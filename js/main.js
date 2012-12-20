@@ -1,82 +1,41 @@
-window.HomeView = Backbone.View.extend({
+// Author: Thomas Davis <thomasalwyndavis@gmail.com>
+// Filename: main.js
 
-    template:_.template($('#home').html()),
-
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-    }
+// Require.js allows us to configure shortcut alias
+// Their usage will become more apparent futher along in the tutorial.
+require.config( {
+  paths: {
+    jquery:     'libs/jquery/jquery-1.8.3-min',
+    underscore: 'libs/underscore/underscore-min',
+    backbone:   'libs/backbone/backbone-min',
+    jqm:        'libs/jqueryMobile/jquery.mobile-1.2.0-min',
+    templates:  '../templates'
+  },
+  // Sets the configuration for your third party scripts that are not AMD compatible
+  shim: {
+    underscore: {
+      'exports': '_'
+    },
+    backbone: {
+        'deps': [ 'underscore', 'jquery' ],
+        'exports': 'Backbone'  //attaches "Backbone" to the window object
+      }
+  } // end Shim Configuration
 });
 
-window.Page1View = Backbone.View.extend({
+require([
+  // Load our app module and pass it to our definition function
+  'app',
+  'jquery',
+  'jqm'
 
-    template:_.template($('#page1').html()),
+], function(App, $){
+    $.mobile.ajaxEnabled = false;
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
 
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-    }
-});
-
-window.Page2View = Backbone.View.extend({
-
-    template:_.template($('#page2').html()),
-
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-    }
-});
-
-var AppRouter = Backbone.Router.extend({
-
-    routes:{
-        "":"home",
-        "page1":"page1",
-        "page2":"page2"
-    },
-
-    initialize:function () {
-        // Handle back button throughout the application
-        $('.back').live('click', function(event) {
-            window.history.back();
-            return false;
-        });
-        this.firstPage = true;
-    },
-
-    home:function () {
-        console.log('#home');
-        this.changePage(new HomeView());
-    },
-
-    page1:function () {
-        console.log('#page1');
-        this.changePage(new Page1View());
-    },
-
-    page2:function () {
-        console.log('#page2');
-        this.changePage(new Page2View());
-    },
-
-    changePage:function (page) {
-        $(page.el).attr('data-role', 'page');
-        page.render();
-        $('body').append($(page.el));
-        var transition = $.mobile.defaultPageTransition;
-        // We don't want to slide the first page
-        if (this.firstPage) {
-            transition = 'none';
-            this.firstPage = false;
-        }
-        $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
-    }
-
-});
-
-$(document).ready(function () {
-    console.log('document ready');
-    app = new AppRouter();
-    Backbone.history.start();
+  // The "app" dependency is passed in as "App"
+  // Again, the other dependencies passed in are not "AMD" therefore don't pass a parameter to this function
+  App.initialize();
 });
