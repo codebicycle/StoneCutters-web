@@ -1,82 +1,49 @@
-window.HomeView = Backbone.View.extend({
+// Author: Thomas Davis <thomasalwyndavis@gmail.com>
+// Filename: main.js
 
-    template:_.template($('#home').html()),
-
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-    }
+// Require.js allows us to configure shortcut alias
+// Their usage will become more apparent futher along in the tutorial.
+require.config( {
+  paths: {
+    jquery:     'libs/jquery/jquery-1.8.3-min',
+    jqm:        'libs/jqueryMobile/jquery.mobile-1.2.0-min',
+    underscore: 'libs/underscore/underscore-min',
+    backbone:   'libs/backbone/backbone-min',
+    templates:  '../templates'
+  },
+  
+  // Sets the configuration for your third party scripts that are not AMD compatible
+  shim: {
+    underscore: {
+      'exports': '_'
+    },
+    backbone: {
+        'deps': ['underscore' ,'jquery'],
+        'exports': 'Backbone'  //attaches "Backbone" to the window object
+      }
+  } // end Shim Configuration
 });
 
-window.Page1View = Backbone.View.extend({
+require(['app','jquery'], function(App, $){
 
-    template:_.template($('#page1').html()),
+  $( document ).on( "mobileinit",
+    // Set up the "mobileinit" handler before requiring jQuery Mobile's module
+    function() {
+      // Prevents all anchor click handling including the addition of active button state and alternate link bluring.
+      $.mobile.linkBindingEnabled = false;
 
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
+      // Disabling this will prevent jQuery Mobile from handling hash changes
+      $.mobile.hashListeningEnabled = false;
+      $.mobile.ajaxEnabled = false; 
+      $.mobile.pushStateEnabled = false; 
+      // Remove page from DOM when it’s being replaced 
+      $('div[data-role="page"]').live('pagehide', function (event, ui) { 
+        $(event.currentTarget).remove(); 
+      });
     }
-});
-
-window.Page2View = Backbone.View.extend({
-
-    template:_.template($('#page2').html()),
-
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-    }
-});
-
-var AppRouter = Backbone.Router.extend({
-
-    routes:{
-        "":"home",
-        "page1":"page1",
-        "page2":"page2"
-    },
-
-    initialize:function () {
-        // Handle back button throughout the application
-        $('.back').live('click', function(event) {
-            window.history.back();
-            return false;
-        });
-        this.firstPage = true;
-    },
-
-    home:function () {
-        console.log('#home');
-        this.changePage(new HomeView());
-    },
-
-    page1:function () {
-        console.log('#page1');
-        this.changePage(new Page1View());
-    },
-
-    page2:function () {
-        console.log('#page2');
-        this.changePage(new Page2View());
-    },
-
-    changePage:function (page) {
-        $(page.el).attr('data-role', 'page');
-        page.render();
-        $('body').append($(page.el));
-        var transition = $.mobile.defaultPageTransition;
-        // We don't want to slide the first page
-        if (this.firstPage) {
-            transition = 'none';
-            this.firstPage = false;
-        }
-        $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
-    }
-
-});
-
-$(document).ready(function () {
-    console.log('document ready');
-    app = new AppRouter();
-    Backbone.history.start();
+  )
+  
+  require( [ "jqm" ], function() {
+    App.initialize();
+  });
 });
