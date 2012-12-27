@@ -8,7 +8,7 @@ define([
   function($,_, Backbone, page1Template){
 
     var Page1View = Backbone.View.extend({
-      el: $("#page"),
+      el: $("#page1"),
       
       template: _.template(page1Template),
 

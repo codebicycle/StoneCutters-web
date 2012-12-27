@@ -7,17 +7,15 @@ define([
 
   function($,_, Backbone, homeTemplate){
 
-  var HomeView = Backbone.View.extend({
-    el: $("#page"),
+    var HomeView = Backbone.View.extend({
+      el: $("#home"),
 
-    render: function(){
-      this.$el.html(homeTemplate);
-      //$(this.el).html(this.template());
-      return this;
-    }
+      template: _.template(homeTemplate),
 
-  });
-
-  return HomeView;
-  
+      render: function(){
+        this.$el.html(this.template);
+        return this;
+      }
+    });
+    return HomeView;
 });
