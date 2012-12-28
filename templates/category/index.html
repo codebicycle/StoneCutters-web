@@ -1,0 +1,18 @@
+<div id="main">
+	<div data-role="header">
+	    <h1>Categories</h1>
+	</div>
+
+	<h3>Welcome to OLX Mobile Application.</h3>
+    <p>This is the first attemp to a category list view. We are using Backbone.js + Handlebars + jQuery Mobile + Require.js + Handlebars.</p>
+    
+    <p>jQuery Mobile is used for its mobile styles and widgets. The routing and navigation capabilities of jQuery Mobile are disbled to let Backbone.js handle these requirements.</p>
+    <p>This is the Home page. It was created dynamically using an Handlebars template.</p>
+    <p>Navigate to:</p>
+    <ul data-role="listview"  data-inset="true">
+        {{#categories}}
+    		<li><a href="#page1">{{name}}</a></li>
+    	{{/categories}}
+    </ul>
+</div>
+

@@ -9,6 +9,7 @@ require.config( {
     jqm:        'libs/jqueryMobile/jquery.mobile-1.2.0-min',
     underscore: 'libs/underscore/underscore-min',
     backbone:   'libs/backbone/backbone-min',
+    handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
     templates:  '../templates'
   },
   
@@ -18,9 +19,12 @@ require.config( {
       'exports': '_'
     },
     backbone: {
-        'deps': ['underscore' ,'jquery'],
-        'exports': 'Backbone'  //attaches "Backbone" to the window object
-      }
+      'deps': ['underscore' ,'jquery'],
+      'exports': 'Backbone'  //attaches "Backbone" to the window object
+    },
+    handlebars: {
+      exports: 'Handlebars'
+    }
   } // end Shim Configuration
 });
 
