@@ -14,8 +14,8 @@ function($, _, Backbone, Handlebars, CategoriesCollection, categoriesListTemplat
 
     initialize: function(){
       this.collection = new CategoriesCollection();
-      this.collection.add({ name: "Category 1"});
-      this.collection.add({ name: "Category 2"});
+      this.collection.add({ name: "Category 1", pageNum: 1});
+      this.collection.add({ name: "Category 2", pageNum: 2});
       
       // Compile the template using Handlebars micro-templating
       var compiledTemplate = Handlebars.compile(categoriesListTemplate);
