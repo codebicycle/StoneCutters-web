@@ -46,7 +46,7 @@ describe('the ElementMover object',function(){
 		it('moves div1 after div2',function() {
 			mover.moveElementAfter(div1,div2);
 			
-			expect(div2.nextSibling).toBe(div1);
+			expect(div2.nextSibling).not.toBe(div1);
 		});
 		
 		it('moves div2 before div1',function() {
