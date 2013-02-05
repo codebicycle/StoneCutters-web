@@ -1,4 +1,13 @@
-<div id="main">
+
+
+<div data-role="panel" id="left-panel">
+    <ul data-role="listview"  data-inset="true">
+        {{#categories}}
+            <li><a href="#page{{pageNum}}">{{name}}</a></li>
+        {{/categories}}
+    </ul>
+</div>
+
 <div data-role="header">
     <h1>Backbone.js + jQuery Mobile</h1>
 </div>
@@ -9,9 +18,11 @@
     <p>jQuery Mobile is used for its mobile styles and widgets. The routing and navigation capabilities of jQuery Mobile are disbled to let Backbone.js handle these requirements.</p>
     <p>This is the Home page. It was created dynamically using an underscore.js template.</p>
     <p>Navigate to:</p>
-    <ul data-role="listview"  data-inset="true">
-        <li><a href="#page1">Page 1</a></li>
-        <li><a href="#page2">Page 2</a></li>
-    </ul>
-</div>
+    <!-- <ul data-role="listview"  data-inset="true">
+        {{#categories}}
+            <li><a href="#page{{pageNum}}">{{name}}</a></li>
+        {{/categories}}
+    </ul> -->
+
+    <a href="#left-panel" data-rel="panel">Open panel</a>
 </div>
