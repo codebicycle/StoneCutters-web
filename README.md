@@ -1,5 +1,7 @@
 #ARWEN (Advanced Rest Webapp Enhanced Notoriously)
 
+![ARWEN](http://images2.wikia.nocookie.net/__cb20060312224343/lotr/images/3/35/Arwen_sword.PNG)
+
 ## What is it?
 
 ARWEN is the new Olx's web application, which can be browsed by almost all new market's  smartphones.
