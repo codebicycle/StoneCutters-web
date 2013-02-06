@@ -10,7 +10,7 @@ define([
   function($,_, Backbone, Handlebars, CategoriesCollection, homeTemplate){
 
     var HomeView = Backbone.View.extend({
-      el: $("#home"),
+      el: "#home",
 
       initialize: function(){
       this.collection = new CategoriesCollection();
@@ -18,10 +18,14 @@ define([
       this.collection.add({ name: "Category 2", pageNum: 2});
       
       // Compile the template using Handlebars micro-templating
-      var compiledTemplate = Handlebars.compile(homeTemplate);
-      //console.log(compiledTemplate({'categories': this.collection.toJSON()}));
-      this.$el.html(compiledTemplate({'categories': this.collection.toJSON()}));
+      this.compiledTemplate = Handlebars.compile(homeTemplate);
+    },
+      render:function () {
+      
+        this.$el.html(this.compiledTemplate({'categories': this.collection.toJSON()}));
+        return this;
     }
+
     });
     return HomeView;
 });

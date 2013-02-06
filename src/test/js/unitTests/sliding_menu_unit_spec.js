@@ -1,4 +1,4 @@
-
+define(['views/home/HomeView'], function(HomeView) {
 describe('The sliding menu',function(){
 	
 	var rootId = 'testContainer';
@@ -8,6 +8,9 @@ describe('The sliding menu',function(){
 		var container = document.createElement('div');
 		container.setAttribute('id',rootId);		
 		document.body.appendChild(container);
+
+		setFixtures('<div id="home"></div>');
+		this.homeView = new HomeView();
 
 	});
 	
@@ -19,19 +22,14 @@ describe('The sliding menu',function(){
 		
 	//Specs
 	it('opens',function(){
-		jasmine.getFixtures().fixturesPath = '../../../main/webapp/';
-		loadFixtures('index.html');
+ 
+      	$(this.homeView.el).attr('data-role', 'page');
+      	this.homeView.render();
 
-		expect($('<div>some text</div>')).toHaveText('some text');
-
-		console.log('asdasdasd');
-		console.log($('#page1').text());
-		console.log($('#jasmine-fixtures').text());
-
-		expect($('#page1')).toHaveText("Loading....");
-
+      	expect($(this.homeView.el)).toContain('#left-panel');
         
 	});
 
 
+});
 });

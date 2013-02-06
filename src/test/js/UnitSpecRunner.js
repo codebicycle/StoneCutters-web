@@ -5,6 +5,8 @@ require.config({
     jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0-rc.1.min',
     underscore: 'libs/underscore/underscore-min',
     backbone:   'libs/backbone/backbone-min',
+    handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
+    templates:  '../templates',
     jasmine: 'libs/jasmine/jasmine-1.3.1/jasmine',
     'jasmine-html': 'libs/jasmine/jasmine-1.3.1/jasmine-html',
     'jasmine-jquery': 'libs/jasmine/jasmine-jquery',
@@ -33,6 +35,9 @@ require.config({
     },
     console_runner: {
       deps: ['jasmine']
+    },
+    handlebars: {
+      exports: 'Handlebars'
     }
   }
 });
