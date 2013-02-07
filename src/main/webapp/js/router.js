@@ -6,13 +6,11 @@ define([
   'views/home/HomeView',
   'views/pages/Page1View',
   'views/pages/Page2View',
-  'views/categories/index'
-], function($, _, Backbone, HomeView, Page1View, Page2View, ShowCategoriesView) {
+], function($, _, Backbone, HomeView, Page1View, Page2View) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
-        "":"showCategories",
-        "/categories":"showCategories",
+        "":"showHome",
         "page1":"page1",
         "page2":"page2"
     },
@@ -26,9 +24,9 @@ define([
         this.firstPage = true;
     },
 
-    showCategories:function () {
-        console.log('/categories');
-        this.changePage(new ShowCategoriesView());
+    showHome:function () {
+        console.log('/');
+        this.changePage(new HomeView());
     },
 
     page1:function () {
