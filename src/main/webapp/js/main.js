@@ -40,7 +40,7 @@ require(['app','jquery'], function(App, $){
       // Disabling this will prevent jQuery Mobile from handling hash changes
       $.mobile.hashListeningEnabled = false;
       $.mobile.ajaxEnabled = false; 
-      $.mobile.pushStateEnabled = false; 
+      $.mobile.pushStateEnabled = false;
       // Remove page from DOM when it’s being replaced 
       $('div[data-role="page"]').live('pagehide', function (event, ui) { 
         $(event.currentTarget).remove(); 
