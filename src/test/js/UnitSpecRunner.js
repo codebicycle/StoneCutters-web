@@ -12,7 +12,7 @@ require.config({
     'jasmine-jquery': 'libs/jasmine/jasmine-jquery',
     console_runner: 'libs/phantom-jasmine/console-runner',
     spec: '../../../test/js',
-    config: '../../../../configuration'
+    config: '../configuration'
   },
   shim: {
     underscore: {
