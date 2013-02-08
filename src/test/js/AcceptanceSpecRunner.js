@@ -8,7 +8,7 @@ require.config({
     'jasmine-html': 'libs/jasmine/jasmine-1.3.1/jasmine-html',
     console_runner: 'libs/phantom-jasmine/console-runner',
     spec: '../../../test/js',
-    config: '../../../../configuration'
+    config: '../configuration'
   },
   shim: {
     underscore: {
