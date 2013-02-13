@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#check the code, and dump the results to the file
+#none of these will actually halt the commit
+
+if [[ `git symbolic-ref HEAD` == "refs/heads/master" ]]
+then
+
+	echo "  ______  _____   _____    ____   _____  "
+	echo " |  ____||  __ \ |  __ \  / __ \ |  __ \ "
+	echo " | |__   | |__) || |__) || |  | || |__) |"
+	echo " |  __|  |  _  / |  _  / | |  | ||  _  / "
+	echo " | |____ | | \ \ | | \ \ | |__| || | \ \ "
+	echo " |______||_|  \_\|_|  \_\ \____/ |_|  \_\ "
+
+	echo "You are trying to commit in MASTER."
+	echo "Please STASH your changes get out of this branch."
+	echo "git stash"
+	echo "git checkout other/branch"
+	echo "git stash apply"
+	exit 1
+fi
+
+if [[ `git symbolic-ref HEAD` == "refs/heads/develop" ]]
+then
+
+	echo "  ______  _____   _____    ____   _____  "
+	echo " |  ____||  __ \ |  __ \  / __ \ |  __ \ "
+	echo " | |__   | |__) || |__) || |  | || |__) |"
+	echo " |  __|  |  _  / |  _  / | |  | ||  _  / "
+	echo " | |____ | | \ \ | | \ \ | |__| || | \ \ "
+	echo " |______||_|  \_\|_|  \_\ \____/ |_|  \_\ "
+
+	echo "You are trying to commit in DEVELOP."
+	echo "Please STASH your changes get out of this branch."
+	echo "git stash"
+	echo "git checkout other/branch"
+	echo "git stash apply"
+	exit 1
+fi
