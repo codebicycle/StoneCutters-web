@@ -4,15 +4,13 @@ define([
   'underscore',
   'backbone',
   'views/home/HomeView',
-  'views/pages/Page1View',
-  'views/pages/Page2View',
-], function($, _, Backbone, HomeView, Page1View, Page2View) {
+  'views/item/ItemView',
+], function($, _, Backbone, HomeView, ItemView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
         "":"showHome",
-        "page1":"page1",
-        "page2":"page2"
+        "item/:itemId": "showItem",
     },
 
     initialize:function () {
@@ -29,14 +27,9 @@ define([
         this.changePage(new HomeView());
     },
 
-    page1:function () {
-        console.log('#page1');
-        this.changePage(new Page1View());
-    },
-
-    page2:function () {
-        console.log('#page2');
-        this.changePage(new Page2View());
+    showItem: function(itemId){
+      console.log('/item/'+itemId);
+      this.changePage(new ItemView({'id': itemId}));
     },
 
     changePage:function (page) {
@@ -52,7 +45,6 @@ define([
       }
       $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
     }
-
   });
   
   var initialize = function(){
