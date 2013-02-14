@@ -7,8 +7,13 @@ define([
 ], function(_, Backbone, ItemModel, ConfModel){
   	var conf = new ConfModel();
     var ItemCollection = Backbone.Collection.extend({
-     	model: ItemModel,
-     	url: conf.get('smaug').url + ':' + conf.get('smaug').port + '/items?country_id=1&category_id=2'
+     	initialize: function(options){
+        this.query_opts = options;
+      },
+      model: ItemModel,
+      url: function(){
+        return conf.get('smaug').url + ':' + conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
+      }
     });
     // You don't usually return a collection instantiated
     return ItemCollection;
