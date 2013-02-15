@@ -9,7 +9,7 @@ define([
 
   function($,_, Backbone, Handlebars, ItemsCollection, adsListTemplate){
 
-    var ItemView = Backbone.View.extend({
+    var AdsListView = Backbone.View.extend({
       el: $("#home"),
 
       events: {
@@ -36,5 +36,5 @@ define([
         return;
       },
     });
-    return ItemView;
+    return AdsListView;
 });
