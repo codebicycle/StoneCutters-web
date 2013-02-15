@@ -1,0 +1,30 @@
+[
+	{
+		"children": "",
+		"name": "For Sale",
+		"id": 185,
+		"counter": 1234,
+		"parentId": ""
+	},
+	{
+		"children": "",
+		"name": "Vehicles",
+		"id": 362,
+		"counter": 1234,
+		"parentId": ""
+	},
+	{
+		"children": "",
+		"name": "Real Estate",
+		"id": 16,
+		"counter": 1234,
+		"parentId": ""
+	},
+	{
+		"children": "",
+		"name": "Electronics and Mobile",
+		"id": 800,
+		"counter": 1234,
+		"parentId": ""
+	}
+]
