@@ -3,6 +3,6 @@
 <!-- TODO move style to a homeView.css file -->
 <ul id="categories-list" data-role="listview"  data-inset="true" style="width : 90%; position:relative; left:5%;">
         {{#categories}}
-            <li><a href="#category{{id}}">{{name}}</a></li>
+            <li><a href="#category/{{id}}" data-id="{{id}}" data-parent-id="{{parentId}}" class="cat-link">{{name}}</a></li>
         {{/categories}}
 </ul>

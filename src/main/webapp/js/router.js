@@ -5,12 +5,14 @@ define([
   'backbone',
   'views/home/HomeView',
   'views/item/ItemView',
-], function($, _, Backbone, HomeView, ItemView) {
+  'views/ads/AdsListView',
+], function($, _, Backbone, HomeView, ItemView, AdsListView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
         "":"showHome",
         "item/:itemId": "showItem",
+        "category/:catId": "showAds",
     },
 
     initialize:function () {
@@ -30,6 +32,14 @@ define([
     showItem: function(itemId){
       console.log('/item/'+itemId);
       this.changePage(new ItemView({'id': itemId}));
+    },
+
+    showAds: function(catId){
+      console.log('/category/'+catId);
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new AdsListView({'deferred': dfd, 'cat_id': catId});
     },
 
     changePage:function (page) {
