@@ -12,7 +12,8 @@ require.config({
     'jasmine-jquery': 'libs/jasmine/jasmine-jquery',
     console_runner: 'libs/phantom-jasmine/console-runner',
     spec: '../../../test/js',
-    config: '../configuration'
+    config: '../configuration',
+    sinon: 'libs/sinon/sinon-1.5.2'
   },
   shim: {
     underscore: {
@@ -38,6 +39,9 @@ require.config({
     },
     handlebars: {
       exports: 'Handlebars'
+    },
+    sinon:{
+      exports: 'sinon'
     }
   }
 });
@@ -45,7 +49,7 @@ require.config({
 
 window.store = "TestStore"; // override local storage store name - for testing
 
-require(['underscore', 'jquery', 'jasmine-html', 'console_runner', 'jasmine-jquery'], function(_, $, jasmine){
+require(['underscore', 'jquery', 'jasmine-html', 'console_runner', 'jasmine-jquery','sinon'], function(_, $, jasmine){
 
   //this code enables a nicer html reporter to run locally (i.e not on jenkins)
   // var jasmineEnv = jasmine.getEnv();
@@ -76,5 +80,4 @@ require(['underscore', 'jquery', 'jasmine-html', 'console_runner', 'jasmine-jque
       jasmine.getEnv().execute();
     });
   });
-
 });
