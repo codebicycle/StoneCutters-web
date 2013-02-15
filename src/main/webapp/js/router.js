@@ -31,7 +31,10 @@ define([
 
     showItem: function(itemId){
       console.log('/item/'+itemId);
-      this.changePage(new ItemView({'id': itemId}));
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new ItemView({'deferred': dfd, 'id': itemId});
     },
 
     showAds: function(catId){

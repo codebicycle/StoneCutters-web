@@ -1,7 +1,18 @@
 <div data-role="header">
-    <h1>Item detail</h1>
+    <h1>{{item.title}}</h1>
 </div>
 
 <div data-role="content">
-    <h3>Here you have item detail.</h3>
+	{{#each item.images}}
+		<img src={{thumbImage}} />
+	{{/each}}		
+    <br/>
+    <strong>Description</strong>: {{item.description}}<br/>
+    <strong>Username:</strong> {{item.username}}<br/>
+    <strong>Price:</strong> {{item.price}}<br/>
+    <strong>Display Price:</strong> {{item.displayPrice}}<br/>
+    <strong>Category:</strong> {{item.category.name}}<br/>
+    <strong>Phone:</strong> {{item.phone}}<br/>
+    <a href="#category/{{item.category.id}}">Mas items en la categoria {{item.category.name}}</a>
 </div>
+

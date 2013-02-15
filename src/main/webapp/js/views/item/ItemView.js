@@ -10,29 +10,29 @@ define([
   function($,_, Backbone, Handlebars, ItemModel, itemTemplate){
 
     var ItemView = Backbone.View.extend({
-      el: $("#item"),
+      el: $("#home"),
 
       events: {
       },
 
-      initialize: function(itemId){
+      initialize: function(options){
         
         /*Compile the template using Handlebars micro-templating*/
         this.itemCT = Handlebars.compile(itemTemplate);
+        this.dfd = options.deferred;
 
-        this.item = new ItemModel(itemId);
+        this.item = new ItemModel({'id': options.id});
         this.item.on('sync',_.bind(this.success, this));
         this.item.fetch();
       },
       render:function () {
-        console.log("rendering Item view...")
-        this.$el.html(this.itemCT(this.item));
+        $('#content').html(this.itemCT({'item': this.item.toJSON()}));
         return this;
       },
       success: function(model, response)  {
-        //this.render();
+        this.dfd.resolve(this);
         return;
       },
     });
-    return ItemView;
+  return ItemView;
 });
