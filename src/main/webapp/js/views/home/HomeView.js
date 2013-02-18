@@ -54,7 +54,14 @@ define([
       },
       items_success: function(model, response){
         $("#slider1").html(this.sliderCT({'items': this.items.toJSON()}));
-        this.slider1 = new Swipe(document.getElementById('slider1'));
+        this.slider1 = new Swipe(document.getElementById('slider1'), {
+                            //startSlide: 2,
+                            //speed: 400,
+                            //auto: 3000,
+                            items:3,
+                            callback: function(event, index, elem) {
+                            }
+        });
       },
       refreshList: function(ev){
         var data_id = $(ev.currentTarget).data("id");
