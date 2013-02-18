@@ -18,7 +18,8 @@ define([
       el: $("#home"),
 
       events:{
-        "click .cat-link": "refreshList", 
+        "click .cat-link": "refreshList",
+        "click #p-cat-link": "showParentCategories",
       },
 
       initialize: function(){
@@ -48,6 +49,8 @@ define([
       cat_success: function(model, response){
         $('#left-panel').html(this.catCT({'categories': response}));
         $("#categories-list").listview();
+        $("#p-cat-link").button();
+        $("#p-cat-link").hide();
       },
       items_success: function(model, response){
         $("#slider1").html(this.sliderCT({'items': this.items.toJSON()}));
@@ -62,6 +65,7 @@ define([
           var parentCategory = this.categories.get(parent_id);
           var children = new CategoriesCollection(parentCategory.get('children'));
           category = children.get(data_id);
+          $('#left-panel').panel("close");
         }else{
           category = this.categories.get(data_id);
         };
@@ -70,8 +74,17 @@ define([
           this.cat_success({}, category.get('children'));
         };
 
-        //$(ev.currentTarget).removeClass('ui-btn-down-a ui-btn-down-b ui-btn-down-c ui-btn-down-d ui-btn-down-e ui-btn-hover-a  ui-btn-hover-b  ui-btn-hover-c  ui-btn-hover-d  ui-btn-hover-e');
-        //$("#categories-list").listview('refresh');
+        if (!parent_id) {
+          $("#p-cat-link").show();
+        }
+
+        //deselects the currently selected sub-category
+        $('.ui-li').removeClass('ui-focus');
+        
+      },
+      showParentCategories: function(){
+        this.cat_success([],this.categories.toJSON());
+        $("#p-cat-link").hide();
       },
     });
     return HomeView;
