@@ -2,12 +2,13 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'swipe',
   'handlebars',
   'models/item',
   'text!templates/item/itemTemplate.html'
   ], 
 
-  function($,_, Backbone, Handlebars, ItemModel, itemTemplate){
+  function($,_, Backbone, sw, Handlebars, ItemModel, itemTemplate){
 
     var ItemView = Backbone.View.extend({
       el: $("#home"),
@@ -27,6 +28,8 @@ define([
       },
       render:function () {
         $('#content').html(this.itemCT({'item': this.item.toJSON()}));
+        
+        this.slider = new Swipe(document.getElementById('image-slider'));
         return this;
       },
       success: function(model, response)  {
