@@ -3,16 +3,30 @@
 </div>
 
 <div data-role="content">
-	{{#each item.images}}
-		<img src={{thumbImage}} />
-	{{/each}}		
+	<div id="image-slider" class="swipe">
+		<ul>
+		{{#each item.images}}
+			<li>
+				<img src={{thumbImage}}/>
+			</li>
+		{{/each}}
+		</ul>
+	</div>
+    
     <br/>
+    
     <strong>Description</strong>: {{item.description}}<br/>
     <strong>Username:</strong> {{item.username}}<br/>
     <strong>Price:</strong> {{item.price}}<br/>
     <strong>Display Price:</strong> {{item.displayPrice}}<br/>
     <strong>Category:</strong> {{item.category.name}}<br/>
     <strong>Phone:</strong> {{item.phone}}<br/>
+    
     <a href="#category/{{item.category.id}}">Mas items en la categoria {{item.category.name}}</a>
+    
+    <br/>
+    <br/>
+    
+    <img src="http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&maptype=roadmap&markers=color:red%7Ccolor:red%7C{{item.location.latitude}},{{item.location.longitude}}&sensor=false">
 </div>
 
