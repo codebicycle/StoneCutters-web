@@ -19,7 +19,7 @@ define([
 
       events:{
         "click .cat-link": "refreshList",
-        "click #p-cat-link": "showParentCategories",
+        "click #p-cat-link": "showParentCategories"
       },
 
       initialize: function(){
@@ -58,8 +58,8 @@ define([
                             //startSlide: 2,
                             //speed: 400,
                             //auto: 3000,
-                            items:3,
-                            callback: function(event, index, elem) {
+                            'items':3,
+                            'callback': function(event, index, elem) {
                             }
         });
       },
@@ -75,11 +75,11 @@ define([
           $('#left-panel').panel("close");
         }else{
           category = this.categories.get(data_id);
-        };
+        }
 
         if (category.get('children').length > 0) {
           this.cat_success({}, category.get('children'));
-        };
+        }
 
         if (!parent_id) {
           $("#p-cat-link").show();

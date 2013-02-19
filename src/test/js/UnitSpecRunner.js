@@ -7,13 +7,14 @@ require.config({
     backbone:   'libs/backbone/backbone-min',
     handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
     templates:  '../templates',
-    jasmine: 'libs/jasmine/jasmine-1.3.1/jasmine',
+    jasmine:    'libs/jasmine/jasmine-1.3.1/jasmine',
     'jasmine-html': 'libs/jasmine/jasmine-1.3.1/jasmine-html',
     'jasmine-jquery': 'libs/jasmine/jasmine-jquery',
     console_runner: 'libs/phantom-jasmine/console-runner',
+    sinon: 'libs/sinon/sinon-1.5.2',
+    swipe: 'libs/swipe/swipe',
     spec: '../../../test/js',
-    config: '../configuration',
-    sinon: 'libs/sinon/sinon-1.5.2'
+    config: '../configuration'
   },
   shim: {
     underscore: {
@@ -42,6 +43,9 @@ require.config({
     },
     sinon:{
       exports: 'sinon'
+    },
+    swipe:{
+      exports: 'swipe'
     }
   }
 });
@@ -49,7 +53,7 @@ require.config({
 
 window.store = "TestStore"; // override local storage store name - for testing
 
-require(['underscore', 'jquery', 'jasmine-html', 'console_runner', 'jasmine-jquery','sinon'], function(_, $, jasmine){
+require(['underscore', 'jquery', 'jasmine-html','sinon','swipe', 'console_runner', 'jasmine-jquery'], function(_, $, jasmine, sinon, swipe){
 
   //this code enables a nicer html reporter to run locally (i.e not on jenkins)
   // var jasmineEnv = jasmine.getEnv();
@@ -72,7 +76,7 @@ require(['underscore', 'jquery', 'jasmine-html', 'console_runner', 'jasmine-jque
 
   var specs = [];
 
-  specs.push('spec/unitTests/category_model_unit_spec');
+  //specs.push('spec/unitTests/category_model_unit_spec');
   specs.push('spec/unitTests/sliding_menu_unit_spec');
 
   $(function(){
