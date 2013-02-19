@@ -10,7 +10,7 @@ define([
   function($,_, Backbone, Handlebars, ItemsCollection, adsListTemplate){
 
     var AdsListView = Backbone.View.extend({
-      el: $("#home"),
+      el: "#home",
 
       events: {
       },
@@ -27,8 +27,8 @@ define([
         this.items.fetch();
       },
       render:function () {
-        $('#content').html(this.adsCT({'items': this.items.toJSON()}));
-        $("#ads-list").listview();
+        $(this.el).find('#content').html(this.adsCT({'items': this.items.toJSON()}));
+        $(this.el).find('#ads-list').listview();
         return this;
       },
       items_success: function(model, response)  {

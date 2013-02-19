@@ -76,7 +76,7 @@ require(['underscore', 'jquery', 'jasmine-html','sinon','swipe', 'console_runner
 
   var specs = [];
 
-  //specs.push('spec/unitTests/category_model_unit_spec');
+  specs.push('spec/unitTests/category_model_unit_spec');
   specs.push('spec/unitTests/sliding_menu_unit_spec');
 
   $(function(){

@@ -1,53 +1,55 @@
 define(['views/home/HomeView'], function(HomeView) {
-//	describe('The sliding menu',function(){
+	describe('The sliding menu',function(){
 	
 		//Create an easily-removed container for our tests to play in
-		// beforeEach(function() {
-		// 	setFixtures('<div id="home"></div>');
-		// });
+		beforeEach(function() {
+			setFixtures('<div id="home">hola</div>');
+		});
 		
 		//Specs
-		// it('should load categories from the json response',function(){
+		it('should load categories from the json response',function(){
 			
-		// 	//var response = '[{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}]';
+			var response = '[{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}]';
 
-		// 	//var options = {}; // no additional options for the Ajax request
-	 // 		//var view = null;
+			var options = {}; // no additional options for the Ajax request
+	 		var view = null;
 
-	 // 		//fakeResponse(response, options, function() {
-	 // 		//	view = new HomeView(); 
-	 // 		//});
+	 		fakeResponse(response, options, function() {
+	 			view = new HomeView(); 
+	 		});
 	 		
-	 //      	//(view.$el).attr('data-role', 'page');
-	 //      	//view.render();
-	 //      	//console.log($('body').html());
-		// });
+	      	(view.$el).attr('data-role', 'page');
+	      	view.render();
+	      	console.log($('body').html());
+	      	expect(1).toBe(1);
 
-		// function fakeResponse(response, options, callback) {
-		// 	var statusCode, headers, server;
+		});
 
-		// 	// some default values, so we don't have to set status code and
-		// 	// content type all the time.
-		// 	statusCode = options.statusCode || 200;
-		// 	headers = options.headers || { "Content-Type": "application/json" }
+		function fakeResponse(response, options, callback) {
+			var statusCode, headers, server;
 
-		// 	// we create what Sinon.js calls a fake server. This is basically just
-		// 	// a name for mocking out all XMLHttpRequests. (There are no actual
-		// 	// servers involved.)
-		// 	server = sinon.fakeServer.create();
+			// some default values, so we don't have to set status code and
+			// content type all the time.
+			statusCode = options.statusCode || 200;
+			headers = options.headers || { "Content-Type": "application/json" }
 
-		// 	// we tell Sinon.js what we want to respond with
-		// 	server.respondWith([statusCode, headers, response]);
+			// we create what Sinon.js calls a fake server. This is basically just
+			// a name for mocking out all XMLHttpRequests. (There are no actual
+			// servers involved.)
+			server = sinon.fakeServer.create();
 
-		// 	callback();
+			// we tell Sinon.js what we want to respond with
+			server.respondWith([statusCode, headers, response]);
 
-		// 	// this actually makes Sinon.js respond to the Ajax request. As we can
-		// 	// choose when to respond to a request, it is for example possible to
-		// 	// test that spinners start and stop, that we handle timeouts
-		// 	// properly, and so on.
-		// 	server.respond();
+			callback();
 
-		// 	server.restore();
-		// }
-//	});
+			// this actually makes Sinon.js respond to the Ajax request. As we can
+			// choose when to respond to a request, it is for example possible to
+			// test that spinners start and stop, that we handle timeouts
+			// properly, and so on.
+			server.respond();
+
+			server.restore();
+		}
+	});
 });

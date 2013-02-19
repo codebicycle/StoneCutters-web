@@ -15,11 +15,11 @@ define([
     homeTemplate, categoriesListTemplate, sliderTemplate){
 
     var HomeView = Backbone.View.extend({
-      el: $("#home"),
+      el: "#home",
 
       events:{
-        "click .cat-link": "refreshList",
-        "click #p-cat-link": "showParentCategories"
+        'click .cat-link': "refreshList",
+        'click #p-cat-link': "showParentCategories"
       },
 
       initialize: function(){
@@ -39,21 +39,21 @@ define([
         this.items = new ItemsCollection({country_id:1});
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
-
       },
       render:function (){
-        this.$el.html(this.homeCT({}));
+        
+        $(this.el).html(this.homeCT({}));
         
         return this;
       },
       cat_success: function(model, response){
-        $('#left-panel').html(this.catCT({'categories': response}));
-        $("#categories-list").listview();
-        $("#p-cat-link").button();
-        $("#p-cat-link").hide();
+        $(this.el).find('#left-panel').html(this.catCT({'categories': response}));
+        $(this.el).find('#categories-list').listview();
+        $(this.el).find('#p-cat-link').button();
+        $(this.el).find('#p-cat-link').hide();
       },
       items_success: function(model, response){
-        $("#slider1").html(this.sliderCT({'items': this.items.toJSON()}));
+        $(this.el).find('#slider1').html(this.sliderCT({'items': this.items.toJSON()}));
         this.slider1 = new Swipe(document.getElementById('slider1'), {
                             //startSlide: 2,
                             //speed: 400,
@@ -72,7 +72,7 @@ define([
           var parentCategory = this.categories.get(parent_id);
           var children = new CategoriesCollection(parentCategory.get('children'));
           category = children.get(data_id);
-          $('#left-panel').panel("close");
+          $(this.el).find('#left-panel').panel("close");
         }else{
           category = this.categories.get(data_id);
         }
@@ -82,7 +82,7 @@ define([
         }
 
         if (!parent_id) {
-          $("#p-cat-link").show();
+          $(this.el).find('#p-cat-link').show();
         }
 
         //deselects the currently selected sub-category
