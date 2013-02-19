@@ -11,7 +11,7 @@ define([
   function($,_, Backbone, sw, Handlebars, ItemModel, itemTemplate){
 
     var ItemView = Backbone.View.extend({
-      el: $("#home"),
+      el: "#home",
 
       events: {
       },
@@ -27,8 +27,7 @@ define([
         this.item.fetch();
       },
       render:function () {
-        $('#content').html(this.itemCT({'item': this.item.toJSON()}));
-        
+        $(this.el).find('#content').html(this.itemCT({'item': this.item.toJSON()}));
         this.slider = new Swipe(document.getElementById('image-slider'));
         return this;
       },

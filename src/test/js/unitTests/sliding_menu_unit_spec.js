@@ -3,7 +3,7 @@ define(['views/home/HomeView'], function(HomeView) {
 	
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
-			setFixtures('<div id="home"></div>');
+			setFixtures('<div id="home">hola</div>');
 		});
 		
 		//Specs
@@ -14,20 +14,19 @@ define(['views/home/HomeView'], function(HomeView) {
 			var options = {}; // no additional options for the Ajax request
 	 		var view = null;
 
-			//console.log("--*******-------****************************-----");	
-	 		//console.log("---"+response+"****");
-	 		//console.log("--*******-------****************************-----");
 	 		fakeResponse(response, options, function() {
 	 			view = new HomeView(); 
 	 		});
 	 		
 	      	(view.$el).attr('data-role', 'page');
 	      	view.render();
-	      	//console.log($('body').html());
+	      	console.log($('body').html());
+	      	expect(1).toBe(1);
+
 		});
 
 		function fakeResponse(response, options, callback) {
-			var statusCode, headers, server, resp;
+			var statusCode, headers, server;
 
 			// some default values, so we don't have to set status code and
 			// content type all the time.
