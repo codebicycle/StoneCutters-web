@@ -3,14 +3,14 @@ define(['views/home/HomeView'], function(HomeView) {
 	
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
-			setFixtures('<div id="home">hola</div>');
+			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
 		});
 		
 		//Specs
 		it('should load categories from the json response',function(){
 			
 			var categories = '[{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}]';
-			var items = '[{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":598,"date":"Date-126539","displayPrice":"$15.552616","title":"Title of ad=dbUpH"},{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":706,"date":"Date-352719","displayPrice":"$18.109798","title":"Title of ad=cHKQC"},{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":993,"date":"Date-25579","displayPrice":"$44.43649","title":"Title of ad=GDFPx"}]';
+			var items = '[{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":598,"date":"Date-126539","displayPrice":"$15.50","title":"Item 1"},{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":706,"date":"Date-352719","displayPrice":"$18.10","title":"Item 2"},{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":993,"date":"Date-25579","displayPrice":"$44.43","title":"Item 3"}]';
 
 			var options = {}; // no additional options for the Ajax request
 	 		var view = null;
@@ -29,12 +29,18 @@ define(['views/home/HomeView'], function(HomeView) {
 
 	 		fakeResponse(actions,urls,responses, options, function() {
 	 			view = new HomeView();
+	 			view.render();
 			});
+	 		
+      		//Categories's Expectations
+      		expect($($('#home #categories-list li a')[0]).html()).toBe("For Sale"); 
+      		expect($($('#home #categories-list li a')[1]).html()).toBe("Vehicles");
+      		expect($('#home  #categories-list li a').length).toBe(2);
 
-	 		$(view.el).attr('data-role', 'page');
-      		
-      		console.log($('body').html());
-      		expect(1).toBe(1); 
+      		//Items's expectations
+      		expect($($('#home #slider1 li span')[0]).html()).toBe("Item 1 Price: $15.50"); 
+      		expect($($('#home #slider1 li span')[1]).html()).toBe("Item 2 Price: $18.10");
+      		expect($('#home #slider1 li a img').length).toBe(3);
 		});
 
 		function fakeResponse(actions, urls, responses, options, callback) {
@@ -50,6 +56,7 @@ define(['views/home/HomeView'], function(HomeView) {
 			// servers involved.)
 			server = sinon.fakeServer.create();
 
+
 			for (var i=0; i< actions.length; i++)
 			{ 
 				// we tell Sinon.js what we want to respond respondWith
@@ -63,7 +70,6 @@ define(['views/home/HomeView'], function(HomeView) {
 			// test that spinners start and stop, that we handle timeouts
 			// properly, and so on.
 			server.respond();
-
 			server.restore();
 		}
 	});
