@@ -39,15 +39,21 @@ define([
         this.items = new ItemsCollection({country_id:1});
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
+
+        $(document).on("swiperight", function(event, ui) {
+            $(this.el).find('#left-panel').panel("open");
+        });
       },
       render:function (){
         
-        $(this.el).html(this.homeCT({}));
-        
+        $(this.el).find('#content').html(this.homeCT({}));
+        $(this.el).trigger('create');
+
         return this;
       },
       cat_success: function(model, response){
         $(this.el).find('#left-panel').html(this.catCT({'categories': response}));
+        $(this.el).find('#left-panel').trigger("updatelayout");
         $(this.el).find('#categories-list').listview();
         $(this.el).find('#p-cat-link').button();
         $(this.el).find('#p-cat-link').hide();
