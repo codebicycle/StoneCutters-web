@@ -3,31 +3,42 @@ define(['views/home/HomeView'], function(HomeView) {
 	
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
-			setFixtures('<div id="home"></div>');
+			setFixtures('<div id="home">hola</div>');
 		});
 		
 		//Specs
 		it('should load categories from the json response',function(){
 			
-			var response = '[{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}]';
+			var categories = '[{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}]';
+			var items = '[{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":598,"date":"Date-126539","displayPrice":"$15.552616","title":"Title of ad=dbUpH"},{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":706,"date":"Date-352719","displayPrice":"$18.109798","title":"Title of ad=cHKQC"},{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":993,"date":"Date-25579","displayPrice":"$44.43649","title":"Title of ad=GDFPx"}]';
 
 			var options = {}; // no additional options for the Ajax request
 	 		var view = null;
+	 		var actions = [];
+	 		var urls = [];
+	 		var responses = [];
 
-			//console.log("--*******-------****************************-----");	
-	 		//console.log("---"+response+"****");
-	 		//console.log("--*******-------****************************-----");
-	 		fakeResponse(response, options, function() {
-	 			view = new HomeView(); 
-	 		});
-	 		
-	      	(view.$el).attr('data-role', 'page');
-	      	view.render();
-	      	//console.log($('body').html());
+	 		actions.push("GET");
+	 		actions.push("GET");
+
+	 		urls.push('http://smaug.herokuapp.com:80/categories/1');
+			urls.push('http://smaug.herokuapp.com:80/items/{"country_id":1}');
+
+			responses.push(categories);
+			responses.push(items);
+
+	 		fakeResponse(actions,urls,responses, options, function() {
+	 			view = new HomeView();
+			});
+
+	 		$(view.el).attr('data-role', 'page');
+      		
+      		console.log($('body').html());
+      		expect(1).toBe(1); 
 		});
 
-		function fakeResponse(response, options, callback) {
-			var statusCode, headers, server, resp;
+		function fakeResponse(actions, urls, responses, options, callback) {
+			var statusCode, headers, server;
 
 			// some default values, so we don't have to set status code and
 			// content type all the time.
@@ -39,11 +50,14 @@ define(['views/home/HomeView'], function(HomeView) {
 			// servers involved.)
 			server = sinon.fakeServer.create();
 
-			// we tell Sinon.js what we want to respond with
-			server.respondWith([statusCode, headers, response]);
+			for (var i=0; i< actions.length; i++)
+			{ 
+				// we tell Sinon.js what we want to respond respondWith
+				server.respondWith(actions[i], urls[i], [statusCode, headers, responses[i]]);
+			}
 
 			callback();
-
+			
 			// this actually makes Sinon.js respond to the Ajax request. As we can
 			// choose when to respond to a request, it is for example possible to
 			// test that spinners start and stop, that we handle timeouts

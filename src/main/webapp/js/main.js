@@ -9,7 +9,7 @@ require.config( {
     jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0-rc.1.min',
     underscore: 'libs/underscore/underscore-min',
     backbone:   'libs/backbone/backbone-min',
-    swipe:      'libs/swipe/swipe.min', 
+    swipe:      'libs/swipe/swipe-items', 
     handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
     templates:  '../templates',
     config:     '../configuration'

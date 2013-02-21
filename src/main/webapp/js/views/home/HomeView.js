@@ -15,10 +15,11 @@ define([
     homeTemplate, categoriesListTemplate, sliderTemplate){
 
     var HomeView = Backbone.View.extend({
-      el: $("#home"),
+      el: "#home",
 
       events:{
-        "click .cat-link": "refreshList", 
+        'click .cat-link': "refreshList",
+        'click #p-cat-link': "showParentCategories"
       },
 
       initialize: function(){
@@ -39,19 +40,34 @@ define([
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
+        $(document).on("swiperight", function(event, ui) {
+            $(this.el).find('#left-panel').panel("open");
+        });
       },
       render:function (){
-        this.$el.html(this.homeCT({}));
         
+        $(this.el).find('#content').html(this.homeCT({}));
+        $(this.el).trigger('create');
+
         return this;
       },
       cat_success: function(model, response){
-        $('#left-panel').html(this.catCT({'categories': response}));
-        $("#categories-list").listview();
+        $(this.el).find('#left-panel').html(this.catCT({'categories': response}));
+        $(this.el).find('#left-panel').trigger("updatelayout");
+        $(this.el).find('#categories-list').listview();
+        $(this.el).find('#p-cat-link').button();
+        $(this.el).find('#p-cat-link').hide();
       },
       items_success: function(model, response){
-        $("#slider1").html(this.sliderCT({'items': this.items.toJSON()}));
-        this.slider1 = new Swipe(document.getElementById('slider1'));
+        $(this.el).find('#slider1').html(this.sliderCT({'items': this.items.toJSON()}));
+        this.slider1 = new Swipe(document.getElementById('slider1'), {
+                            //startSlide: 2,
+                            //speed: 400,
+                            //auto: 3000,
+                            'items':3,
+                            'callback': function(event, index, elem) {
+                            }
+        });
       },
       refreshList: function(ev){
         var data_id = $(ev.currentTarget).data("id");
@@ -62,16 +78,26 @@ define([
           var parentCategory = this.categories.get(parent_id);
           var children = new CategoriesCollection(parentCategory.get('children'));
           category = children.get(data_id);
+          $(this.el).find('#left-panel').panel("close");
         }else{
           category = this.categories.get(data_id);
-        };
+        }
 
         if (category.get('children').length > 0) {
           this.cat_success({}, category.get('children'));
-        };
+        }
 
-        //$(ev.currentTarget).removeClass('ui-btn-down-a ui-btn-down-b ui-btn-down-c ui-btn-down-d ui-btn-down-e ui-btn-hover-a  ui-btn-hover-b  ui-btn-hover-c  ui-btn-hover-d  ui-btn-hover-e');
-        //$("#categories-list").listview('refresh');
+        if (!parent_id) {
+          $(this.el).find('#p-cat-link').show();
+        }
+
+        //deselects the currently selected sub-category
+        $('.ui-li').removeClass('ui-focus');
+        
+      },
+      showParentCategories: function(){
+        this.cat_success([],this.categories.toJSON());
+        $("#p-cat-link").hide();
       },
     });
     return HomeView;
