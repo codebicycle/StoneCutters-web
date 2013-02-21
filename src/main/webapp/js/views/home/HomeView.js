@@ -40,8 +40,17 @@ define([
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
-        $(document).on("swiperight", function(event, ui) {
-            $(this.el).find('#left-panel').panel("open");
+        $( document ).on( "swipeleft swiperight", this.el, function( e ) {
+            if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+                // if ( e.type === "swipeleft"  ) {
+                //     $( "#right-panel" ).panel( "open" );
+                // } else if ( e.type === "swiperight" ) {
+                //     $( "#left-panel" ).panel( "open" );
+                // }
+                if ( e.type === "swiperight" ) {
+                    $( "#left-panel" ).panel( "open" );
+                }
+            }
         });
       },
       render:function (){
