@@ -6,7 +6,7 @@
 require.config( {
   paths: {
     jquery:     'libs/jquery/jquery-1.8.3-min',
-    jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0-rc.1.min',
+    jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0.min',
     underscore: 'libs/underscore/underscore-min',
     backbone:   'libs/backbone/backbone-min',
     swipe:      'libs/swipe/swipe-items', 
