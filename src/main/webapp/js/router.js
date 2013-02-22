@@ -13,6 +13,7 @@ define([
         "":"showHome",
         "item/:itemId": "showItem",
         "category/:catId": "showAds",
+        "search/:query": "showSearchAds",
     },
 
     initialize:function () {
@@ -45,7 +46,22 @@ define([
       new AdsListView({'deferred': dfd, 'cat_id': catId});
     },
 
+    showSearchAds: function(query){
+      console.log('/search/'+query);
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new AdsListView({'deferred': dfd, 'q': query});
+    },
+
     changePage:function (page) {
+      if (this.prevPage) {
+        //unbinds the events binded to the previous page
+        this.prevPage.undelegateEvents();
+      };
+
+      this.prevPage = page;
+
       $(page.el).attr('data-role', 'page');
       page.render();
       $('body').append($(page.el));

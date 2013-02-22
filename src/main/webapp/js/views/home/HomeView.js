@@ -19,7 +19,8 @@ define([
 
       events:{
         'click .cat-link': "refreshList",
-        'click #p-cat-link': "showParentCategories"
+        'click #p-cat-link': "showParentCategories",
+        'click #toggle-search': "toggleSearch"
       },
 
       initialize: function(){
@@ -40,6 +41,8 @@ define([
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
+        this.eventAggregator.on("searchDone", _.bind(this.doneSearch,this));
+
         $( document ).on( "swipeleft swiperight", this.el, function( e ) {
             if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
                 // if ( e.type === "swipeleft"  ) {
@@ -51,6 +54,10 @@ define([
                     $( "#left-panel" ).panel( "open" );
                 }
             }
+        });
+
+        $('#search-bar').change(function(){
+          window.location = "#search/" + $('#search-bar').val();
         });
       },
       render:function (){
@@ -108,6 +115,21 @@ define([
       showParentCategories: function(){
         this.cat_success([],this.categories.toJSON());
         $("#p-cat-link").hide();
+      },
+      toggleSearch: function(){
+        $("#search-bar-div").slideToggle("fast", function () {
+            if ($("#search-bar-div").is(":visible")){
+              $('#search-bar').focus();
+              $('#toggle-search .ui-btn-text').text('Cancel');
+            }else{
+              $('#search-bar').val("");
+              $('#toggle-search .ui-btn-text').text('Search');
+            }
+          });
+
+      },
+      doneSearch: function(){
+        this.toggleSearch();
       },
     });
     return HomeView;
