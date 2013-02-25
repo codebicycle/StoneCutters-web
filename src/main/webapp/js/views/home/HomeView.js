@@ -57,7 +57,7 @@ define([
         });
 
         $('#search-bar').change(function(){
-          window.location = "#search/" + $('#search-bar').val();
+          window.location = "#search?q=" + $('#search-bar').val();
         });
       },
       render:function (){
@@ -117,16 +117,15 @@ define([
         $("#p-cat-link").hide();
       },
       toggleSearch: function(){
-        $("#search-bar-div").slideToggle("fast", function () {
-            if ($("#search-bar-div").is(":visible")){
-              $('#search-bar').focus();
-              $('#toggle-search .ui-btn-text').text('Cancel');
-            }else{
-              $('#search-bar').val("");
-              $('#toggle-search .ui-btn-text').text('Search');
-            }
-          });
+        $("#search-bar-div").toggle();
 
+        if ($("#search-bar-div").is(":visible")){
+          $('#search-bar').focus();
+          $('#toggle-search .ui-btn-text').text('Cancel');
+        }else{
+          $('#search-bar').val("");
+          $('#toggle-search .ui-btn-text').text('Search');
+        }
       },
       doneSearch: function(){
         this.toggleSearch();

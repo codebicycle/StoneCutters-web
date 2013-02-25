@@ -21,7 +21,7 @@ define([
         this.adsCT = Handlebars.compile(adsListTemplate);
 
         this.dfd = options.deferred;
-        this.query = options.q;
+        this.query = null || options.q;
 
         this.items = new ItemsCollection({country_id: 1, cat_id:options.cat_id, q:this.query});
         this.items.on('sync',_.bind(this.items_success, this));

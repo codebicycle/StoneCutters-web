@@ -13,7 +13,8 @@ define([
         "":"showHome",
         "item/:itemId": "showItem",
         "category/:catId": "showAds",
-        "search/:query": "showSearchAds",
+        "search?q=:query": "showSearchAds",
+        "*path":  "defaultRoute"
     },
 
     initialize:function () {
@@ -28,6 +29,10 @@ define([
     showHome:function () {
         console.log('/');
         this.changePage(new HomeView());
+    },
+
+    defaultRoute: function(path) {
+        window.location = "#";
     },
 
     showItem: function(itemId){
