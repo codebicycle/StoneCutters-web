@@ -33,6 +33,13 @@ define([
 
         this.eventAggregator.on("searchDone", _.bind(this.doneSearch,this));
 
+        $.extend($.event.special.swipe,{
+          scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
+          durationThreshold: 1000, // More time than this, and it isn't a swipe.
+          horizontalDistanceThreshold: Math.min($(document).width() / 2, 160),  // Swipe horizontal displacement must be more than this.
+          verticalDistanceThreshold: 75,  // Swipe vertical displacement must be less than this.
+        });
+
         $( document ).on( "swipeleft swiperight", this.el, function( e ) {
             if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
                 // if ( e.type === "swipeleft"  ) {
