@@ -56,7 +56,8 @@ require.config({
 
 window.store = "TestStore"; // override local storage store name - for testing
 
-require(['underscore', 'jquery','jqm', 'jasmine-html','sinon','swipe','console_runner', 'jasmine-jquery'], function(_, $, jqm, jasmine, sinon, swipe){
+require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html','sinon','swipe','console_runner', 'jasmine-jquery'], 
+  function(Backbone, _, $, jqm, jasmine, sinon, swipe){
 
   //this code enables a nicer html reporter to run locally (i.e not on jenkins)
   // var jasmineEnv = jasmine.getEnv();
@@ -80,7 +81,10 @@ require(['underscore', 'jquery','jqm', 'jasmine-html','sinon','swipe','console_r
   var specs = [];
 
   specs.push('spec/unitTests/category_model_unit_spec');
-  specs.push('spec/unitTests/sliding_menu_unit_spec');
+  specs.push('spec/unitTests/item_slider_unit_spec');
+  specs.push('spec/unitTests/load_categories_unit_spec');
+
+  Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
 
   $(function(){
     require(specs, function(){
