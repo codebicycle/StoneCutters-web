@@ -29,7 +29,7 @@ define(['views/base/BaseView','spec/SinonHelper'], function(BaseView,SinonHelper
 	 			view = new BaseView();
 	 			view.render();
 			});
-	 		//console.log($('#home #categories-list li a')[0].html());
+
       		//Categories's Expectations
       		expect($($('#home #categories-list li a')[0]).html()).toBe("For Sale"); 
       		expect($($('#home #categories-list li a')[1]).html()).toBe("Vehicles");

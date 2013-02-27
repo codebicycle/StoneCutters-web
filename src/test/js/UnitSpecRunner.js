@@ -83,6 +83,7 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html','sinon','swipe
   specs.push('spec/unitTests/category_model_unit_spec');
   specs.push('spec/unitTests/item_slider_unit_spec');
   specs.push('spec/unitTests/load_categories_unit_spec');
+  specs.push('spec/unitTests/load_items_unit_spec');
 
   Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
 
