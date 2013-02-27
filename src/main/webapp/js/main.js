@@ -1,4 +1,3 @@
-// Author: Thomas Davis <thomasalwyndavis@gmail.com>
 // Filename: main.js
 
 // Require.js allows us to configure shortcut alias
@@ -6,7 +5,7 @@
 require.config( {
   paths: {
     jquery:     'libs/jquery/jquery-1.8.3-min',
-    jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0-rc.1.min',
+    jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0.min',
     underscore: 'libs/underscore/underscore-min',
     backbone:   'libs/backbone/backbone-min',
     swipe:      'libs/swipe/swipe-items', 
@@ -30,7 +29,7 @@ require.config( {
   } // end Shim Configuration
 });
 
-require(['app','jquery'], function(App, $){
+require(['app','jquery', 'backbone'], function(App, $, Backbone){
 
   $( document ).on( "mobileinit",
     // Set up the "mobileinit" handler before requiring jQuery Mobile's module
@@ -46,6 +45,10 @@ require(['app','jquery'], function(App, $){
       $('div[data-role="page"]').live('pagehide', function (event, ui) { 
         $(event.currentTarget).remove(); 
       });
+
+      //this adds the eventAggregator object to every view. This object is 
+      //used for events across views/objects (event aggregator pattern)
+      Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
     }
   )
   
