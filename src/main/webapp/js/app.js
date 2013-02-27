@@ -12,7 +12,7 @@ define([
 
     //initialize the base view to be able to access sub pages (ie items)
     //directly from their static URL
-    new BaseView();
+    new BaseView({});
   };
 
   return { 

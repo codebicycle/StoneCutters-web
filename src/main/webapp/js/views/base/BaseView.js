@@ -19,8 +19,10 @@ define([
         'click #toggle-search': "toggleSearch"
       },
 
-      initialize: function(){
-        
+      initialize: function(options){
+
+        this.dfd = null || options.deferred;
+
         // Compile the template using Handlebars micro-templating
         this.catCT = Handlebars.compile(categoriesListTemplate);
 
@@ -58,14 +60,17 @@ define([
         });
       },
       render:function (){
-        return this;
-      },
-      cat_success: function(model, response){
-        $(this.el).find('#left-panel').html(this.catCT({'categories': response}));
+        $(this.el).find('#left-panel').html(this.catCT({'categories': this.categories.toJSON()}));
         $(this.el).find('#left-panel').trigger("updatelayout");
         $(this.el).find('#categories-list').listview();
         $(this.el).find('#p-cat-link').button();
         $(this.el).find('#p-cat-link').hide();
+
+        return this;
+      },
+      cat_success: function(model, response){
+        if (this.dfd) this.dfd.resolve(this);
+        this.render();
       },
       refreshList: function(ev){
         var data_id = $(ev.currentTarget).data("id");

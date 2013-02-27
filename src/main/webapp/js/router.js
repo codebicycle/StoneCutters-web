@@ -28,7 +28,10 @@ define([
 
     showHome:function () {
         console.log('/');
-        this.changePage(new HomeView());
+        
+        var dfd = $.Deferred().done(this.changePage);
+
+        new HomeView({'deferred': dfd});
     },
 
     defaultRoute: function(path) {

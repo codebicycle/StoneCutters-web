@@ -26,14 +26,19 @@ define(['views/home/HomeView','spec/SinonHelper'], function(HomeView,SinonHelper
 			var S = new SinonHelper();
 
 	 		S.fakeResponse(actions,urls,responses, options, function() {
-	 			view = new HomeView();
-	 			view.render();
+	 			var dfd = $.Deferred().done(_.bind(function(page){
+					page.render(); 
+	      			
+	      			//Items's expectations
+		      		expect($($('#home #slider1 li span')[0]).html()).toBe("Item 1 Price: $15.50"); 
+		      		expect($($('#home #slider1 li span')[1]).html()).toBe("Item 2 Price: $18.10");
+		      		expect($('#home #slider1 li a img').length).toBe(3);
+				}, this));
+
+	 			view = new HomeView({'deferred': dfd});
 			});
 
-      		//Items's expectations
-      		expect($($('#home #slider1 li span')[0]).html()).toBe("Item 1 Price: $15.50"); 
-      		expect($($('#home #slider1 li span')[1]).html()).toBe("Item 2 Price: $18.10");
-      		expect($('#home #slider1 li a img').length).toBe(3);
+      		
 		});
 	});
 });
