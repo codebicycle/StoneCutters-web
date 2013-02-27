@@ -33,7 +33,7 @@ define([
         return this;
       },
       items_success: function(model, response)  {
-        this.dfd.resolve(this);
+        if (this.dfd) this.dfd.resolve(this);
         if (this.query) {
           //if this requests comes from a search, trigger the done event
           this.eventAggregator.trigger("searchDone");

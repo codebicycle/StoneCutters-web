@@ -18,8 +18,10 @@ define([
       events:{
       },
 
-      initialize: function(){
+      initialize: function(options){
         
+        this.dfd = null || options.deferred;
+
         // Compile the template using Handlebars micro-templating
         this.homeCT = Handlebars.compile(homeTemplate);
         this.sliderCT = Handlebars.compile(sliderTemplate);
@@ -35,9 +37,6 @@ define([
         //This line is commented in order to get green in the sliding test.
         //$(this.el).trigger('create');
 
-        return this;
-      },
-      items_success: function(model, response){
         $(this.el).find('#slider1').html(this.sliderCT({'items': this.items.toJSON()}));
         this.slider1 = new Swipe(document.getElementById('slider1'), {
                             //startSlide: 2,
@@ -47,6 +46,11 @@ define([
                             'callback': function(event, index, elem) {
                             }
         });
+
+        return this;
+      },
+      items_success: function(model, response){
+        if (this.dfd) this.dfd.resolve(this);
       },
     });
     return HomeView;
