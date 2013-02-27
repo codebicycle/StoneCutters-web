@@ -70,7 +70,6 @@ define([
       },
       cat_success: function(model, response){
         if (this.dfd) this.dfd.resolve(this);
-        this.render();
       },
       refreshList: function(ev){
         var data_id = $(ev.currentTarget).data("id");

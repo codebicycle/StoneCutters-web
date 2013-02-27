@@ -12,7 +12,11 @@ define([
 
     //initialize the base view to be able to access sub pages (ie items)
     //directly from their static URL
-    new BaseView({});
+    var dfd = $.Deferred().done(_.bind(function(page){
+          page.render();
+        }, this));
+
+    new BaseView({'deferred': dfd});
   };
 
   return { 
