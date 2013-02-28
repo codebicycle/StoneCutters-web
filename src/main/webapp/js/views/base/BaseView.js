@@ -26,6 +26,8 @@ define([
         // Compile the template using Handlebars micro-templating
         this.catCT = Handlebars.compile(categoriesListTemplate);
 
+        this.loadCategories = new CategoriesCollection();
+
         this.categories = new CategoriesCollection();
         //this.categories.comparator = 'name';
         //underscore bind preserves the views scope so that this.categories is still 
@@ -60,7 +62,7 @@ define([
         });
       },
       render:function (){
-        $(this.el).find('#left-panel').html(this.catCT({'categories': this.categories.toJSON()}));
+        $(this.el).find('#left-panel').html(this.catCT({'categories': this.loadCategories.toJSON()}));
         $(this.el).find('#left-panel').trigger("updatelayout");
         $(this.el).find('#categories-list').listview();
         $(this.el).find('#p-cat-link').button();
@@ -69,6 +71,7 @@ define([
         return this;
       },
       cat_success: function(model, response){
+        this.loadCategories.reset(response);
         if (this.dfd) this.dfd.resolve(this);
       },
       refreshList: function(ev){
@@ -86,7 +89,7 @@ define([
         }
 
         if (category.get('children').length > 0) {
-          this.cat_success({}, category.get('children'));
+          this.changeCategories(category.get('children'));
         }
 
         if (!parent_id) {
@@ -98,8 +101,7 @@ define([
         
       },
       showParentCategories: function(){
-        this.cat_success([],this.categories.toJSON());
-        $("#p-cat-link").hide();
+        this.changeCategories(this.categories.toJSON());
       },
       toggleSearch: function(){
         $("#search-bar-div").toggle();
@@ -114,6 +116,10 @@ define([
       },
       doneSearch: function(){
         this.toggleSearch();
+      },
+      changeCategories: function(categories){
+        this.loadCategories.reset(categories);
+        this.render();
       },
     });
     return BaseView;
