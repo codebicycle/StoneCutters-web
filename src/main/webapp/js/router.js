@@ -63,12 +63,13 @@ define([
     },
 
     changePage:function (page) {
-      if (this.prevPage) {
+      if (window.prevPage) {
         //unbinds the events binded to the previous page
-        this.prevPage.undelegateEvents();
+        window.prevPage.undelegateEvents();
+        window.prevPage.close();
       };
 
-      this.prevPage = page;
+      window.prevPage = page;
 
       $(page.el).attr('data-role', 'page');
       page.render();

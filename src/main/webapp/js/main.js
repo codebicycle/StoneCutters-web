@@ -49,6 +49,7 @@ require(['app','jquery', 'backbone'], function(App, $, Backbone){
       //this adds the eventAggregator object to every view. This object is 
       //used for events across views/objects (event aggregator pattern)
       Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
+      Backbone.View.prototype.close = function(){};
     }
   )
   
