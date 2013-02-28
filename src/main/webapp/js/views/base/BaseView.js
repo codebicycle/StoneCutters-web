@@ -88,6 +88,8 @@ define([
           category = this.categories.get(data_id);
         }
 
+        document.title = category.get('name');
+
         if (category.get('children').length > 0) {
           this.changeCategories(category.get('children'));
         }
