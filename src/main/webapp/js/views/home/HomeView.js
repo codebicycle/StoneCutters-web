@@ -19,6 +19,7 @@ define([
       },
 
       initialize: function(options){
+        document.title = "OLX Mobile";
         
         this.dfd = null || options.deferred;
 
