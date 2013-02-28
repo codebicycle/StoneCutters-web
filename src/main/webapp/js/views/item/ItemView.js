@@ -27,6 +27,7 @@ define([
         this.item.fetch();
       },
       render:function () {
+        document.title = this.item.get('title');
         $(this.el).find('#content').html(this.itemCT({'item': this.item.toJSON()}));
         this.slider = new Swipe(document.getElementById('image-slider'));
         return this;

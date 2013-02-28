@@ -13,8 +13,9 @@ define([
       model: ItemModel,
       url: function(){
         return conf.get('smaug').url + ':' + conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
-      }
+      },
     });
+
     // You don't usually return a collection instantiated
     return ItemCollection;
 });
