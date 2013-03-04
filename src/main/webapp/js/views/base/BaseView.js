@@ -83,7 +83,6 @@ define([
           var parentCategory = this.categories.get(parent_id);
           var children = new CategoriesCollection(parentCategory.get('children'));
           category = children.get(data_id);
-          $(this.el).find('#left-panel').panel("close");
         }else{
           category = this.categories.get(data_id);
         }
@@ -100,7 +99,6 @@ define([
 
         //deselects the currently selected sub-category
         $('.ui-li').removeClass('ui-focus');
-        
       },
       showParentCategories: function(){
         this.changeCategories(this.categories.toJSON());
