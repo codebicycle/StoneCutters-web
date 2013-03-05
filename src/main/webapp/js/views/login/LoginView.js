@@ -15,6 +15,7 @@ define([
 
       events:{
         'click #login-button': "startLogin",
+        'click #send-email-button': "startLoginEmail",
       },
 
       initialize: function(options){
@@ -44,7 +45,17 @@ define([
       },
       login_success:function (model, response){
         
-      }
+      },
+      startLoginEmail:function (){
+        var email = $(this.el).find('#email-field').val();
+
+        // this.user = new User({"username":user, "password":pass});
+        // this.user.on('sync',_.bind(this.login_success, this));
+        // this.user.fetch();
+      },
+      login_email_success:function (model, response){
+        
+      },
     });
     return LoginView;
 });
