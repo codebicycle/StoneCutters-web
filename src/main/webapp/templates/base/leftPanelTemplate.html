@@ -1,0 +1,18 @@
+<ul id="left-panel-list" data-role="listview" data-theme="d" data-inset="true">
+	<li data-role="list-divider" role="heading">My OLX</li>
+	{{#unless user}}
+		<li data-icon="false"><a id="login-button" href="#login" data-role="button" style="text-align:center;" data-mini="true">Log In</a></li>
+	{{else}}
+		<li data-icon="false"><a id="myolx-link" href="#myolx" data-mini="true" style="text-align:center;">{{user.name}}</a></li>
+	{{/unless}}
+
+	<li data-icon="false"><a id="post-button" href="#post" data-role="button" data-mini="true" style="text-align:center;">Post Ad</a></li>
+	<li data-icon="false"><a id="settings-button" href="#settings" data-role="button" data-mini="true" style="text-align:center;">Settings</a></li>
+
+	<li id="cat-divider" data-role="list-divider" role="heading">Categories</li>
+	<li id="p-cat-link" data-icon="arrow-l" class="ui-btn-icon-left"><a href="javascript:;" data-mini="true" style="text-align:center;">Parent Categories</a></li>
+	{{#categories}}
+        <li><a href="#category/{{id}}" data-id="{{id}}" data-parent-id="{{parentId}}" class="cat-link">{{name}}</a></li>
+    {{/categories}}
+
+</ul>
