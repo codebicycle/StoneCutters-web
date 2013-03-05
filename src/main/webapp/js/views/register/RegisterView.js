@@ -15,6 +15,7 @@ define([
 
       events:{
         'click #register-button': "startRegister",
+        'keypress input[type=email]': "startRegister"
       },
 
       initialize: function(options){
