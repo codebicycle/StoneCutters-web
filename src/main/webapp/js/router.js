@@ -6,7 +6,8 @@ define([
   'views/home/HomeView',
   'views/item/ItemView',
   'views/ads/AdsListView',
-], function($, _, Backbone, HomeView, ItemView, AdsListView) {
+  'views/login/LoginView',
+], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
@@ -14,6 +15,7 @@ define([
         "item/:itemId": "showItem",
         "category/:catId": "showAds",
         "search?q=:query": "showSearchAds",
+        "login": "showLogin",
         "*path":  "defaultRoute"
     },
 
@@ -44,6 +46,14 @@ define([
       var dfd = $.Deferred().done(this.changePage);
 
       new ItemView({'deferred': dfd, 'id': itemId});
+    },
+
+    showLogin: function(itemId){
+      console.log('/login');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new LoginView({'deferred': dfd});
     },
 
     showAds: function(catId){
