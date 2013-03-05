@@ -4,11 +4,12 @@ define([
   'backbone',
   'handlebars',
   'collections/categories',
-  'text!templates/base/categoriesListTemplate.html'
+  'models/user',
+  'text!templates/base/leftPanelTemplate.html'
   ], 
 
-  function($,_, Backbone, Handlebars, CategoriesCollection, 
-    categoriesListTemplate){
+  function($,_, Backbone, Handlebars, CategoriesCollection, UserModel, 
+    leftPanelTemplate){
 
     var BaseView = Backbone.View.extend({
       el: "#home",
@@ -24,7 +25,13 @@ define([
         this.dfd = null || options.deferred;
 
         // Compile the template using Handlebars micro-templating
-        this.catCT = Handlebars.compile(categoriesListTemplate);
+        this.panelCT = Handlebars.compile(leftPanelTemplate);
+
+        this.userJSON = null;
+
+        if (window.user) {
+          this.userJSON = window.user.toJSON();
+        };
 
         this.loadCategories = new CategoriesCollection();
 
@@ -62,10 +69,10 @@ define([
         });
       },
       render:function (){
-        $(this.el).find('#left-panel').html(this.catCT({'categories': this.loadCategories.toJSON()}));
+        $(this.el).find('#left-panel').html(this.panelCT({'user': this.userJSON, 'categories': this.loadCategories.toJSON()}));
         $(this.el).find('#left-panel').trigger("updatelayout");
-        $(this.el).find('#categories-list').listview();
-        $(this.el).find('#p-cat-link').button();
+        
+        $(this.el).find('#left-panel-list').listview();
         $(this.el).find('#p-cat-link').hide();
 
         return this;
@@ -85,6 +92,7 @@ define([
           category = children.get(data_id);
         }else{
           category = this.categories.get(data_id);
+          $('li#cat-divider.ui-li').text(category.get('name'));
         }
 
         document.title = category.get('name');
@@ -94,6 +102,7 @@ define([
         }
 
         if (!parent_id) {
+          $('li#cat-divider.ui-li').text(category.get('name'));
           $(this.el).find('#p-cat-link').show();
         }
 
