@@ -7,8 +7,10 @@ define([
   'views/item/ItemView',
   'views/ads/AdsListView',
   'views/login/LoginView',
-  'views/register/RegisterView'
-], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView, RegisterView) {
+  'views/register/RegisterView',
+  'views/register/TermsView'
+], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView, 
+  RegisterView, TermsView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
@@ -18,6 +20,7 @@ define([
         "search?q=:query": "showSearchAds",
         "login": "showLogin",
         "register": "showRegister",
+        "terms": "showTerms",
         "*path":  "defaultRoute"
     },
 
@@ -64,6 +67,14 @@ define([
       var dfd = $.Deferred().done(this.changePage);
 
       new RegisterView({'deferred': dfd});
+    },
+
+    showTerms: function(){
+      console.log('/terms');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new TermsView({'deferred': dfd});
     },
 
     showAds: function(catId){

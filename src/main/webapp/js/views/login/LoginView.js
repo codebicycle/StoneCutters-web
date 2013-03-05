@@ -3,12 +3,11 @@ define([
   'underscore',
   'backbone',
   'handlebars',
-  'collections/items',
   'models/user',
   'text!templates/login/loginTemplate.html'
   ], 
 
-  function($,_, Backbone, Handlebars, ItemsCollection, User, loginTemplate){
+  function($,_, Backbone, Handlebars, User, loginTemplate){
 
     var LoginView = Backbone.View.extend({
       el: "#home",
