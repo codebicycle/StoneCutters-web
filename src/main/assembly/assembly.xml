@@ -1,0 +1,19 @@
+<assembly>
+  <id>bin</id>
+  
+  <formats>
+    <format>tar.gz</format>
+  </formats>
+  
+  <includeBaseDirectory>false</includeBaseDirectory>
+  
+  <fileSets>
+    <fileSet>
+      <outputDirectory>webapp</outputDirectory>
+      <directory>src/main/webapp</directory>
+<!--      <includes>
+        <include>*html</include>
+      </includes>-->
+    </fileSet>
+  </fileSets>
+</assembly>
