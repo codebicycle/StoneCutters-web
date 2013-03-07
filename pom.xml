@@ -5,7 +5,7 @@
   <groupId>ar.com.olx</groupId>
   <artifactId>mobile-olx-arwen</artifactId>
   <name>ARWEN</name>
-  <version>0.02</version>
+  <version>auto</version>
 
   <packaging>pom</packaging>
   
