@@ -65,7 +65,7 @@ define([
       },
       login_success:function (data){
         if (data.token) {
-          window.token = data.token;
+          Storage.set("authToken",data.token);
 
           this.user = new User({"username":this.username});
           this.user.on('sync',_.bind(this.user_success, this));
@@ -75,7 +75,7 @@ define([
       },
       user_success:function (model, response){
         if(this.user.username){
-          window.user = this.user;
+          Storage.set("userObj",this.user);
         }
         
       },
