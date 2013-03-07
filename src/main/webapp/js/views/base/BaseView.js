@@ -64,7 +64,7 @@ define([
       },
       render:function (){
         $(this.el).find('#left-panel').html(this.panelCT({
-          'user': if(Storage.get("userObj")) Storage.get("userObj").toJSON() else null, 
+          'user': (this.Storage.get("userObj"))? this.Storage.get("userObj").toJSON() : null, 
           'categories': this.loadCategories.toJSON()})
         );
         $(this.el).find('#left-panel').trigger("updatelayout");

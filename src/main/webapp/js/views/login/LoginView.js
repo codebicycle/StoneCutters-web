@@ -65,9 +65,9 @@ define([
       },
       login_success:function (data){
         if (data.token) {
-          Storage.set("authToken",data.token);
+          this.Storage.set("authToken",data.token);
 
-          this.user = new User({"username":this.username});
+          this.user = new User({"username":this.username, "authToken": this.Storage.get("authToken")});
           this.user.on('sync',_.bind(this.user_success, this));
           this.user.fetch();
         };
@@ -75,7 +75,7 @@ define([
       },
       user_success:function (model, response){
         if(this.user.username){
-          Storage.set("userObj",this.user);
+          this.Storage.set("userObj",this.user);
         }
         
       },
