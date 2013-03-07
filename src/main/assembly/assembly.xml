@@ -11,9 +11,6 @@
     <fileSet>
       <outputDirectory>webapp</outputDirectory>
       <directory>src/main/webapp</directory>
-<!--      <includes>
-        <include>*html</include>
-      </includes>-->
     </fileSet>
   </fileSets>
 </assembly>
