@@ -5,7 +5,7 @@
 	<groupId>ar.com.olx</groupId>
 	<artifactId>mobile-olx-arwen</artifactId>
 	<name>ARWEN</name>
-	<version>${build.number}</version>
+	<version>${BUILD_NUMBER}</version>
 	<packaging>pom</packaging>
   
 	<!--<pluginRepositories>
