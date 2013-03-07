@@ -29,6 +29,7 @@ define([
         this.query = null || options.q;
         this.page= options.page || 0;
         this.pageSize =  10 || conf.get('pageSize');
+        this.cat_id = options.cat_id;
 
         this.opts = {country_id: 1, cat_id:options.cat_id, q:this.query, offset:this.page, pageSize: this.pageSize};
 
@@ -37,13 +38,13 @@ define([
         this.items.fetch();
 
         //We are not able to attach this event in events: {}, because windows is not inside el.
-        $(window).scroll(_.bind(this.checkScroll,this));
+        //Namespaced events. http://docs.jquery.com/Namespaced_Events (This is here to avoid a bug)
+        $(window).bind("scroll."+options.cat_id, (_.bind(this.checkScroll,this)));
       },
 
       checkScroll: function () {
         var triggerPoint = 100; // 100px from the bottom
         if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()  ) {
-          console.log("Page:"+this.page);
           this.opts.offset += 1; // Load next page
           this.items.reset(this.opts);
           this.loadResults();
@@ -79,7 +80,7 @@ define([
       },
 
       close: function(){
-        $(window).unbind('scroll');
+        $(window).unbind("scroll."+this.cat_id);
       }
     });
     return AdsListView;
