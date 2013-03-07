@@ -6,10 +6,10 @@ define([
 	var conf = new ConfModel();
  	var UserModel = Backbone.Model.extend({
   	initialize: function(options){
-  		this.id = options.id;
+  		this.username = options.username;
   	},
   	url: function(){
-  		return conf.get('smaug').url + ':' + conf.get('smaug').port + '/user/'+this.id;
+  		return conf.get('smaug').url + ':' + conf.get('smaug').port + '/user/'+this.username;
   	}
   });
   

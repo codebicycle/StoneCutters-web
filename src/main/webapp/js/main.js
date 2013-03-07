@@ -11,7 +11,8 @@ require.config( {
     swipe:      'libs/swipe/swipe-items', 
     handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
     templates:  '../templates',
-    config:     '../configuration'
+    config:     '../configuration',
+    crypto:     'libs/cryptoJS'
   },
   
   // Sets the configuration for your third party scripts that are not AMD compatible
