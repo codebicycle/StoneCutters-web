@@ -27,12 +27,6 @@ define([
         // Compile the template using Handlebars micro-templating
         this.panelCT = Handlebars.compile(leftPanelTemplate);
 
-        this.userJSON = null;
-
-        if (window.user) {
-          this.userJSON = window.user.toJSON();
-        };
-
         this.loadCategories = new CategoriesCollection();
 
         this.categories = new CategoriesCollection();
@@ -69,7 +63,10 @@ define([
         });
       },
       render:function (){
-        $(this.el).find('#left-panel').html(this.panelCT({'user': this.userJSON, 'categories': this.loadCategories.toJSON()}));
+        $(this.el).find('#left-panel').html(this.panelCT({
+          'user': (this.Storage.get("userObj"))? this.Storage.get("userObj").toJSON() : null, 
+          'categories': this.loadCategories.toJSON()})
+        );
         $(this.el).find('#left-panel').trigger("updatelayout");
         
         $(this.el).find('#left-panel-list').listview();
