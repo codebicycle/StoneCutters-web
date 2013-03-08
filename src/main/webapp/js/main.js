@@ -10,7 +10,7 @@ require.config( {
     backbone:   'libs/backbone/backbone-min',
     swipe:      'libs/swipe/swipe-items', 
     handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
-    modernizr: 'libs/modernizr/modernizr.custom',
+    modernizr:  'libs/modernizr/modernizr.custom',
     templates:  '../templates',
     config:     '../configuration',
     crypto:     'libs/cryptoJS'
@@ -58,23 +58,30 @@ require(['app','jquery', 'backbone', 'modernizr'], function(App, $, Backbone, mo
 
       var Storage = null;
 
-      if (Modernizr.localStorage) {
+      if (Modernizr.localstorage) {
         Storage = {
             set: function(key, value) {
-                localStorage[key] = value;
+                localStorage[key] = JSON.stringify(value);
             },
             get: function(key) {
-                return localStorage[key] ? localStorage[key] : null;
+                return localStorage[key] ? JSON.parse(localStorage[key]) : null;
+            },
+            clear: function() {
+                localStorage.clear();
             }
         };
       } else{
+        window.ls = [];
         //implement a Storage solution independent form localSorage
         Storage = {
             set: function(key, value) {
-                window[key] = value;
+                window.ls[key] = JSON.stringify(value);
             },
             get: function(key) {
-                return window[key] ? window[key] : null;
+                return window.ls[key] ? JSON.parse(window.ls[key]) : null;
+            },
+            clear: function() {
+                window.ls.length = 0;
             }
         };
       };

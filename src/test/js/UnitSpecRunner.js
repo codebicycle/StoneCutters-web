@@ -96,23 +96,27 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
   Backbone.View.prototype.close = function(){};
 
   var Storage = null;
-  if (Modernizr.localStorage) {
+  if (Modernizr.localstorage) {
     Storage = {
         set: function(key, value) {
-            localStorage[key] = value;
+            localStorage[key] = JSON.stringify(value);
         },
         get: function(key) {
-            return localStorage[key] ? localStorage[key] : null;
+            return localStorage[key] ? JSON.parse(localStorage[key]) : null;
         }
     };
   } else{
+    window.ls = [];
     //implement a Storage solution independent form localSorage
     Storage = {
         set: function(key, value) {
-            window[key] = value;
+            window.ls[key] = JSON.stringify(value);
         },
         get: function(key) {
-            return window[key] ? window[key] : null;
+            return window.ls[key] ? JSON.parse(window.ls[key]) : null;
+        },
+        clear: function() {
+            window.ls.length = 0;
         }
     };
   };
