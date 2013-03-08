@@ -1,9 +1,13 @@
 <ul id="left-panel-list" data-role="listview" data-theme="d" data-inset="true">
-	<li data-role="list-divider" role="heading">My OLX</li>
 	{{#unless user}}
-		<li data-icon="false"><a id="login-button" href="#login" data-role="button" style="text-align:center;" data-mini="true">Log In</a></li>
+		<li data-icon="false"><a id="login-link" href="#login" style="text-align:center;background-color:#5E87B0;color:#FFFFFF" data-mini="true">My OLX - Log In</a></li>
 	{{else}}
-		<li data-icon="false"><a id="myolx-link" href="#myolx" data-mini="true" style="text-align:center;">{{user.name}}</a></li>
+		<li data-icon="false"><a id="myolx-link" href="javascript:;" data-mini="true" style="text-align:center;background-color:#5E87B0;color:#FFFFFF">My OLX - {{user.name}}</a></li>
+
+		<li data-icon="false" class="myolx-cat"><a href="#mymessages" data-mini="true">My Messages</a></li>
+		<li data-icon="false" class="myolx-cat"><a href="#myads" data-mini="true">My Ads</a></li>
+		<li data-icon="false" class="myolx-cat"><a href="#myfavs" data-mini="true">My Favorites</a></li>
+		<li data-icon="false" class="myolx-cat"><a id="logout-link" href="javascript:;" data-mini="true">Logout</a></li>
 	{{/unless}}
 
 	<li data-icon="false"><a id="post-button" href="#post" data-role="button" data-mini="true" style="text-align:center;">Post Ad</a></li>

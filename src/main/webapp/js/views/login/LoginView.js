@@ -43,6 +43,18 @@ define([
         this.username = $(this.el).find('#username-field').val();
         this.password = $(this.el).find('#password-field').val();
 
+        if(!this.username || !this.password)
+          return;
+
+        //ATTENTION BEGIN DEBUG CODE
+        // var user = new User({"id":100,"name":this.username,"username":this.username});
+        // this.Storage.set("userObj",user);
+        // this.Storage.set("authToken","12345678");
+        // this.eventAggregator.trigger("loggedIn");
+        // window.location = "#";
+        // return;
+        //END OF DEBUG CODE
+
         var conf = new ConfModel();
 
         $.ajax({
