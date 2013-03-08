@@ -19,7 +19,7 @@ define(['views/ads/AdsListView','spec/SinonHelper'], function(AdsListView,SinonH
 
 	 		actions.push("GET");
 
-	 		urls.push('http://smaug.herokuapp.com:80/items/{"country_id":1,"cat_id":322}');
+	 		urls.push('http://smaug.herokuapp.com:80/items/{"country_id":1,"cat_id":322,"offset":0,"pageSize":10}');
 
 			responses.push(items);
 
@@ -27,11 +27,11 @@ define(['views/ads/AdsListView','spec/SinonHelper'], function(AdsListView,SinonH
 
 	 		S.fakeResponse(actions,urls,responses, options, function() {
 	 			var dfd = $.Deferred().done(_.bind(function(page){
-					page.render(); 
-	      			
+					page.render();
+					
 	      			//Items' Expectations
-		      		expect($($('#home #ads-list li a')[0]).html()).toBe("Item 1 Price: $15.50"); 
-		      		expect($($('#home #ads-list li a')[1]).html()).toBe("Item 2 Price: $18.10");
+		      		expect($($('#home #ads-list li a')[0]).html()).toBe("Item 1"); 
+		      		expect($($('#home #ads-list li a')[1]).html()).toBe("Item 2");
 		      		expect($('#home #ads-list li a').length).toBe(3);
 				}, this));
 

@@ -13,6 +13,7 @@ require.config({
     console_runner: 'libs/phantom-jasmine/console-runner',
     sinon: 'libs/sinon/sinon-1.5.2',
     swipe: 'libs/swipe/swipe',
+    modernizr: 'libs/modernizr/modernizr.custom',
     spec: '../../../test/js',
     config: '../configuration'
   },
@@ -48,6 +49,7 @@ require.config({
       exports: 'swipe'
     },
     jqm:{
+      deps: ['jquery'],
       exports: 'jqm'
     }
   }
@@ -56,7 +58,8 @@ require.config({
 
 window.store = "TestStore"; // override local storage store name - for testing
 
-require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html','sinon','swipe','console_runner', 'jasmine-jquery'], 
+require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
+  'sinon','swipe', 'modernizr', 'console_runner', 'jasmine-jquery'], 
   function(Backbone, _, $, jqm, jasmine, sinon, swipe){
 
   //this code enables a nicer html reporter to run locally (i.e not on jenkins)
@@ -78,17 +81,46 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html','sinon','swipe
   jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
   jasmine.getEnv().addReporter(console_reporter);
 
+  //disable element creation functions in jquery mobile for tests to work
+  $.mobile.listview.prototype._create = function() {};
+
   var specs = [];
 
   specs.push('spec/unitTests/category_model_unit_spec');
   specs.push('spec/unitTests/item_slider_unit_spec');
   specs.push('spec/unitTests/load_categories_unit_spec');
   specs.push('spec/unitTests/load_items_unit_spec');
+  specs.push('spec/unitTests/login_unit_spec');
 
   Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
+  Backbone.View.prototype.close = function(){};
+
+  var Storage = null;
+  if (Modernizr.localStorage) {
+    Storage = {
+        set: function(key, value) {
+            localStorage[key] = value;
+        },
+        get: function(key) {
+            return localStorage[key] ? localStorage[key] : null;
+        }
+    };
+  } else{
+    //implement a Storage solution independent form localSorage
+    Storage = {
+        set: function(key, value) {
+            window[key] = value;
+        },
+        get: function(key) {
+            return window[key] ? window[key] : null;
+        }
+    };
+  };
+
+  Backbone.View.prototype.Storage = Storage;
 
   $(function(){
-    require(specs, function(){
+    require(['jqm', 'jasmine-jquery'].concat(specs), function(){
       jasmine.getEnv().execute();
     });
   });

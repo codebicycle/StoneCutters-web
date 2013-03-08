@@ -61,20 +61,20 @@ require(['app','jquery', 'backbone', 'modernizr'], function(App, $, Backbone, mo
       if (Modernizr.localStorage) {
         Storage = {
             set: function(key, value) {
-                localStorage[key] = JSON.stringify(value);
+                localStorage[key] = value;
             },
             get: function(key) {
-                return localStorage[key] ? JSON.parse(localStorage[key]) : null;
+                return localStorage[key] ? localStorage[key] : null;
             }
         };
       } else{
         //implement a Storage solution independent form localSorage
         Storage = {
             set: function(key, value) {
-                window.key = JSON.stringify(value);
+                window[key] = value;
             },
             get: function(key) {
-                return window.key ? JSON.parse(window.key) : null;
+                return window[key] ? window[key] : null;
             }
         };
       };

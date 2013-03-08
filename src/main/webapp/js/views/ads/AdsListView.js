@@ -25,7 +25,7 @@ define([
         this.adsCT = Handlebars.compile(adsListTemplate);
         this.adsMCT = Handlebars.compile(adsMoreListTemplate);
 
-        this.dfd = options.deferred;
+        this.dfd = null || options.deferred;
         this.query = null || options.q;
         this.page= options.page || 0;
         this.pageSize =  10 || conf.get('pageSize');

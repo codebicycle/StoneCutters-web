@@ -47,7 +47,7 @@ define([
 
         $.ajax({
           type: "GET",
-          url: conf.get('smaug').url + ':' + conf.get('smaug').port + '/challenge?user='+this.username,
+          url: conf.get('smaug').url + ':' + conf.get('smaug').port + '/challenge/'+this.username,
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (data){
