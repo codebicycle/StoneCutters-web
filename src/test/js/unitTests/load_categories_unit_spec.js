@@ -28,11 +28,11 @@ define(['views/base/BaseView','spec/SinonHelper'], function(BaseView,SinonHelper
 	 		S.fakeResponse(actions,urls,responses, options, function() {
 	 			var dfd = $.Deferred().done(_.bind(function(page){
 					page.render(); 
-	      			
+
 	      			//Categories's Expectations
-		      		expect($($('#home #left-panel-list li a')[0]).html()).toBe("For Sale"); 
-		      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("Vehicles");
-		      		expect($('#home  #left-panel-list li a').length).toBe(2);
+		      		expect($($('#home #left-panel-list li a')[4]).html()).toBe("For Sale"); 
+		      		expect($($('#home #left-panel-list li a')[5]).html()).toBe("Vehicles");
+		      		expect($('#home  #left-panel-list li a').length).toBe(6);
 				}, this));
 
 	 			view = new BaseView({'deferred': dfd});

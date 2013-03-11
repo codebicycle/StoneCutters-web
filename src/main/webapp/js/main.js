@@ -10,8 +10,10 @@ require.config( {
     backbone:   'libs/backbone/backbone-min',
     swipe:      'libs/swipe/swipe-items', 
     handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
+    modernizr:  'libs/modernizr/modernizr.custom',
     templates:  '../templates',
-    config:     '../configuration'
+    config:     '../configuration',
+    crypto:     'libs/cryptoJS'
   },
   
   // Sets the configuration for your third party scripts that are not AMD compatible
@@ -29,7 +31,7 @@ require.config( {
   } // end Shim Configuration
 });
 
-require(['app','jquery', 'backbone'], function(App, $, Backbone){
+require(['app','jquery', 'backbone', 'modernizr'], function(App, $, Backbone, modernizr){
 
   $( document ).on( "mobileinit",
     // Set up the "mobileinit" handler before requiring jQuery Mobile's module
@@ -53,6 +55,39 @@ require(['app','jquery', 'backbone'], function(App, $, Backbone){
       //This function is to be overridden by all the subviews that want to 
       //execute some lines of code before the router run the changePage
       Backbone.View.prototype.close = function(){};
+
+      var Storage = null;
+
+      if (Modernizr.localstorage) {
+        Storage = {
+            set: function(key, value) {
+                localStorage[key] = JSON.stringify(value);
+            },
+            get: function(key) {
+                return localStorage[key] ? JSON.parse(localStorage[key]) : null;
+            },
+            clear: function() {
+                localStorage.clear();
+            }
+        };
+      } else{
+        window.ls = [];
+        //implement a Storage solution independent form localSorage
+        Storage = {
+            set: function(key, value) {
+                window.ls[key] = JSON.stringify(value);
+            },
+            get: function(key) {
+                return window.ls[key] ? JSON.parse(window.ls[key]) : null;
+            },
+            clear: function() {
+                window.ls.length = 0;
+            }
+        };
+      };
+
+      Backbone.View.prototype.Storage = Storage;
+
     }
   )
   
