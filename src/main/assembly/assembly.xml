@@ -9,8 +9,8 @@
   
   <fileSets>
     <fileSet>
-      <outputDirectory>webapp</outputDirectory>
-      <directory>src/main/webapp</directory>
+      <outputDirectory></outputDirectory>
+      <directory>src/main/webapp/</directory>
     </fileSet>
   </fileSets>
 </assembly>
