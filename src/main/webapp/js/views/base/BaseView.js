@@ -17,7 +17,9 @@ define([
       events:{
         'click .cat-link': "refreshList",
         'click #p-cat-link': "showParentCategories",
-        'click #toggle-search': "toggleSearch"
+        'click #toggle-search': "toggleSearch",
+        'click #myolx-link' : "toggleMyOLXCats",
+        'click #logout-link' : "logout"
       },
 
       initialize: function(options){
@@ -37,6 +39,7 @@ define([
         this.categories.fetch();
 
         this.eventAggregator.on("searchDone", _.bind(this.doneSearch,this));
+        this.eventAggregator.on("loggedIn", _.bind(this.render,this));
 
         $.extend($.event.special.swipe,{
           scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
@@ -64,13 +67,14 @@ define([
       },
       render:function (){
         $(this.el).find('#left-panel').html(this.panelCT({
-          'user': (this.Storage.get("userObj"))? this.Storage.get("userObj").toJSON() : null, 
+          'user': (this.Storage.get("userObj"))? this.Storage.get("userObj") : null, 
           'categories': this.loadCategories.toJSON()})
         );
         $(this.el).find('#left-panel').trigger("updatelayout");
         
         $(this.el).find('#left-panel-list').listview();
         $(this.el).find('#p-cat-link').hide();
+        $(this.el).find('.myolx-cat').hide();
 
         return this;
       },
@@ -120,11 +124,18 @@ define([
           $('#toggle-search .ui-btn-text').text('Search');
         }
       },
+      toggleMyOLXCats: function(){
+        $(this.el).find('.myolx-cat').slideToggle('fast');
+      },
       doneSearch: function(){
         this.toggleSearch();
       },
       changeCategories: function(categories){
         this.loadCategories.reset(categories);
+        this.render();
+      },
+      logout: function(){
+        this.Storage.clear();
         this.render();
       },
     });

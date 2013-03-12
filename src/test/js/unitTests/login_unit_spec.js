@@ -33,13 +33,13 @@ define(['views/base/BaseView','spec/SinonHelper', 'models/user',],
 	 		S.fakeResponse(actions,urls,responses, options, function() {
 	 			var user_success = function(model,response){
 
-					window["userObj"] = model;
+					localStorage["userObj"] = JSON.stringify(model);
 
 					var dfd = $.Deferred().done(_.bind(function(page){
 						page.render();
 
 		      			//BaseView Expectations
-			      		expect($('#myolx-link').html()).toBe("Pedro Perez");
+			      		expect($('#myolx-link').html()).toBe("My OLX - Pedro Perez");
 					}, this));
 
 	      			view = new BaseView({'deferred': dfd});

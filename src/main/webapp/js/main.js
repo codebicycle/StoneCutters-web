@@ -10,7 +10,7 @@ require.config( {
     backbone:   'libs/backbone/backbone-min',
     swipe:      'libs/swipe/swipe-items', 
     handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
-    modernizr: 'libs/modernizr/modernizr.custom',
+    modernizr:  'libs/modernizr/modernizr.custom',
     templates:  '../templates',
     config:     '../configuration',
     crypto:     'libs/cryptoJS'
@@ -47,7 +47,6 @@ require(['app','jquery', 'backbone', 'modernizr'], function(App, $, Backbone, mo
       $('div[data-role="page"]').live('pagehide', function (event, ui) { 
         $(event.currentTarget).remove(); 
       });
-
     }
   )
   
