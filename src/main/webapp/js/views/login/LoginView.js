@@ -17,9 +17,7 @@ define([
 
       events:{
         'click #login-button': "startLogin",
-        'keypress input[type=text]': "startLogin",
         'click #send-email-button': "startLoginEmail",
-        'keypress input[type=email]': "startLoginEmail"
       },
 
       initialize: function(options){

@@ -47,47 +47,6 @@ require(['app','jquery', 'backbone', 'modernizr'], function(App, $, Backbone, mo
       $('div[data-role="page"]').live('pagehide', function (event, ui) { 
         $(event.currentTarget).remove(); 
       });
-
-      //this adds the eventAggregator object to every view. This object is 
-      //used for events across views/objects (event aggregator pattern)
-      Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
-
-      //This function is to be overridden by all the subviews that want to 
-      //execute some lines of code before the router run the changePage
-      Backbone.View.prototype.close = function(){};
-
-      var Storage = null;
-
-      if (Modernizr.localstorage) {
-        Storage = {
-            set: function(key, value) {
-                localStorage[key] = JSON.stringify(value);
-            },
-            get: function(key) {
-                return localStorage[key] ? JSON.parse(localStorage[key]) : null;
-            },
-            clear: function() {
-                localStorage.clear();
-            }
-        };
-      } else{
-        window.ls = [];
-        //implement a Storage solution independent form localSorage
-        Storage = {
-            set: function(key, value) {
-                window.ls[key] = JSON.stringify(value);
-            },
-            get: function(key) {
-                return window.ls[key] ? JSON.parse(window.ls[key]) : null;
-            },
-            clear: function() {
-                window.ls.length = 0;
-            }
-        };
-      };
-
-      Backbone.View.prototype.Storage = Storage;
-
     }
   )
   
