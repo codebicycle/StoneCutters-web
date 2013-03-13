@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title>OLX Mobile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/jqueryMobile/jquery.mobile-1.3.0.min.css"/>
+    <link rel="stylesheet" href="css/arwen/arwen.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile.structure-1.3.0.min.css">
     <link rel='stylesheet' href='css/swipe/style.css'/>
+    <link rel="stylesheet" href="css/arwen/style.css" />
     
 
     <script data-main="js/main" src="js/libs/require/require.js"></script>
@@ -15,19 +17,43 @@
 
 <body>
     <div id="home" data-role="page">
+        
         <div id="left-panel" data-role="panel"></div>
 
         <div id="header" data-role="header">
-            <a id="cat-button" href="#left-panel" data-rel="panel">Categories</a>
-            <h1><a href="#">ARWEN</a></h1>
-            <a href="javascript:;" id="toggle-search">Search</a>
-            <div id="search-bar-div" style="display:none;">
-                <input id="search-bar" type="search" name="search" value="" data-mini="true" data-theme="c" class="search-header"/>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-e" class="ui-btn-left" style="height:60px">
+                        <a id="cat-button" href="#left-panel" data-rel="panel" data-icon="arwen-bars"  data-iconpos="notext" ></a>
+                    </div>
+                </div>
+                
+                <div class="ui-block-b">
+                    
+                        <div style="height:60px">
+                            <a href="#"><img src="css/arwen/images/logo.png"/></a>   
+                        </div>
+                    
+                </div>
+                
+                
+                <div class="ui-block-c">
+                    <div class="ui-bar ui-bar-e" style="height:60px">
+                        <a id="toggle-search" class="ui-btn-right" href="javascript:;" data-icon="arwen-search" data-iconpos="notext"></a>
+                    </div>
+                </div>
             </div>
+
+           
+
+                
+                <div id="search-bar-div" style="display:none;">
+                    <input id="search-bar" type="search" name="search" value="" data-mini="true" data-theme="c" class="search-header"/>
+                </div>
         </div>
 
-        <div id="content" data-role="content"></div>
+        <div id="content" data-role="content" data-theme="a"></div>
     </div>
-</body
->
+</body>
 </html>
