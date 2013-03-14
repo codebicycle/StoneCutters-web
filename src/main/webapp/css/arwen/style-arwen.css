@@ -1,0 +1,83 @@
+/* ARWEN Icons */
+.ui-icon-arwen-bars {
+	background-image: url("images/arwen-bars.png");
+    box-shadow: none;
+    background-size: 28px 28px;
+    border-radius: 0px 0px 0px 0px;
+    border: none;
+    width:28px;
+    height:28px;
+}
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-icon-arwen-bars {
+		background-image: url("arwen-bars-highres.png");
+		background-size: 18px 18px;
+	}
+}
+
+.ui-icon-arwen-search {
+	background-image: url("arwen-search.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-icon-arwen-search {
+		background-image: url("arwen-search-highres.png");
+		background-size: 18px 18px;
+	}
+}
+
+/* Header */
+	
+	div#header div.ui-bar {
+		height: 80px;
+	}
+
+	div#header .ui-btn-icon-notext {
+		width: 30px;
+		height:auto;
+	}
+
+	#header.item-header {
+	    overflow: hidden;
+	    height: auto;
+	    padding: 2.5%;
+	    border: none;
+	    text-align: right;
+	}
+
+	#header.ite-header .button {
+	    display: inline-block;
+	    color: #FFF;
+	}
+
+	#header.item-header .back {
+	    margin-right: .66em;
+	}
+
+	#header.item-header h1 {
+	    margin: 0;
+	    text-align: left;
+	}
+
+	#header.item-header h1 a {
+	    width: 34px;
+	    height: 33px;
+	    background-image: url(/images/html5/itempage/logo.png);
+	    text-indent:-9000px;
+	    background-size: contain;
+	}
+
+	/*@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (min--moz-device-pixel-ratio: 2),
+	only screen and (-moz-device-pixel-ratio: 2),
+	only screen and (-o-min-device-pixel-ratio: 2/1),
+	only screen and (min-device-pixel-ratio: 2),
+	only screen and (min-resolution: 192dpi),
+	only screen and (min-resolution: 2dppx) { 
+	    #header.item-header h1 a {
+	        background-image: url(/images/html5/itempage/logo2x.png);
+	    }
+	}*/
