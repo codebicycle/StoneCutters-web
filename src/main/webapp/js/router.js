@@ -9,9 +9,10 @@ define([
   'views/login/LoginView',
   'views/register/RegisterView',
   'views/register/TermsView',
+  'views/messages/MyMessagesListView',
   'views/posting/PostingView',
 ], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView, 
-  RegisterView, TermsView, PostingView) {
+  RegisterView, TermsView, MyMessagesListView, PostingView ) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
@@ -23,6 +24,7 @@ define([
         "register": "showRegister",
         "post": "showPosting",
         "terms": "showTerms",
+        "mymessages": "showMyMessages",
         "*path":  "defaultRoute"
     },
 
@@ -43,48 +45,12 @@ define([
         new HomeView({'deferred': dfd});
     },
 
-    defaultRoute: function(path) {
-        window.location = "#";
-    },
-
     showItem: function(itemId){
       console.log('/item/'+itemId);
 
       var dfd = $.Deferred().done(this.changePage);
 
       new ItemView({'deferred': dfd, 'id': itemId});
-    },
-
-    showLogin: function(){
-      console.log('/login');
-
-      var dfd = $.Deferred().done(this.changePage);
-
-      new LoginView({'deferred': dfd});
-    },
-
-    showPosting: function(){
-      console.log('/post');
-
-      var dfd = $.Deferred().done(this.changePage);
-
-      new PostingView({'deferred': dfd});
-    },
-
-    showRegister: function(){
-      console.log('/register');
-
-      var dfd = $.Deferred().done(this.changePage);
-
-      new RegisterView({'deferred': dfd});
-    },
-
-    showTerms: function(){
-      console.log('/terms');
-
-      var dfd = $.Deferred().done(this.changePage);
-
-      new TermsView({'deferred': dfd});
     },
 
     showAds: function(catId){
@@ -101,6 +67,50 @@ define([
       var dfd = $.Deferred().done(this.changePage);
 
       new AdsListView({'deferred': dfd, 'q': query});
+    },
+
+    showLogin: function(){
+      console.log('/login');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new LoginView({'deferred': dfd});
+    },
+
+    showRegister: function(){
+      console.log('/register');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new RegisterView({'deferred': dfd});
+    },
+
+    showPosting: function(){
+      console.log('/post');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new PostingView({'deferred': dfd});
+    },
+
+    showTerms: function(){
+      console.log('/terms');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new TermsView({'deferred': dfd});
+    },
+
+    showMyMessages: function(){
+      console.log('/users/user_id/messages');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new MyMessagesListView({'deferred': dfd});
+    },
+    
+    defaultRoute: function(path) {
+        window.location = "#";
     },
 
     changePage:function (page) {
