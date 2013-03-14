@@ -3,9 +3,10 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'router', // Request router.js
+  'router',
+  'modernizr',
   'views/base/BaseView',
-], function($, _, Backbone, Router, BaseView){
+], function($, _, Backbone, Router, modernizr, BaseView){
   var initialize = function(){
     //this adds the eventAggregator object to every view. This object is 
     //used for events across views/objects (event aggregator pattern)
@@ -17,23 +18,30 @@ define([
 
     var Storage = null;
 
-    if (Modernizr.localStorage) {
+    if (Modernizr.localstorage) {
       Storage = {
           set: function(key, value) {
-              localStorage[key] = value;
+              localStorage[key] = JSON.stringify(value);
           },
           get: function(key) {
-              return localStorage[key] ? localStorage[key] : null;
+              return localStorage[key] ? JSON.parse(localStorage[key]) : null;
+          },
+          clear: function() {
+              localStorage.clear();
           }
       };
     } else{
+      window.ls = [];
       //implement a Storage solution independent form localSorage
       Storage = {
           set: function(key, value) {
-              window[key] = value;
+              window.ls[key] = JSON.stringify(value);
           },
           get: function(key) {
-              return window[key] ? window[key] : null;
+              return window.ls[key] ? JSON.parse(window.ls[key]) : null;
+          },
+          clear: function() {
+              window.ls.length = 0;
           }
       };
     };
