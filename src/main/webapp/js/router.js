@@ -18,8 +18,8 @@ define([
     routes:{
         "":"showHome",
         "item/:itemId": "showItem",
-        "category/:catId": "showAds",
-        "search?q=:query": "showSearchAds",
+        "category/:catId(/:params)": "showAds",
+        "search?:params": "showSearchAds",
         "login": "showLogin",
         "register": "showRegister",
         "post": "showPosting",
@@ -30,7 +30,7 @@ define([
 
     initialize:function () {
         // Handle back button throughout the application
-        $('.back').live('click', function(event) {
+        $('body').on('click', '.back', function(event) {
             window.history.back();
             return false;
         });
@@ -53,20 +53,24 @@ define([
       new ItemView({'deferred': dfd, 'id': itemId});
     },
 
-    showAds: function(catId){
-      console.log('/category/'+catId);
+    showAds: function(catId,params){
+      if (params) {
+        console.log('/category/'+catId+"/"+params);
+      }else{
+        console.log('/category/'+catId);
+      };
 
       var dfd = $.Deferred().done(this.changePage);
 
-      new AdsListView({'deferred': dfd, 'cat_id': catId});
+      new AdsListView({'deferred': dfd, 'cat_id': catId, 'params': params});
     },
 
-    showSearchAds: function(query){
-      console.log('/search/'+query);
+    showSearchAds: function(params){
+      console.log('/search?'+params);
 
       var dfd = $.Deferred().done(this.changePage);
 
-      new AdsListView({'deferred': dfd, 'q': query});
+      new AdsListView({'deferred': dfd, 'params': params});
     },
 
     showLogin: function(){
