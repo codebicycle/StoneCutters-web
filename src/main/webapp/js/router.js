@@ -115,7 +115,7 @@ define([
     
     defaultRoute: function(path) {
         window.location = "#";
-    }
+    },
 
     changePage:function (page) {
       if (window.prevPage) {
