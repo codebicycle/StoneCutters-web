@@ -4,7 +4,7 @@
 // Their usage will become more apparent futher along in the tutorial.
 require.config( {
   paths: {
-    jquery:     'libs/jquery/jquery-1.8.3-min',
+    jquery:     'libs/jquery/jquery-1.9.1.min',
     jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0.min',
     underscore: 'libs/underscore/underscore-min',
     backbone:   'libs/backbone/backbone-min',
@@ -31,7 +31,7 @@ require.config( {
   } // end Shim Configuration
 });
 
-require(['app','jquery', 'backbone', 'modernizr'], function(App, $, Backbone, modernizr){
+require(['app','jquery', 'backbone'], function(App, $, Backbone){
 
   $( document ).on( "mobileinit",
     // Set up the "mobileinit" handler before requiring jQuery Mobile's module
@@ -44,7 +44,7 @@ require(['app','jquery', 'backbone', 'modernizr'], function(App, $, Backbone, mo
       $.mobile.ajaxEnabled = false; 
       $.mobile.pushStateEnabled = false;
       // Remove page from DOM when it’s being replaced 
-      $('div[data-role="page"]').live('pagehide', function (event, ui) { 
+      $('body').on('pagehide', 'div[data-role="page"]', function (event, ui) { 
         $(event.currentTarget).remove(); 
       });
     }
