@@ -50,22 +50,23 @@ define([
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
-        // this.filters = new FiltersCollection(this.opts);
-        // this.filters.on('sync',_.bind(this.filters_success, this));
-        // this.filters.fetch();
+        this.filters = new FiltersCollection(this.opts);
+        this.filters.on('sync',_.bind(this.filters_success, this));
+        this.filters.fetch();
 
-        // this.sorts = new SortsCollection(this.opts);
-        // this.sorts.on('sync',_.bind(this.sorts_success, this));
-        // this.sorts.fetch();
+        this.sorts = new SortsCollection(this.opts);
+        this.sorts.on('sync',_.bind(this.sorts_success, this));
+        this.sorts.fetch();
 
-        this.filters = new FiltersCollection([
-            {title:"Year", options:[{opTitle:"1980"},{opTitle:"1981"},{opTitle:"1982"}]},
-            {title:"Color", options:[{opTitle:"Red"},{opTitle:"Blue"}]},
-            {title:"Length", options:[{opTitle:"100"}]},
-            {title:"Model", options:[{opTitle:"A"},{opTitle:"B"},{opTitle:"C"}]},
-          ]);
+        //MOCK CODE
+        // this.filters = new FiltersCollection([
+        //     {title:"Year", options:[{opTitle:"1980"},{opTitle:"1981"},{opTitle:"1982"}]},
+        //     {title:"Color", options:[{opTitle:"Red"},{opTitle:"Blue"}]},
+        //     {title:"Length", options:[{opTitle:"100"}]},
+        //     {title:"Model", options:[{opTitle:"A"},{opTitle:"B"},{opTitle:"C"}]},
+        //   ]);
 
-        this.sorts = new SortsCollection([{title:"Date"},{title:"Price"}]);
+        // this.sorts = new SortsCollection([{title:"Date"},{title:"Price"}]);
 
         //We are not able to attach this event in events: {}, because windows is not inside el.
         //Namespaced events. http://docs.jquery.com/Namespaced_Events (This is here to avoid a bug)
