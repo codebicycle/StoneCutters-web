@@ -31,13 +31,13 @@ define([
         this.adsCT = Handlebars.compile(adsListTemplate);
         this.adsMCT = Handlebars.compile(adsMoreListTemplate);
 
+        this.params = jsonHelper.parseQueryString(options.params);
         this.dfd = null || options.deferred;
-        this.query = null || options.q;
+        this.query = null || this.params.q;
         this.page= options.page || 0;
         this.pageSize =  10 || conf.get('pageSize');
         this.cat_id = options.cat_id;
-        this.params = jsonHelper.parseQueryString(options.params);
-
+        
         var ops = {country_id: 1, cat_id:options.cat_id, q:this.query, 
           offset:this.page, pageSize: this.pageSize};
         ops = jsonHelper.concatJSON(ops, this.params)
@@ -118,15 +118,21 @@ define([
         };
         return;
       },
-      updateItems: function(){      
-        var url = "#category/"+this.opts.get("cat_id")+"/";
+      updateItems: function(){
+        var url;
+
+        if (this.opts.get("cat_id")) {
+          url = "#category/"+this.opts.get("cat_id")+"/";
+        }else if(this.opts.get("q")){
+          url = "#search?";
+        }else{return};
 
         for (var key in this.opts.attributes) {
           if (this.opts.attributes[key] && key != "cat_id")
             url += key + "=" + this.opts.attributes[key] + "&";
         };
+
         url = url.substring(0,url.length-1);
-        console.log(url);
         window.location = url;
 
       },

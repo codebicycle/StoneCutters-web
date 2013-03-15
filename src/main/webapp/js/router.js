@@ -18,7 +18,7 @@ define([
         "":"showHome",
         "item/:itemId": "showItem",
         "category/:catId(/:params)": "showAds",
-        "search?q=:query": "showSearchAds",
+        "search?:params": "showSearchAds",
         "login": "showLogin",
         "register": "showRegister",
         "post": "showPosting",
@@ -99,12 +99,12 @@ define([
       new AdsListView({'deferred': dfd, 'cat_id': catId, 'params': params});
     },
 
-    showSearchAds: function(query){
-      console.log('/search/'+query);
+    showSearchAds: function(params){
+      console.log('/search?'+params);
 
       var dfd = $.Deferred().done(this.changePage);
 
-      new AdsListView({'deferred': dfd, 'q': query});
+      new AdsListView({'deferred': dfd, 'params': params});
     },
 
     changePage:function (page) {
