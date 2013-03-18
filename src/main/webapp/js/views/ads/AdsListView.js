@@ -43,7 +43,7 @@ define([
         this.pageSize =  10 || conf.get('pageSize');
         this.cat_id = options.cat_id;
         
-        var ops = {country_id: 1, cat_id:options.cat_id, q:this.query, 
+        var ops = {country_id: 1, category_id:options.cat_id, q:this.query, 
           offset:this.page, pageSize: this.pageSize};
         ops = jsonHelper.concatJSON(ops, this.params)
 
@@ -51,15 +51,15 @@ define([
         this.opts = new Opts(ops);
         this.opts.on('change', this.updateItems, this);
 
-        this.items = new ItemsCollection(this.opts);
+        this.items = new ItemsCollection(this.opts.toJSON());
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
-        this.filters = new FiltersCollection(this.opts);
+        this.filters = new FiltersCollection(this.opts.toJSON());
         this.filters.on('sync',_.bind(this.filters_success, this));
         this.filters.fetch();
 
-        this.sorts = new SortsCollection(this.opts);
+        this.sorts = new SortsCollection(this.opts.toJSON());
         this.sorts.on('sync',_.bind(this.sorts_success, this));
         this.sorts.fetch();
 
@@ -103,7 +103,7 @@ define([
       render:function () {
         $(this.el).find('#content').html(this.adsCT({'items': this.items.toJSON(), 
           'filters': this.filters.toJSON(), 'search-term': this.query,
-          'sorts':this.sorts.toJSON()}));
+          'sorts':this.sorts.toJSON(), 'added-filters':this.params}));
         $(this.el).find('#content').trigger('create');
 
         $('a[class*=filter]').click({opts: this.opts},function(ev){
