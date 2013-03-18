@@ -10,9 +10,10 @@ define([
   'views/register/RegisterView',
   'views/register/TermsView',
   'views/messages/MyMessagesListView',
+  'views/ads/MyAdsListView',
   'views/posting/PostingView',
 ], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView, 
-  RegisterView, TermsView, MyMessagesListView, PostingView ) {
+  RegisterView, TermsView, MyMessagesListView, MyAdsListView, PostingView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
@@ -25,6 +26,7 @@ define([
         "post": "showPosting",
         "terms": "showTerms",
         "mymessages": "showMyMessages",
+        "myads": "showMyAds",
         "*path":  "defaultRoute"
     },
 
@@ -106,11 +108,19 @@ define([
     },
 
     showMyMessages: function(){
-      console.log('/users/user_id/messages');
+      console.log('/mymessages');
 
       var dfd = $.Deferred().done(this.changePage);
 
       new MyMessagesListView({'deferred': dfd});
+    },
+
+    showMyAds: function(){
+      console.log('/myads');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new MyAdsListView({'deferred': dfd});
     },
     
     defaultRoute: function(path) {
