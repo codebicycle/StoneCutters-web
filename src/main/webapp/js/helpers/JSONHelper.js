@@ -9,6 +9,18 @@ define([
       }
       return o1;
     },
+    parseTitleValue: function (o) {
+      var objs = [];
+      
+      for (var key in o) {
+        var obj = {};
+        obj['title'] = key;
+        obj['value'] = o[key];
+        objs.push(obj);
+      }
+
+      return objs;
+    },
     parseQueryString: function (queryString){
       var params = {};
       if(queryString){

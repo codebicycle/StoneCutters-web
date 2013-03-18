@@ -28,24 +28,28 @@ define([
 
       initialize: function(options){
         this.conf = new ConfModel();
-        var jsonHelper = new JSONHelperModel();
+        this.jsonHelper = new JSONHelperModel();
         
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(adsListTemplate);
         this.adsMCT = Handlebars.compile(adsMoreListTemplate);
         this.filCT = Handlebars.compile(filterTemplate);
-        this.sorMCT = Handlebars.compile(sortTemplate);
+        this.sorCT = Handlebars.compile(sortTemplate);
 
-        this.params = jsonHelper.parseQueryString(options.params);
+        this.params = this.jsonHelper.parseQueryString(options.params);
         this.dfd = null || options.deferred;
         this.query = null || this.params.q;
+        this.sortName = null || this.params.sort;
         this.page= options.page || 0;
         this.pageSize =  10 || conf.get('pageSize');
         this.cat_id = options.cat_id;
-        
-        var ops = {country_id: 1, category_id:options.cat_id, q:this.query, 
+
+        var ops = {country_id: 1, category_id:options.cat_id, 
           offset:this.page, pageSize: this.pageSize};
-        ops = jsonHelper.concatJSON(ops, this.params)
+        ops = this.jsonHelper.concatJSON(ops, this.params)
+
+        delete this.params["q"];
+        delete this.params["sort"];
 
         var Opts = Backbone.Model.extend();
         this.opts = new Opts(ops);
@@ -72,6 +76,7 @@ define([
         //   ]);
 
         // this.sorts = new SortsCollection([{title:"Date"},{title:"Price"}]);
+        //End of Mock code
 
         //We are not able to attach this event in events: {}, because windows is not inside el.
         //Namespaced events. http://docs.jquery.com/Namespaced_Events (This is here to avoid a bug)
@@ -102,15 +107,34 @@ define([
 
       render:function () {
         $(this.el).find('#content').html(this.adsCT({'items': this.items.toJSON(), 
-          'filters': this.filters.toJSON(), 'search-term': this.query,
-          'sorts':this.sorts.toJSON(), 'added-filters':this.params}));
+          'search-term': this.query,
+          'added-filters':this.jsonHelper.parseTitleValue(this.params),
+          'sortName':this.sortName
+        }));
+
+        //Mock code lines
+        // $(this.el).find('#filterPopup').html(this.filCT({
+        //   'filters': this.filters.toJSON()}));
+        // $(this.el).find('#sortPopup').html(this.sorCT({
+        //   'sorts':this.sorts.toJSON()}));
+        //End of Mock code lines
+
         $(this.el).find('#content').trigger('create');
 
         $('a[class*=filter]').click({opts: this.opts},function(ev){
           var filter = $(ev.currentTarget).closest('ul').data('filtername');
           var value = $(ev.currentTarget).html();
-
           ev.data.opts.set(filter,value);
+        });
+
+        $('a[class*=sort]').click({opts: this.opts},function(ev){
+          var sort = $(ev.currentTarget).data('sortname');
+          ev.data.opts.set("sort",sort);
+        });
+
+        $('a[class*=remove-filter]').click({opts: this.opts},function(ev){
+          var filter = $(ev.currentTarget).data('filtername');
+          ev.data.opts.unset(filter);
         });
 
         return this;
@@ -127,14 +151,15 @@ define([
       updateItems: function(){
         var url;
 
-        if (this.opts.get("cat_id")) {
-          url = "#category/"+this.opts.get("cat_id")+"/";
-        }else if(this.opts.get("q")){
+        if (!this.opts.get("q")) {
+          url = "#category/"+this.opts.get("category_id")+"/";
+        }else{
           url = "#search?";
-        }else{return};
+        };
 
         for (var key in this.opts.attributes) {
-          if (this.opts.attributes[key] && key != "cat_id")
+          if (this.opts.attributes[key] && key != "category_id"
+            && key != "country_id" && key != "pageSize")
             url += key + "=" + this.opts.attributes[key] + "&";
         };
 
