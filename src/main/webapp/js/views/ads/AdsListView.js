@@ -9,11 +9,14 @@ define([
   'config/conf',
   'text!templates/ads/adsListTemplate.html',
   'text!templates/ads/adsMoreListTemplate.html',
+  'text!templates/ads/filterTemplate.html',
+  'text!templates/ads/sortTemplate.html',
   'helpers/JSONHelper'
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
-    SortsCollection, ConfModel, adsListTemplate,adsMoreListTemplate, JSONHelperModel){
+    SortsCollection, ConfModel, adsListTemplate,adsMoreListTemplate, 
+    filterTemplate, sortTemplate, JSONHelperModel){
 
     var AdsListView = Backbone.View.extend({
       el: "#home",
@@ -30,6 +33,8 @@ define([
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(adsListTemplate);
         this.adsMCT = Handlebars.compile(adsMoreListTemplate);
+        this.filCT = Handlebars.compile(filterTemplate);
+        this.sorMCT = Handlebars.compile(sortTemplate);
 
         this.params = jsonHelper.parseQueryString(options.params);
         this.dfd = null || options.deferred;
@@ -138,10 +143,14 @@ define([
 
       },
       filters_success: function(model, response)  {
-        $(this.el).find('#filterPopup').trigger('refresh');
+        $(this.el).find('#filterPopup').html(this.filCT({
+          'filters': this.filters.toJSON()}));
+        $(this.el).find('#filterPopup').trigger('create');
       },
       sorts_success: function(model, response)  {
-        $(this.el).find('#sortPopup').trigger('refresh');
+        $(this.el).find('#sortPopup').html(this.sorCT({
+          'sorts':this.sorts.toJSON()}));
+        $(this.el).find('#sortPopup').trigger('create');
       },
       close: function(){
         $(window).unbind("scroll."+this.cat_id);

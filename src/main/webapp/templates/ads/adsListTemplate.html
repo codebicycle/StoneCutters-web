@@ -12,29 +12,9 @@
 	</div>
 </div>
 
-<div data-role="popup" id="filterPopup" data-theme="none" data-overlay-theme="a">
-    <div data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; min-width:250px;" data-theme="b">
-    	{{#filters}}
-	        <div data-role="collapsible" data-inset="false">
-	            <h2>{{title}}</h2>
-	            <ul data-role="listview" data-filtername="{{title}}">
-	            	{{#options}}
-	            		<li><a class="filter" href="javascript:;" data-rel="dialog">{{opTitle}}</a></li>
-	            	{{/options}}
-	            </ul>
-	        </div>
-	    {{/filters}}
-    </div>
-</div>
+<div data-role="popup" id="filterPopup" data-theme="none" data-overlay-theme="a"></div>
 
-<div data-role="popup" id="sortPopup" data-theme="none" data-overlay-theme="a">
-        <ul data-role="listview" data-inset="true" style="min-width:250px;" data-theme="d" data-filtername="sort">
-            <li data-role="divider" data-theme="b">Sort by</li>
-            {{#sorts}}
-        		<li><a class="filter" href="javascript:;" data-rel="dialog">{{title}}</a></li>
-        	{{/sorts}}
-        </ul>
-</div>
+<div data-role="popup" id="sortPopup" data-theme="none" data-overlay-theme="a"></div>
 
 <ul id="ads-list" data-role="listview" data-inset="true">
     {{#items}}
