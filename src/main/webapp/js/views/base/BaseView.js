@@ -128,7 +128,9 @@ define([
         $(this.el).find('.myolx-cat').slideToggle('fast');
       },
       doneSearch: function(){
-        this.toggleSearch();
+        $("#search-bar-div").hide();
+        $('#search-bar').val("");
+        $('#toggle-search .ui-btn-text').text('Search');
       },
       changeCategories: function(categories){
         this.loadCategories.reset(categories);
