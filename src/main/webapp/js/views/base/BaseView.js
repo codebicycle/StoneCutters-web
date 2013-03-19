@@ -73,6 +73,7 @@ define([
         $(this.el).find('#left-panel').trigger("updatelayout");
         
         $(this.el).find('#left-panel-list').listview();
+        $(this.el).find('#left-panel-list-top').listview();
         $(this.el).find('#p-cat-link').hide();
         $(this.el).find('.myolx-cat').hide();
 
