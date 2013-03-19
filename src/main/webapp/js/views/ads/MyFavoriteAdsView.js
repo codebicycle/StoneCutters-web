@@ -7,7 +7,7 @@ define([
   'collections/filters',
   'collections/sorts',
   'config/conf',
-  'text!templates/ads/myAdsListTemplate.html',
+  'text!templates/ads/myFavoriteAdsTemplate.html',
   'text!templates/ads/adsMoreListTemplate.html',
   ], 
 
@@ -32,21 +32,23 @@ define([
         this.pageSize =  10 || conf.get('pageSize');
         this.user_id = this.Storage.get("userObj").id;
         
-        this.ops = {country_id: 1, offset:this.page, pageSize: this.pageSize};
-        this.items = new ItemsCollection(this.ops, {"user_id":this.user_id}, {"item_type":"myAds"});
+        this.query_ops = {country_id: 1, offset:this.page, pageSize: this.pageSize};
+        this.url_ops = {"user_id":this.user_id};
+        this.item_ops = {"item_type":"myFavorites"};
+        this.items = new ItemsCollection(this.query_ops, this.url_ops, this.item_ops);
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
         //We are not able to attach this event in events: {}, because windows is not inside el.
         //Namespaced events. http://docs.jquery.com/Namespaced_Events (This is here to avoid a bug)
-        $(window).bind("scroll.myAds"+this.user_id, (_.bind(this.checkScroll,this)));
+        $(window).bind("scroll.favs"+this.user_id, (_.bind(this.checkScroll,this)));
       },
 
       checkScroll: function () {
         var triggerPoint = 100; // 100px from the bottom
         if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()  ) {
-          this.ops.offset += 1; // Load next page
-          this.items.reset(this.ops);
+          this.query_ops.offset += 1; // Load next page
+          this.items.reset(this.query_ops);
           this.loadResults();
         }
       },
@@ -79,7 +81,7 @@ define([
         return;
       },
       close: function(){
-        $(window).unbind("scroll.myAds"+this.user_id);
+        $(window).unbind("scroll.favs"+this.user_id);
       }
     });
     return MyAdsListView;

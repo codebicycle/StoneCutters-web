@@ -27,7 +27,7 @@ define([
         this.homeCT = Handlebars.compile(homeTemplate);
         this.sliderCT = Handlebars.compile(sliderTemplate);
 
-        this.items = new ItemsCollection({country_id:1});
+        this.items = new ItemsCollection({country_id:1},{},{"item_type":"adsList"});
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 

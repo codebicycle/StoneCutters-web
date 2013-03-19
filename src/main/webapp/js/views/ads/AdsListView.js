@@ -46,7 +46,7 @@ define([
         this.opts = new Opts(ops);
         this.opts.on('change', this.updateItems, this);
 
-        this.items = new ItemsCollection(this.opts);
+        this.items = new ItemsCollection(this.opts,{},{"item_type":"adsList"});
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
