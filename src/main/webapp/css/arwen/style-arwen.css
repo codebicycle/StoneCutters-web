@@ -165,3 +165,18 @@ ul#left-panel-list-top  .myolx-cat .ui-btn-inner {
 	border-top: 1px solid #454546;
 	border-bottom: 1px solid #100e0e;
 }
+
+
+/* Home
+---------------------------------------------------------------------- */
+
+h4 {
+	color: #666666;
+	font-size: 20pt;
+	font-weight: normal;
+	margin: 10px 0 10px 0;
+}
+
+div#slider1 {
+	margin-bottom: 20px;
+}
