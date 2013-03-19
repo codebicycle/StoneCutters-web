@@ -79,7 +79,6 @@ define([
         return this;
       },
       cat_success: function(model, response){
-        console.log(response);
         this.loadCategories.reset(response);
         if (this.dfd) this.dfd.resolve(this);
       },
