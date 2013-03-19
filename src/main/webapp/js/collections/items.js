@@ -7,29 +7,37 @@ define([
 ], function(_, Backbone, ItemModel, ConfModel){
   	var conf = new ConfModel();
     var ItemCollection = Backbone.Collection.extend({
-     	initialize: function(options, user_id){
-        this.query_opts = options;
-        this.user_id = user_id || null;
+     	initialize: function(query_options, url_options, item_options){
+        this.query_opts = null || query_options;
+        this.url_options = null || url_options;
+        this.item_options = null || item_options;
       },
       model: ItemModel,
       url: function(){
         var response;
-        
 
         //***********-----------------------
         //WARNING!!:
         //Comment or DELETE the following line in order to get the right logic.
-        this.user_id=null;
+        this.item_options.item_type='adsList';
         //***********-----------------------
 
-        if(this.user_id==null)
-          response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
-        else
-          response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/users/' + this.user_id + '/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+        switch(this.item_options.item_type){
+
+          case "adsList":
+            response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
+          break;
+          case "myAds":
+            response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/users/' + this.url_options.user_id + '/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+          break;
+          case "myFavorites":
+            response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/users/' + this.url_options.user_id + '/favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+          break;
+        }
         return response;
       },
     });
 
-    // You don't usually return a collection instantiated
+    // You do not usually return a collection instantiated
     return ItemCollection;
 });

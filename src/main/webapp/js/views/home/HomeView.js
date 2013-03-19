@@ -31,12 +31,11 @@ define([
         this.homeCT = Handlebars.compile(homeTemplate);
         this.sliderCT = Handlebars.compile(sliderTemplate);
 
-
-        this.whatsNewItems = new ItemsCollection({country_id:1});
+        this.whatsNewItems = new ItemsCollection({country_id:1},{},{"item_type":"adsList"});
         this.whatsNewItems.on('sync',_.bind(this.items_success, this));
         this.whatsNewItems.fetch();
 
-        this.lastVisitedItems = new ItemsCollection({country_id:1});
+        this.lastVisitedItems = new ItemsCollection({country_id:1},{},{"item_type":"adsList"});
         this.lastVisitedItems.on('sync',_.bind(this.items_success, this));
         this.lastVisitedItems.fetch();
       },
