@@ -118,17 +118,19 @@ define([
 
         if ($("#search-bar-div").is(":visible")){
           $('#search-bar').focus();
-          $('#toggle-search .ui-btn-text').text('Cancel');
+          //$('#toggle-search .ui-btn-text').text('Cancel');
         }else{
           $('#search-bar').val("");
-          $('#toggle-search .ui-btn-text').text('Search');
+          //$('#toggle-search .ui-btn-text').text('Search');
         }
       },
       toggleMyOLXCats: function(){
         $(this.el).find('.myolx-cat').slideToggle('fast');
       },
       doneSearch: function(){
-        this.toggleSearch();
+        $("#search-bar-div").hide();
+        $('#search-bar').val("");
+        $('#toggle-search .ui-btn-text').text('Search');
       },
       changeCategories: function(categories){
         this.loadCategories.reset(categories);
