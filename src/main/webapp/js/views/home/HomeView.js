@@ -44,13 +44,13 @@ define([
         //Debug Code
         /*
         var collection = Backbone.Collection.extend();
-        this.whatsNewItems = new collection([{"title":"Dog 1","thumbImage":"http://petliferadio.com/doggydog.jpg"},
-                                                  {"title":"Dog 2","thumbImage":"http://www.cck9.com/wp-content/uploads/2009/09/German-shepherd-protection-dogs-CCK9-Blog-300x300.jpg"},
-                                                  {"title":"Dog 3","thumbImage":"http://static.ddmcdn.com/gif/bad-dog-training-behavior-300.jpg"},
-                                                  {"title":"Dog 4","thumbImage":"http://assets.archivhadas.es/system/tog_forum/topics/images/5395/big_perro-dog-cl.jpg"},
-                                                  {"title":"Dog 5","thumbImage":"http://dogwalking.dogster.com/wp-content/themes/alcottTheme/uploads/Dog-Park-Safety.jpg"},
-                                                  {"title":"Dog 6","thumbImage":"http://img.ehowcdn.com/article-new/ehow/images/a04/qu/7b/signs-symptoms-dog-food-poisoning-800x800.jpg"},
-                                                  {"title":"Dog 7","thumbImage":"http://www.theworld.org/wp-content/uploads/Q-dog-300x300.jpg"},
+        this.whatsNewItems = new collection([ {"title":"Chihuahua Puppies For Sale","thumbImage":"http://petliferadio.com/doggydog.jpg"},
+                                              {"title":"Gun Dog Stud Many Willowyck & Drakeshead Lns","thumbImage":"http://www.cck9.com/wp-content/uploads/2009/09/German-shepherd-protection-dogs-CCK9-Blog-300x300.jpg"},
+                                              {"title":"Siberian Husky Female Puppy For Sale","thumbImage":"http://static.ddmcdn.com/gif/bad-dog-training-behavior-300.jpg"},
+                                              {"title":"Black And Yellow Labrador Puppies","thumbImage":"http://assets.archivhadas.es/system/tog_forum/topics/images/5395/big_perro-dog-cl.jpg"},
+                                              {"title":"11 Week Old Kc Reg Lab Dog For Sale","thumbImage":"http://dogwalking.dogster.com/wp-content/themes/alcottTheme/uploads/Dog-Park-Safety.jpg"},
+                                              {"title":"Stunning Litter Of K.c","thumbImage":"http://img.ehowcdn.com/article-new/ehow/images/a04/qu/7b/signs-symptoms-dog-food-poisoning-800x800.jpg"},
+                                              {"title":"Barney At Wolfabulls Bulldogs","thumbImage":"http://www.theworld.org/wp-content/uploads/Q-dog-300x300.jpg"},
                                                   ]);
         this.items_success();
         
