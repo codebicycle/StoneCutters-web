@@ -11,12 +11,13 @@ define([
   'text!templates/ads/adsMoreListTemplate.html',
   'text!templates/ads/filterTemplate.html',
   'text!templates/ads/sortTemplate.html',
-  'helpers/JSONHelper'
+  'helpers/JSONHelper',
+  'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
     SortsCollection, ConfModel, adsListTemplate,adsMoreListTemplate, 
-    filterTemplate, sortTemplate, JSONHelperModel){
+    filterTemplate, sortTemplate, JSONHelper, CategoryHelper){
 
     var AdsListView = Backbone.View.extend({
       el: "#home",
@@ -28,7 +29,6 @@ define([
 
       initialize: function(options){
         this.conf = new ConfModel();
-        this.jsonHelper = new JSONHelperModel();
         
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(adsListTemplate);
@@ -36,17 +36,19 @@ define([
         this.filCT = Handlebars.compile(filterTemplate);
         this.sorCT = Handlebars.compile(sortTemplate);
 
-        this.params = this.jsonHelper.parseQueryString(options.params);
+        this.params = JSONHelper.parseQueryString(options.params);
         this.dfd = null || options.deferred;
         this.query = null || this.params.q;
         this.sortName = null || this.params.sort;
         this.page= options.page || 0;
         this.pageSize =  10 || conf.get('pageSize');
-        this.cat_id = options.cat_id;
 
-        var ops = {country_id: 1, category_id:options.cat_id, 
-          offset:this.page, pageSize: this.pageSize};
-        ops = this.jsonHelper.concatJSON(ops, this.params)
+        //this sets the category and parent category in the Category Helper
+        if (options.cat_id)
+          CategoryHelper.setCategory(parseInt(options.cat_id,10));
+
+        var ops = {country_id: 1, offset:this.page, pageSize: this.pageSize};
+        ops = JSONHelper.concatJSON(ops, this.params)
 
         delete this.params["q"];
         delete this.params["sort"];
@@ -87,7 +89,6 @@ define([
         var triggerPoint = 100; // 100px from the bottom
         if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()  ) {
           this.opts.offset += 1; // Load next page
-          this.items.reset(this.opts);
           this.loadResults();
         }
       },
@@ -108,7 +109,7 @@ define([
       render:function () {
         $(this.el).find('#content').html(this.adsCT({'items': this.items.toJSON(), 
           'search-term': this.query,
-          'added-filters':this.jsonHelper.parseTitleValue(this.params),
+          'added-filters':JSONHelper.parseTitleValue(this.params),
           'sortName':this.sortName
         }));
 
