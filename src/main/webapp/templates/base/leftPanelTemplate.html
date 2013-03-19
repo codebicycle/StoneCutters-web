@@ -1,22 +1,30 @@
-<ul id="left-panel-list" data-role="listview" data-theme="d" data-inset="true">
+<ul id="left-panel-list-top" data-role="listview" data-theme="d" data-inset="true">
+
 	{{#unless user}}
-		<li data-icon="false"><a id="login-link" href="#login" style="text-align:center;background-color:#5E87B0;color:#FFFFFF" data-mini="true">My OLX - Log In</a></li>
+		<li data-icon="false"><a id="login-link" href="#login" data-mini="true">My OLX - Log In</a></li>
 	{{else}}
-		<li data-icon="false"><a id="myolx-link" href="javascript:;" data-mini="true" style="text-align:center;background-color:#5E87B0;color:#FFFFFF">My OLX - {{user.name}}</a></li>
+		<li data-icon="false"><a id="myolx-link" href="javascript:;" data-mini="true">My OLX - Hi {{user.name}}!</a></li>
 
 		<li data-icon="false" class="myolx-cat"><a href="#mymessages" data-mini="true">My Messages</a></li>
 		<li data-icon="false" class="myolx-cat"><a href="#myads" data-mini="true">My Ads</a></li>
 		<li data-icon="false" class="myolx-cat"><a href="#myfavs" data-mini="true">My Favorites</a></li>
-		<li data-icon="false" class="myolx-cat"><a id="logout-link" href="javascript:;" data-mini="true">Logout</a></li>
+
+		<li data-icon="false" class="myolx-cat"><a id="settings-button" href="#settings" data-role="button" data-mini="true">Settings</a></li>
 	{{/unless}}
 
-	<li data-icon="false"><a id="post-button" href="#post" data-role="button" data-mini="true" style="text-align:center;">Post Ad</a></li>
-	<li data-icon="false"><a id="settings-button" href="#settings" data-role="button" data-mini="true" style="text-align:center;">Settings</a></li>
+	<li data-icon="false"><a id="post-button" href="#post" data-role="button" data-mini="true">Post Ad</a></li>
+
+</ul>
+<ul id="left-panel-list" data-role="listview" data-theme="d" data-inset="true">
 
 	<li id="cat-divider" data-role="list-divider" role="heading">Categories</li>
-	<li id="p-cat-link" data-icon="arrow-l" class="ui-btn-icon-left"><a href="javascript:;" data-mini="true" style="text-align:center;">Parent Categories</a></li>
+	<li id="p-cat-link" data-icon="false" class="ui-btn-icon-left"><a href="javascript:;" data-mini="true">Parent Categories</a></li>
 	{{#categories}}
-        <li><a href="#category/{{id}}" data-id="{{id}}" data-parent-id="{{parentId}}" class="cat-link">{{name}}</a></li>
+        <li data-icon="false"><a href="#category/{{id}}" data-id="{{id}}" data-parent-id="{{parentId}}" class="cat-link">{{name}}</a></li>
     {{/categories}}
+
+    {{#if user}}
+		<li data-icon="false"><a id="logout-link" href="javascript:;" data-mini="true">Logout</a></li>
+    {{/if}}
 
 </ul>

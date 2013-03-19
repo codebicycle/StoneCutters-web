@@ -73,6 +73,7 @@ define([
         $(this.el).find('#left-panel').trigger("updatelayout");
         
         $(this.el).find('#left-panel-list').listview();
+        $(this.el).find('#left-panel-list-top').listview();
         $(this.el).find('#p-cat-link').hide();
         $(this.el).find('.myolx-cat').hide();
 
@@ -117,10 +118,10 @@ define([
 
         if ($("#search-bar-div").is(":visible")){
           $('#search-bar').focus();
-          $('#toggle-search .ui-btn-text').text('Cancel');
+          //$('#toggle-search .ui-btn-text').text('Cancel');
         }else{
           $('#search-bar').val("");
-          $('#toggle-search .ui-btn-text').text('Search');
+          //$('#toggle-search .ui-btn-text').text('Search');
         }
       },
       toggleMyOLXCats: function(){

@@ -6,14 +6,19 @@ define([
   'handlebars',
   'collections/items',
   'text!templates/home/homeTemplate.html',
-  'text!templates/home/sliderTemplate.html'
+  'text!templates/home/whatsNewTemplate.html',
+  'text!templates/home/lastVisitTemplate.html'
   ], 
 
   function($,_, Backbone, sw, Handlebars, ItemsCollection, 
-    homeTemplate, sliderTemplate){
+    homeTemplate, whatsNewTemplate, lastVisitTemplate){
 
     var HomeView = Backbone.View.extend({
       el: "#home",
+
+      fetchsAmount: 0,
+
+      fetchsTotals: 2,
 
       events:{
       },
@@ -25,21 +30,57 @@ define([
 
         // Compile the template using Handlebars micro-templating
         this.homeCT = Handlebars.compile(homeTemplate);
-        this.sliderCT = Handlebars.compile(sliderTemplate);
+        this.whatsNewCT = Handlebars.compile(whatsNewTemplate);
+        this.lastVisitCT = Handlebars.compile(lastVisitTemplate);
 
-        this.items = new ItemsCollection({country_id:1});
-        this.items.on('sync',_.bind(this.items_success, this));
-        this.items.fetch();
+        this.whatsNewItems = new ItemsCollection({country_id:1},{},{"item_type":"adsList"});
+        this.whatsNewItems.on('sync',_.bind(this.items_success, this));
+        this.whatsNewItems.fetch();
 
+        this.lastVisitedItems = new ItemsCollection({country_id:1},{},{"item_type":"adsList"});
+        this.lastVisitedItems.on('sync',_.bind(this.items_success, this));
+        this.lastVisitedItems.fetch();
+        
+        //Debug Code
+        /*
+        var collection = Backbone.Collection.extend();
+        this.whatsNewItems = new collection([ {"title":"Chihuahua Puppies For Sale","thumbImage":"http://petliferadio.com/doggydog.jpg"},
+                                              {"title":"Gun Dog Stud Many Willowyck & Drakeshead Lns","thumbImage":"http://www.cck9.com/wp-content/uploads/2009/09/German-shepherd-protection-dogs-CCK9-Blog-300x300.jpg"},
+                                              {"title":"Siberian Husky Female Puppy For Sale","thumbImage":"http://static.ddmcdn.com/gif/bad-dog-training-behavior-300.jpg"},
+                                              {"title":"Black And Yellow Labrador Puppies","thumbImage":"http://assets.archivhadas.es/system/tog_forum/topics/images/5395/big_perro-dog-cl.jpg"},
+                                              {"title":"11 Week Old Kc Reg Lab Dog For Sale","thumbImage":"http://dogwalking.dogster.com/wp-content/themes/alcottTheme/uploads/Dog-Park-Safety.jpg"},
+                                              {"title":"Stunning Litter Of K.c","thumbImage":"http://img.ehowcdn.com/article-new/ehow/images/a04/qu/7b/signs-symptoms-dog-food-poisoning-800x800.jpg"},
+                                              {"title":"Barney At Wolfabulls Bulldogs","thumbImage":"http://www.theworld.org/wp-content/uploads/Q-dog-300x300.jpg"},
+                                                  ]);
+        this.items_success();
+        
+        this.lastVisitedItems = this.whatsNewItems;
+        this.items_success();
+        */
+        //END Debug Code
+        
+
+        
       },
+
       render:function (){
         
         $(this.el).find('#content').html(this.homeCT({}));
         //This line is commented in order to get green in the sliding test.
         //$(this.el).trigger('create');
 
-        $(this.el).find('#slider1').html(this.sliderCT({'items': this.items.toJSON()}));
+        $(this.el).find('#slider1').html(this.whatsNewCT({'items': this.whatsNewItems.toJSON()}));
         this.slider1 = new Swipe(document.getElementById('slider1'), {
+                            //startSlide: 2,
+                            //speed: 400,
+                            //auto: 3000,
+                            'items':3,
+                            'callback': function(event, index, elem) {
+                            }
+        });
+
+        $(this.el).find('#slider2').html(this.lastVisitCT({'items': this.lastVisitedItems.toJSON()}));
+        this.slider2 = new Swipe(document.getElementById('slider2'), {
                             //startSlide: 2,
                             //speed: 400,
                             //auto: 3000,
@@ -50,9 +91,14 @@ define([
 
         return this;
       },
+
       items_success: function(model, response){
-        if (this.dfd) this.dfd.resolve(this);
-      },
+        this.fetchsAmount +=1;
+        if(this.fetchsAmount == this.fetchsTotals){
+          if (this.dfd) 
+            this.dfd.resolve(this);
+        }
+      }
     });
     return HomeView;
 });

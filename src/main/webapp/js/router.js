@@ -11,9 +11,10 @@ define([
   'views/register/TermsView',
   'views/messages/MyMessagesListView',
   'views/ads/MyAdsListView',
+  'views/ads/MyFavoriteAdsView',
   'views/posting/PostingView',
 ], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView, 
-  RegisterView, TermsView, MyMessagesListView, MyAdsListView, PostingView) {
+  RegisterView, TermsView, MyMessagesListView, MyAdsListView, MyFavoritesView, PostingView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
@@ -27,6 +28,7 @@ define([
         "terms": "showTerms",
         "mymessages": "showMyMessages",
         "myads": "showMyAds",
+        "myfavs": "showMyFavorites",
         "*path":  "defaultRoute"
     },
 
@@ -121,6 +123,14 @@ define([
       var dfd = $.Deferred().done(this.changePage);
 
       new MyAdsListView({'deferred': dfd});
+    },
+
+    showMyFavorites: function(){
+      console.log('/myfavorites');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new MyFavoritesView({'deferred': dfd});
     },
     
     defaultRoute: function(path) {
