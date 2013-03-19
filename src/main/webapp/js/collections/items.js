@@ -3,12 +3,15 @@ define([
   'backbone',
   // Pull in the Model module from above
   'models/item',
-  'config/conf'
-], function(_, Backbone, ItemModel, ConfModel){
+  'config/conf',
+  'helpers/JSONHelper',
+  'helpers/CategoryHelper'
+], function(_, Backbone, ItemModel, ConfModel, JSONHelper, CategoryHelper){
   	var conf = new ConfModel();
     var ItemCollection = Backbone.Collection.extend({
      	initialize: function(options, user_id){
-        this.query_opts = options;
+        var category = {"category_id":CategoryHelper.getCategory()};
+        this.query_opts = JSONHelper.concatJSON(options, category);
         this.user_id = user_id || null;
       },
       model: ItemModel,

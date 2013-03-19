@@ -2,7 +2,7 @@ define([
   'underscore',
   'backbone'
 ], function(_, Backbone){
-  var JSONHelperModel = Backbone.Model.extend({
+  var JSONHelper = Backbone.Model.extend({
     concatJSON: function (o1, o2) {
       for (var key in o2) {
        o1[key] = o2[key];
@@ -44,5 +44,5 @@ define([
     },
   });
 
-  return JSONHelperModel;
+  return new JSONHelper();
 });
