@@ -44,7 +44,7 @@ define([
           return;
 
         //ATTENTION BEGIN DEBUG CODE
-        // var user = new User({"id":100,"name":this.username,"username":this.username});
+        // var user = new User({"id":100,"username":this.username});
         // this.Storage.set("userObj",user);
         // this.Storage.set("authToken","12345678");
         // this.eventAggregator.trigger("loggedIn");
@@ -54,7 +54,7 @@ define([
 
         $.ajax({
           type: "GET",
-          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/challenge/'+this.username,
+          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/user/challenge?u='+this.username,
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (data){
@@ -64,9 +64,9 @@ define([
         var sha512Hash = CryptoJS.SHA512(md5Hash+this.challenge);
 
         $.ajax({
-          type: "POST",
-          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/login',
-          data: "{'username':"+this.username+",'password':"+sha512Hash+"}",
+          type: "GET",
+          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
+          '/user/login?u=' + this.username + "&h=" + sha512Hash,
         }).done(_.bind(this.login_success, this));
         
       },
@@ -74,16 +74,18 @@ define([
         if (data.token) {
           this.Storage.set("authToken",data.token);
 
-          this.user = new User({"username":this.username, "authToken": this.Storage.get("authToken")});
-          this.user.on('sync',_.bind(this.user_success, this));
-          this.user.fetch();
-        };
-        
-      },
-      user_success:function (model, response){
-        if(this.user.username){
+          this.user = new User({
+            "username":this.username, 
+            "authToken": data.token,
+            "unreadMessagesCount": data.unreadMessagesCount,
+            "favorites": data.favorites,
+          });
+          
           this.Storage.set("userObj",this.user);
-        }
+
+          this.eventAggregator.trigger("loggedIn");
+          window.location = "#";
+        };
         
       }
     });
