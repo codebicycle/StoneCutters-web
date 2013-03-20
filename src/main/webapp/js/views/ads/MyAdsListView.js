@@ -8,12 +8,13 @@ define([
   'collections/sorts',
   'text!templates/ads/myAdsListTemplate.html',
   'text!templates/ads/adsMoreListTemplate.html',
+  'views/scroll/ScrollView'
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
-    SortsCollection, MyAdsListTemplate,adsMoreListTemplate){
+    SortsCollection, MyAdsListTemplate,adsMoreListTemplate, ScrollView){
 
-    var MyAdsListView = Backbone.View.extend({
+    var MyAdsListView = ScrollView.extend({
       el: "#home",
 
       events: {
@@ -23,43 +24,23 @@ define([
         
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(MyAdsListTemplate);
-        this.adsMCT = Handlebars.compile(adsMoreListTemplate);
+        MyAdsListView.__super__.moreTemplate  = Handlebars.compile(adsMoreListTemplate);
 
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
         this.pageSize =  10;
         this.user_id = this.Storage.get("userObj").id;
+        MyAdsListView.__super__.offset= options.page || 0;
         
         this.ops = {country_id: 1, offset:this.page, pageSize: this.pageSize};
         this.items = new ItemsCollection(this.ops, {"user_id":this.user_id}, {"item_type":"myAds"});
+        MyAdsListView.__super__.collection = this.items;
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
-        //We are not able to attach this event in events: {}, because windows is not inside el.
-        //Namespaced events. http://docs.jquery.com/Namespaced_Events (This is here to avoid a bug)
-        $(window).bind("scroll.myAds"+this.user_id, (_.bind(this.checkScroll,this)));
-      },
-
-      checkScroll: function () {
-        var triggerPoint = 100; // 100px from the bottom
-        if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()  ) {
-          this.ops.offset += 1; // Load next page
-          this.items.reset(this.ops);
-          this.loadResults();
-        }
-      },
-
-      loadResults: function () {
-        this.items.on('sync',_.bind(this.load_more_items, this));
-        this.isLoading = true;
-        this.items.fetch();
-      },
-
-      load_more_items:function(items){
-        $(this.el).find('#ads-list').append(this.adsMCT({'items': this.items.toJSON(), 'search-term': this.query}));
-        $(this.el).find('#ads-list').listview("refresh");
-        this.isLoading = false;
-        return this;
+        this.templateKey = "items";
+        this.scrollingID = "myAds"+this.user_id;
+        MyAdsListView.__super__.bindScrolling.call(this);
       },
 
       render:function () {
@@ -76,9 +57,6 @@ define([
         };
         return;
       },
-      close: function(){
-        $(window).unbind("scroll.myAds"+this.user_id);
-      }
     });
     return MyAdsListView;
 });
