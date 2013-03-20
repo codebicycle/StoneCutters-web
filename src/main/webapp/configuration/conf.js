@@ -5,6 +5,8 @@ define([
   var ConfModel = Backbone.Model.extend({
     defaults: {
       smaug : {
+        // url : 'http://10.0.5.27',
+        // port : '9000',
         url : 'http://smaug.herokuapp.com',
         port : '80',
       },
