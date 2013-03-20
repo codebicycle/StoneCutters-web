@@ -56,7 +56,7 @@ define([
         
         this.lastVisitedItems = this.whatsNewItems;
         this.items_success();
-        */
+        */  
         //END Debug Code
         
 

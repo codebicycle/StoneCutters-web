@@ -7,10 +7,18 @@ define([
   // How to use this view:
   // ---------------------
   // You must extend this view if only you want the infinit scroll for a specified view.
+  // In order to set up your scrolling view you have to define/override the following variables:
+  //
+  // scrollingID: must be unique for each view.
+  // collection: the collection that we are scrolling and fetching more elements.
+  // moreTemplate: the template that is in charge of rendering the items.
+  //
   // Inside your initialize function you have to call the following method, where MyView is 
   // the name of the new view.
-  // Do not forget to override the scrollingID variable.
   // MyView.__super__.bindScrolling.call(this);
+  //
+  // Note: this view assumes that inside our collection you have an query_opts element which has offset variable inside.
+  // this.collection.query_opts.offset
 
   function($,_, Backbone){
 
@@ -50,7 +58,7 @@ define([
       },
 
       close: function(){
-        $(window).unbind("scroll.myAds"+this.user_id);
+        $(window).unbind("scroll."+this.scrollingID);
       }
     });
     return ScrollView;
