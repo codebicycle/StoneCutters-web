@@ -6,7 +6,6 @@ define([
   'collections/items',
   'collections/filters',
   'collections/sorts',
-  'config/conf',
   'text!templates/ads/adsListTemplate.html',
   'text!templates/ads/adsMoreListTemplate.html',
   'text!templates/ads/filterTemplate.html',
@@ -16,7 +15,7 @@ define([
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
-    SortsCollection, ConfModel, adsListTemplate,adsMoreListTemplate, 
+    SortsCollection, adsListTemplate,adsMoreListTemplate, 
     filterTemplate, sortTemplate, JSONHelper, CategoryHelper){
 
     var AdsListView = Backbone.View.extend({
@@ -28,7 +27,6 @@ define([
       },
 
       initialize: function(options){
-        this.conf = new ConfModel();
         
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(adsListTemplate);
@@ -41,7 +39,7 @@ define([
         this.query = null || this.params.q;
         this.sortName = null || this.params.sort;
         this.page= options.page || 0;
-        this.pageSize =  10 || conf.get('pageSize');
+        this.pageSize =  10;
 
         //this sets the category and parent category in the Category Helper
         if (options.cat_id)

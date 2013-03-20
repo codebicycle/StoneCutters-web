@@ -6,8 +6,7 @@ define([
   'config/conf',
   'helpers/JSONHelper',
   'helpers/CategoryHelper'
-], function(_, Backbone, ItemModel, ConfModel, JSONHelper, CategoryHelper){
-  	var conf = new ConfModel();
+], function(_, Backbone, ItemModel, Conf, JSONHelper, CategoryHelper){
     var ItemCollection = Backbone.Collection.extend({
      	initialize: function(query_options, url_options, item_options){
         this.query_opts = null || query_options;
@@ -31,13 +30,13 @@ define([
         switch(this.item_options.item_type){
 
           case "adsList":
-            response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
           break;
           case "myAds":
-            response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/users/' + this.url_options.user_id + '/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + this.url_options.user_id + '/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
           break;
           case "myFavorites":
-            response = conf.get('smaug').url + ':' + conf.get('smaug').port + '/users/' + this.url_options.user_id + '/favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + this.url_options.user_id + '/favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
           break;
         }
         return response;
