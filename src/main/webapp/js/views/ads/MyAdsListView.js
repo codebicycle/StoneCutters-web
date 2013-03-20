@@ -6,14 +6,13 @@ define([
   'collections/items',
   'collections/filters',
   'collections/sorts',
-  'config/conf',
   'text!templates/ads/myAdsListTemplate.html',
   'text!templates/ads/adsMoreListTemplate.html',
   'views/scroll/ScrollView'
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
-    SortsCollection, ConfModel, MyAdsListTemplate,adsMoreListTemplate, ScrollView){
+    SortsCollection, MyAdsListTemplate,adsMoreListTemplate, ScrollView){
 
     var MyAdsListView = ScrollView.extend({
       el: "#home",
@@ -22,7 +21,6 @@ define([
       },
 
       initialize: function(options){
-        this.conf = new ConfModel();
         
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(MyAdsListTemplate);
@@ -30,7 +28,7 @@ define([
 
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
-        this.pageSize =  10 || conf.get('pageSize');
+        this.pageSize =  10;
         this.user_id = this.Storage.get("userObj").id;
         MyAdsListView.__super__.offset= options.page || 0;
         

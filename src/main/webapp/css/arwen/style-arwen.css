@@ -1,7 +1,17 @@
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
 .clear {
 	width: 100%;
 	clear: both;
 	height: 1px;
+}
+
+/* Main Panel
+---------------------------------------------------------------------- */
+div.ui-panel-content-wrap {
+	background: #fff;
 }
 
 /* Header 
@@ -53,7 +63,7 @@ a#toggle-search {
 
 div.ui-input-search.ui-shadow-inset.ui-btn-corner-all.ui-btn-shadow.ui-icon-searchfield.ui-body-c.ui-mini {
 	box-shadow: none;
-	background: white;
+	background: #fff;
 	width: 90%;
 	margin: auto;
 	margin-top: 10px;
@@ -79,3 +89,149 @@ div#header h1.ui-title div {
 	width: 100%;
 	height: 100%;
 }
+
+/* Left Panel
+---------------------------------------------------------------------- */
+
+div#left-panel.ui-panel-position-left.ui-panel-display-reveal, 
+div#left-panel.ui-panel-position-left.ui-panel-open {
+    background: #2b2b2c;
+    color: #838282;
+}
+
+div#left-panel ul {
+	box-shadow: none;
+}
+
+
+a#login-link,
+a#myolx-link,
+a#post-button,
+a#logout-link {
+	margin: 0;
+	font-weight: bold;
+}
+
+/* li categories */
+
+div#left-panel .ui-btn-inner {
+	border: 0;
+	border-top: 1px solid #454546;
+	border-bottom: 2px solid #100e0e;
+}
+
+div#left-panel .ui-btn-inner .ui-btn-text {
+	height: 40px;
+}
+
+div#left-panel .ui-btn-inner a {
+	color: #838282;
+	padding: 1em 15px;
+}
+
+div#left-panel li#p-cat-link a {
+	color: #b0aaaa;
+}
+
+
+/* category divider */
+div#left-panel li#cat-divider {
+	padding: 1em 15px;
+	border-bottom: 1px solid #100e0e;
+}
+
+/* myolx options */
+
+ul#left-panel-list-top {
+	background: #3b393b;
+}
+
+ul#left-panel-list-top  a {
+	color: #838282;
+	padding: 1em 15px;
+}
+
+ul#left-panel-list-top .myolx-cat li {
+	border: 0;
+}
+
+/* post ad */
+ul#left-panel-list-top a#post-button {
+	color: #ffa500;
+}
+
+ul#left-panel-list-top  .myolx-cat .ui-btn-inner {
+	border: 0;
+	border-top: 1px solid #454546;
+	border-bottom: 1px solid #100e0e;
+}
+
+
+/* Home
+---------------------------------------------------------------------- */
+
+h4 {
+	color: #666666;
+	font-size: 20pt;
+	font-weight: normal;
+	margin: 10px 0 10px 0;
+}
+
+div#slider1 {
+	margin-bottom: 20px;
+}
+
+div.swipe {
+	height: 200px;
+}
+
+div.swipe ul li img{
+	width: 200px;
+	height: 200px;
+}
+
+div.swipe ul li div.tooltip {
+    background: #666;
+    opacity: 0.7;
+    position: absolute;
+    float: left;
+    top: 100px;
+    height: 100px;
+    width: 200px;
+    padding: 0px;
+}
+
+div.swipe ul li div.tooltip h5 {
+	font-size: 12pt;
+	text-align: left;
+	padding: 10px;
+	margin: 0;
+}
+
+
+@media only screen and (max-device-width: 480px) {
+
+	div.swipe {
+		height: 150px;
+	}
+
+	div.swipe ul li img{
+		width: 150px;
+		height: 150px;
+	}
+
+	div.swipe ul li div.tooltip {
+	    top: 75px;
+	    height: 75px;
+	    width: 150px;
+	}
+
+	div.swipe ul li div.tooltip h5 {
+		font-size: 10pt;
+	}
+
+}
+
+
+
+

@@ -4,13 +4,12 @@ define([
   'backbone',
   'handlebars',
   'collections/messages',
-  'config/conf',
   'views/scroll/ScrollView',
   'text!templates/message/messagesListTemplate.html',
   'text!templates/message/messagesMoreListTemplate.html'
   ], 
 
-  function($,_, Backbone, Handlebars, MessagesCollection, ConfModel, ScrollView, messagesListTemplate,messagesMoreListTemplate){
+  function($,_, Backbone, Handlebars, MessagesCollection, ScrollView, messagesListTemplate,messagesMoreListTemplate){
 
     var MyMessageListView = ScrollView.extend({
       el: "#home",
@@ -19,15 +18,15 @@ define([
       },
 
       initialize: function(options){
-        this.conf = new ConfModel();
         
         /*Compile the template using Handlebars micro-templating*/
         this.messagesCT = Handlebars.compile(messagesListTemplate);
         MyMessageListView.__super__.moreTemplate = Handlebars.compile(messagesMoreListTemplate);
 
         this.dfd = null || options.deferred;
+
         MyMessageListView.__super__.offset = options.page || 0; 
-        this.pageSize =  10 || conf.get('pageSize');
+        this.pageSize =  10;
         this.user_id = this.Storage.get("userObj").id;
 
         this.opts = {user_id:this.user_id, offset:MyMessageListView.__super__.offset, pageSize: this.pageSize};

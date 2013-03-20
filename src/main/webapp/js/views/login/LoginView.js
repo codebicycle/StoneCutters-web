@@ -10,7 +10,7 @@ define([
   'crypto/sha512'
   ], 
 
-  function($,_, Backbone, Handlebars, User, loginTemplate, ConfModel){
+  function($,_, Backbone, Handlebars, User, loginTemplate, Conf){
 
     var LoginView = Backbone.View.extend({
       el: "#home",
@@ -52,11 +52,9 @@ define([
         // return;
         //END OF DEBUG CODE
 
-        var conf = new ConfModel();
-
         $.ajax({
           type: "GET",
-          url: conf.get('smaug').url + ':' + conf.get('smaug').port + '/challenge/'+this.username,
+          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/challenge/'+this.username,
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (data){
@@ -67,7 +65,7 @@ define([
 
         $.ajax({
           type: "POST",
-          url: conf.get('smaug').url + ':' + conf.get('smaug').port + '/login',
+          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/login',
           data: "{'username':"+this.username+",'password':"+sha512Hash+"}",
         }).done(_.bind(this.login_success, this));
         

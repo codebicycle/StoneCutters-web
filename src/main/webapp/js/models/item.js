@@ -2,14 +2,13 @@ define([
   'underscore',
   'backbone',
   'config/conf'
-], function(_, Backbone, ConfModel){
-	var conf = new ConfModel();
+], function(_, Backbone, Conf){
  	var ItemModel = Backbone.Model.extend({
   	initialize: function(options){
   		this.id = options.id;
   	},
   	url: function(){
-  		return conf.get('smaug').url + ':' + conf.get('smaug').port + '/item/'+this.id;
+  		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/item/'+this.id;
   	}
   });
   

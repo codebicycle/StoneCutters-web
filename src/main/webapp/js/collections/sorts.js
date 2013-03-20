@@ -3,25 +3,22 @@ define([
   'backbone',
   // Pull in the Model module from above
   'models/sort',
-  'config/conf'
-], function(_, Backbone, SortModel, ConfModel){
-    var conf = new ConfModel();
+  'config/conf',
+  'helpers/CategoryHelper'
+], function(_, Backbone, SortModel, Conf, CategoryHelper){
     var SortCollection = Backbone.Collection.extend({
       model: SortModel,
       initialize: function(options){
         this.countryId = options.country_id;
-        this.categoryId = options.category_id;
         this.query = options.q;
       },
       url: function(){
-        var path;
-        if (this.categoryId) {
-          path = '/' + this.categoryId;
-        }else if (this.query) {
-          path = '?q=' + this.query;
-        };
-        return conf.get('smaug').url + ':' + conf.get('smaug').port + 
-        '/sorts/'+ this.countryId + path;
+        var q_param = "";
+        if (this.query)
+          q_param = '?q=' + this.query;
+
+        return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
+        '/sorts/'+ this.countryId + '/' + CategoryHelper.getCategory() + q_param;
       },
     });
     // You don't usually return a collection instantiated

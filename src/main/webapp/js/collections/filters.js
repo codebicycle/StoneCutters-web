@@ -3,25 +3,22 @@ define([
   'backbone',
   // Pull in the Model module from above
   'models/filter',
-  'config/conf'
-], function(_, Backbone, FilterModel, ConfModel){
-    var conf = new ConfModel();
+  'config/conf',
+  'helpers/CategoryHelper'
+], function(_, Backbone, FilterModel, Conf, CategoryHelper){
     var FilterCollection = Backbone.Collection.extend({
       model: FilterModel,
       initialize: function(options){
         this.countryId = options.country_id;
-        this.categoryId = options.category_id;
         this.query = options.q;
       },
       url: function(){
-        var path;
-        if (this.categoryId) {
-          path = '/' + this.categoryId;
-        }else if (this.query) {
-          path = '?q=' + this.query;
-        };
-        return conf.get('smaug').url + ':' + conf.get('smaug').port + 
-        '/filters/'+ this.countryId + path;
+        var q_param = "";
+        if (this.query)
+          q_param = '?q=' + this.query;
+
+        return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
+        '/filters/'+ this.countryId + '/' + CategoryHelper.getCategory() + q_param;
       },
     });
     // You don't usually return a collection instantiated
