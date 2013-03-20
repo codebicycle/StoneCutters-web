@@ -11,14 +11,15 @@ define([
   'text!templates/ads/adsMoreListTemplate.html',
   'text!templates/ads/filterTemplate.html',
   'text!templates/ads/sortTemplate.html',
+  'views/scroll/ScrollView',
   'helpers/JSONHelper'
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
     SortsCollection, ConfModel, adsListTemplate,adsMoreListTemplate, 
-    filterTemplate, sortTemplate, JSONHelperModel){
+    filterTemplate, sortTemplate,ScrollView, JSONHelperModel){
 
-    var AdsListView = Backbone.View.extend({
+    var AdsListView = ScrollView.extend({
       el: "#home",
 
       events: {
@@ -32,7 +33,7 @@ define([
         
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(adsListTemplate);
-        this.adsMCT = Handlebars.compile(adsMoreListTemplate);
+        AdsListView.__super__.moreTemplate = Handlebars.compile(adsMoreListTemplate);
         this.filCT = Handlebars.compile(filterTemplate);
         this.sorCT = Handlebars.compile(sortTemplate);
 
@@ -40,12 +41,12 @@ define([
         this.dfd = null || options.deferred;
         this.query = null || this.params.q;
         this.sortName = null || this.params.sort;
-        this.page= options.page || 0;
+        AdsListView.__super__.offset= options.page || 0;
         this.pageSize =  10 || conf.get('pageSize');
         this.cat_id = options.cat_id;
 
         var ops = {country_id: 1, category_id:options.cat_id, 
-          offset:this.page, pageSize: this.pageSize};
+          offset:AdsListView.__super__.offset, pageSize: this.pageSize};
         ops = this.jsonHelper.concatJSON(ops, this.params)
 
         delete this.params["q"];
@@ -55,7 +56,8 @@ define([
         this.opts = new Opts(ops);
         this.opts.on('change', this.updateItems, this);
 
-        this.items = new ItemsCollection(this.opts.toJSON(),{},{"item_type":"adsList"});
+        AdsListView.__super__.collection = new ItemsCollection(this.opts.toJSON(),{},{"item_type":"adsList"});
+        this.items = AdsListView.__super__.collection;
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
@@ -78,31 +80,14 @@ define([
         // this.sorts = new SortsCollection([{title:"Date"},{title:"Price"}]);
         //End of Mock code
 
+        //ScrollView's settings
+        this.templateKey = "items";
+        this.scrollingID = options.cat_id;
+        AdsListView.__super__.bindScrolling.call(this);
+
         //We are not able to attach this event in events: {}, because windows is not inside el.
         //Namespaced events. http://docs.jquery.com/Namespaced_Events (This is here to avoid a bug)
-        $(window).bind("scroll."+options.cat_id, (_.bind(this.checkScroll,this)));
-      },
-
-      checkScroll: function () {
-        var triggerPoint = 100; // 100px from the bottom
-        if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()  ) {
-          this.opts.offset += 1; // Load next page
-          this.items.reset(this.opts);
-          this.loadResults();
-        }
-      },
-
-      loadResults: function () {
-        this.items.on('sync',_.bind(this.load_more_items, this));
-        this.isLoading = true;
-        this.items.fetch();
-      },
-
-      load_more_items:function(items){
-        $(this.el).find('#ads-list').append(this.adsMCT({'items': this.items.toJSON(), 'search-term': this.query}));
-        $(this.el).find('#ads-list').listview("refresh");
-        this.isLoading = false;
-        return this;
+        //$(window).bind("scroll."+options.cat_id, (_.bind(this.checkScroll,this)));
       },
 
       render:function () {
