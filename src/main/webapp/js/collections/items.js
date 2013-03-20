@@ -11,7 +11,7 @@ define([
      	initialize: function(query_options, url_options, item_options){
         this.query_opts = null || query_options;
         
-        var category = {"category_id":CategoryHelper.getCategory()};
+        var category = {"categoryId":CategoryHelper.getCategory()};
         this.query_opts = JSONHelper.concatJSON(query_options, category);
 
         this.url_options = null || url_options;
