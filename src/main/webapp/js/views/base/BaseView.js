@@ -5,11 +5,12 @@ define([
   'handlebars',
   'collections/categories',
   'models/user',
-  'text!templates/base/leftPanelTemplate.html'
+  'text!templates/base/leftPanelTemplate.html',
+  'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, Handlebars, CategoriesCollection, UserModel, 
-    leftPanelTemplate){
+    leftPanelTemplate, CategoryHelper){
 
     var BaseView = Backbone.View.extend({
       el: "#home",
@@ -31,12 +32,11 @@ define([
 
         this.loadCategories = new CategoriesCollection();
 
-        this.categories = new CategoriesCollection();
-        //this.categories.comparator = 'name';
-        //underscore bind preserves the views scope so that this.categories is still 
+        //CategoryHelper.categories.comparator = 'name';
+        //underscore bind preserves the views scope so that CategoryHelper.categories is still 
         //defined in the success callback
-        this.categories.on('sync',_.bind(this.cat_success, this));
-        this.categories.fetch();
+        CategoryHelper.categories.on('sync',_.bind(this.cat_success, this));
+        CategoryHelper.categories.fetch();
 
         this.eventAggregator.on("searchDone", _.bind(this.doneSearch,this));
         this.eventAggregator.on("loggedIn", _.bind(this.render,this));
@@ -73,6 +73,7 @@ define([
         $(this.el).find('#left-panel').trigger("updatelayout");
         
         $(this.el).find('#left-panel-list').listview();
+        $(this.el).find('#left-panel-list-top').listview();
         $(this.el).find('#p-cat-link').hide();
         $(this.el).find('.myolx-cat').hide();
 
@@ -88,12 +89,11 @@ define([
         var category = null;
 
         if (parent_id) {
-          var parentCategory = this.categories.get(parent_id);
+          var parentCategory = CategoryHelper.categories.get(parent_id);
           var children = new CategoriesCollection(parentCategory.get('children'));
           category = children.get(data_id);
         }else{
-          category = this.categories.get(data_id);
-          $('li#cat-divider.ui-li').text(category.get('name'));
+          category = CategoryHelper.categories.get(data_id);
         }
 
         document.title = category.get('name');
@@ -111,24 +111,26 @@ define([
         $('.ui-li').removeClass('ui-focus');
       },
       showParentCategories: function(){
-        this.changeCategories(this.categories.toJSON());
+        this.changeCategories(CategoryHelper.categories.toJSON());
       },
       toggleSearch: function(){
         $("#search-bar-div").toggle();
 
         if ($("#search-bar-div").is(":visible")){
           $('#search-bar').focus();
-          $('#toggle-search .ui-btn-text').text('Cancel');
+          //$('#toggle-search .ui-btn-text').text('Cancel');
         }else{
           $('#search-bar').val("");
-          $('#toggle-search .ui-btn-text').text('Search');
+          //$('#toggle-search .ui-btn-text').text('Search');
         }
       },
       toggleMyOLXCats: function(){
         $(this.el).find('.myolx-cat').slideToggle('fast');
       },
       doneSearch: function(){
-        this.toggleSearch();
+        $("#search-bar-div").hide();
+        $('#search-bar').val("");
+        $('#toggle-search .ui-btn-text').text('Search');
       },
       changeCategories: function(categories){
         this.loadCategories.reset(categories);

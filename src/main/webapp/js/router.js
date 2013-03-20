@@ -9,26 +9,32 @@ define([
   'views/login/LoginView',
   'views/register/RegisterView',
   'views/register/TermsView',
+  'views/messages/MyMessagesListView',
+  'views/ads/MyAdsListView',
+  'views/ads/MyFavoriteAdsView',
   'views/posting/PostingView',
 ], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView, 
-  RegisterView, TermsView, PostingView) {
+  RegisterView, TermsView, MyMessagesListView, MyAdsListView, MyFavoritesView, PostingView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
         "":"showHome",
         "item/:itemId": "showItem",
-        "category/:catId": "showAds",
-        "search?q=:query": "showSearchAds",
+        "category/:catId(/:params)": "showAds",
+        "search?:params": "showSearchAds",
         "login": "showLogin",
         "register": "showRegister",
         "post": "showPosting",
         "terms": "showTerms",
+        "mymessages": "showMyMessages",
+        "myads": "showMyAds",
+        "myfavs": "showMyFavorites",
         "*path":  "defaultRoute"
     },
 
     initialize:function () {
         // Handle back button throughout the application
-        $('.back').live('click', function(event) {
+        $('body').on('click', '.back', function(event) {
             window.history.back();
             return false;
         });
@@ -43,16 +49,32 @@ define([
         new HomeView({'deferred': dfd});
     },
 
-    defaultRoute: function(path) {
-        window.location = "#";
-    },
-
     showItem: function(itemId){
       console.log('/item/'+itemId);
 
       var dfd = $.Deferred().done(this.changePage);
 
       new ItemView({'deferred': dfd, 'id': itemId});
+    },
+
+    showAds: function(catId,params){
+      if (params) {
+        console.log('/category/'+catId+"/"+params);
+      }else{
+        console.log('/category/'+catId);
+      };
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new AdsListView({'deferred': dfd, 'cat_id': catId, 'params': params});
+    },
+
+    showSearchAds: function(params){
+      console.log('/search?'+params);
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new AdsListView({'deferred': dfd, 'params': params});
     },
 
     showLogin: function(){
@@ -63,20 +85,20 @@ define([
       new LoginView({'deferred': dfd});
     },
 
-    showPosting: function(){
-      console.log('/post');
-
-      var dfd = $.Deferred().done(this.changePage);
-
-      new PostingView({'deferred': dfd});
-    },
-
     showRegister: function(){
       console.log('/register');
 
       var dfd = $.Deferred().done(this.changePage);
 
       new RegisterView({'deferred': dfd});
+    },
+
+    showPosting: function(){
+      console.log('/post');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new PostingView({'deferred': dfd});
     },
 
     showTerms: function(){
@@ -87,20 +109,32 @@ define([
       new TermsView({'deferred': dfd});
     },
 
-    showAds: function(catId){
-      console.log('/category/'+catId);
+    showMyMessages: function(){
+      console.log('/mymessages');
 
       var dfd = $.Deferred().done(this.changePage);
 
-      new AdsListView({'deferred': dfd, 'cat_id': catId});
+      new MyMessagesListView({'deferred': dfd});
     },
 
-    showSearchAds: function(query){
-      console.log('/search/'+query);
+    showMyAds: function(){
+      console.log('/myads');
 
       var dfd = $.Deferred().done(this.changePage);
 
-      new AdsListView({'deferred': dfd, 'q': query});
+      new MyAdsListView({'deferred': dfd});
+    },
+
+    showMyFavorites: function(){
+      console.log('/myfavorites');
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new MyFavoritesView({'deferred': dfd});
+    },
+    
+    defaultRoute: function(path) {
+        window.location = "#";
     },
 
     changePage:function (page) {

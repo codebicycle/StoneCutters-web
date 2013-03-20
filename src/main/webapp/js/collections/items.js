@@ -3,19 +3,46 @@ define([
   'backbone',
   // Pull in the Model module from above
   'models/item',
-  'config/conf'
-], function(_, Backbone, ItemModel, ConfModel){
-  	var conf = new ConfModel();
+  'config/conf',
+  'helpers/JSONHelper',
+  'helpers/CategoryHelper'
+], function(_, Backbone, ItemModel, Conf, JSONHelper, CategoryHelper){
     var ItemCollection = Backbone.Collection.extend({
-     	initialize: function(options){
-        this.query_opts = options;
+     	initialize: function(query_options, url_options, item_options){
+        this.query_opts = null || query_options;
+        
+        var category = {"category_id":CategoryHelper.getCategory()};
+        this.query_opts = JSONHelper.concatJSON(query_options, category);
+
+        this.url_options = null || url_options;
+        this.item_options = null || item_options;
       },
       model: ItemModel,
       url: function(){
-        return conf.get('smaug').url + ':' + conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
+        var response;
+
+        //***********-----------------------
+        //WARNING!!:
+        //Comment or DELETE the following line in order to get the right logic.
+        this.item_options.item_type='adsList';
+        //***********-----------------------
+
+        switch(this.item_options.item_type){
+
+          case "adsList":
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
+          break;
+          case "myAds":
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + this.url_options.user_id + '/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+          break;
+          case "myFavorites":
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + this.url_options.user_id + '/favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+          break;
+        }
+        return response;
       },
     });
 
-    // You don't usually return a collection instantiated
+    // You do not usually return a collection instantiated
     return ItemCollection;
 });

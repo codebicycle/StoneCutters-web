@@ -4,8 +4,7 @@ define([
   // Pull in the Model module from above
   'models/field',
   'config/conf'
-], function(_, Backbone, FieldModel, ConfModel){
-    var conf = new ConfModel();
+], function(_, Backbone, FieldModel, Conf){
     var FieldCollection = Backbone.Collection.extend({
       model: FieldModel,
       initialize: function(options){
@@ -13,7 +12,7 @@ define([
         this.categoryId = options.category_id;
       },
       url: function(){
-        return conf.get('smaug').url + ':' + conf.get('smaug').port + 
+        return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
         '/fields/'+ this.countryId + '/' + this.categoryId;
       },
     });

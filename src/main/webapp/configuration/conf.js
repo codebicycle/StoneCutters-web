@@ -16,5 +16,5 @@ define([
   });
   
   // Return the model for the module
-  return ConfModel;
+  return new ConfModel();
 });

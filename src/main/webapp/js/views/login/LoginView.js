@@ -10,14 +10,13 @@ define([
   'crypto/sha512'
   ], 
 
-  function($,_, Backbone, Handlebars, User, loginTemplate, ConfModel){
+  function($,_, Backbone, Handlebars, User, loginTemplate, Conf){
 
     var LoginView = Backbone.View.extend({
       el: "#home",
 
       events:{
         'click #login-button': "startLogin",
-        'click #send-email-button': "startLoginEmail",
       },
 
       initialize: function(options){
@@ -45,7 +44,7 @@ define([
           return;
 
         //ATTENTION BEGIN DEBUG CODE
-        // var user = new User({"id":100,"name":this.username,"username":this.username});
+        // var user = new User({"id":100,"username":this.username});
         // this.Storage.set("userObj",user);
         // this.Storage.set("authToken","12345678");
         // this.eventAggregator.trigger("loggedIn");
@@ -53,11 +52,9 @@ define([
         // return;
         //END OF DEBUG CODE
 
-        var conf = new ConfModel();
-
         $.ajax({
           type: "GET",
-          url: conf.get('smaug').url + ':' + conf.get('smaug').port + '/challenge/'+this.username,
+          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/user/challenge?u='+this.username,
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (data){
@@ -67,9 +64,9 @@ define([
         var sha512Hash = CryptoJS.SHA512(md5Hash+this.challenge);
 
         $.ajax({
-          type: "POST",
-          url: conf.get('smaug').url + ':' + conf.get('smaug').port + '/login',
-          data: "{'username':"+this.username+",'password':"+sha512Hash+"}",
+          type: "GET",
+          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
+          '/user/login?u=' + this.username + "&h=" + sha512Hash,
         }).done(_.bind(this.login_success, this));
         
       },
@@ -77,28 +74,20 @@ define([
         if (data.token) {
           this.Storage.set("authToken",data.token);
 
-          this.user = new User({"username":this.username, "authToken": this.Storage.get("authToken")});
-          this.user.on('sync',_.bind(this.user_success, this));
-          this.user.fetch();
+          this.user = new User({
+            "username":this.username, 
+            "authToken": data.token,
+            "unreadMessagesCount": data.unreadMessagesCount,
+            "favorites": data.favorites,
+          });
+          
+          this.Storage.set("userObj",this.user);
+
+          this.eventAggregator.trigger("loggedIn");
+          window.location = "#";
         };
         
-      },
-      user_success:function (model, response){
-        if(this.user.username){
-          this.Storage.set("userObj",this.user);
-        }
-        
-      },
-      startLoginEmail:function (){
-        var email = $(this.el).find('#email-field').val();
-
-        // this.user = new User({"username":user, "password":pass});
-        // this.user.on('sync',_.bind(this.login_success, this));
-        // this.user.fetch();
-      },
-      login_email_success:function (model, response){
-        
-      },
+      }
     });
     return LoginView;
 });
