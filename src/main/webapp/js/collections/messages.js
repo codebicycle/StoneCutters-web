@@ -20,7 +20,7 @@ define([
       url: function(){
         //Due to the fact that Smaug is drunk, the following line is commented, but we must uncomment the line for production.
         //return conf.get('smaug').url + ':' + conf.get('smaug').port + '/users/'+this.user_id+'/messages?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize
-        this.query_opts = {country_id: 1, cat_id:16, q:null, offset:0, pageSize: 10};
+        this.query_opts = {country_id: 1, cat_id:16, q:null, offset:this.query_opts.offset, pageSize: this.query_opts.pageSize};
         return Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
       }
     });

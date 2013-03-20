@@ -42,7 +42,7 @@ define([
         this.lastVisitedItems.fetch();
         
         //Debug Code
-        /*
+        
         var collection = Backbone.Collection.extend();
         this.whatsNewItems = new collection([ {"id":"484949563", "title":"Chihuahua Puppies For Sale","thumbImage":"http://petliferadio.com/doggydog.jpg"},
                                               {"id":"484949178", "title":"Gun Dog Stud Many Willowyck & Drakeshead Lns","thumbImage":"http://www.cck9.com/wp-content/uploads/2009/09/German-shepherd-protection-dogs-CCK9-Blog-300x300.jpg"},
@@ -56,7 +56,7 @@ define([
         
         this.lastVisitedItems = this.whatsNewItems;
         this.items_success();
-        */
+        
         //END Debug Code
         
 
