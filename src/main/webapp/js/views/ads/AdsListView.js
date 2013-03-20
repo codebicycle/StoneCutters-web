@@ -17,7 +17,7 @@ define([
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
     SortsCollection, adsListTemplate,adsMoreListTemplate, 
-    filterTemplate, sortTemplate,ScrollView, JSONHelperModel, CategoryHelper){
+    filterTemplate, sortTemplate,ScrollView, JSONHelper, CategoryHelper){
   
     var AdsListView = ScrollView.extend({
       el: "#home",
