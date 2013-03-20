@@ -1,32 +1,68 @@
-<div>
-    <h1>{{item.title}}</h1>
-</div>
+<div id="itempage">
 
-<div>
-	<div id="image-slider" class="swipe">
-		<ul>
-		{{#each item.images}}
-			<li>
-				<img src={{thumbUrl}}/>
-			</li>
-		{{/each}}
-		</ul>
-	</div>
-    
-    <br/>
-    
-    <strong>Description</strong>: {{item.description}}<br/>
-    <strong>Username:</strong> {{item.username}}<br/>
-    <strong>Price:</strong> {{item.price}}<br/>
-    <strong>Display Price:</strong> {{item.displayPrice}}<br/>
-    <strong>Category:</strong> {{item.category.name}}<br/>
-    <strong>Phone:</strong> {{item.phone}}<br/>
-    
-    <a href="#category/{{item.category.id}}">Mas items en la categoria {{item.category.name}}</a>
-    
-    <br/>
-    <br/>
-    
-    <img src="http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&maptype=roadmap&markers=color:red%7Ccolor:red%7C{{item.location.latitude}},{{item.location.longitude}}&sensor=false">
-</div>
+    <div class="title">
+        <h1>{{item.title}}</h1>
+        <h4>{{item.displayPrice}}</h4>
+    </div>    
 
+    <div id="image-slider" class="swipe">
+        <ul>
+        {{#each item.images}}
+            <li>
+                <img src="{{thumbUrl}}"/>
+            </li>
+        {{/each}}
+        </ul>
+    </div>
+
+
+    <div class="actions">
+        <div class="date">{{item.date}}</div>
+        <div class="addFavorite"></div> 
+        <div class="share"></div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="optionals">
+        {{#each item.optionals}}
+            <b>{{key}}:</b> {{value}}<br>
+        {{/each}}
+    </div>
+
+    <div class="titleBox"><h3>Description</h3></div>
+
+    <div class="description">{{item.description}}</div>
+
+    <div class="titleBox"><h3>Location</h3></div>
+
+    <div class="location">
+        <h4>{{item.location.city}}</h4>
+        <div class="map" style="background-image: url(http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=1024x150&maptype=roadmap&markers=color:red%7Ccolor:red%7C{{item.location.latitude}},{{item.location.longitude}}&sensor=false)"></div>
+    </div>
+
+    <div class="phoneActions">
+
+        <div class="call"></div>
+        <div class="sms"></div>
+        <div class="message"></div>
+        <div class="clear"></div>
+
+        <div class="callTitle">Call</div>
+        <div class="smsTitle">SMS</div>
+        <div class="messageTitle">Message</div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="titleBox"><h3>Related Ads</h3></div>
+
+    <div id="image-slider-related" class="swipe">
+        <ul>
+        {{#each item.images}}
+            <li>
+                <img src="{{thumbUrl}}"/>
+            </li>
+        {{/each}}
+        </ul>
+    </div>
+
+</div>
