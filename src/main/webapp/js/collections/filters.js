@@ -5,8 +5,7 @@ define([
   'models/filter',
   'config/conf',
   'helpers/CategoryHelper'
-], function(_, Backbone, FilterModel, ConfModel, CategoryHelper){
-    var conf = new ConfModel();
+], function(_, Backbone, FilterModel, Conf, CategoryHelper){
     var FilterCollection = Backbone.Collection.extend({
       model: FilterModel,
       initialize: function(options){
@@ -18,7 +17,7 @@ define([
         if (this.query)
           q_param = '?q=' + this.query;
 
-        return conf.get('smaug').url + ':' + conf.get('smaug').port + 
+        return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
         '/filters/'+ this.countryId + '/' + CategoryHelper.getCategory() + q_param;
       },
     });

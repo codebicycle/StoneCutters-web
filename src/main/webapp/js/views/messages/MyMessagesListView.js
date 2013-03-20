@@ -4,12 +4,11 @@ define([
   'backbone',
   'handlebars',
   'collections/messages',
-  'config/conf',
   'text!templates/message/messagesListTemplate.html',
   'text!templates/message/messagesMoreListTemplate.html'
   ], 
 
-  function($,_, Backbone, Handlebars, MessagesCollection, ConfModel, messagesListTemplate,messagesMoreListTemplate){
+  function($,_, Backbone, Handlebars, MessagesCollection, messagesListTemplate,messagesMoreListTemplate){
 
     var AdsListView = Backbone.View.extend({
       el: "#home",
@@ -18,7 +17,6 @@ define([
       },
 
       initialize: function(options){
-        this.conf = new ConfModel();
         
         /*Compile the template using Handlebars micro-templating*/
         this.messagesCT = Handlebars.compile(messagesListTemplate);
@@ -26,7 +24,7 @@ define([
 
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
-        this.pageSize =  10 || conf.get('pageSize');
+        this.pageSize =  10;
         this.user_id = this.Storage.get("userObj").id;
 
         this.opts = {user_id:this.user_id, offset:this.page, pageSize: this.pageSize};

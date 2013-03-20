@@ -5,8 +5,7 @@ define([
   'models/sort',
   'config/conf',
   'helpers/CategoryHelper'
-], function(_, Backbone, SortModel, ConfModel, CategoryHelper){
-    var conf = new ConfModel();
+], function(_, Backbone, SortModel, Conf, CategoryHelper){
     var SortCollection = Backbone.Collection.extend({
       model: SortModel,
       initialize: function(options){
@@ -18,7 +17,7 @@ define([
         if (this.query)
           q_param = '?q=' + this.query;
 
-        return conf.get('smaug').url + ':' + conf.get('smaug').port + 
+        return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
         '/sorts/'+ this.countryId + '/' + CategoryHelper.getCategory() + q_param;
       },
     });
