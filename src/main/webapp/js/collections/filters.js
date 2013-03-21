@@ -9,7 +9,7 @@ define([
     var FilterCollection = Backbone.Collection.extend({
       model: FilterModel,
       initialize: function(options){
-        this.countryId = options.country_id;
+        this.countryId = options.countryId;
         this.query = options.q;
       },
       url: function(){
