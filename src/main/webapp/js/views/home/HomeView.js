@@ -7,11 +7,12 @@ define([
   'collections/items',
   'text!templates/home/homeTemplate.html',
   'text!templates/home/whatsNewTemplate.html',
-  'text!templates/home/lastVisitTemplate.html'
+  'text!templates/home/lastVisitTemplate.html',
+  'helpers/ScreenHelper'
   ], 
 
   function($,_, Backbone, sw, Handlebars, ItemsCollection, 
-    homeTemplate, whatsNewTemplate, lastVisitTemplate){
+    homeTemplate, whatsNewTemplate, lastVisitTemplate, ScreenHelper){
 
     var HomeView = Backbone.View.extend({
       el: "#home",
@@ -70,7 +71,7 @@ define([
                             //startSlide: 2,
                             //speed: 400,
                             //auto: 3000,
-                            'items':3,
+                            'items':ScreenHelper.getImgsNum(),
                             'callback': function(event, index, elem) {
                             }
         });
@@ -80,14 +81,15 @@ define([
                             //startSlide: 2,
                             //speed: 400,
                             //auto: 3000,
-                            'items':3,
+                            'items':ScreenHelper.getImgsNum(),
                             'callback': function(event, index, elem) {
                             }
         });
 
-        $(window).resize(function() {
-          $('#wdiv').html("height = "+$(window).height()+"width = "+$(window).width());
-        });
+        $(window).resize(_.bind(function() {
+          this.slider1.items = ScreenHelper.getImgsNum();
+          this.slider2.items = ScreenHelper.getImgsNum();
+        },this));
         
 
         return this;

@@ -64,6 +64,7 @@ define([
         $('#search-bar').change(function(){
           window.location = "#search?q=" + $('#search-bar').val();
         });
+        
       },
       render:function (){
         $(this.el).find('#left-panel').html(this.panelCT({
