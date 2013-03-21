@@ -8,11 +8,12 @@ define([
   'text!templates/home/homeTemplate.html',
   'text!templates/home/whatsNewTemplate.html',
   'text!templates/home/lastVisitTemplate.html',
-  'helpers/ScreenHelper'
+  'helpers/ScreenHelper',
+  'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, sw, Handlebars, ItemsCollection, 
-    homeTemplate, whatsNewTemplate, lastVisitTemplate, ScreenHelper){
+    homeTemplate, whatsNewTemplate, lastVisitTemplate, ScreenHelper, CategoryHelper){
 
     var HomeView = Backbone.View.extend({
       el: "#home",
@@ -26,6 +27,8 @@ define([
 
       initialize: function(options){
         document.title = "OLX Mobile";
+
+        CategoryHelper.setCategory(0);
         
         this.dfd = null || options.deferred;
 
@@ -34,11 +37,11 @@ define([
         this.whatsNewCT = Handlebars.compile(whatsNewTemplate);
         this.lastVisitCT = Handlebars.compile(lastVisitTemplate);
 
-        this.whatsNewItems = new ItemsCollection({country_id:1},{},{"item_type":"adsList"});
+        this.whatsNewItems = new ItemsCollection({countryId:1},{},{"item_type":"adsList"});
         this.whatsNewItems.on('sync',_.bind(this.items_success, this));
         this.whatsNewItems.fetch();
 
-        this.lastVisitedItems = new ItemsCollection({country_id:1},{},{"item_type":"adsList"});
+        this.lastVisitedItems = new ItemsCollection({countryId:1},{},{"item_type":"adsList"});
         this.lastVisitedItems.on('sync',_.bind(this.items_success, this));
         this.lastVisitedItems.fetch();
         

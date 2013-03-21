@@ -11,20 +11,24 @@ define([
      	initialize: function(query_options, url_options, item_options){
         this.query_opts = null || query_options;
         
-        var category = {"categoryId":CategoryHelper.getCategory()};
-        this.query_opts = JSONHelper.concatJSON(query_options, category);
+        if(CategoryHelper.getCategory()!=0){
+          var category = {"categoryId":CategoryHelper.getCategory()};
+          this.query_opts = JSONHelper.concatJSON(query_options, category);
+        }
 
         this.url_options = null || url_options;
         this.item_options = null || item_options;
       },
+
       model: ItemModel,
+
       url: function(){
         var response;
 
         //***********-----------------------
         //WARNING!!:
         //Comment or DELETE the following line in order to get the right logic.
-        this.item_options.item_type='adsList';
+        //this.item_options.item_type='adsList';
         //***********-----------------------
 
         switch(this.item_options.item_type){
@@ -36,7 +40,7 @@ define([
             response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + this.url_options.user_id + '/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
           break;
           case "myFavorites":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + this.url_options.user_id + '/favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + 'favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize+'&token=' +this.query_opts.token;
           break;
         }
         return response;
