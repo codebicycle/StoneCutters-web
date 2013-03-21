@@ -29,7 +29,7 @@ define([
         this.pageSize =  10;
         this.user_id = this.Storage.get("userObj").id;
 
-        this.opts = {user_id:this.user_id, offset:MyMessageListView.__super__.offset, pageSize: this.pageSize};
+        this.opts = {user_id:this.user_id, offset:MyMessageListView.__super__.offset, pageSize: this.pageSize, token:this.Storage.get("userObj").authToken};
 
         this.messages = new MessagesCollection(this.opts);
         MyMessageListView.__super__.collection =this.messages;
