@@ -46,21 +46,26 @@ define([
         if (options.cat_id)
           CategoryHelper.setCategory(parseInt(options.cat_id,10));
 
-        var ops = {country_id: 1, offset:AdsListView.__super__.offset, pageSize: this.pageSize};
-        ops = JSONHelper.concatJSON(ops, this.params)
-
+        var ops = {countryId: 1, offset:AdsListView.__super__.offset, pageSize: this.pageSize};
         delete this.params["q"];
+
+
+        ops = JSONHelper.concatJSON(ops, this.params)
+        
+        if(this.query){
+          ops = JSONHelper.concatJSON(ops, {"searchQuery":this.query});
+        }
+        
         delete this.params["sort"];
 
         var Opts = Backbone.Model.extend();
-        this.opts = new Opts(ops);
-        this.opts.on('change', this.updateItems, this);
+        this.query_options = new Opts(ops);
+        this.query_options.on('change', this.updateItems, this);
 
-        AdsListView.__super__.collection = new ItemsCollection(this.opts.toJSON(),{},{"item_type":"adsList"});
+        AdsListView.__super__.collection = new ItemsCollection(this.query_options.toJSON(),{},{"item_type":"adsList"});
         this.items = AdsListView.__super__.collection;
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
-
 
         //Debug Code
         /*
@@ -77,11 +82,11 @@ define([
         */
         //END Debug Code
 
-        this.filters = new FiltersCollection(this.opts.toJSON());
+        this.filters = new FiltersCollection(this.query_options.toJSON());
         this.filters.on('sync',_.bind(this.filters_success, this));
         this.filters.fetch();
 
-        this.sorts = new SortsCollection(this.opts.toJSON());
+        this.sorts = new SortsCollection(this.query_options.toJSON());
         this.sorts.on('sync',_.bind(this.sorts_success, this));
         this.sorts.fetch();
 
@@ -118,18 +123,18 @@ define([
 
         $(this.el).find('#content').trigger('create');
 
-        $('a[class*=filter]').click({opts: this.opts},function(ev){
+        $('a[class*=filter]').click({opts: this.query_options},function(ev){
           var filter = $(ev.currentTarget).closest('ul').data('filtername');
           var value = $(ev.currentTarget).html();
           ev.data.opts.set(filter,value);
         });
 
-        $('a[class*=sort]').click({opts: this.opts},function(ev){
+        $('a[class*=sort]').click({opts: this.query_options},function(ev){
           var sort = $(ev.currentTarget).data('sortname');
           ev.data.opts.set("sort",sort);
         });
 
-        $('a[class*=remove-filter]').click({opts: this.opts},function(ev){
+        $('a[class*=remove-filter]').click({opts: this.query_options},function(ev){
           var filter = $(ev.currentTarget).data('filtername');
           ev.data.opts.unset(filter);
         });
