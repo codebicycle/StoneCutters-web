@@ -443,3 +443,129 @@ div#content div#itempage {
 		font-size: 10pt;
 		text-align: center;
 	}
+
+
+/* Category Listing
+---------------------------------------------------------------------- */
+ul#ads-list {
+	box-shadow: none;
+}
+
+ul#ads-list li {
+	border: 1px solid #e6e2e1;
+	background: #f8f2f2;
+	margin-bottom: 15px;
+	padding: 0;
+}
+
+	ul#ads-list div.listingContainer div.left,
+	ul#ads-list div.listingContainer div.right {
+		display: table-cell;
+	}
+
+	ul#ads-list div.listingContainer div.left {
+		width: 100px;
+	}
+
+
+	ul#ads-list div.listingContainer div.right {
+		width: 190px;
+		vertical-align: top;
+	}
+
+		ul#ads-list div.listingContainer div.left a {
+			margin: 0;
+		}
+		ul#ads-list div.listingContainer div.left img{
+			height: 70px;
+			width: 70px;
+			margin: 15px;
+			border: 1px solid #e6e2e1;
+		}
+
+		ul#ads-list div.listingContainer div.right div.rowTitle {
+			margin: 15px;
+			margin-bottom: 0;
+			height: 50px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowTitle a {
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+
+			ul#ads-list div.listingContainer div.right div.rowTitle h2 {
+				margin: 0;
+				padding: 0;
+				max-height: 45px;
+				font-weight: normal;
+				white-space: normal;
+				text-align: left;
+				font-size: 12pt;
+			}
+
+		ul#ads-list div.listingContainer div.right div.rowInfo {
+			margin: 15px;
+			margin-top: 0;
+			margin-bottom: 0;
+			height: 20px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.location,
+			ul#ads-list div.listingContainer div.right div.rowInfo div.displayPrice {
+				width: 50%;
+				height: 20px;
+				font-size: 9pt;
+				padding-top: 5px;
+			}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.location {
+				float: left;
+				color: #666666;
+			}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.displayPrice {
+				float: right;
+				text-align: right;
+				color: #fe7702;
+				font-weight: bold;
+			}
+
+
+@media only screen and (min-device-width: 700px) {
+
+	ul#ads-list div.listingContainer div.left {
+		width: 200px;
+	}
+
+
+	ul#ads-list div.listingContainer div.right {
+		width: 500px;
+	}
+
+		ul#ads-list div.listingContainer div.left img{
+			height: 150px;
+			width: 150px;
+		}
+
+		ul#ads-list div.listingContainer div.right div.rowTitle {
+			height: 110px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowTitle h2 {
+				max-height: 110px;
+				font-size: 18pt;
+			}
+
+		ul#ads-list div.listingContainer div.right div.rowInfo {
+			height: 40px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.location,
+			ul#ads-list div.listingContainer div.right div.rowInfo div.displayPrice {
+				font-size: 14pt;
+				padding-top: 10px;
+			}
+
+}

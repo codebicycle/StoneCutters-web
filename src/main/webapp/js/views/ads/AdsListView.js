@@ -61,6 +61,22 @@ define([
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
 
+
+        //Debug Code
+        /*
+        var collection = Backbone.Collection.extend();
+        this.items = new collection([ {"id":"484949563", "location":"Paris",      "displayPrice":"$125.99", "title":"Chihuahua Puppies For Sale","thumbImage":"http://petliferadio.com/doggydog.jpg"},
+                                      {"id":"484949178", "location":"Paris",      "displayPrice":"$200.00", "title":"Gun Dog Stud Many Willowyck & Drakeshead Lns","thumbImage":"http://www.cck9.com/wp-content/uploads/2009/09/German-shepherd-protection-dogs-CCK9-Blog-300x300.jpg"},
+                                      {"id":"484940969", "location":"Marseille",  "displayPrice":"$549.99", "title":"Siberian Husky Female Puppy For Sale","thumbImage":"http://static.ddmcdn.com/gif/bad-dog-training-behavior-300.jpg"},
+                                      {"id":"484940652", "location":"Lyon",       "displayPrice":"$110.00", "title":"Black And Yellow Labrador Puppies","thumbImage":"http://assets.archivhadas.es/system/tog_forum/topics/images/5395/big_perro-dog-cl.jpg"},
+                                      {"id":"484939846", "location":"Nantes",     "displayPrice":"$80.55",  "title":"11 Week Old Kc Reg Lab Dog For Sale","thumbImage":"http://dogwalking.dogster.com/wp-content/themes/alcottTheme/uploads/Dog-Park-Safety.jpg"},
+                                      {"id":"484937518", "location":"Lyon",       "displayPrice":"$166.80", "title":"Stunning Litter Of K.c","thumbImage":"http://img.ehowcdn.com/article-new/ehow/images/a04/qu/7b/signs-symptoms-dog-food-poisoning-800x800.jpg"},
+                                      {"id":"484936416", "location":"Marseille",  "displayPrice":"$210.00", "title":"Barney At Wolfabulls Bulldogs","thumbImage":"http://www.theworld.org/wp-content/uploads/Q-dog-300x300.jpg"},
+                                    ]);
+
+        */
+        //END Debug Code
+
         this.filters = new FiltersCollection(this.opts.toJSON());
         this.filters.on('sync',_.bind(this.filters_success, this));
         this.filters.fetch();
