@@ -61,6 +61,12 @@ a#toggle-search {
 #cat-button  {
 	background: url(images/arwen-bars.png);
 }
+
+#cat-button.off  {
+	background: url(images/arwen-x.png);
+}
+
+
 #toggle-search {
 	background: url(images/img_search.png);
 }
