@@ -39,7 +39,7 @@ define(['views/base/BaseView','spec/SinonHelper', 'models/user',],
 						page.render();
 
 		      			//BaseView Expectations
-			      		expect($('#myolx-link').html()).toBe("My OLX - Pedro Perez");
+			      		expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
 					}, this));
 
 	      			view = new BaseView({'deferred': dfd});
