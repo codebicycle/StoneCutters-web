@@ -9,7 +9,7 @@ define([
     var SortCollection = Backbone.Collection.extend({
       model: SortModel,
       initialize: function(options){
-        this.countryId = options.country_id;
+        this.countryId = options.countryId;
         this.query = options.q;
       },
       url: function(){
