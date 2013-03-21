@@ -569,3 +569,70 @@ ul#ads-list li {
 			}
 
 }
+
+
+/* Forms
+---------------------------------------------------------------------- */
+
+form.form div.ui-input-text.ui-shadow-inset.ui-corner-all.ui-btn-shadow.ui-body-c{
+	box-shadow: none;
+	border: 1px solid #e4e3e1;
+	background: #f8f2f2;
+	padding: 8px;
+	margin-bottom: 15px;
+}
+
+	form.form input.ui-input-text.ui-body-c {
+		font-size: 9pt;
+		color: #666666;
+	}
+
+
+form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c,
+form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c {
+	box-shadow: none;
+	background: #666666;
+	border: 0;
+	border-radius: 0;
+	width: 40%;
+	padding: 5px;
+}
+
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c span,
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c span {
+		font-size: 9pt;
+		color: #ffffff;
+		border: 0;
+	}
+
+a#register-link {
+	border-radius: 0;
+	box-shadow: none;
+	background: #9e70b1;
+	text-decoration: none;
+	padding: 5px;
+}
+
+	a#register-link span {
+		color: #ffffff;
+		font-size: 9pt;
+		border: 0;
+	}
+
+
+@media only screen and (min-device-width: 700px) {
+
+	form.form input.ui-input-text.ui-body-c {
+		font-size: 12pt;
+	}
+
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c span,
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c span {
+		font-size: 12pt;
+	}
+
+	a#register-link span {
+		font-size: 12pt;
+	}
+
+}
