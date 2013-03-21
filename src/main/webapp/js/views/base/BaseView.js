@@ -64,6 +64,7 @@ define([
         $('#search-bar').change(function(){
           window.location = "#search?q=" + $('#search-bar').val();
         });
+        
       },
       render:function (){
         $(this.el).find('#left-panel').html(this.panelCT({
@@ -130,7 +131,6 @@ define([
       doneSearch: function(){
         $("#search-bar-div").hide();
         $('#search-bar').val("");
-        $('#toggle-search .ui-btn-text').text('Search');
       },
       changeCategories: function(categories){
         this.loadCategories.reset(categories);

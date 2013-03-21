@@ -30,9 +30,9 @@ define(['views/base/BaseView','spec/SinonHelper'], function(BaseView,SinonHelper
 					page.render(); 
 
 	      			//Categories's Expectations
-		      		expect($($('#home #left-panel-list li a')[4]).html()).toBe("For Sale"); 
-		      		expect($($('#home #left-panel-list li a')[5]).html()).toBe("Vehicles");
-		      		expect($('#home  #left-panel-list li a').length).toBe(6);
+		      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("For Sale"); 
+		      		expect($($('#home #left-panel-list li a')[2]).html()).toBe("Vehicles");
+		      		expect($('#home  #left-panel-list li a').length).toBe(3);
 				}, this));
 
 	 			view = new BaseView({'deferred': dfd});

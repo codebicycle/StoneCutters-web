@@ -5,10 +5,11 @@ define([
   'swipe',
   'handlebars',
   'models/item',
-  'text!templates/item/itemTemplate.html'
+  'text!templates/item/itemTemplate.html',
+  'helpers/ScreenHelper'
   ], 
 
-  function($,_, Backbone, sw, Handlebars, ItemModel, itemTemplate){
+  function($,_, Backbone, sw, Handlebars, ItemModel, itemTemplate, ScreenHelper){
 
     var ItemView = Backbone.View.extend({
       el: "#home",
@@ -76,7 +77,7 @@ define([
                             //startSlide: 2,
                             //speed: 400,
                             //auto: 3000,
-                            'items':2, //this should be set according to the device's width
+                            'items':ScreenHelper.getImgsNum(),
                             'callback': function(event, index, elem) {
                             }
         });
@@ -84,10 +85,15 @@ define([
                             //startSlide: 2,
                             //speed: 400,
                             //auto: 3000,
-                            'items':2, //this should be set according to the device's width
+                            'items':ScreenHelper.getImgsNum(),
                             'callback': function(event, index, elem) {
                             }
         });
+
+        $(window).resize(_.bind(function() {
+          this.slider.items = ScreenHelper.getImgsNum();
+          this.sliderRelated.items = ScreenHelper.getImgsNum();
+        },this));
 
         return this;
       },
