@@ -4,7 +4,7 @@
 
 ## What is it?
 
-ARWEN is the new Olx's web application, which can be browsed by almost all new market's  smartphones.
+ARWEN is the new Olx's web application, which is being built using the latest web technologies.
 
 ## The Latest Version
 
