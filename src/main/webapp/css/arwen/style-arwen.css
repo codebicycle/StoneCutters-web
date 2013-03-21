@@ -458,11 +458,49 @@ ul#ads-list {
 }
 
 ul#ads-list li {
-	border: 1px solid #e6e2e1;
-	background: #f8f2f2;
 	margin-bottom: 15px;
 	padding: 0;
 }
+
+	ul#ads-list div.listingStatus {
+		width: 100%;
+		border: 1px solid #e6e2e1;
+		margin: 0;
+		padding: 0;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-align: center;
+		font-size: 8pt;
+		text-transform: uppercase;
+		color: #ffffff;
+		font-weight: bold;
+	}
+
+		ul#ads-list div.rejected {
+			background: #ee3030;
+			border-color: #b81d1b; 
+		}
+
+		ul#ads-list div.active {
+			background: #01cd5e;
+			border-color: #00a94e; 
+		}
+
+		ul#ads-list div.close {
+			background: #000000;
+			border-color: #666666; 
+		}
+
+		ul#ads-list div.pending {
+			background: #ffcd0c;
+			border-color: #fdb400; 
+		}
+
+	ul#ads-list div.listingContainer {
+		border: 1px solid #e6e2e1;
+		background: #f8f2f2;
+		width: 100%;
+	}
 
 	ul#ads-list div.listingContainer div.left,
 	ul#ads-list div.listingContainer div.right {
@@ -485,12 +523,13 @@ ul#ads-list li {
 		ul#ads-list div.listingContainer div.left img{
 			height: 70px;
 			width: 70px;
-			margin: 15px;
+			margin: 10px;
 			border: 1px solid #e6e2e1;
 		}
 
 		ul#ads-list div.listingContainer div.right div.rowTitle {
 			margin: 15px;
+			margin-left: 0;
 			margin-bottom: 0;
 			height: 50px;
 		}
@@ -513,6 +552,7 @@ ul#ads-list li {
 
 		ul#ads-list div.listingContainer div.right div.rowInfo {
 			margin: 15px;
+			margin-left: 0;
 			margin-top: 0;
 			margin-bottom: 0;
 			height: 20px;
@@ -540,6 +580,13 @@ ul#ads-list li {
 
 
 @media only screen and (min-device-width: 700px) {
+
+	ul#ads-list div.listingStatus {
+		width: 100%;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		font-size: 12pt;
+	}
 
 	ul#ads-list div.listingContainer div.left {
 		width: 200px;
