@@ -1,6 +1,6 @@
 #ARWEN (Advanced Rest Webapp Enhanced Notoriously)
 
-![ARWEN](http://images2.wikia.nocookie.net/__cb20060312224343/lotr/images/3/35/Arwen_sword.PNG "ARWEN")
+![ARWEN](http://data.whicdn.com/images/33934659/tumblr_m7wnipncvl1qfpva2o1_500_large.gif "ARWEN")
 
 ## What is it?
 
