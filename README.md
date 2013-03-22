@@ -2,6 +2,8 @@
 
 ![ARWEN](http://data.whicdn.com/images/33934659/tumblr_m7wnipncvl1qfpva2o1_500_large.gif "ARWEN")
 
+Nîn o Chithaeglir lasto beth daer; Rimmo nîn Bruinen dan in Ulaer!
+
 ## What is it?
 
 ARWEN is the new Olx's web application, which is being built using the latest web technologies.
