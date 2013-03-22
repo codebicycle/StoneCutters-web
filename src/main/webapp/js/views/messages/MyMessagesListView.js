@@ -21,7 +21,7 @@ define([
         
         /*Compile the template using Handlebars micro-templating*/
         this.messagesCT = Handlebars.compile(messagesListTemplate);
-        MyMessageListView.__super__.moreTemplate = Handlebars.compile(messagesMoreListTemplate);
+        MyMessageListView.__super__.listTemplate = Handlebars.compile(messagesMoreListTemplate);
 
         this.dfd = null || options.deferred;
 
