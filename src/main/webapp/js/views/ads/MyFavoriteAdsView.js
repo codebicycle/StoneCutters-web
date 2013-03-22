@@ -7,12 +7,12 @@ define([
   'collections/filters',
   'collections/sorts',
   'text!templates/ads/myFavoriteAdsTemplate.html',
-  'text!templates/ads/adsListTemplate.html',
+  'text!templates/ads/myFavoriteAdsListTemplate.html',
   'views/scroll/ScrollView'
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
-    SortsCollection, MyAdsListTemplate,adsMoreListTemplate, ScrollView){
+    SortsCollection, myFavoriteAdsTemplate,myFavoriteAdsListTemplate, ScrollView){
 
     var MyFavoritesAdsListView = ScrollView.extend({
       el: "#home",
@@ -23,8 +23,8 @@ define([
       initialize: function(options){
         
         /*Compile the template using Handlebars micro-templating*/
-        this.adsCT = Handlebars.compile(MyAdsListTemplate);
-        MyFavoritesAdsListView.__super__.listTemplate= Handlebars.compile(adsMoreListTemplate);
+        this.myFavCT = Handlebars.compile(myFavoriteAdsTemplate);
+        this.myFavListCT= MyFavoritesAdsListView.__super__.listTemplate= Handlebars.compile(myFavoriteAdsListTemplate);
 
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
@@ -47,9 +47,10 @@ define([
       },
 
       render:function () {
-        $(this.el).find('#content').html(this.adsCT({'items': this.items.toJSON()}));
+        $(this.el).find('#content').html(this.myFavCT());
+        $(this.el).find('#ads-list').html(this.myFavListCT({'items': this.items.toJSON()}));
         $(this.el).find('#content').trigger('create');
-         return this;
+        return this;
       },
 
       items_success: function(model, response)  {
