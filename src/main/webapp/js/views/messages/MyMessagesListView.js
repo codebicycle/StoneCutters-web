@@ -5,11 +5,11 @@ define([
   'handlebars',
   'collections/messages',
   'views/scroll/ScrollView',
-  'text!templates/message/messagesListTemplate.html',
-  'text!templates/message/messagesMoreListTemplate.html'
+  'text!templates/message/messagesTemplate.html',
+  'text!templates/message/messagesListTemplate.html'
   ], 
 
-  function($,_, Backbone, Handlebars, MessagesCollection, ScrollView, messagesListTemplate,messagesMoreListTemplate){
+  function($,_, Backbone, Handlebars, MessagesCollection, ScrollView, messagesTemplate,messagesListTemplate){
 
     var MyMessageListView = ScrollView.extend({
       el: "#home",
@@ -20,8 +20,8 @@ define([
       initialize: function(options){
         
         /*Compile the template using Handlebars micro-templating*/
-        this.messagesCT = Handlebars.compile(messagesListTemplate);
-        MyMessageListView.__super__.listTemplate = Handlebars.compile(messagesMoreListTemplate);
+        this.messagesCT = Handlebars.compile(messagesTemplate);
+        this.messagesListCT = MyMessageListView.__super__.listTemplate = Handlebars.compile(messagesListTemplate);
 
         this.dfd = null || options.deferred;
 
@@ -67,6 +67,7 @@ define([
                                  "message":"Morbi dignissim elit eu quam gravida quis feugiat massa dignissim. Donec eget tortor in mauris porttitor tristique."},
 
                                 {"id":"484949522", "from":"Gonzalo Aizpun", "date":"06/11/2012",
+           
                                  "title":"Stunning Litter Of K.c", 
                                  "unread":false,
                                  "message":"Morbi euismod, leo et vulputate placerat, erat sem cursus elit, nec bibendum dui neque a tortor. Suspendisse nisl nisl, dignissim venenatis auctor sagittis, scelerisque nec libero."},
@@ -103,7 +104,8 @@ define([
       },
 
       render:function () {
-        $(this.el).find('#content').html(this.messagesCT({'messages': this.messages.toJSON(), 'search-term': this.query}));
+        $(this.el).find('#content').html(this.messagesCT({'search-term': this.query}));
+        $(this.el).find('#ads-list').html(this.messagesListCT({'messages': this.messages.toJSON()}));
         $(this.el).find('#ads-list').listview();
         return this;
       },
