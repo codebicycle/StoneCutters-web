@@ -689,3 +689,164 @@ a#register-link {
 	}
 
 }
+
+
+/* Message Listing
+---------------------------------------------------------------------- */
+ul#message-list {
+	box-shadow: none;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul#message-list li {
+	margin: 0;
+	margin-bottom: 15px;
+	padding: 0;
+}
+
+	ul#message-list div.listingContainer {
+		border: 1px solid #e6e2e1;
+		background: #f8f2f2;
+		width: 100%;
+		height: 90px;
+	}
+
+	ul#message-list div.listingContainer div.left,
+	ul#message-list div.listingContainer div.right {
+		display: table-cell;
+	}
+
+		ul#message-list div.listingContainer div.left a {
+			padding: 0;
+			margin: 0;
+			text-decoration: none;
+		}
+
+		ul#message-list div.listingContainer div.left h3,
+		ul#message-list div.listingContainer div.left h4,
+		ul#message-list div.listingContainer div.left h5 {
+			padding: 0;
+			margin: 0;
+			margin-left: 15px;
+			margin-right: 15px;
+			width: 185px;
+			color: #666666;
+			font-weight: normal;
+			
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-o-text-overflow: ellipsis;
+		}
+
+		ul#message-list div.listingContainer div.left h3 {
+			margin-top: 15px;
+		}
+
+		ul#message-list div.listingContainer div.left h5 {
+			margin-bottom: 15px;
+		}
+
+		ul#message-list div.listingContainer div.left h3,
+		ul#message-list div.listingContainer div.left h3 a{
+			font-size: 11pt;
+		}
+
+		ul#message-list div.listingContainer div.left h4,
+		ul#message-list div.listingContainer div.left h4 a{
+			font-size: 10pt;
+		}
+
+		ul#message-list div.listingContainer div.left h5,
+		ul#message-list div.listingContainer div.left h5 a{
+			font-size: 8pt;
+		}
+
+		ul#message-list div.listingContainer div.unread h3,
+		ul#message-list div.listingContainer div.unread h4 {
+			font-weight: bold;
+		}
+
+
+		ul#message-list div.listingContainer div.right div.date {
+			clear: both;
+			text-align: right;
+			margin-right: 15px;
+			font-size: 8pt;
+			color: #666666;
+		}
+
+		ul#message-list div.listingContainer div.unread div.date {
+			color: #ab45db;
+		}
+
+		ul#message-list div.listingContainer div.right div.delete {
+			clear: both;
+			text-align: right;
+			margin-right: 15px;
+			margin-top: 15px;
+			width: 15px;
+			height: 18px;
+			float: right;
+			background: url(images/delete01.png) no-repeat;
+		}
+
+		@media screen and (orientation:landscape) {
+
+				ul#message-list div.listingContainer div.left h3,
+				ul#message-list div.listingContainer div.left h4,
+				ul#message-list div.listingContainer div.left h5 {
+					width: 340px;
+				}
+		}
+
+
+@media screen and (min-width: 481px) {
+
+	ul#message-list div.listingContainer {
+		height: 100px;
+	}
+
+		ul#message-list div.listingContainer div.left h3,
+		ul#message-list div.listingContainer div.left h4,
+		ul#message-list div.listingContainer div.left h5 {
+			width: 615px;
+		}
+
+		ul#message-list div.listingContainer div.left h3,
+		ul#message-list div.listingContainer div.left h3 a{
+			font-size: 13pt;
+		}
+
+		ul#message-list div.listingContainer div.left h4,
+		ul#message-list div.listingContainer div.left h4 a{
+			font-size: 12pt;
+		}
+
+		ul#message-list div.listingContainer div.left h5,
+		ul#message-list div.listingContainer div.left h5 a{
+			font-size: 10pt;
+		}
+
+		ul#message-list div.listingContainer div.right div.date {
+			font-size: 10pt;
+		}
+
+		ul#message-list div.listingContainer div.right div.delete {
+			width: 20px;
+			height: 24px;
+			background: url(images/delete01@2x.png) no-repeat;
+		}
+
+}
+
+@media screen and (orientation:landscape) and (min-width: 481px) {
+
+		ul#message-list div.listingContainer div.left h3,
+		ul#message-list div.listingContainer div.left h4,
+		ul#message-list div.listingContainer div.left h5 {
+			width: 865px;
+		}
+}
