@@ -57,7 +57,8 @@ define([
           url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/user/challenge?u='+this.username,
         }).done(_.bind(this.challenge_success, this));
       },
-      challenge_success:function (data){
+      challenge_success:function (response){
+        var data = JSON.parse(response);
         this.challenge = data.challenge;
 
         var md5Hash = CryptoJS.MD5(this.password);
@@ -70,12 +71,14 @@ define([
         }).done(_.bind(this.login_success, this));
         
       },
-      login_success:function (data){
+      login_success:function (response){
+        data = JSON.parse(response);
+
         if (data.token) {
           this.Storage.set("authToken",data.token);
 
           this.user = new User({
-            "username":this.username, 
+            "username":data.username, 
             "authToken": data.token,
             "unreadMessagesCount": data.unreadMessagesCount,
             "favorites": data.favorites,
@@ -85,7 +88,9 @@ define([
 
           this.eventAggregator.trigger("loggedIn");
           window.location = "#";
-        };
+        }else{
+          alert('Wrong Username or password');
+        }
         
       }
     });

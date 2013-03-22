@@ -1,11 +1,17 @@
 define([
   'underscore',
-  'backbone'
-], function(_, Backbone, ConfModel){
+  'backbone',
+  'config/conf'
+], function(_, Backbone, Conf){
  	var MessageModel = Backbone.Model.extend({
   	initialize: function(options){
   		this.id = options.id;
-  	}  	
+  		this.token = options.token;
+  	},
+  	url: function(){
+  		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
+  		'/messages/' + this.id + "?token=" + this.token;
+  	}
   });
   
   // Return the model for the module

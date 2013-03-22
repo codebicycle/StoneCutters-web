@@ -13,8 +13,10 @@ define([
   'views/ads/MyAdsListView',
   'views/ads/MyFavoriteAdsView',
   'views/posting/PostingView',
+  'views/messages/MessageView',
 ], function($, _, Backbone, HomeView, ItemView, AdsListView, LoginView, 
-  RegisterView, TermsView, MyMessagesListView, MyAdsListView, MyFavoritesView, PostingView) {
+  RegisterView, TermsView, MyMessagesListView, MyAdsListView, MyFavoritesView, 
+  PostingView, MessageView) {
   
   var AppRouter = Backbone.Router.extend({
     routes:{
@@ -27,6 +29,7 @@ define([
         "post": "showPosting",
         "terms": "showTerms",
         "mymessages": "showMyMessages",
+        "message/:messageId": "showMessage",
         "myads": "showMyAds",
         "myfavs": "showMyFavorites",
         "*path":  "defaultRoute"
@@ -117,6 +120,14 @@ define([
       new MyMessagesListView({'deferred': dfd});
     },
 
+    showMessage: function(messageId){
+      console.log('/message/'+messageId);
+
+      var dfd = $.Deferred().done(this.changePage);
+
+      new MessageView({'deferred': dfd, 'id': messageId});
+    },
+
     showMyAds: function(){
       console.log('/myads');
 
@@ -146,17 +157,7 @@ define([
 
       window.prevPage = page;
 
-      $(page.el).attr('data-role', 'page');
       page.render();
-      $('body').append($(page.el));
-      var transition = $.mobile.defaultPageTransition;
-      
-      // We don't want to slide the first page
-      if (this.firstPage) {
-          transition = 'none';
-          this.firstPage = false;
-      }
-      $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
     }
   });
   

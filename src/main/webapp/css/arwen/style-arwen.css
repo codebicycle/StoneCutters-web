@@ -22,8 +22,13 @@ div#header.ui-header.ui-bar-a {
 	background: #0076be;
 	border: 0;
 	border-top: #015385 solid 1px;
-	border-bottom: #015385 solid 1px;
 
+}
+
+div#header div.headerBorder {
+	width: 100%;
+	border-top: #015385 solid 1px;
+	height: 1px;
 }
 
 /* categories btn & search btn */
@@ -56,6 +61,12 @@ a#toggle-search {
 #cat-button  {
 	background: url(images/arwen-bars.png);
 }
+
+#cat-button.off  {
+	background: url(images/arwen-x.png);
+}
+
+
 #toggle-search {
 	background: url(images/img_search.png);
 }
@@ -233,5 +244,448 @@ div.swipe ul li div.tooltip h5 {
 }
 
 
+/* Breadcrumb
+---------------------------------------------------------------------- */
+div#breadcrumb {
+	background: #f8f2f2;
+	color: #666666;
+	width: 100%;
+	padding: 15px;
+}
+
+	div#breadcrumb h3 {
+		margin: 0;
+		margin-right: 15px;
+		padding: 0;
+		display: inline-block;
+	}
+
+	div#breadcrumb h3 a {
+		text-decoration: none;
+		margin-left: 30px;
+		font-size: 14pt;
+		font-weight: normal;
+		color: #666666;
+	}
+
+		div#breadcrumb h3.category a {
+			margin-left: 20px;			
+		}
+
+	div#breadcrumb h3.parent {
+		background: url(images/back01.png) no-repeat left center;
+	}
+
+	div#breadcrumb h3.category {
+		background: url(images/next01.png) no-repeat left center;
+	}
 
 
+/* ItemPage
+---------------------------------------------------------------------- */
+
+div#content div#itempage {
+
+	border: 1px solid #e6e2e1;
+	background: #f8f2f2;
+	margin-top: 15px;
+	padding: 15px;
+	color: #666666;
+
+}
+
+	div#content div#itempage div {
+		width: 100%;
+	}
+
+	/* Reset */
+
+	div#content div#itempage h1,
+	div#content div#itempage h2,
+	div#content div#itempage h3,
+	div#content div#itempage h4,
+	div#content div#itempage h5 {
+		margin: 0;
+		margin-bottom: 15px;
+		padding: 0;
+	}
+
+
+	/* ______________ Title Price Box _________________________ */
+
+	div#content div#itempage div.title h1 {
+		text-align: left;
+		font-weight: normal;
+		font-size: 18pt;
+		margin-bottom: 5px;
+	}
+
+	div#content div#itempage div.title h4 {
+		text-align: left;
+		font-weight: normal;
+		font-size: 14pt;
+		color: #fd7801;
+	}
+
+	/* ______________ Action Box _________________________ */
+	div#content div#itempage div.actions {
+		margin-bottom: 15px;
+	}
+
+	div#content div#itempage div.actions div.date {
+		width: auto;
+		float: left;
+		font-size: 10pt;
+		font-weight: normal;
+		
+		background: url(images/date01.png) no-repeat left top;
+		padding-left: 25px;
+		margin-top: 10px;
+	}
+
+	div#content div#itempage div.actions div.share,
+	div#content div#itempage div.actions div.addFavorite {
+		float: right;
+		height: 35px;
+	}
+
+	div#content div#itempage div.actions div.share {
+		width: 30px;
+		background: url(images/share01.png) no-repeat left top;
+		margin-right: 20px;
+	}
+
+	div#content div#itempage div.actions div.addFavorite {
+		width: 40px;
+		background: url(images/favorite01.png) no-repeat left top;
+	}
+
+	/* ______________ Optional Box _________________________ */
+	div#content div#itempage div.optionals {
+		margin-bottom: 15px;
+		border-top: 1px solid #d2d2d2;
+		border-bottom: 1px solid #d2d2d2;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		font-size: 10pt;
+	}
+
+
+	/* ______________ Generic Title Box _______________________ */
+	div#content div#itempage div.titleBox {
+		width: 100%;
+		background: #c6c6c6;
+	}
+
+	div#content div#itempage div.titleBox h3 {
+		color: #ffffff;
+		padding: 10px;
+		font-weight: normal;
+		font-size: 12pt;
+	}
+
+	/* ______________ Description Box _________________________ */
+	div#content div#itempage div.description {
+		margin-bottom: 15px;
+		font-size: 10pt;
+	}
+
+	/* ______________ Location Box _________________________ */
+	div#content div#itempage div.location {
+		margin-bottom: 15px;
+	}
+
+		div#content div#itempage div.location h4 {
+			font-size: 12pt;
+			font-weight: normal;
+			padding-left: 20px;
+			background: url(images/site01.png) left center no-repeat;
+		}
+
+		div#content div#itempage div.location div.map {
+			height: 150px;
+			background-position: center center;
+		}
+
+	/* ______________ phoneActions Box _________________________ */
+	div#content div#itempage div.phoneActions {
+		margin-bottom: 15px;
+		background: #ffffff;
+		border: 1px solid #cdcdcd;
+	}	
+
+	div#content div#itempage div.phoneActions div.call,
+	div#content div#itempage div.phoneActions div.sms,
+	div#content div#itempage div.phoneActions div.message {
+		margin: 0;
+		margin-top: 15px;
+		margin-bottom: 5px;
+		float: left;
+		width: 33%;
+		height: 55px;
+	}
+
+		div#content div#itempage div.phoneActions div.call {
+			background: url(images/call01.png) center center no-repeat;
+			
+		}
+		div#content div#itempage div.phoneActions div.sms {
+			border-right: 1px solid #cdcdcd;
+			border-left: 1px solid #cdcdcd;
+			background: url(images/sms01.png) center center no-repeat;
+		}
+		div#content div#itempage div.phoneActions div.message {
+			background: url(images/message01.png) center center no-repeat;
+		}
+
+	div#content div#itempage div.phoneActions div.callTitle,
+	div#content div#itempage div.phoneActions div.smsTitle,
+	div#content div#itempage div.phoneActions div.messageTitle {
+		margin: 0;
+		margin-bottom: 15px;
+		float: left;
+		width: 33%;
+		height: 20px;
+		font-size: 10pt;
+		text-align: center;
+	}
+
+
+/* Category Listing
+---------------------------------------------------------------------- */
+ul#ads-list {
+	box-shadow: none;
+}
+
+ul#ads-list li {
+	margin-bottom: 15px;
+	padding: 0;
+}
+
+	ul#ads-list div.listingStatus {
+		width: 100%;
+		border: 1px solid #e6e2e1;
+		margin: 0;
+		padding: 0;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-align: center;
+		font-size: 8pt;
+		text-transform: uppercase;
+		color: #ffffff;
+		font-weight: bold;
+	}
+
+		ul#ads-list div.rejected {
+			background: #ee3030;
+			border-color: #b81d1b; 
+		}
+
+		ul#ads-list div.ready {
+			background: #01cd5e;
+			border-color: #00a94e; 
+		}
+
+		ul#ads-list div.close {
+			background: #000000;
+			border-color: #666666; 
+		}
+
+		ul#ads-list div.pending {
+			background: #ffcd0c;
+			border-color: #fdb400; 
+		}
+
+	ul#ads-list div.listingContainer {
+		border: 1px solid #e6e2e1;
+		background: #f8f2f2;
+		width: 100%;
+	}
+
+	ul#ads-list div.listingContainer div.left,
+	ul#ads-list div.listingContainer div.right {
+		display: table-cell;
+	}
+
+	ul#ads-list div.listingContainer div.left {
+		width: 100px;
+	}
+
+
+	ul#ads-list div.listingContainer div.right {
+		width: 190px;
+		vertical-align: top;
+	}
+
+		ul#ads-list div.listingContainer div.left a {
+			margin: 0;
+		}
+		ul#ads-list div.listingContainer div.left img{
+			height: 70px;
+			width: 70px;
+			margin: 10px;
+			border: 1px solid #e6e2e1;
+		}
+
+		ul#ads-list div.listingContainer div.right div.rowTitle {
+			margin: 15px;
+			margin-left: 0;
+			margin-bottom: 0;
+			height: 50px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowTitle a {
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
+			}
+
+			ul#ads-list div.listingContainer div.right div.rowTitle h2 {
+				margin: 0;
+				padding: 0;
+				max-height: 45px;
+				font-weight: normal;
+				white-space: normal;
+				text-align: left;
+				font-size: 12pt;
+			}
+
+		ul#ads-list div.listingContainer div.right div.rowInfo {
+			margin: 15px;
+			margin-left: 0;
+			margin-top: 0;
+			margin-bottom: 0;
+			height: 20px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.location,
+			ul#ads-list div.listingContainer div.right div.rowInfo div.displayPrice {
+				width: 50%;
+				height: 20px;
+				font-size: 9pt;
+				padding-top: 5px;
+			}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.location {
+				float: left;
+				color: #666666;
+			}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.displayPrice {
+				float: right;
+				text-align: right;
+				color: #fe7702;
+				font-weight: bold;
+			}
+
+
+@media only screen and (min-device-width: 700px) {
+
+	ul#ads-list div.listingStatus {
+		width: 100%;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		font-size: 12pt;
+	}
+
+	ul#ads-list div.listingContainer div.left {
+		width: 200px;
+	}
+
+
+	ul#ads-list div.listingContainer div.right {
+		width: 100%;
+	}
+
+		ul#ads-list div.listingContainer div.left img{
+			height: 150px;
+			width: 150px;
+		}
+
+		ul#ads-list div.listingContainer div.right div.rowTitle {
+			height: 110px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowTitle h2 {
+				max-height: 110px;
+				font-size: 18pt;
+			}
+
+		ul#ads-list div.listingContainer div.right div.rowInfo {
+			height: 40px;
+		}
+
+			ul#ads-list div.listingContainer div.right div.rowInfo div.location,
+			ul#ads-list div.listingContainer div.right div.rowInfo div.displayPrice {
+				font-size: 14pt;
+				padding-top: 10px;
+			}
+
+}
+
+
+/* Forms
+---------------------------------------------------------------------- */
+
+form.form div.ui-input-text.ui-shadow-inset.ui-corner-all.ui-btn-shadow.ui-body-c{
+	box-shadow: none;
+	border: 1px solid #e4e3e1;
+	background: #f8f2f2;
+	padding: 8px;
+	margin-bottom: 15px;
+}
+
+	form.form input.ui-input-text.ui-body-c {
+		font-size: 9pt;
+		color: #666666;
+	}
+
+
+form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c,
+form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c {
+	box-shadow: none;
+	background: #666666;
+	border: 0;
+	border-radius: 0;
+	width: 40%;
+	padding: 5px;
+}
+
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c span,
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c span {
+		font-size: 9pt;
+		color: #ffffff;
+		border: 0;
+	}
+
+a#register-link {
+	border-radius: 0;
+	box-shadow: none;
+	background: #9e70b1;
+	text-decoration: none;
+	padding: 5px;
+}
+
+	a#register-link span {
+		color: #ffffff;
+		font-size: 9pt;
+		border: 0;
+	}
+
+
+@media only screen and (min-device-width: 700px) {
+
+	form.form input.ui-input-text.ui-body-c {
+		font-size: 12pt;
+	}
+
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c span,
+	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c span {
+		font-size: 12pt;
+	}
+
+	a#register-link span {
+		font-size: 12pt;
+	}
+
+}

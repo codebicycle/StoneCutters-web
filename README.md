@@ -1,10 +1,14 @@
 #ARWEN (Advanced Rest Webapp Enhanced Notoriously)
 
-![ARWEN](http://images2.wikia.nocookie.net/__cb20060312224343/lotr/images/3/35/Arwen_sword.PNG "ARWEN")
+![ARWEN](http://data.whicdn.com/images/33934659/tumblr_m7wnipncvl1qfpva2o1_500_large.gif "ARWEN")
+
+Nîn o Chithaeglir lasto beth daer; Rimmo nîn Bruinen dan in Ulaer!
+
+Waters of the Misty Mountains listen to the great word; flow waters of Loudwater against the Ringwraiths!
 
 ## What is it?
 
-ARWEN is the new Olx's web application, which can be browsed by almost all new market's  smartphones.
+ARWEN is the new Olx's web application, which is being built using the latest web technologies.
 
 ## The Latest Version
 

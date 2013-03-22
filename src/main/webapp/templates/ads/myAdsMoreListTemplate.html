@@ -1,13 +1,12 @@
-<ul id="ads-list" data-role="listview" data-inset="true">
 {{#items}}
         <li data-icon="false">
-            {{#if status}}
-            <div class="listingStatus {{status}}">{{status}}</div>
+            {{#if adStatus}}
+            <div class="listingStatus {{adStatus}}">{{adStatus}}</div>
             {{/if}}
             <div class="listingContainer">
                 <div class="left">
                     <a href="#item/{{id}}">
-                    	<img src="{{#if thumbImage}}{{thumbImage}}{{else}}css/arwen/images/img_no_pic.png{{/if}}">
+                        <img src="{{#if thumbImage}}{{thumbImage}}{{else}}css/arwen/images/img_no_pic.png{{/if}}">
                     </a>
                 </div>
                 <div class="right">
@@ -22,4 +21,3 @@
             </div>
         </li>
 {{/items}}
-</ul>

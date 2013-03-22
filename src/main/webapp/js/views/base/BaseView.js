@@ -16,11 +16,12 @@ define([
       el: "#home",
 
       events:{
-        'click .cat-link': "refreshList",
-        'click #p-cat-link': "showParentCategories",
-        'click #toggle-search': "toggleSearch",
-        'click #myolx-link' : "toggleMyOLXCats",
-        'click #logout-link' : "logout"
+        'click .cat-link': 'refreshList',
+        'click #p-cat-link': 'showParentCategories',
+        'click #toggle-search': 'toggleSearch',
+        'click #myolx-link' : 'toggleMyOLXCats',
+        'click #logout-link' : 'logout'
+
       },
 
       initialize: function(options){
@@ -61,10 +62,23 @@ define([
             }
         });
 
+        $( document.getElementById('left-panel')).on( "panelopen", _.bind(this.changeIcon,this));
+        $( document.getElementById('left-panel')).on( "panelclose", _.bind(this.changeIcon,this));
+
         $('#search-bar').change(function(){
           window.location = "#search?q=" + $('#search-bar').val();
         });
       },
+
+      changeIcon: function(event_id){
+        var event= event_id.type.split("panel")[1];
+        if(event=="open"){
+          $(this.el).find("#cat-button").addClass("off")
+        }else if(event=="close"){
+          $(this.el).find("#cat-button").removeClass("off")
+        }
+      },
+
       render:function (){
         $(this.el).find('#left-panel').html(this.panelCT({
           'user': (this.Storage.get("userObj"))? this.Storage.get("userObj") : null, 
@@ -76,13 +90,14 @@ define([
         $(this.el).find('#left-panel-list-top').listview();
         $(this.el).find('#p-cat-link').hide();
         $(this.el).find('.myolx-cat').hide();
-
         return this;
       },
+
       cat_success: function(model, response){
-        this.loadCategories.reset(response);
+        this.loadCategories.set(response);
         if (this.dfd) this.dfd.resolve(this);
       },
+
       refreshList: function(ev){
         var data_id = $(ev.currentTarget).data("id");
         var parent_id = $(ev.currentTarget).data("parentId");
@@ -110,9 +125,11 @@ define([
         //deselects the currently selected sub-category
         $('.ui-li').removeClass('ui-focus');
       },
+
       showParentCategories: function(){
         this.changeCategories(CategoryHelper.categories.toJSON());
       },
+
       toggleSearch: function(){
         $("#search-bar-div").toggle();
 
@@ -124,22 +141,25 @@ define([
           //$('#toggle-search .ui-btn-text').text('Search');
         }
       },
+
       toggleMyOLXCats: function(){
         $(this.el).find('.myolx-cat').slideToggle('fast');
       },
+
       doneSearch: function(){
         $("#search-bar-div").hide();
         $('#search-bar').val("");
-        $('#toggle-search .ui-btn-text').text('Search');
       },
+
       changeCategories: function(categories){
-        this.loadCategories.reset(categories);
+        this.loadCategories.set(categories);
         this.render();
       },
+
       logout: function(){
         this.Storage.clear();
         this.render();
-      },
+      }
     });
     return BaseView;
 });
