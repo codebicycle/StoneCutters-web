@@ -1,5 +1,17 @@
-<ul id="ads-list" data-role="listview"  data-inset="true">
+<ul id="message-list" data-role="listview"  data-inset="true">
     {{#messages}}
-        <li><a href="#message/{{id}}">{{title}}</a></li>
+        <li data-icon="false">
+        	<div class="listingContainer">
+        		<div class="left{{#if unread}} unread{{/if}}">
+        			<h3><a href="#message/{{id}}">{{from}}</a></h4>
+        			<h4><a href="#message/{{id}}">{{title}}</a></h3>
+        			<h5><a href="#message/{{id}}">{{message}}</a></h5>
+        		</div>
+        		<div class="right{{#if unread}} unread{{/if}}">
+        			<div class="date">{{date}}</div>
+        			<div class="delete"></div>
+        		</div>
+        	</div>
+        </li>
     {{/messages}}
 </ul>
