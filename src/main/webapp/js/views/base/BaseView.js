@@ -94,7 +94,7 @@ define([
       },
 
       cat_success: function(model, response){
-        this.loadCategories.reset(response);
+        this.loadCategories.set(response);
         if (this.dfd) this.dfd.resolve(this);
       },
 
@@ -152,7 +152,7 @@ define([
       },
 
       changeCategories: function(categories){
-        this.loadCategories.reset(categories);
+        this.loadCategories.set(categories);
         this.render();
       },
 
