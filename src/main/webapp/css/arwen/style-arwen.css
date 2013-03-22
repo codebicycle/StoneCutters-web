@@ -46,6 +46,11 @@ a#toggle-search.ui-btn-right.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-a
 	box-shadow: none;
 }
 
+a#toggle-search.ui-btn-right.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-a, 
+a#toggle-search.ui-btn-right.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-a {
+	margin-right: 10px;
+}
+
 a#cat-button .ui-btn-inner,
 a#toggle-search .ui-btn-inner{
     border: 0;
@@ -218,6 +223,19 @@ div.swipe ul li div.tooltip h5 {
 	padding: 10px;
 	margin: 0;
 }
+
+div#location {
+	background: url(images/icon_location01.png) right center no-repeat;
+	width: 100%;
+	text-align: right;
+}
+
+	div#location span {
+		font-size: 13pt;
+		color: #666666;
+		margin-right: 30px;
+	}
+
 
 
 @media only screen and (max-device-width: 480px) {
@@ -513,7 +531,7 @@ ul#ads-list li {
 
 
 	ul#ads-list div.listingContainer div.right {
-		width: 190px;
+		width: 100%;
 		vertical-align: top;
 	}
 
@@ -590,11 +608,6 @@ ul#ads-list li {
 
 	ul#ads-list div.listingContainer div.left {
 		width: 200px;
-	}
-
-
-	ul#ads-list div.listingContainer div.right {
-		width: 100%;
 	}
 
 		ul#ads-list div.listingContainer div.left img{
