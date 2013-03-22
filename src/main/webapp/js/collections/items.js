@@ -37,10 +37,10 @@ define([
             response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
           break;
           case "myAds":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + this.url_options.user_id + '/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +'&token=' + this.query_opts.token;
           break;
           case "myFavorites":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + 'favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize+'&token=' +this.query_opts.token;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + 'favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +'&token=' +this.query_opts.token;
           break;
         }
         return response;
