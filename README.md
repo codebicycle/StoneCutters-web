@@ -4,6 +4,8 @@
 
 Nîn o Chithaeglir lasto beth daer; Rimmo nîn Bruinen dan in Ulaer!
 
+Waters of the Misty Mountains listen to the great word; flow waters of Loudwater against the Ringwraiths!
+
 ## What is it?
 
 ARWEN is the new Olx's web application, which is being built using the latest web technologies.
