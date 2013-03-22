@@ -513,7 +513,7 @@ ul#ads-list li {
 
 
 	ul#ads-list div.listingContainer div.right {
-		width: 190px;
+		width: 100%;
 		vertical-align: top;
 	}
 
@@ -590,11 +590,6 @@ ul#ads-list li {
 
 	ul#ads-list div.listingContainer div.left {
 		width: 200px;
-	}
-
-
-	ul#ads-list div.listingContainer div.right {
-		width: 100%;
 	}
 
 		ul#ads-list div.listingContainer div.left img{
