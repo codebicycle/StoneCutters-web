@@ -481,7 +481,7 @@ ul#ads-list li {
 			border-color: #b81d1b; 
 		}
 
-		ul#ads-list div.active {
+		ul#ads-list div.ready {
 			background: #01cd5e;
 			border-color: #00a94e; 
 		}
@@ -594,7 +594,7 @@ ul#ads-list li {
 
 
 	ul#ads-list div.listingContainer div.right {
-		width: 500px;
+		width: 100%;
 	}
 
 		ul#ads-list div.listingContainer div.left img{
