@@ -1,25 +1,23 @@
-<ul id="ads-list" data-role="listview" data-inset="true">
 {{#items}}
-        <li data-icon="false">
-            {{#if status}}
-            <div class="listingStatus {{status}}">{{status}}</div>
-            {{/if}}
-            <div class="listingContainer">
-                <div class="left">
-                    <a href="#item/{{id}}">
-                    	<img src="{{#if thumbImage}}{{thumbImage}}{{else}}css/arwen/images/img_no_pic.png{{/if}}">
-                    </a>
+    <li data-icon="false">
+        {{#if status}}
+        <div class="listingStatus {{status}}">{{status}}</div>
+        {{/if}}
+        <div class="listingContainer">
+            <div class="left">
+                <a href="#item/{{id}}">
+                    <img src="{{#if thumbImage}}{{thumbImage}}{{else}}css/arwen/images/img_no_pic.png{{/if}}">
+                </a>
+            </div>
+            <div class="right">
+                <div class="rowTitle">
+                    <a href="#item/{{id}}"><h2>{{title}}</h2></a>
                 </div>
-                <div class="right">
-                    <div class="rowTitle">
-                        <a href="#item/{{id}}"><h2>{{title}}</h2></a>
-                    </div>
-                    <div class="rowInfo">
-                        <div class="location">{{location}}</div>
-                        <div class="displayPrice">{{displayPrice}}</div>
-                    </div>
+                <div class="rowInfo">
+                    <div class="location">{{location}}</div>
+                    <div class="displayPrice">{{displayPrice}}</div>
                 </div>
             </div>
-        </li>
+        </div>
+    </li>
 {{/items}}
-</ul>

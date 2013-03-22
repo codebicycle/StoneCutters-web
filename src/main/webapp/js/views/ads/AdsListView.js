@@ -6,8 +6,8 @@ define([
   'collections/items',
   'collections/filters',
   'collections/sorts',
+  'text!templates/ads/adsTemplate.html',
   'text!templates/ads/adsListTemplate.html',
-  'text!templates/ads/adsMoreListTemplate.html',
   'text!templates/ads/filterTemplate.html',
   'text!templates/ads/sortTemplate.html',
   'views/scroll/ScrollView',
@@ -16,7 +16,7 @@ define([
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
-    SortsCollection, adsListTemplate,adsMoreListTemplate, 
+    SortsCollection, adsTemplate,adsListTemplate, 
     filterTemplate, sortTemplate,ScrollView, JSONHelper, CategoryHelper){
   
     var AdsListView = ScrollView.extend({
@@ -30,8 +30,8 @@ define([
       initialize: function(options){
         
         /*Compile the template using Handlebars micro-templating*/
-        this.adsCT = Handlebars.compile(adsListTemplate);
-        AdsListView.__super__.moreTemplate = Handlebars.compile(adsMoreListTemplate);
+        this.adsCT = Handlebars.compile(adsTemplate);
+        this.adsListCT = AdsListView.__super__.listTemplate = Handlebars.compile(adsListTemplate);
         this.filCT = Handlebars.compile(filterTemplate);
         this.sorCT = Handlebars.compile(sortTemplate);
 
@@ -108,11 +108,12 @@ define([
       },
 
       render:function () {
-        $(this.el).find('#content').html(this.adsCT({'items': this.items.toJSON(), 
-          'search-term': this.query,
+        $(this.el).find('#content').html(this.adsCT({'search-term': this.query,
           'added-filters':JSONHelper.parseTitleValue(this.params),
           'sortName':this.sortName
         }));
+
+        $(this.el).find('#ads-list').html(this.adsListCT({'items': this.items.toJSON()}));
 
         //Mock code lines
         // $(this.el).find('#filterPopup').html(this.filCT({

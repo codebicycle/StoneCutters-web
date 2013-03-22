@@ -7,7 +7,7 @@ define([
   'collections/filters',
   'collections/sorts',
   'text!templates/ads/myFavoriteAdsTemplate.html',
-  'text!templates/ads/adsMoreListTemplate.html',
+  'text!templates/ads/adsListTemplate.html',
   'views/scroll/ScrollView'
   ], 
 
@@ -24,7 +24,7 @@ define([
         
         /*Compile the template using Handlebars micro-templating*/
         this.adsCT = Handlebars.compile(MyAdsListTemplate);
-        MyFavoritesAdsListView.__super__.moreTemplate= Handlebars.compile(adsMoreListTemplate);
+        MyFavoritesAdsListView.__super__.listTemplate= Handlebars.compile(adsMoreListTemplate);
 
         this.dfd = null || options.deferred;
         this.page= options.page || 0;

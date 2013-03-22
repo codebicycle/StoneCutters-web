@@ -6,13 +6,13 @@ define([
   'collections/items',
   'collections/filters',
   'collections/sorts',
+  'text!templates/ads/myAdsTemplate.html',
   'text!templates/ads/myAdsListTemplate.html',
-  'text!templates/ads/myAdsMoreListTemplate.html',
   'views/scroll/ScrollView'
   ], 
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
-    SortsCollection, MyAdsListTemplate,myAdsMoreListTemplate, ScrollView){
+    SortsCollection, MyAdsTemplate,myAdsListTemplate, ScrollView){
 
     var MyAdsListView = ScrollView.extend({
       el: "#home",
@@ -23,8 +23,8 @@ define([
       initialize: function(options){
         
         /*Compile the template using Handlebars micro-templating*/
-        this.adsCT = Handlebars.compile(MyAdsListTemplate);
-        MyAdsListView.__super__.moreTemplate  = Handlebars.compile(myAdsMoreListTemplate);
+        this.adsCT = Handlebars.compile(MyAdsTemplate);
+        this.adsListCT = MyAdsListView.__super__.listTemplate  = Handlebars.compile(myAdsListTemplate);
 
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
@@ -61,7 +61,8 @@ define([
       },
 
       render:function () {
-        $(this.el).find('#content').html(this.adsCT({'items': this.items.toJSON()}));
+        $(this.el).find('#content').html(this.adsCT());
+        $(this.el).find('#ads-list').html(this.adsListCT({'items': this.items.toJSON()}));
         $(this.el).find('#content').trigger('create');
          return this;
       },

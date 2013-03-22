@@ -11,7 +11,7 @@ define([
   //
   // scrollingID: must be unique for each view.
   // collection: the collection that we are scrolling and fetching more elements.
-  // moreTemplate: the template that is in charge of rendering the items.
+  // listTemplate: the template that is in charge of rendering the items.
   //
   // Inside your initialize function you have to call the following method, where MyView is 
   // the name of the new view.
@@ -51,7 +51,7 @@ define([
       load_more_items:function(items){
         var data= {};
         data[this.templateKey] = this.collection.toJSON();
-        $(this.el).find('#ads-list').append(this.moreTemplate(data));
+        $(this.el).find('#ads-list').append(this.listTemplate(data));
         $(this.el).find('#ads-list').listview("refresh");
         this.isLoading = false;
         return this;
