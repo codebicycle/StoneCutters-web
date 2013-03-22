@@ -1,7 +1,7 @@
 require.config({
   baseUrl: "../../src/main/webapp/js/",
   paths: {
-    jquery:     'libs/jquery/jquery-1.8.3-min',
+    jquery:     'libs/jquery/jquery-1.9.1.min',
     jqm:        'libs/jqueryMobile/jquery.mobile-1.3.0.min',
     underscore: 'libs/underscore/underscore-min',
     backbone:   'libs/backbone/backbone-min',
@@ -12,7 +12,7 @@ require.config({
     'jasmine-jquery': 'libs/jasmine/jasmine-jquery',
     console_runner: 'libs/phantom-jasmine/console-runner',
     sinon: 'libs/sinon/sinon-1.5.2',
-    swipe: 'libs/swipe/swipe',
+    swipe: 'libs/swipe/swipe-items',
     modernizr: 'libs/modernizr/modernizr.custom',
     spec: '../../../test/js',
     config: '../configuration'

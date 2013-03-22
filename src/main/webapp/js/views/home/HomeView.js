@@ -37,7 +37,7 @@ define([
         this.whatsNewCT = Handlebars.compile(whatsNewTemplate);
         this.lastVisitCT = Handlebars.compile(lastVisitTemplate);
 
-        this.whatsNewItems = new ItemsCollection({countryId:1},{},{"item_type":"adsList"});
+        this.whatsNewItems = new ItemsCollection({countryId:1, filters:"[{'name':'withPhotos', 'value':'true'}]"},{},{"item_type":"adsList"});
         this.whatsNewItems.on('sync',_.bind(this.items_success, this));
         this.whatsNewItems.fetch();
 
