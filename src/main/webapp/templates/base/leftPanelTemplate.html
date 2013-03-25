@@ -20,7 +20,7 @@
 	<li id="cat-divider" data-role="list-divider" role="heading">Categories</li>
 	<li id="p-cat-link" data-icon="false" class="ui-btn-icon-left"><a href="javascript:;" data-mini="true">Parent Categories</a></li>
 	{{#categories}}
-        <li data-icon="false"><a href="#category/{{id}}" data-id="{{id}}" data-parent-id="{{parentId}}" class="cat-link">{{name}}</a></li>
+        <li data-icon="false"><a href="#category/{{id}}" data-id="{{id}}" data-parent-id="{{parentId}}" class="cat-link {{#unless parentId}}cat-main cat-{{id}}{{/unless}}">{{name}}</a></li>
     {{/categories}}
 
     {{#if user}}
