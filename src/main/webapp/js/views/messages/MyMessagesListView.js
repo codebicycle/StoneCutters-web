@@ -37,7 +37,7 @@ define([
         this.messages.fetch();
 
         //Debug Code
-       /*
+       
         var collection = Backbone.Collection.extend();
         this.messages = new collection([ 
 
@@ -94,7 +94,7 @@ define([
 
                             ]);
         if (this.dfd) this.dfd.resolve(this);
-        */
+        
         //END Debug Code
 
         //ScrollView's settings
@@ -105,8 +105,8 @@ define([
 
       render:function () {
         $(this.el).find('#content').html(this.messagesCT({'search-term': this.query}));
-        $(this.el).find('#ads-list').html(this.messagesListCT({'messages': this.messages.toJSON()}));
-        $(this.el).find('#ads-list').listview();
+        $(this.el).find('#message-list').html(this.messagesListCT({'messages': this.messages.toJSON()}));
+        $(this.el).find('#message-list').listview();
         return this;
       },
 
