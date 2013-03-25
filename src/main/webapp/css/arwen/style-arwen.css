@@ -149,6 +149,80 @@ div#left-panel li#p-cat-link a {
 	color: #b0aaaa;
 }
 
+div#left-panel a.cat-main {
+	padding-left: 40px;
+	background: url(images/sprite.png) no-repeat;
+}
+
+/* ___________ icon for categories ___________ */
+
+	div#left-panel a.cat-16 {
+		background-position: 0 -680px;
+	}
+
+	div#left-panel a.cat-185 {
+		background-position: 0 -83px;
+	}
+
+	div#left-panel a.cat-186 {
+		background-position: 0 8px;
+	}
+
+	div#left-panel a.cat-187 {
+		background-position: 0 -265px;
+	}
+
+	div#left-panel a.cat-821,
+	div#left-panel a.cat-190 {
+		background-position: 0 -129px;
+	}
+
+	div#left-panel a.cat-191 {
+		background-position: 0 -220px;
+	}
+
+	div#left-panel a.cat-362 {
+		background-position: 0 -38px;
+	}
+
+	div#left-panel a.cat-389 {
+		background-position: 0 -405px;
+	}
+
+	div#left-panel a.cat-405 {
+		background-position: 0 -310px;
+	}
+
+	div#left-panel a.cat-600 {
+		background-position: 0 -355px;
+	}
+
+	div#left-panel a.cat-674 {
+		background-position: 0 -175px;
+	}
+
+	div#left-panel a.cat-830,
+	div#left-panel a.cat-800 {
+		background-position: 0 -545px;
+	}
+
+	div#left-panel a.cat-806 {
+		background-position: 0 -495px;
+	}
+
+	div#left-panel a.cat-811 {
+		background-position: 0 -450px;
+	}
+
+	div#left-panel a.cat-815 {
+		background-position: 0 -590px;
+	}
+
+	div#left-panel a.cat-833 {
+		background-position: 0 -633px;
+	}
+
+
 
 /* category divider */
 div#left-panel li#cat-divider {
