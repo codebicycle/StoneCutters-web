@@ -671,7 +671,8 @@ form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c {
 		border: 0;
 	}
 
-a#register-link {
+a#register-link,
+a#register-button {
 	border-radius: 0;
 	box-shadow: none;
 	background: #9e70b1;
@@ -679,11 +680,49 @@ a#register-link {
 	padding: 5px;
 }
 
-	a#register-link span {
+	a#register-link span,
+	a#register-button span {
 		color: #ffffff;
-		font-size: 9pt;
+		font-size: 12pt;
 		border: 0;
 	}
+
+a#terms-link {
+	text-decoration: underline;
+	box-shadow: none;
+	text-align: left;
+	color: #559fe0;
+}
+
+	a#terms-link span {
+		font-size: 10pt;
+		padding: 0;
+	}
+
+input#agree-check {
+	display: none;
+}
+
+form#register-form label.ui-checkbox-on span, 
+form#register-form label.ui-checkbox-off span {
+	font-size: 10pt;
+}
+
+form#register-form label.ui-checkbox-on span.ui-btn-inner, 
+form#register-form label.ui-checkbox-off span.ui-btn-inner {
+	padding: 0;
+}
+
+form#register-form label.ui-checkbox-on span.ui-btn-text, 
+form#register-form label.ui-checkbox-off span.ui-btn-text {
+	padding-left: 30px;
+}
+
+form#register-form span.ui-icon-checkbox-on,
+form#register-form span.ui-icon-checkbox-off {
+	left: 0;
+	padding: 0;
+}
 
 
 @media only screen and (min-device-width: 700px) {
