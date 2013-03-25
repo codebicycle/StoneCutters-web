@@ -90,6 +90,9 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
   specs.push('spec/unitTests/item_slider_unit_spec');
   specs.push('spec/unitTests/load_categories_unit_spec');
   specs.push('spec/unitTests/load_items_unit_spec');
+  specs.push('spec/unitTests/load_messages_unit_spec');
+  specs.push('spec/unitTests/load_favorites_unit_spec');
+  specs.push('spec/unitTests/load_myads_unit_spec');
   specs.push('spec/unitTests/login_unit_spec');
 
   Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
