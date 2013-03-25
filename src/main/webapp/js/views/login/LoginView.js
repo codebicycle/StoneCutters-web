@@ -75,7 +75,7 @@ define([
         data = JSON.parse(response);
 
         if (data.token) {
-          this.Storage.set("authToken",data.token);
+          //this.Storage.set("authToken",data.token);
 
           this.user = new User({
             "username":data.username, 
