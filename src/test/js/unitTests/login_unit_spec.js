@@ -10,7 +10,8 @@ define(['views/base/BaseView','models/user','config/conf'],
 		});
 
 		afterEach(function () {
-			expect(callbacks.doneLogin).toHaveBeenCalled();
+			expect(callbacks.userSuccess).toHaveBeenCalled();
+			expect(callbacks.doneCategories).toHaveBeenCalled();
 		});
 		
 		//Specs
@@ -19,34 +20,36 @@ define(['views/base/BaseView','models/user','config/conf'],
 			var user = {"id":100,"name":"Pedro Perez","username":"pedro32"};
 			var categories = [{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}];
 
-			
 	 		callbacks.userSuccess = function(model,response){
 
-				localStorage["userObj"] = JSON.stringify(model);
+				Backbone.View.prototype.Storage.set("userObj",this.user.toJSON());
 
-				var dfd = $.Deferred().done(_.bind(function(page){
+				callbacks.doneCategories = function(page){
 					page.render();
 
 	      			//BaseView Expectations
 		      		expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
-		      		//Here we check that sinon worked correctly.
-					wasCall=true;
-				}, this));
+				}
+
+				spyOn(callbacks,'doneCategories').andCallThrough();
+
+				var dfd = $.Deferred().done(_.bind(callbacks.doneCategories, this));
+
 	      		view = new BaseView({'deferred': dfd});
+
+	      		$.ajax.calls[1].args[0].success(categories);
 			};
 
 			spyOn(callbacks,'userSuccess').andCallThrough();
 
- 			
-
 			spyOn($,'ajax');
 
-			var user = new User({"username":"pedro32", "authToken": 12345678});
-			user.on('sync',_.bind(callbacks.userSuccess, this));
-			user.fetch();
+			this.user = new User({"username":"pedro32", "authToken": 12345678});
+			this.user.on('sync',_.bind(callbacks.userSuccess, this));
+			this.user.fetch();
 	
  			$.ajax.calls[0].args[0].success(user);
- 			$.ajax.calls[1].args[0].success(categories);
+ 			
 		});
 	});
 });
