@@ -5,11 +5,15 @@ define([
   'swipe',
   'handlebars',
   'models/item',
+  'collections/items',
   'text!templates/item/itemTemplate.html',
+  'text!templates/item/imagesTemplate.html',
+  'text!templates/home/whatsNewTemplate.html',
   'helpers/ScreenHelper'
   ], 
 
-  function($,_, Backbone, sw, Handlebars, ItemModel, itemTemplate, ScreenHelper){
+  function($,_, Backbone, sw, Handlebars, ItemModel, ItemsCollection, 
+    itemTemplate, imgsTemplate, relatedAdsTemplate, ScreenHelper){
 
     var ItemView = Backbone.View.extend({
       el: "#home",
@@ -21,12 +25,17 @@ define([
         
         /*Compile the template using Handlebars micro-templating*/
         this.itemCT = Handlebars.compile(itemTemplate);
+        this.imgsCT = Handlebars.compile(imgsTemplate);
+        this.relAdsCT = Handlebars.compile(relatedAdsTemplate);
         this.dfd = options.deferred;
 
         this.item = new ItemModel({'id': options.id});
         this.item.on('sync',_.bind(this.success, this));
         this.item.fetch();
 
+        this.relatedAds = new ItemsCollection({countryId:1, relatedTo:options.id, filters:"[{'name':'withPhotos', 'value':'true'}]"},{},{"item_type":"adsList"});
+        this.relatedAds.on('sync',_.bind(this.related_ads_success, this));
+        this.relatedAds.fetch();
 
         //Debug Code
         /*
@@ -72,7 +81,11 @@ define([
       },
       render:function () {
         document.title = this.item.get('title');
+
         $(this.el).find('#content').html(this.itemCT({'item': this.item.toJSON()}));
+
+        $(this.el).find('#image-slider').html(this.imgsCT({'imgs': this.item.get('images')}));
+
         this.slider = new Swipe(document.getElementById('image-slider'), {
                             //startSlide: 2,
                             //speed: 400,
@@ -80,7 +93,10 @@ define([
                             'items':ScreenHelper.getImgsNum(),
                             'callback': function(event, index, elem) {
                             }
+
         });
+
+        $(this.el).find('#image-slider-related').html(this.relAdsCT({'items': this.relatedAds.toJSON()}));
         this.sliderRelated = new Swipe(document.getElementById('image-slider-related'), {
                             //startSlide: 2,
                             //speed: 400,
@@ -101,6 +117,9 @@ define([
         this.dfd.resolve(this);
         return;
       },
+      related_ads_success: function(model, response){
+        this.render();
+      }
     });
   return ItemView;
 });
