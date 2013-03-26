@@ -37,7 +37,7 @@ define([
         this.messages.fetch();
 
         //Debug Code
-       
+       /*
         var collection = Backbone.Collection.extend();
         this.messages = new collection([ 
 
@@ -94,7 +94,7 @@ define([
 
                             ]);
         if (this.dfd) this.dfd.resolve(this);
-        
+        */
         //END Debug Code
 
         //ScrollView's settings
