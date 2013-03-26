@@ -105,8 +105,8 @@ define([
 
       render:function () {
         $(this.el).find('#content').html(this.messagesCT({'search-term': this.query}));
-        $(this.el).find('#ads-list').html(this.messagesListCT({'messages': this.messages.toJSON()}));
-        $(this.el).find('#ads-list').listview();
+        $(this.el).find('#message-list').html(this.messagesListCT({'messages': this.messages.toJSON()}));
+        $(this.el).find('#message-list').listview();
         return this;
       },
 

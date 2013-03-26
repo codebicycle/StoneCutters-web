@@ -976,3 +976,83 @@ ul#message-list li {
 			width: 865px;
 		}
 }
+
+
+/* Message Detail
+---------------------------------------------------------------------- */
+
+div#messagepage h1 {
+	text-align: left;
+	font-size: 13pt;
+	font-weight: normal;
+}
+
+div#messagepage div#messageContainer {
+	margin: 15px;
+	border: 1px solid #e6e2e3;
+	background: #f8f2f2;
+}
+
+	div#messagepage div#messageContainer div.left {
+		float: left;
+		width: 50%;
+	}
+
+	div#messagepage div#messageContainer div.right {
+		float: right;
+		width: 50%;
+	}
+
+		div#messagepage div#messageContainer div.left h2,
+		div#messagepage div#messageContainer div.left h3,
+		div#messagepage div#messageContainer div.right h3 {
+			margin: 15px;
+			padding: 0;
+			font-weight: normal;
+			font-size: 8pt;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			color: #666666;
+		}
+
+		div#messagepage div#messageContainer div.left h2 {
+			margin-bottom: 0;
+			font-weight: bold;
+		}
+
+		div#messagepage div#messageContainer div.left h3 {
+			margin-top: 0;
+		}
+
+		div#messagepage div#messageContainer div.right h3.date {
+			margin-bottom: 0;
+			color: #bab8b9;
+		}
+		div#messagepage div#messageContainer div.right h3.phone {
+			margin-top: 0;
+			color: #bab8b9;
+		}
+
+	div#messagepage div#messageContainer div.message {
+		margin: 15px;
+		margin-top: 0;
+		border: 1px solid #e6e2e3;
+		background: #ffffff;
+		font-size: 8pt;
+	}
+
+	div#messagepage div#messageContainer div.message div {
+		margin: 15px;
+	}
+
+	div#messagepage div#messageContainer div.message div.clear {
+		margin: 0;
+	}
+
+	div#messagepage div.formContainer {
+		margin: 15px;
+	}
+
+	div#messagepage div.formContainer form.form div.ui-input-text.ui-shadow-inset.ui-corner-all.ui-btn-shadow.ui-body-c {
+		padding: 5px;
+	}

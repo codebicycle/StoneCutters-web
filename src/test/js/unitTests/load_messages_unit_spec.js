@@ -37,14 +37,15 @@ define(['views/messages/MyMessagesListView','spec/SinonHelper','config/conf'], f
 					page.render();
 					
 	      			//Messages's Expectations
-		      		expect($($($('#home #ads-list li')[0]).find('a')[0]).html()).toBe("mobile_automation"); 
-		      		expect($($($('#home #ads-list li')[0]).find('a')[1]).html()).toBe("Message 1"); 
+		      		expect($($($('#home #message-list li')[0]).find('a')[0]).html()).toBe("mobile_automation"); 
+		      		expect($($($('#home #message-list li')[0]).find('a')[1]).html()).toBe("Message 1"); 
 
-		      		expect($($($('#home #ads-list li')[1]).find('a')[0]).html()).toBe("mobile_automation"); 
-		      		expect($($($('#home #ads-list li')[1]).find('a')[1]).html()).toBe("Message 2"); 
+		      		expect($($($('#home #message-list li')[1]).find('a')[0]).html()).toBe("mobile_automation"); 
+		      		expect($($($('#home #message-list li')[1]).find('a')[1]).html()).toBe("Message 2"); 
 
 		      		//Here we check that sinon worked correctly.
 		      		wasCall=true;
+
 	      		}, this));
 
       			view = new MyMessagesListView({'deferred': dfd});
