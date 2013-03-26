@@ -28,35 +28,35 @@ define([
         this.message.fetch();
 
         //Debug Code
+        /*
+         var m = Backbone.Model.extend();
+         this.message = new m({
+             "id": 4653,
+             "itemId": 47372355,
+             "title": "python test",
+             "countryId": 2,
+             "toUserId": 2062073,
+             "toEmail": "damian.buonamico@olx.com",
+             "fromUserId": 2062073,
+             "fromEmail": "damianb@olx.com",
+             "fromName": "Damian",
+             "phone": "47724545",
+             "date": 1351083912,
+             "read": true,
+             "message": "Message with invalid unicode encoding:  asdf",
+             "attachment": null,
+             "attachmentId": null
+         });
         
-        // var m = Backbone.Model.extend();
-        // this.message = new m({
-        //     "id": 4653,
-        //     "itemId": 47372355,
-        //     "title": "python test",
-        //     "countryId": 2,
-        //     "toUserId": 2062073,
-        //     "toEmail": "damian.buonamico@olx.com",
-        //     "fromUserId": 2062073,
-        //     "fromEmail": "damianb@olx.com",
-        //     "fromName": "Damian",
-        //     "phone": "47724545",
-        //     "date": 1351083912,
-        //     "read": true,
-        //     "message": "Message with invalid unicode encoding:  asdf",
-        //     "attachment": null,
-        //     "attachmentId": null
-        // });
-        
-        // this.dfd.resolve(this);
-        
+         this.dfd.resolve(this);
+        */
         //END Debug Code
 
       },
       render:function () {
         document.title = this.message.get('title');
         $(this.el).find('#content').html(this.messCT({'message': this.message.toJSON()}));
-
+        $(this.el).find('#content').trigger('create');
         return this;
       },
       success: function(model, response)  {
