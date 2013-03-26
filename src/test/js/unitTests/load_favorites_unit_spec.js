@@ -1,11 +1,17 @@
 define(['views/ads/MyFavoriteAdsView','spec/SinonHelper','config/conf'], function(MyFavoritesListView,SinonHelper, Conf) {
 	describe('The favorites list',function(){
 	
+ 		var wasCall = false;
+
  		//Create an easily-removed container for our tests to play in
  		beforeEach(function() {
  			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
  			Backbone.View.prototype.Storage.set("userObj",{"username":"mobile_automation","authToken":"ec780678f628386fbc2e72f0c30b12fd2eb13520dfa4490b90de5d7c4dfba95c55844aed2b59775a9637b351697d5dbced9987d7516c1c7e1038e213d5efde65","unreadMessagesCount":0,"favorites":[]});
  		});
+
+ 		afterEach(function () {
+			expect(wasCall).toBe(true);
+		});
 		
  		//Specs
  		it('should load favorites from the json response',function(){
@@ -37,6 +43,9 @@ define(['views/ads/MyFavoriteAdsView','spec/SinonHelper','config/conf'], functio
 		      		expect($($($('#home #ads-list li')[1]).find('a')[1]).html()).toBe("<h2>Favorite 2</h2>"); 
 		      		expect($($($('#home .displayPrice')[0])).html()).toBe("642.0"); 
 		      		expect($($($('#home .displayPrice')[1])).html()).toBe("12.0"); 
+
+		      		//Here we check that sinon worked correctly.
+		      		wasCall=true;
 	      		}, this));
 
       			view = new MyFavoritesListView({'deferred': dfd});

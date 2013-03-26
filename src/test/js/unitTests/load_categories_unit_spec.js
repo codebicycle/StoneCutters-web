@@ -1,9 +1,15 @@
-define(['views/base/BaseView','spec/SinonHelper'], function(BaseView,SinonHelper) {
+define(['views/base/BaseView','spec/SinonHelper','config/conf'], function(BaseView,SinonHelper, Conf) {
 	describe('The categories menu',function(){
 	
+		var wasCall = false;
+
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
 			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
+		});
+
+		afterEach(function () {
+			expect(wasCall).toBe(true);
 		});
 		
 		//Specs
@@ -19,7 +25,7 @@ define(['views/base/BaseView','spec/SinonHelper'], function(BaseView,SinonHelper
 
 	 		actions.push("GET");
 
-	 		urls.push('http://smaug.herokuapp.com:80/categories/1');
+	 		urls.push(Conf.get('smaug').url +':'+ Conf.get('smaug').port + '/categories/1');
 
 			responses.push(categories);
 
@@ -29,10 +35,13 @@ define(['views/base/BaseView','spec/SinonHelper'], function(BaseView,SinonHelper
 	 			var dfd = $.Deferred().done(_.bind(function(page){
 					page.render(); 
 
-	      			//Categories's Expectations
+	      			//Categories's Expectations.
 		      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("For Sale"); 
 		      		expect($($('#home #left-panel-list li a')[2]).html()).toBe("Vehicles");
 		      		expect($('#home  #left-panel-list li a').length).toBe(3);
+
+		      		//Here we check that sinon worked correctly.
+		      		wasCall=true;
 				}, this));
 
 	 			view = new BaseView({'deferred': dfd});
