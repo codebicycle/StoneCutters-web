@@ -1,10 +1,16 @@
-define(['views/base/BaseView','spec/SinonHelper', 'models/user',], 
-	function(BaseView,SinonHelper,User) {
+define(['views/base/BaseView','spec/SinonHelper', 'models/user','config/conf'], 
+	function(BaseView,SinonHelper,User, Conf) {
 	describe('The login link',function(){
 	
+		var wasCall = false;
+
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
 			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
+		});
+
+		afterEach(function () {
+			expect(wasCall).toBe(true);
 		});
 		
 		//Specs
@@ -22,8 +28,8 @@ define(['views/base/BaseView','spec/SinonHelper', 'models/user',],
 	 		actions.push("GET");
 	 		actions.push("GET");
 
-	 		urls.push('http://smaug.herokuapp.com:80/users/pedro32?token=12345678');
-	 		urls.push('http://smaug.herokuapp.com:80/categories/1');
+	 		urls.push(Conf.get('smaug').url +':'+ Conf.get('smaug').port +'/users/pedro32?token=12345678');
+	 		urls.push(Conf.get('smaug').url +':'+ Conf.get('smaug').port +'/categories/1');
 
 			responses.push(user);
 			responses.push(categories);
@@ -40,6 +46,8 @@ define(['views/base/BaseView','spec/SinonHelper', 'models/user',],
 
 		      			//BaseView Expectations
 			      		expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
+			      		//Here we check that sinon worked correctly.
+						wasCall=true;
 					}, this));
 
 	      			view = new BaseView({'deferred': dfd});
@@ -48,7 +56,6 @@ define(['views/base/BaseView','spec/SinonHelper', 'models/user',],
 	 			var user = new User({"username":"pedro32", "authToken": 12345678});
 	 			user.on('sync',_.bind(user_success, this));
 	 			user.fetch();
-	 			
 			});
 
 		});
