@@ -182,10 +182,6 @@ define([
         $(this.el).find('#sortPopup').trigger('create');
       },
 
-      close: function(){
-        $(window).unbind("scroll."+this.cat_id);
-      },
-
       openFilterPopup: function(){
         $('#filterPopup').popup("open", {transition:"slideup"});
       },
