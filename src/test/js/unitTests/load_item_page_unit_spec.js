@@ -1,11 +1,17 @@
-define(['views/item/ItemView','spec/SinonHelper'], function(ItemView,SinonHelper) {
+define(['views/item/ItemView'], function(ItemView) {
 	describe('The item page',function(){
-	
+		
+		var callbacks = {};
+
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
 			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
 		});
-		
+
+		afterEach(function () {
+			expect(callbacks.doneItems).toHaveBeenCalled();
+		});
+
 		//Specs
 		it('should load the item from the json response',function(){
 			
@@ -19,8 +25,8 @@ define(['views/item/ItemView','spec/SinonHelper'], function(ItemView,SinonHelper
 	           	{"id":"484937518", "title":"Stunning Litter Of K.c","thumbnail":"http://img.ehowcdn.com/article-new/ehow/images/a04/qu/7b/signs-symptoms-dog-food-poisoning-800x800.jpg"},
 	           	{"id":"484936416", "title":"Barney At Wolfabulls Bulldogs","thumbnail":"http://www.theworld.org/wp-content/uploads/Q-dog-300x300.jpg"},
             ];
-
-			var dfd = $.Deferred().done(_.bind(function(page){
+            
+            callbacks.doneItems = function(page){
 				page.render();
       			
       			//Item's expectations
@@ -28,7 +34,11 @@ define(['views/item/ItemView','spec/SinonHelper'], function(ItemView,SinonHelper
 	      		expect($('#itempage .title h4').html()).toBe("R$850");
 	      		expect($('#itempage .description').html()).toBe("Lindos filhotes");
 	      		expect($('#itempage #image-slider li img').length).toBe(5);
-			}, this));
+			}
+
+			spyOn(callbacks,'doneItems').andCallThrough();
+
+			var dfd = $.Deferred().done(_.bind( callbacks.doneItems, this));
 
 			spyOn($,'ajax');
 

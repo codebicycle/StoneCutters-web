@@ -1,8 +1,8 @@
-define(['views/base/BaseView','spec/SinonHelper', 'models/user','config/conf'], 
-	function(BaseView,SinonHelper,User, Conf) {
+define(['views/base/BaseView','models/user','config/conf'], 
+	function(BaseView,User, Conf) {
 	describe('The login link',function(){
 	
-		var wasCall = false;
+		var callbacks = {};
 
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
@@ -10,54 +10,43 @@ define(['views/base/BaseView','spec/SinonHelper', 'models/user','config/conf'],
 		});
 
 		afterEach(function () {
-			expect(wasCall).toBe(true);
+			expect(callbacks.doneLogin).toHaveBeenCalled();
 		});
 		
 		//Specs
 		it('should change to a myolx link when the user logs in',function(){
 			
-			var user = '{"id":100,"name":"Pedro Perez","username":"pedro32"}';
-			var categories = '[{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}]';
+			var user = {"id":100,"name":"Pedro Perez","username":"pedro32"};
+			var categories = [{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}];
 
-			var options = {}; // no additional options for the Ajax request
-	 		var view = null;
-	 		var actions = [];
-	 		var urls = [];
-	 		var responses = [];
+			
+	 		callbacks.userSuccess = function(model,response){
 
-	 		actions.push("GET");
-	 		actions.push("GET");
+				localStorage["userObj"] = JSON.stringify(model);
 
-	 		urls.push(Conf.get('smaug').url +':'+ Conf.get('smaug').port +'/users/pedro32?token=12345678');
-	 		urls.push(Conf.get('smaug').url +':'+ Conf.get('smaug').port +'/categories/1');
+				var dfd = $.Deferred().done(_.bind(function(page){
+					page.render();
 
-			responses.push(user);
-			responses.push(categories);
+	      			//BaseView Expectations
+		      		expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
+		      		//Here we check that sinon worked correctly.
+					wasCall=true;
+				}, this));
+	      		view = new BaseView({'deferred': dfd});
+			};
 
-			var S = new SinonHelper();
+			spyOn(callbacks,'userSuccess').andCallThrough();
 
-	 		S.fakeResponse(actions,urls,responses, options, function() {
-	 			var user_success = function(model,response){
+ 			
 
-					localStorage["userObj"] = JSON.stringify(model);
+			spyOn($,'ajax');
 
-					var dfd = $.Deferred().done(_.bind(function(page){
-						page.render();
-
-		      			//BaseView Expectations
-			      		expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
-			      		//Here we check that sinon worked correctly.
-						wasCall=true;
-					}, this));
-
-	      			view = new BaseView({'deferred': dfd});
-				};
-
-	 			var user = new User({"username":"pedro32", "authToken": 12345678});
-	 			user.on('sync',_.bind(user_success, this));
-	 			user.fetch();
-			});
-
+			var user = new User({"username":"pedro32", "authToken": 12345678});
+			user.on('sync',_.bind(callbacks.userSuccess, this));
+			user.fetch();
+	
+ 			$.ajax.calls[0].args[0].success(user);
+ 			$.ajax.calls[1].args[0].success(categories);
 		});
 	});
 });
