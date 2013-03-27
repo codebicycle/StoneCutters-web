@@ -10,14 +10,14 @@ define(['models/category'], function (CategoryModel){
 			container.setAttribute('id',rootId);		
 			document.body.appendChild(container);
 
-			//the following commented code serves as an alternative way to 'import' the categoryModel
+			// The following commented code serves as an alternative way to 'import' the categoryModel.
 
 			// var flag = false;
 			// var that = this;
 
 			// require(['models/category'], function (CategoryModel) { 
             
-   //          that.categoryModel = new CategoryModel();
+            // that.categoryModel = new CategoryModel();
 			// that.categoryModel.set({name: "Buy and sell", index: 1});
 
 			// console.log(that.categoryModel.get("name"));
