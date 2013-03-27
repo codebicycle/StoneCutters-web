@@ -1,51 +1,42 @@
-define(['views/base/BaseView','spec/SinonHelper','config/conf'], function(BaseView,SinonHelper, Conf) {
+define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 	describe('The categories menu',function(){
 	
-		var wasCall = false;
+		var callbacks = {};
 
-		//Create an easily-removed container for our tests to play in
+		// Create an easily-removed container for our tests to play in
 		beforeEach(function() {
 			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
 		});
 
 		afterEach(function () {
-			expect(wasCall).toBe(true);
+			expect(callbacks.doneCategories).toHaveBeenCalled();
 		});
 		
 		//Specs
 		it('should load categories from the json response',function(){
 			
-			var categories = '[{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}]';
+			var categories = [{"children": "","name": "For Sale","id": 185,"counter": 1234,"parentId": ""},{"children": "","name": "Vehicles","id": 362,"counter": 1234,"parentId": ""}];
 
-			var options = {}; // no additional options for the Ajax request
-	 		var view = null;
-	 		var actions = [];
-	 		var urls = [];
-	 		var responses = [];
+			callbacks.doneCategories = function(page){
+				page.render(); 
 
-	 		actions.push("GET");
+      			//Categories's Expectations.
+	      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("For Sale"); 
+	      		expect($($('#home #left-panel-list li a')[2]).html()).toBe("Vehicles");
+	      		expect($('#home  #left-panel-list li a').length).toBe(3);
 
-	 		urls.push(Conf.get('smaug').url +':'+ Conf.get('smaug').port + '/categories/1');
+	      		//Here we check that sinon worked correctly.
+	      		wasCall=true;
+			}
 
-			responses.push(categories);
+			spyOn(callbacks,'doneCategories').andCallThrough();
+			var dfd = $.Deferred().done(_.bind(callbacks.doneCategories, this));
 
-			var S = new SinonHelper();
+			spyOn($,'ajax');
 
-	 		S.fakeResponse(actions,urls,responses, options, function() {
-	 			var dfd = $.Deferred().done(_.bind(function(page){
-					page.render(); 
+ 			view = new BaseView({'deferred': dfd});
 
-	      			//Categories's Expectations.
-		      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("For Sale"); 
-		      		expect($($('#home #left-panel-list li a')[2]).html()).toBe("Vehicles");
-		      		expect($('#home  #left-panel-list li a').length).toBe(3);
-
-		      		//Here we check that sinon worked correctly.
-		      		wasCall=true;
-				}, this));
-
-	 			view = new BaseView({'deferred': dfd});
-			});
+ 			$.ajax.calls[0].args[0].success(categories);
 		});
 	});
 });
