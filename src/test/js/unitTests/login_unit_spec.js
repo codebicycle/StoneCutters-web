@@ -27,17 +27,17 @@ define(['views/base/BaseView','models/user','config/conf'],
 				callbacks.doneCategories = function(page){
 					page.render();
 
-	      			//BaseView Expectations
-		      		expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
+	      				//BaseView Expectations
+		      			expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
 				}
 
 				spyOn(callbacks,'doneCategories').andCallThrough();
 
 				var dfd = $.Deferred().done(_.bind(callbacks.doneCategories, this));
 
-	      		view = new BaseView({'deferred': dfd});
+	      			view = new BaseView({'deferred': dfd});
 
-	      		$.ajax.calls[1].args[0].success(categories);
+	      			$.ajax.calls[1].args[0].success(categories);
 			};
 
 			spyOn(callbacks,'userSuccess').andCallThrough();
