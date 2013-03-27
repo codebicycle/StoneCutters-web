@@ -22,11 +22,11 @@ define(['views/messages/MyMessagesListView','config/conf'], function(MyMessagesL
 				page.render();
 				
       			//Messages's Expectations
-	      		expect($($($('#home #ads-list li')[0]).find('a')[0]).html()).toBe("mobile_automation"); 
-	      		expect($($($('#home #ads-list li')[0]).find('a')[1]).html()).toBe("Message 1"); 
+	      		expect($($($('#home #message-list li')[0]).find('a')[0]).html()).toBe("mobile_automation"); 
+	      		expect($($($('#home #message-list li')[0]).find('a')[1]).html()).toBe("Message 1"); 
 
-	      		expect($($($('#home #ads-list li')[1]).find('a')[0]).html()).toBe("mobile_automation"); 
-	      		expect($($($('#home #ads-list li')[1]).find('a')[1]).html()).toBe("Message 2"); 
+	      		expect($($($('#home #message-list li')[1]).find('a')[0]).html()).toBe("mobile_automation"); 
+	      		expect($($($('#home #message-list li')[1]).find('a')[1]).html()).toBe("Message 2"); 
       		}
 
       		spyOn(callbacks,'doneMessages').andCallThrough();
