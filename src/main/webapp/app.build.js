@@ -9,10 +9,18 @@
     modules: [
         {
             name: "main",
-            include: ["requireLib","jqm"]
-            //excludeShallow: [
-            //    "config/conf"
-            //]
+            include: ["requireLib","jqm"],
+            excludeShallow: [
+                "config/conf"
+            ]
+        },
+        {
+            name: "config/conf",
+            exclude: [
+            "underscore", 
+            "jquery",
+            "backbone"
+            ]
         }
     ],
     optimize: "uglify"
