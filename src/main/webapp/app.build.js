@@ -23,5 +23,5 @@
             ]
         }
     ],
-    optimize: "none"
+    optimize: 'uglify'
 })

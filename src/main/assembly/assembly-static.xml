@@ -1,5 +1,5 @@
 <assembly>
-  <id>bin</id>
+  <id>static</id>
   
   <formats>
     <format>zip</format>
@@ -11,6 +11,11 @@
     <fileSet>
       <outputDirectory></outputDirectory>
       <directory>src/main/webapp/</directory>
+      <excludes>
+        <exclude>index.html</exclude>
+        <exclude>index.php</exclude>
+        <exclude>smoke-dynamic.sh</exclude>
+      </excludes>
     </fileSet>
   </fileSets>
 </assembly>
