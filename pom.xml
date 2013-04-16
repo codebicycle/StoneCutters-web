@@ -9,7 +9,25 @@
 	<packaging>pom</packaging>
 
 	<build>
-	    <plugins>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+								<copy file="${project.build.directory}/../src/main/webapp/index.html"
+	                tofile="${project.build.directory}/../src/main/webapp/index.php" />
+	            			</target>
+	            		</configuration>
+	            		<goals>
+	            			<goal>run</goal>
+	            		</goals>
+	            	</execution>
+	            </executions>
+	        </plugin>
 			<plugin>
 	        	<artifactId>maven-assembly-plugin</artifactId>
 	        	<version>2.4</version>
@@ -27,29 +45,29 @@
 					<execution>
 			            <id>make-assembly-static</id>
 			            <phase>package</phase>
-  	            		<configuration>
+		            		<configuration>
 	          				<descriptor>src/main/assembly/assembly-static.xml</descriptor>
 	        			</configuration>
-            			<goals>
-              				<goal>single</goal>
-            			</goals>
-          			</execution>
+	        			<goals>
+	          				<goal>single</goal>
+	        			</goals>
+	      			</execution>
 	      		</executions>
 	      	</plugin>
-	      	<plugin>
-	        	<groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-jar-plugin</artifactId>
-	            <configuration>
-	            	<skip>true</skip>
-	            </configuration>
-	            
-	            <executions>
-	            	<execution>
-		        	<id>default-jar</id>
-	    	    		<phase>none</phase>
-	    	    	</execution>
-		      	</executions>
-	    	</plugin>
+      	<plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+            	<skip>true</skip>
+            </configuration>
+            
+            <executions>
+            	<execution>
+	        	<id>default-jar</id>
+    	    		<phase>none</phase>
+    	    	</execution>
+	      	</executions>
+    	</plugin>
 	    </plugins>
 	</build>
 </project>
