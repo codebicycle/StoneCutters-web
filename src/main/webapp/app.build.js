@@ -1,6 +1,6 @@
 ({
-	appDir: '.',
-    baseUrl: 'js',
+	appDir: ".",
+    baseUrl: "js",
     mainConfigFile: 'js/main.js',
     paths: {
         requireLib: 'libs/require/require-min',
@@ -8,20 +8,20 @@
     },
     modules: [
         {
-            name: 'main',
-            include: ['requireLib','jqm'],
+            name: "main",
+            include: ["requireLib","jqm"],
             excludeShallow: [
-                'config/conf'
+                "config/conf"
             ]
         },
         {
-            name: 'config/conf',
+            name: "config/conf",
             exclude: [
-            'underscore', 
-            'jquery',
-            'backbone'
+            "underscore", 
+            "jquery",
+            "backbone"
             ]
         }
     ],
-    optimize: "none"
+    optimize: "uglify"
 })
