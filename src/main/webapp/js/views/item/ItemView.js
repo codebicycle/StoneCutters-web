@@ -23,7 +23,7 @@ define([
         'click .callTitle': 'callSeller',
         'click .sms': 'smsSeller',
         'click .smsTitle': 'smsSeller',
-        'click .messageTitle': 'messageSeller',
+        'click .message': 'messageSeller',
         'click .messageTitle': 'messageSeller',
       },
 
