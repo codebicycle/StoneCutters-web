@@ -19,6 +19,12 @@ define([
       el: "#home",
 
       events: {
+        'click .call': 'callSeller',
+        'click .callTitle': 'callSeller',
+        'click .sms': 'smsSeller',
+        'click .smsTitle': 'smsSeller',
+        'click .message': 'messageSeller',
+        'click .messageTitle': 'messageSeller',
       },
 
       initialize: function(options){
@@ -119,6 +125,23 @@ define([
       },
       related_ads_success: function(model, response){
         this.render();
+      },
+      callSeller: function(){
+        if (this.item.get('phone')) {
+          window.location = "callto:"+this.item.get('phone');
+        }else{
+          alert("This user did not provide a phone number");
+        };
+      },
+      smsSeller: function(){
+        if (this.item.get('phone')) {
+          window.location = "sms:"+this.item.get('phone');
+        }else{
+          alert("This user did not provide a phone number");
+        };
+      },
+      messageSeller: function(){
+        
       }
     });
   return ItemView;
