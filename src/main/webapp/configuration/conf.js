@@ -9,10 +9,10 @@ define([
         // port : '9000',
         // url : 'http://10.0.5.12',
         // port : '9000',
-        url : 'http://smaug.herokuapp.com',
-        port : '80',
-        //url : 'http://localhost',
-        //port : '9000'
+        // url : 'http://smaug.herokuapp.com',
+        // port : '80',
+        url : 'http://api-v2.olx.com',
+        port : '80'
       },
       arwen : {
         url : 'http://arwen.herokuapp.com',

@@ -10,6 +10,7 @@ define([
   'text!templates/ads/adsListTemplate.html',
   'text!templates/ads/filterTemplate.html',
   'text!templates/ads/sortTemplate.html',
+  'text!templates/base/breadcrumbTemplate.html',
   'views/scroll/ScrollView',
   'helpers/JSONHelper',
   'helpers/CategoryHelper'
@@ -17,7 +18,7 @@ define([
 
   function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
     SortsCollection, adsTemplate,adsListTemplate, 
-    filterTemplate, sortTemplate,ScrollView, JSONHelper, CategoryHelper){
+    filterTemplate, sortTemplate, breadcrumbTemplate, ScrollView, JSONHelper, CategoryHelper){
   
     var AdsListView = ScrollView.extend({
       el: "#home",
@@ -34,6 +35,7 @@ define([
         this.adsListCT = AdsListView.__super__.listTemplate = Handlebars.compile(adsListTemplate);
         this.filCT = Handlebars.compile(filterTemplate);
         this.sorCT = Handlebars.compile(sortTemplate);
+        this.breadCT = Handlebars.compile(breadcrumbTemplate);
 
         this.params = JSONHelper.parseQueryString(options.params);
         this.dfd = null || options.deferred;
@@ -42,7 +44,7 @@ define([
         AdsListView.__super__.offset= options.page || 0;
         this.pageSize =  10;
 
-        //this sets the category and parent category in the Category Helper
+        //this sets the category in the Category Helper
         if (options.cat_id)
           CategoryHelper.setCategory(parseInt(options.cat_id,10));
 
@@ -121,6 +123,25 @@ define([
         // $(this.el).find('#sortPopup').html(this.sorCT({
         //   'sorts':this.sorts.toJSON()}));
         //End of Mock code lines
+
+        if (CategoryHelper.categories.length > 0) {
+          var breadOpts = {};
+          var pCat;
+          var catId = parseInt(this.options.cat_id,10);
+
+          if (CategoryHelper.isParent(catId)) {
+            pCat = CategoryHelper.categories.get(catId);
+          }else{
+            var sCat = CategoryHelper.getChild(catId);
+            pCat = CategoryHelper.categories.get(sCat.get('parentId'));
+            breadOpts = JSONHelper.concatJSON(breadOpts, {'sCat':sCat.get('id'),'sCatName':sCat.get('name')});
+          };
+
+          breadOpts = JSONHelper.concatJSON(breadOpts, {'pCat':pCat.get('id'),'pCatName':pCat.get('name')});
+
+          $(this.el).find('#breadcrumb').show();
+          $(this.el).find('#breadcrumb').html(this.breadCT(breadOpts));
+        }
 
         $(this.el).find('#content').trigger('create');
 

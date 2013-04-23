@@ -47,6 +47,8 @@ define([
         $(this.el).find('#content').html(this.postingCT({fields:this.fields.toJSON()}));
         $(this.el).find('#content').trigger('create');
 
+        $(this.el).find('#breadcrumb').hide();
+
         $('input[class*=in],select[class*=in],textarea[class*=in]').change(function(ev){
           var name = $(ev.currentTarget).attr('name');
           var value;
