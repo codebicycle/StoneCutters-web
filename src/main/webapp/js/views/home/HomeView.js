@@ -69,6 +69,8 @@ define([
         $(this.el).find('#content').html(this.homeCT({}));
         //$(this.el).trigger('create');
 
+        $(this.el).find('#breadcrumb').hide();
+
         $(this.el).find('#slider1').html(this.whatsNewCT({'items': this.whatsNewItems.toJSON()}));
         this.slider1 = new Swipe(document.getElementById('slider1'), {
                             //startSlide: 2,
