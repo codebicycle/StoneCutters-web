@@ -26,8 +26,8 @@ define(['views/home/HomeView','config/conf'], function(HomeView,Conf) {
 	      		expect($($('#home #slider1 li a')[1]).attr("href")).toBe("#item/706");
 	      		expect($('#home #slider1 li a img').length).toBe(3);
 
-	      		expect($($('#home #slider2 li h5')[0]).html()).toBe("Last Visited 1"); 
-	      		expect($($('#home #slider2 li h5')[1]).html()).toBe("Last Visited 2");
+	      		expect($($('#home #slider2 li figcaption')[0]).html()).toBe("Last Visited 1"); 
+	      		expect($($('#home #slider2 li figcaption')[1]).html()).toBe("Last Visited 2");
 	      		expect($('#home #slider2 li a img').length).toBe(2);
 			}
 
