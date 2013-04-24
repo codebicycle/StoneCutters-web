@@ -1,52 +1,47 @@
 <div id="itempage">
 
-    <div class="title">
-        <h1>{{item.title}}</h1>
-        <h4>{{item.displayPrice}}</h4>
-    </div>    
+    <header class="title">
+        <hgroup>
+            <h1>{{item.title}}</h1>
+            <h4>{{item.displayPrice}}</h4>
+        </hgroup>
+    </header>    
 
-    <div id="image-slider" class="swipe"></div>
+    <section id="image-slider" class="swipe"></section>
 
-
-    <div class="actions">
-        <div class="date">{{item.date}}</div>
-        <div class="addFavorite"></div> 
-        <div class="share"></div>
-        <div class="clear"></div>
-    </div>
+    <ul class="actions">
+        <li class="date">{{item.date}}</li>
+        <li class="addFavorite">Add to favourites</li> 
+        <li class="share">Share this Ad</li>
+    </ul>
 
     <div class="optionals">
         {{#each item.optionals}}
-            <b>{{key}}:</b> {{value}}<br>
+           <li><b>{{key}}:</b> {{value}}</li>
         {{/each}}
     </div>
 
-    <div class="titleBox"><h3>Description</h3></div>
+    <article>
+        <h3 class="titleBox">Description</h3>
+        <p class="description">{{item.description}}</p>
+    </article>
 
-    <div class="description">{{item.description}}</div>
-
-    <div class="titleBox"><h3>Location</h3></div>
-
-    <div class="location">
+    <article class="location">
+        <h3 class="titleBox">Location</h3>
         <h4>{{item.location.city}}</h4>
-        <div class="map" style="background-image: url(http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=1024x150&maptype=roadmap&markers=color:red%7Ccolor:red%7C{{item.location.latitude}},{{item.location.longitude}}&sensor=false)"></div>
-    </div>
+        <div class="map" style="background-image: url(http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=640x150&maptype=roadmap&markers=color:red%7Ccolor:red%7C{{item.location.latitude}},{{item.location.longitude}}&sensor=false)"></div>
+    </article>
 
-    <div class="phoneActions">
+    <ul class="phoneActions">
 
-        <div class="call"></div>
-        <div class="sms"></div>
-        <div class="message"></div>
-        <div class="clear"></div>
+        <li class="call">Call</li>
+        <li class="sms">SMS</li>
+        <li class="message">Message</li>
+    </ul>
 
-        <div class="callTitle">Call</div>
-        <div class="smsTitle">SMS</div>
-        <div class="messageTitle">Message</div>
-        <div class="clear"></div>
-    </div>
-
-    <div class="titleBox"><h3>Related Ads</h3></div>
-
-    <div id="image-slider-related" class="swipe"></div>
-
+    <article>
+        <h3 class="titleBox">Related Ads</h3>
+        <div id="image-slider-related" class="swipe">
+        </div>
+    </article>
 </div>

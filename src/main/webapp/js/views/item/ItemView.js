@@ -9,22 +9,22 @@ define([
   'text!templates/item/itemTemplate.html',
   'text!templates/item/imagesTemplate.html',
   'text!templates/home/whatsNewTemplate.html',
-  'helpers/ScreenHelper'
+  'text!templates/base/breadcrumbTemplate.html',
+  'helpers/ScreenHelper',
+  'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, sw, Handlebars, ItemModel, ItemsCollection, 
-    itemTemplate, imgsTemplate, relatedAdsTemplate, ScreenHelper){
+    itemTemplate, imgsTemplate, relatedAdsTemplate, breadcrumbTemplate, 
+    ScreenHelper, CategoryHelper){
 
     var ItemView = Backbone.View.extend({
       el: "#home",
 
       events: {
         'click .call': 'callSeller',
-        'click .callTitle': 'callSeller',
         'click .sms': 'smsSeller',
-        'click .smsTitle': 'smsSeller',
         'click .message': 'messageSeller',
-        'click .messageTitle': 'messageSeller',
       },
 
       initialize: function(options){
@@ -33,6 +33,7 @@ define([
         this.itemCT = Handlebars.compile(itemTemplate);
         this.imgsCT = Handlebars.compile(imgsTemplate);
         this.relAdsCT = Handlebars.compile(relatedAdsTemplate);
+        this.breadCT = Handlebars.compile(breadcrumbTemplate);
         this.dfd = options.deferred;
 
         this.item = new ItemModel({'id': options.id});
@@ -90,6 +91,20 @@ define([
 
         $(this.el).find('#content').html(this.itemCT({'item': this.item.toJSON()}));
 
+        if (CategoryHelper.categories.length > 0) {
+          var parentId = this.item.get('category').parentId;
+
+          $(this.el).find('#breadcrumb').show();
+          $(this.el).find('#breadcrumb').html(this.breadCT({
+            // 'itemId':this.item.get('id'),
+            // 'itemName':this.item.get('title'),
+            'sCat':this.item.get('category').id,
+            'sCatName':this.item.get('category').name,
+            'pCat':parentId,
+            'pCatName':CategoryHelper.categories.get(parentId).get('name')
+          }));
+        };
+
         $(this.el).find('#image-slider').html(this.imgsCT({'imgs': this.item.get('images')}));
 
         this.slider = new Swipe(document.getElementById('image-slider'), {
@@ -102,15 +117,7 @@ define([
 
         });
 
-        $(this.el).find('#image-slider-related').html(this.relAdsCT({'items': this.relatedAds.toJSON()}));
-        this.sliderRelated = new Swipe(document.getElementById('image-slider-related'), {
-                            //startSlide: 2,
-                            //speed: 400,
-                            //auto: 3000,
-                            'items':ScreenHelper.getImgsNum(),
-                            'callback': function(event, index, elem) {
-                            }
-        });
+        this.related_ads_success(null,null);
 
         $(window).resize(_.bind(function() {
           this.slider.items = ScreenHelper.getImgsNum();
@@ -124,7 +131,15 @@ define([
         return;
       },
       related_ads_success: function(model, response){
-        this.render();
+        $(this.el).find('#image-slider-related').html(this.relAdsCT({'items': this.relatedAds.toJSON()}));
+        this.sliderRelated = new Swipe(document.getElementById('image-slider-related'), {
+                            //startSlide: 2,
+                            //speed: 400,
+                            //auto: 3000,
+                            'items':ScreenHelper.getImgsNum(),
+                            'callback': function(event, index, elem) {
+                            }
+        });
       },
       callSeller: function(){
         if (this.item.get('phone')) {
