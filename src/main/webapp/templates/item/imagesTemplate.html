@@ -1,7 +1,11 @@
 <ul>
 {{#each imgs}}
-    <li>
-        <img src="{{thumbUrl}}"/>
+	<li>
+        <a href="{{thumbUrl}}">
+	        <figure>
+	            <img src="{{thumbUrl}}" alt="">
+	        </figure>
+        </a>
     </li>
 {{/each}}
 </ul>

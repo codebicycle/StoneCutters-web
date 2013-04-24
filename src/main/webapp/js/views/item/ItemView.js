@@ -23,11 +23,8 @@ define([
 
       events: {
         'click .call': 'callSeller',
-        'click .callTitle': 'callSeller',
         'click .sms': 'smsSeller',
-        'click .smsTitle': 'smsSeller',
         'click .message': 'messageSeller',
-        'click .messageTitle': 'messageSeller',
       },
 
       initialize: function(options){

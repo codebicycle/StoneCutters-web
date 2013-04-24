@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html class="ui-mobile-rendering">
 <head>
+    <title>OLX Mobile</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-    <title>OLX Mobile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/arwen/arwen.css"/>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile.structure-1.3.0.min.css">
-    <link rel="stylesheet" href="css/swipe/style.css"/>
-    <link rel="stylesheet" href="css/arwen/style-arwen.css"/>
-    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <!--[if IE]><meta http-equiv="cleartype" content="on"><![endif]-->
+
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="imgs/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="imgs/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="imgs/apple-touch-icon-precomposed.png">
+
+    <link rel="shortcut icon" href="imgs/favicon.ico">
+
+    <link rel="stylesheet" href="css/normalize/normalize.css">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300">    
+    <link rel="stylesheet" href="css/jqueryMobile/jquery.mobile.structure-1.3.0.min.css">
+
+    <link rel="stylesheet" href='css/arwen/style-arwen.css'>
+
+    <link rel="stylesheet" href="css/arwen/custom.css">
 
     <script data-main="js/main" src="js/libs/require/require.js"></script>
-
 </head>
 
 <body>
     <div id="home" data-role="page">
         <div id="left-panel" data-role="panel"></div>
 
-        <div id="header" data-role="header">
+        <header id="header" data-role="header">
 
             <a id="cat-button" href="#left-panel" data-rel="panel"></a>
-            <h1><a href="#"><div>&nbsp;</div></a></h1>
+            <h1><a href="#">OLX</a></h1>
             <a href="javascript:;" id="toggle-search"></a>
             
             <div id="search-bar-div" style="display:none;">
@@ -33,7 +46,7 @@
             <div class="headerBorder"></div>
 
             <div id="breadcrumb" style="display: none;"></div>
-        </div>
+        </header>
 
         <div id="content" data-role="content"></div>
     </div>
