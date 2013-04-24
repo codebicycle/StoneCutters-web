@@ -1,5 +1,11 @@
 <ul>
     {{#items}}
-        <li style='display:none'><a href="#item/{{id}}"><img src="{{thumbnail}}"/></a></li>
+    	<li>
+			<a href="#item/{{id}}">
+        		<figure>
+        			<img src="{{thumbnail}}" alt="">
+        		</figure>
+        	</a>
+        </li>
     {{/items}}
 </ul>

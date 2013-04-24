@@ -1,8 +1,12 @@
 <ul>
     {{#items}}
-        <li style='display:none'>
-        	<a href="#item/{{id}}"><img src="{{thumbnail}}"/></a>
-        	<div class="tooltip"><h5>{{title}}</h5></div>
+        <li>
+        	<a href="#item/{{id}}">
+        		<figure>
+        			<img src="{{thumbnail}}" alt="">
+        			<figcaption>{{title}}</figcaption>
+				</figure>
+        	</a>
         </li>
     {{/items}}
 </ul>
