@@ -121,7 +121,7 @@ div#content div#itempage .actions .date {
   float: left;
   font-size: 10pt;
   font-weight: normal;    
-  background: url(arwen/images/date01.png) no-repeat left center;
+  background: url(images/date01.png) no-repeat left center;
   padding-left: 23px;
 }
 
@@ -134,13 +134,13 @@ div#content div#itempage .actions .addFavorite {
 
 div#content div#itempage .actions .share {
   width: 30px;
-  background: url(arwen/images/share01.png) no-repeat left top;
+  background: url(images/share01.png) no-repeat left top;
   margin-right: 20px;
 }
 
 div#content div#itempage .actions .addFavorite {
   width: 40px;
-  background: url(arwen/images/favorite01.png) no-repeat left top;
+  background: url(images/favorite01.png) no-repeat left top;
 }
 
 /* ______________ Optional Box _________________________ */
@@ -179,7 +179,7 @@ div#content div#itempage .location h4 {
   font-size: 12pt;
   font-weight: normal;
   padding-left: 20px;
-  background: url(arwen/images/site01.png) left center no-repeat;
+  background: url(images/site01.png) left center no-repeat;
 }
 
 div#content div#itempage .location div.map {
@@ -209,22 +209,22 @@ div#content div#itempage .phoneActions .message {
 }
 
 div#content div#itempage .phoneActions .call {
-  background: url(arwen/images/call01.png) 50% 0 no-repeat;
+  background: url(images/call01.png) 50% 0 no-repeat;
   
 }
 div#content div#itempage .phoneActions .sms {
   border-right: 1px solid #cdcdcd;
   border-left: 1px solid #cdcdcd;
-  background: url(arwen/images/sms01.png) 50% 4px no-repeat;
+  background: url(images/sms01.png) 50% 4px no-repeat;
 }
 div#content div#itempage .phoneActions .message {
-  background: url(arwen/images/message01.png) 50% 4px no-repeat;
+  background: url(images/message01.png) 50% 4px no-repeat;
 }
 
 
 /* logo h1 with link */
 #header h1.ui-title {
-  background: url(arwen/images/logo.png);
+  background: url(images/logo.png);
   height: 44px;
   width: 83px;
   margin:0 0 0 50px;
@@ -274,7 +274,7 @@ ul#ads-list .listingContainer a div {
 
 ul#ads-list .listingContainer a figure span  {
   display: block;
-  background: url(arwen/images/img_no_pic.png) no-repeat 50% 50%;
+  background: url(images/img_no_pic.png) no-repeat 50% 50%;
   background-size: 100%;
 }
 
