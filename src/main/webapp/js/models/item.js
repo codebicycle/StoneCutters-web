@@ -8,7 +8,7 @@ define([
   		this.id = options.id;
   	},
   	url: function(){
-  		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/item/'+this.id;
+  		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+this.id;
   	}
   });
   

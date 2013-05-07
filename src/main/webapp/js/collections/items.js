@@ -31,16 +31,20 @@ define([
         //this.item_options.item_type='adsList';
         //***********-----------------------
 
+        var queryParameters = JSONHelper.jsonToQueryString(this.query_opts);
+        
         switch(this.item_options.item_type){
 
           case "adsList":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
+            //response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+ JSON.stringify(this.query_opts);
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items'+queryParameters;
           break;
           case "myAds":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +'&token=' + this.query_opts.token;
+            //response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +'&token=' + this.query_opts.token;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/ads'+queryParameters;
           break;
           case "myFavorites":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + 'favorites?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +'&token=' +this.query_opts.token;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + 'favorites'+queryParameters;
           break;
         }
         return response;
