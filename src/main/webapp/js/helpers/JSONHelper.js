@@ -42,6 +42,17 @@ define([
       }
       return params;
     },
+
+    jsonToQueryString: function(jsonObject){
+     
+      var query_parameters = '?';
+      for(variable in jsonObject){
+        query_parameters = query_parameters+variable+"="+jsonObject[variable];
+        query_parameters = query_parameters+"&";
+      }
+      query_parameters = query_parameters.substring(0, query_parameters.length - 1);
+      return query_parameters;
+    }
   });
 
   return new JSONHelper();
