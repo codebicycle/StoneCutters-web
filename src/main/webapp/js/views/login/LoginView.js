@@ -67,7 +67,7 @@ define([
         $.ajax({
           type: "GET",
           url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-          '/user/login?c=' + this.challenge + "&h=" + sha512,
+          '/user/login?c=' + this.challenge + "&h=" + sha512Hash,
         }).done(_.bind(this.login_success, this));
         
       },
