@@ -58,6 +58,7 @@ define([
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (response){
+        console.log(response);
         debugger;
         var data = JSON.parse(response);
         this.challenge = data.challenge;
@@ -73,6 +74,7 @@ define([
 
       },
       login_success:function (response){
+        console.log(response);
         debugger;
 
         data = JSON.parse(response);
