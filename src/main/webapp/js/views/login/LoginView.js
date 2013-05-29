@@ -58,9 +58,14 @@ define([
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (response){
-        console.log(response);
-        debugger;
-        var data = JSON.parse(response);
+        
+        var data = null;
+        if(typeof response == "string"){
+          data = JSON.parse(response);
+        }else{
+          data=response;
+        }
+        
         this.challenge = data.challenge;
 
         var md5Hash = CryptoJS.MD5(this.password);
@@ -74,10 +79,13 @@ define([
 
       },
       login_success:function (response){
-        console.log(response);
-        debugger;
-
-        data = JSON.parse(response);
+        
+        var data = null;
+        if(typeof response == "string"){
+          data = JSON.parse(response);
+        }else{
+          data=response;
+        }
 
         if (data.token) {
           //this.Storage.set("authToken",data.token);
