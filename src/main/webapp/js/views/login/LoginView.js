@@ -58,6 +58,7 @@ define([
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (response){
+        debugger;
         var data = JSON.parse(response);
         this.challenge = data.challenge;
 
@@ -69,9 +70,11 @@ define([
           url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
           '/user/login?c=' + this.challenge + "&h=" + sha512Hash,
         }).done(_.bind(this.login_success, this));
-        
+
       },
       login_success:function (response){
+        debugger;
+
         data = JSON.parse(response);
 
         if (data.token) {
