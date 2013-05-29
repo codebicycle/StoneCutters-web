@@ -48,14 +48,14 @@ define([
         if (options.cat_id)
           CategoryHelper.setCategory(parseInt(options.cat_id,10));
 
-        var ops = {countryId: 1, offset:AdsListView.__super__.offset, pageSize: this.pageSize};
+        var ops = {location: "www.olx.com", offset:AdsListView.__super__.offset, pageSize: this.pageSize};
         delete this.params["q"];
 
 
         ops = JSONHelper.concatJSON(ops, this.params)
         
         if(this.query){
-          ops = JSONHelper.concatJSON(ops, {"searchQuery":this.query});
+          ops = JSONHelper.concatJSON(ops, {"searchTerm":this.query});
         }
         
         delete this.params["sort"];

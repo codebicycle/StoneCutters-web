@@ -62,12 +62,12 @@ define([
         this.challenge = data.challenge;
 
         var md5Hash = CryptoJS.MD5(this.password);
-        var sha512Hash = CryptoJS.SHA512(md5Hash+this.challenge);
+        var sha512Hash = CryptoJS.SHA512(md5Hash+this.username);
 
         $.ajax({
           type: "GET",
           url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-          '/user/login?u=' + this.username + "&h=" + sha512Hash,
+          '/user/login?c=' + this.challenge + "&h=" + sha512Hash,
         }).done(_.bind(this.login_success, this));
         
       },
