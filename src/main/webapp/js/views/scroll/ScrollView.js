@@ -36,7 +36,19 @@ define([
 
       checkScroll: function () {
         var triggerPoint = 100; // 100px from the bottom
-        if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()  ) {
+        
+        console.log("YEAH:"+$(window).scrollTop());
+        console.log("YEAH2:"+$(window).height());
+        console.log("YEAH3:"+!this.isLoading);
+        console.log("YEAH4:"+$(window).scrollTop() + $(window).height() + triggerPoint > $(document).height());
+        console.log($(window).scrollTop() + $(window).height() + triggerPoint);
+        console.log($(document).height());
+        
+
+        console.log(!this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height() );
+
+        if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()) {
+          console.log("I am inside!!!!")
           this.collection.query_opts.offset += 1; // Load next page
           this.loadResults();
         }
