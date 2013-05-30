@@ -38,7 +38,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 				//Items' Expectations
 	      		expect($($('#home #ads-list li a h2')[0]).html()).toBe("Item 1");
 	      		expect($($('#home #ads-list li a h2')[1]).html()).toBe("Item 2");
-	      		expect($('#home #ads-list li a h2').length).toBe(15z);
+	      		expect($('#home #ads-list li a h2').length).toBe(15);
 
 	      		//Here we check that sinon worked correctly.
 	      		wasCall=true;
