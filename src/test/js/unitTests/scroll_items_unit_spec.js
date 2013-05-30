@@ -38,7 +38,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 				//Items' Expectations
 	      		expect($($('#home #ads-list li a h2')[0]).html()).toBe("Item 1");
 	      		expect($($('#home #ads-list li a h2')[1]).html()).toBe("Item 2");
-	      		expect($('#home #ads-list li a h2').length).toBe(15);
+	      		expect($('#home #ads-list li a h2').length).toBe(15z);
 
 	      		//Here we check that sinon worked correctly.
 	      		wasCall=true;
@@ -56,6 +56,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 			
 			$.ajax.calls[0].args[0].success(items);
 
+			$(window).scrollTop(175);
 			$(window).trigger("scroll.322"); 			
 
  			
