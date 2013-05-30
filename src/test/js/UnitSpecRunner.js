@@ -86,15 +86,15 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
 
   var specs = [];
 
-  // specs.push('spec/unitTests/category_model_unit_spec');
-  // specs.push('spec/unitTests/item_slider_unit_spec');
-  // specs.push('spec/unitTests/load_categories_unit_spec');
-  // specs.push('spec/unitTests/load_items_unit_spec');
-  // specs.push('spec/unitTests/load_messages_unit_spec');
-  // specs.push('spec/unitTests/load_favorites_unit_spec');
-  // specs.push('spec/unitTests/load_myads_unit_spec');
-  // specs.push('spec/unitTests/login_unit_spec');
-  // specs.push('spec/unitTests/load_item_page_unit_spec');
+  specs.push('spec/unitTests/category_model_unit_spec');
+  specs.push('spec/unitTests/item_slider_unit_spec');
+  specs.push('spec/unitTests/load_categories_unit_spec');
+  specs.push('spec/unitTests/load_items_unit_spec');
+  specs.push('spec/unitTests/load_messages_unit_spec');
+  specs.push('spec/unitTests/load_favorites_unit_spec');
+  specs.push('spec/unitTests/load_myads_unit_spec');
+  specs.push('spec/unitTests/login_unit_spec');
+  specs.push('spec/unitTests/load_item_page_unit_spec');
   // specs.push('spec/unitTests/swipe_menu_unit_spec');
   specs.push('spec/unitTests/scroll_items_unit_spec');
 
