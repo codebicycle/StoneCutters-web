@@ -32,6 +32,23 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 							{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":766,"date":"Date-352719","displayPrice":"$18.10","title":"Item 15"},
 							{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":973,"date":"Date-25579","displayPrice":"$44.43","title":"Item 16"},
 						];
+			var items2 = [
+							{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":518,"date":"Date-126539","displayPrice":"$15.50","title":"Item 17"},
+							{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":726,"date":"Date-352719","displayPrice":"$18.10","title":"Item 18"},
+							{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":933,"date":"Date-25579","displayPrice":"$44.43","title":"Item 19"},
+								{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":548,"date":"Date-126539","displayPrice":"$15.50","title":"Item 20"},
+							{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":756,"date":"Date-352719","displayPrice":"$18.10","title":"Item 21"},
+							{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":963,"date":"Date-25579","displayPrice":"$44.43","title":"Item 22"},
+								{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":578,"date":"Date-126539","displayPrice":"$15.50","title":"Item 23"},
+							{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":786,"date":"Date-352719","displayPrice":"$18.10","title":"Item 24"},
+							{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":913,"date":"Date-25579","displayPrice":"$44.43","title":"Item 25"},
+								{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":528,"date":"Date-126539","displayPrice":"$15.50","title":"Item 26"},
+							{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":736,"date":"Date-352719","displayPrice":"$18.10","title":"Item 27"},
+							{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":943,"date":"Date-25579","displayPrice":"$44.43","title":"Item 28"},
+								{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":558,"date":"Date-126539","displayPrice":"$15.50","title":"Item 29"},
+							{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":766,"date":"Date-352719","displayPrice":"$18.10","title":"Item 30"},
+							{"displayLocation":"Fzqxjgrad","thumbnail":"dRmYXKDaU-thumbnail","id":973,"date":"Date-25579","displayPrice":"$44.43","title":"Item 31"},
+						];
 
 	 		callbacks.doneItems =function(page){
 				page.render();
@@ -53,13 +70,15 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
  			view = new AdsListView({'deferred': dfd, 'cat_id': 322});
 
 			spyOn(view,'checkScroll').andCallThrough();			
+			spyOn(view,'loadResults').andCallThrough();
 			
 			$.ajax.calls[0].args[0].success(items);
+			$.ajax.calls[1].args[0].success(items2);
 
 			$(window).scrollTop(2400);
-			$(window).trigger("scroll.322"); 			
+			$(window).trigger("scroll.322"); 	
 
- 			
+			expect(view.loadResults).toHaveBeenCalled();		
 		});
 	});
 });
