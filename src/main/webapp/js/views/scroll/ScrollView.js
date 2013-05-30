@@ -35,6 +35,7 @@ define([
       },
 
       checkScroll: function () {
+        console.log("Checkscroll!!!!!!!!!!!!!!!!11")
         var triggerPoint = 100; // 100px from the bottom
         
         if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()) {
