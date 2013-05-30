@@ -56,7 +56,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 			
 			$.ajax.calls[0].args[0].success(items);
 
-			$(window).scrollTop(175);
+			$(window).scrollTop(2400);
 			$(window).trigger("scroll.322"); 			
 
  			
