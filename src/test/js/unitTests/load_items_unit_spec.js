@@ -22,7 +22,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 				//Items' Expectations
 	      		expect($($('#home #ads-list li a h2')[0]).html()).toBe("Item 1");
 	      		expect($($('#home #ads-list li a h2')[1]).html()).toBe("Item 2");
-	      		expect($('#home #ads-list li a h2').length).toBe(3);
+	      		
 	      		
 
 	      		var length = $('#home #ads-list li a h2').length;
@@ -32,7 +32,9 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 				  console.log("HOLA"+$('#home #ads-list li a h2')[i]);
 				  // Do something with element i.
 				}
-
+				var length2;
+				expect(length2=$('#home #ads-list li a h2').length).toBe(3);
+				console.log("Length2 es:"+length2);
 	      		//Here we check that sinon worked correctly.
 	      		wasCall=true;
 			}
