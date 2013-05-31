@@ -30,16 +30,16 @@ define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 
 
 	      		var length = $('#home  #left-panel-list li a').length;
-			    console.log("El length total es:"+length);
+			    console.log("El length total es ca:"+length);
 			    element = null;
 				for (var i = 0; i < length; i++) {
-				  console.log("HOLA"+$('#home  #left-panel-list li a')[i]);
+				  console.log("HOLAca"+$($('#home  #left-panel-list li a')[i]).html());
 				  // Do something with element i.
 				}
 				expect($('#home  #left-panel-list li a').length).toBe(3);
 				var length2;
 				expect(length2=$('#home  #left-panel-list li a').length).toBe(3);
-				console.log("Length2 es:"+length2);
+				console.log("Length2 es ca:"+length2);
 
 
 
