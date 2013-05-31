@@ -25,10 +25,11 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 	      		expect($('#home #ads-list li a h2').length).toBe(3);
 	      		
 
-	      		var length = $('#home #ads-list li a h2').length,
+	      		var length = $('#home #ads-list li a h2').length;
+			    console.log("El length total es:"+length);
 			    element = null;
 				for (var i = 0; i < length; i++) {
-				  console.log($('#home #ads-list li a h2')[i]);
+				  console.log("HOLA"+$('#home #ads-list li a h2')[i]);
 				  // Do something with element i.
 				}
 
