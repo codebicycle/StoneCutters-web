@@ -20,7 +20,7 @@ define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 			callbacks.doneCategories = function(page){
 				page.render(); 
 
-				console.log($('#home #left-panel-list').html());
+				
       			
       			//Categories's Expectations.
 	      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("For Sale"); 
@@ -29,7 +29,7 @@ define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 
 
 
-
+	      		console.log("Lo que da la posta:"+$('#home #left-panel-list').html());
 
 	      		var length = $('#home  #left-panel-list li a').length;
 			    console.log("El length total es ca:"+length);
