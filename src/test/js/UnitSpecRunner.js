@@ -97,6 +97,7 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
   specs.push('spec/unitTests/load_item_page_unit_spec');
   // specs.push('spec/unitTests/swipe_menu_unit_spec');
   specs.push('spec/unitTests/scroll_items_unit_spec');
+  specs.push('spec/unitTests/json_helper_unit_spec');
 
   Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
   Backbone.View.prototype.close = function(){};
