@@ -36,9 +36,9 @@ define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 				  console.log("HOLAca"+$($('#home  #left-panel-list li a')[i]).html());
 				  // Do something with element i.
 				}
-				expect($('#home  #left-panel-list li a').length).toBe(3);
+				expect($('#home  #left-panel-list li a').length).toBe(4);
 				var length2;
-				expect(length2=$('#home  #left-panel-list li a').length).toBe(3);
+				expect(length2=$('#home  #left-panel-list li a').length).toBe(4);
 				console.log("Length2 es ca:"+length2);
 
 
