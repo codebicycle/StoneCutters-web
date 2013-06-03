@@ -20,33 +20,10 @@ define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 			callbacks.doneCategories = function(page){
 				page.render(); 
 
-				
-      			
       			//Categories's Expectations.
-	      		expect($($('#home #left-panel-list li a.cat-link')[1]).html()).toBe("For Sale"); 
-	      		expect($($('#home #left-panel-list li a.cat-link')[2]).html()).toBe("Vehicles");
-	      		
-
-
-
-	      		console.log("Lo que da la posta:"+$('#home #left-panel-list').html());
-
-	      		var length = $('#home  #left-panel-list li a.cat-link').length;
-			    console.log("El length total es ca:"+length);
-			    element = null;
-				for (var i = 0; i < length; i++) {
-				  console.log("HOLAca"+$($('#home  #left-panel-list li a.cat-link')[i]).html());
-				  // Do something with element i.
-				}
-				expect($('#home  #left-panel-list li a.cat-link').length).toBe(4);
-				var length2;
-				expect(length2=$('#home  #left-panel-list li a.cat-link').length).toBe(4);
-				console.log("Length2 es ca:"+length2);
-
-
-
-
-
+	      		expect($($('#home #left-panel-list li a.cat-link')[0]).html()).toBe("For Sale"); 
+	      		expect($($('#home #left-panel-list li a.cat-link')[1]).html()).toBe("Vehicles");
+				expect($('#home  #left-panel-list li a.cat-link').length).toBe(2);
 
 	      		//Here we check that sinon worked correctly.
 	      		wasCall=true;
