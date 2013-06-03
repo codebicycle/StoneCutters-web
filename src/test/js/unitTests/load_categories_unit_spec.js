@@ -20,6 +20,7 @@ define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 			callbacks.doneCategories = function(page){
 				page.render(); 
 
+				$('#home #left-panel-list').html();
       			//Categories's Expectations.
 	      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("For Sale"); 
 	      		expect($($('#home #left-panel-list li a')[2]).html()).toBe("Vehicles");
