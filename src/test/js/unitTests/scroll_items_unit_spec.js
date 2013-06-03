@@ -73,7 +73,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 			spyOn(view,'loadResults').andCallThrough();
 			
 			$.ajax.calls[0].args[0].success(items);
-			$.ajax.calls[1].args[0].success(items2);
+			//$.ajax.calls[1].args[0].success(items2);
 
 			$(window).scrollTop(2400);
 			$(window).trigger("scroll.322"); 	
