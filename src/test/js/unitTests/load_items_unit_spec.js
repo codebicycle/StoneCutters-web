@@ -1,4 +1,4 @@
-define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
+define(['views/ads/AdsListView','config/conf','helpers/CategoryHelper'], function(AdsListView,Conf,CategoryHelper) {
 	describe('The items list',function(){
 	
 		var callbacks = {};
@@ -6,6 +6,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
 			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
+			CategoryHelper.categories.reset();
 		});
 
 		afterEach(function () {
@@ -34,7 +35,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 
 			spyOn($,'ajax');
 
- 			view = new AdsListView({'deferred': dfd, 'cat_id': 322});
+ 			view = new AdsListView({'deferred': dfd, 'cat_id': 187});
 
  			$.ajax.calls[0].args[0].success(items);
 		});
