@@ -1,4 +1,4 @@
-define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
+define(['views/ads/AdsListView','config/conf','helpers/CategoryHelper'], function(AdsListView,Conf,CategoryHelper) {
 	describe('The items list',function(){
 	
 		var callbacks = {};
@@ -6,6 +6,7 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 		//Create an easily-removed container for our tests to play in
 		beforeEach(function() {
 			setFixtures('<div id="home"><div id="left-panel" data-role="panel"></div><div id="header" data-role="header"><a href="#left-panel" data-rel="panel">Categories</a><h1>ARWEN</h1></div><div id="content" data-role="content"></div></div>');
+			CategoryHelper.categories.reset();
 		});
 
 		afterEach(function () {
@@ -15,6 +16,8 @@ define(['views/ads/AdsListView','config/conf'], function(AdsListView,Conf) {
 		//Specs
 		it('should load items from the json response',function(){
 			
+			
+
 			var items = [
 							{"displayLocation":"yxPZRgrad","thumbnail":"PzpwSspnO-thumbnail","id":518,"date":"Date-126539","displayPrice":"$15.50","title":"Item 1"},
 							{"displayLocation":"WbvoRgrad","thumbnail":"seUqJzPwj-thumbnail","id":726,"date":"Date-352719","displayPrice":"$18.10","title":"Item 2"},
