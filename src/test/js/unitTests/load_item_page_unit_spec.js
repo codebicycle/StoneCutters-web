@@ -17,13 +17,6 @@ define(['views/item/ItemView', 'helpers/CategoryHelper'],
 		//Specs
 		it('should load the item from the json response',function(){
 			
-			// console.log(CategoryHelper.categories);
-			// var output = '';
-			// for (property in CategoryHelper.categories) {
-			//   output += property + ': ' + CategoryHelper.categories[property]+'; ';
-			// }
-			// console.log(output);
-
 			CategoryHelper.categories.set([
 				{"children":[
 					{	

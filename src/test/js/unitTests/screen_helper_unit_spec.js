@@ -4,15 +4,6 @@ define(['helpers/ScreenHelper'], function(ScreenHelper) {
 	
 		var callbacks = {};
 
-		// //Create an easily-removed container for our tests to play in
-		// beforeEach(function() {
-		// });
-
-		// afterEach(function () {
-			
-		// 	expect(callbacks.doneItems).toHaveBeenCalled();
-		// });
-		
 		//Specs
 		it('should return the width',function(){
 			var resp = ScreenHelper.getWidth();
