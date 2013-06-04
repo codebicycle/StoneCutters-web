@@ -21,9 +21,9 @@ define(['views/base/BaseView','config/conf'], function(BaseView, Conf) {
 				page.render(); 
 
       			//Categories's Expectations.
-	      		expect($($('#home #left-panel-list li a')[1]).html()).toBe("For Sale"); 
-	      		expect($($('#home #left-panel-list li a')[2]).html()).toBe("Vehicles");
-	      		expect($('#home  #left-panel-list li a').length).toBe(3);
+	      		expect($($('#home #left-panel-list li a.cat-link')[0]).html()).toBe("For Sale"); 
+	      		expect($($('#home #left-panel-list li a.cat-link')[1]).html()).toBe("Vehicles");
+				expect($('#home  #left-panel-list li a.cat-link').length).toBe(2);
 
 	      		//Here we check that sinon worked correctly.
 	      		wasCall=true;

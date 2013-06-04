@@ -36,7 +36,8 @@ define([
 
       checkScroll: function () {
         var triggerPoint = 100; // 100px from the bottom
-        if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()  ) {
+        
+        if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()) {
           this.collection.query_opts.offset += 1; // Load next page
           this.loadResults();
         }

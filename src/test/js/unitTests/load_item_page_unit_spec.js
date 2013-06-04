@@ -17,7 +17,101 @@ define(['views/item/ItemView', 'helpers/CategoryHelper'],
 		//Specs
 		it('should load the item from the json response',function(){
 			
-			var item = {"location":{"latitude":0.0,"longitude":0.0},"username":"","description":"Lindos filhotes","price":850.0,"id":484949563,"date":"2013-02-22T13:02:42.000-0500","displayPrice":"R$850","category":{"id":812,"name":"Dogs","parentId":811},"optionals":[],"title":"Lindos filhotes de shih-tzu com pedigree","myOLXData":{"favorite":false,"onApproval":false},"images":[{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_4-Lindos-filhotes-de-shih-tzu-com-pedigree-Animais.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_4.jpg","displayOrder":1},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_2-Lindos-filhotes-de-shih-tzu-com-pedigree-Salvador.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_2.jpg","displayOrder":2},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_3-Lindos-filhotes-de-shih-tzu-com-pedigree-Cachorros.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_3.jpg","displayOrder":3},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_5-Lindos-filhotes-de-shih-tzu-com-pedigree-Bahia.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_5.jpg","displayOrder":4},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_1-Fotos-de--Lindos-filhotes-de-shih-tzu-com-pedigree.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_1.jpg","displayOrder":5}],"phone":"7188181314"};
+			CategoryHelper.categories.set([
+				{"children":[
+					{	
+						"children":[],
+						"name":"Language Classes",
+						"id":279,
+						"counter":0,
+						"parentId":186
+					},
+					{	
+						"children":[],
+						"name":"Tutoring - Private Lessons",
+						"id":278,
+						"counter":0,
+						"parentId":186
+					},
+					{
+						"children":[],
+						"name":"Other Classes",
+						"id":283,
+						"counter":0,
+						"parentId":186
+					},
+					{
+						"children":[],
+						"name":"Computer - Multimedia Classes",
+						"id":281,
+						"counter":0,
+						"parentId":186
+					},
+					{	
+						"children":[],
+						"name":"Music - Theatre - Dance Classes",
+						"id":280,
+						"counter":0,
+						"parentId":186
+					}
+					],
+					"name":"Classes",
+					"id":186,
+					"counter":0,
+					"parentId":null
+				},
+				{"children":[
+					{
+						"children":[],
+						"name":"Carpool",
+						"id":248,
+						"counter":0,
+						"parentId":187
+					},
+					{	"children":[],
+						"name":"Lost And Found",
+						"id":413,
+						"counter":0,
+						"parentId":187
+					},
+					{
+						"children":[],
+						"name":"Community Activities",
+						"id":381,
+						"counter":0,
+						"parentId":187
+					},
+					{
+						"children":[],"name":"Musicians - Artists - Bands",
+						"id":244,
+						"counter":0,
+						"parentId":187
+					},
+					{
+						"children":[],
+						"name":"Events",
+						"id":401,
+						"counter":0,
+						"parentId":187
+					},
+					{
+						"children":[],
+						"name":"Volunteers",
+						"id":382,
+						"counter":0,
+						"parentId":187
+					}
+					],
+					"name":"Community",
+					"id":187,
+					"counter":0,
+					"parentId":null
+				}
+			]);
+
+
+
+			var item = {"location":{"latitude":0.0,"longitude":0.0},"username":"","description":"Lindos filhotes","price":850.0,"id":484949563,"date":"2013-02-22T13:02:42.000-0500","displayPrice":"R$850","category":{"id":382,"name":"Dogs","parentId":187},"optionals":[],"title":"Lindos filhotes de shih-tzu com pedigree","myOLXData":{"favorite":false,"onApproval":false},"images":[{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_4-Lindos-filhotes-de-shih-tzu-com-pedigree-Animais.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_4.jpg","displayOrder":1},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_2-Lindos-filhotes-de-shih-tzu-com-pedigree-Salvador.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_2.jpg","displayOrder":2},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_3-Lindos-filhotes-de-shih-tzu-com-pedigree-Cachorros.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_3.jpg","displayOrder":3},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_5-Lindos-filhotes-de-shih-tzu-com-pedigree-Bahia.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_5.jpg","displayOrder":4},{"url":"http://images01.olx-st.com/ui/15/98/63/1361556161_484949563_1-Fotos-de--Lindos-filhotes-de-shih-tzu-com-pedigree.jpg","thumbUrl":"http://images01.olx-st.com/ui/15/98/63/t_1361556161_484949563_1.jpg","displayOrder":5}],"phone":"7188181314"};
 			var relatedAds = [ 
 				{"id":"484949563", "title":"Chihuahua Puppies For Sale","thumbnail":"http://petliferadio.com/doggydog.jpg"},
 	           	{"id":"484949178", "title":"Gun Dog Stud Many Willowyck & Drakeshead Lns","thumbnail":"http://www.cck9.com/wp-content/uploads/2009/09/German-shepherd-protection-dogs-CCK9-Blog-300x300.jpg"},
