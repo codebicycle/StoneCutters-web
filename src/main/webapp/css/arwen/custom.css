@@ -59,7 +59,7 @@ a:hover, a:focus, a:visited, a:link {
   background-color: #387BBE;
 }
 
-.swipe {
+/*.swipe {
   position:relative;
   z-index:1;
   -webkit-perspective: 1000;
@@ -102,7 +102,7 @@ div#slider1 {
 
 .swipe ul li a:active figcaption, .swipe ul li a:focus figcaption {
   background:rgba(0,0,0,.7);
-}
+}*/
 
 /* ______________ Action Box _________________________ */
 div#content div#itempage .actions {

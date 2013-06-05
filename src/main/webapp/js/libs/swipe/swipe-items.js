@@ -26,8 +26,8 @@ window.Swipe = function(element, options) {
   this.element = this.container.children[0]; // the slide pane
 
   // static css
-  this.container.style.overflow = 'hidden';
-  this.element.style.listStyle = 'none';
+  //this.container.style.overflow = 'hidden';
+  //this.element.style.listStyle = 'none';
 
   // trigger slider initialization
   this.setup();
@@ -67,23 +67,23 @@ Swipe.prototype = {
     if (!this.width) return null;
 
     // hide slider element but keep positioning during setup
-    this.container.style.visibility = 'hidden';
+    //this.container.style.visibility = 'hidden';
 
     // dynamic css
-    this.element.style.width = (this.slides.length * this.width) + 'px';
+    //this.element.style.width = (this.slides.length * this.width) + 'px';
     var index = this.slides.length;
     while (index--) {
       var el = this.slides[index];
-      el.style.width = this.width + 'px';
-      el.style.display = 'table-cell';
-      el.style.verticalAlign = 'top';
+      //el.style.width = this.width + 'px';
+      //el.style.display = 'table-cell';
+      //el.style.verticalAlign = 'top';
     }
 
     // set start position and force translate to remove initial flickering
     this.slide(this.index, 0); 
 
     // show slider element
-    this.container.style.visibility = 'visible';
+    //this.container.style.visibility = 'visible';
 
   },
 
