@@ -22,13 +22,13 @@ define(['views/home/HomeView','config/conf'], function(HomeView,Conf) {
 				view.render(); 
 
 	  			//Items's expectations
-	      		expect($($('#home #slider1 li a')[0]).attr("href")).toBe("#item/598"); 
-	      		expect($($('#home #slider1 li a')[1]).attr("href")).toBe("#item/706");
-	      		expect($('#home #slider1 li a img').length).toBe(3);
+	      		expect($($('#home #slider1 a')[0]).attr("href")).toBe("#item/598"); 
+	      		expect($($('#home #slider1 a')[1]).attr("href")).toBe("#item/706");
+	      		expect($('#home #slider1 a img').length).toBe(3);
 
-	      		expect($($('#home #slider2 li figcaption')[0]).html()).toBe("Last Visited 1"); 
-	      		expect($($('#home #slider2 li figcaption')[1]).html()).toBe("Last Visited 2");
-	      		expect($('#home #slider2 li a img').length).toBe(2);
+	      		expect($($('#home #slider2 figcaption h4')[0]).html()).toBe("Last Visited 1"); 
+	      		expect($($('#home #slider2 figcaption h4')[1]).html()).toBe("Last Visited 2");
+	      		expect($('#home #slider2 a img').length).toBe(2);
 			}
 
 			spyOn(callbacks,'doneItems').andCallThrough();
