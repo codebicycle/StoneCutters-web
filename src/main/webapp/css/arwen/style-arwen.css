@@ -232,12 +232,12 @@ ul#left-panel-list-top  .myolx-cat .ui-btn-inner {
 /* Home
 ---------------------------------------------------------------------- */
 
-h4 {
+/*h4 {
 	color: #666666;
 	font-size: 20pt;
 	font-weight: normal;
 	margin: 10px 0 10px 0;
-}
+}*/
 
 div#location {
 	background: url(images/icon_location01.png) right center no-repeat;
@@ -777,9 +777,31 @@ div#messagepage div#messageContainer {
 		body
 		{
 			font-size: 12px;
+			color: #666;
 		}
 
 /* 2. PAGES */
+
+	/* 2.1 Home page */
+
+		/* 2.1.1 Defaults */
+
+			.home-page
+			{
+
+			}
+
+			.home-page section
+			{
+				padding: 0 1rem 1rem;
+			}
+
+			.home-page section h3
+			{
+				padding-bottom: 1rem;
+				font-size: 2em;
+				font-weight: normal;
+			}
 
 	/* 2.1 Item page */
 
