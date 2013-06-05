@@ -126,10 +126,10 @@ define(['views/item/ItemView', 'helpers/CategoryHelper'],
 				page.render();
       			
       			//Item's expectations
-	      		expect($('#itempage .title h1').html()).toBe("Lindos filhotes de shih-tzu com pedigree");
-	      		expect($('#itempage .title h4').html()).toBe("R$850");
-	      		expect($('#itempage .description').html()).toBe("Lindos filhotes");
-	      		expect($('#itempage #image-slider li img').length).toBe(5);
+	      		expect($('article.item-page header h1').html()).toBe("Lindos filhotes de shih-tzu com pedigree");
+	      		expect($('article.item-page header div h2').html()).toBe("R$850");
+	      		expect($('article.item-page .description div').html()).toBe("Lindos filhotes");
+	      		expect($('article.item-page #image-slider a').length).toBe(5);
 			}
 
 			spyOn(callbacks,'doneItems').andCallThrough();
@@ -144,8 +144,8 @@ define(['views/item/ItemView', 'helpers/CategoryHelper'],
  			$.ajax.calls[1].args[0].success(relatedAds);
 
  			//Related Ads' expectations
-      		expect($($('#itempage #image-slider-related li a figure')[0]).html().replace(/^\s+|\s+$/g,'')).toBe('<img src="http://petliferadio.com/doggydog.jpg" alt="">'); 
-      		expect($('#itempage #image-slider-related li img').length).toBe(7);
+      		expect($($($('article.item-page #image-slider-related a figure')[0]).find('img')).attr('src')).toBe('http://petliferadio.com/doggydog.jpg'); 
+      		expect($('article.item-page #image-slider-related a').length).toBe(7);
 	
 		});
 
