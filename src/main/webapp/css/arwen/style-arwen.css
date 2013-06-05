@@ -793,7 +793,7 @@ div#messagepage div#messageContainer {
 
 			.home-page section
 			{
-				padding: 0 1rem 1rem;
+				padding: 0 0 1rem;
 			}
 
 			.home-page section h3
@@ -801,6 +801,12 @@ div#messagepage div#messageContainer {
 				padding-bottom: 1rem;
 				font-size: 2em;
 				font-weight: normal;
+			}
+
+			.home-page section .swipe
+			{
+				padding: 0 1rem;
+				margin: 0 -1rem;
 			}
 
 	/* 2.1 Item page */
@@ -1003,67 +1009,94 @@ div#messagepage div#messageContainer {
 				padding: 0 1rem;
 			}
 
-
 /* WIDGETS */
 
-/* Swipe */
+	/* Swipe */
 
-.swipe {
-	overflow: hidden;
-	position: relative;
-}
+		.swipe
+		{
+			overflow: hidden;
+			position: relative;
+		}
 
-.swipe > div {
-	position: relative;
-	white-space: nowrap;
-	font-size: 0;
-}
+		.swipe > div
+		{
+			position: relative;
+			white-space: nowrap;
+			font-size: 0;
+		}
 
-.swipe > div > div {
-	overflow: hidden;
-	position: relative;
-	display: inline-block;
-	width: 40%;
-	max-width: 180px;
-	margin: 0 .5rem;
-	font-size: 1rem;
-	vertical-align: top;
-}
+		.swipe > div > div
+		{
+			overflow: hidden;
+			position: relative;
+			display: inline-block;
+			width: 40%;
+			max-width: 180px;
+			padding: 0 .125rem;
+			font-size: 1rem;
+			vertical-align: top;
+		}
 
-.swipe > div > div:first-child {
-	margin-left: 0;
-}
+		.swipe > div > div:first-child
+		{
+			margin-left: 0;
+		}
 
-.swipe > div > div:last-child {
-	margin-right: 0;
-}
+		.swipe > div > div:last-child
+		{
+			margin-right: 0;
+		}
 
-.swipe a,
-.swipe figure,
-.swipe img {
-	display: block;
-}
+		.swipe a,
+		.swipe figure,
+		.swipe img
+		{
+			display: block;
+		}
 
-.swipe a {
-	color: inherit;
-	text-decoration: none;
-}
+		.swipe a
+		{
+			color: inherit;
+			text-decoration: none;
+		}
 
-.swipe img {
-	width: 100%;
-	height: 0;
-	padding-bottom: 100%;
-	font-size: 0;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-}
+		.swipe figure
+		{
+			position: relative;
+		}
 
-/* */
+		.swipe img
+		{
+			width: 100%;
+			height: 0;
+			padding-bottom: 100%;
+			font-size: 0;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+		}
 
-.swipe h4 {
-	overflow: hidden;
-	font-size: 1rem;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
+		.swipe figcaption
+		{
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			padding: .3rem .5rem .5rem;
+			background-color: rgba(0, 0, 0, .75);
+			color: #FFF;
+		}
+
+		.swipe h4
+		{
+			overflow: hidden;
+			height: 3.75em;
+			line-height: 1.25em;
+			font-weight: normal;
+			white-space: normal;
+		}
+
+		.swipe p {
+			display: none; /* More info on swipe items temporarily disabled */
+		}
