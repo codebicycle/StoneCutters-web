@@ -7,15 +7,15 @@ define([
   'models/item',
   'collections/items',
   'text!templates/item/itemTemplate.html',
-  'text!templates/item/imagesTemplate.html',
-  'text!templates/home/whatsNewTemplate.html',
+  'text!templates/widgets/imageGalleryTemplate.html',
+  'text!templates/widgets/itemGalleryTemplate.html',
   'text!templates/base/breadcrumbTemplate.html',
   'helpers/ScreenHelper',
   'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, sw, Handlebars, ItemModel, ItemsCollection, 
-    itemTemplate, imgsTemplate, relatedAdsTemplate, breadcrumbTemplate, 
+    itemTemplate, imageGalleryTemplate, itemGalleryTemplate, breadcrumbTemplate, 
     ScreenHelper, CategoryHelper){
 
     var ItemView = Backbone.View.extend({
@@ -25,14 +25,15 @@ define([
         'click .call': 'callSeller',
         'click .sms': 'smsSeller',
         'click .message': 'messageSeller',
+        'click .collapse' : 'collapseSection',
       },
 
       initialize: function(options){
         
         /*Compile the template using Handlebars micro-templating*/
         this.itemCT = Handlebars.compile(itemTemplate);
-        this.imgsCT = Handlebars.compile(imgsTemplate);
-        this.relAdsCT = Handlebars.compile(relatedAdsTemplate);
+        this.imgsCT = Handlebars.compile(imageGalleryTemplate);
+        this.relAdsCT = Handlebars.compile(itemGalleryTemplate);
         this.breadCT = Handlebars.compile(breadcrumbTemplate);
         this.dfd = options.deferred;
 
@@ -133,7 +134,7 @@ define([
         return;
       },
       related_ads_success: function(model, response){
-        $(this.el).find('#image-slider-related').html(this.relAdsCT({'items': this.relatedAds.toJSON()}));
+        $(this.el).find('#image-slider-related').html(this.relAdsCT({'item': this.relatedAds.toJSON()}));
         this.sliderRelated = new Swipe(document.getElementById('image-slider-related'), {
                             //startSlide: 2,
                             //speed: 400,
@@ -143,7 +144,7 @@ define([
                             }
         });
       },
-      callSeller: function(){
+      callSeller: function(e){
         if (this.item.get('phone')) {
           window.location = "callto:"+this.item.get('phone');
         }else{

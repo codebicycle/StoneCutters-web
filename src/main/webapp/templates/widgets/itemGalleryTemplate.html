@@ -1,0 +1,16 @@
+<div>
+    {{# each item }}
+        <div>
+            <a href="#item/{{ id }}">
+                <figure>
+                    <img src="{{ thumbnail }}" alt="{{ title }}" style="background-image: url({{ thumbnail }});" />
+                    <figcaption>
+                        <h4>{{ title }}</h4>
+                        <p><small>{{ date }}, <em>{{ displayLocation }}</em></small></p>
+                        <p><strong>{{ displayPrice }}</strong></p>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+    {{/ each }}
+</div>
