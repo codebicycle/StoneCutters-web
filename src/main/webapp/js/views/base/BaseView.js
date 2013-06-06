@@ -20,8 +20,7 @@ define([
         'click #p-cat-link': 'showParentCategories',
         'click #toggle-search': 'toggleSearch',
         'click #myolx-link' : 'toggleMyOLXCats',
-        'click #logout-link' : 'logout'
-
+        'click #logout-link' : 'logout',
       },
 
       initialize: function(options){
@@ -73,9 +72,9 @@ define([
       changeIcon: function(event_id){
         var event= event_id.type.split("panel")[1];
         if(event=="open"){
-          $(this.el).find("#cat-button").addClass("off")
+          $(this.el).find("#toggle-panel").addClass("off")
         }else if(event=="close"){
-          $(this.el).find("#cat-button").removeClass("off")
+          $(this.el).find("#toggle-panel").removeClass("off")
         }
       },
 
@@ -130,10 +129,11 @@ define([
         this.changeCategories(CategoryHelper.categories.toJSON());
       },
 
-      toggleSearch: function(){
-        $("#search-bar-div").toggle();
+      toggleSearch: function(e){
+        e.preventDefault();
+        $("#search-container").toggle();
 
-        if ($("#search-bar-div").is(":visible")){
+        if ($("#search-container").is(":visible")){
           $('#search-bar').focus();
           //$('#toggle-search .ui-btn-text').text('Cancel');
         }else{
