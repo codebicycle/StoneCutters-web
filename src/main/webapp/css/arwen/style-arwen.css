@@ -232,13 +232,6 @@ ul#left-panel-list-top  .myolx-cat .ui-btn-inner {
 /* Home
 ---------------------------------------------------------------------- */
 
-/*h4 {
-	color: #666666;
-	font-size: 20pt;
-	font-weight: normal;
-	margin: 10px 0 10px 0;
-}*/
-
 div#location {
 	background: url(images/icon_location01.png) right center no-repeat;
 	width: 100%;
@@ -250,120 +243,6 @@ div#location span {
 	color: #666666;
 	margin-right: 30px;
 }
-
-
-/* Breadcrumb
----------------------------------------------------------------------- */
-div#breadcrumb {
-	background: #f8f2f2;
-	color: #666666;
-	width: 100%;
-	padding: 15px;
-}
-
-	div#breadcrumb h3 {
-		margin: 0;
-		margin-right: 15px;
-		padding: 0;
-		display: inline-block;
-	}
-
-	div#breadcrumb h3 a {
-		text-decoration: none;
-		margin-left: 30px;
-		font-size: 14pt;
-		font-weight: normal;
-		color: #666666;
-	}
-
-		div#breadcrumb h3.category a {
-			margin-left: 20px;			
-		}
-
-	div#breadcrumb h3.parent {
-		background: url(images/back01.png) no-repeat left center;
-	}
-
-	div#breadcrumb h3.category {
-		background: url(images/next01.png) no-repeat left center;
-	}
-
-
-/* ItemPage
----------------------------------------------------------------------- */
-
-div#content div#itempage {
-
-	border: 1px solid #e6e2e1;
-	background: #f8f2f2;
-	margin-top: 15px;
-	padding: 15px;
-	color: #666666;
-
-}
-
-	div#content div#itempage div {
-		width: 100%;
-	}
-
-	/* Reset */
-
-	div#content div#itempage h1,
-	div#content div#itempage h2,
-	div#content div#itempage h3,
-	div#content div#itempage h4,
-	div#content div#itempage h5 {
-		margin: 0;
-		margin-bottom: 15px;
-		padding: 0;
-	}
-
-
-	/* ______________ Title Price Box _________________________ */
-
-	div#content div#itempage .title h1 {
-		text-align: left;
-		font-weight: normal;
-		font-size: 18pt;
-		margin-bottom: 5px;
-	}
-
-	div#content div#itempage .title h4 {
-		text-align: left;
-		font-weight: normal;
-		font-size: 14pt;
-		color: #fd7801;
-	}
-
-
-/* [VIEW] Item */
-/*.item-page {
-	margin-top: 1rem;
-	border: thin solid #E6E2E1;
-	background-color: #F8F2F2;
-}*/
-
-	/* Temporary reset */
-/*	.item-view * {
-		margin: 0;
-	}
-
-.item-view section {
-	padding: 0 0 1rem;
-}
-
-.item-view section h3 {
-	padding: 1rem;
-	font-weight: bold;
-	color: #FFF;
-	background-color: #C6C6C6;
-}
-
-.item-view section p {
-	padding: 1rem 1rem 0;
-}*/
-
-	
 
 
 /* Category Listing
@@ -785,7 +664,6 @@ div#messagepage div#messageContainer {
 			.site-header
 			{
 				background-color: #0076BE;
-				/**/margin-bottom: 1rem;/**/
 			}
 
 			.site-header section
@@ -859,6 +737,33 @@ div#messagepage div#messageContainer {
 				box-sizing: border-box;
 			}
 
+		/* 1.2.2 Breadcrumbs */
+
+			.breadcrumbs
+			{
+				padding: 1rem;
+				background-color: #F8F2F2;
+				font-size: 0;
+			}
+
+			.breadcrumbs a
+			{
+				display: inline-block;
+				padding-left: 2rem;
+				margin-left: 1rem;
+				color: #666;
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+
+				background: transparent url(images/next01.png) no-repeat left center;
+			}
+
+			.breadcrumbs a:first-child
+			{
+				margin-left: 0;
+				background-image: url(images/back01.png);
+			}
+
 /* 2. PAGES */
 
 	/* 2.1 Home page */
@@ -899,7 +804,6 @@ div#messagepage div#messageContainer {
 
 			.item-page
 			{
-				margin-top: 1rem;
 				border: thin solid #E6E2E1;
 				background-color: #F8F2F2;
 				color: #666;
