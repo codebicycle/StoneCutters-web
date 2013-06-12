@@ -48,43 +48,84 @@ define([
 
     Backbone.View.prototype.Storage = Storage;
 
+  //   Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+  //   switch (operator) {
+  //       case '==':
+  //           return (v1 == v2) ? options.fn(this) : options.inverse(this);
+  //           break;
+  //       case '===':
+  //           return (v1 === v2) ? options.fn(this) : options.inverse(this);
+  //           break;
+  //       case '<':
+  //           return (v1 < v2) ? options.fn(this) : options.inverse(this);
+  //           break;
+  //       case '<=':
+  //           return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+  //           break;
+  //       case '>':
+  //           return (v1 > v2) ? options.fn(this) : options.inverse(this);
+  //           break;
+  //       case '>=':
+  //           return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+  //           break;
+  //       default:
+  //           return options.inverse(this)
+  //           break;
+  //   }
+  //   //return options.inverse(this);
+  // });
+
+
     Handlebars.registerHelper('getField', function(field) {
       var snip;
 
       switch(field.type){
-        case "text-1": snip = field.title+'<input type="text" name='+field.name+' class="in-'+field.type+'">';
-        break;
-        case "text-2": snip = field.title+'<textarea name='+field.name+' class="in-'+field.type+'"></textarea>';
-        break;
         case "radio":{
-          snip = '<fieldset data-role="controlgroup"><legend>'+field.title+':</legend>';
-
-          for(i = 0; i < field.opts.length; i++){
-            snip += '<input type="radio" class="in-'+field.type+'" name="'+field.name+'" id="radio-'+field.title+i+'" value="'+field.opts[i]+'">';
-            snip += '<label for="radio-'+field.title+i+'">'+field.opts[i]+'</label>';
+          snip = '<legend>'+field.label+':</legend>';
+          for(i = 0; i < field.values.length; i++){
+            snip += '<input id = "radio-'+field.name+i+'"'+ 'type="radio" name="'+field.name+'"value="'+field.values[i].key+'">';
+            snip += '<label for="radio-'+field.name+i+'">'+field.values[i].value+'</label>';
           }
+        };
+        break;
 
-          snip += '</fieldset>';
-        };break;
-        case "combo": {
-          snip = '<label for="select-'+field.title+'" class="select">'+field.title+'</label>'+
-                    '<select id="select-'+field.title+'" class="in-'+field.type+'" name="'+field.name+'">';
+        case "text":{
+          snip = '<label for="text-'+field.name+'">'+field.label+'</label>'+'<input type="text" id="text-'+field.name+'" name=' + field.name +'">';
+        };
+        break;
 
-          for(i = 0; i < field.opts.length; i++){
-            snip += '<option value="'+field.opts[i]+'">'+field.opts[i]+'</option>';
+        case "textarea":{ 
+          snip = '<label for="textarea-'+field.name+'">'+field.label+'</label>'+'<textarea id="textarea-'+field.name+'" name=' + field.name +'"></textarea>';
+        };
+        break;
+
+        case "combobox": {
+          snip = '<label for="select-'+field.name+'">'+field.label+'</label>'+
+                    '<select id="select-'+field.name+'" name="'+field.name+'">';
+
+          for(i = 0; i < field.values.length; i++){
+            snip += '<option name="'+field.name+'" value="'+field.values[i].key+'">'+field.values[i].value+'</option>';
           }
 
           snip += '</select>';
         };break;
-        case "imgs": snip = '<label for="imgs">'+field.title+'</label>'+
-                            '<input type="file" name="'+field.name+'" id="imgs" value="" class="in-'+field.type+'">';
+        case "checkbox":
+          snip = '<input type="checkbox" id="checkbox-'+field.name+'" name="'+field.name+'">'+
+                              '<label for="check-'+field.name +'">'+field.label+'</label>';
         break;
-        case "check": snip = '<input type="checkbox" id="check-'+field.title+'" class="in-'+field.type+'" name="'+field.name+'">'+
-                              '<label for="check-'+field.title+'">'+field.title+'</label>';
+        case "password": snip = '<label for="password-'+field.name+'">'+field.label+'</label>'+'<input type="password" id="password-'+field.name+'" name="'+field.name+'">';
         break;
-        case "slider": snip = '<label for="slider-'+field.title+'">'+field.title+'</label>'+
-                                '<input type="range" name="'+field.name+'" class="in-'+field.type+'" id="slider-'+field.title+
+        case "email": snip = '<label for="email-'+field.name+'">'+field.label+'</label>'+'<input type="email" id="email-'+field.name+'" name="'+field.name+'">';
+        break;
+        case "url": snip =   '<label for="url-'+field.name+'">'+field.label+'</label>'+'<input type="url" id="url-'+  field.name+'" name="'+field.name+'">';
+        break;
+        case "range": snip = '<label for="slider-'+field.name+'">'+field.label+'</label>'+
+                                '<input type="range" name="'+field.name+'" id="range-'+field.name+
                                 '" value="'+field.min+'" min="'+field.min+'" max="'+field.max+'" step="'+field.step+'">';
+        break;
+        case "image": snip = '<label for="imgs-'+field.name+'">'+field.label+'</label>'+
+                            '<input type="file" name="'+field.name+'" id="imgs-'+field.name+'" value="" class="in-'+field.type+'">';
         break;
       }
 
