@@ -8,12 +8,12 @@ define([
     var FieldCollection = Backbone.Collection.extend({
       model: FieldModel,
       initialize: function(options){
-        this.countryId = options.country_id;
-        this.categoryId = options.category_id;
+        //this.countryId = options.country_id;
+        //this.categoryId = options.category_id;
       },
       url: function(){
         return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-        '/fields/'+ this.countryId + '/' + this.categoryId;
+        '/countries/'+ this.countryId + '/categories/' + this.categoryId + '/optionals';
       },
     });
     // You don't usually return a collection instantiated
