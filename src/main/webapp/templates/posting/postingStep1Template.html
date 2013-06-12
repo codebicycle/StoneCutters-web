@@ -1,28 +1,20 @@
 <h1>Post a new item</h1>
 <h2>Build your post in 3 steps</h2>
 <form>
-	<input name="title" type="text" placeholder="Title" autofocus style="background-color:red" />
+	<input id="title" name="title" type="text" placeholder="Title" autofocus style="background-color:red" />
 	</br>
 	
 	<label for=category>Category</label>
 	<select style="background-color:red" id="category" name="category">
-		<option value="firefox">Firefox</option>
-		<option value="ie">IE</option>
-		<option value="chrome">Chrome</option>
-		<option value="opera">Opera</option>
-		<option value="safari">Safari</option>
+	{{#categories}}
+		<option value={{id}}>{{name}}</option>
+	{{/categories}}
 	</select>
 	
 	</br>
 
-	<label for=category>Subcategory</label>
-	<select id="subcategory" name="category">
-		<option value="firefox">Firefox</option>
-		<option value="ie">IE</option>
-		<option value="chrome">Chrome</option>
-		<option value="opera">Opera</option>
-		<option value="safari">Safari</option>
-	</select>
-
+	<label for=subcategories>Subcategory</label>
+	<div id="subcategories">
+	</div>
 	<input id="next-p0-button" type="button" value="Next" style="color:black" data-destiny="1">
 </form>
