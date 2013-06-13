@@ -21,6 +21,9 @@ define([
         'click #toggle-search': 'toggleSearch',
         'click #myolx-link' : 'toggleMyOLXCats',
         'click #logout-link' : 'logout',
+        'click #toggle-panel': 'toggleLeftPanel',
+        'click #left-panel': 'toggleLeftPanel',
+        'click .panel-content': 'disableBubbling',
       },
 
       initialize: function(options){
@@ -49,33 +52,16 @@ define([
         });
 
         $( document ).on( "swipeleft swiperight", this.el, function( e ) {
-            if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-                // if ( e.type === "swipeleft"  ) {
-                //     $( "#right-panel" ).panel( "open" );
-                // } else if ( e.type === "swiperight" ) {
-                //     $( "#left-panel" ).panel( "open" );
-                // }
-                if ( e.type === "swiperight" ) {
-                    $( "#left-panel" ).panel( "open" );
-                }
+            if (e.type === 'swiperight') {
+              $('body').addClass('left-panel-visible');
+            } else if (e.type === 'swipeleft') {
+              $('body').removeClass('left-panel-visible');
             }
         });
-
-        $( document.getElementById('left-panel')).on( "panelopen", _.bind(this.changeIcon,this));
-        $( document.getElementById('left-panel')).on( "panelclose", _.bind(this.changeIcon,this));
 
         $('#search-bar').change(function(){
           window.location = "#search?q=" + $('#search-bar').val();
         });
-      },
-
-      changeIcon: function(event_id){
-        var event= event_id.type.split("panel")[1];
-        if(event=="open"){
-          $(this.el).find("#toggle-panel").addClass("off")
-        }else if(event=="close"){
-          $(this.el).find("#toggle-panel").removeClass("off")
-        }
       },
 
       render:function (){
@@ -84,9 +70,6 @@ define([
           'categories': this.loadCategories.toJSON()})
         );
         $(this.el).find('#left-panel').trigger("updatelayout");
-        
-        $(this.el).find('#left-panel-list').listview();
-        $(this.el).find('#left-panel-list-top').listview();
         $(this.el).find('#p-cat-link').hide();
         $(this.el).find('.myolx-cat').hide();
         return this;
@@ -140,6 +123,15 @@ define([
           $('#search-bar').val("");
           //$('#toggle-search .ui-btn-text').text('Search');
         }
+      },
+
+      toggleLeftPanel: function(e){
+        e.preventDefault();
+        $('body').toggleClass('left-panel-visible');
+      },
+
+      disableBubbling: function(e){
+        e.stopPropagation();
       },
 
       toggleMyOLXCats: function(){
