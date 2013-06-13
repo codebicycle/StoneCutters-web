@@ -24,6 +24,7 @@ define([
         'click #back-p1-button': 'showPage',
         'click #next-p1-button': 'showPage',
         'click #back-p2-button': 'showPage',
+        'click #post-button':    'makePosting',
         'click #save-button':    'savePosting',
         'change #category':   'loadSubcategory'
       },
@@ -39,7 +40,7 @@ define([
         this.postingStep3CT = Handlebars.compile(postingStep3Template);
         this.comboBoxCT = Handlebars.compile(comboBoxTemplate);
 
-        this.item = new ItemModel({id:0});
+        this.item = new ItemModel();
         this.fields = new FieldCollection([
          {type:"text", name:"title", label:"My Title",description:"this is a description"},
          {type:"textarea", label:"Description", name:"description"},
@@ -133,7 +134,8 @@ define([
             
             //I set the require fields in order to get the optionals fields 
             //for this this
-            this.fields.countryId = countryId
+            this.fields.countryId = countryId;
+            this.fields.parentCategoryId= categoryID;
             this.fields.categoryId = subcategoryID;
           break;
           case 2:
@@ -143,7 +145,6 @@ define([
             var opts = new Backbone.Model();
             
             for (var i = 0; i < fields.length; i++) {
-              debugger
               if(fields[i].type == "radio" ){
                 var value = $('input[name='+fields[i].name+']:checked', '#postingForm').val()
                 opts.set(fields[i].name,value);
@@ -157,33 +158,19 @@ define([
                 opts.set(fields[i].name,$(this.el).find('#'+fields[i].type+'-'+fields[i].name).val());
               }
             };
-            var title = $(this.el).find('#content #title').text();
-            var categoryID = $(this.el).find('#content #category').val()
-            var subcategoryID = $(this.el).find('#content #subcategory').val();
-            var countryId = 'www.olx.com';  //TODO We must create a Country Helper
-
-            this.item.set({title: title});
-            this.item.set({category: {id: subcategoryID, parentId:categoryID}});
             
-            //I set the require fields in order to get the optionals fields 
-            //for this category
-            this.fields.countryId = countryId
-            this.fields.categoryId = subcategoryID;
+            this.item.set({opts:opts.toJSON()});
           break;
           case 3:
-            //var contact_name = $(this.el).find('#content #title').text();
-            var email = $(this.el).find('#content #category').val()
-            var phone = $(this.el).find('#content #subcategory').val();
-            var city_id = 'www.olx.com';  //TODO We must create a Country Helper
-            var ad_address = 'www.olx.com';  //TODO We must create a Country Helper
+            var contactName = $(this.el).find('#content #contact-name').val();
+            var email = $(this.el).find('#content #email').val();
+            var phone = $(this.el).find('#content #phone-number').val();
+            var adAddress = $(this.el).find('#content #ad-address').val();
 
-            this.item.set({title: title});
-            this.item.set({category: {id: subcategoryID, parentId:categoryID}});
-            
-            //I set the require fields in order to get the optionals fields 
-            //for this category
-            this.fields.countryId = countryId
-            this.fields.categoryId = subcategoryID; 
+            //this.item.set({contactName: contactName});
+            //this.item.set({adAddress:adAddress});
+            this.item.set({email: email});
+            this.item.set({phone: phone});
           break;
         }
         return;
@@ -217,6 +204,18 @@ define([
       postSuccess:function (){
         
       },
+      makePosting: function(){
+        debugger
+        this.buildItem(3);
+        this.item.save(null, {
+          success:function(model,response){
+            console.log("success");
+          },
+          error:function(model,response){
+            console.log("error");
+          }
+        });
+      }
     });
     return PostingView;
 });

@@ -5,10 +5,12 @@ define([
 ], function(_, Backbone, Conf){
  	var ItemModel = Backbone.Model.extend({
   	initialize: function(options){
-  		this.id = options.id;
+      if(options != undefined){
+        this.id = options.id;   
+      }
   	},
-  	url: function(){
-  		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items/'+this.id;
+  	urlRoot: function(){
+  		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/items';
   	}
   });
   
