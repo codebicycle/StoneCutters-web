@@ -6,14 +6,13 @@ define([
   'handlebars',
   'collections/items',
   'text!templates/home/homeTemplate.html',
-  'text!templates/home/whatsNewTemplate.html',
-  'text!templates/home/lastVisitTemplate.html',
+  'text!templates/widgets/itemGalleryTemplate.html',
   'helpers/ScreenHelper',
   'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, sw, Handlebars, ItemsCollection, 
-    homeTemplate, whatsNewTemplate, lastVisitTemplate, ScreenHelper, CategoryHelper){
+    homeTemplate, itemGalleryTemplate, ScreenHelper, CategoryHelper){
 
     var HomeView = Backbone.View.extend({
       el: "#home",
@@ -34,8 +33,8 @@ define([
 
         // Compile the template using Handlebars micro-templating
         this.homeCT = Handlebars.compile(homeTemplate);
-        this.whatsNewCT = Handlebars.compile(whatsNewTemplate);
-        this.lastVisitCT = Handlebars.compile(lastVisitTemplate);
+        this.whatsNewCT = Handlebars.compile(itemGalleryTemplate);
+        this.lastVisitCT = Handlebars.compile(itemGalleryTemplate);
 
         this.whatsNewItems = new ItemsCollection({location:"www.olx.com", filters:"[{'name':'withPhotos', 'value':'true'}]"},{},{"item_type":"adsList"});
         this.whatsNewItems.on('sync',_.bind(this.items_success, this));
@@ -71,7 +70,7 @@ define([
 
         $(this.el).find('#breadcrumb').hide();
 
-        $(this.el).find('#slider1').html(this.whatsNewCT({'items': this.whatsNewItems.toJSON()}));
+        $(this.el).find('#slider1').html(this.whatsNewCT({'item': this.whatsNewItems.toJSON()}));
         this.slider1 = new Swipe(document.getElementById('slider1'), {
                             //startSlide: 2,
                             //speed: 400,
@@ -81,7 +80,7 @@ define([
                             }
         });
 
-        $(this.el).find('#slider2').html(this.lastVisitCT({'items': this.lastVisitedItems.toJSON()}));
+        $(this.el).find('#slider2').html(this.lastVisitCT({'item': this.lastVisitedItems.toJSON()}));
         this.slider2 = new Swipe(document.getElementById('slider2'), {
                             //startSlide: 2,
                             //speed: 400,

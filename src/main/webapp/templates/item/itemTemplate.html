@@ -1,47 +1,66 @@
-<div id="itempage">
-
-    <header class="title">
-        <hgroup>
-            <h1>{{item.title}}</h1>
-            <h4>{{item.displayPrice}}</h4>
-        </hgroup>
-    </header>    
-
-    <section id="image-slider" class="swipe"></section>
-
-    <ul class="actions">
-        <li class="date">{{item.date}}</li>
-        <li class="addFavorite">Add to favourites</li> 
-        <li class="share">Share this Ad</li>
-    </ul>
-
-    <div class="optionals">
-        {{#each item.optionals}}
-           <li><b>{{key}}:</b> {{value}}</li>
-        {{/each}}
-    </div>
-
-    <article>
-        <h3 class="titleBox">Description</h3>
-        <p class="description">{{item.description}}</p>
-    </article>
-
-    <article class="location">
-        <h3 class="titleBox">Location</h3>
-        <h4>{{item.location.city}}</h4>
-        <div class="map" style="background-image: url(http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=640x150&maptype=roadmap&markers=color:red%7Ccolor:red%7C{{item.location.latitude}},{{item.location.longitude}}&sensor=false)"></div>
-    </article>
-
-    <ul class="phoneActions">
-
-        <li class="call">Call</li>
-        <li class="sms">SMS</li>
-        <li class="message">Message</li>
-    </ul>
-
-    <article>
-        <h3 class="titleBox">Related Ads</h3>
-        <div id="image-slider-related" class="swipe">
+<article class="item-page">
+    
+    <header>
+        <h1>{{item.title}}</h1>
+        {{! Check for price }}
+        <div>
+            {{# if item.displayPrice }}
+                <h2>{{ item.displayPrice }}</h2>
+            {{/ if }}
+            <p>{{ item.date }}</p>
         </div>
-    </article>
-</div>
+    </header>
+    
+    {{# if item.images }}
+        <section class="images">
+            <div id="image-slider" class="swipe"></div>
+        </section>
+    {{/ if }}
+    
+    {{# if item.optionals }}
+        <section class="optionals">
+            {{#each item.optionals}}
+                <p><strong>{{ label }}:</strong> {{ value }} {{ options.unit }}</p>
+            {{/each}}
+            <p><a href="#">See more</a></p>
+        </section>
+    {{/ if }}
+    
+    {{# if item.description }}
+        <section class="description">
+            <h3>Description</h3>
+            <div>{{ item.description }}</div>
+            <p><a href="#">See more</a></p>
+        </section>
+    {{/ if }}
+    
+    {{! Check for location}}
+    {{# if item.location }}
+        <section class="location">
+            <h3>Location</h3>
+            <h4>{{ item.location.city }}</h4>
+            <div class="map" style="background-image: url(http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=640x150&maptype=roadmap&markers=color:red%7Ccolor:red%7C{{ item.location.latitude }},{{ item.location.longitude }}&sensor=false)"></div>
+        </section>
+    {{/ if }}
+    
+    <section class="contact">
+        <h3>Contact information</h3>
+        <p>{{ item.user.username }}</p>
+        {{# if item.phone }}
+            <p><strong>{{ item.phone }} phone</strong></p>
+            <ul>
+                <li class="call"><a href="callto:{{ item.phone }}">Call</a></li>
+                <li class="sms"><a href="sms:{{ item.phone }}">SMS</a></li>
+        {{ else }}
+            <ul>
+        {{/ if }}
+            <li class="email"><a href="mailto:xxx">Email</a></li>
+        </ul>
+    </section>
+    
+    <section class="related-ads">
+        <h3>More items in <span>{{ item.category.name }}</span></h3>
+        <div id="image-slider-related" class="swipe"></div>
+    </section>
+
+</article>

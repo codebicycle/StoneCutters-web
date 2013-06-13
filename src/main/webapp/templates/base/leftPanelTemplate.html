@@ -1,4 +1,4 @@
-<ul id="left-panel-list-top" data-role="listview" data-theme="d" data-inset="true">
+<!-- <ul id="left-panel-list-top" data-role="listview" data-theme="d" data-inset="true">
 
 	{{#unless user}}
 		<li data-icon="false"><a id="login-link" href="#login" data-mini="true">My OLX - Log In</a></li>
@@ -25,3 +25,31 @@
 		<li data-icon="false"><a id="logout-link" href="javascript:;" data-mini="true">Logout</a></li>
     {{/if}}
 </ul>
+ -->
+
+<div class="panel-content">
+	<ul>
+		{{# unless user }}
+			<li><a id="login-link" href="#login">My OLX - Log In</a></li>
+		{{ else }}
+			<li><a id="myolx-link" href="javascript:;">My OLX - Hi {{user.username}}!</a></li>
+			<li><a href="#mymessages">My Messages</a></li>
+			<li><a href="#myads">My Ads</a></li>
+			<li><a href="#myfavs">My Favorites</a></li>
+			<li><a id="settings-button">Settings</a></li>
+			<li><a id="logout-link" href="javascript:;">Logout</a></li>
+		{{/ unless }}
+	</ul>
+	<p>
+		<a id="post-button" href="#post">Post a Free Ad</a>
+	</p>
+	<h3>Categories</h3>
+	<ul>
+		<li id="p-cat-link"><a href="javascript:;">Parent Categories</a></li>
+		{{# categories }}
+			<li>
+				<a href="#category/{{ id }}" data-id="{{ id }}" data-parent-id="{{ parentId }}" class="cat-link {{# unless parentId }} cat-main cat-{{ id }} {{/ unless }}">{{ name }}</a>
+			</li>
+		{{/ categories }}
+	</ul>
+</div>

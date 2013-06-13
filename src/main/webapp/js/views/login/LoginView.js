@@ -54,7 +54,7 @@ define([
 
         $.ajax({
           type: "GET",
-          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/user/challenge?u='+this.username,
+          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/challenge?u='+this.username,
         }).done(_.bind(this.challenge_success, this));
       },
       challenge_success:function (response){
@@ -74,7 +74,7 @@ define([
         $.ajax({
           type: "GET",
           url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-          '/user/login?c=' + this.challenge + "&h=" + sha512Hash,
+          '/users/login?c=' + this.challenge + "&h=" + sha512Hash,
         }).done(_.bind(this.login_success, this));
 
       },
