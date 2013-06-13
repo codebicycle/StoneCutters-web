@@ -653,17 +653,36 @@ div#messagepage div#messageContainer {
 
 	/* 1.2 Defaults */
 
+		html
+		{
+			height: 100%;
+		}
+
 		body
 		{
+			height: 100%;
+			overflow-x: hidden;
 			font-size: 12px;
 			color: #666;
+		}
+
+		#content
+		{
+			width: 100%;
+			padding: 0;
+
+			transition: transform 250ms ease-in-out;
+			-webkit-transition: -webkit-transform 250ms ease-in-out;
 		}
 
 		/* 1.2.1 Site header */
 
 			.site-header
 			{
+				width: 100%;
 				background-color: #0076BE;
+				transition: transform 250ms ease-in-out;
+				-webkit-transition: -webkit-transform 250ms ease-in-out;
 			}
 
 			.site-header section
@@ -686,11 +705,6 @@ div#messagepage div#messageContainer {
 				padding: 7px 0;
 				background: transparent url(images/arwen-bars.png) no-repeat center center;
 				text-indent: -9000px;
-			}
-
-			.site-header .toggle-panel.off
-			{
-				background-image: url(images/arwen-x.png);
 			}
 
 			.site-header h1
@@ -754,7 +768,7 @@ div#messagepage div#messageContainer {
 				color: #666;
 				font-size: 1.25rem;
 				line-height: 1.5rem;
-
+				text-decoration: none;
 				background: transparent url(images/next01.png) no-repeat left center;
 			}
 
@@ -762,6 +776,203 @@ div#messagepage div#messageContainer {
 			{
 				margin-left: 0;
 				background-image: url(images/back01.png);
+			}
+
+		/* 1.2.3 Left panel */
+
+			.left-panel
+			{
+				position: fixed;
+				z-index: 2;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				transform: translate3d(-100%, 0, 0);
+				-webkit-transform: translate3d(-100%, 0, 0);
+				-ms-transform: translate3d(-100%, 0, 0);
+				transition: transform 1ms linear 250ms;
+				-webkit-transition: -webkit-transform 1ms linear 250ms;
+			}
+
+			.left-panel .panel-content
+			{
+				width: 12rem;
+				height: 100%;
+				overflow: auto;
+				transform: translate3d(-12rem, 0, 0);
+				-webkit-transform: translate3d(-12rem, 0, 0);
+				-ms-transform: translate3d(-12rem, 0, 0);
+				transition: transform 250ms ease-in-out;
+				-webkit-transition: -webkit-transform 250ms ease-in-out;
+				background-color: #2B2B2C;
+				box-shadow: -.25rem 0 .25rem rgba(0, 0, 0, .5) inset;
+			}
+
+			.left-panel p
+			{
+				padding: 1rem;
+				border-top: solid 1px #454546;
+				border-bottom: solid 2px #100E0E;
+			}
+
+			.left-panel p a
+			{
+				display: block;
+				padding: .75rem 1rem;
+				text-align: center;
+				color: #FFF;
+				text-decoration: none;
+				font-weight: bold;
+				border-radius: 3px;
+				background: #f7a258;
+				background: -moz-linear-gradient(top, #f7a258 0%, #e58737 50%, #e07314 51%, #de7315 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7a258), color-stop(50%,#e58737), color-stop(51%,#e07314), color-stop(100%,#de7315));
+				background: -webkit-linear-gradient(top, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%);
+				background: -o-linear-gradient(top, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%);
+				background: linear-gradient(to bottom, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%);
+			}
+
+			.left-panel .panel-content h3
+			{
+				padding: .75rem 1rem;
+				border-top: solid 1px #454546;
+				border-bottom: solid 2px #100E0E;
+				text-transform: uppercase;
+			}
+
+			.left-panel .panel-content ul
+			{
+				padding: 0;
+				list-style: none;
+			}
+
+			.left-panel .panel-content li
+			{
+				border-top: solid 1px #454546;
+				border-bottom: solid 2px #100E0E;
+			}
+
+			.left-panel .panel-content li a
+			{
+				display: block;
+				padding: .75rem 1rem;
+				text-decoration: none;
+				color: #838282;
+			}
+
+			.left-panel .panel-content li .cat-main
+			{
+				padding: .75rem 1rem .75rem 3rem;
+			}			
+
+			/* Icons */
+
+				.left-panel a.cat-main {
+					background: url(images/sprite.png) no-repeat;
+				}
+
+				.left-panel a.cat-16 {
+					background-position: .75rem -680px;
+				}
+
+				.left-panel a.cat-185 {
+					background-position: .75rem -83px;
+				}
+
+				.left-panel a.cat-186 {
+					background-position: .75rem 8px;
+				}
+
+				.left-panel a.cat-187 {
+					background-position: .75rem -265px;
+				}
+
+				.left-panel a.cat-821,
+				.left-panel a.cat-190 {
+					background-position: .75rem -129px;
+				}
+
+				.left-panel a.cat-191 {
+					background-position: .75rem -220px;
+				}
+
+				.left-panel a.cat-362 {
+					background-position: .75rem -38px;
+				}
+
+				.left-panel a.cat-389 {
+					background-position: .75rem -405px;
+				}
+
+				.left-panel a.cat-405 {
+					background-position: .75rem -310px;
+				}
+
+				.left-panel a.cat-600 {
+					background-position: .75rem -355px;
+				}
+
+				.left-panel a.cat-674 {
+					background-position: .75rem -175px;
+				}
+
+				.left-panel a.cat-830,
+				.left-panel a.cat-800 {
+					background-position: .75rem -545px;
+				}
+
+				.left-panel a.cat-806 {
+					background-position: .75rem -495px;
+				}
+
+				.left-panel a.cat-811 {
+					background-position: .75rem -450px;
+				}
+
+				.left-panel a.cat-815 {
+					background-position: .75rem -590px;
+				}
+
+				.left-panel a.cat-833 {
+					background-position: .75rem -633px;
+				}
+
+			/* Animation */
+
+				.left-panel-visible .toggle-panel
+				{
+					background-image: url(images/arwen-x.png);
+				}
+
+				.left-panel-visible .site-header,
+				.left-panel-visible #content
+				{
+					transform: translate3d(12rem, 0, 0);
+					-webkit-transform: translate3d(12rem, 0, 0);
+					-ms-transform: translate3d(12rem, 0, 0);
+				}
+
+				.left-panel-visible .left-panel
+				{
+					transform: translate3d(0, 0, 0);
+					-webkit-transform: translate3d(0, 0, 0);
+					-ms-transform: translate3d(0, 0, 0);
+					transition: transform 1ms linear;
+					-webkit-transition: -webkit-transform 1ms linear;
+				}
+
+				.left-panel-visible .left-panel .panel-content
+				{
+					transform: translate3d(0, 0, 0);
+					-webkit-transform: translate3d(0, 0, 0);
+					-ms-transform: translate3d(0, 0, 0);
+				}
+
+		/* Loader */
+
+			.ui-loader
+			{
+				display: none;
 			}
 
 /* 2. PAGES */
@@ -772,7 +983,7 @@ div#messagepage div#messageContainer {
 
 			.home-page
 			{
-
+				padding: 1rem;
 			}
 
 			.home-page section

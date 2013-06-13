@@ -1,5 +1,5 @@
 ﻿@charset "UTF-8";
-
+/*
 #left-panel {
 	bottom: 0;
 	min-height: 0;
@@ -10,26 +10,26 @@
 
 #left-panel > * {
     -webkit-transform: translate3d(0,0,0);
-}
+}*/
 
 /* post ad */
-#post-button {
+/*#post-button {
 	border-radius: 3px;
-  background: #f7a258; /* Old browsers */
-  background: -moz-linear-gradient(top, #f7a258 0%, #e58737 50%, #e07314 51%, #de7315 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7a258), color-stop(50%,#e58737), color-stop(51%,#e07314), color-stop(100%,#de7315)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%); /* Opera 11.10+ */
-  background: linear-gradient(to bottom, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%); /* W3C */
+  background: #f7a258;
+  background: -moz-linear-gradient(top, #f7a258 0%, #e58737 50%, #e07314 51%, #de7315 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7a258), color-stop(50%,#e58737), color-stop(51%,#e07314), color-stop(100%,#de7315));
+  background: -webkit-linear-gradient(top, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%);
+  background: -o-linear-gradient(top, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%);
+  background: linear-gradient(to bottom, #f7a258 0%,#e58737 50%,#e07314 51%,#de7315 100%);
   text-align: center;
   color:#fff !important;
   margin:4px 10px;
   padding:0;
   font-size: 12px;
   font-weight: bold;
-}
+}*/
 
-/* search */
+/* search *//*
 .ui-icon-search, .ui-icon-searchfield:after {
     background-position: -611px -1px;
 }
@@ -57,7 +57,7 @@ a:hover, a:focus, a:visited, a:link {
 }
 .ui-checkbox-on .ui-icon, .ui-radio-on .ui-icon {
   background-color: #387BBE;
-}
+}*/
 
 /*.swipe {
   position:relative;
@@ -104,7 +104,7 @@ div#slider1 {
   background:rgba(0,0,0,.7);
 }*/
 
-/* ______________ Action Box _________________________ */
+/* ______________ Action Box _________________________ *//*
 div#content div#itempage .actions {
   margin-bottom: 15px;
   overflow: hidden;
@@ -141,9 +141,9 @@ div#content div#itempage .actions .share {
 div#content div#itempage .actions .addFavorite {
   width: 40px;
   background: url(images/favorite01.png) no-repeat left top;
-}
+}*/
 
-/* ______________ Optional Box _________________________ */
+/* ______________ Optional Box _________________________ *//*
 div#content div#itempage .optionals {
   margin-bottom: 15px;
   border-top: 1px solid #d2d2d2;
@@ -151,9 +151,9 @@ div#content div#itempage .optionals {
   font-size: 10pt;
   list-style: none;
   padding: 15px 0;
-}
+}*/
 
-/* ______________ Generic Title Box _______________________ */
+/* ______________ Generic Title Box _______________________ *//*
 div#content div#itempage .titleBox {
   background: #c6c6c6;
   color: #ffffff;
@@ -161,16 +161,16 @@ div#content div#itempage .titleBox {
   font-weight: normal;
   font-size: 12pt;
   margin: 0 0 10px;
-}
+}*/
 
-/* ______________ Description Box _________________________ */
+/* ______________ Description Box _________________________ *//*
 div#content div#itempage .description {
   margin:0 0 15px;
   font-size: 10pt;
   padding: 0;
-}
+}*/
 
-/* ______________ Location Box _________________________ */
+/* ______________ Location Box _________________________ *//*
 div#content div#itempage .location {
   margin-bottom: 15px;
 }
@@ -185,10 +185,10 @@ div#content div#itempage .location h4 {
 div#content div#itempage .location div.map {
   height: 150px;
   background-position: center center;
-}
+}*/
 
 
-/* ______________ phoneActions Box _________________________ */
+/* ______________ phoneActions Box _________________________ *//*
 div#content div#itempage .phoneActions {
   margin-bottom: 15px;
   background: #ffffff;
@@ -219,10 +219,10 @@ div#content div#itempage .phoneActions .sms {
 }
 div#content div#itempage .phoneActions .message {
   background: url(images/message01.png) 50% 4px no-repeat;
-}
+}*/
 
 
-/* logo h1 with link */
+/* logo h1 with link *//*
 #header h1.ui-title {
   background: url(images/logo.png);
   height: 44px;
@@ -235,10 +235,10 @@ div#content div#itempage .phoneActions .message {
   height: 100%;
   overflow: hidden;
   text-indent: -4000px;
-}
+}*/
 
 
-/*Ads*/
+/*Ads*//*
 ul#ads-list .listingContainer {
   padding: 0 !important;
   display: table;
@@ -363,7 +363,7 @@ ul#ads-list .listingContainer .displayPrice {
     line-height: 16px;
   }
 
-}
+}*/
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
        only screen and (min--moz-device-pixel-ratio: 1.3),
