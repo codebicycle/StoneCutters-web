@@ -247,7 +247,7 @@ div#location span {
 
 /* Category Listing
 ---------------------------------------------------------------------- */
-ul#ads-list {
+/*ul#ads-list {
 	box-shadow: none;
 }
 
@@ -288,7 +288,7 @@ ul#ads-list li {
 		ul#ads-list div.pending {
 			background: #ffcd0c;
 			border-color: #fdb400; 
-		}
+		}*/
 
 	
 
@@ -1009,12 +1009,161 @@ div#messagepage div#messageContainer {
 				display: none;
 			}
 
+	/* 2.2 Listing page */
+
+		/* 2.2.1 Defaults */
+
+			.listing-page
+			{
+				padding: 1rem;
+			}
+
+			.listing-page header
+			{
+				display: table;
+				table-layout: fixed;
+				width: 100%;
+				padding-bottom: 1rem;
+				font-size: 0;
+			}
+
+			.listing-page header div
+			{
+				display: table-cell;
+			}
+
+			.listing-page header div p
+			{
+				overflow: hidden;
+				white-space: nowrap;
+			}
+
+			.listing-page header div p span
+			{
+				display: inline-block;
+				padding: .25rem .5rem;
+				margin-left: .5rem;
+				border: thin solid #AFAFAF;
+				border-radius: .1rem;
+				background-color: #CACACA;
+				font-size: .75rem;
+				font-weight: bold;
+				color: #FFF;
+			}
+
+			.listing-page header p span:first-child
+			{
+				margin-left: 0;
+			}
+
+			.listing-page header nav
+			{
+				display: table-cell;
+				text-align: right;
+				white-space: nowrap;
+			}
+
+			.listing-page header nav a
+			{
+				display: inline-block;
+				padding: .25rem .5rem;
+				margin-left: .5rem;
+				border: thin solid #727473;
+				border-radius: .1rem;
+				background-color: #9B9B9B;
+				font-size: .75rem;
+				text-transform: uppercase;
+				text-decoration: none;
+				color: #FFF;
+				font-weight: bold;
+			}
+
+			.listing-page .ads
+			{
+				padding: 0;
+				list-style: none;
+			}
+
+			.listing-page .ads li
+			{
+				margin-top: 1rem;
+			}
+
+			.listing-page .ads li:first-child
+			{
+				margin-top: 0;
+			}
+
+			.listing-page .ads li a
+			{
+				display: block;
+				overflow: hidden;
+				padding: .75rem 1rem;
+				border: thin solid #E6E2E1;
+				background-color: #F8F2F2;
+				text-decoration: none;
+				color: #666;
+			}
+
+			.listing-page .ads li a figure
+			{
+				float: left;
+				width: 25%;
+				max-width: 180px;
+				min-width: 60px;
+				padding:.25rem 1rem .25rem 0;
+			}
+
+			.listing-page .ads li a figure img
+			{
+				display: block;
+				width: 100%;
+				height: 0;
+				padding-bottom: 100%;
+				background-position: center center;
+			    background-repeat: no-repeat;
+			    background-size: cover;
+			}
+
+			.listing-page .ads li a div
+			{
+				overflow: hidden;
+				font-size: 1rem;
+			}
+
+			.listing-page .ads li a div h2
+			{
+				overflow: hidden;
+				padding-bottom: .25rem;
+				font-size: 1.25rem;
+				font-weight: normal;
+			}
+
+			.listing-page .ads li a div p
+			{
+				overflow: hidden;
+			}
+
+			.listing-page .ads li a div p em
+			{
+				display: block;
+			}
+
+			.listing-page .ads li a div strong
+			{
+				display: block;
+				text-align: right;
+				color: #F60;
+				font-weight: bold;
+			}
+
 	/* 2.1 Item page */
 
 		/* 2.1.1 Defaults */
 
 			.item-page
 			{
+				margin: 1rem;
 				border: thin solid #E6E2E1;
 				background-color: #F8F2F2;
 				color: #666;

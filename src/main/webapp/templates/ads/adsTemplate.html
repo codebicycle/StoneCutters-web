@@ -12,14 +12,36 @@
 	</div>
 </div> -->
 
-{{#if search-term}}
-	<span>Results for: {{search-term}}</span>
-{{/if}}
+<article class="listing-page">
 
-<div data-role="popup" id="filterPopup" data-theme="none" data-overlay-theme="a"></div>
+	<header>
+		<div>
+			<p>
+				<span>3 hab.</span>
+				<span>Palermo</span>
+				<span>3 hab.</span>
+				<span>Palermo</span>
+				<span>3 hab.</span>
+				<span>Palermo</span>
+				<!-- <span>...</span> -->
+			</p>
+		</div>
+		<nav>
+			<a href="#">Filter</a>
+			<a href="#">Sort by</a>
+		</nav>
+	</header>
 
-<div data-role="popup" id="sortPopup" data-theme="none" data-overlay-theme="a"></div>
+	{{#if search-term}}
+		<span>Results for: {{search-term}}</span>
+	{{/if}}
 
-<ul id="ads-list" data-role="listview" data-inset="true">
+	<div data-role="popup" id="filterPopup" data-theme="none" data-overlay-theme="a"></div>
 
-</ul>
+	<div data-role="popup" id="sortPopup" data-theme="none" data-overlay-theme="a"></div>
+
+	<!-- If removed from jquery mobile logic, tha list is not able to refres its content -->
+	<!-- <ul id="ads-list" class="ads" data-role="listview" data-inset="true"></ul> -->
+	<ul id="ads-list" class="ads"></ul>
+
+</article>
