@@ -1,11 +1,19 @@
 {{#items}}
-    <li data-icon="false" class="listingContainer">
+    <li>
         <a href="#item/{{id}}">
-            <figure>{{#if thumbnail}}<img src="{{thumbnail}}">{{else}}<span></span>{{/if}}</figure>
+            {{# if thumbnail }}
+                <figure>
+                    <img src="{{ thumbnail }}" alt="{{ title }}" style="background-image: url({{ thumbnail }});" />
+                </figure>
+            {{/ if }}
             <div>
-                <h2 class="rowTitle">{{title}}</h2>
-                <h6 class="location">{{location}}</h6>
-                <h4 class="displayPrice">{{displayPrice}}</h4>
+                <h2>{{ title }}</h2>
+                {{# if location }}
+                    <p><em>{{ location }}</em></p>
+                {{/ if }}
+                {{# if displayPrice }}
+                    <p><strong>{{ displayPrice }}</strong></p>
+                {{/ if }}
             </div>
         </a> 
     </li>
