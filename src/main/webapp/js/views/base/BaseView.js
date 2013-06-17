@@ -4,12 +4,11 @@ define([
   'backbone',
   'handlebars',
   'collections/categories',
-  'models/user',
   'text!templates/base/leftPanelTemplate.html',
   'helpers/CategoryHelper'
   ], 
 
-  function($,_, Backbone, Handlebars, CategoriesCollection, UserModel, 
+  function($,_, Backbone, Handlebars, CategoriesCollection, 
     leftPanelTemplate, CategoryHelper){
 
     var BaseView = Backbone.View.extend({
