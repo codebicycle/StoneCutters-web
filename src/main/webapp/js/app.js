@@ -48,6 +48,7 @@ define([
 
     Backbone.View.prototype.Storage = Storage;
     Backbone.Model.prototype.Storage = Storage;
+    Backbone.Collection.prototype.Storage = Storage;
 
   //   Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 

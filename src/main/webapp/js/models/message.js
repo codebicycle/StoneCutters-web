@@ -5,8 +5,7 @@ define([
 ], function(_, Backbone, Conf){
  	var MessageModel = Backbone.Model.extend({
   	initialize: function(options){
-  		this.id = options.id;
-  		this.token = options.token;
+      
   	},
   	url: function(){
   		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 

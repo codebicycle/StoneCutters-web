@@ -32,8 +32,8 @@ define([
         this.user_id = this.Storage.get("userObj").userId;
         this.token = this.Storage.get("userObj").authToken; 
         
-        this.query_ops = {offset:this.page, pageSize: this.pageSize, "token": this.token, "userId":this.user_id};
-        this.url_ops = {"user_id":this.user_id};
+        this.query_ops = {offset:this.page, pageSize: this.pageSize};
+        this.url_ops = {};
         this.item_ops = {"item_type":"myFavorites"};
         this.items = new ItemsCollection(this.query_ops, this.url_ops, this.item_ops);
         MyFavoritesAdsListView.__super__.collection = this.items;

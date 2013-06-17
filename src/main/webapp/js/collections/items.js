@@ -41,10 +41,10 @@ define([
           break;
           case "myAds":
             //response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +'&token=' + this.query_opts.token;
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/'+this.query_opts.userId+'/items'+queryParameters;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/'+this.Storage.get("userObj").userId+'/items'+queryParameters;
           break;
           case "myFavorites":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/'+this.query_opts.userId+'/favorites'+queryParameters;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/'+this.Storage.get("userObj").userId+'/favorites'+queryParameters;
           break;
         }
         return response;
