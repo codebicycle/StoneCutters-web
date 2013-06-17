@@ -10,7 +10,8 @@ define([
   	},
   	url: function(){
   		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-  		'/messages/' + this.id + "?token=" + this.token;
+        '/users/'+this.Storage.get("userObj").userId+'/messages/'+this.id+
+        '?token='+this.Storage.get("userObj").authToken;
   	}
   });
   

@@ -23,7 +23,7 @@ define([
         this.messCT = Handlebars.compile(messageTemplate);
         this.dfd = options.deferred;
 
-        this.message = new MessageModel({'id': options.id, 'token': this.Storage.get("userObj").authToken});
+        this.message = new MessageModel({'id': options.id});
         this.message.on('sync',_.bind(this.success, this));
         this.message.fetch();
 
