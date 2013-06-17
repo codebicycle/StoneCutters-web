@@ -8,7 +8,7 @@ define([
   'helpers/CategoryHelper'
 ], function(_, Backbone, ItemModel, Conf, JSONHelper, CategoryHelper){
     var ItemCollection = Backbone.Collection.extend({
-     	initialize: function(query_options, url_options, item_options){
+     	initialize: function(query_options, item_options){
         this.query_opts = null || query_options;
         
         if(CategoryHelper.getCategory()!=0){
@@ -16,7 +16,6 @@ define([
           this.query_opts = JSONHelper.concatJSON(query_options, category);
         }
 
-        this.url_options = null || url_options;
         this.item_options = null || item_options;
       },
 

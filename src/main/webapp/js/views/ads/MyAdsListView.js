@@ -35,7 +35,7 @@ define([
         MyAdsListView.__super__.offset= options.page || 0;
         
         this.query_ops = {"country_id": 1, "offset":this.page, "pageSize": this.pageSize};
-        this.items = new ItemsCollection(this.query_ops, {}, {"item_type":"myAds"});
+        this.items = new ItemsCollection(this.query_ops, {"item_type":"myAds"});
         MyAdsListView.__super__.collection = this.items;
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();
