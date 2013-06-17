@@ -44,7 +44,7 @@ define([
             response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/'+this.query_opts.userId+'/items'+queryParameters;
           break;
           case "myFavorites":
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + 'favorites'+queryParameters;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/'+this.query_opts.userId+'/favorites'+queryParameters;
           break;
         }
         return response;

@@ -29,10 +29,10 @@ define([
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
         this.pageSize =  10;
-        this.user_id = this.Storage.get("userObj").id;
+        this.user_id = this.Storage.get("userObj").userId;
         this.token = this.Storage.get("userObj").authToken; 
         
-        this.query_ops = {offset:this.page, pageSize: this.pageSize, "token": this.token};
+        this.query_ops = {offset:this.page, pageSize: this.pageSize, "token": this.token, "userId":this.user_id};
         this.url_ops = {"user_id":this.user_id};
         this.item_ops = {"item_type":"myFavorites"};
         this.items = new ItemsCollection(this.query_ops, this.url_ops, this.item_ops);
