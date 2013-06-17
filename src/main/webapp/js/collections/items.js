@@ -41,7 +41,7 @@ define([
           break;
           case "myAds":
             //response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/ads?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +'&token=' + this.query_opts.token;
-            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/ads'+queryParameters;
+            response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/'+this.query_opts.userId+'/items'+queryParameters;
           break;
           case "myFavorites":
             response = Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/' + 'favorites'+queryParameters;

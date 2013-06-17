@@ -29,12 +29,12 @@ define([
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
         this.pageSize =  10;
-        this.user_id = this.Storage.get("userObj").id;
+        this.user_id = this.Storage.get("userObj").userId;
         this.token = this.Storage.get("userObj").authToken;
 
         MyAdsListView.__super__.offset= options.page || 0;
         
-        this.query_ops = {"country_id": 1, "offset":this.page, "pageSize": this.pageSize, "token": this.token};
+        this.query_ops = {"country_id": 1, "offset":this.page, "pageSize": this.pageSize, "token": this.token, "userId":this.user_id};
         this.items = new ItemsCollection(this.query_ops, {"user_id":this.user_id}, {"item_type":"myAds"});
         MyAdsListView.__super__.collection = this.items;
         this.items.on('sync',_.bind(this.items_success, this));
