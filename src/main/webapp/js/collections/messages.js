@@ -20,7 +20,7 @@ define([
       
       url: function(){
         return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-        '/users/messages?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +
+        '/users/'+this.query_opts.user_id+'/messages?offset='+this.query_opts.offset+'&pageSize='+this.query_opts.pageSize +
         '&token='+this.query_opts.token;
       }
     });

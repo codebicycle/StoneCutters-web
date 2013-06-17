@@ -89,8 +89,9 @@ define([
 
         if (data.token) {
           //this.Storage.set("authToken",data.token);
-
+          
           this.user = new User({
+            "userId":data.userId,
             "username":data.username, 
             "authToken": data.token,
             "unreadMessagesCount": data.unreadMessagesCount,

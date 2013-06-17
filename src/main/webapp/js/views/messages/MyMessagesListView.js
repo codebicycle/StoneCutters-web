@@ -27,7 +27,7 @@ define([
 
         MyMessageListView.__super__.offset = options.page || 0; 
         this.pageSize =  10;
-        this.user_id = this.Storage.get("userObj").id;
+        this.user_id = this.Storage.get("userObj").userId;
 
         this.opts = {user_id:this.user_id, offset:MyMessageListView.__super__.offset, pageSize: this.pageSize, token:this.Storage.get("userObj").authToken};
 
