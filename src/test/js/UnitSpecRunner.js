@@ -130,6 +130,8 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
   };
 
   Backbone.View.prototype.Storage = Storage;
+  Backbone.Model.prototype.Storage = Storage;
+  Backbone.Collection.prototype.Storage = Storage;
 
   $(function(){
     require(['jqm', 'jasmine-jquery'].concat(specs), function(){

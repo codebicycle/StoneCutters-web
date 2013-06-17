@@ -27,9 +27,8 @@ define([
 
         MyMessageListView.__super__.offset = options.page || 0; 
         this.pageSize =  10;
-        this.user_id = this.Storage.get("userObj").userId;
 
-        this.opts = {user_id:this.user_id, offset:MyMessageListView.__super__.offset, pageSize: this.pageSize, token:this.Storage.get("userObj").authToken};
+        this.opts = {offset:MyMessageListView.__super__.offset, pageSize: this.pageSize};
 
         this.messages = new MessagesCollection(this.opts);
         MyMessageListView.__super__.collection =this.messages;
@@ -99,7 +98,7 @@ define([
 
         //ScrollView's settings
         this.templateKey = "messages";
-        this.scrollingID = "myMessages"+this.user_id;
+        this.scrollingID = "myMessages"+this.Storage.get("userObj").userId;
         MyMessageListView.__super__.bindScrolling.call(this);
       },
 

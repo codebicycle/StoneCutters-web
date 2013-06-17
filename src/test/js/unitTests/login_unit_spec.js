@@ -22,33 +22,39 @@ define(['views/base/BaseView','models/user','config/conf'],
 
 	 		callbacks.userSuccess = function(model,response){
 
-				Backbone.View.prototype.Storage.set("userObj",this.user.toJSON());
+				// Backbone.View.prototype.Storage.set("userObj",this.user.toJSON());
+				Backbone.View.prototype.Storage.set("userObj",model.toJSON());
 
 				callbacks.doneCategories = function(page){
 					page.render();
 
-	      				//BaseView Expectations
-		      			expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
+      				//BaseView Expectations
+	      			expect($('#myolx-link').html()).toBe("My OLX - Hi pedro32!");
 				}
 
 				spyOn(callbacks,'doneCategories').andCallThrough();
 
 				var dfd = $.Deferred().done(_.bind(callbacks.doneCategories, this));
 
-	      			view = new BaseView({'deferred': dfd});
+      			view = new BaseView({'deferred': dfd});
 
-	      			$.ajax.calls[1].args[0].success(categories);
+      			// $.ajax.calls[1].args[0].success(categories);
+      			$.ajax.calls[0].args[0].success(categories);
 			};
 
 			spyOn(callbacks,'userSuccess').andCallThrough();
 
 			spyOn($,'ajax');
 
-			this.user = new User({"username":"pedro32", "authToken": 12345678});
-			this.user.on('sync',_.bind(callbacks.userSuccess, this));
-			this.user.fetch();
+			this.user = new User({"username":"pedro32"});
+			// Commented because user object doesn't have a URL anymore.
+			// No fetch needed. Left as an example for future tests.
+			// this.user.on('sync',_.bind(callbacks.userSuccess, this));
+			// this.user.fetch();
 	
- 			$.ajax.calls[0].args[0].success(user);
+ 			// $.ajax.calls[0].args[0].success(user);
+
+ 			callbacks.userSuccess(this.user);
  			
 		});
 	});

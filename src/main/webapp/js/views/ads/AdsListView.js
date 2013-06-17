@@ -64,7 +64,7 @@ define([
         this.query_options = new Opts(ops);
         this.query_options.on('change', this.updateItems, this);
 
-        AdsListView.__super__.collection = new ItemsCollection(this.query_options.toJSON(),{},{"item_type":"adsList"});
+        AdsListView.__super__.collection = new ItemsCollection(this.query_options.toJSON(),{"item_type":"adsList"});
         this.items = AdsListView.__super__.collection;
         this.items.on('sync',_.bind(this.items_success, this));
         this.items.fetch();

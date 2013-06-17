@@ -36,11 +36,11 @@ define([
         this.whatsNewCT = Handlebars.compile(itemGalleryTemplate);
         this.lastVisitCT = Handlebars.compile(itemGalleryTemplate);
 
-        this.whatsNewItems = new ItemsCollection({location:"www.olx.com", filters:"[{'name':'withPhotos', 'value':'true'}]"},{},{"item_type":"adsList"});
+        this.whatsNewItems = new ItemsCollection({location:"www.olx.com", filters:"[{'name':'withPhotos', 'value':'true'}]"},{"item_type":"adsList"});
         this.whatsNewItems.on('sync',_.bind(this.items_success, this));
         this.whatsNewItems.fetch();
 
-        this.lastVisitedItems = new ItemsCollection({location:"www.olx.com"},{},{"item_type":"adsList"});
+        this.lastVisitedItems = new ItemsCollection({location:"www.olx.com"},{"item_type":"adsList"});
         this.lastVisitedItems.on('sync',_.bind(this.items_success, this));
         this.lastVisitedItems.fetch();
         

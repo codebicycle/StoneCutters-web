@@ -8,8 +8,8 @@ define([
     var FieldCollection = Backbone.Collection.extend({
       model: FieldModel,
       initialize: function(options){
-        //this.countryId = options.country_id;
-        //this.categoryId = options.category_id;
+        this.countryId = options.country_id;
+        this.categoryId = options.category_id;
       },
       url: function(){
         return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
