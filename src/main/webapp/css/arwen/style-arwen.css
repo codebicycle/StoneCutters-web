@@ -294,7 +294,7 @@ ul#ads-list li {
 
 /* Forms
 ---------------------------------------------------------------------- */
-
+/*
 form.form div.ui-input-text.ui-shadow-inset.ui-corner-all.ui-btn-shadow.ui-body-c{
 	box-shadow: none;
 	border: 1px solid #e4e3e1;
@@ -396,7 +396,7 @@ form#register-form span.ui-icon-checkbox-off {
 	}
 
 }
-
+*/
 
 /* Message Listing
 ---------------------------------------------------------------------- */
@@ -975,6 +975,38 @@ div#messagepage div#messageContainer {
 				display: none;
 			}
 
+		/* Forms */
+
+			.olx-ui-button
+			{
+				display: block;
+				width: 100%;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				padding: .75rem 1rem;
+				background-color: #9E70B1;
+				border: thin solid #5C3D67;
+				font-size: 1rem;
+				color: #FFF;
+				text-decoration: none;
+				text-align: center;
+
+			}
+
+			.olx-ui-textbox
+			{
+				display: block;
+				width: 100%;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				padding: .75rem 1rem;
+				background-color: #F2E6E6;
+				border: thin solid #E6E2E1;
+				font-size: 1rem;
+				color: #666;
+			}
+
 /* 2. PAGES */
 
 	/* 2.1 Home page */
@@ -1356,6 +1388,60 @@ div#messagepage div#messageContainer {
 				margin: 1rem -1rem 0;
 				padding: 0 1rem;
 			}
+
+	/* 2.2 Login */
+
+		.login-page
+		{
+			padding: 0 1rem 1rem;
+		}
+
+		.login-page section
+		{
+			padding-top: 1rem;
+		}
+
+		.login-page h3
+		{
+			padding-bottom: 1rem;
+			font-size: 2em;
+		    font-weight: normal;
+		}
+
+		.login-page .login
+		{
+			padding-bottom: 1rem;
+			border-bottom: thin solid #D2D2D2;
+		}
+
+		.login-page .login .olx-ui-textbox
+		{
+			margin-bottom: 1rem;
+		}
+
+		.login-page .login .olx-ui-button
+		{
+			display: inline-block;
+			width: auto;
+			min-width: 25%;
+			padding: .75rem 3rem;
+			margin-right: 1rem;
+			background-color: #6B696A;
+			border-color: #9A9899;
+		}
+
+		.login-page .login p
+		{
+			display: inline-block;
+			padding: .75rem 0;
+		}
+
+		.login-page .login a
+		{
+			font-size: 1rem;
+			text-decoration: none;
+			color: #06F;
+		}
 
 /* WIDGETS */
 
