@@ -41,9 +41,13 @@ define([
         this.item.on('sync',_.bind(this.success, this));
         this.item.fetch();
 
-        this.relatedAds = new ItemsCollection({location:"www.olx.com", relatedTo:options.id, filters:"[{'name':'withPhotos', 'value':'true'}]"},{"item_type":"adsList"});
+        this.relatedAds = new ItemsCollection({"item_type":"adsList"});
         this.relatedAds.on('sync',_.bind(this.related_ads_success, this));
-        this.relatedAds.fetch();
+        this.relatedAds.fetch({data: $.param({
+          location:"www.olx.com",
+          relatedTo:options.id,
+          filters:"[{'name':'withPhotos', 'value':'true'}]"
+        })});
 
         //Debug Code
         /*

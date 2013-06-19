@@ -42,6 +42,7 @@ define([
         this.query = null || this.params.q;
         this.sortName = null || this.params.sort;
         AdsListView.__super__.offset= options.page || 0;
+        AdsListView.__super__.itemListId = "#ads-list";
         this.pageSize =  10;
 
         //this sets the category in the Category Helper
@@ -57,17 +58,24 @@ define([
         if(this.query){
           ops = JSONHelper.concatJSON(ops, {"searchTerm":this.query});
         }
+
+        if(CategoryHelper.getCategory() != 0){
+          ops = JSONHelper.concatJSON(ops, {"categoryId":CategoryHelper.getCategory()});
+        }
         
         delete this.params["sort"];
 
         var Opts = Backbone.Model.extend();
-        this.query_options = new Opts(ops);
-        this.query_options.on('change', this.updateItems, this);
+        AdsListView.__super__.query_options = new Opts(ops);
+        this.query_options = AdsListView.__super__.query_options;
+        //this was meant for updating items when filters or sorts change.
+        //Now it does not work. Rethink
+        //this.query_options.on('change', this.updateItems, this);
 
-        AdsListView.__super__.collection = new ItemsCollection(this.query_options.toJSON(),{"item_type":"adsList"});
+        AdsListView.__super__.collection = new ItemsCollection({"item_type":"adsList"});
         this.items = AdsListView.__super__.collection;
         this.items.on('sync',_.bind(this.items_success, this));
-        this.items.fetch();
+        this.items.fetch({data: $.param(this.query_options.toJSON())});
 
         //Debug Code
         /*

@@ -38,7 +38,7 @@ define([
         var triggerPoint = 100; // 100px from the bottom
         
         if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()) {
-          this.collection.query_opts.offset += 1; // Load next page
+          this.query_options.set("offset", this.query_options.get("offset") + 1); // Load next page
           this.loadResults();
         }
       },
@@ -46,14 +46,13 @@ define([
       loadResults: function () {
         this.collection.on('sync',_.bind(this.load_more_items, this));
         this.isLoading = true;
-        this.collection.fetch();
+        this.collection.fetch({data: $.param(this.query_options.toJSON())});
       },
 
       load_more_items:function(items){
         var data= {};
         data[this.templateKey] = this.collection.toJSON();
-        $(this.el).find('#ads-list').append(this.listTemplate(data));
-        $(this.el).find('#ads-list').listview("refresh");
+        $(this.el).find(this.itemListId).append(this.listTemplate(data));
         this.isLoading = false;
         return this;
       },

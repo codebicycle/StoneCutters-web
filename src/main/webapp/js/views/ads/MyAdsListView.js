@@ -29,16 +29,24 @@ define([
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
         this.pageSize =  10;
-        this.user_id = this.Storage.get("userObj").userId;
-        this.token = this.Storage.get("userObj").authToken;
 
         MyAdsListView.__super__.offset= options.page || 0;
+        MyAdsListView.__super__.itemListId = "#ads-list";
+
+        var ops = {
+          token: this.Storage.get("userObj").authToken,
+          offset:this.page,
+          pageSize: this.pageSize
+        };
+
+        var Opts = Backbone.Model.extend();
+        MyAdsListView.__super__.query_options = new Opts(ops);
+        this.query_options = MyAdsListView.__super__.query_options;
         
-        this.query_ops = {"country_id": 1, "offset":this.page, "pageSize": this.pageSize};
-        this.items = new ItemsCollection(this.query_ops, {"item_type":"myAds"});
+        this.items = new ItemsCollection({"item_type":"myAds"});
         MyAdsListView.__super__.collection = this.items;
         this.items.on('sync',_.bind(this.items_success, this));
-        this.items.fetch();
+        this.items.fetch({data: $.param(this.query_options.toJSON())});
 
         //Debug Code
         /*
@@ -56,7 +64,7 @@ define([
 
 
         this.templateKey = "items";
-        this.scrollingID = "myAds"+this.user_id;
+        this.scrollingID = "myAds"+this.Storage.get("userObj").userId;
         MyAdsListView.__super__.bindScrolling.call(this);
       },
 
