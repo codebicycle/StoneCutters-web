@@ -25,7 +25,10 @@ define([
 
         this.message = new MessageModel({'id': options.id});
         this.message.on('sync',_.bind(this.success, this));
-        this.message.fetch();
+        //the data param adds query parameters to the fetch url
+        this.message.fetch({data: $.param({
+          token: this.Storage.get("userObj").authToken
+        })});
 
         //Debug Code
         /*

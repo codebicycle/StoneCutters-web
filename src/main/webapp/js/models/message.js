@@ -7,11 +7,10 @@ define([
   	initialize: function(options){
       
   	},
-  	url: function(){
-  		return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-        '/users/'+this.Storage.get("userObj").userId+'/messages/'+this.id+
-        '?token='+this.Storage.get("userObj").authToken;
-  	}
+    urlRoot: function(){
+      return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
+        '/users/'+this.Storage.get("userObj").userId+'/messages';
+    }
   });
   
   // Return the model for the module

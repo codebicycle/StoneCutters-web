@@ -25,15 +25,24 @@ define([
 
         this.dfd = null || options.deferred;
 
-        MyMessageListView.__super__.offset = options.page || 0; 
+        MyMessageListView.__super__.offset = options.page || 0;
+        MyMessageListView.__super__.itemListId = "#message-list";
         this.pageSize =  10;
 
-        this.opts = {offset:MyMessageListView.__super__.offset, pageSize: this.pageSize};
+        var ops = {
+          token: this.Storage.get("userObj").authToken,
+          offset:MyMessageListView.__super__.offset,
+          pageSize: this.pageSize
+        };
 
-        this.messages = new MessagesCollection(this.opts);
+        var Opts = Backbone.Model.extend();
+        MyMessageListView.__super__.query_options = new Opts(ops);
+        this.query_options = MyMessageListView.__super__.query_options;
+
+        this.messages = new MessagesCollection();
         MyMessageListView.__super__.collection =this.messages;
         this.messages.on('sync',_.bind(this.messages_success, this));
-        this.messages.fetch();
+        this.messages.fetch({data: $.param(this.query_options.toJSON())});
 
         //Debug Code
        /*
