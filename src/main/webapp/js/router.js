@@ -156,7 +156,8 @@ define([
       };
 
       window.prevPage = page;
-
+      window.scrollTo(0,0);
+      
       page.render();
     }
   });
