@@ -3,6 +3,7 @@ define([
   'underscore',
   'backbone',
   'handlebars',
+  'constants/const',
   'collections/items',
   'collections/filters',
   'collections/sorts',
@@ -11,11 +12,12 @@ define([
   'views/scroll/ScrollView'
   ], 
 
-  function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
+  function($,_, Backbone, Handlebars, Const, ItemsCollection, FiltersCollection, 
     SortsCollection, MyAdsTemplate,myAdsListTemplate, ScrollView){
 
     var MyAdsListView = ScrollView.extend({
       el: "#home",
+      className: "MyAdsListView",
 
       events: {
       },
@@ -28,7 +30,6 @@ define([
 
         this.dfd = null || options.deferred;
         this.page= options.page || 0;
-        this.pageSize =  10;
 
         MyAdsListView.__super__.offset= options.page || 0;
         MyAdsListView.__super__.itemListId = "#ads-list";
@@ -36,7 +37,7 @@ define([
         var ops = {
           token: this.Storage.get("userObj").authToken,
           offset:this.page,
-          pageSize: this.pageSize
+          pageSize: Const.get(this.className).pageSize
         };
 
         var Opts = Backbone.Model.extend();

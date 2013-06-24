@@ -3,6 +3,7 @@ define([
   'underscore',
   'backbone',
   'handlebars',
+  'constants/const',
   'collections/items',
   'collections/filters',
   'collections/sorts',
@@ -16,12 +17,13 @@ define([
   'helpers/CategoryHelper'
   ], 
 
-  function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
+  function($,_, Backbone, Handlebars, Const, ItemsCollection, FiltersCollection, 
     SortsCollection, adsTemplate,adsListTemplate, 
     filterTemplate, sortTemplate, breadcrumbTemplate, ScrollView, JSONHelper, CategoryHelper){
   
     var AdsListView = ScrollView.extend({
       el: "#home",
+      className: "AdsListView",
 
       events: {
         'click #filterButton': 'openFilterPopup',
@@ -43,13 +45,12 @@ define([
         this.sortName = null || this.params.sort;
         AdsListView.__super__.offset= options.page || 0;
         AdsListView.__super__.itemListId = "#ads-list";
-        this.pageSize =  10;
 
         //this sets the category in the Category Helper
         if (options.cat_id)
           CategoryHelper.setCategory(parseInt(options.cat_id,10));
 
-        var ops = {location: "www.olx.com", offset:AdsListView.__super__.offset, pageSize: this.pageSize};
+        var ops = {location: "www.olx.com", offset:AdsListView.__super__.offset, pageSize: Const.get(this.className).pageSize};
         delete this.params["q"];
 
 
