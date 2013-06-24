@@ -129,8 +129,6 @@ define([
           this.sliderRelated.items = ScreenHelper.getImgsNum();
         },this));
 
-        window.scrollTo(0,0);
-
         return this;
       },
       success: function(model, response)  {
