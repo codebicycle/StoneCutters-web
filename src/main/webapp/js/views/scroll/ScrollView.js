@@ -51,6 +51,12 @@ define([
       },
 
       load_more_items:function(items){
+        if (this.collection.length < this.query_options.get("pageSize")) {
+          //if there are less items than the items I requested, unbind infinite scrolling
+          this.close();
+          return;
+        }
+
         var data= {};
         data[this.templateKey] = this.collection.toJSON();
         $(this.el).find(this.itemListId).append(this.listTemplate(data));
