@@ -131,9 +131,9 @@ define([
             var countryId = 'losangeles.olx.com';  //TODO We must create a Country Helper
             this.item.set({title: title});
             this.item.set({description: description});
-            //this.item.set({category: {id: subcategoryID, parentId:categoryID}});
-            this.item.set({"categoryId": subcategoryID});
-            this.item.set({"parentCategoryId": categoryID});
+            this.item.set({category: {id: subcategoryID, parentId:categoryID}});
+            //this.item.set({"categoryId": subcategoryID});
+            //this.item.set({"parentCategoryId": categoryID});
             
             //I set the require fields in order to get the optionals fields 
             //for this this
