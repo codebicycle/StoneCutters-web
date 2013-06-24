@@ -13,7 +13,8 @@ require.config( {
     modernizr:  'libs/modernizr/modernizr.custom',
     templates:  '../templates',
     config:     '../configuration',
-    crypto:     'libs/cryptoJS'
+    crypto:     'libs/cryptoJS',
+    constants:     '../constants',
   },
   
   // Sets the configuration for your third party scripts that are not AMD compatible

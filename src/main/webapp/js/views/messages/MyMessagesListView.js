@@ -3,16 +3,19 @@ define([
   'underscore',
   'backbone',
   'handlebars',
+  'constants/const',
   'collections/messages',
   'views/scroll/ScrollView',
   'text!templates/message/messagesTemplate.html',
   'text!templates/message/messagesListTemplate.html'
   ], 
 
-  function($,_, Backbone, Handlebars, MessagesCollection, ScrollView, messagesTemplate,messagesListTemplate){
+  function($,_, Backbone, Handlebars, Const, MessagesCollection, ScrollView, 
+    messagesTemplate, messagesListTemplate){
 
     var MyMessageListView = ScrollView.extend({
       el: "#home",
+      className: "MyMessageListView",
 
       events: {
       },
@@ -27,12 +30,11 @@ define([
 
         MyMessageListView.__super__.offset = options.page || 0;
         MyMessageListView.__super__.itemListId = "#message-list";
-        this.pageSize =  10;
 
         var ops = {
           token: this.Storage.get("userObj").authToken,
           offset:MyMessageListView.__super__.offset,
-          pageSize: this.pageSize
+          pageSize: Const.get(this.className).pageSize
         };
 
         var Opts = Backbone.Model.extend();

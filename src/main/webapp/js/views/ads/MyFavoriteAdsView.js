@@ -3,6 +3,7 @@ define([
   'underscore',
   'backbone',
   'handlebars',
+  'constants/const',
   'collections/items',
   'collections/filters',
   'collections/sorts',
@@ -11,11 +12,12 @@ define([
   'views/scroll/ScrollView'
   ], 
 
-  function($,_, Backbone, Handlebars, ItemsCollection, FiltersCollection, 
+  function($,_, Backbone, Handlebars, Const, ItemsCollection, FiltersCollection, 
     SortsCollection, myFavoriteAdsTemplate,myFavoriteAdsListTemplate, ScrollView){
 
     var MyFavoritesAdsListView = ScrollView.extend({
       el: "#home",
+      className: "MyFavoritesAdsListView",
 
       events: {
       },
@@ -30,14 +32,13 @@ define([
         this.page= options.page || 0;
         MyFavoritesAdsListView.__super__.offset = options.page || 0; 
         MyFavoritesAdsListView.__super__.itemListId = "#ads-list";
-        this.pageSize =  10;
         
         this.item_ops = {"item_type":"myFavorites"};
 
         var ops = {
           token: this.Storage.get("userObj").authToken,
           offset:this.page,
-          pageSize: this.pageSize
+          pageSize: Const.get(this.className).pageSize
         };
 
         var Opts = Backbone.Model.extend();

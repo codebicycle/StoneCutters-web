@@ -2,6 +2,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'constants/const',
   ], 
   
   // How to use this view:
@@ -20,7 +21,7 @@ define([
   // Note: this view assumes that inside our collection you have an query_opts element which has offset variable inside.
   // this.collection.query_opts.offset
 
-  function($,_, Backbone){
+  function($,_, Backbone, Const){
 
     var ScrollView = Backbone.View.extend({
 
@@ -35,7 +36,7 @@ define([
       },
 
       checkScroll: function () {
-        var triggerPoint = 100; // 100px from the bottom
+        var triggerPoint = Const.get("ScrollView").scrollFetchPxOffset; // 100px from the bottom
         
         if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()) {
           this.query_options.set("offset", this.query_options.get("offset") + 1); // Load next page
