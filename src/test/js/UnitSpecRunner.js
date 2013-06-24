@@ -15,7 +15,8 @@ require.config({
     swipe: 'libs/swipe/swipe-items',
     modernizr: 'libs/modernizr/modernizr.custom',
     spec: '../../../test/js',
-    config: '../configuration'
+    config: '../configuration',
+    constants:     '../constants',
   },
   shim: {
     underscore: {
