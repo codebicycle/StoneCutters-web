@@ -124,13 +124,16 @@ define([
         switch(posting_step)
         {
           case 1:
-            var title = $(this.el).find('#content #title').text();
-            var categoryID = $(this.el).find('#content #category').val()
-            var subcategoryID = $(this.el).find('#content #subcategory').val();
-            var countryId = 'www.olx.com';  //TODO We must create a Country Helper
-
+            var title = $(this.el).find('#content #title').val();
+            var description = $(this.el).find('#content #description').val();
+            var categoryID = parseInt($(this.el).find('#content #category').val());
+            var subcategoryID = parseInt($(this.el).find('#content #subcategory').val());
+            var countryId = 'losangeles.olx.com';  //TODO We must create a Country Helper
             this.item.set({title: title});
-            this.item.set({category: {id: subcategoryID, parentId:categoryID}});
+            this.item.set({description: description});
+            //this.item.set({category: {id: subcategoryID, parentId:categoryID}});
+            this.item.set({"categoryId": subcategoryID});
+            this.item.set({"parentCategoryId": categoryID});
             
             //I set the require fields in order to get the optionals fields 
             //for this this
@@ -171,6 +174,7 @@ define([
             //this.item.set({adAddress:adAddress});
             this.item.set({email: email});
             this.item.set({phone: phone});
+            this.item.set({location: "losangeles.olx.com"});
           break;
         }
         return;
