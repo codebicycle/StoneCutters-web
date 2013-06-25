@@ -39,8 +39,8 @@ define([
         this.whatsNewItems = new ItemsCollection({"item_type":"adsList"});
         this.whatsNewItems.on('sync',_.bind(this.items_success, this));
         this.whatsNewItems.fetch({data: $.param({
-          location:"www.olx.com",
-          filters:"[{'name':'withPhotos', 'value':'true'}]"
+          "location":"www.olx.com",
+          "f.withPhotos":"true"
         })});
 
         this.lastVisitedItems = new ItemsCollection({"item_type":"adsList"});

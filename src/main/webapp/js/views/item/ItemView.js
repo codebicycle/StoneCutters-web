@@ -46,7 +46,7 @@ define([
         this.relatedAds.fetch({data: $.param({
           location:"www.olx.com",
           relatedTo:options.id,
-          filters:"[{'name':'withPhotos', 'value':'true'}]"
+          "f.withPhotos":"true"
         })});
 
         //Debug Code
