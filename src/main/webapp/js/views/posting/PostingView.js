@@ -90,9 +90,7 @@ define([
           break;
           case 1:
             this.buildItem(posting_step);
-            /*TODO This should be uncomment the following line and delete the call to field succes*/
             this.fields.fetch();
-            //this.fieldsSuccess();
           break;
           case 2:
             this.buildItem(posting_step);
