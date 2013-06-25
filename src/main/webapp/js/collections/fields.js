@@ -7,10 +7,6 @@ define([
 ], function(_, Backbone, FieldModel, Conf){
     var FieldCollection = Backbone.Collection.extend({
       model: FieldModel,
-      initialize: function(options){
-        this.countryId = options.country_id;
-        this.categoryId = options.category_id;
-      },
       url: function(){
         return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
         '/countries/'+ this.countryId + '/categories/' + this.categoryId + '/optionals';

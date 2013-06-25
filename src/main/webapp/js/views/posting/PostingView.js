@@ -41,18 +41,20 @@ define([
         this.comboBoxCT = Handlebars.compile(comboBoxTemplate);
 
         this.item = new ItemModel();
-        this.fields = new FieldCollection([
-         {type:"text", name:"title", label:"My Title",description:"this is a description"},
-         {type:"textarea", label:"Description", name:"description"},
-         {type:"radio", label:"Type of ad", values:[{key: 1,value: "Vendo"},{key: 2,value: "Compro"}], name:"typeOfAd"},
-         {type:"combobox", label:"Currency", values:[{key: 1,value: "ARS"},{key: 2,value: "US"}], name:"currency"},
-         {type:"password", label:"Password", name:"Password"},
-         {type:"email", label:"Email", name:"email", min:1, max:10, step:2},
-         {type:"url", label:"My website", name:"myWebsite"},
-         {type:"range", label:"Number of Bedrooms", name:"nOfBedrooms", min:1, max:10, step:1},
-         {type:"image", label:"Add images", name:"image"},
-         {type:"checkbox", label:"Mayor de edad", name:"typeOfPerson"}
-        ]);
+        this.fields = new FieldCollection();
+        //Mock
+        //this.fields = new FieldCollection([
+        // {type:"text", name:"title", label:"My Title",description:"this is a description"},
+        // {type:"textarea", label:"Description", name:"description"},
+        // {type:"radio", label:"Type of ad", values:[{key: 1,value: "Vendo"},{key: 2,value: "Compro"}], name:"typeOfAd"},
+        // {type:"combobox", label:"Currency", values:[{key: 1,value: "ARS"},{key: 2,value: "US"}], name:"currency"},
+        // {type:"password", label:"Password", name:"Password"},
+        // {type:"email", label:"Email", name:"email", min:1, max:10, step:2},
+        // {type:"url", label:"My website", name:"myWebsite"},
+        // {type:"range", label:"Number of Bedrooms", name:"nOfBedrooms", min:1, max:10, step:1},
+        // {type:"image", label:"Add images", name:"image"},
+        // {type:"checkbox", label:"Mayor de edad", name:"typeOfPerson"}
+        //]);
 
         this.fields.on('sync',_.bind(this.fieldsSuccess, this));
         
@@ -63,19 +65,6 @@ define([
         }else{
           if (this.dfd) this.dfd.resolve(this);
         }
-
-        // this.fields = new FieldCollection({country_id:1, category_id:4});
-        // this.fields.on('sync',_.bind(this.fieldsSuccess, this));
-        // this.fields.fetch();
-
-        // this.fields = new FieldCollection([{type:"text-1", title:"Title", name:"title"},
-        //   {type:"text-2", title:"Description", name:"desc"},
-        //   {type:"radio", title:"Type of ad", opts:["Buy","Sell"], name:"typeOfAd"},
-        //   {type:"combo", title:"Currency", opts:["ARS","USD"], name:"currency"},
-        //   {type:"check", title:"Has furniture", name:"hasFurniture"},
-        //   {type:"slider", title:"Number of Bedrooms", name:"nOfBedrooms", min:1, max:10, step:1},
-        //   {type:"imgs", title:"Add images", name:"image"},]);
-        
       },
 
       cat_success: function(){
@@ -101,10 +90,7 @@ define([
           break;
           case 1:
             this.buildItem(posting_step);
-            /*TODO This should be uncomment the following line and delete the call to field succes*/
-            //this.fields.fetch();
-            this.fieldsSuccess();
-
+            this.fields.fetch();
           break;
           case 2:
             this.buildItem(posting_step);
@@ -138,7 +124,7 @@ define([
             //I set the require fields in order to get the optionals fields 
             //for this this
             this.fields.countryId = countryId;
-            this.fields.parentCategoryId= categoryID;
+            this.fields.parentCategoryId = categoryID;
             this.fields.categoryId = subcategoryID;
           break;
           case 2:
