@@ -50,41 +50,16 @@ define([
     Backbone.Model.prototype.Storage = Storage;
     Backbone.Collection.prototype.Storage = Storage;
 
-  //   Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-
-  //   switch (operator) {
-  //       case '==':
-  //           return (v1 == v2) ? options.fn(this) : options.inverse(this);
-  //           break;
-  //       case '===':
-  //           return (v1 === v2) ? options.fn(this) : options.inverse(this);
-  //           break;
-  //       case '<':
-  //           return (v1 < v2) ? options.fn(this) : options.inverse(this);
-  //           break;
-  //       case '<=':
-  //           return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-  //           break;
-  //       case '>':
-  //           return (v1 > v2) ? options.fn(this) : options.inverse(this);
-  //           break;
-  //       case '>=':
-  //           return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-  //           break;
-  //       default:
-  //           return options.inverse(this)
-  //           break;
-  //   }
-  //   //return options.inverse(this);
-  // });
-
-
     Handlebars.registerHelper('getField', function(field) {
       var snip;
 
       switch(field.type){
         case "radio":{
-          snip = '<legend>'+field.label+':</legend>';
+          snip = "";
+          if(field.label!= null){
+            snip += '<legend>'+field.label+':</legend>';
+          }
+
           for(i = 0; i < field.values.length; i++){
             snip += '<input id = "radio-'+field.name+i+'"'+ 'type="radio" name="'+field.name+'"value="'+field.values[i].key+'">';
             snip += '<label for="radio-'+field.name+i+'">'+field.values[i].value+'</label>';
@@ -93,41 +68,76 @@ define([
         break;
 
         case "text":{
-          snip = '<label for="text-'+field.name+'">'+field.label+'</label>'+'<input type="text" id="text-'+field.name+'" name=' + field.name +'">';
+          snip="";
+          if(field.label!= null){
+            snip += '<label for="text-'+field.name+'">'+field.label+'</label>';
+          }
+          snip += '<input type="text" id="text-'+field.name+'" name=' + field.name +'">';
         };
         break;
 
         case "textarea":{ 
-          snip = '<label for="textarea-'+field.name+'">'+field.label+'</label>'+'<textarea id="textarea-'+field.name+'" name=' + field.name +'"></textarea>';
+          snip="";
+          if(field.label!= null){
+            snip += '<label for="textarea-'+field.name+'">'+field.label+'</label>';
+          }
+          snip += '<textarea id="textarea-'+field.name+'" name=' + field.name +'"></textarea>';
         };
         break;
 
         case "combobox": {
-          snip = '<label for="select-'+field.name+'">'+field.label+'</label>'+
-                    '<select id="select-'+field.name+'" name="'+field.name+'">';
-
+          snip = "";
+          if(field.label!= null){
+            snip += '<label for="select-'+field.name+'">'+field.label+'</label>'
+          }
+          snip +='<select id="select-'+field.name+'" name="'+field.name+'">';
           for(i = 0; i < field.values.length; i++){
             snip += '<option name="'+field.name+'" value="'+field.values[i].key+'">'+field.values[i].value+'</option>';
           }
-
           snip += '</select>';
         };break;
         case "checkbox":
-          snip = '<input type="checkbox" id="checkbox-'+field.name+'" name="'+field.name+'">'+
-                              '<label for="check-'+field.name +'">'+field.label+'</label>';
+          snip = '<input type="checkbox" id="checkbox-'+field.name+'" name="'+field.name+'">';
+          if(field.label!= null){
+            snip += '<label for="check-'+field.name +'">'+field.label+'</label>';
+          }
         break;
-        case "password": snip = '<label for="password-'+field.name+'">'+field.label+'</label>'+'<input type="password" id="password-'+field.name+'" name="'+field.name+'">';
+        case "password": 
+          snip = "";
+          if(field.label!= null){
+            snip += '<label for="password-'+field.name+'">'+field.label+'</label>';
+          }
+          snip += '<input type="password" id="password-'+field.name+'" name="'+field.name+'">';
         break;
-        case "email": snip = '<label for="email-'+field.name+'">'+field.label+'</label>'+'<input type="email" id="email-'+field.name+'" name="'+field.name+'">';
+        case "email": 
+          snip = "";
+          if(field.label!= null){
+            snip = '<label for="email-'+field.name+'">'+field.label+'</label>';
+          }
+          snip = '<input type="email" id="email-'+field.name+'" name="'+field.name+'">';
         break;
-        case "url": snip =   '<label for="url-'+field.name+'">'+field.label+'</label>'+'<input type="url" id="url-'+  field.name+'" name="'+field.name+'">';
+        case "url": 
+          snip = "";
+          if(field.label!= null){
+            snip +=   '<label for="url-'+field.name+'">'+field.label+'</label>'
+          }
+          snip += '<input type="url" id="url-'+  field.name+'" name="'+field.name+'">';
         break;
-        case "range": snip = '<label for="slider-'+field.name+'">'+field.label+'</label>'+
-                                '<input type="range" name="'+field.name+'" id="range-'+field.name+
-                                '" value="'+field.min+'" min="'+field.min+'" max="'+field.max+'" step="'+field.step+'">';
+        case "range": 
+          snip = "";
+          if(field.label!= null){
+            snip += '<label for="slider-'+field.name+'">'+field.label+'</label>';
+          }
+          snip += '<input type="range" name="'+field.name+'" id="range-'+field.name+
+          '" value="'+field.min+'" min="'+field.min+'" max="'+field.max+'" step="'+field.step+'">';
         break;
-        case "image": snip = '<label for="imgs-'+field.name+'">'+field.label+'</label>'+
-                            '<input type="file" name="'+field.name+'" id="imgs-'+field.name+'" value="" class="in-'+field.type+'">';
+  
+        case "image": 
+        snip = "";
+        if(field.label!= null){
+          snip += '<label for="imgs-'+field.name+'">'+field.label+'</label>';
+        }
+        snip += '<input type="file" name="'+field.name+'" id="imgs-'+field.name+'" value="" class="in-'+field.type+'">';
         break;
       }
 
