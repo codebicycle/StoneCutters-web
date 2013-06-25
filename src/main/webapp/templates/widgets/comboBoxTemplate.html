@@ -1,5 +1,7 @@
-<select id={{id}} name={{name}}>
+<span></span>
+<select id="{{id}}" name="{{name}}" class="olx-ui-select2" data-role="none">
+	<option>Select a {{name}}</option>
 	{{#items}}
-		<option value={{id}}>{{name}}</option>
+		<option value="{{id}}">{{name}}</option>
 	{{/items}}
 </select>

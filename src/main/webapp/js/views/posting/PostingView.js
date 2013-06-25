@@ -9,12 +9,13 @@ define([
     'text!templates/posting/postingStep2Template.html',
     'text!templates/posting/postingStep3Template.html',
     'text!templates/widgets/comboBoxTemplate.html',
+    'text!templates/widgets/formControls/checkboxTemplate.html',
     'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, Handlebars, FieldCollection, ItemModel, 
     postingStep1Template, postingStep2Template, postingStep3Template, 
-    comboBoxTemplate, CategoryHelper){
+    comboBoxTemplate, checkboxTemplate, CategoryHelper){
 
     var PostingView = Backbone.View.extend({
       el: "#home",
@@ -26,7 +27,8 @@ define([
         'click #back-p2-button': 'showPage',
         'click #post-button':    'makePosting',
         'click #save-button':    'savePosting',
-        'change #category':   'loadSubcategory'
+        'change #category':   'loadSubcategory',
+        'click .change-page' : 'changePage'
       },
 
       initialize: function(options){
@@ -96,7 +98,7 @@ define([
         {
           case 0:
             $(this.el).find('#content').html(this.postingStep1CT({categories:this.categories.toJSON()}));
-            $(this.el).find('#subcategories').html(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[0].get('children')}));
+            $(this.el).find('#subcategories').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[0].get('children')}));
             $(this.el).find('#content').trigger('create');
           break;
           case 1:
@@ -184,6 +186,23 @@ define([
       showPage: function(ev){
         var dest = $(ev.target).data('destiny');
         this.render(dest);
+      },
+
+      changePage: function(e){
+        e.preventDefault();
+        
+        var steps = $('.steps');
+        var activeStep = $('.highlight', steps).last();
+        var activeSection = $('section.active', 'form');
+        var targetSection = $(e.target.hash);
+        
+        if(activeSection.next().is(targetSection)){
+          activeStep.removeClass('animate').next().addClass('highlight animate');
+        }else{
+          activeStep.removeClass('highlight animate');
+        }
+        activeSection.removeClass('active');
+        targetSection.addClass('active');
       },
 
       showPosting: function(){
