@@ -181,10 +181,11 @@ define([
           
         });
 
-        $('a[class*=remove-filter]').click({opts: this.query_options},function(ev){
+        $('.remove-filter').click({opts: this.query_options},_.bind(function(ev){
           var filter = $(ev.currentTarget).data('filtername');
           ev.data.opts.unset(filter);
-        });
+          this.updateItems();
+        },this));
       },
 
       bindSorts: function(){
@@ -228,14 +229,26 @@ define([
           'filters': this.filters.toJSON()
         }));
 
-        this.bindFilters();
-
         //fill out the filter popup according to the filters already set in params
         this.filters.each(_.bind(function(filter) {
           if (this.params[filter.get("name")]) {
-            $(this.el).find("[name="+filter.get("name")+"]").filter("[value="+this.params[filter.get("name")]+"]").prop('checked', true);
+            $(this.el).find("[name="+filter.get("name")+"]")
+              .filter("[value="+this.params[filter.get("name")]+"]")
+              .prop('checked', true);
+
+            var label = $(this.el).find("label[for='"+filter.get("name")+"-"+
+              this.params[filter.get("name")]+"']").html();
+
+            label = (typeof label == 'undefined')?"":": "+label;
+
+            $(this.el).find("#filtersSet p").append("<span class='remove-filter' data-filtername='"+filter.get("name")+"'>"+
+              filter.get("description")+label+
+              "</span>");
           }
         }, this));
+
+        this.bindFilters();
+
       },
 
       sorts_success: function(model, response){

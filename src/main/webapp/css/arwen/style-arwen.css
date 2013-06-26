@@ -1081,6 +1081,7 @@ div#messagepage div#messageContainer {
 				font-size: .75rem;
 				font-weight: bold;
 				color: #FFF;
+				cursor: pointer;
 			}
 
 			.listing-page header p span:first-child
