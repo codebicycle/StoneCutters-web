@@ -59,12 +59,14 @@ define([
           if(field.label!= null){
             snip += '<label class="olx-ui-label">' + field.label + '</label>';
           }
-          snip += '<label class="olx-ui-radio">';
+          
           for(i = 0; i < field.values.length; i++){
+            snip += '<label class="olx-ui-radio">';
             snip += '<input data-role="none" id = "radio-'+field.name+i+'"'+ 'type="radio" name="'+field.name+'"value="'+field.values[i].key+'">';
             snip += '<span>'+field.values[i].value+'</span>';
+            snip += '</label>';
           }
-          snip += '</label>';
+          
         };
         break;
 
