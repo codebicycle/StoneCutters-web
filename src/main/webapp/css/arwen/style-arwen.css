@@ -1007,6 +1007,190 @@ div#messagepage div#messageContainer {
 				color: #666;
 			}
 
+			.olx-ui-textarea
+			{
+				display: block;
+				width: 100%;
+				height: 8.75rem;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				padding: .75rem 1rem;
+				background-color: #F2E6E6;
+				border: thin solid #E6E2E1;
+				font-size: 1rem;
+				color: #666;
+			}
+
+			.olx-ui-label
+			{
+				display: block;
+				padding: 1rem 0 .5rem;
+				font-size: 1rem;
+				color: #666;
+			}
+
+			.olx-ui-select2
+			{
+				display: block;
+				width: 100%;
+				padding: .75rem 1rem;
+				background-color: #F2E6E6;
+				border: thin solid #E6E2E1;
+				font-size: 1rem;
+				color: #666;
+			}
+
+			.olx-ui-select
+			{
+				position: relative;
+				display: block;
+				padding-top: 1rem;
+			}
+
+			.olx-ui-select span
+			{
+				display: block;
+				font-size: 1rem;
+				color: #666;
+			}
+
+			.olx-ui-select span:before
+			{
+				content: '';
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				display: block;
+				width: 0;
+				height: 0;
+				margin: .9rem;
+				border-style: solid;
+				border-color: #666 transparent;
+				border-width: .75rem .5rem 0;
+			}
+
+			.olx-ui-select span:after
+			{
+				content: attr(data-value);
+				display: block;
+				margin-top: .5rem;
+				padding: .75rem 1rem;
+				background-color: #F2E6E6;
+				border: thin solid #E6E2E1;
+				font-size: 1rem;
+				color: #666;
+			}
+
+			.olx-ui-select select
+			{
+				position: absolute;
+				bottom: 0;
+				opacity: 0;
+				display: block;
+				width: 100%;
+				padding: .75rem 1rem;
+				background-color: #F2E6E6;
+				border: none;
+				font-size: 1rem;
+				color: #666;
+			}
+
+			.olx-ui-radio,
+			.olx-ui-checkbox
+			{
+				display: block;
+				width: 100%;
+				padding: .5rem 0 0;
+				font-size: 1rem;
+				color: #666;
+
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.olx-ui-radio:after,
+			.olx-ui-checkbox:after
+			{
+				content: '';
+				display: block;
+				clear: both;
+				height: 0;
+				font-size: 0;
+			}
+
+			.olx-ui-radio input,
+			.olx-ui-checkbox input
+			{
+				display: none;
+			}
+
+			.olx-ui-radio span,
+			.olx-ui-checkbox span
+			{
+				display: block;
+			}
+
+			.olx-ui-radio span:before
+			{
+				content: '';
+				float: left;
+				width: 1.4rem;
+				height: 1.4rem;
+				margin-right: .5rem;
+				background-color: #EEE;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				border: .1rem solid #DDD;
+				border-radius: .7rem;
+				box-shadow: 0 0 0 .2rem #FFF inset;
+				transition: background-color .2s ease-in-out;
+				-webkit-transition: background-color .2s ease-in-out;
+			}
+
+			.olx-ui-checkbox span:before
+			{
+				content: '';
+				float: left;
+				width: 1.4rem;
+				height: 1.4rem;
+				margin-right: .5rem;
+				background-color: #EEE;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				border: .1rem solid #DDD;
+				box-shadow: 0 0 0 .2rem #FFF inset;
+				transition: background-color .2s ease-in-out;
+				-webkit-transition: background-color .2s ease-in-out;
+			}
+
+			@keyframes pop-control
+			{
+				from	{transform: scale3d(1, 1, 1);}
+				to		{transform: scale3d(1.25, 1.25, 1);}
+			}
+
+			@-webkit-keyframes pop-control
+			{
+				from	{-webkit-transform: scale3d(1, 1, 1);}
+				to		{-webkit-transform: scale3d(1.25, 1.25, 1);}
+			}
+
+			.olx-ui-radio > input:checked + span:before,
+			.olx-ui-checkbox > input:checked + span:before
+			{
+				border-color: #38C157;
+				background-color: #5CEB77;
+				animation: pop-control .2s ease-in 2 alternate;
+				-webkit-animation: pop-control .2s ease-in 2 alternate;
+			}
+
 /* 2. PAGES */
 
 	/* 2.1 Home page */
@@ -1441,6 +1625,158 @@ div#messagepage div#messageContainer {
 			font-size: 1rem;
 			text-decoration: none;
 			color: #06F;
+		}
+
+	/* Posting page */
+
+		.posting-page
+		{
+			padding: 1rem;
+		}
+
+		.posting-page header h3
+		{
+			font-size: 2em;
+		}
+
+		.posting-page header p
+		{
+			font-size: 1rem;
+		}
+
+		.posting-page header .steps
+		{
+			height: .6rem;
+			margin: 2rem 0 1rem;
+			background-color: #F8F2F2;
+			border-radius: .3rem;
+			font-size: 0;
+			box-shadow: inset 0 0 0 1px #E6E2E1;
+		}
+
+		.posting-page header .steps span
+		{
+			display: inline-block;
+			height: .6rem;
+			width: 25%;
+			padding-left: .5rem;
+			background-color: #F8F2F2;
+			text-align: right;
+			box-shadow: inset 0 0 0 1px #E6E2E1;
+			transition: background-color .2s ease-in, box-shadow .3s ease-in;
+			-webkit-transition: background-color .2s ease-in, box-shadow .3s ease-in;
+		}
+
+		.posting-page header .steps span:first-child
+		{
+			border-radius: .3rem 0 0 .3rem;
+		}
+
+		.posting-page header .steps strong
+		{
+			position: relative;
+			display: inline-block;
+			width: 2rem;
+			height: 2rem;
+			margin: -1rem -.1rem -1rem 0;
+			padding: .3rem;
+			font-size: 1rem;
+			line-height: 2rem;
+			text-align: center;
+			background-color: #F8F2F2;
+			border-radius: 1.3rem;
+			box-shadow: inset 0 0 0 1px #E6E2E1;
+			transition: background-color .3s ease-in, box-shadow .4s ease-in;
+			-webkit-transition: background-color .3s ease-in, box-shadow .4s ease-in;
+		}
+
+		.posting-page header .steps em
+		{
+			display: block;
+			background-color: #FFF;
+			font-style: normal;
+			font-weight: bold;
+			color: #A6A6A6;
+			border-radius: 1rem;
+			box-shadow: inset 0 0 0 1px #E6E2E1;
+		}
+
+		@keyframes steps-highlight
+		{
+			from	{transform: scale3d(1, 1, 1);}
+			to		{transform: scale3d(1.25, 1.25, 1);}
+		}
+
+		@-webkit-keyframes steps-highlight
+		{
+			from	{-webkit-transform: scale3d(1, 1, 1);}
+			to		{-webkit-transform: scale3d(1.25, 1.25, 1);}
+		}
+
+		.posting-page header .steps span.highlight
+		{
+			background-color: #5CEB77;
+			box-shadow: inset 0 0 0 1px #38C157;
+		}
+
+		.posting-page header .steps span.highlight strong
+		{
+			background-color: #5CEB77;
+			box-shadow: inset 0 0 0 1px #38C157;
+		}
+
+		.posting-page header .steps span.highlight em
+		{
+			box-shadow: inset 0 0 0 1px #38C157;
+		}
+
+		.posting-page header .steps span.animate strong
+		{
+			animation: steps-highlight .2s ease-in 2 alternate;
+			-webkit-animation: steps-highlight .2s ease-in 2 alternate;
+		}
+
+		/**/
+
+		.posting-page form
+		{
+			
+		}
+
+		.posting-page form section
+		{
+			display: none;
+		}
+
+		.posting-page form section.active
+		{
+			display: block;
+		}
+
+		.posting-page form label
+		{
+			
+		}
+
+		.posting-page form select
+		{
+			
+		}
+
+		.posting-page form footer,
+		.posting-page form .post-actions
+		{
+			display: table;
+			table-layout: fixed;
+			width: 100%;
+			padding-top: 2rem;
+		}
+
+		.posting-page form footer .olx-ui-button,
+		.posting-page form .post-actions .olx-ui-button
+		{
+			display: table-cell;
+			width: auto;
 		}
 
 /* WIDGETS */
