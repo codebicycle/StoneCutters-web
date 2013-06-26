@@ -57,31 +57,32 @@ define([
         case "radio":{
           snip = "";
           if(field.label!= null){
-            snip += '<legend>'+field.label+':</legend>';
+            snip += '<label class="olx-ui-label">' + field.label + '</label>';
           }
-
+          snip += '<label class="olx-ui-radio">';
           for(i = 0; i < field.values.length; i++){
-            snip += '<input id = "radio-'+field.name+i+'"'+ 'type="radio" name="'+field.name+'"value="'+field.values[i].key+'">';
-            snip += '<label for="radio-'+field.name+i+'">'+field.values[i].value+'</label>';
+            snip += '<input data-role="none" id = "radio-'+field.name+i+'"'+ 'type="radio" name="'+field.name+'"value="'+field.values[i].key+'">';
+            snip += '<span>'+field.values[i].value+'</span>';
           }
+          snip += '</label>';
         };
         break;
 
         case "text":{
           snip="";
           if(field.label!= null){
-            snip += '<label for="text-'+field.name+'">'+field.label+'</label>';
+            snip += '<label for="text-'+field.name+'" class="olx-ui-label">'+field.label+'</label>';
           }
-          snip += '<input type="text" id="text-'+field.name+'" name=' + field.name +'">';
+          snip += '<input type="text" name=' + field.name +'" id="text-'+field.name+'"class="olx-ui-textbox" data-role="none">';
         };
         break;
 
         case "textarea":{ 
           snip="";
           if(field.label!= null){
-            snip += '<label for="textarea-'+field.name+'">'+field.label+'</label>';
+            snip += '<label class="olx-ui-label" for="textarea-'+field.name+'">'+field.label+'</label>';
           }
-          snip += '<textarea id="textarea-'+field.name+'" name=' + field.name +'"></textarea>';
+          snip += '<textarea class="olx-ui-textarea" data-role="none" id="textarea-'+field.name+'" name=' + field.name +'"></textarea>';
         };
         break;
 
@@ -97,17 +98,19 @@ define([
           snip += '</select>';
         };break;
         case "checkbox":
-          snip = '<input type="checkbox" id="checkbox-'+field.name+'" name="'+field.name+'">';
+          snip = '<label class="olx-ui-checkbox">'
+          snip += '<input type="checkbox" id="checkbox-'+field.name+'" name="'+field.name+'">';
           if(field.label!= null){
-            snip += '<label for="check-'+field.name +'">'+field.label+'</label>';
+            snip += '<span>'+field.label+'<span>';
           }
+          snip += '</label>';
         break;
         case "password": 
           snip = "";
           if(field.label!= null){
-            snip += '<label for="password-'+field.name+'">'+field.label+'</label>';
+            snip += '<label class="olx-ui-label" for="password-'+field.name+'">'+field.label+'</label>';
           }
-          snip += '<input type="password" id="password-'+field.name+'" name="'+field.name+'">';
+          snip += '<input class="olx-ui-textbox" data-role="none" type="password" id="password-'+field.name+'" name="'+field.name+'">';
         break;
         case "email": 
           snip = "";
@@ -119,9 +122,9 @@ define([
         case "url": 
           snip = "";
           if(field.label!= null){
-            snip +=   '<label for="url-'+field.name+'">'+field.label+'</label>'
+            snip +=   '<label class="olx-ui-label" for="url-'+field.name+'">'+field.label+'</label>'
           }
-          snip += '<input type="url" id="url-'+  field.name+'" name="'+field.name+'">';
+          snip += '<input class="olx-ui-textbox" data-role="none" type="url" id="url-'+  field.name+'" name="'+field.name+'">';
         break;
         case "range": 
           snip = "";
@@ -135,7 +138,7 @@ define([
         case "image": 
         snip = "";
         if(field.label!= null){
-          snip += '<label for="imgs-'+field.name+'">'+field.label+'</label>';
+          snip += '<label class="olx-ui-label" for="imgs-'+field.name+'">'+field.label+'</label>';
         }
         snip += '<input type="file" name="'+field.name+'" id="imgs-'+field.name+'" value="" class="in-'+field.type+'">';
         break;
