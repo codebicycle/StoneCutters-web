@@ -5,17 +5,13 @@ define([
     'handlebars',
     'collections/fields',
     'models/item',
-    'text!templates/posting/postingStep1Template.html',
-    'text!templates/posting/postingStep2Template.html',
-    'text!templates/posting/postingStep3Template.html',
+    'text!templates/posting/postingFormTemplate.html',
     'text!templates/widgets/comboBoxTemplate.html',
-    'text!templates/widgets/formControls/checkboxTemplate.html',
     'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, Handlebars, FieldCollection, ItemModel, 
-    postingStep1Template, postingStep2Template, postingStep3Template, 
-    comboBoxTemplate, checkboxTemplate, CategoryHelper){
+    postingFormTemplate, comboBoxTemplate, CategoryHelper){
 
     var PostingView = Backbone.View.extend({
       el: "#home",
@@ -36,10 +32,7 @@ define([
         this.dfd = null || options.deferred;
 
         // Compile the template using Handlebars micro-templating
-        this.postingStep1CT = Handlebars.compile(postingStep1Template);
-        this.postingStep2CT = Handlebars.compile(postingStep2Template);
-        this.postingStep3CT = Handlebars.compile(postingStep3Template);
-        this.postingStep3CT = Handlebars.compile(postingStep3Template);
+        this.postingFormCT = Handlebars.compile(postingFormTemplate);
         this.comboBoxCT = Handlebars.compile(comboBoxTemplate);
 
         this.item = new ItemModel();
@@ -86,7 +79,7 @@ define([
         switch(posting_step)
         {
           case 0:
-            $(this.el).find('#content').html(this.postingStep1CT({categories:this.categories.toJSON()}));
+            $(this.el).find('#content').html(this.postingFormCT({categories:this.categories.toJSON()}));
             $(this.el).find('#subcategories').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[0].get('children')}));
             $(this.el).find('#content').trigger('create');
           break;
