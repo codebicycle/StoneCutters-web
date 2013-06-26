@@ -24,13 +24,13 @@
 
 {{#items}}
     <li>
-        <a href="" class="{{status}}">
+        <a href="" class="{{status}}" data-role="none">
             {{#if status}}
-                <p style="padding: .75rem 1rem; margin: -.75rem -1rem .75rem; background: #000; color: #FFF;">{{status}}</p>
+                <p class="status">{{status}}</p>
             {{/if}}
             <figure>
-                {{#if thumbImage}}
-                    <img src="{{thumbImage}}" alt="{{title}}" style="background-image: url({{thumbImage}});" />
+                {{#if thumbnail}}
+                    <img src="{{thumbnail}}" alt="{{title}}" style="background-image: url({{thumbnail}});" />
                 {{else}}
                     <div>
                         <strong>+</strong>
@@ -39,9 +39,9 @@
                 {{/if}}
             </figure>
             <div>
-                <h2>{{title}} {{thumbImage}}</h2>
-                {{#if location}}
-                    <p><em>{{location}}</em></p>
+                <h2>{{title}}</h2>
+                {{#if displayLocation}}
+                    <p><em>{{displayLocation}}</em> <em>{{date}}</em></p>
                 {{/if}}
                 {{#if displayPrice}}
                     <p><strong>{{displayPrice}}</strong></p>
