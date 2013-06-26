@@ -1,12 +1,17 @@
-<div data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; min-width:250px;" data-theme="b">
-	{{#filters}}
-        <div data-role="collapsible" data-inset="false">
-            <h2>{{title}}</h2>
-            <ul data-role="listview" data-filtername="{{title}}">
-            	{{#options}}
-            		<li><a class="filter" href="javascript:;" data-rel="dialog">{{opTitle}}</a></li>
-            	{{/options}}
-            </ul>
-        </div>
-    {{/filters}}
-</div>
+{{#filters}}
+    <div>
+        <h2>{{description}}</h2>
+        <ul data-filtername="{{name}}">
+            {{#equal type "boolean" }}
+                <input class="filter" id ="{{name}}" type="checkbox" name="{{name}}" value="true" data-filtername="{{name}}">
+                <label for="{{name}}">{{description}}</label>
+            {{/equal }}
+        	{{#values}}
+                <input class="filter" id ="{{../name}}-{{id}}" type="radio" name="{{../name}}" value="{{id}}" data-filtername="{{../name}}">
+                <label for="{{../name}}-{{id}}">{{value}}</label>
+        	{{/values}}
+        </ul>
+    </div>
+{{/filters}}
+
+<a id="filterOk" href="javascript:;">OK</a>

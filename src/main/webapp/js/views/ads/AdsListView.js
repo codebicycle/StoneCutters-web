@@ -28,6 +28,8 @@ define([
       events: {
         'click #filterButton': 'openFilterPopup',
         'click #sortButton': 'openSortPopup',
+        'click #overlay': 'closePopup',
+        'click #filterOk': 'doFilter',
       },
 
       initialize: function(options){
@@ -53,8 +55,7 @@ define([
         var ops = {location: "www.olx.com", offset:AdsListView.__super__.offset, pageSize: Const.get(this.className).pageSize};
         delete this.params["q"];
 
-
-        ops = JSONHelper.concatJSON(ops, this.params)
+        ops = JSONHelper.concatJSON(ops, this.params);
         
         if(this.query){
           ops = JSONHelper.concatJSON(ops, {"searchTerm":this.query});
@@ -93,11 +94,11 @@ define([
         */
         //END Debug Code
 
-        this.filters = new FiltersCollection(this.query_options.toJSON());
+        this.filters = new FiltersCollection();
         this.filters.on('sync',_.bind(this.filters_success, this));
         this.filters.fetch();
 
-        this.sorts = new SortsCollection(this.query_options.toJSON());
+        this.sorts = new SortsCollection();
         this.sorts.on('sync',_.bind(this.sorts_success, this));
         this.sorts.fetch();
 
@@ -154,22 +155,43 @@ define([
 
         $(this.el).find('#content').trigger('create');
 
-        $('a[class*=filter]').click({opts: this.query_options},function(ev){
-          var filter = $(ev.currentTarget).closest('ul').data('filtername');
-          var value = $(ev.currentTarget).html();
-          ev.data.opts.set(filter,value);
-        });
+        if (this.filters.length > 0) {
+          this.filters_success();
+        }
 
-        $('a[class*=sort]').click({opts: this.query_options},function(ev){
-          var sort = $(ev.currentTarget).data('sortname');
-          ev.data.opts.set("sort",sort);
+        if (this.sorts.length > 0) {
+          this.sorts_success();
+        }
+
+        return this;
+      },
+
+      bindFilters: function(){
+        $('.filter').click({opts: this.query_options},function(ev){
+          var filter = $(ev.currentTarget).data('filtername');
+          var value = $(ev.currentTarget).val();
+          
+          if ($(ev.currentTarget).attr('type') != "checkbox") {
+              ev.data.opts.set(filter,value);
+          }else if ($(ev.currentTarget).is(":checked")) {
+              ev.data.opts.set(filter,value);
+          }else{
+              ev.data.opts.unset(filter);
+          }
+          
         });
 
         $('a[class*=remove-filter]').click({opts: this.query_options},function(ev){
           var filter = $(ev.currentTarget).data('filtername');
           ev.data.opts.unset(filter);
         });
-        return this;
+      },
+
+      bindSorts: function(){
+        $('input[class*=sort]').click({opts: this.query_options},function(ev){
+          var sort = $(ev.currentTarget).data('sortname');
+          ev.data.opts.set("sort",sort);
+        });
       },
 
       items_success: function(model, response)  {
@@ -184,16 +206,16 @@ define([
       updateItems: function(){
         var url;
 
-        if (!this.opts.get("q")) {
-          url = "#category/"+this.opts.get("category_id")+"/";
+        if (!this.query_options.get("q")) {
+          url = "#category/"+CategoryHelper.getCategory()+"?";
         }else{
           url = "#search?";
         };
 
-        for (var key in this.opts.attributes) {
-          if (this.opts.attributes[key] && key != "category_id"
+        for (var key in this.query_options.attributes) {
+          if (this.query_options.attributes[key] && key != "categoryId"
             && key != "country_id" && key != "pageSize")
-            url += key + "=" + this.opts.attributes[key] + "&";
+            url += key + "=" + this.query_options.attributes[key] + "&";
         };
 
         url = url.substring(0,url.length-1);
@@ -201,24 +223,48 @@ define([
       },
 
       filters_success: function(model, response){
+        $(this.el).find('#filterPopup').hide();
         $(this.el).find('#filterPopup').html(this.filCT({
-          'filters': this.filters.toJSON()}));
-        $(this.el).find('#filterPopup').trigger('create');
+          'filters': this.filters.toJSON()
+        }));
+
+        this.bindFilters();
+
+        //fill out the filter popup according to the filters already set in params
+        this.filters.each(_.bind(function(filter) {
+          if (this.params[filter.get("name")]) {
+            $(this.el).find("[name="+filter.get("name")+"]").filter("[value="+this.params[filter.get("name")]+"]").prop('checked', true);
+          }
+        }, this));
       },
 
       sorts_success: function(model, response){
+        $(this.el).find('#sortPopup').hide();
         $(this.el).find('#sortPopup').html(this.sorCT({
-          'sorts':this.sorts.toJSON()}));
-        $(this.el).find('#sortPopup').trigger('create');
+          'sorts': this.sorts.toJSON()}));
+
+        this.bindSorts();
       },
 
       openFilterPopup: function(){
-        $('#filterPopup').popup("open", {transition:"slideup"});
+        $(this.el).find('#filterPopup').show();
+        $(this.el).find('#overlay').show();
       },
 
       openSortPopup: function(){
-        $('#sortPopup').popup("open", {transition:"slideup"});
-      }
+        $(this.el).find('#sortPopup').show();
+        $(this.el).find('#overlay').show();
+      },
+
+      closePopup: function(){
+        $(this.el).find('#filterPopup').hide();
+        $(this.el).find('#sortPopup').hide();
+        $(this.el).find('#overlay').hide();
+      },
+
+      doFilter: function(){
+        this.updateItems();
+      },
     });
     return AdsListView;
 });
