@@ -37,8 +37,10 @@ define([
 
       checkScroll: function () {
         var triggerPoint = Const.get("ScrollView").scrollFetchPxOffset; // 100px from the bottom
-        
-        if( !this.isLoading && $(window).scrollTop() + $(window).height() + triggerPoint > $(document).height()) {
+        var pxToBottom = $(document).height() - (window.pageYOffset + window.innerHeight);
+
+        //check for 0 because pxToBottom is 0 just after loading the page
+        if( !this.isLoading && pxToBottom != 0 && pxToBottom < triggerPoint) {
           this.query_options.set("offset", this.query_options.get("offset") + 1); // Load next page
           this.loadResults();
         }
