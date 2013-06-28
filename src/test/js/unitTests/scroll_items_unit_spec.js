@@ -78,7 +78,7 @@ define(['views/ads/AdsListView','config/conf','helpers/CategoryHelper'], functio
 			$.ajax.calls[0].args[0].success(items);
 			//$.ajax.calls[1].args[0].success(items2);
 
-			$(window).scrollTop(2400);
+			window.scrollTo(0,2100);
 			$(window).trigger("scroll."+view.cid); 	
 
 			expect(view.loadResults).toHaveBeenCalled();		
