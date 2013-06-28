@@ -411,7 +411,7 @@ ul#message-list li {
 /* Message Detail
 ---------------------------------------------------------------------- */
 
-div#messagepage h1 {
+/*div#messagepage h1 {
 	text-align: left;
 	font-size: 13pt;
 	font-weight: normal;
@@ -485,7 +485,7 @@ div#messagepage div#messageContainer {
 
 	div#messagepage div.formContainer form.form div.ui-input-text.ui-shadow-inset.ui-corner-all.ui-btn-shadow.ui-body-c {
 		padding: 5px;
-	}
+	}*/
 
 
 
@@ -1715,6 +1715,13 @@ div#messagepage div#messageContainer {
 		{
 			float: right;
 			margin: 0 0 0 .5rem;
+		}
+
+		/* Message detail */
+
+		.my-messages-detail
+		{
+
 		}
 
 /* WIDGETS */
