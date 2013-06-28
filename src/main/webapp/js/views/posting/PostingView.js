@@ -5,17 +5,14 @@ define([
     'handlebars',
     'collections/fields',
     'models/item',
-    'text!templates/posting/postingStep1Template.html',
-    'text!templates/posting/postingStep2Template.html',
-    'text!templates/posting/postingStep3Template.html',
+    'text!templates/posting/postingFormTemplate.html',
     'text!templates/widgets/comboBoxTemplate.html',
-    'text!templates/widgets/formControls/checkboxTemplate.html',
+    'text!templates/posting/optionalsTemplate.html',
     'helpers/CategoryHelper'
   ], 
 
   function($,_, Backbone, Handlebars, FieldCollection, ItemModel, 
-    postingStep1Template, postingStep2Template, postingStep3Template, 
-    comboBoxTemplate, checkboxTemplate, CategoryHelper){
+    postingFormTemplate, comboBoxTemplate, optionalsTemplate, CategoryHelper){
 
     var PostingView = Backbone.View.extend({
       el: "#home",
@@ -28,7 +25,7 @@ define([
         'click #post-button':    'makePosting',
         'click #save-button':    'savePosting',
         'change #category':   'loadSubcategory',
-        'click .change-page' : 'changePage'
+        'click .change-page' : 'showPage'
       },
 
       initialize: function(options){
@@ -36,10 +33,8 @@ define([
         this.dfd = null || options.deferred;
 
         // Compile the template using Handlebars micro-templating
-        this.postingStep1CT = Handlebars.compile(postingStep1Template);
-        this.postingStep2CT = Handlebars.compile(postingStep2Template);
-        this.postingStep3CT = Handlebars.compile(postingStep3Template);
-        this.postingStep3CT = Handlebars.compile(postingStep3Template);
+        this.postingFormCT = Handlebars.compile(postingFormTemplate);
+        this.optionalsCT = Handlebars.compile(optionalsTemplate);
         this.comboBoxCT = Handlebars.compile(comboBoxTemplate);
 
         this.item = new ItemModel();
@@ -79,16 +74,35 @@ define([
         $(this.el).find('#content').trigger('create');
       },
 
+      sections: ["#step-1","#step-2","#step-3"],
+
+
       render:function (posting_step){
+        
+
+        this.steps = $('.steps');
+        this.activeStep = $('.highlight', this.steps).last();
+        this.activeSection = $('section.active', 'form');
+        this.targetSection = $(this.sections[posting_step]);
+        
+
         //posting_step: 0,1,2
         posting_step = posting_step || 0;
 
         switch(posting_step)
         {
           case 0:
-            $(this.el).find('#content').html(this.postingStep1CT({categories:this.categories.toJSON()}));
+            $(this.el).find('#content').html(this.postingFormCT({categories:this.categories.toJSON()}));
             $(this.el).find('#subcategories').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[0].get('children')}));
-            $(this.el).find('#content').trigger('create');
+
+            
+            if(this.activeSection.next().is(this.targetSection)){
+              this.activeStep.removeClass('animate').next().addClass('highlight animate');
+            }else{
+              this.activeStep.removeClass('highlight animate');
+            }
+            this.activeSection.removeClass('active');
+            this.targetSection.addClass('active');
           break;
           case 1:
             this.buildItem(posting_step);
@@ -96,8 +110,16 @@ define([
           break;
           case 2:
             this.buildItem(posting_step);
-            $(this.el).find('#content').html(this.postingStep3CT());
-            $(this.el).find('#content').trigger('create');
+
+            if(this.activeSection.next().is(this.targetSection)){
+              this.activeStep.removeClass('animate').next().addClass('highlight animate');
+            }else{
+              this.activeStep.removeClass('highlight animate');
+            }
+            this.activeSection.removeClass('active');
+            this.targetSection.addClass('active');
+            
+            
           break;
         }
         
@@ -169,11 +191,19 @@ define([
       },
 
       fieldsSuccess: function(){
-        $(this.el).find('#content').html(this.postingStep2CT({fields:this.fields.toJSON()}));
-        $(this.el).find('#content').trigger('create');
+        $(this.el).find('#form-2').hide().replaceWith(this.optionalsCT({fields:this.fields.toJSON()})).show();
+
+        if(this.activeSection.next().is(this.targetSection)){
+          this.activeStep.removeClass('animate').next().addClass('highlight animate');
+        }else{
+          this.activeStep.removeClass('highlight animate');
+        }
+        this.activeSection.removeClass('active');
+        this.targetSection.addClass('active');
       },
       
       showPage: function(ev){
+        ev.preventDefault();
         var dest = $(ev.target).data('destiny');
         this.render(dest);
       },

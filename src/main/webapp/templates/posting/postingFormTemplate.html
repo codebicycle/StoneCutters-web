@@ -38,6 +38,9 @@
 		<section id="step-1" class="active">
 			<label for="title" class="olx-ui-label">Title</label>
 			<input id="title" name="title" type="text" class="olx-ui-textbox" placeholder="Title" autofocus data-role="none" />
+			<label for="description" class="olx-ui-label">Description</label>
+			<input id="description" name="description" type="textarea" placeholder="Description..." class="olx-ui-textarea" />
+	
 			
 			<label class="olx-ui-select">
 				<span data-value="Select a category">Category</span>
@@ -61,11 +64,18 @@
 			<label for="subcategories" class="olx-ui-label">Subcategory</label>
 			<div id="subcategories"></div>
 			<footer>
-				<a href="#step-2" class="olx-ui-button change-page" data-role="none">Siguiente</a>
+				<a href="#step-2" class="olx-ui-button change-page" data-destiny="1" data-role="none">Next</a>
 			</footer>
 		</section>
+		
 		<section id="step-2">
-			
+			<div id="form-2">
+			</div>	
+		<!-- 	
+			{{#each fields}}
+				{{getField this}}
+			{{/each}} -->
+			<!-- START ANDRES MOCKUP
 			<label for="text-title" class="olx-ui-label">My Title</label>
 			<input type="text" name="title" id="text-title" class="olx-ui-textbox" data-role="none" />
 	
@@ -80,10 +90,8 @@
 			<label class="olx-ui-radio">
 				<input type="radio" value="2" name="typeOfAd" id="radio-typeOfAd1" data-role="none" />
 				<span>Buy</span>
-			</label>
+			</label> 
 
-			<!-- <legend>Type of ad:</legend><div class="ui-radio"><input type="radio" value="1" name="typeOfAd" id="radio-typeOfAd0"><label for="radio-typeOfAd0" data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="radio-off" data-theme="c" data-mini="false" class="ui-radio-off ui-btn ui-btn-corner-all ui-fullsize ui-btn-icon-left ui-btn-up-c"><span class="ui-btn-inner"><span class="ui-btn-text">Vendo</span><span class="ui-icon ui-icon-radio-off ui-icon-shadow">&nbsp;</span></span></label></div><div class="ui-radio"><input type="radio" value="2" name="typeOfAd" id="radio-typeOfAd1"><label for="radio-typeOfAd1" data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="radio-off" data-theme="c" data-mini="false" class="ui-radio-off ui-btn ui-btn-corner-all ui-fullsize ui-btn-icon-left ui-btn-up-c"><span class="ui-btn-inner"><span class="ui-btn-text">Compro</span><span class="ui-icon ui-icon-radio-off ui-icon-shadow">&nbsp;</span></span></label></div> -->
-		
 			<label for="select-currency" class="olx-ui-label">Currency</label>
 			<select name="currency" id="select-currency" class="olx-ui-select2" data-role="none">
 				<option value="1" name="currency">ARS</option>
@@ -107,13 +115,14 @@
 			<label class="olx-ui-checkbox">
 				<input type="checkbox" name="typeOfPerson" id="checkbox-typeOfPerson" data-role="none" />
 				<span>Mayor de edad</span>
-			</label>
+			</label>-->
+			<!-- END ANDRES MOCKUP -->
 
 			<!-- <div class="ui-checkbox"><input type="checkbox" name="typeOfPerson" id="checkbox-typeOfPerson"></div><label for="check-typeOfPerson">Mayor de edad</label> -->
 
 			<footer>
-				<a href="#step-1" class="olx-ui-button change-page" data-role="none">Anterior</a>
-				<a href="#step-3" class="olx-ui-button change-page" data-role="none">Siguiente</a>
+				<a href="#step-1" class="olx-ui-button change-page" data-role="none" data-destiny="0">Back</a>
+				<a href="#step-3" class="olx-ui-button change-page" data-role="none" data-destiny="2">Next</a>
 			</footer>
 		</section>
 		<section id="step-3">
@@ -135,7 +144,7 @@
 			</div>
 
 			<footer>
-				<a href="#step-2" class="change-page olx-ui-button" data-role="none">Anterior</a>
+				<a href="#step-2" class="change-page olx-ui-button" data-role="none">Back</a>
 			</footer>
 		</section>
 	</form>
