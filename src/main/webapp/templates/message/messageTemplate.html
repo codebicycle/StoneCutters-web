@@ -1,34 +1,34 @@
-<article class=".my-messages-detail">
+<article class="my-messages-detail">
 	<header>
 		<h2>{{message.title}}</h2>
 	</header>
 	<section class="content">
 		<header>
-			{{#with message.from}}
-				<ul>
-					{{#if username}}
-						<li><strong>{{username}}</strong></li>
-						<li>{{email}}</li>
-					{{else}}
-						<li><strong>{{email}}</strong></li>
-					{{/if}}
-				</ul>
-			{{/with}}
 			<ul>
-				{{#with message.to}}<li><span>To:</span> {{email}}</li>{{/with}}
+				{{#with message.from}}
+					{{#if username}}
+						<li>From: <strong>{{username}}</strong> <em>({{email}})</em></li>
+					{{else}}
+						<li>From: <strong><em>{{email}}</em></strong></li>
+					{{/if}}
+				{{/with}}
+				{{#with message.to}}<li><span>To:</span> <em>{{email}}</em></li>{{/with}}
+			</ul>
+			<ul>
 				<li><span>Date:</span> {{message.date}}</li>
-				{{#if message.phone}}<li><span>Phone:</span> {{message.phone}}</li>{{/if}}
+				<!-- {{#if message.phone}}<li><span>Phone:</span> {{message.phone}}</li>{{/if}} -->
 			</ul>
 		</header>
 		<div>{{message.message}}</div>
 	</section>
 	<section class="reply">
 		<form id="reply-ad" name="reply-ad" action="" method="">
-			<input id="email-field" type="name" name="email" placeholder="Email" data-role="none" />
-			<input id="name-field" type="text" name="name" placeholder="Name" data-role="none" />
-			<input id="phone-field" type="phone" name="phone" placeholder="Phone" data-role="none" />
-			<textarea id="message-field" name="message" placeholder="message" data-role="none"></textarea>
-			<input id="reply-button" type="button" value="Reply" data-role="none" />
+			<h3>Reply</h3>
+			<input id="email-field" type="name" name="email" placeholder="Email" class="olx-ui-textbox" data-role="none" />
+			<input id="name-field" type="text" name="name" placeholder="Name" class="olx-ui-textbox" data-role="none" />
+			<input id="phone-field" type="phone" name="phone" placeholder="Phone" class="olx-ui-textbox" data-role="none" />
+			<textarea id="message-field" name="message" placeholder="Enter your message here" class="olx-ui-textarea" data-role="none"></textarea>
+			<input id="reply-button" type="button" value="Reply" class="olx-ui-button" data-role="none" />
 		</form>
 	</section>
 </article>

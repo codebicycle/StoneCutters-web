@@ -1721,7 +1721,85 @@ div#messagepage div#messageContainer {
 
 		.my-messages-detail
 		{
+			padding: 1rem;
+		}
 
+		.my-messages-detail > header
+		{
+			padding-bottom: 1rem;
+		}
+
+		.my-messages-detail > header h2
+		{
+			font-size: 1.5rem;
+		}
+
+		.my-messages-detail > header h2::first-letter
+		{
+			text-transform: uppercase;
+		}
+
+		.my-messages-detail .content
+		{
+			padding: .75rem 1rem 1rem;
+			background-color: #F2E6E6;
+			border-color: solid 1px #E6E2E1;
+		}
+
+		.my-messages-detail .content > header
+		{
+			display: table;
+			width: 100%;
+			padding-bottom: .75rem;
+		}
+
+		.my-messages-detail .content > header ul
+		{
+			display: table-cell;
+			padding: 0;
+			list-style: none;
+			vertical-align: bottom;
+			text-align: right;
+		}
+
+		.my-messages-detail .content > header ul:first-child
+		{
+			padding-right: 1rem;
+			text-align: left;
+		}
+
+		.my-messages-detail .content > header ul li strong
+		{
+			font-size: 1.25rem;
+		}
+
+		.my-messages-detail .content > div
+		{
+			padding: 1rem;
+			background-color: #FFF;
+			border: solid 1px #E6E2E1;	
+		}
+
+		.my-messages-detail .reply
+		{
+			padding-top: 1rem;	
+		}
+
+		.my-messages-detail .reply h3
+		{
+			font-size: 1.5rem;
+			font-weight: normal;
+		}
+
+		.my-messages-detail .reply .olx-ui-textbox,
+		.my-messages-detail .reply .olx-ui-textarea
+		{
+			margin-top: 1rem;	
+		}
+
+		.my-messages-detail .reply .olx-ui-button
+		{
+			margin-top: 1rem;	
 		}
 
 /* WIDGETS */
