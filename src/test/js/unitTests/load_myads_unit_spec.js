@@ -21,12 +21,12 @@ define(['views/ads/MyAdsListView', 'config/conf'], function(MyAdsListView, Conf)
 				page.render();
 
 	  			//My ads's Expectations
-	      		expect($($($('#home #ads-list li')[0]).find('a')[1]).html()).toBe("<h2>My Ads 1</h2>"); 
-	      		expect($($($('#home #ads-list li')[1]).find('a')[1]).html()).toBe("<h2>My Ads 2</h2>"); 
-	      		expect($($($('#home .displayPrice')[0])).html()).toBe("2345.00"); 
-	      		expect($($($('#home .displayPrice')[1])).html()).toBe("1.00"); 
-	      		expect($($($('#home .listingStatus')[0])).html()).toBe("ready"); 
-	      		expect($($($('#home .listingStatus')[1])).html()).toBe("pending"); 
+	      		expect($($($('#home #ads-list li')[0]).find('a h2')[0]).html()).toBe("My Ads 1"); 
+	      		expect($($($('#home #ads-list li')[1]).find('a h2')[0]).html()).toBe("My Ads 2"); 
+	      		expect($($($('#home #ads-list li')[0]).find('a strong')[0]).html()).toBe("2345.00"); 
+	      		expect($($($('#home #ads-list li')[1]).find('a strong')[0]).html()).toBe("1.00"); 
+	      		expect($($($('#home .status')[0])).html()).toBe("ready"); 
+	      		expect($($($('#home .status')[1])).html()).toBe("pending"); 
 		  	}
 
 		  	spyOn(callbacks,'doneMyAds').andCallThrough();
