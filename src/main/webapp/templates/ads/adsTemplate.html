@@ -17,7 +17,13 @@
 	<header>
 		<div id ="filtersSet">
 			<p>
-				<!-- <span>...</span> -->
+				{{#filters}}
+					{{#if value}}
+					<span class='remove-filter' data-filtername='{{name}}'>
+	              		{{description}}{{label}}
+	              	</span>
+	              	{{/if}}
+              	{{/filters}}
 			</p>
 		</div>
 		<nav>

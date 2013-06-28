@@ -109,7 +109,7 @@ define([
 
         //ScrollView's settings
         this.templateKey = "messages";
-        this.scrollingID = "myMessages"+this.Storage.get("userObj").userId;
+        this.scrollingID = this.cid;
         MyMessageListView.__super__.bindScrolling.call(this);
       },
 

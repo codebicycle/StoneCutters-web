@@ -115,24 +115,18 @@ define([
 
         //ScrollView's settings
         this.templateKey = "items";
-        this.scrollingID = options.cat_id;
+        this.scrollingID = this.cid;
         AdsListView.__super__.bindScrolling.call(this);
       },
 
       render:function () {
         $(this.el).find('#content').html(this.adsCT({'search-term': this.query,
           'added-filters':JSONHelper.parseTitleValue(this.params),
-          'sortName':this.sortName
+          'sortName':this.sortName,
+          'filters': this.filters.toJSON()
         }));
 
         $(this.el).find('#ads-list').html(this.adsListCT({'items': this.items.toJSON()}));
-
-        //Mock code lines
-        // $(this.el).find('#filterPopup').html(this.filCT({
-        //   'filters': this.filters.toJSON()}));
-        // $(this.el).find('#sortPopup').html(this.sorCT({
-        //   'sorts':this.sorts.toJSON()}));
-        //End of Mock code lines
 
         if (CategoryHelper.categories.length > 0) {
           var breadOpts = {};
@@ -153,15 +147,12 @@ define([
           $(this.el).find('#breadcrumb').html(this.breadCT(breadOpts));
         }
 
-        $(this.el).find('#content').trigger('create');
+        $(this.el).find('#filterPopup').hide();
+        $(this.el).find('#filterPopup').html(this.filCT({
+          'filters': this.filters.toJSON()
+        }));
 
-        if (this.filters.length > 0) {
-          this.filters_success();
-        }
-
-        if (this.sorts.length > 0) {
-          this.sorts_success();
-        }
+        this.bindFilters();
 
         return this;
       },
@@ -179,6 +170,13 @@ define([
               ev.data.opts.unset(filter);
           }
           
+        });
+
+        $('.filter').keyup({opts: this.query_options},function(ev){
+          var filter = $(ev.currentTarget).data('filtername');
+          var value = $(ev.currentTarget).val();
+          
+          ev.data.opts.set(filter,value);
         });
 
         $('.remove-filter').click({opts: this.query_options},_.bind(function(ev){
@@ -200,7 +198,7 @@ define([
         if (this.query) {
           //if this requests comes from a search, trigger the done event
           this.eventAggregator.trigger("searchDone");
-        };
+        }
         return;
       },
 
@@ -215,7 +213,7 @@ define([
 
         for (var key in this.query_options.attributes) {
           if (this.query_options.attributes[key] && key != "categoryId"
-            && key != "country_id" && key != "pageSize")
+            && key != "country_id" && key != "pageSize" && key != "offset")
             url += key + "=" + this.query_options.attributes[key] + "&";
         };
 
@@ -223,32 +221,33 @@ define([
         window.location = url;
       },
 
-      filters_success: function(model, response){
-        $(this.el).find('#filterPopup').hide();
-        $(this.el).find('#filterPopup').html(this.filCT({
-          'filters': this.filters.toJSON()
-        }));
-
+      filters_success: function(model, response){    
         //fill out the filter popup according to the filters already set in params
         this.filters.each(_.bind(function(filter) {
-          if (this.params[filter.get("name")]) {
-            $(this.el).find("[name="+filter.get("name")+"]")
-              .filter("[value="+this.params[filter.get("name")]+"]")
-              .prop('checked', true);
+          var value = this.params[filter.get("name")];
 
-            var label = $(this.el).find("label[for='"+filter.get("name")+"-"+
-              this.params[filter.get("name")]+"']").html();
+          if (value) {
+            var label = "";
 
-            label = (typeof label == 'undefined')?"":": "+label;
+            filter.set("checked", value);
+            filter.set("value", value);
 
-            $(this.el).find("#filtersSet p").append("<span class='remove-filter' data-filtername='"+filter.get("name")+"'>"+
-              filter.get("description")+label+
-              "</span>");
+            if (filter.get("type") == "number") {
+              label = value;
+            }else{
+              if (filter.get("values") && filter.get("values").length > 0) {
+                var vals = filter.get("values");
+                label = _.filter(vals,function(el){return el.id == value})[0].value;
+                filter.set("checked", value);
+              }
+            }
+
+            label = (label == "")?"":": "+label;
+            filter.set("label", label);
           }
         }, this));
 
-        this.bindFilters();
-
+        this.render();
       },
 
       sorts_success: function(model, response){

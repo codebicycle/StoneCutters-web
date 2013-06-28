@@ -2,12 +2,16 @@
     <div>
         <h2>{{description}}</h2>
         <ul data-filtername="{{name}}">
-            {{#equal type "boolean" }}
-                <input class="filter" id ="{{name}}" type="checkbox" name="{{name}}" value="true" data-filtername="{{name}}">
+            {{#equal type "boolean"}}
+                <input class="filter" id ="{{name}}" type="checkbox" name="{{name}}" value="true" data-filtername="{{name}}" {{#if checked}}checked="true"{{/if}}>
                 <label for="{{name}}">{{description}}</label>
-            {{/equal }}
+            {{/equal}}
+            {{#equal type "number"}}
+                <input class="filter" id ="{{name}}" type="text" name="{{name}}" value="{{value}}" data-filtername="{{name}}">
+                <label for="{{name}}">{{description}}</label>
+            {{/equal}}
         	{{#values}}
-                <input class="filter" id ="{{../name}}-{{id}}" type="radio" name="{{../name}}" value="{{id}}" data-filtername="{{../name}}">
+                <input class="filter" id ="{{../name}}-{{id}}" type="radio" name="{{../name}}" value="{{id}}" data-filtername="{{../name}}" {{#equal ../checked id}}checked="true"{{/equal}}>
                 <label for="{{../name}}-{{id}}">{{value}}</label>
         	{{/values}}
         </ul>
