@@ -203,7 +203,6 @@ define([
       },
       
       showPage: function(ev){
-        debugger
         ev.preventDefault();
         var dest = $(ev.target).data('destiny');
         this.render(dest);
