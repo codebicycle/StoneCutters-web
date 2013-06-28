@@ -245,162 +245,11 @@ div#location span {
 }
 
 
-/* Category Listing
----------------------------------------------------------------------- */
-/*ul#ads-list {
-	box-shadow: none;
-}
 
-ul#ads-list li {
-	margin-bottom: 15px;
-	padding: 0;
-}
-
-	ul#ads-list div.listingStatus {
-		width: 100%;
-		border: 1px solid #e6e2e1;
-		margin: 0;
-		padding: 0;
-		padding-top: 5px;
-		padding-bottom: 5px;
-		text-align: center;
-		font-size: 8pt;
-		text-transform: uppercase;
-		color: #ffffff;
-		font-weight: bold;
-	}
-
-		ul#ads-list div.rejected {
-			background: #ee3030;
-			border-color: #b81d1b; 
-		}
-
-		ul#ads-list div.ready {
-			background: #01cd5e;
-			border-color: #00a94e; 
-		}
-
-		ul#ads-list div.close {
-			background: #000000;
-			border-color: #666666; 
-		}
-
-		ul#ads-list div.pending {
-			background: #ffcd0c;
-			border-color: #fdb400; 
-		}*/
-
-	
-
-/* Forms
----------------------------------------------------------------------- */
-/*
-form.form div.ui-input-text.ui-shadow-inset.ui-corner-all.ui-btn-shadow.ui-body-c{
-	box-shadow: none;
-	border: 1px solid #e4e3e1;
-	background: #f8f2f2;
-	padding: 8px;
-	margin-bottom: 15px;
-}
-
-	form.form input.ui-input-text.ui-body-c {
-		font-size: 9pt;
-		color: #666666;
-	}
-
-
-form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c,
-form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c {
-	box-shadow: none;
-	background: #666666;
-	border: 0;
-	border-radius: 0;
-	width: 40%;
-	padding: 5px;
-}
-
-	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c span,
-	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c span {
-		font-size: 9pt;
-		color: #ffffff;
-		border: 0;
-	}
-
-a#register-link,
-a#register-button {
-	border-radius: 0;
-	box-shadow: none;
-	background: #9e70b1;
-	text-decoration: none;
-	padding: 5px;
-}
-
-	a#register-link span,
-	a#register-button span {
-		color: #ffffff;
-		font-size: 12pt;
-		border: 0;
-	}
-
-a#terms-link {
-	text-decoration: underline;
-	box-shadow: none;
-	text-align: left;
-	color: #559fe0;
-}
-
-	a#terms-link span {
-		font-size: 10pt;
-		padding: 0;
-	}
-
-input#agree-check {
-	display: none;
-}
-
-form#register-form label.ui-checkbox-on span, 
-form#register-form label.ui-checkbox-off span {
-	font-size: 10pt;
-}
-
-form#register-form label.ui-checkbox-on span.ui-btn-inner, 
-form#register-form label.ui-checkbox-off span.ui-btn-inner {
-	padding: 0;
-}
-
-form#register-form label.ui-checkbox-on span.ui-btn-text, 
-form#register-form label.ui-checkbox-off span.ui-btn-text {
-	padding-left: 30px;
-}
-
-form#register-form span.ui-icon-checkbox-on,
-form#register-form span.ui-icon-checkbox-off {
-	left: 0;
-	padding: 0;
-}
-
-
-@media only screen and (min-device-width: 700px) {
-
-	form.form input.ui-input-text.ui-body-c {
-		font-size: 12pt;
-	}
-
-	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-up-c span,
-	form.form div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-hover-c span {
-		font-size: 12pt;
-	}
-
-	a#register-link span {
-		font-size: 12pt;
-	}
-
-}
-*/
 
 /* Message Listing
 ---------------------------------------------------------------------- */
-ul#message-list {
+/*ul#message-list {
 	box-shadow: none;
 	list-style-type: none;
 	padding: 0;
@@ -556,7 +405,7 @@ ul#message-list li {
 		ul#message-list div.listingContainer div.left h5 {
 			width: 865px;
 		}
-}
+}*/
 
 
 /* Message Detail
@@ -1777,6 +1626,95 @@ div#messagepage div#messageContainer {
 		{
 			display: table-cell;
 			width: auto;
+		}
+
+	/* My Messages */
+
+		.my-messages
+		{
+			padding: 0 1rem 1rem;
+		}
+
+		.my-messages ul
+		{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.my-messages li
+		{
+			display: table;
+			table-layout: fixed;
+			width: 100%;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			margin-top: 1rem;
+			background-color: #F1E7E6;
+			border: thin solid #E6E2E1;
+		}
+
+		.my-messages .pending
+		{
+			background-color: #E0D6D5;
+			border: thin solid #D5D1D0;
+		}
+
+		.my-messages li > a
+		{
+			display: table-cell;
+			width: 75%;
+			padding: .75rem 1rem;
+			text-decoration: none;
+			font-size: 1rem;
+			color: #AAA;
+		}
+
+		.my-messages .pending a
+		{
+			color: #666;
+		}
+
+		.my-messages li > a .data
+		{
+			font-size: 1em;
+		}
+
+		.my-messages li > a .data small
+		{
+			font-style: italic;
+			opacity: .75;
+		}
+
+		.my-messages li > a .title
+		{
+			padding-top: .5rem;
+			font-size: 1.25em;
+		}
+
+		.my-messages li > a .text
+		{
+			overflow: hidden;
+			padding-top: .25rem;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			font-size: .75em;
+		}
+
+		.my-messages li > div
+		{
+			display: table-cell;
+			width: 25%;
+			padding: .75rem 1rem;
+			vertical-align: bottom;
+			text-align: right;
+		}
+
+		.my-messages li > div label span:before
+		{
+			float: right;
+			margin: 0 0 0 .5rem;
 		}
 
 /* WIDGETS */

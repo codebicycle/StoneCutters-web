@@ -1,15 +1,22 @@
 {{#messages}}
-    <li>
-    	<div class="listingContainer">
-    		<div class="left{{#if unread}} unread{{/if}}">
-    			<h3><a href="#message/{{id}}">{{from.username}}</a></h4>
-    			<h4><a href="#message/{{id}}">{{title}}</a></h3>
-    			<h5><a href="#message/{{id}}">{{message}}</a></h5>
-    		</div>
-    		<div class="right{{#if unread}} unread{{/if}}">
-    			<div class="date">{{date}}</div>
-    			<div class="delete"></div>
-    		</div>
-    	</div>
-    </li>
+    {{#if read}}
+        <li class="pending">
+            <a href="#message/{{id}}">
+                <p class="data"><strong>{{from.username}}</strong> <small>{{date}}</small></p>
+                <p class="title"><strong>{{title}}</strong></p>
+    {{else}}
+        <li>
+            <a href="#message/{{id}}">
+                <p class="data">{{from.username}} <small>{{date}}</small></p>
+                <p class="title">{{title}}</p>
+    {{/if}}
+                <p class="text">{{body}}</p>
+            </a>
+            <div>
+                <label class="olx-ui-checkbo">
+                    <input type="checkbox" data-role="none" />
+                    <span></span>
+                </label>
+            </div>
+        </li>
 {{/messages}}
