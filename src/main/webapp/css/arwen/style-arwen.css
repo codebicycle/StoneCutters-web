@@ -1313,12 +1313,59 @@ div#messagepage div#messageContainer {
 			.listing-page .ads li a
 			{
 				display: block;
-				overflow: hidden;
-				padding: .75rem 1rem;
 				border: thin solid #E6E2E1;
 				background-color: #F8F2F2;
 				text-decoration: none;
 				color: #666;
+			}
+
+			.listing-page .ads li a:after
+			{
+				content: '';
+				display: block;
+				width: 0;
+				height: 0;
+				font-size: 0;
+				line-height: 0;
+				clear: both;
+			}
+
+			.listing-page .ads li .status
+			{
+				padding: .25rem 1rem;
+				margin: -1px;
+				border-style: solid;
+				border-width: 1px;
+				font-size: 1rem;
+				color: #FFF;
+				font-weight: bold;
+				text-transform: uppercase;
+				text-align: center;
+			}
+
+			.listing-page .ads .rejected .status
+			{
+				background-color: #EE3030;
+				border-color: #AF2904;
+			}
+
+			.listing-page .ads .active .status,
+			.listing-page .ads .ready .status
+			{
+				background-color: #01CD5E;
+				border-color: #00A000;
+			}
+
+			.listing-page .ads .pending .status
+			{
+				background-color: #E1CF03;
+				border-color: #D2BD00;
+			}
+
+			.listing-page .ads .close .status
+			{
+				background-color: #000;
+				border-color: #000;
 			}
 
 			.listing-page .ads li a figure
@@ -1327,7 +1374,7 @@ div#messagepage div#messageContainer {
 				width: 25%;
 				max-width: 180px;
 				min-width: 60px;
-				padding:.25rem 1rem .25rem 0;
+				padding: 1rem;
 			}
 
 			.listing-page .ads li a figure img
@@ -1335,19 +1382,44 @@ div#messagepage div#messageContainer {
 				display: block;
 				width: 100%;
 				height: 0;
-				padding-bottom: 100%;
+				padding-bottom: 75%;
 				background-position: center center;
 			    background-repeat: no-repeat;
 			    background-size: cover;
 			}
 
-			.listing-page .ads li a div
+			.listing-page .ads li a figure div
+			{
+				width: 100%;
+				height: 0;
+				padding-bottom: 75%;
+				background-color: #999;
+				color: #FFF;
+				text-align: center;
+			}
+
+			.listing-page .ads li a figure div strong
+			{
+				display: block;
+				font-size: 1rem;
+				line-height: 1em;
+			}
+
+			.listing-page .ads li a figure div span
+			{
+				display: block;
+				font-size: 1rem;
+				line-height: 1em;
+			}
+
+			.listing-page .ads li a > div
 			{
 				overflow: hidden;
 				font-size: 1rem;
+				padding: .75rem 1rem .75rem 0;
 			}
 
-			.listing-page .ads li a div h2
+			.listing-page .ads li a > div h2
 			{
 				overflow: hidden;
 				padding-bottom: .25rem;
@@ -1355,17 +1427,17 @@ div#messagepage div#messageContainer {
 				font-weight: normal;
 			}
 
-			.listing-page .ads li a div p
+			.listing-page .ads li a > div p
 			{
 				overflow: hidden;
 			}
 
-			.listing-page .ads li a div p em
+			.listing-page .ads li a > div p em
 			{
 				display: block;
 			}
 
-			.listing-page .ads li a div strong
+			.listing-page .ads li a > div strong
 			{
 				display: block;
 				text-align: right;
