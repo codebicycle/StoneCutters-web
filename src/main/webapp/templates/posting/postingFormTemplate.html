@@ -38,6 +38,9 @@
 		<section id="step-1" class="active">
 			<label for="title" class="olx-ui-label">Title</label>
 			<input id="title" name="title" type="text" class="olx-ui-textbox" placeholder="Title" autofocus data-role="none" />
+			<label for="description" class="olx-ui-label">Description</label>
+			<input id="description" name="description" type="textarea" placeholder="Description..." class="olx-ui-textarea" />
+	
 			
 			<label class="olx-ui-select">
 				<span data-value="Select a category">Category</span>
@@ -66,6 +69,8 @@
 		</section>
 		
 		<section id="step-2">
+			<div id="form-2">
+			</div>	
 		<!-- 	
 			{{#each fields}}
 				{{getField this}}

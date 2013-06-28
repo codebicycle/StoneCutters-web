@@ -103,7 +103,7 @@ define([
           snip = '<label class="olx-ui-checkbox">'
           snip += '<input type="checkbox" id="checkbox-'+field.name+'" name="'+field.name+'">';
           if(field.label!= null){
-            snip += '<span>'+field.label+'<span>';
+            snip += '<span>'+field.label+'</span>';
           }
           snip += '</label>';
         break;
