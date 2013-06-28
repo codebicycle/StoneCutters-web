@@ -12,7 +12,7 @@ require.config( {
     handlebars: 'libs/handlebars/handlebars-1.0.rc.1-min',
     modernizr:  'libs/modernizr/modernizr.custom',
     templates:  '../templates',
-    config:     '../configuration',
+    config:     'http://static04.olx-st.com/mobile-arwen/configuration',
     crypto:     'libs/cryptoJS',
     constants:     '../constants',
   },
