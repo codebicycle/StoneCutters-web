@@ -15,20 +15,20 @@
 <article class="listing-page">
 
 	<header>
-		<div>
+		<div id ="filtersSet">
 			<p>
-				<span>3 hab.</span>
-				<span>Palermo</span>
-				<span>3 hab.</span>
-				<span>Palermo</span>
-				<span>3 hab.</span>
-				<span>Palermo</span>
-				<!-- <span>...</span> -->
+				{{#filters}}
+					{{#if value}}
+					<span class='remove-filter' data-filtername='{{name}}'>
+	              		{{description}}{{label}}
+	              	</span>
+	              	{{/if}}
+              	{{/filters}}
 			</p>
 		</div>
 		<nav>
-			<a href="#">Filter</a>
-			<a href="#">Sort by</a>
+			<a id ="filterButton" href="javascript:;">Filter</a>
+			<a id ="sortButton" href="javascript:;">Sort by</a>
 		</nav>
 	</header>
 
@@ -36,9 +36,9 @@
 		<span>Results for: {{search-term}}</span>
 	{{/if}}
 
-	<div data-role="popup" id="filterPopup" data-theme="none" data-overlay-theme="a"></div>
-
-	<div data-role="popup" id="sortPopup" data-theme="none" data-overlay-theme="a"></div>
+	<div id="filterPopup" class="popup_content"></div>
+	<div id="sortPopup" class="popup_content"></div>
+	<div id="overlay" class="black_overlay"></div>
 
 	<!-- If removed from jquery mobile logic, tha list is not able to refres its content -->
 	<!-- <ul id="ads-list" class="ads" data-role="listview" data-inset="true"></ul> -->

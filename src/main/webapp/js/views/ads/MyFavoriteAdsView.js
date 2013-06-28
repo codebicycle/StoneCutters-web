@@ -52,7 +52,7 @@ define([
 
         //ScrollView Settings
         this.templateKey = "items";
-        this.scrollingID = "favs"+this.Storage.get("userObj").userId;
+        this.scrollingID = this.cid;
         MyFavoritesAdsListView.__super__.bindScrolling.call(this);
       },
 

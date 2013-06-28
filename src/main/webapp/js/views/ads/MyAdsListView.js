@@ -65,7 +65,7 @@ define([
 
 
         this.templateKey = "items";
-        this.scrollingID = "myAds"+this.Storage.get("userObj").userId;
+        this.scrollingID = this.cid;
         MyAdsListView.__super__.bindScrolling.call(this);
       },
 

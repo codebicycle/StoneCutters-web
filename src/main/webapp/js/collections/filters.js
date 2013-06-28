@@ -9,16 +9,13 @@ define([
     var FilterCollection = Backbone.Collection.extend({
       model: FilterModel,
       initialize: function(options){
-        this.countryId = options.countryId;
-        this.query = options.q;
+        
       },
       url: function(){
-        var q_param = "";
-        if (this.query)
-          q_param = '?q=' + this.query;
 
         return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-        '/filters/'+ this.countryId + '/' + CategoryHelper.getCategory() + q_param;
+        '/countries/'+ 'www.olx.com' + '/categories/' + CategoryHelper.getCategory() + 
+        '/filters';
       },
     });
     // You don't usually return a collection instantiated

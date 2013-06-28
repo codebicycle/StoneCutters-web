@@ -9,16 +9,13 @@ define([
     var SortCollection = Backbone.Collection.extend({
       model: SortModel,
       initialize: function(options){
-        this.countryId = options.countryId;
-        this.query = options.q;
+
       },
       url: function(){
-        var q_param = "";
-        if (this.query)
-          q_param = '?q=' + this.query;
 
         return Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-        '/sorts/'+ this.countryId + '/' + CategoryHelper.getCategory() + q_param;
+        '/countries/'+ "www.olx.com" + '/categories/' + CategoryHelper.getCategory() + 
+        "/sorts";
       },
     });
     // You don't usually return a collection instantiated

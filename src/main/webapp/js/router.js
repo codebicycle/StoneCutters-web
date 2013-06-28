@@ -22,7 +22,8 @@ define([
     routes:{
         "":"showHome",
         "item/:itemId": "showItem",
-        "category/:catId(/:params)": "showAds",
+        "category/:catId?*params": "showAds",
+        "category/:catId": "showAds",
         "search?:params": "showSearchAds",
         "login": "showLogin",
         "register": "showRegister",
@@ -62,7 +63,7 @@ define([
 
     showAds: function(catId,params){
       if (params) {
-        console.log('/category/'+catId+"/"+params);
+        console.log('/category/'+catId+"?"+params);
       }else{
         console.log('/category/'+catId);
       };

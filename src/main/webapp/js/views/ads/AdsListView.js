@@ -28,6 +28,8 @@ define([
       events: {
         'click #filterButton': 'openFilterPopup',
         'click #sortButton': 'openSortPopup',
+        'click #overlay': 'closePopup',
+        'click #filterOk': 'doFilter',
       },
 
       initialize: function(options){
@@ -53,8 +55,7 @@ define([
         var ops = {location: "www.olx.com", offset:AdsListView.__super__.offset, pageSize: Const.get(this.className).pageSize};
         delete this.params["q"];
 
-
-        ops = JSONHelper.concatJSON(ops, this.params)
+        ops = JSONHelper.concatJSON(ops, this.params);
         
         if(this.query){
           ops = JSONHelper.concatJSON(ops, {"searchTerm":this.query});
@@ -93,11 +94,11 @@ define([
         */
         //END Debug Code
 
-        this.filters = new FiltersCollection(this.query_options.toJSON());
+        this.filters = new FiltersCollection();
         this.filters.on('sync',_.bind(this.filters_success, this));
         this.filters.fetch();
 
-        this.sorts = new SortsCollection(this.query_options.toJSON());
+        this.sorts = new SortsCollection();
         this.sorts.on('sync',_.bind(this.sorts_success, this));
         this.sorts.fetch();
 
@@ -114,24 +115,18 @@ define([
 
         //ScrollView's settings
         this.templateKey = "items";
-        this.scrollingID = options.cat_id;
+        this.scrollingID = this.cid;
         AdsListView.__super__.bindScrolling.call(this);
       },
 
       render:function () {
         $(this.el).find('#content').html(this.adsCT({'search-term': this.query,
           'added-filters':JSONHelper.parseTitleValue(this.params),
-          'sortName':this.sortName
+          'sortName':this.sortName,
+          'filters': this.filters.toJSON()
         }));
 
         $(this.el).find('#ads-list').html(this.adsListCT({'items': this.items.toJSON()}));
-
-        //Mock code lines
-        // $(this.el).find('#filterPopup').html(this.filCT({
-        //   'filters': this.filters.toJSON()}));
-        // $(this.el).find('#sortPopup').html(this.sorCT({
-        //   'sorts':this.sorts.toJSON()}));
-        //End of Mock code lines
 
         if (CategoryHelper.categories.length > 0) {
           var breadOpts = {};
@@ -152,24 +147,50 @@ define([
           $(this.el).find('#breadcrumb').html(this.breadCT(breadOpts));
         }
 
-        $(this.el).find('#content').trigger('create');
+        $(this.el).find('#filterPopup').hide();
+        $(this.el).find('#filterPopup').html(this.filCT({
+          'filters': this.filters.toJSON()
+        }));
 
-        $('a[class*=filter]').click({opts: this.query_options},function(ev){
-          var filter = $(ev.currentTarget).closest('ul').data('filtername');
-          var value = $(ev.currentTarget).html();
+        this.bindFilters();
+
+        return this;
+      },
+
+      bindFilters: function(){
+        $('.filter').click({opts: this.query_options},function(ev){
+          var filter = $(ev.currentTarget).data('filtername');
+          var value = $(ev.currentTarget).val();
+          
+          if ($(ev.currentTarget).attr('type') != "checkbox") {
+              ev.data.opts.set(filter,value);
+          }else if ($(ev.currentTarget).is(":checked")) {
+              ev.data.opts.set(filter,value);
+          }else{
+              ev.data.opts.unset(filter);
+          }
+          
+        });
+
+        $('.filter').keyup({opts: this.query_options},function(ev){
+          var filter = $(ev.currentTarget).data('filtername');
+          var value = $(ev.currentTarget).val();
+          
           ev.data.opts.set(filter,value);
         });
 
-        $('a[class*=sort]').click({opts: this.query_options},function(ev){
+        $('.remove-filter').click({opts: this.query_options},_.bind(function(ev){
+          var filter = $(ev.currentTarget).data('filtername');
+          ev.data.opts.unset(filter);
+          this.updateItems();
+        },this));
+      },
+
+      bindSorts: function(){
+        $('input[class*=sort]').click({opts: this.query_options},function(ev){
           var sort = $(ev.currentTarget).data('sortname');
           ev.data.opts.set("sort",sort);
         });
-
-        $('a[class*=remove-filter]').click({opts: this.query_options},function(ev){
-          var filter = $(ev.currentTarget).data('filtername');
-          ev.data.opts.unset(filter);
-        });
-        return this;
       },
 
       items_success: function(model, response)  {
@@ -177,48 +198,85 @@ define([
         if (this.query) {
           //if this requests comes from a search, trigger the done event
           this.eventAggregator.trigger("searchDone");
-        };
+        }
         return;
       },
 
       updateItems: function(){
         var url;
 
-        if (!this.opts.get("q")) {
-          url = "#category/"+this.opts.get("category_id")+"/";
+        if (!this.query_options.get("q")) {
+          url = "#category/"+CategoryHelper.getCategory()+"?";
         }else{
           url = "#search?";
         };
 
-        for (var key in this.opts.attributes) {
-          if (this.opts.attributes[key] && key != "category_id"
-            && key != "country_id" && key != "pageSize")
-            url += key + "=" + this.opts.attributes[key] + "&";
+        for (var key in this.query_options.attributes) {
+          if (this.query_options.attributes[key] && key != "categoryId"
+            && key != "country_id" && key != "pageSize" && key != "offset")
+            url += key + "=" + this.query_options.attributes[key] + "&";
         };
 
         url = url.substring(0,url.length-1);
         window.location = url;
       },
 
-      filters_success: function(model, response){
-        $(this.el).find('#filterPopup').html(this.filCT({
-          'filters': this.filters.toJSON()}));
-        $(this.el).find('#filterPopup').trigger('create');
+      filters_success: function(model, response){    
+        //fill out the filter popup according to the filters already set in params
+        this.filters.each(_.bind(function(filter) {
+          var value = this.params[filter.get("name")];
+
+          if (value) {
+            var label = "";
+
+            filter.set("checked", value);
+            filter.set("value", value);
+
+            if (filter.get("type") == "number") {
+              label = value;
+            }else{
+              if (filter.get("values") && filter.get("values").length > 0) {
+                var vals = filter.get("values");
+                label = _.filter(vals,function(el){return el.id == value})[0].value;
+                filter.set("checked", value);
+              }
+            }
+
+            label = (label == "")?"":": "+label;
+            filter.set("label", label);
+          }
+        }, this));
+
+        this.render();
       },
 
       sorts_success: function(model, response){
+        $(this.el).find('#sortPopup').hide();
         $(this.el).find('#sortPopup').html(this.sorCT({
-          'sorts':this.sorts.toJSON()}));
-        $(this.el).find('#sortPopup').trigger('create');
+          'sorts': this.sorts.toJSON()}));
+
+        this.bindSorts();
       },
 
       openFilterPopup: function(){
-        $('#filterPopup').popup("open", {transition:"slideup"});
+        $(this.el).find('#filterPopup').show();
+        $(this.el).find('#overlay').show();
       },
 
       openSortPopup: function(){
-        $('#sortPopup').popup("open", {transition:"slideup"});
-      }
+        $(this.el).find('#sortPopup').show();
+        $(this.el).find('#overlay').show();
+      },
+
+      closePopup: function(){
+        $(this.el).find('#filterPopup').hide();
+        $(this.el).find('#sortPopup').hide();
+        $(this.el).find('#overlay').hide();
+      },
+
+      doFilter: function(){
+        this.updateItems();
+      },
     });
     return AdsListView;
 });
