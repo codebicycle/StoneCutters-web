@@ -1,28 +1,32 @@
-<div id="messagepage">
-    
-    <h1>{{message.title}}</h1>
-    <div id="messageContainer">
-    	<div class="left">
-			<h2>{{message.from.username}}</h2>
-			<h3>{{message.from.email}}</h3>
-    	</div>
-    	<div class="right">
-			<h3 class="date">Date: {{message.date}}</h3>
-			<h3 class="phone">Phone: {{message.phone}}</h3>
-    	</div>
-    	<div class="clear"></div>
-    	<div class="message">
-			<div>{{message.message}}</div>
-			<div class="clear"></div>
-    	</div>
-    </div>
-
-	<section class="reply-to-ad">
-        <h3>Reply to ad</h3>
-        <input id="email-field" type="text" name="email" placeholder="Email" class="olx-ui-textbox">
-        <input id="name-field" type="text" name="name" placeholder="Name" class="olx-ui-textbox">
-        <input id="phone-field" type="text" name="phone" placeholder="Phone" class="olx-ui-textbox">
-        <input id="message-field" type="text" name="message" placeholder="Message" class="olx-ui-textbox">
-        <input id="reply-button" type="button" value="Reply" class="olx-ui-button small">
-    </section>
-</div>
+<article class="my-messages-detail">
+	<header>
+		<h2>{{message.title}}</h2>
+	</header>
+	<section class="content">
+		<header>
+			<ul>
+				{{#with message.from}}
+					{{#if username}}
+						<li>From: <strong>{{username}}</strong> <em>({{email}})</em></li>
+					{{else}}
+						<li>From: <strong><em>{{email}}</em></strong></li>
+					{{/if}}
+				{{/with}}
+				{{#with message.to}}<li><span>To:</span> <em>{{email}}</em></li>{{/with}}
+			</ul>
+			<ul>
+				<li><span>Date:</span> {{message.date}}</li>
+				<!-- {{#if message.phone}}<li><span>Phone:</span> {{message.phone}}</li>{{/if}} -->
+			</ul>
+		</header>
+		<div>{{message.message}}</div>
+	</section>
+	<section class="reply">
+		<h3>Reply</h3>
+		<input id="email-field" type="name" name="email" placeholder="Email" class="olx-ui-textbox" data-role="none" />
+		<input id="name-field" type="text" name="name" placeholder="Name" class="olx-ui-textbox" data-role="none" />
+		<input id="phone-field" type="phone" name="phone" placeholder="Phone" class="olx-ui-textbox" data-role="none" />
+		<textarea id="message-field" name="message" placeholder="Enter your message here" class="olx-ui-textarea" data-role="none"></textarea>
+		<input id="reply-button" type="button" value="Reply" class="olx-ui-button" data-role="none" />
+	</section>
+</article>
