@@ -29,7 +29,8 @@ define([
         'click #filterButton': 'openFilterPopup',
         'click #sortButton': 'openSortPopup',
         'click #overlay': 'closePopup',
-        'click #filterOk': 'doFilter',
+        'click #filterOk': 'updateItems',
+        'click #sortOk': 'updateItems',
       },
 
       initialize: function(options){
@@ -98,9 +99,15 @@ define([
         this.filters.on('sync',_.bind(this.filters_success, this));
         this.filters.fetch();
 
-        this.sorts = new SortsCollection();
-        this.sorts.on('sync',_.bind(this.sorts_success, this));
-        this.sorts.fetch();
+        this.sorts = new SortsCollection([
+          {name: "price", order:"asc", description: "Price Ascending"},
+          {name: "price", order:"desc", description: "Price Descending"},
+          {name: "date", order:"asc", description: "Date Ascending"},
+          {name: "date", order:"desc", description: "Date Descending"}
+        ]);
+        this.sorts_success();
+        //this.sorts.on('sync',_.bind(this.sorts_success, this));
+        //this.sorts.fetch();
 
         //MOCK CODE
         // this.filters = new FiltersCollection([
@@ -122,7 +129,7 @@ define([
       render:function () {
         $(this.el).find('#content').html(this.adsCT({'search-term': this.query,
           'added-filters':JSONHelper.parseTitleValue(this.params),
-          'sortName':this.sortName,
+          'sorts':this.sorts.toJSON(),
           'filters': this.filters.toJSON()
         }));
 
@@ -149,10 +156,14 @@ define([
 
         $(this.el).find('#filterPopup').hide();
         $(this.el).find('#filterPopup').html(this.filCT({
-          'filters': this.filters.toJSON()
-        }));
+          'filters': this.filters.toJSON()}));
+
+        $(this.el).find('#sortPopup').hide();
+        $(this.el).find('#sortPopup').html(this.sorCT({
+          'sorts': this.sorts.toJSON()}));
 
         this.bindFilters();
+        this.bindSorts();
 
         return this;
       },
@@ -187,9 +198,17 @@ define([
       },
 
       bindSorts: function(){
-        $('input[class*=sort]').click({opts: this.query_options},function(ev){
+        $('.sort').click({opts: this.query_options},function(ev){
           var sort = $(ev.currentTarget).data('sortname');
-          ev.data.opts.set("sort",sort);
+          var order = $(ev.currentTarget).data('sortorder');
+
+          var prevSorts = _.filter(ev.data.opts.keys(),function(el){return el.indexOf("s") == 0});
+          var existingSort = _.filter(ev.data.opts.keys(),function(el){return el.indexOf(sort) !== -1});
+          var existingSortNum = (existingSort.length > 0)? existingSort[0].substring(1,2):0;
+
+          var sNum = existingSortNum || prevSorts.length+1;
+
+          ev.data.opts.set("s"+sNum+"."+sort,order);
         });
       },
 
@@ -251,11 +270,18 @@ define([
       },
 
       sorts_success: function(model, response){
-        $(this.el).find('#sortPopup').hide();
-        $(this.el).find('#sortPopup').html(this.sorCT({
-          'sorts': this.sorts.toJSON()}));
+        this.sorts.each(_.bind(function(sort) {
+          var value = this.params["s."+sort.get("name")] || 
+            this.params["s1."+sort.get("name")] || 
+            this.params["s2."+sort.get("name")];
 
-        this.bindSorts();
+          if (value) {
+            sort.set("checked", value);
+            sort.set("value", value);
+          }
+        }, this));
+
+        this.render();
       },
 
       openFilterPopup: function(){
@@ -274,9 +300,6 @@ define([
         $(this.el).find('#overlay').hide();
       },
 
-      doFilter: function(){
-        this.updateItems();
-      },
     });
     return AdsListView;
 });
