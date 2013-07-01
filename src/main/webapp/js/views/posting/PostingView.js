@@ -70,7 +70,8 @@ define([
 
       loadSubcategory: function(ev){
         var selectedIndex = ev.target.selectedIndex;
-        $(this.el).find('#subcategories').html(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[selectedIndex].get('children')}));
+        $(this.el).find('#category').prev('span').attr('data-value', this.categories.models[selectedIndex].get('name'));
+        $(this.el).find('#subcategory').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[selectedIndex].get('children')}));
         $(this.el).find('#content').trigger('create');
       },
 
