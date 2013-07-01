@@ -28,7 +28,13 @@
 		</div>
 		<nav>
 			<a id ="filterButton" href="javascript:;">Filter</a>
-			<a id ="sortButton" href="javascript:;">Sort by</a>
+			<a id ="sortButton" href="javascript:;">Sort by
+				{{#sorts}} 
+					{{#equal order value}}
+						{{description}} 
+					{{/equal}}
+				{{/sorts}}
+			</a>
 		</nav>
 	</header>
 

@@ -60,8 +60,8 @@ require.config({
 window.store = "TestStore"; // override local storage store name - for testing
 
 require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
-  'sinon','swipe', 'modernizr', 'console_runner', 'jasmine-jquery'], 
-  function(Backbone, _, $, jqm, jasmine, sinon, swipe){
+  'sinon','swipe', 'handlebars', 'modernizr', 'console_runner', 'jasmine-jquery'], 
+  function(Backbone, _, $, jqm, jasmine, sinon, swipe, handlebars){
 
   //this code enables a nicer html reporter to run locally (i.e not on jenkins)
   // var jasmineEnv = jasmine.getEnv();
@@ -129,6 +129,16 @@ require(['backbone', 'underscore', 'jquery','jqm', 'jasmine-html',
         }
     };
   };
+
+  Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
+        if (arguments.length < 3)
+            throw new Error("Handlebars Helper equal needs 2 parameters");
+        if( lvalue!=rvalue ) {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
+        }
+    });
 
   Backbone.View.prototype.Storage = Storage;
   Backbone.Model.prototype.Storage = Storage;

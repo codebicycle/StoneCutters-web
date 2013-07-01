@@ -1,6 +1,8 @@
-<ul data-role="listview" data-inset="true" style="min-width:250px;" data-theme="d" data-filtername="sort">
-    <li data-role="divider" data-theme="b">Sort by</li>
-    {{#sorts}}
-		<li><a class="sort" href="javascript:;" data-rel="dialog" data-sortname="{{title}}">{{title}}</a></li>
+<div>
+	{{#sorts}}
+        <input class="sort" id ="{{name}}-{{order}}" type="radio" name="{{name}}" value="{{order}}" data-sortname="{{name}}" data-sortorder="{{order}}" {{#equal checked order}}checked="true"{{/equal}}>
+        <label for="{{name}}-{{order}}">{{description}}</label>
 	{{/sorts}}
-</ul>
+</div>
+
+<a id="sortOk" href="javascript:;">OK</a>
