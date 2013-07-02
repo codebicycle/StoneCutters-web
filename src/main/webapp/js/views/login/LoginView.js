@@ -6,11 +6,12 @@ define([
   'models/user',
   'text!templates/login/loginTemplate.html',
   'config/conf',
+  'helpers/LoginHelper',
   'crypto/md5',
   'crypto/sha512'
   ], 
 
-  function($,_, Backbone, Handlebars, User, loginTemplate, Conf){
+  function($,_, Backbone, Handlebars, User, loginTemplate, Conf, LoginHelper){
 
     var LoginView = Backbone.View.extend({
       el: "#home",
@@ -37,11 +38,13 @@ define([
         return this;
       },
       startLogin:function (){
+        debugger
         this.username = $(this.el).find('#username-field').val();
         this.password = $(this.el).find('#password-field').val();
 
         if(!this.username || !this.password)
           return;
+        
 
         //ATTENTION BEGIN DEBUG CODE
         // var user = new User({"id":100,"username":this.username});
@@ -52,30 +55,7 @@ define([
         // return;
         //END OF DEBUG CODE
 
-        $.ajax({
-          type: "GET",
-          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users/challenge?u='+this.username,
-        }).done(_.bind(this.challenge_success, this));
-      },
-      challenge_success:function (response){
-        
-        var data = null;
-        if(typeof response == "string"){
-          data = JSON.parse(response);
-        }else{
-          data=response;
-        }
-        
-        this.challenge = data.challenge;
-
-        var md5Hash = CryptoJS.MD5(this.password);
-        var sha512Hash = CryptoJS.SHA512(md5Hash+this.username);
-
-        $.ajax({
-          type: "GET",
-          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-          '/users/login?c=' + this.challenge + "&h=" + sha512Hash,
-        }).done(_.bind(this.login_success, this));
+        LoginHelper.makeLogin(this.username, this.password,_.bind(this.login_success,this));
 
       },
       login_success:function (response){
