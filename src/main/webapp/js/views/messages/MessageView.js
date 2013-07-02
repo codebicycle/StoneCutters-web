@@ -5,12 +5,13 @@ define([
   'handlebars',
   'models/message',
   'text!templates/message/messageTemplate.html',
+  'text!templates/item/replyToAdTemplate.html',
   'helpers/ScreenHelper',
-  'config/conf',
+  'helpers/ReplyHelper',
   ], 
 
   function($,_, Backbone, Handlebars, MessageModel, 
-    messageTemplate, ScreenHelper, Conf){
+    messageTemplate, replyTemplate, ScreenHelper, ReplyHelper){
 
     var MessageView = Backbone.View.extend({
       el: "#home",
@@ -23,6 +24,7 @@ define([
         
         /*Compile the template using Handlebars micro-templating*/
         this.messCT = Handlebars.compile(messageTemplate);
+        this.replyCT = Handlebars.compile(replyTemplate);
         this.dfd = options.deferred;
 
         this.message = new MessageModel({'id': options.id});
@@ -61,7 +63,7 @@ define([
       render:function () {
         document.title = this.message.get('title');
         $(this.el).find('#content').html(this.messCT({'message': this.message.toJSON()}));
-        $(this.el).find('#content').trigger('create');
+        $(this.el).find('#reply-container').html(this.replyCT());
         return this;
       },
       success: function(model, response)  {
@@ -69,44 +71,8 @@ define([
         return;
       },
       postReply: function(){
-        var name = $(this.el).find('#name-field').val();
-        var email = $(this.el).find('#email-field').val();
-        var phone = $(this.el).find('#phone-field').val();
-        var message = $(this.el).find('#message-field').val();
-        var user = this.Storage.get("userObj");
-
-        if(!message){
-          //TODO show error here
-          return;
-        }
-
-        var postData = {};
-
-        if (email)
-          postData.email = email;
-        if (message)
-          postData.message = message;
-        if (name)
-          postData.name = name;
-        if (phone)
-          postData.phone = phone;
-        if (user)
-          postData.userId = user.userId;
-
-        $.ajax({
-          type: "POST",
-          url: Conf.get('smaug').url + ':' + Conf.get('smaug').port + 
-          '/items/'+this.message.get("itemId")+'/messages',
-          data: postData
-        }).done(_.bind(this.reply_done, this));
+        ReplyHelper.postReply(this.message.get("itemId"));
       },
-      reply_done: function(model, response){
-        $(this.el).find('#name-field').val("");
-        $(this.el).find('#email-field').val("");
-        $(this.el).find('#phone-field').val("");
-        $(this.el).find('#message-field').val("");
-        alert("Successfully replied to ad");
-      }
     });
   return MessageView;
 });

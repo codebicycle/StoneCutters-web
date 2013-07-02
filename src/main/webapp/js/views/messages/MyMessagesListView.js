@@ -114,7 +114,7 @@ define([
       },
 
       render:function () {
-        $(this.el).find('#content').html(this.messagesCT({'search-term': this.query}));
+        $(this.el).find('#content').html(this.messagesCT());
         $(this.el).find('#message-list').html(this.messagesListCT({'messages': this.messages.toJSON()}));
         return this;
       },
