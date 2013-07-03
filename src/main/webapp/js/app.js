@@ -50,6 +50,24 @@ define([
     Backbone.Model.prototype.Storage = Storage;
     Backbone.Collection.prototype.Storage = Storage;
 
+    $(document).ajaxError(function(event, jqxhr, settings, exception) {
+      // console.log("status: "+jqxhr.status);
+      // console.log(event);
+      // console.log(jqxhr);
+      // console.log(settings);
+      // console.log(exception);
+
+      var status = jqxhr.status;
+      var url = settings.url;
+
+      //should check for status == 401 here. Status always 0 in dev env
+      if (url.indexOf("users") !== -1) {
+        console.log("Unauthorized. Status: "+status+". Logging out current user");
+        Backbone.View.prototype.eventAggregator.trigger("logout");
+        window.location = "#";
+      };
+    });
+
     Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
         if (arguments.length < 3)
             throw new Error("Handlebars Helper equal needs 2 parameters");

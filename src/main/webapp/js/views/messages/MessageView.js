@@ -5,22 +5,26 @@ define([
   'handlebars',
   'models/message',
   'text!templates/message/messageTemplate.html',
-  'helpers/ScreenHelper'
+  'text!templates/item/replyToAdTemplate.html',
+  'helpers/ScreenHelper',
+  'helpers/ReplyHelper',
   ], 
 
   function($,_, Backbone, Handlebars, MessageModel, 
-    messageTemplate, ScreenHelper){
+    messageTemplate, replyTemplate, ScreenHelper, ReplyHelper){
 
     var MessageView = Backbone.View.extend({
       el: "#home",
 
       events: {
+        'click #reply-button': "postReply",
       },
 
       initialize: function(options){
         
         /*Compile the template using Handlebars micro-templating*/
         this.messCT = Handlebars.compile(messageTemplate);
+        this.replyCT = Handlebars.compile(replyTemplate);
         this.dfd = options.deferred;
 
         this.message = new MessageModel({'id': options.id});
@@ -59,12 +63,15 @@ define([
       render:function () {
         document.title = this.message.get('title');
         $(this.el).find('#content').html(this.messCT({'message': this.message.toJSON()}));
-        $(this.el).find('#content').trigger('create');
+        $(this.el).find('#reply-container').html(this.replyCT());
         return this;
       },
       success: function(model, response)  {
         this.dfd.resolve(this);
         return;
+      },
+      postReply: function(){
+        ReplyHelper.postReply(this.message.get("itemId"));
       },
     });
   return MessageView;

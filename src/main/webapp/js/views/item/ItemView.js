@@ -10,13 +10,15 @@ define([
   'text!templates/widgets/imageGalleryTemplate.html',
   'text!templates/widgets/itemGalleryTemplate.html',
   'text!templates/base/breadcrumbTemplate.html',
+  'text!templates/item/replyToAdTemplate.html',
   'helpers/ScreenHelper',
-  'helpers/CategoryHelper'
+  'helpers/CategoryHelper',
+  'helpers/ReplyHelper',
   ], 
 
   function($,_, Backbone, sw, Handlebars, ItemModel, ItemsCollection, 
     itemTemplate, imageGalleryTemplate, itemGalleryTemplate, breadcrumbTemplate, 
-    ScreenHelper, CategoryHelper){
+    replyTemplate, ScreenHelper, CategoryHelper, ReplyHelper){
 
     var ItemView = Backbone.View.extend({
       el: "#home",
@@ -26,6 +28,7 @@ define([
         'click .sms': 'smsSeller',
         'click .message': 'messageSeller',
         'click .collapse' : 'collapseSection',
+        'click #reply-button': "postReply",
       },
 
       initialize: function(options){
@@ -35,6 +38,7 @@ define([
         this.imgsCT = Handlebars.compile(imageGalleryTemplate);
         this.relAdsCT = Handlebars.compile(itemGalleryTemplate);
         this.breadCT = Handlebars.compile(breadcrumbTemplate);
+        this.replyCT = Handlebars.compile(replyTemplate);
         this.dfd = options.deferred;
 
         this.item = new ItemModel({'id': options.id});
@@ -95,6 +99,7 @@ define([
         document.title = this.item.get('title');
 
         $(this.el).find('#content').html(this.itemCT({'item': this.item.toJSON()}));
+        $(this.el).find('#reply-container').html(this.replyCT());
 
         if (CategoryHelper.categories.length > 0) {
           var parentId = this.item.get('category').parentId;
@@ -162,7 +167,10 @@ define([
       },
       messageSeller: function(){
         
-      }
+      },
+      postReply: function(){
+        ReplyHelper.postReply(this.item.get("id"));
+      },
     });
   return ItemView;
 });

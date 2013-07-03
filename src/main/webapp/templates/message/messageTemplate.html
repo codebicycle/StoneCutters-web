@@ -1,32 +1,27 @@
-<div id="messagepage">
-    
-    <h1>{{message.title}}</h1>
-    <div id="messageContainer">
-    	<div class="left">
-			<h2>{{message.from.username}}</h2>
-			<h3>{{message.from.email}}</h3>
-    	</div>
-    	<div class="right">
-			<h3 class="date">Date: {{message.date}}</h3>
-			<h3 class="phone">Phone: {{message.phone}}</h3>
-    	</div>
-    	<div class="clear"></div>
-    	<div class="message">
-			<div>{{message.message}}</div>
-			<div class="clear"></div>
-    	</div>
-    </div>
+<article class="my-messages-detail">
+	<header>
+		<h2>{{message.title}}</h2>
+	</header>
+	<section class="content">
+		<header>
+			<ul>
+				{{#with message.from}}
+					{{#if username}}
+						<li>From: <strong>{{username}}</strong> <em>({{email}})</em></li>
+					{{else}}
+						<li>From: <strong><em>{{email}}</em></strong></li>
+					{{/if}}
+				{{/with}}
+				{{#with message.to}}<li><span>To:</span> <em>{{email}}</em></li>{{/with}}
+			</ul>
+			<ul>
+				<li><span>Date:</span> {{message.date}}</li>
+				<!-- {{#if message.phone}}<li><span>Phone:</span> {{message.phone}}</li>{{/if}} -->
+			</ul>
+		</header>
+		<div>{{message.message}}</div>
+	</section>
 
-	<h1>Reply to Ad</h1>
-
-		<div class="formContainer">
-			<form id="reply-ad" name="reply-ad" action="" method="" class="form">
-				<input id="email-field" type="text" name="email" placeholder="Email">
-				<input id="name-field" type="text" name="name" placeholder="Name">
-				<input id="phone-field" type="text" name="phone" placeholder="Phone">
-				<input id="message-field" type="text" name="message" placeholder="message">
-				<input id="reply-button" type="button" value="Reply">
-			</form>
-		</div>
-		<div class="clear"></div>
-</div>
+	<div id="reply-container"></div>
+	
+</article>

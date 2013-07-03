@@ -54,9 +54,11 @@
         {{ else }}
             <ul>
         {{/ if }}
-            <li class="email"><a href="mailto:xxx">Email</a></li>
+            <li class="email"><a href="mailto:{{item.email}}">Email</a></li>
         </ul>
     </section>
+
+    <div id="reply-container"></div>
     
     <section class="related-ads">
         <h3>More items in <span>{{ item.category.name }}</span></h3>
