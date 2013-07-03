@@ -41,8 +41,11 @@ define([
         CategoryHelper.categories.fetch();
 
         this.eventAggregator.on("searchDone", _.bind(this.doneSearch,this));
+
+        this.eventAggregator.on("openLeftPannel", _.bind(this.toggleLeftPanel,this));
         this.eventAggregator.on("loggedIn", _.bind(this.render,this));
         this.eventAggregator.on("logout", _.bind(this.logout,this));
+
 
         $.extend($.event.special.swipe,{
           scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
@@ -126,7 +129,9 @@ define([
       },
 
       toggleLeftPanel: function(e){
-        e.preventDefault();
+        if(e){
+          e.preventDefault();
+        }
         $('body').toggleClass('left-panel-visible');
       },
 

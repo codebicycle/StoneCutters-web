@@ -245,7 +245,6 @@ define([
         
       },
       makePosting: function(){
-        debugger
         this.buildItem(3);
         this.item.save(null, {
           success:function(model,response){
