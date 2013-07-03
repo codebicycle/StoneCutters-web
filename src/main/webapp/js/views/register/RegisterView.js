@@ -38,7 +38,7 @@ define([
 
       startRegister:function (){
         if (!$(this.el).find('#agree-check').is(':checked')) {
-          console.log("You must accept terms and conditions.");
+          alert("You must accept terms and conditions.");
           return;
         };
 
@@ -58,11 +58,10 @@ define([
 
         tentativeUser.save(null, {
           success:_.bind(function(model,response){
-            console.log("success");
             LoginHelper.makeLogin(this.username, this.password,_.bind(this.login_success,this));
           },this),
           error:_.bind(function(model,response){
-            console.log("errors creating a new user");
+            alert("Errors creating a new user.");
           },this)
         });
 
