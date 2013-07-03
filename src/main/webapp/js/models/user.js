@@ -12,7 +12,10 @@ define([
         this.unreadMessagesCount = options.unreadMessagesCount;
         this.favorites = options.favorites;
       }
-  	}
+  	},
+    urlRoot: function(){
+      return Conf.get('smaug').url + ':' + Conf.get('smaug').port + '/users';
+    }
   });
   
   // Return the model for the module

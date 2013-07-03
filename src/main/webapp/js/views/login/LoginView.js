@@ -38,7 +38,6 @@ define([
         return this;
       },
       startLogin:function (){
-        debugger
         this.username = $(this.el).find('#username-field').val();
         this.password = $(this.el).find('#password-field').val();
 
@@ -59,7 +58,6 @@ define([
 
       },
       login_success:function (response){
-        
         var data = null;
         if(typeof response == "string"){
           data = JSON.parse(response);
