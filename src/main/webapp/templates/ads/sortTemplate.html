@@ -1,8 +1,10 @@
 <div>
+	<h3>Sort this results by</h3>
 	{{#sorts}}
-        <input class="sort" id ="{{name}}-{{order}}" type="radio" name="{{name}}" value="{{order}}" data-sortname="{{name}}" data-sortorder="{{order}}" {{#equal checked order}}checked="true"{{/equal}}>
-        <label for="{{name}}-{{order}}">{{description}}</label>
+        <label class="olx-ui-radio">
+        	<input class="sort" type="radio" id="{{name}}-{{order}}" name="{{name}}" value="{{order}}" {{#equal checked order}}checked{{/equal}} data-sortname="{{order}}" data-sortorder="{{name}}" />
+        	<span>{{description}}</span>
+        </label>
 	{{/sorts}}
+	<a href="#sortPopUp" class="olx-ui-button toggle-popup update-items">Sort</a>
 </div>
-
-<a id="sortOk" href="javascript:;">OK</a>

@@ -1,17 +1,3 @@
-<!-- <div class="ui-grid-a ui-responsive">
-    <div class="ui-block-a">
-    	{{#each added-filters}}
-	        <a class="remove-filter" href="javascript:;" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-filtername="{{title}}">{{title}}:{{value}}</a>
-	    {{/each}}
-    </div>
-    <div class="ui-block-b">
-    	<div data-role="controlgroup" data-type="horizontal" style="float:right;">
-		    <a href="javascript:;" id="filterButton" data-role="button" data-mini="true">Filter</a>
-		    <a href="javascript:;" id="sortButton" data-role="button" data-mini="true">Sort by{{#if sortName}}: {{sortName}}{{/if}}</a>
-		</div>
-	</div>
-</div> -->
-
 <article class="listing-page">
 
 	<header>
@@ -27,8 +13,8 @@
 			</p>
 		</div>
 		<nav>
-			<a id ="filterButton" href="javascript:;">Filter</a>
-			<a id ="sortButton" href="javascript:;">Sort by
+			<a class="toggle-popup" href="#filterPopUp">Filter</a>
+			<a class="toggle-popup" href="#sortPopUp">Sort</a>
 				{{#sorts}} 
 					{{#equal order value}}
 						{{description}} 
@@ -42,12 +28,11 @@
 		<span>Results for: {{search-term}}</span>
 	{{/if}}
 
-	<div id="filterPopup" class="popup_content"></div>
-	<div id="sortPopup" class="popup_content"></div>
-	<div id="overlay" class="black_overlay"></div>
-
 	<!-- If removed from jquery mobile logic, tha list is not able to refres its content -->
 	<!-- <ul id="ads-list" class="ads" data-role="listview" data-inset="true"></ul> -->
 	<ul id="ads-list" class="ads"></ul>
+
+	<div id="filterPopUp" class="olx-ui-pop-up"></div>
+	<div id="sortPopUp" class="olx-ui-pop-up"></div>
 
 </article>

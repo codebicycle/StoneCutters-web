@@ -1086,7 +1086,7 @@ div#messagepage div#messageContainer {
 			.listing-page header
 			{
 				display: table;
-				table-layout: fixed;
+				/*table-layout: fixed;*/
 				width: 100%;
 				padding-bottom: 1rem;
 				font-size: 0;
@@ -1100,14 +1100,15 @@ div#messagepage div#messageContainer {
 			.listing-page header div p
 			{
 				overflow: hidden;
-				white-space: nowrap;
+				/*white-space: nowrap;*/
+				margin-top: -.5rem;
 			}
 
 			.listing-page header div p span
 			{
 				display: inline-block;
 				padding: .25rem .5rem;
-				margin-left: .5rem;
+				margin: .5rem .5rem 0 0;
 				border: thin solid #AFAFAF;
 				border-radius: .1rem;
 				background-color: #CACACA;
@@ -1115,11 +1116,6 @@ div#messagepage div#messageContainer {
 				font-weight: bold;
 				color: #FFF;
 				cursor: pointer;
-			}
-
-			.listing-page header p span:first-child
-			{
-				margin-left: 0;
 			}
 
 			.listing-page header nav
@@ -1995,3 +1991,73 @@ div#messagepage div#messageContainer {
             z-index:1002;
             overflow: auto;
         }
+
+        /* Pop-up layout */
+
+	        .olx-ui-pop-up
+	        {
+	        	position: fixed;
+	        	top: 0;
+	        	left: 0;
+	        	right: 0;
+	        	bottom: 0;
+	        	background-color: rgba(0, 0, 0, .75);
+	        	transform: translate3d(100%, 0, 0);
+	        	-webkit-transform: translate3d(100%, 0, 0);
+	        	opacity: 0;
+	        	transition: opacity 250ms ease-in, transform 1ms linear 250ms;
+	        	-webkit-transition: opacity 250ms ease-in, -webkit-transform 1ms linear 250ms;
+	        }
+
+	        .olx-ui-pop-up > div
+	        {
+	        	position: absolute;
+	        	top: 1rem;
+	        	right: 1rem;
+	        	bottom: 1rem;
+	        	left: 1rem;
+	        	overflow: auto;
+	        	padding-left: 1rem;
+	        	border-style: solid;
+	        	border-color: #FFF;
+	        	border-width: 1rem 1rem 1rem 0;
+	        	background: #FFF;
+	        	transform: scale3d(0, 0, 0);
+	        	-webkit-transform: scale3d(0, 0, 0);
+	        	transition: transform 250ms ease-in;
+	        	-webkit-transition: -webkit-transform 250ms ease-in;
+	        }
+
+	        .olx-ui-pop-up > div h3
+	        {
+	        	font-size: 2rem;
+	        	font-weight: normal;
+	        }
+
+	        .olx-ui-pop-up > div .olx-ui-checkbox,
+	        .olx-ui-pop-up > div .olx-ui-radio
+	        {
+	        	padding-top: 1rem;
+	        }
+
+	        .olx-ui-pop-up > div .olx-ui-button
+	        {
+	        	margin-top: 1rem;
+	        }
+
+        /* Visible status */
+
+        	.olx-ui-pop-up.visible
+        	{
+        		transform: translate3d(0, 0, 0);
+        		-webkit-transform: translate3d(0, 0, 0);
+        		opacity: 1;
+        		transition: opacity 250ms ease-in, transform 1ms linear;
+        		-webkit-transition: opacity 250ms ease-in, -webkit-transform 1ms linear;
+        	}
+
+        	.olx-ui-pop-up.visible > div
+        	{
+        		transform: scale3d(1, 1, 1);
+        		-webkit-transform: scale3d(1, 1, 1);
+        	}
