@@ -25,6 +25,7 @@ define([
         'click #post-button':    'makePosting',
         'click #save-button':    'savePosting',
         'change #category':   'loadSubcategory',
+        'change #subcategory':   'loadSubcategoryDataValue',
         'click .change-page' : 'showPage'
       },
 
@@ -69,24 +70,24 @@ define([
       },
 
       loadSubcategory: function(ev){
+        this.catIndex = ev.target.selectedIndex;
+        $(this.el).find('#category').prev('span').attr('data-value', this.categories.models[this.catIndex].get('name'));
+        $(this.el).find('#subcategory').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[this.catIndex].get('children')}));
+      },
+
+      loadSubcategoryDataValue: function(ev){
         var selectedIndex = ev.target.selectedIndex;
-        $(this.el).find('#category').prev('span').attr('data-value', this.categories.models[selectedIndex].get('name'));
-        $(this.el).find('#subcategory').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[selectedIndex].get('children')}));
-        $(this.el).find('#content').trigger('create');
+        $(this.el).find('#subcategory').prev('span').attr('data-value', this.categories.models[this.catIndex].get('children')[selectedIndex].name);
       },
 
       sections: ["#step-1","#step-2","#step-3"],
 
-
       render:function (posting_step){
-        
-
         this.steps = $('.steps');
         this.activeStep = $('.highlight', this.steps).last();
         this.activeSection = $('section.active', 'form');
         this.targetSection = $(this.sections[posting_step]);
         
-
         //posting_step: 0,1,2
         posting_step = posting_step || 0;
 
@@ -94,7 +95,7 @@ define([
         {
           case 0:
             $(this.el).find('#content').html(this.postingFormCT({categories:this.categories.toJSON()}));
-            $(this.el).find('#subcategories').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[0].get('children')}));
+            $(this.el).find('#subcategory').replaceWith(this.comboBoxCT({id:"subcategory", name:"subcategory", items:this.categories.models[0].get('children')}));
 
             
             if(this.activeSection.next().is(this.targetSection)){
@@ -119,8 +120,6 @@ define([
             }
             this.activeSection.removeClass('active');
             this.targetSection.addClass('active');
-            
-            
           break;
         }
         
