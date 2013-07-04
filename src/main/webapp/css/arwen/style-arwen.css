@@ -1545,6 +1545,54 @@ div#messagepage div#messageContainer {
 			color: #06F;
 		}
 
+	/* Register */
+
+		.register-page
+		{
+			padding: 1rem;
+		}
+
+		.register-page h3
+		{
+			font-size: 2rem;
+			font-weight: normal;
+		}
+
+		.register-page p
+		{
+			padding-top: 1.5rem;
+			text-align: right;
+		}
+
+		.register-page p:after
+		{
+			display: block;
+			clear: both;
+			width: 0;
+			height: 0;
+			font-size: 0;
+			line-height: 0;
+		}
+
+		.register-page p a
+		{
+			color: #06F;
+			font-size: 1rem;
+			text-decoration: none;
+		}
+
+		.register-page .olx-ui-checkbox
+		{
+			float: left;
+			width: auto;
+			padding: 0;
+		}
+
+		.register-page .olx-ui-button
+		{
+			margin-top: 1.5rem;
+		}
+
 	/* Posting page */
 
 		.posting-page
