@@ -1593,6 +1593,37 @@ div#messagepage div#messageContainer {
 			margin-top: 1.5rem;
 		}
 
+	/* Terms and conditions */
+
+		.terms-and-conditions
+		{
+			padding: 1rem;	
+		}
+
+		.terms-and-conditions h3
+		{
+			font-size: 2rem;
+			font-weight: normal;
+		}
+
+		.terms-and-conditions section
+		{
+			padding-top: 1rem;
+			font-size: .75rem;
+		}
+
+		.terms-and-conditions section h4
+		{
+			text-transform: uppercase;
+		}
+
+		.terms-and-conditions section p,
+		.terms-and-conditions section ul,
+		.terms-and-conditions section ol
+		{
+			padding-top: .5rem;
+		}
+
 	/* Posting page */
 
 		.posting-page
