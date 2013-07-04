@@ -232,7 +232,8 @@ define([
 
         for (var key in this.query_options.attributes) {
           if (this.query_options.attributes[key] && key != "categoryId"
-            && key != "country_id" && key != "pageSize" && key != "offset")
+            && key != "country_id" && key != "pageSize" && key != "offset" && 
+            key != "location")
             url += key + "=" + this.query_options.attributes[key] + "&";
         };
 
