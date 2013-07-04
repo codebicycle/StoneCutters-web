@@ -26,11 +26,8 @@ define([
       className: "AdsListView",
 
       events: {
-        'click #filterButton': 'openFilterPopup',
-        'click #sortButton': 'openSortPopup',
-        'click #overlay': 'closePopup',
-        'click #filterOk': 'updateItems',
-        'click #sortOk': 'updateItems',
+        'click .toggle-popup': 'togglePopUp',
+        'click .update-items': 'updateItems',
       },
 
       initialize: function(options){
@@ -124,6 +121,7 @@ define([
         this.templateKey = "items";
         this.scrollingID = this.cid;
         AdsListView.__super__.bindScrolling.call(this);
+
       },
 
       render:function () {
@@ -154,13 +152,18 @@ define([
           $(this.el).find('#breadcrumb').html(this.breadCT(breadOpts));
         }
 
-        $(this.el).find('#filterPopup').hide();
-        $(this.el).find('#filterPopup').html(this.filCT({
-          'filters': this.filters.toJSON()}));
+        $('#filterPopUp', this.el).html(this.filCT({'filters': this.filters.toJSON()}));
+        $('#sortPopUp', this.el).html(this.sorCT({'sorts': this.sorts.toJSON()}));
 
-        $(this.el).find('#sortPopup').hide();
-        $(this.el).find('#sortPopup').html(this.sorCT({
-          'sorts': this.sorts.toJSON()}));
+        // Set the faux select control to display the first value
+        $('.olx-ui-select select', this.el).each(function(){
+          $(this).prev('span').attr('data-value', $(this).children('option:selected').text());
+        });
+
+        // Update faux select control on change to display the current value
+        $('.olx-ui-select select', this.el).change(function(){
+          $(this).prev('span').attr('data-value', $(this).children('option:selected').text());
+        });
 
         this.bindFilters();
         this.bindSorts();
@@ -184,6 +187,13 @@ define([
         });
 
         $('.filter').keyup({opts: this.query_options},function(ev){
+          var filter = $(ev.currentTarget).data('filtername');
+          var value = $(ev.currentTarget).val();
+          
+          ev.data.opts.set(filter,value);
+        });
+
+        $('.filter').change({opts: this.query_options},function(ev){
           var filter = $(ev.currentTarget).data('filtername');
           var value = $(ev.currentTarget).val();
           
@@ -284,20 +294,9 @@ define([
         this.render();
       },
 
-      openFilterPopup: function(){
-        $(this.el).find('#filterPopup').show();
-        $(this.el).find('#overlay').show();
-      },
-
-      openSortPopup: function(){
-        $(this.el).find('#sortPopup').show();
-        $(this.el).find('#overlay').show();
-      },
-
-      closePopup: function(){
-        $(this.el).find('#filterPopup').hide();
-        $(this.el).find('#sortPopup').hide();
-        $(this.el).find('#overlay').hide();
+      togglePopUp: function(e){
+        e.preventDefault();
+        $(e.target.hash).toggleClass('visible');
       },
 
     });
