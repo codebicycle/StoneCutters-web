@@ -1,11 +1,17 @@
-<h4>Register</h4>
-
-<form class="form" id="register-form" name="register" action="" method="">
-	<input id="username-field" type="text" name="user" placeholder="Username">
-	<input id="email-field" type="email" name="email" placeholder="Email">
-	<input id="password-field" type="password" name="pwd" placeholder="Password">
-	<a id="terms-link" href="#terms" type="button">Terms and conditions</a>
-	<input type="checkbox" name="agree-check" id="agree-check">
-    <label for="agree-check">I agree to the terms and conditions</label></br>
-	<input type="button" id="register-button" value="Register"/>
+<form class="register-page" id="register-form" name="register" action="" method="">
+	<h3>Register</h3>
+	<label for="username-field" class="olx-ui-label">Username</label>
+	<input id="username-field" type="text" name="user" class="olx-ui-textbox" placeholder="Type your desired username" data-role="none" />
+	<label for="email-field" class="olx-ui-label">Email</label>
+	<input id="email-field" type="email" name="email" class="olx-ui-textbox" placeholder="Type a valid email adress" data-role="none" />
+	<label for="password-field" class="olx-ui-label">Password</label>
+	<input id="password-field" type="password" name="pwd" class="olx-ui-textbox" placeholder="Choose a secure password" data-role="none" />
+	<p>
+		<label class="olx-ui-checkbox">
+			<input type="checkbox" name="agree-check" id="agree-check" data-role="none" />
+			<span>I agree to the terms and conditions</span>
+		</label>
+		<a id="terms-link" href="#terms" data-role="none">Read the terms and conditions</a>
+	</p>
+	<input type="button" id="register-button" value="Register" class="olx-ui-button" data-role="none" />
 </form>
