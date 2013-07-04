@@ -1,21 +1,26 @@
-{{#filters}}
-    <div>
-        <h2>{{description}}</h2>
-        <ul data-filtername="{{name}}">
-            {{#equal type "boolean"}}
-                <input class="filter" id ="{{name}}" type="checkbox" name="{{name}}" value="true" data-filtername="{{name}}" {{#if checked}}checked="true"{{/if}}>
-                <label for="{{name}}">{{description}}</label>
-            {{/equal}}
-            {{#equal type "number"}}
-                <input class="filter" id ="{{name}}" type="text" name="{{name}}" value="{{value}}" data-filtername="{{name}}">
-                <label for="{{name}}">{{description}}</label>
-            {{/equal}}
-        	{{#values}}
-                <input class="filter" id ="{{../name}}-{{id}}" type="radio" name="{{../name}}" value="{{id}}" data-filtername="{{../name}}" {{#equal ../checked id}}checked="true"{{/equal}}>
-                <label for="{{../name}}-{{id}}">{{value}}</label>
-        	{{/values}}
-        </ul>
-    </div>
-{{/filters}}
-
-<a id="filterOk" href="javascript:;">OK</a>
+<div>
+    <h3>Filter this results by</h3>
+    {{#filters}}
+        {{#equal type "boolean"}}
+            <label class="olx-ui-checkbox">
+                <input class="filter" type="checkbox" id="{{name}}" name="{{name}}" value="true" {{#if checked}}checked{{/if}} data-filtername="{{name}}" />
+                <span>{{description}}</span>
+            </label>
+        {{/equal}}
+        {{#equal type "number"}}
+            <label for="{{name}}" class="olx-ui-label">{{description}}</label>
+            <input type="text" id="{{name}}" class="olx-ui-textbox filter" name="name" placeholder="Type the number of {{description}}" data-filtername="{{name}}" />
+        {{/equal}}
+        {{#equal type "select"}}
+            <label class="olx-ui-select">
+                <span data-value="">{{description}}</span>
+                <select class="filter" id="{{name}}" data-filtername="{{name}}">
+                    {{#each values}}
+                        <option value="{{id}}">{{value}}</option>
+                    {{/each}}
+                </select>
+            </label>
+        {{/equal}}
+    {{/filters}}
+    <a href="#filterPopUp" class="olx-ui-button toggle-popup update-items">Filter</a>
+</div>
