@@ -97,7 +97,7 @@ define([
           snip += '<textarea class="olx-ui-textarea" data-role="none" id="textarea-'+field.name+'" name=' + field.name +'"></textarea>';
         };
         break;
-
+        
         case "combobox": {
           snip = "";
           if(field.label!= null){
@@ -109,6 +109,7 @@ define([
           }
           snip += '</select>';
         };break;
+        
         case "checkbox":
           snip = '<label class="olx-ui-checkbox">'
           snip += '<input type="checkbox" id="checkbox-'+field.name+'" name="'+field.name+'">';
