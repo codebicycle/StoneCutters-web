@@ -1,4 +1,5 @@
-define(['views/ads/AdsListView','config/conf','helpers/CategoryHelper'], function(AdsListView,Conf,CategoryHelper) {
+define(['views/ads/AdsListView','config/conf','helpers/CategoryHelper','constants/const',], 
+	function(AdsListView,Conf,CategoryHelper,Const) {
 	describe('The items list',function(){
 	
 		var callbacks = {};
@@ -78,7 +79,11 @@ define(['views/ads/AdsListView','config/conf','helpers/CategoryHelper'], functio
 			$.ajax.calls[0].args[0].success(items);
 			//$.ajax.calls[1].args[0].success(items2);
 
-			window.scrollTo(0,2100);
+			var triggerPoint = Const.get("ScrollView").scrollFetchPxOffset;
+        	var pxToBottom = $(document).height() - (window.pageYOffset + window.innerHeight);
+        	var scrollToTrigger = pxToBottom - triggerPoint / 2;
+
+			window.scrollTo(0,scrollToTrigger);
 			$(window).trigger("scroll."+view.cid); 	
 
 			expect(view.loadResults).toHaveBeenCalled();		
