@@ -1,0 +1,9 @@
+<h1>Items for category {{params.categoryId}}</h1>
+
+<ul>
+{{#each models.0.data}}
+  <li>
+    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
+  </li></br>
+{{/each}}
+</ul>
