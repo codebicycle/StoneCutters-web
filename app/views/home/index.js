@@ -17,7 +17,8 @@ module.exports = BaseView.extend({
         //                 }
         // });
 
-        window.mySwipe = Swipe(document.getElementById('slider1'));
+        window.whatsNewSwipe = Swipe(document.getElementById('whats-new-slider'));
+        window.LastVisitedSwipe = Swipe(document.getElementById('last-visited-slider'));
 
     // $(this.el).find('#slider2').html(this.lastVisitCT({'item': this.lastVisitedItems.toJSON()}));
     // 	this.slider2 = new Swipe(document.getElementById('slider2'), {

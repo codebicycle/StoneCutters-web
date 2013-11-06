@@ -10,9 +10,9 @@
 
 	<section class="whats-new">
 		<h3>What's new</h3>
-		<div id='slider1' class='swipe'>
+		<div id='whats-new-slider' class='swipe'>
 		  <div class='swipe-wrap'>
-		  	{{#each models.0.data}}
+		  	{{#each whatsNewCollection.models.0.attributes.data}}
 			  <div>
 			    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
 			  </div>
@@ -23,7 +23,15 @@
 
 	<section class="last-visited">
 		<h3>Last visited</h3>
-		<div id="slider2" class="swipe"></div>
+		<div id='last-visited-slider' class='swipe'>
+		  <div class='swipe-wrap'>
+		  	{{#each lastVisitedCollection.models.0.attributes.data}}
+			  <div>
+			    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
+			  </div>
+			{{/each}}
+		  </div>
+		</div>
 	</section>
 
 </div>
