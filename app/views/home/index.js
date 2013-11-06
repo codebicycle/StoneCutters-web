@@ -1,6 +1,33 @@
 var BaseView = require('../base');
 
+if (typeof window != 'undefined') {
+	var Swipe = require('../../lib/swipe');
+};
+
 module.exports = BaseView.extend({
-  className: 'home_index_view'
+	className: 'home_index_view',
+	postRender: function(){
+
+        // this.slider1 = new Swipe(document.getElementById('slider1'), {
+        //                 //startSlide: 2,
+        //                 //speed: 400,
+        //                 //auto: 3000,
+        //                 'items':10,
+        //                 'callback': function(event, index, elem) {
+        //                 }
+        // });
+
+        window.mySwipe = Swipe(document.getElementById('slider1'));
+
+    // $(this.el).find('#slider2').html(this.lastVisitCT({'item': this.lastVisitedItems.toJSON()}));
+    // 	this.slider2 = new Swipe(document.getElementById('slider2'), {
+    //                     //startSlide: 2,
+    //                     //speed: 400,
+    //                     //auto: 3000,
+    //                     'items':ScreenHelper.getImgsNum(),
+    //                     'callback': function(event, index, elem) {
+    //                     }
+    // });
+  }
 });
 module.exports.id = 'home/index';
