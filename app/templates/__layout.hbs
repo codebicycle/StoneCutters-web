@@ -1,33 +1,50 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
+<head>
+    <title>OLX Mobile</title>
 
-  <head>
-    <meta charset='utf-8'/>
-    <title>Rendr Example App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <!--[if IE]><meta http-equiv="cleartype" content="on"><![endif]-->
 
     <link href="/styles.css" media="screen" rel="stylesheet" type="text/css" />
-  </head>
 
-  <body class="">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="/">GitHub Browser</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="/">Home</a></li>
-              <li class="active"><a href="/repos">Repos</a></li>
-              <li class="active"><a href="/users">Users</a></li>
-            </ul>
-          </div>
-          <div class="loading-indicator">Loading&hellip;</div>
-        </div>
-      </div>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="imgs/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="imgs/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="imgs/apple-touch-icon-precomposed.png">
+    <link rel="shortcut icon" href="imgs/favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300">    
+
+</head>
+
+<body>
+    <div id="home" data-role="page">
+        
+        <header class="site-header" data-role="header">
+            <section class="main">
+                <a href="#" id="toggle-panel" class="toggle-panel">panel</a>
+                <h1><a href="#">OLX</a></h1>
+                <a href="#" id="toggle-search" class="toggle-search">search</a>
+            </section>
+            <section id="search-container" class="search" style="display: none;">
+                <input id="search-bar" type="search" name="search" data-role="none" />
+            </section>
+
+            <div id="breadcrumb" class="breadcrumbs" style="display: none;"></div>
+        </header>
+
+        <!-- <div id="left-panel" data-role="panel"></div> -->
+
+        <div id="left-panel" class="left-panel"></div>
+
+        <section id="content" class="container">
+          {{{body}}}
+        </section>
     </div>
-
-    <section id="content" class="container">
-      {{{body}}}
-    </section>
 
     <script src="/mergedAssets.js"></script>
     <script>
@@ -38,6 +55,5 @@
     })();
     </script>
 
-  </body>
-
+</body>
 </html>
