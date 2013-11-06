@@ -1,5 +1,7 @@
 module.exports = {
   index: function(params, callback) {
+    params.item_type = 'adsList';
+    
     var spec = {
       collection: {collection: 'Items', params: params}
     };
