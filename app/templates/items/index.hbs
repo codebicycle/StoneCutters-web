@@ -1,11 +1,9 @@
 <h1>Items for category {{params.categoryId}}</h1>
 
-<div id='slider1' class='swipe'>
-  <div class='swipe-wrap'>
-  	{{#each models.0.data}}
-	  <div>
-	    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
-	  </div>
-	{{/each}}
-  </div>
-</div>
+<ul>
+{{#each models.0.data}}
+  <li>
+    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
+  </li></br>
+{{/each}}
+</ul>
