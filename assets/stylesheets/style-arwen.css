@@ -1954,7 +1954,7 @@ div#messagepage div#messageContainer {
 
 	/* Swipe */
 
-		.swipe
+		/*.swipe
 		{
 			overflow: hidden;
 			position: relative;
@@ -2040,7 +2040,7 @@ div#messagepage div#messageContainer {
 
 		.swipe p {
 			display: none; /* More info on swipe items temporarily disabled */
-		}
+		/*}*/
 
 	/* Popups */
 
