@@ -1,9 +1,21 @@
 <h1>Items for category {{params.categoryId}}</h1>
 
-<ul>
+<div class="row">
 {{#each models.0.data}}
-  <li>
-    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
-  </li></br>
+	{{#moduloIf @index 3}}
+		</div>
+		<div class="row">
+	{{/moduloIf}}
+	<div class="span4" style="height: 180px;text-align:center;margin-bottom:2em;border:2px solid;border-radius:10px;">
+		<a href="/items/{{id}}">
+	
+	{{#if thumbnail }}
+			<img src="{{thumbnail}}" style="height: 176px;">
+	{{else}}
+			<div style="line-height:180px; height: 180px">{{title}} - {{price.displayPrice}}</div>
+	{{/if}}
+	
+		</a>
+	</div>
 {{/each}}
-</ul>
+</div>
