@@ -1,33 +1,73 @@
-<div class="home-page">
-
-	<section id="location" class="location">
-		<span>Buenos Aires</span>
-	</section>
-
-	<section class="whats-new">
-		<h3>What's new</h3>
-		<div id='whats-new-slider' class='swipe'>
-		  <div class='swipe-wrap'>
-		  	{{#each whatsNewCollection.models.0.attributes.data}}
-			  <div>
-			    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
-			  </div>
-			{{/each}}
-		  </div>
+<div class="home-page"style="padding:0px;">
+	<div class="row-fluid" class="">
+		<div class="span12">
+			<!--<section id="location" class="location">
+				<span>Buenos Aires</span>
+			</section>-->
+			<section class="whats-new">
+				<!--<h3>What's new</h3>-->
+				<div id='whats-new-slider' class='swipe'>
+				  <div class='swipe-wrap'>
+				  	{{#each whatsNewCollection.models.0.attributes.data}}
+					  <div style="overflow:hidden; height:13rem">
+					    <a href="/items/{{id}}">
+					    <img src="{{thumbnail}}" style="width:100%; "></a><br>
+					    <a href="/items/{{id}}">{{title}} - {{price.displayPrice}}</a>
+					  </div>
+					{{/each}}
+				  </div>
+				</div>
+			</section>
 		</div>
-	</section>
-
-	<section class="last-visited">
-		<h3>Last visited</h3>
-		<div id='last-visited-slider' class='swipe'>
-		  <div class='swipe-wrap'>
-		  	{{#each lastVisitedCollection.models.0.attributes.data}}
-			  <div>
-			    <a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>
-			  </div>
-			{{/each}}
-		  </div>
+	</div>
+	<div class="row-fluid font-format">
+		<div class="span6 celd-format" >
+			<section style="padding-bottom:0px;">
+				<div id='categoriesCollection.models'>
+				  	<ul>
+						{{#each categoriesCollection.models}}
+							{{#gte @index 6}}
+	 						<li>
+								<a href="/items?categoryId={{id}}&location=www.olx.com.ar">{{attributes.trName}}</a>
+							</li>
+							{{/gte}}
+						{{/each}}
+					</ul>
+				</div>
+			</section>
 		</div>
-	</section>
-
+			
+		
+		<div class="span6 celd-format">
+			<section>
+				<div id='categories'>
+				  	<ul>
+						{{#each categoriesCollection.models}}
+							{{#lt @index 6}}
+								<li>
+									<a href="/items?categoryId={{id}}&location=www.olx.com.ar">{{attributes.trName}}</a>
+								</li>
+							{{/lt}}
+						{{/each}}
+					</ul>
+				</div>
+			</section>
+		</div>
+		
+		<!-- Last Visited -->
+		<!--<div class="span6">-->
+			<!--<section class="last-visited">-->
+				<!--<h3>Last visited</h3>-->
+				<!--<div id='last-visited-slider' class='swipe'>-->
+				  <!--<div class='swipe-wrap'>-->
+				  	<!--{{#each lastVisitedCollection.models.0.attributes.data}}-->
+					  <!--<div>-->
+					    <!--<a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>-->
+					  <!--</div>-->
+					<!--{{/each}}-->
+				  <!--</div>-->
+				<!--</div>-->
+			<!--</section>-->
+		<!--</div>-->
+	</div>
 </div>

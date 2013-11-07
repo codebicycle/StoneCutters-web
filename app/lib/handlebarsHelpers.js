@@ -10,6 +10,16 @@ module.exports = function(Handlebars) {
     moduloIf: function(index_count,mod,block) {
 	  if(parseInt(index_count)%(mod)=== 0){
 	    return block.fn(this);}
+	},
+	gte: function(a,b,block) {
+	  if(parseInt(a)>=parseInt(b)){
+	  	return block.fn(this);
+	  }
+	},
+	lt: function(a,b,block) {
+	  if(parseInt(a)<parseInt(b)){
+	  	return block.fn(this);
+	  }
 	}
   };
 };

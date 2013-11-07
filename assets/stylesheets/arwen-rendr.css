@@ -1,7 +1,24 @@
+.font-format ul li{
+  list-style: none;
+  font-size:1.52em;
+}
+
+.font-format ul li a{
+  color: #333333!important;
+}
+
+
+.celd-format{
+  border:2px solid;
+  border-radius:10px;
+}
 body{
 	background-color:#f5f5f5;
 	padding-top:0px !important;
+  padding-left:0px !important;
+  padding-right:0px !important;
 }
+
 .swipe img {
 width: auto;
 height: auto;
