@@ -1,6 +1,7 @@
-var express = require('express')
-  , rendr = require('rendr')
-  , app = express();
+var express = require('express');
+var rendr = require('rendr');
+var platformSelector = require('./server/middleware/platformSelector');
+var app = express();
 
 /**
  * Initialize Express middleware stack.
@@ -9,6 +10,8 @@ app.use(express.compress());
 app.use(express.static(__dirname + '/public'));
 app.use(express.logger());
 app.use(express.bodyParser());
+
+app.use(platformSelector("on"));
 
 /**
  * In this simple example, the DataAdapter config, which specifies host, port, etc. of the API
