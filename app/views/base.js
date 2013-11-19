@@ -4,13 +4,7 @@ var RendrView = require('rendr/shared/base/view');
 // application's views.
 module.exports = RendrView.extend({
     getTemplate: function(){
-    	var platform = null;
-    	if(global.isServer){
-    		platform = this.app.req.platform;
-    	}else{
-    		//if I am in client, I will fetch the enhanced templates.
-    		platform = "enhanced";
-    	}
+    	var platform = global.platform;
     	var name = this.name;
     	console.log("retrieving:"+platform+"/"+name);
         return this.app.templateAdapter.getTemplate(platform+"/"+name);

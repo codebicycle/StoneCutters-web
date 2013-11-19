@@ -22,7 +22,8 @@ module.exports = function(onoff) {
 	        	response.on('data', function (chunk) {
 	        		var obj = JSON.parse(chunk.toString());
     				var isBrowserProp = obj["isBrowser"];
-                    req.platform ="enhanced"
+                    req.platform = "enhanced";
+                    global.platform = "enhanced";
     				next();
   				});
             }).on('error', function(e) {
