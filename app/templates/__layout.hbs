@@ -1,4 +1,15 @@
-{{{body}}}
+{{#eq platform "enhanced"}}
+	{{{partial "enhanced/partials/header"}}}
+{{/eq}}
+
+<section id="content" class="container">
+  {{{body}}}
+</section>
+
+{{#eq platform "enhanced"}}
+	{{{partial "enhanced/partials/footer"}}}
+{{/eq}}
+
 <script src="/mergedAssets.js"></script>
     <script>
     (function() {

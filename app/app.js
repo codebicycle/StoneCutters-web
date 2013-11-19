@@ -25,6 +25,14 @@ module.exports = BaseApp.extend({
      * modules that can be used on both client & server.
      */
     this.templateAdapter.registerHelpers(handlebarsHelpers);
+
+    //set the platform in the templates
+    if (global.isServer) {
+      this.req.app.locals({
+        platform: global.platform,
+      });
+    }
+
   },
 
   /**

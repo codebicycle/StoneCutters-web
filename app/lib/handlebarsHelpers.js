@@ -20,6 +20,11 @@ module.exports = function(Handlebars) {
 	  if(parseInt(a)<parseInt(b)){
 	  	return block.fn(this);
 	  }
+	},
+	eq: function(a,b,block) {
+	  if(a == b){
+	  	return block.fn(this);
+	  }
 	}
   };
 };
