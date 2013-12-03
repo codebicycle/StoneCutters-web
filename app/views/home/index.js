@@ -3,10 +3,13 @@ var BaseView = require('../base');
 if (typeof window != 'undefined') {
 	var Swipe = require('../../lib/swipe');
 };
-
 module.exports = BaseView.extend({
-	className: 'home_index_view',
-	postRender: function(){
+    className: 'home_index_view',
+
+	preRender: function(){
+        
+    },
+    postRender: function(){
 
         // this.slider1 = new Swipe(document.getElementById('slider1'), {
         //                 //startSlide: 2,

@@ -1,5 +1,6 @@
 var express = require('express');
 var rendr = require('rendr');
+var abSelector = require('./server/middleware/abSelector');
 var platformSelector = require('./server/middleware/platformSelector');
 var app = express();
 
@@ -12,6 +13,7 @@ app.use(express.logger());
 app.use(express.bodyParser());
 
 app.use(platformSelector("on"));
+app.use(abSelector("on"));
 
 /**
  * In this simple example, the DataAdapter config, which specifies host, port, etc. of the API
