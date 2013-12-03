@@ -1,6 +1,9 @@
 var express = require('express');
 var rendr = require('rendr');
 var platformSelector = require('./server/middleware/platformSelector');
+var config = require('config');
+var mw = require('./server/middleware');
+
 var app = express();
 
 /**
@@ -14,21 +17,30 @@ app.use(express.bodyParser());
 app.use(platformSelector("on"));
 
 /**
+ * The 'cookieParser' middleware is required for sessions.
+ */
+app.use(express.cookieParser());
+
+/**
+ * Add session support. This will populate `req.session`.
+ */
+app.use(express.session({
+  secret: config.session.secret,
+
+  /**
+   * In production apps, you should probably use something like Redis or Memcached
+   * to store sessions. Look at the `connect-redis` or `connect-memcached` modules.
+   */
+  store: null
+}));
+
+/**
  * In this simple example, the DataAdapter config, which specifies host, port, etc. of the API
  * to hit, is written inline. In a real world example, you would probably move this out to a
  * config file. Also, if you want more control over the fetching of data, you can pass your own
  * `dataAdapter` object to the call to `rendr.createServer()`.
  */
-var dataAdapterConfig = {
-  'default': {
-    host: 'api-v2.olx.com',
-    protocol: 'http'
-  },
-  'travis-ci': {
-    host: 'api.travis-ci.org',
-    protocol: 'https'
-  }
-};
+var dataAdapterConfig = config.api;
 
 /**
  * Initialize our Rendr server.
@@ -46,6 +58,20 @@ var server = rendr.createServer({
   *     app.use('/my_cool_app', server);
   */
 app.use(server);
+
+server.configure(function(rendrExpressApp) {
+
+  /**
+   * Allow the Rendr app to access session data on client and server.
+   * Check out the source in the file `./server/middleware/initSession.js`.
+   */
+  rendrExpressApp.use(mw.initSession());
+
+  /**
+   * Increment a counter in the session on every page hit.
+   */
+  rendrExpressApp.use(mw.incrementCounter());
+});
 
 /**
  * Start the Express server.
