@@ -1,6 +1,5 @@
 var express = require('express');
 var rendr = require('rendr');
-var platformSelector = require('./server/middleware/platformSelector');
 var config = require('config');
 var mw = require('./server/middleware');
 
@@ -14,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.logger());
 app.use(express.bodyParser());
 
-app.use(platformSelector("on"));
+app.use(mw.platformSelector("on"));
 
 /**
  * The 'cookieParser' middleware is required for sessions.
