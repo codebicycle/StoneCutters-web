@@ -1,15 +1,37 @@
 var path = require('path');
-
 var stylesheetsDir = 'assets/stylesheets';
 var rendrDir = 'node_modules/rendr';
 var rendrHandlebarsDir = 'node_modules/rendr-handlebars';
-var rendrModulesDir = rendrDir + '/node_modules';
 
 module.exports = function(grunt) {
+  
+  require('load-grunt-tasks')(grunt);
+
+  //var config = loadConfig('.grunt/config');
+
+  //config.pkg = grunt.file.readJSON('./package.json');
+
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    jshint:{
+      all: ['*.js']
+    },
+    
+    // Uglify
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: 'src/<%= pkg.name %>.js',
+        dest: 'build/<%= pkg.name %>.min.js'
+      }
+    },
+
+    //Stylus
     stylus: {
       compile: {
         options: {
@@ -22,6 +44,7 @@ module.exports = function(grunt) {
       }
     },
 
+    //Handlebars
     handlebars: {
       compile: {
         options: {
@@ -42,6 +65,7 @@ module.exports = function(grunt) {
       }
     },
 
+    //Watch
     watch: {
       scripts: {
         files: 'app/**/*.js',
@@ -66,6 +90,7 @@ module.exports = function(grunt) {
       }
     },
 
+    //Rendr stitch
     rendr_stitch: {
       compile: {
         options: {
@@ -96,14 +121,62 @@ module.exports = function(grunt) {
           ]
         }]
       }
-    }
-  });
+    },
 
+    //rsync
+    rsync: {
+    options: {
+        args: ["--verbose"],
+        exclude: [".git*","*.scss","node_modules"],
+        recursive: true
+    },
+    dist: {
+        options: {
+            src: "./",
+            dest: "../dist"
+        }
+    },
+    stage: {
+        options: {
+            src: "../dist/",
+            dest: "./testFolder",
+            host: "root@nodebox",
+            syncDestIgnoreExcl: true
+        }
+     }//,
+    // prod: {
+    //     options: {
+    //         src: "../dist/",
+    //         dest: "/var/www/site",
+    //         host: "user@live-host",
+    //         syncDestIgnoreExcl: true
+    //     }
+    //   }
+    },
+
+    //mocha
+    mocha: { 
+          test: {
+            src: ['test/**/*.html'],
+            reporter: 'XUnit',
+            dest: './test/output/xunit.out',
+          },
+        }
+    });
+
+  //Loading NPM tasks.
+  /*grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-rendr-stitch');
 
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-mocha');*/
+
+
+  //Register the tasks to Grunt.
   grunt.registerTask('runNode', function () {
     grunt.util.spawn({
       cmd: 'node',
@@ -116,11 +189,37 @@ module.exports = function(grunt) {
     });
   });
 
+  // grunt.registerTask('deploy', function () {
+  //   grunt.util.spawn({
+  //     cmd: 'git push heroku master',
+  //     args: [],
+  //     opts: {
+  //       stdio: 'inherit'
+  //     }
+  //   }, function () {
+  //     grunt.fail.fatal(new Error("git error."));
+  //   });
+  // });
+  
+  // grunt.registerTask('uglify', ['uglify']);
+  // grunt.registerTask('jshint', ['jshint']);
+  
+  grunt.registerTask('unit-test', ['jshint', 'mocha']);
+  
+  //Compile tasks (dev-build, dist-build)
+  grunt.registerTask('dev-build', ['handlebars', 'rendr_stitch', 'stylus']);
 
-  grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'stylus']);
+  grunt.registerTask('dist-build', ['handlebars', 'rendr_stitch', 'stylus', 'uglify']);
 
+  //Pipeline tasks
+  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync']);
+
+  //Server tasks
   // Run the server and watch for file changes
-  grunt.registerTask('server', ['runNode', 'compile', 'watch']);
+  grunt.registerTask('server-dev', ['runNode', 'dev-build', 'watch']);
+
+  // Run the server with build files
+  grunt.registerTask('server-dist', ['runNode', 'dist-build']);
 
   // Default task(s).
   grunt.registerTask('default', ['compile']);
