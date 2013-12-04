@@ -6,7 +6,7 @@ var http = require("http");
  * SelectorPlatform middleware.
  * Here we call smaug in order to define which type of web we have to show.
  */
-module.exports = function(onoff) {
+module.exports = function platformSelector(onoff) {
     
     enabled = (onoff == 'on') ? true : false;
     
