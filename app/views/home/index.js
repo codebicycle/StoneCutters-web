@@ -1,14 +1,23 @@
 var BaseView = require('../base');
+var _ = require('underscore');
 
 if (typeof window != 'undefined') {
 	var Swipe = require('../../lib/swipe');
 };
 module.exports = BaseView.extend({
     className: 'home_index_view',
-
-	preRender: function(){
+	
+    getTemplateData:function(){
+        // Get `super`.
+        var data = BaseView.prototype.getTemplateData.call(this);
         
+        return _.extend({}, 
+                        data, 
+                        {
+                            count: this.app.get('session').count
+                        });   
     },
+
     postRender: function(){
 
         // this.slider1 = new Swipe(document.getElementById('slider1'), {
