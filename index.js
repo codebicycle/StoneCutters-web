@@ -21,6 +21,7 @@ app.use(express.bodyParser());
 
 app.use(mw.platformSelector("on"));
 app.use(mw.abSelector("on"));
+app.use(mw.experimentNotificator("on"));
 
 /**
  * The 'cookieParser' middleware is required for sessions.
