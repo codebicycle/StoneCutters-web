@@ -5,7 +5,7 @@ module.exports = function(match) {
   match('users'       ,       'users#index');
   match('users/:login',       'users#show');
   match('users_lazy/:login',  'users#show_lazy');
-  match('experiments/:experiment/:value', 'experiments#make_convertion');
+
   // if (global.isServer) {
   //     match('categories',     'categories#index');
   //     match('items',          'items#index');
