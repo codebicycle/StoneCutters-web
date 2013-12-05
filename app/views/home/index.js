@@ -4,9 +4,8 @@ var _ = require('underscore');
 if (typeof window != 'undefined') {
 	var Swipe = require('../../lib/swipe');
 };
-
 module.exports = BaseView.extend({
-	className: 'home_index_view',
+    className: 'home_index_view',
 	
     getTemplateData:function(){
         // Get `super`.

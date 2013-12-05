@@ -15,7 +15,6 @@ module.exports = {
   	paramsWhatsNew.location = 'www.olx.com.ar';
     params.location = 'www.olx.com.ar';
   	paramsWhatsNew['f.withPhotos'] = 'true';
-
     //TODO we have to implement a real last visited filter.
     //paramsLastVisited.item_type = 'adsList';
     //TODO remove hardcoded location. Should come from local storage or cookie
@@ -28,11 +27,9 @@ module.exports = {
     };
 
     this.app.fetch(spec, function(err, result) {
+      result.button_color = global.button_color;
       callback(err, result);
     });
   }
 };
 
-
-
-      

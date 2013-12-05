@@ -3,7 +3,7 @@ var http = require("http");
 
 
 /**
- * SelectorPlatform middleware.
+ * PlatformSelector middleware.
  * Here we call smaug in order to define which type of web we have to show.
  */
 module.exports = function platformSelector(onoff) {
@@ -22,8 +22,10 @@ module.exports = function platformSelector(onoff) {
 	        	response.on('data', function (chunk) {
 	        		var obj = JSON.parse(chunk.toString());
     				var isBrowserProp = obj["isBrowser"];
-                    req.platform = "enhanced";
-                    global.platform = "enhanced";
+                    //req.platform = "enhanced";
+                    //global.platform = "enhanced";
+                    req.platform = "basic";
+                    global.platform = "basic";
     				next();
   				});
             }).on('error', function(e) {
