@@ -22,10 +22,10 @@ module.exports = function platformSelector(onoff) {
 	        	response.on('data', function (chunk) {
 	        		var obj = JSON.parse(chunk.toString());
     				var isBrowserProp = obj["isBrowser"];
-                    //req.platform = "enhanced";
-                    //global.platform = "enhanced";
-                    req.platform = "basic";
-                    global.platform = "basic";
+                    req.platform = "enhanced";
+                    global.platform = "enhanced";
+                    // req.platform = "basic";
+                    // global.platform = "basic";
     				next();
   				});
             }).on('error', function(e) {
