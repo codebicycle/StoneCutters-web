@@ -31,6 +31,9 @@ module.exports = BaseApp.extend({
       this.req.app.locals({
         platform: global.platform,
       });
+    }else{
+      //This is the client side, so init platform with "enhanced"
+      global.platform = "enhanced";
     }
 
   },
