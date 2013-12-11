@@ -1,8 +1,13 @@
 {
-  "name": "rendr-app-template",
-  "version": "0.2.1",
+  "name": "arwen",
+  "version": "0.0.1",
+  "homepage": "http://github.com/olx-inc/arwen",
   "description": "",
   "main": "index.js",
+  "author": {
+    "name": "OLX Mobile Team",
+    "url": "http://www.olx.com"
+  },
   "scripts": {
     "test": "mocha --ui bdd --reporter spec  ./test --recursive",
     "start": "node index.js"
@@ -13,7 +18,10 @@
     "async": "~0.1.22",
     "rendr-handlebars": "0.0.8",
     "rendr": "0.5.0-alpha08",
-    "config": "~0.4.30"
+    "config": "~0.4.30",
+    "grunt-rsync": "~0.2.1",
+    "grunt-env": "~0.4.0",
+    "grunt-lib-phantomjs": "~0.4.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -21,10 +29,17 @@
     "grunt-contrib-handlebars": "git://github.com/spikebrehm/grunt-contrib-handlebars#a4ae75750efeb23bf8ca9c61d9cf7569d40879fa",
     "grunt-rendr-stitch": "~0.0.6",
     "grunt-contrib-watch": "~0.3.1",
+    "grunt-env": "~0.4.0",
     "nodemon": "~0.7.6",
     "mocha": "~1.9.0",
     "should": "~1.2.2",
-    "js-yaml": "2.x.x"
+    "js-yaml": "2.x.x",
+    "grunt-contrib-uglify": "~0.2.7",
+    "load-grunt-tasks": "~0.2.0",
+    "grunt-rsync": "~0.2.1",
+    "grunt-mocha": "~0.4.7",
+    "grunt-lib-phantomjs": "~0.4.0",
+    "grunt-contrib-jshint": "~0.7.2"
   },
   "engines": {
     "node": ">=0.8"
