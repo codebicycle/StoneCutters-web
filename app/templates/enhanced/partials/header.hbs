@@ -25,7 +25,7 @@
         
         <header class="site-header" data-role="header">
             <section class="main">
-                <a href="/categories?location=www.olx.com.ar&languageId=2" id="toggle-panel" class="toggle-panel">panel</a>
+                <a href="#" id="toggle-panel" class="toggle-panel">panel</a>
                 <h1><a href="/">OLX</a></h1>
                 <a href="#" id="toggle-search" class="toggle-search">search</a>
             </section>
@@ -38,6 +38,12 @@
 
         <!-- <div id="left-panel" data-role="panel"></div> -->
 
-        <div id="left-panel" class="left-panel"></div>
-
-        <section id="content" class="container">
+        <div id="left-panel" class="left-panel">
+            <ul>
+                {{#each categoriesCollection.models}}
+                    <li>
+                        <a href="/items?categoryId={{id}}&location=www.olx.com.ar">{{attributes.trName}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>

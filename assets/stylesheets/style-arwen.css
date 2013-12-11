@@ -2140,3 +2140,7 @@ div#messagepage div#messageContainer {
         		transform: scale3d(1, 1, 1);
         		-webkit-transform: scale3d(1, 1, 1);
         	}
+
+        	.left-panel {
+        		width:12rem;
+        	}
