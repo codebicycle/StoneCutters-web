@@ -3,9 +3,11 @@ var http = require("http");
 module.exports = function fetchBaseData() {
   return function fetchBaseData(req, res, next) {
     var app = req.rendrApp;
-    var hasData = app.get('session').hasData || false;
+    var baseData = app.get('session').baseData;
 
-    if (hasData){
+    if (baseData){
+      //still set the base data from ths session in case this is a deep link request
+      app.set('baseData', baseData);
       next();
       return;
     }
@@ -21,7 +23,7 @@ module.exports = function fetchBaseData() {
           var obj = JSON.parse(output);
           //console.log("OBJ "+JSON.stringify(obj));
           app.set('baseData', {"categories":obj});
-          req.updateSession('hasData', true);
+          req.updateSession('baseData', {"categories":obj});
 
           next();
       });
