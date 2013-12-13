@@ -133,12 +133,12 @@ module.exports = function(grunt) {
     dist: {
         options: {
             src: "./",
-            dest: "../dist"
+            dest: "./dist"
         }
     },
     stage: {
         options: {
-            src: "../dist/",
+            src: "./dist/",
             dest: "./testFolder",
             host: "root@nodebox",
             syncDestIgnoreExcl: true
