@@ -17,6 +17,9 @@ module.exports = Base.extend({
       case "myFavorites":
         url = '/users/'+this.Storage.get("userObj").userId+'/favorites';
       break;
+      default:
+        url = '/items';
+      break;
     }
     return url;
   },

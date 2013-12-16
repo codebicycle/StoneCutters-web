@@ -78,6 +78,9 @@ server.configure(function(rendrExpressApp) {
    * Increment a counter in the session on every page hit.
    */
   rendrExpressApp.use(mw.incrementCounter());
+
+  //fetch base app data like categories
+  rendrExpressApp.use(mw.fetchBaseData());
 });
 
 /**

@@ -15,6 +15,9 @@ module.exports = function(match) {
   match('items',          'items#index');
   match('categories?*params',     'categories#index');
   match('items?*params',          'items#index');
+
+  match('search',          'items#search');
+  match('search?*params',         'items#search');
   
   //match('categories/:id?*params',	'categories#show');
   match('items/:id',				      'items#show');
