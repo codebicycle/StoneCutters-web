@@ -21,7 +21,8 @@
     "config": "~0.4.30",
     "grunt-rsync": "~0.2.1",
     "grunt-env": "~0.4.0",
-    "grunt-lib-phantomjs": "~0.4.0"
+    "grunt-lib-phantomjs": "~0.4.0",
+    "grunt-ssh": "~0.9.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

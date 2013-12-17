@@ -31,6 +31,34 @@ module.exports = function(grunt) {
       }
     },
 
+    sshconfig: {
+      testing: {
+        host: "nodebox",
+        port: 22,
+        username: "root", 
+        password: "password"
+      }//,
+      //staging: {
+      //  host: "my.staging.server",
+      //  port: 22,
+      //  username: "user",
+      //  password: "password"
+      //}    
+    },
+    sshexec: {
+      start{
+        command: "cd /root/testFolder && forever start index.js" 
+      },
+      stop: {
+        command: "forever stop index.js",
+        options: {
+          ignoreErrors: true
+       },
+       npm-install:{
+        command: "cd /root/testFolder && npm install"
+       }
+    },  
+
     //Stylus
     stylus: {
       compile: {
@@ -204,23 +232,22 @@ module.exports = function(grunt) {
   // grunt.registerTask('uglify', ['uglify']);
   // grunt.registerTask('jshint', ['jshint']);
   
+  //Testing task
   grunt.registerTask('unit-test', ['jshint', 'mocha']);
   
   //Compile tasks (dev-build, dist-build)
-  grunt.registerTask('dev-build', ['handlebars', 'rendr_stitch', 'stylus']);
-
+  grunt.registerTask('dev-build',  ['handlebars', 'rendr_stitch', 'stylus']);
   grunt.registerTask('dist-build', ['handlebars', 'rendr_stitch', 'stylus', 'uglify']);
 
   //Pipeline tasks
-  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync']);
+  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync', 'sshexec:npm-install', 'sshexec:start']);
 
   //Server tasks
   // Run the server and watch for file changes
   grunt.registerTask('server-dev', ['runNode', 'dev-build', 'watch']);
-
   // Run the server with build files
-  grunt.registerTask('server-dist', ['runNode', 'dist-build']);
+  //grunt.registerTask('server-dist', ['runNode', 'dist-build']);
 
   // Default task(s).
-  grunt.registerTask('default', ['compile']);
+  //grunt.registerTask('default', ['compile']);
 };
