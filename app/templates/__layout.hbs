@@ -1,8 +1,11 @@
 {{#eq platform "enhanced"}}
 	{{{partial "enhanced/partials/header"}}}
+  {{view "left-panel/index"}}
 {{/eq}}
 
-{{view "left-panel/index"}}
+{{#eq platform "basic"}}
+  {{{partial "basic/partials/header"}}}
+{{/eq}}
 
 <section id="content" class="container">
   {{{body}}}
@@ -10,6 +13,10 @@
 
 {{#eq platform "enhanced"}}
 	{{{partial "enhanced/partials/footer"}}}
+{{/eq}}
+
+{{#eq platform "basic"}}
+  {{{partial "basic/partials/footer"}}}
 {{/eq}}
 
 <script src="/mergedAssets.js"></script>

@@ -1,0 +1,17 @@
+<h1>Items</h1>
+
+<div class="row">
+{{#each items}}
+	<div style="height: 180px;text-align:center;margin-bottom:2em;border:2px solid;border-radius:10px;">
+		<a href="/items/{{id}}">
+	
+	{{#if thumbnail }}
+			<img src="{{thumbnail}}" style="height: 176px;">
+	{{else}}
+			<div style="line-height:180px; height: 180px">{{title}} - {{price.displayPrice}}</div>
+	{{/if}}
+	
+		</a>
+	</div>
+{{/each}}
+</div>

@@ -1,5 +1,27 @@
-{{platform}}
 <div class="home-page"style="padding:0px;">
+
+<div style="text-align:center;">
+	<a href="/items/{{firstItem.id}}">
+		{{#if firstItem.thumbnail }}
+				<img src="{{firstItem.thumbnail}}" style="height:200px; width: 100%">
+		{{else}}
+				<div style="line-height:180px; height: 180px">{{firstItem.title}} - {{firstItem.price.displayPrice}}</div>
+		{{/if}}
+	</a>
+</div>
+
+<div id='categories.models'>
+  	<ul>
+		{{#each categories.models}}
+			<li>
+				<a href="/items?categoryId={{id}}&location=www.olx.com.ar">{{attributes.trName}}</a>
+			</li>
+		{{/each}}
+	</ul>
+</div>
+
+{{platform}}
+
 "Testeando AB Testing en WAP"
 
 	{{#eq button_color.value "red"}}
