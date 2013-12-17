@@ -38,26 +38,28 @@ module.exports = function(grunt) {
         username: "root",
         agent: process.env.SSH_AUTH_SOCK,
         privateKey: grunt.file.read("/home/dev/.ssh/id_rsa")
-      }//,
-      //staging: {
-      //  host: "my.staging.server",
-      //  port: 22,
-      //  username: "user",
-      //  password: "password"
-      //}    
+      }
     },
     sshexec: {
       start:{
-        command: "cd /root/apps/arwen/ && forever start index.js" 
+        command: "cd /root/apps/arwen/ && forever start index.js",
+        options:{
+          config: testing
+        }
       },
       stop: {
         command: "forever stop index.js",
         options: {
+          config: testing, 
           ignoreErrors: true
-        },
+        }
       },
        'npm-install':{
         command: "cd /root/apps/arwen/ && npm install --verbose",
+        options: {
+          config: testing, 
+          ignoreErrors: true
+        }
        }
     },  
 
