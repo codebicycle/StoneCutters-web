@@ -36,7 +36,8 @@ module.exports = function(grunt) {
         host: "nodebox",
         port: 22,
         username: "root",
-        agent: process.env.SSH_AUTH_SOCK 
+        agent: process.env.SSH_AUTH_SOCK,
+        privateKey: grunt.file.read("/home/dev/.ssh/id_rsa")
       }//,
       //staging: {
       //  host: "my.staging.server",
