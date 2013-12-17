@@ -36,7 +36,6 @@ module.exports = function(grunt) {
         host: "nodebox",
         port: 22,
         username: "root", 
-        password: "password"
       }//,
       //staging: {
       //  host: "my.staging.server",
@@ -241,7 +240,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-build', ['handlebars', 'rendr_stitch', 'stylus', 'uglify']);
 
   //Pipeline tasks
-  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync', 'sshexec:npm-install', 'sshexec:start']);
+  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync', 'sshexec:npm-install'/*, 'sshexec:start'*/]);
 
   //Server tasks
   // Run the server and watch for file changes
