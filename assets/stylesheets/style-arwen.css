@@ -564,16 +564,26 @@ div#messagepage div#messageContainer {
 
 			.site-header h1 a
 			{
-				display: block;
+				display: inline-block;
 				width: 83px;
 				height: 44px;
 				text-indent: -9000px;
 				background: transparent url(images/logo.png) no-repeat 0 0;
 			}
+			.site-header form
+			{
+				margin:0!important;
+			}
+			.site-header input.search-input
+			{
+				display: inline-block!important;
+				width: 50%!important;
+				margin:.7rem;
+			}
 
 			.site-header .toggle-search
 			{
-				float: right;
+				display: inline-block;
 				width: 30px;
 				height: 30px;
 				margin-left: 1rem;

@@ -21,13 +21,16 @@ module.exports = {
     //paramsLastVisited.location = 'www.olx.com.ar';
 
     var spec = {
-      whatsNewCollection: {collection: 'Items', params: paramsWhatsNew},
-      categoriesCollection: {collection: 'Categories', params: params}
+      whatsNewItems: {collection: 'Items', params: paramsWhatsNew},
+      categories: {collection: 'Categories', params: params}
       //lastVisitedCollection: {collection: 'Items', params: paramsLastVisited}
     };
 
     this.app.fetch(spec, function(err, result) {
       result.button_color = global.button_color;
+      result.whatsNewMetadata = result.whatsNewItems.models[0].get("metadata");
+      result.whatsNewItems = result.whatsNewItems.models[0].get("data");
+      result.firstItem = result.whatsNewItems[0];
       callback(err, result);
     });
   }

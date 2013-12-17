@@ -9,7 +9,7 @@
 				<!--<h3>What's new</h3>-->
 				<div id='whats-new-slider' class='swipe'>
 				  <div class='swipe-wrap'>
-				  	{{#each whatsNewCollection.models.0.attributes.data}}
+				  	{{#each whatsNewItems}}
 					  <div style="overflow:hidden; height:13rem">
 					    <a href="/items/{{id}}">
 					    <img src="{{thumbnail}}" style="width:100%; "></a><br>
@@ -25,9 +25,9 @@
 	<div class="row-fluid font-format">
 		<div class="span6 celd-format" >
 			<section style="padding-bottom:0px;">
-				<div id='categoriesCollection.models'>
+				<div id='categories.models'>
 				  	<ul>
-						{{#each categoriesCollection.models}}
+						{{#each categories.models}}
 							{{#gte @index 6}}
 	 						<li>
 								<a href="/items?categoryId={{id}}&location=www.olx.com.ar">{{attributes.trName}}</a>
@@ -44,7 +44,7 @@
 			<section>
 				<div id='categories'>
 				  	<ul>
-						{{#each categoriesCollection.models}}
+						{{#each categories.models}}
 							{{#lt @index 6}}
 								<li>
 									<a href="/items?categoryId={{id}}&location=www.olx.com.ar">{{attributes.trName}}</a>

@@ -16,20 +16,32 @@ module.exports = function platformSelector(onoff) {
 		if (req) {
 			userAgent = req.get('user-agent');
 		}
-    	userAgentEncoded = console.log(encodeURIComponent(userAgent));
+    	userAgentEncoded = encodeURIComponent(userAgent);
     	console.log("Hitting SMAUG to know the platform");
-        http.get("http://api-v2.olx.com/devices/"+userAgentEncoded,function(response){
-	        	response.on('data', function (chunk) {
-	        		var obj = JSON.parse(chunk.toString());
-    				var isBrowserProp = obj["isBrowser"];
+        http.get("http://api-v2.olx.com/devices/"+userAgentEncoded,function(res){
+	        var output = '';
+
+            res.on('data', function (chunk) {
+                output += chunk;
+            });
+
+            res.on('end', function() {
+                var device = JSON.parse(output);
+                //console.log("Device "+JSON.stringify(device));
+                
+                if (device.web_platform == 'wap') {
+                    req.platform = "basic";
+                    global.platform = "basic";
+                }else{
                     req.platform = "enhanced";
                     global.platform = "enhanced";
-                    // req.platform = "basic";
-                    // global.platform = "basic";
-    				next();
-  				});
-            }).on('error', function(e) {
-                console.log("Got error: " + e.message);
+                }
+
+                next();
             });
+
+        }).on('error', function(e) {
+            console.log("Got error: " + e.message);
+        });
     }
 };
