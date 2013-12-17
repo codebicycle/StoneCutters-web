@@ -53,7 +53,8 @@ module.exports = function(grunt) {
         command: "forever stop index.js",
         options: {
           ignoreErrors: true
-       },
+        },
+      },
        'npm-install':{
         command: "cd /root/apps/arwen/ && npm install"
        }
@@ -184,13 +185,13 @@ module.exports = function(grunt) {
 
     //mocha
     mocha: { 
-          test: {
-            src: ['test/**/*.html'],
-            reporter: 'XUnit',
-            dest: './test/output/xunit.out',
-          },
-        }
-    });
+      test: {
+        src: ['test/**/*.html'],
+        reporter: 'XUnit',
+        dest: './test/output/xunit.out',
+      },
+    }
+  });
 
   //Loading NPM tasks.
   /*grunt.loadNpmTasks('grunt-contrib-uglify');
