@@ -47,15 +47,15 @@ module.exports = function(grunt) {
     },
     sshexec: {
       start:{
-        command: "cd /root/testFolder && forever start index.js" 
+        command: "cd /root/apps/arwen/ && forever start index.js" 
       },
       stop: {
         command: "forever stop index.js",
         options: {
           ignoreErrors: true
        },
-       npm-install:{
-        command: "cd /root/testFolder && npm install"
+       'npm-install':{
+        command: "cd /root/apps/arwen/ && npm install"
        }
     },  
 
@@ -167,7 +167,7 @@ module.exports = function(grunt) {
     stage: {
         options: {
             src: "./dist/",
-            dest: "./testFolder",
+            dest: "/root/apps/arwen/",
             host: "root@nodebox",
             syncDestIgnoreExcl: true
         }
