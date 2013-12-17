@@ -46,7 +46,7 @@ module.exports = function(grunt) {
       //}    
     },
     sshexec: {
-      start{
+      start:{
         command: "cd /root/testFolder && forever start index.js" 
       },
       stop: {
