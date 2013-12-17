@@ -1,4 +1,14 @@
 # Config settings for NODE_ENV=production
-
 server:
-  port: 80
+  port: 3030
+
+api:
+  default:
+    host: api-v2.olx.com
+    protocol: http
+  travis-ci:
+    host: api.travis-ci.org
+    protocol: https
+
+session:
+  secret: this should be some long random string

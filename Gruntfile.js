@@ -31,6 +31,38 @@ module.exports = function(grunt) {
       }
     },
 
+    sshconfig: {
+      testing: {
+        host: "nodebox",
+        port: 22,
+        username: "root",
+        agent: process.env.SSH_AUTH_SOCK,
+        privateKey: grunt.file.read("/home/dev/.ssh/id_rsa")
+      }
+    },
+    sshexec: {
+      start:{
+        command: "cd /root/apps/arwen/ && forever start index.js",
+        options:{
+          config: 'testing'
+        }
+      },
+      stop: {
+        command: "forever stop index.js",
+        options: {
+          config: 'testing', 
+          ignoreErrors: true
+        }
+      },
+       'npm-install':{
+        command: "cd /root/apps/arwen/ && npm install --verbose",
+        options: {
+          config: 'testing', 
+          ignoreErrors: true
+        }
+       }
+    },  
+
     //Stylus
     stylus: {
       compile: {
@@ -133,13 +165,13 @@ module.exports = function(grunt) {
     dist: {
         options: {
             src: "./",
-            dest: "../dist"
+            dest: "./dist"
         }
     },
     stage: {
         options: {
-            src: "../dist/",
-            dest: "./testFolder",
+            src: "./dist/",
+            dest: "/root/apps/arwen/",
             host: "root@nodebox",
             syncDestIgnoreExcl: true
         }
@@ -156,13 +188,13 @@ module.exports = function(grunt) {
 
     //mocha
     mocha: { 
-          test: {
-            src: ['test/**/*.html'],
-            reporter: 'XUnit',
-            dest: './test/output/xunit.out',
-          },
-        }
-    });
+      test: {
+        src: ['test/**/*.html'],
+        reporter: 'XUnit',
+        dest: './test/output/xunit.out',
+      },
+    }
+  });
 
   //Loading NPM tasks.
   /*grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -204,23 +236,22 @@ module.exports = function(grunt) {
   // grunt.registerTask('uglify', ['uglify']);
   // grunt.registerTask('jshint', ['jshint']);
   
+  //Testing task
   grunt.registerTask('unit-test', ['jshint', 'mocha']);
   
   //Compile tasks (dev-build, dist-build)
-  grunt.registerTask('dev-build', ['handlebars', 'rendr_stitch', 'stylus']);
-
+  grunt.registerTask('dev-build',  ['handlebars', 'rendr_stitch', 'stylus']);
   grunt.registerTask('dist-build', ['handlebars', 'rendr_stitch', 'stylus', 'uglify']);
 
   //Pipeline tasks
-  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync']);
+  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync', 'sshexec:npm-install'/*, 'sshexec:start'*/]);
 
   //Server tasks
   // Run the server and watch for file changes
   grunt.registerTask('server-dev', ['runNode', 'dev-build', 'watch']);
-
   // Run the server with build files
-  grunt.registerTask('server-dist', ['runNode', 'dist-build']);
+  //grunt.registerTask('server-dist', ['runNode', 'dist-build']);
 
   // Default task(s).
-  grunt.registerTask('default', ['compile']);
+  //grunt.registerTask('default', ['compile']);
 };
