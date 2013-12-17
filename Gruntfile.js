@@ -44,20 +44,20 @@ module.exports = function(grunt) {
       start:{
         command: "cd /root/apps/arwen/ && forever start index.js",
         options:{
-          config: testing
+          config: 'testing'
         }
       },
       stop: {
         command: "forever stop index.js",
         options: {
-          config: testing, 
+          config: 'testing', 
           ignoreErrors: true
         }
       },
        'npm-install':{
         command: "cd /root/apps/arwen/ && npm install --verbose",
         options: {
-          config: testing, 
+          config: 'testing', 
           ignoreErrors: true
         }
        }
