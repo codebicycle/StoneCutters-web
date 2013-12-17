@@ -35,7 +35,8 @@ module.exports = function(grunt) {
       testing: {
         host: "nodebox",
         port: 22,
-        username: "root", 
+        username: "root",
+        agent: process.env.SSH_AUTH_SOCK 
       }//,
       //staging: {
       //  host: "my.staging.server",
