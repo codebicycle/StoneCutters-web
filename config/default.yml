@@ -1,5 +1,4 @@
 # Default config
-
 server:
   port: 3030
 
