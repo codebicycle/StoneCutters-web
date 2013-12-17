@@ -56,11 +56,7 @@ module.exports = function(grunt) {
         },
       },
        'npm-install':{
-        command: "cd /root/apps/arwen/ && npm install",
-        options:{
-          verbose: true  
-        }
-
+        command: "cd /root/apps/arwen/ && npm install --verbose",
        }
     },  
 
