@@ -29,12 +29,12 @@ module.exports = function platformSelector(onoff) {
                 var device = JSON.parse(output);
                 //console.log("Device "+JSON.stringify(device));
                 
-                if (device.web_platform == 'wap') {
-                    req.platform = "basic";
-                    global.platform = "basic";
-                }else{
+                if (device.web_platform == 'html5') {
                     req.platform = "enhanced";
                     global.platform = "enhanced";
+                }else{
+                    req.platform = "basic";
+                    global.platform = "basic";
                 }
 
                 next();
