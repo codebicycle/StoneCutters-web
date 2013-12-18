@@ -42,13 +42,13 @@ module.exports = function(grunt) {
     },
     sshexec: {
       start:{
-        command: "cd /root/apps/arwen/ && forever start index.js",
+        command: "cd /root/apps/arwen/ && start arwen",
         options:{
           config: 'testing'
         }
       },
       stop: {
-        command: "forever stop index.js",
+        command: "cd /root/apps/arwen/ && stop arwen",
         options: {
           config: 'testing', 
           ignoreErrors: true
@@ -197,15 +197,8 @@ module.exports = function(grunt) {
   });
 
   //Loading NPM tasks.
-  /*grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-handlebars');
-  grunt.loadNpmTasks('grunt-rendr-stitch');
-
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-mocha');*/
+  /* Here we should load the NPM task but we are using a grunt task to do this.*/
+  /*grunt.loadNpmTasks('grunt task');*/
 
 
   //Register the tasks to Grunt.
@@ -244,7 +237,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-build', ['handlebars', 'rendr_stitch', 'stylus', 'uglify']);
 
   //Pipeline tasks
-  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync', 'sshexec:npm-install'/*, 'sshexec:start'*/]);
+  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync', 'sshexec:npm-install', 'sshexec:stop', 'sshexec:start']);
 
   //Server tasks
   // Run the server and watch for file changes
