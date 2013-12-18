@@ -175,15 +175,15 @@ module.exports = function(grunt) {
             host: "root@nodebox",
             syncDestIgnoreExcl: true
         }
-     }//,
-    // prod: {
-    //     options: {
-    //         src: "../dist/",
-    //         dest: "/var/www/site",
-    //         host: "user@live-host",
-    //         syncDestIgnoreExcl: true
-    //     }
-    //   }
+     },
+    prod: {
+         options: {
+             src: "./dist/",
+             dest: "/root/apps/arwen/",
+             host: "root@nodebox",
+             syncDestIgnoreExcl: true
+         }
+      }
     },
 
     //mocha
@@ -214,21 +214,6 @@ module.exports = function(grunt) {
     });
   });
 
-  // grunt.registerTask('deploy', function () {
-  //   grunt.util.spawn({
-  //     cmd: 'git push heroku master',
-  //     args: [],
-  //     opts: {
-  //       stdio: 'inherit'
-  //     }
-  //   }, function () {
-  //     grunt.fail.fatal(new Error("git error."));
-  //   });
-  // });
-  
-  // grunt.registerTask('uglify', ['uglify']);
-  // grunt.registerTask('jshint', ['jshint']);
-  
   //Testing task
   grunt.registerTask('unit-test', ['jshint', 'mocha']);
   
@@ -237,14 +222,13 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-build', ['handlebars', 'rendr_stitch', 'stylus', 'uglify']);
 
   //Pipeline tasks
-  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync', 'sshexec:npm-install', 'sshexec:stop', 'sshexec:start']);
+  //Here we compile and deploy the sourcecode.
+  grunt.registerTask('pipeline', ['unit-test', 'dist-build', 'rsync:dist', 'rsync:stage', 'sshexec:npm-install', 'sshexec:stop', 'sshexec:start']);
 
   //Server tasks
   // Run the server and watch for file changes
   grunt.registerTask('server-dev', ['runNode', 'dev-build', 'watch']);
-  // Run the server with build files
-  //grunt.registerTask('server-dist', ['runNode', 'dist-build']);
-
-  // Default task(s).
+  
+    // Default task(s).
   //grunt.registerTask('default', ['compile']);
 };
