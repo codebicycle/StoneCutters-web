@@ -12,7 +12,7 @@ module.exports = function fetchBaseData() {
       return;
     }
 
-    http.get("http://api-v2.olx.com/countries/www.olx.com.ar/categories",function(res){
+    http.get("http://api-v2.olx.com/countries/"+global.siteLocation+"/categories",function(res){
       var output = '';
 
       res.on('data', function (chunk) {
@@ -22,8 +22,9 @@ module.exports = function fetchBaseData() {
       res.on('end', function() {
           var obj = JSON.parse(output);
           //console.log("OBJ "+JSON.stringify(obj));
-          app.set('baseData', {"categories":obj});
-          req.updateSession('baseData', {"categories":obj});
+
+          app.set('baseData', {"categories":obj, "siteLocation":global.siteLocation});
+          req.updateSession('baseData', {"categories":obj, "siteLocation":global.siteLocation});
 
           next();
       });

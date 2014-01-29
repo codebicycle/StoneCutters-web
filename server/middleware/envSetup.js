@@ -3,14 +3,20 @@ var http = require("http");
 
 
 /**
- * PlatformSelector middleware.
+ * envSetup middleware.
  * Here we call smaug in order to define which type of web we have to show.
+ * Also set up the site location (domain)
  */
-module.exports = function platformSelector(onoff) {
+module.exports = function envSetup(onoff) {
     
     enabled = (onoff == 'on') ? true : false;
     
     return function(req, res, next) {
+
+        var host = req.get('host');
+        var siteLoc = host.substring(0,host.indexOf(":")).replace("m","www");
+
+        global.siteLocation = siteLoc;
 
 	    var userAgent = null;
 		if (req) {
