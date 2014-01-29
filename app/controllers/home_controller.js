@@ -9,11 +9,12 @@ module.exports = {
     var paramsLastVisited = {};
     _.extend(paramsLastVisited, params);
 
+    var siteLocation = this.app.get("baseData").siteLocation;
+
     //Setting up the photo filters.
     paramsWhatsNew.item_type = 'adsList';
-  	//TODO remove hardcoded location. Should come from local storage or cookie
-  	paramsWhatsNew.location = 'www.olx.com.ar';
-    params.location = 'www.olx.com.ar';
+    paramsWhatsNew.location = siteLocation;
+    params.location = siteLocation;
   	paramsWhatsNew['f.withPhotos'] = 'true';
     //TODO we have to implement a real last visited filter.
     //paramsLastVisited.item_type = 'adsList';
@@ -28,6 +29,7 @@ module.exports = {
 
     this.app.fetch(spec, function(err, result) {
       result.button_color = global.button_color;
+      result.siteLocation = siteLocation;
       result.whatsNewMetadata = result.whatsNewItems.models[0].get("metadata");
       result.whatsNewItems = result.whatsNewItems.models[0].get("data");
       result.firstItem = result.whatsNewItems[0];

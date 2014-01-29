@@ -11,7 +11,8 @@ module.exports = BaseView.extend({
         return _.extend({}, 
                         data, 
                         {
-                            categories: this.app.get('baseData').categories
+                            categories: this.app.get('baseData').categories,
+                            siteLocation: this.app.get('baseData').siteLocation
                         });
     },
 

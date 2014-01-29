@@ -3,7 +3,7 @@
     <ul>
         {{#each categories}}
             <li>
-                <a href="/items?categoryId={{id}}&location=www.olx.com.ar">{{trName}}</a>
+                <a href="/items?categoryId={{id}}&location={{../siteLocation}}">{{trName}}</a>
             </li>
         {{/each}}
     </ul>

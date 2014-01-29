@@ -2,7 +2,7 @@ var express = require('express');
 var rendr = require('rendr');
 
 var abSelector = require('./server/middleware/abSelector');
-var platformSelector = require('./server/middleware/platformSelector');
+var envSetup = require('./server/middleware/envSetup');
 
 var config = require('config');
 var mw = require('./server/middleware');
@@ -19,7 +19,7 @@ app.use(express.logger());
 app.use(express.bodyParser());
 
 
-app.use(mw.platformSelector("on"));
+app.use(mw.envSetup("on"));
 app.use(mw.abSelector("on"));
 app.use(mw.experimentNotificator("on"));
 

@@ -26,16 +26,14 @@ module.exports = BaseApp.extend({
      */
     this.templateAdapter.registerHelpers(handlebarsHelpers);
 
-    //set the platform in the templates
+    //set the platform in the layout template
     if (global.isServer) {
       this.req.app.locals({
         platform: global.platform,
-        siteLocation: "www.olx.com.ar"
       });
     }else{
       //This is the client side, so init platform with "enhanced"
       global.platform = "enhanced";
-      global.siteLocation = "www.olx.com.ar";
     }
 
   },

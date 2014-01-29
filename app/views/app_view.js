@@ -15,8 +15,10 @@ module.exports = BaseAppView.extend({
     	  $body.toggleClass('loading', loading);
     	}, this);
 
+    	var siteLoc = this.app.get("baseData").siteLocation;
+
     	jQuery('#search-bar').change(function(){
-          window.location = "search?location="+"www.olx.com.ar"+"&q=" + jQuery('#search-bar').val();
+          window.location = "search?location="+siteLoc+"&q=" + jQuery('#search-bar').val();
         });
   	},
 
