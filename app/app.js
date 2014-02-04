@@ -30,10 +30,12 @@ module.exports = BaseApp.extend({
     if (global.isServer) {
       this.req.app.locals({
         platform: global.platform,
+        template: global.template,
       });
     }else{
-      //This is the client side, so init platform with "enhanced"
-      global.platform = "enhanced";
+      //This is the client side, so init template with "enhanced"
+      global.template = "enhanced";
+      global.platform = "html5";
     }
 
   },

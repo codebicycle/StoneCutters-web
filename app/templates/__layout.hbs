@@ -1,9 +1,9 @@
-{{#eq platform "enhanced"}}
+{{#eq template "enhanced"}}
 	{{{partial "enhanced/partials/header"}}}
   {{view "left-panel/index"}}
 {{/eq}}
 
-{{#eq platform "basic"}}
+{{#eq template "basic"}}
   {{{partial "basic/partials/header"}}}
 {{/eq}}
 
@@ -11,21 +11,24 @@
   {{{body}}}
 </section>
 
-{{#eq platform "enhanced"}}
+{{#eq template "enhanced"}}
 	{{{partial "enhanced/partials/footer"}}}
 {{/eq}}
 
-{{#eq platform "basic"}}
+{{#eq template "basic"}}
   {{{partial "basic/partials/footer"}}}
 {{/eq}}
 
-<script src="/mergedAssets.js"></script>
-    <script>
-    (function() {
-      var App = window.App = new (require('app/app'))({{json appData}});
-      App.bootstrapData({{json bootstrappedData}});
-      App.start();
-    })();
-    </script>
+{{#eq platform "html5"}}
+  <script src="/mergedAssets.js"></script>
+  <script>
+  (function() {
+    var App = window.App = new (require('app/app'))({{json appData}});
+    App.bootstrapData({{json bootstrappedData}});
+    App.start();
+  })();
+  </script>
+{{/eq}}
+
 </body>
 </html>
