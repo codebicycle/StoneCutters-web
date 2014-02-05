@@ -53,7 +53,8 @@ var dataAdapterConfig = config.api;
  * Initialize our Rendr server.
  */
 var server = rendr.createServer({
-  dataAdapterConfig: dataAdapterConfig
+  dataAdapterConfig: dataAdapterConfig,
+  apiPath: 'http://api-v2.olx.com',
 });
 
 /**

@@ -6,7 +6,7 @@ module.exports = {
       items: {collection: 'Items', params: params}
     };
 
-    var platform = global.platform;
+    var platform = this.app.get("baseData").platform;
 
     //don't read from cache, because rendr caching expects an array response
     //with ids, and smaug returns an object with 'data' and 'metadata'
@@ -22,9 +22,9 @@ module.exports = {
       item: {model: 'Item', params: params}
     };
 
-    var platform = global.platform;
+    var platform = this.app.get("baseData").platform;
 
-    this.app.fetch(spec, function(err, result) {
+    this.app.fetch(spec, {"readFromCache": false}, function(err, result) {
       result.platform = platform;
       result.item = result.item.toJSON();
       callback(err, result);
