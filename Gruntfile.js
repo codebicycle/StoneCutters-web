@@ -37,7 +37,7 @@ module.exports = function(grunt) {
         port: 22,
         username: "root",
         agent: process.env.SSH_AUTH_SOCK,
-        privateKey: grunt.file.read("/home/dev/.ssh/id_rsa")
+        privateKey: grunt.file.read(grunt.file.readJSON('conf.json').auth) //"/home/dev/.ssh/id_rsa"
       }
     },
     sshexec: {
@@ -187,12 +187,26 @@ module.exports = function(grunt) {
     },
 
     //mocha
-    mocha: { 
+    //mocha: { 
+    //  test: {
+    //    src: ['test/**/*.js'],
+    //    reporter: 'XUnit',
+    //    dest: './test/output/xunit.out',
+    //  },
+    //},
+    //mocha_phantomjs: {
+    //  all: ['test/**/*.html'],
+    //  reporter: 'XUnit',
+    //  dest: './test/output/xunit.out'
+    //}
+
+    mochaTest: {
       test: {
-        src: ['test/**/*.html'],
-        reporter: 'XUnit',
-        dest: './test/output/xunit.out',
-      },
+        options: {
+          reporter: 'spec'
+        },
+        src: ['test/**/*.js']
+      }
     }
   });
 
@@ -215,7 +229,7 @@ module.exports = function(grunt) {
   });
 
   //Testing task
-  grunt.registerTask('unit-test', ['jshint', 'mocha']);
+  grunt.registerTask('unit-test', ['jshint', 'mochaTest']);
   
   //Compile tasks (dev-build, dist-build)
   grunt.registerTask('dev-build',  ['handlebars', 'rendr_stitch', 'stylus']);
