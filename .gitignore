@@ -16,3 +16,5 @@ npm-debug.log
 config/runtime.json
 *.swp
 *.swo
+conf.json
+test/output
