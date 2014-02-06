@@ -7,6 +7,7 @@ var envSetup = require('./server/middleware/envSetup');
 var config = require('config');
 var mw = require('./server/middleware');
 
+var smaugAdapter = require('./server/data_adapter/smaug_adapter');
 
 var app = express();
 
@@ -49,12 +50,13 @@ app.use(express.session({
  */
 var dataAdapterConfig = config.api;
 
+var smaugAd = new smaugAdapter();
+
 /**
  * Initialize our Rendr server.
  */
 var server = rendr.createServer({
-  dataAdapterConfig: dataAdapterConfig,
-  apiPath: 'http://api-v2.olx.com',
+  dataAdapter: smaugAd
 });
 
 /**
