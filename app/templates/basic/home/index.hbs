@@ -1,32 +1,13 @@
-<div class="home-page"style="padding:0px;">
-
-<div style="text-align:center;">
-	<a href="/items/{{firstItem.id}}">
-		{{#if firstItem.thumbnail }}
-				<img src="{{firstItem.thumbnail}}" style="height:200px; width: 100%">
-		{{else}}
-				<div style="line-height:180px; height: 180px">{{firstItem.title}} - {{firstItem.price.displayPrice}}</div>
-		{{/if}}
-	</a>
-</div>
-
-<div id='categories.models'>
-  	<ul>
+<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+	<tbody>
 		{{#each categories.models}}
-			<li>
-				<a href="/items?categoryId={{id}}&location={{../siteLocation}}">{{attributes.trName}}</a>
-			</li>
+			<tr>
+				<td style="border-top: solid thin #808080;">
+					<a style="display: block;" href="/items?categoryId={{id}}&location={{../siteLocation}}">
+						<small style="display: block;"><img border="0" alt="" src="" />{{attributes.trName}}</small>
+					</a>
+				</td>
+			</tr>
 		{{/each}}
-	</ul>
-</div>
-
-"Testeando AB Testing en WAP"
-
-	{{#eq button_color.value "red"}}
-		<a href="/experiments/button_color/RED?url=/&client_id={{button_color.client_id}}">RED</a>
-	{{/eq}}
-
-	{{#eq button_color.value "blue"}}
-		<a href="/experiments/button_color/BLUE?url=/&client_id={{button_color.client_id}}">BLUE</a>
-	{{/eq}}
-</div>
+    </tbody>
+</table>
