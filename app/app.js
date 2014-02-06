@@ -27,13 +27,11 @@ module.exports = BaseApp.extend({
     this.templateAdapter.registerHelpers(handlebarsHelpers);
 
     //set the platform in the layout template
-    if (global.isServer) {
+    if (typeof global !== 'undefined') {
       this.req.app.locals({
         platform: global.platform,
+        template: global.template,
       });
-    }else{
-      //This is the client side, so init platform with "enhanced"
-      global.platform = "enhanced";
     }
 
   },
@@ -54,6 +52,16 @@ module.exports = BaseApp.extend({
 
     // Call 'super'.
     BaseApp.prototype.start.call(this);
+  },
+
+  /**
+   * Client-side only.
+   *
+   * This method also exists on shared/app.js, and is called by client/router.
+   * Override it here to specify your own app_view object.
+   */
+  getAppViewClass: function() {
+    return require('./views/app_view');
   }
 
 });

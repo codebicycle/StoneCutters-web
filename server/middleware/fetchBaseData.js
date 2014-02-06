@@ -5,7 +5,8 @@ module.exports = function fetchBaseData() {
     var app = req.rendrApp;
     var baseData = app.get('session').baseData;
 
-    if (baseData){
+    //we have to check the platform because it might have changed if the user agent changed
+    if (baseData && baseData.platform == global.platform){
       //still set the base data from ths session in case this is a deep link request
       app.set('baseData', baseData);
       next();
@@ -21,10 +22,9 @@ module.exports = function fetchBaseData() {
 
       res.on('end', function() {
           var obj = JSON.parse(output);
-          //console.log("OBJ "+JSON.stringify(obj));
 
-          app.set('baseData', {"categories":obj, "siteLocation":global.siteLocation});
-          req.updateSession('baseData', {"categories":obj, "siteLocation":global.siteLocation});
+          app.set('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template});
+          req.updateSession('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template});
 
           next();
       });

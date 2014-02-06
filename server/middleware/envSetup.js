@@ -33,15 +33,28 @@ module.exports = function envSetup(onoff) {
 
             res.on('end', function() {
                 var device = JSON.parse(output);
+                var template = "basic";
+                var platform = "wap";
+
                 //console.log("Device "+JSON.stringify(device));
-                
-                if (device.web_platform == 'html5') {
-                    req.platform = "enhanced";
-                    global.platform = "enhanced";
-                }else{
-                    req.platform = "basic";
-                    global.platform = "basic";
+
+                platform = device.web_platform;
+
+                switch(platform){
+                    case "html5": template = "enhanced";
+                    break;
+                    case "html4": template = "enhanced";
+                    break;
+                    case "wap": template = "basic";
+                    break;
+                    default: template = "basic";
+                    break;
                 }
+
+                req.platform = platform;
+                global.platform = platform;
+                req.template = template;
+                global.template = template;
 
                 next();
             });

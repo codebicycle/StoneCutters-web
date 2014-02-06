@@ -10,6 +10,7 @@ module.exports = {
     _.extend(paramsLastVisited, params);
 
     var siteLocation = this.app.get("baseData").siteLocation;
+    var platform = this.app.get("baseData").platform;
 
     //Setting up the photo filters.
     paramsWhatsNew.item_type = 'adsList';
@@ -28,8 +29,12 @@ module.exports = {
     };
 
     this.app.fetch(spec, function(err, result) {
-      result.button_color = global.button_color;
+      //TODO global is not defined in the client anymore
+      //You can use this.app.get("baseData").button_color if defined in 
+      //the fetchBaseData middleware
+      //result.button_color = global.button_color;
       result.siteLocation = siteLocation;
+      result.platform = platform;
       result.whatsNewMetadata = result.whatsNewItems.models[0].get("metadata");
       result.whatsNewItems = result.whatsNewItems.models[0].get("data");
       result.firstItem = result.whatsNewItems[0];
