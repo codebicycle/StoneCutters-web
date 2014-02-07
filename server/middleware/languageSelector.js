@@ -56,6 +56,7 @@ module.exports = function languageSelector() {
 
                     response.on('end', function() {
                         global.currentDictionary = JSON.parse(output);
+                        next();
                     });
                 }).on('error', function(e){
                     console.log("Got error: " + e.message);
@@ -65,8 +66,6 @@ module.exports = function languageSelector() {
                 req.selectedLanguage = selectedLanguage;
                 global.languages = languages;
                 req.languages = languages;
-                
-                next();
             });
         }).on('error', function(e) {
             console.log("Got error: " + e.message);
