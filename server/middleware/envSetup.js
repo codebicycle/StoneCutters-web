@@ -1,4 +1,3 @@
-var enabled = true;
 var http = require("http");
 
 
@@ -7,10 +6,9 @@ var http = require("http");
  * Here we call smaug in order to define which type of web we have to show.
  * Also set up the site location (domain)
  */
-module.exports = function envSetup(onoff) {
+module.exports = function envSetup() {
     
-    enabled = (onoff == 'on') ? true : false;
-    
+   
     return function(req, res, next) {
 
         var host = req.get('host');

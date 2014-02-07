@@ -1,15 +1,13 @@
 var _ = require('underscore');
 var sixpack = require('../../app/lib/sixpack');
-var enabled;
 
 /**
  * Experiment Notificator middleware.
  * Here we call sixpack server in order to tell it that a convertion has to be made.
  */
-module.exports = function experimentNotificator(onoff) {
+module.exports = function experimentNotificator() {
 	var myClientId = sixpack.generate_client_id();
     var session = new sixpack.Session(myClientId);
-    enabled = (onoff == 'on') ? true : false;
 
     return function(req, res, next) {
         var req_path = req._parsedUrl.pathname.split("/");

@@ -20,9 +20,10 @@ app.use(express.logger());
 app.use(express.bodyParser());
 
 
-app.use(mw.envSetup("on"));
-app.use(mw.abSelector("on"));
-app.use(mw.experimentNotificator("on"));
+app.use(mw.envSetup());
+//app.use(mw.languageSelector());//We must wait that smaug implement this called.
+app.use(mw.abSelector());
+app.use(mw.experimentNotificator());
 
 /**
  * The 'cookieParser' middleware is required for sessions.

@@ -1,16 +1,14 @@
 var sixpack = require('../../app/lib/sixpack')();
 var experiments = require('../../app/experiments')();
-var enabled;
 
 
 /**
  * AB Testing middleware.
  * Here we call sixpack server in order to define which template we have to show.
  */
-module.exports = function(onoff) {
+module.exports = function() {
     var myClientId = sixpack.generate_client_id();
     var session = new sixpack.Session(myClientId);
-    enabled = (onoff == 'on') ? true : false;
 
     return function(req, res, next) {
         var experimentsAmount = 0;
