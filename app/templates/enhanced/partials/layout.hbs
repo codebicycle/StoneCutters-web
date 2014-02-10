@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<head>
+	    <title>Arwen ENHANCED Layout</title>
+	    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable: no" />
+	</head>
+	<body>
+		
+		{{{partial "enhanced/partials/header"}}}
+  		{{view "left-panel/index"}}
+  		<section id="content" class="container">
+		  {{{body}}}
+		</section>
+		{{{partial "enhanced/partials/footer"}}}
+
+
+		<script src="/mergedAssets.js"></script>
+		<script>
+			(function() {
+				var App = window.App = new (require('app/app'))({{json appData}});
+				App.bootstrapData({{json bootstrappedData}});
+				App.start();
+			})();
+		</script>
+	</body>
+</html>
