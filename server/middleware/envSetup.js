@@ -8,17 +8,39 @@ var http = require("http");
  */
 module.exports = function envSetup() {
     
-   
-    return function(req, res, next) {
-
+    var urlVarsSetup = function (req){
         var host = req.headers.host;
+        var path = req._parsedUrl.pathname;
+        var url = req.originalUrl;
+
         var index = host.indexOf(":");
         var siteLoc = index == -1? host: host.substring(0,index);
         siteLoc = siteLoc.replace("m","www");
 
         console.log("<DEBUG CONSOLE LOG> Extracting location ID from host header:" + siteLoc);
+        var viewType = 'unknown';
+
+        switch(path){
+            case '/': viewType = 'home';
+            break;
+            case '/items': viewType = 'listing';
+            break;
+            //emulate /items/* match
+            case '/items/'+ path.slice('/items/'.length): viewType = 'itemPage';
+            break;
+            default: viewType = 'unknown';
+            break;
+        }
 
         global.siteLocation = siteLoc;
+        global.path = path;
+        global.url = url;
+        global.viewType = viewType;
+    };
+   
+    return function(req, res, next) {
+
+        urlVarsSetup(req);
 
 	    var userAgent = null;
 		if (req) {
