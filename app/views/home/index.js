@@ -1,7 +1,7 @@
 var BaseView = require('../base');
 var _ = require('underscore');
-var fitText = require('../../helpers/fitText_helper');
-var timeAgo = require('../../helpers/timeAgo_helper');
+var fitText = require('../../helpers/fit_text_helper');
+var timeAgo = require('../../helpers/time_ago_helper');
 
 if (typeof window != 'undefined') {
 	var Swipe = require('../../lib/swiper');
