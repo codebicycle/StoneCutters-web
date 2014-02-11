@@ -22,9 +22,34 @@ module.exports = function fetchBaseData() {
 
       res.on('end', function() {
           var obj = JSON.parse(output);
+          
+          var categories = {
+            "models": obj,
+            "_byId": {}
+          };
 
-          app.set('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template, "path":global.path, "url":global.url, "viewType":global.viewType});
-          req.updateSession('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template, "path":global.path, "url":global.url, "viewType":global.viewType});
+          obj.forEach(function(category) {
+            categories._byId[category.id] = category;
+          });
+
+          app.set('baseData', {
+            "categories": categories,
+            "siteLocation": global.siteLocation,
+            "platform": global.platform,
+            "template": global.template,
+            "path":global.path, 
+            "url":global.url, 
+            "viewType":global.viewType
+          });
+          req.updateSession('baseData', {
+            "categories": categories,
+            "siteLocation": global.siteLocation,
+            "platform": global.platform,
+            "template": global.template,
+            "path":global.path, 
+            "url":global.url, 
+            "viewType":global.viewType
+          });
 
           next();
       });

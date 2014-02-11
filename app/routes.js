@@ -9,6 +9,7 @@ module.exports = function(match) {
   match('search',          'items#search');
   match('search?*params',         'items#search');
   
-  //match('categories/:id?*params',	'categories#show');
+  match('categories/:id?*params',	'categories#show');
+  match('categories/:id',	'categories#show');
   match('items/:id',				      'items#show');
 };

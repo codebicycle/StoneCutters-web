@@ -1,9 +1,17 @@
-<h1>Categories</h1>
+<h1>{{category.name}}</h1>
 
-<ul>
-{{#each models}}
-  <li>
-  	<a href="/items?categoryId={{id}}&location={{../params.location}}">{{trName}}</a>
-  </li>
-{{/each}}
-</ul>
+<div class="row-fluid font-format">
+	<div class="span6 celd-format" >
+		<section style="padding-bottom:0px;">
+			<div id='subcategories.models'>
+			  	<ul>
+					{{#each category.children}}
+ 						<li>
+							<a href="/items?categoryId={{id}}&location={{../params.location}}">{{trName}}</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+		</section>
+	</div>
+</div>
