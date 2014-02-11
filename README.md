@@ -14,6 +14,27 @@ ARWEN is the new Olx's web application, which is being built using the latest we
 
 Details of the latest version can be found on the Project's Github Wiki.
 
+##  Starting up
+
+Congratulations soldier in shiny armour! you have been one of the chosen to insert source code in this beloved app. Please follow carefully the following steps to be enter in this mighty world.
+
+*Download and install the last version of NodeJS from http://nodejs.org/ (follow the instructions inside the Readme file.)
+
+*Clone Arwen repo using the following URL: git@github.com:olx-inc/arwen.git 
+
+*Go into the ARWEN folder and run the following command to install Grunt.
+
+sudo npm install -g grunt-cli
+
+*Download and install the node modules running:
+
+sudo npm install
+
+*Run ARWEN and enjoy it magic running:
+
+sudo grunt server-dev
+
+
 ##  Documentation
 
 The most up-to-date documentation can be found at https://github.com/olx-inc/arwen/wiki
