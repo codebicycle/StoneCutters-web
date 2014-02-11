@@ -33,7 +33,7 @@
 						{{#each categories.models}}
 							{{#gte @index 6}}
 	 						<li>
-								<a href="/items?categoryId={{id}}&location={{../../siteLocation}}">{{attributes.trName}}</a>
+								<a href="/categories/{{id}}?location={{../../siteLocation}}">{{trName}}</a>
 							</li>
 							{{/gte}}
 						{{/each}}
@@ -50,7 +50,7 @@
 						{{#each categories.models}}
 							{{#lt @index 6}}
 								<li>
-									<a href="/items?categoryId={{id}}&location={{../../siteLocation}}">{{attributes.trName}}</a>
+									<a href="/categories/{{id}}?location={{../../siteLocation}}">{{trName}}</a>
 								</li>
 							{{/lt}}
 						{{/each}}

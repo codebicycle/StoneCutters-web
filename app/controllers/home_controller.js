@@ -11,6 +11,7 @@ module.exports = {
 
     var siteLocation = this.app.get("baseData").siteLocation;
     var platform = this.app.get("baseData").platform;
+    var categories = this.app.get("baseData").categories;
 
     //Setting up the photo filters.
     paramsWhatsNew.item_type = 'adsList';
@@ -24,7 +25,7 @@ module.exports = {
 
     var spec = {
       whatsNewItems: {collection: 'Items', params: paramsWhatsNew},
-      categories: {collection: 'Categories', params: params}
+      //categories: {collection: 'Categories', params: params}
       //lastVisitedCollection: {collection: 'Items', params: paramsLastVisited}
     };
 
@@ -33,6 +34,7 @@ module.exports = {
       //You can use this.app.get("baseData").button_color if defined in 
       //the fetchBaseData middleware
       //result.button_color = global.button_color;
+      result.categories = categories;
       result.siteLocation = siteLocation;
       result.platform = platform;
       result.whatsNewMetadata = result.whatsNewItems.models[0].get("metadata");

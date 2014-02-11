@@ -23,8 +23,27 @@ module.exports = function fetchBaseData() {
       res.on('end', function() {
           var obj = JSON.parse(output);
 
-          app.set('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template});
-          req.updateSession('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template});
+          var categories = {
+            "models": obj,
+            "_byId": {}
+          };
+
+          obj.forEach(function(category) {
+            categories._byId[category.id] = category;
+          });
+
+          app.set('baseData', {
+            "categories": categories,
+            "siteLocation": global.siteLocation,
+            "platform": global.platform,
+            "template": global.template
+          });
+          req.updateSession('baseData', {
+            "categories": categories,
+            "siteLocation": global.siteLocation,
+            "platform": global.platform,
+            "template": global.template
+          });
 
           next();
       });
