@@ -12,8 +12,11 @@ module.exports = function envSetup() {
     return function(req, res, next) {
 
         var host = req.headers.host;
-        console.log("<DEBUG CONSOLE LOG> " + host);
-        var siteLoc = host.substring(0,host.indexOf(":")).replace("m","www");
+        var index = host.indexOf(":");
+        var siteLoc = index == -1? host: host.substring(0,index);
+        siteLoc = siteLoc.replace("m","www");
+
+        console.log("<DEBUG CONSOLE LOG> Extracting location ID from host header:" + siteLoc);
 
         global.siteLocation = siteLoc;
 
