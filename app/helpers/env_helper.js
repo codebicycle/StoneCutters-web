@@ -8,7 +8,6 @@ module.exports = {
   	var location = window.location;
   	var url = location.href;
   	var path = location.pathname;
-  	console.log(window.location);
 
     var viewType = 'unknown';
 
