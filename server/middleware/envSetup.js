@@ -11,7 +11,8 @@ module.exports = function envSetup() {
    
     return function(req, res, next) {
 
-        var host = req.get('host');
+        var host = req.headers.host;
+        console.log("<DEBUG CONSOLE LOG> " + host);
         var siteLoc = host.substring(0,host.indexOf(":")).replace("m","www");
 
         global.siteLocation = siteLoc;
@@ -21,7 +22,7 @@ module.exports = function envSetup() {
 			userAgent = req.get('user-agent');
 		}
     	userAgentEncoded = encodeURIComponent(userAgent);
-    	console.log("Hitting SMAUG to know the platform");
+    	console.log("<DEBUG CONSOLE LOG> Hitting SMAUG to know the platform");
         http.get("http://api-v2.olx.com/devices/"+userAgentEncoded,function(res){
 	        var output = '';
 
