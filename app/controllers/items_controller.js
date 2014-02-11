@@ -1,3 +1,5 @@
+var EnvHelper = require('../helpers/env_helper');
+
 module.exports = {
   index: function(params, callback) {
     params.item_type = 'adsList';
@@ -7,6 +9,8 @@ module.exports = {
     };
 
     var platform = this.app.get("baseData").platform;
+
+    EnvHelper.setUrlVars(this.app);
 
     //don't read from cache, because rendr caching expects an array response
     //with ids, and smaug returns an object with 'data' and 'metadata'
@@ -24,6 +28,8 @@ module.exports = {
 
     var platform = this.app.get("baseData").platform;
 
+    EnvHelper.setUrlVars(this.app);
+
     this.app.fetch(spec, {"readFromCache": false}, function(err, result) {
       result.platform = platform;
       result.item = result.item.toJSON();
@@ -39,6 +45,9 @@ module.exports = {
     var spec = {
       items: {collection: 'Items', params: params}
     };
+
+    EnvHelper.setUrlVars(this.app);
+    
     //don't read from cache, because rendr caching expects an array response
     //with ids, and smaug returns an object with 'data' and 'metadata'
     this.app.fetch(spec, {"readFromCache": false}, function(err, result) {

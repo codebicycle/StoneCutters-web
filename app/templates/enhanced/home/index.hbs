@@ -1,78 +1,40 @@
-<div class="home-page"style="padding:0px;">
-
-	{{#eq platform "html5"}}
-	  <div class="row-fluid" class="">
-			<div class="span12">
-				<!--<section id="location" class="location">
-					<span>Buenos Aires</span>
-				</section>-->
-				<section class="whats-new">
-					<!--<h3>What's new</h3>-->
-					<div id='whats-new-slider' class='swipe'>
-					  <div class='swipe-wrap'>
-					  	{{#each whatsNewItems}}
-						  <div style="overflow:hidden; height:13rem">
-						    <a href="/items/{{id}}">
-						    <img src="{{thumbnail}}" style="width:100%; "></a><br>
-						    <a href="/items/{{id}}">{{title}} - {{price.displayPrice}}</a>
-						  </div>
-						{{/each}}
-					  </div>
-					</div>
-				</section>
-			</div>
-		</div>
-	{{/eq}}
-
-	Este es el valor de count: {{count}}
-	<div class="row-fluid font-format">
-		<div class="span6 celd-format" >
-			<section style="padding-bottom:0px;">
-				<div id='categories.models'>
-				  	<ul>
-						{{#each categories.models}}
-							{{#gte @index 6}}
-	 						<li>
-								<a href="/categories/{{id}}?location={{../../siteLocation}}">{{trName}}</a>
-							</li>
-							{{/gte}}
-						{{/each}}
-					</ul>
-				</div>
-			</section>
-		</div>
-			
-		
-		<div class="span6 celd-format">
-			<section>
-				<div id='categories'>
-				  	<ul>
-						{{#each categories.models}}
-							{{#lt @index 6}}
-								<li>
-									<a href="/categories/{{id}}?location={{../../siteLocation}}">{{trName}}</a>
-								</li>
-							{{/lt}}
-						{{/each}}
-					</ul>
-				</div>
-			</section>
-		</div>
-		
-		<!-- Last Visited -->
-		<!--<div class="span6">-->
-			<!--<section class="last-visited">-->
-				<!--<h3>Last visited</h3>-->
-				<!--<div id='last-visited-slider' class='swipe'>-->
-				  <!--<div class='swipe-wrap'>-->
-				  	<!--{{#each lastVisitedCollection.models.0.attributes.data}}-->
-					  <!--<div>-->
-					    <!--<a href="/items/{{id}}"><img src="{{thumbnail}}">{{title}} - {{price.displayPrice}}</a>-->
-					  <!--</div>-->
-					<!--{{/each}}-->
-				  <!--</div>-->
-				<!--</div>-->
-			<!--</section>-->
-		<!--</div>-->
+<section id="postAd">
+	<div>
+		<h1>Make <strong>easy money</strong> by selling stuff you no longer need!</h1>
+		<a href="/posting">Post an Ad</a>
 	</div>
-</div>
+</section>
+
+<section id="newAds">
+	<h2>New ads in Cape Town</h2>
+	<div class="swiper-containerAds">	
+		<div class="swiper-wrapper">
+			{{#each whatsNewItems}}
+				<div class="swiper-slide"> 
+					<div class="slide">
+			          <div style="background-image: url('{{thumbnail}}');"></div>
+			        </div>
+			        <div class="caption">7 min ago<br><span>{{price.displayPrice}}</span></div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</section>
+
+<section id="categories">
+	<h2>Popular Categories</h2>
+	<div class="swiper-containerCats">	
+		<div class="swiper-wrapper">
+			{{#each categories.models}}
+				<div class="swiper-slide"> 
+					<div class="slide">
+			          <div class="home-{{id}} color">
+			          	<span></span>
+			          	<p>{{trName}}</p>
+			          </div>
+			        </div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</section>
