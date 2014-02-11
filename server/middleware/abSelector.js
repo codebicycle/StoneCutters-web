@@ -12,7 +12,7 @@ module.exports = function() {
 
     return function(req, res, next) {
         var experimentsAmount = 0;
-        console.log("Loading all the expriments.");
+        console.log("<DEBUG CONSOLE LOG> Loading all the experiments.");
         var myExperiments = experiments;
         for (index = 0; index < experiments.length; index++) {
             var myIndex= index;
