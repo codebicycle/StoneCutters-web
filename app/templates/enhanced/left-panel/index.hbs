@@ -1,10 +1,20 @@
-<div id="left-panel" class="left-panel">
-    Categories: </br></br>
-    <ul>
-        {{#each categories}}
-            <li>
-                <a href="/items?categoryId={{id}}&location={{../siteLocation}}">{{trName}}</a>
-            </li>
-        {{/each}}
-    </ul>
-</div>
+<div id="overlay"></div>
+<nav>
+	<div>
+		<ul class="menu">
+			<li class="start"><a href="/">Inicio</a></li>
+			<li class="post"><a href="/">Publicá un aviso gratis</a></li>
+			<li class="myAds"><a href="/">Mis Avisos</a></li>
+			<li class="myFav"><a href="/">Favoritos</a></li>
+			<li class="login"><a href="/">Login</a></li>
+			<li class="settings"><a href="/">Settings</a></li>
+		</ul>
+		<ul class="categories">
+			<li class="title">CATEGORIAS</li>
+			{{#each categories}}
+				<li><a href="/items?categoryId={{id}}&location={{../siteLocation}}" class="home-{{id}}">{{trName}}</a></li>
+				
+			{{/each}}
+		</ul>
+	</div>
+</nav>

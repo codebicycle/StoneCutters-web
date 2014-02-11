@@ -1,18 +1,15 @@
 <!doctype html>
 <html>
 	<head>
-	    <title>Arwen ENHANCED Layout</title>
-	    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable: no" />
+	    {{{partial "enhanced/partials/head"}}}
 	</head>
 	<body>
 		
 		{{{partial "enhanced/partials/header"}}}
-  		{{view "left-panel/index"}}
-  		<section id="content" class="container">
-		  {{{body}}}
-		</section>
-		{{{partial "enhanced/partials/footer"}}}
-
+		<article id="homePage">
+	  		{{view "left-panel/index"}}
+			{{{body}}}
+		</article>
 
 		<script src="/mergedAssets.js"></script>
 		<script>

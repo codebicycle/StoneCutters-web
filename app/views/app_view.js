@@ -6,7 +6,8 @@ module.exports = BaseAppView.extend({
 	className: 'app_view_index_view',
 
 	events:{
-	   'click #toggle-panel': 'toggleLeftPanel',
+	   'click .navLeft': 'toggleLeftPanel',
+	   'click #overlay': 'toggleLeftPanel',
 	   'click #toggle-search': 'toggleSearch',
     },
 
@@ -20,13 +21,20 @@ module.exports = BaseAppView.extend({
     	jQuery('#search-bar').change(function(){
           window.location = "search?location="+siteLoc+"&q=" + jQuery('#search-bar').val();
         });
+
+
+        $('nav div').css('height' , ($(window).height() - $('header').height())+'px');
+
+		$( window ).resize(function() {
+		  $('nav div').css('height' , ($(window).height() - $('header').height())+'px');
+		});
   	},
 
   	toggleLeftPanel: function(e){
-        if(e)
-            e.preventDefault();
-        
-        $('body').toggleClass('left-panel-visible');
+        e.preventDefault();
+        $('article nav').toggleClass('open');
+        $('#overlay').fadeToggle();
+		$('body').toggleClass('noscroll');
     },
 
     toggleSearch: function(e){
