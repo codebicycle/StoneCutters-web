@@ -11,9 +11,8 @@
 		</ul>
 		<ul class="categories">
 			<li class="title">CATEGORIAS</li>
-			{{#each categories}}
+			{{#each categories.models}}
 				<li><a href="/items?categoryId={{id}}&location={{../siteLocation}}" class="home-{{id}}">{{trName}}</a></li>
-				
 			{{/each}}
 		</ul>
 	</div>
