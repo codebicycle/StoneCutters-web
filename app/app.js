@@ -31,6 +31,9 @@ module.exports = BaseApp.extend({
       this.req.app.locals({
         platform: global.platform,
         template: global.template,
+        path: global.path,
+        url: global.url,
+        viewType: global.viewType,
       });
     }
 

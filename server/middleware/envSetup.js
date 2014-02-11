@@ -8,13 +8,34 @@ var http = require("http");
  */
 module.exports = function envSetup() {
     
+    var urlVarsSetup = function (req){
+        var host = req.get('host');
+        var path = req._parsedUrl.pathname;
+        var url = req.originalUrl;
+        var siteLoc = host.substring(0,host.indexOf(":")).replace("m","www");
+        var viewType = 'unknown';
+
+        switch(path){
+            case '/': viewType = 'home';
+            break;
+            case '/items': viewType = 'listing';
+            break;
+            //emulate /items/* match
+            case '/items/'+ path.slice('/items/'.length): viewType = 'itemPage';
+            break;
+            default: viewType = 'unknown';
+            break;
+        }
+
+        global.siteLocation = siteLoc;
+        global.path = path;
+        global.url = url;
+        global.viewType = viewType;
+    };
    
     return function(req, res, next) {
 
-        var host = req.get('host');
-        var siteLoc = host.substring(0,host.indexOf(":")).replace("m","www");
-
-        global.siteLocation = siteLoc;
+        urlVarsSetup(req);
 
 	    var userAgent = null;
 		if (req) {

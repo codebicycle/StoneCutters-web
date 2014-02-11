@@ -23,8 +23,8 @@ module.exports = function fetchBaseData() {
       res.on('end', function() {
           var obj = JSON.parse(output);
 
-          app.set('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template});
-          req.updateSession('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template});
+          app.set('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template, "path":global.path, "url":global.url, "viewType":global.viewType});
+          req.updateSession('baseData', {"categories":obj, "siteLocation":global.siteLocation, "platform":global.platform, "template":global.template, "path":global.path, "url":global.url, "viewType":global.viewType});
 
           next();
       });

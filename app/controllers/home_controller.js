@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var EnvHelper = require('../helpers/env_helper');
 
 module.exports = {
   index: function(params, callback) {
@@ -8,6 +9,8 @@ module.exports = {
     
     var paramsLastVisited = {};
     _.extend(paramsLastVisited, params);
+
+    EnvHelper.setUrlVars(this.app);
 
     var siteLocation = this.app.get("baseData").siteLocation;
     var platform = this.app.get("baseData").platform;
@@ -38,6 +41,7 @@ module.exports = {
       result.whatsNewMetadata = result.whatsNewItems.models[0].get("metadata");
       result.whatsNewItems = result.whatsNewItems.models[0].get("data");
       result.firstItem = result.whatsNewItems[0];
+
       callback(err, result);
     });
   }
