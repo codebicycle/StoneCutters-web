@@ -10,12 +10,16 @@
 	<div class="swiper-containerAds">	
 		<div class="swiper-wrapper">
 			{{#each whatsNewItems}}
+				
 				<div class="swiper-slide"> 
-					<div class="slide">
-			          <div style="background-image: url('{{thumbnail}}');"></div>
-			        </div>
-			        <div class="caption">7 min ago<br><span>{{price.displayPrice}}</span></div>
+					<a href="items/{{id}}" >
+						<div class="slide">
+				        	<div style="background-image: url('{{thumbnail}}');"></div>
+				        </div>
+				        <div class="caption">7 min ago<br><span>{{price.displayPrice}}</span></div>
+				    </a>
 				</div>
+				
 			{{/each}}
 		</div>
 	</div>
@@ -27,12 +31,13 @@
 		<div class="swiper-wrapper">
 			{{#each categories.models}}
 				<div class="swiper-slide"> 
-					<div class="slide">
-			          <div class="home-{{id}} color">
-			          	<span></span>
-			          	<p>{{trName}}</p>
-			          </div>
-			        </div>
+					<a href="categories/{{id}}?location={{../siteLocation}}" >
+						<div class="slide">
+				          <div class="home-{{id}} color">
+				          	<p>{{trName}}</p>
+				          </div>
+				        </div>
+			        </a>
 				</div>
 			{{/each}}
 		</div>

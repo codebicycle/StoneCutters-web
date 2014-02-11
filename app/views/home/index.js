@@ -1,5 +1,6 @@
 var BaseView = require('../base');
 var _ = require('underscore');
+var fitText = require('../../helpers/fitText_helper');
 
 if (typeof window != 'undefined') {
 	var Swipe = require('../../lib/swiper');
@@ -21,7 +22,8 @@ module.exports = BaseView.extend({
 
     postRender: function(){
 
-        
+        fitText.fitText($('section#newAds .swiper-containerAds .caption') , .9 , { minFontSize: '9px', maxFontSize: '30px' });
+        fitText.fitText($('section#categories .swiper-containerCats .slide div p') , .7 , { minFontSize: '9px', maxFontSize: '30px' });       
 
         var swiperAds = $('.swiper-containerAds').swiper({
             mode:'horizontal',
