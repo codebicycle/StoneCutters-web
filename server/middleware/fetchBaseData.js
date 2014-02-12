@@ -74,7 +74,7 @@ module.exports = function fetchBaseData() {
       var categories = results[0];
       var location = results[1];
       location.topcities = results[2];
-      location.cities = results[2];
+      location.cities = results[2]; // TODO: Find a better way to get a particular city.
 
       app.set('baseData', {
         "categories": categories,

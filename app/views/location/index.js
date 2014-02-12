@@ -17,14 +17,6 @@ module.exports = BaseView.extend({
 
     postRender: function(){
 
-    },
-
-    events: {
-        "click .city": "changeCity"
-    },
-
-    changeCity: function() {
-        console.log("HOLA!!!");
     }
 });
 module.exports.id = 'location/index';
