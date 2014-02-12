@@ -1,7 +1,11 @@
-{{#eq template 'enhanced'}}
+{{#eq platform 'html5'}}
 	{{{partial 'enhanced/partials/layout'}}}
 {{/eq}}
 
-{{#eq template 'basic'}}
+{{#eq platform 'html4'}}
+  {{{partial 'standard/partials/layout'}}}
+{{/eq}}
+
+{{#eq platform 'wap'}}
   {{{partial 'basic/partials/layout'}}}
 {{/eq}}
