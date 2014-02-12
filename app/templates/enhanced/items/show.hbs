@@ -1,17 +1,27 @@
-{{#eq platform "html4"}}
-  HTML4!!!!!
-{{/eq}}
-
 {{#with item}}
-	<h2>{{title}}</h2>
-	<h3>{{price.displayPrice}}</h3>
+	
+<section id="itemPage">
+	<div class="swiper-containerItem">
+		<div class="swiper-wrapper">
+			{{#each images}}
+			  <div class="swiper-slide"> 
+					<div class="slide">
+			          <div style="background-image: url('{{url}}');"></div>
+			        </div>
+				</div>
+			{{/each}}
+		</div>
+		<div class="slidePagination"></div>
+	</div>
 
-	{{#each images}}
-	  <img src="{{url}}"></br></br>
-	{{/each}}
-	</br>
+	<h1>{{price.displayPrice}}</h1>
+	<div class="clear"></div>
+</section>
+
+	<!--h2>{{title}}</h2>
+	
 
 	{{{description}}}
 
-	<a href="/items?categoryId={{category.id}}&location={{../location}}&relatedAds={{id}}">Related Ads</a>
+	<a href="/items?categoryId={{category.id}}&location={{../location}}&relatedAds={{id}}">Related Ads</a-->
 {{/with}}
