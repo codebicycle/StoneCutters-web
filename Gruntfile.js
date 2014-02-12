@@ -1,5 +1,5 @@
 var path = require('path');
-var stylesheetsDir = 'assets/stylesheets';
+var stylesheetsDir = 'assets/css';
 var rendrDir = 'node_modules/rendr';
 var rendrHandlebarsDir = 'node_modules/rendr-handlebars';
 
@@ -71,7 +71,8 @@ module.exports = function(grunt) {
           'include css': true
         },
         files: {
-          'public/styles.css': stylesheetsDir + '/index.styl'
+          'public/css/html5/styles.css': stylesheetsDir + '/html5/index.styl',
+          'public/css/html4/styles.css': stylesheetsDir + '/html4/index.styl',
         }
       }
     },
