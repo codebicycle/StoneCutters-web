@@ -38,7 +38,7 @@ module.exports = BaseView.extend({
             slidesPerView: 3,
             preventLinks:false
         });
-        var swiperAds = $('.swiper-containerCats').swiper({
+        var swiperCats = $('.swiper-containerCats').swiper({
             mode:'horizontal',
             slidesPerView: 4,
             preventLinks:false,
