@@ -66,6 +66,8 @@ article nav.open{left: 0;}
         article nav ul.categories li.title{padding: 0.9rem 0 .6rem .5rem; font-family: helveticaNeueMed, Helvetica, Arial, sans-serif;}
             
             article nav ul li a{width: 100%; display: inline-block; padding: 0.9rem 0 .6rem 3.5rem; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+
 /*----Post An Ad----*/
 section#postAd{padding: .5rem;}
     section#postAd div{padding: .5rem 0; background: #532581 url('../images/iconsPattern.png') repeat; text-shadow: 0px 0px 19px rgba(0, 0, 0, 0.50); text-align: center; font-size: 1.4rem; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif;}
@@ -157,3 +159,9 @@ section#categories{margin: 0 0.5em; padding: 0.5em 0;}
     .home-859.color{background-color: #f36400;}
 .home-881{background-image: url('../images/icons/home-881.png');}
     .home-881.color{background-color: #f36400;}
+
+
+
+/*----Select SubCategory----*/
+article section > ul#subCategory li{padding: 0 1px;}
+article section > ul#subCategory li a{width: 100%; display: inline-block; padding: .75rem; border-bottom: 1px solid #ebebeb; color: #474747; font-size: 1.2rem; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
