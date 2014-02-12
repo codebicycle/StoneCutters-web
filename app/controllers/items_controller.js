@@ -27,11 +27,13 @@ module.exports = {
     };
 
     var platform = this.app.get("baseData").platform;
+    var siteLocation = this.app.get("baseData").siteLocation;
 
     EnvHelper.setUrlVars(this.app);
 
     this.app.fetch(spec, {"readFromCache": false}, function(err, result) {
       result.platform = platform;
+      result.location = siteLocation;
       result.item = result.item.toJSON();
       callback(err, result);
     });
