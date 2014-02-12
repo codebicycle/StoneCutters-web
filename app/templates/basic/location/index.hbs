@@ -1,0 +1,27 @@
+<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+    <tr>
+        <td style="border-top: solid thin #B0B0B0;">
+            <small>Type a city</small>
+            <form action="/location">
+                <input type="text" name="search">
+                <input type="submit" value="Search">
+            </form>
+        </td>
+    </tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+	<tr>
+		<td>
+			<strong style="display: block;">{{#if search }}Results{{else}}Popular Cities{{/if}}</strong>
+		</td>
+	</tr>
+	{{#each cities}}
+		<tr>
+			<td style="border-top: solid thin #808080;">
+				<a style="display: block;" href="/?cityId={{id}}">
+					<small style="display: block;"><img border="0" alt="" src="" />{{name}}</small>
+				</a>
+			</td>
+		</tr>
+	{{/each}}
+</table>

@@ -12,6 +12,12 @@ module.exports = {
 
     EnvHelper.setUrlVars(this.app);
 
+    if (params.cityId) {
+      var city = this.app.get("baseData").location.cities._byId[params.cityId];
+      this.app.get("baseData").siteLocation = city.url;
+      this.app.get("baseData").location.city = city;
+    }
+
     var siteLocation = this.app.get("baseData").siteLocation;
     var platform = this.app.get("baseData").platform;
     var categories = this.app.get("baseData").categories;
