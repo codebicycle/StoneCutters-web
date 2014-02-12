@@ -7,7 +7,6 @@ module.exports = BaseView.extend({
 
 	processItem: function(item){
 		var dateAg = timeAgo.timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second, 00));
-		console.log(dateAg);
 		item.date.since = dateAg;
 	},
 
