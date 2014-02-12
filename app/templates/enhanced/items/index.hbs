@@ -1,23 +1,19 @@
-<h1>Items</h1>
-{{#eq platform "html4"}}
-  HTML4!!!!!
-{{/eq}}
-<div class="row">
 {{#each items}}
-	{{#moduloIf @index 3}}
-		</div>
-		<div class="row">
-	{{/moduloIf}}
-	<div class="span4" style="height: 180px;text-align:center;margin-bottom:2em;border:2px solid;border-radius:10px;">
+	<section>	
 		<a href="/items/{{id}}">
-	
-	{{#if thumbnail }}
-			<img src="{{thumbnail}}" style="height: 176px;">
-	{{else}}
-			<div style="line-height:180px; height: 180px">{{title}} - {{price.displayPrice}}</div>
-	{{/if}}
-	
+			{{#if thumbnail }}
+		        <div class="image filled" style="background-image:url({{thumbnail}}); ?>);"></div>
+			{{else}}
+				<div class="image"></div>
+			{{/if}}
+			
+			<p>{{date.since}} in {{displayLocation}}</p>
+			<div class="title"><h2><span><span>{{title}}</span></span></h2></div>
+			{{#if price.displayPrice }}
+				<h3>{{price.displayPrice}}</h3>
+			{{/if}}
+
 		</a>
-	</div>
+	</section>
 {{/each}}
-</div>
+

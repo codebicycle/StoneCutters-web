@@ -36,8 +36,8 @@ a:focus {outline:0px;}
 
 /*----Generales----*/
 article{width: 100%; height: 100%; position: relative; overflow: hidden; padding: 0.5em;  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
-article section{height: auto; display: block; margin: 0 0 0.5em; background: #fff; box-shadow: 1px 1px 1px 0 #CCCCCC;}
-article section > h2{margin:0 0 0 .5rem;  font-size: 1.2rem; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif; color: #494949;}
+article section{height: auto; display: block; margin: 0 0 0.5em; background: #fff; box-shadow: 1px 1px 1px 0 #CCCCCC; color: #474747;}
+    article section > h2{margin:0 0 0 .5rem;  font-size: 1.2rem; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif; color: #494949;}
 /*----Header----*/
 header{width: 100%; height: 3rem; background: #fff; border-bottom: 1px solid #d1d1d1;}
 	header a.navLeft{width: .8rem; height: 2.5rem; float: left; margin: .25rem 0 0 0;}
@@ -165,3 +165,21 @@ section#categories{margin: 0 0.5em; padding: 0.5em 0;}
 /*----Select SubCategory----*/
 article section > ul#subCategory li{padding: 0 1px;}
 article section > ul#subCategory li a{width: 100%; display: inline-block; padding: .75rem; border-bottom: 1px solid #ebebeb; color: #474747; font-size: 1.2rem; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+article section > ul#subCategory li:last-child a{border: none;}
+/*----Item Listing----*/
+article section a{display: block; overflow: hidden; padding: 5px 6px 5px 5px;}
+article section a:hover {text-decoration: none;}
+article section a .image {float: left; width: 95px; height: 95px; margin-right: 5px; font-size: 0; line-height: 0; background-color: #FFF; box-shadow: inset 0 0 0 1px #EEE; background-image: url(/images/no-photos.png); background-repeat: no-repeat; background-position: center;}
+article section a .image.filled {background-size: cover;}
+article section a > p {overflow: hidden; height: 13px; padding-bottom: 10px; color: #666; font-size: 13px; line-height: 13px; text-overflow: ellipsis; white-space: nowrap;}
+article section a .title {overflow: hidden; height: 42px; font-size: 18px; line-height: 21px;}
+article section a .title h2 {display: table; table-layout: fixed; width: 100%; height: 42px; margin: 0; font-size: inherit; line-height: inherit; font-weight: normal;}
+article section a .title h2 > span {display: table-cell; vertical-align: middle; color: #494949;}
+article section a .title h2 > span span {display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;}
+article section a h3 {overflow: hidden; height: 20px; padding-top: 10px; color:#F70; text-align: right; font-size: 20px; line-height: 20px; font-weight: bold; text-overflow: ellipsis; white-space: nowrap;}
+
+
+
+
+
+
