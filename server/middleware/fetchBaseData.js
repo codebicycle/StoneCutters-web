@@ -1,4 +1,5 @@
 var http = require("http");
+var async = require("async");
 
 module.exports = function fetchBaseData() {
   return function fetchBaseData(req, res, next) {
@@ -13,50 +14,91 @@ module.exports = function fetchBaseData() {
       return;
     }
 
-    http.get("http://api-v2.olx.com/countries/"+global.siteLocation+"/categories",function(res){
-      var output = '';
+    function fetchBaseData(url, callback) {
+      http.get(url, function(res) {
+        var output = '';
 
-      res.on('data', function (chunk) {
+        res.on('data', function(chunk) {
           output += chunk;
+        }).on('error', function(e) {
+          console.log("Got error: " + e.message);
+          callback(e);
+        }).on('end', function() {
+          callback(null, JSON.parse(output));
+        });  
+      });
+    }
+
+    async.parallel([function(callback) {
+
+      fetchBaseData("http://api-v2.olx.com/countries/" + global.siteLocation + "/categories", function(err, results) {
+        if (err) {
+          return callback(err);
+        }
+
+        var categories = {
+          "models": results,
+          "_byId": {}
+        };
+        categories.models.forEach(function(category) {
+          categories._byId[category.id] = category;
+        });
+
+        callback(null, categories);
       });
 
-      res.on('end', function() {
-          var obj = JSON.parse(output);
-          
-          var categories = {
-            "models": obj,
-            "_byId": {}
-          };
+    }, function(callback) {
+      
+      fetchBaseData("http://api-v2.olx.com/locations/" + global.siteLocation, callback);
 
-          obj.forEach(function(category) {
-            categories._byId[category.id] = category;
-          });
+    }, function(callback) {
 
-          app.set('baseData', {
-            "categories": categories,
-            "siteLocation": global.siteLocation,
-            "platform": global.platform,
-            "template": global.template,
-            "path":global.path, 
-            "url":global.url, 
-            "viewType":global.viewType
-          });
-          req.updateSession('baseData', {
-            "categories": categories,
-            "siteLocation": global.siteLocation,
-            "platform": global.platform,
-            "template": global.template,
-            "path":global.path, 
-            "url":global.url, 
-            "viewType":global.viewType
-          });
+      fetchBaseData("http://api-v2.olx.com/countries/" + global.siteLocation + "/topcities", function(err, result) {
+        if (err) {
+          return callback(err);
+        }
 
-          next();
+        var topcities = {
+          "models": result.data,
+          "_byId": {},
+          "metadata": result.metadata
+        };
+        topcities.models.forEach(function(city) {
+          topcities._byId[city.id] = city;
+        });
+
+        callback(null, topcities);
       });
-            
-    }).on('error', function(e) {
-      console.log("Got error: " + e.message);
+
+    }], function(err, results) {
+      var categories = results[0];
+      var location = results[1];
+      location.topcities = results[2];
+      location.cities = results[2]; // TODO: Find a better way to get a particular city.
+
+      app.set('baseData', {
+        "categories": categories,
+        "siteLocation": global.siteLocation,
+        "location": location,
+        "platform": global.platform,
+        "template": global.template,
+        "path":global.path, 
+        "url":global.url, 
+        "viewType":global.viewType
+      });
+
+      req.updateSession('baseData', {
+        "categories": categories,
+        "siteLocation": global.siteLocation,
+        "location": location,
+        "platform": global.platform,
+        "template": global.template,
+        "path":global.path, 
+        "url":global.url, 
+        "viewType":global.viewType
+      });
+
+      next();
     });
-
   };
 };

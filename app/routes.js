@@ -1,4 +1,5 @@
 module.exports = function(match) {
+  match('?*params',           'home#index');
   match('',                   'home#index');
 
   match('categories',     'categories#index');
@@ -12,4 +13,6 @@ module.exports = function(match) {
   match('categories/:id?*params',	'categories#show');
   match('categories/:id',	'categories#show');
   match('items/:id',				      'items#show');
+
+  match('location',       'location#index');
 };
