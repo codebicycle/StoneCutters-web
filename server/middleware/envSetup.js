@@ -14,8 +14,19 @@ module.exports = function envSetup() {
         var url = req.originalUrl;
 
         var index = host.indexOf(":");
-        var siteLoc = index == -1? host: host.substring(0,index);
+        var siteLoc = (index == -1)? host: host.substring(0,index);
         siteLoc = siteLoc.replace("m","www");
+
+        //If I detect that is not a m.olx.com like URL I will set up arg location
+        //This is only for testing in Rackspace, must be removed in the near future.
+        var pointIndex = siteLoc.indexOf(".");
+        var firstWord = siteLoc.substring(0,pointIndex);
+        siteLoc = (firstWord == "www")? siteLoc : "www.olx.com.ar";
+        req.headers.host = siteLoc;
+        console.log("SITELOC-"+siteLoc);
+
+        //End Of Debug lines
+
 
         console.log("<DEBUG CONSOLE LOG> Extracting location ID from host header:" + siteLoc);
         var viewType = 'unknown';
