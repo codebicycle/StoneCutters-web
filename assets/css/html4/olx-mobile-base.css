@@ -47,7 +47,7 @@ div.analytics {
     width: 94px;
     height: 48px;
     text-indent: -9000px;
-    background: transparent url(/images/html4/logoMenu.png) no-repeat 0 0;
+    background: transparent url(../../images/logoMenu.png) no-repeat 0 0;
 }
 
 #header h1 a:focus {
@@ -105,13 +105,13 @@ div.analytics {
 }
 
 #header .sign-in.no-loged a {
-    background-image: url(/images/html4/ico-user-no-log.png);
+    background-image: url(../../images/ico-user-no-log.png);
 }
 #header .sign-in.loged a {
-    background-image: url(/images/html4/ico-user-log.png);
+    background-image: url(../../images/html4/ico-user-log.png);
 }
 #header .sign-in.loged-mes a {
-    background-image: url(/images/html4/ico-user-log-mes.png);
+    background-image: url(../../images/html4/ico-user-log-mes.png);
 }
 
 #header .register a {
@@ -256,7 +256,7 @@ div.analytics {
     margin: 0;
     padding: 2px;
     border: none;
-    background: #818080 url(/images/html4/lupa.png) no-repeat center center;
+    background: #818080 url(../../images/lupa.png) no-repeat center center;
     cursor: pointer;
     font-size: 1em;
     text-indent: -100em;
@@ -957,7 +957,7 @@ div.analytics {
 }
 
 #content.home .categories li {
-    border-bottom: 1px solid #CCC;
+    border-top: 1px solid #CCC;
     position: relative;
 }
 

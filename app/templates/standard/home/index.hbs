@@ -1,0 +1,12 @@
+<div class="home" id="content">
+    <ul class="categories parent-cat">
+    	{{#each categories.models}}
+			<li{{#eq @index 0}} class="border-none"{{/eq}}>
+				<a href="categories/{{id}}?location={{../siteLocation}}">
+					<img src="/images/icons/html4/{{id}}.png">
+					<span>{{trName}}</span> 
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+</div>
