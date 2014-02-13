@@ -24,7 +24,8 @@ module.exports = BaseView.extend({
         return _.extend({}, 
                         data, 
                         {
-                            count: this.app.get('session').count
+                            count: this.app.get('session').count,
+                            user: this.app.get('session').user
                         });   
     },
 
@@ -38,7 +39,7 @@ module.exports = BaseView.extend({
             slidesPerView: 3,
             preventLinks:false
         });
-        var swiperAds = $('.swiper-containerCats').swiper({
+        var swiperCats = $('.swiper-containerCats').swiper({
             mode:'horizontal',
             slidesPerView: 4,
             preventLinks:false,

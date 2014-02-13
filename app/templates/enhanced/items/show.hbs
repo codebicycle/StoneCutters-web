@@ -1,17 +1,68 @@
-{{#eq platform "html4"}}
-  HTML4!!!!!
-{{/eq}}
-
 {{#with item}}
-	<h2>{{title}}</h2>
-	<h3>{{price.displayPrice}}</h3>
+	
+<section id="itemPage">
+	<div class="swiper-containerItem">
+		<div class="swiper-wrapper">
+			{{#each images}}
+			  <div class="swiper-slide"> 
+					<div class="slide">
+			          <div style="background-image: url('{{url}}');"></div>
+			        </div>
+				</div>
+			{{/each}}
+		</div>
+		<div class="slidePagination"></div>
+	</div>
+	<span>{{location.cityName}}</span>
+	<h1>{{price.displayPrice}}</h1>
+	<p class="desc">{{{description}}}</p>
+	
+	<ul id="optionals">
+		{{#each optionals}}
+		<li>{{label}}: <strong>{{value}}</strong></li>
+		{{/each}}
+	</ul>
+	{{#if coordinates }}
+		<img style="width:100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{coordinates.latitude}},{{coordinates.longitude}} ?>&zoom=14&size=320x100&markers={{coordinates.latitude}},{{coordinates.longitude}}&sensor=false">
+	{{/if}}
 
-	{{#each images}}
-	  <img src="{{url}}"></br></br>
-	{{/each}}
-	</br>
 
-	{{{description}}}
+	<div class="clear"></div>
+</section>
 
-	<a href="/items?categoryId={{category.id}}&location={{../location}}&relatedAds={{id}}">Related Ads</a>
+<section id="actions">
+	<div class="background"></div>
+	<span>
+		{{#if user.username}}
+			{{#if phone}}
+				{{user.username}} : {{phone}}
+			{{else}}
+				{{user.username}}
+			{{/if}}
+		{{else}}
+			{{#if phone}}
+				{{phone}}
+			{{/if}}
+		{{/if}}
+	</span>
+	<div class="action call trackMe" data-tracking="itemPage-clickCall">
+		<a href="tel:<?php echo $item->phone; ?>" >
+			<span>Call</span>
+		</a>
+	</div>
+	<div class="action sms trackMe" data-tracking="itemPage-clickSms">
+		<a href="sms:<?php echo $item->phone; ?>" >
+			<span>SMS</span>
+		</a>
+	</div>
+	<div class="action email <?php if(empty($item->phone)){ echo 'fullWidth';} ?> trackMe" data-tracking="itemPage-clickEmail">
+		<div>
+			<span>EMAIL</span>
+		</div>
+	</div>
+	<div class="clear"></div>
+</section>
+
+
+	<!--a href="/items?categoryId={{category.id}}&location={{../location}}&relatedAds={{id}}">Related Ads</a-->
 {{/with}}

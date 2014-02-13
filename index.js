@@ -70,6 +70,8 @@ var server = rendr.createServer({
   */
 app.use(server);
 
+require('./server/router')(app, smaugAd);
+
 server.configure(function(rendrExpressApp) {
 
   /**
