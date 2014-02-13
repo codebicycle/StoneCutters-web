@@ -31,9 +31,6 @@ module.exports = BaseView.extend({
 
     postRender: function(){
 
-        fitText.fitText($('section#newAds .swiper-containerAds .caption') , .9 , { minFontSize: '9px', maxFontSize: '30px' });
-        fitText.fitText($('section#categories .swiper-containerCats .slide div p') , .7 , { minFontSize: '9px', maxFontSize: '30px' });    
-
         var swiperAds = $('.swiper-containerAds').swiper({
             mode:'horizontal',
             slidesPerView: 3,
@@ -45,7 +42,19 @@ module.exports = BaseView.extend({
             preventLinks:false,
         });
 
+        $(window).on("resize", this.resize).trigger("resize");
         
+    }, 
+
+    remove: function() {
+        $(window).off("resize", this.resize);
+        BaseView.prototype.remove.apply(this, arguments);
     },
+
+    resize: function() {
+        fitText.fitText($('section#newAds .swiper-containerAds .caption') , .9 , { minFontSize: '9px', maxFontSize: '30px' });
+        fitText.fitText($('section#categories .swiper-containerCats .slide div p') , .7 , { minFontSize: '9px', maxFontSize: '30px' });
+    }
+
 });
 module.exports.id = 'home/index';
