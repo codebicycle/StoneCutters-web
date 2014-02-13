@@ -37,7 +37,7 @@ module.exports = BaseView.extend({
 	resize: function() {
 		$('section#itemPage').css('margin-bottom' , ($('#actions').height()+20)+'px');
 
-		var paginationCount = $('.slidePagination span').length + 1;
+		var paginationCount = $('.slidePagination span').length + 2;
 		var windowSize = $(window).width();
 		var paginationWidth = windowSize / paginationCount;
 		var paginationMargin = paginationWidth / paginationCount;
