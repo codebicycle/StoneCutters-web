@@ -12,12 +12,11 @@ module.exports = BaseView.extend({
                         data, 
                         {
                             categories: this.app.get('baseData').categories,
-                            siteLocation: this.app.get('baseData').siteLocation
+                            siteLocation: this.app.get('baseData').siteLocation,
+                            user: this.app.get('session').user
                         });
     },
 
-    postRender: function(){
 
-    },
 });
 module.exports.id = 'left-panel/index';
