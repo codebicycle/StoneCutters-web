@@ -24,7 +24,8 @@ module.exports = BaseView.extend({
         return _.extend({}, 
                         data, 
                         {
-                            count: this.app.get('session').count
+                            count: this.app.get('session').count,
+                            user: this.app.get('session').user
                         });   
     },
 
