@@ -24,7 +24,6 @@ module.exports = BaseView.extend({
     	var data = BaseView.prototype.getTemplateData.call(this);
     	data.category_name = this.options.category_name;
     	data.item.location.cityName = data.item.location.children[0].children[0].name; 
-    	console.log(data.item.location.cityName);
     	return data;
   	},
 
