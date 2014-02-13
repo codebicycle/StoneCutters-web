@@ -6,5 +6,19 @@
 	<body>
 		HTML4
 		{{{partial 'standard/partials/header'}}}
+		<article>
+			<div id="content">
+				{{{body}}}
+			</div>
+		</article>
+
+		<script src="/mergedAssets.js"></script>
+		<script>
+			(function() {
+				var App = window.App = new (require('app/app'))({{json appData}});
+				App.bootstrapData({{json bootstrappedData}});
+				App.start();
+			})();
+		</script>
 	</body>
 </html>
