@@ -9,6 +9,7 @@ module.exports = BaseAppView.extend({
 	   'click .navLeft': 'toggleLeftPanel',
 	   'click #overlay': 'toggleLeftPanel',
 	   'click #toggle-search': 'toggleSearch',
+	   "click nav#leftPanel li a": "toggleLeftPanel"
     },
 
   	postInitialize: function() {

@@ -1,12 +1,16 @@
 <div id="overlay"></div>
-<nav>
+<nav id="leftPanel">
 	<div>
 		<ul class="menu">
 			<li class="start"><a href="/">Inicio</a></li>
 			<li class="post"><a href="/">Publicá un aviso gratis</a></li>
-			<li class="myAds"><a href="/">Mis Avisos</a></li>
-			<li class="myFav"><a href="/">Favoritos</a></li>
-			<li class="login"><a href="/">Login</a></li>
+			{{#if user}}
+				<li class="myAds"><a href="/">Mis Avisos</a></li>
+				<li class="myFav"><a href="/">Favoritos</a></li>
+				<li class="login"><a href="/login">Login</a></li>
+			{{else}}
+				<li class="login"><a href="/registration">Registration</a></li>
+			{{/if}}
 			<li class="settings"><a href="/">Settings</a></li>
 		</ul>
 		<ul class="categories">
