@@ -78,7 +78,7 @@ module.exports = function envSetup() {
                 switch(platform){
                     case "html5": template = "enhanced";
                     break;
-                    case "html4": template = "enhanced";
+                    case "html4": template = "standard";
                     break;
                     case "wap": template = "basic";
                     break;
