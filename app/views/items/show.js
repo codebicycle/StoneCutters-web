@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
   className: 'items_show_view',
 
 	paginationSize: function(){
-		var paginationCount = $('.slidePagination span').length + 1;
+		var paginationCount = $('.slidePagination span').length + 2;
 		var windowSize = $(window).width();
 		var paginationWidth = windowSize / paginationCount;
 		var paginationMargin = paginationWidth / paginationCount;
@@ -24,6 +24,9 @@ module.exports = BaseView.extend({
     	var data = BaseView.prototype.getTemplateData.call(this);
     	data.category_name = this.options.category_name;
     	data.item.location.cityName = data.item.location.children[0].children[0].name; 
+
+    	data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,"");
+    	console.log(data.item.description);
     	return data;
   	},
 
