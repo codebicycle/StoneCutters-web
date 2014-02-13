@@ -34,6 +34,7 @@ module.exports = BaseApp.extend({
         path: global.path,
         url: global.url,
         viewType: global.viewType,
+        siteLocation: global.siteLocation,
       });
     }
 

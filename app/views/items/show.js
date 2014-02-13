@@ -12,6 +12,7 @@ module.exports = BaseView.extend({
     	var data = BaseView.prototype.getTemplateData.call(this);
     	data.category_name = this.options.category_name;
     	data.item.location.cityName = data.item.location.children[0].children[0].name; 
+    	data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,"");
     	return data;
   	},
 

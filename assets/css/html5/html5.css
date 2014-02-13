@@ -190,18 +190,28 @@ section#itemPage{padding: 0 .5rem}
 .swiper-containerItem .slidePagination{width: 100%; height: auto;   display: block; margin: 0 0 0 0; text-align: center; line-height: 0; font-size: 0;}
 .swiper-containerItem .slidePagination span.swiper-pagination-switch{width: 48px;   height: 4px; background: #494949; display: inline-block;}
 .swiper-containerItem .slidePagination span.swiper-pagination-switch.swiper-active-switch{background: #ff7700;}
+
+div.noPicture{padding: .5rem 0; margin: 0 0 .5rem!important; background: #D1D1D1; color: #FFF;}
+div.noPicture p{float: left;}
+div.noPicture span{width: 20px; height: 15px; float: left; margin: .1em .5em 0 0; background: url('/images/html5/html5_sprite.png') -104px 0;}
+
+div.onePicture .slide{position: relative; width: 100%!important; margin: 0 0 .5rem 0;}
+div.onePicture .slide:before{content: ""; display: block; padding-top: 56.25%!important;}
+div.onePicture .slide div{position: absolute; top: 0; left: 0;  bottom: 0; right: 0; background-position: center center; background-repeat: no-repeat; background-size: cover; cursor: pointer;}
+
+
 section#itemPage h1{float: right; font-size: 1.5em; color: #FF7700; font-weight: normal;}
 section#itemPage > span{float: left; margin: .5em 0 0 0; font-size: .7em; color: #494949;}
 section#itemPage > p{width: 100%; float: left; margin: 0 0 1em 0; color: #666;}
 section#itemPage > p.title{font-size: 1.3em; margin: .4em 0;}
-section#itemPage > p.desc{font-size: .8em;}
+section#itemPage > p.desc{font-size: .8em; margin: 1em 0;}
 
 section#itemPage ul#optionals{float: left; color: #494949; font-size: .8em;}
 section#itemPage ul#optionals li{display: inline-block; margin: 0 .5em .5em 0}
 
 section#actions{width: 100%; margin: 0!important; position: fixed; left: 0; bottom: 0; background: #fff; z-index: 10; background: #fff;}
 section#actions .background{width: 5%; height: 100%; position: absolute; top: 0; right: 0; background: #FF7700; z-index: 1;}
-section#actions > span{width: 100%; height: 1.3em; display: block; position: absolute; top: -1.3em; padding: 0 0 0 .5em; background: #333; color: #fff; opacity: .85;  z-index: 10;}
+section#actions > span{width: 100%; height: 1.3em; display: block; position: absolute; top: -1.3em; padding: 0 0 0 .5em; background: #333; font-size: 1rem; line-height: 1.5rem; color: #fff; opacity: .85;  z-index: 10;}
 section#actions > span a[href^=tel] {color: #fff;}
 section#actions > div.action{position: relative; width: 33%!important; float: left; margin-right: .5%; cursor: pointer; z-index: 10;}
 section#actions > div.action.fullWidth{width: 100%!important;}
