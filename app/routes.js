@@ -15,6 +15,6 @@ module.exports = function(match) {
   match('items/:id',				      'items#show');
 
   match('location',       'location#index');
-
   match('registration',       'registration#index');
+  match('login',       'login#index');
 };
