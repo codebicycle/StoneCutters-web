@@ -6,7 +6,7 @@
 </section>
 
 <section id="newAds">
-	<h2>New ads in Cape Town</h2>
+	<h2>New ads in {{#if location.city }}{{location.city.name}}{{else}}{{location.name}}{{/if}}</h2>
 	<div class="swiper-containerAds">	
 		<div class="swiper-wrapper">
 			{{#each whatsNewItems}}
