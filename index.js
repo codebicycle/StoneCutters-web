@@ -21,7 +21,7 @@ app.use(express.bodyParser());
 
 
 app.use(mw.envSetup());
-//app.use(mw.languageSelector());//We must wait that smaug implement this called.
+//app.use(mw.languageSelector());//We must wait for smaug to implement this call.
 app.use(mw.abSelector());
 app.use(mw.experimentNotificator());
 
