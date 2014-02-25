@@ -7,7 +7,7 @@ var http = require("http");
  * Also set up the site location (domain)
  */
 module.exports = function envSetup() {
-    
+
     var urlVarsSetup = function (req){
         var host = req.headers.host;
         var path = req._parsedUrl.pathname;
@@ -48,7 +48,7 @@ module.exports = function envSetup() {
         global.url = url;
         global.viewType = viewType;
     };
-   
+
     return function(req, res, next) {
 
         urlVarsSetup(req);
@@ -74,7 +74,7 @@ module.exports = function envSetup() {
                 //console.log("Device "+JSON.stringify(device));
 
                 platform = device.web_platform;
-
+platform='html5';
                 switch(platform){
                     case "html5": template = "enhanced";
                     break;

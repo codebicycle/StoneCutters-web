@@ -1,13 +1,11 @@
-{{#with item}}
-	<h2>{{title}}</h2>
-	<h3>{{price.displayPrice}}</h3>
+<h2>{{item.title}}</h2>
+<h3>{{item.price.displayPrice}}</h3>
 
-	{{#each images}}
-	  <img src="{{url}}"></br></br>
-	{{/each}}
-	</br>
+{{#each item.images}}
+	<img src="{{url}}"></br></br>
+{{/each}}
+</br>
 
-	{{{description}}}
+{{{item.description}}}
 
-	<a href="/items?categoryId={{category.id}}&location={{../location}}&relatedAds={{id}}">Related Ads</a>
-{{/with}}
+<a href="/items?categoryId={{item.category.id}}&location={{location}}&relatedAds={{item.id}}">Related Ads</a>
