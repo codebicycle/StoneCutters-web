@@ -1,3 +1,5 @@
+'use strict';
+
 /**
 * This middleware allows accessing the session data from `req.rendrApp`.
 * This means that from either the client or server, you can access the session

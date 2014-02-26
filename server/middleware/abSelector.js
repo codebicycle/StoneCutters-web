@@ -1,3 +1,5 @@
+'use strict';
+
 var sixpack = require('../../app/lib/sixpack')();
 var experiments = require('../../app/experiments')();
 
@@ -20,6 +22,7 @@ module.exports = function() {
             var myIndex= index;
 
             session.participate(experiments[index].name, experiments[index].options, function callback(err, res) {
+                var alt;
                 if (err) {
                     throw err;
                 }

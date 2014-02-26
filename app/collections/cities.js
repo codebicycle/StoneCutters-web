@@ -1,3 +1,5 @@
+'use strict';
+
 var City = require('../models/city');
 var Base = require('./base');
 

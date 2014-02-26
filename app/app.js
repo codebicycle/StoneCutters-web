@@ -1,3 +1,5 @@
+'use strict';
+
 var BaseApp = require('rendr/shared/app');
 var handlebarsHelpers = require('./lib/handlebarsHelpers');
 

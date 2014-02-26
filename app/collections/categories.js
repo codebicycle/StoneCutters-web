@@ -1,3 +1,5 @@
+'use strict';
+
 var Category = require('../models/category')
 var Base = require('./base');
 

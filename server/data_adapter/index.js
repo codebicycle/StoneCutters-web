@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = DataAdapter;
 
 function DataAdapter(options) {

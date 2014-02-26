@@ -1,3 +1,5 @@
+'use strict';
+
 var http = require('http');
 
 /**
@@ -47,6 +49,7 @@ module.exports = function envSetup() {
 
     return function(req, res, next) {
         var userAgent = null;
+        var userAgentEncoded;
 
         urlVarsSetup(req);
         if (req) {

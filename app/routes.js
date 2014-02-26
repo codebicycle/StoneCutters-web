@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(match) {
     match('?*params', 'home#index');
     match('', 'home#index');
