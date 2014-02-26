@@ -26,7 +26,8 @@
     "debug": "*",
     "request": "~2.29",
     "grunt-ssh": "~0.9.1",
-    "grunt-mocha-test": "~0.9.0"
+    "grunt-mocha-test": "~0.9.0",
+    "asynquence": "~0.3.3-b"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
