@@ -5,7 +5,7 @@ module.exports = {
         EnvHelper.setUrlVars(this.app);
         var location = this.app.get('baseData').location;
         if (!params.search) {
-            var cities = location.topcities;
+            var cities = location.topCities;
             this.app.get('baseData').location.cities = cities;
             return callback(null, {
                 'location': location,
