@@ -1,10 +1,12 @@
+'use strict';
+
 var path = require('path');
 var stylesheetsDir = 'assets/css';
 var rendrDir = 'node_modules/rendr';
 var rendrHandlebarsDir = 'node_modules/rendr-handlebars';
 
 module.exports = function(grunt) {
-  
+
   require('load-grunt-tasks')(grunt);
 
   //var config = loadConfig('.grunt/config');
@@ -19,7 +21,7 @@ module.exports = function(grunt) {
     jshint:{
       all: ['*.js']
     },
-    
+
     // Uglify
     uglify: {
       options: {
@@ -56,14 +58,14 @@ module.exports = function(grunt) {
       stop: {
         command: "cd /root/apps/arwen/ && stop arwen",
         options: {
-          config: 'testing', 
+          config: 'testing',
           ignoreErrors: true
         }
       },
       'npm-install':{
         command: "cd /root/apps/arwen/ && npm install --verbose",
         options: {
-          config: 'testing', 
+          config: 'testing',
           ignoreErrors: true
         }
        }
@@ -223,7 +225,7 @@ module.exports = function(grunt) {
     },
 
     //mocha
-    //mocha: { 
+    //mocha: {
     //  test: {
     //    src: ['test/**/*.js'],
     //    reporter: 'XUnit',
@@ -280,6 +282,7 @@ module.exports = function(grunt) {
     grunt.task.requires('exec:anonymous_functions');
   });
   
+
   //Compile tasks (dev-build, dist-build)
   grunt.registerTask('dev-build',  ['handlebars', 'rendr_stitch', 'stylus']);
   grunt.registerTask('dist-build', ['clean','anonymous-finder','handlebars', 'rendr_stitch', 'stylus', 'uglify']);
@@ -293,5 +296,8 @@ module.exports = function(grunt) {
   grunt.registerTask('server-dev', ['clean','anonymous-finder','runNode', 'dev-build', 'watch']);
   
   // Default task(s).
+  //grunt.registerTask('server-dev', ['runNode', 'dev-build', 'watch']);
+
+    // Default task(s).
   //grunt.registerTask('default', ['compile']);
 };

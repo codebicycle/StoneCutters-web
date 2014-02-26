@@ -1,3 +1,5 @@
+'use strict';
+
 var Item = require('../models/item');
 var Base = require('./base');
 

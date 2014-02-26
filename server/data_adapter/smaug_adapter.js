@@ -1,3 +1,5 @@
+'use strict';
+
 var DataAdapter = require('./index');
 var utils = require('../utils');
 var _ = require('underscore');

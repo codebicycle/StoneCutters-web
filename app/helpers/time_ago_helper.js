@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     timeAgo: function(previous) {
         var current = new Date();

@@ -1,3 +1,5 @@
+'use strict';
+
 var EnvHelper = require('../helpers/env_helper');
 
 module.exports = {

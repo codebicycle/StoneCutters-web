@@ -1,3 +1,5 @@
+'use strict';
+
 var BaseView = require('../base');
 var _ = require('underscore');
 var timeAgo = require('../../helpers/time_ago_helper');
@@ -5,7 +7,7 @@ var timeAgo = require('../../helpers/time_ago_helper');
 module.exports = BaseView.extend({
     className: 'items_index_view',
     processItem: function(item) {
-        var dateAg = timeAgo.timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second, 00));
+        var dateAg = timeAgo.timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second));
         item.date.since = dateAg;
     },
     getTemplateData: function() {

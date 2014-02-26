@@ -1,3 +1,5 @@
+'use strict';
+
 var asynquence = require('asynquence');
 
 module.exports = function usersRouter(app, dataAdapter) {
