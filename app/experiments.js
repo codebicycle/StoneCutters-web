@@ -1,9 +1,6 @@
-
-module.exports = function() {
-  return [
-		{
-			name: "button_color", 
-			options:["red", "blue"]
-		}
-	];
+module.exports = function experiments() {
+    return [{
+        name: 'button_color',
+        options: ['red', 'blue']
+    }];
 };

@@ -1,6 +1,7 @@
 var Base = require('./base');
 
 module.exports = Base.extend({
-  idAttribute: 'id'
+    idAttribute: 'id'
 });
+
 module.exports.id = 'City';

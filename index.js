@@ -11,36 +11,27 @@ var smaugAdapter = require('./server/data_adapter/smaug_adapter');
 
 var app = express();
 
-/**
- * Initialize Express middleware stack.
- */
 app.use(express.compress());
 app.use(express.static(__dirname + '/public'));
 app.use(express.logger());
 app.use(express.bodyParser());
 
-
 app.use(mw.envSetup());
-//app.use(mw.languageSelector());//We must wait for smaug to implement this call.
 app.use(mw.abSelector());
 app.use(mw.experimentNotificator());
 
-/**
- * The 'cookieParser' middleware is required for sessions.
- */
+//We must wait that smaug implement this called.
+//app.use(mw.languageSelector());
+
 app.use(express.cookieParser());
-
-/**
- * Add session support. This will populate `req.session`.
- */
 app.use(express.session({
-  secret: config.session.secret,
+    secret: config.session.secret,
 
-  /**
-   * In production apps, you should probably use something like Redis or Memcached
-   * to store sessions. Look at the `connect-redis` or `connect-memcached` modules.
-   */
-  store: null
+    /**
+     * In production apps, you should probably use something like Redis or Memcached
+     * to store sessions. Look at the `connect-redis` or `connect-memcached` modules.
+     */
+    store: null
 }));
 
 /**
@@ -53,11 +44,8 @@ var dataAdapterConfig = config.api;
 
 var smaugAd = new smaugAdapter();
 
-/**
- * Initialize our Rendr server.
- */
 var server = rendr.createServer({
-  dataAdapter: smaugAd
+    dataAdapter: smaugAd
 });
 
 /**
@@ -74,41 +62,31 @@ require('./server/router')(app, smaugAd);
 
 server.configure(function(rendrExpressApp) {
 
-  /**
-   * Allow the Rendr app to access session data on client and server.
-   * Check out the source in the file `./server/middleware/initSession.js`.
-   */
-  rendrExpressApp.use(mw.initSession());
-
-  /**
-   * Increment a counter in the session on every page hit.
-   */
-  rendrExpressApp.use(mw.incrementCounter());
-
-  //fetch base app data like categories
-  rendrExpressApp.use(mw.fetchBaseData());
+    /**
+     * Allow the Rendr app to access session data on client and server.
+     * Check out the source in the file `./server/middleware/initSession.js`.
+     */
+    rendrExpressApp.use(mw.initSession());
+    rendrExpressApp.use(mw.incrementCounter());
+    rendrExpressApp.use(mw.fetchBaseData());
 });
 
-/**
- * Start the Express server.
- */
 function start(){
-  var port = process.env.PORT || 3030;
-  app.listen(port);
-  console.log("server pid %s listening on port %s in %s mode",
-    process.pid,
-    port,
-    app.get('env')
-  );
+    var port = process.env.PORT || 3030;
+    app.listen(port);
+    console.log("server pid %s listening on port %s in %s mode",
+        process.pid,
+        port,
+        app.get('env')
+    );
 }
-
 
 /**
  * Only start server if this script is executed, not if it's require()'d.
  * This makes it easier to run integration tests on ephemeral ports.
  */
 if (require.main === module) {
-  start();
+    start();
 }
 
 exports.app = app;

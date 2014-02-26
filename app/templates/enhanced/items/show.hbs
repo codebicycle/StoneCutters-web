@@ -1,20 +1,18 @@
-{{#with item}}
-	
 <section id="itemPage">
-	{{#if images}}
-		{{#ifC images.length '==' 1}}
+	{{#if item.images}}
+		{{#ifC item.images.length '==' 1}}
 			<div class="onePicture">
 				<div class="slide">
-		          <div style="background-image: url('{{images.0.url}}');"></div>
+		          <div style="background-image: url('{{item.images.0.url}}');"></div>
 		        </div>
 			</div>
 		{{else}}
 		<div class="swiper-containerItem">
 			<div class="swiper-wrapper">
-				{{#each images}}
+				{{#each item.images}}
 				  <div class="swiper-slide"> 
 						<div class="slide">
-				          <div style="background-image: url('{{url}}');"></div>
+				          <div style="background-image: url('{{item.url}}');"></div>
 				        </div>
 					</div>
 				{{/each}}
@@ -29,19 +27,18 @@
 			<div class="clear"></div>
 		</div>
 	{{/if}}
-	<span>{{location.cityName}}</span>
-	<h1>{{price.displayPrice}}</h1>
-	<p class="desc">{{{description}}}</p>
+	<span>{{item.location.cityName}}</span>
+	<h1>{{item.price.displayPrice}}</h1>
+	<p class="desc">{{{item.description}}}</p>
 	
 	<ul id="optionals">
-		{{#each optionals}}
-		<li>{{label}}: <strong>{{value}}</strong></li>
+		{{#each item.optionals}}
+			<li>{{label}}: <strong>{{value}}</strong></li>
 		{{/each}}
 	</ul>
-	{{#if coordinates }}
-		<img style="width:100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{coordinates.latitude}},{{coordinates.longitude}} ?>&zoom=14&size=320x100&markers={{coordinates.latitude}},{{coordinates.longitude}}&sensor=false">
+	{{#if item.coordinates }}
+		<img style="width:100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{item.coordinates.latitude}},{{item.coordinates.longitude}} ?>&zoom=14&size=320x100&markers={{item.coordinates.latitude}},{{item.coordinates.longitude}}&sensor=false">
 	{{/if}}
-
 
 	<div class="clear"></div>
 </section>
@@ -49,31 +46,31 @@
 <section id="actions">
 	<div class="background"></div>
 	<span>
-		{{#if user.username}}
+		{{#if item.user.username}}
 			{{#if phone}}
-				{{user.username}} : {{phone}}
+				{{item.user.username}} : {{phone}}
 			{{else}}
-				{{user.username}}
+				{{item.user.username}}
 			{{/if}}
 		{{else}}
-			{{#if phone}}
-				{{phone}}
+			{{#if item.phone}}
+				{{item.phone}}
 			{{/if}}
 		{{/if}}
 	</span>
-	{{#if phone}}
+	{{#if item.phone}}
 		<div class="action call trackMe" data-tracking="itemPage-clickCall">
-			<a href="tel:{{phone}}" >
+			<a href="tel:{{item.phone}}" >
 				<span>Call</span>
 			</a>
 		</div>
 		<div class="action sms trackMe" data-tracking="itemPage-clickSms">
-			<a href="sms:{{phone}}" >
+			<a href="sms:{{item.phone}}" >
 				<span>SMS</span>
 			</a>
 		</div>
 	{{/if}}
-	<div class="action email {{#unless phone}}fullWidth{{/unless}} trackMe" data-tracking="itemPage-clickEmail">
+	<div class="action email {{#unless item.phone}}fullWidth{{/unless}} trackMe" data-tracking="itemPage-clickEmail">
 		<div>
 			<span>EMAIL</span>
 		</div>
@@ -82,5 +79,4 @@
 </section>
 
 
-	<!--a href="/items?categoryId={{category.id}}&location={{../location}}&relatedAds={{id}}">Related Ads</a-->
-{{/with}}
+<!--a href="/items?categoryId={{item.category.id}}&location={{location}}&relatedAds={{item.id}}">Related Ads</a-->

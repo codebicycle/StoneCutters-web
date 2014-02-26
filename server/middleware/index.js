@@ -1,5 +1,5 @@
-var fs = require('fs')
-  , path = require('path');
+var fs = require('fs');
+var path = require('path');
 
 /**
  * This is a clever convenience for accessing our custom middleware functions.
@@ -10,10 +10,12 @@ var fs = require('fs')
  *
  * Inspired by the way Express/Connect loads middleware.
  */
-
 fs.readdirSync(__dirname).forEach(function(filename) {
-  var name = path.basename(filename, '.js');
-  if (name === 'index') return;
-  function load() { return require('./' + name); }
-  exports.__defineGetter__(name, load);
+    var name = path.basename(filename, '.js');
+    if (name === 'index') {
+        return;
+    }
+    exports.__defineGetter__(name, function load() {
+        return require('./' + name);
+    });
 });

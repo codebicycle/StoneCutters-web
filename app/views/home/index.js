@@ -4,34 +4,25 @@ var fitText = require('../../helpers/fit_text_helper');
 var timeAgo = require('../../helpers/time_ago_helper');
 
 if (typeof window != 'undefined') {
-	var Swipe = require('../../lib/swiper');
+    var Swipe = require('../../lib/swiper');
 };
 
 module.exports = BaseView.extend({
     className: 'home_index_view',
-
-    processItem: function(item){
+    processItem: function(item) {
         var dateAg = timeAgo.timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second, 00));
         item.date.since = dateAg;
     },
-
-    getTemplateData:function(){
-        // Get `super`.
+    getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        
-        _.each(data.whatsNewItems,this.processItem);
-
-        return _.extend({}, 
-                        data, 
-                        {
-                            count: this.app.get('session').count,
-                            user: this.app.get('session').user,
-                            location: this.app.get('baseData').location
-                        });   
+        _.each(data.whatsNewItems, this.processItem);
+        return _.extend({}, data, {
+            count: this.app.get('session').count,
+            user: this.app.get('session').user,
+            location: this.app.get('baseData').location
+        });
     },
-
     postRender: function(){
-
         var swiperAds = $('.swiper-containerAds').swiper({
             mode:'horizontal',
             slidesPerView: 3,
@@ -40,22 +31,18 @@ module.exports = BaseView.extend({
         var swiperCats = $('.swiper-containerCats').swiper({
             mode:'horizontal',
             slidesPerView: 4,
-            preventLinks:false,
+            preventLinks:false
         });
-
-        $(window).on("resize", this.resize).trigger("resize");
-        
-    }, 
-
+        $(window).on('resize', this.resize).trigger('resize');
+    },
     remove: function() {
-        $(window).off("resize", this.resize);
+        $(window).off('resize', this.resize);
         BaseView.prototype.remove.apply(this, arguments);
     },
-
     resize: function() {
         fitText.fitText($('section#newAds .swiper-containerAds .caption') , .9 , { minFontSize: '9px', maxFontSize: '30px' });
         fitText.fitText($('section#categories .swiper-containerCats .slide div p') , .7 , { minFontSize: '9px', maxFontSize: '30px' });
     }
-
 });
+
 module.exports.id = 'home/index';
