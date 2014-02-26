@@ -1,5 +1,5 @@
-var http = require("http");
-var ASQ = require("asynquence");
+var http = require('http');
+var asynquence = require('asynquence');
 
 /**
  * languageSelector middleware.
@@ -8,9 +8,9 @@ var ASQ = require("asynquence");
  */
 module.exports = function languageSelector() {
 
-    function getLanguages(done, siteLoc){
-        console.log("Hitting SMAUG to know the correct language");
-        http.get("http://api-v2.olx.com/countries/"+siteLoc+"/languages",function languageGetCallback(res){
+    function getLanguages(done, siteLoc) {
+        console.log('Hitting SMAUG to know the correct language');
+        http.get('http://api-v2.olx.com/countries/'+siteLoc+'/languages',function languageGetCallback(res) {
             var output = '';
 
             res.on('data', function languageDataCallback(chunk) {
@@ -20,8 +20,8 @@ module.exports = function languageSelector() {
             res.on('end', function languageEndCallback() {
                 var languages = JSON.parse(output);
                 var selectedLanguage = null;
-                
-                languages.forEach(function processLanguage(entry){
+
+                languages.forEach(function processLanguage(entry) {
                     if(entry.default == true){
                         selectedLanguage = entry;
                     }
@@ -34,13 +34,13 @@ module.exports = function languageSelector() {
 
                 done(selectedLanguage);
             });
-        }).on('error', function languageErrorCallback(e) {
-            done.fail("Got error: " + e.message);
+        }).on('error', function languageErrorCallback(error) {
+            done.fail('Got error: ' + error.message);
         });
     }
 
     function getDictionaries (done, selectedLanguage){
-        http.get("http://api-v2.olx.com/dictionaries/"+selectedLanguage.id,function dictionariesGetCallback(response){
+        http.get('http://api-v2.olx.com/dictionaries/' + selectedLanguage.id,function dictionariesGetCallback(response){
             var output = '';
 
             response.on('data', function dictionariesDataCallback(chunk) {
@@ -49,32 +49,34 @@ module.exports = function languageSelector() {
 
             response.on('end', function dictionariesEndCallback() {
                 global.currentDictionary = JSON.parse(output);
-
                 done();
             });
-        }).on('error', function dictionariesErrorCallback(e){
-            done.fail("Got error: " + e.message);
+        }).on('error', function dictionariesErrorCallback(error){
+            done.fail('Got error: ' + error.message);
         });
     }
 
     return function languageSelector(req, res, next) {
-
-        //Extract the url from the request.
         var host = req.get('host');
-        //Replace m for www in order to get the location id.
-        var siteLoc = host.substring(0,host.indexOf(":")).replace("m","www"); 
-        global.siteLocation = siteLoc; //Site location (location id)
+        var siteLoc = host.substring(0,host.indexOf(':')).replace('m','www');
+        global.siteLocation = siteLoc;
 
-        ASQ(function callGetLanguageCallback(done){
+        function callGetLanguageCallback(done) {
             getLanguages(done, siteLoc);
-        })
-        .then(getDictionary)
-        .then(function languageSelectorFinishCallback(){
+        }
+
+        function languageSelectorFinishCallback() {
             next();
-        })
-        .or(function languageSelectorErrorCallback(msg){
-            console.log("Failure: " + msg);
-        });
+        }
+
+        function languageSelectorErrorCallback(msg) {
+            console.log('Failure: ' + msg);
+        }
+
+        asynquence(callGetLanguageCallback)
+        .then(getDictionary)
+        .then(languageSelectorFinishCallback)
+        .or(languageSelectorErrorCallback);
 
     }
 };

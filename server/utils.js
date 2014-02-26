@@ -9,7 +9,8 @@ utils.isErrorStatus = function(statusCode, options) {
     statusCode = Number(statusCode);
     if (options.allow4xx) {
         return statusCode >= 500 && statusCode < 600;
-    } else {
+    }
+    else {
         return statusCode >= 400 && statusCode < 600;
     }
 };

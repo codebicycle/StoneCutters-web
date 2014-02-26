@@ -13,7 +13,7 @@ function SmaugAdapter(options) {
   _.defaults(this.options, {
         userAgent: 'Rendr SmaugAdapter; Node.js'
     });
-}
+};
 util.inherits(SmaugAdapter, DataAdapter);
 
 /**

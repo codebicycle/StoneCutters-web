@@ -1,152 +1,162 @@
-var ASQ = require("asynquence");
+var asynquence = require('asynquence');
 
 module.exports = function usersRouter(app, dataAdapter) {
-	var querystring = require("querystring");
-	var crypto = require("crypto");
+    var querystring = require('querystring');
+    var crypto = require('crypto');
 
-	app.post("/registration", registrationHandler);
-	app.post("/login", loginHandler);
+    app.post('/registration', registrationHandler);
+    app.post('/login', loginHandler);
 
-	function registrationHandler(req, res) {
-		var user = {
-			username: req.param("username", null),
-			email: req.param("email", null),
-			password: req.param("password", null),
-			location: req.rendrApp.get("baseData").siteLocation,
-			languageId: 10
-		}
+    function registrationHandler(req, res) {
+        var user = {
+            username: req.param('username', null),
+            email: req.param('email', null),
+            password: req.param('password', null),
+            location: req.rendrApp.get('baseData').siteLocation,
+            languageId: 10
+        };
 
-		ASQ(function callValidateUserCallback(done) {
-			validateUser(done, user);
-		})
-		.then(registerUser)
-		.then(function saveDataRegistrationCallback (done, user) {
-			saveData(req, res, user, done);
-		})
-		.then(function redirectRegistrationHomeCallback (done) {
-			res.redirect("/");
-		})
-		.or(function errorRegistrationCallback(err){
-	        console.log("Failure: " + err);
-	        res.redirect("/registration?" + querystring.stringify(err));
-	    });
+        function callValidateUserCallback(done) {
+            validateUser(done, user);
+        };
 
-		function validateUser(done, user) {
-			var errors = {
-				errCode: 400,
-				err: [],
-				errFields: []
-			}
-			if (!user.username) {
-				errors.err.push("Invalid username");
-				errors.errFields.push("username");
-			}
-			if (!user.email) {
-				errors.err.push("Invalid email");
-				errors.errFields.push("email");
-			}
-			if (!user.password) {
-				errors.err.push("Invalid password");
-				errors.errFields.push("password");
-			}
-			if (errors.err.length) {
-				done.fail(errors);
-				return;
-			}
-			done(user);
-		}
+        function saveDataRegistrationCallback(done, user) {
+            saveData(req, res, user, done);
+        };
 
-		function registerUser(done, user) {
-			var api = {
-				method: "POST",
-				body: user,
-				url: "/users"
-			}
+        function redirectRegistrationHomeCallback(done) {
+            res.redirect('/');
+        };
 
-			makeRequest(req, api, done, function requestDone (body) {
-				done(body);
-			});
-		}
+        function errorRegistrationCallback(err){
+            console.log('Failure: ' + err);
+            res.redirect('/registration?' + querystring.stringify(err));
+        };
 
-	}
+        function validateUser(done, user) {
+            var errors = {
+                errCode: 400,
+                err: [],
+                errFields: []
+            };
+            if (!user.username) {
+                errors.err.push('Invalid username');
+                errors.errFields.push('username');
+            }
+            if (!user.email) {
+                errors.err.push('Invalid email');
+                errors.errFields.push('email');
+            }
+            if (!user.password) {
+                errors.err.push('Invalid password');
+                errors.errFields.push('password');
+            }
+            if (errors.err.length) {
+                done.fail(errors);
+                return;
+            }
+            done(user);
+        }
 
-	function loginHandler(req, res) {
+        function registerUser(done, user) {
+            var api = {
+                method: 'POST',
+                body: user,
+                url: '/users'
+            };
 
-		var usernameOrEmail = req.param("usernameOrEmail", null);
-		var password = req.param("password", null);
+            makeRequest(req, api, done, function requestDone (body) {
+                done(body);
+            });
+        };
 
-		ASQ(function callGetChallengeCallback(done) {
-			getChallenge(done, usernameOrEmail);
-		})
-		.then(loginUser)
-		.then(function saveDataLoginCallback (done, user) {
-			saveData(req, res, user, done);
-		})
-		.then(function redirectLoginHomeCallback (done) {
-			res.redirect("/");
-		})
-		.or(function errorLoginCallback(err){
-	        console.log("Failure: " + err);
-	        res.redirect("/login?" + querystring.stringify(err));
-	    });
+        asynquence(callValidateUserCallback)
+        .then(registerUser)
+        .then(saveDataRegistrationCallback)
+        .then(redirectRegistrationHomeCallback)
+        .or(errorRegistrationCallback);
+    };
 
-		function getChallenge (done, usernameOrEmail) {
-			var api = {
-				body: {},
-				url: "/users/challenge?u=" + usernameOrEmail
-			}
+    function loginHandler(req, res) {
+        var usernameOrEmail = req.param('usernameOrEmail', null);
+        var password = req.param('password', null);
 
-			makeRequest(req, api, done, function challengeRequestDone (body) {
-				var hash = crypto.createHash("md5").update(password).digest("hex");
-				hash += usernameOrEmail;
-				hash = crypto.createHash("sha512").update(hash).digest("hex");
+        function callGetChallengeCallback(done) {
+            getChallenge(done, usernameOrEmail);
+        };
 
-				var credentials = {
-					c: body.challenge,
-					h: hash
-				}
+        function saveDataLoginCallback(done, user) {
+            saveData(req, res, user, done);
+        };
 
-				done(credentials);
-			});
-		}
+        function redirectLoginHomeCallback(done) {
+            res.redirect('/');
+        };
 
-		function loginUser (done, credentials) {
-			var api = {
-				body: {},
-				url: "/users/login?" + querystring.stringify(credentials)
-			}
+        function errorLoginCallback(err) {
+            console.log('Failure: ' + err);
+            res.redirect('/login?' + querystring.stringify(err));
+        };
 
-			makeRequest(req, api, done, function loginRequestDone (body) {
-				done(body);
-			});
-		}
+        function getChallenge(done, usernameOrEmail) {
+            var api = {
+                body: {},
+                url: '/users/challenge?u=' + usernameOrEmail
+            };
 
-	}
+            makeRequest(req, api, done, function challengeRequestDone (body) {
+                var hash = crypto.createHash('md5').update(password).digest('hex');
+                hash += usernameOrEmail;
+                hash = crypto.createHash('sha512').update(hash).digest('hex');
 
-	function makeRequest (req, api, done, requestDone) {
-		dataAdapter.request(req, api, function adapterRequestDone(err, response, body) {
-			if (err) {
-				var error = {
-					errCode: err.status,
-					err: []
-				}
-				body.forEach(function processError(err) {
-					error.err.push(err.message);
-				});
+                var credentials = {
+                    c: body.challenge,
+                    h: hash
+                };
 
-				done.fail(error);
-				return;
-			}
+                done(credentials);
+            });
+        };
 
-			requestDone(body);
-		});
-	}
+        function loginUser(done, credentials) {
+            var api = {
+                body: {},
+                url: '/users/login?' + querystring.stringify(credentials)
+            };
 
-	function saveData(req, res, user, done) {
-		app.set('user', user);
-	    req.updateSession('user', user);
+            makeRequest(req, api, done, function loginRequestDone (body) {
+                done(body);
+            });
+        };
 
-		done();
-	}
+        asynquence(callGetChallengeCallback)
+        .then(loginUser)
+        .then(saveDataLoginCallback)
+        .then(redirectLoginHomeCallback)
+        .or(errorLoginCallback);
+    };
+
+    function makeRequest(req, api, done, requestDone) {
+        dataAdapter.request(req, api, function adapterRequestDone(err, response, body) {
+            if (err) {
+                var error = {
+                    errCode: err.status,
+                    err: []
+                }
+                body.forEach(function processError(err) {
+                    error.err.push(err.message);
+                });
+                done.fail(error);
+                return;
+            }
+            requestDone(body);
+        });
+    };
+
+    function saveData(req, res, user, done) {
+        app.set('user', user);
+        req.updateSession('user', user);
+        done();
+    };
 
 };
