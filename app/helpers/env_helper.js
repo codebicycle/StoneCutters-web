@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     setUrlVars: function(app) {
         if (typeof window === 'undefined') {

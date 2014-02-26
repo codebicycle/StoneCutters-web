@@ -1,3 +1,5 @@
+'use strict';
+
 var BaseView = require('../base');
 var _ = require('underscore');
 

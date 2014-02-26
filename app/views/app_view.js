@@ -1,3 +1,5 @@
+'use strict';
+
 var BaseAppView = require('rendr/client/app_view');
 
 var $body = $('body');

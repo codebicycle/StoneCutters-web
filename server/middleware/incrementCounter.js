@@ -1,3 +1,5 @@
+'use strict';
+
 /**
   * This middleware demonstrates updating session data. Increment a counter
   * for every page hit. Test it out by executing `App.get('session')` in

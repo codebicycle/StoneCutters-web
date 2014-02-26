@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     fitText: function (element, kompressor, options){
         var compressor = kompressor || 1;
