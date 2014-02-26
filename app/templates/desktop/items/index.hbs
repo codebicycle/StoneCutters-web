@@ -1,0 +1,19 @@
+{{#each items}}
+	<section>	
+		<a href="/items/{{id}}">
+			{{#if thumbnail }}
+		        <div class="image filled" style="background-image:url({{thumbnail}}); ?>);"></div>
+			{{else}}
+				<div class="image"></div>
+			{{/if}}
+			
+			<p>{{date.since}} in {{displayLocation}}</p>
+			<div class="title"><h2><span><span>{{title}}</span></span></h2></div>
+			{{#if price.displayPrice }}
+				<h3>{{price.displayPrice}}</h3>
+			{{/if}}
+
+		</a>
+	</section>
+{{/each}}
+
