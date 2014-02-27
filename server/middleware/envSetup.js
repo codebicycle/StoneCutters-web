@@ -28,16 +28,19 @@ module.exports = function envSetup() {
         console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header:' + siteLoc);
         var viewType = 'unknown';
 
-        switch(path){
-            case '/': viewType = 'home';
+        switch(path) {
+            case '/':
+                viewType = 'home';
             break;
-            case '/items': viewType = 'listing';
+                case '/items': viewType = 'listing';
             break;
 
             //emulate /items/* match
-            case '/items/'+ path.slice('/items/'.length): viewType = 'itemPage';
+            case '/items/'+ path.slice('/items/'.length):
+                viewType = 'itemPage';
             break;
-            default: viewType = 'unknown';
+            default:
+                viewType = 'unknown';
             break;
         }
 
@@ -47,7 +50,7 @@ module.exports = function envSetup() {
         global.viewType = viewType;
     };
 
-    return function(req, res, next) {
+    return function envSetup(req, res, next) {
         var userAgent = null;
         var userAgentEncoded;
 
@@ -69,16 +72,27 @@ module.exports = function envSetup() {
                 var template = 'basic';
                 var platform = 'wap';
 
-                platform = device.web_platform;
-
+                if (device.isBrowser) {
+                    platform = 'desktop';
+                }
+                else {
+                    platform = device.web_platform;
+                }
                 switch(platform) {
-                    case 'html5': template = 'enhanced';
+                    case 'desktop':
+                        template = 'desktop';
                     break;
-                    case 'html4': template = 'standard';
+                    case 'html5':
+                        template = 'enhanced';
                     break;
-                    case 'wap': template = 'basic';
+                    case 'html4':
+                        template = 'standard';
                     break;
-                    default: template = 'basic';
+                    case 'wap':
+                        template = 'basic';
+                    break;
+                    default:
+                        template = 'basic';
                     break;
                 }
 
