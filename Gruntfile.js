@@ -273,7 +273,7 @@ module.exports = function(grunt) {
   grunt.registerTask('es6', ['traceur', 'exec:add_new_line']);
   
   //Testing task
-  grunt.registerTask('unit-test', ['jshint', 'mochaTest']);
+  grunt.registerTask('unit-test', [/*'jshint',*/ 'mochaTest']);
 
   
   //Search anonymous functions
