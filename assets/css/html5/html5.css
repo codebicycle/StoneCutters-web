@@ -164,7 +164,7 @@ section#categories{padding: 0.5em 0;}
 
 
 /*----Select SubCategory----*/
-article section > ul#subCategory li{padding: 0 1px;}
+article section > ul#subCategory li{padding: 0 1px; list-style: none;}
 article section > ul#subCategory li a{width: 100%; display: inline-block; padding: .75rem; border-bottom: 1px solid #ebebeb; color: #474747; font-size: 1.2rem; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
 article section > ul#subCategory li:last-child a{border: none;}
 /*----Item Listing----*/
@@ -225,3 +225,19 @@ section#actions > div.action.sms > a{background-image: url('../../images/sms.png
 section#actions > div.action.email > div{background-image: url('../../images/email.png');}
 section#actions > div.action > div span, section#actions > div.action > a span{width: 100%; position: absolute; left: 0; bottom: .1em; text-align: center; color: #fff; font-size: .8em;}
 
+/*----Desktop----*/
+@media only screen and (min-width : 1224px) {
+    .navLeft{display: none;}
+    article nav{float: left; position: relative; left: 0; width: 30%; overflow: hidden;}
+    article nav div{overflow: hidden; height: auto!important;}
+    #content{width: 65%; margin: 0 0 0 5%; float: left;}
+    #overlay{display: none!important;}
+    article section a .image{width: 250px; height: 250px;}
+    section#actions{width: 65%; right: 0; left: auto;}
+    section#actions > div.action:before{padding-top: 25% !important;}
+    section#actions > div.action.fullWidth:before{padding-top: 8% !important;}
+    section#actions > div.action > div, section#actions > div.action > a{background-size: 15% auto;}
+    section#actions > div.action.fullWidth > div{background-size: 5% auto;}
+    section#itemPage{overflow: hidden;}
+    .swiper-containerItem .slide:before{padding-top: 40% !important}
+}
