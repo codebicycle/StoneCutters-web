@@ -2,8 +2,8 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
-var fitText = require('../../helpers/fit_text_helper');
-var timeAgo = require('../../helpers/time_ago_helper');
+var fitText = require('../../helpers/fit_text_helper').fitText;
+var timeAgo = require('../../helpers/time_ago_helper').timeAgo;
 
 if (typeof window != 'undefined') {
     var Swipe = require('../../lib/swiper');
@@ -12,7 +12,7 @@ if (typeof window != 'undefined') {
 module.exports = BaseView.extend({
     className: 'home_index_view',
     processItem: function(item) {
-        var dateAg = timeAgo.timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second));
+        var dateAg = timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second));
         item.date.since = dateAg;
     },
     getTemplateData: function() {
@@ -42,8 +42,14 @@ module.exports = BaseView.extend({
         BaseView.prototype.remove.apply(this, arguments);
     },
     resize: function() {
-        fitText.fitText($('section#newAds .swiper-containerAds .caption') , .9 , { minFontSize: '9px', maxFontSize: '30px' });
-        fitText.fitText($('section#categories .swiper-containerCats .slide div p') , .7 , { minFontSize: '9px', maxFontSize: '30px' });
+        fitText($('section#newAds .swiper-containerAds .caption') , .9 , {
+            minFontSize: '9px',
+            maxFontSize: '30px'
+        });
+        fitText($('section#categories .swiper-containerCats .slide div p') , .7 , {
+            minFontSize: '9px',
+            maxFontSize: '30px'
+        });
     }
 });
 

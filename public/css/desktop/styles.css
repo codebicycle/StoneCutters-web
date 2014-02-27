@@ -47,61 +47,46 @@ section#newAds .swiper-containerAds, section#categories .swiper-containerCats , 
     .swiper-slide {float: left; position: relative;}
 
 /*----Header----*/
-header{width: 100%; height: 6rem; background: #fff; border-bottom: 1px solid #d1d1d1;}
+header{width: 100%; height: 6rem; background: #fff; border-bottom: 1px solid #d1d1d1;padding: 10px 10px 0px 10px;}
 	header a.navLeft{width: .8rem; height: 2.5rem; float: left; margin: .25rem 0 0 0;}
 		header a.navLeft span{width: 100%; height: .4rem; float: left; margin: .33rem 0 0 0; background: #666;}
-	header .olxLogo{width: 133px; height: 80px; float: left; margin: .5rem .5rem 0 .5rem; background: url('../../images/logoOlxBig.png');}
+	header .olxLogo{width: 133px; height: 80px; float: left; background: url('../../images/logoOlxBig.png');}
 	header h1{display: block; margin: 0; color: #666; line-height: 3.2rem; font-size: 1.25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
+#content,#headerContent{min-width: 700px;max-width: 980px;float: none;margin: auto;}
+
+#userMenu{float: right;list-style: none;margin-right: 10px;}
+    #userMenu .userMenuItem{color: #0076BE;}
+    #userMenu .userMenuItem:hover{color: #003366;}
+
 /*----Navigation----*/
-.left-panel_index_view{width: 35%;float: left;margin-right: 2.5%;}
-    article nav{background: #3d3d3d;}
-        article nav ul{list-style: none; color: #fff; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif;}
-            article nav ul li{border-bottom: 1px solid #313131;}
-            article nav ul.menu li{background: #4a4a4a;}
-            article nav ul.categories li{background-color: #3d3d3d;}
-            article nav ul.categories li.current{background: #343434;}
-                article nav ul li a{background-repeat: no-repeat;}
-                article nav ul.menu li a{background-image: url('../../images/spriteMenuIcons.png');}
-                article nav ul.menu li.start a{background-position: .5rem 0;}
-                article nav ul.menu li.post a{background-position: .5rem -43px;}
-                article nav ul.menu li.myAds a{background-position: .5rem -86px;}
-                article nav ul.menu li.myFav a{background-position: .5rem -128px;}
-                article nav ul.menu li.login a{background-position: .5rem -171px;}
-                article nav ul.menu li.settings a{background-position: .5rem -213px;}
-                article nav ul.categories li a{background-size: 43px; background-position: center left;}
-            article nav ul.categories li.title{padding: 0.9rem 0 .6rem .5rem; font-family: helveticaNeueMed, Helvetica, Arial, sans-serif;}
-                
-                article nav ul li a{width: 100%; display: inline-block; padding: 0.9rem 0 .6rem 3.5rem; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+#menu{width: 35%;float: left;margin-right: 2.5%;font-size: 13px;}
+    #menu nav{background: #E8F6FF;border: solid 1px #B9DDF3; border-radius: 3px;}
+        #menu nav .navTitle{padding: 10px;margin: 0px;font-weight: bold;}
+        #menu nav ul{padding: 0px 10px 10px 10px;list-style: none;}
+            #menu nav .menuItem{color: #0076BE;padding: 8px 0px 8px 28px;border-bottom: solid 1px #CCE7F8;}
+            #menu nav .menuItem:hover{background-color: #F4FBFF;color: #003366;text-decoration: underline;}
+            #menu nav .menuItem:last-child{border-bottom: none;}
+                #menu nav .menuItem .menuItemLink{color: #0076BE;}
+                #menu nav .menuItem .menuItemLink .counter{color: #666666;}
 
-article #content{width: 62.5%;float: left;}
+article #main{width: 62.5%;float: left;}
 
-/*----Post An Ad----*/
-section#postAd{padding: .5rem;}
-    section#postAd div{padding: .5rem 0; background: #532581 url('../../images/iconsPattern.png') repeat; text-shadow: 0px 0px 19px rgba(0, 0, 0, 0.50); text-align: center; font-size: 1.4rem; font-family: helveticaNeueLt, Helvetica, Arial, sans-serif;}
-    section#postAd div h1{margin: 1rem .5rem; color: #fff;}
-        section#postAd div h1 strong{font-family: helveticaNeueMed, Helvetica, Arial, sans-serif; font-weight: normal;}
-    section#postAd div a{display: inline-block; padding: .5rem .7rem .3rem; margin: .5rem 0 1rem 0; color: #fff; background: #ff7700;}
+section#location{background: #FFFEB9;border: solid 1px #DBD4A8;border-radius: 3px;box-shadow: none;font-size: 13px;padding: 10px;}
 
-/*----New Ads----*/
-section#newAds{padding: 0.5em 0;}
+#newAds{border: solid 1px #CCCCCC;border-bottom: none;}
+.listItem{display: table;width: 100%;box-sizing: border-box;-moz-box-sizing: border-box;border-bottom: solid 1px #CCCCCC;}
+.listItem:hover{background: #E0F4FF;}
+    .listItem .listItemContainer{display: table-cell;vertical-align: middle;padding: 10px;}
+    .listItem .listItemContainerImage{width: 15%;}
+    .listItem .listItemContainerData{width: 50%;}
+    .listItem .listItemContainerPrice{width: 15%;}
+    .listItem .listItemContainerDate{width: 20%;}
+        .listItem .listItemContainer .listItemImage{max-height: 100; max-width: 120px;}
+        .listItem .listItemContainer.listItemData{text-align: left;}
+            .listItem .listItemData .listItemTitle{color: #0076BE;}
+            .listItem:hover .listItemData .listItemTitle{color: #003366;text-decoration: underline;}
 
-    
-    section#newAds .swiper-containerAds .slide{position: relative; width: 100%!important;}
-    section#newAds .swiper-containerAds .slide:before{content: ""; display: block; padding-top: 100%!important;}
-    section#newAds .swiper-containerAds .slide div{position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-position: center center; background-repeat: no-repeat; background-size: cover;}
-    section#newAds .swiper-containerAds a{width: 100%; height: 100%; display: block;}
-
-    section#newAds .swiper-containerAds .caption{width: 100%; height: 30%; position: absolute; left: 0; bottom: 0; padding: .3rem .5rem; background: rgba(0, 0, 0, .5); color: #fff; font-size: 1em; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
-    section#newAds .swiper-containerAds .caption span{color: #ff7700;}
-
-/*----Popular Categories----*/
-section#categories{padding: 0.5em 0;}
-
-    section#categories .swiper-containerCats .slide{position: relative; width: 100%!important;}
-    section#categories .swiper-containerCats .slide:before{content: ""; display: block; padding-top: 110%!important;}
-        section#categories .swiper-containerCats .slide div{position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-position: top center; background-repeat: no-repeat; background-size: 75%; color: #fff; text-align: center; }
-            section#categories .swiper-containerCats .slide div p{width: 100%; height: 35%; padding: 0 0 .1rem 0; position: absolute; bottom: 0; left: 0;}
 /*----Icons----*/
 .home-16{background-image: url('../../images/icons/home-16.png');}
     .home-16.color{background-color: #0090d6;}

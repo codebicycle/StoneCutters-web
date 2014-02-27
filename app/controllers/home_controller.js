@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var EnvHelper = require('../helpers/env_helper');
+var timeAgo = require('../helpers/time_ago_helper').timeAgo;
 
 module.exports = {
     index: function(params, callback) {
@@ -36,7 +37,6 @@ module.exports = {
             }
         };
         this.app.fetch(spec, function afterFetch(err, result) {
-
             /** TODO global is not defined in the client anymore
             You can use this.app.get('baseData').button_color if defined in
             the fetchBaseData middleware
@@ -46,6 +46,10 @@ module.exports = {
             result.platform = platform;
             result.whatsNewMetadata = result.whatsNewItems.models[0].get('metadata');
             result.whatsNewItems = result.whatsNewItems.models[0].get('data');
+            _.each(result.whatsNewItems, function processItem(item) {
+                var dateAg = timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second));
+                item.date.since = dateAg;
+            });
             result.firstItem = result.whatsNewItems[0];
             callback(err, result);
         });

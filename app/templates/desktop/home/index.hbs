@@ -1,49 +1,32 @@
-<section id="postAd">
-	<div>
-		<h1>Make <strong>easy money</strong> by selling stuff you no longer need!</h1>
-		<a href="/posting">Post an Ad</a>
-	</div>
-</section>
-
-<section id="newAds">
-	<h2>New ads in {{#if location.city }}{{location.city.name}}{{else}}{{location.name}}{{/if}}</h2>
-	<div class="swiper-containerAds">	
-		<div class="swiper-wrapper">
-			{{#each whatsNewItems}}
-				
-				<div class="swiper-slide"> 
-					<a href="items/{{id}}" >
-						<div class="slide">
-				        	<div style="background-image: url('{{thumbnail}}');"></div>
-				        </div>
-				        <div class="caption">{{date.since}}<br><span>{{price.displayPrice}}</span></div>
-				    </a>
+ <div id="menu">
+	{{view "categories/menu"}}
+ </div>
+ <div id="main">
+	<section id="location">
+		{{view "location/select"}}
+	</section>
+	<section id="newAds">
+		{{#each whatsNewItems}}			
+			<div class="listItem">
+				<div class="listItemContainer listItemContainerImage">
+					<img class="listItemImage" src="{{thumbnail}}">
 				</div>
-				
-			{{/each}}
-		</div>
-	</div>
-</section>
-
-<section id="categories">
-	<h2>Popular Categories</h2>
-	<div class="swiper-containerCats">	
-		<div class="swiper-wrapper">
-			{{#each categories.models}}
-				<div class="swiper-slide"> 
-					<a href="categories/{{id}}?location={{../siteLocation}}" >
-						<div class="slide">
-				          <div class="home-{{id}} color">
-				          	<p>{{trName}}</p>
-				          </div>
-				        </div>
-			        </a>
+				<div class="listItemContainer listItemContainerData">
+					<div class="listItemData">
+						<a class="listItemTitle" href="items/{{id}}">{{title}}</a>
+					</div>
 				</div>
-			{{/each}}
-		</div>
-	</div>
-</section>
-
-<section id="location">
-	{{view "location/select"}}
-</section>
+				<div class="listItemContainer listItemContainerPrice">
+					<div class="listItemPrice">
+						<strong>{{price.displayPrice}}</strong>
+					</div>
+				</div>
+				<div class="listItemContainer listItemContainerDate">
+					<div class="listItemDate">
+						<small>{{date.since}}</small>
+					</div>
+				</div>
+			</div>
+		{{/each}}
+	</section>
+</div>
