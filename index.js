@@ -7,9 +7,11 @@ var abSelector = require('./server/middleware/abSelector');
 var envSetup = require('./server/middleware/envSetup');
 
 var config = require('config');
-var mw = require('./server/middleware');
 
 var smaugAdapter = require('./server/data_adapter/smaug_adapter');
+var smaugAd = new smaugAdapter();
+
+var mw = require('./server/middleware')(smaugAd);
 
 var app = express();
 
@@ -21,9 +23,6 @@ app.use(express.bodyParser());
 app.use(mw.envSetup());
 app.use(mw.abSelector());
 app.use(mw.experimentNotificator());
-
-//We must wait that smaug implement this called.
-//app.use(mw.languageSelector());
 
 app.use(express.cookieParser());
 app.use(express.session({
@@ -43,8 +42,6 @@ app.use(express.session({
  * `dataAdapter` object to the call to `rendr.createServer()`.
  */
 var dataAdapterConfig = config.api;
-
-var smaugAd = new smaugAdapter();
 
 var server = rendr.createServer({
     dataAdapter: smaugAd
@@ -71,9 +68,10 @@ server.configure(function(rendrExpressApp) {
     rendrExpressApp.use(mw.initSession());
     rendrExpressApp.use(mw.incrementCounter());
     rendrExpressApp.use(mw.fetchBaseData());
+    rendrExpressApp.use(mw.languageSelector());
 });
 
-function start(){
+function start() {
     var port = process.env.PORT || 3030;
     app.listen(port);
     console.log("server pid %s listening on port %s in %s mode",

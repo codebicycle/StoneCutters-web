@@ -31,7 +31,6 @@ module.exports = function usersRouter(app, dataAdapter) {
         };
 
         function errorRegistrationCallback(err){
-            console.log('Failure: ' + err);
             res.redirect('/registration?' + querystring.stringify(err));
         };
 
@@ -67,9 +66,7 @@ module.exports = function usersRouter(app, dataAdapter) {
                 url: '/users'
             };
 
-            makeRequest(req, api, done, function requestDone (body) {
-                done(body);
-            });
+            dataAdapter.promiseRequest(req, api, done);
         };
 
         asynquence(callValidateUserCallback)
@@ -96,7 +93,6 @@ module.exports = function usersRouter(app, dataAdapter) {
         };
 
         function errorLoginCallback(err) {
-            console.log('Failure: ' + err);
             res.redirect('/login?' + querystring.stringify(err));
         };
 
@@ -106,7 +102,7 @@ module.exports = function usersRouter(app, dataAdapter) {
                 url: '/users/challenge?u=' + usernameOrEmail
             };
 
-            makeRequest(req, api, done, function challengeRequestDone (body) {
+            function requestDone(body) {
                 var hash = crypto.createHash('md5').update(password).digest('hex');
                 hash += usernameOrEmail;
                 hash = crypto.createHash('sha512').update(hash).digest('hex');
@@ -117,7 +113,9 @@ module.exports = function usersRouter(app, dataAdapter) {
                 };
 
                 done(credentials);
-            });
+            }
+
+            dataAdapter.promiseRequest(req, api, requestDone, done.fail);
         };
 
         function loginUser(done, credentials) {
@@ -126,9 +124,7 @@ module.exports = function usersRouter(app, dataAdapter) {
                 url: '/users/login?' + querystring.stringify(credentials)
             };
 
-            makeRequest(req, api, done, function loginRequestDone (body) {
-                done(body);
-            });
+            dataAdapter.promiseRequest(req, api, done);
         };
 
         asynquence(callGetChallengeCallback)
@@ -136,23 +132,6 @@ module.exports = function usersRouter(app, dataAdapter) {
         .then(saveDataLoginCallback)
         .then(redirectLoginHomeCallback)
         .or(errorLoginCallback);
-    };
-
-    function makeRequest(req, api, done, requestDone) {
-        dataAdapter.request(req, api, function adapterRequestDone(err, response, body) {
-            if (err) {
-                var error = {
-                    errCode: err.status,
-                    err: []
-                }
-                body.forEach(function processError(err) {
-                    error.err.push(err.message);
-                });
-                done.fail(error);
-                return;
-            }
-            requestDone(body);
-        });
     };
 
     function saveData(req, res, user, done) {

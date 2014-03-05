@@ -1,74 +1,68 @@
 'use strict';
 
-var http = require('http');
-
 /**
  * envSetup middleware.
  * Here we call smaug in order to define which type of web we have to show.
  * Also set up the site location (domain)
  */
-module.exports = function envSetup() {
-    var urlVarsSetup = function(req) {
-        var host = req.headers.host;
-        var path = req._parsedUrl.pathname;
-        var url = req.originalUrl;
+module.exports = function(dataAdapter) {
 
-        var index = host.indexOf(':');
-        var siteLoc = (index == -1)? host: host.substring(0,index);
-        siteLoc = siteLoc.replace('m','www');
+    return function envSetupLoader() {
 
-        /** If I detect that is not a m.olx.com like URL I will set up arg location
-        This is only for testing in Rackspace, must be removed in the near future. */
-        var pointIndex = siteLoc.indexOf('.');
-        var firstWord = siteLoc.substring(0,pointIndex);
-        siteLoc = (firstWord == 'www')? siteLoc : 'www.olx.com.ar';
-        req.headers.host = siteLoc;
-        console.log('SITELOC-'+siteLoc);
+        function urlVarsSetup(req) {
+            var host = req.headers.host;
+            var path = req._parsedUrl.pathname;
+            var url = req.originalUrl;
 
-        console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header:' + siteLoc);
-        var viewType = 'unknown';
+            var index = host.indexOf(':');
+            var siteLoc = (index === -1) ? host : host.substring(0,index);
+            siteLoc = siteLoc.replace('m','www');
 
-        switch(path) {
-            case '/':
-                viewType = 'home';
-            break;
-                case '/items': viewType = 'listing';
-            break;
+            /** If I detect that is not a m.olx.com like URL I will set up arg location
+            This is only for testing in Rackspace, must be removed in the near future. */
+            var pointIndex = siteLoc.indexOf('.');
+            var firstWord = siteLoc.substring(0,pointIndex);
+            siteLoc = (firstWord === 'www') ? siteLoc : 'www.olx.com.ar';
+            req.headers.host = siteLoc;
+            console.log('SITELOC-'+siteLoc);
 
-            //emulate /items/* match
-            case '/items/'+ path.slice('/items/'.length):
-                viewType = 'itemPage';
-            break;
-            default:
-                viewType = 'unknown';
-            break;
-        }
+            console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header: ' + siteLoc);
+            var viewType = 'unknown';
 
-        global.siteLocation = siteLoc;
-        global.path = path;
-        global.url = url;
-        global.viewType = viewType;
-    };
+            switch(path) {
+                case '/':
+                    viewType = 'home';
+                break;
+                    case '/items': viewType = 'listing';
+                break;
 
-    return function envSetup(req, res, next) {
-        var userAgent = null;
-        var userAgentEncoded;
+                //emulate /items/* match
+                case '/items/'+ path.slice('/items/'.length):
+                    viewType = 'itemPage';
+                break;
+                default:
+                    viewType = 'unknown';
+                break;
+            }
 
-        urlVarsSetup(req);
-        if (req) {
-            userAgent = req.get('user-agent');
-        }
-        userAgentEncoded = encodeURIComponent(userAgent);
-        console.log('<DEBUG CONSOLE LOG> Hitting SMAUG to know the platform');
-        http.get('http://api-v2.olx.com/devices/' + userAgentEncoded, function callback(res) {
-            var output = '';
+            global.siteLocation = siteLoc;
+            global.path = path;
+            global.url = url;
+            global.viewType = viewType;
+        };
 
-            res.on('data', function onData(chunk) {
-                output += chunk;
-            });
+        return function envSetup(req, res, next) {
+            urlVarsSetup(req);
 
-            res.on('end', function onEnd() {
-                var device = JSON.parse(output);
+            var userAgent = req.get('user-agent');
+            var api = {
+                body: {},
+                url: '/devices/' + encodeURIComponent(userAgent)
+            };
+
+            console.log('<DEBUG CONSOLE LOG> Hitting SMAUG to know the platform');
+            dataAdapter.promiseRequest(req, api, function callback(body) {
+                var device = body;
                 var template = 'basic';
                 var platform = 'wap';
 
@@ -95,17 +89,16 @@ module.exports = function envSetup() {
                         template = 'basic';
                     break;
                 }
-
                 req.platform = platform;
                 global.platform = platform;
                 req.template = template;
                 global.template = template;
-
                 next();
+            }, function onError(error) {
+                console.log('Got error: ' + error.err);
             });
+        };
 
-        }).on('error', function onError(error) {
-            console.log('Got error: ' + error.message);
-        });
-    }
+    };
+
 };
