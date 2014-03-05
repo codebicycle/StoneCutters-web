@@ -6,10 +6,16 @@
   * the console of the web browser.
   */
 module.exports = function incrementCounter() {
-    return function incrementCounter(req, res, next) {
-        var app = req.rendrApp;
-        var count = app.get('session').count || 0;
-        req.updateSession('count', count + 1);
-        next();
+
+    return function incrementCounterLoader(dataAdapter) {
+
+        return function incrementCounter(req, res, next) {
+            var app = req.rendrApp;
+            var count = app.get('session').count || 0;
+            req.updateSession('count', count + 1);
+            next();
+        };
+
     };
+
 };

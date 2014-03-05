@@ -1,12 +1,12 @@
 <section id="postAd">
 	<div>
-		<h1>Make <strong>easy money</strong> by selling stuff you no longer need!</h1>
-		<a href="/posting">Post an Ad</a>
+		<h1>{{dictionary.postAd_prefix}}<strong>{{dictionary.postAd_strong}}</strong>{{dictionary.postAd_suffix}}</h1>
+		<a href="/posting">{{dictionary.postAd_button}}</a>
 	</div>
 </section>
 
 <section id="newAds">
-	<h2>New ads in {{#if location.city }}{{location.city.name}}{{else}}{{location.name}}{{/if}}</h2>
+	<h2>{{dictionary.newAds_prefix}}{{#if location.city }}{{location.city.name}}{{else}}{{location.name}}{{/if}}</h2>
 	<div class="swiper-containerAds">	
 		<div class="swiper-wrapper">
 			{{#each whatsNewItems}}
@@ -26,7 +26,7 @@
 </section>
 
 <section id="categories">
-	<h2>Popular Categories</h2>
+	<h2>{{dictionary.categories_title}}</h2>
 	<div class="swiper-containerCats">	
 		<div class="swiper-wrapper">
 			{{#each categories.models}}

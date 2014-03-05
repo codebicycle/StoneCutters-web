@@ -19,6 +19,7 @@ module.exports = {
         var siteLocation = this.app.get('baseData').siteLocation;
         var platform = this.app.get('baseData').platform;
         var categories = this.app.get('baseData').categories;
+        var dictionary = this.app.get('baseData').dictionary;
 
         //Setting up the photo filters.
         paramsWhatsNew.item_type = 'adsList';
@@ -51,6 +52,7 @@ module.exports = {
                 item.date.since = dateAg;
             });
             result.firstItem = result.whatsNewItems[0];
+            result.dictionary = dictionary;
             callback(err, result);
         });
     }
