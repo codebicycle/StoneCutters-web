@@ -37,7 +37,7 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
         options = {};
     }
     if (api.headers) {
-        api.headers.host = "api-v2.olx.com";
+        api.headers.host = 'api-v2.olx.com';
     }
     options = _.defaults({}, options, {
         convertErrorCode: true,
@@ -115,4 +115,34 @@ SmaugAdapter.prototype.getErrForResponse = function(res, options) {
         err.body = res.body;
     }
     return err;
+};
+
+SmaugAdapter.prototype.promiseRequest = function(req, api, options, done, fail) {
+    if (options instanceof Function) {
+        fail = done;
+        done = options;
+        options = {};
+    }
+    if (!fail) {
+        fail = done.fail;
+    }
+    this.request(req, api, options, function requestDone(err, response, body) {
+        if (err) {
+            var error = {
+                errCode: err.status,
+                err: []
+            }
+            if (Array.isArray(body)) {
+                body.forEach(function addError(err) {
+                    error.err.push(err.message);
+                });
+            }
+            else {
+                error.err.push(body);
+            }
+            fail(error);
+            return;
+        }
+        done(body);
+    });
 };

@@ -1,8 +1,6 @@
 'use strict';
 
-var http = require('http');
 var asynquence = require('asynquence');
-
 var defaultDictionary = require('../defaultDictionary');
 
 /**
@@ -10,9 +8,9 @@ var defaultDictionary = require('../defaultDictionary');
  * Here we call smaug in order to define which language we have to show.
  * Also fetch the default dictionary.
  */
-module.exports = function languageSelector() {
+module.exports = function(dataAdapter) {
 
-    return function languageSelectorLoader(dataAdapter) {
+    return function languageSelectorLoader() {
 
         return function languageSelector(req, res, next) {
             var app = req.rendrApp;
@@ -32,65 +30,54 @@ module.exports = function languageSelector() {
             }
 
             function getLanguages(done, siteLoc) {
-                console.log('Hitting SMAUG to know the correct language');
-                http.get('http://api-v2.olx.com/countries/' + siteLoc + '/languages', function languageGetCallback(res) {
-                    var output = '';
+                var api = {
+                    body: {},
+                    url: '/countries/' + siteLoc + '/languages'
+                };
 
-                    res.on('data', function languageDataCallback(chunk) {
-                        output += chunk;
-                    });
+                function requestDone(languages) {
+                    var selectedLanguage = null;
 
-                    res.on('end', function languageEndCallback() {
-                        var languages = JSON.parse(output);
-                        var selectedLanguage = null;
-
-                        languages.forEach(function processLanguage(entry) {
-                            if(entry.default){
-                                selectedLanguage = entry;
-                            }
-                        });
-
-                        if (!selectedLanguage) {
-                            selectedLanguage = languages[0];
+                    languages.forEach(function processLanguage(entry) {
+                        if(entry.default){
+                            selectedLanguage = entry;
                         }
-
-                        app.get('baseData').languages = languages;
-                        app.get('baseData').language = selectedLanguage;
-                        app.get('session').baseData.languages = languages;
-                        app.get('session').baseData.language = selectedLanguage;
-
-                        done(selectedLanguage);
                     });
-                }).on('error', function languageErrorCallback(error) {
-                    done.fail('Got error: ' + error.message);
-                });
+
+                    if (!selectedLanguage) {
+                        selectedLanguage = languages[0];
+                    }
+
+                    app.get('baseData').languages = languages;
+                    app.get('baseData').language = selectedLanguage;
+                    app.get('session').baseData.languages = languages;
+                    app.get('session').baseData.language = selectedLanguage;
+
+                    done(selectedLanguage);
+                }
+
+                console.log('Hitting SMAUG to know the correct language');
+                dataAdapter.promiseRequest(req, api, requestDone, done.fail);
             }
 
-            function getDictionary(done, selectedLanguage){
-                http.get('http://api-v2.olx.com/dictionaries/' + selectedLanguage.id,function dictionariesGetCallback(response){
-                    var output = '';
+            function getDictionary(done, selectedLanguage) {
+                var api = {
+                    body: {},
+                    url: '/dictionaries/' + selectedLanguage.id
+                };
 
-                    response.on('data', function dictionariesDataCallback(chunk) {
-                        output += chunk;
-                    });
+                function requestDone(dictionary) {
+                    app.get('baseData').dictionary = dictionary;
+                    app.get('session').baseData.dictionary = dictionary;
+                    done();
+                }
 
-                    response.on('end', function dictionariesEndCallback() {
-                        var dictionary;
-                        try {
-                            dictionary = JSON.parse(output);
-                        }
-                        catch (e) {
+                console.log('Hitting SMAUG to know the correct language');
 
-                            // We must wait until smaug implements this call
-                            //done.fail(output);
-                            dictionary = defaultDictionary;
-                        }
-                        app.get('baseData').dictionary = dictionary;
-                        app.get('session').baseData.dictionary = dictionary;
-                        done();
-                    });
-                }).on('error', function dictionariesErrorCallback(error) {
-                    done.fail('Got error: ' + error.message);
+                // Waiting for SMAUG to implement this call
+                // dataAdapter.promiseRequest(req, api, requestDone, done.fail);
+                dataAdapter.promiseRequest(req, api, requestDone, function requestFail() {
+                    requestDone(defaultDictionary);
                 });
             }
 

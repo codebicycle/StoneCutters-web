@@ -1,11 +1,10 @@
 'use strict';
 
-var http = require('http');
 var asynquence = require('asynquence');
 
-module.exports = function fetchBaseData() {
+module.exports = function(dataAdapter) {
 
-    return function fetchBaseDataLoader(dataAdapter) {
+    return function fetchBaseDataLoader() {
 
         return function fetchBaseData(req, res, next) {
             var app = req.rendrApp;
@@ -20,64 +19,57 @@ module.exports = function fetchBaseData() {
                 return;
             }
 
-            function fetchBaseData(url, callback) {
-            http.get(url, function fetchBaseGetCallback(res) {
-                var output = '';
-
-                res.on('data', function fetchBaseNewDataCallback(chunk) {
-                    output += chunk;
-                }).on('error', function fetchBaseErrorCallback(error) {
-                    callback(error);
-                }).on('end', function fetchBaseDoneCallback() {
-                    callback(null, JSON.parse(output));
-                });
-            });
-            }
-
             function getCategories(done) {
-                fetchBaseData('http://api-v2.olx.com/countries/' + global.siteLocation + '/categories', function fetchCountriesCallback(err, results) {
-                    if (err) {
-                        done.fail(err);
-                        return;
-                    }
+                var api = {
+                    body: {},
+                    url: '/countries/' + global.siteLocation + '/categories'
+                };
+
+                function requestDone(results) {
                     var categories = {
                         models: results,
                         _byId: {}
                     };
+
                     categories.models.forEach(function processCategory(category) {
                         categories._byId[category.id] = category;
                     });
 
                     done(categories);
-                });
+                }
+
+                dataAdapter.promiseRequest(req, api, requestDone, done.fail);
             }
 
             function getLocation(done) {
-                fetchBaseData('http://api-v2.olx.com/locations/' + global.siteLocation, function fetchLocationCallback(err, location){
-                    if (err) {
-                        done.fail(err);
-                        return;
-                    }
-                    done(location);
-                });
+                var api = {
+                    body: {},
+                    url: '/locations/' + global.siteLocation
+                };
+
+                dataAdapter.promiseRequest(req, api, done);
             }
 
             function getTopCities (done) {
-                fetchBaseData('http://api-v2.olx.com/countries/' + global.siteLocation + '/topcities', function fetchCitiesCallback(err, result) {
-                    if (err) {
-                        done.fail(err);
-                        return;
-                    }
+                var api = {
+                    body: {},
+                    url: '/countries/' + global.siteLocation + '/topcities'
+                };
+
+                function requestDone(result) {
                     var topCities = {
                         models: result.data,
                        _byId: {},
                         metadata: result.metadata
                     };
+
                     topCities.models.forEach(function processCity(city) {
                         topCities._byId[city.id] = city;
                     });
                     done(topCities);
-                });
+                }
+
+                dataAdapter.promiseRequest(req, api, requestDone, done.fail);
             }
 
             function saveData(categories, location, topCities) {
@@ -116,6 +108,7 @@ module.exports = function fetchBaseData() {
 
             function fetchBaseDataErrorCallback(msg) {
                 console.log('Failure: ' + msg);
+                res.send(400, msg);
             }
 
             asynquence()

@@ -5,9 +5,9 @@
 * This means that from either the client or server, you can access the session
 * data from models, views, and controllers like `this.app.get('session')`.
 */
-module.exports = function initSession() {
+module.exports = function(dataAdapter) {
 
-    return function initSessionLoader(dataAdapter) {
+    return function initSessionLoader() {
 
         return function initSession(req, res, next) {
             var app = req.rendrApp;

@@ -5,9 +5,9 @@
   * for every page hit. Test it out by executing `App.get('session')` in
   * the console of the web browser.
   */
-module.exports = function incrementCounter() {
+module.exports = function(dataAdapter) {
 
-    return function incrementCounterLoader(dataAdapter) {
+    return function incrementCounterLoader() {
 
         return function incrementCounter(req, res, next) {
             var app = req.rendrApp;

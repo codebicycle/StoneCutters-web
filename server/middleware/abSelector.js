@@ -7,9 +7,9 @@ var experiments = require('../../app/experiments')();
  * AB Testing middleware.
  * Here we call sixpack server in order to define which template we have to show.
  */
-module.exports = function() {
+module.exports = function(dataAdapter) {
 
-    return function abSelectorLoader(dataAdapter) {
+    return function abSelectorLoader() {
 
         var myClientId = sixpack.generate_client_id();
         var session = new sixpack.Session(myClientId);

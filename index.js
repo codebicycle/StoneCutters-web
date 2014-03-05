@@ -9,8 +9,9 @@ var envSetup = require('./server/middleware/envSetup');
 var config = require('config');
 
 var smaugAdapter = require('./server/data_adapter/smaug_adapter');
+var smaugAd = new smaugAdapter();
 
-var mw = require('./server/middleware')(smaugAdapter);
+var mw = require('./server/middleware')(smaugAd);
 
 var app = express();
 
@@ -41,8 +42,6 @@ app.use(express.session({
  * `dataAdapter` object to the call to `rendr.createServer()`.
  */
 var dataAdapterConfig = config.api;
-
-var smaugAd = new smaugAdapter();
 
 var server = rendr.createServer({
     dataAdapter: smaugAd
