@@ -26,7 +26,8 @@
     "debug": "*",
     "request": "~2.29",
     "asynquence": "~0.3.3-b",
-    "grunt-exec": "~0.4.5"
+    "grunt-exec": "~0.4.5",
+    "cluster": "~0.7.7"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
