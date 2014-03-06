@@ -24,7 +24,7 @@ module.exports = function(dataAdapter) {
             var firstWord = siteLoc.substring(0,pointIndex);
             siteLoc = (firstWord === 'www') ? siteLoc : 'www.olx.com.ar';
             req.headers.host = siteLoc;
-            console.log('SITELOC-'+siteLoc);
+            console.log('<DEBUG CONSOLE LOG> SITELOC-'+siteLoc);
 
             console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header: ' + siteLoc);
             var viewType = 'unknown';
