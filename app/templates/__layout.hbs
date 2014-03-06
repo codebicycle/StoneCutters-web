@@ -1,15 +1,3 @@
-{{#eq platform 'desktop'}}
-	{{{partial 'desktop/partials/layout'}}}
-{{/eq}}
-
-{{#eq platform 'html5'}}
-	{{{partial 'enhanced/partials/layout'}}}
-{{/eq}}
-
-{{#eq platform 'html4'}}
-  {{{partial 'standard/partials/layout'}}}
-{{/eq}}
-
-{{#eq platform 'wap'}}
-  {{{partial 'basic/partials/layout'}}}
-{{/eq}}
+{{#layout template '/partials/layout'}}
+	{{{partial layout}}}
+{{/layout}}

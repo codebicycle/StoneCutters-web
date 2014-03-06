@@ -1,0 +1,10 @@
+<!--h1>{{category.name}}</h1-->
+
+
+<section>
+  	<ul id="subCategory">
+		{{#each category.children}}
+			<li><a href="/items?categoryId={{id}}&location={{../params.location}}">{{trName}}</a></li>
+		{{/each}}
+	</ul>
+</section>
