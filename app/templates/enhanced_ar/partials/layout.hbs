@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+	<head>
+	    {{{partial "enhanced/partials/head"}}}
+	</head>
+	<body>
+		
+		{{{partial "enhanced/partials/header"}}}
+		<article>
+	  		{{view "left-panel/index"}}
+			<div id="content">
+				{{{body}}}
+			</div>
+		</article>
+
+		<script src="/mergedAssets.js"></script>
+		<script>
+			(function() {
+				var App = window.App = new (require('app/app'))({{json appData}});
+				App.bootstrapData({{json bootstrappedData}});
+				App.start();
+			})();
+		</script>
+	</body>
+</html>

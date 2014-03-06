@@ -2,6 +2,7 @@
 
 var BaseApp = require('rendr/shared/app');
 var handlebarsHelpers = require('./lib/handlebarsHelpers');
+var customHandlebarsHelpers = require('./helpers/customHandlebarsHelpers');
 
 /**
  * Extend the `BaseApp` class, adding any custom methods or overrides.
@@ -28,6 +29,7 @@ module.exports = BaseApp.extend({
          * modules that can be used on both client & server.
          */
         this.templateAdapter.registerHelpers(handlebarsHelpers);
+        this.templateAdapter.registerHelpers(customHandlebarsHelpers);
 
         //set the platform in the layout template
         if (typeof global !== 'undefined') {

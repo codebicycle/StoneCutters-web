@@ -8,6 +8,11 @@
 module.exports = function(dataAdapter) {
 
     return function envSetupLoader() {
+        var localizedTemplates = require('../localizedTemplates');
+
+        function isLocalized(platform, location) {
+            return !!(~localizedTemplates[platform].indexOf(location));
+        }
 
         function urlVarsSetup(req) {
             var host = req.headers.host;
@@ -65,6 +70,7 @@ module.exports = function(dataAdapter) {
                 var device = body;
                 var template = 'basic';
                 var platform = 'wap';
+                var location = global.siteLocation.slice(global.siteLocation.length - 2);
 
                 //if (device.isBrowser) {
                 //    platform = 'desktop';
@@ -89,6 +95,9 @@ module.exports = function(dataAdapter) {
                     default:
                         template = 'basic';
                     break;
+                }
+                if (isLocalized(platform, location)) {
+                    template += '_' + location;
                 }
                 req.platform = platform;
                 global.platform = platform;
