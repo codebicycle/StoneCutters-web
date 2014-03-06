@@ -66,15 +66,16 @@ module.exports = function(dataAdapter) {
                 var template = 'basic';
                 var platform = 'wap';
 
-                if (device.isBrowser) {
-                    platform = 'desktop';
-                }
-                else {
+                //if (device.isBrowser) {
+                //    platform = 'desktop';
+                //}
+                //else {
                     platform = device.web_platform;
-                }
+                //}
                 switch(platform) {
                     case 'desktop':
-                        template = 'desktop';
+                        //template = 'desktop';
+                        template = 'enhanced';
                     break;
                     case 'html5':
                         template = 'enhanced';
