@@ -67,6 +67,7 @@ module.exports = function appUseConf(done){
       rendrExpressApp.use(mw.initSession());
       rendrExpressApp.use(mw.incrementCounter());
       rendrExpressApp.use(mw.fetchBaseData());
+      rendrExpressApp.use(mw.languageSelector());
   });
 
   done(app);
