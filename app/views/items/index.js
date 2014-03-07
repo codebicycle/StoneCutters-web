@@ -2,20 +2,26 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
-var timeAgo = require('../../helpers/time_ago_helper');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'items_index_view',
     processItem: function(item) {
-        var dateAg = timeAgo.timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second));
-        item.date.since = dateAg;
+        var year = item.date.year;
+        var month = item.date.month - 1;
+        var day = item.date.day;
+        var hour = item.date.hour;
+        var minute = item.date.minute;
+        var second = item.date.second;
+        var date = new Date(year, month, day, hour, minute, second);
+
+        item.date.since = helpers.timeAgo(date);
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
+
         _.each(data.items, this.processItem);
-        return _.extend({}, data, {
-            count: this.app.get('session').count
-        });
+        return _.extend({}, data);
     }
 });
 

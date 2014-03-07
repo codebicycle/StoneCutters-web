@@ -2,8 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
-var fitText = require('../../helpers/fit_text_helper').fitText;
-var timeAgo = require('../../helpers/time_ago_helper').timeAgo;
+var helpers = require('../../helpers');
 
 if (typeof window != 'undefined') {
     var Swipe = require('../../lib/swiper');
@@ -12,16 +11,23 @@ if (typeof window != 'undefined') {
 module.exports = BaseView.extend({
     className: 'home_index_view',
     processItem: function(item) {
-        var dateAg = timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second));
-        item.date.since = dateAg;
+        var year = item.date.year;
+        var month = item.date.month - 1;
+        var day = item.date.day;
+        var hour = item.date.hour;
+        var minute = item.date.minute;
+        var second = item.date.second;
+        var date = new Date(year, month, day, hour, minute, second);
+
+        item.date.since = helpers.timeAgo(date);
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
+
         _.each(data.whatsNewItems, this.processItem);
         return _.extend({}, data, {
-            count: this.app.get('session').count,
-            user: this.app.get('session').user,
-            location: this.app.get('baseData').location
+            user: this.app.getSession('user'),
+            location: this.app.getSession('location')
         });
     },
     postRender: function(){
@@ -42,11 +48,11 @@ module.exports = BaseView.extend({
         BaseView.prototype.remove.apply(this, arguments);
     },
     resize: function() {
-        fitText($('section#newAds .swiper-containerAds .caption') , .9 , {
+        helpers.fitText($('section#newAds .swiper-containerAds .caption') , .9 , {
             minFontSize: '9px',
             maxFontSize: '30px'
         });
-        fitText($('section#categories .swiper-containerCats .slide div p') , .7 , {
+        helpers.fitText($('section#categories .swiper-containerCats .slide div p') , .7 , {
             minFontSize: '9px',
             maxFontSize: '30px'
         });

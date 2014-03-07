@@ -8,6 +8,7 @@ module.exports = BaseView.extend({
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
         var params = this.options.params;
+
         if (params.err) {
             params.err = params.err.split(',');
         }
@@ -15,8 +16,8 @@ module.exports = BaseView.extend({
             params.errFields = params.errFields.split(',');
         }
         return _.extend({}, data, {
-            location: this.app.get('baseData').siteLocation,
-            user: this.app.get('session').user,
+            location: this.app.getSession('siteLocation'),
+            user: this.app.getSession('user'),
             params: params
         });
     }

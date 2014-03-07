@@ -7,10 +7,11 @@ module.exports = BaseView.extend({
     className: 'left-panel_index_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
+
         return _.extend({}, data, {
-            categories: this.app.get('baseData').categories,
-            siteLocation: this.app.get('baseData').siteLocation,
-            user: this.app.get('session').user
+            categories: this.app.getSession('categories'),
+            siteLocation: this.app.getSession('siteLocation'),
+            user: this.app.getSession('user')
         });
     }
 });

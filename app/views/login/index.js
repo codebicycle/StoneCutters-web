@@ -8,6 +8,7 @@ module.exports = BaseView.extend({
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
         var params = this.options.params;
+
         if (params.err) {
             params.err = params.err.split(',');
         }

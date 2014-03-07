@@ -1,45 +1,48 @@
 'use strict';
 
-var EnvHelper = require('../helpers/env_helper');
+var helpers = require('../helpers');
 
 module.exports = {
     index: function(params, callback) {
-        EnvHelper.setUrlVars(this.app);
-        var location = this.app.get('baseData').location;
+        var app = helpers.environment.init(this.app);
+        var location = app.getSession('location');
+        var cities = location.topCities;
+
         if (!params.search) {
-            var cities = location.topCities;
-            this.app.get('baseData').location.cities = cities;
+            location.cities = cities;
             return callback(null, {
                 'location': location,
                 'cities': cities.models
             });
         }
-        var siteLocation = this.app.get('baseData').siteLocation;
-        var spec = {
-            cities: {
-                collection: 'Cities',
-                params: {
-                    location: siteLocation,
-                    name: params.search
+
+        (function fetchCities() {
+            var spec = {
+                cities: {
+                    collection: 'Cities',
+                    params: {
+                        location: app.getSession('siteLocation'),
+                        name: params.search
+                    }
                 }
-            }
-        }
-        var that = this;
-        this.app.fetch(spec, function(err, result) {
-            var cities = {
-                'models': result.cities.toJSON(),
-                '_byId': {},
-                'metadata': result.cities.get('metadata')
-            }
-            cities.models.forEach(function(city) {
-                cities._byId[city.id] = city;
+            };
+
+            app.fetch(spec, function afterFetch(err, result) {
+                var cities = {
+                    'models': result.cities.toJSON(),
+                    '_byId': {},
+                    'metadata': result.cities.get('metadata')
+                }
+                cities.models.forEach(function sortCity(city) {
+                    cities._byId[city.id] = city;
+                });
+                location.cities = cities;
+                callback(err, {
+                    'location': location,
+                    'cities': cities.models,
+                    'search': params.search
+                });
             });
-            that.app.get('baseData').location.cities = cities;
-            callback(err, {
-                'location': location,
-                'cities': cities.models,
-                'search': params.search
-            });
-        });
+        })();
     }
 };

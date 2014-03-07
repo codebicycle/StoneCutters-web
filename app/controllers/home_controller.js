@@ -1,60 +1,64 @@
 'use strict';
 
 var _ = require('underscore');
-var EnvHelper = require('../helpers/env_helper');
-var timeAgo = require('../helpers/time_ago_helper').timeAgo;
+var helpers = require('../helpers');
 
 module.exports = {
     index: function(params, callback) {
-        var paramsWhatsNew = {};
-        _.extend(paramsWhatsNew, params);
-        var paramsLastVisited = {};
-        _.extend(paramsLastVisited, params);
-        EnvHelper.setUrlVars(this.app);
-        if (params.cityId) {
-            var city = this.app.get('baseData').location.cities._byId[params.cityId];
-            this.app.get('baseData').siteLocation = city.url;
-            this.app.get('baseData').location.city = city;
-        }
-        var siteLocation = this.app.get('baseData').siteLocation;
-        var platform = this.app.get('baseData').platform;
-        var categories = this.app.get('baseData').categories;
-        var dictionary = this.app.get('baseData').dictionary;
+        var app = helpers.environment.init(this.app);
 
-        //Setting up the photo filters.
-        paramsWhatsNew.item_type = 'adsList';
-        paramsWhatsNew.location = siteLocation;
-        params.location = siteLocation;
-      	paramsWhatsNew['f.withPhotos'] = 'true';
+        (function updateCity(cityId) {
+            var location = app.getSession('location');
+            var city = location.cities._byId[cityId];
 
-        /** TODO we have to implement a real last visited filter.
-        paramsLastVisited.item_type = 'adsList';
-        TODO remove hardcoded location. Should come from local storage or cookie
-        paramsLastVisited.location = 'www.olx.com.ar'; */
-        var spec = {
-            whatsNewItems: {
-                collection: 'Items',
-                params: paramsWhatsNew
+            if (city) {
+                location.city = city;
+                app.updateSession({
+                    siteLocation: city.url
+                });
             }
-        };
-        this.app.fetch(spec, function afterFetch(err, result) {
-            /** TODO global is not defined in the client anymore
-            You can use this.app.get('baseData').button_color if defined in
-            the fetchBaseData middleware
-            result.button_color = global.button_color; */
-            result.categories = categories;
-            result.siteLocation = siteLocation;
-            result.platform = platform;
-            result.whatsNewMetadata = result.whatsNewItems.models[0].get('metadata');
-            result.whatsNewItems = result.whatsNewItems.models[0].get('data');
-            _.each(result.whatsNewItems, function processItem(item) {
-                var dateAg = timeAgo(new Date(item.date.year, item.date.month - 1, item.date.day, item.date.hour, item.date.minute, item.date.second));
-                item.date.since = dateAg;
+        })(params.cityId);
+
+        (function fetchWhatsNew() {
+            var siteLocation = app.getSession('siteLocation');
+            var spec = {
+                whatsNewItems: {
+                    collection: 'Items',
+                    params: {}
+                }
+            }
+
+            _.extend(spec.whatsNewItems.params, params, {
+                location: siteLocation,
+                item_type: 'adsList',
+                'f.withPhotos': 'true'
             });
-            result.firstItem = result.whatsNewItems[0];
-            result.dictionary = dictionary;
-            callback(err, result);
-        });
+            app.fetch(spec, function afterFetch(err, result) {
+                var whatsNew = result.whatsNewItems.models[0];
+
+                function processItem(item) {
+                    var year = item.date.year;
+                    var month = item.date.month - 1;
+                    var day = item.date.day;
+                    var hour = item.date.hour;
+                    var minute = item.date.minute;
+                    var second = item.date.second;
+                    var date = new Date(year, month, day, hour, minute, second);
+
+                    item.date.since = helpers.timeAgo(date);
+                }
+
+                result.platform = app.getSession('platform');
+                result.categories = app.getSession('categories');
+                result.dictionary = app.getSession('dictionary');
+                result.whatsNewMetadata = whatsNew.get('metadata');
+                result.whatsNewItems = whatsNew.get('data');
+                result.firstItem = result.whatsNewItems[0];
+                result.siteLocation = siteLocation;
+                _.each(result.whatsNewItems, processItem);
+                callback(err, result);
+            });
+        })();
     }
 };
 

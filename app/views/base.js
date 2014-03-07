@@ -6,8 +6,9 @@ var RendrView = require('rendr/shared/base/view');
 // application's views.
 module.exports = RendrView.extend({
     getTemplate: function(){
-        var template = this.app.get('baseData').template;
+        var template = this.app.getSession('template');
         var name = this.name;
+
         console.log('<DEBUG CONSOLE LOG> retrieving:' + template + '/' + name);
         return this.app.templateAdapter.getTemplate(template + '/' + name);
     }
