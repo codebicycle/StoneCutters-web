@@ -2,7 +2,7 @@
 
 var BaseApp = require('rendr/shared/app');
 var handlebarsHelpers = require('./lib/handlebarsHelpers');
-var customHandlebarsHelpers = require('./helpers/customHandlebarsHelpers');
+var customHandlebarsHelpers = require('./helpers').handlebars;
 
 /**
  * Extend the `BaseApp` class, adding any custom methods or overrides.
@@ -30,18 +30,6 @@ module.exports = BaseApp.extend({
          */
         this.templateAdapter.registerHelpers(handlebarsHelpers);
         this.templateAdapter.registerHelpers(customHandlebarsHelpers);
-
-        //set the platform in the layout template
-        if (typeof global !== 'undefined') {
-            this.req.app.locals({
-                platform: global.platform,
-                template: global.template,
-                path: global.path,
-                url: global.url,
-                viewType: global.viewType,
-                siteLocation: global.siteLocation,
-            });
-        }
     },
 
     /**

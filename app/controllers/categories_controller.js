@@ -1,19 +1,21 @@
 'use strict';
 
-var EnvHelper = require('../helpers/env_helper');
+var helpers = require('../helpers');
 
 module.exports = {
     index: function(params, callback) {
-        EnvHelper.setUrlVars(this.app);
-        var category = this.app.get('baseData').categories._byId[params.id];
+        var app = helpers.environment.init(this.app);
+        var category = app.getSession('categories')._byId[params.id];
+
         callback(null, {
             'category': category,
             'params': params
         });
     },
     show: function(params, callback) {
-        EnvHelper.setUrlVars(this.app);
-        var category = this.app.get('baseData').categories._byId[params.id];
+        var app = helpers.environment.init(this.app);
+        var category = app.getSession('categories')._byId[params.id];
+
         callback(null, {
             'category': category,
             'params': params

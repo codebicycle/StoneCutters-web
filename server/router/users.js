@@ -14,7 +14,7 @@ module.exports = function usersRouter(app, dataAdapter) {
             username: req.param('username', null),
             email: req.param('email', null),
             password: req.param('password', null),
-            location: req.rendrApp.get('baseData').siteLocation,
+            location: req.rendrApp.getSession('siteLocation'),
             languageId: 10
         };
 
@@ -69,11 +69,10 @@ module.exports = function usersRouter(app, dataAdapter) {
             dataAdapter.promiseRequest(req, api, done);
         };
 
-        asynquence(callValidateUserCallback)
-        .then(registerUser)
-        .then(saveDataRegistrationCallback)
-        .then(redirectRegistrationHomeCallback)
-        .or(errorRegistrationCallback);
+        asynquence(callValidateUserCallback).or(errorRegistrationCallback)
+            .then(registerUser)
+            .then(saveDataRegistrationCallback)
+            .then(redirectRegistrationHomeCallback);
     };
 
     function loginHandler(req, res) {
@@ -93,6 +92,7 @@ module.exports = function usersRouter(app, dataAdapter) {
         };
 
         function errorLoginCallback(err) {
+            console.log(err);
             res.redirect('/login?' + querystring.stringify(err));
         };
 
@@ -127,16 +127,17 @@ module.exports = function usersRouter(app, dataAdapter) {
             dataAdapter.promiseRequest(req, api, done);
         };
 
-        asynquence(callGetChallengeCallback)
-        .then(loginUser)
-        .then(saveDataLoginCallback)
-        .then(redirectLoginHomeCallback)
-        .or(errorLoginCallback);
+        asynquence().or(errorLoginCallback)
+            .then(callGetChallengeCallback)
+            .then(loginUser)
+            .then(saveDataLoginCallback)
+            .then(redirectLoginHomeCallback);
     };
 
     function saveData(req, res, user, done) {
-        app.set('user', user);
-        req.updateSession('user', user);
+        req.rendrApp.updateSession({
+            user: user
+        });
         done();
     };
 

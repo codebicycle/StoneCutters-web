@@ -1,21 +1,20 @@
 'use strict';
 
-var _ = require('underscore');
-var sixpack = require('../../app/lib/sixpack');
-
 /**
  * Experiment Notificator middleware.
  * Here we call sixpack server in order to tell it that a convertion has to be made.
  */
 module.exports = function(dataAdapter) {
 
-    return function experimentNotificatorLoader() {
-
+    return function loader() {
+        var _ = require('underscore');
+        var sixpack = require('../../app/lib/sixpack');
         var myClientId = sixpack.generate_client_id();
         var session = new sixpack.Session(myClientId);
 
-        return function experimentNotificator(req, res, next) {
+        return function middleware(req, res, next) {
             var req_path = req._parsedUrl.pathname.split('/');
+
             if(req_path[1] == 'experiments'){
                 var experimentName = req_path[2];
                 var value = req_path[3];

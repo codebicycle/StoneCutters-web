@@ -1,10 +1,11 @@
 'use strict';
 
-var EnvHelper = require('../helpers/env_helper');
+var helpers = require('../helpers');
 
 module.exports = {
     index: function(params, callback) {
-        EnvHelper.setUrlVars(this.app);
+        var app = helpers.environment.init(this.app);
+
         callback(null, {
             'params': params
         });

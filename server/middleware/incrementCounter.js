@@ -7,12 +7,15 @@
   */
 module.exports = function(dataAdapter) {
 
-    return function incrementCounterLoader() {
+    return function loader() {
 
-        return function incrementCounter(req, res, next) {
+        return function middleware(req, res, next) {
             var app = req.rendrApp;
-            var count = app.get('session').count || 0;
-            req.updateSession('count', count + 1);
+            var count = app.getSession('count') || 0;
+
+            app.updateSession({
+                count: count + 1
+            });
             next();
         };
 
