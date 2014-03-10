@@ -5,14 +5,17 @@ var analyticsConfig = require('../config/analytics/analytics_config');
 
 module.exports = function analyticsHelper(){
     var imgUrls = function(session) {
-        var atiUrl = atiImgUrl(session);
-        var urls = [atiUrl];
-
+        var urls = [];
+        atiImgUrl(session, urls);
+        
         return urls;
     };
 
-    var atiImgUrl = function(session) {
+    var atiImgUrl = function(session, urls) {
         var countryId = session.location.id;
+
+        if (!analyticsConfig[session.viewType] || !atiConfig[countryId])
+            return;
 
         var logServer = atiConfig[countryId].logServer;
         var siteId = atiConfig[countryId].siteId;
@@ -28,7 +31,7 @@ module.exports = function analyticsHelper(){
 
         var url = "http://"+logServer+".ati-host.net/hit.xiti?s="+siteId+"&stc="+encodeURIComponent(JSON.stringify(params))+"&idclient="+clientId+"&na="+rnd+"&ref="+referer;
 
-        return url;
+        urls.push(url);
     };
 
     var api = {
