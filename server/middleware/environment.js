@@ -28,13 +28,13 @@ module.exports = function(dataAdapter) {
                 siteLocation = (firstWord === 'www') ? siteLocation : 'www.olx.com.ar';
             })();
 
-            console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header: ' + siteLocation);
             req.headers.host = siteLocation;
             switch(path) {
                 case '/':
                     viewType = 'home';
                 break;
-                    case '/items': viewType = 'listing';
+                case '/items':
+                    viewType = 'listing';
                 break;
 
                 //emulate /items/* match
