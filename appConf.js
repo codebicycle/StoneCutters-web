@@ -23,7 +23,7 @@ module.exports = function appUseConf(done){
             store: null,
             secret: config.session.secret
         }));
-    }
+    };
 
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.session());
@@ -35,7 +35,7 @@ module.exports = function appUseConf(done){
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());
         //rendrApp.use(middleware.incrementCounter());
-    }
+    };
 
     app.configure(expressConfiguration);
     server.configure(rendrConfiguration);
