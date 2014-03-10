@@ -20,6 +20,7 @@ module.exports = function appUseConf(done){
         app.use(express.bodyParser());
         app.use(express.cookieParser());
         app.use(express.session({
+            // By using node's session store you will get a different session for each core
             store: null,
             secret: config.session.secret
         }));

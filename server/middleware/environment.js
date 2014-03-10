@@ -29,7 +29,9 @@ module.exports = function(dataAdapter) {
             })();
 
             console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header: ' + siteLocation);
+
             req.headers.host = siteLocation;
+
             switch(path) {
                 case '/':
                     viewType = 'home';
@@ -45,12 +47,26 @@ module.exports = function(dataAdapter) {
                     viewType = 'unknown';
                 break;
             }
+
+            var clientId = app.getSession('clientId');
+
+            if(clientId == undefined){
+                var c1 = Math.floor(Math.random()*11);
+                var c2 = Math.floor(Math.random()*11);
+                var n = Math.floor(Math.random()* 1000000);
+                
+                clientId = String.fromCharCode(c1)+n+String.fromCharCode(c2);
+            }
+
             app.updateSession({
                 siteLocation: siteLocation,
                 path: path,
+                referer: '',
                 viewType: viewType,
-                url: url
+                url: url,
+                clientId: clientId
             });
+
             next();
         };
 
