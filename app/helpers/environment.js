@@ -34,6 +34,7 @@ module.exports = {
         var url = location.href;
         var path = location.pathname;
         var viewType = 'unknown';
+        var referer = app.getSession('path');
 
         switch(path){
             case '/': viewType = 'home';
@@ -49,6 +50,7 @@ module.exports = {
         }
         app.updateSession({
             path: path,
+            referer: referer,
             url: url,
             viewType: viewType
         });

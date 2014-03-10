@@ -3,6 +3,7 @@
 module.exports = {
     handlebars: require('./handlebars'),
     environment: require('./environment'),
+    analytics: require('./analytics'),
     fitText: function(element, kompressor, options) {
         var compressor = kompressor || 1;
         var settings = $.extend({
