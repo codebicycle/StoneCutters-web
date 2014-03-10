@@ -2,10 +2,9 @@ var should = require('should');
 var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
-var middleware = require('../../../server/middleware/session');
 var SmaugAdapter = require('../../../server/data_adapter/smaug_adapter');
 var dataAdapter = new SmaugAdapter();
-var session = middleware(dataAdapter);
+var middleware = require('../../../server/middleware')(dataAdapter);
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -47,7 +46,7 @@ describe('server', function test() {
                     };
 
                     rendrApp.use(before);
-                    rendrApp.use(session());
+                    rendrApp.use(middleware.session());
                     rendrApp.use(after);
                 };
 
@@ -101,7 +100,7 @@ describe('server', function test() {
                     };
 
                     rendrApp.use(before);
-                    rendrApp.use(session());
+                    rendrApp.use(middleware.session());
                     rendrApp.use(after);
                 };
 
@@ -151,7 +150,7 @@ describe('server', function test() {
                     };
 
                     rendrApp.use(before);
-                    rendrApp.use(session());
+                    rendrApp.use(middleware.session());
                     rendrApp.use(after);
                 };
 
@@ -205,7 +204,7 @@ describe('server', function test() {
                                 };
 
                                 rendrApp.use(before);
-                                rendrApp.use(session());
+                                rendrApp.use(middleware.session());
                                 rendrApp.use(after);
                             };
 
@@ -259,7 +258,7 @@ describe('server', function test() {
                                     res.json(response);
                                 };
 
-                                rendrApp.use(session());
+                                rendrApp.use(middleware.session());
                                 rendrApp.use(after);
                             };
 
@@ -311,7 +310,7 @@ describe('server', function test() {
                                     res.json(response);
                                 };
 
-                                rendrApp.use(session());
+                                rendrApp.use(middleware.session());
                                 rendrApp.use(after);
                             };
 

@@ -28,15 +28,13 @@ module.exports = function(dataAdapter) {
                 siteLocation = (firstWord === 'www') ? siteLocation : 'www.olx.com.ar';
             })();
 
-            console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header: ' + siteLocation);
-
             req.headers.host = siteLocation;
-
             switch(path) {
                 case '/':
                     viewType = 'home';
                 break;
-                    case '/items': viewType = 'listing';
+                case '/items':
+                    viewType = 'listing';
                 break;
 
                 //emulate /items/* match
@@ -54,7 +52,7 @@ module.exports = function(dataAdapter) {
                 var c1 = Math.floor(Math.random()*11);
                 var c2 = Math.floor(Math.random()*11);
                 var n = Math.floor(Math.random()* 1000000);
-                
+
                 clientId = String.fromCharCode(c1)+n+String.fromCharCode(c2);
             }
 
