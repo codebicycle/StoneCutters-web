@@ -1,5 +1,7 @@
 'use strict';
 
+var analyticsConfig = require('../config/analytics/analytics_config');
+
 module.exports = {
     init: function(app) {
         if (typeof window === 'undefined') {
@@ -34,18 +36,13 @@ module.exports = {
         var url = location.href;
         var path = location.pathname;
         var viewType = 'unknown';
-        var referer = app.getSession('path');
+        var referer = app.getSession('url');
 
         switch(path){
-            case '/': viewType = 'home';
-            break;
-            case '/items': viewType = 'listing';
-            break;
-
             //emulate /items/* match
-            case '/items/'+ path.slice('/items/'.length): viewType = 'itemPage';
+            case '/items/'+ path.slice('/items/'.length): viewType = 'item';
             break;
-            default: viewType = 'unknown';
+            default: viewType = analyticsConfig[path].viewType;
             break;
         }
         app.updateSession({
