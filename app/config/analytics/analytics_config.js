@@ -11,16 +11,22 @@ module.exports = {
 	    'category': '',
 	    'subcategory': '',
 	},
+	'/items/id' : {
+		'viewType': 'listing',
+	    'pageName': 'listing_',
+	    'category': '',
+	    'subcategory': '',
+	},
 	'/interstitial' : {
 		'viewType': 'interstitial',
 	    'pageName': 'interstitial',
 	    'category': 'static',
 	    'subcategory': '',
 	},
-	'replyAdSuccess' : {
-		'viewType': 'replyAdSuccess',
-	    'pageName': 'interstitial',
-	    'category': 'static',
+	'/categories' : {
+		'viewType': 'categoryList',
+	    'pageName': 'listing_',
+	    'category': '',
 	    'subcategory': '',
 	},
 };

@@ -24,17 +24,31 @@ module.exports = function analyticsHelper(){
         return suffix;
     };
 
+    var getPathMatch = function (path) {
+        var pathMatch = path;
+
+        if (path.indexOf('/categories/') != -1) {
+            pathMatch = '/categories';
+        }else if (path.indexOf('/items/') != -1) {
+            pathMatch = '/items/id';
+        }
+
+        return pathMatch;
+    };
+
     var atiImgUrl = function(session, urls) {
         var countryId = session.location.id;
 
-        if (!analyticsConfig[session.path] || !atiConfig[countryId])
+        var pathMatch = getPathMatch(session.path);
+
+        if (!analyticsConfig[pathMatch] || !atiConfig[countryId])
             return;
 
         var logServer = atiConfig[countryId].logServer;
         var siteId = atiConfig[countryId].siteId;
-        var catName = catHelper.getCatName(session) || analyticsConfig[session.path].category;
-        var subCatName = catHelper.getSubCatName(session) || analyticsConfig[session.path].subcategory;
-        var pageName = analyticsConfig[session.path].pageName + getAtiPageNameSuffix(session, catName, subCatName);
+        var catName = catHelper.getCatName(session) || analyticsConfig[pathMatch].category;
+        var subCatName = catHelper.getSubCatName(session) || analyticsConfig[pathMatch].subcategory;
+        var pageName = analyticsConfig[pathMatch].pageName + getAtiPageNameSuffix(session, catName, subCatName);
         var params = {
             language: session.location.flags.languageCode,
             platform: session.platform,
@@ -53,6 +67,7 @@ module.exports = function analyticsHelper(){
 
     var api = {
         imgUrls: imgUrls,
+        getPathMatch: getPathMatch,
     };
 
     return api;

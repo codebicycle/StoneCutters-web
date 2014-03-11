@@ -9,7 +9,7 @@ module.exports = function categoriesHelper(){
         var url = session.url;
         var catId = getCatId(url);
 
-        var category = categories._byId.catId;
+        var category = categories._byId[catId];
 
         if(category){
             name = category.name;
@@ -41,18 +41,16 @@ module.exports = function categoriesHelper(){
     };
 
     var getCatId = function (url) {
-        var catIndex = url.indexOf('category');
+        var catIndex = url.indexOf('categories');
+        var catIdIndex = url.indexOf('categoryId');
         var catId = 0;
 
         if (catIndex != -1) {
-            var catIdIndex = url.indexOf('categoryId');
-            if (catIdIndex != -1) {
-                var ampIndex = url.indexOf('&',catIdIndex+11);
-                catId = parseInt(url.substring(catIdIndex+11,ampIndex),10);
-            }else{
-                var qMarkIndex = url.indexOf('?',catIndex+9);
-                catId = parseInt(url.substring(catIndex+9,qMarkIndex),10);
-            }
+            var qMarkIndex = url.indexOf('?',catIndex+11);
+            catId = parseInt(url.substring(catIndex+11,qMarkIndex),10);
+        }else if (catIdIndex != -1) {
+            var ampIndex = url.indexOf('&',catIdIndex+11);
+            catId = parseInt(url.substring(catIdIndex+11,ampIndex),10);
         }
 
         return catId;
