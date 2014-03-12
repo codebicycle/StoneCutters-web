@@ -4,7 +4,7 @@ module.exports = function(dataAdapter) {
 
     return function loader() {
         var asynquence = require('asynquence');
-        var defaultDictionary = require('../defaultDictionary');
+        var defaultDictionaries = require('../defaultDictionaries');
 
         return function middleware(req, res, next) {
             var app = req.rendrApp;
@@ -16,40 +16,70 @@ module.exports = function(dataAdapter) {
                     url: '/countries/' + siteLocation + '/languages'
                 };
 
-                dataAdapter.promiseRequest(req, api, done);
+                function success(results) {
+                    var languages = {
+                        models: results,
+                        _byId: {}
+                    };
+
+                    languages.models.forEach(function iteration(language) {
+                        languages._byId[language.id] = language;
+                        if (language.default) {
+                            languages.default = language.id;
+                        }
+                    });
+
+                    done(languages);
+                };
+
+                if (!app.getSession('updateRequired')) {
+                    return done(app.getSession('languages'));
+                }
+
+                dataAdapter.promiseRequest(req, api, success, done.fail);
             }
 
             function select(done, languages) {
-                var selectedLanguage = null;
+                var language = parseInt(req.query.language);
+                var selectedLanguage;
 
-                languages.forEach(function select(entry) {
-                    if(entry.default){
-                        selectedLanguage = entry;
-                    }
-                });
-                if (!selectedLanguage) {
-                    selectedLanguage = languages[0];
+                if (language && !languages._byId[language]) {
+                    language = null;
                 }
+                if (!app.getSession('updateRequired')) {
+                    selectedLanguage = language || app.getSession('selectedLanguage');
+                }
+                else {
+                    selectedLanguage = language || languages.default || languages.models[0].id;
+                }
+
                 done(languages, selectedLanguage);
-            }
+            };
 
             function fetchDictionary(done, languages, selectedLanguage) {
-                var api = {
-                    body: {},
-                    url: '/dictionaries/' + selectedLanguage.id
+                function fetch() {
+                    var api = {
+                        body: {},
+                        url: '/dictionaries/' + languages._byId[selectedLanguage].id
+                    };
+
+                    dataAdapter.promiseRequest(req, api, success, /*done.*/fail);
                 };
 
                 function success(dictionary) {
                     done(languages, selectedLanguage, dictionary);
-                }
+                };
 
                 // Waiting for SMAUG to implement this call so we need to use a fake fail function
                 function fail() {
-                    success(defaultDictionary);
-                }
+                    success(defaultDictionaries[selectedLanguage]);
+                };
 
-                dataAdapter.promiseRequest(req, api, success, /*done.*/fail);
-            }
+                if (!app.getSession('updateRequired') && app.getSession('selectedLanguage') === selectedLanguage) {
+                    return success(app.getSession('dictionary'));
+                }
+                fetch();
+            };
 
             function store(done, languages, selectedLanguage, dictionary) {
                 app.updateSession({
@@ -58,16 +88,12 @@ module.exports = function(dataAdapter) {
                     dictionary: dictionary
                 });
                 done();
-            }
+            };
 
             function fail(msg) {
                 console.log('Failure: ' + msg);
                 res.send(400, msg);
-            }
-
-            if (!app.getSession('updateRequired')) {
-                return next();
-            }
+            };
 
             asynquence().or(fail)
                 .then(fetchLanguages)

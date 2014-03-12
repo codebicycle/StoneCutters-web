@@ -27,7 +27,10 @@ module.exports = BaseView.extend({
         _.each(data.whatsNewItems, this.processItem);
         return _.extend({}, data, {
             user: this.app.getSession('user'),
-            location: this.app.getSession('location')
+            location: this.app.getSession('location'),
+            template: this.app.getSession('template'),
+            languages: this.app.getSession('languages'),
+            selectedLanguage: this.app.getSession('selectedLanguage')
         });
     },
     postRender: function(){

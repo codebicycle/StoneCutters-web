@@ -1,0 +1,3 @@
+{{#each languages.models}}
+	<a href="?language={{id}}" style="color:black;float:left;">{{#ifC id '===' ../selectedLanguage }}<strong>{{name}}</strong>{{else}}{{name}}{{/ifC}}</a>
+{{/each}}
