@@ -31,9 +31,23 @@ module.exports = function(dataAdapter) {
                 dataAdapter.promiseRequest(req, api, success, done.fail);
             }
 
+            function childCatsForCategories (categories) {
+                var childCats = {};
+
+                categories.models.forEach(function traverseCats (cat, index, categories) {
+                    cat.children.forEach(function traverseChildCats (sCat, index, categories) {
+                        childCats[sCat.id] = sCat;
+                    });
+                });
+
+                return childCats;
+            }
+
             function store(done, categories) {
+                var childCats = childCatsForCategories(categories);
                 app.updateSession({
-                    categories: categories
+                    categories: categories,
+                    childCategories: childCats,
                 });
                 done();
             }
