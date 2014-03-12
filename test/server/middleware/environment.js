@@ -11,8 +11,10 @@ var middleware = require('../../../server/middleware')(dataAdapter);
 var paths = {
     '/': 'home',
     '/items': 'listing',
-    '/items/.*': 'itemPage',
-    '/.*': 'unknown'
+    '/items/.*': 'listing',
+    '/interstitial': 'interstitial',
+    '/categories': 'categoryList',
+    '/api/.*': 'api'
 };
 
 function expressConfiguration(app) {
