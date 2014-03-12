@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     'postAd_prefix': 'Make ',
     'postAd_strong': 'easy money',

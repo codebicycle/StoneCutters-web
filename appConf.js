@@ -20,11 +20,12 @@ module.exports = function appUseConf(done){
         app.use(express.bodyParser());
         app.use(express.cookieParser());
         app.use(express.session({
+
             // By using node's session store you will get a different session for each core
             store: null,
             secret: config.session.secret
         }));
-    }
+    };
 
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.session());
@@ -33,10 +34,11 @@ module.exports = function appUseConf(done){
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.language());
+
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());
         //rendrApp.use(middleware.incrementCounter());
-    }
+    };
 
     app.configure(expressConfiguration);
     server.configure(rendrConfiguration);

@@ -7,7 +7,7 @@ module.exports = function(dataAdapter) {
 
         function isLocalized(platform, location) {
             return !!(~localizedTemplates[platform].indexOf(location));
-        }
+        };
 
         return function middleware(req, res, next) {
             var app = req.rendrApp;
@@ -24,10 +24,10 @@ module.exports = function(dataAdapter) {
                 var platform = 'wap';
                 var location = siteLocation.slice(siteLocation.length - 2);
 
-                //if (device.isBrowser) {
-                //    platform = 'desktop';
-                //}
-                //else {
+                /*if (device.isBrowser) {
+                    platform = 'desktop';
+                }
+                else {*/
                     platform = device.web_platform;
                 //}
                 switch(platform) {
@@ -52,9 +52,8 @@ module.exports = function(dataAdapter) {
                     template += '_' + location;
                 }
                 app.updateSession({
-                    updateRequired: platform !== app.getSession('lastPlatform'),
+                    updateRequired: platform !== app.getSession('platform'),
                     platform: platform,
-                    lastPlatform: platform,
                     template: template
                 });
                 app.req.app.locals({
@@ -67,9 +66,8 @@ module.exports = function(dataAdapter) {
             function fail(error) {
                 console.log('Got error: ' + error.err);
                 res.send(400, error.err);
-            }
+            };
 
-            console.log('<DEBUG CONSOLE LOG> Hitting SMAUG to know the platform');
             dataAdapter.promiseRequest(req, api, done, fail);
         };
 
