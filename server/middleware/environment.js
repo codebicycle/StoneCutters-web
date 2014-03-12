@@ -5,6 +5,10 @@
  * Here we call smaug in order to define which type of web we have to show.
  * Also set up the site location (domain)
  */
+
+var analyticsConfig = require('../../app/config/analytics/analytics_config');
+var analyticsHelper = require('../../app/helpers/analytics');
+
 module.exports = function(dataAdapter) {
 
     return function loader() {
@@ -18,6 +22,16 @@ module.exports = function(dataAdapter) {
             var siteLocation = (index === -1) ? host : host.substring(0,index);
             var viewType;
 
+            if (path.indexOf('/api/') == -1) {
+
+                //if this isn't an api call, get the viewtype
+                var pathMatch = analyticsHelper.getPathMatch(path);
+                viewType = analyticsConfig[pathMatch].viewType;
+            }
+            else {
+                viewType = 'api';
+            }
+
             siteLocation = siteLocation.replace('m','www');
 
             /** If I detect that is not a m.olx.com like URL I will set up arg location
@@ -29,22 +43,6 @@ module.exports = function(dataAdapter) {
             })();
 
             req.headers.host = siteLocation;
-            switch(path) {
-                case '/':
-                    viewType = 'home';
-                break;
-                case '/items':
-                    viewType = 'listing';
-                break;
-
-                //emulate /items/* match
-                case '/items/'+ path.slice('/items/'.length):
-                    viewType = 'itemPage';
-                break;
-                default:
-                    viewType = 'unknown';
-                break;
-            }
 
             var clientId = app.getSession('clientId');
 
