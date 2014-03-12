@@ -1,3 +1,6 @@
+'use strict';
+
+var _ = require('underscore');
 var should = require('should');
 var request = require('supertest');
 var express = require('express');
@@ -18,8 +21,11 @@ function expressConfiguration(app) {
 describe('server', function test() {
     describe('middleware', function test() {
         describe('session', function test() {
-            it('should set session.data as the session attribute of req.rendrApp', function test(done) {
-                var app = express();
+            var app;
+            var response;
+
+            before(function before(done) {
+                app = express();
                 var server = rendr.createServer({
                     dataAdapter: dataAdapter
                 });
@@ -28,314 +34,169 @@ describe('server', function test() {
                     var response = {};
 
                     function before(req, res, next) {
-                        req.session.data = {
+                        response.before = {
+                            session: {
+                                data: _.clone(req.session.data)
+                            },
+                            app: {
+                                session: _.clone(req.rendrApp.get('session')),
+                                hasUpdateSession: !!req.rendrApp.updateSession,
+                                hasGetSession: !!req.rendrApp.getSession,
+                                getSession: {}
+                            }
+                        };
+                        if (req.rendrApp.getSession) {
+                            response.before.app.getSession = {
+                                session: req.rendrApp.getSession(),
+                                test: req.rendrApp.getSession('test')
+                            };
+                        }
+                        next();
+                    };
+
+                    function after(req, res) {
+                        req.rendrApp.updateSession({
                             test: 'test'
-                        };
-                        response.before = {
-                            appSession: req.rendrApp.get('session')
-                        };
-                        next();
-                    };
-
-                    function after(req, res) {
-                        response.after = {
-                            sessionData: req.session.data,
-                            appSession: req.rendrApp.get('session')
-                        };
-                        res.json(response);
-                    };
-
-                    rendrApp.use(before);
-                    rendrApp.use(middleware.session());
-                    rendrApp.use(after);
-                };
-
-                app.configure(expressConfiguration(app));
-                server.configure(rendrConfiguration);
-                app.use(server);
-
-                request(app).get('/').end(end);
-
-                function end(err, response) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function existance(before, after) {
-                        should.not.exist(before);
-                        should.exist(after);
-                    })(before.appSession, after.appSession);
-
-                    (function equality(appSession, sessionData) {
-                        appSession.should.equal(sessionData);
-                    })(JSON.stringify(after.appSession), JSON.stringify(after.sessionData));
-
-                    done();
-                };
-            });
-            it('should add an updateSession method to req.rendrApp', function test(done) {
-                var app = express();
-                var server = rendr.createServer({
-                    dataAdapter: dataAdapter
-                });
-
-                function rendrConfiguration(rendrApp) {
-                    var response = {};
-
-                    function before(req, res, next) {
-                        response.before = {
-                            rendrApp: {
-                                hasUpdateSession: !!req.rendrApp.updateSession
-                            }
-                        };
-                        next();
-                    };
-
-                    function after(req, res) {
-                        response.after = {
-                            rendrApp: {
-                                hasUpdateSession: !!req.rendrApp.updateSession
-                            }
-                        };
-                        res.json(response);
-                    };
-
-                    rendrApp.use(before);
-                    rendrApp.use(middleware.session());
-                    rendrApp.use(after);
-                };
-
-                app.configure(expressConfiguration(app));
-                server.configure(rendrConfiguration);
-                app.use(server);
-
-                request(app).get('/').end(end);
-
-                function end(err, response) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function existance(before, after) {
-                        before.should.not.be.ok;
-                        after.should.be.ok;
-                    })(before.rendrApp.hasUpdateSession, after.rendrApp.hasUpdateSession);
-
-                    done();
-                };
-            });
-            it('should add a getSession method to req.rendrApp', function test(done) {
-                var app = express();
-                var server = rendr.createServer({
-                    dataAdapter: dataAdapter
-                });
-
-                function rendrConfiguration(rendrApp) {
-                    var response = {};
-
-                    function before(req, res, next) {
-                        response.before = {
-                            rendrApp: {
-                                hasGetSession: !!req.rendrApp.getSession
-                            }
-                        };
-                        next();
-                    };
-
-                    function after(req, res) {
-                        response.after = {
-                            rendrApp: {
-                                hasGetSession: !!req.rendrApp.getSession
-                            }
-                        };
-                        res.json(response);
-                    };
-
-                    rendrApp.use(before);
-                    rendrApp.use(middleware.session());
-                    rendrApp.use(after);
-                };
-
-                app.configure(expressConfiguration(app));
-                server.configure(rendrConfiguration);
-                app.use(server);
-
-                request(app).get('/').end(end);
-
-                function end(err, response) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function existance(before, after) {
-                        before.should.not.be.ok;
-                        after.should.be.ok;
-                    })(before.rendrApp.hasGetSession, after.rendrApp.hasGetSession);
-
-                    done();
-                };
-            });
-            describe('req', function test() {
-                describe('rendrApp', function test() {
-                    describe('updateSession(Object)', function test() {
-                        it ("should add each Object's key/value pair to session.data", function test(done) {
-                            var app = express();
-                            var server = rendr.createServer({
-                                dataAdapter: dataAdapter
-                            });
-
-                            function rendrConfiguration(rendrApp) {
-                                var response = {};
-
-                                function before(req, res, next) {
-                                    response.before = {
-                                        sessionData: req.session.data || {}
-                                    };
-                                    next();
-                                };
-
-                                function after(req, res) {
-                                    if (req.rendrApp.updateSession) {
-                                        req.rendrApp.updateSession({
-                                            test: 'test'
-                                        });
-                                    }
-                                    response.after = {
-                                        sessionData: req.session.data
-                                    };
-                                    res.json(response);
-                                };
-
-                                rendrApp.use(before);
-                                rendrApp.use(middleware.session());
-                                rendrApp.use(after);
-                            };
-
-                            app.configure(expressConfiguration(app));
-                            server.configure(rendrConfiguration);
-                            app.use(server);
-
-                            request(app).get('/').end(end);
-
-                            function end(err, response) {
-                                var before = response.body.before;
-                                var after = response.body.after;
-
-                                (function existance(before, after) {
-                                    should.not.exist(before);
-                                    should.exist(after);
-                                })(before.sessionData.test, after.sessionData.test);
-
-                                (function equality(test) {
-                                    test.should.equal('test');
-                                })(after.sessionData.test);
-
-                                done();
-                            };
                         });
+                        response.after = {
+                            session: {
+                                data: _.clone(req.session.data)
+                            },
+                            app: {
+                                session: _.clone(req.rendrApp.get('session')),
+                                hasUpdateSession: !!req.rendrApp.updateSession,
+                                hasGetSession: !!req.rendrApp.getSession,
+                                getSession: {}
+                            }
+                        };
+                        if (req.rendrApp.getSession) {
+                            response.after.app.getSession = {
+                                session: req.rendrApp.getSession(),
+                                test: req.rendrApp.getSession('test')
+                            };
+                        }
+                        res.json(response);
+                    };
+
+                    rendrApp.use(before);
+                    rendrApp.use(middleware.session());
+                    rendrApp.use(after);
+                };
+
+                app.configure(expressConfiguration(app));
+                server.configure(rendrConfiguration);
+                app.use(server);
+                request(app)
+                    .get('/')
+                    .end(end);
+
+                function end(err, res) {
+                    response = res;
+                    done();
+                };
+            });
+            describe('rendrApp', function test() {
+                describe('.session', function test() {
+                    it('should be added', function test(done) {
+                        var before = response.body.before;
+                        var after = response.body.after;
+
+                        (function existance(before, after) {
+                            should.not.exist(before);
+                            should.exist(after);
+                        })(before.app.session, after.app.session);
+
+                        done();
                     });
-                    describe('getSession(String)', function test() {
-                        it('should return session.data[String]', function test(done) {
-                            var app = express();
-                            var server = rendr.createServer({
-                                dataAdapter: dataAdapter
-                            });
+                    it('should be req.session.data', function test(done) {
+                        var before = response.body.before;
+                        var after = response.body.after;
 
-                            function rendrConfiguration(rendrApp) {
-                                var response = {};
+                        (function equality(appSession, sessionData) {
+                            appSession.should.equal(sessionData);
+                        })(JSON.stringify(after.app.session), JSON.stringify(after.session.data));
 
-                                function after(req, res) {
-                                    var test;
-                                    req.session.data.test = 'test';
-                                    if (req.rendrApp.getSession) {
-                                        test = req.rendrApp.getSession('test');
-                                    }
-                                    response = {
-                                        session: {
-                                            test: req.session.data.test
-                                        },
-                                        rendrApp: {
-                                            test : test
-                                        }
-                                    };
-                                    res.json(response);
-                                };
+                        done();
+                    });
+                });
+                describe('.updateSession(Object)', function test() {
+                    it('should be added', function test(done) {
+                        var before = response.body.before;
+                        var after = response.body.after;
 
-                                rendrApp.use(middleware.session());
-                                rendrApp.use(after);
-                            };
+                        (function existance(before, after) {
+                            before.should.not.be.ok;
+                            after.should.be.ok;
+                        })(before.app.hasUpdateSession, after.app.hasUpdateSession);
 
-                            app.configure(expressConfiguration(app));
-                            server.configure(rendrConfiguration);
-                            app.use(server);
+                        done();
+                    });
+                    it("should add each Object's key/value pair to session.data", function test(done) {
+                        var before = response.body.before;
+                        var after = response.body.after;
 
-                            request(app).get('/').end(end);
+                        (function existance(before, after) {
+                            before.should.not.have.property('test');
+                            after.should.have.property('test');
+                        })(before.session.data || {}, after.session.data);
 
-                            function end(err, response) {
-                                var session = response.body.session;
-                                var rendrApp = response.body.rendrApp;
+                        (function existance(before, after) {
+                            before.should.not.have.property('test');
+                            after.should.have.property('test');
+                        })(before.app.session || {}, after.app.session);
 
-                                (function existance(sessionTest, rendrAppTest) {
-                                    should.exist(sessionTest);
-                                    should.exist(rendrAppTest);
-                                })(session.test, rendrApp.test);
+                        (function equality(test) {
+                            test.should.equal('test');
+                        })(after.session.data.test);
 
-                                (function equality(sessionTest, rendrAppTest) {
-                                    sessionTest.should.equal(rendrAppTest);
-                                })(session.test, rendrApp.test);
+                        (function equality(test) {
+                            test.should.equal('test');
+                        })(after.app.session.test);
 
-                                done();
-                            };
-                        });
-                        it('should return session.data if !String', function test(done) {
-                            var app = express();
-                            var server = rendr.createServer({
-                                dataAdapter: dataAdapter
-                            });
+                        done();
+                    });
+                });
+                describe('.getSession(String)', function test() {
+                    it('should be added', function test(done) {
+                        var before = response.body.before;
+                        var after = response.body.after;
 
-                            function rendrConfiguration(rendrApp) {
-                                var response = {};
+                        (function existance(before, after) {
+                            before.should.not.be.ok;
+                            after.should.be.ok;
+                        })(before.app.hasGetSession, after.app.hasGetSession);
 
-                                function after(req, res) {
-                                    var data;
-                                    req.session.data.test = 'test';
-                                    if (req.rendrApp.getSession) {
-                                        data = req.rendrApp.getSession();
-                                    }
-                                    response = {
-                                        session: {
-                                            data: req.session.data
-                                        },
-                                        rendrApp: {
-                                            data: data
-                                        }
-                                    };
-                                    res.json(response);
-                                };
+                        done();
+                    });
+                    it('should return session.data[String]', function test(done) {
+                        var before = response.body.before;
+                        var after = response.body.after;
 
-                                rendrApp.use(middleware.session());
-                                rendrApp.use(after);
-                            };
+                        (function existance(before, after) {
+                            before.should.not.have.property('test');
+                            after.should.have.property('test');
+                        })(before.app.getSession, after.app.getSession);
 
-                            app.configure(expressConfiguration(app));
-                            server.configure(rendrConfiguration);
-                            app.use(server);
+                        (function equality(appTest, sessionTest) {
+                            appTest.should.equal(sessionTest);
+                        })(after.app.getSession.test, after.session.data.test);
 
-                            request(app).get('/').end(end);
+                        done();
+                    });
+                    it('should return session.data if String is falsey', function test(done) {
+                        var before = response.body.before;
+                        var after = response.body.after;
 
-                            function end(err, response) {
-                                var session = response.body.session;
-                                var rendrApp = response.body.rendrApp;
+                        (function existance(before, after) {
+                            before.should.not.have.property('session');
+                            after.should.have.property('session');
+                        })(before.app.getSession, after.app.getSession);
 
-                                (function existance(sessionData, rendrAppData) {
-                                    should.exist(sessionData);
-                                    should.exist(rendrAppData);
-                                })(session.data, rendrApp.data);
+                        (function equality(appSession, session) {
+                            appSession.should.equal(session);
+                        })(JSON.stringify(after.app.getSession.session), JSON.stringify(after.session.data));
 
-                                (function equality(sessionData, rendrAppData) {
-                                    sessionData.should.equal(rendrAppData);
-                                })(JSON.stringify(session.data), JSON.stringify(rendrApp.data));
-
-                                done();
-                            };
-                        });
+                        done();
                     });
                 });
             });

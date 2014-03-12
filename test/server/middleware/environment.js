@@ -1,3 +1,6 @@
+'use strict';
+
+var _ = require('underscore');
 var should = require('should');
 var request = require('supertest');
 var express = require('express');
@@ -5,7 +8,12 @@ var rendr = require('rendr');
 var SmaugAdapter = require('../../../server/data_adapter/smaug_adapter');
 var dataAdapter = new SmaugAdapter();
 var middleware = require('../../../server/middleware')(dataAdapter);
-var asynquence = require('asynquence');
+var paths = {
+    '/': 'home',
+    '/items': 'listing',
+    '/items/.*': 'itemPage',
+    '/.*': 'unknown'
+};
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -19,8 +27,11 @@ function expressConfiguration(app) {
 describe('server', function test() {
     describe('middleware', function test() {
         describe('environment', function test() {
-            it('should add the www host to the session as the siteLocation attribute', function test(done) {
-                var app = express();
+            var app;
+            var response;
+
+            before(function before(done) {
+                app = express();
                 var server = rendr.createServer({
                     dataAdapter: dataAdapter
                 });
@@ -31,7 +42,9 @@ describe('server', function test() {
                     function before(req, res, next) {
                         response.before = {
                             host: req.headers.host,
-                            siteLocation: req.rendrApp.getSession('siteLocation')
+                            pathname: req._parsedUrl.pathname,
+                            originalUrl: req.originalUrl,
+                            session: _.clone(req.rendrApp.getSession())
                         };
                         next();
                     };
@@ -39,10 +52,13 @@ describe('server', function test() {
                     function after(req, res) {
                         response.after = {
                             host: req.headers.host,
-                            siteLocation: req.rendrApp.getSession('siteLocation')
+                            pathname: req._parsedUrl.pathname,
+                            originalUrl: req.originalUrl,
+                            session: _.clone(req.rendrApp.getSession())
                         };
                         res.json(response);
                     };
+
                     rendrApp.use(middleware.session());
                     rendrApp.use(before);
                     rendrApp.use(middleware.environment());
@@ -52,200 +68,128 @@ describe('server', function test() {
                 app.configure(expressConfiguration(app));
                 server.configure(rendrConfiguration);
                 app.use(server);
+                request(app)
+                    .get('/')
+                    .set('host', 'm.olx.com.ar')
+                    .end(end);
 
-                request(app).get('/').set('host', 'm.olx.com.ar').end(end);
-
-                function end(err, response) {
+                function end(err, res) {
+                    response = res;
+                    done();
+                };
+            });
+            describe('siteLocation', function test() {
+                it('should be added to the session', function test(done) {
                     var before = response.body.before;
                     var after = response.body.after;
 
                     (function existance(before, after) {
-                        should.not.exist(before);
-                        should.exist(after);
-                    })(before.siteLocation, after.siteLocation);
+                        before.should.not.have.property('siteLocation');
+                        after.should.have.property('siteLocation');
+                    })(before.session, after.session);
 
-                    (function validity(subdomain) {
-                        subdomain.should.equal('www');
-                    })(after.host.split('.')[0]);
+                    done();
+                });
+                it('should be equal to the host', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
 
                     (function equality(siteLocation, host) {
                         siteLocation.should.equal(host);
-                    })(after.host, after.siteLocation);
+                    })(after.session.siteLocation, after.host);
 
                     done();
-                };
-            });
-            it('should add the pathname to the session as the path attribute', function test(done) {
-                var app = express();
-                var server = rendr.createServer({
-                    dataAdapter: dataAdapter
                 });
+                it('should start with "www."', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
 
-                function rendrConfiguration(rendrApp) {
-                    var response = {};
+                    (function validity(subdomain) {
+                        subdomain.should.equal('www');
+                    })(after.session.siteLocation.split('.')[0]);
 
-                    function before(req, res, next) {
-                        response.before = {
-                            pathname: req._parsedUrl.pathname,
-                            path: req.rendrApp.getSession('path')
-                        };
-                        next();
-                    };
-
-                    function after(req, res) {
-                        response.after = {
-                            pathname: req._parsedUrl.pathname,
-                            path: req.rendrApp.getSession('path')
-                        };
-                        res.json(response);
-                    };
-                    rendrApp.use(middleware.session());
-                    rendrApp.use(before);
-                    rendrApp.use(middleware.environment());
-                    rendrApp.use(after);
-                };
-
-                app.configure(expressConfiguration(app));
-                server.configure(rendrConfiguration);
-                app.use(server);
-
-                request(app).get('/').set('host', 'm.olx.com.ar').end(end);
-
-                function end(err, response) {
+                    done();
+                });
+            });
+            describe('path', function test() {
+                it('should be added to the session', function test(done) {
                     var before = response.body.before;
                     var after = response.body.after;
 
                     (function existance(before, after) {
-                        should.not.exist(before);
-                        should.exist(after);
-                    })(before.path, after.path);
+                        before.should.not.have.property('path');
+                        after.should.have.property('path');
+                    })(before.session, after.session);
+
+                    done();
+                });
+                it('should be equal to the pathname', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
 
                     (function equality(path, pathname) {
                         path.should.equal(pathname);
-                    })(after.path, after.pathname);
+                    })(after.session.path, after.pathname);
 
                     done();
-                };
-            });
-            it('should add the view type to the session as the viewType attribute', function test(done) {
-                var app = express();
-                var server = rendr.createServer({
-                    dataAdapter: dataAdapter
                 });
+            });
+            describe('url', function test() {
+                it('should be added to the session', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
 
-                function rendrConfiguration(rendrApp) {
-                    var response = {};
+                    (function existance(before, after) {
+                        before.should.not.have.property('url');
+                        after.should.have.property('url');
+                    })(before.session, after.session);
 
-                    function before(req, res, next) {
-                        response.before = {
-                            viewType: req.rendrApp.getSession('viewType')
-                        };
-                        next();
-                    };
+                    done();
+                });
+                it('should be equal to the original url', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
 
-                    function after(req, res) {
-                        response.after = {
-                            viewType: req.rendrApp.getSession('viewType')
-                        };
-                        res.json(response);
-                    };
-                    rendrApp.use(middleware.session());
-                    rendrApp.use(before);
-                    rendrApp.use(middleware.environment());
-                    rendrApp.use(after);
-                };
+                    (function equality(url, originalUrl) {
+                        url.should.equal(originalUrl);
+                    })(after.session.url, after.originalUrl);
 
-                app.configure(expressConfiguration(app));
-                server.configure(rendrConfiguration);
-                app.use(server);
+                    done();
+                });
+            });
+            describe('viewType', function test() {
+                it('should be added to the session', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
 
-                var paths = {
-                    '/': 'home',
-                    '/items': 'listing',
-                    '/items/1': 'itemPage',
-                    '/test': 'unknown'
-                };
-                var requests = asynquence(function start(done) {
-                    done(request(app));
+                    (function existance(before, after) {
+                        before.should.not.have.property('viewType');
+                        after.should.have.property('viewType');
+                    })(before.session, after.session);
+
+                    done();
                 });
                 for (var path in paths) {
                     (function closure(path) {
-                        requests.then(function then(done, request) {
-                            request.get(path).set('host', 'm.olx.com.ar').end(end);
+                        it('should be "' + paths[path] + '" if path is ' + path, function test(done) {
+                            request(app)
+                                .get(path)
+                                .set('host', 'm.olx.com.ar')
+                                .end(end);
 
                             function end(err, response) {
                                 var before = response.body.before;
                                 var after = response.body.after;
 
-                                (function existance(before, after) {
-                                    should.not.exist(before);
-                                    should.exist(after);
-                                })(before.viewType, after.viewType);
-
                                 (function equality(viewType) {
                                     viewType.should.equal(paths[path]);
-                                })(after.viewType);
+                                })(after.session.viewType);
 
-                                done(request);
+                                done();
                             };
                         });
                     })(path);
                 }
-                requests.val(function end() {
-                    done();
-                });
-            });
-            it('should add the originalUrl to the session as the url attribute', function test(done) {
-                var app = express();
-                var server = rendr.createServer({
-                    dataAdapter: dataAdapter
-                });
-
-                function rendrConfiguration(rendrApp) {
-                    var response = {};
-
-                    function before(req, res, next) {
-                        response.before = {
-                            originalUrl: req.originalUrl,
-                            url: req.rendrApp.getSession('url')
-                        };
-                        next();
-                    };
-
-                    function after(req, res) {
-                        response.after = {
-                            originalUrl: req.originalUrl,
-                            url: req.rendrApp.getSession('url')
-                        };
-                        res.json(response);
-                    };
-                    rendrApp.use(middleware.session());
-                    rendrApp.use(before);
-                    rendrApp.use(middleware.environment());
-                    rendrApp.use(after);
-                };
-
-                app.configure(expressConfiguration(app));
-                server.configure(rendrConfiguration);
-                app.use(server);
-
-                request(app).get('/').set('host', 'm.olx.com.ar').end(end);
-
-                function end(err, response) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function existance(before, after) {
-                        should.not.exist(before);
-                        should.exist(after);
-                    })(before.url, after.url);
-
-                    (function equality(url, originalUrl) {
-                        url.should.equal(originalUrl);
-                    })(after.url, after.originalUrl);
-
-                    done();
-                };
             });
         });
     });
