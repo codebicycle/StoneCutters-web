@@ -3,7 +3,6 @@ module.exports = {
 		'viewType': 'home',
 	    'pageName': 'home_page',
 	    'category': 'home',
-	    'subcategory': '',
 	},
 	'/items' : {
 		'viewType': 'listing',
@@ -12,7 +11,7 @@ module.exports = {
 	    'subcategory': '',
 	},
 	'/items/id' : {
-		'viewType': 'listing',
+		'viewType': 'item_page',
 	    'pageName': 'listing_',
 	    'category': '',
 	    'subcategory': '',

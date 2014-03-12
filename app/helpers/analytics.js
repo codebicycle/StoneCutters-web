@@ -36,26 +36,43 @@ module.exports = function analyticsHelper(){
         return pathMatch;
     };
 
-    var atiImgUrl = function(session, urls) {
-        var countryId = session.location.id;
+    var getParams = function (paramsProperties, session) {
+        var params = paramsProperties;
+        delete params['viewType'];
 
-        var pathMatch = getPathMatch(session.path);
-
-        if (!analyticsConfig[pathMatch] || !atiConfig[countryId])
-            return;
-
-        var logServer = atiConfig[countryId].logServer;
-        var siteId = atiConfig[countryId].siteId;
-        var catName = catHelper.getCatName(session) || analyticsConfig[pathMatch].category;
-        var subCatName = catHelper.getSubCatName(session) || analyticsConfig[pathMatch].subcategory;
-        var pageName = analyticsConfig[pathMatch].pageName + getAtiPageNameSuffix(session, catName, subCatName);
-        var params = {
-            language: session.location.flags.languageCode,
-            platform: session.platform,
+        var catName = catHelper.getCatName(session) || paramsProperties.category;
+        var subCatName = catHelper.getSubCatName(session) || paramsProperties.subcategory;
+        var pageName = paramsProperties.pageName + getAtiPageNameSuffix(session, catName, subCatName);
+        
+        var allParams = {
             page_name: pageName,
             category: catName,
             subcategory: subCatName,
         };
+
+        for(var p in params){
+            params[p] = allParams[p];
+        }
+
+        params['language'] = session.location.flags.languageCode;
+        params['platform'] = session.platform;
+
+        return params;
+    }
+
+    var atiImgUrl = function(session, urls) {
+        var countryId = session.location.id;
+
+        var pathMatch = getPathMatch(session.path);
+        var paramsProperties = analyticsConfig[pathMatch];
+        var atiCountryConfig = atiConfig[countryId];
+
+        if (!paramsProperties || !atiCountryConfig)
+            return;
+
+        var logServer = atiCountryConfig.logServer;
+        var siteId = atiCountryConfig.siteId;
+        var params = getParams(paramsProperties, session);
         var clientId = session.clientId;
         var rnd = Math.floor(Math.random() * 1000000000);
         var referer = session.referer;
