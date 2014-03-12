@@ -10,6 +10,7 @@ var dataAdapter = new SmaugAdapter();
 var middleware = require('../../../server/middleware')(dataAdapter);
 var hosts = ['m.olx.com.ar', 'm.olx.com.br'];
 var userAgents = ['UCWEB/8.8 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0 Mobile', 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0) Asus;Galaxy6'];
+var languageId = 10;
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -62,7 +63,7 @@ describe('server', function test() {
                 server.configure(rendrConfiguration);
                 app.use(server);
                 request(app)
-                    .get('/')
+                    .get('/?language=' + languageId)
                     .set('host', hosts[0])
                     .set('user-agent', userAgents[0])
                     .end(end);
@@ -131,6 +132,16 @@ describe('server', function test() {
                         before.should.not.have.property('selectedLanguage');
                         after.should.have.property('selectedLanguage');
                     })(before.session || {}, after.session);
+
+                    done();
+                });
+                it('should be equal to req.query.language if present', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
+
+                    (function equality(after) {
+                        after.should.be.equal(languageId);
+                    })(after.session.selectedLanguage);
 
                     done();
                 });
