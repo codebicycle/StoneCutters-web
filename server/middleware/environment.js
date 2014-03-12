@@ -20,9 +20,16 @@ module.exports = function(dataAdapter) {
             var url = req.originalUrl;
             var index = host.indexOf(':');
             var siteLocation = (index === -1) ? host : host.substring(0,index);
-            var pathMatch = analyticsHelper.getPathMatch(path);
-            var viewType = analyticsConfig[pathMatch].viewType;
+            var viewType;
 
+            if (path.indexOf('/api/') == -1) {
+                //if this isn't an api call, get the viewtype
+                var pathMatch = analyticsHelper.getPathMatch(path);
+                viewType = analyticsConfig[pathMatch].viewType;
+            }else{
+                viewType = 'api';
+            }
+            
             siteLocation = siteLocation.replace('m','www');
 
             /** If I detect that is not a m.olx.com like URL I will set up arg location
