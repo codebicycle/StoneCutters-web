@@ -80,9 +80,9 @@ module.exports = function(grunt) {
       custom: {
         files:{
           'build/mergedAssets.js': ['public/mergedAssets.js']
-        } 
+        }
       },
-    }, 
+    },
 
     //Stylus
     stylus: {
@@ -238,12 +238,27 @@ module.exports = function(grunt) {
     //  dest: './test/output/xunit.out'
     //}
 
-    mochaTest: {
+    //mochaTest: {
+    //  test: {
+    //    options: {
+    //      reporter: 'spec'
+    //    },
+    //    src: ['test/**/*.js']
+    //  }
+    //},
+    mochacov: {
+      coverage: {
+        src: ['test/**/*.js'],
+        options: {
+          reporter: 'html-cov',
+          output: 'test/coverage.html'
+        }
+      },
       test: {
+        src: ['test/**/*.js'],
         options: {
           reporter: 'spec'
-        },
-        src: ['test/**/*.js']
+        }
       }
     }
   });
@@ -251,7 +266,6 @@ module.exports = function(grunt) {
   //Loading NPM tasks.
   /* Here we should load the NPM task but we are using a grunt task to do this.*/
   /*grunt.loadNpmTasks('grunt task');*/
-
 
   //Register the tasks to Grunt.
   grunt.registerTask('runNode', function () {
@@ -271,17 +285,17 @@ module.exports = function(grunt) {
 
   //Transpiler task
   grunt.registerTask('es6', ['traceur', 'exec:add_new_line']);
-  
-  //Testing task
-  grunt.registerTask('unit-test', [/*'jshint',*/ 'mochaTest']);
 
-  
+  //Testing task
+  grunt.registerTask('unit-test', [/*'jshint',*/ 'mochacov:test', 'mochacov:coverage']);
+
+
   //Search anonymous functions
   grunt.registerTask('anonymous-finder', ['exec:anonymous_functions', 'anonymous-fx']);
   grunt.registerTask('anonymous-fx', 'Search for anonymous functions.', function handler(){
     grunt.task.requires('exec:anonymous_functions');
   });
-  
+
 
   //Compile tasks (dev-build, dist-build)
   grunt.registerTask('dev-build',  ['handlebars', 'rendr_stitch', 'stylus']);
@@ -294,7 +308,7 @@ module.exports = function(grunt) {
   //Server tasks
   // Run the server and watch for file changes
   grunt.registerTask('server-dev', ['clean','anonymous-finder','runNode', 'dev-build', 'watch']);
-  
+
   // Default task(s).
   //grunt.registerTask('server-dev', ['runNode', 'dev-build', 'watch']);
 
