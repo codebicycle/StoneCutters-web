@@ -1,7 +1,7 @@
 body{width: 100%; height: 100%; font-family: Helvetica,Arial,sans-serif; background: #eaeaea; font-family: helveticaNeue, Helvetica, Arial, sans-serif;}
 html, body, h1, h2 ,h3, ul, p, a{margin: 0; padding: 0; font-weight: normal;}
 .noscroll{overflow: hidden; position: fixed;}
-a{text-decoration: none; outline: none; color: #fff;}
+a{text-decoration: none; outline: none;}
 a:focus {outline:0px;}
 .clear{clear: both;}
 .hide{display: none!important;}
@@ -92,7 +92,7 @@ section#newAds{padding: 0.5em 0;}
     section#newAds .swiper-containerAds .slide div{position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-position: center center; background-repeat: no-repeat; background-size: cover;}
     section#newAds .swiper-containerAds a{width: 100%; height: 100%; display: block;}
 
-    section#newAds .swiper-containerAds .caption{width: 100%; height: 30%; position: absolute; left: 0; bottom: 0; padding: .3rem .5rem; background: rgba(0, 0, 0, .5); color: #fff; font-size: 1em; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+    section#newAds .swiper-containerAds .caption{width: 100%; height: 30%; position: absolute; left: 0; bottom: 0; padding: .3rem .5rem; background: rgba(0, 0, 0, .5); color: #fff; font-size: .8em; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
     section#newAds .swiper-containerAds .caption span{color: #ff7700;}
 
 /*----Popular Categories----*/
@@ -243,4 +243,24 @@ section#actions > div.action > div span, section#actions > div.action > a span{w
     section#itemPage{overflow: hidden;}
     .swiper-containerItem .slide:before{padding-top: 40% !important}
 }
+
+
+/*----AdWare----*/
+section#adWare{padding: .5rem;}
+section#adWare a{color: #0066CC;}
+section#adWare img{width: 30%; height: auto; float: left;}
+section#adWare .adD, section#adWare .adC{display: block; overflow: hidden;}
+section#adWare .ad{word-wrap: break-word;}
+section#adWare .adD{width: 68%; float: right; margin: .3rem 0 0 0; font-size: .8rem;}
+
+/*----languages----*/
+section#languages{padding: .5rem;}
+section#languages ul{width: 100%; text-align: center; font-size: .8rem;}
+section#languages ul li{display: inline-block; padding: 0 .2rem; color: #474747; border-right: 1px solid #474747;}
+section#languages ul li:last-child{border: none;}
+section#languages ul li a{color: #474747;}
+
+/*----location----*/
+section#location{padding: .5rem; text-align: center;}
+section#location a{color: #474747;}
 [data-view] .loading{opacity:.5}
