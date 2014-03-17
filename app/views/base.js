@@ -19,7 +19,7 @@ module.exports = RendrView.extend({
 
         return _.extend({}, data, {
             //an array of urls to be used as srcs for analytics images
-            analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession())
+            analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data)
         });
     },
 });

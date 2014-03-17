@@ -14,6 +14,7 @@ module.exports = function appUseConf(done){
     });
 
     function expressConfiguration() {
+        app.use(express.favicon());
         app.use(express.compress());
         app.use(express.static(__dirname + '/public'));
         app.use(express.logger());

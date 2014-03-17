@@ -23,7 +23,6 @@ module.exports = function(dataAdapter) {
             var viewType;
 
             if (path.indexOf('/api/') == -1) {
-
                 //if this isn't an api call, get the viewtype
                 var pathMatch = analyticsHelper.getPathMatch(path);
                 viewType = analyticsConfig[pathMatch].viewType;

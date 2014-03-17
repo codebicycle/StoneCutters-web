@@ -3,11 +3,11 @@
 var _ = require('underscore');
 
 module.exports = function categoriesHelper(){
-    var getCatName = function(session) {
+    var getCatName = function(session, viewData) {
         var name = '';
         var categories = session.categories;
         var url = session.url;
-        var catId = getCatId(url);
+        var catId = getCatId(url, viewData);
 
         var category = categories._byId[catId];
 
@@ -26,10 +26,10 @@ module.exports = function categoriesHelper(){
         return name;
     };
 
-    var getSubCatName = function(session) {
+    var getSubCatName = function(session, viewData) {
         var name = '';
         
-        var catId = getCatId(session.url);
+        var catId = getCatId(session.url, viewData);
         var childCats = session.childCategories;
         var subCat = childCats[catId];
 
@@ -40,7 +40,7 @@ module.exports = function categoriesHelper(){
         return name;
     };
 
-    var getCatId = function (url) {
+    var getCatId = function (url, viewData) {
         var catIndex = url.indexOf('categories');
         var catIdIndex = url.indexOf('categoryId');
         var catId = 0;
@@ -51,6 +51,8 @@ module.exports = function categoriesHelper(){
         }else if (catIdIndex != -1) {
             var ampIndex = url.indexOf('&',catIdIndex+11);
             catId = parseInt(url.substring(catIdIndex+11,ampIndex),10);
+        }else if(viewData && viewData.item){
+            catId = viewData.item.category.id;
         }
 
         return catId;
