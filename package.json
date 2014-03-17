@@ -27,7 +27,9 @@
     "request": "~2.29",
     "asynquence": "~0.3.3-b",
     "grunt-exec": "~0.4.5",
-    "cluster": "~0.7.7"
+    "cluster": "~0.7.7",
+    "load-grunt-config": "~0.7.2",
+    "load-grunt-tasks": "~0.4.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -55,8 +57,13 @@
   },
   "config": {
     "blanket": {
-      "pattern": ["/server/"],
-      "data-cover-never": ["/node_modules/", "/test/"]
+      "pattern": [
+        "/server/"
+      ],
+      "data-cover-never": [
+        "/node_modules/",
+        "/test/"
+      ]
     }
   }
 }
