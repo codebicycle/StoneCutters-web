@@ -5,9 +5,9 @@ var analyticsConfig = require('../config/analytics/analytics_config');
 var catHelper = require('./categories');
 
 module.exports = function analyticsHelper(){
-    var imgUrls = function(session) {
+    var imgUrls = function(session, viewData) {
         var urls = [];
-        atiImgUrl(session, urls);
+        atiImgUrl(session, viewData, urls);
         
         return urls;
     };
@@ -36,18 +36,67 @@ module.exports = function analyticsHelper(){
         return pathMatch;
     };
 
-    var getParams = function (paramsProperties, session) {
+    var getAd = function (session, viewData) {
+        var ad = {};
+
+        if (viewData.hasOwnProperty('item')) {
+            var item = viewData.item;
+            var postDate = new Date(item.date.timestamp);
+            var now = new Date();
+
+            ad.ad_id = item.id;
+            ad.ad_photo = item.images.length;
+            ad.poster_id = (item.user)? item.user.id : 0;
+            ad.poster_type = (item.user)? 'registered_logged' : 'registered_no';
+            ad.posting_to_action = Math.abs(Math.round((now - postDate) / (60*60*24)));
+        }
+
+        return ad;
+    };
+
+    var getGeo = function (session, viewData) {
+        var geo = {};
+
+        if (viewData.hasOwnProperty('item')) {
+            var item = viewData.item;
+            var country = item.location;
+            var state = country.children[0];
+            var city = state.children[0];
+
+            geo.geo1 = state.name.replace(/  /g,"_").replace(/ /g,"_").replace(/-/g,"");
+            geo.geo2 = city.name.replace(/  /g,"_").replace(/ /g,"_").replace(/-/g,"");
+        }
+
+        return geo;
+    };
+
+    var getParams = function (paramsProperties, session, viewData) {
         var params = paramsProperties;
         delete params['viewType'];
 
-        var catName = catHelper.getCatName(session) || paramsProperties.category;
-        var subCatName = catHelper.getSubCatName(session) || paramsProperties.subcategory;
+        var catName = catHelper.getCatName(session, viewData) || paramsProperties.category;
+        var subCatName = catHelper.getSubCatName(session, viewData) || paramsProperties.subcategory;
         var pageName = paramsProperties.pageName + getAtiPageNameSuffix(session, catName, subCatName);
-        
+
+        var geoObj = getGeo(session, viewData);
+        var adObj = getAd(session, viewData);
+
+        var action_type;
+
         var allParams = {
             page_name: pageName,
             category: catName,
             subcategory: subCatName,
+            geo1: geoObj.geo1,
+            geo2: geoObj.geo2,
+            ad_category: catName,
+            ad_subcategory: subCatName,
+            ad_id: adObj.ad_id,
+            ad_photo: adObj.ad_photo,
+            poster_id: adObj.poster_id,
+            poster_type: adObj.poster_type,
+            posting_to_action: adObj.posting_to_action,
+            action_type: params['action_type']
         };
 
         for(var p in params){
@@ -60,7 +109,7 @@ module.exports = function analyticsHelper(){
         return params;
     }
 
-    var atiImgUrl = function(session, urls) {
+    var atiImgUrl = function(session, viewData, urls) {
         var countryId = session.location.id;
 
         var pathMatch = getPathMatch(session.path);
@@ -72,7 +121,7 @@ module.exports = function analyticsHelper(){
 
         var logServer = atiCountryConfig.logServer;
         var siteId = atiCountryConfig.siteId;
-        var params = getParams(paramsProperties, session);
+        var params = getParams(paramsProperties, session, viewData);
         var clientId = session.clientId;
         var rnd = Math.floor(Math.random() * 1000000000);
         var referer = session.referer;
