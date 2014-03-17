@@ -18,3 +18,4 @@ config/runtime.json
 *.swo
 conf.json
 test/output
+test/coverage.html

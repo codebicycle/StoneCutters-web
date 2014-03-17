@@ -22,14 +22,15 @@ module.exports = function(dataAdapter) {
             var siteLocation = (index === -1) ? host : host.substring(0,index);
             var viewType;
 
-            if (path.indexOf('/api/') == -1 && path.indexOf('/favicon.ico') == -1) {
+            if (path.indexOf('/api/') == -1) {
                 //if this isn't an api call, get the viewtype
                 var pathMatch = analyticsHelper.getPathMatch(path);
                 viewType = analyticsConfig[pathMatch].viewType;
-            }else{
+            }
+            else {
                 viewType = 'api';
             }
-            
+
             siteLocation = siteLocation.replace('m','www');
 
             /** If I detect that is not a m.olx.com like URL I will set up arg location
@@ -40,8 +41,6 @@ module.exports = function(dataAdapter) {
                 siteLocation = (firstWord === 'www') ? siteLocation : 'www.olx.com.ar';
             })();
 
-            console.log('<DEBUG CONSOLE LOG> Extracting location ID from host header: ' + siteLocation);
-
             req.headers.host = siteLocation;
 
             var clientId = app.getSession('clientId');
@@ -50,7 +49,7 @@ module.exports = function(dataAdapter) {
                 var c1 = Math.floor(Math.random()*11);
                 var c2 = Math.floor(Math.random()*11);
                 var n = Math.floor(Math.random()* 1000000);
-                
+
                 clientId = String.fromCharCode(c1)+n+String.fromCharCode(c2);
             }
 
