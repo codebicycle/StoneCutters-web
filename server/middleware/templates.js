@@ -52,7 +52,6 @@ module.exports = function(dataAdapter) {
                     template += '_' + location;
                 }
                 app.updateSession({
-                    updateRequired: platform !== app.getSession('platform'),
                     platform: platform,
                     template: template
                 });
