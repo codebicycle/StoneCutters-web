@@ -16,7 +16,7 @@ function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
         app.use(express.session({
-            store: null,
+            store: require('../../../store')(express),
             secret: 'test'
         }));
     };

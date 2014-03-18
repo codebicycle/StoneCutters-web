@@ -32,7 +32,7 @@ function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
         app.use(express.session({
-            store: null,
+            store: require('../../../store')(express),
             secret: 'test'
         }));
     };
@@ -90,17 +90,6 @@ describe('server', function test() {
                     };
                 })(Object.keys(userAgents));
             });
-            it('should add an updateRequired attribute to the session', function test(done) {
-                var before = response.body.before;
-                var after = response.body.after;
-
-                (function existance(before, after) {
-                    before.should.not.have.property('updateRequired');
-                    after.should.have.property('updateRequired');
-                })(before.session, after.session);
-
-                done();
-            });
             it('should add a platform attribute to the session', function test(done) {
                 var before = response.body.before;
                 var after = response.body.after;
@@ -122,60 +111,6 @@ describe('server', function test() {
                 })(before.session, after.session);
 
                 done();
-            });
-            describe('updateRequired', function test() {
-                it('should be true on first request', function test(done) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function equality(updateRequired) {
-                        updateRequired.should.be.ok;
-                    })(after.session.updateRequired);
-
-                    done();
-                });
-                it('should be false after first request', function test(done) {
-                    (function closure(userAgents) {
-                        request(app)
-                            .get('/')
-                            .set('host', 'm.olx.com.ar')
-                            .set('user-agent', userAgents[0])
-                            .set('cookie', response.get('set-cookie'))
-                            .end(end);
-
-                        function end(err, response) {
-                            var before = response.body.before;
-                            var after = response.body.after;
-
-                            (function equality(updateRequired) {
-                                updateRequired.should.not.be.ok;
-                            })(after.session.updateRequired);
-
-                            done();
-                        };
-                    })(Object.keys(userAgents));
-                });
-                it('should be true after first request if the platform changes', function test(done) {
-                    (function closure(userAgents) {
-                        request(app)
-                            .get('/')
-                            .set('host', 'm.olx.com.ar')
-                            .set('user-agent', userAgents[1])
-                            .set('cookie', response.get('set-cookie'))
-                            .end(end);
-
-                        function end(err, response) {
-                            var before = response.body.before;
-                            var after = response.body.after;
-
-                            (function equality(updateRequired) {
-                                updateRequired.should.be.ok;
-                            })(after.session.updateRequired);
-
-                            done();
-                        };
-                    })(Object.keys(userAgents));
-                });
             });
             describe('platform', function test() {
                 for (var userAgent in userAgents) {

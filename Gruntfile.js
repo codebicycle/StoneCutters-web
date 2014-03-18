@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('es6', ['traceur', 'exec:add_new_line']);
 
-    grunt.registerTask('test', ['mochacov:test', 'mochacov:coverage']);
+    grunt.registerTask('unit-test', ['mochacov:test', 'mochacov:coverage']);
 
     grunt.registerTask('anonymous-finder', ['exec:anonymous_functions', 'anonymous-fx']);
 

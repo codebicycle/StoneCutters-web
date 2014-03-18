@@ -3,7 +3,7 @@
 /*
  * This is the implementation of cluster technology for ARWEN.
  */
- module.exports = function(done) {
+ module.exports = function(done, store) {
     var cluster = require('cluster');
 
     if (cluster.isMaster) {
@@ -21,6 +21,6 @@
         });
     }
     else {
-        done(cluster.worker);
+        done(store, cluster.worker);
     }
 }

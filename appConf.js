@@ -1,10 +1,11 @@
 'use strict';
 
-module.exports = function appUseConf(done){
+module.exports = function appUseConf(done) {
     var config = require('config');
     var express = require('express');
     var rendr = require('rendr');
 
+    var store = require('./store')(express);
     var SmaugAdapter = require('./server/data_adapter/smaug_adapter');
     var dataAdapter = new SmaugAdapter();
     var middleware = require('./server/middleware')(dataAdapter);
@@ -21,9 +22,7 @@ module.exports = function appUseConf(done){
         app.use(express.bodyParser());
         app.use(express.cookieParser());
         app.use(express.session({
-
-            // By using node's session store you will get a different session for each core
-            store: null,
+            store: store,
             secret: config.session.secret
         }));
     };

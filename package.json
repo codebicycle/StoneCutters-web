@@ -29,7 +29,8 @@
     "grunt-exec": "~0.4.5",
     "cluster": "~0.7.7",
     "load-grunt-config": "~0.7.2",
-    "load-grunt-tasks": "~0.4.0"
+    "load-grunt-tasks": "~0.4.0",
+    "connect-memcached": "0.0.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
