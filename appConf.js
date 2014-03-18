@@ -36,7 +36,7 @@ module.exports = function appUseConf(done) {
 
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());
-        rendrApp.use(middleware.incrementCounter());
+        //rendrApp.use(middleware.incrementCounter());
     };
 
     app.configure(expressConfiguration);
