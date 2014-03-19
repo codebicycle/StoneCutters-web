@@ -1,5 +1,7 @@
 'use strict';
 
+require('newrelic');
+
 function uncaughtError(error) {
     throw error;
 }

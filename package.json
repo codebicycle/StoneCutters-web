@@ -40,7 +40,8 @@
     "underscore": "~1.6.0",
     "request": "~2.34.0",
     "debug": "~0.7.4",
-    "rendr-handlebars": "~0.2.0"
+    "rendr-handlebars": "~0.2.0",
+    "newrelic": "~1.4.0"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
