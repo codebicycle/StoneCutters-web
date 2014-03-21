@@ -4,39 +4,41 @@ var atiConfig = require('../config/analytics/ati_config');
 var analyticsConfig = require('../config/analytics/analytics_config');
 var catHelper = require('./categories');
 
-module.exports = function analyticsHelper(){
+module.exports = function analyticsHelper() {
     var imgUrls = function(session, viewData) {
         var urls = [];
         atiImgUrl(session, viewData, urls);
-        
+
         return urls;
     };
 
-    var getAtiPageNameSuffix = function (session, catName, subCatName) {
+    var getAtiPageNameSuffix = function(session, catName, subCatName) {
         var suffix = '';
 
         if (session.viewType == 'listing') {
             suffix = subCatName;
-        }else if (session.viewType == 'categoryList') {
+        }
+        else if (session.viewType == 'categoryList') {
             suffix = catName;
         }
 
         return suffix;
     };
 
-    var getPathMatch = function (path) {
+    var getPathMatch = function(path) {
         var pathMatch = path;
 
         if (path.indexOf('/categories/') != -1) {
             pathMatch = '/categories';
-        }else if (path.indexOf('/items/') != -1) {
+        }
+        else if (path.indexOf('/items/') != -1) {
             pathMatch = '/items/id';
         }
 
         return pathMatch;
     };
 
-    var getAd = function (session, viewData) {
+    var getAd = function(session, viewData) {
         var ad = {};
 
         if (viewData.hasOwnProperty('item')) {
@@ -54,7 +56,7 @@ module.exports = function analyticsHelper(){
         return ad;
     };
 
-    var getGeo = function (session, viewData) {
+    var getGeo = function(session, viewData) {
         var geo = {};
 
         if (viewData.hasOwnProperty('item')) {
@@ -70,9 +72,9 @@ module.exports = function analyticsHelper(){
         return geo;
     };
 
-    var getParams = function (paramsProperties, session, viewData) {
+    var getParams = function(paramsProperties, session, viewData) {
         var params = paramsProperties;
-        delete params['viewType'];
+        delete params.viewType;
 
         var catName = catHelper.getCatName(session, viewData) || paramsProperties.category;
         var subCatName = catHelper.getSubCatName(session, viewData) || paramsProperties.subcategory;
@@ -96,18 +98,18 @@ module.exports = function analyticsHelper(){
             poster_id: adObj.poster_id,
             poster_type: adObj.poster_type,
             posting_to_action: adObj.posting_to_action,
-            action_type: params['action_type']
+            action_type: params.action_type
         };
 
         for(var p in params){
             params[p] = allParams[p];
         }
 
-        params['language'] = session.location.flags.languageCode;
-        params['platform'] = session.platform;
+        params.language = session.location.flags.languageCode;
+        params.platform = session.platform;
 
         return params;
-    }
+    };
 
     var atiImgUrl = function(session, viewData, urls) {
         var countryId = session.location.id;
@@ -116,8 +118,9 @@ module.exports = function analyticsHelper(){
         var paramsProperties = analyticsConfig[pathMatch];
         var atiCountryConfig = atiConfig[countryId];
 
-        if (!paramsProperties || !atiCountryConfig)
+        if (!paramsProperties || !atiCountryConfig) {
             return;
+        }
 
         var logServer = atiCountryConfig.logServer;
         var siteId = atiCountryConfig.siteId;

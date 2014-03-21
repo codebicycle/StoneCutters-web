@@ -9,7 +9,7 @@ module.exports = function(debugMode) {
     store = store || require('./store')();
 
     function get(key, done, notCached, cached, lifetime) {
-        function get(done) {
+        function __get(done) {
             _get(key, done, notCached, lifetime);
         }
 
@@ -20,11 +20,11 @@ module.exports = function(debugMode) {
 
         cached = cached || function(data) {
             done(data);
-        }
+        };
 
         asynquence().or(done.fail)
-            .then(get)
-            .val(cached)
+            .then(__get)
+            .val(cached);
     }
 
     function _get(key, done, notSet, lifetime) {
@@ -63,7 +63,7 @@ module.exports = function(debugMode) {
             .then(attempt)
             .then(check)
             .val(cache);
-    };
+    }
 
     function set(key, value, done, lifetime) {
         if (Array.isArray(key)) {
@@ -100,11 +100,11 @@ module.exports = function(debugMode) {
             }
             done();
         });
-    };
+    }
 
     return {
         get: get,
         set: set,
         unset: unset
-    }
-}
+    };
+};

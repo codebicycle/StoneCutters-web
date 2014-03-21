@@ -75,7 +75,7 @@ module.exports = function(dataAdapter) {
                 location.cities = cities;
                 location.city = city;
                 done(location);
-            };
+            }
 
             function store(done, location) {
                 app.updateSession({
