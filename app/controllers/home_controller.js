@@ -7,17 +7,8 @@ module.exports = {
     index: function(params, callback) {
         var app = helpers.environment.init(this.app);
 
-        (function updateCity(cityId) {
-            var location = app.getSession('location');
-            var city = location.cities._byId[cityId];
-
-            if (city) {
-                location.city = city;
-                app.updateSession({
-                    siteLocation: city.url
-                });
-            }
-        })(params.cityId);
+        if (params.cityId)
+            helpers.environment.updateCity(app, params.cityId);
 
         (function fetchWhatsNew() {
             var siteLocation = app.getSession('siteLocation');

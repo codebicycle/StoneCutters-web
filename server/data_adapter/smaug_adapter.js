@@ -141,6 +141,7 @@ SmaugAdapter.prototype.promiseRequest = function(req, api, options, done, fail) 
             else {
                 error.err.push(body);
             }
+            console.log("Err en adapter: %j",error);
             fail(error);
             return;
         }
