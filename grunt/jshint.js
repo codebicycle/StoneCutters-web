@@ -2,6 +2,27 @@
 
 module.exports = function(grunt) {
     return {
-      all: ['*.js']
+        options: {
+            force: true,
+            node: true
+        },
+        server: {
+            src: ['*.js', 'server/**/*.js', 'grunt/**/*.js']
+        },
+        client: {
+            src: ['app/**/*.js'],
+            options: {
+                ignores: ['app/lib/**/*.js', 'app/templates/compiledTemplates.js'],
+                browser: true,
+                predef: ['$', '_gaq'],
+                '-W040': true
+            }
+        },
+        tests: {
+            src: ['test/**/*.js'],
+            options: {
+                predef: ['describe', 'before', 'it']
+            }
+        }
     };
 };

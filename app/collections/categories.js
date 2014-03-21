@@ -1,6 +1,6 @@
 'use strict';
 
-var Category = require('../models/category')
+var Category = require('../models/category');
 var Base = require('./base');
 
 module.exports = Base.extend({

@@ -20,19 +20,19 @@ module.exports = function usersRouter(app, dataAdapter) {
 
         function callValidateUserCallback(done) {
             validateUser(done, user);
-        };
+        }
 
         function saveDataRegistrationCallback(done, user) {
             saveData(req, res, user, done);
-        };
+        }
 
         function redirectRegistrationHomeCallback(done) {
             res.redirect('/');
-        };
+        }
 
         function errorRegistrationCallback(err){
             res.redirect('/registration?' + querystring.stringify(err));
-        };
+        }
 
         function validateUser(done, user) {
             var errors = {
@@ -67,13 +67,13 @@ module.exports = function usersRouter(app, dataAdapter) {
             };
 
             dataAdapter.promiseRequest(req, api, done);
-        };
+        }
 
         asynquence(callValidateUserCallback).or(errorRegistrationCallback)
             .then(registerUser)
             .then(saveDataRegistrationCallback)
             .then(redirectRegistrationHomeCallback);
-    };
+    }
 
     function loginHandler(req, res) {
         var usernameOrEmail = req.param('usernameOrEmail', null);
@@ -81,20 +81,20 @@ module.exports = function usersRouter(app, dataAdapter) {
 
         function callGetChallengeCallback(done) {
             getChallenge(done, usernameOrEmail);
-        };
+        }
 
         function saveDataLoginCallback(done, user) {
             saveData(req, res, user, done);
-        };
+        }
 
         function redirectLoginHomeCallback(done) {
             res.redirect('/');
-        };
+        }
 
         function errorLoginCallback(err) {
             console.log(err);
             res.redirect('/login?' + querystring.stringify(err));
-        };
+        }
 
         function getChallenge(done, usernameOrEmail) {
             var api = {
@@ -116,7 +116,7 @@ module.exports = function usersRouter(app, dataAdapter) {
             }
 
             dataAdapter.promiseRequest(req, api, requestDone, done.fail);
-        };
+        }
 
         function loginUser(done, credentials) {
             var api = {
@@ -125,20 +125,20 @@ module.exports = function usersRouter(app, dataAdapter) {
             };
 
             dataAdapter.promiseRequest(req, api, done);
-        };
+        }
 
         asynquence().or(errorLoginCallback)
             .then(callGetChallengeCallback)
             .then(loginUser)
             .then(saveDataLoginCallback)
             .then(redirectLoginHomeCallback);
-    };
+    }
 
     function saveData(req, res, user, done) {
         req.rendrApp.updateSession({
             user: user
         });
         done();
-    };
+    }
 
 };

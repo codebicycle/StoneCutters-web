@@ -15,7 +15,7 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var req_path = req._parsedUrl.pathname.split('/');
 
-            if(req_path[1] == 'experiments'){
+            if (req_path[1] == 'experiments') {
                 var experimentName = req_path[2];
                 var value = req_path[3];
                 var client_id = req.query.client_id;
@@ -30,8 +30,8 @@ module.exports = function(dataAdapter) {
                     console.log('Convertion logged.');
                 });
 
-                req.url=url
-                req.originalUrl=url;
+                req.url = url;
+                req.originalUrl = url;
                 delete req.query.url;
                 delete req.query.client_id;
             }

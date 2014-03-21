@@ -34,13 +34,13 @@ module.exports = function(dataAdapter) {
                         });
 
                         done(languages);
-                    };
+                    }
 
                     dataAdapter.promiseRequest(req, api, success, done.fail);
                 }
 
                 cache.get(key, done, notCached);
-            };
+            }
 
             function select(done, languages) {
                 var language = parseInt(req.param('language', 0));
@@ -51,7 +51,7 @@ module.exports = function(dataAdapter) {
                 }
                 selectedLanguage = language || app.getSession('selectedLanguage') || languages.default || languages.models[0].id;
                 done(languages, selectedLanguage);
-            };
+            }
 
             function fetchDictionary(done, languages, selectedLanguage) {
                 var key = ['dictionaries', selectedLanguage];
@@ -65,7 +65,7 @@ module.exports = function(dataAdapter) {
                     // Waiting for SMAUG to implement this call so we need to use a fake fail function
                     function fail() {
                         done(defaultDictionaries[selectedLanguage] || defaultDictionaries[1]);
-                    };
+                    }
 
                     dataAdapter.promiseRequest(req, api, done, /*done.*/fail);
                 }
@@ -75,7 +75,7 @@ module.exports = function(dataAdapter) {
                 }
 
                 cache.get(key, done, notCached, cached);
-            };
+            }
 
             function store(done, languages, selectedLanguage, dictionary) {
                 app.updateSession({
@@ -84,12 +84,12 @@ module.exports = function(dataAdapter) {
                     dictionary: dictionary
                 });
                 done();
-            };
+            }
 
             function fail(msg) {
                 console.log('Middleware Failure (Language): ' + msg);
                 res.send(400, msg);
-            };
+            }
 
             asynquence().or(fail)
                 .then(fetchLanguages)

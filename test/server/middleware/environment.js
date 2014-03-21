@@ -25,7 +25,7 @@ function expressConfiguration(app) {
             secret: 'test'
         }));
     };
-};
+}
 
 describe('server', function test() {
     describe('middleware', function test() {
@@ -50,7 +50,7 @@ describe('server', function test() {
                             session: _.clone(req.rendrApp.getSession())
                         };
                         next();
-                    };
+                    }
 
                     function after(req, res) {
                         response.after = {
@@ -60,13 +60,13 @@ describe('server', function test() {
                             session: _.clone(req.rendrApp.getSession())
                         };
                         res.json(response);
-                    };
+                    }
 
                     rendrApp.use(middleware.session());
                     rendrApp.use(before);
                     rendrApp.use(middleware.environment());
                     rendrApp.use(after);
-                };
+                }
 
                 app.configure(expressConfiguration(app));
                 server.configure(rendrConfiguration);
@@ -79,7 +79,7 @@ describe('server', function test() {
                 function end(err, res) {
                     response = res;
                     done();
-                };
+                }
             });
             describe('siteLocation', function test() {
                 it('should be added to the session', function test(done) {
@@ -173,25 +173,26 @@ describe('server', function test() {
                     done();
                 });
                 for (var path in paths) {
-                    (function closure(path) {
-                        it('should be "' + paths[path] + '" if path is ' + path, function test(done) {
-                            request(app)
-                                .get(path)
-                                .set('host', 'm.olx.com.ar')
-                                .end(end);
+                    closure(path);
+                }
+                function closure(path) {
+                    it('should be "' + paths[path] + '" if path is ' + path, function test(done) {
+                        request(app)
+                            .get(path)
+                            .set('host', 'm.olx.com.ar')
+                            .end(end);
 
-                            function end(err, response) {
-                                var before = response.body.before;
-                                var after = response.body.after;
+                        function end(err, response) {
+                            var before = response.body.before;
+                            var after = response.body.after;
 
-                                (function equality(viewType) {
-                                    viewType.should.equal(paths[path]);
-                                })(after.session.viewType);
+                            (function equality(viewType) {
+                                viewType.should.equal(paths[path]);
+                            })(after.session.viewType);
 
-                                done();
-                            };
-                        });
-                    })(path);
+                            done();
+                        }
+                    });
                 }
             });
         });

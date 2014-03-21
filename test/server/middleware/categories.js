@@ -19,7 +19,7 @@ function expressConfiguration(app) {
             secret: 'test'
         }));
     };
-};
+}
 
 describe('server', function test() {
     describe('middleware', function test() {
@@ -41,14 +41,14 @@ describe('server', function test() {
                             session: _.clone(req.rendrApp.getSession())
                         };
                         next();
-                    };
+                    }
 
                     function after(req, res) {
                         response.after = {
                             session: _.clone(req.rendrApp.getSession())
                         };
                         res.json(response);
-                    };
+                    }
 
                     rendrApp.use(middleware.session());
                     rendrApp.use(middleware.environment());
@@ -56,7 +56,7 @@ describe('server', function test() {
                     rendrApp.use(before);
                     rendrApp.use(middleware.categories());
                     rendrApp.use(after);
-                };
+                }
 
                 app.configure(expressConfiguration(app));
                 server.configure(rendrConfiguration);
@@ -70,7 +70,7 @@ describe('server', function test() {
                 function end(err, res) {
                     response = res;
                     done();
-                };
+                }
             });
             it('should be added to the session', function test(done) {
                 var before = response.body.before;
@@ -100,7 +100,7 @@ describe('server', function test() {
                     })(JSON.stringify(before.session.categories), JSON.stringify(after.session.categories));
 
                     done();
-                };
+                }
             });
             it('should be different for different hosts', function test(done) {
                 request(app)
@@ -119,7 +119,7 @@ describe('server', function test() {
                     })(JSON.stringify(before.session.categories), JSON.stringify(after.session.categories));
 
                     done();
-                };
+                }
             });
         });
     });

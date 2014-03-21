@@ -28,13 +28,17 @@ Details of the latest version can be found on the Project's Github Wiki.
 
     `sudo npm install -g grunt-cli`
 
-4. Download and install the node modules running:
+4. Install nodemon:
+
+    `sudo npm -g nodemon`
+
+5. Download and install the node modules running:
 
     `sudo npm install`
 
-5. Run ARWEN and enjoy it magic running:
+6. Run ARWEN and enjoy it magic running:
 
-    `sudo grunt server-dev`
+    `sudo grunt start`
 
 
 ##  Documentation
