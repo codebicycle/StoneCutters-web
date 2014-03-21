@@ -46,5 +46,16 @@ module.exports = {
             url: url,
             viewType: viewType
         });
-    }
+    },
+    updateCity: function(app, cityId) {
+        var location = app.getSession('location');
+        var city = location.cities._byId[cityId];
+
+        if (city) {
+            location.city = city;
+            app.updateSession({
+                siteLocation: city.url
+            });
+        }
+    },
 };

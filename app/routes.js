@@ -19,4 +19,8 @@ module.exports = function(match) {
     match('location', 'location#index');
     match('registration', 'registration#index');
     match('login', 'login#index');
+
+    match('post', 'post#index');
+    match('post/category/:id', 'post#subcat');
+    match('post/subcategory/:id', 'post#form');
 };

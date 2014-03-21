@@ -6,5 +6,5 @@ var asynquence = require('asynquence');
 
 
 var app = asynquence()
-    .then(require('./cluster'))
+    //.then(require('./cluster'))
     .val(require('./bootstrap'));

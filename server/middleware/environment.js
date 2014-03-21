@@ -22,7 +22,7 @@ module.exports = function(dataAdapter) {
             var siteLocation = (index === -1) ? host : host.substring(0,index);
             var viewType;
 
-            if (path.indexOf('/api/') == -1) {
+            if (path.indexOf('/api/') == -1 && analyticsConfig[pathMatch]) {
                 //if this isn't an api call, get the viewtype
                 var pathMatch = analyticsHelper.getPathMatch(path);
                 viewType = analyticsConfig[pathMatch].viewType;

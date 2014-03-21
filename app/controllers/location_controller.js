@@ -12,7 +12,8 @@ module.exports = {
             location.cities = cities;
             return callback(null, {
                 'location': location,
-                'cities': cities.models
+                'cities': cities.models,
+                'posting': params.posting,
             });
         }
 
@@ -37,10 +38,12 @@ module.exports = {
                     cities._byId[city.id] = city;
                 });
                 location.cities = cities;
+
                 callback(err, {
                     'location': location,
                     'cities': cities.models,
-                    'search': params.search
+                    'search': params.search,
+                    'posting': params.posting,
                 });
             });
         })();
