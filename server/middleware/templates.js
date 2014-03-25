@@ -7,7 +7,7 @@ module.exports = function(dataAdapter) {
 
         function isLocalized(platform, location) {
             return !!(~localizedTemplates[platform].indexOf(location));
-        };
+        }
 
         return function middleware(req, res, next) {
             var app = req.rendrApp;
@@ -52,7 +52,6 @@ module.exports = function(dataAdapter) {
                     template += '_' + location;
                 }
                 app.updateSession({
-                    updateRequired: platform !== app.getSession('platform'),
                     platform: platform,
                     template: template
                 });
@@ -66,7 +65,7 @@ module.exports = function(dataAdapter) {
             function fail(error) {
                 console.log('Got error: ' + error.err);
                 res.send(400, error.err);
-            };
+            }
 
             dataAdapter.promiseRequest(req, api, done, fail);
         };

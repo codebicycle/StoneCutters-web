@@ -9,77 +9,73 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
+            var cache = require('../../cache')();
 
             function fetchLanguages(done) {
-                var api = {
-                    body: {},
-                    url: '/countries/' + siteLocation + '/languages'
-                };
+                var key = ['languages', siteLocation];
 
-                function success(results) {
-                    var languages = {
-                        models: results,
-                        _byId: {}
+                function notCached(done) {
+                    var api = {
+                        body: {},
+                        url: '/countries/' + siteLocation + '/languages'
                     };
 
-                    languages.models.forEach(function iteration(language) {
-                        languages._byId[language.id] = language;
-                        if (language.default) {
-                            languages.default = language.id;
-                        }
-                    });
+                    function success(results) {
+                        var languages = {
+                            models: results,
+                            _byId: {}
+                        };
 
-                    done(languages);
-                };
+                        languages.models.forEach(function iteration(language) {
+                            languages._byId[language.id] = language;
+                            if (language.default) {
+                                languages.default = language.id;
+                            }
+                        });
 
-                if (!app.getSession('updateRequired')) {
-                    return done(app.getSession('languages'));
+                        done(languages);
+                    }
+
+                    dataAdapter.promiseRequest(req, api, success, done.fail);
                 }
 
-                dataAdapter.promiseRequest(req, api, success, done.fail);
+                cache.get(key, done, notCached);
             }
 
             function select(done, languages) {
-                var language = parseInt(req.query.language);
+                var language = parseInt(req.param('language', 0));
                 var selectedLanguage;
 
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
-                if (!app.getSession('updateRequired')) {
-                    selectedLanguage = language || app.getSession('selectedLanguage');
-                }
-                else {
-                    selectedLanguage = language || languages.default || languages.models[0].id;
-                }
-
+                selectedLanguage = language || app.getSession('selectedLanguage') || languages.default || languages.models[0].id;
                 done(languages, selectedLanguage);
-            };
+            }
 
             function fetchDictionary(done, languages, selectedLanguage) {
-                function fetch() {
+                var key = ['dictionaries', selectedLanguage];
+
+                function notCached(done) {
                     var api = {
                         body: {},
-                        url: '/dictionaries/' + languages._byId[selectedLanguage].id
+                        url: '/dictionaries/' + selectedLanguage
                     };
 
-                    dataAdapter.promiseRequest(req, api, success, /*done.*/fail);
-                };
+                    // Waiting for SMAUG to implement this call so we need to use a fake fail function
+                    function fail() {
+                        done(defaultDictionaries[selectedLanguage] || defaultDictionaries[1]);
+                    }
 
-                function success(dictionary) {
-                    done(languages, selectedLanguage, dictionary);
-                };
-
-                // Waiting for SMAUG to implement this call so we need to use a fake fail function
-                function fail() {
-                    success(defaultDictionaries[selectedLanguage]);
-                };
-
-                if (!app.getSession('updateRequired') && app.getSession('selectedLanguage') === selectedLanguage) {
-                    return success(app.getSession('dictionary'));
+                    dataAdapter.promiseRequest(req, api, done, /*done.*/fail);
                 }
-                fetch();
-            };
+
+                function cached(dictionary) {
+                    done(languages, selectedLanguage, dictionary);
+                }
+
+                cache.get(key, done, notCached, cached);
+            }
 
             function store(done, languages, selectedLanguage, dictionary) {
                 app.updateSession({
@@ -88,12 +84,12 @@ module.exports = function(dataAdapter) {
                     dictionary: dictionary
                 });
                 done();
-            };
+            }
 
             function fail(msg) {
-                console.log('Failure: ' + msg);
+                console.log('Middleware Failure (Language): ' + msg);
                 res.send(400, msg);
-            };
+            }
 
             asynquence().or(fail)
                 .then(fetchLanguages)

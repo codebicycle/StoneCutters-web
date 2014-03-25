@@ -12,12 +12,12 @@ module.exports = BaseAppView.extend({
         'click #toggle-search': 'toggleSearch',
         'click nav#leftPanel li a': 'toggleLeftPanel'
     },
-    postInitialize: function() {
+    initialize: function() {
         this.app.on('change:loading', function onLoading(app, loading) {
             $body.toggleClass('loading', loading);
         }, this);
-        jQuery('#search-bar').change(function(){
-            window.location = 'search?location=' + this.app.getSession('siteLocation') + '&q=' + jQuery('#search-bar').val();
+        $('#search-bar').change(function(){
+            window.location = 'search?location=' + this.app.getSession('siteLocation') + '&q=' + $('#search-bar').val();
         });
         $('nav div').css('height' , ($(window).height() - $('header').height()) + 'px');
         $(window).resize(function onResize() {

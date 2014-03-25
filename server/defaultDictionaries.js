@@ -17,4 +17,4 @@ module.exports = {
         'newAds_prefix': 'Nuevos anuncios en ',
         'categories_title': 'Categorias Populares'
     }
-}
+};

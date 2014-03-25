@@ -32,11 +32,11 @@ function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
         app.use(express.session({
-            store: null,
+            store: require('../../../store')(express),
             secret: 'test'
         }));
     };
-};
+}
 
 describe('server', function test() {
     describe('middleware', function test() {
@@ -59,21 +59,21 @@ describe('server', function test() {
                                 session: _.clone(req.rendrApp.getSession())
                             };
                             next();
-                        };
+                        }
 
                         function after(req, res) {
                             response.after = {
                                 session: _.clone(req.rendrApp.getSession())
                             };
                             res.json(response);
-                        };
+                        }
 
                         rendrApp.use(middleware.session());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(before);
                         rendrApp.use(middleware.templates());
                         rendrApp.use(after);
-                    };
+                    }
 
                     app.configure(expressConfiguration(app));
                     server.configure(rendrConfiguration);
@@ -87,19 +87,8 @@ describe('server', function test() {
                     function end(err, res) {
                         response = res;
                         done();
-                    };
+                    }
                 })(Object.keys(userAgents));
-            });
-            it('should add an updateRequired attribute to the session', function test(done) {
-                var before = response.body.before;
-                var after = response.body.after;
-
-                (function existance(before, after) {
-                    before.should.not.have.property('updateRequired');
-                    after.should.have.property('updateRequired');
-                })(before.session, after.session);
-
-                done();
             });
             it('should add a platform attribute to the session', function test(done) {
                 var before = response.body.before;
@@ -123,133 +112,81 @@ describe('server', function test() {
 
                 done();
             });
-            describe('updateRequired', function test() {
-                it('should be true on first request', function test(done) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function equality(updateRequired) {
-                        updateRequired.should.be.ok;
-                    })(after.session.updateRequired);
-
-                    done();
-                });
-                it('should be false after first request', function test(done) {
-                    (function closure(userAgents) {
-                        request(app)
-                            .get('/')
-                            .set('host', 'm.olx.com.ar')
-                            .set('user-agent', userAgents[0])
-                            .set('cookie', response.get('set-cookie'))
-                            .end(end);
-
-                        function end(err, response) {
-                            var before = response.body.before;
-                            var after = response.body.after;
-
-                            (function equality(updateRequired) {
-                                updateRequired.should.not.be.ok;
-                            })(after.session.updateRequired);
-
-                            done();
-                        };
-                    })(Object.keys(userAgents));
-                });
-                it('should be true after first request if the platform changes', function test(done) {
-                    (function closure(userAgents) {
-                        request(app)
-                            .get('/')
-                            .set('host', 'm.olx.com.ar')
-                            .set('user-agent', userAgents[1])
-                            .set('cookie', response.get('set-cookie'))
-                            .end(end);
-
-                        function end(err, response) {
-                            var before = response.body.before;
-                            var after = response.body.after;
-
-                            (function equality(updateRequired) {
-                                updateRequired.should.be.ok;
-                            })(after.session.updateRequired);
-
-                            done();
-                        };
-                    })(Object.keys(userAgents));
-                });
-            });
             describe('platform', function test() {
                 for (var userAgent in userAgents) {
-                    (function closure(userAgent) {
-                        describe(userAgent, function test() {
-                            it('should be "' + userAgents[userAgent].platform + '"', function test(done) {
-                                request(app)
-                                    .get('/')
-                                    .set('host', 'm.olx.com.ar')
-                                    .set('user-agent', userAgent)
-                                    .end(end);
+                    closure(userAgent);
+                }
+                function closure(userAgent) {
+                    describe(userAgent, function test() {
+                        it('should be "' + userAgents[userAgent].platform + '"', function test(done) {
+                            request(app)
+                                .get('/')
+                                .set('host', 'm.olx.com.ar')
+                                .set('user-agent', userAgent)
+                                .end(end);
 
-                                function end(err, response) {
-                                    var before = response.body.before;
-                                    var after = response.body.after;
+                            function end(err, response) {
+                                var before = response.body.before;
+                                var after = response.body.after;
 
-                                    (function equality(platform) {
-                                        platform.should.equal(userAgents[userAgent].platform);
-                                    })(after.session.platform);
+                                (function equality(platform) {
+                                    platform.should.equal(userAgents[userAgent].platform);
+                                })(after.session.platform);
 
-                                    done();
-                                };
-                            });
+                                done();
+                            }
                         });
-                    })(userAgent);
+                    });
                 }
             });
             describe('template', function test() {
                 for (var userAgent in userAgents) {
-                    (function closure(userAgent) {
-                        describe(userAgent, function test() {
-                            it('should be "' + userAgents[userAgent].template + '"', function test(done) {
-                                request(app)
-                                    .get('/')
-                                    .set('host', 'm.olx.com.ar')
-                                    .set('user-agent', userAgent)
-                                    .end(end);
+                    closure(userAgent);
+                }
+                function closure(userAgent) {
+                    describe(userAgent, function test() {
+                        it('should be "' + userAgents[userAgent].template + '"', function test(done) {
+                            request(app)
+                                .get('/')
+                                .set('host', 'm.olx.com.ar')
+                                .set('user-agent', userAgent)
+                                .end(end);
 
-                                function end(err, response) {
-                                    var before = response.body.before;
-                                    var after = response.body.after;
+                            function end(err, response) {
+                                var before = response.body.before;
+                                var after = response.body.after;
 
-                                    (function equality(template) {
-                                        template.should.equal(userAgents[userAgent].template);
-                                    })(after.session.template.split('_')[0]);
+                                (function equality(template) {
+                                    template.should.equal(userAgents[userAgent].template);
+                                })(after.session.template.split('_')[0]);
 
-                                    done();
-                                };
-                            });
-                            var locations = localizedTemplates[userAgents[userAgent].platform];
-                            if (locations.length) {
-                                locations.forEach(function iteration(location) {
-                                    it('should end with _' + location + ' if the host ends with .' + location, function test(done) {
-                                        request(app)
-                                            .get('/')
-                                            .set('host', 'm.olx.com.' + location)
-                                            .set('user-agent', userAgent)
-                                            .end(end);
-
-                                        function end(err, response) {
-                                            var before = response.body.before;
-                                            var after = response.body.after;
-
-                                            (function equality(template) {
-                                                template.should.equal(location);
-                                            })(after.session.template.split('_')[1]);
-
-                                            done();
-                                        };
-                                    });
-                                });
+                                done();
                             }
                         });
-                    })(userAgent);
+                        var locations = localizedTemplates[userAgents[userAgent].platform];
+                        if (locations.length) {
+                            locations.forEach(function iteration(location) {
+                                it('should end with _' + location + ' if the host ends with .' + location, function test(done) {
+                                    request(app)
+                                        .get('/')
+                                        .set('host', 'm.olx.com.' + location)
+                                        .set('user-agent', userAgent)
+                                        .end(end);
+
+                                    function end(err, response) {
+                                        var before = response.body.before;
+                                        var after = response.body.after;
+
+                                        (function equality(template) {
+                                            template.should.equal(location);
+                                        })(after.session.template.split('_')[1]);
+
+                                        done();
+                                    }
+                                });
+                            });
+                        }
+                    });
                 }
             });
         });

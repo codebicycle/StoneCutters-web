@@ -8,14 +8,15 @@ var request = require('request');
 var debug = require('debug')('rendr:SmaugAdapter');
 var util = require('util');
 
-module.exports = SmaugAdapter;
-
 function SmaugAdapter(options) {
     DataAdapter.call(this, options);
   _.defaults(this.options, {
         userAgent: 'Rendr SmaugAdapter; Node.js'
     });
-};
+}
+
+module.exports = SmaugAdapter;
+
 util.inherits(SmaugAdapter, DataAdapter);
 
 /**
@@ -93,10 +94,10 @@ SmaugAdapter.prototype.apiDefaults = function(api, req) {
         url: url.format(urlOpts),
         headers: {}
     });
-    if (api.headers['User-Agent'] == null) {
+    if (api.headers['User-Agent'] === null) {
         api.headers['User-Agent'] = this.options.userAgent;
     }
-    if (api.body != null && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
+    if (api.body !== null && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
         api.json = api.body;
     }
     if (api.method === 'GET' && Object.keys(api.body).length === 0) {
@@ -131,7 +132,7 @@ SmaugAdapter.prototype.promiseRequest = function(req, api, options, done, fail) 
             var error = {
                 errCode: err.status,
                 err: []
-            }
+            };
             if (Array.isArray(body)) {
                 body.forEach(function addError(err) {
                     error.err.push(err.message);

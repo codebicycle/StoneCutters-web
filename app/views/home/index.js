@@ -6,7 +6,7 @@ var helpers = require('../../helpers');
 
 if (typeof window != 'undefined') {
     var Swipe = require('../../lib/swiper');
-};
+}
 
 module.exports = BaseView.extend({
     className: 'home_index_view',
@@ -51,11 +51,11 @@ module.exports = BaseView.extend({
         BaseView.prototype.remove.apply(this, arguments);
     },
     resize: function() {
-        helpers.fitText($('section#newAds .swiper-containerAds .caption') , .9 , {
+        helpers.fitText($('section#newAds .swiper-containerAds .caption') , 0.9 , {
             minFontSize: '9px',
             maxFontSize: '30px'
         });
-        helpers.fitText($('section#categories .swiper-containerCats .slide div p') , .7 , {
+        helpers.fitText($('section#categories .swiper-containerCats .slide div p') , 0.7 , {
             minFontSize: '9px',
             maxFontSize: '30px'
         });

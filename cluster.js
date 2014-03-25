@@ -3,7 +3,7 @@
 /*
  * This is the implementation of cluster technology for ARWEN.
  */
- module.exports = function(done) {
+module.exports = function(done) {
     var cluster = require('cluster');
 
     if (cluster.isMaster) {
@@ -11,7 +11,6 @@
         var i;
 
         for (i = 0; i < cpuCount; i++) {
-            console.log("I am forking a new process");
             cluster.fork();
         }
         cluster.on('exit', function onClusterExit(worker) {
@@ -23,4 +22,4 @@
     else {
         done(cluster.worker);
     }
-}
+};

@@ -1,10 +1,11 @@
 'use strict';
 
-module.exports = function appUseConf(done){
+module.exports = function appUseConf(done) {
     var config = require('config');
     var express = require('express');
     var rendr = require('rendr');
 
+    var store = require('./store')(express);
     var SmaugAdapter = require('./server/data_adapter/smaug_adapter');
     var dataAdapter = new SmaugAdapter();
     var middleware = require('./server/middleware')(dataAdapter);
@@ -18,15 +19,14 @@ module.exports = function appUseConf(done){
         app.use(express.compress());
         app.use(express.static(__dirname + '/public'));
         app.use(express.logger());
-        app.use(express.bodyParser());
+        app.use(express.urlencoded());
+        app.use(express.json());
         app.use(express.cookieParser());
         app.use(express.session({
-
-            // By using node's session store you will get a different session for each core
-            store: null,
+            store: store,
             secret: config.session.secret
         }));
-    };
+    }
 
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.session());
@@ -39,11 +39,11 @@ module.exports = function appUseConf(done){
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());
         //rendrApp.use(middleware.incrementCounter());
-    };
+    }
 
     app.configure(expressConfiguration);
     server.configure(rendrConfiguration);
     app.use(server);
     require('./server/router')(app, dataAdapter);
     done(app);
-}
+};

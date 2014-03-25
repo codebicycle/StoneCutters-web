@@ -33,7 +33,8 @@ module.exports = {
                     'models': result.cities.toJSON(),
                     '_byId': {},
                     'metadata': result.cities.get('metadata')
-                }
+                };
+
                 cities.models.forEach(function sortCity(city) {
                     cities._byId[city.id] = city;
                 });

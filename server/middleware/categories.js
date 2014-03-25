@@ -8,61 +8,76 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
+            var cache = require('../../cache')();
 
             function fetch(done) {
-                var api = {
-                    body: {},
-                    url: '/countries/' + siteLocation + '/categories'
-                };
+                var key = ['categories', siteLocation];
 
-                function success(results) {
-                    var categories = {
-                        models: results,
-                        _byId: {}
+                function notCached(done) {
+                    var api = {
+                        body: {},
+                        url: '/countries/' + siteLocation + '/categories'
                     };
 
-                    categories.models.forEach(function processCategory(category) {
-                        categories._byId[category.id] = category;
-                    });
+                    function success(results) {
+                        var categories = {
+                            models: results,
+                            _byId: {}
+                        };
 
-                    done(categories);
+                        categories.models.forEach(function processCategory(category) {
+                            categories._byId[category.id] = category;
+                        });
+
+                        done(categories);
+                    }
+                    dataAdapter.promiseRequest(req, api, success, done.fail);
                 }
 
-                dataAdapter.promiseRequest(req, api, success, done.fail);
+                cache.get(key, done, notCached);
             }
 
-            function childCatsForCategories (categories) {
-                var childCats = {};
+            function getChildren(done, categories) {
+                var key = ['categories', 'children', siteLocation];
 
-                categories.models.forEach(function traverseCats (cat, index, categories) {
-                    cat.children.forEach(function traverseChildCats (sCat, index, categories) {
-                        childCats[sCat.id] = sCat;
-                    });
-                });
+                function notCached(done) {
+                    var children = {};
 
-                return childCats;
+                    function traverseCategories(category) {
+                        category.children.forEach(traverseChildCategories);
+                    }
+
+                    function traverseChildCategories(subCategory, index, categories) {
+                        children[subCategory.id] = subCategory;
+                    }
+
+                    categories.models.forEach(traverseCategories);
+                    done(children);
+                }
+
+                function cached(children) {
+                    done(categories, children);
+                }
+
+                cache.get(key, done, notCached, cached);
             }
 
-            function store(done, categories) {
-                var childCats = childCatsForCategories(categories);
+            function store(done, categories, children) {
                 app.updateSession({
                     categories: categories,
-                    childCategories: childCats,
+                    childCategories: children,
                 });
                 done();
             }
 
             function fail(msg) {
-                console.log('Failure: ' + msg);
+                console.log('Middleware Failure (Categories): ' + msg);
                 res.send(400, msg);
-            }
-
-            if (!app.getSession('updateRequired')) {
-                return next();
             }
 
             asynquence().or(fail)
                 .then(fetch)
+                .then(getChildren)
                 .then(store)
                 .val(next);
         };

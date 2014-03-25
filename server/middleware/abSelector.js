@@ -13,35 +13,39 @@ module.exports = function(dataAdapter) {
         var session = new sixpack.Session(myClientId);
 
         return function middleware(req, res, next) {
+            var app = req.rendrApp;
             var myExperiments = experiments;
             var experimentsAmount = 0;
             var index = 0;
             var length = experiments.length;
 
-            console.log('<DEBUG CONSOLE LOG> Loading all the experiments.');
-            for (index; index < length; index++) {
-                var myIndex = index;
-
+            function closure(index) {
                 session.participate(experiments[index].name, experiments[index].options, function callback(err, res) {
+                    var experiment = {};
                     var alt;
 
                     if (err) {
                         throw err;
                     }
-                    alt = res.alternative.name
-                    req[myExperiments[myIndex].name] = {
+                    alt = res.alternative.name;
+                    req[myExperiments[index].name] = {
                         value: alt,
                         client_id: myClientId
                     };
-                    global[myExperiments[myIndex].name] = {
+                    experiment[myExperiments[index].name] = {
                         value:alt,
                         client_id: myClientId
                     };
+                    app.updateSession(experiment);
                     experimentsAmount++;
                     if(experimentsAmount === myExperiments.length) {
                         next();
                     }
                 });
+            }
+
+            for (index; index < length; index++) {
+                closure(index);
             }
             if(!experiments.length){
                 next();

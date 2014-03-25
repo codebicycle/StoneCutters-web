@@ -15,17 +15,7 @@ module.exports = function(worker) {
         var port = process.env.PORT || 3030;
 
         app.listen(port, function onServerListening() {
-            console.log("server pid %s listening on port %s in %s mode", process.pid, port, app.get('env'));
+            console.log("server %s (pid %s) listening on port %s in %s mode", worker.id, process.pid, port, app.get('env'));
         });
-        exports.app = app;
     }
-}
-
-
-
-
-
-
-
-
-
+};

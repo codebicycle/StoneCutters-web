@@ -25,7 +25,8 @@ module.exports = function(dataAdapter) {
             if (path.indexOf('/api/') == -1 && analyticsConfig[pathMatch]) {
                 //if this isn't an api call, get the viewtype
                 var pathMatch = analyticsHelper.getPathMatch(path);
-                viewType = analyticsConfig[pathMatch].viewType;
+                var config = analyticsConfig[pathMatch] || {};
+                viewType = config.viewType || '';
             }
             else {
                 viewType = 'api';
@@ -45,7 +46,7 @@ module.exports = function(dataAdapter) {
 
             var clientId = app.getSession('clientId');
 
-            if(clientId == undefined){
+            if (typeof clientId === 'undefined') {
                 var c1 = Math.floor(Math.random()*11);
                 var c2 = Math.floor(Math.random()*11);
                 var n = Math.floor(Math.random()* 1000000);

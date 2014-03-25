@@ -12,17 +12,13 @@ module.exports = {
             'maxFontSize' : Number.POSITIVE_INFINITY
         }, options);
 
-        function resizer() {
+        function onResize() {
             var $this = $(this);
             var max = parseFloat(settings.maxFontSize);
             var min = parseFloat(settings.minFontSize);
 
             $this.css('font-size', Math.max(Math.min($this.width() / (compressor * 10), max), min));
-        };
-
-        function onResize() {
-            resizer.call(this);
-        };
+        }
 
         return element.each(function resize() {
             $(window).on('resize.fittext orientationchange.fittext', onResize).trigger('resize.fittext');

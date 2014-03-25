@@ -17,7 +17,7 @@ module.exports = {
                     collection: 'Items',
                     params: {}
                 }
-            }
+            };
 
             _.extend(spec.whatsNewItems.params, params, {
                 location: siteLocation,
