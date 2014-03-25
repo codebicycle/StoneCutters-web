@@ -7,12 +7,10 @@ var url = require('url');
 var request = require('request');
 var debug = require('debug')('rendr:SmaugAdapter');
 var util = require('util');
+var CONFIG = require('config').smaug;
 
 function SmaugAdapter(options) {
     DataAdapter.call(this, options);
-  _.defaults(this.options, {
-        userAgent: 'Rendr SmaugAdapter; Node.js'
-    });
 }
 
 module.exports = SmaugAdapter;
@@ -33,21 +31,22 @@ util.inherits(SmaugAdapter, DataAdapter);
  * `callback`: Callback.
  */
 SmaugAdapter.prototype.request = function(req, api, options, callback) {
+    var start = new Date().getTime();
+    var end;
+
     if (arguments.length === 3) {
         callback = options;
         options = {};
     }
     if (api.headers) {
-        api.headers.host = 'api-v2.olx.com';
+        api.headers.host = CONFIG.host;
     }
     options = _.defaults({}, options, {
         convertErrorCode: true,
         allow4xx: false
     });
     api = this.apiDefaults(api, req);
-    var start = new Date().getTime();
-    var end;
-    api.url = "http://api-v2.olx.com"+api.url;
+    api.url = CONFIG.protocol + '://' + CONFIG.host + api.url;
     request(api, function afterRequest(err, response, body) {
         if (err) {
             return callback(err);
@@ -78,6 +77,7 @@ SmaugAdapter.prototype.isJSONResponse = function(response) {
 
 SmaugAdapter.prototype.apiDefaults = function(api, req) {
     var urlOpts, apiHost;
+
     api = _.clone(api);
     if (api.path && ~api.path.indexOf('://')) {
         api.url = api.path;
@@ -94,10 +94,10 @@ SmaugAdapter.prototype.apiDefaults = function(api, req) {
         url: url.format(urlOpts),
         headers: {}
     });
-    if (api.headers['User-Agent'] === null) {
+    if (!api.headers['User-Agent']) {
         api.headers['User-Agent'] = this.options.userAgent;
     }
-    if (api.body !== null && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
+    if (api.body && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
         api.json = api.body;
     }
     if (api.method === 'GET' && Object.keys(api.body).length === 0) {
