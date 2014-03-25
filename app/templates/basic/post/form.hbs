@@ -1,48 +1,23 @@
-<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
-	<tr>
-		<td>
-			<strong style="display: block;">Post an ad in {{category.name}}</strong>
-		</td>
-	</tr>
-    <form id="postingForm" action="/post" method="POST">
+<form id="postingForm" action="/post" method="POST">
     {{#each params.err}}
         <small style="display: block; color: red;">{{this}}</small>
     {{/each}}
-    <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
-        {{#each fields.productDescription}}
-            <tr>
-                <td style="border-top: solid thin #808080;">
-                    {{#getFieldTemplate this}}
-                        {{{partial fieldPath}}}
-                    {{/getFieldTemplate}}
-                </td>
-            </tr>
-        {{/each}}
-    </table>
-    <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
-        {{#each fields.categoryAttributes}}
-            <tr>
-                <td style="border-top: solid thin #808080;">
-                    {{#getFieldTemplate this}}
-                        {{{partial fieldPath}}}
-                    {{/getFieldTemplate}}
-                </td>
-            </tr>
-        {{/each}}
-    </table>
-    <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
-        {{#each fields.contactInformation}}
-            <tr>
-                <td style="border-top: solid thin #808080;">
-                    {{#getFieldTemplate this}}
-                        {{{partial fieldPath}}}
-                    {{/getFieldTemplate}}
-                </td>
-            </tr>
-        {{/each}}
-    </table>
+    {{#each fields.productDescription}}
+        {{#getFieldTemplate this}}
+            {{{partial fieldPath}}}
+        {{/getFieldTemplate}}
+    {{/each}}
+    {{#each fields.categoryAttributes}}
+        {{#getFieldTemplate this}}
+            {{{partial fieldPath}}}
+        {{/getFieldTemplate}}
+    {{/each}}
+    {{#each fields.contactInformation}}
+        {{#getFieldTemplate this}}
+            {{{partial fieldPath}}}
+        {{/getFieldTemplate}}
+    {{/each}}
     <input type="hidden" name="postingSession" value="{{postingSession}}">
     <input type="hidden" name="intent" value="{{intent}}">
     <span style="display: block;"><input type="submit" value="Post Ad"></span>
-    </form>
-</table>
+</form>

@@ -66,6 +66,9 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
                 err = error;
             }
         }
+        if(body.itemProperties === null){
+            body.itemProperties = {};
+        }
         callback(err, response, body);
     }.bind(this));
 };
