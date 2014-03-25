@@ -6,7 +6,9 @@ var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
 var SmaugAdapter = require('../../../server/data_adapter/smaug_adapter');
-var dataAdapter = new SmaugAdapter();
+var dataAdapter = new SmaugAdapter({
+    userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
+});
 var middleware = require('../../../server/middleware')(dataAdapter);
 
 function expressConfiguration(app) {
