@@ -9,37 +9,30 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
-            var cache = require('../../cache')();
 
             function fetchLanguages(done) {
-                var key = ['languages', siteLocation];
+                var api = {
+                    body: {},
+                    url: '/countries/' + siteLocation + '/languages'
+                };
 
-                function notCached(done) {
-                    var api = {
-                        body: {},
-                        url: '/countries/' + siteLocation + '/languages'
+                function success(results) {
+                    var languages = {
+                        models: results,
+                        _byId: {}
                     };
 
-                    function success(results) {
-                        var languages = {
-                            models: results,
-                            _byId: {}
-                        };
+                    languages.models.forEach(function iteration(language) {
+                        languages._byId[language.id] = language;
+                        if (language.default) {
+                            languages.default = language.id;
+                        }
+                    });
 
-                        languages.models.forEach(function iteration(language) {
-                            languages._byId[language.id] = language;
-                            if (language.default) {
-                                languages.default = language.id;
-                            }
-                        });
-
-                        done(languages);
-                    }
-
-                    dataAdapter.promiseRequest(req, api, success, done.fail);
+                    done(languages);
                 }
 
-                cache.get(key, done, notCached);
+                dataAdapter.promiseRequest(req, api, success, done.fail);
             }
 
             function select(done, languages) {
@@ -54,27 +47,21 @@ module.exports = function(dataAdapter) {
             }
 
             function fetchDictionary(done, languages, selectedLanguage) {
-                var key = ['dictionaries', selectedLanguage];
+                var api = {
+                    body: {},
+                    url: '/dictionaries/' + selectedLanguage
+                };
 
-                function notCached(done) {
-                    var api = {
-                        body: {},
-                        url: '/dictionaries/' + selectedLanguage
-                    };
-
-                    // Waiting for SMAUG to implement this call so we need to use a fake fail function
-                    function fail() {
-                        done(defaultDictionaries[selectedLanguage] || defaultDictionaries[1]);
-                    }
-
-                    dataAdapter.promiseRequest(req, api, done, /*done.*/fail);
-                }
-
-                function cached(dictionary) {
+                function success(dictionary) {
                     done(languages, selectedLanguage, dictionary);
                 }
 
-                cache.get(key, done, notCached, cached);
+                // Waiting for SMAUG to implement this call so we need to use a fake fail function
+                function fail() {
+                    success(defaultDictionaries[selectedLanguage] || defaultDictionaries[1]);
+                }
+
+                dataAdapter.promiseRequest(req, api, success, /*done.*/fail);
             }
 
             function store(done, languages, selectedLanguage, dictionary) {

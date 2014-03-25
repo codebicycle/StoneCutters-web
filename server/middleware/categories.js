@@ -8,58 +8,41 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
-            var cache = require('../../cache')();
 
             function fetch(done) {
-                var key = ['categories', siteLocation];
+                var api = {
+                    body: {},
+                    url: '/countries/' + siteLocation + '/categories'
+                };
 
-                function notCached(done) {
-                    var api = {
-                        body: {},
-                        url: '/countries/' + siteLocation + '/categories'
+                function success(results) {
+                    var categories = {
+                        models: results,
+                        _byId: {}
                     };
 
-                    function success(results) {
-                        var categories = {
-                            models: results,
-                            _byId: {}
-                        };
-
-                        categories.models.forEach(function processCategory(category) {
-                            categories._byId[category.id] = category;
-                        });
-
-                        done(categories);
-                    }
-                    dataAdapter.promiseRequest(req, api, success, done.fail);
+                    categories.models.forEach(function processCategory(category) {
+                        categories._byId[category.id] = category;
+                    });
+                    done(categories);
                 }
 
-                cache.get(key, done, notCached);
+                dataAdapter.promiseRequest(req, api, success, done.fail);
             }
 
             function getChildren(done, categories) {
-                var key = ['categories', 'children', siteLocation];
+                var children = {};
 
-                function notCached(done) {
-                    var children = {};
-
-                    function traverseCategories(category) {
-                        category.children.forEach(traverseChildCategories);
-                    }
-
-                    function traverseChildCategories(subCategory, index, categories) {
-                        children[subCategory.id] = subCategory;
-                    }
-
-                    categories.models.forEach(traverseCategories);
-                    done(children);
+                function traverseCategories(category) {
+                    category.children.forEach(traverseChildCategories);
                 }
 
-                function cached(children) {
-                    done(categories, children);
+                function traverseChildCategories(subCategory, index, categories) {
+                    children[subCategory.id] = subCategory;
                 }
 
-                cache.get(key, done, notCached, cached);
+                categories.models.forEach(traverseCategories);
+                done(categories, children);
             }
 
             function store(done, categories, children) {
