@@ -1,12 +1,12 @@
 'use strict';
 
 var asynquence = require('asynquence');
-var LIFETIME = 30;//86400;
-var store;
+var LIFETIME = require('config').cache.lifetime.default;
+var memcached;
 
 module.exports = function(debugMode) {
     debugMode = debugMode || false;
-    store = store || require('./store')();
+    memcached = memcached || require('./memcached')();
 
     function get(key, done, notCached, cached, lifetime) {
         function __get(done) {
@@ -34,7 +34,7 @@ module.exports = function(debugMode) {
         lifetime = lifetime || LIFETIME;
 
         function attempt(done) {
-            store.client.get(key, function got(err, response) {
+            memcached.client.get(key, function got(err, response) {
                 if (err) {
                     if (debugMode) {
                         console.log('Cache error getting ' + key + ': ' + err);
@@ -70,7 +70,7 @@ module.exports = function(debugMode) {
             key = key.join('_');
         }
         lifetime = lifetime || LIFETIME;
-        store.client.set(key, value, lifetime, function set(err) {
+        memcached.client.set(key, value, lifetime, function set(err) {
             if (err) {
                 if (debugMode) {
                     console.log('Cache error setting ' + key + ': ' + err);
@@ -88,7 +88,7 @@ module.exports = function(debugMode) {
         if (Array.isArray(key)) {
             key = key.join('_');
         }
-        store.client.del(key, function deleted(err) {
+        memcached.client.del(key, function deleted(err) {
             if (err) {
                 if (debugMode) {
                     console.log('Cache error unseting ' + key + ': ' + err);

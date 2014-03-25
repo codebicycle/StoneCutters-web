@@ -1,18 +1,20 @@
 'use strict';
 
 module.exports = function appUseConf(done) {
-    var config = require('config');
+    var CONFIG = require('config');
     var express = require('express');
     var rendr = require('rendr');
 
-    var store = require('./store')(express);
-    var SmaugAdapter = require('./server/data_adapter/smaug_adapter');
-    var dataAdapter = new SmaugAdapter();
-    var middleware = require('./server/middleware')(dataAdapter);
     var app = express();
+    var SmaugAdapter = require('./server/data_adapter/smaug_adapter');
+    var dataAdapter = new SmaugAdapter({
+        userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
+    });
+    var middleware = require('./server/middleware')(dataAdapter);
     var server = rendr.createServer({
         dataAdapter: dataAdapter
     });
+    var memcached = require('./memcached')(express);
 
     function expressConfiguration() {
         app.use(express.favicon());
@@ -23,8 +25,8 @@ module.exports = function appUseConf(done) {
         app.use(express.json());
         app.use(express.cookieParser());
         app.use(express.session({
-            store: store,
-            secret: config.session.secret
+            store: memcached,
+            secret: CONFIG.session.secret
         }));
     }
 

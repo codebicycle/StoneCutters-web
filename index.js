@@ -1,11 +1,14 @@
 'use strict';
 
-var asynquence = require('asynquence');
-
 function uncaughtError(error) {
     throw error;
 }
 
-var app = asynquence().or(uncaughtError)
-    .then(require('./cluster'))
-    .val(require('./bootstrap'));
+var asynquence = require('asynquence');
+
+var app = asynquence().or(uncaughtError);
+
+if (require('config').cluster.enabled) {
+    app.then(require('./cluster'));
+}
+app.val(require('./bootstrap'));

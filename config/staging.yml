@@ -1,0 +1,3 @@
+# Config settings for NODE_ENV=staging
+server:
+  port: 8080
