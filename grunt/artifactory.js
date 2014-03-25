@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     		],
 		  options: {
 		    publish: [{
-          		id: 'olx.arwen:dynamic:zip:1000',
+          		id: 'olx.arwen:arwen-dynamic:zip:1000',
           		/*name: 'arwen-dynamic',
           		version: '1000', 
           		path: 'dist/',
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     		],
 		  options: {
 		    publish: [{
-          		id: 'olx.arwen:static:zip:1000',
+          		id: 'olx.arwen:arwen-static:zip:1000',
           		/*name: 'arwen-static',
           		version: '1000', 
           		path: 'dist/',
