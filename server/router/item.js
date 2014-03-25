@@ -8,10 +8,8 @@ module.exports = function itemRouter(app, dataAdapter) {
     app.post('/post', postingHandler);
 
     function postingHandler(req, res) {
-        var params = req.params;
-        delete params.postingSession;
-        delete params.intent;
-        delete params.token;
+        var params = req.body;
+        
 
         var item = {
             postingSession: req.param('postingSession', null),
@@ -19,6 +17,10 @@ module.exports = function itemRouter(app, dataAdapter) {
             token: req.param('token', null),
             params: params,
         };
+        
+        delete params.postingSession;
+        delete params.intent;
+        delete params.token;
 
         function callValidateItemCallback(done) {
             validateItem(done, item);
@@ -41,6 +43,8 @@ module.exports = function itemRouter(app, dataAdapter) {
         };
 
         function validateItem(done, item) {
+            console.log('*******************************');
+            console.log(item);
             console.log("en validate");
             var errors = {
                 errCode: 400,
@@ -117,7 +121,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         function postItem(done, item) {
             var api = {
                 method: 'POST',
-                body: item,
+                params: item,
                 url: '/items'
             };
 
