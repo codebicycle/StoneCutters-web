@@ -2,13 +2,20 @@
 server:
   port: 3030
 
-api:
-  default:
-    host: api-v2.olx.com
-    protocol: http
-  travis-ci:
-    host: api.travis-ci.org
-    protocol: https
+smaug:
+  protocol: http
+  host: api-v2.olx.com
 
 session:
-  secret: this should be some long random string
+  secret: VWaB5TfjGPNWXJATbr6BK3Hy
+
+memcached:
+  hosts:
+    - 'localhost:11211'
+
+cache:
+  lifetime:
+    default: 60
+
+cluster:
+  enabled: true

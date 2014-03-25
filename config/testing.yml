@@ -1,0 +1,3 @@
+# Config settings for NODE_ENV=testing
+server:
+  port: 8080
