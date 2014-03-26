@@ -1,0 +1,23 @@
+<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+	<tr>
+		<td>
+			<strong style="display: block;">Post an ad</strong>
+		</td>
+	</tr>
+    <tr>
+        <td>
+            <strong style="display: block;">Select a category</strong>
+        </td>
+    </tr>
+    <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+        {{#each categories.models}}
+            <tr>
+                <td style="border-top: solid thin #808080;">
+                    <a style="display: block;" href="post/{{id}}">
+                        <small style="display: block;"><img border="0" alt="" src="" />{{trName}}</small>
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+</table>

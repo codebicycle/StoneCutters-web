@@ -1,0 +1,50 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
+    <tbody><tr>
+        <td style="padding: .25em .5em; border-top: solid thin #808080;">
+            <strong style="color: #0075BD;">Publicar</strong>
+            <br>
+            <small>Detalles de Publicación</small>
+        </td>
+    </tr>
+</tbody></table>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+    <tr>
+        <td style="padding: .5em; border-top: solid thin #808080;">
+            <small>
+                <strong>Categoría::</strong>
+                <span>Cat name</span>
+            </small>
+            <br />
+            <br style="display: none;" />
+            <form id="postingForm" action="/post" method="POST">
+                {{#each params.err}}
+                    <small style="display: block; color: red;">{{this}}</small>
+                {{/each}}
+                {{#each fields.productDescription}}
+                    {{#getFieldTemplate this}}
+                        {{{partial fieldPath}}}
+                        <br style="display: none;" />
+                    {{/getFieldTemplate}}
+                {{/each}}
+                {{#each fields.categoryAttributes}}
+                    {{#getFieldTemplate this}}
+                        {{{partial fieldPath}}}
+                    {{/getFieldTemplate}}
+                {{/each}}
+                {{#each fields.contactInformation}}
+                    {{#getFieldTemplate this}}
+                        {{{partial fieldPath}}}
+                    {{/getFieldTemplate}}
+                {{/each}}
+                <input type="hidden" name="postingSession" value="{{postingSession}}">
+                <input type="hidden" name="intent" value="{{intent}}">
+                <input type="hidden" name="location" value="{{location}}">
+                <input type="hidden" name="languageId" value="{{language}}">
+                <input type="hidden" name="platform" value="{{platform}}">
+                <input type="hidden" name="category[parentId]" value="{{category}}">
+                <input type="hidden" name="category[id]" value="{{subcategory}}">
+                <span style="display: block;"><input type="submit" value="Post Ad"></span>
+            </form>
+        </td>
+    </tr>
+</table>

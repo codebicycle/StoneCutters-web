@@ -65,7 +65,11 @@ module.exports = function(dataAdapter) {
             }
 
             function store(done, location) {
+                if (location.city) {
+                    siteLocation = location.city.url;
+                }
                 app.updateSession({
+                    siteLocation: siteLocation,
                     location: location
                 });
                 done();

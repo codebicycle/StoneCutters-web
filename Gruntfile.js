@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('run', function run() {
         grunt.util.spawn({
-            cmd: 'node',
+            cmd: 'nodemon',
             args: ['index.js'],
             opts: {
                 stdio: 'inherit'

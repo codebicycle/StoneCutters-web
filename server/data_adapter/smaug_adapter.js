@@ -66,12 +66,16 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
                 err = error;
             }
         }
+        if(body.itemProperties === null){
+            body.itemProperties = {};
+        }
         callback(err, response, body);
     }.bind(this));
 };
 
 SmaugAdapter.prototype.isJSONResponse = function(response) {
     var contentType = response.headers['content-type'] || '';
+
     return contentType.indexOf('application/json') !== -1;
 };
 
@@ -141,6 +145,7 @@ SmaugAdapter.prototype.promiseRequest = function(req, api, options, done, fail) 
             else {
                 error.err.push(body);
             }
+            console.log("Err en adapter: %j",error);
             fail(error);
             return;
         }
