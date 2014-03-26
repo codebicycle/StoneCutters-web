@@ -18,7 +18,7 @@ function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
         app.use(express.session({
-            store: require('../../../store')(express),
+            store: require('../../../memcached')(express),
             secret: 'test'
         }));
     };
