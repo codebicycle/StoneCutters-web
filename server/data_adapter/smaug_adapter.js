@@ -75,6 +75,7 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
 
 SmaugAdapter.prototype.isJSONResponse = function(response) {
     var contentType = response.headers['content-type'] || '';
+
     return contentType.indexOf('application/json') !== -1;
 };
 

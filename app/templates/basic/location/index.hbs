@@ -18,7 +18,7 @@
 	{{#each cities}}
 		<tr>
 			<td style="border-top: solid thin #808080;">
-				<a style="display: block;" href={{#if ../posting}}"/post"{{else}}"/?cityId={{id}}"{{/if}}>
+				<a style="display: block;" href="/{{#if ../target}}{{../../target}}{{/if}}?cityId={{id}}">
 					<small style="display: block;"><img border="0" alt="" src="" />{{name}}</small>
 				</a>
 			</td>

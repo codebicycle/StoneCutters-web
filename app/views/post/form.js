@@ -8,9 +8,7 @@ module.exports = BaseView.extend({
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data, {
-            'location': this.app.getSession('location'),
-        });
+        return _.extend({}, data, {});
     }
 });
 

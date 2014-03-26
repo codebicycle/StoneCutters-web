@@ -7,8 +7,9 @@ module.exports = {
     index: function(params, callback) {
         var app = helpers.environment.init(this.app);
 
-        if (params.cityId)
+        if (params.cityId) {
             helpers.environment.updateCity(app, params.cityId);
+        }
 
         (function fetchWhatsNew() {
             var siteLocation = app.getSession('siteLocation');

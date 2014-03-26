@@ -21,6 +21,6 @@ module.exports = function(match) {
     match('login', 'login#index');
 
     match('post', 'post#index');
-    match('post/category/:id', 'post#subcat');
-    match('post/subcategory/:id', 'post#form');
+    match('post/:categoryId', 'post#subcat');
+    match('post/:categoryId/:subcategoryId', 'post#form');
 };

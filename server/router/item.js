@@ -8,46 +8,37 @@ module.exports = function itemRouter(app, dataAdapter) {
     app.post('/post', postingHandler);
 
     function postingHandler(req, res) {
-        var params = req.body;
+        var item = req.body;
 
-        var item = {
-            postingSession: req.param('postingSession', null),
-            intent: req.param('intent', null),
-            token: req.param('token', null),
-            params: params,
-        };
-
-        delete params.postingSession;
-        delete params.intent;
-        delete params.token;
+        item.postingSession = req.param('postingSession', null);
+        item.intent = req.param('intent', null);
+        item.token = req.param('token', null);
 
         function callValidateItemCallback(done) {
             validateItem(done, item);
-        };
+        }
 
         function redirectToSuccessPostCallback(done, item) {
-            //res.redirect('/post/success?itemId=' + item.id);
             res.redirect('/items/' + item.id);
-        };
+        }
 
-        function errorPostingCallback(err){
-            console.log("err en callback: %j",err);
+        function errorPostingCallback(err) {
             var url = req.headers.referer;
             var qIndex = url.indexOf('?');
+
             if (qIndex != -1) {
                 url = url.substring(0,qIndex);
             }
-            console.log(url);
             res.redirect(url+'?' + querystring.stringify(err));
-        };
+        }
 
         function validateItem(done, item) {
-            console.log("en validate");
             var errors = {
                 errCode: 400,
                 err: [],
                 errFields: []
             };
+
             if (!item.postingSession) {
                 errors.err.push('Missing postingSession');
                 errors.errFields.push('postingSession');
@@ -56,53 +47,51 @@ module.exports = function itemRouter(app, dataAdapter) {
                 errors.err.push('Missing intent');
                 errors.errFields.push('intent');
             }
-            if (!item.params) {
-                errors.err.push('Missing params');
-                errors.errFields.push('params');
-            }
-            if (!item.params.title) {
+            if (!item.title) {
                 errors.err.push('Missing title');
                 errors.errFields.push('title');
             }
-            if (!item.params.description) {
+            if (!item.description) {
                 errors.err.push('Missing description');
                 errors.errFields.push('description');
             }
-            if (item.params.category) {
-                if (!item.params.category.parentId) {
+            if (!item.category) {
+                errors.err.push('Missing category');
+                errors.errFields.push('category');
+            }
+            else {
+                if (!item.category.parentId) {
                     errors.err.push('Missing category.parentId');
                     errors.errFields.push('category.parentId');
                 }
-                if (!item.params.category.id) {
+                else {
+                    item.category.parentId = Number(item.category.parentId);
+                }
+                if (!item.category.id) {
                     errors.err.push('Missing category.id');
                     errors.errFields.push('category.id');
                 }
+                else {
+                    item.category.id = Number(item.category.id);
+                }
             }
-            if (!item.params.location) {
+            if (!item.location) {
                 errors.err.push('Missing location');
                 errors.errFields.push('location');
             }
-            if (!item.params.email) {
+            if (!item.email) {
                 errors.err.push('Missing email');
                 errors.errFields.push('email');
             }
-            if (!item.params.platform) {
+            if (!item.platform) {
                 errors.err.push('Missing platform');
                 errors.errFields.push('platform');
             }
-            if (!item.params.languageId) {
+            if (!item.languageId) {
                 errors.err.push('Missing languageId');
                 errors.errFields.push('languageId');
             }
-            if (!item.params.languageCode) {
-                errors.err.push('Missing languageCode');
-                errors.errFields.push('languageCode');
-            }
-            if (!item.params.postingSession) {
-                errors.err.push('Missing postingSession');
-                errors.errFields.push('postingSession');
-            }
-            if (!item.params.priceType) {
+            if (!item.priceType) {
                 errors.err.push('Missing priceType');
                 errors.errFields.push('priceType');
             }
@@ -111,23 +100,22 @@ module.exports = function itemRouter(app, dataAdapter) {
                 done.fail(errors);
                 return;
             }
-            console.log("saliendo validate");
             done(item);
-        };
+        }
 
         function postItem(done, item) {
             var api = {
                 method: 'POST',
                 url: '/items',
-                params: item
+                body: item
             };
 
             dataAdapter.promiseRequest(req, api, done);
-        };
+        }
 
         asynquence(callValidateItemCallback).or(errorPostingCallback)
             .then(postItem)
             .then(redirectToSuccessPostCallback);
-    };
+    }
 
 };

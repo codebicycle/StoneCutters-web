@@ -1,6 +1,7 @@
 'use strict';
 
 var helpers = require('../helpers');
+var _ = require('underscore');
 
 module.exports = {
     index: function(params, callback) {
@@ -12,40 +13,40 @@ module.exports = {
     },
     subcat: function(params, callback) {
         var app = helpers.environment.init(this.app);
+        var subcategories = this.app.getSession('categories')._byId[params.categoryId].children;
 
-        var subcategories = this.app.getSession('categories')._byId[params.id].children;
-
-        callback(null, {
-            'params': params,
+        callback(null, _.extend(params, {
             'subcategories': subcategories
-        });
+        }));
     },
     form: function(params, callback) {
         var app = helpers.environment.init(this.app);
-        var urlParams = params;
-
-        var languageId = this.app.getSession().selectedLanguage;
-        var languangeCode = this.app.getSession('languages')._byId[languageId].isocode;
-
+        var siteLocation = app.getSession('siteLocation');
+        var language = app.getSession('selectedLanguage');
         var spec = {
-                fields: {
-                    collection: 'Fields',
-                    params: {
-                    	intent: 'post',
-                    	location: this.app.getSession('siteLocation'),
-                    	categoryId: urlParams.id,
-                    	languageId: languageId,
-                    	languageCode: languangeCode,
-                    }
+            fields: {
+                collection: 'Fields',
+                params: {
+                    intent: 'post',
+                    location: siteLocation,
+                    categoryId: params.subcategoryId,
+                    languageId: language
                 }
-            };
+            }
+        };
 
         app.fetch(spec, function afterFetch(err, result) {
-        	var response = result.fields.models[0].attributes;
-        	result.postingSession = response.postingSession;
-        	result.intent = 'create';
-        	result.fields = response.fields;
-        	result.errors = params.err;
+            var response = result.fields.models[0].attributes;
+
+            result.postingSession = response.postingSession;
+            result.intent = 'create';
+            result.fields = response.fields;
+            result.errors = params.err;
+            result.category = params.categoryId;
+            result.subcategory = params.subcategoryId;
+            result.location = siteLocation;
+            result.language = language;
+            result.platform = app.getSession('platform');
             callback(err, result);
         });
 

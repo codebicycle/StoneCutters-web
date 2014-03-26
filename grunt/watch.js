@@ -4,11 +4,11 @@ module.exports = function(grunt) {
     return {
         scripts: {
             files: ['app/**/*.js', '!app/**/compiledTemplates.js'],
-            tasks: ['browserify']
+            tasks: ['exec:removeAssets', 'browserify']
         },
         templates: {
             files: ['app/**/*.hbs'],
-            tasks: ['handlebars']
+            tasks: ['exec:removeTemplates', 'handlebars']
         }
     };
 };

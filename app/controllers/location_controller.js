@@ -13,7 +13,7 @@ module.exports = {
             return callback(null, {
                 'location': location,
                 'cities': cities.models,
-                'posting': params.posting,
+                'target': params.target,
             });
         }
 
