@@ -9,49 +9,36 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
-            var cache = require('../../cache')();
 
             function fetchLocation(done) {
-                var key = ['location', siteLocation];
+                var api = {
+                    body: {},
+                    url: '/locations/' + siteLocation
+                };
 
-                function notCached(done) {
-                    var api = {
-                        body: {},
-                        url: '/locations/' + siteLocation
-                    };
-
-                    dataAdapter.promiseRequest(req, api, done);
-                }
-
-                cache.get(key, done, notCached);
+                dataAdapter.promiseRequest(req, api, done);
             }
 
             function fetchTopCities(done) {
-                var key = ['topCities', siteLocation];
+                var api = {
+                    body: {},
+                    url: '/countries/' + siteLocation + '/topcities'
+                };
 
-                function notCached(done) {
-                    var api = {
-                        body: {},
-                        url: '/countries/' + siteLocation + '/topcities'
+                function success(result) {
+                    var topCities = {
+                        models: result.data,
+                       _byId: {},
+                        metadata: result.metadata
                     };
 
-                    function success(result) {
-                        var topCities = {
-                            models: result.data,
-                           _byId: {},
-                            metadata: result.metadata
-                        };
-
-                        topCities.models.forEach(function sort(city) {
-                            topCities._byId[city.id] = city;
-                        });
-                        done(topCities);
-                    }
-
-                    dataAdapter.promiseRequest(req, api, success, done.fail);
+                    topCities.models.forEach(function sort(city) {
+                        topCities._byId[city.id] = city;
+                    });
+                    done(topCities);
                 }
 
-                cache.get(key, done, notCached);
+                dataAdapter.promiseRequest(req, api, success, done.fail);
             }
 
             function getCity(done, location, topCities) {

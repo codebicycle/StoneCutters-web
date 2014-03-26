@@ -10,21 +10,31 @@ module.exports = function(grunt) {
         },
         'build-dynamic': {
             files: [{
-                src: ['dist/**/*']
+                cwd: 'dist',
+                src: ['**']
             }],
             options: {
                 publish: [{
-                    id: 'olx.arwen:dynamic:zip:1000'
+                    id: 'olx.arwen:arwen-dynamic:zip:1.1.1',
+                    name: 'arwen-dynamic',
+                    path: 'dist/',
+                    group_id: 'olx.arwen',
+                    ext: 'zip'
                 }]
             }
         },
         'build-static': {
             files: [{
-                src: ['dist/**/*']
+                cwd: 'dist',
+                src: ['**']
             }],
             options: {
                 publish: [{
-                    id: 'olx.arwen:static:zip:1000'
+                    id: 'olx.arwen:arwen-static:zip:1.1.1',
+                    name: 'arwen-static',
+                    path: 'dist/',
+                    group_id: 'olx.arwen',
+                    ext: 'zip'
                 }]
             }
         }
