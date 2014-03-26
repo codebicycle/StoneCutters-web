@@ -1,0 +1,11 @@
+<label style="display: block; padding-top: .5em;">
+		<small>{{label}}</small>
+		<br />
+		<select id="select-{{name}}" name="{{parseOptionalFieldName name}}">
+			{{#each values}}
+				<option value="{{key}}">{{value}}</option>
+			{{/each}}
+	    </select>
+</label>
+
+
