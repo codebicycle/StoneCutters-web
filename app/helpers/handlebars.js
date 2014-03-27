@@ -14,7 +14,7 @@ module.exports = function(Handlebars) {
             if (fieldName.indexOf('opt.') !== 0) {
                 return fieldName;
             }
-            return fieldName.replace('.', '[') + ']';
+            return 'opts['+fieldName+']';
         }
     };
 };
