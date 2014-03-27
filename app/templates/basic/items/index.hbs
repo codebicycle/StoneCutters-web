@@ -1,17 +1,21 @@
-<h1>Items</h1>
+{{view "location/select"}}
+{{{partial 'basic/partials/search'}}}
 
-<div class="row">
-{{#each items}}
-	<div style="height: 180px;text-align:center;margin-bottom:2em;border:2px solid;border-radius:10px;">
-		<a href="/items/{{id}}">
-	
-	{{#if thumbnail }}
-			<img src="{{thumbnail}}" style="height: 176px;">
-	{{else}}
-			<div style="line-height:180px; height: 180px">{{title}} - {{price.displayPrice}}</div>
-	{{/if}}
-	
-		</a>
-	</div>
-{{/each}}
-</div>
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
+	<tbody>
+		{{#each items}}
+			<tr>
+	            <td style="border-top: solid thin #808080;">
+	                <a style="display: block;" tabindex="1" href="/items/{{id}}">
+	                	<small style="display: block;">
+	                		{{#if thumbnail }}
+	                			*
+	                		{{/if}}
+	                    	{{title}} - {{price.displayPrice}}
+	                	</small>
+	                </a>
+	            </td>
+	        </tr>
+        {{/each}}               
+	</tbody>
+</table>
