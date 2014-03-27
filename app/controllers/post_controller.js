@@ -24,6 +24,9 @@ module.exports = {
         var siteLocation = app.getSession('siteLocation');
         var language = app.getSession('selectedLanguage');
         var spec = {
+            postingSession: {
+                model: 'PostingSession'
+            },
             fields: {
                 collection: 'Fields',
                 params: {
@@ -37,8 +40,7 @@ module.exports = {
 
         app.fetch(spec, function afterFetch(err, result) {
             var response = result.fields.models[0].attributes;
-
-            result.postingSession = response.postingSession;
+            result.postingSession = result.postingSession.get('postingSession');
             result.intent = 'create';
             result.fields = response.fields;
             result.errors = params.err;
@@ -47,6 +49,7 @@ module.exports = {
             result.location = siteLocation;
             result.language = language;
             result.platform = app.getSession('platform');
+            result.template = app.getSession('template');
             callback(err, result);
         });
 

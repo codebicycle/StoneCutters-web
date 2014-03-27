@@ -6,8 +6,8 @@ module.exports = function(Handlebars) {
             this.layout = template + path;
             return options.fn(this);
         },
-        getFieldTemplate: function(field, options) {
-            this.fieldPath = "basic/fields/" + field.fieldType;
+        getFieldTemplate: function(template, options) {
+            this.fieldPath = template + "/fields/" + this.fieldType;
             return options.fn(this);
         },
         parseOptionalFieldName: function(fieldName, options) {
