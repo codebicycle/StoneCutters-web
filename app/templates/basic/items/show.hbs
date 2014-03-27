@@ -4,8 +4,12 @@
 {{#each item.images}}
 	<img src="{{url}}"></br></br>
 {{/each}}
+</br></br>
+
+{{{item.description}}}</br></br>
+
+{{#each item.optionals}}
+	{{label}}:{{name}}:{{value}}</br>
+{{/each}}
 </br>
-
-{{{item.description}}}
-
 <a href="/items?categoryId={{item.category.id}}&location={{location}}&relatedAds={{item.id}}">Related Ads</a>
