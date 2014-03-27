@@ -21,18 +21,20 @@
                     <small style="display: block; color: red;">{{this}}</small>
                 {{/each}}
                 {{#each fields.productDescription}}
-                    {{#getFieldTemplate this}}
+                    {{#getFieldTemplate ../template}}
                         {{{partial fieldPath}}}
                         <br style="display: none;" />
                     {{/getFieldTemplate}}
                 {{/each}}
                 {{#each fields.categoryAttributes}}
-                    {{#getFieldTemplate this}}
-                        {{{partial fieldPath}}}
-                    {{/getFieldTemplate}}
+                    {{#if this.values}}
+                        {{#getFieldTemplate ../../template}}
+                            {{{partial fieldPath}}}
+                        {{/getFieldTemplate}}
+                    {{/if}}
                 {{/each}}
                 {{#each fields.contactInformation}}
-                    {{#getFieldTemplate this}}
+                    {{#getFieldTemplate ../template}}
                         {{{partial fieldPath}}}
                     {{/getFieldTemplate}}
                 {{/each}}

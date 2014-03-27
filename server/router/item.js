@@ -92,10 +92,6 @@ module.exports = function itemRouter(app, dataAdapter) {
                 errors.err.push('Missing languageId');
                 errors.errFields.push('languageId');
             }
-            if (!item.priceType) {
-                errors.err.push('Missing priceType');
-                errors.errFields.push('priceType');
-            }
             if (errors.err.length) {
                 console.log("err en validate: %j",errors);
                 done.fail(errors);
