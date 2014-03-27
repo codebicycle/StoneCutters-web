@@ -39,6 +39,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 errFields: []
             };
 
+            item.priceC = Number(item.priceC);
             if (!item.postingSession) {
                 errors.err.push('Missing postingSession');
                 errors.errFields.push('postingSession');
@@ -106,10 +107,13 @@ module.exports = function itemRouter(app, dataAdapter) {
         function postItem(done, item) {
             var api = {
                 method: 'POST',
-                url: '/items',
+                url: '/items?' + querystring.stringify({postingSession:item.postingSession,intent:item.intent}),
                 body: item
             };
 
+            delete item.postingSession;
+            delete item.intent;
+            delete item.token;
             dataAdapter.promiseRequest(req, api, done);
         }
 
