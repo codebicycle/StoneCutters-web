@@ -6,13 +6,15 @@ module.exports = function(grunt) {
             src: ['test/**/*.js'],
             options: {
                 reporter: 'html-cov',
-                output: 'test/coverage.html'
+                output: 'test/coverage.html',
+                timeout: '5000'
             }
         },
         test: {
             src: ['test/**/*.js'],
                 options: {
-                reporter: 'spec'
+                reporter: 'spec',
+                timeout: '5000'
             }
         }
     };
