@@ -23,6 +23,8 @@ module.exports = {
         var app = helpers.environment.init(this.app);
         var siteLocation = app.getSession('siteLocation');
         var language = app.getSession('selectedLanguage');
+        var languages = app.getSession('languages');
+        var languageCode = languages._byId[language].isocode.toLowerCase(); 
         var spec = {
             postingSession: {
                 model: 'PostingSession'
@@ -33,12 +35,14 @@ module.exports = {
                     intent: 'post',
                     location: siteLocation,
                     categoryId: params.subcategoryId,
-                    languageId: language
+                    languageId: language,
+                    languageCode: languageCode
                 }
             }
         };
 
         app.fetch(spec, function afterFetch(err, result) {
+
             var response = result.fields.models[0].attributes;
             result.postingSession = result.postingSession.get('postingSession');
             result.intent = 'create';
@@ -48,8 +52,11 @@ module.exports = {
             result.subcategory = params.subcategoryId;
             result.location = siteLocation;
             result.language = language;
+            result.languageCode = languageCode;
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
+            result.errField = params.errField;
+            result.errMsg = params.errMsg;
             callback(err, result);
         });
 

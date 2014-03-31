@@ -66,7 +66,7 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
                 err = error;
             }
         }
-        if(body.itemProperties === null){
+        if (body && body.itemProperties === null){
             body.itemProperties = {};
         }
         callback(err, response, body);
@@ -135,7 +135,8 @@ SmaugAdapter.prototype.promiseRequest = function(req, api, options, done, fail) 
         if (err) {
             var error = {
                 errCode: err.status,
-                err: []
+                err: [],
+                original: err
             };
             if (Array.isArray(body)) {
                 body.forEach(function addError(err) {

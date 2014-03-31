@@ -17,9 +17,6 @@
             <br />
             <br style="display: none;" />
             <form id="postingForm" action="/post" method="POST">
-                {{#each params.err}}
-                    <small style="display: block; color: red;">{{this}}</small>
-                {{/each}}
                 {{#each fields.productDescription}}
                     {{#getFieldTemplate ../template}}
                         {{{partial fieldPath}}}
@@ -38,10 +35,17 @@
                         {{{partial fieldPath}}}
                     {{/getFieldTemplate}}
                 {{/each}}
+                {{#each errField}}
+                    <small style="display: block; color: red;">{{this}}</small>
+                {{/each}}
+                {{#each errMsg}}
+                    <small style="display: block; color: red;">{{this}}</small>
+                {{/each}}
                 <input type="hidden" name="postingSession" value="{{postingSession}}">
                 <input type="hidden" name="intent" value="{{intent}}">
                 <input type="hidden" name="location" value="{{location}}">
                 <input type="hidden" name="languageId" value="{{language}}">
+                <input type="hidden" name="languageCode" value="{{languageCode}}">
                 <input type="hidden" name="platform" value="{{platform}}">
                 <input type="hidden" name="category[parentId]" value="{{category}}">
                 <input type="hidden" name="category[id]" value="{{subcategory}}">
