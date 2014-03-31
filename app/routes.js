@@ -15,6 +15,7 @@ module.exports = function(match) {
     match('categories/:id?*params', 'categories#show');
     match('categories/:id', 'categories#show');
     match('items/:id', 'items#show');
+    match('items/:id/reply', 'items#reply');
 
     match('location', 'location#index');
     match('registration', 'registration#index');
