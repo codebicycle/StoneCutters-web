@@ -23,81 +23,42 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function errorPostingCallback(err) {
+            var errors = {
+                errCode: 400,
+                errField: [],
+                errMsg: [],
+            };
+            err.original.body.forEach(function each(error) {
+                errors.errField.push(error.selector);
+                errors.errMsg.push(error.message);
+            });
             var url = req.headers.referer;
             var qIndex = url.indexOf('?');
 
             if (qIndex != -1) {
                 url = url.substring(0,qIndex);
             }
-            res.redirect(url+'?' + querystring.stringify(err));
+            res.redirect(url+'?' + querystring.stringify(errors));
         }
 
         function validateItem(done, item) {
-            var errors = {
-                errCode: 400,
-                err: [],
-                errFields: []
-            };
+            
 
             item.priceC = Number(item.priceC);
-            if (!item.postingSession) {
-                errors.err.push('Missing postingSession');
-                errors.errFields.push('postingSession');
+            item.category.parentId = Number(item.category.parentId);
+            item.category.id = Number(item.category.id);
+            var api = {
+                method: 'POST',
+                url: '/items?' + querystring.stringify({postingSession:item.postingSession,intent:'validate',languageCode:item.languageCode}),
+                body: item
+            };
+
+            function success(results) {
+                done(item);
             }
-            if (!item.intent) {
-                errors.err.push('Missing intent');
-                errors.errFields.push('intent');
-            }
-            if (!item.title) {
-                errors.err.push('Missing title');
-                errors.errFields.push('title');
-            }
-            if (!item.description) {
-                errors.err.push('Missing description');
-                errors.errFields.push('description');
-            }
-            if (!item.category) {
-                errors.err.push('Missing category');
-                errors.errFields.push('category');
-            }
-            else {
-                if (!item.category.parentId) {
-                    errors.err.push('Missing category.parentId');
-                    errors.errFields.push('category.parentId');
-                }
-                else {
-                    item.category.parentId = Number(item.category.parentId);
-                }
-                if (!item.category.id) {
-                    errors.err.push('Missing category.id');
-                    errors.errFields.push('category.id');
-                }
-                else {
-                    item.category.id = Number(item.category.id);
-                }
-            }
-            if (!item.location) {
-                errors.err.push('Missing location');
-                errors.errFields.push('location');
-            }
-            if (!item.email) {
-                errors.err.push('Missing email');
-                errors.errFields.push('email');
-            }
-            if (!item.platform) {
-                errors.err.push('Missing platform');
-                errors.errFields.push('platform');
-            }
-            if (!item.languageId) {
-                errors.err.push('Missing languageId');
-                errors.errFields.push('languageId');
-            }
-            if (errors.err.length) {
-                console.log("err en validate: %j",errors);
-                done.fail(errors);
-                return;
-            }
-            done(item);
+
+            dataAdapter.promiseRequest(req, api, success, done.fail);
+
         }
 
         function postItem(done, item) {
