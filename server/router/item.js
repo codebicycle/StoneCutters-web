@@ -126,7 +126,6 @@ module.exports = function itemRouter(app, dataAdapter) {
             delete item.postingSession;
             delete item.intent;
             delete item.token;
-            console.log(api);
             dataAdapter.promiseRequest(req, api, done);
         }
 

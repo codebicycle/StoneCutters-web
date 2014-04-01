@@ -55,7 +55,6 @@ module.exports = {
             result.myAds = myAds.get('data');
             result.siteLocation = siteLocation;
             _.each(result.myAds, processItem);
-            console.log(result);
             callback(err, result);
         });
     }
