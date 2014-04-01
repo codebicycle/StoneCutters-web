@@ -67,5 +67,24 @@ module.exports = {
             result.searchTerm = params.searchTerm;
             callback(err, result);
         });
+    },
+    reply: function(params, callback) {
+        var app = helpers.environment.init(this.app);
+        var spec = {
+            item: {
+                model: 'Item',
+                params: params
+            }
+        };
+
+        app.fetch(spec, {
+            'readFromCache': false
+        }, function afterFetch(err, result) {
+            result.user = app.getSession('user');
+            result.platform = app.getSession('platform');
+            result.location = app.getSession('siteLocation');
+            result.item = result.item.toJSON();
+            callback(err, result);
+        });
     }
 };

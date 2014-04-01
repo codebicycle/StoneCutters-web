@@ -6,6 +6,48 @@ module.exports = function itemRouter(app, dataAdapter) {
     var querystring = require('querystring');
 
     app.post('/post', postingHandler);
+    app.post('/items/:itemId/reply', replyHandler);
+
+    function replyHandler(req, res) {
+        var itemId = req.param('itemId', null);
+        var reply = req.body;
+        var params = {};
+        var user = req.rendrApp.getSession('user');
+
+        if (user) {
+            params.token = user.token;
+        }
+        reply.platform = req.rendrApp.getSession('platform');
+
+        function success(done, item) {
+            res.redirect('/items/' + itemId);
+        }
+
+        function error(err) {
+            var url = req.headers.referer;
+            var qIndex = url.indexOf('?');
+
+            if (qIndex != -1) {
+                url = url.substring(0,qIndex);
+            }
+            res.redirect(url+'?' + querystring.stringify(err));
+        }
+
+        function replyToAd(done, item) {
+            var api = {
+                method: 'POST',
+                url: '/items/' + itemId + '/messages?' + querystring.stringify(params),
+                form: reply,
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                }
+            };
+            dataAdapter.promiseRequest(req, api, done);
+        }
+
+        asynquence(replyToAd).or(error)
+            .then(success);
+    }
 
     function postingHandler(req, res) {
         var item = req.body;
