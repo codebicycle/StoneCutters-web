@@ -24,4 +24,6 @@ module.exports = function(match) {
     match('post', 'post#index');
     match('post/:categoryId', 'post#subcat');
     match('post/:categoryId/:subcategoryId', 'post#form');
+
+    match('terms', 'pages#terms');
 };
