@@ -55,7 +55,7 @@ module.exports = function usersRouter(app, dataAdapter) {
             }
             if (!user.agreeTerms) {
                 errors.err.push('Accept terms and conditions');
-                errors.errFields.push('agree_terms');
+                errors.errFields.push('agreeTerms');
             }
             if (errors.err.length) {
                 done.fail(errors);
