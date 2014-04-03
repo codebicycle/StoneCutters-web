@@ -9,10 +9,10 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
         var params = this.options.params;
 
-        if (params.err) {
+        if (params.err && typeof params.err === 'string') {
             params.err = params.err.split(',');
         }
-        if (params.errFields) {
+        if (params.errFields && typeof params.errFields === 'string') {
             params.errFields = params.errFields.split(',');
         }
         return _.extend({}, data, {
