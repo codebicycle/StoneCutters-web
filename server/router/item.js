@@ -1,10 +1,13 @@
 'use strict';
 
 var asynquence = require('asynquence');
+var multipart = require('connect-multiparty');
+var express = require('express');
 
 module.exports = function itemRouter(app, dataAdapter) {
     var querystring = require('querystring');
 
+    app.use(express.bodyParser());
     app.post('/post', postingHandler);
     app.post('/items/:itemId/reply', replyHandler);
 
@@ -49,8 +52,12 @@ module.exports = function itemRouter(app, dataAdapter) {
             .then(success);
     }
 
-    function postingHandler(req, res) {
+    function postingHandler(req, res, next) {
         var item = req.body;
+        var images = req.files.images[0];
+        
+        console.log(images);
+        
 
         item.postingSession = req.param('postingSession', null);
         item.intent = req.param('intent', null);
@@ -103,6 +110,33 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         }
 
+        function postImages(done, item) {
+            var posts = asynquence().or(done.fail);
+            var callbaks = [];
+
+            function success() {
+                console.log('----------------------', arguments);
+                done(arguments);
+            }
+
+            if (!Array.isArray(images)) {
+                images = [images];
+            }
+            images.forEach(function each(image) {
+                function post(done) {
+                    var api = {
+                        method: 'POST',
+                        url: '/images?' + querystring.stringify({postingSession:item.postingSession}),
+                        body: image.path
+                    };
+                    console.log(api);
+                    dataAdapter.promiseRequest(req, api, done);
+                }
+                callbaks.push(post);
+            });
+            posts.gate.apply(posts, callbaks).val(success);
+        }
+
         function postItem(done, item) {
             var api = {
                 method: 'POST',
@@ -117,6 +151,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         asynquence(callValidateItemCallback).or(errorPostingCallback)
+            .then(postImages)
             .then(postItem)
             .then(redirectToSuccessPostCallback);
     }

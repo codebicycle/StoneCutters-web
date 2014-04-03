@@ -16,7 +16,14 @@
             </small>
             <br />
             <br style="display: none;" />
-            <form id="postingForm" action="/post" method="POST">
+            <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
+                <label style="display: block; padding-top: .5em;">
+                    <small>Attach a Picture:</small>
+                    <br>
+                    <input type="file" style="font-size: small" name="images[]">
+                    <br>
+                    <input type="file" style="font-size: small" name="images[]">
+                </label>
                 {{#each fields.productDescription}}
                     {{#getFieldTemplate ../template}}
                         {{{partial fieldPath}}}
