@@ -14,6 +14,7 @@ module.exports = function usersRouter(app, dataAdapter) {
             username: req.param('username', null),
             email: req.param('email', null),
             password: req.param('password', null),
+            agreeTerms: req.param('agreeTerms', null),
             location: req.rendrApp.getSession('siteLocation'),
             languageId: 10
         };
@@ -51,6 +52,10 @@ module.exports = function usersRouter(app, dataAdapter) {
             if (!user.password) {
                 errors.err.push('Invalid password');
                 errors.errFields.push('password');
+            }
+            if (!user.agreeTerms) {
+                errors.err.push('Accept terms and conditions');
+                errors.errFields.push('agreeTerms');
             }
             if (errors.err.length) {
                 done.fail(errors);
