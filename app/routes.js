@@ -21,6 +21,7 @@ module.exports = function(match) {
     match('registration', 'user#registration');
     match('login', 'user#login');
     match('my-ads', 'user#my-ads');
+    match('favorites', 'user#favorites');
 
     match('post', 'post#index');
     match('post/:categoryId', 'post#subcat');
