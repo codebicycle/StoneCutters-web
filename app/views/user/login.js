@@ -4,7 +4,7 @@ var BaseView = require('../base');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
-    className: 'login_index_view',
+    className: 'user_login_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
         var params = this.options.params;
@@ -21,4 +21,4 @@ module.exports = BaseView.extend({
     }
 });
 
-module.exports.id = 'login/index';
+module.exports.id = 'user/login';

@@ -84,14 +84,13 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function validateItem(done, item) {
-            
-
-            item.priceC = Number(item.priceC);
-            item.category.parentId = Number(item.category.parentId);
-            item.category.id = Number(item.category.id);
             var api = {
                 method: 'POST',
-                url: '/items?' + querystring.stringify({postingSession:item.postingSession,intent:'validate',languageCode:item.languageCode}),
+                url: '/items?' + querystring.stringify({
+                    postingSession: item.postingSession,
+                    intent: 'validate',
+                    languageCode: item.languageCode
+                }),
                 body: item
             };
 
@@ -99,17 +98,31 @@ module.exports = function itemRouter(app, dataAdapter) {
                 done(item);
             }
 
+            item.priceC = Number(item.priceC);
+            item.category.parentId = Number(item.category.parentId);
+            item.category.id = Number(item.category.id);
             dataAdapter.promiseRequest(req, api, success, done.fail);
-
         }
 
         function postItem(done, item) {
+            var user = req.rendrApp.getSession('user');
             var api = {
-                method: 'POST',
-                url: '/items?' + querystring.stringify({postingSession:item.postingSession,intent:item.intent}),
-                body: item
+                method: 'POST'
+            };
+            var params = {
+                postingSession: item.postingSession,
+                intent: item.intent,
+                languageCode: item.languageCode
             };
 
+            if (user) {
+                params.token = user.token;
+            }
+            item.priceC = Number(item.priceC);
+            item.category.parentId = Number(item.category.parentId);
+            item.category.id = Number(item.category.id);
+            api.url = '/items?' + querystring.stringify(params);
+            api.body = item;
             delete item.postingSession;
             delete item.intent;
             delete item.token;

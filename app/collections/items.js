@@ -7,6 +7,7 @@ var querystring = require('querystring');
 module.exports = Base.extend({
     model: Item,
     url: function() {
+        var user = this.app.getSession('user') || {};
         var url;
 
         switch(this.params.item_type) {
@@ -14,10 +15,10 @@ module.exports = Base.extend({
                 url = '/items';
             break;
             case 'myAds':
-                url = '/users/'+this.Storage.get('userObj').userId+'/items';
+                url = '/users/'+ user.userId +'/items';
             break;
             case 'myFavorites':
-                url = '/users/'+this.Storage.get('userObj').userId+'/favorites';
+                url = '/users/'+ user.userId +'/favorites';
             break;
             default:
                 url = '/items';
