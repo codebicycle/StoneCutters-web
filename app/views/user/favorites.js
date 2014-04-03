@@ -4,7 +4,7 @@ var BaseView = require('../base');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
-    className: 'user_myads_view',
+    className: 'user_favorites_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
@@ -12,4 +12,4 @@ module.exports = BaseView.extend({
     }
 });
 
-module.exports.id = 'user/my-ads';
+module.exports.id = 'user/favorites';

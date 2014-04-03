@@ -26,6 +26,7 @@ module.exports = {
     },
     show: function(params, callback) {
         var app = helpers.environment.init(this.app);
+        var user = app.getSession('user');
         var spec = {
             item: {
                 model: 'Item',
@@ -33,11 +34,13 @@ module.exports = {
             }
         };
 
+        params.token = user.token;
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
             result.platform = app.getSession('platform');
             result.location = app.getSession('siteLocation');
+            result.user = user;
             result.item = result.item.toJSON();
             callback(err, result);
         });

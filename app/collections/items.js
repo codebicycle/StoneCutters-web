@@ -17,7 +17,7 @@ module.exports = Base.extend({
             case 'myAds':
                 url = '/users/'+ user.userId +'/items';
             break;
-            case 'myFavorites':
+            case 'favorites':
                 url = '/users/'+ user.userId +'/favorites';
             break;
             default:
