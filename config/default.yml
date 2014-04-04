@@ -5,6 +5,7 @@ server:
 smaug:
   protocol: http
   host: api-v2.olx.com
+  maxPageSize: 50
 
 session:
   secret: VWaB5TfjGPNWXJATbr6BK3Hy
