@@ -19,3 +19,10 @@ cache:
 
 cluster:
   enabled: true
+
+newrelic:
+  enabled: false
+  app_name:
+  	- 'OLX Mobile Arwen [Testing]'
+  license_key: 44a224263249b223e0106479ee8e5db378771508
+  level: trace
