@@ -3,7 +3,6 @@
 var helpers = require('../helpers');
 var _ = require('underscore');
 var querystring = require('querystring');
-//var CONFIG = require('config');
 
 module.exports = {
     index: function(params, callback) {
@@ -15,9 +14,10 @@ module.exports = {
             }
         };
         var query = _.clone(params);
+        var CONFIG = require('../config').smaug;
         function checkPageSize(query) {
-            if (query.pageSize > 50 /*CONFIG.maxPageSize*/) {
-                query.pageSize = 50 /*CONFIG.maxPageSize*/;
+            if (query.pageSize > CONFIG.maxPageSize) {
+                query.pageSize = CONFIG.maxPageSize;
             }
         }
         checkPageSize(params);
@@ -37,14 +37,14 @@ module.exports = {
                     query.sort = next.replace(/.*sort=([\d\w\s]*).*/, '\$1');
                     metadata.next = (url + querystring.stringify(query));
                 } else {
-                    query.offset = parseInt(query.offset) + parseInt(query.pageSize);
+                    query.offset = Number(query.offset) + Number(query.pageSize);
                 }
                 checkPageSize(query);
             }
 
             function preparePreviousLink(metadata, url) {
-                var offset = parseInt(query.offset);
-                var pageSize = parseInt(query.pageSize);
+                var offset = Number(query.offset);
+                var pageSize = Number(query.pageSize);
                 offset = (offset - (pageSize * 2));
                 if (offset >= 0) {
                     query.offset = offset;
