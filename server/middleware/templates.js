@@ -20,6 +20,10 @@ module.exports = function(dataAdapter) {
 
             function done(body) {
                 var device = body;
+                var marketing = {
+                    osName: device.osName,
+                    osVersion: parseFloat(device.osVersion.replace('_','.'))
+                };
                 var template = 'basic';
                 var platform = 'wap';
                 var location = siteLocation.slice(siteLocation.length - 2);
@@ -53,11 +57,12 @@ module.exports = function(dataAdapter) {
                 }
                 app.updateSession({
                     platform: platform,
-                    template: template
+                    template: template,
+                    marketing: marketing,
                 });
                 app.req.app.locals({
                     platform: platform,
-                    template: template
+                    template: template,
                 });
                 next();
             }
