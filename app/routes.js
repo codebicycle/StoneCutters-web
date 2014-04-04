@@ -28,4 +28,5 @@ module.exports = function(match) {
     match('post/:categoryId/:subcategoryId', 'post#form');
 
     match('terms', 'pages#terms');
+    match('health', 'pages#health');
 };
