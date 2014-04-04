@@ -9,13 +9,5 @@ module.exports = {
         callback(null, {
             'params': params
         });
-    },
-    health: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-
-        callback(null, {
-            'params': params,
-            'message': '{"online":true, "message":"Everything ok!"}'
-        });
     }
 };
