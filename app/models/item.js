@@ -3,7 +3,14 @@
 var Base = require('./base');
 
 module.exports = Base.extend({
-    url: '/items/:id',
+    url: function() {
+        var url = '/items/:id';
+
+        if (this.get('token')) {
+            url += '?token=:token';
+        }
+        return url;
+    },
     idAttribute: 'id'
 });
 

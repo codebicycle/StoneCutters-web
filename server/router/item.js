@@ -7,6 +7,45 @@ module.exports = function itemRouter(app, dataAdapter) {
 
     app.post('/post', postingHandler);
     app.post('/items/:itemId/reply', replyHandler);
+    app.post('/items/:itemId/favorite', favoriteHandler);
+
+    function favoriteHandler(req, res) {
+        var itemId = req.param('itemId', null);
+        var user = req.rendrApp.getSession('user') || {};
+        var languages = req.rendrApp.getSession('languages');
+        var languageId = req.rendrApp.getSession('selectedLanguage');
+        var params = {
+            token: user.token,
+            languageId: languageId,
+            languageCode: languages._byId[languageId].isocode.toLowerCase()
+        };
+
+        function success(done, item) {
+            res.redirect('/items/' + itemId);
+        }
+
+        function error(err) {
+            var url = req.headers.referer;
+            var qIndex = url.indexOf('?');
+
+            if (qIndex != -1) {
+                url = url.substring(0,qIndex);
+            }
+            res.redirect(url+'?' + querystring.stringify(err));
+        }
+
+        function addToFavorites(done, item) {
+            var api = {
+                method: 'POST',
+                url: '/users/' + user.userId + '/favorites/' + itemId + '?' + querystring.stringify(params)
+            };
+
+            dataAdapter.promiseRequest(req, api, done);
+        }
+
+        asynquence(addToFavorites).or(error)
+            .then(success);
+    }
 
     function replyHandler(req, res) {
         var itemId = req.param('itemId', null);

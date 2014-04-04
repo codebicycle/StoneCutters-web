@@ -19,3 +19,4 @@ config/runtime.json
 conf.json
 test/output
 test/coverage.html
+newrelic_agent.log
