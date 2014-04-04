@@ -1,14 +1,18 @@
 'use strict';
 
+var CONFIG = require('config');
+var asynquence = require('asynquence');
+var app = asynquence().or(uncaughtError);
+
 function uncaughtError(error) {
     throw error;
 }
 
-var asynquence = require('asynquence');
+if (CONFIG.newrelic.enabled) {
+    require('newrelic');
+}
 
-var app = asynquence().or(uncaughtError);
-
-if (require('config').cluster.enabled) {
+if (CONFIG.cluster.enabled) {
     app.then(require('./cluster'));
 }
 app.val(require('./bootstrap'));
