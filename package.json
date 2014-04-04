@@ -40,7 +40,8 @@
     "underscore": "~1.6.0",
     "request": "~2.34.0",
     "debug": "~0.7.4",
-    "rendr-handlebars": "~0.2.0"
+    "rendr-handlebars": "~0.2.0",
+    "nunjucks": "~1.0.2"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
@@ -56,6 +57,7 @@
     "grunt-contrib-jshint": "~0.9.2",
     "grunt-artifactory-artifact": "^0.6.1",
     "grunt-rsync": "~0.2.1",
-    "grunt-ssh": "~0.9.1"
+    "grunt-ssh": "~0.9.1",
+    "grunt-nunjucks": "~0.1.4"
   }
 }

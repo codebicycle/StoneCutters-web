@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('clean', ['exec:removeTemplates', 'exec:removeAssets']);
 
-    grunt.registerTask('build', ['handlebars', 'browserify']);
+    grunt.registerTask('build', ['nunjucks', 'browserify']);
 
     grunt.registerTask('rebuild', ['clean', 'build']);
 

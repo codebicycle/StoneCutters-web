@@ -8,7 +8,9 @@ var customHandlebarsHelpers = require('./helpers').handlebars;
  * Extend the `BaseApp` class, adding any custom methods or overrides.
  */
 module.exports = BaseApp.extend({
-
+    defaults: {
+        templateAdapter: 'rendr-nunjucks'
+    },
     /**
      * Client and server.
      *
