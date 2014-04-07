@@ -14,10 +14,11 @@ module.exports = {
             }
         };
         var query = _.clone(params);
-        var CONFIG = require('../config').smaug;
+        var config = require('../config');
         function checkPageSize(query) {
-            if (query.pageSize > CONFIG.maxPageSize) {
-                query.pageSize = CONFIG.maxPageSize;
+            var max = config.get(['smaug', 'maxPageSize'], 50);
+            if (query.pageSize > max) {
+                query.pageSize = max;
             }
         }
         checkPageSize(params);
@@ -32,9 +33,9 @@ module.exports = {
             function prepareNextLink(metadata, url) {
                 var next = metadata.next;
                 if (next) {
-                    query.offset = next.replace(/.*offset=(\d*).*/, '\$1');
-                    query.pageSize = next.replace(/.*pageSize=(\d*).*/, '\$1');
-                    query.sort = next.replace(/.*sort=([\d\w\s]*).*/, '\$1');
+                    query.offset = next.replace(/.*offset=(\d*).*/, '$1');
+                    query.pageSize = next.replace(/.*pageSize=(\d*).*/, '$1');
+                    query.sort = next.replace(/.*sort=([\d\w\s]*).*/, '$1');
                     metadata.next = (url + querystring.stringify(query));
                 } else {
                     query.offset = Number(query.offset) + Number(query.pageSize);
