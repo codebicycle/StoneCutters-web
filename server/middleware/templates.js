@@ -4,6 +4,7 @@ module.exports = function(dataAdapter) {
 
     return function loader() {
         var localizedTemplates = require('../localizedTemplates');
+        var debug = require('debug')('arwen:middleware:templates');
 
         function isLocalized(platform, location) {
             return !!(~localizedTemplates[platform].indexOf(location));
@@ -71,7 +72,7 @@ module.exports = function(dataAdapter) {
             }
 
             function fail(error) {
-                console.log('Got error: ' + error.err);
+                debug('%s %j', 'ERROR', error);
                 res.send(400, error.err);
             }
 

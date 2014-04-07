@@ -1,8 +1,5 @@
 'use strict';
 
-/*
- * This is the implementation of cluster technology for ARWEN.
- */
 module.exports = function(done) {
     var cluster = require('cluster');
 
@@ -15,7 +12,6 @@ module.exports = function(done) {
         }
         cluster.on('exit', function onClusterExit(worker) {
             console.log('Express server %d exiting', worker.id);
-            //You won't die.
             cluster.fork();
         });
     }

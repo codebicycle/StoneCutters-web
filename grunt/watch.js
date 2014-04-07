@@ -9,6 +9,14 @@ module.exports = function(grunt) {
         templates: {
             files: ['app/**/*.hbs'],
             tasks: ['exec:removeTemplates', 'handlebars']
+        },
+        node: {
+            files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'grunt/**/*.js'],
+            tasks: ['jshint:node']
+        },
+        tests: {
+            files: ['test/**/*.js'],
+            tasks: ['jshint:tests']
         }
     };
 };
