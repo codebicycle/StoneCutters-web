@@ -16,6 +16,22 @@
 	                </a>
 	            </td>
 	        </tr>
-        {{/each}}               
+        {{/each}}
+	</tbody>
+</table>
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
+	<tbody>
+		<tr>
+			{{#if metadata.previous}}
+				<td style="text-align: left;">
+					<a href="{{metadata.previous}}">Previous</a>
+				</td>
+			{{/if}}
+			{{#if metadata.next}}
+				<td style="text-align: right;">
+					<a href="{{metadata.next}}">Next</a>
+				</td>
+			{{/if}}
+		</tr>
 	</tbody>
 </table>

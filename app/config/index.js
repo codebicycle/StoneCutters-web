@@ -2,7 +2,10 @@
 
 var _ = require('underscore');
 var CONFIG = {
-    analytics: require('./analytics')
+    analytics: require('./analytics'),
+    smaug: {
+        maxPageSize: 50
+    }
 };
 
 function get(keys, defaultValue) {
