@@ -39,9 +39,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('debug', ['rebuild', 'jshint:node', 'log', 'watch']);
 
-    grunt.registerTask('pipeline-rackspace', ['test', 'rebuild', 'rsync:dist', 'rsync:stage', 'sshexec:npm-install', 'sshexec:stop', 'sshexec:start']);
-
-    grunt.registerTask('pipeline-artifactory', ['rebuild', 'rsync:dist', 'artifactory:build-static:publish', 'artifactory:build-dynamic:publish']);
+    grunt.registerTask('pipeline', ['rebuild', 'artifactory:static:publish', 'artifactory:dynamic:publish']);
 
     grunt.registerTask('test', ['jshint:tests', 'mochacov:test', 'mochacov:coverage']);
 };

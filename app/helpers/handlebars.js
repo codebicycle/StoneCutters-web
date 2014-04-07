@@ -15,6 +15,9 @@ module.exports = function(Handlebars) {
                 return fieldName;
             }
             return 'opts['+fieldName+']';
+        },
+        html: function(string, options) {
+            return new Handlebars.SafeString(string);
         }
     };
 };
