@@ -20,6 +20,9 @@ module.exports = function(dataAdapter) {
 
             function done(body) {
                 var device = body;
+                if(device.osVersion === undefined){
+                    device.osVersion = '0';
+                }
                 var marketing = {
                     osName: device.osName,
                     osVersion: parseFloat(device.osVersion.replace('_','.'))

@@ -15,8 +15,12 @@ module.exports = function(grunt) {
                 }],
                 shim: {
                     jquery: {
-                        path: 'assets/vendor/jquery-1.9.1.min.js',
+                        path: 'public/js/lib/jquery.js',
                         exports: '$'
+                    },
+                    swiper: {
+                        path: 'public/js/lib/swiper.js',
+                        exports: 'swiper'
                     }
                 }
             }
