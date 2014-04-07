@@ -9,6 +9,9 @@ target
 
 node_modules
 public/mergedAssets.js
+public/js/mergedAssets.js
+public/js/libs.js
+public/js/app.js
 app/templates/compiledTemplates.js
 public/styles.css
 .DS_Store
@@ -20,3 +23,5 @@ conf.json
 test/output
 test/coverage.html
 newrelic_agent.log
+
+
