@@ -14,7 +14,9 @@
   },
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production nodemon index.js"
+    "start": "NODE_ENV=production nodemon index.js",
+    "develop": "nodemon index.js",
+    "debug": "DEBUG=arwen* nodemon index.js"
   },
   "engines": {
     "node": ">=0.10"
