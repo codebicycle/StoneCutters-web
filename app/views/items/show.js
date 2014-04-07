@@ -3,10 +3,6 @@
 var BaseView = require('../base');
 var _ = require('underscore');
 
-if (typeof window != 'undefined') {
-    var Swipe = require('../../lib/swiper');
-}
-
 module.exports = BaseView.extend({
     className: 'items_show_view',
     getTemplateData: function() {

@@ -8,31 +8,31 @@ module.exports = function(grunt) {
             username: 'mobile-jenkins',
             password: 'm0b1l30lx',
         },
-        'build-dynamic': {
+        'dynamic': {
             files: [{
-                cwd: 'dist',
-                src: ['**']
+                src: ['app/**/*', 'node_modules/**/*', 'server/**/*', 'cache.js', 'memcached.js', 'appConf.js', 'bootstrap.js', 'cluster.js', 'index.js', 'newrelic.js'],
             }],
             options: {
                 publish: [{
-                    id: 'olx.arwen:arwen-dynamic:zip:0.1.'+grunt.option('artifactory-version'),
+                    id: 'olx.arwen:arwen-dynamic:zip:' + grunt.option('artifactory-version'),
                     name: 'arwen-dynamic',
-                    path: 'dist/',
+                    path: '',
                     group_id: 'olx.arwen',
                     ext: 'zip'
                 }]
             }
         },
-        'build-static': {
+        'static': {
             files: [{
-                cwd: 'dist',
+                expand: true,
+                cwd: 'public/',
                 src: ['**']
             }],
             options: {
                 publish: [{
-                    id: 'olx.arwen:arwen-static:zip:0.1.'+grunt.option('artifactory-version'),
+                    id: 'olx.arwen:arwen-static:zip:' + grunt.option('artifactory-version'),
                     name: 'arwen-static',
-                    path: 'dist/',
+                    path: '',
                     group_id: 'olx.arwen',
                     ext: 'zip'
                 }]

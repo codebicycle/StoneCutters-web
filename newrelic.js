@@ -1,6 +1,4 @@
-var _ = require('underscore');
-var CONFIG = require('config').newrelic;
-var config = _.clone(CONFIG);
+var config = require('./config').get('newrelic', {});
 
 delete config.enabled;
 exports.config = config;

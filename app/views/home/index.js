@@ -4,10 +4,6 @@ var BaseView = require('../base');
 var _ = require('underscore');
 var helpers = require('../../helpers');
 
-if (typeof window != 'undefined') {
-    var Swipe = require('../../lib/swiper');
-}
-
 module.exports = BaseView.extend({
     className: 'home_index_view',
     processItem: function(item) {

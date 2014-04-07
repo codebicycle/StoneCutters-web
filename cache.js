@@ -1,7 +1,7 @@
 'use strict';
 
 var asynquence = require('asynquence');
-var LIFETIME = require('config').cache.lifetime.default;
+var LIFETIME = require('config').get(['cache', 'lifetime','default'], 60);
 var memcached;
 
 module.exports = function(debugMode) {

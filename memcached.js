@@ -1,6 +1,6 @@
 'use strict';
 
-var CONFIG = require('config').memcached;
+var config = require('./config');
 var Memcached;
 var memcached;
 
@@ -14,7 +14,7 @@ module.exports = function(express) {
     }
 
     Memcached = require('connect-memcached')(express);
-    memcached = new Memcached(CONFIG);
+    memcached = new Memcached(config.get('memcached', {}));
 
     return memcached;
 };

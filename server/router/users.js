@@ -5,9 +5,11 @@ var asynquence = require('asynquence');
 module.exports = function usersRouter(app, dataAdapter) {
     var querystring = require('querystring');
     var crypto = require('crypto');
+    var debug = require('debug')('arwen:router:users');
 
     app.post('/registration', registrationHandler);
     app.post('/login', loginHandler);
+    app.post('/loginAnon', loginAnonHandler);
 
     function registrationHandler(req, res) {
         var user = {
@@ -97,7 +99,7 @@ module.exports = function usersRouter(app, dataAdapter) {
         }
 
         function errorLoginCallback(err) {
-            console.log(err);
+            debug('%s %j', 'ERROR', err);
             res.redirect('/login?' + querystring.stringify(err));
         }
 
@@ -137,6 +139,49 @@ module.exports = function usersRouter(app, dataAdapter) {
             .then(loginUser)
             .then(saveDataLoginCallback)
             .then(redirectLoginHomeCallback);
+    }
+
+    function loginAnonHandler(req, res) {
+        var email = req.param('email', null);
+
+        function errorLoginCallback(err) {
+            console.log(err);
+            err.emailErr = err.err;
+            delete err.err; 
+            res.redirect('/login?' + querystring.stringify(err));
+        }
+
+        function validateCallback(done) {
+            if (!email) {
+                done.fail({
+                    errCode: 400,
+                    err: ['Invalid email']
+                });
+            }
+            done();
+        }
+
+        function loginCallback(done) {
+            /*
+            TODO [MOB-4716] Authentication anonymous to MyAds & My favorites.
+            var api = {
+                body: {},
+                url: '/users/login?' + email
+            };
+
+            dataAdapter.promiseRequest(req, api, done);
+            */
+            done();
+        }
+
+        function redirectLoginCallback(done) {
+            res.redirect('/login?emailMsg=The link to access My OLX has been emailed to you.');
+        }
+
+        asynquence().or(errorLoginCallback)
+            .then(validateCallback)
+            .then(loginCallback)
+            .then(redirectLoginCallback);
     }
 
     function saveData(req, res, user, done) {

@@ -79,7 +79,9 @@ module.exports = {
             }
         };
 
-        params.token = user.token;
+        if (user) {
+            params.token = user.token;
+        }
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
