@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 module.exports = function usersRouter(app, dataAdapter) {
     var querystring = require('querystring');
     var crypto = require('crypto');
+    var debug = require('debug')('arwen:router:users');
 
     app.post('/registration', registrationHandler);
     app.post('/login', loginHandler);
@@ -98,7 +99,7 @@ module.exports = function usersRouter(app, dataAdapter) {
         }
 
         function errorLoginCallback(err) {
-            console.log(err);
+            debug('%s %j', 'ERROR', err);
             res.redirect('/login?' + querystring.stringify(err));
         }
 

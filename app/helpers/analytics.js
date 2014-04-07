@@ -1,7 +1,6 @@
 'use strict';
 
-var atiConfig = require('../config/analytics/ati_config');
-var analyticsConfig = require('../config/analytics/analytics_config');
+var config = require('../config');
 var catHelper = require('./categories');
 
 module.exports = function analyticsHelper() {
@@ -115,8 +114,8 @@ module.exports = function analyticsHelper() {
         var countryId = session.location.id;
 
         var pathMatch = getPathMatch(session.path);
-        var paramsProperties = analyticsConfig[pathMatch];
-        var atiCountryConfig = atiConfig[countryId];
+        var paramsProperties = config.get(['analytics', 'paths', pathMatch]);
+        var atiCountryConfig = config.get(['analytics', 'ati', countryId]);
 
         if (!paramsProperties || !atiCountryConfig) {
             return;

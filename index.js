@@ -1,18 +1,25 @@
 'use strict';
 
-var CONFIG = require('config');
+var config = require('./config');
 var asynquence = require('asynquence');
 var app = asynquence().or(uncaughtError);
+var debug = require('debug')('arwen');
+
 
 function uncaughtError(error) {
-    throw error;
+    var log = '%s %j';
+
+    if (error instanceof Error) {
+        log = '%s %s';
+    }
+    debug(log, 'ERROR', error.stack);
 }
 
-if (CONFIG.newrelic.enabled) {
+if (config.get(['newrelic', 'enabled'], false)) {
     require('newrelic');
 }
 
-if (CONFIG.cluster.enabled) {
+if (config.get(['cluster', 'enabled'], false)) {
     app.then(require('./cluster'));
 }
 app.val(require('./bootstrap'));

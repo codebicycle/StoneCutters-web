@@ -5,6 +5,7 @@ module.exports = function(dataAdapter) {
     return function loader() {
         var asynquence = require('asynquence');
         var _ = require('underscore');
+        var debug = require('debug')('arwen:middleware:location');
 
         return function middleware(req, res, next) {
             var app = req.rendrApp;
@@ -75,9 +76,9 @@ module.exports = function(dataAdapter) {
                 done();
             }
 
-            function fail(msg) {
-                console.log('Failure: ' + msg);
-                res.send(400, msg);
+            function fail(err) {
+                debug('%s %j', 'ERROR', err);
+                res.send(400, err);
             }
 
             asynquence().or(fail)

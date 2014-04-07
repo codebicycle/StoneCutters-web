@@ -1,6 +1,6 @@
 'use strict';
 
-var analyticsConfig = require('../config/analytics/analytics_config');
+var config = require('../config');
 var analyticsHelper = require('./analytics');
 
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
         var path = location.pathname;
         var referer = app.getSession('url');
         var pathMatch = analyticsHelper.getPathMatch(path);
-        var viewType = analyticsConfig[pathMatch].viewType;
+        var viewType = config.get(['analytics', 'paths', pathMatch, 'viewType'], '');
 
         app.updateSession({
             path: path,

@@ -5,9 +5,9 @@ var utils = require('../utils');
 var _ = require('underscore');
 var url = require('url');
 var request = require('request');
-var debug = require('debug')('rendr:SmaugAdapter');
+var debug = require('debug')('arwen:adapter:data');
 var util = require('util');
-var CONFIG = require('config').smaug;
+var CONFIG = require('../../config').get('smaug', {});
 
 function SmaugAdapter(options) {
     DataAdapter.call(this, options);
@@ -31,9 +31,6 @@ util.inherits(SmaugAdapter, DataAdapter);
  * `callback`: Callback.
  */
 SmaugAdapter.prototype.request = function(req, api, options, callback) {
-    var start = new Date().getTime();
-    var end;
-
     if (arguments.length === 3) {
         callback = options;
         options = {};
@@ -48,11 +45,7 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
     api = this.apiDefaults(api, req);
     api.url = CONFIG.protocol + '://' + CONFIG.host + api.url;
     request(api, function afterRequest(err, response, body) {
-        if (err) {
-            return callback(err);
-        }
-        end = new Date().getTime();
-        debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
+        debug('%s %s %d', api.method.toUpperCase(), api.url, response.statusCode);
         if (options.convertErrorCode) {
             err = this.getErrForResponse(response, {
                 allow4xx: options.allow4xx
@@ -68,6 +61,9 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
         }
         if (body && body.itemProperties === null){
             body.itemProperties = {};
+        }
+        if (err) {
+            debug('%s %j', 'ERROR', err);
         }
         callback(err, response, body);
     }.bind(this));
@@ -146,7 +142,6 @@ SmaugAdapter.prototype.promiseRequest = function(req, api, options, done, fail) 
             else {
                 error.err.push(body);
             }
-            console.log("Err en adapter: %j",error);
             fail(error);
             return;
         }
