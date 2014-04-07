@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
     return {
         basic: {
-            src: ['app/**/*.js'],
+            src: ['public/js/lib/*.js'],
             dest: 'public/js/mergedAssets.js',
             options: {
                 debug: true,
@@ -17,10 +17,6 @@ module.exports = function(grunt) {
                     jquery: {
                         path: 'public/js/lib/jquery.js',
                         exports: '$'
-                    },
-                    swiper: {
-                        path: 'public/js/lib/swiper.js',
-                        exports: 'swiper'
                     }
                 }
             }
