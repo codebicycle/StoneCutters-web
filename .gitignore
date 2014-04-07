@@ -20,3 +20,5 @@ conf.json
 test/output
 test/coverage.html
 newrelic_agent.log
+arwen-static-*
+arwen-dynamic-*
