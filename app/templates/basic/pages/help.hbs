@@ -1,0 +1,20 @@
+<h1>Help</h1>
+<hr/>
+</br>
+
+{{#each items}}
+    <h3>{{this.name}}</h3>
+    <hr/>
+    <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
+        <tbody>
+        {{#each this.questions}}
+            <tr id="{{@index}}">
+                <td>
+                    <h4>{{this.question}}</h4>
+                    <p>{{#html this.response}}{{/html}}</p>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{/each}}

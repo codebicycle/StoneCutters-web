@@ -264,3 +264,10 @@ section#languages ul li a{color: #474747;}
 section#location{padding: .5rem; text-align: center;}
 section#location a{color: #474747;}
 [data-view] .loading{opacity:.5}
+
+/*----effects----*/
+.fade {opacity: 0; -webkit-transition: opacity .15s linear; transition: opacity .15s linear;}
+.fade.in {opacity: 1;}
+.collapse {display: none;}
+.collapse.in {display: block;}
+.collapsing {position: relative; height: 0; overflow: hidden; -webkit-transition: height .35s ease; transition: height .35s ease;}
