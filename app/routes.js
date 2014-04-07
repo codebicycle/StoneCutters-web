@@ -18,10 +18,14 @@ module.exports = function(match) {
     match('items/:id/reply', 'items#reply');
 
     match('location', 'location#index');
-    match('registration', 'registration#index');
-    match('login', 'login#index');
+    match('registration', 'user#registration');
+    match('login', 'user#login');
+    match('my-ads', 'user#my-ads');
+    match('favorites', 'user#favorites');
 
     match('post', 'post#index');
     match('post/:categoryId', 'post#subcat');
     match('post/:categoryId/:subcategoryId', 'post#form');
+
+    match('terms', 'pages#terms');
 };

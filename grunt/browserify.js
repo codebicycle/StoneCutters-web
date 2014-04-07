@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     return {
         basic: {
             src: ['app/**/*.js'],
-            dest: 'public/mergedAssets.js',
+            dest: 'public/js/mergedAssets.js',
             options: {
                 debug: true,
                 alias: ['node_modules/rendr-handlebars/index.js:rendr-handlebars'],

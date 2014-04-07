@@ -1,0 +1,46 @@
+<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+	<tr>
+		<td>
+			<strong style="display: block;">Login</strong>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="/registration" style="display: block;">If you don't have an account, click here</a>
+		</td>
+	</tr>
+    <tr>
+        <td style="border-top: solid thin #B0B0B0;">
+            <form action="/login" method="POST">
+                {{#each params.err}}
+                    <small style="display: block; color: red;">{{this}}</small>
+                {{/each}}
+                <span style="display: block;">Username or Email</span>
+                <input type="text" name="usernameOrEmail">
+                <span style="display: block;">Password</span>
+                <input type="password" name="password">
+                <span style="display: block;"><input type="submit" value="Login"></span>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong style="display: block;">Already posted an ad</strong>
+        </td>
+    </tr>
+    <tr>
+        <td style="border-top: solid thin #B0B0B0;">
+            <form action="/loginAnon" method="POST">
+                {{#if params.emailMsg}}
+                    <small style="display: block; color: blue;">{{params.emailMsg}}</small>
+                {{/if}}
+                {{#if params.emailErr}}
+                    <small style="display: block; color: red;">{{params.emailErr}}</small>
+                {{/if}}
+                <span style="display: block;">Enter the email that you used to post your ad and receive the link to My OLX by email.</span>
+                <input type="text" name="email">
+                <span style="display: block;"><input type="submit" value="Send"></span>
+            </form>
+        </td>
+    </tr>
+</table>

@@ -4,6 +4,7 @@ module.exports = function(dataAdapter) {
 
     return function loader() {
         var localizedTemplates = require('../localizedTemplates');
+        var debug = require('debug')('arwen:middleware:templates');
 
         function isLocalized(platform, location) {
             return !!(~localizedTemplates[platform].indexOf(location));
@@ -20,6 +21,10 @@ module.exports = function(dataAdapter) {
 
             function done(body) {
                 var device = body;
+                var marketing = {
+                    osName: device.osName,
+                    osVersion: parseFloat(device.osVersion.replace('_','.'))
+                };
                 var template = 'basic';
                 var platform = 'wap';
                 var location = siteLocation.slice(siteLocation.length - 2);
@@ -53,17 +58,18 @@ module.exports = function(dataAdapter) {
                 }
                 app.updateSession({
                     platform: platform,
-                    template: template
+                    template: template,
+                    marketing: marketing,
                 });
                 app.req.app.locals({
                     platform: platform,
-                    template: template
+                    template: template,
                 });
                 next();
             }
 
             function fail(error) {
-                console.log('Got error: ' + error.err);
+                debug('%s %j', 'ERROR', error);
                 res.send(400, error.err);
             }
 

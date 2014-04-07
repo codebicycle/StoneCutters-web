@@ -22,12 +22,9 @@ module.exports = function(dataAdapter) {
                 var url = req.query.url;
 
                 var session = new sixpack.Session(client_id);
-                console.log('Making a convertion');
-                console.log(req._parsedUrl);
 
                 session.convert(experimentName, function callback(err, res) {
-                if (err) throw err;
-                    console.log('Convertion logged.');
+                    if (err) throw err;
                 });
 
                 req.url = url;

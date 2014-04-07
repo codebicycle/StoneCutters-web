@@ -4,7 +4,11 @@ module.exports = function(grunt) {
     var privateKey = '';
 
     if (grunt.file.exists('conf.json')) {
-        privateKey = grunt.file.read(grunt.file.readJSON('conf.json').auth);
+        var conf = grunt.file.readJSON('conf.json');
+
+        if (conf && conf.auth && grunt.file.exists(conf.auth)) {
+            privateKey = grunt.file.read(conf.auth);
+        }
     }
     return {
       testing: {

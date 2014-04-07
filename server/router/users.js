@@ -5,15 +5,18 @@ var asynquence = require('asynquence');
 module.exports = function usersRouter(app, dataAdapter) {
     var querystring = require('querystring');
     var crypto = require('crypto');
+    var debug = require('debug')('arwen:router:users');
 
     app.post('/registration', registrationHandler);
     app.post('/login', loginHandler);
+    app.post('/loginAnon', loginAnonHandler);
 
     function registrationHandler(req, res) {
         var user = {
             username: req.param('username', null),
             email: req.param('email', null),
             password: req.param('password', null),
+            agreeTerms: req.param('agreeTerms', null),
             location: req.rendrApp.getSession('siteLocation'),
             languageId: 10
         };
@@ -51,6 +54,10 @@ module.exports = function usersRouter(app, dataAdapter) {
             if (!user.password) {
                 errors.err.push('Invalid password');
                 errors.errFields.push('password');
+            }
+            if (!user.agreeTerms) {
+                errors.err.push('Accept terms and conditions');
+                errors.errFields.push('agreeTerms');
             }
             if (errors.err.length) {
                 done.fail(errors);
@@ -92,7 +99,7 @@ module.exports = function usersRouter(app, dataAdapter) {
         }
 
         function errorLoginCallback(err) {
-            console.log(err);
+            debug('%s %j', 'ERROR', err);
             res.redirect('/login?' + querystring.stringify(err));
         }
 
@@ -132,6 +139,49 @@ module.exports = function usersRouter(app, dataAdapter) {
             .then(loginUser)
             .then(saveDataLoginCallback)
             .then(redirectLoginHomeCallback);
+    }
+
+    function loginAnonHandler(req, res) {
+        var email = req.param('email', null);
+
+        function errorLoginCallback(err) {
+            console.log(err);
+            err.emailErr = err.err;
+            delete err.err; 
+            res.redirect('/login?' + querystring.stringify(err));
+        }
+
+        function validateCallback(done) {
+            if (!email) {
+                done.fail({
+                    errCode: 400,
+                    err: ['Invalid email']
+                });
+            }
+            done();
+        }
+
+        function loginCallback(done) {
+            /*
+            TODO [MOB-4716] Authentication anonymous to MyAds & My favorites.
+            var api = {
+                body: {},
+                url: '/users/login?' + email
+            };
+
+            dataAdapter.promiseRequest(req, api, done);
+            */
+            done();
+        }
+
+        function redirectLoginCallback(done) {
+            res.redirect('/login?emailMsg=The link to access My OLX has been emailed to you.');
+        }
+
+        asynquence().or(errorLoginCallback)
+            .then(validateCallback)
+            .then(loginCallback)
+            .then(redirectLoginCallback);
     }
 
     function saveData(req, res, user, done) {

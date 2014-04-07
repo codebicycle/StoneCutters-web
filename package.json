@@ -14,7 +14,9 @@
   },
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production nodemon index.js"
+    "start": "NODE_ENV=production nodemon index.js",
+    "develop": "nodemon index.js",
+    "debug": "DEBUG=arwen* nodemon index.js"
   },
   "engines": {
     "node": ">=0.10"
@@ -41,7 +43,7 @@
     "request": "~2.34.0",
     "debug": "~0.7.4",
     "rendr-handlebars": "~0.2.0",
-    "connect-multiparty": "~1.0.3"
+    "newrelic": "~1.4.0"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
