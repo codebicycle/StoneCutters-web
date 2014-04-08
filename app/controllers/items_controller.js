@@ -3,6 +3,44 @@
 var helpers = require('../helpers');
 var _ = require('underscore');
 var querystring = require('querystring');
+var config = require('../config');
+
+function checkPageSize(query) {
+    var max = config.get(['smaug', 'maxPageSize'], 50);
+    if (query.pageSize > max) {
+        query.pageSize = max;
+    }
+}
+
+function prepareNextLink(metadata, query, url) {
+    var next = metadata.next;
+    if (next) {
+        query.offset = next.replace(/.*offset=(\d*).*/, '$1');
+        query.pageSize = next.replace(/.*pageSize=(\d*).*/, '$1');
+        query.sort = next.replace(/.*sort=([\d\w\s]*).*/, '$1');
+        metadata.next = (url + querystring.stringify(query));
+    } else {
+        query.offset = Number(query.offset) + Number(query.pageSize);
+    }
+    checkPageSize(query);
+}
+
+function preparePreviousLink(metadata, query, url) {
+    var offset = Number(query.offset);
+    var pageSize = Number(query.pageSize);
+    offset = (offset - (pageSize * 2));
+    if (offset >= 0) {
+        query.offset = offset;
+        metadata.previous = (url + querystring.stringify(query));
+    }
+}
+
+function preparePaginationLink(metadata, query, url) {
+    if (metadata.total > 0) {
+        prepareNextLink(metadata, query, url);
+        preparePreviousLink(metadata, query, url);
+    }
+ }
 
 module.exports = {
     index: function(params, callback) {
@@ -14,13 +52,6 @@ module.exports = {
             }
         };
         var query = _.clone(params);
-        var config = require('../config');
-        function checkPageSize(query) {
-            var max = config.get(['smaug', 'maxPageSize'], 50);
-            if (query.pageSize > max) {
-                query.pageSize = max;
-            }
-        }
         checkPageSize(params);
 
         params.item_type = 'adsList';
@@ -30,42 +61,10 @@ module.exports = {
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
-            function prepareNextLink(metadata, url) {
-                var next = metadata.next;
-                if (next) {
-                    query.offset = next.replace(/.*offset=(\d*).*/, '$1');
-                    query.pageSize = next.replace(/.*pageSize=(\d*).*/, '$1');
-                    query.sort = next.replace(/.*sort=([\d\w\s]*).*/, '$1');
-                    metadata.next = (url + querystring.stringify(query));
-                } else {
-                    query.offset = Number(query.offset) + Number(query.pageSize);
-                }
-                checkPageSize(query);
-            }
-
-            function preparePreviousLink(metadata, url) {
-                var offset = Number(query.offset);
-                var pageSize = Number(query.pageSize);
-                offset = (offset - (pageSize * 2));
-                if (offset >= 0) {
-                    query.offset = offset;
-                    metadata.previous = (url + querystring.stringify(query));
-                }
-            }
-
-            function preparePaginationLink(metadata) {
-                var url;
-                if (metadata.total > 0) {
-                    url = '/items?';
-                    prepareNextLink(metadata, url);
-                    preparePreviousLink(metadata, url);
-                }
-             }
-
             var model = result.items.models[0];
             result.items = model.get('data');
             result.metadata = model.get('metadata');
-            preparePaginationLink(result.metadata);
+            preparePaginationLink(result.metadata, query, '/items?');
             result.platform = app.getSession('platform');
             callback(err, result);
         });
@@ -101,21 +100,24 @@ module.exports = {
                 params: params
             }
         };
+        var query = _.clone(params);
+        checkPageSize(params);
 
         params.item_type = 'adsList';
-        params.searchTerm = params.q;
-        delete params.q;
+        params.searchTerm = params.search;
+        delete params.search;
+        params.location = app.getSession('siteLocation');
 
         //don't read from cache, because rendr caching expects an array response
         //with ids, and smaug returns an object with 'data' and 'metadata'
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
-            var items = result.items.models[0];
-
-            result.metadata = items.get('metadata');
-            result.items = items.get('data');
-            result.searchTerm = params.searchTerm;
+            var model = result.items.models[0];
+            result.items = model.get('data');
+            result.metadata = model.get('metadata');
+            preparePaginationLink(result.metadata, query, '/search?');
+            result.search = query.search;
             callback(err, result);
         });
     },
