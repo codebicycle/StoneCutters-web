@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         },
         'dynamic': {
             files: [{
-                src: ['app/**/*', 'node_modules/**/*', 'server/**/*', 'cache.js', 'memcached.js', 'appConf.js', 'bootstrap.js', 'cluster.js', 'index.js', 'newrelic.js'],
+                src: ['app/**/*', 'node_modules/**/*', 'server/**/*', 'cache.js', 'memcached.js', 'appConf.js', 'bootstrap.js', 'cluster.js', 'index.js', 'newrelic.js', 'config.js'],
             }],
             options: {
                 publish: [{
