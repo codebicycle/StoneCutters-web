@@ -5,7 +5,19 @@ var CONFIG = {
     analytics: require('./analytics'),
     smaug: {
         maxPageSize: 50
-    }
+    },
+    environment: {
+        type: 'd',
+        static: {
+            path: '//static-testing.olx-st.com/mobile/',
+            accept: ['css', 'js']
+        },
+        image: {
+            path: '',
+            accept: ['jpg', 'jpeg', 'png', 'gif', 'ico']
+        }
+    },
+    revision: '32ABFE1E'
 };
 
 function get(keys, defaultValue) {
