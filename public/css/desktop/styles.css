@@ -230,3 +230,6 @@ input.search-input {border: 1px solid #ccc; -webkit-box-shadow: 0 0 5px rgba(0,0
 /*----icons----*/
 [class*="icon-"] {font: normal 22px/.8 'olx-icon-font'; speak: none; font-variant: normal; text-transform: none; -webkit-font-smoothing: antialiased; position: absolute;}
 .icon-search:before {content: "\e052";}
+
+/*----items----*/
+.item-action-favorite {float: right; padding: 1em 0; color: #333333; font-weight: bold;}

@@ -20,6 +20,7 @@ config/runtime.json
 *.swp
 *.swo
 conf.json
+build.json
 test/output
 test/coverage.html
 newrelic_agent.log

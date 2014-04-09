@@ -7,10 +7,11 @@ module.exports = function itemRouter(app, dataAdapter) {
 
     app.post('/post', postingHandler);
     app.post('/items/:itemId/reply', replyHandler);
-    app.post('/items/:itemId/favorite', favoriteHandler);
+    app.post('/items/:itemId/favorite/:intent?', favoriteHandler);
 
     function favoriteHandler(req, res) {
         var itemId = req.param('itemId', null);
+        var intent = req.param('intent', '');
         var user = req.rendrApp.getSession('user') || {};
         var languages = req.rendrApp.getSession('languages');
         var languageId = req.rendrApp.getSession('selectedLanguage');
@@ -35,9 +36,10 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function addToFavorites(done, item) {
+            intent = (intent ? '/' + intent : '');
             var api = {
                 method: 'POST',
-                url: '/users/' + user.userId + '/favorites/' + itemId + '?' + querystring.stringify(params)
+                url: '/users/' + user.userId + '/favorites/' + itemId + intent + '?' + querystring.stringify(params)
             };
 
             dataAdapter.promiseRequest(req, api, done);
