@@ -6,16 +6,12 @@ var CONFIG = {
     smaug: {
         maxPageSize: 50
     },
+    staticAccept: ['css', 'js'],
+    imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'd',
-        static: {
-            path: '//static-testing.olx-st.com/mobile/',
-            accept: ['css', 'js']
-        },
-        image: {
-            path: '',
-            accept: ['jpg', 'jpeg', 'png', 'gif', 'ico']
-        }
+        staticPath: '',
+        imagePath: ''
     },
     revision: '32ABFE1E'
 };

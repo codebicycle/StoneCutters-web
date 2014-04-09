@@ -25,30 +25,46 @@ module.exports = function(Handlebars) {
         static: function(path) {
             var env = config.get(['environment', 'type'], 't');
             var type;
-            var revision;
             var handler;
             function getType(path) {
                 var ext = path.substr(path.lastIndexOf('.') + 1);
-                var accept = config.get(['environment', 'static', 'accept'], ['css', 'js']);
+                var defaults = ['css', 'js'];
+                var accept = config.get('staticAccept', defaults);
                 if (_.indexOf(accept, ext) >= 0) {
                     return 'static';
                 }
-                accept = config.get(['environment', 'image', 'accept'], ['jpg', 'jpeg', 'png', 'gif', 'ico']);
+
+                defaults = ['jpg', 'jpeg', 'png', 'gif', 'ico'];
+                accept = config.get('imageAccept', defaults);
                 if (_.indexOf(accept, ext) >= 0) {
                     return 'image';
                 }
             }
 
             var typesHandler = {
-                static: function(path) {
-                    console.log('··························· static ···························');
-                    
-                    return path;
+                static: function(filePath) {
+                    var baseNumber = '0' + ((filePath.length % 4) + 1);
+                    if (env !== 'd') {
+                        var pointIndex = path.lastIndexOf('.');
+                        var ext = path.substr(pointIndex + 1);
+                        var fileName = path.substr(0, pointIndex);
+                        var revision = config.get('revision', '0');
+                        filePath = (fileName + '-' + revision + '.' + ext);
+                    }
+                    var envPath = config.get(['environment', 'staticPath'], '');
+
+                    if (env === 'p') {
+                        return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
+                    }
+                    return envPath + filePath;
                 },
-                image: function(path) {
-                    console.log('··························· image ···························');
-                    var path = config.get(['environment', 'static', 'accept'], ['css', 'js']);
-                    return path;
+                image: function(filePath) {
+                    var envPath = config.get(['environment', 'imagePath'], '');
+                    if (env === 'p') {
+                        var baseNumber = '0' + ((filePath.length() % 4) + 1);
+                        return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
+                    }
+                    return envPath + filePath;
                 }
             };
 
