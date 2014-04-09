@@ -24,4 +24,4 @@ newrelic:
   enabled: false
 
 graphite:
-  enabled: true
+  enabled: false
