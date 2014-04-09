@@ -22,3 +22,6 @@ cluster:
 
 newrelic:
   enabled: false
+
+graphite:
+  enabled: false
