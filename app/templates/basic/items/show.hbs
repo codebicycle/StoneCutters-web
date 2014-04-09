@@ -13,7 +13,7 @@
 {{/each}}
 </br>
 {{#if user}}
-    <form method="post" action="/items/{{item.id}}/favorite/{{#if item.isFavorite}}delete{{else}}add{{/if}}">
+    <form method="post" action="/items/{{item.id}}/favorite{{#if item.isFavorite}}/delete{{/if}}">
 {{else}}
     <form method="get" action="/registration">
 {{/if}}
