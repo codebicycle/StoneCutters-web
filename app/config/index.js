@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 
-var CONFIG = _.extend(require('./default'), {
+var CONFIG = _.extend(require('./default'), require('./build'), {
     analytics: require('./analytics')
 });
 
