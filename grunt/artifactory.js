@@ -15,9 +15,9 @@ module.exports = function(grunt) {
             options: {
                 publish: [{
                     id: 'olx.arwen:arwen-dynamic:zip:1.1.' + grunt.option('artifactory-version'),
-                    name: 'arwen-dynamic',
+                    name: 'mobile-webapp-dynamic',
                     path: '',
-                    group_id: 'olx.arwen',
+                    group_id: 'olx.mobile-webapp',
                     ext: 'zip'
                 }]
             }
@@ -31,9 +31,9 @@ module.exports = function(grunt) {
             options: {
                 publish: [{
                     id: 'olx.arwen:arwen-static:zip:1.1.' + grunt.option('artifactory-version'),
-                    name: 'arwen-static',
+                    name: 'mobile-webapp-static',
                     path: '',
-                    group_id: 'olx.arwen',
+                    group_id: 'olx.mobile-webapp',
                     ext: 'zip'
                 }]
             }
