@@ -1,20 +1,10 @@
 'use strict';
 
 var _ = require('underscore');
-var CONFIG = {
-    analytics: require('./analytics'),
-    smaug: {
-        maxPageSize: 50
-    },
-    staticAccept: ['css', 'js'],
-    imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
-    environment: {
-        type: 'd',
-        staticPath: '',
-        imagePath: ''
-    },
-    revision: '32ABFE1E'
-};
+
+var CONFIG = _.extend(require('./default'), {
+    analytics: require('./analytics')
+});
 
 function get(keys, defaultValue) {
     var value;

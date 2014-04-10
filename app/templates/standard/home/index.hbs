@@ -3,7 +3,7 @@
     	{{#each categories.models}}
 			<li{{#eq @index 0}} class="border-none"{{/eq}}>
 				<a href="categories/{{id}}?location={{../siteLocation}}">
-					<img src="/images/icons/html4/{{id}}.png">
+					<img src="{{#static '/images/icons/html4/{{id}}.png' '{{id}}' id}}{{this}}{{/static}}">
 					<span>{{trName}}</span> 
 				</a>
 			</li>
