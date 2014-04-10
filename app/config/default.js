@@ -8,7 +8,6 @@ module.exports = {
         type: 'd',
         staticPath: '',
         imagePath: ''
-    },
-    revision: '32ABFE1E'
+    }
 };
     
