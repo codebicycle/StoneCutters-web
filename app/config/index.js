@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var fs = require('fs');
 var CONFIG = {
     analytics: require('./analytics'),
     smaug: {
@@ -15,6 +16,15 @@ var CONFIG = {
     },
     revision: '32ABFE1E'
 };
+
+if (process.env != 'production') {
+    var path = 'build.json';
+    if (fs.existsSync(path)) {
+        try {
+            CONFIG.build = require('../../' + path);
+        } catch(e) {}
+    }
+}
 
 function get(keys, defaultValue) {
     var value;

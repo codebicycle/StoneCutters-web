@@ -73,6 +73,10 @@ module.exports = function(Handlebars) {
                 return path;
             }
             return typesHandler[type](path);
+        },
+        strfy: function(obj) {
+            var qs = require('querystring');
+            return qs.stringify(obj);
         }
     };
 };
