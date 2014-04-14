@@ -15,11 +15,11 @@ module.exports = BaseView.extend({
             var bar = {
                 show: false
             };
-            var build = config.get('build', false);
+            var build = config.get('deploy', false);
             if (build) {
                 _.extend(bar, build);
                 bar.show = true;
-                bar.env = process.env.NODE_ENV || 'DEV';
+                bar.env = (process.env.NODE_ENV || 'DEV').toUpperCase();
                 bar.platform = app.getSession('platform').toUpperCase();
             }
             return bar;

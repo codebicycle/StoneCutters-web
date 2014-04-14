@@ -5,15 +5,6 @@ var CONFIG = _.extend(require('./default'), require('./build'), {
     analytics: require('./analytics')
 });
 
-if (process.env != 'production') {
-    var path = 'build.json';
-    if (fs.existsSync(path)) {
-        try {
-            CONFIG.build = require('../../' + path);
-        } catch(e) {}
-    }
-}
-
 function get(keys, defaultValue) {
     var value;
 
