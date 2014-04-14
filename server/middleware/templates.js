@@ -14,16 +14,17 @@ module.exports = function(dataAdapter) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
             var userAgent = req.get('user-agent');
-            var api = {
-                body: {},
-                url: '/devices/' + encodeURIComponent(userAgent)
-            };
 
-            function done(body) {
+            function callback(err, response, body) {
+                if (err) {
+                    return fail(err);
+                }
                 var device = body;
+
                 if(device.osVersion === undefined){
                     device.osVersion = '0';
                 }
+
                 var marketing = {
                     osName: device.osName,
                     osVersion: parseFloat(device.osVersion.replace('_','.'))
@@ -34,7 +35,8 @@ module.exports = function(dataAdapter) {
 
                 if(req.cookies && req.cookies.platform) {
                     platform = req.cookies.platform;
-                }  else {
+                }
+                else {
                     /*if (device.isBrowser) {
                         platform = 'desktop';
                     }
@@ -80,7 +82,7 @@ module.exports = function(dataAdapter) {
                 res.send(400, error.err);
             }
 
-            dataAdapter.promiseRequest(req, api, done, fail);
+            dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), callback);
         };
 
     };

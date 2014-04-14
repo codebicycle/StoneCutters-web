@@ -10,62 +10,55 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
+            var languages;
+            var selectedLanguage;
+            var dictionary;
 
             function fetchLanguages(done) {
-                var api = {
-                    body: {},
-                    url: '/countries/' + siteLocation + '/languages'
-                };
-
-                function success(results) {
-                    var languages = {
-                        models: results,
-                        _byId: {}
-                    };
-
-                    languages.models.forEach(function iteration(language) {
-                        languages._byId[language.id] = language;
-                        if (language.default) {
-                            languages.default = language.id;
-                        }
-                    });
-
-                    done(languages);
-                }
-
-                dataAdapter.promiseRequest(req, api, success, done.fail);
+                dataAdapter.get(req, '/countries/' + siteLocation + '/languages', done.errfcb);
             }
 
-            function select(done, languages) {
+            function parse(done, response, _languages) {
+                languages = {
+                    models: _languages,
+                    _byId: {}
+                };
+
+                languages.models.forEach(function each(language) {
+                    languages._byId[language.id] = language;
+                    if (language.default) {
+                        languages.default = language.id;
+                    }
+                });
+
+                done();
+            }
+
+            function select(done) {
                 var language = parseInt(req.param('language', 0));
-                var selectedLanguage;
 
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
                 selectedLanguage = language || app.getSession('selectedLanguage') || languages.default || languages.models[0].id;
-                done(languages, selectedLanguage);
+                done();
             }
 
-            function fetchDictionary(done, languages, selectedLanguage) {
-                var api = {
-                    body: {},
-                    url: '/dictionaries/' + selectedLanguage
-                };
+            function fetchDictionary(done) {
 
-                function success(dictionary) {
-                    done(languages, selectedLanguage, dictionary);
+                // Waiting for SMAUG to implement this call so we need to use a fake callback function
+                function callback(err, response, _dictionary) {
+                    if (err) {
+                        _dictionary = defaultDictionaries[selectedLanguage] || defaultDictionaries[1];
+                    }
+                    dictionary = _dictionary;
+                    done();
                 }
 
-                // Waiting for SMAUG to implement this call so we need to use a fake fail function
-                function fail() {
-                    success(defaultDictionaries[selectedLanguage] || defaultDictionaries[1]);
-                }
-
-                dataAdapter.promiseRequest(req, api, success, /*done.*/fail);
+                dataAdapter.get(req, '/dictionaries/' + selectedLanguage, callback);
             }
 
-            function store(done, languages, selectedLanguage, dictionary) {
+            function store(done) {
                 app.updateSession({
                     languages: languages,
                     selectedLanguage: selectedLanguage,
@@ -81,6 +74,7 @@ module.exports = function(dataAdapter) {
 
             asynquence().or(fail)
                 .then(fetchLanguages)
+                .then(parse)
                 .then(select)
                 .then(fetchDictionary)
                 .then(store)
