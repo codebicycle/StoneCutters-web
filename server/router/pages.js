@@ -43,11 +43,13 @@ module.exports = function itemRouter(app, dataAdapter) {
         var _ = require('underscore');
         var platform = req.param('platform', '');
         var platforms = configClient.get('platforms',  ['wap', 'html4', 'html5', 'desktop']);
+        var maxAge;
         if (platform && _.indexOf(platforms, platform) < 0) {
             platform = '';
         }
         if (req.cookies) {
-            res.cookie('platform', platform, {maxAge: 3600000});
+            maxAge = (platform ? 3600000 : 0);
+            res.cookie('platform', platform, {maxAge: maxAge});
         }
         res.redirect('/');
     }
