@@ -25,3 +25,8 @@ newrelic:
 
 graphite:
   enabled: false
+
+formidable:
+  uploadDir: /tmp
+  keepExtensions: true
+  multiples: true

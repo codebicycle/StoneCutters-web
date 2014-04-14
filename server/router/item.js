@@ -1,10 +1,11 @@
 'use strict';
 
 var asynquence = require('asynquence');
+var formidable = require('../formidable');
+var querystring = require('querystring');
+var fs = require('fs');
 
 module.exports = function itemRouter(app, dataAdapter) {
-    var querystring = require('querystring');
-
     app.post('/post', postingHandler);
     app.post('/items/:itemId/reply', replyHandler);
     app.post('/items/:itemId/favorite/:intent?', favoriteHandler);
@@ -90,89 +91,107 @@ module.exports = function itemRouter(app, dataAdapter) {
             .then(success);
     }
 
-    function postingHandler(req, res) {
-        var item = req.body;
+    function postingHandler(req, res, next) {
+        var item;
+        var images;
 
-        item.postingSession = req.param('postingSession', null);
-        item.intent = req.param('intent', null);
-        item.token = req.param('token', null);
-
-        function callValidateItemCallback(done) {
-            validateItem(done, item);
+        function parse(done) {
+            formidable(req, done.errfcb);
         }
 
-        function redirectToSuccessPostCallback(done, item) {
+        function validate(done, _item, _images) {
+            item = _item;
+            images = _images;
+            dataAdapter.post(req, '/items', {
+                query: {
+                    intent: 'validate',
+                    postingSession: item.postingSession,
+                    languageCode: item.languageCode
+                },
+                data: item
+            }, done.errfcb);
+        }
+
+        function postImages(done) {
+            var data = {};
+            var image;
+
+            if (!images || typeof images !== 'object' || !Object.keys(images).length) {
+                return done([]);
+            }
+            for (image in images) {
+                data[image] = require('restler').file(images[image].path, null, images[image].size, null, images[image].type);
+            }
+            dataAdapter.post(req, '/images', {
+                query: {
+                    postingSession: item.postingSession,
+                    url: req.rendrApp.getSession('siteLocation')
+                },
+                data: data,
+                multipart: true
+            }, done.errfcb);
+        }
+
+        function post(done, response, _images) {
+            var query = {
+                intent: 'create',
+                postingSession: item.postingSession,
+                languageCode: item.languageCode
+            };
+            var user = req.rendrApp.getSession('user');
+
+            if (user) {
+                query.token = user.token;
+            }
+            item.images = _images;
+            dataAdapter.post(req, '/items', {
+                query: query,
+                data: item
+            }, done.errfcb);
+        }
+
+        function success(response, item) {
             res.redirect('/items/' + item.id);
+            clean();
         }
 
-        function errorPostingCallback(err) {
+        function error(err) {
             var errors = {
                 errCode: 400,
                 errField: [],
                 errMsg: [],
             };
-            err.original.body.forEach(function each(error) {
-                errors.errField.push(error.selector);
-                errors.errMsg.push(error.message);
-            });
             var url = req.headers.referer;
             var qIndex = url.indexOf('?');
 
+            err.forEach(function each(error) {
+                errors.errField.push(error.selector);
+                errors.errMsg.push(error.message);
+            });
             if (qIndex != -1) {
                 url = url.substring(0,qIndex);
             }
             res.redirect(url+'?' + querystring.stringify(errors));
+            clean();
         }
 
-        function validateItem(done, item) {
-            var api = {
-                method: 'POST',
-                url: '/items?' + querystring.stringify({
-                    postingSession: item.postingSession,
-                    intent: 'validate',
-                    languageCode: item.languageCode
-                }),
-                body: item
-            };
+        function clean() {
+            var field;
 
-            function success(results) {
-                done(item);
+            if (!images || typeof images !== 'object' || !Object.keys(images).length) {
+                return;
             }
-
-            item.priceC = Number(item.priceC);
-            item.category.parentId = Number(item.category.parentId);
-            item.category.id = Number(item.category.id);
-            dataAdapter.promiseRequest(req, api, success, done.fail);
-        }
-
-        function postItem(done, item) {
-            var user = req.rendrApp.getSession('user');
-            var api = {
-                method: 'POST'
-            };
-            var params = {
-                postingSession: item.postingSession,
-                intent: item.intent,
-                languageCode: item.languageCode
-            };
-
-            if (user) {
-                params.token = user.token;
+            for (field in images) {
+                fs.unlink(images[field].path);
             }
-            item.priceC = Number(item.priceC);
-            item.category.parentId = Number(item.category.parentId);
-            item.category.id = Number(item.category.id);
-            api.url = '/items?' + querystring.stringify(params);
-            api.body = item;
-            delete item.postingSession;
-            delete item.intent;
-            delete item.token;
-            dataAdapter.promiseRequest(req, api, done);
         }
 
-        asynquence(callValidateItemCallback).or(errorPostingCallback)
-            .then(postItem)
-            .then(redirectToSuccessPostCallback);
+        asynquence().or(error)
+            .then(parse)
+            .then(validate)
+            .then(postImages)
+            .then(post)
+            .val(success);
     }
 
 };

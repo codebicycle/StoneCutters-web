@@ -44,6 +44,8 @@
     "debug": "~0.7.4",
     "rendr-handlebars": "~0.2.0",
     "newrelic": "~1.4.0",
+    "restler": "~3.2.0",
+    "formidable": "~1.0.14",
     "graphite": "0.0.6"
   },
   "devDependencies": {
