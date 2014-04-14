@@ -10,12 +10,6 @@ module.exports = function(Handlebars) {
             this.fieldPath = template + "/fields/" + this.fieldType;
             return options.fn(this);
         },
-        parseOptionalFieldName: function(fieldName, options) {
-            if (fieldName.indexOf('opt.') !== 0) {
-                return fieldName;
-            }
-            return 'opts['+fieldName+']';
-        },
         html: function(string, options) {
             return new Handlebars.SafeString(string);
         }

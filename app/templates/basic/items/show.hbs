@@ -9,7 +9,7 @@
 {{{item.description}}}</br></br>
 
 {{#each item.optionals}}
-	{{label}}:{{name}}:{{value}}</br>
+	{{label}}: {{value}}</br>
 {{/each}}
 </br>
 <form action="{{#if user}}/items/{{item.id}}/favorite{{else}}/registration{{/if}}"{{#if user}} method="POST"{{/if}}>

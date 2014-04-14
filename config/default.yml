@@ -22,3 +22,7 @@ cluster:
 
 newrelic:
   enabled: false
+
+formidable:
+  uploadDir: /tmp
+  keepExtensions: true

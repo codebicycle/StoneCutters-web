@@ -1,12 +1,11 @@
 'use strict';
 
 var asynquence = require('asynquence');
-var express = require('express');
+var formidable = require('../formidable');
+var querystring = require('querystring');
+var fs = require('fs');
 
 module.exports = function itemRouter(app, dataAdapter) {
-    var querystring = require('querystring');
-
-    app.use(express.bodyParser());
     app.post('/post', postingHandler);
     app.post('/items/:itemId/reply', replyHandler);
     app.post('/items/:itemId/favorite', favoriteHandler);
@@ -91,120 +90,106 @@ module.exports = function itemRouter(app, dataAdapter) {
     }
 
     function postingHandler(req, res, next) {
-        var item = req.body;
-        var images = req.files.images[0];
+        var item;
+        var images;
 
-        console.log(images);
-
-
-        item.postingSession = req.param('postingSession', null);
-        item.intent = req.param('intent', null);
-        item.token = req.param('token', null);
-
-        function callValidateItemCallback(done) {
-            validateItem(done, item);
+        function parse(done) {
+            formidable(req, done.errfcb);
         }
 
-        function redirectToSuccessPostCallback(done, item) {
+        function validate(done, _item, _images) {
+            item = _item;
+            images = _images;
+            dataAdapter.post(req, '/items', {
+                query: {
+                    intent: 'validate',
+                    postingSession: item.postingSession,
+                    languageCode: item.languageCode
+                },
+                data: item
+            }, done.errfcb);
+        }
+
+        function postImages(done) {
+            var data = {};
+            var image;
+
+            if (!images || typeof images !== 'object' || !Object.keys(images).length) {
+                return done([]);
+            }
+            for (image in images) {
+                data[image] = require('restler').file(images[image].path, null, images[image].size, null, images[image].type);
+            }
+            dataAdapter.post(req, '/images', {
+                query: {
+                    postingSession: item.postingSession,
+                    url: req.rendrApp.getSession('siteLocation')
+                },
+                data: data,
+                multipart: true
+            }, done.errfcb);
+        }
+
+        function post(done, response, _images) {
+            var query = {
+                intent: 'create',
+                postingSession: item.postingSession,
+                languageCode: item.languageCode
+            };
+            var user = req.rendrApp.getSession('user');
+
+            if (user) {
+                query.token = user.token;
+            }
+            item.images = _images;
+            dataAdapter.post(req, '/items', {
+                query: query,
+                data: item
+            }, done.errfcb);
+        }
+
+        function success(response, item) {
             res.redirect('/items/' + item.id);
+            clean();
         }
 
-        function errorPostingCallback(err) {
+        function error(err) {
             var errors = {
                 errCode: 400,
                 errField: [],
                 errMsg: [],
             };
-            err.original.body.forEach(function each(error) {
-                errors.errField.push(error.selector);
-                errors.errMsg.push(error.message);
-            });
             var url = req.headers.referer;
             var qIndex = url.indexOf('?');
 
+            err.forEach(function each(error) {
+                errors.errField.push(error.selector);
+                errors.errMsg.push(error.message);
+            });
             if (qIndex != -1) {
                 url = url.substring(0,qIndex);
             }
             res.redirect(url+'?' + querystring.stringify(errors));
+            clean();
         }
 
-        function validateItem(done, item) {
-            var api = {
-                method: 'POST',
-                url: '/items?' + querystring.stringify({
-                    postingSession: item.postingSession,
-                    intent: 'validate',
-                    languageCode: item.languageCode
-                }),
-                body: item
-            };
+        function clean() {
+            var field;
 
-            function success(results) {
-                done(item);
+            if (!images || typeof images !== 'object' || !Object.keys(images).length) {
+                return;
             }
-
-            item.priceC = Number(item.priceC);
-            item.category.parentId = Number(item.category.parentId);
-            item.category.id = Number(item.category.id);
-            dataAdapter.promiseRequest(req, api, success, done.fail);
+            for (field in images) {
+                fs.unlink(images[field].path);
+            }
         }
 
-        function postImages(done, item) {
-            var posts = asynquence().or(done.fail);
-            var callbaks = [];
-
-            function success() {
-                console.log('----------------------', arguments);
-                done(arguments);
-            }
-
-            if (!Array.isArray(images)) {
-                images = [images];
-            }
-            images.forEach(function each(image) {
-                function post(done) {
-                    var api = {
-                        method: 'POST',
-                        url: '/images?' + querystring.stringify({postingSession:item.postingSession}),
-                        body: image.path
-                    };
-                    console.log(api);
-                    dataAdapter.promiseRequest(req, api, done);
-                }
-                callbaks.push(post);
-            });
-            posts.gate.apply(posts, callbaks).val(success);
-        }
-
-        function postItem(done, item) {
-            var user = req.rendrApp.getSession('user');
-            var api = {
-                method: 'POST'
-            };
-            var params = {
-                postingSession: item.postingSession,
-                intent: item.intent,
-                languageCode: item.languageCode
-            };
-
-            if (user) {
-                params.token = user.token;
-            }
-            item.priceC = Number(item.priceC);
-            item.category.parentId = Number(item.category.parentId);
-            item.category.id = Number(item.category.id);
-            api.url = '/items?' + querystring.stringify(params);
-            api.body = item;
-            delete item.postingSession;
-            delete item.intent;
-            delete item.token;
-            dataAdapter.promiseRequest(req, api, done);
-        }
-
-        asynquence(callValidateItemCallback).or(errorPostingCallback)
+        asynquence().or(error)
+            .then(parse)
+            .then(validate)
             .then(postImages)
-            .then(postItem)
-            .then(redirectToSuccessPostCallback);
+            .then(post)
+            .val(success);
     }
 
 };

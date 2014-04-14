@@ -5,7 +5,9 @@ var utils = require('../utils');
 var _ = require('underscore');
 var url = require('url');
 var request = require('request');
-var debug = require('debug')('arwen:adapter:data');
+var restler = require('restler');
+var log = require('debug')('arwen:adapter:data');
+var logError = require('debug')('arwen:adapter:data:error');
 var util = require('util');
 var CONFIG = require('../../config').get('smaug', {});
 
@@ -31,6 +33,8 @@ util.inherits(SmaugAdapter, DataAdapter);
  * `callback`: Callback.
  */
 SmaugAdapter.prototype.request = function(req, api, options, callback) {
+    var start = new Date().getTime();
+
     if (arguments.length === 3) {
         callback = options;
         options = {};
@@ -45,7 +49,8 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
     api = this.apiDefaults(api, req);
     api.url = CONFIG.protocol + '://' + CONFIG.host + api.url;
     request(api, function afterRequest(err, response, body) {
-        debug('%s %s %d', api.method.toUpperCase(), api.url, response.statusCode);
+        var elapsed = '+' + (new Date().getTime() - start) + 'ms';
+
         if (options.convertErrorCode) {
             err = this.getErrForResponse(response, {
                 allow4xx: options.allow4xx
@@ -63,7 +68,10 @@ SmaugAdapter.prototype.request = function(req, api, options, callback) {
             body.itemProperties = {};
         }
         if (err) {
-            debug('%s %j', 'ERROR', err);
+            logError('%s %d %s %j %s', api.method.toUpperCase(), response.statusCode, api.url, err, elapsed);
+        }
+        else {
+            log('%s %d %s %s', api.method.toUpperCase(), response.statusCode, api.url, elapsed);
         }
         callback(err, response, body);
     }.bind(this));
@@ -108,8 +116,9 @@ SmaugAdapter.prototype.apiDefaults = function(api, req) {
 };
 
 SmaugAdapter.prototype.getErrForResponse = function(res, options) {
-    var status = +res.statusCode,
-    err = null;
+    var status = Number(res.statusCode);
+    var err;
+
     if (utils.isErrorStatus(status, options)) {
         err = new Error(status + " status");
         err.status = status;
@@ -147,4 +156,79 @@ SmaugAdapter.prototype.promiseRequest = function(req, api, options, done, fail) 
         }
         done(body);
     });
+};
+
+function getElapsed(start, elapsed) {
+    var end = new Date().getTime();
+
+    if (elapsed) {
+        return elapsed;
+    }
+    return '+' + (end - start) + 'ms';
+}
+
+SmaugAdapter.prototype.newRequest = function(req, api, options, callback) {
+    var start = new Date().getTime();
+    var elapsed;
+
+    if (arguments.length === 3) {
+        callback = options;
+        options = {};
+    }
+    if (!api.url && api.uri) {
+        api.url = api.uri;
+        delete api.uri;
+    }
+    api.method = (api.method && api.method.toLowerCase()) || 'get';
+    restler.request(CONFIG.protocol + '://' + CONFIG.host + api.url, _.extend(api, options))
+        .on('success', success)
+        .on('fail', fail)
+        .on('error', fail);
+
+    function success(body, res) {
+        elapsed = getElapsed(start, elapsed);
+        if (typeof body === 'string' && SmaugAdapter.prototype.isJSONResponse(res)) {
+            try {
+                body = JSON.parse(body);
+            }
+            catch (err) {
+                return fail(err, res);
+            }
+        }
+        if (body && body.itemProperties === null){
+            body.itemProperties = {};
+        }
+        log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
+        callback(null, res, body);
+    }
+
+    function fail(err, res) {
+        elapsed = getElapsed(start, elapsed);
+        try {
+            err = JSON.parse(err);
+        }
+        catch (error) {}
+        if (options.convertErrorCode) {
+            err = SmaugAdapter.prototype.getErrForResponse(res, {
+                allow4xx: options.allow4xx
+            });
+        }
+        logError('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
+        callback(err, res);
+    }
+};
+
+SmaugAdapter.prototype.post = function(req, url, options, callback) {
+    if (arguments.length === 3) {
+        callback = options;
+        options = {};
+    }
+    this.newRequest(req, {
+        method: 'post',
+        url: url
+    }, options, callback);
+};
+
+SmaugAdapter.prototype.file = function(path, name, size, encoding, mime) {
+    return restler.file(path, name, size, encoding, mime);
 };
