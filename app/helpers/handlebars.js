@@ -49,7 +49,7 @@ module.exports = function(Handlebars) {
                         var pointIndex = path.lastIndexOf('.');
                         var ext = path.substr(pointIndex + 1);
                         var fileName = path.substr(0, pointIndex);
-                        var revision = config.get('revision', '0');
+                        var revision = config.get(['deploy', 'revision'], '0');
                         filePath = (fileName + '-' + revision + '.' + ext);
                     }
                     var envPath = config.get(['environment', 'staticPath'], '');

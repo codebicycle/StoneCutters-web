@@ -8,6 +8,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     app.get('/health', healthHandler);
     app.get('/check', checkHandler);
     app.get('/stats', statsHandler);
+    app.get('/force/:platform?', forceHandler);
 
     function healthHandler(req, res) {
         res.json({
@@ -36,6 +37,19 @@ module.exports = function itemRouter(app, dataAdapter) {
         list.push('memory.heapTotal:' + process.memoryUsage().heapTotal);
         list.push('memory.heapUsed:' + process.memoryUsage().heapUsed);
         res.send(list.join(' '));
+    }
+
+    function forceHandler(req, res) {
+        var _ = require('underscore');
+        var platform = req.param('platform', '');
+        var platforms = configClient.get('platforms',  ['wap', 'html4', 'html5', 'desktop']);
+        if (platform && _.indexOf(platforms, platform) < 0) {
+            platform = '';
+        }
+        if (req.cookies) {
+            res.cookie('platform', platform, {maxAge: 3600000});
+        }
+        res.redirect('/');
     }
 
 };
