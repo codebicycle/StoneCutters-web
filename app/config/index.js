@@ -1,21 +1,9 @@
 'use strict';
 
 var _ = require('underscore');
-var fs = require('fs');
-var CONFIG = {
-    analytics: require('./analytics'),
-    smaug: {
-        maxPageSize: 50
-    },
-    staticAccept: ['css', 'js'],
-    imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
-    environment: {
-        type: 'd',
-        staticPath: '',
-        imagePath: ''
-    },
-    revision: '32ABFE1E'
-};
+var CONFIG = _.extend(require('./default'), require('./build'), {
+    analytics: require('./analytics')
+});
 
 if (process.env != 'production') {
     var path = 'build.json';
@@ -30,10 +18,17 @@ function get(keys, defaultValue) {
     var value;
 
     if (!Array.isArray(keys)) {
-        keys = [keys];
+        if (typeof keys === 'undefined') {
+            keys = [];
+        } else {
+            keys = [keys];
+        }
     }
     if (typeof defaultValue === 'undefined') {
         defaultValue = null;
+    }
+    if (!keys.length) {
+        return defaultValue || CONFIG;
     }
     keys.every(function iterate(key, index) {
         try {

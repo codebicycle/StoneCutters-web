@@ -22,10 +22,11 @@ module.exports = function(Handlebars) {
         html: function(string, options) {
             return new Handlebars.SafeString(string);
         },
-        static: function(path) {
+        static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 't');
             var type;
             var handler;
+
             function getType(path) {
                 var ext = path.substr(path.lastIndexOf('.') + 1);
                 var defaults = ['css', 'js'];
@@ -48,7 +49,7 @@ module.exports = function(Handlebars) {
                         var pointIndex = path.lastIndexOf('.');
                         var ext = path.substr(pointIndex + 1);
                         var fileName = path.substr(0, pointIndex);
-                        var revision = config.get('revision', '0');
+                        var revision = config.get(['deploy', 'revision'], '0');
                         filePath = (fileName + '-' + revision + '.' + ext);
                     }
                     var envPath = config.get(['environment', 'staticPath'], '');
@@ -68,6 +69,9 @@ module.exports = function(Handlebars) {
                 }
             };
 
+            if (key && value) {
+                path = path.replace(key, value);
+            }
             type = getType(path);
             if (!type) {
                 return path;
