@@ -32,12 +32,16 @@ module.exports = function(dataAdapter) {
                 var platform = 'wap';
                 var location = siteLocation.slice(siteLocation.length - 2);
 
-                /*if (device.isBrowser) {
-                    platform = 'desktop';
+                if(req.cookies && req.cookies.platform) {
+                    platform = req.cookies.platform;
+                }  else {
+                    /*if (device.isBrowser) {
+                        platform = 'desktop';
+                    }
+                    else {*/
+                        platform = device.web_platform;
+                    //}
                 }
-                else {*/
-                    platform = device.web_platform;
-                //}
                 switch(platform) {
                     case 'desktop':
                         //template = 'desktop';
