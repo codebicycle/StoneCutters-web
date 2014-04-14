@@ -26,3 +26,6 @@ test/coverage.html
 newrelic_agent.log
 mobile-webapp-static-*
 mobile-webapp-dynamic-*
+
+public/css/*/*-staging.css
+public/css/*/*-testing.css
