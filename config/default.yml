@@ -23,6 +23,10 @@ cluster:
 newrelic:
   enabled: false
 
+graphite:
+  enabled: false
+
 formidable:
   uploadDir: /tmp
   keepExtensions: true
+  multiples: true

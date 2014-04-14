@@ -12,8 +12,18 @@
 	{{label}}: {{value}}</br>
 {{/each}}
 </br>
-<form action="{{#if user}}/items/{{item.id}}/favorite{{else}}/registration{{/if}}"{{#if user}} method="POST"{{/if}}>
-	<input type="submit" value="Add to Favorites"{{#if user}}{{#if item.isFavorite}} disabled{{/if}}{{/if}}>
+{{#if user}}
+    <form method="post" action="/items/{{item.id}}/favorite{{#if item.isFavorite}}/delete{{/if}}">
+{{else}}
+    <form method="get" action="/registration">
+{{/if}}
+    <p class="item-action-favorite">
+        {{#if item.isFavorite}}
+            <input type="image" src="{{#static '/images/favorite_s.png'}}{{/static}}" alt="Submit" class="item-actions-favorite" >
+        {{else}}
+            <input type="image" src="{{#static '/images/favorite_u.png'}}{{/static}}" alt="Submit" class="item-actions-favorite" >
+        {{/if}}
+    </p>
 </form>
 <br />
 <a href="/items/{{item.id}}/reply">Reply</a>

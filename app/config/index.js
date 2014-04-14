@@ -1,18 +1,25 @@
 'use strict';
 
 var _ = require('underscore');
-var CONFIG = {
+var CONFIG = _.extend(require('./default'), require('./build'), {
     analytics: require('./analytics')
-};
+});
 
 function get(keys, defaultValue) {
     var value;
 
     if (!Array.isArray(keys)) {
-        keys = [keys];
+        if (typeof keys === 'undefined') {
+            keys = [];
+        } else {
+            keys = [keys];
+        }
     }
     if (typeof defaultValue === 'undefined') {
         defaultValue = null;
+    }
+    if (!keys.length) {
+        return defaultValue || CONFIG;
     }
     keys.every(function iterate(key, index) {
         try {
