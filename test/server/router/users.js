@@ -15,6 +15,7 @@ var userAgents = ['UCWEB/8.8 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
+        app.use(express.bodyParser());
         app.use(express.cookieParser());
         app.use(express.session({
             store: require('../../../memcached')(express),
@@ -28,6 +29,7 @@ describe('server', function test() {
         describe('users', function test() {
             var app;
             var response;
+            var sessions = {};
 
             before(function before(done) {
                 app = express();
@@ -36,41 +38,36 @@ describe('server', function test() {
                 });
 
                 function rendrConfiguration(rendrApp) {
-                    var response = {};
-
-                    function before(req, res, next) {
-                        response.before = {
-                            session: _.clone(req.rendrApp.getSession())
-                        };
+                    function after(req, res, next) {
+                        if (!sessions.before) {
+                            sessions.before = _.clone(req.rendrApp.getSession());
+                        } else {
+                            sessions.after = _.clone(req.rendrApp.getSession());
+                        }
                         next();
-                    }
-
-                    function after(req, res) {
-                        response.after = {
-                            session: _.clone(req.rendrApp.getSession())
-                        };
-                        res.json(response);
                     }
 
                     rendrApp.use(middleware.session());
                     rendrApp.use(middleware.environment());
                     rendrApp.use(middleware.templates());
                     rendrApp.use(middleware.categories());
-                    rendrApp.use(before);
-                    // rendrApp.use(after);
+                    rendrApp.use(middleware.location());
+                    rendrApp.use(middleware.languages());
+                    rendrApp.use(after);
                 }
 
                 app.configure(expressConfiguration(app));
                 server.configure(rendrConfiguration);
                 app.use(server);
+                require('../../../server/router')(app, dataAdapter);
                 request(app)
                     .post('/login')
-                    .set('host', hosts[0])
-                    .set('user-agent', userAgents[0])
                     .send({
-                        usernameOrEmail: 'comodinxxx',
+                        usernameOrEmail: 'nicolas.molina@olx.com',
                         password: 'Milo2004'
                     })
+                    .set('host', hosts[0])
+                    .set('user-agent', userAgents[0])
                     .end(end);
 
                 function end(err, res) {
@@ -78,16 +75,26 @@ describe('server', function test() {
                     done();
                 }
             });
-            it('should be added to the session', function test(done) {
-                var before = response.body.before;
-                var after = response.body.after;
-
-                (function existance(before, after) {
+            it('should not exists the user in the session', function test(done) {
+                (function existance(before) {
                     before.should.not.have.property('user');
-                    after.should.have.property('user');
-                })(before.session, after.session);
-
+                })(sessions.before);
                 done();
+            });
+            it('should be added the user to the session', function test(done) {
+                request(app)
+                    .get('/')
+                    .set('host', hosts[1])
+                    .set('user-agent', userAgents[0])
+                    .set('cookie', response.get('set-cookie'))
+                    .end(end);
+
+                function end(err, res) {
+                    (function existance(after) {
+                        after.should.have.property('user');
+                    })(sessions.after);
+                    done();
+                }
             });
         });
     });
