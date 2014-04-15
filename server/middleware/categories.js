@@ -52,7 +52,6 @@ module.exports = function(dataAdapter) {
             }
 
             function fail(err) {
-                console.log(err.stack);
                 debug('%s %j', 'ERROR', err);
                 res.send(400, err);
             }
