@@ -16,6 +16,9 @@ do
 		sed -i "s/(\/images/(http:\/\/images-${env}.olx-st.com\/mobile-webapp\/images/g" ../public/css/$platform/styles-$env.css
 		sed -i "s/(\/fonts/(http:\/\/static-${env}.olx-st.com\/mobile-webapp\/fonts/g" ../public/css/$platform/styles-$env.css
 	done
+	# production
+	sed -i "s/(\/images/(http:\/\/images01.olx-st.com\/mobile-webapp\/images/g" ../public/css/$platform/styles.css
+	sed -i "s/(\/fonts/(http:\/\/static01.olx-st.com\/mobile-webapp\/fonts/g" ../public/css/$platform/styles.css
 done
 
 # execute grunt job
