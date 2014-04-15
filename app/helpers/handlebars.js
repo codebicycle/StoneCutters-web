@@ -45,6 +45,10 @@ module.exports = function(Handlebars) {
                         var fileName = path.substr(0, pointIndex);
                         var revision = config.get(['deploy', 'revision'], '0');
                         filePath = (fileName + '-' + revision + '.' + ext);
+                        if (ext === 'css' && (env === 't' || env === 's')) {
+                            var sEnv = (env == 't' ? 'testing' : 'staging');
+                            filePath = (fileName + '-' + sEnv + '-' + revision + '.' + ext);
+                        }
                     }
                     var envPath = config.get(['environment', 'staticPath'], '');
 
