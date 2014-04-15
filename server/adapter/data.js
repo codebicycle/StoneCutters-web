@@ -4,8 +4,7 @@ var utils = require('../utils');
 var _ = require('underscore');
 var url = require('url');
 var restler = require('restler');
-var log = require('debug')('arwen:adapter:data');
-var logError = require('debug')('arwen:adapter:data:error');
+var logger = require('../../logger')('adapter data');
 var util = require('util');
 var CONFIG = require('../../config').get('smaug', {});
 
@@ -42,7 +41,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
         if (body && body.itemProperties === null){
             body.itemProperties = {};
         }
-        log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
+        logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
         callback(null, res, body);
     }
 
@@ -57,7 +56,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
                 allow4xx: options.allow4xx
             });
         }
-        logError('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
+        logger.error('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
         callback(err, res);
     }
 };
