@@ -1,194 +1,202 @@
 'use strict';
 
-var asynquence = require('asynquence');
-
-module.exports = function usersRouter(app, dataAdapter) {
+module.exports = function(app, dataAdapter) {
+    var asynquence = require('asynquence');
+    var formidable = require('../formidable');
     var querystring = require('querystring');
     var crypto = require('crypto');
-    var debug = require('debug')('arwen:router:users');
 
-    app.post('/register', registrationHandler);
-    app.post('/login', loginHandler);
-    app.post('/loginAnon', loginAnonHandler);
+    (function registration() {
+        app.post('/register', handler);
 
-    function registrationHandler(req, res) {
-        var user = {
-            username: req.param('username', null),
-            email: req.param('email', null),
-            password: req.param('password', null),
-            agreeTerms: req.param('agreeTerms', null),
-            location: req.rendrApp.getSession('siteLocation'),
-            languageId: 10
-        };
+        function handler(req, res) {
 
-        function callValidateUserCallback(done) {
-            validateUser(done, user);
-        }
-
-        function saveDataRegistrationCallback(done, user) {
-            saveData(req, res, user, done);
-        }
-
-        function redirectRegistrationHomeCallback(done) {
-            res.redirect('/');
-        }
-
-        function errorRegistrationCallback(err){
-            res.redirect('/register?' + querystring.stringify(err));
-        }
-
-        function validateUser(done, user) {
-            var errors = {
-                errCode: 400,
-                err: [],
-                errFields: []
-            };
-            if (!user.username) {
-                errors.err.push('Invalid username');
-                errors.errFields.push('username');
+            function parse(done) {
+                formidable(req, done.errfcb);
             }
-            if (!user.email) {
-                errors.err.push('Invalid email');
-                errors.errFields.push('email');
-            }
-            if (!user.password) {
-                errors.err.push('Invalid password');
-                errors.errFields.push('password');
-            }
-            if (!user.agreeTerms) {
-                errors.err.push('Accept terms and conditions');
-                errors.errFields.push('agreeTerms');
-            }
-            if (errors.err.length) {
-                done.fail(errors);
-                return;
-            }
-            done(user);
-        }
 
-        function registerUser(done, user) {
-            var api = {
-                method: 'POST',
-                body: user,
-                url: '/users'
-            };
-
-            dataAdapter.promiseRequest(req, api, done);
-        }
-
-        asynquence(callValidateUserCallback).or(errorRegistrationCallback)
-            .then(registerUser)
-            .then(saveDataRegistrationCallback)
-            .then(redirectRegistrationHomeCallback);
-    }
-
-    function loginHandler(req, res) {
-        var usernameOrEmail = req.param('usernameOrEmail', null);
-        var password = req.param('password', null);
-
-        function callGetChallengeCallback(done) {
-            getChallenge(done, usernameOrEmail);
-        }
-
-        function saveDataLoginCallback(done, user) {
-            saveData(req, res, user, done);
-        }
-
-        function redirectLoginHomeCallback(done) {
-            res.redirect('/');
-        }
-
-        function errorLoginCallback(err) {
-            debug('%s %j', 'ERROR', err);
-            res.redirect('/login?' + querystring.stringify(err));
-        }
-
-        function getChallenge(done, usernameOrEmail) {
-            var api = {
-                body: {},
-                url: '/users/challenge?u=' + usernameOrEmail
-            };
-
-            function requestDone(body) {
-                var hash = crypto.createHash('md5').update(password).digest('hex');
-                hash += usernameOrEmail;
-                hash = crypto.createHash('sha512').update(hash).digest('hex');
-
-                var credentials = {
-                    c: body.challenge,
-                    h: hash
+            function validate(done, user) {
+                var errors = {
+                    errCode: 400,
+                    err: [],
+                    errFields: []
                 };
 
-                done(credentials);
+                if (!user.username) {
+                    errors.err.push('Invalid username');
+                    errors.errFields.push('username');
+                }
+                if (!user.email) {
+                    errors.err.push('Invalid email');
+                    errors.errFields.push('email');
+                }
+                if (!user.password) {
+                    errors.err.push('Invalid password');
+                    errors.errFields.push('password');
+                }
+                if (!user.agreeTerms) {
+                    errors.err.push('Accept terms and conditions');
+                    errors.errFields.push('agreeTerms');
+                }
+                if (errors.err.length) {
+                    done.fail(errors);
+                    return;
+                }
+                done(user);
             }
 
-            dataAdapter.promiseRequest(req, api, requestDone, done.fail);
-        }
+            function submit(done, user) {
+                user.location = req.rendrApp.getSession('siteLocation');
+                user.languageId = 10;
+                dataAdapter.post(req, '/users', {
+                    data: user
+                }, done.errfcb);
+            }
 
-        function loginUser(done, credentials) {
-            var api = {
-                body: {},
-                url: '/users/login?' + querystring.stringify(credentials)
-            };
+            function save(done, response, user) {
+                req.rendrApp.updateSession({
+                    user: user
+                });
+                done();
+            }
 
-            dataAdapter.promiseRequest(req, api, done);
-        }
+            function success() {
+                res.redirect('/');
+            }
 
-        asynquence().or(errorLoginCallback)
-            .then(callGetChallengeCallback)
-            .then(loginUser)
-            .then(saveDataLoginCallback)
-            .then(redirectLoginHomeCallback);
-    }
-
-    function loginAnonHandler(req, res) {
-        var email = req.param('email', null);
-
-        function errorLoginCallback(err) {
-            console.log(err);
-            err.emailErr = err.err;
-            delete err.err; 
-            res.redirect('/login?' + querystring.stringify(err));
-        }
-
-        function validateCallback(done) {
-            if (!email) {
-                done.fail({
+            function error(err) {
+                var errors = {
                     errCode: 400,
-                    err: ['Invalid email']
+                    errField: [],
+                    errMsg: [],
+                };
+                var url = req.headers.referer;
+                var qIndex = url.indexOf('?');
+
+                err.forEach(function each(error) {
+                    errors.errField.push(error.selector);
+                    errors.errMsg.push(error.message);
+                });
+                if (qIndex != -1) {
+                    url = url.substring(0,qIndex);
+                }
+                res.redirect(url + '?' + querystring.stringify(errors));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(validate)
+                .then(submit)
+                .then(save)
+                .val(success);
+        }
+    })();
+
+    (function login() {
+        app.post('/login', handler);
+
+        function handler(req, res) {
+            var usernameOrEmail;
+            var password;
+
+            function parse(done) {
+                formidable(req, done.errfcb);
+            }
+
+            function getChallenge(done, data) {
+                usernameOrEmail = data.usernameOrEmail;
+                password = data.password;
+                dataAdapter.get(req, '/users/challenge', {
+                    query: {
+                        u: usernameOrEmail
+                    }
+                }, done.errfcb);
+            }
+
+            function getCredentials(done, response, data) {
+                var hash = crypto.createHash('md5').update(password).digest('hex');
+
+                done({
+                    c: data.challenge,
+                    h: crypto.createHash('sha512').update(hash + usernameOrEmail).digest('hex')
                 });
             }
-            done();
+
+            function submit(done, credentials) {
+                dataAdapter.get(req, '/users/login', {
+                    query: credentials
+                }, done.errfcb);
+            }
+
+            function save(done, response, user) {
+                req.rendrApp.updateSession({
+                    user: user
+                });
+                done();
+            }
+
+            function success() {
+                res.redirect('/');
+            }
+
+            function error(err) {
+                res.redirect('/login?' + querystring.stringify(err));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(getChallenge)
+                .then(getCredentials)
+                .then(submit)
+                .then(save)
+                .val(success);
         }
+    })();
 
-        function loginCallback(done) {
-            /*
-            TODO [MOB-4716] Authentication anonymous to MyAds & My favorites.
-            var api = {
-                body: {},
-                url: '/users/login?' + email
-            };
+    (function anonymousLogin() {
+        app.post('/anonymousLogin', handler);
 
-            dataAdapter.promiseRequest(req, api, done);
-            */
-            done();
+        function handler(req, res) {
+            var email;
+
+            function parse(done) {
+                formidable(req, done.errfcb);
+            }
+
+            function validate(done, data) {
+                email = data.email;
+                if (!email) {
+                    done.fail({
+                        errCode: 400,
+                        err: ['Invalid email']
+                    });
+                }
+                done();
+            }
+
+            function submit(done) {
+                /* TODO [MOB-4716] Authentication anonymous to MyAds & My favorites.
+                dataAdapter.get(req, '/users/login', {
+                    query: {
+                        email: email
+                    }
+                }, done.errfcb); */
+                done();
+            }
+
+            function success() {
+                res.redirect('/login?emailMsg=The link to access My OLX has been emailed to you.');
+            }
+
+            function error(err) {
+                res.redirect('/login?' + querystring.stringify(err));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(validate)
+                .then(submit)
+                .val(success);
         }
-
-        function redirectLoginCallback(done) {
-            res.redirect('/login?emailMsg=The link to access My OLX has been emailed to you.');
-        }
-
-        asynquence().or(errorLoginCallback)
-            .then(validateCallback)
-            .then(loginCallback)
-            .then(redirectLoginCallback);
-    }
-
-    function saveData(req, res, user, done) {
-        req.rendrApp.updateSession({
-            user: user
-        });
-        done();
-    }
-
+    })();
 };

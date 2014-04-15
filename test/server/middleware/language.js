@@ -5,7 +5,7 @@ var should = require('should');
 var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
-var SmaugAdapter = require('../../../server/data_adapter/smaug_adapter');
+var SmaugAdapter = require('../../../server/adapter/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
@@ -57,7 +57,7 @@ describe('server', function test() {
                     rendrApp.use(middleware.environment());
                     rendrApp.use(middleware.templates());
                     rendrApp.use(before);
-                    rendrApp.use(middleware.language());
+                    rendrApp.use(middleware.languages());
                     rendrApp.use(after);
                 }
 
