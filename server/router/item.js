@@ -9,6 +9,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     app.post('/post', postingHandler);
     app.post('/items/:itemId/reply', replyHandler);
     app.post('/items/:itemId/favorite/:intent?', favoriteHandler);
+    app.post('/nf/search/redirect', searchHandler);
 
     function favoriteHandler(req, res) {
         var itemId = req.param('itemId', null);
@@ -192,6 +193,11 @@ module.exports = function itemRouter(app, dataAdapter) {
             .then(postImages)
             .then(post)
             .val(success);
+    }
+
+    function searchHandler(req, res, next) {
+        var search = req.param('search', '');
+        res.redirect('/nf/search/' + search);
     }
 
 };

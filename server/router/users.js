@@ -7,7 +7,7 @@ module.exports = function usersRouter(app, dataAdapter) {
     var crypto = require('crypto');
     var debug = require('debug')('arwen:router:users');
 
-    app.post('/registration', registrationHandler);
+    app.post('/register', registrationHandler);
     app.post('/login', loginHandler);
     app.post('/loginAnon', loginAnonHandler);
 
@@ -34,7 +34,7 @@ module.exports = function usersRouter(app, dataAdapter) {
         }
 
         function errorRegistrationCallback(err){
-            res.redirect('/registration?' + querystring.stringify(err));
+            res.redirect('/register?' + querystring.stringify(err));
         }
 
         function validateUser(done, user) {

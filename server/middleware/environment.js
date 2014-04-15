@@ -53,7 +53,9 @@ module.exports = function(dataAdapter) {
                 referer: '',
                 viewType: viewType,
                 url: url,
-                clientId: clientId
+                clientId: clientId,
+                host: host,
+                protocol: req.protocol
             });
 
             next();
