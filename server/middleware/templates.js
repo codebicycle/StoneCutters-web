@@ -33,8 +33,8 @@ module.exports = function(dataAdapter) {
                 var platform = 'wap';
                 var location = siteLocation.slice(siteLocation.length - 2);
 
-                if(req.cookies && req.cookies.platform) {
-                    platform = req.cookies.platform;
+                if(app.getSession('platformForced')) {
+                    platform = app.getSession('platform');
                 }
                 else {
                     /*if (device.isBrowser) {
@@ -65,14 +65,14 @@ module.exports = function(dataAdapter) {
                 if (isLocalized(platform, location)) {
                     template += '_' + location;
                 }
+                app.req.app.locals({
+                    platform: platform,
+                    template: template,
+                });
                 app.updateSession({
                     platform: platform,
                     template: template,
                     marketing: marketing,
-                });
-                app.req.app.locals({
-                    platform: platform,
-                    template: template,
                 });
                 next();
             }

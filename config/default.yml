@@ -30,3 +30,4 @@ formidable:
   uploadDir: /tmp
   keepExtensions: true
   multiples: true
+  acceptFiles: false

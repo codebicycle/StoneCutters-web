@@ -1,30 +1,34 @@
 'use strict';
 
-var asynquence = require('asynquence');
-var formidable = require('../formidable');
-var querystring = require('querystring');
-var fs = require('fs');
-
 module.exports = function(app, dataAdapter) {
+    var asynquence = require('asynquence');
+    var formidable = require('../formidable');
+    var querystring = require('querystring');
+    var fs = require('fs');
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
         function handler(req, res) {
             var itemId = req.param('itemId', null);
-            var user = req.rendrApp.getSession('user');
-            var query = {};
 
-            if (user) {
-                query.token = user.token;
+            function parse(done) {
+                formidable(req, done.errfcb);
             }
-            reply.platform = req.rendrApp.getSession('platform');
 
-            function submit(done) {
-                dataAdapter.post(req, '/items/' + itemId + '/messages', {
-                    data: req.body,
-                    query: query
-                }, done.errfcb);
+            function submit(done, data) {
+                var options = {
+                    data: data
+                };
+                var user = req.rendrApp.getSession('user');
+
+                if (user) {
+                    options.query = {
+                        token: user.token
+                    };
+                }
+                data.platform = req.rendrApp.getSession('platform');
+                dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
             function success() {
@@ -43,6 +47,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             asynquence().or(error)
+                .then(parse)
                 .then(submit)
                 .val(success);
         }
@@ -56,7 +61,9 @@ module.exports = function(app, dataAdapter) {
             var images;
 
             function parse(done) {
-                formidable(req, done.errfcb);
+                formidable(req, {
+                    acceptFiles: true
+                }, done.errfcb);
             }
 
             function validate(done, _item, _images) {
@@ -161,11 +168,12 @@ module.exports = function(app, dataAdapter) {
         function handler(req, res) {
             var itemId = req.param('itemId', null);
             var intent = req.param('intent', '');
-            var user = req.rendrApp.getSession('user') || {};
-            var languages = req.rendrApp.getSession('languages');
-            var languageId = req.rendrApp.getSession('selectedLanguage');
 
             function add(done) {
+                var user = req.rendrApp.getSession('user') || {};
+                var languages = req.rendrApp.getSession('languages');
+                var languageId = req.rendrApp.getSession('selectedLanguage');
+
                 dataAdapter.post(req, '/users/' + user.userId + '/favorites/' + itemId + (intent ? '/' + intent : ''), {
                     query: {
                         token: user.token,

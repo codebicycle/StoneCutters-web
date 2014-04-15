@@ -1,10 +1,9 @@
 'use strict';
 
-var asynquence = require('asynquence');
-var configServer = require('../../config');
-var configClient = require('../../app/config');
-
 module.exports = function itemRouter(app, dataAdapter) {
+    var asynquence = require('asynquence');
+    var configServer = require('../../config');
+    var configClient = require('../../app/config');
 
     (function health() {
         app.get('/health', handler);
@@ -51,14 +50,19 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/force/:platform?', handler);
 
         function handler(req, res) {
-            var _ = require('underscore');
-            var platform = req.param('platform', '');
+            var platform = req.param('platform', null);
             var platforms = configClient.get('platforms',  ['wap', 'html4', 'html5', 'desktop']);
-            if (platform && _.indexOf(platforms, platform) < 0) {
-                platform = '';
+
+            if (platform && ~platforms.indexOf(platform)) {
+                req.rendrApp.updateSession({
+                    platformForced: true,
+                    platform: platform
+                });
             }
-            if (req.cookies) {
-                res.cookie('platform', platform, {maxAge: 3600000});
+            else {
+                req.rendrApp.updateSession({
+                    platformForced: false
+                });
             }
             res.redirect('/');
         }

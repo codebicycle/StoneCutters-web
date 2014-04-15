@@ -1,31 +1,27 @@
 'use strict';
 
-var asynquence = require('asynquence');
-
 module.exports = function(app, dataAdapter) {
+    var asynquence = require('asynquence');
+    var formidable = require('../formidable');
     var querystring = require('querystring');
     var crypto = require('crypto');
-    var debug = require('debug')('arwen:router:users');
 
     (function registration() {
         app.post('/registration', handler);
 
         function handler(req, res) {
-            var user = {
-                username: req.param('username', null),
-                email: req.param('email', null),
-                password: req.param('password', null),
-                agreeTerms: req.param('agreeTerms', null),
-                location: req.rendrApp.getSession('siteLocation'),
-                languageId: 10
-            };
 
-            function validate(done) {
+            function parse(done) {
+                formidable(req, done.errfcb);
+            }
+
+            function validate(done, user) {
                 var errors = {
                     errCode: 400,
                     err: [],
                     errFields: []
                 };
+
                 if (!user.username) {
                     errors.err.push('Invalid username');
                     errors.errFields.push('username');
@@ -46,18 +42,20 @@ module.exports = function(app, dataAdapter) {
                     done.fail(errors);
                     return;
                 }
-                done();
+                done(user);
             }
 
-            function submit(done) {
+            function submit(done, user) {
+                user.location = req.rendrApp.getSession('siteLocation');
+                user.languageId = 10;
                 dataAdapter.post(req, '/users', {
                     data: user
                 }, done.errfcb);
             }
 
-            function save(done, response, _user) {
+            function save(done, response, user) {
                 req.rendrApp.updateSession({
-                    user: _user
+                    user: user
                 });
                 done();
             }
@@ -86,6 +84,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             asynquence().or(error)
+                .then(parse)
                 .then(validate)
                 .then(submit)
                 .then(save)
@@ -97,10 +96,16 @@ module.exports = function(app, dataAdapter) {
         app.post('/login', handler);
 
         function handler(req, res) {
-            var usernameOrEmail = req.param('usernameOrEmail', null);
-            var password = req.param('password', null);
+            var usernameOrEmail;
+            var password;
 
-            function getChallenge(done) {
+            function parse(done) {
+                formidable(req, done.errfcb);
+            }
+
+            function getChallenge(done, data) {
+                usernameOrEmail = data.usernameOrEmail;
+                password = data.password;
                 dataAdapter.get(req, '/users/challenge', {
                     query: {
                         u: usernameOrEmail
@@ -135,11 +140,11 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                debug('%s %j', 'ERROR', err);
                 res.redirect('/login?' + querystring.stringify(err));
             }
 
             asynquence().or(error)
+                .then(parse)
                 .then(getChallenge)
                 .then(getCredentials)
                 .then(submit)
@@ -152,14 +157,14 @@ module.exports = function(app, dataAdapter) {
         app.post('/anonymousLogin', handler);
 
         function handler(req, res) {
-            var email = req.param('email', null);
+            var email;
 
-            function error(err) {
-                debug('%s %j', 'ERROR', err);
-                res.redirect('/login?' + querystring.stringify(err));
+            function parse(done) {
+                formidable(req, done.errfcb);
             }
 
-            function validate(done) {
+            function validate(done, data) {
+                email = data.email;
                 if (!email) {
                     done.fail({
                         errCode: 400,
@@ -183,7 +188,12 @@ module.exports = function(app, dataAdapter) {
                 res.redirect('/login?emailMsg=The link to access My OLX has been emailed to you.');
             }
 
+            function error(err) {
+                res.redirect('/login?' + querystring.stringify(err));
+            }
+
             asynquence().or(error)
+                .then(parse)
                 .then(validate)
                 .then(submit)
                 .val(success);
