@@ -53,8 +53,9 @@ module.exports = function(req, options, callback) {
     form.uploadDir = options.uploadDir || config.get(['formidable', 'uploadDir'], os.tmpDir());
     form.keepExtensions = options.keepExtensions || config.get(['formidable', 'keepExtensions'], true);
     form.multiples = options.multiples || config.get(['formidable', 'multiples'], true);
+    form.acceptFiles = options.acceptFiles || config.get(['formidable', 'acceptFiles'], false);
     form.onPart = function(part) {
-        if (!part.mime || part.filename) {
+        if (!part.mime || (part.filename && form.acceptFiles)) {
             form.handlePart(part);
         }
     };

@@ -6,8 +6,8 @@ module.exports = function appUseConf(done) {
     var rendr = require('rendr');
 
     var app = express();
-    var SmaugAdapter = require('./server/data_adapter/smaug_adapter');
-    var dataAdapter = new SmaugAdapter({
+    var DataAdapter = require('./server/adapter/data');
+    var dataAdapter = new DataAdapter({
         userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
     });
     var middleware = require('./server/middleware')(dataAdapter);
@@ -20,8 +20,6 @@ module.exports = function appUseConf(done) {
         app.use(express.favicon());
         app.use(express.compress());
         app.use(express.static(__dirname + '/public'));
-        app.use(express.urlencoded());
-        app.use(express.json());
         app.use(express.cookieParser());
         app.use(express.session({
             store: memcached,

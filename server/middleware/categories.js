@@ -9,44 +9,41 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
+            var categories;
+            var children;
 
             function fetch(done) {
-                var api = {
-                    body: {},
-                    url: '/countries/' + siteLocation + '/categories'
-                };
-
-                function success(results) {
-                    var categories = {
-                        models: results,
-                        _byId: {}
-                    };
-
-                    categories.models.forEach(function processCategory(category) {
-                        categories._byId[category.id] = category;
-                    });
-                    done(categories);
-                }
-
-                dataAdapter.promiseRequest(req, api, success, done.fail);
+                dataAdapter.get(req, '/countries/' + siteLocation + '/categories', done.errfcb);
             }
 
-            function getChildren(done, categories) {
-                var children = {};
+            function parse(done, response, _categories) {
+                categories = {
+                    models: _categories,
+                    _byId: {}
+                };
+
+                categories.models.forEach(function each(category) {
+                    categories._byId[category.id] = category;
+                });
+                done();
+            }
+
+            function getChildren(done) {
+                children = {};
 
                 function traverseCategories(category) {
                     category.children.forEach(traverseChildCategories);
                 }
 
-                function traverseChildCategories(subCategory, index, categories) {
+                function traverseChildCategories(subCategory, index) {
                     children[subCategory.id] = subCategory;
                 }
 
                 categories.models.forEach(traverseCategories);
-                done(categories, children);
+                done();
             }
 
-            function store(done, categories, children) {
+            function store(done) {
                 app.updateSession({
                     categories: categories,
                     childCategories: children,
@@ -61,6 +58,7 @@ module.exports = function(dataAdapter) {
 
             asynquence().or(fail)
                 .then(fetch)
+                .then(parse)
                 .then(getChildren)
                 .then(store)
                 .val(next);
