@@ -3,17 +3,16 @@
 var config = require('./config');
 var asynquence = require('asynquence');
 var app = asynquence().or(uncaughtError);
-var debug = require('debug')('arwen');
-var debugGraphite = require('debug')('arwen:graphite');
-
+var logger = require('./logger')('server');
 
 function uncaughtError(error) {
-    var log = '%s %j';
+    var log = '%j';
 
     if (error instanceof Error) {
-        log = '%s %s';
+        log = '%s';
+        error = error.stack;
     }
-    debug(log, 'ERROR', error.stack);
+    logger.error(log, error);
 }
 
 if (config.get(['newrelic', 'enabled'], false)) {
@@ -21,15 +20,7 @@ if (config.get(['newrelic', 'enabled'], false)) {
 }
 
 if (config.get(['graphite', 'enabled'], false)) {
-    var graphite = require('graphite');
-    var client = graphite.createClient('plaintext://graphite-server:2003/');
-    var metrics = {};
-    metrics['olx-' + process.env + '.application.arwen.random'] = new Date().getTime();
-    client.write(metrics, function(err) {
-        if (err) {
-            debugGraphite('%s %s', 'ERROR', err);
-        }
-    });
+    require('./graphite')();
 }
 
 if (config.get(['cluster', 'enabled'], false)) {
