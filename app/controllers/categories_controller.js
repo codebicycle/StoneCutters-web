@@ -8,8 +8,9 @@ module.exports = {
         var category = app.getSession('categories')._byId[params.id];
 
         callback(null, {
-            'category': category,
-            'params': params
+            category: category,
+            params: params,
+            template: app.getSession('template')
         });
     },
     show: function(params, callback) {
@@ -24,7 +25,8 @@ module.exports = {
 
         callback(null, {
             'category': category,
-            'params': params
+            'params': params,
+            template: app.getSession('template')
         });
     }
 };

@@ -12,6 +12,7 @@ public/mergedAssets.js
 public/js/mergedAssets.js
 public/js/libs.js
 public/js/app.js
+public/css
 app/templates/compiledTemplates.js
 public/styles.css
 .DS_Store

@@ -8,7 +8,9 @@ module.exports = {
         var app = helpers.environment.init(this.app);
 
         callback(null, {
-            'params': params
+            params: params,
+            platform: app.getSession('platform'),
+            template: app.getSession('template')
         });
     },
     login: function(params, callback) {
@@ -50,6 +52,8 @@ module.exports = {
                 item.date.since = helpers.timeAgo(date);
             }
 
+            result.platform = app.getSession('platform');
+            result.template = app.getSession('template');
             result.dictionary = app.getSession('dictionary');
             result.myAdsMetadata = myAds.get('metadata');
             result.myAds = myAds.get('data');
@@ -90,6 +94,8 @@ module.exports = {
                 item.date.since = helpers.timeAgo(date);
             }
 
+            result.platform = app.getSession('platform');
+            result.template = app.getSession('template');
             result.dictionary = app.getSession('dictionary');
             result.favoritesMetadata = favorites.get('metadata');
             result.favorites = favorites.get('data');

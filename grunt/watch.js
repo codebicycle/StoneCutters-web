@@ -10,6 +10,10 @@ module.exports = function(grunt) {
             files: ['app/**/*.hbs'],
             tasks: ['exec:removeTemplates', 'handlebars']
         },
+        stylesheets: {
+            files: ['app/**/*.styl', 'app/**/*.css'],
+            tasks: ['exec:removeStyles', 'stylus']
+        },
         node: {
             files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'grunt/**/*.js'],
             tasks: ['jshint:node']
