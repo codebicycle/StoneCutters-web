@@ -17,7 +17,7 @@ module.exports = BaseAppView.extend({
             $body.toggleClass('loading', loading);
         }, this);
         $('#search-bar').change(function(){
-            window.location = 'search?location=' + this.app.getSession('siteLocation') + '&q=' + $('#search-bar').val();
+            window.location = 'nf/search/' + $('#search-bar').val() + '?location=' + this.app.getSession('siteLocation');
         });
         $('nav div').css('height' , ($(window).height() - $('header').height()) + 'px');
         $(window).resize(function onResize() {

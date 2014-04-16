@@ -104,7 +104,7 @@ DataAdapter.prototype.apiDefaults = function(api, req) {
     if (api.body && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
         api.json = api.body;
     }
-    if (api.method === 'GET' && Object.keys(api.body).length === 0) {
+    if (api.method === 'GET' && (api.body && Object.keys(api.body).length === 0)) {
         delete api.json;
         delete api.body;
     }

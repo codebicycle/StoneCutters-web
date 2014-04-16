@@ -32,7 +32,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success() {
-                res.redirect('/items/' + itemId);
+                res.redirect('/change-this-description-for-the-item-iid-' + itemId);
             }
 
             function error(err) {
@@ -118,7 +118,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(response, item) {
-                res.redirect('/items/' + item.id);
+                res.redirect('/change-this-description-for-the-item-iid-' + item.id);
                 clean();
             }
 
@@ -184,7 +184,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(done) {
-                res.redirect('/items/' + itemId);
+                res.redirect('/change-this-description-for-the-item-iid-' + itemId);
             }
 
             function error(err) {
@@ -200,6 +200,19 @@ module.exports = function(app, dataAdapter) {
             asynquence().or(error)
                 .then(add)
                 .val(success);
+        }
+    })();
+
+    (function search() {
+        app.post('/nf/search/redirect', handler);
+
+        function handler(req, res, next) {
+            formidable(req, function callback(err, data) {
+                if (!data.search) {
+                    return res.redirect(req.headers.referer);
+                }
+                res.redirect('/nf/search/' + data.search);
+            });
         }
     })();
 
