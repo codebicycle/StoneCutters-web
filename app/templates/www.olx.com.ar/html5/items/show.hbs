@@ -44,7 +44,7 @@
     {{#if user}}
         <form method="post" action="/items/{{item.id}}/favorite{{#if item.isFavorite}}/delete{{/if}}">
     {{else}}
-        <form method="get" action="/registration">
+        <form method="get" action="/register">
     {{/if}}
         <p class="item-action-favorite">
             {{#if item.isFavorite}}

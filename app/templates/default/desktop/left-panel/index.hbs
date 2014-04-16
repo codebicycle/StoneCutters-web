@@ -8,14 +8,14 @@
 				<li class="myFav"><a href="/">Favoritos</a></li>
 				<li class="login"><a href="/login">Login</a></li>
 			{{else}}
-				<li class="login"><a href="/registration">Registration</a></li>
+				<li class="login"><a href="/register">Registration</a></li>
 			{{/if}}
 			<li class="settings"><a href="/">Settings</a></li>
 		</ul>
 		<ul class="categories">
 			<li class="title">CATEGORIAS</li>
 			{{#each categories.models}}
-				<li><a href="/categories/{{id}}?location={{../siteLocation}}" class="home-{{id}}">{{trName}}</a></li>
+				<li><a href="/change-this-description-for-the-category-cat-{{id}}?location={{../siteLocation}}" class="home-{{id}}">{{trName}}</a></li>
 			{{/each}}
 		</ul>
 	</div>

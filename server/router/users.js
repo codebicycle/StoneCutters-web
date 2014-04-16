@@ -7,7 +7,7 @@ module.exports = function(app, dataAdapter) {
     var crypto = require('crypto');
 
     (function registration() {
-        app.post('/registration', handler);
+        app.post('/register', handler);
 
         function handler(req, res) {
 

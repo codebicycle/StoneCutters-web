@@ -5,40 +5,38 @@ var _ = require('underscore');
 var querystring = require('querystring');
 var config = require('../config');
 
-function checkPageSize(query) {
+function prepareParams(app, params) {
     var max = config.get(['smaug', 'maxPageSize'], 50);
-    if (query.pageSize > max) {
-        query.pageSize = max;
+    if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
+        params.pageSize = max;
     }
+
+    params.item_type = 'adsList';
+    params.location = app.getSession('siteLocation');
+
+    params.page = (params.page ? Number(params.page) : 1);
+    params.offset = (params.page - 1) * 50;
+
+    var sorts = ['-sort_date_to_showdesc', '-sort_price', '-sort_pricedesc'];
+    params.searchOrder = (params.sort && !~sorts.indexOf(params.sort)) ? '' : params.sort;
+    params.searchOrder = (params.searchOrder ? params.searchOrder.substr(6) : '');
+    delete params.sort;
 }
 
-function prepareNextLink(metadata, query, url) {
-    var next = metadata.next;
-    if (next) {
-        query.offset = next.replace(/.*offset=(\d*).*/, '$1');
-        query.pageSize = next.replace(/.*pageSize=(\d*).*/, '$1');
-        query.sort = next.replace(/.*sort=([\d\w\s]*).*/, '$1');
-        metadata.next = (url + querystring.stringify(query));
-    } else {
-        query.offset = Number(query.offset) + Number(query.pageSize);
-    }
-    checkPageSize(query);
-}
-
-function preparePreviousLink(metadata, query, url) {
-    var offset = Number(query.offset);
-    var pageSize = Number(query.pageSize);
-    offset = (offset - (pageSize * 2));
-    if (offset >= 0) {
-        query.offset = offset;
-        metadata.previous = (url + querystring.stringify(query));
-    }
+function prepareURLParams(query, url, offset) {
+    return (url + '-p-' + (query.page + offset) + query.searchOrder);
 }
 
 function preparePaginationLink(metadata, query, url) {
     if (metadata.total > 0) {
-        prepareNextLink(metadata, query, url);
-        preparePreviousLink(metadata, query, url);
+        query.searchOrder = (query.searchOrder ? ('/-sort_' + query.searchOrder) : query.searchOrder);
+        var next = metadata.next;
+        if (next) {
+            metadata.next = prepareURLParams(query, url, 1);
+        }
+        if (query.page > 1) {
+            metadata.previous = prepareURLParams(query, url, -1);
+        }
     }
  }
 
@@ -51,10 +49,15 @@ module.exports = {
                 params: params
             }
         };
-        var query = _.clone(params);
-        checkPageSize(params);
+        var query;
 
-        params.item_type = 'adsList';
+        prepareParams(app, params);
+        query = _.clone(params);
+
+        params.categoryId = params.catId;
+        delete params.catId;
+        delete params.title;
+        delete params.page;
 
         /** don't read from cache, because rendr caching expects an array response
         with ids, and smaug returns an object with 'data' and 'metadata' */
@@ -62,12 +65,15 @@ module.exports = {
             'readFromCache': false
         }, function afterFetch(err, result) {
             var model = result.items.models[0];
+            var protocol = app.getSession('protocol');
+            var host = app.getSession('host');
+            var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
 
             result.items = model.get('data');
             result.metadata = model.get('metadata');
-            preparePaginationLink(result.metadata, query, '/items?');
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
+            preparePaginationLink(result.metadata, query, url);
             callback(err, result);
         });
     },
@@ -84,6 +90,11 @@ module.exports = {
         if (user) {
             params.token = user.token;
         }
+
+        params.id = params.itemId;
+        delete params.itemId;
+        delete params.title;
+
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
@@ -103,13 +114,14 @@ module.exports = {
                 params: params
             }
         };
-        var query = _.clone(params);
-        checkPageSize(params);
+        var query;
 
-        params.item_type = 'adsList';
+        prepareParams(app, params);
+        query = _.clone(params);
+
         params.searchTerm = params.search;
         delete params.search;
-        params.location = app.getSession('siteLocation');
+        delete params.page;
 
         //don't read from cache, because rendr caching expects an array response
         //with ids, and smaug returns an object with 'data' and 'metadata'
@@ -117,12 +129,16 @@ module.exports = {
             'readFromCache': false
         }, function afterFetch(err, result) {
             var model = result.items.models[0];
+            var protocol = app.getSession('protocol');
+            var host = app.getSession('host');
+            var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
 
             result.items = model.get('data');
             result.metadata = model.get('metadata');
             preparePaginationLink(result.metadata, query, '/search?');
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
+            preparePaginationLink(result.metadata, query, url);
             result.search = query.search;
             callback(err, result);
         });
@@ -135,6 +151,10 @@ module.exports = {
                 params: params
             }
         };
+
+        params.id = params.itemId;
+        delete params.itemId;
+        delete params.title;
 
         app.fetch(spec, {
             'readFromCache': false
