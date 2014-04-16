@@ -5,7 +5,8 @@ npm install
 
 # write config
 echo '{"auth":"/var/lib/jenkins/.ssh/id_rsa"}' > ../conf.json
-echo 'module.exports={deploy:{version:"1.1.'${BUILD_NUMBER}'",revision:"test1234"}};'> ../app/config/build.js
+echo 'module.exports={version:"1.1.'${BUILD_NUMBER}'"};'> ../app/config/version.js
+echo 'module.exports={revision:"test1234"};'> ../app/config/build.js
 
 # replace proper domains > $ sed -i 's/old/new/g' file.ext
 for platform in html4 html5 desktop
