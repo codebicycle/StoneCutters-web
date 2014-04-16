@@ -5,13 +5,6 @@ var _ = require('underscore');
 var querystring = require('querystring');
 var config = require('../config');
 
-function checkPageSize(query) {
-    var max = config.get(['smaug', 'maxPageSize'], 50);
-    if (!query.pageSize || (query.pageSize < 1 || query.pageSize > max)) {
-        query.pageSize = max;
-    }
-}
-
 function prepareParams(app, params) {
     var max = config.get(['smaug', 'maxPageSize'], 50);
     if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
