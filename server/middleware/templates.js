@@ -5,8 +5,8 @@ module.exports = function(dataAdapter) {
     return function loader() {
         var localizedTemplates = require('../localizedTemplates');
 
-        function isLocalized(platform, location) {
-            return !!(~localizedTemplates[platform].indexOf(location));
+        function isLocalized(platform, siteLocation) {
+            return !!(~localizedTemplates[platform].indexOf(siteLocation));
         }
 
         return function middleware(req, res, next) {
@@ -28,41 +28,25 @@ module.exports = function(dataAdapter) {
                     osName: device.osName,
                     osVersion: parseFloat(device.osVersion.replace('_','.'))
                 };
-                var template = 'basic';
-                var platform = 'wap';
-                var location = siteLocation.slice(siteLocation.length - 2);
+                var platform;
+                var template;
 
                 if(app.getSession('platformForced')) {
-                    platform = app.getSession('platform');
+                    platform = app.getSession('platform') || 'wap';
                 }
                 else {
                     /*if (device.isBrowser) {
                         platform = 'desktop';
                     }
                     else {*/
-                        platform = device.web_platform;
+                        platform = device.web_platform || 'wap';
                     //}
                 }
-                switch(platform) {
-                    case 'desktop':
-                        //template = 'desktop';
-                        template = 'enhanced';
-                    break;
-                    case 'html5':
-                        template = 'enhanced';
-                    break;
-                    case 'html4':
-                        template = 'standard';
-                    break;
-                    case 'wap':
-                        template = 'basic';
-                    break;
-                    default:
-                        template = 'basic';
-                    break;
+                if (isLocalized(platform, siteLocation)) {
+                    template = siteLocation + '/' + platform;
                 }
-                if (isLocalized(platform, location)) {
-                    template += '_' + location;
+                else {
+                    template = 'default/' + platform;
                 }
                 app.updateSession({
                     platform: platform,

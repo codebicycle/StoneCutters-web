@@ -11,9 +11,11 @@ module.exports = {
         if (!params.search) {
             location.cities = cities;
             return callback(null, {
-                'location': location,
-                'cities': cities.models,
-                'target': params.target,
+                location: location,
+                cities: cities.models,
+                target: params.target,
+                platform: app.getSession('platform'),
+                template: app.getSession('template')
             });
         }
 
@@ -41,10 +43,12 @@ module.exports = {
                 location.cities = cities;
 
                 callback(err, {
-                    'location': location,
-                    'cities': cities.models,
-                    'search': params.search,
-                    'posting': params.posting,
+                    location: location,
+                    cities: cities.models,
+                    search: params.search,
+                    posting: params.posting,
+                    platform: app.getSession('platform'),
+                    template: app.getSession('template')
                 });
             });
         })();

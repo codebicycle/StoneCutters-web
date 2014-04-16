@@ -62,10 +62,12 @@ module.exports = {
             'readFromCache': false
         }, function afterFetch(err, result) {
             var model = result.items.models[0];
+
             result.items = model.get('data');
             result.metadata = model.get('metadata');
             preparePaginationLink(result.metadata, query, '/items?');
             result.platform = app.getSession('platform');
+            result.template = app.getSession('template');
             callback(err, result);
         });
     },
@@ -86,6 +88,7 @@ module.exports = {
             'readFromCache': false
         }, function afterFetch(err, result) {
             result.platform = app.getSession('platform');
+            result.template = app.getSession('template');
             result.location = app.getSession('siteLocation');
             result.user = user;
             result.item = result.item.toJSON();
@@ -114,9 +117,12 @@ module.exports = {
             'readFromCache': false
         }, function afterFetch(err, result) {
             var model = result.items.models[0];
+
             result.items = model.get('data');
             result.metadata = model.get('metadata');
             preparePaginationLink(result.metadata, query, '/search?');
+            result.platform = app.getSession('platform');
+            result.template = app.getSession('template');
             result.search = query.search;
             callback(err, result);
         });
@@ -135,6 +141,7 @@ module.exports = {
         }, function afterFetch(err, result) {
             result.user = app.getSession('user');
             result.platform = app.getSession('platform');
+            result.template = app.getSession('template');
             result.location = app.getSession('siteLocation');
             result.item = result.item.toJSON();
             callback(err, result);
