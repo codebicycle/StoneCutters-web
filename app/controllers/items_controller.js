@@ -12,29 +12,31 @@ function checkPageSize(query) {
     }
 }
 
-function prepareParams(params) {
+function prepareParams(app, params) {
     var max = config.get(['smaug', 'maxPageSize'], 50);
     if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
         params.pageSize = max;
     }
 
-    params.page = (params.page ? Number(params.page.replace(/.*-p-([\d]*)/, '$1')) : 1);
+    params.item_type = 'adsList';
+    params.location = app.getSession('siteLocation');
+
+    params.page = (params.page ? Number(params.page) : 1);
     params.offset = (params.page - 1) * 50;
 
     var sorts = ['-sort_date_to_showdesc', '-sort_price', '-sort_pricedesc'];
-    if (params.sort && !~sorts.indexOf(params.sort)) {
-        params.sort = '';
-    }
-    params.sort = (params.sort ? params.sort.replace('-sort_', '') : '');
+    params.searchOrder = (params.sort && !~sorts.indexOf(params.sort)) ? '' : params.sort;
+    params.searchOrder = (params.searchOrder ? params.searchOrder.substr(6) : '');
+    delete params.sort;
 }
 
 function prepareURLParams(query, url, offset) {
-    return (url + '-p-' + (query.page + offset) + query.sort);
+    return (url + '-p-' + (query.page + offset) + query.searchOrder);
 }
 
 function preparePaginationLink(metadata, query, url) {
     if (metadata.total > 0) {
-        query.sort = (query.sort ? ('/-sort_' + query.sort.replace(/(.*)(desc)$/, '$1 $2')) : query.sort);
+        query.searchOrder = (query.searchOrder ? ('/-sort_' + query.searchOrder) : query.searchOrder);
         var next = metadata.next;
         if (next) {
             metadata.next = prepareURLParams(query, url, 1);
@@ -54,10 +56,15 @@ module.exports = {
                 params: params
             }
         };
-        var query = _.clone(params);
-        checkPageSize(params);
+        var query;
 
-        params.item_type = 'adsList';
+        prepareParams(app, params);
+        query = _.clone(params);
+
+        params.categoryId = params.catId;
+        delete params.catId;
+        delete params.title;
+        delete params.page;
 
         /** don't read from cache, because rendr caching expects an array response
         with ids, and smaug returns an object with 'data' and 'metadata' */
@@ -65,10 +72,15 @@ module.exports = {
             'readFromCache': false
         }, function afterFetch(err, result) {
             var model = result.items.models[0];
+            var protocol = app.getSession('protocol');
+            var host = app.getSession('host');
+            var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
+
             result.items = model.get('data');
             result.metadata = model.get('metadata');
-            preparePaginationLink(result.metadata, query, '/items?');
             result.platform = app.getSession('platform');
+
+            preparePaginationLink(result.metadata, query, url);
             callback(err, result);
         });
     },
@@ -85,6 +97,11 @@ module.exports = {
         if (user) {
             params.token = user.token;
         }
+
+        params.id = params.itemId;
+        delete params.itemId;
+        delete params.title;
+
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
@@ -105,12 +122,10 @@ module.exports = {
         };
         var query;
 
-        prepareParams(params);
+        prepareParams(app, params);
         query = _.clone(params);
 
-        params.item_type = 'adsList';
         params.searchTerm = params.search;
-        params.location = app.getSession('siteLocation');
         delete params.search;
         delete params.page;
 
@@ -140,6 +155,10 @@ module.exports = {
                 params: params
             }
         };
+
+        params.id = params.itemId;
+        delete params.itemId;
+        delete params.title;
 
         app.fetch(spec, {
             'readFromCache': false

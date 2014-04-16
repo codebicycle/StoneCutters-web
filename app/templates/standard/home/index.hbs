@@ -2,7 +2,7 @@
     <ul class="categories parent-cat">
     	{{#each categories.models}}
 			<li{{#eq @index 0}} class="border-none"{{/eq}}>
-				<a href="categories/{{id}}?location={{../siteLocation}}">
+				<a href="/change-this-description-for-the-category-cat-{{id}}?location={{../siteLocation}}">
 					<img src="{{#static '/images/icons/html4/{{id}}.png' '{{id}}' id}}{{this}}{{/static}}">
 					<span>{{trName}}</span> 
 				</a>
