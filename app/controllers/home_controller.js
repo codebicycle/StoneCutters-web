@@ -41,6 +41,7 @@ module.exports = {
                 }
 
                 result.platform = app.getSession('platform');
+                result.template = app.getSession('template');
                 result.categories = app.getSession('categories');
                 result.dictionary = app.getSession('dictionary');
                 result.whatsNewMetadata = whatsNew.get('metadata');

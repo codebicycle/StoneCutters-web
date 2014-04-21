@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('underscore');
-var CONFIG = _.extend(require('./default'), require('./build'), {
+var CONFIG = _.extend(require('./default'), {
+    deploy: _.extend(require('./build'), require('./version')),
     analytics: require('./analytics')
 });
 

@@ -7,12 +7,15 @@ module.exports = {
         var app = helpers.environment.init(this.app);
 
         callback(null, {
-            'params': params
+            params: params,
+            platform: app.getSession('platform'),
+            template: app.getSession('template')
         });
     },
     help: function(params, callback) {
         var app = helpers.environment.init(this.app);
-        // Delete this function and your references 
+
+        // Delete this function and your references
         function itemsHelpSimulator() {
             return [{
                 name: 'New to OLX',
@@ -85,8 +88,10 @@ module.exports = {
         }
         // Delete this callback
         callback(null, {
-            'items': itemsHelpSimulator(),
-            'params': params
+            items: itemsHelpSimulator(),
+            params: params,
+            platform: app.getSession('platform'),
+            template: app.getSession('template')
         });
 
         /*

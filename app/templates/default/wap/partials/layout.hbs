@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		{{#layout template '/partials/head'}}
+			{{{partial layout}}}
+		{{/layout}}
+	</head>
+	<body style="margin: 0; padding: 0; font-family: Sans-Serif;" text="#666666" link="#0066FF" vlink="#0066FF">
+	    {{view "header/index"}}
+
+	    {{{body}}}
+	    
+		{{#layout template '/partials/actions'}}
+			{{{partial layout}}}
+		{{/layout}}
+		{{#layout template '/partials/languages'}}
+			{{{partial layout}}}
+		{{/layout}}
+	    {{view "footer/index"}}
+	</body>
+</html>
