@@ -5,40 +5,130 @@ var _ = require('underscore');
 var querystring = require('querystring');
 var config = require('../config');
 
+function findFilters(filters) {
+    var match = filters.match(/-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g);
+    return(match ? match : []);
+}
+
+function parseValueFilter(value, filter) {
+    if (!~value.indexOf('_')) {
+        filter.type = _.contains(['true', 'false'], value) ? 'BOOLEAN' : 'SELECT';
+        return value;
+    }
+    value = value.split('_');
+    filter.type = 'RANGE';
+    return {
+        from: value[0],
+        to: value[1]
+    };
+}
+
+function parseFilter(filter) {
+    var keyValue = filter.replace(/-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g, '$1#$2');
+    keyValue = keyValue.split('#');
+    filter = {
+        name: keyValue[0]
+    };
+    filter.value = parseValueFilter(keyValue[1], filter);
+    return filter;
+}
+
+function prepareFilters(params) {
+    var filters = {};
+    var listFilters = findFilters(params.filters);
+
+    _.each(listFilters, function parseFilters(filter, i) {
+        filter = parseFilter(filter);
+        filters[ filter.name ] = filter;
+    });
+    return filters;
+}
+
+function prepareURLFilters(params) {
+    var url;
+    var sort;
+    var filters = params.filters;
+    if (!filters) {
+        return '';
+    }
+
+    url = ['/'];
+    if (filters.sort) {
+        sort = filters.sort;
+        delete filters.sort;
+    }
+    _.each(filters, function(filter, name) {
+        if (filter.value === 'false') {
+            return;
+        }
+        url.push('-');
+        url.push(name);
+        url.push('_');
+        switch(filter.type) {
+            case 'SELECT':
+                url.push(filter.value);
+                params['f.' + name] = filter.value;
+                break;
+            case 'BOOLEAN':
+                url.push(filter.value);
+                params['f.' + name] = filter.value;
+                break;
+            case 'RANGE':
+                url.push(filter.value.from);
+                url.push('_');
+                url.push(filter.value.to);
+                params['f.' + name] = filter.value.from + 'TO' + filter.value.to;
+                break;
+            default:
+                break;
+        }
+    });
+    if (sort) {
+        url.push('-sort_');
+        url.push(sort.value);
+        var sortNameValue = sort.value.replace(/([a-zA-Z0-9_]*)(desc)/g, '$1#$2');
+        sortNameValue = sortNameValue.split('#');
+        params['s.' + sortNameValue[0]] = sortNameValue[1] || 'asc';
+    }
+    return url.join('');
+}
+
 function prepareParams(app, params) {
     var max = config.get(['smaug', 'maxPageSize'], 50);
     if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
         params.pageSize = max;
     }
-
     params.item_type = 'adsList';
     params.location = app.getSession('siteLocation');
-
     params.page = (params.page ? Number(params.page) : 1);
     params.offset = (params.page - 1) * 50;
-
-    var sorts = ['-sort_date_to_showdesc', '-sort_price', '-sort_pricedesc'];
-    params.searchOrder = (params.sort && !~sorts.indexOf(params.sort)) ? '' : params.sort;
-    params.searchOrder = (params.searchOrder ? params.searchOrder.substr(6) : '');
-    delete params.sort;
+    if (params.search) {
+        params.searchTerm = params.search;
+    }
+    if (params.filters) {
+        params.filters = prepareFilters(params);
+        params.urlFilters = prepareURLFilters(params);
+    }
 }
 
-function prepareURLParams(query, url, offset) {
-    return (url + '-p-' + (query.page + offset) + query.searchOrder);
+function prepareURLParams(query, url, offset, urlFilters) {
+    return (url + '-p-' + (query.page + offset) + (urlFilters || '/'));
 }
 
 function preparePaginationLink(metadata, query, url) {
+    var next;
+
+    metadata.current = prepareURLParams(query, url, 0, query.urlFilters);
     if (metadata.total > 0) {
-        query.searchOrder = (query.searchOrder ? ('/-sort_' + query.searchOrder) : query.searchOrder);
-        var next = metadata.next;
+        next = metadata.next;
         if (next) {
-            metadata.next = prepareURLParams(query, url, 1);
+            metadata.next = prepareURLParams(query, url, 1, query.urlFilters);
         }
         if (query.page > 1) {
-            metadata.previous = prepareURLParams(query, url, -1);
+            metadata.previous = prepareURLParams(query, url, -1, query.urlFilters);
         }
     }
- }
+}
 
 module.exports = {
     index: function(params, callback) {
@@ -58,6 +148,8 @@ module.exports = {
         delete params.catId;
         delete params.title;
         delete params.page;
+        delete params.filters;
+        delete params.urlFilters;
 
         /** don't read from cache, because rendr caching expects an array response
         with ids, and smaug returns an object with 'data' and 'metadata' */
@@ -121,7 +213,10 @@ module.exports = {
 
         params.searchTerm = params.search;
         delete params.search;
+        delete params.title;
         delete params.page;
+        delete params.filters;
+        delete params.urlFilters;
 
         //don't read from cache, because rendr caching expects an array response
         //with ids, and smaug returns an object with 'data' and 'metadata'
