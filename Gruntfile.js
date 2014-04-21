@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', ['nunjucks', 'browserify']);
 
-    grunt.registerTask('rebuild', ['clean', 'build']);
+    grunt.registerTask('rebuild', ['clean']);
 
     grunt.registerTask('jshint:node', ['jshint:server', 'jshint:client']);
 

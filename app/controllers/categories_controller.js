@@ -18,7 +18,8 @@ module.exports = {
 
         callback(null, {
             'category': category,
-            'params': params
+            'params': params,
+            'location': app.getSession('location')
         });
     }
 };

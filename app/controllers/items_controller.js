@@ -21,20 +21,24 @@ module.exports = {
         }, function afterFetch(err, result) {
             result.items = result.items.models[0].get('data');
             result.platform = app.getSession('platform');
+            result.location = app.getSession('location');
             callback(err, result);
         });
     },
     show: function(params, callback) {
         var app = helpers.environment.init(this.app);
         var user = app.getSession('user');
+
         var spec = {
             item: {
                 model: 'Item',
                 params: params
             }
         };
-
-        params.token = user.token;
+        
+        if (user) {
+            params.token = user.token;
+        }
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
