@@ -1,0 +1,45 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
+    <tbody><tr>
+        <td style="padding: .25em .5em; border-top: solid thin #808080;">
+            <strong style="color: #0075BD;">{{item.title}}</strong>
+            <br>
+            <small>Contactar al anunciante</small>
+        </td>
+    </tr>
+</tbody></table>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+    <tr>
+        <td style="padding: .5em; border-top: solid thin #808080;">
+            <small>
+                <strong>Para: </strong>
+                <span>{{item.contactName}}</span>
+            </small>
+            <br />
+            <br style="display: none;" />
+            <form id="postingForm" action="/items/{{item.id}}/reply" method="POST" enctype="multipart/form-data">
+                <label style="display: block; padding-top: .5em;">
+                    <small>Message</small>
+                    <br />
+                    <textarea name="message"></textarea>
+                </label>
+                <label style="display: block; padding-top: .5em;">
+                    <small>Email</small>
+                    <br />
+                    <input type="text" name="email"{{#if user}} value="{{user.email}}"{{/if}}>
+                </label>
+                <label style="display: block; padding-top: .5em;">
+                    <small>Name</small>
+                    <br />
+                    <input type="text" name="name">
+                </label>
+                <label style="display: block; padding-top: .5em;">
+                    <small>Phone</small>
+                    <br />
+                    <input type="text" name="phone">
+                </label>
+                <input type="hidden" name="itemId" value="{{item.id}}">
+                <span style="display: block;"><input type="submit" value="Enviar Consulta"></span>
+            </form>
+        </td>
+    </tr>
+</table>

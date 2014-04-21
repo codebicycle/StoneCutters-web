@@ -1,0 +1,33 @@
+{{partial "analytics"}}
+
+{{#each items}}
+	<section>	
+		<a href="/change-this-description-for-the-item-iid-{{id}}">
+			{{#if thumbnail }}
+		        <div class="image filled" style="background-image:url({{thumbnail}}); ?>);"></div>
+			{{else}}
+				<div class="image"></div>
+			{{/if}}
+			
+			<p>{{date.since}} in {{displayLocation}}</p>
+			<div class="title"><h2><span><span>{{title}}</span></span></h2></div>
+			{{#if price.displayPrice }}
+				<h3>{{price.displayPrice}}</h3>
+			{{/if}}
+
+		</a>
+	</section>
+{{/each}}
+<div>
+	{{#if metadata.previous}}
+    	<span style="display: inline-block; float: left;">
+			<a href="{{metadata.previous}}">Previous</a>
+    	</span>
+	{{/if}}
+	{{#if metadata.next}}
+		<span style="display: inline-block; float: right;">
+			<a href="{{metadata.next}}">Next</a>
+    	</span>
+	{{/if}}
+	<div style="clear: both;"></div>
+</div>

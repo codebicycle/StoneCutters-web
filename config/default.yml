@@ -19,3 +19,15 @@ cache:
 
 cluster:
   enabled: true
+
+newrelic:
+  enabled: false
+
+graphite:
+  enabled: false
+
+formidable:
+  uploadDir: /tmp
+  keepExtensions: true
+  multiples: true
+  acceptFiles: false

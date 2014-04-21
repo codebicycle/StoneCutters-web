@@ -14,7 +14,9 @@
   },
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production nodemon index.js"
+    "start": "NODE_ENV=production nodemon index.js",
+    "develop": "DEBUG=arwen:server*,arwen:*:error nodemon index.js",
+    "debug": "DEBUG=arwen:* nodemon index.js"
   },
   "engines": {
     "node": ">=0.10"
@@ -41,7 +43,11 @@
     "request": "~2.34.0",
     "debug": "~0.7.4",
     "rendr-handlebars": "~0.2.0",
-    "nunjucks": "~1.0.2"
+    "nunjucks": "~1.0.2",
+    "newrelic": "~1.4.0",
+    "restler": "~3.2.0",
+    "formidable": "~1.0.14",
+    "graphite": "0.0.6"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
@@ -58,6 +64,7 @@
     "grunt-artifactory-artifact": "^0.6.1",
     "grunt-rsync": "~0.2.1",
     "grunt-ssh": "~0.9.1",
-    "grunt-nunjucks": "~0.1.4"
+    "grunt-nunjucks": "~0.1.4",
+    "grunt-contrib-stylus": "~0.14.0"
   }
 }

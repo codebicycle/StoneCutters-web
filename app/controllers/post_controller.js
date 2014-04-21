@@ -8,7 +8,9 @@ module.exports = {
         var app = helpers.environment.init(this.app);
 
         callback(null, {
-            'params': params,
+            params: params,
+            platform: app.getSession('platform'),
+            template: app.getSession('template')
         });
     },
     subcat: function(params, callback) {
@@ -24,7 +26,7 @@ module.exports = {
         var siteLocation = app.getSession('siteLocation');
         var language = app.getSession('selectedLanguage');
         var languages = app.getSession('languages');
-        var languageCode = languages._byId[language].isocode.toLowerCase(); 
+        var languageCode = languages._byId[language].isocode.toLowerCase();
         var spec = {
             postingSession: {
                 model: 'PostingSession'

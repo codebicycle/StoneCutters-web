@@ -5,69 +5,66 @@ module.exports = function(dataAdapter) {
     return function loader() {
         var localizedTemplates = require('../localizedTemplates');
 
-        function isLocalized(platform, location) {
-            return !!(~localizedTemplates[platform].indexOf(location));
+        function isLocalized(platform, siteLocation) {
+            return !!(~localizedTemplates[platform].indexOf(siteLocation));
         }
 
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
             var userAgent = req.get('user-agent');
-            var api = {
-                body: {},
-                url: '/devices/' + encodeURIComponent(userAgent)
-            };
 
-            function done(body) {
+            function callback(err, response, body) {
+                if (err) {
+                    return fail(err);
+                }
                 var device = body;
-                var template = 'basic';
-                var platform = 'wap';
-                var location = siteLocation.slice(siteLocation.length - 2);
 
-                /*if (device.isBrowser) {
-                    platform = 'desktop';
+                if(device.osVersion === undefined){
+                    device.osVersion = '0';
                 }
-                else {*/
-                    platform = device.web_platform;
-                //}
-                switch(platform) {
-                    case 'desktop':
-                        //template = 'desktop';
-                        template = 'enhanced';
-                    break;
-                    case 'html5':
-                        template = 'enhanced';
-                    break;
-                    case 'html4':
-                        template = 'standard';
-                    break;
-                    case 'wap':
-                        template = 'basic';
-                    break;
-                    default:
-                        template = 'basic';
-                    break;
+
+                var marketing = {
+                    osName: device.osName,
+                    osVersion: parseFloat(device.osVersion.replace('_','.'))
+                };
+                var platform;
+                var template;
+
+                if(app.getSession('platformForced')) {
+                    platform = app.getSession('platform') || 'wap';
                 }
-                if (isLocalized(platform, location)) {
-                    template += '_' + location;
+                else {
+                    /*if (device.isBrowser) {
+                        platform = 'desktop';
+                    }
+                    else {*/
+                        platform = device.web_platform || 'wap';
+                    //}
+                }
+                if (isLocalized(platform, siteLocation)) {
+                    template = siteLocation + '/' + platform;
+                }
+                else {
+                    template = 'default/' + platform;
                 }
                 app.updateSession({
                     platform: platform,
-                    template: template
+                    template: template,
+                    marketing: marketing,
                 });
                 app.req.app.locals({
                     platform: platform,
-                    template: template
+                    template: template,
                 });
                 next();
             }
 
-            function fail(error) {
-                console.log('Got error: ' + error.err);
-                res.send(400, error.err);
+            function fail(err) {
+                res.send(400, err);
             }
 
-            dataAdapter.promiseRequest(req, api, done, fail);
+            dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), callback);
         };
 
     };

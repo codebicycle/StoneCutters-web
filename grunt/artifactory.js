@@ -8,32 +8,32 @@ module.exports = function(grunt) {
             username: 'mobile-jenkins',
             password: 'm0b1l30lx',
         },
-        'build-dynamic': {
+        'dynamic': {
             files: [{
-                cwd: 'dist',
-                src: ['**']
+                src: ['app/**/*', '!app/config/default.js', 'node_modules/**/*', 'server/**/*', 'cache.js', 'memcached.js', 'appConf.js', 'bootstrap.js', 'cluster.js', 'index.js', 'newrelic.js', 'config.js', 'build.json'],
             }],
             options: {
                 publish: [{
-                    id: 'olx.arwen:arwen-dynamic:zip:0.1.'+grunt.option('artifactory-version'),
-                    name: 'arwen-dynamic',
-                    path: 'dist/',
-                    group_id: 'olx.arwen',
+                    id: 'olx.mobile-webapp:mobile-webapp-dynamic:zip:1.1.' + grunt.option('artifactory-version'),
+                    name: 'mobile-webapp-dynamic',
+                    path: '',
+                    group_id: 'olx.mobile-webapp',
                     ext: 'zip'
                 }]
             }
         },
-        'build-static': {
+        'static': {
             files: [{
-                cwd: 'dist',
+                expand: true,
+                cwd: 'public/',
                 src: ['**']
             }],
             options: {
                 publish: [{
-                    id: 'olx.arwen:arwen-static:zip:0.1.'+grunt.option('artifactory-version'),
-                    name: 'arwen-static',
-                    path: 'dist/',
-                    group_id: 'olx.arwen',
+                    id: 'olx.mobile-webapp:mobile-webapp-static:zip:1.1.' + grunt.option('artifactory-version'),
+                    name: 'mobile-webapp-static',
+                    path: '',
+                    group_id: 'olx.mobile-webapp',
                     ext: 'zip'
                 }]
             }

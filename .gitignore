@@ -9,6 +9,10 @@ target
 
 node_modules
 public/mergedAssets.js
+public/js/mergedAssets.js
+public/js/libs.js
+public/js/app.js
+public/css
 app/templates/compiledTemplates.js
 public/styles.css
 .DS_Store
@@ -17,5 +21,12 @@ config/runtime.json
 *.swp
 *.swo
 conf.json
+build.json
 test/output
 test/coverage.html
+newrelic_agent.log
+mobile-webapp-static-*
+mobile-webapp-dynamic-*
+
+public/css/*/*-staging.css
+public/css/*/*-testing.css

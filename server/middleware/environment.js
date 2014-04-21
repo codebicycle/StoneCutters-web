@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * envSetup middleware.
- * Here we call smaug in order to define which type of web we have to show.
- * Also set up the site location (domain)
- */
-
-var analyticsConfig = require('../../app/config/analytics/analytics_config');
+var config = require('../../app/config');
 var analyticsHelper = require('../../app/helpers/analytics');
 
 module.exports = function(dataAdapter) {
@@ -20,13 +14,12 @@ module.exports = function(dataAdapter) {
             var url = req.originalUrl;
             var index = host.indexOf(':');
             var siteLocation = (index === -1) ? host : host.substring(0,index);
-            var viewType;
+            var viewType = 'api';
+            var pathMatch;
 
-            if (path.indexOf('/api/') == -1 && analyticsConfig[pathMatch]) {
-                //if this isn't an api call, get the viewtype
-                var pathMatch = analyticsHelper.getPathMatch(path);
-                var config = analyticsConfig[pathMatch] || {};
-                viewType = config.viewType || '';
+            if (path.indexOf('/api/') == -1) {
+                pathMatch = analyticsHelper.getPathMatch(path);
+                viewType = config.get(['analytics', 'paths', pathMatch, 'viewType'], '');
             }
             else {
                 viewType = 'api';
@@ -60,7 +53,9 @@ module.exports = function(dataAdapter) {
                 referer: '',
                 viewType: viewType,
                 url: url,
-                clientId: clientId
+                clientId: clientId,
+                host: host,
+                protocol: req.protocol
             });
 
             next();

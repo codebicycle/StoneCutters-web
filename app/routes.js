@@ -4,28 +4,28 @@ module.exports = function(match) {
     match('?*params', 'home#index');
     match('', 'home#index');
 
-    match('categories', 'categories#index');
-    match('items', 'items#index');
-    match('categories?*params', 'categories#index');
-    match('items?*params', 'items#index');
-
-    match('search', 'items#search');
-    match('search?*params', 'items#search');
-
-    match('categories/:id?*params', 'categories#show');
-    match('categories/:id', 'categories#show');
-    match('items/:id', 'items#show');
-    match('items/:id/reply', 'items#reply');
+    match('search/:search?', 'items#search');
+    match('search/:search/-p-:page/:sort?', 'items#search');
+    match('nf/search/:search?', 'items#search');
+    match('nf/search/:search/-p-:page/:sort?', 'items#search');
 
     match('location', 'location#index');
-    match('registration', 'user#registration');
+    match('register', 'user#registration');
     match('login', 'user#login');
-    match('my-ads', 'user#my-ads');
-    match('favorites', 'user#favorites');
+    match('myolx/myadslisting', 'user#my-ads');
+    match('myolx/favoritelisting', 'user#favorites');
 
-    match('post', 'post#index');
-    match('post/:categoryId', 'post#subcat');
-    match('post/:categoryId/:subcategoryId', 'post#form');
+    match('posting', 'post#index');
+    match('posting/:categoryId', 'post#subcat');
+    match('posting/:categoryId/:subcategoryId', 'post#form');
 
     match('terms', 'pages#terms');
+    match('help', 'pages#help');
+
+    match(':title-iid-:itemId(\\d+$)', 'items#show');
+    match(':title-iid-:itemId(\\d+)/reply', 'items#reply');
+
+    match(':title-cat-:catId(\\d+$)', 'categories#show');
+    match(':title-cat-:catId(\\d+)-p-:page(\\d+$)', 'items#index');
+    match(':title-cat-:catId(\\d+)-p-:page(\\d+)/:sort?', 'items#index');
 };

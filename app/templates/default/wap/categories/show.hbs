@@ -1,0 +1,19 @@
+{{category.name}}
+
+{{view "location/select"}}
+{{view 'post/home_select'}}
+{{#layout template '/partials/search'}}
+	{{{partial layout}}}
+{{/layout}}
+
+<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+	{{#each category.children}}
+		<tr>
+			<td style="border-top: solid thin #808080;">
+				<a style="display: block;" href="/change-this-description-for-the-category-cat-{{id}}-p-1?location={{../params.location}}">
+					<small style="display: block;"><img border="0" alt="" src="" />{{trName}}</small>
+				</a>
+			</td>
+		</tr>
+	{{/each}}
+</table>

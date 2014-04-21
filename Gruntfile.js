@@ -3,31 +3,43 @@
 module.exports = function(grunt) {
     require('load-grunt-config')(grunt);
 
-    grunt.registerTask('run', function run() {
+    grunt.registerTask('develop', function run() {
         grunt.util.spawn({
-            cmd: 'nodemon',
-            args: ['index.js'],
+            cmd: 'npm',
+            args: ['run-script', 'develop'],
             opts: {
                 stdio: 'inherit'
             }
-        }, function error() {
-            grunt.fail.fatal(new Error("nodemon quit"));
+        }, function error(err) {
+            grunt.fail.fatal(err.stack);
         });
     });
 
-    grunt.registerTask('clean', ['exec:removeTemplates', 'exec:removeAssets']);
+    grunt.registerTask('log', function log() {
+        grunt.util.spawn({
+            cmd: 'npm',
+            args: ['run-script', 'debug'],
+            opts: {
+                stdio: 'inherit'
+            }
+        }, function error(err) {
+            grunt.fail.fatal(err.stack);
+        });
+    });
 
-    grunt.registerTask('build', ['nunjucks', 'browserify']);
+    grunt.registerTask('clean', ['exec:removeTemplates', 'exec:removeAssets', 'exec:removeStyles']);
+
+    grunt.registerTask('build', ['nunjucks', 'browserify', 'stylus']);
 
     grunt.registerTask('rebuild', ['clean']);
 
     grunt.registerTask('jshint:node', ['jshint:server', 'jshint:client']);
 
-    grunt.registerTask('start', ['rebuild', 'jshint:node', 'run', 'watch']);
+    grunt.registerTask('start', ['rebuild', 'jshint:node', 'develop', 'watch']);
 
-    grunt.registerTask('pipeline-rackspace', ['test', 'rebuild', 'rsync:dist', 'rsync:stage', 'sshexec:npm-install', 'sshexec:stop', 'sshexec:start']);
+    grunt.registerTask('debug', ['rebuild', 'jshint:node', 'log', 'watch']);
 
-    grunt.registerTask('pipeline-artifactory', ['rebuild', 'rsync:dist', 'artifactory:build-static:publish', 'artifactory:build-dynamic:publish']);
+    grunt.registerTask('pipeline', ['rebuild', 'artifactory:static:publish', 'artifactory:dynamic:publish']);
 
     grunt.registerTask('test', ['jshint:tests', 'mochacov:test', 'mochacov:coverage']);
 };

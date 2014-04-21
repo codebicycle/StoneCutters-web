@@ -1,13 +1,13 @@
 'use strict';
 
 module.exports = function appUseConf(done) {
-    var CONFIG = require('config');
+    var config = require('./config');
     var express = require('express');
     var rendr = require('rendr');
 
     var app = express();
-    var SmaugAdapter = require('./server/data_adapter/smaug_adapter');
-    var dataAdapter = new SmaugAdapter({
+    var DataAdapter = require('./server/adapter/data');
+    var dataAdapter = new DataAdapter({
         userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
     });
     var middleware = require('./server/middleware')(dataAdapter);
@@ -20,13 +20,10 @@ module.exports = function appUseConf(done) {
         app.use(express.favicon());
         app.use(express.compress());
         app.use(express.static(__dirname + '/public'));
-        app.use(express.logger());
-        app.use(express.urlencoded());
-        app.use(express.json());
         app.use(express.cookieParser());
         app.use(express.session({
             store: memcached,
-            secret: CONFIG.session.secret
+            secret: config.get(['session', 'secret'], '')
         }));
     }
 
@@ -36,7 +33,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.location());
-        rendrApp.use(middleware.language());
+        rendrApp.use(middleware.languages());
 
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());

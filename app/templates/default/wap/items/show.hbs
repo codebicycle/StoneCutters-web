@@ -1,0 +1,31 @@
+<h2>{{item.title}}</h2>
+<h3>{{item.price.displayPrice}}</h3>
+
+{{#each item.images}}
+	<img src="{{url}}"></br></br>
+{{/each}}
+</br></br>
+
+{{{item.description}}}</br></br>
+
+{{#each item.optionals}}
+	{{label}}: {{value}}</br>
+{{/each}}
+</br>
+{{#if user}}
+    <form method="post" action="/items/{{item.id}}/favorite{{#if item.isFavorite}}/delete{{/if}}">
+{{else}}
+    <form method="get" action="/register">
+{{/if}}
+    <p class="item-action-favorite">
+        {{#if item.isFavorite}}
+            <input type="image" src="{{#static '/images/favorite_s.png'}}{{/static}}" alt="Submit" class="item-actions-favorite" >
+        {{else}}
+            <input type="image" src="{{#static '/images/favorite_u.png'}}{{/static}}" alt="Submit" class="item-actions-favorite" >
+        {{/if}}
+    </p>
+</form>
+<br />
+<a href="/change-this-description-for-the-item-iid-{{item.id}}/reply">Reply</a>
+<br />
+<a href="/change-this-description-for-the-category-cat-{{item.category.id}}-p-1?location={{location}}&relatedAds={{item.id}}">Related Ads</a>

@@ -9,39 +9,32 @@ module.exports = function(dataAdapter) {
         return function middleware(req, res, next) {
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
+            var location;
+            var topCities;
 
             function fetchLocation(done) {
-                var api = {
-                    body: {},
-                    url: '/locations/' + siteLocation
-                };
-
-                dataAdapter.promiseRequest(req, api, done);
+                dataAdapter.get(req, '/locations/' + siteLocation, done.errfcb);
             }
 
             function fetchTopCities(done) {
-                var api = {
-                    body: {},
-                    url: '/countries/' + siteLocation + '/topcities'
-                };
-
-                function success(result) {
-                    var topCities = {
-                        models: result.data,
-                       _byId: {},
-                        metadata: result.metadata
-                    };
-
-                    topCities.models.forEach(function sort(city) {
-                        topCities._byId[city.id] = city;
-                    });
-                    done(topCities);
-                }
-
-                dataAdapter.promiseRequest(req, api, success, done.fail);
+                dataAdapter.get(req, '/countries/' + siteLocation + '/topcities', done.errfcb);
             }
 
-            function getCity(done, location, topCities) {
+            function parse(done, _location, _topCities) {
+                location = _location[1];
+                topCities = {
+                    models: _topCities[1].data,
+                   _byId: {},
+                    metadata: _topCities[1].metadata
+                };
+
+                topCities.models.forEach(function sort(city) {
+                    topCities._byId[city.id] = city;
+                });
+                done();
+            }
+
+            function getCity(done) {
                 var storedLocation = app.getSession('location');
                 var cityId = req.param('cityId', null);
                 var cities;
@@ -61,10 +54,10 @@ module.exports = function(dataAdapter) {
                 location.topCities = topCities;
                 location.cities = cities;
                 location.city = city;
-                done(location);
+                done();
             }
 
-            function store(done, location) {
+            function store(done) {
                 if (location.city) {
                     siteLocation = location.city.url;
                 }
@@ -75,13 +68,13 @@ module.exports = function(dataAdapter) {
                 done();
             }
 
-            function fail(msg) {
-                console.log('Failure: ' + msg);
-                res.send(400, msg);
+            function fail(err) {
+                res.send(400, err);
             }
 
             asynquence().or(fail)
                 .gate(fetchLocation, fetchTopCities)
+                .then(parse)
                 .then(getCity)
                 .then(store)
                 .val(next);

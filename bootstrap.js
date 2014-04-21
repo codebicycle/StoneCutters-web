@@ -2,10 +2,17 @@
 
 module.exports = function(worker) {
     var asynquence = require('asynquence');
-    var PORT = require('config').server.port;
+    var PORT = require('./config').get(['server', 'port'], 8080);
+    var logger = require('./logger')('server');
 
     function onBootstrapError(error) {
-        console.log('ARWEN Bootstrap error: ' + error);
+        var log = '%j';
+
+        if (error instanceof Error) {
+            log = '%s';
+            error = error.stack;
+        }
+        logger.error(log, error);
     }
 
     function appBootstrap(app) {
@@ -13,12 +20,12 @@ module.exports = function(worker) {
             var log;
 
             if (worker) {
-                log = 'server %d (pid %d) listening on port %d in %s mode';
-                console.log(log, worker.id, process.pid, PORT, app.get('env'));
+                log = 'id:%d pid:%d listening on port %d in %s mode';
+                logger.log(log, worker.id, process.pid, PORT, app.get('env'));
             }
             else {
-                log = 'server (pid %d) listening on port %d in %s mode';
-                console.log(log, process.pid, PORT, app.get('env'));
+                log = 'pid:%d listening on port %d in %s mode';
+                logger.log(log, process.pid, PORT, app.get('env'));
             }
         });
     }

@@ -1,0 +1,22 @@
+<nav id="leftPanel">
+	<div>
+		<ul class="menu">
+			<li class="start"><a href="/">Inicio</a></li>
+			<li class="post"><a href="/">Publicá un aviso gratis</a></li>
+			{{#if user}}
+				<li class="myAds"><a href="/">Mis Avisos</a></li>
+				<li class="myFav"><a href="/">Favoritos</a></li>
+				<li class="login"><a href="/login">Login</a></li>
+			{{else}}
+				<li class="login"><a href="/register">Registration</a></li>
+			{{/if}}
+			<li class="settings"><a href="/">Settings</a></li>
+		</ul>
+		<ul class="categories">
+			<li class="title">CATEGORIAS</li>
+			{{#each categories.models}}
+				<li><a href="/change-this-description-for-the-category-cat-{{id}}?location={{../siteLocation}}" class="home-{{id}}">{{trName}}</a></li>
+			{{/each}}
+		</ul>
+	</div>
+</nav>
