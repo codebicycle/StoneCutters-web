@@ -29,3 +29,11 @@
 	{{/if}}
 	<div style="clear: both;"></div>
 </div>
+{{#if metadata.filters.length}}
+    <div>
+        <h2>Filters</h2>
+        {{#each metadata.filters}}
+            {{#filter this ../metadata.current}}{{/filter}}
+        {{/each}}
+    </div>
+{{/if}}

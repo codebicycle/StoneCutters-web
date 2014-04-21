@@ -35,3 +35,17 @@
 		</tr>
 	</tbody>
 </table>
+{{#if metadata.filters.length}}
+<h2>Filters</h2>
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
+    <tbody>
+        {{#each metadata.filters}}
+            <tr>
+                <td>
+                    {{#filter this ../metadata.current}}{{/filter}}
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{/if}}
