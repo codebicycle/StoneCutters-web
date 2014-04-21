@@ -6,10 +6,12 @@
 ##########################################################################################################
 
 URL=$1
-curl --user jenkins-mobile:pwd -s $URL
+DATA=$2
+JOB_STATUS_URL=$3
+
+curl --user jenkins-mobile:pwd --data $DATA $URL -X POST
 
 GREP_RETURN_CODE=0
-JOB_STATUS_URL=$2
 
 echo "URL:"$URL
 echo "JOB_STATUS:"$JOB_STATUS_URL
