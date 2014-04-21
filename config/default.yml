@@ -31,3 +31,7 @@ formidable:
   keepExtensions: true
   multiples: true
   acceptFiles: false
+
+interstitial:
+  clicks: 1
+  time: 10000

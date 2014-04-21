@@ -6,6 +6,7 @@ module.exports = {
     analytics: require('./analytics'),
     categories: require('./categories'),
     marketing: require('./marketing'),
+    cookies: require('./cookies'),
     fitText: function(element, kompressor, options) {
         var compressor = kompressor || 1;
         var settings = $.extend({

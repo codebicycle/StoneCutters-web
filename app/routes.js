@@ -21,6 +21,7 @@ module.exports = function(match) {
 
     match('terms', 'pages#terms');
     match('help', 'pages#help');
+    match('interstitial', 'pages#interstitial');
 
     match(':title-iid-:itemId(\\d+$)', 'items#show');
     match(':title-iid-:itemId(\\d+)/reply', 'items#reply');
