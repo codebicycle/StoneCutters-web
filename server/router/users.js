@@ -199,4 +199,17 @@ module.exports = function(app, dataAdapter) {
                 .val(success);
         }
     })();
+
+    (function logout() {
+        app.get('/logout', handler);
+
+        function handler(req, res) {
+            var app = req.rendrApp;
+            
+            app.updateSession({
+                user: null
+            });
+            res.redirect('/');
+        }
+    })();
 };
