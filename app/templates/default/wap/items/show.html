@@ -1,0 +1,33 @@
+<h2>{{ item.title }}</h2>
+<h3>{{ item.price.displayPrice }}</h3>
+
+{% for image in item.images %}
+	<img src="{{ image.url }}" alt="{{ item.title }}" />
+{% endfor %}
+</br></br>
+
+{{ item.description }}
+</br></br>
+
+<ul>
+	{% for optional in item.optionals %}
+		<li><em>{{ optional.name }}:</em> {{ optional.value }}</li>
+	{% endfor %}
+</ul>
+
+
+</br>
+{% if user %}
+	<form action="/items/{{ item.id }}/favorite" method="POST">
+		<input type="submit" value="Add to Favorites" {% if item.isFavorite %}disabled{% endif %}>
+	</form>
+{% else %}
+	<form action="/registration">
+		<input type="submit" value="Add to Favorites">
+	</form>
+{% endif %}
+
+<br />
+<a href="/items/{{ item.id }}/reply">Reply</a>
+<br />
+<a href="/items?categoryId={{ item.category.id }}&location={{ location }}&relatedAds={{ item.id }}">Related Ads</a>

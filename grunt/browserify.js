@@ -17,7 +17,7 @@ module.exports = function(grunt) {
             src: ['app/**/*.js'],
             dest: 'public/js/app.js',
             options: {
-                alias: ['node_modules/rendr-handlebars/index.js:rendr-handlebars'],
+                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks'],
                 aliasMappings: [{
                     cwd: 'app/',
                     src: ['**/*.js'],

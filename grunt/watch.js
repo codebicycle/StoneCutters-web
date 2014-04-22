@@ -7,8 +7,8 @@ module.exports = function(grunt) {
             tasks: ['exec:removeAssets', 'browserify']
         },
         templates: {
-            files: ['app/**/*.hbs'],
-            tasks: ['exec:removeTemplates', 'handlebars']
+            files: ['app/**/*.html'],
+            tasks: ['exec:removeTemplates', 'nunjucks']
         },
         stylesheets: {
             files: ['app/**/*.styl', 'app/**/*.css'],

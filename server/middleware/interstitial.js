@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../../config');
+var config = require('../config');
 var helpers = require('../../app/helpers');
 var _ = require('underscore');
 
@@ -29,8 +29,8 @@ module.exports = function(dataAdapter) {
                 if (currentClicks < clicks) {
                     currentClicks++;
                     helpers.cookies.put(res, 'clicks', currentClicks);
-
-                } else if (!~req.originalUrl.indexOf('/redirect')) {
+                }
+                else if (!~req.originalUrl.indexOf('/redirect')) {
                     var protocol = app.getSession('protocol');
                     var host = app.getSession('host');
                     var time = config.get(['interstitial', 'time'], 60000);
