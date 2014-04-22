@@ -1,0 +1,9 @@
+<label style="display: block; padding-top: .5em;">
+    <small>{{context.label}}</small>
+    <br />
+    <select id="select-{{context.name}}" name="{{context.name}}">
+        {% for value in context.values %}
+            <option value="{{value.key}}">{{value.value}}</option>
+        {% endfor %}
+    </select>
+</label>
