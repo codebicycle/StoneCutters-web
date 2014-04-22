@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    handlebars: require('./handlebars'),
+    nunjucks: require('./nunjucks'),
     environment: require('./environment'),
     analytics: require('./analytics'),
     categories: require('./categories'),

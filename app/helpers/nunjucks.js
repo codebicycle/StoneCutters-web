@@ -3,17 +3,10 @@
 var config = require('../config');
 var _ = require('underscore');
 
-module.exports = function(Handlebars) {
+module.exports = function(nunjucks) {
     return {
         json: function(json) {
             return JSON.stringify(json);
-        },
-        getFieldTemplate: function(template, options) {
-            this.fieldPath = template + "/fields/" + this.fieldType;
-            return options.fn(this);
-        },
-        html: function(string, options) {
-            return new Handlebars.SafeString(string);
         },
         static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 't');
