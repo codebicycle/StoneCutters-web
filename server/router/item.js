@@ -243,16 +243,75 @@ module.exports = function(app, dataAdapter) {
         }
     })();
 
-    (function remove() {
+    (function removeItem() {
         app.get('/myolx/deleteitem/:itemId', handler);
 
         function handler(req, res, next) {
             var itemId = req.param('itemId', '');
 
-            if (!itemId) {
-                return res.redirect('/myolx/myadslisting');
+            function validate(done) {
+                var errors = {
+                    errCode: 400,
+                    err: [],
+                    errFields: []
+                };
+
+                if (!itemId) {
+                    errors.err.push('Invalid itemId');
+                    errors.errFields.push('itemId');
+                }
+                if (errors.err.length) {
+                    done.fail(errors);
+                    return;
+                }
+                done();
             }
-            res.redirect('/this-item-is-deleted-iid-' + itemId);
+
+            function remove(done) {
+                var user = req.rendrApp.getSession('user') || {};
+                var query = {
+                    token: user.token
+                };
+
+                dataAdapter.post(req, '/items/' + itemId + '/delete', {
+                    query: query
+                }, done.errfcb);
+            }
+
+            function success(response) {
+                res.redirect('/myolx/myadslisting');
+            }
+
+            function error(err) {
+                var errors;
+                var url = req.headers.referer;
+                var qIndex = url.indexOf('?');
+
+                if (!err.errCode) {
+                    errors = {
+                        errCode: 400,
+                        errField: [],
+                        errMsg: [],
+                    };
+
+                    err.forEach(function each(error) {
+                        errors.errField.push(error.selector);
+                        errors.errMsg.push(error.message);
+                    });
+                } else {
+                    errors = err;
+                }
+
+                if (qIndex != -1) {
+                    url = url.substring(0,qIndex);
+                }
+                res.redirect(url + '?' + querystring.stringify(errors));
+            }
+
+            asynquence().or(error)
+                .then(validate)
+                .then(remove)
+                .val(success);
         }
     })();
 
