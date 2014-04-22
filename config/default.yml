@@ -39,3 +39,7 @@ localization:
     - 'www.olx.com.ar'
     - 'www.olx.com.br'
   desktop: []
+
+interstitial:
+  clicks: 1
+  time: 10000

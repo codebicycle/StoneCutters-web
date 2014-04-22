@@ -75,6 +75,62 @@ module.exports = function(Handlebars) {
                 return path;
             }
             return typesHandler[type](path);
+        },
+        filter: function(filter, currentURL) {
+            var out = [];
+            var current;
+            var name = '-' + filter.name + '_';
+            var regExp = new RegExp(name + '-p-([0-9]+)', 'g');
+
+            currentURL = currentURL.replace(regExp, '-p-1');
+
+            function prepareURL(value, description) {
+                out.push('<a href="');
+                if (!~currentURL.indexOf(name)) {
+                    out.push(currentURL + name + value);
+                } else {
+                    regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
+                    out.push(currentURL.replace(regExp, name + value));
+                }
+                out.push('">' + description + '</a>');
+            }
+            
+            out.push('<div id="filter-' + filter.name + '">');
+            switch(filter.type) {
+                case 'SELECT':
+                    out.push('<h4>' + filter.description + '</h4>');
+                    out.push('<ul class="list-group">');
+                    _.each(filter.value, function outputSelectFilter(item) {
+                        out.push('<li class="list-group-item">');
+                        prepareURL(item.id, item.value);
+                        out.push('</li>');
+                    });
+                    out.push('</ul>');
+                    break;
+                case 'BOOLEAN':
+                    out.push('<div class="checkbox">');
+                    out.push(' <label for="filter-check-' + filter.name + '">');
+                    prepareURL(true, '<input id="filter-check-' + filter.name + '" type="checkbox"> ' + filter.description);
+                    out.push(' </label>');
+                    out.push('</div>');
+                    break;
+                case 'RANGE':
+                    out.push('<h4>' + filter.description + '</h4>');
+                    out.push('<form action="/nf/search/redirect" method="post" class="form-inline" role="form">');
+                    _.each(filter.value, function outputRangeFilter(item) {
+                        out.push('<input type="text" class="form-control" name="' + item.id + '_' + filter.name +'" placeholder="' + item.value + '" size="5">');
+                    });
+                    out.push('  <input type="hidden" class="hide" name="currentURL" value="' + currentURL + '">');
+                    out.push('  <input type="hidden" class="hide" name="name" value="' + filter.name + '">');
+                    out.push('  <button type="submit" class="btn btn-default">&gt;</button>');
+                    out.push(' </form>');
+                    out.push('</div>');
+                    break;
+                default:
+                    break;
+            }
+            out.push('</div>');
+            return out.join('');
         }
     };
 };

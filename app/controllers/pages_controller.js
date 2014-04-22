@@ -114,5 +114,12 @@ module.exports = {
             callback(err, result);
         });
         */
+    },
+    interstitial: function(params, callback) {
+        var app = helpers.environment.init(this.app);
+
+        callback(null, {
+            params: params
+        });
     }
 };

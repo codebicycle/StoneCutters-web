@@ -34,6 +34,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.languages());
+        rendrApp.use(middleware.interstitial());
 
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());

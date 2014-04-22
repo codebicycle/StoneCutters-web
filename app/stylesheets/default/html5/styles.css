@@ -50,7 +50,7 @@ section#newAds .swiper-containerAds, section#categories .swiper-containerCats , 
 header{width: 100%; height: 3rem; background: #fff; border-bottom: 1px solid #d1d1d1;}
 	header a.navLeft{width: .8rem; height: 2.5rem; float: left; margin: .25rem 0 0 0;}
 		header a.navLeft span{width: 100%; height: .4rem; float: left; margin: .33rem 0 0 0; background: #666;}
-	header .olxLogo{width: 40px; height: 40px; float: left; margin: .25rem .5rem 0 .5rem; background: url('../../images/logoOlx.png');}
+	header .olxLogo{width: 40px; height: 40px; float: left; margin: .25rem .5rem 0 .5rem; background: url(/images/logoOlx.png);}
 	header h1{display: block; margin: 0; color: #666; line-height: 3.2rem; font-size: 1.25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
 /*----Navigation----*/
