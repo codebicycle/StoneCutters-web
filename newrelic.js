@@ -1,4 +1,4 @@
-var config = require('./config').get('newrelic', {});
+var config = require('./server/config').get('newrelic', {});
 
 delete config.enabled;
 exports.config = config;
