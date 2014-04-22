@@ -4,7 +4,24 @@ module.exports = function(dataAdapter) {
 
     return function loader() {
         var asynquence = require('asynquence');
-        var defaultDictionaries = require('../defaultDictionaries');
+        var defaultDictionaries = {
+            1: {
+                'postAd_prefix': 'Make ',
+                'postAd_strong': 'easy money',
+                'postAd_suffix': ' by selling stuff you no longer need!',
+                'postAd_button': 'Post an Ad',
+                'newAds_prefix': 'New ads in ',
+                'categories_title': 'Popular Categories'
+            },
+            10: {
+                'postAd_prefix': 'Hace ',
+                'postAd_strong': 'dinero facil',
+                'postAd_suffix': ' vendiendo cosas que ya no necesites!',
+                'postAd_button': 'Publicar un Anuncio',
+                'newAds_prefix': 'Nuevos anuncios en ',
+                'categories_title': 'Categorias Populares'
+            }
+        };
 
         return function middleware(req, res, next) {
             var app = req.rendrApp;
@@ -47,7 +64,7 @@ module.exports = function(dataAdapter) {
 
                 // Waiting for SMAUG to implement this call so we need to use a fake callback function
                 function callback(err, response, _dictionary) {
-                    if (err) {
+                    if (err || !Object.keys(_dictionary).length) {
                         _dictionary = defaultDictionaries[selectedLanguage] || defaultDictionaries[1];
                     }
                     dictionary = _dictionary;
