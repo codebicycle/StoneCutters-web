@@ -12,12 +12,20 @@ module.exports = function(dataAdapter) {
             var url = '/interstitial';
             var app = req.rendrApp;
             var platform;
+            var platforms;
+            var paths;
             var downloadApp;
             var clicks;
             var currentClicks;
 
             platform = app.getSession('platform');
-            if (platform === 'wap' || req.path === url) {
+            platforms = config.get(['interstitial', 'ignorePlatform'], ['wap']);
+            if (_.contains(platforms, platform)) {
+                return next();
+            }
+
+            paths = config.get(['interstitial', 'ignorePath'], ['/health', '/stats', '/check', '/login', '/interstitial']);
+            if (_.contains(paths, req.path)) {
                 return next();
             }
 
