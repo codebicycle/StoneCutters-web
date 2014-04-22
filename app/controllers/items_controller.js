@@ -165,6 +165,7 @@ module.exports = {
             result.metadata = model.get('metadata');
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
+            result.location = app.getSession('location');
             preparePaginationLink(result.metadata, query, url);
             callback(err, result);
         });
@@ -172,6 +173,7 @@ module.exports = {
     show: function(params, callback) {
         var app = helpers.environment.init(this.app);
         var user = app.getSession('user');
+
         var spec = {
             item: {
                 model: 'Item',
@@ -182,11 +184,9 @@ module.exports = {
         if (user) {
             params.token = user.token;
         }
-
         params.id = params.itemId;
         delete params.itemId;
         delete params.title;
-
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {

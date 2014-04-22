@@ -1,14 +1,15 @@
 'use strict';
 
 var BaseApp = require('rendr/shared/app');
-var handlebarsHelpers = require('./lib/handlebarsHelpers');
-var customHandlebarsHelpers = require('./helpers').handlebars;
+var helpers = require('./helpers').nunjucks;
 
 /**
  * Extend the `BaseApp` class, adding any custom methods or overrides.
  */
 module.exports = BaseApp.extend({
-
+    defaults: {
+        templateAdapter: 'rendr-nunjucks'
+    },
     /**
      * Client and server.
      *
@@ -20,16 +21,7 @@ module.exports = BaseApp.extend({
      * app on both client and server.
      */
     initialize: function() {
-
-        /**
-         * Register our Handlebars helpers.
-         *
-         * `this.templateAdapter` is, by default, the `rendr-handlebars` module.
-         * It has a `registerHelpers` method, which allows us to register helper
-         * modules that can be used on both client & server.
-         */
-        this.templateAdapter.registerHelpers(handlebarsHelpers);
-        this.templateAdapter.registerHelpers(customHandlebarsHelpers);
+        this.templateAdapter.registerHelpers(helpers);
     },
 
     /**
@@ -42,8 +34,6 @@ module.exports = BaseApp.extend({
     * in order to do things like bind events to the router, as shown below.
     */
     start: function() {
-
-        // Show a loading indicator when the app is fetching.
         this.router.on('action:start', function onStart() {
             this.set({
                 loading: true
@@ -54,8 +44,6 @@ module.exports = BaseApp.extend({
                 loading: false
             });
         }, this);
-
-        // Call 'super'.
         BaseApp.prototype.start.call(this);
     },
 

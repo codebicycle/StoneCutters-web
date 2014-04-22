@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('clean', ['exec:removeTemplates', 'exec:removeAssets', 'exec:removeStyles']);
 
-    grunt.registerTask('build', ['handlebars', 'browserify', 'stylus']);
+    grunt.registerTask('build', ['nunjucks', 'browserify', 'stylus']);
 
     grunt.registerTask('rebuild', ['clean', 'build']);
 

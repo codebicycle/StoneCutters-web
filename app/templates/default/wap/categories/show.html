@@ -1,0 +1,15 @@
+{{ category.name }}
+{% include 'basic/location/select.html' %}
+{% include 'basic/post/home_select.html'%}
+{% include 'basic/partials/search.html' %}
+<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+	{% for subcategory in category.children %}
+		<tr>
+			<td style="border-top: solid thin #808080;">
+				<a style="display: block;" href="/items?categoryId={{ subcategory.id }}&location={{ params.location }}">
+					<small style="display: block;"><img border="0" alt="" src="" />{{ subcategory.trName }}</small>
+				</a>
+			</td>
+		</tr>
+	{% endfor %}
+</table>

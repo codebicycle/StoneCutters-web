@@ -3,10 +3,10 @@
 module.exports = function(dataAdapter) {
 
     return function loader() {
-        var localizedTemplates = require('../localizedTemplates');
+        var localization = require('../config').get('localization');
 
         function isLocalized(platform, siteLocation) {
-            return !!(~localizedTemplates[platform].indexOf(siteLocation));
+            return !!(~localization[platform].indexOf(siteLocation));
         }
 
         return function middleware(req, res, next) {

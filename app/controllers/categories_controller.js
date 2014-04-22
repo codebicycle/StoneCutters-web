@@ -24,8 +24,9 @@ module.exports = {
         category = app.getSession('categories')._byId[params.id];
 
         callback(null, {
-            'category': category,
-            'params': params,
+            category: category,
+            params: params,
+            location: app.getSession('location'),
             template: app.getSession('template')
         });
     }
