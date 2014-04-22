@@ -21,6 +21,16 @@ module.exports = BaseApp.extend({
      * app on both client and server.
      */
     initialize: function() {
+        var host = (function getHost(req) {
+            if (req) {
+                return req.headers.host;
+            }
+            return window.location.host;
+        })(this.req);
+        var index = host.indexOf(':');
+        var siteLocation = (index === -1) ? host : host.substring(0,index);
+
+        this.templateAdapter.init(siteLocation.replace('m','www'));
         this.templateAdapter.registerHelpers(helpers);
     },
 
