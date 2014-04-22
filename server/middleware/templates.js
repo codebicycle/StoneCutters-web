@@ -28,6 +28,7 @@ module.exports = function(dataAdapter) {
                     osName: device.osName,
                     osVersion: parseFloat(device.osVersion.replace('_','.'))
                 };
+                var directory = 'default';
                 var platform;
                 var template;
 
@@ -43,17 +44,17 @@ module.exports = function(dataAdapter) {
                     //}
                 }
                 if (isLocalized(platform, siteLocation)) {
-                    template = siteLocation + '/' + platform;
+                    directory = siteLocation;
                 }
-                else {
-                    template = 'default/' + platform;
-                }
+                template = directory + '/' + platform;
                 app.updateSession({
+                    directory: directory,
                     platform: platform,
                     template: template,
-                    marketing: marketing,
+                    marketing: marketing
                 });
                 app.req.app.locals({
+                    directory: directory,
                     platform: platform,
                     template: template,
                 });

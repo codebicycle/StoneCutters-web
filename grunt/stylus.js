@@ -19,12 +19,13 @@ module.exports = function(grunt) {
         var parts = subdir.split('/');
         var target = 'public/css/default/' + parts[0] + '/styles.css';
 
-        if (filename.split('.').pop() === 'styl') {
-            if (!files[target]) {
-                files[target] = {};
-            }
-            files[target][abspath] = abspath;
+        if (filename.split('.').pop() !== 'styl') {
+            return;
         }
+        if (!files[target]) {
+            files[target] = {};
+        }
+        files[target][abspath] = abspath;
     });
 
     for (platform in localization) {
@@ -47,6 +48,9 @@ module.exports = function(grunt) {
         }
         if (grunt.file.exists(dir)) {
             grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
+                if (filename.split('.').pop() !== 'styl') {
+                    return;
+                }
                 files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
             });
         }
