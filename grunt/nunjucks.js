@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             options: {
                 asFunction: true,
                 name: function(filename) {
-                    return filename.replace('app/templates/', '').replace('.html', '');
+                    return filename.replace('app/templates/', '');
                 }
             }
         }

@@ -1,8 +1,7 @@
 'use strict';
 
 var BaseApp = require('rendr/shared/app');
-var handlebarsHelpers = require('./lib/handlebarsHelpers');
-var customHandlebarsHelpers = require('./helpers').handlebars;
+var helpers = require('./helpers').handlebars;
 
 /**
  * Extend the `BaseApp` class, adding any custom methods or overrides.
@@ -30,8 +29,7 @@ module.exports = BaseApp.extend({
          * It has a `registerHelpers` method, which allows us to register helper
          * modules that can be used on both client & server.
          */
-        this.templateAdapter.registerHelpers(handlebarsHelpers);
-        this.templateAdapter.registerHelpers(customHandlebarsHelpers);
+        this.templateAdapter.registerHelpers(helpers);
     },
 
     /**
