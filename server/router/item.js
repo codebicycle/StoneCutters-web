@@ -70,6 +70,13 @@ module.exports = function(app, dataAdapter) {
             function validate(done, _item, _images) {
                 item = _item;
                 images = _images;
+                item.ipAddress = req.ip;
+
+                for (var key in item) {
+                    if (!key.indexOf('opt.') && !item[key]) {
+                        delete item[key];
+                    }
+                }
                 dataAdapter.post(req, '/items', {
                     query: {
                         intent: 'validate',
@@ -111,7 +118,9 @@ module.exports = function(app, dataAdapter) {
                 if (user) {
                     query.token = user.token;
                 }
-                item.images = _images;
+                if (_images && _images.length) {
+                    item.images = _images;
+                }
                 dataAdapter.post(req, '/items', {
                     query: query,
                     data: item
