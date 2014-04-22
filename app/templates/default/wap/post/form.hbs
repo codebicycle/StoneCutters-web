@@ -35,6 +35,12 @@
                         {{#getFieldTemplate ../../template}}
                             {{{partial fieldPath}}}
                         {{/getFieldTemplate}}
+                    {{else}}
+                        {{#ifC this.fieldType '==' 'text'}}
+                            {{#getFieldTemplate ../../../template}}
+                                {{{partial fieldPath}}}
+                            {{/getFieldTemplate}}
+                        {{/ifC}}
                     {{/if}}
                 {{/each}}
                 {{#each fields.contactInformation}}
