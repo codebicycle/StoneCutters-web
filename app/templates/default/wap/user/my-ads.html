@@ -1,0 +1,28 @@
+<h1>My Ads</h1>
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
+    <tbody>
+        {% for item in myAds %}
+            <tr>
+                <td style="border-top: solid thin #808080; text-align: left;">
+                    <a style="display: inline-block;" tabindex="1" href="/change-this-description-for-the-item-iid-{{item.id}}">
+                        <small style="display: block;">
+                            {% if item.thumbnail %}
+                                *
+                            {% endif %}
+                            {{item.title}} - {{item.price.displayPrice}}
+                        </small>
+                    </a>
+                </td>
+                <td style="border-top: solid thin #808080; text-align: right;">
+                    <a style="display: inline-block;" tabindex="1" href="/myolx/edititem/{{item.id}}">
+                        <small style="display: block;">Edit</small>
+                    </a>
+                    &#160;|&#160;
+                    <a style="display: inline-block;" tabindex="1" href="/myolx/deleteitem/{{item.id}}">
+                        <small style="display: block;">Delete</small>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

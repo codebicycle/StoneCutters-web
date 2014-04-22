@@ -243,4 +243,17 @@ module.exports = function(app, dataAdapter) {
         }
     })();
 
+    (function remove() {
+        app.get('/myolx/deleteitem/:itemId', handler);
+
+        function handler(req, res, next) {
+            var itemId = req.param('itemId', '');
+
+            if (!itemId) {
+                return res.redirect('/myolx/myadslisting');
+            }
+            res.redirect('/this-item-is-deleted-iid-' + itemId);
+        }
+    })();
+
 };
