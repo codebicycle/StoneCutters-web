@@ -205,12 +205,7 @@ module.exports = function(app, dataAdapter) {
 
         function handler(req, res) {
             var app = req.rendrApp;
-            var user = app.getSession('user');
-
-            console.log('\n············ LOGOUT ············');
-            console.log(' User -> ');
-            console.log(user);
-            console.log('············ LOGOUT ············\n');
+            
             app.updateSession({
                 user: null
             });
