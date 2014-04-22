@@ -2,7 +2,7 @@
 
 module.exports = function itemRouter(app, dataAdapter) {
     var asynquence = require('asynquence');
-    var configServer = require('../../config');
+    var configServer = require('../config');
     var configClient = require('../../app/config');
 
     (function health() {

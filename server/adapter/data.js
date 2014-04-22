@@ -1,12 +1,11 @@
 'use strict';
 
-var utils = require('../utils');
 var _ = require('underscore');
 var url = require('url');
 var restler = require('restler');
-var logger = require('../../logger')('adapter data');
+var logger = require('../logger')('adapter data');
 var util = require('util');
-var CONFIG = require('../../config').get('smaug', {});
+var CONFIG = require('../config').get('smaug', {});
 
 function DataAdapter(options) {
     this.options = options || {};
@@ -59,6 +58,13 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
         logger.error('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
         callback(err, res);
     }
+};
+
+DataAdapter.prototype._request = function(method, req, url, options, callback) {
+    this.request(req, {
+        method: method,
+        url: url
+    }, options, callback);
 };
 
 DataAdapter.prototype.post = function(req, url, options, callback) {
@@ -116,7 +122,7 @@ DataAdapter.prototype.getErrForResponse = function(res, options) {
     var status = Number(res.statusCode);
     var err;
 
-    if (utils.isErrorStatus(status, options)) {
+    if (isErrorStatus(status, options)) {
         err = new Error(status + " status");
         err.status = status;
         err.body = res.body;
@@ -133,9 +139,16 @@ function getElapsed(start, elapsed) {
     return '+' + (end - start) + 'ms';
 }
 
-DataAdapter.prototype._request = function(method, req, url, options, callback) {
-    this.request(req, {
-        method: method,
-        url: url
-    }, options, callback);
-};
+function isErrorStatus(statusCode, options) {
+    options = options || {};
+    _.defaults(options, {
+        allow4xx: false
+    });
+    statusCode = Number(statusCode);
+    if (options.allow4xx) {
+        return statusCode >= 500 && statusCode < 600;
+    }
+    else {
+        return statusCode >= 400 && statusCode < 600;
+    }
+}

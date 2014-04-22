@@ -1,4 +1,4 @@
-var config = require('../config');
+var config = require('./config');
 var formidable = require('formidable');
 var os = require('os');
 

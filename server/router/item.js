@@ -4,6 +4,7 @@ module.exports = function(app, dataAdapter) {
     var asynquence = require('asynquence');
     var formidable = require('../formidable');
     var querystring = require('querystring');
+
     var fs = require('fs');
 
     (function reply() {
@@ -204,14 +205,40 @@ module.exports = function(app, dataAdapter) {
     })();
 
     (function search() {
+        app.post('/search/redirect', handler);
         app.post('/nf/search/redirect', handler);
 
         function handler(req, res, next) {
+
+            function replaceParam(url, name, value) {
+                if (!~url.indexOf(name)) {
+                    url = url + '-' + name + value;
+                } else {
+                    var regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
+                    url = url.replace(regExp, name + value);
+                }
+                return url;
+            }
+
             formidable(req, function callback(err, data) {
-                if (!data.search) {
+                if (!data.search && !data.currentURL) {
                     return res.redirect(req.headers.referer);
                 }
-                res.redirect('/nf/search/' + data.search);
+                if (data.search) {
+                    res.redirect('/nf/search/' + data.search);
+                } else {
+                    var url;
+                    var from = data['from_' + data.name] || '';
+                    var to = data['to_' + data.name] || '';
+                    
+                    url = data.currentURL;
+                    if (!from.length && !to.length) {
+                        return res.redirect(url);
+                    }
+                    url = replaceParam(url, 'p' + '-', 1);
+                    url = replaceParam(url, data.name + '_', from + '_' + to);
+                    res.redirect(url);
+                }
             });
         }
     })();

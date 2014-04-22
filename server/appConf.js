@@ -6,11 +6,11 @@ module.exports = function appUseConf(done) {
     var rendr = require('rendr');
 
     var app = express();
-    var DataAdapter = require('./server/adapter/data');
+    var DataAdapter = require('./adapter/data');
     var dataAdapter = new DataAdapter({
         userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
     });
-    var middleware = require('./server/middleware')(dataAdapter);
+    var middleware = require('./middleware')(dataAdapter);
     var server = rendr.createServer({
         dataAdapter: dataAdapter
     });
@@ -19,7 +19,7 @@ module.exports = function appUseConf(done) {
     function expressConfiguration() {
         app.use(express.favicon());
         app.use(express.compress());
-        app.use(express.static(__dirname + '/public'));
+        app.use(express.static(__dirname + '/../public'));
         app.use(express.cookieParser());
         app.use(express.session({
             store: memcached,
@@ -34,6 +34,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.languages());
+        rendrApp.use(middleware.interstitial());
 
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());
@@ -43,6 +44,6 @@ module.exports = function appUseConf(done) {
     app.configure(expressConfiguration);
     server.configure(rendrConfiguration);
     app.use(server);
-    require('./server/router')(app, dataAdapter);
+    require('./router')(app, dataAdapter);
     done(app);
 };
