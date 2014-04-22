@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localizedTemplates = require('../server/localizedTemplates');
+    var localization = require('../server/config').get('localization');
     var stylus = {
         options: {
             'include css': true
@@ -27,8 +27,8 @@ module.exports = function(grunt) {
         }
     });
 
-    for (platform in localizedTemplates) {
-        localizedTemplates[platform].forEach(eachLocation);
+    for (platform in localization) {
+        localization[platform].forEach(eachLocation);
     }
     for (var target in files) {
         stylus.compile.files[target] = [];

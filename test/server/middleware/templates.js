@@ -10,7 +10,7 @@ var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
 var middleware = require('../../../server/middleware')(dataAdapter);
-var localizedTemplates = require('../../../server/localizedTemplates');
+var localization = require('../../../server/config').get('localization');
 var userAgents = {
     /*'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0': {
         platform: 'desktop',
@@ -165,7 +165,7 @@ describe('server', function test() {
                                 done();
                             }
                         });
-                        var locations = localizedTemplates[userAgents[userAgent].platform];
+                        var locations = localization[userAgents[userAgent].platform];
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
                                 it('should end with _' + location + ' if the host ends with .' + location, function test(done) {

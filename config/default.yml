@@ -31,3 +31,11 @@ formidable:
   keepExtensions: true
   multiples: true
   acceptFiles: false
+
+localization:
+  wap: []
+  html4: []
+  html5:
+    - 'www.olx.com.ar'
+    - 'www.olx.com.br'
+  desktop: []
