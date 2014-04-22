@@ -34,4 +34,4 @@ formidable:
 
 interstitial:
   clicks: 1
-  time: 10000
+  time: 600000

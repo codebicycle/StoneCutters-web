@@ -31,70 +31,90 @@ describe('server', function test() {
             var response;
             var sessions = {};
 
-            before(function before(done) {
-                app = express();
-                var server = rendr.createServer({
-                    dataAdapter: dataAdapter
-                });
+            describe('login', function test() {
+                before(function before(done) {
+                    app = express();
+                    var server = rendr.createServer({
+                        dataAdapter: dataAdapter
+                    });
 
-                function rendrConfiguration(rendrApp) {
-                    function after(req, res, next) {
-                        if (!sessions.before) {
-                            sessions.before = _.clone(req.rendrApp.getSession());
-                        } else {
-                            sessions.after = _.clone(req.rendrApp.getSession());
+                    function rendrConfiguration(rendrApp) {
+                        function after(req, res, next) {
+                            if (!sessions.before) {
+                                sessions.before = _.clone(req.rendrApp.getSession());
+                            } else {
+                                sessions.after = _.clone(req.rendrApp.getSession());
+                            }
+                            next();
                         }
-                        next();
+
+                        rendrApp.use(middleware.session());
+                        rendrApp.use(middleware.environment());
+                        rendrApp.use(middleware.templates());
+                        rendrApp.use(middleware.categories());
+                        rendrApp.use(middleware.location());
+                        rendrApp.use(middleware.languages());
+                        rendrApp.use(after);
                     }
 
-                    rendrApp.use(middleware.session());
-                    rendrApp.use(middleware.environment());
-                    rendrApp.use(middleware.templates());
-                    rendrApp.use(middleware.categories());
-                    rendrApp.use(middleware.location());
-                    rendrApp.use(middleware.languages());
-                    rendrApp.use(after);
-                }
+                    app.configure(expressConfiguration(app));
+                    server.configure(rendrConfiguration);
+                    app.use(server);
+                    require('../../../server/router')(app, dataAdapter);
+                    request(app)
+                        .post('/login')
+                        .send({
+                            usernameOrEmail: 'nicolas.molina@olx.com',
+                            password: 'Milo2004'
+                        })
+                        .set('host', hosts[0])
+                        .set('user-agent', userAgents[0])
+                        .end(end);
 
-                app.configure(expressConfiguration(app));
-                server.configure(rendrConfiguration);
-                app.use(server);
-                require('../../../server/router')(app, dataAdapter);
-                request(app)
-                    .post('/login')
-                    .send({
-                        usernameOrEmail: 'nicolas.molina@olx.com',
-                        password: 'Milo2004'
-                    })
-                    .set('host', hosts[0])
-                    .set('user-agent', userAgents[0])
-                    .end(end);
-
-                function end(err, res) {
-                    response = res;
+                    function end(err, res) {
+                        response = res;
+                        done();
+                    }
+                });
+                it('should not exists the user in the session', function test(done) {
+                    (function existance(before) {
+                        before.should.not.have.property('user');
+                    })(sessions.before);
                     done();
-                }
-            });
-            it('should not exists the user in the session', function test(done) {
-                (function existance(before) {
-                    before.should.not.have.property('user');
-                })(sessions.before);
-                done();
-            });
-            it('should be added the user to the session', function test(done) {
-                request(app)
-                    .get('/')
-                    .set('host', hosts[1])
-                    .set('user-agent', userAgents[0])
-                    .set('cookie', response.get('set-cookie'))
-                    .end(end);
+                });
+                it('should be added the user to the session', function test(done) {
+                    request(app)
+                        .get('/')
+                        .set('host', hosts[1])
+                        .set('user-agent', userAgents[0])
+                        .set('cookie', response.get('set-cookie'))
+                        .end(end);
 
-                function end(err, res) {
-                    (function existance(after) {
-                        after.should.have.property('user');
-                    })(sessions.after);
-                    done();
-                }
+                    function end(err, res) {
+                        (function existance(after) {
+                            after.should.have.property('user');
+                        })(sessions.after);
+                        done();
+                    }
+                });
+            });
+
+            describe('logout', function test() {
+                it('should not exists the user in the session', function test(done) {
+                    request(app)
+                        .get('/logout')
+                        .set('host', hosts[1])
+                        .set('user-agent', userAgents[0])
+                        .set('cookie', response.get('set-cookie'))
+                        .end(end);
+
+                    function end(err, res) {
+                        (function existance(after) {
+                            after.should.not.have.property('user');
+                        })(sessions.after);
+                        done();
+                    }
+                });
             });
         });
     });
