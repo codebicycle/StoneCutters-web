@@ -4,11 +4,15 @@ var config = require('../config');
 var helpers = require('../../app/helpers');
 var _ = require('underscore');
 
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
 
         return function interstitial(req, res, next) {
+            if (~excludedUrls.indexOf(req.path)) {
+                return next();
+            }
+
             var url = '/interstitial';
             var app = req.rendrApp;
             var platform;

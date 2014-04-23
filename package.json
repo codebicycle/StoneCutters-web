@@ -41,9 +41,8 @@
     "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks",
     "connect-memcached": "0.0.6",
     "underscore": "~1.6.0",
-    "request": "~2.34.0",
     "debug": "~0.7.4",
-    "newrelic": "~1.4.0",
+    "newrelic": "~1.5.1",
     "restler": "~3.2.0",
     "formidable": "~1.0.14",
     "graphite": "0.0.6"

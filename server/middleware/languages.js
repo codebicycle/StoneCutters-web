@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var asynquence = require('asynquence');
@@ -24,6 +24,10 @@ module.exports = function(dataAdapter) {
         };
 
         return function middleware(req, res, next) {
+            if (~excludedUrls.indexOf(req.path)) {
+                return next();
+            }
+
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
             var languages;

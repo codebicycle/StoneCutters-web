@@ -22,10 +22,6 @@ cluster:
 
 newrelic:
   enabled: false
-  app_name:
-    - 'OLX Mobile Arwen [Testing]'
-  license_key: 44a224263249b223e0106479ee8e5db378771508
-  level: trace
 
 graphite:
   enabled: false
@@ -56,3 +52,9 @@ interstitial:
     - /interstitial
   ignorePlatform:
     - wap
+
+middleware:
+  exclude:
+    - /health
+    - /stats
+    - /check
