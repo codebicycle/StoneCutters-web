@@ -2,57 +2,93 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localization = require('../server/config').get('localization');
+    var config = require('../server/config');
+    var localization = config.get('localization');
+    var environments = config.get('stylus');
     var stylus = {
         options: {
             'include css': true
         },
-        compile: {
-            files: {}
+        development: {
+            files: {},
+            options: {
+                define: {
+                    staticUrl: '',
+                    imageUrl: ''
+                }
+            }
         }
     };
-    var files = {};
-    var file;
-    var platform;
+    var environment;
 
-    grunt.file.recurse('app/stylesheets/default', function callback(abspath, rootdir, subdir, filename) {
-        var parts = subdir.split('/');
-        var target = 'public/css/default/' + parts[0] + '/styles.css';
-
-        if (filename.split('.').pop() !== 'styl') {
-            return;
-        }
-        if (!files[target]) {
-            files[target] = {};
-        }
-        files[target][abspath] = abspath;
-    });
-
-    for (platform in localization) {
-        localization[platform].forEach(eachLocation);
-    }
-    for (var target in files) {
-        stylus.compile.files[target] = [];
-        for (file in files[target]) {
-            stylus.compile.files[target].unshift(files[target][file]);
-        }
-    }
-
-    function eachLocation(location) {
-        var dir = 'app/stylesheets/' + location + '/' + platform;
-        var defaultTarget = 'public/css/default/' + platform + '/styles.css';
-
-        target = 'public/css/' + location + '/' + platform + '/styles.css';
-        if (!files[target]) {
-            files[target] = _.clone(files[defaultTarget]);
-        }
-        if (grunt.file.exists(dir)) {
-            grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
-                if (filename.split('.').pop() !== 'styl') {
-                    return;
+    getFiles('development');
+    for (environment in environments) {
+        stylus[environment] = {
+            files: {},
+            options: {
+                define: {
+                    staticUrl: environments[environment].urls.static,
+                    imageUrl: environments[environment].urls.image
                 }
-                files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
-            });
+            }
+        };
+        getFiles(environment);
+    }
+
+    function getFiles(environment) {
+        var files = {};
+        var file;
+        var platform;
+
+        grunt.file.recurse('app/stylesheets/default', function callback(abspath, rootdir, subdir, filename) {
+            var parts = subdir.split('/');
+            var target = 'public/css/default/' + parts[0] + '/styles';
+
+            if (environment !== 'development') {
+                target += '-' + environment;
+            }
+            target += '.css';
+            if (filename.split('.').pop() !== 'styl') {
+                return;
+            }
+            if (!files[target]) {
+                files[target] = {};
+            }
+            files[target][abspath] = abspath;
+        });
+
+        for (platform in localization) {
+            localization[platform].forEach(eachLocation);
+        }
+        for (var target in files) {
+            stylus[environment].files[target] = [];
+            for (file in files[target]) {
+                stylus[environment].files[target].unshift(files[target][file]);
+            }
+        }
+
+        function eachLocation(location) {
+            var dir = 'app/stylesheets/' + location + '/' + platform;
+            var defaultTarget = 'public/css/default/' + platform + '/styles';
+            var target = 'public/css/' + location + '/' + platform + '/styles';
+
+            if (environment !== 'development') {
+                defaultTarget += '-' + environment;
+                target += '-' + environment;
+            }
+            defaultTarget += '.css';
+            target += '.css';
+            if (!files[target]) {
+                files[target] = _.clone(files[defaultTarget]);
+            }
+            if (grunt.file.exists(dir)) {
+                grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
+                    if (filename.split('.').pop() !== 'styl') {
+                        return;
+                    }
+                    files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
+                });
+            }
         }
     }
 
