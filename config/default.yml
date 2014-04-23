@@ -43,7 +43,7 @@ localization:
     - 'www.olx.in'
 
 interstitial:
-  enabled: true
+  enabled: false
   clicks: 1
   time: 600000
   ignorePath:
@@ -60,3 +60,17 @@ middleware:
     - /health
     - /stats
     - /check
+
+stylus:
+  testing:
+    urls:
+      static: 'http://static-testing.olx-st.com'
+      image: 'http://images-testing.olx-st.com'
+  staging:
+    urls:
+      static: 'http://static-staging.olx-st.com'
+      image: 'http://images-staging.olx-st.com'
+  production:
+    urls:
+      static: 'http://static01.olx-st.com'
+      image: 'http://images01.olx-st.com'

@@ -9,7 +9,7 @@ module.exports = function(nunjucks) {
             return JSON.stringify(json);
         },
         static: function(path, key, value) {
-            var env = config.get(['environment', 'type'], 't');
+            var env = config.get(['environment', 'type'], 'development');
             var type;
             var handler;
 
@@ -17,6 +17,7 @@ module.exports = function(nunjucks) {
                 var ext = path.substr(path.lastIndexOf('.') + 1);
                 var defaults = ['css', 'js'];
                 var accept = config.get('staticAccept', defaults);
+
                 if (_.indexOf(accept, ext) >= 0) {
                     return 'static';
                 }
@@ -31,27 +32,29 @@ module.exports = function(nunjucks) {
             var typesHandler = {
                 static: function(filePath) {
                     var baseNumber = '0' + ((filePath.length % 4) + 1);
-                    if (env !== 'd') {
+
+                    if (env !== 'development') {
                         var pointIndex = path.lastIndexOf('.');
                         var ext = path.substr(pointIndex + 1);
                         var fileName = path.substr(0, pointIndex);
                         var revision = config.get(['deploy', 'revision'], '0');
+
                         filePath = (fileName + '-' + revision + '.' + ext);
-                        if (ext === 'css' && (env === 't' || env === 's')) {
-                            var sEnv = (env == 't' ? 'testing' : 'staging');
-                            filePath = (fileName + '-' + sEnv + '-' + revision + '.' + ext);
+                        if (ext === 'css') {
+                            filePath = (fileName + '-' + env + '-' + revision + '.' + ext);
                         }
                     }
                     var envPath = config.get(['environment', 'staticPath'], '');
 
-                    if (env === 'p') {
+                    if (env === 'production') {
                         return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
                     }
                     return envPath + filePath;
                 },
                 image: function(filePath) {
                     var envPath = config.get(['environment', 'imagePath'], '');
-                    if (env === 'p') {
+
+                    if (env === 'production') {
                         var baseNumber = '0' + ((filePath.length() % 4) + 1);
                         return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
                     }
@@ -86,7 +89,7 @@ module.exports = function(nunjucks) {
                 }
                 out.push('">' + description + '</a>');
             }
-            
+
             out.push('<div id="filter-' + filter.name + '">');
             switch(filter.type) {
                 case 'SELECT':
