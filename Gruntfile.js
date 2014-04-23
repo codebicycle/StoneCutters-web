@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('log', function log() {
         grunt.util.spawn({
-            cmd: 'node',
+            cmd: 'npm',
             args: ['run-script', 'debug'],
             opts: {
                 stdio: 'inherit'
