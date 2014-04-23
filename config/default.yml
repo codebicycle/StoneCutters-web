@@ -33,11 +33,14 @@ formidable:
   acceptFiles: false
 
 localization:
-  wap: []
-  html4: []
+  wap:
+    - 'www.olx.in'
+  html4:
+    - 'www.olx.in'
   html5:
     - 'www.olx.in'
-  desktop: []
+  desktop:
+    - 'www.olx.in'
 
 interstitial:
   enabled: true
