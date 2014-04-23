@@ -24,36 +24,28 @@
                     <br>
                     <input type="file" style="font-size: small" name="images[1]">
                 </label>
-                {{#each fields.productDescription}}
-                    {{#getFieldTemplate ../template}}
-                        {{{partial fieldPath}}}
-                        <br style="display: none;" />
-                    {{/getFieldTemplate}}
-                {{/each}}
-                {{#each fields.categoryAttributes}}
-                    {{#if this.values}}
-                        {{#getFieldTemplate ../../template}}
-                            {{{partial fieldPath}}}
-                        {{/getFieldTemplate}}
-                    {{else}}
-                        {{#ifC this.fieldType '==' 'text'}}
-                            {{#getFieldTemplate ../../../template}}
-                                {{{partial fieldPath}}}
-                            {{/getFieldTemplate}}
-                        {{/ifC}}
-                    {{/if}}
-                {{/each}}
-                {{#each fields.contactInformation}}
-                    {{#getFieldTemplate ../template}}
-                        {{{partial fieldPath}}}
-                    {{/getFieldTemplate}}
-                {{/each}}
-                {{#each errField}}
-                    <small style="display: block; color: red;">{{this}}</small>
-                {{/each}}
-                {{#each errMsg}}
-                    <small style="display: block; color: red;">{{this}}</small>
-                {{/each}}
+                {% for context in fields.productDescription %}
+                    {% set templateName = template + '/fields/' + context.fieldType + '.html' %}
+                    {% include templateName %}
+                    <br style="display: none;" />
+                {% endfor %}
+                {% for context in fields.categoryAttributes %}
+                    {% if (context.values) or (context.fieldType == 'text') %}
+                        {% set templateName = template + '/fields/' + context.fieldType + '.html' %}
+                        {% include templateName %}
+                    {% endif %}
+                {% endfor %}
+                {% for context in fields.contactInformation %}
+                    {% set templateName = template + '/fields/' + context.fieldType + '.html' %}
+                    {% include templateName %}
+                {% endfor %}
+
+                {% for err in errField %}
+                    <small style="display: block; color: red;">{{err}}</small>
+                {% endfor %}
+                {% for err in errMsg %}
+                    <small style="display: block; color: red;">{{err}}</small>
+                {% endfor %}
                 <input type="hidden" name="postingSession" value="{{postingSession}}">
                 <input type="hidden" name="location" value="{{location}}">
                 <input type="hidden" name="languageId" value="{{language}}">

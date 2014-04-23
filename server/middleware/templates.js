@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var localization = require('../config').get('localization');
@@ -10,6 +10,10 @@ module.exports = function(dataAdapter) {
         }
 
         return function middleware(req, res, next) {
+            if (~excludedUrls.indexOf(req.path)) {
+                return next();
+            }
+
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
             var userAgent = req.get('user-agent');
@@ -28,6 +32,7 @@ module.exports = function(dataAdapter) {
                     osName: device.osName,
                     osVersion: parseFloat(device.osVersion.replace('_','.'))
                 };
+                var directory = 'default';
                 var platform;
                 var template;
 
@@ -43,17 +48,17 @@ module.exports = function(dataAdapter) {
                     //}
                 }
                 if (isLocalized(platform, siteLocation)) {
-                    template = siteLocation + '/' + platform;
+                    directory = siteLocation;
                 }
-                else {
-                    template = 'default/' + platform;
-                }
+                template = directory + '/' + platform;
                 app.updateSession({
+                    directory: directory,
                     platform: platform,
                     template: template,
-                    marketing: marketing,
+                    marketing: marketing
                 });
                 app.req.app.locals({
+                    directory: directory,
                     platform: platform,
                     template: template,
                 });

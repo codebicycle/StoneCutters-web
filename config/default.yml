@@ -22,10 +22,6 @@ cluster:
 
 newrelic:
   enabled: false
-  app_name:
-    - 'OLX Mobile Arwen [Testing]'
-  license_key: 44a224263249b223e0106479ee8e5db378771508
-  level: trace
 
 graphite:
   enabled: false
@@ -37,13 +33,30 @@ formidable:
   acceptFiles: false
 
 localization:
-  wap: []
-  html4: []
+  wap:
+    - 'www.olx.in'
+  html4:
+    - 'www.olx.in'
   html5:
-    - 'www.olx.com.ar'
-    - 'www.olx.com.br'
-  desktop: []
+    - 'www.olx.in'
+  desktop:
+    - 'www.olx.in'
 
 interstitial:
+  enabled: true
   clicks: 1
   time: 600000
+  ignorePath:
+    - /health
+    - /stats
+    - /check
+    - /login
+    - /interstitial
+  ignorePlatform:
+    - wap
+
+middleware:
+  exclude:
+    - /health
+    - /stats
+    - /check

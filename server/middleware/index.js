@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 
-module.exports = function middleware(dataAdapter) {
+module.exports = function middleware(dataAdapter, excludedUrls) {
     var middlewares = {};
 
     fs.readdirSync(__dirname).forEach(function(filename) {
@@ -12,7 +12,7 @@ module.exports = function middleware(dataAdapter) {
             return;
         }
         middlewares.__defineGetter__(name, function load() {
-            return require('./' + name)(dataAdapter);
+            return require('./' + name)(dataAdapter, excludedUrls);
         });
     });
     return middlewares;

@@ -5,11 +5,15 @@
 * This means that from either the client or server, you can access the session
 * data from models, views, and controllers like `this.app.get('session')`.
 */
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
 
         return function middleware(req, res, next) {
+            if (~excludedUrls.indexOf(req.path)) {
+                return next();
+            }
+
             var app = req.rendrApp;
             var session = req.session;
 

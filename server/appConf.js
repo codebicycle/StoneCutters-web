@@ -10,7 +10,7 @@ module.exports = function appUseConf(done) {
     var dataAdapter = new DataAdapter({
         userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
     });
-    var middleware = require('./middleware')(dataAdapter);
+    var middleware = require('./middleware')(dataAdapter, config.get(['middleware', 'exclude'], []));
     var server = rendr.createServer({
         dataAdapter: dataAdapter
     });
@@ -34,7 +34,9 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.languages());
-        rendrApp.use(middleware.interstitial());
+        if (config.get(['interstitial', 'enabled'], false)) {
+            rendrApp.use(middleware.interstitial());
+        }
 
         //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());
