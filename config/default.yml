@@ -45,7 +45,7 @@ localization:
   desktop: []
 
 interstitial:
-  enabled: true
+  enabled: false
   clicks: 1
   time: 600000
   ignorePath:
@@ -54,5 +54,15 @@ interstitial:
     - /check
     - /login
     - /interstitial
+    - /force
+    - /force/wap
+    - /force/html4
+    - /force/html5
+    - /force/desktop
+    - /404
+    - /500
   ignorePlatform:
     - wap
+
+error:
+  detail: true

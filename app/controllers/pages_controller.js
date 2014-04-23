@@ -121,5 +121,26 @@ module.exports = {
         callback(null, {
             params: params
         });
+    },
+    404: function(params, callback) {
+        var app = helpers.environment.init(this.app);
+
+        callback(null, {
+            params: params
+        });
+    },
+    500: function(params, callback) {
+        var app = helpers.environment.init(this.app);
+        var err = app.getSession('error');
+            
+        if (err) {
+            app.updateSession({
+                error: null
+            });
+        }
+        callback(null, {
+            params: params,
+            error: err
+        });
     }
 };

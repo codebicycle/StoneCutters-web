@@ -12,7 +12,8 @@ module.exports = function appUseConf(done) {
     });
     var middleware = require('./middleware')(dataAdapter);
     var server = rendr.createServer({
-        dataAdapter: dataAdapter
+        dataAdapter: dataAdapter,
+        errorHandler: require('./errorHandler')()
     });
     var memcached = require('./memcached')(express);
 

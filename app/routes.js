@@ -29,4 +29,7 @@ module.exports = function(match) {
     match(':title-cat-:catId(\\d+$)', 'categories#show');
     match(':title-cat-:catId(\\d+)-p-:page(\\d+$)', 'items#index');
     match(':title-cat-:catId(\\d+)-p-:page(\\d+)/:filters?', 'items#index');
+
+    match('404', 'pages#404');
+    match('500', 'pages#500');
 };
