@@ -21,6 +21,9 @@ module.exports = function(grunt) {
         tests: {
             files: ['test/**/*.js'],
             tasks: ['jshint:tests']
+        },
+        dist: {
+            files: ['dist/index.js']
         }
     };
 };
