@@ -1,0 +1,62 @@
+header {
+	height: 48px;
+	padding: 0 .8rem;
+	position: relative;
+	background: #4275BA;
+}
+header > h1 {
+	float: left;
+	padding: 0 .2rem;
+	position: relative;
+	z-index: 10;
+}
+header > h1 > a{
+	width: 94px;
+	height: 48px;
+	display: block;
+	background: url('/images/html5/logoMenu.png');
+	text-indent: -9000px;
+}
+header > ul {
+	width: auto;
+	height: auto;
+	position: absolute;
+	right: .5rem;
+	top: .4rem;
+	z-index: 1;
+}
+header > ul > li {
+	width: auto;
+	float: left;
+	margin: 0 0 0 .8rem;
+	display: inline-block;
+}
+header > ul > li > span, header > ul > li > a{
+	height: 1.2rem;
+	display: inline-block;
+	padding: 0.45rem 0.75rem;
+	border-radius: 5px;
+	font-size: 1.15rem;
+	line-height: 1.15rem;
+	font-weight: bold;
+	color: #fff;
+} 
+header > ul > li.logOut a, header > ul > li.logIn span, header > ul > li.logInMsg span {
+	width: 10px;
+	border: 1px solid #2C4B77;
+	background-color: #355E97;
+}
+header > ul > li.logOut a {
+	background-image: url('/images/html5/userLogOut.png'); 
+}
+header > ul > li.logIn span {
+	background-image: url('/images/html5/userLogIn.png'); 
+}
+header > ul > li.logInMsg span {
+	background-image: url('/images/html5/userLogInMsg.png'); 
+}
+header > ul > li.postBtn a{
+	background: #E2771C;
+	border: 1px solid #C44D13;
+	text-transform: uppercase;
+}
