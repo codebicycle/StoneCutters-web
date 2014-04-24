@@ -1,6 +1,12 @@
 'use strict';
 
 module.exports = function(grunt) {
+    var files = ['app/**/*', '!app/config/default.js', 'server/**/*', 'index.js', 'build.json', 'newrelic.js', 'package.json'];
+    var dependencies = grunt.file.readJSON('package.json').dependencies;
+
+    for(var module in dependencies) {
+        files.push('node_modules/' + module + '/**/*');
+    }
     return {
         options: {
             url: 'http://jfrog.olx.com.ar',
@@ -10,7 +16,7 @@ module.exports = function(grunt) {
         },
         dynamic: {
             files: [{
-                src: ['app/**/*', '!app/config/default.js', 'node_modules/**/*', 'server/**/*', 'index.js', 'build.json', 'newrelic.js', 'start.sh', 'package.json'],
+                src: files,
             }],
             options: {
                 publish: [{
