@@ -8,9 +8,9 @@ module.exports = function(grunt) {
             username: 'mobile-jenkins',
             password: 'm0b1l30lx',
         },
-        'dynamic': {
+        dynamic: {
             files: [{
-                src: ['app/**/*', '!app/config/default.js', 'node_modules/**/*', 'server/**/*', 'index.js', 'build.json', 'newrelic.js'],
+                src: ['app/**/*', '!app/config/default.js', 'node_modules/**/*', 'server/**/*', 'index.js', 'build.json', 'newrelic.js', 'start.sh', 'package.json'],
             }],
             options: {
                 publish: [{

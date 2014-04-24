@@ -10,7 +10,7 @@ module.exports = function appUseConf(done) {
     var dataAdapter = new DataAdapter({
         userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
     });
-    var middleware = require('./middleware')(dataAdapter);
+    var middleware = require('./middleware')(dataAdapter, config.get(['middleware', 'exclude'], []));
     var server = rendr.createServer({
         dataAdapter: dataAdapter,
         errorHandler: require('./errorHandler')()

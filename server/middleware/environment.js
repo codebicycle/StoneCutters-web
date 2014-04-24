@@ -3,11 +3,15 @@
 var config = require('../../app/config');
 var analyticsHelper = require('../../app/helpers/analytics');
 
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
 
         return function environment(req, res, next) {
+            if (~excludedUrls.indexOf(req.path)) {
+                return next();
+            }
+
             var app = req.rendrApp;
             var host = req.headers.host;
             var path = req._parsedUrl.pathname;
