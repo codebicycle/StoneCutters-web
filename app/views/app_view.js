@@ -30,7 +30,7 @@ module.exports = BaseAppView.extend({
         $('#overlay').fadeToggle();
         $('body').toggleClass('noscroll');
     },
-    toggleSearch: function(event){
+    toggleSearch: function(event) {
         if (event) {
             event.preventDefault();
         }

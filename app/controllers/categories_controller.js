@@ -17,6 +17,10 @@ module.exports = {
         var app = helpers.environment.init(this.app);
         var category;
 
+        helpers.seo.resetHead();
+        helpers.seo.addMetatag('title', 'Listing');
+        helpers.seo.addMetatag('Description', 'This is a listing page');
+
         params.id = params.catId;
         delete params.catId;
         delete params.title;
