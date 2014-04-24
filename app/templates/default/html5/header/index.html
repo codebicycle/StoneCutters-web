@@ -2,14 +2,17 @@
     <div class="env">You are now in <strong>{{blackBar.env}} ({{blackBar.platform}} v. {{blackBar.version}} :: {{blackBar.revision}})</strong> environment.</div>
 {% endif %}
 <header>
-    <a href="#" class="navLeft">
-        <span></span>
-        <span></span>
-        <span></span>
-    </a>
-    <a href="/"><div class="olxLogo"></div></a>
-    <h1></h1>
-    <div class="search">
+
+    <h1><a href="/">OLX.com</a></h1>
+    <ul>
+        {% if user %}
+            <li class="logIn"><span></span></li>
+        {% else %}
+            <li class="logOut"><a href="/register"></a></li>
+        {% endif %}
+        <li class="postBtn"><a href="/posting">PUBLICAR</a></li>
+    </ul>
+    <!--div class="search">
         <form action="/nf/search/redirect" class="search-form" method="post" >
             <input type="text" class="search-input" name="search" value="" placeholder="¿Qué estás buscando?">
             <button type="submit" class="search-button">
@@ -17,5 +20,5 @@
                 <span class="search-label"></span>
             </button>
         </form>
-    </div>
+    </div-->
 </header>
