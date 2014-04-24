@@ -1,17 +1,14 @@
 <!doctype html>
 <html>
-    <head>
-        {% set templateName = template + '/partials/head.html' %}
-        {% include templateName %}
-    </head>
+    {% view 'layout/head' %}
     <body>
 
-        {% set templateName = template + '/header/index.html' %}
-        {% include templateName %}
+        {% view 'header/index' %}
         {% set templateName = template + '/location/select.html' %}
         {% include templateName %}
         {% set templateName = template + '/partials/search.html' %}
         {% include templateName %}
+
         <article>
             {% set templateName = template + '/left-panel/index.html' %}
             {% include templateName %}
@@ -21,13 +18,12 @@
                 {% include templateName %}
             </div>
         </article>
-        
         <script src="/js/app/libs.js"></script>
         <script src="/js/app/{{directory}}/app.js"></script>
         <script>
             (function() {
-                var App = window.App = new (require('app/app'))({{appData | json}});
-                App.bootstrapData({{bootstrappedData | json}});
+                var App = window.App = new (require('app/app'))({% json appData %});
+                App.bootstrapData({% json bootstrappedData %});
                 App.start();
             })();
         </script>

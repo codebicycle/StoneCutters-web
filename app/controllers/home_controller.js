@@ -10,6 +10,10 @@ module.exports = {
         if (params.cityId) {
             helpers.environment.updateCity(app, params.cityId);
         }
+        helpers.seo.resetHead();
+        helpers.seo.addMetatag('title', 'Home');
+        helpers.seo.addMetatag('Description', 'This is the home page');
+        helpers.seo.addMetatag('robots', 'NOFOLLOW');
 
         (function fetchWhatsNew() {
             var siteLocation = app.getSession('siteLocation');

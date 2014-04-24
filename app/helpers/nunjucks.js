@@ -5,9 +5,6 @@ var _ = require('underscore');
 
 module.exports = function(nunjucks) {
     return {
-        json: function(json) {
-            return JSON.stringify(json);
-        },
         static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 'development');
             var type;
