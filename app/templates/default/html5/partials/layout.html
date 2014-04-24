@@ -8,6 +8,10 @@
 
         {% set templateName = template + '/header/index.html' %}
         {% include templateName %}
+        {% set templateName = template + '/location/select.html' %}
+        {% include templateName %}
+        {% set templateName = template + '/partials/search.html' %}
+        {% include templateName %}
         <article>
             {% set templateName = template + '/left-panel/index.html' %}
             {% include templateName %}
