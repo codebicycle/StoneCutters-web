@@ -43,7 +43,7 @@ localization:
     - 'www.olx.in'
 
 interstitial:
-  enabled: true
+  enabled: false
   clicks: 1
   time: 600000
   ignorePath:

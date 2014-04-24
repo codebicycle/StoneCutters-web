@@ -32,6 +32,7 @@ module.exports = {
                 }
             }
         };
+        var query = _.clone(params);
 
         _.extend(spec.myAds.params, params, {
             location: siteLocation,
@@ -58,6 +59,7 @@ module.exports = {
             result.myAdsMetadata = myAds.get('metadata');
             result.myAds = myAds.get('data');
             result.siteLocation = siteLocation;
+            result.params = query;
             _.each(result.myAds, processItem);
             callback(err, result);
         });
