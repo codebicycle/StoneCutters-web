@@ -27,6 +27,18 @@ module.exports = function(grunt) {
         });
     });
 
+    grunt.registerTask('startDist', function log() {
+        grunt.util.spawn({
+            cmd: './dist/start.sh',
+            args: [grunt.option('environment') || 'testing'],
+            opts: {
+                stdio: 'inherit'
+            }
+        }, function error(err) {
+            grunt.fail.fatal(err.stack);
+        });
+    });
+
     grunt.registerTask('clean', ['exec:removeTemplates', 'exec:removeAssets', 'exec:removeStyles']);
 
     grunt.registerTask('build', ['nunjucks', 'browserify', 'stylus']);
@@ -38,6 +50,8 @@ module.exports = function(grunt) {
     grunt.registerTask('start', ['rebuild', 'jshint:node', 'develop', 'watch']);
 
     grunt.registerTask('debug', ['rebuild', 'jshint:node', 'log', 'watch']);
+
+    grunt.registerTask('pipetest', ['exec:removeDist', 'rebuild', 'copy:dynamic', 'gitclone', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'startDist', 'watch:dist']);
 
     grunt.registerTask('pipeline', ['rebuild', 'artifactory:static:publish', 'artifactory:dynamic:publish']);
 

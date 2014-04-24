@@ -5,6 +5,9 @@ module.exports = function(grunt) {
         anonymousFunctions: '! grep -e "[^:= ][ ]*function()" app/collections/** app/controllers/** app/helpers/** app/models/** app/templates/** app/views/**/** server/**/** app/**',
         removeTemplates: 'rm -rf app/templates/compiled',
         removeAssets: 'rm -rf public/js/app',
-        removeStyles: 'rm -rf public/css'
+        removeStyles: 'rm -rf public/css',
+        removeDist: 'rm -rf dist',
+        removeDistGit: 'rm -rf dist/git',
+        chmodDistStart: 'chmod 777 dist/start.sh'
     };
 };
