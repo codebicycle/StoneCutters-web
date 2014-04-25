@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo 'Starting ARWEN on DEVELOP'
-grunt debug
+echo 'Starting ARWEN'
+DEBUG=arwen:server* node index.js
