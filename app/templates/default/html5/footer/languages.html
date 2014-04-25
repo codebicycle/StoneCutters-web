@@ -1,0 +1,11 @@
+<footer id="languages">
+	<ul>
+		{% for language in languages.models %}
+			{% if language.id == selectedLanguage %}
+				<li><strong>{{language.name}}</strong></li>
+			{% else %}
+				<li><a href="?language={{language.id}}">{{language.name}}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</footer>

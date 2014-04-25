@@ -1,4 +1,17 @@
-<section id="postAd">
+<section id="categories">
+	<ul>
+		
+		{% for category in categories.models %}
+			<li>
+				<a href="/change-this-description-for-the-category-cat-{{category.id}}?location={{siteLocation}}" >
+					<span class="home-icon" id="catid-{{category.id}}"></span>
+			        {{category.trName}}
+		        </a>
+		    </li>
+		{% endfor %}
+	</ul>
+</section>
+<!--section id="postAd">
 	<div>
 		<h1>{{dictionary.postAd_prefix}}<strong>{{dictionary.postAd_strong}}</strong>{{dictionary.postAd_suffix}}</h1>
 		<a href="/posting">{{dictionary.postAd_button}}</a>
@@ -23,26 +36,9 @@
 	</div>
 </section>
 
-<section id="categories">
-	<h2>{{dictionary.categories_title}}</h2>
-	<div class="swiper-containerCats">	
-		<div class="swiper-wrapper">
-			{% for category in categories.models %}
-				<div class="swiper-slide"> 
-					<a href="/change-this-description-for-the-category-cat-{{category.id}}?location={{siteLocation}}" >
-						<div class="slide">
-				          <div class="home-{{category.id}} color">
-				          	<p>{{category.trName}}</p>
-				          </div>
-				        </div>
-			        </a>
-				</div>
-			{% endfor %}
-		</div>
-	</div>
-</section>
+
 
 <section id="languages">
     {% set templateName = template + '/partials/languages.html' %}
     {% include templateName %}
-</section>
+</section-->
