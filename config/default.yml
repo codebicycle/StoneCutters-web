@@ -1,4 +1,6 @@
 # Default config
+environment: development
+
 server:
   port: 3030
 
