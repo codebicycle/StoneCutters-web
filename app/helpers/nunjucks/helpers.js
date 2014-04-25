@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config');
+var config = require('../../config');
 var _ = require('underscore');
 
 module.exports = function(nunjucks) {

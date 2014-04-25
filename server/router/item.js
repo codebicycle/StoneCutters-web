@@ -182,13 +182,13 @@ module.exports = function(app, dataAdapter) {
             function add(done) {
                 var user = req.rendrApp.getSession('user') || {};
                 var languages = req.rendrApp.getSession('languages');
-                var languageId = req.rendrApp.getSession('selectedLanguage');
+                var selectedLanguage = req.rendrApp.getSession('selectedLanguage');
 
                 dataAdapter.post(req, '/users/' + user.userId + '/favorites/' + itemId + (intent ? '/' + intent : ''), {
                     query: {
                         token: user.token,
-                        languageId: languageId,
-                        languageCode: languages._byId[languageId].isocode.toLowerCase()
+                        languageId: languages._byId[selectedLanguage].id,
+                        languageCode: selectedLanguage
                     }
                 }, done.errfcb);
             }
@@ -239,7 +239,7 @@ module.exports = function(app, dataAdapter) {
                     var url;
                     var from = data['from_' + data.name] || '';
                     var to = data['to_' + data.name] || '';
-                    
+
                     url = data.currentURL;
                     if (!from.length && !to.length) {
                         return res.redirect(url);
