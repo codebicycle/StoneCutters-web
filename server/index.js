@@ -5,7 +5,7 @@ module.exports = function() {
     var asynquence = require('asynquence');
     var app = asynquence().or(uncaughtError);
     var logger = require('./logger')('server');
-    process.env.NODE_ENV=config.get('environment');
+    process.env.NODE_ENV = config.get('environment');
 
     function uncaughtError(error) {
         var log = '%j';
