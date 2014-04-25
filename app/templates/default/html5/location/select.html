@@ -1,6 +1,13 @@
 <!--strong>{{location.name}}{% if location.city %} > {{location.city.name}} {% endif %}</strong>
 <a href="location">{% if location.city %}Change city {% else %} Select a city {% endif %}</a-->
 <header id="location">
-	<p>San Juan <a href="/location">Cambiar Ciudad</a></p>
+	<p>
+		{% if location.city %}
+			{{location.city}} <a href="/location">Cambiar Ciudad</a></p>
+		{% else %}
+			{{location.name}} <a href="/location">Seleccionar Ciudad</a></p>
+		{% endif %} 
+
+		
 
 </header>
