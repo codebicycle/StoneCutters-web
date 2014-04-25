@@ -13,7 +13,8 @@ module.exports = function categoriesHelper(){
 
         if(category){
             name = category.name;
-        }else{
+        }
+        else{
             var childCats = session.childCategories;
             var subCat = childCats[catId];
 
@@ -28,7 +29,7 @@ module.exports = function categoriesHelper(){
 
     var getSubCatName = function(session, viewData) {
         var name = '';
-        
+
         var catId = getCatId(session.url, viewData);
         var childCats = session.childCategories;
         var subCat = childCats[catId];
@@ -48,10 +49,12 @@ module.exports = function categoriesHelper(){
         if (catIndex != -1) {
             var qMarkIndex = url.indexOf('?',catIndex+11);
             catId = parseInt(url.substring(catIndex+11,qMarkIndex),10);
-        }else if (catIdIndex != -1) {
+        }
+        else if (catIdIndex != -1) {
             var ampIndex = url.indexOf('&',catIdIndex+11);
             catId = parseInt(url.substring(catIdIndex+11,ampIndex),10);
-        }else if(viewData && viewData.item){
+        }
+        else if(viewData && viewData.item){
             catId = viewData.item.category.id;
         }
 

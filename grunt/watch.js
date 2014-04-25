@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         },
         templates: {
             files: ['app/**/*.html'],
-            tasks: ['exec:removeTemplates', 'nunjucks']
+            tasks: ['exec:removeTranslations', 'exec:removeTemplates', 'translate', 'nunjucks']
         },
         stylesheets: {
             files: ['app/**/*.styl', 'app/**/*.css'],

@@ -16,6 +16,7 @@ public/js/app
 public/css
 app/templates/compiledTemplates.js
 app/templates/compiled
+app/translations
 public/styles.css
 .DS_Store
 npm-debug.log
