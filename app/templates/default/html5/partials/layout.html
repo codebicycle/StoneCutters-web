@@ -4,8 +4,7 @@
     <body>
 
         {% view 'header/index' %}
-        {% set templateName = template + '/location/select.html' %}
-        {% include templateName %}
+        {% view 'location/select' %}
         {% set templateName = template + '/partials/search.html' %}
         {% include templateName %}
 

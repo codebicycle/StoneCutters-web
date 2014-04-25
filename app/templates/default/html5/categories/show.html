@@ -1,7 +1,13 @@
-<section>
-  	<ul id="subCategory">
+<section id="subCategories">
+	<div id="title">
+		<a href="/"></a>
+		<h1>{{category.name}}</h1>
+	</div>
+  	<ul>
 		{% for subcategory in category.children %}
-			<li><a href="/change-this-description-for-the-category-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a></li>
+			<li>
+				<a href="/change-this-description-for-the-category-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a>
+			</li>
 		{% endfor %}
 	</ul>
 </section>
