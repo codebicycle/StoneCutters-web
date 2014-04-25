@@ -1,0 +1,24 @@
+<div id="overlay"></div>
+<nav id="leftPanel">
+    <div>
+        <ul class="menu">
+            <li class="start"><a href="/">Inicio</a></li>
+            <li class="post"><a href="/">Publicá un aviso gratis</a></li>
+            {% if user %}
+                <li class="myAds"><a href="/">Mis Avisos</a></li>
+                <li class="myFav"><a href="/">Favoritos</a></li>
+                <li class="logout"><a href="/logout">Salir</a></li>
+            {% else %}
+                <li class="login"><a href="/login">Login</a></li>
+                <li class="login"><a href="/register">Registration</a></li>
+            {% endif %}
+            <li class="settings"><a href="/">Settings</a></li>
+        </ul>
+        <ul class="categories">
+            <li class="title">CATEGORIAS</li>
+            {% for category in categories.models %}
+                <li><a href="/change-this-description-for-the-category-cat-{{category.id}}?location={{siteLocation}}" class="home-{{category.id}}">{{category.trName}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
