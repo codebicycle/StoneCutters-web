@@ -46,6 +46,33 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
+    (function statsMemory() {
+        app.get('/stats/memory', handler);
+
+        function handler(req, res) {
+            var list = [];
+            var freeMemory = process.memoryUsage().heapTotal - process.memoryUsage().heapUsed;
+            var usableFreeMemory = process.memoryUsage().rss - process.memoryUsage().heapTotal + freeMemory;
+            var usedPercent = (process.memoryUsage().heapTotal - freeMemory) / process.memoryUsage().rss;
+
+            list.push('freeMemory:' + freeMemory);
+            list.push('maxMemory:' + process.memoryUsage().rss);
+            list.push('totalMemory:' + process.memoryUsage().heapTotal);
+            list.push('usableFreeMemory:' + usableFreeMemory);
+            list.push('usedPercent:' + usedPercent);
+
+            res.send(list.join(' '));
+        }
+    })();
+
+    (function statsThreads() {
+        app.get('/stats/threads', handler);
+
+        function handler(req, res) {
+            res.send('threadCount:' + require('os').cpus().length);
+        }
+    })();
+
     (function force() {
         app.get('/force/:platform?', handler);
 

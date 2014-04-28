@@ -51,6 +51,8 @@ interstitial:
   ignorePath:
     - /health
     - /stats
+    - /stats/memory
+    - /stats/threads
     - /check
     - /login
     - /interstitial

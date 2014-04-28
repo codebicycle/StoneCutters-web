@@ -123,6 +123,9 @@ module.exports = function(nunjucks) {
             }
             out.push('</div>');
             return out.join('');
+        },
+        is: function(value, type) {
+            return typeof value === type;
         }
     };
 };

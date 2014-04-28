@@ -60,6 +60,7 @@ module.exports = function(app, dataAdapter) {
         function handler(req, res, next) {
             var item;
             var images;
+            var oldImages = [];
 
             function parse(done) {
                 formidable(req, {
@@ -75,6 +76,13 @@ module.exports = function(app, dataAdapter) {
                 for (var key in item) {
                     if (!key.indexOf('opt.') && !item[key]) {
                         delete item[key];
+                    }
+                    if (item.id && !key.indexOf('image.')) {
+                        if (!item['del.' + key]) {
+                            oldImages.push(item[key]);
+                        }
+                        delete item[key];
+                        delete item['del.' + key];
                     }
                 }
                 dataAdapter.post(req, '/items', {
@@ -109,19 +117,27 @@ module.exports = function(app, dataAdapter) {
 
             function post(done, response, _images) {
                 var query = {
-                    intent: 'create',
                     postingSession: item.postingSession,
                     languageCode: item.languageCode
                 };
                 var user = req.rendrApp.getSession('user');
 
+                if (item.id) {
+                    query.intent = 'create';
+                }
                 if (user) {
                     query.token = user.token;
                 }
                 if (_images && _images.length) {
                     item.images = _images;
                 }
-                dataAdapter.post(req, '/items', {
+                if (oldImages && oldImages.length) {
+                    item.images = (item.images ? item.images.concat(oldImages) : oldImages);
+                }
+                if (item.images) {
+                    item.images = item.images.join(',');
+                }
+                dataAdapter.post(req, '/items' + (item.id ? '/' + item.id + '/edit' : ''), {
                     query: query,
                     data: item
                 }, done.errfcb);
@@ -249,6 +265,78 @@ module.exports = function(app, dataAdapter) {
                     res.redirect(url);
                 }
             });
+        }
+    })();
+
+    (function removeItem() {
+        app.post('/myolx/delete_item/:itemId?', handler);
+
+        function handler(req, res, next) {
+            var itemId = req.param('itemId', '');
+
+            function validate(done) {
+                var errors = {
+                    errCode: 400,
+                    err: [],
+                    errFields: []
+                };
+
+                if (!itemId) {
+                    errors.err.push('Invalid itemId');
+                    errors.errFields.push('itemId');
+                }
+                if (errors.err.length) {
+                    done.fail(errors);
+                    return;
+                }
+                done();
+            }
+
+            function remove(done) {
+                var user = req.rendrApp.getSession('user') || {};
+                var query = {
+                    token: user.token
+                };
+
+                dataAdapter.post(req, '/items/' + itemId + '/delete', {
+                    query: query
+                }, done.errfcb);
+            }
+
+            function success(response) {
+                res.redirect('/myolx/myadslisting?deleted=true');
+            }
+
+            function error(err) {
+                var errors;
+                var url = req.headers.referer;
+                var qIndex = url.indexOf('?');
+
+                if (!err.errCode) {
+                    errors = {
+                        errCode: 400,
+                        errField: [],
+                        errMsg: [],
+                    };
+
+                    err.forEach(function each(error) {
+                        errors.errField.push(error.selector);
+                        errors.errMsg.push(error.message);
+                    });
+                } else {
+                    errors = err;
+                }
+
+                if (qIndex != -1) {
+                    url = url.substring(0,qIndex);
+                }
+                res.redirect(url + '?' + querystring.stringify(errors));
+            }
+
+            asynquence().or(error)
+                .then(validate)
+                .then(remove)
+                .val(success);
         }
     })();
 
