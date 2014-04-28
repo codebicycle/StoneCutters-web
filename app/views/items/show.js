@@ -10,10 +10,17 @@ module.exports = BaseView.extend({
         data.category_name = this.options.category_name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
         data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
+        data.item.images.noImage = false;
+        data.item.images.oneImage = false;
+        if(data.item.images.length === 0){
+            data.item.images.noImage = true; 
+        }else if (data.item.images.length == 1){
+            data.item.images.oneImage = true;
+        }
         return data;
     },
     postRender: function() {
-        var mySwiper = $('.swiper-containerItem').swiper({
+        var mySwiper = $('.swiper-container').swiper({
             mode:'horizontal',
             loop: true,
             pagination: '.slidePagination',

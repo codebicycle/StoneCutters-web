@@ -7,7 +7,7 @@
 	<ul class="">
 		{% for item in items %}
 			<li>
-				<a href="">
+				<a href="/change-this-description-for-the-item-iid-{{item.id}}">
 					<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
 					<p>{{ item.date.since }} {{ item.displayLocation }}</p>
 					<h3>{{ item.price.displayPrice }}</h3>
