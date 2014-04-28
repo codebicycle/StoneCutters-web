@@ -1,3 +1,66 @@
-#header {
-	background-color: #f0f0f0;
+#header { 
+    height: auto;
+    min-height: 48px;
+    position: relative;
+    padding: 0 0.5em;
+    background: #4275BA;
+}
+#header h1 {
+    float: left;
+    position: relative;
+    padding-left: 5px;
+    z-index: 10;
+}
+#header h1 a {
+    width: 94px;
+    height: 48px;
+    display: block;
+    background: url(imageUrl/images/html4/logoMenu.png) no-repeat;    
+    text-indent: -9000px;
+}
+#header ul {
+	width: auto;
+	height: auto;
+	position: absolute;
+	right: 7px;
+	top: 6px;
+	list-style: none;
+	z-index: 1;
+}
+#header ul li {
+	float: right;
+	margin: 0 0 0 .5em;
+}
+#header ul li a {
+	display: inline-block;
+	padding: 7px .7em;
+	border-radius: 5px;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	text-indent: -9000px;
+}
+#header ul li.signIn a {
+	width: 12px;
+	border: 1px solid #2C4B77;
+	background-color: #355E97;
+}
+#header ul li.signIn.userLogOut a {
+	background-image: url(imageUrl/images/html4/userLogOut.png);
+}
+#header ul li.signIn.userLogIn a {
+	background-image: url(imageUrl/images/html4/userLogIn.png);
+}
+#header ul li.signIn.userLogInMsg a {
+	background-image: url(imageUrl/images/html4/userLogInMsg.png);
+}
+#header ul li.post a {
+	width: auto;
+	border: 1px solid #C44D13;
+	border-radius: 5px;
+	background: #E0771B;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-indent: 0;
 }
