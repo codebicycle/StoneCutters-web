@@ -7,15 +7,15 @@ module.exports = function(grunt) {
             tasks: ['exec:removeAssets', 'browserify']
         },
         templates: {
-            files: ['app/**/*.html'],
-            tasks: ['exec:removeTranslations', 'exec:removeTemplates', 'translate', 'nunjucks']
+            files: ['app/**/*.html', '!app/templates/compiled/**/*.html'],
+            tasks: ['exec:removeTranslations', 'exec:removeTemplates', 'translate', 'template']
         },
         stylesheets: {
             files: ['app/**/*.styl', 'app/**/*.css'],
             tasks: ['exec:removeStyles', 'stylus']
         },
         node: {
-            files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'grunt/**/*.js'],
+            files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'grunt/**/*.js', '!app/templates/**/*.js'],
             tasks: ['jshint:node']
         },
         tests: {
