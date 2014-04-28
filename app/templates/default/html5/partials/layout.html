@@ -11,8 +11,6 @@
         <article>
             <div id="content">
                 {{body}}
-                {% set templateName = 'compiled/' + template + '/footer/index.html' %}
-                {% include templateName %}
             </div>
         </article>
         {% view 'footer/languages' %}

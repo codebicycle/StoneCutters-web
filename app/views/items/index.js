@@ -17,6 +17,27 @@ module.exports = BaseView.extend({
 
         item.date.since = helpers.timeAgo(date);
     },
+    postRender: function() {
+        $('.switchView').click(function(e) {
+            var url;
+            $('.filled').each(function() {
+                url = $(this).attr('data-fullimg');
+                loadImages(url , $(this));
+            });
+            $('section#itemListing ul').toggleClass('gallery-list');
+            $('.switchView').toggleClass('gallery');
+            /*var action = ($('section#itemListing ul').hasClass('gallery-list')) ? 'viewGalery' : 'viewListing';
+            _gaq.push(['_trackEvent', 'listing', action]);*/
+        });
+        function loadImages(url , $this) {
+            var newImg = new Image();
+
+            newImg.src = url;
+            newImg.onload = function() {
+                $this.css('background-image', 'url('+url+')');
+            };
+        }
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
