@@ -67,4 +67,12 @@ module.exports = function itemRouter(app, dataAdapter) {
             res.redirect('/');
         }
     })();
+
+    (function notFound() {
+        app.get('*', handler);
+
+        function handler(req, res) {
+            res.redirect('/404');
+        }
+    })();
 };

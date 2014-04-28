@@ -12,7 +12,9 @@ module.exports = function appUseConf(done) {
     });
     var middleware = require('./middleware')(dataAdapter, config.get(['middleware', 'exclude'], []));
     var server = rendr.createServer({
-        dataAdapter: dataAdapter
+        dataAdapter: dataAdapter,
+        errorHandler: require('./errorHandler')(),
+        apiPath: config.get(['smaug', 'protocol'], 'http') + '://' + config.get(['smaug', 'url'], 'api-v2.olx.com')
     });
     var memcached = require('./memcached')(express);
 

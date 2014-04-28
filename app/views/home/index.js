@@ -6,30 +6,7 @@ var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'home_index_view',
-    processItem: function(item) {
-        var year = item.date.year;
-        var month = item.date.month - 1;
-        var day = item.date.day;
-        var hour = item.date.hour;
-        var minute = item.date.minute;
-        var second = item.date.second;
-        var date = new Date(year, month, day, hour, minute, second);
-
-        item.date.since = helpers.timeAgo(date);
-    },
-    getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
-
-        _.each(data.whatsNewItems, this.processItem);
-        return _.extend({}, data, {
-            user: this.app.getSession('user'),
-            location: this.app.getSession('location'),
-            template: this.app.getSession('template'),
-            languages: this.app.getSession('languages'),
-            selectedLanguage: this.app.getSession('selectedLanguage')
-        });
-    },
-    postRender: function(){
+    postRender: function() {
         var swiperAds = $('.swiper-containerAds').swiper({
             mode:'horizontal',
             slidesPerView: 3,

@@ -3,12 +3,12 @@
 module.exports = function(grunt) {
     return {
         scripts: {
-            files: ['app/**/*.js', '!app/templates/**/*.js'],
+            files: ['app/**/*.js', '!app/templates/default/**/*.js', '!app/templates/*olx*/**/*.js'],
             tasks: ['exec:removeAssets', 'browserify']
         },
         templates: {
             files: ['app/**/*.html'],
-            tasks: ['exec:removeTemplates', 'nunjucks']
+            tasks: ['exec:removeTranslations', 'exec:removeTemplates', 'translate', 'nunjucks']
         },
         stylesheets: {
             files: ['app/**/*.styl', 'app/**/*.css'],
@@ -21,6 +21,9 @@ module.exports = function(grunt) {
         tests: {
             files: ['test/**/*.js'],
             tasks: ['jshint:tests']
+        },
+        dist: {
+            files: ['dist/index.js']
         }
     };
 };

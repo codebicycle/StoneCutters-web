@@ -1,7 +1,7 @@
 'use strict';
 
 var BaseApp = require('rendr/shared/app');
-var helpers = require('./helpers').nunjucks;
+var helpers = require('./helpers');
 
 /**
  * Extend the `BaseApp` class, adding any custom methods or overrides.
@@ -31,7 +31,8 @@ module.exports = BaseApp.extend({
         var siteLocation = (index === -1) ? host : host.substring(0,index);
 
         this.templateAdapter.init(siteLocation.replace('m','www'));
-        this.templateAdapter.registerHelpers(helpers);
+        this.templateAdapter.registerHelpers(helpers.nunjucks.helpers);
+        this.templateAdapter.registerExtensions(helpers.nunjucks.extensions);
     },
 
     /**

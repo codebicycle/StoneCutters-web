@@ -1,4 +1,6 @@
 # Default config
+environment: development
+
 server:
   port: 3030
 
@@ -38,7 +40,7 @@ localization:
   html4:
     - 'www.olx.in'
   html5:
-    - 'www.olx.in'
+    - 'www.olx.de'
   desktop:
     - 'www.olx.in'
 
@@ -52,11 +54,35 @@ interstitial:
     - /check
     - /login
     - /interstitial
+    - /force
+    - /force/wap
+    - /force/html4
+    - /force/html5
+    - /force/desktop
+    - /404
+    - /500
   ignorePlatform:
     - wap
+
+error:
+  detail: true
 
 middleware:
   exclude:
     - /health
     - /stats
     - /check
+
+stylus:
+  testing:
+    urls:
+      static: 'http://static-testing.olx-st.com'
+      image: 'http://images-testing.olx-st.com'
+  staging:
+    urls:
+      static: 'http://static-staging.olx-st.com'
+      image: 'http://images-staging.olx-st.com'
+  production:
+    urls:
+      static: 'http://static01.olx-st.com'
+      image: 'http://images01.olx-st.com'

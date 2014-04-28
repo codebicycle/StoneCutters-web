@@ -3,6 +3,7 @@
 var RendrView = require('rendr/shared/base/view');
 var _ = require('underscore');
 var helpers = require('../helpers');
+var translations = require('../translations');
 
 module.exports = RendrView.extend({
     getTemplate: function(){
@@ -13,9 +14,11 @@ module.exports = RendrView.extend({
     },
     getTemplateData: function() {
         var data = RendrView.prototype.getTemplateData.call(this);
+        var app = helpers.environment.init(this.app);
 
         return _.extend({}, data, {
-            analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data)
+            analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data),
+            dictionary: translations[app.getSession('selectedLanguage') || 'en']
         });
     },
 });
