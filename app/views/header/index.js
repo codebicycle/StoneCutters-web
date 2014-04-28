@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
             var bar = {
                 show: false
             };
-            var build = config.get('deploy', false);
+            var build = config.get(['deploy', 'deploy'], false);
             if (build) {
                 _.extend(bar, build);
                 bar.show = true;
