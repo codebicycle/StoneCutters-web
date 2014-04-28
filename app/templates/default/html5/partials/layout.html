@@ -5,19 +5,19 @@
 
         {% view 'header/index' %}
         {% view 'location/select' %}
-        {% set templateName = template + '/partials/search.html' %}
+        {% set templateName = 'compiled/' + template + '/partials/search.html' %}
         {% include templateName %}
 
         <article>
             <div id="content">
                 {{body}}
-                {% set templateName = template + '/footer/index.html' %}
+                {% set templateName = 'compiled/' + template + '/footer/index.html' %}
                 {% include templateName %}
             </div>
         </article>
         {% view 'footer/languages' %}
 
-        {% set templateName = template + '/footer/footer.html' %}
+        {% set templateName = 'compiled/' + template + '/footer/footer.html' %}
         {% include templateName %}
         <script src="/js/app/libs.js"></script>
         <script src="/js/app/{{directory}}/app.js"></script>
