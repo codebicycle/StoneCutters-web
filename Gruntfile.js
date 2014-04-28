@@ -102,19 +102,21 @@ module.exports = function(grunt) {
 
     grunt.registerTask('clean', ['exec:removeTranslations', 'exec:removeTemplates', 'exec:removeAssets', 'exec:removeStyles', 'exec:removeDist']);
 
-    grunt.registerTask('build', ['translate', 'nunjucks', 'browserify', 'stylus']);
+    grunt.registerTask('template', ['copy:templates', 'nunjucks']);
 
-    grunt.registerTask('rebuild', ['clean', 'build']);
+    grunt.registerTask('build', ['translate', 'template', 'browserify', 'stylus']);
+
+    grunt.registerTask('compile', ['clean', 'build']);
 
     grunt.registerTask('jshint:node', ['jshint:server', 'jshint:client']);
 
-    grunt.registerTask('start', ['rebuild', 'jshint:node', 'develop', 'watch']);
+    grunt.registerTask('start', ['compile', 'jshint:node', 'develop', 'watch']);
 
-    grunt.registerTask('debug', ['rebuild', 'jshint:node', 'log', 'watch']);
+    grunt.registerTask('debug', ['compile', 'jshint:node', 'log', 'watch']);
 
-    grunt.registerTask('pipetest', ['exec:removeDist', 'rebuild', 'copy:dynamic', 'gitclone', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'watch:dist']);
+    grunt.registerTask('pipetest', ['exec:removeDist', 'compile', 'copy:dynamic', 'gitclone', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'watch:dist']);
 
-    grunt.registerTask('pipeline', ['rebuild', 'artifactory:static:publish', 'artifactory:dynamic:publish']);
+    grunt.registerTask('pipeline', ['compile', 'artifactory:static:publish', 'artifactory:dynamic:publish']);
 
     grunt.registerTask('test', ['jshint:tests', 'mochacov:test', 'mochacov:coverage']);
 };

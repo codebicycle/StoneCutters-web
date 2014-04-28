@@ -29,13 +29,14 @@ module.exports = BaseView.extend({
             /*var action = ($('section#itemListing ul').hasClass('gallery-list')) ? 'viewGalery' : 'viewListing';
             _gaq.push(['_trackEvent', 'listing', action]);*/
         });
-        function loadImages(url , $this){
-            var newImg = new Image;
+        function loadImages(url , $this) {
+            var newImg = new Image();
+
             newImg.src = url;
             newImg.onload = function() {
                 $this.css('background-image', 'url('+url+')');
-            }
-        };
+            };
+        }
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
