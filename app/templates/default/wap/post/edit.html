@@ -1,7 +1,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
     <tbody><tr>
         <td style="padding: .25em .5em; border-top: solid thin #808080;">
-            <strong style="color: #0075BD;">Publicar</strong>
+            <strong style="color: #0075BD;">Editar publicación</strong>
             <br>
             <small>Detalles de Publicación</small>
         </td>
@@ -17,6 +17,16 @@
             <br />
             <br style="display: none;" />
             <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
+                {% for image in item.images %}
+                    <small style="display: block;">
+                        <img src="{{image.thumbnail}}" alt="OLX - Item image" style="display: inline-block;">
+                    </small>
+                    <label style="display: block; padding-top: .5em;">
+                        <input type="checkbox" name="del.image.{{image.id}}" value="{{image.id}}" >
+                        <small>Delete image</small>
+                        <input type="hidden" name="image.{{image.id}}" value="{{image.id}}" style="display: none;" >
+                    </label>
+                {% endfor %}
                 <label style="display: block; padding-top: .5em;">
                     <small>Attach a Picture:</small>
                     <br>
@@ -39,13 +49,20 @@
                     {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
                     {% include templateName %}
                 {% endfor %}
-
-                {% for err in errField %}
-                    <small style="display: block; color: red;">{{err}}</small>
-                {% endfor %}
-                {% for err in errMsg %}
-                    <small style="display: block; color: red;">{{err}}</small>
-                {% endfor %}
+                {% if errField | is('string') %}
+                    <small style="display: block; color: red;">{{errField}}:</small>
+                {% else %}
+                    {% for index, field in errField %}
+                        <small style="display: block; color: red;">{{field}}</small>
+                    {% endfor %}
+                {% endif %}
+                {% if errMsg | is('string') %}
+                    <small style="display: block; color: red;">{{errMsg}}</small>
+                {% else %}
+                    {% for index, msg in errMsg %}
+                        <small style="display: block; color: red;">{{msg}}</small>
+                    {% endfor %}
+                {% endif %}
                 <input type="hidden" name="postingSession" value="{{postingSession}}">
                 <input type="hidden" name="location" value="{{location}}">
                 <input type="hidden" name="languageId" value="{{language}}">
@@ -53,6 +70,7 @@
                 <input type="hidden" name="platform" value="{{platform}}">
                 <input type="hidden" name="category.parentId" value="{{category}}">
                 <input type="hidden" name="category.id" value="{{subcategory}}">
+                <input type="hidden" name="id" value="{{item.id}}">
                 <span style="display: block;"><input type="submit" value="Post Ad"></span>
             </form>
         </td>
