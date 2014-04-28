@@ -26,7 +26,7 @@ module.exports = {
         var siteLocation = app.getSession('siteLocation');
         var language = app.getSession('selectedLanguage');
         var languages = app.getSession('languages');
-        var languageCode = languages._byId[language].isocode.toLowerCase();
+        var languageId = languages._byId[language].id;
         var spec = {
             postingSession: {
                 model: 'PostingSession'
@@ -37,8 +37,8 @@ module.exports = {
                     intent: 'post',
                     location: siteLocation,
                     categoryId: params.subcategoryId,
-                    languageId: language,
-                    languageCode: languageCode
+                    languageId: languageId,
+                    languageCode: language
                 }
             }
         };
@@ -52,8 +52,8 @@ module.exports = {
             result.category = params.categoryId;
             result.subcategory = params.subcategoryId;
             result.location = siteLocation;
-            result.language = language;
-            result.languageCode = languageCode;
+            result.language = languageId;
+            result.languageCode = language;
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
             result.errField = params.errField;
@@ -66,7 +66,7 @@ module.exports = {
         var user = app.getSession('user');
         var language = app.getSession('selectedLanguage');
         var languages = app.getSession('languages');
-        var languageCode = languages._byId[language].isocode.toLowerCase();
+        var languageId = languages._byId[language].id;
 
         function findItem(next) {
             var spec = {
@@ -75,8 +75,8 @@ module.exports = {
                     params: {
                         id: params.itemId,
                         token: user.token,
-                        languageId: language,
-                        languageCode: languageCode
+                        languageId: languageId,
+                        languageCode: language
                     }
                 }
             };
@@ -103,8 +103,8 @@ module.exports = {
                     params: {
                         intent: 'edit',
                         location: siteLocation,
-                        languageId: language,
-                        languageCode: languageCode,
+                        languageId: languageId,
+                        languageCode: language,
                         itemId: item.id,
                         categoryId: item.category.id,
                         token: user.token
@@ -123,8 +123,8 @@ module.exports = {
                 result.category = item.category.parentId;
                 result.subcategory = item.category.id;
                 result.location = siteLocation;
-                result.language = language;
-                result.languageCode = languageCode;
+                result.language = languageId;
+                result.languageCode = language;
                 result.platform = app.getSession('platform');
                 result.template = app.getSession('template');
                 result.errField = params.errField;
