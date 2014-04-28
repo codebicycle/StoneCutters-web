@@ -1,9 +1,0 @@
-<ul>
-{{#each languages.models}}
-	{{#ifC id '===' ../selectedLanguage }}
-		<li><strong>{{name}}</strong></li>
-	{{else}}
-		<li><a href="?language={{id}}">{{name}}</a></li>
-	{{/ifC}}
-{{/each}}
-</ul>
