@@ -13,10 +13,10 @@
                 {{body}}
             </div>
         </article>
-        {% view 'footer/languages' %}
 
-        {% set templateName = 'compiled/' + template + '/footer/footer.html' %}
-        {% include templateName %}
+        {% view 'footer/languages' %}
+        {% view 'footer/footer' %}
+
         <script src="/js/app/libs.js"></script>
         <script src="/js/app/{{directory}}/app.js"></script>
         <script>
