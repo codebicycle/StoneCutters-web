@@ -1,8 +1,8 @@
+<div class="breadcrumb">
+    <a href="/">Back</a>
+    <h1>{{category.name}}</h1>
+</div>
 <div id="itemListing">
-    <div class="breadcrumb">
-        <a href="/">Back</a>
-        <h1>{{category.name}}</h1>
-    </div>
     <ul>
         {% for item in items %}
             <li>
@@ -41,4 +41,8 @@
         {{ "<a href='' class='left'>Anterior</a>" if metadata.previous }}
         {{ "<a href='' class='right'>Siguiente</a>" if metadata.next }}
     </div>
+</div>
+<div class="breadcrumb">
+    <a href="/">back</a>
+    <a href="/" class="home">home</a>
 </div>

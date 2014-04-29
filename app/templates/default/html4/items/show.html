@@ -1,4 +1,58 @@
-<section id="itemPage">
+<div class="breadcrumb">
+    <a href="/">Back</a>
+    <h1>{{ item.category.name }}</h1>
+</div>
+<div id="itemPage">
+	<h1>{{ item.title }}</h1>
+	<span>24-02-2014, Capital Federal</span>
+	<div id="itemPhotos">
+		{% if item.images.length == 0 %}
+			<span>(No hay foto disponible)</span>
+		{% else %}
+			<a href="">
+				<div class="arrow"></div>
+				<img alt="" src="{{ item.images[0].url }}" class="item-media-picture">
+			</a>
+			<div id="galeryPagination">
+				<a href="{{ metadata.previous }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
+				<div class="center"><strong>1/{{ item.images.length }}</strong></div>
+				<a href="{{ metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
+			</div>
+		{% endif %}
+	</div>
+	
+	<h2>Contactar al Vendedor</h2>
+
+	<div id="centerBtns">
+		<a href="" class="btns orange">Email</a>
+	</div>
+	
+	<div class="line"></div>
+
+	<ul>
+		{% if item.optionals %}
+    		{% for optional in item.optionals %} 
+				<li><strong>{{ optional.name }}: </strong>{{ optional.value }}</li>    			
+    		{% endfor %}
+    	{% endif %}
+	</ul>
+	
+	<h2>Descripcion</h2>
+
+    <p>{{ item.description }}</p>
+
+    <div class="line"></div>
+
+    <div id="centerBtns">
+    	<a href="" class="btns grey">Otros anuncios relacionados</a>
+    </div>
+
+</div>
+<div class="breadcrumb">
+	<a href="/">back</a>
+	<a href="/" class="home">home</a>
+</div>
+<!--section id="itemPage">
 	<div id="title">
 		<a href="/"></a>
 		<h1>{{ item.category.name }}</h1>
@@ -33,4 +87,4 @@
 			<div class="slidePagination"></div>
 		</section>
 	{% endif %}
-</section>
+</section-->
