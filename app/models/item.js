@@ -11,6 +11,10 @@ module.exports = Base.extend({
             url += prefix + 'token=:token';
             prefix = '&';
         }
+        if (this.get('securityKey')) {
+            url += prefix + 'securityKey=:securityKey';
+            prefix = '&';
+        }
         if (this.get('languageId')) {
             url += prefix + 'languageId=:languageId';
             prefix = '&';
