@@ -67,20 +67,43 @@ module.exports = {
         var language = app.getSession('selectedLanguage');
         var languages = app.getSession('languages');
         var languageId = languages._byId[language].id;
+        var securityKey = params.sk;
+
+        function checkAuthentication(params, id) {
+            var anonymousItem;
+            if (user) {
+                params.token = user.token;
+            }
+            else {
+                if (typeof window !== 'undefined' && localStorage) {
+                    anonymousItem = localStorage.getItem('anonymousItem');
+                    anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                    if (securityKey) {
+                        anonymousItem[id] = securityKey;
+                        localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                    }
+                    else {
+                        securityKey = anonymousItem[id];
+                    }
+                }
+                params.securityKey = securityKey;
+            }
+        }
 
         function findItem(next) {
+            var _params = {
+                id: params.itemId,
+                languageId: languageId,
+                languageCode: language
+            };
             var spec = {
                 item: {
                     model: 'Item',
-                    params: {
-                        id: params.itemId,
-                        token: user.token,
-                        languageId: languageId,
-                        languageCode: language
-                    }
+                    params: _params
                 }
-            };
+            }; 
 
+            checkAuthentication(_params, _params.id);
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
@@ -94,24 +117,25 @@ module.exports = {
         function findFields(err, response) {
             var item = response.item.toJSON();
             var siteLocation = app.getSession('siteLocation');
+            var _params = {
+                intent: 'edit',
+                location: siteLocation,
+                languageId: languageId,
+                languageCode: language,
+                itemId: item.id,
+                categoryId: item.category.id
+            };
             var spec = {
                 postingSession: {
                     model: 'PostingSession'
                 },
                 fields: {
                     collection: 'Fields',
-                    params: {
-                        intent: 'edit',
-                        location: siteLocation,
-                        languageId: languageId,
-                        languageCode: language,
-                        itemId: item.id,
-                        categoryId: item.category.id,
-                        token: user.token
-                    }
+                    params: _params
                 }
             };
 
+            checkAuthentication(_params, _params.itemId);
             app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
                 result.user = user;
@@ -129,6 +153,7 @@ module.exports = {
                 result.template = app.getSession('template');
                 result.errField = params.errField;
                 result.errMsg = params.errMsg;
+                result.sk = securityKey;
                 callback(err, result);
             });
         }

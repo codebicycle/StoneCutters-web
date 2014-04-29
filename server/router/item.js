@@ -122,11 +122,15 @@ module.exports = function(app, dataAdapter) {
                 };
                 var user = req.rendrApp.getSession('user');
 
-                if (item.id) {
+                if (!item.id) {
                     query.intent = 'create';
                 }
                 if (user) {
                     query.token = user.token;
+                } 
+                else if (item.id && item.sk) {
+                    query.securityKey = item.sk;
+                    delete item.sk;
                 }
                 if (_images && _images.length) {
                     item.images = _images;
@@ -144,7 +148,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(response, item) {
-                res.redirect('/change-this-description-for-the-item-iid-' + item.id);
+                res.redirect('/change-this-description-for-the-item-iid-' + item.id + '?sk=' + item.securityKey);
                 clean();
             }
 
@@ -269,7 +273,7 @@ module.exports = function(app, dataAdapter) {
     })();
 
     (function removeItem() {
-        app.post('/myolx/delete_item/:itemId?', handler);
+        app.post('/myolx/deleteitem/:itemId?', handler);
 
         function handler(req, res, next) {
             var itemId = req.param('itemId', '');

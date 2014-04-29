@@ -1,4 +1,10 @@
-<h2>{{ item.title }}</h2>
+<h2>
+	{{ item.title }} 
+	{% if sk %}
+		&#160;|&#160;
+        <a href="/myolx/edititem/{{item.id}}?sk={{sk}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
+	{% endif %}
+</h2>
 <h3>{{ item.price.displayPrice }}</h3>
 
 {% for image in item.images %}

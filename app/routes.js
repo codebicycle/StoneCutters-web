@@ -18,7 +18,7 @@ module.exports = function(match) {
     match('posting', 'post#index');
     match('posting/:categoryId', 'post#subcat');
     match('posting/:categoryId/:subcategoryId', 'post#form');
-    match('myolx/edit_item/:itemId?', 'post#edit');
+    match('myolx/edititem/:itemId?', 'post#edit');
 
     match('terms', 'pages#terms');
     match('help', 'pages#help');

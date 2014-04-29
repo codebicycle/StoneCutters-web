@@ -13,7 +13,13 @@ module.exports = Base.extend({
             url = '/items/fields?intent=post&location='+params.location+'&categoryId='+params.categoryId+'&languageId='+params.languageId+'&languageCode='+params.languageCode;
         break;
         case 'edit':
-            url = '/items/fields?intent=edit&location='+params.location+'&categoryId='+params.categoryId+'&languageId='+params.languageId+'&languageCode='+params.languageCode+'&itemId='+params.itemId+'&token='+params.token;
+            url = '/items/fields?intent=edit&location='+params.location+'&categoryId='+params.categoryId+'&languageId='+params.languageId+'&languageCode='+params.languageCode+'&itemId='+params.itemId;
+            if (params.token) {
+                url += '&token='+params.token;
+            }
+            else if (params.securityKey) {
+                url += '&securityKey='+params.securityKey;
+            }
         break;
         case 'catchange':
             url = '/items/fields?intent=catchange&location='+params.location+'&categoryId='+params.categoryId+'&languageId='+params.languageId+'&languageCode='+params.languageCode+'&itemId='+params.itemId;
