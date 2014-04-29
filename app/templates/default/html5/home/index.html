@@ -11,34 +11,3 @@
 		{% endfor %}
 	</ul>
 </section>
-<!--section id="postAd">
-	<div>
-		<h1>{{dictionary.postAd_prefix}}<strong>{{dictionary.postAd_strong}}</strong>{{dictionary.postAd_suffix}}</h1>
-		<a href="/posting">{{dictionary.postAd_button}}</a>
-	</div>
-</section>
-
-<section id="newAds">
-	<h2>{{dictionary.newAds_prefix}}{% if location.city %}{{location.city.name}}{% else %}{{location.name}}{% endif %}</h2>
-	<div class="swiper-containerAds">	
-		<div class="swiper-wrapper">
-			{% for item in whatsNewItems %}
-				<div class="swiper-slide"> 
-					<a href="/change-this-description-for-the-item-iid-{{item.id}}" >
-						<div class="slide">
-				        	<div style="background-image: url('{{item.thumbnail}}');"></div>
-				        </div>
-				        <div class="caption">{{item.date.since}}<br><span>{{item.price.displayPrice}}</span></div>
-				    </a>
-				</div>
-			{% endfor %}
-		</div>
-	</div>
-</section>
-
-
-
-<section id="languages">
-    {% set templateName = 'compiled/' + template + '/partials/languages.html' %}
-    {% include templateName %}
-</section-->

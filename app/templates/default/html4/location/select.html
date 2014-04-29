@@ -1,0 +1,9 @@
+<div id="locationSelect">
+	<p>
+		{% if location.city %}
+			<strong>{{location.city}}</strong> <a href="/location">Cambiar Ciudad</a>
+		{% else %}
+			<strong>{{location.name}}</strong> <a href="/location">Seleccionar Ciudad</a>
+		{% endif %} 
+	</p>
+</div>
