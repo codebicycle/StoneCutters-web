@@ -20,20 +20,33 @@
 			</div>
 		{% endif %}
 	</div>
+	
 	<h2>Contactar al Vendedor</h2>
+
 	<div id="centerBtns">
 		<a href="" class="btns orange">Email</a>
 	</div>
-	<ul>
-		<li><strong>Modelo: </strong>CL</li>
-	</ul>
+	
 	<div class="line"></div>
+
+	<ul>
+		{% if item.optionals %}
+    		{% for optional in item.optionals %} 
+				<li><strong>{{ optional.name }}: </strong>{{ optional.value }}</li>    			
+    		{% endfor %}
+    	{% endif %}
+	</ul>
+	
 	<h2>Descripcion</h2>
+
     <p>{{ item.description }}</p>
+
     <div class="line"></div>
+
     <div id="centerBtns">
     	<a href="" class="btns grey">Otros anuncios relacionados</a>
     </div>
+
 </div>
 <div class="breadcrumb">
 	<a href="/">back</a>
