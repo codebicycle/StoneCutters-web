@@ -5,7 +5,7 @@
 	</div>
   	<ul>
 		{% for subcategory in category.children %}
-			<li>
+			<li class="{{ "last" if loop.last else "" }}">
 				<a href="/change-this-description-for-the-category-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a>
 			</li>
 		{% endfor %}
