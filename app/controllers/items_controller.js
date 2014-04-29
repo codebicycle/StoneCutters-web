@@ -184,6 +184,7 @@ module.exports = {
         if (user) {
             params.token = user.token;
         }
+
         params.id = params.itemId;
         delete params.itemId;
         delete params.title;
@@ -195,6 +196,7 @@ module.exports = {
             result.location = app.getSession('siteLocation');
             result.user = user;
             result.item = result.item.toJSON();
+            result.pos = parseInt(params.pos) || 0;
             callback(err, result);
         });
     },

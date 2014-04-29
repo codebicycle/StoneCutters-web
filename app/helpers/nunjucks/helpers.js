@@ -5,6 +5,13 @@ var _ = require('underscore');
 
 module.exports = function(nunjucks) {
     return {
+        date: function(timestamp) {
+            var d = new Date(timestamp);
+            return d.toLocaleString();
+        },
+        urlize: function(string) {
+            return string.replace(/ /g, '-').replace(/---/g, '-').toLowerCase();
+        },
         static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 'development');
             var type;
