@@ -1,0 +1,36 @@
+<section id="itemPage">
+	<div id="title">
+		<a href="/"></a>
+		<h1>{{ item.category.name }}</h1>
+		<ul>
+			<li><a class="share" href="#share">Comparte este anuncio</a></li>
+			<li><a data-itemid="559450421" class="fav add" href="">Agregar a favoritos</a></li>
+		</ul>
+	</div>
+	{% if item.images.noImage %}
+		<section id="noPicture">
+			<span></span>
+			<p>No hay foto disponible</p>
+			<div class="clear"></div>
+		</section>
+	{% elif item.images.oneImage %}
+		<section id="onePicture">
+			<div class="slide">
+				<div style="background-image: url('{{ item.images[0].url }}');"></div>
+			</div>
+		</section>
+	{% else %}
+		<section class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for image in item.images %}
+				  	<div class="swiper-slide"> 
+						<div class="slide">
+				          <div style="background-image: url('{{ image.url }}');"></div>
+				        </div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="slidePagination"></div>
+		</section>
+	{% endif %}
+</section>
