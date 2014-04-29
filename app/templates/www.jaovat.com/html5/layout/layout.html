@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    {% view 'layout/head' %}
+    <body>
+
+        {% view 'header/index' %}
+        {% set templateName = 'compiled/' + template + '/partials/search.html' %}
+        {% include templateName %}
+
+        <article>
+            <div id="content">
+                {{body}}
+            </div>
+        </article>
+
+        {% view 'location/select' %}
+        {% view 'footer/languages' %}
+        {% view 'footer/footer' %}
+
+        <script src="/js/app/libs.js"></script>
+        <script src="/js/app/{{directory}}/app.js"></script>
+        <script>
+            (function() {
+                var App = window.App = new (require('app/app'))({% json appData %});
+                App.bootstrapData({% json bootstrappedData %});
+                App.start();
+            })();
+        </script>
+    </body>
+</html>

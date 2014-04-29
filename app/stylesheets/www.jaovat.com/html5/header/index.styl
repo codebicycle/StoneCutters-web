@@ -1,0 +1,63 @@
+header#topBar {
+    height: 48px;
+    padding: 0 .8rem;
+    position: relative;
+    background: #EAEAEA;
+}
+header#topBar > h1 {
+    float: left;
+    padding: 0 .2rem;
+    position: relative;
+    z-index: 10;
+}
+header#topBar > h1 > a{    
+    width: 107px;
+    height: 33px;
+    display: block;
+    text-indent: -9000px;
+    background: url(imageUrl/images/html5/www.jaovat.com/logoMenu.png);
+    margin-top: 8px;
+}
+header#topBar > ul {
+    width: auto;
+    height: auto;
+    position: absolute;
+    right: .5rem;
+    top: .4rem;
+    z-index: 1;
+}
+header#topBar > ul > li {
+    width: auto;
+    float: left;
+    margin: 0 0 0 .8rem;
+    display: inline-block;
+}
+header#topBar > ul > li > span, header#topBar > ul > li > a{
+    height: 1.2rem;
+    display: inline-block;
+    padding: 0.45rem 0.75rem;
+    border-radius: 0.3125rem;
+    font-size: 1.15rem;
+    line-height: 1.15rem;
+    font-weight: bold;
+    color: #fff;
+} 
+header#topBar > ul > li.logOut a, header#topBar > ul > li.logIn span, header#topBar > ul > li.logInMsg span {
+    width: 10px;
+    border: 1px solid #BEBEBE;
+    background-color: #DDD;
+}
+header#topBar > ul > li.logOut a {
+    background-image: url(imageUrl/images/html5/www.jaovat.com/userLogOut.png);
+}
+header#topBar > ul > li.logIn span {
+    background-image: url(imageUrl/images/html5/www.jaovat.com/userLogIn.png); 
+}
+header#topBar > ul > li.logInMsg span {
+    background-image: url(imageUrl/images/html5/www.jaovat.com/userLogInMsg.png);
+}
+header#topBar > ul > li.postBtn a{
+    background: #E2771C;
+    border: 1px solid #C44D13;
+    text-transform: uppercase;
+}
