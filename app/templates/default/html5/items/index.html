@@ -1,25 +1,53 @@
 <section id="itemListing">
-	<div id="title">
-		<a href="/"></a>
-		<h1>Categoria{{category.name}}</h1>
-		<span class="switchView"></span>
-	</div>
-	<ul class="">
-		{% for item in items %}
-			<li>
-				<a href="/change-this-description-for-the-item-iid-{{item.id}}">
-					<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
-					<p>{{ item.date.since }} {{ item.displayLocation }}</p>
-					<h3>{{ item.price.displayPrice }}</h3>
-					<div class="title">
-						<h2>
-							<span>
-								<span>{{ item.title }}</span>
-							</span>
-						</h2>
-					</div>
-				</a>
-			</li>
-		{% endfor %}
-	</ul>
+    <div id="title">
+        <a href="/"></a>
+        <h1>Categoria{{category.name}}</h1>
+        <span class="switchView"></span>
+    </div>
+    <ul class="">
+        {% for item in items %}
+            <li>
+                <a href="/change-this-description-for-the-item-iid-{{item.id}}">
+                    <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
+                    <p>{{ item.date.since }} {{ item.displayLocation }}</p>
+                    <h3>{{ item.price.displayPrice }}</h3>
+                    <div class="title">
+                        <h2>
+                            <span>
+                                <span>{{ item.title }}</span>
+                            </span>
+                        </h2>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 </section>
+<section id="itemPagination">
+    {% if metadata.previous %}
+        <div style="display: inline-block; float: left; margin-left: 5px;">
+            <a href="{{metadata.previous}}">Previous</a>
+        </div>
+    {% endif %}
+    {% if metadata.next %}
+        <div style="display: inline-block; float: right; margin-right: 5px;">
+            <a href="{{metadata.next}}">Next</a>
+        </div>
+    {% endif %}
+    <div style="clear: both;">&nbsp;</div>
+</section>
+{% if metadata.filters.length %}
+<section id="itemFilter">
+    <div id="title">
+        <h1>Filters</h1>
+        <span class="switchView"></span>
+    </div>
+    <ul class="">
+        {% for filter in metadata.filters %}
+            <li>
+                {{ filter | filter(metadata.current)}}
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}

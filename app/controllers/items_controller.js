@@ -101,7 +101,7 @@ function prepareParams(app, params) {
     params.item_type = 'adsList';
     params.location = app.getSession('siteLocation');
     params.page = (params.page ? Number(params.page) : 1);
-    params.offset = (params.page - 1) * 50;
+    params.offset = (params.page - 1) * params.pageSize;
     if (params.search) {
         params.searchTerm = params.search;
     }
