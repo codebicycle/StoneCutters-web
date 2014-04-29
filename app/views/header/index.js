@@ -17,7 +17,8 @@ module.exports = BaseView.extend({
             };
             var build = config.get('deploy', false);
             if (build) {
-                _.extend(bar, build);
+                bar.version = build.version;
+                bar.revision = build.deploy.revision;
                 bar.show = true;
                 bar.env = (process.env.NODE_ENV || 'DEV').toUpperCase();
                 bar.platform = app.getSession('platform').toUpperCase();

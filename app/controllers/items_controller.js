@@ -101,7 +101,7 @@ function prepareParams(app, params) {
     params.item_type = 'adsList';
     params.location = app.getSession('siteLocation');
     params.page = (params.page ? Number(params.page) : 1);
-    params.offset = (params.page - 1) * 50;
+    params.offset = (params.page - 1) * params.pageSize;
     if (params.search) {
         params.searchTerm = params.search;
     }
@@ -173,21 +173,32 @@ module.exports = {
     show: function(params, callback) {
         var app = helpers.environment.init(this.app);
         var user = app.getSession('user');
-
+        var securityKey = params.sk;
         var spec = {
             item: {
                 model: 'Item',
                 params: params
             }
         };
+        var anonymousItem;
 
         if (user) {
             params.token = user.token;
+        } else if (typeof window !== 'undefined' && localStorage) {
+            anonymousItem = localStorage.getItem('anonymousItem');
+            anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+            if (securityKey) {
+                anonymousItem[params.itemId] = securityKey;
+                localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+            }
+            else {
+                securityKey = anonymousItem[params.itemId];
+            }
         }
-
         params.id = params.itemId;
         delete params.itemId;
         delete params.title;
+        delete params.sk;
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
@@ -197,6 +208,7 @@ module.exports = {
             result.user = user;
             result.item = result.item.toJSON();
             result.pos = parseInt(params.pos) || 0;
+            result.sk = securityKey;
             callback(err, result);
         });
     },

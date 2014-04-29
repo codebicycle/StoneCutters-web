@@ -1,0 +1,44 @@
+<div id="itemListing">
+    <div class="breadcrumb">
+        <a href="/">Back</a>
+        <h1>{{category.name}}</h1>
+    </div>
+    <ul>
+        {% for item in items %}
+            <li>
+                <a href="/change-this-description-for-the-item-iid-{{item.id}}">
+                    <div class="imageCont">
+                        <div class="imageContAlign">
+                            <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
+                        </div>
+                    </div>
+                </a>
+                <div class="itemInfo">
+                    <h2>{{ item.price.displayPrice }}</h2>
+                    <span>{{ item.date.since }}</span>
+                    <div class="centerCont">
+                        <a href="/change-this-description-for-the-item-iid-{{item.id}}">
+                            <p>{{ item.title }}</p>
+                        </a>
+                    </div>
+                    <span>{{ item.displayLocation }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <div id="itemPagination">
+        <a href="{{ metadata.previous }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
+        <div class="center">
+            <a href="#"><strong>1</strong></a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#" class="last">5</a>
+        </div>
+        <a href="{{ metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
+    </div>
+    <div id="itemPaginationCaption">
+        {{ "<a href='' class='left'>Anterior</a>" if metadata.previous }}
+        {{ "<a href='' class='right'>Siguiente</a>" if metadata.next }}
+    </div>
+</div>

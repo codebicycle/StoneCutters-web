@@ -1,0 +1,17 @@
+<div id="subCategories">
+	<div class="breadcrumb">
+		<a href="/">Back</a>
+		<h1>{{category.name}}</h1>
+	</div>
+  	<ul>
+		{% for subcategory in category.children %}
+			<li class="{{ "last" if loop.last else "" }}">
+				<a href="/change-this-description-for-the-category-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+	<div class="breadcrumb">
+		<a href="/">back</a>
+		<a href="/" class="home">home</a>
+	</div>
+</div>

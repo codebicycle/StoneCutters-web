@@ -29,7 +29,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 viewType = 'api';
             }
 
-            siteLocation = siteLocation.replace('m','www');
+            siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
 
             /** If I detect that is not a m.olx.com like URL I will set up arg location
             This is only for testing in Rackspace, must be removed in the near future. */

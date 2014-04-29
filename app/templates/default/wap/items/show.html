@@ -11,6 +11,14 @@
                     <font color="#FF0000">[myolx.ApprovalPending]</font>
                 </small>
         	{% endif %}
+
+        	<hr />
+	        	{% if sk %}
+					&#160;|&#160;
+			        <a href="/myolx/edititem/{{item.id}}?sk={{sk}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
+				{% endif %}
+        	<hr />
+
         	{# added to favorites status pending
 	        	{% if item.favorites.added || item.favorites.removed %}
 	        		<br />

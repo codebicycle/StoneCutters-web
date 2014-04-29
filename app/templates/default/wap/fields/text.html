@@ -1,5 +1,5 @@
 <label style="display: block; padding-top: .5em;">
-    <small>{{context.label}}</small>
+    <small>{{field.label}}</small>
     <br />
-    <input type="text" name="{{context.name}}" id="text-{{context.name}}"class="olx-ui-textbox" data-role="none">
+    <input type="text" name="{{field.name}}" id="text-{{field.name}}" class="olx-ui-textbox" data-role="none" value="{%if field.value %}{{field.value.value}}{% endif %}">
 </label>

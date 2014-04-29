@@ -1,0 +1,43 @@
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                <strong style="color: #0075BD;">My Ads</strong>
+                {% if params.deleted %}
+                    <small style="display: block; color: #0C0;">Your ad was removed</small>
+                {% endif %}
+                {% if params.err %}
+                    {% for err in params.err %}
+                        <small style="display: block; color: red;">{{err}}</small>
+                    {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="0">
+    <tbody>
+        {% for item in myAds %}
+            <tr>
+                <td style="border-top: solid thin #808080; text-align: left;">
+                    <a style="display: block; padding: .25em .5em 0;" tabindex="1" href="/change-this-description-for-the-item-iid-{{item.id}}">
+                        <small style="display: block;">
+                            {% if item.thumbnail %}
+                                *
+                            {% endif %}
+                            {{item.title}} - {{item.price.displayPrice}}
+                        </small>
+                    </a>
+                    <small style="display: block; padding: .25em .5em;">
+                        <a href="/myolx/edititem/{{item.id}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
+                        &#160;|&#160;
+                        <form action="/myolx/deleteitem/{{item.id}}" method="POST" enctype="multipart/form-data" style="display: inline-block;">
+                            <button type="submit" tabindex="3" style="background-color: transparent; border: 0; color: #06F; cursor: pointer;">Delete</button>
+                        </form>
+                    </small>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

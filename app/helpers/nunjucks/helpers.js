@@ -41,7 +41,7 @@ module.exports = function(nunjucks) {
                         var pointIndex = path.lastIndexOf('.');
                         var ext = path.substr(pointIndex + 1);
                         var fileName = path.substr(0, pointIndex);
-                        var revision = config.get(['deploy', 'revision'], '0');
+                        var revision = config.get(['deploy', 'deploy', 'revision'], '0');
 
                         filePath = (fileName + '-' + revision + '.' + ext);
                         if (ext === 'css') {
@@ -130,6 +130,9 @@ module.exports = function(nunjucks) {
             }
             out.push('</div>');
             return out.join('');
+        },
+        is: function(value, type) {
+            return typeof value === type;
         }
     };
 };

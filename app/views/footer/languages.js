@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
 
         return _.extend({}, data, {
             languages: app.getSession('languages'),
-            selectedLanguage: app.getSession('selectedLanguage')
+            selectedLanguage: app.getSession('selectedLanguage').toUpperCase()
         });
     }
 });
