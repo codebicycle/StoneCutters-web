@@ -31,6 +31,14 @@ module.exports = {
                 return data[key];
             };
         }
+        if (!app.deleteSession) {
+            app.deleteSession = function(key) {
+                if (key) {
+                    delete data[key];
+                }
+                app.set('session', data);
+            };
+        }
     },
     setUrlVars: function(app) {
         var location = window.location;

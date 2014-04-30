@@ -39,6 +39,13 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return data[key];
             };
 
+            app.deleteSession = function(key) {
+                if (key) {
+                    delete session.data[key];
+                }
+                app.set('session', session.data);
+            };
+
             next();
         };
 

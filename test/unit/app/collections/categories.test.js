@@ -1,5 +1,5 @@
 var should = require("should");
-var Categories = require('../../../app/collections/categories');
+var Categories = require('../../../../app/collections/categories');
 
 describe('Categories', function describeTest() {
     it('should have a default url if params.user is not specified', function test() {

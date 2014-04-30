@@ -205,10 +205,8 @@ module.exports = function(app, dataAdapter) {
 
         function handler(req, res) {
             var app = req.rendrApp;
-            
-            app.updateSession({
-                user: null
-            });
+
+            app.deleteSession('user');
             res.redirect('/');
         }
     })();

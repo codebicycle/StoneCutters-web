@@ -18,8 +18,14 @@ module.exports = function(grunt) {
                 '-W040': true
             }
         },
-        tests: {
-            src: ['test/**/*.js'],
+        utests: {
+            src: ['test/unit/**/*.js'],
+            options: {
+                predef: ['describe', 'before', 'it']
+            }
+        },
+        atests: {
+            src: ['test/acceptance/**/*.js'],
             options: {
                 predef: ['describe', 'before', 'it']
             }

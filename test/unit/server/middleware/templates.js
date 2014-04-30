@@ -5,28 +5,24 @@ var should = require('should');
 var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
-var SmaugAdapter = require('../../../server/adapter/data');
+var SmaugAdapter = require('../../../../server/adapter/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
-var middleware = require('../../../server/middleware')(dataAdapter);
-var localization = require('../../../server/config').get('localization');
+var middleware = require('../../../../server/middleware')(dataAdapter);
+var localization = require('../../../../server/config').get('localization');
 var userAgents = {
     /*'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0': {
-        platform: 'desktop',
-        template: 'desktop'
+        platform: 'desktop'
     },*/
     'UCWEB/8.8 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0 Mobile': {
-        platform: 'html5',
-        template: 'enhanced'
+        platform: 'html5'
     },
     'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0) Asus;Galaxy6': {
-        platform: 'html4',
-        template: 'standard'
+        platform: 'html4'
     },
     'Nokia6100/1.0 (04.01) Profile/MIDP-1.0 Configuration/CLDC-1.0': {
-        platform: 'wap',
-        template: 'basic'
+        platform: 'wap'
     }
 };
 
@@ -34,7 +30,7 @@ function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
         app.use(express.session({
-            store: require('../../../memcached')(express),
+            store: require('../../../../server/memcached')(express),
             secret: 'test'
         }));
     };
@@ -147,10 +143,10 @@ describe('server', function test() {
                 }
                 function closure(userAgent) {
                     describe(userAgent, function test() {
-                        it('should be "' + userAgents[userAgent].template + '"', function test(done) {
+                        it('should be "default/' + userAgents[userAgent].platform + '" for host m.olx.com', function test(done) {
                             request(app)
                                 .get('/')
-                                .set('host', 'm.olx.com.ar')
+                                .set('host', 'm.olx.com')
                                 .set('user-agent', userAgent)
                                 .end(end);
 
@@ -159,8 +155,8 @@ describe('server', function test() {
                                 var after = response.body.after;
 
                                 (function equality(template) {
-                                    template.should.equal(userAgents[userAgent].template);
-                                })(after.session.template.split('_')[0]);
+                                    template.should.equal('default/' + userAgents[userAgent].platform);
+                                })(after.session.template);
 
                                 done();
                             }
@@ -168,10 +164,10 @@ describe('server', function test() {
                         var locations = localization[userAgents[userAgent].platform];
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
-                                it('should end with _' + location + ' if the host ends with .' + location, function test(done) {
+                                it('should be "' + location + '/' + userAgents[userAgent].platform + '" for host ' + location, function test(done) {
                                     request(app)
                                         .get('/')
-                                        .set('host', 'm.olx.com.' + location)
+                                        .set('host', location)
                                         .set('user-agent', userAgent)
                                         .end(end);
 
@@ -180,8 +176,58 @@ describe('server', function test() {
                                         var after = response.body.after;
 
                                         (function equality(template) {
-                                            template.should.equal(location);
-                                        })(after.session.template.split('_')[1]);
+                                            template.should.equal(location + '/' + userAgents[userAgent].platform);
+                                        })(after.session.template);
+
+                                        done();
+                                    }
+                                });
+                            });
+                        }
+                    });
+                }
+            });
+            describe('directory', function test() {
+                for (var userAgent in userAgents) {
+                    closure(userAgent);
+                }
+                function closure(userAgent) {
+                    describe(userAgent, function test() {
+                        it('should be "default" for host m.olx.com', function test(done) {
+                            request(app)
+                                .get('/')
+                                .set('host', 'm.olx.com')
+                                .set('user-agent', userAgent)
+                                .end(end);
+
+                            function end(err, response) {
+                                var before = response.body.before;
+                                var after = response.body.after;
+
+                                (function equality(directory) {
+                                    directory.should.equal('default');
+                                })(after.session.directory);
+
+                                done();
+                            }
+                        });
+                        var locations = localization[userAgents[userAgent].platform];
+                        if (locations.length) {
+                            locations.forEach(function iteration(location) {
+                                it('should be "' + location + '" for host ' + location, function test(done) {
+                                    request(app)
+                                        .get('/')
+                                        .set('host', location)
+                                        .set('user-agent', userAgent)
+                                        .end(end);
+
+                                    function end(err, response) {
+                                        var before = response.body.before;
+                                        var after = response.body.after;
+
+                                        (function equality(directory) {
+                                            directory.should.equal(location);
+                                        })(after.session.directory);
 
                                         done();
                                     }

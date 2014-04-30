@@ -2,8 +2,9 @@
 
 var fs = require('fs');
 var path = require('path');
+var excluded = require('../config').get(['middleware', 'exclude'], []);
 
-module.exports = function middleware(dataAdapter, excludedUrls) {
+module.exports = function middleware(dataAdapter) {
     var middlewares = {};
 
     fs.readdirSync(__dirname).forEach(function(filename) {
@@ -12,7 +13,7 @@ module.exports = function middleware(dataAdapter, excludedUrls) {
             return;
         }
         middlewares.__defineGetter__(name, function load() {
-            return require('./' + name)(dataAdapter, excludedUrls);
+            return require('./' + name)(dataAdapter, excluded);
         });
     });
     return middlewares;

@@ -114,9 +114,13 @@ module.exports = function(grunt) {
 
     grunt.registerTask('debug', ['compile', 'jshint:node', 'log', 'watch']);
 
-    grunt.registerTask('pipetest', ['exec:removeDist', 'compile', 'copy:dynamic', 'gitclone', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'watch:dist']);
+    grunt.registerTask('prepipeline', ['compile', 'utest']);
 
-    grunt.registerTask('pipeline', ['compile', 'artifactory:static:publish', 'artifactory:dynamic:publish']);
+    grunt.registerTask('pipeline', ['artifactory:static:publish', 'artifactory:dynamic:publish']);
 
-    grunt.registerTask('test', ['jshint:tests', 'mochacov:test', 'mochacov:coverage']);
+    grunt.registerTask('pipetest', ['prepipeline', 'copy:dynamic', 'gitclone', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'atest', 'watch:dist']);
+
+    grunt.registerTask('utest', ['jshint:utests', 'mochacov:unit', 'mochacov:coverage']);
+
+    grunt.registerTask('atest', ['jshint:atests', 'mochacov:acceptance']);
 };

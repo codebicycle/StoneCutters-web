@@ -78,7 +78,7 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var platform = req.param('platform', null);
-            var platforms = configClient.get('platforms',  ['wap', 'html4', 'html5', 'desktop']);
+            var platforms = configClient.get('platforms',  []);
 
             if (platform && ~platforms.indexOf(platform)) {
                 req.rendrApp.updateSession({
