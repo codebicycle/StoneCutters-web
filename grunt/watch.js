@@ -18,9 +18,13 @@ module.exports = function(grunt) {
             files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'grunt/**/*.js', '!app/templates/**/*.js'],
             tasks: ['jshint:node']
         },
-        tests: {
-            files: ['test/**/*.js'],
-            tasks: ['jshint:tests']
+        utests: {
+            files: ['test/unit/**/*.js'],
+            tasks: ['jshint:utests']
+        },
+        atests: {
+            files: ['test/acceptance/**/*.js'],
+            tasks: ['jshint:atests']
         },
         dist: {
             files: ['dist/index.js']

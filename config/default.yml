@@ -88,3 +88,14 @@ stylus:
     urls:
       static: 'http://static01.olx-st.com/mobile-webapp'
       image: 'http://images01.olx-st.com/mobile-webapp'
+
+zombie:
+  dns:
+    localhost: true
+    ip: '127.0.0.1'
+    port: 3030
+    hosts:
+      - 'm.olx.com.ar'
+      - 'm.olx.com.br'
+      - 'm.olx.de'
+      - 'm.olx.in'
