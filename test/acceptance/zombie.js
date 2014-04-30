@@ -22,7 +22,6 @@ module.exports = function() {
         else {
             Browser.dns.map(host, 'A', zombie.dns.ip);
             if (zombie.dns.port) {
-                console.log(zombie.dns.port);
                 Browser.ports.map(host, zombie.dns.port);
             }
         }
