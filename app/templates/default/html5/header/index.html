@@ -5,10 +5,10 @@
     <h1><a href="/">OLX.com</a></h1>
     <ul>
         {% if user %}
-            <li class="logIn"><span></span></li>
+            <li class="logIn"><span class="btns blue"></span></li>
         {% else %}
-            <li class="logOut"><a href="/register"></a></li>
+            <li class="logOut"><a href="/register" class="btns blue"></a></li>
         {% endif %}
-        <li class="postBtn"><a href="/posting">PUBLICAR</a></li>
+        <li class="postBtn"><a href="/posting" class="btns orange">PUBLICAR</a></li>
     </ul>
 </header>

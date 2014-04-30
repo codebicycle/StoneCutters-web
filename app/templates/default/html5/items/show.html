@@ -33,4 +33,89 @@
 			<div class="slidePagination"></div>
 		</section>
 	{% endif %}
+
+	<section id="description">
+		<span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
+		<h1>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h1>
+		<h2>{{ item.title }}</h2>
+		<p>{{ item.description }}</p>
+		<div class="clear"></div>
+	</section>
+
+	<section id="optionals">
+		{% if item.optionals %}
+			<ul>
+				{% for optional in item.optionals %}
+					{% if optional.value %}
+						<li>{{ optional.label }}: <strong>{{ optional.value }}</strong></li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<div class="clear"></div>
+	</section>
+
+	<aside class="relatedAds">
+		<a class="btns orange" href="#">Otros anuncios relacionados</a>
+	</aside>
+
+	<section class="reply">
+		<span>Contactar al anunciante</span>
+		<form  action="">
+			<label>* Mensaje</label>
+			<textarea class="message" name="replytoad[message]"></textarea>
+			<small class="message hide"></small>
+
+			<label>* Nombre</label>
+			<input type="text" value="" class="name" name="replytoad[name]">
+			<small class="name hide"></small>
+
+			<label>* Email</label>
+			<input type="email" value="" class="email" name="replytoad[email]">
+			<small class="email hide"></small>
+
+			<label>Teléfono</label>
+			<input type="number" class="phone" name="replytoad[phone]">
+
+			<span>* Campo Obligatorio</span>
+
+			<div class="replySubmit">
+				<input type="button" class="btns orange" value="Enviar Consulta" id="submit">
+			</div>
+	</form>
+	<div class="clear"></div>
+	</section>
+
+	<section class="actions">
+		<div class="background"></div>
+		{% if item.phone and item.contactName %}
+			<span>{{ item.contactName }}: {{ item.phone }}</span>
+		{% elif item.phone or item.contactName %}
+			<span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
+		{% endif %}
+		{% if item.phone %}
+			<div class="action call">
+				<a href="tel:12345678910">
+					<span>Llamar</span>
+				</a>
+			</div>
+			<div class="action sms">
+				<a href="sms:12345678910">
+					<span>SMS</span>
+				</a>
+			</div>
+			<div class="action email">
+				<div>
+					<span>Email</span>
+				</div>
+			</div>
+		{% else %}
+			<div data-tracking="itemPage-clickEmail" class="action email fullWidth trackMe">
+				<div>
+					<span>Email</span>
+				</div>
+			</div>
+		{% endif %}
+		<div class="clear"></div>
+	</section>
 </section>

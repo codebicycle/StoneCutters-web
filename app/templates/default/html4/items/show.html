@@ -62,7 +62,7 @@
 			{% if item.optionals %}
 	    		{% for optional in item.optionals %}
 	    			{% if optional.value %} 
-						<li><strong>{{ optional.name }}: </strong>{{ optional.value }}</li>    			
+						<li><strong>{{ optional.label }}: </strong>{{ optional.value }}</li>
 	    			{% endif %}
 	    		{% endfor %}
 	    	{% endif %}

@@ -208,6 +208,7 @@ module.exports = {
             result.location = app.getSession('siteLocation');
             result.user = user;
             result.item = result.item.toJSON();
+            console.log(result.item);
             result.pos = parseInt(params.pos) || 0;
             result.sk = securityKey;
             callback(err, result);
