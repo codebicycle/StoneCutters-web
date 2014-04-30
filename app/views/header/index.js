@@ -29,7 +29,13 @@ module.exports = BaseView.extend({
         return _.extend({}, data, {
             blackBar: getBlackBar(this.app)
         });
-    }
+    },
+    postRender: function() {
+        $('#topBar ul li a').click(function(e){
+            $('menu#myOlx').toggle();
+        });
+        $('#topBar ul li a').on('resize', this.resize).trigger('resize');
+    },
 });
 
 module.exports.id = 'header/index';
