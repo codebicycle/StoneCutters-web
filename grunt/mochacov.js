@@ -6,7 +6,7 @@ module.exports = function(grunt) {
             src: ['test/unit/**/*.js'],
                 options: {
                 reporter: 'spec',
-                timeout: '5000'
+                timeout: '15000'
             }
         },
         coverage: {
@@ -14,14 +14,14 @@ module.exports = function(grunt) {
             options: {
                 reporter: 'html-cov',
                 output: 'test/unit/coverage.html',
-                timeout: '5000'
+                timeout: '15000'
             }
         },
         acceptance: {
             src: ['test/acceptance/**/*.js', '!test/acceptance/zombie.js'],
                 options: {
                 reporter: 'spec',
-                timeout: '5000'
+                timeout: '15000'
             }
         }
     };
