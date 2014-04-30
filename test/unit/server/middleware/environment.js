@@ -5,11 +5,11 @@ var should = require('should');
 var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
-var SmaugAdapter = require('../../../server/adapter/data');
+var SmaugAdapter = require('../../../../server/adapter/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
-var middleware = require('../../../server/middleware')(dataAdapter);
+var middleware = require('../../../../server/middleware')(dataAdapter);
 var paths = {
     '/': 'home',
     '/items': 'listing',
@@ -23,7 +23,7 @@ function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
         app.use(express.session({
-            store: require('../../../memcached')(express),
+            store: require('../../../../server/memcached')(express),
             secret: 'test'
         }));
     };
