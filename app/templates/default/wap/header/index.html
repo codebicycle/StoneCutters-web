@@ -1,3 +1,10 @@
+{% if blackBar.show %}
+    <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#333333">
+		<tr>
+			<td><font size="1" color="#FFFFFF" style="display: block; font-size: 10px;">You are now in <strong>{{ blackBar.env }} ({{ blackBar.platform }} v. {{ blackBar.version }} :: {{ blackBar.revision }})</strong> environment.</font></td>
+		</tr>
+	</table>
+{% endif %}
 <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#0075BD">
     <tr>
         <td>

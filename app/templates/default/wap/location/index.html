@@ -1,27 +1,41 @@
-<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+<table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
     <tr>
-        <td style="border-top: solid thin #B0B0B0;">
-            <small>Type a city</small>
+        <td style="padding: .25em .5em; border-top: solid thin #808080;">
             <form action="/location">
-                <input type="text" name="search">
-                <input type="submit" value="Search">
+                <label for="search"> 
+                    <small>[countryoptions.EnterCityOrZipCode]</small>
+                 </label><br />
+                <input type="text" value="" name="search" />
+                <input type="submit" value="[homeheader.Search]" name="search_button" />
             </form>
         </td>
     </tr>
 </table>
-<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
     <tr>
-        <td>
-            <strong style="display: block;">{% if search %}Results{% else %}Popular Cities{% endif %}</strong>
+        <td style="padding: .25em .5em;; border-top: solid thin #808080;">
+            <strong><small style="display: block;">{{ '[listingpageitemslisting.AllResultsNew]' if search else '[popularsearchesbody.PopularCities]' }}</small></strong>
         </td>
     </tr>
-    {% for city in cities %}
+</table>
+{% if cities.length > 0 %}
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+        {% for city in cities %}
+            <tr>
+                <td style="border-top: solid thin #808080;">
+                    <a style="display: block; padding: .25em .5em;" href="/{{ target }}?cityId={{ city.id }}">
+                        <small style="display: block;">{{ city.name }}</small>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
         <tr>
-            <td style="border-top: solid thin #808080;">
-                <a style="display: block;" href="/{% if target %}{{ target }}{% endif %}?cityId={{city.id}}">
-                    <small style="display: block;"><img border="0" alt="" src="" />{{city.name}}</small>
-                </a>
+            <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                <small style="displayt: block;">[listingpageitemslisting.WeAreSorryNoResults]</small>
             </td>
         </tr>
-    {% endfor %}
-</table>
+    </table>
+{% endif %}
