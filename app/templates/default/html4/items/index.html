@@ -29,11 +29,7 @@
     <div id="itemPagination">
         <a href="{{ metadata.previous }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
         <div class="center">
-            <a href="#"><strong>1</strong></a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#" class="last">5</a>
+            {{ metadata.page | pagination(metadata.total, metadata.current) }}
         </div>
         <a href="{{ metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
     </div>
