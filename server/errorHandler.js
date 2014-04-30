@@ -3,6 +3,19 @@ var config = require('./config');
 var env = process.env.NODE_ENV || 'development';
 
 exports = module.exports = function errorHandler() {
+    function isRedirection(app) {
+        var redirection = false;
+        var errorDirection = true;
+        if (app.getSession('errorDirection')) {
+            redirection = true;
+            errorDirection = null;
+        }
+        app.updateSession({
+            errorDirection: errorDirection
+        });
+        return redirection;
+    }
+
     return function errorHandler(err, req, res, next) {
         var accept = req.headers.accept || '';
 
@@ -14,6 +27,11 @@ exports = module.exports = function errorHandler() {
         }
         if (env === 'development') {
             console.error(err.stack);
+        }
+        if (isRedirection(req.rendrApp)) {
+            res.setHeader('Content-Type', 'text/plain');
+            res.end(config.get(['error', 'detail'], true) ? err.stack : err.toString());
+            return;
         }
         if (~accept.indexOf('html')) {
             if (config.get(['error', 'detail'], true)) {
