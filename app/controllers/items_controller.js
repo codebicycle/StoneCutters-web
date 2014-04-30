@@ -140,6 +140,7 @@ module.exports = {
                 params: params
             }
         };
+        var category = helpers.categories.getCat(app.getSession(), params.catId);
         var query;
 
         prepareParams(app, params);
@@ -168,6 +169,7 @@ module.exports = {
             result.template = app.getSession('template');
             result.location = app.getSession('location');
             preparePaginationLink(result.metadata, query, url);
+            result.category = category;
             callback(err, result);
         });
     },
@@ -221,6 +223,7 @@ module.exports = {
                 params: params
             }
         };
+        var category = helpers.categories.getCat(app.getSession(), params.catId);
         var query;
 
         prepareParams(app, params);
@@ -250,6 +253,7 @@ module.exports = {
             result.template = app.getSession('template');
             preparePaginationLink(result.metadata, query, url);
             result.search = query.search;
+            result.category = category;
             callback(err, result);
         });
     },
