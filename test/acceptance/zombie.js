@@ -1,17 +1,32 @@
 'use strict';
 
+var config = require('../../server/config');
+var environment = config.get('environment', 'development');
+var zombie = config.get('zombie', {
+    dns: {
+        localhost: true,
+        ip: '127.0.0.1',
+        port: 3030,
+        hosts: []
+    }
+});
+
 module.exports = function() {
     var Browser = require('zombie');
 
-
-    Browser.dns.localhost('m.olx.com.ar');
-    Browser.dns.localhost('m.olx.com.br');
-    Browser.dns.localhost('m.olx.com.co');
-    Browser.dns.localhost('m.olx.com.fr');
-    Browser.ports.map('m.olx.com.ar', 3030);
-    Browser.ports.map('m.olx.com.br', 3030);
-    Browser.ports.map('m.olx.com.co', 3030);
-    Browser.ports.map('m.olx.com.fr', 3030);
-    Browser.ports.map('localhost', 3030);
+    zombie.dns.hosts.forEach(function each(host) {
+        if (zombie.dns.localhost) {
+            Browser.dns.localhost(host);
+        }
+        else {
+            Browser.dns.map(host, 'A', zombie.dns.ip);
+            if (zombie.dns.port) {
+                Browser.ports.map(host, zombie.dns.port);
+            }
+        }
+    });
+    if (zombie.dns.localhost && zombie.dns.port) {
+        Browser.ports.map('localhost', zombie.dns.port);
+    }
     return Browser;
 };
