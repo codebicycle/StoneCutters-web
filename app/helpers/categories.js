@@ -2,7 +2,19 @@
 
 var _ = require('underscore');
 
-module.exports = function categoriesHelper(){
+module.exports = function categoriesHelper() {
+    var getCat = function(session, catId) {
+        var name = '';
+        var categories = session.categories;
+        var category = categories._byId[catId];
+
+        if (!category) {
+            categories = session.childCategories;
+            category = categories[catId];
+        }
+        return category;
+    };
+
     var getCatName = function(session, viewData) {
         var name = '';
         var categories = session.categories;
@@ -62,6 +74,7 @@ module.exports = function categoriesHelper(){
     };
 
     var api = {
+        getCat: getCat,
         getCatName: getCatName,
         getSubCatName: getSubCatName,
     };
