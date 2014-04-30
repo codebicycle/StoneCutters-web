@@ -8,19 +8,24 @@
 	<div id="itemPhotos">
 		{% if item.images.length == 0 %}
 			<span>(No hay foto disponible)</span>
+		{% elif item.images.length == 1 %}
+			<a href="">
+				<div class="arrow"></div>
+				<img alt="" src="{{item.images[0].url | static }}" class="item-media-picture">
+			</a>
 		{% else %}
 			<a href="">
 				<div class="arrow"></div>
-				<img alt="" src="{{ item.images[0].url }}" class="item-media-picture">
+				<img alt="" src="{{item.images[pos].url | static }}" class="item-media-picture">
 			</a>
 			<div id="galeryPagination">
-				<a href="{{ metadata.previous }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
-				<div class="center"><strong>1/{{ item.images.length }}</strong></div>
-				<a href="{{ metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
+				<a href="?pos={{ pos if pos == 0 else pos - 1 }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
+				<div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
+				<a href="?pos={{ pos if pos + 1 == item.images.length else pos + 1 }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
 			</div>
 		{% endif %}
 	</div>
-	
+
 	<h2>Contactar al Vendedor</h2>
 
 	<div id="centerBtns">
