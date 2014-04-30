@@ -1,11 +1,33 @@
 #itemPage {
 	padding: 16px;
+	position: relative;
 	color: #333333;
 }
 #itemPage h1 {
 	font-size: 16px;
 }
-#itemPage span {
+#itemPage input.favorite {
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	right: 16px;
+	top: 16px;
+	border: none;
+	text-indent: -9000px;
+	cursor: pointer;
+}
+#itemPage input.favorite.favoriteOn {
+	background: url(imageUrl/images/html4/favoriteOn.png) no-repeat;
+}
+#itemPage input.favorite.favoriteOff {
+	background: url(imageUrl/images/html4/favoriteOff.png) no-repeat;
+}
+#itemPage h2 {
+	padding: 5px 0 0 0;
+	color: #fd7600;
+	font-size: 16px;
+}
+#itemPage > span {
 	font-size: 11px;
 	padding: 3px 0;
 }
@@ -61,7 +83,7 @@
 	margin: 10px 0 0 0;
 	text-align: center;
 }
-#itemPage h2 {
+#itemPage h3 {
 	padding: 6px;
 	margin: 12px 0;
 	background: #e0f4ff;
@@ -70,13 +92,24 @@
 #itemPage #centerBtns {
 	width: 100%;
 	height: auto;
-	min-height: 50px;
 	margin: 10px 0;
 	text-align: center;
 }
 #itemPage #centerBtns a {
 	padding: 5px 7px;
 	font-size: 13px;
+}
+#itemPage #phone {
+	margin: 30px 0 0 0;
+	font-size: 18px;
+	text-align: center;
+}
+#itemPage #phone img {
+	padding: 0 7px 0 0;
+}
+#itemPage #phone span {
+	position: relative;
+	top: -5px;
 }
 #itemPage p {
 	word-wrap: break-word;
@@ -86,4 +119,13 @@
 #itemPage ul {
 	font-size: 13px;
 	text-transform: capitalize;
+}
+#itemPage ul li a {
+	color: #175db4;
+}
+#itemPage #itemDisable {
+	padding: 14px 0;
+	color: #f90b09;
+	font-size: 15px;
+	font-weight: bold;
 }
