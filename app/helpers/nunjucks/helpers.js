@@ -131,6 +131,45 @@ module.exports = function(nunjucks) {
             out.push('</div>');
             return out.join('');
         },
+        pagination: function(currentPage, total, currentURL) {
+            var out = [];
+            var max = config.get(['smaug', 'maxPageSize'], 50);
+            var pages = Math.floor(total / max) + ((total % max) === 0 ? 0 : 1);
+            var regExp = new RegExp('-p-([0-9]+)', 'g');
+            var pagination = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2];
+            var count = 0;
+            var i;
+
+            function prepareURL(page, last) {
+                if (page > 0 && page <= pages) {
+                    out.push('<a href="');
+                    out.push(currentURL.replace(regExp, '-p-' + page));
+                    out.push('" class="');
+                    out.push(page === currentPage ? 'active ' : '');
+                    out.push(last ? 'last' : '');
+                    out.push('">');
+                    out.push(page);
+                    out.push('</a>');
+                    count++;
+                } 
+                else if (page < pages) {
+                    pagination.push(pagination[pagination.length - 1] + 1);
+                }
+            }
+
+            if ((pages - currentPage) < 2) {
+                max = (pages - currentPage);
+                for (i = 0, max = (max === 0 ? 2 : max); i < max; i++) {
+                    pagination.splice(0, 0, pagination[0] - 1);
+                    pagination.pop();
+                }
+            }
+            max = 5;
+            for (i = 0; i < pagination.length && count < max; i++) {
+                prepareURL(pagination[i], ((count + 1) === max));
+            }
+            return out.join('');
+        },
         is: function(value, type) {
             return typeof value === type;
         }

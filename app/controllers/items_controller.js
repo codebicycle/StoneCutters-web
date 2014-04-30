@@ -118,6 +118,7 @@ function prepareURLParams(query, url, offset, urlFilters) {
 function preparePaginationLink(metadata, query, url) {
     var next;
 
+    metadata.page = query.page;
     metadata.current = prepareURLParams(query, url, 0, query.urlFilters);
     if (metadata.total > 0) {
         next = metadata.next;
