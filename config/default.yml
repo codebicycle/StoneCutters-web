@@ -74,6 +74,8 @@ middleware:
   exclude:
     - /health
     - /stats
+    - /stats/memory
+    - /stats/threads
     - /check
 
 stylus:
