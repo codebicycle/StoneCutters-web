@@ -94,11 +94,10 @@ stylus:
 
 zombie:
   dns:
-    localhost: true
-    ip: '127.0.0.1'
-    port: 3030
+    localhost: false
+    ip: '108.171.171.69'
     hosts:
-      - 'm.olx.com.ar'
-      - 'm.olx.com.br'
-      - 'm.olx.de'
-      - 'm.olx.in'
+      - 'm2.olx.com.ar'
+      - 'm2.olx.com.br'
+      - 'm2.olx.de'
+      - 'm2.olx.in'

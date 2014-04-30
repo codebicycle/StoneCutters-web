@@ -15,12 +15,14 @@ module.exports = function() {
     var Browser = require('zombie');
 
     zombie.dns.hosts.forEach(function each(host) {
+        host = host.replace('m.', 'm2.');
         if (zombie.dns.localhost) {
             Browser.dns.localhost(host);
         }
         else {
             Browser.dns.map(host, 'A', zombie.dns.ip);
             if (zombie.dns.port) {
+                console.log(zombie.dns.port);
                 Browser.ports.map(host, zombie.dns.port);
             }
         }
