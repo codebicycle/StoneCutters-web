@@ -25,16 +25,16 @@ module.exports = BaseView.extend({
             }
             return bar;
         }
-
+        var app = helpers.environment.init(this.app);
         return _.extend({}, data, {
-            blackBar: getBlackBar(this.app)
+            blackBar: getBlackBar(this.app),
+            user: app.getSession('user')
         });
     },
     postRender: function() {
-        $('#topBar ul li a').click(function(e){
-            $('menu#myOlx').toggle();
+        $('#topBar ul li.logIn span').click(function(e){
+            $('menu#myOlx').slideToggle();
         });
-        $('#topBar ul li a').on('resize', this.resize).trigger('resize');
     },
 });
 
