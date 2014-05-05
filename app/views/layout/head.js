@@ -13,7 +13,8 @@ module.exports = BaseView.extend({
 
         return _.extend({}, data, {
             head: helpers.seo.getHead(),
-            template: app.getSession('template')
+            template: app.getSession('template'),
+            location: app.getSession('location')
         });
     },
     postRender: function() {
