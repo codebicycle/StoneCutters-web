@@ -1,0 +1,16 @@
+<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+    <tr>
+        <td align="center" style="border-top: solid thin #808080;">
+            <small style="display: block;">
+			{% for language in languages.models %}
+				{% if language.isocode == selectedLanguage %}
+					{{ language.name }}
+				{% else %}
+					<a href="?language={{ language.id }}">{{ language.name }}</a>
+				{% endif %}
+				{% if not loop.last %} | {% endif %}
+			{% endfor %}
+			</small>
+		</td>
+    </tr>
+</table>

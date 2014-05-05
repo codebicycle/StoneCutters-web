@@ -25,12 +25,18 @@ module.exports = BaseView.extend({
             }
             return bar;
         }
-
+        var app = helpers.environment.init(this.app);
         return _.extend({}, data, {
             blackBar: getBlackBar(this.app),
-            location: this.app.getSession('location')
+            location: this.app.getSession('location'),
+            user: app.getSession('user')
         });
-    }
+    },
+    postRender: function() {
+        $('#topBar ul li.logIn span').click(function(e){
+            $('menu#myOlx').slideToggle();
+        });
+    },
 });
 
 module.exports.id = 'header/index';

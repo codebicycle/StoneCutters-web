@@ -1,8 +1,10 @@
 <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
     <tr>
         <td style="border-top: solid thin #808080; border-bottom: solid thin #B0B0B0; padding:1px 4px;">
-        	<span>{% if location.city %}{{ location.city.name }}{% else %}{{ location.name }}{% endif %}</span>
-            <small><a href="/location">{% if location.city %}Change city{% else %}Select a city{% endif %}</a></small>
-        </td>
+        	<small>
+	        	{{ location.city.name if location.city else location.name }} >
+				<a href="/location">{{ '[countryoptions.ChangeCity]' if location.city else '[countryoptions.SelectACity]' }}</a>
+			</small>
+		</td>
     </tr>
 </table>

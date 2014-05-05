@@ -4,6 +4,12 @@ environment: development
 server:
   port: 3030
 
+platforms:
+  - wap
+  - html4
+  - html5
+  - desktop
+
 smaug:
   protocol: http
   host: api-v2.olx.com
@@ -40,7 +46,7 @@ localization:
   html4:
     - 'www.olx.in'
   html5:
-    - 'www.olx.de'
+    - 'www.olx.in'
     - 'www.jaovat.com'
   desktop:
     - 'www.olx.in'
@@ -74,6 +80,8 @@ middleware:
   exclude:
     - /health
     - /stats
+    - /stats/memory
+    - /stats/threads
     - /check
 
 stylus:
@@ -96,7 +104,7 @@ zombie:
     ip: '127.0.0.1'
     port: 3030
     hosts:
-      - 'm.olx.com.ar'
-      - 'm.olx.com.br'
-      - 'm.olx.de'
-      - 'm.olx.in'
+      - 'm2.olx.com.ar'
+      - 'm2.olx.com.br'
+      - 'm2.olx.de'
+      - 'm2.olx.in'
