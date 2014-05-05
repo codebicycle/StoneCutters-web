@@ -21,13 +21,12 @@ module.exports = function() {
         require('newrelic');
     }
 
-    if (config.get(['graphite', 'enabled'], false)) {
-        require('./graphite')();
-    }
-
     if (config.get(['cluster', 'enabled'], false)) {
         app.then(require('./cluster'));
     }
+
+    require('./graphite')();
+
     app.val(require('./bootstrap'));
 };
 

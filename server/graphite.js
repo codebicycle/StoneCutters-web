@@ -130,6 +130,14 @@ function Client(options) {
 
 module.exports = function(options) {
     options = options || {};
-    client = client || new Client(options);
+
+    if (config.enabled) {
+        client = client || new Client(options);
+    }
+    else {
+        client = {
+            send: function() {}
+        };
+    }
     return client;
 };
