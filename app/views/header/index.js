@@ -27,7 +27,8 @@ module.exports = BaseView.extend({
         }
 
         return _.extend({}, data, {
-            blackBar: getBlackBar(this.app)
+            blackBar: getBlackBar(this.app),
+            location: this.app.getSession('location')
         });
     }
 });

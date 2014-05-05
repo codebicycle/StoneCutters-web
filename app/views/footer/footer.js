@@ -10,9 +10,13 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
         var app = helpers.environment.init(this.app);
         var marketing = helpers.marketing.getInfo(app.getSession('marketing'),'footer',app.getSession('platform'));
+        var user = app.getSession('user');
+        var location = app.getSession('location');
 
         return _.extend({}, data, {
-            marketing: marketing
+            marketing: marketing,
+            user: user,
+            location: location
         });
     }
 });
