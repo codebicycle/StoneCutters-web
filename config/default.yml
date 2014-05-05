@@ -32,14 +32,7 @@ newrelic:
   enabled: false
 
 graphite:
-  enabled: true
-  client:
-    host: graphite-testing.olx.com
-    port: 2003
-    debug: true
-    interval: 60000
-    type: udp4
-  namespace: olx-testing.application.mobile.webapp
+  enabled: false
 
 formidable:
   uploadDir: /tmp
