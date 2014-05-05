@@ -28,6 +28,7 @@ module.exports = BaseView.extend({
         var app = helpers.environment.init(this.app);
         return _.extend({}, data, {
             blackBar: getBlackBar(this.app),
+            location: this.app.getSession('location'),
             user: app.getSession('user')
         });
     },
