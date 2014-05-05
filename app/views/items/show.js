@@ -21,12 +21,17 @@ module.exports = BaseView.extend({
         return data;
     },
     postRender: function() {
-        var mySwiper = $('.swiper-container').swiper({
+        var galery = $('.swiper-container').swiper({
             mode:'horizontal',
             loop: true,
             pagination: '.slidePagination',
             paginationClickable: true,
             initialSlide: 0
+        });
+        var relatedAds = $('.swiper-containerRA').swiper({
+            mode:'horizontal',
+            slidesPerView: 3,
+            preventLinks:false
         });
         $(window).on('resize', this.resize).trigger('resize');
     },

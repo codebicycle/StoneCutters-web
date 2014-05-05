@@ -56,6 +56,23 @@
 	</section>
 
 	<aside class="relatedAds">
+		{% if relatedItems %}
+			<section class="swiper-containerRA">
+				<div class="swiper-wrapper">
+					{% for relatedItem in relatedItems %}
+						{% if relatedItem.thumbnail %}
+							<div class="swiper-slide">
+								<div class="slide" data-itemId="{{ relatedItem.id }}">
+									<a href="/change-this-description-for-the-item-iid-{{ relatedItem.id }}">
+										<div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
+									</a>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</section>
+		{% endif %}
 		<a class="btns orange" href="#">Otros anuncios relacionados</a>
 	</aside>
 

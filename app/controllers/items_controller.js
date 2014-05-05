@@ -177,10 +177,20 @@ module.exports = {
         var app = helpers.environment.init(this.app);
         var user = app.getSession('user');
         var securityKey = params.sk;
+        var siteLocation = app.getSession('siteLocation');
         var spec = {
             item: {
                 model: 'Item',
                 params: params
+            },
+            items: {
+                collection : 'Items',
+                params: {
+                    location: siteLocation,
+                    offset: 0,
+                    pageSize:10,
+                    relatedAds: params.itemId
+                }
             }
         };
         var anonymousItem;
@@ -205,9 +215,11 @@ module.exports = {
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
+            var model = result.items.models[0];
+            result.relatedItems = model.get('data');
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
-            result.location = app.getSession('siteLocation');
+            result.location = siteLocation;
             result.user = user;
             result.item = result.item.toJSON();
             result.pos = parseInt(params.pos) || 0;

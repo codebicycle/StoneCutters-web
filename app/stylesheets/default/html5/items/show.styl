@@ -63,7 +63,9 @@ section#itemPage section#onePicture .slide div {
 	background-size: cover;
 	cursor: pointer;
 }
-.swiper-container {
+
+/*----Slide comon css----*/
+.swiper-container, .swiper-containerRA {
 	margin:0 auto;
 	position:relative;
 	overflow:hidden;
@@ -75,8 +77,8 @@ section#itemPage section#onePicture .slide div {
 	/* Fix of Webkit flickering */
 	z-index:1;
 }
-.swiper-container, .swiper-container .swiper-slide {width: 100%; height: auto!important;}
-.swiper-container .swiper-wrapper {
+.swiper-container, .swiper-containerRA, .swiper-container .swiper-slide, .swiper-containerRA .swiper-slide {width: 100%; height: auto!important;}
+.swiper-container .swiper-wrapper, .swiper-containerRA .swiper-wrapper {
 	height: auto!important;
 	position:relative;
 	width:100%;
@@ -106,6 +108,7 @@ section#itemPage section#onePicture .slide div {
 	transform:translate3d(0px,0,0);
 	transition-timing-function:ease;
 }
+/*-------*/
 .swiper-container .swiper-slide {float: left;}
 
 .swiper-container .slide{position: relative; width: 100%!important;}
@@ -176,6 +179,15 @@ section#itemPage aside.relatedAds a.btns, section#itemPage section.reply div.btn
 section#itemPage aside.relatedAds a.btns {
 	margin: .5rem;
 }
+
+.swiper-containerRA .swiper-slide {float: left;}
+
+.swiper-containerRA .slide{position: relative; width: 100%!important;}
+.swiper-containerRA .slide:before{content: ""; display: block; padding-top: 80%!important;}
+.swiper-containerRA .slide div{position: absolute; top: 0; left: 0;	bottom: 0; right: 0; margin: 0 .1em 0 0; background-position: center center; background-repeat: no-repeat; background-size: cover;}
+.swiper-containerRA a{width: 100%; height: 100%; display: block;}
+aside.relatedAds a#relatedBtn{padding: .5em 1em; margin: .5em; display: inline-block; background: #FF7700; border-radius: .5em; border: 1px solid #BD5901; color: #fff;}
+
 section#itemPage section.reply {
 	margin: .5rem !important;
 	padding: .5rem;
