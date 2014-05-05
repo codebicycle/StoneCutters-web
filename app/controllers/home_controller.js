@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var helpers = require('../helpers');
+var config = require('../config');
 
 module.exports = {
     index: function(params, callback) {
@@ -14,6 +15,13 @@ module.exports = {
         helpers.seo.addMetatag('title', 'Home');
         helpers.seo.addMetatag('Description', 'This is the home page');
         helpers.seo.addMetatag('robots', 'NOFOLLOW');
+
+        function getIcons(platform) {
+            var icons = config.get(['icons', platform], []);
+            var country = app.getSession('location').url;
+
+            return (~icons.indexOf(country)) ? country : 'default';
+        }
 
         (function fetchWhatsNew() {
             var siteLocation = app.getSession('siteLocation');
@@ -52,6 +60,8 @@ module.exports = {
                 result.whatsNewItems = whatsNew.get('data');
                 result.firstItem = result.whatsNewItems[0];
                 result.siteLocation = siteLocation;
+                result.icons = getIcons(result.platform);
+
                 _.each(result.whatsNewItems, processItem);
                 callback(err, result);
             });
