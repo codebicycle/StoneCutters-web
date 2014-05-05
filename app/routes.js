@@ -27,9 +27,9 @@ module.exports = function(match) {
     match(':title-iid-:itemId(\\d+$)', 'items#show');
     match(':title-iid-:itemId(\\d+)/reply', 'items#reply');
 
-    match(':title-cat-:catId(\\d+$)', 'categories#show');
     match(':title-cat-:catId(\\d+)-p-:page(\\d+$)', 'items#index');
     match(':title-cat-:catId(\\d+)-p-:page(\\d+)/:filters?', 'items#index');
-    
-    match(':errorCode(\\d{3}$)', 'pages#error');
+    match(':title-cat-:catId(\\d+$)', 'categories#show');
+
+    match(':errorCode([0-9]{3})', 'pages#error');
 };

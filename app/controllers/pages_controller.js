@@ -125,7 +125,11 @@ module.exports = {
     error: function(params, callback) {
         var app = helpers.environment.init(this.app);
         var err = app.getSession('error');
-            
+
+        if (typeof window !== 'undefined' && !(/[0-9]{3}/.test(params.errorCode))) {
+            window.location = params.errorCode;
+            return;
+        }
         if (err) {
             app.updateSession({
                 error: null
