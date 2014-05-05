@@ -3,7 +3,8 @@
         <td style="border-top: solid thin #808080; border-bottom: solid thin #B0B0B0; padding:1px 4px;">
         	<small>
 	        	{{ location.city.name if location.city else location.name }} >
-				<a href="/location">{{ '[countryoptions.ChangeCity]' if location.city else '[countryoptions.SelectACity]' }}</a>
+				<!-- <a href="/location">{{ dictionary["countryoptions.ChangeCity"] if location.city else dictionary["countryoptions.SelectACity"] }}</a> -->
+				<a href="/location">{{ "Change city" if location.city else "Select a city" }}</a>
 			</small>
 		</td>
     </tr>
