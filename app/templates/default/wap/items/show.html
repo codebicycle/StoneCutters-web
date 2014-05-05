@@ -8,16 +8,17 @@
         	</strong>
         	{% if item.status.onReview %}
         		<small style="display: block;">
-                    <font color="#FF0000">[myolx.ApprovalPending]</font>
+                    <!-- <font color="#FF0000">{{ dictionary["myolx.ApprovalPending"] }}</font> -->
+                    <font color="#FF0000">Aproval pending</font>
                 </small>
         	{% endif %}
 
-        	<hr />
+        	<!-- <hr />
 	        	{% if sk %}
 					&#160;|&#160;
 			        <a href="/myolx/edititem/{{item.id}}?sk={{sk}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
 				{% endif %}
-        	<hr />
+        	<hr /> -->
 
         	{# added to favorites status pending
 	        	{% if item.favorites.added || item.favorites.removed %}
@@ -48,7 +49,8 @@
 		                    {% else %}
 		                    	<font color="#CCCCCC">&lt;</font> | 
 		                    {% endif %}
-		                    	{{ pos + 1 }} [posting_photosprogress.of] {{ item.images.length }}
+		                    	{# {{ pos + 1 }} {{ dictionary["posting_photosprogress.of"] }} {{ item.images.length }} #}
+		                    	{{ pos + 1 }} of {{ item.images.length }}
 		                    {% if pos < item.images.length - 1 %}
 		                    	 | <a rel="nofollow" href="{{ item.title | urlize }}-iid-{{ item.id }}?pos={{ pos + 1 }}">&gt;</a>
 		                    {% else %}
@@ -67,8 +69,9 @@
 	                <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
 	                    <tr>
 	                        <td align="center" style="border: solid thin #F30;">
-	                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">[contactseller_form.ReplyToListing]</font></a>
-	                        </td>
+	                            <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
+	                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
+							</td>
 	                    </tr>
 	                </table>
 	            </td>
@@ -78,7 +81,8 @@
     <table width="100%" cellspacing="0" cellpadding="4" border="0" class="itemDescription">
         <tr>
             <td style="border-top: solid thin #808080;">
-                <small style="display: block;"><strong>[itemdescription.Description]:</strong></small>
+                <!-- <small style="display: block;"><strong>{{ dictionary["itemdescription.Description"] }}:</strong></small> -->
+                <small style="display: block;"><strong>Description:</strong></small>
             </td>
         </tr>
         <tr>
@@ -94,7 +98,8 @@
                     {% if item.price %}
                 		<tr>
                 			<th align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block; text-transform: capitalize;">[itemgeneraldetails.Price]:</small>
+	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Price"] }}:</small> -->
+	                            <small style="display: block; text-transform: capitalize;">Price:</small>
 	                        </th>
 	                        <td align="left" style="border-top: solid 1px #CCC;">
 	                            <small style="display: block;">{{ item.price.displayPrice }}</small>
@@ -121,7 +126,8 @@
 					{% if city %}
                         <tr>
                             <th align="left" style="border-top: solid 1px #CCC;">
-                                <small style="display: block; text-transform: capitalize;">[itemgeneraldetails.City]:</small>
+                                <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.City"] }}:</small> -->
+                                <small style="display: block; text-transform: capitalize;">City:</small>
                             </th>
                             <td align="left" style="border-top: solid 1px #CCC;">
                                 <small style="display: block;">{{ city }}</small>
@@ -131,7 +137,8 @@
                     {% if state %}
                     	<tr>
 	                        <th align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block; text-transform: capitalize;">[itemgeneraldetails.State]:</small>
+	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.State"] }}:</small> -->
+	                            <small style="display: block; text-transform: capitalize;">State:</small>
 	                        </th> 
 	                        <td align="left" style="border-top: solid 1px #CCC;">
 	                            <small style="display: block;">{{ state }}</small>
@@ -141,7 +148,8 @@
                     {% if country %}
                     	<tr>
 	                        <th align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block; text-transform: capitalize;">[postingstep1_selector.SelectCountry]:</small>
+	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["postingstep1_selector.SelectCountry"] }}:</small> -->
+	                            <small style="display: block; text-transform: capitalize;">Country:</small>
 	                        </th> 
 	                        <td align="left" style="border-top: solid 1px #CCC;">
 	                            <small style="display: block;">{{ country }}</small>
@@ -150,16 +158,19 @@
                     {% endif %}
 				    <tr>
                         <th align="left" style="border-top: solid 1px #CCC;">
-                            <small style="display: block; text-transform: capitalize;">[itemgeneraldetails.User]:</small>
+                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.User"] }}:</small> -->
+                            <small style="display: block; text-transform: capitalize;">User:</small>
                         </th> 
                         <td align="left" style="border-top: solid 1px #CCC;">
-                            <small style="display: block;">{{ user if user else '[itemgeneraldetails.Anonymous]' }}</small>
+                            <!-- <small style="display: block;">{{ user if user else dictionary["itemgeneraldetails.Anonymous"] }}</small> -->
+                            <small style="display: block;">{{ user if user else "Anonymous" }}</small>
 						</td>
                     </tr>
 				    {% if item.phone %}
                     	<tr>
 	                        <th align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block; text-transform: capitalize;">[itemgeneraldetails.Phone]:</small>
+	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Phone"] }}:</small> -->
+	                            <small style="display: block; text-transform: capitalize;">Phone:</small>
 	                        </th>
 	                        <td align="left" style="border-top: solid 1px #CCC;">
 	                            <small style="display: block;">{{ item.phone }}</small>
@@ -168,7 +179,8 @@
                     {% endif %}
                     <tr>
                         <th align="left" style="border-top: solid 1px #CCC;">
-                            <small style="display: block; text-transform: capitalize;">[itemgeneraldetails.DatePosted]:</small>
+                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.DatePosted"] }}:</small> -->
+                            <small style="display: block; text-transform: capitalize;">Date posted:</small>
                         </th>
                         <td align="left" style="border-top: solid 1px #CCC;">
                             <small style="display: block;">{{ item.date.timestamp | date }}</small>
@@ -185,7 +197,8 @@
 	                <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
 	                    <tr>
 	                        <td align="center" style="border: solid thin #F30;">
-	                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">[contactseller_form.ReplyToListing]</font></a>
+	                            <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
+	                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
 	                        </td>
 	                    </tr>
 	                </table>
@@ -229,7 +242,7 @@
 	<table width="100%" cellspacing="0" cellpadding="4" border="0">
 	    <tr>
 	        <td style="border-top: solid thin #808080;">
-	            <small style="display: block;">[item.ThisAdIsNoLongerAvailable]</small>
+	            <small style="display: block;">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</small>
 	        </td>
 	    </tr>
 	</table>
