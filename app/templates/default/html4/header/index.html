@@ -6,10 +6,12 @@
 	<h1><a href="/">OLX.com</a></h1>
 	<ul>
 	    <li class="post"><a href="" title="Sell" class="btns orange">Publicar</a></li>
-	    {% if user %}
+	    {% if not user %}
+	    	<li class="signIn userLogOut"><a href="/login" title="Mi OLX">Entrar</a></li>
+	    {% elif user.unreadMessagesCount > 0 %}
+	    	<li class="signIn userLogInMsg"><a href="" title="Mi OLX">Entrar</a></li>
+	    {% else %}
 	    	<li class="signIn userLogIn"><a href="" title="Mi OLX">Entrar</a></li>
-		{% else %}
-			<li class="signIn userLogOut"><a href="" title="Mi OLX">Entrar</a></li>
 		{% endif %}
 	</ul>
 </div>

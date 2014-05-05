@@ -1,0 +1,46 @@
+<div class="breadcrumb">
+    <a href="/">Back</a>
+    <h1>Mi Olx</h1>
+</div>
+<div id="login">
+	<form action="/login" method="POST" enctype="multipart/form-data">
+		<h4>Acceso para Miembros</h4>
+		<div class="formField">
+		    <label>Usuario o Email</label>
+		    <input type="text" value="" name="usernameOrEmail" class="text">
+		</div>
+		<div class="formField">
+	        <label>Contraseña</label>
+	        <input type="password" value="" name="password" class="text">
+	    </div>
+	    <div class="formActions">
+	        <div class="btn-adjust btnOrange btnForm">
+	            <input type="submit" value="Ingresar" name="submit" class="btns orange">
+	        </div>
+	    </div>
+	</form>
+	<div class="line"></div>
+	<form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
+		<h4>Ya publicaste algún anuncio</h4>
+		<div class="formField">
+		    <label>Ingresa el email que usaste para publicar tu anuncio y recibe el link a Mi OLX por email.</label>
+		    <input type="text" name="email">
+		</div>
+	    <div class="formActions">
+	        <div class="btn-adjust btnOrange btnForm">
+	            <input type="submit" value="Enviar" name="submit" class="btns orange">
+	        </div>
+	    </div>
+	</form>
+	<div class="line"></div>
+	<h4>¿No eres miembro?</h4>
+	<div class="formActions">
+        <div class="btn-adjust btnOrange btnForm">
+            <a href="/register" class="btns orange">Crea tu cuenta gratis</a>
+        </div>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="/">back</a>
+    <a href="/" class="home">home</a>
+</div>
