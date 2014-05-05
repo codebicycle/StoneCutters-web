@@ -4,6 +4,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var localization = require('../config').get('localization');
+        var graphite = require('../graphite')();
 
         function isLocalized(platform, siteLocation) {
             return !!(~localization[platform].indexOf(siteLocation));
@@ -15,6 +16,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var app = req.rendrApp;
+            var location = app.getSession('location');
             var siteLocation = app.getSession('siteLocation');
             var userAgent = req.get('user-agent');
 
@@ -63,6 +65,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     template: template,
                 });
                 next();
+                graphite.send([location.name, platform], 1, '+');
             }
 
             function fail(err) {

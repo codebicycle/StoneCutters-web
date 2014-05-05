@@ -1,5 +1,5 @@
 module.exports = {
-	deploy: {
-    	revision: 'none'
-	}
+    deploy: {
+        revision: 'none'
+    }
 };
