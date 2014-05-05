@@ -9,13 +9,14 @@ module.exports = BaseView.extend({
     className: 'header_index_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
+        var app = helpers.environment.init(this.app);
 
         function getBlackBar(app) {
-            var _ = require('underscore');
             var bar = {
                 show: false
             };
             var build = config.get('deploy', false);
+
             if (build) {
                 bar.version = build.version;
                 bar.revision = build.deploy.revision;
@@ -25,7 +26,7 @@ module.exports = BaseView.extend({
             }
             return bar;
         }
-        var app = helpers.environment.init(this.app);
+
         return _.extend({}, data, {
             blackBar: getBlackBar(this.app),
             location: this.app.getSession('location'),

@@ -15,7 +15,6 @@ module.exports = function() {
     var Browser = require('zombie');
 
     zombie.dns.hosts.forEach(function each(host) {
-        host = host.replace('m.', 'm2.');
         if (zombie.dns.localhost) {
             Browser.dns.localhost(host);
         }
