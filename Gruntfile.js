@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('translate', function translate() {
         var restler = require('restler');
-        var rTranslations = new RegExp('{{ ?dictionary.[^}]+ ?}}', 'gi');
+        var rTranslations = new RegExp('{{ ?dictionary\\[[^}]+ ?}}', 'gi');
         var translations = {};
         var index = "'use strict';\n\nmodule.exports = {";
         var i = 0;
@@ -61,7 +61,7 @@ module.exports = function(grunt) {
                 return;
             }
             matches.forEach(function each(match) {
-                var key = match.slice(match.indexOf(".") + 1, match.lastIndexOf("}}"));
+                var key = match.slice(match.indexOf('"') + 1, match.lastIndexOf('"'));
 
                 translations[key] = key;
             });
@@ -100,11 +100,11 @@ module.exports = function(grunt) {
         grunt.file.write('app/translations/index.js', index);
     });
 
-    grunt.registerTask('clean', ['exec:removeTranslations', 'exec:removeTemplates', 'exec:removeAssets', 'exec:removeStyles', 'exec:removeDist']);
+    grunt.registerTask('clean', ['exec:removeTranslations', 'exec:removeTemplates', 'exec:removeAssets', 'exec:removeStyles', 'exec:removeIcons', 'exec:removeDist']);
 
     grunt.registerTask('template', ['copy:templates', 'nunjucks']);
 
-    grunt.registerTask('build', ['translate', 'template', 'browserify', 'stylus']);
+    grunt.registerTask('build', ['translate', 'template', 'browserify', 'stylus', 'copy:icons']);
 
     grunt.registerTask('compile', ['clean', 'build']);
 

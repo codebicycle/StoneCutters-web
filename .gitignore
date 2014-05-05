@@ -35,3 +35,5 @@ mobile-webapp-dynamic-*
 public/css/*/*-staging.css
 public/css/*/*-testing.css
 dist
+
+public/images/*/icons

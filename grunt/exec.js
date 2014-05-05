@@ -7,6 +7,7 @@ module.exports = function(grunt) {
         removeTemplates: 'rm -rf app/templates/compiled',
         removeAssets: 'rm -rf public/js/app',
         removeStyles: 'rm -rf public/css',
+        removeIcons: 'rm -rf public/images/**/icons',
         removeDist: 'rm -rf dist',
         removeDistGit: 'rm -rf dist/git',
         chmodDistStart: 'chmod 777 dist/start.sh'
