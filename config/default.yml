@@ -43,13 +43,17 @@ formidable:
 localization:
   wap:
     - 'www.olx.in'
+    - 'www.olx.cl'
   html4:
     - 'www.olx.in'
+    - 'www.olx.cl'
   html5:
     - 'www.olx.in'
     - 'www.jaovat.com'
+    - 'www.olx.cl'
   desktop:
     - 'www.olx.in'
+    - 'www.olx.cl'
 
 interstitial:
   enabled: false
