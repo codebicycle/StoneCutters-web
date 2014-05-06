@@ -11,13 +11,7 @@ module.exports = BaseView.extend({
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
         data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
-        data.item.images.noImage = false;
-        data.item.images.oneImage = false;
-        if(data.item.images.length === 0){
-            data.item.images.noImage = true; 
-        }else if (data.item.images.length == 1){
-            data.item.images.oneImage = true;
-        }
+        
         return data;
     },
     postRender: function() {
@@ -34,6 +28,61 @@ module.exports = BaseView.extend({
             preventLinks:false
         });
         $(window).on('resize', this.resize).trigger('resize');
+        $( '.actions .email' ).click(function() {
+            $('html, body').animate({scrollTop: $('.reply').offset().top}, 400);
+        });
+        $('section#itemPage section#onePicture .slide div').click(function(e) {
+            e.preventDefault();
+            $('body').addClass('noscroll');
+            $('#galContOne').addClass('visible');
+        });
+        $('.galActions .close').click(function(e) {
+            e.preventDefault();
+            $('.galCont').removeClass('visible');
+            $('body').removeClass('noscroll');
+        });
+        var mySwiperGal = '';
+        $('section.swiper-container').click(function(e) {
+            e.preventDefault();
+            $('body').addClass('noscroll');
+            $('#galCont').addClass('visible');
+
+            if(mySwiperGal === ''){
+                mySwiperGal = $('.swiper-container-gal').swiper({
+                    mode:'horizontal',
+                    loop: true,
+                    initialSlide: galery.activeLoopIndex,
+                    autoplay: 2000,
+                                
+                });
+            }else{
+                mySwiperGal.swipeTo(galery.activeLoopIndex,500);
+            }
+        });
+        $('.galActions .next').click(function(e) {
+            e.preventDefault();
+            mySwiperGal.swipeNext();
+        });
+        $('.galActions .prev').click(function(e) {
+            e.preventDefault();
+            mySwiperGal.swipePrev();
+        });
+
+        $('.galActions .pause').click(function(e) {
+            e.preventDefault();
+            if($(this).hasClass('play')){
+                mySwiperGal.startAutoplay();
+            }else{
+                mySwiperGal.stopAutoplay();
+            }
+            $('.pause').toggleClass('play');
+            
+        });
+        $('#galCont .swiper-wrapper , #galContOne').click(function(e) {
+            e.preventDefault();
+            $('.galCont .galActions , .galCont .title').fadeToggle(500);
+
+        });
     },
     remove: function() {
         $(window).off('resize', this.resize);
