@@ -3,9 +3,9 @@
 <header id="location">
 	<p>
 		{% if location.city %}
-			{{location.city}} <a href="/location">Cambiar Ciudad</a>
+			{{location.city.name}} <a href="/location">Change City</a>
 		{% else %}
-			{{location.name}} <a href="/location">Seleccionar Ciudad</a>
+			{{location.name}} <a href="/location">Select City</a>
 		{% endif %} 
 	</p>
 </header>

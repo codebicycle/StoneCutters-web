@@ -10,7 +10,11 @@ module.exports = function(nunjucks) {
             return d.toLocaleString();
         },
         urlize: function(string) {
-            return string.replace(/ /g, '-').replace(/---/g, '-').toLowerCase();
+            return string
+                .replace(/ /g, '-')
+                .replace(/---/g, '-')
+                .replace(/:/g, '-')
+                .toLowerCase();
         },
         static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 'development');
@@ -151,7 +155,7 @@ module.exports = function(nunjucks) {
                     out.push(page);
                     out.push('</a>');
                     count++;
-                } 
+                }
                 else if (page < pages) {
                     pagination.push(pagination[pagination.length - 1] + 1);
                 }
