@@ -7,13 +7,13 @@
 			<li><a data-itemid="559450421" class="fav add" href="">Agregar a favoritos</a></li>
 		</ul>
 	</div>
-	{% if item.images.noImage %}
+	{% if not item.images %}
 		<section id="noPicture">
 			<span></span>
 			<p>No hay foto disponible</p>
 			<div class="clear"></div>
 		</section>
-	{% elif item.images.oneImage %}
+	{% elif item.images.length == 1 %}
 		<section id="onePicture">
 			<div class="slide">
 				<div style="background-image: url('{{ item.images[0].url }}');"></div>
@@ -136,3 +136,37 @@
 		<div class="clear"></div>
 	</section>
 </section>
+
+
+
+
+{% if item.images.length == 1 %}
+	<div id="galContOne" class="galCont">
+		<div class="title">{{ item.title }}</div>
+		<div class="galCont-container swiper-container-gal" style="background-image: url('{{ item.images[0].url }}');"></div>
+		<div class="galActions">
+			<div class="close"><span></span></div>
+			<div class="playDis"><span></span></div>
+			<div class="prevDis"><span></span></div>
+			<div class="nextDis"><span></span></div>
+		</div>
+	</div>
+{% elif item.images.length > 1  %}
+	<div id="galCont" class="galCont">
+		<div class="title">{{ item.title }}</div>
+		<div class="galCont-container swiper-container-gal">
+			<div class="swiper-wrapper">
+				{% for image in item.images %}
+					<div class="swiper-slide" style="background-image: url('{{ image.url }}');"></div>
+				{% endfor %}
+			</div>
+			<div class="slidePaginationGal"></div>
+		</div>
+		<div class="galActions">
+			<div class="close"><span></span></div>
+			<div class="pause"><span></span></div>
+			<div class="prev"><span></span></div>
+			<div class="next"><span></span></div>
+		</div>
+	</div>
+{% endif %}
