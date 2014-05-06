@@ -16,7 +16,7 @@
 			<td style="border-top: solid thin #808080;">
 				<a style="display: block;" href="{{ category.trName | urlize }}-cat-{{ category.id }}">
 					<small style="display: block;">
-						<img border="0" alt="{{ category.trName }}" src="/images/{{ platform }}/icons/{{ icons }}/{{ category.id }}.gif" />
+						<img border="0" alt="{{ category.trName }}" src="{{ ["/images/", platform, '/icons/', icons, '/', category.id, ".gif"] | join('') | static }}" />
 						{{ category.trName }}
 					</small>
 				</a>
