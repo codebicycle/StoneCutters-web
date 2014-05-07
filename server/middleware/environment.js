@@ -29,17 +29,16 @@ module.exports = function(dataAdapter, excludedUrls) {
                 viewType = 'api';
             }
 
-            siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
+            siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('m.')),'www');
 
             /** If I detect that is not a m.olx.com like URL I will set up arg location
             This is only for testing in Rackspace, must be removed in the near future. */
             (function rackspaceWalkaround() {
                 var pointIndex = siteLocation.indexOf('.');
                 var firstWord = siteLocation.substring(0, pointIndex);
+
                 siteLocation = (firstWord === 'www') ? siteLocation : 'www.olx.com.ar';
             })();
-
-            req.headers.host = siteLocation;
 
             var clientId = app.getSession('clientId');
 

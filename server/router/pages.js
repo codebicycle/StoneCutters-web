@@ -73,29 +73,6 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
-    (function force() {
-        app.get('/force/:platform?', handler);
-
-        function handler(req, res) {
-            var platform = req.param('platform', null);
-            //var platforms = configServer.get('platforms',  []);
-            var platforms = ['wap', 'html4', 'html5', 'desktop'];
-
-            if (platform && ~platforms.indexOf(platform)) {
-                req.rendrApp.updateSession({
-                    platformForced: true,
-                    platform: platform
-                });
-            }
-            else {
-                req.rendrApp.updateSession({
-                    platformForced: false
-                });
-            }
-            res.redirect('/');
-        }
-    })();
-
     (function notFound() {
         app.get('*', handler);
 

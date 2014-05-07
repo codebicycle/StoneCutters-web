@@ -30,6 +30,7 @@ module.exports = function appUseConf(done) {
     }
 
     function rendrConfiguration(rendrApp) {
+        rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.categories());
