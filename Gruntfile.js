@@ -2,7 +2,6 @@
 
 module.exports = function(grunt) {
     var languages = ['af', 'bs', 'el', 'es', 'ht', 'ja', 'ml', 'no', 'ro', 'sr', 'te', 'uk', 'ar', 'ca', 'en', 'gu', 'hu', 'kn', 'mr', 'pa', 'ru', 'sv', 'th', 'ur', 'cs', 'et', 'he', 'id', 'ko', 'ms', 'pl', 'si', 'sw', 'vi', 'bg', 'da', 'fi', 'hi', 'is', 'lt', 'sk', 'tl', 'zh', 'bn', 'de', 'fr', 'hr', 'it', 'lv', 'nl', 'pt', 'sl', 'ta', 'tr'];
-    var config = require('./server/config');
 
     require('load-grunt-config')(grunt);
 
