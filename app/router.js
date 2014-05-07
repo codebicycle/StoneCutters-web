@@ -1,7 +1,6 @@
 'use strict';
 
 var BaseClientRouter = require('rendr/client/router');
-var helpers = require('./helpers');
 
 var Router = module.exports = function Router(options) {
     BaseClientRouter.call(this, options);
