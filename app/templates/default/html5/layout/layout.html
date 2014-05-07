@@ -17,8 +17,8 @@
         {% view 'footer/languages' %}
         {% view 'footer/footer' %}
 
-        <script src="/js/app/libs.js"></script>
-        <script src="/js/app/{{directory}}/app.js"></script>
+        <script src="/js/{{jsDir}}/libs.js"></script>
+        <script src="/js/{{jsDir}}/{{directory}}/app.js"></script>
         <script>
             (function() {
                 var App = window.App = new (require('app/app'))({% json appData %});

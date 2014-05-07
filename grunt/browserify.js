@@ -24,7 +24,6 @@ module.exports = function(grunt) {
         if (subdir) {
             parts = subdir.split('/');
         }
-
         if (parts[0] === 'templates' || parts[0] === 'stylesheets' || filename.split('.').pop() !== 'js') {
             return;
         }
