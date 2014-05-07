@@ -4,7 +4,13 @@
 		<h1>{{ item.category.name }}</h1>
 		<ul>
 			<li><a class="share" href="#share">Comparte este anuncio</a></li>
-			<li><a data-itemid="559450421" class="fav add" href="">Agregar a favoritos</a></li>
+			{% if item.isFavorite %}
+				<li><a data-itemId="{{ item.id }}" class="fav remove" href="#">Remover de favoritos</a></li>
+			{% elif user %}
+				<li><a data-itemId="{{ item.id }}" class="fav add" href="#">Agregar a favoritos</a></li>
+			{% else %}
+				<li><a data-itemid="{{ item.id }}" class="fav add" href="/login">Agregar a favoritos</a></li>
+			{% endif %}
 		</ul>
 	</div>
 	{% if not item.images %}

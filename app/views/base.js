@@ -14,11 +14,11 @@ module.exports = RendrView.extend({
     },
     getTemplateData: function() {
         var data = RendrView.prototype.getTemplateData.call(this);
-        var app = helpers.environment.init(this.app);
 
         return _.extend({}, data, {
             analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data),
-            dictionary: translations[app.getSession('selectedLanguage') || 'en']
+            dictionary: translations[this.app.getSession('selectedLanguage') || 'en'],
+            referer: this.app.getSession('referer')
         });
     },
 });
