@@ -105,12 +105,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('template', ['copy:templates', 'nunjucks']);
 
-    if (config.get(['uglify', 'enabled'], true)) {
-        grunt.registerTask('javascript', ['browserify', 'uglify']);
-    }
-    else {
-        grunt.registerTask('javascript', ['browserify']);
-    }
+    grunt.registerTask('javascript', ['browserify', 'uglify']);
 
     grunt.registerTask('build', ['translate', 'template', 'javascript', 'stylus', 'copy:icons']);
 

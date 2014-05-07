@@ -10,7 +10,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'public/js/app',
                 src: '**/*.js',
-                dest: 'public/js/app'
+                dest: 'public/js/min'
             }]
         }
     };
