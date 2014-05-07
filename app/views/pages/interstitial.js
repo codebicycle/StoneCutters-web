@@ -8,8 +8,7 @@ module.exports = BaseView.extend({
     className: 'pages_terms_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var app = helpers.environment.init(this.app);
-        var marketing = helpers.marketing.getInfo(app.getSession('marketing'), 'interstitial', app.getSession('platform'));
+        var marketing = helpers.marketing.getInfo(this.app.getSession('marketing'), 'interstitial', this.app.getSession('platform'));
 
         return _.extend({}, data, {
             marketing: marketing

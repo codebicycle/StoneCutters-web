@@ -81,8 +81,28 @@ module.exports = BaseView.extend({
         $('#galCont .swiper-wrapper , #galContOne').click(function(e) {
             e.preventDefault();
             $('.galCont .galActions , .galCont .title').fadeToggle(500);
-
         });
+
+        $('.fav').click(function(e) {
+            if ($(this).attr('href') == '#') {
+                e.preventDefault();
+                var element = $(this);
+                var itemId = element.attr('data-itemId');
+                var url = (element.hasClass('add')) ? '/items/'+itemId+'/favorite' : '/items/'+itemId+'/favorite/delete';
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    cache: false,
+                    success: function(data) {
+                        element.toggleClass('add remove');
+                    },
+                    error: function() {
+                        console.log('Error');
+                    }
+                });
+            }
+        });
+
     },
     remove: function() {
         $(window).off('resize', this.resize);

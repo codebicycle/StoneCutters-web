@@ -9,12 +9,11 @@ module.exports = BaseView.extend({
     tagName: 'head',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var app = helpers.environment.init(this.app);
 
         return _.extend({}, data, {
             head: helpers.seo.getHead(),
-            template: app.getSession('template'),
-            location: app.getSession('location')
+            template: this.app.getSession('template'),
+            location: this.app.getSession('location')
         });
     },
     postRender: function() {

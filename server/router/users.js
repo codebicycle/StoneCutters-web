@@ -98,6 +98,7 @@ module.exports = function(app, dataAdapter) {
         function handler(req, res) {
             var usernameOrEmail;
             var password;
+            var redirect;
 
             function parse(done) {
                 formidable(req, done.errfcb);
@@ -106,6 +107,7 @@ module.exports = function(app, dataAdapter) {
             function getChallenge(done, data) {
                 usernameOrEmail = data.usernameOrEmail;
                 password = data.password;
+                redirect = data.redirect;
                 dataAdapter.get(req, '/users/challenge', {
                     query: {
                         u: usernameOrEmail
@@ -136,7 +138,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success() {
-                res.redirect('/');
+                res.redirect(redirect);
             }
 
             function error(err) {
@@ -207,7 +209,7 @@ module.exports = function(app, dataAdapter) {
             var app = req.rendrApp;
 
             app.deleteSession('user');
-            res.redirect('/');
+            res.redirect(app.getSession('referer') || '/');
         }
     })();
 };
