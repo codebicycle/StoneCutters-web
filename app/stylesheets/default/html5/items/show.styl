@@ -323,3 +323,22 @@ section.actions > div.action > div span, section.actions > div.action > a span{w
 	/* Fix of Webkit flickering */
 	z-index:1;
 }
+
+/*----Popups----*/
+
+.popup {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; background: rgba(0, 0, 0, .5); -moz-transition: all 400ms ease-in-out 0ms; -webkit-transition: all 400ms ease-in-out 0ms; transition: all 400ms ease-in-out 0ms;}
+.popup-wrapper {display: table-cell; width: 100%; height: 100%; padding: 1rem; text-align: center; vertical-align: middle; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+.popup-container {display: block; overflow: hidden; width: 100%; margin: 0 auto; padding: 1rem; text-align: left; background-color: #FFF; border: solid thin #4275BA; border-radius: .5rem; box-shadow: 0 0 .5rem rgba(0, 0, 0, .5); -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; -moz-transform: scale(0); -moz-transition: all 250ms ease-in-out 0ms; -webkit-transform: scale(0); -webkit-transition: all 250ms ease-in-out 0ms; transform: scale(0); transition: all 250ms ease-in-out 0ms;}
+.popup-container h4 {position: relative; margin:0; padding-bottom: 1rem; font-weight: normal; text-align: center; text-transform: uppercase; line-height: 1em; color: #4275BA; border-bottom: solid thin #4275BA;}
+.popup-container > div {overflow: auto; width: 100%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: -2rem 0 -3.75rem; border-style: solid; border-color: #FFF; border-width: 2rem 0 3.75rem;}
+.popup-container li:not(:first-child) {border-top: solid thin #CCC;}
+.popup-container > div .social {padding: .5em 0; list-style: none;}
+.popup-container > div .social li {padding: .5em 0;}
+.popup-container > div .social a {display: block; padding: .5em 0; line-height: 1em; color: #666;}
+.popup-container > div .social a:before {content:''; float: left; width: 2em; height: 2em; margin: -.5em 0 -.5em -.5em; background-repeat: no-repeat; background-position: center; background-color: transparent;}
+.popup-container > div .social .facebookButton:before {background-image: url(imageUrl/images/html5/facebook.png);}
+.popup-container > div .social .twitterButton:before {background-image: url(imageUrl/images/html5/twitter.png);}
+.popup-container footer {position: relative; padding: 1rem 1rem 0; text-align: center; border-top: solid thin #CCC;}
+.popup-container footer a {padding: .75rem 2.75rem; display: inline-block;}
+.popup.visible {display: table;}
+.popup.visible .popup-container {-moz-transform: scale(1); -webkit-transform: scale(1); transform: scale(1);}

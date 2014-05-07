@@ -18,7 +18,8 @@ module.exports = RendrView.extend({
         return _.extend({}, data, {
             analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data),
             dictionary: translations[this.app.getSession('selectedLanguage') || 'en'],
-            referer: this.app.getSession('referer')
+            referer: this.app.getSession('referer'),
+            url: this.app.getSession('url')
         });
     },
 });
