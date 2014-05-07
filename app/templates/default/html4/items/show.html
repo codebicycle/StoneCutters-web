@@ -44,7 +44,7 @@
 		<h3>Contactar al Vendedor</h3>
 
 		<div id="centerBtns">
-			<a href="" class="btns orange">Email</a>
+			<a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" class="btns orange">Email</a>
 			{% if item.phone %}
 				<a href="" class="btns orange">SMS</a>
 				<a href="" class="btns orange">Call</a>
