@@ -1,0 +1,45 @@
+<div class="breadcrumb">
+    <a href="/">Back</a>
+    <h1>Contactar al anunciante</h1>
+</div>
+<div id="reply">
+    <form action="/items/{{ item.id }}/reply" method="POST" enctype="multipart/form-data">
+        {% if errors %}
+            <div id="errors">
+                {% for error in errors %}
+                    <span>{{ error }}</span><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <h4>{{ item.title }}</h4>
+        <div class="formField">
+            <label>Para: {{ item.contactName if item.contactName else "anonymous" }}</label>
+            <label>Anuncio Publicado: {{ item.title }}</label>
+        </div>
+        <div class="formField">
+            <label>Tu Email:(Campo Obligatorio)</label>
+            <input type="text" name="email" value="{{ data.email if data.email else (user.email if user.email else '') }}" >
+        </div>
+        <div class="formField">
+            <label>Tu Nombre: (Campo Obligatorio)</label>
+            <input type="text" name="name" value="{{ data.email if data.name else (user.name if user.name else '') }}">
+        </div>
+        <div class="formField">
+            <label>Teléfono: (opcional)</label>
+            <input type="text" name="phone" value="{{ data.phone if data.phone else '' }}">
+        </div>
+        <div class="formField">
+            <label>Tus Comentarios:</label>
+            <textarea name="message">{{ data.message if data.message else '' }}</textarea>
+        </div>
+        <div class="formActions">
+            <div class="btn-adjust btnOrange btnForm">
+                <input type="submit" value="Send" name="submit" class="btns orange">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="breadcrumb">
+    <a href="/">back</a>
+    <a href="/" class="home">home</a>
+</div>
