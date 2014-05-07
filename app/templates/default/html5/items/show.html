@@ -176,3 +176,21 @@
 		</div>
 	</div>
 {% endif %}
+
+<div id="share" class="popup">
+	<div class="popup-wrapper">
+		<div class="popup-container">
+			<h4>Share this ad</h4>
+			<div>
+				<ul class="social">
+					<li><a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank" class="facebookButton">Facebook</a></li>
+					<li><a href="https://twitter.com/intent/tweet?original_referer={{ url }}&text={{ item.title }}&url={{ url }}" target="_blank" class="twitterButton">Twitter</a></li>
+				</ul>
+			</div>
+
+			<footer>
+				<a href="#" class="popup-close btns grey">Cancelar</a>
+			</footer>
+		</div>
+	</div>
+</div>

@@ -102,6 +102,16 @@ module.exports = BaseView.extend({
                 });
             }
         });
+        $('.share').click(function(e) {
+            e.preventDefault();
+            $('body').addClass('noscroll');
+            $('#share').addClass('visible');
+        });
+        $('.popup-close').click(function(e) {
+            e.preventDefault();
+            $('body').removeClass('noscroll');
+            $(this).parents('.popup').removeClass('visible');
+        }); 
 
     },
     remove: function() {
