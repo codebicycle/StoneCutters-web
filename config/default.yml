@@ -112,3 +112,6 @@ zombie:
       - 'm2.olx.com.br'
       - 'm2.olx.de'
       - 'm2.olx.in'
+
+uglify:
+  enabled: false
