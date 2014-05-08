@@ -5,11 +5,6 @@
 	</head>
 	<body>
 		{% view 'header/index' %}
-
-		{% view 'location/select' %}
-
-		{% set templateName = 'compiled/' + template + '/partials/search.html' %}
-        {% include templateName %}
 		
 		{{body}}
 
