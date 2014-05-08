@@ -130,7 +130,6 @@ module.exports = BaseView.extend({
                     cache: false,
                     data: data,
                     success: function(data) {
-                        console.log(data.error);
                         $('.loading').hide();
                         $('body').removeClass('noscroll');
                         $('.message').val('');
