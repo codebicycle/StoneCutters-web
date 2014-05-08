@@ -9,6 +9,24 @@ var analytics = {
     google: require('./google'),
     ati: require('./ati')
 };
+var query = {};
+
+function reset() {
+    query.page = '';
+    query.params = {};
+    query.length = 0;
+    addParam('id', config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X'));
+    addParam('random', Math.round(Math.random() * 1000000));
+}
+
+function setPage(page) {
+    query.page = page;
+}
+
+function addParam(name, value) {
+    query.params[name] = value;
+    query.length++;
+}
 
 function pathRegexp(path, sensitive, strict) {
     if ({}.toString.call(path) == '[object RegExp]') {
@@ -49,22 +67,33 @@ function getURLObject(page) {
     }
 }
 
-function generateURL(session, page, options) {
-    var url = getURLObject(page);
-    var customPage = (options ? analytics.google.generatePage(url, options) : page);
-    var custom = _.defaults({}, url.ati, options);
-    var params = {
-        id: config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X'),
-        random: Math.round(Math.random() * 1000000),
-        referer: (session.referer || '-'),
-        page: customPage,
-        platform: session.platform,
-        custom: JSON.stringify(custom)
-    };
+function stringifyParams() {
+    var params = [];
 
-    return '/pageview.gif?' + querystring.stringify(params);
+    _.each(query.params, function(value, name) {
+        params.push(name + '=' + encodeURIComponent(value));
+    });
+    return params.join('&');
+}
+
+function generateURL(session) {
+    var page = query.page;
+    var url = getURLObject(page);
+
+    if (query.length) {
+        page = analytics.google.generatePage(url, query.params);
+    }
+    addParam('referer', (session.referer || '-'));
+    addParam('page', page);
+    addParam('platform', session.platform);
+    addParam('custom', analytics.ati.getParams(url, query.params));
+
+    return '/pageview.gif?' + stringifyParams();
 }
 
 module.exports = _.extend({
+    reset: reset,
+    setPage: setPage,
+    addParam: addParam,
     generateURL: generateURL
 }, analytics);

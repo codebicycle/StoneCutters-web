@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var config = require('../../config');
 var catHelper = require('../categories');
 
@@ -71,7 +72,7 @@ module.exports = function analyticsHelper() {
         return geo;
     };
 
-    var getParams = function(paramsProperties, session, viewData) {
+    var getParams0 = function(paramsProperties, session, viewData) {
         var params = paramsProperties;
         delete params.viewType;
 
@@ -123,7 +124,7 @@ module.exports = function analyticsHelper() {
 
         var logServer = atiCountryConfig.logServer;
         var siteId = atiCountryConfig.siteId;
-        var params = getParams(paramsProperties, session, viewData);
+        var params = getParams0(paramsProperties, session, viewData);
         var clientId = session.clientId;
         var rnd = Math.floor(Math.random() * 1000000000);
         var referer = session.referer;
@@ -135,9 +136,16 @@ module.exports = function analyticsHelper() {
         urls.push(url);
     };
 
+    function getParams(url, options) {
+        var params = _.extend({}, url.ati);
+
+        return JSON.stringify(params);
+    }
+
     var api = {
         imgUrls: imgUrls,
-        getPathMatch: getPathMatch
+        getPathMatch: getPathMatch,
+        getParams: getParams
     };
 
     return api;

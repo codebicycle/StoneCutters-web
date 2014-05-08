@@ -140,14 +140,15 @@ module.exports = {
                 params: params
             }
         };
-        var category = helpers.categories.getCat(app.getSession(), params.catId);
-        var parentCategory = (category.parentId ? helpers.categories.getCat(app.getSession(), category.parentId) : category);
-        var subCategory = (parentCategory ? category : null);
-        var analytics = helpers.analytics.generateURL(app.getSession(), '/description-cat-' + params.catId, {
-            parentCategory: parentCategory,
-            subCategory: subCategory
-        });
+        var session = app.getSession();
+        var category = helpers.categories.getCat(session, params.catId);
+        var parentCategory = (category.parentId ? helpers.categories.getCat(session, category.parentId) : category);
         var query;
+
+        helpers.analytics.reset();
+        helpers.analytics.setPage('/description-cat-' + params.catId);
+        helpers.analytics.addParam('parentCategory', parentCategory);
+        helpers.analytics.addParam('subCategory', (parentCategory ? category : null));
 
         prepareParams(app, params);
         query = _.clone(params);
@@ -176,7 +177,7 @@ module.exports = {
             result.location = app.getSession('location');
             preparePaginationLink(result.metadata, query, url);
             result.category = category;
-            result.analytics = analytics;
+            result.analytics = helpers.analytics.generateURL(session);
             callback(err, result);
         });
     },

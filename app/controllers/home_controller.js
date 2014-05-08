@@ -7,7 +7,9 @@ var config = require('../config');
 module.exports = {
     index: function(params, callback) {
         var app = helpers.environment.init(this.app);
-        var analytics = helpers.analytics.generateURL(app.getSession(), '/');
+        
+        helpers.analytics.reset();
+        helpers.analytics.setPage('/');
 
         function getIcons(platform) {
             var icons = config.get(['icons', platform], []);
@@ -27,7 +29,7 @@ module.exports = {
         callback(null, {
             categories: app.getSession('categories'),
             icons: getIcons(app.getSession('platform')),
-            analytics: analytics
+            analytics: helpers.analytics.generateURL(app.getSession())
         });
     }
 };
