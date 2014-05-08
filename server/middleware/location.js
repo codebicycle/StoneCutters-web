@@ -66,8 +66,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                     siteLocation = location.city.url;
                 }
                 app.updateSession({
-                    siteLocation: siteLocation,
                     location: location
+                });
+                app.persistSession({
+                    siteLocation: siteLocation
                 });
                 done();
             }

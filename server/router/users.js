@@ -54,7 +54,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function save(done, response, user) {
-                req.rendrApp.updateSession({
+                req.rendrApp.persistSession({
                     user: user
                 });
                 done();
@@ -131,7 +131,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function save(done, response, user) {
-                req.rendrApp.updateSession({
+                req.rendrApp.persistSession({
                     user: user
                 });
                 done();
