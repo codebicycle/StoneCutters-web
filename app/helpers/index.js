@@ -8,6 +8,7 @@ module.exports = {
     marketing: require('./marketing'),
     cookies: require('./cookies'),
     seo: require('./seo'),
+    urls: require('./urls'),
     fitText: function(element, kompressor, options) {
         var compressor = kompressor || 1;
         var settings = $.extend({

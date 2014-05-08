@@ -1,6 +1,5 @@
 <section id="categories">
 	<ul>
-		
 		{% for category in categories.models %}
 			<li>
 				<a href="/change-this-description-for-the-category-cat-{{category.id}}?location={{siteLocation}}" >
@@ -10,4 +9,7 @@
 		    </li>
 		{% endfor %}
 	</ul>
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}   
 </section>

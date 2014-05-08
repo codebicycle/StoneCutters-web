@@ -17,7 +17,7 @@ module.exports = RendrView.extend({
         var app = helpers.environment.init(this.app);
 
         return _.extend({}, data, {
-            analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data),
+            analyticsImgUrls: helpers.analytics.ati.imgUrls(this.app.getSession(), data),
             dictionary: translations[app.getSession('selectedLanguage') || 'en']
         });
     },

@@ -141,6 +141,12 @@ module.exports = {
             }
         };
         var category = helpers.categories.getCat(app.getSession(), params.catId);
+        var parentCategory = (category.parentId ? helpers.categories.getCat(app.getSession(), category.parentId) : category);
+        var subCategory = (parentCategory ? category : null);
+        var analytics = helpers.analytics.generateURL(app.getSession(), '/description-cat-' + params.catId, {
+            parentCategory: parentCategory,
+            subCategory: subCategory
+        });
         var query;
 
         prepareParams(app, params);
@@ -170,6 +176,7 @@ module.exports = {
             result.location = app.getSession('location');
             preparePaginationLink(result.metadata, query, url);
             result.category = category;
+            result.analytics = analytics;
             callback(err, result);
         });
     },

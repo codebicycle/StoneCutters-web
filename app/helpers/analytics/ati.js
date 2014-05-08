@@ -1,7 +1,7 @@
 'use strict';
 
-var config = require('../config');
-var catHelper = require('./categories');
+var config = require('../../config');
+var catHelper = require('../categories');
 
 module.exports = function analyticsHelper() {
     var imgUrls = function(session, viewData) {
@@ -128,6 +128,8 @@ module.exports = function analyticsHelper() {
         var rnd = Math.floor(Math.random() * 1000000000);
         var referer = session.referer;
 
+        // siteId = '533932'; // DESA
+
         var url = "http://"+logServer+".ati-host.net/hit.xiti?s="+siteId+"&stc="+encodeURIComponent(JSON.stringify(params))+"&idclient="+clientId+"&na="+rnd+"&ref="+referer;
 
         urls.push(url);
@@ -135,7 +137,7 @@ module.exports = function analyticsHelper() {
 
     var api = {
         imgUrls: imgUrls,
-        getPathMatch: getPathMatch,
+        getPathMatch: getPathMatch
     };
 
     return api;

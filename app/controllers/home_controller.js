@@ -7,6 +7,7 @@ var config = require('../config');
 module.exports = {
     index: function(params, callback) {
         var app = helpers.environment.init(this.app);
+        var analytics = helpers.analytics.generateURL(app.getSession(), '/');
 
         if (params.cityId) {
             helpers.environment.updateCity(app, params.cityId);
@@ -15,6 +16,7 @@ module.exports = {
         helpers.seo.addMetatag('title', 'Home');
         helpers.seo.addMetatag('Description', 'This is the home page');
         helpers.seo.addMetatag('robots', 'NOFOLLOW');
+
 
         function getIcons(platform) {
             var icons = config.get(['icons', platform], []);
@@ -61,6 +63,7 @@ module.exports = {
                 result.firstItem = result.whatsNewItems[0];
                 result.siteLocation = siteLocation;
                 result.icons = getIcons(result.platform);
+                result.analytics = analytics;
 
                 _.each(result.whatsNewItems, processItem);
                 callback(err, result);

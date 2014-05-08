@@ -2,5 +2,8 @@
 
 module.exports = {
     paths: require('./paths'),
-    ati: require('./ati')
+    ati: require('./ati'),
+    google: {
+        id: 'UA-50756825-1'
+    }
 };

@@ -22,7 +22,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var pathMatch;
 
             if (path.indexOf('/api/') == -1) {
-                pathMatch = analyticsHelper.getPathMatch(path);
+                pathMatch = analyticsHelper.ati.getPathMatch(path);
                 viewType = config.get(['analytics', 'paths', pathMatch, 'viewType'], '');
             }
             else {
