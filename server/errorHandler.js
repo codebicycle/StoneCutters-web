@@ -10,7 +10,7 @@ exports = module.exports = function errorHandler() {
             redirection = true;
             errorDirection = null;
         }
-        app.updateSession({
+        app.persistSession({
             errorDirection: errorDirection
         });
         return redirection;
@@ -35,7 +35,7 @@ exports = module.exports = function errorHandler() {
         }
         if (~accept.indexOf('html')) {
             if (config.get(['error', 'detail'], true)) {
-                req.rendrApp.updateSession({
+                req.rendrApp.persistSession({
                     error: {
                         statusCode: res.statusCode,
                         message: err.message,
@@ -44,7 +44,7 @@ exports = module.exports = function errorHandler() {
                 });
             }
             res.redirect('/500');
-        } 
+        }
         else if (~accept.indexOf('json')) {
             var error = { message: err.message };
             if (config.get(['error', 'detail'], true)) {
@@ -57,7 +57,7 @@ exports = module.exports = function errorHandler() {
 
             res.setHeader('Content-Type', 'application/json');
             res.end(json);
-        } 
+        }
         else {
             res.setHeader('Content-Type', 'text/plain');
             res.end(config.get(['error', 'detail'], true) ? err.stack : err.toString());

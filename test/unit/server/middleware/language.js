@@ -17,10 +17,6 @@ var languageId = 'es';
 function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
-        app.use(express.session({
-            store: require('../../../../server/memcached')(express),
-            secret: 'test'
-        }));
     };
 }
 
@@ -29,6 +25,7 @@ describe('server', function test() {
         describe('language', function test() {
             var app;
             var response;
+            var after;
 
             before(function before(done) {
                 app = express();
@@ -77,7 +74,8 @@ describe('server', function test() {
             describe('languages', function test() {
                 it('should be added to the session', function test(done) {
                     var before = response.body.before;
-                    var after = response.body.after;
+
+                    after = response.body.after;
 
                     (function existance(before, after) {
                         before.should.not.have.property('languages');
@@ -95,12 +93,11 @@ describe('server', function test() {
                         .end(end);
 
                     function end(err, response) {
-                        var before = response.body.before;
-                        var after = response.body.after;
+                        var newAfter = response.body.after;
 
                         (function equality(before, after) {
                             before.should.equal(after);
-                        })(JSON.stringify(before.session.languages), JSON.stringify(after.session.languages));
+                        })(JSON.stringify(after.session.languages), JSON.stringify(newAfter.session.languages));
                         done();
                     }
                 });
@@ -113,12 +110,11 @@ describe('server', function test() {
                         .end(end);
 
                     function end(err, response) {
-                        var before = response.body.before;
-                        var after = response.body.after;
+                        var newAfter = response.body.after;
 
                         (function equality(before, after) {
                             before.should.not.equal(after);
-                        })(JSON.stringify(before.session.languages), JSON.stringify(after.session.languages));
+                        })(JSON.stringify(after.session.languages), JSON.stringify(newAfter.session.languages));
 
                         done();
                     }

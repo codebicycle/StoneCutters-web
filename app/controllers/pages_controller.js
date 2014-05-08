@@ -131,9 +131,7 @@ module.exports = {
             return;
         }
         if (err) {
-            app.updateSession({
-                error: null
-            });
+            app.deleteSession('error');
         }
         callback(null, {
             params: params,

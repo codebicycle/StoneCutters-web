@@ -1,7 +1,7 @@
 'use strict';
 
 var config = require('../config');
-var helpers = require('../../app/helpers');
+var cookies = require('../cookies');
 var _ = require('underscore');
 
 module.exports = function(dataAdapter, excludedUrls) {
@@ -23,32 +23,34 @@ module.exports = function(dataAdapter, excludedUrls) {
             var currentClicks;
 
             platform = app.getSession('platform');
-            platforms = config.get(['interstitial', 'ignorePlatform'], ['wap']);
+            platforms = config.get(['interstitial', 'ignorePlatform'], []);
             if (_.contains(platforms, platform)) {
                 return next();
             }
 
-            paths = config.get(['interstitial', 'ignorePath'], ['/health', '/stats', '/check', '/login', '/interstitial']);
+            paths = config.get(['interstitial', 'ignorePath'], []);
             if (_.contains(paths, req.path)) {
                 return next();
             }
 
-            downloadApp = helpers.cookies.get(req, 'downloadApp', 0);
+            downloadApp = cookies.get(req, 'downloadApp', 0);
             if (!downloadApp) {
                 clicks = config.get(['interstitial', 'clicks'], 1);
-                currentClicks = helpers.cookies.get(req, 'clicks', 0);
+                currentClicks = cookies.get(req, 'clicks', 0);
 
                 if (currentClicks < clicks) {
                     currentClicks++;
-                    helpers.cookies.put(res, 'clicks', currentClicks);
+                    cookies.put(res, 'clicks', currentClicks);
                 }
                 else if (!~req.originalUrl.indexOf('/redirect')) {
                     var protocol = app.getSession('protocol');
                     var host = app.getSession('host');
                     var time = config.get(['interstitial', 'time'], 60000);
 
-                    helpers.cookies.put(res, 'clicks', 0);
-                    helpers.cookies.put(res, 'downloadApp', 1, {maxAge: time});
+                    cookies.put(res, 'clicks', 0);
+                    cookies.put(res, 'downloadApp', 1, {
+                        maxAge: time
+                    });
                     return res.redirect(url + '?ref=' + protocol + '://' + host + req.originalUrl);
                 }
             }
