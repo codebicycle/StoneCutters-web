@@ -1,7 +1,6 @@
 {% set templateName = template + '/location/select.html' %}
 {% include templateName %}
-{% set templateName = template + '/post/home_select.html' %}
-{% include templateName %}
+{% view 'location/select' %}
 {% set templateName = template + '/partials/search.html' %}
 {% include templateName %}
 <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
@@ -22,3 +21,19 @@
         {% endfor %}               
 	</tbody>
 </table>
+{% if metadata.next or metadata.previous %}
+	<table width="100%" border="0" bgcolor="#DDDDDD" cellspacing="0" cellpadding="4">
+	    <tbody>
+	    	<tr>
+		        <td align="center" style="border-top: solid thin #808080;">
+		            <small style="display: block;">
+		            	<a href="{{ metadata.previous }}">&lt;</a>
+		            	{{ metadata.page | pagination(metadata.total, metadata.current, 'wap') }}
+		            	<a href="{{ metadata.next }}">&gt;</a>       
+		            </small>
+		        </td>
+	    	</tr>
+		</tbody>
+	</table>
+{% endif %}
+
