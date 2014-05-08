@@ -48,11 +48,8 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function select(done) {
 
-                var language = app.getSession('selectedLanguage');
+                var language = req.param('language','').toLowerCase();
 
-                if(req.param('language')) {
-                    language = req.param('language').toLowerCase();
-                }
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
