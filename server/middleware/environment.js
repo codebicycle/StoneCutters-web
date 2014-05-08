@@ -16,6 +16,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var host = req.headers.host;
             var path = req._parsedUrl.pathname;
             var url = req.originalUrl;
+            var referer = app.getSession('url');
             var index = host.indexOf(':');
             var siteLocation = (index === -1) ? host : host.substring(0,index);
             var viewType = 'api';
@@ -54,7 +55,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             app.updateSession({
                 siteLocation: siteLocation,
                 path: path,
-                referer: '',
+                referer: referer,
                 viewType: viewType,
                 url: url,
                 clientId: clientId,

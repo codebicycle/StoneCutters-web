@@ -8,11 +8,10 @@ module.exports = BaseView.extend({
     className: 'footer_index_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var app = helpers.environment.init(this.app);
 
         return _.extend({}, data, {
-            languages: app.getSession('languages'),
-            selectedLanguage: app.getSession('selectedLanguage').toUpperCase()
+            languages: this.app.getSession('languages'),
+            selectedLanguage: this.app.getSession('selectedLanguage').toUpperCase()
         });
     }
 });

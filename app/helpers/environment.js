@@ -2,45 +2,53 @@
 
 var config = require('../config');
 var analyticsHelper = require('./analytics');
+var cookies = require('./cookies');
+var _ = require('underscore');
+var session;
 
 module.exports = {
     init: function(app) {
-        if (typeof window === 'undefined') {
-            return app;
-        }
         this.setSession(app);
         this.setUrlVars(app);
         return app;
     },
     setSession: function(app) {
-        var data = app.get('session');
+        if (typeof window === 'undefined' || session) {
+            return;
+        }
+        session = _.extend(app.get('session'), cookies.getAll());
 
-        if (!app.updateSession) {
-            app.updateSession = function(pairs) {
-                for (var key in pairs) {
-                    data[key] = pairs[key];
-                }
-                app.set('session', data);
-            };
-        }
-        if (!app.getSession) {
-            app.getSession = function(key) {
-                if (!key) {
-                    return data;
-                }
-                return data[key];
-            };
-        }
-        if (!app.deleteSession) {
-            app.deleteSession = function(key) {
-                if (key) {
-                    delete data[key];
-                }
-                app.set('session', data);
-            };
-        }
+        app.updateSession = function(pairs) {
+            for (var key in pairs) {
+                session[key] = pairs[key];
+            }
+            app.set('session', session);
+        };
+        app.persistSession = function(pairs, options) {
+            for (var key in pairs) {
+                cookies.put(key, pairs[key], options);
+            }
+            app.updateSession(pairs);
+        };
+        app.getSession = function(key) {
+            if (!key) {
+                return session;
+            }
+            return session[key];
+        };
+        app.deleteSession = function(key, options) {
+            if (!key) {
+                return;
+            }
+            cookies.clear(key, options);
+            delete session[key];
+            app.set('session', session);
+        };
     },
     setUrlVars: function(app) {
+        if (typeof window === 'undefined') {
+            return;
+        }
         var location = window.location;
         var url = location.href;
         var path = location.pathname;
@@ -61,7 +69,7 @@ module.exports = {
 
         if (city) {
             location.city = city;
-            app.updateSession({
+            app.persistSession({
                 siteLocation: city.url
             });
         }

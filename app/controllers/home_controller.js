@@ -9,15 +9,6 @@ module.exports = {
         var app = helpers.environment.init(this.app);
         var analytics = helpers.analytics.generateURL(app.getSession(), '/');
 
-        if (params.cityId) {
-            helpers.environment.updateCity(app, params.cityId);
-        }
-        helpers.seo.resetHead();
-        helpers.seo.addMetatag('title', 'Home');
-        helpers.seo.addMetatag('Description', 'This is the home page');
-        helpers.seo.addMetatag('robots', 'NOFOLLOW');
-
-
         function getIcons(platform) {
             var icons = config.get(['icons', platform], []);
             var country = app.getSession('location').url;
@@ -25,50 +16,19 @@ module.exports = {
             return (~icons.indexOf(country)) ? country : 'default';
         }
 
-        (function fetchWhatsNew() {
-            var siteLocation = app.getSession('siteLocation');
-            var spec = {
-                whatsNewItems: {
-                    collection: 'Items',
-                    params: {}
-                }
-            };
 
-            _.extend(spec.whatsNewItems.params, params, {
-                location: siteLocation,
-                item_type: 'adsList',
-                'f.withPhotos': 'true'
-            });
-            app.fetch(spec, function afterFetch(err, result) {
-                var whatsNew = result.whatsNewItems.models[0];
-
-                function processItem(item) {
-                    var year = item.date.year;
-                    var month = item.date.month - 1;
-                    var day = item.date.day;
-                    var hour = item.date.hour;
-                    var minute = item.date.minute;
-                    var second = item.date.second;
-                    var date = new Date(year, month, day, hour, minute, second);
-
-                    item.date.since = helpers.timeAgo(date);
-                }
-
-                result.platform = app.getSession('platform');
-                result.template = app.getSession('template');
-                result.categories = app.getSession('categories');
-                result.dictionary = app.getSession('dictionary');
-                result.whatsNewMetadata = whatsNew.get('metadata');
-                result.whatsNewItems = whatsNew.get('data');
-                result.firstItem = result.whatsNewItems[0];
-                result.siteLocation = siteLocation;
-                result.icons = getIcons(result.platform);
-                result.analytics = analytics;
-
-                _.each(result.whatsNewItems, processItem);
-                callback(err, result);
-            });
-        })();
+        if (params.cityId) {
+            helpers.environment.updateCity(app, params.cityId);
+        }
+        helpers.seo.resetHead();
+        helpers.seo.addMetatag('title', 'Home');
+        helpers.seo.addMetatag('Description', 'This is the home page');
+        helpers.seo.addMetatag('robots', 'NOFOLLOW');
+        callback(null, {
+            categories: app.getSession('categories'),
+            icons: getIcons(app.getSession('platform')),
+            analytics: analytics
+        });
     }
 };
 

@@ -17,10 +17,6 @@ smaug:
 session:
   secret: VWaB5TfjGPNWXJATbr6BK3Hy
 
-memcached:
-  hosts:
-    - 'localhost:11211'
-
 cache:
   lifetime:
     default: 60
@@ -43,13 +39,17 @@ formidable:
 localization:
   wap:
     - 'www.olx.in'
+    - 'www.olx.cl'
   html4:
     - 'www.olx.in'
+    - 'www.olx.cl'
   html5:
     - 'www.olx.in'
     - 'www.jaovat.com'
+    - 'www.olx.cl'
   desktop:
     - 'www.olx.in'
+    - 'www.olx.cl'
 
 interstitial:
   enabled: false
@@ -114,3 +114,6 @@ analytics:
     enabled: true
   atinternet:
     enabled: true
+
+uglify:
+  enabled: false

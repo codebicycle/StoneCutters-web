@@ -16,10 +16,6 @@ var userAgents = ['UCWEB/8.8 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0
 function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
-        app.use(express.session({
-            store: require('../../../../server/memcached')(express),
-            secret: 'test'
-        }));
     };
 }
 

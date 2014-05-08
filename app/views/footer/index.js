@@ -8,8 +8,7 @@ module.exports = BaseView.extend({
     className: 'footer_index_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var app = helpers.environment.init(this.app);
-        var marketing = helpers.marketing.getInfo(app.getSession('marketing'),'footer',app.getSession('platform'));
+        var marketing = helpers.marketing.getInfo(this.app.getSession('marketing'), 'footer', this.app.getSession('platform'));
 
         return _.extend({}, data, {
             marketing: marketing

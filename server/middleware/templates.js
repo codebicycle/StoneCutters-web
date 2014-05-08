@@ -3,7 +3,10 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var localization = require('../config').get('localization');
+        var config = require('../config');
+        var minify = config.get(['uglify', 'enabled'], true);
+        var localization = config.get('localization');
+        var graphite = require('../graphite')();
 
         function isLocalized(platform, siteLocation) {
             return !!(~localization[platform].indexOf(siteLocation));
@@ -34,6 +37,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     osVersion: parseFloat(device.osVersion.replace('_','.'))
                 };
                 var directory = 'default';
+                var jsDir = minify ? 'min' : 'app';
                 var platform;
                 var template;
 
@@ -56,12 +60,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                     directory: directory,
                     platform: platform,
                     template: template,
-                    marketing: marketing
+                    marketing: marketing,
+                    jsDir: jsDir
                 });
                 app.req.app.locals({
                     directory: directory,
                     platform: platform,
                     template: template,
+                    jsDir: jsDir
                 });
                 next();
             }

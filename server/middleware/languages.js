@@ -39,7 +39,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var lastSelectedLanguage = app.getSession('selectedLanguage');
 
                 if (!isNaN(lastSelectedLanguage)) {
-                    app.updateSession({
+                    app.persistSession({
                         selectedLanguage: null
                     });
                 }
@@ -58,7 +58,9 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function store(done) {
                 app.updateSession({
-                    languages: languages,
+                    languages: languages
+                });
+                app.persistSession({
                     selectedLanguage: selectedLanguage
                 });
                 done();

@@ -11,18 +11,18 @@
         {% else %}
             <li class="logIn"><span class="btns blue"></span></li>
         {% endif %}
-        <li class="postBtn"><a href="#" class="btns orange">PUBLICAR</a></li>
+        <li class="postBtn"><a href="#" class="btns orange">POST</a></li>
     </ul>
 </header>
 {% if user %}
 <menu id="myOlx">
         <ul>
-            <li><a href="">Mis Anuncions</a></li>
-            <li><a href="">Mis Mensajes</a>
+            <li><a href="">My Ads</a></li>
+            <li><a href="">My Messages</a>
                 {{ "<span>"+user.unreadMessagesCount+"</span>" if user.unreadMessagesCount > 0 }}
             </li>
-            <li><a href="">Mis Favoritos</a></li>
-            <li><a href="/logout">Salir</a></li>
+            <li><a href="">My Favorites</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </menu>
 {% endif %}

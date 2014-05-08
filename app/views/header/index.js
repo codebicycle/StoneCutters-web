@@ -9,7 +9,6 @@ module.exports = BaseView.extend({
     className: 'header_index_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var app = helpers.environment.init(this.app);
 
         function getBlackBar(app) {
             var bar = {
@@ -30,7 +29,7 @@ module.exports = BaseView.extend({
         return _.extend({}, data, {
             blackBar: getBlackBar(this.app),
             location: this.app.getSession('location'),
-            user: app.getSession('user')
+            user: this.app.getSession('user')
         });
     },
     postRender: function() {

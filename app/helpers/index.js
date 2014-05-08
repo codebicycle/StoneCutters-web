@@ -6,7 +6,6 @@ module.exports = {
     analytics: require('./analytics'),
     categories: require('./categories'),
     marketing: require('./marketing'),
-    cookies: require('./cookies'),
     seo: require('./seo'),
     urls: require('./urls'),
     fitText: function(element, kompressor, options) {

@@ -37,7 +37,7 @@
 	        <tr>
 	            <td align="center" valign="top" style="border-top: solid thin #808080;">
 	                {% set imgIndex = pos if item.images.length > 1 else 0 %}
-	                <img src="{{ item.images[imgIndex].url | static }}" alt="{{ item.title }}" align="top" width="100%" style="display: block;" />
+	                <img src="{{ item.images[imgIndex].url }}" alt="{{ item.title }}" align="top" width="100%" style="display: block;" />
 	            </td>
 	        </tr>
 	        {% if item.images.length > 1 %}

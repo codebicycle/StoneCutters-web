@@ -84,15 +84,14 @@ module.exports = function itemRouter(app, dataAdapter) {
             var platforms = ['wap', 'html4', 'html5', 'desktop'];
 
             if (platform && ~platforms.indexOf(platform)) {
-                req.rendrApp.updateSession({
+                req.rendrApp.persistSession({
                     platformForced: true,
                     platform: platform
                 });
             }
             else {
-                req.rendrApp.updateSession({
-                    platformForced: false
-                });
+                req.rendrApp.deleteSession('platformForced');
+                req.rendrApp.deleteSession('platform');
             }
             res.redirect('/');
         }

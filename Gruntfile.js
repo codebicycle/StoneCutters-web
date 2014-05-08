@@ -104,7 +104,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask('template', ['copy:templates', 'nunjucks']);
 
-    grunt.registerTask('build', ['translate', 'template', 'browserify', 'stylus', 'copy:icons']);
+    grunt.registerTask('javascript', ['browserify', 'uglify']);
+
+    grunt.registerTask('build', ['translate', 'template', 'javascript', 'stylus', 'copy:icons']);
 
     grunt.registerTask('compile', ['clean', 'build']);
 

@@ -10,7 +10,11 @@ module.exports = function(nunjucks) {
             return d.toLocaleString();
         },
         urlize: function(string) {
-            return string.replace(/ /g, '-').replace(/---/g, '-').toLowerCase();
+            return string
+                .replace(/ /g, '-')
+                .replace(/---/g, '-')
+                .replace(/:/g, '-')
+                .toLowerCase();
         },
         static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 'development');
@@ -131,7 +135,7 @@ module.exports = function(nunjucks) {
             out.push('</div>');
             return out.join('');
         },
-        pagination: function(currentPage, total, currentURL) {
+        pagination: function(currentPage, total, currentURL, platform) {
             var out = [];
             var max = config.get(['smaug', 'maxPageSize'], 50);
             var pages = Math.floor(total / max) + ((total % max) === 0 ? 0 : 1);
@@ -142,16 +146,38 @@ module.exports = function(nunjucks) {
 
             function prepareURL(page, last) {
                 if (page > 0 && page <= pages) {
-                    out.push('<a href="');
-                    out.push(currentURL.replace(regExp, '-p-' + page));
-                    out.push('" class="');
-                    out.push(page === currentPage ? 'active ' : '');
-                    out.push(last ? 'last' : '');
-                    out.push('">');
-                    out.push(page);
-                    out.push('</a>');
+                    if(page === currentPage){
+                        out.push('<strong>'+page+'</strong>');
+                    }else{
+                        out.push('<a href="');
+                        out.push(currentURL.replace(regExp, '-p-' + page));
+                        out.push('" class="');
+                        out.push(last ? 'last' : '');
+                        out.push('">');
+                        out.push(page);
+                        out.push('</a>');
+                    }
                     count++;
-                } 
+                }
+                else if (page < pages) {
+                    pagination.push(pagination[pagination.length - 1] + 1);
+                }
+            }
+            function prepareURLwap(page, last) {
+                if (page > 0 && page <= pages) {
+                    if(page === currentPage){
+                        out.push('<strong>'+page+'</strong>');
+                        out.push(last ? '' : ' | ');
+                    }else{
+                        out.push('<a href="');
+                        out.push(currentURL.replace(regExp, '-p-' + page));
+                        out.push('">');
+                        out.push(page);
+                        out.push('</a>');
+                        out.push(last ? '' : ' | ');
+                    }
+                    count++;
+                }
                 else if (page < pages) {
                     pagination.push(pagination[pagination.length - 1] + 1);
                 }
@@ -165,9 +191,16 @@ module.exports = function(nunjucks) {
                 }
             }
             max = 5;
-            for (i = 0; i < pagination.length && count < max; i++) {
-                prepareURL(pagination[i], ((count + 1) === max));
+            if(platform === 'wap') {
+                for (i = 0; i < pagination.length && count < max; i++) {
+                    prepareURLwap(pagination[i], ((count + 1) === max));
+                }
+            }else{
+                for (i = 0; i < pagination.length && count < max; i++) {
+                    prepareURL(pagination[i], ((count + 1) === max));
+                }
             }
+            
             return out.join('');
         },
         is: function(value, type) {

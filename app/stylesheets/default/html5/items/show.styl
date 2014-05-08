@@ -26,6 +26,9 @@ section#itemPage #title ul li a.share {
 section#itemPage #title ul li a.add {
 	background-position: -35px 0;
 }
+section#itemPage #title ul li a.remove {
+	background-position: -132px 0;
+}
 section#itemPage section {
 	height: auto;
 	margin: 0 0 .5rem;
@@ -77,8 +80,8 @@ section#itemPage section#onePicture .slide div {
 	/* Fix of Webkit flickering */
 	z-index:1;
 }
-.swiper-container, .swiper-containerRA, .swiper-container .swiper-slide, .swiper-containerRA .swiper-slide {width: 100%; height: auto!important;}
-.swiper-container .swiper-wrapper, .swiper-containerRA .swiper-wrapper {
+.swiper-container, .swiper-containerRA, .swiper-container .swiper-slide, .swiper-containerRA .swiper-slide, {width: 100%; height: auto!important;}
+.swiper-container .swiper-wrapper, .swiper-containerRA .swiper-wrapper{
 	height: auto!important;
 	position:relative;
 	width:100%;
@@ -228,6 +231,14 @@ section#itemPage section.reply div.replySubmit {
 	display: block;
 	text-align: center;
 }
+section#itemPage section.reply form small{
+	color: #FF0000; 
+	display: block; 
+	margin: -0.5rem 0 0.5rem; 
+	font-size: 0.75rem; 
+	padding: 0.25rem 0 0 0.5rem;
+}
+
 section.actions{width: 100%; margin: 0!important; position: fixed; left: 0; bottom: 0; background: #fff; z-index: 10; background: #fff;}
 section.actions .background{width: 5%; height: 100%; position: absolute; top: 0; right: 0; background: #FF7700; z-index: 1;}
 section.actions > span{width: 100%; height: 1.3em; display: block; position: absolute; top: -1.3em; padding: 0 0 0 .5em; background: #333; color: #fff; opacity: .85;  z-index: 10;}
@@ -248,3 +259,105 @@ section.actions > div.action > div span, section.actions > div.action > a span{w
     section.actions > div.action:before{padding-top: 28%!important;}
     section.actions > div.action > div, section.actions > div.action > a{background-size: 15%;}
 }
+
+
+/*----Galery----*/
+.galCont {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; background: #000;}
+
+/*----Visible----*/
+.galCont.visible {display: block;}
+.swiper-container-gal, .swiper-container-gal .swiper-slide {width: 100%; height: 100%;}
+.galCont .title{
+	width: 100%; 
+	position: absolute; 
+	left: 0; 
+	top: 0; 
+	background: #000;	
+	border-bottom: 1px solid #42403f; 
+	color: #ffffff;
+	font-size: 13px;
+	font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
+	text-align: center;
+	display: block;
+    padding: 13px; z-index: 100;
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+}
+.swiper-container-gal .swiper-slide , #galContOne .galCont-container {float: left; background-position: center center; background-repeat: no-repeat; background-size: contain;}
+.galCont .galActions{width: 100%; height: 20px; position: absolute; left: 0; bottom: 0; 
+	background: #000000;
+	border-top: 1px solid #42403f;
+	color: #ffffff;
+	font-size: 13px;
+	font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
+	text-align: center;
+	height: 44px;
+	display: table;
+	table-layout: fixed; z-index: 100;
+}
+.galActions > div{display: table-cell; outline: none; -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;}
+
+.galActions > div > span{width: 44px; height: 44px; margin: 0 auto; display: block; background-image: url(imageUrl/images/html5/itemPageSprite.png); background-repeat: no-repeat;}
+.galActions > div.close > span{background-position: -3px -40px;}
+.galActions > div.pause > span{background-position: -170px -40px;}
+.galActions > div.pause.play > span {background-position: -90px -40px!important;}
+.galActions > div.prev > span{background-position: -45px -40px;}
+.galActions > div.next > span{background-position: -134px -40px;}
+
+
+.galActions > div.closeDis > span{background-position: -3px -84px;}
+.galActions > div.playDis > span{background-position: -90px -84px;}
+.galActions > div.prevDis > span{background-position: -45px -84px;}
+.galActions > div.nextDis > span{background-position: -134px -84px;}
+
+.swiper-container-gal {
+	height: 100% !important;
+    text-align: center;
+    width: 100%;
+	margin:0;
+	position:relative;
+	overflow:hidden;
+	-webkit-backface-visibility:hidden;
+	-moz-backface-visibility:hidden;
+	-ms-backface-visibility:hidden;
+	-o-backface-visibility:hidden;
+	backface-visibility:hidden;
+	/* Fix of Webkit flickering */
+	z-index:1;
+}
+
+/*----Popups----*/
+
+.popup {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; background: rgba(0, 0, 0, .5); -moz-transition: all 400ms ease-in-out 0ms; -webkit-transition: all 400ms ease-in-out 0ms; transition: all 400ms ease-in-out 0ms;}
+.popup-wrapper {display: table-cell; width: 100%; height: 100%; padding: 1rem; text-align: center; vertical-align: middle; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+.popup-container {display: block; overflow: hidden; width: 100%; margin: 0 auto; padding: 1rem; text-align: left; background-color: #FFF; border: solid thin #4275BA; border-radius: .5rem; box-shadow: 0 0 .5rem rgba(0, 0, 0, .5); -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; -moz-transform: scale(0); -moz-transition: all 250ms ease-in-out 0ms; -webkit-transform: scale(0); -webkit-transition: all 250ms ease-in-out 0ms; transform: scale(0); transition: all 250ms ease-in-out 0ms;}
+.popup-container h4 {position: relative; margin:0; padding-bottom: 1rem; font-weight: normal; text-align: center; text-transform: uppercase; line-height: 1em; color: #4275BA; border-bottom: solid thin #4275BA;}
+.popup-container > div {overflow: auto; width: 100%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: -2rem 0 -3.75rem; border-style: solid; border-color: #FFF; border-width: 2rem 0 3.75rem;}
+.popup-container li:not(:first-child) {border-top: solid thin #CCC;}
+.popup-container > div .social {padding: .5em 0; list-style: none;}
+.popup-container > div .social li {padding: .5em 0;}
+.popup-container > div .social a {display: block; padding: .5em 0; line-height: 1em; color: #666;}
+.popup-container > div .social a:before {content:''; float: left; width: 2em; height: 2em; margin: -.5em 0 -.5em -.5em; background-repeat: no-repeat; background-position: center; background-color: transparent;}
+.popup-container > div .social .facebookButton:before {background-image: url(imageUrl/images/html5/facebook.png);}
+.popup-container > div .social .twitterButton:before {background-image: url(imageUrl/images/html5/twitter.png);}
+.popup-container footer {position: relative; padding: 1rem 1rem 0; text-align: center; border-top: solid thin #CCC;}
+.popup-container footer a {padding: .75rem 2.75rem; display: inline-block;}
+.popup.visible {display: table;}
+.popup.visible .popup-container {-moz-transform: scale(1); -webkit-transform: scale(1); transform: scale(1);}
+
+
+
+
+
+.msgCont {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; -moz-transition: all 400ms ease-in-out 0ms; -webkit-transition: all 400ms ease-in-out 0ms; transition: all 400ms ease-in-out 0ms;}
+.msgCont-wrapper {display: table-cell; width: 100%; height: 100%; padding: 1rem; text-align: center; vertical-align: middle; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+.msgCont-container {display: block; text-align: center; overflow: hidden; width: 70%; margin: 0 auto; padding: 1rem; text-align: left; background: rgba(51, 51, 51, .75); -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; -moz-transform: scale(0); -moz-transition: all 250ms ease-in-out 0ms; -webkit-transform: scale(0); -webkit-transition: all 250ms ease-in-out 0ms; transform: scale(0); transition: all 250ms ease-in-out 0ms; color: #fff; font-size: 1rem;}
+
+.msgCont.visible {display: table;}
+.msgCont.visible .msgCont-container {-moz-transform: scale(1); -webkit-transform: scale(1); transform: scale(1);}

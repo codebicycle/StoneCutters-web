@@ -13,6 +13,7 @@ public/js/mergedAssets.js
 public/js/libs.js
 public/js/app.js
 public/js/app
+public/js/min
 public/css
 app/templates/compiledTemplates.js
 app/templates/compiled

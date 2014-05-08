@@ -1,0 +1,49 @@
+{% view 'location/select' %}
+{% set templateName = template + '/partials/search.html' %}
+{% include templateName %}
+
+{% if metadata.total == 0 %}
+	<table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
+		<tbody>
+			<tr>
+	            <td style="border-top: solid thin #808080;">
+	                <small style="display: block;">Lo lamentamos pero no hay resultados para tu búsqueda.</small>
+	            </td>
+	        </tr>
+		</tbody>
+	</table>
+{% else %}
+	<table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
+		<tbody>
+			{%for item in items %}
+				<tr>
+		            <td style="border-top: solid thin #808080;">
+		                <a style="display: block;" tabindex="1" href="{{ item.title | urlize }}-iid-{{ item.id }}">
+		                	<small style="display: block;">
+		                		{% if item.thumbnail %}
+		                			<img border="0" alt="" src="{{ '/images/wap/photo.gif' | static }}">
+		                		{% endif %}
+		                    	{{ item.title }} - {{ item.price.displayPrice }}
+		                	</small>
+		                </a>
+		            </td>
+		        </tr>
+	        {% endfor %}
+		</tbody>
+	</table>
+	{% if metadata.next or metadata.previous %}
+		<table width="100%" border="0" bgcolor="#DDDDDD" cellspacing="0" cellpadding="4">
+		    <tbody>
+		    	<tr>
+			        <td align="center" style="border-top: solid thin #808080;">
+			            <small style="display: block;">
+			            	<a href="{{ metadata.previous }}">&lt;</a>
+			            	{{ metadata.page | pagination(metadata.total, metadata.current, 'wap') }}
+			            	<a href="{{ metadata.next }}">&gt;</a>       
+			            </small>
+			        </td>
+		    	</tr>
+			</tbody>
+		</table>
+	{% endif %}
+{% endif %} 
