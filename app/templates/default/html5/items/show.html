@@ -84,26 +84,26 @@
 
 	<section class="reply">
 		<span>Contactar al anunciante</span>
-		<form  action="">
+		<form id="replyForm" action="">
 			<label>* Mensaje</label>
-			<textarea class="message" name="replytoad[message]"></textarea>
+			<textarea class="message" name="message"></textarea>
 			<small class="message hide"></small>
 
 			<label>* Nombre</label>
-			<input type="text" value="" class="name" name="replytoad[name]">
+			<input type="text" value="" class="name" name="name">
 			<small class="name hide"></small>
 
 			<label>* Email</label>
-			<input type="email" value="" class="email" name="replytoad[email]">
+			<input type="email" value="" class="email" name="email">
 			<small class="email hide"></small>
 
 			<label>Teléfono</label>
-			<input type="number" class="phone" name="replytoad[phone]">
-
+			<input type="number" class="phone" name="phone">
+			<input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
 			<span>* Campo Obligatorio</span>
 
 			<div class="btnCenter">
-				<input type="button" class="btns orange" value="Enviar Consulta" id="submit">
+				<input type="button" class="btns orange submit" value="Enviar Consulta" >
 			</div>
 	</form>
 	<div class="clear"></div>
@@ -192,5 +192,11 @@
 				<a href="#" class="popup-close btns grey">Cancelar</a>
 			</footer>
 		</div>
+	</div>
+</div>
+
+<div id="msgCont" class="msgCont">
+	<div class="msgCont-wrapper">
+		<div class="msgCont-container"></div>
 	</div>
 </div>

@@ -231,6 +231,14 @@ section#itemPage section.reply div.replySubmit {
 	display: block;
 	text-align: center;
 }
+section#itemPage section.reply form small{
+	color: #FF0000; 
+	display: block; 
+	margin: -0.5rem 0 0.5rem; 
+	font-size: 0.75rem; 
+	padding: 0.25rem 0 0 0.5rem;
+}
+
 section.actions{width: 100%; margin: 0!important; position: fixed; left: 0; bottom: 0; background: #fff; z-index: 10; background: #fff;}
 section.actions .background{width: 5%; height: 100%; position: absolute; top: 0; right: 0; background: #FF7700; z-index: 1;}
 section.actions > span{width: 100%; height: 1.3em; display: block; position: absolute; top: -1.3em; padding: 0 0 0 .5em; background: #333; color: #fff; opacity: .85;  z-index: 10;}
@@ -342,3 +350,14 @@ section.actions > div.action > div span, section.actions > div.action > a span{w
 .popup-container footer a {padding: .75rem 2.75rem; display: inline-block;}
 .popup.visible {display: table;}
 .popup.visible .popup-container {-moz-transform: scale(1); -webkit-transform: scale(1); transform: scale(1);}
+
+
+
+
+
+.msgCont {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; -moz-transition: all 400ms ease-in-out 0ms; -webkit-transition: all 400ms ease-in-out 0ms; transition: all 400ms ease-in-out 0ms;}
+.msgCont-wrapper {display: table-cell; width: 100%; height: 100%; padding: 1rem; text-align: center; vertical-align: middle; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+.msgCont-container {display: block; text-align: center; overflow: hidden; width: 70%; margin: 0 auto; padding: 1rem; text-align: left; background: rgba(51, 51, 51, .75); -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; -moz-transform: scale(0); -moz-transition: all 250ms ease-in-out 0ms; -webkit-transform: scale(0); -webkit-transition: all 250ms ease-in-out 0ms; transform: scale(0); transition: all 250ms ease-in-out 0ms; color: #fff; font-size: 1rem;}
+
+.msgCont.visible {display: table;}
+.msgCont.visible .msgCont-container {-moz-transform: scale(1); -webkit-transform: scale(1); transform: scale(1);}
