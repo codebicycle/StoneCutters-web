@@ -148,7 +148,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(response, item) {
-                res.redirect('/change-this-description-for-the-item-iid-' + item.id + '?sk=' + item.securityKey);
+                res.redirect('/posting/success/' + item.id + '?sk=' + item.securityKey);
                 clean();
             }
 
