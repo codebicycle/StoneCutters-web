@@ -14,18 +14,24 @@ module.exports = {
 
             return (~icons.indexOf(country)) ? country : 'default';
         }
-
-        if (params.cityId) {
-            helpers.environment.updateCity(app, params.cityId);
+        
+        function done(err) {
+            callback(err, {
+                categories: app.getSession('categories'),
+                icons: getIcons(app.getSession('platform'))
+            });
         }
+
         helpers.seo.resetHead();
         helpers.seo.addMetatag('title', 'Home');
         helpers.seo.addMetatag('Description', 'This is the home page');
         helpers.seo.addMetatag('robots', 'NOFOLLOW');
-        callback(null, {
-            categories: app.getSession('categories'),
-            icons: getIcons(app.getSession('platform'))
-        });
+        if (params.cityId) {
+            helpers.environment.updateCity(app, params.cityId, done);
+        }
+        else {
+            done();
+        }
     }
 };
 

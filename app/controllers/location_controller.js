@@ -38,7 +38,7 @@ module.exports = {
                 };
 
                 cities.models.forEach(function sortCity(city) {
-                    cities._byId[city.id] = city;
+                    cities._byId[city.url] = city;
                 });
                 location.cities = cities;
 
