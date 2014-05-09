@@ -1,17 +1,23 @@
+{% view 'location/select' %}
+{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% include templateName %}
 <div class="breadcrumb">
     <a href="/">Back</a>
     <h1>Post a Free Ad</h1>
 </div>
 <div id="success">
-{{ item.title }}
+    <div>
+        <h1>AllSet_Mob</h1>
+        <h2>AdSubmittedApproval</h2>
+        <p>SeeAdIn2Hrs_Mob</p>
+        <p>You can view your ad <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">here</a>.</p>
+    </div>
+    <div style="margin:6px 0 0 0;">
+        <h1>EmailAdActivated_Mob</h1>
+        <a href="/posting" class="btns orange">Post another add</a>
+        <a href="/" class="back">BackToStart_Mob</a>
+    </div>
 </div>
-
-
-
-
-
-
-
 <div class="breadcrumb">
     <a href="/">back</a>
     <a href="/" class="home">home</a>
