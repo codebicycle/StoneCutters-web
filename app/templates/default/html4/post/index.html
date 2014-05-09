@@ -1,0 +1,18 @@
+<div class="breadcrumb">
+    <a href="/">Back</a>
+    <h1>Elige una categoría</h1>
+</div>
+<div id="selectCat">
+    <ul class="normalList">
+        {% for category in categories.models %}
+            <li class="{{ "last" if loop.last else "" }}">
+                <a href="posting/{{category.id}}">{{category.trName}}</a>
+            </li>
+        {% endfor %}
+    <ul>
+</div>
+<div class="breadcrumb">
+    <a href="/">back</a>
+    <a href="/" class="home">home</a>
+</div>
+

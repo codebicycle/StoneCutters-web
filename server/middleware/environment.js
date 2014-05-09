@@ -18,7 +18,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var url = req.originalUrl;
             var referer = app.getSession('url');
             var index = host.indexOf(':');
-            var siteLocation = (index === -1) ? host : host.substring(0,index);
+            var siteLocation = app.getSession('siteLocation');
             var viewType = 'api';
             var pathMatch;
 
@@ -29,16 +29,10 @@ module.exports = function(dataAdapter, excludedUrls) {
             else {
                 viewType = 'api';
             }
-
-            siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
-
-            /** If I detect that is not a m.olx.com like URL I will set up arg location
-            This is only for testing in Rackspace, must be removed in the near future. */
-            (function rackspaceWalkaround() {
-                var pointIndex = siteLocation.indexOf('.');
-                var firstWord = siteLocation.substring(0, pointIndex);
-                siteLocation = (firstWord === 'www') ? siteLocation : 'www.olx.com.ar';
-            })();
+            if (!siteLocation) {
+                siteLocation = (index === -1) ? host : host.substring(0,index);
+                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
+            }
 
             req.headers.host = siteLocation;
 
@@ -51,7 +45,6 @@ module.exports = function(dataAdapter, excludedUrls) {
 
                 clientId = String.fromCharCode(c1)+n+String.fromCharCode(c2);
             }
-
             app.updateSession({
                 siteLocation: siteLocation,
                 path: path,

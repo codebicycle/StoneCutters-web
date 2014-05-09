@@ -31,6 +31,7 @@ module.exports = {
             };
 
             app.fetch(spec, function afterFetch(err, result) {
+                console.log(result.cities.toJSON());
                 var cities = {
                     'models': result.cities.toJSON(),
                     '_byId': {},
@@ -38,7 +39,7 @@ module.exports = {
                 };
 
                 cities.models.forEach(function sortCity(city) {
-                    cities._byId[city.id] = city;
+                    cities._byId[city.url] = city;
                 });
                 location.cities = cities;
 
