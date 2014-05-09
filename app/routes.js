@@ -16,9 +16,11 @@ module.exports = function(match) {
     match('myolx/favoritelisting', 'user#favorites');
 
     match('posting', 'post#index');
+    match('posting/success/:itemId', 'post#success');
     match('posting/:categoryId', 'post#subcat');
     match('posting/:categoryId/:subcategoryId', 'post#form');
     match('myolx/edititem/:itemId?', 'post#edit');
+
 
     match('terms', 'pages#terms');
     match('help', 'pages#help');
