@@ -6,7 +6,6 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../config');
         var minify = config.get(['uglify', 'enabled'], true);
         var localization = config.get('localization');
-        var graphite = require('../graphite')();
 
         function isLocalized(platform, siteLocation) {
             return !!(~localization[platform].indexOf(siteLocation));

@@ -53,14 +53,11 @@ module.exports = {
         var url = location.href;
         var path = location.pathname;
         var referer = app.getSession('url');
-        var pathMatch = analyticsHelper.ati.getPathMatch(path);
-        var viewType = config.get(['analytics', 'paths', pathMatch, 'viewType'], '');
-
+        
         app.updateSession({
             path: path,
             referer: referer,
-            url: url,
-            viewType: viewType
+            url: url
         });
     },
     updateCity: function(app, cityId) {

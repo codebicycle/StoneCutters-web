@@ -19,16 +19,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             var referer = app.getSession('url');
             var index = host.indexOf(':');
             var siteLocation = (index === -1) ? host : host.substring(0,index);
-            var viewType = 'api';
-            var pathMatch;
-
-            if (path.indexOf('/api/') == -1) {
-                pathMatch = analyticsHelper.ati.getPathMatch(path);
-                viewType = config.get(['analytics', 'paths', pathMatch, 'viewType'], '');
-            }
-            else {
-                viewType = 'api';
-            }
 
             siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
 
@@ -56,7 +46,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 siteLocation: siteLocation,
                 path: path,
                 referer: referer,
-                viewType: viewType,
                 url: url,
                 clientId: clientId,
                 host: host,

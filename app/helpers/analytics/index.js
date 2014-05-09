@@ -86,7 +86,7 @@ function generateURL(session) {
     addParam('referer', (session.referer || '-'));
     addParam('page', page);
     addParam('platform', session.platform);
-    addParam('custom', analytics.ati.getParams(url, query.params));
+    addParam('custom', analytics.ati.getParams(session, url, query.params));
 
     return '/pageview.gif?' + stringifyParams();
 }

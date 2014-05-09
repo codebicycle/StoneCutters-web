@@ -6,8 +6,11 @@ module.exports = {
         isServer: false,
         google: '',
         ati: {
-            page_name: 'home_page',
-            category: 'home'
+            process: false,
+            params: {
+                page_name: 'home_page',
+                category: 'home'
+            }
         }
     },
     '': {
@@ -15,8 +18,11 @@ module.exports = {
         isServer: false,
         google: '',
         ati: {
-            page_name: 'home_page',
-            category: 'home'
+            process: false,
+            params: {
+                page_name: 'home_page',
+                category: 'home'
+            }
         }
     },
     'search/:search/-p-:page/:filters?': {
@@ -24,8 +30,13 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/search/to_be_completed',
         ati: {
-            page_name: 'home_page',
-            category: 'home'
+            process: true,
+            params: {
+                page_name: 'listing_all',
+                category: 'listing',
+                keyword: '',
+                page_nb: 0
+            }
         }
     },
     'search/:search?': {
@@ -33,17 +44,27 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/search',
         ati: {
-            page_name: 'home_page',
-            category: 'home'
+            process: true,
+            params: {
+                page_name: 'listing_all',
+                category: 'listing',
+                keyword: '',
+                page_nb: 0
+            }
         }
     },
     'nf/search/:search/-p-:page/:filters?': {
         view: 'items#search',
         isServer: false,
-        google: '[category-name]/[subcategory-id]/search/to_be_completed',
+        google: '[category-name]/[subcategory-id]/staticsearch/to_be_completed',
         ati: {
-            page_name: 'home_page',
-            category: 'home'
+            process: true,
+            params: {
+                page_name: 'listing_all',
+                category: 'listing',
+                keyword: '',
+                page_nb: 0
+            }
         }
     },
     'nf/search/:search?': {
@@ -51,17 +72,13 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/staticsearch',
         ati: {
-            page_name: 'home_page',
-            category: 'home'
-        }
-    },
-    'location': {
-        view: 'location#index',
-        isServer: false,
-        google: 'location',
-        ati: {
-            page_name: 'home_page',
-            category: 'home'
+            process: true,
+            params: {
+                page_name: 'listing_all',
+                category: 'listing',
+                keyword: '',
+                page_nb: 0
+            }
         }
     },
     'register': {
@@ -69,8 +86,11 @@ module.exports = {
         isServer: false,
         google: 'register',
         ati: {
-            page_name: 'register_page',
-            category: 'register'
+            process: false,
+            params: {
+                page_name: 'register_form',
+                category: 'account'
+            }
         }
     },
     'login': {
@@ -78,8 +98,11 @@ module.exports = {
         isServer: false,
         google: 'login',
         ati: {
-            page_name: 'login_page',
-            category: 'login'
+            process: false,
+            params: {
+                page_name: 'login',
+                category: 'account'
+            }
         }
     },
     'myolx/myadslisting': {
@@ -87,8 +110,11 @@ module.exports = {
         isServer: false,
         google: 'myadslisting',
         ati: {
-            page_name: 'myadslisting_page',
-            category: 'myadslisting'
+            process: false,
+            params: {
+                page_name: 'ads_listings',
+                category: 'account'
+            }
         }
     },
     'myolx/favoritelisting': {
@@ -96,8 +122,24 @@ module.exports = {
         isServer: false,
         google: 'favoritelisting',
         ati: {
-            page_name: 'favoritelisting_page',
-            category: 'favoritelisting'
+            process: false,
+            params: {
+                page_name: 'favorite_listings',
+                category: 'account'
+            }
+        }
+    },
+    'location': {
+        view: 'location#index',
+        isServer: false,
+        google: 'location',
+        ati: {
+            process: false,
+            params: {
+                page_name: 'posting_step1',
+                category: 'posting',
+                funnel_page: 'posting_step1'
+            }
         }
     },
     'posting': {
@@ -105,8 +147,12 @@ module.exports = {
         isServer: false,
         google: 'posting',
         ati: {
-            page_name: 'posting_page',
-            category: 'posting'
+            process: false,
+            params: {
+                page_name: 'posting_step2',
+                category: 'posting',
+                funnel_page: 'posting_step2'
+            }
         }
     },
     'posting/:categoryId': {
@@ -114,8 +160,12 @@ module.exports = {
         isServer: false,
         google: 'posting',
         ati: {
-            page_name: 'posting_page',
-            category: 'posting'
+            process: false,
+            params: {
+                page_name: 'posting_step3',
+                category: 'posting',
+                funnel_page: 'posting_step3'
+            }
         }
     },
     'posting/:categoryId/:subcategoryId': {
@@ -123,26 +173,97 @@ module.exports = {
         isServer: false,
         google: 'posting',
         ati: {
-            page_name: 'posting_page',
-            category: 'posting'
+            process: true,
+            params: {
+                page_name: 'posting_step4',
+                category: 'posting',
+                funnel_page: 'posting_step4',
+                ad_category: '',
+                ad_subcategory: '',
+                funnel_category: '',
+                funnel_subcategory: ''
+            }
         }
     },
+    /*
+    'posting/success': {
+        view: 'post#success',
+        isServer: false,
+        google: 'posting',
+        ati: {
+            process: true,
+            params: {
+                page_name: 'posting_success',
+                category: 'posting',
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                action_type: 'posted',
+                poster_id: '0',
+                poster_type: 'registered_no',
+                funnel_page: 'posting_success',
+                funnel_category: '',
+                funnel_subcategory: ''
+            }
+        }
+    },
+    */
     'myolx/edititem/:itemId?': {
         view: 'post#edit',
         isServer: false,
         google: 'edititem',
         ati: {
-            page_name: 'edititem_page',
-            category: 'edititem'
+            process: true,
+            params: {
+                page_name: 'edit_ad_form',
+                category: 'expired_category',
+                subcategory: 'expired_subCategory',
+                ad_category: 'expired_category',
+                ad_subcategory: 'expired_subCategory',
+                ad_id: '',
+                ad_photo: 0,
+                funnel_page: 'edit_ad_form',
+                funnel_category: '',
+                funnel_subcategory: ''
+            }
         }
     },
+    /*
+    'myolx/edititem/success': {
+        view: 'post#success',
+        isServer: false,
+        google: 'edititem',
+        ati: {
+            process: true,
+            params: {
+                page_name: 'posting_edit_success',
+                category: 'posting',
+                action_type: 'edited',
+                posting_to_action: '',
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                poster_id: '0',
+                poster_type: 'registered_no',
+                funnel_page: 'posting_edit_success',
+                funnel_category: '',
+                funnel_subcategory: ''
+            }
+        }
+    },
+    */
     'terms': {
         view: 'pages#terms',
         isServer: false,
         google: 'terms',
         ati: {
-            page_name: 'terms_page',
-            category: 'terms'
+            process: false,
+            params: {
+                page_name: 'terms_and_conditions',
+                category: 'static'
+            }
         }
     },
     'help': {
@@ -150,8 +271,11 @@ module.exports = {
         isServer: false,
         google: 'help',
         ati: {
-            page_name: 'help_page',
-            category: 'help'
+            process: false,
+            params: {
+                page_name: 'help_page',
+                category: 'static'
+            }
         }
     },
     'interstitial': {
@@ -159,8 +283,11 @@ module.exports = {
         isServer: false,
         google: 'interstitial',
         ati: {
-            page_name: 'interstitial_page',
-            category: 'interstitial'
+            process: false,
+            params: {
+                page_name: 'interstitial_page',
+                category: 'interstitial'
+            }
         }
     },
     ':title-iid-:itemId([0-9]+$)': {
@@ -168,8 +295,22 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/item/[item_attributes]',
         ati: {
-            page_name: 'item_page',
-            category: 'item'
+            process: true,
+            params: {
+                page_name: 'detail_page',
+                category: '',
+                subcategory: '',
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                poster_id: '0',
+                poster_type: 'registered_no',
+                action_type: 'loaded',
+                posting_to_action: '',
+                geo1: '',
+                geo2: ''
+            }
         }
     },
     ':title-iid-:itemId([0-9]+)/reply': {
@@ -177,8 +318,20 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/item/[item_attributes]',
         ati: {
-            page_name: 'item_page',
-            category: 'item'
+            process: true,
+            params: {
+                page_name: 'contact_seller_form',
+                category: 'reply',
+                subcategory: '',
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                poster_id: '0',
+                poster_type: 'registered_no',
+                posting_to_action: '',
+                action_type: 'message_form'
+            }
         }
     },
     ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?': {
@@ -186,8 +339,12 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing/[filter_name_value]',
         ati: {
-            page_name: 'items_page',
-            category: 'items'
+            process: true,
+            params: {
+                page_name: 'expired_category',
+                category: 'expired_category',
+                subcategory: 'expired_subCategory'
+            }
         }
     },
     ':title-cat-:catId([0-9]+)-p-:page([0-9]+$)': {
@@ -195,8 +352,12 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing',
         ati: {
-            page_name: 'items_page',
-            category: 'items'
+            process: true,
+            params: {
+                page_name: 'expired_category',
+                category: 'expired_category',
+                subcategory: 'expired_subCategory'
+            }
         }
     },
     ':title-cat-:catId([0-9]+$)': {
@@ -204,8 +365,11 @@ module.exports = {
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing',
         ati: {
-            page_name: 'items_page',
-            category: 'items'
+            process: true,
+            params: {
+                page_name: 'expired_category',
+                category: 'expired_category'
+            }
         }
     },
     ':errorCode([0-9]{3})': {
@@ -213,8 +377,11 @@ module.exports = {
         isServer: false,
         google: 'error',
         ati: {
-            page_name: 'error_page',
-            category: 'error'
+            process: false,
+            params: {
+                page_name: 'not_found',
+                category: 'static'
+            }
         }
     }
 };
