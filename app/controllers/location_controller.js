@@ -31,7 +31,6 @@ module.exports = {
             };
 
             app.fetch(spec, function afterFetch(err, result) {
-                console.log(result.cities.toJSON());
                 var cities = {
                     'models': result.cities.toJSON(),
                     '_byId': {},
