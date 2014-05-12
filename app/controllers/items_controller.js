@@ -133,164 +133,168 @@ function preparePaginationLink(metadata, query, url) {
 
 module.exports = {
     index: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var spec = {
-            items: {
-                collection: 'Items',
-                params: params
-            }
-        };
-        var category = helpers.categories.getCat(app.getSession(), params.catId);
-        var query;
+        helpers.controllers.control(this, params, controller);
 
-        prepareParams(app, params);
-        query = _.clone(params);
+        function controller() {
+            var spec = {
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            };
+            var category = helpers.categories.getCat(this.app.getSession(), params.catId);
+            var protocol = this.app.getSession('protocol');
+            var host = this.app.getSession('host');
+            var query;
 
-        params.categoryId = params.catId;
-        delete params.catId;
-        delete params.title;
-        delete params.page;
-        delete params.filters;
-        delete params.urlFilters;
+            prepareParams(this.app, params);
+            query = _.clone(params);
+            params.categoryId = params.catId;
+            delete params.catId;
+            delete params.title;
+            delete params.page;
+            delete params.filters;
+            delete params.urlFilters;
 
-        /** don't read from cache, because rendr caching expects an array response
-        with ids, and smaug returns an object with 'data' and 'metadata' */
-        app.fetch(spec, {
-            'readFromCache': false
-        }, function afterFetch(err, result) {
-            var model = result.items.models[0];
-            var protocol = app.getSession('protocol');
-            var host = app.getSession('host');
-            var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
+            /** don't read from cache, because rendr caching expects an array response
+            with ids, and smaug returns an object with 'data' and 'metadata' */
+            this.app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
+                var model = result.items.models[0];
 
-            result.items = model.get('data');
-            result.metadata = model.get('metadata');
-            result.platform = app.getSession('platform');
-            result.template = app.getSession('template');
-            result.location = app.getSession('location');
-            preparePaginationLink(result.metadata, query, url);
-            result.category = category;
-            callback(err, result);
-        });
+                result.items = model.get('data');
+                result.metadata = model.get('metadata');
+                preparePaginationLink(result.metadata, query, url);
+                result.category = category;
+                callback(err, result);
+            });
+        }
     },
     show: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var user = app.getSession('user');
-        var securityKey = params.sk;
-        var siteLocation = app.getSession('siteLocation');
-        var spec = {
-            item: {
-                model: 'Item',
-                params: params
-            },
-            items: {
-                collection : 'Items',
-                params: {
-                    location: siteLocation,
-                    offset: 0,
-                    pageSize:10,
-                    relatedAds: params.itemId
+        helpers.controllers.control(this, params, controller);
+
+        function controller() {
+            var user = this.app.getSession('user');
+            var securityKey = params.sk;
+            var siteLocation = this.app.getSession('siteLocation');
+            var spec = {
+                item: {
+                    model: 'Item',
+                    params: params
+                },
+                items: {
+                    collection : 'Items',
+                    params: {
+                        location: siteLocation,
+                        offset: 0,
+                        pageSize:10,
+                        relatedAds: params.itemId
+                    }
+                }
+            };
+            var anonymousItem;
+
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.itemId] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+                else {
+                    securityKey = anonymousItem[params.itemId];
                 }
             }
-        };
-        var anonymousItem;
-
-        if (user) {
-            params.token = user.token;
-        } else if (typeof window !== 'undefined' && localStorage) {
-            anonymousItem = localStorage.getItem('anonymousItem');
-            anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-            if (securityKey) {
-                anonymousItem[params.itemId] = securityKey;
-                localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-            }
-            else {
-                securityKey = anonymousItem[params.itemId];
-            }
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+            delete params.sk;
+            this.app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                var model = result.items.models[0];
+                result.relatedItems = model.get('data');
+                result.user = user;
+                result.item = result.item.toJSON();
+                result.pos = parseInt(params.pos) || 0;
+                result.sk = securityKey;
+                callback(err, result);
+            });
         }
-        params.id = params.itemId;
-        delete params.itemId;
-        delete params.title;
-        delete params.sk;
-        app.fetch(spec, {
-            'readFromCache': false
-        }, function afterFetch(err, result) {
-            var model = result.items.models[0];
-            result.relatedItems = model.get('data');
-            result.platform = app.getSession('platform');
-            result.template = app.getSession('template');
-            result.location = siteLocation;
-            result.user = user;
-            result.item = result.item.toJSON();
-            result.pos = parseInt(params.pos) || 0;
-            result.sk = securityKey;
-            callback(err, result);
-        });
     },
     search: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var spec = {
-            items: {
-                collection: 'Items',
-                params: params
-            }
-        };
-        var category = helpers.categories.getCat(app.getSession(), params.catId);
-        var query;
+        helpers.controllers.control(this, params, controller);
 
-        prepareParams(app, params);
-        query = _.clone(params);
+        function controller() {
+            var spec = {
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            };
+            var category = helpers.categories.getCat(this.app.getSession(), params.catId);
+            var protocol = this.app.getSession('protocol');
+            var host = this.app.getSession('host');
+            var query;
 
-        params.searchTerm = params.search;
-        delete params.search;
-        delete params.title;
-        delete params.page;
-        delete params.filters;
-        delete params.urlFilters;
+            prepareParams(this.app, params);
+            query = _.clone(params);
+            params.searchTerm = params.search;
+            delete params.search;
+            delete params.title;
+            delete params.page;
+            delete params.filters;
+            delete params.urlFilters;
 
-        //don't read from cache, because rendr caching expects an array response
-        //with ids, and smaug returns an object with 'data' and 'metadata'
-        app.fetch(spec, {
-            'readFromCache': false
-        }, function afterFetch(err, result) {
-            var model = result.items.models[0];
-            var protocol = app.getSession('protocol');
-            var host = app.getSession('host');
-            var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
+            //don't read from cache, because rendr caching expects an array response
+            //with ids, and smaug returns an object with 'data' and 'metadata'
+            this.app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
+                var model = result.items.models[0];
 
-            result.items = model.get('data');
-            result.metadata = model.get('metadata');
-            preparePaginationLink(result.metadata, query, '/search?');
-            result.platform = app.getSession('platform');
-            result.template = app.getSession('template');
-            preparePaginationLink(result.metadata, query, url);
-            result.search = query.search;
-            result.category = category;
-            callback(err, result);
-        });
+                result.items = model.get('data');
+                result.metadata = model.get('metadata');
+                preparePaginationLink(result.metadata, query, '/search?');
+                preparePaginationLink(result.metadata, query, url);
+                result.search = query.search;
+                result.category = category;
+                callback(err, result);
+            });
+        }
     },
     reply: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var spec = {
-            item: {
-                model: 'Item',
-                params: params
-            }
-        };
+        helpers.controllers.control(this, params, controller);
 
-        params.id = params.itemId;
-        delete params.itemId;
-        delete params.title;
+        function controller() {
+            var user = this.app.getSession('user');
+            var spec = {
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            };
 
-        app.fetch(spec, {
-            'readFromCache': false
-        }, function afterFetch(err, result) {
-            result.user = app.getSession('user');
-            result.platform = app.getSession('platform');
-            result.template = app.getSession('template');
-            result.location = app.getSession('siteLocation');
-            result.item = result.item.toJSON();
-            callback(err, result);
-        });
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+
+            this.app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                result.user = user;
+                result.item = result.item.toJSON();
+                callback(err, result);
+            });
+        }
+
+
+
     }
 };

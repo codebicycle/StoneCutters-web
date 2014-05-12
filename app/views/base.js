@@ -17,8 +17,8 @@ module.exports = RendrView.extend({
         return _.extend({}, data, {
             platform: this.app.getSession('platform'),
             template: this.app.getSession('template'),
-            directory: this.app.getSession('directory'),
             siteLocation: this.app.getSession('siteLocation'),
+            location: this.app.getSession('location'),
             analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data),
             dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['en-US'],
             referer: this.app.getSession('referer'),

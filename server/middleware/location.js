@@ -13,7 +13,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             var app = req.rendrApp;
             var previousLocation = app.getSession('siteLocation');
-            var siteLocation = req.param('cityId', previousLocation);
+            var siteLocation = req.param('location', previousLocation);
             var location;
             var topCities;
 
