@@ -15,10 +15,11 @@ module.exports = BaseView.extend({
         if (params.errFields && typeof params.errFields === 'string') {
             params.errFields = params.errFields.split(',');
         }
+
         return _.extend({}, data, {
             location: this.app.getSession('siteLocation'),
             user: this.app.getSession('user'),
-            params: params
+            params: params.err
         });
     }
 });

@@ -140,12 +140,29 @@ h4 {
 	padding: 0 0 4px 0;
 	color: #333333;
 }
-.formField label small {
+.formField label > a {
+	color: #4275BA;
+}
+.formField a {
+	text-decoration: underline;
+}
+.formField > a {
+	font-size: 11px;
+	color: #0000EE;
+}
+.formField > label > small {
 	display: block;
 	padding: 2.5px 0 0;
 	font-size: 10px;
 	line-height: 13px;
 	color: #ff6700;
+}
+.formField > small {
+	display: block;
+	padding: 2.5px 0 0;
+	font-size: 10px;
+	line-height: 13px;
+	color: #333333;
 }
 .formField > input, .formField > textarea {
 	width: 99%;
@@ -155,9 +172,14 @@ h4 {
 	border: 1px solid #cccccc;
 	font-size: 16px;
 	background: #f8f8f8;
-}ç
+}
 .formField > input {
 	height: 22px;
+}
+.formField > input.checkbox {
+	width: auto;
+	float: left;
+	margin: 0 7px 0 0;
 }
 .formField > textarea {
 	height: 72px;
