@@ -47,7 +47,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function select(done) {
-                var language = parseInt(req.param('language', 'en'));
+
+                var language = req.param('language','').toLowerCase();
 
                 if (language && !languages._byId[language]) {
                     language = null;

@@ -1,22 +1,17 @@
 'use strict';
 
 var _ = require('underscore');
-var querystring = require('querystring');
 var config = require('../../config');
 var urls = require('../urls');
+var google = require('./google');
+var ati = require('./ati');
 
-var analytics = {
-    google: require('./google'),
-    ati: require('./ati')
-};
 var query = {};
 
 function reset() {
     query.page = '';
     query.params = {};
     query.length = 0;
-    addParam('id', config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X'));
-    addParam('random', Math.round(Math.random() * 1000000));
 }
 
 function setPage(page) {
@@ -67,33 +62,38 @@ function getURLObject(page) {
     }
 }
 
-function stringifyParams() {
-    var params = [];
+function stringifyParams(params) {
+    var str = [];
 
-    _.each(query.params, function(value, name) {
-        params.push(name + '=' + encodeURIComponent(value));
+    _.each(params, function(value, name) {
+        str.push(name + '=' + encodeURIComponent(value));
     });
-    return params.join('&');
+    return str.join('&');
 }
 
 function generateURL(session) {
     var page = query.page;
     var url = getURLObject(page);
-
+    var params = {};
+    
     if (query.length) {
-        page = analytics.google.generatePage(url, query.params);
+        page = google.generatePage(url, query.params);
     }
-    addParam('referer', (session.referer || '-'));
-    addParam('page', page);
-    addParam('platform', session.platform);
-    addParam('custom', analytics.ati.getParams(session, url, query.params));
+    params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
+    params.random = Math.round(Math.random() * 1000000);
+    params.referer = (session.referer || '-');
+    params.page = page;
+    params.platform = session.platform;
+    params.custom = ati.generateParams(session, url, query.params);
 
-    return '/pageview.gif?' + stringifyParams();
+    return '/pageview.gif?' + stringifyParams(params);
 }
 
-module.exports = _.extend({
+module.exports = {
+    google: google,
+    ati: ati,
     reset: reset,
     setPage: setPage,
     addParam: addParam,
     generateURL: generateURL
-}, analytics);
+};

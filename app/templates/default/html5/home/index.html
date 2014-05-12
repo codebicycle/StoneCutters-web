@@ -1,3 +1,6 @@
+{% view 'location/select' %}
+{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% include templateName %}
 <section id="categories">
 	<ul>
 		{% for category in categories.models %}

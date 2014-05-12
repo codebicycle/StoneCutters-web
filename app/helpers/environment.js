@@ -60,15 +60,24 @@ module.exports = {
             url: url
         });
     },
-    updateCity: function(app, cityId) {
-        var location = app.getSession('location');
-        var city = location.cities._byId[cityId];
+    updateCity: function(app, cityId, callback) {
+        var spec = {
+            city: {
+                model: 'City',
+                params: {
+                    location: cityId
+                }
+            }
+        };
 
-        if (city) {
-            location.city = city;
+        app.fetch(spec, function afterFetch(err, result) {
+            if (err) {
+                return callback();
+            }
             app.persistSession({
-                siteLocation: city.url
+                siteLocation: result.city.get('url')
             });
-        }
-    },
+            callback();
+        });
+    }
 };

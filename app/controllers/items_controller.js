@@ -117,8 +117,10 @@ function prepareURLParams(query, url, offset, urlFilters) {
 
 function preparePaginationLink(metadata, query, url) {
     var next;
+    var max = config.get(['smaug', 'maxPageSize'], 50);
 
     metadata.page = query.page;
+    metadata.totalPages = Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1);
     metadata.current = prepareURLParams(query, url, 0, query.urlFilters);
     if (metadata.total > 0) {
         next = metadata.next;
@@ -142,13 +144,8 @@ module.exports = {
         };
         var session = app.getSession();
         var category = helpers.categories.getCat(session, params.catId);
-        var parentCategory = (category.parentId ? helpers.categories.getCat(session, category.parentId) : category);
+        var categoryTree = helpers.categories.getCatTree(session, params.catId);
         var query;
-
-        helpers.analytics.reset();
-        helpers.analytics.setPage('/description-cat-' + params.catId);
-        helpers.analytics.addParam('parentCategory', parentCategory);
-        helpers.analytics.addParam('subCategory', (parentCategory ? category : null));
 
         prepareParams(app, params);
         query = _.clone(params);
@@ -177,7 +174,13 @@ module.exports = {
             result.location = app.getSession('location');
             preparePaginationLink(result.metadata, query, url);
             result.category = category;
+
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/description-cat-' + query.catId);
+            helpers.analytics.addParam('category', categoryTree.parent);
+            helpers.analytics.addParam('subcategory', categoryTree.subCategory);
             result.analytics = helpers.analytics.generateURL(session);
+
             callback(err, result);
         });
     },
@@ -201,6 +204,7 @@ module.exports = {
                 }
             }
         };
+        var session = app.getSession();
         var anonymousItem;
 
         if (user) {
@@ -223,15 +227,30 @@ module.exports = {
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
+            var category;
+            var categoryTree;
             var model = result.items.models[0];
+
             result.relatedItems = model.get('data');
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
             result.location = siteLocation;
             result.user = user;
             result.item = result.item.toJSON();
-            result.pos = parseInt(params.pos) || 0;
+            result.pos = Number(params.pos) || 0;
             result.sk = securityKey;
+
+            category = helpers.categories.getCat(session, result.item.category.id);
+            categoryTree = helpers.categories.getCatTree(session, result.item.category.id);
+
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/description-iid-' + result.item.id);
+            helpers.analytics.addParam('user', user);
+            helpers.analytics.addParam('item', result.item);
+            helpers.analytics.addParam('category', categoryTree.parent);
+            helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+            result.analytics = helpers.analytics.generateURL(session);
+
             callback(err, result);
         });
     },
@@ -243,7 +262,8 @@ module.exports = {
                 params: params
             }
         };
-        var category = helpers.categories.getCat(app.getSession(), params.catId);
+        var session = app.getSession();
+        var user = app.getSession('user');
         var query;
 
         prepareParams(app, params);
@@ -268,12 +288,18 @@ module.exports = {
 
             result.items = model.get('data');
             result.metadata = model.get('metadata');
-            preparePaginationLink(result.metadata, query, '/search?');
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
             preparePaginationLink(result.metadata, query, url);
             result.search = query.search;
-            result.category = category;
+
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/nf/search/' + query.search + '/');
+            helpers.analytics.addParam('keyword', query.search);
+            helpers.analytics.addParam('page_nb', result.metadata.totalPages);
+            helpers.analytics.addParam('user', user);
+            result.analytics = helpers.analytics.generateURL(session);
+
             callback(err, result);
         });
     },
@@ -293,11 +319,28 @@ module.exports = {
         app.fetch(spec, {
             'readFromCache': false
         }, function afterFetch(err, result) {
-            result.user = app.getSession('user');
+            var category;
+            var categoryTree;
+            var session = app.getSession();
+            var user = app.getSession('user');
+
+            result.user = user;
             result.platform = app.getSession('platform');
             result.template = app.getSession('template');
             result.location = app.getSession('siteLocation');
             result.item = result.item.toJSON();
+
+            category = helpers.categories.getCat(session, result.item.category.id);
+            categoryTree = helpers.categories.getCatTree(session, result.item.category.id);
+
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/description-iid-' + result.item.id + '/reply');
+            helpers.analytics.addParam('user', user);
+            helpers.analytics.addParam('item', result.item);
+            helpers.analytics.addParam('category', categoryTree.parent);
+            helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+            result.analytics = helpers.analytics.generateURL(session);
+
             callback(err, result);
         });
     }

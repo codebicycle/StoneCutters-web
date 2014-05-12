@@ -6,10 +6,13 @@ module.exports = {
     terms: function(params, callback) {
         var app = helpers.environment.init(this.app);
 
+        helpers.analytics.reset();
+        helpers.analytics.setPage('/terms');
         callback(null, {
             params: params,
             platform: app.getSession('platform'),
-            template: app.getSession('template')
+            template: app.getSession('template'),
+            analytics: helpers.analytics.generateURL(app.getSession())
         });
     },
     help: function(params, callback) {
@@ -118,8 +121,11 @@ module.exports = {
     interstitial: function(params, callback) {
         var app = helpers.environment.init(this.app);
 
+        helpers.analytics.reset();
+        helpers.analytics.setPage('/interstitial');
         callback(null, {
-            params: params
+            params: params,
+            analytics: helpers.analytics.generateURL(app.getSession())
         });
     },
     error: function(params, callback) {

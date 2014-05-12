@@ -2,6 +2,13 @@
 
 var _ = require('underscore');
 
+
+function daysDiff(date) {
+    var now = new Date();
+    var diff = now.getTime() - date.getTime();
+    return Math.abs(Math.round(diff / (60 * 60 * 24)));
+}
+
 var analyticsParams = {
     category: {
         name: 'category-name',
@@ -11,13 +18,13 @@ var analyticsParams = {
         nameSubName: '[subcategory-name]',
         nameSubId: '[subcategory-id]',
         parse: function (url, options) {
-            if (options.parentCategory && options.subCategory) {
-                url = url.replace(this.nameParentName, options.parentCategory.name);
-                url = url.replace(this.nameSubName, options.subCategory.name);
-                url = url.replace(this.nameSubId, options.subCategory.id);
+            if (options.category && options.subcategory) {
+                url = url.replace(this.nameParentName, options.category.name);
+                url = url.replace(this.nameSubName, options.subcategory.name);
+                url = url.replace(this.nameSubId, options.subcategory.id);
             }
-            else if (options.parentCategory && !options.subCategory) {
-                url = url.replace(this.nameParentName, options.parentCategory.name);
+            else if (options.category && !options.subcategory) {
+                url = url.replace(this.nameParentName, options.category.name);
                 url = url.replace(this.nameSubName, 'nocat');
                 url = url.replace(this.nameSubId, 'nocat');
             }
@@ -25,31 +32,42 @@ var analyticsParams = {
                 url = url.replace(this.nameParentNameSubName, 'nocat');
                 url = url.replace(this.nameParentNameSubId, 'nocat');
             }
-            this.clean(options);
             return url;
-        },
-        clean: function(options) {
-            delete options.parentCategory;
-            delete options.subCategory;
         }
 
     },
     item: {
-        name: 'item attributes',
+        name: 'item_attributes',
         parse: function (url, options) {
-            this.clean(options);
-            return url;
-        },
-        clean: function(options) {
+            var str = [];
+            var item = options.item;
+
+            if (item) {
+                str.push('img_' + ((item.images && item.images.length) ? '1' : '0'));
+                str.push('/source_' + (item.status.feed ? 'f' : 'o'));
+                // str.push('/feat_xx')); // Referer (Possible values: home, listingchp, listingexp)
+
+                if (item.status.deprecated) {
+                    str.push('/age_expired');
+                }
+                else if (!item.status.open) {
+                    str.push('/age_closed');
+                }
+                else if (!item.id) {
+                    str.push('/age_unavailable');
+                }
+                else if (daysDiff(new Date(item.date.timestamp)) > 30) {
+                    str.push('/age_30');
+                }
+
+            }
+            return url.replace('[' + this.name + ']', str.join(''));
         }
     },
     filters: {
         name: 'filter_name_value',
         parse: function (url, options) {
-            this.clean(options);
-            return url;
-        },
-        clean: function(options) {
+            return url.replace('[' + this.name + ']', '');
         }
     }
 };

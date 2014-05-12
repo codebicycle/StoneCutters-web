@@ -2,9 +2,11 @@
 	<ul>
 		{% for language in languages.models %}
 			{% if language.isocode == selectedLanguage %}
-				<li class="current"><strong>{{language.name}}</strong></li>
+				<li><strong>{{language.name}}</strong></li>
+				{{ ' | ' if not loop.last }}
 			{% else %}
-				<li><a href="?language={{language.id}}">{{language.name}}</a></li>
+				<li><a href="?language={{language.isocode}}">{{language.name}}</a></li>
+				{{ ' | ' if not loop.last }}
 			{% endif %}
 		{% endfor %}
 	</ul>

@@ -11,6 +11,12 @@ module.exports = function analyticsHelper() {
         }
     };
 
+    function daysDiff(date) {
+        var now = new Date();
+        var diff = now.getTime() - date.getTime();
+        return Math.abs(Math.round(diff / (60 * 60 * 24)));
+    }
+
     function standarizeName(name) {
         name = name.toLowerCase();
         name = name.replace('  ', ' ');
@@ -38,47 +44,52 @@ module.exports = function analyticsHelper() {
             params.keyword = options.keyword;
         }
         if(!_.isUndefined(params.page_nb)) {
-            params.page_nb = options.total;
+            params.page_nb = options.page_nb;
         }
         if(!_.isUndefined(params.ad_id) && options.item) {
             params.ad_id = options.item.id;
             if(options.item.images) {
                 params.ad_photo = options.item.images.length;
             }
-            if(options.parentCategory) {
-                params.ad_category = options.parentCategory.name;
+            if(options.category) {
+                params.category = options.category.name;
+                params.ad_category = options.category.name;
             }
-            if(options.subCategory) {
-                params.ad_subcategory = options.subCategory.name;
+            if(options.subcategory) {
+                params.ad_subcategory = options.subcategory.name;
             }
-            if(options.geo1) {
+            if(!_.isUndefined(params.geo1)) {
                 location = options.item.location;
                 if (location.children && location.children[0]) {
                     params.geo1 = standarizeName(location.children[0].name || '');
                 }
             }
-            if(options.geo2) {
+            if(!_.isUndefined(params.geo2)) {
                 location = options.item.location;
                 if (location.children && location.children[0] && location.children[0].children && location.children[0].children[0]) {
                     params.geo2 = standarizeName(location.children[0].children[0].name || '');
                 }
             }
+            if(!_.isUndefined(params.posting_to_action)) {
+                params.posting_to_action = daysDiff(new Date(options.item.date.timestamp));
+            }
         }
-        if(!_.isUndefined(params.funnel_category) && options.parentCategory) {
-            params.funnel_category = options.parentCategory.name;
+        if(!_.isUndefined(params.funnel_category) && options.category) {
+            params.funnel_category = options.category.name;
         }
-        if(!_.isUndefined(params.funnel_subcategory) && options.subCategory) {
-            params.funnel_subcategory = options.subCategory.name;
+        if(!_.isUndefined(params.funnel_subcategory) && options.subcategory) {
+            params.funnel_subcategory = options.subcategory.name;
         }
-        if(!_.isUndefined(params.subcategory) && options.subCategory) {
-            params.subcategory = options.subCategory.name;
+        if(!_.isUndefined(params.subcategory) && options.subcategory) {
+            params.subcategory = options.subcategory.name;
         }
-        if(!_.isUndefined(params.poster_id) && options.user) {
-            params.poster_id = options.user.id;
+        if(!_.isUndefined(params.poster_id) && options.item.user) {
+            params.poster_id = options.item.user.id;
             params.poster_type = 'registered_logged';
         }
-        if(!_.isUndefined(params.posting_to_action) && options.postingToAction) {
-            params.posting_to_action = options.postingToAction;
+        if(params.page_name === 'expired_category' && options.category) {
+            params.page_name = 'listing_' + options.category.name;
+            params.category = options.category.name;
         }
     }
 
@@ -97,7 +108,7 @@ module.exports = function analyticsHelper() {
         return params;
     }
 
-    function getParams(session, url, options) {
+    function generateParams(session, url, options) {
         var params = _.clone(url.ati.params);
         
         prepareDefaultParams(session, params);
@@ -108,6 +119,6 @@ module.exports = function analyticsHelper() {
     }
 
     return {
-        getParams: getParams
+        generateParams: generateParams
     };
 }();

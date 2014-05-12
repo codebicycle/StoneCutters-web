@@ -185,8 +185,7 @@ module.exports = {
             }
         }
     },
-    /*
-    'posting/success': {
+    'posting/success/:itemId': {
         view: 'post#success',
         isServer: false,
         google: 'posting',
@@ -208,7 +207,6 @@ module.exports = {
             }
         }
     },
-    */
     'myolx/edititem/:itemId?': {
         view: 'post#edit',
         isServer: false,

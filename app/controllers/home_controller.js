@@ -7,9 +7,6 @@ var config = require('../config');
 module.exports = {
     index: function(params, callback) {
         var app = helpers.environment.init(this.app);
-        
-        helpers.analytics.reset();
-        helpers.analytics.setPage('/');
 
         function getIcons(platform) {
             var icons = config.get(['icons', platform], []);
@@ -17,20 +14,27 @@ module.exports = {
 
             return (~icons.indexOf(country)) ? country : 'default';
         }
-
-
-        if (params.cityId) {
-            helpers.environment.updateCity(app, params.cityId);
+        
+        function done(err) {
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/');
+            callback(err, {
+                categories: app.getSession('categories'),
+                icons: getIcons(app.getSession('platform')),
+                analytics: helpers.analytics.generateURL(app.getSession())
+            });
         }
+
         helpers.seo.resetHead();
         helpers.seo.addMetatag('title', 'Home');
         helpers.seo.addMetatag('Description', 'This is the home page');
         helpers.seo.addMetatag('robots', 'NOFOLLOW');
-        callback(null, {
-            categories: app.getSession('categories'),
-            icons: getIcons(app.getSession('platform')),
-            analytics: helpers.analytics.generateURL(app.getSession())
-        });
+        if (params.cityId) {
+            helpers.environment.updateCity(app, params.cityId, done);
+        }
+        else {
+            done();
+        }
     }
 };
 
