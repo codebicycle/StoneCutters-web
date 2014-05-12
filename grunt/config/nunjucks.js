@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
     var path = require('path');
     var _ = require('underscore');
-    var localization = require('../server/config').get('localization');
+    var localization = require('../../server/config').get('localization');
     var rendrNunjucks = require('rendr-nunjucks')();
     var nunjucks = {
         options: {
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     }
 
     rendrNunjucks.init();
-    rendrNunjucks.registerExtensions(require('../app/helpers').nunjucks.extensions);
+    rendrNunjucks.registerExtensions(require('../../app/helpers').nunjucks.extensions);
     nunjucks.options.env = rendrNunjucks.nunjucks;
 
     grunt.file.recurse('app/templates/default', function callback(abspath, rootdir, subdir, filename) {

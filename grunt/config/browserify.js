@@ -2,13 +2,20 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localization = require('../server/config').get('localization');
+    var localization = require('../../server/config').get('localization');
     var browserify = {
         lib: {
             src: ['public/js/lib/**/*.js'],
             dest: 'public/js/app/libs.js',
             options: {
                 alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery']
+            }
+        },
+        translations: {
+            src: ['app/translations/**/*.js'],
+            dest: 'public/js/app/translations.js',
+            options: {
+                alias: ['app/translations/index.js:../translations']
             }
         }
     };
@@ -24,7 +31,7 @@ module.exports = function(grunt) {
         if (subdir) {
             parts = subdir.split('/');
         }
-        if (parts[0] === 'templates' || parts[0] === 'stylesheets' || filename.split('.').pop() !== 'js') {
+        if (parts[0] === 'templates' || parts[0] === 'stylesheets' || parts[0] === 'translations' || filename.split('.').pop() !== 'js') {
             return;
         }
         if (!files[target]) {
@@ -48,7 +55,7 @@ module.exports = function(grunt) {
                     src: [],
                     dest: 'app/'
                 }],
-                external: ['jquery', 'nunjucks']
+                external: ['jquery', 'nunjucks', '../translations']
             }
         };
         browserify[location].files[target] = [];
