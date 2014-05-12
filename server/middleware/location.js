@@ -14,13 +14,15 @@ module.exports = function(dataAdapter, excludedUrls) {
             var app = req.rendrApp;
             var previousLocation = app.getSession('siteLocation');
             var siteLocation = req.param('location', previousLocation);
+            var host = req.headers.host;
+            var index = host.indexOf(':');
             var location;
             var topCities;
 
             function fetchLocation(done) {
                 function after (err, response, _location) {
                     if (!err) {
-                        return done(_location);
+                        return done(response, _location);
                     }
                     siteLocation = previousLocation;
                     dataAdapter.get(req, '/locations/' + siteLocation, done.errfcb);
@@ -29,18 +31,17 @@ module.exports = function(dataAdapter, excludedUrls) {
                 dataAdapter.get(req, '/locations/' + siteLocation, after);
             }
 
-            function fetchTopCities(done) {
+            function fetchTopCities(done, response, _location) {
+                location = _location;
                 dataAdapter.get(req, '/countries/' + siteLocation + '/topcities', done.errfcb);
             }
 
-            function parse(done, _location, _topCities) {
-                location = _location;
+            function parse(done, response, _topCities) {
                 topCities = {
-                    models: _topCities[1].data,
+                    models: _topCities.data,
                    _byId: {},
-                    metadata: _topCities[1].metadata
+                    metadata: _topCities.metadata
                 };
-
                 topCities.models.forEach(function sort(city) {
                     topCities._byId[city.url] = city;
                 });
@@ -67,11 +68,21 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
+                console.log(err);
                 res.send(400, err);
             }
 
+            if (!siteLocation) {
+                siteLocation = (index === -1) ? host : host.substring(0, index);
+                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
+            }
+            req.headers.host = siteLocation;
+            if (previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
+                return res.redirect('/?location=' + previousLocation);
+            }
             asynquence().or(fail)
-                .gate(fetchLocation, fetchTopCities)
+                .then(fetchLocation)
+                .then(fetchTopCities)
                 .then(parse)
                 .then(getCity)
                 .then(store)

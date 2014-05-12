@@ -7,9 +7,6 @@ var _ = require('underscore');
 var session;
 
 function setSession() {
-    if (typeof window === 'undefined' || session) {
-        return;
-    }
     session = _.extend(this.app.get('session'), cookies.getAll());
 
     this.app.updateSession = function(pairs) {
@@ -41,9 +38,6 @@ function setSession() {
 }
 
 function setUrlVars() {
-    if (typeof window === 'undefined') {
-        return;
-    }
     var location = window.location;
     var url = location.href;
     var path = location.pathname;
@@ -64,6 +58,7 @@ function setLocation(params, callback) {
     var location = this.app.getSession('location');
     var previousLocation;
     var spec;
+    var url;
 
     if (!params || !params.location) {
         return callback();
@@ -84,12 +79,15 @@ function setLocation(params, callback) {
         if (err) {
             return callback();
         }
-        console.log(location);
-        console.log(result.city);
+        url = result.city.get('url');
+        if (location.url.split('.').pop() !== url.split('.').pop()) {
+            window.location = '/';
+            return;
+        }
         location.city = result.city.toJSON();
         app.persistSession({
             location: location,
-            siteLocation: result.city.get('url')
+            siteLocation: url
         });
         callback();
     });
@@ -97,8 +95,12 @@ function setLocation(params, callback) {
 
 module.exports = {
     control: function(that, params, callback) {
+        callback = callback.bind(that);
+        if (typeof window === 'undefined') {
+            return callback();
+        }
         setSession.call(that);
         setUrlVars.call(that);
-        setLocation.call(that, params, callback.bind(that));
+        setLocation.call(that, params, callback);
     }
 };
