@@ -18,7 +18,7 @@
         <ul>
             {% for item in items %}
                 <li>
-                    <a href="/change-this-description-for-the-item-iid-{{item.id}}">
+                    <a href="/{{ item.title | urlize }}-iid-{{item.id}}">
                         <div class="imageCont">
                             <div class="imageContAlign">
                                 <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
@@ -29,7 +29,7 @@
                         <h2>{{ item.price.displayPrice }}</h2>
                         <span>{{ item.date.since }}</span>
                         <div class="centerCont">
-                            <a href="/change-this-description-for-the-item-iid-{{item.id}}">
+                            <a href="/{{ item.title | urlize }}-iid-{{item.id}}">
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
