@@ -3,20 +3,32 @@
 {% include templateName %}<section id="subCategories">
 <div id="title">
     <a href="/"></a>
-    <h1>Login</h1>
+    <h1>{{ dictionary["homeheader.My OLX"] }}</h1>
 </div>
 <section id="login">
     <form action="/login" method="POST" enctype="multipart/form-data">
-        {% for err in params.err %}
-            <small style="display: block; color: red;">{{err}}</small>
-        {% endfor %}
-        <label>Username or Email</label>
+        <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>
+        <label>{{ dictionary["loginbox.Username"] }}</label>
         <input type="text" name="usernameOrEmail">
-        <label >Password</label>
+        <label >{{ dictionary["loginbox.Password"] }}</label>
         <input type="password" name="password">
         <input type="hidden" name="redirect" value="{{ referer }}">
         <div class="btnCenter">
-            <input type="submit" value="Login" class="btns orange">
+            <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="btns orange">
         </div>
     </form>
+    <div class="line"></div>
+    <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
+        <h4>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</h4>
+        <label>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace("<<MY_CLASSIFIEDS>>","Mi OLX") }}</label>
+        <input type="text" name="email">
+        <div class="btnCenter">
+            <input type="submit" value="{{ dictionary["myolx.Send"] }}" class="btns orange">
+        </div>
+    </form>
+    <div class="line"></div>
+    <h4>{{ dictionary["loginbox.NotAMember"] }}</h4>
+    <div class="btnCenter">
+        <a href="/register" class="btns orange">{{ dictionary["loginbox.CreateYourAccount"] }}</a>
+    </div>
 </section>

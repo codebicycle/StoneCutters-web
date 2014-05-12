@@ -20,7 +20,7 @@ module.exports = RendrView.extend({
             directory: this.app.getSession('directory'),
             siteLocation: this.app.getSession('siteLocation'),
             analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data),
-            dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['en-US'],
+            dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['es-ES'],
             referer: this.app.getSession('referer'),
             url: this.app.getSession('url')
         });
