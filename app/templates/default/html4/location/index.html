@@ -15,7 +15,7 @@
 	<ul class="normalList">
 		{% for city in cities %}
 				<li class="{{ "last" if loop.last else "" }}">
-					<a href="/?cityId={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
+					<a href="/?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
 				</li>
 		{% endfor %}
 	</ul>			
