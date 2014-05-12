@@ -5,8 +5,8 @@ module.exports = function(grunt) {
     var dependencies = grunt.file.readJSON('package.json').dependencies;
     var path = require('path');
     var _ = require('underscore');
-    var localization = require('../server/config').get('localization');
-    var iconsLocalization = require('../app/config').get('icons');
+    var localization = require('../../server/config').get('localization');
+    var iconsLocalization = require('../../app/config').get('icons');
     var templates = [{
         src: ['app/templates/__layout.html'],
         dest: 'app/templates/compiled/__layout.html'
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     (function copyIcons() {
         var files = {};
         var platform;
-        
+
         grunt.file.recurse('app/icons/default', function callback(abspath, rootdir, subdir, filename) {
             var dest = 'public/images/' + subdir + '/icons/default/' + filename;
 

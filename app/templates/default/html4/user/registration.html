@@ -1,0 +1,44 @@
+<div class="breadcrumb">
+    <a href="/">Back</a>
+    <h1>Registrate</h1>
+</div>
+<div id="register">
+	<div id="errors">
+		{% for field, error in params %}
+	        {{error}}<br>
+	    {% endfor %}
+	</div>
+   
+	<form action="/register" method="POST" enctype="multipart/form-data">
+		<div class="formField">
+		    <label>Nombre de usuario</label>
+		    <input type="text" name="username">
+		</div>
+		<div class="formField">
+	        <label>Dirección de Email</label>
+	        <input type="text" name="email">
+	        <small>Tu email no será publicado.</small>
+	    </div>
+	    <div class="formField">
+	        <label>Contraseña</label>
+	        <input type="password" name="password">
+	    </div>
+	    <div class="formField">
+	        <input type="checkbox" name="agreeTerms" class="checkbox">
+	        <label>Acepto los <a href="/terms">Términos y Condiciones</a> de OLX</label>        
+
+	    </div>
+	    <div class="formActions">
+	        <div class="btn-adjust btnOrange btnForm">
+	            <input type="submit" value="Registrarte" name="submit" class="btns orange">
+	        </div>
+	    </div>
+	</form>
+	<div class="formField">
+		<a href="/login">Si ya tienes una cuenta, cliquea aquí para ingresar</a>
+	</div>
+</div>
+<div class="breadcrumb">
+    <a href="/">back</a>
+    <a href="/" class="home">home</a>
+</div>

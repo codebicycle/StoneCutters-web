@@ -21,7 +21,7 @@
         {% for item in myAds %}
             <tr>
                 <td style="border-top: solid thin #808080; text-align: left;">
-                    <a style="display: block; padding: .25em .5em 0;" tabindex="1" href="/change-this-description-for-the-item-iid-{{item.id}}">
+                    <a style="display: block; padding: .25em .5em 0;" tabindex="1" href="/{{ item.title | urlize }}-iid-{{item.id}}">
                         <small style="display: block;">
                             {% if item.thumbnail %}
                                 *

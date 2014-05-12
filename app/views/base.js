@@ -19,7 +19,7 @@ module.exports = RendrView.extend({
             template: this.app.getSession('template'),
             directory: this.app.getSession('directory'),
             siteLocation: this.app.getSession('siteLocation'),
-            dictionary: translations[this.app.getSession('selectedLanguage') || 'en'],
+            dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['en-US'],
             referer: this.app.getSession('referer'),
             url: this.app.getSession('url')
         });
