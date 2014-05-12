@@ -68,7 +68,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                console.log(err);
                 res.send(400, err);
             }
 
