@@ -6,7 +6,7 @@
 				{% if language.isocode == selectedLanguage %}
 					{{ language.name }}
 				{% else %}
-					<a href="?language={{ language.id }}">{{ language.name }}</a>
+					<a href="?language={{ language.isocode }}">{{ language.name }}</a>
 				{% endif %}
 				{% if not loop.last %} | {% endif %}
 			{% endfor %}

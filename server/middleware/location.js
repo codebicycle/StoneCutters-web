@@ -12,12 +12,21 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var app = req.rendrApp;
-            var siteLocation = app.getSession('siteLocation');
+            var previousLocation = app.getSession('siteLocation');
+            var siteLocation = req.param('cityId', previousLocation);
             var location;
             var topCities;
 
             function fetchLocation(done) {
-                dataAdapter.get(req, '/locations/' + siteLocation, done.errfcb);
+                function after (err, response, _location) {
+                    if (!err) {
+                        return done(_location);
+                    }
+                    siteLocation = previousLocation;
+                    dataAdapter.get(req, '/locations/' + siteLocation, done.errfcb);
+                }
+
+                dataAdapter.get(req, '/locations/' + siteLocation, after);
             }
 
             function fetchTopCities(done) {
@@ -25,7 +34,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function parse(done, _location, _topCities) {
-                location = _location[1];
+                location = _location;
                 topCities = {
                     models: _topCities[1].data,
                    _byId: {},
@@ -33,31 +42,16 @@ module.exports = function(dataAdapter, excludedUrls) {
                 };
 
                 topCities.models.forEach(function sort(city) {
-                    topCities._byId[city.id] = city;
+                    topCities._byId[city.url] = city;
                 });
                 done();
             }
 
             function getCity(done) {
-                var storedLocation = app.getSession('location');
-                var cityId = req.param('cityId', null);
-                var cities;
-                var city;
-
-                // TODO: Find a better way to get a particular city.
-                if (storedLocation) {
-                    cities = storedLocation.cities;
-                    city = storedLocation.city;
-                }
-                else {
-                    cities = _.clone(topCities);
-                }
-                if (cityId) {
-                    city = cities._byId[cityId];
-                }
                 location.topCities = topCities;
-                location.cities = cities;
-                location.city = city;
+                if (location.children && location.children[0] && location.children[0].children && location.children[0].children[0]) {
+                    location.city = location.children[0].children[0];
+                }
                 done();
             }
 
@@ -65,10 +59,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (location.city) {
                     siteLocation = location.city.url;
                 }
-                app.updateSession({
-                    location: location
-                });
                 app.persistSession({
+                    location: location,
                     siteLocation: siteLocation
                 });
                 done();
