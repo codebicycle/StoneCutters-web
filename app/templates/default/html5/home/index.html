@@ -5,7 +5,7 @@
 	<ul>
 		{% for category in categories.models %}
 			<li>
-				<a href="/{{ category.trName | urlize }}-cat-{{category.id}}?location={{siteLocation}}" >
+				<a href="{{ ['/', category.trName | urlize, '-cat-', category.id] | join | link }}" >
 					<span class="home-icon" id="catid-{{category.id}}"></span>
 			        {{category.trName}}
 		        </a>

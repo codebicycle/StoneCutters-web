@@ -284,16 +284,28 @@ module.exports = function(nunjucks) {
                 for (i = 0; i < pagination.length && count < max; i++) {
                     prepareURLwap(pagination[i], ((count + 1) === max));
                 }
-            }else{
+            }
+            else{
                 for (i = 0; i < pagination.length && count < max; i++) {
                     prepareURL(pagination[i], ((count + 1) === max));
                 }
             }
-            
+
             return out.join('');
         },
         is: function(value, type) {
             return typeof value === type;
+        },
+        link: function(href) {
+            console.log(href.indexOf('?'), ~href.indexOf('?'), !!(~href.indexOf('?')));
+            if (~href.indexOf('?')) {
+                href += '&';
+            }
+            else {
+                href += '?';
+            }
+            href += 'location=' + this.ctx.siteLocation;
+            return href;
         }
     };
 };
