@@ -297,7 +297,9 @@ module.exports = function(nunjucks) {
             return typeof value === type;
         },
         link: function(href) {
-            console.log(href.indexOf('?'), ~href.indexOf('?'), !!(~href.indexOf('?')));
+            if (!this.ctx.siteLocation || !this.ctx.siteLocation.indexOf('www.')) {
+                return href;
+            }
             if (~href.indexOf('?')) {
                 href += '&';
             }
