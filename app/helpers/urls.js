@@ -366,7 +366,8 @@ module.exports = {
             process: true,
             params: {
                 page_name: 'expired_category',
-                category: 'expired_category'
+                category: 'expired_category',
+                subcategory: 'expired_subCategory'
             }
         }
     },

@@ -128,7 +128,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 analytic = new Analytic('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer,
-                    clientId: req.rendrApp.getSession('clientId')
+                    clientId: req.rendrApp.getSession('clientId').substr(24)
                 });
                 analytic.debug = true;
                 analytic.trackPage({

@@ -6,35 +6,25 @@ var config = require('../config');
 
 module.exports = {
     index: function(params, callback) {
-        var app = helpers.environment.init(this.app);
+        helpers.controllers.control(this, params, controller);
 
-        function getIcons(platform) {
+        function controller() {
+            var platform = this.app.getSession('platform');
             var icons = config.get(['icons', platform], []);
-            var country = app.getSession('location').url;
+            var country = this.app.getSession('location').url;
 
-            return (~icons.indexOf(country)) ? country : 'default';
-        }
-        
-        function done(err) {
             helpers.analytics.reset();
             helpers.analytics.setPage('/');
-            callback(err, {
-                categories: app.getSession('categories'),
-                icons: getIcons(app.getSession('platform')),
-                analytics: helpers.analytics.generateURL(app.getSession())
-            });
-        }
 
-        helpers.seo.resetHead();
-        helpers.seo.addMetatag('title', 'Home');
-        helpers.seo.addMetatag('Description', 'This is the home page');
-        helpers.seo.addMetatag('robots', 'NOFOLLOW');
-        if (params.cityId) {
-            helpers.environment.updateCity(app, params.cityId, done);
-        }
-        else {
-            done();
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('title', 'Home');
+            helpers.seo.addMetatag('Description', 'This is the home page');
+            helpers.seo.addMetatag('robots', 'NOFOLLOW');
+            callback(null, {
+                categories: this.app.getSession('categories'),
+                icons: (~icons.indexOf(country)) ? country : 'default',
+                analytics: helpers.analytics.generateURL(this.app.getSession())
+            });
         }
     }
 };
-

@@ -26,7 +26,7 @@
         {% for city in cities %}
             <tr>
                 <td style="border-top: solid thin #808080;">
-                    <a style="display: block; padding: .25em .5em;" href="/{{ target }}?cityId={{ city.id }}">
+                    <a style="display: block; padding: .25em .5em;" href="/{{ target }}?location={{ city.id }}">
                         <small style="display: block;">{{ city.name }}</small>
                     </a>
                 </td>

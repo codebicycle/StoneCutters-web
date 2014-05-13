@@ -91,6 +91,10 @@ module.exports = function analyticsHelper() {
             params.page_name = 'listing_' + options.category.name;
             params.category = options.category.name;
         }
+        if(params.page_name === 'posting_step4' && options.category) {
+            params.ad_category = options.category.name;
+            params.ad_subcategory = options.subcategory.name;
+        }
     }
 
     function prepareParams(params, options) {

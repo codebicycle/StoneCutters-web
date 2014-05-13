@@ -1,7 +1,7 @@
 'use strict';
 
 var config = require('../../app/config');
-var analyticsHelper = require('../../app/helpers/analytics');
+var uuid = require('node-uuid');
 
 module.exports = function(dataAdapter, excludedUrls) {
 
@@ -13,36 +13,24 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var app = req.rendrApp;
-            var host = req.headers.host;
             var path = req._parsedUrl.pathname;
             var url = req.originalUrl;
             var referer = app.getSession('url');
-            var index = host.indexOf(':');
-            var siteLocation = app.getSession('siteLocation');
-
-            if (!siteLocation) {
-                siteLocation = (index === -1) ? host : host.substring(0,index);
-                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
-            }
-
-            req.headers.host = siteLocation;
-
             var clientId = app.getSession('clientId');
 
             if (typeof clientId === 'undefined') {
-                var c1 = Math.floor(Math.random()*11);
-                var c2 = Math.floor(Math.random()*11);
-                var n = Math.floor(Math.random()* 1000000);
-
-                clientId = String.fromCharCode(c1)+n+String.fromCharCode(c2);
+                clientId = new Buffer(32);
+                uuid.v4(null, clientId);
+                clientId = uuid.unparse(clientId);
+                app.persistSession({
+                    clientId: clientId
+                });
             }
             app.updateSession({
-                siteLocation: siteLocation,
                 path: path,
                 referer: referer,
                 url: url,
                 clientId: clientId,
-                host: host,
                 protocol: req.protocol
             });
 
