@@ -29,6 +29,7 @@ module.exports = {
     'itemdescription.Description': 'Omschrijving',
     'posting_fields_1.Email_address_not_shared': 'Je emailadres wordt niet weergegeven',
     'item.ThisAdIsNoLongerAvailable': 'Deze advertentie is niet meer beschikbaar',
+    'posting_fields_2.email': 'E-mail',
     'posting_photosprogress.of': ' van',
     'contactseller_form.1366': 'Je naam:',
     'contactseller_form.1512': 'Telefoonnummer:',
@@ -39,10 +40,13 @@ module.exports = {
     'contactseller_form.60': 'Verzenden',
     'contactseller_form.Ad': 'Advertentie:',
     'contactseller_form.ReplyToListing': 'Reageer op advertentie',
+    'register_form.245': 'Registratie nieuwe gebruiker',
     'myolx.ApprovalPending': 'In afwachting van goedkeuring',
+    'myolx.MyBrand': 'Mijn <<BRAND>>',
     'myolx.Send': 'Verzenden',
     'mobilepromo.RemoveFromFavorites': 'Uit favorieten verwijderen',
     'wap_posting_step4.mandatoryField': 'verplicht veld',
+    'searchheader.ClickHere': 'Klik hier',
     'homeheader.My OLX': 'Mijn OLX',
     'homeheader.Register': 'Registreren',
     'homeheader.Search': 'Zoeken',
@@ -50,5 +54,6 @@ module.exports = {
     'register_mail.Password': 'wachtwoord',
     'register_mail.Username': 'gebruikersnaam',
     'registerheader.Register': 'Registreren',
+    'loginheader.Identification': 'Identificatie',
     'terms.TermsOfUse': 'Gebruiksvoorwaarden'
 };
