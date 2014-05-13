@@ -44,6 +44,9 @@
             <div style="clear: both;">&nbsp;</div>
         </section>
     {% endif %}
+    
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </section>
 
 {% if metadata.filters.length %}

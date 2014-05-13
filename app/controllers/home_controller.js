@@ -13,13 +13,17 @@ module.exports = {
             var icons = config.get(['icons', platform], []);
             var country = this.app.getSession('location').url;
 
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/');
+
             helpers.seo.resetHead();
             helpers.seo.addMetatag('title', 'Home');
             helpers.seo.addMetatag('Description', 'This is the home page');
             helpers.seo.addMetatag('robots', 'NOFOLLOW');
             callback(null, {
                 categories: this.app.getSession('categories'),
-                icons: (~icons.indexOf(country)) ? country : 'default'
+                icons: (~icons.indexOf(country)) ? country : 'default',
+                analytics: helpers.analytics.generateURL(this.app.getSession())
             });
         }
     }

@@ -7,7 +7,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
@@ -18,6 +18,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var index = host.indexOf(':');
             var location;
             var topCities;
+            var promise;
 
             function fetchLocation(done) {
                 function after (err, response, _location) {
@@ -31,8 +32,12 @@ module.exports = function(dataAdapter, excludedUrls) {
                 dataAdapter.get(req, '/locations/' + siteLocation, after);
             }
 
-            function fetchTopCities(done, response, _location) {
+            function getLocation(done, response, _location) {
                 location = _location;
+                done();
+            }
+
+            function fetchTopCities(done) {
                 dataAdapter.get(req, '/countries/' + siteLocation + '/topcities', done.errfcb);
             }
 
@@ -74,15 +79,21 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!siteLocation) {
                 siteLocation = (index === -1) ? host : host.substring(0, index);
                 siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
+                previousLocation = siteLocation;
             }
             req.headers.host = siteLocation;
             if (previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
                 return res.redirect('/?location=' + previousLocation);
             }
-            asynquence().or(fail)
+            promise = asynquence().or(fail)
                 .then(fetchLocation)
-                .then(fetchTopCities)
-                .then(parse)
+                .then(getLocation);
+            if (!_.contains(excludedUrls.data, req.path)) {
+                promise
+                    .then(fetchTopCities)
+                    .then(parse);
+            }
+            promise
                 .then(getCity)
                 .then(store)
                 .val(next);

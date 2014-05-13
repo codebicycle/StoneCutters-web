@@ -14,6 +14,9 @@
 			</li>
 		{% endfor %}
 	</ul>
+    
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>
 <div class="breadcrumb">
 	<a href="/">back</a>

@@ -78,11 +78,14 @@ error:
 
 middleware:
   exclude:
-    - /health
-    - /stats
-    - /stats/memory
-    - /stats/threads
-    - /check
+    all:
+      - /health
+      - /stats
+      - /stats/memory
+      - /stats/threads
+      - /check
+    data:
+      - /pageview.gif
 
 stylus:
   testing:
@@ -109,5 +112,22 @@ zombie:
       - 'm2.olx.de'
       - 'm2.olx.in'
 
+analytics:
+  google:
+    enabled: true
+  atinternet:
+    enabled: true
+
 uglify:
   enabled: false
+
+sixpack:
+  enabled: false
+  url: http://localhost:5000
+  experiments:
+    post-button:
+      enabled: false
+      alternatives:
+        - post
+        - sell
+        - vender

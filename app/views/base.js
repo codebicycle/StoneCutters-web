@@ -19,10 +19,10 @@ module.exports = RendrView.extend({
             template: this.app.getSession('template'),
             siteLocation: this.app.getSession('siteLocation'),
             location: this.app.getSession('location'),
-            analyticsImgUrls: helpers.analytics.imgUrls(this.app.getSession(), data),
             dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['es-ES'],
             referer: this.app.getSession('referer'),
-            url: this.app.getSession('url')
+            url: this.app.getSession('url'),
+            sixpack: this.app.getSession('sixpack')
         });
     },
 });

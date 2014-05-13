@@ -4,6 +4,8 @@ module.exports = function itemRouter(app, dataAdapter) {
     var asynquence = require('asynquence');
     var configServer = require('../config');
     var configClient = require('../../app/config');
+    var graphite = require('../graphite')();
+    var Analytic = require('analytic');
 
     (function health() {
         app.get('/health', handler);
@@ -92,6 +94,64 @@ module.exports = function itemRouter(app, dataAdapter) {
                 req.rendrApp.deleteSession('platform');
             }
             res.redirect('/');
+        }
+    })();
+
+    (function tracking() {
+        app.get('/pageview.gif', handler);
+
+        function graphiteTracking(req) {
+            var location = req.rendrApp.getSession('location');
+
+            graphite.send([location.name, req.query.platform], 1, '+');
+        }
+
+        function googleTracking(req) {
+            var analytic = new Analytic('google', {
+                id: req.query.id,
+                host: req.host
+            });
+
+            analytic.trackPage({
+                page: req.query.page,
+                referer: req.query.referer
+            });
+        }
+
+        function atiTracking(req) {
+            var location = req.rendrApp.getSession('location');
+            var atiConfig = configClient.get(['analytics', 'ati', location.id]);
+            var analytic;
+
+            if (atiConfig) {
+                analytic = new Analytic('ati', {
+                    id: atiConfig.siteId,
+                    host: atiConfig.logServer,
+                    clientId: req.rendrApp.getSession('clientId').substr(24)
+                });
+                analytic.trackPage({
+                    page: req.query.page,
+                    referer: req.query.referer,
+                    custom: req.query.custom
+                });
+            }
+        }
+
+        function handler(req, res) {
+            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+
+            graphiteTracking(req);
+            if (configServer.get(['analytics', 'google', 'enabled'], true)) {
+                googleTracking(req);
+            }
+            if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
+                atiTracking(req);
+            }
+
+            image = new Buffer(image, 'base64');
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', image.length);
+            res.send(image);
         }
     })();
 

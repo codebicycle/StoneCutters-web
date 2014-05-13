@@ -42,6 +42,9 @@
             {{ "<a href='' class='right'>Siguiente</a>" if metadata.next }}
         </div>
     {% endif %}
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>
 <div class="breadcrumb">
     <a href="/">back</a>

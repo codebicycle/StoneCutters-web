@@ -84,6 +84,8 @@
 		<div id="itemDisable">Esse anúncio não está mais disponível</div>
 	{% endif %}
 
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>
 <div class="breadcrumb">
 	<a href="/">back</a>
