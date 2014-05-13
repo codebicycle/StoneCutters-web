@@ -10,6 +10,7 @@ module.exports = {
     },
     sixpack: {
         enabled: false,
+        url: 'http://localhost:5000',
         'post-button': {
             enabled: false
         }

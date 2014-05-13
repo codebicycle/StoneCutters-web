@@ -22,7 +22,7 @@ module.exports = {
                     analytics: helpers.analytics.generateURL(this.app.getSession())
                 });
             }
-            var session = new sixpack.Session(this.app.getSession('clientId'), 'http://localhost:5000');
+            var session = new sixpack.Session(this.app.getSession('clientId'), sixpackConfig.url);
 
             session.convert('post-button', function(err, res) {
                 callback(null, {
