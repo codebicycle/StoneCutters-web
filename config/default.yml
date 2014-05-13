@@ -109,5 +109,11 @@ zombie:
       - 'm2.olx.de'
       - 'm2.olx.in'
 
+analytics:
+  google:
+    enabled: true
+  atinternet:
+    enabled: true
+
 uglify:
   enabled: false

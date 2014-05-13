@@ -16,4 +16,10 @@
 			</td>
 		</tr>
 	{% endfor %}
+    <tr style="display: none;">
+        <td>
+            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+            {% include templateName %}
+        </td>
+    </tr>
 </table>

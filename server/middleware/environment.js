@@ -1,7 +1,7 @@
 'use strict';
 
 var config = require('../../app/config');
-var analyticsHelper = require('../../app/helpers/analytics');
+var uuid = require('node-uuid');
 
 module.exports = function(dataAdapter, excludedUrls) {
 
@@ -16,32 +16,17 @@ module.exports = function(dataAdapter, excludedUrls) {
             var path = req._parsedUrl.pathname;
             var url = req.originalUrl;
             var referer = app.getSession('url');
-            var viewType = 'api';
-            var pathMatch;
-
-            if (path.indexOf('/api/') == -1) {
-                pathMatch = analyticsHelper.getPathMatch(path);
-                viewType = config.get(['analytics', 'paths', pathMatch, 'viewType'], '');
-            }
-            else {
-                viewType = 'api';
-            }
-
             var clientId = app.getSession('clientId');
 
             if (typeof clientId === 'undefined') {
-                var c1 = Math.floor(Math.random()*11);
-                var c2 = Math.floor(Math.random()*11);
-                var n = Math.floor(Math.random()* 1000000);
-
-                clientId = String.fromCharCode(c1)+n+String.fromCharCode(c2);
+                app.persistSession({
+                    clientId: uuid.v4()
+                });
             }
             app.updateSession({
                 path: path,
                 referer: referer,
-                viewType: viewType,
                 url: url,
-                clientId: clientId,
                 protocol: req.protocol
             });
 

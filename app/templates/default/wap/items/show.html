@@ -30,6 +30,12 @@
         	#}
         </td>
     </tr>
+    <tr style="display: none;">
+        <td>
+            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+            {% include templateName %}
+        </td>
+    </tr>
 </table>
 {% if item.status.visible %}
 	{% if item.images.length > 0 %}
