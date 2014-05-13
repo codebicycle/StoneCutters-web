@@ -19,18 +19,14 @@ module.exports = function(dataAdapter, excludedUrls) {
             var clientId = app.getSession('clientId');
 
             if (typeof clientId === 'undefined') {
-                clientId = new Buffer(32);
-                uuid.v4(null, clientId);
-                clientId = uuid.unparse(clientId);
                 app.persistSession({
-                    clientId: clientId
+                    clientId: uuid.v4()
                 });
             }
             app.updateSession({
                 path: path,
                 referer: referer,
                 url: url,
-                clientId: clientId,
                 protocol: req.protocol
             });
 
