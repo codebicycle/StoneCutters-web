@@ -145,7 +145,16 @@ module.exports = {
                     params: params
                 }
             };
+            var siteLocation = app.getSession('siteLocation');
+            var category = helpers.categories.getCat(app.getSession(), params.catId);
+            var slug = helpers.common.urlize(category.trName);
             var query;
+
+            if (slug !== params.title) {
+                slug = ['/', slug, '-cat-', params.catId, '-p-1'].join('');
+                this.redirectTo(helpers.common.link(slug, siteLocation));
+                return;
+            }
 
             prepareParams(app, params);
             query = _.clone(params);
@@ -185,25 +194,11 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var app = this.app;
-            var user = app.getSession('user');
+            var that = this;
+            var user = that.app.getSession('user');
             var securityKey = params.sk;
-            var siteLocation = app.getSession('siteLocation');
-            var spec = {
-                item: {
-                    model: 'Item',
-                    params: params
-                },
-                items: {
-                    collection : 'Items',
-                    params: {
-                        location: siteLocation,
-                        offset: 0,
-                        pageSize:10,
-                        relatedAds: params.itemId
-                    }
-                }
-            };
+            var itemId = params.itemId;
+            var slugUrl = params.title;
             var anonymousItem;
 
             if (user) {
@@ -224,27 +219,65 @@ module.exports = {
             delete params.itemId;
             delete params.title;
             delete params.sk;
-            app.fetch(spec, {
-                'readFromCache': false
-            }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-                var model = result.items.models[0];
-                var categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
 
-                helpers.analytics.reset();
-                helpers.analytics.setPage('/description-iid-' + item.id);
-                helpers.analytics.addParam('user', user);
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', categoryTree.parent);
-                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
-                result.relatedItems = model.get('data');
-                result.user = user;
-                result.item = item;
-                result.pos = parseInt(params.pos) || 0;
-                result.sk = securityKey;
-                callback(err, result);
-            });
+            function findItem(next) {
+                var spec = {
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }    
+                };
+
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    if (err) {
+                        callback(err, result);
+                        return;
+                    }
+                    next(err, result);
+                });
+            }
+
+            function findRelatedItems(err, data) {
+                var item = data.item.toJSON();
+                var slug = helpers.common.urlize(item.title);
+                var siteLocation = that.app.getSession('siteLocation');
+                var spec;
+
+                if (slug !== slugUrl) {
+                    slug = ['/', slug, '-iid-', item.id].join('');
+                    that.redirectTo(helpers.common.link(slug, siteLocation));
+                    return;
+                }
+
+                spec = {
+                    items: {
+                        collection : 'Items',
+                        params: {
+                            location: siteLocation,
+                            offset: 0,
+                            pageSize:10,
+                            relatedAds: itemId
+                        }
+                    }
+                };
+
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    var model = result.items.models[0];
+
+                    result.relatedItems = model.get('data');
+                    result.user = user;
+                    result.item = item;
+                    result.pos = Number(params.pos) || 0;
+                    result.sk = securityKey;
+                    callback(err, result);
+                });
+            }
+
+            findItem(findRelatedItems);
         }
     },
     search: function(params, callback) {
@@ -300,8 +333,9 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var app = this.app;
-            var user = app.getSession('user');
+            var that = this;
+            var user = that.app.getSession('user');
+            var slugUrl = params.title;
             var spec = {
                 item: {
                     model: 'Item',
@@ -313,19 +347,27 @@ module.exports = {
             delete params.itemId;
             delete params.title;
 
-            app.fetch(spec, {
+            that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
-                var categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+                var slug = helpers.common.urlize(item.title);
+                var siteLocation = that.app.getSession('siteLocation');
+                var categoryTree;
 
+                if (slug !== slugUrl) {
+                    slug = ['/', slug, '-iid-', item.id].join('');
+                    that.redirectTo(helpers.common.link(slug, siteLocation));
+                    return;
+                }
+                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.setPage('/description-iid-' + item.id + '/reply');
                 helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.user = user;
                 result.item = item;
                 callback(err, result);
