@@ -12,10 +12,9 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
-
             var app = req.rendrApp;
             var session = _.clone(cookies.getAll(req));
 

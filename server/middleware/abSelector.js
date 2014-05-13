@@ -1,53 +1,58 @@
 'use strict';
 
-/**
- * AB Testing middleware.
- * Here we call sixpack server in order to define which template we have to show.
- */
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var sixpack = require('../../app/lib/sixpack')();
-        var experiments = require('../../app/experiments')();
-        var myClientId = sixpack.generate_client_id();
-        var session = new sixpack.Session(myClientId);
+        var config = require('../config').get('sixpack', {});
+        var sixpack = require('sixpack-client');
+        var uuid = require('node-uuid');
+        var asynquence = require('asynquence');
+        var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            var app = req.rendrApp;
-            var myExperiments = experiments;
-            var experimentsAmount = 0;
-            var index = 0;
-            var length = experiments.length;
+            if (_.contains(excludedUrls.all, req.path) || _.contains(excludedUrls.data, req.path) || !config.enabled || !config.experiments || !Object.keys(config.experiments)) {
+                return next();
+            }
 
-            function closure(index) {
-                session.participate(experiments[index].name, experiments[index].options, function callback(err, res) {
-                    var experiment = {};
-                    var alt;
+            var clientId = req.rendrApp.getSession('clientId') || uuid.v4();
+            var session = new sixpack.Session(clientId, config.url, req.ip, req.get('user-agent'));
+            var gate = [];
+            var sixpackData = {};
 
-                    if (err) {
-                        throw err;
+            for (var experiment in config.experiments) {
+                closure(experiment);
+            }
+
+            asynquence().or(done)
+                .gate.apply(null, gate)
+                .val(done);
+
+            function closure(experiment) {
+                if (!config.experiments[experiment].enabled) {
+                    return;
+                }
+                gate.push(then);
+
+                function then(done) {
+                    session.participate(experiment, config.experiments[experiment].alternatives, callback);
+
+                    function callback(err, res) {
+                        if (!err && res.status !== 'failed') {
+                            sixpackData[experiment] = res.alternative.name;
+                        }
+                        done();
                     }
-                    alt = res.alternative.name;
-                    req[myExperiments[index].name] = {
-                        value: alt,
-                        client_id: myClientId
-                    };
-                    experiment[myExperiments[index].name] = {
-                        value:alt,
-                        client_id: myClientId
-                    };
-                    app.updateSession(experiment);
-                    experimentsAmount++;
-                    if(experimentsAmount === myExperiments.length) {
-                        next();
-                    }
+                }
+
+            }
+
+            function done() {
+                req.rendrApp.updateSession({
+                    sixpack: sixpackData
                 });
-            }
-
-            for (index; index < length; index++) {
-                closure(index);
-            }
-            if(!experiments.length){
+                req.rendrApp.persistSession({
+                    clientId: clientId
+                });
                 next();
             }
         };

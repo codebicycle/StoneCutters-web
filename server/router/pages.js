@@ -112,7 +112,6 @@ module.exports = function itemRouter(app, dataAdapter) {
                 host: req.host
             });
 
-            analytic.debug = true;
             analytic.trackPage({
                 page: req.query.page,
                 referer: req.query.referer
@@ -130,7 +129,6 @@ module.exports = function itemRouter(app, dataAdapter) {
                     host: atiConfig.logServer,
                     clientId: req.rendrApp.getSession('clientId').substr(24)
                 });
-                analytic.debug = true;
                 analytic.trackPage({
                     page: req.query.page,
                     referer: req.query.referer,

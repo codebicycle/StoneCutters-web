@@ -2,17 +2,32 @@
 
 var helpers = require('../helpers');
 var _ = require('underscore');
+var sixpack = require('sixpack-client');
+var config = require('../config');
 
 module.exports = {
     index: function(params, callback) {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            var sixpackConfig = config.get('sixpack', {});
+
             helpers.analytics.reset();
             helpers.analytics.setPage('/posting');
-        
-            callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.getSession())
+            if (!sixpackConfig.enabled ||
+                !sixpackConfig['post-button'] ||
+                !sixpackConfig['post-button'].enabled ||
+                !params.sixpack || params.sixpack !== 'post-button') {
+                return callback(null, {
+                    analytics: helpers.analytics.generateURL(this.app.getSession())
+                });
+            }
+            var session = new sixpack.Session(this.app.getSession('clientId'), sixpackConfig.url);
+
+            session.convert('post-button', function(err, res) {
+                callback(null, {
+                    analytics: helpers.analytics.generateURL(this.app.getSession())
+                });
             });
         }
     },
@@ -58,7 +73,7 @@ module.exports = {
             app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
                 var categoryTree;
-                
+
                 result.postingSession = result.postingSession.get('postingSession');
                 result.intent = 'create';
                 result.fields = response.fields;

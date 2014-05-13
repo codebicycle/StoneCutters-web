@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             src: ['public/js/lib/**/*.js'],
             dest: 'public/js/app/libs.js',
             options: {
-                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery']
+                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client']
             }
         },
         translations: {

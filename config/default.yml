@@ -78,11 +78,14 @@ error:
 
 middleware:
   exclude:
-    - /health
-    - /stats
-    - /stats/memory
-    - /stats/threads
-    - /check
+    all:
+      - /health
+      - /stats
+      - /stats/memory
+      - /stats/threads
+      - /check
+    data:
+      - /pageview.gif
 
 stylus:
   testing:
@@ -117,3 +120,14 @@ analytics:
 
 uglify:
   enabled: false
+
+sixpack:
+  enabled: false
+  url: http://localhost:5000
+  experiments:
+    post-button:
+      enabled: false
+      alternatives:
+        - post
+        - sell
+        - vender

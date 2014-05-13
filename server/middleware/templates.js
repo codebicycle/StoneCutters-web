@@ -6,13 +6,14 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../config');
         var minify = config.get(['uglify', 'enabled'], true);
         var localization = config.get('localization');
+        var _ = require('underscore');
 
         function isLocalized(platform, siteLocation) {
             return !!(~localization[platform].indexOf(siteLocation));
         }
 
         return function middleware(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 

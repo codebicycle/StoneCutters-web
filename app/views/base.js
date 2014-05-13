@@ -21,7 +21,8 @@ module.exports = RendrView.extend({
             location: this.app.getSession('location'),
             dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['es-ES'],
             referer: this.app.getSession('referer'),
-            url: this.app.getSession('url')
+            url: this.app.getSession('url'),
+            sixpack: this.app.getSession('sixpack')
         });
     },
 });
