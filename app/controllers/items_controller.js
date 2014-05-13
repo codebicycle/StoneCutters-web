@@ -136,18 +136,25 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            var app = this.app;
             var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 }
             };
-            var category = helpers.categories.getCat(this.app.getSession(), params.catId);
-            var protocol = this.app.getSession('protocol');
-            var host = this.app.getSession('host');
+            var siteLocation = app.getSession('siteLocation');
+            var category = helpers.categories.getCat(app.getSession(), params.catId);
+            var slug = helpers.common.urlize(category.trName);
             var query;
 
-            prepareParams(this.app, params);
+            if (slug !== params.title) {
+                slug = ['/', slug, '-cat-', params.catId, '-p-1'].join('');
+                this.redirectTo(helpers.common.link(slug, siteLocation));
+                return;
+            }
+
+            prepareParams(app, params);
             query = _.clone(params);
             params.categoryId = params.catId;
             delete params.catId;
@@ -158,9 +165,11 @@ module.exports = {
 
             /** don't read from cache, because rendr caching expects an array response
             with ids, and smaug returns an object with 'data' and 'metadata' */
-            this.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
+                var protocol = app.getSession('protocol');
+                var host = app.getSession('host');
                 var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
                 var model = result.items.models[0];
 
@@ -176,24 +185,11 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var user = this.app.getSession('user');
+            var that = this;
+            var user = that.app.getSession('user');
             var securityKey = params.sk;
-            var siteLocation = this.app.getSession('siteLocation');
-            var spec = {
-                item: {
-                    model: 'Item',
-                    params: params
-                },
-                items: {
-                    collection : 'Items',
-                    params: {
-                        location: siteLocation,
-                        offset: 0,
-                        pageSize:10,
-                        relatedAds: params.itemId
-                    }
-                }
-            };
+            var itemId = params.itemId;
+            var slugUrl = params.title;
             var anonymousItem;
 
             if (user) {
@@ -214,17 +210,65 @@ module.exports = {
             delete params.itemId;
             delete params.title;
             delete params.sk;
-            this.app.fetch(spec, {
-                'readFromCache': false
-            }, function afterFetch(err, result) {
-                var model = result.items.models[0];
-                result.relatedItems = model.get('data');
-                result.user = user;
-                result.item = result.item.toJSON();
-                result.pos = parseInt(params.pos) || 0;
-                result.sk = securityKey;
-                callback(err, result);
-            });
+
+            function findItem(next) {
+                var spec = {
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }    
+                };
+
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    if (err) {
+                        callback(err, result);
+                        return;
+                    }
+                    next(err, result);
+                });
+            }
+
+            function findRelatedItems(err, data) {
+                var item = data.item.toJSON();
+                var slug = helpers.common.urlize(item.title);
+                var siteLocation = that.app.getSession('siteLocation');
+                var spec;
+
+                if (slug !== slugUrl) {
+                    slug = ['/', slug, '-iid-', item.id].join('');
+                    that.redirectTo(helpers.common.link(slug, siteLocation));
+                    return;
+                }
+
+                spec = {
+                    items: {
+                        collection : 'Items',
+                        params: {
+                            location: siteLocation,
+                            offset: 0,
+                            pageSize:10,
+                            relatedAds: itemId
+                        }
+                    }
+                };
+
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    var model = result.items.models[0];
+
+                    result.relatedItems = model.get('data');
+                    result.user = user;
+                    result.item = item;
+                    result.pos = Number(params.pos) || 0;
+                    result.sk = securityKey;
+                    callback(err, result);
+                });
+            }
+
+            findItem(findRelatedItems);
         }
     },
     search: function(params, callback) {
@@ -273,7 +317,9 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            var that = this;
             var user = this.app.getSession('user');
+            var slugUrl = params.title;
             var spec = {
                 item: {
                     model: 'Item',
@@ -288,8 +334,18 @@ module.exports = {
             this.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
+                var slug = helpers.common.urlize(item.title);
+                var siteLocation = that.app.getSession('siteLocation');
+
+                if (slug !== slugUrl) {
+                    slug = ['/', slug, '-iid-', item.id].join('');
+                    that.redirectTo(helpers.common.link(slug, siteLocation));
+                    return;
+                }
+
                 result.user = user;
-                result.item = result.item.toJSON();
+                result.item = item;
                 callback(err, result);
             });
         }
