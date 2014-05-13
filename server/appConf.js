@@ -26,6 +26,7 @@ module.exports = function appUseConf(done) {
 
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.session());
+        rendrApp.use(middleware.abSelector());
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.categories());
@@ -35,7 +36,6 @@ module.exports = function appUseConf(done) {
             rendrApp.use(middleware.interstitial());
         }
 
-        //rendrApp.use(middleware.abSelector());
         //rendrApp.use(middleware.experimentNotificator());
         //rendrApp.use(middleware.incrementCounter());
     }
