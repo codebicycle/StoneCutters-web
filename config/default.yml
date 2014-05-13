@@ -111,3 +111,14 @@ zombie:
 
 uglify:
   enabled: false
+
+sixpack:
+  enabled: false
+  url: http://localhost:5000
+  experiments:
+    post-button:
+      enabled: false
+      alternatives:
+        - post
+        - sell
+        - vender

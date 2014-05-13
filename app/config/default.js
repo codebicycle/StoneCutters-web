@@ -7,5 +7,11 @@ module.exports = {
     icons: {
         wap: ['www.olx.in', 'www.olx.com.ar'],
         html4: ['www.olx.in', 'www.olx.com.ar']
+    },
+    sixpack: {
+        enabled: false,
+        'post-button': {
+            enabled: false
+        }
     }
 };

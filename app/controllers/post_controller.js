@@ -2,13 +2,27 @@
 
 var helpers = require('../helpers');
 var _ = require('underscore');
+var sixpack = require('sixpack-client');
+var config = require('../config');
 
 module.exports = {
     index: function(params, callback) {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            callback(null, {});
+            var sixpackConfig = config.get('sixpack', {});
+
+            if (!sixpackConfig.enabled ||
+                !sixpackConfig['post-button'] ||
+                !sixpackConfig['post-button'].enabled ||
+                !params.sixpack || params.sixpack !== 'post-button') {
+                return callback(null, {});
+            }
+            var session = new sixpack.Session(this.app.getSession('clientId'), 'http://localhost:5000');
+
+            session.convert('post-button', function(err, res) {
+                callback(null, {});
+            });
         }
     },
     subcat: function(params, callback) {
