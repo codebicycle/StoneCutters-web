@@ -367,7 +367,7 @@ module.exports = {
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.user = user;
                 result.item = item;
                 callback(err, result);
