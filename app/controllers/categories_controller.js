@@ -25,8 +25,17 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var user = this.app.getSession('user');
-            var categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.catId);
+            var category = helpers.categories.getCat(this.app.getSession(), params.catId);
+            var slug = helpers.common.urlize(category.trName);
+            var categoryTree;
+            var user;
+
+            if (slug !== params.title) {
+                this.redirectTo(['/', slug, '-cat-', params.catId].join(''));
+                return;
+            }
+            categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.catId);
+            user = this.app.getSession('user');
 
             helpers.analytics.reset();
             helpers.analytics.setPage('/description-cat-' + params.catId + '-p-1');
@@ -41,7 +50,7 @@ module.exports = {
             delete params.catId;
             delete params.title;
             callback(null, {
-                category: this.app.getSession('categories')._byId[params.id],
+                category: category,
                 analytics: helpers.analytics.generateURL(this.app.getSession())
             });
         }

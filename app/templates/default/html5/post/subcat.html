@@ -1,0 +1,13 @@
+<section id="selectSubCat">
+    <div id="title">
+        <a href="/"></a>
+        <h1>{{ dictionary["posting_select_subcategory.SelectSubcategory"] }}</h1>
+    </div>
+    <ul>
+        {% for category in subcategories %}
+            <li>
+                <a href="/posting/{{categoryId}}/{{category.id}}">{{category.trName}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>

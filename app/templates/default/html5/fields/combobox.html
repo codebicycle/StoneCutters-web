@@ -1,0 +1,6 @@
+<label>{{field.label}}</label>
+<select name="{{field.name}}">
+    {% for value in field.values %}
+        <option value="{{value.key}}" {% if (field.value) and (field.value.key == value.key) %}selected="selected"{% endif %}>{{value.value}}</option>
+    {% endfor %}
+</select>

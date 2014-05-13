@@ -1,0 +1,109 @@
+<div id="title">
+    <a href="/"></a>
+    <h1>{{ dictionary["defaultfooter.Back"] }}</h1>
+</div>
+<div class="changeCat">
+    {{ dictionary["itemslisting.Category"] }} : Mobile Phones
+    <a href="/posting">{{ dictionary["defaultheader.change"] }}</a>
+</div>
+<section id="posting">
+    <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
+        <label>{{ dictionary["posting_fields_1.photos"] }}: <br> <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
+        <div class="fileUpload">
+            <div class="image"><input id="file1" type="file" name="images[]" class="hide" /></div>
+            <div class="image"><input id="file2" type="file" name="images[]" class="hide" /></div>
+            <div class="image"><input id="file3" type="file" name="images[]" class="hide" /></div>
+            <div class="image"><input id="file4" type="file" name="images[]" class="hide" /></div>
+        </div>
+
+
+
+        {% for field in fields.productDescription %}
+            {% if  field.name == 'description' %}
+                {% set templateName = template + '/fields/textarea.html' %}
+            {% else %}
+                {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+            {% endif %}
+        {% include templateName %}
+        {% endfor %}
+        <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
+        {% for field in fields.categoryAttributes %}
+            {% if (field.values) or (field.fieldType == 'text') %}
+                {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                {% include templateName %}
+            {% endif %}
+        {% endfor %}
+        <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
+        {% for field in fields.contactInformation %}
+            {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+            {% include templateName %}
+        {% endfor %}
+
+        <input type="hidden" name="postingSession" value="{{postingSession}}">
+        <input type="hidden" name="location" value="{{location}}">
+        <input type="hidden" name="languageId" value="{{language}}">
+        <input type="hidden" name="languageCode" value="{{languageCode}}">
+        <input type="hidden" name="platform" value="{{platform}}">
+        <input type="hidden" name="category.parentId" value="{{category}}">
+        <input type="hidden" name="category.id" value="{{subcategory}}">
+        
+        <div class="btnCenter">
+            <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange">
+        </div>
+    </form>
+
+</section>
+
+
+<!--div class="breadcrumb">
+    <a href="/">Back</a>
+    <h1>Volver</h1>
+</div>
+<div id="posting">
+    <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
+        <h4>Categoría seleccionada :: Nombre cat</h4>
+        <div class="formField">
+            <label>Fotos: <small>¡Los anuncios con fotos se venden 5 veces más!</small></label>
+            <div class="imgHolder">
+                <input id="file1" type="file" name="images[]" />
+            </div>
+            <div class="imgHolder">
+                <input id="file2" type="file" name="images[]" />
+            </div>
+        </div>
+        {% for field in fields.productDescription %}
+            {% if  field.name == 'description' %}
+                {% set templateName = template + '/fields/textarea.html' %}
+            {% else %}
+                {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+            {% endif %}
+        {% include templateName %}
+        {% endfor %}
+        <div class="line"></div>
+        {% for field in fields.categoryAttributes %}
+            {% if (field.values) or (field.fieldType == 'text') %}
+                {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                {% include templateName %}
+            {% endif %}
+        {% endfor %}
+        <div class="line"></div>
+        {% for field in fields.contactInformation %}
+            {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+            {% include templateName %}
+        {% endfor %}
+
+        <input type="hidden" name="postingSession" value="{{postingSession}}">
+        <input type="hidden" name="location" value="{{location}}">
+        <input type="hidden" name="languageId" value="{{language}}">
+        <input type="hidden" name="languageCode" value="{{languageCode}}">
+        <input type="hidden" name="platform" value="{{platform}}">
+        <input type="hidden" name="category.parentId" value="{{category}}">
+        <input type="hidden" name="category.id" value="{{subcategory}}">
+
+        <div class="formActions">
+            <div class="btn-adjust btnOrange btnForm">
+                <input type="submit" value="Post Ad" class="btns orange w100">
+            </div>
+        </div>
+    </form>
+</div-->
