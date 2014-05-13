@@ -19,6 +19,9 @@ ul, li {
 .visible {
 	display: block;
 }
+.hide {
+	display: none;
+}
 .clear {
 	clear: both;
 }
@@ -99,6 +102,69 @@ a.btns {
 	margin: 6px 0;
 	background: #cccccc;
 }
+/*----Forms----*/
+section form label {
+	color: #494848;
+	display: block;
+	font-size: 1rem;
+}
+section form label small {
+	color: #ff6700;
+	font-size: .625rem;
+}
+section form a {
+	text-decoration: underline;
+}
+section form label a {
+	color: #4275BA;
+}
+section form small {
+	font-size: 12px;
+	color: #333;
+}
+section form > input , section form > textarea , section form > select {
+	width: 100%;
+	display: block;
+	padding: .5rem;
+	margin: .2rem 0 .6rem;
+	-moz-box-sizing: border-box;
+	border: 1px solid #6891C8;
+    border-radius: 0.5em;
+}
+section form > input , section form > select {
+	height: 2.3rem;
+}
+section form > textarea {
+	height: 3.125rem;
+}
+section div.btnCenter {
+	text-align: left;
+	padding: 1rem 0;
+}
+section form div.btnCenter input, section div.btnCenter a{
+	display: inline-block;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+section h4 {
+	width: 100%;
+	padding: .5rem 0;
+	color: #333;
+}
+section form > input[type='checkbox'] {
+	width: auto;
+	height: .5rem;
+	float: left;
+	margin: .2rem .5rem 0 0;
+}
+section form > select {
+	-webkit-appearance: none;  /*Removes default chrome and safari style*/
+	-moz-appearance: none; /* Removes Default Firefox style*/
+	background: #fff url(imageUrl/images/html5/selectArrow.png) no-repeat 97% center;
+	background-size: 12px;
+	outline: none;
+}
 .analytics {
     display: none;
 }
+
