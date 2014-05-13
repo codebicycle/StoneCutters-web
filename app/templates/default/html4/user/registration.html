@@ -1,6 +1,6 @@
 <div class="breadcrumb">
     <a href="/">Back</a>
-    <h1>Registrate</h1>
+    <h1>{{ dictionary["registerheader.Register"] }}</h1>
 </div>
 <div id="register">
 	<div id="errors">
@@ -25,7 +25,7 @@
 	    </div>
 	    <div class="formField">
 	        <input type="checkbox" name="agreeTerms" class="checkbox">
-	        <label>Acepto los <a href="/terms">Términos y Condiciones</a> de OLX</label>        
+	        <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>        
 
 	    </div>
 	    <div class="formActions">
@@ -35,7 +35,7 @@
 	    </div>
 	</form>
 	<div class="formField">
-		<a href="/login">Si ya tienes una cuenta, cliquea aquí para ingresar</a>
+		<a href="/login">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
 	</div>
 </div>
 <div class="breadcrumb">
