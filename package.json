@@ -38,7 +38,9 @@
     "debug": "0.7.4",
     "newrelic": "1.5.1",
     "restler": "3.2.0",
-    "formidable": "1.0.14"
+    "formidable": "1.0.14",
+    "analytic": "nicolas-molina-olx/analytic",
+    "node-uuid": "^1.4.1"
   },
   "devDependencies": {
     "grunt": "0.4.4",

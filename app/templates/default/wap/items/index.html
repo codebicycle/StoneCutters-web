@@ -18,7 +18,13 @@
 	                </a>
 	            </td>
 	        </tr>
-        {% endfor %}               
+        {% endfor %}
+        <tr style="display: none;">
+            <td>
+                {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+                {% include templateName %}
+            </td>
+        </tr>
 	</tbody>
 </table>
 {% if metadata.next or metadata.previous %}

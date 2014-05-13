@@ -8,15 +8,24 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            callback(null, {});
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/posting');
+        
+            callback(null, {
+                analytics: helpers.analytics.generateURL(this.app.getSession())
+            });
         }
     },
     subcat: function(params, callback) {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/posting/' + params.categoryId);
+
             callback(null, _.extend(params, {
-                subcategories: this.app.getSession('categories')._byId[params.categoryId].children
+                subcategories: this.app.getSession('categories')._byId[params.categoryId].children,
+                analytics: helpers.analytics.generateURL(this.app.getSession())
             }));
         }
     },
@@ -24,9 +33,11 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var siteLocation = this.app.getSession('siteLocation');
-            var language = this.app.getSession('selectedLanguage');
-            var languages = this.app.getSession('languages');
+            var app = this.app;
+            var user = app.getSession('user');
+            var siteLocation = app.getSession('siteLocation');
+            var language = app.getSession('selectedLanguage');
+            var languages = app.getSession('languages');
             var languageId = languages._byId[language].id;
             var spec = {
                 postingSession: {
@@ -44,8 +55,10 @@ module.exports = {
                 }
             };
 
-            this.app.fetch(spec, function afterFetch(err, result) {
+            app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
+                var categoryTree;
+                
                 result.postingSession = result.postingSession.get('postingSession');
                 result.intent = 'create';
                 result.fields = response.fields;
@@ -56,6 +69,15 @@ module.exports = {
                 result.languageCode = language;
                 result.errField = params.errField;
                 result.errMsg = params.errMsg;
+
+                categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);
+                helpers.analytics.reset();
+                helpers.analytics.setPage('/posting/' + params.categoryId + '/' + params.subcategoryId);
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(app.getSession());
+
                 callback(err, result);
             });
         }
@@ -64,10 +86,11 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var user = this.app.getSession('user');
-            var siteLocation = this.app.getSession('siteLocation');
-            var language = this.app.getSession('selectedLanguage');
-            var languages = this.app.getSession('languages');
+            var app = this.app;
+            var user = app.getSession('user');
+            var siteLocation = app.getSession('siteLocation');
+            var language = app.getSession('selectedLanguage');
+            var languages = app.getSession('languages');
             var languageId = languages._byId[language].id;
             var securityKey = params.sk;
             var _params = {
@@ -81,10 +104,9 @@ module.exports = {
                     params: _params
                 }
             };
-            var app = this.app;
 
             checkAuthentication(_params, _params.id);
-            this.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 if (err) {
@@ -138,6 +160,7 @@ module.exports = {
                 checkAuthentication(_params, _params.itemId);
                 app.fetch(spec, function afterFetch(err, result) {
                     var response = result.fields.models[0].attributes;
+                    var categoryTree;
 
                     result.user = user;
                     result.item = item;
@@ -152,6 +175,16 @@ module.exports = {
                     result.errField = params.errField;
                     result.errMsg = params.errMsg;
                     result.sk = securityKey;
+
+                    categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+                    helpers.analytics.reset();
+                    helpers.analytics.setPage('/myolx/edititem/' + item.id);
+                    helpers.analytics.addParam('user', user);
+                    helpers.analytics.addParam('item', item);
+                    helpers.analytics.addParam('category', categoryTree.parent);
+                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                    result.analytics = helpers.analytics.generateURL(app.getSession());
+
                     callback(err, result);
                 });
             }
@@ -234,6 +267,8 @@ module.exports = {
                 checkAuthentication(_params, _params.itemId);
                 app.fetch(spec, function afterFetch(err, result) {
                     var response = result.fields.models[0].attributes;
+                    var categoryTree;
+
                     result.user = user;
                     result.item = item;
                     result.postingSession = result.postingSession.get('postingSession');
@@ -247,6 +282,16 @@ module.exports = {
                     result.errField = params.errField;
                     result.errMsg = params.errMsg;
                     result.sk = securityKey;
+
+                    categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+                    helpers.analytics.reset();
+                    helpers.analytics.setPage('/posting/success/' + item.id);
+                    helpers.analytics.addParam('user', user);
+                    helpers.analytics.addParam('item', item);
+                    helpers.analytics.addParam('category', categoryTree.parent);
+                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                    result.analytics = helpers.analytics.generateURL(app.getSession());
+
                     callback(err, result);
                 });
             }

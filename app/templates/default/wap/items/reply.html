@@ -6,6 +6,12 @@
             <strong style="display: block;"><font color="#0075BD">{{ item.title }}</font></strong>
         </td>
     </tr>
+    <tr style="display: none;">
+        <td>
+            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+            {% include templateName %}            
+        </td>
+    </tr>
 </table>
 {% if errors %} {# Check error and data variables #}
     <table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">

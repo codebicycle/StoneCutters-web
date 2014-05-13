@@ -7,7 +7,12 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            callback(null, {});
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/terms');
+
+            callback(null, {
+                analytics: helpers.analytics.generateURL(this.app.getSession())
+            });
         }
     },
     help: function(params, callback) {
@@ -117,7 +122,12 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            callback(null, {});
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/interstitial');
+
+            callback(null, {
+                analytics: helpers.analytics.generateURL(this.app.getSession())
+            });
         }
     },
     error: function(params, callback) {
@@ -133,8 +143,11 @@ module.exports = {
             if (err) {
                 this.app.deleteSession('error');
             }
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/interstitial');
             callback(null, {
-                error: err
+                error: err,
+                analytics: helpers.analytics.generateURL(this.app.getSession())
             });
         }
 
