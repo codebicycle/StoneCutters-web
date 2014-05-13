@@ -7,22 +7,29 @@ module.exports = {
     index: function(params, callback) {
         var app = helpers.environment.init(this.app);
 
+        helpers.analytics.reset();
+        helpers.analytics.setPage('/posting');
         callback(null, {
             params: params,
             platform: app.getSession('platform'),
-            template: app.getSession('template')
+            template: app.getSession('template'),
+            analytics: helpers.analytics.generateURL(app.getSession())
         });
     },
     subcat: function(params, callback) {
         var app = helpers.environment.init(this.app);
         var subcategories = this.app.getSession('categories')._byId[params.categoryId].children;
 
+        helpers.analytics.reset();
+        helpers.analytics.setPage('/posting/' + params.categoryId);
         callback(null, _.extend(params, {
-            'subcategories': subcategories
+            subcategories: subcategories,
+            analytics: helpers.analytics.generateURL(app.getSession())
         }));
     },
     form: function(params, callback) {
         var app = helpers.environment.init(this.app);
+        var user = app.getSession('user');
         var siteLocation = app.getSession('siteLocation');
         var language = app.getSession('selectedLanguage');
         var languages = app.getSession('languages');
@@ -45,6 +52,9 @@ module.exports = {
 
         app.fetch(spec, function afterFetch(err, result) {
             var response = result.fields.models[0].attributes;
+            var categoryTree;
+            var session = app.getSession();
+
             result.postingSession = result.postingSession.get('postingSession');
             result.intent = 'create';
             result.fields = response.fields;
@@ -58,6 +68,16 @@ module.exports = {
             result.template = app.getSession('template');
             result.errField = params.errField;
             result.errMsg = params.errMsg;
+
+            categoryTree = helpers.categories.getCatTree(session, params.subcategoryId);
+
+            helpers.analytics.reset();
+            helpers.analytics.setPage('/posting/' + params.categoryId + '/' + params.subcategoryId);
+            helpers.analytics.addParam('user', user);
+            helpers.analytics.addParam('category', categoryTree.parent);
+            helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+            result.analytics = helpers.analytics.generateURL(app.getSession());
+
             callback(err, result);
         });
     },
@@ -138,6 +158,9 @@ module.exports = {
             checkAuthentication(_params, _params.itemId);
             app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
+                var categoryTree;
+                var session = app.getSession();
+
                 result.user = user;
                 result.item = item;
                 result.postingSession = result.postingSession.get('postingSession');
@@ -154,6 +177,17 @@ module.exports = {
                 result.errField = params.errField;
                 result.errMsg = params.errMsg;
                 result.sk = securityKey;
+
+                categoryTree = helpers.categories.getCatTree(session, item.category.id);
+
+                helpers.analytics.reset();
+                helpers.analytics.setPage('/myolx/edititem/' + item.id);
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('item', item);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(session);
+
                 callback(err, result);
             });
         }

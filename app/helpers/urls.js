@@ -142,29 +142,25 @@ module.exports = {
             }
         }
     },
-    'posting': {
-        view: 'post#index',
+    'posting/success/:itemId': {
+        view: 'post#success',
         isServer: false,
         google: 'posting',
         ati: {
-            process: false,
+            process: true,
             params: {
-                page_name: 'posting_step2',
+                page_name: 'posting_success',
                 category: 'posting',
-                funnel_page: 'posting_step2'
-            }
-        }
-    },
-    'posting/:categoryId': {
-        view: 'post#subcat',
-        isServer: false,
-        google: 'posting',
-        ati: {
-            process: false,
-            params: {
-                page_name: 'posting_step3',
-                category: 'posting',
-                funnel_page: 'posting_step3'
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                action_type: 'posted',
+                poster_id: '0',
+                poster_type: 'registered_no',
+                funnel_page: 'posting_success',
+                funnel_category: '',
+                funnel_subcategory: ''
             }
         }
     },
@@ -185,25 +181,29 @@ module.exports = {
             }
         }
     },
-    'posting/success/:itemId': {
-        view: 'post#success',
+    'posting/:categoryId': {
+        view: 'post#subcat',
         isServer: false,
         google: 'posting',
         ati: {
-            process: true,
+            process: false,
             params: {
-                page_name: 'posting_success',
+                page_name: 'posting_step3',
                 category: 'posting',
-                ad_category: '',
-                ad_subcategory: '',
-                ad_id: '',
-                ad_photo: 0,
-                action_type: 'posted',
-                poster_id: '0',
-                poster_type: 'registered_no',
-                funnel_page: 'posting_success',
-                funnel_category: '',
-                funnel_subcategory: ''
+                funnel_page: 'posting_step3'
+            }
+        }
+    },
+    'posting': {
+        view: 'post#index',
+        isServer: false,
+        google: 'posting',
+        ati: {
+            process: false,
+            params: {
+                page_name: 'posting_step2',
+                category: 'posting',
+                funnel_page: 'posting_step2'
             }
         }
     },

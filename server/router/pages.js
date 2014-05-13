@@ -112,6 +112,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 host: req.host
             });
 
+            analytic.debug = true;
             analytic.trackPage({
                 page: req.query.page,
                 referer: req.query.referer
@@ -119,18 +120,23 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var id = 533932;
-            var analytic = new Analytic('ati', {
-                id: id,
-                host: 'logw306',
-                clientId: '368f4ea6dede'
-            });
+            var location = req.rendrApp.getSession('location');
+            var atiConfig = configClient.get(['analytics', 'ati', location.id]);
+            var analytic;
 
-            analytic.trackPage({
-                page: req.query.page,
-                referer: req.query.referer,
-                custom: req.query.custom
-            });
+            if (atiConfig) {
+                analytic = new Analytic('ati', {
+                    id: atiConfig.siteId,
+                    host: atiConfig.logServer,
+                    clientId: req.rendrApp.getSession('clientId')
+                });
+                analytic.debug = true;
+                analytic.trackPage({
+                    page: req.query.page,
+                    referer: req.query.referer,
+                    custom: req.query.custom
+                });
+            }
         }
 
         function handler(req, res) {
