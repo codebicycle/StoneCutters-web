@@ -117,8 +117,10 @@ function prepareURLParams(query, url, offset, urlFilters) {
 
 function preparePaginationLink(metadata, query, url) {
     var next;
+    var max = config.get(['smaug', 'maxPageSize'], 50);
 
     metadata.page = query.page;
+    metadata.totalPages = Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1);
     metadata.current = prepareURLParams(query, url, 0, query.urlFilters);
     if (metadata.total > 0) {
         next = metadata.next;
@@ -136,18 +138,16 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            var app = this.app;
             var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 }
             };
-            var category = helpers.categories.getCat(this.app.getSession(), params.catId);
-            var protocol = this.app.getSession('protocol');
-            var host = this.app.getSession('host');
             var query;
 
-            prepareParams(this.app, params);
+            prepareParams(app, params);
             query = _.clone(params);
             params.categoryId = params.catId;
             delete params.catId;
@@ -158,15 +158,24 @@ module.exports = {
 
             /** don't read from cache, because rendr caching expects an array response
             with ids, and smaug returns an object with 'data' and 'metadata' */
-            this.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
+                var protocol = app.getSession('protocol');
+                var host = app.getSession('host');
                 var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
                 var model = result.items.models[0];
+                var category = helpers.categories.getCat(app.getSession(), query.catId);
+                var categoryTree = helpers.categories.getCatTree(app.getSession(), query.catId);
 
                 result.items = model.get('data');
                 result.metadata = model.get('metadata');
                 preparePaginationLink(result.metadata, query, url);
+                helpers.analytics.reset();
+                helpers.analytics.setPage('/description-cat-' + query.catId);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.category = category;
                 callback(err, result);
             });
@@ -176,9 +185,10 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var user = this.app.getSession('user');
+            var app = this.app;
+            var user = app.getSession('user');
             var securityKey = params.sk;
-            var siteLocation = this.app.getSession('siteLocation');
+            var siteLocation = app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -214,13 +224,23 @@ module.exports = {
             delete params.itemId;
             delete params.title;
             delete params.sk;
-            this.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
                 var model = result.items.models[0];
+                var categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+
+                helpers.analytics.reset();
+                helpers.analytics.setPage('/description-iid-' + item.id);
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('item', item);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.relatedItems = model.get('data');
                 result.user = user;
-                result.item = result.item.toJSON();
+                result.item = item;
                 result.pos = parseInt(params.pos) || 0;
                 result.sk = securityKey;
                 callback(err, result);
@@ -231,18 +251,17 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            var app = this.app;
             var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 }
             };
-            var category = helpers.categories.getCat(this.app.getSession(), params.catId);
-            var protocol = this.app.getSession('protocol');
-            var host = this.app.getSession('host');
+            var category = helpers.categories.getCat(app.getSession(), params.catId);
             var query;
 
-            prepareParams(this.app, params);
+            prepareParams(app, params);
             query = _.clone(params);
             params.searchTerm = params.search;
             delete params.search;
@@ -253,16 +272,24 @@ module.exports = {
 
             //don't read from cache, because rendr caching expects an array response
             //with ids, and smaug returns an object with 'data' and 'metadata'
-            this.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
+                var user = app.getSession('user');
+                var protocol = app.getSession('protocol');
+                var host = app.getSession('host');
                 var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
                 var model = result.items.models[0];
 
                 result.items = model.get('data');
                 result.metadata = model.get('metadata');
-                preparePaginationLink(result.metadata, query, '/search?');
                 preparePaginationLink(result.metadata, query, url);
+                helpers.analytics.reset();
+                helpers.analytics.setPage('/nf/search/' + query.search + '/');
+                helpers.analytics.addParam('keyword', query.search);
+                helpers.analytics.addParam('page_nb', result.metadata.totalPages);
+                helpers.analytics.addParam('user', user);
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.search = query.search;
                 result.category = category;
                 callback(err, result);
@@ -273,7 +300,8 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var user = this.app.getSession('user');
+            var app = this.app;
+            var user = app.getSession('user');
             var spec = {
                 item: {
                     model: 'Item',
@@ -285,16 +313,23 @@ module.exports = {
             delete params.itemId;
             delete params.title;
 
-            this.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
+                var categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+
+                helpers.analytics.reset();
+                helpers.analytics.setPage('/description-iid-' + item.id + '/reply');
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('item', item);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.user = user;
-                result.item = result.item.toJSON();
+                result.item = item;
                 callback(err, result);
             });
         }
-
-
-
     }
 };

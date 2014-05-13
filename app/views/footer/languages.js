@@ -11,7 +11,8 @@ module.exports = BaseView.extend({
 
         return _.extend({}, data, {
             languages: this.app.getSession('languages'),
-            selectedLanguage: this.app.getSession('selectedLanguage').toUpperCase()
+            selectedLanguage: this.app.getSession('selectedLanguage').toUpperCase(),
+            user: this.app.getSession('user')
         });
     }
 });
