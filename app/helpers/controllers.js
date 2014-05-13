@@ -90,6 +90,18 @@ function setLocation(params, callback) {
     });
 }
 
+function setLanguage(params) {
+    var languages = this.app.getSession('languages');
+    var selectedLanguage = this.app.getSession('selectedLanguage');
+
+    if (!params || !params.language || selectedLanguage === params.language || !languages._byId[params.language]) {
+        return;
+    }
+    this.app.persistSession({
+        selectedLanguage: params.language
+    });
+}
+
 module.exports = {
     control: function(that, params, callback) {
         callback = callback.bind(that);
@@ -98,6 +110,7 @@ module.exports = {
         }
         setSession.call(that);
         setUrlVars.call(that);
+        setLanguage.call(that);
         setLocation.call(that, params, callback);
     }
 };

@@ -28,10 +28,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 };
 
                 languages.models.forEach(function each(language) {
-                    languages._byId[language.isocode.toLowerCase()] = language;
-                    if (language.default) {
-                        languages.default = language.isocode.toLowerCase();
-                    }
+                    languages._byId[language.locale] = language;
                 });
 
                 done();
@@ -47,12 +44,12 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function select(done) {
-                var language = req.param('language', '').toLowerCase();
+                var language = req.param('language', '');
 
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
-                selectedLanguage = language || app.getSession('selectedLanguage') || languages.default || languages.models[0].isocode.toLowerCase();
+                selectedLanguage = language || app.getSession('selectedLanguage') || languages.models[0].locale;
                 done();
             }
 
