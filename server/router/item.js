@@ -127,7 +127,7 @@ module.exports = function(app, dataAdapter) {
                 }
                 if (user) {
                     query.token = user.token;
-                } 
+                }
                 else if (item.id && item.sk) {
                     query.securityKey = item.sk;
                     delete item.sk;
@@ -208,7 +208,7 @@ module.exports = function(app, dataAdapter) {
                     query: {
                         token: user.token,
                         languageId: languages._byId[selectedLanguage].id,
-                        languageCode: selectedLanguage
+                        languageCode: languages._byId[selectedLanguage].isocode.toLowerCase()
                     }
                 }, done.errfcb);
             }

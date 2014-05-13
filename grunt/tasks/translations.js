@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
     return function task() {
         var done = this.async();
-        var destDir = process.cwd() + '/translations';
+        var destDir = process.cwd() + '/translations-tmp';
         var dest = destDir + '/translations.zip';
         var asynquence = require('asynquence');
         var restler = require('restler');

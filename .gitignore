@@ -7,7 +7,7 @@
 #Jasmine target
 target
 
-#translations
+translations-tmp
 node_modules
 public/mergedAssets.js
 public/js/mergedAssets.js
