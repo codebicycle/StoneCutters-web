@@ -1,19 +1,16 @@
 'use strict';
 
-/**
- * AB Testing middleware.
- * Here we call sixpack server in order to define which template we have to show.
- */
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var config = require('../config').get('sixpack', {});
         var sixpack = require('sixpack-client');
         var uuid = require('node-uuid');
         var asynquence = require('asynquence');
+        var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            if (!config.enabled || !config.experiments || !Object.keys(config.experiments)) {
+            if (_.contains(excludedUrls.all, req.path) || _.contains(excludedUrls.data, req.path) || !config.enabled || !config.experiments || !Object.keys(config.experiments)) {
                 return next();
             }
 

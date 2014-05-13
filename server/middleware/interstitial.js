@@ -7,9 +7,10 @@ var _ = require('underscore');
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
+        var _ = require('underscore');
 
         return function interstitial(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path) || _.contains(excludedUrls.data, req.path)) {
                 return next();
             }
 
