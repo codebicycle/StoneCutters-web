@@ -4,3 +4,6 @@
     <meta name="{{metatag.name}}" content="{{metatag.content}}" />
 {% endfor %}
 <link href="{{'/css/template/styles.css' | replace('template', template) | static }}" media="screen" rel="stylesheet" type="text/css" />
+{% if head.canonical %}
+    <link rel="canonical" href="{{head.canonical}}" >
+{% endif %}
