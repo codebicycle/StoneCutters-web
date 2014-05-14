@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Stadt \xE4ndern',
-    'countryoptions.ChangeCountry': 'Land \xE4ndern',
     'countryoptions.EnterCityOrZipCode': 'Stadt oder Postleitzahl eingeben',
     'countryoptions.SelectACity': 'Stadt ausw\xE4hlen',
     'defaultfooter.Back': 'Zur\xFCck',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrieren',
     'loginheader.Identification': 'Identifikation ',
     'terms.TermsOfUse': 'Nutzungsbedingungen',
-    'misc.Sell_Post_Mobile_India': 'Ver\xF6ffentlichen'
+    'misc.Sell_Post_Mobile_India': 'Ver\xF6ffentlichen',
+    'misc.SpecificFields_title': 'Kategoriespezifische Felder (Kann-Eingaben)'
 };

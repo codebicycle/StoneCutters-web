@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Change City',
-    'countryoptions.ChangeCountry': 'Change Country',
     'countryoptions.EnterCityOrZipCode': 'Enter a City or Zip Code',
     'countryoptions.SelectACity': 'Select a city',
     'defaultfooter.Back': 'Back',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Register',
     'loginheader.Identification': 'Identification ',
     'terms.TermsOfUse': 'Terms Of Use',
-    'misc.Sell_Post_Mobile_India': 'Sell'
+    'misc.Sell_Post_Mobile_India': 'Sell',
+    'misc.SpecificFields_title': 'Category Specific Fields (Optionals)'
 };

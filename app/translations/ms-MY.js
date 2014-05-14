@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Tukar Bandar',
-    'countryoptions.ChangeCountry': 'Tukar Negara',
     'countryoptions.EnterCityOrZipCode': 'Masukkan Bandar atau Poskod',
     'countryoptions.SelectACity': 'Pilih bandar',
     'defaultfooter.Back': 'Undur',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Daftar',
     'loginheader.Identification': 'Pengenalan',
     'terms.TermsOfUse': 'Terma Penggunaan',
-    'misc.Sell_Post_Mobile_India': 'Siar'
+    'misc.Sell_Post_Mobile_India': 'Siar',
+    'misc.SpecificFields_title': 'Medan Spesifik Kategori (Opsyenal)'
 };

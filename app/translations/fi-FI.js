@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Vaihda kaupunkia',
-    'countryoptions.ChangeCountry': 'Vaihda maata',
     'countryoptions.EnterCityOrZipCode': 'Sy\xF6t\xE4 kaupunki tai postinumero',
     'countryoptions.SelectACity': 'Valitse kaupunki',
     'defaultfooter.Back': 'Takaisin',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Rekister\xF6idy',
     'loginheader.Identification': 'Tunnistautuminen ',
     'terms.TermsOfUse': 'K\xE4ytt\xF6ehdot',
-    'misc.Sell_Post_Mobile_India': 'Julkaise'
+    'misc.Sell_Post_Mobile_India': 'Julkaise',
+    'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)'
 };

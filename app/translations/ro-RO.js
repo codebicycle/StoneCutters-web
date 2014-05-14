@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Modificare ora\u015F',
-    'countryoptions.ChangeCountry': 'Modificare \u0163ar\u0103',
     'countryoptions.EnterCityOrZipCode': 'Intr\u0103 un Ora\u015F sau Codul Po\u015Ftal',
     'countryoptions.SelectACity': 'Selecta\u0163i un ora\u015F',
     'defaultfooter.Back': '\xCEnapoi',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Inregistreaz\u0103-te',
     'loginheader.Identification': 'Identificare',
     'terms.TermsOfUse': 'Condi\u0163ii de Utilizare',
-    'misc.Sell_Post_Mobile_India': 'Publicare'
+    'misc.Sell_Post_Mobile_India': 'Publicare',
+    'misc.SpecificFields_title': 'C\xE2mpuri specifice categorie (Op\u0163ionale)'
 };

@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Keisti miest\u0105',
-    'countryoptions.ChangeCountry': 'Keisti \u0161al\u012F',
     'countryoptions.EnterCityOrZipCode': '\u012Eveskite miest\u0105 arba pa\u0161to indeks\u0105',
     'countryoptions.SelectACity': 'Pasirinkite miest\u0105',
     'defaultfooter.Back': 'Atgal',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registruotis',
     'loginheader.Identification': 'Identifikacija ',
     'terms.TermsOfUse': 'Naudojimosi s\u0105lygos',
-    'misc.Sell_Post_Mobile_India': 'Skelbti'
+    'misc.Sell_Post_Mobile_India': 'Skelbti',
+    'misc.SpecificFields_title': 'Special\u016Bs kategorij\u0173 laukai (papildomi)'
 };

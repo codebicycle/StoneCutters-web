@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Zmie\u0144 Miasto',
-    'countryoptions.ChangeCountry': 'Zmie\u0144 Kraj',
     'countryoptions.EnterCityOrZipCode': 'Wpisz Miasto lub Kod pocztowy',
     'countryoptions.SelectACity': 'Wybierz miasto',
     'defaultfooter.Back': ' Powr\xF3t ',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Zarejestruj si\u0119',
     'loginheader.Identification': 'Identyfikacja',
     'terms.TermsOfUse': 'Warunki u\u017Cytkowania',
-    'misc.Sell_Post_Mobile_India': 'Publikuj'
+    'misc.Sell_Post_Mobile_India': 'Publikuj',
+    'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)'
 };

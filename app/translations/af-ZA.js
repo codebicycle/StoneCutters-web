@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Verander Stad',
-    'countryoptions.ChangeCountry': 'Verander Land',
     'countryoptions.EnterCityOrZipCode': 'Voer \'n Stad of Poskode in',
     'countryoptions.SelectACity': 'Kies \'n stad',
     'defaultfooter.Back': 'Terug',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registreer',
     'loginheader.Identification': 'Identifikasie ',
     'terms.TermsOfUse': 'Gebruiksvoorwaardes',
-    'misc.Sell_Post_Mobile_India': 'Publiseer'
+    'misc.Sell_Post_Mobile_India': 'Publiseer',
+    'misc.SpecificFields_title': 'Kategorie-spesifieke Velde (Opsionele)'
 };

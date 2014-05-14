@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Promjenite grad',
-    'countryoptions.ChangeCountry': 'Promjeniti dr\u017Eavu',
     'countryoptions.EnterCityOrZipCode': 'Unesite grad ili po\u0161tanski broj',
     'countryoptions.SelectACity': 'Odaberite grad',
     'defaultfooter.Back': 'Natrag',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrirajte se',
     'loginheader.Identification': 'Identifikacija',
     'terms.TermsOfUse': 'Uvjeti uporabe',
-    'misc.Sell_Post_Mobile_India': 'Objavi'
+    'misc.Sell_Post_Mobile_India': 'Objavi',
+    'misc.SpecificFields_title': 'Specifi\u010Dna polja kategorija (po izboru)'
 };

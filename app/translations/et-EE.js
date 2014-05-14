@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Muuda linn',
-    'countryoptions.ChangeCountry': 'Muuda riik',
     'countryoptions.EnterCityOrZipCode': 'Sisestage linn v\xF5i suunakood',
     'countryoptions.SelectACity': 'Valige linn',
     'defaultfooter.Back': 'Tagasi',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registreeruge',
     'loginheader.Identification': 'Identifitseerimine',
     'terms.TermsOfUse': 'Kasutustingimused',
-    'misc.Sell_Post_Mobile_India': 'Postita'
+    'misc.Sell_Post_Mobile_India': 'Postita',
+    'misc.SpecificFields_title': 'Kategooriatele vastavad v\xE4ljad (valikulised)'
 };

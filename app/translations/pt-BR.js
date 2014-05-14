@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Alterar cidade',
-    'countryoptions.ChangeCountry': 'Alterar pa\xEDs',
     'countryoptions.EnterCityOrZipCode': 'Digite uma Cidade ou CEP',
     'countryoptions.SelectACity': 'Selecione uma cidade',
     'defaultfooter.Back': 'Voltar',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Cadastre-se',
     'loginheader.Identification': 'Identifica\xE7\xE3o',
     'terms.TermsOfUse': 'Condi\xE7\xF5es de Uso',
-    'misc.Sell_Post_Mobile_India': 'Publicar'
+    'misc.Sell_Post_Mobile_India': 'Publicar',
+    'misc.SpecificFields_title': 'Category Specific Fields (Optionals)'
 };

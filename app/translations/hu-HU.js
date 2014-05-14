@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'V\xE1ros megv\xE1ltoztat\xE1sa',
-    'countryoptions.ChangeCountry': 'Orsz\xE1g megv\xE1ltoztat\xE1sa',
     'countryoptions.EnterCityOrZipCode': 'Adjon meg egy telep\xFCl\xE9st vagy ir\xE1ny\xEDt\xF3sz\xE1mot',
     'countryoptions.SelectACity': 'V\xE1lasszon telep\xFCl\xE9st',
     'defaultfooter.Back': 'Vissza',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Regisztr\xE1ci\xF3',
     'loginheader.Identification': 'Azonos\xEDt\xE1s',
     'terms.TermsOfUse': 'Haszn\xE1lati felt\xE9telek',
-    'misc.Sell_Post_Mobile_India': 'Elk\xFCld'
+    'misc.Sell_Post_Mobile_India': 'Elk\xFCld',
+    'misc.SpecificFields_title': 'Kateg\xF3riaf\xFCgg\u0151 mez\u0151k (V\xE1laszthat\xF3k)'
 };

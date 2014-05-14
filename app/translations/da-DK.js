@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Skift by',
-    'countryoptions.ChangeCountry': 'Skift land',
     'countryoptions.EnterCityOrZipCode': 'Indtast en by eller et postnummer',
     'countryoptions.SelectACity': 'V\xE6lg en by',
     'defaultfooter.Back': 'Tilbage',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Tilmeld',
     'loginheader.Identification': 'Identifikation',
     'terms.TermsOfUse': 'Regler for anvendelse',
-    'misc.Sell_Post_Mobile_India': 'S\xE6lg'
+    'misc.Sell_Post_Mobile_India': 'S\xE6lg',
+    'misc.SpecificFields_title': 'Kategorispecifikke felter (valgfrit)'
 };

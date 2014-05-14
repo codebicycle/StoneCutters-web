@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': '\xC4ndra Stad',
-    'countryoptions.ChangeCountry': '\xC4ndra Land',
     'countryoptions.EnterCityOrZipCode': 'Ange en stad eller ett postnummer',
     'countryoptions.SelectACity': 'V\xE4lj en stad',
     'defaultfooter.Back': 'Tillbaka',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrera',
     'loginheader.Identification': 'Identifikation',
     'terms.TermsOfUse': 'Anv\xE4ndarvillkor',
-    'misc.Sell_Post_Mobile_India': 'L\xE4gg upp'
+    'misc.Sell_Post_Mobile_India': 'L\xE4gg upp',
+    'misc.SpecificFields_title': 'Kategorispecifikka f\xE4lt (tillval)'
 };
