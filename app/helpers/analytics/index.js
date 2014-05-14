@@ -37,13 +37,10 @@ function generateURL(session) {
     var url = urls[page];
     var params = {};
     
-    if (query.length) {
-        page = google.generatePage(url, query.params);
-    }
     params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
     params.random = Math.round(Math.random() * 1000000);
     params.referer = (session.referer || '-');
-    params.page = page;
+    params.page = google.generatePage(url, query.params);
     params.platform = session.platform;
     params.custom = ati.generateParams(session, url, query.params);
 

@@ -244,7 +244,8 @@ module.exports = {
         }
     },
     /*
-    'myolx/edititem/success': {
+    posting_edit_success: {
+        url: 'myolx/edititem/success',
         view: 'post#success',
         isServer: false,
         google: 'edititem',
