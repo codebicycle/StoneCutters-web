@@ -57,6 +57,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 template = directory + '/' + platform;
                 app.updateSession({
+                    device: device,
                     directory: directory,
                     platform: platform,
                     template: template,
@@ -64,6 +65,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     jsDir: jsDir
                 });
                 app.req.app.locals({
+                    device: device,
                     directory: directory,
                     platform: platform,
                     template: template,

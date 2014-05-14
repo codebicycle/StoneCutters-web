@@ -37,7 +37,6 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                console.log(err);
                 var url = req.headers.referer;
                 var qIndex = url.indexOf('?');
 

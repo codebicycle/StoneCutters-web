@@ -54,6 +54,7 @@ module.exports = {
             var language = app.getSession('selectedLanguage');
             var languages = app.getSession('languages');
             var languageId = languages._byId[language].id;
+            var languageCode = languages._byId[language].isocode.toLowerCase();
             var spec = {
                 postingSession: {
                     model: 'PostingSession',
@@ -66,7 +67,7 @@ module.exports = {
                         location: siteLocation,
                         categoryId: params.subcategoryId,
                         languageId: languageId,
-                        languageCode: language
+                        languageCode: languageCode
                     }
                 }
             };
@@ -82,7 +83,7 @@ module.exports = {
                 result.category = params.categoryId;
                 result.subcategory = params.subcategoryId;
                 result.language = languageId;
-                result.languageCode = language;
+                result.languageCode = languageCode;
                 result.siteLocation = siteLocation;
                 result.errField = params.errField;
                 result.errMsg = params.errMsg;
@@ -109,11 +110,12 @@ module.exports = {
             var language = app.getSession('selectedLanguage');
             var languages = app.getSession('languages');
             var languageId = languages._byId[language].id;
+            var languageCode = languages._byId[language].isocode.toLowerCase();
             var securityKey = params.sk;
             var _params = {
                 id: params.itemId,
                 languageId: languageId,
-                languageCode: language
+                languageCode: languageCode
             };
             var spec = {
                 item: {
@@ -160,7 +162,7 @@ module.exports = {
                     intent: 'edit',
                     location: siteLocation,
                     languageId: languageId,
-                    languageCode: language,
+                    languageCode: languageCode,
                     itemId: item.id,
                     categoryId: item.category.id
                 };
@@ -188,7 +190,7 @@ module.exports = {
                     result.category = item.category.parentId;
                     result.subcategory = item.category.id;
                     result.language = languageId;
-                    result.languageCode = language;
+                    result.languageCode = languageCode;
                     result.errField = params.errField;
                     result.errMsg = params.errMsg;
                     result.sk = securityKey;
@@ -216,11 +218,12 @@ module.exports = {
             var language = this.app.getSession('selectedLanguage');
             var languages = this.app.getSession('languages');
             var languageId = languages._byId[language].id;
+            var languageCode = languages._byId[language].isocode.toLowerCase();
             var securityKey = params.sk;
             var _params = {
                 id: params.itemId,
                 languageId: languageId,
-                languageCode: language
+                languageCode: languageCode
             };
             var spec = {
                 item: {
@@ -267,7 +270,7 @@ module.exports = {
                     intent: 'edit',
                     location: siteLocation,
                     languageId: languageId,
-                    languageCode: language,
+                    languageCode: languageCode,
                     itemId: item.id,
                     categoryId: item.category.id
                 };
@@ -295,7 +298,7 @@ module.exports = {
                     result.category = item.category.parentId;
                     result.subcategory = item.category.id;
                     result.language = languageId;
-                    result.languageCode = language;
+                    result.languageCode = languageCode;
                     result.errField = params.errField;
                     result.errMsg = params.errMsg;
                     result.sk = securityKey;

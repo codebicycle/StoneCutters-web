@@ -44,11 +44,15 @@
 		<h3>Contactar al Vendedor</h3>
 
 		<div id="centerBtns">
-			<a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" class="btns orange">Email</a>
 			{% if item.phone %}
-				<a href="" class="btns orange">SMS</a>
-				<a href="" class="btns orange">Call</a>
+				{% if device.uriSchemeTel %}
+					<a href="tel:{{ item.phone }}" class="btns orange">Call</a>
+				{% endif %}
+				{% if device.uriSchemeSms %}
+					<a href="sms:{{ item.phone }}" class="btns orange">SMS</a>
+				{% endif %}
 			{% endif %}	
+			<a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" class="btns orange">Email</a>
 		</div>
 		{% if item.phone %}
 			<div id="phone">

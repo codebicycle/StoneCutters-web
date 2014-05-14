@@ -21,6 +21,7 @@ module.exports = RendrView.extend({
         var data = RendrView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
+            device: this.app.getSession('device'),
             platform: this.app.getSession('platform'),
             template: this.app.getSession('template'),
             siteLocation: this.app.getSession('siteLocation'),
