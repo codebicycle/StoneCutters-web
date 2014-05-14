@@ -280,7 +280,6 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-
                     callback(err, result);
                 });
             }
