@@ -7,6 +7,10 @@ var config = require('../../config');
 
 module.exports = BaseView.extend({
     className: 'header_index_view',
+    wapAttributes: {
+        cellpadding: 0,
+        bgcolor: '#0075BD'
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 

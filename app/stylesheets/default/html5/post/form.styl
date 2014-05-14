@@ -45,6 +45,10 @@ section#posting > form .fileUpload .image:before {
     display: block;
     padding-top: 100% !important;
 }
+section#posting > form .fileUpload .image.empty {
+	background-image: url(imageUrl/images/html5/cameraSmall.png)!important;
+	background-size: 75% auto;
+}
 section#posting > form .fileUpload .image.fill {
 	background-size: cover;
 }
@@ -61,6 +65,7 @@ section#posting > form .fileUpload .image span {
     right: 5%;
     top: 5%;
     width: 35%;
+    cursor: pointer;
 }
 section#posting > form .fileUpload .image.fill span {
 	display: block;

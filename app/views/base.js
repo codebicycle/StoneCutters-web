@@ -6,7 +6,13 @@ var helpers = require('../helpers');
 var translations = require('../translations');
 
 module.exports = RendrView.extend({
-    getTemplate: function(){
+    initialize: function() {
+        if (this.tagName === 'div' && this.app.getSession('platform') === 'wap') {
+            this.tagName = 'table';
+            this.attributes = this.getWapAttributes();
+        }
+    },
+    getTemplate: function() {
         var template = this.app.getSession('template');
 
         return this.app.templateAdapter.getTemplate(template + '/' + this.name);
@@ -25,4 +31,12 @@ module.exports = RendrView.extend({
             sixpack: this.app.getSession('sixpack')
         });
     },
+    getWapAttributes: function() {
+        return _.extend(this.attributes || {}, {
+            width: '100%',
+            cellspacing: 0,
+            cellpadding: 4,
+            border: 0
+        }, this.wapAttributes || {});
+    }
 });

@@ -1,55 +1,59 @@
-<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-    <tbody>
-    	<tr>
-	        <td style="padding: .25em .5em; border-top: solid thin #808080;">
-	            <strong style="color: #0075BD;">{{ dictionary["registerheader.Register"] }}</strong>
-	        </td>
-	    </tr>
+<tr>
+    <td>
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+		    <tbody>
+		    	<tr>
+			        <td style="padding: .25em .5em; border-top: solid thin #808080;">
+			            <strong style="color: #0075BD;">{{ dictionary["registerheader.Register"] }}</strong>
+			        </td>
+			    </tr>
+			</tbody>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+			<tbody>
+				<tr>
+					<td style="padding: .25em .5em; border-top: solid thin #808080;">
+						<a href="/auth/login/"><small>{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</small></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+			<tbody>
+				<tr>
+					<td style="padding: .25em .5em; border-top: solid thin #808080;">
+						<strong><small>{{ dictionary["register_form.245"] }}</small></strong>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 0 .5em .5em;">
+						<form action="/register" method="POST" enctype="multipart/form-data">
+							<label style="display: block;">
+								<small>{{ dictionary["register_mail.Username"] }}</small><br>
+								<input type="text" value="" name="username">
+							</label>
+							<br style="display: none;">
+							<label style="display: block; padding-top: .25em;">
+								<small>{{ dictionary["landingbody.EmailAddress"] }} <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small></small><br>
+								<input type="text" value="" name="email">
+							</label>
+							<br style="display: none;">
+							<label style="display: block; padding-top: .25em;">
+								<small>{{ dictionary["register_mail.Password"] }}</small><br>
+								<input type="password" value="" name="password">
+							</label>
+							<br style="display: none;">
+							<label style="display: block; padding-top: .25em;">
+								<input type="checkbox" style="margin: 0; vertical-align: sub;" name="agreeTerms" value="1" checked="true">
+								<small>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</small>
+							</label>
+							<div style="padding-top: .25em;">
+								<input type="submit" value="{{ dictionary["registerheader.Register"] }}" name="submit">
+							</div>
+						</form>
+					</td>
+				</tr>
+		</table>
 	</tbody>
-</table>
-<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-	<tbody>
-		<tr>
-			<td style="padding: .25em .5em; border-top: solid thin #808080;">
-				<a href="/auth/login/"><small>{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</small></a>
-			</td>
-		</tr>
-	</tbody>
-</table>
-<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-	<tbody>
-		<tr>
-			<td style="padding: .25em .5em; border-top: solid thin #808080;">
-				<strong><small>{{ dictionary["register_form.245"] }}</small></strong>
-			</td>
-		</tr>
-		<tr>
-			<td style="padding: 0 .5em .5em;">
-				<form action="/register" method="POST" enctype="multipart/form-data">
-					<label style="display: block;">
-						<small>{{ dictionary["register_mail.Username"] }}</small><br>
-						<input type="text" value="" name="username">
-					</label>
-					<br style="display: none;">
-					<label style="display: block; padding-top: .25em;">
-						<small>{{ dictionary["landingbody.EmailAddress"] }} <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small></small><br>
-						<input type="text" value="" name="email">
-					</label>
-					<br style="display: none;">
-					<label style="display: block; padding-top: .25em;">
-						<small>{{ dictionary["register_mail.Password"] }}</small><br>
-						<input type="password" value="" name="password">
-					</label>
-					<br style="display: none;">
-					<label style="display: block; padding-top: .25em;">
-						<input type="checkbox" style="margin: 0; vertical-align: sub;" name="agreeTerms" value="1">
-						<small>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</small>
-					</label>
-					<div style="padding-top: .25em;">
-						<input type="submit" value="{{ dictionary["registerheader.Register"] }}" name="submit">
-					</div>
-				</form>
-			</td>
-		</tr>
-	</tbody>
-</table>
+    </td>
+</tr>

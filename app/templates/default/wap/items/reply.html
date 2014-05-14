@@ -1,103 +1,107 @@
-<table width="100%" cellspacing="0" cellpadding="4" border="0">
-    <tr>
-        <td style="border-top: solid thin #808080;">
-            <!-- <small style="display: block;">{{ dictionary["contactseller_form.ReplyToListing"] }}</small> -->
-            <small style="display: block;">Reply to this ad</small>
-            <strong style="display: block;"><font color="#0075BD">{{ item.title }}</font></strong>
-        </td>
-    </tr>
-    <tr style="display: none;">
-        <td>
-            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-            {% include templateName %}            
-        </td>
-    </tr>
-</table>
-{% if errors %} {# Check error and data variables #}
-    <table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">
-        <tr>
-            <td style="border-top: solid thin #808080;">
-                <small style="display: block;">
-                    {% for error in errors %}
-                        <font color="#FF0000">{{ error }}</font><br />
-                    {% endfor %}
-                </small>
-            </td>
-        </tr>
-    </table>
-{% endif %}
-<form action="/items/{{ item.id }}/reply" method="POST" enctype="multipart/form-data">
-    <table width="100%" cellspacing="0" cellpadding="4" border="0">
-        <tr>
-            <td style="border-top: solid thin #808080;">
-                <!-- <small style="display: block;"><strong>{{ dictionary["contactseller_form.55"] }}:</strong> <span>{{ item.contactName if item.contactName else dictionary["itemgeneraldetails.Anonymous"] }}</small> -->
-                <small style="display: block;"><strong>To:</strong> <span>{{ item.contactName if item.contactName else "anonymous" }}</small>
-            </td>
-        </tr>
-        <tr>
-            <td style="border-top: solid thin #CCC;">
-                <!-- <small style="display: block;"><strong>{{ dictionary["contactseller_form.Ad"] }}:</strong> {{ item .title }}</small> -->
-                <small style="display: block;"><strong>From:</strong> {{ item .title }}</small>
-            </td>
-        </tr>
-        <tr>
-            <td style="border-top: solid thin #CCC;">
-                <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.57"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</font></small> -->
-                <small style="display: block;"><font size="1">Your email address: (mandatory field)</font></small>
-                <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                        <td style="padding: 2px; border: solid thin #BBB;">
-                            <input type="text" name="email" value="{{ data.email if data.email else (user.email if user.email else '') }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.1366"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</font></small> -->
-                <small style="display: block;"><font size="1">Ypur name: (mandatory field)</font></small>
-                <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                        <td style="padding: 2px; border: solid thin #BBB;">
-                            <input type="text" name="name" value="{{ data.email if data.name else (user.name if user.name else '') }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.1512"] }} ({{ dictionary["contactseller_form.6"] }}):</font></small> -->
-                <small style="display: block;"><font size="1">Phone (optional):</font></small>
-                <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                        <td style="padding: 2px; border: solid thin #BBB;">
-                            <input type="text" name="phone" value="{{ data.phone if data.phone else '' }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.58"] }}</font></small> -->
-                <small style="display: block;"><font size="1">Your comments</font></small>
-                <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tr>
-                        <td style="padding: 2px; border: solid thin #BBB;">
-                            <textarea name="message" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">{{ data.message if data.message else '' }}</textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td style="border-top: solid thin #CCC; text-align: right;">
-                <input type="hidden" name="itemId" value="{{ item.id }}" />
-                <!-- <input type="submit" name="submit" value='{{ dictionary["contactseller_form.60"] }}' /> -->
-                <input type="submit" name="submit" value="Send" />
-            </td>
-        </tr>
-    </table>
-</form>
+<tr>
+    <td>
+        <table width="100%" cellspacing="0" cellpadding="4" border="0">
+            <tr>
+                <td style="border-top: solid thin #808080;">
+                    <!-- <small style="display: block;">{{ dictionary["contactseller_form.ReplyToListing"] }}</small> -->
+                    <small style="display: block;">Reply to this ad</small>
+                    <strong style="display: block;"><font color="#0075BD">{{ item.title }}</font></strong>
+                </td>
+            </tr>
+            <tr style="display: none;">
+                <td>
+                    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+                    {% include templateName %}            
+                </td>
+            </tr>
+        </table>
+        {% if errors %} {# Check error and data variables #}
+            <table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <small style="display: block;">
+                            {% for error in errors %}
+                                <font color="#FF0000">{{ error }}</font><br />
+                            {% endfor %}
+                        </small>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
+        <form action="/items/{{ item.id }}/reply" method="POST" enctype="multipart/form-data">
+            <table width="100%" cellspacing="0" cellpadding="4" border="0">
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <!-- <small style="display: block;"><strong>{{ dictionary["contactseller_form.55"] }}:</strong> <span>{{ item.contactName if item.contactName else dictionary["itemgeneraldetails.Anonymous"] }}</small> -->
+                        <small style="display: block;"><strong>To:</strong> <span>{{ item.contactName if item.contactName else "anonymous" }}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-top: solid thin #CCC;">
+                        <!-- <small style="display: block;"><strong>{{ dictionary["contactseller_form.Ad"] }}:</strong> {{ item .title }}</small> -->
+                        <small style="display: block;"><strong>From:</strong> {{ item .title }}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-top: solid thin #CCC;">
+                        <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.57"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</font></small> -->
+                        <small style="display: block;"><font size="1">Your email address: (mandatory field)</font></small>
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="padding: 2px; border: solid thin #BBB;">
+                                    <input type="text" name="email" value="{{ data.email if data.email else (user.email if user.email else '') }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.1366"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</font></small> -->
+                        <small style="display: block;"><font size="1">Ypur name: (mandatory field)</font></small>
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="padding: 2px; border: solid thin #BBB;">
+                                    <input type="text" name="name" value="{{ data.email if data.name else (user.name if user.name else '') }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.1512"] }} ({{ dictionary["contactseller_form.6"] }}):</font></small> -->
+                        <small style="display: block;"><font size="1">Phone (optional):</font></small>
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="padding: 2px; border: solid thin #BBB;">
+                                    <input type="text" name="phone" value="{{ data.phone if data.phone else '' }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- <small style="display: block;"><font size="1">{{ dictionary["contactseller_form.58"] }}</font></small> -->
+                        <small style="display: block;"><font size="1">Your comments</font></small>
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="padding: 2px; border: solid thin #BBB;">
+                                    <textarea name="message" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">{{ data.message if data.message else '' }}</textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-top: solid thin #CCC; text-align: right;">
+                        <input type="hidden" name="itemId" value="{{ item.id }}" />
+                        <!-- <input type="submit" name="submit" value='{{ dictionary["contactseller_form.60"] }}' /> -->
+                        <input type="submit" name="submit" value="Send" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </td>
+</tr>

@@ -1,44 +1,48 @@
-<table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
-    <tr>
-        <td style="padding: .25em .5em; border-top: solid thin #808080;">
-            <form action="/location">
-                <label for="search"> 
-                    <!-- <small>{{ dictionary["countryoptions.EnterCityOrZipCode"] }}</small> -->
-                    <small>Enter a city or Zip Code</small>
-                 </label><br />
-                <input type="text" value="" name="search" />
-                <!-- <input type="submit" value='{{ dictionary["homeheader.Search"] }}' name="search_button" /> -->
-                <input type="submit" value="Search" name="search_button" />
-            </form>
-        </td>
-    </tr>
-</table>
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
-    <tr>
-        <td style="padding: .25em .5em;; border-top: solid thin #808080;">
-            <!-- <strong><small style="display: block;">{{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}</small></strong> -->
-            <strong><small style="display: block;">{{ "All results" if search else "Popular cities" }}</small></strong>
-        </td>
-    </tr>
-</table>
-{% if cities.length > 0 %}
-    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
-        {% for city in cities %}
+<tr>
+    <td>
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
             <tr>
-                <td style="border-top: solid thin #808080;">
-                    <a style="display: block; padding: .25em .5em;" href="/{{ target }}?location={{ city.id }}">
-                        <small style="display: block;">{{ city.name }}</small>
-                    </a>
+                <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                    <form action="/location">
+                        <label for="search"> 
+                            <!-- <small>{{ dictionary["countryoptions.EnterCityOrZipCode"] }}</small> -->
+                            <small>Enter a city or Zip Code</small>
+                         </label><br />
+                        <input type="text" value="" name="search" />
+                        <!-- <input type="submit" value='{{ dictionary["homeheader.Search"] }}' name="search_button" /> -->
+                        <input type="submit" value="Search" name="search_button" />
+                    </form>
                 </td>
             </tr>
-        {% endfor %}
-    </table>
-{% else %}
-    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
-        <tr>
-            <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                <small style="displayt: block;">We are sorry but we don't have results for your search.</small>
-            </td>
-        </tr>
-    </table>
-{% endif %}
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+            <tr>
+                <td style="padding: .25em .5em;; border-top: solid thin #808080;">
+                    <!-- <strong><small style="display: block;">{{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}</small></strong> -->
+                    <strong><small style="display: block;">{{ "All results" if search else "Popular cities" }}</small></strong>
+                </td>
+            </tr>
+        </table>
+        {% if cities.length > 0 %}
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                {% for city in cities %}
+                    <tr>
+                        <td style="border-top: solid thin #808080;">
+                            <a style="display: block; padding: .25em .5em;" href="/{{ target }}?location={{ city.url }}">
+                                <small style="display: block;">{{ city.name }}</small>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <small style="displayt: block;">We are sorry but we don't have results for your search.</small>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
+    </td>
+</tr>

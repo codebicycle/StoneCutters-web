@@ -1,85 +1,87 @@
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
-    <tbody><tr>
-        <td style="padding: .25em .5em; border-top: solid thin #808080;">
-            <strong style="color: #0075BD;">Editar publicación</strong>
-            <br>
-            <small>Detalles de Publicación</small>
-        </td>
-    </tr>
-</tbody></table>
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
-    <tr>
-        <td style="padding: .5em; border-top: solid thin #808080;">
-            <small>
-                <strong>Categoría::</strong>
-                <span>Cat name</span>
-            </small>
-            <br />
-            <br style="display: none;" />
-            <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
-                {% for image in item.images %}
-                    <small style="display: block;">
-                        <img src="{{image.thumbnail}}" alt="OLX - Item image" style="display: inline-block;">
+<tr>
+    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+        <strong style="color: #0075BD;">Editar publicación</strong>
+        <br>
+        <small>Detalles de Publicación</small>
+    </td>
+</tr>
+<tr>
+    <td>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+            <tr>
+                <td style="padding: .5em; border-top: solid thin #808080;">
+                    <small>
+                        <strong>Categoría::</strong>
+                        <span>Cat name</span>
                     </small>
-                    <label style="display: block; padding-top: .5em;">
-                        <input type="checkbox" name="del.image.{{image.id}}" value="{{image.id}}" >
-                        <small>Delete image</small>
-                        <input type="hidden" name="image.{{image.id}}" value="{{image.id}}" style="display: none;" >
-                    </label>
-                {% endfor %}
-                <label style="display: block; padding-top: .5em;">
-                    <small>Attach a Picture:</small>
-                    <br>
-                    <input type="file" style="font-size: small" name="images[0]">
-                    <br>
-                    <input type="file" style="font-size: small" name="images[1]">
-                </label>
-                {% for field in fields.productDescription %}
-                    {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
-                    {% include templateName %}
+                    <br />
                     <br style="display: none;" />
-                {% endfor %}
-                {% for field in fields.categoryAttributes %}
-                    {% if (field.values) or (field.fieldType == 'text') %}
-                        {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
-                        {% include templateName %}
-                    {% endif %}
-                {% endfor %}
-                {% for field in fields.contactInformation %}
-                    {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                    <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
+                        {% for image in item.images %}
+                            <small style="display: block;">
+                                <img src="{{image.thumbnail}}" alt="OLX - Item image" style="display: inline-block;">
+                            </small>
+                            <label style="display: block; padding-top: .5em;">
+                                <input type="checkbox" name="del.image.{{image.id}}" value="{{image.id}}" >
+                                <small>Delete image</small>
+                                <input type="hidden" name="image.{{image.id}}" value="{{image.id}}" style="display: none;" >
+                            </label>
+                        {% endfor %}
+                        <label style="display: block; padding-top: .5em;">
+                            <small>Attach a Picture:</small>
+                            <br>
+                            <input type="file" style="font-size: small" name="images[0]">
+                            <br>
+                            <input type="file" style="font-size: small" name="images[1]">
+                        </label>
+                        {% for field in fields.productDescription %}
+                            {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                            {% include templateName %}
+                            <br style="display: none;" />
+                        {% endfor %}
+                        {% for field in fields.categoryAttributes %}
+                            {% if (field.values) or (field.fieldType == 'text') %}
+                                {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                                {% include templateName %}
+                            {% endif %}
+                        {% endfor %}
+                        {% for field in fields.contactInformation %}
+                            {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                            {% include templateName %}
+                        {% endfor %}
+                        {% if errField | is('string') %}
+                            <small style="display: block; color: red;">{{errField}}:</small>
+                        {% else %}
+                            {% for index, field in errField %}
+                                <small style="display: block; color: red;">{{field}}</small>
+                            {% endfor %}
+                        {% endif %}
+                        {% if errMsg | is('string') %}
+                            <small style="display: block; color: red;">{{errMsg}}</small>
+                        {% else %}
+                            {% for index, msg in errMsg %}
+                                <small style="display: block; color: red;">{{msg}}</small>
+                            {% endfor %}
+                        {% endif %}
+                        <input type="hidden" name="postingSession" value="{{postingSession}}">
+                        <input type="hidden" name="location" value="{{location}}">
+                        <input type="hidden" name="languageId" value="{{language}}">
+                        <input type="hidden" name="languageCode" value="{{languageCode}}">
+                        <input type="hidden" name="platform" value="{{platform}}">
+                        <input type="hidden" name="category.parentId" value="{{category}}">
+                        <input type="hidden" name="category.id" value="{{subcategory}}">
+                        <input type="hidden" name="id" value="{{item.id}}">
+                        <input type="hidden" name="sk" value="{{sk}}">
+                        <span style="display: block;"><input type="submit" value="Post Ad"></span>
+                    </form>
+                </td>
+            </tr>
+            <tr style="display: none;">
+                <td>
+                    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
                     {% include templateName %}
-                {% endfor %}
-                {% if errField | is('string') %}
-                    <small style="display: block; color: red;">{{errField}}:</small>
-                {% else %}
-                    {% for index, field in errField %}
-                        <small style="display: block; color: red;">{{field}}</small>
-                    {% endfor %}
-                {% endif %}
-                {% if errMsg | is('string') %}
-                    <small style="display: block; color: red;">{{errMsg}}</small>
-                {% else %}
-                    {% for index, msg in errMsg %}
-                        <small style="display: block; color: red;">{{msg}}</small>
-                    {% endfor %}
-                {% endif %}
-                <input type="hidden" name="postingSession" value="{{postingSession}}">
-                <input type="hidden" name="location" value="{{location}}">
-                <input type="hidden" name="languageId" value="{{language}}">
-                <input type="hidden" name="languageCode" value="{{languageCode}}">
-                <input type="hidden" name="platform" value="{{platform}}">
-                <input type="hidden" name="category.parentId" value="{{category}}">
-                <input type="hidden" name="category.id" value="{{subcategory}}">
-                <input type="hidden" name="id" value="{{item.id}}">
-                <input type="hidden" name="sk" value="{{sk}}">
-                <span style="display: block;"><input type="submit" value="Post Ad"></span>
-            </form>
-        </td>
-    </tr>
-    <tr style="display: none;">
-        <td>
-            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-            {% include templateName %}
-        </td>
-    </tr>
-</table>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

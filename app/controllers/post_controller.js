@@ -56,7 +56,8 @@ module.exports = {
             var languageId = languages._byId[language].id;
             var spec = {
                 postingSession: {
-                    model: 'PostingSession'
+                    model: 'PostingSession',
+                    params: {}
                 },
                 fields: {
                     collection: 'Fields',

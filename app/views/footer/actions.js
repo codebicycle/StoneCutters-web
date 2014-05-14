@@ -2,17 +2,20 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
-    className: 'categories_menu_view',
+    className: 'footer_actions_view',
+    wapAttributes: {
+        bgcolor: '#DDDDDD'
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            categories: this.app.getSession('categories'),
-            siteLocation: this.app.getSession('siteLocation')
+            user: this.app.getSession('user')
         });
-    },
+    }
 });
 
-module.exports.id = 'categories/menu';
+module.exports.id = 'footer/actions';

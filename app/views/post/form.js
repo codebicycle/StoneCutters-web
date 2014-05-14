@@ -5,6 +5,9 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
     className: 'post_form_view',
+    wapAttributes: {
+        cellpadding: 0
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
@@ -17,16 +20,23 @@ module.exports = BaseView.extend({
             var $input = $('input.'+$image);
             $input.trigger('click'); 
         });
-        $('form').on('change', 'input[type="file"]', function (e) {
-        	var $imageUrl = window.URL.createObjectURL(this.files[0]);
-            window.URL.revokeObjectURL(this.src);
-    		var $current = $(this).attr('class');
-    		$('<img/>').attr('src', $imageUrl).load(function() {
-               $(this).remove();
-               $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill');
-            });
-
-    	});
+        $('.fileUpload .image span').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $input = $(this).parent('.image').attr('id');
+            $(this).parent('.image').removeClass('fill').addClass('empty');
+            var $clone = $('<input>').attr({'type': $('.'+$input).attr('type'),'name': $('.'+$input).attr('name'),'class': $('.'+$input).attr('class')});
+			$('.'+$input).replaceWith($clone);
+        });
+		$('form').on('change', 'input[type="file"]', function (e) {
+			var $imageUrl = window.URL.createObjectURL(this.files[0]);
+			window.URL.revokeObjectURL(this.src);
+			var $current = $(this).attr('class');
+			$('<img/>').attr('src', $imageUrl).load(function() {
+				$(this).remove();
+				$('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill');
+			});
+		});
     },
 });
 

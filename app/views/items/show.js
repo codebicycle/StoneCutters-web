@@ -5,13 +5,16 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
     className: 'items_show_view',
+    wapAttributes: {
+        cellpadding: 0
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
         data.category_name = this.options.category_name;
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
         data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
-        
+
         return data;
     },
     postRender: function() {
@@ -53,7 +56,7 @@ module.exports = BaseView.extend({
                     loop: true,
                     initialSlide: galery.activeLoopIndex,
                     autoplay: 2000,
-                                
+
                 });
             }else{
                 mySwiperGal.swipeTo(galery.activeLoopIndex,500);
@@ -76,7 +79,7 @@ module.exports = BaseView.extend({
                 mySwiperGal.stopAutoplay();
             }
             $('.pause').toggleClass('play');
-            
+
         });
         $('#galCont .swiper-wrapper , #galContOne').click(function(e) {
             e.preventDefault();
@@ -147,7 +150,7 @@ module.exports = BaseView.extend({
                     }
                 });
             }
-        
+
         });
         $('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
             var value = $(this).val();
@@ -172,7 +175,7 @@ module.exports = BaseView.extend({
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     },
-    validForm: function (message, name, email) {           
+    validForm: function (message, name, email) {
         var valMail = true;
         var valName = true;
         var valMsg = true;
@@ -181,7 +184,7 @@ module.exports = BaseView.extend({
         if(valMail){
             valMail = this.isEmail(email,'email');
         }
-        
+
         valName = this.isEmpty(name,'name');
         valMsg = this.isEmpty(message,'message');
 
@@ -196,7 +199,7 @@ module.exports = BaseView.extend({
                 $('small.'+field).removeClass('hide').empty();
                 return true;
             }
-            
+
         },
 
     isEmpty: function (value,field) {
