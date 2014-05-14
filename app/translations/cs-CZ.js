@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrovat se',
     'loginheader.Identification': 'Identifikace',
     'terms.TermsOfUse': 'Podm\xEDnky pou\u017E\xEDv\xE1n\xED',
-    'misc.Sell_Post_Mobile_India': 'Zaslat'
+    'misc.Sell_Post_Mobile_India': 'Zaslat',
+    'misc.SpecificFields_title': 'Specifick\xE1 pole kategori\xED (Voliteln\xE9)'
 };

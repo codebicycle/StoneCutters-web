@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrieren',
     'loginheader.Identification': 'Identifikation ',
     'terms.TermsOfUse': 'Nutzungsbedingungen',
-    'misc.Sell_Post_Mobile_India': 'Ver\xF6ffentlichen'
+    'misc.Sell_Post_Mobile_India': 'Ver\xF6ffentlichen',
+    'misc.SpecificFields_title': 'Kategoriespezifische Felder (Kann-Eingaben)'
 };

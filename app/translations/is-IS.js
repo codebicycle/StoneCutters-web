@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'N\xFDskr\xE1ning',
     'loginheader.Identification': 'Au\xF0kenning',
     'terms.TermsOfUse': 'Notkunarskilm\xE1lar',
-    'misc.Sell_Post_Mobile_India': 'Birta'
+    'misc.Sell_Post_Mobile_India': 'Birta',
+    'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)'
 };

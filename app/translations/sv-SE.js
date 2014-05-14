@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrera',
     'loginheader.Identification': 'Identifikation',
     'terms.TermsOfUse': 'Anv\xE4ndarvillkor',
-    'misc.Sell_Post_Mobile_India': 'L\xE4gg upp'
+    'misc.Sell_Post_Mobile_India': 'L\xE4gg upp',
+    'misc.SpecificFields_title': 'Kategorispecifikka f\xE4lt (tillval)'
 };

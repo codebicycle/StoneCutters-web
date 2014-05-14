@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Zarejestruj si\u0119',
     'loginheader.Identification': 'Identyfikacja',
     'terms.TermsOfUse': 'Warunki u\u017Cytkowania',
-    'misc.Sell_Post_Mobile_India': 'Publikuj'
+    'misc.Sell_Post_Mobile_India': 'Publikuj',
+    'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)'
 };

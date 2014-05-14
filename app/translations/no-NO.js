@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrere',
     'loginheader.Identification': 'Identifikasjon',
     'terms.TermsOfUse': 'Bruker Vilk\xE5r',
-    'misc.Sell_Post_Mobile_India': 'Legg ut'
+    'misc.Sell_Post_Mobile_India': 'Legg ut',
+    'misc.SpecificFields_title': 'Felter for spesifikk kategori (valgfritt)'
 };

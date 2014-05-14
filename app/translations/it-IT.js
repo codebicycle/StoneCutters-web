@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrarti',
     'loginheader.Identification': 'Identificazione',
     'terms.TermsOfUse': 'Condizioni D\' Uso',
-    'misc.Sell_Post_Mobile_India': 'Pubblica'
+    'misc.Sell_Post_Mobile_India': 'Pubblica',
+    'misc.SpecificFields_title': 'Categoria/Campi Specifici (Opzionali)'
 };

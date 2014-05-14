@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Tilmeld',
     'loginheader.Identification': 'Identifikation',
     'terms.TermsOfUse': 'Regler for anvendelse',
-    'misc.Sell_Post_Mobile_India': 'S\xE6lg'
+    'misc.Sell_Post_Mobile_India': 'S\xE6lg',
+    'misc.SpecificFields_title': 'Kategorispecifikke felter (valgfrit)'
 };

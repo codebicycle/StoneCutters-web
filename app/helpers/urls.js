@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = {
-    '?*params': {
+    home_with_params: {
+        url: '?*params',
         view: 'home#index',
         isServer: false,
-        google: '',
+        google: 'home',
         ati: {
             process: false,
             params: {
@@ -13,10 +14,11 @@ module.exports = {
             }
         }
     },
-    '': {
+    home: {
+        url: '',
         view: 'home#index',
         isServer: false,
-        google: '',
+        google: 'home',
         ati: {
             process: false,
             params: {
@@ -25,10 +27,11 @@ module.exports = {
             }
         }
     },
-    'search/:search/-p-:page/:filters?': {
+    search_with_filters: {
+        url: 'search/:search/-p-:page/:filters?',
         view: 'items#search',
         isServer: false,
-        google: '[category-name]/[subcategory-id]/search/to_be_completed',
+        google: '[category-name]/[subcategory-id]/search/[filter_name_value]',
         ati: {
             process: true,
             params: {
@@ -39,7 +42,8 @@ module.exports = {
             }
         }
     },
-    'search/:search?': {
+    search: {
+        url: 'search/:search?',
         view: 'items#search',
         isServer: false,
         google: '[category-name]/[subcategory-id]/search',
@@ -53,10 +57,11 @@ module.exports = {
             }
         }
     },
-    'nf/search/:search/-p-:page/:filters?': {
+    nfsearch_with_filters: {
+        url: 'nf/search/:search/-p-:page/:filters?',
         view: 'items#search',
         isServer: false,
-        google: '[category-name]/[subcategory-id]/staticsearch/to_be_completed',
+        google: '[category-name]/[subcategory-id]/search/[filter_name_value]',
         ati: {
             process: true,
             params: {
@@ -67,10 +72,11 @@ module.exports = {
             }
         }
     },
-    'nf/search/:search?': {
+    nfsearch: {
+        url: 'nf/search/:search?',
         view: 'items#search',
         isServer: false,
-        google: '[category-name]/[subcategory-id]/staticsearch',
+        google: '[category-name]/[subcategory-id]/search',
         ati: {
             process: true,
             params: {
@@ -81,7 +87,8 @@ module.exports = {
             }
         }
     },
-    'register': {
+    register: {
+        url: 'register',
         view: 'user#registration',
         isServer: false,
         google: 'register',
@@ -93,7 +100,8 @@ module.exports = {
             }
         }
     },
-    'login': {
+    login: {
+        url: 'login',
         view: 'user#login',
         isServer: false,
         google: 'login',
@@ -105,7 +113,8 @@ module.exports = {
             }
         }
     },
-    'myolx/myadslisting': {
+    myadslisting: {
+        url: 'myolx/myadslisting',
         view: 'user#my-ads',
         isServer: false,
         google: 'myadslisting',
@@ -117,7 +126,8 @@ module.exports = {
             }
         }
     },
-    'myolx/favoritelisting': {
+    favoritelisting: {
+        url: 'myolx/favoritelisting',
         view: 'user#favorites',
         isServer: false,
         google: 'favoritelisting',
@@ -129,7 +139,8 @@ module.exports = {
             }
         }
     },
-    'location': {
+    location: {
+        url: 'location',
         view: 'location#index',
         isServer: false,
         google: 'location',
@@ -142,7 +153,8 @@ module.exports = {
             }
         }
     },
-    'posting/success/:itemId': {
+    posting_success: {
+        url: 'posting/success/:itemId',
         view: 'post#success',
         isServer: false,
         google: 'posting',
@@ -164,7 +176,8 @@ module.exports = {
             }
         }
     },
-    'posting/:categoryId/:subcategoryId': {
+    posting_cat_subcat: {
+        url: 'posting/:categoryId/:subcategoryId',
         view: 'post#form',
         isServer: false,
         google: 'posting',
@@ -181,7 +194,8 @@ module.exports = {
             }
         }
     },
-    'posting/:categoryId': {
+    posting_cat: {
+        url: 'posting/:categoryId',
         view: 'post#subcat',
         isServer: false,
         google: 'posting',
@@ -194,7 +208,8 @@ module.exports = {
             }
         }
     },
-    'posting': {
+    posting: {
+        url :'posting',
         view: 'post#index',
         isServer: false,
         google: 'posting',
@@ -207,7 +222,8 @@ module.exports = {
             }
         }
     },
-    'myolx/edititem/:itemId?': {
+    posting_edit: {
+        url: 'myolx/edititem/:itemId?',
         view: 'post#edit',
         isServer: false,
         google: 'edititem',
@@ -228,7 +244,8 @@ module.exports = {
         }
     },
     /*
-    'myolx/edititem/success': {
+    posting_edit_success: {
+        url: 'myolx/edititem/success',
         view: 'post#success',
         isServer: false,
         google: 'edititem',
@@ -252,7 +269,8 @@ module.exports = {
         }
     },
     */
-    'terms': {
+    terms: {
+        url: 'terms',
         view: 'pages#terms',
         isServer: false,
         google: 'terms',
@@ -264,7 +282,8 @@ module.exports = {
             }
         }
     },
-    'help': {
+    help: {
+        url: 'help',
         view: 'pages#help',
         isServer: false,
         google: 'help',
@@ -276,7 +295,8 @@ module.exports = {
             }
         }
     },
-    'interstitial': {
+    interstitial: {
+        url: 'interstitial',
         view: 'pages#interstitial',
         isServer: false,
         google: 'interstitial',
@@ -288,7 +308,8 @@ module.exports = {
             }
         }
     },
-    ':title-iid-:itemId([0-9]+$)': {
+    item: {
+        url: ':title-iid-:itemId([0-9]+$)',
         view: 'items#show',
         isServer: false,
         google: '[category-name]/[subcategory-id]/item/[item_attributes]',
@@ -311,7 +332,8 @@ module.exports = {
             }
         }
     },
-    ':title-iid-:itemId([0-9]+)/reply': {
+    item_reply: {
+        url: ':title-iid-:itemId([0-9]+)/reply',
         view: 'items#reply',
         isServer: false,
         google: '[category-name]/[subcategory-id]/item/[item_attributes]',
@@ -332,7 +354,8 @@ module.exports = {
             }
         }
     },
-    ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?': {
+    category_with_filters: {
+        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?',
         view: 'items#index',
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing/[filter_name_value]',
@@ -345,7 +368,8 @@ module.exports = {
             }
         }
     },
-    ':title-cat-:catId([0-9]+)-p-:page([0-9]+$)': {
+    category_with_page: {
+        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+$)',
         view: 'items#index',
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing',
@@ -358,10 +382,11 @@ module.exports = {
             }
         }
     },
-    ':title-cat-:catId([0-9]+$)': {
+    category: {
+        url: ':title-cat-:catId([0-9]+$)',
         view: 'categories#show',
         isServer: false,
-        google: '[category-name]/[subcategory-id]/listing',
+        google: '[category-name]/subcategory_list',
         ati: {
             process: true,
             params: {
@@ -371,7 +396,8 @@ module.exports = {
             }
         }
     },
-    ':errorCode([0-9]{3})': {
+    error: {
+        url: ':errorCode([0-9]{3})',
         view: 'pages#error',
         isServer: false,
         google: 'error',

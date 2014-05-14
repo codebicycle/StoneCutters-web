@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Daftar',
     'loginheader.Identification': 'Identifikasi',
     'terms.TermsOfUse': 'Ketentuan Penggunaan',
-    'misc.Sell_Post_Mobile_India': 'Kirim'
+    'misc.Sell_Post_Mobile_India': 'Kirim',
+    'misc.SpecificFields_title': 'Bidang Spesifik Kategori (Opsional)'
 };

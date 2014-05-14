@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': '\u0110\u0103ng k\xFD',
     'loginheader.Identification': 'Nh\u1EADn d\u1EA1ng',
     'terms.TermsOfUse': '\u0110i\u1EC1u kho\u1EA3n s\u1EED d\u1EE5ng',
-    'misc.Sell_Post_Mobile_India': '\u0110\u0103ng'
+    'misc.Sell_Post_Mobile_India': '\u0110\u0103ng',
+    'misc.SpecificFields_title': 'C\xE1c tr\u01B0\u1EDDng c\u1EE5 th\u1EC3 c\u1EE7a Nh\xF3m h\xE0ng (c\xE1c t\xF9y ch\u1ECDn)'
 };

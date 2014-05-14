@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrirajte se',
     'loginheader.Identification': 'Identifikacija',
     'terms.TermsOfUse': 'Uvjeti uporabe',
-    'misc.Sell_Post_Mobile_India': 'Objavi'
+    'misc.Sell_Post_Mobile_India': 'Objavi',
+    'misc.SpecificFields_title': 'Specifi\u010Dna polja kategorija (po izboru)'
 };

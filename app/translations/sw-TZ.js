@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Jiandikishe',
     'loginheader.Identification': 'Kitambulisho',
     'terms.TermsOfUse': 'Masharti ya Matumizi',
-    'misc.Sell_Post_Mobile_India': 'Kuuza'
+    'misc.Sell_Post_Mobile_India': 'Kuuza',
+    'misc.SpecificFields_title': 'Uga ya Kundi Maalum (Hiari)'
 };

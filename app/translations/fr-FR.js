@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Ouvrir un compte',
     'loginheader.Identification': 'Identification ',
     'terms.TermsOfUse': 'Conditions d\'Utilisation',
-    'misc.Sell_Post_Mobile_India': 'Publier'
+    'misc.Sell_Post_Mobile_India': 'Publier',
+    'misc.SpecificFields_title': 'Champs de Cat\xE9gorie Sp\xE9cifiques (Facultatif)'
 };

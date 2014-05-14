@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Re\u0123istr\u0113ties',
     'loginheader.Identification': 'Identific\u0113\u0161ana',
     'terms.TermsOfUse': 'Izmanto\u0161anas noteikumi',
-    'misc.Sell_Post_Mobile_India': 'Public\u0113t'
+    'misc.Sell_Post_Mobile_India': 'Public\u0113t',
+    'misc.SpecificFields_title': 'Category Specific Fields (Optionals)'
 };

@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registruotis',
     'loginheader.Identification': 'Identifikacija ',
     'terms.TermsOfUse': 'Naudojimosi s\u0105lygos',
-    'misc.Sell_Post_Mobile_India': 'Skelbti'
+    'misc.Sell_Post_Mobile_India': 'Skelbti',
+    'misc.SpecificFields_title': 'Special\u016Bs kategorij\u0173 laukai (papildomi)'
 };

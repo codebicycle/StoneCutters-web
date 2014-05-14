@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Magrehistro',
     'loginheader.Identification': 'Identipikasyon',
     'terms.TermsOfUse': 'Patakaran ng Paggamit',
-    'misc.Sell_Post_Mobile_India': 'Ipaskil'
+    'misc.Sell_Post_Mobile_India': 'Ipaskil',
+    'misc.SpecificFields_title': 'Mga Partikular na Field ng Kategorya (Mga Opsyonal)'
 };

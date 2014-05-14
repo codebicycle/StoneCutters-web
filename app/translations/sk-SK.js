@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Zaregistrujte sa',
     'loginheader.Identification': 'Identifik\xE1cia',
     'terms.TermsOfUse': 'Podmienky pou\u017E\xEDvania',
-    'misc.Sell_Post_Mobile_India': 'Uverejni\u0165'
+    'misc.Sell_Post_Mobile_India': 'Uverejni\u0165',
+    'misc.SpecificFields_title': '\u0160pecifick\xE9 polia kateg\xF3rie (vo\u013Eby)'
 };

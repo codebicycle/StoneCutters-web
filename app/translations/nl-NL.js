@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registreren',
     'loginheader.Identification': 'Identificatie',
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
-    'misc.Sell_Post_Mobile_India': 'Plaatsen'
+    'misc.Sell_Post_Mobile_India': 'Plaatsen',
+    'misc.SpecificFields_title': 'Categoriespecifieke velden (optioneel)'
 };

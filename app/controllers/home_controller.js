@@ -15,7 +15,7 @@ module.exports = {
             var siteLocation = this.app.getSession('siteLocation');
 
             helpers.analytics.reset();
-            helpers.analytics.setPage('/');
+            helpers.analytics.setPage('home');
 
             helpers.seo.resetHead();
             helpers.seo.addMetatag('title', 'Home');

@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': '\xDCye Ol',
     'loginheader.Identification': 'Kimlik ',
     'terms.TermsOfUse': 'Kullan\u0131m \u015Eartlar\u0131',
-    'misc.Sell_Post_Mobile_India': 'G\xF6nder'
+    'misc.Sell_Post_Mobile_India': 'G\xF6nder',
+    'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)'
 };

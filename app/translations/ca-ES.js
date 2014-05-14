@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrar',
     'loginheader.Identification': 'Identificaci\xF3',
     'terms.TermsOfUse': 'Condicions d\'\xFAs',
-    'misc.Sell_Post_Mobile_India': 'Publicar'
+    'misc.Sell_Post_Mobile_India': 'Publicar',
+    'misc.SpecificFields_title': 'Camps espec\xEDfics de categoria (opcionals)'
 };

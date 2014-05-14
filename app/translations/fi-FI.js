@@ -65,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Rekister\xF6idy',
     'loginheader.Identification': 'Tunnistautuminen ',
     'terms.TermsOfUse': 'K\xE4ytt\xF6ehdot',
-    'misc.Sell_Post_Mobile_India': 'Julkaise'
+    'misc.Sell_Post_Mobile_India': 'Julkaise',
+    'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)'
 };
