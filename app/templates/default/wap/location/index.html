@@ -5,7 +5,7 @@
                 <tr>
                     <td style="padding: .5em;">
                         <small>
-                            <img src="http://images04.olx-st.com/mobile/images/wap/ico_city.gif">
+                            <img src="{{ "/images/wap/ico_city.gif" | static }}">
                             <small> <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %} </small>
                         </small>
                     </td>
