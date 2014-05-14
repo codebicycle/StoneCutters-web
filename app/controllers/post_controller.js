@@ -82,6 +82,7 @@ module.exports = {
                 result.subcategory = params.subcategoryId;
                 result.language = languageId;
                 result.languageCode = language;
+                result.siteLocation = siteLocation;
                 result.errField = params.errField;
                 result.errMsg = params.errMsg;
 

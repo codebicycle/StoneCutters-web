@@ -12,6 +12,7 @@ module.exports = {
             var platform = this.app.getSession('platform');
             var icons = config.get(['icons', platform], []);
             var country = this.app.getSession('location').url;
+            var siteLocation = this.app.getSession('siteLocation');
 
             helpers.analytics.reset();
             helpers.analytics.setPage('/');
@@ -20,6 +21,7 @@ module.exports = {
             helpers.seo.addMetatag('title', 'Home');
             helpers.seo.addMetatag('Description', 'This is the home page');
             helpers.seo.addMetatag('robots', 'NOFOLLOW');
+            helpers.seo.addMetatag('canonical', 'http://' + siteLocation);
             callback(null, {
                 categories: this.app.getSession('categories'),
                 icons: (~icons.indexOf(country)) ? country : 'default',

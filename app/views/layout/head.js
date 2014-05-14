@@ -33,6 +33,10 @@ module.exports = BaseView.extend({
             _.each(head.metatags, function each(metatag) {
                 $('head meta:last').after('<meta name="' +  metatag.name + '" content="' + metatag.content + '" />');
             });
+            $('head link[rel="canonical"]').remove();
+            if (head.canonical) {
+                $('head').append('<link rel="canonical" href="' +  head.canonical + '" >');
+            }
         });
     }
 });

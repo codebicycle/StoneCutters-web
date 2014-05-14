@@ -10,10 +10,14 @@
     <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["posting_fields_1.photos"] }}: <br> <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
         <div class="fileUpload">
-            <div class="image"><input id="file1" type="file" name="images[]" class="hide" /></div>
-            <div class="image"><input id="file2" type="file" name="images[]" class="hide" /></div>
-            <div class="image"><input id="file3" type="file" name="images[]" class="hide" /></div>
-            <div class="image"><input id="file4" type="file" name="images[]" class="hide" /></div>
+            <input type="file" name="images[]" class="file1" />
+            <input type="file" name="images[]" class="file2" />
+            <input type="file" name="images[]" class="file3" />
+            <input type="file" name="images[]" class="file4" />
+            <div class="image" id="file1"><span></span></div>
+            <div class="image" id="file2"><span></span></div>
+            <div class="image" id="file3"><span></span></div>
+            <div class="image" id="file4"><span></span></div>
         </div>
 
 
@@ -40,7 +44,7 @@
         {% endfor %}
 
         <input type="hidden" name="postingSession" value="{{postingSession}}">
-        <input type="hidden" name="location" value="{{location}}">
+        <input type="hidden" name="location" value="{{siteLocation}}">
         <input type="hidden" name="languageId" value="{{language}}">
         <input type="hidden" name="languageCode" value="{{languageCode}}">
         <input type="hidden" name="platform" value="{{platform}}">
