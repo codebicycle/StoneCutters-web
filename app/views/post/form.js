@@ -32,9 +32,10 @@ module.exports = BaseView.extend({
             var $imageUrl = window.URL.createObjectURL(this.files[0]);
             window.URL.revokeObjectURL(this.src);
             var $current = $(this).attr('class');
+            $('#' + $current).addClass('loading');
             $('<img/>').attr('src', $imageUrl).load(function() {
                 $(this).remove();
-                $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill');
+                $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('loading');
             });
         });
     },

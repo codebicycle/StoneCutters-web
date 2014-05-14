@@ -25,7 +25,11 @@ section#posting > form .fileUpload {
 	margin: .5rem;
 }
 section#posting > form .fileUpload input[type="file"] {
-	display: none;
+	width: 0;
+	height: 0;
+	display: block;
+	visibility: hidden;
+	z-index: -100;
 }
 section#posting > form .fileUpload .image {
 	position: relative;
