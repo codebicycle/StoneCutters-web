@@ -16,7 +16,6 @@ module.exports = {
                 content: clone.metatags[metatag]
             };
         });
-        console.log(clone.metatags);
         return clone;
     },
     resetHead: function() {
@@ -28,7 +27,6 @@ module.exports = {
             head.title = content;
             return;
         }
-        console.log(name);
         head.metatags[name] = content;
     }
 };
