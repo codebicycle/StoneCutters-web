@@ -1,24 +1,16 @@
 {% view 'location/select' %}
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>Post a Free Ad</h1>
-</div>
-<div id="success">
-    <div>
-        <h1>AllSet_Mob</h1>
-        <h2>AdSubmittedApproval</h2>
-        <p>SeeAdIn2Hrs_Mob</p>
-        <p>You can view your ad <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">here</a>.</p>
-    </div>
-    <div style="margin:6px 0 0 0;">
-        <h1>EmailAdActivated_Mob</h1>
-        <a href="/posting" class="btns orange">Post another add</a>
-        <a href="/" class="back">BackToStart_Mob</a>
-    </div>
-</div>
-<div class="breadcrumb">
-    <a href="/">back</a>
-    <a href="/" class="home">home</a>
-</div>
+<section class="afterPosting">
+    <article class="ready">
+        <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
+        <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
+        <p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}<br></p>
+        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">{{ dictionary["itemwarning.Here"] }}</a></p>
+    </article>
+    <article class="mail">
+        <h1>{{ dictionary["misc.EmailAdActivated_Mob"] }}</h1>
+        <a href="/posting" class="posting">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</a>
+        <a class="home" href="/">{{ dictionary["misc.BackToStart_Mob"] }}</a>
+    </article>
+</section>
