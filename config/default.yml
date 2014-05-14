@@ -77,6 +77,8 @@ middleware:
       - /check
     data:
       - /pageview.gif
+      - /404
+      - /500
 
 stylus:
   testing:

@@ -1,22 +1,6 @@
-<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
-	<tr>
-        <td align="center" style="border-top: solid thin #808080;">
-        	<small style="display: block;">
-        		<a href="/choosecountry">{{ dictionary["countryoptions.ChangeCountry"] }}</a> | 
-        		{% if not user %}
-	        		<a href="/login">{{ dictionary["homeheader.Sign_In"] }}</a> | 
-	        		<a href="/registration">{{ dictionary["homeheader.Register"] }}</a>
-	        	{% else %}
-	        		<a href="">{{ dictionary["myolx.MyBrand"] | replace("<<BRAND>>","OLX") }}</a>
-	        	{% endif %}
-        	</small>
-        </td>
-    </tr>
-</table>
-<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
-    <tr>
-        <td align="center" style="border-top: solid thin #808080;">
-            <small style="display: block;">
+<tr>
+    <td align="center" style="border-top: solid thin #808080;">
+        <small style="display: block;">
 			{% for language in languages.models %}
 				{% if language.locale == selectedLanguage %}
 					{{ language.name }}
@@ -25,7 +9,6 @@
 				{% endif %}
 				{% if not loop.last %} | {% endif %}
 			{% endfor %}
-			</small>
-		</td>
-    </tr>
-</table>
+		</small>
+	</td>
+</tr>

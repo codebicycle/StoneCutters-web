@@ -5,6 +5,9 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
     className: 'location_select_view',
+    wapAttributes: {
+        bgcolor: '#DDDDDD'
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 

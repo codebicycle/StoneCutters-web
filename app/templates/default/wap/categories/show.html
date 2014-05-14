@@ -1,24 +1,33 @@
-{{ category.name }}
-{% set templateName = template + '/location/select.html' %}
-{% include templateName %}
-{% set templateName = template + '/post/home_select.html' %}
-{% include templateName %}
-{% set templateName = template + '/partials/search.html' %}
-{% include templateName %}
-<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
-	{% for subcategory in category.children %}
-		<tr>
-			<td style="border-top: solid thin #808080;">
-				<a style="display: block;" href="{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">
-					<small style="display: block;"><img border="0" alt="" src="" />{{ subcategory.trName }}</small>
-				</a>
-			</td>
-		</tr>
-	{% endfor %}
-    <tr style="display: none;">
-        <td>
-            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-            {% include templateName %}
-        </td>
-    </tr>
-</table>
+<tr>
+	<td>
+		<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+		    <tr>
+		        <td>
+		        	{{ category.name }}
+		        </td>
+		    </tr>
+		</table>
+		{% view 'location/select' %}
+		{% set templateName = template + '/post/home_select.html' %}
+		{% include templateName %}
+		{% set templateName = template + '/partials/search.html' %}
+		{% include templateName %}
+		<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left" bgcolor="#FFFFFF">
+			{% for subcategory in category.children %}
+				<tr>
+					<td style="border-top: solid thin #808080;">
+						<a style="display: block;" href="{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">
+							<small style="display: block;"><img border="0" alt="" src="" />{{ subcategory.trName }}</small>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		    <tr style="display: none;">
+		        <td>
+		            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+		            {% include templateName %}
+		        </td>
+		    </tr>
+		</table>
+    </td>
+</tr>

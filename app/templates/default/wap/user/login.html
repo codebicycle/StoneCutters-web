@@ -1,78 +1,82 @@
-<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-    <tbody>
-        <tr>
-            <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                <strong style="color: #0075BD;">{{ dictionary["loginheader.Identification"] }}</strong>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-    <tbody>
-        <tr>
-            <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                <strong><small>{{ dictionary["loginbox.MemberAccess"] }}</small></strong>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 0 .5em .5em;">
-                <form action="/login" method="POST" enctype="multipart/form-data">
-                    <label style="display: block;">
-                        <small>{{ dictionary["loginbox.Username"] }}</small><br>
-                        <input type="text" value="" name="usernameOrEmail">
-                    </label>
-                    <br style="display: none;">
-                    <label style="display: block;">
-                        <small>{{ dictionary["loginbox.Password"] }}</small><br>
-                        <input type="password" value="" name="password">
-                    </label>
-                    <input type="hidden" name="redirect" value="{{ referer }}">
-                    <div style="padding-top: .25em;">
-                        <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit">
-                    </div>
-                </form>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-    <tbody>
-        <tr>
-            <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                <strong><small>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</small></strong>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 0 .5em .5em;">
-                <small>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace("<<MY_CLASSIFIEDS>>","Mi OLX") }}</small>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 0 .5em .5em;">
-                <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
-                    <label style="display: block;">
-                        <small>{{ dictionary["posting_fields_2.email"] }}</small><br>
-                        <input type="text" value="" name="email">
-                    </label>
-                    <div style="padding-top: .25em;">
-                        <input type="submit" value="{{ dictionary["myolx.Send"] }}" name="submit">
-                    </div>
-                </form>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
-    <tbody>
-        <tr>
-            <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                <strong><small>{{ dictionary["loginbox.NotAMember"] }}</small></strong>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 0 .5em .5em;">
-                <small>{{ dictionary["loginbox.CreateYourAccount"] }}: <a href="/register">{{ dictionary["searchheader.ClickHere"] }}</a></small>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<tr>
+    <td>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong style="color: #0075BD;">{{ dictionary["loginheader.Identification"] }}</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong><small>{{ dictionary["loginbox.MemberAccess"] }}</small></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <form action="/login" method="POST" enctype="multipart/form-data">
+                            <label style="display: block;">
+                                <small>{{ dictionary["loginbox.Username"] }}</small><br>
+                                <input type="text" value="" name="usernameOrEmail">
+                            </label>
+                            <br style="display: none;">
+                            <label style="display: block;">
+                                <small>{{ dictionary["loginbox.Password"] }}</small><br>
+                                <input type="password" value="" name="password">
+                            </label>
+                            <input type="hidden" name="redirect" value="{{ referer }}">
+                            <div style="padding-top: .25em;">
+                                <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong><small>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</small></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <small>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace("<<MY_CLASSIFIEDS>>","Mi OLX") }}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
+                            <label style="display: block;">
+                                <small>{{ dictionary["posting_fields_2.email"] }}</small><br>
+                                <input type="text" value="" name="email">
+                            </label>
+                            <div style="padding-top: .25em;">
+                                <input type="submit" value="{{ dictionary["myolx.Send"] }}" name="submit">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong><small>{{ dictionary["loginbox.NotAMember"] }}</small></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <small>{{ dictionary["loginbox.CreateYourAccount"] }}: <a href="/register">{{ dictionary["searchheader.ClickHere"] }}</a></small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>

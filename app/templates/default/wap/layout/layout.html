@@ -4,8 +4,12 @@
 		{% view 'layout/head' %}
 	</head>
 	<body style="margin: 0; padding: 0; font-family: Sans-Serif;" text="#666666" link="#0066FF" vlink="#0066FF">
+		{% if blackBar.show %}
+			{% view 'header/bar' %}
+		{% endif %}
 		{% view 'header/index' %}
 		{{ body }}
+		{% view 'footer/actions' %}
 		{% view 'footer/languages' %}
 		{% view 'footer/index' %}
 	</body>

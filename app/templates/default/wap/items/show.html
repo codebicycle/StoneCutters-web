@@ -1,259 +1,256 @@
-<!-- Title -->
-<table width="100%" cellspacing="0" cellpadding="4" border="0">
-    <tr>
-        <td style="border-top: solid thin #808080;">
-        	<small style="display: block;">{{ item.category.name }}</small>
-        	<strong style="display: block;">
-        		<font color="{{ '#0075BD' if item.status.label == 'ready' else '#FF0000' }}">{{ item.title }}</font>
-        	</strong>
-        	{% if item.status.onReview %}
-        		<small style="display: block;">
-                    <!-- <font color="#FF0000">{{ dictionary["myolx.ApprovalPending"] }}</font> -->
-                    <font color="#FF0000">Aproval pending</font>
-                </small>
-        	{% endif %}
-
-        	<!-- <hr />
-	        	{% if sk %}
-					&#160;|&#160;
-			        <a href="/myolx/edititem/{{item.id}}?sk={{sk}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
-				{% endif %}
-        	<hr /> -->
-
-        	{# added to favorites status pending
-	        	{% if item.favorites.added || item.favorites.removed %}
-	        		<br />
-	                <small style="display: block;">
-	                    <font color="#6CB100">{{ '[itemheader.AddedFavorites]' if item.favorites.added else '[itemheader.RemovedFavorites]' }}</font>
-	                </small>
-	        	{% endif %}
-        	#}
-        </td>
-    </tr>
-    <tr style="display: none;">
-        <td>
-            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-            {% include templateName %}
-        </td>
-    </tr>
-</table>
-{% if item.status.visible %}
-	{% if item.images.length > 0 %}
+<tr>
+    <td>
+		<!-- Title -->
 		<table width="100%" cellspacing="0" cellpadding="4" border="0">
-	        <tr>
-	            <td align="center" valign="top" style="border-top: solid thin #808080;">
-	                {% set imgIndex = pos if item.images.length > 1 else 0 %}
-	                <img src="{{ item.images[imgIndex].url }}" alt="{{ item.title }}" align="top" width="100%" style="display: block;" />
-	            </td>
-	        </tr>
-	        {% if item.images.length > 1 %}
-	        	<tr>
-		            <td align="center">
-		                <small style="display: block;">
-		                	{% if pos > 0 %}
-		                    	<a rel="nofollow" href="{{ item.title | urlize }}-iid-{{ item.id }}{% if pos - 1 > 0 %}?pos={{ pos - 1 }}{% endif %}">&lt;</a> | 
-		                    {% else %}
-		                    	<font color="#CCCCCC">&lt;</font> | 
-		                    {% endif %}
-		                    	{# {{ pos + 1 }} {{ dictionary["posting_photosprogress.of"] }} {{ item.images.length }} #}
-		                    	{{ pos + 1 }} of {{ item.images.length }}
-		                    {% if pos < item.images.length - 1 %}
-		                    	 | <a rel="nofollow" href="{{ item.title | urlize }}-iid-{{ item.id }}?pos={{ pos + 1 }}">&gt;</a>
-		                    {% else %}
-		                    	 | <font color="#CCCCCC">&gt;</font>
-		                    {% endif %}
+		    <tr>
+		        <td style="border-top: solid thin #808080;">
+		        	<small style="display: block;">{{ item.category.name }}</small>
+		        	<strong style="display: block;">
+		        		<font color="{{ '#0075BD' if item.status.label == 'ready' else '#FF0000' }}">{{ item.title }}</font>
+		        	</strong>
+		        	{% if item.status.onReview %}
+		        		<small style="display: block;">
+		                    <!-- <font color="#FF0000">{{ dictionary["myolx.ApprovalPending"] }}</font> -->
+		                    <font color="#FF0000">Aproval pending</font>
 		                </small>
+		        	{% endif %}
+
+		        	<!-- <hr />
+			        	{% if sk %}
+							&#160;|&#160;
+					        <a href="/myolx/edititem/{{item.id}}?sk={{sk}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
+						{% endif %}
+		        	<hr /> -->
+
+		        	{# added to favorites status pending
+			        	{% if item.favorites.added || item.favorites.removed %}
+			        		<br />
+			                <small style="display: block;">
+			                    <font color="#6CB100">{{ '[itemheader.AddedFavorites]' if item.favorites.added else '[itemheader.RemovedFavorites]' }}</font>
+			                </small>
+			        	{% endif %}
+		        	#}
+		        </td>
+		    </tr>
+		    <tr style="display: none;">
+		        <td>
+		            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+		            {% include templateName %}
+		        </td>
+		    </tr>
+		</table>
+		{% if item.status.visible %}
+			{% if item.images.length > 0 %}
+				<table width="100%" cellspacing="0" cellpadding="4" border="0">
+			        <tr>
+			            <td align="center" valign="top" style="border-top: solid thin #808080;">
+			                {% set imgIndex = pos if item.images.length > 1 else 0 %}
+			                <img src="{{ item.images[imgIndex].url }}" alt="{{ item.title }}" align="top" width="100%" style="display: block;" />
+			            </td>
+			        </tr>
+			        {% if item.images.length > 1 %}
+			        	<tr>
+				            <td align="center">
+				                <small style="display: block;">
+				                	{% if pos > 0 %}
+				                    	<a rel="nofollow" href="{{ item.title | urlize }}-iid-{{ item.id }}{% if pos - 1 > 0 %}?pos={{ pos - 1 }}{% endif %}">&lt;</a> | 
+				                    {% else %}
+				                    	<font color="#CCCCCC">&lt;</font> | 
+				                    {% endif %}
+				                    	{# {{ pos + 1 }} {{ dictionary["posting_photosprogress.of"] }} {{ item.images.length }} #}
+				                    	{{ pos + 1 }} of {{ item.images.length }}
+				                    {% if pos < item.images.length - 1 %}
+				                    	 | <a rel="nofollow" href="{{ item.title | urlize }}-iid-{{ item.id }}?pos={{ pos + 1 }}">&gt;</a>
+				                    {% else %}
+				                    	 | <font color="#CCCCCC">&gt;</font>
+				                    {% endif %}
+				                </small>
+				            </td>
+				        </tr>
+			        {% endif %}
+			    </table>
+			{% endif %}
+			{% if item.status.contactable %}
+				<table width="100%" cellspacing="0" cellpadding="4" border="0">
+			        <tr>
+			            <td style="border-top: solid thin #808080;">
+			                <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
+			                    <tr>
+			                        <td align="center" style="border: solid thin #F30;">
+			                            <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
+			                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
+									</td>
+			                    </tr>
+			                </table>
+			            </td>
+			        </tr>
+			    </table>
+		    {% endif %}
+		    <table width="100%" cellspacing="0" cellpadding="4" border="0" class="itemDescription">
+		        <tr>
+		            <td style="border-top: solid thin #808080;">
+		                <!-- <small style="display: block;"><strong>{{ dictionary["itemdescription.Description"] }}:</strong></small> -->
+		                <small style="display: block;"><strong>Description:</strong></small>
 		            </td>
 		        </tr>
-	        {% endif %}
-	    </table>
-	{% endif %}
-	{% if item.status.contactable %}
-		<table width="100%" cellspacing="0" cellpadding="4" border="0">
-	        <tr>
-	            <td style="border-top: solid thin #808080;">
-	                <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
-	                    <tr>
-	                        <td align="center" style="border: solid thin #F30;">
-	                            <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
-	                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
-							</td>
-	                    </tr>
-	                </table>
-	            </td>
-	        </tr>
-	    </table>
-    {% endif %}
-    <table width="100%" cellspacing="0" cellpadding="4" border="0" class="itemDescription">
-        <tr>
-            <td style="border-top: solid thin #808080;">
-                <!-- <small style="display: block;"><strong>{{ dictionary["itemdescription.Description"] }}:</strong></small> -->
-                <small style="display: block;"><strong>Description:</strong></small>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <small style="display: block;">{{ item.description }}</small>
-            </td>
-        </tr>
-    </table>
-	<table width="100%" cellspacing="0" cellpadding="4" border="0">
-        <tr>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                    {% if item.price %}
-                		<tr>
-                			<th align="left" style="border-top: solid 1px #CCC;">
-	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Price"] }}:</small> -->
-	                            <small style="display: block; text-transform: capitalize;">Price:</small>
-	                        </th>
-	                        <td align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block;">{{ item.price.displayPrice }}</small>
-	                        </td>
-                		</tr>
-                	{% endif %}
-					{% if item.optionals %}
-                		{% for optional in item.optionals %}
-                			<tr>
-                                <th align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block; text-transform: capitalize;">{{ optional.label }}:</small>
-                                </th> 
-                                <td align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block;">{{ optional.value }}</small>
-                                </td>
-                            </tr>
-                		{% endfor %}
-                	{% endif %}
-					{# Experience (?) #}
-					{# Salary (?) #}
-					{% set city = item.location.cityName %}
-                	{% set state = item.location.stateName %}
-                	{% set country = item.location.name %}
-					{% if city %}
-                        <tr>
-                            <th align="left" style="border-top: solid 1px #CCC;">
-                                <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.City"] }}:</small> -->
-                                <small style="display: block; text-transform: capitalize;">City:</small>
-                            </th>
-                            <td align="left" style="border-top: solid 1px #CCC;">
-                                <small style="display: block;">{{ city }}</small>
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if state %}
-                    	<tr>
-	                        <th align="left" style="border-top: solid 1px #CCC;">
-	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.State"] }}:</small> -->
-	                            <small style="display: block; text-transform: capitalize;">State:</small>
-	                        </th> 
-	                        <td align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block;">{{ state }}</small>
-	                        </td>
-	                    </tr>
-                    {% endif %}
-                    {% if country %}
-                    	<tr>
-	                        <th align="left" style="border-top: solid 1px #CCC;">
-	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["postingstep1_selector.SelectCountry"] }}:</small> -->
-	                            <small style="display: block; text-transform: capitalize;">Country:</small>
-	                        </th> 
-	                        <td align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block;">{{ country }}</small>
-	                        </td>
-	                    </tr>
-                    {% endif %}
-				    <tr>
-                        <th align="left" style="border-top: solid 1px #CCC;">
-                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.User"] }}:</small> -->
-                            <small style="display: block; text-transform: capitalize;">User:</small>
-                        </th> 
-                        <td align="left" style="border-top: solid 1px #CCC;">
-                            <!-- <small style="display: block;">{{ user if user else dictionary["itemgeneraldetails.Anonymous"] }}</small> -->
-                            <small style="display: block;">{{ user if user else "Anonymous" }}</small>
-						</td>
-                    </tr>
-				    {% if item.phone %}
-                    	<tr>
-	                        <th align="left" style="border-top: solid 1px #CCC;">
-	                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Phone"] }}:</small> -->
-	                            <small style="display: block; text-transform: capitalize;">Phone:</small>
-	                        </th>
-	                        <td align="left" style="border-top: solid 1px #CCC;">
-	                            <small style="display: block;">{{ item.phone }}</small>
-	                        </td>
-	                    </tr>
-                    {% endif %}
-                    <tr>
-                        <th align="left" style="border-top: solid 1px #CCC;">
-                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.DatePosted"] }}:</small> -->
-                            <small style="display: block; text-transform: capitalize;">Date posted:</small>
-                        </th>
-                        <td align="left" style="border-top: solid 1px #CCC;">
-                            <small style="display: block;">{{ item.date.timestamp | date }}</small>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-    {% if item.status.contactable %}
-		<table width="100%" cellspacing="0" cellpadding="4" border="0">
-	        <tr>
-	            <td style="border-top: solid thin #808080;">
-	                <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
-	                    <tr>
-	                        <td align="center" style="border: solid thin #F30;">
-	                            <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
-	                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
-	                        </td>
-	                    </tr>
-	                </table>
-	            </td>
-	        </tr>
-	    </table>
-    {% endif %}
-	<table width="100%" cellspacing="0" cellpadding="4" border="0">
-	    <tr>
-	        <td style="border-top: solid thin #808080;">
-	            <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
-	                <tr>
-	                    <td align="center" style="border: solid thin #AAA;">
-	                        {% if item.isFavorite %}
-	                        	<form action="/items/{{ item.id }}/favorite/delete" method="POST">
-									<!-- <input type="submit" value='{{ dictionary["mobilepromo.RemoveFromFavorites"] }}' /> -->
-									<input type="submit" value="Remove from favorites" />
-								</form>
-							{% elif user %}
-								<form action="/items/{{ item.id }}/favorite" method="POST">
-									<!-- <input type="submit" value='{{ dictionary["itemgeneraldetails.addFavorites"] }}' /> -->
-									<input type="submit" value="Add to favorites" />
-								</form>
-	                        {% else %}
-	                        	<form action="/register">
-									<!-- <input type="submit" value='{{ dictionary["itemgeneraldetails.addFavorites"] }}' /> -->
-									<input type="submit" value="Add to favorites" />
-								</form>
-	                        {% endif %}
-						</td>
-	                </tr>
-	            </table>
-	        </td>
-	    </tr>   
-	</table>
-	<table width="100%" cellspacing="0" cellpadding="4" border="0" class="itemDescription">
-        <tr>
-            <td style="border-top: solid thin #808080;">
-				<small style="display: block;"><a href="">Related ads</a></small>
-            </td>
-        </tr>
-    </table>
-{% else %}
-	<table width="100%" cellspacing="0" cellpadding="4" border="0">
-	    <tr>
-	        <td style="border-top: solid thin #808080;">
-	            <!-- <small style="display: block;">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</small> -->
-	            <small style="display: block;">This item is no longer available</small>
-	        </td>
-	    </tr>
-	</table>
-{% endif %}
+		        <tr>
+		            <td>
+		                <small style="display: block;">{{ item.description }}</small>
+		            </td>
+		        </tr>
+		    </table>
+			<table width="100%" cellspacing="0" cellpadding="4" border="0">
+		        <tr>
+		            <td>
+		                <table width="100%" cellspacing="0" cellpadding="4" border="0">
+		                    {% if item.price %}
+		                		<tr>
+		                			<th align="left" style="border-top: solid 1px #CCC;">
+			                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Price"] }}:</small> -->
+			                            <small style="display: block; text-transform: capitalize;">Price:</small>
+			                        </th>
+			                        <td align="left" style="border-top: solid 1px #CCC;">
+			                            <small style="display: block;">{{ item.price.displayPrice }}</small>
+			                        </td>
+		                		</tr>
+		                	{% endif %}
+							{% if item.optionals %}
+		                		{% for optional in item.optionals %}
+		                			<tr>
+		                                <th align="left" style="border-top: solid 1px #CCC;">
+		                                    <small style="display: block; text-transform: capitalize;">{{ optional.label }}:</small>
+		                                </th> 
+		                                <td align="left" style="border-top: solid 1px #CCC;">
+		                                    <small style="display: block;">{{ optional.value }}</small>
+		                                </td>
+		                            </tr>
+		                		{% endfor %}
+		                	{% endif %}
+							{# Experience (?) #}
+							{# Salary (?) #}
+							{% set city = item.location.cityName %}
+		                	{% set state = item.location.stateName %}
+		                	{% set country = item.location.name %}
+							{% if city %}
+		                        <tr>
+		                            <th align="left" style="border-top: solid 1px #CCC;">
+		                                <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.City"] }}:</small> -->
+		                                <small style="display: block; text-transform: capitalize;">City:</small>
+		                            </th>
+		                            <td align="left" style="border-top: solid 1px #CCC;">
+		                                <small style="display: block;">{{ city }}</small>
+		                            </td>
+		                        </tr>
+		                    {% endif %}
+		                    {% if state %}
+		                    	<tr>
+			                        <th align="left" style="border-top: solid 1px #CCC;">
+			                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.State"] }}:</small> -->
+			                            <small style="display: block; text-transform: capitalize;">State:</small>
+			                        </th> 
+			                        <td align="left" style="border-top: solid 1px #CCC;">
+			                            <small style="display: block;">{{ state }}</small>
+			                        </td>
+			                    </tr>
+		                    {% endif %}
+		                    {% if country %}
+		                    	<tr>
+			                        <th align="left" style="border-top: solid 1px #CCC;">
+			                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["postingstep1_selector.SelectCountry"] }}:</small> -->
+			                            <small style="display: block; text-transform: capitalize;">Country:</small>
+			                        </th> 
+			                        <td align="left" style="border-top: solid 1px #CCC;">
+			                            <small style="display: block;">{{ country }}</small>
+			                        </td>
+			                    </tr>
+		                    {% endif %}
+						    <tr>
+		                        <th align="left" style="border-top: solid 1px #CCC;">
+		                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.User"] }}:</small> -->
+		                            <small style="display: block; text-transform: capitalize;">User:</small>
+		                        </th> 
+		                        <td align="left" style="border-top: solid 1px #CCC;">
+		                            <!-- <small style="display: block;">{{ user if user else dictionary["itemgeneraldetails.Anonymous"] }}</small> -->
+		                            <small style="display: block;">{% if user %}{{user.username}}{% else %}Anonymous{% endif %}</small>
+								</td>
+		                    </tr>
+						    {% if item.phone %}
+		                    	<tr>
+			                        <th align="left" style="border-top: solid 1px #CCC;">
+			                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Phone"] }}:</small> -->
+			                            <small style="display: block; text-transform: capitalize;">Phone:</small>
+			                        </th>
+			                        <td align="left" style="border-top: solid 1px #CCC;">
+			                            <small style="display: block;">{{ item.phone }}</small>
+			                        </td>
+			                    </tr>
+		                    {% endif %}
+		                    <tr>
+		                        <th align="left" style="border-top: solid 1px #CCC;">
+		                            <!-- <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.DatePosted"] }}:</small> -->
+		                            <small style="display: block; text-transform: capitalize;">Date posted:</small>
+		                        </th>
+		                        <td align="left" style="border-top: solid 1px #CCC;">
+		                            <small style="display: block;">{{ item.date.timestamp | date }}</small>
+		                        </td>
+		                    </tr>
+		                </table>
+		            </td>
+		        </tr>
+		    </table>
+		    {% if item.status.contactable %}
+				<table width="100%" cellspacing="0" cellpadding="4" border="0">
+			        <tr>
+			            <td style="border-top: solid thin #808080;">
+			                <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
+			                    <tr>
+			                        <td align="center" style="border: solid thin #F30;">
+			                            <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
+			                            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
+			                        </td>
+			                    </tr>
+			                </table>
+			            </td>
+			        </tr>
+			    </table>
+		    {% endif %}
+			<table width="100%" cellspacing="0" cellpadding="4" border="0">
+			    <tr>
+			        <td style="border-top: solid thin #808080;">
+			            <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+			                <tr>
+			                    <td align="center" style="border: solid thin #AAA;">
+			                        {% if item.isFavorite %}
+			                        	<form action="/items/{{ item.id }}/favorite/delete" method="POST">
+											<!-- <input type="submit" value='{{ dictionary["mobilepromo.RemoveFromFavorites"] }}' /> -->
+											<input type="submit" value="Remove from favorites" />
+										</form>
+									{% elif user %}
+										<form action="/items/{{ item.id }}/favorite" method="POST">
+											<!-- <input type="submit" value='{{ dictionary["itemgeneraldetails.addFavorites"] }}' /> -->
+											<input type="submit" value="Add to favorites" />
+										</form>
+			                        {% else %}
+			                        	<form action="/register">
+											<!-- <input type="submit" value='{{ dictionary["itemgeneraldetails.addFavorites"] }}' /> -->
+											<input type="submit" value="Add to favorites" />
+										</form>
+			                        {% endif %}
+								</td>
+			                </tr>
+			            </table>
+			        </td>
+			    </tr>   
+			</table>
+		{% else %}
+			<table width="100%" cellspacing="0" cellpadding="4" border="0">
+			    <tr>
+			        <td style="border-top: solid thin #808080;">
+			            <!-- <small style="display: block;">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</small> -->
+			            <small style="display: block;">This item is no longer available</small>
+			        </td>
+			    </tr>
+			</table>
+		{% endif %}
+    </td>
+</tr>
