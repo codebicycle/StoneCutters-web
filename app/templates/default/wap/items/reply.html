@@ -3,8 +3,6 @@
         <table width="100%" cellspacing="0" cellpadding="4" border="0">
             <tr>
                 <td style="border-top: solid thin #808080;">
-                    <!-- <small style="display: block;">{{ dictionary["contactseller_form.ReplyToListing"] }}</small> -->
-                    <small style="display: block;">Reply to this ad</small>
                     <strong style="display: block;"><font color="#0075BD">{{ item.title }}</font></strong>
                 </td>
             </tr>
@@ -34,12 +32,6 @@
                     <td style="border-top: solid thin #808080;">
                         <!-- <small style="display: block;"><strong>{{ dictionary["contactseller_form.55"] }}:</strong> <span>{{ item.contactName if item.contactName else dictionary["itemgeneraldetails.Anonymous"] }}</small> -->
                         <small style="display: block;"><strong>To:</strong> <span>{{ item.contactName if item.contactName else "anonymous" }}</small>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="border-top: solid thin #CCC;">
-                        <!-- <small style="display: block;"><strong>{{ dictionary["contactseller_form.Ad"] }}:</strong> {{ item .title }}</small> -->
-                        <small style="display: block;"><strong>From:</strong> {{ item .title }}</small>
                     </td>
                 </tr>
                 <tr>
