@@ -9,7 +9,7 @@ module.exports = function(match) {
     for (url in helpers.urls) {
         properties = helpers.urls[ url ];
         if (!properties.isServer) {
-            match(url, properties.view);
+            match(properties.url, properties.view);
         }
     }
 };
