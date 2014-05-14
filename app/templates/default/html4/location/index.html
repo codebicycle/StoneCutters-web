@@ -2,7 +2,9 @@
 	<a href="/">Back</a>
 	<h1>Cambiar ubicacion</h1>
 </div>
-{% view 'location/select' %}
+<div id="locationSelect" class="locationBreadcrumb">
+	<p><a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}</p>
+</div>
 <div id="search">
     <form action="/location">
         <input type="text" name="search" value="" class="search">

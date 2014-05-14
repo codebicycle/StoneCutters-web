@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Tukar Bandar',
-    'countryoptions.EnterCityOrZipCode': 'Masukkan Bandar atau Poskod',
+    'countryoptions.EnterCity': 'Masukkan Bandar ',
     'countryoptions.SelectACity': 'Pilih bandar',
     'defaultfooter.Back': 'Undur',
     'defaultfooter.PublishFreeAd': 'Siarkan Iklan Percuma',

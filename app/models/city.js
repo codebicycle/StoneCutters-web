@@ -6,7 +6,7 @@ module.exports = Base.extend({
     idAttribute: 'id',
     url: function() {
         var url = '/locations/' + this.attributes.location;
-        
+
         if (this.params) {
             url += '?';
             for (var param in this.params) {
@@ -16,11 +16,14 @@ module.exports = Base.extend({
         }
         return url;
     },
-    parse: function(response) {
-        if (response.children && response.children[0] && response.children[0].children && response.children[0].children[0]) {
-            return response.children[0].children[0];
+    parse: function(location) {
+        if (location.children && location.children[0]) {
+            if (location.children[0].children && location.children[0].children[0]) {
+                return location.children[0].children[0];
+            }
+            return location.children[0];
         }
-        return response;
+        return location;
     }
 });
 

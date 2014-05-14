@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': '\u9055\u3046\u5E02\u3092\u9078\u629E\u3059\u308B',
-    'countryoptions.EnterCityOrZipCode': '\u5E02\u304B\u90F5\u4FBF\u756A\u53F7\u3092\u5165\u529B\u3059\u308B',
+    'countryoptions.EnterCity': '\u5E02\u3092\u5165\u529B\u3059\u308B',
     'countryoptions.SelectACity': '\u5E02\u3092\u9078\u3076',
     'defaultfooter.Back': '\u623B\u308B',
     'defaultfooter.PublishFreeAd': '\u30AF\u30E9\u30B7\u30D5\u30A1\u30A4\u30C9\u3092\u63B2\u8F09\u3059\u308B',

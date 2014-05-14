@@ -18,7 +18,7 @@ module.exports = BaseView.extend({
             e.preventDefault();
             var $image = $(this).attr('id');
             var $input = $('input.'+$image);
-            $input.trigger('click'); 
+            $input.trigger('click');
         });
         $('.fileUpload .image span').click(function(e) {
             e.preventDefault();
@@ -26,18 +26,18 @@ module.exports = BaseView.extend({
             var $input = $(this).parent('.image').attr('id');
             $(this).parent('.image').removeClass('fill').addClass('empty');
             var $clone = $('<input>').attr({'type': $('.'+$input).attr('type'),'name': $('.'+$input).attr('name'),'class': $('.'+$input).attr('class')});
-			$('.'+$input).replaceWith($clone);
+            $('.'+$input).replaceWith($clone);
         });
-		$('form').on('change', 'input[type="file"]', function (e) {
-			var $imageUrl = window.URL.createObjectURL(this.files[0]);
-			window.URL.revokeObjectURL(this.src);
-			var $current = $(this).attr('class');
-			$('#' + $current).addClass('loading');
-			$('<img/>').attr('src', $imageUrl).load(function() {
-				$(this).remove();
-				$('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('loading');
-			});
-		});
+        $('form').on('change', 'input[type="file"]', function (e) {
+            var $imageUrl = window.URL.createObjectURL(this.files[0]);
+            window.URL.revokeObjectURL(this.src);
+            var $current = $(this).attr('class');
+            $('#' + $current).addClass('loading');
+            $('<img/>').attr('src', $imageUrl).load(function() {
+                $(this).remove();
+                $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('loading');
+            });
+        });
     },
 });
 

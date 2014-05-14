@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Breyta borg',
-    'countryoptions.EnterCityOrZipCode': 'Sl\xE1\xF0u inn borg e\xF0a p\xF3stn\xFAmer',
+    'countryoptions.EnterCity': 'Sl\xE1\xF0u inn borg',
     'countryoptions.SelectACity': 'Velja borg',
     'defaultfooter.Back': 'Til baka',
     'defaultfooter.PublishFreeAd': 'Augl\xFDstu \xF3keypis',

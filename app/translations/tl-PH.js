@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Baguhin ang Lungsod',
-    'countryoptions.EnterCityOrZipCode': 'Magbigay ng Lungsod o Zip Code',
+    'countryoptions.EnterCity': 'Magbigay ng Lungsod',
     'countryoptions.SelectACity': 'Pumili ng lungsod.',
     'defaultfooter.Back': 'Bumalik',
     'defaultfooter.PublishFreeAd': 'Mag-Post ng Libreng Anunsyo',

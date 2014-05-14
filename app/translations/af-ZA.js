@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Verander Stad',
-    'countryoptions.EnterCityOrZipCode': 'Voer \'n Stad of Poskode in',
+    'countryoptions.EnterCity': 'Voer \'n Stad in',
     'countryoptions.SelectACity': 'Kies \'n stad',
     'defaultfooter.Back': 'Terug',
     'defaultfooter.PublishFreeAd': 'Pos \'n Gratis Advertensie',

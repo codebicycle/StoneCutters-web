@@ -1,12 +1,23 @@
 <tr>
     <td>
+        {% if search %}
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
+                <tr>
+                    <td style="padding: .5em;">
+                        <small>
+                            <img src="{{ "/images/wap/ico_city.gif" | static }}">
+                            <small> <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %} </small>
+                        </small>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
             <tr>
                 <td style="padding: .25em .5em; border-top: solid thin #808080;">
                     <form action="/location">
                         <label for="search"> 
-                            <!-- <small>{{ dictionary["countryoptions.EnterCityOrZipCode"] }}</small> -->
-                            <small>Enter a city or Zip Code</small>
+                            <small>{{ dictionary["countryoptions.EnterCity"] }}</small>
                          </label><br />
                         <input type="text" value="" name="search" />
                         <!-- <input type="submit" value='{{ dictionary["homeheader.Search"] }}' name="search_button" /> -->

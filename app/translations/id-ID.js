@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Ganti Kota',
-    'countryoptions.EnterCityOrZipCode': 'Masukkan Kota atau Kode Zip',
+    'countryoptions.EnterCity': 'Masukkan Kota',
     'countryoptions.SelectACity': 'Pilih kota',
     'defaultfooter.Back': 'Kembali',
     'defaultfooter.PublishFreeAd': 'Pasang Iklan Gratis',

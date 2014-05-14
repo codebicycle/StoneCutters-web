@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': '\u015Eehri De\u011Fi\u015Ftir',
-    'countryoptions.EnterCityOrZipCode': 'Bir \u0130l ya da Posta Kodu Girin',
+    'countryoptions.EnterCity': 'Bir \u0130l Girin',
     'countryoptions.SelectACity': '\u015Eehir se\xE7in',
     'defaultfooter.Back': 'Geri',
     'defaultfooter.PublishFreeAd': '\xDCcretsiz \u0130lan Yay\u0131nla',

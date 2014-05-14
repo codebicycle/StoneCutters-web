@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Muuda linn',
-    'countryoptions.EnterCityOrZipCode': 'Sisestage linn v\xF5i suunakood',
+    'countryoptions.EnterCity': 'Sisestage linn',
     'countryoptions.SelectACity': 'Valige linn',
     'defaultfooter.Back': 'Tagasi',
     'defaultfooter.PublishFreeAd': 'Postita tasuta kuulutus',

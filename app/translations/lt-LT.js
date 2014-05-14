@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Keisti miest\u0105',
-    'countryoptions.EnterCityOrZipCode': '\u012Eveskite miest\u0105 arba pa\u0161to indeks\u0105',
+    'countryoptions.EnterCity': '\u012Eveskite miest\u0105',
     'countryoptions.SelectACity': 'Pasirinkite miest\u0105',
     'defaultfooter.Back': 'Atgal',
     'defaultfooter.PublishFreeAd': 'Pateikti nemokam\u0105 skelbim\u0105',

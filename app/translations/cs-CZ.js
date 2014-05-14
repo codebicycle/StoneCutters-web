@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Zm\u011Bnit m\u011Bsto',
-    'countryoptions.EnterCityOrZipCode': 'Zadejte m\u011Bsto nebo PS\u010C',
+    'countryoptions.EnterCity': 'Zadejte m\u011Bsto',
     'countryoptions.SelectACity': 'Vyberte m\u011Bsto',
     'defaultfooter.Back': 'Zp\u011Bt',
     'defaultfooter.PublishFreeAd': 'Zadat bezplatn\xFD inzer\xE1t',

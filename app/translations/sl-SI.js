@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Spremeni kraj',
-    'countryoptions.EnterCityOrZipCode': 'Vnesite kraj ali po\u0161tno \u0161tevilko',
+    'countryoptions.EnterCity': 'Vnesite kraj',
     'countryoptions.SelectACity': 'Izberite kraj',
     'defaultfooter.Back': 'Nazaj',
     'defaultfooter.PublishFreeAd': 'Objavite brezpla\u010Dni oglas',

@@ -55,15 +55,18 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function getCity(done) {
                 location.topCities = topCities;
-                if (location.children && location.children[0] && location.children[0].children && location.children[0].children[0]) {
-                    location.city = location.children[0].children[0];
+                if (location.children && location.children[0]) {
+                    location.current = location.children[0];
+                    if (location.children[0].children && location.children[0].children[0]) {
+                        location.current = location.children[0].children[0];
+                    }
                 }
                 done();
             }
 
             function store(done) {
-                if (location.city) {
-                    siteLocation = location.city.url;
+                if (location.current) {
+                    siteLocation = location.current.url;
                 }
                 app.persistSession({
                     location: location,

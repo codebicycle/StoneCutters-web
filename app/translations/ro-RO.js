@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Modificare ora\u015F',
-    'countryoptions.EnterCityOrZipCode': 'Intr\u0103 un Ora\u015F sau Codul Po\u015Ftal',
+    'countryoptions.EnterCity': 'Intr\u0103 un Ora\u015F',
     'countryoptions.SelectACity': 'Selecta\u0163i un ora\u015F',
     'defaultfooter.Back': '\xCEnapoi',
     'defaultfooter.PublishFreeAd': 'Public\u0103 un Anun\u0163 gratuit',

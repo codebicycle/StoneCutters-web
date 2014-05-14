@@ -2,7 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Changer la Ville',
-    'countryoptions.EnterCityOrZipCode': 'Ville ou Code postal',
+    'countryoptions.EnterCity': 'Indiquez une ville',
     'countryoptions.SelectACity': 'S\xE9lectionnez une ville',
     'defaultfooter.Back': 'Retourner',
     'defaultfooter.PublishFreeAd': 'Publiez votre annonce gratuitement',

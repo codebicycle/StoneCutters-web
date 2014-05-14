@@ -30,8 +30,8 @@ module.exports = function analyticsHelper() {
         if (session.user) {
             params.user_id = session.user.id;
         }
-        if (session.location && session.location.city) {
-            params.geo2 = standarizeName(session.location.city.name || '');
+        if (session.location && session.location.current) {
+            params.geo2 = standarizeName(session.location.current.name || '');
         }
         params.platform = session.platform;
         params.language = session.selectedLanguage;
@@ -114,7 +114,7 @@ module.exports = function analyticsHelper() {
 
     function generateParams(session, url, options) {
         var params = _.clone(url.ati.params);
-        
+
         prepareDefaultParams(session, params);
         if (url.ati.process) {
             params = prepareParams(params, options);
