@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Chanje Vil',
-    'countryoptions.ChangeCountry': 'Chanje Peyi',
-    'countryoptions.EnterCityOrZipCode': 'Mete yon vil ou kod postal ',
+    'countryoptions.EnterCity': 'Mete yon vil',
     'countryoptions.SelectACity': 'Chwazi yon vil .',
     'defaultfooter.Back': 'Retounen',
     'defaultfooter.PublishFreeAd': 'Pibliye yon anons Gratis',

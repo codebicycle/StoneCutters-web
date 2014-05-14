@@ -18,18 +18,18 @@ module.exports = BaseView.extend({
             e.preventDefault();
             var $image = $(this).attr('id');
             var $input = $('input.'+$image);
-            $input.trigger('click'); 
+            $input.trigger('click');
         });
         $('form').on('change', 'input[type="file"]', function (e) {
-        	var $imageUrl = window.URL.createObjectURL(this.files[0]);
+            var $imageUrl = window.URL.createObjectURL(this.files[0]);
             window.URL.revokeObjectURL(this.src);
-    		var $current = $(this).attr('class');
-    		$('<img/>').attr('src', $imageUrl).load(function() {
+            var $current = $(this).attr('class');
+            $('<img/>').attr('src', $imageUrl).load(function() {
                $(this).remove();
                $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill');
             });
 
-    	});
+        });
     },
 });
 

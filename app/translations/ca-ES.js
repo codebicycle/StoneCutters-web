@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Canvia la ciutat',
-    'countryoptions.ChangeCountry': 'Canvia el pa\xEDs',
-    'countryoptions.EnterCityOrZipCode': 'Introdu\xEFu una ciutat o un codi postal',
+    'countryoptions.EnterCity': 'Introdu\xEFu una ciutat',
     'countryoptions.SelectACity': 'Selecciona una ciutat',
     'defaultfooter.Back': 'Torna',
     'defaultfooter.PublishFreeAd': 'Publicar un anunci gratu\xEFt',

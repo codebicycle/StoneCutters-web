@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Vaihda kaupunkia',
-    'countryoptions.ChangeCountry': 'Vaihda maata',
-    'countryoptions.EnterCityOrZipCode': 'Sy\xF6t\xE4 kaupunki tai postinumero',
+    'countryoptions.EnterCity': 'Sy\xF6t\xE4 kaupunki',
     'countryoptions.SelectACity': 'Valitse kaupunki',
     'defaultfooter.Back': 'Takaisin',
     'defaultfooter.PublishFreeAd': 'L\xE4het\xE4 ilmainen ilmoitus',

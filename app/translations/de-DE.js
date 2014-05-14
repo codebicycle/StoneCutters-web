@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Stadt \xE4ndern',
-    'countryoptions.ChangeCountry': 'Land \xE4ndern',
-    'countryoptions.EnterCityOrZipCode': 'Stadt oder Postleitzahl eingeben',
+    'countryoptions.EnterCity': 'Geben Sie eine Stadt ein',
     'countryoptions.SelectACity': 'Stadt ausw\xE4hlen',
     'defaultfooter.Back': 'Zur\xFCck',
     'defaultfooter.PublishFreeAd': 'Kostenlose Kleinanzeige schalten',

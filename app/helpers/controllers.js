@@ -65,7 +65,7 @@ function setLocation(params, callback) {
         return callback();
     }
     spec = {
-        city: {
+        location: {
             model: 'City',
             params: {
                 location: params.location
@@ -76,12 +76,12 @@ function setLocation(params, callback) {
         if (err) {
             return callback();
         }
-        url = result.city.get('url');
+        url = result.location.get('url');
         if (location.url.split('.').pop() !== url.split('.').pop()) {
             window.location = '/';
             return;
         }
-        location.city = result.city.toJSON();
+        location.current = result.location.toJSON();
         app.persistSession({
             location: location,
             siteLocation: url

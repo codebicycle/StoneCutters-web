@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Main\u012Bt pils\u0113tu',
-    'countryoptions.ChangeCountry': 'Main\u012Bt valsti',
-    'countryoptions.EnterCityOrZipCode': 'Ievadiet pils\u0113tu vai pasta indeksu',
+    'countryoptions.EnterCity': 'Ievadiet pils\u0113tu',
     'countryoptions.SelectACity': 'Izv\u0113lieties pils\u0113tu',
     'defaultfooter.Back': 'Atpaka\u013C',
     'defaultfooter.PublishFreeAd': 'Ievietot bezmaksas sludin\u0101jumu',

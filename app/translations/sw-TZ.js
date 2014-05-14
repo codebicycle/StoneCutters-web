@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Badilisha Mji',
-    'countryoptions.ChangeCountry': 'Badilisha Nchi',
-    'countryoptions.EnterCityOrZipCode': 'Ingiza Mji au Msimbo Zip',
+    'countryoptions.EnterCity': 'Ingiza Mji',
     'countryoptions.SelectACity': 'Chagua mji',
     'defaultfooter.Back': 'Nyuma',
     'defaultfooter.PublishFreeAd': 'Chapisha Tangazo Bure',

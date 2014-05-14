@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Skift by',
-    'countryoptions.ChangeCountry': 'Skift land',
-    'countryoptions.EnterCityOrZipCode': 'Indtast en by eller et postnummer',
+    'countryoptions.EnterCity': 'Indtast en by',
     'countryoptions.SelectACity': 'V\xE6lg en by',
     'defaultfooter.Back': 'Tilbage',
     'defaultfooter.PublishFreeAd': 'Indryk en gratis annonce',

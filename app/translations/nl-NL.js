@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Plaats wijzigen',
-    'countryoptions.ChangeCountry': 'Land wijzigen',
-    'countryoptions.EnterCityOrZipCode': 'Vul een plaats of postcode in',
+    'countryoptions.EnterCity': 'Vul een plaats in',
     'countryoptions.SelectACity': 'Kies een plaats',
     'defaultfooter.Back': 'Terug',
     'defaultfooter.PublishFreeAd': 'Plaats een gratis advertentie',

@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Endre by',
-    'countryoptions.ChangeCountry': 'Endre land',
-    'countryoptions.EnterCityOrZipCode': 'Skriv inn en by eller et postnummer',
+    'countryoptions.EnterCity': 'Angi en by',
     'countryoptions.SelectACity': 'Velg en by',
     'defaultfooter.Back': 'Tilbake',
     'defaultfooter.PublishFreeAd': 'Sett inn en gratis annonse',

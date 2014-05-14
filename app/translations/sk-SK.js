@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Zmena obce',
-    'countryoptions.ChangeCountry': 'Zmena krajiny',
-    'countryoptions.EnterCityOrZipCode': 'Zadajte mesto alebo PS\u010C',
+    'countryoptions.EnterCity': 'Zadajte mesto',
     'countryoptions.SelectACity': 'Zvo\u013Ete mesto',
     'defaultfooter.Back': 'Sp\xE4\u0165',
     'defaultfooter.PublishFreeAd': 'Uverejnite bezplatn\xFA reklamu',

@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'V\xE1ros megv\xE1ltoztat\xE1sa',
-    'countryoptions.ChangeCountry': 'Orsz\xE1g megv\xE1ltoztat\xE1sa',
-    'countryoptions.EnterCityOrZipCode': 'Adjon meg egy telep\xFCl\xE9st vagy ir\xE1ny\xEDt\xF3sz\xE1mot',
+    'countryoptions.EnterCity': 'Adjon meg egy telep\xFCl\xE9st',
     'countryoptions.SelectACity': 'V\xE1lasszon telep\xFCl\xE9st',
     'defaultfooter.Back': 'Vissza',
     'defaultfooter.PublishFreeAd': 'Adjon fel ingyenes hirdet\xE9st',

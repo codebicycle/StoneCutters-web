@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Promjenite grad',
-    'countryoptions.ChangeCountry': 'Promjeniti dr\u017Eavu',
-    'countryoptions.EnterCityOrZipCode': 'Unesite grad ili po\u0161tanski broj',
+    'countryoptions.EnterCity': 'Unesite grad',
     'countryoptions.SelectACity': 'Odaberite grad',
     'defaultfooter.Back': 'Natrag',
     'defaultfooter.PublishFreeAd': 'Po\u0161aljite besplatni oglas',

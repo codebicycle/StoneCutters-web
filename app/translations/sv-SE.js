@@ -2,8 +2,7 @@
 
 module.exports = {
     'countryoptions.ChangeCity': '\xC4ndra Stad',
-    'countryoptions.ChangeCountry': '\xC4ndra Land',
-    'countryoptions.EnterCityOrZipCode': 'Ange en stad eller ett postnummer',
+    'countryoptions.EnterCity': 'Ange en stad',
     'countryoptions.SelectACity': 'V\xE4lj en stad',
     'defaultfooter.Back': 'Tillbaka',
     'defaultfooter.PublishFreeAd': 'L\xE4gg upp gratis annons',

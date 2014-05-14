@@ -7,7 +7,7 @@ var translations = require('../translations');
 
 module.exports = RendrView.extend({
     initialize: function() {
-        if (this.tagName === 'div' && this.app.getSession('platform') === 'wap') {
+        if (this.tagName === 'div' && this.app.get('session').platform === 'wap') {
             this.tagName = 'table';
             this.attributes = this.getWapAttributes();
         }
