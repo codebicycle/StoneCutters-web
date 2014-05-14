@@ -7,15 +7,15 @@
 </div>
 <div id="success">
     <div>
-        <h1>AllSet_Mob</h1>
-        <h2>AdSubmittedApproval</h2>
-        <p>SeeAdIn2Hrs_Mob</p>
-        <p>You can view your ad <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">here</a>.</p>
+        <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
+        <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
+        <p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</p>
+        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">{{ dictionary["itemwarning.Here"] }}</a>.</p>
     </div>
     <div style="margin:6px 0 0 0;">
-        <h1>EmailAdActivated_Mob</h1>
-        <a href="/posting" class="btns orange">Post another add</a>
-        <a href="/" class="back">BackToStart_Mob</a>
+        <h1>{{ dictionary["misc.EmailAdActivated_Mob"] }}</h1>
+        <a href="/posting" class="btns orange">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</a>
+        <a href="/" class="back">{{ dictionary["misc.BackToStart_Mob"] }}</a>
     </div>
 </div>
 <div class="breadcrumb">

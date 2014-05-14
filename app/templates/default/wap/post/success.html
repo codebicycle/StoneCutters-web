@@ -1,0 +1,16 @@
+<tr>
+	<td style="padding: .25em .5em; border-top: solid thin #808080;">
+		<strong style="color: #0075BD;">{{ dictionary["postingheader.Post"] }}</strong>
+	</td>
+</tr>
+<tr>
+	<td style="padding: .5em .5em .25em; border-top: solid thin #808080;">
+		<strong>{{ dictionary["postingtitlelisting.Congratulations"] }}</strong>
+	</td>
+</tr>
+<tr>
+	<td style="padding: .25em .5em .5em;">
+		<small>{{ dictionary["postingtitlelisting.view"] }}</small><br>
+		<a href="/{{ item.title | urlize }}-iid-{{ item.id }}">{{ item.title }}</a>
+	</td>
+</tr>
