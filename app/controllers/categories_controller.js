@@ -8,6 +8,7 @@ module.exports = {
 
         function controller() {
             var user = this.app.getSession('user');
+            var siteLocation = this.app.getSession('siteLocation');
             var categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.id);
 
             helpers.analytics.reset();
@@ -15,6 +16,8 @@ module.exports = {
             helpers.analytics.addParam('user', user);
             helpers.analytics.addParam('category', categoryTree.parent);
             helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', params.title, '-cat-', params.id].join(''));
             callback(null, {
                 category: this.app.getSession('categories')._byId[params.id],
                 analytics: helpers.analytics.generateURL(this.app.getSession())
@@ -25,6 +28,7 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            var siteLocation = this.app.getSession('siteLocation');
             var category = helpers.categories.getCat(this.app.getSession(), params.catId);
             var slug = helpers.common.urlize(category.trName);
             var categoryTree;
@@ -46,6 +50,7 @@ module.exports = {
             helpers.seo.resetHead();
             helpers.seo.addMetatag('title', 'Listing');
             helpers.seo.addMetatag('Description', 'This is a listing page');
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', params.title, '-cat-', params.catId].join(''));
             params.id = params.catId;
             delete params.catId;
             delete params.title;

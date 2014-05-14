@@ -156,6 +156,9 @@ module.exports = {
                 return;
             }
 
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slug, '-cat-', params.catId].join(''));
+
             prepareParams(app, params);
             query = _.clone(params);
             params.categoryId = params.catId;
@@ -179,6 +182,7 @@ module.exports = {
 
                 result.items = model.get('data');
                 result.metadata = model.get('metadata');
+
                 preparePaginationLink(result.metadata, query, url);
                 helpers.analytics.reset();
                 helpers.analytics.setPage('/description-cat-' + query.catId);
@@ -199,7 +203,11 @@ module.exports = {
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
+            var siteLocation = that.app.getSession('siteLocation');
             var anonymousItem;
+
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slugUrl, '-iid-', itemId].join(''));
 
             if (user) {
                 params.token = user.token;
@@ -242,7 +250,6 @@ module.exports = {
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
                 var slug = helpers.common.urlize(item.title);
-                var siteLocation = that.app.getSession('siteLocation');
                 var spec;
 
                 if (slug !== slugUrl) {
@@ -291,8 +298,12 @@ module.exports = {
                     params: params
                 }
             };
+            var siteLocation = app.getSession('siteLocation');
             var category = helpers.categories.getCat(app.getSession(), params.catId);
             var query;
+
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/nf/search/', params.search].join(''));
 
             prepareParams(app, params);
             query = _.clone(params);
@@ -356,7 +367,7 @@ module.exports = {
                 var categoryTree;
 
                 if (slug !== slugUrl) {
-                    slug = ['/', slug, '-iid-', item.id].join('');
+                    slug = ['/', slug, '-iid-', item.id, '/reply'].join('');
                     that.redirectTo(helpers.common.link(slug, siteLocation));
                     return;
                 }
