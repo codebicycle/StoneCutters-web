@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': '\u0A36\u0A39\u0A3F\u0A30 \u0A2C\u0A26\u0A32\u0A4B',
-    'countryoptions.ChangeCountry': '\u0A26\u0A47\u0A36 \u0A2C\u0A26\u0A32\u0A4B',
     'countryoptions.EnterCityOrZipCode': '\u0A36\u0A39\u0A3F\u0A30 \u0A1C\u0A3E\u0A02 \u0A5B\u0A3F\u0A2A \u0A15\u0A4B\u0A21 \u0A26\u0A3E\u0A16\u0A32 \u0A15\u0A30\u0A4B',
     'countryoptions.SelectACity': '\u0A36\u0A39\u0A3F\u0A30 \u0A1A\u0A41\u0A23\u0A4B',
     'defaultfooter.Back': '\u0A2A\u0A3F\u0A71\u0A1B\u0A47',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': '\u0A30\u0A1C\u0A3F\u0A38\u0A1F\u0A30 \u0A15\u0A30\u0A4B',
     'loginheader.Identification': '\u0A36\u0A28\u0A3E\u0A59\u0A24',
     'terms.TermsOfUse': '\u0A35\u0A30\u0A24\u0A4B\u0A02 \u0A26\u0A40\u0A06\u0A02 \u0A36\u0A30\u0A24\u0A3E\u0A02',
-    'misc.Sell_Post_Mobile_India': '\u0A2A\u0A4B\u0A38\u0A1F \u0A15\u0A30\u0A4B'
+    'misc.Sell_Post_Mobile_India': '\u0A2A\u0A4B\u0A38\u0A1F \u0A15\u0A30\u0A4B',
+    'misc.SpecificFields_title': '\u0A36\u0A4D\u0A30\u0A47\u0A23\u0A40 \u0A38\u0A2C\u0A70\u0A27\u0A24 \u0A16\u0A47\u0A24\u0A30 (\u0A35\u0A3F\u0A15\u0A32\u0A2A\u0A15)'
 };

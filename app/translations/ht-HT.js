@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Chanje Vil',
-    'countryoptions.ChangeCountry': 'Chanje Peyi',
     'countryoptions.EnterCityOrZipCode': 'Mete yon vil ou kod postal ',
     'countryoptions.SelectACity': 'Chwazi yon vil .',
     'defaultfooter.Back': 'Retounen',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Enskri',
     'loginheader.Identification': 'Idantifikayon',
     'terms.TermsOfUse': 'Regleman pou Itilize',
-    'misc.Sell_Post_Mobile_India': 'Vann'
+    'misc.Sell_Post_Mobile_India': 'Vann',
+    'misc.SpecificFields_title': 'Chan Espesifik Kategori (Opsyon\xE8l)'
 };

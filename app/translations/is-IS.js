@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Breyta borg',
-    'countryoptions.ChangeCountry': 'Breyta landi',
     'countryoptions.EnterCityOrZipCode': 'Sl\xE1\xF0u inn borg e\xF0a p\xF3stn\xFAmer',
     'countryoptions.SelectACity': 'Velja borg',
     'defaultfooter.Back': 'Til baka',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'N\xFDskr\xE1ning',
     'loginheader.Identification': 'Au\xF0kenning',
     'terms.TermsOfUse': 'Notkunarskilm\xE1lar',
-    'misc.Sell_Post_Mobile_India': 'Birta'
+    'misc.Sell_Post_Mobile_India': 'Birta',
+    'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)'
 };

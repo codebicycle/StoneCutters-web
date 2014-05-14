@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Plaats wijzigen',
-    'countryoptions.ChangeCountry': 'Land wijzigen',
     'countryoptions.EnterCityOrZipCode': 'Vul een plaats of postcode in',
     'countryoptions.SelectACity': 'Kies een plaats',
     'defaultfooter.Back': 'Terug',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registreren',
     'loginheader.Identification': 'Identificatie',
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
-    'misc.Sell_Post_Mobile_India': 'Plaatsen'
+    'misc.Sell_Post_Mobile_India': 'Plaatsen',
+    'misc.SpecificFields_title': 'Categoriespecifieke velden (optioneel)'
 };

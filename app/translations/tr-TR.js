@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': '\u015Eehri De\u011Fi\u015Ftir',
-    'countryoptions.ChangeCountry': '\xDClkeyi De\u011Fi\u015Ftir',
     'countryoptions.EnterCityOrZipCode': 'Bir \u0130l ya da Posta Kodu Girin',
     'countryoptions.SelectACity': '\u015Eehir se\xE7in',
     'defaultfooter.Back': 'Geri',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': '\xDCye Ol',
     'loginheader.Identification': 'Kimlik ',
     'terms.TermsOfUse': 'Kullan\u0131m \u015Eartlar\u0131',
-    'misc.Sell_Post_Mobile_India': 'G\xF6nder'
+    'misc.Sell_Post_Mobile_India': 'G\xF6nder',
+    'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)'
 };

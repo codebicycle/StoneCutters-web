@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Zm\u011Bnit m\u011Bsto',
-    'countryoptions.ChangeCountry': 'Zm\u011Bnit zemi',
     'countryoptions.EnterCityOrZipCode': 'Zadejte m\u011Bsto nebo PS\u010C',
     'countryoptions.SelectACity': 'Vyberte m\u011Bsto',
     'defaultfooter.Back': 'Zp\u011Bt',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrovat se',
     'loginheader.Identification': 'Identifikace',
     'terms.TermsOfUse': 'Podm\xEDnky pou\u017E\xEDv\xE1n\xED',
-    'misc.Sell_Post_Mobile_India': 'Zaslat'
+    'misc.Sell_Post_Mobile_India': 'Zaslat',
+    'misc.SpecificFields_title': 'Specifick\xE1 pole kategori\xED (Voliteln\xE9)'
 };

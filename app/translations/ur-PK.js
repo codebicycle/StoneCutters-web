@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': '\u0634\u06C1\u0631 \u062A\u0628\u062F\u06CC\u0644 \u06A9\u0631\u06CC\u06BA',
-    'countryoptions.ChangeCountry': '\u0645\u0644\u06A9 \u062A\u0628\u062F\u06CC\u0644 \u06A9\u0631\u06CC\u06BA',
     'countryoptions.EnterCityOrZipCode': '\u0634\u06C1\u0631 \u06CC\u0627 \u0632\u067E \u06A9\u0648\u0688 \u0644\u06A9\u06BE\u06CC\u06BA',
     'countryoptions.SelectACity': '\u0634\u06C1\u0631 \u0645\u0646\u062A\u062E\u0628 \u06A9\u0631\u06CC\u06BA',
     'defaultfooter.Back': '\u0648\u0627\u067E\u0633',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': '\u0631\u062C\u0633\u0679\u0631 \u06A9\u0631\u06CC\u06BA',
     'loginheader.Identification': '\u0634\u0646\u0627\u062E\u062A',
     'terms.TermsOfUse': '\u0627\u0633\u062A\u0639\u0645\u0627\u0644 \u06A9\u06CC \u0634\u0631\u0627\u0626\u0637 ',
-    'misc.Sell_Post_Mobile_India': '\u0641\u0631\u0648\u062E\u062A \u06A9\u0631\u06CC\u06BA'
+    'misc.Sell_Post_Mobile_India': '\u0641\u0631\u0648\u062E\u062A \u06A9\u0631\u06CC\u06BA',
+    'misc.SpecificFields_title': '\u06A9\u06CC\u0679\u06AF\u0631\u06CC \u0645\u0631\u06A9\u0632\u06CC \u062E\u0627\u0646\u06D2 (\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC)'
 };

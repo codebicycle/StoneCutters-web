@@ -2,7 +2,6 @@
 
 module.exports = {
     'countryoptions.ChangeCity': 'Canvia la ciutat',
-    'countryoptions.ChangeCountry': 'Canvia el pa\xEDs',
     'countryoptions.EnterCityOrZipCode': 'Introdu\xEFu una ciutat o un codi postal',
     'countryoptions.SelectACity': 'Selecciona una ciutat',
     'defaultfooter.Back': 'Torna',
@@ -66,5 +65,6 @@ module.exports = {
     'registerheader.Register': 'Registrar',
     'loginheader.Identification': 'Identificaci\xF3',
     'terms.TermsOfUse': 'Condicions d\'\xFAs',
-    'misc.Sell_Post_Mobile_India': 'Publicar'
+    'misc.Sell_Post_Mobile_India': 'Publicar',
+    'misc.SpecificFields_title': 'Camps espec\xEDfics de categoria (opcionals)'
 };
