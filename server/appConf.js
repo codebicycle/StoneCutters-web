@@ -32,6 +32,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.languages());
         rendrApp.use(middleware.templates());
+        rendrApp.use(middleware.bar());
         if (config.get(['interstitial', 'enabled'], false)) {
             rendrApp.use(middleware.interstitial());
         }

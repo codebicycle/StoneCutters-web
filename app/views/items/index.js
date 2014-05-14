@@ -6,6 +6,10 @@ var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'items_index_view',
+    wapAttributes: {
+        cellpadding: 0,
+        bgcolor: '#DDDDDD'
+    },
     processItem: function(item) {
         var year = item.date.year;
         var month = item.date.month - 1;
