@@ -117,17 +117,21 @@
 			<span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
 		{% endif %}
 		{% if item.phone %}
-			<div class="action call">
-				<a href="tel:12345678910">
-					<span>Llamar</span>
-				</a>
-			</div>
-			<div class="action sms">
-				<a href="sms:12345678910">
-					<span>SMS</span>
-				</a>
-			</div>
-			<div class="action email">
+			{% if device.uriSchemeTel %}
+				<div class="action call">
+					<a href="tel:{{ item.phone }}">
+						<span>Llamar</span>
+					</a>
+				</div>
+			{% endif %}
+			{% if device.uriSchemeSms %}
+				<div class="action sms">
+					<a href="{{ item.phone }}">
+						<span>SMS</span>
+					</a>
+				</div>
+			{% endif %}
+			<div class="action email {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}">
 				<div>
 					<span>Email</span>
 				</div>
