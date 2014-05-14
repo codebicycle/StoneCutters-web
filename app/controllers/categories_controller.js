@@ -12,7 +12,7 @@ module.exports = {
             var categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.id);
 
             helpers.analytics.reset();
-            helpers.analytics.setPage('/description-cat-' + params.id + '-p-1');
+            helpers.analytics.setPage('category');
             helpers.analytics.addParam('user', user);
             helpers.analytics.addParam('category', categoryTree.parent);
             helpers.analytics.addParam('subcategory', categoryTree.subCategory);
@@ -42,7 +42,7 @@ module.exports = {
             user = this.app.getSession('user');
 
             helpers.analytics.reset();
-            helpers.analytics.setPage('/description-cat-' + params.catId + '-p-1');
+            helpers.analytics.setPage('category');
             helpers.analytics.addParam('user', user);
             helpers.analytics.addParam('category', categoryTree.parent);
             helpers.analytics.addParam('subcategory', categoryTree.subCategory);

@@ -13,7 +13,7 @@ module.exports = {
             var sixpackConfig = config.get('sixpack', {});
 
             helpers.analytics.reset();
-            helpers.analytics.setPage('/posting');
+            helpers.analytics.setPage('posting');
             if (!sixpackConfig.enabled ||
                 !sixpackConfig['post-button'] ||
                 !sixpackConfig['post-button'].enabled ||
@@ -36,7 +36,7 @@ module.exports = {
 
         function controller() {
             helpers.analytics.reset();
-            helpers.analytics.setPage('/posting/' + params.categoryId);
+            helpers.analytics.setPage('posting_cat');
 
             callback(null, _.extend(params, {
                 subcategories: this.app.getSession('categories')._byId[params.categoryId].children,
@@ -89,7 +89,7 @@ module.exports = {
 
                 categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);
                 helpers.analytics.reset();
-                helpers.analytics.setPage('/posting/' + params.categoryId + '/' + params.subcategoryId);
+                helpers.analytics.setPage('posting_cat_subcat');
                 helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
@@ -195,7 +195,7 @@ module.exports = {
 
                     categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
                     helpers.analytics.reset();
-                    helpers.analytics.setPage('/myolx/edititem/' + item.id);
+                    helpers.analytics.setPage('posting_edit');
                     helpers.analytics.addParam('user', user);
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
@@ -302,7 +302,7 @@ module.exports = {
 
                     categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
                     helpers.analytics.reset();
-                    helpers.analytics.setPage('/posting/success/' + item.id);
+                    helpers.analytics.setPage('posting_success');
                     helpers.analytics.addParam('user', user);
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);

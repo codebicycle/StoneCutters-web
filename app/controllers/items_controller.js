@@ -185,7 +185,7 @@ module.exports = {
 
                 preparePaginationLink(result.metadata, query, url);
                 helpers.analytics.reset();
-                helpers.analytics.setPage('/description-cat-' + query.catId);
+                helpers.analytics.setPage('category_with_page');
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
                 result.analytics = helpers.analytics.generateURL(app.getSession());
@@ -274,12 +274,22 @@ module.exports = {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
+                    var user = that.app.getSession('user');
+                    var categoryTree;
 
                     result.relatedItems = model.get('data');
                     result.user = user;
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
+                    categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                    helpers.analytics.reset();
+                    helpers.analytics.setPage('item');
+                    helpers.analytics.addParam('user', user);
+                    helpers.analytics.addParam('item', item);
+                    helpers.analytics.addParam('category', categoryTree.parent);
+                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                    result.analytics = helpers.analytics.generateURL(that.app.getSession());
                     callback(err, result);
                 });
             }
@@ -329,7 +339,7 @@ module.exports = {
                 result.metadata = model.get('metadata');
                 preparePaginationLink(result.metadata, query, url);
                 helpers.analytics.reset();
-                helpers.analytics.setPage('/nf/search/' + query.search + '/');
+                helpers.analytics.setPage('search');
                 helpers.analytics.addParam('keyword', query.search);
                 helpers.analytics.addParam('page_nb', result.metadata.totalPages);
                 helpers.analytics.addParam('user', user);
@@ -373,7 +383,7 @@ module.exports = {
                 }
                 categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                 helpers.analytics.reset();
-                helpers.analytics.setPage('/description-iid-' + item.id + '/reply');
+                helpers.analytics.setPage('item_reply');
                 helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
