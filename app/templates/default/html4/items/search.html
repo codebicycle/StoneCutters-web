@@ -10,13 +10,13 @@
     <span class="searchResultsNumber">', metadata.total, '</span>
     <span class="searchResultsText">', dictionary["itemslisting.Results"], '</span>
 </div>'] | join) }}
-<div id="itemListing">
+<div id="search">
     {% if metadata.total == 0 %}
         <div class="emtyList">
             Lo lamentamos pero no hay resultados para tu búsqueda.
         </div>
     {% else %}
-        <ul>
+        <ul class="itemListing">
             {% for item in items %}
                 <li>
                     <a href="/{{ item.title | urlize }}-iid-{{item.id}}">
