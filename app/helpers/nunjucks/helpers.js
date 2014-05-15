@@ -129,46 +129,46 @@ module.exports = function(nunjucks) {
             out.push('</div>');
             return out.join('');
         },
-        pagination: function(currentPage, total, currentURL, platform) {
+        pagination: function(metadata, platform) {
             var out = [];
-            var max = config.get(['smaug', 'maxPageSize'], 50);
-            var pages = Math.floor(total / max) + ((total % max) === 0 ? 0 : 1);
+            var currentPage = metadata.page;
+            var currentURL = metadata.current;
+            var pages = metadata.totalPages;
             var regExp = new RegExp('-p-([0-9]+)', 'g');
             var pagination = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2];
             var count = 0;
+            var max;
             var i;
+
+            function prepareStyle(last) {
+                if (platform !== 'wap') {
+                    out.push('" class="');
+                    out.push(last ? 'last' : '');
+                }
+            }
+
+            function prepareSeparator(last) {
+                if (platform === 'wap') {
+                    out.push(last ? '' : ' | ');
+                }
+            }
 
             function prepareURL(page, last) {
                 if (page > 0 && page <= pages) {
                     if(page === currentPage){
-                        out.push('<strong>'+page+'</strong>');
-                    }else{
-                        out.push('<a href="');
-                        out.push(currentURL.replace(regExp, '-p-' + page));
-                        out.push('" class="');
-                        out.push(last ? 'last' : '');
-                        out.push('">');
+                        out.push('<strong>');
                         out.push(page);
-                        out.push('</a>');
+                        out.push('</strong>');
+                        prepareSeparator(last);
                     }
-                    count++;
-                }
-                else if (page < pages) {
-                    pagination.push(pagination[pagination.length - 1] + 1);
-                }
-            }
-            function prepareURLwap(page, last) {
-                if (page > 0 && page <= pages) {
-                    if(page === currentPage){
-                        out.push('<strong>'+page+'</strong>');
-                        out.push(last ? '' : ' | ');
-                    }else{
+                    else {
                         out.push('<a href="');
                         out.push(currentURL.replace(regExp, '-p-' + page));
+                        prepareStyle(last);
                         out.push('">');
                         out.push(page);
                         out.push('</a>');
-                        out.push(last ? '' : ' | ');
+                        prepareSeparator(last);
                     }
                     count++;
                 }
@@ -185,15 +185,8 @@ module.exports = function(nunjucks) {
                 }
             }
             max = 5;
-            if(platform === 'wap') {
-                for (i = 0; i < pagination.length && count < max; i++) {
-                    prepareURLwap(pagination[i], ((count + 1) === max));
-                }
-            }
-            else{
-                for (i = 0; i < pagination.length && count < max; i++) {
-                    prepareURL(pagination[i], ((count + 1) === max));
-                }
+            for (i = 0; i < pagination.length && count < max; i++) {
+                prepareURL(pagination[i], ((count + 1) === max));
             }
 
             return out.join('');

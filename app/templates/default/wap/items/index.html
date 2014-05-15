@@ -33,9 +33,9 @@
 			    	<tr>
 				        <td align="center" style="border-top: solid thin #808080;">
 				            <small style="display: block;">
-				            	<a href="{{ metadata.previous }}">&lt;</a>
-				            	{{ metadata.page | pagination(metadata.total, metadata.current, 'wap') }}
-				            	<a href="{{ metadata.next }}">&gt;</a>       
+				            	{{ ("<a href='" + metadata.previous + "' >&lt;</a>") if metadata.previous }}
+				            	{{ metadata | pagination('wap') }}
+				            	{{ ("<a href='" + metadata.next + "' >&gt;</a>") if metadata.next }}
 				            </small>
 				        </td>
 			    	</tr>
