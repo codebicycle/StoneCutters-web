@@ -1,9 +1,9 @@
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, dictionary["myolx.MyAds"], '/', ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
-<div id="myads">
-    <ul class="normalList">
-        {% if myads.length %}
-            {% for item in myAds %}
+{{ breadcrumb(dictionary, dictionary["myolx.MyFavorites"], '/', ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
+<div id="favorites">
+    {% if favorites.length %}
+        <ul class="itemListing">
+            {% for item in favorites %}
                 <li>
                     <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
                         <div class="imageCont">
@@ -21,14 +21,20 @@
                             </a>
                         </div>
                         <span>{{ item.displayLocation }}</span>
+                        <a href="" class="delete">{{ dictionary["myfavorites.Delete"] }}</a>
                     </div>
                 </li>
             {% endfor %}
-        {% else %}
-            <div class="emtyList">
-                {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}
-            </div>
-        {% endif %}
-    </ul>
+        </ul>
+    {% else %}
+        <div class="emtyList">
+            {{ dictionary["myolx.YouCurrentlyHaveNoFavoriteListings"] }}
+        </div>
+    {% endif %}
 </div>
 {{ breadcrumbHome(dictionary) }}
+
+
+
+
+
