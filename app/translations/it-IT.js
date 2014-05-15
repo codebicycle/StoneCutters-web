@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'I tuoi commenti:',
     'contactseller_form.6': 'facoltativo',
     'contactseller_form.60': 'Inviare Richiesta',
-    'contactseller_form.Ad': 'Elenco annunci pubblicati:',
     'contactseller_form.ReplyToListing': 'Rispondere all\'annuncio',
     'register_form.245': 'Registrazione Nuovo Utente',
     'myolx.ApprovalPending': 'In attesa di approvazione',

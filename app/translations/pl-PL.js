@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Wiadomo\u015B\u0107:',
     'contactseller_form.6': 'Opcjonalnie',
     'contactseller_form.60': 'Wy\u015Blij',
-    'contactseller_form.Ad': 'Og\u0142oszenie:',
     'contactseller_form.ReplyToListing': 'Odpowiedz na og\u0142oszenie',
     'register_form.245': 'Rejestracja nowego u\u017Cytkownika',
     'myolx.ApprovalPending': 'Oczekuje na zatwierdzenie',

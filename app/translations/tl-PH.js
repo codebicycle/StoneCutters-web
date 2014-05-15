@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Ang iyong mga komento:',
     'contactseller_form.6': 'Puwedeng wala nito',
     'contactseller_form.60': 'Ipadala',
-    'contactseller_form.Ad': 'Patalastas:',
     'contactseller_form.ReplyToListing': 'Sumagot sa Listahan',
     'register_form.245': 'Pagrehistro ng Bagong User',
     'myolx.ApprovalPending': 'Nakabinbin ang pag-apruba',

@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Va\u0161e pozn\xE1mky:',
     'contactseller_form.6': 'volite\u013En\xE9',
     'contactseller_form.60': 'Odosla\u0165',
-    'contactseller_form.Ad': 'Ozn\xE1menie:',
     'contactseller_form.ReplyToListing': 'Odpoveda\u0165 na ozn\xE1menie',
     'register_form.245': 'Registr\xE1cia nov\xE9ho pou\u017E\xEDvate\u013Ea',
     'myolx.ApprovalPending': 'Prebieha schva\u013Eovanie',

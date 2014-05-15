@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Ihre Kommentare:',
     'contactseller_form.6': 'optional',
     'contactseller_form.60': 'Senden',
-    'contactseller_form.Ad': 'Kleinanzeige:',
     'contactseller_form.ReplyToListing': 'Auf Kleinanzeige antworten',
     'register_form.245': 'Registrierung eines neuen Benutzers',
     'myolx.ApprovalPending': 'Wartet auf Freigabe',

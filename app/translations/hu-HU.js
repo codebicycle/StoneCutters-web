@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Megjegyz\xE9sei:',
     'contactseller_form.6': 'opcion\xE1lis',
     'contactseller_form.60': 'K\xFCld\xE9s',
-    'contactseller_form.Ad': 'Hirdet\xE9s:',
     'contactseller_form.ReplyToListing': 'V\xE1lasz a hirdet\xE9sre',
     'register_form.245': '\xDAj felhaszn\xE1l\xF3 regisztr\xE1l\xE1sa',
     'myolx.ApprovalPending': 'A j\xF3v\xE1hagy\xE1s folyamatban van',

@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Va\u0161 komentar:',
     'contactseller_form.6': 'izbirno',
     'contactseller_form.60': 'Po\u0161lji',
-    'contactseller_form.Ad': 'Oglas:',
     'contactseller_form.ReplyToListing': 'Odgovori na objavo',
     'register_form.245': 'Registracija novega uporabnika',
     'myolx.ApprovalPending': 'Odobritev v teku',

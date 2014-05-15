@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Teie kommentaarid:',
     'contactseller_form.6': 'valikuline',
     'contactseller_form.60': 'Saada',
-    'contactseller_form.Ad': 'Kuulutus:',
     'contactseller_form.ReplyToListing': 'Vastake kuulutusele',
     'register_form.245': 'Uue kasutajana registreerumine',
     'myolx.ApprovalPending': 'Kinnitamine ootel',

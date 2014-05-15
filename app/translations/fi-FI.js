@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Kommenttisi:',
     'contactseller_form.6': 'vapaavalintainen',
     'contactseller_form.60': 'L\xE4het\xE4',
-    'contactseller_form.Ad': 'Ilmoitus:',
     'contactseller_form.ReplyToListing': 'Vastaa ilmoitukseen',
     'register_form.245': 'Uuden k\xE4ytt\xE4j\xE4n rekister\xF6inti',
     'myolx.ApprovalPending': 'Hyv\xE4ksynn\xE4ss\xE4',

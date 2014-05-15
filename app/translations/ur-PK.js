@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': '\u0622\u067E \u06A9\u06D2 \u062A\u0628\u0635\u0631\u06D2::',
     'contactseller_form.6': '\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC',
     'contactseller_form.60': '\u0628\u06BE\u06CC\u062C \u062F\u06CC\u06BA',
-    'contactseller_form.Ad': '\u0627\u0634\u062A\u06C1\u0627\u0631:',
     'contactseller_form.ReplyToListing': '\u0641\u06C1\u0631\u0633\u062A \u06A9\u0627 \u062C\u0648\u0627\u0628 \u062F\u06CC\u06BA',
     'register_form.245': '\u0646\u0626\u06D2 \u0635\u0627\u0631\u0641 \u06A9\u06CC \u0631\u062C\u0633\u0679\u0631\u06CC\u0634\u0646',
     'myolx.ApprovalPending': '\u0645\u0646\u0638\u0648\u0631\u06CC \u0632\u06CC\u0631 \u063A\u0648\u0631 \u06C1\u06D2',

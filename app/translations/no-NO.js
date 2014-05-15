@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Dine kommentarer:',
     'contactseller_form.6': 'valgfritt',
     'contactseller_form.60': 'Send',
-    'contactseller_form.Ad': 'Annonse:',
     'contactseller_form.ReplyToListing': 'Svar p\xE5 annonsen',
     'register_form.245': 'Ny bruker registrering',
     'myolx.ApprovalPending': 'Venter p\xE5 godkjenning',

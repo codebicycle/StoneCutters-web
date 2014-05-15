@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Message :',
     'contactseller_form.6': 'Facultatif',
     'contactseller_form.60': 'Envoyer',
-    'contactseller_form.Ad': 'Annonce:',
     'contactseller_form.ReplyToListing': 'R\xE9pondre \xE0 cette Annonce',
     'register_form.245': 'Inscription d\'un Nouvel Utilisateur',
     'myolx.ApprovalPending': 'Approbation en cours',

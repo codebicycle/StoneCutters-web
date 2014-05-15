@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'J\u016Bs\u0173 komentarai:',
     'contactseller_form.6': 'pasirinktinai',
     'contactseller_form.60': 'Si\u0173sti',
-    'contactseller_form.Ad': 'Skelbimas:',
     'contactseller_form.ReplyToListing': 'Atsakyti \u012F skelbim\u0105',
     'register_form.245': 'Naujo vartotojo registracija',
     'myolx.ApprovalPending': 'Laukiama patvirtinimo',

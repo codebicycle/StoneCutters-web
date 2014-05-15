@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Jou Kommentaar:',
     'contactseller_form.6': 'opsioneel',
     'contactseller_form.60': 'Stuur',
-    'contactseller_form.Ad': 'Lysting:',
     'contactseller_form.ReplyToListing': 'Antwoord op Lysting',
     'register_form.245': 'Nuwe Gebruikersregistrasie',
     'myolx.ApprovalPending': 'Goedkeuring hangende',

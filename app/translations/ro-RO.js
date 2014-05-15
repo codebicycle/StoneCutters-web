@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Comentariile dvs.:',
     'contactseller_form.6': 'op\u0163ional',
     'contactseller_form.60': 'Trimite',
-    'contactseller_form.Ad': 'Anun\u0163:',
     'contactseller_form.ReplyToListing': 'R\u0103spunde la Listare',
     'register_form.245': '\xCEnregistrarea Noului Utilizator',
     'myolx.ApprovalPending': '\xCEn a\u015Fteptarea aprob\u0103rii',

@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Your Comments:',
     'contactseller_form.6': 'Hiari',
     'contactseller_form.60': 'Tuma',
-    'contactseller_form.Ad': 'Tangazo:',
     'contactseller_form.ReplyToListing': 'Reply to this Ad',
     'register_form.245': 'Usajili Mpya wa Mtumiaji',
     'myolx.ApprovalPending': 'Idhini inasubiri',

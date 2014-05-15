@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Mesaj:',
     'contactseller_form.6': 'Si ou vle',
     'contactseller_form.60': 'Voye',
-    'contactseller_form.Ad': 'Anons ki Pibliye :',
     'contactseller_form.ReplyToListing': 'Reponn a Anons sa',
     'register_form.245': 'Enskripsyon pou nouvo manm',
     'myolx.ApprovalPending': 'Nou ap tann pou otorizasyon',

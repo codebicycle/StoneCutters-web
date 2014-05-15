@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Sorular\u0131n\u0131z:',
     'contactseller_form.6': 'iste\u011Fe ba\u011Fl\u0131',
     'contactseller_form.60': 'G\xF6nder',
-    'contactseller_form.Ad': '\u0130lanlar:',
     'contactseller_form.ReplyToListing': '\u0130lana Yan\u0131t Ver',
     'register_form.245': 'Yeni \xDCye Kayd\u0131',
     'myolx.ApprovalPending': 'Onay beklemede',

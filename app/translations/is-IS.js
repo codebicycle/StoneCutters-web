@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Athugasemdir \xFE\xEDnar:',
     'contactseller_form.6': 'valfrj\xE1lst',
     'contactseller_form.60': 'Senda',
-    'contactseller_form.Ad': 'Augl\xFDsing:',
     'contactseller_form.ReplyToListing': 'Svara augl\xFDsingu',
     'register_form.245': 'N\xFDskr\xE1ning notanda',
     'myolx.ApprovalPending': 'B\xED\xF0ur sam\xFEykkis',

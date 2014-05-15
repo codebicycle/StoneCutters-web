@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': 'Komentar Anda:',
     'contactseller_form.6': 'opsional',
     'contactseller_form.60': 'Kirim',
-    'contactseller_form.Ad': 'Iklan:',
     'contactseller_form.ReplyToListing': 'Membalas Iklan',
     'register_form.245': 'Pendaftaran Pengguna Baru',
     'myolx.ApprovalPending': 'Menunggu persetujuan',

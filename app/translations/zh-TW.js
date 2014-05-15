@@ -47,7 +47,6 @@ module.exports = {
     'contactseller_form.58': '\u60A8\u7684\u610F\u898B\uFF1A',
     'contactseller_form.6': '\u9078\u64C7\u9805',
     'contactseller_form.60': '\u5BC4\u9001',
-    'contactseller_form.Ad': '\u5EE3\u544A\uFF1A',
     'contactseller_form.ReplyToListing': '\u56DE\u8986\u4FE1\u606F',
     'register_form.245': '\u65B0\u7528\u6236\u8A3B\u518A',
     'myolx.ApprovalPending': '\u7B49\u5F85\u6279\u51C6',
