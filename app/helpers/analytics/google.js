@@ -1,12 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-
-function daysDiff(date) {
-    var now = new Date();
-    var diff = now.getTime() - date.getTime();
-    return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
-}
+var common = require('../common');
 
 var analyticsParams = {
     category: {
@@ -50,7 +45,7 @@ var analyticsParams = {
                 else if (!item.id) {
                     str.push('/age_unavailable');
                 }
-                else if (daysDiff(new Date(item.date.timestamp)) > 30) {
+                else if (common.daysDiff(new Date(item.date.timestamp)) > 30) {
                     str.push('/age_30');
                 }
 
