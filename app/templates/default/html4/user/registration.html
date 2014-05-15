@@ -1,44 +1,39 @@
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>{{ dictionary["registerheader.Register"] }}</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["registerheader.Register"]) }}
 <div id="register">
-	<div id="errors">
-		{% for field, error in params %}
-	        {{error}}<br>
-	    {% endfor %}
-	</div>
-   
-	<form action="/register" method="POST" enctype="multipart/form-data">
-		<div class="formField">
-		    <label>Nombre de usuario</label>
-		    <input type="text" name="username">
-		</div>
-		<div class="formField">
-	        <label>Dirección de Email</label>
-	        <input type="text" name="email">
-	        <small>Tu email no será publicado.</small>
-	    </div>
-	    <div class="formField">
-	        <label>Contraseña</label>
-	        <input type="password" name="password">
-	    </div>
-	    <div class="formField">
-	        <input type="checkbox" name="agreeTerms" class="checkbox" checked="true">
-	        <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>        
+    <div id="errors">
+        {% for field, error in params %}
+            {{error}}<br>
+        {% endfor %}
+    </div>
 
-	    </div>
-	    <div class="formActions">
-	        <div class="btn-adjust btnOrange btnForm">
-	            <input type="submit" value="Registrarte" name="submit" class="btns orange">
-	        </div>
-	    </div>
-	</form>
-	<div class="formField">
-		<a href="/login">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
-	</div>
+    <form action="/register" method="POST" enctype="multipart/form-data">
+        <div class="formField">
+            <label>Nombre de usuario</label>
+            <input type="text" name="username">
+        </div>
+        <div class="formField">
+            <label>Dirección de Email</label>
+            <input type="text" name="email">
+            <small>Tu email no será publicado.</small>
+        </div>
+        <div class="formField">
+            <label>Contraseña</label>
+            <input type="password" name="password">
+        </div>
+        <div class="formField">
+            <input type="checkbox" name="agreeTerms" class="checkbox" checked="true">
+            <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
+
+        </div>
+        <div class="formActions">
+            <div class="btn-adjust btnOrange btnForm">
+                <input type="submit" value="Registrarte" name="submit" class="btns orange">
+            </div>
+        </div>
+    </form>
+    <div class="formField">
+        <a href="/login">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
+    </div>
 </div>
-<div class="breadcrumb">
-    <a href="/">back</a>
-    <a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary) }}

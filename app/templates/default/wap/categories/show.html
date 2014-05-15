@@ -1,5 +1,5 @@
 <tr>
-	<td>
+    <td>
         <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
             <tbody>
                 <tr>
@@ -10,30 +10,32 @@
                 </tr>
             </tbody>
         </table>
-		{% view 'location/select' %}
-		{% set templateName = template + '/post/home_select.html' %}
-		{% include templateName %}
-		{% set templateName = template + '/partials/search.html' %}
-		{% include templateName %}
-		<table width="100%" cellspacing="0" cellpadding="4" border="0" align="left" bgcolor="#FFFFFF">
-			{% for subcategory in category.children %}
-				<tr>
-					<td style="border-top: solid thin #808080;">
-						<a style="display: block;" href="{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">
-							<small style="display: block;">
+        {% view 'location/select' %}
+        {% set templateName = template + '/post/home_select.html' %}
+        {% include templateName %}
+        {% set templateName = template + '/partials/search.html' %}
+        {% include templateName %}
+        <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left" bgcolor="#FFFFFF">
+            {% for subcategory in category.children %}
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <a style="display: block;" href="{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">
+                            <small style="display: block;">
                                 <img border="0" alt="" src="" />{{ subcategory.trName }}
                                 <small style="color: #999;">({{subcategory.counter}})</small>
                             </small>
-						</a>
-					</td>
-				</tr>
-			{% endfor %}
-		    <tr style="display: none;">
-		        <td>
-		            {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-		            {% include templateName %}
-		        </td>
-		    </tr>
-		</table>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr style="display: none;">
+                <td>
+                    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+                    {% include templateName %}
+                </td>
+            </tr>
+        </table>
+        {% from macros import breadcrumb %}
+        {{ breadcrumb(dictionary) }}
     </td>
 </tr>

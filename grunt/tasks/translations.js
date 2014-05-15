@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         var csv = require('csv');
         var _ = require('underscore');
         var jsesc = require('jsesc');
-        var rTranslations = new RegExp('{{ ?dictionary\\[[^}]+ ?}}', 'gi');
+        var rTranslations = new RegExp('dictionary\\["[^"]+"]', 'gi');
         var translations = {};
         var i = 0;
         var file;
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
                     return;
                 }
                 matches.forEach(function each(match) {
-                    var key = match.slice(match.indexOf('[') + 2, match.indexOf(']') - 1);
+                    var key = match.slice(match.indexOf('"') + 1, match.indexOf(']') - 1);
 
                     translations[key] = key;
                 });

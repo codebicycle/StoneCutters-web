@@ -1,10 +1,5 @@
-{% view 'location/select' %}
-{% set templateName = 'compiled/' + template + '/partials/search.html' %}
-{% include templateName %}<section id="subCategories">
-<div id="title">
-    <a href="/"></a>
-    <h1>{{ dictionary["homeheader.My OLX"] }}</h1>
-</div>
+{% from macros import breadcrumb %}
+{{ breadcrumb(dictionary, dictionary["homeheader.My OLX"]) }}
 <section id="login">
     <form action="/login" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>

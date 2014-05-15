@@ -1,11 +1,9 @@
-<div class="breadcrumb">
-	<a href="/">{{ dictionary["defaultfooter.Back"] }}</a>
-	<h1>{{ dictionary["distancediv.changeLocation"] }}</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["distancediv.changeLocation"]) }}
 <div id="locationSelect" class="locationBreadcrumb">
-	<p>
-		<a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
-	</p>
+    <p>
+        <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
+    </p>
 </div>
 <div id="search">
     <form action="/location">
@@ -15,23 +13,19 @@
     </form>
 </div>
 <div id="location">
-	{% if cities.length %}
-		<h4>
-			{{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}
-		</h4>
-		<ul class="normalList">
-			{% for city in cities %}
-					<li class="{{ "last" if loop.last else "" }}">
-						<a href="/?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
-					</li>
-			{% endfor %}
-		</ul>
-	{% else %}
-		<div class="emtyList">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
-	{% endif %}
-				
+    {% if cities.length %}
+        <h4>
+            {{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}
+        </h4>
+        <ul class="normalList">
+            {% for city in cities %}
+                    <li class="{{ "last" if loop.last else "" }}">
+                        <a href="/?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
+                    </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="emtyList">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
+    {% endif %}
 </div>
-<div class="breadcrumb">
-    <a href="/">{{ dictionary["defaultfooter.Back"] }}</a>
-    <a href="/" class="home">{{ dictionary["homeheader.Home"] }}</a>
-</div>
+{{ breadcrumbHome(dictionary) }}

@@ -1,151 +1,152 @@
 <section id="itemPage">
-	<div id="title">
-		<a href="/"></a>
-		<h1>{{ item.category.name }}</h1>
-		<ul>
-			<li><a class="share" href="#share">Comparte este anuncio</a></li>
-			{% if item.isFavorite %}
-				<li><a data-itemId="{{ item.id }}" class="fav remove" href="#">Remover de favoritos</a></li>
-			{% elif user %}
-				<li><a data-itemId="{{ item.id }}" class="fav add" href="#">Agregar a favoritos</a></li>
-			{% else %}
-				<li><a data-itemid="{{ item.id }}" class="fav add" href="/login">Agregar a favoritos</a></li>
-			{% endif %}
-		</ul>
-	</div>
-	{% if not item.images %}
-		<section id="noPicture">
-			<span></span>
-			<p>No hay foto disponible</p>
-			<div class="clear"></div>
-		</section>
-	{% elif item.images.length == 1 %}
-		<section id="onePicture">
-			<div class="slide">
-				<div style="background-image: url('{{ item.images[0].url }}');"></div>
-			</div>
-		</section>
-	{% else %}
-		<section class="swiper-container">
-			<div class="swiper-wrapper">
-				{% for image in item.images %}
-				  	<div class="swiper-slide"> 
-						<div class="slide">
-				          <div style="background-image: url('{{ image.url }}');"></div>
-				        </div>
-					</div>
-				{% endfor %}
-			</div>
-			<div class="slidePagination"></div>
-		</section>
-	{% endif %}
+    {% set favClass = 'remove' %}
+    {% set favLink = '#' %}
+    {% set favText = dictionary["item.RemoveFromFavorites"] %}
+    {% if not item.isFavorite %}
+        {% set favClass = 'add' %}
+        {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
+        {% if not user %}
+            {% set favLink = '/login' %}
+        {% endif %}
+    {% endif %}
+    {% from macros import breadcrumb %}
+    {{ breadcrumb(dictionary, item.category.name, '/', ['<ul>
+        <li><a class="share" href="#share">', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
+        <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
+    </ul>'] | join) }}
+    {% if not item.images %}
+        <section id="noPicture">
+            <span></span>
+            <p>No hay foto disponible</p>
+            <div class="clear"></div>
+        </section>
+    {% elif item.images.length == 1 %}
+        <section id="onePicture">
+            <div class="slide">
+                <div style="background-image: url('{{ item.images[0].url }}');"></div>
+            </div>
+        </section>
+    {% else %}
+        <section class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for image in item.images %}
+                    <div class="swiper-slide">
+                        <div class="slide">
+                          <div style="background-image: url('{{ image.url }}');"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="slidePagination"></div>
+        </section>
+    {% endif %}
 
-	<section id="description">
-		<span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
-		<h1>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h1>
-		<h2>{{ item.title }}</h2>
-		<p>{{ item.description }}</p>
-		<div class="clear"></div>
-	</section>
+    <section id="description">
+        <span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
+        <h1>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h1>
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <div class="clear"></div>
+    </section>
 
-	<section id="optionals">
-		{% if item.optionals %}
-			<ul>
-				{% for optional in item.optionals %}
-					{% if optional.value %}
-						<li>{{ optional.label }}: <strong>{{ optional.value }}</strong></li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-		{% endif %}
-		<div class="clear"></div>
-	</section>
+    <section id="optionals">
+        {% if item.optionals %}
+            <ul>
+                {% for optional in item.optionals %}
+                    {% if optional.value %}
+                        <li>{{ optional.label }}: <strong>{{ optional.value }}</strong></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="clear"></div>
+    </section>
 
-	<aside class="relatedAds">
-		{% if relatedItems %}
-			<section class="swiper-containerRA">
-				<div class="swiper-wrapper">
-					{% for relatedItem in relatedItems %}
-						{% if relatedItem.thumbnail %}
-							<div class="swiper-slide">
-								<div class="slide" data-itemId="{{ relatedItem.id }}">
-									<a href="/{{ item.title | urlize }}-iid-{{ relatedItem.id }}">
-										<div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
-									</a>
-								</div>
-							</div>
-						{% endif %}
-					{% endfor %}
-				</div>
-			</section>
-		{% endif %}
-		<a class="btns orange" href="#">Otros anuncios relacionados</a>
-	</aside>
+    <aside class="relatedAds">
+        {% if relatedItems %}
+            <section class="swiper-containerRA">
+                <div class="swiper-wrapper">
+                    {% for relatedItem in relatedItems %}
+                        {% if relatedItem.thumbnail %}
+                            <div class="swiper-slide">
+                                <div class="slide" data-itemId="{{ relatedItem.id }}">
+                                    <a href="/{{ item.title | urlize }}-iid-{{ relatedItem.id }}">
+                                        <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+        <a class="btns orange" href="#">Otros anuncios relacionados</a>
+    </aside>
 
-	<section class="reply">
-		<span>Contactar al anunciante</span>
-		<form id="replyForm" action="">
-			<label>* Mensaje</label>
-			<textarea class="message" name="message"></textarea>
-			<small class="message hide"></small>
+    <section class="reply">
+        <span>Contactar al anunciante</span>
+        <form id="replyForm" action="">
+            <label>* Mensaje</label>
+            <textarea class="message" name="message"></textarea>
+            <small class="message hide"></small>
 
-			<label>* Nombre</label>
-			<input type="text" value="" class="name" name="name">
-			<small class="name hide"></small>
+            <label>* Nombre</label>
+            <input type="text" value="" class="name" name="name">
+            <small class="name hide"></small>
 
-			<label>* Email</label>
-			<input type="email" value="" class="email" name="email">
-			<small class="email hide"></small>
+            <label>* Email</label>
+            <input type="email" value="" class="email" name="email">
+            <small class="email hide"></small>
 
-			<label>Teléfono</label>
-			<input type="number" class="phone" name="phone">
-			<input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
-			<span>* Campo Obligatorio</span>
+            <label>Teléfono</label>
+            <input type="number" class="phone" name="phone">
+            <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
+            <span>* Campo Obligatorio</span>
 
-			<div class="btnCenter">
-				<input type="button" class="btns orange submit" value="Enviar Consulta" >
-			</div>
-	</form>
-	<div class="clear"></div>
-	</section>
+            <div class="btnCenter">
+                <input type="button" class="btns orange submit" value="Enviar Consulta" >
+            </div>
+    </form>
+    <div class="clear"></div>
+    </section>
 
-	<section class="actions">
-		<div class="background"></div>
-		{% if item.phone and item.contactName %}
-			<span>{{ item.contactName }}: {{ item.phone }}</span>
-		{% elif item.phone or item.contactName %}
-			<span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
-		{% endif %}
-		{% if item.phone %}
-			{% if device.uriSchemeTel %}
-				<div class="action call">
-					<a href="tel:{{ item.phone }}">
-						<span>Llamar</span>
-					</a>
-				</div>
-			{% endif %}
-			{% if device.uriSchemeSms %}
-				<div class="action sms">
-					<a href="{{ item.phone }}">
-						<span>SMS</span>
-					</a>
-				</div>
-			{% endif %}
-			<div class="action email {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}">
-				<div>
-					<span>Email</span>
-				</div>
-			</div>
-		{% else %}
-			<div data-tracking="itemPage-clickEmail" class="action email fullWidth trackMe">
-				<div>
-					<span>Email</span>
-				</div>
-			</div>
-		{% endif %}
-		<div class="clear"></div>
-	</section>
-	
+    <section class="actions">
+        <div class="background"></div>
+        {% if item.phone and item.contactName %}
+            <span>{{ item.contactName }}: {{ item.phone }}</span>
+        {% elif item.phone or item.contactName %}
+            <span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
+        {% endif %}
+        {% if item.phone %}
+            {% if device.uriSchemeTel %}
+                <div class="action call">
+                    <a href="tel:{{ item.phone }}">
+                        <span>Llamar</span>
+                    </a>
+                </div>
+            {% endif %}
+            {% if device.uriSchemeSms %}
+                <div class="action sms">
+                    <a href="{{ item.phone }}">
+                        <span>SMS</span>
+                    </a>
+                </div>
+            {% endif %}
+            <div class="action email {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}">
+                <div>
+                    <span>Email</span>
+                </div>
+            </div>
+        {% else %}
+            <div data-tracking="itemPage-clickEmail" class="action email fullWidth trackMe">
+                <div>
+                    <span>Email</span>
+                </div>
+            </div>
+        {% endif %}
+        <div class="clear"></div>
+    </section>
+
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </section>
@@ -154,56 +155,56 @@
 
 
 {% if item.images.length == 1 %}
-	<div id="galContOne" class="galCont">
-		<div class="title">{{ item.title }}</div>
-		<div class="galCont-container swiper-container-gal" style="background-image: url('{{ item.images[0].url }}');"></div>
-		<div class="galActions">
-			<div class="close"><span></span></div>
-			<div class="playDis"><span></span></div>
-			<div class="prevDis"><span></span></div>
-			<div class="nextDis"><span></span></div>
-		</div>
-	</div>
+    <div id="galContOne" class="galCont">
+        <div class="title">{{ item.title }}</div>
+        <div class="galCont-container swiper-container-gal" style="background-image: url('{{ item.images[0].url }}');"></div>
+        <div class="galActions">
+            <div class="close"><span></span></div>
+            <div class="playDis"><span></span></div>
+            <div class="prevDis"><span></span></div>
+            <div class="nextDis"><span></span></div>
+        </div>
+    </div>
 {% elif item.images.length > 1  %}
-	<div id="galCont" class="galCont">
-		<div class="title">{{ item.title }}</div>
-		<div class="galCont-container swiper-container-gal">
-			<div class="swiper-wrapper">
-				{% for image in item.images %}
-					<div class="swiper-slide" style="background-image: url('{{ image.url }}');"></div>
-				{% endfor %}
-			</div>
-			<div class="slidePaginationGal"></div>
-		</div>
-		<div class="galActions">
-			<div class="close"><span></span></div>
-			<div class="pause"><span></span></div>
-			<div class="prev"><span></span></div>
-			<div class="next"><span></span></div>
-		</div>
-	</div>
+    <div id="galCont" class="galCont">
+        <div class="title">{{ item.title }}</div>
+        <div class="galCont-container swiper-container-gal">
+            <div class="swiper-wrapper">
+                {% for image in item.images %}
+                    <div class="swiper-slide" style="background-image: url('{{ image.url }}');"></div>
+                {% endfor %}
+            </div>
+            <div class="slidePaginationGal"></div>
+        </div>
+        <div class="galActions">
+            <div class="close"><span></span></div>
+            <div class="pause"><span></span></div>
+            <div class="prev"><span></span></div>
+            <div class="next"><span></span></div>
+        </div>
+    </div>
 {% endif %}
 
 <div id="share" class="popup">
-	<div class="popup-wrapper">
-		<div class="popup-container">
-			<h4>Share this ad</h4>
-			<div>
-				<ul class="social">
-					<li><a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank" class="facebookButton">Facebook</a></li>
-					<li><a href="https://twitter.com/intent/tweet?original_referer={{ url }}&text={{ item.title }}&url={{ url }}" target="_blank" class="twitterButton">Twitter</a></li>
-				</ul>
-			</div>
+    <div class="popup-wrapper">
+        <div class="popup-container">
+            <h4>Share this ad</h4>
+            <div>
+                <ul class="social">
+                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank" class="facebookButton">Facebook</a></li>
+                    <li><a href="https://twitter.com/intent/tweet?original_referer={{ url }}&text={{ item.title }}&url={{ url }}" target="_blank" class="twitterButton">Twitter</a></li>
+                </ul>
+            </div>
 
-			<footer>
-				<a href="#" class="popup-close btns grey">Cancelar</a>
-			</footer>
-		</div>
-	</div>
+            <footer>
+                <a href="#" class="popup-close btns grey">Cancelar</a>
+            </footer>
+        </div>
+    </div>
 </div>
 
 <div id="msgCont" class="msgCont">
-	<div class="msgCont-wrapper">
-		<div class="msgCont-container"></div>
-	</div>
+    <div class="msgCont-wrapper">
+        <div class="msgCont-container"></div>
+    </div>
 </div>

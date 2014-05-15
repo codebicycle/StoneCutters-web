@@ -1,7 +1,5 @@
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>Volver</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["defaultfooter.Back"]) }}
 <div id="posting">
     <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
         <h4>Categoría seleccionada :: Nombre cat</h4>
@@ -53,3 +51,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
+{{ breadcrumbHome(dictionary) }}
