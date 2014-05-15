@@ -113,6 +113,19 @@ module.exports = {
             }
         }
     },
+    myolx: {
+        url: 'myolx',
+        view: 'user#myolx',
+        isServer: false,
+        google: 'myolx',
+        ati: {
+            process: false,
+            params: {
+                page_name: 'my_account',
+                category: 'account'
+            }
+        }
+    },
     myadslisting: {
         url: 'myolx/myadslisting',
         view: 'user#my-ads',

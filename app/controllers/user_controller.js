@@ -18,6 +18,13 @@ module.exports = {
             callback(null, {});
         }
     },
+    myolx: function(params, callback) {
+        helpers.controllers.control(this, params, controller);
+
+        function controller() {
+            callback(null, {});
+        }
+    },
     'my-ads': function(params, callback) {
         helpers.controllers.control(this, params, controller);
 

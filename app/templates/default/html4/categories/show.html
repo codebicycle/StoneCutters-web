@@ -7,7 +7,10 @@
     <ul class="normalList">
         {% for subcategory in category.children %}
             <li class="{{ "last" if loop.last else "" }}">
-                <a href="/{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">{{subcategory.trName}}</a>
+                <a href="/{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">
+                    {{subcategory.trName}}
+                    <small style="color: #999;">({{subcategory.counter}})</small>
+                </a>
             </li>
         {% endfor %}
     </ul>
