@@ -213,108 +213,90 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
-            var user = this.app.getSession('user');
-            var siteLocation = this.app.getSession('siteLocation');
-            var language = this.app.getSession('selectedLanguage');
-            var languages = this.app.getSession('languages');
-            var languageId = languages._byId[language].id;
-            var languageCode = languages._byId[language].isocode.toLowerCase();
+            var that = this;
+            var user = that.app.getSession('user');
             var securityKey = params.sk;
-            var _params = {
-                id: params.itemId,
-                languageId: languageId,
-                languageCode: languageCode
-            };
-            var spec = {
-                item: {
-                    model: 'Item',
-                    params: _params
-                }
-            };
-            var app = this.app;
+            var itemId = params.itemId;
+            var siteLocation = that.app.getSession('siteLocation');
+            var anonymousItem;
 
-            checkAuthentication(_params, _params.id);
-            this.app.fetch(spec, {
-                'readFromCache': false
-            }, function afterFetch(err, result) {
-                if (err) {
-                    return callback(err, result);
-                }
-                findFields(err, result);
-            });
-
-            function checkAuthentication(params, id) {
-                var anonymousItem;
-                if (user) {
-                    params.token = user.token;
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.itemId] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
                 }
                 else {
-                    if (typeof window !== 'undefined' && localStorage) {
-                        anonymousItem = localStorage.getItem('anonymousItem');
-                        anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                        if (securityKey) {
-                            anonymousItem[id] = securityKey;
-                            localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                        }
-                        else {
-                            securityKey = anonymousItem[id];
-                        }
-                    }
-                    params.securityKey = securityKey;
+                    securityKey = anonymousItem[params.itemId];
                 }
             }
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+            delete params.sk;
 
-            function findFields(err, response) {
-                var item = response.item.toJSON();
-                var _params = {
-                    intent: 'edit',
-                    location: siteLocation,
-                    languageId: languageId,
-                    languageCode: languageCode,
-                    itemId: item.id,
-                    categoryId: item.category.id
-                };
+            function findItem(next) {
                 var spec = {
-                    postingSession: {
-                        model: 'PostingSession'
-                    },
-                    fields: {
-                        collection: 'Fields',
-                        params: _params
+                    item: {
+                        model: 'Item',
+                        params: params
                     }
                 };
 
-                checkAuthentication(_params, _params.itemId);
-                app.fetch(spec, function afterFetch(err, result) {
-                    var response = result.fields.models[0].attributes;
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    if (err) {
+                        callback(err, result);
+                        return;
+                    }
+                    next(err, result);
+                });
+            }
+
+            function findRelatedItems(err, data) {
+                var item = data.item.toJSON();
+                var spec = {
+                    items: {
+                        collection : 'Items',
+                        params: {
+                            location: siteLocation,
+                            offset: 0,
+                            pageSize:10,
+                            relatedAds: itemId
+                        }
+                    }
+                };
+
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    var model = result.items.models[0];
+                    var user = that.app.getSession('user');
                     var categoryTree;
 
+                    result.relatedItems = model.get('data');
                     result.user = user;
                     result.item = item;
-                    result.postingSession = result.postingSession.get('postingSession');
-                    result.intent = 'edit';
-                    result.fields = response.fields;
-                    result.errors = params.err;
-                    result.category = item.category.parentId;
-                    result.subcategory = item.category.id;
-                    result.language = languageId;
-                    result.languageCode = languageCode;
-                    result.errField = params.errField;
-                    result.errMsg = params.errMsg;
+                    result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-
-                    categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+                    categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                     helpers.analytics.reset();
-                    helpers.analytics.setPage('posting_success');
+                    helpers.analytics.setPage('item');
                     helpers.analytics.addParam('user', user);
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                    result.analytics = helpers.analytics.generateURL(app.getSession());
-
+                    result.analytics = helpers.analytics.generateURL(that.app.getSession());
                     callback(err, result);
                 });
             }
+
+            findItem(findRelatedItems);
         }
     }
 };

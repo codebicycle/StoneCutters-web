@@ -1,0 +1,34 @@
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["defaultfooter.Back myolx.MyAds"], '/', ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
+<div id="myads">
+    <ul class="normalList">
+        {% if myads.length %}
+            {% for item in myAds %}
+                <li>
+                    <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                        <div class="imageCont">
+                            <div class="imageContAlign">
+                                <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="itemInfo">
+                        <h2>{{ item.price.displayPrice }}</h2>
+                        <span>{{ item.date.since }}</span>
+                        <div class="centerCont">
+                            <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                                <p>{{ item.title }}</p>
+                            </a>
+                        </div>
+                        <span>{{ item.displayLocation }}</span>
+                    </div>
+                </li>
+            {% endfor %}
+        {% else %}
+            <div class="emtyList">
+                {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}
+            </div>
+        {% endif %}
+    </ul>
+</div>
+{{ breadcrumbHome(dictionary) }}
