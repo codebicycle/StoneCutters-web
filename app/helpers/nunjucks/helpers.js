@@ -3,13 +3,10 @@
 var config = require('../../config');
 var common = require('../common');
 var _ = require('underscore');
+var dateformat = require('dateformat');
 
 module.exports = function(nunjucks) {
     return {
-        date: function(timestamp) {
-            var d = new Date(timestamp);
-            return d.toLocaleString();
-        },
         static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 'development');
             var type;
@@ -200,6 +197,9 @@ module.exports = function(nunjucks) {
         },
         link: function (href) {
             return common.link(href, this.ctx.siteLocation);
+        },
+        date: function(timestamp) {
+            return dateformat(new Date(timestamp), 'yyyy-mm-dd');
         },
         urlize: common.urlize
     };

@@ -113,8 +113,15 @@ module.exports = (function() {
         return href;
     }
 
+    function daysDiff(date) {
+        var now = new Date();
+        var diff = now.getTime() - date.getTime();
+        return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
+    }
+
     return {
         urlize: urlize,
-        link: link
+        link: link,
+        daysDiff: daysDiff
     };
 })();
