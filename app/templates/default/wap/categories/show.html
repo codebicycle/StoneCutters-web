@@ -20,7 +20,10 @@
 				<tr>
 					<td style="border-top: solid thin #808080;">
 						<a style="display: block;" href="{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">
-							<small style="display: block;"><img border="0" alt="" src="" />{{ subcategory.trName }}</small>
+							<small style="display: block;">
+                                <img border="0" alt="" src="" />{{ subcategory.trName }}
+                                <small style="color: #999;">({{subcategory.counter}})</small>
+                            </small>
 						</a>
 					</td>
 				</tr>

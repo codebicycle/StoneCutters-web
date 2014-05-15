@@ -9,7 +9,10 @@
   	<ul>
 		{% for subcategory in category.children %}
 			<li>
-				<a href="/{{ subcategory.trName | urlize }}-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a>
+				<a href="/{{ subcategory.trName | urlize }}-cat-{{subcategory.id}}-p-1?location={{params.location}}">
+                    {{subcategory.trName}}
+                    <span class="count">{{subcategory.counter}}</span>
+                </a>
 			</li>
 		{% endfor %}
 	</ul>
