@@ -140,10 +140,12 @@ module.exports = function(nunjucks) {
             var max;
             var i;
 
-            function prepareStyle(last) {
+            function prepareStyle(last, start, end) {
                 if (platform !== 'wap') {
-                    out.push('" class="');
+                    out.push(start || '" ');
+                    out.push('class="');
                     out.push(last ? 'last' : '');
+                    out.push(end || '');
                 }
             }
 
@@ -156,7 +158,9 @@ module.exports = function(nunjucks) {
             function prepareURL(page, last) {
                 if (page > 0 && page <= pages) {
                     if(page === currentPage){
-                        out.push('<strong>');
+                        out.push('<strong');
+                        prepareStyle(last, ' ', '"');
+                        out.push('>');
                         out.push(page);
                         out.push('</strong>');
                         prepareSeparator(last);
