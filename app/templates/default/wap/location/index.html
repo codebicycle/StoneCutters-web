@@ -6,7 +6,9 @@
                     <td style="padding: .5em;">
                         <small>
                             <img src="{{ "/images/wap/ico_city.gif" | static }}">
-                            <small> <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %} </small>
+                            <small> 
+                                <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
+                            </small>
                         </small>
                     </td>
                 </tr>
@@ -20,21 +22,23 @@
                             <small>{{ dictionary["countryoptions.EnterCity"] }}</small>
                          </label><br />
                         <input type="text" value="" name="search" />
-                        <!-- <input type="submit" value='{{ dictionary["homeheader.Search"] }}' name="search_button" /> -->
-                        <input type="submit" value="Search" name="search_button" />
+                        <input type="submit" value="{{ dictionary["homeheader.Search"] }}" name="search_button" />
                     </form>
                 </td>
             </tr>
         </table>
-        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
-            <tr>
-                <td style="padding: .25em .5em;; border-top: solid thin #808080;">
-                    <!-- <strong><small style="display: block;">{{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}</small></strong> -->
-                    <strong><small style="display: block;">{{ "All results" if search else "Popular cities" }}</small></strong>
-                </td>
-            </tr>
-        </table>
         {% if cities.length > 0 %}
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .25em .5em;; border-top: solid thin #808080;">
+                        <strong>
+                            <small style="display: block;">
+                                {{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}
+                            </small>
+                        </strong>
+                    </td>
+                </tr>
+            </table>
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
                 {% for city in cities %}
                     <tr>
@@ -50,7 +54,7 @@
             <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
                 <tr>
                     <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                        <small style="displayt: block;">We are sorry but we don't have results for your search.</small>
+                        <small style="displayt: block;">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</small>
                     </td>
                 </tr>
             </table>
