@@ -1,7 +1,5 @@
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>{{ dictionary["myolx.MyOLX"] }}<a href="{{ '/logout' | link }}">{{ dictionary["myolx.SignOut"] }}</a></h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["homeheader.My OLX"], '/', ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
 <div id="myolx">
     <ul class="normalList">
         <li>
@@ -12,7 +10,4 @@
         </li>
     </ul>
 </div>
-<div class="breadcrumb">
-    <a href="/">back</a>
-    <a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary) }}
