@@ -1,5 +1,15 @@
 <tr>
     <td>
+        <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
+            <tbody>
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <strong style="color: #0075BD;">{{category.name}}</strong>
+                        <small style="color: #999;">({{category.counter}})</small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         {% view 'location/select' %}
         {% set templateName = template + '/partials/search.html' %}
         {% include templateName %}
@@ -33,9 +43,9 @@
                     <tr>
                         <td align="center" style="border-top: solid thin #808080;">
                             <small style="display: block;">
-                                <a href="{{ metadata.previous }}">&lt;</a>
-                                {{ metadata.page | pagination(metadata.total, metadata.current, 'wap') }}
-                                <a href="{{ metadata.next }}">&gt;</a>
+                                {{ ("<a href='" + metadata.previous + "' >&lt;</a>") if metadata.previous }}
+                                {{ metadata | pagination('wap') }}
+                                {{ ("<a href='" + metadata.next + "' >&gt;</a>") if metadata.next }}
                             </small>
                         </td>
                     </tr>

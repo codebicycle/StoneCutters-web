@@ -16,6 +16,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             var app = req.rendrApp;
             var path = req._parsedUrl.pathname;
             var url = req.originalUrl;
+            var host = req.headers.host;
+            var protocol = req.protocol;
             var referer = app.getSession('url');
             var clientId = app.getSession('clientId');
 
@@ -28,7 +30,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 path: path,
                 referer: referer,
                 url: url,
-                protocol: req.protocol
+                protocol: protocol,
+                host: host
             });
 
             next();
