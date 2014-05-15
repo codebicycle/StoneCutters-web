@@ -3,19 +3,18 @@
 var BaseView = require('../base');
 var _ = require('underscore');
 var helpers = require('../../helpers');
+var translations = require('../../translations');
 
 module.exports = BaseView.extend({
-    className: 'footer_footer_view',
+    className: 'footer_downloadapp_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var user = this.app.getSession('user');
-        var location = this.app.getSession('location');
+        var marketing = helpers.marketing.getInfo(this.app, 'footer');
 
         return _.extend({}, data, {
-            user: user,
-            location: location
+            marketing: marketing
         });
     }
 });
 
-module.exports.id = 'footer/footer';
+module.exports.id = 'footer/downloadapp';
