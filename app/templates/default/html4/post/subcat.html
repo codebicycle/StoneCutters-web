@@ -1,7 +1,5 @@
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>Elige Subcategoría</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["posting_selector.SelectSubCategory"]) }}
 <div id="selectSubCat">
     <ul class="normalList">
         {% for category in subcategories %}
@@ -10,11 +8,7 @@
             </li>
         {% endfor %}
     <ul>
-
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-<div class="breadcrumb">
-    <a href="/">back</a>
-    <a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary) }}

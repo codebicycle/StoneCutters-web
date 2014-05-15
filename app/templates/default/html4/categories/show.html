@@ -1,24 +1,17 @@
 {% view 'location/select' %}
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
-<div class="breadcrumb">
-	<a href="/">Back</a>
-	<h1>{{category.name}}</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, category.name) }}
 <div id="subCategories">
-  	<ul class="normalList">
-		{% for subcategory in category.children %}
-			<li class="{{ "last" if loop.last else "" }}">
-				<a href="/{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">{{subcategory.trName}}</a>
-
-			</li>
-		{% endfor %}
-	</ul>
-    
+    <ul class="normalList">
+        {% for subcategory in category.children %}
+            <li class="{{ "last" if loop.last else "" }}">
+                <a href="/{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">{{subcategory.trName}}</a>
+            </li>
+        {% endfor %}
+    </ul>
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-<div class="breadcrumb">
-	<a href="/">back</a>
-	<a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary) }}

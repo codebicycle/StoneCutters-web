@@ -1,0 +1,17 @@
+{% macro breadcrumb(dictionary, link='') %}
+    <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+        <tbody>
+            <tr>
+                <td style="border-top: solid thin #808080;">
+                    <small style="display: block;">
+                        {% if link %}
+                            <a href="{{link}}"><img border="0" alt="" src="{{ "/images/wap/arrowbackwap.gif" | static }}">
+                            {{dictionary["defaultfooter.Back"]}}</a> |
+                        {% endif %}
+                        <a href="/"><img border="0" alt="" src="{{ "/images/wap/ico_home.gif" | static }}"> {{dictionary["defaultfooter.Home"]}}</a>
+                    </small>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endmacro %}

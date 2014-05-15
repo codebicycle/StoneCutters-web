@@ -35,16 +35,17 @@
             <tr><td colspan="3"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="4"></td></tr>
             <tr>
                 <td width="20" valign="top"><img src="http://static03.olx-st.com/imagenes/notfound/bulletnarch.gif" border="0"></td>
-                <td width="740"><font class="txt02">Intenta acceder a la página directamente desde la <a href="/">página principal</a> de OLX.</font></td> 
+                <td width="740"><font class="txt02">Intenta acceder a la página directamente desde la <a href="/">página principal</a> de OLX.</font></td>
             </tr>
             <tr><td colspan="3"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="30" width="1"></td></tr>
         </table>
-
         {% if error %}
             <span style="display: block;">
                 <em>{{error.statusCode}}<em> - {{error.message}}
             </span>
             <pre id="stacktrace">{{error.detail}}</pre>
         {% endif %}
+        {% from macros import breadcrumb %}
+        {{ breadcrumb(dictionary) }}
     </td>
 </tr>

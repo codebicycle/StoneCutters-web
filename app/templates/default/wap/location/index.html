@@ -16,7 +16,7 @@
             <tr>
                 <td style="padding: .25em .5em; border-top: solid thin #808080;">
                     <form action="/location">
-                        <label for="search"> 
+                        <label for="search">
                             <small>{{ dictionary["countryoptions.EnterCity"] }}</small>
                          </label><br />
                         <input type="text" value="" name="search" />
@@ -55,5 +55,7 @@
                 </tr>
             </table>
         {% endif %}
+        {% from macros import breadcrumb %}
+        {{ breadcrumb(dictionary) }}
     </td>
 </tr>

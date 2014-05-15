@@ -2,18 +2,16 @@
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
 <section id="subCategories">
-	<div id="title">
-		<a href="/"></a>
-		<h1>{{category.name}}</h1>
-	</div>
-  	<ul>
-		{% for subcategory in category.children %}
-			<li>
-				<a href="/{{ subcategory.trName | urlize }}-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a>
-			</li>
-		{% endfor %}
-	</ul>
-    
+    {% from macros import breadcrumb %}
+    {{ breadcrumb(dictionary, category.name) }}
+    <ul>
+        {% for subcategory in category.children %}
+            <li>
+                <a href="/{{ subcategory.trName | urlize }}-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </section>

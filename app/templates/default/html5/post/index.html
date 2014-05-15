@@ -1,8 +1,6 @@
 <section id="selectCat">
-    <div id="title">
-        <a href="/"></a>
-        <h1>{{ dictionary["posting_selector.SelectCategory"] }}</h1>
-    </div>
+    {% from macros import breadcrumb %}
+    {{ breadcrumb(dictionary, dictionary["posting_selector.SelectCategory"]) }}
     <ul>
         {% for category in categories.models %}
             <li>

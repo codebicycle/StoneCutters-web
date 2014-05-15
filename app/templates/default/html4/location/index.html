@@ -1,9 +1,7 @@
-<div class="breadcrumb">
-	<a href="/">Back</a>
-	<h1>Cambiar ubicacion</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["distancediv.changeLocation"]) }}
 <div id="locationSelect" class="locationBreadcrumb">
-	<p><a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}</p>
+    <p><a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}</p>
 </div>
 <div id="search">
     <form action="/location">
@@ -13,16 +11,13 @@
     </form>
 </div>
 <div id="location">
-	<h4>{% if search %}Results{% else %}Popular Cities{% endif %}</h4>
-	<ul class="normalList">
-		{% for city in cities %}
-				<li class="{{ "last" if loop.last else "" }}">
-					<a href="/?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
-				</li>
-		{% endfor %}
-	</ul>			
+    <h4>{% if search %}Results{% else %}Popular Cities{% endif %}</h4>
+    <ul class="normalList">
+        {% for city in cities %}
+                <li class="{{ "last" if loop.last else "" }}">
+                    <a href="/?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
+                </li>
+        {% endfor %}
+    </ul>
 </div>
-<div class="breadcrumb">
-    <a href="/">back</a>
-    <a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary) }}

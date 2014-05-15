@@ -6,6 +6,9 @@ var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'items_search_view',
+    wapAttributes: {
+        cellpadding: 0
+    },
     postRender: function() {
         $('.switchView').click(function(e) {
 

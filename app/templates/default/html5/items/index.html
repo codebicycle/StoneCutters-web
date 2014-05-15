@@ -1,12 +1,9 @@
 {% view 'location/select' %}
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
-{% include templateName %}<section id="subCategories">
+{% include templateName %}
 <section id="itemListing">
-    <div id="title">
-        <a href="/"></a>
-        <h1>{{category.name}}</h1>
-        <span class="switchView"></span>
-    </div>
+    {% from macros import breadcrumb %}
+    {{ breadcrumb(dictionary, category.name, '/', '<span class="switchView"></span>') }}
     <ul class="">
         {% for item in items %}
             <li>
@@ -25,7 +22,7 @@
             </li>
         {% endfor %}
     </ul>
-    
+
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </section>
@@ -42,18 +39,3 @@
     {% endif %}
     <div style="clear: both;">&nbsp;</div>
 </section>
-{% if metadata.filters.length %}
-<section id="itemFilter">
-    <div id="title">
-        <h1>Filters</h1>
-        <span class="switchView"></span>
-    </div>
-    <ul class="">
-        {% for filter in metadata.filters %}
-            <li>
-                {{ filter | filter(metadata.current)}}
-            </li>
-        {% endfor %}
-    </ul>
-</section>
-{% endif %}

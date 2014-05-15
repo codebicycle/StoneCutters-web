@@ -9,7 +9,7 @@
             <tr style="display: none;">
                 <td>
                     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-                    {% include templateName %}            
+                    {% include templateName %}
                 </td>
             </tr>
         </table>
@@ -95,5 +95,7 @@
                 </tr>
             </table>
         </form>
+        {% from macros import breadcrumb %}
+        {{ breadcrumb(dictionary) }}
     </td>
 </tr>

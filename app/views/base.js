@@ -19,17 +19,19 @@ module.exports = RendrView.extend({
     },
     getTemplateData: function() {
         var data = RendrView.prototype.getTemplateData.call(this);
+        var template = this.app.getSession('template');
 
         return _.extend({}, data, {
             device: this.app.getSession('device'),
             platform: this.app.getSession('platform'),
-            template: this.app.getSession('template'),
+            template: template,
             siteLocation: this.app.getSession('siteLocation'),
             location: this.app.getSession('location'),
             dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['es-ES'],
             referer: this.app.getSession('referer'),
             url: this.app.getSession('url'),
-            sixpack: this.app.getSession('sixpack')
+            sixpack: this.app.getSession('sixpack'),
+            macros: 'compiled/' + template + '/partials/macros.html'
         });
     },
     getWapAttributes: function() {

@@ -1,97 +1,92 @@
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>{{ item.category.name }}</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, item.category.name) }}
 <div id="itemPage">
-	{% if item.status.visible %}
-		<h1>{{ item.title }}</h1>
-		{% if item.isFavorite %}
-			<form action="/items/{{ item.id }}/favorite/delete" method="POST">
-				<input type="submit" value="[mobilepromo.RemoveFromFavorites]" class="favorite favoriteOn" />
-			</form>
-		{% elif user %}
-			<form action="/items/{{ item.id }}/favorite" method="POST">
-				<input type="submit" value="[itemgeneraldetails.addFavorites]" class="favorite favoriteOff" />
-			</form>
-		{% else %}
-			<form action="/register">
-				<input type="submit" value="[itemgeneraldetails.addFavorites]" class="favorite favoriteOff" />
-			</form>
-		{% endif %}
-	    <h2>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h2>
-		<span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
-		<div id="itemPhotos">
-			{% if item.images.length == 0 %}
-				<span>(No hay foto disponible)</span>
-			{% elif item.images.length == 1 %}
-				<a href="">
-					<div class="arrow"></div>
-					<img alt="" src="{{item.images[0].url | static }}">
-				</a>
-			{% else %}
-				<a href="">
-					<div class="arrow"></div>
-					<img alt="" src="{{item.images[pos].url | static }}">
-				</a>
-				<div id="galeryPagination">
-					<a href="?pos={{ pos if pos == 0 else pos - 1 }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
-					<div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
-					<a href="?pos={{ pos if pos + 1 == item.images.length else pos + 1 }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
-				</div>
-			{% endif %}
-		</div>
+    {% if item.status.visible %}
+        <h1>{{ item.title }}</h1>
+        {% if item.isFavorite %}
+            <form action="/items/{{ item.id }}/favorite/delete" method="POST">
+                <input type="submit" value="[mobilepromo.RemoveFromFavorites]" class="favorite favoriteOn" />
+            </form>
+        {% elif user %}
+            <form action="/items/{{ item.id }}/favorite" method="POST">
+                <input type="submit" value="[itemgeneraldetails.addFavorites]" class="favorite favoriteOff" />
+            </form>
+        {% else %}
+            <form action="/register">
+                <input type="submit" value="[itemgeneraldetails.addFavorites]" class="favorite favoriteOff" />
+            </form>
+        {% endif %}
+        <h2>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h2>
+        <span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
+        <div id="itemPhotos">
+            {% if item.images.length == 0 %}
+                <span>(No hay foto disponible)</span>
+            {% elif item.images.length == 1 %}
+                <a href="">
+                    <div class="arrow"></div>
+                    <img alt="" src="{{item.images[0].url | static }}">
+                </a>
+            {% else %}
+                <a href="">
+                    <div class="arrow"></div>
+                    <img alt="" src="{{item.images[pos].url | static }}">
+                </a>
+                <div id="galeryPagination">
+                    <a href="?pos={{ pos if pos == 0 else pos - 1 }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
+                    <div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
+                    <a href="?pos={{ pos if pos + 1 == item.images.length else pos + 1 }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
+                </div>
+            {% endif %}
+        </div>
 
-		<h3>Contactar al Vendedor</h3>
+        <h3>Contactar al Vendedor</h3>
 
-		<div id="centerBtns">
-			{% if item.phone %}
-				{% if device.uriSchemeTel %}
-					<a href="tel:{{ item.phone }}" class="btns orange">Call</a>
-				{% endif %}
-				{% if device.uriSchemeSms %}
-					<a href="sms:{{ item.phone }}" class="btns orange">SMS</a>
-				{% endif %}
-			{% endif %}	
-			<a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" class="btns orange">Email</a>
-		</div>
-		{% if item.phone %}
-			<div id="phone">
-				<img alt="" src="{{ "/images/html4/phone.png" | static }}">
-				<span>{{ item.phone }}</span>
-			</div>
-		{% endif %}
-		<div class="line"></div>
+        <div id="centerBtns">
+            {% if item.phone %}
+                {% if device.uriSchemeTel %}
+                    <a href="tel:{{ item.phone }}" class="btns orange">Call</a>
+                {% endif %}
+                {% if device.uriSchemeSms %}
+                    <a href="sms:{{ item.phone }}" class="btns orange">SMS</a>
+                {% endif %}
+            {% endif %}
+            <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" class="btns orange">Email</a>
+        </div>
+        {% if item.phone %}
+            <div id="phone">
+                <img alt="" src="{{ "/images/html4/phone.png" | static }}">
+                <span>{{ item.phone }}</span>
+            </div>
+        {% endif %}
+        <div class="line"></div>
 
-		<ul>
-			{% if item.optionals %}
-	    		{% for optional in item.optionals %}
-	    			{% if optional.value %} 
-						<li><strong>{{ optional.label }}: </strong>{{ optional.value }}</li>
-	    			{% endif %}
-	    		{% endfor %}
-	    	{% endif %}
-	    	{% if item.coordinates %}
-	    		<li><strong>Mapa: </strong><a href="url-para-el-mapa/{{ item.id }}?latitude={{ item.coordinates.latitude }}&longitude={{ item.coordinates.longitude }}">Ver Mapa grande</a></li>
-	    	{% endif %}
-		</ul>
-		
-		<h3>Descripcion</h3>
+        <ul>
+            {% if item.optionals %}
+                {% for optional in item.optionals %}
+                    {% if optional.value %}
+                        <li><strong>{{ optional.label }}: </strong>{{ optional.value }}</li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if item.coordinates %}
+                <li><strong>Mapa: </strong><a href="url-para-el-mapa/{{ item.id }}?latitude={{ item.coordinates.latitude }}&longitude={{ item.coordinates.longitude }}">Ver Mapa grande</a></li>
+            {% endif %}
+        </ul>
 
-	    <p>{{ item.description }}</p>
+        <h3>Descripcion</h3>
 
-	    <div class="line"></div>
+        <p>{{ item.description }}</p>
 
-	    <div id="centerBtns">
-	    	<a href="" class="btns grey">Otros anuncios relacionados</a>
-	    </div>
-	{% else %}
-		<div id="itemDisable">Esse anúncio não está mais disponível</div>
-	{% endif %}
+        <div class="line"></div>
+
+        <div id="centerBtns">
+            <a href="" class="btns grey">Otros anuncios relacionados</a>
+        </div>
+    {% else %}
+        <div id="itemDisable">Esse anúncio não está mais disponível</div>
+    {% endif %}
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-<div class="breadcrumb">
-	<a href="/">back</a>
-	<a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary) }}
