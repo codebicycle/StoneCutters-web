@@ -100,10 +100,8 @@ zombie:
     ip: '127.0.0.1'
     port: 3030
     hosts:
-      - 'm2.olx.com.ar'
-      - 'm2.olx.com.br'
-      - 'm2.olx.de'
-      - 'm2.olx.in'
+      - 'html4.m.olx.de'
+      - 'html4.m.olx.in'
 
 analytics:
   google:
