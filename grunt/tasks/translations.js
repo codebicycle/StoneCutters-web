@@ -39,6 +39,7 @@ module.exports = function(grunt) {
         }
 
         function getVersion(done) {
+            console.log('1');
             restler
                 .get('http://elvira.olx.com.ar/tags/api/query.php?repo=smaug-translations&env=testing')
                 .on('success', done)
@@ -47,6 +48,7 @@ module.exports = function(grunt) {
         }
 
         function create(done, version) {
+            console.log('2');
             grunt.file.mkdir(destDir);
             file = fs.createWriteStream(dest).on('open', onOpen);
 
@@ -56,6 +58,7 @@ module.exports = function(grunt) {
         }
 
         function download(done, version) {
+            console.log('3');
             http.request({
                 host: 'jfrog.olx.com.ar',
                 path: '/artifactory/mobile-jenkins-release/olx/smaug-translations/smaug-translations-0.1.186.zip'
@@ -88,12 +91,14 @@ module.exports = function(grunt) {
         }
 
         function unZip(done) {
+            console.log('4');
             fs.createReadStream(dest).pipe(unzip.Extract({
                 path: destDir
-            })).on('close', done).on('error', done.fail);
+            })).on('close', done).on('end', done).on('error', done.fail);
         }
 
         function getTranslations(done) {
+            console.log('5');
             grunt.file.recurse('app/templates', function each(abspath, rootdir, subdir, filename) {
                 var file;
                 var matches;
@@ -120,6 +125,7 @@ module.exports = function(grunt) {
         }
 
         function getDictionaries(done) {
+            console.log('6');
             var promise = asynquence().or(done.fail);
             var index = "'use strict';\n\nmodule.exports = {";
             var j = 0;
@@ -136,13 +142,13 @@ module.exports = function(grunt) {
                     var dictionary = "'use strict';\n\nmodule.exports = {";
                     var i = 0;
 
-                    csv().from(destDir + '/' + language + '.csv').on('data', function onData(data) {
-                        data = data.split(',').slice(1);
-                        if (_.contains(translations, data[0])) {
+                    csv().from(destDir + '/' + language + '.csv').on('record', function onData(record) {
+                        record = record.slice(1);
+                        if (_.contains(translations, record[0])) {
                             if (i) {
                                 dictionary += ',';
                             }
-                            dictionary += "\n    '" + data[0] + "': '" + jsesc(data[1]) + "'";
+                            dictionary += "\n    '" + record[0] + "': '" + jsesc(record[1]) + "'";
                             i++;
                         }
                     }).on('end', function onEnd() {
@@ -160,6 +166,7 @@ module.exports = function(grunt) {
         }
 
         function clean(done) {
+            console.log('7');
             grunt.file.delete(destDir);
             done();
         }

@@ -19,7 +19,7 @@ ul, li {
 .visible {
     display: block;
 }
-.hide {
+.hide , .analytics {
     display: none;
 }
 .clear {
@@ -57,6 +57,7 @@ div.loading {
     float: left;
     margin: .25rem .5rem;
     background: url(imageUrl/images/html5/back.png);
+    text-indent: -9000px;
 }
 .breadcrumb h1 {
     float: left;
@@ -166,10 +167,97 @@ section form > select {
     background-size: 12px;
     outline: none;
 }
-.analytics {
-    display: none;
+/*----ItemListing----*/
+ul.itemListing {
+    padding: 0.3125rem;
+    background: #eaeaea;
+}
+ul.itemListing li {
+    padding: 0.3125rem 0 0 0;
+}
+ul.itemListing li:first-child {
+    padding: 0;
 }
 
+ul.itemListing li a {
+    display: block;
+    position: relative;
+    padding: 0.3125rem 0;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0.0625rem 0.0625rem 0.0625rem 0 #ccc;
+}
+ul.itemListing li a .image{
+    width: 5.938rem;
+    height: 5.938rem;
+    float: left;
+    margin: 0 0.3125rem;
+    box-shadow: 0 0 0 1px #EEEEEE inset;
+    background-image: url(imageUrl/images/html5/noPhoto.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #fff;
+}
+ul.itemListing li a .image.filled {
+    background-size: cover;
+}
+ul.itemListing li a p {
+    height: 0.8125rem;
+    padding: 0 0 0.625rem 0;
+    font-size: 0.8125rem;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 0.8125rem;
+}
+ul.itemListing li a h3 {
+    height: 1.25rem;
+    position: absolute;
+    right: .3rem;
+    bottom: .3rem;
+    color: #ff7700;
+    font-weight: bold;
+    line-height: 1.25rem;
+    text-align: right;
+}
+ul.itemListing li a .title {
+    height: 2.625rem;
+    margin: 0 0 0 0.3125rem;
+    font-size: 1.125rem;
+    line-height: 1.313rem;
+    overflow: hidden;
+}
+ul.itemListing li a .title h2 {
+    width: 100%;
+    height: 2.625rem;
+    margin: 0;
+    display: table;
+    table-layout: fixed;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: normal;
+}
+ul.itemListing li a .title h2 span {
+    color: #494949;
+    display: table-cell;
+    vertical-align: middle;
+}
+/*----Popups----*/
+.popup {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; background: rgba(0, 0, 0, .5); -moz-transition: all 400ms ease-in-out 0ms; -webkit-transition: all 400ms ease-in-out 0ms; transition: all 400ms ease-in-out 0ms;}
+.popup-wrapper {display: table-cell; width: 100%; height: 100%; padding: 1rem; text-align: center; vertical-align: middle; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+.popup-container {display: block; overflow: hidden; width: 100%; margin: 0 auto; padding: 1rem; text-align: left; background-color: #FFF; border: solid thin #4275BA; border-radius: .5rem; box-shadow: 0 0 .5rem rgba(0, 0, 0, .5); -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; -moz-transform: scale(0); -moz-transition: all 250ms ease-in-out 0ms; -webkit-transform: scale(0); -webkit-transition: all 250ms ease-in-out 0ms; transform: scale(0); transition: all 250ms ease-in-out 0ms;}
+.popup-container h4 {position: relative; margin:0; padding-bottom: 1rem; font-weight: normal; text-align: center; text-transform: uppercase; line-height: 1em; color: #4275BA; border-bottom: solid thin #4275BA;}
+.popup-container > div {overflow: auto; width: 100%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: -2rem 0 -3.75rem; border-style: solid; border-color: #FFF; border-width: 2rem 0 3.75rem;}
+.popup-container li:not(:first-child) {border-top: solid thin #CCC;}
+.popup-container > div ul {padding: .5em 0; list-style: none;}
+.popup-container > div ul li {padding: .5em 0;}
+.popup-container > div ul a {display: block; padding: .5em 0; line-height: 1em; color: #666;}
+.popup-container > div ul a:before {content:''; float: left; width: 2em; height: 2em; margin: -.5em 0 -.5em -.5em; background-repeat: no-repeat; background-position: center; background-color: transparent;}
+.popup-container footer {position: relative; padding: 1rem 1rem 0; text-align: center; border-top: solid thin #CCC;}
+.popup-container footer a {padding: .75rem 2.75rem; display: inline-block;}
+.popup.visible {display: table;}
+.popup.visible .popup-container {-moz-transform: scale(1); -webkit-transform: scale(1); transform: scale(1);}
 
 /* Icons map */
 .ar-icons,
