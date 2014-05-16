@@ -156,9 +156,6 @@ module.exports = {
                 return;
             }
 
-            helpers.seo.resetHead();
-            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slug, '-cat-', params.catId].join(''));
-
             prepareParams(app, params);
             query = _.clone(params);
             params.categoryId = params.catId;
@@ -167,6 +164,9 @@ module.exports = {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
+
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slug, '-cat-', query.catId, (query.page ? '-p-' + query.page : '')].join(''));
 
             /** don't read from cache, because rendr caching expects an array response
             with ids, and smaug returns an object with 'data' and 'metadata' */
@@ -312,9 +312,6 @@ module.exports = {
             var category = helpers.categories.getCat(app.getSession(), params.catId);
             var query;
 
-            helpers.seo.resetHead();
-            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/nf/search/', params.search].join(''));
-
             prepareParams(app, params);
             query = _.clone(params);
             params.searchTerm = params.search;
@@ -323,6 +320,9 @@ module.exports = {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
+
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/nf/search/', query.search, (query.page ? '/-p-' + query.page : '')].join(''));
 
             //don't read from cache, because rendr caching expects an array response
             //with ids, and smaug returns an object with 'data' and 'metadata'
