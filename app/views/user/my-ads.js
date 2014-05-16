@@ -19,7 +19,6 @@ module.exports = BaseView.extend({
             $('.viewItem').attr("href", itemUrl);
             $('.editItem').attr("href", 'urlForEdit');
             $('.deleteItem').attr("href", 'urlForDelete');
-            $('body').addClass('noscroll');
             $('#edit').addClass('visible');
         });
         $('.popup-close').click(function(e) {
@@ -27,7 +26,6 @@ module.exports = BaseView.extend({
             $('.viewItem').attr("href", '#');
             $('.editItem').attr("href", '#');
             $('.deleteItem').attr("href", '#');
-            $('body').removeClass('noscroll');
             $('#edit').removeClass('visible');
         });
     }

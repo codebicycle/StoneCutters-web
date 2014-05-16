@@ -18,14 +18,12 @@ module.exports = BaseView.extend({
             var itemUrl = element.attr('data-itemUrl');
             $('.viewItem').attr("href", itemUrl);
             $('.removeItem').attr("href", 'urlForRemoveFav');
-            $('body').addClass('noscroll');
             $('#favoritePopup').addClass('visible');
         });
         $('.popup-close').click(function(e) {
             e.preventDefault();
             $('.viewItem').attr("href", '#');
             $('.removeItem').attr("href", '#');
-            $('body').removeClass('noscroll');
             $('#favoritePopup').removeClass('visible');
         });
     }
