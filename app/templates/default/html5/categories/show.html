@@ -5,16 +5,11 @@
     {% from macros import breadcrumb %}
     {% set link = (referer | breadcrumb | link) %}
     {{ breadcrumb(dictionary, link, category.name) }}
-    <div id="title">
-        <a href="/"></a>
-        <h1>{{category.name}}</h1>
-    </div>
     <ul>
         {% for subcategory in category.children %}
             <li>
                 <a href="/{{ subcategory.trName | urlize }}-cat-{{subcategory.id}}-p-1?location={{params.location}}">
-                    {{subcategory.trName}}
-                    <span class="count">{{subcategory.counter}}</span>
+                    {{subcategory.trName}} ({{subcategory.counter}})
                 </a>
             </li>
         {% endfor %}

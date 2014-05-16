@@ -90,7 +90,7 @@ module.exports = function(grunt) {
         function unZip(done) {
             fs.createReadStream(dest).pipe(unzip.Extract({
                 path: destDir
-            })).on('close', done).on('error', done.fail);
+            })).on('close', done).on('end', done).on('error', done.fail);
         }
 
         function getTranslations(done) {

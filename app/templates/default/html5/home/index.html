@@ -2,17 +2,16 @@
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
 <section id="categories">
-	<ul>
+	<ul class="{{ icons[icons.length - 1] }}-icons">
 		{% for category in categories.models %}
 			<li>
 				<a href="{{ ['/', category.trName | urlize, '-cat-', category.id] | join | link }}" >
-					<span class="home-icon" id="catid-{{category.id}}"></span>
+					<span class="icon cat-{{ category.id }}"></span>
 			        {{category.trName}}
 		        </a>
 		    </li>
 		{% endfor %}
 	</ul>
-
-    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+	{% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}   
 </section>

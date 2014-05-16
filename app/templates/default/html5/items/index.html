@@ -5,7 +5,7 @@
     {% from macros import breadcrumb %}
     {% set link = (referer | breadcrumb | link) %}
     {{ breadcrumb(dictionary, link, category.name, '<span class="switchView"></span>') }}
-    <ul class="">
+    <ul class="itemListing">
         {% for item in items %}
             <li>
                 <a href="/{{ item.title | urlize }}-iid-{{item.id}}">
