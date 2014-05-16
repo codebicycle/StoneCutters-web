@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Aking mga Patalastas',
     'myolx.MyBrand': 'Aking <<BRAND>>',
     'myolx.MyFavorites': 'Aking mga Paborito',
+    'myolx.MyOLX': 'Aking OLX',
     'myolx.Send': 'Ipadala',
     'myolx.SignOut': 'Mag-sign Out',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Wala kang aktibong mga patalastas sa kasalukuyan',

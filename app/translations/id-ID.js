@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Iklan Saya',
     'myolx.MyBrand': '<<BRAND>> Saya',
     'myolx.MyFavorites': 'Favorit saya',
+    'myolx.MyOLX': 'OLX Saya',
     'myolx.Send': 'Kirim',
     'myolx.SignOut': 'Keluar',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Saat ini Anda tidak mempunyai iklan yang aktif',

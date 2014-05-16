@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Rao V\u1EB7t C\u1EE7a T\xF4i',
     'myolx.MyBrand': '<<BRAND>> c\u1EE7a t\xF4i',
     'myolx.MyFavorites': 'M\u1EE5c y\xEAu th\xEDch c\u1EE7a t\xF4i',
+    'myolx.MyOLX': 'OLX c\u1EE7a t\xF4i',
     'myolx.Send': 'G\u1EEDi',
     'myolx.SignOut': 'Tho\xE1t',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Hi\u1EC7n t\u1EA1i b\u1EA1n kh\xF4ng c\xF3 danh m\u1EE5c ho\u1EA1t \u0111\u1ED9ng n\xE0o',

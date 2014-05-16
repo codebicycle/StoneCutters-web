@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Mano skelbimai',
     'myolx.MyBrand': 'Mano <<BRAND>>',
     'myolx.MyFavorites': 'Mano m\u0117gstamiausieji',
+    'myolx.MyOLX': 'Mano OLX',
     'myolx.Send': 'Si\u0173sti',
     'myolx.SignOut': 'I\u0161siregistruoti',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u0160iuo metu neturite aktyvi\u0173 skelbim\u0173',

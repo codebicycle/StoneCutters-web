@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Hirdet\xE9seim',
     'myolx.MyBrand': 'Saj\xE1t <<BRAND>>',
     'myolx.MyFavorites': 'Kedvenceim',
+    'myolx.MyOLX': 'Saj\xE1t OLX',
     'myolx.Send': 'K\xFCld\xE9s',
     'myolx.SignOut': 'Kijelentkez\xE9s',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Jelenleg nincs akt\xEDv hirdet\xE9se',

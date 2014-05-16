@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Moji oglasi',
     'myolx.MyBrand': 'Moj <<BRAND>>',
     'myolx.MyFavorites': 'Moji favoriti',
+    'myolx.MyOLX': 'Moj OLX',
     'myolx.Send': 'Po\u0161alji',
     'myolx.SignOut': 'Odjava',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Trenutno nemate aktivnih oglasa',

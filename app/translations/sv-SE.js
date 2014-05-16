@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Mina annonser',
     'myolx.MyBrand': 'Mitt <<BRAND>>',
     'myolx.MyFavorites': 'Mina favoriter',
+    'myolx.MyOLX': 'Mitt OLX',
     'myolx.Send': 'Skicka',
     'myolx.SignOut': 'Logga ut',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Du har f\xF6r tillf\xE4llet inga aktiva annonser ',

@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Meine Kleinanzeigen',
     'myolx.MyBrand': 'Mein <<BRAND>>',
     'myolx.MyFavorites': 'Meine Favoriten',
+    'myolx.MyOLX': 'Mein OLX',
     'myolx.Send': 'Senden',
     'myolx.SignOut': 'Abmelden',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Sie haben zur Zeit keine aktiven Kleinanzeigen',

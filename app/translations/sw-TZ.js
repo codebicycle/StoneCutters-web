@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Matangazo Yangu',
     'myolx.MyBrand': '<<BRAND>> Yangu',
     'myolx.MyFavorites': 'Vibwedo Vyangu',
+    'myolx.MyOLX': 'My OLX',
     'myolx.Send': 'Tuma',
     'myolx.SignOut': 'Toka',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Kwa sasa hauna matangazo amilifu',

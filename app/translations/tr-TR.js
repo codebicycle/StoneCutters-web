@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': '\u0130lanlar\u0131m',
     'myolx.MyBrand': '<<BRAND>> Bana \xD6zel',
     'myolx.MyFavorites': 'Favorilerim',
+    'myolx.MyOLX': 'OLX Bana \xD6zel',
     'myolx.Send': 'Yolla',
     'myolx.SignOut': '\xDCye \xC7\u0131k\u0131\u015F\u0131',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u015Eu an aktif ilan\u0131n\u0131z bulunmuyor',

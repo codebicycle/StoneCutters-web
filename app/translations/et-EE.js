@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Minu kataloogid',
     'myolx.MyBrand': 'Minu <<BRAND>>',
     'myolx.MyFavorites': 'Minu lemmikud',
+    'myolx.MyOLX': 'Minu OLX',
     'myolx.Send': 'Saada',
     'myolx.SignOut': 'Logi v\xE4lja',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Hetkel pole aktiivseid kuulutusi',

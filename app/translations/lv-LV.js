@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Mani sludin\u0101jumi',
     'myolx.MyBrand': 'Mans <<BRAND>>',
     'myolx.MyFavorites': 'Mani favor\u012Bti',
+    'myolx.MyOLX': 'Mans OLX',
     'myolx.Send': 'Nos\u016Bt\u012Bt',
     'myolx.SignOut': 'Izrakst\u012Bties',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Jums \u0161obr\u012Bd nav akt\u012Bvu zi\u0146ojumu',

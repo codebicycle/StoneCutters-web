@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'My Ads',
     'myolx.MyBrand': 'My <<BRAND>>',
     'myolx.MyFavorites': 'My Favorites',
+    'myolx.MyOLX': 'My OLX',
     'myolx.Send': 'Send',
     'myolx.SignOut': 'Sign out',
     'myolx.YouCurrentlyHaveNoActiveListings': 'You currently have no active ads',

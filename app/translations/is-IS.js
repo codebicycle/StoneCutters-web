@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Augl\xFDsingarnar m\xEDnar',
     'myolx.MyBrand': 'Mitt <<BRAND>>',
     'myolx.MyFavorites': 'Upp\xE1haldi\xF0 mitt',
+    'myolx.MyOLX': 'Mitt OLX',
     'myolx.Send': 'Senda',
     'myolx.SignOut': '\xDAtskr\xE1ning',
     'myolx.YouCurrentlyHaveNoActiveListings': '\xDE\xFA ert ekki me\xF0 neinar virkar augl\xFDsingar \xED augnablikinu',

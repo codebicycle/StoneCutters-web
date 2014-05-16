@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Mine annoncer',
     'myolx.MyBrand': 'Min <<BRAND>>',
     'myolx.MyFavorites': 'Mine favoritter',
+    'myolx.MyOLX': 'Min OLX',
     'myolx.Send': 'Send',
     'myolx.SignOut': 'Log ud',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Du har ingen aktive annoncer',

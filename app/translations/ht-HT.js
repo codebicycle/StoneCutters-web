@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Anons Mwen yo',
     'myolx.MyBrand': '<<BRAND>> Mwen',
     'myolx.MyFavorites': 'Favori mwen yo',
+    'myolx.MyOLX': 'OLX Mwen',
     'myolx.Send': 'Voye',
     'myolx.SignOut': 'Dekonekte',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Ou pa genyen anons aktiv pou konyea a',

@@ -106,7 +106,7 @@ module.exports = function(grunt) {
         }
 
         function eachIconLocation(location) {
-            var dir = 'public/images/' + platform + '/icons/' + location;
+            var dir = 'app/icons/' + location + '/' + platform;
 
             if (grunt.file.exists(dir)) {
                 grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {

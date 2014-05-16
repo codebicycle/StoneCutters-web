@@ -68,6 +68,7 @@ module.exports = {
     'myolx.MyAds': 'Omat ilmoitukset',
     'myolx.MyBrand': 'Oma <<BRAND>>',
     'myolx.MyFavorites': 'Omat suosikit',
+    'myolx.MyOLX': 'Oma OLX',
     'myolx.Send': 'L\xE4het\xE4',
     'myolx.SignOut': 'Kirjaudu ulos',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Sinulla ei ole aktiivisia ilmoituksia',

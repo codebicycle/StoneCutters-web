@@ -24,7 +24,7 @@ module.exports = {
             helpers.seo.addMetatag('canonical', 'http://' + siteLocation);
             callback(null, {
                 categories: this.app.getSession('categories'),
-                icons: (~icons.indexOf(country)) ? country : 'default',
+                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
                 analytics: helpers.analytics.generateURL(this.app.getSession())
             });
         }
