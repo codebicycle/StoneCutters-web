@@ -1,12 +1,6 @@
 {% from macros import breadcrumb, breadcrumbHome %}
 {{ breadcrumb(dictionary, dictionary["registerheader.Register"]) }}
 <div id="register">
-    <div id="errors">
-        {% for field, error in params %}
-            {{error}}<br>
-        {% endfor %}
-    </div>
-
     <form action="/register" method="POST" enctype="multipart/form-data">
         <div class="formField">
             <label>Nombre de usuario</label>
