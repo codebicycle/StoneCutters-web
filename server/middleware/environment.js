@@ -15,12 +15,15 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             var app = req.rendrApp;
             var path = req._parsedUrl.pathname;
-            var url = req.originalUrl;
-            var host = req.headers.host;
             var protocol = req.protocol;
-            var referer = app.getSession('url');
+            var host = req.headers.host;
+            var url = req.originalUrl;
+            var referer = req.headers.referer;
             var clientId = app.getSession('clientId');
 
+            if (referer && url.indexOf('/pageview.gif') !== 0) {
+                referer = referer.replace(new RegExp('^' + protocol + '://' + host, 'gi'), '');
+            }
             if (typeof clientId === 'undefined') {
                 app.persistSession({
                     clientId: uuid.v4()
@@ -28,12 +31,11 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             app.updateSession({
                 path: path,
-                referer: referer,
-                url: url,
                 protocol: protocol,
-                host: host
+                host: host,
+                url: url,
+                referer: referer || '/'
             });
-
             next();
         };
 

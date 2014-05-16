@@ -2,7 +2,8 @@
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, dictionary["defaultfooter.PublishFreeAd"]) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}
 <div id="success">
     <div>
         <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
@@ -16,4 +17,4 @@
         <a href="/" class="back">{{ dictionary["misc.BackToStart_Mob"] }}</a>
     </div>
 </div>
-{{ breadcrumbHome(dictionary) }}
+{{ breadcrumbHome(dictionary, link) }}

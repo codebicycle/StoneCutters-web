@@ -2,7 +2,8 @@
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
 {% from macros import breadcrumb %}
-{{ breadcrumb(dictionary, dictionary["registerheader.Register"]) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
 <section id="login">
     <form action="/register" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["register_mail.Username"] }}</label>

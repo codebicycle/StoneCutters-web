@@ -2,6 +2,7 @@
 
 var config = require('../../config');
 var common = require('../common');
+var controllers = require('../controllers');
 var _ = require('underscore');
 var dateformat = require('dateformat');
 
@@ -200,6 +201,20 @@ module.exports = function(nunjucks) {
         },
         date: function(timestamp) {
             return dateformat(new Date(timestamp), 'yyyy-mm-dd');
+        },
+        breadcrumb: function(referer) {
+            var breadcrumb = referer;
+            var currentRoute = this.ctx.currentRoute;
+
+            if (currentRoute.controller === 'items') {
+                if (currentRoute.action === 'index') {
+                    var categoryId = this.ctx.category.parentId;
+                    var category = this.ctx._app.getSession('categories')._byId[categoryId];
+
+                    breadcrumb = '/' + common.urlize(category.trName) + '-cat-' + categoryId;
+                }
+            }
+            return breadcrumb || '/';
         },
         urlize: common.urlize
     };

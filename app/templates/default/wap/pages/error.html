@@ -46,6 +46,7 @@
             <pre id="stacktrace">{{error.detail}}</pre>
         {% endif %}
         {% from macros import breadcrumb %}
-        {{ breadcrumb(dictionary) }}
+        {% set link = (referer | breadcrumb | link) %}
+        {{ breadcrumb(dictionary, link) }}
     </td>
 </tr>

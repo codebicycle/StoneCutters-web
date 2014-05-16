@@ -31,7 +31,8 @@ module.exports = RendrView.extend({
             referer: this.app.getSession('referer'),
             url: this.app.getSession('url'),
             sixpack: this.app.getSession('sixpack'),
-            macros: 'compiled/' + template + '/partials/macros.html'
+            macros: 'compiled/' + template + '/partials/macros.html',
+            currentRoute: this.app.getSession('currentRoute')
         });
     },
     getWapAttributes: function() {

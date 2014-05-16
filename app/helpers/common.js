@@ -104,12 +104,16 @@ module.exports = (function() {
             return href;
         }
         if (~href.indexOf('?')) {
-            href += '&';
+            if (href.slice(-1) !== '&') {
+                href += '&';
+            }
         }
         else {
             href += '?';
         }
-        href += 'location=' + siteLocation;
+        if (!(~href.indexOf('location=' + siteLocation))) {
+            href += 'location=' + siteLocation;
+        }
         return href;
     }
 
