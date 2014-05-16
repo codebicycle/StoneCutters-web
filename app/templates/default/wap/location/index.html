@@ -6,7 +6,7 @@
                     <td style="padding: .5em;">
                         <small>
                             <img src="{{ "/images/wap/ico_city.gif" | static }}">
-                            <small> 
+                            <small>
                                 <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
                             </small>
                         </small>
@@ -60,6 +60,7 @@
             </table>
         {% endif %}
         {% from macros import breadcrumb %}
-        {{ breadcrumb(dictionary) }}
+        {% set link = (referer | breadcrumb | link) %}
+        {{ breadcrumb(dictionary, link) }}
     </td>
 </tr>

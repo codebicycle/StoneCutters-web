@@ -3,7 +3,8 @@
 {% include templateName %}
 <section id="itemListing">
     {% from macros import breadcrumb %}
-    {{ breadcrumb(dictionary, category.name, '/', '<span class="switchView"></span>') }}
+    {% set link = (referer | breadcrumb | link) %}
+    {{ breadcrumb(dictionary, link, category.name, '<span class="switchView"></span>') }}
     <ul class="">
         {% for item in items %}
             <li>

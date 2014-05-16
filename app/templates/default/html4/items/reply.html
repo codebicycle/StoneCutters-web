@@ -1,5 +1,6 @@
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, dictionary["contactseller_form.ReplyToThisAd"]) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToThisAd"]) }}
 <div id="reply">
     <form action="/items/{{ item.id }}/reply" method="POST" enctype="multipart/form-data">
         {% if errors %}
@@ -39,4 +40,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary) }}
+{{ breadcrumbHome(dictionary, link) }}

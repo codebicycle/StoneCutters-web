@@ -7,6 +7,9 @@ var _ = require('underscore');
 var session;
 
 function setSession() {
+    if (typeof window === 'undefined') {
+        return;
+    }
     session = _.extend(this.app.get('session'), cookies.getAll());
 
     this.app.updateSession = function(pairs) {
@@ -38,19 +41,43 @@ function setSession() {
 }
 
 function setUrlVars() {
+    if (typeof window === 'undefined') {
+        return;
+    }
     var location = window.location;
-    var url = location.href;
-    var path = location.pathname;
-    var referer = this.app.getSession('url');
 
     this.app.updateSession({
-        path: path,
-        referer: referer,
-        url: url
+        path: location.pathname,
+        url: location.href,
+        referer: this.app.getSession('referer') || '/'
+    });
+}
+
+function setLanguage(params) {
+    if (typeof window === 'undefined') {
+        return;
+    }
+    var languages = this.app.getSession('languages');
+    var selectedLanguage = this.app.getSession('selectedLanguage');
+
+    if (!params || !params.language || selectedLanguage === params.language || !languages._byId[params.language]) {
+        return;
+    }
+    this.app.persistSession({
+        selectedLanguage: params.language
+    });
+}
+
+function setCurrentRoute() {
+    this.app.updateSession({
+        currentRoute: this.currentRoute
     });
 }
 
 function setLocation(params, callback) {
+    if (typeof window === 'undefined') {
+        return callback();
+    }
     var app = this.app;
     var location = this.app.getSession('location');
     var previousLocation;
@@ -90,25 +117,11 @@ function setLocation(params, callback) {
     });
 }
 
-function setLanguage(params) {
-    var languages = this.app.getSession('languages');
-    var selectedLanguage = this.app.getSession('selectedLanguage');
-
-    if (!params || !params.language || selectedLanguage === params.language || !languages._byId[params.language]) {
-        return;
-    }
-    this.app.persistSession({
-        selectedLanguage: params.language
-    });
-}
-
 module.exports = {
     control: function(that, params, callback) {
         callback = callback.bind(that);
-        if (typeof window === 'undefined') {
-            return callback();
-        }
         setSession.call(that);
+        setCurrentRoute.call(that);
         setUrlVars.call(that);
         setLanguage.call(that);
         setLocation.call(that, params, callback);

@@ -51,6 +51,7 @@
         {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
         {% include templateName %}
         {% from macros import breadcrumb %}
-        {{ breadcrumb(dictionary) }}
+        {% set link = (referer | breadcrumb | link) %}
+        {{ breadcrumb(dictionary, link) }}
     </td>
 </tr>

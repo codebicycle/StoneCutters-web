@@ -1,5 +1,6 @@
 {% from macros import breadcrumb %}
-{{ breadcrumb(dictionary, dictionary["homeheader.My OLX"]) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["homeheader.My OLX"]) }}
 <section id="login">
     <form action="/login" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>

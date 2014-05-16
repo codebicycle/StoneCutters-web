@@ -6,7 +6,8 @@
     {% set s = '' %}
 {% endif %}
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, [dictionary["defaultheader.Search"], search] | join(': '), '/', ['<div class="searchResultsCount">
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, [dictionary["defaultheader.Search"], search] | join(': '), ['<div class="searchResultsCount">
     <span class="searchResultsNumber">', metadata.total, '</span>
     <span class="searchResultsText">', dictionary["itemslisting.Results"], '</span>
 </div>'] | join) }}
@@ -57,4 +58,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary) }}
+{{ breadcrumbHome(dictionary, link) }}
