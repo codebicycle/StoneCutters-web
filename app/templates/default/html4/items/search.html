@@ -10,10 +10,10 @@
     <span class="searchResultsNumber">', metadata.total, '</span>
     <span class="searchResultsText">', dictionary["itemslisting.Results"], '</span>
 </div>'] | join) }}
-<div id="search">
+<div id="searchListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">
-            Lo lamentamos pero no hay resultados para tu búsqueda.
+            {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
         </div>
     {% else %}
         <ul class="itemListing">
