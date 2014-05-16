@@ -17,11 +17,11 @@
 {% if user %}
 <menu id="myOlx">
         <ul>
-            <li><a href="">My Ads</a></li>
-            <li><a href="">My Messages</a>
+            <li><a href="{{ 'myolx/myadslisting' | link }}">{{ dictionary["myolx.MyAds"] }}</a></li>
+            <!--li><a href="">My Messages</a>
                 {{ "<span>"+user.unreadMessagesCount+"</span>" if user.unreadMessagesCount > 0 }}
-            </li>
-            <li><a href="">My Favorites</a></li>
+            </li-->
+            <li><a href="{{ 'myolx/favoritelisting' | link }}">{{ dictionary["myolx.MyFavorites"] }}</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </menu>
