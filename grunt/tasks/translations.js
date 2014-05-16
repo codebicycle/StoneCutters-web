@@ -136,13 +136,13 @@ module.exports = function(grunt) {
                     var dictionary = "'use strict';\n\nmodule.exports = {";
                     var i = 0;
 
-                    csv().from(destDir + '/' + language + '.csv').on('data', function onData(data) {
-                        data = data.split(',').slice(1);
-                        if (_.contains(translations, data[0])) {
+                    csv().from(destDir + '/' + language + '.csv').on('record', function onData(record) {
+                        record = record.slice(1);
+                        if (_.contains(translations, record[0])) {
                             if (i) {
                                 dictionary += ',';
                             }
-                            dictionary += "\n    '" + data[0] + "': '" + jsesc(data[1]) + "'";
+                            dictionary += "\n    '" + record[0] + "': '" + jsesc(record[1]) + "'";
                             i++;
                         }
                     }).on('end', function onEnd() {
