@@ -4,9 +4,10 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var asynquence = require('asynquence');
+        var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path) || _.contains(excludedUrls.data, req.path)) {
                 return next();
             }
 

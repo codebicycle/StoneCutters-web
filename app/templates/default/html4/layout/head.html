@@ -1,3 +1,11 @@
-<title>Arwen STANDARD Layout</title>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable: no" />
+<title>{{head.title}}</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+{% for metatag in head.metatags %}
+    <meta name="{{metatag.name}}" content="{{metatag.content}}" />
+{% endfor %}
 <link href="{{'/css/template/styles.css' | replace('template', template) | static }}" media="screen" rel="stylesheet" type="text/css" />
+{% if head.canonical %}
+    <link rel="canonical" href="{{head.canonical}}" >
+{% endif %}
+<link rel="shortcut icon" href="{{ '/images/common/favicon.ico' | static }}" type="image/x-icon">

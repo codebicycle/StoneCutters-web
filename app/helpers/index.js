@@ -2,12 +2,13 @@
 
 module.exports = {
     nunjucks: require('./nunjucks'),
-    environment: require('./environment'),
+    controllers: require('./controllers'),
     analytics: require('./analytics'),
     categories: require('./categories'),
     marketing: require('./marketing'),
-    cookies: require('./cookies'),
     seo: require('./seo'),
+    common: require('./common'),
+    urls: require('./urls'),
     fitText: function(element, kompressor, options) {
         var compressor = kompressor || 1;
         var settings = $.extend({

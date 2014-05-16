@@ -4,33 +4,27 @@ var helpers = require('../helpers');
 
 module.exports = {
     index: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var location = app.getSession('location');
-        var cities = location.topCities;
+        helpers.controllers.control(this, params, controller);
 
-        if (!params.search) {
-            location.cities = cities;
-            return callback(null, {
-                location: location,
-                cities: cities.models,
-                target: params.target,
-                platform: app.getSession('platform'),
-                template: app.getSession('template')
-            });
-        }
+        function controller() {
+            var spec;
 
-        (function fetchCities() {
-            var spec = {
+            if (!params.search) {
+                return callback(null, {
+                    cities: this.app.getSession('location').topCities.models,
+                    target: params.target
+                });
+            }
+            spec = {
                 cities: {
                     collection: 'Cities',
                     params: {
-                        location: app.getSession('siteLocation'),
+                        location: this.app.getSession('siteLocation'),
                         name: params.search
                     }
                 }
             };
-
-            app.fetch(spec, function afterFetch(err, result) {
+            this.app.fetch(spec, function afterFetch(err, result) {
                 var cities = {
                     'models': result.cities.toJSON(),
                     '_byId': {},
@@ -38,19 +32,14 @@ module.exports = {
                 };
 
                 cities.models.forEach(function sortCity(city) {
-                    cities._byId[city.id] = city;
+                    cities._byId[city.url] = city;
                 });
-                location.cities = cities;
-
                 callback(err, {
-                    location: location,
                     cities: cities.models,
                     search: params.search,
-                    posting: params.posting,
-                    platform: app.getSession('platform'),
-                    template: app.getSession('template')
+                    posting: params.posting
                 });
             });
-        })();
+        }
     }
 };

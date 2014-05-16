@@ -3,25 +3,39 @@
 var _ = require('underscore');
 var head = {
     title: 'OLX Mobile',
-    metatags: []
+    canonical: '',
+    metatags: {}
 };
+
+function checkSpecials(name, content) {
+    if (name === 'title' || name === 'canonical') {
+        head[name] = content;
+        return true;
+    }
+    return false;
+}
 
 module.exports = {
     getHead: function() {
-        return _.clone(head);
+        var clone = _.clone(head);
+
+        clone.metatags = Object.keys(clone.metatags).map(function each(metatag) {
+            return {
+                name: metatag,
+                content: clone.metatags[metatag]
+            };
+        });
+        return clone;
     },
     resetHead: function() {
         head.title = 'OLX Mobile';
-        head.metatags = [];
+        head.canonical = '';
+        head.metatags = {};
     },
     addMetatag: function(name, content) {
-        if (name === 'title') {
-            head.title = content;
+        if (checkSpecials(name, content)) {
             return;
         }
-        head.metatags.push({
-            name: name,
-            content: content
-        });
+        head.metatags[name] = content;
     }
 };

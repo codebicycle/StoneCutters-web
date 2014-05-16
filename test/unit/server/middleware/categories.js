@@ -16,10 +16,6 @@ var userAgents = ['UCWEB/8.8 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0
 function expressConfiguration(app) {
     return function expressConfiguration() {
         app.use(express.cookieParser());
-        app.use(express.session({
-            store: require('../../../../server/memcached')(express),
-            secret: 'test'
-        }));
     };
 }
 
@@ -28,6 +24,7 @@ describe('server', function test() {
         describe('categories', function test() {
             var app;
             var response;
+            var after;
 
             before(function before(done) {
                 app = express();
@@ -75,7 +72,8 @@ describe('server', function test() {
             });
             it('should be added to the session', function test(done) {
                 var before = response.body.before;
-                var after = response.body.after;
+
+                after = response.body.after;
 
                 (function existance(before, after) {
                     before.should.not.have.property('categories');
@@ -93,12 +91,11 @@ describe('server', function test() {
                     .end(end);
 
                 function end(err, response) {
-                    var before = response.body.before;
-                    var after = response.body.after;
+                    var newAfter = response.body.after;
 
                     (function equality(before, after) {
                         before.should.equal(after);
-                    })(JSON.stringify(before.session.categories), JSON.stringify(after.session.categories));
+                    })(JSON.stringify(after.session.categories), JSON.stringify(newAfter.session.categories));
 
                     done();
                 }
@@ -112,12 +109,11 @@ describe('server', function test() {
                     .end(end);
 
                 function end(err, response) {
-                    var before = response.body.before;
-                    var after = response.body.after;
+                    var newAfter = response.body.after;
 
                     (function equality(before, after) {
                         before.should.not.equal(after);
-                    })(JSON.stringify(before.session.categories), JSON.stringify(after.session.categories));
+                    })(JSON.stringify(after.session.categories), JSON.stringify(newAfter.session.categories));
 
                     done();
                 }

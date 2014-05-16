@@ -27,13 +27,13 @@
 
                 <div class="block" id="c-{{category.id}}" style="background-color: rgb(255, 255, 255);">
                     <h3>
-                        <a href="/change-this-description-for-the-category-cat-{{category.id}}?location={{siteLocation}}">
+                        <a href="/{{ category.trName | urlize }}-cat-{{category.id}}?location={{siteLocation}}">
                             <strong>{{category.name}}</strong>
                         </a>
                         <span class="cat-counter">{{category.counter}} Ads</span>
                     </h3>
                     {% for subCategory in category.children %}
-                        <a href="/change-this-description-for-the-category-cat-{{subCategory.id}}?location={{siteLocation}}">{{subCategory.name}}</a>
+                        <a href="/{{ category.trName | urlize }}-cat-{{subCategory.id}}?location={{siteLocation}}">{{subCategory.name}}</a>
                     {% endfor %}
                 </div>
                 
@@ -158,4 +158,7 @@
             </div>
         </div>
     </div>
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}    
 </div>

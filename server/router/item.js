@@ -37,7 +37,6 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                console.log(err);
                 var url = req.headers.referer;
                 var qIndex = url.indexOf('?');
 
@@ -127,7 +126,7 @@ module.exports = function(app, dataAdapter) {
                 }
                 if (user) {
                     query.token = user.token;
-                } 
+                }
                 else if (item.id && item.sk) {
                     query.securityKey = item.sk;
                     delete item.sk;
@@ -148,7 +147,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(response, item) {
-                res.redirect('/change-this-description-for-the-item-iid-' + item.id + '?sk=' + item.securityKey);
+                res.redirect('/posting/success/' + item.id + '?sk=' + item.securityKey);
                 clean();
             }
 
@@ -208,7 +207,7 @@ module.exports = function(app, dataAdapter) {
                     query: {
                         token: user.token,
                         languageId: languages._byId[selectedLanguage].id,
-                        languageCode: selectedLanguage
+                        languageCode: languages._byId[selectedLanguage].isocode.toLowerCase()
                     }
                 }, done.errfcb);
             }

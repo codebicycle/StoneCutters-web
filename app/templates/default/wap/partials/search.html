@@ -1,11 +1,10 @@
 <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
     <tr>
         <td style="border-top: solid thin #B0B0B0;">
-            <!-- <small>{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}</small> -->
-            <small>What are you looking for?</small>
-            <form action="/search/page/1">
+            <small>{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}</small>
+            <form action="/nf/search/redirect" method="post">
                 <input type="text" name="search" value="">
-                <input type="submit" name="search_button" value="[homeheader.Search]">
+                <input type="submit" name="search_button" value="{{ dictionary["homeheader.Search"] }}">
             </form>
         </td>
     </tr>

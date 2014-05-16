@@ -1,13 +1,17 @@
+{% view 'location/select' %}
+{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% include templateName %}
 <section id="categories">
-	<ul>
-		
+	<ul class="{{ icons[icons.length - 1] }}-icons">
 		{% for category in categories.models %}
 			<li>
-				<a href="/change-this-description-for-the-category-cat-{{category.id}}?location={{siteLocation}}" >
-					<span class="home-icon" id="catid-{{category.id}}"></span>
+				<a href="{{ ['/', category.trName | urlize, '-cat-', category.id] | join | link }}" >
+					<span class="icon cat-{{ category.id }}"></span>
 			        {{category.trName}}
 		        </a>
 		    </li>
 		{% endfor %}
 	</ul>
+	{% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}   
 </section>

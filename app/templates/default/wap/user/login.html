@@ -1,46 +1,85 @@
-<table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
-	<tr>
-		<td>
-			<strong style="display: block;">Login</strong>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="/register" style="display: block;">If you don't have an account, click here</a>
-		</td>
-	</tr>
-    <tr>
-        <td style="border-top: solid thin #B0B0B0;">
-            <form action="/login" method="POST" enctype="multipart/form-data">
-                {% for err in params.err %}
-                    <small style="display: block; color: red;">{{err}}</small>
-                {% endfor %}
-                <span style="display: block;">Username or Email</span>
-                <input type="text" name="usernameOrEmail">
-                <span style="display: block;">Password</span>
-                <input type="password" name="password">
-                <span style="display: block;"><input type="submit" value="Login"></span>
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <strong style="display: block;">Already posted an ad</strong>
-        </td>
-    </tr>
-    <tr>
-        <td style="border-top: solid thin #B0B0B0;">
-            <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
-                {% if params.emailMsg %}
-                    <small style="display: block; color: blue;">{{params.emailMsg}}</small>
-                {% endif %}
-                {% if params.emailErr %}
-                    <small style="display: block; color: red;">{{params.emailErr}}</small>
-                {% endif %}
-                <span style="display: block;">Enter the email that you used to post your ad and receive the link to My OLX by email.</span>
-                <input type="text" name="email">
-                <span style="display: block;"><input type="submit" value="Send"></span>
-            </form>
-        </td>
-    </tr>
-</table>
+<tr>
+    <td>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong style="color: #0075BD;">{{ dictionary["loginheader.Identification"] }}</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong><small>{{ dictionary["loginbox.MemberAccess"] }}</small></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <form action="/login" method="POST" enctype="multipart/form-data">
+                            <label style="display: block;">
+                                <small>{{ dictionary["loginbox.Username"] }}</small><br>
+                                <input type="text" value="" name="usernameOrEmail">
+                            </label>
+                            <br style="display: none;">
+                            <label style="display: block;">
+                                <small>{{ dictionary["loginbox.Password"] }}</small><br>
+                                <input type="password" value="" name="password">
+                            </label>
+                            <input type="hidden" name="redirect" value="{{ referer }}">
+                            <div style="padding-top: .25em;">
+                                <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong><small>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</small></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <small>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace("<<MY_CLASSIFIEDS>>","Mi OLX") }}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
+                            <label style="display: block;">
+                                <small>{{ dictionary["posting_fields_2.email"] }}</small><br>
+                                <input type="text" value="" name="email">
+                            </label>
+                            <div style="padding-top: .25em;">
+                                <input type="submit" value="{{ dictionary["myolx.Send"] }}" name="submit">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong><small>{{ dictionary["loginbox.NotAMember"] }}</small></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 .5em .5em;">
+                        <small>{{ dictionary["loginbox.CreateYourAccount"] }}: <a href="/register">{{ dictionary["searchheader.ClickHere"] }}</a></small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% from macros import breadcrumb %}
+        {% set link = (referer | breadcrumb | link) %}
+        {{ breadcrumb(dictionary, link) }}
+    </td>
+</tr>

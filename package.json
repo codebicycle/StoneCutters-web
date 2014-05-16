@@ -13,10 +13,6 @@
     "url": "https://github.com/olx-inc/arwen"
   },
   "private": true,
-  "scripts": {
-    "develop": "DEBUG=arwen:server*,arwen:*:error nodemon index.js",
-    "debug": "DEBUG=arwen:* nodemon index.js"
-  },
   "engines": {
     "node": ">=0.10"
   },
@@ -38,12 +34,15 @@
     "express": "3.4.8",
     "rendr": "martin-didomenico-olx/rendr",
     "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks",
-    "connect-memcached": "0.0.6",
     "underscore": "1.6.0",
     "debug": "0.7.4",
     "newrelic": "1.5.1",
     "restler": "3.2.0",
-    "formidable": "1.0.14"
+    "formidable": "1.0.14",
+    "sixpack-client": "1.0.0",
+    "analytic": "nicolas-molina-olx/analytic",
+    "node-uuid": "1.4.1",
+    "dateformat": "1.0.7-1.2.3"
   },
   "devDependencies": {
     "grunt": "0.4.4",
@@ -64,6 +63,12 @@
     "grunt-contrib-copy": "0.5.0",
     "grunt-git": "0.2.7",
     "zombie": "2.0.0-alpha31",
-    "grunt-contrib-uglify": "0.4.0"
+    "grunt-contrib-uglify": "0.4.0",
+    "progress": "~1.1.5",
+    "unzip": "~0.1.9",
+    "csv": "~0.3.7",
+    "jsesc": "~0.4.3",
+    "grunt-nodemon": "~0.2.1",
+    "grunt-concurrent": "~0.5.0"
   }
 }

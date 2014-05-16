@@ -1,8 +1,15 @@
-<title>OLX Mobile</title>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable: no" />
+<title>{{head.title}}</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{% for metatag in head.metatags %}
+    <meta name="{{metatag.name}}" content="{{metatag.content}}" />
+{% endfor %}
+{% if head.canonical %}
+    <link rel="canonical" href="{{head.canonical}}" >
+{% endif %}
+<link rel="shortcut icon" href="{{ '/images/common/favicon.ico' | static }}" type="image/x-icon">
 <style type="text/css">
-	a {text-decoration: none;}
-	.category-link:hover, .category-link:focus {outline: 0px; background-color: #EEE;}
-	.itemDescription p {margin: 0;}
-	.itemReplyFeedback br {display: none;}
+    a {text-decoration: none;}
+    .category-link:hover, .category-link:focus {outline: 0px; background-color: #EEE;}
+    .itemDescription p {margin: 0;}
+    .itemReplyFeedback br {display: none;}
 </style>

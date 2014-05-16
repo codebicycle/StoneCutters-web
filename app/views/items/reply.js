@@ -5,6 +5,9 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
     className: 'items_reply_view',
+    wapAttributes: {
+        cellpadding: 0
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 

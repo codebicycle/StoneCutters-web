@@ -7,67 +7,70 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
             var app = req.rendrApp;
-            var siteLocation = app.getSession('siteLocation');
+            var previousLocation = app.getSession('siteLocation');
+            var siteLocation = req.param('location', previousLocation);
+            var host = req.headers.host;
+            var index = host.indexOf(':');
             var location;
             var topCities;
+            var promise;
 
             function fetchLocation(done) {
-                dataAdapter.get(req, '/locations/' + siteLocation, done.errfcb);
+                function after (err, response, _location) {
+                    if (!err) {
+                        return done(response, _location);
+                    }
+                    siteLocation = previousLocation;
+                    dataAdapter.get(req, '/locations/' + siteLocation, done.errfcb);
+                }
+
+                dataAdapter.get(req, '/locations/' + siteLocation, after);
+            }
+
+            function getLocation(done, response, _location) {
+                location = _location;
+                done();
             }
 
             function fetchTopCities(done) {
                 dataAdapter.get(req, '/countries/' + siteLocation + '/topcities', done.errfcb);
             }
 
-            function parse(done, _location, _topCities) {
-                location = _location[1];
+            function parse(done, response, _topCities) {
                 topCities = {
-                    models: _topCities[1].data,
+                    models: _topCities.data,
                    _byId: {},
-                    metadata: _topCities[1].metadata
+                    metadata: _topCities.metadata
                 };
-
                 topCities.models.forEach(function sort(city) {
-                    topCities._byId[city.id] = city;
+                    topCities._byId[city.url] = city;
                 });
                 done();
             }
 
             function getCity(done) {
-                var storedLocation = app.getSession('location');
-                var cityId = req.param('cityId', null);
-                var cities;
-                var city;
-
-                // TODO: Find a better way to get a particular city.
-                if (storedLocation) {
-                    cities = storedLocation.cities;
-                    city = storedLocation.city;
-                }
-                else {
-                    cities = _.clone(topCities);
-                }
-                if (cityId) {
-                    city = cities._byId[cityId];
-                }
                 location.topCities = topCities;
-                location.cities = cities;
-                location.city = city;
+                if (location.children && location.children[0]) {
+                    location.current = location.children[0];
+                    if (location.children[0].children && location.children[0].children[0]) {
+                        location.current = location.children[0].children[0];
+                    }
+                }
                 done();
             }
 
             function store(done) {
-                if (location.city) {
-                    siteLocation = location.city.url;
+                if (location.current) {
+                    siteLocation = location.current.url;
                 }
-                app.updateSession({
-                    siteLocation: siteLocation,
-                    location: location
+                app.persistSession({
+                    location: location,
+                    siteLocation: siteLocation
                 });
                 done();
             }
@@ -76,9 +79,23 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.send(400, err);
             }
 
-            asynquence().or(fail)
-                .gate(fetchLocation, fetchTopCities)
-                .then(parse)
+            if (!siteLocation) {
+                siteLocation = (index === -1) ? host : host.substring(0, index);
+                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('m.') + 1),'www');
+                previousLocation = siteLocation;
+            }
+            if (previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
+                return res.redirect('/?location=' + previousLocation);
+            }
+            promise = asynquence().or(fail)
+                .then(fetchLocation)
+                .then(getLocation);
+            if (!_.contains(excludedUrls.data, req.path)) {
+                promise
+                    .then(fetchTopCities)
+                    .then(parse);
+            }
+            promise
                 .then(getCity)
                 .then(store)
                 .val(next);

@@ -1,7 +1,7 @@
 <header id="location">
     <p>
-        {% if location.city %}
-            {{location.city}} <a href="/location">Cambiar Ciudad</a>
+        {% if location.current %}
+            {{location.current}} <a href="/location">Cambiar Ciudad</a>
         {% else %}
             {{location.name}} <a href="/location">Seleccionar Ciudad</a>
         {% endif %} 

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function(app, dataAdapter) {
+    var _ = require('underscore');
     var asynquence = require('asynquence');
     var formidable = require('../formidable');
     var querystring = require('querystring');
@@ -54,7 +55,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function save(done, response, user) {
-                req.rendrApp.updateSession({
+                req.rendrApp.persistSession({
                     user: user
                 });
                 done();
@@ -65,18 +66,24 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var errors = {
-                    errCode: 400,
-                    errField: [],
-                    errMsg: [],
-                };
                 var url = req.headers.referer;
                 var qIndex = url.indexOf('?');
+                var errors;
 
-                err.forEach(function each(error) {
-                    errors.errField.push(error.selector);
-                    errors.errMsg.push(error.message);
-                });
+                if (_.isArray(err)) {
+                    errors = {
+                        errCode: 400,
+                        errField: [],
+                        errMsg: [],
+                    };
+                    err.forEach(function each(error) {
+                        errors.errField.push(error.selector);
+                        errors.errMsg.push(error.message);
+                    });
+                }
+                else {
+                    errors = err;
+                }
                 if (qIndex != -1) {
                     url = url.substring(0,qIndex);
                 }
@@ -98,6 +105,7 @@ module.exports = function(app, dataAdapter) {
         function handler(req, res) {
             var usernameOrEmail;
             var password;
+            var redirect;
 
             function parse(done) {
                 formidable(req, done.errfcb);
@@ -106,6 +114,7 @@ module.exports = function(app, dataAdapter) {
             function getChallenge(done, data) {
                 usernameOrEmail = data.usernameOrEmail;
                 password = data.password;
+                redirect = data.redirect;
                 dataAdapter.get(req, '/users/challenge', {
                     query: {
                         u: usernameOrEmail
@@ -129,14 +138,14 @@ module.exports = function(app, dataAdapter) {
             }
 
             function save(done, response, user) {
-                req.rendrApp.updateSession({
+                req.rendrApp.persistSession({
                     user: user
                 });
                 done();
             }
 
             function success() {
-                res.redirect('/');
+                res.redirect(redirect);
             }
 
             function error(err) {
@@ -207,7 +216,7 @@ module.exports = function(app, dataAdapter) {
             var app = req.rendrApp;
 
             app.deleteSession('user');
-            res.redirect('/');
+            res.redirect(app.getSession('referer') || '/');
         }
     })();
 };

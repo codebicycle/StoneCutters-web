@@ -1,21 +1,26 @@
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>Buscar: {{ search }}</h1>
-    <div class="searchResultsCount">
-        <span class="searchResultsNumber">{{ metadata.total }}</span>
-        <span class="searchResultsText">{{ "resultado" if  metadata.total == 1 else "resultados" }}</span>
-    </div>
-</div>
-<div id="itemListing">
+{% view 'location/select' %}
+{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% include templateName %}
+{% set s = 's' %}
+{% if metadata.total == 1 %}
+    {% set s = '' %}
+{% endif %}
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, [dictionary["defaultheader.Search"], search] | join(': '), ['<div class="searchResultsCount">
+    <span class="searchResultsNumber">', metadata.total, '</span>
+    <span class="searchResultsText">', dictionary["itemslisting.Results"], '</span>
+</div>'] | join) }}
+<div id="searchListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">
-            Lo lamentamos pero no hay resultados para tu búsqueda.
+            {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
         </div>
     {% else %}
-        <ul>
+        <ul class="itemListing">
             {% for item in items %}
                 <li>
-                    <a href="/change-this-description-for-the-item-iid-{{item.id}}">
+                    <a href="/{{ item.title | urlize }}-iid-{{item.id}}">
                         <div class="imageCont">
                             <div class="imageContAlign">
                                 <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
@@ -26,7 +31,7 @@
                         <h2>{{ item.price.displayPrice }}</h2>
                         <span>{{ item.date.since }}</span>
                         <div class="centerCont">
-                            <a href="/change-this-description-for-the-item-iid-{{item.id}}">
+                            <a href="/{{ item.title | urlize }}-iid-{{item.id}}">
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
@@ -39,7 +44,7 @@
             <div id="itemPagination">
                 <a href="{{ metadata.previous }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
                 <div class="center">
-                    {{ metadata.page | pagination(metadata.total, metadata.current) }}
+                    {{ metadata | pagination }}
                 </div>
                 <a href="{{ metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
             </div>
@@ -49,8 +54,8 @@
             </div>
         {% endif %}
     {% endif %}
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>
-<div class="breadcrumb">
-    <a href="/">back</a>
-    <a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary, link) }}

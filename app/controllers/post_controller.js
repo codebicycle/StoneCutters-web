@@ -2,106 +2,127 @@
 
 var helpers = require('../helpers');
 var _ = require('underscore');
+var sixpack = require('sixpack-client');
+var config = require('../config');
 
 module.exports = {
     index: function(params, callback) {
-        var app = helpers.environment.init(this.app);
+        helpers.controllers.control(this, params, controller);
 
-        callback(null, {
-            params: params,
-            platform: app.getSession('platform'),
-            template: app.getSession('template')
-        });
+        function controller() {
+            var sixpackConfig = config.get('sixpack', {});
+
+            helpers.analytics.reset();
+            helpers.analytics.setPage('posting');
+            if (!sixpackConfig.enabled ||
+                !sixpackConfig['post-button'] ||
+                !sixpackConfig['post-button'].enabled ||
+                !params.sixpack || params.sixpack !== 'post-button') {
+                return callback(null, {
+                    analytics: helpers.analytics.generateURL(this.app.getSession())
+                });
+            }
+            var session = new sixpack.Session(this.app.getSession('clientId'), sixpackConfig.url);
+
+            session.convert('post-button', function(err, res) {
+                callback(null, {
+                    analytics: helpers.analytics.generateURL(this.app.getSession())
+                });
+            });
+        }
     },
     subcat: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var subcategories = this.app.getSession('categories')._byId[params.categoryId].children;
+        helpers.controllers.control(this, params, controller);
 
-        callback(null, _.extend(params, {
-            'subcategories': subcategories
-        }));
+        function controller() {
+            helpers.analytics.reset();
+            helpers.analytics.setPage('posting_cat');
+
+            callback(null, _.extend(params, {
+                subcategories: this.app.getSession('categories')._byId[params.categoryId].children,
+                analytics: helpers.analytics.generateURL(this.app.getSession())
+            }));
+        }
     },
     form: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var siteLocation = app.getSession('siteLocation');
-        var language = app.getSession('selectedLanguage');
-        var languages = app.getSession('languages');
-        var languageId = languages._byId[language].id;
-        var spec = {
-            postingSession: {
-                model: 'PostingSession'
-            },
-            fields: {
-                collection: 'Fields',
-                params: {
-                    intent: 'post',
-                    location: siteLocation,
-                    categoryId: params.subcategoryId,
-                    languageId: languageId,
-                    languageCode: language
-                }
-            }
-        };
+        helpers.controllers.control(this, params, controller);
 
-        app.fetch(spec, function afterFetch(err, result) {
-            var response = result.fields.models[0].attributes;
-            result.postingSession = result.postingSession.get('postingSession');
-            result.intent = 'create';
-            result.fields = response.fields;
-            result.errors = params.err;
-            result.category = params.categoryId;
-            result.subcategory = params.subcategoryId;
-            result.location = siteLocation;
-            result.language = languageId;
-            result.languageCode = language;
-            result.platform = app.getSession('platform');
-            result.template = app.getSession('template');
-            result.errField = params.errField;
-            result.errMsg = params.errMsg;
-            callback(err, result);
-        });
+        function controller() {
+            var app = this.app;
+            var user = app.getSession('user');
+            var siteLocation = app.getSession('siteLocation');
+            var language = app.getSession('selectedLanguage');
+            var languages = app.getSession('languages');
+            var languageId = languages._byId[language].id;
+            var languageCode = languages._byId[language].isocode.toLowerCase();
+            var spec = {
+                postingSession: {
+                    model: 'PostingSession',
+                    params: {}
+                },
+                fields: {
+                    collection: 'Fields',
+                    params: {
+                        intent: 'post',
+                        location: siteLocation,
+                        categoryId: params.subcategoryId,
+                        languageId: languageId,
+                        languageCode: languageCode
+                    }
+                }
+            };
+
+            app.fetch(spec, function afterFetch(err, result) {
+                var response = result.fields.models[0].attributes;
+                var categoryTree;
+
+                result.postingSession = result.postingSession.get('postingSession');
+                result.intent = 'create';
+                result.fields = response.fields;
+                result.errors = params.err;
+                result.category = params.categoryId;
+                result.subcategory = params.subcategoryId;
+                result.language = languageId;
+                result.languageCode = languageCode;
+                result.siteLocation = siteLocation;
+                result.errField = params.errField;
+                result.errMsg = params.errMsg;
+
+                categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);
+                helpers.analytics.reset();
+                helpers.analytics.setPage('posting_cat_subcat');
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(app.getSession());
+
+                callback(err, result);
+            });
+        }
     },
     edit: function(params, callback) {
-        var app = helpers.environment.init(this.app);
-        var user = app.getSession('user');
-        var language = app.getSession('selectedLanguage');
-        var languages = app.getSession('languages');
-        var languageId = languages._byId[language].id;
-        var securityKey = params.sk;
+        helpers.controllers.control(this, params, controller);
 
-        function checkAuthentication(params, id) {
-            var anonymousItem;
-            if (user) {
-                params.token = user.token;
-            }
-            else {
-                if (typeof window !== 'undefined' && localStorage) {
-                    anonymousItem = localStorage.getItem('anonymousItem');
-                    anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                    if (securityKey) {
-                        anonymousItem[id] = securityKey;
-                        localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                    }
-                    else {
-                        securityKey = anonymousItem[id];
-                    }
-                }
-                params.securityKey = securityKey;
-            }
-        }
-
-        function findItem(next) {
+        function controller() {
+            var app = this.app;
+            var user = app.getSession('user');
+            var siteLocation = app.getSession('siteLocation');
+            var language = app.getSession('selectedLanguage');
+            var languages = app.getSession('languages');
+            var languageId = languages._byId[language].id;
+            var languageCode = languages._byId[language].isocode.toLowerCase();
+            var securityKey = params.sk;
             var _params = {
                 id: params.itemId,
                 languageId: languageId,
-                languageCode: language
+                languageCode: languageCode
             };
             var spec = {
                 item: {
                     model: 'Item',
                     params: _params
                 }
-            }; 
+            };
 
             checkAuthentication(_params, _params.id);
             app.fetch(spec, {
@@ -110,54 +131,172 @@ module.exports = {
                 if (err) {
                     return callback(err, result);
                 }
-                next(err, result);
+                findFields(err, result);
             });
-        }
 
-        function findFields(err, response) {
-            var item = response.item.toJSON();
-            var siteLocation = app.getSession('siteLocation');
-            var _params = {
-                intent: 'edit',
-                location: siteLocation,
-                languageId: languageId,
-                languageCode: language,
-                itemId: item.id,
-                categoryId: item.category.id
-            };
-            var spec = {
-                postingSession: {
-                    model: 'PostingSession'
-                },
-                fields: {
-                    collection: 'Fields',
-                    params: _params
+            function checkAuthentication(params, id) {
+                var anonymousItem;
+
+                if (user) {
+                    params.token = user.token;
                 }
-            };
+                else {
+                    if (typeof window !== 'undefined' && localStorage) {
+                        anonymousItem = localStorage.getItem('anonymousItem');
+                        anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                        if (securityKey) {
+                            anonymousItem[id] = securityKey;
+                            localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                        }
+                        else {
+                            securityKey = anonymousItem[id];
+                        }
+                    }
+                    params.securityKey = securityKey;
+                }
+            }
 
-            checkAuthentication(_params, _params.itemId);
-            app.fetch(spec, function afterFetch(err, result) {
-                var response = result.fields.models[0].attributes;
-                result.user = user;
-                result.item = item;
-                result.postingSession = result.postingSession.get('postingSession');
-                result.intent = 'edit';
-                result.fields = response.fields;
-                result.errors = params.err;
-                result.category = item.category.parentId;
-                result.subcategory = item.category.id;
-                result.location = siteLocation;
-                result.language = languageId;
-                result.languageCode = language;
-                result.platform = app.getSession('platform');
-                result.template = app.getSession('template');
-                result.errField = params.errField;
-                result.errMsg = params.errMsg;
-                result.sk = securityKey;
-                callback(err, result);
-            });
+            function findFields(err, response) {
+                var item = response.item.toJSON();
+                var _params = {
+                    intent: 'edit',
+                    location: siteLocation,
+                    languageId: languageId,
+                    languageCode: languageCode,
+                    itemId: item.id,
+                    categoryId: item.category.id
+                };
+                var spec = {
+                    postingSession: {
+                        model: 'PostingSession'
+                    },
+                    fields: {
+                        collection: 'Fields',
+                        params: _params
+                    }
+                };
+
+                checkAuthentication(_params, _params.itemId);
+                app.fetch(spec, function afterFetch(err, result) {
+                    var response = result.fields.models[0].attributes;
+                    var categoryTree;
+
+                    result.user = user;
+                    result.item = item;
+                    result.postingSession = result.postingSession.get('postingSession');
+                    result.intent = 'edit';
+                    result.fields = response.fields;
+                    result.errors = params.err;
+                    result.category = item.category.parentId;
+                    result.subcategory = item.category.id;
+                    result.language = languageId;
+                    result.languageCode = languageCode;
+                    result.errField = params.errField;
+                    result.errMsg = params.errMsg;
+                    result.sk = securityKey;
+
+                    categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+                    helpers.analytics.reset();
+                    helpers.analytics.setPage('posting_edit');
+                    helpers.analytics.addParam('user', user);
+                    helpers.analytics.addParam('item', item);
+                    helpers.analytics.addParam('category', categoryTree.parent);
+                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                    result.analytics = helpers.analytics.generateURL(app.getSession());
+
+                    callback(err, result);
+                });
+            }
         }
+    },
+    success: function(params, callback) {
+        helpers.controllers.control(this, params, controller);
 
-        findItem(findFields);
+        function controller() {
+            var that = this;
+            var user = that.app.getSession('user');
+            var securityKey = params.sk;
+            var itemId = params.itemId;
+            var siteLocation = that.app.getSession('siteLocation');
+            var anonymousItem;
+
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.itemId] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+                else {
+                    securityKey = anonymousItem[params.itemId];
+                }
+            }
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+            delete params.sk;
+
+            function findItem(next) {
+                var spec = {
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                };
+
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    if (err) {
+                        callback(err, result);
+                        return;
+                    }
+                    next(err, result);
+                });
+            }
+
+            function findRelatedItems(err, data) {
+                var item = data.item.toJSON();
+                var spec = {
+                    items: {
+                        collection : 'Items',
+                        params: {
+                            location: siteLocation,
+                            offset: 0,
+                            pageSize:10,
+                            relatedAds: itemId
+                        }
+                    }
+                };
+
+                that.app.fetch(spec, {
+                    'readFromCache': false
+                }, function afterFetch(err, result) {
+                    var model = result.items.models[0];
+                    var user = that.app.getSession('user');
+                    var categoryTree;
+
+                    result.relatedItems = model.get('data');
+                    result.user = user;
+                    result.item = item;
+                    result.pos = Number(params.pos) || 0;
+                    result.sk = securityKey;
+                    categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                    helpers.analytics.reset();
+                    helpers.analytics.setPage('item');
+                    helpers.analytics.addParam('user', user);
+                    helpers.analytics.addParam('item', item);
+                    helpers.analytics.addParam('category', categoryTree.parent);
+                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                    result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                    callback(err, result);
+                });
+            }
+
+            findItem(findRelatedItems);
+        }
     }
 };

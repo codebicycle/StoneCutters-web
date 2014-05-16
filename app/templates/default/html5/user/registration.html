@@ -1,0 +1,23 @@
+{% view 'location/select' %}
+{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% include templateName %}
+{% from macros import breadcrumb %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
+<section id="login">
+    <form action="/register" method="POST" enctype="multipart/form-data">
+        <label>{{ dictionary["register_mail.Username"] }}</label>
+        <input type="text" name="username">
+        <label >{{ dictionary["landingbody.EmailAddress"] }}</label>
+        <input type="text" name="email">
+        <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small>
+        <label >{{ dictionary["register_mail.Password"] }}</label>
+        <input type="password" name="password">
+        <input type="checkbox" name="agreeTerms" class="checkbox" checked="true">
+        <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
+        <div class="btnCenter">
+            <input type="submit" value="{{ dictionary["registerheader.Register"] }}" class="btns orange">
+        </div>
+    </form>
+    <a href="/login">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
+</section>

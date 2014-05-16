@@ -4,14 +4,16 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var asynquence = require('asynquence');
+        var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
             var app = req.rendrApp;
             var siteLocation = app.getSession('siteLocation');
+            var location = app.getSession('location');
             var languages;
             var selectedLanguage;
 
@@ -26,10 +28,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 };
 
                 languages.models.forEach(function each(language) {
-                    languages._byId[language.isocode.toLowerCase()] = language;
-                    if (language.default) {
-                        languages.default = language.isocode.toLowerCase();
-                    }
+                    languages._byId[language.locale] = language;
                 });
 
                 done();
@@ -39,32 +38,33 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var lastSelectedLanguage = app.getSession('selectedLanguage');
 
                 if (!isNaN(lastSelectedLanguage)) {
-                    app.updateSession({
-                        selectedLanguage: null
-                    });
+                    app.deleteSession('selectedLanguage');
                 }
                 done();
             }
 
             function select(done) {
-                var language = parseInt(req.param('language', 'en'));
+                var language = req.param('language', '');
 
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
-                selectedLanguage = language || app.getSession('selectedLanguage') || languages.default || languages.models[0].isocode.toLowerCase();
+                selectedLanguage = language || app.getSession('selectedLanguage') || languages.models[0].locale;
                 done();
             }
 
             function store(done) {
                 app.updateSession({
-                    languages: languages,
+                    languages: languages
+                });
+                app.persistSession({
                     selectedLanguage: selectedLanguage
                 });
                 done();
             }
 
             function fail(err) {
+                console.log(err.stack);
                 res.send(400, err);
             }
 

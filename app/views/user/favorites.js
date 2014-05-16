@@ -8,7 +8,24 @@ module.exports = BaseView.extend({
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data, {});
+        return _.extend({}, data);
+    },
+    postRender: function() {
+        $('.favoritePopup').click(function(e) {
+            e.preventDefault();
+            var element = $(this);
+            var itemId = element.attr('data-itemId');
+            var itemUrl = element.attr('data-itemUrl');
+            $('.viewItem').attr("href", itemUrl);
+            $('.removeItem').attr("href", 'urlForRemoveFav');
+            $('#favoritePopup').addClass('visible');
+        });
+        $('.popup-close').click(function(e) {
+            e.preventDefault();
+            $('.viewItem').attr("href", '#');
+            $('.removeItem').attr("href", '#');
+            $('#favoritePopup').removeClass('visible');
+        });
     }
 });
 

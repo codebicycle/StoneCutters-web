@@ -1,7 +1,6 @@
-<div class="breadcrumb">
-    <a href="/">Back</a>
-    <h1>Contactar al anunciante</h1>
-</div>
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToThisAd"]) }}
 <div id="reply">
     <form action="/items/{{ item.id }}/reply" method="POST" enctype="multipart/form-data">
         {% if errors %}
@@ -14,7 +13,6 @@
         <h4>{{ item.title }}</h4>
         <div class="formField">
             <label>Para: {{ item.contactName if item.contactName else "anonymous" }}</label>
-            <label>Anuncio Publicado: {{ item.title }}</label>
         </div>
         <div class="formField">
             <label>Tu Email:(Campo Obligatorio)</label>
@@ -38,8 +36,8 @@
             </div>
         </div>
     </form>
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>
-<div class="breadcrumb">
-    <a href="/">back</a>
-    <a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary, link) }}

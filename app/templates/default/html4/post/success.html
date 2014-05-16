@@ -1,0 +1,20 @@
+{% view 'location/select' %}
+{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% include templateName %}
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}
+<div id="success">
+    <div>
+        <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
+        <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
+        <p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</p>
+        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">{{ dictionary["itemwarning.Here"] }}</a>.</p>
+    </div>
+    <div style="margin:6px 0 0 0;">
+        <h1>{{ dictionary["misc.EmailAdActivated_Mob"] }}</h1>
+        <a href="/posting" class="btns orange">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</a>
+        <a href="/" class="back">{{ dictionary["misc.BackToStart_Mob"] }}</a>
+    </div>
+</div>
+{{ breadcrumbHome(dictionary, link) }}

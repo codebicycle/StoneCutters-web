@@ -1,0 +1,16 @@
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["posting_selector.SelectCategory"]) }}
+<div id="selectCat">
+    <ul class="normalList">
+        {% for category in categories.models %}
+            <li class="{{ "last" if loop.last else "" }}">
+                <a href="posting/{{category.id}}">{{category.trName}}</a>
+            </li>
+        {% endfor %}
+    <ul>
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
+</div>
+{{ breadcrumbHome(dictionary, link) }}

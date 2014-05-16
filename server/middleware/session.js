@@ -8,44 +8,48 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
+        var cookies = require('../cookies');
+        var _ = require('underscore');
 
         return function middleware(req, res, next) {
-            if (~excludedUrls.indexOf(req.path)) {
+            if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
-
             var app = req.rendrApp;
-            var session = req.session;
-
-            /**
-             * Let's keep session data stored in a `data` object, so we don't send metadata
-             * like `session.cookie` to the client.
-             */
-            session.data = session.data || {};
-            app.set('session', session.data);
+            var session = _.clone(cookies.getAll(req));
 
             app.updateSession = function(pairs) {
                 for (var key in pairs) {
-                    session.data[key] = pairs[key];
+                    session[key] = pairs[key];
                 }
-                app.set('session', session.data);
+                app.set('session', session);
+            };
+
+            app.persistSession = function(pairs, options) {
+                for (var key in pairs) {
+                    cookies.put(res, key, pairs[key], options);
+                    session[key] = pairs[key];
+                }
+                app.updateSession(pairs);
             };
 
             app.getSession = function(key) {
-                var data = app.get('session');
                 if (!key) {
-                    return data;
+                    return session;
                 }
-                return data[key];
+                return session[key];
             };
 
-            app.deleteSession = function(key) {
-                if (key) {
-                    delete session.data[key];
+            app.deleteSession = function(key, options) {
+                if (!key) {
+                    return;
                 }
-                app.set('session', session.data);
+                cookies.clear(res, key, options);
+                delete session[key];
+                app.set('session', session);
             };
 
+            app.set('session', session);
             next();
         };
 

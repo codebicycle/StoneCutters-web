@@ -1,4 +1,4 @@
-<h1>{{location.name}}{% if location.city %} > {{location.city.name}}{% endif %}</h1>
+<h1>{{location.name}}{% if location.current %} > {{location.current.name}}{% endif %}</h1>
 
 <form action="/location">
 	<input type="text" name="search"><button type="submit">Search</button>
@@ -14,7 +14,7 @@
 			  	<ul>
 					{% for city in cities %}
  						<li>
-							<a href="/?cityId={{city.id}}" class="city" style="color:black;">{{city.name}}</a>
+							<a href="/?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
 						</li>
 					{% endfor %}
 				</ul>

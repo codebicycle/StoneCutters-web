@@ -2,22 +2,17 @@
 <html>
     {% view 'layout/head' %}
     <body>
-
         {% view 'header/index' %}
-        {% view 'location/select' %}
-        {% set templateName = 'compiled/' + template + '/partials/search.html' %}
-        {% include templateName %}
-
         <article>
             <div id="content">
                 {{body}}
             </div>
         </article>
-
+        {% view 'footer/downloadapp' %}
         {% view 'footer/languages' %}
         {% view 'footer/footer' %}
-
         <script src="/js/{{jsDir}}/libs.js"></script>
+        <script src="/js/{{jsDir}}/translations.js"></script>
         <script src="/js/{{jsDir}}/{{directory}}/app.js"></script>
         <script>
             (function() {
@@ -26,5 +21,6 @@
                 App.start();
             })();
         </script>
+        <div class="loading"></div>
     </body>
 </html>

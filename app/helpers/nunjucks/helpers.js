@@ -1,21 +1,13 @@
 'use strict';
 
 var config = require('../../config');
+var common = require('../common');
+var controllers = require('../controllers');
 var _ = require('underscore');
+var dateformat = require('dateformat');
 
 module.exports = function(nunjucks) {
     return {
-        date: function(timestamp) {
-            var d = new Date(timestamp);
-            return d.toLocaleString();
-        },
-        urlize: function(string) {
-            return string
-                .replace(/ /g, '-')
-                .replace(/---/g, '-')
-                .replace(/:/g, '-')
-                .toLowerCase();
-        },
         static: function(path, key, value) {
             var env = config.get(['environment', 'type'], 'development');
             var type;
@@ -135,25 +127,51 @@ module.exports = function(nunjucks) {
             out.push('</div>');
             return out.join('');
         },
-        pagination: function(currentPage, total, currentURL) {
+        pagination: function(metadata, platform) {
             var out = [];
-            var max = config.get(['smaug', 'maxPageSize'], 50);
-            var pages = Math.floor(total / max) + ((total % max) === 0 ? 0 : 1);
+            var currentPage = metadata.page;
+            var currentURL = metadata.current;
+            var pages = metadata.totalPages;
             var regExp = new RegExp('-p-([0-9]+)', 'g');
             var pagination = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2];
             var count = 0;
+            var max;
             var i;
+
+            function prepareStyle(last, start, end) {
+                if (platform !== 'wap') {
+                    out.push(start || '" ');
+                    out.push('class="');
+                    out.push(last ? 'last' : '');
+                    out.push(end || '');
+                }
+            }
+
+            function prepareSeparator(last) {
+                if (platform === 'wap') {
+                    out.push(last ? '' : ' | ');
+                }
+            }
 
             function prepareURL(page, last) {
                 if (page > 0 && page <= pages) {
-                    out.push('<a href="');
-                    out.push(currentURL.replace(regExp, '-p-' + page));
-                    out.push('" class="');
-                    out.push(page === currentPage ? 'active ' : '');
-                    out.push(last ? 'last' : '');
-                    out.push('">');
-                    out.push(page);
-                    out.push('</a>');
+                    if(page === currentPage){
+                        out.push('<strong');
+                        prepareStyle(last, ' ', '"');
+                        out.push('>');
+                        out.push(page);
+                        out.push('</strong>');
+                        prepareSeparator(last);
+                    }
+                    else {
+                        out.push('<a href="');
+                        out.push(currentURL.replace(regExp, '-p-' + page));
+                        prepareStyle(last);
+                        out.push('">');
+                        out.push(page);
+                        out.push('</a>');
+                        prepareSeparator(last);
+                    }
                     count++;
                 }
                 else if (page < pages) {
@@ -172,10 +190,32 @@ module.exports = function(nunjucks) {
             for (i = 0; i < pagination.length && count < max; i++) {
                 prepareURL(pagination[i], ((count + 1) === max));
             }
+
             return out.join('');
         },
         is: function(value, type) {
             return typeof value === type;
-        }
+        },
+        link: function (href) {
+            return common.link(href, this.ctx.siteLocation);
+        },
+        date: function(timestamp) {
+            return dateformat(new Date(timestamp), 'yyyy-mm-dd');
+        },
+        breadcrumb: function(referer) {
+            var breadcrumb = referer;
+            var currentRoute = this.ctx.currentRoute;
+
+            if (currentRoute.controller === 'items') {
+                if (currentRoute.action === 'index') {
+                    var categoryId = this.ctx.category.parentId;
+                    var category = this.ctx._app.getSession('categories')._byId[categoryId];
+
+                    breadcrumb = '/' + common.urlize(category.trName) + '-cat-' + categoryId;
+                }
+            }
+            return breadcrumb || '/';
+        },
+        urlize: common.urlize
     };
 };

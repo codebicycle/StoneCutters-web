@@ -1,17 +1,21 @@
-<div class="breadcrumb">
-	<a href="/">Back</a>
-	<h1>{{category.name}}</h1>
-</div>
+{% view 'location/select' %}
+{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% include templateName %}
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, category.name) }}
 <div id="subCategories">
-  	<ul>
-		{% for subcategory in category.children %}
-			<li class="{{ "last" if loop.last else "" }}">
-				<a href="/change-this-description-for-the-category-cat-{{subcategory.id}}-p-1?location={{params.location}}">{{subcategory.trName}}</a>
-			</li>
-		{% endfor %}
-	</ul>
+    <ul class="normalList">
+        {% for subcategory in category.children %}
+            <li class="{{ "last" if loop.last else "" }}">
+                <a href="/{{ subcategory.trName | urlize }}-cat-{{ subcategory.id }}-p-1">
+                    {{subcategory.trName}}
+                    <small style="color: #999;">({{subcategory.counter}})</small>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>
-<div class="breadcrumb">
-	<a href="/">back</a>
-	<a href="/" class="home">home</a>
-</div>
+{{ breadcrumbHome(dictionary, link) }}

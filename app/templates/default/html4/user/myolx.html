@@ -1,0 +1,14 @@
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["homeheader.My OLX"], ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
+<div id="myolx">
+    <ul class="normalList">
+        <li>
+            <a href="{{ 'myolx/myadslisting' | link }}">{{ dictionary["myolx.MyAds"] }}</a>
+        </li>
+        <li class="last">
+            <a href="{{ 'myolx/favoritelisting' | link }}">{{ dictionary["myolx.MyFavorites"] }}</a>
+        </li>
+    </ul>
+</div>
+{{ breadcrumbHome(dictionary, link) }}

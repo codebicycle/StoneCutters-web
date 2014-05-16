@@ -5,16 +5,19 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
     className: 'user_login_view',
+    wapAttributes: {
+        cellpadding: 0
+    },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var params = this.options.params;
+        var params = this.options.params || {};
 
-        if (params.err) {
+        /*if (params.err) {
             params.err = params.err.split(',');
         }
         if (params.errFields) {
             params.errFields = params.errFields.split(',');
-        }
+        }*/
         return _.extend({}, data, {
             params: params
         });

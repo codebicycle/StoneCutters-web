@@ -1,0 +1,12 @@
+<tr>
+    <td align="center" style="border-top: solid thin #808080;">
+    	<small style="display: block;">
+    		{% if not user %}
+        		<a href="/login">{{ dictionary["homeheader.Sign_In"] }}</a> | 
+        		<a href="/register">{{ dictionary["homeheader.Register"] }}</a>
+        	{% else %}
+        		<a href="">{{ dictionary["myolx.MyBrand"] | replace("<<BRAND>>","OLX") }}</a>
+        	{% endif %}
+    	</small>
+    </td>
+</tr>
