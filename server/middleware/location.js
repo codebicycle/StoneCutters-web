@@ -81,7 +81,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             if (!siteLocation) {
                 siteLocation = (index === -1) ? host : host.substring(0, index);
-                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 1),'www');
+                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
                 previousLocation = siteLocation;
             }
             if (previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
