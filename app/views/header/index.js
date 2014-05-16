@@ -40,6 +40,9 @@ module.exports = BaseView.extend({
         $('#topBar ul li.logIn span').click(function(e){
             $('menu#myOlx').slideToggle();
         });
+        $('menu#myOlx ul li a').click(function(e){
+            $('menu#myOlx').slideUp();
+        });
     },
 });
 
