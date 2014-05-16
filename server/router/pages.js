@@ -75,28 +75,6 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
-    (function force() {
-        app.get('/force/:platform?', handler);
-
-        function handler(req, res) {
-            var platform = req.param('platform', null);
-            //var platforms = configServer.get('platforms',  []);
-            var platforms = ['wap', 'html4', 'html5', 'desktop'];
-
-            if (platform && ~platforms.indexOf(platform)) {
-                req.rendrApp.persistSession({
-                    platformForced: true,
-                    platform: platform
-                });
-            }
-            else {
-                req.rendrApp.deleteSession('platformForced');
-                req.rendrApp.deleteSession('platform');
-            }
-            res.redirect('/');
-        }
-    })();
-
     (function tracking() {
         app.get('/pageview.gif', handler);
 

@@ -81,10 +81,9 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             if (!siteLocation) {
                 siteLocation = (index === -1) ? host : host.substring(0, index);
-                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.')),'www');
+                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 1),'www');
                 previousLocation = siteLocation;
             }
-            req.headers.host = siteLocation;
             if (previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
                 return res.redirect('/?location=' + previousLocation);
             }
