@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var common = require('../common');
 
 module.exports = function analyticsHelper() {
     var actionTypes = {
@@ -10,12 +11,6 @@ module.exports = function analyticsHelper() {
             }
         }
     };
-
-    function daysDiff(date) {
-        var now = new Date();
-        var diff = now.getTime() - date.getTime();
-        return Math.abs(Math.round(diff / (60 * 60 * 24)));
-    }
 
     function standarizeName(name) {
         name = name.toLowerCase();
@@ -71,7 +66,7 @@ module.exports = function analyticsHelper() {
                 }
             }
             if(!_.isUndefined(params.posting_to_action)) {
-                params.posting_to_action = daysDiff(new Date(options.item.date.timestamp));
+                params.posting_to_action = common.daysDiff(new Date(options.item.date.timestamp));
             }
         }
         if(!_.isUndefined(params.funnel_category) && options.category) {

@@ -171,7 +171,7 @@
                                 </th>
                                 <td align="left" style="border-top: solid 1px #CCC;">
                                     <!-- <small style="display: block;">{{ user if user else dictionary["itemgeneraldetails.Anonymous"] }}</small> -->
-                                    <small style="display: block;">{% if user %}{{user.username}}{% else %}Anonymous{% endif %}</small>
+                                    <small style="display: block;">{% if item.user %}{{item.user.username}}{% else %}Anonymous{% endif %}</small>
                                 </td>
                             </tr>
                             {% if item.phone %}

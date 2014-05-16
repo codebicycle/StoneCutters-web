@@ -1,0 +1,40 @@
+{% from macros import breadcrumb, breadcrumbHome %}
+{{ breadcrumb(dictionary, dictionary["myolx.MyAds"], '/', ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
+<div id="myads">
+    {% if myAds.length %}
+        <ul class="itemListing">
+            {% for item in myAds %}
+                <li>
+                    <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                        <div class="imageCont">
+                            <div class="imageContAlign">
+                                <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="itemInfo">
+                        <h2>{{ item.price.displayPrice }}</h2>
+                        {% if item.status == 'pending' %}
+                            <span class="status pending">{{ dictionary["itemslisting.PendingAd"] }}</span>
+                        {% elif item.status == 'rejected' %}
+                            <span class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</span>
+                        {% endif %}
+                        <div class="centerCont">
+                            <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                                <p>{{ item.title }}</p>
+                            </a>
+                        </div>
+                        <span>{{ item.displayLocation }}</span>
+                        <a href="" class="action">{{ dictionary["showactivelistings.Edit"] }}</a>
+                        <a href="" class="action">{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <div class="emtyList">
+                {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}
+            </div>
+        {% endif %}
+</div>
+{{ breadcrumbHome(dictionary) }}

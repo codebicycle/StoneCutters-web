@@ -4,7 +4,7 @@
 {% from macros import breadcrumb, breadcrumbHome %}
 {{ breadcrumb(dictionary, category.name) }}
 <div id="itemListing">
-    <ul>
+    <ul class="itemListing">
         {% for item in items %}
             <li>
                 <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
