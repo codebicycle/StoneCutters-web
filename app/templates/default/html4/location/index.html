@@ -1,5 +1,6 @@
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, dictionary["distancediv.changeLocation"]) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
 <div id="locationSelect" class="locationBreadcrumb">
     <p>
         <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
@@ -28,4 +29,4 @@
         <div class="emtyList">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
     {% endif %}
 </div>
-{{ breadcrumbHome(dictionary) }}
+{{ breadcrumbHome(dictionary, link) }}

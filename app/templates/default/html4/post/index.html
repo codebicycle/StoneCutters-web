@@ -1,5 +1,6 @@
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, dictionary["posting_selector.SelectCategory"]) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["posting_selector.SelectCategory"]) }}
 <div id="selectCat">
     <ul class="normalList">
         {% for category in categories.models %}
@@ -12,4 +13,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary) }}
+{{ breadcrumbHome(dictionary, link) }}

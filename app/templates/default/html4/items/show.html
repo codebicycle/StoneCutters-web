@@ -1,5 +1,6 @@
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, item.category.name) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, item.category.name) }}
 <div id="itemPage">
     {% if item.status.visible %}
         <h1>{{ item.title }}</h1>
@@ -89,4 +90,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary) }}
+{{ breadcrumbHome(dictionary, link) }}

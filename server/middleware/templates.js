@@ -38,20 +38,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 };
                 var directory = 'default';
                 var jsDir = minify ? 'min' : 'app';
-                var platform;
+                var platform = req.subdomains.pop() || 'wap';
                 var template;
 
-                if(app.getSession('platformForced')) {
-                    platform = app.getSession('platform') || 'wap';
-                }
-                else {
-                    /*if (device.isBrowser) {
-                        platform = 'desktop';
-                    }
-                    else {*/
-                        platform = device.web_platform || 'wap';
-                    //}
-                }
                 if (isLocalized(platform, siteLocation)) {
                     directory = siteLocation;
                 }

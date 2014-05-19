@@ -24,6 +24,7 @@ module.exports = function appUseConf(done) {
     }
 
     function rendrConfiguration(rendrApp) {
+        rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
         rendrApp.use(middleware.abSelector());
         rendrApp.use(middleware.environment());

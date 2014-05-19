@@ -1,6 +1,7 @@
 <section id="selectSubCat">
     {% from macros import breadcrumb %}
-    {{ breadcrumb(dictionary, dictionary["posting_select_subcategory.SelectSubcategory"]) }}
+    {% set link = (referer | breadcrumb | link) %}
+    {{ breadcrumb(dictionary, link, dictionary["posting_select_subcategory.SelectSubcategory"]) }}
     <ul>
         {% for category in subcategories %}
             <li>

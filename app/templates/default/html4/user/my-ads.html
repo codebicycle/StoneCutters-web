@@ -1,5 +1,6 @@
 {% from macros import breadcrumb, breadcrumbHome %}
-{{ breadcrumb(dictionary, dictionary["myolx.MyAds"], '/', ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["myolx.MyAds"], ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
 <div id="myads">
     {% if myAds.length %}
         <ul class="itemListing">
@@ -37,4 +38,4 @@
             </div>
         {% endif %}
 </div>
-{{ breadcrumbHome(dictionary) }}
+{{ breadcrumbHome(dictionary, link) }}
