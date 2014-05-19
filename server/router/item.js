@@ -192,7 +192,7 @@ module.exports = function(app, dataAdapter) {
     })();
 
     (function favorite() {
-        app.post('/items/:itemId/favorite/:intent?', handler);
+        app.get('/items/:itemId/favorite/:intent?', handler);
 
         function handler(req, res) {
             var itemId = req.param('itemId', null);

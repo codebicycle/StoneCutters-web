@@ -5,11 +5,11 @@
     {% if item.status.visible %}
         <h1>{{ item.title }}</h1>
         {% if item.isFavorite %}
-            <form action="/items/{{ item.id }}/favorite/delete" method="POST">
+            <form action="/items/{{ item.id }}/favorite/delete" >
                 <input type="submit" value="[mobilepromo.RemoveFromFavorites]" class="favorite favoriteOn" />
             </form>
         {% elif user %}
-            <form action="/items/{{ item.id }}/favorite" method="POST">
+            <form action="/items/{{ item.id }}/favorite" >
                 <input type="submit" value="[itemgeneraldetails.addFavorites]" class="favorite favoriteOff" />
             </form>
         {% else %}

@@ -219,34 +219,6 @@
                     </tr>
                 </table>
             {% endif %}
-            <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                <tr>
-                    <td style="border-top: solid thin #808080;">
-                        <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
-                            <tr>
-                                <td align="center" style="border: solid thin #AAA;">
-                                    {% if item.isFavorite %}
-                                        <form action="/items/{{ item.id }}/favorite/delete" method="POST">
-                                            <!-- <input type="submit" value='{{ dictionary["mobilepromo.RemoveFromFavorites"] }}' /> -->
-                                            <input type="submit" value="Remove from favorites" />
-                                        </form>
-                                    {% elif user %}
-                                        <form action="/items/{{ item.id }}/favorite" method="POST">
-                                            <!-- <input type="submit" value='{{ dictionary["itemgeneraldetails.addFavorites"] }}' /> -->
-                                            <input type="submit" value="Add to favorites" />
-                                        </form>
-                                    {% else %}
-                                        <form action="/register">
-                                            <!-- <input type="submit" value='{{ dictionary["itemgeneraldetails.addFavorites"] }}' /> -->
-                                            <input type="submit" value="Add to favorites" />
-                                        </form>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
         {% else %}
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
