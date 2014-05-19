@@ -71,7 +71,7 @@
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
                                 <div class="slide" data-itemId="{{ relatedItem.id }}">
-                                    <a href="/{{ item.title | urlize }}-iid-{{ relatedItem.id }}">
+                                    <a href="/{{ relatedItem | slugToUrl | link }}">
                                         <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
                                     </a>
                                 </div>

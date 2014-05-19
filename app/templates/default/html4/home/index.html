@@ -5,7 +5,7 @@
 	<ul>
 		{% for category in categories.models %}
 			<li class="{{ "last" if loop.last else "" }}" >
-				<a href="{{ category.trName | urlize }}-cat-{{ category.id }}">
+				<a href="/{{ category | slugToUrl | link }}">
 					<img border="0" alt="{{ category.trName }}" src="{{ ['/images/', platform, '/icons/', icons.join('.'), '/', category.id, '.png'] | join('') | static }}" />
 					<span>{{category.trName}}</span>
 				</a>

@@ -53,14 +53,19 @@
                             <td align="center">
                                 <small style="display: block;">
                                     {% if pos > 0 %}
-                                        <a rel="nofollow" href="{{ item.title | urlize }}-iid-{{ item.id }}{% if pos - 1 > 0 %}?pos={{ pos - 1 }}{% endif %}">&lt;</a> |
+                                        {% set posImage = "" %}
+                                        {% if pos - 1 > 0 %}
+                                            {% set posImage = "?pos=" + (pos - 1) %}
+                                        {% endif %}
+                                        <a rel="nofollow" href="/{{ [item | slugToUrl, posImage] | join('') | link }}">&lt;</a> |
                                     {% else %}
                                         <font color="#CCCCCC">&lt;</font> |
                                     {% endif %}
                                         {# {{ pos + 1 }} {{ dictionary["posting_photosprogress.of"] }} {{ item.images.length }} #}
                                         {{ pos + 1 }} of {{ item.images.length }}
                                     {% if pos < item.images.length - 1 %}
-                                         | <a rel="nofollow" href="{{ item.title | urlize }}-iid-{{ item.id }}?pos={{ pos + 1 }}">&gt;</a>
+                                        {% set posImage = '?pos=' + (pos + 1) %}
+                                         | <a rel="nofollow" href="/{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>
                                     {% else %}
                                          | <font color="#CCCCCC">&gt;</font>
                                     {% endif %}
@@ -78,7 +83,7 @@
                                 <tr>
                                     <td align="center" style="border: solid thin #F30;">
                                         <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
-                                        <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
+                                        <a href="/{{ [item | slugToUrl, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
                                     </td>
                                 </tr>
                             </table>
@@ -206,7 +211,7 @@
                                 <tr>
                                     <td align="center" style="border: solid thin #F30;">
                                         <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
-                                        <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
+                                        <a href="/{{ [item | slugToUrl, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
                                     </td>
                                 </tr>
                             </table>

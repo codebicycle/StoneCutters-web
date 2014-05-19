@@ -30,12 +30,12 @@ module.exports = {
         function controller() {
             var siteLocation = this.app.getSession('siteLocation');
             var category = helpers.categories.getCat(this.app.getSession(), params.catId);
-            var slug = helpers.common.urlize(category.trName);
+            var slug = helpers.common.slugToUrl(category);
             var categoryTree;
             var user;
 
-            if (slug !== params.title) {
-                this.redirectTo(['/', slug, '-cat-', params.catId].join(''));
+            if (slug.indexOf(params.title + '-cat-')) {
+                this.redirectTo(helpers.common.link('/' + slug, siteLocation));
                 return;
             }
             categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.catId);

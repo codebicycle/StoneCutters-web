@@ -6,7 +6,7 @@
         <ul class="itemListing">
             {% for item in favorites %}
                 <li>
-                    <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                    <a href="/{{ item | slugToUrl | link }}">
                         <div class="imageCont">
                             <div class="imageContAlign">
                                 <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
@@ -17,7 +17,7 @@
                         <h2>{{ item.price.displayPrice }}</h2>
                         <span>{{ item.date.since }}</span>
                         <div class="centerCont">
-                            <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                            <a href="/{{ item | slugToUrl | link }}">
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
