@@ -91,7 +91,6 @@ module.exports = {
                 categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);
                 helpers.analytics.reset();
                 helpers.analytics.setPage('posting_cat_subcat');
-                helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
                 result.analytics = helpers.analytics.generateURL(app.getSession());
@@ -198,7 +197,6 @@ module.exports = {
                     categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
                     helpers.analytics.reset();
                     helpers.analytics.setPage('posting_edit');
-                    helpers.analytics.addParam('user', user);
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
@@ -286,8 +284,7 @@ module.exports = {
                     result.sk = securityKey;
                     categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                     helpers.analytics.reset();
-                    helpers.analytics.setPage('item');
-                    helpers.analytics.addParam('user', user);
+                    helpers.analytics.setPage('posting_success');
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);

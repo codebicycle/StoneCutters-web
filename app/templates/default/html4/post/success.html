@@ -16,5 +16,8 @@
         <a href="/posting" class="btns orange">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</a>
         <a href="/" class="back">{{ dictionary["misc.BackToStart_Mob"] }}</a>
     </div>
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>
 {{ breadcrumbHome(dictionary, link) }}

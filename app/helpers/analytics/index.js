@@ -36,6 +36,8 @@ function generateURL(session) {
     var page = query.page;
     var url = urls[page];
     var params = {};
+
+    this.addParam('rendering', session.platform);
     
     params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
     params.random = Math.round(Math.random() * 1000000);

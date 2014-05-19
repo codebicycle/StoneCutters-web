@@ -14,6 +14,12 @@
         <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">{{ item.title }}</a>
     </td>
 </tr>
+<tr style="display: none;">
+    <td>
+        {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+        {% include templateName %}
+    </td>
+</tr>
 <tr>
     <td>
         {% from macros import breadcrumb %}

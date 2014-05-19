@@ -156,7 +156,7 @@ module.exports = {
         url: 'location',
         view: 'location#index',
         isServer: false,
-        google: 'location',
+        google: 'post_location/[rendering]',
         ati: {
             process: false,
             params: {
@@ -170,7 +170,7 @@ module.exports = {
         url: 'posting/success/:itemId',
         view: 'post#success',
         isServer: false,
-        google: 'posting',
+        google: '[category-name]/[subcategory-id]/post_success/[rendering]',
         ati: {
             process: true,
             params: {
@@ -193,7 +193,7 @@ module.exports = {
         url: 'posting/:categoryId/:subcategoryId',
         view: 'post#form',
         isServer: false,
-        google: 'posting',
+        google: '[category-name]/[subcategory-id]/post_form/[rendering]',
         ati: {
             process: true,
             params: {
@@ -211,7 +211,7 @@ module.exports = {
         url: 'posting/:categoryId',
         view: 'post#subcat',
         isServer: false,
-        google: 'posting',
+        google: 'post_subcategorylist/[rendering]',
         ati: {
             process: false,
             params: {
@@ -225,7 +225,7 @@ module.exports = {
         url :'posting',
         view: 'post#index',
         isServer: false,
-        google: 'posting',
+        google: 'post_categorylist/[rendering]',
         ati: {
             process: false,
             params: {
