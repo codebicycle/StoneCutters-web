@@ -1,5 +1,5 @@
 {% macro breadcrumb(dictionary, link, title='', suffix='') %}
-    <h1>{{link}}</h1>
+    <!-- h1>{{link}}</h1 -->
     <div class="breadcrumb">
         <a href="{{link}}" class="arrow">{{dictionary["defaultfooter.Back"]}}</a>
         {{ (['<h1>', title, '</h1>'] | join) if title }}{{suffix}}

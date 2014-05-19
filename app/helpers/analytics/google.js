@@ -60,6 +60,12 @@ var analyticsParams = {
         parse: function (url, options) {
             return url.replace('[' + this.name + ']', '');
         }
+    },
+    platform: {
+        name: 'rendering',
+        parse: function (url, options) {
+            return url.replace('[' + this.name + ']', options.rendering);
+        }
     }
 };
 
