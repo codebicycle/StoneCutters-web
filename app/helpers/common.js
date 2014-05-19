@@ -92,11 +92,18 @@ module.exports = (function() {
         {replace:'-', regExp:/\-+/g}
     ];
 
-    function urlize(slug) {
+    function urlize(url) {
         URLizeMap.forEach(function(map) {
-            slug = slug.replace(map.regExp, map.replace);
+            url = url.replace(map.regExp, map.replace);
         });
-        return slug.trim().toLowerCase();
+        return url.trim().toLowerCase();
+    }
+
+    function slugToUrl(obj) {
+        if (obj.slug) {
+            return obj.slug.substr(obj.slug.lastIndexOf('/') + 1);
+        }
+        return ['des', (obj.category ? '-iid-' : '-cat-'), obj.id].join('');
     }
 
     function link(href, siteLocation) {
@@ -125,6 +132,7 @@ module.exports = (function() {
 
     return {
         urlize: urlize,
+        slugToUrl: slugToUrl,
         link: link,
         daysDiff: daysDiff
     };

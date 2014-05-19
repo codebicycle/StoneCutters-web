@@ -6,7 +6,7 @@
         <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
         <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
         <p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}<br></p>
-        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">{{ dictionary["itemwarning.Here"] }}</a></p>
+        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="/{{ item | slugToUrl | link }}">{{ dictionary["itemwarning.Here"] }}</a></p>
     </article>
     <article class="mail">
         <h1>{{ dictionary["misc.EmailAdActivated_Mob"] }}</h1>

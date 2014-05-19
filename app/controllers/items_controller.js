@@ -147,12 +147,11 @@ module.exports = {
             };
             var siteLocation = app.getSession('siteLocation');
             var category = helpers.categories.getCat(app.getSession(), params.catId);
-            var slug = helpers.common.urlize(category.trName);
+            var slug = helpers.common.slugToUrl(category);
             var query;
 
-            if (slug !== params.title) {
-                slug = ['/', slug, '-cat-', params.catId, '-p-1'].join('');
-                this.redirectTo(helpers.common.link(slug, siteLocation));
+            if (slug.indexOf(params.title + '-cat-')) {
+                this.redirectTo(helpers.common.link('/' + slug + '-p-1', siteLocation));
                 return;
             }
 
@@ -166,7 +165,7 @@ module.exports = {
             delete params.urlFilters;
 
             helpers.seo.resetHead();
-            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slug, '-cat-', query.catId, (query.page ? '-p-' + query.page : '')].join(''));
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slug, (query.page ? '-p-' + query.page : '')].join(''));
 
             /** don't read from cache, because rendr caching expects an array response
             with ids, and smaug returns an object with 'data' and 'metadata' */
@@ -249,12 +248,11 @@ module.exports = {
 
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
-                var slug = helpers.common.urlize(item.title);
+                var slug = helpers.common.slugToUrl(item);
                 var spec;
 
-                if (slug !== slugUrl) {
-                    slug = ['/', slug, '-iid-', item.id].join('');
-                    that.redirectTo(helpers.common.link(slug, siteLocation));
+                if (slug.indexOf(slugUrl + '-iid-')) {
+                    that.redirectTo(helpers.common.link('/' + slug, siteLocation));
                     return;
                 }
 
@@ -372,19 +370,17 @@ module.exports = {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
-                var slug = helpers.common.urlize(item.title);
+                var slug = helpers.common.slugToUrl(item);
                 var siteLocation = that.app.getSession('siteLocation');
                 var categoryTree;
 
-                if (slug !== slugUrl) {
-                    slug = ['/', slug, '-iid-', item.id, '/reply'].join('');
-                    that.redirectTo(helpers.common.link(slug, siteLocation));
+                if (slug.indexOf(slugUrl + '-iid-')) {
+                    that.redirectTo(helpers.common.link('/' + slug + '/reply', siteLocation));
                     return;
                 }
                 categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.setPage('item_reply');
-                helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);

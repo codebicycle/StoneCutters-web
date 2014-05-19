@@ -210,12 +210,13 @@ module.exports = function(nunjucks) {
                 if (currentRoute.action === 'index') {
                     var categoryId = this.ctx.category.parentId;
                     var category = this.ctx._app.getSession('categories')._byId[categoryId];
-
-                    breadcrumb = '/' + common.urlize(category.trName) + '-cat-' + categoryId;
+                    
+                    breadcrumb = '/' + common.slugToUrl(category);
                 }
             }
             return breadcrumb || '/';
         },
+        slugToUrl: common.slugToUrl,
         urlize: common.urlize
     };
 };

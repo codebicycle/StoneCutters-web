@@ -11,7 +11,7 @@
 <tr>
     <td style="padding: .25em .5em .5em;">
         <small>{{ dictionary["postingtitlelisting.view"] }}</small><br>
-        <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">{{ item.title }}</a>
+        <a href="/{{ item | slugToUrl | link }}">{{ item.title }}</a>
     </td>
 </tr>
 <tr style="display: none;">

@@ -6,7 +6,7 @@
         <ul class="itemListing">
             {% for item in myAds %}
                 <li>
-                    <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                    <a href="/{{ item | slugToUrl | link }}">
                         <div class="imageCont">
                             <div class="imageContAlign">
                                 <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
@@ -21,7 +21,7 @@
                             <span class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</span>
                         {% endif %}
                         <div class="centerCont">
-                            <a href="/{{ item.title | urlize }}-iid-{{ item.id }}">
+                            <a href="/{{ item | slugToUrl | link }}">
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
