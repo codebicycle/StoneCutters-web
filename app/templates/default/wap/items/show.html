@@ -214,27 +214,6 @@
                     </tr>
                 </table>
             {% endif %}
-            <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                <tr>
-                    <td style="border-top: solid thin #808080;">
-                        <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
-                            <tr>
-                                <td align="center" style="border: solid thin #AAA;">
-                                    <small style="display: block;">
-                                        {% if item.isFavorite %}
-                                            <a href="/items/{{ item.id }}/favorite/delete">{{ dictionary["item.RemoveFromFavorites"] }}</a>
-                                        {% elif user %}
-                                            <a href="/items/{{ item.id }}/favorite">{{ dictionary["itemgeneraldetails.addFavorites"] }}</a>
-                                        {% else %}
-                                            <a href="/register">{{ dictionary["itemgeneraldetails.addFavorites"] }}</a>
-                                        {% endif %}
-                                    </small>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
         {% else %}
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
