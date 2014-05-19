@@ -93,7 +93,7 @@ module.exports = BaseView.extend({
                 var itemId = element.attr('data-itemId');
                 var url = (element.hasClass('add')) ? '/items/'+itemId+'/favorite' : '/items/'+itemId+'/favorite/delete';
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: url,
                     cache: false,
                     success: function(data) {
