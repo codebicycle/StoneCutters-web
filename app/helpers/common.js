@@ -103,7 +103,7 @@ module.exports = (function() {
         if (obj.slug) {
             return obj.slug.substr(obj.slug.lastIndexOf('/') + 1);
         }
-        return ['des', (obj.category ? '-iid-' : '-cat-'), obj.id].join('');
+        return ['des', (typeof obj.parentId !== 'undefined' ? '-cat-' : '-iid-'), obj.id].join('');
     }
 
     function link(href, siteLocation) {
