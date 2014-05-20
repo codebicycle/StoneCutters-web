@@ -30,10 +30,13 @@ describe('home', function test() {
                     })
                     .then(done, done);
             });
-            it('should have subcategory Cars but not Cellphones', function test(done) {
-                browser.location.pathname.should.equal('/change-this-description-for-the-category-cat-362');
-                should.exist(browser.link('Cars'));
-                should.not.exist(browser.link('Cellphones'));
+            it('should have the following path "/vehicles-cat-362"', function test(done) {
+                browser.location.pathname.should.equal('/vehicles-cat-362');
+                done();
+            });
+            it('should have subcategory Cars but not Tablets', function test(done) {
+                should.exist(browser.link('a[href*="/cars-cat-378"]'));
+                should.not.exist(browser.link('a[href*="/tablets-cat-857"]'));
                 done();
             });
         });
