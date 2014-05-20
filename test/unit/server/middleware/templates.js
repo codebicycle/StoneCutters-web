@@ -11,6 +11,7 @@ var dataAdapter = new SmaugAdapter({
 });
 var middleware = require('../../../../server/middleware')(dataAdapter);
 var localization = require('../../../../server/config').get('localization');
+var hosts = ['html5.m.olx.com.ar', 'html4.m.olx.com', 'wap.m.olx.in'];
 var userAgents = {
     /*'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0': {
         platform: 'desktop'
@@ -75,7 +76,7 @@ describe('server', function test() {
                     app.use(server);
                     request(app)
                         .get('/')
-                        .set('host', 'm.olx.com.ar')
+                        .set('host', hosts[0])
                         .set('user-agent', userAgents[0])
                         .end(end);
 
@@ -108,6 +109,7 @@ describe('server', function test() {
                 done();
             });
             describe('platform', function test() {
+                var index = -1;
                 for (var userAgent in userAgents) {
                     closure(userAgent);
                 }
@@ -116,7 +118,7 @@ describe('server', function test() {
                         it('should be "' + userAgents[userAgent].platform + '"', function test(done) {
                             request(app)
                                 .get('/')
-                                .set('host', 'm.olx.com.ar')
+                                .set('host', hosts[++index])
                                 .set('user-agent', userAgent)
                                 .end(end);
 
@@ -135,6 +137,7 @@ describe('server', function test() {
                 }
             });
             describe('template', function test() {
+                var index = -1;
                 for (var userAgent in userAgents) {
                     closure(userAgent);
                 }
@@ -143,7 +146,7 @@ describe('server', function test() {
                         it('should be "default/' + userAgents[userAgent].platform + '" for host m.olx.com', function test(done) {
                             request(app)
                                 .get('/')
-                                .set('host', 'm.olx.com')
+                                .set('host', hosts[++index])
                                 .set('user-agent', userAgent)
                                 .end(end);
 
@@ -190,10 +193,10 @@ describe('server', function test() {
                 }
                 function closure(userAgent) {
                     describe(userAgent, function test() {
-                        it('should be "default" for host m.olx.com', function test(done) {
+                        it('should be "default" for host html4.m.olx.com', function test(done) {
                             request(app)
                                 .get('/')
-                                .set('host', 'm.olx.com')
+                                .set('host', 'html4.m.olx.com')
                                 .set('user-agent', userAgent)
                                 .end(end);
 

@@ -1,3 +1,4 @@
+
 'use strict';
 
 var _ = require('underscore');
@@ -51,6 +52,7 @@ describe('server', function test() {
 
                     rendrApp.use(middleware.session());
                     rendrApp.use(middleware.environment());
+                    rendrApp.use(middleware.location());
                     rendrApp.use(before);
                     rendrApp.use(middleware.categories());
                     rendrApp.use(after);
@@ -102,21 +104,30 @@ describe('server', function test() {
             });
             it('should be different for different hosts', function test(done) {
                 request(app)
-                    .get('/')
+                    .get('/?location=www.olx.in')
                     .set('host', hosts[1])
                     .set('user-agent', userAgents[2])
                     .set('cookie', response.get('set-cookie'))
-                    .end(end);
+                    .end(next);
 
-                function end(err, response) {
-                    var newAfter = response.body.after;
+                    function next(err, response) {
+                        request(app)
+                            .get('/')
+                            .set('host', hosts[1])
+                            .set('user-agent', userAgents[2])
+                            .set('cookie', response.get('set-cookie'))
+                            .end(end);
 
-                    (function equality(before, after) {
-                        before.should.not.equal(after);
-                    })(JSON.stringify(after.session.categories), JSON.stringify(newAfter.session.categories));
+                        function end(err, response) {
+                            var newAfter = response.body.after;
 
-                    done();
-                }
+                            (function equality(before, after) {
+                                before.should.not.equal(after);
+                            })(JSON.stringify(after.session.categories), JSON.stringify(newAfter.session.categories));
+
+                            done();
+                        }
+                    }
             });
         });
     });

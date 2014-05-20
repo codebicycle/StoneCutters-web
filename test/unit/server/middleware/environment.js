@@ -79,39 +79,6 @@ describe('server', function test() {
                     done();
                 }
             });
-            describe('siteLocation', function test() {
-                it('should be added to the session', function test(done) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function existance(before, after) {
-                        before.should.not.have.property('siteLocation');
-                        after.should.have.property('siteLocation');
-                    })(before.session, after.session);
-
-                    done();
-                });
-                it('should be equal to the host', function test(done) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function equality(siteLocation, host) {
-                        siteLocation.should.equal(host);
-                    })(after.session.siteLocation, after.host);
-
-                    done();
-                });
-                it('should start with "www."', function test(done) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function validity(subdomain) {
-                        subdomain.should.equal('www');
-                    })(after.session.siteLocation.split('.')[0]);
-
-                    done();
-                });
-            });
             describe('path', function test() {
                 it('should be added to the session', function test(done) {
                     var before = response.body.before;
@@ -157,42 +124,6 @@ describe('server', function test() {
 
                     done();
                 });
-            });
-            describe('viewType', function test() {
-                it('should be added to the session', function test(done) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function existance(before, after) {
-                        before.should.not.have.property('viewType');
-                        after.should.have.property('viewType');
-                    })(before.session, after.session);
-
-                    done();
-                });
-                for (var path in paths) {
-                    // TODO: Needs to be fixed.
-                    //closure(path);
-                }
-                function closure(path) {
-                    it('should be "' + paths[path] + '" if path is ' + path, function test(done) {
-                        request(app)
-                            .get(path)
-                            .set('host', 'm.olx.com.ar')
-                            .end(end);
-
-                        function end(err, response) {
-                            var before = response.body.before;
-                            var after = response.body.after;
-
-                            (function equality(viewType) {
-                                viewType.should.equal(paths[path]);
-                            })(after.session.viewType);
-
-                            done();
-                        }
-                    });
-                }
             });
         });
     });

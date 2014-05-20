@@ -10,9 +10,9 @@ var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
 var middleware = require('../../../../server/middleware')(dataAdapter);
-var hosts = ['m.olx.com.ar', 'm.olx.com.br'];
+var hosts = ['m.olx.com.ar', 'm.olx.com.br', 'm.olx.in'];
 var userAgents = ['UCWEB/8.8 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0 Mobile', 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0) Asus;Galaxy6'];
-var languageId = 'es';
+var languageId = 'es-AR';
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -52,6 +52,7 @@ describe('server', function test() {
 
                     rendrApp.use(middleware.session());
                     rendrApp.use(middleware.environment());
+                    rendrApp.use(middleware.location());
                     rendrApp.use(before);
                     rendrApp.use(middleware.languages());
                     rendrApp.use(after);
@@ -103,21 +104,30 @@ describe('server', function test() {
                 });
                 it('should be different for different hosts', function test(done) {
                     request(app)
-                        .get('/')
-                        .set('host', hosts[1])
+                        .get('/?location=www.olx.in')
+                        .set('host', hosts[2])
                         .set('user-agent', userAgents[0])
                         .set('cookie', response.get('set-cookie'))
-                        .end(end);
+                        .end(next);
 
-                    function end(err, response) {
-                        var newAfter = response.body.after;
+                        function next(err, response) {
+                            request(app)
+                                .get('/')
+                                .set('host', hosts[2])
+                                .set('user-agent', userAgents[0])
+                                .set('cookie', response.get('set-cookie'))
+                                .end(end);
 
-                        (function equality(before, after) {
-                            before.should.not.equal(after);
-                        })(JSON.stringify(after.session.languages), JSON.stringify(newAfter.session.languages));
+                            function end(err, response) {
+                                var newAfter = response.body.after;
 
-                        done();
-                    }
+                                (function equality(before, after) {
+                                    before.should.not.equal(after);
+                                })(JSON.stringify(after.session.languages), JSON.stringify(newAfter.session.languages));
+
+                                done();
+                            }
+                        }
                 });
             });
             describe('selectedLanguage', function test() {
