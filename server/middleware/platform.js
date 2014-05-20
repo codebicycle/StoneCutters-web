@@ -5,8 +5,12 @@ var config = require('../../app/config');
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
+        var _ = require('underscore');
 
-        return function environment(req, res, next) {
+        return function platform(req, res, next) {
+            if (_.contains(excludedUrls.all, req.path)) {
+                return next();
+            }
 
             function callback(err, response, body) {
                 var platform;
