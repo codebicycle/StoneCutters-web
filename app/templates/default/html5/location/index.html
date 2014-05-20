@@ -1,7 +1,9 @@
 <h1>{{location.name}}{% if location.current %} > {{location.current.name}}{% endif %}</h1>
 
 <form action="/location">
-	<input type="text" name="search"><button type="submit">Search</button>
+	<input type="text" name="search">
+	<button type="submit">Search</button>
+    <input type="hidden" value="{{ target }}" name="target" style="display: none;" />
 	<small>Type a city</small>
 </form>
 
@@ -14,11 +16,14 @@
 			  	<ul>
 					{% for city in cities %}
  						<li>
-							<a href="/?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
+							<a href="/{{ target }}?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
 						</li>
 					{% endfor %}
 				</ul>
 			</div>
 		</section>
 	</div>
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </div>

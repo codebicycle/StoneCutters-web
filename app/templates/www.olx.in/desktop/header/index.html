@@ -14,7 +14,7 @@
         <p class="ina-headtxt ">
             {{location.name}} Largest Marketplace<span>Sell anything from used cars to mobiles, furniture, laptops, clothing &amp; more...</span>
         </p>
-        <a id="post-it" class="olx-ui-button corner-radius orange ina-post-button" rel="nofollow" href="/posting">
+        <a id="post-it" class="olx-ui-button corner-radius orange ina-post-button" rel="nofollow" href="{% if location.current %}"{{ '/posting' | link }}"{% else %}"{{ '/location?target=posting' | link }}">
             Submit an Ad<span class="ina-free-flag">Free</span>
         </a>
     </div>

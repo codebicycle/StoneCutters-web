@@ -7,7 +7,7 @@
                         <small>
                             <img src="{{ "/images/wap/ico_city.gif" | static }}">
                             <small>
-                                <a href="/?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
+                                <a href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/{{ target }}?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
                             </small>
                         </small>
                     </td>
@@ -23,7 +23,11 @@
                          </label><br />
                         <input type="text" value="" name="search" />
                         <input type="submit" value="{{ dictionary["homeheader.Search"] }}" name="search_button" />
+                        <input type="hidden" value="{{ target }}" name="target" style="display: none;" />
                     </form>
+
+                    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+                    {% include templateName %}
                 </td>
             </tr>
         </table>
