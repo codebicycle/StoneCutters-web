@@ -5,11 +5,11 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var config = require('../config');
         var minify = config.get(['uglify', 'enabled'], true);
-        var localization = config.get('localization');
+        var localization = config.get('localization', {});
         var _ = require('underscore');
 
         function isLocalized(platform, siteLocation) {
-            return !!(~localization[platform].indexOf(siteLocation));
+            return !!(localization[platform] && ~localization[platform].indexOf(siteLocation));
         }
 
         return function middleware(req, res, next) {
