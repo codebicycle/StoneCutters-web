@@ -68,7 +68,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (location.current) {
                     siteLocation = location.current.url;
                 }
-                app.persistSession({
+                app.updateSession({
                     location: location,
                     siteLocation: siteLocation
                 });
