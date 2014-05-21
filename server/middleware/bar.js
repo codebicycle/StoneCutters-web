@@ -17,7 +17,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             if (build) {
                 bar.version = build.version;
-                bar.revision = build.deploy.revision;
+                bar.revision = build.revision;
                 bar.show = true;
                 bar.env = (process.env.NODE_ENV || 'DEV').toUpperCase();
                 bar.platform = req.rendrApp.getSession('platform').toUpperCase();
