@@ -3,6 +3,7 @@
     {% view 'layout/head' %}
     <body>
 
+        {% view 'header/bar' %}
         {% view 'header/index' %}
         {% set templateName = 'compiled/' + template + '/partials/search.html' %}
         {% include templateName %}
