@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'N\xE3o \xE9 um usu\xE1rio cadastrado?',
     'loginbox.Password': 'Senha',
     'loginbox.Username': 'E-mail ou nome de usu\xE1rio',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
     'listingpageitemslisting.AllResultsNew': 'Todos os resultados',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desculpe, mas n\xE3o temos resultados para a sua pesquisa.',

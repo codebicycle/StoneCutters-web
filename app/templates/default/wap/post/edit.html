@@ -12,7 +12,7 @@
                 <td style="padding: .5em; border-top: solid thin #808080;">
                     <small>
                         <strong>Categoría::</strong>
-                        <span>Cat name</span>
+                        <span>{{subcategory.name}}</span>
                     </small>
                     <br />
                     <br style="display: none;" />
@@ -35,18 +35,18 @@
                             <input type="file" style="font-size: small" name="images[1]">
                         </label>
                         {% for field in fields.productDescription %}
-                            {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                            {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
                             {% include templateName %}
                             <br style="display: none;" />
                         {% endfor %}
                         {% for field in fields.categoryAttributes %}
                             {% if (field.values) or (field.fieldType == 'text') %}
-                                {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                                {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
                                 {% include templateName %}
                             {% endif %}
                         {% endfor %}
                         {% for field in fields.contactInformation %}
-                            {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                            {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
                             {% include templateName %}
                         {% endfor %}
                         {% if errField | is('string') %}
@@ -68,8 +68,8 @@
                         <input type="hidden" name="languageId" value="{{language}}">
                         <input type="hidden" name="languageCode" value="{{languageCode}}">
                         <input type="hidden" name="platform" value="{{platform}}">
-                        <input type="hidden" name="category.parentId" value="{{category}}">
-                        <input type="hidden" name="category.id" value="{{subcategory}}">
+                        <input type="hidden" name="category.parentId" value="{{category.id}}">
+                        <input type="hidden" name="category.id" value="{{subcategory.id}}">
                         <input type="hidden" name="id" value="{{item.id}}">
                         <input type="hidden" name="sk" value="{{sk}}">
                         <span style="display: block;"><input type="submit" value="Post Ad"></span>

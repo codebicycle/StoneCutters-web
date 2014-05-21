@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Si mwanachama?',
     'loginbox.Password': 'Nenosiri',
     'loginbox.Username': 'Jina la mtumiaji au Barua pepe',
+    'messages_site_class.30': 'Sawa',
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'Matokeo yote',
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',

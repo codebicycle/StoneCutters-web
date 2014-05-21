@@ -17,16 +17,30 @@ module.exports = BaseView.extend({
             var itemId = element.attr('data-itemId');
             var itemUrl = element.attr('data-itemUrl');
             $('.viewItem').attr("href", itemUrl);
-            $('.editItem').attr("href", 'urlForEdit');
-            $('.deleteItem').attr("href", 'urlForDelete');
+            $('.editItem').attr("href", '/myolx/edititem/' + itemId);
+            $('.deleteItemConfirm').data("itemId", itemId);
             $('#edit').addClass('visible');
         });
-        $('.popup-close').click(function(e) {
+        $('#edit .popup-close').click(function(e) {
             e.preventDefault();
             $('.viewItem').attr("href", '#');
             $('.editItem').attr("href", '#');
-            $('.deleteItem').attr("href", '#');
+            $('.deleteItemConfirm').removeData("itemId");
             $('#edit').removeClass('visible');
+        });
+        $('.deleteItem').on("click", function(e) {
+            e.preventDefault();
+            var $confirm = $('.deleteItemConfirm');
+            var href = $confirm.attr('href');
+            $confirm.attr('href', href.replace('[[itemId]]', $confirm.data('itemId')));
+            $('#delete').addClass('visible');
+        });
+        $('#delete .popup-close').click(function(e) {
+            e.preventDefault();
+            var $confirm = $('.deleteItemConfirm');
+            var href = $confirm.attr('href');
+            $confirm.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
+            $('#delete').removeClass('visible');
         });
     }
 });

@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Bukan anggota?',
     'loginbox.Password': 'Kata Sandi',
     'loginbox.Username': 'Nama Pengguna (Username) atau Email',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': 'Alamat Email',
     'listingpageitemslisting.AllResultsNew': 'Semua hasil',
     'listingpageitemslisting.WeAreSorryNoResults': 'Maaf tidak ada hasil untuk pencarian Anda.',

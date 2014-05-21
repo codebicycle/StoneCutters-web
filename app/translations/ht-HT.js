@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Ou poko manm?',
     'loginbox.Password': 'Kod Sekr\xE8',
     'loginbox.Username': 'Non Manm nan ou Im\xE8l ou',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Adr\xE8s Im\xE8l',
     'listingpageitemslisting.AllResultsNew': 'Tout resilta yo',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nou regr\xE8t men nou pa jwenn okenn rezilta pou rech\xE8ch ou an. ',

@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Etk\xF6 ole viel\xE4 j\xE4sen?',
     'loginbox.Password': 'salasana',
     'loginbox.Username': 'K\xE4ytt\xE4j\xE4tunnus tai s\xE4hk\xF6postiosoite',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'S\xE4hk\xF6postiosoite',
     'listingpageitemslisting.AllResultsNew': 'Kaikki tulokset',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',

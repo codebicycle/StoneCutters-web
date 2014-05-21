@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Nie ste \u010Dlenom?',
     'loginbox.Password': 'Heslo',
     'loginbox.Username': 'Pou\u017E\xEDvate\u013Esk\xE9 meno alebo e-mail',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'listingpageitemslisting.AllResultsNew': 'V\u0161etky v\xFDsledky',
     'listingpageitemslisting.WeAreSorryNoResults': '\u013Dutujeme, neboli n\xE1jden\xE9 \u017Eiadne v\xFDsledky.',

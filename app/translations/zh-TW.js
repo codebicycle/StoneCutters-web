@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': '\u9084\u4E0D\u662F\u6703\u54E1\uFF1F',
     'loginbox.Password': '\u5BC6\u78BC',
     'loginbox.Username': '\u7528\u6236\u540D\u6216\u4FE1\u7BB1',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': '\u96FB\u5B50\u90F5\u7BB1\u5730\u5740',
     'listingpageitemslisting.AllResultsNew': '\u6240\u6709\u7D50\u679C',
     'listingpageitemslisting.WeAreSorryNoResults': '\u5C0D\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u60A8\u641C\u7D22\u7684\u7D50\u679C',

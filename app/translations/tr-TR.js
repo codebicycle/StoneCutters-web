@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': '\xDCye de\u011Fil misiniz?',
     'loginbox.Password': 'Parola',
     'loginbox.Username': 'Kullan\u0131c\u0131 Ad\u0131 veya E-Posta Adresi ',
+    'messages_site_class.30': 'Tamam',
     'landingbody.EmailAddress': 'E-Posta Adresi',
     'listingpageitemslisting.AllResultsNew': 'B\xFCt\xFCn sonu\xE7lar',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z bulunamad\u0131.',

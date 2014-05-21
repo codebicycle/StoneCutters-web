@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Geen lid?',
     'loginbox.Password': 'Wachtwoord',
     'loginbox.Username': 'Gebruikersnaam of e-mail',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'E-mailadres',
     'listingpageitemslisting.AllResultsNew': 'Alle resultaten',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',

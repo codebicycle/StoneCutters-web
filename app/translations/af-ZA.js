@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Nie \'n lid nie?',
     'loginbox.Password': 'Wagwoord',
     'loginbox.Username': 'Gebruikersnaam of E-pos',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': 'E-posadres',
     'listingpageitemslisting.AllResultsNew': 'Alle resultate',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ons is jammer, maar jou soektog geen resultate opgelewer nie.',

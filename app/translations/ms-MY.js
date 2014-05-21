@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Bukan ahli?',
     'loginbox.Password': 'Kata laluan',
     'loginbox.Username': 'Nama penguna atau Emel',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Alamat Emel ',
     'listingpageitemslisting.AllResultsNew': 'Semua keputusan',
     'listingpageitemslisting.WeAreSorryNoResults': 'Kami minta maaf kerana kami tidak mendapat keputusan untuk carian anda.',

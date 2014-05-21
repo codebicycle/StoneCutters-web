@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Inte medlem \xE4n?',
     'loginbox.Password': 'L\xF6senord',
     'loginbox.Username': 'Anv\xE4ndarnamn eller e-post',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'E-postadress',
     'listingpageitemslisting.AllResultsNew': 'Alla resultat',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi \xE4r ledsna, men vi har inga resultat f\xF6r din s\xF6kning.',

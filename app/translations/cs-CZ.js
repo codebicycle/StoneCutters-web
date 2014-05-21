@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Nejste \u010Dlenem?',
     'loginbox.Password': 'Heslo',
     'loginbox.Username': 'U\u017Eivatelsk\xE9 jm\xE9no nebo e-mail',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'listingpageitemslisting.AllResultsNew': 'V\u0161echny v\xFDsledky hled\xE1n\xED',
     'listingpageitemslisting.WeAreSorryNoResults': 'Je n\xE1m l\xEDto, ale pro V\xE1mi zadan\xE9 vyhled\xE1v\xE1n\xED nem\xE1me v\xFDsledky.',

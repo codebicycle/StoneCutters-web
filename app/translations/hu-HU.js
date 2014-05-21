@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'M\xE9g nem tag?',
     'loginbox.Password': 'Jelsz\xF3',
     'loginbox.Username': 'Felhaszn\xE1l\xF3i n\xE9v vagy e-mail',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': 'E-mail c\xEDm',
     'listingpageitemslisting.AllResultsNew': '\xD6sszes tal\xE1lat',
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',

@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Toujours pas membre?',
     'loginbox.Password': 'Mot de passe',
     'loginbox.Username': 'Nom d\'Utilisateur ou Email',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Email',
     'listingpageitemslisting.AllResultsNew': 'Tous les r\xE9sultats',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nous sommes d\xE9sol\xE9s mais il n\'y pas de r\xE9sultats pour votre recherche.',

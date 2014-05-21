@@ -5,7 +5,7 @@
     <ul>
         {% for category in categories.models %}
             <li>
-                <a href="posting/{{category.id}}">{{category.trName}}</a>
+                <a href="{{ ['/posting/', category.id] | join('') | link }}">{{category.trName}}</a>
             </li>
         {% endfor %}
     </ul>
