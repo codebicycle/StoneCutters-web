@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Niste \u010Dlan?',
     'loginbox.Password': 'Lozinka',
     'loginbox.Username': 'Korisni\u010Dko ime ili e-mail',
+    'messages_site_class.30': 'U redu',
     'landingbody.EmailAddress': 'E-mail adresa',
     'listingpageitemslisting.AllResultsNew': 'Svi rezultati',
     'listingpageitemslisting.WeAreSorryNoResults': '\u017Dao nam je, ali za va\u0161u pretragu nemamo rezultata.',

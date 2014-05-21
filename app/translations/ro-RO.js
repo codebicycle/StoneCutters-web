@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Nu sunte\u0163i membru?',
     'loginbox.Password': 'Parola',
     'loginbox.Username': 'Nume de Utilizator sau Email',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Adresa de email',
     'listingpageitemslisting.AllResultsNew': 'Toate rezultatele',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ne pare r\u0103u dar nu avem rezultate pentru c\u0103utarea dvs.',

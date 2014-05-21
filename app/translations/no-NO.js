@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Er du ikke en registrert bruker?',
     'loginbox.Password': 'Passord',
     'loginbox.Username': 'Brukernavn eller epostadresse',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'E-postadresse',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi beklager men vi fant ingen s\xF8keresultater.',

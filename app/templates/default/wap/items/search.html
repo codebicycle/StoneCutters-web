@@ -1,7 +1,7 @@
 <tr>
     <td>
         {% view 'location/select' %}
-        {% set templateName = template + '/partials/search.html' %}
+        {% set templateName = 'compiled/' + template + '/partials/search.html' %}
         {% include templateName %}
         {% if metadata.total == 0 %}
             <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">

@@ -74,21 +74,20 @@ module.exports = {
 
             app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
-                var categoryTree;
+                var categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);
 
                 result.postingSession = result.postingSession.get('postingSession');
                 result.intent = 'create';
                 result.fields = response.fields;
                 result.errors = params.err;
-                result.category = params.categoryId;
-                result.subcategory = params.subcategoryId;
+                result.category = categoryTree.parent;
+                result.subcategory = categoryTree.subCategory;
                 result.language = languageId;
                 result.languageCode = languageCode;
                 result.siteLocation = siteLocation;
                 result.errField = params.errField;
                 result.errMsg = params.errMsg;
 
-                categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);
                 helpers.analytics.reset();
                 helpers.analytics.setPage('posting_cat_subcat');
                 helpers.analytics.addParam('category', categoryTree.parent);
@@ -178,7 +177,7 @@ module.exports = {
                 checkAuthentication(_params, _params.itemId);
                 app.fetch(spec, function afterFetch(err, result) {
                     var response = result.fields.models[0].attributes;
-                    var categoryTree;
+                    var categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
 
                     result.user = user;
                     result.item = item;
@@ -186,15 +185,14 @@ module.exports = {
                     result.intent = 'edit';
                     result.fields = response.fields;
                     result.errors = params.err;
-                    result.category = item.category.parentId;
-                    result.subcategory = item.category.id;
+                    result.category = categoryTree.parent;
+                    result.subcategory = categoryTree.subCategory;
                     result.language = languageId;
                     result.languageCode = languageCode;
                     result.errField = params.errField;
                     result.errMsg = params.errMsg;
                     result.sk = securityKey;
 
-                    categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
                     helpers.analytics.reset();
                     helpers.analytics.setPage('posting_edit');
                     helpers.analytics.addParam('item', item);

@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Ikke medlem?',
     'loginbox.Password': 'Kodeord',
     'loginbox.Username': 'Brugernavn eller e-mail',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desv\xE6rre kan vi ikke finde noget resultat p\xE5 din s\xF8gning.',

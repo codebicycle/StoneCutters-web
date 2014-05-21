@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Ei ole liige?',
     'loginbox.Password': 'Salas\xF5na',
     'loginbox.Username': 'Kasutajanimi v\xF5i E-post',
+    'messages_site_class.30': 'OK',
     'landingbody.EmailAddress': 'E-posti aadress',
     'listingpageitemslisting.AllResultsNew': 'K\xF5ik tulemused',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vabandame, kuid meil ei ole Teie otsingule tulemusi',

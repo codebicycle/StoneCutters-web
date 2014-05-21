@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': '\xBFNo eres miembro?',
     'loginbox.Password': 'Contrase\xF1a',
     'loginbox.Username': 'Usuario o Email',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Direcci\xF3n de Email',
     'listingpageitemslisting.AllResultsNew': 'Todos los resultados',
     'listingpageitemslisting.WeAreSorryNoResults': 'Lo lamentamos pero no hay resultados para tu b\xFAsqueda.',

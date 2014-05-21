@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Hindi ka pa miyembro?',
     'loginbox.Password': 'Password',
     'loginbox.Username': 'Username o Email',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'Lahat ng resulta',
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',

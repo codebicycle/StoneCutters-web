@@ -2,7 +2,7 @@
 {% set link = (referer | breadcrumb | link) %}
 {{ breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div class="changeCat">
-    {{ dictionary["itemslisting.Category"] }} : Mobile Phones
+    {{ dictionary["itemslisting.Category"] }} : {{ subcategory.name }}
     <a href="/posting">{{ dictionary["defaultheader.change"] }}</a>
 </div>
 <section id="posting">
@@ -23,9 +23,9 @@
 
         {% for field in fields.productDescription %}
             {% if  field.name == 'description' %}
-                {% set templateName = template + '/fields/textarea.html' %}
+                {% set templateName = 'compiled/' + template + '/fields/textarea.html' %}
             {% else %}
-                {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
             {% endif %}
         {% include templateName %}
         {% endfor %}
@@ -33,14 +33,14 @@
             <h4>{{ dictionary["misc.SpecificFields_title"] }}</h4>
             {% for field in fields.categoryAttributes %}
                 {% if (field.values) or (field.fieldType == 'text') %}
-                    {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+                    {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
                     {% include templateName %}
                 {% endif %}
             {% endfor %}
         {% endif %}
         <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
         {% for field in fields.contactInformation %}
-            {% set templateName = template + '/fields/' + field.fieldType + '.html' %}
+            {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
             {% include templateName %}
         {% endfor %}
 
@@ -49,8 +49,8 @@
         <input type="hidden" name="languageId" value="{{language}}">
         <input type="hidden" name="languageCode" value="{{languageCode}}">
         <input type="hidden" name="platform" value="{{platform}}">
-        <input type="hidden" name="category.parentId" value="{{category}}">
-        <input type="hidden" name="category.id" value="{{subcategory}}">
+        <input type="hidden" name="category.parentId" value="{{category.id}}">
+        <input type="hidden" name="category.id" value="{{subcategory.id}}">
 
         <div class="btnCenter">
             <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange">

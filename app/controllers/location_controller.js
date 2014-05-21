@@ -7,24 +7,29 @@ module.exports = {
         helpers.controllers.control(this, params, controller);
 
         function controller() {
+            var that = this;
             var spec;
+
+            helpers.analytics.reset();
+            helpers.analytics.setPage('location');
 
             if (!params.search) {
                 return callback(null, {
-                    cities: this.app.getSession('location').topCities.models,
-                    target: params.target
+                    cities: that.app.getSession('location').topCities.models,
+                    target: params.target,
+                    analytics: helpers.analytics.generateURL(that.app.getSession())
                 });
             }
             spec = {
                 cities: {
                     collection: 'Cities',
                     params: {
-                        location: this.app.getSession('siteLocation'),
+                        location: that.app.getSession('siteLocation'),
                         name: params.search
                     }
                 }
             };
-            this.app.fetch(spec, function afterFetch(err, result) {
+            that.app.fetch(spec, function afterFetch(err, result) {
                 var cities = {
                     'models': result.cities.toJSON(),
                     '_byId': {},
@@ -37,7 +42,9 @@ module.exports = {
                 callback(err, {
                     cities: cities.models,
                     search: params.search,
-                    posting: params.posting
+                    posting: params.posting,
+                    target: params.target,
+                    analytics: helpers.analytics.generateURL(that.app.getSession())
                 });
             });
         }

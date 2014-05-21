@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'No sou membre?',
     'loginbox.Password': 'Contrasenya',
     'loginbox.Username': 'Nom d\'usuari o correu electr\xF2nic',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Adre\xE7a de correu electr\xF2nic',
     'listingpageitemslisting.AllResultsNew': 'Tots els resultats',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',

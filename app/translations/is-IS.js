@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Ekki skr\xE1\xF0ur notandi?',
     'loginbox.Password': 'Lykilor\xF0',
     'loginbox.Username': 'Notandanafn e\xF0a t\xF6lvup\xF3stfang',
+    'messages_site_class.30': '\xCD lagi',
     'landingbody.EmailAddress': 'T\xF6lvup\xF3stfang',
     'listingpageitemslisting.AllResultsNew': 'Allar ni\xF0urst\xF6\xF0ur',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDEv\xED mi\xF0ur fundust engar ni\xF0urst\xF6\xF0ur fyrir leit \xFE\xEDna.',

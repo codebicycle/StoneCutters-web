@@ -5,7 +5,7 @@
     <ul>
         {% for category in subcategories %}
             <li>
-                <a href="/posting/{{categoryId}}/{{category.id}}">{{category.trName}}</a>
+                <a href="{{ ['/posting/', categoryId, '/', category.id] | join('') | link }}">{{category.trName}}</a>
             </li>
         {% endfor %}
     </ul>

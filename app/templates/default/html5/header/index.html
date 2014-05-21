@@ -11,7 +11,7 @@
         {% else %}
             <li class="logIn"><span class="btns blue"></span></li>
         {% endif %}
-        <li class="postBtn"><a href="/posting" class="btns orange">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a></li>
+        <li class="postBtn"><a href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}" class="btns orange">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a></li>
     </ul>
 </header>
 {% if user %}

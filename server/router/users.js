@@ -7,114 +7,14 @@ module.exports = function(app, dataAdapter) {
     var querystring = require('querystring');
     var crypto = require('crypto');
 
-    (function registration() {
-        app.post('/register', handler);
+    var loginHandler = (function login() {
 
-        function handler(req, res) {
+        return function handler(req, res, data) {
+            var usernameOrEmail = data.usernameOrEmail;
+            var password = data.password;
+            var redirect = data.redirect;
 
-            function parse(done) {
-                formidable(req, done.errfcb);
-            }
-
-            function validate(done, user) {
-                var errors = {
-                    errCode: 400,
-                    err: [],
-                    errFields: []
-                };
-
-                if (!user.username) {
-                    errors.err.push('Invalid username');
-                    errors.errFields.push('username');
-                }
-                if (!user.email) {
-                    errors.err.push('Invalid email');
-                    errors.errFields.push('email');
-                }
-                if (!user.password) {
-                    errors.err.push('Invalid password');
-                    errors.errFields.push('password');
-                }
-                if (!user.agreeTerms) {
-                    errors.err.push('Accept terms and conditions');
-                    errors.errFields.push('agreeTerms');
-                }
-                if (errors.err.length) {
-                    done.fail(errors);
-                    return;
-                }
-                done(user);
-            }
-
-            function submit(done, user) {
-                user.location = req.rendrApp.getSession('siteLocation');
-                user.languageId = 10;
-                dataAdapter.post(req, '/users', {
-                    data: user
-                }, done.errfcb);
-            }
-
-            function save(done, response, user) {
-                req.rendrApp.persistSession({
-                    user: user
-                });
-                done();
-            }
-
-            function success() {
-                res.redirect('/');
-            }
-
-            function error(err) {
-                var url = req.headers.referer;
-                var qIndex = url.indexOf('?');
-                var errors;
-
-                if (_.isArray(err)) {
-                    errors = {
-                        errCode: 400,
-                        errField: [],
-                        errMsg: [],
-                    };
-                    err.forEach(function each(error) {
-                        errors.errField.push(error.selector);
-                        errors.errMsg.push(error.message);
-                    });
-                }
-                else {
-                    errors = err;
-                }
-                if (qIndex != -1) {
-                    url = url.substring(0,qIndex);
-                }
-                res.redirect(url + '?' + querystring.stringify(errors));
-            }
-
-            asynquence().or(error)
-                .then(parse)
-                .then(validate)
-                .then(submit)
-                .then(save)
-                .val(success);
-        }
-    })();
-
-    (function login() {
-        app.post('/login', handler);
-
-        function handler(req, res) {
-            var usernameOrEmail;
-            var password;
-            var redirect;
-
-            function parse(done) {
-                formidable(req, done.errfcb);
-            }
-
-            function getChallenge(done, data) {
-                usernameOrEmail = data.usernameOrEmail;
-                password = data.password;
-                redirect = data.redirect;
+            function getChallenge(done) {
                 dataAdapter.get(req, '/users/challenge', {
                     query: {
                         u: usernameOrEmail
@@ -153,12 +53,121 @@ module.exports = function(app, dataAdapter) {
             }
 
             asynquence().or(error)
-                .then(parse)
                 .then(getChallenge)
                 .then(getCredentials)
                 .then(submit)
                 .then(save)
                 .val(success);
+        };
+    })();
+
+    (function registration() {
+        app.post('/register', handler);
+
+        function handler(req, res) {
+            var user;
+
+            function parse(done) {
+                formidable(req, done.errfcb);
+            }
+
+            function validate(done, data) {
+                var errors = {
+                    errCode: 400,
+                    err: [],
+                    errFields: []
+                };
+
+                if (!data.username) {
+                    errors.err.push('Invalid username');
+                    errors.errFields.push('username');
+                }
+                if (!data.email) {
+                    errors.err.push('Invalid email');
+                    errors.errFields.push('email');
+                }
+                if (!data.password) {
+                    errors.err.push('Invalid password');
+                    errors.errFields.push('password');
+                }
+                if (!data.agreeTerms) {
+                    errors.err.push('Accept terms and conditions');
+                    errors.errFields.push('agreeTerms');
+                }
+                if (errors.err.length) {
+                    done.fail(errors);
+                    return;
+                }
+                user = data;
+                done(data);
+            }
+
+            function submit(done, data) {
+                data.location = req.rendrApp.getSession('siteLocation');
+                data.languageId = 10;
+                dataAdapter.post(req, '/users', {
+                    data: data
+                }, done.errfcb);
+            }
+
+            function success() {
+                user.usernameOrEmail = user.username;
+                user.redirect = '/';
+                loginHandler(req, res, user);
+            }
+
+            function error(err) {
+                var url = req.headers.referer;
+                var qIndex = url.indexOf('?');
+                var errors;
+
+                if (_.isArray(err)) {
+                    errors = {
+                        errCode: 400,
+                        errField: [],
+                        errMsg: [],
+                    };
+                    err.forEach(function each(error) {
+                        errors.errField.push(error.selector);
+                        errors.errMsg.push(error.message);
+                    });
+                }
+                else {
+                    errors = err;
+                }
+                if (qIndex != -1) {
+                    url = url.substring(0,qIndex);
+                }
+                res.redirect(url + '?' + querystring.stringify(errors));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(validate)
+                .then(submit)
+                .val(success);
+        }
+    })();
+
+    (function login() {
+        app.post('/login', handler);
+
+        function handler(req, res) {
+            function parse(done) {
+                formidable(req, done);
+            }
+
+            function submit(done, data) {
+                loginHandler(req, res, data);
+            }
+
+            function error(err) {
+                res.redirect('/login?' + querystring.stringify(err));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .val(submit);
         }
     })();
 

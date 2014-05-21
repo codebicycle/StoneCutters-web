@@ -11,9 +11,9 @@
             </tbody>
         </table>
         {% view 'location/select' %}
-        {% set templateName = template + '/post/home_select.html' %}
+        {% set templateName = 'compiled/' + template + '/post/home_select.html' %}
         {% include templateName %}
-        {% set templateName = template + '/partials/search.html' %}
+        {% set templateName = 'compiled/' + template + '/partials/search.html' %}
         {% include templateName %}
         <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left" bgcolor="#FFFFFF">
             {% for subcategory in category.children %}

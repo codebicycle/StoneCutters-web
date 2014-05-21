@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Nie zarejestrowany?',
     'loginbox.Password': 'Has\u0142o',
     'loginbox.Username': 'Nazwa u\u017Cytkownika lub e-mail',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Adres e-mail',
     'listingpageitemslisting.AllResultsNew': 'Wszystkie wyniki',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',

@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Nesate narys?',
     'loginbox.Password': 'slapta\u017Eodis',
     'loginbox.Username': 'Vartotojo vardas ar el. pa\u0161tas',
+    'messages_site_class.30': 'Gerai',
     'landingbody.EmailAddress': 'El. pa\u0161to adresas',
     'listingpageitemslisting.AllResultsNew': 'Visi rezultatai',
     'listingpageitemslisting.WeAreSorryNoResults': 'Atsipra\u0161ome, ta\u010Diau neturime j\u016Bs\u0173 paie\u0161kos rezultat\u0173.',

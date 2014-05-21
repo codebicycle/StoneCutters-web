@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Neesat biedrs?',
     'loginbox.Password': 'Parole',
     'loginbox.Username': 'Lietot\u0101jv\u0101rds vai e-pasts',
+    'messages_site_class.30': 'Labi',
     'landingbody.EmailAddress': 'E-pasta adrese',
     'listingpageitemslisting.AllResultsNew': 'Visi rezult\u0101ti',
     'listingpageitemslisting.WeAreSorryNoResults': 'Diem\u017E\u0113l nevaram atrast j\u016Bsu nor\u0101d\u012Btajiem parametriem atbilsto\u0161us rezult\u0101tus.',

@@ -25,6 +25,7 @@ module.exports = {
     'loginbox.NotAMember': 'Not a member?',
     'loginbox.Password': 'Password',
     'loginbox.Username': 'Username or Email',
+    'messages_site_class.30': 'Ok',
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'All results',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',

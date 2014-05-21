@@ -272,7 +272,7 @@ module.exports = function(app, dataAdapter) {
     })();
 
     (function removeItem() {
-        app.post('/myolx/deleteitem/:itemId?', handler);
+        app.get('/myolx/deleteitem/:itemId?', handler);
 
         function handler(req, res, next) {
             var itemId = req.param('itemId', '');
