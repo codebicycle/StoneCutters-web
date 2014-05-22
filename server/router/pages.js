@@ -89,10 +89,16 @@ module.exports = function itemRouter(app, dataAdapter) {
                 id: req.query.id,
                 host: req.host
             });
+            var ip = req.ip;
 
+            if (req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR')) {
+                ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
+            }
+            analytic.debug = true;
             analytic.trackPage({
                 page: req.query.page,
-                referer: req.query.referer
+                referer: req.query.referer,
+                ip: ip
             });
         }
 
