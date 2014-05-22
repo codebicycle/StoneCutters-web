@@ -94,7 +94,6 @@ module.exports = function itemRouter(app, dataAdapter) {
             if (req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR')) {
                 ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
             }
-            analytic.debug = true;
             analytic.trackPage({
                 page: req.query.page,
                 referer: req.query.referer,
