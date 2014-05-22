@@ -84,7 +84,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
                 previousLocation = siteLocation;
             }
-            if (previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
+            if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
                 return res.redirect('/?location=' + previousLocation);
             }
             promise = asynquence().or(fail)
