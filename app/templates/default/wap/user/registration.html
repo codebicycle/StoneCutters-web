@@ -13,7 +13,7 @@
             <tbody>
                 <tr>
                     <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                        <a href="/auth/login/"><small>{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</small></a>
+                        <a href="{{ '/login' | link }}"><small>{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</small></a>
                     </td>
                 </tr>
             </tbody>
@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 .5em .5em;">
-                        <form action="/register" method="POST" enctype="multipart/form-data">
+                        <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
                             <label style="display: block;">
                                 <small>{{ dictionary["register_mail.Username"] }}</small><br>
                                 <input type="text" value="" name="username">
@@ -45,7 +45,7 @@
                             <br style="display: none;">
                             <label style="display: block; padding-top: .25em;">
                                 <input type="checkbox" style="margin: 0; vertical-align: sub;" name="agreeTerms" value="1" checked="true">
-                                <small>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</small>
+                                <small>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='",('/terms' | link),"'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</small>
                             </label>
                             <div style="padding-top: .25em;">
                                 <input type="submit" value="{{ dictionary["registerheader.Register"] }}" name="submit">

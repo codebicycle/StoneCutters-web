@@ -128,6 +128,7 @@ module.exports = function(nunjucks) {
             return out.join('');
         },
         pagination: function(metadata, platform) {
+            var that = this;
             var out = [];
             var currentPage = metadata.page;
             var currentURL = metadata.current;
@@ -165,7 +166,7 @@ module.exports = function(nunjucks) {
                     }
                     else {
                         out.push('<a href="');
-                        out.push(currentURL.replace(regExp, '-p-' + page));
+                        out.push(common.link(currentURL.replace(regExp, '-p-' + page), that.ctx.siteLocation));
                         prepareStyle(last);
                         out.push('">');
                         out.push(page);
@@ -200,7 +201,7 @@ module.exports = function(nunjucks) {
             return common.link(href, this.ctx.siteLocation);
         },
         date: function(timestamp) {
-            return dateformat(new Date(timestamp), 'yyyy-mm-dd');
+            return dateformat(new Date(timestamp), 'dd-mm-yyyy');
         },
         breadcrumb: function(referer) {
             var breadcrumb = referer;

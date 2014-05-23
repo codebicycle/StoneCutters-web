@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'A f\xE9nyk\xE9ppel hirdetett term\xE9kek 5-sz\xF6r nagyobb val\xF3sz\xEDn\u0171s\xE9ggel kelnek el!',
     'item.RemoveFromFavorites': 'T\xF6rl\xE9s a kedvencekb\u0151l',
     'item.ThisAdIsNoLongerAvailable': 'A hirdet\xE9s m\xE1r nem el\xE9rhet\u0151',
+    'item.YourMessageHasBeenSent': '\xDCzenet\xE9t elk\xFCldte.',
     'posting_fields_2.email': 'E-mail',
     'posting_photosprogress.of': '/',
     'contactseller_form.1366': 'Az \xD6n neve:',

@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Valokuvilla varustetut ilmoitukset myyv\xE4t jopa 5 kertaa enemm\xE4n!',
     'item.RemoveFromFavorites': 'Poista suosikeista',
     'item.ThisAdIsNoLongerAvailable': 'T\xE4m\xE4 ilmoitus ei ole en\xE4\xE4 saatavilla',
+    'item.YourMessageHasBeenSent': 'Viestisi on l\xE4hetetty.',
     'posting_fields_2.email': 's\xE4hk\xF6posti',
     'posting_photosprogress.of': ' /',
     'contactseller_form.1366': 'Nimesi:',

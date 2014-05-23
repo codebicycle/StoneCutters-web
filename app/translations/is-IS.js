@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Augl\xFDsingar me\xF0 myndum eru allt a\xF0 fimm sinnum s\xF6luv\xE6nni.',
     'item.RemoveFromFavorites': 'Fjarl\xE6gja \xFAr upp\xE1halds',
     'item.ThisAdIsNoLongerAvailable': '\xDEessi augl\xFDsing er ekki lengur \xED bo\xF0i',
+    'item.YourMessageHasBeenSent': 'Skilabo\xF0in voru send.',
     'posting_fields_2.email': 'T\xF6lvup\xF3stur',
     'posting_photosprogress.of': ' af',
     'contactseller_form.1366': 'Nafn \xFEitt: ',

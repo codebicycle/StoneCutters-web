@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Matangazo yaliyo na huuza hadi mara 5x zaidi!',
     'item.RemoveFromFavorites': 'Ondoa kutoka kwa vibwedo',
     'item.ThisAdIsNoLongerAvailable': 'Tangazo hili halipatikani tena',
+    'item.YourMessageHasBeenSent': 'Ujumbe wako umetumwa',
     'posting_fields_2.email': 'Barua pepe',
     'posting_photosprogress.of': ' of ',
     'contactseller_form.1366': 'Your name:',

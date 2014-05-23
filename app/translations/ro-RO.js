@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Anun\u0163urile cu imagini au de 5 ori mai multe v\xE2nz\u0103ri!',
     'item.RemoveFromFavorites': 'Elimin\u0103 din favorite',
     'item.ThisAdIsNoLongerAvailable': 'Acest anun\u0163 nu mai este disponibil',
+    'item.YourMessageHasBeenSent': 'Mesajul dvs. a fost trimis.',
     'posting_fields_2.email': 'Email',
     'posting_photosprogress.of': ' de ',
     'contactseller_form.1366': 'Numele dvs.:',

@@ -135,9 +135,10 @@ module.exports = {
 
         function controller() {
             var err = this.app.getSession('error');
+            var siteLocation = this.app.getSession('siteLocation');
 
             if (typeof window !== 'undefined' && !(/[0-9]{3}/.test(params.errorCode))) {
-                window.location = params.errorCode;
+                this.redirectTo(helpers.common.link('/' + params.errorCode, siteLocation));
                 return;
             }
             if (err) {

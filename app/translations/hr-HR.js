@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Oglasi s fotografijama prodaju se i do 5 puta vi\u0161e!',
     'item.RemoveFromFavorites': 'Uklonite iz favorita',
     'item.ThisAdIsNoLongerAvailable': 'Ovaj oglas vi\u0161e nije dostupan.',
+    'item.YourMessageHasBeenSent': 'Va\u0161a poruka je poslana.',
     'posting_fields_2.email': 'E-po\u0161ta',
     'posting_photosprogress.of': ' od',
     'contactseller_form.1366': 'Va\u0161e ime:',

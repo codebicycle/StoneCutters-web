@@ -5,7 +5,7 @@
 				{% if language.locale == selectedLanguage %}
 					{{ language.name }}
 				{% else %}
-					<a href="?language={{ language.locale }}">{{ language.name }}</a>
+					<a href="{{ ['?language=', language.locale] | join('') | link }}">{{ language.name }}</a>
 				{% endif %}
 				{% if not loop.last %} | {% endif %}
 			{% endfor %}

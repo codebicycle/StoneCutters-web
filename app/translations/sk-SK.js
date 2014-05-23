@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Inzer\xE1ty s fotkami maj\xFA a\u017E 5x v\xE4\u010D\u0161iu predajnos\u0165!',
     'item.RemoveFromFavorites': 'Odobra\u0165 z ob\u013E\xFAben\xFDch',
     'item.ThisAdIsNoLongerAvailable': 'Toto ozn\xE1menie u\u017E nie je dostupn\xE9.',
+    'item.YourMessageHasBeenSent': 'Va\u0161a spr\xE1va bola odoslan\xE1.',
     'posting_fields_2.email': 'E-mail',
     'posting_photosprogress.of': ' z ',
     'contactseller_form.1366': 'Va\u0161e meno:',

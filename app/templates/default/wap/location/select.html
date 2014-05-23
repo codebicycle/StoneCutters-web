@@ -3,7 +3,7 @@
     	<small>
         	{{ location.current.name if location.current else location.name }} >
 			<!-- <a href="/location">{{ dictionary["countryoptions.ChangeCity"] if location.current else dictionary["countryoptions.SelectACity"] }}</a> -->
-			<a href="/location">{{ "Change city" if location.current else "Select a city" }}</a>
+			<a href="{{ '/location' | link }}">{{ "Change city" if location.current else "Select a city" }}</a>
 		</small>
 	</td>
 </tr>

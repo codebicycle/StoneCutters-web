@@ -321,6 +321,50 @@ module.exports = {
             }
         }
     },
+    item_reply_success: {
+        url: 'iid-:itemId([0-9]+)/reply/success',
+        view: 'items#success',
+        isServer: false,
+        google: '[category-name]/[subcategory-id]/reply_success/[item_attributes]',
+        ati: {
+            process: true,
+            params: {
+                page_name: 'contact_seller_done',
+                category: 'reply',
+                subcategory: '',
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                poster_id: '0',
+                poster_type: 'registered_no',
+                posting_to_action: '',
+                action_type: 'message_sent'
+            }
+        }
+    },
+    item_reply: {
+        url: 'iid-:itemId([0-9]+)/reply',
+        view: 'items#reply',
+        isServer: false,
+        google: '[category-name]/[subcategory-id]/reply/[item_attributes]',
+        ati: {
+            process: true,
+            params: {
+                page_name: 'contact_seller_form',
+                category: 'reply',
+                subcategory: '',
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                poster_id: '0',
+                poster_type: 'registered_no',
+                posting_to_action: '',
+                action_type: 'message_form'
+            }
+        }
+    },
     item: {
         url: ':title-iid-:itemId([0-9]+$)',
         view: 'items#show',
@@ -342,28 +386,6 @@ module.exports = {
                 posting_to_action: '',
                 geo1: '',
                 geo2: ''
-            }
-        }
-    },
-    item_reply: {
-        url: ':title-iid-:itemId([0-9]+)/reply',
-        view: 'items#reply',
-        isServer: false,
-        google: '[category-name]/[subcategory-id]/item/[item_attributes]',
-        ati: {
-            process: true,
-            params: {
-                page_name: 'contact_seller_form',
-                category: 'reply',
-                subcategory: '',
-                ad_category: '',
-                ad_subcategory: '',
-                ad_id: '',
-                ad_photo: 0,
-                poster_id: '0',
-                poster_type: 'registered_no',
-                posting_to_action: '',
-                action_type: 'message_form'
             }
         }
     },

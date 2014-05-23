@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Ang mga anunsyo na may mga litrato ay mas nabibili nang 5 beses!',
     'item.RemoveFromFavorites': 'Tanggalin mula sa mga paborito',
     'item.ThisAdIsNoLongerAvailable': 'Hindi na available ang patalastas na ito',
+    'item.YourMessageHasBeenSent': 'Naipadala na ang inyong mensahe.',
     'posting_fields_2.email': 'Email',
     'posting_photosprogress.of': 'ng',
     'contactseller_form.1366': 'Pangalan',
