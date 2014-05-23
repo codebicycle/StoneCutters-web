@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Els anuncis amb foto es venen fins a 5 cops m\xE9s!',
     'item.RemoveFromFavorites': 'Treure de favorits',
     'item.ThisAdIsNoLongerAvailable': 'Aquest anunci ja no est\xE0 disponible',
+    'item.YourMessageHasBeenSent': 'El teu missatge s\'ha enviat correctament.',
     'posting_fields_2.email': 'Correu electr\xF2nic',
     'posting_photosprogress.of': 'de',
     'contactseller_form.1366': 'El vostre nom:',

@@ -110,8 +110,10 @@ function setLocation(params, callback) {
         }
         location.current = result.location.toJSON();
         app.persistSession({
-            location: location,
             siteLocation: url
+        });
+        app.updateSession({
+            location: location
         });
         callback();
     });

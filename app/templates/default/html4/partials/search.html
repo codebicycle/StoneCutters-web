@@ -1,5 +1,5 @@
 <div id="search">
-    <form action="/nf/search/redirect" method="post">
+    <form action="{{ '/nf/search/redirect' | link }}" method="post">
         <input type="text" name="search" value="" class="search">
         <input type="submit" value="Buscar" class="submit">
         <span>What are you looking for?</span>

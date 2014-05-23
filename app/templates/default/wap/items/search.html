@@ -38,9 +38,9 @@
                         <tr>
                             <td align="center" style="border-top: solid thin #808080;">
                                 <small style="display: block;">
-                                    {{ ("<a href='" + metadata.previous + "' >&lt;</a>") if metadata.previous }}
+                                    {{ (['<a href="', metadata.previous | link, '" >&lt;</a>'] | join('')) if metadata.previous }}
                                     {{ metadata | pagination('wap') }}
-                                    {{ ("<a href='" + metadata.next + "' >&gt;</a>") if metadata.next }}
+                                    {{ (['<a href="', metadata.next | link, '" >&gt;</a>'] | join('')) if metadata.next }}
                                 </small>
                             </td>
                         </tr>

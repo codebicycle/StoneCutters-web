@@ -2,7 +2,7 @@
 {% set link = (referer | breadcrumb | link) %}
 {{ breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div id="posting">
-    <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
+    <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <h4 class="title" >Categoría seleccionada :: {{ subcategory.name }}</h4>
         <div class="formField">
             <label>Fotos: <small>¡Los anuncios con fotos se venden 5 veces más!</small></label>

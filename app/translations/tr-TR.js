@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Foto\u011Frafl\u0131 ilanlarda sat\u0131\u015F \u015Fans\u0131 5 kat daha fazlad\u0131r!',
     'item.RemoveFromFavorites': 'Favorilerden kald\u0131r\u0131n',
     'item.ThisAdIsNoLongerAvailable': 'Bu ilan art\u0131k kullan\u0131lam\u0131yor',
+    'item.YourMessageHasBeenSent': 'Mesaj\u0131n\u0131z g\xF6nderildi.',
     'posting_fields_2.email': 'E-Posta',
     'posting_photosprogress.of': '/',
     'contactseller_form.1366': 'Ad\u0131n\u0131z:',

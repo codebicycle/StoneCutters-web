@@ -1,0 +1,56 @@
+<tr>
+    <td>
+        <!-- Title -->
+        <table width="100%" cellspacing="0" cellpadding="4" border="0">
+            <tr>
+                <td style="border-top: solid thin #808080;">
+                    <small style="display: block;">{{ item.category.name }}</small>
+                    <strong style="display: block;">
+                        <font color="{{ '#0075BD' if item.status.label == 'ready' else '#FF0000' }}">{{ item.title }}</font>
+                    </strong>
+                    {% if item.status.onReview %}
+                        <small style="display: block;">
+                            <!-- <font color="#FF0000">{{ dictionary["myolx.ApprovalPending"] }}</font> -->
+                            <font color="#FF0000">Aproval pending</font>
+                        </small>
+                    {% endif %}
+
+                    <!-- <hr />
+                        {% if sk %}
+                            &#160;|&#160;
+                            <a href="/myolx/edititem/{{item.id}}?sk={{sk}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
+                        {% endif %}
+                    <hr /> -->
+
+                    {# added to favorites status pending
+                        {% if item.favorites.added || item.favorites.removed %}
+                            <br />
+                            <small style="display: block;">
+                                <font color="#6CB100">{{ '[itemheader.AddedFavorites]' if item.favorites.added else '[itemheader.RemovedFavorites]' }}</font>
+                            </small>
+                        {% endif %}
+                    #}
+                </td>
+            </tr>
+            <tr style="display: none;">
+                <td>
+                    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+                    {% include templateName %}
+                </td>
+            </tr>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="4" border="0">
+            <tr>
+                <td><hr noshade="" style="margin: 0; border-bottom: none;"></td>
+            </tr>
+            <tr>
+                <td style="padding: .5em;">
+                    <font color="#00CC33">{{ dictionary["item.YourMessageHasBeenSent"] }}</font>
+                </td>
+            </tr>
+        </table>
+        {% from macros import breadcrumb %}
+        {% set link = (referer | breadcrumb | link) %}
+        {{ breadcrumb(dictionary, link) }}
+    </td>
+</tr>

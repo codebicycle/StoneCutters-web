@@ -2,7 +2,7 @@
 {% set link = (referer | breadcrumb | link) %}
 {{ breadcrumb(dictionary, link, dictionary["homeheader.My OLX"]) }}
 <div id="login">
-    <form action="/login" method="POST" enctype="multipart/form-data">
+    <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <h4>Acceso para Miembros</h4>
         <div class="formField">
             <label>Usuario o Email</label>
@@ -20,7 +20,7 @@
         </div>
     </form>
     <div class="line"></div>
-    <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
+    <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
         <h4>Ya publicaste algún anuncio</h4>
         <div class="formField">
             <label>Ingresa el email que usaste para publicar tu anuncio y recibe el link a Mi OLX por email.</label>
@@ -36,7 +36,7 @@
     <h4>¿No eres miembro?</h4>
     <div class="formActions">
         <div class="btn-adjust btnOrange btnForm">
-            <a href="/register" class="btns orange">Crea tu cuenta gratis</a>
+            <a href="{{ '/register' | link }}" class="btns orange">Crea tu cuenta gratis</a>
         </div>
     </div>
 </div>

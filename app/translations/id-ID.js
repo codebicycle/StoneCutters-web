@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Iklan yang dilengkapi foto berpeluang terjual 5X lebih besar!',
     'item.RemoveFromFavorites': 'Hapus dari favorit',
     'item.ThisAdIsNoLongerAvailable': 'Iklan ini tidak tersedia lagi',
+    'item.YourMessageHasBeenSent': 'Pesan Anda telah dikirim.',
     'posting_fields_2.email': 'Email',
     'posting_photosprogress.of': 'dari',
     'contactseller_form.1366': 'Nama Anda:',

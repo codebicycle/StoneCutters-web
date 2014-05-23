@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Ajoute foto pou w ka vann menm 5 fa plis.',
     'item.RemoveFromFavorites': 'Retire nan favorites',
     'item.ThisAdIsNoLongerAvailable': 'Anons sa a pa disponib ank\xF2',
+    'item.YourMessageHasBeenSent': 'Nou te voye mesaj ou a.',
     'posting_fields_2.email': 'Im\xE8l',
     'posting_photosprogress.of': ' de ',
     'contactseller_form.1366': 'Non ou :',

@@ -4,6 +4,7 @@ module.exports = function(app, dataAdapter) {
     var asynquence = require('asynquence');
     var formidable = require('../formidable');
     var querystring = require('querystring');
+    var utils = require('../utils');
 
     var fs = require('fs');
 
@@ -33,7 +34,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success() {
-                res.redirect('/change-this-description-for-the-item-iid-' + itemId);
+                var url = '/iid-' + itemId + '/reply/success';
+
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
@@ -43,7 +46,8 @@ module.exports = function(app, dataAdapter) {
                 if (qIndex != -1) {
                     url = url.substring(0,qIndex);
                 }
-                res.redirect(url+'?' + querystring.stringify(err));
+                url += '?' + querystring.stringify(err);
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -147,7 +151,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(response, item) {
-                res.redirect('/posting/success/' + item.id + '?sk=' + item.securityKey);
+                var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
+
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
                 clean();
             }
 
@@ -167,7 +173,8 @@ module.exports = function(app, dataAdapter) {
                 if (qIndex != -1) {
                     url = url.substring(0,qIndex);
                 }
-                res.redirect(url+'?' + querystring.stringify(errors));
+                url += '?' + querystring.stringify(errors);
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
                 clean();
             }
 
@@ -213,7 +220,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(done) {
-                res.redirect('/change-this-description-for-the-item-iid-' + itemId);
+                var url = '/des-iid-' + itemId;
+
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
@@ -223,7 +232,8 @@ module.exports = function(app, dataAdapter) {
                 if (qIndex != -1) {
                     url = url.substring(0,qIndex);
                 }
-                res.redirect(url+'?' + querystring.stringify(err));
+                url += '?' + querystring.stringify(err);
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -249,24 +259,24 @@ module.exports = function(app, dataAdapter) {
             }
 
             formidable(req, function callback(err, data) {
+                var url;
+
                 if (!data.search && !data.currentURL) {
                     return res.redirect(req.headers.referer);
                 }
                 if (data.search) {
-                    res.redirect('/nf/search/' + data.search);
+                    url = '/nf/search/' + data.search;
                 } else {
-                    var url;
                     var from = data['from_' + data.name] || '';
                     var to = data['to_' + data.name] || '';
 
                     url = data.currentURL;
-                    if (!from.length && !to.length) {
-                        return res.redirect(url);
+                    if (from.length || to.length) {
+                        url = replaceParam(url, 'p' + '-', 1);
+                        url = replaceParam(url, data.name + '_', from + '_' + to);
                     }
-                    url = replaceParam(url, 'p' + '-', 1);
-                    url = replaceParam(url, data.name + '_', from + '_' + to);
-                    res.redirect(url);
                 }
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             });
         }
     })();
@@ -307,7 +317,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(response) {
-                res.redirect('/myolx/myadslisting?deleted=true');
+                var url = '/myolx/myadslisting?deleted=true';
+
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
@@ -333,7 +345,8 @@ module.exports = function(app, dataAdapter) {
                 if (qIndex != -1) {
                     url = url.substring(0,qIndex);
                 }
-                res.redirect(url + '?' + querystring.stringify(errors));
+                url += '?' + querystring.stringify(errors);
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)

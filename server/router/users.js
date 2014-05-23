@@ -6,6 +6,7 @@ module.exports = function(app, dataAdapter) {
     var formidable = require('../formidable');
     var querystring = require('querystring');
     var crypto = require('crypto');
+    var utils = require('../utils');
 
     var loginHandler = (function login() {
 
@@ -45,11 +46,13 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success() {
-                res.redirect(redirect);
+                res.redirect(utils.link(redirect, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
-                res.redirect('/login?' + querystring.stringify(err));
+                var url = '/login?' + querystring.stringify(err);
+
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -138,7 +141,8 @@ module.exports = function(app, dataAdapter) {
                 if (qIndex != -1) {
                     url = url.substring(0,qIndex);
                 }
-                res.redirect(url + '?' + querystring.stringify(errors));
+                url += '?' + querystring.stringify(errors);
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -162,7 +166,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                res.redirect('/login?' + querystring.stringify(err));
+                var url = '/login?' + querystring.stringify(err);
+
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -203,11 +209,15 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success() {
-                res.redirect('/login?emailMsg=The link to access My OLX has been emailed to you.');
+                var url = '/login?loginSuccess=true';
+
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
-                res.redirect('/login?' + querystring.stringify(err));
+                var url = '/login?' + querystring.stringify(err);
+                
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -223,9 +233,11 @@ module.exports = function(app, dataAdapter) {
 
         function handler(req, res) {
             var app = req.rendrApp;
+            var url;
 
             app.deleteSession('user');
-            res.redirect(app.getSession('referer') || '/');
+            url = (app.getSession('referer') || '/');
+            res.redirect(utils.link(url, app.getSession('siteLocation')));
         }
     })();
 };

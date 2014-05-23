@@ -354,7 +354,6 @@ module.exports = {
         function controller() {
             var that = this;
             var user = that.app.getSession('user');
-            var slugUrl = params.title;
             var spec = {
                 item: {
                     model: 'Item',
@@ -364,21 +363,13 @@ module.exports = {
 
             params.id = params.itemId;
             delete params.itemId;
-            delete params.title;
 
             that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
-                var slug = helpers.common.slugToUrl(item);
-                var siteLocation = that.app.getSession('siteLocation');
-                var categoryTree;
+                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
 
-                if (slug.indexOf(slugUrl + '-iid-')) {
-                    that.redirectTo(helpers.common.link('/' + slug + '/reply', siteLocation));
-                    return;
-                }
-                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.setPage('item_reply');
                 helpers.analytics.addParam('item', item);
@@ -390,5 +381,39 @@ module.exports = {
                 callback(err, result);
             });
         }
-    }
+    },
+    success: function(params, callback) {
+        helpers.controllers.control(this, params, controller);
+
+        function controller() {
+            var that = this;
+            var user = that.app.getSession('user');
+            var spec = {
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            };
+
+            params.id = params.itemId;
+            delete params.itemId;
+
+            that.app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
+                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+
+                helpers.analytics.reset();
+                helpers.analytics.setPage('item_reply_success');
+                helpers.analytics.addParam('item', item);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                result.user = user;
+                result.item = item;
+                callback(err, result);
+            });
+        }
+    },
 };
