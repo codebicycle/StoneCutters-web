@@ -1,5 +1,5 @@
 <div id="header">
-	<h1><a href="/">OLX.com</a></h1>
+	<h1><a href="{{ '/' | link }}">OLX.com</a></h1>
 	<ul>
 	    <li class="post"><a href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}" class="btns orange">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a></li>
 	    {% if not user %}

@@ -2,7 +2,7 @@
 {% set link = (referer | breadcrumb | link) %}
 {{ breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToThisAd"]) }}
 <div id="reply">
-    <form action="/items/{{ item.id }}/reply" method="POST" enctype="multipart/form-data">
+    <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
         {% if errors %}
             <div id="errors">
                 {% for error in errors %}
@@ -15,11 +15,11 @@
             <label>Para: {{ item.contactName if item.contactName else "anonymous" }}</label>
         </div>
         <div class="formField">
-            <label>Tu Email:(Campo Obligatorio)</label>
+            <label>Tu Email: *</label>
             <input type="text" name="email" value="{{ data.email if data.email else (user.email if user.email else '') }}" >
         </div>
         <div class="formField">
-            <label>Tu Nombre: (Campo Obligatorio)</label>
+            <label>Tu Nombre: *</label>
             <input type="text" name="name" value="{{ data.email if data.name else (user.name if user.name else '') }}">
         </div>
         <div class="formField">
