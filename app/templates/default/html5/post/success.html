@@ -11,7 +11,7 @@
     <article class="mail">
         <h1>{{ dictionary["misc.EmailAdActivated_Mob"] }}</h1>
         <a href="{{ '/posting' | link }}" class="posting">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</a>
-        <a class="home" href="/">{{ dictionary["misc.BackToStart_Mob"] }}</a>
+        <a class="home" href="{{ '/' | link }}">{{ dictionary["misc.BackToStart_Mob"] }}</a>
     </article>
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}

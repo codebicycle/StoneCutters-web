@@ -2,7 +2,7 @@
 {% set link = (referer | breadcrumb | link) %}
 {{ breadcrumb(dictionary, link, dictionary["homeheader.My OLX"]) }}
 <section id="login">
-    <form action="/login" method="POST" enctype="multipart/form-data">
+    <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>
         <label>{{ dictionary["loginbox.Username"] }}</label>
         <input type="text" name="usernameOrEmail">
@@ -14,7 +14,7 @@
         </div>
     </form>
     <div class="line"></div>
-    <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
+    <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</h4>
         <label>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace("<<MY_CLASSIFIEDS>>","Mi OLX") }}</label>
         <input type="text" name="email">
@@ -25,6 +25,6 @@
     <div class="line"></div>
     <h4>{{ dictionary["loginbox.NotAMember"] }}</h4>
     <div class="btnCenter">
-        <a href="/register" class="btns orange">{{ dictionary["loginbox.CreateYourAccount"] }}</a>
+        <a href="{{ '/register' | link }}" class="btns orange">{{ dictionary["loginbox.CreateYourAccount"] }}</a>
     </div>
 </section>
