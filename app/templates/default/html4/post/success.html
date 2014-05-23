@@ -14,7 +14,7 @@
     <div style="margin:6px 0 0 0;">
         <h1>{{ dictionary["misc.EmailAdActivated_Mob"] }}</h1>
         <a href="{{ '/posting' | link }}" class="btns orange">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</a>
-        <a href="/" class="back">{{ dictionary["misc.BackToStart_Mob"] }}</a>
+        <a href="{{ '/' | link }}" class="back">{{ dictionary["misc.BackToStart_Mob"] }}</a>
     </div>
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}

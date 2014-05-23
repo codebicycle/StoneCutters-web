@@ -2,7 +2,7 @@
 {% set link = (referer | breadcrumb | link) %}
 {{ breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
 <div id="register">
-    <form action="/register" method="POST" enctype="multipart/form-data">
+    <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
             <label>Nombre de usuario</label>
             <input type="text" name="username">
@@ -18,7 +18,7 @@
         </div>
         <div class="formField">
             <input type="checkbox" name="agreeTerms" class="checkbox" checked="true">
-            <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='/terms'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
+            <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='", "/terms" | link, "'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
 
         </div>
         <div class="formActions">
@@ -28,7 +28,7 @@
         </div>
     </form>
     <div class="formField">
-        <a href="/login">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
+        <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
     </div>
 </div>
 {{ breadcrumbHome(dictionary, link) }}
