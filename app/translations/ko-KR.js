@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': '\uC0AC\uC9C4\uC774 \uC788\uB294 \uAD11\uACE0\uB294 \uD310\uB9E4\uAC00 \uB2E4\uC12F \uBC30 \uB354 \uB9CE\uC2B5\uB2C8\uB2E4!',
     'item.RemoveFromFavorites': '\uC990\uACA8\uCC3E\uAE30\uC5D0\uC11C \uC81C\uAC70',
     'item.ThisAdIsNoLongerAvailable': '\uBCF8 \uAD11\uACE0\uB294 \uB354 \uC774\uC0C1 \uC874\uC7AC\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.',
+    'item.YourMessageHasBeenSent': '\uADC0\uD558\uC758 \uBA54\uC2DC\uC9C0\uAC00 \uBC1C\uC1A1\uB418\uC5C8\uC2B5\uB2C8\uB2E4.',
     'posting_fields_2.email': 'Email',
     'posting_photosprogress.of': ' \uB300\uC0C1 ',
     'contactseller_form.1366': '\uADC0\uD558\uC758 \uC131\uBA85:',

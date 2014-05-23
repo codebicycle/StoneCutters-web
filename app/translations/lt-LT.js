@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Naudojant skelbimus su nuotraukomis, parduodama iki 5 kart\u0173 daugiau!',
     'item.RemoveFromFavorites': '\u0160alinti i\u0161 megiamiausi\u0173',
     'item.ThisAdIsNoLongerAvailable': '\u0160is skelbimas pa\u0161alintas',
+    'item.YourMessageHasBeenSent': 'J\u016Bs\u0173 prane\u0161imas i\u0161si\u0173stas.',
     'posting_fields_2.email': 'El. pa\u0161to adresas',
     'posting_photosprogress.of': ' i\u0161',
     'contactseller_form.1366': 'J\u016Bs\u0173 vardas ir pavard\u0117:',

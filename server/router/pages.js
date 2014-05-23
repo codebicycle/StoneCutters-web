@@ -6,6 +6,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     var configClient = require('../../app/config');
     var graphite = require('../graphite')();
     var Analytic = require('analytic');
+    var utils = require('../utils');
 
     (function health() {
         app.get('/health', handler);
@@ -142,7 +143,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('*', handler);
 
         function handler(req, res) {
-            res.redirect('/404');
+            res.redirect(utils.link('/404', req.rendrApp.getSession('siteLocation')));
         }
     })();
 };

@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Fotodega kuulutuste abil on m\xFC\xFCgiv\xF5imalus kuni 5 korda parem!',
     'item.RemoveFromFavorites': 'Eemalda lemmikutest',
     'item.ThisAdIsNoLongerAvailable': 'See kuulutus pole enam k\xE4ttesaadav',
+    'item.YourMessageHasBeenSent': 'Teie s\xF5num on saadetud.',
     'posting_fields_2.email': 'E-post',
     'posting_photosprogress.of': '  ',
     'contactseller_form.1366': 'Teie nimi:',

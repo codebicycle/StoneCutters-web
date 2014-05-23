@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Sludin\u0101jumi ar fotogr\u0101fij\u0101m ir l\u012Bdz pat 5 reiz\u0113m efekt\u012Bv\u0101ki!',
     'item.RemoveFromFavorites': 'Iz\u0146emt no favor\u012Btiem',
     'item.ThisAdIsNoLongerAvailable': '\u0160is sludin\u0101jums vairs nav pieejams',
+    'item.YourMessageHasBeenSent': 'J\u016Bsu zi\u0146ojums ir nos\u016Bt\u012Bts.',
     'posting_fields_2.email': 'E-pasts',
     'posting_photosprogress.of': 'no',
     'contactseller_form.1366': 'J\u016Bsu v\u0101rds:',

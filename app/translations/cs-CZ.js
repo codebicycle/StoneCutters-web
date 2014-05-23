@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Inzer\xE1ty s fotografiemi maj\xED a\u017E 5x v\u011Bt\u0161\xED \xFAsp\u011Bch p\u0159i prodeji!',
     'item.RemoveFromFavorites': 'Odstranit z obl\xEDben\xFDch',
     'item.ThisAdIsNoLongerAvailable': 'Tento inzer\xE1t ji\u017E nen\xED k dispozici',
+    'item.YourMessageHasBeenSent': 'V\xE1\u0161 vzkaz byl odesl\xE1n.',
     'posting_fields_2.email': 'E-mail',
     'posting_photosprogress.of': 'z',
     'contactseller_form.1366': 'Va\u0161e jm\xE9no:',

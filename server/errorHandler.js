@@ -1,4 +1,5 @@
 var config = require('./config');
+var utils = require('./utils');
 
 var env = process.env.NODE_ENV || 'development';
 
@@ -43,7 +44,7 @@ exports = module.exports = function errorHandler() {
                     }
                 });
             }
-            res.redirect('/500');
+            res.redirect(utils.link('/500', req.rendrApp.getSession('siteLocation')));
         }
         else if (~accept.indexOf('json')) {
             var error = { message: err.message };

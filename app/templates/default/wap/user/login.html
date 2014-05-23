@@ -18,7 +18,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 .5em .5em;">
-                        <form action="/login" method="POST" enctype="multipart/form-data">
+                        <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
                             <label style="display: block;">
                                 <small>{{ dictionary["loginbox.Username"] }}</small><br>
                                 <input type="text" value="" name="usernameOrEmail">
@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 .5em .5em;">
-                        <form action="/anonymousLogin" method="POST" enctype="multipart/form-data">
+                        <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
                             <label style="display: block;">
                                 <small>{{ dictionary["posting_fields_2.email"] }}</small><br>
                                 <input type="text" value="" name="email">
@@ -73,7 +73,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 .5em .5em;">
-                        <small>{{ dictionary["loginbox.CreateYourAccount"] }}: <a href="/register">{{ dictionary["searchheader.ClickHere"] }}</a></small>
+                        <small>{{ dictionary["loginbox.CreateYourAccount"] }}: <a href="{{ '/register' | link }}">{{ dictionary["searchheader.ClickHere"] }}</a></small>
                     </td>
                 </tr>
             </tbody>

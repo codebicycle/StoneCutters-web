@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Annonser med bilder selger opptil 5 ganger mer!',
     'item.RemoveFromFavorites': 'Fjern fra favoritter',
     'item.ThisAdIsNoLongerAvailable': 'Denne annonsen er ikke lenger tilgjengelig.',
+    'item.YourMessageHasBeenSent': 'Meldingen din er sendt.',
     'posting_fields_2.email': 'Epost',
     'posting_photosprogress.of': 'av',
     'contactseller_form.1366': 'Ditt navn:',

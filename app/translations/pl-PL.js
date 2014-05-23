@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Rzeczy ze zdj\u0119\u0107 sprzedaj\u0105 si\u0119 nawet 5 razy cz\u0119\u015Bciej!',
     'item.RemoveFromFavorites': 'Usu\u0144 z ulubionych',
     'item.ThisAdIsNoLongerAvailable': 'Og\u0142oszenie jest niedost\u0119pne.',
+    'item.YourMessageHasBeenSent': 'Wiadomo\u015B\u0107 zosta\u0142a wys\u0142ana.',
     'posting_fields_2.email': 'E-mail',
     'posting_photosprogress.of': '',
     'contactseller_form.1366': 'Imi\u0119:',

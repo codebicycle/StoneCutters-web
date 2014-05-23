@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Advts. met foto\'s vekoop tot 5X meer dikwels!',
     'item.RemoveFromFavorites': 'Verwyder van gunstelinge',
     'item.ThisAdIsNoLongerAvailable': 'Hierdie advt. is nie meer beskikbaar nie.',
+    'item.YourMessageHasBeenSent': 'Jou boodskap is gestuur.',
     'posting_fields_2.email': 'E-pos',
     'posting_photosprogress.of': ' van',
     'contactseller_form.1366': 'Jou naam:',

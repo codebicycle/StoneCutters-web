@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Iklan yang ada foto senang dijual lebih daripada 5X!',
     'item.RemoveFromFavorites': 'Alih keluar daripada kegemaran',
     'item.ThisAdIsNoLongerAvailable': 'Iklan ini kini sudah tiada.',
+    'item.YourMessageHasBeenSent': 'Mesej anda telah di hantar.',
     'posting_fields_2.email': 'Emel',
     'posting_photosprogress.of': '',
     'contactseller_form.1366': 'Nama anda:',

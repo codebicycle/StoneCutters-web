@@ -52,6 +52,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Ads with photos sell up to 5X more!',
     'item.RemoveFromFavorites': 'Eliminar de favoritos',
     'item.ThisAdIsNoLongerAvailable': 'Este aviso ya no est\xE1 disponible',
+    'item.YourMessageHasBeenSent': 'Tu mensaje ha sido enviado.',
     'posting_fields_2.email': 'Email',
     'posting_photosprogress.of': 'de',
     'contactseller_form.1366': 'Tu Nombre:',
