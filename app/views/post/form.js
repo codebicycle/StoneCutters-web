@@ -35,10 +35,10 @@ module.exports = BaseView.extend({
             $('#' + $current).addClass('loading');
             $('<img/>').attr('src', $imageUrl).load(function() {
                 $(this).remove();
-                $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('loading');
+                $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('empty').removeClass('loading');
             });
         });
-    },
+    }
 });
 
 module.exports.id = 'post/form';

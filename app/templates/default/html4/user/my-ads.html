@@ -25,7 +25,6 @@
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
-                        <span>{{ item.displayLocation }}</span>
                         <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" class="action">{{ dictionary["showactivelistings.Edit"] }}</a>
                         <a href="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" class="action">{{ dictionary["confirmremoveitem.Delete"] }}</a>
                     </div>

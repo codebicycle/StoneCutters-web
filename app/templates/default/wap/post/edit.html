@@ -35,7 +35,11 @@
                             <input type="file" style="font-size: small" name="images[1]">
                         </label>
                         {% for field in fields.productDescription %}
-                            {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
+                            {% if  field.name == 'description' %}
+                                {% set templateName = 'compiled/' + template + '/fields/textarea.html' %}
+                            {% else %}
+                                {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
+                            {% endif %}
                             {% include templateName %}
                             <br style="display: none;" />
                         {% endfor %}
@@ -64,7 +68,7 @@
                             {% endfor %}
                         {% endif %}
                         <input type="hidden" name="postingSession" value="{{postingSession}}">
-                        <input type="hidden" name="location" value="{{location}}">
+                        <input type="hidden" name="location" value="{{siteLocation}}">
                         <input type="hidden" name="languageId" value="{{language}}">
                         <input type="hidden" name="languageCode" value="{{languageCode}}">
                         <input type="hidden" name="platform" value="{{platform}}">
