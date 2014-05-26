@@ -1,0 +1,16 @@
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, item.category.name) }}
+<div id="itemPage">
+    {% if item.status.visible %}
+        <h1>{{ item.title }}</h1>
+
+        <div id="replySuccess">{{ dictionary["item.YourMessageHasBeenSent"] }}</div>
+    {% else %}
+        <div id="itemDisable">Esse anúncio não está mais disponível</div>
+    {% endif %}
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
+</div>
+{{ breadcrumbHome(dictionary, link) }}

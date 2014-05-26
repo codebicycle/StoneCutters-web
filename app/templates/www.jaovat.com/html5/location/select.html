@@ -3,7 +3,7 @@
 <footer id="location">
     <p>
         {% if location.current %}
-            {{location.current}} <a href="/location">Cambiar Ciudad</a>
+            {{location.current}} <a href="{{ '/location' | link }}">Cambiar Ciudad</a>
         {% else %}
             {{location.name}} <a href="/location">Seleccionar Ciudad</a>
         {% endif %} 

@@ -1,6 +1,6 @@
 <h1>{{location.name}}{% if location.current %} > {{location.current.name}}{% endif %}</h1>
 
-<form action="/location">
+<form action="{{ '/location' | link }}">
 	<input type="text" name="search">
 	<button type="submit">Search</button>
     <input type="hidden" value="{{ target }}" name="target" style="display: none;" />

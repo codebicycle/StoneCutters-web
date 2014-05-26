@@ -1,7 +1,7 @@
 <header id="location">
 	<p>
 		{% if location.current %}
-			{{location.current.name}} <a href="/location">{{ dictionary["countryoptions.ChangeCity"] }}</a>
+			{{location.current.name}} <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
 		{% else %}
 			{{location.name}} <a href="/location">{{ dictionary["countryoptions.SelectACity"] }}</a>
 		{% endif %} 

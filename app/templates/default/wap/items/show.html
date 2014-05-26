@@ -83,7 +83,7 @@
                                 <tr>
                                     <td align="center" style="border: solid thin #F30;">
                                         <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
-                                        <a href="/{{ ['iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
+                                        <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
                                     </td>
                                 </tr>
                             </table>
@@ -211,7 +211,7 @@
                                 <tr>
                                     <td align="center" style="border: solid thin #F30;">
                                         <!-- <a href="{{ item.title | urlize }}-iid-{{ item.id }}/reply" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a> -->
-                                        <a href="/{{ ['iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
+                                        <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">Reply to this ad</font></a>
                                     </td>
                                 </tr>
                             </table>

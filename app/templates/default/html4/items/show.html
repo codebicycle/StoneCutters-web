@@ -51,7 +51,7 @@
                     <a href="sms:{{ item.phone }}" class="btns orange">SMS</a>
                 {% endif %}
             {% endif %}
-            <a href="/{{ [item | slugToUrl, '/reply'] | join('') | link }}" class="btns orange">Email</a>
+            <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange">Email</a>
         </div>
         {% if item.phone %}
             <div id="phone">

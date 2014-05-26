@@ -3,10 +3,10 @@
 {{ breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div class="changeCat">
     {{ dictionary["itemslisting.Category"] }} : {{ subcategory.name }}
-    <a href="/posting">{{ dictionary["defaultheader.change"] }}</a>
+    <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
 </div>
 <section id="posting">
-    <form id="postingForm" action="/post" method="POST" enctype="multipart/form-data">
+    <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["posting_fields_1.photos"] }}: <br> <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
         <div class="fileUpload">
             <input type="file" name="images[]" class="file1" />
