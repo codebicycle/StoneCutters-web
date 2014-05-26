@@ -126,20 +126,27 @@ module.exports = BaseView.extend({
             if(self.validForm(message, name, email)){
                 $('.loading').show();
                 $('body').addClass('noscroll');
-                var url = '/items/'+itemId+'/reply';
+                var url = '/items/' + itemId + '/reply';
                 $.ajax({
                     type: "POST",
                     url: url,
                     cache: false,
                     data: data,
                     success: function(data) {
+                        var analytics;
+
                         $('.loading').hide();
                         $('body').removeClass('noscroll');
                         $('.message').val('');
                         $('.name').val('');
                         $('.email').val('');
                         $('.phone').val('');
-                        $('.msgCont .msgCont-wrapper .msgCont-container').text('Se envio');
+
+                        analytics = $('<div></div>').append(data);
+                        analytics = $('#replySuccess', analytics);
+                        $('.msgCont .msgCont-wrapper .msgCont-container')
+                            .text('Se envio')
+                            .append(analytics.length ? analytics : '');
                         $('.msgCont').addClass('visible');
                         setTimeout(function(){
                             $('.msgCont').removeClass('visible');
