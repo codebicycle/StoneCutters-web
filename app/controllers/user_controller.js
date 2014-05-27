@@ -18,6 +18,18 @@ module.exports = {
             callback(null, {});
         }
     },
+    logout: function(params, callback) {
+        helpers.controllers.control(this, params, controller);
+
+        function controller() {
+            var siteLocation = this.app.getSession('siteLocation');
+            
+            this.app.deleteSession('user');
+            this.redirectTo(helpers.common.link('/', siteLocation), {
+                pushState: false
+            });
+        }
+    },
     myolx: function(params, callback) {
         helpers.controllers.control(this, params, controller);
 
