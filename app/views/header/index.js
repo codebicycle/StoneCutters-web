@@ -2,8 +2,6 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
-var helpers = require('../../helpers');
-var config = require('../../config');
 
 module.exports = BaseView.extend({
     className: 'header_index_view',

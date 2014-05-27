@@ -227,17 +227,4 @@ module.exports = function(app, dataAdapter) {
                 .val(success);
         }
     })();
-
-    (function logout() {
-        app.get('/logout', handler);
-
-        function handler(req, res) {
-            var app = req.rendrApp;
-            var url;
-
-            app.deleteSession('user');
-            url = (app.getSession('referer') || '/');
-            res.redirect(utils.link(url, app.getSession('siteLocation')));
-        }
-    })();
 };

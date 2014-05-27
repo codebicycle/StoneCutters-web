@@ -113,6 +113,11 @@ module.exports = {
             }
         }
     },
+    logout: {
+        url: 'logout',
+        view: 'user#logout',
+        isServer: false
+    },
     myolx: {
         url: 'myolx',
         view: 'user#myolx',

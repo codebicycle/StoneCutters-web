@@ -14,12 +14,7 @@ module.exports = BaseView.extend({
         return _.extend({}, data, {
             blackBar: this.app.getSession('blackBar')
         });
-    },
-    postRender: function() {
-        $('#topBar ul li.logIn span').click(function(e){
-            $('menu#myOlx').slideToggle();
-        });
-    },
+    }
 });
 
 module.exports.id = 'header/bar';
