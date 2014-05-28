@@ -33,12 +33,22 @@
                             {% include templateName %}
                             <br style="display: none;" />
                         {% endfor %}
-                        {% for field in fields.categoryAttributes %}
-                            {% if (field.values) or (field.fieldType == 'text') %}
-                                {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
-                                {% include templateName %}
-                            {% endif %}
-                        {% endfor %}
+                        {% if fields.categoryAttributes.length %}
+                            <br />
+                            <small>
+                                <strong>{{ dictionary["misc.SpecificFields_title"] }}</strong>
+                            </small>
+                            {% for field in fields.categoryAttributes %}
+                                {% if (field.values) or (field.fieldType == 'text') %}
+                                    {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
+                                    {% include templateName %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <br />
+                        <small>
+                            <strong>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</strong>
+                        </small>
                         {% for field in fields.contactInformation %}
                             {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
                             {% include templateName %}
