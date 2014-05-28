@@ -21,14 +21,18 @@
             {% endif %}
         {% include templateName %}
         {% endfor %}
+        {% if fields.categoryAttributes.length %}
+            <div class="line"></div>
+            <h4>{{ dictionary["misc.SpecificFields_title"] }}</h4>
+            {% for field in fields.categoryAttributes %}
+                {% if (field.values) or (field.fieldType == 'text') %}
+                    {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
+                    {% include templateName %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         <div class="line"></div>
-        {% for field in fields.categoryAttributes %}
-            {% if (field.values) or (field.fieldType == 'text') %}
-                {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
-                {% include templateName %}
-            {% endif %}
-        {% endfor %}
-        <div class="line"></div>
+        <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
         {% for field in fields.contactInformation %}
             {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
             {% include templateName %}
