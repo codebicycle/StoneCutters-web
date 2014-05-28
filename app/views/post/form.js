@@ -10,8 +10,9 @@ module.exports = BaseView.extend({
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-
-        return _.extend({}, data, {});
+        return _.extend({}, data, {
+            user: this.app.getSession('user')
+        });
     },
     postRender: function() {
         $('.fileUpload .image').click(function(e) {
