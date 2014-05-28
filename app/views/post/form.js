@@ -39,6 +39,18 @@ module.exports = BaseView.extend({
                 $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('empty').removeClass('loading');
             });
         });
+        this.attachTrackMe(this.className, function(category, action) {
+            var itemCategory = '-';
+            var itemSubcategory = '-';
+
+            if (action !== 'ClickUploadPicture') {
+                itemCategory = $('.itemCategory').val();
+                itemSubcategory = $('.itemSubcategory').val();
+            }
+            return {
+                custom: [category, itemCategory, itemSubcategory, action].join('::')
+            };
+        });
     }
 });
 

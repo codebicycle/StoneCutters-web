@@ -5,8 +5,11 @@
     <ul>
         {% for category in categories.models %}
             <li>
-                <a href="{{ ['/posting/', category.id] | join('') | link }}">{{category.trName}}</a>
+                <a href="{{ ['/posting/', category.id] | join('') | link }}" class="trackMe" data-tracking="Posting-ClickSelectCategoryList" data-id="{{category.id}}" >{{category.trName}}</a>
             </li>
         {% endfor %}
     </ul>
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </section>

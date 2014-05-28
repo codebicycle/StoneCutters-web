@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function itemRouter(app, dataAdapter) {
+    var _ = require('underscore');
     var asynquence = require('asynquence');
     var configServer = require('../config');
     var configClient = require('../../app/config');
@@ -76,7 +77,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
-    (function tracking() {
+    (function pageview() {
         app.get('/pageview.gif', handler);
 
         function graphiteTracking(req) {
@@ -132,6 +133,58 @@ module.exports = function itemRouter(app, dataAdapter) {
                 atiTracking(req);
             }
 
+            image = new Buffer(image, 'base64');
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', image.length);
+            res.send(image);
+        }
+    })();
+
+    (function pageevent() {
+        app.get('/pageevent.gif', handler);
+
+        function googleTracking(req) {
+            var analytic = new Analytic('google-event', {
+                host: req.host
+            });
+            var ip = req.ip;
+
+            if (req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR')) {
+                ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
+            }
+            analytic.trackPage(_.extend({
+                ip: ip
+            }, req.query));
+        }
+
+        function atiTracking(req) {
+            var location = req.rendrApp.getSession('location');
+            var atiConfig = configClient.get(['analytics', 'ati', location.id]);
+            var analytic;
+
+            if (atiConfig) {
+                analytic = new Analytic('ati-event', {
+                    id: atiConfig.siteId,
+                    host: atiConfig.logServer,
+                    clientId: req.rendrApp.getSession('clientId').substr(24)
+                });
+                analytic.trackPage({
+                    custom: req.query.custom,   
+                    url: req.query.url   
+                });
+            }
+        }
+
+        function handler(req, res) {
+            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+
+            if (configServer.get(['analytics', 'google', 'enabled'], true)) {
+                googleTracking(req);
+            }
+            if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
+                atiTracking(req);
+            }
+        
             image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', image.length);

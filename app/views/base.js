@@ -42,5 +42,54 @@ module.exports = RendrView.extend({
             cellpadding: 4,
             border: 0
         }, this.wapAttributes || {});
+    },
+    track: function(data, callback) {
+        var that = this;
+        var obj = {
+            url: helpers.common.static('/images/common/gif1x1.gif')
+        };
+        var analytics = {};
+        var $img = $('img.analytics');
+
+        if ($img.length) {
+            analytics = $img.last().attr('src');
+            analytics = $.deparam(analytics.replace('/pageview.gif?', ''));
+        }
+        obj = _.defaults(obj, data, analytics);
+
+        $.ajax({
+            url: '/pageevent.gif',
+            type: 'GET',
+            global: false,
+            cache: false,
+            data: obj,
+            always: (callback || $.noop)
+        });
+    },
+    attachTrackMe: function(context, handler) {
+        var that = this;
+        
+        $('.' + context + ' .trackMe').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var data = $this.data('tracking');
+            var obj;
+            var category;
+            var action;
+
+            if (data && !$this.hasClass('disabled')) {
+                data = data.split('-');
+
+                if (data.length === 2) {
+                    category = data[0];
+                    action = data[1];
+                    obj = _.defaults((handler || $.noop).apply($this, data) || {}, {
+                        category: category,
+                        action: action
+                    });
+                    that.track(obj);
+                }
+            }
+        });
     }
 });

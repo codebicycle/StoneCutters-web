@@ -18,6 +18,8 @@ module.exports = BaseView.extend({
         return data;
     },
     postRender: function() {
+        var that = this;
+
         var galery = $('.swiper-container').swiper({
             mode:'horizontal',
             loop: true,
@@ -115,25 +117,33 @@ module.exports = BaseView.extend({
             $('body').removeClass('noscroll');
             $(this).parents('.popup').removeClass('visible');
         });
-        var self = this;
         $('#replyForm .submit').click(function() {
             var message = $('.message').val();
             var email = $('.email').val();
             var name = $('.name').val();
             var phone = $('.phone').val();
-            var itemId = $('.itemId').val();
-            var data = {message: message,email: email, name:name,phone:phone};
-            if(self.validForm(message, name, email)){
+
+            if (that.validForm(message, name, email)) {
+                var itemId = $('.itemId').val();
+                var url = '/items/' + itemId + '/reply';
+
                 $('.loading').show();
                 $('body').addClass('noscroll');
-                var url = '/items/' + itemId + '/reply';
                 $.ajax({
                     type: "POST",
                     url: url,
                     cache: false,
-                    data: data,
+                    data: {
+                        message: message,
+                        email: email,
+                        name:name,
+                        phone:phone
+                    },
                     success: function(data) {
                         var analytics;
+                        var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
+                        var category = $('.itemCategory').val();
+                        var subcategory = $('.itemSubcategory').val();
 
                         $('.loading').hide();
                         $('body').removeClass('noscroll');
@@ -141,16 +151,21 @@ module.exports = BaseView.extend({
                         $('.name').val('');
                         $('.email').val('');
                         $('.phone').val('');
+                        $msg.text('Se envio');
 
                         analytics = $('<div></div>').append(data);
                         analytics = $('#replySuccess', analytics);
-                        $('.msgCont .msgCont-wrapper .msgCont-container')
-                            .text('Se envio')
-                            .append(analytics.length ? analytics : '');
+                        $msg.append(analytics.length ? analytics : '');
+                        that.track({
+                            category: 'Reply',
+                            action: 'ReplySuccess',
+                            custom: ['Reply', category, subcategory, 'ReplySuccess', 'ItemID' + itemId].join('::')
+                        });
+
                         $('.msgCont').addClass('visible');
                         setTimeout(function(){
                             $('.msgCont').removeClass('visible');
-                       }, 3000);
+                        }, 3000);
                     },
                     error: function() {
                         $('small.email').text('error mail smaug').removeClass('hide');
@@ -163,9 +178,37 @@ module.exports = BaseView.extend({
             var value = $(this).val();
             var field = $(this).attr('class');
 
-            if(self.isEmpty(value,field) && field == 'email'){
-                self.isEmail(value,field);
+            if(that.isEmpty(value,field) && field == 'email'){
+                that.isEmail(value,field);
             }
+        });
+        this.attachTrackMe(this.className, function(category, action) {
+            var itemId = $('.itemId').val();
+            var itemCategory = $('.itemCategory').val();
+            var itemSubcategory = $('.itemSubcategory').val();
+
+            if (action === 'clickReply') {
+                var message = $('.message').val();
+                var email = $('.email').val();
+                var name = $('.name').val();
+
+                if (!that.validForm(message, name, email)) {
+                    action += '_Error';
+
+                    if (!that.isEmpty(email, 'email')){
+                        action += 'EmailEmpty';
+                    }
+                    else if (!that.isEmail(email, 'email')) {
+                        action += 'EmailWrong';
+                    }
+                    action += (that.isEmpty(message, 'message') ? '' : 'MessageEmpty');
+                    action += (that.isEmpty(name, 'name') ? '' : 'NameEmpty');
+                }
+            }
+            return {
+                action: action,
+                custom: [category, itemCategory, itemSubcategory, action, 'ItemID' + itemId].join('::')
+            };
         });
     },
     remove: function() {
@@ -198,26 +241,24 @@ module.exports = BaseView.extend({
         return (valMail && valName && valMsg);
     },
     isEmail: function (value,field) {
-            var expression = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
-            if(!expression.test(value)){
-                $('small.'+field).text('no mail').removeClass('hide');
-                return false;
-            }else{
-                $('small.'+field).removeClass('hide').empty();
-                return true;
-            }
+        var expression = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
+        if(!expression.test(value)){
+            $('small.'+field).text('no mail').removeClass('hide');
+            return false;
+        }else{
+            $('small.'+field).removeClass('hide').empty();
+            return true;
+        }
 
-        },
-
+    },
     isEmpty: function (value,field) {
-
-            if(value === ''){
-                $('small.'+field).text('mandatory').removeClass('hide');
-                return false;
-            }else{
-                $('small.'+field).addClass('hide').empty();
-                return true;
-            }
+        if(value === ''){
+            $('small.'+field).text('mandatory').removeClass('hide');
+            return false;
+        }else{
+            $('small.'+field).addClass('hide').empty();
+            return true;
+        }
     }
 
 });
