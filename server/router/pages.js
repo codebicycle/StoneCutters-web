@@ -3,7 +3,6 @@
 module.exports = function itemRouter(app, dataAdapter) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
-    var formidable = require('../formidable');
     var configServer = require('../config');
     var configClient = require('../../app/config');
     var graphite = require('../graphite')();
