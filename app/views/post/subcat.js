@@ -8,6 +8,13 @@ module.exports = BaseView.extend({
     wapAttributes: {
         cellpadding: 0,
         bgcolor: '#DDDDDD'
+    },
+    postRender: function() {
+        this.attachTrackMe(this.className, function(category, action) {
+            return {
+                custom: [category, this.data('parentId'), this.data('id'), action].join('::')
+            };
+        });
     }
 });
 

@@ -26,7 +26,12 @@ module.exports = BaseView.extend({
         $('menu#myOlx ul li a').click(function(e){
             $('menu#myOlx').slideUp();
         });
-    },
+        this.attachTrackMe(this.className, function(category, action) {
+            return {
+                custom: [category, '-', '-', action].join('::')
+            };
+        });
+    }
 });
 
 module.exports.id = 'header/index';

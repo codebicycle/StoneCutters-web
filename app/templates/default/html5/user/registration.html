@@ -14,7 +14,7 @@
         <label >{{ dictionary["register_mail.Password"] }}</label>
         <input type="password" name="password">
         <input type="checkbox" name="agreeTerms" class="checkbox" checked="true">
-        <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='", "/terms" | link, "'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
+        <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>", (["<a href='" , "/terms" | link, "'>"] | join(''))) | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
         <div class="btnCenter">
             <input type="submit" value="{{ dictionary["registerheader.Register"] }}" class="btns orange">
         </div>

@@ -115,7 +115,7 @@ module.exports = function(app, dataAdapter) {
 
             function success() {
                 user.usernameOrEmail = user.username;
-                user.redirect = '/';
+                user.redirect = '/?register_success=true';
                 loginHandler(req, res, user);
             }
 

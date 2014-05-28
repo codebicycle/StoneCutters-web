@@ -12,7 +12,7 @@
     {% from macros import breadcrumb %}
     {% set link = (referer | breadcrumb | link) %}
     {{ breadcrumb(dictionary, link, item.category.name, ['<ul>
-        <li><a class="share" href="#share">', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
+        <li><a class="share trackMe" href="#share" data-tracking="itemPage-clickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
         <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
     </ul>'] | join) }}
     {% if not item.images %}
@@ -70,7 +70,7 @@
                     {% for relatedItem in relatedItems %}
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
-                                <div class="slide" data-itemId="{{ relatedItem.id }}">
+                                <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="itemPage-clickRelatedAdImg" >
                                     <a href="/{{ relatedItem | slugToUrl | link }}">
                                         <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
                                     </a>
@@ -81,7 +81,7 @@
                 </div>
             </section>
         {% endif %}
-        <a class="btns orange" href="#">Otros anuncios relacionados</a>
+        <a class="btns orange trackMe" href="#" data-tracking="itemPage-clickRelatedAdBtn" >Otros anuncios relacionados</a>
     </aside>
 
     <section class="reply">
@@ -102,12 +102,14 @@
             <label>Teléfono</label>
             <input type="number" class="phone" name="phone">
             <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
+            <input type="hidden" class="itemCategory" value="{{ item.category.id }}">
+            <input type="hidden" class="itemSubcategory" value="{{ item.category.parentId }}">
             <span>* Campo Obligatorio</span>
 
             <div class="btnCenter">
-                <input type="button" class="btns orange submit" value="Enviar Consulta" >
+                <input type="button" class="btns orange submit trackMe" value="Enviar Consulta" data-tracking="itemPage-clickReply" >
             </div>
-    </form>
+        </form>
     <div class="clear"></div>
     </section>
 
@@ -120,26 +122,26 @@
         {% endif %}
         {% if item.phone %}
             {% if device.uriSchemeTel %}
-                <div class="action call">
+                <div class="action call trackMe" data-tracking="Reply-ClickCall" >
                     <a href="tel:{{ item.phone }}">
                         <span>Llamar</span>
                     </a>
                 </div>
             {% endif %}
             {% if device.uriSchemeSms %}
-                <div class="action sms">
+                <div class="action sms trackMe" data-tracking="Reply-ClickSms" >
                     <a href="{{ item.phone }}">
                         <span>SMS</span>
                     </a>
                 </div>
             {% endif %}
-            <div class="action email {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}">
+            <div class="action email trackMe {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}" data-tracking="Reply-clickEmail">
                 <div>
                     <span>Email</span>
                 </div>
             </div>
         {% else %}
-            <div data-tracking="itemPage-clickEmail" class="action email fullWidth trackMe">
+            <div class="action email fullWidth trackMe" data-tracking="Reply-ClickEmail" >
                 <div>
                     <span>Email</span>
                 </div>
@@ -151,9 +153,6 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </section>
-
-
-
 
 {% if item.images.length == 1 %}
     <div id="galContOne" class="galCont">

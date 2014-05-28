@@ -14,6 +14,13 @@ module.exports = BaseView.extend({
         return _.extend({}, data, {
             location: this.app.getSession('location')
         });
+    },
+    postRender: function() {
+        this.attachTrackMe(this.className, function(category, action) {
+            return {
+                custom: [category, '-', '-', action].join('::')
+            };
+        });
     }
 });
 

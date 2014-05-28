@@ -14,6 +14,18 @@ module.exports = BaseView.extend({
         return _.extend({}, data, {
             location: this.app.getSession('location')
         });
+    },
+    postRender: function() {
+        if ($('.registerSuccess').length) {
+            var category = 'Account';
+            var action = 'register_confirmation';
+            
+            this.track({
+                category: category,
+                action: action,
+                custom: [category, '-', '-', action].join('::')
+            });
+        }
     }
 });
 

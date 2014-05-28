@@ -2,7 +2,7 @@
 
 <form action="{{ '/location' | link }}">
 	<input type="text" name="search">
-	<button type="submit">Search</button>
+	<button type="submit" class="trackMe" data-tracking="Posting-ClickSearchLocation" >Search</button>
     <input type="hidden" value="{{ target }}" name="target" style="display: none;" />
 	<small>Type a city</small>
 </form>
