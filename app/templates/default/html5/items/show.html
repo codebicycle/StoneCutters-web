@@ -18,7 +18,7 @@
     {% if not item.images %}
         <section id="noPicture">
             <span></span>
-            <p>No hay foto disponible</p>
+            <p>{{ dictionary["itemgeneraldetails.NoPicture"] }}</p>
             <div class="clear"></div>
         </section>
     {% elif item.images.length == 1 %}
@@ -81,36 +81,34 @@
                 </div>
             </section>
         {% endif %}
-        <a class="btns orange" href="#">Otros anuncios relacionados</a>
+        <a class="btns orange" href="#">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] }}</a>
     </aside>
-
     <section class="reply">
-        <span>Contactar al anunciante</span>
+        <span>{{ dictionary["contactseller_form.ReplyToListing"] }}</span>
         <form id="replyForm" action="">
-            <label>* Mensaje</label>
+            <label>* {{ dictionary["replymessage.Message"] }}</label>
             <textarea class="message" name="message"></textarea>
             <small class="message hide"></small>
 
-            <label>* Nombre</label>
-            <input type="text" value="" class="name" name="name">
+            <label>* {{ dictionary["replymessage.Name"] }}</label>
+            <input type="text" value="{{ user.username if user.username }}" class="name" name="name">
             <small class="name hide"></small>
 
-            <label>* Email</label>
-            <input type="email" value="" class="email" name="email">
+            <label>* {{ dictionary["replymessage.Email"] }}</label>
+            <input type="email" value="{{ user.email if user.email }}" class="email" name="email">
             <small class="email hide"></small>
 
-            <label>Teléfono</label>
+            <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
             <input type="number" class="phone" name="phone">
             <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
-            <span>* Campo Obligatorio</span>
+            <span>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</span>
 
             <div class="btnCenter">
-                <input type="button" class="btns orange submit" value="Enviar Consulta" >
+                <input type="button" class="btns orange submit" value="{{ dictionary["contactseller_form.60"] }}" >
             </div>
     </form>
     <div class="clear"></div>
     </section>
-
     <section class="actions">
         <div class="background"></div>
         {% if item.phone and item.contactName %}
@@ -122,26 +120,26 @@
             {% if device.uriSchemeTel %}
                 <div class="action call">
                     <a href="tel:{{ item.phone }}">
-                        <span>Llamar</span>
+                        <span>{{ dictionary["misc.Call"] }}</span>
                     </a>
                 </div>
             {% endif %}
             {% if device.uriSchemeSms %}
                 <div class="action sms">
                     <a href="{{ item.phone }}">
-                        <span>SMS</span>
+                        <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                     </a>
                 </div>
             {% endif %}
             <div class="action email {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}">
                 <div>
-                    <span>Email</span>
+                    <span>{{ dictionary["replymessage.Email"] }}</span>
                 </div>
             </div>
         {% else %}
             <div data-tracking="itemPage-clickEmail" class="action email fullWidth trackMe">
                 <div>
-                    <span>Email</span>
+                    <span>{{ dictionary["replymessage.Email"] }}</span>
                 </div>
             </div>
         {% endif %}
@@ -189,7 +187,7 @@
 <div id="share" class="popup">
     <div class="popup-wrapper">
         <div class="popup-container">
-            <h4>Share this ad</h4>
+            <h4>{{ dictionary["itemgeneraldetails.ShareThisAd"] }}</h4>
             <div>
                 <ul>
                     <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank" class="facebookButton">Facebook</a></li>
@@ -198,7 +196,7 @@
             </div>
 
             <footer>
-                <a href="#" class="popup-close btns grey">Cancelar</a>
+                <a href="#" class="popup-close btns grey">{{ dictionary["wap_posting_step4.Cancel"] }}</a>
             </footer>
         </div>
     </div>
