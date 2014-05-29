@@ -12,7 +12,7 @@
     {% from macros import breadcrumb %}
     {% set link = (referer | breadcrumb | link) %}
     {{ breadcrumb(dictionary, link, item.category.name, ['<ul>
-        <li><a class="share" href="#share">', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
+        <li><a class="share trackMe" href="#share" data-tracking="itemPage-clickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
         <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
     </ul>'] | join) }}
     {% if not item.images %}
@@ -70,7 +70,7 @@
                     {% for relatedItem in relatedItems %}
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
-                                <div class="slide" data-itemId="{{ relatedItem.id }}">
+                                <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="itemPage-clickRelatedAdImg" >
                                     <a href="/{{ relatedItem | slugToUrl | link }}">
                                         <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
                                     </a>
@@ -81,7 +81,7 @@
                 </div>
             </section>
         {% endif %}
-        <a class="btns orange" href="#">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] }}</a>
+        <a class="btns orange trackMe" href="{{ relatedAdsLink | link }}" data-tracking="itemPage-clickRelatedAdBtn" >{{ dictionary["itemgeneraldetails.OtherRelatedListings"] }}</a>
     </aside>
     <section class="reply">
         <span>{{ dictionary["contactseller_form.ReplyToListing"] }}</span>
@@ -101,12 +101,15 @@
             <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
             <input type="number" class="phone" name="phone">
             <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
+
+            <input type="hidden" class="itemCategory" value="{{ item.category.id }}">
+            <input type="hidden" class="itemSubcategory" value="{{ item.category.parentId }}">
             <span>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</span>
 
             <div class="btnCenter">
-                <input type="button" class="btns orange submit" value="{{ dictionary["contactseller_form.60"] }}" >
+                <input type="button" class="btns orange submit trackMe" value="{{ dictionary["contactseller_form.60"] }}" data-tracking="itemPage-clickReply" >
             </div>
-    </form>
+        </form>
     <div class="clear"></div>
     </section>
     <section class="actions">
@@ -118,26 +121,26 @@
         {% endif %}
         {% if item.phone %}
             {% if device.uriSchemeTel %}
-                <div class="action call">
+                <div class="action call trackMe" data-tracking="Reply-ClickCall" >
                     <a href="tel:{{ item.phone }}">
                         <span>{{ dictionary["misc.Call"] }}</span>
                     </a>
                 </div>
             {% endif %}
             {% if device.uriSchemeSms %}
-                <div class="action sms">
+                <div class="action sms trackMe" data-tracking="Reply-ClickSms" >
                     <a href="{{ item.phone }}">
                         <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                     </a>
                 </div>
             {% endif %}
-            <div class="action email {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}">
+            <div class="action email trackMe {{ "fullWidth" if not device.uriSchemeTel and not device.uriSchemeSms }}" data-tracking="Reply-clickEmail">
                 <div>
                     <span>{{ dictionary["replymessage.Email"] }}</span>
                 </div>
             </div>
         {% else %}
-            <div data-tracking="itemPage-clickEmail" class="action email fullWidth trackMe">
+            <div class="action email fullWidth trackMe" data-tracking="Reply-ClickEmail" >
                 <div>
                     <span>{{ dictionary["replymessage.Email"] }}</span>
                 </div>
@@ -149,9 +152,6 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </section>
-
-
-
 
 {% if item.images.length == 1 %}
     <div id="galContOne" class="galCont">

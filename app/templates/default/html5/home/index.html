@@ -12,6 +12,10 @@
 		    </li>
 		{% endfor %}
 	</ul>
+	{% if register_success %}
+        <input type="hidden" value="true"  class="registerSuccess">
+	{% endif %}
+
 	{% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}   
 </section>

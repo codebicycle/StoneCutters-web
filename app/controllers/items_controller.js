@@ -232,7 +232,7 @@ module.exports = {
                     item: {
                         model: 'Item',
                         params: params
-                    }    
+                    }
                 };
 
                 that.app.fetch(spec, {
@@ -288,6 +288,7 @@ module.exports = {
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
                     result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                    result.relatedAdsLink = '/' + helpers.common.slugToUrl(categoryTree.subCategory) + '-p-1?relatedAds=' + itemId;
                     callback(err, result);
                 });
             }

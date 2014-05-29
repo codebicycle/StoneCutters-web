@@ -8,7 +8,13 @@
         {% else %}
             <li class="logIn"><span class="btns blue"></span></li>
         {% endif %}
-        <li class="postBtn"><a href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}" class="btns orange">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a></li>
+        <li class="postBtn">
+            {% if location.current %}
+                <a href="{{ '/posting' | link }}" class="btns orange">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% else %}
+                <a href="{{ '/location?target=posting' | link }}" class="btns orange trackMe" data-tracking="Posting-ClickSelectLocation" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% endif %}
+        </li>
     </ul>
 </header>
 {% if user %}

@@ -63,6 +63,9 @@
         <div class="btnCenter">
             <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange">
         </div>
+
+        {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+        {% include templateName %}
     </form>
 
 </section>

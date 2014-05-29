@@ -8,69 +8,6 @@ var dateformat = require('dateformat');
 
 module.exports = function(nunjucks) {
     return {
-        static: function(path, key, value) {
-            var env = config.get(['environment', 'type'], 'development');
-            var type;
-            var handler;
-
-            function getType(path) {
-                var ext = path.substr(path.lastIndexOf('.') + 1);
-                var defaults = ['css', 'js'];
-                var accept = config.get('staticAccept', defaults);
-
-                if (_.indexOf(accept, ext) >= 0) {
-                    return 'static';
-                }
-
-                defaults = ['jpg', 'jpeg', 'png', 'gif', 'ico'];
-                accept = config.get('imageAccept', defaults);
-                if (_.indexOf(accept, ext) >= 0) {
-                    return 'image';
-                }
-            }
-
-            var typesHandler = {
-                static: function(filePath) {
-                    var baseNumber = '0' + ((filePath.length % 4) + 1);
-
-                    if (env !== 'development') {
-                        var pointIndex = path.lastIndexOf('.');
-                        var ext = path.substr(pointIndex + 1);
-                        var fileName = path.substr(0, pointIndex);
-                        var revision = config.get(['deploy', 'deploy', 'revision'], '0');
-
-                        filePath = (fileName + '-' + revision + '.' + ext);
-                        if (ext === 'css') {
-                            filePath = (fileName + '-' + env + '-' + revision + '.' + ext);
-                        }
-                    }
-                    var envPath = config.get(['environment', 'staticPath'], '');
-
-                    if (env === 'production') {
-                        return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
-                    }
-                    return envPath + filePath;
-                },
-                image: function(filePath) {
-                    var envPath = config.get(['environment', 'imagePath'], '');
-
-                    if (env === 'production') {
-                        var baseNumber = '0' + ((filePath.length() % 4) + 1);
-                        return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
-                    }
-                    return envPath + filePath;
-                }
-            };
-
-            if (key && value) {
-                path = path.replace(key, value);
-            }
-            type = getType(path);
-            if (!type) {
-                return path;
-            }
-            return typesHandler[type](path);
-        },
         filter: function(filter, currentURL) {
             var out = [];
             var current;
@@ -211,12 +148,13 @@ module.exports = function(nunjucks) {
                 if (currentRoute.action === 'index') {
                     var categoryId = this.ctx.category.parentId;
                     var category = this.ctx._app.getSession('categories')._byId[categoryId];
-                    
+
                     breadcrumb = '/' + common.slugToUrl(category);
                 }
             }
             return breadcrumb || '/';
         },
+        'static': common.static,
         slugToUrl: common.slugToUrl,
         urlize: common.urlize
     };

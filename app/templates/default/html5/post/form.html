@@ -13,13 +13,11 @@
             <input type="file" name="images[]" class="file2" />
             <input type="file" name="images[]" class="file3" />
             <input type="file" name="images[]" class="file4" />
-            <div class="image" id="file1"><span></span></div>
-            <div class="image" id="file2"><span></span></div>
-            <div class="image" id="file3"><span></span></div>
-            <div class="image" id="file4"><span></span></div>
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file1"><span></span></div>
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file2"><span></span></div>
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file3"><span></span></div>
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file4"><span></span></div>
         </div>
-
-
 
         {% for field in fields.productDescription %}
             {% if  field.name == 'description' %}
@@ -49,12 +47,15 @@
         <input type="hidden" name="languageId" value="{{language}}">
         <input type="hidden" name="languageCode" value="{{languageCode}}">
         <input type="hidden" name="platform" value="{{platform}}">
-        <input type="hidden" name="category.parentId" value="{{category.id}}">
-        <input type="hidden" name="category.id" value="{{subcategory.id}}">
+        <input type="hidden" name="category.parentId" value="{{category.id}}" class="itemCategory">
+        <input type="hidden" name="category.id" value="{{subcategory.id}}"  class="itemSubcategory">
 
         <div class="btnCenter">
-            <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange">
+            <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange trackMe" data-tracking="Posting-ClickSubmit" >
         </div>
+
+        {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+        {% include templateName %}
     </form>
 
 </section>
