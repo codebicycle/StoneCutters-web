@@ -12,27 +12,27 @@
         {% endif %}
         <h4>{{ item.title }}</h4>
         <div class="formField">
-            <label>Para: {{ item.contactName if item.contactName else "anonymous" }}</label>
+            <label>{{ dictionary["contactseller_form.55"] }} {{ item.contactName if item.contactName else "anonymous" }}</label>
         </div>
         <div class="formField">
-            <label>Tu Email: *</label>
-            <input type="text" name="email" value="{{ data.email if data.email else (user.email if user.email else '') }}" >
+            <label>{{ dictionary["contactseller_form.57"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</label>
+            <input type="text" name="email" value="{{ user.email if user.email }}" >
         </div>
         <div class="formField">
-            <label>Tu Nombre: *</label>
-            <input type="text" name="name" value="{{ data.email if data.name else (user.name if user.name else '') }}">
+            <label>{{ dictionary["contactseller_form.1366"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</label>
+            <input type="text" name="name" value="{{ user.username if user.username }}">
         </div>
         <div class="formField">
-            <label>Teléfono: (opcional)</label>
-            <input type="text" name="phone" value="{{ data.phone if data.phone else '' }}">
+            <label>{{ dictionary["contactseller_form.1512"] }} ({{ dictionary["contactseller_form.6"] }})</label>
+            <input type="text" name="phone" value="">
         </div>
         <div class="formField">
-            <label>Tus Comentarios:</label>
-            <textarea name="message">{{ data.message if data.message else '' }}</textarea>
+            <label>{{ dictionary["contactseller_form.58"] }} :</label>
+            <textarea name="message"></textarea>
         </div>
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="Send" name="submit" class="btns orange">
+                <input type="submit" value="{{ dictionary["contactseller_form.60"] }}" name="submit" class="btns orange">
             </div>
         </div>
     </form>

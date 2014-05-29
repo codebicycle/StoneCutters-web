@@ -39,6 +39,8 @@ module.exports = {
     'itemgeneraldetails.Anonymous': 'Anoniem',
     'itemgeneraldetails.City': 'stad',
     'itemgeneraldetails.DatePosted': 'Plaatsingsdatum',
+    'itemgeneraldetails.NoPicture': 'Geen foto aangeboden',
+    'itemgeneraldetails.OtherRelatedListings': 'Verwante advertenties:',
     'itemgeneraldetails.Phone': 'Telefoonnummer',
     'itemgeneraldetails.Price': 'Prijs',
     'itemgeneraldetails.ShareThisAd': 'Deel deze advertentie',
@@ -74,6 +76,7 @@ module.exports = {
     'popularsearchesbody.PopularCities': 'Populaire steden',
     'postingheader.Post': 'Plaatsen',
     'posting_select_subcategory.SelectSubcategory': 'Kies een subrubriek',
+    'wap_posting_step4.Cancel': 'Annuleer',
     'wap_posting_step4.mandatoryField': 'verplicht veld',
     'searchheader.ClickHere': 'Klik hier',
     'myfavorites.Delete': 'Verwijder',
@@ -88,6 +91,9 @@ module.exports = {
     'register_mail.Password': 'wachtwoord',
     'register_mail.Username': 'gebruikersnaam',
     'registerheader.Register': 'Registreren',
+    'replymessage.Email': 'e-mail',
+    'replymessage.Message': 'Bericht',
+    'replymessage.Name': 'Naam',
     'loginheader.Identification': 'Identificatie',
     'terms.TermsOfUse': 'Gebruiksvoorwaarden'
 };

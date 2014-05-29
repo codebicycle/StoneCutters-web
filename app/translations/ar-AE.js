@@ -39,6 +39,8 @@ module.exports = {
     'itemgeneraldetails.Anonymous': '\u062D\u0631 ',
     'itemgeneraldetails.City': '\u0645\u062F\u064A\u0646\u0629 ',
     'itemgeneraldetails.DatePosted': '\u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0627\u0639\u0644\u0627\u0645 ',
+    'itemgeneraldetails.NoPicture': '\u0648\u0644\u0627 \u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0642\u062F\u0645\u0629',
+    'itemgeneraldetails.OtherRelatedListings': 'Other related listings:',
     'itemgeneraldetails.Phone': '\u0647\u0627\u062A\u0641',
     'itemgeneraldetails.Price': '\u0633\u0639\u0631 ',
     'itemgeneraldetails.ShareThisAd': 'Share this ad',
@@ -74,6 +76,7 @@ module.exports = {
     'popularsearchesbody.PopularCities': 'Popular cities',
     'postingheader.Post': '\u0648\u0636\u0639 \u0623\u0639\u0644\u0627\u0646',
     'posting_select_subcategory.SelectSubcategory': '\u0627\u062E\u062A\u0631 \u0642\u0628\u0644 \u0627\u0644\u0645\u0631\u062A\u0628\u0629 ',
+    'wap_posting_step4.Cancel': '\u0627\u0644\u063A\u0627\u0621 ',
     'wap_posting_step4.mandatoryField': 'mandatory field',
     'searchheader.ClickHere': '\u0623\u0636\u063A\u0637 \u0647\u0646\u0627',
     'myfavorites.Delete': '\u062D\u0630\u0641 ',
@@ -88,6 +91,9 @@ module.exports = {
     'register_mail.Password': '\u0643\u0644\u0645\u0629 \u0627\u0644\u0633\u0631',
     'register_mail.Username': '\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645',
     'registerheader.Register': '\u0633\u062C\u064D\u0644',
+    'replymessage.Email': ' Email \u0639\u0646\u0648\u0627\u0646 ',
+    'replymessage.Message': 'Message',
+    'replymessage.Name': '\u0623\u0633\u0645',
     'loginheader.Identification': 'Identification ',
     'terms.TermsOfUse': '\u0634\u0631\u0648\u0637 \u0627\u0644\u0627\u0633\u062A\u062E\u062F\u0627\u0645'
 };
