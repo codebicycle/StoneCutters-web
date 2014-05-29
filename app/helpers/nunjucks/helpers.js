@@ -148,7 +148,7 @@ module.exports = function(nunjucks) {
                 if (currentRoute.action === 'index') {
                     var categoryId = this.ctx.category.parentId;
                     var category = this.ctx._app.getSession('categories')._byId[categoryId];
-                    
+
                     breadcrumb = '/' + common.slugToUrl(category);
                 }
             }
