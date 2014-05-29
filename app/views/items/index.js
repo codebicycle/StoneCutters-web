@@ -30,8 +30,6 @@ module.exports = BaseView.extend({
             });
             $('section#itemListing ul').toggleClass('gallery-list');
             $('.switchView').toggleClass('gallery');
-            /*var action = ($('section#itemListing ul').hasClass('gallery-list')) ? 'viewGalery' : 'viewListing';
-            _gaq.push(['_trackEvent', 'listing', action]);*/
         });
 
         function loadImages(url , $this){

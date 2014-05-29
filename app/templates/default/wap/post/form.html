@@ -66,6 +66,14 @@
                         <input type="hidden" name="platform" value="{{platform}}">
                         <input type="hidden" name="category.parentId" value="{{category.id}}">
                         <input type="hidden" name="category.id" value="{{subcategory.id}}">
+
+                        <small>
+                            <strong>{{ dictionary["itemslisting.NavigatorByLocation"] }}:</strong>
+                            <span>
+                                {{location.current.name}}.<small><a href="{{ ('/location?target=posting/'+category.id+'/'+subcategory.id) | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
+                            </span>
+                        </small>
+
                         <span style="display: block;"><input type="submit" value="Post Ad"></span>
                     </form>
                 </td>
