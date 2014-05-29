@@ -89,21 +89,41 @@ module.exports = BaseView.extend({
         });
 
         $('.fav').click(function(e) {
-            if ($(this).attr('href') == '#') {
+            var $this = $(this);
+
+            if ($this.attr('href') == '#') {
                 e.preventDefault();
-                var element = $(this);
-                var itemId = element.attr('data-itemId');
-                var url = (element.hasClass('add')) ? '/items/'+itemId+'/favorite' : '/items/'+itemId+'/favorite/delete';
+                var api = that.app.get('apiPath');
+                var session = that.app.get('session');
+                var user = session.user;
+                var itemId = $this.data('itemid');
+                var url = [];
+
+                url.push(api);
+                url.push('/users/');
+                url.push(user.userId);
+                url.push('/favorites/');
+                url.push(itemId);
+                url.push(($this.hasClass('add') ? '' : '/delete'));
+                url.push('?token=');
+                url.push(user.token);
+
+                $('.loading').show();
                 $.ajax({
-                    type: "GET",
-                    url: url,
+                    type: 'POST',
+                    url: url.join(''),
                     cache: false,
-                    success: function(data) {
-                        element.toggleClass('add remove');
-                    },
-                    error: function() {
-                        console.log('Error');
-                    }
+                    json: true,
+                    data: {}
+                })
+                .done(function () {
+                    $this.toggleClass('add remove');
+                })
+                .fail(function () {
+                    console.log('Error');
+                })
+                .always(function () {
+                    $('.loading').hide();
                 });
             }
         });

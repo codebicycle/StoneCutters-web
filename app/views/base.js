@@ -70,7 +70,6 @@ module.exports = RendrView.extend({
         var that = this;
         
         $('.' + context + ' .trackMe').on('click', function(e) {
-            e.preventDefault();
             var $this = $(this);
             var data = $this.data('tracking');
             var obj;

@@ -207,14 +207,10 @@ module.exports = function(app, dataAdapter) {
 
             function add(done) {
                 var user = req.rendrApp.getSession('user') || {};
-                var languages = req.rendrApp.getSession('languages');
-                var selectedLanguage = req.rendrApp.getSession('selectedLanguage');
 
                 dataAdapter.post(req, '/users/' + user.userId + '/favorites/' + itemId + (intent ? '/' + intent : ''), {
                     query: {
-                        token: user.token,
-                        languageId: languages._byId[selectedLanguage].id,
-                        languageCode: languages._byId[selectedLanguage].isocode.toLowerCase()
+                        token: user.token
                     }
                 }, done.errfcb);
             }
