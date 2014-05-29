@@ -121,14 +121,16 @@
                             {% endif %}
                             {% if item.optionals %}
                                 {% for optional in item.optionals %}
-                                    <tr>
-                                        <th align="left" style="border-top: solid 1px #CCC;">
-                                            <small style="display: block; text-transform: capitalize;">{{ optional.label }}:</small>
-                                        </th>
-                                        <td align="left" style="border-top: solid 1px #CCC;">
-                                            <small style="display: block;">{{ optional.value }}</small>
-                                        </td>
-                                    </tr>
+                                    {% if optional.label and optional.value %}
+                                        <tr>
+                                            <th align="left" style="border-top: solid 1px #CCC;">
+                                                <small style="display: block; text-transform: capitalize;">{{ optional.label }}:</small>
+                                            </th>
+                                            <td align="left" style="border-top: solid 1px #CCC;">
+                                                <small style="display: block;">{{ optional.value }}</small>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
                                 {% endfor %}
                             {% endif %}
                             {# Experience (?) #}
