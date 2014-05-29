@@ -9,9 +9,19 @@ module.exports = BaseView.extend({
     wapAttributes: {
         cellpadding: 0
     },
+    processItem: function(item) {
+        var year = item.date.year;
+        var month = item.date.month - 1;
+        var day = item.date.day;
+        var hour = item.date.hour;
+        var minute = item.date.minute;
+        var second = item.date.second;
+        var date = new Date(year, month, day, hour, minute, second);
+
+        item.date.since = helpers.timeAgo(date);
+    },
     postRender: function() {
         $('.switchView').click(function(e) {
-
             var url;
             $('.filled').each(function() {
                 url = $(this).attr('data-fullimg');
@@ -19,8 +29,6 @@ module.exports = BaseView.extend({
             });
             $('section#itemListing ul').toggleClass('gallery-list');
             $('.switchView').toggleClass('gallery');
-            /*var action = ($('section#itemListing ul').hasClass('gallery-list')) ? 'viewGalery' : 'viewListing';
-            _gaq.push(['_trackEvent', 'listing', action]);*/
         });
 
         function loadImages(url , $this){
@@ -30,6 +38,12 @@ module.exports = BaseView.extend({
                 $this.css('background-image', 'url('+url+')');
             };
         }
+    },
+    getTemplateData: function() {
+        var data = BaseView.prototype.getTemplateData.call(this);
+
+        _.each(data.items, this.processItem);
+        return _.extend({}, data);
     }
 });
 

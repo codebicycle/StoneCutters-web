@@ -45,6 +45,12 @@
         <input type="hidden" name="platform" value="{{platform}}">
         <input type="hidden" name="category.parentId" value="{{category.id}}">
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
+        <div class="formField">
+            <h3>
+                {{ dictionary["itemslisting.NavigatorByLocation"] }} : {{location.current.name}}<br>
+                <a href="{{ ('/location?target=posting/'+category.id+'/'+subcategory.id) | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
+            </h3>
+        </div>
 
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
