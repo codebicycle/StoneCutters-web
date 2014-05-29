@@ -11,7 +11,7 @@
                 <a href="/{{ item | slugToUrl | link }}">
                     <div class="imageCont">
                         <div class="imageContAlign">
-                            <img alt="" src="{{ item.thumbnail if item.thumbnail else "/images/html4/noPhoto.png" }}" {{ "class='noPhoto'" if not item.thumbnail }}>
+                            <img alt="" src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}" {{ "class='noPhoto'" if not item.thumbnail }}>
                         </div>
                     </div>
                 </a>
