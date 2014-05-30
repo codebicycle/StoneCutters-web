@@ -330,73 +330,34 @@ module.exports = {
             delete params.title;
             delete params.sk;
 
-            function findItem(next) {
-                var spec = {
-                    item: {
-                        model: 'Item',
-                        params: params
-                    }
-                };
-
-                that.app.fetch(spec, {
-                    'readFromCache': false
-                }, function afterFetch(err, result) {
-                    if (err) {
-                        callback(err, result);
-                        return;
-                    }
-                    next(err, result);
-                });
-            }
-
-            function findRelatedItems(err, data) {
-                var item = data.item.toJSON();
-                var slug = helpers.common.slugToUrl(item);
-                var spec;
-
-                if (slug.indexOf(slugUrl + '-iid-')) {
-                    that.redirectTo(helpers.common.link('/' + slug, siteLocation));
-                    return;
+            var spec = {
+                item: {
+                    model: 'Item',
+                    params: params
                 }
+            };
 
-                spec = {
-                    items: {
-                        collection : 'Items',
-                        params: {
-                            location: siteLocation,
-                            offset: 0,
-                            pageSize:10,
-                            relatedAds: itemId
-                        }
-                    }
-                };
+            that.app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
+                var user = that.app.getSession('user');
+                var categoryTree;
 
-                that.app.fetch(spec, {
-                    'readFromCache': false
-                }, function afterFetch(err, result) {
-                    var model = result.items.models[0];
-                    var user = that.app.getSession('user');
-                    var categoryTree;
-
-                    result.relatedItems = model.get('data');
-                    result.user = user;
-                    result.item = item;
-                    result.pos = Number(params.pos) || 0;
-                    result.sk = securityKey;
-                    categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
-                    helpers.analytics.reset();
-                    helpers.analytics.setPage('item');
-                    helpers.analytics.addParam('user', user);
-                    helpers.analytics.addParam('item', item);
-                    helpers.analytics.addParam('category', categoryTree.parent);
-                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                    result.analytics = helpers.analytics.generateURL(that.app.getSession());
-                    result.relatedAdsLink = '/' + helpers.common.slugToUrl(categoryTree.subCategory) + '-p-1?relatedAds=' + itemId;
-                    callback(err, result);
-                });
-            }
-
-            findItem(findRelatedItems);
+                result.item = item;
+                result.user = user;
+                result.pos = Number(params.pos) || 0;
+                result.sk = securityKey;
+                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                helpers.analytics.reset();
+                helpers.analytics.setPage('item');
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('item', item);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                callback(err, result);
+            });
         }
     },
     search: function(params, callback) {
