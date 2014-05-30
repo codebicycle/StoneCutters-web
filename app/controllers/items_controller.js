@@ -296,6 +296,70 @@ module.exports = {
             findItem(findRelatedItems);
         }
     },
+    galery: function(params, callback) {
+        helpers.controllers.control(this, params, controller);
+
+        function controller() {
+            var that = this;
+            var user = that.app.getSession('user');
+            var securityKey = params.sk;
+            var itemId = params.itemId;
+            var slugUrl = params.title;
+            var siteLocation = that.app.getSession('siteLocation');
+            var anonymousItem;
+
+            helpers.seo.resetHead();
+            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slugUrl, '-iid-', itemId].join(''));
+
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.itemId] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+                else {
+                    securityKey = anonymousItem[params.itemId];
+                }
+            }
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+            delete params.sk;
+
+            var spec = {
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            };
+
+            that.app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
+                var user = that.app.getSession('user');
+                var categoryTree;
+
+                result.item = item;
+                result.user = user;
+                result.pos = Number(params.pos) || 0;
+                result.sk = securityKey;
+                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                helpers.analytics.reset();
+                helpers.analytics.setPage('item');
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('item', item);
+                helpers.analytics.addParam('category', categoryTree.parent);
+                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                callback(err, result);
+            });
+        }
+    },
     search: function(params, callback) {
         helpers.controllers.control(this, params, controller);
 
