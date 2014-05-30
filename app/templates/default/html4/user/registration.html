@@ -18,8 +18,7 @@
         </div>
         <div class="formField">
             <input type="checkbox" name="agreeTerms" class="checkbox" checked="true">
-            <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='", "/terms" | link, "'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
-
+            <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>", (["<a href='" , "/terms" | link, "'>"] | join(''))) | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
         </div>
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
