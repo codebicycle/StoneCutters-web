@@ -16,5 +16,10 @@ module.exports = {
         'post-button': {
             enabled: false
         }
+    },
+    disablePostingButton: {
+        wap: ['home', 'post', 'location'],
+        html4: ['post', 'location'],
+        html5: ['post', 'location']
     }
 };

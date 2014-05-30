@@ -2,6 +2,27 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var config = require('../../config');
+
+function readPostButtonConfig(platform, currentRoute) {
+    var buttonsConfig = config.get('disablePostingButton');
+    var match = _.find(buttonsConfig[platform], function(conf) {
+        conf = conf.split(':');
+        var configRoute = {
+            controller: conf[0],
+            action: conf[1]
+        };
+
+        if (configRoute.action) {
+            return (configRoute.controller === currentRoute.controller && configRoute.action === currentRoute.action);
+        }
+        else {
+            return (configRoute.controller === currentRoute.controller);
+        }
+    });
+
+    return (match) ? false : true;
+}
 
 module.exports = BaseView.extend({
     className: 'header_index_view',
@@ -11,13 +32,20 @@ module.exports = BaseView.extend({
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
+        var platform = this.app.getSession('platform');
+        var currentRoute = this.app.getSession('currentRoute');
+        var postButton = readPostButtonConfig(platform, currentRoute);
 
         return _.extend({}, data, {
             location: this.app.getSession('location'),
-            user: this.app.getSession('user')
+            user: this.app.getSession('user'),
+            postButton: postButton
         });
     },
     postRender: function() {
+        var platform = this.app.getSession('platform');
+        var currentRoute = this.app.getSession('currentRoute');
+
         $('#topBar ul li.logIn span').click(function(e){
             $('menu#myOlx').slideToggle();
         });
@@ -28,6 +56,17 @@ module.exports = BaseView.extend({
             return {
                 custom: [category, '-', '-', action].join('::')
             };
+        });
+        $(document).on('route', function onRoute() {
+            var button = $('.postBtn', '#topBar');
+            var postButton = readPostButtonConfig(platform, currentRoute);
+
+            if (postButton) {
+                button.removeClass('disabled');
+            }
+            else {
+                button.addClass('disabled');
+            }
         });
     }
 });
