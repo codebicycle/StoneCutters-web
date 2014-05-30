@@ -2,9 +2,9 @@
     <tbody>
         <tr>
             <td style="padding: .25em .5em; border-top: solid thin #808080;">
-                <strong style="color: #0075BD;">My Ads</strong>
+                <strong style="color: #0075BD;">{{ dictionary["defaulthtmlhead.My Listings"] }}</strong>
                 {% if params.deleted %}
-                    <small style="display: block; color: #0C0;">Your ad was removed</small>
+                    <small style="display: block; color: #0C0;">{{ dictionary["showactivelistings.SuccessRemove"] }}</small>
                 {% endif %}
                 {% if params.err %}
                     {% for err in params.err %}
