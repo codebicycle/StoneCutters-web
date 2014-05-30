@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Mit\xE4 etsit?',
     'defaulthtmlhead.SellerInformation': 'Myyj\xE4n tiedot',
     'itemslisting.Category': 'Kategoria:',
+    'itemslisting.NavigatorByLocation': 'Sijainti',
     'itemslisting.PendingAd': 'Ilmoitus odottaa',
     'itemslisting.Results': 'tulokset',
     'itemslisting.SearchResults': 'Results for ',

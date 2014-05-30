@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Hva ser du etter?',
     'defaulthtmlhead.SellerInformation': 'Selger opplysninger',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.NavigatorByLocation': 'Sted',
     'itemslisting.PendingAd': 'Kommende annonse',
     'itemslisting.Results': 'resultater',
     'itemslisting.SearchResults': 'Resultater for',

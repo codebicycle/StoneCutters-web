@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Je, unatafuta nini?',
     'defaulthtmlhead.SellerInformation': 'Habari ya Muuzaji',
     'itemslisting.Category': 'Kundi:',
+    'itemslisting.NavigatorByLocation': 'Eneo',
     'itemslisting.PendingAd': 'Tangazo Linasubiri',
     'itemslisting.Results': 'matokeo',
     'itemslisting.SearchResults': 'Matokeo ya',

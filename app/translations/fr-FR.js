@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Que recherchez vous?',
     'defaulthtmlhead.SellerInformation': 'Profil du Vendeur',
     'itemslisting.Category': 'Cat\xE9gorie:',
+    'itemslisting.NavigatorByLocation': 'Ville',
     'itemslisting.PendingAd': 'Annonce en attente',
     'itemslisting.Results': 'r\xE9sultats',
     'itemslisting.SearchResults': 'R\xE9sultats de la Recherche:',

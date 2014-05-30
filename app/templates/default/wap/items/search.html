@@ -16,6 +16,14 @@
         {% else %}
             <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4">
                 <tbody>
+                    <tr>
+                        <td style="border-top: solid thin #808080;">
+                            <small style="display: block;">
+                                <img border="0" alt="" src="{{ '/images/common/gif1x1.gif' | static }}" width="12" height="9" >
+                                {{ metadata.total }} {{ dictionary["itemslisting.Results"] }}
+                            </small>
+                        </td>
+                    </tr>
                     {%for item in items %}
                         <tr>
                             <td style="border-top: solid thin #808080;">

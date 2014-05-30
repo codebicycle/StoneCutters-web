@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'B\u1EA1n \u0111ang t\xECm ki\u1EBFm th\xF4ng tin g\xEC?',
     'defaulthtmlhead.SellerInformation': 'Th\xF4ng Tin Ng\u01B0\u1EDDi B\xE1n',
     'itemslisting.Category': 'H\u1EA1ng m\u1EE5c:',
+    'itemslisting.NavigatorByLocation': '\u0110\u1ECBa \u0111i\u1EC3m',
     'itemslisting.PendingAd': 'Qu\u1EA3ng c\xE1o \u0111ang Ch\u1EDD X\u1EED l\xFD',
     'itemslisting.Results': 'K\u1EBFt qu\u1EA3',
     'itemslisting.SearchResults': 'K\u1EBFt qu\u1EA3 cho',

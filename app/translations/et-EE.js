@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Mida otsite?',
     'defaulthtmlhead.SellerInformation': 'M\xFC\xFCja andmed',
     'itemslisting.Category': 'Kategooria:',
+    'itemslisting.NavigatorByLocation': 'Asukoht',
     'itemslisting.PendingAd': 'Ootel kuulutus',
     'itemslisting.Results': 'tulemused',
     'itemslisting.SearchResults': 'Tulemused ',

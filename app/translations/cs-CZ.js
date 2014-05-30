@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Co hled\xE1te?',
     'defaulthtmlhead.SellerInformation': '\xDAdaje o prodejci',
     'itemslisting.Category': 'Kategorie:',
+    'itemslisting.NavigatorByLocation': 'M\xEDsto',
     'itemslisting.PendingAd': 'Inzer\xE1t je zpracov\xE1v\xE1n',
     'itemslisting.Results': 'v\xFDsledk\u016F',
     'itemslisting.SearchResults': 'V\xFDsledky pro',

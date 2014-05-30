@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': '\u0622\u067E \u06A9\u06CC\u0627 \u062A\u0644\u0627\u0634 \u06A9\u0631\u0631\u06C1\u06D2 \u06C1\u06CC\u06BA\u061F',
     'defaulthtmlhead.SellerInformation': '\u0641\u0631\u0648\u062E\u062A \u06A9\u0646\u0646\u062F\u06C1 \u06A9\u06CC \u0645\u0639\u0644\u0648\u0645\u0627\u062A',
     'itemslisting.Category': '\u06A9\u06CC\u0679\u06CC\u06AF\u0631\u06CC:',
+    'itemslisting.NavigatorByLocation': '\u0645\u0642\u0627\u0645',
     'itemslisting.PendingAd': '\u0632\u06CC\u0631 \u063A\u0648\u0631 \u0627\u0634\u062A\u06C1\u0627\u0631',
     'itemslisting.Results': '\u0646\u062A\u0627\u0626\u062C',
     'itemslisting.SearchResults': '\u0646\u062A\u0627\u0626\u062C \u0628\u0631\u0627\u0626\u06D2',

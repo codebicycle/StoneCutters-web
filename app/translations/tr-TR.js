@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Arad\u0131\u011F\u0131n\u0131z \u015Fey nedir?',
     'defaulthtmlhead.SellerInformation': 'Sat\u0131c\u0131 Bilgisi',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.NavigatorByLocation': 'Yer',
     'itemslisting.PendingAd': '\u0130lan Beklemede',
     'itemslisting.Results': 'sonu\xE7lar',
     'itemslisting.SearchResults': 'Sonu\xE7lar',

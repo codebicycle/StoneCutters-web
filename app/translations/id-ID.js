@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Apa yang sedang Anda cari?',
     'defaulthtmlhead.SellerInformation': 'Informasi Penjual',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.NavigatorByLocation': 'Lokasi',
     'itemslisting.PendingAd': 'Iklan yang Menunggu',
     'itemslisting.Results': 'hasil',
     'itemslisting.SearchResults': 'Hasil untuk',

@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': '\u0D94\u0DB6 \u0DC3\u0DDC\u0DBA\u0DB1\u0DCA\u0DB1\u0DDA \u0D9A\u0DD4\u0DB8\u0D9A\u0DCA\u0DAF?',
     'defaulthtmlhead.SellerInformation': '\u0DC0\u0DD2\u0D9A\u0DD4\u0DAB\u0DB1\u0DCA\u0DB1\u0DCF\u0D9C\u0DDA \u0DAD\u0DDC\u0DBB\u0DAD\u0DD4\u0DBB\u0DD4',
     'itemslisting.Category': '\u0D9A\u0DCF\u0DAB\u0DCA\u0DA9\u0DBA:',
+    'itemslisting.NavigatorByLocation': '\u0DB4\u0DD2\u0DC4\u0DD2\u0DA7\u0DD3\u0DB8',
     'itemslisting.PendingAd': '\u0D89\u0DAD\u0DD2\u0DBB\u0DD2 \u0DAF\u0DD0\u0DB1\u0DCA\u0DC0\u0DD3\u0DB8\u0DCA',
     'itemslisting.Results': '\u0DB4\u0DCA\u200D\u0DBB\u0DAD\u0DD2\u0DB5\u0DBD',
     'itemslisting.SearchResults': '\u0DC3\u0DB3\u0DC4\u0DCF \u0DB4\u0DCA\u200D\u0DBB\u0DAD\u0DD2\u0DB5\u0DBD',
