@@ -179,7 +179,7 @@ module.exports = BaseView.extend({
                         that.track({
                             category: 'Reply',
                             action: 'ReplySuccess',
-                            custom: ['Reply', category, subcategory, 'ReplySuccess', 'ItemID' + itemId].join('::')
+                            custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
                         });
 
                         $('.msgCont').addClass('visible');
@@ -227,7 +227,7 @@ module.exports = BaseView.extend({
             }
             return {
                 action: action,
-                custom: [category, itemCategory, itemSubcategory, action, 'ItemID' + itemId].join('::')
+                custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
             };
         });
     },
