@@ -394,6 +394,30 @@ module.exports = {
             }
         }
     },
+    item_galery: {
+        url: ':title-iid-:itemId([0-9]+)/galery',
+        view: 'items#galery',
+        isServer: false,
+        google: '[category-name]/[subcategory-id]/item/[item_attributes]/galery',
+        ati: {
+            process: true,
+            params: {
+                page_name: 'detail_page_galery',
+                category: '',
+                subcategory: '',
+                ad_category: '',
+                ad_subcategory: '',
+                ad_id: '',
+                ad_photo: 0,
+                poster_id: '0',
+                poster_type: 'registered_no',
+                action_type: 'loaded',
+                posting_to_action: '',
+                geo1: '',
+                geo2: ''
+            }
+        }
+    },
     category_with_filters: {
         url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?',
         view: 'items#index',

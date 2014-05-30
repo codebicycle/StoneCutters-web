@@ -21,14 +21,14 @@
         <span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
         <div id="itemPhotos">
             {% if item.images.length == 0 %}
-                <span>(No hay foto disponible)</span>
+                <span>({{ dictionary[itemgeneraldetails.NoPicture] }})</span>
             {% elif item.images.length == 1 %}
-                <a href="">
+                <a href="/{{ [item | slugToUrl, '/galery'] | join('') | link }}">
                     <div class="arrow"></div>
                     <img alt="" src="{{item.images[0].url | static }}">
                 </a>
             {% else %}
-                <a href="">
+                <a href="/{{ [item | slugToUrl, '/galery?pos='+pos] | join('') | link }}">
                     <div class="arrow"></div>
                     <img alt="" src="{{item.images[pos].url | static }}">
                 </a>
@@ -40,18 +40,18 @@
             {% endif %}
         </div>
 
-        <h3>Contactar al Vendedor</h3>
+        <h3>{{ dictionary[mybids.ContactSeller] }}</h3>
 
         <div id="centerBtns">
             {% if item.phone %}
                 {% if device.uriSchemeTel %}
-                    <a href="tel:{{ item.phone }}" class="btns orange">Call</a>
+                    <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
                 {% endif %}
                 {% if device.uriSchemeSms %}
-                    <a href="sms:{{ item.phone }}" class="btns orange">SMS</a>
+                    <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
                 {% endif %}
             {% endif %}
-            <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange">Email</a>
+            <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange">{{ dictionary["register_mail.Email"] }}</a>
         </div>
         {% if item.phone %}
             <div id="phone">
@@ -70,21 +70,21 @@
                 {% endfor %}
             {% endif %}
             {% if item.coordinates %}
-                <li><strong>Mapa: </strong><a href="url-para-el-mapa/{{ item.id }}?latitude={{ item.coordinates.latitude }}&longitude={{ item.coordinates.longitude }}">Ver Mapa grande</a></li>
+                <li><strong>Mapa: </strong><a href="url-para-el-mapa/{{ item.id }}?latitude={{ item.coordinates.latitude }}&longitude={{ item.coordinates.longitude }}">{{ dictionary["item.ViewBiggerMap"] }}</a></li>
             {% endif %}
         </ul>
 
-        <h3>Descripcion</h3>
+        <h3>{{ dictionary["itemgeneraldetails.Description"] }}</h3>
 
         <p>{{ item.description }}</p>
 
         <div class="line"></div>
 
         <div id="centerBtns">
-            <a href="{{ relatedAdsLink | link }}" class="btns grey">Otros anuncios relacionados</a>
+            <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] }}</a>
         </div>
     {% else %}
-        <div id="itemDisable">Esse anúncio não está mais disponível</div>
+        <div id="itemDisable">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</div>
     {% endif %}
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
