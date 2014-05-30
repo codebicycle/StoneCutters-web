@@ -7,7 +7,7 @@
     {{ breadcrumb(dictionary, link, [dictionary["itemslisting.SearchResults"], search] | join(' '), '<span class="switchView"></span>') }}
     {% if metadata.total == 0 %}
         <div class="emtyList">
-            Lo lamentamos pero no hay resultados para tu búsqueda.
+            {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
         </div>
     {% else %}
         <ul class="itemListing">

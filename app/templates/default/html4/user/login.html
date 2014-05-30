@@ -3,40 +3,40 @@
 {{ breadcrumb(dictionary, link, dictionary["homeheader.My OLX"]) }}
 <div id="login">
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
-        <h4>Acceso para Miembros</h4>
+        <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>
         <div class="formField">
-            <label>Usuario o Email</label>
+            <label>{{ dictionary["loginbox.Username"] }}</label>
             <input type="text" value="" name="usernameOrEmail">
         </div>
         <div class="formField">
-            <label>Contraseña</label>
+            <label>{{ dictionary["loginbox.Password"] }}</label>
             <input type="password" value="" name="password">
         </div>
         <input type="hidden" name="redirect" value="{{ referer }}">
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="Ingresar" name="submit" class="btns orange">
+                <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit" class="btns orange">
             </div>
         </div>
     </form>
     <div class="line"></div>
     <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
-        <h4>Ya publicaste algún anuncio</h4>
+        <h4>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</h4>
         <div class="formField">
-            <label>Ingresa el email que usaste para publicar tu anuncio y recibe el link a Mi OLX por email.</label>
+            <label>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace ('<<MY_CLASSIFIEDS>>','OLX') }}</label>
             <input type="text" name="email">
         </div>
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="Enviar" name="submit" class="btns orange">
+                <input type="submit" value="{{ dictionary["myolx.Send"] }}" name="submit" class="btns orange">
             </div>
         </div>
     </form>
     <div class="line"></div>
-    <h4>¿No eres miembro?</h4>
+    <h4>{{ dictionary["loginbox.NotAMember"] }}</h4>
     <div class="formActions">
         <div class="btn-adjust btnOrange btnForm">
-            <a href="{{ '/register' | link }}" class="btns orange">Crea tu cuenta gratis</a>
+            <a href="{{ '/register' | link }}" class="btns orange">{{ dictionary["loginbox.CreateYourAccount"] }}</a>
         </div>
     </div>
 </div>

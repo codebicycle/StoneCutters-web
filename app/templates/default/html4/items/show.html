@@ -70,7 +70,7 @@
                 {% endfor %}
             {% endif %}
             {% if item.coordinates %}
-                <li><strong>Mapa: </strong><a href="url-para-el-mapa/{{ item.id }}?latitude={{ item.coordinates.latitude }}&longitude={{ item.coordinates.longitude }}">{{ dictionary["item.ViewBiggerMap"] }}</a></li>
+                <li><strong>{{ dictionary["business_directory.Map"] }}: </strong><a href="url-para-el-mapa/{{ item.id }}?latitude={{ item.coordinates.latitude }}&longitude={{ item.coordinates.longitude }}">{{ dictionary["item.ViewBiggerMap"] }}</a></li>
             {% endif %}
         </ul>
 

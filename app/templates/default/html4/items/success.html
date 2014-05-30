@@ -7,7 +7,7 @@
 
         <div id="replySuccess">{{ dictionary["item.YourMessageHasBeenSent"] }}</div>
     {% else %}
-        <div id="itemDisable">Esse anúncio não está mais disponível</div>
+        <div id="itemDisable">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</div>
     {% endif %}
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}

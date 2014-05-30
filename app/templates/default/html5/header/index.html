@@ -25,7 +25,7 @@
                 {{ "<span>"+user.unreadMessagesCount+"</span>" if user.unreadMessagesCount > 0 }}
             </li-->
             <li><a href="/{{ 'myolx/favoritelisting' | link }}">{{ dictionary["myolx.MyFavorites"] }}</a></li>
-            <li><a href="{{ '/logout' | link }}">Logout</a></li>
+            <li><a href="{{ '/logout' | link }}">{{ dictionary["myolx.SignOut"] }}</a></li>
         </ul>
     </menu>
 {% endif %}

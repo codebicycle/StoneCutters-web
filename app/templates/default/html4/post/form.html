@@ -3,9 +3,9 @@
 {{ breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
-        <h4 class="title" >Categoría seleccionada :: {{ subcategory.name }}</h4>
+        <h4 class="title" >{{ dictionary["item.ChosenCategory"] }}: {{ subcategory.name }}</h4>
         <div class="formField">
-            <label>Fotos: <small>¡Los anuncios con fotos se venden 5 veces más!</small></label>
+            <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
             <div class="imgHolder">
                 <input id="file1" type="file" name="images[]" />
             </div>
@@ -54,7 +54,7 @@
 
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="Post Ad" class="btns orange w100">
+                <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange w100">
             </div>
         </div>
     </form>

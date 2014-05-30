@@ -1,8 +1,8 @@
 <tr>
     <td style="padding: .25em .5em; border-top: solid thin #808080;">
-        <strong style="color: #0075BD;">Editar publicación</strong>
+        <strong style="color: #0075BD;">{{ dictionary["messages_user_management_current_ads.EditMyListing"] }}</strong>
         <br>
-        <small>Detalles de Publicación</small>
+        <small>{{ dictionary["wap_posting_step4.PostingDetails"] }}</small>
     </td>
 </tr>
 <tr>
@@ -11,7 +11,7 @@
             <tr>
                 <td style="padding: .5em; border-top: solid thin #808080;">
                     <small>
-                        <strong>Categoría::</strong>
+                        <strong>{{ dictionary["itemslisting.NavigatorByCategory"] }}::</strong>
                         <span>{{subcategory.name}}</span>
                     </small>
                     <br />
@@ -23,12 +23,12 @@
                             </small>
                             <label style="display: block; padding-top: .5em;">
                                 <input type="checkbox" name="del.image.{{image.id}}" value="{{image.id}}" >
-                                <small>Delete image</small>
+                                <small>{{ dictionary["posting_photos.RemovePhoto"] }}</small>
                                 <input type="hidden" name="image.{{image.id}}" value="{{image.id}}" style="display: none;" >
                             </label>
                         {% endfor %}
                         <label style="display: block; padding-top: .5em;">
-                            <small>Attach a Picture:</small>
+                            <small>{{ dictionary["contactseller_form.AttachPicture"] }}</small>
                             <br>
                             <input type="file" style="font-size: small" name="images[0]">
                             <br>
