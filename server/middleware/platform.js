@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../../app/config');
+var config = require('../config');
 
 module.exports = function(dataAdapter, excludedUrls) {
 
@@ -26,11 +26,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.send(400, err);
             }
 
-            if ('m' === req.subdomains.pop()) {
+            if (req.subdomains.length === 1 && 'm' === req.subdomains.pop()) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), callback);
             }
-            else {
+            else if (req.subdomains.length && _.contains(config.get('platforms', []), req.subdomains[1])) {
                 next();
+            }
+            else {
+                res.redirect(req.protocol + '://' + req.headers.host.replace(new RegExp('^' + req.subdomains.reverse().join('.'), 'i'), 'm'));
             }
         };
 

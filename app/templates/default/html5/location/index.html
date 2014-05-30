@@ -1,29 +1,33 @@
-<h1>{{location.name}}{% if location.current %} > {{location.current.name}}{% endif %}</h1>
+{% from macros import breadcrumb %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
 
-<form action="{{ '/location' | link }}">
-	<input type="text" name="search">
-	<button type="submit" class="trackMe" data-tracking="Posting-ClickSearchLocation" >Search</button>
-    <input type="hidden" value="{{ target }}" name="target" style="display: none;" />
-	<small>Type a city</small>
-</form>
+<header id="location">
+	<p>{{location.name}}{% if location.current %} > {{ location.current.name }}{% endif %}</p>
+</header>
 
-<h3>{% if search %}Results{% else %}Popular Cities{% endif %}</h3>
+<header id="search">
+	<form class="search-form" action="{{ '/location' | link }}">
+		<input type="text" name="search" placeholder="{{ dictionary["countryoptions.EnterCity"] }}" />
+		<input type="submit" class="submit trackMe" data-tracking="Posting-ClickSearchLocation" />
+		{% if target %}
+			<input type="hidden" value="{{ target }}" name="target" style="display: none;" />
+		{% endif %}
+	</form>
+</header>
 
-<div class="row-fluid font-format">
-	<div class="span6 celd-format" >
-		<section style="padding-bottom:0px;">
-			<div id='cities.models'>
-			  	<ul>
-					{% for city in cities %}
- 						<li>
-							<a href="/{{ target }}?location={{city.url}}" class="city" style="color:black;">{{city.name}}</a>
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
-		</section>
-	</div>
-
-    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-    {% include templateName %}
+<div class="list">
+	{% if cities.length %}
+		<h3>{% if search %}{{ dictionary["listingpageitemslisting.AllResultsNew"] }}{% else %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% endif %}</h3>
+		<ul>
+			{% for city in cities %}
+				<li><a href="/{{ target }}?location={{city.url}}">{{ city.name }}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</p>
+	{% endif %}
 </div>
+
+{% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+{% include templateName %}
