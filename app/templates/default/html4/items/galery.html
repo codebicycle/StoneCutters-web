@@ -1,0 +1,33 @@
+{% from macros import breadcrumb, breadcrumbHome %}
+{% set link = (referer | breadcrumb | link) %}
+{{ breadcrumb(dictionary, link, item.title ) }}
+<div id="itemPageGalery">
+    {% if item.status.visible %}
+        {% if item.images.length == 1 %}
+            <img alt="" src="{{item.images[0].url | static }}">
+        {% else %}
+            <img alt="" src="{{item.images[pos].url | static }}">
+            <div id="galeryPagination">
+                <a href="?pos={{ pos if pos == 0 else pos - 1 }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
+                <div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
+                <a href="?pos={{ pos if pos + 1 == item.images.length else pos + 1 }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
+            </div>
+            <div id="galeryPaginationLinks">
+                {% for image in item.images %}
+                    {% if image.displayOrder == pos + 1  %}
+                        <strong class="{{ "last" if loop.last }}">{{ image.displayOrder }}</strong>
+                    {% else %}
+                        <a href="{{ ('?pos='+(image.displayOrder - 1)) | link }}" class="{{ "last" if loop.last }}">{{ image.displayOrder }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+    {% else %}
+        <div id="itemDisable">{{ dictionary[item.ThisAdIsNoLongerAvailable] }}</div>
+    {% endif %}
+
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
+</div>
+{{ breadcrumbHome(dictionary, link) }}
