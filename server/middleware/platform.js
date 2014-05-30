@@ -26,14 +26,19 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.send(400, err);
             }
 
-            if (req.subdomains.length === 1 && 'm' === req.subdomains.pop()) {
+            if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && 'olx' === req.subdomains.shift())) && 'm' === req.subdomains.pop()) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), callback);
             }
-            else if (req.subdomains.length && _.contains(config.get('platforms', []), req.subdomains[1])) {
+            else if (req.subdomains.length === 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
                 next();
             }
             else {
-                res.redirect(req.protocol + '://' + req.headers.host.replace(new RegExp('^' + req.subdomains.reverse().join('.'), 'i'), 'm'));
+                var subdomains = req.subdomains.reverse();
+
+                if (subdomains.pop() === 'olx') {
+                    subdomains = subdomains.slice(0, subdomains.length);
+                }
+                res.redirect(req.protocol + '://' + req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), 'm'));
             }
         };
 
