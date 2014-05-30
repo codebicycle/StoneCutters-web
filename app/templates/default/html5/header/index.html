@@ -8,7 +8,7 @@
         {% else %}
             <li class="logIn"><span class="btns blue"></span></li>
         {% endif %}
-        <li class="postBtn">
+        <li class="postBtn{% if not postButton %} disabled{% endif %}">
             {% if location.current %}
                 <a href="{{ '/posting' | link }}" class="btns orange">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% else %}

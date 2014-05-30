@@ -16,5 +16,15 @@ module.exports = {
         'post-button': {
             enabled: false
         }
+    },
+    disabledPostButtonFlows: {
+        wap: ['posting', 'location?target=posting'],
+        html4: ['posting', 'location?target=posting'],
+        html5: ['posting', 'location?target=posting']
+    },
+    disablePostingButton: {
+        wap: ['home', 'post', 'location'],
+        html4: ['post', 'location'],
+        html5: ['post', 'location']
     }
 };

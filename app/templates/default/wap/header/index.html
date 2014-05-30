@@ -5,4 +5,13 @@
         </a>
     </td>
     <td width="100%">&nbsp;</td>
+    {% if postButton %}
+    	<td bgcolor="#FF6600" align="center">
+			<font size="1" style="display: block;">
+				<a style="display: block;" href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}">
+					<strong><font color="#FFFFFF">&nbsp;&nbsp;{{ dictionary["misc.Sell_Post_Mobile_India"] }}&nbsp;&nbsp;</font></strong>
+				</a>
+			</font>
+		</td>
+    {% endif %}
 </tr>
