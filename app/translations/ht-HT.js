@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Kisa Wap Ch\xE8che?',
     'defaulthtmlhead.SellerInformation': 'Enf\xF2masyon sou Machann nan',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.NavigatorByLocation': 'Kote',
     'itemslisting.PendingAd': 'Reklam an atant',
     'itemslisting.Results': 'rezilta',
     'itemslisting.SearchResults': 'Rezilta pou',

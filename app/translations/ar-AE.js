@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'What are you looking for?',
     'defaulthtmlhead.SellerInformation': '\u0645\u0639\u0644\u0648\u0645\u0627\u062A \u0627\u0644\u0628\u0627\u0626\u0639',
     'itemslisting.Category': '\u0645\u0631\u062A\u0628\u0627\u062A',
+    'itemslisting.NavigatorByLocation': '\u0645\u0648\u0642\u0639',
     'itemslisting.PendingAd': 'Pending Ad',
     'itemslisting.Results': '\u0646\u062A\u064A\u062C\u0629 ',
     'itemslisting.SearchResults': '\u0646\u062A\u064A\u062C\u0629 \u0627\u0644\u0628\u062D\u062B ',

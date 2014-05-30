@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Ko j\u016Bs mekl\u0113jat?',
     'defaulthtmlhead.SellerInformation': 'P\u0101rdev\u0113ja dati',
     'itemslisting.Category': 'Kategorija:',
+    'itemslisting.NavigatorByLocation': 'Atra\u0161an\u0101s vieta',
     'itemslisting.PendingAd': 'Apstiprin\u0101ms sludin\u0101jums',
     'itemslisting.Results': 'rezult\u0101ti',
     'itemslisting.SearchResults': 'Rezult\u0101ti -',

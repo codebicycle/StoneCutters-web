@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Mit keres?',
     'defaulthtmlhead.SellerInformation': 'Elad\xF3 inform\xE1ci\xF3i',
     'itemslisting.Category': 'Kateg\xF3ria:',
+    'itemslisting.NavigatorByLocation': 'Helysz\xEDn',
     'itemslisting.PendingAd': 'F\xFCgg\u0151 hirdet\xE9s',
     'itemslisting.Results': 'eredm\xE9nyek',
     'itemslisting.SearchResults': 'Tal\xE1latok:',

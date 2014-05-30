@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Hverju ertu a\xF0 leita a\xF0?',
     'defaulthtmlhead.SellerInformation': 'Uppl\xFDsingar um seljanda',
     'itemslisting.Category': 'Flokkur:',
+    'itemslisting.NavigatorByLocation': 'Sta\xF0setning',
     'itemslisting.PendingAd': 'Augl\xFDsing \xED bi\xF0',
     'itemslisting.Results': 'ni\xF0urst\xF6\xF0ur',
     'itemslisting.SearchResults': 'Ni\xF0urst\xF6\xF0ur fyrir',

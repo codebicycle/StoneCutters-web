@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Ano ang hinahanap mo?',
     'defaulthtmlhead.SellerInformation': 'Impormasyon Tungkol sa Nagbebenta',
     'itemslisting.Category': 'Kategorya:',
+    'itemslisting.NavigatorByLocation': 'Lokasyon',
     'itemslisting.PendingAd': 'Nakabinbing Anunsyo',
     'itemslisting.Results': 'mga resulta',
     'itemslisting.SearchResults': 'Mga resulta para',

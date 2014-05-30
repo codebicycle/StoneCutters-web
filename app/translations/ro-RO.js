@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Ce c\u0103uta\u0163i?',
     'defaulthtmlhead.SellerInformation': 'Informa\u0163ii despre v\xE2nz\u0103tor',
     'itemslisting.Category': 'Categorie:',
+    'itemslisting.NavigatorByLocation': 'Loca\u0163ie',
     'itemslisting.PendingAd': 'Anun\u0163 \xEEn a\u015Fteptare.',
     'itemslisting.Results': 'rezultate',
     'itemslisting.SearchResults': 'Rezultate pentru',

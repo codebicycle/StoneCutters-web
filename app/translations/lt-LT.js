@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': 'Ko ie\u0161kote?',
     'defaulthtmlhead.SellerInformation': 'Pardav\u0117jo informacija',
     'itemslisting.Category': 'Kategorija:',
+    'itemslisting.NavigatorByLocation': 'Vieta',
     'itemslisting.PendingAd': 'Laukiantis skelbimas',
     'itemslisting.Results': 'rezultatai',
     'itemslisting.SearchResults': 'Rezultatai ',

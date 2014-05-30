@@ -12,6 +12,7 @@ module.exports = {
     'defaultheader.WhatAreYouLookingFor': '\u0160ta tra\u017Eite?',
     'defaulthtmlhead.SellerInformation': 'Informacije o prodavcu',
     'itemslisting.Category': 'Kategorija:',
+    'itemslisting.NavigatorByLocation': 'Lokacija',
     'itemslisting.PendingAd': 'Reklama na \u010Dekanju.',
     'itemslisting.Results': 'rezultati',
     'itemslisting.SearchResults': 'Rezultati za ',
