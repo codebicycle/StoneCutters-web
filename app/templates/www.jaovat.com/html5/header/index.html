@@ -6,6 +6,6 @@
         {% else %}
             <li class="logOut"><a href="{{ '/register' | link }}"></a></li>
         {% endif %}
-        <li class="postBtn"><a href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}">Đăng</a></li>
+        <li class="postBtn"><a href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}">Đăng</a></li>
     </ul>
 </header>
