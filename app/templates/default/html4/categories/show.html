@@ -1,9 +1,9 @@
 {% view 'location/select' %}
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, category.name) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, category.name) }}
 <div id="subCategories">
     <ul class="normalList">
         {% for subcategory in category.children %}
@@ -18,4 +18,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

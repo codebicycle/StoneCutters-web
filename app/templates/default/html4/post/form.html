@@ -1,6 +1,6 @@
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <h4 class="title" >{{ dictionary["item.ChosenCategory"] }}: {{ subcategory.name }}</h4>
@@ -62,4 +62,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

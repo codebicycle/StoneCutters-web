@@ -1,6 +1,6 @@
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
 <div id="register">
     <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
@@ -30,4 +30,4 @@
         <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
     </div>
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

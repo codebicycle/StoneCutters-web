@@ -9,9 +9,9 @@
             {% set favLink = ('/login' | link) %}
         {% endif %}
     {% endif %}
-    {% from macros import breadcrumb %}
-    {% set link = (referer | breadcrumb | link) %}
-    {{ breadcrumb(dictionary, link, item.category.name, ['<ul>
+    {% from macros import Breadcrumb %}
+    {% set link = (breadcrumb | link) %}
+    {{ Breadcrumb(dictionary, link, item.category.name, ['<ul>
         <li><a class="share trackMe" href="#share" data-tracking="itemPage-clickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
         <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
     </ul>'] | join) }}

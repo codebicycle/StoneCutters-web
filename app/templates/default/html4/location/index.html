@@ -1,6 +1,6 @@
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
 <div id="locationSelect" class="locationBreadcrumb">
     <p>
         <a href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/{{ target }}?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
@@ -33,4 +33,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

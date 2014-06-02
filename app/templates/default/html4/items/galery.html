@@ -1,6 +1,6 @@
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, item.title ) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, item.title ) }}
 <div id="itemPageGalery">
     {% if item.status.visible %}
         {% if item.images.length == 1 %}
@@ -30,4 +30,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

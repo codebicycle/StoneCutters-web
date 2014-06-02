@@ -1,6 +1,6 @@
-{% from macros import breadcrumb %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
+{% from macros import Breadcrumb %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div class="changeCat">
     {{ dictionary["itemslisting.Category"] }} : {{ subcategory.name }}
     <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>

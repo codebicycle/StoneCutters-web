@@ -29,6 +29,7 @@ module.exports = RendrView.extend({
             location: this.app.getSession('location'),
             dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['es-ES'],
             referer: this.app.getSession('referer'),
+            breadcrumb: helpers.common.getBreadcrumb.call(this, data),
             url: this.app.getSession('url'),
             sixpack: this.app.getSession('sixpack'),
             macros: 'compiled/' + template + '/partials/macros.html',
@@ -68,7 +69,7 @@ module.exports = RendrView.extend({
     },
     attachTrackMe: function(context, handler) {
         var that = this;
-        
+
         $('.' + context + ' .trackMe').on('click', function(e) {
             var $this = $(this);
             var data = $this.data('tracking');
