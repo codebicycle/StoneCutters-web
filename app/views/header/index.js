@@ -5,7 +5,7 @@ var _ = require('underscore');
 var config = require('../../config');
 
 function readPostButtonConfig(platform, currentRoute) {
-    var buttonsConfig = config.get('disablePostingButton');
+    var buttonsConfig = config.get('disablePostingButton', {});
     var match = _.find(buttonsConfig[platform], function(conf) {
         conf = conf.split(':');
         var configRoute = {
