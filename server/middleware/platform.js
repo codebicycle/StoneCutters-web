@@ -19,7 +19,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return fail(err);
                 }
                 platform = body.web_platform || 'wap';
-                res.redirect(req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
+                res.redirect(301, req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
             }
 
             function fail(err) {
@@ -38,7 +38,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (subdomains.pop() === 'olx') {
                     subdomains = subdomains.slice(0, subdomains.length);
                 }
-                res.redirect(req.protocol + '://' + req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), 'm'));
+                res.redirect(301, req.protocol + '://' + req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), 'm'));
             }
         };
 

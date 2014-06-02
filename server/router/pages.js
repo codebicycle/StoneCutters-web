@@ -169,8 +169,8 @@ module.exports = function itemRouter(app, dataAdapter) {
                     clientId: req.rendrApp.getSession('clientId').substr(24)
                 });
                 analytic.trackPage({
-                    custom: req.query.custom,   
-                    url: req.query.url   
+                    custom: req.query.custom,
+                    url: req.query.url
                 });
             }
         }
@@ -184,7 +184,7 @@ module.exports = function itemRouter(app, dataAdapter) {
             if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
                 atiTracking(req);
             }
-        
+
             image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', image.length);
@@ -196,7 +196,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('*', handler);
 
         function handler(req, res) {
-            res.redirect(utils.link('/404', req.rendrApp.getSession('siteLocation')));
+            res.redirect(301, utils.link('/404', req.rendrApp.getSession('siteLocation')));
         }
     })();
 };

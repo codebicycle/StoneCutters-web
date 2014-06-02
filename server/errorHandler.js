@@ -44,7 +44,7 @@ exports = module.exports = function errorHandler() {
                     }
                 });
             }
-            res.redirect(utils.link('/500', req.rendrApp.getSession('siteLocation')));
+            res.redirect(301, utils.link('/500', req.rendrApp.getSession('siteLocation')));
         }
         else if (~accept.indexOf('json')) {
             var error = { message: err.message };
