@@ -87,7 +87,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 previousLocation = siteLocation;
             }
             if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
-                return res.redirect('/?location=' + previousLocation);
+                return res.redirect(301, '/?location=' + previousLocation);
             }
             promise = asynquence().or(fail)
                 .then(fetchLocation)
