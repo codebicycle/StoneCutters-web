@@ -5,7 +5,7 @@
 				<li><strong>{{language.name}}</strong></li>
 				{{ ' | ' if not loop.last }}
 			{% else %}
-				<li><a href="{{ ['?language=', language.locale'] | join('') | link }}">{{language.name}}</a></li>
+				<li><a href="{{ ['?language=', language.locale'] | join('') | link }}" rel="nofollow" >{{language.name}}</a></li>
 				{{ ' | ' if not loop.last }}
 			{% endif %}
 		{% endfor %}
