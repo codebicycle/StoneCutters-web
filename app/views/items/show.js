@@ -20,6 +20,8 @@ module.exports = BaseView.extend({
     postRender: function() {
         var that = this;
 
+        that.messages = {'errMsgMail': $('.errMsgMail').val(), 'errMsgMandatory': $('.errMsgMandatory').val(), 'msgSend': $('.msgSend').val().replace(/<br \/>/g,'')};
+
         var galery = $('.swiper-container').swiper({
             mode:'horizontal',
             loop: true,
@@ -137,63 +139,81 @@ module.exports = BaseView.extend({
             $('body').removeClass('noscroll');
             $(this).parents('.popup').removeClass('visible');
         });
+
         $('#replyForm .submit').click(function() {
+            var $this = $(this);
+
             var message = $('.message').val();
             var email = $('.email').val();
             var name = $('.name').val();
             var phone = $('.phone').val();
 
-            if (that.validForm(message, name, email)) {
-                var itemId = $('.itemId').val();
-                var url = '/items/' + itemId + '/reply';
+            var errMsgMail = $('.errMsgMail').val();
+            var errMsgMandatory = $('.errMsgMandatory').val();
+            var msgSend = $('.msgSend').val();
 
+            var api = that.app.get('apiPath');
+            var session = that.app.get('session');
+            var itemId = $('.itemId').val();
+            var url = [];
+
+            url.push(api);
+            url.push('/items/');
+            url.push(itemId);
+            url.push('/messages');
+
+            if (that.validForm(message, name, email)) {
                 $('.loading').show();
-                $('body').addClass('noscroll');
                 $.ajax({
-                    type: "POST",
-                    url: url,
+                    type: 'POST',
+                    url: url.join(''),
                     cache: false,
                     data: {
                         message: message,
                         email: email,
                         name:name,
                         phone:phone
-                    },
-                    success: function(data) {
-                        var analytics;
-                        var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-                        var category = $('.itemCategory').val();
-                        var subcategory = $('.itemSubcategory').val();
-
-                        $('.loading').hide();
-                        $('body').removeClass('noscroll');
-                        $('.message').val('');
-                        $('.name').val('');
-                        $('.email').val('');
-                        $('.phone').val('');
-                        $msg.text('Se envio');
-
-                        analytics = $('<div></div>').append(data);
-                        analytics = $('#replySuccess', analytics);
-                        $msg.append(analytics.length ? analytics : '');
-                        that.track({
-                            category: 'Reply',
-                            action: 'ReplySuccess',
-                            custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
-                        });
-
-                        $('.msgCont').addClass('visible');
-                        setTimeout(function(){
-                            $('.msgCont').removeClass('visible');
-                        }, 3000);
-                    },
-                    error: function() {
-                        $('small.email').text('error mail smaug').removeClass('hide');
                     }
+                })
+                .done(function (data) {
+                    var analytics;
+                    var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
+                    var category = $('.itemCategory').val();
+                    var subcategory = $('.itemSubcategory').val();
+
+                    $('.loading').hide();
+                    $('body').removeClass('noscroll');
+                    $('.message').val('');
+                    $('.name').val('');
+                    $('.email').val('');
+                    $('.phone').val('');
+                    $msg.text(that.messages.msgSend);
+
+                    analytics = $('<div></div>').append(data);
+                    analytics = $('#replySuccess', analytics);
+                    $msg.append(analytics.length ? analytics : '');
+                    that.track({
+                        category: 'Reply',
+                        action: 'ReplySuccess',
+                        custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
+                    });
+
+                    $('.msgCont').addClass('visible');
+                    setTimeout(function(){
+                        $('.msgCont').removeClass('visible');
+                    }, 3000);
+                })
+                .fail(function (data) {
+                    var messages = JSON.parse(data.responseText);
+                    $('small.email').text(messages[0].message).removeClass('hide');
+                })
+                .always(function () {
+                    $('.loading').hide();
                 });
             }
 
         });
+
         $('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
             var value = $(this).val();
             var field = $(this).attr('class');
@@ -261,9 +281,10 @@ module.exports = BaseView.extend({
         return (valMail && valName && valMsg);
     },
     isEmail: function (value,field) {
+
         var expression = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
         if(!expression.test(value)){
-            $('small.'+field).text('no mail').removeClass('hide');
+            $('small.'+field).text(this.messages.errMsgMail).removeClass('hide');
             return false;
         }else{
             $('small.'+field).removeClass('hide').empty();
@@ -273,7 +294,7 @@ module.exports = BaseView.extend({
     },
     isEmpty: function (value,field) {
         if(value === ''){
-            $('small.'+field).text('mandatory').removeClass('hide');
+            $('small.'+field).text(this.messages.errMsgMandatory).removeClass('hide');
             return false;
         }else{
             $('small.'+field).addClass('hide').empty();

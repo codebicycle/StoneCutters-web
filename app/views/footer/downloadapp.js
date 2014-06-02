@@ -3,7 +3,6 @@
 var BaseView = require('../base');
 var _ = require('underscore');
 var helpers = require('../../helpers');
-var translations = require('../../translations');
 
 module.exports = BaseView.extend({
     className: 'footer_downloadapp_view',

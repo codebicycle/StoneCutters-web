@@ -52,7 +52,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     cookies.put(res, 'downloadApp', 1, {
                         maxAge: time
                     });
-                    return res.redirect(url + '?ref=' + protocol + '://' + host + req.originalUrl);
+                    return res.redirect(301, url + '?ref=' + protocol + '://' + host + req.originalUrl);
                 }
             }
             next();

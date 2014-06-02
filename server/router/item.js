@@ -36,7 +36,7 @@ module.exports = function(app, dataAdapter) {
             function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
@@ -47,7 +47,7 @@ module.exports = function(app, dataAdapter) {
                     url = url.substring(0,qIndex);
                 }
                 url += '?' + querystring.stringify(err);
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -153,7 +153,7 @@ module.exports = function(app, dataAdapter) {
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
                 clean();
             }
 
@@ -174,7 +174,7 @@ module.exports = function(app, dataAdapter) {
                     url = url.substring(0,qIndex);
                 }
                 url += '?' + querystring.stringify(errors);
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
                 clean();
             }
 
@@ -218,7 +218,7 @@ module.exports = function(app, dataAdapter) {
             function success(done) {
                 var url = '/des-iid-' + itemId;
 
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
@@ -229,7 +229,7 @@ module.exports = function(app, dataAdapter) {
                     url = url.substring(0,qIndex);
                 }
                 url += '?' + querystring.stringify(err);
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -258,7 +258,7 @@ module.exports = function(app, dataAdapter) {
                 var url;
 
                 if (!data.search && !data.currentURL) {
-                    return res.redirect(req.headers.referer);
+                    return res.redirect(301, req.headers.referer);
                 }
                 if (data.search) {
                     url = '/nf/search/' + data.search;
@@ -272,7 +272,7 @@ module.exports = function(app, dataAdapter) {
                         url = replaceParam(url, data.name + '_', from + '_' + to);
                     }
                 }
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             });
         }
     })();
@@ -315,7 +315,7 @@ module.exports = function(app, dataAdapter) {
             function success(response) {
                 var url = '/myolx/myadslisting?deleted=true';
 
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
@@ -342,7 +342,7 @@ module.exports = function(app, dataAdapter) {
                     url = url.substring(0,qIndex);
                 }
                 url += '?' + querystring.stringify(errors);
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)

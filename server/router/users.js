@@ -46,13 +46,13 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success() {
-                res.redirect(utils.link(redirect, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(redirect, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
                 var url = '/login?' + querystring.stringify(err);
 
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -142,7 +142,7 @@ module.exports = function(app, dataAdapter) {
                     url = url.substring(0,qIndex);
                 }
                 url += '?' + querystring.stringify(errors);
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -168,7 +168,7 @@ module.exports = function(app, dataAdapter) {
             function error(err) {
                 var url = '/login?' + querystring.stringify(err);
 
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
@@ -211,13 +211,13 @@ module.exports = function(app, dataAdapter) {
             function success() {
                 var url = '/login?loginSuccess=true';
 
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
                 var url = '/login?' + querystring.stringify(err);
-                
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
