@@ -1,6 +1,6 @@
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["homeheader.My OLX"]) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["homeheader.My OLX"]) }}
 <div id="login">
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>
@@ -12,7 +12,7 @@
             <label>{{ dictionary["loginbox.Password"] }}</label>
             <input type="password" value="" name="password">
         </div>
-        <input type="hidden" name="redirect" value="{{ referer }}">
+        <input type="hidden" name="redirect" value="{{ breadcrumb | link }}">
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
                 <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit" class="btns orange">
@@ -40,4 +40,4 @@
         </div>
     </div>
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

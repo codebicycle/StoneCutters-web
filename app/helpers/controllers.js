@@ -49,8 +49,22 @@ function setUrlVars() {
     this.app.updateSession({
         path: location.pathname,
         url: location.href,
-        referer: this.app.getSession('referer') || '/'
+        referer: this.app.getSession('referer')
     });
+}
+
+function setCurrentPage() {
+    var path = this.app.getSession('path');
+    var page;
+
+    if (new RegExp('^.+-p-[\\d]+(/.*)?(\\?.*)?$', 'i').test(path)) {
+        page = path.split('/')[1].split('-p-').pop();
+    }
+    if (page) {
+        this.app.persistSession({
+            page: page
+        });
+    }
 }
 
 function setLanguage(params) {
@@ -120,12 +134,12 @@ function setLocation(params, callback) {
 }
 
 module.exports = {
-    control: function(that, params, callback) {
-        callback = callback.bind(that);
-        setSession.call(that);
-        setCurrentRoute.call(that);
-        setUrlVars.call(that);
-        setLanguage.call(that);
-        setLocation.call(that, params, callback);
+    control: function(params, callback) {
+        setSession.call(this);
+        setCurrentRoute.call(this);
+        setUrlVars.call(this);
+        setCurrentPage.call(this);
+        setLanguage.call(this);
+        setLocation.call(this, params, callback.bind(this));
     }
 };

@@ -1,9 +1,9 @@
 {% view 'location/select' %}
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}
 <div id="success">
     <div>
         <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
@@ -20,4 +20,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

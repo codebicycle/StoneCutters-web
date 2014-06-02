@@ -197,11 +197,57 @@ module.exports = (function() {
         return typesHandler[type](path);
     }
 
+    function getBreadcrumb(data) {
+        var currentRoute = data.app.getSession('currentRoute');
+        var breadcrumb = data.app.getSession('breadcrumb');
+        var path = data.app.getSession('path');
+        var referer = data.app.getSession('referer');
+        var page = data.app.getSession('page') || 1;
+        var categoryId;
+        var category;
+
+        if (currentRoute.controller !== this.name.split('/').shift()) {
+            return breadcrumb;
+        }
+        console.log(currentRoute);
+        if (currentRoute.controller === 'categories') {
+            if (currentRoute.action === 'show') {
+                breadcrumb = '/';
+            }
+        }
+        else if (currentRoute.controller === 'items') {
+            if (currentRoute.action === 'index') {
+                if (page > 1) {
+                    categoryId = data.category.id;
+                    category = data.app.getSession('childCategories')[categoryId];
+                    breadcrumb = '/' + slugToUrl(category) + '-p-' + (page - 1);
+                }
+                else {
+                    categoryId = data.category.parentId;
+                    category = data.app.getSession('categories')._byId[categoryId];
+                    breadcrumb = '/' + slugToUrl(category);
+                }
+            }
+            else if (currentRoute.action === 'show') {
+                categoryId = data.item.category.id;
+                category = data.app.getSession('childCategories')[categoryId];
+                breadcrumb = '/' + slugToUrl(category) + '-p-' + page;
+            }
+        }
+        breadcrumb = breadcrumb || referer || '/';
+        console.log(breadcrumb);
+        data.app.updateSession({
+            breadcrumb: breadcrumb
+        });
+        return breadcrumb;
+    }
+
     return {
         urlize: urlize,
         slugToUrl: slugToUrl,
         link: link,
         daysDiff: daysDiff,
-        'static': statics
+        'static': statics,
+        getBreadcrumb: getBreadcrumb
     };
 })();

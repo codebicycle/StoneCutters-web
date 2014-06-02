@@ -1,5 +1,5 @@
-{% from macros import breadcrumb %}
-{{ breadcrumb(dictionary, dictionary["myolx.MyFavorites"]) }}
+{% from macros import Breadcrumb %}
+{{ Breadcrumb(dictionary, dictionary["myolx.MyFavorites"]) }}
 <section id="favorites">
     {% if favorites.length %}
         <ul class="itemListing">

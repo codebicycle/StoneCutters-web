@@ -2,9 +2,9 @@
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
 <section id="subCategories">
-    {% from macros import breadcrumb %}
-    {% set link = (referer | breadcrumb | link) %}
-    {{ breadcrumb(dictionary, link, category.name) }}
+    {% from macros import Breadcrumb %}
+    {% set link = (breadcrumb | link) %}
+    {{ Breadcrumb(dictionary, link, category.name) }}
     <ul>
         {% for subcategory in category.children %}
             <li>

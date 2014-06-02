@@ -1,6 +1,5 @@
 'use strict';
 
-var config = require('../../app/config');
 var uuid = require('node-uuid');
 
 module.exports = function(dataAdapter, excludedUrls) {
@@ -18,12 +17,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             var protocol = req.protocol;
             var host = req.headers.host;
             var url = req.originalUrl;
-            var referer = req.headers.referer;
             var clientId = app.getSession('clientId');
+            var referer = req.headers.referer;
 
-            if (referer && url.indexOf('/pageview.gif') !== 0) {
-                referer = referer.replace(new RegExp('^' + protocol + '://' + host, 'gi'), '');
-            }
             if (typeof clientId === 'undefined') {
                 app.persistSession({
                     clientId: uuid.v4()
@@ -34,7 +30,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 protocol: protocol,
                 host: host,
                 url: url,
-                referer: referer || '/'
+                referer: referer
             });
             next();
         };

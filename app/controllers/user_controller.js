@@ -5,25 +5,25 @@ var helpers = require('../helpers');
 
 module.exports = {
     registration: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             callback(null, {});
         }
     },
     login: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             callback(null, {});
         }
     },
     logout: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var siteLocation = this.app.getSession('siteLocation');
-            
+
             this.app.deleteSession('user');
             this.redirectTo(helpers.common.link('/', siteLocation), {
                 pushState: false
@@ -31,14 +31,14 @@ module.exports = {
         }
     },
     myolx: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             callback(null, {});
         }
     },
     'my-ads': function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var user = this.app.getSession('user') || {};
@@ -79,7 +79,7 @@ module.exports = {
         }
     },
     favorites: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var user = this.app.getSession('user') || {};

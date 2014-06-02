@@ -4,7 +4,7 @@ var helpers = require('../helpers');
 
 module.exports = {
     terms: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             helpers.analytics.reset();
@@ -16,7 +16,7 @@ module.exports = {
         }
     },
     help: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
 
@@ -119,7 +119,7 @@ module.exports = {
         }
     },
     interstitial: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             helpers.analytics.reset();
@@ -131,7 +131,7 @@ module.exports = {
         }
     },
     error: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var err = this.app.getSession('error');
