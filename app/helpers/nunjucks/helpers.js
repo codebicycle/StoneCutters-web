@@ -140,20 +140,6 @@ module.exports = function(nunjucks) {
         date: function(timestamp) {
             return dateformat(new Date(timestamp), 'dd-mm-yyyy');
         },
-        breadcrumb: function(referer) {
-            var breadcrumb = referer;
-            var currentRoute = this.ctx.currentRoute;
-
-            if (currentRoute.controller === 'items') {
-                if (currentRoute.action === 'index') {
-                    var categoryId = this.ctx.category.parentId;
-                    var category = this.ctx._app.getSession('categories')._byId[categoryId];
-
-                    breadcrumb = '/' + common.slugToUrl(category);
-                }
-            }
-            return breadcrumb || '/';
-        },
         'static': common.static,
         slugToUrl: common.slugToUrl,
         urlize: common.urlize

@@ -135,7 +135,7 @@ function preparePaginationLink(metadata, query, url) {
 
 module.exports = {
     index: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;
@@ -199,7 +199,7 @@ module.exports = {
         }
     },
     show: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;
@@ -306,7 +306,7 @@ module.exports = {
         }
     },
     galery: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;
@@ -370,7 +370,7 @@ module.exports = {
         }
     },
     search: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;
@@ -423,7 +423,7 @@ module.exports = {
         }
     },
     reply: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;
@@ -465,7 +465,7 @@ module.exports = {
         }
     },
     success: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;

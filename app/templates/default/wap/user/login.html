@@ -28,7 +28,7 @@
                                 <small>{{ dictionary["loginbox.Password"] }}</small><br>
                                 <input type="password" value="" name="password">
                             </label>
-                            <input type="hidden" name="redirect" value="{{ referer }}">
+                            <input type="hidden" name="redirect" value="{{ breadcrumb | link }}">
                             <div style="padding-top: .25em;">
                                 <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit">
                             </div>
@@ -78,8 +78,8 @@
                 </tr>
             </tbody>
         </table>
-        {% from macros import breadcrumb %}
-        {% set link = (referer | breadcrumb | link) %}
-        {{ breadcrumb(dictionary, link) }}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link) }}
     </td>
 </tr>

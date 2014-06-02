@@ -10,26 +10,9 @@
                     </strong>
                     {% if item.status.onReview %}
                         <small style="display: block;">
-                            <!-- <font color="#FF0000">{{ dictionary["myolx.ApprovalPending"] }}</font> -->
-                            <font color="#FF0000">Aproval pending</font>
+                            <font color="#FF0000">{{ dictionary["myolx.ApprovalPending"] }}</font>
                         </small>
                     {% endif %}
-
-                    <!-- <hr />
-                        {% if sk %}
-                            &#160;|&#160;
-                            <a href="/myolx/edititem/{{item.id}}?sk={{sk}}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">Edit</a>
-                        {% endif %}
-                    <hr /> -->
-
-                    {# added to favorites status pending
-                        {% if item.favorites.added || item.favorites.removed %}
-                            <br />
-                            <small style="display: block;">
-                                <font color="#6CB100">{{ '[itemheader.AddedFavorites]' if item.favorites.added else '[itemheader.RemovedFavorites]' }}</font>
-                            </small>
-                        {% endif %}
-                    #}
                 </td>
             </tr>
             <tr style="display: none;">
@@ -49,8 +32,8 @@
                 </td>
             </tr>
         </table>
-        {% from macros import breadcrumb %}
-        {% set link = (referer | breadcrumb | link) %}
-        {{ breadcrumb(dictionary, link) }}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link) }}
     </td>
 </tr>

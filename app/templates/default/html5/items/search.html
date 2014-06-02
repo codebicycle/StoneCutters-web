@@ -2,12 +2,12 @@
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
 <section id="itemListing">
-    {% from macros import breadcrumb %}
-    {% set link = (referer | breadcrumb | link) %}
-    {{ breadcrumb(dictionary, link, [dictionary["itemslisting.SearchResults"], search] | join(' '), '<span class="switchView"></span>') }}
+    {% from macros import Breadcrumb %}
+    {% set link = (breadcrumb | link) %}
+    {{ Breadcrumb(dictionary, link, [dictionary["itemslisting.SearchResults"], search] | join(' '), '<span class="switchView"></span>') }}
     {% if metadata.total == 0 %}
         <div class="emtyList">
-            Lo lamentamos pero no hay resultados para tu búsqueda.
+            {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
         </div>
     {% else %}
         <ul class="itemListing">

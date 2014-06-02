@@ -4,7 +4,7 @@ var helpers = require('../helpers');
 
 module.exports = {
     index: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;

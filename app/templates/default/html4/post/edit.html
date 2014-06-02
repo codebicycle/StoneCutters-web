@@ -1,17 +1,17 @@
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
-        <h4 class="title" >Categoría seleccionada :: {{ subcategory.name }}</h4>
+        <h4 class="title" >{{ dictionary["itemslisting.NavigatorByCategory"] }} :: {{ subcategory.name }}</h4>
         <div class="formField">
-            <label>Fotos: <small>¡Los anuncios con fotos se venden 5 veces más!</small></label>
+            <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
             {% for image in item.images %}
                 <div class="imgHolder">
                     <img src="{{image.thumbnail}}" alt="OLX - Item image" style="display: inline-block;">
                     <label style="display: block; padding-top: .5em;">
                         <input type="checkbox" name="del.image.{{image.id}}" value="{{image.id}}" >
-                        <small>Delete image</small>
+                        <small>{{ dictionary["posting_photos.RemovePhoto"] }}</small>
                         <input type="hidden" name="image.{{image.id}}" value="{{image.id}}" style="display: none;" >
                     </label>
                 </div>
@@ -56,7 +56,7 @@
 
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="Post Ad" class="btns orange w100">
+                <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange w100">
             </div>
         </div>
     </form>
@@ -64,4 +64,4 @@
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

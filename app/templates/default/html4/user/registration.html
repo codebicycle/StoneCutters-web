@@ -1,19 +1,19 @@
-{% from macros import breadcrumb, breadcrumbHome %}
-{% set link = (referer | breadcrumb | link) %}
-{{ breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
 <div id="register">
     <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
-            <label>Nombre de usuario</label>
+            <label>{{ dictionary["loginbox.Username"] }}</label>
             <input type="text" name="username">
         </div>
         <div class="formField">
-            <label>Dirección de Email</label>
+            <label>{{ dictionary["landingbody.EmailAddress"] }}</label>
             <input type="text" name="email">
-            <small>Tu email no será publicado.</small>
+            <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small>
         </div>
         <div class="formField">
-            <label>Contraseña</label>
+            <label>{{ dictionary["loginbox.Password"] }}</label>
             <input type="password" name="password">
         </div>
         <div class="formField">
@@ -30,4 +30,4 @@
         <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
     </div>
 </div>
-{{ breadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link) }}

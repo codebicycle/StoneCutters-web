@@ -22,8 +22,8 @@
 </tr>
 <tr>
     <td>
-        {% from macros import breadcrumb %}
-        {% set link = (referer | breadcrumb | link) %}
-        {{ breadcrumb(dictionary, link) }}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link) }}
     </td>
 </tr>

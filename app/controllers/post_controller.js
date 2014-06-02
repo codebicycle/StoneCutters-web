@@ -7,7 +7,7 @@ var config = require('../config');
 
 module.exports = {
     index: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var sixpackConfig = config.get('sixpack', {});
@@ -32,7 +32,7 @@ module.exports = {
         }
     },
     subcat: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             helpers.analytics.reset();
@@ -45,7 +45,7 @@ module.exports = {
         }
     },
     form: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var app = this.app;
@@ -99,7 +99,7 @@ module.exports = {
         }
     },
     edit: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var app = this.app;
@@ -206,7 +206,7 @@ module.exports = {
         }
     },
     success: function(params, callback) {
-        helpers.controllers.control(this, params, controller);
+        helpers.controllers.control.call(this, params, controller);
 
         function controller() {
             var that = this;

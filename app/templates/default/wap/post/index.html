@@ -3,12 +3,12 @@
         <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
             <tr>
                 <td>
-                    <strong style="display: block;">Post an ad</strong>
+                    <strong style="display: block;">{{ dictionary["postingheader.Post"] }}</strong>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <strong style="display: block;">Select a category</strong>
+                    <strong style="display: block;">{{ dictionary["posting_selector.SelectCategory"] }}</strong>
                 </td>
             </tr>
         </table>
@@ -37,8 +37,8 @@
 </tr>
 <tr>
     <td>
-        {% from macros import breadcrumb %}
-        {% set link = (referer | breadcrumb | link) %}
-        {{ breadcrumb(dictionary, link) }}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link) }}
     </td>
 </tr>

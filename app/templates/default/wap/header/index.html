@@ -1,8 +1,17 @@
 <tr>
     <td>
         <a style="display: block;" tabindex="1" href="{{ '/' | link }}">
-            <img border="0" align="top" style="display: block;" alt="OLX" src="{{ "/images/wap/olxHeader.gif" | static }}">
+            <img border="0" align="top" style="display: block;" alt="{{ location.url | replace('www.','')}}" src="{{ "/images/wap/olxHeader.gif" | static }}">
         </a>
     </td>
     <td width="100%">&nbsp;</td>
+    {% if postButton %}
+    	<td bgcolor="#FF6600" align="center">
+			<font size="1" style="display: block;">
+				<a style="display: block;" href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}">
+					<strong><font color="#FFFFFF">&nbsp;&nbsp;{{ dictionary["misc.Sell_Post_Mobile_India"] }}&nbsp;&nbsp;</font></strong>
+				</a>
+			</font>
+		</td>
+    {% endif %}
 </tr>

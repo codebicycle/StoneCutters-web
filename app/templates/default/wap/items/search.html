@@ -8,7 +8,7 @@
                 <tbody>
                     <tr>
                         <td style="border-top: solid thin #808080;">
-                            <small style="display: block;">Lo lamentamos pero no hay resultados para tu búsqueda.</small>
+                            <small style="display: block;">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</small>
                         </td>
                     </tr>
                 </tbody>
@@ -60,8 +60,8 @@
         {% endif %}
         {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
         {% include templateName %}
-        {% from macros import breadcrumb %}
-        {% set link = (referer | breadcrumb | link) %}
-        {{ breadcrumb(dictionary, link) }}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link) }}
     </td>
 </tr>
