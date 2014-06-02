@@ -86,6 +86,10 @@
     <section class="reply">
         <span>{{ dictionary["contactseller_form.ReplyToListing"] }}</span>
         <form id="replyForm" action="">
+            <input type="hidden" value="{{ dictionary["postingerror.InvalidEmail"] }}" name="errMsgMail" class="errMsgMail">
+            <input type="hidden" value="{{ dictionary["postingerror.PleaseCompleteThisField"] }}" name="errMsgMandatory" class="errMsgMandatory">
+            <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
+
             <label>* {{ dictionary["replymessage.Message"] }}</label>
             <textarea class="message" name="message"></textarea>
             <small class="message hide"></small>
