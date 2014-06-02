@@ -209,7 +209,6 @@ module.exports = (function() {
         if (currentRoute.controller !== this.name.split('/').shift()) {
             return breadcrumb;
         }
-        console.log(currentRoute);
         if (currentRoute.controller === 'categories') {
             if (currentRoute.action === 'show') {
                 breadcrumb = '/';
@@ -235,7 +234,6 @@ module.exports = (function() {
             }
         }
         breadcrumb = breadcrumb || referer || '/';
-        console.log(breadcrumb);
         data.app.updateSession({
             breadcrumb: breadcrumb
         });
