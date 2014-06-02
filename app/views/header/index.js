@@ -43,9 +43,6 @@ module.exports = BaseView.extend({
         });
     },
     postRender: function() {
-        var platform = this.app.getSession('platform');
-        var currentRoute = this.app.getSession('currentRoute');
-
         $('#topBar ul li.logIn span').click(function(e){
             $('menu#myOlx').slideToggle();
         });
@@ -58,6 +55,8 @@ module.exports = BaseView.extend({
             };
         });
         $(document).on('route', function onRoute() {
+            var platform = this.app.getSession('platform');
+            var currentRoute = this.app.getSession('currentRoute');
             var button = $('.postBtn', '#topBar');
             var postButton = readPostButtonConfig(platform, currentRoute);
 
@@ -67,7 +66,7 @@ module.exports = BaseView.extend({
             else {
                 button.addClass('disabled');
             }
-        });
+        }.bind(this));
     }
 });
 
