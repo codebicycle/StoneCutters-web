@@ -265,7 +265,7 @@ module.exports = BaseView.extend({
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     },
-    validForm: function (message, name, email, messages) {
+    validForm: function (message, name, email) {
         var valMail = true;
         var valName = true;
         var valMsg = true;
@@ -280,7 +280,7 @@ module.exports = BaseView.extend({
 
         return (valMail && valName && valMsg);
     },
-    isEmail: function (value,field, errMsg) {
+    isEmail: function (value,field) {
 
         var expression = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
         if(!expression.test(value)){
@@ -292,7 +292,7 @@ module.exports = BaseView.extend({
         }
 
     },
-    isEmpty: function (value,field, errMsg) {
+    isEmpty: function (value,field) {
         if(value === ''){
             $('small.'+field).text(this.messages.errMsgMandatory).removeClass('hide');
             return false;
