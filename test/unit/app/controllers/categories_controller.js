@@ -17,19 +17,9 @@ var helpers = require('../../../../app/helpers');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
+        app.use(express.compress());
         app.use(express.cookieParser());
     };
-}
-
-function rendrConfiguration(rendrApp) {
-    rendrApp.use(middleware.platform());
-    rendrApp.use(middleware.session());
-    rendrApp.use(middleware.abSelector());
-    rendrApp.use(middleware.environment());
-    rendrApp.use(middleware.location());
-    rendrApp.use(middleware.categories());
-    rendrApp.use(middleware.languages());
-    rendrApp.use(middleware.templates());
 }
 
 describe('app', function test() {
@@ -41,10 +31,7 @@ describe('app', function test() {
             var context;
             var category;
             var response;
-            var result = {
-                err: null,
-                data: {}
-            };
+            var result;
 
             describe('show', function test() {
                 before(function before(done) {
@@ -52,58 +39,70 @@ describe('app', function test() {
                     server = rendr.createServer({
                         dataAdapter: dataAdapter
                     });
-                    context = {
-                        redirectTo: function(uri, options) {
-                            this.redirect = {
-                                uri: uri,
-                                options: options
-                            };
-                        }
-                    };
+                    context = {};
 
-                    function rendrConfig(rendrApp) {
-                        rendrConfiguration(rendrApp);
-                        rendrApp.use(categoryMiddleware);
-                        rendrApp.use(afterMiddlewares);
+                    function rendrConfiguration(rendrApp) {
+                        rendrApp.use(middleware.platform());
+                        rendrApp.use(middleware.session());
+                        rendrApp.use(middleware.abSelector());
+                        rendrApp.use(middleware.environment());
+                        rendrApp.use(middleware.location());
+                        rendrApp.use(middleware.categories());
+                        rendrApp.use(middleware.languages());
+                        rendrApp.use(middleware.templates());
+                        rendrApp.use(beforeMiddleware);
+                        rendrApp.use(afterMiddleware);
                     }
 
-                    function categoryMiddleware(req, res, next) {
+                    function beforeMiddleware(req, res, next) {
                         var categories = req.rendrApp.getSession('categories');
                         var keys = _.keys(categories._byId);
-                        category = categories._byId[ _.first(keys) ];
 
+                        category = categories._byId[ _.first(keys) ];
                         url = helpers.common.slugToUrl(category);
                         next();
                     }
 
-                    function afterMiddlewares(req, res, next) {
+                    function afterMiddleware(req, res, next) {
+                        if (req.path === '/') {
+                            res.json({
+                                success: true
+                            });
+                            return;
+                        }
                         var params = req.path.split('-cat-');
 
                         params = {
                             title: params[0].substr(1),
                             catId: params[1]
                         };
-                        context.app = req.rendrApp;
-                        context.app = req.rendrApp;
-                        delete context.redirect;
-                        result = {
-                            err: null,
-                            data: {}
-                        };
-
+                        reset(req, res);
                         function callback(err, data) {
                             result.err = err;
                             result.data = data;
                             res.json(result);
                         }
                         Controller.show.call(context, params, callback);
-                        if (context.redirect) {
+                    }
+
+                    function reset(req, res) {
+                        context.app = req.rendrApp;
+                        context.redirectTo = function(uri, options) {
+                            this.redirect = {
+                                uri: uri,
+                                options: options
+                            };
                             res.json(result);
-                        }
+                        };
+                        delete context.redirect;
+                        result = {
+                            err: null,
+                            data: {}
+                        };
                     }
 
                     app.configure(expressConfiguration(app));
-                    server.configure(rendrConfig);
+                    server.configure(rendrConfiguration);
                     app.use(server);
                     require('../../../../server/router')(app, dataAdapter);
                     request(app)
@@ -144,7 +143,7 @@ describe('app', function test() {
                     (function existance(response) {
                         response.should.have.property('id');
                         response.should.have.property('random');
-                        response.should.have.property('referer', '/');
+                        response.should.have.property('referer', '-');
                         response.should.have.property('page', category.name + '/subcategory_list/');
                         response.should.have.property('custom');
                         response.custom = JSON.parse(response.custom);

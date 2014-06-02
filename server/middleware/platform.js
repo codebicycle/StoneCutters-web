@@ -29,7 +29,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && 'olx' === req.subdomains.shift())) && 'm' === req.subdomains.pop()) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), callback);
             }
-            else if (req.subdomains.length === 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
+            else if (req.subdomains.length <= 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
                 next();
             }
             else {

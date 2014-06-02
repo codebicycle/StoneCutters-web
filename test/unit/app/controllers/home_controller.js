@@ -17,19 +17,9 @@ var helpers = require('../../../../app/helpers');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
+        app.use(express.compress());
         app.use(express.cookieParser());
     };
-}
-
-function rendrConfiguration(rendrApp) {
-    rendrApp.use(middleware.platform());
-    rendrApp.use(middleware.session());
-    rendrApp.use(middleware.abSelector());
-    rendrApp.use(middleware.environment());
-    rendrApp.use(middleware.location());
-    rendrApp.use(middleware.categories());
-    rendrApp.use(middleware.languages());
-    rendrApp.use(middleware.templates());
 }
 
 describe('app', function test() {
@@ -39,10 +29,7 @@ describe('app', function test() {
             var server;
             var context;
             var response;
-            var result = {
-                err: null,
-                data: {}
-            };
+            var result;
 
             describe('index', function test() {
                 before(function before(done) {
@@ -50,38 +37,50 @@ describe('app', function test() {
                     server = rendr.createServer({
                         dataAdapter: dataAdapter
                     });
-                    context = {
-                        redirectTo: function(uri, options) {
-                            this.redirect = {
-                                uri: uri,
-                                options: options
-                            };
-                        }
-                    };
+                    context = {};
 
-                    function rendrConfig(rendrApp) {
-                        rendrConfiguration(rendrApp);
-                        rendrApp.use(afterMiddlewares);
+                    function rendrConfiguration(rendrApp) {
+                        rendrApp.use(middleware.platform());
+                        rendrApp.use(middleware.session());
+                        rendrApp.use(middleware.abSelector());
+                        rendrApp.use(middleware.environment());
+                        rendrApp.use(middleware.location());
+                        rendrApp.use(middleware.categories());
+                        rendrApp.use(middleware.languages());
+                        rendrApp.use(middleware.templates());
+                        rendrApp.use(afterMiddleware);
                     }
 
-                    function afterMiddlewares(req, res, next) {
+                    function afterMiddleware(req, res, next) {
                         var params = {};
 
-                        context.app = req.rendrApp;
-
+                        reset(req, res);
                         function callback(err, data) {
                             result.err = err;
                             result.data = data;
                             res.json(result);
                         }
                         Controller.index.call(context, params, callback);
-                        if (context.redirect) {
+                    }
+
+                    function reset(req, res) {
+                        context.app = req.rendrApp;
+                        context.redirectTo = function(uri, options) {
+                            this.redirect = {
+                                uri: uri,
+                                options: options
+                            };
                             res.json(result);
-                        }
+                        };
+                        delete context.redirect;
+                        result = {
+                            err: null,
+                            data: {}
+                        };
                     }
 
                     app.configure(expressConfiguration(app));
-                    server.configure(rendrConfig);
+                    server.configure(rendrConfiguration);
                     app.use(server);
                     require('../../../../server/router')(app, dataAdapter);
                     request(app)
@@ -117,7 +116,7 @@ describe('app', function test() {
                     (function existance(response) {
                         response.should.have.property('id');
                         response.should.have.property('random');
-                        response.should.have.property('referer', '/');
+                        response.should.have.property('referer', '-');
                         response.should.have.property('page', 'home/');
                         response.should.have.property('custom');
                         response.custom = JSON.parse(response.custom);
