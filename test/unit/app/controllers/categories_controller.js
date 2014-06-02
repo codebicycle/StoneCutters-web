@@ -35,9 +35,11 @@ function rendrConfiguration(rendrApp) {
 describe('app', function test() {
     describe('controllers', function test() {
         describe('categories', function test() {
+            var url;
             var app;
             var server;
             var context;
+            var category;
             var response;
             var result = {
                 err: null,
@@ -52,7 +54,7 @@ describe('app', function test() {
                     });
                     context = {
                         redirectTo: function(uri, options) {
-                            this.redirection = {
+                            this.redirect = {
                                 uri: uri,
                                 options: options
                             };
@@ -61,7 +63,17 @@ describe('app', function test() {
 
                     function rendrConfig(rendrApp) {
                         rendrConfiguration(rendrApp);
+                        rendrApp.use(categoryMiddleware);
                         rendrApp.use(afterMiddlewares);
+                    }
+
+                    function categoryMiddleware(req, res, next) {
+                        var categories = req.rendrApp.getSession('categories');
+                        var keys = _.keys(categories._byId);
+                        category = categories._byId[ _.first(keys) ];
+
+                        url = helpers.common.slugToUrl(category);
+                        next();
                     }
 
                     function afterMiddlewares(req, res, next) {
@@ -72,6 +84,12 @@ describe('app', function test() {
                             catId: params[1]
                         };
                         context.app = req.rendrApp;
+                        context.app = req.rendrApp;
+                        delete context.redirect;
+                        result = {
+                            err: null,
+                            data: {}
+                        };
 
                         function callback(err, data) {
                             result.err = err;
@@ -79,7 +97,7 @@ describe('app', function test() {
                             res.json(result);
                         }
                         Controller.show.call(context, params, callback);
-                        if (context.redirection) {
+                        if (context.redirect) {
                             res.json(result);
                         }
                     }
@@ -89,14 +107,25 @@ describe('app', function test() {
                     app.use(server);
                     require('../../../../server/router')(app, dataAdapter);
                     request(app)
-                        .get('/mobile-tablets-cat-830?location=' + utils.locations.in.www)
+                        .get('/?location=' + utils.locations.in.www)
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .end(end);
 
                     function end(err, res) {
                         response = res;
-                        done();
+
+                        request(app)
+                            .get('/' + url + '?location=' + utils.locations.in.www)
+                            .set('host', utils.getHost('html4', 'in'))
+                            .set('user-agent', utils.userAgents.html4)
+                            .set('cookie', response.get('set-cookie'))
+                            .end(finish);
+
+                        function finish(err, res) {
+                            response = res;
+                            done();
+                        }
                     }
                 });
                 it('should be added category to the response', function test(done) {
@@ -116,11 +145,11 @@ describe('app', function test() {
                         response.should.have.property('id');
                         response.should.have.property('random');
                         response.should.have.property('referer', '/');
-                        response.should.have.property('page', 'Mobiles & Tablets/subcategory_list/');
+                        response.should.have.property('page', category.name + '/subcategory_list/');
                         response.should.have.property('custom');
                         response.custom = JSON.parse(response.custom);
-                        response.custom.should.have.property('page_name', 'listing_Mobiles & Tablets');
-                        response.custom.should.have.property('category', 'Mobiles & Tablets');
+                        response.custom.should.have.property('page_name', 'listing_' + category.name);
+                        response.custom.should.have.property('category', category.name);
                         response.custom.should.have.property('subcategory', 'expired_subCategory');
                         response.custom.should.have.property('language');
                         response.custom.should.have.property('platform');
@@ -144,7 +173,7 @@ describe('app', function test() {
                         var x;
 
                         x = head.canonical.should.be.ok;
-                        head.canonical.should.equal('http://' + utils.locations.in.www + '/mobile-tablets-cat-830');
+                        head.canonical.should.equal('http://' + utils.locations.in.www + '/' + url);
                     })(helpers.seo.getHead());
                     done();
                 });
@@ -167,25 +196,44 @@ describe('app', function test() {
                     })(helpers.seo.getHead());
                     done();
                 });
-                it('should not redirection', function test(done) {
+                it('should not redirect', function test(done) {
                     (function existance(response) {
-                        response.should.not.have.property('redirection');
+                        response.should.not.have.property('redirect');
                     })(context);
                     done();
                 });
-                it('should redirection to the correct URL', function test(done) {
+                it('should redirect to the correct slug category', function test(done) {
                     request(app)
-                        .get('/des-cat-830?location=' + utils.locations.in.www)
+                        .get('/des-cat-' + url.split('-cat-')[1] + '?location=' + utils.locations.in.www)
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
+                        .set('cookie', response.get('set-cookie'))
                         .end(end);
 
                     function end(err, res) {
                         response = res;
 
                         (function existance(response) {
-                            response.should.have.property('redirection');
-                            response.redirection.uri.should.equal('/mobile-tablets-cat-830');
+                            response.should.have.property('redirect');
+                            response.redirect.uri.should.equal('/' + url);
+                        })(context);
+                        done();
+                    }
+                });
+                it('should redirect to the home ("/")', function test(done) {
+                    request(app)
+                        .get('/' + url.split('-cat-')[0] + '-cat-1668125?location=' + utils.locations.in.www)
+                        .set('host', utils.getHost('html4', 'in'))
+                        .set('user-agent', utils.userAgents.html4)
+                        .set('cookie', response.get('set-cookie'))
+                        .end(end);
+
+                    function end(err, res) {
+                        response = res;
+
+                        (function existance(response) {
+                            response.should.have.property('redirect');
+                            response.redirect.uri.should.equal('/');
                         })(context);
                         done();
                     }

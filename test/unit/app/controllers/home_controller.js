@@ -52,7 +52,7 @@ describe('app', function test() {
                     });
                     context = {
                         redirectTo: function(uri, options) {
-                            this.redirection = {
+                            this.redirect = {
                                 uri: uri,
                                 options: options
                             };
@@ -75,7 +75,7 @@ describe('app', function test() {
                             res.json(result);
                         }
                         Controller.index.call(context, params, callback);
-                        if (context.redirection) {
+                        if (context.redirect) {
                             res.json(result);
                         }
                     }
@@ -173,9 +173,9 @@ describe('app', function test() {
                     })(helpers.seo.getHead());
                     done();
                 });
-                it('should not redirection', function test(done) {
+                it('should not redirect', function test(done) {
                     (function existance(response) {
-                        response.should.not.have.property('redirection');
+                        response.should.not.have.property('redirect');
                     })(context);
                     done();
                 });

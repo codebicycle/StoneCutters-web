@@ -381,18 +381,15 @@ module.exports = {
                 }
             };
             var siteLocation = that.app.getSession('siteLocation');
-            var category = helpers.categories.getCat(that.app.getSession(), params.catId);
             var query;
 
-            if (!category) {
+            if (!params.search || _.isEmpty(params.search)) {
                 that.redirectTo(helpers.common.link('/', siteLocation));
                 return;
             }
             prepareParams(that.app, params);
             query = _.clone(params);
-            params.searchTerm = params.search;
             delete params.search;
-            delete params.title;
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
@@ -421,7 +418,6 @@ module.exports = {
                 helpers.analytics.addParam('user', user);
                 result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.search = query.search;
-                result.category = category;
                 callback(err, result);
             });
         }
