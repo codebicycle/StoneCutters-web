@@ -5,7 +5,7 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var utils = require('../utils');
 
-        return function platform(req, res, next) {
+        return function redirections(req, res, next) {
             var path = req.rendrApp.getSession('path');
 
             if (path.length <= 1 || path.slice(-1) !== '/') {
