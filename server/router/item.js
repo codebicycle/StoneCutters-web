@@ -152,7 +152,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                formidable.error(req, req.headers.referer.split('?').shift(), err, function redirect(url) {
+                formidable.error(req, req.headers.referer.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
                     clean();
                 });

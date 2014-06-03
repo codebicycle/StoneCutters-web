@@ -9,7 +9,7 @@ module.exports = {
     index: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var sixpackConfig = config.get('sixpack', {});
 
             helpers.analytics.reset();
@@ -34,7 +34,7 @@ module.exports = {
     subcat: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             helpers.analytics.reset();
             helpers.analytics.setPage('posting_cat');
 
@@ -47,7 +47,7 @@ module.exports = {
     form: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller(form) {
             var app = this.app;
             var user = app.getSession('user');
             var siteLocation = app.getSession('siteLocation');
@@ -79,13 +79,12 @@ module.exports = {
                 result.postingSession = result.postingSession.get('postingSession');
                 result.intent = 'create';
                 result.fields = response.fields;
-                result.errors = params.err;
                 result.category = categoryTree.parent;
                 result.subcategory = categoryTree.subCategory;
                 result.language = languageId;
                 result.languageCode = languageCode;
                 result.siteLocation = siteLocation;
-                result.errors = errors;
+                result.form = form;
 
                 helpers.analytics.reset();
                 helpers.analytics.setPage('posting_cat_subcat');
@@ -100,7 +99,7 @@ module.exports = {
     edit: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller(form) {
             var app = this.app;
             var user = app.getSession('user');
             var siteLocation = app.getSession('siteLocation');
@@ -183,7 +182,6 @@ module.exports = {
                     result.postingSession = result.postingSession.get('postingSession');
                     result.intent = 'edit';
                     result.fields = response.fields;
-                    result.errors = params.err;
                     result.category = categoryTree.parent;
                     result.subcategory = categoryTree.subCategory;
                     result.language = languageId;
@@ -191,6 +189,7 @@ module.exports = {
                     result.errField = params.errField;
                     result.errMsg = params.errMsg;
                     result.sk = securityKey;
+                    result.form = form;
 
                     helpers.analytics.reset();
                     helpers.analytics.setPage('posting_edit');
@@ -207,7 +206,7 @@ module.exports = {
     success: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;

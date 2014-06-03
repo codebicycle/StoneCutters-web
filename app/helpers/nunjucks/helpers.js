@@ -140,6 +140,9 @@ module.exports = function(nunjucks) {
         date: function(timestamp) {
             return dateformat(new Date(timestamp), 'dd-mm-yyyy');
         },
+        log: function() {
+            console.log.apply(console, arguments);
+        },
         'static': common.static,
         slugToUrl: common.slugToUrl,
         urlize: common.urlize
