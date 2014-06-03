@@ -33,6 +33,7 @@ module.exports = BaseApp.extend({
         this.templateAdapter.init(siteLocation.replace('m','www'));
         this.templateAdapter.registerHelpers(helpers.nunjucks.helpers);
         this.templateAdapter.registerExtensions(helpers.nunjucks.extensions);
+        helpers.app.setSession.call(this);
     },
 
     /**

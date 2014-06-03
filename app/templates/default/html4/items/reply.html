@@ -1,15 +1,9 @@
-{% from macros import Breadcrumb, BreadcrumbHome %}
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToThisAd"]) }}
+{% if errors %}{{ Errors(errors) }}{% endif %}
 <div id="reply">
     <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
-        {% if errors %}
-            <div id="errors">
-                {% for error in errors %}
-                    <span>{{ error }}</span><br>
-                {% endfor %}
-            </div>
-        {% endif %}
         <h4>{{ item.title }}</h4>
         <div class="formField">
             <label>{{ dictionary["contactseller_form.55"] }} {{ item.contactName if item.contactName else "anonymous" }}</label>

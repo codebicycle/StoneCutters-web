@@ -1,8 +1,9 @@
 var config = require('./config');
 var formidable = require('formidable');
 var os = require('os');
+var querystring = require('querystring');
 
-module.exports = function(req, options, callback) {
+function parse(req, options, callback) {
     var form = new formidable.IncomingForm();
     var error;
     var aborted;
@@ -65,4 +66,41 @@ module.exports = function(req, options, callback) {
     else {
         form.parse(req);
     }
+}
+
+function error(req, url, err, callback) {
+    var errors;
+
+    if (req.rendrApp.getSession('platform') === 'wap') {
+        errors = [];
+        err.forEach(function each(error) {
+            var message = '';
+
+            if (error.selector !== 'main') {
+                message += error.selector + ' | ';
+            }
+            errors.push(message + error.message);
+        });
+        url += '?' + querystring.stringify({
+            errors: errors
+        });
+    }
+    else {
+        errors = {};
+        err.forEach(function each(error) {
+            if (typeof errors[error.selector] === 'undefined') {
+                errors[error.selector] = [];
+            }
+            errors[error.selector].push(error.message);
+        });
+        req.rendrApp.persistSession({
+            errors: errors
+        });
+    }
+    callback(url);
+}
+
+module.exports = {
+    parse: parse,
+    error: error
 };

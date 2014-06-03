@@ -1,3 +1,4 @@
+{% from macros import Breadcrumb, Errors %}
 <tr>
     <td>
         <table width="100%" cellspacing="0" cellpadding="4" border="0">
@@ -13,19 +14,7 @@
                 </td>
             </tr>
         </table>
-        {% if errors %}
-            <table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">
-                <tr>
-                    <td style="border-top: solid thin #808080;">
-                        <small style="display: block;">
-                            {% for error in errors %}
-                                <font color="#FF0000">{{ error }}</font><br />
-                            {% endfor %}
-                        </small>
-                    </td>
-                </tr>
-            </table>
-        {% endif %}
+        {% if errors %}{{ Errors(errors) }}{% endif %}
         <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
@@ -71,7 +60,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <small style="display: block;">{{ dictionary["contactseller_form.1512"] }}</small>
+                        <small style="display: block;">{{ dictionary["contactseller_form.58"] }}</small>
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <td style="padding: 2px; border: solid thin #BBB;">
@@ -94,7 +83,6 @@
                 </tr>
             </table>
         </form>
-        {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link) }}
     </td>

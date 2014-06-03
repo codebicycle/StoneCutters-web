@@ -9,7 +9,7 @@ module.exports = {
     index: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var sixpackConfig = config.get('sixpack', {});
 
             helpers.analytics.reset();
@@ -34,7 +34,7 @@ module.exports = {
     subcat: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             helpers.analytics.reset();
             helpers.analytics.setPage('posting_cat');
 
@@ -47,7 +47,7 @@ module.exports = {
     form: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var app = this.app;
             var user = app.getSession('user');
             var siteLocation = app.getSession('siteLocation');
@@ -85,8 +85,7 @@ module.exports = {
                 result.language = languageId;
                 result.languageCode = languageCode;
                 result.siteLocation = siteLocation;
-                result.errField = params.errField;
-                result.errMsg = params.errMsg;
+                result.errors = errors;
 
                 helpers.analytics.reset();
                 helpers.analytics.setPage('posting_cat_subcat');
@@ -101,7 +100,7 @@ module.exports = {
     edit: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var app = this.app;
             var user = app.getSession('user');
             var siteLocation = app.getSession('siteLocation');
@@ -208,7 +207,7 @@ module.exports = {
     success: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;

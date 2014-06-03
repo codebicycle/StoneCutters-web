@@ -6,7 +6,7 @@ module.exports = {
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var siteLocation = this.app.getSession('siteLocation');
             var category = helpers.categories.getCat(this.app.getSession(), params.catId);
             var categoryTree;

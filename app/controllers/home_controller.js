@@ -8,7 +8,7 @@ module.exports = {
     index: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var platform = this.app.getSession('platform');
             var icons = config.get(['icons', platform], []);
             var country = this.app.getSession('location').url;
