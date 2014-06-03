@@ -14,12 +14,16 @@ module.exports = {
             var slug;
 
             if (!category) {
-                this.redirectTo(helpers.common.link('/', siteLocation));
+                this.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
                 return;
             }
             slug = helpers.common.slugToUrl(category);
             if (slug.indexOf(params.title + '-cat-')) {
-                this.redirectTo(helpers.common.link('/' + slug, siteLocation));
+                this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
+                    status: 301
+                });
                 return;
             }
             categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.catId);

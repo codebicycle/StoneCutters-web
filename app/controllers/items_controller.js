@@ -151,12 +151,16 @@ module.exports = {
             var slug;
 
             if (!category) {
-                this.redirectTo(helpers.common.link('/', siteLocation));
+                this.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
                 return;
             }
             slug = helpers.common.slugToUrl(category);
             if (slug.indexOf(params.title + '-cat-')) {
-                this.redirectTo(helpers.common.link('/' + slug + '-p-1', siteLocation));
+                this.redirectTo(helpers.common.link('/' + slug + '-p-1', siteLocation), {
+                    status: 301
+                });
                 return;
             }
 
@@ -244,7 +248,9 @@ module.exports = {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     if (err) {
-                        that.redirectTo(helpers.common.link('/404', siteLocation));
+                        that.redirectTo(helpers.common.link('/404', siteLocation), {
+                            status: 301
+                        });
                         return;
                     }
                     next(err, result);
@@ -257,12 +263,16 @@ module.exports = {
                 var spec;
 
                 if (!item) {
-                    that.redirectTo(helpers.common.link('/404', siteLocation));
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
                     return;
                 }
                 slug = helpers.common.slugToUrl(item);
                 if (slug.indexOf(slugUrl + '-iid-')) {
-                    that.redirectTo(helpers.common.link('/' + slug, siteLocation));
+                    that.redirectTo(helpers.common.link('/' + slug, siteLocation), {
+                        status: 301
+                    });
                     return;
                 }
 
@@ -384,7 +394,9 @@ module.exports = {
             var query;
 
             if (!params.search || _.isEmpty(params.search)) {
-                that.redirectTo(helpers.common.link('/', siteLocation));
+                that.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
                 return;
             }
             prepareParams(that.app, params);
@@ -446,7 +458,9 @@ module.exports = {
                 var item;
 
                 if (err) {
-                    that.redirectTo(helpers.common.link('/404', siteLocation));
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
                     return;
                 }
                 item = result.item.toJSON();
@@ -488,7 +502,9 @@ module.exports = {
                 var item;
                 
                 if (err) {
-                    that.redirectTo(helpers.common.link('/404', siteLocation));
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
                     return;
                 }
                 item = result.item.toJSON();
