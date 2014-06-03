@@ -10,27 +10,27 @@ function setSession() {
     if (typeof window === 'undefined') {
         return;
     }
-    session = _.extend(this.app.get('session'), cookies.getAll());
+    session = _.extend(this.get('session'), cookies.getAll());
 
-    this.app.updateSession = function(pairs) {
+    this.updateSession = function(pairs) {
         for (var key in pairs) {
             session[key] = pairs[key];
         }
         this.set('session', session);
     };
-    this.app.persistSession = function(pairs, options) {
+    this.persistSession = function(pairs, options) {
         for (var key in pairs) {
             cookies.put(key, pairs[key], options);
         }
         this.updateSession(pairs);
     };
-    this.app.getSession = function(key) {
+    this.getSession = function(key) {
         if (!key) {
             return session;
         }
         return session[key];
     };
-    this.app.deleteSession = function(key, options) {
+    this.deleteSession = function(key, options) {
         if (!key) {
             return;
         }
@@ -135,11 +135,13 @@ function setLocation(params, callback) {
 
 module.exports = {
     control: function(params, callback) {
-        setSession.call(this);
         setCurrentRoute.call(this);
         setUrlVars.call(this);
         setCurrentPage.call(this);
         setLanguage.call(this);
         setLocation.call(this, params, callback.bind(this));
+    },
+    setSession: function() {
+        setSession.call(this);
     }
 };
