@@ -4,9 +4,9 @@
 <div id="itemPageGalery">
     {% if item.status.visible %}
         {% if item.images.length == 1 %}
-            <img alt="" src="{{item.images[0].url | static }}">
+            <img alt="" src="{{item.images[0].url }}">
         {% else %}
-            <img alt="" src="{{item.images[pos].url | static }}">
+            <img alt="" src="{{item.images[pos].url }}">
             <div id="galeryPagination">
                 <a href="?pos={{ pos if pos == 0 else pos - 1 }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
                 <div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
