@@ -4,7 +4,9 @@
 {% if errors %}{{ Errors(errors) }}{% endif %}
 <div id="reply">
     <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
-        <h4>{{ item.title }}</h4>
+        <a style="display: block;" tabindex="1" href="/{{ item | slugToUrl | link }}">
+            <h4>{{ item.title }}</h4>
+        </a>
         <div class="formField">
             <label>{{ dictionary["contactseller_form.55"] }} {{ item.contactName if item.contactName else "anonymous" }}</label>
         </div>
