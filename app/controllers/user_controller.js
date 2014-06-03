@@ -30,7 +30,8 @@ module.exports = {
 
             this.app.deleteSession('user');
             this.redirectTo(helpers.common.link('/', siteLocation), {
-                pushState: false
+                pushState: false,
+                status: 301
             });
         }
     },

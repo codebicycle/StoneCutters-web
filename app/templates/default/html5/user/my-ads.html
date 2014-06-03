@@ -1,5 +1,6 @@
 {% from macros import Breadcrumb %}
-{{ Breadcrumb(dictionary, dictionary["myolx.MyAds"]) }}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["myolx.MyAds"]) }}
 <section id="myads">
     {% if myAds.length %}
         <ul class="itemListing">

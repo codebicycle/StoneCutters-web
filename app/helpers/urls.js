@@ -336,7 +336,6 @@ module.exports = {
             params: {
                 page_name: 'contact_seller_done',
                 category: 'reply',
-                subcategory: '',
                 ad_category: '',
                 ad_subcategory: '',
                 ad_id: '',
@@ -358,7 +357,6 @@ module.exports = {
             params: {
                 page_name: 'contact_seller_form',
                 category: 'reply',
-                subcategory: '',
                 ad_category: '',
                 ad_subcategory: '',
                 ad_id: '',

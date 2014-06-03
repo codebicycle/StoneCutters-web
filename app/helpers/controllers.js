@@ -1,44 +1,6 @@
 'use strict';
 
-var config = require('../config');
-var analyticsHelper = require('./analytics');
-var cookies = require('./cookies');
 var _ = require('underscore');
-var session;
-
-function setSession() {
-    if (typeof window === 'undefined') {
-        return;
-    }
-    session = _.extend(this.app.get('session'), cookies.getAll());
-
-    this.app.updateSession = function(pairs) {
-        for (var key in pairs) {
-            session[key] = pairs[key];
-        }
-        this.set('session', session);
-    };
-    this.app.persistSession = function(pairs, options) {
-        for (var key in pairs) {
-            cookies.put(key, pairs[key], options);
-        }
-        this.updateSession(pairs);
-    };
-    this.app.getSession = function(key) {
-        if (!key) {
-            return session;
-        }
-        return session[key];
-    };
-    this.app.deleteSession = function(key, options) {
-        if (!key) {
-            return;
-        }
-        cookies.clear(key, options);
-        delete session[key];
-        this.set('session', session);
-    };
-}
 
 function setUrlVars() {
     if (typeof window === 'undefined') {
@@ -176,7 +138,6 @@ function getErrors(params) {
 
 module.exports = {
     control: function(params, callback) {
-        setSession.call(this);
         setCurrentRoute.call(this);
         setUrlVars.call(this);
         setCurrentPage.call(this);

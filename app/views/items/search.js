@@ -7,7 +7,8 @@ var helpers = require('../../helpers');
 module.exports = BaseView.extend({
     className: 'items_search_view',
     wapAttributes: {
-        cellpadding: 0
+        cellpadding: 0,
+        bgcolor: '#DDDDDD'
     },
     processItem: function(item) {
         var year = item.date.year;
@@ -21,15 +22,27 @@ module.exports = BaseView.extend({
         item.date.since = helpers.timeAgo(date);
     },
     postRender: function() {
-        $('.switchView').click(function(e) {
-            var url;
-            $('.filled').each(function() {
-                url = $(this).attr('data-fullimg');
-                loadImages(url , $(this));
-            });
-            $('section#itemListing ul').toggleClass('gallery-list');
-            $('.switchView').toggleClass('gallery');
-        });
+       var listingView = 'listView';
+        if (typeof window !== 'undefined' && localStorage) {
+            listingView = localStorage.getItem('listingView');
+        }else{
+            listingView = this.app.getSession('listingView');
+        }
+        if(listingView == 'galView'){
+            switchView();
+        }
+        $('.switchView').click((function(e) {
+            switchView();
+            var current = ($('.gallery-list').length === 0 ? 'listView' : 'galView');
+            if (typeof window !== 'undefined' && localStorage) {
+                console.log('storage');
+                localStorage.setItem('listingView', current);
+            }else{
+                this.app.persistSession({
+                    listingView: current
+                });
+            }
+        }).bind(this));
 
         function loadImages(url , $this){
             var newImg = new Image();
@@ -37,6 +50,15 @@ module.exports = BaseView.extend({
             newImg.onload = function() {
                 $this.css('background-image', 'url('+url+')');
             };
+        }
+        function switchView(){
+            $('section#itemListing ul').toggleClass('gallery-list');
+            $('.switchView').toggleClass('gallery');
+            var url;
+            $('.filled').each(function() {
+                url = $(this).attr('data-fullimg');
+                loadImages(url , $(this));
+            });
         }
     },
     getTemplateData: function() {

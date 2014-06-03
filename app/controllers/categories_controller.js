@@ -3,39 +3,27 @@
 var helpers = require('../helpers');
 
 module.exports = {
-    index: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller(errors) {
-            var user = this.app.getSession('user');
-            var siteLocation = this.app.getSession('siteLocation');
-            var categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.id);
-
-            helpers.analytics.reset();
-            helpers.analytics.setPage('category');
-            helpers.analytics.addParam('user', user);
-            helpers.analytics.addParam('category', categoryTree.parent);
-            helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-            helpers.seo.resetHead();
-            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', params.title, '-cat-', params.id].join(''));
-            callback(null, {
-                category: this.app.getSession('categories')._byId[params.id],
-                analytics: helpers.analytics.generateURL(this.app.getSession())
-            });
-        }
-    },
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller(errors) {
             var siteLocation = this.app.getSession('siteLocation');
             var category = helpers.categories.getCat(this.app.getSession(), params.catId);
-            var slug = helpers.common.slugToUrl(category);
             var categoryTree;
             var user;
+            var slug;
 
+            if (!category) {
+                this.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
+            slug = helpers.common.slugToUrl(category);
             if (slug.indexOf(params.title + '-cat-')) {
-                this.redirectTo(helpers.common.link('/' + slug, siteLocation));
+                this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
+                    status: 301
+                });
                 return;
             }
             categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.catId);

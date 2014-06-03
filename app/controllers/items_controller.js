@@ -137,7 +137,7 @@ module.exports = {
     index: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var app = this.app;
             var spec = {
                 items: {
@@ -147,11 +147,20 @@ module.exports = {
             };
             var siteLocation = app.getSession('siteLocation');
             var category = helpers.categories.getCat(app.getSession(), params.catId);
-            var slug = helpers.common.slugToUrl(category);
             var query;
+            var slug;
 
+            if (!category) {
+                this.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
+            slug = helpers.common.slugToUrl(category);
             if (slug.indexOf(params.title + '-cat-')) {
-                this.redirectTo(helpers.common.link('/' + slug + '-p-1', siteLocation));
+                this.redirectTo(helpers.common.link('/' + slug + '-p-1', siteLocation), {
+                    status: 301
+                });
                 return;
             }
 
@@ -239,7 +248,9 @@ module.exports = {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     if (err) {
-                        callback(err, result);
+                        that.redirectTo(helpers.common.link('/404', siteLocation), {
+                            status: 301
+                        });
                         return;
                     }
                     next(err, result);
@@ -248,11 +259,20 @@ module.exports = {
 
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
-                var slug = helpers.common.slugToUrl(item);
+                var slug;
                 var spec;
 
+                if (!item) {
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
+                    return;
+                }
+                slug = helpers.common.slugToUrl(item);
                 if (slug.indexOf(slugUrl + '-iid-')) {
-                    that.redirectTo(helpers.common.link('/' + slug, siteLocation));
+                    that.redirectTo(helpers.common.link('/' + slug, siteLocation), {
+                        status: 301
+                    });
                     return;
                 }
 
@@ -267,7 +287,6 @@ module.exports = {
                         }
                     }
                 };
-
                 that.app.fetch(spec, {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
@@ -372,14 +391,17 @@ module.exports = {
                 }
             };
             var siteLocation = app.getSession('siteLocation');
-            var category = helpers.categories.getCat(app.getSession(), params.catId);
             var query;
 
+            if (!params.search || _.isEmpty(params.search)) {
+                this.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
             prepareParams(app, params);
             query = _.clone(params);
-            params.searchTerm = params.search;
             delete params.search;
-            delete params.title;
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
@@ -408,7 +430,6 @@ module.exports = {
                 helpers.analytics.addParam('user', user);
                 result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.search = query.search;
-                result.category = category;
                 callback(err, result);
             });
         }
@@ -419,6 +440,7 @@ module.exports = {
         function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
+            var siteLocation = that.app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -432,8 +454,17 @@ module.exports = {
             that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                var categoryTree;
+                var item;
+
+                if (err) {
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
+                    return;
+                }
+                item = result.item.toJSON();
+                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
 
                 helpers.analytics.reset();
                 helpers.analytics.setPage('item_reply');
@@ -454,6 +485,7 @@ module.exports = {
         function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
+            var siteLocation = that.app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -467,8 +499,17 @@ module.exports = {
             that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                var categoryTree;
+                var item;
+
+                if (err) {
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
+                    return;
+                }
+                item = result.item.toJSON();
+                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
 
                 helpers.analytics.reset();
                 helpers.analytics.setPage('item_reply_success');

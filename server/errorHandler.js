@@ -5,16 +5,14 @@ var env = process.env.NODE_ENV || 'development';
 
 exports = module.exports = function errorHandler() {
     function isRedirection(app) {
-        var redirection = false;
-        var errorDirection = true;
         if (app.getSession('errorDirection')) {
-            redirection = true;
-            errorDirection = null;
+            app.deleteSession('errorDirection');
+            return true;
         }
         app.persistSession({
-            errorDirection: errorDirection
+            errorDirection: true
         });
-        return redirection;
+        return false;
     }
 
     return function errorHandler(err, req, res, next) {
