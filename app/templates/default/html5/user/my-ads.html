@@ -12,6 +12,8 @@
                             <p class="status pending">{{ dictionary["itemslisting.PendingAd"] }}</p>
                         {% elif item.status == 'rejected' %}
                             <p class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</p>
+                        {% elif item.status == 'ready' %}
+                            <p>{{ dictionary[item.date.since] }} {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}</p>
                         {% endif %}
                         <h3>{{ item.price.displayPrice }}</h3>
                         <div class="title">

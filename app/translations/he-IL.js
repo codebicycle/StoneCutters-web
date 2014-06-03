@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u05D0\u05D9\u05E0\u05DA \u05D7\u05D1\u05E8?',
     'loginbox.Password': '\u05E1\u05D9\u05E1\u05DE\u05D4',
     'loginbox.Username': '\u05E9\u05DD \u05DE\u05EA\u05E9\u05DE\u05E9 \u05D0\u05D5 \u05D0\u05D9 \u05DE\u05D9\u05D9\u05DC',
+    'messages_date_format.101': '\u05D9\u05E0\u05D5\u05D0\u05E8',
+    'messages_date_format.102': '\u05E4\u05D1\u05E8\u05D5\u05D0\u05E8',
+    'messages_date_format.103': '\u05DE\u05E8\u05E5',
+    'messages_date_format.104': '\u05D0\u05E4\u05E8\u05D9\u05DC',
+    'messages_date_format.105': '\u05DE\u05D0\u05D9',
+    'messages_date_format.106': '\u05D9\u05D5\u05E0\u05D9',
+    'messages_date_format.107': '\u05D9\u05D5\u05DC\u05D9',
+    'messages_date_format.108': '\u05D0\u05D5\u05D2\u05D5\u05E1\u05D8',
+    'messages_date_format.109': '\u05E1\u05E4\u05D8\u05DE\u05D1\u05E8',
+    'messages_date_format.110': '\u05D0\u05D5\u05E7\u05D8\u05D5\u05D1\u05E8',
+    'messages_date_format.111': '\u05E0\u05D5\u05D1\u05DE\u05D1\u05E8',
+    'messages_date_format.112': '\u05D3\u05E6\u05DE\u05D1\u05E8',
+    'messages_date_format.Today': '\u05D4\u05D9\u05D5\u05DD',
+    'messages_date_format.Yesterday': '\u05D0\u05EA\u05DE\u05D5\u05DC',
     'messages_item_page.57': '\u05D0\u05E0\u05D5\u05E0\u05D9\u05DE\u05D9',
     'messages_site_class.30': '\u05D0\u05D5.\u05E7\u05D9\u05D9',
     'messages_user_management_current_ads.EditMyListing': '\u05E2\u05E8\u05D5\u05DA \u05D0\u05EA \u05D4\u05DE\u05D5\u05D3\u05E2\u05D4 \u05E9\u05DC\u05D9',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u05E9\u05D3\u05D5\u05EA \u05E7\u05D8\u05D2\u05D5\u05E8\u05D9\u05D4 \u05E1\u05E4\u05E6\u05D9\u05E4\u05D9\u05EA (\u05D0\u05D5\u05E4\u05E6\u05D9\u05D5\u05E0\u05D0\u05DC\u05D9)',
     'misc.YouAreIn_Mob': '\u05D0\u05EA\u05D4 \u05E0\u05DE\u05E6\u05D0 \u05D1<<LOCATION>>',
     'business_directory.Map': '\u05DE\u05E4\u05D4',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u05D1-'
 };

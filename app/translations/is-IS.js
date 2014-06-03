@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Ekki skr\xE1\xF0ur notandi?',
     'loginbox.Password': 'Lykilor\xF0',
     'loginbox.Username': 'Notandanafn e\xF0a t\xF6lvup\xF3stfang',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'Ma\xED',
+    'messages_date_format.106': 'J\xFAn',
+    'messages_date_format.107': 'J\xFAl',
+    'messages_date_format.108': '\xC1g',
+    'messages_date_format.109': 'Sept',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'N\xF3v',
+    'messages_date_format.112': 'Des',
+    'messages_date_format.Today': '\xCD dag',
+    'messages_date_format.Yesterday': '\xCD g\xE6r',
     'messages_item_page.57': 'Nafnlaust',
     'messages_site_class.30': '\xCD lagi',
     'messages_user_management_current_ads.EditMyListing': 'Breyta augl\xFDsingunni minni',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)',
     'misc.YouAreIn_Mob': '\xDE\xFA ert \xED/\xE1 <<LOCATION>>',
     'business_directory.Map': 'Kort',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'h\xE9\xF0an \xED fr\xE1 \xED flokknum'
 };

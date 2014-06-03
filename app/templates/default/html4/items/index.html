@@ -17,13 +17,12 @@
                 </a>
                 <div class="itemInfo">
                     <h2>{{ item.price.displayPrice }}</h2>
-                    <span>{{ item.date.since }}</span>
+                    <span>{{ dictionary[item.date.since] }} {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}</span>
                     <div class="centerCont">
                         <a href="/{{ item | slugToUrl | link }}">
                             <p>{{ item.title }}</p>
                         </a>
                     </div>
-                    <span>{{ item.displayLocation }}</span>
                 </div>
             </li>
         {% endfor %}

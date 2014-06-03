@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Ei ole liige?',
     'loginbox.Password': 'Salas\xF5na',
     'loginbox.Username': 'Kasutajanimi v\xF5i E-post',
+    'messages_date_format.101': 'Jaan',
+    'messages_date_format.102': 'Veebr',
+    'messages_date_format.103': 'M\xE4rts',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'Mai',
+    'messages_date_format.106': 'Juuni',
+    'messages_date_format.107': 'Juuli',
+    'messages_date_format.108': 'Aug',
+    'messages_date_format.109': 'Sept',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Dets',
+    'messages_date_format.Today': 'T\xE4na',
+    'messages_date_format.Yesterday': 'Eile',
     'messages_item_page.57': 'Anon\xFC\xFCmne',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Muutke "Minu kuulutust"',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Kategooriatele vastavad v\xE4ljad (valikulised)',
     'misc.YouAreIn_Mob': 'Olete asukohas <<LOCATION>>',
     'business_directory.Map': 'Kaart',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'asukohast'
 };

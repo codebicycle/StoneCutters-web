@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Er du ikke en registrert bruker?',
     'loginbox.Password': 'Passord',
     'loginbox.Username': 'Brukernavn eller epostadresse',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'Mai',
+    'messages_date_format.106': 'Juni',
+    'messages_date_format.107': 'Juli',
+    'messages_date_format.108': 'Aug',
+    'messages_date_format.109': 'Sept',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Des',
+    'messages_date_format.Today': 'I dag',
+    'messages_date_format.Yesterday': 'I g\xE5r',
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonse',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Felter for spesifikk kategori (valgfritt)',
     'misc.YouAreIn_Mob': 'Du er i <<LOCATION>>',
     'business_directory.Map': 'Kart',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'i'
 };

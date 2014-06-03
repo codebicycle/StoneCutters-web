@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Nejste \u010Dlenem?',
     'loginbox.Password': 'Heslo',
     'loginbox.Username': 'U\u017Eivatelsk\xE9 jm\xE9no nebo e-mail',
+    'messages_date_format.101': 'Leden',
+    'messages_date_format.102': '\xDAnor',
+    'messages_date_format.103': 'B\u0159ezen',
+    'messages_date_format.104': 'Duben',
+    'messages_date_format.105': 'Kv\u011Bten',
+    'messages_date_format.106': '\u010Cerven',
+    'messages_date_format.107': '\u010Cervenec',
+    'messages_date_format.108': 'Srpen',
+    'messages_date_format.109': 'Z\xE1\u0159\xED',
+    'messages_date_format.110': '\u0158\xEDjen',
+    'messages_date_format.111': 'Listopad',
+    'messages_date_format.112': 'Prosinec',
+    'messages_date_format.Today': 'Dnes',
+    'messages_date_format.Yesterday': 'V\u010Dera',
     'messages_item_page.57': 'Anonymn\xED',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravit m\u016Fj z\xE1znam',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Specifick\xE1 pole kategori\xED (Voliteln\xE9)',
     'misc.YouAreIn_Mob': 'Nach\xE1z\xEDte se v <<LOCATION>>',
     'business_directory.Map': 'Mapa',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'v'
 };

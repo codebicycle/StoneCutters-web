@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Nie zarejestrowany?',
     'loginbox.Password': 'Has\u0142o',
     'loginbox.Username': 'Nazwa u\u017Cytkownika lub e-mail',
+    'messages_date_format.101': 'Stycznia',
+    'messages_date_format.102': 'Lutego',
+    'messages_date_format.103': 'Marca',
+    'messages_date_format.104': 'Kwietnia',
+    'messages_date_format.105': 'Maja',
+    'messages_date_format.106': 'Czerwca',
+    'messages_date_format.107': 'Lipca',
+    'messages_date_format.108': 'Sierpnia',
+    'messages_date_format.109': 'Wrze\u015Bnia',
+    'messages_date_format.110': 'Pa\u017Adziernika',
+    'messages_date_format.111': 'Listopada',
+    'messages_date_format.112': 'Grudnia',
+    'messages_date_format.Today': 'Dzisiaj',
+    'messages_date_format.Yesterday': 'Wczoraj',
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edytuj moje og\u0142oszenie',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)',
     'misc.YouAreIn_Mob': 'Jeste\u015B w miejscu: <<LOCATION>>',
     'business_directory.Map': 'Mapa',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'mo\u017Cna teraz znale\u017A\u0107 w kategorii:'
 };

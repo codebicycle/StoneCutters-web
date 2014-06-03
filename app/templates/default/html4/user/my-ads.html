@@ -19,6 +19,8 @@
                             <span class="status pending">{{ dictionary["itemslisting.PendingAd"] }}</span>
                         {% elif item.status == 'rejected' %}
                             <span class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</span>
+                        {% elif item.status == 'ready' %}
+                            <span class="status ready">{{ dictionary[item.date.since] }} {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}</span>
                         {% endif %}
                         <div class="centerCont">
                             <a href="/{{ item | slugToUrl | link }}">

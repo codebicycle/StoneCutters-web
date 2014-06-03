@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'M\xE9g nem tag?',
     'loginbox.Password': 'Jelsz\xF3',
     'loginbox.Username': 'Felhaszn\xE1l\xF3i n\xE9v vagy e-mail',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'M\xE1r',
+    'messages_date_format.104': '\xC1pr',
+    'messages_date_format.105': 'M\xE1j',
+    'messages_date_format.106': 'J\xFAn',
+    'messages_date_format.107': 'J\xFAl',
+    'messages_date_format.108': 'Aug',
+    'messages_date_format.109': 'Szep',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Dec',
+    'messages_date_format.Today': 'Ma',
+    'messages_date_format.Yesterday': 'Tegnap',
     'messages_item_page.57': 'N\xE9vtelen',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'A hirdet\xE9sem szerkeszt\xE9se',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Kateg\xF3riaf\xFCgg\u0151 mez\u0151k (V\xE1laszthat\xF3k)',
     'misc.YouAreIn_Mob': 'Tart\xF3zkod\xE1si helye: <<LOCATION>>',
     'business_directory.Map': 'T\xE9rk\xE9p',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'kateg\xF3ria:'
 };

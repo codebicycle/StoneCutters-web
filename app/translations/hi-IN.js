@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u0938\u0926\u0938\u094D\u092F \u0928\u0939\u0940\u0902 \u0939\u0948\u0902?',
     'loginbox.Password': '\u092A\u093E\u0938\u0935\u0930\u094D\u0921',
     'loginbox.Username': '\u092A\u094D\u0930\u092F\u094B\u0915\u094D\u0924\u093E \u0928\u093E\u092E \u092F\u093E \u0908\u092E\u0947\u0932',
+    'messages_date_format.101': '\u091C\u0928',
+    'messages_date_format.102': '\u092B\u0930',
+    'messages_date_format.103': '\u092E\u093E\u0930\u094D\u091A',
+    'messages_date_format.104': '\u0905\u092A\u094D\u0930\u0948\u0932',
+    'messages_date_format.105': '\u092E\u0908',
+    'messages_date_format.106': '\u091C\u0942\u0928',
+    'messages_date_format.107': '\u091C\u0941\u0932\u093E',
+    'messages_date_format.108': '\u0905\u0917',
+    'messages_date_format.109': '\u0938\u093F\u0924\u0902',
+    'messages_date_format.110': '\u0905\u0915\u094D\u0924\u0942',
+    'messages_date_format.111': '\u0928\u0935\u0902',
+    'messages_date_format.112': '\u0926\u093F\u0938\u0902',
+    'messages_date_format.Today': '\u0906\u091C',
+    'messages_date_format.Yesterday': '\u0915\u0932',
     'messages_item_page.57': '\u0917\u0941\u092E\u0928\u093E\u092E',
     'messages_site_class.30': '\u0920\u0940\u0915 \u0939\u0948',
     'messages_user_management_current_ads.EditMyListing': '\u092E\u0947\u0930\u0940 \u0935\u0938\u094D\u0924\u0941 \u0915\u094B \u0938\u0902\u092A\u093E\u0926\u093F\u0924 \u0915\u0930\u0947\u0902',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u0936\u094D\u0930\u0947\u0923\u0940 \u0935\u093F\u0936\u093F\u0937\u094D\u091F \u092B\u093C\u0940\u0932\u094D\u0921 (\u0935\u0948\u0915\u0932\u094D\u092A\u093F\u0915)',
     'misc.YouAreIn_Mob': '\u0906\u092A <<LOCATION>> \u092E\u0947\u0902 \u0939\u0948',
     'business_directory.Map': '\u0928\u0915\u094D\u0936\u093E',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u092F\u0939\u093E\u0901 \u092E\u093F\u0932\u0947\u0917\u093E -'
 };

@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Etk\xF6 ole viel\xE4 j\xE4sen?',
     'loginbox.Password': 'salasana',
     'loginbox.Username': 'K\xE4ytt\xE4j\xE4tunnus tai s\xE4hk\xF6postiosoite',
+    'messages_date_format.101': 'Tam',
+    'messages_date_format.102': 'Hel',
+    'messages_date_format.103': 'Maa',
+    'messages_date_format.104': 'Huh',
+    'messages_date_format.105': 'Tou',
+    'messages_date_format.106': 'Kes',
+    'messages_date_format.107': 'Hei',
+    'messages_date_format.108': 'Elo',
+    'messages_date_format.109': 'Syy',
+    'messages_date_format.110': 'Lok',
+    'messages_date_format.111': 'Mar',
+    'messages_date_format.112': 'Jou',
+    'messages_date_format.Today': 'T\xE4n\xE4\xE4n',
+    'messages_date_format.Yesterday': 'Eilen',
     'messages_item_page.57': 'Nimet\xF6n',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Muokkaa omaa ilmoitusta',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)',
     'misc.YouAreIn_Mob': 'Olet kohteessa <<LOCATION>>',
     'business_directory.Map': 'Kartta',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'kohdassa'
 };

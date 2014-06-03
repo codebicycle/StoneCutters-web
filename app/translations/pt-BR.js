@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'N\xE3o \xE9 um usu\xE1rio cadastrado?',
     'loginbox.Password': 'Senha',
     'loginbox.Username': 'E-mail ou nome de usu\xE1rio',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Fev',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Abr',
+    'messages_date_format.105': 'Mai',
+    'messages_date_format.106': 'Jun',
+    'messages_date_format.107': 'Jul',
+    'messages_date_format.108': 'Ago',
+    'messages_date_format.109': 'Set',
+    'messages_date_format.110': 'Out',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Dez',
+    'messages_date_format.Today': 'Hoje',
+    'messages_date_format.Yesterday': 'Ontem',
     'messages_item_page.57': 'An\xF4nimo',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'Voc\xEA est\xE1 em <<LOCATION>>',
     'business_directory.Map': 'Mapa',
-    'optionals.opt-215-generaltopics-workenvironment': 'Ambiente Laboral'
+    'optionals.opt-215-generaltopics-workenvironment': 'Ambiente Laboral',
+    'crm_new_version.RenameCategory_3': 'em'
 };

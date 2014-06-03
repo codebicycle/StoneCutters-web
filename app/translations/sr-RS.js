@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Niste \u010Dlan?',
     'loginbox.Password': 'Lozinka',
     'loginbox.Username': 'Korisni\u010Dko ime ili e-adresa',
+    'messages_date_format.101': 'Jan.',
+    'messages_date_format.102': 'Feb.',
+    'messages_date_format.103': 'Mar.',
+    'messages_date_format.104': 'Apr.',
+    'messages_date_format.105': 'Maj',
+    'messages_date_format.106': 'Jun',
+    'messages_date_format.107': 'Jul',
+    'messages_date_format.108': 'Avg.',
+    'messages_date_format.109': 'Sept.',
+    'messages_date_format.110': 'Okt.',
+    'messages_date_format.111': 'Nov.',
+    'messages_date_format.112': 'Dec.',
+    'messages_date_format.Today': 'Danas',
+    'messages_date_format.Yesterday': 'Ju\u010De',
     'messages_item_page.57': 'Anonimno',
     'messages_site_class.30': 'U redu',
     'messages_user_management_current_ads.EditMyListing': 'Ure\u0111ivanje oglasa',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Polja specifi\u010Dna za kategoriju (opcionalno)',
     'misc.YouAreIn_Mob': 'Nalazite se u <<LOCATION>>',
     'business_directory.Map': 'Mapa',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'u'
 };

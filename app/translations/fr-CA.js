@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Toujours pas membre?',
     'loginbox.Password': 'Mot de passe',
     'loginbox.Username': 'Nom d\'Utilisateur ou Email',
+    'messages_date_format.101': 'Janv',
+    'messages_date_format.102': 'F\xE9vr',
+    'messages_date_format.103': 'Mars',
+    'messages_date_format.104': 'Avr',
+    'messages_date_format.105': 'Mai',
+    'messages_date_format.106': 'Juin',
+    'messages_date_format.107': 'Juil',
+    'messages_date_format.108': 'Ao\xFBt',
+    'messages_date_format.109': 'Sept',
+    'messages_date_format.110': 'Oct',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'D\xE9c',
+    'messages_date_format.Today': 'Aujourd\'hui',
+    'messages_date_format.Yesterday': 'Hier',
     'messages_item_page.57': 'Anonyme',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Modifier Mon Annonce',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',
     'business_directory.Map': 'Carte',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'in'
 };

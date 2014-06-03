@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'B\u1EA1n kh\xF4ng ph\u1EA3i l\xE0 th\xE0nh vi\xEAn?',
     'loginbox.Password': 'M\u1EADt kh\u1EA9u',
     'loginbox.Username': 'T\xEAn \u0111\u0103ng nh\u1EADp ho\u1EB7c email',
+    'messages_date_format.101': 'Th\xE1ng Gi\xEAng',
+    'messages_date_format.102': 'Th\xE1ng Hai',
+    'messages_date_format.103': 'Th\xE1ng Ba',
+    'messages_date_format.104': 'Th\xE1ng T\u01B0',
+    'messages_date_format.105': 'Th\xE1ng N\u0103m',
+    'messages_date_format.106': 'Th\xE1ng S\xE1u',
+    'messages_date_format.107': 'Th\xE1ng B\u1EA3y',
+    'messages_date_format.108': 'Th\xE1ng T\xE1m',
+    'messages_date_format.109': 'th\xE1ng Ch\xEDn',
+    'messages_date_format.110': 'Th\xE1ng M\u01B0\u1EDDi ',
+    'messages_date_format.111': 'Th\xE1ng M\u01B0\u1EDDi M\u1ED9t',
+    'messages_date_format.112': 'Th\xE1ng M\u01B0\u1EDDi Hai',
+    'messages_date_format.Today': 'H\xF4m nay',
+    'messages_date_format.Yesterday': 'H\xF4m qua',
     'messages_item_page.57': '\u1EA8n danh',
     'messages_site_class.30': '\u0110\u1ED3ng \xFD',
     'messages_user_management_current_ads.EditMyListing': 'Ch\u1EC9nh s\u1EEDa rao v\u1EB7t',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'C\xE1c tr\u01B0\u1EDDng c\u1EE5 th\u1EC3 c\u1EE7a Nh\xF3m h\xE0ng (c\xE1c t\xF9y ch\u1ECDn)',
     'misc.YouAreIn_Mob': 'B\u1EA1n \u0111ang \u1EDF <<LOCATION>>',
     'business_directory.Map': 'B\u1EA3n \u0111\u1ED3',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u1EDF trong'
 };

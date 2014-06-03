@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u0D2E\u0D46\u0D02\u0D2C\u0D31\u0D32\u0D4D\u0D32\u0D47?',
     'loginbox.Password': '\u0D2A\u0D3E\u0D38\u0D4D\u0D38\u0D4D\u200C\u0D35\u0D47\u0D21\u0D4D',
     'loginbox.Username': '\u0D09\u0D2A\u0D2F\u0D4B\u0D17\u0D3F\u0D15\u0D4D\u0D15\u0D41\u0D28\u0D4D\u0D28\u0D2F\u0D3E\u0D33\u0D41\u0D1F\u0D46 \u0D2A\u0D47\u0D30\u0D4D \u0D05\u0D32\u0D4D\u0D32\u0D46\u0D19\u0D4D\u0D15\u0D3F\u0D32\u0D4D\u200D \u0D07-\u0D2E\u0D46\u0D2F\u0D3F\u0D32\u0D4D\u200D',
+    'messages_date_format.101': '\u0D1C\u0D28\u0D41\u0D35\u0D30\u0D3F',
+    'messages_date_format.102': '\u0D2B\u0D46\u0D2C\u0D4D\u0D30\u0D41\u0D35\u0D30\u0D3F',
+    'messages_date_format.103': '\u0D2E\u0D3E\u0D30\u0D4D\u200D\u0D1A\u0D4D\u0D1A\u0D4D',
+    'messages_date_format.104': '\u0D0F\u0D2A\u0D4D\u0D30\u0D3F\u0D32\u0D4D\u200D',
+    'messages_date_format.105': '\u0D2E\u0D46\u0D2F\u0D4D',
+    'messages_date_format.106': '\u0D1C\u0D42\u0D23\u0D4D\u200D',
+    'messages_date_format.107': '\u0D1C\u0D42\u0D32\u0D2F\u0D4D',
+    'messages_date_format.108': '\u0D06\u0D17\u0D38\u0D4D\u0D24\u0D4D',
+    'messages_date_format.109': '\u0D38\u0D2A\u0D4D\u0D24\u0D02\u0D2C\u0D30\u0D4D\u200D',
+    'messages_date_format.110': '\u0D12\u0D15\u0D4D\u0D1F\u0D4B\u0D2C\u0D30\u0D4D\u200D',
+    'messages_date_format.111': '\u0D28\u0D35\u0D02\u0D2C\u0D30\u0D4D\u200D',
+    'messages_date_format.112': '\u0D21\u0D3F\u0D38\u0D02\u0D2C\u0D30\u0D4D\u200D',
+    'messages_date_format.Today': '\u0D07\u0D28\u0D4D\u0D28\u0D4D',
+    'messages_date_format.Yesterday': '\u0D07\u0D28\u0D4D\u0D28\u0D32\u0D46',
     'messages_item_page.57': '\u0D05\u0D1C\u0D4D\u0D1E\u0D3E\u0D24\u0D28\u0D4D\u200D',
     'messages_site_class.30': '\u0D12 \u0D15\u0D46',
     'messages_user_management_current_ads.EditMyListing': '\u0D0E\u0D28\u0D4D\u0D31\u0D46 \u0D2A\u0D1F\u0D4D\u0D1F\u0D3F\u0D15 \u0D0E\u0D21\u0D3F\u0D31\u0D4D\u0D31\u0D4D \u0D1A\u0D46\u0D2F\u0D4D\u0D2F\u0D41\u0D15',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u0D15\u0D3E\u0D31\u0D4D\u0D31\u0D17\u0D31\u0D3F \u0D05\u0D27\u0D3F\u0D37\u0D4D\u0D20\u0D3F\u0D24 \u0D2B\u0D40\u0D32\u0D4D\u200D\u0D21\u0D41\u0D15\u0D33\u0D4D\u200D (\u0D13\u0D2A\u0D4D\u0D37\u0D28\u0D32\u0D41\u0D15\u0D33\u0D4D\u200D)',
     'misc.YouAreIn_Mob': '\u0D28\u0D3F\u0D19\u0D4D\u0D19\u0D33\u0D4D<<LOCATION>>\u0D32\u0D3E\u0D23\u0D4D',
     'business_directory.Map': '\u0D2D\u0D42\u0D2A\u0D1F\u0D02',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u0D07\u0D35\u0D3F\u0D1F\u0D46 \u0D15\u0D3E\u0D23\u0D3E\u0D02'
 };

@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Si mwanachama?',
     'loginbox.Password': 'Nenosiri',
     'loginbox.Username': 'Jina la mtumiaji au Barua pepe',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Februari',
+    'messages_date_format.103': 'Machi',
+    'messages_date_format.104': 'Aprili',
+    'messages_date_format.105': 'Mei',
+    'messages_date_format.106': 'Jun',
+    'messages_date_format.107': 'Jul',
+    'messages_date_format.108': 'Agosti',
+    'messages_date_format.109': 'Sep',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Disemba',
+    'messages_date_format.Today': 'Leo',
+    'messages_date_format.Yesterday': 'Jana',
     'messages_item_page.57': 'Isiokuwa na jina',
     'messages_site_class.30': 'Sawa',
     'messages_user_management_current_ads.EditMyListing': 'Hariri Tangazo Langu',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Uga ya Kundi Maalum (Hiari)',
     'misc.YouAreIn_Mob': 'Uko katika <<LOCATION>>',
     'business_directory.Map': 'Ramani',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'katika'
 };

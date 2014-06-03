@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u8FD8\u4E0D\u662F\u4F1A\u5458\uFF1F',
     'loginbox.Password': '\u5BC6\u7801',
     'loginbox.Username': '\u7528\u6237\u540D\u6216\u4FE1\u7BB1',
+    'messages_date_format.101': '\u4E00\u6708',
+    'messages_date_format.102': '\u4E8C\u6708',
+    'messages_date_format.103': '\u4E09\u6708',
+    'messages_date_format.104': '\u56DB\u6708',
+    'messages_date_format.105': '\u4E94\u6708',
+    'messages_date_format.106': '\u516D\u6708',
+    'messages_date_format.107': '\u4E03\u6708',
+    'messages_date_format.108': '\u516B\u6708',
+    'messages_date_format.109': '\u4E5D\u6708',
+    'messages_date_format.110': '\u5341\u6708',
+    'messages_date_format.111': '\u5341\u4E00\u6708',
+    'messages_date_format.112': '\u5341\u4E8C\u6708',
+    'messages_date_format.Today': '\u4ECA\u5929',
+    'messages_date_format.Yesterday': '\u6628\u5929',
     'messages_item_page.57': '\u533F\u540D',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': '\u7F16\u8F91\u6211\u7684\u5E7F\u544A',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u7C7B\u522B\u7279\u6709\u5B57\u6BB5 (\u53EF\u9009)',
     'misc.YouAreIn_Mob': '\u60A8\u4F4D\u4E8E<<LOCATION>>',
     'business_directory.Map': '\u5730\u56FE',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u5728'
 };

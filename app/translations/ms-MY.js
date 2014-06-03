@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Bukan ahli?',
     'loginbox.Password': 'Kata laluan',
     'loginbox.Username': 'Nama penguna atau Emel',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'Mac',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'Mei',
+    'messages_date_format.106': 'Jun',
+    'messages_date_format.107': 'Jul',
+    'messages_date_format.108': 'Ogo',
+    'messages_date_format.109': 'Sep',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Dis',
+    'messages_date_format.Today': 'Hari ini',
+    'messages_date_format.Yesterday': 'Semalam',
     'messages_item_page.57': 'Tanpa nama',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Medan Spesifik Kategori (Opsyenal)',
     'misc.YouAreIn_Mob': 'Anda berada di <<LOCATION>>',
     'business_directory.Map': 'Peta',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'dalam'
 };

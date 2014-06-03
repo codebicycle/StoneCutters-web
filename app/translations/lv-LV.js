@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Neesat biedrs?',
     'loginbox.Password': 'Parole',
     'loginbox.Username': 'Lietot\u0101jv\u0101rds vai e-pasts',
+    'messages_date_format.101': 'Janv.',
+    'messages_date_format.102': 'Febr.',
+    'messages_date_format.103': 'Marts',
+    'messages_date_format.104': 'Apr.',
+    'messages_date_format.105': 'Maijs',
+    'messages_date_format.106': 'J\u016Bn.',
+    'messages_date_format.107': 'J\u016Bl.',
+    'messages_date_format.108': 'Aug.',
+    'messages_date_format.109': 'Sept.',
+    'messages_date_format.110': 'Okt.',
+    'messages_date_format.111': 'Nov.',
+    'messages_date_format.112': 'Dec.',
+    'messages_date_format.Today': '\u0160odien',
+    'messages_date_format.Yesterday': 'Vakar',
     'messages_item_page.57': 'Viesis',
     'messages_site_class.30': 'Labi',
     'messages_user_management_current_ads.EditMyListing': 'Redi\u0123\u0113t manu sludin\u0101jumu',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',
     'business_directory.Map': 'Karte',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u0161eit'
 };

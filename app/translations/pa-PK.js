@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u0A2E\u0A48\u0A02\u0A2C\u0A30 \u0A28\u0A39\u0A40\u0A02 \u0A39\u0A4B?',
     'loginbox.Password': '\u0A2A\u0A3E\u0A38\u0A35\u0A30\u0A21',
     'loginbox.Username': '\u0A09\u0A2A\u0A2F\u0A4B\u0A17\u0A15\u0A30\u0A24\u0A3E \u0A28\u0A3E\u0A2E \u0A1C\u0A3E\u0A02 \u0A08\u0A2E\u0A47\u0A32',
+    'messages_date_format.101': '\u0A1C\u0A28',
+    'messages_date_format.102': '\u0A2B\u0A30',
+    'messages_date_format.103': '\u0A2E\u0A3E\u0A30',
+    'messages_date_format.104': '\u0A05\u0A2A\u0A4D\u0A30\u0A48',
+    'messages_date_format.105': '\u0A2E\u0A08',
+    'messages_date_format.106': '\u0A1C\u0A42\u0A28',
+    'messages_date_format.107': '\u0A1C\u0A41\u0A32\u0A3E',
+    'messages_date_format.108': '\u0A05\u0A17',
+    'messages_date_format.109': '\u0A38\u0A3F\u0A24\u0A70',
+    'messages_date_format.110': '\u0A05\u0A15',
+    'messages_date_format.111': '\u0A28\u0A35\u0A70',
+    'messages_date_format.112': '\u0A26\u0A3F\u0A38\u0A70',
+    'messages_date_format.Today': '\u0A05\u0A71\u0A1C',
+    'messages_date_format.Yesterday': '\u0A15\u0A71\u0A32\u0A4D\u0A39',
     'messages_item_page.57': '\u0A17\u0A41\u0A2E\u0A28\u0A3E\u0A2E',
     'messages_site_class.30': '\u0A20\u0A40\u0A15',
     'messages_user_management_current_ads.EditMyListing': '\u0A2E\u0A47\u0A30\u0A47 \u0A07\u0A36\u0A24\u0A3F\u0A39\u0A3E\u0A30 \u0A28\u0A42\u0A70 \u0A38\u0A70\u0A2A\u0A3E\u0A26\u0A3F\u0A24 \u0A15\u0A30\u0A4B',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u0A36\u0A4D\u0A30\u0A47\u0A23\u0A40 \u0A38\u0A2C\u0A70\u0A27\u0A24 \u0A16\u0A47\u0A24\u0A30 (\u0A35\u0A3F\u0A15\u0A32\u0A2A\u0A15)',
     'misc.YouAreIn_Mob': '\u0A24\u0A41\u0A38\u0A40\u0A02 <<LOCATION>> \u0A35\u0A3F\u0A71\u0A1A \u0A39\u0A4B',
     'business_directory.Map': '\u0A28\u0A15\u0A36\u0A3E',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u0A35\u0A3F\u0A71\u0A1A'
 };
