@@ -28,7 +28,7 @@ module.exports = {
         }
     },
     search_with_filters: {
-        url: 'search/:search/-p-:page/:filters?',
+        url: 'search/:search/-p-:page/:filters?/?$',
         view: 'items#search',
         isServer: false,
         google: '[category-name]/[subcategory-id]/search/[filter_name_value]',
@@ -43,7 +43,7 @@ module.exports = {
         }
     },
     search: {
-        url: 'search/:search?',
+        url: 'search/:search?/?$',
         view: 'items#search',
         isServer: false,
         google: '[category-name]/[subcategory-id]/search',
@@ -58,7 +58,7 @@ module.exports = {
         }
     },
     nfsearch_with_filters: {
-        url: 'nf/search/:search/-p-:page/:filters?',
+        url: 'nf/search/:search/-p-:page/:filters?/?$',
         view: 'items#search',
         isServer: false,
         google: '[category-name]/[subcategory-id]/search/[filter_name_value]',
@@ -73,7 +73,7 @@ module.exports = {
         }
     },
     nfsearch: {
-        url: 'nf/search/:search?',
+        url: 'nf/search/:search?/?$',
         view: 'items#search',
         isServer: false,
         google: '[category-name]/[subcategory-id]/search',
@@ -88,7 +88,7 @@ module.exports = {
         }
     },
     register: {
-        url: 'register',
+        url: 'register/?$',
         view: 'user#registration',
         isServer: false,
         google: 'register',
@@ -101,7 +101,7 @@ module.exports = {
         }
     },
     login: {
-        url: 'login',
+        url: 'login/?$',
         view: 'user#login',
         isServer: false,
         google: 'login',
@@ -114,12 +114,12 @@ module.exports = {
         }
     },
     logout: {
-        url: 'logout',
+        url: 'logout/?$',
         view: 'user#logout',
         isServer: false
     },
     myolx: {
-        url: 'myolx',
+        url: 'myolx/?$',
         view: 'user#myolx',
         isServer: false,
         google: 'myolx',
@@ -132,7 +132,7 @@ module.exports = {
         }
     },
     myadslisting: {
-        url: 'myolx/myadslisting',
+        url: 'myolx/myadslisting/?$',
         view: 'user#my-ads',
         isServer: false,
         google: 'myadslisting',
@@ -145,7 +145,7 @@ module.exports = {
         }
     },
     favoritelisting: {
-        url: 'myolx/favoritelisting',
+        url: 'myolx/favoritelisting/?$',
         view: 'user#favorites',
         isServer: false,
         google: 'favoritelisting',
@@ -158,7 +158,7 @@ module.exports = {
         }
     },
     location: {
-        url: 'location',
+        url: 'location/?$',
         view: 'location#index',
         isServer: false,
         google: 'post_location/[rendering]',
@@ -172,7 +172,7 @@ module.exports = {
         }
     },
     posting_success: {
-        url: 'posting/success/:itemId',
+        url: 'posting/success/:itemId/?$',
         view: 'post#success',
         isServer: false,
         google: '[category-name]/[subcategory-id]/post_success/[rendering]',
@@ -195,7 +195,7 @@ module.exports = {
         }
     },
     posting_cat_subcat: {
-        url: 'posting/:categoryId/:subcategoryId',
+        url: 'posting/:categoryId/:subcategoryId/?$',
         view: 'post#form',
         isServer: false,
         google: '[category-name]/[subcategory-id]/post_form/[rendering]',
@@ -213,7 +213,7 @@ module.exports = {
         }
     },
     posting_cat: {
-        url: 'posting/:categoryId',
+        url: 'posting/:categoryId/?$',
         view: 'post#subcat',
         isServer: false,
         google: 'post_subcategorylist/[rendering]',
@@ -227,7 +227,7 @@ module.exports = {
         }
     },
     posting: {
-        url :'posting',
+        url :'posting/?$',
         view: 'post#index',
         isServer: false,
         google: 'post_categorylist/[rendering]',
@@ -241,7 +241,7 @@ module.exports = {
         }
     },
     posting_edit: {
-        url: 'myolx/edititem/:itemId?',
+        url: 'myolx/edititem/:itemId?/?$',
         view: 'post#edit',
         isServer: false,
         google: 'edititem',
@@ -288,7 +288,7 @@ module.exports = {
     },
     */
     terms: {
-        url: 'terms',
+        url: 'terms/?$',
         view: 'pages#terms',
         isServer: false,
         google: 'terms',
@@ -301,7 +301,7 @@ module.exports = {
         }
     },
     help: {
-        url: 'help',
+        url: 'help/?$',
         view: 'pages#help',
         isServer: false,
         google: 'help',
@@ -314,7 +314,7 @@ module.exports = {
         }
     },
     interstitial: {
-        url: 'interstitial',
+        url: 'interstitial/?$',
         view: 'pages#interstitial',
         isServer: false,
         google: 'interstitial',
@@ -327,7 +327,7 @@ module.exports = {
         }
     },
     item_reply_success: {
-        url: 'iid-:itemId([0-9]+)/reply/success',
+        url: 'iid-:itemId([0-9]+)/reply/success/?$',
         view: 'items#success',
         isServer: false,
         google: '[category-name]/[subcategory-id]/reply_success/[item_attributes]',
@@ -348,7 +348,7 @@ module.exports = {
         }
     },
     item_reply: {
-        url: 'iid-:itemId([0-9]+)/reply',
+        url: 'iid-:itemId([0-9]+)/reply/?$',
         view: 'items#reply',
         isServer: false,
         google: '[category-name]/[subcategory-id]/reply/[item_attributes]',
@@ -369,7 +369,7 @@ module.exports = {
         }
     },
     item: {
-        url: ':title-iid-:itemId([0-9]+$)',
+        url: ':title-iid-:itemId([0-9]+)/?$',
         view: 'items#show',
         isServer: false,
         google: '[category-name]/[subcategory-id]/item/[item_attributes]',
@@ -393,7 +393,7 @@ module.exports = {
         }
     },
     item_galery: {
-        url: ':title-iid-:itemId([0-9]+)/galery',
+        url: ':title-iid-:itemId([0-9]+)/galery/?$',
         view: 'items#galery',
         isServer: false,
         google: '[category-name]/[subcategory-id]/item/[item_attributes]/galery',
@@ -417,7 +417,7 @@ module.exports = {
         }
     },
     category_with_filters: {
-        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?',
+        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?/?$',
         view: 'items#index',
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing/[filter_name_value]',
@@ -431,7 +431,7 @@ module.exports = {
         }
     },
     category_with_page: {
-        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+$)',
+        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/?$',
         view: 'items#index',
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing',
@@ -445,7 +445,7 @@ module.exports = {
         }
     },
     category: {
-        url: ':title-cat-:catId([0-9]+$)',
+        url: ':title-cat-:catId([0-9]+)/?$',
         view: 'categories#show',
         isServer: false,
         google: '[category-name]/subcategory_list',
@@ -459,7 +459,7 @@ module.exports = {
         }
     },
     error: {
-        url: ':errorCode([0-9]{3})',
+        url: ':errorCode([0-9]{3})/?$',
         view: 'pages#error',
         isServer: false,
         google: 'error',

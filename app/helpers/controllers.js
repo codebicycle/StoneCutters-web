@@ -1,6 +1,22 @@
 'use strict';
 
 var _ = require('underscore');
+var common = require('./common');
+
+function redirect() {
+    if (typeof window === 'undefined') {
+        return false;
+    }
+    var path = this.app.getSession('path');
+
+    if (path.length <= 1 || path.slice(-1) !== '/') {
+        return false;
+    }
+    this.redirectTo(common.link(path.slice(0, -1), this.app.getSession('siteLocation')), {
+        status: 301
+    });
+    return true;
+}
 
 function setUrlVars() {
     if (typeof window === 'undefined') {
@@ -139,12 +155,14 @@ function processForm(params) {
 
 module.exports = {
     control: function(params, callback) {
-        setCurrentRoute.call(this);
-        setUrlVars.call(this);
-        setCurrentPage.call(this);
-        setLanguage.call(this);
-        setLocation.call(this, params, function next() {
-            callback.call(this, processForm.call(this, params));
-        }.bind(this));
+        if (!redirect.call(this)) {
+            setCurrentRoute.call(this);
+            setUrlVars.call(this);
+            setCurrentPage.call(this);
+            setLanguage.call(this);
+            setLocation.call(this, params, function next() {
+                callback.call(this, processForm.call(this, params));
+            }.bind(this));
+        }
     }
 };
