@@ -9,20 +9,23 @@
             <label>{{ dictionary["contactseller_form.55"] }} {{ item.contactName if item.contactName else "anonymous" }}</label>
         </div>
         <div class="formField">
-            <label>{{ dictionary["contactseller_form.57"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</label>
-            <input type="text" name="email" value="{{ user.email if user.email }}" >
+            <label>* {{ dictionary["replymessage.Message"] }}</label>
+            <textarea name="message"></textarea>
         </div>
         <div class="formField">
-            <label>{{ dictionary["contactseller_form.1366"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</label>
+            <label>* {{ dictionary["replymessage.Name"] }}</label>
             <input type="text" name="name" value="{{ user.username if user.username }}">
         </div>
         <div class="formField">
-            <label>{{ dictionary["contactseller_form.1512"] }} ({{ dictionary["contactseller_form.6"] }})</label>
+            <label>* {{ dictionary["replymessage.Email"] }}</label>
+            <input type="text" name="email" value="{{ user.email if user.email }}" >
+        </div>
+        <div class="formField">
+            <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
             <input type="text" name="phone" value="">
         </div>
         <div class="formField">
-            <label>{{ dictionary["contactseller_form.58"] }} :</label>
-            <textarea name="message"></textarea>
+            <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
         </div>
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
