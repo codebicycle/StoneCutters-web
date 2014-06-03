@@ -94,33 +94,6 @@ describe('server', function test() {
                     }
                 });
             });
-
-            describe('logout', function test() {
-                it('should not exists the user in the session', function test(done) {
-                    request(app)
-                        .get('/logout')
-                        .set('host', hosts[1])
-                        .set('user-agent', userAgents[0])
-                        .set('cookie', response.get('set-cookie'))
-                        .end(next);
-
-                    function next(err, response) {
-                        request(app)
-                            .get('/')
-                            .set('host', hosts[1])
-                            .set('user-agent', userAgents[0])
-                            .set('cookie', response.get('set-cookie'))
-                            .end(end);
-                    }
-
-                    function end(err, response) {
-                        (function existance(after, ok) {
-                            ok = after.user.should.be.falsey;
-                        })(sessions.after);
-                        done();
-                    }
-                });
-            });
         });
     });
 });

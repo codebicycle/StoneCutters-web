@@ -110,6 +110,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function submit(done, data) {
+                if (!data.redirect) {
+                    data.redirect = '/';
+                }
                 loginHandler(req, res, data);
             }
 
