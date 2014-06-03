@@ -1,7 +1,6 @@
-<div class="breadcrumb">
-	<a href="{{ '/' | link }}">Back</a>
-	<h1>{{ dictionary["terms.TermsOfUse"] }}</h1>
-</div>
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["terms.TermsOfUse"]) }}
 <div id="terms">
 	<p><strong>Please carefully read these terms of use. By using this website you indicate your understanding and acceptance of these terms. If you do not agree to these terms you may not use this website.</strong></p>
 	<h4>Acceptance</h4>
@@ -127,6 +126,4 @@
 	<p><u>L.How to Contact Us</u></p>
 	<p>If you have questions about this Privacy Policy, please contact OLX <a href="http://www.olx.de/contacts.php?fv[contact]=ContactLegalIssues">via the Legal Issues report form</a> with “Privacy Policy” in the subject line.
 </div>
-<div class="breadcrumb">
-	<a href="/">Back</a>
-</div>
+{{ BreadcrumbHome(dictionary, link) }}

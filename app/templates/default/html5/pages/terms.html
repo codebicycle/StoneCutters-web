@@ -1,7 +1,6 @@
-<div id="title">
-	<a href="{{ '/' | link }}"></a>
-	<h1>{{ dictionary["terms.TermsOfUse"] }}</h1>
-</div>
+{% from macros import Breadcrumb %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["terms.TermsOfUse"]) }}
 <div id="terms">
 	<p><strong>Please carefully read these terms of use. By using this website you indicate your understanding and acceptance of these terms. If you do not agree to these terms you may not use this website.</strong></p>
 	<h4>Acceptance</h4>
