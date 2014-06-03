@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Hindi ka pa miyembro?',
     'loginbox.Password': 'Password',
     'loginbox.Username': 'Username o Email',
+    'messages_date_format.101': 'Ene',
+    'messages_date_format.102': 'Peb',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Abr',
+    'messages_date_format.105': 'Mayo',
+    'messages_date_format.106': 'Hun',
+    'messages_date_format.107': 'Hul',
+    'messages_date_format.108': 'Agos',
+    'messages_date_format.109': 'Set',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nob',
+    'messages_date_format.112': 'Dis',
+    'messages_date_format.Today': 'Ngayon',
+    'messages_date_format.Yesterday': 'Kahapon',
     'messages_item_page.57': 'Di Kilala',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'I-edit ang aking Patalastas',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Mga Partikular na Field ng Kategorya (Mga Opsyonal)',
     'misc.YouAreIn_Mob': 'Kayo ay nasa <<LOCATION>>',
     'business_directory.Map': 'Mapa',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'sa'
 };

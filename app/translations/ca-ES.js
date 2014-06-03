@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'No sou membre?',
     'loginbox.Password': 'Contrasenya',
     'loginbox.Username': 'Nom d\'usuari o correu electr\xF2nic',
+    'messages_date_format.101': 'Gen',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Abr',
+    'messages_date_format.105': 'Maig',
+    'messages_date_format.106': 'Jun',
+    'messages_date_format.107': 'Jul',
+    'messages_date_format.108': 'Ago',
+    'messages_date_format.109': 'Set',
+    'messages_date_format.110': 'Oct',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Des',
+    'messages_date_format.Today': 'Avui',
+    'messages_date_format.Yesterday': 'Ahir',
     'messages_item_page.57': 'An\xF2nim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar el meu anunci',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Camps espec\xEDfics de categoria (opcionals)',
     'misc.YouAreIn_Mob': 'Ets a  <<LOCATION>>',
     'business_directory.Map': 'Mapa',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'a'
 };

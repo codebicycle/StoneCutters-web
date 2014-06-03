@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Ou poko manm?',
     'loginbox.Password': 'Kod Sekr\xE8',
     'loginbox.Username': 'Non Manm nan ou Im\xE8l ou',
+    'messages_date_format.101': 'Janv',
+    'messages_date_format.102': 'Fevr',
+    'messages_date_format.103': 'Mas',
+    'messages_date_format.104': 'Avr',
+    'messages_date_format.105': 'Me',
+    'messages_date_format.106': 'Jyen',
+    'messages_date_format.107': 'Jiy\xE8',
+    'messages_date_format.108': 'Out',
+    'messages_date_format.109': 'S\xE8pt',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Des',
+    'messages_date_format.Today': 'Jodiya',
+    'messages_date_format.Yesterday': 'Y\xE8',
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Chanje Anons Mwen ',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Chan Espesifik Kategori (Opsyon\xE8l)',
     'misc.YouAreIn_Mob': 'Ou nan<<LOCATION>>',
     'business_directory.Map': 'Kat Jewografik',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'nan'
 };

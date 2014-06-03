@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u06A9\u06CC\u0627 \u0622\u067E \u0645\u0645\u0628\u0631\u0646\u06C1\u06CC\u06BA \u06C1\u06CC\u06BA\u061F',
     'loginbox.Password': '\u067E\u0627\u0633 \u0648\u0631\u0688',
     'loginbox.Username': '\u0635\u0627\u0631\u0641 \u0646\u0627\u0645 \u06CC\u0627 \u0627\u06CC \u0645\u06CC\u0644',
+    'messages_date_format.101': '\u062C\u0646\u0648\u0631\u06CC',
+    'messages_date_format.102': '\u0641\u0631\u0648\u0631\u06CC',
+    'messages_date_format.103': '\u0645\u0627\u0631\u0686',
+    'messages_date_format.104': '\u0627\u067E\u0631\u06CC\u0644 ',
+    'messages_date_format.105': '\u0645\u0626\u06CC ',
+    'messages_date_format.106': '\u062C\u0648\u0646',
+    'messages_date_format.107': '\u062C\u0648\u0644\u0627\u0626\u06CC',
+    'messages_date_format.108': '\u0627\u06AF\u0633\u062A',
+    'messages_date_format.109': '\u0633\u062A\u0645\u0628\u0631',
+    'messages_date_format.110': '\u0627\u06A9\u062A\u0648\u0628\u0631',
+    'messages_date_format.111': '\u0646\u0648\u0645\u0628\u0631',
+    'messages_date_format.112': '\u062F\u0633\u0645\u0628\u0631 ',
+    'messages_date_format.Today': '\u0622\u062C',
+    'messages_date_format.Yesterday': '\u06AF\u0630\u0634\u062A\u06C1 \u062F\u0646',
     'messages_item_page.57': '\u06AF\u0645\u0646\u0627\u0645',
     'messages_site_class.30': '\u0679\u06BE\u06CC\u06A9 \u06C1\u06D2',
     'messages_user_management_current_ads.EditMyListing': '\u0627\u067E\u0646\u06CC \u0644\u0633\u0679\u0646\u06AF \u0645\u06CC\u06BA \u0631\u062F\u0648\u0628\u062F\u0644:',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u06A9\u06CC\u0679\u06AF\u0631\u06CC \u0645\u0631\u06A9\u0632\u06CC \u062E\u0627\u0646\u06D2 (\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC)',
     'misc.YouAreIn_Mob': '\u0622\u067E <<LOCATION>> \u0645\u06CC\u06BA \u06C1\u06CC\u06BA',
     'business_directory.Map': '\u0646\u0642\u0634\u06C1',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u0645\u06CC\u06BA'
 };

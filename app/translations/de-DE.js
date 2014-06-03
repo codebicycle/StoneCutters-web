@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Noch nicht registriert?',
     'loginbox.Password': 'Passwort',
     'loginbox.Username': 'Benutzername oder E-Mail',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'M\xE4r',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'Mai',
+    'messages_date_format.106': 'Jun',
+    'messages_date_format.107': 'Jul',
+    'messages_date_format.108': 'Aug',
+    'messages_date_format.109': 'Sep',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Dez',
+    'messages_date_format.Today': 'Heute',
+    'messages_date_format.Yesterday': 'Gestern',
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Meine Kleinanzeige bearbeiten',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Kategoriespezifische Felder (Kann-Eingaben)',
     'misc.YouAreIn_Mob': 'Sie sind in <<LOCATION>>',
     'business_directory.Map': 'Karte',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'in'
 };

@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Not a member?',
     'loginbox.Password': 'Password',
     'loginbox.Username': 'Username or Email',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'May',
+    'messages_date_format.106': 'Jun',
+    'messages_date_format.107': 'Jul',
+    'messages_date_format.108': 'Aug',
+    'messages_date_format.109': 'Sep',
+    'messages_date_format.110': 'Oct',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Dec',
+    'messages_date_format.Today': 'Today',
+    'messages_date_format.Yesterday': 'Yesterday',
     'messages_item_page.57': 'Anonymous',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit My Ad',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',
     'business_directory.Map': 'Map',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'in'
 };

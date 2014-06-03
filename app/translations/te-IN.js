@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u0C2E\u0C46\u0C02\u0C2C\u0C30\u0C41 \u0C15\u0C3E\u0C26\u0C3E?',
     'loginbox.Password': '\u0C2A\u0C3E\u0C38\u0C4D\u200C\u0C35\u0C30\u0C4D\u0C21\u0C4D',
     'loginbox.Username': '\u0C2F\u0C42\u0C1C\u0C30\u0C4D \u0C2A\u0C47\u0C30\u0C41 \u0C32\u0C47\u0C26\u0C3E \u0C07\u0C2E\u0C46\u0C2F\u0C3F\u0C32\u0C4D',
+    'messages_date_format.101': '\u0C1C\u0C28',
+    'messages_date_format.102': '\u0C2B\u0C3F\u0C2C\u0C4D\u0C30',
+    'messages_date_format.103': '\u0C2E\u0C3E\u0C30\u0C4D\u0C1A\u0C3F',
+    'messages_date_format.104': '\u0C0F\u0C2A\u0C4D\u0C30\u0C3F',
+    'messages_date_format.105': '\u0C2E\u0C47',
+    'messages_date_format.106': '\u0C1C\u0C42\u0C28\u0C4D',
+    'messages_date_format.107': '\u0C1C\u0C42\u0C32\u0C48',
+    'messages_date_format.108': '\u0C06\u0C17',
+    'messages_date_format.109': '\u0C38\u0C46\u0C2A\u0C4D\u0C1F\u0C46',
+    'messages_date_format.110': '\u0C05\u0C15\u0C4D\u0C1F\u0C4B',
+    'messages_date_format.111': '\u0C28\u0C35',
+    'messages_date_format.112': '\u0C21\u0C3F\u0C38\u0C46',
+    'messages_date_format.Today': '\u0C08\u0C30\u0C4B\u0C1C\u0C41 ',
+    'messages_date_format.Yesterday': '\u0C28\u0C3F\u0C28\u0C4D\u0C28',
     'messages_item_page.57': '\u0C2A\u0C47\u0C30\u0C41 \u0C32\u0C47\u0C28\u0C3F',
     'messages_site_class.30': '\u0C13\u0C15\u0C47',
     'messages_user_management_current_ads.EditMyListing': '\u0C28\u0C3E \u0C32\u0C3F\u0C38\u0C4D\u0C1F\u0C3F\u0C02\u0C17\u0C4D\u200C\u0C28\u0C41 \u0C0E\u0C21\u0C3F\u0C1F\u0C4D \u0C1A\u0C46\u0C2F\u0C4D\u0C2F\u0C3F',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u0C35\u0C3F\u0C2D\u0C3E\u0C17\u0C3E\u0C28\u0C3F\u0C15\u0C3F \u0C28\u0C3F\u0C30\u0C4D\u0C26\u0C3F\u0C37\u0C4D\u0C1F\u0C2E\u0C48\u0C28 \u0C2D\u0C3E\u0C17\u0C3E\u0C32\u0C41 (\u0C10\u0C1A\u0C4D\u0C1B\u0C3F\u0C15\u0C3E\u0C32\u0C41)',
     'misc.YouAreIn_Mob': '<<LOCATION>> \u0C32\u0C4B \u0C2E\u0C40\u0C30\u0C41 \u0C09\u0C28\u0C4D\u0C28\u0C3E\u0C30\u0C41',
     'business_directory.Map': '\u0C2A\u0C1F\u0C02',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u0C32\u0C4B'
 };

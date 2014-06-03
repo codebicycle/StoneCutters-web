@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u0394\u03B5\u03BD \u03B5\u03AF\u03C3\u03C4\u03B5 \u03BC\u03AD\u03BB\u03BF\u03C2;',
     'loginbox.Password': '\u039A\u03C9\u03B4\u03B9\u03BA\u03CC\u03C2 \u03C0\u03C1\u03CC\u03C3\u03B2\u03B1\u03C3\u03B7\u03C2',
     'loginbox.Username': '\u038C\u03BD\u03BF\u03BC\u03B1 \u03C7\u03C1\u03AE\u03C3\u03C4\u03B7 \u03AE \u03B7\u03BB\u03B5\u03BA\u03C4\u03C1\u03BF\u03BD\u03B9\u03BA\u03AE \u03B4\u03B9\u03B5\u03CD\u03B8\u03C5\u03BD\u03C3\u03B7',
+    'messages_date_format.101': '\u0399\u03B1\u03BD',
+    'messages_date_format.102': '\u03A6\u03B5\u03B2',
+    'messages_date_format.103': '\u039C\u03B1\u03C1',
+    'messages_date_format.104': '\u0391\u03C0\u03C1',
+    'messages_date_format.105': '\u039C\u03B1\u03B9',
+    'messages_date_format.106': '\u0399\u03BF\u03C5\u03BD',
+    'messages_date_format.107': '\u0399\u03BF\u03C5\u03BB',
+    'messages_date_format.108': '\u0391\u03C5\u03B3',
+    'messages_date_format.109': '\u03A3\u03B5\u03C0',
+    'messages_date_format.110': '\u039F\u03BA\u03C4',
+    'messages_date_format.111': '\u039D\u03BF\u03B5\u03BC',
+    'messages_date_format.112': '\u0394\u03B5\u03BA',
+    'messages_date_format.Today': '\u03A3\u03AE\u03BC\u03B5\u03C1\u03B1',
+    'messages_date_format.Yesterday': '\u03A7\u03B8\u03B5\u03C2',
     'messages_item_page.57': '\u0391\u03BD\u03CE\u03BD\u03C5\u03BC\u03BF\u03C2',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': '\u0395\u03C0\u03B5\u03BE\u03B5\u03C1\u03B3\u03B1\u03C3\u03AF\u03B1 \u03C4\u03B7\u03C2 \u03B1\u03B3\u03B3\u03B5\u03BB\u03AF\u03B1\u03C2 \u03BC\u03BF\u03C5',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u03A3\u03C5\u03B3\u03BA\u03B5\u03BA\u03C1\u03B9\u03BC\u03AD\u03BD\u03B1 \u03B3\u03B9\u03B1 \u03C4\u03B7\u03BD \u03BA\u03B1\u03C4\u03B7\u03B3\u03BF\u03C1\u03AF\u03B1 \u03C0\u03B5\u03B4\u03AF\u03B1 (\u03C0\u03C1\u03BF\u03B1\u03B9\u03C1\u03B5\u03C4\u03B9\u03BA\u03AC)',
     'misc.YouAreIn_Mob': '\u0392\u03C1\u03AF\u03C3\u03BA\u03B5\u03C3\u03C4\u03B5 \u03C3\u03C4\u03B7\u03BD \u03C4\u03BF\u03C0\u03BF\u03B8\u03B5\u03C3\u03AF\u03B1 <<LOCATION>>',
     'business_directory.Map': '\u03A7\u03AC\u03C1\u03C4\u03B7\u03C2',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u03C3\u03C4\u03B7\u03BD \u03BA\u03B1\u03C4\u03B7\u03B3\u03BF\u03C1\u03AF\u03B1'
 };

@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Nesate narys?',
     'loginbox.Password': 'slapta\u017Eodis',
     'loginbox.Username': 'Vartotojo vardas ar el. pa\u0161tas',
+    'messages_date_format.101': 'Sau',
+    'messages_date_format.102': 'Vas',
+    'messages_date_format.103': 'Kov',
+    'messages_date_format.104': 'Bal',
+    'messages_date_format.105': 'Geg',
+    'messages_date_format.106': 'Bir',
+    'messages_date_format.107': 'Lie',
+    'messages_date_format.108': 'Rgp',
+    'messages_date_format.109': 'Rgs',
+    'messages_date_format.110': 'Spa',
+    'messages_date_format.111': 'Lap',
+    'messages_date_format.112': 'Gru',
+    'messages_date_format.Today': '\u0160iandien',
+    'messages_date_format.Yesterday': 'Vakar',
     'messages_item_page.57': 'Anoniminis',
     'messages_site_class.30': 'Gerai',
     'messages_user_management_current_ads.EditMyListing': 'Redaguoti mano skelbim\u0105',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Special\u016Bs kategorij\u0173 laukai (papildomi)',
     'misc.YouAreIn_Mob': 'J\u016Bs esate <<LOCATION>>',
     'business_directory.Map': '\u017Dem\u0117lapis',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'patalpint\u0105'
 };

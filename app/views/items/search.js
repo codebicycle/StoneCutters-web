@@ -35,7 +35,6 @@ module.exports = BaseView.extend({
             switchView();
             var current = ($('.gallery-list').length === 0 ? 'listView' : 'galView');
             if (typeof window !== 'undefined' && localStorage) {
-                console.log('storage');
                 localStorage.setItem('listingView', current);
             }else{
                 this.app.persistSession({

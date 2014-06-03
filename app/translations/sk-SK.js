@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Nie ste \u010Dlenom?',
     'loginbox.Password': 'Heslo',
     'loginbox.Username': 'Pou\u017E\xEDvate\u013Esk\xE9 meno alebo e-mail',
+    'messages_date_format.101': 'Jan',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'M\xE1j',
+    'messages_date_format.106': 'J\xFAn',
+    'messages_date_format.107': 'J\xFAl',
+    'messages_date_format.108': 'Aug',
+    'messages_date_format.109': 'Sep',
+    'messages_date_format.110': 'Okt',
+    'messages_date_format.111': 'Nov',
+    'messages_date_format.112': 'Dec',
+    'messages_date_format.Today': 'Dnes',
+    'messages_date_format.Yesterday': 'V\u010Dera',
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravi\u0165 moje ozn\xE1menie',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u0160pecifick\xE9 polia kateg\xF3rie (vo\u013Eby)',
     'misc.YouAreIn_Mob': 'Va\u0161a poloha je <<LOCATION>>',
     'business_directory.Map': 'Mapa',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'v'
 };

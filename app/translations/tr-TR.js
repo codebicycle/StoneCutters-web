@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\xDCye de\u011Fil misiniz?',
     'loginbox.Password': 'Parola',
     'loginbox.Username': 'Kullan\u0131c\u0131 Ad\u0131 veya E-Posta Adresi ',
+    'messages_date_format.101': 'Ock',
+    'messages_date_format.102': '\u015Ebt',
+    'messages_date_format.103': 'Mrt',
+    'messages_date_format.104': 'Nsn',
+    'messages_date_format.105': 'Mys',
+    'messages_date_format.106': 'Hzn',
+    'messages_date_format.107': 'Tmz',
+    'messages_date_format.108': 'A\u011Fts',
+    'messages_date_format.109': 'Eyl',
+    'messages_date_format.110': 'Ekm',
+    'messages_date_format.111': 'Ksm',
+    'messages_date_format.112': 'Arlk',
+    'messages_date_format.Today': 'Bug\xFCn',
+    'messages_date_format.Yesterday': 'D\xFCn',
     'messages_item_page.57': 'Ad\u0131z',
     'messages_site_class.30': 'Tamam',
     'messages_user_management_current_ads.EditMyListing': '\u0130lanlar\u0131m\u0131 D\xFCzenle',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)',
     'misc.YouAreIn_Mob': '<<LOCATION>> konumundas\u0131n\u0131z',
     'business_directory.Map': 'Harita',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': ''
 };

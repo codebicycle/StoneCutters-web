@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': '\u0924\u0941\u092E\u094D\u0939\u0940 \u0938\u092D\u093E\u0938\u0926 \u0928\u093E\u0939\u0940 \u0906\u0939\u093E\u0924 \u0915\u093E?',
     'loginbox.Password': '\u092A\u0930\u0935\u0932\u0940\u091A\u093E \u0936\u092C\u094D\u0926',
     'loginbox.Username': '\u0935\u093E\u092A\u0930\u0915\u0930\u094D\u0924\u094D\u092F\u093E\u091A\u0947 \u0928\u093E\u0935 \u0905\u0925\u0935\u093E \u0907-\u092A\u0924\u094D\u0930 \u092A\u0924\u094D\u0924\u093E',
+    'messages_date_format.101': '\u091C\u093E\u0928\u0947',
+    'messages_date_format.102': '\u092B\u0947\u092C',
+    'messages_date_format.103': '\u092E\u093E\u0930\u094D\u091A',
+    'messages_date_format.104': '\u090F\u092A\u094D\u0930\u093F\u0932',
+    'messages_date_format.105': '\u092E\u0947',
+    'messages_date_format.106': '\u091C\u0942\u0928',
+    'messages_date_format.107': '\u091C\u0941\u0932\u0948',
+    'messages_date_format.108': '\u0911\u0917\u0938\u094D\u091F',
+    'messages_date_format.109': '\u0938\u092A\u094D\u091F\u0947\u0902',
+    'messages_date_format.110': '\u0911\u0915\u094D\u091F\u094B',
+    'messages_date_format.111': '\u0928\u094B\u0935\u094D\u0939\u0947\u0902',
+    'messages_date_format.112': '\u0921\u093F\u0938\u0947\u0902',
+    'messages_date_format.Today': '\u0906\u091C',
+    'messages_date_format.Yesterday': '\u0915\u093E\u0932',
     'messages_item_page.57': '\u0928\u093F\u0928\u093E\u0935\u0940',
     'messages_site_class.30': '\u0920\u093F\u0915 \u0906\u0939\u0947',
     'messages_user_management_current_ads.EditMyListing': '\u092E\u093E\u091D\u094D\u092F\u093E \u091C\u093E\u0939\u093F\u0930\u093E\u0924\u0940\u091A\u0947 \u0938\u0902\u092A\u093E\u0926\u0928 \u0915\u0930\u093E',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': '\u0935\u0930\u094D\u0917 \u0938\u094D\u092A\u0947\u0938\u093F\u092B\u093F\u0915 \u0930\u0915\u093E\u0928\u0947 (\u0911\u092A\u094D\u0936\u0928\u0932\u094D\u0938)',
     'misc.YouAreIn_Mob': '\u0924\u0941\u092E\u094D\u0939\u0940 <<LOCATION>> \u092F\u0947\u0925\u0947 \u0906\u0939\u093E\u0924',
     'business_directory.Map': '\u0928\u0915\u093E\u0936\u093E',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\u092F\u093E\u092E\u0927\u0940\u0932'
 };

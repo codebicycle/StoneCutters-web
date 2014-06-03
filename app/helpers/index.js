@@ -32,13 +32,26 @@ module.exports = {
     timeAgo: function(previous) {
         var current = new Date();
         var lastMidnight = current - (current % (24*60*60));
+        var month = [];
+        month[0] = '01';
+        month[1] = '02';
+        month[2] = '03';
+        month[3] = '04';
+        month[4] = '05';
+        month[5] = '06';
+        month[6] = '07';
+        month[7] = '08';
+        month[8] = '09';
+        month[9] = '10';
+        month[10] = '11';
+        month[11] = '12';
 
         if (previous >= lastMidnight){
-            return 'Hoy';
+            return 'messages_date_format.Today';
         }else if (previous >= (lastMidnight - (24*60*60))) {
-            return 'ayer';
+            return 'messages_date_format.Yesterday';
         }else{
-            return previous.getMonth();
+            return 'messages_date_format.1'+month[previous.getMonth()];
         }
     }
 };

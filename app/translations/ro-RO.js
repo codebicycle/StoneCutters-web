@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Nu sunte\u0163i membru?',
     'loginbox.Password': 'Parola',
     'loginbox.Username': 'Nume de Utilizator sau Email',
+    'messages_date_format.101': 'Ian',
+    'messages_date_format.102': 'Feb',
+    'messages_date_format.103': 'Mar',
+    'messages_date_format.104': 'Apr',
+    'messages_date_format.105': 'Mai',
+    'messages_date_format.106': 'Iun',
+    'messages_date_format.107': 'Iul',
+    'messages_date_format.108': 'Aug',
+    'messages_date_format.109': 'Sep',
+    'messages_date_format.110': 'Oct',
+    'messages_date_format.111': 'Noi',
+    'messages_date_format.112': 'Dec',
+    'messages_date_format.Today': 'Azi',
+    'messages_date_format.Yesterday': 'Ieri',
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editarea anun\u0163ului meu',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'C\xE2mpuri specifice categorie (Op\u0163ionale)',
     'misc.YouAreIn_Mob': 'V\u0103 afla\u0163i la <<LOCATION>>',
     'business_directory.Map': 'Hart\u0103',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': '\xEEn'
 };

@@ -31,6 +31,20 @@ module.exports = {
     'loginbox.NotAMember': 'Nie \'n lid nie?',
     'loginbox.Password': 'Wagwoord',
     'loginbox.Username': 'Gebruikersnaam of E-pos',
+    'messages_date_format.101': 'Jan.',
+    'messages_date_format.102': 'Febr.',
+    'messages_date_format.103': 'Mrt.',
+    'messages_date_format.104': 'Apr.',
+    'messages_date_format.105': 'Mei',
+    'messages_date_format.106': 'Jun.',
+    'messages_date_format.107': 'Jul.',
+    'messages_date_format.108': 'Aug.',
+    'messages_date_format.109': 'Sept.',
+    'messages_date_format.110': 'Okt.',
+    'messages_date_format.111': 'Nov.',
+    'messages_date_format.112': 'Des.',
+    'messages_date_format.Today': 'Vandag',
+    'messages_date_format.Yesterday': 'Gister',
     'messages_item_page.57': 'Anoniem',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Redigeer My Lysting',
@@ -134,5 +148,6 @@ module.exports = {
     'misc.SpecificFields_title': 'Kategorie-spesifieke Velde (Opsionele)',
     'misc.YouAreIn_Mob': 'Jy is in <<LOCATION>>',
     'business_directory.Map': 'Kaart',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
+    'crm_new_version.RenameCategory_3': 'in'
 };
