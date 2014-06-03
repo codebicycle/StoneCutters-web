@@ -77,6 +77,7 @@ module.exports = function(app, dataAdapter) {
             function submit(done, data) {
                 data.location = req.rendrApp.getSession('siteLocation');
                 data.languageId = 10;
+                user = _.clone(data);
                 dataAdapter.post(req, '/users', {
                     data: data
                 }, done.errfcb);
@@ -110,7 +111,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function submit(done, data) {
-                if (!data.redirect) {
+                if (!data.redirect || ~data.redirect.match(/(\/register|\/login|\/logout)/g)) {
                     data.redirect = '/';
                 }
                 loginHandler(req, res, data);
