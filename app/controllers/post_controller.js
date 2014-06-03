@@ -35,11 +35,21 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller(errors) {
+            var siteLocation = this.app.getSession('siteLocation');
+            var categories = this.app.getSession('categories');
+            var category = categories._byId[params.categoryId];
+            
+            if (!category) {
+                this.redirectTo(helpers.common.link('/posting', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
             helpers.analytics.reset();
             helpers.analytics.setPage('posting_cat');
 
             callback(null, _.extend(params, {
-                subcategories: this.app.getSession('categories')._byId[params.categoryId].children,
+                subcategories: category.children,
                 analytics: helpers.analytics.generateURL(this.app.getSession())
             }));
         }
@@ -71,7 +81,23 @@ module.exports = {
                     }
                 }
             };
-
+            var categories = app.getSession('categories');
+            var category = categories._byId[params.categoryId];
+            
+            if (!category) {
+                this.redirectTo(helpers.common.link('/posting', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
+            categories = app.getSession('childCategories');
+            category = categories[params.subcategoryId];
+            if (!category) {
+                this.redirectTo(helpers.common.link('/posting/' + params.categoryId, siteLocation), {
+                    status: 301
+                });
+                return;
+            }
             app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
                 var categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);

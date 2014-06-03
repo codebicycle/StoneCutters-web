@@ -73,7 +73,6 @@ function error(req, url, err, callback) {
 
     if (err instanceof Error) {
         throw err;
-        return;
     }
     if (req.rendrApp.getSession('platform') === 'wap') {
         errors = [];
