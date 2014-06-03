@@ -138,24 +138,33 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var app = this.app;
+            var that = this;
             var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 }
             };
-            var siteLocation = app.getSession('siteLocation');
-            var category = helpers.categories.getCat(app.getSession(), params.catId);
-            var slug = helpers.common.slugToUrl(category);
+            var siteLocation = that.app.getSession('siteLocation');
+            var category = helpers.categories.getCat(that.app.getSession(), params.catId);
             var query;
+            var slug;
 
+            if (!category) {
+                this.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
+            slug = helpers.common.slugToUrl(category);
             if (slug.indexOf(params.title + '-cat-')) {
-                this.redirectTo(helpers.common.link('/' + slug + '-p-1', siteLocation));
+                this.redirectTo(helpers.common.link('/' + slug + '-p-1', siteLocation), {
+                    status: 301
+                });
                 return;
             }
 
-            prepareParams(app, params);
+            prepareParams(that.app, params);
             query = _.clone(params);
             params.categoryId = params.catId;
             delete params.catId;
@@ -169,15 +178,15 @@ module.exports = {
 
             /** don't read from cache, because rendr caching expects an array response
             with ids, and smaug returns an object with 'data' and 'metadata' */
-            app.fetch(spec, {
+            that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var protocol = app.getSession('protocol');
-                var host = app.getSession('host');
+                var protocol = that.app.getSession('protocol');
+                var host = that.app.getSession('host');
                 var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
                 var model = result.items.models[0];
-                var category = helpers.categories.getCat(app.getSession(), query.catId);
-                var categoryTree = helpers.categories.getCatTree(app.getSession(), query.catId);
+                var category = helpers.categories.getCat(that.app.getSession(), query.catId);
+                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), query.catId);
 
                 result.items = model.get('data');
                 result.metadata = model.get('metadata');
@@ -187,7 +196,7 @@ module.exports = {
                 helpers.analytics.setPage('category_with_page');
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.category = category;
                 callback(err, result);
             });
@@ -239,7 +248,9 @@ module.exports = {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     if (err) {
-                        callback(err, result);
+                        that.redirectTo(helpers.common.link('/404', siteLocation), {
+                            status: 301
+                        });
                         return;
                     }
                     next(err, result);
@@ -248,11 +259,20 @@ module.exports = {
 
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
-                var slug = helpers.common.slugToUrl(item);
+                var slug;
                 var spec;
 
+                if (!item) {
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
+                    return;
+                }
+                slug = helpers.common.slugToUrl(item);
                 if (slug.indexOf(slugUrl + '-iid-')) {
-                    that.redirectTo(helpers.common.link('/' + slug, siteLocation));
+                    that.redirectTo(helpers.common.link('/' + slug, siteLocation), {
+                        status: 301
+                    });
                     return;
                 }
 
@@ -267,7 +287,6 @@ module.exports = {
                         }
                     }
                 };
-
                 that.app.fetch(spec, {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
@@ -364,22 +383,25 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var app = this.app;
+            var that = this;
             var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 }
             };
-            var siteLocation = app.getSession('siteLocation');
-            var category = helpers.categories.getCat(app.getSession(), params.catId);
+            var siteLocation = that.app.getSession('siteLocation');
             var query;
 
-            prepareParams(app, params);
+            if (!params.search || _.isEmpty(params.search)) {
+                that.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
+            prepareParams(that.app, params);
             query = _.clone(params);
-            params.searchTerm = params.search;
             delete params.search;
-            delete params.title;
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
@@ -389,12 +411,12 @@ module.exports = {
 
             //don't read from cache, because rendr caching expects an array response
             //with ids, and smaug returns an object with 'data' and 'metadata'
-            app.fetch(spec, {
+            that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var user = app.getSession('user');
-                var protocol = app.getSession('protocol');
-                var host = app.getSession('host');
+                var user = that.app.getSession('user');
+                var protocol = that.app.getSession('protocol');
+                var host = that.app.getSession('host');
                 var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
                 var model = result.items.models[0];
 
@@ -406,9 +428,8 @@ module.exports = {
                 helpers.analytics.addParam('keyword', query.search);
                 helpers.analytics.addParam('page_nb', result.metadata.totalPages);
                 helpers.analytics.addParam('user', user);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.search = query.search;
-                result.category = category;
                 callback(err, result);
             });
         }
@@ -419,6 +440,7 @@ module.exports = {
         function controller() {
             var that = this;
             var user = that.app.getSession('user');
+            var siteLocation = that.app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -432,8 +454,17 @@ module.exports = {
             that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                var categoryTree;
+                var item;
+
+                if (err) {
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
+                    return;
+                }
+                item = result.item.toJSON();
+                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
 
                 helpers.analytics.reset();
                 helpers.analytics.setPage('item_reply');
@@ -453,6 +484,7 @@ module.exports = {
         function controller() {
             var that = this;
             var user = that.app.getSession('user');
+            var siteLocation = that.app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -466,8 +498,17 @@ module.exports = {
             that.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                var categoryTree;
+                var item;
+                
+                if (err) {
+                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
+                    return;
+                }
+                item = result.item.toJSON();
+                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
 
                 helpers.analytics.reset();
                 helpers.analytics.setPage('item_reply_success');

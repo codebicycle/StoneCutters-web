@@ -7,7 +7,8 @@ var helpers = require('../../helpers');
 module.exports = BaseView.extend({
     className: 'items_search_view',
     wapAttributes: {
-        cellpadding: 0
+        cellpadding: 0,
+        bgcolor: '#DDDDDD'
     },
     processItem: function(item) {
         var year = item.date.year;

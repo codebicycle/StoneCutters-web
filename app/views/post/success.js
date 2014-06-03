@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
         this.track({
             category: category,
             action: action,
-            custom: [category, itemCategory, itemSubcategory, action, 'ItemID' + itemId].join('::')
+            custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
         });
     }
 });
