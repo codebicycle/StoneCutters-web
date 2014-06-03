@@ -57,7 +57,7 @@
                     {% endif %}
                 </table>
             {% endif %}
-            {% if item.status.contactable %}
+            {% if item.status.contactable and item.email %}
                 <table width="100%" cellspacing="0" cellpadding="4" border="0">
                     <tr>
                         <td style="border-top: solid thin #808080;">
@@ -173,7 +173,7 @@
                     </td>
                 </tr>
             </table>
-            {% if item.status.contactable %}
+            {% if item.status.contactable and item.email %}
                 <table width="100%" cellspacing="0" cellpadding="4" border="0">
                     <tr>
                         <td style="border-top: solid thin #808080;">
