@@ -21,7 +21,7 @@
         <span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
         <div id="itemPhotos">
             {% if item.images.length == 0 %}
-                <span>({{ dictionary[itemgeneraldetails.NoPicture] }})</span>
+                <span>({{ dictionary["itemgeneraldetails.NoPicture"] }})</span>
             {% elif item.images.length == 1 %}
                 <a href="/{{ [item | slugToUrl, '/galery'] | join('') | link }}">
                     <div class="arrow"></div>
@@ -42,18 +42,21 @@
 
         <h3>{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</h3>
 
-
-        <div id="centerBtns">
-            {% if item.phone %}
-                {% if device.uriSchemeTel %}
-                    <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+        {% if item.status.contactable %}
+            <div id="centerBtns">
+                {% if item.phone %}
+                    {% if device.uriSchemeTel %}
+                        <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                    {% endif %}
+                    {% if device.uriSchemeSms %}
+                        <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+                    {% endif %}
                 {% endif %}
-                {% if device.uriSchemeSms %}
-                    <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+                {% if item.email %}
+                    <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange">{{ dictionary["register_mail.Email"] }}</a>
                 {% endif %}
-            {% endif %}
-            <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange">{{ dictionary["register_mail.Email"] }}</a>
-        </div>
+            </div>
+        {% endif %}
         {% if item.phone %}
             <div id="phone">
                 <img alt="" src="{{ "/images/html4/phone.png" | static }}">
@@ -82,7 +85,7 @@
         <div class="line"></div>
 
         <div id="centerBtns">
-            <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] }}</a>
+            <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
         </div>
     {% else %}
         <div id="itemDisable">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</div>
