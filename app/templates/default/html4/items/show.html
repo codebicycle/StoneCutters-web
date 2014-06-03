@@ -40,7 +40,8 @@
             {% endif %}
         </div>
 
-        <h3>{{ dictionary[mybids.ContactSeller] }}</h3>
+        <h3>{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</h3>
+
 
         <div id="centerBtns">
             {% if item.phone %}

@@ -148,7 +148,7 @@
                                     <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.User"] }}:</small>
                                 </th>
                                 <td align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block;">{% if item.user %}{{item.user.username}}{% else %}{{ dictionary["messages_item_page.57"] }}{% endif %}</small>
+                                    <small style="display: block;">{{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</small>
                                 </td>
                             </tr>
                             {% if item.phone %}
