@@ -71,6 +71,10 @@ function parse(req, options, callback) {
 function error(req, url, err, callback) {
     var errors;
 
+    if (err instanceof Error) {
+        throw err;
+        return;
+    }
     if (req.rendrApp.getSession('platform') === 'wap') {
         errors = [];
         err.forEach(function each(error) {
