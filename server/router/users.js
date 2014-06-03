@@ -50,9 +50,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var url = '/login?' + querystring.stringify(err);
-
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                formidable.error(req, '/login', err, function redirect(url) {
+                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                });
             }
 
             asynquence().or(error)
@@ -71,38 +71,7 @@ module.exports = function(app, dataAdapter) {
             var user;
 
             function parse(done) {
-                formidable(req, done.errfcb);
-            }
-
-            function validate(done, data) {
-                var errors = {
-                    errCode: 400,
-                    err: [],
-                    errFields: []
-                };
-
-                if (!data.username) {
-                    errors.err.push('Invalid username');
-                    errors.errFields.push('username');
-                }
-                if (!data.email) {
-                    errors.err.push('Invalid email');
-                    errors.errFields.push('email');
-                }
-                if (!data.password) {
-                    errors.err.push('Invalid password');
-                    errors.errFields.push('password');
-                }
-                if (!data.agreeTerms) {
-                    errors.err.push('Accept terms and conditions');
-                    errors.errFields.push('agreeTerms');
-                }
-                if (errors.err.length) {
-                    done.fail(errors);
-                    return;
-                }
-                user = data;
-                done(data);
+                formidable.parse(req, done.errfcb);
             }
 
             function submit(done, data) {
@@ -120,34 +89,13 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var url = req.headers.referer;
-                var qIndex = url.indexOf('?');
-                var errors;
-
-                if (_.isArray(err)) {
-                    errors = {
-                        errCode: 400,
-                        errField: [],
-                        errMsg: [],
-                    };
-                    err.forEach(function each(error) {
-                        errors.errField.push(error.selector);
-                        errors.errMsg.push(error.message);
-                    });
-                }
-                else {
-                    errors = err;
-                }
-                if (qIndex != -1) {
-                    url = url.substring(0,qIndex);
-                }
-                url += '?' + querystring.stringify(errors);
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                formidable.error(req, '/register', err, function redirect(url) {
+                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                });
             }
 
             asynquence().or(error)
                 .then(parse)
-                .then(validate)
                 .then(submit)
                 .val(success);
         }
@@ -158,7 +106,7 @@ module.exports = function(app, dataAdapter) {
 
         function handler(req, res) {
             function parse(done) {
-                formidable(req, done);
+                formidable.parse(req, done);
             }
 
             function submit(done, data) {
@@ -166,9 +114,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var url = '/login?' + querystring.stringify(err);
-
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                formidable.error(req, '/login', err, function redirect(url) {
+                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                });
             }
 
             asynquence().or(error)
@@ -184,18 +132,7 @@ module.exports = function(app, dataAdapter) {
             var email;
 
             function parse(done) {
-                formidable(req, done.errfcb);
-            }
-
-            function validate(done, data) {
-                email = data.email;
-                if (!email) {
-                    done.fail({
-                        errCode: 400,
-                        err: ['Invalid email']
-                    });
-                }
-                done();
+                formidable.parse(req, done.errfcb);
             }
 
             function submit(done) {
@@ -215,14 +152,13 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var url = '/login?' + querystring.stringify(err);
-
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                formidable.error(req, '/login', err, function redirect(url) {
+                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                });
             }
 
             asynquence().or(error)
                 .then(parse)
-                .then(validate)
                 .then(submit)
                 .val(success);
         }

@@ -1,44 +1,6 @@
 'use strict';
 
-var config = require('../config');
-var analyticsHelper = require('./analytics');
-var cookies = require('./cookies');
 var _ = require('underscore');
-var session;
-
-function setSession() {
-    if (typeof window === 'undefined') {
-        return;
-    }
-    session = _.extend(this.get('session'), cookies.getAll());
-
-    this.updateSession = function(pairs) {
-        for (var key in pairs) {
-            session[key] = pairs[key];
-        }
-        this.set('session', session);
-    };
-    this.persistSession = function(pairs, options) {
-        for (var key in pairs) {
-            cookies.put(key, pairs[key], options);
-        }
-        this.updateSession(pairs);
-    };
-    this.getSession = function(key) {
-        if (!key) {
-            return session;
-        }
-        return session[key];
-    };
-    this.deleteSession = function(key, options) {
-        if (!key) {
-            return;
-        }
-        cookies.clear(key, options);
-        delete session[key];
-        this.set('session', session);
-    };
-}
 
 function setUrlVars() {
     if (typeof window === 'undefined') {
@@ -133,15 +95,55 @@ function setLocation(params, callback) {
     });
 }
 
+function getErrors(params) {
+    var errors;
+
+    if (this.app.getSession('platform') === 'wap' && params && params.errors) {
+        if (typeof params.errors === 'string') {
+            params.errors = [params.errors];
+        }
+        else {
+            params.errors.length = Object.keys(params.errors).length;
+            params.errors = Array.prototype.slice.call(params.errors);
+        }
+        errors = {};
+        params.errors.forEach(function each(error) {
+            var err = error.split(' | ');
+            var field;
+            var message;
+
+            if (err.length > 1) {
+                field = err.shift();
+                message = err.pop();
+            }
+            else {
+                field = 'main';
+                message = err.shift();
+            }
+            if (!errors[field]) {
+                errors[field] = [];
+            }
+            errors[field].push(message);
+        });
+    }
+    else {
+        errors = this.app.getSession('errors');
+    }
+    if (errors && !_.isEmpty(errors)) {
+        errors = _.clone(errors);
+        this.app.deleteSession('errors');
+    }
+    return errors;
+}
+
 module.exports = {
     control: function(params, callback) {
         setCurrentRoute.call(this);
         setUrlVars.call(this);
         setCurrentPage.call(this);
         setLanguage.call(this);
-        setLocation.call(this, params, callback.bind(this));
-    },
-    setSession: function() {
-        setSession.call(this);
+        setLocation.call(this, params, function next() {
+            callback.call(this, getErrors.call(this, params));
+        }.bind(this));
     }
 };

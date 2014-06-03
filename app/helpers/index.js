@@ -2,6 +2,7 @@
 
 module.exports = {
     nunjucks: require('./nunjucks'),
+    app: require('./app'),
     controllers: require('./controllers'),
     analytics: require('./analytics'),
     categories: require('./categories'),

@@ -4,3 +4,13 @@
         <h1>{{title}}</h1>{{suffix}}
     </div>
 {% endmacro %}
+
+{% macro Errors(errors) %}
+    <div id="errors">
+        {% for field, messages in errors %}
+            {% for message in messages %}
+                <span>{{ ([field, ': '] | join | title) if field != 'main' }}{{ message }}</span><br/>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endmacro %}

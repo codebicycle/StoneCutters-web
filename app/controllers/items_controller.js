@@ -138,15 +138,15 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var that = this;
+            var app = this.app;
             var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 }
             };
-            var siteLocation = that.app.getSession('siteLocation');
-            var category = helpers.categories.getCat(that.app.getSession(), params.catId);
+            var siteLocation = app.getSession('siteLocation');
+            var category = helpers.categories.getCat(app.getSession(), params.catId);
             var query;
             var slug;
 
@@ -164,7 +164,7 @@ module.exports = {
                 return;
             }
 
-            prepareParams(that.app, params);
+            prepareParams(app, params);
             query = _.clone(params);
             params.categoryId = params.catId;
             delete params.catId;
@@ -178,15 +178,15 @@ module.exports = {
 
             /** don't read from cache, because rendr caching expects an array response
             with ids, and smaug returns an object with 'data' and 'metadata' */
-            that.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var protocol = that.app.getSession('protocol');
-                var host = that.app.getSession('host');
+                var protocol = app.getSession('protocol');
+                var host = app.getSession('host');
                 var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
                 var model = result.items.models[0];
-                var category = helpers.categories.getCat(that.app.getSession(), query.catId);
-                var categoryTree = helpers.categories.getCatTree(that.app.getSession(), query.catId);
+                var category = helpers.categories.getCat(app.getSession(), query.catId);
+                var categoryTree = helpers.categories.getCatTree(app.getSession(), query.catId);
 
                 result.items = model.get('data');
                 result.metadata = model.get('metadata');
@@ -196,7 +196,7 @@ module.exports = {
                 helpers.analytics.setPage('category_with_page');
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.category = category;
                 callback(err, result);
             });
@@ -205,7 +205,7 @@ module.exports = {
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;
@@ -318,7 +318,7 @@ module.exports = {
     galery: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;
@@ -382,24 +382,24 @@ module.exports = {
     search: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
-            var that = this;
+        function controller(errors) {
+            var app = this.app;
             var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 }
             };
-            var siteLocation = that.app.getSession('siteLocation');
+            var siteLocation = app.getSession('siteLocation');
             var query;
 
             if (!params.search || _.isEmpty(params.search)) {
-                that.redirectTo(helpers.common.link('/', siteLocation), {
+                this.redirectTo(helpers.common.link('/', siteLocation), {
                     status: 301
                 });
                 return;
             }
-            prepareParams(that.app, params);
+            prepareParams(app, params);
             query = _.clone(params);
             delete params.search;
             delete params.page;
@@ -411,12 +411,12 @@ module.exports = {
 
             //don't read from cache, because rendr caching expects an array response
             //with ids, and smaug returns an object with 'data' and 'metadata'
-            that.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var user = that.app.getSession('user');
-                var protocol = that.app.getSession('protocol');
-                var host = that.app.getSession('host');
+                var user = app.getSession('user');
+                var protocol = app.getSession('protocol');
+                var host = app.getSession('host');
                 var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
                 var model = result.items.models[0];
 
@@ -428,7 +428,7 @@ module.exports = {
                 helpers.analytics.addParam('keyword', query.search);
                 helpers.analytics.addParam('page_nb', result.metadata.totalPages);
                 helpers.analytics.addParam('user', user);
-                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.search = query.search;
                 callback(err, result);
             });
@@ -437,7 +437,7 @@ module.exports = {
     reply: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var siteLocation = that.app.getSession('siteLocation');
@@ -474,6 +474,7 @@ module.exports = {
                 result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.user = user;
                 result.item = item;
+                result.errors = errors;
                 callback(err, result);
             });
         }
@@ -481,7 +482,7 @@ module.exports = {
     success: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var siteLocation = that.app.getSession('siteLocation');
@@ -500,7 +501,7 @@ module.exports = {
             }, function afterFetch(err, result) {
                 var categoryTree;
                 var item;
-                
+
                 if (err) {
                     that.redirectTo(helpers.common.link('/404', siteLocation), {
                         status: 301

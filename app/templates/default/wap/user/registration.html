@@ -1,5 +1,7 @@
+{% from macros import Breadcrumb, Errors %}
 <tr>
     <td>
+        {% if errors %}{{ Errors(errors) }}{% endif %}
         <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
             <tbody>
                 <tr>
@@ -45,7 +47,7 @@
                             <br style="display: none;">
                             <label style="display: block; padding-top: .25em;">
                                 <input type="checkbox" style="margin: 0; vertical-align: sub;" name="agreeTerms" value="1" checked="true">
-                                <small>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>","<a href='",('/terms' | link),"'>") | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</small>
+                                <small>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>", (["<a href='" , "/terms" | link, "'>"] | join(''))) | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</small>
                             </label>
                             <div style="padding-top: .25em;">
                                 <input type="submit" value="{{ dictionary["registerheader.Register"] }}" name="submit">
@@ -55,7 +57,6 @@
                 </tr>
             </tbody>
         </table>
-        {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link) }}
     </td>

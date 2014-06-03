@@ -232,6 +232,14 @@ module.exports = (function() {
                 category = data.app.getSession('childCategories')[categoryId];
                 breadcrumb = '/' + slugToUrl(category) + '-p-' + page;
             }
+            else if (currentRoute.action === 'reply') {
+                breadcrumb = '/' + slugToUrl(data.item);
+            }
+        }
+        else if (currentRoute.controller === 'post') {
+            if (currentRoute.action === 'form') {
+                breadcrumb = '/';
+            }
         }
         breadcrumb = breadcrumb || referer || '/';
         data.app.updateSession({
