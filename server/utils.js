@@ -1,3 +1,4 @@
+'use strict';
 
 exports.link = function link(href, siteLocation) {
     if (!siteLocation || !siteLocation.indexOf('www.')) {

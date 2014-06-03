@@ -5,7 +5,6 @@ module.exports = function(app, dataAdapter) {
     var formidable = require('../formidable');
     var querystring = require('querystring');
     var utils = require('../utils');
-
     var fs = require('fs');
 
     (function reply() {
@@ -15,7 +14,7 @@ module.exports = function(app, dataAdapter) {
             var itemId = req.param('itemId', null);
 
             function parse(done) {
-                formidable(req, done.errfcb);
+                formidable.parse(req, done.errfcb);
             }
 
             function submit(done, data) {
@@ -40,14 +39,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var url = req.headers.referer;
-                var qIndex = url.indexOf('?');
-
-                if (qIndex != -1) {
-                    url = url.substring(0,qIndex);
-                }
-                url += '?' + querystring.stringify(err);
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                formidable.error(req, req.headers.referer.split('?').shift(), err, function redirect(url) {
+                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                });
             }
 
             asynquence().or(error)
@@ -66,7 +60,7 @@ module.exports = function(app, dataAdapter) {
             var oldImages = [];
 
             function parse(done) {
-                formidable(req, {
+                formidable.parse(req, {
                     acceptFiles: true
                 }, done.errfcb);
             }
@@ -158,24 +152,10 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var errors = {
-                    errCode: 400,
-                    errField: [],
-                    errMsg: [],
-                };
-                var url = req.headers.referer;
-                var qIndex = url.indexOf('?');
-
-                err.forEach(function each(error) {
-                    errors.errField.push(error.selector);
-                    errors.errMsg.push(error.message);
+                formidable.error(req, req.headers.referer.split('?').shift(), err, function redirect(url) {
+                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                    clean();
                 });
-                if (qIndex != -1) {
-                    url = url.substring(0,qIndex);
-                }
-                url += '?' + querystring.stringify(errors);
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
-                clean();
             }
 
             function clean() {
@@ -254,7 +234,7 @@ module.exports = function(app, dataAdapter) {
                 return url;
             }
 
-            formidable(req, function callback(err, data) {
+            formidable.parse(req, function callback(err, data) {
                 var url;
 
                 if (!data.search && !data.currentURL) {

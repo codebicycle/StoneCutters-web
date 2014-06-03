@@ -1,6 +1,7 @@
-{% from macros import Breadcrumb, BreadcrumbHome %}
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["homeheader.My OLX"]) }}
+{% if errors %}{{ Errors(errors) }}{% endif %}
 <div id="login">
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>

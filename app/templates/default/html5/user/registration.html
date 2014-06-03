@@ -1,9 +1,10 @@
 {% view 'location/select' %}
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
-{% from macros import Breadcrumb %}
+{% from macros import Breadcrumb, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
+{% if errors %}{{ Errors(errors) }}{% endif %}
 <section id="login">
     <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["register_mail.Username"] }}</label>

@@ -1,6 +1,7 @@
-{% from macros import Breadcrumb, BreadcrumbHome %}
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
+{% if errors %}{{ Errors(errors) }}{% endif %}
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <h4 class="title" >{{ dictionary["item.ChosenCategory"] }}: {{ subcategory.name }}</h4>

@@ -137,7 +137,7 @@ module.exports = {
     index: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var app = this.app;
             var spec = {
                 items: {
@@ -196,7 +196,7 @@ module.exports = {
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;
@@ -299,7 +299,7 @@ module.exports = {
     galery: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;
@@ -363,7 +363,7 @@ module.exports = {
     search: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var app = this.app;
             var spec = {
                 items: {
@@ -416,7 +416,7 @@ module.exports = {
     reply: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var spec = {
@@ -443,6 +443,7 @@ module.exports = {
                 result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.user = user;
                 result.item = item;
+                result.errors = errors;
                 callback(err, result);
             });
         }
@@ -450,7 +451,7 @@ module.exports = {
     success: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(errors) {
             var that = this;
             var user = that.app.getSession('user');
             var spec = {
