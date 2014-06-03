@@ -25,12 +25,12 @@
             {% elif item.images.length == 1 %}
                 <a href="/{{ [item | slugToUrl, '/galery'] | join('') | link }}">
                     <div class="arrow"></div>
-                    <img alt="" src="{{item.images[0].url | static }}">
+                    <img alt="" src="{{item.images[0].url }}">
                 </a>
             {% else %}
                 <a href="/{{ [item | slugToUrl, '/galery?pos='+pos] | join('') | link }}">
                     <div class="arrow"></div>
-                    <img alt="" src="{{item.images[pos].url | static }}">
+                    <img alt="" src="{{item.images[pos].url }}">
                 </a>
                 <div id="galeryPagination">
                     <a href="?pos={{ pos if pos == 0 else pos - 1 }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
