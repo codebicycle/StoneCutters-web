@@ -6,7 +6,7 @@ module.exports = {
     terms: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             helpers.analytics.reset();
             helpers.analytics.setPage('terms');
 
@@ -18,7 +18,7 @@ module.exports = {
     help: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
 
             // Delete this function and your references
             function itemsHelpSimulator() {
@@ -121,7 +121,7 @@ module.exports = {
     interstitial: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             helpers.analytics.reset();
             helpers.analytics.setPage('interstitial');
 
@@ -133,7 +133,7 @@ module.exports = {
     error: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var err = this.app.getSession('error');
             var siteLocation = this.app.getSession('siteLocation');
 

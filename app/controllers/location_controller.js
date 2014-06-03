@@ -6,7 +6,7 @@ module.exports = {
     index: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var that = this;
             var spec;
 

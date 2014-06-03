@@ -7,25 +7,25 @@ module.exports = {
     registration: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller(form) {
             callback(null, {
-                errors: errors
+                form: form
             });
         }
     },
     login: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller(form) {
             callback(null, {
-                errors: errors
+                form: form
             });
         }
     },
     logout: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var siteLocation = this.app.getSession('siteLocation');
 
             this.app.deleteSession('user');
@@ -38,14 +38,14 @@ module.exports = {
     myolx: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             callback(null, {});
         }
     },
     'my-ads': function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var user = this.app.getSession('user') || {};
             var spec = {
                 myAds: {
@@ -86,7 +86,7 @@ module.exports = {
     favorites: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var user = this.app.getSession('user') || {};
             var spec = {
                 favorites: {

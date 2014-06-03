@@ -16,7 +16,7 @@
                 </td>
             </tr>
         </table>
-        {% if errors %}{{ Errors(errors) }}{% endif %}
+        {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
         <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>

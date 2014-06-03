@@ -1,7 +1,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToThisAd"]) }}
-{% if errors %}{{ Errors(errors) }}{% endif %}
+{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
 <div id="reply">
     <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
         <a style="display: block;" tabindex="1" href="/{{ item | slugToUrl | link }}">

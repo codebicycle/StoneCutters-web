@@ -68,9 +68,16 @@ function parse(req, options, callback) {
     }
 }
 
-function error(req, url, err, callback) {
+function error(req, url, err, values, callback) {
     var errors;
 
+    if (!callback && values instanceof Function) {
+        callback = values;
+        values = {};
+    }
+    if (!err) {
+        return callback(url);
+    }
     if (err instanceof Error) {
         throw err;
     }
@@ -97,7 +104,10 @@ function error(req, url, err, callback) {
             errors[error.selector].push(error.message);
         });
         req.rendrApp.persistSession({
-            errors: errors
+            form: {
+                values: values,
+                errors: errors
+            }
         });
     }
     callback(url);

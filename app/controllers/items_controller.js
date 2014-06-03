@@ -205,7 +205,7 @@ module.exports = {
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;
@@ -318,7 +318,7 @@ module.exports = {
     galery: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var that = this;
             var user = that.app.getSession('user');
             var securityKey = params.sk;
@@ -382,7 +382,7 @@ module.exports = {
     search: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var app = this.app;
             var spec = {
                 items: {
@@ -437,7 +437,7 @@ module.exports = {
     reply: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller(form) {
             var that = this;
             var user = that.app.getSession('user');
             var siteLocation = that.app.getSession('siteLocation');
@@ -474,7 +474,7 @@ module.exports = {
                 result.analytics = helpers.analytics.generateURL(that.app.getSession());
                 result.user = user;
                 result.item = item;
-                result.errors = errors;
+                result.form = form;
                 callback(err, result);
             });
         }
@@ -482,7 +482,7 @@ module.exports = {
     success: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller(errors) {
+        function controller() {
             var that = this;
             var user = that.app.getSession('user');
             var siteLocation = that.app.getSession('siteLocation');

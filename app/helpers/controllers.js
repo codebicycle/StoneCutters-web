@@ -95,7 +95,8 @@ function setLocation(params, callback) {
     });
 }
 
-function getErrors(params) {
+function processForm(params) {
+    var form;
     var errors;
 
     if (this.app.getSession('platform') === 'wap' && params && params.errors) {
@@ -106,7 +107,10 @@ function getErrors(params) {
             params.errors.length = Object.keys(params.errors).length;
             params.errors = Array.prototype.slice.call(params.errors);
         }
-        errors = {};
+        form = {
+            values: {},
+            errors: {}
+        };
         params.errors.forEach(function each(error) {
             var err = error.split(' | ');
             var field;
@@ -120,20 +124,17 @@ function getErrors(params) {
                 field = 'main';
                 message = err.shift();
             }
-            if (!errors[field]) {
-                errors[field] = [];
+            if (!form.errors[field]) {
+                form.errors[field] = [];
             }
-            errors[field].push(message);
+            form.errors[field].push(message);
         });
     }
     else {
-        errors = this.app.getSession('errors');
+        form = _.clone(this.app.getSession('form'));
+        this.app.deleteSession('form');
     }
-    if (errors && !_.isEmpty(errors)) {
-        errors = _.clone(errors);
-        this.app.deleteSession('errors');
-    }
-    return errors;
+    return form;
 }
 
 module.exports = {
@@ -143,7 +144,7 @@ module.exports = {
         setCurrentPage.call(this);
         setLanguage.call(this);
         setLocation.call(this, params, function next() {
-            callback.call(this, getErrors.call(this, params));
+            callback.call(this, processForm.call(this, params));
         }.bind(this));
     }
 };

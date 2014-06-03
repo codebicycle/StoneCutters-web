@@ -1,8 +1,8 @@
 <div class="formField">
-	<label>{{field.label}}</label>
-	<select id="select-{{field.name}}" name="{{field.name}}">
+    <label>{{field.label}}</label>
+    <select id="select-{{field.name}}" name="{{field.name}}">
         {% for value in field.values %}
-            <option value="{{value.key}}" {% if (field.value) and (field.value.key == value.key) %}selected="selected"{% endif %}>{{value.value}}</option>
+            <option value="{{value.key}}"{% if form and form.values and form.values[field.name] and form.values[field.name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
         {% endfor %}
     </select>
 </div>
