@@ -34,8 +34,32 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <small style="display: block;">{{ dictionary["contactseller_form.58"] }}</small>
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="padding: 2px; border: solid thin #BBB;">
+                                    <textarea name="message" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <small style="display: block;">* {{ dictionary["contactseller_form.1366"] }}</small>
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="padding: 2px; border: solid thin #BBB;">
+                                    <input type="text" name="name" value="{{ user.username if user.username }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
                     <td style="border-top: solid thin #CCC;">
-                        <small style="display: block;">{{ dictionary["contactseller_form.57"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</small>
+                        <small style="display: block;">* {{ dictionary["contactseller_form.57"] }}</small>
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <td style="padding: 2px; border: solid thin #BBB;">
@@ -47,19 +71,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <small style="display: block;">{{ dictionary["contactseller_form.1366"] }} ({{ dictionary["wap_posting_step4.mandatoryField"] }})</small>
-                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                            <tr>
-                                <td style="padding: 2px; border: solid thin #BBB;">
-                                    <input type="text" name="name" value="{{ user.username if user.username }}" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <small style="display: block;">{{ dictionary["contactseller_form.1512"] }} ({{ dictionary["contactseller_form.6"] }})</small>
+                        <small style="display: block;">{{ dictionary["contactseller_form.1512"] }}</small>
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <td style="padding: 2px; border: solid thin #BBB;">
@@ -71,14 +83,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <small style="display: block;">{{ dictionary["contactseller_form.58"] }}</small>
-                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                            <tr>
-                                <td style="padding: 2px; border: solid thin #BBB;">
-                                    <textarea name="message" style="display: block; width: 100%; padding: 0; margin: 0; border-width: 0;"></textarea>
-                                </td>
-                            </tr>
-                        </table>
+                        <small style="display: block; font-size: 0.7em;">* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
                     </td>
                 </tr>
                 <tr>
