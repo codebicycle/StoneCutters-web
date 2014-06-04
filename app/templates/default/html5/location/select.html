@@ -1,6 +1,6 @@
 <header id="location">
 	<p>
-		{% if location.current %}
+		{% if location.current and location.current.type != 'country' %}
 			{{location.current.name}} <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
 		{% else %}
 			{{location.name}} <a href="/location">{{ dictionary["countryoptions.SelectACity"] }}</a>

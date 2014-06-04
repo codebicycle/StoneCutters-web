@@ -1,8 +1,11 @@
 <tr>
-    <td style="border-top: solid thin #808080; border-bottom: solid thin #B0B0B0; padding:1px 4px;">
+    <td style="border-top: solid thin #808080; padding:1px 4px;">
         <small>
-            {{ location.current.name if location.current else location.name }} >
-            <a href="{{ '/location' | link }}">{{ "Change city" if location.current else "Select a city" }}</a>
-        </small>
+            {% if location.current and location.current.type != 'country' %}
+				{{location.current.name}} <small><a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a></small>
+			{% else %}
+				{{location.name}} <small><a href="/location">{{ dictionary["countryoptions.SelectACity"] }}</a></small>
+			{% endif %}
+		</small>
     </td>
 </tr>

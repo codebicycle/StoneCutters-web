@@ -1,11 +1,14 @@
 {% from macros import Breadcrumb %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
-
 <header id="location">
-	<p>{{location.name}}{% if location.current %} > {{ location.current.name }}{% endif %}</p>
+	<p>
+		<a class="big" href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>
+		{% if location.current and location.current.type != 'country' %}
+			<small>&#62; {{ location.current.name }}</small>
+		{% endif %}
+	</p>
 </header>
-
 <header id="search">
 	<form class="search-form" action="{{ '/location' | link }}">
 		<input type="text" name="search" placeholder="{{ dictionary["countryoptions.EnterCity"] }}" />
@@ -15,7 +18,6 @@
 		{% endif %}
 	</form>
 </header>
-
 <div class="list">
 	{% if cities.length %}
 		<h3>{% if search %}{{ dictionary["listingpageitemslisting.AllResultsNew"] }}{% else %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% endif %}</h3>
@@ -28,6 +30,5 @@
 		<p>{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</p>
 	{% endif %}
 </div>
-
 {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
 {% include templateName %}
