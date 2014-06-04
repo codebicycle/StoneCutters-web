@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Adre\xE7a de correu electr\xF2nic',
     'listingpageitemslisting.AllResultsNew': 'Tots els resultats',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',
+    'listingpageitemslisting.ZeroResultsPage': 'Ho sentim, no hem trobat resultats de <<CATEGORY>> a <<REGION>>.',
     'distancediv.changeLocation': 'Canvia ubicaci\xF3',
     'postingtitlelisting.Congratulations': 'Felicitats! El vostre anunci s\'ha publicat. ',
     'postingtitlelisting.view': 'Podeu veure el vostre anunci:',

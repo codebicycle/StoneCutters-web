@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Adr\xE8s Im\xE8l',
     'listingpageitemslisting.AllResultsNew': 'Tout resilta yo',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nou regr\xE8t men nou pa jwenn okenn rezilta pou rech\xE8ch ou an. ',
+    'listingpageitemslisting.ZeroResultsPage': 'Nou regr\xE8t, nou pa jwenn okenn rezilta nan<<CATEGORY>> pou <<REGION>>.',
     'distancediv.changeLocation': 'Chanje kote an ',
     'postingtitlelisting.Congratulations': 'Felisitasyon! Anons ou an pibliye.',
     'postingtitlelisting.view': 'Ou ka gade anons ou an :',

@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desv\xE6rre kan vi ikke finde noget resultat p\xE5 din s\xF8gning.',
+    'listingpageitemslisting.ZeroResultsPage': 'Vi beklager, men vi har ikke fundet nogle resultater i <<CATEGORY>> i <<REGION>>.',
     'distancediv.changeLocation': '\xE6ndr sted',
     'postingtitlelisting.Congratulations': 'Tilykke! Din annonce er blevet indrykket.',
     'postingtitlelisting.view': 'Du kan se din annonce:',

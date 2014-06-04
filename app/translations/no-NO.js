@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-postadresse',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi beklager men vi fant ingen s\xF8keresultater.',
+    'listingpageitemslisting.ZeroResultsPage': 'Beklager, men vi har ikke funnet noen resultater i <<CATEGORY>> i <<REGION>>.',
     'distancediv.changeLocation': 'Endre sted',
     'postingtitlelisting.Congratulations': 'Gratulerer! Din annonse har blitt publisert.',
     'postingtitlelisting.view': 'Du kan se din annonse:',

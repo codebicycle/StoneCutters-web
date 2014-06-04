@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Alamat Emel ',
     'listingpageitemslisting.AllResultsNew': 'Semua keputusan',
     'listingpageitemslisting.WeAreSorryNoResults': 'Kami minta maaf kerana kami tidak mendapat keputusan untuk carian anda.',
+    'listingpageitemslisting.ZeroResultsPage': 'Kami minta maaf, kami masih tidak menjumpai keputusan dalam <<CATEGORY>> di <<REGION>>.',
     'distancediv.changeLocation': 'Tukar lokasi',
     'postingtitlelisting.Congratulations': 'Tahniah! Iklan anda telah diterbitkan. ',
     'postingtitlelisting.view': 'Anda boleh melihat iklan anda:',

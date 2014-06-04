@@ -7,7 +7,7 @@
     {{ Breadcrumb(dictionary, link, category.name, '<span class="switchView"></span>') }}
     {% if metadata.total == 0 %}
         <div class="emtyList">
-            {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
+            {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
         </div>
     {% else %}
         <ul class="itemListing">

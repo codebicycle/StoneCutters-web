@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Adresa de email',
     'listingpageitemslisting.AllResultsNew': 'Toate rezultatele',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ne pare r\u0103u dar nu avem rezultate pentru c\u0103utarea dvs.',
+    'listingpageitemslisting.ZeroResultsPage': 'Ne pare r\u0103u, nu am g\u0103sit rezultate \xEEn <<CATEGORY>> \xEEn <<REGION>>.',
     'distancediv.changeLocation': 'Schimb\u0103 pozi\u0163ia',
     'postingtitlelisting.Congratulations': 'Felicit\u0103ri! Anun\u0163ul dvs. a fost publicat.',
     'postingtitlelisting.view': 'Pute\u0163i vizualiza anun\u0163ul dvs.:',

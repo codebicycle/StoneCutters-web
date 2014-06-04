@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-mail adresa',
     'listingpageitemslisting.AllResultsNew': 'Svi rezultati',
     'listingpageitemslisting.WeAreSorryNoResults': '\u017Dao nam je, ali za va\u0161u pretragu nemamo rezultata.',
+    'listingpageitemslisting.ZeroResultsPage': '\u017Dao nam je, nismo prona\u0161li rezultate u<<CATEGORY>> u <<REGION>>.',
     'distancediv.changeLocation': 'Promjeniti lokaciju',
     'postingtitlelisting.Congratulations': '\u010Cestitamo! Va\u0161 oglas je objavljen.',
     'postingtitlelisting.view': 'Mo\u017Eete vidjeti svoj oglas:',

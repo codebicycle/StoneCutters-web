@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Adres e-mail',
     'listingpageitemslisting.AllResultsNew': 'Wszystkie wyniki',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',
+    'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',
     'distancediv.changeLocation': 'Zmie\u0144 lokalizacj\u0119',
     'postingtitlelisting.Congratulations': 'Gratulujemy! Twoje og\u0142oszenie zosta\u0142o opublikowane.',
     'postingtitlelisting.view': 'Zobacz swoje og\u0142oszenie:',

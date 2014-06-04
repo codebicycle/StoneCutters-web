@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'El. pa\u0161to adresas',
     'listingpageitemslisting.AllResultsNew': 'Visi rezultatai',
     'listingpageitemslisting.WeAreSorryNoResults': 'Atsipra\u0161ome, ta\u010Diau neturime j\u016Bs\u0173 paie\u0161kos rezultat\u0173.',
+    'listingpageitemslisting.ZeroResultsPage': 'Atsipra\u0161ome, <<CATEGORY>>, esan\u010Di\u0173 <<REGION>>, neradome.',
     'distancediv.changeLocation': 'Keisti viet\u0105',
     'postingtitlelisting.Congratulations': 'Sveikiname! J\u016Bs\u0173 skelbimas paskelbtas. ',
     'postingtitlelisting.view': 'Galite per\u017Ei\u016Br\u0117ti savo skelbim\u0105:',

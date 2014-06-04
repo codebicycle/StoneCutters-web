@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': '\u7535\u5B50\u90AE\u7BB1\u5730\u5740',
     'listingpageitemslisting.AllResultsNew': '\u6240\u6709\u7ED3\u679C',
     'listingpageitemslisting.WeAreSorryNoResults': '\u5BF9\u4E0D\u8D77\uFF0C\u6CA1\u6709\u627E\u5230\u60A8\u641C\u7D22\u7684\u7ED3\u679C',
+    'listingpageitemslisting.ZeroResultsPage': '\u5BF9\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u5728<<REGION>> \u7684 <<CATEGORY>> \u76F8\u5173\u7ED3\u679C\u3002',
     'distancediv.changeLocation': '\u66F4\u6539\u5730\u533A',
     'postingtitlelisting.Congratulations': '\u606D\u559C\u60A8\uFF01\u60A8\u7684\u5E7F\u544A\u5DF2\u53D1\u5E03\u3002',
     'postingtitlelisting.view': '\u60A8\u53EF\u4EE5\u67E5\u770B\u60A8\u7684\u5E7F\u544A\uFF1A',

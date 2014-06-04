@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-mailadres',
     'listingpageitemslisting.AllResultsNew': 'Alle resultaten',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
+    'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',
     'distancediv.changeLocation': 'Wijzig locatie',
     'postingtitlelisting.Congratulations': 'Je advertentie is geplaatst.',
     'postingtitlelisting.view': 'Je kunt je advertentie bekijken op:',

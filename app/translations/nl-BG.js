@@ -53,6 +53,7 @@ module.exports = {
     'unexistingitem.ListingUnavailable': 'Deze advertentie is niet meer beschikbaar',
     'landingbody.EmailAddress': 'E-mailadres',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
+    'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',
     'distancediv.changeLocation': 'Wijzig locatie',
     'postingtitlelisting.Congratulations': 'Je advertentie is geplaatst.',
     'postingtitlelisting.view': 'Je kunt je advertentie bekijken op:',

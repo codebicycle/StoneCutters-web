@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Direcci\xF3n de Email',
     'listingpageitemslisting.AllResultsNew': 'Todos los resultados',
     'listingpageitemslisting.WeAreSorryNoResults': 'Lo lamentamos pero no hay resultados para tu b\xFAsqueda.',
+    'listingpageitemslisting.ZeroResultsPage': 'Disculpa, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',
     'distancediv.changeLocation': 'Cambiar ubicaci\xF3n',
     'postingtitlelisting.Congratulations': '\xA1Enhorabuena! Tu anuncio ha sido publicado.',
     'postingtitlelisting.view': 'Puedes ver tu anuncio:',

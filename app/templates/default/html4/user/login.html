@@ -20,6 +20,9 @@
             </div>
         </div>
     </form>
+    <div class="formField" style="padding-top:0;">
+        <a href="/register">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
+    </div>
     <div class="line"></div>
     <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</h4>
@@ -33,12 +36,5 @@
             </div>
         </div>
     </form>
-    <div class="line"></div>
-    <h4>{{ dictionary["loginbox.NotAMember"] }}</h4>
-    <div class="formActions">
-        <div class="btn-adjust btnOrange btnForm">
-            <a href="{{ '/register' | link }}" class="btns orange">{{ dictionary["loginbox.CreateYourAccount"] }}</a>
-        </div>
-    </div>
 </div>
 {{ BreadcrumbHome(dictionary, link) }}

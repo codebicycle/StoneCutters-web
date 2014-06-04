@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Email',
     'listingpageitemslisting.AllResultsNew': 'Tous les r\xE9sultats',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nous sommes d\xE9sol\xE9s mais il n\'y pas de r\xE9sultats pour votre recherche.',
+    'listingpageitemslisting.ZeroResultsPage': 'D\xE9sol\xE9 mais nous n\'avons trouv\xE9 aucun r\xE9sultat dans <<CATEGORY>> pour <<REGION>>.',
     'distancediv.changeLocation': 'Modifier le lieu',
     'postingtitlelisting.Congratulations': 'F\xE9licitations ! Votre annonce a \xE9t\xE9 publi\xE9e.',
     'postingtitlelisting.view': 'Vous pouvez voir votre annonce :',

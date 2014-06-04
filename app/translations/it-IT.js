@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Indirizzo email',
     'listingpageitemslisting.AllResultsNew': 'Tutti i risultati',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ci dispiace ma non ci sono risultati per la tua ricerca.',
+    'listingpageitemslisting.ZeroResultsPage': 'Ci dispiace, ma non abbiamo trovato<<RESULTS>> in <<CATEGORY>> in <<REGION>>.',
     'distancediv.changeLocation': 'Cambia regione',
     'postingtitlelisting.Congratulations': 'Complimenti! Il tuo annuncio e\' stato pubblicato su OLX.',
     'postingtitlelisting.view': 'Puoi vederlo in:',

@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-Mailadresse',
     'listingpageitemslisting.AllResultsNew': 'Alle Resultate',
     'listingpageitemslisting.WeAreSorryNoResults': 'Es tut uns leid, aber wir haben keine Ergebnosse f\xFCr Ihre Suche.',
+    'listingpageitemslisting.ZeroResultsPage': 'Es konnten leider keine Ergebnisse in <<CATEGORY>> in <<REGION>> gefunden werden.',
     'distancediv.changeLocation': 'Ort wechseln',
     'postingtitlelisting.Congratulations': 'Herzlichen Gl\xFCckwunsch! Ihr Artikel ist ver\xF6ffentlicht worden.',
     'postingtitlelisting.view': 'Sie k\xF6nnen ihn sehen bei:',

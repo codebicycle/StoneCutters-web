@@ -54,6 +54,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-postadress',
     'listingpageitemslisting.AllResultsNew': 'Alla resultat',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi \xE4r ledsna, men vi har inga resultat f\xF6r din s\xF6kning.',
+    'listingpageitemslisting.ZeroResultsPage': 'Vi \xE4r ledsna, vi har inte hittat resultat i <<CATEGORY>> i <<REGION>>.',
     'distancediv.changeLocation': '\xC4ndra ort',
     'postingtitlelisting.Congratulations': 'Gratulerar! Din annons har lagts upp.',
     'postingtitlelisting.view': 'Du kan se din annons:',
