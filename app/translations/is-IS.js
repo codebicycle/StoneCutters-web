@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'T\xF6lvup\xF3stfang',
     'listingpageitemslisting.AllResultsNew': 'Allar ni\xF0urst\xF6\xF0ur',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDEv\xED mi\xF0ur fundust engar ni\xF0urst\xF6\xF0ur fyrir leit \xFE\xEDna.',
+    'listingpageitemslisting.ZeroResultsPage': '\xDEv\xED mi\xF0ur fundum vi\xF0 engar ni\xF0urst\xF6\xF0ur \xED <<CATEGORY>> \xED <<REGION>>.',
     'distancediv.changeLocation': 'Breyta sta\xF0setningu',
     'postingtitlelisting.Congratulations': 'Til hamingju! Augl\xFDsingin \xFE\xEDn hefur veri\xF0 birt.',
     'postingtitlelisting.view': '\xDE\xFA getur s\xE9\xF0 augl\xFDsinguna \xFE\xEDna:',

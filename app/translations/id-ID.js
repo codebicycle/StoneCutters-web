@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Alamat Email',
     'listingpageitemslisting.AllResultsNew': 'Semua hasil',
     'listingpageitemslisting.WeAreSorryNoResults': 'Maaf tidak ada hasil untuk pencarian Anda.',
+    'listingpageitemslisting.ZeroResultsPage': 'Maaf, kami tidak menemukan hasil untuk <<CATEGORY>> di <<REGION>>.',
     'distancediv.changeLocation': 'Ganti lokasi',
     'postingtitlelisting.Congratulations': 'Selamat! Iklan Anda telah Diterbitkan. ',
     'postingtitlelisting.view': 'Anda dapat melihat iklan Anda:',

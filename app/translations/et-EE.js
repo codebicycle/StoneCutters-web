@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-posti aadress',
     'listingpageitemslisting.AllResultsNew': 'K\xF5ik tulemused',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vabandame, kuid meil ei ole Teie otsingule tulemusi',
+    'listingpageitemslisting.ZeroResultsPage': 'Vabandame, me ei leidnud tulemusi <<CATEGORY>>  <<REGION>>.',
     'distancediv.changeLocation': 'Muutke asukohta',
     'postingtitlelisting.Congratulations': 'Palju \xF5nne! Teie kuulutus on avaldatud. ',
     'postingtitlelisting.view': 'Te saate oma kuulutust vaadata:',

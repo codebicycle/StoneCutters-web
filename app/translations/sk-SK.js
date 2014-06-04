@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'listingpageitemslisting.AllResultsNew': 'V\u0161etky v\xFDsledky',
     'listingpageitemslisting.WeAreSorryNoResults': '\u013Dutujeme, neboli n\xE1jden\xE9 \u017Eiadne v\xFDsledky.',
+    'listingpageitemslisting.ZeroResultsPage': 'Je n\xE1m \u013E\xFAto, nena\u0161li sme v\xFDsledky v kateg\xF3rii <<CATEGORY>> v regi\xF3ne <<REGION>>.',
     'distancediv.changeLocation': 'Zmeni\u0165 miesto',
     'postingtitlelisting.Congratulations': 'Gratulujeme! Va\u0161a reklama bola zverejnen\xE1. ',
     'postingtitlelisting.view': 'Va\u0161u reklamu m\xF4\u017Eete zobrazi\u0165:',

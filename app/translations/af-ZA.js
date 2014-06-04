@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-posadres',
     'listingpageitemslisting.AllResultsNew': 'Alle resultate',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ons is jammer, maar jou soektog geen resultate opgelewer nie.',
+    'listingpageitemslisting.ZeroResultsPage': 'Jammer, ons het geen resultate in <<CATEGORY>> in <<REGION>> gekry nie.',
     'distancediv.changeLocation': 'Verander ligging',
     'postingtitlelisting.Congratulations': 'Veels geluk! Jou Advertensie is Gepubliseer. ',
     'postingtitlelisting.view': 'Jy kan jou advt. bekyk:',

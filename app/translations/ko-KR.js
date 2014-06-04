@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': '\uC774\uBA54\uC77C \uC8FC\uC18C',
     'listingpageitemslisting.AllResultsNew': '\uBAA8\uB4E0 \uACB0\uACFC',
     'listingpageitemslisting.WeAreSorryNoResults': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uAC80\uC0C9\uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
+    'listingpageitemslisting.ZeroResultsPage': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4, <<REGION>>\uC758 <<CATEGORY>>\uC5D0\uC11C \uCC3E\uC740 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'distancediv.changeLocation': '\uC9C0\uC5ED \uBC14\uAFB8\uAE30',
     'postingtitlelisting.Congratulations': '\uCD95\uD558\uB4DC\uB9BD\uB2C8\uB2E4! \uADC0\uD558\uC758 \uAD11\uACE0\uAC00 \uAC8C\uC7AC\uB418\uC5C8\uC2B5\uB2C8\uB2E4. ',
     'postingtitlelisting.view': '\uADC0\uD558\uC758 \uAD11\uACE0\uB97C \uBCF4\uC2E4 \uC218\uAC00 \uC788\uC2B5\uB2C8\uB2E4:',

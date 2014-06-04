@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'S\xE4hk\xF6postiosoite',
     'listingpageitemslisting.AllResultsNew': 'Kaikki tulokset',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
+    'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',
     'distancediv.changeLocation': 'muokkaa sijaintia',
     'postingtitlelisting.Congratulations': 'Onneksi olkoon! Ilmoituksesi on julkaistu. ',
     'postingtitlelisting.view': 'Voit n\xE4hd\xE4 ilmoituksesi:',
