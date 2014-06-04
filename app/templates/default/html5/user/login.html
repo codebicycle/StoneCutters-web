@@ -14,6 +14,7 @@
             <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="btns orange">
         </div>
     </form>
+    <a href="/register">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
     <div class="line"></div>
     <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
         <h4>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</h4>
@@ -23,9 +24,4 @@
             <input type="submit" value="{{ dictionary["myolx.Send"] }}" class="btns orange">
         </div>
     </form>
-    <div class="line"></div>
-    <h4>{{ dictionary["loginbox.NotAMember"] }}</h4>
-    <div class="btnCenter">
-        <a href="{{ '/register' | link }}" class="btns orange">{{ dictionary["loginbox.CreateYourAccount"] }}</a>
-    </div>
 </section>
