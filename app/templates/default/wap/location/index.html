@@ -1,22 +1,20 @@
 <tr>
     <td>
-        {% if search %}
-            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
-                <tr>
-                    <td style="padding: .5em;">
-                        <small>
-                            <img src="{{ "/images/wap/ico_city.gif" | static }}">
-                            <small>
-                                <a href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>{% if location.current %} &#62; <a href="/{{ target }}?location={{ location.children[0].url }}">{{ location.children[0].name }}</a>{% endif %}
-                            </small>
-                        </small>
-                    </td>
-                </tr>
-            </table>
-        {% endif %}
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
             <tr>
-                <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                <td style="border-top: solid thin #808080; padding:1px 4px;">
+                    <small>
+                        <a href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>
+                        {% if location.current and location.current.type != 'country' %}
+                            <small>&#62; {{ location.current.name }}</small>
+                        {% endif %}
+                    </small>
+                </td>
+            </tr>
+        </table>
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
+            <tr>
+                <td style="padding: .25em .5em; border-top: solid thin #B0B0B0;">
                     <form action="/location">
                         <label for="search">
                             <small>{{ dictionary["countryoptions.EnterCity"] }}</small>

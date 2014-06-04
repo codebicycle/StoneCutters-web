@@ -1,6 +1,6 @@
 <div id="locationSelect">
 	<p>
-		{% if location.current %}
+		{% if location.current and location.current.type != 'country' %}
 			<strong>{{location.current.name}}</strong> <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
 		{% else %}
 			<strong>{{location.name}}</strong> <a href="/location">{{ dictionary["countryoptions.SelectACity"] }}</a>
