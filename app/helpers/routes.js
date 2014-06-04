@@ -1,23 +1,8 @@
 'use strict';
 
 module.exports = {
-    home_with_params: {
-        url: '?*params',
-        view: 'home#index',
-        isServer: false,
-        google: 'home',
-        ati: {
-            process: false,
-            params: {
-                page_name: 'home_page',
-                category: 'home'
-            }
-        }
-    },
-    home: {
+    'home#index': {
         url: '',
-        view: 'home#index',
-        isServer: false,
         google: 'home',
         ati: {
             process: false,
@@ -27,10 +12,13 @@ module.exports = {
             }
         }
     },
-    search_with_filters: {
-        url: 'search/:search/-p-:page/:filters?/?$',
-        view: 'items#search',
-        isServer: false,
+    'items#search#filters': {
+        urls: {
+            server: 'search/:search/-p-:page/:filters?',
+            client: {
+                url: 'search/:search/-p-:page(/)(:filters)'
+            }
+        },
         google: '[category-name]/[subcategory-id]/search/[filter_name_value]',
         ati: {
             process: true,
@@ -42,10 +30,13 @@ module.exports = {
             }
         }
     },
-    search: {
-        url: 'search/:search?/?$',
-        view: 'items#search',
-        isServer: false,
+    'items#search': {
+        urls: {
+            server: 'search/:search?',
+            client: {
+                url: 'search(/)(:search)'
+            }
+        },
         google: '[category-name]/[subcategory-id]/search',
         ati: {
             process: true,
@@ -57,10 +48,13 @@ module.exports = {
             }
         }
     },
-    nfsearch_with_filters: {
-        url: 'nf/search/:search/-p-:page/:filters?/?$',
-        view: 'items#search',
-        isServer: false,
+    'items#search#nfFilters': {
+        urls: {
+            server: 'nf/search/:search/-p-:page/:filters?',
+            client: {
+                url: 'nf/search/:search/-p-:page(/)(:filters)'
+            }
+        },
         google: '[category-name]/[subcategory-id]/search/[filter_name_value]',
         ati: {
             process: true,
@@ -72,10 +66,13 @@ module.exports = {
             }
         }
     },
-    nfsearch: {
-        url: 'nf/search/:search?/?$',
-        view: 'items#search',
-        isServer: false,
+    'items#search#nf': {
+        urls: {
+            server: 'nf/search/:search?',
+            client: {
+                url: 'nf/search(/)(:search)'
+            }
+        },
         google: '[category-name]/[subcategory-id]/search',
         ati: {
             process: true,
@@ -87,10 +84,8 @@ module.exports = {
             }
         }
     },
-    register: {
-        url: 'register/?$',
-        view: 'user#registration',
-        isServer: false,
+    'user#registration': {
+        url: 'register',
         google: 'register',
         ati: {
             process: false,
@@ -100,10 +95,8 @@ module.exports = {
             }
         }
     },
-    login: {
-        url: 'login/?$',
-        view: 'user#login',
-        isServer: false,
+    'user#login': {
+        url: 'login',
         google: 'login',
         ati: {
             process: false,
@@ -113,15 +106,11 @@ module.exports = {
             }
         }
     },
-    logout: {
-        url: 'logout/?$',
-        view: 'user#logout',
-        isServer: false
+    'user#logout': {
+        url: 'logout'
     },
-    myolx: {
-        url: 'myolx/?$',
-        view: 'user#myolx',
-        isServer: false,
+    'user#myolx': {
+        url: 'myolx',
         google: 'myolx',
         ati: {
             process: false,
@@ -131,10 +120,8 @@ module.exports = {
             }
         }
     },
-    myadslisting: {
-        url: 'myolx/myadslisting/?$',
-        view: 'user#my-ads',
-        isServer: false,
+    'user#my-ads': {
+        url: 'myolx/myadslisting',
         google: 'myadslisting',
         ati: {
             process: false,
@@ -144,10 +131,8 @@ module.exports = {
             }
         }
     },
-    favoritelisting: {
-        url: 'myolx/favoritelisting/?$',
-        view: 'user#favorites',
-        isServer: false,
+    'user#favorites': {
+        url: 'myolx/favoritelisting',
         google: 'favoritelisting',
         ati: {
             process: false,
@@ -157,10 +142,8 @@ module.exports = {
             }
         }
     },
-    location: {
-        url: 'location/?$',
-        view: 'location#index',
-        isServer: false,
+    'location#index': {
+        url: 'location',
         google: 'post_location/[rendering]',
         ati: {
             process: false,
@@ -171,10 +154,8 @@ module.exports = {
             }
         }
     },
-    posting_success: {
-        url: 'posting/success/:itemId/?$',
-        view: 'post#success',
-        isServer: false,
+    'post#success': {
+        url: 'posting/success/:itemId',
         google: '[category-name]/[subcategory-id]/post_success/[rendering]',
         ati: {
             process: true,
@@ -194,10 +175,8 @@ module.exports = {
             }
         }
     },
-    posting_cat_subcat: {
-        url: 'posting/:categoryId/:subcategoryId/?$',
-        view: 'post#form',
-        isServer: false,
+    'post#form': {
+        url: 'posting/:categoryId/:subcategoryId',
         google: '[category-name]/[subcategory-id]/post_form/[rendering]',
         ati: {
             process: true,
@@ -212,10 +191,8 @@ module.exports = {
             }
         }
     },
-    posting_cat: {
-        url: 'posting/:categoryId/?$',
-        view: 'post#subcat',
-        isServer: false,
+    'post#subcat': {
+        url: 'posting/:categoryId',
         google: 'post_subcategorylist/[rendering]',
         ati: {
             process: false,
@@ -226,10 +203,8 @@ module.exports = {
             }
         }
     },
-    posting: {
-        url :'posting/?$',
-        view: 'post#index',
-        isServer: false,
+    'post#index': {
+        url :'posting',
         google: 'post_categorylist/[rendering]',
         ati: {
             process: false,
@@ -240,10 +215,8 @@ module.exports = {
             }
         }
     },
-    posting_edit: {
-        url: 'myolx/edititem/:itemId?/?$',
-        view: 'post#edit',
-        isServer: false,
+    'post#edit': {
+        url: 'myolx/edititem/:itemId',
         google: 'edititem',
         ati: {
             process: true,
@@ -287,10 +260,8 @@ module.exports = {
         }
     },
     */
-    terms: {
-        url: 'terms/?$',
-        view: 'pages#terms',
-        isServer: false,
+    'pages#terms': {
+        url: 'terms',
         google: 'terms',
         ati: {
             process: false,
@@ -300,10 +271,8 @@ module.exports = {
             }
         }
     },
-    help: {
-        url: 'help/?$',
-        view: 'pages#help',
-        isServer: false,
+    'pages#help': {
+        url: 'help',
         google: 'help',
         ati: {
             process: false,
@@ -313,10 +282,8 @@ module.exports = {
             }
         }
     },
-    interstitial: {
-        url: 'interstitial/?$',
-        view: 'pages#interstitial',
-        isServer: false,
+    'pages#interstitial': {
+        url: 'interstitial',
         google: 'interstitial',
         ati: {
             process: false,
@@ -326,10 +293,13 @@ module.exports = {
             }
         }
     },
-    item_reply_success: {
-        url: 'iid-:itemId([0-9]+)/reply/success/?$',
-        view: 'items#success',
-        isServer: false,
+    'items#success': {
+        urls: {
+            server: 'iid-:itemId([0-9]+)/reply/success',
+            client: {
+                url: 'iid-:itemId/reply/success'
+            }
+        },
         google: '[category-name]/[subcategory-id]/reply_success/[item_attributes]',
         ati: {
             process: true,
@@ -347,10 +317,13 @@ module.exports = {
             }
         }
     },
-    item_reply: {
-        url: 'iid-:itemId([0-9]+)/reply/?$',
-        view: 'items#reply',
-        isServer: false,
+    'items#reply': {
+        urls: {
+            server: 'iid-:itemId([0-9]+)/reply',
+            client: {
+                url: 'iid-:itemId/reply'
+            }
+        },
         google: '[category-name]/[subcategory-id]/reply/[item_attributes]',
         ati: {
             process: true,
@@ -368,10 +341,13 @@ module.exports = {
             }
         }
     },
-    item: {
-        url: ':title-iid-:itemId([0-9]+)/?$',
-        view: 'items#show',
-        isServer: false,
+    'items#show': {
+        urls: {
+            server: ':title-iid-:itemId([0-9]+)',
+            client: {
+                url: ':title-iid-:itemId'
+            }
+        },
         google: '[category-name]/[subcategory-id]/item/[item_attributes]',
         ati: {
             process: true,
@@ -392,10 +368,13 @@ module.exports = {
             }
         }
     },
-    item_galery: {
-        url: ':title-iid-:itemId([0-9]+)/galery/?$',
-        view: 'items#galery',
-        isServer: false,
+    'items#galery': {
+        urls: {
+            server: ':title-iid-:itemId([0-9]+)/galery',
+            client: {
+                url: ':title-iid-:itemId/galery'
+            }
+        },
         google: '[category-name]/[subcategory-id]/item/[item_attributes]/galery',
         ati: {
             process: true,
@@ -416,10 +395,13 @@ module.exports = {
             }
         }
     },
-    category_with_filters: {
-        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?/?$',
-        view: 'items#index',
-        isServer: false,
+    'items#index#filters': {
+        urls: {
+            server: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?',
+            client: {
+                url: ':title-cat-:catId-p-:page(/)(:filters)'
+            }
+        },
         google: '[category-name]/[subcategory-id]/listing/[filter_name_value]',
         ati: {
             process: true,
@@ -430,9 +412,13 @@ module.exports = {
             }
         }
     },
-    category_with_page: {
-        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/?$',
-        view: 'items#index',
+    'items#index#pages': {
+        urls: {
+            server: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)',
+            client: {
+                url: ':title-cat-:catId-p-:page'
+            }
+        },
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing',
         ati: {
@@ -444,10 +430,13 @@ module.exports = {
             }
         }
     },
-    category: {
-        url: ':title-cat-:catId([0-9]+)/?$',
-        view: 'categories#show',
-        isServer: false,
+    'categories#show': {
+        urls: {
+            server: ':title-cat-:catId([0-9]+)',
+            client: {
+                url: ':title-cat-:catId'
+            }
+        },
         google: '[category-name]/subcategory_list',
         ati: {
             process: true,
@@ -458,10 +447,14 @@ module.exports = {
             }
         }
     },
-    error: {
-        url: ':errorCode([0-9]{3})/?$',
-        view: 'pages#error',
-        isServer: false,
+    'pages#error': {
+        urls: {
+            server: ':errorCode([0-9]{3})',
+            client: {
+                url: /([0-9]{3})/,
+                params: ['errorCode']
+            }
+        },
         google: 'error',
         ati: {
             process: false,

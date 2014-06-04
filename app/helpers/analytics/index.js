@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var config = require('../../config');
-var urls = require('../urls');
+var routes = require('../routes');
 var google = require('./google');
 var ati = require('./ati');
 
@@ -32,13 +32,26 @@ function stringifyParams(params) {
     return str.join('&');
 }
 
+function getURLName(session, page) {
+    var name = [];
+    var currentRoute = session.currentRoute;
+    name.push(currentRoute.controller);
+    name.push('#');
+    name.push(currentRoute.action);
+    if (page) {
+        name.push('#');
+        name.push(page);
+    }
+    return name.join('');
+}
+
 function generateURL(session) {
-    var page = query.page;
-    var url = urls[page];
+    var page = getURLName(session, query.page);
+    var url = routes[page];
     var params = {};
 
     this.addParam('rendering', session.platform);
-    
+
     params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
     params.random = Math.round(Math.random() * 1000000);
     params.referer = (session.referer || '-');
