@@ -8,7 +8,6 @@ module.exports = {
 
         function controller() {
             helpers.analytics.reset();
-            helpers.analytics.setPage('terms');
 
             callback(null, {
                 analytics: helpers.analytics.generateURL(this.app.getSession())
@@ -123,7 +122,6 @@ module.exports = {
 
         function controller() {
             helpers.analytics.reset();
-            helpers.analytics.setPage('interstitial');
 
             callback(null, {
                 analytics: helpers.analytics.generateURL(this.app.getSession())
@@ -145,7 +143,6 @@ module.exports = {
                 this.app.deleteSession('error');
             }
             helpers.analytics.reset();
-            helpers.analytics.setPage('error');
             callback(null, {
                 error: err,
                 analytics: helpers.analytics.generateURL(this.app.getSession())

@@ -11,7 +11,6 @@ module.exports = {
             var spec;
 
             helpers.analytics.reset();
-            helpers.analytics.setPage('location');
 
             if (!params.search) {
                 return callback(null, {

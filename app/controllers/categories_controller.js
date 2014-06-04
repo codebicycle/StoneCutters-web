@@ -30,7 +30,6 @@ module.exports = {
             user = this.app.getSession('user');
 
             helpers.analytics.reset();
-            helpers.analytics.setPage('category');
             helpers.analytics.addParam('user', user);
             helpers.analytics.addParam('category', categoryTree.parent);
             helpers.analytics.addParam('subcategory', categoryTree.subCategory);
