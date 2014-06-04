@@ -117,7 +117,10 @@ module.exports = (function() {
         }
         params.item_type = 'adsList';
         params.location = app.getSession('siteLocation');
-        params.page = (params.page ? Number(params.page) : 1);
+        params.page = (params.page && !isNaN(Number(params.page)) ? Number(params.page) : 1);
+        app.persistSession({
+            page: params.page
+        });
         params.offset = (params.page - 1) * params.pageSize;
         if (params.search) {
             params.searchTerm = params.search;

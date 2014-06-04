@@ -1,21 +1,19 @@
 {% view 'location/select' %}
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
-{% from macros import Breadcrumb, BreadcrumbHome %}
-{% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, category.name) }}
-<div id="subCategories">
-    <ul class="normalList">
+<section id="subCategories">
+    {% from macros import Breadcrumb %}
+    {% set link = (breadcrumb | link) %}
+    {{ Breadcrumb(dictionary, link, category.name) }}
+    <ul>
         {% for subcategory in category.children %}
-            <li class="{{ "last" if loop.last else "" }}">
+            <li>
                 <a href="/{{ subcategory | slugToUrl | link }}">
-                    {{subcategory.trName}}
-                    <small style="color: #999;">({{subcategory.counter}})</small>
+                    {{subcategory.trName}} ({{subcategory.counter}})
                 </a>
             </li>
         {% endfor %}
     </ul>
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
-</div>
-{{ BreadcrumbHome(dictionary, link) }}
+</section>

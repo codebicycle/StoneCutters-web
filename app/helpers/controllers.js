@@ -31,20 +31,6 @@ function setUrlVars() {
     });
 }
 
-function setCurrentPage() {
-    var path = this.app.getSession('path');
-    var page;
-
-    if (new RegExp('^.+-p-[\\d]+(/.*)?(\\?.*)?$', 'i').test(path)) {
-        page = path.split('/')[1].split('-p-').pop();
-    }
-    if (page) {
-        this.app.persistSession({
-            page: page
-        });
-    }
-}
-
 function setLanguage(params) {
     if (typeof window === 'undefined') {
         return;
@@ -58,6 +44,10 @@ function setLanguage(params) {
     this.app.persistSession({
         selectedLanguage: params.language
     });
+}
+
+function cleanSession() {
+    this.app.deleteSession('page');
 }
 
 function setCurrentRoute() {
@@ -156,9 +146,9 @@ function processForm(params) {
 module.exports = {
     control: function(params, callback) {
         if (!redirect.call(this)) {
+            cleanSession.call(this);
             setCurrentRoute.call(this);
             setUrlVars.call(this);
-            setCurrentPage.call(this);
             setLanguage.call(this);
             setLocation.call(this, params, function next() {
                 callback.call(this, processForm.call(this, params));

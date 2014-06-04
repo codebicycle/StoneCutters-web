@@ -197,69 +197,11 @@ module.exports = (function() {
         return typesHandler[type](path);
     }
 
-    function getBreadcrumb(data) {
-        var currentRoute = data.app.getSession('currentRoute');
-        var breadcrumb = data.app.getSession('breadcrumb');
-        var path = data.app.getSession('path');
-        var referer = data.app.getSession('referer');
-        var page = data.app.getSession('page') || 0;
-        var categoryId;
-        var category;
-
-        if (currentRoute.controller !== this.name.split('/').shift()) {
-            return breadcrumb;
-        }
-        if (currentRoute.controller === 'categories') {
-            if (currentRoute.action === 'show') {
-                breadcrumb = '/';
-            }
-        }
-        else if (currentRoute.controller === 'items') {
-            if (currentRoute.action === 'index') {
-                if (page === 0) {
-                    categoryId = data.category.parentId;
-                    category = data.app.getSession('categories')._byId[categoryId];
-                    breadcrumb = '/' + slugToUrl(category);
-                }
-                else {
-                    categoryId = data.category.id;
-                    category = data.app.getSession('childCategories')[categoryId];
-                    breadcrumb = '/' + slugToUrl(category);
-                    if (page > 1) {
-                        breadcrumb += '-p-' + (page - 1);
-                    }
-                }
-            }
-            else if (currentRoute.action === 'show') {
-                categoryId = data.item.category.id;
-                category = data.app.getSession('childCategories')[categoryId];
-                breadcrumb = '/' + slugToUrl(category);
-                if (page > 1) {
-                    breadcrumb += '-p-' + page;
-                }
-            }
-            else if (currentRoute.action === 'reply') {
-                breadcrumb = '/' + slugToUrl(data.item);
-            }
-        }
-        else if (currentRoute.controller === 'post') {
-            if (currentRoute.action === 'form') {
-                breadcrumb = '/';
-            }
-        }
-        breadcrumb = breadcrumb || referer || '/';
-        data.app.updateSession({
-            breadcrumb: breadcrumb
-        });
-        return breadcrumb;
-    }
-
     return {
         urlize: urlize,
         slugToUrl: slugToUrl,
         link: link,
         daysDiff: daysDiff,
-        'static': statics,
-        getBreadcrumb: getBreadcrumb
+        'static': statics
     };
 })();

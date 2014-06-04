@@ -3,7 +3,7 @@
 var helpers = require('../helpers');
 var _ = require('underscore');
 
-function handleIndex(params, callback) {
+function handleItems(params, callback) {
     var app = this.app;
     var spec = {
         items: {
@@ -64,6 +64,7 @@ function handleIndex(params, callback) {
         helpers.analytics.addParam('subcategory', categoryTree.subCategory);
         result.analytics = helpers.analytics.generateURL(app.getSession());
         result.category = category;
+        result.type = 'items';
         callback(err, result);
     });
 }
@@ -106,6 +107,7 @@ function handleShow(params, callback) {
     delete params.title;
     callback(null, {
         category: category,
+        type: 'categories',
         analytics: helpers.analytics.generateURL(this.app.getSession())
     });
 }
@@ -118,11 +120,10 @@ module.exports = {
             var category = helpers.categories.getCat(this.app.getSession(), params.catId);
             
             if (category.parentId) {
-                handleIndex.call(this, params, callback);
+                handleItems.call(this, params, callback);
+                return;
             } 
-            else {
-                handleShow.call(this, params, callback);
-            }
+            handleShow.call(this, params, callback);
         }
     }
 };

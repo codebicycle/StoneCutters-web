@@ -1,19 +1,2 @@
-{% view 'location/select' %}
-{% set templateName = 'compiled/' + template + '/partials/search.html' %}
+{% set templateName = 'compiled/' + template + '/' + type + '/index.html' %}
 {% include templateName %}
-<section id="subCategories">
-    {% from macros import Breadcrumb %}
-    {% set link = (breadcrumb | link) %}
-    {{ Breadcrumb(dictionary, link, category.name) }}
-    <ul>
-        {% for subcategory in category.children %}
-            <li>
-                <a href="/{{ [subcategory | slugToUrl, '-p-1'] | join('') | link }}">
-                    {{subcategory.trName}} ({{subcategory.counter}})
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-    {% include templateName %}
-</section>

@@ -17,12 +17,3 @@ exports.link = function link(href, siteLocation) {
     }
     return href;
 };
-
-exports.logMiddleware = function () {
-    var args = arguments;
-
-    return function(req, res, next) {
-        console.log.apply(console, args);
-        next();
-    };
-};
