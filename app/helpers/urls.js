@@ -417,8 +417,8 @@ module.exports = {
         }
     },
     category_with_filters: {
-        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?/?$',
-        view: 'items#index',
+        url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?/?$',
+        view: 'categories#show',
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing/[filter_name_value]',
         ati: {
@@ -432,7 +432,7 @@ module.exports = {
     },
     category_with_page: {
         url: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/?$',
-        view: 'items#index',
+        view: 'categories#show',
         isServer: false,
         google: '[category-name]/[subcategory-id]/listing',
         ati: {

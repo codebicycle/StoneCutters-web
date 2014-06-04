@@ -10,6 +10,7 @@ module.exports = {
     seo: require('./seo'),
     common: require('./common'),
     urls: require('./urls'),
+    pagination: require('./pagination'),
     fitText: function(element, kompressor, options) {
         var compressor = kompressor || 1;
         var settings = $.extend({

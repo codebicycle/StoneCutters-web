@@ -202,7 +202,7 @@ module.exports = (function() {
         var breadcrumb = data.app.getSession('breadcrumb');
         var path = data.app.getSession('path');
         var referer = data.app.getSession('referer');
-        var page = data.app.getSession('page') || 1;
+        var page = data.app.getSession('page') || 0;
         var categoryId;
         var category;
 
@@ -216,21 +216,27 @@ module.exports = (function() {
         }
         else if (currentRoute.controller === 'items') {
             if (currentRoute.action === 'index') {
-                if (page > 1) {
-                    categoryId = data.category.id;
-                    category = data.app.getSession('childCategories')[categoryId];
-                    breadcrumb = '/' + slugToUrl(category) + '-p-' + (page - 1);
-                }
-                else {
+                if (page === 0) {
                     categoryId = data.category.parentId;
                     category = data.app.getSession('categories')._byId[categoryId];
                     breadcrumb = '/' + slugToUrl(category);
+                }
+                else {
+                    categoryId = data.category.id;
+                    category = data.app.getSession('childCategories')[categoryId];
+                    breadcrumb = '/' + slugToUrl(category);
+                    if (page > 1) {
+                        breadcrumb += '-p-' + (page - 1);
+                    }
                 }
             }
             else if (currentRoute.action === 'show') {
                 categoryId = data.item.category.id;
                 category = data.app.getSession('childCategories')[categoryId];
-                breadcrumb = '/' + slugToUrl(category) + '-p-' + page;
+                breadcrumb = '/' + slugToUrl(category);
+                if (page > 1) {
+                    breadcrumb += '-p-' + page;
+                }
             }
             else if (currentRoute.action === 'reply') {
                 breadcrumb = '/' + slugToUrl(data.item);
