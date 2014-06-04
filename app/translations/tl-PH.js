@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'Lahat ng resulta',
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',
+    'listingpageitemslisting.ZeroResultsPage': 'Paumanhin, walang resulta sa <<CATEGORY>> sa <<REGION>>.',
     'distancediv.changeLocation': 'Palitan ang Lokasyon',
     'postingtitlelisting.Congratulations': 'Mabuhay! Ang iyong ad ay nai-post na.',
     'postingtitlelisting.view': 'Makikita mo ito sa:',

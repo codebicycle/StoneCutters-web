@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-Posta Adresi',
     'listingpageitemslisting.AllResultsNew': 'B\xFCt\xFCn sonu\xE7lar',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z bulunamad\u0131.',
+    'listingpageitemslisting.ZeroResultsPage': '\xDCzg\xFCn\xFCz <<CATEGORY>> kategorisinde b\xF6lgesi <<REGION>> olan sonuca rastlanmad\u0131.',
     'distancediv.changeLocation': 'Yeri de\u011Fi\u015Ftir',
     'postingtitlelisting.Congratulations': 'Tebrikler! \u0130lan\u0131n\u0131z Yay\u0131nland\u0131. ',
     'postingtitlelisting.view': '\u0130lan\u0131n\u0131z\u0131 g\xF6r\xFCnt\xFClemek i\xE7in:',

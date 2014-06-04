@@ -5,40 +5,46 @@
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, category.name) }}
 <div id="itemListing">
-    <ul class="itemListing">
-        {% for item in items %}
-            <li>
-                <a href="/{{ item | slugToUrl | link }}">
-                    <div class="imageCont">
-                        <div class="imageContAlign">
-                            <img alt="" src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}" {{ "class='noPhoto'" if not item.thumbnail }}>
+    {% if metadata.total == 0 %}
+        <div class="emtyList">
+            {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
+        </div>
+    {% else %}
+        <ul class="itemListing">
+            {% for item in items %}
+                <li>
+                    <a href="/{{ item | slugToUrl | link }}">
+                        <div class="imageCont">
+                            <div class="imageContAlign">
+                                <img alt="" src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}" {{ "class='noPhoto'" if not item.thumbnail }}>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="itemInfo">
+                        <h2>{{ item.price.displayPrice }}</h2>
+                        <span>{{ dictionary[item.date.since] }} {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}</span>
+                        <div class="centerCont">
+                            <a href="/{{ item | slugToUrl | link }}">
+                                <p>{{ item.title }}</p>
+                            </a>
                         </div>
                     </div>
-                </a>
-                <div class="itemInfo">
-                    <h2>{{ item.price.displayPrice }}</h2>
-                    <span>{{ dictionary[item.date.since] }} {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}</span>
-                    <div class="centerCont">
-                        <a href="/{{ item | slugToUrl | link }}">
-                            <p>{{ item.title }}</p>
-                        </a>
-                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if metadata.next or metadata.previous %}
+            <div id="itemPagination">
+                <a href="{{ (metadata.previous | link) if metadata.previous }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
+                <div class="center">
+                    {{ metadata | pagination }}
                 </div>
-            </li>
-        {% endfor %}
-    </ul>
-    {% if metadata.next or metadata.previous %}
-        <div id="itemPagination">
-            <a href="{{ (metadata.previous | link) if metadata.previous }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
-            <div class="center">
-                {{ metadata | pagination }}
+                <a href="{{ (metadata.next | link) if metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
             </div>
-            <a href="{{ (metadata.next | link) if metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
-        </div>
-        <div id="itemPaginationCaption">
-            {{ "<a href='' class='left'>Anterior</a>" if metadata.previous }}
-            {{ "<a href='' class='right'>Siguiente</a>" if metadata.next }}
-        </div>
+            <div id="itemPaginationCaption">
+                {{ "<a href='' class='left'>Anterior</a>" if metadata.previous }}
+                {{ "<a href='' class='right'>Siguiente</a>" if metadata.next }}
+            </div>
+        {% endif %}
     {% endif %}
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}

@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-mail c\xEDm',
     'listingpageitemslisting.AllResultsNew': '\xD6sszes tal\xE1lat',
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',
+    'listingpageitemslisting.ZeroResultsPage': 'Sajn\xE1ljuk, nem tal\xE1ltunk eredm\xE9nyeket a <<CATEGORY>> kateg\xF3ri\xE1ban <<REGION>> r\xE9gi\xF3ban.',
     'distancediv.changeLocation': 'M\xE1s hely',
     'postingtitlelisting.Congratulations': 'Gratul\xE1lunk! A hirdet\xE9s\xE9t k\xF6zz\xE9tett\xFCk. ',
     'postingtitlelisting.view': 'Hirdet\xE9s\xE9t megtekintheti:',

@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'All results',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
+    'listingpageitemslisting.ZeroResultsPage': 'We are sorry, we haven\'t found results in <<CATEGORY>> at <<REGION>>.',
     'distancediv.changeLocation': 'Change Location',
     'postingtitlelisting.Congratulations': 'Congratulations! Your Ad has been Published. ',
     'postingtitlelisting.view': 'You can view your ad:',

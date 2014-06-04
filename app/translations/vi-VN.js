@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': '\u0110\u1ECBa ch\u1EC9 email',
     'listingpageitemslisting.AllResultsNew': 'T\u1EA5t c\u1EA3 k\u1EBFt qu\u1EA3',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ch\xFAng t\xF4i r\u1EA5t ti\u1EBFc ch\xFAng t\xF4i kh\xF4ng c\xF3 k\u1EBFt qu\u1EA3 cho t\xECm ki\u1EBFm c\u1EE7a b\u1EA1n.',
+    'listingpageitemslisting.ZeroResultsPage': 'Xin l\u1ED7i, ch\xFAng t\xF4i kh\xF4ng t\xECm th\u1EA5y k\u1EBFt qu\u1EA3 trong <<CATEGORY>> t\u1EA1i <<REGION>>.',
     'distancediv.changeLocation': 'Thay \u0111\u1ED5i v\u1ECB tr\xED',
     'postingtitlelisting.Congratulations': 'Ch\xFAc m\u1EEBng! Qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n \u0111\xE3 \u0111\u01B0\u1EE3c \u0111\u0103ng. ',
     'postingtitlelisting.view': 'B\u1EA1n c\xF3 th\u1EC3 xem qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n:',

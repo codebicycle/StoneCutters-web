@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-pasta adrese',
     'listingpageitemslisting.AllResultsNew': 'Visi rezult\u0101ti',
     'listingpageitemslisting.WeAreSorryNoResults': 'Diem\u017E\u0113l nevaram atrast j\u016Bsu nor\u0101d\u012Btajiem parametriem atbilsto\u0161us rezult\u0101tus.',
+    'listingpageitemslisting.ZeroResultsPage': 'Diem\u017E\u0113l m\u0113s neatrad\u0101m rezult\u0101tus <<CATEGORY>>, <<REGION>>.',
     'distancediv.changeLocation': 'Main\u012Bt atra\u0161an\u0101s vietu',
     'postingtitlelisting.Congratulations': 'Apsveicam! J\u016Bsu sludin\u0101jums public\u0113ts.',
     'postingtitlelisting.view': 'J\u016Bs varat apskat\u012Bt savu sludin\u0101jumu:',

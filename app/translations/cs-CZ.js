@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'listingpageitemslisting.AllResultsNew': 'V\u0161echny v\xFDsledky hled\xE1n\xED',
     'listingpageitemslisting.WeAreSorryNoResults': 'Je n\xE1m l\xEDto, ale pro V\xE1mi zadan\xE9 vyhled\xE1v\xE1n\xED nem\xE1me v\xFDsledky.',
+    'listingpageitemslisting.ZeroResultsPage': 'Omlouv\xE1me se, ale nena\u0161li jsme \u017E\xE1dn\xE9 v\xFDsledky v kategorii <<CATEGORY>> pro oblast <<REGION>>.',
     'distancediv.changeLocation': 'Zm\u011Bnit m\xEDsto',
     'postingtitlelisting.Congratulations': 'Blahop\u0159ejeme! V\xE1\u0161 inzer\xE1t byl zve\u0159ejn\u011Bn.',
     'postingtitlelisting.view': 'M\u016F\u017Eete zobrazit sv\u016Fj inzer\xE1t:',

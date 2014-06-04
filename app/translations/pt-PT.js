@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
     'listingpageitemslisting.AllResultsNew': 'Todos os resultados',
     'listingpageitemslisting.WeAreSorryNoResults': 'Lamentamos, mas n\xE3o temos resultados para a sua pesquisa.',
+    'listingpageitemslisting.ZeroResultsPage': 'Pedimos desculpa, mas n\xE3o encontramos <<RESULTS>> na <<CATEGORY>> da <<REGION>>.',
     'distancediv.changeLocation': 'Mudar a Localiza\xE7\xE3o',
     'postingtitlelisting.Congratulations': 'Parab\xE9ns! O seu an\xFAncio foi publicado. ',
     'postingtitlelisting.view': 'Pode ver o seu an\xFAncio em:',

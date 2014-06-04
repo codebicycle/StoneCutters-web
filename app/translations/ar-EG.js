@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': ' Email \u0639\u0646\u0648\u0627\u0646 ',
     'listingpageitemslisting.AllResultsNew': 'All results',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
+    'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',
     'distancediv.changeLocation': '\u062A\u063A\u064A\u0631 \u0645\u0646\u0637\u0642\u0629 ',
     'postingtitlelisting.Congratulations': '  \xA1 \u062A\u0647\u0627\u0646\u064A\u0646\u0627 ! \u0627\u0639\u0644\u0627\u0646\u0643 \u0648\u0636\u0639',
     'postingtitlelisting.view': '\u062A\u0633\u062A\u0637\u064A\u0639 \u0645\u0634\u0627\u0647\u062F\u062A \u0627\u0639\u0644\u0627\u0646\u0643',

@@ -52,6 +52,7 @@ module.exports = {
     'landingbody.EmailAddress': 'Email Address',
     'listingpageitemslisting.AllResultsNew': 'Matokeo yote',
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',
+    'listingpageitemslisting.ZeroResultsPage': 'Tunasikitika, hatukupata matokeo katika <<CATEGORY>> at <<REGION>>.',
     'distancediv.changeLocation': 'Badilisha Mahali',
     'postingtitlelisting.Congratulations': 'Congratulations! Your Ad has been Published. ',
     'postingtitlelisting.view': 'Unaweza kuangalia tangazo lako:',
