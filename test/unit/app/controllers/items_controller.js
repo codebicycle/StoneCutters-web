@@ -58,7 +58,7 @@ describe('app', function test() {
                     function beforeMiddleware(req, res, next) {
                         var categories = req.rendrApp.getSession('categories');
                         var keys = _.keys(categories._byId);
-                        
+
                         category = categories._byId[ _.first(keys) ];
                         subcategory = _.first(category.children);
                         url = helpers.common.slugToUrl(subcategory);
@@ -91,6 +91,10 @@ describe('app', function test() {
 
                     function reset(req, res) {
                         context.app = req.rendrApp;
+                        context.currentRoute = {
+                            controller: 'items',
+                            action: 'index'
+                        };
                         context.redirectTo = function(uri, options) {
                             this.redirect = {
                                 uri: uri,
@@ -271,6 +275,10 @@ describe('app', function test() {
 
                     function reset(req, res) {
                         context.app = req.rendrApp;
+                        context.currentRoute = {
+                            controller: 'items',
+                            action: 'search'
+                        };
                         context.redirectTo = function(uri, options) {
                             this.redirect = {
                                 uri: uri,
@@ -429,8 +437,8 @@ describe('app', function test() {
                             search: 'a',
                             page: 1
                         };
-                        
-                        reset(req, res, next);
+
+                        reset(req, res, 'search', next);
                         function callback(err, data) {
                             items = data.items;
                             item = _.first(items);
@@ -453,7 +461,7 @@ describe('app', function test() {
                             title: params[0].substr(1),
                             itemId: params[1]
                         };
-                        reset(req, res);
+                        reset(req, res, 'show');
                         function callback(err, data) {
                             result.err = err;
                             result.data = data;
@@ -462,8 +470,12 @@ describe('app', function test() {
                         Controller.show.call(context, params, callback);
                     }
 
-                    function reset(req, res, next) {
+                    function reset(req, res, action, next) {
                         context.app = req.rendrApp;
+                        context.currentRoute = {
+                            controller: 'items',
+                            action: action
+                        };
                         context.redirectTo = function(uri, options) {
                             this.redirect = {
                                 uri: uri,
