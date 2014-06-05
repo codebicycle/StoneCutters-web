@@ -17,7 +17,11 @@ module.exports = function(dataAdapter, excludedUrls) {
             var children;
 
             function fetch(done) {
-                dataAdapter.get(req, '/countries/' + siteLocation + '/categories', done.errfcb);
+                dataAdapter.get(req, '/countries/' + siteLocation + '/categories', {
+                    query: {
+                        languageCode: app.getSession('selectedLanguage')
+                    }
+                }, done.errfcb);
             }
 
             function parse(done, response, _categories) {
