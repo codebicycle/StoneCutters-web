@@ -12,24 +12,16 @@ function handleItems(params, callback) {
         }
     };
     var siteLocation = app.getSession('siteLocation');
-    var category = helpers.categories.getCat(app.getSession(), params.catId);
+    var category = helpers.categories.get(app, params.catId);
+    var slug = helpers.common.slugToUrl(category);
     var query;
-    var slug;
 
-    if (!category) {
-        this.redirectTo(helpers.common.link('/', siteLocation), {
-            status: 301
-        });
-        return;
-    }
-    slug = helpers.common.slugToUrl(category);
     if (slug.indexOf(params.title + '-cat-')) {
         this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
             status: 301
         });
         return;
     }
-
     helpers.pagination.prepare(app, params);
     query = _.clone(params);
     params.categoryId = params.catId;
@@ -51,8 +43,8 @@ function handleItems(params, callback) {
         var host = app.getSession('host');
         var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
         var model = result.items.models[0];
-        var category = helpers.categories.getCat(app.getSession(), query.catId);
-        var categoryTree = helpers.categories.getCatTree(app.getSession(), query.catId);
+        var category = helpers.categories.get(app, query.catId);
+        var categoryTree = helpers.categories.getTree(app, query.catId);
 
         result.items = model.get('data');
         result.metadata = model.get('metadata');
@@ -62,7 +54,6 @@ function handleItems(params, callback) {
         helpers.analytics.setPage('listing');
         helpers.analytics.addParam('category', categoryTree.parent);
         helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-        console.log(categoryTree);
         result.analytics = helpers.analytics.generateURL(app.getSession());
         result.category = category;
         result.type = 'items';
@@ -72,24 +63,17 @@ function handleItems(params, callback) {
 
 function handleShow(params, callback) {
     var siteLocation = this.app.getSession('siteLocation');
-    var category = helpers.categories.getCat(this.app.getSession(), params.catId);
+    var category = helpers.categories.get(this.app, params.catId);
+    var slug = helpers.common.slugToUrl(category);
     var categoryTree;
-    var slug;
 
-    if (!category) {
-        this.redirectTo(helpers.common.link('/', siteLocation), {
-            status: 301
-        });
-        return;
-    }
-    slug = helpers.common.slugToUrl(category);
     if (slug.indexOf(params.title + '-cat-')) {
         this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
             status: 301
         });
         return;
     }
-    categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.catId);
+    categoryTree = helpers.categories.getTree(this.app, params.catId);
     
     helpers.analytics.reset();
     helpers.analytics.addParam('user', this.app.getSession('user'));
@@ -100,9 +84,6 @@ function handleShow(params, callback) {
     helpers.seo.addMetatag('title', 'Listing');
     helpers.seo.addMetatag('Description', 'This is a listing page');
     helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', params.title, '-cat-', params.catId].join(''));
-    params.id = params.catId;
-    delete params.catId;
-    delete params.title;
     callback(null, {
         category: category,
         type: 'categories',
@@ -115,8 +96,16 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var category = helpers.categories.getCat(this.app.getSession(), params.catId);
+            var category = helpers.categories.get(this.app, params.catId);
+            var siteLocation;
             
+            if (!category) {
+                siteLocation = this.app.getSession('siteLocation');
+                this.redirectTo(helpers.common.link('/', siteLocation), {
+                    status: 301
+                });
+                return;
+            }
             if (category.parentId) {
                 handleItems.call(this, params, callback);
                 return;

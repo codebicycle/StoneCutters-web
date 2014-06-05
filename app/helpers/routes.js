@@ -118,19 +118,11 @@ module.exports = {
             }
         }
     },
-    'categories#show#filters': {
+    'categories#show#listing': {
         urls: {
-            server: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?',
+            server: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?',
             client: {
                 url: ':title-cat-:catId-p-:page(/)(:filters)'
-            }
-        }
-    },
-    'categories#show#pages': {
-        urls: {
-            server: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)',
-            client: {
-                url: ':title-cat-:catId-p-:page'
             }
         }
     },

@@ -8,13 +8,14 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var that = this;
-            var user = that.app.getSession('user');
+            var app = this.app;
+            var user = app.getSession('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var siteLocation = that.app.getSession('siteLocation');
+            var siteLocation = app.getSession('siteLocation');
             var anonymousItem;
+            var spec;
 
             helpers.seo.resetHead();
             helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slugUrl, '-iid-', itemId].join(''));
@@ -38,26 +39,24 @@ module.exports = {
             delete params.title;
             delete params.sk;
 
-            function findItem(next) {
-                var spec = {
-                    item: {
-                        model: 'Item',
-                        params: params
-                    }
-                };
+            spec = {
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            };
 
-                that.app.fetch(spec, {
-                    'readFromCache': false
-                }, function afterFetch(err, result) {
-                    if (err) {
-                        that.redirectTo(helpers.common.link('/404', siteLocation), {
-                            status: 301
-                        });
-                        return;
-                    }
-                    next(err, result);
-                });
-            }
+            app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                if (err) {
+                    this.redirectTo(helpers.common.link('/404', siteLocation), {
+                        status: 301
+                    });
+                    return;
+                }
+                findRelatedItems.call(this, err, result);
+            }.bind(this));
 
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
@@ -65,14 +64,14 @@ module.exports = {
                 var spec;
 
                 if (!item) {
-                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                    this.redirectTo(helpers.common.link('/404', siteLocation), {
                         status: 301
                     });
                     return;
                 }
                 slug = helpers.common.slugToUrl(item);
                 if (slug.indexOf(slugUrl + '-iid-')) {
-                    that.redirectTo(helpers.common.link('/' + slug, siteLocation), {
+                    this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
                         status: 301
                     });
                     return;
@@ -89,11 +88,11 @@ module.exports = {
                         }
                     }
                 };
-                that.app.fetch(spec, {
+                app.fetch(spec, {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
-                    var user = that.app.getSession('user');
+                    var user = app.getSession('user');
                     var categoryTree;
 
                     result.relatedItems = model.get('data');
@@ -101,31 +100,29 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                    categoryTree = helpers.categories.getTree(app, item.category.id);
                     helpers.analytics.reset();
                     helpers.analytics.addParam('user', user);
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                    result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                    result.analytics = helpers.analytics.generateURL(app.getSession());
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(categoryTree.subCategory) + '?relatedAds=' + itemId;
                     callback(err, result);
                 });
             }
-
-            findItem(findRelatedItems);
         }
     },
     galery: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var that = this;
-            var user = that.app.getSession('user');
+            var app = this.app;
+            var user = app.getSession('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var siteLocation = that.app.getSession('siteLocation');
+            var siteLocation = app.getSession('siteLocation');
             var anonymousItem;
 
             helpers.seo.resetHead();
@@ -157,24 +154,24 @@ module.exports = {
                 }
             };
 
-            that.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
-                var user = that.app.getSession('user');
+                var user = app.getSession('user');
                 var categoryTree;
 
                 result.item = item;
                 result.user = user;
                 result.pos = Number(params.pos) || 0;
                 result.sk = securityKey;
-                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                categoryTree = helpers.categories.getTree(app, item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 callback(err, result);
             });
         }
@@ -238,9 +235,9 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller(form) {
-            var that = this;
-            var user = that.app.getSession('user');
-            var siteLocation = that.app.getSession('siteLocation');
+            var app = this.app;
+            var user = app.getSession('user');
+            var siteLocation = app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -251,40 +248,40 @@ module.exports = {
             params.id = params.itemId;
             delete params.itemId;
 
-            that.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var categoryTree;
                 var item;
 
                 if (err) {
-                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                    this.redirectTo(helpers.common.link('/404', siteLocation), {
                         status: 301
                     });
                     return;
                 }
                 item = result.item.toJSON();
-                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                categoryTree = helpers.categories.getTree(app, item.category.id);
 
                 helpers.analytics.reset();
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.user = user;
                 result.item = item;
                 result.form = form;
                 callback(err, result);
-            });
+            }.bind(this));
         }
     },
     success: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var that = this;
-            var user = that.app.getSession('user');
-            var siteLocation = that.app.getSession('siteLocation');
+            var app = this.app;
+            var user = app.getSession('user');
+            var siteLocation = app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -295,30 +292,30 @@ module.exports = {
             params.id = params.itemId;
             delete params.itemId;
 
-            that.app.fetch(spec, {
+            app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var categoryTree;
                 var item;
 
                 if (err) {
-                    that.redirectTo(helpers.common.link('/404', siteLocation), {
+                    this.redirectTo(helpers.common.link('/404', siteLocation), {
                         status: 301
                     });
                     return;
                 }
                 item = result.item.toJSON();
-                categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                categoryTree = helpers.categories.getTree(app, item.category.id);
 
                 helpers.analytics.reset();
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.user = user;
                 result.item = item;
                 callback(err, result);
-            });
+            }.bind(this));
         }
     },
 };
