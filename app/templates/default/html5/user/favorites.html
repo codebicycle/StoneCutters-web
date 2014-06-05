@@ -13,7 +13,11 @@
                         {% elif item.status == 'rejected' %}
                             <p class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</p>
                         {% endif %}
-                        <p>{{ dictionary[item.date.since] }} {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}</p>
+                        <p>{{ dictionary[item.date.since] }}
+                            {% if item.displayLocation %}
+                                {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
+                            {% endif %}
+                        </p>
                         <h3>{{ item.price.displayPrice }}</h3>
                         <div class="title">
                             <h2>

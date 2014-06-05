@@ -74,7 +74,7 @@ function handleShow(params, callback) {
         return;
     }
     categoryTree = helpers.categories.getTree(this.app, params.catId);
-    
+
     helpers.analytics.reset();
     helpers.analytics.addParam('user', this.app.getSession('user'));
     helpers.analytics.addParam('category', categoryTree.parent);
@@ -98,7 +98,7 @@ module.exports = {
         function controller() {
             var category = helpers.categories.get(this.app, params.catId);
             var siteLocation;
-            
+
             if (!category) {
                 siteLocation = this.app.getSession('siteLocation');
                 this.redirectTo(helpers.common.link('/', siteLocation), {
@@ -109,7 +109,7 @@ module.exports = {
             if (category.parentId) {
                 handleItems.call(this, params, callback);
                 return;
-            } 
+            }
             handleShow.call(this, params, callback);
         }
     }
