@@ -19,9 +19,9 @@ module.exports = BaseView.extend({
     },
     postRender: function() {
         var that = this;
-        if (this.$('section .reply').length){
-            that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,'')};
-        }
+
+        that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
+
         var galery = this.$('.swiper-container').swiper({
             mode:'horizontal',
             loop: true,
@@ -100,6 +100,8 @@ module.exports = BaseView.extend({
                 var user = session.user;
                 var itemId = $this.data('itemid');
                 var url = [];
+                var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
+                $msg.text($this.hasClass('add') ? that.messages.addFav : that.messages.removeFav);
 
                 url.push(api);
                 url.push('/users/');
@@ -120,6 +122,11 @@ module.exports = BaseView.extend({
                 })
                 .done(function () {
                     $this.toggleClass('add remove');
+                    $('.msgCont').addClass('visible');
+                    setTimeout(function(){
+                        $('.msgCont').removeClass('visible');
+                        $msg.text('');
+                    }, 3000);
                 })
                 .fail(function () {
                     console.log('Error');
