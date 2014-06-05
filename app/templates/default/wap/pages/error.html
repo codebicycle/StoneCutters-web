@@ -1,48 +1,42 @@
 <tr>
     <td>
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <table width="100%" cellspacing="0" cellpadding="4" border="0">
             <tr>
-                <td width="140"><a href="{{ '/' | link }}"><img src="http://static03.olx-st.com/images/h_logo2.gif" border="0"></a></td>
+                <td style="border-top: solid thin #808080;">
+                    <strong style="display: block; color: #0075BD;">{{ dictionary["postingerror.Error"] }}</strong>
+                    <small style="display: block; font-size: .66em;">
+                        <h4 style="margin: 0; padding-top: .5em; padding-bottom: .25em;">{{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}</h4>
+                    </small>
+                </td>
             </tr>
         </table>
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <table width="100%" cellspacing="0" cellpadding="4" border="0">
             <tr>
-                <td colspan="2" height="1" background="http://static03.olx-st.com/imagenes/notfound/linea_pts.gif"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="1"></td>
-            </tr>
-            <tr>
-                <td width="20"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="1"></td>
-                <td height="48"><font class="tit">{{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}</font></td>
-            </tr>
-            <tr>
-                <td colspan="2" height="1" background="http://static03.olx-st.com/imagenes/notfound/linea_pts.gif"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="1"></td>
+                <td style="border-top: solid thin #CCCCCC;">
+                    <small style="display: block; padding: .5em 0; font-size: .66em;">
+                        <p style="margin: 0;">{{ dictionary["defaulthtmlhead.PleaseTryOneOfTheFollowingOptions"] }}</p>
+                        <ul style="margin: 0; padding-top: .5em; padding-left: 2em;">
+                            <li>{{ dictionary["defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect"] }}</li>
+                            {% if breadcrumb and (breadcrumb != '/' ) %}
+                                <li><a href="{{ breadcrumb | link }}">{{ dictionary["defaulthtmlhead.GoBackToThePreviousPage"] }}</a></li>
+                            {% endif %}
+                            {% set homeLink = ('/' | link ) %}
+                            {% set backToHome = dictionary["defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage"] | replace('<<LINK_HOME_PAGE>>', '<a href="' + homeLink + '">') | replace('<</LINK_HOME_PAGE>>', '</a>') | replace ('<<BRAND>>','OLX') %}
+                            <li>{{ backToHome }}</li>
+                        </ul>
+                    </small>
+                </td>
             </tr>
         </table>
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-            <tr>
-                <td width="20"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="1"></td>
-                <td colspan="2"><font class="txt01"><strong><br>{{ dictionary["defaulthtmlhead.PleaseTryOneOfTheFollowingOptions"] }}</strong><br><br></font></td>
-            </tr>
-            <tr>
-                <td width="20" rowspan="7"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="1"></td>
-                <td width="20" valign="top"><img src="http://static03.olx-st.com/imagenes/notfound/bulletnarch.gif" border="0"></td>
-                <td width="740"><font class="txt02">{{ dictionary["Asegúrate que la dirección web es correcta."] }}</font></td>
-            </tr>
-            <tr><td colspan="3"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="4"></td></tr>
-            <tr>
-                <td width="20" valign="top"><img src="http://static03.olx-st.com/imagenes/notfound/bulletnarch.gif" border="0"></td>
-            </tr>
-            <tr><td colspan="3"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="4"></td></tr>
-            <tr>
-                <td width="20" valign="top"><img src="http://static03.olx-st.com/imagenes/notfound/bulletnarch.gif" border="0"></td>
-                <td width="740"><font class="txt02">{{ dictionary["defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage"] | replace ('<<LINK_HOME_PAGE>>','<a href="{{ '/' | link }}"') | replace ('<<BRAND>>','OLX') }}</font></td>
-            </tr>
-            <tr><td colspan="3"><img src="http://static02.olx-st.com/imagenes/notfound/tp.gif" border="0" height="30" width="1"></td></tr>
-        </table>
-        {% if error %}
-            <span style="display: block;">
-                <em>{{error.statusCode}}<em> - {{error.message}}
-            </span>
-            <pre id="stacktrace">{{error.detail}}</pre>
+        {% if blackBar.show and error %}
+            <table width="100%" cellspacing="0" cellpadding="4" border="0">
+                <tr>
+                    <td bgcolor="#EEEEEE" style="border-top: solid thin #CCC; background-color: #EEE;">
+                        <h2 style="margin: 0; font-weight: normal;"><font color="FF0000">{{ error.statusCode }}</font></h2>
+                        <pre style="display: block; margin: 0;">{{ error.detail }}</pre>
+                    </td>
+                </tr>
+            </table>
         {% endif %}
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
