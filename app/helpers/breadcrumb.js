@@ -6,84 +6,99 @@ var _ = require('underscore');
 
 module.exports = (function() {
     var handlers = {
-        categories: function bcCategories(route, breadcrumb) {
-            var page = this.app.getSession('page') || 0;
-            var categoryId;
-            var category;
+        categories: {
+            show: function() {
+                var page = this.app.getSession('page') || 0;
+                var categoryId;
+                var category;
+                var breadcrumb;
 
-            if (route.action === 'show') {
                 if (page === 0) {
-                    breadcrumb = '/';
+                    return '/';
                 }
-                else if (page === 1) {
+                if (page === 1) {
                     categoryId = this.category.parentId;
                     category = this.app.getSession('categories')._byId[categoryId];
-                    breadcrumb = '/' + common.slugToUrl(category);
+                    return '/' + common.slugToUrl(category);
                 }
-                else {
-                    categoryId = this.category.id;
-                    category = this.app.getSession('childCategories')[categoryId];
-                    breadcrumb = '/' + common.slugToUrl(category);
-                    if ((page - 1) > 1) {
-                        breadcrumb += '-p-' + (page - 1);
-                    }
-                }
-            }
-            return breadcrumb;
-        },
-        post: function bcPost(route, breadcrumb) {
-            if (route.action === 'form') {
-                breadcrumb = '/';
-            }
-            return breadcrumb;
-        },
-        items: function bcItems(route, breadcrumb) {
-            var page = this.app.getSession('page') || 0;
-            var categoryId;
-            var category;
-
-            if (route.action === 'show') {
-                categoryId = this.item.category.id;
+                categoryId = this.category.id;
                 category = this.app.getSession('childCategories')[categoryId];
                 breadcrumb = '/' + common.slugToUrl(category);
+                if ((page - 1) > 1) {
+                    breadcrumb += '-p-' + (page - 1);
+                }
+                return breadcrumb;
+            }
+        },
+        post: {
+            form: function() {
+                return '/';
+            }
+        },
+        items: {
+            show: function() {
+                var page = this.app.getSession('page') || 0;
+                var categoryId = this.item.category.id;
+                var category = this.app.getSession('childCategories')[categoryId];
+                var breadcrumb = '/' + common.slugToUrl(category);
+
                 if (page > 1) {
                     breadcrumb += '-p-' + page;
                 }
-            }
-            else if (route.action === 'reply') {
-                breadcrumb = '/' + common.slugToUrl(this.item);
-            }
-            else if (route.action === 'search') {
+                return breadcrumb;
+            },
+            reply: function() {
+                return '/' + common.slugToUrl(this.item);
+            },
+            search: function() {
+                var page = this.app.getSession('page') || 0;
+                var breadcrumb;
+
                 if (page === 1) {
-                    breadcrumb = '/';
+                    return '/';
                 }
-                else {
-                    breadcrumb = '/nf/search/' + this.search;
-                    if ((page - 1) > 1) {
-                        breadcrumb += '/-p-' + (page - 1);
-                    }
+                breadcrumb = '/nf/search/' + this.search;
+                if ((page - 1) > 1) {
+                    breadcrumb += '/-p-' + (page - 1);
+                }
+                return breadcrumb;
+            }
+        },
+        user: {
+            'my-ads': function() {
+                var platform = this.app.getSession('platform');
+
+                if (platform === 'wap' || platform === 'html4') {
+                    return '/myolx';
+                }
+            },
+            favorites: function() {
+                var platform = this.app.getSession('platform');
+
+                if (platform === 'wap' || platform === 'html4') {
+                    return '/myolx';
                 }
             }
-            return breadcrumb;
         }
     };
 
     function get(data) {
         var currentRoute = data.app.getSession('currentRoute');
-        var breadcrumb = data.app.getSession('breadcrumb');
         var referer = data.app.getSession('referer');
-        var handler;
+        var breadcrumb;
+        var controller;
 
         if (currentRoute.controller !== this.name.split('/').shift()) {
-            return breadcrumb;
+            return data.app.getSession('breadcrumb');
         }
-        handler = handlers[currentRoute.controller];
-        if (handler) {
-            breadcrumb = handler.call(data, currentRoute, breadcrumb);
+        controller = handlers[currentRoute.controller];
+        if (controller && controller[currentRoute.action]) {
+            breadcrumb = controller[currentRoute.action].call(data);
         }
         breadcrumb = breadcrumb || referer || '/';
         data.app.updateSession({
-            breadcrumb: breadcrumb
+            breadcrumb: breadcrumb,
+            referer: referer
         });
         return breadcrumb;
     }
