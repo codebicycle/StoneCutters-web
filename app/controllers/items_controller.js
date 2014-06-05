@@ -103,7 +103,6 @@ module.exports = {
                     result.sk = securityKey;
                     categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                     helpers.analytics.reset();
-                    helpers.analytics.setPage('item');
                     helpers.analytics.addParam('user', user);
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
@@ -171,7 +170,6 @@ module.exports = {
                 result.sk = securityKey;
                 categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                 helpers.analytics.reset();
-                helpers.analytics.setPage('item');
                 helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
@@ -226,7 +224,7 @@ module.exports = {
                 result.metadata = model.get('metadata');
                 helpers.pagination.paginate(result.metadata, query, url);
                 helpers.analytics.reset();
-                helpers.analytics.setPage('search');
+                helpers.analytics.setPage('nf');
                 helpers.analytics.addParam('keyword', query.search);
                 helpers.analytics.addParam('page_nb', result.metadata.totalPages);
                 helpers.analytics.addParam('user', user);
@@ -269,7 +267,6 @@ module.exports = {
                 categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
 
                 helpers.analytics.reset();
-                helpers.analytics.setPage('item_reply');
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
@@ -314,7 +311,6 @@ module.exports = {
                 categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
 
                 helpers.analytics.reset();
-                helpers.analytics.setPage('item_reply_success');
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);

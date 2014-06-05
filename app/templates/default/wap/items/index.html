@@ -18,7 +18,11 @@
                 <tbody>
                     <tr>
                         <td style="border-top: solid thin #808080;">
-                            <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}</small>
+                            {% if location.current.name %}
+                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}</small>
+                            {% else %}
+                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}</small>
+                            {% endif %}
                         </td>
                     </tr>
                 </tbody>

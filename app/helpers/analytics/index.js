@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var config = require('../../config');
-var urls = require('../urls');
 var google = require('./google');
 var ati = require('./ati');
 
@@ -32,19 +31,33 @@ function stringifyParams(params) {
     return str.join('&');
 }
 
+function getURLName(session, page) {
+    var name = [];
+    var currentRoute = session.currentRoute;
+    name.push(currentRoute.controller);
+    name.push('#');
+    name.push(currentRoute.action);
+    if (page) {
+        name.push('#');
+        name.push(page);
+    }
+    return name.join('');
+}
+
 function generateURL(session) {
-    var page = query.page;
-    var url = urls[page];
+    var page = getURLName(session, query.page);
+    var pageGoogle = config.get(['analytics', 'google', 'pages', page], '');
+    var configAti = config.get(['analytics', 'ati', 'params', page], {});
     var params = {};
 
     this.addParam('rendering', session.platform);
-    
+
     params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
     params.random = Math.round(Math.random() * 1000000);
     params.referer = (session.referer || '-');
-    params.page = google.generatePage(url, query.params);
+    params.page = google.generatePage(pageGoogle, query.params);
     params.platform = session.platform;
-    params.custom = ati.generateParams(session, url, query.params);
+    params.custom = ati.generateParams(session, configAti, query.params);
 
     return '/pageview.gif?' + stringifyParams(params);
 }

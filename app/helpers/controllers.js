@@ -3,6 +3,18 @@
 var _ = require('underscore');
 var common = require('./common');
 
+function setUrlVars() {
+    if (typeof window === 'undefined') {
+        return;
+    }
+    var location = window.location;
+
+    this.app.updateSession({
+        path: location.pathname,
+        url: location.href
+    });
+}
+
 function redirect() {
     if (typeof window === 'undefined') {
         return false;
@@ -18,15 +30,21 @@ function redirect() {
     return true;
 }
 
-function setUrlVars() {
+function cleanSession() {
+    this.app.deleteSession('page');
+}
+
+function setCurrentRoute() {
+    this.app.updateSession({
+        currentRoute: this.currentRoute
+    });
+}
+
+function setReferer() {
     if (typeof window === 'undefined') {
         return;
     }
-    var location = window.location;
-
     this.app.updateSession({
-        path: location.pathname,
-        url: location.href,
         referer: this.app.getSession('referer')
     });
 }
@@ -43,16 +61,6 @@ function setLanguage(params) {
     }
     this.app.persistSession({
         selectedLanguage: params.language
-    });
-}
-
-function cleanSession() {
-    this.app.deleteSession('page');
-}
-
-function setCurrentRoute() {
-    this.app.updateSession({
-        currentRoute: this.currentRoute
     });
 }
 
@@ -145,10 +153,11 @@ function processForm(params) {
 
 module.exports = {
     control: function(params, callback) {
+        setUrlVars.call(this);
         if (!redirect.call(this)) {
             cleanSession.call(this);
             setCurrentRoute.call(this);
-            setUrlVars.call(this);
+            setReferer.call(this);
             setLanguage.call(this);
             setLocation.call(this, params, function next() {
                 callback.call(this, processForm.call(this, params));

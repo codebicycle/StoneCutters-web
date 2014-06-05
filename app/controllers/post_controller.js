@@ -13,7 +13,6 @@ module.exports = {
             var sixpackConfig = config.get('sixpack', {});
 
             helpers.analytics.reset();
-            helpers.analytics.setPage('posting');
             if (!sixpackConfig.enabled ||
                 !sixpackConfig['post-button'] ||
                 !sixpackConfig['post-button'].enabled ||
@@ -46,7 +45,6 @@ module.exports = {
                 return;
             }
             helpers.analytics.reset();
-            helpers.analytics.setPage('posting_cat');
 
             callback(null, _.extend(params, {
                 subcategories: category.children,
@@ -113,7 +111,6 @@ module.exports = {
                 result.form = form;
 
                 helpers.analytics.reset();
-                helpers.analytics.setPage('posting_cat_subcat');
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
                 result.analytics = helpers.analytics.generateURL(app.getSession());
@@ -218,7 +215,6 @@ module.exports = {
                     result.form = form;
 
                     helpers.analytics.reset();
-                    helpers.analytics.setPage('posting_edit');
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
@@ -306,7 +302,6 @@ module.exports = {
                     result.sk = securityKey;
                     categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
                     helpers.analytics.reset();
-                    helpers.analytics.setPage('posting_success');
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);

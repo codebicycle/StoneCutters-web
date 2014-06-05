@@ -7,7 +7,11 @@
 <div id="itemListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">
-            {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
+            {% if location.current.name %}
+                {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
+            {% else %}
+                {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}
+            {% endif %}
         </div>
     {% else %}
         <ul class="itemListing">

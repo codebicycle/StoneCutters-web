@@ -59,9 +59,10 @@ function handleItems(params, callback) {
 
         helpers.pagination.paginate(result.metadata, query, url);
         helpers.analytics.reset();
-        helpers.analytics.setPage('category_with_page');
+        helpers.analytics.setPage('listing');
         helpers.analytics.addParam('category', categoryTree.parent);
         helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+        console.log(categoryTree);
         result.analytics = helpers.analytics.generateURL(app.getSession());
         result.category = category;
         result.type = 'items';
@@ -73,7 +74,6 @@ function handleShow(params, callback) {
     var siteLocation = this.app.getSession('siteLocation');
     var category = helpers.categories.getCat(this.app.getSession(), params.catId);
     var categoryTree;
-    var user;
     var slug;
 
     if (!category) {
@@ -90,11 +90,9 @@ function handleShow(params, callback) {
         return;
     }
     categoryTree = helpers.categories.getCatTree(this.app.getSession(), params.catId);
-    user = this.app.getSession('user');
-
+    
     helpers.analytics.reset();
-    helpers.analytics.setPage('category');
-    helpers.analytics.addParam('user', user);
+    helpers.analytics.addParam('user', this.app.getSession('user'));
     helpers.analytics.addParam('category', categoryTree.parent);
     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
 

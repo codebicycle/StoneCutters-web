@@ -9,7 +9,7 @@ module.exports = {
     marketing: require('./marketing'),
     seo: require('./seo'),
     common: require('./common'),
-    urls: require('./urls'),
+    routes: require('./routes'),
     breadcrumb: require('./breadcrumb'),
     pagination: require('./pagination'),
     fitText: function(element, kompressor, options) {
