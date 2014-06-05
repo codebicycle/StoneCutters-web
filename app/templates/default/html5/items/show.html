@@ -1,4 +1,9 @@
 <section id="itemPage">
+    <input type="hidden" value="{{ dictionary["postingerror.InvalidEmail"] }}" name="errMsgMail" class="errMsgMail">
+    <input type="hidden" value="{{ dictionary["postingerror.PleaseCompleteThisField"] }}" name="errMsgMandatory" class="errMsgMandatory">
+    <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
+    <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav">
+    <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav">
     {% set favClass = 'remove' %}
     {% set favLink = '#' %}
     {% set favText = dictionary["item.RemoveFromFavorites"] %}
@@ -87,9 +92,7 @@
         <section class="reply">
             <span>{{ dictionary["contactseller_form.ReplyToListing"] }}</span>
             <form id="replyForm" action="">
-                <input type="hidden" value="{{ dictionary["postingerror.InvalidEmail"] }}" name="errMsgMail" class="errMsgMail">
-                <input type="hidden" value="{{ dictionary["postingerror.PleaseCompleteThisField"] }}" name="errMsgMandatory" class="errMsgMandatory">
-                <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
+
 
                 <label>* {{ dictionary["replymessage.Message"] }}</label>
                 <textarea class="message" name="message"></textarea>
