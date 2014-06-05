@@ -17,27 +17,7 @@ module.exports = BaseView.extend({
         });
     },
     postRender: function() {
-        var title = $('head title');
-
-        $(document).on('route', function onRoute() {
-            var head = helpers.seo.getHead();
-
-            title.text(head.title);
-            _.each($('meta[name!=viewport]'), function each(metatag) {
-                metatag = $(metatag);
-                if (!metatag.attr('name')) {
-                    return;
-                }
-                metatag.remove();
-            });
-            _.each(head.metatags, function each(metatag) {
-                $('head meta:last').after('<meta name="' +  metatag.name + '" content="' + metatag.content + '" />');
-            });
-            $('head link[rel="canonical"]').remove();
-            if (head.canonical) {
-                $('head').append('<link rel="canonical" href="' +  head.canonical + '" >');
-            }
-        });
+        $(document).on('route', helpers.seo.update);
     }
 });
 

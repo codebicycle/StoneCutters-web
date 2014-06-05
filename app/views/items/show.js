@@ -19,37 +19,37 @@ module.exports = BaseView.extend({
     },
     postRender: function() {
         var that = this;
-
-        that.messages = {'errMsgMail': $('.errMsgMail').val(), 'errMsgMandatory': $('.errMsgMandatory').val(), 'msgSend': $('.msgSend').val().replace(/<br \/>/g,'')};
-
-        var galery = $('.swiper-container').swiper({
+        if (this.$('section .reply').length){
+            that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,'')};
+        }
+        var galery = this.$('.swiper-container').swiper({
             mode:'horizontal',
             loop: true,
             pagination: '.slidePagination',
             paginationClickable: true,
             initialSlide: 0
         });
-        var relatedAds = $('.swiper-containerRA').swiper({
+        var relatedAds = this.$('.swiper-containerRA').swiper({
             mode:'horizontal',
             slidesPerView: 3,
             preventLinks:false
         });
-        $(window).on('resize', this.resize).trigger('resize');
-        $( '.actions .email' ).click(function() {
+        this.$(window).on('resize', this.resize).trigger('resize');
+        this.$( '.actions .email' ).click(function() {
             $('html, body').animate({scrollTop: $('.reply').offset().top}, 400);
         });
-        $('section#itemPage section#onePicture .slide div').click(function(e) {
+        this.$('section#itemPage section#onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
             $('#galContOne').addClass('visible');
         });
-        $('.galActions .close').click(function(e) {
+        this.$('.galActions .close').click(function(e) {
             e.preventDefault();
             $('.galCont').removeClass('visible');
             $('body').removeClass('noscroll');
         });
         var mySwiperGal = '';
-        $('section.swiper-container').click(function(e) {
+        this.$('section.swiper-container').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
             $('#galCont').addClass('visible');
@@ -66,16 +66,16 @@ module.exports = BaseView.extend({
                 mySwiperGal.swipeTo(galery.activeLoopIndex,500);
             }
         });
-        $('.galActions .next').click(function(e) {
+        this.$('.galActions .next').click(function(e) {
             e.preventDefault();
             mySwiperGal.swipeNext();
         });
-        $('.galActions .prev').click(function(e) {
+        this.$('.galActions .prev').click(function(e) {
             e.preventDefault();
             mySwiperGal.swipePrev();
         });
 
-        $('.galActions .pause').click(function(e) {
+        this.$('.galActions .pause').click(function(e) {
             e.preventDefault();
             if($(this).hasClass('play')){
                 mySwiperGal.startAutoplay();
@@ -85,12 +85,12 @@ module.exports = BaseView.extend({
             $('.pause').toggleClass('play');
 
         });
-        $('#galCont .swiper-wrapper , #galContOne').click(function(e) {
+        this.$('#galCont .swiper-wrapper , #galContOne').click(function(e) {
             e.preventDefault();
             $('.galCont .galActions , .galCont .title').fadeToggle(500);
         });
 
-        $('.fav').click(function(e) {
+        this.$('.fav').click(function(e) {
             var $this = $(this);
 
             if ($this.attr('href') == '#') {
@@ -129,18 +129,18 @@ module.exports = BaseView.extend({
                 });
             }
         });
-        $('.share').click(function(e) {
+        this.$('.share').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
             $('#share').addClass('visible');
         });
-        $('.popup-close').click(function(e) {
+        this.$('.popup-close').click(function(e) {
             e.preventDefault();
             $('body').removeClass('noscroll');
             $(this).parents('.popup').removeClass('visible');
         });
 
-        $('#replyForm .submit').click(function() {
+        this.$('#replyForm .submit').click(function() {
             var $this = $(this);
 
             var message = $('.message').val();
@@ -214,7 +214,7 @@ module.exports = BaseView.extend({
 
         });
 
-        $('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
+        this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
             var value = $(this).val();
             var field = $(this).attr('class');
 

@@ -307,6 +307,13 @@ module.exports = {
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
                     result.analytics = helpers.analytics.generateURL(that.app.getSession());
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(categoryTree.subCategory) + '-p-1?relatedAds=' + itemId;
+
+                    var title = helpers.seo.shortTitle(item.title, item.location.children[0].children[0].name);
+                    var description = helpers.seo.shortDescription(item.title, item.description, item.category.name, item.location.children[0].children[0].name);
+                    helpers.seo.addMetatag('title', title);
+                    helpers.seo.addMetatag('Description', description);
+                    helpers.seo.update();
+
                     callback(err, result);
                 });
             }
