@@ -65,6 +65,10 @@ describe('app', function test() {
 
                     function reset(req, res) {
                         context.app = req.rendrApp;
+                        context.currentRoute = {
+                            controller: 'home',
+                            action: 'index'
+                        };
                         context.redirectTo = function(uri, options) {
                             this.redirect = {
                                 uri: uri,

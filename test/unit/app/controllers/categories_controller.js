@@ -87,6 +87,10 @@ describe('app', function test() {
 
                     function reset(req, res) {
                         context.app = req.rendrApp;
+                        context.currentRoute = {
+                            controller: 'categories',
+                            action: 'show'
+                        };
                         context.redirectTo = function(uri, options) {
                             this.redirect = {
                                 uri: uri,
