@@ -6,7 +6,7 @@
         {% set favClass = 'add' %}
         {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
         {% if not user %}
-            {% set favLink = ('/login' | link) %}
+            {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
         {% endif %}
     {% endif %}
     {% from macros import Breadcrumb %}

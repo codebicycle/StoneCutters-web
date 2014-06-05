@@ -1,19 +1,21 @@
 'use strict';
 
+var querystring = require('querystring');
+var _ = require('underscore');
+
 exports.link = function link(href, siteLocation) {
-    if (!siteLocation || !siteLocation.indexOf('www.')) {
-        return href;
+    var parts = href.split('?');
+    var params = {};
+
+    href = parts.shift();
+    if (parts.length) {
+        params = querystring.parse(parts.join('?'));
     }
-    if (~href.indexOf('?')) {
-        if (href.slice(-1) !== '&') {
-            href += '&';
-        }
+    if (siteLocation && !~siteLocation.indexOf('www.') && !params.location) {
+        params.location = siteLocation;
     }
-    else {
-        href += '?';
-    }
-    if (!(~href.indexOf('location=' + siteLocation))) {
-        href += 'location=' + siteLocation;
+    if (!_.isEmpty(params)) {
+        href += '?' + querystring.stringify(params);
     }
     return href;
 };

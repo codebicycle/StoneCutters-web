@@ -202,14 +202,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                var url = req.headers.referer;
-                var qIndex = url.indexOf('?');
+                var redirect = req.param('redirect') || '/des-iid-' + itemId;
 
-                if (qIndex != -1) {
-                    url = url.substring(0,qIndex);
-                }
-                url += '?' + querystring.stringify(err);
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(redirect, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
