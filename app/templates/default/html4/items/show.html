@@ -68,7 +68,7 @@
         <ul>
             {% if item.optionals %}
                 {% for optional in item.optionals %}
-                    {% if optional.value %}
+                    {% if optional.label and optional.value %}
                         <li><strong>{{ optional.label }}: </strong>{{ optional.value }}</li>
                     {% endif %}
                 {% endfor %}
