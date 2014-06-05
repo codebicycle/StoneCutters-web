@@ -11,21 +11,66 @@ module.exports = BaseView.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        $('.favoritePopup').click(function(e) {
-            e.preventDefault();
-            var element = $(this);
-            var itemId = element.attr('data-itemId');
-            var itemUrl = element.attr('data-itemUrl');
-            $('.viewItem').attr("href", itemUrl);
-            $('.removeItem').attr("href", 'urlForRemoveFav');
-            $('#favoritePopup').addClass('visible');
+        var $popup = this.$('#favoritePopup');
+        var $viewItem = $popup.find('.viewItem');
+        var $removeItem = $popup.find('.removeItem');
+
+        function close() {
+            $popup.removeClass('visible');
+            $viewItem.attr('href', '#');
+            $removeItem.removeData('itemId');
+        }
+
+        this.$('.favoritePopup').click(function onClick(event) {
+            event.preventDefault();
+
+            var $item = $(this);
+            var itemId = $item.attr('data-itemId');
+
+            $viewItem.attr('href', $item.attr('data-itemUrl'));
+            $removeItem.data('itemId', itemId);
+            $popup.addClass('visible');
         });
-        $('.popup-close').click(function(e) {
-            e.preventDefault();
-            $('.viewItem').attr("href", '#');
-            $('.removeItem').attr("href", '#');
-            $('#favoritePopup').removeClass('visible');
+        $popup.find('.popup-close').click(function onClick(event) {
+            event.preventDefault();
+
+            close();
         });
+        $removeItem.click(function onClick(event) {
+            event.preventDefault();
+
+            var api = this.app.get('apiPath');
+            var user = this.app.getSession('user');
+            var itemId = $removeItem.data('itemId');
+            var url = [];
+
+            url.push(api);
+            url.push('/users/');
+            url.push(user.userId);
+            url.push('/favorites/');
+            url.push(itemId);
+            url.push('/delete?token=');
+            url.push(user.token);
+
+            $('.loading').show();
+            $.ajax({
+                type: 'POST',
+                url: url.join(''),
+                cache: false,
+                json: true,
+                data: {}
+            })
+            .done(function done() {
+                this.$('[data-itemId="' + itemId + '"]').parent().remove();
+                close();
+            }.bind(this))
+            .fail(function fail() {
+                console.log('Error');
+            })
+            .always(function always() {
+                $('.loading').hide();
+            });
+        }.bind(this));
     }
 });
 

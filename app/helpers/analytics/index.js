@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var config = require('../../config');
-var routes = require('../routes');
 var google = require('./google');
 var ati = require('./ati');
 
@@ -47,7 +46,8 @@ function getURLName(session, page) {
 
 function generateURL(session) {
     var page = getURLName(session, query.page);
-    var url = routes[page];
+    var pageGoogle = config.get(['analytics', 'google', 'pages', page], '');
+    var configAti = config.get(['analytics', 'ati', 'params', page], {});
     var params = {};
 
     this.addParam('rendering', session.platform);
@@ -55,9 +55,9 @@ function generateURL(session) {
     params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
     params.random = Math.round(Math.random() * 1000000);
     params.referer = (session.referer || '-');
-    params.page = google.generatePage(url, query.params);
+    params.page = google.generatePage(pageGoogle, query.params);
     params.platform = session.platform;
-    params.custom = ati.generateParams(session, url, query.params);
+    params.custom = ati.generateParams(session, configAti, query.params);
 
     return '/pageview.gif?' + stringifyParams(params);
 }

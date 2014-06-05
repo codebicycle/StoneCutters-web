@@ -17,7 +17,7 @@
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
-                        <a href="" class="action">{{ dictionary["myfavorites.Delete"] }}</a>
+                        <a href="{{ ['/items/', item.id, '/favorite/delete?redirect=/myolx/favoritelisting'] | join('') | link }}" class="action">{{ dictionary["myfavorites.Delete"] }}</a>
                     </div>
                 </li>
             {% endfor %}

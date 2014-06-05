@@ -58,7 +58,7 @@ var analyticsParams = {
     filters: {
         name: 'filter_name_value',
         parse: function (url, options) {
-            return url.replace('[' + this.name + ']', '');
+            return url.replace('/[' + this.name + ']', '');
         }
     },
     platform: {
@@ -69,8 +69,7 @@ var analyticsParams = {
     }
 };
 
-function generatePage(url, options) {
-    var page = url.google;
+function generatePage(page, options) {
     var token;
 
     _.each(analyticsParams, function(analyticParam) {

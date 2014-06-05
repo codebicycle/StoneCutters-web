@@ -30,6 +30,10 @@ function redirect() {
     return true;
 }
 
+function cleanSession() {
+    this.app.deleteSession('page');
+}
+
 function setCurrentRoute() {
     this.app.updateSession({
         currentRoute: this.currentRoute
@@ -43,20 +47,6 @@ function setReferer() {
     this.app.updateSession({
         referer: this.app.getSession('referer')
     });
-}
-
-function setCurrentPage() {
-    var path = this.app.getSession('path');
-    var page;
-
-    if (new RegExp('^.+-p-[\\d]+(/.*)?(\\?.*)?$', 'i').test(path)) {
-        page = path.split('/')[1].split('-p-').pop();
-    }
-    if (page) {
-        this.app.persistSession({
-            page: page
-        });
-    }
 }
 
 function setLanguage(params) {
@@ -165,9 +155,9 @@ module.exports = {
     control: function(params, callback) {
         setUrlVars.call(this);
         if (!redirect.call(this)) {
+            cleanSession.call(this);
             setCurrentRoute.call(this);
             setReferer.call(this);
-            setCurrentPage.call(this);
             setLanguage.call(this);
             setLocation.call(this, params, function next() {
                 callback.call(this, processForm.call(this, params));

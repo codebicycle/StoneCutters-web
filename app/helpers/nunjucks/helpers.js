@@ -65,60 +65,67 @@ module.exports = function(nunjucks) {
             return out.join('');
         },
         pagination: function(metadata, platform) {
-            var that = this;
+            var context = this.ctx;
             var out = [];
-            var currentPage = metadata.page;
-            var currentURL = metadata.current;
+            var url = metadata.current;
+            var page = metadata.page;
             var pages = metadata.totalPages;
             var regExp = new RegExp('-p-([0-9]+)', 'g');
-            var pagination = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2];
+            var pagination = [page-2, page-1, page, page+1, page+2];
             var count = 0;
             var max;
             var i;
 
-            function prepareStyle(last, start, end) {
+            function prepareStyle(isLast, start, end) {
                 if (platform !== 'wap') {
                     out.push(start || '" ');
                     out.push('class="');
-                    out.push(last ? 'last' : '');
+                    out.push(isLast ? 'last' : '');
                     out.push(end || '');
                 }
             }
 
-            function prepareSeparator(last) {
-                if (platform === 'wap') {
-                    out.push(last ? '' : ' | ');
+            function prepareSeparator(isLast) {
+                if (platform === 'wap' && !isLast) {
+                    out.push(' | ');
                 }
             }
 
-            function prepareURL(page, last) {
-                if (page > 0 && page <= pages) {
-                    if(page === currentPage){
+            function prepareURL(_page, isLast) {
+                if (_page > 0 && _page <= pages) {
+                    if (_page === page) {
                         out.push('<strong');
-                        prepareStyle(last, ' ', '"');
+                        prepareStyle(isLast, ' ', '"');
                         out.push('>');
-                        out.push(page);
+                        out.push(_page);
                         out.push('</strong>');
-                        prepareSeparator(last);
                     }
                     else {
+                        var replace = '';
+                        
                         out.push('<a href="');
-                        out.push(common.link(currentURL.replace(regExp, '-p-' + page), that.ctx.siteLocation));
-                        prepareStyle(last);
+                        if (_page > 1) {
+                            replace = '-p-' + _page;
+                        }
+                        out.push(common.link(url.replace(regExp, replace), context.siteLocation));
+                        prepareStyle(isLast);
                         out.push('">');
-                        out.push(page);
+                        out.push(_page);
                         out.push('</a>');
-                        prepareSeparator(last);
                     }
+                    prepareSeparator(isLast);
                     count++;
                 }
-                else if (page < pages) {
+                else if (_page < pages) {
                     pagination.push(pagination[pagination.length - 1] + 1);
                 }
             }
 
-            if ((pages - currentPage) < 2) {
-                max = (pages - currentPage);
+            if (!url.match(regExp)) {
+                url += '-p-0';
+            }
+            if ((pages - page) < 2) {
+                max = (pages - page);
                 for (i = 0, max = (max === 0 ? 2 : max); i < max; i++) {
                     pagination.splice(0, 0, pagination[0] - 1);
                     pagination.pop();

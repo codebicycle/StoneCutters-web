@@ -105,7 +105,7 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function atiTracking(req) {
             var location = req.rendrApp.getSession('location');
-            var atiConfig = configClient.get(['analytics', 'ati', location.id]);
+            var atiConfig = configClient.get(['analytics', 'ati', 'paths', location.id]);
             var analytic;
 
             if (atiConfig) {
@@ -159,7 +159,7 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function atiTracking(req) {
             var location = req.rendrApp.getSession('location');
-            var atiConfig = configClient.get(['analytics', 'ati', location.id]);
+            var atiConfig = configClient.get(['analytics', 'ati', 'paths', location.id]);
             var analytic;
 
             if (atiConfig) {
