@@ -18,7 +18,8 @@ module.exports = function(grunt) {
             }
         },
         acceptance: {
-            src: ['test/acceptance/**/*.js', '!test/acceptance/zombie.js'],
+            //src: ['test/acceptance/**/*.js', '!test/acceptance/zombie.js'],
+            src: [],
                 options: {
                 reporter: 'spec',
                 timeout: '15000'
