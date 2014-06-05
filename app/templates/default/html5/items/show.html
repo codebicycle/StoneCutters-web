@@ -145,7 +145,7 @@
                         </a>
                     </div>
                     <div class="action sms trackMe" data-tracking="Reply-ClickSms" >
-                        <a href="{{ item.phone }}">
+                        <a href="sms:{{ item.phone }}">
                             <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                         </a>
                     </div>
@@ -167,9 +167,15 @@
                         </div>
                     </div>
                     <div class="action sms trackMe midWidth" data-tracking="Reply-ClickSms" >
-                        <a href="{{ item.phone }}">
+                        <a href="sms:{{ item.phone }}">
                             <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                         </a>
+                    </div>
+                {% else %}
+                    <div class="action email trackMe fullWidth" data-tracking="Reply-clickEmail">
+                        <div>
+                            <span>{{ dictionary["replymessage.Email"] }}</span>
+                        </div>
                     </div>
                 {% endif %}
             {% elif item.phone and not item.email %}
@@ -180,7 +186,7 @@
                         </a>
                     </div>
                     <div class="action sms trackMe midWidth" data-tracking="Reply-ClickSms" >
-                        <a href="{{ item.phone }}">
+                        <a href="sms:{{ item.phone }}">
                             <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                         </a>
                     </div>
@@ -192,7 +198,7 @@
                     </div>
                 {% elif device.uriSchemeSms and not device.uriSchemeTel %}
                     <div class="action sms trackMe fullWidth" data-tracking="Reply-ClickSms" >
-                        <a href="{{ item.phone }}">
+                        <a href="sms:{{ item.phone }}">
                             <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                         </a>
                     </div>
@@ -243,7 +249,7 @@
             <h4>{{ dictionary["itemgeneraldetails.ShareThisAd"] }}</h4>
             <div>
                 <ul>
-                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank" class="facebookButton">Facebook</a></li>
+                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ location.url }}{{ url }}" target="_blank" class="facebookButton">Facebook</a></li>
                     <li><a href="https://twitter.com/intent/tweet?original_referer={{ url }}&text={{ item.title }}&url={{ url }}" target="_blank" class="twitterButton">Twitter</a></li>
                 </ul>
             </div>
