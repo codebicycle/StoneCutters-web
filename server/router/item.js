@@ -196,9 +196,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(done) {
-                var url = '/des-iid-' + itemId;
+                var redirect = req.param('redirect') || '/des-iid-' + itemId;
 
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(redirect, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
