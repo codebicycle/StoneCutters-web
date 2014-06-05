@@ -18,7 +18,8 @@ module.exports = {
 
         function controller(form) {
             callback(null, {
-                form: form
+                form: form,
+                redirect: params.redirect
             });
         }
     },

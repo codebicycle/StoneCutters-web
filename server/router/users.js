@@ -50,7 +50,12 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                formidable.error(req, '/login', err, function redirect(url) {
+                var link = '/login';
+
+                if (redirect && redirect !== '/') {
+                    link += '?redirect=' + redirect;
+                }
+                formidable.error(req, link, err, function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
                 });
             }
@@ -111,7 +116,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function submit(done, data) {
-                if (!data.redirect || ~data.redirect.match(/(\/register|\/login|\/logout)/g)) {
+                if (!data.redirect || data.redirect.match(/(\/register|\/login|\/logout)/g)) {
                     data.redirect = '/';
                 }
                 loginHandler(req, res, data);

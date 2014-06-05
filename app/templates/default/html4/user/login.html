@@ -13,7 +13,7 @@
             <label>{{ dictionary["loginbox.Password"] }}</label>
             <input type="password" value="" name="password">
         </div>
-        <input type="hidden" name="redirect" value="{{ breadcrumb | link }}">
+        <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
                 <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit" class="btns orange">
