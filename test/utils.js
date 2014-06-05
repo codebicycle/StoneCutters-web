@@ -14,6 +14,12 @@ module.exports = {
             www: 'www.olx.com.ar',
             capitalfederal: 'capitalfederal.olx.com.ar'
         },
+        br: {
+            www: 'www.olx.com.br'
+        },
+        de: {
+            www: 'www.olx.de'
+        },
         in: {
             www: 'www.olx.in',
             mumbai: 'mumbai.olx.in'

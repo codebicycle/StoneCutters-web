@@ -86,6 +86,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
                 previousLocation = siteLocation;
             }
+            else if (_.isArray(siteLocation)) {
+                siteLocation = siteLocation[0];
+            }
             if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
                 return res.redirect(301, '/?location=' + previousLocation);
             }
