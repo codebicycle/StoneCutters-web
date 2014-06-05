@@ -37,8 +37,8 @@
                 <a href="{{ (metadata.next | link) if metadata.next }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
             </div>
             <div id="itemPaginationCaption">
-                {{ "<a href='' class='left'>Anterior</a>" if metadata.previous }}
-                {{ "<a href='' class='right'>Siguiente</a>" if metadata.next }}
+                {{ ["<a href='' class='left'>", dictionary["itemslisting.Previous"], "</a>"] | join('') if metadata.previous }}
+                {{ ["<a href='' class='right'>", dictionary["itemslisting.Next"], "</a>"] | join('') if metadata.next }}
             </div>
         {% endif %}
     {% endif %}

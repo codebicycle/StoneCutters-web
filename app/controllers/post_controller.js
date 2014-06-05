@@ -35,8 +35,7 @@ module.exports = {
 
         function controller() {
             var siteLocation = this.app.getSession('siteLocation');
-            var categories = this.app.getSession('categories');
-            var category = categories._byId[params.categoryId];
+            var category = helpers.categories.get(this.app, params.categoryId);
 
             if (!category) {
                 this.redirectTo(helpers.common.link('/posting', siteLocation), {
@@ -98,7 +97,7 @@ module.exports = {
             }
             app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
-                var categoryTree = helpers.categories.getCatTree(app.getSession(), params.subcategoryId);
+                var categoryTree = helpers.categories.getTree(app, params.subcategoryId);
 
                 result.postingSession = result.postingSession.get('postingSession');
                 result.intent = 'create';
@@ -198,7 +197,7 @@ module.exports = {
                 checkAuthentication(_params, _params.itemId);
                 app.fetch(spec, function afterFetch(err, result) {
                     var response = result.fields.models[0].attributes;
-                    var categoryTree = helpers.categories.getCatTree(app.getSession(), item.category.id);
+                    var categoryTree = helpers.categories.getTree(app, item.category.id);
 
                     result.user = user;
                     result.item = item;
@@ -229,12 +228,13 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var that = this;
-            var user = that.app.getSession('user');
+            var app = this.app;
+            var user = app.getSession('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
-            var siteLocation = that.app.getSession('siteLocation');
+            var siteLocation = app.getSession('siteLocation');
             var anonymousItem;
+            var spec;
 
             if (user) {
                 params.token = user.token;
@@ -255,24 +255,21 @@ module.exports = {
             delete params.title;
             delete params.sk;
 
-            function findItem(next) {
-                var spec = {
-                    item: {
-                        model: 'Item',
-                        params: params
-                    }
-                };
-
-                that.app.fetch(spec, {
-                    'readFromCache': false
-                }, function afterFetch(err, result) {
-                    if (err) {
-                        callback(err, result);
-                        return;
-                    }
-                    next(err, result);
-                });
-            }
+            spec = {
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            };
+            app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                if (err) {
+                    callback(err, result);
+                    return;
+                }
+                findRelatedItems.call(this, err, result);
+            });
 
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
@@ -288,11 +285,11 @@ module.exports = {
                     }
                 };
 
-                that.app.fetch(spec, {
+                app.fetch(spec, {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
-                    var user = that.app.getSession('user');
+                    var user = app.getSession('user');
                     var categoryTree;
 
                     result.relatedItems = model.get('data');
@@ -300,17 +297,15 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    categoryTree = helpers.categories.getCatTree(that.app.getSession(), item.category.id);
+                    categoryTree = helpers.categories.getTree(app, item.category.id);
                     helpers.analytics.reset();
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                    result.analytics = helpers.analytics.generateURL(that.app.getSession());
+                    result.analytics = helpers.analytics.generateURL(app.getSession());
                     callback(err, result);
                 });
             }
-
-            findItem(findRelatedItems);
         }
     }
 };

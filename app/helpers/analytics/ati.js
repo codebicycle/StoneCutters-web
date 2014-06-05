@@ -107,11 +107,11 @@ module.exports = function analyticsHelper() {
         return params;
     }
 
-    function generateParams(session, url, options) {
-        var params = _.clone(url.ati.params);
+    function generateParams(session, ati, options) {
+        var params = _.clone(ati.names);
 
         prepareDefaultParams(session, params);
-        if (url.ati.process) {
+        if (ati.process) {
             params = prepareParams(params, options);
         }
         return JSON.stringify(params);
