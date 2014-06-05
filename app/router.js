@@ -22,6 +22,7 @@ Router.prototype = Object.create(BaseClientRouter.prototype);
 Router.prototype.constructor = BaseClientRouter;
 
 Router.prototype.postInitialize = function() {
+    this.on('action:start', this.setReferer, this);
     this.on('action:start', this.trackImpression, this);
     this._router.on('route', this.triggerRoute, this);
 };
@@ -31,6 +32,12 @@ Router.prototype.triggerRoute = function(event) {
         $(document).trigger('route', event);
     }
     trigger = true;
+};
+
+Router.prototype.setReferer = function(event) {
+    this.app.updateSession({
+        referer: '/' + this.previousFragment
+    });
 };
 
 Router.prototype.trackImpression = function() {
