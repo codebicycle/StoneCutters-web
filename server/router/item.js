@@ -182,6 +182,7 @@ module.exports = function(app, dataAdapter) {
         app.get('/items/:itemId/favorite/:intent?', handler);
 
         function handler(req, res) {
+            console.log('hola');
             var itemId = req.param('itemId', null);
             var intent = req.param('intent', '');
 
@@ -198,13 +199,13 @@ module.exports = function(app, dataAdapter) {
             function success(done) {
                 var redirect = req.param('redirect') || '/des-iid-' + itemId;
 
-                res.redirect(301, utils.link(redirect, req.rendrApp.getSession('siteLocation')));
+                res.redirect(utils.link(redirect, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
                 var redirect = req.param('redirect') || '/des-iid-' + itemId;
 
-                res.redirect(301, utils.link(redirect, req.rendrApp.getSession('siteLocation')));
+                res.redirect(utils.link(redirect, req.rendrApp.getSession('siteLocation')));
             }
 
             asynquence().or(error)
