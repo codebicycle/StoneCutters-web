@@ -80,8 +80,6 @@ describe('app', function test() {
                             catId: params[1],
                             page: params[2] ? Number(params[2]) : -1
                         };
-
-                        console.log(params);
                         reset(req, res);
                         function callback(err, data) {
                             result.err = err;
