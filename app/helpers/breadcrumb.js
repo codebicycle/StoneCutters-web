@@ -33,6 +33,9 @@ module.exports = (function() {
         post: {
             form: function() {
                 return '/';
+            },
+            success: function() {
+                return '/posting/' + this.category.parentId + '/' + this.category.id;
             }
         },
         items: {
@@ -47,7 +50,18 @@ module.exports = (function() {
                 }
                 return breadcrumb;
             },
+            galery: function() {
+                var url = '/' + common.slugToUrl(this.item);
+
+                if (this.pos) {
+                    url += '?pos=' + this.pos;
+                }
+                return url;
+            },
             reply: function() {
+                return '/' + common.slugToUrl(this.item);
+            },
+            success: function() {
                 return '/' + common.slugToUrl(this.item);
             },
             search: function() {

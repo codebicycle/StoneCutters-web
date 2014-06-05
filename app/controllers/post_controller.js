@@ -298,6 +298,7 @@ module.exports = {
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
                     categoryTree = helpers.categories.getTree(app, item.category.id);
+                    result.category = categoryTree.subCategory;
                     helpers.analytics.reset();
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
