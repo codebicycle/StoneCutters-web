@@ -35,9 +35,11 @@ Router.prototype.triggerRoute = function(event) {
 };
 
 Router.prototype.setReferer = function(event) {
-    this.app.updateSession({
-        referer: '/' + this.previousFragment
-    });
+    if (this.previousFragment) {
+        this.app.updateSession({
+            referer: '/' + this.previousFragment
+        });
+    }
 };
 
 Router.prototype.trackImpression = function() {
