@@ -25,8 +25,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                     if (!err) {
                         return done(response, _location);
                     }
+                    done.abort();
                     siteLocation = previousLocation;
-                    dataAdapter.get(req, '/locations/' + siteLocation, done.errfcb);
+                    return res.redirect(301, '/?location=' + siteLocation);
                 }
 
                 dataAdapter.get(req, '/locations/' + siteLocation, after);
