@@ -43,7 +43,7 @@
     {% endif %}
 
     <section id="description">
-        <span>{{ item.date.timestamp | date }}, {{ item.location.cityName }}</span>
+        <span>{{ item.date.timestamp | date }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
         <h1>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h1>
         <h2>{{ item.title }}</h2>
         <p>{{ item.description }}</p>
