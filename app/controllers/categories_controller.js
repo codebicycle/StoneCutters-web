@@ -48,6 +48,10 @@ function handleItems(params, callback) {
 
         result.items = model.get('data');
         result.metadata = model.get('metadata');
+        if (result.metadata.total < 5){
+            helpers.seo.addMetatag('robots', 'noindex, nofollow');
+            helpers.seo.update();
+        }
 
         helpers.pagination.paginate(result.metadata, query, url);
         helpers.analytics.reset();
