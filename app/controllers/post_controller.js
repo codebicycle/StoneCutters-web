@@ -34,14 +34,10 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var siteLocation = this.app.getSession('siteLocation');
             var category = helpers.categories.get(this.app, params.categoryId);
 
             if (!category) {
-                this.redirectTo(helpers.common.link('/posting', siteLocation), {
-                    status: 301
-                });
-                return;
+                return helpers.common.redirect.call(this, '/posting');
             }
             helpers.analytics.reset();
 
@@ -82,18 +78,12 @@ module.exports = {
             var category = categories._byId[params.categoryId];
 
             if (!category) {
-                this.redirectTo(helpers.common.link('/posting', siteLocation), {
-                    status: 301
-                });
-                return;
+                return helpers.common.redirect.call(this, '/posting');
             }
             categories = app.getSession('childCategories');
             category = categories[params.subcategoryId];
             if (!category) {
-                this.redirectTo(helpers.common.link('/posting/' + params.categoryId, siteLocation), {
-                    status: 301
-                });
-                return;
+                return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
             }
             app.fetch(spec, function afterFetch(err, result) {
                 var response = result.fields.models[0].attributes;
@@ -298,6 +288,7 @@ module.exports = {
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
                     categoryTree = helpers.categories.getTree(app, item.category.id);
+                    result.category = categoryTree.subCategory;
                     helpers.analytics.reset();
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);

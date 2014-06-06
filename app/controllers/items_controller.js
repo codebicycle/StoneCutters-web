@@ -50,10 +50,7 @@ module.exports = {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 if (err) {
-                    this.redirectTo(helpers.common.link('/404', siteLocation), {
-                        status: 301
-                    });
-                    return;
+                    return helpers.common.redirect.call(this, '/404');
                 }
                 findRelatedItems.call(this, err, result);
             }.bind(this));
@@ -64,17 +61,11 @@ module.exports = {
                 var spec;
 
                 if (!item) {
-                    this.redirectTo(helpers.common.link('/404', siteLocation), {
-                        status: 301
-                    });
-                    return;
+                    return helpers.common.redirect.call(this, '/404');
                 }
                 slug = helpers.common.slugToUrl(item);
                 if (slug.indexOf(slugUrl + '-iid-')) {
-                    this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
-                        status: 301
-                    });
-                    return;
+                    return helpers.common.redirect.call(this, ('/' + slug));
                 }
 
                 spec = {
@@ -129,8 +120,10 @@ module.exports = {
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
+            var pos = Number(params.pos) || 0;
             var siteLocation = app.getSession('siteLocation');
             var anonymousItem;
+            var spec;
 
             helpers.seo.resetHead();
             helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slugUrl, '-iid-', itemId].join(''));
@@ -154,13 +147,12 @@ module.exports = {
             delete params.title;
             delete params.sk;
 
-            var spec = {
+            spec = {
                 item: {
                     model: 'Item',
                     params: params
                 }
             };
-
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
@@ -170,7 +162,7 @@ module.exports = {
 
                 result.item = item;
                 result.user = user;
-                result.pos = Number(params.pos) || 0;
+                result.pos = pos;
                 result.sk = securityKey;
                 categoryTree = helpers.categories.getTree(app, item.category.id);
                 helpers.analytics.reset();
@@ -198,10 +190,7 @@ module.exports = {
             var query;
 
             if (!params.search || _.isEmpty(params.search)) {
-                this.redirectTo(helpers.common.link('/', siteLocation), {
-                    status: 301
-                });
-                return;
+                return helpers.common.redirect.call(this, '/');
             }
             helpers.pagination.prepare(app, params);
             query = _.clone(params);
@@ -249,7 +238,6 @@ module.exports = {
         function controller(form) {
             var app = this.app;
             var user = app.getSession('user');
-            var siteLocation = app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -267,10 +255,7 @@ module.exports = {
                 var item;
 
                 if (err) {
-                    this.redirectTo(helpers.common.link('/404', siteLocation), {
-                        status: 301
-                    });
-                    return;
+                    return helpers.common.redirect.call(this, '/404');
                 }
                 item = result.item.toJSON();
                 categoryTree = helpers.categories.getTree(app, item.category.id);
@@ -293,7 +278,6 @@ module.exports = {
         function controller() {
             var app = this.app;
             var user = app.getSession('user');
-            var siteLocation = app.getSession('siteLocation');
             var spec = {
                 item: {
                     model: 'Item',
@@ -311,10 +295,7 @@ module.exports = {
                 var item;
 
                 if (err) {
-                    this.redirectTo(helpers.common.link('/404', siteLocation), {
-                        status: 301
-                    });
-                    return;
+                    return helpers.common.redirect.call(this, '/404');
                 }
                 item = result.item.toJSON();
                 categoryTree = helpers.categories.getTree(app, item.category.id);

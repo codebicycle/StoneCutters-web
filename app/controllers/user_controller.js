@@ -27,12 +27,9 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var siteLocation = this.app.getSession('siteLocation');
-
             this.app.deleteSession('user');
-            this.redirectTo(helpers.common.link('/', siteLocation), {
-                pushState: false,
-                status: 301
+            return helpers.common.redirect.call(this, '/', null, {
+                pushState: false
             });
         }
     },

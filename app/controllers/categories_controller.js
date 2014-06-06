@@ -16,12 +16,6 @@ function handleItems(params, callback) {
     var slug = helpers.common.slugToUrl(category);
     var query;
 
-    if (slug.indexOf(params.title + '-cat-')) {
-        this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
-            status: 301
-        });
-        return;
-    }
     helpers.pagination.prepare(app, params);
     query = _.clone(params);
     params.categoryId = params.catId;
@@ -68,15 +62,8 @@ function handleItems(params, callback) {
 function handleShow(params, callback) {
     var siteLocation = this.app.getSession('siteLocation');
     var category = helpers.categories.get(this.app, params.catId);
-    var slug = helpers.common.slugToUrl(category);
     var categoryTree;
 
-    if (slug.indexOf(params.title + '-cat-')) {
-        this.redirectTo(helpers.common.link('/' + slug, siteLocation), {
-            status: 301
-        });
-        return;
-    }
     categoryTree = helpers.categories.getTree(this.app, params.catId);
 
     helpers.analytics.reset();
@@ -101,14 +88,14 @@ module.exports = {
 
         function controller() {
             var category = helpers.categories.get(this.app, params.catId);
-            var siteLocation;
+            var slug;
 
             if (!category) {
-                siteLocation = this.app.getSession('siteLocation');
-                this.redirectTo(helpers.common.link('/', siteLocation), {
-                    status: 301
-                });
-                return;
+                return helpers.common.redirect.call(this, '/');
+            }
+            slug = helpers.common.slugToUrl(category);
+            if (slug.indexOf(params.title + '-cat-')) {
+                return helpers.common.redirect.call(this, '/' + slug);
             }
             if (category.parentId) {
                 handleItems.call(this, params, callback);
