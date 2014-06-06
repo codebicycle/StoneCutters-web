@@ -85,12 +85,13 @@
         <h3>{{ dictionary["itemgeneraldetails.Description"] }}</h3>
 
         <p>{{ item.description }}</p>
+        {% if relatedItems.length %}
+            <div class="line"></div>
 
-        <div class="line"></div>
-
-        <div id="centerBtns">
-            <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
-        </div>
+            <div id="centerBtns">
+                <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
+            </div>
+        {% endif %}
     {% else %}
         <div id="itemDisable">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</div>
     {% endif %}
