@@ -152,7 +152,6 @@ module.exports = (function() {
         options = _.defaults((options || {}), {
             status: 301
         });
-        console.log(url, options);
         this.redirectTo(url, options);
     }
 

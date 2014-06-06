@@ -65,7 +65,6 @@ module.exports = {
                 }
                 slug = helpers.common.slugToUrl(item);
                 if (slug.indexOf(slugUrl + '-iid-')) {
-                    console.log('/' + slug);
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
 
