@@ -68,13 +68,14 @@
         <div class="clear"></div>
     </section>
 
-    <aside class="relatedAds">
-        {% if relatedItems %}
+    {% if relatedItems.length %}
+        <aside class="relatedAds">
             <section class="swiper-containerRA">
                 <div class="swiper-wrapper">
                     {% for relatedItem in relatedItems %}
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
+                                {{ relatedItem.id }}
                                 <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="itemPage-clickRelatedAdImg" >
                                     <a href="/{{ relatedItem | slugToUrl | link }}">
                                         <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
@@ -85,9 +86,10 @@
                     {% endfor %}
                 </div>
             </section>
-        {% endif %}
-        <a class="btns orange trackMe" href="{{ relatedAdsLink | link }}" data-tracking="itemPage-clickRelatedAdBtn" >{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','') }}</a>
-    </aside>
+            <a class="btns orange trackMe" href="{{ relatedAdsLink | link }}" data-tracking="itemPage-clickRelatedAdBtn" >{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','') }}</a>
+        </aside>
+    {% endif %}
+
     {% if item.status.contactable and item.email %}
         <section class="reply">
             <span>{{ dictionary["contactseller_form.ReplyToListing"] }}</span>
