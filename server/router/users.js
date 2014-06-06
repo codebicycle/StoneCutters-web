@@ -46,7 +46,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success() {
-                res.redirect(301, utils.link(redirect, req.rendrApp.getSession('siteLocation')));
+                res.redirect(utils.link(redirect, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
@@ -56,7 +56,7 @@ module.exports = function(app, dataAdapter) {
                     link += '?redirect=' + redirect;
                 }
                 formidable.error(req, link, err, function redirect(url) {
-                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                    res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
                 });
             }
 
@@ -124,7 +124,7 @@ module.exports = function(app, dataAdapter) {
 
             function error(err) {
                 formidable.error(req, '/login', err, function redirect(url) {
-                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                    res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
                 });
             }
 
@@ -157,12 +157,12 @@ module.exports = function(app, dataAdapter) {
             function success() {
                 var url = '/login?loginSuccess=true';
 
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
                 formidable.error(req, '/login', err, function redirect(url) {
-                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                    res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
                 });
             }
 

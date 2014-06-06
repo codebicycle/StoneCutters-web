@@ -13,7 +13,9 @@ module.exports = (function() {
                 var category;
                 var breadcrumb;
 
-                if (page === 0) {
+                console.log(page);
+
+                if (!page || page === 0) {
                     return '/';
                 }
                 if (page === 1) {
