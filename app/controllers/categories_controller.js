@@ -4,6 +4,7 @@ var helpers = require('../helpers');
 var _ = require('underscore');
 
 function handleItems(params, callback) {
+    var page = params ? params.page : undefined;
     var app = this.app;
     var spec = {
         items: {
@@ -42,11 +43,13 @@ function handleItems(params, callback) {
 
         result.items = model.get('data');
         result.metadata = model.get('metadata');
+        if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || !result.items.length)) {
+            return helpers.common.redirect.call(this, '/' + slug);
+        }
         if (result.metadata.total < 5){
             helpers.seo.addMetatag('robots', 'noindex, nofollow');
             helpers.seo.update();
         }
-
         helpers.pagination.paginate(result.metadata, query, url);
         helpers.analytics.reset();
         helpers.analytics.setPage('listing');
@@ -56,7 +59,7 @@ function handleItems(params, callback) {
         result.category = category;
         result.type = 'items';
         callback(err, result);
-    });
+    }.bind(this));
 }
 
 function handleShow(params, callback) {

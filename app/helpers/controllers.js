@@ -25,9 +25,6 @@ function setUrlVars() {
 }
 
 function redirect() {
-    if (typeof window === 'undefined') {
-        return false;
-    }
     var path = this.app.getSession('path');
 
     if (path.length <= 1 || path.slice(-1) !== '/') {
