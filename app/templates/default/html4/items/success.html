@@ -1,13 +1,13 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, item.category.name) }}
+{{ Breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToListing"]) }}
 <div id="itemPage">
     {% if item.status.visible %}
-        <h1>{{ item.title }}</h1>
-
-        <div id="replySuccess">{{ dictionary["item.YourMessageHasBeenSent"] }}</div>
+        <div>{{ item.title }}</div>
+        </br>
+        <h1>{{ dictionary["item.YourMessageHasBeenSent"] }}</h1>
     {% else %}
-        <div id="itemDisable">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</div>
+        <h1>{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</h1>
     {% endif %}
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
