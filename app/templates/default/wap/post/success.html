@@ -5,13 +5,28 @@
 </tr>
 <tr>
     <td style="padding: .5em .5em .25em; border-top: solid thin #808080;">
-        <strong>{{ dictionary["postingtitlelisting.Congratulations"] }}</strong>
+        <strong>{{ dictionary["posting_fields_1.YourAdHasBeenSuccessfullySubmittedForApproval"] }}</strong>
     </td>
 </tr>
 <tr>
     <td style="padding: .25em .5em .5em;">
-        <small>{{ dictionary["postingtitlelisting.view"] }}</small><br>
+        <strong>{{ dictionary["postingtitlelisting.view"] }}</strong><br>
         <a href="/{{ item | slugToUrl | link }}">{{ item.title }}</a>
+    </td>
+</tr>
+<tr>
+    <td style="padding: .25em .5em .5em;">
+        <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
+            <tr>
+                <td bgcolor="#FF6600" align="center">
+                    <font size="2" style="display: block;">
+                        <a href="{{ '/posting' | link }}" style="display: block;">
+                            <strong><font color="#FFFFFF">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</font></strong>
+                        </a>
+                    </font>
+                </td>
+            </tr>
+        </table>
     </td>
 </tr>
 <tr style="display: none;">
