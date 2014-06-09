@@ -22,7 +22,7 @@
             </form>
         {% endif %}
         <h2>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h2>
-        <span>{{ item.date.timestamp | date }} {{ (', '+item.location.cityName) if item.location.cityName }}</span>
+        <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }} {{ (', '+item.location.cityName) if item.location.cityName }}</span>
         <div id="itemPhotos">
             {% if item.images.length == 0 %}
                 <span>({{ dictionary["itemgeneraldetails.NoPicture"] }})</span>

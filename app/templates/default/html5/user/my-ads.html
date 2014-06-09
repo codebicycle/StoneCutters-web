@@ -13,7 +13,8 @@
                         {% elif item.status == 'rejected' %}
                             <p class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</p>
                         {% elif item.status == 'ready' %}
-                            <p>{{ dictionary[item.date.since] }}
+                            <p>
+                                {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
                                 {% if item.displayLocation %}
                                     {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
                                 {% endif %}

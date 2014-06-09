@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'items_show_view',
@@ -14,6 +15,7 @@ module.exports = BaseView.extend({
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
         data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
+        data.item.date.since = helpers.timeAgo(data.item.date);
 
         return data;
     },
