@@ -272,18 +272,19 @@ module.exports = function(app, dataAdapter) {
             var itemId = req.param('itemId', '');
 
             function validate(done) {
-                var errors = {
-                    errCode: 400,
-                    err: [],
-                    errFields: []
-                };
+                var err = [];
 
                 if (!itemId) {
-                    errors.err.push('Invalid itemId');
-                    errors.errFields.push('itemId');
+                    err.push({
+                        selector: 'Main',
+                        message: 'Invalid item'
+                    });
                 }
-                if (errors.err.length) {
-                    done.fail(errors);
+                if (err.length) {
+                    formidable.error(req, req.headers.referer.split('?').shift(), err, function redirect(url) {
+                        console.log(url);
+                        res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                    });
                     return;
                 }
                 done();
@@ -303,34 +304,13 @@ module.exports = function(app, dataAdapter) {
             function success(response) {
                 var url = '/myolx/myadslisting?deleted=true';
 
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
             }
 
             function error(err) {
-                var errors;
-                var url = req.headers.referer;
-                var qIndex = url.indexOf('?');
-
-                if (!err.errCode) {
-                    errors = {
-                        errCode: 400,
-                        errField: [],
-                        errMsg: [],
-                    };
-
-                    err.forEach(function each(error) {
-                        errors.errField.push(error.selector);
-                        errors.errMsg.push(error.message);
-                    });
-                } else {
-                    errors = err;
-                }
-
-                if (qIndex != -1) {
-                    url = url.substring(0,qIndex);
-                }
-                url += '?' + querystring.stringify(errors);
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                formidable.error(req, req.headers.referer.split('?').shift(), err, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
+                });
             }
 
             asynquence().or(error)
