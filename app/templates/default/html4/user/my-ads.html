@@ -16,11 +16,7 @@
                         {% elif item.status == 'rejected' %}
                             <span class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</span>
                         {% elif item.status == 'ready' %}
-                            <span class="status ready">{{ dictionary[item.date.since] }}
-                                {% if item.displayLocation %}
-                                    {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
-                                {% endif %}
-                            </span>
+                            <span class="status ready">{{ dictionary[item.date.since] }}</span>
                         {% endif %}
                         <div class="centerCont">
                             <a href="/{{ item | slugToUrl | link }}">
