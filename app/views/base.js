@@ -31,6 +31,7 @@ module.exports = RendrView.extend({
             referer: this.app.getSession('referer'),
             breadcrumb: helpers.breadcrumb.get.call(this, data),
             url: this.app.getSession('url'),
+            href: this.app.getSession('href'),
             sixpack: this.app.getSession('sixpack'),
             macros: 'compiled/' + template + '/partials/macros.html',
             currentRoute: this.app.getSession('currentRoute')
