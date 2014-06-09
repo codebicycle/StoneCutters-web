@@ -168,7 +168,7 @@
                                     <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.DatePosted"] }}:</small>
                                 </th>
                                 <td align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block;">{{ item.date.timestamp | date }}</small>
+                                    <small style="display: block;">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</small>
                                 </td>
                             </tr>
                         </table>

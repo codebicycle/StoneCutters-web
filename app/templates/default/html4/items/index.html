@@ -22,7 +22,7 @@
                     </a>
                     <div class="itemInfo">
                         <h2>{{ item.price.displayPrice }}</h2>
-                        <span>{{ dictionary[item.date.since] }}</span>
+                        <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
                         <div class="centerCont">
                             <a href="/{{ item | slugToUrl | link }}">
                                 <p>{{ item.title }}</p>
