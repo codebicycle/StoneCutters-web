@@ -182,7 +182,6 @@ module.exports = function(app, dataAdapter) {
         app.get('/items/:itemId/favorite/:intent?', handler);
 
         function handler(req, res) {
-            console.log('hola');
             var itemId = req.param('itemId', null);
             var intent = req.param('intent', '');
 

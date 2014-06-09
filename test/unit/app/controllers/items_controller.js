@@ -62,11 +62,10 @@ describe('app', function test() {
                             return;
                         }
                         var params = req.path.split('/');
-                        var page = (params.length === 5 ? Number(params[4].replace('-p-', '')) : 1);
-
+                        
                         params = {
                             search: params[3],
-                            page: page
+                            page: (params.length === 5 ? Number(params[4].replace('-p-', '')) : undefined)
                         };
                         reset(req, res);
                         function callback(err, data) {
@@ -192,9 +191,9 @@ describe('app', function test() {
                     })(context);
                     done();
                 });
-                it('should redirect to the home ("/")', function test(done) {
+                it('should not redirect on empty search', function test(done) {
                     request(app)
-                        .get('/nf/redirect/?location=' + utils.locations.in.www)
+                        .get('/nf/search?location=' + utils.locations.in.www)
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
@@ -204,8 +203,7 @@ describe('app', function test() {
                         response = res;
 
                         (function existance(response) {
-                            response.should.have.property('redirect');
-                            response.redirect.uri.should.equal('/');
+                            response.should.not.have.property('redirect');
                         })(context);
                         done();
                     }
@@ -238,8 +236,7 @@ describe('app', function test() {
 
                     function beforeMiddleware(req, res, next) {
                         var params = {
-                            search: 'a',
-                            page: 1
+                            search: 'a'
                         };
 
                         reset(req, res, 'search', next);

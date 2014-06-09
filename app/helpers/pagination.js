@@ -123,6 +123,9 @@ module.exports = (function() {
         });
         params.offset = (params.page - 1) * params.pageSize;
         if (params.search) {
+            if (params.search === 'undefined' && !~app.getSession('path').indexOf('undefined')) {
+                delete params.search;
+            }
             params.searchTerm = params.search;
         }
         if (params.filters) {

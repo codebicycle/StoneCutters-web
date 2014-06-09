@@ -78,7 +78,7 @@ describe('app', function test() {
                         params = {
                             title: params[0].substr(1),
                             catId: params[1],
-                            page: params[2] ? Number(params[2]) : -1
+                            page: params[2] ? Number(params[2]) : undefined
                         };
                         reset(req, res);
                         function callback(err, data) {
