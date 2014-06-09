@@ -1,9 +1,14 @@
 <label style="display: block; padding-top: .5em;">
-    <small>{{field.label}}</small>
-    <br />
-    <select id="select-{{field.name}}" name="{{field.name}}">
-        {% for value in field.values %}
-            <option value="{{value.key}}" {% if (field.value) and (field.value.key == value.key) %}selected="selected"{% endif %}>{{value.value}}</option>
-        {% endfor %}
-    </select>
+    {% if field.values.length == 1 %}
+        <small>{{field.label}}: <strong>{{ field.values[0].value }}</strong></small>
+        <input type="hidden" id="select-{{field.name}}" name="{{field.name}}" value="{{ field.values[0].key }}">
+    {% else %}
+        <small>{{field.label}}</small>
+        <br />
+        <select id="select-{{field.name}}" name="{{field.name}}">
+            {% for value in field.values %}
+                <option value="{{value.key}}" {% if (field.value) and (field.value.key == value.key) %}selected="selected"{% endif %}>{{value.value}}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
 </label>

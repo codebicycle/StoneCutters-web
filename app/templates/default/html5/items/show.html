@@ -75,7 +75,6 @@
                     {% for relatedItem in relatedItems %}
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
-                                {{ relatedItem.id }}
                                 <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="itemPage-clickRelatedAdImg" >
                                     <a href="/{{ relatedItem | slugToUrl | link }}">
                                         <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
@@ -254,8 +253,8 @@
             <h4>{{ dictionary["itemgeneraldetails.ShareThisAd"] }}</h4>
             <div>
                 <ul>
-                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ location.url }}{{ url }}" target="_blank" class="facebookButton">Facebook</a></li>
-                    <li><a href="https://twitter.com/intent/tweet?original_referer={{ url }}&text={{ item.title }}&url={{ url }}" target="_blank" class="twitterButton">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ href }}" target="_blank" class="facebookButton">Facebook</a></li>
+                    <li><a href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title }}&url={{ href }}" target="_blank" class="twitterButton">Twitter</a></li>
                 </ul>
             </div>
 

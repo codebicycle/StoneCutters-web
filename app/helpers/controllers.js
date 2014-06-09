@@ -4,21 +4,27 @@ var _ = require('underscore');
 var common = require('./common');
 
 function setUrlVars() {
+    var href;
     if (typeof window === 'undefined') {
-        return;
-    }
-    var location = window.location;
+        href = this.app.getSession('siteLocation') + this.app.getSession('path');
 
-    this.app.updateSession({
-        path: location.pathname,
-        url: location.href
-    });
+        this.app.updateSession({
+            href: href
+        });
+    }
+    else {
+        var location = window.location;
+        href = this.app.getSession('siteLocation') + location.pathname;
+
+        this.app.updateSession({
+            path: location.pathname,
+            url: location.href,
+            href: href
+        });
+    }
 }
 
 function redirect() {
-    if (typeof window === 'undefined') {
-        return false;
-    }
     var path = this.app.getSession('path');
 
     if (path.length <= 1 || path.slice(-1) !== '/') {

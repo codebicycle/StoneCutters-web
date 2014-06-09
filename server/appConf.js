@@ -29,7 +29,6 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.abSelector());
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.location());
-        rendrApp.use(middleware.redirections());
         rendrApp.use(middleware.languages());
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.templates());

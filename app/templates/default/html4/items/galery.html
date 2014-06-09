@@ -12,15 +12,6 @@
                 <div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
                 <a href="{{ (['?pos=', pos + 1] | join('') | link) if pos + 1 != item.images.length else '#' }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
             </div>
-            <div id="galeryPaginationLinks">
-                {% for image in item.images %}
-                    {% if image.displayOrder == pos + 1  %}
-                        <strong class="{{ "last" if loop.last }}">{{ image.displayOrder }}</strong>
-                    {% else %}
-                        <a href="{{ ('?pos='+(image.displayOrder - 1)) | link }}" class="{{ "last" if loop.last }}">{{ image.displayOrder }}</a>
-                    {% endif %}
-                {% endfor %}
-            </div>
         {% endif %}
         </div>
     {% else %}

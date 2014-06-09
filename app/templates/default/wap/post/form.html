@@ -13,14 +13,14 @@
             <tr>
                 <td style="padding: .5em; border-top: solid thin #808080;">
                     <small>
-                        <strong>{{ dictionary["itemslisting.Category"] }}:</strong>
+                        <strong>{{ dictionary["itemslisting.Category"] }}</strong>
                         <span>{{subcategory.name}}</span>
                     </small>
                     <br />
                     <br style="display: none;" />
                     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
                         <label style="display: block; padding-top: .5em;">
-                            <small>{{ dictionary["contactseller_form.AttachPicture"] }}:</small>
+                            <small>{{ dictionary["contactseller_form.AttachPicture"] }}</small>
                             <br>
                             <input type="file" style="font-size: small" name="images[0]">
                             <br>
@@ -62,7 +62,7 @@
                         <input type="hidden" name="platform" value="{{platform}}">
                         <input type="hidden" name="category.parentId" value="{{category.id}}">
                         <input type="hidden" name="category.id" value="{{subcategory.id}}">
-
+                        <br>
                         <small>
                             <strong>{{ dictionary["itemslisting.NavigatorByLocation"] }}:</strong>
                             <span>
@@ -70,7 +70,7 @@
                             </span>
                         </small>
 
-                        <span style="display: block;"><input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}"></span>
+                        <span style="display: block; padding-top: .5em;"><input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}"></span>
                     </form>
                 </td>
             </tr>
