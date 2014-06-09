@@ -182,7 +182,6 @@ module.exports = function(app, dataAdapter) {
         app.get('/items/:itemId/favorite/:intent?', handler);
 
         function handler(req, res) {
-            console.log('hola');
             var itemId = req.param('itemId', null);
             var intent = req.param('intent', '');
 
@@ -220,35 +219,48 @@ module.exports = function(app, dataAdapter) {
 
         function handler(req, res, next) {
 
+            formidable.parse(req, function callback(err, data) {
+                var url = '/nf/search' + (data.search ? ('/' + data.search) : '');
+
+                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+            });
+        }
+    })();
+
+    (function filter() {
+        app.post('/nf/filter/redirect', handler);
+
+        function handler(req, res, next) {
+
             function replaceParam(url, name, value) {
+                var regExp;
+
                 if (!~url.indexOf(name)) {
-                    url = url + '-' + name + value;
-                } else {
-                    var regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
-                    url = url.replace(regExp, name + value);
+                    url = value ? [url, '-', value].join('') : url;
+                } 
+                else {
+                    regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
+                    url = url.replace(regExp, (value ? (name + value) : value));
                 }
                 return url;
             }
 
             formidable.parse(req, function callback(err, data) {
-                var url;
+                var from;
+                var to;
 
-                if (!data.search && !data.currentURL) {
+                if (!data.currentURL) {
                     return res.redirect(301, req.headers.referer);
-                }
-                if (data.search) {
-                    url = '/nf/search/' + data.search;
-                } else {
-                    var from = data['from_' + data.name] || '';
-                    var to = data['to_' + data.name] || '';
-
-                    url = data.currentURL;
+                } 
+                else {
+                    from = data['from_' + data.name] || '';
+                    to = data['to_' + data.name] || '';
                     if (from.length || to.length) {
-                        url = replaceParam(url, 'p' + '-', 1);
-                        url = replaceParam(url, data.name + '_', from + '_' + to);
+                        data.currentURL = replaceParam(data.currentURL, 'p' + '-', '');
+                        data.currentURL = replaceParam(data.currentURL, data.name + '_', from + '_' + to);
                     }
                 }
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(data.currentURL, req.rendrApp.getSession('siteLocation')));
             });
         }
     })();

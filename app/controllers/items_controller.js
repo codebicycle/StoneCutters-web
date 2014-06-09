@@ -74,7 +74,7 @@ module.exports = {
                         params: {
                             location: siteLocation,
                             offset: 0,
-                            pageSize:10,
+                            pageSize: 10,
                             relatedAds: itemId
                         }
                     }
@@ -187,12 +187,10 @@ module.exports = {
                     params: params
                 }
             };
+            var user = app.getSession('user');
             var siteLocation = app.getSession('siteLocation');
             var query;
 
-            if (!params.search || _.isEmpty(params.search)) {
-                return helpers.common.redirect.call(this, '/');
-            }
             helpers.pagination.prepare(app, params);
             query = _.clone(params);
             delete params.search;
@@ -203,12 +201,28 @@ module.exports = {
             helpers.seo.resetHead();
             helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/nf/search/', query.search, (query.page && query.page > 1 ? '/-p-' + query.page : '')].join(''));
 
+            helpers.analytics.reset();
+            helpers.analytics.setPage('nf');
+            helpers.analytics.addParam('keyword', query.search);
+            helpers.analytics.addParam('page_nb', 0);
+            helpers.analytics.addParam('user', user);
+
+            if (!query.search || _.isEmpty(query.search.trim())) {
+                helpers.seo.addMetatag('robots', 'noindex, nofollow');
+                return callback(null, {
+                    analytics: helpers.analytics.generateURL(app.getSession()),
+                    search: '',
+                    metadata: {
+                        total: 0
+                    }
+                });
+            }
+
             //don't read from cache, because rendr caching expects an array response
             //with ids, and smaug returns an object with 'data' and 'metadata'
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var user = app.getSession('user');
                 var protocol = app.getSession('protocol');
                 var host = app.getSession('host');
                 var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
@@ -225,11 +239,7 @@ module.exports = {
                 }
 
                 helpers.pagination.paginate(result.metadata, query, url);
-                helpers.analytics.reset();
-                helpers.analytics.setPage('nf');
-                helpers.analytics.addParam('keyword', query.search);
                 helpers.analytics.addParam('page_nb', result.metadata.totalPages);
-                helpers.analytics.addParam('user', user);
                 result.analytics = helpers.analytics.generateURL(app.getSession());
                 result.search = query.search;
                 callback(err, result);

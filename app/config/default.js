@@ -1,6 +1,14 @@
 module.exports = {
     smaug: {
-        maxPageSize: 10
+        wap: {
+            maxPageSize: 25
+        },
+        html4: {
+            maxPageSize: 25
+        },
+        html5: {
+            maxPageSize: 25
+        }
     },
     staticAccept: ['css', 'js'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],

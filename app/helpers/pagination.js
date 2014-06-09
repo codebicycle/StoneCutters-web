@@ -110,7 +110,7 @@ module.exports = (function() {
     }
 
     function prepare(app, params) {
-        var max = config.get(['smaug', 'maxPageSize'], 50);
+        var max = config.get(['smaug', app.getSession('platform'), 'maxPageSize'], 25);
 
         if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
             params.pageSize = max;
@@ -123,6 +123,9 @@ module.exports = (function() {
         });
         params.offset = (params.page - 1) * params.pageSize;
         if (params.search) {
+            if (params.search === 'undefined' && !~app.getSession('path').indexOf('undefined')) {
+                delete params.search;
+            }
             params.searchTerm = params.search;
         }
         if (params.filters) {
@@ -133,7 +136,7 @@ module.exports = (function() {
 
     function paginate(metadata, params, url) {
         var next;
-        var max = config.get(['smaug', 'maxPageSize'], 50);
+        var max = params.pageSize;
 
         metadata.page = params.page;
         metadata.totalPages = Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1);
