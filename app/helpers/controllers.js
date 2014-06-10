@@ -8,7 +8,7 @@ var intertitial = config.get(['interstitial', 'enabled'], false);
 function setUrlVars() {
     var href;
     if (typeof window === 'undefined') {
-        href = this.app.getSession('siteLocation') + this.app.getSession('path');
+        href = this.app.getSession('protocol') + '://' + this.app.getSession('siteLocation') + this.app.getSession('path');
 
         this.app.updateSession({
             href: href
@@ -16,7 +16,7 @@ function setUrlVars() {
     }
     else {
         var location = window.location;
-        href = this.app.getSession('siteLocation') + location.pathname;
+        href = this.app.getSession('protocol') + '://' + this.app.getSession('siteLocation') + location.pathname;
 
         this.app.updateSession({
             path: location.pathname,
