@@ -1,15 +1,22 @@
 <div id="header">
-	<h1><a href="{{ '/' | link }}">{{ location.url | replace('www.','')}}</a></h1>
+	<h1><a href="{{ '/' | link }}">{{ location.url | replace('www.', '') }}</a></h1>
 	<ul>
-	    {% if postButton %}
-	    	<li class="post"><a href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}" class="btns orange">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a></li>
-	    {% endif %}
-	    {% if not user %}
-	    	<li class="signIn userLogOut"><a href="{{ '/login' | link }}" title="{{ dictionary["homeheader.My OLX"] }}">{{ dictionary["homeheader.Sign_In"] }}</a></li>
-	    {% elif user.unreadMessagesCount > 0 %}
-	    	<li class="signIn userLogInMsg"><a href="{{ '/myolx' | link }}" title="{{ dictionary["homeheader.My OLX"] }}">{{ dictionary["homeheader.My OLX"] }}</a></li>
-	    {% else %}
-	    	<li class="signIn userLogIn"><a href="{{ '/myolx' | link }}" title="{{ dictionary["homeheader.My OLX"] }}">{{ dictionary["homeheader.My OLX"] }}</a></li>
+		{% if user %}
+			{% set status = 'loggedInUnreadMessages' if user.unreadMessagesCount else 'loggedIn' %}
+			{% set url = '/myolx' %}
+			{% set text = dictionary['homeheader.My OLX'] %}
+		{% else %}
+			{% set status = 'loggedOut' %}
+			{% set url = '/login' %}
+			{% set text = dictionary['homeheader.Sign_In'] %}
+		{% endif %}
+		<li>
+			<a class="user {{ status }}" href="{{ url | link }}" title="{{ text }}">{{ text }}</a>
+		</li>
+		{% if postButton %}
+			<li>
+				<a class="post" href="{{ '/posting' if location.current else '/location?target=posting' | link }}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+			</li>
 		{% endif %}
 	</ul>
 </div>
