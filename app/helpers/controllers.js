@@ -2,6 +2,8 @@
 
 var _ = require('underscore');
 var common = require('./common');
+var config = require('../config');
+var intertitial = config.get(['interstitial', 'enabled'], false);
 
 function setUrlVars() {
     var href;
@@ -24,10 +26,13 @@ function setUrlVars() {
     }
 }
 
-function redirect() {
+function redirect(params) {
     var path = this.app.getSession('path');
 
     if (path.length <= 1 || path.slice(-1) !== '/') {
+        if (intertitial && setInterstitial.call(this, params)) {
+            return true;
+        }
         return false;
     }
     this.redirectTo(common.link(path.slice(0, -1), this.app.getSession('siteLocation')), {
@@ -53,6 +58,75 @@ function setReferer() {
     this.app.updateSession({
         referer: this.app.getSession('referer')
     });
+}
+
+function setInterstitial(params) {
+    var url = '/interstitial';
+    var platform;
+    var platforms;
+    var path;
+    var paths;
+    var downloadApp;
+    var clicks;
+    var currentClicks;
+
+    platform = this.app.getSession('platform');
+    platforms = config.get(['interstitial', 'ignorePlatform'], []);
+    if (_.contains(platforms, platform)) {
+console.log('Return for platform');
+        return;
+    }
+
+    path = this.app.getSession('path');
+    paths = config.get(['interstitial', 'ignorePath'], []);
+    if (_.contains(paths, path)) {
+console.log('Return for path');
+        return;
+    }
+
+    downloadApp = this.app.getSession('downloadApp');
+console.log('Check if download app is already set [', downloadApp, ']');
+    if (!downloadApp) {
+        clicks = config.get(['interstitial', 'clicks'], 1);
+        currentClicks = this.app.getSession('clicks') || 0;
+console.log('Max clicks for show interstitial [', clicks, ']');
+console.log('Current clicks for show interstitial [', currentClicks, ']');
+
+        if (currentClicks < clicks) {
+            currentClicks++;
+            this.app.persistSession({
+                clicks: currentClicks
+            });
+console.log('Current clicks + 1 [', currentClicks, ']');
+        }
+        else {
+            var protocol = this.app.getSession('protocol');
+            var host = this.app.getSession('host');
+            var time = config.get(['interstitial', 'time'], 60000);
+
+            this.app.deleteSession('clicks');
+            this.app.persistSession({
+                downloadApp: 1
+            }, {
+                maxAge: time
+            });
+            if (typeof window === 'undefined') {
+console.log('Show intertitial');
+                this.app.updateSession({
+                    interstitial: true
+                });
+            } 
+            else {
+                url = [url, '?ref=', protocol, '://', host, this.app.getSession('url')].join('');
+console.log('Show intertitial [', url, ']');
+                this.redirectTo(common.link(url, this.app.getSession('siteLocation')), {
+                    status: 301
+                });
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 function setLanguage(params) {
@@ -160,11 +234,11 @@ function processForm(params) {
 module.exports = {
     control: function(params, callback) {
         setUrlVars.call(this);
-        if (!redirect.call(this)) {
+        if (!redirect.call(this, params)) {
             cleanSession.call(this);
             setCurrentRoute.call(this);
             setReferer.call(this);
-            setLanguage.call(this);
+            setLanguage.call(this, params);
             setLocation.call(this, params, function next() {
                 callback.call(this, processForm.call(this, params));
             }.bind(this));
