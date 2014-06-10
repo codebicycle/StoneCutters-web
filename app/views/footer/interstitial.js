@@ -16,12 +16,16 @@ module.exports = BaseView.extend({
     },
     postRender: function() {
         var interstitial = this.$('#interstitial');
+        var views = '[data-view]';
+
         if (interstitial.length) {
             this.$('.closeInterstitial', interstitial).on('click', function(e) {
                 e.preventDefault();
                 interstitial.remove();
+                $(views).removeClass('hide');
             });
-
+            $(views).addClass('hide');
+            $('.' + this.className).removeClass('hide');
             this.attachTrackMe(this.className, function(category, action) {
                 return {
                     custom: [category, '-', '-', action].join('::')

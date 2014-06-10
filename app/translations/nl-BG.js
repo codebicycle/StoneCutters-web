@@ -5,6 +5,7 @@ module.exports = {
     'countryoptions.EnterCity': 'Vul een stad in',
     'countryoptions.SelectACity': 'Kies een stad',
     'defaultfooter.Back': 'Terug',
+    'defaultfooter.FreeSite': '100% Gratis advertenties',
     'defaultfooter.Home': 'Home',
     'defaultfooter.PublishFreeAd': 'Plaats een gratis advertentie',
     'defaultheader.change': 'Wijzig',
