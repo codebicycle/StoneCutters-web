@@ -22,6 +22,9 @@ module.exports = BaseView.extend({
     postRender: function() {
         var that = this;
 
+        var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
+        this.$('.footer_footer_view').css('margin-bottom', marginActions + 'px');
+
         that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
 
         var galery = this.$('.swiper-container').swiper({
