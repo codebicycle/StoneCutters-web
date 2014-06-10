@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 
     grunt.file.recurse('app', function callback(abspath, rootdir, subdir, filename) {
         var parts = [];
-        var target = 'public/js/app/default/app.js';
+        var target = 'public/js/app/app.js';
 
         if (subdir) {
             parts = subdir.split('/');
@@ -40,11 +40,6 @@ module.exports = function(grunt) {
         files[target][abspath] = abspath;
     });
 
-    files['public/js/app/default/app.js']['app/templates/compiled/default/html5/templates.js'] = 'app/templates/compiled/default/html5/templates.js';
-
-    for (platform in localization) {
-        localization[platform].forEach(eachLocation);
-    }
     for (var target in files) {
         location = target.split('/')[3];
         browserify[location] = {
@@ -62,27 +57,6 @@ module.exports = function(grunt) {
         for (file in files[target]) {
             browserify[location].files[target].unshift(files[target][file]);
             browserify[location].options.aliasMappings[0].src.push(files[target][file].slice(4));
-        }
-    }
-
-    function eachLocation(location) {
-        var dir = 'app/templates/compiled/' + location + '/' + platform;
-        var defaultTarget = 'public/js/app/default/app.js';
-
-        if(platform === 'wap' || platform === 'html4') {
-            return;
-        }
-        target = 'public/js/app/' + location + '/app.js';
-        if (!files[target]) {
-            files[target] = _.clone(files[defaultTarget]);
-        }
-        if (grunt.file.exists(dir)) {
-            grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
-                if (filename.split('.').pop() !== 'js') {
-                    return;
-                }
-                files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
-            });
         }
     }
 

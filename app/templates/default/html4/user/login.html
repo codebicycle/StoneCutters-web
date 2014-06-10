@@ -23,18 +23,5 @@
     <div class="formField" style="padding-top:0;">
         <a href="/register">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
     </div>
-    <div class="line"></div>
-    <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
-        <h4>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</h4>
-        <div class="formField">
-            <label>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace ('<<MY_CLASSIFIEDS>>','OLX') }}</label>
-            <input type="text" name="email">
-        </div>
-        <div class="formActions">
-            <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="{{ dictionary["myolx.Send"] }}" name="submit" class="btns orange">
-            </div>
-        </div>
-    </form>
 </div>
 {{ BreadcrumbHome(dictionary, link) }}

@@ -12,9 +12,10 @@
         {% view 'footer/downloadapp' %}
         {% view 'footer/languages' %}
         {% view 'footer/footer' %}
-        <script src="{{ ['/js/', jsDir, '/libs.js'] | join('') | static }}"></script>
-        <script src="{{ ['/js/', jsDir, '/translations.js'] | join('') | static }}"></script>
-        <script src="{{ ['/js/', jsDir, '/', directory, '/app.js'] | join('') | static }}"></script>
+        <script src="{{ [jsDir, 'libs.js'] | join('/') | static }}"></script>
+        <script src="{{ [jsDir, 'translations.js'] | join('/') | static }}"></script>
+        <script src="{{ [jsDir, 'templates', template, 'templates.js'] | join('/') | static }}"></script>
+        <script src="{{ [jsDir, 'app.js'] | join('/') | static }}"></script>
         <script>
             (function() {
                 var App = window.App = new (require('app/app'))({% json appData %});

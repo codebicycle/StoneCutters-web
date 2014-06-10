@@ -15,13 +15,4 @@
         </div>
     </form>
     <a href="/register">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
-    <div class="line"></div>
-    <form action="{{ '/anonymousLogin' | link }}" method="POST" enctype="multipart/form-data">
-        <h4>{{ dictionary["loginbox.AlreadyPostedAnAd"] }}</h4>
-        <label>{{ dictionary["loginbox.EnterEmailUsedToPostReceiveLinkToMyBrand"] | replace("<<MY_CLASSIFIEDS>>","Mi OLX") }}</label>
-        <input type="text" name="email">
-        <div class="btnCenter">
-            <input type="submit" value="{{ dictionary["myolx.Send"] }}" class="btns orange">
-        </div>
-    </form>
 </section>
