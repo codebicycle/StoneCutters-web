@@ -7,7 +7,7 @@ var express = require('express');
 var rendr = require('rendr');
 
 var utils = require('../../../utils');
-var SmaugAdapter = require('../../../../server/adapter/data');
+var SmaugAdapter = require('../../../../shared/adapters/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: utils.smaugUserAgent
 });
