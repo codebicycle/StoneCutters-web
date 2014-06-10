@@ -59,7 +59,7 @@ function generateURL(session) {
     params.platform = session.platform;
     params.custom = ati.generateParams(session, configAti, query.params);
 
-    return '/pageview.gif?' + stringifyParams(params);
+    return '/analytics/pageview.gif?' + stringifyParams(params);
 }
 
 module.exports = {

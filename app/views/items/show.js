@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'items_show_view',
@@ -95,7 +96,6 @@ module.exports = BaseView.extend({
 
             if ($this.attr('href') == '#') {
                 e.preventDefault();
-                var api = that.app.get('apiPath');
                 var session = that.app.get('session');
                 var user = session.user;
                 var itemId = $this.data('itemid');
@@ -103,7 +103,6 @@ module.exports = BaseView.extend({
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                 $msg.text($this.hasClass('add') ? that.messages.addFav : that.messages.removeFav);
 
-                url.push(api);
                 url.push('/users/');
                 url.push(user.userId);
                 url.push('/favorites/');
@@ -113,25 +112,21 @@ module.exports = BaseView.extend({
                 url.push(user.token);
 
                 $('.loading').show();
-                $.ajax({
-                    type: 'POST',
-                    url: url.join(''),
+                helpers.dataAdapter.request('post', url.join(''), {
                     cache: false,
                     json: true,
-                    data: {}
-                })
-                .done(function () {
-                    $this.toggleClass('add remove');
-                    $('.msgCont').addClass('visible');
-                    setTimeout(function(){
-                        $('.msgCont').removeClass('visible');
-                        $msg.text('');
-                    }, 3000);
-                })
-                .fail(function () {
-                    console.log('Error');
-                })
-                .always(function () {
+                    done: function() {
+                        $this.toggleClass('add remove');
+                        $('.msgCont').addClass('visible');
+                        setTimeout(function(){
+                            $('.msgCont').removeClass('visible');
+                            $msg.text('');
+                        }, 3000);
+                    },
+                    fail: function() {
+                        console.log('Error');
+                    }
+                }, function always() {
                     $('.loading').hide();
                 });
             }

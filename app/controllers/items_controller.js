@@ -2,6 +2,7 @@
 
 var helpers = require('../helpers');
 var _ = require('underscore');
+var asynquence = require('asynquence');
 
 module.exports = {
     show: function(params, callback) {
@@ -315,4 +316,27 @@ module.exports = {
             }.bind(this));
         }
     },
+    favorite: function(params, callback) {
+        var intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
+
+        function add(done) {
+            var user = this.app.getSession('user') || {};
+
+            helpers.dataAdapter.request('post', '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
+                query: {
+                    token: user.token
+                }
+            }, done.errfcb);
+        }
+
+        function next(done) {
+            helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
+                status: 302
+            });
+        }
+
+        asynquence().or(next.bind(this))
+            .then(add.bind(this))
+            .val(next.bind(this));
+    }
 };

@@ -12,6 +12,7 @@ module.exports = {
     routes: require('./routes'),
     breadcrumb: require('./breadcrumb'),
     pagination: require('./pagination'),
+    dataAdapter: require('./dataAdapter'),
     fitText: function(element, kompressor, options) {
         var compressor = kompressor || 1;
         var settings = $.extend({
