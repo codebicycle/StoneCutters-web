@@ -31,3 +31,27 @@
         </tbody>
     </table>
 {% endmacro %}
+
+{% macro ErrorsPosting(errors, dictionary) %}
+    <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#F9E4E3">
+        <tbody>
+            <tr>
+                <td style="border: solid thin #B55351;">
+                    {% for field, messages in errors %}
+                        {% for message in messages %}
+
+                            {% if field == 'priceC' %}
+                                <small>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</small><br/>
+                            {% elif field ==  'contactName' %}
+                                <small>{{ dictionary["itemslisting.NewContactName"] }}: {{ message }}</small><br/>
+                            {% else %}
+                                <small>{{ dictionary["posting_fields_1."+field] }}: {{ message }}</small><br/>
+                            {% endif %}
+
+                        {% endfor %}
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endmacro %}
