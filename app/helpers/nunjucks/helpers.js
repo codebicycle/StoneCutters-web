@@ -48,7 +48,7 @@ module.exports = function(nunjucks) {
                     break;
                 case 'RANGE':
                     out.push('<h4>' + filter.description + '</h4>');
-                    out.push('<form action="/nf/search/redirect" method="post" class="form-inline" role="form">');
+                    out.push('<form action="/nf/filter/redirect" method="post" class="form-inline" role="form">');
                     _.each(filter.value, function outputRangeFilter(item) {
                         out.push('<input type="text" class="form-control" name="' + item.id + '_' + filter.name +'" placeholder="' + item.value + '" size="5">');
                     });

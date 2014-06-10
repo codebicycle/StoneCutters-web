@@ -269,7 +269,7 @@ module.exports = {
                         params: {
                             location: siteLocation,
                             offset: 0,
-                            pageSize:10,
+                            pageSize: 10,
                             relatedAds: itemId
                         }
                     }

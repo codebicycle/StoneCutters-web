@@ -63,15 +63,8 @@ module.exports = {
                 var myAds = result.myAds.models[0];
 
                 function processItem(item) {
-                    var year = item.date.year;
-                    var month = item.date.month - 1;
-                    var day = item.date.day;
-                    var hour = item.date.hour;
-                    var minute = item.date.minute;
-                    var second = item.date.second;
-                    var date = new Date(year, month, day, hour, minute, second);
+                    item.date.since = helpers.timeAgo(item.date);
 
-                    item.date.since = helpers.timeAgo(date);
                 }
 
                 result.myAdsMetadata = myAds.get('metadata');
@@ -103,15 +96,7 @@ module.exports = {
                 var favorites = result.favorites.models[0];
 
                 function processItem(item) {
-                    var year = item.date.year;
-                    var month = item.date.month - 1;
-                    var day = item.date.day;
-                    var hour = item.date.hour;
-                    var minute = item.date.minute;
-                    var second = item.date.second;
-                    var date = new Date(year, month, day, hour, minute, second);
-
-                    item.date.since = helpers.timeAgo(date);
+                    item.date.since = helpers.timeAgo(item.date);
                 }
 
                 result.favoritesMetadata = favorites.get('metadata');
