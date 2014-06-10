@@ -46,5 +46,8 @@ module.exports = {
     },
     deparams: function () {
         return qs.parse.apply(qs, arguments);
+    },
+    analyitcsParams: function (url) {
+        return this.deparams(url.replace('/analytics/pageview.gif?', ''));
     }
 };

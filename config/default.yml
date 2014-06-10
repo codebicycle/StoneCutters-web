@@ -52,7 +52,7 @@ middleware:
       - /stats
       - /stats/memory
       - /stats/threads
-      - /check
+      - /stats/check
     data:
       - /pageview.gif
       - /pageevent.gif

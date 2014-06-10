@@ -178,41 +178,6 @@ module.exports = function(app, dataAdapter) {
         }
     })();
 
-    (function favorite() {
-        app.get('/items/:itemId/favorite/:intent?', handler);
-
-        function handler(req, res) {
-            var itemId = req.param('itemId', null);
-            var intent = req.param('intent', '');
-
-            function add(done) {
-                var user = req.rendrApp.getSession('user') || {};
-
-                dataAdapter.post(req, '/users/' + user.userId + '/favorites/' + itemId + (intent ? '/' + intent : ''), {
-                    query: {
-                        token: user.token
-                    }
-                }, done.errfcb);
-            }
-
-            function success(done) {
-                var redirect = req.param('redirect') || '/des-iid-' + itemId;
-
-                res.redirect(utils.link(redirect, req.rendrApp.getSession('siteLocation')));
-            }
-
-            function error(err) {
-                var redirect = req.param('redirect') || '/des-iid-' + itemId;
-
-                res.redirect(utils.link(redirect, req.rendrApp.getSession('siteLocation')));
-            }
-
-            asynquence().or(error)
-                .then(add)
-                .val(success);
-        }
-    })();
-
     (function search() {
         app.post('/search/redirect', handler);
         app.post('/nf/search/redirect', handler);
@@ -237,7 +202,7 @@ module.exports = function(app, dataAdapter) {
 
                 if (!~url.indexOf(name)) {
                     url = value ? [url, '-', value].join('') : url;
-                } 
+                }
                 else {
                     regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
                     url = url.replace(regExp, (value ? (name + value) : value));
@@ -251,7 +216,7 @@ module.exports = function(app, dataAdapter) {
 
                 if (!data.currentURL) {
                     return res.redirect(301, req.headers.referer);
-                } 
+                }
                 else {
                     from = data['from_' + data.name] || '';
                     to = data['to_' + data.name] || '';
@@ -264,80 +229,4 @@ module.exports = function(app, dataAdapter) {
             });
         }
     })();
-
-    (function removeItem() {
-        app.get('/myolx/deleteitem/:itemId?', handler);
-
-        function handler(req, res, next) {
-            var itemId = req.param('itemId', '');
-
-            function validate(done) {
-                var errors = {
-                    errCode: 400,
-                    err: [],
-                    errFields: []
-                };
-
-                if (!itemId) {
-                    errors.err.push('Invalid itemId');
-                    errors.errFields.push('itemId');
-                }
-                if (errors.err.length) {
-                    done.fail(errors);
-                    return;
-                }
-                done();
-            }
-
-            function remove(done) {
-                var user = req.rendrApp.getSession('user') || {};
-                var query = {
-                    token: user.token
-                };
-
-                dataAdapter.post(req, '/items/' + itemId + '/delete', {
-                    query: query
-                }, done.errfcb);
-            }
-
-            function success(response) {
-                var url = '/myolx/myadslisting?deleted=true';
-
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
-            }
-
-            function error(err) {
-                var errors;
-                var url = req.headers.referer;
-                var qIndex = url.indexOf('?');
-
-                if (!err.errCode) {
-                    errors = {
-                        errCode: 400,
-                        errField: [],
-                        errMsg: [],
-                    };
-
-                    err.forEach(function each(error) {
-                        errors.errField.push(error.selector);
-                        errors.errMsg.push(error.message);
-                    });
-                } else {
-                    errors = err;
-                }
-
-                if (qIndex != -1) {
-                    url = url.substring(0,qIndex);
-                }
-                url += '?' + querystring.stringify(errors);
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
-            }
-
-            asynquence().or(error)
-                .then(validate)
-                .then(remove)
-                .val(success);
-        }
-    })();
-
 };

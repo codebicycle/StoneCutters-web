@@ -4,7 +4,7 @@ module.exports = function() {
     var config = require('./config');
     var asynquence = require('asynquence');
     var app = asynquence().or(uncaughtError);
-    var logger = require('./logger')('server');
+    var logger = require('../shared/logger')('server');
     process.env.NODE_ENV = config.get('environment');
 
     function uncaughtError(error) {

@@ -32,9 +32,9 @@ module.exports = function(grunt) {
     grunt.file.recurse('app/templates/default', function callback(abspath, rootdir, subdir, filename) {
         var parts = subdir.split('/');
         var src = 'app/templates/compiled/default/' + subdir + '/' + filename;
-        var dest = 'app/templates/compiled/default/' + parts[0] + '/templates.js';
+        var dest = 'public/js/app/templates/default/' + parts[0] + '/templates.js';
 
-        if (filename.split('.').pop() !== 'html') {
+        if (parts[0] === 'wap' || parts[0] === 'html4' || filename.split('.').pop() !== 'html') {
             return;
         }
         if (!srcs[dest]) {
@@ -69,9 +69,9 @@ module.exports = function(grunt) {
                 var parts = subdir.split('/');
                 var defaultSrc = 'app/templates/compiled/default/' + platform + '/' + subdir + '/' + filename;
                 var src = 'app/templates/compiled/' + location + '/' + platform + '/' + subdir + '/' + filename;
-                var dest = 'app/templates/compiled/' + location + '/' + platform + '/templates.js';
+                var dest = 'public/js/app/templates/' + location + '/' + platform + '/templates.js';
 
-                if (filename.split('.').pop() !== 'html') {
+                if (platform === 'wap' || platform === 'html4' || filename.split('.').pop() !== 'html') {
                     return;
                 }
                 if (!srcs[dest]) {

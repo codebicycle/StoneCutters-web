@@ -37,7 +37,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     osVersion: parseFloat(String(device.osVersion).replace('_','.'))
                 };
                 var directory = 'default';
-                var jsDir = minify ? 'min' : 'app';
+                var jsDir = '/js/' + (minify ? 'min' : 'app');
                 var platform = req.subdomains.pop() || 'wap';
                 var template;
 

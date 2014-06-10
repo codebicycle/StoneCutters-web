@@ -6,7 +6,7 @@ module.exports = function appUseConf(done) {
     var rendr = require('rendr');
 
     var app = express();
-    var DataAdapter = require('./adapter/data');
+    var DataAdapter = require('../shared/adapters/data');
     var dataAdapter = new DataAdapter({
         userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
     });
