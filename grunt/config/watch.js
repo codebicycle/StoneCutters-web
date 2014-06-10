@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     return {
         scripts: {
             files: ['app/**/*.js', 'shared/**/*.js', '!app/templates/default/**/*.js', '!app/templates/*olx*/**/*.js', '!app/translations/**/*.js'],
-            tasks: ['exec:removeAssets', 'javascript']
+            tasks: ['exec:removeAssets', 'template', 'javascript']
         },
         templates: {
             files: ['app/**/*.html', '!app/templates/compiled/**/*.html'],
