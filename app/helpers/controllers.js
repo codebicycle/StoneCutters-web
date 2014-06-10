@@ -73,31 +73,25 @@ function setInterstitial(params) {
     platform = this.app.getSession('platform');
     platforms = config.get(['interstitial', 'ignorePlatform'], []);
     if (_.contains(platforms, platform)) {
-console.log('Return for platform');
         return;
     }
 
     path = this.app.getSession('path');
     paths = config.get(['interstitial', 'ignorePath'], []);
     if (_.contains(paths, path)) {
-console.log('Return for path');
         return;
     }
 
     downloadApp = this.app.getSession('downloadApp');
-console.log('Check if download app is already set [', downloadApp, ']');
     if (!downloadApp) {
         clicks = config.get(['interstitial', 'clicks'], 1);
         currentClicks = this.app.getSession('clicks') || 0;
-console.log('Max clicks for show interstitial [', clicks, ']');
-console.log('Current clicks for show interstitial [', currentClicks, ']');
 
         if (currentClicks < clicks) {
             currentClicks++;
             this.app.persistSession({
                 clicks: currentClicks
             });
-console.log('Current clicks + 1 [', currentClicks, ']');
         }
         else {
             var protocol = this.app.getSession('protocol');
@@ -110,18 +104,13 @@ console.log('Current clicks + 1 [', currentClicks, ']');
             }, {
                 maxAge: time
             });
-            if (typeof window === 'undefined') {
-console.log('Show intertitial');
+            if (typeof window !== 'undefined' || platform === 'html5') {
                 this.app.updateSession({
                     interstitial: true
                 });
             } 
             else {
-                url = [url, '?ref=', protocol, '://', host, this.app.getSession('url')].join('');
-console.log('Show intertitial [', url, ']');
-                this.redirectTo(common.link(url, this.app.getSession('siteLocation')), {
-                    status: 301
-                });
+                common.redirect.call(this, [url, '?ref=', protocol, '://', host, this.app.getSession('url')].join(''));
                 return true;
             }
         }

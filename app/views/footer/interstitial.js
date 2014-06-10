@@ -19,13 +19,16 @@ module.exports = BaseView.extend({
         var views = '[data-view]';
 
         if (interstitial.length) {
-            this.$('.closeInterstitial', interstitial).on('click', function(e) {
+            interstitial.prependTo($('body'));
+            $(views).addClass('hide');
+            
+            this.$('.closeInterstitial').on('click', function(e) {
                 e.preventDefault();
                 interstitial.remove();
                 $(views).removeClass('hide');
-            });
-            $(views).addClass('hide');
-            $('.' + this.className).removeClass('hide');
+                this.app.deleteSession('interstitial');
+            }.bind(this));
+
             this.attachTrackMe(this.className, function(category, action) {
                 return {
                     custom: [category, '-', '-', action].join('::')
