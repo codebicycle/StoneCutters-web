@@ -9,7 +9,7 @@ module.exports = function(grunt) {
             files: [{
                 expand: true,
                 cwd: 'public/js/app',
-                src: ['**/*.js', '!translations.js'],
+                src: ['**/*.js', '!translations.js', '!templates/**/*.js'],
                 dest: 'public/js/min'
             }]
         },
@@ -21,6 +21,17 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'public/js/app',
                 src: 'translations.js',
+                dest: 'public/js/min'
+            }]
+        },
+        templates: {
+            options: {
+                sourceMap: true
+            },
+            files: [{
+                expand: true,
+                cwd: 'public/js/app',
+                src: 'templates/**/*.js',
                 dest: 'public/js/min'
             }]
         }

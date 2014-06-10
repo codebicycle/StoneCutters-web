@@ -133,43 +133,4 @@ module.exports = function(app, dataAdapter) {
                 .val(submit);
         }
     })();
-
-    (function anonymousLogin() {
-        app.post('/anonymousLogin', handler);
-
-        function handler(req, res) {
-            var email;
-
-            function parse(done) {
-                formidable.parse(req, done.errfcb);
-            }
-
-            function submit(done) {
-                /* TODO [MOB-4716] Authentication anonymous to MyAds & My favorites.
-                dataAdapter.get(req, '/users/login', {
-                    query: {
-                        email: email
-                    }
-                }, done.errfcb); */
-                done();
-            }
-
-            function success() {
-                var url = '/login?loginSuccess=true';
-
-                res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
-            }
-
-            function error(err) {
-                formidable.error(req, '/login', err, function redirect(url) {
-                    res.redirect(utils.link(url, req.rendrApp.getSession('siteLocation')));
-                });
-            }
-
-            asynquence().or(error)
-                .then(parse)
-                .then(submit)
-                .val(success);
-        }
-    })();
 };
