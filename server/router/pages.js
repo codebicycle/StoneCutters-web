@@ -20,17 +20,6 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
-    (function check() {
-        app.get('/check', handler);
-
-        function handler(req, res) {
-            res.json({
-                server: configServer.get(),
-                client: configClient.get()
-            });
-        }
-    })();
-
     (function stats() {
         app.get('/stats', handler);
 
@@ -47,6 +36,17 @@ module.exports = function itemRouter(app, dataAdapter) {
             list.push('memory.heapTotal:' + process.memoryUsage().heapTotal);
             list.push('memory.heapUsed:' + process.memoryUsage().heapUsed);
             res.send(list.join(' '));
+        }
+    })();
+
+    (function check() {
+        app.get('/stats/check', handler);
+
+        function handler(req, res) {
+            res.json({
+                server: configServer.get(),
+                client: configClient.get()
+            });
         }
     })();
 
@@ -78,7 +78,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     })();
 
     (function pageview() {
-        app.get('/pageview.gif', handler);
+        app.get('/analytics/pageview.gif', handler);
 
         function graphiteTracking(req) {
             var location = req.rendrApp.getSession('location');
@@ -141,7 +141,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     })();
 
     (function pageevent() {
-        app.get('/pageevent.gif', handler);
+        app.get('/analytics/pageevent.gif', handler);
 
         function googleTracking(req) {
             var analytic = new Analytic('google-event', {
@@ -189,19 +189,6 @@ module.exports = function itemRouter(app, dataAdapter) {
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', image.length);
             res.send(image);
-        }
-    })();
-
-    (function notFound() {
-        app.get('*', handler);
-
-        function handler(req, res) {
-            var path = req.rendrApp.getSession('path');
-
-            if (path.length > 1 && path.slice(-1) === '/') {
-                return res.redirect(301, utils.link(path.slice(0, -1), req.rendrApp.getSession('siteLocation')));
-            }
-            res.redirect(301, utils.link('/404', req.rendrApp.getSession('siteLocation')));
         }
     })();
 };

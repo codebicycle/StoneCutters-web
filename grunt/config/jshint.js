@@ -9,6 +9,14 @@ module.exports = function(grunt) {
         server: {
             src: ['*.js', 'server/**/*.js', 'grunt/**/*.js']
         },
+        shared: {
+            src: ['shared/**/*.js'],
+            options: {
+                browser: true,
+                predef: ['$'],
+                '-W040': true
+            }
+        },
         client: {
             src: ['app/**/*.js'],
             options: {

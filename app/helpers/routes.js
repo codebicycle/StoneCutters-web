@@ -134,13 +134,15 @@ module.exports = {
             }
         }
     },
-    'pages#error': {
+    'items#favorite': {
         urls: {
-            server: ':errorCode([0-9]{3})',
+            server: 'items/:itemId/favorite/?:intent?',
             client: {
-                url: /([0-9]{3})/,
-                params: ['errorCode']
+                url: 'items/:itemId/favorite(/:intent)'
             }
         }
+    },
+    'pages#error': {
+        url: /^\/(?!((health$)|(stats($|\/))|(analytics\/))).*/
     }
 };

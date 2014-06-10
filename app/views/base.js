@@ -55,12 +55,12 @@ module.exports = RendrView.extend({
 
         if ($img.length) {
             analytics = $img.last().attr('src');
-            analytics = $.deparam(analytics.replace('/pageview.gif?', ''));
+            analytics = $.deparam(analytics.replace('/analytics/pageview.gif?', ''));
         }
         obj = _.defaults(obj, data, analytics);
 
         $.ajax({
-            url: '/pageevent.gif',
+            url: '/analytics/pageevent.gif',
             type: 'GET',
             global: false,
             cache: false,
