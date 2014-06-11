@@ -54,8 +54,8 @@ middleware:
       - /stats/threads
       - /stats/check
     data:
-      - /pageview.gif
-      - /pageevent.gif
+      - /analytics/pageview.gif
+      - /analytics/pageevent.gif
 
 stylus:
   testing:
