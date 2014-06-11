@@ -28,6 +28,8 @@
                     <span>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</span><br/>
                 {% elif field ==  'contactName' %}
                     <span>{{ dictionary["itemslisting.NewContactName"] }}: {{ message }}</span><br/>
+                {% elif field ==  'phone' %}
+                    <span>{{ dictionary["posting_fields_1.phoneNumber"] }}: {{ message }}</span><br/>
                 {% else %}
                     <span>{{ dictionary["posting_fields_1."+field] }}: {{ message }}</span><br/>
                 {% endif %}

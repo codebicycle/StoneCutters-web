@@ -40,18 +40,14 @@
         </ul>
         {% if metadata.next or metadata.previous %}
             <div id="itemPagination">
-                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"><span>{{ dictionary["itemslisting.Previous"] }}</span></a>
                 <div class="center">
                     {{ metadata | pagination }}
                 </div>
-                <a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
-            </div>
-            <div id="itemPaginationCaption">
-                {{ ["<a href='' class='left'>", dictionary["itemslisting.Previous"], "</a>"] | join('') if metadata.previous }}
-                {{ ["<a href='' class='right'>", dictionary["itemslisting.Next"], "</a>"] | join('') if metadata.next }}
+                <a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"><span>{{ dictionary["itemslisting.Next"] }}</span></a>
             </div>
         {% endif %}
-    {% endif %}
+    {% endif %} 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
     {% include templateName %}
 </section>

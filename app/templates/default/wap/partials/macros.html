@@ -44,6 +44,8 @@
                                 <small>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</small><br/>
                             {% elif field ==  'contactName' %}
                                 <small>{{ dictionary["itemslisting.NewContactName"] }}: {{ message }}</small><br/>
+                            {% elif field ==  'phone' %}
+                                <small>{{ dictionary["posting_fields_1.phoneNumber"] }}: {{ message }}</small><br/>
                             {% else %}
                                 <small>{{ dictionary["posting_fields_1."+field] }}: {{ message }}</small><br/>
                             {% endif %}
