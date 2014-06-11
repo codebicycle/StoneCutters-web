@@ -231,8 +231,8 @@ module.exports = {
 
                 result.items = model.get('data');
                 result.metadata = model.get('metadata');
-                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || !result.items.length)) {
-                    return helpers.common.redirect.call(this, '/nf/search/' + query.search);
+                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
+                    return helpers.common.redirect.call(this, '/' + slug);
                 }
                 if (result.metadata.total < 5){
                     helpers.seo.addMetatag('robots', 'noindex, nofollow');
