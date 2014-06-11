@@ -5,6 +5,7 @@ module.exports = {
     'countryoptions.EnterCity': '\u0623\u062F\u062E\u0644 \u0627\u0644\u0645\u062F\u064A\u0646\u0629 ',
     'countryoptions.SelectACity': 'Select a city',
     'defaultfooter.Back': '\u0627\u0644\u0649 \u0627\u0644\u0648\u0631\u0627\u0621',
+    'defaultfooter.FreeSite': '100 \u066A \u062D\u0631\u0629 \u0627\u0639\u0644\u0627\u0646\u0627\u062A \u0645\u0628\u0648\u0628\u0647',
     'defaultfooter.Home': '\u0627\u0644\u0635\u0641\u062D\u0629 \u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629\u0629',
     'defaultfooter.PublishFreeAd': '\u0648\u0638\u064A\u0641\u0629 \u062D\u0631\u0629 \u0627\u0644\u0627\u0639\u0644\u0627\u0646\u064A\u0647',
     'defaultheader.change': '\u062A\u063A\u064A\u064A\u0631',

@@ -29,5 +29,12 @@ module.exports = {
         wap: ['home', 'post', 'location'],
         html4: ['post', 'location'],
         html5: ['post', 'location']
+    },
+    interstitial: {
+        enabled: false,
+        clicks: 1,
+        time: 600000,
+        ignorePath: ['/health', '/stats', '/stats/memory', '/stats/threads', '/stats/check', '/login', '/interstitial', '/404', '/500', '/analytics/pageview.gif', '/analytics/pageevent.gif'],
+        ignorePlatform: ['wap', 'desktop']
     }
 };
