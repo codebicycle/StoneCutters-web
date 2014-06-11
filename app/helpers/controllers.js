@@ -26,11 +26,11 @@ function setUrlVars() {
     }
 }
 
-function redirect(params) {
+function redirect() {
     var path = this.app.getSession('path');
 
     if (path.length <= 1 || path.slice(-1) !== '/') {
-        if (intertitial && setInterstitial.call(this, params)) {
+        if (intertitial && setInterstitial.call(this)) {
             return true;
         }
         return false;
@@ -60,7 +60,7 @@ function setReferer() {
     });
 }
 
-function setInterstitial(params) {
+function setInterstitial() {
     var url = '/interstitial';
     var platform;
     var platforms;
@@ -223,7 +223,7 @@ function processForm(params) {
 module.exports = {
     control: function(params, callback) {
         setUrlVars.call(this);
-        if (!redirect.call(this, params)) {
+        if (!redirect.call(this)) {
             cleanSession.call(this);
             setCurrentRoute.call(this);
             setReferer.call(this);
