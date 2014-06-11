@@ -32,8 +32,13 @@ function stringifyParams(params) {
 }
 
 function getURLName(session, page) {
+    if (~page.indexOf('#')) {
+        return page;
+    }
+    
     var name = [];
     var currentRoute = session.currentRoute;
+
     name.push(currentRoute.controller);
     name.push('#');
     name.push(currentRoute.action);
