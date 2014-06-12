@@ -37,6 +37,11 @@ module.exports = BaseView.extend({
 
             helpers.analytics.reset();
             helpers.analytics.setPage('pages#interstitial');
+            this.app.persistSession({
+                downloadApp: '1'
+            }, {
+                maxAge: this.app.getSession('downloadApp')
+            });
             img = $('<img/>');
             img.addClass('analytics');
             img.attr('src', helpers.analytics.generateURL(this.app.getSession()));

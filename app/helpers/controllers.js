@@ -75,23 +75,22 @@ function setInterstitial() {
     platform = this.app.getSession('platform');
     platforms = config.get(['interstitial', 'ignorePlatform'], []);
     if (_.contains(platforms, platform)) {
-        return;
+        return false;
     }
 
     path = this.app.getSession('path');
     paths = config.get(['interstitial', 'ignorePath'], []);
     if (_.contains(paths, path)) {
-        return;
+        return false;
     }
 
     info = marketing.getInfo(this.app, 'interstitial');
     if (!info || _.isEmpty(info)) {
-        console.log('Marketing not found');
-        return;
+        return false;
     }
 
     downloadApp = this.app.getSession('downloadApp');
-    if (!downloadApp) {
+    if (_.isUndefined(downloadApp) || downloadApp !== '1') {
         clicks = config.get(['interstitial', 'clicks'], 1);
         currentClicks = this.app.getSession('clicks') || 0;
 
@@ -108,9 +107,7 @@ function setInterstitial() {
 
             this.app.deleteSession('clicks');
             this.app.persistSession({
-                downloadApp: 1
-            }, {
-                maxAge: time
+                downloadApp: time
             });
             if (typeof window !== 'undefined' || platform === 'html5') {
                 this.app.updateSession({

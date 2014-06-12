@@ -122,7 +122,11 @@ module.exports = {
 
         function controller() {
             helpers.analytics.reset();
-
+            this.app.persistSession({
+                downloadApp: '1'
+            }, {
+                maxAge: this.app.getSession('downloadApp')
+            });
             callback(null, {
                 analytics: helpers.analytics.generateURL(this.app.getSession()),
                 ref: params.ref
