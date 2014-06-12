@@ -4,7 +4,7 @@
 <section id="itemListing">
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
-    {{ Breadcrumb(dictionary, link, [dictionary["itemslisting.SearchResults"], search] | join(' '), '<span class="switchView"></span>') }}
+    {{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>' , search) | replace('<<NUMBER>>' , metadata.total), '<span class="switchView"></span>') }}
     {% if metadata.total == 0 %}
         <div class="emtyList">
             {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}

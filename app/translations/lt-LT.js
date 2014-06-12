@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Vartotojo vardas',
     'countrystatecityv2.MessageFromPost': 'Nor\u0117dami paskelbti prek\u0119 pasirinkite miest\u0105',
     'listingpageitemslisting.AllResultsNew': 'Visi rezultatai',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> <<KEYWORD>> rezultatai',
     'listingpageitemslisting.WeAreSorryNoResults': 'Atsipra\u0161ome, ta\u010Diau neturime j\u016Bs\u0173 paie\u0161kos rezultat\u0173.',
     'listingpageitemslisting.ZeroResultsPage': 'Atsipra\u0161ome, <<CATEGORY>>, esan\u010Di\u0173 <<REGION>>, neradome.',
     'distancediv.changeLocation': 'Keisti viet\u0105',

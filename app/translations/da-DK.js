@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Brugernavn',
     'countrystatecityv2.MessageFromPost': 'V\xE6lg venligst en by for at kunne indrykke en annonce',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultater for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desv\xE6rre kan vi ikke finde noget resultat p\xE5 din s\xF8gning.',
     'listingpageitemslisting.ZeroResultsPage': 'Vi beklager, men vi har ikke fundet nogle resultater i <<CATEGORY>> i <<REGION>>.',
     'distancediv.changeLocation': '\xE6ndr sted',

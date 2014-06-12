@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Notandanafn',
     'countrystatecityv2.MessageFromPost': 'Veldu borg til a\xF0 birta atri\xF0i\xF0',
     'listingpageitemslisting.AllResultsNew': 'Allar ni\xF0urst\xF6\xF0ur',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> ni\xF0urst\xF6\xF0ur fyrir <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDEv\xED mi\xF0ur fundust engar ni\xF0urst\xF6\xF0ur fyrir leit \xFE\xEDna.',
     'listingpageitemslisting.ZeroResultsPage': '\xDEv\xED mi\xF0ur fundum vi\xF0 engar ni\xF0urst\xF6\xF0ur \xED <<CATEGORY>> \xED <<REGION>>.',
     'distancediv.changeLocation': 'Breyta sta\xF0setningu',

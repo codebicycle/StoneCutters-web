@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Gebruikersnaam',
     'countrystatecityv2.MessageFromPost': 'Kies asseblief \'n stad om \'n item te pos',
     'listingpageitemslisting.AllResultsNew': 'Alle resultate',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultate vir <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ons is jammer, maar jou soektog geen resultate opgelewer nie.',
     'listingpageitemslisting.ZeroResultsPage': 'Jammer, ons het geen resultate in <<CATEGORY>> in <<REGION>> gekry nie.',
     'distancediv.changeLocation': 'Verander ligging',

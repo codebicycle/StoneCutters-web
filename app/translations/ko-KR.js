@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': '\uC0AC\uC6A9\uC790\uBA85',
     'countrystatecityv2.MessageFromPost': '\uBB3C\uD488\uC744 \uC62C\uB9AC\uC2DC\uB824\uBA74 \uB3C4\uC2DC\uBA85\uC744 \uC120\uC815\uD558\uC5EC \uC8FC\uC138\uC694',
     'listingpageitemslisting.AllResultsNew': '\uBAA8\uB4E0 \uACB0\uACFC',
+    'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>>\uC5D0 \uB300\uD55C <<NUMBER>> \uACB0\uACFC\uB4E4',
     'listingpageitemslisting.WeAreSorryNoResults': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uAC80\uC0C9\uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'listingpageitemslisting.ZeroResultsPage': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4, <<REGION>>\uC758 <<CATEGORY>>\uC5D0\uC11C \uCC3E\uC740 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'distancediv.changeLocation': '\uC9C0\uC5ED \uBC14\uAFB8\uAE30',

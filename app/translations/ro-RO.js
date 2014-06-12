@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Nume de utilizator',
     'countrystatecityv2.MessageFromPost': 'V\u0103 rug\u0103m s\u0103 intra\u0163i un ora\u015F pentru a posta un obiect',
     'listingpageitemslisting.AllResultsNew': 'Toate rezultatele',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultate pentru <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ne pare r\u0103u dar nu avem rezultate pentru c\u0103utarea dvs.',
     'listingpageitemslisting.ZeroResultsPage': 'Ne pare r\u0103u, nu am g\u0103sit rezultate \xEEn <<CATEGORY>> \xEEn <<REGION>>.',
     'distancediv.changeLocation': 'Schimb\u0103 pozi\u0163ia',

@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Pou\u017E\xEDvate\u013Esk\xE9 meno',
     'countrystatecityv2.MessageFromPost': 'Zvo\u013Ete mesto, aby ste mohli uverejni\u0165 polo\u017Eku',
     'listingpageitemslisting.AllResultsNew': 'V\u0161etky v\xFDsledky',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> v\xFDsledkov na k\u013E\xFA\u010Dov\xE9 slovo <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\u013Dutujeme, neboli n\xE1jden\xE9 \u017Eiadne v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Je n\xE1m \u013E\xFAto, nena\u0161li sme v\xFDsledky v kateg\xF3rii <<CATEGORY>> v regi\xF3ne <<REGION>>.',
     'distancediv.changeLocation': 'Zmeni\u0165 miesto',

@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Jina la mtumiaji',
     'countrystatecityv2.MessageFromPost': 'Tafadhali chagua mji ili kuchapisha bidhaa',
     'listingpageitemslisting.AllResultsNew': 'Matokeo yote',
+    'listingpageitemslisting.ResultsForNew4': 'Matokeo <<NUMBER>> ya <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',
     'listingpageitemslisting.ZeroResultsPage': 'Tunasikitika, hatukupata matokeo katika <<CATEGORY>> at <<REGION>>.',
     'distancediv.changeLocation': 'Badilisha Mahali',
