@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Anv\xE4ndarnamn',
     'countrystatecityv2.MessageFromPost': 'V\xE4nligen v\xE4lj en stad f\xF6r att l\xE4gga upp ett objekt',
     'listingpageitemslisting.AllResultsNew': 'Alla resultat',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultat f\xF6r <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi \xE4r ledsna, men vi har inga resultat f\xF6r din s\xF6kning.',
     'listingpageitemslisting.ZeroResultsPage': 'Vi \xE4r ledsna, vi har inte hittat resultat i <<CATEGORY>> i <<REGION>>.',
     'distancediv.changeLocation': '\xC4ndra ort',

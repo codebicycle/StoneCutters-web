@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Nome utente',
     'countrystatecityv2.MessageFromPost': 'Per favore scegli una citta\' dall\'elenco dove inserire un annuncio',
     'listingpageitemslisting.AllResultsNew': 'Tutti i risultati',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> risultati per <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ci dispiace ma non ci sono risultati per la tua ricerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ci dispiace, ma non abbiamo trovato<<RESULTS>> in <<CATEGORY>> in <<REGION>>.',
     'distancediv.changeLocation': 'Cambia regione',

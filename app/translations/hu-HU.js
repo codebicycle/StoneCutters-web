@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Felhaszn\xE1l\xF3i n\xE9v',
     'countrystatecityv2.MessageFromPost': 'T\xE9tel felad\xE1s\xE1hoz v\xE1lasszon egy telep\xFCl\xE9st',
     'listingpageitemslisting.AllResultsNew': '\xD6sszes tal\xE1lat',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> eredm\xE9ny <<KEYWORD>> kulcssz\xF3ra',
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',
     'listingpageitemslisting.ZeroResultsPage': 'Sajn\xE1ljuk, nem tal\xE1ltunk eredm\xE9nyeket a <<CATEGORY>> kateg\xF3ri\xE1ban <<REGION>> r\xE9gi\xF3ban.',
     'distancediv.changeLocation': 'M\xE1s hely',

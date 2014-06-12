@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Benutzername',
     'countrystatecityv2.MessageFromPost': 'Bitte w\xE4hlen Sie eine Stadt aus, um einen Artikel aufgeben zu k\xF6nnen',
     'listingpageitemslisting.AllResultsNew': 'Alle Resultate',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultate f\xFCr <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Es tut uns leid, aber wir haben keine Ergebnosse f\xFCr Ihre Suche.',
     'listingpageitemslisting.ZeroResultsPage': 'Es konnten leider keine Ergebnisse in <<CATEGORY>> in <<REGION>> gefunden werden.',
     'distancediv.changeLocation': 'Ort wechseln',

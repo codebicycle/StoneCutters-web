@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Nama Pengguna',
     'countrystatecityv2.MessageFromPost': 'Silakan pilih kota untuk memasang barang',
     'listingpageitemslisting.AllResultsNew': 'Semua hasil',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> hasil untuk <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Maaf tidak ada hasil untuk pencarian Anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Maaf, kami tidak menemukan hasil untuk <<CATEGORY>> di <<REGION>>.',
     'distancediv.changeLocation': 'Ganti lokasi',

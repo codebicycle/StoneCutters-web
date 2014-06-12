@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Brukernavn',
     'countrystatecityv2.MessageFromPost': 'Vennligst velg en by for \xE5 legge inn en gjenstand',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultater for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi beklager men vi fant ingen s\xF8keresultater.',
     'listingpageitemslisting.ZeroResultsPage': 'Beklager, men vi har ikke funnet noen resultater i <<CATEGORY>> i <<REGION>>.',
     'distancediv.changeLocation': 'Endre sted',

@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': '\u0623\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645',
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.AllResultsNew': 'All results',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',
     'distancediv.changeLocation': '\u062A\u063A\u064A\u0631 \u0645\u0646\u0637\u0642\u0629 ',

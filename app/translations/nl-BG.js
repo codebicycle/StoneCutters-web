@@ -56,6 +56,7 @@ module.exports = {
     'landingbody.EmailAddress': 'E-mailadres',
     'lostform.Username': 'Gebruikersnaam',
     'countrystatecityv2.MessageFromPost': 'Kies een stad om een advertentie te kunnen plaatsen',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',
     'distancediv.changeLocation': 'Wijzig locatie',

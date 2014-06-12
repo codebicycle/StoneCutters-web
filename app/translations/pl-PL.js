@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Nazwa U\u017Cytkownika',
     'countrystatecityv2.MessageFromPost': 'Prosz\u0119 wybra\u0107 miasto aby doda\u0107 og\u0142oszenie',
     'listingpageitemslisting.AllResultsNew': 'Wszystkie wyniki',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> wyniki dla <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',
     'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',
     'distancediv.changeLocation': 'Zmie\u0144 lokalizacj\u0119',

@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Username',
     'countrystatecityv2.MessageFromPost': 'Pumili ng lungsod para magpost ng item',
     'listingpageitemslisting.AllResultsNew': 'Lahat ng resulta',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> na mga resulta para sa <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',
     'listingpageitemslisting.ZeroResultsPage': 'Paumanhin, walang resulta sa <<CATEGORY>> sa <<REGION>>.',
     'distancediv.changeLocation': 'Palitan ang Lokasyon',

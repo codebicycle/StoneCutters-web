@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Korisni\u010Dko ime',
     'countrystatecityv2.MessageFromPost': 'Molimo odaberite grad radi postavljanja artikla',
     'listingpageitemslisting.AllResultsNew': 'Svi rezultati',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultati za <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\u017Dao nam je, ali za va\u0161u pretragu nemamo rezultata.',
     'listingpageitemslisting.ZeroResultsPage': '\u017Dao nam je, nismo prona\u0161li rezultate u<<CATEGORY>> u <<REGION>>.',
     'distancediv.changeLocation': 'Promjeniti lokaciju',

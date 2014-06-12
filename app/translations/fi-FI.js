@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'K\xE4ytt\xE4j\xE4tunnus',
     'countrystatecityv2.MessageFromPost': 'Valitse kaupunki tehd\xE4ksesi ilmoituksen',
     'listingpageitemslisting.AllResultsNew': 'Kaikki tulokset',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
     'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',
     'distancediv.changeLocation': 'muokkaa sijaintia',

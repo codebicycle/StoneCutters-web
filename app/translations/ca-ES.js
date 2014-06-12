@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Nom d\'usuari',
     'countrystatecityv2.MessageFromPost': 'Seleccioneu una ciutat per publicar un article',
     'listingpageitemslisting.AllResultsNew': 'Tots els resultats',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultats per a <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ho sentim, no hem trobat resultats de <<CATEGORY>> a <<REGION>>.',
     'distancediv.changeLocation': 'Canvia ubicaci\xF3',

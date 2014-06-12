@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Nama pengguna',
     'countrystatecityv2.MessageFromPost': 'Sila pilih bandar untuk menyiarkan item',
     'listingpageitemslisting.AllResultsNew': 'Semua keputusan',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> keputusan untuk <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Kami minta maaf kerana kami tidak mendapat keputusan untuk carian anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Kami minta maaf, kami masih tidak menjumpai keputusan dalam <<CATEGORY>> di <<REGION>>.',
     'distancediv.changeLocation': 'Tukar lokasi',

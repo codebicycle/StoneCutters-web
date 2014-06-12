@@ -57,6 +57,7 @@ module.exports = {
     'lostform.Username': 'Kasutajanimi',
     'countrystatecityv2.MessageFromPost': 'Kuulutuse postitamiseks sisestage palun linn',
     'listingpageitemslisting.AllResultsNew': 'K\xF5ik tulemused',
+    'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulemust m\xE4rks\xF5nale <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vabandame, kuid meil ei ole Teie otsingule tulemusi',
     'listingpageitemslisting.ZeroResultsPage': 'Vabandame, me ei leidnud tulemusi <<CATEGORY>>  <<REGION>>.',
     'distancediv.changeLocation': 'Muutke asukohta',
