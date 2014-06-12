@@ -34,7 +34,8 @@ module.exports = RendrView.extend({
             href: this.app.getSession('href'),
             sixpack: this.app.getSession('sixpack'),
             macros: 'compiled/' + template + '/partials/macros.html',
-            currentRoute: this.app.getSession('currentRoute')
+            currentRoute: this.app.getSession('currentRoute'),
+            interstitial: this.app.getSession('interstitial')
         });
     },
     getWapAttributes: function() {
@@ -55,12 +56,12 @@ module.exports = RendrView.extend({
 
         if ($img.length) {
             analytics = $img.last().attr('src');
-            analytics = $.deparam(analytics.replace('/pageview.gif?', ''));
+            analytics = $.deparam(analytics.replace('/analytics/pageview.gif?', ''));
         }
         obj = _.defaults(obj, data, analytics);
 
         $.ajax({
-            url: '/pageevent.gif',
+            url: '/analytics/pageevent.gif',
             type: 'GET',
             global: false,
             cache: false,

@@ -1,4 +1,4 @@
-{% from macros import Breadcrumb, Errors %}
+{% from macros import Breadcrumb, ErrorsPosting %}
 <tr>
     <td style="padding: .25em .5em; border-top: solid thin #808080;">
         <strong style="color: #0075BD;">{{ dictionary["postingheader.Post"] }}</strong>
@@ -8,7 +8,7 @@
 </tr>
 <tr>
     <td>
-        {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
+        {% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
             <tr>
                 <td style="padding: .5em; border-top: solid thin #808080;">

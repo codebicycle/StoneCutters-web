@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'items_show_view',
@@ -14,11 +15,15 @@ module.exports = BaseView.extend({
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
         data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
+        data.item.date.since = helpers.timeAgo(data.item.date);
 
         return data;
     },
     postRender: function() {
         var that = this;
+
+        var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
+        this.$('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
         that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
 
@@ -95,7 +100,6 @@ module.exports = BaseView.extend({
 
             if ($this.attr('href') == '#') {
                 e.preventDefault();
-                var api = that.app.get('apiPath');
                 var session = that.app.get('session');
                 var user = session.user;
                 var itemId = $this.data('itemid');
@@ -103,7 +107,6 @@ module.exports = BaseView.extend({
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                 $msg.text($this.hasClass('add') ? that.messages.addFav : that.messages.removeFav);
 
-                url.push(api);
                 url.push('/users/');
                 url.push(user.userId);
                 url.push('/favorites/');
@@ -113,25 +116,21 @@ module.exports = BaseView.extend({
                 url.push(user.token);
 
                 $('.loading').show();
-                $.ajax({
-                    type: 'POST',
-                    url: url.join(''),
+                helpers.dataAdapter.request('post', url.join(''), {
                     cache: false,
                     json: true,
-                    data: {}
-                })
-                .done(function () {
-                    $this.toggleClass('add remove');
-                    $('.msgCont').addClass('visible');
-                    setTimeout(function(){
-                        $('.msgCont').removeClass('visible');
-                        $msg.text('');
-                    }, 3000);
-                })
-                .fail(function () {
-                    console.log('Error');
-                })
-                .always(function () {
+                    done: function() {
+                        $this.toggleClass('add remove');
+                        $('.msgCont').addClass('visible');
+                        setTimeout(function(){
+                            $('.msgCont').removeClass('visible');
+                            $msg.text('');
+                        }, 3000);
+                    },
+                    fail: function() {
+                        console.log('Error');
+                    }
+                }, function always() {
                     $('.loading').hide();
                 });
             }

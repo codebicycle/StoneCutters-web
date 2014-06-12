@@ -16,30 +16,41 @@ module.exports = BaseView.extend({
             var element = $(this);
             var itemId = element.attr('data-itemId');
             var itemUrl = element.attr('data-itemUrl');
+            var itemEditable = element.attr('data-editable');
             var $edit = $('.editItem');
-            var href = $edit.attr('href');
+            var href;
 
-            $edit.attr('href', href.replace('[[itemId]]', itemId));
+            if (itemEditable) {
+                href = $edit.attr('href');
+                $edit.attr('href', href.replace('[[itemId]]', itemId));
+                $('.deleteItemConfirm').data("itemId", itemId);
+                $('.deleteItem').parent('li').removeClass('hide');
+                $edit.parent('li').removeClass('hide');
+            }
+            else {
+                $('.deleteItem').parent('li').addClass('hide');
+                $edit.parent('li').addClass('hide');
+            }
             $('.viewItem').attr("href", itemUrl);
-            $('.deleteItemConfirm').data("itemId", itemId);
             $('#edit').addClass('visible');
         });
         $('#edit .popup-close').click(function(e) {
             e.preventDefault();
             var $edit = $('.editItem');
             var href = $edit.attr('href');
-
+            
             $edit.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
             $('.viewItem').attr("href", '#');
-            $('.deleteItemConfirm').removeData("itemId");
             $('#edit').removeClass('visible');
         });
+        
         $('.deleteItem').on("click", function(e) {
             e.preventDefault();
             var $confirm = $('.deleteItemConfirm');
             var href = $confirm.attr('href');
+            var itemId = $confirm.data('itemId');
 
-            $confirm.attr('href', href.replace('[[itemId]]', $confirm.data('itemId')));
+            $confirm.attr('href', href.replace('[[itemId]]', itemId));
             $('#delete').addClass('visible');
             $('#edit .popup-close').trigger('click');
         });
@@ -47,10 +58,12 @@ module.exports = BaseView.extend({
             e.preventDefault();
             var $confirm = $('.deleteItemConfirm');
             var href = $confirm.attr('href');
+            var itemId = $confirm.data('itemId');
             
             $confirm.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
+            $confirm.removeData("itemId");
             $('#delete').removeClass('visible');
-            $('.edit').trigger('click');
+            $('.' + itemId).trigger('click');
         });
     }
 });

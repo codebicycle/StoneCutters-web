@@ -1,11 +1,11 @@
-{% from macros import Breadcrumb, Errors %}
+{% from macros import Breadcrumb, ErrorsPosting %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div class="changeCat">
     {{ dictionary["itemslisting.Category"] }} : {{ subcategory.name }}
     <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
 </div>
-{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
+{% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
 <section id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["posting_fields_1.photos"] }}: <br> <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>

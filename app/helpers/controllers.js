@@ -2,11 +2,13 @@
 
 var _ = require('underscore');
 var common = require('./common');
+var config = require('../config');
+var intertitial = config.get(['interstitial', 'enabled'], false);
 
 function setUrlVars() {
     var href;
     if (typeof window === 'undefined') {
-        href = this.app.getSession('siteLocation') + this.app.getSession('path');
+        href = this.app.getSession('protocol') + '://' + this.app.getSession('siteLocation') + this.app.getSession('path');
 
         this.app.updateSession({
             href: href
@@ -14,7 +16,7 @@ function setUrlVars() {
     }
     else {
         var location = window.location;
-        href = this.app.getSession('siteLocation') + location.pathname;
+        href = this.app.getSession('protocol') + '://' + this.app.getSession('siteLocation') + location.pathname;
 
         this.app.updateSession({
             path: location.pathname,
@@ -28,6 +30,9 @@ function redirect() {
     var path = this.app.getSession('path');
 
     if (path.length <= 1 || path.slice(-1) !== '/') {
+        if (intertitial && setInterstitial.call(this)) {
+            return true;
+        }
         return false;
     }
     this.redirectTo(common.link(path.slice(0, -1), this.app.getSession('siteLocation')), {
@@ -53,6 +58,64 @@ function setReferer() {
     this.app.updateSession({
         referer: this.app.getSession('referer')
     });
+}
+
+function setInterstitial() {
+    var url = '/interstitial';
+    var platform;
+    var platforms;
+    var path;
+    var paths;
+    var downloadApp;
+    var clicks;
+    var currentClicks;
+
+    platform = this.app.getSession('platform');
+    platforms = config.get(['interstitial', 'ignorePlatform'], []);
+    if (_.contains(platforms, platform)) {
+        return;
+    }
+
+    path = this.app.getSession('path');
+    paths = config.get(['interstitial', 'ignorePath'], []);
+    if (_.contains(paths, path)) {
+        return;
+    }
+
+    downloadApp = this.app.getSession('downloadApp');
+    if (!downloadApp) {
+        clicks = config.get(['interstitial', 'clicks'], 1);
+        currentClicks = this.app.getSession('clicks') || 0;
+
+        if (currentClicks < clicks) {
+            currentClicks++;
+            this.app.persistSession({
+                clicks: currentClicks
+            });
+        }
+        else {
+            var protocol = this.app.getSession('protocol');
+            var host = this.app.getSession('host');
+            var time = config.get(['interstitial', 'time'], 60000);
+
+            this.app.deleteSession('clicks');
+            this.app.persistSession({
+                downloadApp: 1
+            }, {
+                maxAge: time
+            });
+            if (typeof window !== 'undefined' || platform === 'html5') {
+                this.app.updateSession({
+                    interstitial: true
+                });
+            } 
+            else {
+                common.redirect.call(this, [url, '?ref=', protocol, '://', host, this.app.getSession('url')].join(''));
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 function setLanguage(params) {
@@ -164,7 +227,7 @@ module.exports = {
             cleanSession.call(this);
             setCurrentRoute.call(this);
             setReferer.call(this);
-            setLanguage.call(this);
+            setLanguage.call(this, params);
             setLocation.call(this, params, function next() {
                 callback.call(this, processForm.call(this, params));
             }.bind(this));

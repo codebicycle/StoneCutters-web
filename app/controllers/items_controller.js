@@ -2,6 +2,7 @@
 
 var helpers = require('../helpers');
 var _ = require('underscore');
+var asynquence = require('asynquence');
 
 module.exports = {
     show: function(params, callback) {
@@ -230,7 +231,7 @@ module.exports = {
 
                 result.items = model.get('data');
                 result.metadata = model.get('metadata');
-                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || !result.items.length)) {
+                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
                 if (result.metadata.total < 5){
@@ -325,4 +326,56 @@ module.exports = {
             }.bind(this));
         }
     },
+    favorite: function(params, callback) {
+        var intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
+
+        function add(done) {
+            var user = this.app.getSession('user') || {};
+
+            helpers.dataAdapter.request('post', '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
+                query: {
+                    token: user.token
+                }
+            }, done.errfcb);
+        }
+
+        function next(done) {
+            helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
+                status: 302
+            });
+        }
+
+        asynquence().or(next.bind(this))
+            .then(add.bind(this))
+            .val(next.bind(this));
+    },
+    delete: function(params, callback) {
+        var itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
+
+        function remove(done) {
+            var user = this.app.getSession('user') || {};
+
+            helpers.dataAdapter.request('post', ('/items/' + itemId + '/delete'), {
+                query: {
+                    token: user.token
+                }
+            }, done.errfcb);
+        }
+
+        function success(done) {
+            helpers.common.redirect.call(this, '/myolx/myadslisting?deleted=true', null, {
+                status: 302
+            });
+        }
+
+        function error(done) {
+            helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
+                status: 302
+            });
+        }
+
+        asynquence().or(error.bind(this))
+            .then(remove.bind(this))
+            .val(success.bind(this));
+    }
 };

@@ -3,7 +3,7 @@
 module.exports = function(worker) {
     var asynquence = require('asynquence');
     var PORT = require('./config').get(['server', 'port'], 8080);
-    var logger = require('./logger')('server');
+    var logger = require('../shared/logger')('server');
 
     function onBootstrapError(error) {
         var log = '%j';

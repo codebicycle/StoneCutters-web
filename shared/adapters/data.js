@@ -1,11 +1,17 @@
 'use strict';
 
+var PROTOCOL = 'http';
+var HOST = 'api-v2.olx.com';
+
 var _ = require('underscore');
-var url = require('url');
-var restler = require('restler');
 var logger = require('../logger')('adapter data');
-var util = require('util');
-var CONFIG = require('../config').get('smaug', {});
+var utils = require('../utils');
+var isServer = utils.isServer;
+
+if (isServer) {
+    var restlerName = 'restler';
+    var restler = require(restlerName);
+}
 
 function DataAdapter(options) {
     this.options = options || {};
@@ -14,15 +20,24 @@ function DataAdapter(options) {
 module.exports = DataAdapter;
 
 DataAdapter.prototype.request = function(req, api, options, callback) {
+    var syncMethod = isServer ? this.serverRequest : this.clientRequest;
+
+    return syncMethod.apply(this, arguments);
+};
+
+DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
     var start = new Date().getTime();
     var elapsed;
 
+    if (!isServer) {
+        return this.clientRequest(req, api, options, callback);
+    }
     if (options instanceof Function) {
         callback = options;
         options = {};
     }
     api = this.apiDefaults(api, req);
-    restler.request(CONFIG.protocol + '://' + CONFIG.host + api.url, _.extend(api, options))
+    restler.request(api.url, _.extend(api, options))
         .on('success', success)
         .on('fail', fail)
         .on('error', fail);
@@ -60,6 +75,64 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     }
 };
 
+DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
+    var start = new Date().getTime();
+    var elapsed;
+    var done;
+    var failed;
+
+    if (isServer) {
+        return this.serverRequest(req, api, options, callback);
+    }
+
+    if (options instanceof Function) {
+        callback = options;
+        options = {};
+    }
+    done = options.done || function noop() {};
+    failed = options.fail || function noop() {};
+    delete options.done;
+    delete options.fail;
+
+    var success = function(body, textStatus, res) {
+        elapsed = getElapsed(start, elapsed);
+        if (typeof body === 'string' && DataAdapter.prototype.isJSONResponse(res)) {
+            try {
+                body = JSON.parse(body);
+            }
+            catch (err) {
+                return fail(err, res);
+            }
+        }
+        if (body && body.itemProperties === null){
+            body.itemProperties = {};
+        }
+        logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
+        done.apply(this, arguments);
+    }.bind(this);
+
+    var fail = function(res, textStatus, err) {
+        elapsed = getElapsed(start, elapsed);
+        try {
+            err = JSON.parse(err);
+        }
+        catch (error) {}
+        if (options.convertErrorCode) {
+            err = DataAdapter.prototype.getErrForResponse(res, {
+                allow4xx: options.allow4xx
+            });
+        }
+        logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
+        failed.apply(this, arguments);
+    }.bind(this);
+
+    api = this.apiDefaults(api, req);
+    $.ajax(this.ajaxParams(api, options))
+        .done(success.bind(this))
+        .fail(fail.bind(this))
+        .always(callback);
+};
+
 DataAdapter.prototype._request = function(method, req, url, options, callback) {
     this.request(req, {
         method: method,
@@ -76,6 +149,9 @@ DataAdapter.prototype.get = function(req, url, options, callback) {
 };
 
 DataAdapter.prototype.file = function(path, name, size, encoding, mime) {
+    if (!isServer) {
+        throw 'Restler library not available on the client';
+    }
     return restler.file(path, name, size, encoding, mime);
 };
 
@@ -85,26 +161,26 @@ DataAdapter.prototype.isJSONResponse = function(response) {
     return contentType.indexOf('application/json') !== -1;
 };
 
-DataAdapter.prototype.apiDefaults = function(api, req) {
-    var urlOpts, apiHost;
+DataAdapter.prototype.apiDefaults = function(api) {
+    var urlOpts;
+    var apiHost;
 
     api = _.clone(api);
-    if (api.path && ~api.path.indexOf('://')) {
+    if (api.path) {
         api.url = api.path;
         delete api.path;
     }
+    api.url = PROTOCOL + '://' + HOST + api.url;
     apiHost = this.options[api.api] || this.options['default'] || this.options || {};
     urlOpts = _.defaults(
         _.pick(api,     ['protocol', 'port', 'query']),
         _.pick(apiHost, ['protocol', 'port', 'host'])
     );
-    urlOpts.pathname = api.path || api.pathname;
     _.defaults(api, {
         method: 'GET',
-        url: url.format(urlOpts),
         headers: {}
     });
-    if (!api.headers['User-Agent']) {
+    if (isServer && !api.headers['User-Agent']) {
         api.headers['User-Agent'] = this.options.userAgent;
     }
     if (api.body && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
@@ -114,6 +190,18 @@ DataAdapter.prototype.apiDefaults = function(api, req) {
         delete api.json;
         delete api.body;
         delete api.data;
+    }
+    if (!isServer) {
+        api.type = api.method;
+        delete api.method;
+    }
+    return api;
+};
+
+DataAdapter.prototype.ajaxParams = function(api, options) {
+    _.extend(api, options);
+    if (api.query) {
+        api.url = utils.params(api.url, api.query);
     }
     return api;
 };

@@ -1,5 +1,5 @@
 var config = require('./config');
-var utils = require('./utils');
+var utils = require('../shared/utils');
 
 var env = process.env.NODE_ENV || 'development';
 

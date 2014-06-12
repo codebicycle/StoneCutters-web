@@ -2,7 +2,6 @@
 
 var Item = require('../models/item');
 var Base = require('./base');
-var querystring = require('querystring');
 
 module.exports = Base.extend({
     model: Item,

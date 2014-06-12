@@ -9,7 +9,7 @@ var config = require('./config').get('graphite', {
 });
 var dgram = require('dgram');
 var util = require('util');
-var logger = require('./logger')('graphite');
+var logger = require('../shared/logger')('graphite');
 var client;
 
 function Client(options) {

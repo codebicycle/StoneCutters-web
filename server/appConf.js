@@ -6,7 +6,7 @@ module.exports = function appUseConf(done) {
     var rendr = require('rendr');
 
     var app = express();
-    var DataAdapter = require('./adapter/data');
+    var DataAdapter = require('../shared/adapters/data');
     var dataAdapter = new DataAdapter({
         userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
     });
@@ -33,9 +33,6 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.categories());
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.bar());
-        if (config.get(['interstitial', 'enabled'], false)) {
-            rendrApp.use(middleware.interstitial());
-        }
 
         //rendrApp.use(middleware.experimentNotificator());
         //rendrApp.use(middleware.incrementCounter());

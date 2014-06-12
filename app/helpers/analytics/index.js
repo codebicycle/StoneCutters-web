@@ -32,8 +32,13 @@ function stringifyParams(params) {
 }
 
 function getURLName(session, page) {
+    if (~page.indexOf('#')) {
+        return page;
+    }
+    
     var name = [];
     var currentRoute = session.currentRoute;
+
     name.push(currentRoute.controller);
     name.push('#');
     name.push(currentRoute.action);
@@ -59,7 +64,7 @@ function generateURL(session) {
     params.platform = session.platform;
     params.custom = ati.generateParams(session, configAti, query.params);
 
-    return '/pageview.gif?' + stringifyParams(params);
+    return '/analytics/pageview.gif?' + stringifyParams(params);
 }
 
 module.exports = {

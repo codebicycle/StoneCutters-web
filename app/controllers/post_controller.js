@@ -2,7 +2,8 @@
 
 var helpers = require('../helpers');
 var _ = require('underscore');
-var sixpack = require('sixpack-client');
+var sixpackName = 'sixpack-client';
+var sixpack = require(sixpackName);
 var config = require('../config');
 
 module.exports = {

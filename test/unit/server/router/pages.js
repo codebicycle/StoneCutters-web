@@ -5,7 +5,7 @@ var should = require('should');
 var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
-var SmaugAdapter = require('../../../../server/adapter/data');
+var SmaugAdapter = require('../../../../shared/adapters/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
@@ -95,7 +95,7 @@ describe('server', function test() {
             describe('check', function test() {
                 it('should have the properties "client" and "server"', function test(done) {
                     request(app)
-                        .get('/check')
+                        .get('/stats/check')
                         .set('host', hosts[0])
                         .set('user-agent', userAgents[0])
                         .set('cookie', response.get('set-cookie'))

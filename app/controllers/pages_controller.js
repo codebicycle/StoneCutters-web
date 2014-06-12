@@ -124,7 +124,8 @@ module.exports = {
             helpers.analytics.reset();
 
             callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.getSession())
+                analytics: helpers.analytics.generateURL(this.app.getSession()),
+                ref: params.ref
             });
         }
     },
@@ -133,10 +134,7 @@ module.exports = {
 
         function controller() {
             var err = this.app.getSession('error');
-            
-            if (typeof window !== 'undefined' && !(/[0-9]{3}/.test(params.errorCode))) {
-                return helpers.common.redirect.call(this, '/' + params.errorCode);
-            }
+
             if (err) {
                 this.app.deleteSession('error');
             }

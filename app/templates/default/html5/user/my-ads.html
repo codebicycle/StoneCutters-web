@@ -7,14 +7,15 @@
         <ul class="itemListing">
             {% for item in myAds %}
                 <li>
-                    <a href="#" class="edit" data-itemUrl="/{{ item | slugToUrl | link }}" data-itemId="{{ item.id }}" >
+                    <a href="#" class="edit {{ item.id }}" data-itemUrl="/{{ item | slugToUrl | link }}" data-itemId="{{ item.id }}" {{ 'data-editable="true"' if item.status == 'ready'}} >
                         <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
                         {% if item.status == 'pending' %}
                             <p class="status pending">{{ dictionary["itemslisting.PendingAd"] }}</p>
                         {% elif item.status == 'rejected' %}
                             <p class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</p>
                         {% elif item.status == 'ready' %}
-                            <p>{{ dictionary[item.date.since] }}
+                            <p>
+                                {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
                                 {% if item.displayLocation %}
                                     {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
                                 {% endif %}
@@ -70,4 +71,3 @@
         </div>
     </div>
 </div>
-

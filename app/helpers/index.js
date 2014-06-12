@@ -12,6 +12,7 @@ module.exports = {
     routes: require('./routes'),
     breadcrumb: require('./breadcrumb'),
     pagination: require('./pagination'),
+    dataAdapter: require('./dataAdapter'),
     fitText: function(element, kompressor, options) {
         var compressor = kompressor || 1;
         var settings = $.extend({
@@ -31,29 +32,24 @@ module.exports = {
             $(window).on('resize.fittext orientationchange.fittext', onResize).trigger('resize.fittext');
         });
     },
-    timeAgo: function(previous) {
+    timeAgo: function(itemDate) {
         var current = new Date();
-        var lastMidnight = current - (current % (24*60*60));
-        var month = [];
-        month[0] = '01';
-        month[1] = '02';
-        month[2] = '03';
-        month[3] = '04';
-        month[4] = '05';
-        month[5] = '06';
-        month[6] = '07';
-        month[7] = '08';
-        month[8] = '09';
-        month[9] = '10';
-        month[10] = '11';
-        month[11] = '12';
+        var currentMonth = current.getMonth() + 1;
+        var formatDate;
+        var hour = (itemDate.hour < 10 ? '0' : '') + itemDate.hour;
+        var minute = (itemDate.minute < 10 ? '0' : '') + itemDate.minute;
+        var monthArr = ['00','01','02','03','04','05','06','07','08','09','10','11'];
+        var diffDays = current.getDate() - itemDate.day;
 
-        if (previous >= lastMidnight){
-            return 'messages_date_format.Today';
-        }else if (previous >= (lastMidnight - (24*60*60))) {
-            return 'messages_date_format.Yesterday';
+        if (current.getFullYear() == itemDate.year && currentMonth == itemDate.month && diffDays === 0){
+            formatDate = {'hour': hour + ':' + minute, 'dictionary': 'messages_date_format.Today' };
+            return formatDate;
+        }else if (current.getFullYear() == itemDate.year && currentMonth == itemDate.month && diffDays === 1 ) {
+            formatDate = {'hour': hour + ':' + minute, 'dictionary': 'messages_date_format.Yesterday' };
+            return formatDate;
         }else{
-            return 'messages_date_format.1'+month[previous.getMonth()];
+            formatDate = {'day': itemDate.day, 'dictionary': 'messages_date_format.1' + monthArr[itemDate.month] };
+            return formatDate;
         }
     }
 };

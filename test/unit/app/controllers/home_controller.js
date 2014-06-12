@@ -7,7 +7,7 @@ var express = require('express');
 var rendr = require('rendr');
 
 var utils = require('../../../utils');
-var SmaugAdapter = require('../../../../server/adapter/data');
+var SmaugAdapter = require('../../../../shared/adapters/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: utils.smaugUserAgent
 });
@@ -130,7 +130,7 @@ describe('app', function test() {
                         response.custom.should.have.property('language');
                         response.custom.should.have.property('platform');
                         response.should.have.property('platform', 'html4');
-                    })(utils.deparams(result.data.analytics.replace('/pageview.gif?', '')));
+                    })(utils.analyitcsParams(result.data.analytics));
                     done();
                 });
                 it('should be added seo title to the head object', function test(done) {

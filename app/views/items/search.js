@@ -10,15 +10,7 @@ module.exports = BaseView.extend({
         cellpadding: 0
     },
     processItem: function(item) {
-        var year = item.date.year;
-        var month = item.date.month - 1;
-        var day = item.date.day;
-        var hour = item.date.hour;
-        var minute = item.date.minute;
-        var second = item.date.second;
-        var date = new Date(year, month, day, hour, minute, second);
-
-        item.date.since = helpers.timeAgo(date);
+        item.date.since = helpers.timeAgo(item.date);
     },
     postRender: function() {
        var listingView = 'listView';

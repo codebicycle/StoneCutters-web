@@ -17,15 +17,17 @@
                         {% elif item.status == 'rejected' %}
                             <span class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</span>
                         {% elif item.status == 'ready' %}
-                            <span class="status ready">{{ dictionary[item.date.since] }}</span>
+                            <span class="status ready">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
                         {% endif %}
                         <div class="centerCont">
                             <a href="/{{ item | slugToUrl | link }}">
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
-                        <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" class="action">{{ dictionary["showactivelistings.Edit"] }}</a>
-                        <a href="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" class="action">{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                        {% if item.status == 'ready' %}
+                            <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" class="action">{{ dictionary["showactivelistings.Edit"] }}</a>
+                            <a href="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" class="action">{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                        {% endif %}
                     </div>
                 </li>
             {% endfor %}
