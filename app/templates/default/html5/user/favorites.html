@@ -1,6 +1,7 @@
-{% from macros import Breadcrumb %}
+{% from macros import Breadcrumb, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["myolx.MyFavorites"]) }}
+{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
 <section id="favorites">
     {% if favorites.length %}
         <ul class="itemListing">

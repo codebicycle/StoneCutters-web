@@ -151,7 +151,6 @@ module.exports = function(nunjucks) {
             console.log.apply(console, arguments);
         },
         'static': common.static,
-        slugToUrl: common.slugToUrl,
-        urlize: common.urlize
+        slugToUrl: common.slugToUrl
     };
 };

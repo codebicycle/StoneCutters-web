@@ -7,7 +7,6 @@ module.exports = function itemRouter(app, dataAdapter) {
     var configClient = require('../../app/config');
     var graphite = require('../graphite')();
     var Analytic = require('analytic');
-    var utils = require('../utils');
 
     (function health() {
         app.get('/health', handler);
@@ -125,6 +124,11 @@ module.exports = function itemRouter(app, dataAdapter) {
         function handler(req, res) {
             var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
+            image = new Buffer(image, 'base64');
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', image.length);
+            res.end(image);
+
             graphiteTracking(req);
             if (configServer.get(['analytics', 'google', 'enabled'], true)) {
                 googleTracking(req);
@@ -132,11 +136,6 @@ module.exports = function itemRouter(app, dataAdapter) {
             if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
                 atiTracking(req);
             }
-
-            image = new Buffer(image, 'base64');
-            res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.send(image);
         }
     })();
 
@@ -178,17 +177,17 @@ module.exports = function itemRouter(app, dataAdapter) {
         function handler(req, res) {
             var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
+            image = new Buffer(image, 'base64');
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', image.length);
+            res.end(image);
+
             if (configServer.get(['analytics', 'google', 'enabled'], true)) {
                 googleTracking(req);
             }
             if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
                 atiTracking(req);
             }
-
-            image = new Buffer(image, 'base64');
-            res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.send(image);
         }
     })();
 };

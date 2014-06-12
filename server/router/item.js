@@ -4,7 +4,7 @@ module.exports = function(app, dataAdapter) {
     var asynquence = require('asynquence');
     var formidable = require('../formidable');
     var querystring = require('querystring');
-    var utils = require('../utils');
+    var utils = require('../../shared/utils');
     var fs = require('fs');
 
     (function reply() {

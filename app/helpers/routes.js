@@ -77,6 +77,9 @@ module.exports = {
         url: 'myolx/edititem/success'
     },
     */
+    'items#delete': {
+        url: 'myolx/deleteitem/:itemId'
+    },
     'pages#terms': {
         url: 'terms'
     },

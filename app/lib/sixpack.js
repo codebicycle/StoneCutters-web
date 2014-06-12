@@ -127,7 +127,8 @@ module.exports = function Sixpack() {
                 script.async = true;
                 document.body.appendChild(script);
             } else {
-                var http = require('http');
+                var httpName = 'http';
+                var http = require(httpName);
                 var req = http.get(url, function(res) {
                     var body = "";
                     res.on('data', function(chunk) {

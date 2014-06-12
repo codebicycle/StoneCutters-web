@@ -348,5 +348,34 @@ module.exports = {
         asynquence().or(next.bind(this))
             .then(add.bind(this))
             .val(next.bind(this));
+    },
+    delete: function(params, callback) {
+        var itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
+
+        function remove(done) {
+            var user = this.app.getSession('user') || {};
+
+            helpers.dataAdapter.request('post', ('/items/' + itemId + '/delete'), {
+                query: {
+                    token: user.token
+                }
+            }, done.errfcb);
+        }
+
+        function success(done) {
+            helpers.common.redirect.call(this, '/myolx/myadslisting?deleted=true', null, {
+                status: 302
+            });
+        }
+
+        function error(done) {
+            helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
+                status: 302
+            });
+        }
+
+        asynquence().or(error.bind(this))
+            .then(remove.bind(this))
+            .val(success.bind(this));
     }
 };

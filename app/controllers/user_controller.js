@@ -43,7 +43,7 @@ module.exports = {
     'my-ads': function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(form) {
             var user = this.app.getSession('user') || {};
             var spec = {
                 myAds: {
@@ -69,6 +69,7 @@ module.exports = {
 
                 result.myAdsMetadata = myAds.get('metadata');
                 result.myAds = myAds.get('data');
+                result.form = form;
                 _.each(result.myAds, processItem);
                 callback(err, result);
             });
@@ -77,7 +78,7 @@ module.exports = {
     favorites: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(form) {
             var user = this.app.getSession('user') || {};
             var spec = {
                 favorites: {
@@ -101,6 +102,7 @@ module.exports = {
 
                 result.favoritesMetadata = favorites.get('metadata');
                 result.favorites = favorites.get('data');
+                result.form = form;
                 _.each(result.favorites, processItem);
                 callback(err, result);
             });

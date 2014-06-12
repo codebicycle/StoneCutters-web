@@ -6,7 +6,7 @@ module.exports = function(app, dataAdapter) {
     var formidable = require('../formidable');
     var querystring = require('querystring');
     var crypto = require('crypto');
-    var utils = require('../utils');
+    var utils = require('../../shared/utils');
 
     var loginHandler = (function login() {
 

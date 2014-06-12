@@ -5,7 +5,8 @@ var HOST = 'api-v2.olx.com';
 
 var _ = require('underscore');
 var logger = require('../logger')('adapter data');
-var isServer = (typeof window === 'undefined');
+var utils = require('../utils');
+var isServer = utils.isServer;
 
 if (isServer) {
     var restlerName = 'restler';
@@ -126,7 +127,7 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
     }.bind(this);
 
     api = this.apiDefaults(api, req);
-    $.ajax(_.extend(api, options))
+    $.ajax(this.ajaxParams(api, options))
         .done(success.bind(this))
         .fail(fail.bind(this))
         .always(callback);
@@ -193,6 +194,14 @@ DataAdapter.prototype.apiDefaults = function(api) {
     if (!isServer) {
         api.type = api.method;
         delete api.method;
+    }
+    return api;
+};
+
+DataAdapter.prototype.ajaxParams = function(api, options) {
+    _.extend(api, options);
+    if (api.query) {
+        api.url = utils.params(api.url, api.query);
     }
     return api;
 };
