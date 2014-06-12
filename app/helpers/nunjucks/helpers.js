@@ -144,6 +144,9 @@ module.exports = function(nunjucks) {
         link: function (href) {
             return common.link(href, this.ctx.siteLocation);
         },
+        escape: function (text) {
+            return encodeURIComponent(text);
+        },
         date: function(timestamp) {
             return dateformat(new Date(timestamp), 'dd-mm-yyyy');
         },

@@ -254,7 +254,7 @@
             <div>
                 <ul>
                     <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ href }}" target="_blank" class="facebookButton">Facebook</a></li>
-                    <li><a href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title }}&url={{ href }}" target="_blank" class="twitterButton">Twitter</a></li>
+                    <li><a href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title | escape }}&url={{ href }}" target="_blank" class="twitterButton">Twitter</a></li>
                 </ul>
             </div>
 
