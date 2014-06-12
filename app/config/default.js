@@ -36,7 +36,7 @@ module.exports = {
     interstitial: {
         enabled: false,
         clicks: 1,
-        time: 600000,
+        time: 6000000,
         ignorePath: ['/health', '/stats', '/stats/memory', '/stats/threads', '/stats/check', '/login', '/interstitial', '/404', '/500', '/analytics/pageview.gif', '/analytics/pageevent.gif'],
         ignorePlatform: ['wap', 'desktop']
     }

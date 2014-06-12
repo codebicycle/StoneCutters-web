@@ -43,11 +43,6 @@ function get(keys, defaultValue) {
     return _.clone(value);
 }
 
-// BORRAAAAAR despues de la regresion
-if (get(['environment', 'type'], '') === 'testing' && CONFIG.interstitial) {
-    CONFIG.interstitial.enabled = true;
-}
-
 module.exports = {
     get: get
 };

@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var common = require('./common');
+var marketing = require('./marketing');
 var config = require('../config');
 var intertitial = config.get(['interstitial', 'enabled'], false);
 
@@ -66,6 +67,7 @@ function setInterstitial() {
     var platforms;
     var path;
     var paths;
+    var info;
     var downloadApp;
     var clicks;
     var currentClicks;
@@ -79,6 +81,12 @@ function setInterstitial() {
     path = this.app.getSession('path');
     paths = config.get(['interstitial', 'ignorePath'], []);
     if (_.contains(paths, path)) {
+        return;
+    }
+
+    info = marketing.getInfo(this.app, 'interstitial');
+    if (!info || _.isEmpty(info)) {
+        console.log('Marketing not found');
         return;
     }
 
