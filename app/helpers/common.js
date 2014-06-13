@@ -78,15 +78,22 @@ module.exports = (function() {
 
     function redirect(url, parameters, options) {
         var siteLocation = this.app.getSession('siteLocation');
-        
+
+        options = (options || {});
+        if (options.nolink) {
+            siteLocation = '';
+
+            if (_.isString(options.nolink)) {
+                siteLocation = options.nolink;
+            }
+        }
         url = utils.link(url, siteLocation);
         if (parameters) {
             url = utils.params(url, parameters);
         }
-        options = _.defaults((options || {}), {
+        this.redirectTo(url, _.defaults(options, {
             status: 301
-        });
-        this.redirectTo(url, options);
+        }));
     }
 
     function daysDiff(date) {
