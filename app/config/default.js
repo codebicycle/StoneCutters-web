@@ -7,7 +7,7 @@ module.exports = {
             maxPageSize: 25
         },
         html5: {
-            maxPageSize: 25
+            maxPageSize: 26
         }
     },
     staticAccept: ['css', 'js'],
