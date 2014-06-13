@@ -134,35 +134,19 @@ module.exports = {
         function controller() {
             var app = this.app;
             var user = app.getSession('user');
-            var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
             var pos = Number(params.pos) || 0;
             var siteLocation = app.getSession('siteLocation');
-            var anonymousItem;
             var spec;
-
-            helpers.seo.resetHead();
-            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slugUrl, '-iid-', itemId].join(''));
+            var slug;
 
             if (user) {
                 params.token = user.token;
             }
-            else if (typeof window !== 'undefined' && localStorage) {
-                anonymousItem = localStorage.getItem('anonymousItem');
-                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                if (securityKey) {
-                    anonymousItem[params.itemId] = securityKey;
-                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                }
-                else {
-                    securityKey = anonymousItem[params.itemId];
-                }
-            }
             params.id = params.itemId;
             delete params.itemId;
             delete params.title;
-            delete params.sk;
 
             spec = {
                 item: {
@@ -174,13 +158,25 @@ module.exports = {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
-                var user = app.getSession('user');
                 var categoryTree;
+
+                if (!item) {
+                    return helpers.common.redirect.call(this, '/404');
+                }
+                slug = helpers.common.slugToUrl(item);
+                if (slug.indexOf(slugUrl + '-iid-')) {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if (!item.images || !item.images.length) {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if (pos < 0 || pos >= item.images.length) {
+                    return helpers.common.redirect.call(this, ('/' + slug + '/galery'));
+                }
 
                 result.item = item;
                 result.user = user;
                 result.pos = pos;
-                result.sk = securityKey;
                 categoryTree = helpers.categories.getTree(app, item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.addParam('user', user);
@@ -189,7 +185,7 @@ module.exports = {
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
                 result.analytics = helpers.analytics.generateURL(app.getSession());
                 callback(err, result);
-            });
+            }.bind(this));
         }
     },
     search: function(params, callback) {
