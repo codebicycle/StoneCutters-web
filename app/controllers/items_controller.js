@@ -165,8 +165,7 @@ module.exports = {
                 }
                 slug = helpers.common.slugToUrl(item);
                 if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
-                        return helpers.common.redirect.call(this, ('/' + slug));
-                    }
+                    return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (!item.images || !item.images.length) {
                     return helpers.common.redirect.call(this, ('/' + slug));
