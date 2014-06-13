@@ -9,7 +9,7 @@
 <section id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["posting_fields_1.photos"] }}: <br> <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
-        {% if device.browserName == 'UC Browser' %}
+        {% if device.browserName == 'UC Browser' or device.browserName == 'Android Browser' %}
             <div class="normalUpload">
                 <input type="file" name="images[]" />
                 <input type="file" name="images[]" />
