@@ -18,7 +18,7 @@ section#posting {
 section#posting > form > h4 {
 	border-top: 1px solid #CCCCCC;
 }
-section#posting > form .fileUpload {
+section#posting > form .fileUpload , section#posting > form .normalUpload {
 	width: 100%;
 	height: auto;
 	display: inline-block;
@@ -30,6 +30,10 @@ section#posting > form .fileUpload input[type="file"] {
 	display: block;
 	visibility: hidden;
 	z-index: -100;
+}
+section#posting > form .normalUpload input[type="file"] {
+    border: none;
+    margin: .5rem 0 0 0;
 }
 section#posting > form .fileUpload .image {
 	position: relative;
