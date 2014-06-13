@@ -9,7 +9,8 @@ module.exports = {
 
         function controller(form) {
             callback(null, {
-                form: form
+                form: form,
+                agreeTerms: params.agreeTerms
             });
         }
     },

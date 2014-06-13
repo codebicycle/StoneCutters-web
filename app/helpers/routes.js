@@ -105,7 +105,15 @@ module.exports = {
             }
         }
     },
-    'items#show': {
+    'items#galery': {
+        urls: {
+            server: ':title-iid-:itemId([0-9]+)/galery',
+            client: {
+                url: ':title-iid-:itemId/galery'
+            }
+        }
+    },
+    'items#show#slug': {
         urls: {
             server: ':title-iid-:itemId([0-9]+)',
             client: {
@@ -113,11 +121,11 @@ module.exports = {
             }
         }
     },
-    'items#galery': {
+    'items#show': {
         urls: {
-            server: ':title-iid-:itemId([0-9]+)/galery',
+            server: 'iid-:itemId([0-9]+)',
             client: {
-                url: ':title-iid-:itemId/galery'
+                url: 'iid-:itemId'
             }
         }
     },

@@ -79,6 +79,14 @@ module.exports = function(app, dataAdapter) {
                 formidable.parse(req, done.errfcb);
             }
 
+            function validate(done, data) {
+                if (!data.agreeTerms) {
+                    res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp.getSession('siteLocation')));
+                    return;
+                }
+                done(data);
+            }
+
             function submit(done, data) {
                 data.location = req.rendrApp.getSession('siteLocation');
                 data.languageId = 10;
@@ -102,6 +110,7 @@ module.exports = function(app, dataAdapter) {
 
             asynquence().or(error)
                 .then(parse)
+                .then(validate)
                 .then(submit)
                 .val(success);
         }

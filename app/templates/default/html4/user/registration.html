@@ -1,7 +1,13 @@
 {% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["registerheader.Register"]) }}
-{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
+{% if form and form.errors %}
+    {{ Errors(form.errors) }}
+{% elif (not agreeTerms | is('undefined')) %}
+    <div id="errors">
+        <span>{{ dictionary["register_confirmation.782"] }}</span><br/>
+    </div>
+{% endif %}
 <div id="register">
     <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
