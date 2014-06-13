@@ -19,7 +19,6 @@ module.exports = {
             var spec;
 
             helpers.seo.resetHead();
-            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slugUrl, '-iid-', itemId].join(''));
 
             if (user) {
                 params.token = user.token;
@@ -67,7 +66,7 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/404');
                 }
                 slug = helpers.common.slugToUrl(item);
-                if (slug.indexOf(slugUrl + '-iid-')) {
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 itemLocation = item.location.children[0].children[0].url;
@@ -76,7 +75,7 @@ module.exports = {
                     var protocol = app.getSession('protocol');
                     var platform = app.getSession('platform');
                     var host = item.location.url.replace('www', 'm');
-                    var url = [protocol, '://', platform, '.', host, ':3030/', slug].join('');
+                    var url = [protocol, '://', platform, '.', host, '/', slug].join('');
 
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
@@ -121,6 +120,7 @@ module.exports = {
                     description = helpers.seo.shortDescription(item.title, item.description, item.category.name, item.location.children[0].children[0].name);
                     helpers.seo.addMetatag('title', title);
                     helpers.seo.addMetatag('Description', description);
+                    helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slug].join(''));
                     helpers.seo.update();
 
                     callback(err, result);
@@ -164,8 +164,9 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/404');
                 }
                 slug = helpers.common.slugToUrl(item);
-                if (slug.indexOf(slugUrl + '-iid-')) {
-                    return helpers.common.redirect.call(this, ('/' + slug));
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                        return helpers.common.redirect.call(this, ('/' + slug));
+                    }
                 }
                 if (!item.images || !item.images.length) {
                     return helpers.common.redirect.call(this, ('/' + slug));
