@@ -24,7 +24,7 @@ else {
 }
 
 function link(href, siteLocation) {
-    if (siteLocation && !~siteLocation.indexOf('www.') && !params.location) {
+    if (siteLocation && !~siteLocation.indexOf('www.')) {
         href = params(href, 'location', siteLocation);
     }
     return href;

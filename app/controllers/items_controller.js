@@ -59,6 +59,8 @@ module.exports = {
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
                 var slug;
+                var itemLocation;
+                var siteLocation;
                 var spec;
 
                 if (!item) {
@@ -68,7 +70,19 @@ module.exports = {
                 if (slug.indexOf(slugUrl + '-iid-')) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
+                itemLocation = item.location.children[0].children[0].url;
+                siteLocation = this.app.getSession('siteLocation');
+                if (itemLocation.split('.').pop() !== siteLocation.split('.').pop()) {
+                    var protocol = app.getSession('protocol');
+                    var platform = app.getSession('platform');
+                    var host = item.location.url.replace('www', 'm');
+                    var url = [protocol, '://', platform, '.', host, ':3030/', slug].join('');
 
+                    return helpers.common.redirect.call(this, url, null, {
+                        pushState: false,
+                        nolink: itemLocation
+                    });
+                }
                 spec = {
                     items: {
                         collection : 'Items',
@@ -86,6 +100,8 @@ module.exports = {
                     var model = result.items.models[0];
                     var user = app.getSession('user');
                     var categoryTree;
+                    var title;
+                    var description;
 
                     result.relatedItems = model.get('data');
                     result.user = user;
@@ -101,8 +117,8 @@ module.exports = {
                     result.analytics = helpers.analytics.generateURL(app.getSession());
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(categoryTree.subCategory) + '?relatedAds=' + itemId;
 
-                    var title = helpers.seo.shortTitle(item.title, item.location.children[0].children[0].name);
-                    var description = helpers.seo.shortDescription(item.title, item.description, item.category.name, item.location.children[0].children[0].name);
+                    title = helpers.seo.shortTitle(item.title, item.location.children[0].children[0].name);
+                    description = helpers.seo.shortDescription(item.title, item.description, item.category.name, item.location.children[0].children[0].name);
                     helpers.seo.addMetatag('title', title);
                     helpers.seo.addMetatag('Description', description);
                     helpers.seo.update();
