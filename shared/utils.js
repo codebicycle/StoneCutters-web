@@ -5,7 +5,8 @@ var isServer = (typeof window === 'undefined');
 var utils = {
     isServer: isServer,
     link: link,
-    params: params
+    params: params,
+    removeParams: removeParams
 };
 
 if (isServer) {
@@ -51,6 +52,36 @@ function params(url, name, value) {
     if (!_.isEmpty(parameters)) {
         out.push('?');
         out.push(utils.qs.stringify(parameters));
+    }
+    if (url.slice(url.length - 1) === '#') {
+        out.push('#');
+    }
+    return out.join('');
+}
+
+function removeParams(url, name) {
+    var parts = url.split('?');
+    var parameters = {};
+    var out = [];
+
+    out.push(parts.shift());
+    if (parts.length) {
+        parameters = utils.qs.parse(parts.join('?'));
+    }
+    if (_.isObject(name)) {
+        parameters = _.filter(parameters, function filter(key) {
+            return !_.contains(name, key);
+        });
+    }
+    else {
+        delete parameters[name];
+    }
+    if (!_.isEmpty(parameters)) {
+        out.push('?');
+        out.push(utils.qs.stringify(parameters));
+    }
+    if (url.slice(url.length - 1) === '#') {
+        out.push('#');
     }
     return out.join('');
 }
