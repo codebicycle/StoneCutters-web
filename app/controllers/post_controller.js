@@ -177,7 +177,8 @@ module.exports = {
                 };
                 var spec = {
                     postingSession: {
-                        model: 'PostingSession'
+                        model: 'PostingSession',
+                        params: {}
                     },
                     fields: {
                         collection: 'Fields',
@@ -191,7 +192,6 @@ module.exports = {
                     var categoryTree = helpers.categories.getTree(app, item.category.id);
 
                     result.user = user;
-                    result.item = item;
                     result.postingSession = result.postingSession.get('postingSession');
                     result.intent = 'edit';
                     result.fields = response.fields;
@@ -202,14 +202,19 @@ module.exports = {
                     result.errField = params.errField;
                     result.errMsg = params.errMsg;
                     result.sk = securityKey;
-                    result.form = form;
-
+                    if (!form || !form.values) {
+                        result.form = {
+                            values: item
+                        };
+                    }
+                    else {
+                        result.form = form;
+                    }
                     helpers.analytics.reset();
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
                     result.analytics = helpers.analytics.generateURL(app.getSession());
-
                     callback(err, result);
                 });
             }
