@@ -38,3 +38,33 @@
         {% endfor %}
     </div>
 {% endmacro %}
+
+{% macro FieldText(field , form , user) %}
+    <div class="formField">
+        <label>{{field.label}}</label>
+        <input type="text" name="{{field.name}}" id="text-{{field.name}}"{% if (form and form.values and form.values[field.name]) or (field.name == 'email' and user) %} value="{{ form.values[field.name] if form.values[field.name] else user.email }}"{% endif %}>
+    </div>
+{% endmacro %}
+
+{% macro FieldTextArea(field , form) %}
+    <div class="formField">
+        <label>{{field.label}}</label>
+        <textarea id="text-{{field.name}}" name="{{field.name}}" class="textarea">{% if form and form.values and form.values[field.name] %}{{ form.values[field.name] }}{% endif %}</textarea>
+    </div>
+{% endmacro %}
+
+{% macro FieldCombobox(field , form) %}
+    <div class="formField">
+        {% if field.values.length == 1 %}
+            <label>{{field.label}} <strong>{{ field.values[0].value }}</strong></label>
+            <input type="hidden" id="select-{{field.name}}" name="{{field.name}}" value="{{ field.values[0].key }}">
+        {% else %}
+            <label>{{field.label}}</label>
+            <select id="select-{{field.name}}" name="{{field.name}}">
+                {% for value in field.values %}
+                    <option value="{{value.key}}"{% if form and form.values and form.values[field.name] and form.values[field.name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    </div>
+{% endmacro %}

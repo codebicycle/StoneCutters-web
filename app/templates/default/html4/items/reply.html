@@ -1,4 +1,4 @@
-{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
+{% from macros import Breadcrumb, BreadcrumbHome, Errors, FieldText %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToListing"]) }}
 {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
@@ -34,6 +34,11 @@
                 <input type="submit" value="{{ dictionary["contactseller_form.60"] }}" name="submit" class="btns orange">
             </div>
         </div>
+
+
+        <br>
+
+        {{ FieldText('field') }}
     </form>
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
