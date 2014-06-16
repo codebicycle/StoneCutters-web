@@ -39,30 +39,34 @@
     </div>
 {% endmacro %}
 
-{% macro FieldText(field , form , user) %}
+{% macro FieldText(label, name, mandatory, form, user) %}
     <div class="formField">
-        <label>{{field.label}}</label>
-        <input type="text" name="{{field.name}}" id="text-{{field.name}}"{% if (form and form.values and form.values[field.name]) or (field.name == 'email' and user) %} value="{{ form.values[field.name] if form.values[field.name] else user.email }}"{% endif %}>
+        <label>{{ '*' if mandatory == 'true' }} {{label}}</label>
+        <input type="text" name="{{name}}" id="text-{{name}}"
+
+        {% if (form and form.values and form.values[name]) or ((name == 'email' or name == 'name') and user)%}     
+            value="{{ form.values[name] if form.values[name] else (user.email if name == 'email' else user.username) }}"
+        {% endif %}>
     </div>
 {% endmacro %}
 
-{% macro FieldTextArea(field , form) %}
+{% macro FieldTextArea(label, name, mandatory, form, user) %}
     <div class="formField">
-        <label>{{field.label}}</label>
-        <textarea id="text-{{field.name}}" name="{{field.name}}" class="textarea">{% if form and form.values and form.values[field.name] %}{{ form.values[field.name] }}{% endif %}</textarea>
+        <label>{{ '*' if mandatory == 'true' }} {{label}}</label>
+        <textarea id="text-{{name}}" name="{{name}}" class="textarea">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
     </div>
 {% endmacro %}
 
-{% macro FieldCombobox(field , form) %}
+{% macro FieldCombobox(label, name, mandatory, form, user, values) %}
     <div class="formField">
         {% if field.values.length == 1 %}
-            <label>{{field.label}} <strong>{{ field.values[0].value }}</strong></label>
-            <input type="hidden" id="select-{{field.name}}" name="{{field.name}}" value="{{ field.values[0].key }}">
+            <label>{{label}} <strong>{{ field.values[0].value }}</strong></label>
+            <input type="hidden" id="select-{{name}}" name="{{name}}" value="{{ field.values[0].key }}">
         {% else %}
-            <label>{{field.label}}</label>
-            <select id="select-{{field.name}}" name="{{field.name}}">
-                {% for value in field.values %}
-                    <option value="{{value.key}}"{% if form and form.values and form.values[field.name] and form.values[field.name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
+            <label>{{label}}</label>
+            <select id="select-{{name}}" name="{{name}}">
+                {% for value in values %}
+                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
                 {% endfor %}
             </select>
         {% endif %}

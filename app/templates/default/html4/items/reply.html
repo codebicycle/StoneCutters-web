@@ -1,4 +1,4 @@
-{% from macros import Breadcrumb, BreadcrumbHome, Errors, FieldText %}
+{% from macros import Breadcrumb, BreadcrumbHome, Errors, FieldText, FieldTextArea %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToListing"]) }}
 {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
@@ -10,22 +10,15 @@
         <div class="formField">
             <label>{{ dictionary["contactseller_form.55"] }} {{ item.contactName if item.contactName else "anonymous" }}</label>
         </div>
-        <div class="formField">
-            <label>* {{ dictionary["replymessage.Message"] }}</label>
-            <textarea name="message"></textarea>
-        </div>
-        <div class="formField">
-            <label>* {{ dictionary["replymessage.Name"] }}</label>
-            <input type="text" name="name" value="{{ user.username if user.username }}">
-        </div>
-        <div class="formField">
-            <label>* {{ dictionary["replymessage.Email"] }}</label>
-            <input type="text" name="email" value="{{ user.email if user.email }}" >
-        </div>
-        <div class="formField">
-            <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
-            <input type="text" name="phone" value="">
-        </div>
+
+        {% for field in fields %}
+            {% if  field.name == 'message' %}
+                {{ FieldTextArea(dictionary[field.label], field.name, field.mandatory, form) }}
+            {% else %}
+                {{ FieldText(dictionary[field.label], field.name, field.mandatory, form, user) }}
+            {% endif %}
+        {% endfor %}
+       
         <div class="formField">
             <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
         </div>
@@ -37,8 +30,6 @@
 
 
         <br>
-
-        {{ FieldText('field') }}
     </form>
 
     {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
