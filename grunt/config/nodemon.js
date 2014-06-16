@@ -12,6 +12,8 @@ module.exports = function(grunt) {
                 env: {
                     DEBUG: 'arwen:server*,arwen:*:error'
                 },
+                ext: 'js,html',
+                delay: 2000,
                 callback: function(nodemon) {
                     nodemon.on('log', onLog);
                 }
@@ -23,6 +25,8 @@ module.exports = function(grunt) {
                 env: {
                     DEBUG: 'arwen:*'
                 },
+                ext: 'js,html',
+                delay: 2000,
                 callback: function(nodemon) {
                     nodemon.on('log', onLog);
                 }
