@@ -139,6 +139,9 @@ module.exports = {
         function controller() {
             var err = this.app.getSession('error');
 
+            if (typeof window === 'undefined') {
+                this.app.req.res.status(404);
+            }
             if (err) {
                 this.app.deleteSession('error');
             }
