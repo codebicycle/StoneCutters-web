@@ -4,6 +4,7 @@ var RendrView = require('rendr/shared/base/view');
 var _ = require('underscore');
 var helpers = require('../helpers');
 var translations = require('../translations');
+var utils = require('../../shared/utils');
 
 module.exports = RendrView.extend({
     initialize: function() {
@@ -93,5 +94,19 @@ module.exports = RendrView.extend({
                 }
             }
         });
+    },
+    changeLocation: function (e, siteLocation) {
+        var $link = $(this);
+        var href = $link.attr('href');
+        var currentLocation = utils.params(href, 'location');
+
+        if (currentLocation !== siteLocation) {
+            if (siteLocation && ~siteLocation.indexOf('www')) {
+                href = utils.removeParams(href, 'location');
+            }
+            $link.attr({
+                href: utils.link(href, siteLocation)
+            });
+        }
     }
 });

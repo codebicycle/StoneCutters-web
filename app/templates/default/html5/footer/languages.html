@@ -1,10 +1,10 @@
 <footer id="languages">
-	<ul>
+	<ul class="footer-links">
 		{% for language in languages.models %}
 			{% if language.locale == selectedLanguage %}
 				<li><strong>{{language.name}}</strong></li>
 			{% else %}
-				<li><a href="{{ ['?language=', language.locale] | join('') | link }}" rel="nofollow" class="locatable" >{{language.name}}</a></li>
+				<li><a href="{{ ['?language=', language.locale] | join('') | link }}" rel="nofollow" class="footer-link">{{language.name}}</a></li>
 			{% endif %}
 		{% endfor %}
 	</ul>

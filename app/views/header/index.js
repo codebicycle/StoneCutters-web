@@ -67,6 +67,9 @@ module.exports = BaseView.extend({
                 button.addClass('disabled');
             }
         }.bind(this));
+
+        this.$('.logo').on('change:location', this.changeLocation);
+        this.$('.header-links .header-link').on('change:location', this.changeLocation);
     }
 });
 

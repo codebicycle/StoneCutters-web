@@ -15,6 +15,9 @@ module.exports = BaseView.extend({
             languages: this.app.getSession('languages'),
             selectedLanguage: this.app.getSession('selectedLanguage')
         });
+    },
+    postRender: function() {
+        this.$('.footer-links .footer-link').on('change:location', this.changeLocation);
     }
 });
 
