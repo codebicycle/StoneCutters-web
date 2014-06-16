@@ -8,17 +8,14 @@ module.exports = BaseAppView.extend({
     className: 'app_view_index_view',
     initialize: function() {
         function progressBar(loading) {
-            var $progress = $("#progressBar");
-
-            if (loading) {
-                $progress.show();
-                $progress.width('80%');
-            }
-            else {
-                $progress.width('100%');
-                window.setTimeout(function hideProgress() {
-                    $progress.hide();
-                    $progress.width('0');
+            if (loading){ 
+                $("#progressBar").show();
+                $("#progressBar").width('80%');
+            }else{
+                $("#progressBar").width('100%');
+                window.setTimeout(function(){
+                    $("#progressBar").hide();
+                    $("#progressBar").width('0');
                 }, 500);
             }
         }
