@@ -260,7 +260,7 @@ module.exports = {
         }
     },
     reply: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+        helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
             var app = this.app;
