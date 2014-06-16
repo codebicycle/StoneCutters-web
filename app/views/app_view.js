@@ -19,15 +19,11 @@ module.exports = BaseAppView.extend({
                 }, 500);
             }
         }
+
         this.app.on('change:loading', function onLoading(app, loading) {
-            progressBar(loading);            
+            progressBar(loading);
         }, this);
-            
-        
-        $('#search-bar').change(function(){
-            window.location = 'nf/search/' + $('#search-bar').val() + '?location=' + this.app.getSession('siteLocation');
-        });       
-    },
+    }
 });
 
 module.exports.id = 'app_view/index';

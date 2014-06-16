@@ -2,7 +2,6 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
-var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'footer_footer_view',
@@ -15,6 +14,9 @@ module.exports = BaseView.extend({
             user: user,
             location: location
         });
+    },
+    postRender: function() {
+        this.$('.footer-links .footer-link').on('change:location', this.changeLocation);
     }
 });
 

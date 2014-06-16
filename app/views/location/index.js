@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var utils = require('../../../shared/utils');
 
 module.exports = BaseView.extend({
     className: 'location_index_view',
@@ -21,6 +22,15 @@ module.exports = BaseView.extend({
                 custom: [category, '-', '-', action].join('::')
             };
         });
+
+        this.$('.cities-links .city-link').on('click', function(e) {
+            var href = $(e.currentTarget).attr('href');
+            var siteLocation = utils.params(href, 'location');
+
+            $('.logo').trigger('change:location', siteLocation);
+            $('.header-links .header-link').trigger('change:location', siteLocation);
+            $('.footer-links .footer-link').trigger('change:location', siteLocation);
+        }.bind(this));
     }
 });
 

@@ -18,12 +18,12 @@
 		{% endif %}
 	</form>
 </header>
-<div class="list">
+<div class="list cities-links">
 	{% if cities.length %}
 		<h3>{% if search %}{{ dictionary["listingpageitemslisting.AllResultsNew"] }}{% else %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% endif %}</h3>
 		<ul>
 			{% for city in cities %}
-				<li><a href="/{{ target }}?location={{city.url}}">{{ city.name }}</a></li>
+				<li><a href="/{{ target }}?location={{city.url}}" class="city-link">{{ city.name }}</a></li>
 			{% endfor %}
 		</ul>
 	{% else %}
