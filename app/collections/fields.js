@@ -16,9 +16,11 @@ module.exports = Base.extend({
                 url = '/items/fields?intent=edit&location='+params.location+'&categoryId='+params.categoryId+'&languageId='+params.languageId+'&languageCode='+params.languageCode+'&itemId='+params.itemId;
                 if (params.token) {
                     url += '&token='+params.token;
+                    delete params.token;
                 }
                 else if (params.securityKey) {
                     url += '&securityKey='+params.securityKey;
+                    delete params.securityKey;
                 }
                 break;
             case 'catchange':
