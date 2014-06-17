@@ -203,11 +203,11 @@ module.exports = function(app, dataAdapter) {
             function redirect(item) {
                 var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
 
-                res.redirect(301, utils.link(url, req.rendrApp.session.get('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp));
             }
 
             function error(err) {
-                res.redirect(301, utils.link('/location', req.rendrApp.session.get('siteLocation')));
+                res.redirect(301, utils.link('/location', req.rendrApp));
             }
 
             asynquence().or(error)
