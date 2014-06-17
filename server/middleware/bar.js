@@ -20,9 +20,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 bar.revision = build.revision;
                 bar.show = true;
                 bar.env = (process.env.NODE_ENV || 'DEV').toUpperCase();
-                bar.platform = req.rendrApp.getSession('platform').toUpperCase();
+                bar.platform = req.rendrApp.session.get('platform').toUpperCase();
             }
-            req.rendrApp.updateSession({
+            req.rendrApp.session.update({
                 blackBar: bar
             });
             req.rendrApp.req.app.locals({

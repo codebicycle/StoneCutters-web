@@ -77,7 +77,7 @@ module.exports = (function() {
     }
 
     function redirect(url, parameters, options) {
-        var siteLocation = this.app.getSession('siteLocation');
+        var siteLocation = this.app.session.get('siteLocation');
 
         options = (options || {});
         if (options.nolink) {
@@ -87,7 +87,7 @@ module.exports = (function() {
                 siteLocation = options.nolink;
             }
         }
-        url = utils.link(url, siteLocation);
+        url = utils.link(url, this.app);
         if (parameters) {
             url = utils.params(url, parameters);
         }

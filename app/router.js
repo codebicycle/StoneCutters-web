@@ -36,7 +36,7 @@ Router.prototype.triggerRoute = function(event) {
 
 Router.prototype.setReferer = function(event) {
     if (this.previousFragment) {
-        this.app.updateSession({
+        this.app.session.update({
             referer: '/' + this.previousFragment
         });
     }

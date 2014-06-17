@@ -12,7 +12,7 @@ function handleItems(params, callback) {
             params: params
         }
     };
-    var siteLocation = app.getSession('siteLocation');
+    var siteLocation = app.session.get('siteLocation');
     var category = helpers.categories.get(app, params.catId);
     var slug = helpers.common.slugToUrl(category);
     var query;
@@ -34,8 +34,8 @@ function handleItems(params, callback) {
     app.fetch(spec, {
         'readFromCache': false
     }, function afterFetch(err, result) {
-        var protocol = app.getSession('protocol');
-        var host = app.getSession('host');
+        var protocol = app.session.get('protocol');
+        var host = app.session.get('host');
         var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
         var model = result.items.models[0];
         var category = helpers.categories.get(app, query.catId);
@@ -55,7 +55,7 @@ function handleItems(params, callback) {
         helpers.analytics.setPage('listing');
         helpers.analytics.addParam('category', categoryTree.parent);
         helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-        result.analytics = helpers.analytics.generateURL(app.getSession());
+        result.analytics = helpers.analytics.generateURL(app.session.get());
         result.category = category;
         result.type = 'items';
         callback(err, result);
@@ -63,14 +63,14 @@ function handleItems(params, callback) {
 }
 
 function handleShow(params, callback) {
-    var siteLocation = this.app.getSession('siteLocation');
+    var siteLocation = this.app.session.get('siteLocation');
     var category = helpers.categories.get(this.app, params.catId);
     var categoryTree;
 
     categoryTree = helpers.categories.getTree(this.app, params.catId);
 
     helpers.analytics.reset();
-    helpers.analytics.addParam('user', this.app.getSession('user'));
+    helpers.analytics.addParam('user', this.app.session.get('user'));
     helpers.analytics.addParam('category', categoryTree.parent);
     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
 
@@ -81,7 +81,7 @@ function handleShow(params, callback) {
     callback(null, {
         category: category,
         type: 'categories',
-        analytics: helpers.analytics.generateURL(this.app.getSession())
+        analytics: helpers.analytics.generateURL(this.app.session.get())
     });
 }
 

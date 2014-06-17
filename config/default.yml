@@ -17,6 +17,10 @@ smaug:
 session:
   secret: VWaB5TfjGPNWXJATbr6BK3Hy
 
+memcached:
+  hosts:
+    - 'localhost:11211'
+
 cache:
   lifetime:
     default: 60

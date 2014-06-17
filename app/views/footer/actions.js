@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            user: this.app.getSession('user')
+            user: this.app.session.get('user')
         });
     }
 });

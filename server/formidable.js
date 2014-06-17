@@ -81,7 +81,7 @@ function error(req, url, err, values, callback) {
     if (err instanceof Error) {
         throw err;
     }
-    if (req.rendrApp.getSession('platform') === 'wap') {
+    if (req.rendrApp.session.get('platform') === 'wap') {
         errors = [];
         err.forEach(function each(error) {
             var message = '';
@@ -103,7 +103,7 @@ function error(req, url, err, values, callback) {
             }
             errors[error.selector].push(error.message);
         });
-        req.rendrApp.persistSession({
+        req.rendrApp.session.persist({
             form: {
                 values: values,
                 errors: errors

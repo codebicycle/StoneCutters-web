@@ -9,17 +9,17 @@ var intertitial = config.get(['interstitial', 'enabled'], false);
 function setUrlVars() {
     var href;
     if (typeof window === 'undefined') {
-        href = this.app.getSession('protocol') + '://' + this.app.getSession('siteLocation') + this.app.getSession('path');
+        href = this.app.session.get('protocol') + '://' + this.app.session.get('siteLocation') + this.app.session.get('path');
 
-        this.app.updateSession({
+        this.app.session.update({
             href: href
         });
     }
     else {
         var location = window.location;
-        href = this.app.getSession('protocol') + '://' + this.app.getSession('siteLocation') + location.pathname;
+        href = this.app.session.get('protocol') + '://' + this.app.session.get('siteLocation') + location.pathname;
 
-        this.app.updateSession({
+        this.app.session.update({
             path: location.pathname,
             url: location.href,
             href: href
@@ -28,7 +28,7 @@ function setUrlVars() {
 }
 
 function redirect() {
-    var path = this.app.getSession('path');
+    var path = this.app.session.get('path');
 
     if (path.length <= 1 || path.slice(-1) !== '/') {
         if (intertitial && setInterstitial.call(this)) {
@@ -36,18 +36,18 @@ function redirect() {
         }
         return false;
     }
-    this.redirectTo(common.link(path.slice(0, -1), this.app.getSession('siteLocation')), {
+    this.redirectTo(common.link(path.slice(0, -1), this.app), {
         status: 301
     });
     return true;
 }
 
 function cleanSession() {
-    this.app.deleteSession('page');
+    this.app.session.clear('page');
 }
 
 function setCurrentRoute() {
-    this.app.updateSession({
+    this.app.session.update({
         currentRoute: this.currentRoute
     });
 }
@@ -56,8 +56,8 @@ function setReferer() {
     if (typeof window === 'undefined') {
         return;
     }
-    this.app.updateSession({
-        referer: this.app.getSession('referer')
+    this.app.session.update({
+        referer: this.app.session.get('referer')
     });
 }
 
@@ -72,13 +72,13 @@ function setInterstitial() {
     var clicks;
     var currentClicks;
 
-    platform = this.app.getSession('platform');
+    platform = this.app.session.get('platform');
     platforms = config.get(['interstitial', 'ignorePlatform'], []);
     if (_.contains(platforms, platform)) {
         return false;
     }
 
-    path = this.app.getSession('path');
+    path = this.app.session.get('path');
     paths = config.get(['interstitial', 'ignorePath'], []);
     if (_.contains(paths, path)) {
         return false;
@@ -89,33 +89,33 @@ function setInterstitial() {
         return false;
     }
 
-    downloadApp = this.app.getSession('downloadApp');
+    downloadApp = this.app.session.get('downloadApp');
     if (_.isUndefined(downloadApp) || downloadApp !== '1') {
         clicks = config.get(['interstitial', 'clicks'], 1);
-        currentClicks = this.app.getSession('clicks') || 0;
+        currentClicks = this.app.session.get('clicks') || 0;
 
         if (currentClicks < clicks) {
             currentClicks++;
-            this.app.persistSession({
+            this.app.session.persist({
                 clicks: currentClicks
             });
         }
         else {
-            var protocol = this.app.getSession('protocol');
-            var host = this.app.getSession('host');
+            var protocol = this.app.session.get('protocol');
+            var host = this.app.session.get('host');
             var time = config.get(['interstitial', 'time'], 60000);
 
-            this.app.deleteSession('clicks');
-            this.app.persistSession({
+            this.app.session.clear('clicks');
+            this.app.session.persist({
                 downloadApp: time
             });
             if (typeof window !== 'undefined' || platform === 'html5') {
-                this.app.updateSession({
+                this.app.session.update({
                     interstitial: true
                 });
-            } 
+            }
             else {
-                common.redirect.call(this, [url, '?ref=', protocol, '://', host, this.app.getSession('url')].join(''));
+                common.redirect.call(this, [url, '?ref=', protocol, '://', host, this.app.session.get('url')].join(''));
                 return true;
             }
         }
@@ -127,13 +127,13 @@ function setLanguage(params) {
     if (typeof window === 'undefined') {
         return;
     }
-    var languages = this.app.getSession('languages');
-    var selectedLanguage = this.app.getSession('selectedLanguage');
+    var languages = this.app.session.get('languages');
+    var selectedLanguage = this.app.session.get('selectedLanguage');
 
     if (!params || !params.language || selectedLanguage === params.language || !languages._byId[params.language]) {
         return;
     }
-    this.app.persistSession({
+    this.app.session.persist({
         selectedLanguage: params.language
     });
 }
@@ -143,7 +143,7 @@ function setLocation(params, callback) {
         return callback();
     }
     var app = this.app;
-    var location = this.app.getSession('location');
+    var location = this.app.session.get('location');
     var previousLocation;
     var spec;
     var url;
@@ -151,7 +151,7 @@ function setLocation(params, callback) {
     if (!params || !params.location) {
         return callback();
     }
-    previousLocation = this.app.getSession('siteLocation');
+    previousLocation = this.app.session.get('siteLocation');
     if (previousLocation === params.location) {
         return callback();
     }
@@ -173,10 +173,10 @@ function setLocation(params, callback) {
             return;
         }
         location.current = result.location.toJSON();
-        app.persistSession({
+        app.session.persist({
             siteLocation: url
         });
-        app.updateSession({
+        app.session.update({
             location: location
         });
         callback();
@@ -187,7 +187,7 @@ function processForm(params) {
     var form;
     var errors;
 
-    if (this.app.getSession('platform') === 'wap' && params && params.errors) {
+    if (this.app.session.get('platform') === 'wap' && params && params.errors) {
         if (typeof params.errors === 'string') {
             params.errors = [params.errors];
         }
@@ -219,8 +219,8 @@ function processForm(params) {
         });
     }
     else {
-        form = _.clone(this.app.getSession('form'));
-        this.app.deleteSession('form');
+        form = _.clone(this.app.session.get('form'));
+        this.app.session.clear('form');
     }
     return form;
 }

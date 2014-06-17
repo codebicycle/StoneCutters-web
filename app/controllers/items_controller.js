@@ -10,11 +10,11 @@ module.exports = {
 
         function controller() {
             var app = this.app;
-            var user = app.getSession('user');
+            var user = app.session.get('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var siteLocation = app.getSession('siteLocation');
+            var siteLocation = app.session.get('siteLocation');
             var anonymousItem;
             var spec;
 
@@ -70,10 +70,10 @@ module.exports = {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 itemLocation = item.location.children[0].children[0].url;
-                siteLocation = this.app.getSession('siteLocation');
+                siteLocation = this.app.session.get('siteLocation');
                 if (itemLocation.split('.').pop() !== siteLocation.split('.').pop()) {
-                    var protocol = app.getSession('protocol');
-                    var platform = app.getSession('platform');
+                    var protocol = app.session.get('protocol');
+                    var platform = app.session.get('platform');
                     var host = item.location.url.replace('www', 'm');
                     var url = [protocol, '://', platform, '.', host, '/', slug].join('');
 
@@ -97,7 +97,7 @@ module.exports = {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
-                    var user = app.getSession('user');
+                    var user = app.session.get('user');
                     var categoryTree;
                     var title;
                     var description;
@@ -113,7 +113,7 @@ module.exports = {
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                    result.analytics = helpers.analytics.generateURL(app.getSession());
+                    result.analytics = helpers.analytics.generateURL(app.session.get());
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(categoryTree.subCategory) + '?relatedAds=' + itemId;
 
                     title = helpers.seo.shortTitle(item.title, item.location.children[0].children[0].name);
@@ -133,11 +133,11 @@ module.exports = {
 
         function controller() {
             var app = this.app;
-            var user = app.getSession('user');
+            var user = app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
             var pos = Number(params.pos) || 0;
-            var siteLocation = app.getSession('siteLocation');
+            var siteLocation = app.session.get('siteLocation');
             var spec;
             var slug;
 
@@ -183,7 +183,7 @@ module.exports = {
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.session.get());
                 callback(err, result);
             }.bind(this));
         }
@@ -200,8 +200,8 @@ module.exports = {
                     params: params
                 }
             };
-            var user = app.getSession('user');
-            var siteLocation = app.getSession('siteLocation');
+            var user = app.session.get('user');
+            var siteLocation = app.session.get('siteLocation');
             var query;
 
             helpers.pagination.prepare(app, params);
@@ -223,7 +223,7 @@ module.exports = {
             if (!query.search || _.isEmpty(query.search.trim())) {
                 helpers.seo.addMetatag('robots', 'noindex, nofollow');
                 return callback(null, {
-                    analytics: helpers.analytics.generateURL(app.getSession()),
+                    analytics: helpers.analytics.generateURL(app.session.get()),
                     search: '',
                     metadata: {
                         total: 0
@@ -236,8 +236,8 @@ module.exports = {
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var protocol = app.getSession('protocol');
-                var host = app.getSession('host');
+                var protocol = app.session.get('protocol');
+                var host = app.session.get('host');
                 var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
                 var model = result.items.models[0];
 
@@ -253,7 +253,7 @@ module.exports = {
 
                 helpers.pagination.paginate(result.metadata, query, url);
                 helpers.analytics.addParam('page_nb', result.metadata.totalPages);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.session.get());
                 result.search = query.search;
                 callback(err, result);
             }.bind(this));
@@ -264,7 +264,7 @@ module.exports = {
 
         function controller(form) {
             var app = this.app;
-            var user = app.getSession('user');
+            var user = app.session.get('user');
             var spec = {
                 item: {
                     model: 'Item',
@@ -291,7 +291,7 @@ module.exports = {
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.session.get());
                 result.user = user;
                 result.item = item;
                 result.form = form;
@@ -304,7 +304,7 @@ module.exports = {
 
         function controller() {
             var app = this.app;
-            var user = app.getSession('user');
+            var user = app.session.get('user');
             var spec = {
                 item: {
                     model: 'Item',
@@ -331,7 +331,7 @@ module.exports = {
                 helpers.analytics.addParam('item', item);
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.session.get());
                 result.user = user;
                 result.item = item;
                 callback(err, result);
@@ -342,7 +342,7 @@ module.exports = {
         var intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
 
         function add(done) {
-            var user = this.app.getSession('user') || {};
+            var user = this.app.session.get('user') || {};
 
             helpers.dataAdapter.request('post', '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
                 query: {
@@ -365,7 +365,7 @@ module.exports = {
         var itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
 
         function remove(done) {
-            var user = this.app.getSession('user') || {};
+            var user = this.app.session.get('user') || {};
 
             helpers.dataAdapter.request('post', ('/items/' + itemId + '/delete'), {
                 query: {

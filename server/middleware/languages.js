@@ -12,8 +12,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var app = req.rendrApp;
-            var siteLocation = app.getSession('siteLocation');
-            var location = app.getSession('location');
+            var siteLocation = app.session.get('siteLocation');
+            var location = app.session.get('location');
             var languages;
             var selectedLanguage;
 
@@ -35,10 +35,10 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function transition(done) {
-                var lastSelectedLanguage = app.getSession('selectedLanguage');
+                var lastSelectedLanguage = app.session.get('selectedLanguage');
 
                 if (!isNaN(lastSelectedLanguage)) {
-                    app.deleteSession('selectedLanguage');
+                    app.session.clear('selectedLanguage');
                 }
                 done();
             }
@@ -49,15 +49,15 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
-                selectedLanguage = language || app.getSession('selectedLanguage') || languages.models[0].locale;
+                selectedLanguage = language || app.session.get('selectedLanguage') || languages.models[0].locale;
                 done();
             }
 
             function store(done) {
-                app.updateSession({
+                app.session.update({
                     languages: languages
                 });
-                app.persistSession({
+                app.session.persist({
                     selectedLanguage: selectedLanguage
                 });
                 done();

@@ -10,7 +10,7 @@ module.exports = {
             helpers.analytics.reset();
 
             callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.getSession())
+                analytics: helpers.analytics.generateURL(this.app.session.get())
             });
         }
     },
@@ -111,7 +111,7 @@ module.exports = {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 result.items = result.items.models[0].get('data');
-                result.platform = app.getSession('platform');
+                result.platform = app.session.get('platform');
                 callback(err, result);
             });
             */
@@ -122,13 +122,13 @@ module.exports = {
 
         function controller() {
             helpers.analytics.reset();
-            this.app.persistSession({
+            this.app.session.persist({
                 downloadApp: '1'
             }, {
-                maxAge: this.app.getSession('downloadApp')
+                maxAge: this.app.session.get('downloadApp')
             });
             callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.getSession()),
+                analytics: helpers.analytics.generateURL(this.app.session.get()),
                 ref: params.ref
             });
         }
@@ -137,18 +137,18 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var err = this.app.getSession('error');
+            var err = this.app.session.get('error');
 
             if (typeof window === 'undefined') {
                 this.app.req.res.status(404);
             }
             if (err) {
-                this.app.deleteSession('error');
+                this.app.session.clear('error');
             }
             helpers.analytics.reset();
             callback(null, {
                 error: err,
-                analytics: helpers.analytics.generateURL(this.app.getSession())
+                analytics: helpers.analytics.generateURL(this.app.session.get())
             });
         }
 

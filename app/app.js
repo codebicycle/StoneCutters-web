@@ -1,6 +1,7 @@
 'use strict';
 
 var BaseApp = require('rendr/shared/app');
+var Session = require('../shared/session');
 var helpers = require('./helpers');
 
 /**
@@ -30,10 +31,10 @@ module.exports = BaseApp.extend({
         var index = host.indexOf(':');
         var siteLocation = (index === -1) ? host : host.substring(0,index);
 
+        Session.call(this);
         this.templateAdapter.init(siteLocation.replace('m','www'));
         this.templateAdapter.registerHelpers(helpers.nunjucks.helpers);
         this.templateAdapter.registerExtensions(helpers.nunjucks.extensions);
-        helpers.app.setSession.call(this);
     },
 
     /**

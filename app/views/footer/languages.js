@@ -12,8 +12,8 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            languages: this.app.getSession('languages'),
-            selectedLanguage: this.app.getSession('selectedLanguage')
+            languages: this.app.session.get('languages'),
+            selectedLanguage: this.app.session.get('selectedLanguage')
         });
     },
     postRender: function() {

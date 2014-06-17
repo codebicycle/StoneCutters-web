@@ -32,13 +32,13 @@ module.exports = BaseView.extend({
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var platform = this.app.getSession('platform');
-        var currentRoute = this.app.getSession('currentRoute');
+        var platform = this.app.session.get('platform');
+        var currentRoute = this.app.session.get('currentRoute');
         var postButton = readPostButtonConfig(platform, currentRoute);
 
         return _.extend({}, data, {
-            location: this.app.getSession('location'),
-            user: this.app.getSession('user'),
+            location: this.app.session.get('location'),
+            user: this.app.session.get('user'),
             postButton: postButton
         });
     },
@@ -55,8 +55,8 @@ module.exports = BaseView.extend({
             };
         });
         $(document).on('route', function onRoute() {
-            var platform = this.app.getSession('platform');
-            var currentRoute = this.app.getSession('currentRoute');
+            var platform = this.app.session.get('platform');
+            var currentRoute = this.app.session.get('currentRoute');
             var button = $('.postBtn', '#topBar');
             var postButton = readPostButtonConfig(platform, currentRoute);
 

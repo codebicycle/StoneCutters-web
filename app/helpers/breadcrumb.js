@@ -8,7 +8,7 @@ module.exports = (function() {
     var handlers = {
         categories: {
             show: function() {
-                var page = this.app.getSession('page') || 0;
+                var page = this.app.session.get('page') || 0;
                 var categoryId;
                 var category;
                 var breadcrumb;
@@ -18,11 +18,11 @@ module.exports = (function() {
                 }
                 if (page === 1) {
                     categoryId = this.category.parentId;
-                    category = this.app.getSession('categories')._byId[categoryId];
+                    category = this.app.session.get('categories')._byId[categoryId];
                     return '/' + common.slugToUrl(category);
                 }
                 categoryId = this.category.id;
-                category = this.app.getSession('childCategories')[categoryId];
+                category = this.app.session.get('childCategories')[categoryId];
                 breadcrumb = '/' + common.slugToUrl(category);
                 if ((page - 1) > 1) {
                     breadcrumb += '-p-' + (page - 1);
@@ -40,9 +40,9 @@ module.exports = (function() {
         },
         items: {
             show: function() {
-                var page = this.app.getSession('page') || 0;
+                var page = this.app.session.get('page') || 0;
                 var categoryId = this.item.category.id;
-                var category = this.app.getSession('childCategories')[categoryId];
+                var category = this.app.session.get('childCategories')[categoryId];
                 var breadcrumb = '/' + common.slugToUrl(category);
 
                 if (page > 1) {
@@ -65,7 +65,7 @@ module.exports = (function() {
                 return '/' + common.slugToUrl(this.item);
             },
             search: function() {
-                var page = this.app.getSession('page') || 0;
+                var page = this.app.session.get('page') || 0;
                 var breadcrumb;
 
                 if (page === 1) {
@@ -80,14 +80,14 @@ module.exports = (function() {
         },
         user: {
             'my-ads': function() {
-                var platform = this.app.getSession('platform');
+                var platform = this.app.session.get('platform');
 
                 if (platform === 'wap' || platform === 'html4') {
                     return '/myolx';
                 }
             },
             favorites: function() {
-                var platform = this.app.getSession('platform');
+                var platform = this.app.session.get('platform');
 
                 if (platform === 'wap' || platform === 'html4') {
                     return '/myolx';
@@ -97,20 +97,20 @@ module.exports = (function() {
     };
 
     function get(data) {
-        var currentRoute = data.app.getSession('currentRoute');
-        var referer = data.app.getSession('referer');
+        var currentRoute = data.app.session.get('currentRoute');
+        var referer = data.app.session.get('referer');
         var breadcrumb;
         var controller;
 
         if (currentRoute.controller !== this.name.split('/').shift()) {
-            return data.app.getSession('breadcrumb');
+            return data.app.session.get('breadcrumb');
         }
         controller = handlers[currentRoute.controller];
         if (controller && controller[currentRoute.action]) {
             breadcrumb = controller[currentRoute.action].call(data);
         }
         breadcrumb = breadcrumb || referer || '/';
-        data.app.updateSession({
+        data.app.session.update({
             breadcrumb: breadcrumb,
             referer: referer
         });

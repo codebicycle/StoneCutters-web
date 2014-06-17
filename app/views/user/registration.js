@@ -20,8 +20,8 @@ module.exports = BaseView.extend({
         }*/
 
         return _.extend({}, data, {
-            location: this.app.getSession('siteLocation'),
-            user: this.app.getSession('user'),
+            location: this.app.session.get('siteLocation'),
+            user: this.app.session.get('user'),
             params: params
         });
     }

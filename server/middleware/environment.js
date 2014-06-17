@@ -17,15 +17,15 @@ module.exports = function(dataAdapter, excludedUrls) {
             var protocol = req.protocol;
             var host = req.headers.host;
             var url = req.originalUrl;
-            var clientId = app.getSession('clientId');
+            var clientId = app.session.get('clientId');
             var referer = req.headers.referer;
 
             if (typeof clientId === 'undefined') {
-                app.persistSession({
+                app.session.persist({
                     clientId: uuid.v4()
                 });
             }
-            app.updateSession({
+            app.session.update({
                 path: path,
                 protocol: protocol,
                 host: host,

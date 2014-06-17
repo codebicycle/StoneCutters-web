@@ -8,35 +8,35 @@ var utils = require('../../shared/utils');
 
 module.exports = RendrView.extend({
     initialize: function() {
-        if (this.tagName === 'div' && this.app.get('session').platform === 'wap') {
+        if (this.tagName === 'div' && this.app.session.get('platform') === 'wap') {
             this.tagName = 'table';
             this.attributes = this.getWapAttributes();
         }
     },
     getTemplate: function() {
-        var template = this.app.getSession('template');
+        var template = this.app.session.get('template');
 
         return this.app.templateAdapter.getTemplate(template + '/' + this.name);
     },
     getTemplateData: function() {
         var data = RendrView.prototype.getTemplateData.call(this);
-        var template = this.app.getSession('template');
+        var template = this.app.session.get('template');
 
         return _.extend({}, data, {
-            device: this.app.getSession('device'),
-            platform: this.app.getSession('platform'),
+            device: this.app.session.get('device'),
+            platform: this.app.session.get('platform'),
             template: template,
-            siteLocation: this.app.getSession('siteLocation'),
-            location: this.app.getSession('location'),
-            dictionary: translations[this.app.getSession('selectedLanguage') || 'en-US'] || translations['es-ES'],
-            referer: this.app.getSession('referer'),
+            siteLocation: this.app.session.get('siteLocation'),
+            location: this.app.session.get('location'),
+            dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'],
+            referer: this.app.session.get('referer'),
             breadcrumb: helpers.breadcrumb.get.call(this, data),
-            url: this.app.getSession('url'),
-            href: this.app.getSession('href'),
-            sixpack: this.app.getSession('sixpack'),
+            url: this.app.session.get('url'),
+            href: this.app.session.get('href'),
+            sixpack: this.app.session.get('sixpack'),
             macros: 'compiled/' + template + '/partials/macros.html',
-            currentRoute: this.app.getSession('currentRoute'),
-            interstitial: this.app.getSession('interstitial')
+            currentRoute: this.app.session.get('currentRoute'),
+            interstitial: this.app.session.get('interstitial')
         });
     },
     getWapAttributes: function() {

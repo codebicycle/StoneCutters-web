@@ -40,7 +40,7 @@ module.exports = BaseView.extend({
             event.preventDefault();
 
             var api = this.app.get('apiPath');
-            var user = this.app.getSession('user');
+            var user = this.app.session.get('user');
             var itemId = $removeItem.data('itemId');
             var url = [];
 

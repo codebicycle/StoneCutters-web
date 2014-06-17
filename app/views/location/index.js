@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            location: this.app.getSession('location')
+            location: this.app.session.get('location')
         });
     },
     postRender: function() {
@@ -27,9 +27,9 @@ module.exports = BaseView.extend({
             var href = $(e.currentTarget).attr('href');
             var siteLocation = utils.params(href, 'location');
 
-            $('.logo').trigger('change:location', siteLocation);
+            /*$('.logo').trigger('change:location', siteLocation);
             $('.header-links .header-link').trigger('change:location', siteLocation);
-            $('.footer-links .footer-link').trigger('change:location', siteLocation);
+            $('.footer-links .footer-link').trigger('change:location', siteLocation);*/
         }.bind(this));
     }
 });
