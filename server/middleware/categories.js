@@ -12,14 +12,14 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var app = req.rendrApp;
-            var siteLocation = app.getSession('siteLocation');
+            var siteLocation = app.session.get('siteLocation');
             var categories;
             var children;
 
             function fetch(done) {
                 dataAdapter.get(req, '/countries/' + siteLocation + '/categories', {
                     query: {
-                        languageCode: app.getSession('selectedLanguage')
+                        languageCode: app.session.get('selectedLanguage')
                     }
                 }, done.errfcb);
             }
@@ -52,7 +52,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function store(done) {
-                app.updateSession({
+                app.session.update({
                     categories: categories,
                     childCategories: children,
                 });

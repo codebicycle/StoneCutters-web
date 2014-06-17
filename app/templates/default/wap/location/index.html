@@ -15,7 +15,7 @@
                 <tr>
                     <td style="border-top: solid thin #808080; padding:1px 4px;">
                         <small>
-                            <a href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>
+                            <a href="{{ ['/', target or ''] | join | link(location.url) }}">{{ location.name }}</a>
                             {% if location.current and location.current.type != 'country' %}
                                 <small>&#62; {{ location.current.name }}</small>
                             {% endif %}
@@ -57,7 +57,7 @@
                 {% for city in cities %}
                     <tr>
                         <td style="border-top: solid thin #808080;">
-                            <a style="display: block; padding: .25em .5em;" href="/{{ target }}?location={{ city.url }}">
+                            <a style="display: block; padding: .25em .5em;" href="{{ ['/', target or ''] | join | link(city.url) }}">
                                 <small style="display: block;">{{ city.name }}</small>
                             </a>
                         </td>

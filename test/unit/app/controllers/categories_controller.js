@@ -56,7 +56,7 @@ describe('app', function test() {
                     }
 
                     function beforeMiddleware(req, res, next) {
-                        var categories = req.rendrApp.getSession('categories');
+                        var categories = req.rendrApp.session.get('categories');
                         var keys = _.keys(categories._byId);
 
                         category = categories._byId[ _.first(keys) ];
@@ -217,7 +217,7 @@ describe('app', function test() {
                         .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
                         .end(end);
-                    
+
                     function end(err, res) {
                         response = res;
 
@@ -252,7 +252,7 @@ describe('app', function test() {
                     }
 
                     function beforeMiddleware(req, res, next) {
-                        var categories = req.rendrApp.getSession('categories');
+                        var categories = req.rendrApp.session.get('categories');
                         var keys = _.keys(categories._byId);
 
                         category = categories._byId[ _.first(keys) ];

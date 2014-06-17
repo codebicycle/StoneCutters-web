@@ -17,7 +17,7 @@ module.exports = BaseView.extend({
         if (typeof window !== 'undefined' && localStorage) {
             listingView = localStorage.getItem('listingView');
         }else{
-            listingView = this.app.getSession('listingView');
+            listingView = this.app.session.get('listingView');
         }
         if(listingView == 'galView'){
             switchView();
@@ -28,7 +28,7 @@ module.exports = BaseView.extend({
             if (typeof window !== 'undefined' && localStorage) {
                 localStorage.setItem('listingView', current);
             }else{
-                this.app.persistSession({
+                this.app.session.persist({
                     listingView: current
                 });
             }

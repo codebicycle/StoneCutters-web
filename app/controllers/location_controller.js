@@ -14,16 +14,16 @@ module.exports = {
 
             if (!params.search) {
                 return callback(null, {
-                    cities: that.app.getSession('location').topCities.models,
+                    cities: that.app.session.get('location').topCities.models,
                     target: params.target,
-                    analytics: helpers.analytics.generateURL(that.app.getSession())
+                    analytics: helpers.analytics.generateURL(that.app.session.get())
                 });
             }
             spec = {
                 cities: {
                     collection: 'Cities',
                     params: {
-                        location: that.app.getSession('siteLocation'),
+                        location: that.app.session.get('siteLocation'),
                         name: params.search
                     }
                 }
@@ -43,7 +43,7 @@ module.exports = {
                     search: params.search,
                     posting: params.posting,
                     target: params.target,
-                    analytics: helpers.analytics.generateURL(that.app.getSession())
+                    analytics: helpers.analytics.generateURL(that.app.session.get())
                 });
             });
         }

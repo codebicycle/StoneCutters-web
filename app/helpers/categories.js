@@ -2,11 +2,11 @@
 
 module.exports = function categoriesHelper() {
     function get(app, catId) {
-        var categories = app.getSession('categories');
+        var categories = app.session.get('categories');
         var category = categories._byId[catId];
 
         if (!category) {
-            categories = app.getSession('childCategories');
+            categories = app.session.get('childCategories');
             category = categories[catId];
         }
         return category;
@@ -22,7 +22,7 @@ module.exports = function categoriesHelper() {
         }
         return {
             parent: category,
-            subCategory: subCategory 
+            subCategory: subCategory
         };
     }
 

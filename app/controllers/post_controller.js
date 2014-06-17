@@ -19,14 +19,14 @@ module.exports = {
                 !sixpackConfig['post-button'].enabled ||
                 !params.sixpack || params.sixpack !== 'post-button') {
                 return callback(null, {
-                    analytics: helpers.analytics.generateURL(this.app.getSession())
+                    analytics: helpers.analytics.generateURL(this.app.session.get())
                 });
             }
-            var session = new sixpack.Session(this.app.getSession('clientId'), sixpackConfig.url);
+            var session = new sixpack.Session(this.app.session.get('clientId'), sixpackConfig.url);
 
             session.convert('post-button', function(err, res) {
                 callback(null, {
-                    analytics: helpers.analytics.generateURL(this.app.getSession())
+                    analytics: helpers.analytics.generateURL(this.app.session.get())
                 });
             });
         }
@@ -44,7 +44,7 @@ module.exports = {
 
             callback(null, _.extend(params, {
                 subcategories: category.children,
-                analytics: helpers.analytics.generateURL(this.app.getSession())
+                analytics: helpers.analytics.generateURL(this.app.session.get())
             }));
         }
     },
@@ -53,10 +53,10 @@ module.exports = {
 
         function controller(form) {
             var app = this.app;
-            var user = app.getSession('user');
-            var siteLocation = app.getSession('siteLocation');
-            var language = app.getSession('selectedLanguage');
-            var languages = app.getSession('languages');
+            var user = app.session.get('user');
+            var siteLocation = app.session.get('siteLocation');
+            var language = app.session.get('selectedLanguage');
+            var languages = app.session.get('languages');
             var languageId = languages._byId[language].id;
             var languageCode = languages._byId[language].isocode.toLowerCase();
             var spec = {
@@ -75,13 +75,13 @@ module.exports = {
                     }
                 }
             };
-            var categories = app.getSession('categories');
+            var categories = app.session.get('categories');
             var category = categories._byId[params.categoryId];
 
             if (!category) {
                 return helpers.common.redirect.call(this, '/posting');
             }
-            categories = app.getSession('childCategories');
+            categories = app.session.get('childCategories');
             category = categories[params.subcategoryId];
             if (!category) {
                 return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
@@ -103,7 +103,7 @@ module.exports = {
                 helpers.analytics.reset();
                 helpers.analytics.addParam('category', categoryTree.parent);
                 helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                result.analytics = helpers.analytics.generateURL(app.getSession());
+                result.analytics = helpers.analytics.generateURL(app.session.get());
 
                 callback(err, result);
             });
@@ -114,10 +114,10 @@ module.exports = {
 
         function controller(form) {
             var app = this.app;
-            var user = app.getSession('user');
-            var siteLocation = app.getSession('siteLocation');
-            var language = app.getSession('selectedLanguage');
-            var languages = app.getSession('languages');
+            var user = app.session.get('user');
+            var siteLocation = app.session.get('siteLocation');
+            var language = app.session.get('selectedLanguage');
+            var languages = app.session.get('languages');
             var languageId = languages._byId[language].id;
             var languageCode = languages._byId[language].isocode.toLowerCase();
             var securityKey = params.sk;
@@ -214,7 +214,7 @@ module.exports = {
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                    result.analytics = helpers.analytics.generateURL(app.getSession());
+                    result.analytics = helpers.analytics.generateURL(app.session.get());
                     callback(err, result);
                 });
             }
@@ -225,10 +225,10 @@ module.exports = {
 
         function controller() {
             var app = this.app;
-            var user = app.getSession('user');
+            var user = app.session.get('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
-            var siteLocation = app.getSession('siteLocation');
+            var siteLocation = app.session.get('siteLocation');
             var anonymousItem;
             var spec;
 
@@ -285,7 +285,7 @@ module.exports = {
                     'readFromCache': false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
-                    var user = app.getSession('user');
+                    var user = app.session.get('user');
                     var categoryTree;
 
                     result.relatedItems = model.get('data');
@@ -299,7 +299,7 @@ module.exports = {
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', categoryTree.parent);
                     helpers.analytics.addParam('subcategory', categoryTree.subCategory);
-                    result.analytics = helpers.analytics.generateURL(app.getSession());
+                    result.analytics = helpers.analytics.generateURL(app.session.get());
                     callback(err, result);
                 });
             }

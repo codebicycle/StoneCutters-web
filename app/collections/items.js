@@ -6,7 +6,7 @@ var Base = require('./base');
 module.exports = Base.extend({
     model: Item,
     url: function() {
-        var user = this.app.getSession('user') || {};
+        var user = this.app.session.get('user') || {};
         var url;
 
         switch(this.params.item_type) {

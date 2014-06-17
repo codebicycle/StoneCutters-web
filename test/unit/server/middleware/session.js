@@ -32,44 +32,27 @@ describe('server', function test() {
                 function rendrConfiguration(rendrApp) {
                     var response = {};
 
-                    function before(req, res, next) {
-                        response.before = {
-                            session: _.clone(req.rendrApp.get('session')),
-                            hasUpdateSession: !!req.rendrApp.updateSession,
-                            hasGetSession: !!req.rendrApp.getSession,
-                            getSession: {}
-                        };
-                        if (req.rendrApp.getSession) {
-                            response.before.getSession = {
-                                session: req.rendrApp.getSession(),
-                                test: req.rendrApp.getSession('test')
-                            };
-                        }
-                        next();
-                    }
-
                     function after(req, res) {
-                        req.rendrApp.updateSession({
+                        req.rendrApp.session.update({
                             test: 'test'
                         });
                         response.after = {
                             session: _.clone(req.rendrApp.get('session')),
-                            hasUpdateSession: !!req.rendrApp.updateSession,
-                            hasGetSession: !!req.rendrApp.getSession,
-                            hasDeleteSession: !!req.rendrApp.deleteSession,
-                            hasPersistSession: !!req.rendrApp.persistSession,
+                            hasUpdateSession: !!req.rendrApp.session.update,
+                            hasGetSession: !!req.rendrApp.session.get,
+                            hasDeleteSession: !!req.rendrApp.session.clear,
+                            hasPersistSession: !!req.rendrApp.session.update,
                             getSession: {}
                         };
-                        if (req.rendrApp.getSession) {
+                        if (req.rendrApp.session.get) {
                             response.after.getSession = {
-                                session: req.rendrApp.getSession(),
-                                test: req.rendrApp.getSession('test')
+                                session: req.rendrApp.session.get(),
+                                test: req.rendrApp.session.get('test')
                             };
                         }
                         res.json(response);
                     }
 
-                    rendrApp.use(before);
                     rendrApp.use(middleware.session());
                     rendrApp.use(after);
                 }
@@ -89,37 +72,31 @@ describe('server', function test() {
             describe('rendrApp', function test() {
                 describe('.session', function test() {
                     it('should be added', function test(done) {
-                        var before = response.body.before;
                         var after = response.body.after;
 
-                        (function existance(before, after) {
-                            should.not.exist(before);
+                        (function existance(after) {
                             should.exist(after);
-                        })(before.session, after.session);
+                        })(after.session);
 
                         done();
                     });
                 });
-                describe('.updateSession(Object)', function test() {
+                describe('.session.update(Object)', function test() {
                     it('should be added', function test(done) {
-                        var before = response.body.before;
                         var after = response.body.after;
 
-                        (function existance(before, after, ok) {
-                            ok = before.should.not.be.ok;
+                        (function existance(after, ok) {
                             ok = after.should.be.ok;
-                        })(before.hasUpdateSession, after.hasUpdateSession);
+                        })(after.hasUpdateSession);
 
                         done();
                     });
                     it("should add each Object's key/value pair to session", function test(done) {
-                        var before = response.body.before;
                         var after = response.body.after;
 
-                        (function existance(before, after) {
-                            before.should.not.have.property('test');
+                        (function existance(after) {
                             after.should.have.property('test');
-                        })(before.session || {}, after.session);
+                        })(after.session);
 
                         (function equality(test) {
                             test.should.equal('test');
@@ -128,37 +105,31 @@ describe('server', function test() {
                         done();
                     });
                 });
-                describe('.getSession(String)', function test() {
+                describe('.session.get(String)', function test() {
                     it('should be added', function test(done) {
-                        var before = response.body.before;
                         var after = response.body.after;
 
-                        (function existance(before, after, ok) {
-                            ok = before.should.not.be.ok;
+                        (function existance(after, ok) {
                             ok = after.should.be.ok;
-                        })(before.hasGetSession, after.hasGetSession);
+                        })(after.hasGetSession);
 
                         done();
                     });
                     it('should return session[String]', function test(done) {
-                        var before = response.body.before;
                         var after = response.body.after;
 
-                        (function existance(before, after) {
-                            before.should.not.have.property('test');
+                        (function existance(after) {
                             after.should.have.property('test');
-                        })(before.getSession, after.getSession);
+                        })(after.getSession);
 
                         done();
                     });
                     it('should return session if String is falsey', function test(done) {
-                        var before = response.body.before;
                         var after = response.body.after;
 
-                        (function existance(before, after) {
-                            before.should.not.have.property('session');
+                        (function existance(after) {
                             after.should.have.property('session');
-                        })(before.getSession, after.getSession);
+                        })(after.getSession);
 
                         done();
                     });

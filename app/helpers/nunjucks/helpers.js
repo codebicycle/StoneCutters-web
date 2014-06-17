@@ -102,12 +102,12 @@ module.exports = function(nunjucks) {
                     }
                     else {
                         var replace = '';
-                        
+
                         out.push('<a href="');
                         if (_page > 1) {
                             replace = '-p-' + _page;
                         }
-                        out.push(common.link(url.replace(regExp, replace), context.siteLocation));
+                        out.push(common.link(url.replace(regExp, replace), context.app));
                         prepareStyle(isLast);
                         out.push('">');
                         out.push(_page);
@@ -141,8 +141,13 @@ module.exports = function(nunjucks) {
         is: function(value, type) {
             return typeof value === type;
         },
-        link: function (href) {
-            return common.link(href, this.ctx.siteLocation);
+        link: function (href, siteLocation) {
+            var params = {};
+
+            if (siteLocation) {
+                params.location = siteLocation;
+            }
+            return common.link(href, this.ctx.app, params);
         },
         escape: function (text) {
             return encodeURIComponent(text);

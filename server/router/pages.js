@@ -85,7 +85,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/analytics/pageview.gif', handler);
 
         function graphiteTracking(req) {
-            var location = req.rendrApp.getSession('location');
+            var location = req.rendrApp.session.get('location');
 
             graphite.send([location.name, req.query.platform], 1, '+');
         }
@@ -108,7 +108,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var location = req.rendrApp.getSession('location');
+            var location = req.rendrApp.session.get('location');
             var atiConfig = configClient.get(['analytics', 'ati', 'paths', location.id]);
             var analytic;
 
@@ -116,7 +116,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 analytic = new Analytic('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer,
-                    clientId: req.rendrApp.getSession('clientId').substr(24)
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 });
                 analytic.trackPage({
                     page: req.query.page,
@@ -162,7 +162,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var location = req.rendrApp.getSession('location');
+            var location = req.rendrApp.session.get('location');
             var atiConfig = configClient.get(['analytics', 'ati', 'paths', location.id]);
             var analytic;
 
@@ -170,7 +170,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 analytic = new Analytic('ati-event', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer,
-                    clientId: req.rendrApp.getSession('clientId').substr(24)
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 });
                 analytic.trackPage({
                     custom: req.query.custom,

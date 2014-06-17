@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            blackBar: this.app.getSession('blackBar')
+            blackBar: this.app.session.get('blackBar')
         });
     }
 });

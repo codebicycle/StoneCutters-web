@@ -12,7 +12,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var app = req.rendrApp;
-            var previousLocation = app.getSession('siteLocation');
+            var previousLocation = app.session.get('siteLocation');
             var siteLocation = req.param('location', previousLocation);
             var host = req.headers.host;
             var index = host.indexOf(':');
@@ -68,10 +68,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (location.current) {
                     siteLocation = location.current.url;
                 }
-                app.persistSession({
+                app.session.persist({
                     siteLocation: siteLocation
                 });
-                app.updateSession({
+                app.session.update({
                     location: location
                 });
                 done();

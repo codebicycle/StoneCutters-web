@@ -5,11 +5,11 @@ var env = process.env.NODE_ENV || 'development';
 
 exports = module.exports = function errorHandler() {
     function isRedirection(app) {
-        if (app.getSession('errorDirection')) {
-            app.deleteSession('errorDirection');
+        if (app.session.get('errorDirection')) {
+            app.session.clear('errorDirection');
             return true;
         }
-        app.persistSession({
+        app.session.persist({
             errorDirection: true
         });
         return false;
@@ -34,7 +34,7 @@ exports = module.exports = function errorHandler() {
         }
         if (~accept.indexOf('html')) {
             if (config.get(['error', 'detail'], true)) {
-                req.rendrApp.persistSession({
+                req.rendrApp.session.persist({
                     error: {
                         statusCode: res.statusCode,
                         message: err.message,
@@ -42,7 +42,7 @@ exports = module.exports = function errorHandler() {
                     }
                 });
             }
-            res.redirect(utils.link('/500', req.rendrApp.getSession('siteLocation')));
+            res.redirect(utils.link('/500', req.rendrApp));
         }
         else if (~accept.indexOf('json')) {
             var error = { message: err.message };

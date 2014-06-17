@@ -12,8 +12,8 @@ module.exports = BaseView.extend({
 
         return _.extend({}, data, {
             head: helpers.seo.getHead(),
-            template: this.app.getSession('template'),
-            location: this.app.getSession('location')
+            template: this.app.session.get('template'),
+            location: this.app.session.get('location')
         });
     },
     postRender: function() {

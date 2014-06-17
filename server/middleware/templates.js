@@ -18,8 +18,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var app = req.rendrApp;
-            var location = app.getSession('location');
-            var siteLocation = app.getSession('siteLocation');
+            var location = app.session.get('location');
+            var siteLocation = app.session.get('siteLocation');
             var userAgent = req.get('user-agent');
 
             function callback(err, response, body) {
@@ -45,7 +45,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     directory = siteLocation;
                 }
                 template = directory + '/' + platform;
-                app.updateSession({
+                app.session.update({
                     device: device,
                     directory: directory,
                     platform: platform,

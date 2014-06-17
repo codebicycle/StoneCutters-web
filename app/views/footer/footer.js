@@ -8,8 +8,8 @@ module.exports = BaseView.extend({
     className: 'footer_footer_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
-        var user = this.app.getSession('user');
-        var location = this.app.getSession('location');
+        var user = this.app.session.get('user');
+        var location = this.app.session.get('location');
 
         return _.extend({}, data, {
             user: user,

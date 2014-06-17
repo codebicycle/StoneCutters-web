@@ -110,20 +110,20 @@ module.exports = (function() {
     }
 
     function prepare(app, params) {
-        var max = config.get(['smaug', app.getSession('platform'), 'maxPageSize'], 25);
+        var max = config.get(['smaug', app.session.get('platform'), 'maxPageSize'], 25);
 
         if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
             params.pageSize = max;
         }
         params.item_type = 'adsList';
-        params.location = app.getSession('siteLocation');
+        params.location = app.session.get('siteLocation');
         params.page = (params.page && !isNaN(Number(params.page)) ? Number(params.page) : 1);
-        app.persistSession({
+        app.session.persist({
             page: params.page
         });
         params.offset = (params.page - 1) * params.pageSize;
         if (params.search) {
-            if (params.search === 'undefined' && !~app.getSession('path').indexOf('undefined')) {
+            if (params.search === 'undefined' && !~app.session.get('path').indexOf('undefined')) {
                 delete params.search;
             }
             params.searchTerm = params.search;

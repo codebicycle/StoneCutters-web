@@ -51,14 +51,14 @@ describe('server', function test() {
 
                         function before(req, res, next) {
                             response.before = {
-                                session: _.clone(req.rendrApp.getSession())
+                                session: _.clone(req.rendrApp.session.get())
                             };
                             next();
                         }
 
                         function after(req, res) {
                             response.after = {
-                                session: _.clone(req.rendrApp.getSession())
+                                session: _.clone(req.rendrApp.session.get())
                             };
                             res.json(response);
                         }

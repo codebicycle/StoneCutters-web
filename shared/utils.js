@@ -12,7 +12,7 @@ var utils = {
 if (isServer) {
     var querystringName = 'querystring';
     utils.qs = require(querystringName);
-} 
+}
 else {
     utils.qs = {
         parse: function () {
@@ -24,14 +24,23 @@ else {
     };
 }
 
-function link(href, siteLocation) {
-    if (siteLocation && !~siteLocation.indexOf('www.')) {
+function link(href, app, query) {
+    var siteLocation = app.session.get('siteLocation');
+
+    query = query || {};
+    if (!query.location && siteLocation && !~siteLocation.indexOf('www.')) {
         href = params(href, 'location', siteLocation);
+    }
+    if (app.session.get('platform') === 'wap') {
+        href = params(href, 'sid', app.session.get('sid'));
+    }
+    if (!_.isEmpty(query)) {
+        href = params(href, query);
     }
     return href;
 };
 
-function params(url, name, value) {
+function params(url, keys, value) {
     var parts = url.split('?');
     var parameters = {};
     var out = [];
@@ -40,14 +49,14 @@ function params(url, name, value) {
     if (parts.length) {
         parameters = utils.qs.parse(parts.join('?'));
     }
-    if (_.isObject(name)) {
-        parameters = _.extend(parameters, name);
+    if (_.isObject(keys)) {
+        parameters = _.extend(parameters, keys);
     }
     else if (!value) {
-        return parameters[name];
+        return parameters[keys];
     }
     else {
-        parameters[name] = value;
+        parameters[keys] = value;
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
@@ -59,7 +68,7 @@ function params(url, name, value) {
     return out.join('');
 }
 
-function removeParams(url, name) {
+function removeParams(url, keys) {
     var parts = url.split('?');
     var parameters = {};
     var out = [];
@@ -68,13 +77,13 @@ function removeParams(url, name) {
     if (parts.length) {
         parameters = utils.qs.parse(parts.join('?'));
     }
-    if (_.isObject(name)) {
+    if (_.isObject(keys)) {
         parameters = _.filter(parameters, function filter(key) {
-            return !_.contains(name, key);
+            return !_.contains(keys, key);
         });
     }
     else {
-        delete parameters[name];
+        delete parameters[keys];
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');

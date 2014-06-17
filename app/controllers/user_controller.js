@@ -28,7 +28,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            this.app.deleteSession('user');
+            this.app.session.clear('user');
             return helpers.common.redirect.call(this, '/', null, {
                 pushState: false
             });
@@ -45,7 +45,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
-            var user = this.app.getSession('user') || {};
+            var user = this.app.session.get('user') || {};
             var spec = {
                 myAds: {
                     collection: 'Items',
@@ -57,7 +57,7 @@ module.exports = {
             var query = _.clone(params);
 
             _.extend(spec.myAds.params, params, {
-                location: this.app.getSession('siteLocation'),
+                location: this.app.session.get('siteLocation'),
                 item_type: 'myAds'
             });
             this.app.fetch(spec, function afterFetch(err, result) {
@@ -80,7 +80,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
-            var user = this.app.getSession('user') || {};
+            var user = this.app.session.get('user') || {};
             var spec = {
                 favorites: {
                     collection: 'Items',
@@ -91,7 +91,7 @@ module.exports = {
             };
 
             _.extend(spec.favorites.params, params, {
-                location: this.app.getSession('siteLocation'),
+                location: this.app.session.get('siteLocation'),
                 item_type: 'favorites'
             });
             this.app.fetch(spec, function afterFetch(err, result) {

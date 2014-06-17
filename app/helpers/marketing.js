@@ -2,10 +2,10 @@
 
 module.exports = {
     getInfo: function(app, medium) {
-        var marketing = app.getSession('marketing');
-        var platform = app.getSession('platform');
-        var dictionary = require('../translations')[app.getSession('selectedLanguage')];
-        var osName = marketing.osName; 
+        var marketing = app.session.get('marketing');
+        var platform = app.session.get('platform');
+        var dictionary = require('../translations')[app.session.get('selectedLanguage')];
+        var osName = marketing.osName;
         var osVersion = marketing.osVersion;
         var data = {};
 

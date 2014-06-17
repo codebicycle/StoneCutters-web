@@ -22,11 +22,11 @@ module.exports = BaseView.extend({
         if (interstitial.length) {
             interstitial.prependTo($('body'));
             $(views).addClass('hide');
-            
+
             $('.closeInterstitial').on('click', function(e) {
                 interstitial.remove();
                 $(views).removeClass('hide');
-                this.app.deleteSession('interstitial');
+                this.app.session.clear('interstitial');
             }.bind(this));
 
             this.attachTrackMe('interstitial-action', function(category, action) {
@@ -37,14 +37,14 @@ module.exports = BaseView.extend({
 
             helpers.analytics.reset();
             helpers.analytics.setPage('pages#interstitial');
-            this.app.persistSession({
+            this.app.session.persist({
                 downloadApp: '1'
             }, {
-                maxAge: this.app.getSession('downloadApp')
+                maxAge: this.app.session.get('downloadApp')
             });
             img = $('<img/>');
             img.addClass('analytics');
-            img.attr('src', helpers.analytics.generateURL(this.app.getSession()));
+            img.attr('src', helpers.analytics.generateURL(this.app.session.get()));
             interstitial.append(img);
         }
     }

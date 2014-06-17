@@ -9,10 +9,10 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var platform = this.app.getSession('platform');
+            var platform = this.app.session.get('platform');
             var icons = config.get(['icons', platform], []);
-            var country = this.app.getSession('location').url;
-            var siteLocation = this.app.getSession('siteLocation');
+            var country = this.app.session.get('location').url;
+            var siteLocation = this.app.session.get('siteLocation');
 
             helpers.analytics.reset();
 
@@ -22,9 +22,9 @@ module.exports = {
             helpers.seo.addMetatag('robots', 'NOFOLLOW');
             helpers.seo.addMetatag('canonical', 'http://' + siteLocation);
             callback(null, {
-                categories: this.app.getSession('categories'),
+                categories: this.app.session.get('categories'),
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                analytics: helpers.analytics.generateURL(this.app.getSession())
+                analytics: helpers.analytics.generateURL(this.app.session.get())
             });
         }
     }

@@ -22,7 +22,7 @@ module.exports = function(app, dataAdapter) {
                 var options = {
                     data: data
                 };
-                var user = req.rendrApp.getSession('user');
+                var user = req.rendrApp.session.get('user');
 
                 reply = data;
                 if (user) {
@@ -30,19 +30,19 @@ module.exports = function(app, dataAdapter) {
                         token: user.token
                     };
                 }
-                data.platform = req.rendrApp.getSession('platform');
+                data.platform = req.rendrApp.session.get('platform');
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
             function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp));
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, reply, function redirect(url) {
-                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                    res.redirect(301, utils.link(url, req.rendrApp));
                 });
             }
 
@@ -107,7 +107,7 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/images', {
                     query: {
                         postingSession: item.postingSession,
-                        url: req.rendrApp.getSession('siteLocation')
+                        url: req.rendrApp.session.get('siteLocation')
                     },
                     data: data,
                     multipart: true
@@ -119,7 +119,7 @@ module.exports = function(app, dataAdapter) {
                     postingSession: item.postingSession,
                     languageCode: item.languageCode
                 };
-                var user = req.rendrApp.getSession('user');
+                var user = req.rendrApp.session.get('user');
 
                 if (!item.id) {
                     query.intent = 'create';
@@ -149,13 +149,13 @@ module.exports = function(app, dataAdapter) {
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp));
                 clean();
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, item, function redirect(url) {
-                    res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                    res.redirect(301, utils.link(url, req.rendrApp));
                     clean();
                 });
             }
@@ -192,7 +192,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function store(done, item) {
-                req.rendrApp.persistSession({
+                req.rendrApp.session.persist({
                     form: {
                         values: item
                     }
@@ -203,11 +203,11 @@ module.exports = function(app, dataAdapter) {
             function redirect(item) {
                 var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
 
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp.session.get('siteLocation')));
             }
 
             function error(err) {
-                res.redirect(301, utils.link('/location', req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link('/location', req.rendrApp.session.get('siteLocation')));
             }
 
             asynquence().or(error)
@@ -226,7 +226,7 @@ module.exports = function(app, dataAdapter) {
             formidable.parse(req, function callback(err, data) {
                 var url = '/nf/search' + (data.search ? ('/' + data.search) : '');
 
-                res.redirect(301, utils.link(url, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(url, req.rendrApp));
             });
         }
     })();
@@ -264,7 +264,7 @@ module.exports = function(app, dataAdapter) {
                         data.currentURL = replaceParam(data.currentURL, data.name + '_', from + '_' + to);
                     }
                 }
-                res.redirect(301, utils.link(data.currentURL, req.rendrApp.getSession('siteLocation')));
+                res.redirect(301, utils.link(data.currentURL, req.rendrApp));
             });
         }
     })();

@@ -14,7 +14,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
 
-            var clientId = req.rendrApp.getSession('clientId') || uuid.v4();
+            var clientId = req.rendrApp.session.get('clientId') || uuid.v4();
             var session = new sixpack.Session(clientId, config.url, req.ip, req.get('user-agent'));
             var gate = [];
             var sixpackData = {};
@@ -47,10 +47,10 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function done() {
-                req.rendrApp.updateSession({
+                req.rendrApp.session.update({
                     sixpack: sixpackData
                 });
-                req.rendrApp.persistSession({
+                req.rendrApp.session.persist({
                     clientId: clientId
                 });
                 next();

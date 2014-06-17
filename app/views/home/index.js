@@ -12,14 +12,14 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            location: this.app.getSession('location')
+            location: this.app.session.get('location')
         });
     },
     postRender: function() {
         if ($('.registerSuccess').length) {
             var category = 'Account';
             var action = 'register_confirmation';
-            
+
             this.track({
                 category: category,
                 action: action,

@@ -9,9 +9,9 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            categories: this.app.getSession('categories'),
-            siteLocation: this.app.getSession('siteLocation'),
-            user: this.app.getSession('user')
+            categories: this.app.session.get('categories'),
+            siteLocation: this.app.session.get('siteLocation'),
+            user: this.app.session.get('user')
         });
     }
 });
