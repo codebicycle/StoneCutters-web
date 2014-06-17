@@ -10,6 +10,7 @@ module.exports = BaseView.extend({
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
+        data.itemLocation = parse(data.form.values.location);
 
         return _.extend({}, data, {});
     },
@@ -41,7 +42,18 @@ module.exports = BaseView.extend({
                 $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('empty').removeClass('loading');
             });
         });
-    }
+    },
+    
 });
+
+function parse(location) {
+    if (location.children && location.children[0]) {
+        if (location.children[0].children && location.children[0].children[0]) {
+            return location.children[0].children[0];
+        }
+        return location.children[0];
+    }
+    return location;
+}
 
 module.exports.id = 'post/edit';
