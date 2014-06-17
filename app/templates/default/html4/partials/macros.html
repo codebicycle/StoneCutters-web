@@ -43,7 +43,6 @@
     <div class="formField">
         <label>{{ '* ' if mandatory == 'true' }}{{label}}</label>
         <input type="text" name="{{name}}" id="text-{{name}}"
-
         {% if (form and form.values and form.values[name]) or ((name == 'email' or name == 'name') and user)%}     
             value="{{ form.values[name] if form.values[name] else (user.email if name == 'email' else user.username) }}"
         {% endif %}>
@@ -53,17 +52,15 @@
 {% macro FieldTextArea(label, name, mandatory, form, user) %}
     <div class="formField">
         <label>{{ '* ' if mandatory == 'true' }}{{label}}</label>
-        <textarea id="text-{{name}}" name="{{name}}" class="textarea">
-            {% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}
-        </textarea>
+        <textarea id="text-{{name}}" name="{{name}}" class="textarea">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
     </div>
 {% endmacro %}
 
 {% macro FieldCombobox(label, name, mandatory, form, user, values) %}
     <div class="formField">
         {% if values.length == 1 %}
-            <label>{{label}} <strong>{{ field.values[0].value }}</strong></label>
-            <input type="hidden" id="select-{{name}}" name="{{name}}" value="{{ field.values[0].key }}">
+            <label>{{label}} <strong>{{ values[0].value }}</strong></label>
+            <input type="hidden" id="select-{{name}}" name="{{name}}" value="{{ values[0].key }}">
         {% else %}
             <label>{{label}}</label>
             <select id="select-{{name}}" name="{{name}}">

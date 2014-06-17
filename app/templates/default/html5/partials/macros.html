@@ -19,7 +19,6 @@
     <div id="errors">
         {% for field, messages in errors %}
             {% for message in messages %}
-
                 {% if field == 'priceC' %}
                     <span>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</span><br/>
                 {% elif field ==  'contactName' %}
@@ -44,9 +43,7 @@
 
 {% macro FieldTextArea(label, name, mandatory, form, user) %}
     <label>{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-    <textarea id="text-{{name}}" name="{{name}}" class="textarea">
-        {% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}
-    </textarea>
+    <textarea id="text-{{name}}" name="{{name}}" class="textarea">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
 {% endmacro %}
 
 {% macro FieldCombobox(label, name, mandatory, form, user, values) %}
