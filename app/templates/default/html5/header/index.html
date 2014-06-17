@@ -10,9 +10,9 @@
         {% endif %}
         <li class="postBtn{% if not postButton %} disabled{% endif %}">
             {% if location.current %}
-                <a href="{{ '/posting' | link }}" class="btns orange header-link">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+                <a href="{{ '/posting' | link }}" class="btns orange posting-link trackMe">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% else %}
-                <a href="{{ '/location?target=posting' | link }}" class="btns orange header-link trackMe" data-tracking="Posting-ClickSelectLocation" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+                <a href="{{ '/location?target=posting' | link }}" class="btns orange posting-link trackMe" data-tracking="Posting-ClickSelectLocation" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% endif %}
         </li>
     </ul>
