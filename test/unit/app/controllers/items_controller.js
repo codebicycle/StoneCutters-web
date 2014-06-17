@@ -236,7 +236,7 @@ describe('app', function test() {
 
                     function beforeMiddleware(req, res, next) {
                         var params = {
-                            search: 'a'
+                            search: 'e'
                         };
 
                         reset(req, res, 'search', next);
