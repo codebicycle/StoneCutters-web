@@ -30,11 +30,16 @@ module.exports = BaseView.extend({
                 if (siteLocation && ~siteLocation.indexOf('www')) {
                     href = utils.removeParams(href, 'location');
                 }
+                else {
+                    href = utils.link(href, this.app, {
+                        location: siteLocation
+                    });
+                }
                 $link.attr({
-                    href: utils.link(href, siteLocation)
+                    href: href
                 });
             }
-        });
+        }.bind(this));
     }
 });
 

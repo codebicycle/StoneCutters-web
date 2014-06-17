@@ -14,5 +14,5 @@
             <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="btns orange">
         </div>
     </form>
-    <a href="/register">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
+    <a href="{{ '/register' | link }}">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
 </section>
