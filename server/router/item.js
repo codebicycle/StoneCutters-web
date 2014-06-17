@@ -12,6 +12,7 @@ module.exports = function(app, dataAdapter) {
 
         function handler(req, res) {
             var itemId = req.param('itemId', null);
+            var reply;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
@@ -23,6 +24,7 @@ module.exports = function(app, dataAdapter) {
                 };
                 var user = req.rendrApp.session.get('user');
 
+                reply = data;
                 if (user) {
                     options.query = {
                         token: user.token
@@ -39,7 +41,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                formidable.error(req, req.headers.referer.split('?').shift(), err, function redirect(url) {
+                formidable.error(req, req.headers.referer.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp));
                 });
             }
@@ -175,6 +177,43 @@ module.exports = function(app, dataAdapter) {
                 .then(postImages)
                 .then(post)
                 .val(success);
+        }
+    })();
+
+    (function postLocation() {
+        app.post('/post/location', handler);
+
+        function handler(req, res, next) {
+
+            function parse(done) {
+                formidable.parse(req, {
+                    acceptFiles: true
+                }, done.errfcb);
+            }
+
+            function store(done, item) {
+                req.rendrApp.session.persist({
+                    form: {
+                        values: item
+                    }
+                });
+                done(item);
+            }
+
+            function redirect(item) {
+                var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
+
+                res.redirect(301, utils.link(url, req.rendrApp.session.get('siteLocation')));
+            }
+
+            function error(err) {
+                res.redirect(301, utils.link('/location', req.rendrApp.session.get('siteLocation')));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(store)
+                .val(redirect);
         }
     })();
 

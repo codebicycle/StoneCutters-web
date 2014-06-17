@@ -183,10 +183,13 @@ function setLocation(params, callback) {
     });
 }
 
-function processForm(params) {
+function processForm(params, isForm) {
     var form;
     var errors;
 
+    if (!isForm) {
+        return;
+    }
     if (this.app.session.get('platform') === 'wap' && params && params.errors) {
         if (typeof params.errors === 'string') {
             params.errors = [params.errors];
@@ -226,7 +229,11 @@ function processForm(params) {
 }
 
 module.exports = {
-    control: function(params, callback) {
+    control: function(params, isForm, callback) {
+        if (isForm instanceof Function) {
+            callback = isForm;
+            isForm = false;
+        }
         setUrlVars.call(this);
         if (!redirect.call(this)) {
             cleanSession.call(this);
@@ -234,7 +241,7 @@ module.exports = {
             setReferer.call(this);
             setLanguage.call(this, params);
             setLocation.call(this, params, function next() {
-                callback.call(this, processForm.call(this, params));
+                callback.call(this, processForm.call(this, params, isForm));
             }.bind(this));
         }
     }

@@ -5,7 +5,7 @@ var helpers = require('../helpers');
 
 module.exports = {
     registration: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+        helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
             callback(null, {
@@ -15,7 +15,7 @@ module.exports = {
         }
     },
     login: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+        helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
             callback(null, {
@@ -42,7 +42,7 @@ module.exports = {
         }
     },
     'my-ads': function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+        helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
             var user = this.app.session.get('user') || {};
@@ -77,7 +77,7 @@ module.exports = {
         }
     },
     favorites: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+        helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
             var user = this.app.session.get('user') || {};

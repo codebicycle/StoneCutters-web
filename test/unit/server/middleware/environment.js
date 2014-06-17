@@ -45,7 +45,7 @@ describe('server', function test() {
                             host: req.headers.host,
                             pathname: req._parsedUrl.pathname,
                             originalUrl: req.originalUrl,
-                            session: _.clone(req.rendrApp.getSession())
+                            session: _.clone(req.rendrApp.session.get())
                         };
                         next();
                     }
@@ -55,7 +55,7 @@ describe('server', function test() {
                             host: req.headers.host,
                             pathname: req._parsedUrl.pathname,
                             originalUrl: req.originalUrl,
-                            session: _.clone(req.rendrApp.getSession())
+                            session: _.clone(req.rendrApp.session.get())
                         };
                         res.json(response);
                     }

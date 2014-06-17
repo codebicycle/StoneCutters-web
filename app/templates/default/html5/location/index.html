@@ -5,7 +5,7 @@
 	<p>
 		<a class="big" href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>
 		{% if location.current and location.current.type != 'country' %}
-			<small>&#62; {{ location.current.name }}</small>
+			<span>&#62; {{ location.current.name }}</span>
 		{% endif %}
 	</p>
 </header>

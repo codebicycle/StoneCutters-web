@@ -57,3 +57,36 @@
         </tbody>
     </table>
 {% endmacro %}
+
+{% macro FieldText(label, name, mandatory, form, user) %}
+    <label style="display: block; padding-top: .5em;">
+        <small>{{ '* ' if mandatory == 'true' }}{{ label }}</small>
+        <br />
+        <input type="text" name="{{name}}" id="text-{{name}}" value="">
+    </label>
+{% endmacro %}
+
+{% macro FieldTextArea(label, name, mandatory, form, user) %}
+    <label style="display: block; padding-top: .5em;">
+        <small>{{ '* ' if mandatory == 'true' }}{{ label }}</small>
+        <br />
+        <textarea id="text-{{name}}" name="{{name}}" ></textarea>
+    </label>
+{% endmacro %}
+
+{% macro FieldCombobox(label, name, mandatory, form, user, values) %}
+    <label style="display: block; padding-top: .5em;">
+        {% if values.length == 1 %}
+            <small>{{label}}: <strong>{{ values[0].value }}</strong></small>
+            <input type="hidden" name="{{name}}" value="{{ values[0].key }}">
+        {% else %}
+            <small>{{label}}</small>
+            <br />
+            <select id="select-{{name}}" name="{{name}}">
+                {% for value in values %}
+                    <option value="{{value.key}}" {% if (field.value) and (field.value.key == value.key) %}selected="selected"{% endif %}>{{value.value}}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    </label>
+{% endmacro %}

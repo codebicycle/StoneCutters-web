@@ -10,6 +10,7 @@ module.exports = BaseView.extend({
     },
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
+        data.fields = [{ name: 'message', label: 'replymessage.Message', mandatory: 'true'},{name: 'name', label: 'replymessage.Name', mandatory: 'false'}, {name: 'email', label: 'replymessage.Email', mandatory: 'true'}, {name: 'phone', label: 'itemgeneraldetails.Phone'}];
 
         return _.extend({}, data, {});
     }
