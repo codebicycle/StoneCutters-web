@@ -5,13 +5,15 @@
 </tr>
 <tr>
     <td style="padding: .5em .5em .25em; border-top: solid thin #808080;">
-        <strong>{{ dictionary["posting_fields_1.YourAdHasBeenSuccessfullySubmittedForApproval"] }}</strong>
+        <strong style="color:#494949;">{{ dictionary["misc.AllSet_Mob"] }}</strong><br>
+        <strong style="color:#e2771c;">{{ dictionary["misc.AdSubmittedApproval"] }}</strong><br>
+        <small>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</small><br>
+        <small>{{ dictionary["postingtitlelisting.view"] }} <a href="/{{ item | slugToUrl | link }}">{{ dictionary["itemwarning.Here"] }}</a></small><br><br>
     </td>
 </tr>
 <tr>
     <td style="padding: .25em .5em .5em;">
-        <strong>{{ dictionary["postingtitlelisting.view"] }}</strong><br>
-        <a href="/{{ item | slugToUrl | link }}">{{ item.title }}</a>
+        <strong>{{ dictionary["misc.EmailAdActivated_Mob"] }}</strong><br>
     </td>
 </tr>
 <tr>
@@ -27,6 +29,11 @@
                 </td>
             </tr>
         </table>
+    </td>
+</tr>
+<tr>
+    <td style="padding: .25em .5em .5em;" align="center">
+        <small><a href="{{ '/' | link }}" style="color:#474747;" >{{ dictionary["misc.BackToStart_Mob"] }}</a></small>
     </td>
 </tr>
 <tr style="display: none;">
