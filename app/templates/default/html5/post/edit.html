@@ -1,4 +1,4 @@
-{% from macros import Breadcrumb, Errors %}
+{% from macros import Breadcrumb, ErrorsPosting, FieldText, FieldTextArea, FieldCombobox %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 <div class="changeCat">
@@ -30,29 +30,38 @@
 
         {% for field in fields.productDescription %}
             {% if  field.name == 'description' %}
-                {% set templateName = 'compiled/' + template + '/fields/textarea.html' %}
-            {% else %}
-                {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
+                {{ FieldTextArea(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
             {% endif %}
-        {% include templateName %}
         {% endfor %}
+
         {% if fields.categoryAttributes.length %}
             <h4>{{ dictionary["misc.SpecificFields_title"] }}</h4>
             {% for field in fields.categoryAttributes %}
                 {% if (field.values) or (field.fieldType == 'text') %}
-                    {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
-                    {% include templateName %}
+                    {% if field.fieldType == 'text' %}
+                        {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                    {% elif field.fieldType == 'combobox' %}
+                        {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         {% endif %}
+
         <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
         {% for field in fields.contactInformation %}
-            {% set templateName = 'compiled/' + template + '/fields/' + field.fieldType + '.html' %}
-            {% include templateName %}
+            {% if field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name , form, field.value) }}
+            {% endif %}
         {% endfor %}
 
         <input type="hidden" name="postingSession" value="{{postingSession}}">
-        <input type="hidden" name="location" value="{{siteLocation}}">
+        <input type="hidden" name="location" value="{{itemLocation.url}}">
         <input type="hidden" name="languageId" value="{{language}}">
         <input type="hidden" name="languageCode" value="{{languageCode}}">
         <input type="hidden" name="platform" value="{{platform}}">
@@ -60,6 +69,10 @@
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
         <input type="hidden" name="id" value="{{item.id}}">
         <input type="hidden" name="sk" value="{{sk}}">
+
+        <h3>
+            {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{itemLocation.name}}<br>
+        </h3>
 
         <div class="btnCenter">
             <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange">

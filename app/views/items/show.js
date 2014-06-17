@@ -22,6 +22,8 @@ module.exports = BaseView.extend({
     postRender: function() {
         var that = this;
 
+        $('html, body').scrollTop(0);
+
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
         this.$('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 

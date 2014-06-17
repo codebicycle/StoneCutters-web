@@ -3,6 +3,7 @@
 var BaseView = require('../base');
 var _ = require('underscore');
 var config = require('../../config');
+var utils = require('../../../shared/utils');
 
 function readPostButtonConfig(platform, currentRoute) {
     var buttonsConfig = config.get('disablePostingButton', {});
@@ -68,8 +69,38 @@ module.exports = BaseView.extend({
             }
         }.bind(this));
 
-        this.$('.logo').on('change:location', this.changeLocation);
-        this.$('.header-links .header-link').on('change:location', this.changeLocation);
+        $('body').on('change:location', this.changeLocation.bind(this));
+    },
+    changeLocation: function (e, siteLocation) {
+        this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {
+            var $link = $(link);
+            var href = $link.attr('href');
+            var removeLocation = (siteLocation && ~siteLocation.indexOf('www'));
+            var currentLocation;
+
+            if ($link.hasClass('posting-link')) {
+                if (~href.indexOf('/posting')) {
+                    if (removeLocation) {
+                        $link.data('tracking', 'Posting-ClickSelectLocation');
+                        $link.attr('href', '/location?target=posting');
+                    }
+                }
+                else if (!removeLocation) {
+                    $link.removeData('tracking');
+                    $link.attr('href', '/posting');
+                }
+                href = $link.attr('href');
+            }
+            currentLocation = utils.params(href, 'location');
+            if (currentLocation !== siteLocation) {
+                if (removeLocation) {
+                    href = utils.removeParams(href, 'location');
+                }
+                $link.attr({
+                    href: utils.link(href, siteLocation)
+                });
+            }
+        });
     }
 });
 

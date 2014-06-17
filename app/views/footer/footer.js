@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var utils = require('../../../shared/utils');
 
 module.exports = BaseView.extend({
     className: 'footer_footer_view',
@@ -16,7 +17,23 @@ module.exports = BaseView.extend({
         });
     },
     postRender: function() {
-        this.$('.footer-links .footer-link').on('change:location', this.changeLocation);
+        $('body').on('change:location', this.changeLocation.bind(this));
+    },
+    changeLocation: function (e, siteLocation) {
+        this.$('.footer-links .footer-link').each(function(i, link) {
+            var $link = $(link);
+            var href = $link.attr('href');
+            var currentLocation = utils.params(href, 'location');
+
+            if (currentLocation !== siteLocation) {
+                if (siteLocation && ~siteLocation.indexOf('www')) {
+                    href = utils.removeParams(href, 'location');
+                }
+                $link.attr({
+                    href: utils.link(href, siteLocation)
+                });
+            }
+        });
     }
 });
 

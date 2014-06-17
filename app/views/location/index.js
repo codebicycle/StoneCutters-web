@@ -23,13 +23,11 @@ module.exports = BaseView.extend({
             };
         });
 
-        this.$('.cities-links .city-link').on('click', function(e) {
+        this.$('#location .country-link, .cities-links .city-link').on('click', function(e) {
             var href = $(e.currentTarget).attr('href');
             var siteLocation = utils.params(href, 'location');
 
-            /*$('.logo').trigger('change:location', siteLocation);
-            $('.header-links .header-link').trigger('change:location', siteLocation);
-            $('.footer-links .footer-link').trigger('change:location', siteLocation);*/
+            $('body').trigger('change:location', siteLocation);
         }.bind(this));
     }
 });

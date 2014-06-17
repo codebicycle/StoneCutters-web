@@ -3,7 +3,7 @@
 {{ Breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
 <header id="location">
 	<p>
-		<a class="big" href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>
+		<a class="big country-link" href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>
 		{% if location.current and location.current.type != 'country' %}
 			<span>&#62; {{ location.current.name }}</span>
 		{% endif %}
