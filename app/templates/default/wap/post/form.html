@@ -9,18 +9,21 @@
 <tr>
     <td>
         {% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
-        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
-            <tr>
-                <td style="padding: .5em; border-top: solid thin #808080;">
-                    <small>
-                        <strong>{{ dictionary["itemslisting.Category"] }}</strong>
-                        <span>{{subcategory.name}}</span>
-                    </small>
-                    <br />
-                    <br style="display: none;" />
-                    <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+        <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .5em; border-top: solid thin #808080;">
+                        <small>
+                            <strong>{{ dictionary["itemslisting.Category"] }}</strong>
+                            <span>{{subcategory.name}}</span>
+                        </small>
+                        <br />
+                        <br style="display: none;" />
+                        
                         <label style="display: block; padding-top: .5em;">
-                            <small>{{ dictionary["contactseller_form.AttachPicture"] }}</small>
+                            <small>{{ dictionary["contactseller_form.AttachPicture"] }}</small><br />
+                            <small style="color: #ff6700;"><small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></small>
                             <br>
                             <input type="file" style="font-size: small" name="images[0]">
                             <br>
@@ -35,9 +38,15 @@
                                 {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
                             {% endif %}
                         {% endfor %}
+                    
 
                         {% if fields.categoryAttributes.length %}
-                            <br />
+                                </td>
+                            </tr>
+                        </table>
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                            <tr>
+                            <td style="padding: .5em; border-top: solid thin #808080;">
                             <small>
                                 <strong>{{ dictionary["misc.SpecificFields_title"] }}</strong>
                             </small>
@@ -51,7 +60,12 @@
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
-                        <br />
+                    </td>
+                </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .5em; border-top: solid thin #808080;">
                         <small>
                             <strong>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</strong>
                         </small>
@@ -80,16 +94,16 @@
                         <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
 
                         <span style="display: block; padding-top: .5em;"><input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}"></span>
-                    </form>
-                </td>
-            </tr>
-            <tr style="display: none;">
-                <td>
-                    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-                    {% include templateName %}
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+                <tr style="display: none;">
+                    <td>
+                        {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+                        {% include templateName %}
+                    </td>
+                </tr>
+            </table>
+        </form>
     </td>
 </tr>
 <tr>

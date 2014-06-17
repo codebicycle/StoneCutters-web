@@ -4,7 +4,10 @@
 {% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
-        <h4 class="title" >{{ dictionary["item.ChosenCategory"] }}: {{ subcategory.name }}</h4>
+        <h4 class="title" >
+            {{ dictionary["itemslisting.Category"] }} {{ subcategory.name }}
+            <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
+        </h4>
         <div class="formField">
             <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
             <div class="imgHolder">
@@ -58,7 +61,7 @@
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
         <div class="formField">
             <h3>
-                {{ dictionary["itemslisting.NavigatorByLocation"] }} : {{location.current.name}}<br>
+                {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{location.current.name}}<br>
                 <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="/post/location">
             </h3>
         </div>
