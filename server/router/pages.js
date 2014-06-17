@@ -12,6 +12,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/health', handler);
 
         function handler(req, res) {
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
             res.json({
                 online: true,
                 message: 'Everything ok!'
@@ -34,6 +35,7 @@ module.exports = function itemRouter(app, dataAdapter) {
             list.push('memory.rss:' + process.memoryUsage().rss);
             list.push('memory.heapTotal:' + process.memoryUsage().heapTotal);
             list.push('memory.heapUsed:' + process.memoryUsage().heapUsed);
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
             res.send(list.join(' '));
         }
     })();
@@ -42,6 +44,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/stats/check', handler);
 
         function handler(req, res) {
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
             res.json({
                 server: configServer.get(),
                 client: configClient.get()
@@ -64,6 +67,7 @@ module.exports = function itemRouter(app, dataAdapter) {
             list.push('usableFreeMemory:' + usableFreeMemory);
             list.push('usedPercent:' + usedPercent);
 
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
             res.send(list.join(' '));
         }
     })();
@@ -72,6 +76,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/stats/threads', handler);
 
         function handler(req, res) {
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
             res.send('threadCount:' + require('os').cpus().length);
         }
     })();
