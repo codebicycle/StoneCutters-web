@@ -32,7 +32,7 @@ module.exports = (function() {
             var envPath = config.get(['environment', 'imagePath'], '');
 
             if (env === 'production') {
-                var baseNumber = '0' + ((filePath.length() % 4) + 1);
+                var baseNumber = '0' + ((filePath.length % 4) + 1);
                 return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
             }
             return envPath + filePath;
