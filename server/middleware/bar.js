@@ -3,7 +3,9 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var build = require('../../app/config').get('deploy', false);
+        var config = require('../../app/config');
+        var build = config.get(['deploy'], false);
+        var env = config.get(['environment', 'type'], 'DEV');
         var _ = require('underscore');
 
         return function environment(req, res, next) {
@@ -15,11 +17,11 @@ module.exports = function(dataAdapter, excludedUrls) {
                 show: false
             };
 
-            if (build) {
+            if (build && env != 'production') {
                 bar.version = build.version;
                 bar.revision = build.revision;
                 bar.show = true;
-                bar.env = (process.env.NODE_ENV || 'DEV').toUpperCase();
+                bar.env = env.toUpperCase();
                 bar.platform = req.rendrApp.session.get('platform').toUpperCase();
             }
             req.rendrApp.session.update({
