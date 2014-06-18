@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
         $('html, body').scrollTop(0);
 
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
-        this.$('.footer_footer_view').css('margin-bottom', marginActions + 'px');
+        $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
         that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
 
@@ -96,6 +96,8 @@ module.exports = BaseView.extend({
             e.preventDefault();
             $('.galCont .galActions , .galCont .title').fadeToggle(500);
         });
+
+        this.paginationSize();
 
         this.$('.fav').click(function(e) {
             var $this = $(this);
@@ -308,6 +310,15 @@ module.exports = BaseView.extend({
             $('small.'+field).addClass('hide').empty();
             return true;
         }
+    },
+    paginationSize: function () {
+        var paginationCount = $('.slidePagination span').length + 1;
+        var windowSize = $(window).width();
+        var paginationWidth = windowSize / paginationCount;
+        var paginationMargin = paginationWidth / paginationCount;
+        paginationWidth = paginationWidth - paginationMargin; 
+        $('.slidePagination span').css('width' , paginationWidth+'px');
+        $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     }
 
 });
