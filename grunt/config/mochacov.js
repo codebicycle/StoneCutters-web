@@ -10,7 +10,7 @@ module.exports = function(grunt) {
             }
         },
         coverage: {
-            src: ['test/unit/**/*.js'],
+            src: ['test/unit/**/*.js', '!test/unit/app/controllers/categories_controller.js'],
             options: {
                 reporter: 'html-cov',
                 output: 'test/unit/coverage.html',
