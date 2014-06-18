@@ -1,7 +1,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome, ErrorsPosting, FieldText, FieldTextArea, FieldCombobox %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
-{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
+{% if form and form.errors %}{{ ErrorsPosting(form.errors) }}{% endif %}
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <h4 class="title" >{{ dictionary["itemslisting.NavigatorByCategory"] }} :: {{ subcategory.name }}</h4>
@@ -24,7 +24,7 @@
                 <input id="file2" type="file" name="images[]" />
             </div>
         </div>
-        
+
         {% for field in fields.productDescription %}
             {% if  field.name == 'description' %}
                 {{ FieldTextArea(field.label, field.name, field.mandatory, form,  user) }}
