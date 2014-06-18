@@ -3,7 +3,7 @@
 {% include templateName %}
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, category.name) }}
+{{ Breadcrumb(dictionary, link, category.trName) }}
 <div id="itemListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">

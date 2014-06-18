@@ -18,27 +18,32 @@ module.exports = (function() {
                 var page = this.app.session.get('page') || 0;
                 var breadcrumb;
 
+                saveNavigation(this);
                 if (!page || page === 0) {
                     return '/';
                 }
                 if (page === 1) {
-                    return '/' + common.slugToUrl({
-                        id: this.category.parentId,
-                        parentId: null
-                    });
+                    return '/' + common.slugToUrl(this.category);
                 }
-                breadcrumb = '/' + common.slugToUrl(this.category);
+                breadcrumb = '/' + common.slugToUrl(this.subCategory);
                 if ((page - 1) > 1) {
                     breadcrumb += '-p-' + (page - 1);
                 }
-                saveNavigation(this);
                 return breadcrumb;
             }
         },
         post: {
-            form: function() {
+            index: function() {
                 saveNavigation(this);
                 return '/';
+            },
+            subcat: function() {
+                saveNavigation(this);
+                return '/posting';
+            },
+            form: function() {
+                saveNavigation(this);
+                return '/posting/' + this.category.id;
             },
             success: function() {
                 saveNavigation(this);
@@ -93,6 +98,7 @@ module.exports = (function() {
                 });
 
                 if (page === 1) {
+                    navigation.clear.call(this);
                     return '/';
                 }
                 breadcrumb = '/nf/search/' + this.search;
@@ -122,14 +128,29 @@ module.exports = (function() {
         }
     };
 
+    function prepareUrl(url) {
+        var parts = url.split('?');
+        
+        return parts.shift();
+    }
+
     function prepareNavigation(data) {
         var url = data.app.session.get('url');
         var fragment = navigation.getState.call(data);
 
-        console.log('Last state | fragment.url [', (fragment ? fragment.url : ''), '] === [', url, '] ->', Boolean(fragment && fragment.url === url));
+        url = prepareUrl(url);
+        console.log('Last [', (fragment ? fragment.url : undefined), '][', url, ']');
         if (fragment && fragment.url === url) {
-            console.log('Return last state');
             navigation.popState.call(data);
+            return;
+        }
+
+        fragment = navigation.getPrevious.call(data);
+        console.log('Previous [', (fragment ? fragment.url : undefined), '][', url, ']');
+        if (fragment && fragment.url === url) {
+            navigation.popState.call(data);
+            navigation.popState.call(data);
+            return;
         }
     }
 
@@ -137,9 +158,8 @@ module.exports = (function() {
         var url = data.app.session.get('url');
         var fragment = navigation.getState.call(data);
 
-        console.log('Save state | fragment.url [', (fragment ? fragment.url : ''), '] === [', url, '] ->', Boolean(fragment && fragment.url === url));
+        url = prepareUrl(url);
         if (fragment && (fragment.url === url || (state && fragment.n === state.n))) {
-            console.log('Remove last state for duplicate');
             navigation.popState.call(data);
         }
         navigation.pushState.call(data, url, state);

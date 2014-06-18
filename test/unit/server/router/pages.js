@@ -34,7 +34,6 @@ describe('server', function test() {
                 function rendrConfiguration(rendrApp) {
                     rendrApp.use(middleware.session());
                     rendrApp.use(middleware.environment());
-                    rendrApp.use(middleware.categories());
                     rendrApp.use(middleware.location());
                     rendrApp.use(middleware.languages());
                     rendrApp.use(middleware.templates());

@@ -3,7 +3,6 @@
 var _ = require('underscore');
 
 var historyKey = 'history';
-var historyCurrentKey = 'hCurrent';
 
 function getSession(app, name, dephault) {
     var value = app.session.get(name) || dephault;
@@ -25,16 +24,12 @@ function persistSession(app, name, value) {
     app.session.persist(obj);
 }
 
-function getCurrent() {
-    return getSession(this.app, historyCurrentKey, {});
-}
+function getPrevious() {
+    var fragments = getSession(this.app, historyKey, []);
 
-function pushCurrent(url, options) {
-    var fragment = _.extend({
-        url: url
-    }, (options || {}));
-
-    return persistSession(this.app, historyCurrentKey, fragment);
+    if (fragments.length > 1) {
+        return fragments[fragments.length - 2];
+    }
 }
 
 function getState() {
@@ -66,8 +61,7 @@ function clear() {
 }
 
 module.exports = {
-    getCurrent: getCurrent,
-    pushCurrent: pushCurrent,
+    getPrevious: getPrevious,
     getState: getState,
     pushState: pushState,
     popState: popState,

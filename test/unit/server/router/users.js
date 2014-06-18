@@ -47,7 +47,6 @@ describe('server', function test() {
                         rendrApp.use(middleware.session());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(middleware.location());
-                        rendrApp.use(middleware.categories());
                         rendrApp.use(middleware.languages());
                         rendrApp.use(middleware.templates());
                         rendrApp.use(after);

@@ -99,9 +99,8 @@
                 <textarea class="message" name="message"></textarea>
                 <small class="message hide"></small>
 
-                <label>* {{ dictionary["replymessage.Name"] }}</label>
+                <label>{{ dictionary["replymessage.Name"] }}</label>
                 <input type="text" value="{{ user.username if user.username }}" class="name" name="name">
-                <small class="name hide"></small>
 
                 <label>* {{ dictionary["replymessage.Email"] }}</label>
                 <input type="email" value="{{ user.email if user.email }}" class="email" name="email">

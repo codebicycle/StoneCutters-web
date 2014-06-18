@@ -14,8 +14,6 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            location: this.app.session.get('location'),
-            categories: this.app.session.get('categories'),
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     },

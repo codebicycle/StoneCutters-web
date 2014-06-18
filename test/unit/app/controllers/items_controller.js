@@ -48,7 +48,6 @@ describe('app', function test() {
                         rendrApp.use(middleware.abSelector());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(middleware.location());
-                        rendrApp.use(middleware.categories());
                         rendrApp.use(middleware.languages());
                         rendrApp.use(middleware.templates());
                         rendrApp.use(afterMiddleware);
@@ -62,7 +61,7 @@ describe('app', function test() {
                             return;
                         }
                         var params = req.path.split('/');
-                        
+
                         params = {
                             search: params[3],
                             page: (params.length === 5 ? Number(params[4].replace('-p-', '')) : undefined)
@@ -227,7 +226,6 @@ describe('app', function test() {
                         rendrApp.use(middleware.abSelector());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(middleware.location());
-                        rendrApp.use(middleware.categories());
                         rendrApp.use(middleware.languages());
                         rendrApp.use(middleware.templates());
                         rendrApp.use(beforeMiddleware);
