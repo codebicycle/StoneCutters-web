@@ -6,7 +6,7 @@
 {{ Breadcrumb(dictionary, link, category.trName) }}
 <div id="subCategories">
     <ul class="normalList">
-        {% for subcategory in category.children %}
+        {% for subcategory in category.children.toJSON() %}
             <li class="{{ "last" if loop.last else "" }}">
                 <a href="/{{ subcategory | slugToUrl | link }}">
                     {{subcategory.trName}}

@@ -4,7 +4,6 @@ module.exports = {
     nunjucks: require('./nunjucks'),
     controllers: require('./controllers'),
     analytics: require('./analytics'),
-    categories: require('./categories'),
     marketing: require('./marketing'),
     seo: require('./seo'),
     common: require('./common'),

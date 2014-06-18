@@ -14,7 +14,7 @@
         {% set templateName = 'compiled/' + template + '/partials/search.html' %}
         {% include templateName %}
         <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left" bgcolor="#FFFFFF">
-            {% for subcategory in category.children %}
+            {% for subcategory in category.children.toJSON() %}
                 <tr>
                     <td style="border-top: solid thin #808080;">
                         <a style="display: block;" href="/{{ subcategory | slugToUrl | link }}">

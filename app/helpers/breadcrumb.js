@@ -8,7 +8,8 @@ module.exports = (function() {
     var handlers = {
         categories: {
             show: function() {
-                var page = this.app.session.get('page') || 0;
+                return '/';
+                /*var page = this.app.session.get('page') || 0;
                 var categoryId;
                 var category;
                 var breadcrumb;
@@ -27,7 +28,7 @@ module.exports = (function() {
                 if ((page - 1) > 1) {
                     breadcrumb += '-p-' + (page - 1);
                 }
-                return breadcrumb;
+                return breadcrumb;*/
             }
         },
         post: {
@@ -40,7 +41,8 @@ module.exports = (function() {
         },
         items: {
             show: function() {
-                var page = this.app.session.get('page') || 0;
+                return '/';
+                /*var page = this.app.session.get('page') || 0;
                 var categoryId = this.item.category.id;
                 var category = this.app.session.get('childCategories')[categoryId];
                 var breadcrumb = '/' + common.slugToUrl(category);
@@ -48,7 +50,7 @@ module.exports = (function() {
                 if (page > 1) {
                     breadcrumb += '-p-' + page;
                 }
-                return breadcrumb;
+                return breadcrumb;*/
             },
             galery: function() {
                 var url = '/' + common.slugToUrl(this.item);

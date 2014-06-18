@@ -6,7 +6,7 @@
         {% set templateName = 'compiled/' + template + '/partials/search.html' %}
         {% include templateName %}
         <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
-            {% for category in categories.models %}
+            {% for category in categories %}
                 <tr>
                     <td style="border-top: solid thin #808080;">
                         <a style="display: block;" href="/{{ category | slugToUrl | link }}">

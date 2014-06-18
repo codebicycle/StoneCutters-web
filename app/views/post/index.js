@@ -12,10 +12,7 @@ module.exports = BaseView.extend({
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data, {
-            'location': this.app.session.get('location'),
-            'categories': this.app.session.get('categories'),
-        });
+        return _.extend({}, data, {});
     },
     postRender: function() {
         this.attachTrackMe(this.className, function(category, action) {
