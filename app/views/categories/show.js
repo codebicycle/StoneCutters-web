@@ -56,7 +56,9 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         _.each(data.items, this.processItem);
-        return _.extend({}, data);
+        return _.extend({}, data, {
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
+        });
     }
 });
 

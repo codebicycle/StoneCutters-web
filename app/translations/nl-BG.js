@@ -83,7 +83,6 @@ module.exports = {
     'posting_fields_1.Please_Choose': 'Selecteer:',
     'posting_fields_1.price': 'Prijs',
     'posting_fields_1.title': 'Titel',
-    'posting_fields_1.YourAdHasBeenSuccessfullySubmittedForApproval': 'Je advertentie is verstuurd en wacht op goedkeuring.',
     'posting_photos.RemovePhoto': 'Deze foto verwijderen',
     'item.ThisAdIsNoLongerAvailable': 'Deze advertentie is niet meer beschikbaar',
     'postingerror.Error': 'Fout',

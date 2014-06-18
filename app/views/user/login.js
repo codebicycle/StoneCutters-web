@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'user_login_view',
@@ -12,14 +13,9 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
         var params = this.options.params || {};
 
-        /*if (params.err) {
-            params.err = params.err.split(',');
-        }
-        if (params.errFields) {
-            params.errFields = params.errFields.split(',');
-        }*/
         return _.extend({}, data, {
-            params: params
+            params: params,
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     }
 });

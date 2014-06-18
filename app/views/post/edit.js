@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'post_edit_view',
@@ -12,7 +13,9 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
         data.itemLocation = parse(data.form.values.location);
 
-        return _.extend({}, data, {});
+        return _.extend({}, data, {
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
+        });
     },
     postRender: function() {
         $('.fileUpload .image').click(function(e) {

@@ -30,7 +30,6 @@ module.exports = RendrView.extend({
             location: this.app.session.get('location'),
             dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'],
             referer: this.app.session.get('referer'),
-            breadcrumb: helpers.breadcrumb.get.call(this, data),
             url: this.app.session.get('url'),
             href: this.app.session.get('href'),
             sixpack: this.app.session.get('sixpack'),
