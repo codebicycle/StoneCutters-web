@@ -172,7 +172,7 @@ module.exports = BaseView.extend({
             url.push(itemId);
             url.push('/messages');
 
-            if (that.validForm(message, name, email)) {
+            if (that.validForm(message, email)) {
                 $('.loading').show();
                 $.ajax({
                     type: 'POST',
@@ -242,7 +242,7 @@ module.exports = BaseView.extend({
                 var email = $('.email').val();
                 var name = $('.name').val();
 
-                if (!that.validForm(message, name, email)) {
+                if (!that.validForm(message, email)) {
                     action += '_Error';
 
                     if (!that.isEmpty(email, 'email')){
@@ -275,9 +275,8 @@ module.exports = BaseView.extend({
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     },
-    validForm: function (message, name, email) {
+    validForm: function (message, email) {
         var valMail = true;
-        var valName = true;
         var valMsg = true;
 
         valMail = this.isEmpty(email,'email');
@@ -285,10 +284,9 @@ module.exports = BaseView.extend({
             valMail = this.isEmail(email,'email');
         }
 
-        valName = this.isEmpty(name,'name');
         valMsg = this.isEmpty(message,'message');
 
-        return (valMail && valName && valMsg);
+        return (valMail && valMsg);
     },
     isEmail: function (value,field) {
 
