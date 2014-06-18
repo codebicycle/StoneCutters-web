@@ -285,6 +285,13 @@ module.exports = {
             delete params.sk;
 
             spec = {
+                categories: {
+                    collection: 'Categories',
+                    params: {
+                        location: siteLocation,
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                },
                 item: {
                     model: 'Item',
                     params: params
@@ -319,19 +326,19 @@ module.exports = {
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
                     var user = app.session.get('user');
-                    var categoryTree;
+                    var subcategory = data.categories.search(item.category.id);
+                    var category = data.categories.get(subcategory.get('parentId'));
 
                     result.relatedItems = model.get('data');
                     result.user = user;
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    categoryTree = helpers.categories.getTree(app, item.category.id);
-                    result.category = categoryTree.subCategory;
+                    result.category = category.toJSON();
                     helpers.analytics.reset();
                     helpers.analytics.addParam('item', item);
-                    helpers.analytics.addParam('category', categoryTree.parent);
-                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                    helpers.analytics.addParam('category', category.toJSON());
+                    helpers.analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = helpers.analytics.generateURL(app.session.get());
                     callback(err, result);
                 });
