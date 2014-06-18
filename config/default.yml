@@ -103,3 +103,11 @@ sixpack:
         - post
         - sell
         - vender
+
+publicEnvironments:
+  testing:
+    host: '.m-testing.olx.com'
+    mask: '.m.olx.com.py'
+  staging:
+    host: '.m-staging-olx.com'
+    mask: '.m.olx.com.py'

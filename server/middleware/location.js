@@ -3,6 +3,7 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
+        var config = require('../config');
         var asynquence = require('asynquence');
         var _ = require('underscore');
 
@@ -85,8 +86,11 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!siteLocation) {
                 siteLocation = (index === -1) ? host : host.substring(0, index);
                 platform = siteLocation.split('.').shift().length;
-                if (siteLocation.indexOf('.m-testing.olx.com') === platform || siteLocation.indexOf('.m-staging.olx.com') === platform) {
-                    siteLocation = platform + '.m.olx.com.py';
+                if (siteLocation.indexOf(config.get(['publicEnvironments', 'testing', 'host'], '.m-testing.olx.com')) === platform) {
+                    siteLocation = platform + config.get(['publicEnvironments', 'testing', 'mask'], '.m.olx.com');
+                }
+                else if (siteLocation.indexOf(config.get(['publicEnvironments', 'staging', 'host'], '.m-staging.olx.com')) === platform) {
+                    siteLocation = platform + config.get(['publicEnvironments', 'staging', 'mask'], '.m.olx.com');
                 }
                 siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
                 previousLocation = siteLocation;
