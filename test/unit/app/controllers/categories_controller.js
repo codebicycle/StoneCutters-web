@@ -48,7 +48,6 @@ describe('app', function test() {
                         rendrApp.use(middleware.abSelector());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(middleware.location());
-                        rendrApp.use(middleware.categories());
                         rendrApp.use(middleware.languages());
                         rendrApp.use(middleware.templates());
                         rendrApp.use(beforeMiddleware);
@@ -244,7 +243,6 @@ describe('app', function test() {
                         rendrApp.use(middleware.abSelector());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(middleware.location());
-                        rendrApp.use(middleware.categories());
                         rendrApp.use(middleware.languages());
                         rendrApp.use(middleware.templates());
                         rendrApp.use(beforeMiddleware);
