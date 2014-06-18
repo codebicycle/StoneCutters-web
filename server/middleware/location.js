@@ -16,6 +16,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var siteLocation = req.param('location', previousLocation);
             var host = req.headers.host;
             var index = host.indexOf(':');
+            var platform;
             var location;
             var topCities;
             var promise;
@@ -83,6 +84,10 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             if (!siteLocation) {
                 siteLocation = (index === -1) ? host : host.substring(0, index);
+                platform = siteLocation.split('.').shift().length;
+                if (siteLocation.indexOf('.m-testing.olx.com') === platform || siteLocation.indexOf('.m-staging.olx.com') === platform) {
+                    siteLocation = platform + '.m.olx.com.py';
+                }
                 siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
                 previousLocation = siteLocation;
             }
