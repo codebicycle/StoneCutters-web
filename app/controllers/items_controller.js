@@ -35,6 +35,7 @@ module.exports = {
                 }
             }
             params.id = params.itemId;
+            params.languageCode = app.session.get('selectedLanguage');
             delete params.itemId;
             delete params.title;
             delete params.sk;

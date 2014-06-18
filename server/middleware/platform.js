@@ -35,8 +35,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             else {
                 var subdomains = req.subdomains.reverse();
 
-                if (subdomains.pop() === 'olx') {
-                    subdomains = subdomains.slice(0, subdomains.length);
+                if (subdomains[subdomains.length - 1] === 'olx') {
+                    subdomains = subdomains.slice(0, subdomains.length - 1);
                 }
                 res.redirect(301, req.protocol + '://' + req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), 'm'));
             }

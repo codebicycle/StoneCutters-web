@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
         $('html, body').scrollTop(0);
 
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
-        this.$('.footer_footer_view').css('margin-bottom', marginActions + 'px');
+        $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
         that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
 
@@ -48,6 +48,7 @@ module.exports = BaseView.extend({
         this.$('section#itemPage section#onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
+            history.pushState(null, "", window.location.pathname);
             $('#galContOne').addClass('visible');
         });
         this.$('.galActions .close').click(function(e) {
@@ -59,6 +60,7 @@ module.exports = BaseView.extend({
         this.$('section.swiper-container').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
+            history.pushState(null, "", window.location.pathname);
             $('#galCont').addClass('visible');
 
             if(mySwiperGal === ''){
@@ -96,6 +98,8 @@ module.exports = BaseView.extend({
             e.preventDefault();
             $('.galCont .galActions , .galCont .title').fadeToggle(500);
         });
+
+        this.paginationSize();
 
         this.$('.fav').click(function(e) {
             var $this = $(this);
@@ -140,6 +144,7 @@ module.exports = BaseView.extend({
         this.$('.share').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
+            history.pushState(null, "", window.location.pathname);
             $('#share').addClass('visible');
         });
         this.$('.popup-close').click(function(e) {
@@ -170,7 +175,7 @@ module.exports = BaseView.extend({
             url.push(itemId);
             url.push('/messages');
 
-            if (that.validForm(message, name, email)) {
+            if (that.validForm(message, email)) {
                 $('.loading').show();
                 $.ajax({
                     type: 'POST',
@@ -222,6 +227,24 @@ module.exports = BaseView.extend({
 
         });
 
+        //window History
+        window.onpopstate = function(e) {
+            var $galCont = $('#galCont');
+            var $galContOne = $('#galContOne');
+            var $share = $('#share');
+
+            if($galCont.is('.visible')){
+                $galCont.removeClass('visible');
+                $('body').removeClass('noscroll');
+            }else if($galContOne.is('.visible')){
+                $galContOne.removeClass('visible');
+                $('body').removeClass('noscroll');
+            }else if($share.is('.visible')){
+                $share.removeClass('visible');
+                $('body').removeClass('noscroll');
+            }
+        };
+
         this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
             var value = $(this).val();
             var field = $(this).attr('class');
@@ -240,7 +263,7 @@ module.exports = BaseView.extend({
                 var email = $('.email').val();
                 var name = $('.name').val();
 
-                if (!that.validForm(message, name, email)) {
+                if (!that.validForm(message, email)) {
                     action += '_Error';
 
                     if (!that.isEmpty(email, 'email')){
@@ -273,9 +296,8 @@ module.exports = BaseView.extend({
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     },
-    validForm: function (message, name, email) {
+    validForm: function (message, email) {
         var valMail = true;
-        var valName = true;
         var valMsg = true;
 
         valMail = this.isEmpty(email,'email');
@@ -283,10 +305,9 @@ module.exports = BaseView.extend({
             valMail = this.isEmail(email,'email');
         }
 
-        valName = this.isEmpty(name,'name');
         valMsg = this.isEmpty(message,'message');
 
-        return (valMail && valName && valMsg);
+        return (valMail && valMsg);
     },
     isEmail: function (value,field) {
 
@@ -308,6 +329,15 @@ module.exports = BaseView.extend({
             $('small.'+field).addClass('hide').empty();
             return true;
         }
+    },
+    paginationSize: function () {
+        var paginationCount = $('.slidePagination span').length + 1;
+        var windowSize = $(window).width();
+        var paginationWidth = windowSize / paginationCount;
+        var paginationMargin = paginationWidth / paginationCount;
+        paginationWidth = paginationWidth - paginationMargin; 
+        $('.slidePagination span').css('width' , paginationWidth+'px');
+        $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     }
 
 });

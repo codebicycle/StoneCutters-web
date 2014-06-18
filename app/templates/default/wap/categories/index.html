@@ -4,8 +4,8 @@
             <tbody>
                 <tr>
                     <td style="border-top: solid thin #808080;">
-                        <strong style="color: #0075BD;">{{category.name}}</strong>
-                        <small style="color: #999;">({{category.counter}})</small>
+                        <strong style="color: #0075BD;">{{category.trName}}</strong>
+                        <small style="color: #999;">{{ ('(' + subcategory.counter + ')') if subcategory.counter > 0 }}</small>
                     </td>
                 </tr>
             </tbody>
@@ -20,7 +20,7 @@
                         <a style="display: block;" href="/{{ subcategory | slugToUrl | link }}">
                             <small style="display: block;">
                                 <img border="0" alt="" src="" />{{ subcategory.trName }}
-                                <small style="color: #999;">({{subcategory.counter}})</small>
+                                <small style="color: #999;">{{ ('(' + subcategory.counter + ')') if subcategory.counter > 0 }}</small>
                             </small>
                         </a>
                     </td>

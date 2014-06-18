@@ -56,6 +56,9 @@ function parse(req, options, callback) {
     form.multiples = options.multiples || config.get(['formidable', 'multiples'], true);
     form.acceptFiles = options.acceptFiles || config.get(['formidable', 'acceptFiles'], false);
     form.onPart = function(part) {
+        if (!part.mime && typeof part.filename !== 'undefined') {
+            return;
+        }
         if (!part.mime || (part.filename && form.acceptFiles)) {
             form.handlePart(part);
         }
