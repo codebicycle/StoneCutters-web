@@ -48,6 +48,7 @@ module.exports = BaseView.extend({
         this.$('section#itemPage section#onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
+            history.pushState(null, "", window.location.pathname);
             $('#galContOne').addClass('visible');
         });
         this.$('.galActions .close').click(function(e) {
@@ -59,6 +60,7 @@ module.exports = BaseView.extend({
         this.$('section.swiper-container').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
+            history.pushState(null, "", window.location.pathname);
             $('#galCont').addClass('visible');
 
             if(mySwiperGal === ''){
@@ -142,6 +144,7 @@ module.exports = BaseView.extend({
         this.$('.share').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
+            history.pushState(null, "", window.location.pathname);
             $('#share').addClass('visible');
         });
         this.$('.popup-close').click(function(e) {
@@ -223,6 +226,24 @@ module.exports = BaseView.extend({
             }
 
         });
+
+        //window History
+        window.onpopstate = function(e) {
+            var $galCont = $('#galCont');
+            var $galContOne = $('#galContOne');
+            var $share = $('#share');
+
+            if($galCont.is('.visible')){
+                $galCont.removeClass('visible');
+                $('body').removeClass('noscroll');
+            }else if($galContOne.is('.visible')){
+                $galContOne.removeClass('visible');
+                $('body').removeClass('noscroll');
+            }else if($share.is('.visible')){
+                $share.removeClass('visible');
+                $('body').removeClass('noscroll');
+            }
+        };
 
         this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
             var value = $(this).val();
