@@ -4,7 +4,7 @@
 <section id="itemListing">
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
-    {{ Breadcrumb(dictionary, link, category.name, '<span class="switchView"></span>') }}
+    {{ Breadcrumb(dictionary, link, category.trName, '<span class="switchView"></span>') }}
     {% if metadata.total == 0 %}
         <div class="emtyList">
             {% if location.current.name %}
