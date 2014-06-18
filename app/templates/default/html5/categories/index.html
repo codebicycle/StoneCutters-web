@@ -6,7 +6,7 @@
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, category.name) }}
     <ul>
-        {% for subcategory in category.children %}
+        {% for subcategory in category.children.toJSON() %}
             <li>
                 <a href="/{{ subcategory | slugToUrl | link }}">
                     {{subcategory.trName}} ({{subcategory.counter}})

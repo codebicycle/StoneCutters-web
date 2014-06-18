@@ -14,18 +14,29 @@ module.exports = {
             var country = this.app.session.get('location').url;
             var siteLocation = this.app.session.get('siteLocation');
 
-            helpers.analytics.reset();
-
-            helpers.seo.resetHead();
-            helpers.seo.addMetatag('title', 'Home');
-            helpers.seo.addMetatag('Description', 'This is the home page');
-            helpers.seo.addMetatag('robots', 'NOFOLLOW');
-            helpers.seo.addMetatag('canonical', 'http://' + siteLocation);
-            callback(null, {
-                categories: this.app.session.get('categories'),
-                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                analytics: helpers.analytics.generateURL(this.app.session.get())
-            });
+            this.app.fetch({
+                categories: {
+                    collection: 'Categories',
+                    params: {
+                        location: siteLocation,
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
+                helpers.analytics.reset();
+                helpers.seo.resetHead();
+                helpers.seo.addMetatag('title', 'Home');
+                helpers.seo.addMetatag('Description', 'This is the home page');
+                helpers.seo.addMetatag('robots', 'NOFOLLOW');
+                helpers.seo.addMetatag('canonical', 'http://' + siteLocation);
+                callback(null, {
+                    categories: result.categories.toJSON(),
+                    icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+                    analytics: helpers.analytics.generateURL(this.app.session.get())
+                });
+            }.bind(this));
         }
     }
 };

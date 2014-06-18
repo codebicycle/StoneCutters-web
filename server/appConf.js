@@ -30,12 +30,8 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.languages());
-        rendrApp.use(middleware.categories());
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.bar());
-
-        //rendrApp.use(middleware.experimentNotificator());
-        //rendrApp.use(middleware.incrementCounter());
     }
 
     app.configure(expressConfiguration);

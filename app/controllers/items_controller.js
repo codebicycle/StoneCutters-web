@@ -40,6 +40,13 @@ module.exports = {
             delete params.sk;
 
             spec = {
+                categories: {
+                    collection : 'Categories',
+                    params: {
+                        location: siteLocation,
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                },
                 item: {
                     model: 'Item',
                     params: params
@@ -98,7 +105,7 @@ module.exports = {
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
                     var user = app.session.get('user');
-                    var categoryTree;
+                    var subcategory = data.categories.search(item.category.id);
                     var title;
                     var description;
 
@@ -107,14 +114,13 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    categoryTree = helpers.categories.getTree(app, item.category.id);
                     helpers.analytics.reset();
                     helpers.analytics.addParam('user', user);
                     helpers.analytics.addParam('item', item);
-                    helpers.analytics.addParam('category', categoryTree.parent);
-                    helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                    helpers.analytics.addParam('category', data.categories.get(subcategory.get('parentId')).toJSON());
+                    helpers.analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = helpers.analytics.generateURL(app.session.get());
-                    result.relatedAdsLink = '/' + helpers.common.slugToUrl(categoryTree.subCategory) + '?relatedAds=' + itemId;
+                    result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
 
                     title = helpers.seo.shortTitle(item.title, item.location.children[0].children[0].name);
                     description = helpers.seo.shortDescription(item.title, item.description, item.category.name, item.location.children[0].children[0].name);
@@ -149,6 +155,13 @@ module.exports = {
             delete params.title;
 
             spec = {
+                categories: {
+                    collection : 'Categories',
+                    params: {
+                        location: siteLocation,
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                },
                 item: {
                     model: 'Item',
                     params: params
@@ -158,7 +171,7 @@ module.exports = {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
-                var categoryTree;
+                var subcategory = result.categories.search(item.category.id);
 
                 if (!item) {
                     return helpers.common.redirect.call(this, '/404');
@@ -177,12 +190,11 @@ module.exports = {
                 result.item = item;
                 result.user = user;
                 result.pos = pos;
-                categoryTree = helpers.categories.getTree(app, item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', categoryTree.parent);
-                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                helpers.analytics.addParam('subcategory', subcategory.toJSON());
                 result.analytics = helpers.analytics.generateURL(app.session.get());
                 callback(err, result);
             }.bind(this));
@@ -266,6 +278,13 @@ module.exports = {
             var app = this.app;
             var user = app.session.get('user');
             var spec = {
+                categories: {
+                    collection : 'Categories',
+                    params: {
+                        location: this.app.session.get('siteLocation'),
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                },
                 item: {
                     model: 'Item',
                     params: params
@@ -278,19 +297,18 @@ module.exports = {
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var categoryTree;
                 var item;
+                var subcategory;
 
                 if (err) {
                     return helpers.common.redirect.call(this, '/404');
                 }
                 item = result.item.toJSON();
-                categoryTree = helpers.categories.getTree(app, item.category.id);
-
+                subcategory = result.categories.search(item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', categoryTree.parent);
-                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                helpers.analytics.addParam('subcategory', subcategory.toJSON());
                 result.analytics = helpers.analytics.generateURL(app.session.get());
                 result.user = user;
                 result.item = item;
@@ -306,6 +324,13 @@ module.exports = {
             var app = this.app;
             var user = app.session.get('user');
             var spec = {
+                categories: {
+                    collection : 'Categories',
+                    params: {
+                        location: this.app.session.get('siteLocation'),
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                },
                 item: {
                     model: 'Item',
                     params: params
@@ -318,19 +343,19 @@ module.exports = {
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var categoryTree;
                 var item;
+                var subcategory;
 
                 if (err) {
                     return helpers.common.redirect.call(this, '/404');
                 }
                 item = result.item.toJSON();
-                categoryTree = helpers.categories.getTree(app, item.category.id);
+                subcategory = result.categories.search(item.category.id);
 
                 helpers.analytics.reset();
                 helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', categoryTree.parent);
-                helpers.analytics.addParam('subcategory', categoryTree.subCategory);
+                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                helpers.analytics.addParam('subcategory', subcategory.toJSON());
                 result.analytics = helpers.analytics.generateURL(app.session.get());
                 result.user = user;
                 result.item = item;

@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
     return {
         unit: {
-            src: ['test/unit/**/*.js'],
+            src: ['test/unit/**/*.js', '!test/unit/app/controllers/categories_controller.js'],
                 options: {
                 reporter: 'spec',
                 timeout: '15000'

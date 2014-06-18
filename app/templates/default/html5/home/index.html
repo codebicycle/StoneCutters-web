@@ -2,22 +2,21 @@
 {% set templateName = 'compiled/' + template + '/partials/search.html' %}
 {% include templateName %}
 <section id="categories">
-	<ul class="{{ icons[icons.length - 1] }}-icons">
-		{% for category in categories.models %}
-			<li>
-				<a href="/{{ category | slugToUrl | link }}" >
-					<span class="icon cat-{{ category.id }}"></span>
-			        {{category.trName}}
-		        </a>
-		    </li>
-		{% endfor %}
-	</ul>
-	<div class="clear"></div> 
-	{% if register_success %}
+    <ul class="{{ icons[icons.length - 1] }}-icons">
+        {% for category in categories %}
+            <li>
+                <a href="/{{ category | slugToUrl | link }}" >
+                    <span class="icon cat-{{ category.id }}"></span>
+                    {{category.trName}}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="clear"></div>
+    {% if register_success %}
         <input type="hidden" value="true"  class="registerSuccess">
-	{% endif %}
-
-	{% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
-    {% include templateName %}   
+    {% endif %}
+    {% set templateName = 'compiled/' + template + '/partials/analytics.html' %}
+    {% include templateName %}
 </section>
 {% view 'pages/interstitial' %}
