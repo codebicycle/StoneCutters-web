@@ -80,14 +80,7 @@ module.exports = (function() {
         var siteLocation = this.app.session.get('siteLocation');
 
         options = (options || {});
-        if (options.nolink) {
-            siteLocation = '';
-
-            if (_.isString(options.nolink)) {
-                siteLocation = options.nolink;
-            }
-        }
-        url = utils.link(url, this.app);
+        url = utils.link(url, this.app, options.query);
         if (parameters) {
             url = utils.params(url, parameters);
         }

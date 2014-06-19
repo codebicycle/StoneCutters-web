@@ -87,7 +87,9 @@ module.exports = {
 
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
-                        nolink: itemLocation
+                        query: {
+                            location: itemLocation
+                        }
                     });
                 }
                 spec = {
