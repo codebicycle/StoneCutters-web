@@ -15,13 +15,13 @@ module.exports = BaseView.extend({
         });
     },
     postRender: function() {
-        $('.fileUpload .image').click(function(e) {
+        this.$('.fileUpload .image').click(function(e) {
             e.preventDefault();
             var $image = $(this).attr('id');
             var $input = $('input.'+$image);
             $input.trigger('click');
         });
-        $('.fileUpload .image span').click(function(e) {
+        this.$('.fileUpload .image span').click(function(e) {
             e.preventDefault();
             e.stopPropagation();
             var $input = $(this).parent('.image').attr('id');
@@ -29,15 +29,41 @@ module.exports = BaseView.extend({
             var $clone = $('<input>').attr({'type': $('.'+$input).attr('type'),'name': $('.'+$input).attr('name'),'class': $('.'+$input).attr('class')});
             $('.'+$input).replaceWith($clone);
         });
-        $('form').on('change', 'input[type="file"]', function (e) {
-            var $imageUrl = window.URL.createObjectURL(this.files[0]);
-            window.URL.revokeObjectURL(this.src);
+        this.$('form').on('change', 'input[type="file"]', function (e) {
+            var imageUrl = window.URL.createObjectURL(this.files[0]);
+            var image = new window.Image();
             var $current = $(this).attr('class');
+
+            image.src = imageUrl;
+            image.onload = function() {
+                EXIF.getData(image, function() {
+                    var orientation = EXIF.getTag(this, 'Orientation');
+                    var css = {
+                        'background-image' : 'url(' + imageUrl + ')'
+                    };
+                    var deg;
+
+                    if (orientation && orientation != 1) {
+                        switch (orientation) {
+                            case 3:
+                                deg = 180;
+                            break;
+                            case 6:
+                                deg = 225;
+                            break;
+                            case 8:
+                                deg = 90;
+                            break;
+                        }
+                        if (deg) {
+                            css['webkit-transform'] = 'rotate(' + deg + 'deg)';
+                            css['moz-transform'] = 'rotate(' + deg + 'deg)';
+                        }
+                    }
+                    $('#' + $current).css(css).addClass('fill').removeClass('empty').removeClass('loading');
+                });
+            };
             $('#' + $current).addClass('loading');
-            $('<img/>').attr('src', $imageUrl).load(function() {
-                $(this).remove();
-                $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('empty').removeClass('loading');
-            });
         });
         this.attachTrackMe(this.className, function(category, action) {
             var itemCategory = '-';

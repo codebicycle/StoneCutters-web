@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                     src: [],
                     dest: 'app/'
                 }],
-                external: ['jquery', 'nunjucks', '../translations']
+                external: ['jquery', 'nunjucks', '../translations', 'EXIF']
             }
         };
         browserify[location].files[target] = [];
