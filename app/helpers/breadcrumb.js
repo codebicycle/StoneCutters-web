@@ -20,12 +20,15 @@ module.exports = (function() {
 
                 saveNavigation(this);
                 if (!page || page === 0) {
+                    navigation.clear.call(this);
+                    saveNavigation(this);
                     return '/';
                 }
+                saveNavigation(this);
                 if (page === 1) {
                     return '/' + common.slugToUrl(this.category);
                 }
-                breadcrumb = '/' + common.slugToUrl(this.subCategory);
+                breadcrumb = '/' + common.slugToUrl(this.subcategory);
                 if ((page - 1) > 1) {
                     breadcrumb += '-p-' + (page - 1);
                 }
@@ -34,10 +37,12 @@ module.exports = (function() {
         },
         post: {
             index: function() {
+                navigation.clear.call(this);
                 saveNavigation(this);
                 return '/';
             },
             subcat: function() {
+                navigation.clear.call(this);
                 saveNavigation(this);
                 return '/posting';
             },
@@ -47,7 +52,7 @@ module.exports = (function() {
             },
             success: function() {
                 saveNavigation(this);
-                return '/posting/' + this.category.parentId + '/' + this.category.id;
+                return '/posting/' + this.category.id + '/' + this.subcategory.id;
             }
         },
         items: {
@@ -89,18 +94,19 @@ module.exports = (function() {
             },
             search: function() {
                 var page = this.page || this.app.session.get('page') || 0;
-                var breadcrumb;
-
-                saveNavigation(this, {
+                var state = {
                     n: 'search',
                     q: this.search,
                     p: page
-                });
+                };
+                var breadcrumb;
 
                 if (page === 1) {
                     navigation.clear.call(this);
+                    saveNavigation(this, state);
                     return '/';
                 }
+                saveNavigation(this, state);
                 breadcrumb = '/nf/search/' + this.search;
                 if ((page - 1) > 1) {
                     breadcrumb += '/-p-' + (page - 1);
@@ -109,21 +115,37 @@ module.exports = (function() {
             }
         },
         user: {
+            myolx: function() {
+                navigation.clear.call(this);
+                return '/';
+            },
             'my-ads': function() {
                 var platform = this.app.session.get('platform');
+                var breadcrumb;
 
                 if (platform === 'wap' || platform === 'html4') {
-                    saveNavigation(this);
-                    return '/myolx';
+                    breadcrumb = '/myolx';
+                } 
+                else {
+                    navigation.clear.call(this);
+                    breadcrumb = '/';
                 }
+                saveNavigation(this);
+                return breadcrumb;
             },
             favorites: function() {
                 var platform = this.app.session.get('platform');
+                var breadcrumb;
 
                 if (platform === 'wap' || platform === 'html4') {
-                    saveNavigation(this);
-                    return '/myolx';
+                    breadcrumb = '/myolx';
+                } 
+                else {
+                    navigation.clear.call(this);
+                    breadcrumb = '/';
                 }
+                saveNavigation(this);
+                return breadcrumb;
             }
         }
     };
