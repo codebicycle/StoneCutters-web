@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'post_form_view',
@@ -11,7 +12,8 @@ module.exports = BaseView.extend({
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
         return _.extend({}, data, {
-            user: this.app.session.get('user')
+            user: this.app.session.get('user'),
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {

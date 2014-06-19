@@ -2,13 +2,16 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'user_myads_view',
     getTemplateData: function() {
         var data = BaseView.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data);
+        return _.extend({}, data, {
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
+        });
     },
     postRender: function() {
         $('.edit').click(function(e) {

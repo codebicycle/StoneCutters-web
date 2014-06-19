@@ -51,6 +51,8 @@ function handleItems(category, subcategory, params, callback) {
         helpers.analytics.addParam('subcategory', subcategory.toJSON());
         result.analytics = helpers.analytics.generateURL(app.session.get());
         result.category = category.toJSON();
+        result.subcategory = subcategory.toJSON();
+        result.relatedAds = query.relatedAds;
         result.type = 'items';
         callback(err, result);
     }.bind(this));

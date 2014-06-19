@@ -2,9 +2,17 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'post_success_view',
+    getTemplateData: function() {
+        var data = BaseView.prototype.getTemplateData.call(this);
+
+        return _.extend({}, data, {
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
+        });
+    },
     postRender: function() {
         var category = 'Posting';
         var action = 'PostingSuccess';

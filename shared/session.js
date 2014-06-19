@@ -81,7 +81,9 @@ var CookiesSession = function(req, res, callback) {
 
     this.put = function(key, value, options) {
         if (res.cookie) {
-            res.cookie(key, value, options || {});
+            res.cookie(key, value, _.defaults({}, (options || {}), {
+                path: '/'
+            }));
         }
     };
 
@@ -156,10 +158,12 @@ var ClientSession = function(app, callback) {
 
     function put(key, value, options) {
         var cookie = key + '=' + value;
+        var properties = _.defaults(options || {}, {
+            path: '/'
+        });
 
-        options = options || {};
-        for (var option in options) {
-            cookie += '; ' + option + '=' + options[option];
+        for (var option in properties) {
+            cookie += '; ' + option + '=' + properties[option];
         }
         document.cookie = cookie;
     }

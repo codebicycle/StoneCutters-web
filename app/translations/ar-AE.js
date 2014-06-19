@@ -83,7 +83,6 @@ module.exports = {
     'posting_fields_1.Please_Choose': '\u0627\u0644\u0631\u062C\u0627\u0621 \u0627\u0644\u0627\u062E\u062A\u064A\u0627\u0631 :',
     'posting_fields_1.price': '\u0633\u0639\u0631 ',
     'posting_fields_1.title': '\u0639\u0646\u0648\u0627\u0646 ',
-    'posting_fields_1.YourAdHasBeenSuccessfullySubmittedForApproval': 'Your ad has been successfully submitted for approval.',
     'posting_photos.RemovePhoto': '\u062D\u0630\u0641 \u0647\u0630\u0647 \u0627\u0644\u0635\u0648\u0631 ',
     'item.ThisAdIsNoLongerAvailable': 'This ad is no longer available',
     'postingerror.Error': '\u062E\u0637\u0627\u0621',

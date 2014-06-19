@@ -17,7 +17,9 @@ module.exports = BaseView.extend({
         data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
         data.item.date.since = helpers.timeAgo(data.item.date);
 
-        return data;
+        return _.extend({}, data, {
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
+        });
     },
     postRender: function() {
         var that = this;

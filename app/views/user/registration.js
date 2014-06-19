@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 
 module.exports = BaseView.extend({
     className: 'user_registration_view',
@@ -22,7 +23,8 @@ module.exports = BaseView.extend({
         return _.extend({}, data, {
             location: this.app.session.get('siteLocation'),
             user: this.app.session.get('user'),
-            params: params
+            params: params,
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     }
 });

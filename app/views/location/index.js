@@ -2,6 +2,7 @@
 
 var BaseView = require('../base');
 var _ = require('underscore');
+var helpers = require('../../helpers');
 var utils = require('../../../shared/utils');
 
 module.exports = BaseView.extend({
@@ -13,7 +14,8 @@ module.exports = BaseView.extend({
         var data = BaseView.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            location: this.app.session.get('location')
+            location: this.app.session.get('location'),
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {

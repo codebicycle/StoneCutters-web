@@ -67,6 +67,7 @@ module.exports = {
                 }
                 helpers.analytics.reset();
                 callback(null, _.extend(params, {
+                    category: category.toJSON(),
                     subcategories: category.get('children').toJSON(),
                     analytics: helpers.analytics.generateURL(this.app.session.get())
                 }));
@@ -335,6 +336,7 @@ module.exports = {
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
                     result.category = category.toJSON();
+                    result.subcategory = subcategory.toJSON();
                     helpers.analytics.reset();
                     helpers.analytics.addParam('item', item);
                     helpers.analytics.addParam('category', category.toJSON());
