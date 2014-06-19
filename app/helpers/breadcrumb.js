@@ -15,23 +15,46 @@ module.exports = (function() {
         },
         categories: {
             show: function() {
-                var page = this.app.session.get('page') || 0;
+                var page = this.page || this.app.session.get('page') || 0;
+                var state = {};
                 var breadcrumb;
+                var fragment;
 
-                saveNavigation(this);
                 if (!page || page === 0) {
                     navigation.clear.call(this);
-                    saveNavigation(this);
-                    return '/';
+                    breadcrumb = '/';
                 }
-                saveNavigation(this);
-                if (page === 1) {
-                    return '/' + common.slugToUrl(this.category);
+                else if (this.relatedAds) {
+                    state.name = 'relateds';
+                    state.item = this.relatedAds;
+                    if (page === 1) {
+                        fragment = navigation.getState.call(this);
+                        if (fragment && fragment.name === 'item-show') {
+                            breadcrumb = '/' + common.slugToUrl({
+                                id: fragment.item
+                            });
+                        }
+                        else {
+                            breadcrumb = '/' + common.slugToUrl(this.category);
+                        }
+                    }
+                    else {
+                        breadcrumb = '/' + common.slugToUrl(this.subcategory);
+                        if ((page - 1) > 1) {
+                            breadcrumb += '-p-' + (page - 1);
+                        }
+                    }
                 }
-                breadcrumb = '/' + common.slugToUrl(this.subcategory);
-                if ((page - 1) > 1) {
-                    breadcrumb += '-p-' + (page - 1);
+                else if (page === 1) {
+                    breadcrumb = '/' + common.slugToUrl(this.category);
                 }
+                else {
+                    breadcrumb = '/' + common.slugToUrl(this.subcategory);
+                    if ((page - 1) > 1) {
+                        breadcrumb += '-p-' + (page - 1);
+                    }
+                }
+                saveNavigation(this, state);
                 return breadcrumb;
             }
         },
@@ -60,19 +83,37 @@ module.exports = (function() {
                 var page = this.app.session.get('page') || 0;
                 var breadcrumb = '/' + common.slugToUrl(this.item.category);
                 var fragment = navigation.getState.call(this);
+                var state = {
+                    name: 'item-show',
+                    item: this.item.id
+                };
 
-                if (fragment && fragment.n === 'search') {
-                    this.search = fragment.q;
-                    this.page = fragment.p + 1;
-                    breadcrumb = handlers.items.search.call(this);
-                    navigation.popState.call(this);
+                if (fragment) {
+                    switch (fragment.name) {
+                        case 'search':
+                            this.search = fragment.search;
+                            this.page = fragment.page + 1;
+                            breadcrumb = handlers.items.search.call(this);
+                            navigation.popState.call(this);
+                            break;
+                        case 'relateds':
+                            breadcrumb = fragment.url + '?relatedAds=' + fragment.item;
+                            navigation.popState.call(this);
+                            break;
+                        case 'myads':
+                            breadcrumb = '/myolx/myadslisting';
+                            break;
+                        case 'favorites':
+                            breadcrumb = '/myolx/favoritelisting';
+                            break;
+                    }
                 }
                 else {
                     if (page > 1) {
                         breadcrumb += '-p-' + page;
                     }
                 }
-                saveNavigation(this);
+                saveNavigation(this, state);
                 return breadcrumb;
             },
             galery: function() {
@@ -89,15 +130,14 @@ module.exports = (function() {
                 return '/' + common.slugToUrl(this.item);
             },
             success: function() {
-                saveNavigation(this);
                 return '/' + common.slugToUrl(this.item);
             },
             search: function() {
                 var page = this.page || this.app.session.get('page') || 0;
                 var state = {
-                    n: 'search',
-                    q: this.search,
-                    p: page
+                    name: 'search',
+                    search: this.search,
+                    page: page
                 };
                 var breadcrumb;
 
@@ -130,7 +170,9 @@ module.exports = (function() {
                     navigation.clear.call(this);
                     breadcrumb = '/';
                 }
-                saveNavigation(this);
+                saveNavigation(this, {
+                    name: 'myads'
+                });
                 return breadcrumb;
             },
             favorites: function() {
@@ -144,44 +186,37 @@ module.exports = (function() {
                     navigation.clear.call(this);
                     breadcrumb = '/';
                 }
-                saveNavigation(this);
+                saveNavigation(this, {
+                    name: 'favorites'
+                });
                 return breadcrumb;
             }
         }
     };
 
-    function prepareUrl(url) {
-        var parts = url.split('?');
-        
-        return parts.shift();
-    }
-
     function prepareNavigation(data) {
-        var url = data.app.session.get('url');
+        var url = data.app.session.get('path');
         var fragment = navigation.getState.call(data);
 
-        url = prepareUrl(url);
-        console.log('Last [', (fragment ? fragment.url : undefined), '][', url, ']');
         if (fragment && fragment.url === url) {
             navigation.popState.call(data);
             return;
         }
-
         fragment = navigation.getPrevious.call(data);
-        console.log('Previous [', (fragment ? fragment.url : undefined), '][', url, ']');
         if (fragment && fragment.url === url) {
-            navigation.popState.call(data);
-            navigation.popState.call(data);
+            if (!data.relatedAds) {
+                navigation.popState.call(data);
+                navigation.popState.call(data);
+            }
             return;
         }
     }
 
     function saveNavigation(data, state) {
-        var url = data.app.session.get('url');
+        var url = data.app.session.get('path');
         var fragment = navigation.getState.call(data);
 
-        url = prepareUrl(url);
-        if (fragment && (fragment.url === url || (state && fragment.n === state.n))) {
+        if (fragment && (fragment.url === url || (state && fragment.name === state.name))) {
             navigation.popState.call(data);
         }
         navigation.pushState.call(data, url, state);

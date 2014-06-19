@@ -77,7 +77,7 @@ module.exports = {
                 if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                itemLocation = item.location.children[0].children[0].url;
+                itemLocation = item.location.url;
                 siteLocation = this.app.session.get('siteLocation');
                 if (itemLocation.split('.').pop() !== siteLocation.split('.').pop()) {
                     var protocol = app.session.get('protocol');
