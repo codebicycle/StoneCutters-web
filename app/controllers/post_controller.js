@@ -173,8 +173,30 @@ module.exports = {
                 if (err) {
                     return callback(err, result);
                 }
+                var protocol = app.session.get('protocol');
+                var platform = app.session.get('platform');
+                var currentLocation = app.session.get('location');
+                var location = result.item.get('location');
+                var slug;
+                var url;
+
+                if (location.url !== currentLocation.url) {
+                    url = [protocol, '://', platform, '.', location.url.replace('www.', 'm.'), '/login'].join('');
+                    if (location.children) {
+                        location = location.children[0];
+                        if (location.children) {
+                            location = location.children[0];
+                        }
+                    }
+                    return helpers.common.redirect.call(this, url, null, {
+                        pushState: false,
+                        query: {
+                            location: location.url
+                        }
+                    });
+                }
                 findFields(null, result);
-            });
+            }.bind(this));
 
             function checkAuthentication(params, id) {
                 var anonymousItem;
