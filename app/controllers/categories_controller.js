@@ -13,12 +13,13 @@ function handleItems(category, subcategory, params, callback) {
             params: params
         }
     };
-    var query = _.clone(params);
+    var query;
 
     if (slug.indexOf(params.title + '-cat-')) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
     helpers.pagination.prepare(app, params);
+    query = _.clone(params);
     params.categoryId = params.catId;
     delete params.catId;
     delete params.title;
