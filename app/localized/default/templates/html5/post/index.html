@@ -1,0 +1,14 @@
+<section id="selectCat">
+    {% from macros import Breadcrumb %}
+    {% set link = (breadcrumb | link) %}
+    {{ Breadcrumb(dictionary, link, dictionary["posting_selector.SelectCategory"]) }}
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{{ ['/posting/', category.id] | join('') | link }}" class="trackMe" data-tracking="Posting-ClickSelectCategoryList" data-id="{{category.id}}" >{{category.trName}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
+</section>

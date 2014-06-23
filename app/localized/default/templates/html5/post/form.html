@@ -1,0 +1,87 @@
+{% from macros import Breadcrumb, ErrorsPosting, FieldText, FieldTextArea, FieldCombobox %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
+{% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
+<div class="changeCat">
+    {{ dictionary["itemslisting.Category"] }} {{ subcategory.name }}
+    <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
+</div>
+<section id="posting">
+    <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+        <label>{{ dictionary["posting_fields_1.photos"] }}: <br> <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
+        {% if device.browserName == 'UC Browser' or device.browserName == 'Android Browser' %}
+            <div class="normalUpload">
+                <input type="file" name="images[0]" />
+                <input type="file" name="images[1]" />
+                <input type="file" name="images[2]" />
+                <input type="file" name="images[3]" />
+            </div>
+        {% else %}
+        <div class="fileUpload">
+            <input type="file" name="images[0]" class="file1" />
+            <input type="file" name="images[1]" class="file2" />
+            <input type="file" name="images[2]" class="file3" />
+            <input type="file" name="images[3]" class="file4" />
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file1"><span></span></div>
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file2"><span></span></div>
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file3"><span></span></div>
+            <div class="image trackMe" data-tracking="Posting-ClickUploadPicture" id="file4"><span></span></div>
+        </div>
+        {% endif %}
+
+        {% for field in fields.productDescription %}
+            {% if  field.name == 'description' %}
+                {{ FieldTextArea(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+            {% endif %}
+        {% endfor %}
+
+        {% if fields.categoryAttributes.length %}
+            <h4>{{ dictionary["misc.SpecificFields_title"] }}</h4>
+            {% for field in fields.categoryAttributes %}
+                {% if (field.values) or (field.fieldType == 'text') %}
+                    {% if field.fieldType == 'text' %}
+                        {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                    {% elif field.fieldType == 'combobox' %}
+                        {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
+        {% for field in fields.contactInformation %}
+            {% if field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name , form, field.value) }}
+            {% endif %}
+        {% endfor %}
+
+        <h3>
+            {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{location.current.name}}<br>
+            <a href="{{ ('/location?target=posting/'+category.id+'/'+subcategory.id) | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
+        </h3>
+
+        <input type="hidden" name="postingSession" value="{{postingSession}}">
+        <input type="hidden" name="location" value="{{siteLocation}}">
+        <input type="hidden" name="languageId" value="{{language}}">
+        <input type="hidden" name="languageCode" value="{{languageCode}}">
+        <input type="hidden" name="platform" value="{{platform}}">
+        <input type="hidden" name="category.parentId" value="{{category.id}}" class="itemCategory">
+        <input type="hidden" name="category.id" value="{{subcategory.id}}"  class="itemSubcategory">
+
+        <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
+
+        <div class="btnCenter">
+            <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange trackMe" data-tracking="Posting-ClickSubmit" >
+        </div>
+
+        {% set templateName = template + '/partials/analytics.html' %}
+        {% include templateName %}
+    </form>
+
+</section>

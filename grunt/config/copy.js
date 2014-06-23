@@ -8,8 +8,8 @@ module.exports = function(grunt) {
     var localization = require('../../server/config').get('localization');
     var iconsLocalization = require('../../app/config').get('icons');
     var templates = [{
-        src: ['app/templates/__layout.html'],
-        dest: 'app/templates/compiled/__layout.html'
+        src: ['app/localized/common/templates/__layout.html'],
+        dest: 'app/templates/__layout.html'
     }];
     var icons = [];
 
@@ -17,9 +17,9 @@ module.exports = function(grunt) {
         var files = {};
         var platform;
 
-        grunt.file.recurse('app/templates/default', function callback(abspath, rootdir, subdir, filename) {
-            var parts = subdir.split('/');
-            var dest = 'app/templates/compiled/default/' + subdir + '/' + filename;
+        grunt.file.recurse('app/localized/default/templates', function callback(abspath, rootdir, subdir, filename) {
+            var parts = subdir ? subdir.split('/') : [];
+            var dest = 'app/templates/default/' + (subdir ? subdir + '/' : '') + filename;
 
             if (filename.split('.').pop() !== 'html') {
                 return;
@@ -49,11 +49,11 @@ module.exports = function(grunt) {
         }
 
         function eachLocation(location) {
-            var dir = 'app/templates/' + location + '/' + platform;
+            var dir = 'app/localized/' + location + '/templates/' + platform;
 
             if (grunt.file.exists(dir)) {
                 grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
-                    var dest = 'app/templates/compiled/' + location + '/' + platform + '/' + subdir + '/' + filename;
+                    var dest = 'app/templates/' + location + '/' + platform + '/' + subdir + '/' + filename;
 
                     if (filename.split('.').pop() !== 'html') {
                         return;

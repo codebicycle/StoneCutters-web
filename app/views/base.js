@@ -33,7 +33,7 @@ module.exports = RendrView.extend({
             url: this.app.session.get('url'),
             href: this.app.session.get('href'),
             sixpack: this.app.session.get('sixpack'),
-            macros: 'compiled/' + template + '/partials/macros.html',
+            macros: template + '/partials/macros.html',
             currentRoute: this.app.session.get('currentRoute'),
             interstitial: this.app.session.get('interstitial')
         });

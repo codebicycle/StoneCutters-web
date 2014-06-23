@@ -1,0 +1,88 @@
+{% from macros import Breadcrumb, BreadcrumbHome, ErrorsPosting, FieldText, FieldTextArea, FieldCombobox %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
+{% if form and form.errors %}{{ ErrorsPosting(form.errors) }}{% endif %}
+<div id="posting">
+    <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+        <h4 class="title" >{{ dictionary["itemslisting.NavigatorByCategory"] }} :: {{ subcategory.name }}</h4>
+        <div class="formField">
+            <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
+            {% for image in item.images %}
+                <div class="imgHolder">
+                    <img src="{{image.thumbnail}}" alt="OLX - Item image" style="display: inline-block;">
+                    <label style="display: block; padding-top: .5em;">
+                        <input type="checkbox" name="del.image.{{image.id}}" value="{{image.id}}" >
+                        <small>{{ dictionary["posting_photos.RemovePhoto"] }}</small>
+                        <input type="hidden" name="image.{{image.id}}" value="{{image.id}}" style="display: none;" >
+                    </label>
+                </div>
+            {% endfor %}
+            <div class="imgHolder">
+                <input id="file1" type="file" name="images[]" />
+            </div>
+            <div class="imgHolder">
+                <input id="file2" type="file" name="images[]" />
+            </div>
+        </div>
+
+        {% for field in fields.productDescription %}
+            {% if  field.name == 'description' %}
+                {{ FieldTextArea(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+            {% endif %}
+        {% endfor %}
+
+        {% if fields.categoryAttributes.length %}
+            <div class="line"></div>
+            <h4>{{ dictionary["misc.SpecificFields_title"] }}</h4>
+            {% for field in fields.categoryAttributes %}
+                {% if (field.values) or (field.fieldType == 'text') %}
+                    {% if field.fieldType == 'text' %}
+                        {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                    {% elif field.fieldType == 'combobox' %}
+                        {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class="line"></div>
+        <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
+        {% for field in fields.contactInformation %}
+            {% if field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name , form, field.value) }}
+            {% endif %}
+        {% endfor %}
+
+        <input type="hidden" name="postingSession" value="{{postingSession}}">
+        <input type="hidden" name="location" value="{{itemLocation.url}}">
+        <input type="hidden" name="languageId" value="{{language}}">
+        <input type="hidden" name="languageCode" value="{{languageCode}}">
+        <input type="hidden" name="platform" value="{{platform}}">
+        <input type="hidden" name="category.parentId" value="{{category.id}}">
+        <input type="hidden" name="category.id" value="{{subcategory.id}}">
+        <input type="hidden" name="id" value="{{item.id}}">
+        <input type="hidden" name="sk" value="{{sk}}">
+
+        <div class="formField">
+            <h3>
+                {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{itemLocation.name}}<br>
+            </h3>
+        </div>
+
+        <div class="formActions">
+            <div class="btn-adjust btnOrange btnForm">
+                <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange w100">
+            </div>
+        </div>
+    </form>
+
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
+</div>
+{{ BreadcrumbHome(dictionary, link) }}

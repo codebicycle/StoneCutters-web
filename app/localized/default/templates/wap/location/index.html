@@ -1,0 +1,80 @@
+<tr>
+    <td>
+        {% if target == 'posting' %}
+            <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <strong style="color: #0075BD;">{{ dictionary["postingheader.Post"] }}</strong>
+                        <br>
+                        <small>{{ dictionary["countrystatecityv2.MessageFromPost"] }}</small>
+                    </td>
+                </tr>
+            </table>
+        {% else %}
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
+                <tr>
+                    <td style="border-top: solid thin #808080; padding:1px 4px;">
+                        <small>
+                            <a href="{{ ['/', target or ''] | join | link(location.url) }}">{{ location.name }}</a>
+                            {% if location.current and location.current.type != 'country' %}
+                                <small>&#62; {{ location.current.name }}</small>
+                            {% endif %}
+                        </small>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; background-color: #DDD;">
+            <tr>
+                <td style="padding: .25em .5em; border-top: solid thin #B0B0B0;">
+                    <form action="/location">
+                        <label for="search">
+                            <small>{{ dictionary["countryoptions.EnterCity"] }}</small>
+                         </label><br />
+                        <input type="text" value="" name="search" />
+                        <input type="submit" value="{{ dictionary["homeheader.Search"] }}" />
+                        <input type="hidden" value="{{ target }}" name="target" style="display: none;" />
+                    </form>
+
+                    {% set templateName = template + '/partials/analytics.html' %}
+                    {% include templateName %}
+                </td>
+            </tr>
+        </table>
+        {% if cities.length > 0 %}
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .25em .5em;; border-top: solid thin #808080;">
+                        <strong>
+                            <small style="display: block;">
+                                {{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}
+                            </small>
+                        </strong>
+                    </td>
+                </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                {% for city in cities %}
+                    <tr>
+                        <td style="border-top: solid thin #808080;">
+                            <a style="display: block; padding: .25em .5em;" href="{{ ['/', target or ''] | join | link(city.url) }}">
+                                <small style="display: block;">{{ city.name }}</small>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                        <small style="displayt: block;">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</small>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link) }}
+    </td>
+</tr>

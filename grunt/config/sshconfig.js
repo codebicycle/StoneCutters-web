@@ -12,9 +12,9 @@ module.exports = function(grunt) {
     }
     return {
       testing: {
-        host: "nodebox",
+        host: 'nodebox',
         port: 22,
-        username: "root",
+        username: 'root',
         agent: process.env.SSH_AUTH_SOCK,
         privateKey: privateKey
       }

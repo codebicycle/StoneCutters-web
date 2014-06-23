@@ -3,11 +3,11 @@
 module.exports = function(grunt) {
     return {
         scripts: {
-            files: ['app/**/*.js', 'shared/**/*.js', '!app/templates/default/**/*.js', '!app/templates/*olx*/**/*.js', '!app/translations/**/*.js'],
+            files: ['app/**/*.js', 'shared/**/*.js', '!app/translations/**/*.js'],
             tasks: ['exec:removeAssets', 'template', 'javascript']
         },
         templates: {
-            files: ['app/**/*.html', '!app/templates/compiled/**/*.html'],
+            files: ['app/**/*.html', '!app/templates/**/*.html'],
             tasks: ['exec:removeTemplates', 'template']
         },
         stylesheets: {
@@ -15,7 +15,7 @@ module.exports = function(grunt) {
             tasks: ['exec:removeStyles', 'stylus']
         },
         node: {
-            files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'shared/**/*.js', 'grunt/**/*.js', '!app/templates/**/*.js', '!translations/**/*', '!app/translations/**/*', '!public/**/*'],
+            files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'shared/**/*.js', 'grunt/**/*.js', '!translations/**/*', '!app/translations/**/*', '!public/**/*'],
             tasks: ['jshint:node']
         },
         utests: {

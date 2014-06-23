@@ -40,7 +40,7 @@ module.exports = function(grunt) {
         var file;
         var platform;
 
-        grunt.file.recurse('app/stylesheets/default', function callback(abspath, rootdir, subdir, filename) {
+        grunt.file.recurse('app/localized/default/stylesheets', function callback(abspath, rootdir, subdir, filename) {
             var parts = subdir.split('/');
             var target = 'public/css/default/' + parts[0] + '/styles';
 
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
         }
 
         function eachLocation(location) {
-            var dir = 'app/stylesheets/' + location + '/' + platform;
+            var dir = 'app/localized/' + location + '/stylesheets/' + platform;
             var defaultTarget = 'public/css/default/' + platform + '/styles';
             var target = 'public/css/' + location + '/' + platform + '/styles';
 

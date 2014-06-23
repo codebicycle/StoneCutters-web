@@ -1,0 +1,34 @@
+{% from macros import Breadcrumb %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
+<header id="location">
+	<p>
+		<a class="big country-link" href="/{{ target }}?location={{ location.url }}">{{ location.name }}</a>
+		{% if location.current and location.current.type != 'country' %}
+			<span>&#62; {{ location.current.name }}</span>
+		{% endif %}
+	</p>
+</header>
+<header id="search">
+	<form class="search-form" action="{{ '/location' | link }}">
+		<input type="text" name="search" placeholder="{{ dictionary["countryoptions.EnterCity"] }}" />
+		<input type="submit" class="submit trackMe" data-tracking="Posting-ClickSearchLocation" />
+		{% if target %}
+			<input type="hidden" value="{{ target }}" name="target" style="display: none;" />
+		{% endif %}
+	</form>
+</header>
+<div class="list cities-links">
+	{% if cities.length %}
+		<h3>{% if search %}{{ dictionary["listingpageitemslisting.AllResultsNew"] }}{% else %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% endif %}</h3>
+		<ul>
+			{% for city in cities %}
+				<li><a href="/{{ target }}?location={{city.url}}" class="city-link">{{ city.name }}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</p>
+	{% endif %}
+</div>
+{% set templateName = template + '/partials/analytics.html' %}
+{% include templateName %}
