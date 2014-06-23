@@ -23,13 +23,14 @@ module.exports = BaseView.extend({
             var $input = $('input.'+$image);
             $input.trigger('click');
         });
-        this.$('.fileUpload .image span').click(function(e) {
+        this.$('.fileUpload .imgCont span').click(function(e) {
             e.preventDefault();
             e.stopPropagation();
-            var $input = $(this).parent('.image').attr('id');
-            $(this).parent('.image').removeClass('fill').addClass('empty');
+            var $input = $(this).attr('class');
+            $(this).parent('.imgCont').removeClass('fill').addClass('empty');
+            $('#' + $input).removeAttr("style");
             var $clone = $('<input>').attr({'type': $('.'+$input).attr('type'),'name': $('.'+$input).attr('name'),'class': $('.'+$input).attr('class')});
-            $('.'+$input).replaceWith($clone);
+            $('fileUpload > .'+$input).replaceWith($clone);
         });
         this.$('form').on('change', 'input[type="file"]', function (e) {
             var imageUrl = window.URL.createObjectURL(this.files[0]);
@@ -51,18 +52,22 @@ module.exports = BaseView.extend({
                                 deg = 180;
                             break;
                             case 6:
-                                deg = 225;
+                                deg = 90;
                             break;
                             case 8:
-                                deg = 90;
+                                deg = 270;
                             break;
                         }
                         if (deg) {
-                            css['webkit-transform'] = 'rotate(' + deg + 'deg)';
-                            css['moz-transform'] = 'rotate(' + deg + 'deg)';
+                            css['-webkit-transform'] = 'rotate(' + deg + 'deg)';
+                            css['-moz-transform'] = 'rotate(' + deg + 'deg)';
+                            css['-o-transform'] = 'rotate(' + deg + 'deg)';
+                            css['-ms-transform'] = 'rotate(' + deg + 'deg)';
+                            css.transform = 'rotate(' + deg + 'deg)';
                         }
                     }
-                    $('#' + $current).css(css).addClass('fill').removeClass('empty').removeClass('loading');
+                    $('#' + $current).parent().addClass('fill').removeClass('empty');
+                    $('#' + $current).css(css).removeClass('loading');
                 });
             };
             $('#' + $current).addClass('loading');

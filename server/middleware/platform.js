@@ -19,6 +19,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return fail(err);
                 }
                 platform = body.web_platform || 'wap';
+                res.set('Vary', 'User-Agent');
                 res.redirect(301, req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
             }
 
@@ -38,6 +39,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (subdomains[subdomains.length - 1] === 'olx') {
                     subdomains = subdomains.slice(0, subdomains.length - 1);
                 }
+                res.set('Vary', 'User-Agent');
                 res.redirect(301, req.protocol + '://' + req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), 'm'));
             }
         };
