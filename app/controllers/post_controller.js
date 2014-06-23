@@ -272,6 +272,7 @@ module.exports = {
                     var subcategory = response.categories.search(item.category.id);
                     var category = response.categories.get(subcategory.get('parentId'));
 
+                    result.item = item;
                     result.user = user;
                     result.postingSession = result.postingSession.get('postingSession');
                     result.intent = 'edit';
