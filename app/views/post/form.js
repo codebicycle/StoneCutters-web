@@ -17,6 +17,8 @@ module.exports = BaseView.extend({
         });
     },
     postRender: function() {
+        var $form = this.$('form');
+
         this.$('.fileUpload .image').click(function(e) {
             e.preventDefault();
             var $image = $(this).attr('id');
@@ -32,7 +34,7 @@ module.exports = BaseView.extend({
             var $clone = $('<input>').attr({'type': $('.'+$input).attr('type'),'name': $('.'+$input).attr('name'),'class': $('.'+$input).attr('class')});
             $('fileUpload > .'+$input).replaceWith($clone);
         });
-        this.$('form').on('change', 'input[type="file"]', function (e) {
+        $form.on('change', 'input[type="file"]', function (e) {
             var imageUrl = window.URL.createObjectURL(this.files[0]);
             var image = new window.Image();
             var $current = $(this).attr('class');
@@ -84,6 +86,25 @@ module.exports = BaseView.extend({
                 custom: [category, itemCategory, itemSubcategory, action].join('::')
             };
         });
+        this.$('#change-location-posting').click(function onClick(event) {
+            var values = {};
+
+            $.each($form.serializeArray(), function each() {
+                if (values[this.name] !== undefined) {
+                    if (!values[this.name].push) {
+                        values[this.name] = [values[this.name]];
+                    }
+                    values[this.name].push(this.value || '');
+                } else {
+                    values[this.name] = this.value || '';
+                }
+            });
+            this.app.session.persist({
+                form: {
+                    values: values
+                }
+            });
+        }.bind(this));
     }
 });
 
