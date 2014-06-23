@@ -11,11 +11,18 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            var siteLocation = this.app.session.get('siteLocation');
+
+            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
+            }
             this.app.fetch({
                 categories: {
                     collection: 'Categories',
                     params: {
-                        location: this.app.session.get('siteLocation'),
+                        location: siteLocation,
                         languageCode: this.app.session.get('selectedLanguage')
                     }
                 }
@@ -49,11 +56,18 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            var siteLocation = this.app.session.get('siteLocation');
+
+            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
+            }
             this.app.fetch({
                 categories: {
                     collection: 'Categories',
                     params: {
-                        location: this.app.session.get('siteLocation'),
+                        location: siteLocation,
                         languageCode: this.app.session.get('selectedLanguage')
                     }
                 }
@@ -108,6 +122,12 @@ module.exports = {
                     }
                 }
             };
+
+            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
+            }
             app.fetch(spec, function afterFetch(err, result) {
                 var category = result.categories.get(params.categoryId);
                 if (!category) {
@@ -167,12 +187,17 @@ module.exports = {
                 }
             };
 
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
             checkAuthentication(_params, _params.id);
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 if (err) {
-                    return callback(err, result);
+                    return helpers.common.redirect.call(this, '/');
                 }
                 var protocol = app.session.get('protocol');
                 var platform = app.session.get('platform');

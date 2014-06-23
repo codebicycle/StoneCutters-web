@@ -83,7 +83,7 @@ module.exports = {
                     var protocol = app.session.get('protocol');
                     var platform = app.session.get('platform');
                     var url = [protocol, '://', platform, '.', itemLocation.url.replace('www.', 'm.'), '/', slug].join('');
-                    
+
                     if (itemLocation.children) {
                         itemLocation = itemLocation.children[0];
                         if (itemLocation.children) {
@@ -285,6 +285,7 @@ module.exports = {
         function controller(form) {
             var app = this.app;
             var user = app.session.get('user');
+            var platform = app.session.get('platform');
             var spec = {
                 categories: {
                     collection : 'Categories',
@@ -299,6 +300,7 @@ module.exports = {
                 }
             };
 
+
             params.id = params.itemId;
             delete params.itemId;
 
@@ -312,6 +314,9 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/404');
                 }
                 item = result.item.toJSON();
+                if (platform === 'html5') {
+                    return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
+                }
                 subcategory = result.categories.search(item.category.id);
                 helpers.analytics.reset();
                 helpers.analytics.addParam('item', item);
