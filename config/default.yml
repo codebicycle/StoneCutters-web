@@ -43,8 +43,8 @@ formidable:
 localization:
   wap: []
   html4: []
-  html5: []
-  desktop: []
+  html5: ['www.jaovat.com']
+  desktop: ['www.olx.in']
 
 error:
   detail: true

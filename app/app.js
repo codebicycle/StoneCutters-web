@@ -22,17 +22,8 @@ module.exports = BaseApp.extend({
      * app on both client and server.
      */
     initialize: function() {
-        var host = (function getHost(req) {
-            if (req) {
-                return req.headers.host;
-            }
-            return window.location.host;
-        })(this.req);
-        var index = host.indexOf(':');
-        var siteLocation = (index === -1) ? host : host.substring(0,index);
-
         Session.call(this);
-        this.templateAdapter.init(siteLocation.replace('m','www'));
+        this.templateAdapter.init();
         this.templateAdapter.registerHelpers(helpers.nunjucks.helpers);
         this.templateAdapter.registerExtensions(helpers.nunjucks.extensions);
     },
@@ -40,7 +31,7 @@ module.exports = BaseApp.extend({
     /**
     * Client-side only.
     *
-    * `start` is called at the bottom of `__layout.hbs`. Calling this kicks off
+    * `start` is called at the bottom of `__layout.html`. Calling this kicks off
     * the router and initializes the application.
     *
     * Override this method (remembering to call the superclass' `start` method!)

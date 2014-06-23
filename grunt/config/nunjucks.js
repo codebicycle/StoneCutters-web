@@ -22,16 +22,16 @@ module.exports = function(grunt) {
     }
 
     function name(filename) {
-        return filename.replace('app/templates/', '');
+        return filename.replace('app/localized/', '');
     }
 
     rendrNunjucks.init();
     rendrNunjucks.registerExtensions(require('../../app/helpers').nunjucks.extensions);
     nunjucks.options.env = rendrNunjucks.nunjucks;
 
-    grunt.file.recurse('app/templates/default', function callback(abspath, rootdir, subdir, filename) {
-        var parts = subdir.split('/');
-        var src = 'app/templates/compiled/default/' + subdir + '/' + filename;
+    grunt.file.recurse('app/localized/default/templates', function callback(abspath, rootdir, subdir, filename) {
+        var parts = subdir ? subdir.split('/') : [];
+        var src = 'app/templates/default/' + (subdir ? subdir + '/' : '') + filename;
         var dest = 'public/js/app/templates/default/' + parts[0] + '/templates.js';
 
         if (parts[0] === 'wap' || parts[0] === 'html4' || filename.split('.').pop() !== 'html') {
@@ -62,13 +62,13 @@ module.exports = function(grunt) {
     }
 
     function eachLocation(location) {
-        var dir = 'app/templates/' + location + '/' + platform;
+        var dir = 'app/localized/' + location + '/templates/' + platform;
 
         if (grunt.file.exists(dir)) {
             grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
                 var parts = subdir.split('/');
-                var defaultSrc = 'app/templates/compiled/default/' + platform + '/' + subdir + '/' + filename;
-                var src = 'app/templates/compiled/' + location + '/' + platform + '/' + subdir + '/' + filename;
+                var defaultSrc = 'app/templates/default/' + platform + '/' + subdir + '/' + filename;
+                var src = 'app/templates/' + location + '/' + platform + '/' + subdir + '/' + filename;
                 var dest = 'public/js/app/templates/' + location + '/' + platform + '/templates.js';
 
                 if (platform === 'wap' || platform === 'html4' || filename.split('.').pop() !== 'html') {

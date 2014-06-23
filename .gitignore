@@ -9,16 +9,12 @@ target
 
 translations-tmp
 node_modules
-public/mergedAssets.js
-public/js/mergedAssets.js
+app/templates
 public/js/libs.js
 public/js/app.js
 public/js/app
 public/js/min
 public/css
-app/templates/compiledTemplates.js
-app/templates/compiled
-public/styles.css
 .DS_Store
 npm-debug.log
 config/runtime.json
@@ -32,9 +28,6 @@ test/unit/coverage.html
 newrelic_agent.log
 mobile-webapp-static-*
 mobile-webapp-dynamic-*
-
-public/css/*/*-staging.css
-public/css/*/*-testing.css
 dist
 
 public/images/*/icons

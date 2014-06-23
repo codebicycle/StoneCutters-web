@@ -1,0 +1,164 @@
+<div id="supercontainer">
+    <div id="the-content" class="clearfix">
+        <div id="home" class="corner-radius">
+            <div class="homeTitleBar">
+                <h1> Find  ads in <strong>{{location.name}}</strong></h1>
+                <a id="locationRedirectModalLink" href="#" rel="nofollow">
+                Choose your location
+                </a>
+                <div id="locationRedirectModal" title="Set your city or state in {{location.name}}" style="display: none;"></div>
+            </div>
+            {% set catsPerPage = (categories.models.length // 3) %}
+            {% for category in categories.models %}
+                {% if not loop.index0 %}
+                    <div class="column first">
+                    {% set endColumn = 0 %}
+                {% elif not (loop.index0 % catsPerPage) %}
+                    {% if not endColumn %}
+                        </div>
+                        <div class="column">
+                        {% set endColumn = 1 %}
+                    {% elif endColumn == 1 %}
+                        </div>
+                        <div class="column last">
+                        {% set endColumn = 2 %}
+                    {% endif %}
+                {% endif %}
+
+                <div class="block" id="c-{{category.id}}" style="background-color: rgb(255, 255, 255);">
+                    <h3>
+                        <a href="/{{ category | slugToUrl | link }}">
+                            <strong>{{category.name}}</strong>
+                        </a>
+                        <span class="cat-counter">{{category.counter}} Ads</span>
+                    </h3>
+                    {% for subCategory in category.children %}
+                        <a href="/{{ subCategory | slugToUrl | link }}">{{subCategory.name}}</a>
+                    {% endfor %}
+                </div>
+
+                {% if loop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div id="marketing-module">
+            <div class="banner-1 corner-radius womaniya">
+                <img src="http://static02.olx-st.com/frontEnd/in/assets/images/tvad/sellphone.jpg" alt="Make Your Phone a SELL phone" class="corner-radius">
+            </div>
+            <div class="home-tv banner-2 corner-radius banner-bechshaala margin-top-20">
+                <img src="http://static01.olx-st.com/frontEnd/in/assets/images/tvad/make-phone-sellphone-new.jpg" alt="Make Your Phone a SELL phone" class="corner-radius">
+            </div>
+            <div class="banner follow-us corner-radius margin-top-20">
+                <span class="hache1">Follow us: </span>+48 Lakhs people like OLX!
+                <ul>
+                    <li class="Twitter">
+                        <a rel="external nofollow" href="https://twitter.com/OLX_India" target="_blank">Twitter</a>
+                    </li>
+                    <li class="Plus">
+                        <a href="https://plus.google.com/113395767313404239895/posts" rel="external nofollow" target="_blank">Google Plus</a>
+                    </li>
+                    <li class="Facebook">
+                        <a href="http://www.facebook.com/olxindia" rel="external nofollow" target="_blank">Facebook</a>
+                    </li>
+                    <li id="staticFbButton" class="">
+                        <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Folxindia&amp;width=450&amp;height=21&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowtransparency="true"></iframe>
+                    </li>
+                    <li>
+                        <div id="fb-like-button-content-home"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="marketing-vid-player"></div>
+        <div id="populars-on-olx" class="clearfix corner-radius">
+            <h1 class="box-title">
+                Popular on olx.in
+            </h1>
+            <div id="popular-cities">
+                <div class="box-title">Top cities:</div>
+                <div class="all-cities">
+                    <div class="city-column city-custom">
+                        <a href="http://newdelhi.olx.in" rel="follow">Delhi</a>
+                        <a href="http://bangalore.olx.in" rel="follow">Bangalore</a>
+                        <a href="http://mumbai.olx.in" rel="follow">Mumbai</a>
+                        <a href="http://chennai.olx.in" rel="follow">Chennai</a>
+                        <a href="http://hyderabad.olx.in" rel="follow">Hyderabad</a>
+                        <a href="http://kolkata.olx.in" rel="follow">Kolkata</a>
+                        <a href="http://pune.olx.in" rel="follow">Pune</a>
+                        <a href="http://ahmedabad.olx.in" rel="follow">Ahmedabad</a>
+                    </div>
+                    <div class="city-column city-custom">
+                        <a href="http://jaipur.olx.in" rel="follow">Jaipur</a>
+                        <a href="http://lucknow.olx.in" rel="follow">Lucknow</a>
+                        <a href="http://ludhiana.olx.in" rel="follow">Ludhiana</a>
+                        <a href="http://indore.olx.in" rel="follow">Indore</a>
+                        <a href="http://nagpur.olx.in" rel="follow">Nagpur</a>
+                        <a href="http://bhopal.olx.in" rel="follow">Bhopal</a>
+                        <a href="http://patna.olx.in" rel="follow">Patna</a>
+                        <a href="http://thane.olx.in" rel="follow">Thane</a>
+                        <a href="http://surat.olx.in" rel="follow">Surat</a>
+                        <a href="http://vadodara.olx.in" rel="follow">Vadodara</a>
+                        <a href="http://kanpur.olx.in" rel="follow">Kanpur</a>
+                        <a href="http://agra.olx.in" rel="follow">Agra</a>
+                        <a rel="follow" href="http://m.olx.in">
+                            <strong>View all cities</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="popular-states">
+                <div class="box-title">
+                    States:
+                </div>
+                <div class="state-column">
+                    <a href="http://andamannicobar.olx.in" rel="follow">Andaman &amp; Nicobar Islands</a>
+                    <a href="http://andhrapradesh.olx.in" rel="follow">Andhra Pradesh</a>
+                    <a href="http://arunachalpradesh.olx.in" rel="follow">Arunachal Pradesh</a>
+                    <a href="http://assam.olx.in" rel="follow">Assam</a>
+                    <a href="http://bihar.olx.in" rel="follow">Bihar</a>
+                    <a href="http://chandigarh.olx.in" rel="follow">Chandigarh</a>
+                    <a href="http://chhattisgarh.olx.in" rel="follow">Chhattisgarh</a>
+                    <a href="http://dadranagarhaveli.olx.in" rel="follow">Dadra &amp; Nagar Haveli</a>
+                    <a href="http://damandiu.olx.in" rel="follow">Daman &amp; Diu</a>
+                    <a href="http://stateofdelhi.olx.in" rel="follow">Delhi</a>
+                    <a href="http://goa.olx.in" rel="follow">Goa</a>
+                    <a href="http://gujarat.olx.in" rel="follow">Gujarat</a>
+                </div>
+                <div class="state-column">
+                    <a href="http://haryana.olx.in" rel="follow">Haryana</a>
+                    <a href="http://himachalpradesh.olx.in" rel="follow">Himachal Pradesh</a>
+                    <a href="http://jammukashmir.olx.in" rel="follow">Jammu &amp; Kashmir</a>
+                    <a href="http://jharkhand.olx.in" rel="follow">Jharkhand</a>
+                    <a href="http://karnataka.olx.in" rel="follow">Karnataka</a>
+                    <a href="http://kerala.olx.in" rel="follow">Kerala</a>
+                    <a href="http://lakshadweep.olx.in" rel="follow">Lakshadweep</a>
+                    <a href="http://madhyapradesh.olx.in" rel="follow">Madhya Pradesh</a>
+                    <a href="http://maharashtra.olx.in" rel="follow">Maharashtra</a>
+                    <a href="http://manipur.olx.in" rel="follow">Manipur</a>
+                    <a href="http://meghalaya.olx.in" rel="follow">Meghalaya</a>
+                    <a href="http://mizoram.olx.in" rel="follow">Mizoram</a>
+                </div>
+                <div class="state-column">
+                    <a href="http://nagaland.olx.in" rel="follow">Nagaland</a>
+                    <a href="http://orissa.olx.in" rel="follow">Orissa</a>
+                    <a href="http://pondicherry.olx.in" rel="follow">Pondicherry</a>
+                    <a href="http://punjab.olx.in" rel="follow">Punjab</a>
+                    <a href="http://rajasthan.olx.in" rel="follow">Rajasthan</a>
+                    <a href="http://sikkim.olx.in" rel="follow">Sikkim</a>
+                    <a href="http://tamilnadu.olx.in" rel="follow">Tamil Nadu</a>
+                    <a href="http://tripura.olx.in" rel="follow">Tripura</a>
+                    <a href="http://uttaranchal.olx.in" rel="follow">Uttaranchal</a>
+                    <a href="http://uttarpradesh.olx.in" rel="follow">Uttar Pradesh</a>
+                    <a href="http://westbengal.olx.in" rel="follow">West Bengal</a>
+                    <a rel="follow" href="http://www.olx.in/all-states/">
+                        <strong>View all regions</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
+</div>

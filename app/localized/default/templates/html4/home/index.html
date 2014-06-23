@@ -1,0 +1,17 @@
+{% view 'location/select' %}
+{% set templateName = template + '/partials/search.html' %}
+{% include templateName %}
+<div id="home">
+    <ul>
+        {% for category in categories %}
+            <li class="{{ "last" if loop.last else "" }}" >
+                <a href="/{{ category | slugToUrl | link }}">
+                    <img border="0" alt="{{ category.trName }}" src="{{ ['/images/', platform, '/icons/', icons.join('.'), '/', category.id, '.png'] | join('') | static }}" />
+                    <span>{{category.trName}}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
+</div>

@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         client: {
             src: ['app/**/*.js'],
             options: {
-                ignores: ['app/lib/**/*.js', 'app/templates/**/*.js'],
+                ignores: ['app/lib/**/*.js'],
                 browser: true,
                 predef: ['$', '_gaq', 'EXIF'],
                 '-W040': true

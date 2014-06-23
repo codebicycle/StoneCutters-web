@@ -1,0 +1,81 @@
+<tr>
+    <td>
+        <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
+            <tbody>
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <strong style="color: #0075BD;">{{category.trName}}</strong>
+                        <small style="color: #999;">({{category.counter}})</small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% view 'location/select' %}
+        {% set templateName = template + '/partials/search.html' %}
+        {% include templateName %}
+        {% if metadata.total == 0 %}
+            <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4" bgcolor="#FFFFFF">
+                <tbody>
+                    <tr>
+                        <td style="border-top: solid thin #808080;">
+                            {% if location.current.name %}
+                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}</small>
+                            {% else %}
+                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}</small>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4" bgcolor="#FFFFFF">
+                <tbody>
+                    {%for item in items %}
+                        <tr>
+                            <td style="border-top: solid thin #808080;">
+                                <a style="display: block;" tabindex="1" href="/{{ item | slugToUrl | link }}">
+                                    <small style="display: block;">
+                                        {% if item.thumbnail %}
+                                            <img border="0" alt="" src="{{ '/images/wap/photo.gif' | static }}">
+                                        {% else %}
+                                            <img border="0" alt="" src="{{ '/images/common/gif1x1.gif' | static }}" width="12" height="9" >
+                                        {% endif %}
+                                        {{ item.title }} {{ " - "+item.price.displayPrice if item.price.displayPrice }}
+                                    </small>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr style="display: none;">
+                        <td>
+                            {% set templateName = template + '/partials/analytics.html' %}
+                            {% include templateName %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {% if metadata.next or metadata.previous %}
+                <table width="100%" border="0" bgcolor="#DDDDDD" cellspacing="0" cellpadding="4">
+                    <tbody>
+                        <tr>
+                            <td align="center" style="border-top: solid thin #808080;">
+                                <small style="display: block;">
+                                    {% if metadata.previous %}
+                                        <a href="{{ metadata.previous | link }}" >&lt;</a>
+                                    {% endif %}
+                                    {{ metadata | pagination('wap') }}
+                                    {% if metadata.next %}
+                                        <a href="{{ metadata.next | link }}" >&gt;</a>
+                                    {% endif %}
+                                </small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link) }}
+    </td>
+</tr>
