@@ -99,7 +99,7 @@ module.exports = BaseView.extend({
                     values[this.name] = this.value || '';
                 }
             });
-            this.app.session.persist({
+            this.app.session.update({
                 form: {
                     values: values
                 }
