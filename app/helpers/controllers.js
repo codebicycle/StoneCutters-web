@@ -115,7 +115,9 @@ function setInterstitial() {
                 });
             }
             else {
-                common.redirect.call(this, [url, '?ref=', protocol, '://', host, this.app.session.get('url')].join(''));
+                common.redirect.call(this, [url, '?ref=', protocol, '://', host, this.app.session.get('url')].join(''), {
+                    status: 302
+                });
                 return true;
             }
         }
