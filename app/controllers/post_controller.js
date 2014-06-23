@@ -187,14 +187,14 @@ module.exports = {
                 }
             };
 
-            if (!user) {
+            if (!user && !securityKey) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
             checkAuthentication(_params, _params.id);
             app.fetch(spec, {
-                'readFromCache': false
+                readFromCache: false
             }, function afterFetch(err, result) {
                 if (err) {
                     return helpers.common.redirect.call(this, '/');
