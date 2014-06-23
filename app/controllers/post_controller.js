@@ -14,7 +14,9 @@ module.exports = {
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                return helpers.common.redirect.call(this, '/location?target=posting');
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
             }
             this.app.fetch({
                 categories: {
@@ -57,7 +59,9 @@ module.exports = {
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                return helpers.common.redirect.call(this, '/location?target=posting');
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
             }
             this.app.fetch({
                 categories: {
@@ -120,7 +124,9 @@ module.exports = {
             };
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                return helpers.common.redirect.call(this, '/location?target=posting');
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
             }
             app.fetch(spec, function afterFetch(err, result) {
                 var category = result.categories.get(params.categoryId);
