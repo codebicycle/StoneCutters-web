@@ -67,7 +67,7 @@ module.exports = {
                 var item = data.item.toJSON();
                 var slug;
                 var itemLocation;
-                var siteLocation;
+                var currentLocation;
                 var spec;
 
                 if (!item) {
@@ -77,18 +77,23 @@ module.exports = {
                 if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                itemLocation = item.location.url;
-                siteLocation = this.app.session.get('siteLocation');
-                if (itemLocation.split('.').pop() !== siteLocation.split('.').pop()) {
+                itemLocation = item.location;
+                currentLocation = app.session.get('location');
+                if (itemLocation.url !== currentLocation.url) {
                     var protocol = app.session.get('protocol');
                     var platform = app.session.get('platform');
-                    var host = item.location.url.replace('www', 'm');
-                    var url = [protocol, '://', platform, '.', host, '/', slug].join('');
-
+                    var url = [protocol, '://', platform, '.', itemLocation.url.replace('www.', 'm.'), '/', slug].join('');
+                    
+                    if (itemLocation.children) {
+                        itemLocation = itemLocation.children[0];
+                        if (itemLocation.children) {
+                            itemLocation = itemLocation.children[0];
+                        }
+                    }
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
                         query: {
-                            location: itemLocation
+                            location: itemLocation.url
                         }
                     });
                 }
