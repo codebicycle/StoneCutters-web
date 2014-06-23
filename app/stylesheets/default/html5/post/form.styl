@@ -37,11 +37,10 @@ section#posting > form .normalUpload input[type="file"] {
 }
 section#posting > form .fileUpload .image {
 	position: relative;
-    width: 20% !important;
+    width: 100% !important;
     z-index: 10;
 	float: left;
 	position: relative;
-	margin: 0 .625rem 0 0;
 	background-color: #ddd;
 	background-image: url(imageUrl/images/html5/cameraSmall.png);
 	background-size: 75% auto;
@@ -53,14 +52,15 @@ section#posting > form .fileUpload .image:before {
     display: block;
     padding-top: 100% !important;
 }
-section#posting > form .fileUpload .image.empty {
-	background-image: url(imageUrl/images/html5/cameraSmall.png)!important;
-	background-size: 75% auto;
+
+section#posting > form .imgCont{
+    width: 20% !important;
+    float: left;
+    position: relative;
+    margin: 0 .625rem 0 0;
 }
-section#posting > form .fileUpload .image.fill {
-	background-size: cover;
-}
-section#posting > form .fileUpload .image span {
+
+section#posting > form .fileUpload span {
     -moz-box-sizing: border-box;
     animation: 250ms ease-in-out 0s normal none 1 popCloseButton;
     background-color: rgba(0, 0, 0, 0.5);
@@ -74,11 +74,24 @@ section#posting > form .fileUpload .image span {
     top: 5%;
     width: 35%;
     cursor: pointer;
+    z-index: 10;
 }
-section#posting > form .fileUpload .image.fill span {
+section#posting > form .fileUpload .imgCont.fill span {
 	display: block;
 }
-section#posting > form .fileUpload .image span:after {
+section#posting > form .fileUpload .imgCont.fill .image {
+    background-size: cover;
+}
+section#posting > form .fileUpload .imgCont.empty .image {
+    background-image: url(imageUrl/images/html5/cameraSmall.png)!important;
+    background-size: 75% auto;
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+}
+
+section#posting > form .fileUpload span:after {
     border: 1px solid #FFFFFF;
     content: "";
     height: 0;
@@ -87,10 +100,13 @@ section#posting > form .fileUpload .image span:after {
     position: absolute;
     top: 50%;
     transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
     width: 70%;
 }
 
-section#posting > form .fileUpload .image span:before {
+section#posting > form .fileUpload  span:before {
     border: 1px solid #FFFFFF;
     content: "";
     height: 0;
@@ -99,8 +115,12 @@ section#posting > form .fileUpload .image span:before {
     position: absolute;
     top: 50%;
     transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     width: 70%;
 }
+
 section#posting > form .btnCenter input {
 	width: 100%;
 }
