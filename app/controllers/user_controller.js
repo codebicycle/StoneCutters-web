@@ -38,6 +38,17 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            var user = this.app.session.get('user');
+            var platform = this.app.session.get('platform');
+
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            if (platform === 'html5') {
+                return helpers.common.redirect.call(this, '/');
+            }
             callback(null, {});
         }
     },
@@ -45,7 +56,13 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
-            var user = this.app.session.get('user') || {};
+            var user = this.app.session.get('user');
+
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
             var spec = {
                 myAds: {
                     collection: 'Items',
@@ -80,7 +97,13 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
-            var user = this.app.session.get('user') || {};
+            var user = this.app.session.get('user');
+
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
             var spec = {
                 favorites: {
                     collection: 'Items',
