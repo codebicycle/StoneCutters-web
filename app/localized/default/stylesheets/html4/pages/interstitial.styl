@@ -1,12 +1,75 @@
-#interstitial{background-image:url(imageUrl/images/common/marketing/backgroundInt200.jpg);background-repeat:repeat-y;background-size:100%;text-align:center;font-size:16px;position:absolute;top:0;z-index:9999}
-@media screen and (min-width:200px) and (max-width:299px){#interstitial{background-image:url(imageUrl/images/common/marketing/backgroundInt300.jpg)}}
-@media screen and (min-width:300px){#interstitial{background-image:url(imageUrl/images/common/marketing/backgroundInt400.jpg)}}
-#interstitial .header{width:100%;display:block;margin:10px auto}
-#interstitial #logoTop{width:20%;margin:0;display:inline;vertical-align:top}
-#interstitial h1{width:60%;display:inline;margin:0 0 0 .3em;0;display:inline;text-align:left;font-size:1.5em;display:inline;font-weight:normal;line-height:3.5em;text-transform:capitalize}
-#interstitial #mobileImg{width:70%;margin:0 auto}
-#interstitial .btn-adjust{width:80%;display:block;margin:10px auto}
-#interstitial .btn-adjust.btnGrey a{height:10px;padding-top:10px}
-#interstitial .btn-adjust.btnOrange a{background:none repeat scroll 0 0 #ff7800;border:1px solid #e14b02;border-radius:3px 3px 3px 3px;color:#fff!important;cursor:pointer;display:inline-block;font-size:1em;font-weight:bold!important;height:auto;min-height:25px;padding: 10px 7px .7em;text-decoration:none;width:80%}
-#interstitial .continue{width:100%;text-align:center;margin:15px 0 0 0}
-#interstitial .continue a{color:#515151;text-decoration:none}
+#interstitial{ 
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-image: url(imageUrl/images/common/marketing/backgroundInt200.jpg); 
+	background-repeat: repeat-y; 
+	background-size: 100%; 
+	text-align: center;
+	z-index: 10;
+}
+
+@media screen and (min-width: 200px) and (max-width: 299px){ 
+    #interstitial{background-image: url(imageUrl/images/common/marketing/backgroundInt300.jpg);}
+}
+@media screen and (min-width: 300px){ 
+    #interstitial{background-image: url(imageUrl/images/common/marketing/backgroundInt400.jpg);}
+}
+#interstitial .header {
+	width: 100%;
+	display: block;
+	margin:10px auto;
+}
+#interstitial #logoTop {
+	width: 20%;
+	margin: 0;
+	display: inline;
+	vertical-align: top;
+}
+#interstitial h1{ 
+	width: 60%; 
+	display: inline; 
+	margin:0 0 0 7px; 
+	display: inline; 
+	text-align: left;
+	font-size: 24px;
+	line-height: 85px;
+	text-transform: capitalize;
+}
+#interstitial #mobileImg {
+	width: 70%;
+	margin:0 auto;
+}
+#interstitial a.btns {
+	width: 80%;
+	display: inline-block;
+	padding: 10px; 
+	margin: 10px 0; 
+	font-size: 16px;
+}
+#interstitial .btn-adjust.btnGrey a {
+	height: 10px; 
+	padding-top: 10px;
+}
+#interstitial .continue {
+	width: 100%;
+	text-align: center;
+	margin: 15px 0 0 0;
+}
+#interstitial .continue a {
+	color:#515151; 
+	text-decoration: none;
+}
+@media screen and (max-width: 320px){ 
+    #interstitial h1 {
+    	font-size: 16px; 
+    	line-height: 41px;
+    }
+}
+@media screen and (min-width: 640px) { 
+    #interstitial h1 {
+    	font-size: 48px; 
+    	line-height: 41px;
+    }
+}
