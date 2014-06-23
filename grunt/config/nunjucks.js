@@ -22,7 +22,7 @@ module.exports = function(grunt) {
     }
 
     function name(filename) {
-        return filename.replace('app/localized/', '');
+        return filename.replace('app/templates/', '');
     }
 
     rendrNunjucks.init();
