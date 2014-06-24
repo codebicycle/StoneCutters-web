@@ -4,11 +4,9 @@ module.exports = function appUseConf(done) {
     var config = require('./config');
     var express = require('express');
     var rendr = require('rendr');
-
-    var app = express();
     var DataAdapter = require('../shared/adapters/data');
     var dataAdapter = new DataAdapter({
-        userAgent: 'Arwen/' + app.get('env') + ' (node.js ' + process.version + ')'
+        userAgent: 'Arwen/' + config.get('environment', 'development') + ' (node.js ' + process.version + ')'
     });
     var middleware = require('./middleware')(dataAdapter);
     var server = rendr.createServer({
@@ -16,11 +14,13 @@ module.exports = function appUseConf(done) {
         errorHandler: require('./errorHandler')(),
         apiPath: config.get(['smaug', 'protocol'], 'http') + '://' + config.get(['smaug', 'url'], 'api-v2.olx.com')
     });
+    var Router = require('./router');
+    var router = new Router(server);
 
     function expressConfiguration() {
-        app.use(express.compress());
-        app.use(express.static(__dirname + '/../public'));
-        app.use(express.cookieParser());
+        server.expressApp.use(express.compress());
+        server.expressApp.use(express.static(__dirname + '/../public'));
+        server.expressApp.use(express.cookieParser());
     }
 
     function rendrConfiguration(rendrApp) {
@@ -34,9 +34,8 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.bar());
     }
 
-    app.configure(expressConfiguration);
+    server.expressApp.configure(expressConfiguration);
     server.configure(rendrConfiguration);
-    app.use(server);
-    require('./router')(app, dataAdapter);
-    done(app);
+    router.route();
+    done(server.expressApp);
 };

@@ -88,3 +88,7 @@ Router.prototype.getParamsHash = function(pattern, paramsArray, search) {
     }, {});
     return _.extend(query, params);
 };
+
+Router.prototype.getControllerPath = function(controllerName) {
+    return this.options.paths.controllerDir + '/' + controllerName;
+};
