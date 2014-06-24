@@ -3,12 +3,15 @@
 var helpers = require('../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var config = require('../config');
 
 module.exports = {
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'show'], {}));
+
             var app = this.app;
             var user = app.session.get('user');
             var securityKey = params.sk;
@@ -212,6 +215,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'search'], {}));
+
             var page = params ? params.page : undefined;
             var app = this.app;
             var spec = {

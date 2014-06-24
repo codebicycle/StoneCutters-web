@@ -39,5 +39,35 @@ module.exports = {
         time: 6000000,
         ignorePath: ['/health', '/stats', '/stats/memory', '/stats/threads', '/stats/check', '/login', '/interstitial', '/404', '/500', '/analytics/pageview.gif', '/analytics/pageevent.gif'],
         ignorePlatform: ['wap', 'desktop']
+    },
+    cache: {
+        headers: {
+            home: {
+                index: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                }
+            },
+            categories: {
+                subcategories: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                },
+                items: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                }
+            },
+            items: {
+                search: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                },
+                show: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                }
+            }
+        }
     }
 };

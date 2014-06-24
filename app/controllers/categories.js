@@ -2,8 +2,11 @@
 
 var helpers = require('../helpers');
 var _ = require('underscore');
+var config = require('../config');
 
 function handleItems(category, subcategory, params, callback) {
+    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'items'], {}));
+
     var slug = helpers.common.slugToUrl(subcategory.toJSON());
     var page = params ? params.page : undefined;
     var app = this.app;
@@ -60,6 +63,8 @@ function handleItems(category, subcategory, params, callback) {
 }
 
 function handleShow(category, params, callback) {
+    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'subcategories'], {}));
+
     var slug = helpers.common.slugToUrl(category.toJSON());
 
     if (slug.indexOf(params.title + '-cat-')) {
