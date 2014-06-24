@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': '<<BRAND>> Bana \xD6zel',
     'myolx.MyFavorites': 'Favorilerim',
     'myolx.SignOut': '\xDCye \xC7\u0131k\u0131\u015F\u0131',
+    'myolx.TheAdHasBeenDeleted': '\u0130lan silinmi\u015Ftir',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u015Eu an aktif ilan\u0131n\u0131z bulunmuyor',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\u015Eu an favori ilan\u0131n\u0131z bulunmuyor',
     'itemwarning.Here': 't\u0131klay\u0131n.',

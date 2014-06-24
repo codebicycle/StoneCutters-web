@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Meu<<BRAND>>',
     'myolx.MyFavorites': 'Meus Favoritos',
     'myolx.SignOut': 'Sair',
+    'myolx.TheAdHasBeenDeleted': 'O seu an\xFAncio foi exclu\xEDdo com sucesso!',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Atualmente, n\xE3o h\xE1 an\xFAncios ativos em sua conta',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'No momento voc\xEA n\xE3o possui an\xFAncios favoritos.',
     'itemwarning.Here': 'aqui.',

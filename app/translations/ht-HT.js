@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': '<<BRAND>> Mwen',
     'myolx.MyFavorites': 'Favori mwen yo',
     'myolx.SignOut': 'Dekonekte',
+    'myolx.TheAdHasBeenDeleted': 'Anons sa yo efase',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Ou pa genyen anons aktiv pou konyea a',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Ou pa genyen okenn anons prefere ou te sere pou konyea',
     'itemwarning.Here': 'ici.',

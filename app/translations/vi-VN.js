@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': '<<BRAND>> c\u1EE7a t\xF4i',
     'myolx.MyFavorites': 'M\u1EE5c y\xEAu th\xEDch c\u1EE7a t\xF4i',
     'myolx.SignOut': 'Tho\xE1t',
+    'myolx.TheAdHasBeenDeleted': 'Tin rao v\u1EB7t \u0111\xE3 \u0111\u01B0\u1EE3c x\xF3a',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Hi\u1EC7n t\u1EA1i b\u1EA1n kh\xF4ng c\xF3 danh m\u1EE5c ho\u1EA1t \u0111\u1ED9ng n\xE0o',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Hi\u1EC7n t\u1EA1i b\u1EA1n kh\xF4ng c\xF3 danh m\u1EE5c \u01B0a th\xEDch n\xE0o',
     'itemwarning.Here': '\u1EDF \u0111\xE2y.',

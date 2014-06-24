@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': '<<BRAND>> \u0644\u064A',
     'myolx.MyFavorites': '\u0645\u0641\u0636\u0644\u0627\u062A\u064A',
     'myolx.SignOut': '\u062E\u0631\u0648\u062C',
+    'myolx.TheAdHasBeenDeleted': 'The ad has been deleted',
     'myolx.YouCurrentlyHaveNoActiveListings': 'You currently have no active listings',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'You currently have no favorite listings',
     'itemwarning.Here': '\u0647\u0646\u0627 ',

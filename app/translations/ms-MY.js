@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': '<<BRAND>> Saya',
     'myolx.MyFavorites': 'Kegemaran Saya',
     'myolx.SignOut': 'Daftar keluar',
+    'myolx.TheAdHasBeenDeleted': 'Iklan telah dihapuskan',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Anda tiada iklan yang aktif pada masa ini.',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Anda tiada iklan kegemaran pada masa ini.',
     'itemwarning.Here': 'di sini.',
