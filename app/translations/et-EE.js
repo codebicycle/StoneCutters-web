@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Minu <<BRAND>>',
     'myolx.MyFavorites': 'Minu lemmikud',
     'myolx.SignOut': 'Logi v\xE4lja',
+    'myolx.TheAdHasBeenDeleted': 'Kuulutus on kustutatud',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Hetkel pole aktiivseid kuulutusi',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Hetkel pole lemmikutesse paigutatud kuulutusi',
     'itemwarning.Here': 'siia.',

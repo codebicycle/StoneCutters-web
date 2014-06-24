@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': ' \u05E9\u05DC\u05D9 <<BRAND>>',
     'myolx.MyFavorites': '\u05D4\u05DE\u05D5\u05E2\u05D3\u05E4\u05D9\u05DD \u05E9\u05DC\u05D9',
     'myolx.SignOut': '\u05E6\u05D0',
+    'myolx.TheAdHasBeenDeleted': '\u05D4\u05DE\u05D5\u05D3\u05E2\u05D4 \u05E0\u05DE\u05D7\u05E7\u05D4',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u05D0\u05D9\u05DF \u05DC\u05DA \u05DB\u05E8\u05D2\u05E2 \u05DE\u05D5\u05D3\u05E2\u05D5\u05EA \u05E4\u05E2\u05D9\u05DC\u05D5\u05EA',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\u05D0\u05D9\u05DF \u05DC\u05DA \u05DB\u05E8\u05D2\u05E2 \u05DE\u05D5\u05D3\u05E2\u05D5\u05EA \u05DE\u05D5\u05E2\u05D3\u05E4\u05D5\u05EA',
     'itemwarning.Here': '\u05DB\u05D0\u05DF',

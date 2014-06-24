@@ -1,7 +1,11 @@
 {% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["myolx.MyAds"], ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
-{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
+{% if deleted %}
+    <div id="messages">
+        <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
+    </div>
+{% endif %}
 <div id="myads">
     {% if myAds.length %}
         <ul class="itemListing">

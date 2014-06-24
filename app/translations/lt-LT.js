@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Mano <<BRAND>>',
     'myolx.MyFavorites': 'Mano m\u0117gstamiausieji',
     'myolx.SignOut': 'I\u0161siregistruoti',
+    'myolx.TheAdHasBeenDeleted': 'Skelbimas i\u0161trintas',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u0160iuo metu neturite aktyvi\u0173 skelbim\u0173',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\u0160iuo metu parankini\u0173 skelbim\u0173 neturite',
     'itemwarning.Here': '\u010Dia.',

@@ -8,6 +8,18 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            var platform = this.app.session.get('platform');
+            var user;
+
+            if (platform === 'wap') {
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
+            if (user) {
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
             callback(null, {
                 form: form,
                 agreeTerms: params.agreeTerms
@@ -18,6 +30,18 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            var platform = this.app.session.get('platform');
+            var user;
+
+            if (platform === 'wap') {
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
+            if (user) {
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
             callback(null, {
                 form: form,
                 redirect: params.redirect
@@ -30,6 +54,7 @@ module.exports = {
         function controller() {
             this.app.session.clear('user');
             return helpers.common.redirect.call(this, '/', null, {
+                status: 302,
                 pushState: false
             });
         }
@@ -38,26 +63,32 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var user = this.app.session.get('user');
             var platform = this.app.session.get('platform');
+            var user;
 
+            if (platform === 'wap' || platform === 'html5') {
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
-            if (platform === 'html5') {
-                return helpers.common.redirect.call(this, '/');
-            }
             callback(null, {});
         }
     },
     'my-ads': function(params, callback) {
-        helpers.controllers.control.call(this, params, true, controller);
+        helpers.controllers.control.call(this, params, controller);
 
-        function controller(form) {
-            var user = this.app.session.get('user');
+        function controller() {
+            var platform = this.app.session.get('platform');
+            var user;
 
+            if (platform === 'wap') {
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
@@ -71,7 +102,6 @@ module.exports = {
                     }
                 }
             };
-            var query = _.clone(params);
 
             _.extend(spec.myAds.params, params, {
                 location: this.app.session.get('siteLocation'),
@@ -82,12 +112,11 @@ module.exports = {
 
                 function processItem(item) {
                     item.date.since = helpers.timeAgo(item.date);
-
                 }
 
                 result.myAdsMetadata = myAds.get('metadata');
                 result.myAds = myAds.get('data');
-                result.form = form;
+                result.deleted = params.deleted;
                 _.each(result.myAds, processItem);
                 callback(err, result);
             });
@@ -97,8 +126,13 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
-            var user = this.app.session.get('user');
+            var platform = this.app.session.get('platform');
+            var user;
 
+            if (platform === 'wap') {
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302

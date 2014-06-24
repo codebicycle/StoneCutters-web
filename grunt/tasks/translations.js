@@ -58,7 +58,7 @@ module.exports = function(grunt) {
         function download(done, version) {
             http.request({
                 host: 'jfrog.olx.com.ar',
-                path: '/artifactory/mobile-jenkins-release/olx/smaug-translations/smaug-translations-0.1.186.zip'
+                path: '/artifactory/mobile-jenkins-release/olx/smaug-translations/smaug-translations-' + version + '.zip'
             }).on('response', onResponse).on('error', done.fail).end();
 
             function onResponse(res) {
