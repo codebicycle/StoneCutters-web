@@ -14,6 +14,7 @@ module.exports = {
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
+            var favorite = params.favorite;
             var siteLocation = app.session.get('siteLocation');
             var anonymousItem;
             var spec;
@@ -129,6 +130,7 @@ module.exports = {
                     helpers.analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = helpers.analytics.generateURL(app.session.get());
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
+                    result.favorite = favorite;
 
                     title = helpers.seo.shortTitle(item.title, item.location.children[0].children[0].name);
                     description = helpers.seo.shortDescription(item.title, item.description, item.category.name, item.location.children[0].children[0].name);
@@ -377,11 +379,24 @@ module.exports = {
         }
     },
     favorite: function(params, callback) {
-        var intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
+        var platform = this.app.session.get('platform');
+        var user;
+        var intent;
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        user = this.app.session.get('user');
+        if (!user) {
+            var url = helpers.common.params('/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
+
+            return helpers.common.redirect.call(this, url, null, {
+                status: 302
+            });
+        }
+        intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
 
         function add(done) {
-            var user = this.app.session.get('user') || {};
-
             helpers.dataAdapter.request('post', '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
                 query: {
                     token: user.token
@@ -389,22 +404,42 @@ module.exports = {
             }, done.errfcb);
         }
 
-        function next(done) {
+        function success(done) {
+            var url = (params.redirect || '/des-iid-' + params.itemId);
+
+            url = helpers.common.params(url, 'favorite', (intent || 'add'));
+            helpers.common.redirect.call(this, url, null, {
+                status: 302
+            });
+        }
+
+        function error(done) {
             helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
                 status: 302
             });
         }
 
-        asynquence().or(next.bind(this))
+        asynquence().or(error.bind(this))
             .then(add.bind(this))
-            .val(next.bind(this));
+            .val(success.bind(this));
     },
     delete: function(params, callback) {
-        var itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
+        var platform = this.app.session.get('platform');
+        var user;
+        var itemId;
+        
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        user = this.app.session.get('user');
+        if (!user) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+        itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
 
         function remove(done) {
-            var user = this.app.session.get('user') || {};
-
             helpers.dataAdapter.request('post', ('/items/' + itemId + '/delete'), {
                 query: {
                     token: user.token
