@@ -109,5 +109,5 @@ publicEnvironments:
     host: '.m-testing.olx.com'
     mask: '.m.olx.com.py'
   staging:
-    host: '.m-staging-olx.com'
+    host: '.m-staging.olx.com'
     mask: '.m.olx.com.py'

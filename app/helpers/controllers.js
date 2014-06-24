@@ -5,10 +5,11 @@ var common = require('./common');
 var marketing = require('./marketing');
 var config = require('../config');
 var intertitial = config.get(['interstitial', 'enabled'], false);
+var isServer = typeof window === 'undefined';
 
 function setUrlVars() {
     var href;
-    if (typeof window === 'undefined') {
+    if (isServer) {
         href = this.app.session.get('protocol') + '://' + this.app.session.get('siteLocation') + this.app.session.get('path');
 
         this.app.session.update({
@@ -53,7 +54,7 @@ function setCurrentRoute() {
 }
 
 function setReferer() {
-    if (typeof window === 'undefined') {
+    if (isServer) {
         return;
     }
     this.app.session.update({
@@ -109,7 +110,7 @@ function setInterstitial() {
             this.app.session.persist({
                 downloadApp: time
             });
-            if (typeof window !== 'undefined' || platform === 'html5') {
+            if (!isServer || platform === 'html5') {
                 this.app.session.update({
                     interstitial: true
                 });
@@ -126,7 +127,7 @@ function setInterstitial() {
 }
 
 function setLanguage(params) {
-    if (typeof window === 'undefined') {
+    if (isServer) {
         return;
     }
     var languages = this.app.session.get('languages');
@@ -141,7 +142,7 @@ function setLanguage(params) {
 }
 
 function setLocation(params, callback) {
-    if (typeof window === 'undefined') {
+    if (isServer) {
         return callback();
     }
     var app = this.app;
@@ -230,6 +231,15 @@ function processForm(params, isForm) {
     return form;
 }
 
+function changeHeaders(headers) {
+    if (!isServer || !headers || _.isEmpty(headers)) {
+        return;
+    }
+    for (var header in headers) {
+        this.app.req.res.setHeader(header, headers[header]);
+    }
+}
+
 module.exports = {
     control: function(params, isForm, callback) {
         if (isForm instanceof Function) {
@@ -246,5 +256,6 @@ module.exports = {
                 callback.call(this, processForm.call(this, params, isForm));
             }.bind(this));
         }
-    }
+    },
+    changeHeaders: changeHeaders
 };
