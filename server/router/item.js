@@ -37,12 +37,12 @@ module.exports = function(app, dataAdapter) {
             function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
-                res.redirect(301, utils.link(url, req.rendrApp));
+                res.redirect(utils.link(url, req.rendrApp));
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, reply, function redirect(url) {
-                    res.redirect(301, utils.link(url, req.rendrApp));
+                    res.redirect(utils.link(url, req.rendrApp));
                 });
             }
 
@@ -149,13 +149,13 @@ module.exports = function(app, dataAdapter) {
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                res.redirect(301, utils.link(url, req.rendrApp));
+                res.redirect(utils.link(url, req.rendrApp));
                 clean();
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, item, function redirect(url) {
-                    res.redirect(301, utils.link(url, req.rendrApp));
+                    res.redirect(utils.link(url, req.rendrApp));
                     clean();
                 });
             }
@@ -203,11 +203,11 @@ module.exports = function(app, dataAdapter) {
             function redirect(item) {
                 var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
 
-                res.redirect(301, utils.link(url, req.rendrApp));
+                res.redirect(utils.link(url, req.rendrApp));
             }
 
             function error(err) {
-                res.redirect(301, utils.link('/location', req.rendrApp));
+                res.redirect(utils.link('/location', req.rendrApp));
             }
 
             asynquence().or(error)
@@ -226,7 +226,7 @@ module.exports = function(app, dataAdapter) {
             formidable.parse(req, function callback(err, data) {
                 var url = '/nf/search' + (data.search ? ('/' + data.search) : '');
 
-                res.redirect(301, utils.link(url, req.rendrApp));
+                res.redirect(utils.link(url, req.rendrApp));
             });
         }
     })();
@@ -254,7 +254,7 @@ module.exports = function(app, dataAdapter) {
                 var to;
 
                 if (!data.currentURL) {
-                    return res.redirect(301, req.headers.referer);
+                    return res.redirect(req.headers.referer);
                 }
                 else {
                     from = data['from_' + data.name] || '';
@@ -264,7 +264,7 @@ module.exports = function(app, dataAdapter) {
                         data.currentURL = replaceParam(data.currentURL, data.name + '_', from + '_' + to);
                     }
                 }
-                res.redirect(301, utils.link(data.currentURL, req.rendrApp));
+                res.redirect(utils.link(data.currentURL, req.rendrApp));
             });
         }
     })();
