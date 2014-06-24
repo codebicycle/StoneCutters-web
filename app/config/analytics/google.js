@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    id: 'MO-50756825-1',
+    id: 'MO-5247560-4',
     pages: {
         'home#index': 'home',
         'items#search#filters': '[category-name]/[subcategory-id]/search/[filter_name_value]',

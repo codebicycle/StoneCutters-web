@@ -1,8 +1,14 @@
 module.exports = {
+    //Development+
+    0 : {
+        'siteId'          : 533932,
+        'logServer'       : 'logw306',
+        'secureLogServer' : 'logws306'
+    },
     //Argentina+
     2 : {
-        'siteId'           : 533954,
-        'logServer'        : 'logw306',
+        'siteId'          : 533954,
+        'logServer'       : 'logw306',
         'secureLogServer' : 'logws306'
     },
     //Aruba+
