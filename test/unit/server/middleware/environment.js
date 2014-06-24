@@ -18,6 +18,7 @@ var paths = {
     '/categories': 'categoryList',
     '/api/.*': 'api'
 };
+var Router = require('../../../../server/router');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -28,14 +29,14 @@ function expressConfiguration(app) {
 describe('server', function test() {
     describe('middleware', function test() {
         describe('environment', function test() {
-            var app;
+            var server;
             var response;
 
             before(function before(done) {
-                app = express();
-                var server = rendr.createServer({
+                server = rendr.createServer({
                     dataAdapter: dataAdapter
                 });
+                var router = new Router(server);
 
                 function rendrConfiguration(rendrApp) {
                     var response = {};
@@ -66,10 +67,9 @@ describe('server', function test() {
                     rendrApp.use(after);
                 }
 
-                app.configure(expressConfiguration(app));
+                server.expressApp.configure(expressConfiguration(server.expressApp));
                 server.configure(rendrConfiguration);
-                app.use(server);
-                request(app)
+                request(server.expressApp)
                     .get('/')
                     .set('host', 'm.olx.com.ar')
                     .end(end);

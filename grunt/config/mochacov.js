@@ -3,14 +3,14 @@
 module.exports = function(grunt) {
     return {
         unit: {
-            src: ['test/unit/**/*.js', '!test/unit/app/controllers/categories_controller.js'],
+            src: ['test/unit/**/*.js', '!test/unit/app/controllers/categories.js'],
                 options: {
                 reporter: 'spec',
                 timeout: '15000'
             }
         },
         coverage: {
-            src: ['test/unit/**/*.js', '!test/unit/app/controllers/categories_controller.js'],
+            src: ['test/unit/**/*.js', '!test/unit/app/controllers/categories.js'],
             options: {
                 reporter: 'html-cov',
                 output: 'test/unit/coverage.html',

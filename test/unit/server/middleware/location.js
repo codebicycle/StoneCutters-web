@@ -12,6 +12,7 @@ var dataAdapter = new SmaugAdapter({
     userAgent: utils.smaugUserAgent
 });
 var middleware = require('../../../../server/middleware')(dataAdapter);
+var Router = require('../../../../server/router');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -23,15 +24,15 @@ function expressConfiguration(app) {
 describe('server', function test() {
     describe('middleware', function test() {
         describe('location', function test() {
-            var app;
+            var server;
             var response;
             var after;
 
             before(function before(done) {
-                app = express();
-                var server = rendr.createServer({
+                server = rendr.createServer({
                     dataAdapter: dataAdapter
                 });
+                var router = new Router(server);
 
                 function rendrConfiguration(rendrApp) {
                     var response = {};
@@ -59,10 +60,9 @@ describe('server', function test() {
                     rendrApp.use(after);
                 }
 
-                app.configure(expressConfiguration(app));
+                server.expressApp.configure(expressConfiguration(server.expressApp));
                 server.configure(rendrConfiguration);
-                app.use(server);
-                request(app)
+                request(server.expressApp)
                     .get('/')
                     .set('host', utils.getHost('html5', 'ar'))
                     .set('user-agent', utils.userAgents.html5)
@@ -86,7 +86,7 @@ describe('server', function test() {
                 done();
             });
             it('should be the same for the same host', function test(done) {
-                request(app)
+                request(server.expressApp)
                     .get('/')
                     .set('host', utils.getHost('html5', 'ar'))
                     .set('user-agent', utils.userAgents.html5)
@@ -103,7 +103,7 @@ describe('server', function test() {
                 }
             });
             it('should be different for different hosts', function test(done) {
-                request(app)
+                request(server.expressApp)
                     .get('/?location=' + utils.locations.in.www)
                     .set('host', utils.getHost('html5', 'in'))
                     .set('user-agent', utils.userAgents.html5)
@@ -111,7 +111,7 @@ describe('server', function test() {
                     .end(next);
 
                 function next(err, response) {
-                    request(app)
+                    request(server.expressApp)
                         .get('/')
                         .set('host', utils.getHost('html5', 'in'))
                         .set('user-agent', utils.userAgents.html5)
