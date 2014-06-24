@@ -10,7 +10,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'show'], {}));
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'show'], config.get(['cache', 'headers', 'default'], {})));
 
             var app = this.app;
             var user = app.session.get('user');
@@ -149,6 +149,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'galery'], config.get(['cache', 'headers', 'default'], {})));
+
             var app = this.app;
             var user = app.session.get('user');
             var itemId = params.itemId;
@@ -215,7 +217,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'search'], {}));
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'search'], config.get(['cache', 'headers', 'default'], {})));
 
             var page = params ? params.page : undefined;
             var app = this.app;
@@ -288,6 +290,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'reply'], config.get(['cache', 'headers', 'default'], {})));
+
             var app = this.app;
             var user = app.session.get('user');
             var platform = app.session.get('platform');
@@ -339,6 +343,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'success'], config.get(['cache', 'headers', 'default'], {})));
+
             var app = this.app;
             var user = app.session.get('user');
             var spec = {
@@ -382,6 +388,8 @@ module.exports = {
         }
     },
     favorite: function(params, callback) {
+        helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'favorite'], config.get(['cache', 'headers', 'default'], {})));
+
         var intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
 
         function add(done) {
@@ -405,6 +413,8 @@ module.exports = {
             .val(next.bind(this));
     },
     delete: function(params, callback) {
+        helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'delete'], config.get(['cache', 'headers', 'default'], {})));
+
         var itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
 
         function remove(done) {

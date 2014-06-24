@@ -1,12 +1,15 @@
 'use strict';
 
 var helpers = require('../helpers');
+var config = require('../config');
 
 module.exports = {
     index: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'location'], config.get(['cache', 'headers', 'default'], {})));
+
             var that = this;
             var spec;
 

@@ -11,6 +11,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'categories'], config.get(['cache', 'headers', 'default'], {})));
+
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -56,6 +58,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'subcategories'], config.get(['cache', 'headers', 'default'], {})));
+
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -92,6 +96,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'form'], config.get(['cache', 'headers', 'default'], {})));
+
             var app = this.app;
             var user = app.session.get('user');
             var siteLocation = app.session.get('siteLocation');
@@ -160,6 +166,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'edit'], config.get(['cache', 'headers', 'default'], {})));
+
             var app = this.app;
             var user = app.session.get('user');
             var siteLocation = app.session.get('siteLocation');
@@ -306,6 +314,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'success'], config.get(['cache', 'headers', 'default'], {})));
+
             var app = this.app;
             var user = app.session.get('user');
             var securityKey = params.sk;

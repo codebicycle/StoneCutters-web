@@ -5,7 +5,7 @@ var _ = require('underscore');
 var config = require('../config');
 
 function handleItems(category, subcategory, params, callback) {
-    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'items'], {}));
+    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'items'], config.get(['cache', 'headers', 'default'], {})));
 
     var slug = helpers.common.slugToUrl(subcategory.toJSON());
     var page = params ? params.page : undefined;
@@ -63,7 +63,7 @@ function handleItems(category, subcategory, params, callback) {
 }
 
 function handleShow(category, params, callback) {
-    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'subcategories'], {}));
+    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'subcategories'], config.get(['cache', 'headers', 'default'], {})));
 
     var slug = helpers.common.slugToUrl(category.toJSON());
 

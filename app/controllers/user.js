@@ -2,12 +2,15 @@
 
 var _ = require('underscore');
 var helpers = require('../helpers');
+var config = require('../config');
 
 module.exports = {
     registration: function(params, callback) {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'user'], config.get(['cache', 'headers', 'default'], {})));
+
             var platform = this.app.session.get('platform');
             var user;
 
@@ -30,6 +33,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'user'], config.get(['cache', 'headers', 'default'], {})));
+
             var platform = this.app.session.get('platform');
             var user;
 
@@ -52,6 +57,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'user'], config.get(['cache', 'headers', 'default'], {})));
+
             this.app.session.clear('user');
             return helpers.common.redirect.call(this, '/', null, {
                 status: 302,
@@ -63,6 +70,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'user'], config.get(['cache', 'headers', 'default'], {})));
+
             var platform = this.app.session.get('platform');
             var user;
 
@@ -82,6 +91,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'user'], config.get(['cache', 'headers', 'default'], {})));
+
             var platform = this.app.session.get('platform');
             var user;
 
@@ -126,6 +137,8 @@ module.exports = {
         helpers.controllers.control.call(this, params, true, controller);
 
         function controller(form) {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'user'], config.get(['cache', 'headers', 'default'], {})));
+
             var platform = this.app.session.get('platform');
             var user;
 
