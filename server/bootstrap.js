@@ -31,6 +31,6 @@ module.exports = function(worker) {
     }
 
     asynquence().or(onBootstrapError)
-        .then(require('./appConf'))
+        .then(require('./app'))
         .val(appBootstrap);
 };
