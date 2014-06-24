@@ -123,11 +123,13 @@ module.exports = {
         }
     },
     favorites: function(params, callback) {
-        helpers.controllers.control.call(this, params, true, controller);
+        helpers.controllers.control.call(this, params, controller);
 
-        function controller(form) {
+        function controller() {
             var platform = this.app.session.get('platform');
             var user;
+            var favorite;
+            var spec;
 
             if (platform === 'wap') {
                 return helpers.common.redirect.call(this, '/');
@@ -138,7 +140,7 @@ module.exports = {
                     status: 302
                 });
             }
-            var spec = {
+            spec = {
                 favorites: {
                     collection: 'Items',
                     params: {
@@ -146,6 +148,8 @@ module.exports = {
                     }
                 }
             };
+            favorite = params.favorite;
+            delete params.favorite;
 
             _.extend(spec.favorites.params, params, {
                 location: this.app.session.get('siteLocation'),
@@ -160,7 +164,7 @@ module.exports = {
 
                 result.favoritesMetadata = favorites.get('metadata');
                 result.favorites = favorites.get('data');
-                result.form = form;
+                result.favorite = favorite;
                 _.each(result.favorites, processItem);
                 callback(err, result);
             });

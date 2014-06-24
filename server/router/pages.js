@@ -81,6 +81,17 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
+    (function statsHeaders() {
+        app.get('/stats/headers', handler);
+
+        function handler(req, res) {
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+            res.json({
+                headers: req.headers
+            });
+        }
+    })();
+
     (function pageview() {
         app.get('/analytics/pageview.gif', handler);
 
@@ -109,9 +120,15 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function atiTracking(req) {
             var location = req.rendrApp.session.get('location');
-            var atiConfig = configClient.get(['analytics', 'ati', 'paths', location.id]);
+            var env = configClient.get(['environment', 'type'], 'development');
+            var countryId = location.id;
+            var atiConfig;
             var analytic;
 
+            if (env !== 'production') {
+                countryId = 0;
+            }
+            atiConfig = configClient.get(['analytics', 'ati', 'paths', countryId]);
             if (atiConfig) {
                 analytic = new Analytic('ati', {
                     id: atiConfig.siteId,
@@ -163,9 +180,15 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function atiTracking(req) {
             var location = req.rendrApp.session.get('location');
-            var atiConfig = configClient.get(['analytics', 'ati', 'paths', location.id]);
+            var env = configClient.get(['environment', 'type'], 'development');
+            var countryId = location.id;
+            var atiConfig;
             var analytic;
 
+            if (env !== 'production') {
+                countryId = 0;
+            }
+            atiConfig = configClient.get(['analytics', 'ati', 'paths', countryId]);
             if (atiConfig) {
                 analytic = new Analytic('ati-event', {
                     id: atiConfig.siteId,
