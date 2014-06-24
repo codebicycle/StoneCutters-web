@@ -22,8 +22,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             var siteLocation = app.session.get('siteLocation');
             var userAgent = req.get('user-agent');
 
-            
-
             function callback(err, response, body) {
                 if (err) {
                     return fail(err);
@@ -31,7 +29,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var device = body;
                 
                 if (device.browserName == 'Opera Mini'){
-                    var alternativeUA = ['HTTP_DEVICE_STOCK_UA','HTTP_X_OPERAMINI_PHONE_UA'];
+                    var alternativeUA = ['device-stock-ua','x-operamini-phone-ua'];
                     var headers = req.headers;
                     for (var i = alternativeUA.length - 1; i >= 0; i--) {
                         if(alternativeUA[i] in headers){
