@@ -21,6 +21,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var location = app.session.get('location');
             var siteLocation = app.session.get('siteLocation');
             var userAgent = req.get('user-agent');
+            console.log(req.headers);
 
             function callback(err, response, body) {
                 if (err) {
