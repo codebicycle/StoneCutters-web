@@ -22,11 +22,28 @@ module.exports = function(dataAdapter, excludedUrls) {
             var siteLocation = app.session.get('siteLocation');
             var userAgent = req.get('user-agent');
 
+            
+
             function callback(err, response, body) {
                 if (err) {
                     return fail(err);
                 }
                 var device = body;
+                
+                if (device.browserName == 'Opera Mini'){
+                    var alternativeUA = ['HTTP_DEVICE_STOCK_UA','HTTP_X_OPERAMINI_PHONE_UA'];
+                    var headers = req.headers;
+                    for (var i = alternativeUA.length - 1; i >= 0; i--) {
+                        if(alternativeUA[i] in headers){
+                            userAgent = headers[alternativeUA[i]];
+                            if (device.osName == 'Android'){
+                                device.osVersion = userAgent.match(/Android [\d+\.]{3,5}/)[0].replace('Android ','');
+                            }else if (device.osName == 'iOS'){
+                                device.osVersion = userAgent.match(/iPhone OS [\d+\_]{3,5}/)[0].replace('iPhone OS ','');
+                            }
+                        }
+                    }
+                }
 
                 if(device.osVersion === undefined){
                     device.osVersion = '0';
