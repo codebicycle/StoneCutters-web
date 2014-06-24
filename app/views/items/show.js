@@ -260,7 +260,7 @@ module.exports = BaseView.extend({
             var itemCategory = $('.itemCategory').val();
             var itemSubcategory = $('.itemSubcategory').val();
 
-            if (action === 'clickReply') {
+            if (action === 'ClickReply') {
                 var message = $('.message').val();
                 var email = $('.email').val();
                 var name = $('.name').val();

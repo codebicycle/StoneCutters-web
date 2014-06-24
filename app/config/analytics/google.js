@@ -16,7 +16,6 @@ module.exports = {
         'post#subcat': 'post_subcategorylist/[rendering]',
         'post#index': 'post_categorylist/[rendering]',
         'post#edit': 'edititem',
-        'post#editsuccess': 'edititem',
         'pages#terms': 'terms',
         'pages#help': 'help',
         'pages#interstitial': 'interstitial',

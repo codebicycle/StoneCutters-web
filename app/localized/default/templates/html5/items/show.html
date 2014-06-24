@@ -17,7 +17,7 @@
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, item.category.name, ['<ul>
-        <li><a class="share trackMe" href="#share" data-tracking="itemPage-clickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
+        <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
         <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
     </ul>'] | join) }}
     {% if not item.images %}
@@ -75,7 +75,7 @@
                     {% for relatedItem in relatedItems %}
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
-                                <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="itemPage-clickRelatedAdImg" >
+                                <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="ItemPage-ClickRelatedAdImg" >
                                     <a href="/{{ relatedItem | slugToUrl | link }}">
                                         <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
                                     </a>
@@ -85,7 +85,7 @@
                     {% endfor %}
                 </div>
             </section>
-            <a class="btns orange trackMe" href="{{ relatedAdsLink | link }}" data-tracking="itemPage-clickRelatedAdBtn" >{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','') }}</a>
+            <a class="btns orange trackMe" href="{{ relatedAdsLink | link }}" data-tracking="ItemPage-ClickRelatedAdBtn" >{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','') }}</a>
         </aside>
     {% endif %}
 
@@ -115,7 +115,7 @@
                 <span>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</span>
 
                 <div class="btnCenter">
-                    <input type="button" class="btns orange submit trackMe" value="{{ dictionary["contactseller_form.60"] }}" data-tracking="itemPage-clickReply" >
+                    <input type="button" class="btns orange submit trackMe" value="{{ dictionary["contactseller_form.60"] }}" data-tracking="ItemPage-ClickReply" >
                 </div>
             </form>
         <div class="clear"></div>
@@ -130,14 +130,14 @@
                 <span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
             {% endif %}
             {% if item.email and not item.phone %}
-                <div class="action email trackMe fullWidth" data-tracking="Reply-clickEmail">
+                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail">
                     <div>
                         <span>{{ dictionary["replymessage.Email"] }}</span>
                     </div>
                 </div>
             {% elif item.email and item.phone %}
                 {% if device.uriSchemeTel and device.uriSchemeSms %}
-                    <div class="action email trackMe" data-tracking="Reply-clickEmail">
+                    <div class="action email trackMe" data-tracking="Reply-ClickEmail">
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -153,7 +153,7 @@
                         </a>
                     </div>
                 {% elif device.uriSchemeTel and not device.uriSchemeSms %}
-                    <div class="action email trackMe midWidth" data-tracking="Reply-clickEmail">
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail">
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -164,7 +164,7 @@
                         </a>
                     </div>
                 {% elif device.uriSchemeSms and not device.uriSchemeTel %}
-                    <div class="action email trackMe midWidth" data-tracking="Reply-clickEmail">
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail">
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -175,7 +175,7 @@
                         </a>
                     </div>
                 {% else %}
-                    <div class="action email trackMe fullWidth" data-tracking="Reply-clickEmail">
+                    <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail">
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
