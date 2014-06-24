@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Saj\xE1t <<BRAND>>',
     'myolx.MyFavorites': 'Kedvenceim',
     'myolx.SignOut': 'Kijelentkez\xE9s',
+    'myolx.TheAdHasBeenDeleted': 'A hirdet\xE9s t\xF6r\xF6lve',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Jelenleg nincs akt\xEDv hirdet\xE9se',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Jelenleg nincs kedvenc hirdet\xE9se',
     'itemwarning.Here': 'ide.',

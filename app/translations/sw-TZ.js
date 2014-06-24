@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': '<<BRAND>> Yangu',
     'myolx.MyFavorites': 'Vibwedo Vyangu',
     'myolx.SignOut': 'Toka',
+    'myolx.TheAdHasBeenDeleted': 'Tangazo limefutwa',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Kwa sasa hauna matangazo amilifu',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Kwa sasa hauna matangazo uyapendayo',
     'itemwarning.Here': 'here.',

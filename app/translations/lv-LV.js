@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Mans <<BRAND>>',
     'myolx.MyFavorites': 'Mani favor\u012Bti',
     'myolx.SignOut': 'Izrakst\u012Bties',
+    'myolx.TheAdHasBeenDeleted': 'Sludin\u0101jums tika izdz\u0113sts',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Jums \u0161obr\u012Bd nav akt\u012Bvu zi\u0146ojumu',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Jums \u0161obr\u012Bd nav atz\u012Bm\u0113tu zi\u0146ojumu',
     'itemwarning.Here': '\u0161eit.',

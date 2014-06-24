@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'M\xF4j <<BRAND>>',
     'myolx.MyFavorites': 'Moje ob\u013E\xFAben\xE9',
     'myolx.SignOut': 'Odhl\xE1si\u0165 sa',
+    'myolx.TheAdHasBeenDeleted': 'Inzer\xE1t bol vymazan\xFD',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Moment\xE1lne nem\xE1te \u017Eiadne akt\xEDvne ozn\xE1menia',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Moment\xE1lne nem\xE1te \u017Eiadne ob\u013E\xFAben\xE9 ozn\xE1menia',
     'itemwarning.Here': 'sem.',

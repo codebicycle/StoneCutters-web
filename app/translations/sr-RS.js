@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Moj <<BRAND>>',
     'myolx.MyFavorites': 'Moji omiljeni oglasi',
     'myolx.SignOut': 'Odjavite se',
+    'myolx.TheAdHasBeenDeleted': 'Oglas je izbrisan',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Trenutno nemate aktivnih oglasa',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Trenutno nemate omiljenih oglasa',
     'itemwarning.Here': 'ovde.',

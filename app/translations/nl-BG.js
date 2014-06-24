@@ -99,6 +99,7 @@ module.exports = {
     'myolx.MyBrand': 'Mijn <<BRAND>>',
     'myolx.MyFavorites': 'Mijn favorieten',
     'myolx.SignOut': 'Afmelden',
+    'myolx.TheAdHasBeenDeleted': 'De advertentie is verwijderd',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Je hebt momenteel geen actieve advertenties',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Je hebt momenteel geen favoriete advertenties',
     'itemwarning.Here': 'hier.',

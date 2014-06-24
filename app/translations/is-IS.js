@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Mitt <<BRAND>>',
     'myolx.MyFavorites': 'Upp\xE1haldi\xF0 mitt',
     'myolx.SignOut': '\xDAtskr\xE1ning',
+    'myolx.TheAdHasBeenDeleted': 'Augl\xFDsingunni hefur veri\xF0 eytt',
     'myolx.YouCurrentlyHaveNoActiveListings': '\xDE\xFA ert ekki me\xF0 neinar virkar augl\xFDsingar \xED augnablikinu',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\xDE\xFA ert ekki me\xF0 neinar upp\xE1halds augl\xFDsingar \xED augnablikinu',
     'itemwarning.Here': 'h\xE9r.',

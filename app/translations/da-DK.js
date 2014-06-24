@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Min <<BRAND>>',
     'myolx.MyFavorites': 'Mine favoritter',
     'myolx.SignOut': 'Log ud',
+    'myolx.TheAdHasBeenDeleted': 'Annoncen er slettet',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Du har ingen aktive annoncer',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Du har ingen favoritannoncer',
     'itemwarning.Here': 'her.',

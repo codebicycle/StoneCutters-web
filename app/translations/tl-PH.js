@@ -105,6 +105,7 @@ module.exports = {
     'myolx.MyBrand': 'Aking <<BRAND>>',
     'myolx.MyFavorites': 'Aking mga Paborito',
     'myolx.SignOut': 'Mag-sign Out',
+    'myolx.TheAdHasBeenDeleted': 'Tinanggal ang patalastas',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Wala kang aktibong mga patalastas sa kasalukuyan',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Wala kang paboritong mga talaan sa kasalukuyan',
     'itemwarning.Here': 'dito.',
