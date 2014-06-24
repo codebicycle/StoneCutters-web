@@ -2,7 +2,7 @@
 	<div id="downloadapp">
 		<div class="logoOlx"></div>
 		<div class="data">
-			<h1>{{ marketing.forOs }}</h1>
+			<h1>{{ dictionary[marketing.forOsKey] }} {{ marketing.forOs }}</h1>
 			<div class="stars">
 				<span class="star"></span>
 				<span class="star"></span>
@@ -11,7 +11,7 @@
 				<span class="star midstar"></span>
 				<span>{{ marketing.rating }}</span>
 			</div>
-			<h2>{{ marketing.freeIn }}</h2>
+			<h2>{{ dictionary[marketing.freeInKey] }} {{ marketing.freeIn }}</h2>
 		</div>
 		<a class="btns blue" href="{{ marketing.link }}">{{ dictionary["about.Download_Mob"] }}</a>
 		<div class="clear"></div>
