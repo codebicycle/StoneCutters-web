@@ -9,7 +9,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'home', 'index'], {}));
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'home'], config.get(['cache', 'headers', 'default'], {})));
 
             var platform = this.app.session.get('platform');
             var icons = config.get(['icons', platform], []);
