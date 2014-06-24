@@ -26,6 +26,7 @@ var userAgents = {
         platform: 'wap'
     }
 };
+var Router = require('../../../../server/router');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -36,15 +37,15 @@ function expressConfiguration(app) {
 describe('server', function test() {
     describe('middleware', function test() {
         describe('templates', function test() {
-            var app;
+            var server;
             var response;
 
             before(function before(done) {
                 (function closure(userAgents) {
-                    app = express();
-                    var server = rendr.createServer({
+                    server = rendr.createServer({
                         dataAdapter: dataAdapter
                     });
+                    var router = new Router(server);
 
                     function rendrConfiguration(rendrApp) {
                         var response = {};
@@ -71,10 +72,9 @@ describe('server', function test() {
                         rendrApp.use(after);
                     }
 
-                    app.configure(expressConfiguration(app));
+                    server.expressApp.configure(expressConfiguration(server.expressApp));
                     server.configure(rendrConfiguration);
-                    app.use(server);
-                    request(app)
+                    request(server.expressApp)
                         .get('/')
                         .set('host', hosts[0])
                         .set('user-agent', userAgents[0])
@@ -116,7 +116,7 @@ describe('server', function test() {
                 function closure(userAgent) {
                     describe(userAgent, function test() {
                         it('should be "' + userAgents[userAgent].platform + '"', function test(done) {
-                            request(app)
+                            request(server.expressApp)
                                 .get('/')
                                 .set('host', hosts[++index])
                                 .set('user-agent', userAgent)
@@ -144,7 +144,7 @@ describe('server', function test() {
                 function closure(userAgent) {
                     describe(userAgent, function test() {
                         it('should be "default/' + userAgents[userAgent].platform + '" for host m.olx.com', function test(done) {
-                            request(app)
+                            request(server.expressApp)
                                 .get('/')
                                 .set('host', hosts[++index])
                                 .set('user-agent', userAgent)
@@ -165,7 +165,7 @@ describe('server', function test() {
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
                                 it('should be "' + location + '/' + userAgents[userAgent].platform + '" for host ' + location, function test(done) {
-                                    request(app)
+                                    request(server.expressApp)
                                         .get('/')
                                         .set('host', location)
                                         .set('user-agent', userAgent)
@@ -194,7 +194,7 @@ describe('server', function test() {
                 function closure(userAgent) {
                     describe(userAgent, function test() {
                         it('should be "default" for host html4.m.olx.com', function test(done) {
-                            request(app)
+                            request(server.expressApp)
                                 .get('/')
                                 .set('host', 'html4.m.olx.com')
                                 .set('user-agent', userAgent)
@@ -215,7 +215,7 @@ describe('server', function test() {
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
                                 it('should be "' + location + '" for host ' + location, function test(done) {
-                                    request(app)
+                                    request(server.expressApp)
                                         .get('/')
                                         .set('host', location)
                                         .set('user-agent', userAgent)

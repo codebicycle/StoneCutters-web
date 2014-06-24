@@ -12,8 +12,9 @@ var dataAdapter = new SmaugAdapter({
     userAgent: utils.smaugUserAgent
 });
 var middleware = require('../../../../server/middleware')(dataAdapter);
-var Controller = require('../../../../app/controllers/home_controller');
+var Controller = require('../../../../app/controllers/home');
 var helpers = require('../../../../app/helpers');
+var Router = require('../../../../server/router');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -25,7 +26,6 @@ function expressConfiguration(app) {
 describe('app', function test() {
     describe('controllers', function test() {
         describe('home', function test() {
-            var app;
             var server;
             var context;
             var response;
@@ -33,10 +33,10 @@ describe('app', function test() {
 
             describe('index', function test() {
                 before(function before(done) {
-                    app = express();
                     server = rendr.createServer({
                         dataAdapter: dataAdapter
                     });
+                    var router = new Router(server);
                     context = {};
 
                     function rendrConfiguration(rendrApp) {
@@ -82,11 +82,10 @@ describe('app', function test() {
                         };
                     }
 
-                    app.configure(expressConfiguration(app));
+                    server.expressApp.configure(expressConfiguration(server.expressApp));
                     server.configure(rendrConfiguration);
-                    app.use(server);
-                    require('../../../../server/router')(app, dataAdapter);
-                    request(app)
+                    router.route();
+                    request(server.expressApp)
                         .get('/?location=' + utils.locations.in.www)
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
