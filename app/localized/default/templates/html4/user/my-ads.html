@@ -3,7 +3,7 @@
 {{ Breadcrumb(dictionary, link, dictionary["myolx.MyAds"], ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
 {% if deleted %}
     <div id="messages">
-        <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
+        <div class="messages feedback">{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</div>
     </div>
 {% endif %}
 <div id="myads">

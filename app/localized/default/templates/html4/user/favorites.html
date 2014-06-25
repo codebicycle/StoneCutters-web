@@ -3,9 +3,7 @@
 {{ Breadcrumb(dictionary, link, dictionary["myolx.MyFavorites"], ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
 {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
 {% if favorite %}
-    <div id="messages">
-        <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
-    </div>
+    <div class="messages feedback">{{ dictionary["itemheader.RemovedFavorites"] }}</div>
 {% endif %}
 <div id="favorites">
     {% if favorites.length %}

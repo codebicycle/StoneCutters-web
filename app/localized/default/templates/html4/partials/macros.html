@@ -10,7 +10,7 @@
 {% endmacro %}
 
 {% macro Errors(errors) %}
-    <div id="errors">
+    <div class="messages errors">
         {% for field, messages in errors %}
             {% for message in messages %}
                 <span>{{ ([field, ': '] | join | title) if field != 'main' }}{{ message }}</span><br/>
@@ -20,7 +20,7 @@
 {% endmacro %}
 
 {% macro ErrorsPosting(errors, dictionary) %}
-    <div id="errors">
+    <div class="messages errors">
         {% for field, messages in errors %}
             {% for message in messages %}
 
