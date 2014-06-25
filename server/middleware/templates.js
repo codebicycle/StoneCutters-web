@@ -49,7 +49,8 @@ module.exports = function(dataAdapter, excludedUrls) {
 
                 var marketing = {
                     osName: device.osName,
-                    osVersion: parseFloat(String(device.osVersion).replace('_','.'))
+                    osVersion: parseFloat(String(device.osVersion).replace('_','.')),
+                    browserName: device.browserName
                 };
                 var directory = 'default';
                 var jsDir = '/js/' + (minify ? 'min' : 'app');
