@@ -6,6 +6,7 @@ module.exports = {
         var platform = app.session.get('platform');
         var osName = marketing.osName;
         var osVersion = marketing.osVersion;
+        var browserName = marketing.browserName;
         var data = {};
 
         if((osVersion < 2.1 && osName == 'Android') || (osVersion < 3.2 && osName == 'iOS') || (osVersion < 4.5 && osName == 'RIM') || (osVersion < 8 && osName == 'Windows Phone')){
@@ -20,6 +21,7 @@ module.exports = {
                 data.freeIn = ' <span>GOOGLE Play</span>';
                 data.rating = '(+80k)';
                 data.image = 'android';
+                data.browserName = browserName;
             break;
             case 'iOS':
                 data.link = 'http://itunes.apple.com/es/app/olx-classifieds/id382059698';
@@ -29,6 +31,7 @@ module.exports = {
                 data.freeIn = ' <span>App Store</span>';
                 data.rating = '(+4)';
                 data.image = 'ios';
+                data.browserName = browserName;
             break;
             case 'Windows Phone':
                 data.link = 'http://windowsphone.com/s?appid=31fc00f9-44e8-df11-9264-00237de2db9e';
@@ -38,6 +41,7 @@ module.exports = {
                 data.freeIn = ' <span>Windows</span>';
                 data.rating = '(+4)';
                 data.image = 'windowsphone';
+                data.browserName = browserName;
             break;
         }
         return data;

@@ -1,4 +1,4 @@
-#downloadapp {
+#downloadapp, #downloadappOpera {
 	background: #e8e6e6;
 	text-align: center;
 	padding: 8px 16px;
@@ -86,4 +86,66 @@
 	#downloadapp .data h2 {
 		font-size: 10px;
 	}
+}
+/*----DownloadApp for operaMini----*/
+#downloadappOpera .data{
+    float: left;
+    margin: .2em 0 0 0;
+    text-align: left;
+    line-height: 1em;
+}
+#downloadappOpera .data h1{
+    font-size: 14px;
+    color: #303030;
+}
+#downloadappOpera .data .stars{
+    font-size: 10px;
+    color: #827e7e;
+    height: 16px;
+}
+#downloadappOpera .data .stars span{
+    height: 8px;
+    float: left;
+    line-height: normal;
+    margin: 0 .3em 0 0;
+}
+#downloadappOpera .data .stars span.star{
+    width: 8px;
+    margin-top: .25em;
+    background: url(imageUrl/images/common/marketing/starS.png) no-repeat;
+}
+#downloadappOpera .data .stars span.star.midstar{
+    background: url(imageUrl/images/common/marketing/midStarS.png) no-repeat;
+}
+#downloadappOpera .data .stars span.star.emptystar{
+    background: url(imageUrl/images/common/marketing/emptyStarS.png) no-repeat;
+}
+
+#downloadappOpera .btns{
+    margin: .2em 0 0;
+    float: right;
+}
+
+#downloadappOpera .btns {
+    padding: 7px .3em;
+}
+
+@media screen and (min-width: 250px){ 
+
+    #downloadappOpera .logoOlx {
+        width: 40px; 
+        height: 40px; 
+        float: left; 
+        background: url(imageUrl/images/common/marketing/logo40.png) no-repeat;
+        margin: 0 .3em 0 0;
+    }
+
+    #downloadappOpera .btns a{padding: 7px .5em;}
+}
+
+@media screen and (min-width: 320px){ 
+    #downloadappOpera .btns {padding: 7px 1em;}
+}
+@media screen and (min-width: 340px){ 
+    #downloadappOpera .btns {padding: 7px 1.5em;}
 }
