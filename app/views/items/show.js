@@ -1,16 +1,16 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../helpers');
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'items_show_view',
     wapAttributes: {
         cellpadding: 0
     },
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
         data.category_name = this.options.category_name;
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
@@ -286,7 +286,7 @@ module.exports = BaseView.extend({
     },
     remove: function() {
         $(window).off('resize', this.resize);
-        BaseView.prototype.remove.apply(this, arguments);
+        Base.prototype.remove.apply(this, arguments);
     },
     resize: function() {
         $('section#itemPage').css('margin-bottom' , ($('#actions').height()+20)+'px');
@@ -337,7 +337,7 @@ module.exports = BaseView.extend({
         var windowSize = $(window).width();
         var paginationWidth = windowSize / paginationCount;
         var paginationMargin = paginationWidth / paginationCount;
-        paginationWidth = paginationWidth - paginationMargin; 
+        paginationWidth = paginationWidth - paginationMargin;
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     }

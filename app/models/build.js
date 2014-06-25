@@ -1,6 +1,6 @@
 'use strict';
 
-var Base = require('./base');
+var Base = require('../bases/model');
 
 module.exports = Base.extend({
     url: '/repos/:owner/:name',

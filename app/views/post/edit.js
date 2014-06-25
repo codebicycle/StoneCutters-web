@@ -1,16 +1,16 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../helpers');
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'post_edit_view',
     wapAttributes: {
         cellpadding: 0
     },
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
         data.itemLocation = parse(data.form.values.location);
 
         return _.extend({}, data, {
@@ -46,7 +46,7 @@ module.exports = BaseView.extend({
             });
         });
     },
-    
+
 });
 
 function parse(location) {

@@ -1,12 +1,12 @@
 'use strict';
 
-var RendrView = require('rendr/shared/base/view');
+var Base = require('rendr/shared/base/view');
 var _ = require('underscore');
 var helpers = require('../helpers');
 var translations = require('../translations');
 var utils = require('../../shared/utils');
 
-module.exports = RendrView.extend({
+module.exports = Base.extend({
     initialize: function() {
         if (this.tagName === 'div' && this.app.session.get('platform') === 'wap') {
             this.tagName = 'table';
@@ -19,7 +19,7 @@ module.exports = RendrView.extend({
         return this.app.templateAdapter.getTemplate(template + '/' + this.name);
     },
     getTemplateData: function() {
-        var data = RendrView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
         var template = this.app.session.get('template');
 
         return _.extend({}, data, {

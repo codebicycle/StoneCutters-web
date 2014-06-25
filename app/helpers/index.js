@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = {
-    nunjucks: require('./nunjucks'),
     controllers: require('./controllers'),
     analytics: require('./analytics'),
     marketing: require('./marketing'),

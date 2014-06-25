@@ -1,13 +1,13 @@
 'use strict';
 
+var Base = require('../bases/collection');
 var City = require('../models/city');
-var Base = require('./base');
 
 module.exports = Base.extend({
     model: City,
     url: function() {
         var url = '/countries/' + this.params.location + '/cities';
-        
+
         if (this.params) {
             url += '?';
             for (var param in this.params) {

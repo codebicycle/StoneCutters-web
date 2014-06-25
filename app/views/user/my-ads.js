@@ -1,13 +1,13 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../helpers');
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'user_myads_view',
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
@@ -41,12 +41,12 @@ module.exports = BaseView.extend({
             e.preventDefault();
             var $edit = $('.editItem');
             var href = $edit.attr('href');
-            
+
             $edit.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
             $('.viewItem').attr("href", '#');
             $('#edit').removeClass('visible');
         });
-        
+
         $('.deleteItem').on("click", function(e) {
             e.preventDefault();
             var $confirm = $('.deleteItemConfirm');
@@ -62,7 +62,7 @@ module.exports = BaseView.extend({
             var $confirm = $('.deleteItemConfirm');
             var href = $confirm.attr('href');
             var itemId = $confirm.data('itemId');
-            
+
             $confirm.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
             $confirm.removeData("itemId");
             $('#delete').removeClass('visible');
