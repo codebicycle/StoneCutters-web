@@ -1,12 +1,12 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'post_home_select_view',
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
             location: this.app.session.get('location')

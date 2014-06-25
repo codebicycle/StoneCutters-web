@@ -1,7 +1,7 @@
 'use strict';
 
+var Base = require('../bases/collection');
 var Field = require('../models/field');
-var Base = require('./base');
 
 module.exports = Base.extend({
     model: Field,

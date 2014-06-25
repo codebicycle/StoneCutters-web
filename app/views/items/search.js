@@ -1,10 +1,10 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../helpers');
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'items_search_view',
     wapAttributes: {
         cellpadding: 0
@@ -52,7 +52,7 @@ module.exports = BaseView.extend({
         }
     },
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {

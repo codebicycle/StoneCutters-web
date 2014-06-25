@@ -1,13 +1,13 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 var utils = require('../../../shared/utils');
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'footer_footer_view',
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
         var user = this.app.session.get('user');
         var location = this.app.session.get('location');
 

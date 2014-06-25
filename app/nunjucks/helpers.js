@@ -1,8 +1,7 @@
 'use strict';
 
-var config = require('../../config');
-var common = require('../common');
-var controllers = require('../controllers');
+var config = require('../config');
+var helpers = require('../helpers');
 var _ = require('underscore');
 var dateformat = require('dateformat');
 
@@ -107,7 +106,7 @@ module.exports = function(nunjucks) {
                         if (_page > 1) {
                             replace = '-p-' + _page;
                         }
-                        out.push(common.link(url.replace(regExp, replace), context.app));
+                        out.push(helpers.common.link(url.replace(regExp, replace), context.app));
                         prepareStyle(isLast);
                         out.push('">');
                         out.push(_page);
@@ -147,7 +146,7 @@ module.exports = function(nunjucks) {
             if (siteLocation) {
                 params.location = siteLocation;
             }
-            return common.link(href, this.ctx.app, params);
+            return helpers.common.link(href, this.ctx.app, params);
         },
         escape: function (text) {
             return encodeURIComponent(text);
@@ -158,7 +157,7 @@ module.exports = function(nunjucks) {
         log: function() {
             console.log.apply(console, arguments);
         },
-        'static': common.static,
-        slugToUrl: common.slugToUrl
+        'static': helpers.common.static,
+        slugToUrl: helpers.common.slugToUrl
     };
 };

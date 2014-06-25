@@ -1,7 +1,7 @@
 'use strict';
 
+var Base = require('../bases/collection');
 var Item = require('../models/item');
-var Base = require('./base');
 
 module.exports = Base.extend({
     model: Item,

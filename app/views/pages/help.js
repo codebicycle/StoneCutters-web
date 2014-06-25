@@ -1,13 +1,13 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../helpers');
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'pages_help_view',
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)

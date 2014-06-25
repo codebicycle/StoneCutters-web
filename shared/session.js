@@ -11,13 +11,18 @@ if (isServer) {
 
 function noop() {}
 
-var Session = function(done) {
+var Session = function(data, done) {
+    if (data instanceof Function) {
+        done = data;
+        data = {};
+    }
+    data = data || {};
     done = done || noop;
     this.session = {};
     isServer ? new ServerSession(this, callback.bind(this)) : new ClientSession(this, callback.bind(this));
 
     function callback(store) {
-        var session = _.extend({}, _.clone(this.get('session') || {}), store.getAll());
+        var session = _.extend({}, _.clone(this.get('session') || {}), store.getAll(), data);
 
         this.session.update = function(pairs) {
             for (var key in pairs) {

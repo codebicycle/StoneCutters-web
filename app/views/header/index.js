@@ -1,6 +1,6 @@
 'use strict';
 
-var BaseView = require('../base');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 var config = require('../../config');
 var utils = require('../../../shared/utils');
@@ -25,14 +25,14 @@ function readPostButtonConfig(platform, currentRoute) {
     return (match) ? false : true;
 }
 
-module.exports = BaseView.extend({
+module.exports = Base.extend({
     className: 'header_index_view',
     wapAttributes: {
         cellpadding: 0,
         bgcolor: '#0075BD'
     },
     getTemplateData: function() {
-        var data = BaseView.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this);
         var platform = this.app.session.get('platform');
         var currentRoute = this.app.session.get('currentRoute');
         var postButton = readPostButtonConfig(platform, currentRoute);
