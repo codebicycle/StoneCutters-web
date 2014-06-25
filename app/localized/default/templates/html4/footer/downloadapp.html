@@ -1,19 +1,40 @@
 {% if marketing.link %}
-	<div id="downloadapp">
-		{{'<div class="logoOlx"></div>' if marketing.browserName != 'Opera Mini' }}
-		<div class="data">
-			<h1>{{ dictionary[marketing.forOsKey] }} {{ marketing.forOs }}</h1>
-			<div class="stars">
-				<span class="star"></span>
-				<span class="star"></span>
-				<span class="star"></span>
-				<span class="star"></span>
-				<span class="star midstar"></span>
-				<span>{{ marketing.rating }}</span>
+	{% if marketing.browserName == 'Opera Mini'  %}
+		<div id="downloadapp">
+			<div class="logoOlx"></div>
+			<div class="data">
+				<h1>{{ dictionary[marketing.forOsKey] }} {{ marketing.forOs }}</h1>
+				<div class="stars">
+					<span class="star"></span>
+					<span class="star"></span>
+					<span class="star"></span>
+					<span class="star"></span>
+					<span class="star midstar"></span>
+					<span>{{ marketing.rating }}</span>
+				</div>
+				<h2>{{ dictionary[marketing.freeInKey] }} {{ marketing.freeIn }}</h2>
 			</div>
-			<h2>{{ dictionary[marketing.freeInKey] }} {{ marketing.freeIn }}</h2>
+			<a class="btns blue" href="{{ marketing.link }}">{{ dictionary["about.Download_Mob"] }}</a>
+			<div class="clear"></div>
 		</div>
-		<a class="btns blue" href="{{ marketing.link }}">{{ dictionary["about.Download_Mob"] }}</a>
-		<div class="clear"></div>
-	</div>
+
+	{% else %}
+		<div id="downloadapp">
+			<div class="logoOlx"></div>
+			<div class="data">
+				<h1>{{ dictionary[marketing.forOsKey] }} {{ marketing.forOs }}</h1>
+				<div class="stars">
+					<span class="star"></span>
+					<span class="star"></span>
+					<span class="star"></span>
+					<span class="star"></span>
+					<span class="star midstar"></span>
+					<span>{{ marketing.rating }}</span>
+				</div>
+				<h2>{{ dictionary[marketing.freeInKey] }} {{ marketing.freeIn }}</h2>
+			</div>
+			<a class="btns blue" href="{{ marketing.link }}">{{ dictionary["about.Download_Mob"] }}</a>
+			<div class="clear"></div>
+		</div>
+	{% endif %}
 {% endif %}
