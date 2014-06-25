@@ -1,6 +1,6 @@
 {% if marketing.link %}
 	<div id="downloadapp">
-		<div class="logoOlx"></div>
+		{{'<div class="logoOlx"></div>' if marketing.browserName != 'Opera Mini' }}
 		<div class="data">
 			<h1>{{ dictionary[marketing.forOsKey] }} {{ marketing.forOs }}</h1>
 			<div class="stars">
