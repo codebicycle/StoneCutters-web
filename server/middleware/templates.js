@@ -27,23 +27,25 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return fail(err);
                 }
                 var device = body;
-                
+
                 if (device.browserName == 'Opera Mini'){
                     var alternativeUA = ['device-stock-ua','x-operamini-phone-ua'];
                     var headers = req.headers;
+
                     for (var i = alternativeUA.length - 1; i >= 0; i--) {
-                        if(alternativeUA[i] in headers){
+                        if (alternativeUA[i] in headers) {
                             userAgent = headers[alternativeUA[i]];
-                            if (device.osName == 'Android'){
+                            if (device.osName == 'Android') {
                                 device.osVersion = userAgent.match(/Android [\d+\.]{3,5}/)[0].replace('Android ','');
-                            }else if (device.osName == 'iOS'){
+                            }
+                            else if (device.osName == 'iOS') {
                                 device.osVersion = userAgent.match(/iPhone OS [\d+\_]{3,5}/)[0].replace('iPhone OS ','');
                             }
                         }
                     }
                 }
 
-                if(device.osVersion === undefined){
+                if (device.osVersion === undefined) {
                     device.osVersion = '0';
                 }
 

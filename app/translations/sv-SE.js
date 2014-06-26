@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Kategorispecifikka f\xE4lt (tillval)',
     'misc.YouAreIn_Mob': 'Du \xE4r i <<LOCATION>>',
     'business_directory.Map': 'Karta',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'i'
 };

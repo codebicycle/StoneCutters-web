@@ -231,6 +231,15 @@ module.exports = {
             geo2: ''
         }
     },
+    'items#map': {
+        process: true,
+        names: {
+            page_name: 'map_ad_detail',
+            category: 'static',
+            geo1: '',
+            geo2: ''
+        }
+    },
     'categories#show#listing': {
         process: true,
         names: {

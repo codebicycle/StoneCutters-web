@@ -130,7 +130,9 @@ module.exports = {
                     status: 302
                 });
             }
-            app.fetch(spec, function afterFetch(err, result) {
+            app.fetch(spec, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
                 var category = result.categories.get(params.categoryId);
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
@@ -272,7 +274,9 @@ module.exports = {
                 };
 
                 checkAuthentication(_params, _params.itemId);
-                app.fetch(spec, function afterFetch(err, result) {
+                app.fetch(spec, {
+                    readFromCache: false
+                }, function afterFetch(err, result) {
                     var subcategory = response.categories.search(item.category.id);
                     var category = response.categories.get(subcategory.get('parentId'));
 

@@ -67,7 +67,11 @@
         {% endif %}
         <div class="clear"></div>
     </section>
-
+    {% if item.coordinates %}
+        <section id="map">
+            <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&zoom=14&size=320x100&markers={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&sensor=false">
+        </section>
+    {% endif %}
     {% if relatedItems.length %}
         <aside class="relatedAds">
             <section class="swiper-containerRA">

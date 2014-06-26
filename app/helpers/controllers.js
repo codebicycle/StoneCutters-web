@@ -233,7 +233,7 @@ function processForm(params, isForm) {
 }
 
 function changeHeaders(headers, page) {
-    if (!isServer || (headers && _.isEmpty(headers))) {
+    if (!isServer || !config.get(['cache', 'enabled'], false) || (headers && _.isEmpty(headers))) {
         return;
     }
     if (!headers) {

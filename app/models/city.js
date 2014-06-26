@@ -4,18 +4,7 @@ var Base = require('../bases/model');
 
 module.exports = Base.extend({
     idAttribute: 'id',
-    url: function() {
-        var url = '/locations/' + this.attributes.location;
-
-        if (this.params) {
-            url += '?';
-            for (var param in this.params) {
-                url += param + '=:' + param + '&';
-            }
-            url = url.slice(0, url.length - 1);
-        }
-        return url;
-    },
+    url: '/locations/:location',
     parse: function(location) {
         if (location.children && location.children[0]) {
             if (location.children[0].children && location.children[0].children[0]) {

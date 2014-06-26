@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Kateg\xF3riaf\xFCgg\u0151 mez\u0151k (V\xE1laszthat\xF3k)',
     'misc.YouAreIn_Mob': 'Tart\xF3zkod\xE1si helye: <<LOCATION>>',
     'business_directory.Map': 'T\xE9rk\xE9p',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'kateg\xF3ria:'
 };

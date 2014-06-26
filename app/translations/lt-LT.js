@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Special\u016Bs kategorij\u0173 laukai (papildomi)',
     'misc.YouAreIn_Mob': 'J\u016Bs esate <<LOCATION>>',
     'business_directory.Map': '\u017Dem\u0117lapis',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'patalpint\u0105'
 };

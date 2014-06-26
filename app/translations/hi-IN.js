@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': '\u0936\u094D\u0930\u0947\u0923\u0940 \u0935\u093F\u0936\u093F\u0937\u094D\u091F \u092B\u093C\u0940\u0932\u094D\u0921 (\u0935\u0948\u0915\u0932\u094D\u092A\u093F\u0915)',
     'misc.YouAreIn_Mob': '\u0906\u092A <<LOCATION>> \u092E\u0947\u0902 \u0939\u0948',
     'business_directory.Map': '\u0928\u0915\u094D\u0936\u093E',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\u092F\u0939\u093E\u0901 \u092E\u093F\u0932\u0947\u0917\u093E -'
 };

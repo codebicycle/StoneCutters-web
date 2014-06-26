@@ -41,6 +41,7 @@ module.exports = {
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
+        enabled: false,
         headers: {
             locations: {
                 list: {

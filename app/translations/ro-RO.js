@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'C\xE2mpuri specifice categorie (Op\u0163ionale)',
     'misc.YouAreIn_Mob': 'V\u0103 afla\u0163i la <<LOCATION>>',
     'business_directory.Map': 'Hart\u0103',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\xEEn'
 };

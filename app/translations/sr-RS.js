@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Polja specifi\u010Dna za kategoriju (opcionalno)',
     'misc.YouAreIn_Mob': 'Nalazite se u <<LOCATION>>',
     'business_directory.Map': 'Mapa',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'u'
 };
