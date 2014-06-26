@@ -8,45 +8,32 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var that = this;
-            var spec;
-
-            helpers.analytics.reset();
-
-            if (!params.search) {
-                return callback(null, {
-                    cities: that.app.session.get('location').topCities.models,
-                    target: params.target,
-                    analytics: helpers.analytics.generateURL(that.app.session.get())
-                });
-            }
-            spec = {
+            var spec = {
                 cities: {
                     collection: 'Cities',
                     params: {
-                        location: that.app.session.get('siteLocation'),
-                        name: params.search
+                        type: 'topcities',
+                        location: this.app.session.get('siteLocation')
                     }
                 }
             };
-            that.app.fetch(spec, function afterFetch(err, result) {
-                var cities = {
-                    'models': result.cities.toJSON(),
-                    '_byId': {},
-                    'metadata': result.cities.get('metadata')
-                };
 
-                cities.models.forEach(function sortCity(city) {
-                    cities._byId[city.url] = city;
-                });
+            if (params.search) {
+                spec.cities.params.type = 'cities';
+                spec.cities.params.name = params.search;
+            }
+            this.app.fetch(spec, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
+                helpers.analytics.reset();
                 callback(err, {
-                    cities: cities.models,
+                    cities: result.cities.toJSON(),
                     search: params.search,
                     posting: params.posting,
                     target: params.target,
-                    analytics: helpers.analytics.generateURL(that.app.session.get())
+                    analytics: helpers.analytics.generateURL(this.app.session.get())
                 });
-            });
+            }.bind(this));
         }
     }
 };

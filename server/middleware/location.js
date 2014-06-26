@@ -12,69 +12,46 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
 
-            var app = req.rendrApp;
-            var previousLocation = app.session.get('siteLocation');
+            var previousLocation = req.rendrApp.session.get('siteLocation');
             var siteLocation = req.param('location', previousLocation);
-            var host = req.headers.host;
+            var host = req.rendrApp.session.get('host');
             var index = host.indexOf(':');
             var platform;
             var location;
-            var topCities;
-            var promise;
 
-            function fetchLocation(done) {
-                function after (err, response, _location) {
-                    if (!err) {
-                        return done(response, _location);
+            function fetch(done) {
+                function after(err, result) {
+                    if (err) {
+                        done.abort();
+                        return res.redirect(301, '/?location=' + previousLocation);
                     }
-                    done.abort();
-                    return res.redirect(301, '/?location=' + previousLocation);
+                    location = result.location;
+                    done();
                 }
 
-                dataAdapter.get(req, '/locations/' + siteLocation, after);
-            }
-
-            function getLocation(done, response, _location) {
-                location = _location;
-                done();
-            }
-
-            function fetchTopCities(done) {
-                dataAdapter.get(req, '/countries/' + siteLocation + '/topcities', done.errfcb);
-            }
-
-            function parse(done, response, _topCities) {
-                topCities = {
-                    models: _topCities.data,
-                   _byId: {},
-                    metadata: _topCities.metadata
-                };
-                topCities.models.forEach(function sort(city) {
-                    topCities._byId[city.url] = city;
-                });
-                done();
-            }
-
-            function getCity(done) {
-                location.topCities = topCities;
-                if (location.children && location.children[0]) {
-                    location.current = location.children[0];
-                    if (location.children[0].children && location.children[0].children[0]) {
-                        location.current = location.children[0].children[0];
+                req.rendrApp.fetch({
+                    location: {
+                        model: 'Location',
+                        params: {
+                            location: siteLocation
+                        }
                     }
-                }
-                done();
+                }, {
+                    readFromCache: false
+                }, after);
             }
 
             function store(done) {
-                if (location.current) {
-                    siteLocation = location.current.url;
+                var current = location.get('current');
+
+                if (current) {
+                    siteLocation = current.url;
                 }
-                app.session.persist({
+                req.rendrApp.session.persist({
                     siteLocation: siteLocation
                 });
-                app.session.update({
-                    location: location
+                req.rendrApp.session.update({
+                    location: location.toJSON()
                 });
                 done();
             }
@@ -101,16 +78,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
                 return res.redirect(301, '/?location=' + previousLocation);
             }
-            promise = asynquence().or(fail)
-                .then(fetchLocation)
-                .then(getLocation);
-            if (!_.contains(excludedUrls.data, req.path)) {
-                promise
-                    .then(fetchTopCities)
-                    .then(parse);
-            }
-            promise
-                .then(getCity)
+            asynquence().or(fail)
+                .then(fetch)
                 .then(store)
                 .val(next);
         };
