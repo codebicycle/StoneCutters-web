@@ -1,7 +1,7 @@
 'use strict';
 
 var Base = require('rendr/shared/app');
-var Session = require('./session');
+var Session = require('../shared/session');
 var nunjucks = require('./nunjucks');
 
 module.exports = Base.extend({
@@ -9,7 +9,7 @@ module.exports = Base.extend({
         templateAdapter: 'rendr-nunjucks'
     },
     initialize: function() {
-        Session.call(this, {
+        Session.call(this, true, {
             isServer: typeof window === 'undefined'
         });
         this.templateAdapter.init();

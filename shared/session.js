@@ -11,13 +11,16 @@ if (isServer) {
 
 function noop() {}
 
-var Session = function(data, done) {
+var Session = function(isApp, data, done) {
     if (data instanceof Function) {
         done = data;
         data = {};
     }
     data = data || {};
     done = done || noop;
+    if (isApp && data.isServer) {
+        return done();
+    }
     this.session = {};
     if (isServer) {
         new ServerSession(this, callback.bind(this));

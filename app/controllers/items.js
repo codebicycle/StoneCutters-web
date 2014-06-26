@@ -238,6 +238,13 @@ module.exports = {
             delete params.title;
 
             spec = {
+                categories: {
+                    collection : 'Categories',
+                    params: {
+                        location: siteLocation,
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                },
                 item: {
                     model: 'Item',
                     params: params
@@ -247,6 +254,7 @@ module.exports = {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
+                var subcategory = result.categories.search(item.category.id);
 
                 if (!item) {
                     return helpers.common.redirect.call(this, '/404');
@@ -268,6 +276,8 @@ module.exports = {
                 helpers.analytics.reset();
                 helpers.analytics.addParam('user', user);
                 helpers.analytics.addParam('item', item);
+                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                helpers.analytics.addParam('subcategory', subcategory.toJSON());
                 result.analytics = helpers.analytics.generateURL(app.session.get());
                 callback(err, result);
             }.bind(this));
