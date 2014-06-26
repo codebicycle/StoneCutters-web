@@ -144,16 +144,6 @@ describe('app', function test() {
                     })(helpers.seo.getHead());
                     done();
                 });
-                it('should be added seo canonical to the head object', function test(done) {
-                    (function equality(head) {
-                        // Necesary for 'use strict'
-                        var x;
-
-                        x = head.canonical.should.be.ok;
-                        head.canonical.should.equal('http://' + utils.locations.in.www);
-                    })(helpers.seo.getHead());
-                    done();
-                });
                 it('should be added seo metatags to the head object', function test(done) {
                     (function equality(head) {
                         // Necesary for 'use strict'
@@ -323,16 +313,6 @@ describe('app', function test() {
                         response.custom.should.have.property('platform');
                         response.should.have.property('platform', 'html4');
                     })(utils.analyitcsParams(result.data.analytics));
-                    done();
-                });
-                it('should be added seo canonical to the head object', function test(done) {
-                    (function equality(head) {
-                        // Necesary for 'use strict'
-                        var x;
-
-                        x = head.canonical.should.be.ok;
-                        head.canonical.should.equal('http://' + utils.locations.in.www + '/' + url);
-                    })(helpers.seo.getHead());
                     done();
                 });
                 it('should not redirect', function test(done) {
@@ -511,16 +491,6 @@ describe('app', function test() {
 
                         x = head.title.should.be.ok;
                         head.title.should.equal('Listing');
-                    })(helpers.seo.getHead());
-                    done();
-                });
-                it('should be added seo canonical to the head object', function test(done) {
-                    (function equality(head) {
-                        // Necesary for 'use strict'
-                        var x;
-
-                        x = head.canonical.should.be.ok;
-                        head.canonical.should.equal('http://' + utils.locations.in.www + '/' + url);
                     })(helpers.seo.getHead());
                     done();
                 });

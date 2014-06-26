@@ -151,16 +151,6 @@ describe('app', function test() {
                     })(utils.analyitcsParams(result.data.analytics));
                     done();
                 });
-                it('should be added seo canonical to the head object', function test(done) {
-                    (function equality(head) {
-                        // Necesary for 'use strict'
-                        var x;
-
-                        x = head.canonical.should.be.ok;
-                        head.canonical.should.equal('http://' + utils.locations.in.www + '/nf/search/a');
-                    })(helpers.seo.getHead());
-                    done();
-                });
                 it('should have others items when change page 1 to 2', function test(done) {
                     var beforeResult = _.clone(result);
                     request(server.expressApp)
@@ -365,16 +355,6 @@ describe('app', function test() {
                         response.custom.should.have.property('platform');
                         response.should.have.property('platform', 'html4');
                     })(utils.analyitcsParams(result.data.analytics));
-                    done();
-                });
-                it('should be added seo canonical to the head object', function test(done) {
-                    (function equality(head) {
-                        // Necesary for 'use strict'
-                        var x;
-
-                        x = head.canonical.should.be.ok;
-                        head.canonical.should.equal('http://' + utils.locations.in.www + '/' + url);
-                    })(helpers.seo.getHead());
                     done();
                 });
                 it('should have other item when change itemId', function test(done) {
