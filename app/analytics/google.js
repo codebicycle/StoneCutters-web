@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var common = require('../common');
+var helpers = require('../helpers');
 
 var analyticsParams = {
     category: {
@@ -45,7 +45,7 @@ var analyticsParams = {
                 else if (!item.id) {
                     str.push('/age_unavailable');
                 }
-                else if (common.daysDiff(new Date(item.date.timestamp)) > 30) {
+                else if (helpers.common.daysDiff(new Date(item.date.timestamp)) > 30) {
                     str.push('/age_30');
                 }
 

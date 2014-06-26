@@ -2,7 +2,6 @@
 
 module.exports = {
     controllers: require('./controllers'),
-    analytics: require('./analytics'),
     marketing: require('./marketing'),
     common: require('./common'),
     routes: require('./routes'),

@@ -1,9 +1,10 @@
 'use strict';
 
-var helpers = require('../helpers');
-var seo = require('../seo');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var helpers = require('../helpers');
+var seo = require('../seo');
+var analytics = require('../analytics');
 var config = require('../config');
 
 module.exports = {
@@ -125,12 +126,12 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    helpers.analytics.reset();
-                    helpers.analytics.addParam('user', user);
-                    helpers.analytics.addParam('item', item);
-                    helpers.analytics.addParam('category', data.categories.get(subcategory.get('parentId')).toJSON());
-                    helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                    result.analytics = helpers.analytics.generateURL(app.session.get());
+                    analytics.reset();
+                    analytics.addParam('user', user);
+                    analytics.addParam('item', item);
+                    analytics.addParam('category', data.categories.get(subcategory.get('parentId')).toJSON());
+                    analytics.addParam('subcategory', subcategory.toJSON());
+                    result.analytics = analytics.generateURL.call(this);
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
                     result.favorite = favorite;
 
@@ -139,7 +140,7 @@ module.exports = {
                     seo.update();
 
                     callback(err, result);
-                });
+                }.bind(this));
             }
         }
     },
@@ -199,12 +200,12 @@ module.exports = {
                 result.item = item;
                 result.user = user;
                 result.pos = pos;
-                helpers.analytics.reset();
-                helpers.analytics.addParam('user', user);
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('user', user);
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 callback(err, result);
             }.bind(this));
         }
@@ -267,12 +268,12 @@ module.exports = {
                 result.item = item;
                 result.user = user;
                 result.pos = pos;
-                helpers.analytics.reset();
-                helpers.analytics.addParam('user', user);
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('user', user);
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 callback(err, result);
             }.bind(this));
         }
@@ -300,16 +301,16 @@ module.exports = {
             delete params.filters;
             delete params.urlFilters;
             
-            helpers.analytics.reset();
-            helpers.analytics.setPage('nf');
-            helpers.analytics.addParam('keyword', query.search);
-            helpers.analytics.addParam('page_nb', 0);
-            helpers.analytics.addParam('user', user);
+            analytics.reset();
+            analytics.setPage('nf');
+            analytics.addParam('keyword', query.search);
+            analytics.addParam('page_nb', 0);
+            analytics.addParam('user', user);
 
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
                 return callback(null, {
-                    analytics: helpers.analytics.generateURL(app.session.get()),
+                    analytics: analytics.generateURL.call(this),
                     search: '',
                     metadata: {
                         total: 0
@@ -336,8 +337,8 @@ module.exports = {
                 }
 
                 helpers.pagination.paginate(result.metadata, query, url);
-                helpers.analytics.addParam('page_nb', result.metadata.totalPages);
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.addParam('page_nb', result.metadata.totalPages);
+                result.analytics = analytics.generateURL.call(this);
                 result.search = query.search;
                 callback(err, result);
             }.bind(this));
@@ -383,11 +384,11 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
                 }
                 subcategory = result.categories.search(item.category.id);
-                helpers.analytics.reset();
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 result.user = user;
                 result.item = item;
                 result.form = form;
@@ -430,11 +431,11 @@ module.exports = {
                 item = result.item.toJSON();
                 subcategory = result.categories.search(item.category.id);
 
-                helpers.analytics.reset();
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 result.user = user;
                 result.item = item;
                 callback(err, result);

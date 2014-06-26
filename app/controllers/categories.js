@@ -1,8 +1,9 @@
 'use strict';
 
+var _ = require('underscore');
 var helpers = require('../helpers');
 var seo = require('../seo');
-var _ = require('underscore');
+var analytics = require('../analytics');
 var config = require('../config');
 
 function handleItems(category, subcategory, params, callback) {
@@ -50,11 +51,11 @@ function handleItems(category, subcategory, params, callback) {
             seo.update();
         }
         helpers.pagination.paginate(result.metadata, query, url);
-        helpers.analytics.reset();
-        helpers.analytics.setPage('listing');
-        helpers.analytics.addParam('category', category.toJSON());
-        helpers.analytics.addParam('subcategory', subcategory.toJSON());
-        result.analytics = helpers.analytics.generateURL(app.session.get());
+        analytics.reset();
+        analytics.setPage('listing');
+        analytics.addParam('category', category.toJSON());
+        analytics.addParam('subcategory', subcategory.toJSON());
+        result.analytics = analytics.generateURL.call(this);
         result.category = category.toJSON();
         result.subcategory = subcategory.toJSON();
         result.relatedAds = query.relatedAds;
@@ -65,22 +66,22 @@ function handleItems(category, subcategory, params, callback) {
 
 function handleShow(category, params, callback) {
     var currentRouter = ['categories', 'subcategories'];
+    var slug;
 
     helpers.controllers.changeHeaders.call(this, false, currentRouter);
     seo.resetHead.call(this, currentRouter);
 
-    var slug = helpers.common.slugToUrl(category.toJSON());
-
+    slug = helpers.common.slugToUrl(category.toJSON());
     if (slug.indexOf(params.title + '-cat-')) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
-    helpers.analytics.reset();
-    helpers.analytics.addParam('user', this.app.session.get('user'));
-    helpers.analytics.addParam('category', category.toJSON());
+    analytics.reset();
+    analytics.addParam('user', this.app.session.get('user'));
+    analytics.addParam('category', category.toJSON());
     callback(null, {
         category: category.toJSON(),
         type: 'categories',
-        analytics: helpers.analytics.generateURL(this.app.session.get())
+        analytics: analytics.generateURL.call(this)
     });
 }
 
@@ -105,11 +106,11 @@ module.exports = {
             }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                helpers.analytics.reset();
+                analytics.reset();
                 callback(null, {
                     categories: result.categories.toJSON(),
                     icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                    analytics: helpers.analytics.generateURL(this.app.session.get())
+                    analytics: analytics.generateURL.call(this)
                 });
             }.bind(this));
         }

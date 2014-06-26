@@ -1,6 +1,7 @@
 'use strict';
 
 var helpers = require('../helpers');
+var analytics = require('../analytics');
 var config = require('../config');
 
 module.exports = {
@@ -25,13 +26,13 @@ module.exports = {
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                helpers.analytics.reset();
+                analytics.reset();
                 callback(err, {
                     cities: result.cities.toJSON(),
                     search: params.search,
                     posting: params.posting,
                     target: params.target,
-                    analytics: helpers.analytics.generateURL(this.app.session.get())
+                    analytics: analytics.generateURL.call(this)
                 });
             }.bind(this));
         }

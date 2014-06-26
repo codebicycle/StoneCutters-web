@@ -1,6 +1,7 @@
 'use strict';
 
 var helpers = require('../helpers');
+var analytics = require('../analytics');
 var config = require('../config');
 
 module.exports = {
@@ -8,10 +9,10 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.analytics.reset();
+            analytics.reset();
 
             callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.session.get())
+                analytics: analytics.generateURL.call(this)
             });
         }
     },
@@ -121,14 +122,14 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.analytics.reset();
+            analytics.reset();
             this.app.session.persist({
                 downloadApp: '1'
             }, {
                 maxAge: this.app.session.get('downloadApp')
             });
             callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.session.get()),
+                analytics: analytics.generateURL.call(this),
                 ref: params.ref
             });
         }
@@ -145,10 +146,10 @@ module.exports = {
             if (err) {
                 this.app.session.clear('error');
             }
-            helpers.analytics.reset();
+            analytics.reset();
             callback(null, {
                 error: err,
-                analytics: helpers.analytics.generateURL(this.app.session.get())
+                analytics: analytics.generateURL.call(this)
             });
         }
 
