@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Rubriekspecifieke velden (optioneel)',
     'misc.YouAreIn_Mob': 'U bent  in <<LOCATION>>',
     'business_directory.Map': 'Kaart',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'in'
 };

@@ -215,6 +215,64 @@ module.exports = {
             }.bind(this));
         }
     },
+    map: function(params, callback) {
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'map'], config.get(['cache', 'headers', 'default'], {})));
+
+            var app = this.app;
+            var user = app.session.get('user');
+            var itemId = params.itemId;
+            var slugUrl = params.title;
+            var pos = Number(params.pos) || 0;
+            var siteLocation = app.session.get('siteLocation');
+            var spec;
+            var slug;
+
+            if (user) {
+                params.token = user.token;
+            }
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+
+            spec = {
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            };
+            app.fetch(spec, {
+                'readFromCache': false
+            }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
+
+                if (!item) {
+                    return helpers.common.redirect.call(this, '/404');
+                }
+                slug = helpers.common.slugToUrl(item);
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if (!item.images || !item.images.length) {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if (pos < 0 || pos >= item.images.length) {
+                    return helpers.common.redirect.call(this, ('/' + slug + '/map'));
+                }
+
+                result.item = item;
+                result.user = user;
+                result.pos = pos;
+                helpers.analytics.reset();
+                helpers.analytics.addParam('user', user);
+                helpers.analytics.addParam('item', item);
+                result.analytics = helpers.analytics.generateURL(app.session.get());
+                callback(err, result);
+            }.bind(this));
+        }
+    },
     search: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 

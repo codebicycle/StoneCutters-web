@@ -134,5 +134,6 @@ module.exports = {
     'register_confirmation.782': 'You must agree our user agreement to complete registration.',
     'terms.TermsOfUse': '\u0634\u0631\u0648\u0637 \u0627\u0644\u0627\u0633\u062A\u062E\u062F\u0627\u0645',
     'business_directory.Map': 'Map',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
 };

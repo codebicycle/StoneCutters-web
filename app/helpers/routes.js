@@ -161,6 +161,14 @@ module.exports = {
             }
         }
     },
+    'items#map': {
+        urls: {
+            server: ':title-iid-:itemId([0-9]+)/map',
+            client: {
+                url: ':title-iid-:itemId/map'
+            }
+        }
+    },
     'items#show#slug': {
         urls: {
             server: ':title-iid-:itemId([0-9]+)',

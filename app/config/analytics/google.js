@@ -21,6 +21,7 @@ module.exports = {
         'pages#interstitial': 'interstitial',
         'items#success': '[category-name]/[subcategory-id]/reply_success/[item_attributes]',
         'items#reply': '[category-name]/[subcategory-id]/reply/[item_attributes]',
+        'items#map': 'item/locate_in_map/[item_attributes]',
         'items#show': '[category-name]/[subcategory-id]/item/[item_attributes]',
         'items#galery': '[category-name]/[subcategory-id]/item/[item_attributes]/galery',
         'categories#show#listing': '[category-name]/[subcategory-id]/listing/[filter_name_value]',
@@ -28,3 +29,6 @@ module.exports = {
         'pages#error': 'error'
     }
 };
+
+
+///item/locate_in_map/618156028?latitude=-25.3174945&longitude=-57.5604347
