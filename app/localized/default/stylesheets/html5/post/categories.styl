@@ -1,16 +1,27 @@
-section#selectCat ul {
+section#selectCat ul, section#selectSubCat ul {
 	padding: 0.9375rem;
 	list-style: none;
 }
-section#selectCat ul li {
+section#selectCat ul li, section#selectSubCat ul li {
 	border-bottom: 1px solid #ccc;
 }
-section#selectCat ul li:last-child {
+section#selectCat ul li:last-child, section#selectSubCat ul li:last-child {
 	border: none;
 }
-section#selectCat ul li a {
+section#selectCat ul li a, section#selectSubCat ul li a {
 	display: block;
 	padding: 0.5rem 1rem;
 	color: #333;
 	font-size: 1rem;
+}
+@media only screen and (min-width : 768px) {
+    section#selectCat ul li, section#selectSubCat ul li {
+        width: 48%;
+        display: inline-block;
+        margin: 0 0 0 1%;
+        border-bottom: 1px solid #ccc!important;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 }
