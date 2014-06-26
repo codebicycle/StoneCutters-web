@@ -1,6 +1,5 @@
 {% view 'locations/select' %}
-{% set templateName = template + '/partials/search.html' %}
-{% include templateName %}
+{% view 'partials/search' %}
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}

@@ -14,15 +14,17 @@ module.exports = Base.extend({
     },
     postRender: function() {
        var listingView = 'listView';
+
         if (typeof window !== 'undefined' && localStorage) {
             listingView = localStorage.getItem('listingView');
-        }else{
+        }
+        else {
             listingView = this.app.session.get('listingView');
         }
-        if(listingView == 'galView'){
+        if (listingView == 'galView') {
             switchView();
         }
-        $('.switchView').click((function(e) {
+        $('.switchView').click((function onClick(e) {
             switchView();
             var current = ($('.gallery-list').length === 0 ? 'listView' : 'galView');
             if (typeof window !== 'undefined' && localStorage) {
@@ -34,19 +36,20 @@ module.exports = Base.extend({
             }
         }).bind(this));
 
-        function loadImages(url , $this){
+        function loadImages(url , $this) {
             var newImg = new Image();
+
             newImg.src = url;
             newImg.onload = function() {
-                $this.css('background-image', 'url('+url+')');
+                $this.css('background-image', 'url(' + url + ')');
             };
         }
-        function switchView(){
+
+        function switchView() {
             $('section#itemListing ul').toggleClass('gallery-list');
             $('.switchView').toggleClass('gallery');
-            var url;
             $('.filled').each(function() {
-                url = $(this).attr('data-fullimg');
+                var url = $(this).attr('data-fullimg');
                 loadImages(url , $(this));
             });
         }
