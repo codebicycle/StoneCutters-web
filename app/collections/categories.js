@@ -5,19 +5,7 @@ var Category = require('../models/category');
 
 module.exports = Base.extend({
     model: Category,
-    url: function() {
-        var url = '/countries/' + this.params.location + '/categories';
-
-        delete this.params.location;
-        if (this.params) {
-            url += '?';
-            for (var param in this.params) {
-                url += param + '=:' + param + '&';
-            }
-            url = url.slice(0, url.length - 1);
-        }
-        return url;
-    },
+    url: '/countries/:location/categories',
     search: function(id) {
         var category = this.get(id);
 

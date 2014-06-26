@@ -41,6 +41,7 @@ module.exports = {
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
+        enabled: false,
         headers: {
             home: {
                 'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',

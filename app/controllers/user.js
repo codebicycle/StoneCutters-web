@@ -109,7 +109,8 @@ module.exports = {
                 myAds: {
                     collection: 'Items',
                     params: {
-                        token: user.token
+                        token: user.token,
+                        userId: user.userId
                     }
                 }
             };
@@ -118,7 +119,9 @@ module.exports = {
                 location: this.app.session.get('siteLocation'),
                 item_type: 'myAds'
             });
-            this.app.fetch(spec, function afterFetch(err, result) {
+            this.app.fetch(spec, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
                 var myAds = result.myAds.models[0];
 
                 function processItem(item) {
@@ -157,7 +160,8 @@ module.exports = {
                 favorites: {
                     collection: 'Items',
                     params: {
-                        token: user.token
+                        token: user.token,
+                        userId: user.userId
                     }
                 }
             };
@@ -168,7 +172,9 @@ module.exports = {
                 location: this.app.session.get('siteLocation'),
                 item_type: 'favorites'
             });
-            this.app.fetch(spec, function afterFetch(err, result) {
+            this.app.fetch(spec, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
                 var favorites = result.favorites.models[0];
 
                 function processItem(item) {

@@ -19,7 +19,12 @@ var Session = function(data, done) {
     data = data || {};
     done = done || noop;
     this.session = {};
-    isServer ? new ServerSession(this, callback.bind(this)) : new ClientSession(this, callback.bind(this));
+    if (isServer) {
+        new ServerSession(this, callback.bind(this));
+    }
+    else {
+        new ClientSession(this, callback.bind(this));
+    }
 
     function callback(store) {
         var session = _.extend({}, _.clone(this.get('session') || {}), store.getAll(), data);
@@ -99,7 +104,7 @@ var CookiesSession = function(req, res, callback) {
     };
 
     callback(this);
-}
+};
 
 var MemcachedSession = function(req, res, callback) {
     var sid = req.param('sid');
@@ -115,23 +120,23 @@ var MemcachedSession = function(req, res, callback) {
 
         function getAll() {
             return _.clone(session);
-        };
+        }
 
         function get(key, dephault) {
             var value = session[key];
 
             return (typeof value === 'undefined' ? dephault : value);
-        };
+        }
 
         function put(key, value, options) {
             session[key] = value;
             memcached.set(sid, session, 86400, noop);
-        };
+        }
 
         function clear(key) {
             delete session[key];
             memcached.set(sid, session, 86400, noop);
-        };
+        }
 
         this.getAll = !err ? getAll : noop;
         this.get = !err ? get : noop;
@@ -139,7 +144,7 @@ var MemcachedSession = function(req, res, callback) {
         this.clear = !err ? clear : noop;
         callback(this);
     }
-}
+};
 
 var ClientSession = function(app, callback) {
     function getAll() {
