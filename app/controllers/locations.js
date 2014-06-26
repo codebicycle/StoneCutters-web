@@ -9,35 +9,26 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            analytics.reset();
-
-            if (!params.search) {
-                return callback(null, {
-                    cities: this.app.session.get('location').topCities.models,
-                    target: params.target,
-                    analytics: analytics.generateURL.call(this)
-                });
-            }
-            this.app.fetch({
+            var spec = {
                 cities: {
                     collection: 'Cities',
                     params: {
-                        location: this.app.session.get('siteLocation'),
-                        name: params.search
+                        type: 'topcities',
+                        location: this.app.session.get('siteLocation')
                     }
                 }
-            }, function afterFetch(err, result) {
-                var cities = {
-                    'models': result.cities.toJSON(),
-                    '_byId': {},
-                    'metadata': result.cities.get('metadata')
-                };
+            };
 
-                cities.models.forEach(function sortCity(city) {
-                    cities._byId[city.url] = city;
-                });
+            if (params.search) {
+                spec.cities.params.type = 'cities';
+                spec.cities.params.name = params.search;
+            }
+            this.app.fetch(spec, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
+                analytics.reset();
                 callback(err, {
-                    cities: cities.models,
+                    cities: result.cities.toJSON(),
                     search: params.search,
                     posting: params.posting,
                     target: params.target,

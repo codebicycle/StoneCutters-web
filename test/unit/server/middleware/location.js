@@ -129,19 +129,6 @@ describe('server', function test() {
                     }
                 }
             });
-            describe('topCities', function test() {
-                it('should be added', function test(done) {
-                    var before = response.body.before;
-                    var after = response.body.after;
-
-                    (function existance(before, after) {
-                        before.should.not.have.property('topCities');
-                        after.should.have.property('topCities');
-                    })(before.session.location || {}, after.session.location);
-
-                    done();
-                });
-            });
             describe('siteLocation', function test() {
                 it('should be added to the session', function test(done) {
                     var before = response.body.before;
