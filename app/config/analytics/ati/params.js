@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    'home#index': {
+    'categories#list': {
         process: false,
         names: {
             page_name: 'home_page',
@@ -44,21 +44,21 @@ module.exports = {
             page_nb: 0
         }
     },
-    'user#registration': {
+    'users#register': {
         process: false,
         names: {
             page_name: 'register_form',
             category: 'account'
         }
     },
-    'user#login': {
+    'users#login': {
         process: false,
         names: {
             page_name: 'login',
             category: 'account'
         }
     },
-    'location#index': {
+    'locations#list': {
         process: false,
         names: {
             page_name: 'posting_step1',
@@ -95,7 +95,7 @@ module.exports = {
             funnel_subcategory: ''
         }
     },
-    'post#subcat': {
+    'post#subcategories': {
         process: false,
         names: {
             page_name: 'posting_step3',
@@ -103,7 +103,7 @@ module.exports = {
             funnel_page: 'posting_step3'
         }
     },
-    'post#index': {
+    'post#categories': {
         process: false,
         names: {
             page_name: 'posting_step2',

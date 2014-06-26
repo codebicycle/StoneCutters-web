@@ -8,7 +8,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'terms'], config.get(['cache', 'headers', 'default'], {})));
             helpers.analytics.reset();
 
             callback(null, {
@@ -20,8 +19,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'help'], config.get(['cache', 'headers', 'default'], {})));
-
             // Delete this function and your references
             function itemsHelpSimulator() {
                 return [{
@@ -124,7 +121,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'interstitial'], config.get(['cache', 'headers', 'default'], {})));
             helpers.analytics.reset();
             this.app.session.persist({
                 downloadApp: '1'
@@ -141,7 +137,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'error'], config.get(['cache', 'headers', 'default'], {})));
             var err = this.app.session.get('error');
 
             if (typeof window === 'undefined') {

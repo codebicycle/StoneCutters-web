@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var seo = require('../seo');
 var common = require('./common');
 var marketing = require('./marketing');
 var config = require('../config');
@@ -231,8 +232,18 @@ function processForm(params, isForm) {
     return form;
 }
 
-function changeHeaders(headers) {
-    if (!isServer || !headers || !config.get(['cache', 'enabled'], false) || _.isEmpty(headers)) {
+function changeHeaders(headers, page) {
+    if (!isServer || !config.get(['cache', 'enabled'], false) || (headers && _.isEmpty(headers))) {
+        return;
+    }
+    if (!headers) {
+        if (!page) {
+            var currentRoute = this.app.session.get('currentRoute');
+            page = [currentRoute.controller, currentRoute.action];
+        }
+        headers = config.get(['cache', 'headers'].concat(page), config.get(['cache', 'headers', 'default'], {}));
+    }
+    if (_.isEmpty(headers)) {
         return;
     }
     for (var header in headers) {
@@ -241,11 +252,16 @@ function changeHeaders(headers) {
 }
 
 module.exports = {
-    control: function(params, isForm, callback) {
-        if (isForm instanceof Function) {
-            callback = isForm;
-            isForm = false;
+    control: function(params, options, callback) {
+        if (options instanceof Function) {
+            callback = options;
+            options = {};
         }
+        _.defaults(options, {
+            isForm: false,
+            seo: true,
+            cache: true
+        });
         setUrlVars.call(this);
         if (!redirect.call(this)) {
             cleanSession.call(this);
@@ -253,7 +269,13 @@ module.exports = {
             setReferer.call(this);
             setLanguage.call(this, params);
             setLocation.call(this, params, function next() {
-                callback.call(this, processForm.call(this, params, isForm));
+                if (options.seo) {
+                    seo.resetHead.call(this);
+                }
+                if (options.cache) {
+                    changeHeaders.call(this);
+                }
+                callback.call(this, processForm.call(this, params, options.isForm));
             }.bind(this));
         }
     },

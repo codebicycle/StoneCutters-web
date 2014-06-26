@@ -1,0 +1,30 @@
+<tr>
+    <td>
+        {% view 'locations/select' %}
+        {% set templateName = template + '/post/home_select.html' %}
+        {% include templateName %}
+        {% set templateName = template + '/partials/search.html' %}
+        {% include templateName %}
+        <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left">
+            {% for category in categories %}
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <a style="display: block;" href="/{{ category | slugToUrl | link }}">
+                            <small style="display: block;">
+                                <img border="0" alt="{{ category.trName }}" src="{{ ['/images/', platform, '/icons/', icons.join('.'), '/', category.id, '.gif'] | join('') | static }}" />
+                                {{ category.trName }}
+                            </small>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr style="display: none;">
+                <td>
+                    {% set templateName = template + '/partials/analytics.html' %}
+                    {% include templateName %}
+                </td>
+            </tr>
+        </table>
+        {% view 'footer/languages' %}
+    </td>
+</tr>
