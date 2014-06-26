@@ -9,7 +9,9 @@ module.exports = Base.extend({
             if (location.children[0].children && location.children[0].children[0]) {
                 location.current = location.children[0].children[0];
             }
-            location.current = location.children[0];
+            else {
+                location.current = location.children[0];
+            }
         }
         return location;
     }

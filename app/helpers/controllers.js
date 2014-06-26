@@ -167,7 +167,9 @@ function setLocation(params, callback) {
             }
         }
     };
-    this.app.fetch(spec, function afterFetch(err, result) {
+    this.app.fetch(spec, {
+        readFromCache: false
+    }, function afterFetch(err, result) {
         if (err) {
             return callback();
         }
