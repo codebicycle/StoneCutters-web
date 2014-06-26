@@ -7,12 +7,10 @@ var sixpack = require(sixpackName);
 var config = require('../config');
 
 module.exports = {
-    index: function(params, callback) {
+    categories: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'categories'], config.get(['cache', 'headers', 'default'], {})));
-
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -54,12 +52,10 @@ module.exports = {
             }.bind(this));
         }
     },
-    subcat: function(params, callback) {
+    subcategories: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'subcategories'], config.get(['cache', 'headers', 'default'], {})));
-
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -93,11 +89,11 @@ module.exports = {
         }
     },
     form: function(params, callback) {
-        helpers.controllers.control.call(this, params, true, controller);
+        helpers.controllers.control.call(this, params, {
+            isForm: true
+        }, controller);
 
         function controller(form) {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'form'], config.get(['cache', 'headers', 'default'], {})));
-
             var app = this.app;
             var user = app.session.get('user');
             var siteLocation = app.session.get('siteLocation');
@@ -163,11 +159,11 @@ module.exports = {
         }
     },
     edit: function(params, callback) {
-        helpers.controllers.control.call(this, params, true, controller);
+        helpers.controllers.control.call(this, params, {
+            isForm: true
+        }, controller);
 
         function controller(form) {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'edit'], config.get(['cache', 'headers', 'default'], {})));
-
             var app = this.app;
             var user = app.session.get('user');
             var siteLocation = app.session.get('siteLocation');
@@ -314,8 +310,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'success'], config.get(['cache', 'headers', 'default'], {})));
-
             var app = this.app;
             var user = app.session.get('user');
             var securityKey = params.sk;
@@ -357,7 +351,7 @@ module.exports = {
                 }
             };
             app.fetch(spec, {
-                'readFromCache': false
+                readFromCache: false
             }, function afterFetch(err, result) {
                 if (err) {
                     callback(err, result);
@@ -381,7 +375,7 @@ module.exports = {
                 };
 
                 app.fetch(spec, {
-                    'readFromCache': false
+                    readFromCache: false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
                     var user = app.session.get('user');
