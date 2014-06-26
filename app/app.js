@@ -1,7 +1,7 @@
 'use strict';
 
 var Base = require('rendr/shared/app');
-var Session = require('../shared/session');
+var Session = require('./session');
 var nunjucks = require('./nunjucks');
 
 module.exports = Base.extend({
@@ -32,5 +32,4 @@ module.exports = Base.extend({
     getAppViewClass: function() {
         return require('./views/app');
     }
-
 });

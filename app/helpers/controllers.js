@@ -232,7 +232,7 @@ function processForm(params, isForm) {
 }
 
 function changeHeaders(headers) {
-    if (!isServer || !headers || _.isEmpty(headers)) {
+    if (!isServer || !headers || !config.get(['cache', 'enabled'], false) || _.isEmpty(headers)) {
         return;
     }
     for (var header in headers) {

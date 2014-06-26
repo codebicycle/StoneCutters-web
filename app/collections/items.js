@@ -6,7 +6,6 @@ var Item = require('../models/item');
 module.exports = Base.extend({
     model: Item,
     url: function() {
-        var user = this.app.session.get('user') || {};
         var url;
 
         switch(this.params.item_type) {
@@ -14,21 +13,14 @@ module.exports = Base.extend({
                 url = '/items';
             break;
             case 'myAds':
-                url = '/users/'+ user.userId +'/items';
+                url = '/users/:userId/items';
             break;
             case 'favorites':
-                url = '/users/'+ user.userId +'/favorites';
+                url = '/users/:userId/favorites';
             break;
             default:
                 url = '/items';
             break;
-        }
-        if (this.params) {
-            url += '?';
-            for (var param in this.params) {
-                url += param + '=:' + param + '&';
-            }
-            url = url.slice(0, url.length - 1);
         }
         return url;
     }
