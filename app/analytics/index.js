@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../../config');
+var config = require('../config');
 var google = require('./google');
 var ati = require('./ati');
 
@@ -31,13 +31,12 @@ function stringifyParams(params) {
     return str.join('&');
 }
 
-function getURLName(session, page) {
+function getURLName(page, currentRoute) {
     if (~page.indexOf('#')) {
         return page;
     }
     
     var name = [];
-    var currentRoute = session.currentRoute;
 
     name.push(currentRoute.controller);
     name.push('#');
@@ -49,20 +48,20 @@ function getURLName(session, page) {
     return name.join('');
 }
 
-function generateURL(session) {
-    var page = getURLName(session, query.page);
+function generateURL() {
+    var page = getURLName.call(this, query.page, this.app.session.get('currentRoute'));
     var pageGoogle = config.get(['analytics', 'google', 'pages', page], '');
     var configAti = config.get(['analytics', 'ati', 'params', page], {});
     var params = {};
 
-    this.addParam('rendering', session.platform);
+    this.addParam('rendering', this.app.session.get('platform'));
 
     params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
     params.random = Math.round(Math.random() * 1000000);
-    params.referer = (session.referer || '-');
-    params.page = google.generatePage(pageGoogle, query.params);
-    params.platform = session.platform;
-    params.custom = ati.generateParams(session, configAti, query.params);
+    params.referer = (this.app.session.get('referer') || '-');
+    params.page = google.generatePage.call(this, pageGoogle, query.params);
+    params.platform = this.app.session.get('platform');
+    params.custom = ati.generateParams.call(this, configAti, query.params);
 
     return '/analytics/pageview.gif?' + stringifyParams(params);
 }

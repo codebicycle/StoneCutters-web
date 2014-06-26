@@ -49,11 +49,11 @@ function handleItems(category, subcategory, params, callback) {
             helpers.seo.update();
         }
         helpers.pagination.paginate(result.metadata, query, url);
-        helpers.analytics.reset();
-        helpers.analytics.setPage('listing');
-        helpers.analytics.addParam('category', category.toJSON());
-        helpers.analytics.addParam('subcategory', subcategory.toJSON());
-        result.analytics = helpers.analytics.generateURL(app.session.get());
+        analytics.reset();
+        analytics.setPage('listing');
+        analytics.addParam('category', category.toJSON());
+        analytics.addParam('subcategory', subcategory.toJSON());
+        result.analytics = analytics.generateURL.call(this);
         result.category = category.toJSON();
         result.subcategory = subcategory.toJSON();
         result.relatedAds = query.relatedAds;
@@ -70,9 +70,9 @@ function handleShow(category, params, callback) {
     if (slug.indexOf(params.title + '-cat-')) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
-    helpers.analytics.reset();
-    helpers.analytics.addParam('user', this.app.session.get('user'));
-    helpers.analytics.addParam('category', category.toJSON());
+    analytics.reset();
+    analytics.addParam('user', this.app.session.get('user'));
+    analytics.addParam('category', category.toJSON());
     helpers.seo.resetHead();
     helpers.seo.addMetatag('title', 'Listing');
     helpers.seo.addMetatag('Description', 'This is a listing page');
@@ -80,7 +80,7 @@ function handleShow(category, params, callback) {
     callback(null, {
         category: category.toJSON(),
         type: 'categories',
-        analytics: helpers.analytics.generateURL(this.app.session.get())
+        analytics: analytics.generateURL.call(this)
     });
 }
 

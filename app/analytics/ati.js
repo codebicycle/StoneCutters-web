@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var common = require('../common');
+var helpers = require('../helpers');
 
 module.exports = function analyticsHelper() {
     var actionTypes = {
@@ -21,15 +21,19 @@ module.exports = function analyticsHelper() {
         return name;
     }
 
-    function prepareDefaultParams(session, params) {
-        if (session.user) {
-            params.user_id = session.user.id;
+    function prepareDefaultParams(params) {
+        var user = this.app.session.get('user');
+        var location;
+
+        if (user) {
+            params.user_id = user.id;
         }
-        if (session.location && session.location.current) {
-            params.geo2 = standarizeName(session.location.current.name || '');
+        location = this.app.session.get('location');
+        if (location && location.current) {
+            params.geo2 = standarizeName(location.current.name || '');
         }
-        params.platform = session.platform;
-        params.language = session.selectedLanguage;
+        params.platform = this.app.session.get('platform');
+        params.language = this.app.session.get('selectedLanguage');
     }
 
     function processOptions(params, options) {
@@ -66,7 +70,7 @@ module.exports = function analyticsHelper() {
                 }
             }
             if(!_.isUndefined(params.posting_to_action)) {
-                params.posting_to_action = common.daysDiff(new Date(options.item.date.timestamp));
+                params.posting_to_action = helpers.common.daysDiff(new Date(options.item.date.timestamp));
             }
         }
         if(!_.isUndefined(params.funnel_category) && options.category) {
@@ -107,10 +111,10 @@ module.exports = function analyticsHelper() {
         return params;
     }
 
-    function generateParams(session, ati, options) {
+    function generateParams(ati, options) {
         var params = _.clone(ati.names);
 
-        prepareDefaultParams(session, params);
+        prepareDefaultParams.call(this, params);
         if (ati.process) {
             params = prepareParams(params, options);
         }
