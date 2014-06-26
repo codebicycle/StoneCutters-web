@@ -29,6 +29,3 @@ module.exports = {
         'pages#error': 'error'
     }
 };
-
-
-///item/locate_in_map/618156028?latitude=-25.3174945&longitude=-57.5604347
