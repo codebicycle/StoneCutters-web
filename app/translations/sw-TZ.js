@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Uga ya Kundi Maalum (Hiari)',
     'misc.YouAreIn_Mob': 'Uko katika <<LOCATION>>',
     'business_directory.Map': 'Ramani',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'katika'
 };

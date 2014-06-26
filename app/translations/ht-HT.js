@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Chan Espesifik Kategori (Opsyon\xE8l)',
     'misc.YouAreIn_Mob': 'Ou nan<<LOCATION>>',
     'business_directory.Map': 'Kat Jewografik',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'nan'
 };

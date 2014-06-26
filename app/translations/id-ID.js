@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Bidang Spesifik Kategori (Opsional)',
     'misc.YouAreIn_Mob': 'Anda di <<LOCATION>>',
     'business_directory.Map': 'Peta',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'di'
 };

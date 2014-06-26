@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)',
     'misc.YouAreIn_Mob': 'Olet kohteessa <<LOCATION>>',
     'business_directory.Map': 'Kartta',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'kohdassa'
 };

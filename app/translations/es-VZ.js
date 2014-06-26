@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Campos de categor\xEDa espec\xEDfica (opcionales)',
     'misc.YouAreIn_Mob': 'Est\xE1 en <<LOCATION>>',
     'business_directory.Map': 'Mapa',
+    'optionals.opt-138-323-translation-location': 'Localizaci\xF3n',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'en'
 };

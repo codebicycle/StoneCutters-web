@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Kategorispecifikke felter (valgfrit)',
     'misc.YouAreIn_Mob': 'Du er i <<LOCATION>>',
     'business_directory.Map': 'Kort',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'i'
 };
