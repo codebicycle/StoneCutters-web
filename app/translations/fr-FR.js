@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Champs de Cat\xE9gorie Sp\xE9cifiques (Facultatif)',
     'misc.YouAreIn_Mob': 'Vous \xEAtes \xE0 <<LOCATION>>',
     'business_directory.Map': 'Carte',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'dans'
 };

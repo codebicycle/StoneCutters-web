@@ -1,0 +1,10 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["optionals.opt-138-323-translation-location"] ) }}
+<div id="itemMap">
+    <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&zoom=14&size=320x100&markers={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&sensor=false">
+
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
+</div>
+{{ BreadcrumbHome(dictionary, link) }}

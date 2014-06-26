@@ -134,5 +134,6 @@ module.exports = {
     'register_confirmation.782': 'Je moet akkoord gaan met onze gebruikersovereenkomst om de registratie te kunnen voltooien.',
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
     'business_directory.Map': 'Kaart',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
 };

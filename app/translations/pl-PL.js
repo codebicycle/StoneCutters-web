@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)',
     'misc.YouAreIn_Mob': 'Jeste\u015B w miejscu: <<LOCATION>>',
     'business_directory.Map': 'Mapa',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'mo\u017Cna teraz znale\u017A\u0107 w kategorii:'
 };

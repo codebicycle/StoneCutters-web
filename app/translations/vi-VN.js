@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'C\xE1c tr\u01B0\u1EDDng c\u1EE5 th\u1EC3 c\u1EE7a Nh\xF3m h\xE0ng (c\xE1c t\xF9y ch\u1ECDn)',
     'misc.YouAreIn_Mob': 'B\u1EA1n \u0111ang \u1EDF <<LOCATION>>',
     'business_directory.Map': 'B\u1EA3n \u0111\u1ED3',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\u1EDF trong'
 };

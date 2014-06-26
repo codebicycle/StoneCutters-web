@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)',
     'misc.YouAreIn_Mob': '\xDE\xFA ert \xED/\xE1 <<LOCATION>>',
     'business_directory.Map': 'Kort',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'h\xE9\xF0an \xED fr\xE1 \xED flokknum'
 };

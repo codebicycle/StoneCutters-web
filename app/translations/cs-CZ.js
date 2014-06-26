@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Specifick\xE1 pole kategori\xED (Voliteln\xE9)',
     'misc.YouAreIn_Mob': 'Nach\xE1z\xEDte se v <<LOCATION>>',
     'business_directory.Map': 'Mapa',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'v'
 };

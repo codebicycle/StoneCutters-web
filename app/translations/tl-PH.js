@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Mga Partikular na Field ng Kategorya (Mga Opsyonal)',
     'misc.YouAreIn_Mob': 'Kayo ay nasa <<LOCATION>>',
     'business_directory.Map': 'Mapa',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'sa'
 };

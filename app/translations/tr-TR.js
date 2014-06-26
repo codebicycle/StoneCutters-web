@@ -156,6 +156,7 @@ module.exports = {
     'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)',
     'misc.YouAreIn_Mob': '<<LOCATION>> konumundas\u0131n\u0131z',
     'business_directory.Map': 'Harita',
+    'optionals.opt-138-323-translation-location': 'Location',
     'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': ''
 };
