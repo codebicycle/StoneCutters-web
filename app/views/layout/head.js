@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../helpers');
+var seo = require('../../seo');
 
 module.exports = Base.extend({
     className: 'layout_head_view',
@@ -11,13 +11,13 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            head: helpers.seo.getHead(),
+            head: seo.getHead(),
             template: this.app.session.get('template'),
             location: this.app.session.get('location')
         });
     },
     postRender: function() {
-        $(document).on('route', helpers.seo.update);
+        $(document).on('route', seo.update);
     }
 });
 

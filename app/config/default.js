@@ -43,15 +43,17 @@ module.exports = {
     cache: {
         enabled: false,
         headers: {
-            home: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
-            location: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
+            locations: {
+                list: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                }
             },
             categories: {
+                list: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                },
                 subcategories: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'

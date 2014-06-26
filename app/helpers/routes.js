@@ -49,7 +49,7 @@ module.exports = {
     'redirections#edit': {
         url: 'user/edit_item/:userId/:itemId'
     },
-    'home#index': {
+    'categories#list': {
         url: ''
     },
     'items#search#filters': {
@@ -84,25 +84,25 @@ module.exports = {
             }
         }
     },
-    'user#registration': {
+    'users#register': {
         url: 'register'
     },
-    'user#login': {
+    'users#login': {
         url: 'login'
     },
-    'user#logout': {
+    'users#logout': {
         url: 'logout'
     },
-    'user#myolx': {
+    'users#myolx': {
         url: 'myolx'
     },
-    'user#my-ads': {
+    'users#myads': {
         url: 'myolx/myadslisting'
     },
-    'user#favorites': {
+    'users#favorites': {
         url: 'myolx/favoritelisting'
     },
-    'location#index': {
+    'locations#list': {
         url: 'location'
     },
     'post#success': {
@@ -111,10 +111,10 @@ module.exports = {
     'post#form': {
         url: 'posting/:categoryId/:subcategoryId'
     },
-    'post#subcat': {
+    'post#subcategories': {
         url: 'posting/:categoryId'
     },
-    'post#index': {
+    'post#categories': {
         url :'posting'
     },
     'post#edit': {

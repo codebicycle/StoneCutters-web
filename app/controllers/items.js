@@ -1,8 +1,10 @@
 'use strict';
 
-var helpers = require('../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var helpers = require('../helpers');
+var seo = require('../seo');
+var analytics = require('../analytics');
 var config = require('../config');
 
 module.exports = {
@@ -10,8 +12,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'show'], config.get(['cache', 'headers', 'default'], {})));
-
             var app = this.app;
             var user = app.session.get('user');
             var securityKey = params.sk;
@@ -21,8 +21,6 @@ module.exports = {
             var siteLocation = app.session.get('siteLocation');
             var anonymousItem;
             var spec;
-
-            helpers.seo.resetHead();
 
             if (user) {
                 params.token = user.token;
@@ -59,7 +57,7 @@ module.exports = {
             };
 
             app.fetch(spec, {
-                'readFromCache': false
+                readFromCache: false
             }, function afterFetch(err, result) {
                 if (err) {
                     return helpers.common.redirect.call(this, '/404');
@@ -79,7 +77,11 @@ module.exports = {
                 }
                 slug = helpers.common.slugToUrl(item);
                 if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
-                    return helpers.common.redirect.call(this, ('/' + slug));
+                    slug = ('/' + slug);
+                    if (favorite) {
+                        slug = helpers.common.params(slug, 'favorite', favorite);
+                    }
+                    return helpers.common.redirect.call(this, slug);
                 }
                 itemLocation = item.location;
                 currentLocation = app.session.get('location');
@@ -113,37 +115,32 @@ module.exports = {
                     }
                 };
                 app.fetch(spec, {
-                    'readFromCache': false
+                    readFromCache: false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
                     var user = app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
-                    var title;
-                    var description;
-
+                    
                     result.relatedItems = model.get('data');
                     result.user = user;
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    helpers.analytics.reset();
-                    helpers.analytics.addParam('user', user);
-                    helpers.analytics.addParam('item', item);
-                    helpers.analytics.addParam('category', data.categories.get(subcategory.get('parentId')).toJSON());
-                    helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                    result.analytics = helpers.analytics.generateURL(app.session.get());
+                    analytics.reset();
+                    analytics.addParam('user', user);
+                    analytics.addParam('item', item);
+                    analytics.addParam('category', data.categories.get(subcategory.get('parentId')).toJSON());
+                    analytics.addParam('subcategory', subcategory.toJSON());
+                    result.analytics = analytics.generateURL.call(this);
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
                     result.favorite = favorite;
 
-                    title = helpers.seo.shortTitle(item.title, item.location.children[0].children[0].name);
-                    description = helpers.seo.shortDescription(item.title, item.description, item.category.name, item.location.children[0].children[0].name);
-                    helpers.seo.addMetatag('title', title);
-                    helpers.seo.addMetatag('Description', description);
-                    helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/', slug].join(''));
-                    helpers.seo.update();
+                    seo.addMetatag('title', data.item.shortTitle());
+                    seo.addMetatag('Description', data.item.shortDescription());
+                    seo.update();
 
                     callback(err, result);
-                });
+                }.bind(this));
             }
         }
     },
@@ -151,7 +148,73 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'galery'], config.get(['cache', 'headers', 'default'], {})));
+            var app = this.app;
+            var user = app.session.get('user');
+            var itemId = params.itemId;
+            var slugUrl = params.title;
+            var pos = Number(params.pos) || 0;
+            var siteLocation = app.session.get('siteLocation');
+            var spec;
+            var slug;
+
+            if (user) {
+                params.token = user.token;
+            }
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+
+            spec = {
+                categories: {
+                    collection : 'Categories',
+                    params: {
+                        location: siteLocation,
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                },
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            };
+            app.fetch(spec, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
+                var item = result.item.toJSON();
+                var subcategory = result.categories.search(item.category.id);
+
+                if (!item) {
+                    return helpers.common.redirect.call(this, '/404');
+                }
+                slug = helpers.common.slugToUrl(item);
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if (!item.images || !item.images.length) {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if (pos < 0 || pos >= item.images.length) {
+                    return helpers.common.redirect.call(this, ('/' + slug + '/galery'));
+                }
+
+                result.item = item;
+                result.user = user;
+                result.pos = pos;
+                analytics.reset();
+                analytics.addParam('user', user);
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
+                callback(err, result);
+            }.bind(this));
+        }
+    },
+    map: function(params, callback) {
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'map'], config.get(['cache', 'headers', 'default'], {})));
 
             var app = this.app;
             var user = app.session.get('user');
@@ -199,76 +262,18 @@ module.exports = {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (pos < 0 || pos >= item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug + '/galery'));
-                }
-
-                result.item = item;
-                result.user = user;
-                result.pos = pos;
-                helpers.analytics.reset();
-                helpers.analytics.addParam('user', user);
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
-                callback(err, result);
-            }.bind(this));
-        }
-    },
-    map: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'map'], config.get(['cache', 'headers', 'default'], {})));
-
-            var app = this.app;
-            var user = app.session.get('user');
-            var itemId = params.itemId;
-            var slugUrl = params.title;
-            var pos = Number(params.pos) || 0;
-            var siteLocation = app.session.get('siteLocation');
-            var spec;
-            var slug;
-
-            if (user) {
-                params.token = user.token;
-            }
-            params.id = params.itemId;
-            delete params.itemId;
-            delete params.title;
-
-            spec = {
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            };
-            app.fetch(spec, {
-                'readFromCache': false
-            }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-
-                if (!item) {
-                    return helpers.common.redirect.call(this, '/404');
-                }
-                slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
-                    return helpers.common.redirect.call(this, ('/' + slug));
-                }
-                if (!item.images || !item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug));
-                }
-                if (pos < 0 || pos >= item.images.length) {
                     return helpers.common.redirect.call(this, ('/' + slug + '/map'));
                 }
 
                 result.item = item;
                 result.user = user;
                 result.pos = pos;
-                helpers.analytics.reset();
-                helpers.analytics.addParam('user', user);
-                helpers.analytics.addParam('item', item);
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('user', user);
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 callback(err, result);
             }.bind(this));
         }
@@ -277,8 +282,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'search'], config.get(['cache', 'headers', 'default'], {})));
-
             var page = params ? params.page : undefined;
             var app = this.app;
             var spec = {
@@ -297,20 +300,17 @@ module.exports = {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
-
-            helpers.seo.resetHead();
-            helpers.seo.addMetatag('canonical', ['http://', siteLocation, '/nf/search/', query.search, (query.page && query.page > 1 ? '/-p-' + query.page : '')].join(''));
-
-            helpers.analytics.reset();
-            helpers.analytics.setPage('nf');
-            helpers.analytics.addParam('keyword', query.search);
-            helpers.analytics.addParam('page_nb', 0);
-            helpers.analytics.addParam('user', user);
+            
+            analytics.reset();
+            analytics.setPage('nf');
+            analytics.addParam('keyword', query.search);
+            analytics.addParam('page_nb', 0);
+            analytics.addParam('user', user);
 
             if (!query.search || _.isEmpty(query.search.trim())) {
-                helpers.seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('robots', 'noindex, follow');
                 return callback(null, {
-                    analytics: helpers.analytics.generateURL(app.session.get()),
+                    analytics: analytics.generateURL.call(this),
                     search: '',
                     metadata: {
                         total: 0
@@ -318,10 +318,8 @@ module.exports = {
                 });
             }
 
-            //don't read from cache, because rendr caching expects an array response
-            //with ids, and smaug returns an object with 'data' and 'metadata'
             app.fetch(spec, {
-                'readFromCache': false
+                readFromCache: false
             }, function afterFetch(err, result) {
                 var protocol = app.session.get('protocol');
                 var host = app.session.get('host');
@@ -334,24 +332,24 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
                 if (result.metadata.total < 5){
-                    helpers.seo.addMetatag('robots', 'noindex, nofollow');
-                    helpers.seo.update();
+                    seo.addMetatag('robots', 'noindex, follow');
+                    seo.update();
                 }
 
                 helpers.pagination.paginate(result.metadata, query, url);
-                helpers.analytics.addParam('page_nb', result.metadata.totalPages);
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.addParam('page_nb', result.metadata.totalPages);
+                result.analytics = analytics.generateURL.call(this);
                 result.search = query.search;
                 callback(err, result);
             }.bind(this));
         }
     },
     reply: function(params, callback) {
-        helpers.controllers.control.call(this, params, true, controller);
+        helpers.controllers.control.call(this, params, {
+            isForm: true
+        }, controller);
 
         function controller(form) {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'reply'], config.get(['cache', 'headers', 'default'], {})));
-
             var app = this.app;
             var user = app.session.get('user');
             var platform = app.session.get('platform');
@@ -369,12 +367,11 @@ module.exports = {
                 }
             };
 
-
             params.id = params.itemId;
             delete params.itemId;
 
             app.fetch(spec, {
-                'readFromCache': false
+                readFromCache: false
             }, function afterFetch(err, result) {
                 var item;
                 var subcategory;
@@ -387,11 +384,11 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
                 }
                 subcategory = result.categories.search(item.category.id);
-                helpers.analytics.reset();
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 result.user = user;
                 result.item = item;
                 result.form = form;
@@ -403,8 +400,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'success'], config.get(['cache', 'headers', 'default'], {})));
-
             var app = this.app;
             var user = app.session.get('user');
             var spec = {
@@ -425,7 +420,7 @@ module.exports = {
             delete params.itemId;
 
             app.fetch(spec, {
-                'readFromCache': false
+                readFromCache: false
             }, function afterFetch(err, result) {
                 var item;
                 var subcategory;
@@ -436,11 +431,11 @@ module.exports = {
                 item = result.item.toJSON();
                 subcategory = result.categories.search(item.category.id);
 
-                helpers.analytics.reset();
-                helpers.analytics.addParam('item', item);
-                helpers.analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 result.user = user;
                 result.item = item;
                 callback(err, result);
@@ -448,7 +443,6 @@ module.exports = {
         }
     },
     favorite: function(params, callback) {
-        helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'favorite'], config.get(['cache', 'headers', 'default'], {})));
         var platform = this.app.session.get('platform');
         var user;
         var intent;
@@ -494,8 +488,6 @@ module.exports = {
             .val(success.bind(this));
     },
     delete: function(params, callback) {
-        helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'delete'], config.get(['cache', 'headers', 'default'], {})));
-
         var platform = this.app.session.get('platform');
         var user;
         var itemId;

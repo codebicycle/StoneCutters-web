@@ -6,7 +6,8 @@ var utils = {
     isServer: isServer,
     link: link,
     params: params,
-    removeParams: removeParams
+    removeParams: removeParams,
+    get: get
 };
 
 if (isServer) {
@@ -93,6 +94,43 @@ function removeParams(url, keys) {
         out.push('#');
     }
     return out.join('');
+}
+
+function get(obj, keys, defaultValue) {
+    var value;
+
+    if (!Array.isArray(keys)) {
+        if (typeof keys === 'undefined') {
+            keys = [];
+        } else {
+            keys = [keys];
+        }
+    }
+    if (typeof defaultValue === 'undefined') {
+        defaultValue = null;
+    }
+    if (!keys.length) {
+        return defaultValue || obj;
+    }
+    keys.every(function iterate(key, index) {
+        try {
+            if (!index) {
+                value = obj[key];
+            }
+            else {
+                value = value[key];
+            }
+        }
+        catch (err) {
+            value = null;
+            return false;
+        }
+        return true;
+    });
+    if (typeof value === 'undefined' || value === null) {
+        return defaultValue;
+    }
+    return _.clone(value);
 }
 
 module.exports = utils;

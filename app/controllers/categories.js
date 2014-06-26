@@ -1,21 +1,20 @@
 'use strict';
 
-var helpers = require('../helpers');
 var _ = require('underscore');
+var helpers = require('../helpers');
+var seo = require('../seo');
+var analytics = require('../analytics');
 var config = require('../config');
 
 function handleItems(category, subcategory, params, callback) {
-    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'items'], config.get(['cache', 'headers', 'default'], {})));
+    var currentRouter = ['categories', 'items'];
+
+    helpers.controllers.changeHeaders.call(this, false, currentRouter);
+    seo.resetHead.call(this, currentRouter);
 
     var slug = helpers.common.slugToUrl(subcategory.toJSON());
     var page = params ? params.page : undefined;
     var app = this.app;
-    var spec = {
-        items: {
-            collection: 'Items',
-            params: params
-        }
-    };
     var query;
 
     if (slug.indexOf(params.title + '-cat-')) {
@@ -29,10 +28,13 @@ function handleItems(category, subcategory, params, callback) {
     delete params.page;
     delete params.filters;
     delete params.urlFilters;
-    helpers.seo.resetHead();
-    helpers.seo.addMetatag('canonical', ['http://', app.session.get('siteLocation'), '/', slug, (query.page && query.page > 1 ? '-p-' + query.page : '')].join(''));
-    app.fetch(spec, {
-        'readFromCache': false
+    app.fetch({
+        items: {
+            collection: 'Items',
+            params: params
+        }
+    }, {
+        readFromCache: false
     }, function afterFetch(err, result) {
         var protocol = app.session.get('protocol');
         var host = app.session.get('host');
@@ -45,8 +47,8 @@ function handleItems(category, subcategory, params, callback) {
             return helpers.common.redirect.call(this, '/' + slug);
         }
         if (result.metadata.total < 5){
-            helpers.seo.addMetatag('robots', 'noindex, nofollow');
-            helpers.seo.update();
+            seo.addMetatag('robots', 'noindex, follow');
+            seo.update();
         }
         helpers.pagination.paginate(result.metadata, query, url);
         analytics.reset();
@@ -63,20 +65,19 @@ function handleItems(category, subcategory, params, callback) {
 }
 
 function handleShow(category, params, callback) {
-    helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'categories', 'subcategories'], config.get(['cache', 'headers', 'default'], {})));
+    var currentRouter = ['categories', 'subcategories'];
+    var slug;
 
-    var slug = helpers.common.slugToUrl(category.toJSON());
+    helpers.controllers.changeHeaders.call(this, false, currentRouter);
+    seo.resetHead.call(this, currentRouter);
 
+    slug = helpers.common.slugToUrl(category.toJSON());
     if (slug.indexOf(params.title + '-cat-')) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
     analytics.reset();
     analytics.addParam('user', this.app.session.get('user'));
     analytics.addParam('category', category.toJSON());
-    helpers.seo.resetHead();
-    helpers.seo.addMetatag('title', 'Listing');
-    helpers.seo.addMetatag('Description', 'This is a listing page');
-    helpers.seo.addMetatag('canonical', ['http://', this.app.session.get('siteLocation'), '/', params.title, '-cat-', params.catId].join(''));
     callback(null, {
         category: category.toJSON(),
         type: 'categories',
@@ -85,8 +86,40 @@ function handleShow(category, params, callback) {
 }
 
 module.exports = {
-    show: function(params, callback) {
+    list: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            var platform = this.app.session.get('platform');
+            var icons = config.get(['icons', platform], []);
+            var country = this.app.session.get('location').url;
+            var siteLocation = this.app.session.get('siteLocation');
+
+            this.app.fetch({
+                categories: {
+                    collection: 'Categories',
+                    params: {
+                        location: siteLocation,
+                        languageCode: this.app.session.get('selectedLanguage')
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, result) {
+                analytics.reset();
+                callback(null, {
+                    categories: result.categories.toJSON(),
+                    icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+                    analytics: analytics.generateURL.call(this)
+                });
+            }.bind(this));
+        }
+    },
+    show: function(params, callback) {
+        helpers.controllers.control.call(this, params, {
+            seo: false,
+            cache: false
+        }, controller);
 
         function controller() {
             this.app.fetch({

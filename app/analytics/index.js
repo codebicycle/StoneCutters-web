@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../config');
+var utils = require('../../shared/utils');
+var config = require('./config');
 var google = require('./google');
 var ati = require('./ati');
 
@@ -50,13 +51,13 @@ function getURLName(page, currentRoute) {
 
 function generateURL() {
     var page = getURLName.call(this, query.page, this.app.session.get('currentRoute'));
-    var pageGoogle = config.get(['analytics', 'google', 'pages', page], '');
-    var configAti = config.get(['analytics', 'ati', 'params', page], {});
+    var pageGoogle = utils.get(config, ['google', 'pages', page], '');
+    var configAti = utils.get(config, ['ati', 'params', page], {});
     var params = {};
 
-    this.addParam('rendering', this.app.session.get('platform'));
+    addParam('rendering', this.app.session.get('platform'));
 
-    params.id = config.get(['analytics', 'google', 'id'], 'UA-XXXXXXXXX-X');
+    params.id = utils.get(config, ['google', 'id'], 'UA-XXXXXXXXX-X');
     params.random = Math.round(Math.random() * 1000000);
     params.referer = (this.app.session.get('referer') || '-');
     params.page = google.generatePage.call(this, pageGoogle, query.params);

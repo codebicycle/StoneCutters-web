@@ -1,18 +1,17 @@
 'use strict';
 
-var helpers = require('../helpers');
 var _ = require('underscore');
 var sixpackName = 'sixpack-client';
 var sixpack = require(sixpackName);
+var helpers = require('../helpers');
+var analytics = require('../analytics');
 var config = require('../config');
 
 module.exports = {
-    index: function(params, callback) {
+    categories: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'categories'], config.get(['cache', 'headers', 'default'], {})));
-
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -33,13 +32,13 @@ module.exports = {
             }, function afterFetch(err, result) {
                 var sixpackConfig = config.get('sixpack', {});
 
-                helpers.analytics.reset();
+                analytics.reset();
                 if (!sixpackConfig.enabled ||
                     !sixpackConfig['post-button'] ||
                     !sixpackConfig['post-button'].enabled ||
                     !params.sixpack || params.sixpack !== 'post-button') {
                     return callback(null, {
-                        analytics: helpers.analytics.generateURL(this.app.session.get()),
+                        analytics: analytics.generateURL.call(this),
                         categories: result.categories.toJSON()
                     });
                 }
@@ -47,19 +46,17 @@ module.exports = {
 
                 session.convert('post-button', function(err, res) {
                     callback(null, {
-                        analytics: helpers.analytics.generateURL(this.app.session.get()),
+                        analytics: analytics.generateURL.call(this),
                         categories: result.categories.toJSON()
                     });
                 });
             }.bind(this));
         }
     },
-    subcat: function(params, callback) {
+    subcategories: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'subcategories'], config.get(['cache', 'headers', 'default'], {})));
-
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -83,21 +80,21 @@ module.exports = {
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
                 }
-                helpers.analytics.reset();
+                analytics.reset();
                 callback(null, _.extend(params, {
                     category: category.toJSON(),
                     subcategories: category.get('children').toJSON(),
-                    analytics: helpers.analytics.generateURL(this.app.session.get())
+                    analytics: analytics.generateURL.call(this)
                 }));
             }.bind(this));
         }
     },
     form: function(params, callback) {
-        helpers.controllers.control.call(this, params, true, controller);
+        helpers.controllers.control.call(this, params, {
+            isForm: true
+        }, controller);
 
         function controller(form) {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'form'], config.get(['cache', 'headers', 'default'], {})));
-
             var app = this.app;
             var user = app.session.get('user');
             var siteLocation = app.session.get('siteLocation');
@@ -156,25 +153,24 @@ module.exports = {
                 result.languageCode = languageCode;
                 result.siteLocation = siteLocation;
                 result.form = form;
-                helpers.analytics.reset();
-                helpers.analytics.addParam('category', category.toJSON());
-                helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = helpers.analytics.generateURL(app.session.get());
+                analytics.reset();
+                analytics.addParam('category', category.toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                result.analytics = analytics.generateURL.call(this);
                 callback(err, result);
-            });
+            }.bind(this));
         }
     },
     edit: function(params, callback) {
-        helpers.controllers.control.call(this, params, true, controller);
+        helpers.controllers.control.call(this, params, {
+            isForm: true
+        }, controller);
 
         function controller(form) {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'edit'], config.get(['cache', 'headers', 'default'], {})));
-
-            var app = this.app;
-            var user = app.session.get('user');
-            var siteLocation = app.session.get('siteLocation');
-            var language = app.session.get('selectedLanguage');
-            var languages = app.session.get('languages');
+            var user = this.app.session.get('user');
+            var siteLocation = this.app.session.get('siteLocation');
+            var language = this.app.session.get('selectedLanguage');
+            var languages = this.app.session.get('languages');
             var languageId = languages._byId[language].id;
             var languageCode = languages._byId[language].isocode.toLowerCase();
             var securityKey = params.sk;
@@ -203,15 +199,15 @@ module.exports = {
                 });
             }
             checkAuthentication(_params, _params.id);
-            app.fetch(spec, {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err) {
                     return helpers.common.redirect.call(this, '/');
                 }
-                var protocol = app.session.get('protocol');
-                var platform = app.session.get('platform');
-                var currentLocation = app.session.get('location');
+                var protocol = this.app.session.get('protocol');
+                var platform = this.app.session.get('platform');
+                var currentLocation = this.app.session.get('location');
                 var location = result.item.get('location');
                 var slug;
                 var url;
@@ -231,7 +227,7 @@ module.exports = {
                         }
                     });
                 }
-                findFields(null, result);
+                findFields.call(this, null, result);
             }.bind(this));
 
             function checkAuthentication(params, id) {
@@ -278,7 +274,7 @@ module.exports = {
                 };
 
                 checkAuthentication(_params, _params.itemId);
-                app.fetch(spec, {
+                this.app.fetch(spec, {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var subcategory = response.categories.search(item.category.id);
@@ -304,13 +300,13 @@ module.exports = {
                     else {
                         result.form = form;
                     }
-                    helpers.analytics.reset();
-                    helpers.analytics.addParam('item', item);
-                    helpers.analytics.addParam('category', category.toJSON());
-                    helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                    result.analytics = helpers.analytics.generateURL(app.session.get());
+                    analytics.reset();
+                    analytics.addParam('item', item);
+                    analytics.addParam('category', category.toJSON());
+                    analytics.addParam('subcategory', subcategory.toJSON());
+                    result.analytics = analytics.generateURL.call(this);
                     callback(err, result);
-                });
+                }.bind(this));
             }
         }
     },
@@ -318,13 +314,10 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'post', 'success'], config.get(['cache', 'headers', 'default'], {})));
-
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
-            var siteLocation = app.session.get('siteLocation');
+            var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
             var spec;
 
@@ -360,7 +353,7 @@ module.exports = {
                     params: params
                 }
             };
-            app.fetch(spec, {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err) {
@@ -368,11 +361,12 @@ module.exports = {
                     return;
                 }
                 findRelatedItems.call(this, err, result);
-            });
+            }.bind(this));
 
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
-                var spec = {
+                
+                this.app.fetch({
                     items: {
                         collection : 'Items',
                         params: {
@@ -382,13 +376,11 @@ module.exports = {
                             relatedAds: itemId
                         }
                     }
-                };
-
-                app.fetch(spec, {
+                }, {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var model = result.items.models[0];
-                    var user = app.session.get('user');
+                    var user = this.app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
                     var category = data.categories.get(subcategory.get('parentId'));
 
@@ -399,13 +391,13 @@ module.exports = {
                     result.sk = securityKey;
                     result.category = category.toJSON();
                     result.subcategory = subcategory.toJSON();
-                    helpers.analytics.reset();
-                    helpers.analytics.addParam('item', item);
-                    helpers.analytics.addParam('category', category.toJSON());
-                    helpers.analytics.addParam('subcategory', subcategory.toJSON());
-                    result.analytics = helpers.analytics.generateURL(app.session.get());
+                    analytics.reset();
+                    analytics.addParam('item', item);
+                    analytics.addParam('category', category.toJSON());
+                    analytics.addParam('subcategory', subcategory.toJSON());
+                    result.analytics = analytics.generateURL.call(this);
                     callback(err, result);
-                });
+                }.bind(this));
             }
         }
     }

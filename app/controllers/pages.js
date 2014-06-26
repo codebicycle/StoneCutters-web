@@ -1,6 +1,7 @@
 'use strict';
 
 var helpers = require('../helpers');
+var analytics = require('../analytics');
 var config = require('../config');
 
 module.exports = {
@@ -8,11 +9,10 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'terms'], config.get(['cache', 'headers', 'default'], {})));
-            helpers.analytics.reset();
+            analytics.reset();
 
             callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.session.get())
+                analytics: analytics.generateURL.call(this)
             });
         }
     },
@@ -20,8 +20,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'help'], config.get(['cache', 'headers', 'default'], {})));
-
             // Delete this function and your references
             function itemsHelpSimulator() {
                 return [{
@@ -124,15 +122,14 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'interstitial'], config.get(['cache', 'headers', 'default'], {})));
-            helpers.analytics.reset();
+            analytics.reset();
             this.app.session.persist({
                 downloadApp: '1'
             }, {
                 maxAge: this.app.session.get('downloadApp')
             });
             callback(null, {
-                analytics: helpers.analytics.generateURL(this.app.session.get()),
+                analytics: analytics.generateURL.call(this),
                 ref: params.ref
             });
         }
@@ -141,7 +138,6 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'pages', 'error'], config.get(['cache', 'headers', 'default'], {})));
             var err = this.app.session.get('error');
 
             if (typeof window === 'undefined') {
@@ -150,10 +146,10 @@ module.exports = {
             if (err) {
                 this.app.session.clear('error');
             }
-            helpers.analytics.reset();
+            analytics.reset();
             callback(null, {
                 error: err,
-                analytics: helpers.analytics.generateURL(this.app.session.get())
+                analytics: analytics.generateURL.call(this)
             });
         }
 

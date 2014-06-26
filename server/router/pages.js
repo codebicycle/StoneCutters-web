@@ -5,6 +5,8 @@ module.exports = function itemRouter(app, dataAdapter) {
     var asynquence = require('asynquence');
     var configServer = require('../config');
     var configClient = require('../../app/config');
+    var configAnalytics = require('../../app/analytics/config');
+    var utils = require('../../shared/utils');
     var graphite = require('../graphite')();
     var Analytic = require('analytic');
 
@@ -128,7 +130,7 @@ module.exports = function itemRouter(app, dataAdapter) {
             if (env !== 'production') {
                 countryId = 0;
             }
-            atiConfig = configClient.get(['analytics', 'ati', 'paths', countryId]);
+            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
                 analytic = new Analytic('ati', {
                     id: atiConfig.siteId,
@@ -188,7 +190,7 @@ module.exports = function itemRouter(app, dataAdapter) {
             if (env !== 'production') {
                 countryId = 0;
             }
-            atiConfig = configClient.get(['analytics', 'ati', 'paths', countryId]);
+            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
                 analytic = new Analytic('ati-event', {
                     id: atiConfig.siteId,

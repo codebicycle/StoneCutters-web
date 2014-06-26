@@ -1,8 +1,9 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
+var Base = require('../../bases/view');
 var helpers = require('../../helpers');
+var analytics = require('../../analytics');
 
 module.exports = Base.extend({
     className: 'pages_intertitial_view',
@@ -35,8 +36,8 @@ module.exports = Base.extend({
                 };
             });
 
-            helpers.analytics.reset();
-            helpers.analytics.setPage('pages#interstitial');
+            analytics.reset();
+            analytics.setPage('pages#interstitial');
             this.app.session.persist({
                 downloadApp: '1'
             }, {
@@ -44,7 +45,7 @@ module.exports = Base.extend({
             });
             img = $('<img/>');
             img.addClass('analytics');
-            img.attr('src', helpers.analytics.generateURL(this.app.session.get()));
+            img.attr('src', analytics.generateURL.call(this));
             interstitial.append(img);
         }
     }
