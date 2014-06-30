@@ -301,6 +301,7 @@ module.exports = {
 
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
+                seo.addMetatag('googlebot', 'noindex, follow');
                 return callback(null, {
                     analytics: analytics.generateURL.call(this),
                     search: '',
@@ -328,6 +329,7 @@ module.exports = {
                 }
                 if (result.metadata.total < 5){
                     seo.addMetatag('robots', 'noindex, follow');
+                    seo.addMetatag('googlebot', 'noindex, follow');
                     seo.update();
                 }
 

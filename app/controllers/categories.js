@@ -45,18 +45,20 @@ function handleItems(category, subcategory, params, callback) {
         }
         if (result.metadata.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
-            seo.update();
+            seo.addMetatag('googlebot', 'noindex, follow');
         }
         helpers.pagination.paginate(result.metadata, query, url);
+        result.category = category.toJSON();
+        result.subcategory = subcategory.toJSON();
+        result.relatedAds = query.relatedAds;
+        result.type = 'items';
+
         analytics.reset();
         analytics.setPage('listing');
         analytics.addParam('category', category.toJSON());
         analytics.addParam('subcategory', subcategory.toJSON());
         result.analytics = analytics.generateURL.call(this);
-        result.category = category.toJSON();
-        result.subcategory = subcategory.toJSON();
-        result.relatedAds = query.relatedAds;
-        result.type = 'items';
+        seo.update();
         callback(err, result);
     }.bind(this));
 }
@@ -75,6 +77,7 @@ function handleShow(category, params, callback) {
     analytics.reset();
     analytics.addParam('user', this.app.session.get('user'));
     analytics.addParam('category', category.toJSON());
+    seo.update();
     callback(null, {
         category: category.toJSON(),
         type: 'categories',
