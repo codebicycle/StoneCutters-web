@@ -1,21 +1,24 @@
 'use strict';
 
+
 var _ = require('underscore');
 var should = require('should');
 var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
+
+var utils = require('../../../utils');
 var SmaugAdapter = require('../../../../shared/adapters/data');
 var dataAdapter = new SmaugAdapter({
-    userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
+    userAgent: utils.smaugUserAgent
 });
 var middleware = require('../../../../server/middleware')(dataAdapter);
-var hosts = ['html4.m.olx.com.ar', 'html4.m.olx.com.br'];
-var userAgents = ['UCWEB/8.8 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0 Mobile', 'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0) Asus;Galaxy6', 'Nokia6100/1.0 (04.01) Profile/MIDP-1.0 Configuration/CLDC-1.0'];
+var helpers = require('../../../../app/helpers');
 var Router = require('../../../../server/router');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
+        app.use(express.compress());
         app.use(express.cookieParser());
     };
 }
@@ -35,22 +38,24 @@ describe('server', function test() {
                     var router = new Router(server);
 
                     function rendrConfiguration(rendrApp) {
-                        function after(req, res, next) {
-                            if (!sessions.before) {
-                                sessions.before = _.clone(req.rendrApp.session.get());
-                            }
-                            else {
-                                sessions.after = _.clone(req.rendrApp.session.get());
-                            }
-                            next();
-                        }
-
+                        rendrApp.use(middleware.platform());
                         rendrApp.use(middleware.session());
+                        rendrApp.use(middleware.abSelector());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(middleware.location());
                         rendrApp.use(middleware.languages());
                         rendrApp.use(middleware.templates());
-                        rendrApp.use(after);
+                        rendrApp.use(afterMiddleware);
+                    }
+
+                    function afterMiddleware(req, res, next) {
+                        if (!sessions.before) {
+                            sessions.before = _.clone(req.rendrApp.session.get());
+                        }
+                        else {
+                            sessions.after = _.clone(req.rendrApp.session.get());
+                        }
+                        next();
                     }
 
                     server.expressApp.configure(expressConfiguration(server.expressApp));
@@ -62,8 +67,8 @@ describe('server', function test() {
                             usernameOrEmail: 'damianb@olx.com',
                             password: 'dami21'
                         })
-                        .set('host', hosts[0])
-                        .set('user-agent', userAgents[0])
+                        .set('host', utils.getHost('html4', 'ar'))
+                        .set('user-agent', utils.userAgents.html4)
                         .end(end);
 
                     function end(err, res) {
@@ -80,8 +85,8 @@ describe('server', function test() {
                 it('should be added the user to the session', function test(done) {
                     request(server.expressApp)
                         .get('/')
-                        .set('host', hosts[1])
-                        .set('user-agent', userAgents[0])
+                        .set('host', utils.getHost('html4', 'ar'))
+                        .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
                         .end(end);
 
