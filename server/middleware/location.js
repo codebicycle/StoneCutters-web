@@ -17,16 +17,14 @@ module.exports = function(dataAdapter, excludedUrls) {
             var host = req.rendrApp.session.get('host');
             var index = host.indexOf(':');
             var platform;
-            var location;
 
             function fetch(done) {
                 function after(err, result) {
                     if (err) {
                         done.abort();
-                        return res.redirect(301, '/?location=' + previousLocation);
+                        return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
                     }
-                    location = result.location;
-                    done();
+                    done(result.location);
                 }
 
                 req.rendrApp.fetch({
@@ -41,7 +39,17 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }, after);
             }
 
-            function store(done) {
+            function check(done, location) {
+                var url = location.get('url');
+
+                if (host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
+                    done.abort();
+                    return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
+                }
+                done(location);
+            }
+
+            function store(done, location) {
                 var current = location.get('current');
 
                 if (current) {
@@ -80,6 +88,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             asynquence().or(fail)
                 .then(fetch)
+                .then(check)
                 .then(store)
                 .val(next);
         };
