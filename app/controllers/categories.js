@@ -14,13 +14,12 @@ function handleItems(category, subcategory, params, callback) {
 
     var slug = helpers.common.slugToUrl(subcategory.toJSON());
     var page = params ? params.page : undefined;
-    var app = this.app;
     var query;
 
     if (slug.indexOf(params.title + '-cat-')) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
-    helpers.pagination.prepare(app, params);
+    helpers.pagination.prepare(this.app, params);
     query = _.clone(params);
     params.categoryId = params.catId;
     delete params.catId;
@@ -28,7 +27,7 @@ function handleItems(category, subcategory, params, callback) {
     delete params.page;
     delete params.filters;
     delete params.urlFilters;
-    app.fetch({
+    this.app.fetch({
         items: {
             collection: 'Items',
             params: params
@@ -36,9 +35,7 @@ function handleItems(category, subcategory, params, callback) {
     }, {
         readFromCache: false
     }, function afterFetch(err, result) {
-        var protocol = app.session.get('protocol');
-        var host = app.session.get('host');
-        var url = (protocol + '://' + host + '/' + query.title + '-cat-' + query.catId);
+        var url = '/' + query.title + '-cat-' + query.catId;
         var model = result.items.models[0];
 
         result.items = model.get('data');
@@ -46,7 +43,7 @@ function handleItems(category, subcategory, params, callback) {
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
             return helpers.common.redirect.call(this, '/' + slug);
         }
-        if (result.metadata.total < 5){
+        if (result.metadata.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
             seo.update();
         }

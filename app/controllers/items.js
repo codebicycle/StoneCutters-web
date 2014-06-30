@@ -283,18 +283,10 @@ module.exports = {
 
         function controller() {
             var page = params ? params.page : undefined;
-            var app = this.app;
-            var spec = {
-                items: {
-                    collection: 'Items',
-                    params: params
-                }
-            };
-            var user = app.session.get('user');
-            var siteLocation = app.session.get('siteLocation');
+            var user = this.app.session.get('user');
             var query;
 
-            helpers.pagination.prepare(app, params);
+            helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
             delete params.search;
             delete params.page;
@@ -318,12 +310,15 @@ module.exports = {
                 });
             }
 
-            app.fetch(spec, {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                var protocol = app.session.get('protocol');
-                var host = app.session.get('host');
-                var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
+                var url = '/nf/search/' + query.search + '/';
                 var model = result.items.models[0];
 
                 result.items = model.get('data');
