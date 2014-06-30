@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var config = require('../config');
 var utils = require('../../shared/utils');
 var METATAGS = require('./metatags');
 var head = {
@@ -70,11 +71,19 @@ module.exports = {
         var metatag = getMetatagName(page, this.app.session.get('currentRoute'));
         var defaultMetatags = utils.get(METATAGS, 'default');
         var metatags = utils.get(METATAGS, metatag, {});
+        var platform = this.app.session.get('platform');
+        var country = this.app.session.get('location').url;
+        var googleSiteVerification;
 
         head.metatags = {};
         _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
             addMetatag(key, value);
         });
+
+        googleSiteVerification = config.get(['seo', 'wmtools', country, platform]);
+        if (googleSiteVerification) {
+            addMetatag('google-site-verification', googleSiteVerification);
+        }
     },
     addMetatag: addMetatag,
     update: update

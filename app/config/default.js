@@ -87,5 +87,14 @@ module.exports = {
                 'Cache-Control': 'no-cache, max-age=0, s-maxage=0, no-store'
             }
         }
+    },
+    seo: {
+        wmtools: {
+            'www.olx.com.py': {
+                wap:   'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo',
+                html4: 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo',
+                html5: 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo'
+            }
+        }
     }
 };
