@@ -18,6 +18,7 @@ module.exports = function appUseConf(done) {
     var router = new Router(server);
 
     function expressConfiguration() {
+        server.expressApp.disable('x-powered-by');
         server.expressApp.use(express.compress());
         server.expressApp.use(express.static(__dirname + '/../public'));
         server.expressApp.use(express.cookieParser());
