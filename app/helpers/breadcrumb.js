@@ -16,7 +16,9 @@ module.exports = (function() {
         categories: {
             show: function() {
                 var page = this.page || this.app.session.get('page') || 0;
-                var state = {};
+                var state = {
+                    name: 'item-listing'
+                };
                 var breadcrumb;
                 var fragment;
 
@@ -95,6 +97,9 @@ module.exports = (function() {
                             this.page = fragment.page + 1;
                             breadcrumb = handlers.items.search.call(this);
                             navigation.popState.call(this);
+                            break;
+                        case 'item-listing':
+                            breadcrumb = fragment.url;
                             break;
                         case 'relateds':
                             breadcrumb = fragment.url + '?relatedAds=' + fragment.item;

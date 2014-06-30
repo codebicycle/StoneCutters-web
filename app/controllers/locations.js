@@ -1,6 +1,7 @@
 'use strict';
 
 var helpers = require('../helpers');
+var seo = require('../seo');
 var analytics = require('../analytics');
 var config = require('../config');
 
@@ -22,6 +23,10 @@ module.exports = {
             if (params.search) {
                 spec.cities.params.type = 'cities';
                 spec.cities.params.name = params.search;
+            }
+            if (params.location) {
+                seo.addMetatag('robots', 'noindex, follow');
+                seo.addMetatag('googlebot', 'noindex, follow');
             }
             this.app.fetch(spec, {
                 readFromCache: false
