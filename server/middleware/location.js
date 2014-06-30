@@ -6,6 +6,8 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../config');
         var asynquence = require('asynquence');
         var _ = require('underscore');
+        var testing = config.get(['publicEnvironments', 'testing'], {});
+        var staging = config.get(['publicEnvironments', 'staging'], {});
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -42,7 +44,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             function check(done, location) {
                 var url = location.get('url');
 
-                if (host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
+                if (_.contains(req.subdomains, 'm') && host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
                     done.abort();
                     return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
                 }
@@ -71,11 +73,11 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!siteLocation) {
                 siteLocation = (index === -1) ? host : host.substring(0, index);
                 platform = siteLocation.split('.').shift().length;
-                if (siteLocation.indexOf(config.get(['publicEnvironments', 'testing', 'host'], '.m-testing.olx.com')) === platform) {
-                    siteLocation = platform + config.get(['publicEnvironments', 'testing', 'mask'], '.m.olx.com');
+                if (siteLocation.indexOf(testing.host || '.m-testing.olx.com') === platform) {
+                    siteLocation = platform + testing.mask || '.m.olx.com';
                 }
-                else if (siteLocation.indexOf(config.get(['publicEnvironments', 'staging', 'host'], '.m-staging.olx.com')) === platform) {
-                    siteLocation = platform + config.get(['publicEnvironments', 'staging', 'mask'], '.m.olx.com');
+                if (siteLocation.indexOf(staging.host || '.m-staging.olx.com') === platform) {
+                    siteLocation = platform + staging.mask || '.m.olx.com';
                 }
                 siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
                 previousLocation = siteLocation;
