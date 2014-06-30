@@ -1,5 +1,5 @@
 <header id="topBar">
-    <h1><a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a></h1>
+    <a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a>
     <ul class="header-links">
         {% if not user %}
             <li class="logOut"><a href="{{ '/login' | link }}" class="btns blue header-link"></a></li>

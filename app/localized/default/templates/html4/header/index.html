@@ -1,5 +1,5 @@
 <div id="header">
-	<h1><a href="{{ '/' | link }}">{{ location.url | replace('www.', '') }}</a></h1>
+	<span><a href="{{ '/' | link }}">{{ location.url | replace('www.', '') }}</a></span>
 	<ul>
 		{% if user %}
 			{% set status = 'loggedInUnreadMessages' if user.unreadMessagesCount else 'loggedIn' %}
