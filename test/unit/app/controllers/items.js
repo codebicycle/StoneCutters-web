@@ -223,7 +223,7 @@ describe('app', function test() {
 
                     function beforeMiddleware(req, res, next) {
                         var params = {
-                            search: 'i'
+                            search: 'a'
                         };
 
                         reset(req, res, 'search', next);
@@ -243,7 +243,7 @@ describe('app', function test() {
                             });
                             return;
                         }
-                        var params = req.path.split('-iid-');
+                        var params = req.path.split((~req.path.indexOf('-iid-') ? '-' : '') + 'iid-');
 
                         params = {
                             title: params[0].substr(1),
@@ -374,7 +374,7 @@ describe('app', function test() {
 
                             x = before.should.be.not.empty;
                             x = after.should.be.not.empty;
-                            before.should.not.equal(after);
+                            before.id.should.not.equal(after.id);
                         })(beforeResult.data.item, result.data.item);
                         done();
                     }
