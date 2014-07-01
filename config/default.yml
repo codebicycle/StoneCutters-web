@@ -3,6 +3,9 @@ environment: development
 
 server:
   port: 3030
+  maxSockets:
+    http: 500
+    https: 500
 
 platforms:
   - wap
