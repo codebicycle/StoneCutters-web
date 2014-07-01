@@ -1,9 +1,10 @@
 {% view 'locations/select' %}
 {% view 'partials/search' %}
-<section id="subCategories">
-    {% from macros import Breadcrumb %}
+{% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, category.trName) }}
+<section id="subCategories" class="list">
+    
     <ul>
         {% for subcategory in category.children.toJSON() %}
             <li>
