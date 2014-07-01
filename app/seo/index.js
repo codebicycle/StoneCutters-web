@@ -99,7 +99,6 @@ module.exports = {
 
         head.metatags = {};
         _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
-            console.log(key);
             addMetatag.call(this, key, value);
         }.bind(this));
     },
