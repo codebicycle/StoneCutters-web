@@ -49,6 +49,7 @@ module.exports = {
     },
     'default': {
         title: 'OLX Mobile',
+        description: 'OLX Mobile',
         robots: 'index,follow',
         googlebot: 'index,follow'
     }

@@ -7,9 +7,25 @@ var METATAGS = require('./metatags');
 var head = {
     metatags: {}
 };
+var specials = {
+    title: function(content) {
+        head.title = content + (this && this.app ? (' - ' + getLocationName.call(this)) : '');
+    },
+    description: function(content) {
+        head.metatags.description = content + (this && this.app ? (' - ' + getLocationName.call(this)) : '');
+    },
+    canonical: function(content) {
+        head.canonical = content;
+    }
+};
+
+function getLocationName() {
+    var location = this.app.session.get('location');
+    return (location.current ? location.current.name : location.name);
+}
 
 function update() {
-    if (typeof window === 'undefined') {
+    if (utils.isServer) {
         return;
     }
     var head = getHead();
@@ -31,14 +47,6 @@ function update() {
     }
 }
 
-function checkSpecials(name, content) {
-    if (name === 'title' || name === 'canonical') {
-        head[name] = content;
-        return true;
-    }
-    return false;
-}
-
 function getHead() {
     var clone = _.clone(head);
 
@@ -51,18 +59,21 @@ function getHead() {
     return clone;
 }
 
+function addMetatag(name, content) {
+    var special = specials[name];
+
+    if (special) {
+        special.call(this, content);
+        return;
+    }
+    head.metatags[name] = content;
+}
+
 function getMetatagName(page, currentRoute) {
     if (page) {
         return page;
     }
     return [currentRoute.controller, currentRoute.action];
-}
-
-
-function addMetatag(name, content) {
-    if (!checkSpecials(name, content)) {
-        head.metatags[name] = content;
-    }
 }
 
 module.exports = {
@@ -77,8 +88,8 @@ module.exports = {
 
         head.metatags = {};
         _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
-            addMetatag(key, value);
-        });
+            addMetatag.call(this, key, value);
+        }.bind(this));
 
         googleSiteVerification = config.get(['seo', 'wmtools', country, platform]);
         if (googleSiteVerification) {
