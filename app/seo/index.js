@@ -9,10 +9,10 @@ var head = {
 };
 var specials = {
     title: function(content) {
-        head.title = content + (this && this.app ? (' - ' + getLocationName.call(this)) : '');
+        head.title = content + getLocationName.call(this, ' - ');
     },
     description: function(content) {
-        head.metatags.description = content + (this && this.app ? (' - ' + getLocationName.call(this)) : '');
+        head.metatags.description = content + getLocationName.call(this, ' - ');
     },
     canonical: function(content) {
         head.canonical = content;
@@ -29,9 +29,13 @@ var specials = {
     }
 };
 
-function getLocationName() {
-    var location = this.app.session.get('location');
-    return (location.current ? location.current.name : location.name);
+function getLocationName(prefix) {
+    if (this && this.app) {
+        var location = this.app.session.get('location');
+
+        return prefix + (location.current ? location.current.name : location.name);
+    }
+    return '';
 }
 
 function update() {
