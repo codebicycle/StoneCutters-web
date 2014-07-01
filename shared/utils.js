@@ -38,8 +38,20 @@ function link(href, app, query) {
     if (!_.isEmpty(query)) {
         href = params(href, query);
     }
-    return href;
-};
+    return fullLink(app, href);
+}
+
+function fullLink(app, url) {
+    var protocol;
+    var host;
+
+    if (url.indexOf('http://')) {
+        protocol = app.session.get('protocol');
+        host = app.session.get('host');
+        url = [protocol, '://', host, (url.indexOf('/') ? '/' : ''), url].join('');
+    }
+    return url;
+}
 
 function params(url, keys, value) {
     var parts = url.split('?');

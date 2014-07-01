@@ -12,7 +12,7 @@
         <ul class="itemListing">
             {% for item in items %}
                 <li>
-                    <a href="/{{ item | slugToUrl | link }}">
+                    <a href="{{ item | slugToUrl | link }}">
                         <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
                         <p>
                             {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}

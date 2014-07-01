@@ -27,12 +27,12 @@
             {% if item.images.length == 0 %}
                 <span>({{ dictionary["itemgeneraldetails.NoPicture"] }})</span>
             {% elif item.images.length == 1 %}
-                <a href="/{{ [item | slugToUrl, '/galery'] | join('') | link }}">
+                <a href="{{ [item | slugToUrl, '/galery'] | join('') | link }}">
                     <div class="arrow"></div>
                     <img alt="" src="{{item.images[0].url }}">
                 </a>
             {% else %}
-                <a href="/{{ [item | slugToUrl, '/galery?pos='+pos] | join('') | link }}">
+                <a href="{{ [item | slugToUrl, '/galery?pos='+pos] | join('') | link }}">
                     <div class="arrow"></div>
                     <img alt="" src="{{item.images[pos].url }}">
                 </a>
@@ -78,7 +78,7 @@
                 {% endfor %}
             {% endif %}
             {% if item.coordinates %}
-                <li><strong>{{ dictionary["business_directory.Map"] }}: </strong><a href="/{{ [item | slugToUrl, '/map'] | join('') | link }}">{{ dictionary["item.ViewBiggerMap"] }}</a></li>
+                <li><strong>{{ dictionary["business_directory.Map"] }}: </strong><a href="{{ [item | slugToUrl, '/map'] | join('') | link }}">{{ dictionary["item.ViewBiggerMap"] }}</a></li>
             {% endif %}
         </ul>
 

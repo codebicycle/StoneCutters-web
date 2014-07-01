@@ -8,7 +8,7 @@
         {% for subcategory in category.children.toJSON() %}
             <li>
                 <h2>
-                    <a href="/{{ subcategory | slugToUrl | link }}">
+                    <a href="{{ subcategory | slugToUrl | link }}">
                         {{subcategory.trName}} {{ ('(' + subcategory.counter + ')') if subcategory.counter > 0 }}
                     </a>
                 </h2>

@@ -80,7 +80,7 @@
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
                                 <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="ItemPage-ClickRelatedAdImg" >
-                                    <a href="/{{ relatedItem | slugToUrl | link }}">
+                                    <a href="{{ relatedItem | slugToUrl | link }}">
                                         <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
                                     </a>
                                 </div>
