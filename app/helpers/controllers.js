@@ -253,6 +253,17 @@ function changeHeaders(headers, page) {
     }
 }
 
+function getLocationName() {
+    var location = this.app.session.get('location');
+    return (location.current) ? location.current.name : location.name;
+}
+
+function setSeo() {
+    seo.resetHead.call(this);
+    seo.addMetatag('title', 'OLX Mobile - ' + getLocationName.call(this));
+    seo.addMetatag('description', 'OLX Mobile - ' + getLocationName.call(this));
+}
+
 module.exports = {
     control: function(params, options, callback) {
         if (options instanceof Function) {
@@ -272,7 +283,7 @@ module.exports = {
             setLanguage.call(this, params);
             setLocation.call(this, params, function next() {
                 if (options.seo) {
-                    seo.resetHead.call(this);
+                    setSeo.call(this);
                 }
                 if (options.cache) {
                     changeHeaders.call(this);

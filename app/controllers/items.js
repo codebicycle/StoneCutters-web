@@ -327,11 +327,16 @@ module.exports = {
                 if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
+
+                seo.addMetatag('title', query.search + ' - ' + helpers.getLocationName.call(this));
+                seo.addMetatag('description', query.search + ' - ' + helpers.getLocationName.call(this));
+
                 if (result.metadata.total < 5){
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');
-                    seo.update();
                 }
+
+                seo.update();
 
                 helpers.pagination.paginate(result.metadata, query, url);
                 analytics.addParam('page_nb', result.metadata.totalPages);

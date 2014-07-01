@@ -58,6 +58,9 @@ function handleItems(category, subcategory, params, callback) {
         analytics.addParam('category', category.toJSON());
         analytics.addParam('subcategory', subcategory.toJSON());
         result.analytics = analytics.generateURL.call(this);
+
+        seo.addMetatag('title', subcategory.get('trName') + ' - ' + helpers.getLocationName.call(this));
+        seo.addMetatag('description', subcategory.get('trName') + ' - ' + helpers.getLocationName.call(this));
         seo.update();
         callback(err, result);
     }.bind(this));
@@ -77,6 +80,10 @@ function handleShow(category, params, callback) {
     analytics.reset();
     analytics.addParam('user', this.app.session.get('user'));
     analytics.addParam('category', category.toJSON());
+
+    seo.addMetatag('title', category.get('trName') + ' - ' + helpers.getLocationName.call(this));
+    seo.addMetatag('description', category.get('trName') + ' - ' + helpers.getLocationName.call(this));
+
     seo.update();
     callback(null, {
         category: category.toJSON(),
