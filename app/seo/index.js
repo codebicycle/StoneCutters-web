@@ -16,6 +16,16 @@ var specials = {
     },
     canonical: function(content) {
         head.canonical = content;
+    },
+    googleSiteVerification: function(content) {
+        var platform = this.app.session.get('platform');
+        var country = this.app.session.get('location').url;
+        var gsVerification;
+
+        gsVerification = config.get(['seo', 'wmtools', country, platform]);
+        if (gsVerification) {
+            head.metatags['google-site-verification'] = gsVerification;
+        }
     }
 };
 
@@ -82,19 +92,12 @@ module.exports = {
         var metatag = getMetatagName(page, this.app.session.get('currentRoute'));
         var defaultMetatags = utils.get(METATAGS, 'default');
         var metatags = utils.get(METATAGS, metatag, {});
-        var platform = this.app.session.get('platform');
-        var country = this.app.session.get('location').url;
-        var googleSiteVerification;
 
         head.metatags = {};
         _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
+            console.log(key);
             addMetatag.call(this, key, value);
         }.bind(this));
-
-        googleSiteVerification = config.get(['seo', 'wmtools', country, platform]);
-        if (googleSiteVerification) {
-            addMetatag('google-site-verification', googleSiteVerification);
-        }
     },
     addMetatag: addMetatag,
     update: update
