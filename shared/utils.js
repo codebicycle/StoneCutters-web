@@ -39,7 +39,7 @@ function link(href, app, query) {
         href = params(href, query);
     }
     return href;
-};
+}
 
 function params(url, keys, value) {
     var parts = url.split('?');

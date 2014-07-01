@@ -5,7 +5,7 @@
         {% for category in categories %}
             <li>
                 <h2>
-                    <a href="/{{ category | slugToUrl | link }}" >
+                    <a href="{{ category | slugToUrl | link }}" >
                         <span class="icon cat-{{ category.id }}"></span>
                         {{category.trName}}
                     </a>

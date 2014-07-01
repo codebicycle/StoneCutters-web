@@ -10,14 +10,14 @@
         <ul class="itemListing">
             {% for item in favorites %}
                 <li>
-                    <a href="/{{ item | slugToUrl | link }}">
+                    <a href="{{ item | slugToUrl | link }}">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
                     </a>
                     <div class="itemInfo">
                         <h2>{{ item.price.displayPrice }}</h2>
                         <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
                         <div class="centerCont">
-                            <a href="/{{ item | slugToUrl | link }}">
+                            <a href="{{ item | slugToUrl | link }}">
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>

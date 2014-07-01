@@ -8,7 +8,7 @@
         <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
         <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
         <p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</p>
-        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="/{{ item | slugToUrl | link }}">{{ dictionary["itemwarning.Here"] }}</a></p>
+        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="{{ item | slugToUrl | link }}">{{ dictionary["itemwarning.Here"] }}</a></p>
     </div>
     <div style="margin:6px 0 0 0;">
         <h1>{{ dictionary["misc.EmailAdActivated_Mob"] }}</h1>

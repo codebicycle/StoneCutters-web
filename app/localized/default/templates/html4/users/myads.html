@@ -11,7 +11,7 @@
         <ul class="itemListing">
             {% for item in myAds %}
                 <li>
-                    <a href="/{{ item | slugToUrl | link }}">
+                    <a href="{{ item | slugToUrl | link }}">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
                     </a>
                     <div class="itemInfo">
@@ -24,7 +24,7 @@
                             <span class="status ready">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
                         {% endif %}
                         <div class="centerCont">
-                            <a href="/{{ item | slugToUrl | link }}">
+                            <a href="{{ item | slugToUrl | link }}">
                                 <p>{{ item.title }}</p>
                             </a>
                         </div>
