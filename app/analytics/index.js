@@ -57,7 +57,7 @@ function generateURL() {
 
     addParam('rendering', this.app.session.get('platform'));
 
-    params.id = utils.get(config, ['google', 'id'], 'UA-XXXXXXXXX-X');
+    params.id = utils.get(config, ['google', 'id'], 'MO-50756825-1');
     params.random = Math.round(Math.random() * 1000000);
     params.referer = (this.app.session.get('referer') || '-');
     params.page = google.generatePage.call(this, pageGoogle, query.params);
