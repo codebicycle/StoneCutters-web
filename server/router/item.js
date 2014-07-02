@@ -44,8 +44,9 @@ module.exports = function(app, dataAdapter) {
 
             function track() {
                 var location = req.rendrApp.session.get('location');
+                var platform = req.rendrApp.session.get('platform');
 
-                graphite.send([location.name, 'reply', req.query.platform], 1, '+');
+                graphite.send([location.name, 'reply', platform], 1, '+');
             }
 
             function error(err) {
@@ -165,8 +166,9 @@ module.exports = function(app, dataAdapter) {
 
             function track() {
                 var location = req.rendrApp.session.get('location');
+                var platform = req.rendrApp.session.get('platform');
 
-                graphite.send([location.name, 'posting', req.query.platform], 1, '+');
+                graphite.send([location.name, 'posting', platform], 1, '+');
             }
 
             function error(err) {
