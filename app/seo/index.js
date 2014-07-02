@@ -74,7 +74,7 @@ function getHead() {
 }
 
 function addMetatag(name, content) {
-    var special = specials[name];
+    var special = specials[name.toLowerCase()];
 
     if (special) {
         special.call(this, content);
