@@ -9,6 +9,8 @@ module.exports = function itemRouter(app, dataAdapter) {
     var utils = require('../../shared/utils');
     var graphite = require('../graphite')();
     var Analytic = require('analytic');
+    var http = require('http');
+    var https = require('https');
 
     (function health() {
         app.get('/health', handler);
@@ -91,6 +93,55 @@ module.exports = function itemRouter(app, dataAdapter) {
             res.json({
                 headers: req.headers
             });
+        }
+    })();
+
+    (function statsHeaders() {
+        app.get('/stats/sockets', handler);
+
+        function handler(req, res) {
+            var stats = {
+                http: {
+                    sockets: {
+                        max: http.globalAgent.maxSockets,
+                        inUse: {
+                            total: 0
+                        },
+                        free: http.globalAgent.maxSockets
+                    },
+                    queue: {}
+                },
+                https: {
+                    sockets: {
+                        max: https.globalAgent.maxSockets,
+                        inUse: {
+                            total: 0
+                        },
+                        free: http.globalAgent.maxSockets
+                    },
+                    queue: {}
+                }
+            };
+            var url;
+
+            for (url in http.globalAgent.sockets) {
+                stats.http.sockets.inUse[url] = http.globalAgent.sockets[url].length;
+                stats.http.sockets.free = http.globalAgent.maxSockets - http.globalAgent.sockets[url].length;
+                stats.http.sockets.inUse.total += http.globalAgent.sockets[url].length;
+            }
+            for (url in http.globalAgent.requests) {
+                stats.http.queue[url] = http.globalAgent.requests[url].length;
+            }
+            for (url in https.globalAgent.sockets) {
+                stats.https.sockets.inUse[url] = https.globalAgent.sockets[url].length;
+                stats.https.sockets.free = https.globalAgent.maxSockets - https.globalAgent.sockets[url].length;
+                stats.https.sockets.inUse.total += https.globalAgent.sockets[url].length;
+            }
+            for (url in https.globalAgent.requests) {
+                stats.https.queue[url] = https.globalAgent.requests[url].length;
+            }
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+            res.json(stats);
         }
     })();
 
