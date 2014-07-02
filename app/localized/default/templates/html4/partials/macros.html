@@ -5,8 +5,8 @@
     </div>
 {% endmacro %}
 
-{% macro BreadcrumbHome(dictionary, link) %}
-    {{ Breadcrumb(dictionary, link, '', ['<a class="arrow home" href="/">', dictionary["defaultfooter.Home"], '</a>'] | join) }}
+{% macro BreadcrumbHome(dictionary, link, home) %}
+    {{ Breadcrumb(dictionary, link, '', ['<a class="arrow home" href="', home, '">', dictionary["defaultfooter.Home"], '</a>'] | join) }}
 {% endmacro %}
 
 {% macro Errors(errors) %}

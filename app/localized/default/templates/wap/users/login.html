@@ -54,6 +54,6 @@
             </tbody>
         </table>
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link) }}
+        {{ Breadcrumb(dictionary, link, ('/' | link)) }}
     </td>
 </tr>

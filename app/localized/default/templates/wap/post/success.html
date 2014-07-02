@@ -46,6 +46,6 @@
     <td>
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link) }}
+        {{ Breadcrumb(dictionary, link, ('/' | link)) }}
     </td>
 </tr>
