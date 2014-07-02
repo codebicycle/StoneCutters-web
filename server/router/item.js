@@ -6,6 +6,7 @@ module.exports = function(app, dataAdapter) {
     var querystring = require('querystring');
     var utils = require('../../shared/utils');
     var fs = require('fs');
+    var graphite = require('../graphite')();
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -34,10 +35,17 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
-            function success() {
+            function success(done) {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
+                done();
+            }
+
+            function track() {
+                var location = req.rendrApp.session.get('location');
+
+                graphite.send([location.name, 'reply', req.query.platform], 1, '+');
             }
 
             function error(err) {
@@ -49,7 +57,8 @@ module.exports = function(app, dataAdapter) {
             asynquence().or(error)
                 .then(parse)
                 .then(submit)
-                .val(success);
+                .then(success)
+                .val(track);
         }
     })();
 
@@ -146,11 +155,18 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function success(response, item) {
+            function success(done, response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
                 res.redirect(utils.link(url, req.rendrApp));
                 clean();
+                done();
+            }
+
+            function track() {
+                var location = req.rendrApp.session.get('location');
+
+                graphite.send([location.name, 'posting', req.query.platform], 1, '+');
             }
 
             function error(err) {
@@ -176,7 +192,8 @@ module.exports = function(app, dataAdapter) {
                 .then(validate)
                 .then(postImages)
                 .then(post)
-                .val(success);
+                .then(success)
+                .val(track);
         }
     })();
 
