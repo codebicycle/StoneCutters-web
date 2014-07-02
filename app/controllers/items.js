@@ -136,7 +136,7 @@ module.exports = {
                     result.favorite = favorite;
 
                     seo.addMetatag('title', data.item.shortTitle());
-                    seo.addMetatag('Description', data.item.shortDescription());
+                    seo.addMetatag('description', data.item.shortDescription());
                     seo.update();
 
                     callback(err, result);
