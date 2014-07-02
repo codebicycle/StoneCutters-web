@@ -60,6 +60,7 @@ middleware:
       - /stats/memory
       - /stats/threads
       - /stats/check
+      - /stats/sockets
     data:
       - /analytics/pageview.gif
       - /analytics/pageevent.gif
