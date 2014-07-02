@@ -15,7 +15,7 @@
 		</li>
 		{% if postButton %}
 			<li>
-				<a class="post" href="{{ '/posting' if location.current else '/location?target=posting' | link }}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+				<a class="post" href="{% if location.current %}{{ '/posting' | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
 			</li>
 		{% endif %}
 	</ul>

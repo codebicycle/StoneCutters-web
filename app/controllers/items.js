@@ -328,14 +328,12 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
 
-                seo.addMetatag('title', query.search + ' - ' + helpers.getLocationName.call(this));
-                seo.addMetatag('description', query.search + ' - ' + helpers.getLocationName.call(this));
-
                 if (result.metadata.total < 5){
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');
                 }
-
+                seo.addMetatag.call(this, 'title', query.search);
+                seo.addMetatag.call(this, 'description', query.search);
                 seo.update();
 
                 helpers.pagination.paginate(result.metadata, query, url);

@@ -46,9 +46,5 @@ module.exports = {
             formatDate = {'day': itemDate.day, 'dictionary': 'messages_date_format.1' + monthArr[itemDate.month] };
             return formatDate;
         }
-    },
-    getLocationName: function() {
-        var location = this.app.session.get('location');
-        return (location.current) ? location.current.name : location.name;
     }
 };

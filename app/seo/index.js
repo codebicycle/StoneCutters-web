@@ -7,9 +7,39 @@ var METATAGS = require('./metatags');
 var head = {
     metatags: {}
 };
+var specials = {
+    title: function(content) {
+        head.title = content + getLocationName.call(this, ' - ');
+    },
+    description: function(content) {
+        head.metatags.description = content + getLocationName.call(this, ' - ');
+    },
+    canonical: function(content) {
+        head.canonical = content;
+    },
+    googleSiteVerification: function(content) {
+        var platform = this.app.session.get('platform');
+        var country = this.app.session.get('location').url;
+        var gsVerification;
+
+        gsVerification = config.get(['seo', 'wmtools', country, platform]);
+        if (gsVerification) {
+            head.metatags['google-site-verification'] = gsVerification;
+        }
+    }
+};
+
+function getLocationName(prefix) {
+    if (this && this.app) {
+        var location = this.app.session.get('location');
+
+        return prefix + (location.current ? location.current.name : location.name);
+    }
+    return '';
+}
 
 function update() {
-    if (typeof window === 'undefined') {
+    if (utils.isServer) {
         return;
     }
     var head = getHead();
@@ -31,14 +61,6 @@ function update() {
     }
 }
 
-function checkSpecials(name, content) {
-    if (name === 'title' || name === 'canonical') {
-        head[name] = content;
-        return true;
-    }
-    return false;
-}
-
 function getHead() {
     var clone = _.clone(head);
 
@@ -51,18 +73,21 @@ function getHead() {
     return clone;
 }
 
+function addMetatag(name, content) {
+    var special = specials[name];
+
+    if (special) {
+        special.call(this, content);
+        return;
+    }
+    head.metatags[name] = content;
+}
+
 function getMetatagName(page, currentRoute) {
     if (page) {
         return page;
     }
     return [currentRoute.controller, currentRoute.action];
-}
-
-
-function addMetatag(name, content) {
-    if (!checkSpecials(name, content)) {
-        head.metatags[name] = content;
-    }
 }
 
 module.exports = {
@@ -71,19 +96,11 @@ module.exports = {
         var metatag = getMetatagName(page, this.app.session.get('currentRoute'));
         var defaultMetatags = utils.get(METATAGS, 'default');
         var metatags = utils.get(METATAGS, metatag, {});
-        var platform = this.app.session.get('platform');
-        var country = this.app.session.get('location').url;
-        var googleSiteVerification;
 
         head.metatags = {};
         _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
-            addMetatag(key, value);
-        });
-
-        googleSiteVerification = config.get(['seo', 'wmtools', country, platform]);
-        if (googleSiteVerification) {
-            addMetatag('google-site-verification', googleSiteVerification);
-        }
+            addMetatag.call(this, key, value);
+        }.bind(this));
     },
     addMetatag: addMetatag,
     update: update
