@@ -29,7 +29,7 @@ module.exports = {
         helpers.common.redirect.call(this, '/register');
     },
     location: function(params, callback) {
-        helpers.common.redirect.call(this, '/location');
+        helpers.common.redirect.call(this, '/location' + (params && params.posting ? '?target=posting' : ''));
     },
     postCategory: function(params, callback) {
         helpers.common.redirect.call(this, '/posting');
