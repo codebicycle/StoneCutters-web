@@ -12,6 +12,8 @@ module.exports = function(app, dataAdapter) {
         app.post('/items/:itemId/reply', handler);
 
         function handler(req, res) {
+            var location = req.rendrApp.session.get('location');
+            var platform = req.rendrApp.session.get('platform');
             var itemId = req.param('itemId', null);
             var reply;
 
@@ -35,31 +37,24 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
-            function success(done) {
+            function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                done();
-            }
-
-            function track() {
-                var location = req.rendrApp.session.get('location');
-                var platform = req.rendrApp.session.get('platform');
-
-                graphite.send([location.name, 'reply', platform], 1, '+');
+                graphite.send([location.name, 'reply', 'success', platform], 1, '+');
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
+                    graphite.send([location.name, 'reply', 'error', platform], 1, '+');
                 });
             }
 
             asynquence().or(error)
                 .then(parse)
                 .then(submit)
-                .then(success)
-                .val(track);
+                .val(success);
         }
     })();
 
@@ -67,6 +62,8 @@ module.exports = function(app, dataAdapter) {
         app.post('/post', handler);
 
         function handler(req, res, next) {
+            var location = req.rendrApp.session.get('location');
+            var platform = req.rendrApp.session.get('platform');
             var item;
             var images;
             var oldImages = [];
@@ -156,25 +153,19 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function success(done, response, item) {
+            function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
                 res.redirect(utils.link(url, req.rendrApp));
                 clean();
-                done();
-            }
-
-            function track() {
-                var location = req.rendrApp.session.get('location');
-                var platform = req.rendrApp.session.get('platform');
-
-                graphite.send([location.name, 'posting', platform], 1, '+');
+                graphite.send([location.name, 'posting', 'success', platform], 1, '+');
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
+                    graphite.send([location.name, 'posting', 'error', platform], 1, '+');
                 });
             }
 
@@ -194,8 +185,7 @@ module.exports = function(app, dataAdapter) {
                 .then(validate)
                 .then(postImages)
                 .then(post)
-                .then(success)
-                .val(track);
+                .val(success);
         }
     })();
 
