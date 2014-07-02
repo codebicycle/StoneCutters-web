@@ -80,4 +80,4 @@
     {% set templateName = template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ BreadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

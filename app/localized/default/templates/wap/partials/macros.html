@@ -1,4 +1,4 @@
-{% macro Breadcrumb(dictionary, link='') %}
+{% macro Breadcrumb(dictionary, link='', home='/') %}
     <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
         <tbody>
             <tr>
@@ -8,7 +8,7 @@
                             <a href="{{link}}"><img border="0" alt="" src="{{ "/images/wap/arrowbackwap.gif" | static }}">
                             {{dictionary["defaultfooter.Back"]}}</a> |
                         {% endif %}
-                        <a href="/"><img border="0" alt="" src="{{ "/images/wap/ico_home.gif" | static }}"> {{dictionary["defaultfooter.Home"]}}</a>
+                        <a href="{{home}}"><img border="0" alt="" src="{{ "/images/wap/ico_home.gif" | static }}"> {{dictionary["defaultfooter.Home"]}}</a>
                     </small>
                 </td>
             </tr>
