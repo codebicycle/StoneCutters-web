@@ -71,10 +71,15 @@ module.exports = {
             var platform = this.app.session.get('platform');
             var user;
 
-            if (platform === 'wap' || platform === 'html5') {
+            if (platform === 'wap') {
                 return helpers.common.redirect.call(this, '/');
             }
             user = this.app.session.get('user');
+            if (platform === 'html5' && user) {
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
