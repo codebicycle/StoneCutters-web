@@ -30,4 +30,6 @@ module.exports = function(grunt) {
     grunt.registerTask('utest', ['jshint:utests', 'mochacov:unit', 'mochacov:coverage']);
 
     grunt.registerTask('atest', ['jshint:atests', 'mochacov:acceptance']);
+
+    grunt.registerTask('localize', ['localization']);
 };
