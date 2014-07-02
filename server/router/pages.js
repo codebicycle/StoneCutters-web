@@ -151,7 +151,7 @@ module.exports = function itemRouter(app, dataAdapter) {
         function graphiteTracking(req) {
             var location = req.rendrApp.session.get('location');
 
-            graphite.send([location.name, req.query.platform], 1, '+');
+            graphite.send([location.name, 'pageview', req.query.platform], 1, '+');
         }
 
         function googleTracking(req) {
