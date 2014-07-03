@@ -29,7 +29,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 };
 
 DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
-    //var location = req.rendrApp.session.get('location');
+    var location = req.rendrApp.session ? req.rendrApp.session.get('location') : null;
     var start = new Date().getTime();
     var elapsed;
 
@@ -41,9 +41,9 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         options = {};
     }
     api = this.apiDefaults(api, req);
-    /*if (location) {
+    if (location) {
         graphite.send([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-')], 1, '+');
-    }*/
+    }
     restler.request(api.url, _.extend(api, options))
         .on('success', success)
         .on('fail', fail)
