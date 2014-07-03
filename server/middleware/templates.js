@@ -7,7 +7,6 @@ module.exports = function(dataAdapter, excludedUrls) {
         var minify = config.get(['uglify', 'enabled'], true);
         var localization = config.get('localization', {});
         var _ = require('underscore');
-        var graphite = require('../graphite')();
 
         function isLocalized(platform, siteLocation) {
             return !!(localization[platform] && ~localization[platform].indexOf(siteLocation));
@@ -80,7 +79,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                     jsDir: jsDir
                 });
                 next();
-                graphite.send(['devices', device.osName, platform], 1, '+');
             }
 
             function fail(err) {
