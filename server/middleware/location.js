@@ -6,6 +6,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../config');
         var asynquence = require('asynquence');
         var _ = require('underscore');
+        var utils = require('../../shared/utils');
         var testing = config.get(['publicEnvironments', 'testing'], {});
         var staging = config.get(['publicEnvironments', 'staging'], {});
 
@@ -14,7 +15,18 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
 
+            var location = req.param('location');
             var previousLocation = req.rendrApp.session.get('siteLocation');
+
+            if (!_.contains(excludedUrls.data, req.path)) {
+                if (!location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
+                    
+                    return res.redirect(302, utils.link(req.originalUrl, req.rendrApp, {
+                        location: previousLocation
+                    }));
+                }
+            }
+
             var siteLocation = req.param('location', previousLocation);
             var host = req.rendrApp.session.get('host');
             var index = host.indexOf(':');

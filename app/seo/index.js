@@ -17,7 +17,7 @@ var specials = {
     canonical: function(content) {
         head.canonical = content;
     },
-    googleSiteVerification: function(content) {
+    'google-site-verification': function(content) {
         var platform = this.app.session.get('platform');
         var country = this.app.session.get('location').url;
         var gsVerification;
