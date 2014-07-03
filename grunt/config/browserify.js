@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         if (subdir) {
             parts = subdir.split('/');
         }
-        if (parts[0] === 'localized' || parts[0] === 'translations' || filename.split('.').pop() !== 'js') {
+        if (parts[0] === 'translations' || filename.split('.').pop() !== 'js') {
             return;
         }
         if (!files[target]) {

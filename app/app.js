@@ -30,6 +30,6 @@ module.exports = Base.extend({
         Base.prototype.start.call(this);
     },
     getAppViewClass: function() {
-        return require('./views/app');
+        return require('./localized/common/app/views/app');
     }
 });
