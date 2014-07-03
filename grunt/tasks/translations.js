@@ -94,7 +94,7 @@ module.exports = function(grunt) {
         }
 
         function getTranslations(done) {
-            grunt.file.recurse('app/templates', function each(abspath, rootdir, subdir, filename) {
+            grunt.file.recurse('app/localized', function each(abspath, rootdir, subdir, filename) {
                 var file;
                 var matches;
 
