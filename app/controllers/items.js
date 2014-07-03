@@ -461,7 +461,7 @@ module.exports = {
         intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
 
         function add(done) {
-            helpers.dataAdapter.request('post', '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
+            helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
                 query: {
                     token: user.token
                 }
@@ -504,7 +504,7 @@ module.exports = {
         itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
 
         function remove(done) {
-            helpers.dataAdapter.request('post', ('/items/' + itemId + '/delete'), {
+            helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
                 query: {
                     token: user.token
                 }
