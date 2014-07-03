@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     var dependencies = grunt.file.readJSON('package.json').dependencies;
     var path = require('path');
     var _ = require('underscore');
-    var localization = require('../../server/config').get('localization');
+    var localization = require('../../app/config').get('localization');
     var iconsLocalization = require('../../app/config').get('icons');
     var templates = [{
         src: ['app/localized/common/templates/__layout.html'],

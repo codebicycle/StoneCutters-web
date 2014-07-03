@@ -14,18 +14,17 @@
         {% view 'footer/languages' %}
         {% view 'footer/footer' %}
         <div class="loading"></div>
-        <script src="{{ '/js/LAB.js' | static }}"></script>
-        <script>
+        <script>function init() {
             $LAB
-                .script("{{ [jsDir, 'libs.js'] | join('/') | static }}")
-                .script("{{ [jsDir, 'translations.js'] | join('/') | static }}")
-                .script("{{ [jsDir, 'templates', template, 'templates.js'] | join('/') | static }}").wait()
-                .script("{{ [jsDir, 'app.js'] | join('/') | static }}").wait(function wait() {
+                .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
+                .script("{{ [jsDir, directory, 'templates', platform, 'templates.js'] | join('/') | static }}").wait()
+                .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
                     var App = window.App = new (require('app/app'))({% json appData %});
-
                     App.bootstrapData({% json bootstrappedData %});
                     App.start();
             });
-        </script>
+        }</script>
+        <script async src="{{ '/js/LAB.js' | static }}" onload="init()"></script>
     </body>
 </html>

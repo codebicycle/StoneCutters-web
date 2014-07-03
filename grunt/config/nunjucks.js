@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
     var path = require('path');
     var _ = require('underscore');
-    var localization = require('../../server/config').get('localization');
+    var localization = require('../../app/config').get('localization');
     var rendrNunjucks = require('rendr-nunjucks')();
     var nunjucks = {
         options: {
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     grunt.file.recurse('app/localized/default/templates', function callback(abspath, rootdir, subdir, filename) {
         var parts = subdir ? subdir.split('/') : [];
         var src = 'app/templates/default/' + (subdir ? subdir + '/' : '') + filename;
-        var dest = 'public/js/app/templates/default/' + parts[0] + '/templates.js';
+        var dest = 'public/js/src/default/templates/' + parts[0] + '/templates.js';
 
         if (parts[0] === 'wap' || parts[0] === 'html4' || filename.split('.').pop() !== 'html') {
             return;
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
                 var parts = subdir.split('/');
                 var defaultSrc = 'app/templates/default/' + platform + '/' + subdir + '/' + filename;
                 var src = 'app/templates/' + location + '/' + platform + '/' + subdir + '/' + filename;
-                var dest = 'public/js/app/templates/' + location + '/' + platform + '/templates.js';
+                var dest = 'public/js/src/' + location + '/templates/' + platform + '/templates.js';
 
                 if (platform === 'wap' || platform === 'html4' || filename.split('.').pop() !== 'html') {
                     return;

@@ -2,7 +2,7 @@
 
 var Base = require('rendr/shared/base/view');
 var _ = require('underscore');
-var config = require('../../../../config');
+var localization = require('../../../../config').get('localization', {});
 var helpers = require('../../../../helpers');
 var translations = require('../../../../translations');
 var utils = require('../../../../../shared/utils');
@@ -10,19 +10,24 @@ var requireAMD = require;
 
 module.exports = Base.extend({
     initialize: function() {
-        var localized;
         var prefix = this.app.session.get('isServer') ? '../../../' : 'app/localized/';
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location').url;
+        var view;
 
-        if (this.tagName === 'div' && this.app.session.get('platform') === 'wap') {
+        if (this.tagName === 'div' && platform === 'wap') {
             this.tagName = 'table';
             this.attributes = this.getWapAttributes();
         }
+        if (!localization[platform] || !_.contains(localization[platform], location)) {
+            return;
+        }
         try {
-            localized = require(prefix + this.app.session.get('location').url + '/app/views/' + this.name);
+            view = require(prefix + location + '/app/views/' + this.name);
         }
         catch (error) {}
-        if (localized) {
-            _.extend(this, localized);
+        if (view) {
+            _.extend(this, view);
         }
     },
     getTemplate: function() {
