@@ -104,7 +104,7 @@ module.exports = Base.extend({
         this.paginationSize();
 
         this.$('.fav').click(function(e) {
-            var $this = $(this);
+            var $this = $(e.currentTarget);
 
             if ($this.attr('href') == '#') {
                 e.preventDefault();
