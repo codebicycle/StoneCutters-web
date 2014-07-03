@@ -7,7 +7,7 @@ module.exports = {
         list: { 
             title: 'Home',
             Description: 'This is the home page',
-            googleSiteVerification: true
+            'google-site-verification': true
         },
         subcategories: {
             title: 'Listing',
