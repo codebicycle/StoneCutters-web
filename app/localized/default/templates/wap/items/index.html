@@ -33,7 +33,7 @@
                     {%for item in items %}
                         <tr>
                             <td style="border-top: solid thin #808080;">
-                                <a style="display: block;" tabindex="1" href="/{{ item | slugToUrl | link }}">
+                                <a style="display: block;" tabindex="1" href="{{ item | slugToUrl | link }}">
                                     <small style="display: block;">
                                         {% if item.thumbnail %}
                                             <img border="0" alt="" src="{{ '/images/wap/photo.gif' | static }}">
@@ -76,6 +76,6 @@
         {% endif %}
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link) }}
+        {{ Breadcrumb(dictionary, link, ('/' | link)) }}
     </td>
 </tr>

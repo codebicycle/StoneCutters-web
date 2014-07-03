@@ -6,11 +6,14 @@ module.exports = function(app, dataAdapter) {
     var querystring = require('querystring');
     var utils = require('../../shared/utils');
     var fs = require('fs');
+    var graphite = require('../graphite')();
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
         function handler(req, res) {
+            var location = req.rendrApp.session.get('location');
+            var platform = req.rendrApp.session.get('platform');
             var itemId = req.param('itemId', null);
             var reply;
 
@@ -19,16 +22,19 @@ module.exports = function(app, dataAdapter) {
             }
 
             function submit(done, data) {
+                var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
+                var language = req.rendrApp.session.get('languages')._byId[selectedLanguage] || {};
                 var options = {
-                    data: data
+                    data: data,
+                    query: {
+                        languageId: language.id
+                    }
                 };
                 var user = req.rendrApp.session.get('user');
 
                 reply = data;
                 if (user) {
-                    options.query = {
-                        token: user.token
-                    };
+                    options.query.token = user.token;
                 }
                 data.platform = req.rendrApp.session.get('platform');
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
@@ -38,11 +44,13 @@ module.exports = function(app, dataAdapter) {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
+                graphite.send([location.name, 'reply', 'success', platform], 1, '+');
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
+                    graphite.send([location.name, 'reply', 'error', platform], 1, '+');
                 });
             }
 
@@ -57,6 +65,8 @@ module.exports = function(app, dataAdapter) {
         app.post('/post', handler);
 
         function handler(req, res, next) {
+            var location = req.rendrApp.session.get('location');
+            var platform = req.rendrApp.session.get('platform');
             var item;
             var images;
             var oldImages = [];
@@ -151,12 +161,14 @@ module.exports = function(app, dataAdapter) {
 
                 res.redirect(utils.link(url, req.rendrApp));
                 clean();
+                graphite.send([location.name, 'posting', 'success', platform], 1, '+');
             }
 
             function error(err) {
                 formidable.error(req, req.headers.referer.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
+                    graphite.send([location.name, 'posting', 'error', platform], 1, '+');
                 });
             }
 

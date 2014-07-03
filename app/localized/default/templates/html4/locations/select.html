@@ -1,9 +1,9 @@
 <div id="locationSelect">
-	<p>
+	<h1>
 		{% if location.current and location.current.type != 'country' %}
 			<strong>{{location.current.name}}</strong> <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
 		{% else %}
-			<strong>{{location.name}}</strong> <a href="/location">{{ dictionary["countryoptions.SelectACity"] }}</a>
+			<strong>{{location.name}}</strong> <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.SelectACity"] }}</a>
 		{% endif %}
-	</p>
+	</h1>
 </div>

@@ -6,27 +6,39 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../config');
         var asynquence = require('asynquence');
         var _ = require('underscore');
+        var utils = require('../../shared/utils');
+        var testing = config.get(['publicEnvironments', 'testing'], {});
+        var staging = config.get(['publicEnvironments', 'staging'], {});
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
+            var location = req.param('location');
             var previousLocation = req.rendrApp.session.get('siteLocation');
+
+            if (!_.contains(excludedUrls.data, req.path)) {
+                if (!location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
+                    
+                    return res.redirect(302, utils.link(req.originalUrl, req.rendrApp, {
+                        location: previousLocation
+                    }));
+                }
+            }
+
             var siteLocation = req.param('location', previousLocation);
             var host = req.rendrApp.session.get('host');
             var index = host.indexOf(':');
             var platform;
-            var location;
 
             function fetch(done) {
                 function after(err, result) {
                     if (err) {
                         done.abort();
-                        return res.redirect(301, '/?location=' + previousLocation);
+                        return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
                     }
-                    location = result.location;
-                    done();
+                    done(result.location);
                 }
 
                 req.rendrApp.fetch({
@@ -41,7 +53,17 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }, after);
             }
 
-            function store(done) {
+            function check(done, location) {
+                var url = location.get('url');
+
+                if (_.contains(req.subdomains, 'm') && host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
+                    done.abort();
+                    return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
+                }
+                done(location);
+            }
+
+            function store(done, location) {
                 var current = location.get('current');
 
                 if (current) {
@@ -63,11 +85,11 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!siteLocation) {
                 siteLocation = (index === -1) ? host : host.substring(0, index);
                 platform = siteLocation.split('.').shift().length;
-                if (siteLocation.indexOf(config.get(['publicEnvironments', 'testing', 'host'], '.m-testing.olx.com')) === platform) {
-                    siteLocation = platform + config.get(['publicEnvironments', 'testing', 'mask'], '.m.olx.com');
+                if (siteLocation.indexOf(testing.host || '.m-testing.olx.com') === platform) {
+                    siteLocation = platform + testing.mask || '.m.olx.com';
                 }
-                else if (siteLocation.indexOf(config.get(['publicEnvironments', 'staging', 'host'], '.m-staging.olx.com')) === platform) {
-                    siteLocation = platform + config.get(['publicEnvironments', 'staging', 'mask'], '.m.olx.com');
+                if (siteLocation.indexOf(staging.host || '.m-staging.olx.com') === platform) {
+                    siteLocation = platform + staging.mask || '.m.olx.com';
                 }
                 siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
                 previousLocation = siteLocation;
@@ -80,6 +102,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             asynquence().or(fail)
                 .then(fetch)
+                .then(check)
                 .then(store)
                 .val(next);
         };

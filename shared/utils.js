@@ -1,29 +1,16 @@
 'use strict';
 
 var _ = require('underscore');
+var querystring = require('querystring')
 var isServer = (typeof window === 'undefined');
 var utils = {
     isServer: isServer,
     link: link,
     params: params,
     removeParams: removeParams,
-    get: get
+    get: get,
+    qs: querystring
 };
-
-if (isServer) {
-    var querystringName = 'querystring';
-    utils.qs = require(querystringName);
-}
-else {
-    utils.qs = {
-        parse: function () {
-            return querystring.parse.apply(querystring, arguments);
-        },
-        stringify: function () {
-            return querystring.stringify.apply(querystring, arguments);
-        }
-    };
-}
 
 function link(href, app, query) {
     var siteLocation = app.session.get('siteLocation');
@@ -39,7 +26,7 @@ function link(href, app, query) {
         href = params(href, query);
     }
     return href;
-};
+}
 
 function params(url, keys, value) {
     var parts = url.split('?');

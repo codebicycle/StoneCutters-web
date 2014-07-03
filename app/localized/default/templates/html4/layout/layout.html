@@ -1,17 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-	<head>
-		{% view 'layout/head' %}
-	</head>
-	<body>
-		{% view 'header/bar' %}
-		{% view 'header/index' %}
-
-		{{body}}
-
-		{% view 'footer/downloadapp' %}
-		{% view 'footer/languages' %}
-		{% view 'footer/footer' %}
-
-	</body>
+    {% view 'layout/head' %}
+    <body>
+        {% view 'header/bar' %}
+        {% view 'header/index' %}
+        {{body}}
+        {% view 'footer/downloadapp' %}
+        {% view 'footer/languages' %}
+        {% view 'footer/footer' %}
+    </body>
 </html>

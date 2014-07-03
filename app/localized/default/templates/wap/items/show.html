@@ -40,14 +40,14 @@
                                         {% if pos - 1 > 0 %}
                                             {% set posImage = "?pos=" + (pos - 1) %}
                                         {% endif %}
-                                        <a rel="nofollow" href="/{{ [item | slugToUrl, posImage] | join('') | link }}">&lt;</a> |
+                                        <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&lt;</a> |
                                     {% else %}
                                         <font color="#CCCCCC">&lt;</font> |
                                     {% endif %}
                                         {{ pos + 1 }} of {{ item.images.length }}
                                     {% if pos < item.images.length - 1 %}
                                         {% set posImage = '?pos=' + (pos + 1) %}
-                                         | <a rel="nofollow" href="/{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>
+                                         | <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>
                                     {% else %}
                                          | <font color="#CCCCCC">&gt;</font>
                                     {% endif %}
@@ -201,6 +201,6 @@
         {% endif %}
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link) }}
+        {{ Breadcrumb(dictionary, link, ('/' | link)) }}
     </td>
 </tr>

@@ -89,6 +89,18 @@ module.exports = (function() {
         }));
     }
 
+    function link(href, app, query) {
+        var protocol;
+        var host;
+
+        if (href.indexOf('http://')) {
+            protocol = app.session.get('protocol');
+            host = app.session.get('host');
+            href = [protocol, '://', host, (href.indexOf('/') ? '/' : ''), href].join('');
+        }
+        return utils.link(href, app, query);
+    }
+
     function daysDiff(date) {
         var now = new Date();
         var diff = now.getTime() - date.getTime();
@@ -97,7 +109,7 @@ module.exports = (function() {
 
     return {
         slugToUrl: slugToUrl,
-        link: utils.link,
+        link: link,
         params: utils.params,
         redirect: redirect,
         daysDiff: daysDiff,

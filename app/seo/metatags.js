@@ -7,7 +7,7 @@ module.exports = {
         list: { 
             title: 'Home',
             Description: 'This is the home page',
-            robots: 'NOFOLLOW'
+            'google-site-verification': true
         },
         subcategories: {
             title: 'Listing',
@@ -49,6 +49,9 @@ module.exports = {
         error: {}
     },
     'default': {
-        title: 'OLX Mobile'
+        title: 'OLX Mobile',
+        description: 'OLX Mobile',
+        robots: 'index,follow',
+        googlebot: 'index,follow'
     }
 };

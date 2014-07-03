@@ -24,4 +24,4 @@
         <a href="/register">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
     </div>
 </div>
-{{ BreadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

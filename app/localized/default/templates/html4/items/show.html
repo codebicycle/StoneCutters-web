@@ -27,19 +27,19 @@
             {% if item.images.length == 0 %}
                 <span>({{ dictionary["itemgeneraldetails.NoPicture"] }})</span>
             {% elif item.images.length == 1 %}
-                <a href="/{{ [item | slugToUrl, '/galery'] | join('') | link }}">
+                <a href="{{ [item | slugToUrl, '/galery'] | join('') | link }}">
                     <div class="arrow"></div>
                     <img alt="" src="{{item.images[0].url }}">
                 </a>
             {% else %}
-                <a href="/{{ [item | slugToUrl, '/galery?pos='+pos] | join('') | link }}">
+                <a href="{{ [item | slugToUrl, '/galery?pos='+pos] | join('') | link }}">
                     <div class="arrow"></div>
                     <img alt="" src="{{item.images[pos].url }}">
                 </a>
                 <div id="galeryPagination">
-                    <a href="{{ (['?pos=', pos - 1] | join('') | link) if pos != 0 else '#' }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
+                    <a href="{{ ([item | slugToUrl, '?pos=', pos - 1] | join('') | link) if pos != 0 else '#' }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
                     <div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
-                    <a href="{{ (['?pos=', pos + 1] | join('') | link) if pos + 1 != item.images.length else '#' }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
+                    <a href="{{ ([item | slugToUrl, '?pos=', pos + 1] | join('') | link) if pos + 1 != item.images.length else '#' }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
                 </div>
             {% endif %}
         </div>
@@ -78,7 +78,7 @@
                 {% endfor %}
             {% endif %}
             {% if item.coordinates %}
-                <li><strong>{{ dictionary["business_directory.Map"] }}: </strong><a href="/{{ [item | slugToUrl, '/map'] | join('') | link }}">{{ dictionary["item.ViewBiggerMap"] }}</a></li>
+                <li><strong>{{ dictionary["business_directory.Map"] }}: </strong><a href="{{ [item | slugToUrl, '/map'] | join('') | link }}">{{ dictionary["item.ViewBiggerMap"] }}</a></li>
             {% endif %}
         </ul>
 
@@ -99,4 +99,4 @@
     {% set templateName = template + '/partials/analytics.html' %}
     {% include templateName %}
 </div>
-{{ BreadcrumbHome(dictionary, link) }}
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

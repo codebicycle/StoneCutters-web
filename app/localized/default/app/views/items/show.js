@@ -104,7 +104,7 @@ module.exports = Base.extend({
         this.paginationSize();
 
         this.$('.fav').click(function(e) {
-            var $this = $(this);
+            var $this = $(e.currentTarget);
 
             if ($this.attr('href') == '#') {
                 e.preventDefault();
@@ -124,7 +124,7 @@ module.exports = Base.extend({
                 url.push(user.token);
 
                 $('.loading').show();
-                helpers.dataAdapter.request('post', url.join(''), {
+                helpers.dataAdapter.post(this.app.req, url.join(''), {
                     cache: false,
                     json: true,
                     done: function() {
@@ -142,7 +142,7 @@ module.exports = Base.extend({
                     $('.loading').hide();
                 });
             }
-        });
+        }.bind(this));
         this.$('.share').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');

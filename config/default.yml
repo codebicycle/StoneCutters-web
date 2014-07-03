@@ -3,6 +3,9 @@ environment: development
 
 server:
   port: 3030
+  maxSockets:
+    http: 500
+    https: 500
 
 platforms:
   - wap
@@ -57,6 +60,7 @@ middleware:
       - /stats/memory
       - /stats/threads
       - /stats/check
+      - /stats/sockets
     data:
       - /analytics/pageview.gif
       - /analytics/pageevent.gif

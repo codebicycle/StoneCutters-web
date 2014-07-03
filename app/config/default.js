@@ -37,7 +37,7 @@ module.exports = {
         enabled: false,
         clicks: 1,
         time: 6000000,
-        ignorePath: ['/health', '/stats', '/stats/memory', '/stats/threads', '/stats/check', '/login', '/interstitial', '/404', '/500', '/analytics/pageview.gif', '/analytics/pageevent.gif'],
+        ignorePath: ['/health', '/stats', '/stats/memory', '/stats/threads', '/stats/check', '/stats/sockets', '/login', '/interstitial', '/404', '/500', '/analytics/pageview.gif', '/analytics/pageevent.gif'],
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
@@ -85,6 +85,15 @@ module.exports = {
             },
             'default': {
                 'Cache-Control': 'no-cache, max-age=0, s-maxage=0, no-store'
+            }
+        }
+    },
+    seo: {
+        wmtools: {
+            'www.olx.com.py': {
+                wap:   'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo',
+                html4: 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo',
+                html5: 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo'
             }
         }
     }

@@ -136,7 +136,7 @@ module.exports = {
                     result.favorite = favorite;
 
                     seo.addMetatag('title', data.item.shortTitle());
-                    seo.addMetatag('Description', data.item.shortDescription());
+                    seo.addMetatag('description', data.item.shortDescription());
                     seo.update();
 
                     callback(err, result);
@@ -283,18 +283,10 @@ module.exports = {
 
         function controller() {
             var page = params ? params.page : undefined;
-            var app = this.app;
-            var spec = {
-                items: {
-                    collection: 'Items',
-                    params: params
-                }
-            };
-            var user = app.session.get('user');
-            var siteLocation = app.session.get('siteLocation');
+            var user = this.app.session.get('user');
             var query;
 
-            helpers.pagination.prepare(app, params);
+            helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
             delete params.search;
             delete params.page;
@@ -309,6 +301,7 @@ module.exports = {
 
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
+                seo.addMetatag('googlebot', 'noindex, follow');
                 return callback(null, {
                     analytics: analytics.generateURL.call(this),
                     search: '',
@@ -318,12 +311,15 @@ module.exports = {
                 });
             }
 
-            app.fetch(spec, {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                var protocol = app.session.get('protocol');
-                var host = app.session.get('host');
-                var url = (protocol + '://' + host + '/nf/search/' + query.search + '/');
+                var url = '/nf/search/' + query.search + '/';
                 var model = result.items.models[0];
 
                 result.items = model.get('data');
@@ -331,10 +327,14 @@ module.exports = {
                 if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
+
                 if (result.metadata.total < 5){
                     seo.addMetatag('robots', 'noindex, follow');
-                    seo.update();
+                    seo.addMetatag('googlebot', 'noindex, follow');
                 }
+                seo.addMetatag.call(this, 'title', query.search);
+                seo.addMetatag.call(this, 'description', query.search);
+                seo.update();
 
                 helpers.pagination.paginate(result.metadata, query, url);
                 analytics.addParam('page_nb', result.metadata.totalPages);
@@ -461,7 +461,7 @@ module.exports = {
         intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
 
         function add(done) {
-            helpers.dataAdapter.request('post', '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
+            helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
                 query: {
                     token: user.token
                 }
@@ -504,7 +504,7 @@ module.exports = {
         itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
 
         function remove(done) {
-            helpers.dataAdapter.request('post', ('/items/' + itemId + '/delete'), {
+            helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
                 query: {
                     token: user.token
                 }

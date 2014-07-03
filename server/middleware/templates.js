@@ -28,7 +28,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 var device = body;
 
-                if (device.browserName == 'Opera Mini'){
+                if (device.browserName == 'Opera Mini') {
                     var alternativeUA = ['device-stock-ua','x-operamini-phone-ua'];
                     var headers = req.headers;
 
