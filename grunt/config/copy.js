@@ -89,6 +89,9 @@ module.exports = function(grunt) {
                 if (platform !== subdir) {
                     continue;
                 }
+                if (platform === 'html5') {
+                    continue;
+                }
                 iconsLocalization[platform].forEach(eachIconLocation);
             }
 
@@ -102,6 +105,9 @@ module.exports = function(grunt) {
             }
         });
         for (platform in iconsLocalization) {
+            if (platform === 'html5') {
+                continue;
+            }
             iconsLocalization[platform].forEach(eachIconLocation);
         }
 
