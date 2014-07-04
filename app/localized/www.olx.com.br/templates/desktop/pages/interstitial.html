@@ -1,0 +1,20 @@
+{% if interstitial and marketing.link %}
+    <div id="interstitial">
+        <div class="header">
+            <img src="{{ '/images/common/marketing/logo_olx03.png' | static }}" alt="" id="logoTop">
+            <h1>{{ dictionary["defaultfooter.FreeSite"] }}</h1>
+            <div class="clear"></div>
+        </div>
+        <div class="interstitial-action btn-adjust btnOrange">
+            <a href="{{ marketing.link }}" class="trackMe" data-tracking="Interstitial-DownloadApp" >
+            {{ dictionary["misc.GetTheFreeApp"] }}
+            </a>
+        </div>
+        <div class="interstitial-action continue">
+            <a href="#" class="closeInterstitial trackMe" data-tracking="Interstitial-DownloadApp_NoThanks" >
+                {{ dictionary["misc.ContinueMobileSite"] }} &gt;
+            </a>
+        </div>
+        <img src="{{ '/images/common/marketing/iphone_.png' | static }}" alt="" id="mobileImg"> 
+    </div>
+{% endif %}

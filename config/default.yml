@@ -47,7 +47,7 @@ localization:
   wap: []
   html4: []
   html5: []
-  desktop: []
+  desktop: ['www.olx.com.br']
 
 error:
   detail: true
