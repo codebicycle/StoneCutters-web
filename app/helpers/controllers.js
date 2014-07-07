@@ -320,7 +320,10 @@ module.exports = {
         }
 
         function fail(err) {
-            throw err;
+            this.app.session.persist({
+                error: err
+            });
+            return common.redirect.call(this, '/500');
         }
     },
     changeHeaders: changeHeaders
