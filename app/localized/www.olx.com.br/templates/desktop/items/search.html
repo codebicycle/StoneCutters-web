@@ -1,0 +1,49 @@
+{% view 'locations/select' %}
+{% view 'partials/search' %}
+<section id="itemListing">
+    {% from macros import Breadcrumb %}
+    {% set link = (breadcrumb | link) %}
+    {{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>' , search) | replace('<<NUMBER>>' , metadata.total), '<span class="switchView"></span>') }}
+    {% if metadata.total == 0 %}
+        <div class="emtyList">
+            {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
+        </div>
+    {% else %}
+        <ul class="itemListing">
+            {% for item in items %}
+                <li>
+                    <a href="{{ item | slugToUrl | link }}">
+                        <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
+                        <p>
+                            {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
+                            {% if item.displayLocation %}
+                                {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
+                            {% endif %}
+                        </p>
+                        <h3>{{ item.price.displayPrice }}</h3>
+                        <div class="title">
+                            <h2>
+                                <span>
+                                    <span>{{ item.title }}</span>
+                                </span>
+                            </h2>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+            <div class="clear"></div>
+        </ul>
+        {% if metadata.next or metadata.previous %}
+            <div id="itemPagination">
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
+                <div class="center">
+                    {{ metadata | pagination }}
+                </div>
+                <a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
+</section>
+{% view 'pages/interstitial' %}
