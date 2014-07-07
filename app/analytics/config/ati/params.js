@@ -61,6 +61,13 @@ module.exports = {
     'locations#list': {
         process: false,
         names: {
+            page_name: 'select_location',
+            category: 'static'
+        }
+    },
+    'post#location': {
+        process: false,
+        names: {
             page_name: 'posting_step1',
             category: 'posting',
             funnel_page: 'posting_step1'

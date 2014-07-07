@@ -78,7 +78,7 @@ function generatePage(page, options) {
             page = analyticParam.parse(page, options);
         }
     });
-    return page + '/';
+    return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
 module.exports = {
