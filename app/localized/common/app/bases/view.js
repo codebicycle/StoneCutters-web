@@ -2,6 +2,7 @@
 
 var Base = require('rendr/shared/base/view');
 var _ = require('underscore');
+var async = require('async');
 var localization = require('../../../../config').get('localization', {});
 var helpers = require('../../../../helpers');
 var translations = require('../../../../translations');
@@ -99,6 +100,42 @@ module.exports = Base.extend({
         });
     }
 });
+
+module.exports.attach = Base.attach = function(app, parentView, callback) {
+    var scope = parentView ? parentView.$el : null;
+    var list = $('[data-view]', scope).toArray();
+
+    async.map(list, function each(el, cb) {
+        var $el;
+        var options;
+        var viewName;
+        var fetchSummary;
+
+        $el = $(el);
+        if (!$el.data('view-attached')) {
+            options = Base.getViewOptions($el);
+            options.app = app;
+            viewName = options.view;
+            fetchSummary = options.fetch_summary || {};
+            app.fetcher.hydrate(fetchSummary, {
+                app: app
+            }, function done(err, results) {
+                options = _.extend(options, results);
+                Base.getView(app, viewName, app.options.entryPath, function after(ViewClass) {
+                    var view = new ViewClass(options);
+
+                    view.attach($el, parentView);
+                    cb(null, view);
+                });
+            });
+        }
+        else {
+            cb(null, null);
+        }
+    }, function done(err, views) {
+        callback(_.compact(views));
+    });
+};
 
 module.exports.getView = Base.getView = function(app, viewName, entryPath, callback) {
     var platform = app.session.get('platform');
