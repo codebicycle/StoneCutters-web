@@ -5,31 +5,55 @@ var _ = require('underscore');
 var localization = require('../../../../config').get('localization', {});
 var helpers = require('../../../../helpers');
 var translations = require('../../../../translations');
-var utils = require('../../../../../shared/utils');
 var requireAMD = require;
 
-module.exports = Base.extend({
-    initialize: function() {
-        var prefix = this.app.session.get('isServer') ? '../../../' : 'app/localized/';
-        var platform = this.app.session.get('platform');
-        var location = this.app.session.get('location').url;
-        var view;
+var View = module.exports = Base.extend({
+    /*constructor: function(options) {
+        var found = false;
+        var prefix;
+        var platform;
+        var location;
+        var Localized;
+        var obj;
 
-        if (this.tagName === 'div' && platform === 'wap') {
-            this.tagName = 'table';
-            this.attributes = this.getWapAttributes();
+        this.options = _.extend(this.options || {}, options || {});
+        this.parseOptions(options);
+        this.name = this.name || this.app.modelUtils.underscorize(this.constructor.id || this.constructor.name);
+        prefix = this.app.session.get('isServer') ? '../../../' : 'app/localized/';
+        platform = this.app.session.get('platform');
+        location = this.app.session.get('location').url;
+        if (localization[platform] && _.contains(localization[platform], location)) {
+            try {
+                Localized = require(prefix + location + '/app/views/' + platform + '/' + this.name);
+                found = true;
+                console.log(prefix + location + '/app/views/' + platform + '/' + this.name);
+            }
+            catch (error) {}
         }
-        if (!localization[platform] || !_.contains(localization[platform], location)) {
-            return;
+        if (!found) {
+            try {
+                Localized = require(prefix + 'default/app/views/' + platform + '/' + this.name);
+                found = true;
+                console.log(prefix + 'default/app/views/' + platform + '/' + this.name);
+            }
+            catch (error) {}
         }
-        try {
-            view = require(prefix + location + '/app/views/' + this.name);
+        if (!found) {
+            Localized = require(prefix + 'common/app/bases/' + platform + '/view');
+            console.log(prefix + 'common/app/bases/' + platform + '/view');
         }
-        catch (error) {}
-        if (view) {
-            _.extend(this, view);
+        Localized.apply(this, arguments);
+        Backbone.View.apply(this, arguments);
+        if (this.postInitialize) {
+          logger.log('`postInitialize` is deprecated, please use `initialize`');
+          this.postInitialize();
         }
-    },
+        if ((obj = this.options.model || this.options.collection) && this.renderOnRefresh) {
+          obj.on('refresh', this.render, this);
+        }
+        this.render = this.render.bind(this);
+        console.log(this.className);
+    },*/
     getTemplate: function() {
         var template = this.app.session.get('template');
 
@@ -54,14 +78,6 @@ module.exports = Base.extend({
             currentRoute: this.app.session.get('currentRoute'),
             interstitial: this.app.session.get('interstitial')
         });
-    },
-    getWapAttributes: function() {
-        return _.extend(this.attributes || {}, {
-            width: '100%',
-            cellspacing: 0,
-            cellpadding: 4,
-            border: 0
-        }, this.wapAttributes || {});
     },
     track: function(data, callback) {
         var that = this;
@@ -113,13 +129,18 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.getView = Base.getView = function(viewName, entryPath, callback) {
+module.exports.getView = Base.getView = function(app, viewName, entryPath, callback) {
     var viewPath;
 
     if (!entryPath) {
         entryPath = '';
     }
-    viewPath = entryPath + 'app/localized/default/app/views/' + viewName;
+    if (app) {
+        var platform = app.session.get('platform');
+        var location = app.session.get('location').url;
+        console.log(entryPath + 'app/localized/' + location + '/app/views/' + platform + '/' + viewName);
+    }
+    viewPath = entryPath + 'app/localized/common/app/views/' + viewName;
     if (typeof callback === 'function') {
         if (typeof define !== 'undefined') {
             requireAMD([viewPath], callback);

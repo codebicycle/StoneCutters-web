@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             create(stylesheets + '/' + platform);
             create(templates);
             create(templates + '/' + platform);
-            create(views);
+            create(views + '/' + platform);
         }
 
         function create(filePath) {

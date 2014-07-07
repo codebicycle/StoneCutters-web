@@ -23,7 +23,7 @@
                     var App = window.App = new (require('app/app'))({% json appData %});
                     App.bootstrapData({% json bootstrappedData %});
                     App.start();
-            });
+                });
         }</script>
         <script async src="{{ '/js/LAB.js' | static }}" onload="init()"></script>
     </body>

@@ -35,7 +35,7 @@ module.exports = function(nunjucks) {
                 if (parentView) {
                     options.parentView = parentView;
                 }
-                ViewClass = Base.getView(id, app.options.entryPath);
+                ViewClass = Base.getView(app, id, app.options.entryPath);
                 view = new ViewClass(options);
                 return view.getHtml();
             };

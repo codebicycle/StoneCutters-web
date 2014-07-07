@@ -13,7 +13,7 @@ module.exports = function appUseConf(done) {
         dataAdapter: dataAdapter,
         errorHandler: require('./errorHandler')(),
         apiPath: config.get(['smaug', 'protocol'], 'http') + '://' + config.get(['smaug', 'url'], 'api-v2.olx.com'),
-        viewsPath: 'app/localized/default/app/views'
+        viewsPath: 'app/localized/common/app/views'
     });
     var Router = require('./router');
     var router = new Router(server);

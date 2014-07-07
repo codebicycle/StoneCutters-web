@@ -18,7 +18,7 @@ module.exports = {
     localization: {
         wap: [],
         html4: [],
-        html5: [],
+        html5: ['www.olx.com.py'],
         desktop: []
     },
     icons: {
