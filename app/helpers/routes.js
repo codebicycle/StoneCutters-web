@@ -10,8 +10,17 @@ module.exports = {
     'redirections#related': {
         url: 'item/:categoryId/related-ads/page/:page'
     },
+    'redirections#gallery': {
+        url: 'item/gallery/:itemId'
+    },
+    'redirections#itemGallery': {
+        url: 'item/gallery/:itemId/*'
+    },
     'redirections#item': {
         url: 'item/show/:itemId'
+    },
+    'redirections#itemShow': {
+        url: 'item/show/:itemId/*'
     },
     'redirections#reply': {
         url: 'item/reply/:itemId'
@@ -153,11 +162,11 @@ module.exports = {
             }
         }
     },
-    'items#galery': {
+    'items#gallery': {
         urls: {
-            server: ':title-iid-:itemId([0-9]+)/galery',
+            server: ':title-iid-:itemId([0-9]+)/gallery',
             client: {
-                url: ':title-iid-:itemId/galery'
+                url: ':title-iid-:itemId/gallery'
             }
         }
     },

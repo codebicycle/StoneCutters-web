@@ -23,7 +23,7 @@ module.exports = {
         'items#reply': '[category-name]/[subcategory-id]/reply/[item_attributes]',
         'items#map': 'item/locate_in_map/[item_attributes]',
         'items#show': '[category-name]/[subcategory-id]/item/[item_attributes]',
-        'items#galery': '[category-name]/[subcategory-id]/item/[item_attributes]/galery',
+        'items#gallery': '[category-name]/[subcategory-id]/item/[item_attributes]/gallery',
         'categories#show#listing': '[category-name]/[subcategory-id]/listing/[filter_name_value]',
         'categories#show': '[category-name]/subcategory_list',
         'pages#error': 'error'
