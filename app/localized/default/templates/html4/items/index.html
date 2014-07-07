@@ -6,11 +6,15 @@
 <div id="itemListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">
-            {% if location.current.name %}
-                {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
-            {% else %}
-                {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}
-            {% endif %}
+            <div></div>
+            <p>
+                {% if location.current.name %}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
+                {% else %}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}
+                {% endif %}
+            </p>
+            <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
     {% else %}
         <ul class="itemListing">

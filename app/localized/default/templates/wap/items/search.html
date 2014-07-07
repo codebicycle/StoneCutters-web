@@ -8,7 +8,22 @@
                 <tbody>
                     <tr>
                         <td style="border-top: solid thin #808080;">
-                            <small style="display: block;">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</small>
+                            <small style="display: block;">{{ dictionary["misc.NoResults"] }}</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: .25em .5em .5em;">
+                            <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
+                                <tr>
+                                    <td bgcolor="#FF6600" align="center">
+                                        <font size="2" style="display: block;">
+                                            <a href="{{ '/' | link }}" style="display: block;">
+                                                <strong><font color="#FFFFFF">{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</font></strong>
+                                            </a>
+                                        </font>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </tbody>
