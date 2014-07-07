@@ -213,7 +213,7 @@ module.exports = {
             geo2: ''
         }
     },
-    'items#galery': {
+    'items#gallery': {
         process: true,
         names: {
             page_name: 'detail_page_galery',

@@ -89,28 +89,18 @@ module.exports = (function() {
         }));
     }
 
-    function link(href, app, query) {
-        var protocol;
-        var host;
-
-        if (href.indexOf('http://')) {
-            protocol = app.session.get('protocol');
-            host = app.session.get('host');
-            href = [protocol, '://', host, (href.indexOf('/') ? '/' : ''), href].join('');
-        }
-        return utils.link(href, app, query);
-    }
-
     function daysDiff(date) {
         var now = new Date();
         var diff = now.getTime() - date.getTime();
+        
         return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
     }
 
     return {
         slugToUrl: slugToUrl,
-        link: link,
+        link: utils.link,
         params: utils.params,
+        removeParams: utils.removeParams,
         redirect: redirect,
         daysDiff: daysDiff,
         'static': statics

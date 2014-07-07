@@ -144,7 +144,7 @@ module.exports = {
             }
         }
     },
-    galery: function(params, callback) {
+    gallery: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
@@ -181,20 +181,21 @@ module.exports = {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
+                var platform = this.app.session.get('platform');
                 var subcategory = result.categories.search(item.category.id);
 
                 if (!item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
                 slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (!item.images || !item.images.length) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (pos < 0 || pos >= item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug + '/galery'));
+                    return helpers.common.redirect.call(this, ('/' + slug + '/gallery'));
                 }
 
                 result.item = item;
@@ -220,7 +221,6 @@ module.exports = {
             var user = app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var pos = Number(params.pos) || 0;
             var siteLocation = app.session.get('siteLocation');
             var spec;
             var slug;
@@ -249,25 +249,19 @@ module.exports = {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 var item = result.item.toJSON();
+                var platform = this.app.session.get('platform');
                 var subcategory = result.categories.search(item.category.id);
 
                 if (!item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
                 slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
-                }
-                if (!item.images || !item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug));
-                }
-                if (pos < 0 || pos >= item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug + '/map'));
                 }
 
                 result.item = item;
                 result.user = user;
-                result.pos = pos;
                 analytics.reset();
                 analytics.addParam('user', user);
                 analytics.addParam('item', item);

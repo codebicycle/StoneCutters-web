@@ -8,9 +8,9 @@
         {% else %}
             <img alt="" src="{{item.images[pos].url }}">
             <div id="galeryPagination">
-                <a href="{{ ([item | slugToUrl, '/galery?pos=', pos - 1] | join('') | link) if pos != 0 else '#' }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
+                <a href="{{ ([item | slugToUrl, '/gallery?pos=', pos - 1] | join('') | link) if pos != 0 else '#' }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
                 <div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
-                <a href="{{ ([item | slugToUrl, '/galery?pos=', pos + 1] | join('') | link) if pos + 1 != item.images.length else '#' }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
+                <a href="{{ ([item | slugToUrl, '/gallery?pos=', pos + 1] | join('') | link) if pos + 1 != item.images.length else '#' }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
             </div>
         {% endif %}
         </div>

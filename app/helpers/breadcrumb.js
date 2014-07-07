@@ -7,13 +7,11 @@ var _ = require('underscore');
 
 module.exports = (function() {
     var handlers = {
-        home: {
-            index: function() {
+        categories: {
+            list: function() {
                 navigation.clear.call(this);
                 return '/';
-            }
-        },
-        categories: {
+            },
             show: function() {
                 var page = this.page || this.app.session.get('page') || 0;
                 var state = {
@@ -61,12 +59,12 @@ module.exports = (function() {
             }
         },
         post: {
-            index: function() {
+            categories: function() {
                 navigation.clear.call(this);
                 saveNavigation(this);
                 return '/';
             },
-            subcat: function() {
+            subcategories: function() {
                 navigation.clear.call(this);
                 saveNavigation(this);
                 return '/posting';
@@ -121,7 +119,7 @@ module.exports = (function() {
                 saveNavigation(this, state);
                 return breadcrumb;
             },
-            galery: function() {
+            gallery: function() {
                 var url = '/' + common.slugToUrl(this.item);
 
                 if (this.pos) {
@@ -159,12 +157,12 @@ module.exports = (function() {
                 return breadcrumb;
             }
         },
-        user: {
+        users: {
             myolx: function() {
                 navigation.clear.call(this);
                 return '/';
             },
-            'my-ads': function() {
+            myads: function() {
                 var platform = this.app.session.get('platform');
                 var breadcrumb;
 
