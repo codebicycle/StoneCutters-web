@@ -5,55 +5,26 @@ var _ = require('underscore');
 var localization = require('../../../../config').get('localization', {});
 var helpers = require('../../../../helpers');
 var translations = require('../../../../translations');
-var requireAMD = require;
 
-var View = module.exports = Base.extend({
-    /*constructor: function(options) {
-        var found = false;
-        var prefix;
-        var platform;
-        var location;
-        var Localized;
-        var obj;
-
-        this.options = _.extend(this.options || {}, options || {});
-        this.parseOptions(options);
-        this.name = this.name || this.app.modelUtils.underscorize(this.constructor.id || this.constructor.name);
-        prefix = this.app.session.get('isServer') ? '../../../' : 'app/localized/';
-        platform = this.app.session.get('platform');
-        location = this.app.session.get('location').url;
-        if (localization[platform] && _.contains(localization[platform], location)) {
-            try {
-                Localized = require(prefix + location + '/app/views/' + platform + '/' + this.name);
-                found = true;
-                console.log(prefix + location + '/app/views/' + platform + '/' + this.name);
+module.exports = Base.extend({
+    initialize: function() {
+        if (this.app.session.get('platform') === 'wap') {
+            if (this.tagName === 'div') {
+                this.tagName = 'table';
             }
-            catch (error) {}
-        }
-        if (!found) {
-            try {
-                Localized = require(prefix + 'default/app/views/' + platform + '/' + this.name);
-                found = true;
-                console.log(prefix + 'default/app/views/' + platform + '/' + this.name);
+            if (this.tagName === 'table') {
+                this.attributes = this.getWapAttributes();
             }
-            catch (error) {}
         }
-        if (!found) {
-            Localized = require(prefix + 'common/app/bases/' + platform + '/view');
-            console.log(prefix + 'common/app/bases/' + platform + '/view');
-        }
-        Localized.apply(this, arguments);
-        Backbone.View.apply(this, arguments);
-        if (this.postInitialize) {
-          logger.log('`postInitialize` is deprecated, please use `initialize`');
-          this.postInitialize();
-        }
-        if ((obj = this.options.model || this.options.collection) && this.renderOnRefresh) {
-          obj.on('refresh', this.render, this);
-        }
-        this.render = this.render.bind(this);
-        console.log(this.className);
-    },*/
+    },
+    getWapAttributes: function() {
+        return _.extend(this.attributes || {}, {
+            width: '100%',
+            cellspacing: 0,
+            cellpadding: 4,
+            border: 0
+        }, this.wapAttributes || {});
+    },
     getTemplate: function() {
         var template = this.app.session.get('template');
 
@@ -130,26 +101,45 @@ var View = module.exports = Base.extend({
 });
 
 module.exports.getView = Base.getView = function(app, viewName, entryPath, callback) {
-    var viewPath;
+    var platform = app.session.get('platform');
+    var location = app.session.get('location').url;
+    var View = Base.requireView(viewName, location, platform, entryPath);
+
+    if (typeof callback !== 'function') {
+        return View;
+    }
+    callback(View);
+};
+
+module.exports.requireView = Base.requireView = function(viewName, location, platform, entryPath) {
+    var View;
 
     if (!entryPath) {
-        entryPath = '';
-    }
-    if (app) {
-        var platform = app.session.get('platform');
-        var location = app.session.get('location').url;
-        console.log(entryPath + 'app/localized/' + location + '/app/views/' + platform + '/' + viewName);
-    }
-    viewPath = entryPath + 'app/localized/common/app/views/' + viewName;
-    if (typeof callback === 'function') {
-        if (typeof define !== 'undefined') {
-            requireAMD([viewPath], callback);
+        entryPath = process.cwd();
+        if (entryPath.length === 1) {
+            entryPath = '';
         }
         else {
-            callback(require(viewPath));
+            entryPath += '/';
+        }
+    }
+    entryPath += 'app/localized/';
+    if (localization[platform] && _.contains(localization[platform], location)) {
+        try {
+            return require(entryPath + location + '/app/views/' + platform + '/' + viewName);
+        }
+        catch (error) {
+            location = 'default';
         }
     }
     else {
-        return require(viewPath);
+        location = 'default';
     }
+    if (location === 'default') {
+        try {
+            return require(entryPath + 'default/app/views/' + platform + '/' + viewName);
+        }
+        catch (error) {}
+    }
+    return require(entryPath + 'common/app/views/' + viewName);
 };
