@@ -4,7 +4,7 @@
             {% if language.locale == selectedLanguage %}
                 <li><strong>{{language.name}}</strong></li>
             {% else %}
-                <li><a href="?language={{language.id}}">{{language.name}}</a></li>
+                <li><a href="{{ '/' | link({language: language.id}) }}">{{language.name}}</a></li>
             {% endif %}
         {% endfor %}
     </ul>

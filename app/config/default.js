@@ -18,8 +18,8 @@ module.exports = {
     localization: {
         wap: [],
         html4: [],
-        html5: ['www.olx.com.py'],
-        desktop: []
+        html5: [],
+        desktop: ['www.olx.com.br']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve'],

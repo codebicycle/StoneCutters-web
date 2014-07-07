@@ -28,10 +28,13 @@ module.exports = {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
+            analytics.reset();
+            if (params.target && params.target === 'posting') {
+                analytics.setPage('post#location');
+            }
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                analytics.reset();
                 callback(err, {
                     cities: result.cities.toJSON(),
                     search: params.search,

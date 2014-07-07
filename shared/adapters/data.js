@@ -29,7 +29,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 };
 
 DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
-    var location = req.rendrApp.session.get('location');
+    var location = req.rendrApp.session ? req.rendrApp.session.get('location') : null;
     var start = new Date().getTime();
     var elapsed;
 

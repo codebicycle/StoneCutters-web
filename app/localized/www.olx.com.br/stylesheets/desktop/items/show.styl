@@ -1,0 +1,355 @@
+section#itemPage .breadcrumb h3 {
+    width: 55%;
+}
+section#itemPage .breadcrumb ul {
+    float: right;
+    list-style: none;
+}
+section#itemPage .breadcrumb ul li {
+    width: 2.125rem;
+    height: 1.875rem;
+    float: left;
+    margin: 0 0 0 .2rem;
+}
+section#itemPage .breadcrumb ul li a {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: block;
+    background-image: url(imageUrl/images/html5/itemPageSprite.png);
+    overflow: hidden;
+    text-indent: -9000px;
+}
+section#itemPage .breadcrumb ul li a.share {
+    background-position: 0 0;
+}
+section#itemPage .breadcrumb ul li a.add {
+    background-position: -35px 0;
+}
+section#itemPage .breadcrumb ul li a.remove {
+    background-position: -132px 0;
+}
+section#itemPage section {
+    height: auto;
+    margin: 0 0 .5rem;
+}
+section#itemPage section#noPicture {
+    padding: .5rem;
+    color: #fff;
+    background: #d1d1d1;
+    margin: 0 !important;
+}
+section#itemPage section#noPicture span {
+    width: 1.25rem;
+    height: 0.9375rem;
+    float: left;
+    margin: .1rem .5rem 0 0;
+    background: url(imageUrl/images/html5/itemPageSprite.png) no-repeat -104px 0;
+}
+section#itemPage section#onePicture .slide {
+    position: relative;
+    width: 100% !important;
+}
+section#itemPage section#onePicture .slide:before {
+    content: "";
+    display: block;
+    padding-top: 56.25% !important;
+}
+section#itemPage section#onePicture .slide div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+/*----Slide comon css----*/
+.swiper-container, .swiper-containerRA {
+    margin:0 auto;
+    position:relative;
+    overflow:hidden;
+    -webkit-backface-visibility:hidden;
+    -moz-backface-visibility:hidden;
+    -ms-backface-visibility:hidden;
+    -o-backface-visibility:hidden;
+    backface-visibility:hidden;
+    /* Fix of Webkit flickering */
+    z-index:1;
+}
+.swiper-container, .swiper-containerRA, .swiper-container .swiper-slide, .swiper-containerRA .swiper-slide, {width: 100%; height: auto!important;}
+.swiper-container .swiper-wrapper, .swiper-containerRA .swiper-wrapper{
+    height: auto!important;
+    position:relative;
+    width:100%;
+    -webkit-transition-property:-webkit-transform, left, top;
+    -webkit-transition-duration:0s;
+    -webkit-transform:translate3d(0px,0,0);
+    -webkit-transition-timing-function:ease;
+
+    -moz-transition-property:-moz-transform, left, top;
+    -moz-transition-duration:0s;
+    -moz-transform:translate3d(0px,0,0);
+    -moz-transition-timing-function:ease;
+
+    -o-transition-property:-o-transform, left, top;
+    -o-transition-duration:0s;
+    -o-transform:translate3d(0px,0,0);
+    -o-transition-timing-function:ease;
+    -o-transform:translate(0px,0px);
+
+    -ms-transition-property:-ms-transform, left, top;
+    -ms-transition-duration:0s;
+    -ms-transform:translate3d(0px,0,0);
+    -ms-transition-timing-function:ease;
+
+    transition-property:transform, left, top;
+    transition-duration:0s;
+    transform:translate3d(0px,0,0);
+    transition-timing-function:ease;
+}
+/*-------*/
+.swiper-container .swiper-slide {float: left;}
+
+.swiper-container .slide{position: relative; width: 100%!important;}
+.swiper-container .slide:before{content: ""; display: block; padding-top: 56.25%!important;}
+.swiper-container .slide div{position: absolute; top: 0; left: 0;   bottom: 0; right: 0; background-position: center center; background-repeat: no-repeat; background-size: cover;}
+.swiper-container .slidePagination{width: 100%; height: auto;   display: block; margin: 0 0 0 0; text-align: center; line-height: 0; font-size: 0;}
+.swiper-container .slidePagination span.swiper-pagination-switch{width: 48px;   height: 4px; background: #494949; display: inline-block;}
+.swiper-container .slidePagination span.swiper-pagination-switch.swiper-active-switch{background: #ff7700;}
+
+
+/*IE10 Windows Phone 8 Fixes*/
+.swiper-wp8-horizontal {
+    -ms-touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+    -ms-touch-action: pan-x;
+}
+section#itemPage section#description, section#itemPage section#optionals {
+    padding: 0 .5rem;
+}
+section#itemPage section#description span {
+    float: left;
+    margin: .5rem 0 0;
+    font-size: 0.6875rem;
+    color: #494949;
+}
+section#itemPage section#description span, section#itemPage section#description h1, section#itemPage section#description p {
+    float: left;
+}
+section#itemPage section#description h2 {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #ff7700;
+}
+section#itemPage section#description h1, section#itemPage section#description p {
+    color: #666;
+    width: 100%;
+}
+section#itemPage section#description h1 {
+    margin: .5rem 0;
+    font-size: 1.25rem;
+    font-weight: normal;
+}
+section#itemPage section#description p {
+    font-size: .75rem;
+}
+section#itemPage section#optionals ul {
+    float: left;
+    color: #494949;
+    font-size: .75rem;
+}
+section#itemPage section#optionals ul li {
+    display: inline-block;
+    margin: 0 0.375rem 0.375rem 0;
+}
+section#itemPage section#map img {
+    width: 100%;
+}
+section#itemPage aside.relatedAds {
+    margin: 0 .5rem;
+    padding: .5rem 0;
+    background: #eaeaea;
+    text-align: center;
+}
+section#itemPage aside.relatedAds a.btns, section#itemPage section.reply div.btnCenter input {
+    display: inline-block;
+    padding: .5rem 4rem;
+    font-size: 1rem;
+}
+section#itemPage aside.relatedAds a.btns {
+    margin: .5rem;
+}
+
+.swiper-containerRA .swiper-slide {float: left;}
+
+.swiper-containerRA .slide{position: relative; width: 100%!important;}
+.swiper-containerRA .slide:before{content: ""; display: block; padding-top: 80%!important;}
+.swiper-containerRA .slide div{position: absolute; top: 0; left: 0; bottom: 0; right: 0; margin: 0 .1em 0 0; background-position: center center; background-repeat: no-repeat; background-size: cover;}
+.swiper-containerRA a{width: 100%; height: 100%; display: block;}
+aside.relatedAds a#relatedBtn{padding: .5em 1em; margin: .5em; display: inline-block; background: #FF7700; border-radius: .5em; border: 1px solid #BD5901; color: #fff;}
+
+section#itemPage section.reply {
+    margin: .5rem !important;
+    padding: .5rem;
+    background: #eaeaea;
+}
+section#itemPage section.reply span {
+    display: block;
+    margin: 0 0 .7rem 0;
+    font-size: 0.75rem;
+    color: #494949;
+}
+section#itemPage section.reply form {
+    display: block;
+}
+section#itemPage section.reply label {
+    display: block;
+    margin: 0 0 0 .2rem;
+    color: #494848;
+    font-size: 1rem;
+}
+section#itemPage section.reply form > textarea, section#itemPage section.reply form > input {
+    width: 100%;
+    display: block;
+    padding: .5rem;
+    margin: .2rem 0 .6rem;
+    -moz-box-sizing: border-box;
+    border: 1px solid #6891C8;
+    border-radius: 0.5em;
+}
+section#itemPage section.reply form > textarea {
+    height: 6rem;
+    resize: none;
+}
+section#itemPage section.reply form > input {
+    height: 2.3rem;
+}
+section#itemPage section.reply div.replySubmit {
+    display: block;
+    text-align: center;
+}
+section#itemPage section.reply form small{
+    color: #FF0000;
+    display: block;
+    margin: -0.5rem 0 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.25rem 0 0 0.5rem;
+}
+
+section.actions{width: 100%; margin: 0!important; position: fixed; left: 0; bottom: 0; background: #fff; z-index: 10; background: #fff;}
+section.actions .background{width: 5%; height: 100%; position: absolute; top: 0; right: 0; background: #FF7700; z-index: 1;}
+section.actions > span{width: 100%; height: 1.3em; display: block; position: absolute; top: -1.3em; padding: 0 0 0 .5em; background: #333; color: #fff; opacity: .85;  z-index: 10;}
+section.actions > span a[href^=tel] {color: #fff;}
+section.actions > div.action{position: relative; width: 33%!important; float: left; margin-left: .5%; cursor: pointer; z-index: 10;}
+section.actions > div.action.email{margin: 0;}
+section.actions > div.action:before{content: ""; display: block; padding-top: 50%!important;}
+section.actions > div.action > div, section.actions > div.action > a{position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-repeat: no-repeat; background-position: center 20%; background-color: #FF7700; background-size: 32%;}
+section.actions > div.action.call > a{background-image: url(imageUrl/images/html5/phone.png);}
+section.actions > div.action.sms > a{background-image: url(imageUrl/images/html5/sms.png);}
+section.actions > div.action.email > div{background-image: url(imageUrl/images/html5/email.png);}
+section.actions > div.action > div span, section.actions > div.action > a span{width: 100%; position: absolute; left: 0; bottom: .1em; text-align: center; color: #fff; font-size: .8em;}
+
+section.actions > div.action.fullWidth{width: 100%!important;}
+section.actions > div.action.fullWidth:before{padding-top: 16%!important;}
+section.actions > div.action.fullWidth > a, section.actions > div.action.fullWidth > div{background-size: 10%;}
+
+section.actions > div.action.midWidth{width: 49%!important;}
+section.actions > div.action.midWidth:before{padding-top: 32%!important;}
+section.actions > div.action.midWidth > a, section.actions > div.action.midWidth > div{background-size: 20%;}
+
+@media screen and (orientation:landscape) {
+    section.actions > div.action:before{padding-top: 28%!important;}
+    section.actions > div.action > div, section.actions > div.action > a{background-size: 15%;}
+}
+
+
+/*----Galery----*/
+.galCont {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; background: #000;}
+
+/*----Visible----*/
+.galCont.visible {display: block;}
+.swiper-container-gal, .swiper-container-gal .swiper-slide {width: 100%; height: 100%;}
+.galCont .title{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #000;
+    border-bottom: 1px solid #42403f;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
+    text-align: center;
+    display: block;
+    padding: 13px; z-index: 100;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.swiper-container-gal .swiper-slide , #galContOne .galCont-container {float: left; background-position: center center; background-repeat: no-repeat; background-size: contain;}
+.galCont .galActions{width: 100%; height: 20px; position: absolute; left: 0; bottom: 0;
+    background: #000000;
+    border-top: 1px solid #42403f;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
+    text-align: center;
+    height: 44px;
+    display: table;
+    table-layout: fixed; z-index: 100;
+}
+.galActions > div{
+    display: table-cell; outline: none; -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.galActions > div > span{width: 44px; height: 44px; margin: 0 auto; display: block; background-image: url(imageUrl/images/html5/itemPageSprite.png); background-repeat: no-repeat;}
+.galActions > div.close > span{background-position: -3px -40px;}
+.galActions > div.pause > span{background-position: -170px -40px;}
+.galActions > div.pause.play > span {background-position: -90px -40px!important;}
+.galActions > div.prev > span{background-position: -45px -40px;}
+.galActions > div.next > span{background-position: -134px -40px;}
+
+
+.galActions > div.closeDis > span{background-position: -3px -84px;}
+.galActions > div.playDis > span{background-position: -90px -84px;}
+.galActions > div.prevDis > span{background-position: -45px -84px;}
+.galActions > div.nextDis > span{background-position: -134px -84px;}
+
+.swiper-container-gal {
+    height: 100% !important;
+    text-align: center;
+    width: 100%;
+    margin:0;
+    position:relative;
+    overflow:hidden;
+    -webkit-backface-visibility:hidden;
+    -moz-backface-visibility:hidden;
+    -ms-backface-visibility:hidden;
+    -o-backface-visibility:hidden;
+    backface-visibility:hidden;
+    /* Fix of Webkit flickering */
+    z-index:1;
+}
+
+/*----Popups----*/
+.popup-container > div .facebookButton:before {background-image: url(imageUrl/images/html5/facebook.png);}
+.popup-container > div .twitterButton:before {background-image: url(imageUrl/images/html5/twitter.png);}
+
+
+.msgCont {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; -moz-transition: all 400ms ease-in-out 0ms; -webkit-transition: all 400ms ease-in-out 0ms; transition: all 400ms ease-in-out 0ms;}
+.msgCont-wrapper {display: table-cell; width: 100%; height: 100%; padding: 1rem; text-align: center; vertical-align: middle; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+.msgCont-container {display: block; text-align: center; overflow: hidden; width: 70%; margin: 0 auto; padding: 1rem; background: rgba(51, 51, 51, .75); -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; -moz-transform: scale(0); -moz-transition: all 250ms ease-in-out 0ms; -webkit-transform: scale(0); -webkit-transition: all 250ms ease-in-out 0ms; transform: scale(0); transition: all 250ms ease-in-out 0ms; color: #fff; font-size: 1rem;}
+
+.msgCont.visible {display: table;}
+.msgCont.visible .msgCont-container {-moz-transform: scale(1); -webkit-transform: scale(1); transform: scale(1);}

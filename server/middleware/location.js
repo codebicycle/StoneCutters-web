@@ -17,13 +17,16 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             var location = req.param('location');
             var previousLocation = req.rendrApp.session.get('siteLocation');
+            var redirect = false;
 
             if (!_.contains(excludedUrls.data, req.path)) {
                 if (!location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
-                    
                     return res.redirect(302, utils.link(req.originalUrl, req.rendrApp, {
                         location: previousLocation
                     }));
+                } 
+                else if (location && location.split('.').shift() === 'www') {
+                    redirect = true;
                 }
             }
 
@@ -78,6 +81,13 @@ module.exports = function(dataAdapter, excludedUrls) {
                 done();
             }
 
+            function redirection(done) {
+                if (redirect) {
+                    return res.redirect(302, utils.link(utils.removeParams(req.originalUrl, 'location'), req.rendrApp));
+                }
+                done();
+            }
+
             function fail(err) {
                 res.send(400, err);
             }
@@ -104,6 +114,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 .then(fetch)
                 .then(check)
                 .then(store)
+                .then(redirection)
                 .val(next);
         };
 

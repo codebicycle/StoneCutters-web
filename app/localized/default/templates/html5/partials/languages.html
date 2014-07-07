@@ -3,7 +3,7 @@
 	{% if id == selectedLanguage %}
 		<li><strong>{{language.name}}</strong></li>
 	{% else %}
-		<li><a href="{{ ['?language=', id] | join('') | link }}">{{language.name}}</a></li>
+		<li><a href="{{ '/' | link({language: id}) }}">{{language.name}}</a></li>
 	{% endif %}
 {% endfor %}
 </ul>

@@ -1,0 +1,22 @@
+{% from macros import Breadcrumb %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["postingerror.Error"]) }}
+<div class="errorPage">
+    <p><strong>{{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}</strong></p>
+    <p>{{ dictionary["defaulthtmlhead.PleaseTryOneOfTheFollowingOptions"] }}</p>
+    <ul>
+        <li>{{ dictionary["defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect"] }}</li>
+        {% if breadcrumb and (breadcrumb != '/' ) %}
+            <li><a href="{{ breadcrumb | link }}">{{ dictionary["defaulthtmlhead.GoBackToThePreviousPage"] }}</a></li>
+        {% endif %}
+        {% set homeLink = ('/' | link ) %}
+        {% set backToHome = dictionary["defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage"] | replace('<<LINK_HOME_PAGE>>', '<a href="' + homeLink + '">') | replace('<</LINK_HOME_PAGE>>', '</a>') | replace ('<<BRAND>>','OLX') %}
+        <li>{{ backToHome }}</li>
+    </ul>
+    {% if error %}
+        <div>
+            <h2>{{ error.statusCode }}</h2>
+            <pre style="display: block; margin: 0;">{{ error.detail }}</pre>
+        </div>
+    {% endif %}
+</div>

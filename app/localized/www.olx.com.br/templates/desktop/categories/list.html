@@ -1,0 +1,22 @@
+{% view 'locations/select' %}
+{% view 'partials/search' %}
+<section id="categories" class="list">
+    <ul class="{{ icons[icons.length - 1] }}-icons">
+        {% for category in categories %}
+            <li>
+                <h2>
+                    <a href="{{ category | slugToUrl | link }}" >
+                        <span class="icon cat-{{ category.id }}"></span>
+                        {{category.trName}}
+                    </a>
+                </h2>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if register_success %}
+        <input type="hidden" value="true"  class="registerSuccess">
+    {% endif %}
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
+</section>
+{% view 'pages/interstitial' %}

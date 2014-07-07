@@ -5,7 +5,7 @@ var _ = require('underscore');
 var helpers = require('../../../../../helpers');
 
 module.exports = Base.extend({
-    className: 'items_galery_view',
+    className: 'items_gallery_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -18,4 +18,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/galery';
+module.exports.id = 'items/gallery';
