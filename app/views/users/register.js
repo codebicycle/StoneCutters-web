@@ -13,13 +13,6 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var params = this.options.params;
 
-        /*if (params.err && typeof params.err === 'string') {
-            params.err = params.err.split(',');
-        }
-        if (params.errFields && typeof params.errFields === 'string') {
-            params.errFields = params.errFields.split(',');
-        }*/
-
         return _.extend({}, data, {
             location: this.app.session.get('siteLocation'),
             user: this.app.session.get('user'),

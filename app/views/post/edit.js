@@ -45,8 +45,7 @@ module.exports = Base.extend({
                 $('#' + $current).css({'background-image' : 'url(' + $imageUrl + ')'}).addClass('fill').removeClass('empty').removeClass('loading');
             });
         });
-    },
-
+    }
 });
 
 function parse(location) {
