@@ -41,8 +41,7 @@ function redirect(done) {
             done.abort();
             return;
         }
-        done();
-        return;
+        return done();
     }
     this.redirectTo(common.link(path.slice(0, -1), this.app), {
         status: 301
@@ -140,14 +139,34 @@ function setLanguage(params, done) {
     if (isServer) {
         return done();
     }
-    var languages = this.app.session.get('languages');
     var selectedLanguage = this.app.session.get('selectedLanguage');
+    var languages = this.app.session.get('languages');
+    var language = (params ? params.language : undefined);
+    var redirect;
+    var url;
 
-    if (!params || !params.language || selectedLanguage === params.language || !languages._byId[params.language]) {
+    if (selectedLanguage === languages.models[0].locale && language) {
+        redirect = true;
+    }
+    else if (selectedLanguage !== languages.models[0].locale && !language) {
+        redirect = true;
+    }
+    else if (language && language !== selectedLanguage) {
+        redirect = true;
+    }
+    if (redirect) {
+        done.abort();
+        url = URLParser.parse(this.app.session.get('url'));
+        url = [url.pathname, (url.search || '')].join('');
+        return common.redirect.call(this.app.router || this, url, null, {
+            status: 200
+        });
+    }
+    if (!params || !language || selectedLanguage === language || !languages._byId[language]) {
         return done();
     }
     this.app.session.persist({
-        selectedLanguage: params.language
+        selectedLanguage: language
     });
     done();
 }
