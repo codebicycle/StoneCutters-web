@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     return function task() {
         var asynquence = require('asynquence');
         var _ = require('underscore');
-        var config = require('../../server/config');
+        var config = require('../../app/config');
 
         var done = this.async();
         var root = 'app/localized';
@@ -22,26 +22,23 @@ module.exports = function(grunt) {
         }
 
         function check(country, platform) {
-            var dirPath = root + '/' + country;
-            var dirStylePath = dirPath + '/stylesheets';
-            var dirTemplatesPath = dirPath + '/templates';
+            var dir = root + '/' + country;
+            var stylesheets = dir + '/stylesheets';
+            var templates = dir + '/templates';
+            var views = dir + '/app/views';
 
-            // Create country directory.
-            create(dirPath);
-
-            // Create styleheets directory.
-            create(dirStylePath);
-            create(dirStylePath + '/' + platform);
-
-            // Create templates directory.
-            create(dirTemplatesPath);
-            create(dirTemplatesPath + '/' + platform);
+            create(dir);
+            create(stylesheets);
+            create(stylesheets + '/' + platform);
+            create(templates);
+            create(templates + '/' + platform);
+            create(views + '/' + platform);
         }
 
         function create(filePath) {
             if (!grunt.file.exists(filePath)) {
                 grunt.file.mkdir(filePath);
-            }   
+            }
         }
 
         function fail(err) {

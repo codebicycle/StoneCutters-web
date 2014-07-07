@@ -8,20 +8,20 @@ module.exports = function(grunt) {
             },
             files: [{
                 expand: true,
-                cwd: 'public/js/app',
-                src: ['**/*.js', '!translations.js', '!templates/**/*.js'],
+                cwd: 'public/js/src',
+                src: ['**/*.js', '!common/**/*', '!**/templates/**/*'],
                 dest: 'public/js/min'
             }]
         },
-        translations: {
+        common: {
             options: {
                 sourceMap: true
             },
             files: [{
                 expand: true,
-                cwd: 'public/js/app',
-                src: 'translations.js',
-                dest: 'public/js/min'
+                cwd: 'public/js/src/common',
+                src: '**/*.js',
+                dest: 'public/js/min/common'
             }]
         },
         templates: {
@@ -30,8 +30,8 @@ module.exports = function(grunt) {
             },
             files: [{
                 expand: true,
-                cwd: 'public/js/app',
-                src: 'templates/**/*.js',
+                cwd: 'public/js/src',
+                src: '**/templates/**/*.js',
                 dest: 'public/js/min'
             }]
         }

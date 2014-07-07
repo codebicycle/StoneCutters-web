@@ -1,6 +1,7 @@
 'use strict';
 
 var BaseClientRouter = require('rendr/client/router');
+var BaseView = require('./localized/common/app/bases/view');
 
 var Router = module.exports = function Router(options) {
     BaseClientRouter.call(this, options);
@@ -91,4 +92,41 @@ Router.prototype.getParamsHash = function(pattern, paramsArray, search) {
 
 Router.prototype.getControllerPath = function(controllerName) {
     return this.options.paths.controllerDir + '/' + controllerName;
+};
+
+Router.prototype.getRenderCallback = function(route) {
+  return function renderCallback(err, viewPath, locals) {
+    if (err) {
+        return this.handleErr(err, route);
+    }
+
+    var _router = this;
+    var View;
+    if (this.currentView) {
+        this.currentView.remove();
+    }
+    var defaults = this.defaultHandlerParams(viewPath, locals, route);
+
+    viewPath = defaults[0];
+    locals = defaults[1];
+    locals = locals || {};
+    _.extend(locals, {
+        fetch_summary: BaseView.extractFetchSummary(this.app.modelUtils, locals)
+    });
+    locals.app = this.app;
+    this.getView(this.app, viewPath, this.options.entryPath, function callback(View) {
+        _router.currentView = new View(locals);
+        _router.renderView();
+        _router.trigger('action:end', route, false);
+    });
+  }.bind(this);
+};
+
+Router.prototype.getView = function(app, key, entryPath, callback) {
+    BaseView.getView(app, key, entryPath, function done(View) {
+        if (!_.isFunction(View)) {
+            throw new Error("View '" + key + "' not found.");
+        }
+        callback(View);
+    });
 };
