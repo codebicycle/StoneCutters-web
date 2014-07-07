@@ -59,6 +59,13 @@ function handleItems(category, subcategory, params, callback) {
         analytics.addParam('subcategory', subcategory.toJSON());
         result.analytics = analytics.generateURL.call(this);
 
+        this.app.session.update({
+            postingLink: {
+                category: category.get('id'),
+                subcategory: subcategory.get('id')
+            }
+        });
+
         seo.addMetatag.call(this, 'title', subcategory.get('trName'));
         seo.addMetatag.call(this, 'description', subcategory.get('trName'));
         seo.update();
@@ -80,6 +87,12 @@ function handleShow(category, params, callback) {
     analytics.reset();
     analytics.addParam('user', this.app.session.get('user'));
     analytics.addParam('category', category.toJSON());
+
+    this.app.session.update({
+        postingLink: {
+            category: category.get('id')
+        }
+    });
 
     seo.addMetatag.call(this, 'title', category.get('trName'));
     seo.addMetatag.call(this, 'description', category.get('trName'));

@@ -121,6 +121,7 @@ module.exports = {
                     var model = result.items.models[0];
                     var user = app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
+                    var category;
                     
                     result.relatedItems = model.get('data');
                     result.user = user;
@@ -130,11 +131,19 @@ module.exports = {
                     analytics.reset();
                     analytics.addParam('user', user);
                     analytics.addParam('item', item);
-                    analytics.addParam('category', data.categories.get(subcategory.get('parentId')).toJSON());
+                    category = data.categories.get(subcategory.get('parentId'));
+                    analytics.addParam('category', category.toJSON());
                     analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = analytics.generateURL.call(this);
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
                     result.favorite = favorite;
+
+                    this.app.session.update({
+                        postingLink: {
+                            category: category.get('id'),
+                            subcategory: subcategory.get('id')
+                        }
+                    });
 
                     seo.addMetatag('title', data.item.shortTitle());
                     seo.addMetatag('description', data.item.shortDescription());
