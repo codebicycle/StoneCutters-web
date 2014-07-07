@@ -25,6 +25,21 @@ function readPostButtonConfig(platform, currentRoute) {
     return (match) ? false : true;
 }
 
+function getPostLink() {
+    var postLink = this.app.session.get('postingLink');
+    var link;
+
+    if (!postLink) {
+        return '';
+    }
+    link = ['/', postLink.category];
+    if (postLink.subcategory) {
+        link.push('/');
+        link.push(postLink.subcategory);
+    }
+    return link.join('');
+}
+
 module.exports = Base.extend({
     className: 'header_index_view',
     wapAttributes: {
@@ -36,11 +51,13 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var currentRoute = this.app.session.get('currentRoute');
         var postButton = readPostButtonConfig(platform, currentRoute);
+        var postLink = getPostLink.call(this);
 
         return _.extend({}, data, {
             location: this.app.session.get('location'),
             user: this.app.session.get('user'),
-            postButton: postButton
+            postButton: postButton,
+            postLink: postLink
         });
     },
     postRender: function() {
@@ -70,6 +87,7 @@ module.exports = Base.extend({
         }.bind(this));
 
         $('body').on('change:location', this.changeLocation.bind(this));
+        $('body').on('update:postingLink', this.updatePostingLink.bind(this));
     },
     changeLocation: function (e, siteLocation) {
         this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {
@@ -104,6 +122,18 @@ module.exports = Base.extend({
                 $link.attr({
                     href: href
                 });
+            }
+        }.bind(this));
+    },
+    updatePostingLink: function(e) {
+        this.$('.posting-link').each(function(i, link) {
+            var $link = $(link);
+            var href = $link.attr('href');
+            var postLink;
+            
+            if (~href.indexOf('/posting')) {
+                postLink = getPostLink.call(this);
+                $link.attr('href', href.replace(/\/posting(\/\d*)?(\/\d*)?/, ['/posting', postLink].join('')));
             }
         }.bind(this));
     }

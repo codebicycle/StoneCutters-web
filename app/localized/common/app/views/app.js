@@ -18,6 +18,7 @@ module.exports = Base.extend({
             window.setTimeout(function onTimeout(){
                 $progressBar.hide();
                 $progressBar.width('0');
+                $('body').trigger('update:postingLink');
             }, 500);
         }
     },

@@ -116,6 +116,7 @@ function setInterstitial() {
 
 function clearSession(done) {
     this.app.session.clear('page');
+    this.app.session.clear('postingLink');
     done();
 }
 
