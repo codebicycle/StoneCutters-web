@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('underscore');
+var URLParser = require('url');
 var config = require('../config');
 
 module.exports = function(dataAdapter, excludedUrls) {
@@ -23,6 +25,25 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.redirect(301, req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
             }
 
+            function check(err, response, body) {
+                var host = req.headers.host;
+                var platform;
+
+                if (err) {
+                    return fail(err);
+                }
+                platform = body.web_platform || 'wap';
+
+                if (platform !== req.subdomains.pop()) {
+                    host = host.split('.');
+                    host.shift();
+                    res.set('Vary', 'User-Agent');
+                    res.redirect(302, [req.protocol, '://', platform, '.', host.join('.'), req.originalUrl].join(''));
+                    return;
+                }
+                next();
+            }
+
             function fail(err) {
                 res.send(400, err);
             }
@@ -31,6 +52,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), callback);
             }
             else if (req.subdomains.length <= 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
+                if (req.headers.referer) {
+                    var referer = URLParser.parse(req.headers.referer).hostname.split('.');
+
+                    if (!_.contains(referer, 'olx')) {
+                        dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), check);
+                        return;
+                    }
+                }
                 next();
             }
             else {
