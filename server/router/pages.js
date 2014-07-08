@@ -150,7 +150,7 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function graphiteTracking(req) {
             graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
-            graphite.send([req.query.locNm, 'devices', req.query.osNm || 'Others', req.query.platform], 1, '+');
+            graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
         }
 
         function googleTracking(req) {
