@@ -33,7 +33,8 @@ describe('server', function test() {
             describe('login', function test() {
                 before(function before(done) {
                     server = rendr.createServer({
-                        dataAdapter: dataAdapter
+                        dataAdapter: dataAdapter,
+                        viewsPath: 'app/localized/common/app/views'
                     });
                     var router = new Router(server);
 

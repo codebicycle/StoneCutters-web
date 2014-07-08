@@ -99,7 +99,7 @@ describe('app', function test() {
                     server.configure(rendrConfiguration);
                     router.route();
                     request(server.expressApp)
-                        .get('/nf/search/a?location=' + utils.locations.in.www)
+                        .get('/nf/search/a')
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .end(end);
@@ -138,7 +138,7 @@ describe('app', function test() {
                         response.should.have.property('id');
                         response.should.have.property('random');
                         response.should.have.property('referer', '-');
-                        response.should.have.property('page', 'nocat/search/');
+                        response.should.have.property('page', '/nocat/search/');
                         response.should.have.property('custom');
                         response.custom = JSON.parse(response.custom);
                         response.custom.should.have.property('page_name', 'listing_all');
@@ -154,7 +154,7 @@ describe('app', function test() {
                 it('should have others items when change page 1 to 2', function test(done) {
                     var beforeResult = _.clone(result);
                     request(server.expressApp)
-                        .get('/nf/search/a/-p-2?location=' + utils.locations.in.www)
+                        .get('/nf/search/a/-p-2')
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
@@ -163,7 +163,6 @@ describe('app', function test() {
                     function end(err, res) {
                         response = res;
                         (function equality(before, after) {
-                            // Necesary for 'use strict'
                             var x;
 
                             x = before.should.be.not.empty;
@@ -181,7 +180,7 @@ describe('app', function test() {
                 });
                 it('should not redirect on empty search', function test(done) {
                     request(server.expressApp)
-                        .get('/nf/search?location=' + utils.locations.in.www)
+                        .get('/nf/search')
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
@@ -286,7 +285,7 @@ describe('app', function test() {
                     server.configure(rendrConfiguration);
                     router.route();
                     request(server.expressApp)
-                        .get('/?location=' + utils.locations.in.www)
+                        .get('/')
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .end(end);
@@ -295,7 +294,7 @@ describe('app', function test() {
                         response = res;
 
                         request(server.expressApp)
-                            .get('/' + url + '?location=' + utils.locations.in.www)
+                            .get('/' + url)
                             .set('host', utils.getHost('html4', 'in'))
                             .set('user-agent', utils.userAgents.html4)
                             .set('cookie', response.get('set-cookie'))
@@ -360,7 +359,7 @@ describe('app', function test() {
                 it('should have other item when change itemId', function test(done) {
                     var beforeResult = _.clone(result);
                     request(server.expressApp)
-                        .get('/' + helpers.common.slugToUrl(items[1]) + '?location=' + utils.locations.in.www)
+                        .get('/' + helpers.common.slugToUrl(items[1]))
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
@@ -369,7 +368,6 @@ describe('app', function test() {
                     function end(err, res) {
                         response = res;
                         (function equality(before, after) {
-                            // Necesary for 'use strict'
                             var x;
 
                             x = before.should.be.not.empty;
@@ -387,7 +385,7 @@ describe('app', function test() {
                 });
                 it('should redirect to the correct slug item', function test(done) {
                     request(server.expressApp)
-                        .get('/des-iid-' + url.split('-iid-')[1] + '?location=' + utils.locations.in.www)
+                        .get('/des-iid-' + url.split('-iid-')[1])
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
@@ -405,7 +403,7 @@ describe('app', function test() {
                 });
                 it('should redirect to the 404', function test(done) {
                     request(server.expressApp)
-                        .get('/des-iid-1234567890?location=' + utils.locations.in.www)
+                        .get('/des-iid-1234567890')
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
