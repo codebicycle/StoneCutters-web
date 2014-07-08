@@ -58,7 +58,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     if (refererHost !== req.headers.host.split(':').shift()) {
                         refererHost = (refererHost || '').split('.');
                         
-                        if (!_.intersection(config.get('hosts', ['olx']), refererHost)) {
+                        if (!_.intersection(config.get('hosts', ['olx']), refererHost).length) {
                             dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), check);
                             return;
                         }
