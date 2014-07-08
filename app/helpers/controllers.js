@@ -69,7 +69,17 @@ function setInterstitial() {
 
     path = this.app.session.get('path');
     paths = config.get(['interstitial', 'ignorePath'], []);
-    if (_.contains(paths, path)) {
+    paths = _.filter(paths, function filterInterstitial(ignorePath) {
+        if (_.isString(ignorePath)) {
+            return path === ignorePath;
+        }
+        return ignorePath.test(path);
+    });
+    if (paths.length) {
+        return false;
+    }
+
+    if (utils.params(this.app.session.get('url') || '', 'target') === 'posting') {
         return false;
     }
 
