@@ -149,12 +149,8 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/analytics/pageview.gif', handler);
 
         function graphiteTracking(req) {
-            var location = req.rendrApp.session.get('location');
-            var device = req.rendrApp.session.get('device') || {};
-            var platform = req.rendrApp.session.get('platform');
-
-            graphite.send([location.name, 'pageview', req.query.platform], 1, '+');
-            graphite.send([location.name, 'devices', device.osName || 'Others', platform], 1, '+');
+            graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
+            graphite.send([req.query.locNm, 'devices', req.query.osNm || 'Others', req.query.platform], 1, '+');
         }
 
         function googleTracking(req) {
@@ -175,9 +171,8 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var location = req.rendrApp.session.get('location');
             var env = configClient.get(['environment', 'type'], 'development');
-            var countryId = location.id;
+            var countryId = req.query.locId;
             var atiConfig;
             var analytic;
 
@@ -189,7 +184,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 analytic = new Analytic('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
+                    clientId: req.query.cliId
                 });
                 analytic.trackPage({
                     page: req.query.page,
@@ -235,9 +230,8 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var location = req.rendrApp.session.get('location');
             var env = configClient.get(['environment', 'type'], 'development');
-            var countryId = location.id;
+            var countryId = req.query.locId;
             var atiConfig;
             var analytic;
 
@@ -249,7 +243,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 analytic = new Analytic('ati-event', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
+                    clientId: req.query.cliId
                 });
                 analytic.trackPage({
                     custom: req.query.custom,
