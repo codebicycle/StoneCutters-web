@@ -22,7 +22,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 platform = body.web_platform || 'wap';
                 res.set('Vary', 'User-Agent');
-                res.redirect(301, req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
+                res.redirect(302, req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
             }
 
             function check(err, response, body) {
@@ -47,17 +47,21 @@ module.exports = function(dataAdapter, excludedUrls) {
             function fail(err) {
                 res.send(400, err);
             }
-
-            if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && 'olx' === req.subdomains.shift())) && 'm' === req.subdomains.pop()) {
+            
+            if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && _.contains(config.get('hosts', ['olx']), req.subdomains.shift()))) && 'm' === req.subdomains.pop()) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), callback);
             }
             else if (req.subdomains.length <= 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
                 if (req.headers.referer) {
-                    var referer = URLParser.parse(req.headers.referer).hostname.split('.');
+                    var refererHost = URLParser.parse(req.headers.referer).hostname;
 
-                    if (!_.contains(referer, 'olx')) {
-                        dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), check);
-                        return;
+                    if (refererHost !== req.headers.host.split(':').shift()) {
+                        refererHost = (refererHost || '').split('.');
+                        
+                        if (!_.intersection(config.get('hosts', ['olx']), refererHost)) {
+                            dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), check);
+                            return;
+                        }
                     }
                 }
                 next();
@@ -65,7 +69,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             else {
                 var subdomains = req.subdomains.reverse();
 
-                if (subdomains[subdomains.length - 1] === 'olx') {
+                if (_.contains(config.get('hosts', ['olx']), subdomains[subdomains.length - 1])) {
                     subdomains = subdomains.slice(0, subdomains.length - 1);
                 }
                 res.set('Vary', 'User-Agent');

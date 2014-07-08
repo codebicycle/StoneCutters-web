@@ -108,3 +108,13 @@ publicEnvironments:
   staging:
     host: '.m-staging.olx.com'
     mask: '.m.olx.com.py'
+
+hosts:
+  - olx
+  - haibao
+  - olxtunisie
+  - olx-nederland
+  - olxmonaco
+  - haibao
+  - olxalgerie
+  - jaovat
