@@ -54,6 +54,7 @@ function generateURL() {
     var pageGoogle = utils.get(config, ['google', 'pages', page], '');
     var configAti = utils.get(config, ['ati', 'params', page], {});
     var sid = this.app.session.get('sid');
+    var location = this.app.session.get('location');
     var params = {};
 
     if (sid) {
@@ -66,6 +67,10 @@ function generateURL() {
     params.page = google.generatePage.call(this, pageGoogle, query.params);
     params.platform = this.app.session.get('platform');
     params.custom = ati.generateParams.call(this, configAti, query.params);
+    params.locNm = location.name;
+    params.locId = location.id;
+    params.cliId = this.app.session.get('clientId').substr(24);
+    params.osNm = this.app.session.get('device').osName;
 
     return '/analytics/pageview.gif?' + stringifyParams(params);
 }
