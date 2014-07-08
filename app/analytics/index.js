@@ -70,7 +70,7 @@ function generateURL() {
     params.locNm = location.name;
     params.locId = location.id;
     params.cliId = this.app.session.get('clientId').substr(24);
-    params.osNm = this.app.session.get('device').osName;
+    params.osNm = this.app.session.get('device').osName  || 'Others';
 
     return '/analytics/pageview.gif?' + stringifyParams(params);
 }
