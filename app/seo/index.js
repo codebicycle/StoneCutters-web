@@ -15,7 +15,18 @@ var specials = {
         head.metatags.description = content + getLocationName.call(this, ' - ');
     },
     canonical: function(content) {
-        head.canonical = content;
+        var platform = this.app.session.get('platform');
+        var protocol;
+        var host;
+        var url;
+
+        if (platform === 'wap') {
+            protocol = this.app.session.get('protocol');
+            host = this.app.session.get('host');
+            url = this.app.session.get('url');
+
+            head.canonical = [protocol, '://', host, utils.removeParams(url, 'sid')].join('');
+        }
     },
     'google-site-verification': function(content) {
         var platform = this.app.session.get('platform');
