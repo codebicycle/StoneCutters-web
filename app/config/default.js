@@ -43,7 +43,7 @@ module.exports = {
         enabled: false,
         clicks: 1,
         time: 432000000,
-        ignorePath: ['/health', '/stats', '/stats/memory', '/stats/threads', '/stats/check', '/stats/sockets', '/login', '/interstitial', '/404', '/500', '/analytics/pageview.gif', '/analytics/pageevent.gif', /^\/posting(\/\d+)?(\/\d+)?$/],
+        ignorePath: ['/health', '/login', '/interstitial', '/404', '/500', /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
