@@ -68,7 +68,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var selectedLanguage = app.session.get('selectedLanguage');
                 var language = req.param('language');
                 var redirect;
-                
+
                 if (selectedLanguage === languages.models[0].locale && language) {
                     redirect = true;
                 }

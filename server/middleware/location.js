@@ -24,7 +24,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return res.redirect(302, utils.link(req.originalUrl, req.rendrApp, {
                         location: previousLocation
                     }));
-                } 
+                }
                 else if (location && location.split('.').shift() === 'www') {
                     redirect = true;
                 }

@@ -62,7 +62,7 @@ describe('server', function test() {
                 server.expressApp.configure(expressConfiguration(server.expressApp));
                 server.configure(rendrConfiguration);
                 request(server.expressApp)
-                    .get('/?language=' + languageId)
+                    .get('/')
                     .set('host', hosts[0])
                     .set('user-agent', userAgents[0])
                     .end(end);
@@ -104,7 +104,7 @@ describe('server', function test() {
                 });
                 it('should be different for different hosts', function test(done) {
                     request(server.expressApp)
-                        .get('/?location=www.olx.in')
+                        .get('/')
                         .set('host', hosts[2])
                         .set('user-agent', userAgents[0])
                         .set('cookie', response.get('set-cookie'))
