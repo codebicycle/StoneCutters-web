@@ -30,7 +30,7 @@ var linkParams = {
             if (selectedLanguage) {
                 languages = this.session.get('languages');
 
-                if (selectedLanguage === languages.models[0].locale) {
+                if (languages && selectedLanguage === languages.models[0].locale) {
                     href = removeParams(href, 'language');
                 }
                 else {
