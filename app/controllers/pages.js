@@ -162,6 +162,9 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
+            if (this.app.session.get('isServer')) {
+                this.app.req.res.setHeader('Edge-Control', 'dca=esi');
+            }
             callback();
         }
     }
