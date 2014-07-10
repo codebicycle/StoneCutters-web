@@ -62,7 +62,7 @@
         <div class="formField">
             <h3>
                 {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{location.current.name}}<br>
-                <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="/post/location">
+                <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="{{ '/post/location' | link }}">
             </h3>
         </div>
 

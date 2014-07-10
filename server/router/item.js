@@ -77,6 +77,14 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
+            function checkWapChangeLocation(done, _item, _images) {
+                if (_item.btnChangeLocation) {
+                    done.abort();
+                    return handlerPostLocation(_item, req, res, next);
+                }
+                done(_item, _images);
+            }
+
             function validate(done, _item, _images) {
                 item = _item;
                 images = _images;
@@ -185,12 +193,39 @@ module.exports = function(app, dataAdapter) {
 
             asynquence().or(error)
                 .then(parse)
+                .then(checkWapChangeLocation)
                 .then(validate)
                 .then(postImages)
                 .then(post)
                 .val(success);
         }
     })();
+
+    function handlerPostLocation(item, req, res, next) {
+
+        function store(done) {
+            req.rendrApp.session.persist({
+                form: {
+                    values: item
+                }
+            });
+            done(item);
+        }
+
+        function redirect(item) {
+            var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
+
+            res.redirect(utils.link(url, req.rendrApp));
+        }
+
+        function error(err) {
+            res.redirect(utils.link('/location?target=posting', req.rendrApp));
+        }
+
+        asynquence().or(error)
+            .then(store)
+            .val(redirect);
+    }
 
     (function postLocation() {
         app.post('/post/location', handler);
@@ -203,28 +238,16 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function store(done, item) {
-                req.rendrApp.session.persist({
-                    form: {
-                        values: item
-                    }
-                });
-                done(item);
-            }
-
             function redirect(item) {
-                var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
-
-                res.redirect(utils.link(url, req.rendrApp));
+                handlerPostLocation(item, req, res, next);
             }
 
             function error(err) {
-                res.redirect(utils.link('/location', req.rendrApp));
+                res.redirect(utils.link('/location?target=posting', req.rendrApp));
             }
 
             asynquence().or(error)
                 .then(parse)
-                .then(store)
                 .val(redirect);
         }
     })();

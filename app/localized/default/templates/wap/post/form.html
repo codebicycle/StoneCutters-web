@@ -87,7 +87,8 @@
                         <small>
                             <strong>{{ dictionary["itemslisting.NavigatorByLocation"] }}:</strong>
                             <span>
-                                {{location.current.name}} <small><a href="{{ ('/location?target=posting/'+category.id+'/'+subcategory.id) | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
+                                {{location.current.name}}
+                                <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="{{ '/post/location' | link }}" name="btnChangeLocation" >
                             </span>
                         </small>
                         <br>

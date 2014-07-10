@@ -25,6 +25,12 @@ module.exports = {
     'redirections#itemShow': {
         url: 'item/show/:itemId/*'
     },
+    'redirections#comment': {
+        url: 'item/list_comments/:itemId'
+    },
+    'redirections#itemComment': {
+        url: 'item/list_comments/:itemId/*'
+    },
     'redirections#reply': {
         url: 'item/reply/:itemId'
     },
