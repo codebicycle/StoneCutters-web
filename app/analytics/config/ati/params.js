@@ -223,7 +223,7 @@ module.exports = {
     'items#gallery': {
         process: true,
         names: {
-            page_name: 'detail_page_galery',
+            page_name: 'detail_page_gallery',
             category: '',
             subcategory: '',
             ad_category: '',
