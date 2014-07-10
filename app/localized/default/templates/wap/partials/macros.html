@@ -62,7 +62,10 @@
     <label style="display: block; padding-top: .5em;">
         <small>{{ '* ' if mandatory == 'true' }}{{ label }}</small>
         <br />
-        <input type="text" name="{{name}}" id="text-{{name}}" value="">
+        <input type="text" name="{{name}}" id="text-{{name}}" 
+        {% if (form and form.values and form.values[name]) or ((name == 'email' or name == 'name') and user)%}     
+            value="{{ form.values[name] if form.values[name] else (user.email if name == 'email' else user.username) }}"
+        {% endif %}>
     </label>
 {% endmacro %}
 
@@ -70,7 +73,7 @@
     <label style="display: block; padding-top: .5em;">
         <small>{{ '* ' if mandatory == 'true' }}{{ label }}</small>
         <br />
-        <textarea id="text-{{name}}" name="{{name}}" ></textarea>
+        <textarea id="text-{{name}}" name="{{name}}" >{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
     </label>
 {% endmacro %}
 
@@ -84,7 +87,7 @@
             <br />
             <select id="select-{{name}}" name="{{name}}">
                 {% for value in values %}
-                    <option value="{{value.key}}" {% if (field.value) and (field.value.key == value.key) %}selected="selected"{% endif %}>{{value.value}}</option>
+                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
                 {% endfor %}
             </select>
         {% endif %}

@@ -25,6 +25,12 @@ module.exports = {
     itemShow: function(params, callback) {
         helpers.common.redirect.call(this, '/des-iid-' + params.itemId);
     },
+    comment: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-iid-' + params.itemId);
+    },
+    itemComment: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-iid-' + params.itemId);
+    },
     reply: function(params, callback) {
         helpers.common.redirect.call(this, '/iid-' + params.itemId + '/reply');
     },
