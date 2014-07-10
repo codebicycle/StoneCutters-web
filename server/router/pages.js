@@ -6,6 +6,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     var configServer = require('../config');
     var configClient = require('../../app/config');
     var configAnalytics = require('../../app/analytics/config');
+    var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
     var graphite = require('../graphite')();
     var Analytic = require('../analytic');
@@ -145,6 +146,34 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
+    function googleUTMCC(req) {
+        var utmcc = [];
+        var gaDh = req.rendrApp.session.get('gaDh');
+        var gaCs = req.rendrApp.session.get('gaCs');
+        var gaNs = req.rendrApp.session.get('gaNs');
+
+        utmcc.push('__utma=');
+        utmcc.push(gaDh);
+        utmcc.push('.');
+        utmcc.push(req.rendrApp.session.get('gaUid'));
+        utmcc.push('.');
+        utmcc.push(req.rendrApp.session.get('gaIs'));
+        utmcc.push('.');
+        utmcc.push(req.rendrApp.session.get('gaPs'));
+        utmcc.push('.');
+        utmcc.push(gaCs);
+        utmcc.push('.');
+        utmcc.push(gaNs);
+        utmcc.push('; __utmz=');
+        utmcc.push(gaDh);
+        utmcc.push('.');
+        utmcc.push(gaCs);
+        utmcc.push('.');
+        utmcc.push(gaNs);
+        utmcc.push('.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none);');
+        return utmcc.join('');
+    }
+
     (function pageview() {
         app.get('/analytics/pageview.gif', handler);
 
@@ -156,18 +185,20 @@ module.exports = function itemRouter(app, dataAdapter) {
         function googleTracking(req) {
             var analytic = new Analytic('google', {
                 id: req.query.id,
-                host: req.host,
-                userId: req.query.cliId
+                host: req.host
             });
             var ip = req.ip;
-
+            
             if (req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR')) {
                 ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
             }
             analytic.trackPage({
                 page: req.query.page,
                 referer: req.query.referer,
-                ip: ip
+                ip: ip,
+                dynamics: {
+                    utmcc: googleUTMCC(req)
+                }
             });
         }
 
@@ -203,12 +234,18 @@ module.exports = function itemRouter(app, dataAdapter) {
             res.set('Content-Length', image.length);
             res.end(image);
 
-            graphiteTracking(req);
-            if (configServer.get(['analytics', 'google', 'enabled'], true)) {
-                googleTracking(req);
-            }
-            if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
-                atiTracking(req);
+            Session.call(req.rendrApp, false, {
+                isServer: true
+            }, callback);
+
+            function callback() {
+                graphiteTracking(req);
+                if (configServer.get(['analytics', 'google', 'enabled'], true)) {
+                    googleTracking(req);
+                }
+                if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
+                    atiTracking(req);
+                }
             }
         }
     })();
@@ -227,7 +264,10 @@ module.exports = function itemRouter(app, dataAdapter) {
                 ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
             }
             analytic.trackPage(_.extend({
-                ip: ip
+                ip: ip,
+                dynamics: {
+                    utmcc: googleUTMCC(req)
+                }
             }, req.query));
         }
 
@@ -262,11 +302,17 @@ module.exports = function itemRouter(app, dataAdapter) {
             res.set('Content-Length', image.length);
             res.end(image);
 
-            if (configServer.get(['analytics', 'google', 'enabled'], true)) {
-                googleTracking(req);
-            }
-            if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
-                atiTracking(req);
+            Session.call(req.rendrApp, false, {
+                isServer: true
+            }, callback);
+
+            function callback() {
+                if (configServer.get(['analytics', 'google', 'enabled'], true)) {
+                    googleTracking(req);
+                }
+                if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
+                    atiTracking(req);
+                }
             }
         }
     })();
