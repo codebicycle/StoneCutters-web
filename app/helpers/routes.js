@@ -1,6 +1,9 @@
 'use strict';
 
 module.exports = {
+    'pages#esi': {
+        url: 'esi'
+    },
     'redirections#category': {
         url: 'category/:categoryId/:title'
     },
