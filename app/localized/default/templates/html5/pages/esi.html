@@ -1,0 +1,7 @@
+<h1>HOLA</h1>
+<h2 id="esi">
+    <esi:choose>
+        <esi:when test="$exists($(HTTP_COOKIE{'user'}))">LOGGEDIN</esi:when>
+        <esi:otherwise>LOGGEDOUT</esi:otherwise>
+    </esi:choose>
+</h2>
