@@ -8,7 +8,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     var configAnalytics = require('../../app/analytics/config');
     var utils = require('../../shared/utils');
     var graphite = require('../graphite')();
-    var Analytic = require('analytic');
+    var Analytic = require('../analytic');
     var http = require('http');
     var https = require('https');
 
@@ -156,7 +156,8 @@ module.exports = function itemRouter(app, dataAdapter) {
         function googleTracking(req) {
             var analytic = new Analytic('google', {
                 id: req.query.id,
-                host: req.host
+                host: req.host,
+                userId: req.query.cliId
             });
             var ip = req.ip;
 
@@ -217,7 +218,8 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function googleTracking(req) {
             var analytic = new Analytic('google-event', {
-                host: req.host
+                host: req.host,
+                userId: req.query.cliId
             });
             var ip = req.ip;
 
