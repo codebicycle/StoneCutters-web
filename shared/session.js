@@ -133,12 +133,12 @@ var MemcachedSession = function(req, res, callback) {
 
         function put(key, value, options) {
             session[key] = value;
-            memcached.set(sid, session, 86400, noop);
+            memcached.set(sid, session, 1800, noop);
         }
 
         function clear(key) {
             delete session[key];
-            memcached.set(sid, session, 86400, noop);
+            memcached.set(sid, session, 1800, noop);
         }
 
         this.getAll = !err ? getAll : noop;
