@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var URLParser = require('url');
 var config = require('../config');
+var utils = require('../../shared/utils');
 
 module.exports = function(dataAdapter, excludedUrls) {
 
@@ -38,8 +39,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     host = host.split('.');
                     host.shift();
                     res.set('Vary', 'User-Agent');
-                    res.redirect(302, [req.protocol, '://', platform, '.', host.join('.'), req.originalUrl].join(''));
-                    return;
+                    return res.redirect(302, [req.protocol, '://', platform, '.', host.join('.'), utils.removeParams(req.originalUrl, 'sid')].join(''));
                 }
                 next();
             }
@@ -47,7 +47,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             function fail(err) {
                 res.send(400, err);
             }
-            
+
             if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && _.contains(config.get('hosts', ['olx']), req.subdomains.shift()))) && 'm' === req.subdomains.pop()) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), callback);
             }
@@ -57,10 +57,9 @@ module.exports = function(dataAdapter, excludedUrls) {
 
                     if (refererHost !== req.headers.host.split(':').shift()) {
                         refererHost = (refererHost || '').split('.');
-                        
+
                         if (!_.intersection(config.get('hosts', ['olx']), refererHost).length) {
-                            dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), check);
-                            return;
+                            return dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), check);
                         }
                     }
                 }

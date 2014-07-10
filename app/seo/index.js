@@ -108,6 +108,7 @@ module.exports = {
         var defaultMetatags = utils.get(METATAGS, 'default');
         var metatags = utils.get(METATAGS, metatag, {});
 
+        delete head.canonical;
         head.metatags = {};
         _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
             addMetatag.call(this, key, value);
