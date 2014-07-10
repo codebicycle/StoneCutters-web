@@ -188,7 +188,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 host: req.host
             });
             var ip = req.ip;
-            
+
             if (req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR')) {
                 ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
             }
