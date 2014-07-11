@@ -1,1 +1,28 @@
-header
+<div class="header-session">
+	<span class="my_olx" id="my_olx_container">
+		{% if not user %}
+			<a class="noLoggedIn" rel="nofollow" href="{{ '/login' | link }}">Entrar</a>
+			<span class="login-myolx">ou</span>
+			<a rel="nofollow" href="{{ '/register' | link }}">Cadastre-se</a>
+		{% else %}
+			<span class="login-myolx">Olá, {{ user.name }}</span>
+			|
+	        <a rel="nofollow" href="{{ '/logout' | link }}"><span class="my_olx">Sair</span></a> 
+	        |
+	        <a rel="nofollow" href="{{ '/myolx/myadslisting' | link }}"><span class="my_olx">Meus anúncios</span></a> 
+			|
+	        <a rel="nofollow" href="{{ '/myolx/favoritelisting' | link }}"><span class="my_olx">Favoritos</span></a>
+			<!--|
+			<a rel="nofollow" href="http://www.olx.com.br/myolx/myolxmessages.php?src=3"><span class="my_olx">Mensagens</span></a>-->
+		{% endif %}
+	</span>
+</div>
+<div class="header">
+	<a class="header-logo-home" href="{{ '/' | link }}" title="Anúncios grátis em Brasil, anúncios classificados em Brasil (Compra em Brasil, Venda em Brasil, Motor em Brasil, Moradia - Locais Comunidade em Brasil,...)"><img src="http://static01.olx-st.com/frontEnd/br/assets/images/home/logo.png" alt="Anúncios grátis em Brasil, anúncios classificados em Brasil (Compra em Brasil, Venda em Brasil, Motor em Brasil, Moradia - Locais Comunidade em Brasil,...)"></a>
+	<div class="header-text">Na OLX você vende e compra bicicletas, celulares, carrinhos de bebê,<br />guitarras, carros, casas, móveis e muito mais! É fácil, rápido e grátis.</div>
+	{% if location.current %}
+        <a class="header-button olx-ui-button orange trackMe" rel="nofollow" href="{{ ['/posting', postLink] | join('') | link }}" id="post-it">Publicar anúncio</a>
+    {% else %}
+        <a class="header-button olx-ui-button orange trackMe" rel="nofollow" href="{{ '/location?target=posting' | link }}" id="post-it" data-tracking="Posting-ClickSelectLocation">Publicar anúncio</a>
+    {% endif %}
+</div>
