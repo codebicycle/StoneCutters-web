@@ -8,12 +8,9 @@ module.exports = Base.extend({
     className: 'footer_footer_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var user = this.app.session.get('user');
-        var location = this.app.session.get('location');
-
+        
         return _.extend({}, data, {
-            user: user,
-            location: location
+            user: this.app.session.get('user')
         });
     },
     postRender: function() {

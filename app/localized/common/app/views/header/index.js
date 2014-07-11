@@ -54,7 +54,6 @@ module.exports = Base.extend({
         var postLink = getPostLink.call(this);
 
         return _.extend({}, data, {
-            location: this.app.session.get('location'),
             user: this.app.session.get('user'),
             postButton: postButton,
             postLink: postLink

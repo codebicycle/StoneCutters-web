@@ -12,6 +12,7 @@ module.exports = function(grunt) {
         dest: 'app/templates/__layout.html'
     }];
     var icons = [];
+    var sprites = [];
 
     (function copyTemplates() {
         var files = {};
@@ -134,6 +135,45 @@ module.exports = function(grunt) {
         }
     })();
 
+    (function copySprites() {
+        var environments = require('../../server/config').get('stylus');
+        var files = {};
+        var platform;
+
+        for (platform in iconsLocalization) {
+            if (platform !== 'html5') {
+                continue;
+            }
+            iconsLocalization[platform].forEach(eachIconLocation);
+        }
+
+        function eachIconLocation(location) {
+            var environment;
+
+            addIconForEnvironment(location, 'development');
+            for (environment in environments) {
+                addIconForEnvironment(location, environment);
+            }
+        }
+
+        function addIconForEnvironment(location, environment) {
+            if (environment === 'development') {
+                return;
+            }
+            files[[location, '-', environment].join('')] = {
+                src: ['public/css/', location, '/', platform, '/icons.css'].join(''),
+                dest: ['public/css/', location, '/', platform, '/icons-', environment, '.css'].join('')
+            };
+        }
+
+        platform = 'html5';
+        eachIconLocation('default');
+
+        for (var sprite in files) {
+            sprites.push(files[sprite]);
+        }
+    })();
+
     for(var module in dependencies) {
         dynamic.push('node_modules/' + module + '/**/*');
     }
@@ -162,6 +202,9 @@ module.exports = function(grunt) {
         },
         icons: {
             files: icons
+        },
+        sprites: {
+            files: sprites
         }
     };
 };

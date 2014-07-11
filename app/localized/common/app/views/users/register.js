@@ -14,7 +14,6 @@ module.exports = Base.extend({
         var params = this.options.params;
 
         return _.extend({}, data, {
-            location: this.app.session.get('siteLocation'),
             user: this.app.session.get('user'),
             params: params,
             breadcrumb: helpers.breadcrumb.get.call(this, data)
