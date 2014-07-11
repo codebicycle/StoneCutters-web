@@ -1,0 +1,1037 @@
+/*** own mixins ***/
+/* reseting stuff */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend {
+	
+  border:0;
+	
+  outline:0;
+	
+  font-weight:inherit;
+	
+
+  font-style:inherit;
+	
+  font-size:100%;
+	
+  font-family:inherit;
+	
+  vertical-align:baseline;
+	
+  margin:0;
+	
+  padding:0;
+	
+
+}
+
+
+table,caption,tbody,tfoot,thead,tr,th,td {
+	
+  border:0;
+	
+  outline:0;
+	
+  font-weight:inherit;
+	
+  font-style:inherit;
+	
+  font-size:100%;
+	
+  font-family:inherit;
+	
+  margin:0;
+	
+  padding:0;
+	
+
+}
+
+
+:focus {
+	
+  outline:0;
+	
+
+}
+
+
+body {
+	
+  line-height:1;
+	
+  color:#000;
+	
+  background:#fff;
+	
+
+}
+
+
+ol,ul {
+	
+  list-style:none;
+	
+
+}
+
+
+table {
+	
+  border-collapse:separate;
+	
+  border-spacing:0;
+	
+
+}
+
+
+caption,th,td {
+	
+  text-align:left;
+	
+  font-weight:400;
+	
+
+}
+
+
+blockquote:before,blockquote:after,q:before,q:after {
+	
+  content:"";
+	
+
+}
+
+
+blockquote,q {
+	
+  quotes: "" "";
+	
+
+}
+
+
+/* beloved clearfix */
+.clearfix:after {
+	
+  content:".";
+	
+  display:block;
+	
+  height:0;
+	
+  clear:both;
+	
+  visibility:hidden;
+	
+
+}
+
+
+.clearfix {
+	
+  display: inline-block;
+	
+
+}
+
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+	
+  height:1%;
+	
+
+}
+
+
+.clearfix {
+	
+  display: block;
+	
+
+}
+
+
+.clear{
+	
+	clear:both
+
+}
+
+
+.text-center{
+	
+	text-align:center
+
+}
+
+
+/* End hide from IE-mac */
+/* /reset */
+/* basics */
+*,*:before,*:after {
+	
+  -moz-box-sizing:border-box;
+	
+  -webkit-box-sizing:border-box;
+	
+  box-sizing:border-box;
+	
+
+}
+
+
+body {
+	
+  background:#fff;
+	
+  font:65%/1.4 arial,helvetica,sans-serif;
+	
+  color:#000;
+	
+  text-align:center;
+	
+
+}
+
+
+div {
+	
+  position:relative;
+	
+
+}
+
+
+a {
+	
+  color:#06D;
+	
+  text-decoration:none;
+	
+
+}
+
+
+a:hover {
+	
+  color:#034D94;
+	
+  text-decoration:underline;
+	
+
+}
+
+
+strong {
+	
+  font-weight:bold;
+	
+
+}
+
+
+em {
+	
+  font-style:italic;
+	
+
+}
+
+
+small {
+	
+  font-size:0.9em;
+	
+
+}
+
+
+big {
+	
+  font-size:1.1em;
+	
+
+}
+
+
+input,select,textarea,button {
+	
+  font:1em/1.4 arial,helvetica,sans-serif;
+	
+
+}
+
+
+select {
+	
+  height:1.6em;
+	
+
+}
+
+
+optgroup {
+	
+    border-bottom: 1px dashed #CCCCCC;
+	
+    margin-bottom: 10px;
+	
+    padding-bottom: 10px;
+	
+
+}
+
+
+.hidden {
+	
+  display:none !important;
+	
+
+}
+
+
+.env {
+	
+  position:absolute;
+	
+  top:0;
+	
+  left:0;
+	
+  padding:3px 5px;
+	
+  font-weight:bold;
+	
+  color:#fff;
+	
+  background:#333;
+	
+  font-size:1.3em;
+	
+  letter-spacing:-0.05em;
+	
+  z-index:10000;
+	
+
+}
+
+
+.qa1 {
+	
+  background:#0073b9;
+	
+
+}
+
+
+.qa2 {
+	
+  background:#F9761D;
+	
+  color:#333;
+	
+
+}
+
+
+.float-left {
+	
+	float:left;
+	
+
+}
+
+
+.font-normal {
+	
+	font:12px/1.4 arial,helvetica,sans-serif;
+	
+
+}
+
+
+.quarter{
+	
+	width:23%;
+	
+	margin-right:1%
+
+}
+
+
+.arrow-dropdown:after {
+	
+  border-color:#777 transparent;
+	
+  border-style:solid;
+	
+  border-width:4px 4px 0;
+	
+  content:"";
+	
+  display:inline-block;
+	
+  margin:-1px 4px 1px;
+	
+
+}
+
+
+#comboIdiomas:after {
+	
+  border-color:#FAFAFA transparent;
+	
+  top:-4px;
+	
+
+}
+
+
+#comboIdiomas:before,#comboIdiomas:after {
+	
+  border-style:solid;
+	
+  border-width:0 6px 4px;
+	
+  content:" ";
+	
+  position:absolute;
+	
+  right:10px;
+	
+
+}
+
+
+#comboIdiomas:before {
+	
+  border-color:#ccc transparent;
+	
+  top:-5px;
+	
+
+}
+
+
+#comboIdiomas:before,#comboIdiomas:after {
+	
+  border-style:solid;
+	
+  border-width:0 6px 4px;
+	
+  content:" ";
+	
+  position:absolute;
+	
+  right:10px;
+	
+
+}
+
+
+#comboIdiomas {
+	
+  background:none repeat scroll 0 0 #FAFAFA;
+	
+  border:1px solid #ccc;
+	
+  border-radius:3px;
+	
+  box-shadow:0 1px 2px rgba(30,30,30,0.5);
+	
+  display:none;
+	
+  position:absolute;
+	
+  right:0;
+	
+  top:125%;
+	
+  width:85px;
+	
+  z-index: 10001;
+	
+  padding:5px		
+
+}
+
+
+.each-lang{
+	display:block
+}
+
+
+/*** positions ***/
+#supercontainer {
+	
+  width:980px;
+	
+  margin:3em auto 10px;
+	
+  text-align: left;
+	
+
+}
+
+
+/* header_keywords */
+#header_keywords {
+	
+  font:1.1em/normal arial,helvetica,sans-serif;
+	
+  padding:4px 0 0;
+	
+  margin-bottom: -.5em;
+	
+  color:#bfbfbf;
+	
+  overflow: hidden;
+	
+
+}
+
+
+/*** To be sorted ***/
+.full-width {
+	
+  width:100%;
+	
+
+}
+
+
+.region {
+	
+  color:#000;
+	
+  position:relative;
+	
+  padding:5px 0;
+	
+  font:12px/1.1 arial,helvetica,sans-serif;
+	
+
+}
+
+
+.region strong {
+	
+  font-weight:normal;
+	
+
+}
+
+
+.breadcrumb {
+	
+  font:12px/1.1 arial,helvetica,sans-serif;
+	
+  color:#000;
+	
+  float:left;
+	
+  padding:0 5px 15px 0;
+	
+
+}
+
+
+.text-right {
+	
+  text-align: right;
+	
+
+}
+
+
+/*** login modal ***/
+#loginModal #login h1 {
+	
+  font-size:20px;
+	
+  font-family:arial;
+	
+
+}
+
+
+#loginModal #login .cbb {
+	
+  border:none;
+	
+  padding: 25px 0;
+	
+
+}
+
+
+#loginModal #fb-button {
+	
+  background:#7483ae;
+	
+  background-image:-moz-linear-gradient(top,#7483ae 0%,#6c7ba6 30%,#6776a1 30%,#606f9a 99%);
+	
+  background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#7483ae),color-stop(30%,#6c7ba6),color-stop(30%,#6776a1),color-stop(99%,#606f9a));
+	
+  background-image:-webkit-linear-gradient(top,#7483ae 0%,#6c7ba6 30%,#6776a1 30%,#606f9a 99%);
+	
+  background-image:-o-linear-gradient(top,#7483ae 0%,#6c7ba6 30%,#6776a1 30%,#606f9a 99%);
+	
+  background-image:-ms-linear-gradient(top,#7483ae 0%,#6c7ba6 30%,#6776a1 30%,#606f9a 99%);
+	
+  background-image:linear-gradient(top,#7483ae 0%,#6c7ba6 30%,#6776a1 30%,#606f9a 99%);
+	
+  filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#7483ae',endColorstr='#606f9a',GradientType=0 );
+	
+  border-radius:3px;
+	
+  box-shadow:1px 1px 1px #7f7f7f;
+	
+  font-family:Arial,Helvetica,sans-serif;
+	
+  font-size:14px;
+	
+  padding:5px 15px;
+	
+  margin:10px 0 20px;
+	
+  display: inline-block;
+	
+  color: #FFF;
+	
+  text-shadow: -1px -1px rgba(0, 0, 0, .2);
+	
+  text-decoration: none;
+	
+  line-height: 30px;
+	
+  cursor: pointer;
+	
+
+}
+
+
+#loginModal #fb-button:before {
+	
+    content: '';
+	
+    float: left;
+	
+    width: 19px;
+	
+    height: 30px;
+	
+    margin: 0 10px 0 0;
+	
+    background: transparent url(http://images04.olx-st.com/images/v5/olx-base-sprite.png) no-repeat 0 0;
+	 
+
+}
+
+
+*:first-child+html #loginModal #fb-button {
+	
+  padding:0 15px;
+	
+
+}
+
+
+#loginModal #loginform {
+	
+  width:98% !important;
+	
+  border-top:1px solid #ccc !important;
+	
+  border:none;
+	
+  padding-top:10px;
+	
+
+}
+
+
+#loginModal form#loginform h3 {
+	
+  display:none;
+	
+
+}
+
+
+#loginModal p {
+	
+  clear:both;
+	
+  overflow:hidden;
+	
+
+}
+
+
+#loginModal label .label {
+	
+  display:block;
+	
+  float:left;
+	
+  font-size:13px;
+	
+  font-weight:bold;
+	
+  padding:7px 10px 0 0;
+	
+  text-align:right;
+	
+  width:170px;
+	
+
+}
+
+
+#loginModal label span.fields {
+	
+  float:left;
+	
+  width:50%;
+	
+
+}
+
+
+#loginModal .submitLogin {
+	
+  border-top:1px solid #ccc;
+	
+  margin:10px 0;
+	
+  padding-top:10px;
+	
+
+}
+
+
+#loginModal #loginform #username,#loginModal #loginform #password {
+	
+  margin:5px 0;
+	
+  width:200px;
+	
+
+}
+
+
+#loginModal .submitLogin .submit {
+	
+  border:medium none;
+	
+  font-weight:normal;
+	
+  padding:5px 10px;
+	
+  margin-top:10px;
+	
+
+}
+
+
+#loginModal #rememberme {
+	
+  margin-bottom:15px;
+	
+
+}
+
+
+#loginModal #submit {
+	
+  font-size:14px;
+	
+  cursor: pointer;
+	
+
+}
+
+
+#backToUsa{
+	bottom: -20px;
+	display: block;
+	font-family: arial;
+	font-size: 13px;
+	left: 9px;
+	position: absolute;
+}
+
+
+#backToUsa a{
+	font-weight: bold;
+}
+
+
+
+/*** rusia-avito ***/
+.bannerru{
+	
+  width: 980px;
+	 
+  height: 239px;
+	
+  margin-bottom:30px;
+	
+  position: relative;
+	
+
+}
+
+
+.TopBanner1 a{
+	
+  background:url(http://images04.olx-st.com/images/v4/rusia-banner/TopBanner1.jpg) no-repeat left 1px;
+	
+  cursor: pointer;
+	
+  display: block;
+	
+  height: 239px;
+	
+
+}
+
+
+.buttonru{
+	
+  background:url(http://images04.olx-st.com/images/v4/rusia-banner/botonru.png) no-repeat left -42px;
+	
+  width: 162px;
+	
+  height: 40px;
+	
+  position: absolute;
+	
+  right:30px;
+	
+  bottom: 15px;
+	
+  cursor: pointer;
+	
+
+}
+
+
+.buttonru:hover{
+	
+  background-position: left 1px;
+	
+
+}
+
+
+.content-ru{
+	
+  color: #FFFFFF;
+	
+  font-size: 46px;
+	
+  font-weight: bold;
+	
+  position: absolute;
+	
+  right: 371px;
+	
+  top: 147px;
+	
+  width: 70px;
+	
+
+}
+
+
+.content-ru .num-ru1{
+	
+  margin: 0 3px;
+	
+
+}
+
+
+.content-ru .num-ru2{
+	
+  margin: 0 11px;
+	
+
+}
+
+
+/****/
+#surveybanner{
+	
+  font-size: 14px;
+	
+  line-height: 20px;
+	
+  margin: 10px auto 5px;
+	
+  padding: 10px;
+	
+  width: 980px;
+	
+
+}
+
+
+#buttonHide{
+	
+  display: inline-block;
+	
+  width: 20px;
+	
+  height: 20px;
+	
+  margin-left: 10px;
+	
+  border: solid 4px #FECE00;
+	
+  border-radius: 3px;
+	
+  text-indent: -9000px;
+	
+  background: #FECE00 url(http://images04.olx-st.com/images/v5/olx-base-sprite.png) no-repeat -19px 0;
+	
+  vertical-align: top;
+	
+
+}
+
+
+
+/* Extra Post Button */
+#post-extra{
+	
+  clear: both;
+	
+  margin-bottom: 10px;
+	
+  padding-top: 20px;
+	
+  width: 660px;
+	
+
+}
+
+
+#post-extra b{
+	
+  display: block;
+	
+  font-size: 24px
+
+}
+
+
+#post-extra small{
+	
+  font-size: 18px
+
+}
+
+
+#post-extra a{
+	
+  font-size: 16px;
+	
+  vertical-align: top;
+	
+  margin-top: 20px;
+	
+  padding: 10px 20px;
+	
+
+}
+
+
+#post-extra div{
+	
+  background: transparent url(/frontEnd/default/assets/images/arrows.gif) no-repeat 0 0;
+	
+  display: inline-block;
+	
+  height: 51px;
+	
+  margin: 0 10px;
+	 
+  width: 48px;
+	
+
+}
+
+
+#post-extra #post-bottom + div{
+	
+  background-position: -48px 0;
+	
+
+}
+
+
+#post-extra.item{
+	
+  margin-bottom: 25px;
+	
+  padding-top: 0;
+	
+
+}
+
+
+#post-extra.item-expired{
+	
+  float: right;
+	
+  margin-bottom: 25px;
+	
+  padding-top: 0;
+	
+  width: 730px
+
+}
+
+
+.AR #post-extra.home{
+	
+  margin-bottom: 20px;
+	
+  padding-top: 0;
+	
+  width: 100%;
+	
+
+}
+
+
+.AR #post-extra.home p{
+	
+  display: inline-block;
+	
+  margin-right: 15px
+
+}
+
+
+.AR #post-extra.home a{
+	
+  vertical-align: top;
+	
+  margin-top: 8px;
+	
+
+}
+
+
+.AR #post-extra.home div{
+	
+  display: none;
+	
+
+}
