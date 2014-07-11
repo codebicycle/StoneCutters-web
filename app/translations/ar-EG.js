@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Change City',
     'countryoptions.EnterCity': '\u0623\u062F\u062E\u0644 \u0627\u0644\u0645\u062F\u064A\u0646\u0629 ',
+    'countryoptions.Region': '\u0645\u0646\u0637\u0642\u0629 ',
     'countryoptions.SelectACity': 'Select a city',
     'defaultfooter.Back': '\u0627\u0644\u0649 \u0627\u0644\u0648\u0631\u0627\u0621',
     'defaultfooter.FreeSite': '100 \u066A \u062D\u0631\u0629 \u0627\u0639\u0644\u0627\u0646\u0627\u062A \u0645\u0628\u0648\u0628\u0647',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': ' <<BRAND>> \u0645\u0644\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u062A\u0628\u0627\u062A \u0645\u0646',
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.AllResultsNew': 'All results',
+    'listingpageitemslisting.Posted': 'Posted',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Rejected ad',
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
+    'misc.SeeMoreAds': 'See more ads',
     'misc.Sell_Post_Mobile_India': 'Sell',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',

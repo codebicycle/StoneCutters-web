@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Main\u012Bt pils\u0113tu',
     'countryoptions.EnterCity': 'Ievadiet pils\u0113tu',
+    'countryoptions.Region': 'Atra\u0161an\u0101s vieta',
     'countryoptions.SelectACity': 'Izv\u0113lieties pils\u0113tu',
     'defaultfooter.Back': 'Atpaka\u013C',
     'defaultfooter.FreeSite': '100% bezmaksas sludin\u0101jumi',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'P\u0101rl\u016Bkot <<BRAND>> kategorijas',
     'countrystatecityv2.MessageFromPost': 'L\u016Bdzu, izv\u0113lieties pils\u0113tu, lai ievietotu sludin\u0101jumu par preci',
     'listingpageitemslisting.AllResultsNew': 'Visi rezult\u0101ti',
+    'listingpageitemslisting.Posted': 'Public\u0113ts',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezult\u0101ti p\u0113c <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Diem\u017E\u0113l nevaram atrast j\u016Bsu nor\u0101d\u012Btajiem parametriem atbilsto\u0161us rezult\u0101tus.',
     'listingpageitemslisting.ZeroResultsPage': 'Diem\u017E\u0113l m\u0113s neatrad\u0101m rezult\u0101tus <<CATEGORY>>, <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Noraid\u012Btais sludin\u0101jums',
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
+    'misc.SeeMoreAds': 'See more ads',
     'misc.Sell_Post_Mobile_India': 'Public\u0113t',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',

@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('javascript', ['browserify', 'uglify']);
 
-    grunt.registerTask('translate', ['exec:removeTranslations', 'translations', 'browserify:translations', 'uglify:translations']);
+    grunt.registerTask('translate', ['exec:removeTranslations', 'translations', 'browserify:translations', 'uglify:common']);
 
     grunt.registerTask('build', ['template', 'javascript', 'stylus', 'copy:icons']);
 

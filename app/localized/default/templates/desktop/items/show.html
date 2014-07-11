@@ -1,0 +1,147 @@
+<div class="clearfix" id="the-item">
+    <div class="ui-breadcrumb top-breadcrumb" id="levelpath">
+        <span class="left steps">
+            <a href="{{ '/' | link }}" id="firstpath0">Todas as Categorias </a>
+            <span class="arrow"></span>
+            <a href="{{ category | slugToUrl | link }}" id="firstpath1">{{ category.trName }} </a>
+            <span class="arrow"></span>
+            <a href="{{ subcategory | slugToUrl | link }}" id="firstpath2">{{ item.category.name }} </a>
+        </span>
+        <a id="backtoresultslink" class="backtoresults" rel="nofollow" href="{{ subcategory | slugToUrl | link }}">{{ dictionary["misc.SeeMoreAds"] }}</a>
+    </div>
+</div>
+
+
+
+<div class="info-left">
+    <div class="clearfix large-photo-item item-details" id="item-top">
+        <div class="clearfix">
+            <div id="olx_item_title">
+                <div class="h1">{{ item.title }}</div>
+            </div>
+            <div class="item-date-info">
+                <span class="item-date-status">{{ dictionary["listingpageitemslisting.Posted"] }}</span>
+                <span class="text-icon text-icon-time"></span> 
+                {{ item.date.timestamp | date }}
+                <span class="text-icon text-icon-map"></span>
+                {{ item.location.cityName }}
+            </div>
+            <div class="clearfix" id="itm-table">
+                <div id="itm-col-left">
+                    <a id="gallery-big-viewer" name="gallery-big-viewer"></a>
+                    <div id="big-viewer">
+                        <div id="big-container" style="padding: 0px;">
+                            <div onclick="openModal();" id="big-img-1"><img width="540" style="top:50%; left:50%; margin-top:-216px; margin-left:-270px; position:absolute;" id="obj_img" alt="Leitor e Gravador de Tarja Magnetica MSR606 R$1.200 - centro" src="{{ item.images[0].url }}" class="blockCopy"></div>
+                        </div>
+                        <p class="zoom-icon"></p>
+                        <div class="ask-seller-more-photo-container box-no-images" style="display: none;">
+                            <p><i class="text-icon text-icon-photo"></i>Ops! Este anúncio só tem uma foto</p>
+                            <a title="Envie uma mensagem e solicite fotos deste produto ao vandedor" data-ask-seller="more-photos" class="ask-seller-photos" href="javascript:void(0);">Peça para o vendedor inserir mais fotos</a></div>
+                    </div>
+                    <div class="nav-enabled" id="big-navigator">
+                        <div id="big-nav-thc-no-arrow">
+                        <div id="big-nav-thumbs" style="height: 910px;">
+                            <ul id="big-thumbs-list">
+                                {% for image in item.images %}
+                                    <li class="big-nav-thumb">
+                                        <a rel="nofollow" onmouseover="changeBigImage(0);" onclick="return false;" href="#" id="gallery-thumb-1" class="current">
+                                            <div class="cropit">
+                                                <img style="margin-left:-15.5px; margin-top:-6.5px !important;" src="{{ image.thumbnail }}">
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                <li class="big-nav-thumb">
+                                    <a data-ask-seller="show-more-photos" class="ask-seller-more-photos" href="javascript:void(0);"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix large-photo-item" id="item-desc">
+                    <div id="description-text">
+                        {% if item.optionals %}
+                            <div class="optionals-wrapper">
+                                <dl class="optionals">
+                                    {% for optional in item.optionals %}
+                                        {% if optional.label and optional.value %}
+                                            <dt>{{ optional.label }}</dt>
+                                            <dd>{{ optional.value }}</dd>
+                                        {% elif optional.name == 'streetaddress'  %}
+                                            {% set streetaddress = optional.value %}
+                                            {{ streetaddress }}888
+                                        {% endif %}
+                                    {% endfor %}
+                                </dl>
+                            </div>
+                            <div class="cleafix no-padding"></div>
+                        {% endif %}
+                        {{ item.description }}
+                        <div class="location">
+                            <div class="box">
+                                <h2><span class="text-icon text-icon-map"></span>{{ dictionary["countryoptions.Region"] }} Localicacao</h2>
+                                <div class="adr">
+                                    <span class="locality">{{ item.location.cityName }},</span>
+                                    <span class="region">{{ item.location.children[0].abbreviation }}</span>
+                                    <div class="street-address">
+                                        {% for optional in item.optionals %}
+                                            {% if optional.name == 'streetaddress'  %}
+                                                {% set streetaddress = optional.value %}
+                                                {{ streetaddress }}888
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-sharing clearfix">
+                    <a title="Denunciar este anúncio" class="olx-ui-button social scam  enabled" rel="nofollow" onclick="reportSpam.api.send(this, 'flag_item.php?a=4&amp;b={{ item.id }}');">Denunciar</a>
+                    <div class="ad-extras" id="ad-options">
+                        <a rel="nofollow" href="#" class="olx-ui-button social social-button add enabled" id="adToFavorites" onclick="trackGAEvent('Social', 'ClickShare', 'Item');">Adicionar aos Favoritos</a>
+                        <ul id="ad-extras-list">
+                            <li class="i-fav">
+                                <a rel="nofollow" href="javascript:loggedInRedirect('http://varzeagrande-matogrosso.olx.com.br/myolx/favoritelisting.php?insert={{ item.id }}')" id="addToFavorites">Ir para os favoritos</a>
+                            </li>
+                            <li class="i-fav">
+                                <a rel="nofollow" href="javascript:removeFromFavorites('{{ item.id }}', captions)" id="addToFavorites">Remover dos favoritos</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="sharing-container">
+                        <a class="sharing-facebook" href="javascript:centeredWin('http://www.facebook.com/sharer/sharer.php?u={{ href }}', 550, 550) " onclick="trackGAEvent('Social', 'ClickShareFB', 'Item');">Facebook</a>
+                        <a class="sharing-twitter" href="javascript:centeredWin('https://twitter.com/intent/tweet?text={{ item.title }}&amp;url={{ href }}&amp;original_referer={{ href }}', 500,450)" onclick="trackGAEvent('Social', 'ClickShareTwitter', 'Item');">Twitter</a>
+                        <a class="sharing-google" href="javascript:centeredWin('https://plus.google.com/share?url={{ href }}', 500,400)" onclick="trackGAEvent('Social', 'ClickShareGoogle+', 'Item');">Google</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br class="clear">
+    {% if relatedItems.length %}
+        <div class="related-items" style="display: block;">
+            <h2> Quem viu este anúncio viu também: </h2>
+            <div class="related-more-items">
+                {% for relatedItem in relatedItems %}
+                    {% if relatedItem.thumbnail and loop.index <= 3 %}
+                        <div class="hproduct">
+                            <div class="product-thumb">
+                                <a href="{{ relatedItem | slugToUrl | link }}"><img title="" alt="blazer zera" src="{{ relatedItem.thumbnail }}"></a>
+                            </div>
+                            <a class="product-title" title="" href="{{ relatedItem | slugToUrl | link }}">{{ relatedItem.title }}</a>
+                            <br class="last">
+                            <div class="price">{{ relatedItem.price.displayPrice }}</div>
+                            <div class="bubble">
+                                <div class="bubble-title">{{ relatedItem.title }}</div>
+                                <div class="bubble-meta">{{ relatedItem.displayLocation }}</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <br class="clear last">
+        </div>
+    {% endif %}
+</div>
