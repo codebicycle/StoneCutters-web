@@ -81,6 +81,63 @@ function generatePage(page, options) {
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
+function initParams() {
+    var today = new Date().getTime();
+    var gaNs = this.app.session.get('gaNs') || 0;
+
+    this.app.session.persist({
+        gaIs: today,
+        gaPs: today,
+        gaCs: today,
+        gaNs: ++gaNs,
+        gaDh: Math.round(Math.random() * 10000000),
+        gaUid: Math.round(Math.random() * 1000000)
+    });
+}
+
+function persistParams() {
+    var today = new Date().getTime();
+    var gaCs = today;
+    var gaPs = this.app.session.get('gaCs') || gaCs;
+    var gaIs = this.app.session.get('gaIs') || gaCs;
+    var gaNs = this.app.session.get('gaNs') || 0;
+    var gaDh = this.app.session.get('gaDh') || Math.round(Math.random() * 10000000);
+    var gaUid = this.app.session.get('gaUid') || Math.round(Math.random() * 1000000);
+
+    this.app.session.persist({
+        gaIs: gaIs,
+        gaPs: gaPs,
+        gaNs: ++gaNs,
+        gaDh: gaDh,
+        gaUid: gaUid
+    });
+}
+
+function checkParams() {
+    var gaIs = this.app.session.get('gaIs');
+    var gaCs;
+
+    if (!gaIs) {
+        initParams.call(this);
+        return false;
+    }
+
+    gaCs = this.app.session.get('gaCs');
+    gaIs = this.app.session.get('gaIs');
+    if ((Number(gaCs) - Number(gaIs)) > 1800000) {
+        initParams.call(this);
+        return false;
+    }
+    return true;
+}
+
+function generate(params, page, options) {
+    params.page = generatePage.call(this, page, options);
+    if (!checkParams.call(this)) {
+        persistParams.call(this);
+    }
+}
+
 module.exports = {
-    generatePage: generatePage
+    generate: generate
 };
