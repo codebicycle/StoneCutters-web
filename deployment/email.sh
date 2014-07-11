@@ -39,7 +39,7 @@ fi
 
 # ================== Last Build
 
-LAST_BUILD_VERSION=$(curl -s 'http://elvira.olx.com.ar/tags/api/query.php?repo=mobile-webapp-dynamic&env=PRODUCTION');
+LAST_BUILD_VERSION=$(curl -s 'http://elvira.olx.com.ar/tags/api/query.php?repo=mobile-webapp&env=PRODUCTION');
 echo "     PRODUCTION:" $LAST_BUILD_VERSION
 echo "------------------------------------------"
 
