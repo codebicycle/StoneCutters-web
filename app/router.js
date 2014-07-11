@@ -47,6 +47,14 @@ Router.prototype.trackImpression = function() {
     if (window._gaq) {
         _gaq.push(['_trackPageview']);
     }
+    if (window._trq) {
+        window._trq.push(function track(t) {
+            t.track({
+                url: 'http://tracking.olx-st.com/h/imgt/mob/web/',
+                host: window.location.hostname
+            });
+        });
+    }
 };
 
 Router.prototype.getParamsHash = function(pattern, paramsArray, search) {
