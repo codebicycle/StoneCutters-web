@@ -154,7 +154,7 @@ module.exports = {
         }
     },
     esi: function(params, callback) {
-        var enabled = config.get('esi', false);
+        var enabled = config.get('esi', true);
 
         if (!enabled) {
             return helpers.common.redirect.call(this, '/');
