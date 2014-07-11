@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Plaats wijzigen',
     'countryoptions.EnterCity': 'Vul een stad in',
+    'countryoptions.Region': 'Locatie',
     'countryoptions.SelectACity': 'Kies een stad',
     'defaultfooter.Back': 'Terug',
     'defaultfooter.FreeSite': '100% Gratis advertenties',
@@ -54,6 +55,7 @@ module.exports = {
     'lostform.Username': 'Gebruikersnaam',
     'registrationconfirmsuccesstext.Browse': 'Zoek in de <<BRAND>> rubrieken',
     'countrystatecityv2.MessageFromPost': 'Kies een stad om een advertentie te kunnen plaatsen',
+    'listingpageitemslisting.Posted': 'Geplaatst',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',

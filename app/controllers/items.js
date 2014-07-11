@@ -136,6 +136,8 @@ module.exports = {
                     analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = analytics.generateURL.call(this);
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
+                    result.subcategory = subcategory.toJSON();
+                    result.category = category.toJSON();
                     result.favorite = favorite;
 
                     this.app.session.update({

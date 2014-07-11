@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Zmie\u0144 Miasto',
     'countryoptions.EnterCity': 'Wpisz miasto',
+    'countryoptions.Region': 'Lokalizacja',
     'countryoptions.SelectACity': 'Wybierz miasto',
     'defaultfooter.Back': ' Powr\xF3t ',
     'defaultfooter.FreeSite': 'W  100% Darmowe Og\u0142oszenia',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Przejrzyj kategorie <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Prosz\u0119 wybra\u0107 miasto aby doda\u0107 og\u0142oszenie',
     'listingpageitemslisting.AllResultsNew': 'Wszystkie wyniki',
+    'listingpageitemslisting.Posted': 'Wys\u0142ane',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> wyniki dla <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',
     'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Og\u0142oszenie odrzucone',
     'misc.SeeAdIn2Hrs_Mob': 'Zobaczysz je w serwisie OLX w ci\u0105gu 2 godzin',
+    'misc.SeeMoreAds': 'Zobacz wi\u0119cej og\u0142osze\u0144',
     'misc.Sell_Post_Mobile_India': 'Publikuj',
     'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)',
     'misc.YouAreIn_Mob': 'Jeste\u015B w miejscu: <<LOCATION>>',
