@@ -13,6 +13,7 @@ app/templates
 public/js/libs.js
 public/js/app.js
 public/js/app
+public/js/src
 public/js/min
 public/css
 .DS_Store

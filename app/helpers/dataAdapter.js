@@ -10,10 +10,16 @@ var DataAdapter = require('../../shared/adapters/data');
 var dataAdapter = new DataAdapter(options);
 
 module.exports = {
-    request: function(method, url, options, callback) {
-        dataAdapter.request(null, {
+    request: function(req, method, url, options, callback) {
+        dataAdapter.request(req, {
             method: method,
             url: url
         }, options, callback);
+    },
+    post: function(req, url, options, callback) {
+        this.request(req, 'post', url, options, callback);
+    },
+    get: function(req, url, options, callback) {
+        this.request(req, 'get', url, options, callback);
     }
 };

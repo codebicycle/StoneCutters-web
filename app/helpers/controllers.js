@@ -1,14 +1,17 @@
 'use strict';
 
+var asynquence = require('asynquence');
 var _ = require('underscore');
+var URLParser = require('url');
 var seo = require('../seo');
 var common = require('./common');
 var marketing = require('./marketing');
 var config = require('../config');
+var utils = require('../../shared/utils');
 var intertitial = config.get(['interstitial', 'enabled'], false);
 var isServer = typeof window === 'undefined';
 
-function setUrlVars() {
+function setUrlVars(done) {
     var href;
     if (isServer) {
         href = this.app.session.get('protocol') + '://' + this.app.session.get('siteLocation') + this.app.session.get('path');
@@ -27,40 +30,24 @@ function setUrlVars() {
             href: href
         });
     }
+    done();
 }
 
-function redirect() {
+function redirect(done) {
     var path = this.app.session.get('path');
 
     if (path.length <= 1 || path.slice(-1) !== '/') {
         if (intertitial && setInterstitial.call(this)) {
-            return true;
+            done.abort();
+            return;
         }
-        return false;
+        return done();
     }
     this.redirectTo(common.link(path.slice(0, -1), this.app), {
         status: 301
     });
-    return true;
-}
-
-function cleanSession() {
-    this.app.session.clear('page');
-}
-
-function setCurrentRoute() {
-    this.app.session.update({
-        currentRoute: this.currentRoute
-    });
-}
-
-function setReferer() {
-    if (isServer) {
-        return;
-    }
-    this.app.session.update({
-        referer: this.app.session.get('referer')
-    });
+    done.abort();
+    return;
 }
 
 function setInterstitial() {
@@ -82,7 +69,17 @@ function setInterstitial() {
 
     path = this.app.session.get('path');
     paths = config.get(['interstitial', 'ignorePath'], []);
-    if (_.contains(paths, path)) {
+    paths = _.filter(paths, function filterInterstitial(ignorePath) {
+        if (_.isString(ignorePath)) {
+            return path === ignorePath;
+        }
+        return ignorePath.test(path);
+    });
+    if (paths.length) {
+        return false;
+    }
+
+    if (utils.params(this.app.session.get('url') || '', 'target') === 'posting') {
         return false;
     }
 
@@ -127,55 +124,114 @@ function setInterstitial() {
     return false;
 }
 
-function setLanguage(params) {
-    if (isServer) {
-        return;
-    }
-    var languages = this.app.session.get('languages');
-    var selectedLanguage = this.app.session.get('selectedLanguage');
-
-    if (!params || !params.language || selectedLanguage === params.language || !languages._byId[params.language]) {
-        return;
-    }
-    this.app.session.persist({
-        selectedLanguage: params.language
-    });
+function clearSession(done) {
+    this.app.session.clear('page');
+    this.app.session.clear('postingLink');
+    done();
 }
 
-function setLocation(params, callback) {
+function setCurrentRoute(done) {
+    this.app.session.update({
+        currentRoute: this.currentRoute
+    });
+    done();
+}
+
+function setReferer(done) {
+    if (!isServer) {
+        this.app.session.update({
+            referer: this.app.session.get('referer')
+        });
+    }
+    done();
+}
+
+function setLanguage(params, done) {
     if (isServer) {
-        return callback();
+        return done();
+    }
+    var selectedLanguage = this.app.session.get('selectedLanguage');
+    var languages = this.app.session.get('languages');
+    var language = (params ? params.language : undefined);
+    var redirect;
+    var url;
+
+    if (selectedLanguage === languages.models[0].locale && language) {
+        redirect = true;
+    }
+    else if (selectedLanguage !== languages.models[0].locale && !language) {
+        redirect = true;
+    }
+    else if (language && language !== selectedLanguage) {
+        redirect = true;
+    }
+    if (redirect) {
+        done.abort();
+        url = URLParser.parse(this.app.session.get('url'));
+        url = [url.pathname, (url.search || '')].join('');
+        return common.redirect.call(this.app.router || this, url, null, {
+            status: 200
+        });
+    }
+    if (!params || !language || selectedLanguage === language || !languages._byId[language]) {
+        return done();
+    }
+    this.app.session.persist({
+        selectedLanguage: language
+    });
+    done();
+}
+
+function setLocation(params, done) {
+    if (isServer) {
+        return done();
     }
     var app = this.app;
     var location = this.app.session.get('location');
     var previousLocation;
-    var spec;
+    var redirect;
     var url;
 
     if (!params || !params.location) {
-        return callback();
+        return done();
     }
     previousLocation = this.app.session.get('siteLocation');
     if (previousLocation === params.location) {
-        return callback();
+        return done();
     }
-    spec = {
+    if (!params.location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
+        url = URLParser.parse(this.app.session.get('url'));
+        url = [url.pathname, (url.search || '')].join('');
+        common.redirect.call(this.app.router || this, url, {
+            location: previousLocation
+        }, {
+            status: 200
+        });
+        done.abort();
+        return;
+    } 
+    else if (params.location && params.location.split('.').shift() === 'www') {
+        redirect = true;
+    }
+    this.app.fetch({
         location: {
             model: 'City',
             params: {
                 location: params.location
             }
         }
-    };
-    this.app.fetch(spec, {
+    }, {
         readFromCache: false
     }, function afterFetch(err, result) {
         if (err) {
-            return callback();
+            return done.fail(err);
         }
         url = result.location.get('url');
         if (location.url.split('.').pop() !== url.split('.').pop()) {
-            window.location = '/';
+            common.redirect.call(this.app.router || this, '/', null, {
+                status: 200
+            });
+            done.abort();
             return;
         }
         location.current = result.location.toJSON();
@@ -185,8 +241,17 @@ function setLocation(params, callback) {
         app.session.update({
             location: location
         });
-        callback();
-    });
+        if (redirect) {
+            url = URLParser.parse(this.app.session.get('url'));
+            url = [url.pathname, (url.search || '')].join('');
+            common.redirect.call(this.app.router || this, common.removeParams(url, 'location'), null, {
+                status: 200
+            });
+            done.abort();
+            return;
+        }
+        done();
+    }.bind(this));
 }
 
 function processForm(params, isForm) {
@@ -264,21 +329,31 @@ module.exports = {
             seo: true,
             cache: true
         });
-        setUrlVars.call(this);
-        if (!redirect.call(this)) {
-            cleanSession.call(this);
-            setCurrentRoute.call(this);
-            setReferer.call(this);
-            setLanguage.call(this, params);
-            setLocation.call(this, params, function next() {
-                if (options.seo) {
-                    seo.resetHead.call(this);
-                }
-                if (options.cache) {
-                    changeHeaders.call(this);
-                }
-                callback.call(this, processForm.call(this, params, options.isForm));
-            }.bind(this));
+        asynquence().or(fail.bind(this))
+            .then(setUrlVars.bind(this))
+            .then(redirect.bind(this))
+            .then(clearSession.bind(this))
+            .then(setCurrentRoute.bind(this))
+            .then(setReferer.bind(this))
+            .then(setLanguage.bind(this, params))
+            .then(setLocation.bind(this, params))
+            .val(success.bind(this));
+
+        function success() {
+            if (options.seo) {
+                seo.resetHead.call(this);
+            }
+            if (options.cache) {
+                changeHeaders.call(this);
+            }
+            callback.call(this, processForm.call(this, params, options.isForm));
+        }
+
+        function fail(err) {
+            this.app.session.persist({
+                error: err
+            });
+            return common.redirect.call(this, '/500');
         }
     },
     changeHeaders: changeHeaders

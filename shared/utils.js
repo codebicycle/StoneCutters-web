@@ -11,17 +11,51 @@ var utils = {
     get: get,
     qs: querystring
 };
+var linkParams = {
+    location: function (href, query) {
+        var siteLocation = this.session.get('siteLocation');
+
+        if (!query.location && siteLocation && !~siteLocation.indexOf('www.')) {
+            href = params(href, 'location', siteLocation);
+        }
+        return href;
+    },
+    language: function (href, query) {
+        var selectedLanguage;
+        var languages;
+        
+        if (!query.language) {
+            selectedLanguage = this.session.get('selectedLanguage');
+
+            if (selectedLanguage) {
+                languages = this.session.get('languages');
+
+                if (languages && selectedLanguage === languages.models[0].locale) {
+                    href = removeParams(href, 'language');
+                }
+                else {
+                    href = params(href, 'language', selectedLanguage);
+                }
+            }
+        }
+        else {
+            href = params(href, 'language', query.language);
+        }
+        return href;
+    },
+    sid: function (href, query) {
+        if (this.session.get('platform') === 'wap') {
+            href = params(href, 'sid', this.session.get('sid'));
+        }
+        return href;
+    }
+}
 
 function link(href, app, query) {
-    var siteLocation = app.session.get('siteLocation');
-
     query = query || {};
-    if (!query.location && siteLocation && !~siteLocation.indexOf('www.')) {
-        href = params(href, 'location', siteLocation);
-    }
-    if (app.session.get('platform') === 'wap') {
-        href = params(href, 'sid', app.session.get('sid'));
-    }
+    _.each(linkParams, function(checker, name) {
+        href = checker.call(app, href, query);
+    });
     if (!_.isEmpty(query)) {
         href = params(href, query);
     }

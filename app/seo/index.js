@@ -15,9 +15,19 @@ var specials = {
         head.metatags.description = content + getLocationName.call(this, ' - ');
     },
     canonical: function(content) {
-        head.canonical = content;
+        var platform = this.app.session.get('platform');
+        var url = this.app.session.get('url');
+        var protocol;
+        var host;
+
+        if (platform === 'wap' && utils.params(url, 'sid')) {
+            protocol = this.app.session.get('protocol');
+            host = this.app.session.get('host');
+
+            head.canonical = [protocol, '://', host, utils.removeParams(url, 'sid')].join('');
+        }
     },
-    googleSiteVerification: function(content) {
+    'google-site-verification': function(content) {
         var platform = this.app.session.get('platform');
         var country = this.app.session.get('location').url;
         var gsVerification;
@@ -97,6 +107,7 @@ module.exports = {
         var defaultMetatags = utils.get(METATAGS, 'default');
         var metatags = utils.get(METATAGS, metatag, {});
 
+        delete head.canonical;
         head.metatags = {};
         _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
             addMetatag.call(this, key, value);

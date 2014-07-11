@@ -53,7 +53,23 @@ then
 	RELEASE_NOTES=${RELEASE_NOTES//[/<br>[}
 
 	URL_GIT="https\://github.com/olx-inc/mobile-webapp/commits/master"
+else
+
+	PATTERN='1.1.'
+	REPLACE=''
+	LAST_BUILD_VERSION="${LAST_BUILD_VERSION/$PATTERN/$REPLACE}"
+
+	curl http://192.168.8.79:8080/view/01_ARWEN_Pipeline_Testing/job/ARWEN_UnitTest_Testing/$LAST_BUILD_VERSION/consoleText > console.log;
+	COMMIT_ID=$(cat console.log | grep -a 'Checking' | awk '{print $4}');
+	rm console.log;
+
+	cd $SOURCE_PATH
+	RELEASE_NOTES=$(git log $COMMIT_ID.. --grep MOB --pretty=format:'%s' --abbrev-commit | grep -v pull | grep -v "^MOB" | awk '!x[$0]++')
+	RELEASE_NOTES=${RELEASE_NOTES//[/<br>[}
+
+	URL_GIT="https\://github.com/olx-inc/mobile-webapp/compare/"$COMMIT_ID"...master"
 fi
+
 
 
 # ================== Write the file

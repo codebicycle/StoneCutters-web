@@ -52,6 +52,7 @@ module.exports = {
     'unexistingitem.ListingUnavailable': 'Deze advertentie is niet meer beschikbaar',
     'landingbody.EmailAddress': 'E-mailadres',
     'lostform.Username': 'Gebruikersnaam',
+    'registrationconfirmsuccesstext.Browse': 'Zoek in de <<BRAND>> rubrieken',
     'countrystatecityv2.MessageFromPost': 'Kies een stad om een advertentie te kunnen plaatsen',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',

@@ -21,7 +21,7 @@
         </div>
     </form>
     <div class="formField" style="padding-top:0;">
-        <a href="/register">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
+        <a href="{{ '/register' | link }}">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
     </div>
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

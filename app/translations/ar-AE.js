@@ -52,6 +52,7 @@ module.exports = {
     'unexistingitem.ListingUnavailable': '\u0627\u0639\u0644\u0627\u0646 \u0644\u064A\u0633 \u062C\u0627\u0647\u0632 ',
     'landingbody.EmailAddress': ' Email \u0639\u0646\u0648\u0627\u0646 ',
     'lostform.Username': '\u0623\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645',
+    'registrationconfirmsuccesstext.Browse': ' <<BRAND>> \u0645\u0644\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u062A\u0628\u0627\u062A \u0645\u0646',
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',

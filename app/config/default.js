@@ -15,6 +15,12 @@ module.exports = {
     environment: {
         type: 'development'
     },
+    localization: {
+        wap: [],
+        html4: [],
+        html5: [],
+        desktop: ['www.olx.com.br']
+    },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve'],
         html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve'],
@@ -36,8 +42,8 @@ module.exports = {
     interstitial: {
         enabled: false,
         clicks: 1,
-        time: 6000000,
-        ignorePath: ['/health', '/stats', '/stats/memory', '/stats/threads', '/stats/check', '/stats/sockets', '/login', '/interstitial', '/404', '/500', '/analytics/pageview.gif', '/analytics/pageevent.gif'],
+        time: 432000000,
+        ignorePath: ['/health', '/login', '/interstitial', '/404', '/500', /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {

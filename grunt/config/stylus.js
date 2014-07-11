@@ -2,9 +2,8 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var config = require('../../server/config');
-    var localization = config.get('localization');
-    var environments = config.get('stylus');
+    var localization = require('../../app/config').get('localization');
+    var environments = require('../../server/config').get('stylus');
     var stylus = {
         options: {
             'include css': true

@@ -6,6 +6,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../config');
         var asynquence = require('asynquence');
         var _ = require('underscore');
+        var utils = require('../../shared/utils');
         var testing = config.get(['publicEnvironments', 'testing'], {});
         var staging = config.get(['publicEnvironments', 'staging'], {});
 
@@ -14,7 +15,21 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
 
+            var location = req.param('location');
             var previousLocation = req.rendrApp.session.get('siteLocation');
+            var redirect = false;
+
+            if (!_.contains(excludedUrls.data, req.path)) {
+                if (!location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
+                    return res.redirect(302, utils.link(req.originalUrl, req.rendrApp, {
+                        location: previousLocation
+                    }));
+                }
+                else if (location && location.split('.').shift() === 'www') {
+                    redirect = true;
+                }
+            }
+
             var siteLocation = req.param('location', previousLocation);
             var host = req.rendrApp.session.get('host');
             var index = host.indexOf(':');
@@ -66,6 +81,13 @@ module.exports = function(dataAdapter, excludedUrls) {
                 done();
             }
 
+            function redirection(done) {
+                if (redirect) {
+                    return res.redirect(302, utils.link(utils.removeParams(req.originalUrl, 'location'), req.rendrApp));
+                }
+                done();
+            }
+
             function fail(err) {
                 res.send(400, err);
             }
@@ -92,6 +114,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 .then(fetch)
                 .then(check)
                 .then(store)
+                .then(redirection)
                 .val(next);
         };
 

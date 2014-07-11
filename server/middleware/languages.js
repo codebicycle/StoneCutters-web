@@ -5,6 +5,7 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var asynquence = require('asynquence');
         var _ = require('underscore');
+        var utils = require('../../shared/utils');
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -63,6 +64,26 @@ module.exports = function(dataAdapter, excludedUrls) {
                 done();
             }
 
+            function check(done) {
+                var selectedLanguage = app.session.get('selectedLanguage');
+                var language = req.param('language');
+                var redirect;
+
+                if (selectedLanguage === languages.models[0].locale && language) {
+                    redirect = true;
+                }
+                else if (selectedLanguage !== languages.models[0].locale && !language) {
+                    redirect = true;
+                }
+                else if (language && language !== selectedLanguage) {
+                    redirect = true;
+                }
+                if (redirect) {
+                    return res.redirect(302, utils.link(req.originalUrl, req.rendrApp));
+                }
+                done();
+            }
+
             function fail(err) {
                 console.log(err.stack);
                 res.send(400, err);
@@ -74,6 +95,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 .then(transition)
                 .then(select)
                 .then(store)
+                .then(check)
                 .val(next);
         };
 

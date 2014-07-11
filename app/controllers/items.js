@@ -66,15 +66,16 @@ module.exports = {
             }.bind(this));
 
             function findRelatedItems(err, data) {
+                if (err || !data.item) {
+                    return helpers.common.redirect.call(this, '/404');
+                }
+
                 var item = data.item.toJSON();
                 var slug;
                 var itemLocation;
                 var currentLocation;
                 var spec;
 
-                if (!item) {
-                    return helpers.common.redirect.call(this, '/404');
-                }
                 slug = helpers.common.slugToUrl(item);
                 if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
                     slug = ('/' + slug);
@@ -120,6 +121,7 @@ module.exports = {
                     var model = result.items.models[0];
                     var user = app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
+                    var category;
                     
                     result.relatedItems = model.get('data');
                     result.user = user;
@@ -129,11 +131,19 @@ module.exports = {
                     analytics.reset();
                     analytics.addParam('user', user);
                     analytics.addParam('item', item);
-                    analytics.addParam('category', data.categories.get(subcategory.get('parentId')).toJSON());
+                    category = data.categories.get(subcategory.get('parentId'));
+                    analytics.addParam('category', category.toJSON());
                     analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = analytics.generateURL.call(this);
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
                     result.favorite = favorite;
+
+                    this.app.session.update({
+                        postingLink: {
+                            category: category.get('id'),
+                            subcategory: subcategory.get('id')
+                        }
+                    });
 
                     seo.addMetatag('title', data.item.shortTitle());
                     seo.addMetatag('description', data.item.shortDescription());
@@ -144,7 +154,7 @@ module.exports = {
             }
         }
     },
-    galery: function(params, callback) {
+    gallery: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
@@ -180,23 +190,26 @@ module.exports = {
             app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-                var subcategory = result.categories.search(item.category.id);
-
-                if (!item) {
+                if (err || !result.item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
+                
+                var item = result.item.toJSON();
+                var platform = this.app.session.get('platform');
+                var subcategory;
+
                 slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (!item.images || !item.images.length) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (pos < 0 || pos >= item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug + '/galery'));
+                    return helpers.common.redirect.call(this, ('/' + slug + '/gallery'));
                 }
 
+                subcategory = result.categories.search(item.category.id);
                 result.item = item;
                 result.user = user;
                 result.pos = pos;
@@ -220,7 +233,6 @@ module.exports = {
             var user = app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var pos = Number(params.pos) || 0;
             var siteLocation = app.session.get('siteLocation');
             var spec;
             var slug;
@@ -248,26 +260,22 @@ module.exports = {
             app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
-                var item = result.item.toJSON();
-                var subcategory = result.categories.search(item.category.id);
-
-                if (!item) {
+                if (err || !result.item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
+
+                var item = result.item.toJSON();
+                var platform = this.app.session.get('platform');
+                var subcategory;
+
                 slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
-                }
-                if (!item.images || !item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug));
-                }
-                if (pos < 0 || pos >= item.images.length) {
-                    return helpers.common.redirect.call(this, ('/' + slug + '/map'));
                 }
 
+                subcategory = result.categories.search(item.category.id);
                 result.item = item;
                 result.user = user;
-                result.pos = pos;
                 analytics.reset();
                 analytics.addParam('user', user);
                 analytics.addParam('item', item);
@@ -373,13 +381,13 @@ module.exports = {
             app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                var item;
-                var subcategory;
-
-                if (err) {
+                if (err || !result.item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
-                item = result.item.toJSON();
+
+                var item = result.item.toJSON();
+                var subcategory;
+
                 if (platform === 'html5') {
                     return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
                 }
@@ -400,8 +408,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var spec = {
                 categories: {
                     collection : 'Categories',
@@ -419,16 +426,16 @@ module.exports = {
             params.id = params.itemId;
             delete params.itemId;
 
-            app.fetch(spec, {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                var item;
-                var subcategory;
-
-                if (err) {
+                if (err || !result.item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
-                item = result.item.toJSON();
+
+                var item = result.item.toJSON();
+                var subcategory;
+
                 subcategory = result.categories.search(item.category.id);
 
                 analytics.reset();
@@ -461,7 +468,7 @@ module.exports = {
         intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
 
         function add(done) {
-            helpers.dataAdapter.request('post', '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
+            helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
                 query: {
                     token: user.token
                 }
@@ -504,7 +511,7 @@ module.exports = {
         itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
 
         function remove(done) {
-            helpers.dataAdapter.request('post', ('/items/' + itemId + '/delete'), {
+            helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
                 query: {
                     token: user.token
                 }

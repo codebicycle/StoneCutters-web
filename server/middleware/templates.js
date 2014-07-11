@@ -3,9 +3,8 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var config = require('../config');
-        var minify = config.get(['uglify', 'enabled'], true);
-        var localization = config.get('localization', {});
+        var minify = require('../config').get(['uglify', 'enabled'], true);
+        var localization = require('../../app/config').get('localization', {});
         var _ = require('underscore');
 
         function isLocalized(platform, siteLocation) {
@@ -19,7 +18,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             var app = req.rendrApp;
             var location = app.session.get('location');
-            var siteLocation = app.session.get('siteLocation');
+            var siteLocation = app.session.get('location').url;
             var userAgent = req.get('user-agent');
 
             function callback(err, response, body) {
@@ -55,7 +54,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     browserName: device.browserName
                 };
                 var directory = 'default';
-                var jsDir = '/js/' + (minify ? 'min' : 'app');
+                var jsDir = '/js/' + (minify ? 'min' : 'src');
                 var platform = req.subdomains.pop() || 'wap';
                 var template;
 

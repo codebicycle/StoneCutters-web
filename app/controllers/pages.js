@@ -152,6 +152,20 @@ module.exports = {
                 analytics: analytics.generateURL.call(this)
             });
         }
+    },
+    esi: function(params, callback) {
+        var enabled = config.get('esi', false);
 
+        if (!enabled) {
+            return helpers.common.redirect.call(this, '/');
+        }
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            if (this.app.session.get('isServer')) {
+                this.app.req.res.setHeader('Edge-Control', 'dca=esi');
+            }
+            callback();
+        }
     }
 };

@@ -13,7 +13,22 @@ module.exports = {
     related: function(params, callback) {
         helpers.common.redirect.call(this, '/des-cat-' + params.categoryId + '-p-' + params.page);
     },
+    gallery: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-iid-' + params.itemId + '/gallery');
+    },
+    itemGallery: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-iid-' + params.itemId + '/gallery');
+    },
     item: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-iid-' + params.itemId);
+    },
+    itemShow: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-iid-' + params.itemId);
+    },
+    comment: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-iid-' + params.itemId);
+    },
+    itemComment: function(params, callback) {
         helpers.common.redirect.call(this, '/des-iid-' + params.itemId);
     },
     reply: function(params, callback) {

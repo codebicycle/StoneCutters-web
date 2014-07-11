@@ -140,13 +140,16 @@ module.exports = function(nunjucks) {
         is: function(value, type) {
             return typeof value === type;
         },
-        link: function (href, siteLocation) {
-            var params = {};
+        link: function (href, query) {
+            var protocol;
+            var host;
 
-            if (siteLocation) {
-                params.location = siteLocation;
+            if (href.indexOf('http://')) {
+                protocol = this.ctx.app.session.get('protocol');
+                host = this.ctx.app.session.get('host');
+                href = [protocol, '://', host, (href.indexOf('/') ? '/' : ''), href].join('');
             }
-            return helpers.common.link(href, this.ctx.app, params);
+            return helpers.common.link(href, this.ctx.app, query || {});
         },
         escape: function (text) {
             return encodeURIComponent(text);

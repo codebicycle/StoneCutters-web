@@ -75,7 +75,7 @@
 
         <h3>
             {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{location.current.name}}<br>
-            <a id="change-location-posting" href="{{ ('/location?target=posting/'+category.id+'/'+subcategory.id) | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
+            <a id="change-location-posting" href="{{ ['/location?target=posting/', category.id, '/', subcategory.id] | join('') | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
         </h3>
 
         <input type="hidden" name="postingSession" value="{{postingSession}}">

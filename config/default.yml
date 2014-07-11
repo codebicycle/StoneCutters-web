@@ -43,12 +43,6 @@ formidable:
   multiples: true
   acceptFiles: false
 
-localization:
-  wap: []
-  html4: []
-  html5: []
-  desktop: []
-
 error:
   detail: true
 
@@ -61,7 +55,6 @@ middleware:
       - /stats/threads
       - /stats/check
       - /stats/sockets
-    data:
       - /analytics/pageview.gif
       - /analytics/pageevent.gif
 
@@ -115,3 +108,13 @@ publicEnvironments:
   staging:
     host: '.m-staging.olx.com'
     mask: '.m.olx.com.py'
+
+hosts:
+  - olx
+  - haibao
+  - olxtunisie
+  - olx-nederland
+  - olxmonaco
+  - haibao
+  - olxalgerie
+  - jaovat
