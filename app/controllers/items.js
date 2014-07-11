@@ -6,19 +6,19 @@ var helpers = require('../helpers');
 var seo = require('../seo');
 var analytics = require('../analytics');
 var config = require('../config');
+var Item = require('../models/item');
 
 module.exports = {
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
             var favorite = params.favorite;
-            var siteLocation = app.session.get('siteLocation');
+            var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
             var spec;
 
@@ -37,44 +37,74 @@ module.exports = {
                 }
             }
             params.id = params.itemId;
-            params.languageCode = app.session.get('selectedLanguage');
+            params.languageCode = this.app.session.get('selectedLanguage');
             delete params.itemId;
             delete params.title;
             delete params.sk;
 
-            spec = {
+            this.app.fetch({
                 categories: {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
                         languageCode: this.app.session.get('selectedLanguage')
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
                 }
-            };
-
-            app.fetch(spec, {
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err) {
-                    return helpers.common.redirect.call(this, '/404');
+                    return helpers.common.error.call(this, err, result, callback);
                 }
-                findRelatedItems.call(this, err, result);
+                findItem.call(this, err, result);
             }.bind(this));
 
-            function findRelatedItems(err, data) {
-                if (err || !data.item) {
-                    return helpers.common.redirect.call(this, '/404');
-                }
+            function findItem(err, res) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, result) {
+                    if (!result) {
+                        result = {};
+                    }
+                    if (err) {
+                        if (err.status !== 422) {
+                            return helpers.common.error.call(this, err, result, callback);
+                        }
+                        result.item = new Item(err.body);
+                        result.item.set('id', result.item.get('itemId'));
+                        result.item.set('slug', '/des-iid-' + result.item.get('id'));
+                        result.item.set('location', this.app.session.get('location'));
+                        result.item.set('title', 'Item title');
+                        result.item.set('date', {
+                            timestamp: new Date().toISOString()
+                        });
+                        result.item.set('description', 'Item description');
+                        result.item.set('category', {
+                            id: result.item.get('categoryId'),
+                            name: result.item.get('categoryName')
+                        });
+                        result.item.set('status', {
+                            deprecated: true
+                        });
+                        result.item.set('purged', true);
+                        err = null;
+                    }
+                    result.categories = res.categories;
+                    findRelatedItems.call(this, err, result);
+                }.bind(this));
+            }
 
-                var item = data.item.toJSON();
+            function findRelatedItems(err, res) {
+                if (!res.item) {
+                    return helpers.common.error.call(this, err, res, callback);
+                }
+                var item = res.item.toJSON();
                 var slug;
-                var itemLocation;
-                var currentLocation;
-                var spec;
 
                 slug = helpers.common.slugToUrl(item);
                 if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
@@ -84,27 +114,20 @@ module.exports = {
                     }
                     return helpers.common.redirect.call(this, slug);
                 }
-                itemLocation = item.location;
-                currentLocation = app.session.get('location');
-                if (itemLocation.url !== currentLocation.url) {
-                    var protocol = app.session.get('protocol');
-                    var platform = app.session.get('platform');
-                    var url = [protocol, '://', platform, '.', itemLocation.url.replace('www.', 'm.'), '/', slug].join('');
+                if (item.location.url !== this.app.session.get('location').url) {
+                    var protocol = this.app.session.get('protocol');
+                    var platform = this.app.session.get('platform');
+                    var url = [protocol, '://', platform, '.', item.location.url.replace('www.', 'm.'), '/', slug].join('');
 
-                    if (itemLocation.children) {
-                        itemLocation = itemLocation.children[0];
-                        if (itemLocation.children) {
-                            itemLocation = itemLocation.children[0];
-                        }
-                    }
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
                         query: {
-                            location: itemLocation.url
+                            location: res.item.getLocation().url
                         }
                     });
                 }
-                spec = {
+                
+                this.app.fetch({
                     items: {
                         collection : 'Items',
                         params: {
@@ -114,29 +137,45 @@ module.exports = {
                             relatedAds: itemId
                         }
                     }
-                };
-                app.fetch(spec, {
+                }, {
                     readFromCache: false
                 }, function afterFetch(err, result) {
-                    var model = result.items.models[0];
-                    var user = app.session.get('user');
-                    var subcategory = data.categories.search(item.category.id);
+                    var relatedItems = [];
+                    var user = this.app.session.get('user');
+                    var subcategory = res.categories.search(item.category.id);
                     var category;
                     
-                    result.relatedItems = model.get('data');
+                    if (!result) {
+                        result = {};
+                    }
+                    if (result.items) {
+                        relatedItems = result.items.models[0].get('data');
+                    }
+                    result.relatedItems = relatedItems;
                     result.user = user;
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    analytics.reset();
-                    analytics.addParam('user', user);
-                    analytics.addParam('item', item);
-                    category = data.categories.get(subcategory.get('parentId'));
-                    analytics.addParam('category', category.toJSON());
-                    analytics.addParam('subcategory', subcategory.toJSON());
-                    result.analytics = analytics.generateURL.call(this);
+                    category = res.categories.get(subcategory.get('parentId'));
                     result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
                     result.favorite = favorite;
+
+                    if (!item.purged) {
+                        analytics.reset();
+                        analytics.addParam('user', user);
+                        analytics.addParam('item', item);
+                        analytics.addParam('category', category.toJSON());
+                        analytics.addParam('subcategory', subcategory.toJSON());
+                        result.analytics = analytics.generateURL.call(this);
+
+                        seo.addMetatag('title', res.item.shortTitle());
+                        seo.addMetatag('description', res.item.shortDescription());
+                    }
+                    else {
+                        seo.addMetatag('robots', 'noindex, nofollow');
+                        seo.addMetatag('googlebot', 'noindex, nofollow');
+                    }
+                    seo.update();
 
                     this.app.session.update({
                         postingLink: {
@@ -144,10 +183,6 @@ module.exports = {
                             subcategory: subcategory.get('id')
                         }
                     });
-
-                    seo.addMetatag('title', data.item.shortTitle());
-                    seo.addMetatag('description', data.item.shortDescription());
-                    seo.update();
 
                     callback(err, result);
                 }.bind(this));
@@ -158,12 +193,11 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
             var pos = Number(params.pos) || 0;
-            var siteLocation = app.session.get('siteLocation');
+            var siteLocation = this.app.session.get('siteLocation');
             var spec;
             var slug;
 
@@ -187,11 +221,11 @@ module.exports = {
                     params: params
                 }
             };
-            app.fetch(spec, {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
+                    return helpers.common.error.call(this, err, result, callback);
                 }
                 
                 var item = result.item.toJSON();
@@ -227,13 +261,10 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'map'], config.get(['cache', 'headers', 'default'], {})));
-
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var siteLocation = app.session.get('siteLocation');
+            var siteLocation = this.app.session.get('siteLocation');
             var spec;
             var slug;
 
@@ -257,11 +288,11 @@ module.exports = {
                     params: params
                 }
             };
-            app.fetch(spec, {
+            this.app.fetch(spec, {
                 'readFromCache': false
             }, function afterFetch(err, result) {
                 if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
+                    return helpers.common.error.call(this, err, result, callback);
                 }
 
                 var item = result.item.toJSON();
@@ -358,9 +389,8 @@ module.exports = {
         }, controller);
 
         function controller(form) {
-            var app = this.app;
-            var user = app.session.get('user');
-            var platform = app.session.get('platform');
+            var user = this.app.session.get('user');
+            var platform = this.app.session.get('platform');
             var spec = {
                 categories: {
                     collection : 'Categories',
@@ -378,7 +408,7 @@ module.exports = {
             params.id = params.itemId;
             delete params.itemId;
 
-            app.fetch(spec, {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err || !result.item) {

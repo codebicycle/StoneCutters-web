@@ -89,6 +89,17 @@ module.exports = (function() {
         }));
     }
 
+    function error(err, res, status, callback) {
+        if (_.isFunction(status)) {
+            callback = status;
+            status = 404;
+        }
+        if (typeof window === 'undefined') {
+            this.app.req.res.status(status);
+        }
+        return callback(err, 'pages/error', res);
+    }
+
     function daysDiff(date) {
         var now = new Date();
         var diff = now.getTime() - date.getTime();
@@ -102,6 +113,7 @@ module.exports = (function() {
         params: utils.params,
         removeParams: utils.removeParams,
         redirect: redirect,
+        error: error,
         daysDiff: daysDiff,
         'static': statics
     };
