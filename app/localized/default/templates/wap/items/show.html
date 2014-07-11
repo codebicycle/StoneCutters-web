@@ -22,7 +22,7 @@
                 </td>
             </tr>
         </table>
-        {% if item.status.visible %}
+        {% if not item.status.deprecated %}
             {% if item.images.length > 0 %}
                 <table width="100%" cellspacing="0" cellpadding="4" border="0">
                     <tr>
