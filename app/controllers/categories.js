@@ -120,13 +120,16 @@ module.exports = {
                     collection: 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageCode: this.app.session.get('selectedLanguage'),
+                        seo: true
                     }
                 }
             }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 analytics.reset();
+                seo.addMetatag('title', result.categories.metadata.title);
+                seo.addMetatag('description', result.categories.metadata.description);
                 callback(null, {
                     categories: result.categories.toJSON(),
                     icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
