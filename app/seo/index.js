@@ -16,14 +16,13 @@ var specials = {
     },
     canonical: function(content) {
         var platform = this.app.session.get('platform');
+        var url = this.app.session.get('url');
         var protocol;
         var host;
-        var url;
 
-        if (platform === 'wap') {
+        if (platform === 'wap' && utils.params(url, 'sid')) {
             protocol = this.app.session.get('protocol');
             host = this.app.session.get('host');
-            url = this.app.session.get('url');
 
             head.canonical = [protocol, '://', host, utils.removeParams(url, 'sid')].join('');
         }
