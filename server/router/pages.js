@@ -321,23 +321,35 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/force/:platform?', handler);
 
         function handler(req, res) {
+console.log('handler force');
             Session.call(req.rendrApp, false, {
                 isServer: true
             }, callback);
 
             function callback() {
+console.log('   callback force');
                 var forcedPlatform = req.rendrApp.session.get('forcedPlatform');
                 var platform = req.param('platform');
+console.log('       forcedPlatform', forcedPlatform);
+console.log('       platform', platform);
 
                 if (!platform && (forcedPlatform && forcedPlatform === platform) || !_.contains(configServer.get('platforms', []), platform)) {
+console.log('       remove forcedPlatform');
                     req.rendrApp.session.clear('forcedPlatform');
                 }
                 else {
+console.log('       persist forcedPlatform [', platform, ']');
                     req.rendrApp.session.persist({
                         forcedPlatform: platform
                     });
                 }
-                res.redirect(utils.link('/', req.rendrApp));
+console.log('       redirect to HOME');
+                try {
+                    res.redirect(utils.link('/', req.rendrApp));
+                } catch (e) {
+console.log('ERROR', e);
+                    res.redirect('/');
+                }
             }
         }
     })();

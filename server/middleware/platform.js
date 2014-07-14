@@ -20,12 +20,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var platform;
 
                 if (err) {
-                    console.log('redirect for err', err);
                     return fail(err);
                 }
                 platform = body.web_platform || 'wap';
                 res.set('Vary', 'User-Agent');
-                console.log('redirect to', req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
                 res.redirect(302, req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);
             }
 
@@ -34,7 +32,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var platform;
 
                 if (err) {
-                    console.log('redirect for err', err);
                     return fail(err);
                 }
                 platform = body.web_platform || 'wap';
@@ -43,10 +40,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                     host = host.split('.');
                     host.shift();
                     res.set('Vary', 'User-Agent');
-                    console.log('redirect to', [req.protocol, '://', platform, '.', host.join('.'), utils.removeParams(req.originalUrl, 'sid')].join(''));
                     return res.redirect(302, [req.protocol, '://', platform, '.', host.join('.'), utils.removeParams(req.originalUrl, 'sid')].join(''));
                 }
-                console.log('next');
                 next();
             }
 
@@ -59,24 +54,17 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             else if (req.subdomains.length <= 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
                 if (!~userAgent.indexOf('Googlebot')) {
-                    if (req.cookies.forcedPlatform && req.cookies.forcedPlatform !== req.subdomains.pop()) {
-                        res.set('Vary', 'User-Agent');
-
-                        return res.redirect(302, req.protocol + '://' + req.cookies.forcedPlatform + '.' + req.headers.host + req.originalUrl);
+                    if (!req.headers.referer) {
+                        return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), check);
                     }
-                    else if (!req.cookies.forcedPlatform) {
-                        if (!req.headers.referer) {
-                            return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), check);
-                        }
-                        else {
-                            var refererHost = URLParser.parse(req.headers.referer).hostname;
+                    else {
+                        var refererHost = URLParser.parse(req.headers.referer).hostname;
 
-                            if (refererHost !== req.headers.host.split(':').shift()) {
-                                refererHost = (refererHost || '').split('.');
+                        if (refererHost !== req.headers.host.split(':').shift()) {
+                            refererHost = (refererHost || '').split('.');
 
-                                if (!_.intersection(config.get('hosts', ['olx']), refererHost).length) {
-                                    return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), check);
-                                }
+                            if (!_.intersection(config.get('hosts', ['olx']), refererHost).length) {
+                                return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), check);
                             }
                         }
                     }
