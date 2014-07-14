@@ -2,14 +2,15 @@
 <html>
     {% view 'layout/head' %}
     <body>
-        <div id="supercontainer">
-        	{% view 'header/bar' %}
-        	{% view 'header/index' %}
-        	<div id="the-content" class="clearfix">
-        		{{ body }}
-        	</div>
-        	<br class="clear" />
-        	{% view 'footer/footer' %}
+        {% view 'header/bar' %}
+        <div id="wrapper">
+            
+            {% view 'header/index' %}
+            
+            <section id="content">
+                {{ body }}            
+            </section>        	
+            {% view 'footer/footer' %}
         </div>
 	</body>
 </html>

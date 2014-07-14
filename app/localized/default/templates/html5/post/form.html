@@ -3,7 +3,7 @@
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
 {% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
 <div class="changeCat">
-    {{ dictionary["itemslisting.Category"] }} {{ subcategory.name }}
+    {{ dictionary["itemslisting.Category"] }} {{ subcategory.trName }}
     <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
 </div>
 <section id="posting">

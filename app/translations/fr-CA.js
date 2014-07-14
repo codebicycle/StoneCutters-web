@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Changer la Ville',
     'countryoptions.EnterCity': 'Indiquez une Ville',
+    'countryoptions.Region': 'Endroit:',
     'countryoptions.SelectACity': 'S\xE9lectionnez une ville',
     'defaultfooter.Back': 'Retour',
     'defaultfooter.FreeSite': 'Annonces 100% gratuites',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Parcourez les cat\xE9gories d\'<<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Veuillez choisir une ville pour publier un item',
     'listingpageitemslisting.AllResultsNew': 'Tous les r\xE9sultats',
+    'listingpageitemslisting.Posted': 'Post\xE9',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> r\xE9sultats pour <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nous sommes d\xE9sol\xE9s mais il n\'y pas de r\xE9sultats pour votre recherche.',
     'listingpageitemslisting.ZeroResultsPage': 'D\xE9sol\xE9, mais nous n\'avons trouv\xE9 aucun r\xE9sultat dans <<CATEGORY>> pour <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Annonce rejet\xE9e',
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
+    'misc.SeeMoreAds': 'See more ads',
     'misc.Sell_Post_Mobile_India': 'Sell',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',

@@ -99,7 +99,7 @@ describe('app', function test() {
                     server.configure(rendrConfiguration);
                     router.route();
                     request(server.expressApp)
-                        .get('/nf/search/a')
+                        .get('/nf/search/i')
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .end(end);
@@ -143,7 +143,7 @@ describe('app', function test() {
                         response.custom = JSON.parse(response.custom);
                         response.custom.should.have.property('page_name', 'listing_all');
                         response.custom.should.have.property('category', 'listing');
-                        response.custom.should.have.property('keyword', 'a');
+                        response.custom.should.have.property('keyword', 'i');
                         response.custom.should.have.property('page_nb');
                         response.custom.should.have.property('language');
                         response.custom.should.have.property('platform');

@@ -148,7 +148,7 @@ module.exports = function(nunjucks) {
             return encodeURIComponent(text);
         },
         date: function(timestamp) {
-            return dateformat(new Date(timestamp), 'dd-mm-yyyy');
+            return dateformat(new Date(timestamp), 'dd/mm/yyyy');
         },
         log: function() {
             console.log.apply(console, arguments);

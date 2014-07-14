@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Canvia la ciutat',
     'countryoptions.EnterCity': 'Introdu\xEFu una ciutat',
+    'countryoptions.Region': 'Ubicaci\xF3',
     'countryoptions.SelectACity': 'Selecciona una ciutat',
     'defaultfooter.Back': 'Torna',
     'defaultfooter.FreeSite': 'Classificats 100% gratu\xEFts',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Cercar categories <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Seleccioneu una ciutat per publicar un article',
     'listingpageitemslisting.AllResultsNew': 'Tots els resultats',
+    'listingpageitemslisting.Posted': 'Publicat',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultats per a <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ho sentim, no hem trobat resultats de <<CATEGORY>> a <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Anunci rebutjat',
     'misc.SeeAdIn2Hrs_Mob': 'El veur\xE0s publicat a OLX d\'aqu\xED a 2 hores',
+    'misc.SeeMoreAds': 'Veure m\xE9s anuncis',
     'misc.Sell_Post_Mobile_India': 'Publicar',
     'misc.SpecificFields_title': 'Camps espec\xEDfics de categoria (opcionals)',
     'misc.YouAreIn_Mob': 'Ets a  <<LOCATION>>',

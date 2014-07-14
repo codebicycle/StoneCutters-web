@@ -145,7 +145,7 @@ module.exports = {
                     var relatedItems = [];
                     var subcategory = _categories.search(item.category.id);
                     var category;
-                    
+
                     if (!result) {
                         result = {};
                     }
@@ -159,6 +159,8 @@ module.exports = {
                     result.sk = securityKey;
                     category = _categories.get(subcategory.get('parentId'));
                     result.relatedAdsLink = ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join('');
+                    result.subcategory = subcategory.toJSON();
+                    result.category = category.toJSON();
                     result.favorite = favorite;
 
                     if (!item.purged) {
@@ -233,7 +235,7 @@ module.exports = {
                 if (err || !result.item) {
                     return helpers.common.error.call(this, err, result, callback);
                 }
-                
+
                 var item = result.item.toJSON();
                 var platform = this.app.session.get('platform');
                 var subcategory;
@@ -343,7 +345,7 @@ module.exports = {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
-            
+
             analytics.reset();
             analytics.setPage('nf');
             analytics.addParam('keyword', query.search);
