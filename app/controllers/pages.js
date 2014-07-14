@@ -156,15 +156,13 @@ module.exports = {
     esi: function(params, callback) {
         var enabled = config.get('esi', true);
 
-        if (!enabled) {
+        if (!enabled || !this.app.session.get('isServer')) {
             return helpers.common.redirect.call(this, '/');
         }
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            if (this.app.session.get('isServer')) {
-                this.app.req.res.setHeader('Edge-Control', 'dca=esi');
-            }
+            this.app.req.res.setHeader('Edge-Control', 'dca=esi');
             callback();
         }
     }

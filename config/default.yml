@@ -57,6 +57,7 @@ middleware:
       - /stats/sockets
       - /analytics/pageview.gif
       - /analytics/pageevent.gif
+      - /esi
 
 stylus:
   testing:

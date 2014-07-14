@@ -2,7 +2,7 @@
 
 module.exports = {
     'pages#esi': {
-        url: 'esi'
+        url: 'akamai/esi'
     },
     'redirections#category': {
         url: 'category/:categoryId/:title'
@@ -228,6 +228,6 @@ module.exports = {
         }
     },
     'pages#error': {
-        url: /^\/(?!((health$)|(stats($|\/))|(analytics\/))).*/
+        url: /^\/(?!((health$)|(stats($|\/))|(esi($|\/))|(analytics\/))).*/
     }
 };

@@ -1,6 +1,5 @@
-<h2 id="esi">
-    <esi:choose>
-        <esi:when test="$exists($(HTTP_COOKIE{'user'}))">LOGGEDIN</esi:when>
-        <esi:otherwise>LOGGEDOUT</esi:otherwise>
-    </esi:choose>
-</h2>
+<esi:eval src="http://html5.m.olx.com.py/esi" dca="esi" setheader="'set-cookie: ' + $(HTTP_COOKIE)"/>
+<esi:vars>
+    <h2 id="esi">$(user)</h2>
+    <h3 id="esi">$(test)</h3>
+</esi:vars>
