@@ -309,7 +309,10 @@ module.exports = {
                 var subcategory;
 
                 slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
+                if (platform !== 'html4') {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
 
