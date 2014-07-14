@@ -16,9 +16,9 @@ module.exports = {
         type: 'development'
     },
     localization: {
-        wap: [],
-        html4: [],
-        html5: [],
+        wap: ['www.olx.de'],
+        html4: ['www.olx.de'],
+        html5: ['www.olx.de'],
         desktop: ['www.olx.com.br']
     },
     icons: {
