@@ -122,7 +122,7 @@ module.exports = {
                     var user = app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
                     var category;
-                    
+
                     result.relatedItems = model.get('data');
                     result.user = user;
                     result.item = item;
@@ -195,7 +195,7 @@ module.exports = {
                 if (err || !result.item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
-                
+
                 var item = result.item.toJSON();
                 var platform = this.app.session.get('platform');
                 var subcategory;
@@ -302,7 +302,7 @@ module.exports = {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
-            
+
             analytics.reset();
             analytics.setPage('nf');
             analytics.addParam('keyword', query.search);
