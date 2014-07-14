@@ -1,0 +1,4 @@
+{% if blackBar.show %}
+    <span class="env {{ blackBar.env | lower }}">{{ blackBar.env }}<!-- <small>({{ blackBar.platform }} v. {{ blackBar.version }} :: {{ blackBar.revision }})</small>--></span>
+{% endif %}
+

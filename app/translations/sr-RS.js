@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Promenite grad',
     'countryoptions.EnterCity': 'Unesite grad',
+    'countryoptions.Region': 'Lokacija',
     'countryoptions.SelectACity': 'Izaberite grad',
     'defaultfooter.Back': 'Nazad',
     'defaultfooter.FreeSite': '100% besplatni mali oglasi',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Pretra\u017Eite <<BRAND>> kategorije',
     'countrystatecityv2.MessageFromPost': 'Izaberite grad da biste objavili oglas',
     'listingpageitemslisting.AllResultsNew': 'Svi rezultati',
+    'listingpageitemslisting.Posted': 'Objavljeno',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultata za <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\u017Dao nam je, pretraga nije dala rezultate.',
     'listingpageitemslisting.ZeroResultsPage': 'Nema rezultata u <<CATEGORY>> u <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Odbijeni oglas',
     'misc.SeeAdIn2Hrs_Mob': 'Vide\u0107ete ga na OLX-u u roku od 2 sata',
+    'misc.SeeMoreAds': 'Prika\u017Ei jo\u0161 oglasa',
     'misc.Sell_Post_Mobile_India': 'Objavi',
     'misc.SpecificFields_title': 'Polja specifi\u010Dna za kategoriju (opcionalno)',
     'misc.YouAreIn_Mob': 'Nalazite se u <<LOCATION>>',
