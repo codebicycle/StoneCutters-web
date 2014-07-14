@@ -114,7 +114,7 @@ function persistParams() {
     });
 }
 
-function checkParams() {
+function checkInitParams() {
     var gaIs = this.app.session.get('gaIs');
     var gaCs;
 
@@ -134,7 +134,7 @@ function checkParams() {
 
 function generate(params, page, options) {
     params.page = generatePage.call(this, page, options);
-    if (!checkParams.call(this)) {
+    if (checkInitParams.call(this)) {
         persistParams.call(this);
     }
 }
