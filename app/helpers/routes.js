@@ -67,6 +67,9 @@ module.exports = {
     'redirections#edit': {
         url: 'user/edit_item/:userId/:itemId'
     },
+    'redirections#subcategoryList': {
+        url: 'item/:categoryId'
+    },
     'categories#list': {
         url: ''
     },

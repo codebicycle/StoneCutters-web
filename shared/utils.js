@@ -6,10 +6,10 @@ var isServer = (typeof window === 'undefined');
 var utils = {
     isServer: isServer,
     link: link,
+    fullizeUrl: fullizeUrl,
     params: params,
     removeParams: removeParams,
-    get: get,
-    qs: querystring
+    get: get
 };
 var linkParams = {
     location: function (href, query) {
@@ -62,6 +62,18 @@ function link(href, app, query) {
     return href;
 }
 
+function fullizeUrl(href, app) {
+    var protocol;
+    var host;
+
+    if (href.indexOf('http://')) {
+        protocol = app.session.get('protocol');
+        host = app.session.get('host');
+        href = [protocol, '://', host, (href.indexOf('/') ? '/' : ''), href].join('');
+    }
+    return href;
+}
+
 function params(url, keys, value) {
     var parts = url.split('?');
     var parameters = {};
@@ -69,7 +81,7 @@ function params(url, keys, value) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = utils.qs.parse(parts.join('?'));
+        parameters = querystring.parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.extend(parameters, keys);
@@ -82,7 +94,7 @@ function params(url, keys, value) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(utils.qs.stringify(parameters));
+        out.push(querystring.stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');
@@ -97,7 +109,7 @@ function removeParams(url, keys) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = utils.qs.parse(parts.join('?'));
+        parameters = querystring.parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.filter(parameters, function filter(key) {
@@ -109,7 +121,7 @@ function removeParams(url, keys) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(utils.qs.stringify(parameters));
+        out.push(querystring.stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');

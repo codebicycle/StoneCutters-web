@@ -97,7 +97,7 @@ module.exports = (function() {
         if (typeof window === 'undefined') {
             this.app.req.res.status(status);
         }
-        return callback(err, 'pages/error', res);
+        return callback(null, 'pages/error', res);
     }
 
     function daysDiff(date) {
@@ -110,6 +110,7 @@ module.exports = (function() {
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
+        fullizeUrl: utils.fullizeUrl,
         params: utils.params,
         removeParams: utils.removeParams,
         redirect: redirect,

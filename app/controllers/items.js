@@ -20,7 +20,6 @@ module.exports = {
             var favorite = params.favorite;
             var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
-            var spec;
 
             if (user) {
                 params.token = user.token;
@@ -29,37 +28,41 @@ module.exports = {
                 anonymousItem = localStorage.getItem('anonymousItem');
                 anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
                 if (securityKey) {
-                    anonymousItem[params.itemId] = securityKey;
+                    anonymousItem[itemId] = securityKey;
                     localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
                 }
                 else {
-                    securityKey = anonymousItem[params.itemId];
+                    securityKey = anonymousItem[itemId];
                 }
             }
-            params.id = params.itemId;
+            params.id = itemId;
             params.languageCode = this.app.session.get('selectedLanguage');
             delete params.itemId;
             delete params.title;
             delete params.sk;
 
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: params.languageCode
+                        }
                     }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err) {
-                    return helpers.common.error.call(this, err, result, callback);
-                }
-                findItem.call(this, err, result);
-            }.bind(this));
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        done.abort();
+                        return helpers.common.error.call(this, err, res, callback);
+                    }
+                    done(res.categories);
+                }.bind(this));
+            }
 
-            function findItem(err, res) {
+
+            function findItem(done) {
                 this.app.fetch({
                     item: {
                         model: 'Item',
@@ -67,47 +70,46 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, result) {
-                    if (!result) {
-                        result = {};
+                }, function afterFetch(err, res) {
+                    if (!res) {
+                        res = {};
                     }
                     if (err) {
                         if (err.status !== 422) {
-                            return helpers.common.error.call(this, err, result, callback);
+                            return done.fail(err, res);
                         }
-                        result.item = new Item(err.body);
-                        result.item.set('id', result.item.get('itemId'));
-                        result.item.set('slug', '/des-iid-' + result.item.get('id'));
-                        result.item.set('location', this.app.session.get('location'));
-                        result.item.set('title', 'Item title');
-                        result.item.set('date', {
+                        res.item = new Item(err.body);
+                        res.item.set('id', itemId);
+                        res.item.set('slug', '/des-iid-' + itemId);
+                        res.item.set('location', this.app.session.get('location'));
+                        res.item.set('title', 'Item title');
+                        res.item.set('date', {
                             timestamp: new Date().toISOString()
                         });
-                        result.item.set('description', 'Item description');
-                        result.item.set('category', {
-                            id: result.item.get('categoryId'),
-                            name: result.item.get('categoryName')
+                        res.item.set('description', 'Item description');
+                        res.item.set('category', {
+                            id: res.item.get('categoryId'),
+                            name: res.item.get('categoryName')
                         });
-                        result.item.set('status', {
+                        res.item.set('status', {
                             deprecated: true
                         });
-                        result.item.set('purged', true);
+                        res.item.set('purged', true);
                         err = null;
                     }
-                    result.categories = res.categories;
-                    findRelatedItems.call(this, err, result);
+                    done(res.item);
                 }.bind(this));
             }
 
-            function findRelatedItems(err, res) {
-                if (!res.item) {
-                    return helpers.common.error.call(this, err, res, callback);
+            function findRelatedItems(_categories, _item) {
+                if (!_categories || !_item) {
+                    return helpers.common.error.call(this, null, {}, callback);
                 }
-                var item = res.item.toJSON();
+                var item = _item.toJSON();
                 var slug;
 
                 slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
                     slug = ('/' + slug);
                     if (favorite) {
                         slug = helpers.common.params(slug, 'favorite', favorite);
@@ -122,7 +124,7 @@ module.exports = {
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
                         query: {
-                            location: res.item.getLocation().url
+                            location: _item.getLocation().url
                         }
                     });
                 }
@@ -141,8 +143,7 @@ module.exports = {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var relatedItems = [];
-                    var user = this.app.session.get('user');
-                    var subcategory = res.categories.search(item.category.id);
+                    var subcategory = _categories.search(item.category.id);
                     var category;
                     
                     if (!result) {
@@ -156,8 +157,8 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    category = res.categories.get(subcategory.get('parentId'));
-                    result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
+                    category = _categories.get(subcategory.get('parentId'));
+                    result.relatedAdsLink = ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join('');
                     result.favorite = favorite;
 
                     if (!item.purged) {
@@ -168,8 +169,8 @@ module.exports = {
                         analytics.addParam('subcategory', subcategory.toJSON());
                         result.analytics = analytics.generateURL.call(this);
 
-                        seo.addMetatag('title', res.item.shortTitle());
-                        seo.addMetatag('description', res.item.shortDescription());
+                        seo.addMetatag('title', _item.shortTitle());
+                        seo.addMetatag('description', _item.shortDescription());
                     }
                     else {
                         seo.addMetatag('robots', 'noindex, nofollow');
@@ -187,6 +188,14 @@ module.exports = {
                     callback(err, result);
                 }.bind(this));
             }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .val(findRelatedItems.bind(this));
         }
     },
     gallery: function(params, callback) {
@@ -197,8 +206,6 @@ module.exports = {
             var itemId = params.itemId;
             var slugUrl = params.title;
             var pos = Number(params.pos) || 0;
-            var siteLocation = this.app.session.get('siteLocation');
-            var spec;
             var slug;
 
             if (user) {
@@ -208,11 +215,11 @@ module.exports = {
             delete params.itemId;
             delete params.title;
 
-            spec = {
+            this.app.fetch({
                 categories: {
                     collection : 'Categories',
                     params: {
-                        location: siteLocation,
+                        location: this.app.session.get('siteLocation'),
                         languageCode: this.app.session.get('selectedLanguage')
                     }
                 },
@@ -220,8 +227,7 @@ module.exports = {
                     model: 'Item',
                     params: params
                 }
-            };
-            this.app.fetch(spec, {
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err || !result.item) {
@@ -233,7 +239,10 @@ module.exports = {
                 var subcategory;
 
                 slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
+                if (platform !== 'html4') {
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (!item.images || !item.images.length) {
