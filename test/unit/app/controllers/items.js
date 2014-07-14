@@ -401,24 +401,6 @@ describe('app', function test() {
                         done();
                     }
                 });
-                it('should redirect to the 404', function test(done) {
-                    request(server.expressApp)
-                        .get('/des-iid-1234567890')
-                        .set('host', utils.getHost('html4', 'in'))
-                        .set('user-agent', utils.userAgents.html4)
-                        .set('cookie', response.get('set-cookie'))
-                        .end(end);
-
-                    function end(err, res) {
-                        response = res;
-
-                        (function existance(response) {
-                            response.should.have.property('redirect');
-                            response.redirect.uri.should.equal('/404');
-                        })(context);
-                        done();
-                    }
-                });
             });
         });
     });
