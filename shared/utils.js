@@ -44,8 +44,10 @@ var linkParams = {
         return href;
     },
     sid: function (href, query) {
-        if (this.session.get('platform') === 'wap') {
-            href = params(href, 'sid', this.session.get('sid'));
+        var sid = this.session.get('sid');
+
+        if (this.session.get('platform') === 'wap' && sid) {
+            href = params(href, 'sid', sid);
         }
         return href;
     }
