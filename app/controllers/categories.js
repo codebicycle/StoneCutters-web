@@ -17,7 +17,10 @@ function handleItems(category, subcategory, params, callback) {
     var query;
 
     if (slug.indexOf(params.title + '-cat-')) {
-        return helpers.common.redirect.call(this, '/' + slug);
+        if (typeof page === 'undefined' || (isNaN(page) || page <= 1 || page >= 999999)) {
+            return helpers.common.redirect.call(this, '/' + slug);
+        }
+        return helpers.common.redirect.call(this, '/' + slug + '-p-' + page);
     }
     helpers.pagination.prepare(this.app, params);
     query = _.clone(params);
