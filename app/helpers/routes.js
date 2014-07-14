@@ -228,6 +228,6 @@ module.exports = {
         }
     },
     'pages#error': {
-        url: /^\/(?!((health$)|(stats($|\/))|(analytics\/))).*/
+        url: /^\/(?!((health$)|(force($|\/))|(stats($|\/))|(analytics($|\/)))).*/
     }
 };

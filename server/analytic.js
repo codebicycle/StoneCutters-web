@@ -173,11 +173,12 @@ Analytic.prototype.trackPage = function(options, callback) {
     }
     if (analytic) {
         url = analytic(defaults({}, options, this.options));
+        if (this.debug) {
+            console.log('Analytic [' + this.type + '] - URL [' + url + ']');
+        }
+        makeTrack(url, callback);
     }
-    if (this.debug) {
-        console.log('Analytic [' + this.type + '] - URL [' + url + ']');
-    }
-    makeTrack(url, callback);
+    return url;
 };
 
 module.exports = Analytic;

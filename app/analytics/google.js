@@ -105,6 +105,7 @@ function persistParams() {
     var gaUid = this.app.session.get('gaUid') || Math.round(Math.random() * 1000000);
 
     this.app.session.persist({
+        gaCs: gaCs,
         gaIs: gaIs,
         gaPs: gaPs,
         gaNs: ++gaNs,
