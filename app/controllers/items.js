@@ -37,6 +37,7 @@ module.exports = {
             }
             params.id = itemId;
             params.languageCode = this.app.session.get('selectedLanguage');
+            params.seo = true;
             delete params.itemId;
             delete params.title;
             delete params.sk;
@@ -128,9 +129,8 @@ module.exports = {
                         }
                     });
                 }
-                
                 this.app.fetch({
-                    items: {
+                    relatedItems: {
                         collection : 'Items',
                         params: {
                             location: siteLocation,
@@ -142,17 +142,18 @@ module.exports = {
                 }, {
                     readFromCache: false
                 }, function afterFetch(err, result) {
-                    var relatedItems = [];
                     var subcategory = _categories.search(item.category.id);
                     var category;
 
-                    if (!result) {
-                        result = {};
+                    if (err) {
+                        err = null;
+                        result = {
+                            relatedItems: []
+                        };
                     }
-                    if (result.items) {
-                        relatedItems = result.items.models[0].get('data');
+                    else {
+                        result.relatedItems = result.relatedItems.toJSON();
                     }
-                    result.relatedItems = relatedItems;
                     result.user = user;
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
@@ -170,23 +171,20 @@ module.exports = {
                         analytics.addParam('category', category.toJSON());
                         analytics.addParam('subcategory', subcategory.toJSON());
                         result.analytics = analytics.generateURL.call(this);
-
-                        seo.addMetatag('title', _item.shortTitle());
-                        seo.addMetatag('description', _item.shortDescription());
+                        seo.addMetatag('title', item.metadata.itemPage.title);
+                        seo.addMetatag('description', item.metadata.itemPage.description);
                     }
                     else {
                         seo.addMetatag('robots', 'noindex, nofollow');
                         seo.addMetatag('googlebot', 'noindex, nofollow');
                     }
                     seo.update();
-
                     this.app.session.update({
                         postingLink: {
                             category: category.get('id'),
                             subcategory: subcategory.get('id')
                         }
                     });
-
                     callback(err, result);
                 }.bind(this));
             }
@@ -373,10 +371,9 @@ module.exports = {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var url = '/nf/search/' + query.search + '/';
-                var model = result.items.models[0];
 
-                result.items = model.get('data');
-                result.metadata = model.get('metadata');
+                result.metadata = result.items.metadata;
+                result.items = result.items.toJSON();
                 if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
@@ -385,8 +382,8 @@ module.exports = {
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');
                 }
-                seo.addMetatag.call(this, 'title', query.search);
-                seo.addMetatag.call(this, 'description', query.search);
+                seo.addMetatag('title', query.search);
+                seo.addMetatag('description');
                 seo.update();
 
                 helpers.pagination.paginate(result.metadata, query, url);

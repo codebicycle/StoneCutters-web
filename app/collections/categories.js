@@ -17,6 +17,13 @@ module.exports = Base.extend({
                 return category.get('children').get(id);
             }
         }
+    },
+    parse: function(response) {
+        if (response.categories) {
+            this.metadata = response.metadata;
+            return response.categories;
+        }
+        return response;
     }
 });
 
