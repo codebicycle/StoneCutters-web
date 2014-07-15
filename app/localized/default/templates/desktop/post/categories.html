@@ -6,16 +6,18 @@
 		<h2><strong>1</strong>Selecione uma categoria:</h2>
 		<ul class="catList">
 			{% for category in categories %}
-	            <li class="cat{{category.id}}" >
+	            <li id="cat{{category.id}}" class="category" >
 	            	{{category.trName}}
-	            	<h2><strong>2</strong> Selecione uma subcategoria:</h2>
-	            	<ul class="catList">
-		            	{% for subCategory in category.children.toJSON() %}
-		            		<li>
-		            			<a href="">{{ subCategory.trName }}</a>
-		            		</li>
-		            	{% endfor %}
-		            </ul>
+	            	<div class="cat{{category.id}} catContent">
+		            	<h2><strong>2</strong> Selecione uma subcategoria:</h2>
+		            	<ul class="catList">
+			            	{% for subCategory in category.children.toJSON() %}
+			            		<li>
+			            			<a href="{{ ['/posting/', category.id, '/', subCategory.id] | join('') | link }}">{{ subCategory.trName }}</a>
+			            		</li>
+			            	{% endfor %}
+			            </ul>
+			        </div>
 	            </li>
 	        {% endfor %}
 		</ul>
