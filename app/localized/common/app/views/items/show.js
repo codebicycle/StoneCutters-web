@@ -3,6 +3,7 @@
 var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../../../../helpers');
+var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -176,18 +177,25 @@ module.exports = Base.extend({
 
             if (this.validForm(message, email)) {
                 $('.loading').show();
-                $.ajax({
-                    type: 'POST',
-                    url: helpers.common.link(url, this.app),
-                    cache: false,
-                    data: {
-                        message: message,
-                        email: email,
-                        name:name,
-                        phone:phone
-                    }
-                })
-                .done(function success(data) {
+
+                var post = function(done) {
+                    $.ajax({
+                        type: 'POST',
+                        url: helpers.common.link(url, this.app),
+                        cache: false,
+                        data: {
+                            message: message,
+                            email: email,
+                            name:name,
+                            phone:phone
+                        }
+                    })
+                    .done(done)
+                    .fail(done.fail)
+                    .always(always);
+                }.bind(this);
+
+                var success = function(done, data) {
                     var analytics;
                     var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                     var category = $('.itemCategory').val();
@@ -200,7 +208,6 @@ module.exports = Base.extend({
                     $('.email').val('');
                     $('.phone').val('');
                     $msg.text(this.messages.msgSend);
-
                     analytics = $('<div></div>').append(data);
                     analytics = $('#replySuccess', analytics);
                     $msg.append(analytics.length ? analytics : '');
@@ -209,24 +216,51 @@ module.exports = Base.extend({
                         action: 'ReplySuccess',
                         custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
                     });
-
                     $('.msgCont').addClass('visible');
                     setTimeout(function(){
                         $('.msgCont').removeClass('visible');
                     }, 3000);
-                }.bind(this))
+                }.bind(this);
 
-                .fail(function fail(data) {
+                var track = function(done) {
+                    var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+
+                    $.ajax({
+                        url: helpers.common.link(url, this.app, {
+                            metric: 'reply,success',
+                            location: this.app.session.get('location').name,
+                            platform: this.app.session.get('platform')
+                        }),
+                        cache: false
+                    })
+                    .done(done)
+                    .fail(done.fail);
+                }.bind(this);
+
+                var fail = function(data) {
+                    var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
                     var messages = JSON.parse(data.responseText);
 
                     $('small.email').text(messages[0].message).removeClass('hide');
-                }.bind(this))
+                    $.ajax({
+                        url: helpers.common.link(url, this.app, {
+                            metric: 'reply,fail',
+                            location: this.app.session.get('location').name,
+                            platform: this.app.session.get('platform')
+                        }),
+                        cache: false
+                    });
+                }.bind(this);
 
-                .always(function always() {
+                var always = function() {
                     $('.loading').hide();
-                }.bind(this));
-            }
+                }.bind(this);
 
+
+                asynquence().or(fail)
+                    .then(post)
+                    .gate(success, track);
+            }
         }.bind(this));
 
         //window History

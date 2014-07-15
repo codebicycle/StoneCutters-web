@@ -317,6 +317,40 @@ module.exports = function itemRouter(app, dataAdapter) {
         }
     })();
 
+    (function graphiteGif() {
+        app.get('/analytics/graphite.gif', handler);
+
+        var metrics = {
+            reply: {
+                success: function(req) {
+                    graphite.send([req.query.location, 'reply', 'success', req.query.platform], 1, '+');
+                },
+                fail: function(req) {
+                    graphite.send([req.query.location, 'reply', 'fail', req.query.platform], 1, '+');
+                }
+            }
+        };
+
+        function noop() {}
+
+        function handler(req, res) {
+            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+
+            image = new Buffer(image, 'base64');
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', image.length);
+            res.end(image);
+
+            Session.call(req.rendrApp, false, {
+                isServer: true
+            }, callback);
+
+            function callback() {
+                utils.get(metrics, (req.query.metric || '').split(','), noop)(req);
+            }
+        }
+    })();
+
     (function force() {
         app.get('/force/:platform?', handler);
 
