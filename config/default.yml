@@ -58,6 +58,7 @@ middleware:
       - /analytics
       - /analytics/pageview.gif
       - /analytics/pageevent.gif
+      - /analytics/graphite.gif
       - /force
       - /force/wap
       - /force/html4
