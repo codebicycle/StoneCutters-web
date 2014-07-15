@@ -106,6 +106,8 @@ module.exports = {
                     return helpers.common.error.call(this, null, {}, callback);
                 }
                 var item = _item.toJSON();
+                var protocol = this.app.session.get('protocol');
+                var platform = this.app.session.get('platform');
                 var slug;
 
                 slug = helpers.common.slugToUrl(item);
@@ -117,8 +119,6 @@ module.exports = {
                     return helpers.common.redirect.call(this, slug);
                 }
                 if (item.location.url !== this.app.session.get('location').url) {
-                    var protocol = this.app.session.get('protocol');
-                    var platform = this.app.session.get('platform');
                     var url = [protocol, '://', platform, '.', item.location.url.replace('www.', 'm.'), '/', slug].join('');
 
                     return helpers.common.redirect.call(this, url, null, {
@@ -176,6 +176,11 @@ module.exports = {
                     else {
                         seo.addMetatag('robots', 'noindex, nofollow');
                         seo.addMetatag('googlebot', 'noindex, nofollow');
+                    }
+                    if (siteLocation && !~siteLocation.indexOf('www.')) {
+                        var url = this.app.session.get('url');
+
+                        seo.addMetatag.call(this, 'canonical', helpers.common.fullizeUrl(helpers.common.removeParams(url, 'location'), this.app));
                     }
                     seo.update();
                     this.app.session.update({
