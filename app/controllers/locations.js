@@ -31,6 +31,9 @@ module.exports = {
             analytics.reset();
             if (params.target && params.target === 'posting') {
                 analytics.setPage('post#location');
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
             }
             this.app.fetch(spec, {
                 readFromCache: false
