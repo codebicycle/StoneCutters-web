@@ -23,6 +23,7 @@ function handleItems(category, subcategory, params, callback) {
     query = _.clone(params);
     params.categoryId = params.catId;
     params.seo = true;
+    params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
     delete params.catId;
     delete params.title;
     delete params.page;
