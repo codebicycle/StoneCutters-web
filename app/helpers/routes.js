@@ -10,6 +10,9 @@ module.exports = {
     'redirections#subcategory': {
         url: 'item/:categoryId/:title/:subTitle/page/:page'
     },
+    'redirections#subcategoryListWithParams': {
+        url: 'item/:categoryId/:title/:subTitle/:description/page/:page'
+    },
     'redirections#related': {
         url: 'item/:categoryId/related-ads/page/:page'
     },
@@ -66,6 +69,9 @@ module.exports = {
     },
     'redirections#edit': {
         url: 'user/edit_item/:userId/:itemId'
+    },
+    'redirections#subcategoryList': {
+        url: 'item/:categoryId'
     },
     'categories#list': {
         url: ''
@@ -228,6 +234,6 @@ module.exports = {
         }
     },
     'pages#error': {
-        url: /^\/(?!((health$)|(stats($|\/))|(analytics\/))).*/
+        url: /^\/(?!((health$)|(force($|\/))|(stats($|\/))|(analytics($|\/)))).*/
     }
 };

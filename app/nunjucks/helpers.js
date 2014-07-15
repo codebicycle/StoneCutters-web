@@ -1,9 +1,9 @@
 'use strict';
 
-var config = require('../config');
-var helpers = require('../helpers');
 var _ = require('underscore');
 var dateformat = require('dateformat');
+var config = require('../config');
+var helpers = require('../helpers');
 
 module.exports = function(nunjucks) {
     return {
@@ -141,14 +141,7 @@ module.exports = function(nunjucks) {
             return typeof value === type;
         },
         link: function (href, query) {
-            var protocol;
-            var host;
-
-            if (href.indexOf('http://')) {
-                protocol = this.ctx.app.session.get('protocol');
-                host = this.ctx.app.session.get('host');
-                href = [protocol, '://', host, (href.indexOf('/') ? '/' : ''), href].join('');
-            }
+            href = helpers.common.fullizeUrl(href, this.ctx.app);
             return helpers.common.link(href, this.ctx.app, query || {});
         },
         escape: function (text) {

@@ -2,17 +2,15 @@
 <html>
     {% view 'layout/head' %}
     <body>
+        {% view 'header/bar' %}
         <div id="wrapper">
-            <header id="header">
-                {% view 'header/bar' %}
-                {% view 'header/index' %}
-            </header>
+            
+            {% view 'header/index' %}
+            
             <section id="content">
                 {{ body }}            
             </section>        	
-            <footer id="footer">
-            	{% view 'footer/footer' %}
-            </footer>
+            {% view 'footer/footer' %}
         </div>
 	</body>
 </html>

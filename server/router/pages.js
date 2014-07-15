@@ -316,4 +316,58 @@ module.exports = function itemRouter(app, dataAdapter) {
             }
         }
     })();
+
+    (function force() {
+        app.get('/force/:platform?', handler);
+
+        function handler(req, res) {
+            Session.call(req.rendrApp, false, {
+                isServer: true
+            }, callback);
+
+            function callback() {
+                var forcedPlatform = req.rendrApp.session.get('forcedPlatform');
+                var platform = req.param('platform');
+
+                if (!platform && (forcedPlatform && forcedPlatform === platform) || !_.contains(configServer.get('platforms', []), platform)) {
+                    req.rendrApp.session.clear('forcedPlatform');
+                }
+                else {
+                    req.rendrApp.session.persist({
+                        forcedPlatform: platform
+                    });
+                }
+                res.redirect(utils.link('/', req.rendrApp));
+            }
+        }
+    })();
+
+    (function analytics() {
+        app.get('/analytics', handler);
+
+        function handler(req, res) {
+            var analytic = new Analytic('google', {
+                id: 'MO-50756825-1',
+                host: req.host
+            });
+            var ip = req.ip;
+
+            if (req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR')) {
+                ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
+            }
+            var analytics = {
+                url: analytic.trackPage({
+                    page: 'test',
+                    referer: '-',
+                    ip: ip,
+                    dynamics: {
+                        utmcc: googleUTMCC(req)
+                    }
+                })
+            };
+
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+            res.json(analytics);
+        }
+    })();
 };

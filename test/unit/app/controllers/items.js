@@ -99,7 +99,7 @@ describe('app', function test() {
                     server.configure(rendrConfiguration);
                     router.route();
                     request(server.expressApp)
-                        .get('/nf/search/a')
+                        .get('/nf/search/i')
                         .set('host', utils.getHost('html4', 'in'))
                         .set('user-agent', utils.userAgents.html4)
                         .end(end);
@@ -143,7 +143,7 @@ describe('app', function test() {
                         response.custom = JSON.parse(response.custom);
                         response.custom.should.have.property('page_name', 'listing_all');
                         response.custom.should.have.property('category', 'listing');
-                        response.custom.should.have.property('keyword', 'a');
+                        response.custom.should.have.property('keyword', 'i');
                         response.custom.should.have.property('page_nb');
                         response.custom.should.have.property('language');
                         response.custom.should.have.property('platform');
@@ -397,24 +397,6 @@ describe('app', function test() {
                         (function existance(response) {
                             response.should.have.property('redirect');
                             response.redirect.uri.should.equal('/' + url);
-                        })(context);
-                        done();
-                    }
-                });
-                it('should redirect to the 404', function test(done) {
-                    request(server.expressApp)
-                        .get('/des-iid-1234567890')
-                        .set('host', utils.getHost('html4', 'in'))
-                        .set('user-agent', utils.userAgents.html4)
-                        .set('cookie', response.get('set-cookie'))
-                        .end(end);
-
-                    function end(err, res) {
-                        response = res;
-
-                        (function existance(response) {
-                            response.should.have.property('redirect');
-                            response.redirect.uri.should.equal('/404');
                         })(context);
                         done();
                     }
