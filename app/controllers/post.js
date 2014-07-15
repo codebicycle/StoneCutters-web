@@ -32,7 +32,7 @@ module.exports = {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var sixpackConfig = config.get('sixpack', {});
-                
+
                 analytics.reset();
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
