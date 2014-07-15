@@ -12,6 +12,7 @@ module.exports = function(grunt) {
         dest: 'app/templates/__layout.html'
     }];
     var icons = [];
+    var sprites = [];
 
     (function copyTemplates() {
         var files = {};
@@ -89,6 +90,9 @@ module.exports = function(grunt) {
                 if (platform !== subdir) {
                     continue;
                 }
+                if (platform === 'html5') {
+                    continue;
+                }
                 iconsLocalization[platform].forEach(eachIconLocation);
             }
 
@@ -102,6 +106,9 @@ module.exports = function(grunt) {
             }
         });
         for (platform in iconsLocalization) {
+            if (platform === 'html5') {
+                continue;
+            }
             iconsLocalization[platform].forEach(eachIconLocation);
         }
 
@@ -125,6 +132,45 @@ module.exports = function(grunt) {
 
         for (var icon in files) {
             icons.push(files[icon]);
+        }
+    })();
+
+    (function copySprites() {
+        var environments = require('../../server/config').get('stylus');
+        var files = {};
+        var platform;
+
+        for (platform in iconsLocalization) {
+            if (platform !== 'html5') {
+                continue;
+            }
+            iconsLocalization[platform].forEach(eachIconLocation);
+        }
+
+        function eachIconLocation(location) {
+            var environment;
+
+            addIconForEnvironment(location, 'development');
+            for (environment in environments) {
+                addIconForEnvironment(location, environment);
+            }
+        }
+
+        function addIconForEnvironment(location, environment) {
+            if (environment === 'development') {
+                return;
+            }
+            files[[location, '-', environment].join('')] = {
+                src: ['public/css/', location, '/', platform, '/icons.css'].join(''),
+                dest: ['public/css/', location, '/', platform, '/icons-', environment, '.css'].join('')
+            };
+        }
+
+        platform = 'html5';
+        eachIconLocation('default');
+
+        for (var sprite in files) {
+            sprites.push(files[sprite]);
         }
     })();
 
@@ -156,6 +202,9 @@ module.exports = function(grunt) {
         },
         icons: {
             files: icons
+        },
+        sprites: {
+            files: sprites
         }
     };
 };

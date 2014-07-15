@@ -96,21 +96,15 @@ function initParams() {
 }
 
 function persistParams() {
-    var today = new Date().getTime();
-    var gaCs = today;
-    var gaPs = this.app.session.get('gaCs') || gaCs;
-    var gaIs = this.app.session.get('gaIs') || gaCs;
-    var gaNs = this.app.session.get('gaNs') || 0;
-    var gaDh = this.app.session.get('gaDh') || Math.round(Math.random() * 10000000);
-    var gaUid = this.app.session.get('gaUid') || Math.round(Math.random() * 1000000);
+    var gaCs = new Date().getTime();
 
     this.app.session.persist({
         gaCs: gaCs,
-        gaIs: gaIs,
-        gaPs: gaPs,
-        gaNs: ++gaNs,
-        gaDh: gaDh,
-        gaUid: gaUid
+        gaPs: this.app.session.get('gaCs') || gaCs,
+        gaIs: this.app.session.get('gaIs') || gaCs,
+        gaNs: this.app.session.get('gaNs') || 0,
+        gaDh: this.app.session.get('gaDh') || Math.round(Math.random() * 10000000),
+        gaUid: this.app.session.get('gaUid') || Math.round(Math.random() * 1000000)
     });
 }
 

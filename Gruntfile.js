@@ -11,7 +11,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask('translate', ['exec:removeTranslations', 'translations', 'browserify:translations', 'uglify:common']);
 
-    grunt.registerTask('build', ['template', 'javascript', 'stylus', 'copy:icons']);
+    grunt.registerTask('icons', ['copy:icons', 'sprite', 'copy:sprites']);
+
+    grunt.registerTask('build', ['template', 'javascript', 'icons', 'stylus']);
 
     grunt.registerTask('compile', ['clean', 'build']);
 
