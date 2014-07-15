@@ -178,7 +178,7 @@ module.exports = {
                         seo.addMetatag('robots', 'noindex, nofollow');
                         seo.addMetatag('googlebot', 'noindex, nofollow');
                     }
-                    if (siteLocation || !~siteLocation.indexOf('www.')) {
+                    if (siteLocation && !~siteLocation.indexOf('www.')) {
                         var url = this.app.session.get('url');
 
                         seo.addMetatag.call(this, 'canonical', helpers.common.fullizeUrl(helpers.common.removeParams(url, 'location'), this.app));
