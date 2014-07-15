@@ -36,8 +36,8 @@ function serverSync(method, model, options) {
 
         if (err) {
             resp = {
-                body: body,
-                status: err.status
+                body: body || err,
+                status: response.statusCode
             };
             if (options.error) {
                 options.error(resp);

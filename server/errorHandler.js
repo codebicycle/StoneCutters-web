@@ -25,7 +25,7 @@ exports = module.exports = function errorHandler() {
             res.statusCode = 500;
         }
         if (env === 'development') {
-            console.error(err.stack);
+            console.error(err.stack || err);
         }
         if (isRedirection(req.rendrApp)) {
             res.setHeader('Content-Type', 'text/plain');

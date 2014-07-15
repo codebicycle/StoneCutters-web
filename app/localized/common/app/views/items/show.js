@@ -12,10 +12,13 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         data.category_name = this.options.category_name;
-        data.item.location.stateName = data.item.location.children[0].name;
-        data.item.location.cityName = data.item.location.children[0].children[0].name;
-        data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
-        data.item.date.since = helpers.timeAgo(data.item.date);
+
+        if (!data.item.purged) {
+            data.item.location.stateName = data.item.location.children[0].name;
+            data.item.location.cityName = data.item.location.children[0].children[0].name;
+            data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
+            data.item.date.since = helpers.timeAgo(data.item.date);
+        }
 
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
