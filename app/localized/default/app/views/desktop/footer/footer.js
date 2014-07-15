@@ -5,5 +5,5 @@ var Base = require('../../../../../common/app/bases/view').requireView('footer/f
 module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer',
-    className: ''
+    className: 'footer_view'
 });
