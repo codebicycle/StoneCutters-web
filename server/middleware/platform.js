@@ -14,6 +14,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
+            var userAgent = req.get('user-agent');
 
             function callback(err, response, body) {
                 var platform;
@@ -49,17 +50,22 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && _.contains(config.get('hosts', ['olx']), req.subdomains.shift()))) && 'm' === req.subdomains.pop()) {
-                dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), callback);
+                dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), callback);
             }
             else if (req.subdomains.length <= 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
-                if (req.headers.referer) {
-                    var refererHost = URLParser.parse(req.headers.referer).hostname;
+                if (!~userAgent.indexOf('Googlebot')) {
+                    if (!req.headers.referer) {
+                        return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), check);
+                    }
+                    else {
+                        var refererHost = URLParser.parse(req.headers.referer).hostname;
 
-                    if (refererHost !== req.headers.host.split(':').shift()) {
-                        refererHost = (refererHost || '').split('.');
+                        if (refererHost !== req.headers.host.split(':').shift()) {
+                            refererHost = (refererHost || '').split('.');
 
-                        if (!_.intersection(config.get('hosts', ['olx']), refererHost).length) {
-                            return dataAdapter.get(req, '/devices/' + encodeURIComponent(req.get('user-agent')), check);
+                            if (!_.intersection(config.get('hosts', ['olx']), refererHost).length) {
+                                return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), check);
+                            }
                         }
                     }
                 }

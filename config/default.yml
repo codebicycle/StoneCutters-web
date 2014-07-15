@@ -55,8 +55,14 @@ middleware:
       - /stats/threads
       - /stats/check
       - /stats/sockets
+      - /analytics
       - /analytics/pageview.gif
       - /analytics/pageevent.gif
+      - /force
+      - /force/wap
+      - /force/html4
+      - /force/html5
+      - /force/desktop
 
 stylus:
   testing:

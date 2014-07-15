@@ -101,7 +101,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (siteLocation.indexOf(staging.host || '.m-staging.olx.com') === platform) {
                     siteLocation = platform + staging.mask || '.m.olx.com';
                 }
-                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
+                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2), 'www');
                 previousLocation = siteLocation;
             }
             else if (_.isArray(siteLocation)) {
