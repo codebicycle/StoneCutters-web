@@ -22,6 +22,7 @@ function handleItems(category, subcategory, params, callback) {
     helpers.pagination.prepare(this.app, params);
     query = _.clone(params);
     params.categoryId = params.catId;
+    params.seo = true;
     delete params.catId;
     delete params.title;
     delete params.page;
@@ -36,18 +37,15 @@ function handleItems(category, subcategory, params, callback) {
         readFromCache: false
     }, function afterFetch(err, result) {
         var url = '/' + query.title + '-cat-' + query.catId;
-        var model = result.items.models[0];
 
-        result.items = model.get('data');
-        result.metadata = model.get('metadata');
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
             return helpers.common.redirect.call(this, '/' + slug);
         }
-        if (result.metadata.total < 5) {
+        if (result.items.metadata.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
             seo.addMetatag('googlebot', 'noindex, follow');
         }
-        helpers.pagination.paginate(result.metadata, query, url);
+        helpers.pagination.paginate(result.items.metadata, query, url);
         result.category = category.toJSON();
         result.subcategory = subcategory.toJSON();
         result.relatedAds = query.relatedAds;
@@ -66,9 +64,11 @@ function handleItems(category, subcategory, params, callback) {
             }
         });
 
-        seo.addMetatag.call(this, 'title', subcategory.get('trName'));
-        seo.addMetatag.call(this, 'description', subcategory.get('trName'));
+        seo.addMetatag('title', result.items.metadata.seo.title);
+        seo.addMetatag('description', result.items.metadata.seo.description);
         seo.update();
+        result.metadata = result.items.metadata;
+        result.items = result.items.toJSON();
         callback(err, result);
     }.bind(this));
 }
@@ -150,7 +150,8 @@ module.exports = {
                     collection: 'Categories',
                     params: {
                         location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageCode: this.app.session.get('selectedLanguage'),
+                        seo: true
                     }
                 }
             }, {

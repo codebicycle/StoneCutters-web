@@ -74,7 +74,9 @@ function update() {
 function getHead() {
     var clone = _.clone(head);
 
-    clone.metatags = Object.keys(clone.metatags).map(function each(metatag) {
+    clone.metatags = Object.keys(clone.metatags).filter(function each(metatag) {
+        return !!clone.metatags[metatag];
+    }).map(function each(metatag) {
         return {
             name: metatag,
             content: clone.metatags[metatag]
@@ -87,8 +89,7 @@ function addMetatag(name, content) {
     var special = specials[name.toLowerCase()];
 
     if (special) {
-        special.call(this, content);
-        return;
+        return special.call(this, content);
     }
     head.metatags[name] = content;
 }

@@ -38,6 +38,7 @@ module.exports = {
             }
             params.id = params.itemId;
             params.languageCode = app.session.get('selectedLanguage');
+            params.seo = true;
             delete params.itemId;
             delete params.title;
             delete params.sk;
@@ -105,7 +106,7 @@ module.exports = {
                     });
                 }
                 spec = {
-                    items: {
+                    relatedItems: {
                         collection : 'Items',
                         params: {
                             location: siteLocation,
@@ -118,12 +119,19 @@ module.exports = {
                 app.fetch(spec, {
                     readFromCache: false
                 }, function afterFetch(err, result) {
-                    var model = result.items.models[0];
                     var user = app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
                     var category;
-                    
-                    result.relatedItems = model.get('data');
+
+                    if (err) {
+                        err = null;
+                        result = {
+                            relatedItems: []
+                        };
+                    }
+                    else {
+                        result.relatedItems = result.relatedItems.toJSON();
+                    }
                     result.user = user;
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
@@ -147,8 +155,8 @@ module.exports = {
                         }
                     });
 
-                    seo.addMetatag('title', data.item.shortTitle());
-                    seo.addMetatag('description', data.item.shortDescription());
+                    seo.addMetatag('title', item.metadata.itemPage.title);
+                    seo.addMetatag('description', item.metadata.itemPage.description);
                     seo.update();
 
                     callback(err, result);
@@ -195,7 +203,7 @@ module.exports = {
                 if (err || !result.item) {
                     return helpers.common.redirect.call(this, '/404');
                 }
-                
+
                 var item = result.item.toJSON();
                 var platform = this.app.session.get('platform');
                 var subcategory;
@@ -302,7 +310,7 @@ module.exports = {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
-            
+
             analytics.reset();
             analytics.setPage('nf');
             analytics.addParam('keyword', query.search);
@@ -330,10 +338,9 @@ module.exports = {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var url = '/nf/search/' + query.search + '/';
-                var model = result.items.models[0];
 
-                result.items = model.get('data');
-                result.metadata = model.get('metadata');
+                result.metadata = result.items.metadata;
+                result.items = result.items.toJSON();
                 if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
@@ -342,8 +349,8 @@ module.exports = {
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');
                 }
-                seo.addMetatag.call(this, 'title', query.search);
-                seo.addMetatag.call(this, 'description', query.search);
+                seo.addMetatag('title', query.search);
+                seo.addMetatag('description');
                 seo.update();
 
                 helpers.pagination.paginate(result.metadata, query, url);

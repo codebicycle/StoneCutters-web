@@ -365,9 +365,9 @@ module.exports = {
 
             function findRelatedItems(err, data) {
                 var item = data.item.toJSON();
-                
+
                 this.app.fetch({
-                    items: {
+                    relatedItems: {
                         collection : 'Items',
                         params: {
                             location: siteLocation,
@@ -379,12 +379,19 @@ module.exports = {
                 }, {
                     readFromCache: false
                 }, function afterFetch(err, result) {
-                    var model = result.items.models[0];
                     var user = this.app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
                     var category = data.categories.get(subcategory.get('parentId'));
 
-                    result.relatedItems = model.get('data');
+                    if (err) {
+                        err = null;
+                        result = {
+                            relatedItems: []
+                        };
+                    }
+                    else {
+                        result.relatedItems = result.relatedItems.toJSON();
+                    }
                     result.user = user;
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
