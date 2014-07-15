@@ -303,13 +303,11 @@ module.exports = {
                 if (err || !result.item) {
                     return helpers.common.error.call(this, err, result, callback);
                 }
-
                 var item = result.item.toJSON();
-                var platform = this.app.session.get('platform');
                 var subcategory;
 
                 slug = helpers.common.slugToUrl(item);
-                if (platform !== 'html4') {
+                if (this.app.session.get('platform') !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
@@ -378,7 +376,7 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
 
-                if (result.metadata.total < 5){
+                if (result.metadata.total < 5) {
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');
                 }
@@ -400,9 +398,10 @@ module.exports = {
         }, controller);
 
         function controller(form) {
-            var user = this.app.session.get('user');
-            var platform = this.app.session.get('platform');
-            var spec = {
+            params.id = params.itemId;
+            delete params.itemId;
+
+            this.app.fetch({
                 categories: {
                     collection : 'Categories',
                     params: {
@@ -414,22 +413,16 @@ module.exports = {
                     model: 'Item',
                     params: params
                 }
-            };
-
-            params.id = params.itemId;
-            delete params.itemId;
-
-            this.app.fetch(spec, {
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
+                    return helpers.common.error.call(this, err, result, callback);
                 }
-
                 var item = result.item.toJSON();
                 var subcategory;
 
-                if (platform === 'html5') {
+                if (this.app.session.get('platform') === 'html5') {
                     return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
                 }
                 subcategory = result.categories.search(item.category.id);
@@ -438,9 +431,14 @@ module.exports = {
                 analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 result.analytics = analytics.generateURL.call(this);
-                result.user = user;
+                result.user = this.app.session.get('user');
                 result.item = item;
                 result.form = form;
+
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
+
                 callback(err, result);
             }.bind(this));
         }
@@ -449,8 +447,10 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var user = this.app.session.get('user');
-            var spec = {
+            params.id = params.itemId;
+            delete params.itemId;
+
+            this.app.fetch({
                 categories: {
                     collection : 'Categories',
                     params: {
@@ -462,29 +462,21 @@ module.exports = {
                     model: 'Item',
                     params: params
                 }
-            };
-
-            params.id = params.itemId;
-            delete params.itemId;
-
-            this.app.fetch(spec, {
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
+                    return helpers.common.error.call(this, err, result, callback);
                 }
-
                 var item = result.item.toJSON();
-                var subcategory;
-
-                subcategory = result.categories.search(item.category.id);
+                var subcategory = result.categories.search(item.category.id);
 
                 analytics.reset();
                 analytics.addParam('item', item);
                 analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 result.analytics = analytics.generateURL.call(this);
-                result.user = user;
+                result.user = this.app.session.get('user');
                 result.item = item;
                 callback(err, result);
             }.bind(this));

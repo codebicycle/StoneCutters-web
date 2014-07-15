@@ -4,6 +4,7 @@ var _ = require('underscore');
 var sixpackName = 'sixpack-client';
 var sixpack = require(sixpackName);
 var helpers = require('../helpers');
+var seo = require('../seo');
 var analytics = require('../analytics');
 var config = require('../config');
 
@@ -31,8 +32,11 @@ module.exports = {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var sixpackConfig = config.get('sixpack', {});
-
+                
                 analytics.reset();
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
                 if (!sixpackConfig.enabled ||
                     !sixpackConfig['post-button'] ||
                     !sixpackConfig['post-button'].enabled ||
@@ -81,6 +85,9 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/posting');
                 }
                 analytics.reset();
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
                 callback(null, _.extend(params, {
                     category: category.toJSON(),
                     subcategories: category.get('children').toJSON(),
@@ -95,14 +102,23 @@ module.exports = {
         }, controller);
 
         function controller(form) {
-            var app = this.app;
-            var user = app.session.get('user');
-            var siteLocation = app.session.get('siteLocation');
-            var language = app.session.get('selectedLanguage');
-            var languages = app.session.get('languages');
-            var languageId = languages._byId[language].id;
-            var languageCode = languages._byId[language].isocode.toLowerCase();
-            var spec = {
+            var siteLocation = this.app.session.get('siteLocation');
+            var language;
+            var languages;
+            var languageId;
+            var languageCode;
+
+            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
+            }
+            language = this.app.session.get('selectedLanguage');
+            languages = this.app.session.get('languages');
+            languageId = languages._byId[language].id;
+            languageCode = languages._byId[language].isocode.toLowerCase();
+
+            this.app.fetch({
                 categories: {
                     collection: 'Categories',
                     params: {
@@ -124,25 +140,21 @@ module.exports = {
                         languageCode: languageCode
                     }
                 }
-            };
-
-            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                return helpers.common.redirect.call(this, '/location?target=posting', null, {
-                    status: 302
-                });
-            }
-            app.fetch(spec, {
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var category = result.categories.get(params.categoryId);
+                var subcategory;
+                var response;
+
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
                 }
-                var subcategory = category.get('children').get(params.subcategoryId);
+                subcategory = category.get('children').get(params.subcategoryId);
                 if (!subcategory) {
                     return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
                 }
-                var response = result.fields.models[0].attributes;
+                response = result.fields.models[0].attributes;
 
                 result.postingSession = result.postingSession.get('postingSession');
                 result.intent = 'create';
@@ -157,6 +169,9 @@ module.exports = {
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 result.analytics = analytics.generateURL.call(this);
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
                 callback(err, result);
             }.bind(this));
         }
@@ -319,8 +334,7 @@ module.exports = {
             var itemId = params.itemId;
             var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
-            var spec;
-
+            
             if (user) {
                 params.token = user.token;
             }
@@ -340,7 +354,7 @@ module.exports = {
             delete params.title;
             delete params.sk;
 
-            spec = {
+            this.app.fetch({
                 categories: {
                     collection: 'Categories',
                     params: {
@@ -352,8 +366,7 @@ module.exports = {
                     model: 'Item',
                     params: params
                 }
-            };
-            this.app.fetch(spec, {
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 if (err) {
@@ -403,6 +416,9 @@ module.exports = {
                     analytics.addParam('category', category.toJSON());
                     analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = analytics.generateURL.call(this);
+                    seo.addMetatag('robots', 'noindex, nofollow');
+                    seo.addMetatag('googlebot', 'noindex, nofollow');
+                    seo.update();
                     callback(err, result);
                 }.bind(this));
             }
