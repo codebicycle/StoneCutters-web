@@ -35,7 +35,7 @@
     "rendr": "git://github.com/rendrjs/rendr#6497522d78",
     "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks",
     "underscore": "1.6.0",
-    "debug": "0.7.4",
+    "debug": "~0.7.4",
     "newrelic": "1.5.1",
     "restler": "3.2.0",
     "formidable": "1.0.14",
@@ -43,7 +43,8 @@
     "node-uuid": "1.4.1",
     "dateformat": "1.0.7-1.2.3",
     "memcached": "0.2.8",
-    "async": "0.9.0"
+    "async": "0.9.0",
+    "ms": "0.6.2"
   },
   "devDependencies": {
     "grunt": "0.4.4",
