@@ -55,8 +55,7 @@ module.exports = {
                     readFromCache: false
                 }, function afterFetch(err, res) {
                     if (err) {
-                        done.abort();
-                        return helpers.common.error.call(this, err, res, callback);
+                        return done.fail(err, res);
                     }
                     done(res.categories);
                 }.bind(this));

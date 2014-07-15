@@ -121,7 +121,6 @@ module.exports = function(grunt) {
                 stylus[key] = {
                     files: {},
                     options: {
-                        compress: false,
                         define: {
                             staticUrl: '',
                             imageUrl: ''
