@@ -7,7 +7,8 @@ module.exports = function(grunt) {
     var sprites = {};
 
     (function spriteIcons() {
-        var defaultsSrc = 'app/icons/LOCALIZATION/PLATFORM/*.png';
+        var defaultsSrc = 'app/icons/default/PLATFORM/*.png';
+        var defaultsSrcLocalized = 'app/icons/LOCALIZATION/PLATFORM/*.png';
         var defaultsDestImg = 'public/images/PLATFORM/icons/LOCALIZATION/icons.png';
         var defaultsDestCSS = 'public/css/LOCALIZATION/PLATFORM/icons.css';
         var defaultsImgPath = 'imageUrl/images/PLATFORM/icons/LOCALIZATION/icons.png';
@@ -28,7 +29,7 @@ module.exports = function(grunt) {
 
         function addIconLocation(location) {
             sprites[location] = _.extend({}, defaults, {
-                src: defaultsSrc.replace(repLocation, location).replace(repPlatform, platform),
+                src: [defaultsSrc.replace(repPlatform, platform), defaultsSrcLocalized.replace(repLocation, location).replace(repPlatform, platform)],
                 destImg: defaultsDestImg.replace(repLocation, location).replace(repPlatform, platform),
                 destCSS: defaultsDestCSS.replace(repLocation, location).replace(repPlatform, platform),
                 imgPath: defaultsImgPath.replace(repLocation, location).replace(repPlatform, platform),
