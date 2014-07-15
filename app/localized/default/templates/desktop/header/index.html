@@ -7,5 +7,5 @@
 <section id="header">
 	<a class="logo"></a>
 	<p>Na OLX você vende e compra bicicletas, celulares, carrinhos de bebê,<br>guitarras, carros, casas, móveis e muito mais! É fácil, rápido e grátis.</p>
-	<a class="post btn orange">{{ dictionary["defaultheader2.Post"] }}Publicar um anúncio</a>
+	<a href="{{ ['/posting', postLink] | join('') | link }}" class="post btn orange">{{ dictionary["defaultheader2.Post"] }}Publicar um anúncio</a>
 </section>
