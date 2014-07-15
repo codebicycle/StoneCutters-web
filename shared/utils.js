@@ -23,7 +23,7 @@ var linkParams = {
     language: function (href, query) {
         var selectedLanguage;
         var languages;
-        
+
         if (!query.language) {
             selectedLanguage = this.session.get('selectedLanguage');
 
@@ -165,7 +165,7 @@ function get(obj, keys, defaultValue) {
     if (typeof value === 'undefined' || value === null) {
         return defaultValue;
     }
-    return _.clone(value);
+    return _.isFunction(value) ? value : _.clone(value);
 }
 
 module.exports = utils;
