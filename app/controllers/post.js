@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var asynquence = require('asynquence');
 var sixpackName = 'sixpack-client';
 var sixpack = require(sixpackName);
 var helpers = require('../helpers');
@@ -118,35 +119,70 @@ module.exports = {
             languageId = languages._byId[language].id;
             languageCode = languages._byId[language].isocode.toLowerCase();
 
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: language
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection: 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: language
+                        }
                     }
-                },
-                postingSession: {
-                    model: 'PostingSession',
-                    params: {}
-                },
-                fields: {
-                    collection: 'Fields',
-                    params: {
-                        intent: 'post',
-                        location: siteLocation,
-                        categoryId: params.subcategoryId,
-                        languageId: languageId,
-                        languageCode: languageCode
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
                     }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                var category = result.categories.get(params.categoryId);
-                var subcategory;
-                var response;
+                    done(res.categories);
+                }.bind(this));
+            }
 
+            function findPostingSession(done) {
+                this.app.fetch({
+                    postingSession: {
+                        model: 'PostingSession',
+                        params: {}
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.postingSession.get('postingSession'));
+                }.bind(this));
+            }
+
+            function findFields(done) {
+                this.app.fetch({
+                    fields: {
+                        collection: 'Fields',
+                        params: {
+                            intent: 'post',
+                            location: siteLocation,
+                            categoryId: params.subcategoryId,
+                            languageId: languageId,
+                            languageCode: languageCode
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.fields.models[0].attributes);
+                }.bind(this));
+            }
+
+            function success(_categories, _postingSession, _fields) {
+                if (!_categories || !_postingSession || !_fields) {
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
+                var category = _categories.get(params.categoryId);
+                var subcategory;
+                
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
                 }
@@ -154,26 +190,34 @@ module.exports = {
                 if (!subcategory) {
                     return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
                 }
-                response = result.fields.models[0].attributes;
 
-                result.postingSession = result.postingSession.get('postingSession');
-                result.intent = 'create';
-                result.fields = response.fields;
-                result.category = category.toJSON();
-                result.subcategory = subcategory.toJSON();
-                result.language = languageId;
-                result.languageCode = languageCode;
-                result.siteLocation = siteLocation;
-                result.form = form;
                 analytics.reset();
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
-                callback(err, result);
-            }.bind(this));
+                callback(err, {
+                    postingSession: _postingSession,
+                    intent: 'create',
+                    fields: _fields.fields,
+                    category: category.toJSON(),
+                    subcategory: subcategory.toJSON(),
+                    language: languageId,
+                    languageCode: languageCode,
+                    siteLocation: siteLocation,
+                    form: form,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .gate(findCategories.bind(this), findPostingSession.bind(this), findFields.bind(this))
+                .val(findRelatedItems.bind(this));
         }
     },
     edit: function(params, callback) {

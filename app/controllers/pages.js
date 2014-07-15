@@ -10,7 +10,6 @@ module.exports = {
 
         function controller() {
             analytics.reset();
-
             callback(null, {
                 analytics: analytics.generateURL.call(this)
             });

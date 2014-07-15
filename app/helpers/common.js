@@ -97,7 +97,7 @@ module.exports = (function() {
         if (typeof window === 'undefined') {
             this.app.req.res.status(status);
         }
-        return callback(null, 'pages/error', res);
+        return callback(null, 'pages/error', res || {});
     }
 
     function daysDiff(date) {

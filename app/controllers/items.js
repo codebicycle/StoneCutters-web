@@ -61,7 +61,6 @@ module.exports = {
                 }.bind(this));
             }
 
-
             function findItem(done) {
                 this.app.fetch({
                     item: {
@@ -210,7 +209,6 @@ module.exports = {
             var itemId = params.itemId;
             var slugUrl = params.title;
             var pos = Number(params.pos) || 0;
-            var slug;
 
             if (user) {
                 params.token = user.token;
@@ -219,30 +217,50 @@ module.exports = {
             delete params.itemId;
             delete params.title;
 
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage')
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: this.app.session.get('siteLocation'),
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.error.call(this, err, result, callback);
-                }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.categories);
+                }.bind(this));
+            }
 
-                var item = result.item.toJSON();
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.item);
+                }.bind(this));
+            }
+
+            function success(_categories, _item) {
+                if (!_categories || !_item) {
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
+                var item = _item.toJSON();
                 var platform = this.app.session.get('platform');
+                var slug = helpers.common.slugToUrl(item);
                 var subcategory;
-
-                slug = helpers.common.slugToUrl(item);
+                
                 if (platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
@@ -256,18 +274,27 @@ module.exports = {
                     return helpers.common.redirect.call(this, ('/' + slug + '/gallery'));
                 }
 
-                subcategory = result.categories.search(item.category.id);
-                result.item = item;
-                result.user = user;
-                result.pos = pos;
+                subcategory = _categories.search(item.category.id);
                 analytics.reset();
                 analytics.addParam('user', user);
                 analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('category', _categories.get(subcategory.get('parentId')).toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                callback(err, result);
-            }.bind(this));
+                callback(err, {
+                    item: item,
+                    user: user,
+                    pos: pos,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .val(success.bind(this));
         }
     },
     map: function(params, callback) {
@@ -277,9 +304,6 @@ module.exports = {
             var user = this.app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var siteLocation = this.app.session.get('siteLocation');
-            var spec;
-            var slug;
 
             if (user) {
                 params.token = user.token;
@@ -288,47 +312,232 @@ module.exports = {
             delete params.itemId;
             delete params.title;
 
-            spec = {
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: this.app.session.get('siteLocation'),
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.categories);
+                }.bind(this));
+            }
+
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.item);
+                }.bind(this));
+            }
+
+            function success(_categories, _item) {
+                if (!_item) {
+                    return helpers.common.error.call(this, null, {}, callback);
                 }
-            };
-            this.app.fetch(spec, {
-                'readFromCache': false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.error.call(this, err, result, callback);
-                }
-                var item = result.item.toJSON();
+                var item = _item.toJSON();
+                var platform = this.app.session.get('platform');
                 var subcategory;
 
                 slug = helpers.common.slugToUrl(item);
-                if (this.app.session.get('platform') !== 'html4') {
+                if (platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
 
-                subcategory = result.categories.search(item.category.id);
-                result.item = item;
-                result.user = user;
+                subcategory = _categories.search(item.category.id);
                 analytics.reset();
                 analytics.addParam('user', user);
                 analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('category', _categories.get(subcategory.get('parentId')).toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                callback(err, result);
-            }.bind(this));
+                callback(err, {
+                    item: item,
+                    user: user,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .val(success.bind(this));
+        }
+    },
+    reply: function(params, callback) {
+        helpers.controllers.control.call(this, params, {
+            isForm: true
+        }, controller);
+
+        function controller(form) {
+            var user = this.app.session.get('user');
+
+            params.id = params.itemId;
+            delete params.itemId;
+
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: this.app.session.get('siteLocation'),
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.categories);
+                }.bind(this));
+            }
+
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.item);
+                }.bind(this));
+            }
+
+            function success(_categories, _item) {
+                if (!_item) {
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
+                var item = _item.toJSON();
+                var platform = this.app.session.get('platform');
+                var subcategory;
+
+                if (platform === 'html5') {
+                    return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
+                }
+                subcategory = _categories.search(item.category.id);
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('user', user);
+                analytics.addParam('category', _categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
+                callback(err, {
+                    user: user,
+                    item: item,
+                    form: form,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .val(success.bind(this));
+        }
+    },
+    success: function(params, callback) {
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            var user = this.app.session.get('user');
+
+            params.id = params.itemId;
+            delete params.itemId;
+
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: this.app.session.get('siteLocation'),
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.categories);
+                }.bind(this));
+            }
+
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.item);
+                }.bind(this));
+            }
+
+            function success(_categories, _item) {
+                if (!_item) {
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
+                var item = _item.toJSON();
+                var subcategory = _categories.search(item.category.id);
+
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('user', user);
+                analytics.addParam('category', _categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                callback(err, {
+                    item: item,
+                    user: user,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .val(success.bind(this));
         }
     },
     search: function(params, callback) {
@@ -392,96 +601,6 @@ module.exports = {
                 analytics.addParam('page_nb', result.metadata.totalPages);
                 result.analytics = analytics.generateURL.call(this);
                 result.search = query.search;
-                callback(err, result);
-            }.bind(this));
-        }
-    },
-    reply: function(params, callback) {
-        helpers.controllers.control.call(this, params, {
-            isForm: true
-        }, controller);
-
-        function controller(form) {
-            params.id = params.itemId;
-            delete params.itemId;
-
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.error.call(this, err, result, callback);
-                }
-                var item = result.item.toJSON();
-                var subcategory;
-
-                if (this.app.session.get('platform') === 'html5') {
-                    return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
-                }
-                subcategory = result.categories.search(item.category.id);
-                analytics.reset();
-                analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                result.user = this.app.session.get('user');
-                result.item = item;
-                result.form = form;
-
-                seo.addMetatag('robots', 'noindex, nofollow');
-                seo.addMetatag('googlebot', 'noindex, nofollow');
-                seo.update();
-
-                callback(err, result);
-            }.bind(this));
-        }
-    },
-    success: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller() {
-            params.id = params.itemId;
-            delete params.itemId;
-
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.error.call(this, err, result, callback);
-                }
-                var item = result.item.toJSON();
-                var subcategory = result.categories.search(item.category.id);
-
-                analytics.reset();
-                analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
-                analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                result.user = this.app.session.get('user');
-                result.item = item;
                 callback(err, result);
             }.bind(this));
         }

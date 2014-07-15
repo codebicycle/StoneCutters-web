@@ -8,14 +8,14 @@ var config = require('../config');
 
 function handleItems(category, subcategory, params, callback) {
     var currentRouter = ['categories', 'items'];
+    var page = params ? params.page : undefined;
+    var query;
+    var slug;
 
     helpers.controllers.changeHeaders.call(this, false, currentRouter);
     seo.resetHead.call(this, currentRouter);
 
-    var slug = helpers.common.slugToUrl(subcategory.toJSON());
-    var page = params ? params.page : undefined;
-    var query;
-
+    slug = helpers.common.slugToUrl(subcategory.toJSON());
     if (slug.indexOf(params.title + '-cat-')) {
         if (typeof page === 'undefined' || (isNaN(page) || page <= 1 || page >= 999999)) {
             return helpers.common.redirect.call(this, '/' + slug);
@@ -60,6 +60,9 @@ function handleItems(category, subcategory, params, callback) {
         analytics.addParam('category', category.toJSON());
         analytics.addParam('subcategory', subcategory.toJSON());
         result.analytics = analytics.generateURL.call(this);
+        seo.addMetatag('title', result.items.metadata.seo.title);
+        seo.addMetatag('description', result.items.metadata.seo.description);
+        seo.update();
 
         this.app.session.update({
             postingLink: {
@@ -67,10 +70,6 @@ function handleItems(category, subcategory, params, callback) {
                 subcategory: subcategory.get('id')
             }
         });
-
-        seo.addMetatag('title', result.items.metadata.seo.title);
-        seo.addMetatag('description', result.items.metadata.seo.description);
-        seo.update();
         result.metadata = result.items.metadata;
         result.items = result.items.toJSON();
         callback(err, result);
@@ -91,6 +90,9 @@ function handleShow(category, params, callback) {
     analytics.reset();
     analytics.addParam('user', this.app.session.get('user'));
     analytics.addParam('category', category.toJSON());
+    seo.addMetatag.call(this, 'title', category.get('trName'));
+    seo.addMetatag.call(this, 'description', category.get('trName'));
+    seo.update();
 
     this.app.session.update({
         postingLink: {
@@ -98,10 +100,6 @@ function handleShow(category, params, callback) {
         }
     });
 
-    seo.addMetatag.call(this, 'title', category.get('trName'));
-    seo.addMetatag.call(this, 'description', category.get('trName'));
-
-    seo.update();
     callback(null, {
         category: category.toJSON(),
         type: 'categories',
@@ -134,6 +132,7 @@ module.exports = {
                 analytics.reset();
                 seo.addMetatag('title', result.categories.metadata.title);
                 seo.addMetatag('description', result.categories.metadata.description);
+                seo.update();
                 callback(null, {
                     categories: result.categories.toJSON(),
                     icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
