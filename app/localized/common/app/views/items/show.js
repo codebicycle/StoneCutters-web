@@ -158,33 +158,27 @@ module.exports = Base.extend({
             $(this).parents('.popup').removeClass('visible');
         });
 
-        this.$('#replyForm .submit').click(function() {
-            var $this = $(this);
-
+        this.$('#replyForm .submit').click(function(e) {
             var message = $('.message').val();
             var email = $('.email').val();
             var name = $('.name').val();
             var phone = $('.phone').val();
-
+            var itemId = $('.itemId').val();
             var errMsgMail = $('.errMsgMail').val();
             var errMsgMandatory = $('.errMsgMandatory').val();
             var msgSend = $('.msgSend').val();
-
-            var api = that.app.get('apiPath');
-            var session = that.app.get('session');
-            var itemId = $('.itemId').val();
             var url = [];
 
-            url.push(api);
             url.push('/items/');
             url.push(itemId);
-            url.push('/messages');
+            url.push('/reply');
+            url = helpers.common.fullizeUrl(url.join(''), this.app);
 
-            if (that.validForm(message, email)) {
+            if (this.validForm(message, email)) {
                 $('.loading').show();
                 $.ajax({
                     type: 'POST',
-                    url: url.join(''),
+                    url: helpers.common.link(url, this.app),
                     cache: false,
                     data: {
                         message: message,
@@ -193,7 +187,7 @@ module.exports = Base.extend({
                         phone:phone
                     }
                 })
-                .done(function (data) {
+                .done(function success(data) {
                     var analytics;
                     var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                     var category = $('.itemCategory').val();
@@ -205,12 +199,12 @@ module.exports = Base.extend({
                     $('.name').val('');
                     $('.email').val('');
                     $('.phone').val('');
-                    $msg.text(that.messages.msgSend);
+                    $msg.text(this.messages.msgSend);
 
                     analytics = $('<div></div>').append(data);
                     analytics = $('#replySuccess', analytics);
                     $msg.append(analytics.length ? analytics : '');
-                    that.track({
+                    this.track({
                         category: 'Reply',
                         action: 'ReplySuccess',
                         custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
@@ -220,17 +214,20 @@ module.exports = Base.extend({
                     setTimeout(function(){
                         $('.msgCont').removeClass('visible');
                     }, 3000);
-                })
-                .fail(function (data) {
+                }.bind(this))
+
+                .fail(function fail(data) {
                     var messages = JSON.parse(data.responseText);
+
                     $('small.email').text(messages[0].message).removeClass('hide');
-                })
-                .always(function () {
+                }.bind(this))
+
+                .always(function always() {
                     $('.loading').hide();
-                });
+                }.bind(this));
             }
 
-        });
+        }.bind(this));
 
         //window History
         window.onpopstate = function(e) {
