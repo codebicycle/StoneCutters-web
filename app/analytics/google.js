@@ -105,6 +105,7 @@ function persistParams() {
     var gaUid = this.app.session.get('gaUid') || Math.round(Math.random() * 1000000);
 
     this.app.session.persist({
+        gaCs: gaCs,
         gaIs: gaIs,
         gaPs: gaPs,
         gaNs: ++gaNs,
@@ -113,7 +114,7 @@ function persistParams() {
     });
 }
 
-function checkParams() {
+function checkInitParams() {
     var gaIs = this.app.session.get('gaIs');
     var gaCs;
 
@@ -133,7 +134,7 @@ function checkParams() {
 
 function generate(params, page, options) {
     params.page = generatePage.call(this, page, options);
-    if (!checkParams.call(this)) {
+    if (checkInitParams.call(this)) {
         persistParams.call(this);
     }
 }

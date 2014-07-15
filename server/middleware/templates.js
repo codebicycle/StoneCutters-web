@@ -55,7 +55,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 };
                 var directory = 'default';
                 var jsDir = '/js/' + (minify ? 'min' : 'src');
-                var platform = req.subdomains.pop() || 'wap';
+                var platform = req.cookies.forcedPlatform || req.subdomains.pop() || 'wap';
                 var template;
 
                 if (isLocalized(platform, siteLocation)) {

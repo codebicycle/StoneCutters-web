@@ -5,7 +5,7 @@
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <h4 class="title" >
-            {{ dictionary["itemslisting.Category"] }} {{ subcategory.name }}
+            {{ dictionary["itemslisting.Category"] }} {{ subcategory.trName }}
             <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
         </h4>
         <div class="formField">

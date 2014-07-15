@@ -23,6 +23,10 @@ module.exports = Base.extend({
             break;
         }
         return url;
+    },
+    parse: function(response) {
+        this.metadata = response.metadata;
+        return response.data;
     }
 });
 

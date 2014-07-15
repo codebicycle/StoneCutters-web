@@ -8,25 +8,6 @@ module.exports = {
     breadcrumb: require('./breadcrumb'),
     pagination: require('./pagination'),
     dataAdapter: require('./dataAdapter'),
-    fitText: function(element, kompressor, options) {
-        var compressor = kompressor || 1;
-        var settings = $.extend({
-            'minFontSize' : Number.NEGATIVE_INFINITY,
-            'maxFontSize' : Number.POSITIVE_INFINITY
-        }, options);
-
-        function onResize() {
-            var $this = $(this);
-            var max = parseFloat(settings.maxFontSize);
-            var min = parseFloat(settings.minFontSize);
-
-            $this.css('font-size', Math.max(Math.min($this.width() / (compressor * 10), max), min));
-        }
-
-        return element.each(function resize() {
-            $(window).on('resize.fittext orientationchange.fittext', onResize).trigger('resize.fittext');
-        });
-    },
     timeAgo: function(itemDate) {
         var current = new Date();
         var currentMonth = current.getMonth() + 1;

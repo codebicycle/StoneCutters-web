@@ -1,0 +1,19 @@
+{% if marketing.link %}
+	<footer id="downloadapp">
+		<div class="logoOlx"></div>
+		<div class="data">
+			<h1>OLX for {{ marketing.forOs }}</h1>
+			<div class="stars">
+				<span class="star"></span>
+				<span class="star"></span>
+				<span class="star"></span>
+				<span class="star"></span>
+				<span class="star midstar"></span>
+				<span>{{ marketing.rating }}</span>
+			</div>
+			<h2>Free in {{ marketing.freeIn }}</h2>
+		</div>
+		<a class="btns blue" href="{{ marketing.link }}">Download</a>
+		<div class="clear"></div>
+	</footer>
+{% endif %}

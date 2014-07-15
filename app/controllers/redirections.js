@@ -10,6 +10,12 @@ module.exports = {
     subcategory: function(params, callback) {
         helpers.common.redirect.call(this, '/des-cat-' + params.categoryId + '-p-' + params.page);
     },
+    subcategoryList: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-cat-' + params.categoryId);
+    },
+    subcategoryListWithParams: function(params, callback) {
+        helpers.common.redirect.call(this, '/des-cat-' + params.categoryId + '-p-' + params.page);
+    },
     related: function(params, callback) {
         helpers.common.redirect.call(this, '/des-cat-' + params.categoryId + '-p-' + params.page);
     },

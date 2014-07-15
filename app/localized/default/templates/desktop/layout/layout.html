@@ -2,10 +2,15 @@
 <html>
     {% view 'layout/head' %}
     <body>
-        {% view 'header/index' %}
-        <div id="supercontainer">
-            {{body}}
+        {% view 'header/bar' %}
+        <div id="wrapper">
+            
+            {% view 'header/index' %}
+            
+            <section id="content">
+                {{ body }}            
+            </section>        	
+            {% view 'footer/footer' %}
         </div>
-        {% view 'footer/footer' %}
-    </body>
+	</body>
 </html>

@@ -164,10 +164,10 @@ describe('server', function test() {
                         var locations = localization[userAgents[userAgent].platform];
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
-                                it('should be "' + location + '/' + userAgents[userAgent].platform + '" for host ' + location, function test(done) {
+                                it('should be "' + location + '/' + userAgents[userAgent].platform + '" for host ' + location.replace('www.', userAgents[userAgent].platform + '.m.'), function test(done) {
                                     request(server.expressApp)
                                         .get('/')
-                                        .set('host', location)
+                                        .set('host', location.replace('www.', userAgents[userAgent].platform + '.m.'))
                                         .set('user-agent', userAgent)
                                         .end(end);
 
@@ -214,10 +214,10 @@ describe('server', function test() {
                         var locations = localization[userAgents[userAgent].platform];
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
-                                it('should be "' + location + '" for host ' + location, function test(done) {
+                                it('should be "' + location + '" for host ' + location.replace('www.', userAgents[userAgent].platform + '.m.'), function test(done) {
                                     request(server.expressApp)
                                         .get('/')
-                                        .set('host', location)
+                                        .set('host', location.replace('www.', userAgents[userAgent].platform + '.m.'))
                                         .set('user-agent', userAgent)
                                         .end(end);
 

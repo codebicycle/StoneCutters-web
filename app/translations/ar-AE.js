@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Change City',
     'countryoptions.EnterCity': '\u0623\u062F\u062E\u0644 \u0627\u0644\u0645\u062F\u064A\u0646\u0629 ',
+    'countryoptions.Region': '\u0645\u0646\u0637\u0642\u0629 ',
     'countryoptions.SelectACity': 'Select a city',
     'defaultfooter.Back': '\u0627\u0644\u0649 \u0627\u0644\u0648\u0631\u0627\u0621',
     'defaultfooter.FreeSite': '100 \u066A \u062D\u0631\u0629 \u0627\u0639\u0644\u0627\u0646\u0627\u062A \u0645\u0628\u0648\u0628\u0647',
@@ -54,6 +55,7 @@ module.exports = {
     'lostform.Username': '\u0623\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645',
     'registrationconfirmsuccesstext.Browse': ' <<BRAND>> \u0645\u0644\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u062A\u0628\u0627\u062A \u0645\u0646',
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
+    'listingpageitemslisting.Posted': 'Posted',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',

@@ -17,11 +17,16 @@ function handleItems(category, subcategory, params, callback) {
     var query;
 
     if (slug.indexOf(params.title + '-cat-')) {
-        return helpers.common.redirect.call(this, '/' + slug);
+        if (typeof page === 'undefined' || (isNaN(page) || page <= 1 || page >= 999999)) {
+            return helpers.common.redirect.call(this, '/' + slug);
+        }
+        return helpers.common.redirect.call(this, '/' + slug + '-p-' + page);
     }
     helpers.pagination.prepare(this.app, params);
     query = _.clone(params);
     params.categoryId = params.catId;
+    params.seo = true;
+    params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
     delete params.catId;
     delete params.title;
     delete params.page;
@@ -36,18 +41,15 @@ function handleItems(category, subcategory, params, callback) {
         readFromCache: false
     }, function afterFetch(err, result) {
         var url = '/' + query.title + '-cat-' + query.catId;
-        var model = result.items.models[0];
 
-        result.items = model.get('data');
-        result.metadata = model.get('metadata');
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
             return helpers.common.redirect.call(this, '/' + slug);
         }
-        if (result.metadata.total < 5) {
+        if (result.items.metadata.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
             seo.addMetatag('googlebot', 'noindex, follow');
         }
-        helpers.pagination.paginate(result.metadata, query, url);
+        helpers.pagination.paginate(result.items.metadata, query, url);
         result.category = category.toJSON();
         result.subcategory = subcategory.toJSON();
         result.relatedAds = query.relatedAds;
@@ -66,9 +68,11 @@ function handleItems(category, subcategory, params, callback) {
             }
         });
 
-        seo.addMetatag.call(this, 'title', subcategory.get('trName'));
-        seo.addMetatag.call(this, 'description', subcategory.get('trName'));
+        seo.addMetatag('title', result.items.metadata.seo.title);
+        seo.addMetatag('description', result.items.metadata.seo.description);
         seo.update();
+        result.metadata = result.items.metadata;
+        result.items = result.items.toJSON();
         callback(err, result);
     }.bind(this));
 }
@@ -120,13 +124,16 @@ module.exports = {
                     collection: 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageCode: this.app.session.get('selectedLanguage'),
+                        seo: true
                     }
                 }
             }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 analytics.reset();
+                seo.addMetatag('title', result.categories.metadata.title);
+                seo.addMetatag('description', result.categories.metadata.description);
                 callback(null, {
                     categories: result.categories.toJSON(),
                     icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
@@ -147,7 +154,8 @@ module.exports = {
                     collection: 'Categories',
                     params: {
                         location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageCode: this.app.session.get('selectedLanguage'),
+                        seo: true
                     }
                 }
             }, {

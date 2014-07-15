@@ -121,14 +121,12 @@ module.exports = {
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                var myAds = result.myAds.models[0];
-
                 function processItem(item) {
                     item.date.since = helpers.timeAgo(item.date);
                 }
 
-                result.myAdsMetadata = myAds.get('metadata');
-                result.myAds = myAds.get('data');
+                result.myAdsMetadata = result.myAds.metadata;
+                result.myAds = result.myAds.toJSON();
                 result.deleted = params.deleted;
                 _.each(result.myAds, processItem);
                 callback(err, result);
@@ -172,14 +170,12 @@ module.exports = {
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                var favorites = result.favorites.models[0];
-
                 function processItem(item) {
                     item.date.since = helpers.timeAgo(item.date);
                 }
 
-                result.favoritesMetadata = favorites.get('metadata');
-                result.favorites = favorites.get('data');
+                result.favoritesMetadata = result.favorites.metadata;
+                result.favorites = result.favorites.toJSON();
                 result.favorite = favorite;
                 _.each(result.favorites, processItem);
                 callback(err, result);
