@@ -197,7 +197,7 @@ module.exports = {
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
-                callback(err, {
+                callback(null, {
                     postingSession: _postingSession,
                     intent: 'create',
                     fields: _fields.fields,

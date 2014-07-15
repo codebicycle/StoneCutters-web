@@ -280,7 +280,7 @@ module.exports = {
                 analytics.addParam('item', item);
                 analytics.addParam('category', _categories.get(subcategory.get('parentId')).toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                callback(err, {
+                callback(null, {
                     item: item,
                     user: user,
                     pos: pos,
@@ -369,7 +369,7 @@ module.exports = {
                 analytics.addParam('item', item);
                 analytics.addParam('category', _categories.get(subcategory.get('parentId')).toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                callback(err, {
+                callback(null, {
                     item: item,
                     user: user,
                     analytics: analytics.generateURL.call(this)
@@ -451,7 +451,7 @@ module.exports = {
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
-                callback(err, {
+                callback(null, {
                     user: user,
                     item: item,
                     form: form,
@@ -524,7 +524,7 @@ module.exports = {
                 analytics.addParam('user', user);
                 analytics.addParam('category', _categories.get(subcategory.get('parentId')).toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                callback(err, {
+                callback(null, {
                     item: item,
                     user: user,
                     analytics: analytics.generateURL.call(this)
