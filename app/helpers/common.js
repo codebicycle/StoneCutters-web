@@ -1,7 +1,8 @@
 'use strict';
 
-var config = require('../config');
 var _ = require('underscore');
+var config = require('../config');
+var seo = require('../seo');
 var utils = require('../../shared/utils');
 
 module.exports = (function() {
@@ -97,6 +98,9 @@ module.exports = (function() {
         if (typeof window === 'undefined') {
             this.app.req.res.status(status);
         }
+        seo.addMetatag('robots', 'noindex, nofollow');
+        seo.addMetatag('googlebot', 'noindex, nofollow');
+        seo.update();
         return callback(null, 'pages/error', res);
     }
 
