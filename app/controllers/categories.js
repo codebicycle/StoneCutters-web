@@ -89,7 +89,7 @@ function handleShow(category, params, callback) {
     seo.resetHead.call(this, currentRouter);
 
     slug = helpers.common.slugToUrl(category.toJSON());
-    if (slug.indexOf(params.title + '-cat-')) {
+    if (!category.checkSlug(slug, params.title)) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
     analytics.reset();

@@ -58,6 +58,16 @@ module.exports = Base.extend({
             }
         }
         return location;
+    },
+    checkSlug: function(itemSlug, urlSlug) {
+        var slug = [(urlSlug ? (urlSlug + '-') : ''), 'iid-', this.get('id')].join('');
+
+        if (itemSlug === slug) {
+            if (this.app.session.get('path').slice(1).indexOf('-iid-')) {
+                return true;
+            }
+        }       
+        return false;
     }
 });
 

@@ -111,7 +111,7 @@ module.exports = {
                 var slug;
 
                 slug = helpers.common.slugToUrl(item);
-                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
+                if (!_item.checkSlug(slug, slugUrl)) {
                     slug = ('/' + slug);
                     if (favorite) {
                         slug = helpers.common.params(slug, 'favorite', favorite);
@@ -246,7 +246,7 @@ module.exports = {
                 if (platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
+                if (!result.item.checkSlug(slug, slugUrl)) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (!item.images || !item.images.length) {
@@ -308,13 +308,14 @@ module.exports = {
                     return helpers.common.error.call(this, err, result, callback);
                 }
                 var item = result.item.toJSON();
+                var platform = this.app.session.get('platform');
                 var subcategory;
 
                 slug = helpers.common.slugToUrl(item);
-                if (this.app.session.get('platform') !== 'html4') {
+                if (platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
+                if (!result.item.checkSlug(slug, slugUrl)) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
 
