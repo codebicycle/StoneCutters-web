@@ -217,7 +217,135 @@ module.exports = {
 
             asynquence().or(error.bind(this))
                 .gate(findCategories.bind(this), findPostingSession.bind(this), findFields.bind(this))
-                .val(findRelatedItems.bind(this));
+                .val(success.bind(this));
+        }
+    },
+    success: function(params, callback) {
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            var user = this.app.session.get('user');
+            var securityKey = params.sk;
+            var itemId = params.itemId;
+            var siteLocation = this.app.session.get('siteLocation');
+            var anonymousItem;
+            
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.itemId] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+                else {
+                    securityKey = anonymousItem[params.itemId];
+                }
+            }
+            params.id = params.itemId;
+            delete params.itemId;
+            delete params.title;
+            delete params.sk;
+
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.categories);
+                }.bind(this));
+            }
+
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.item);
+                }.bind(this));
+            }
+
+            function findRelatedItems(done, _categories, _item) {
+                if (!_categories || !_item) {
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
+
+                this.app.fetch({
+                    relatedItems: {
+                        collection : 'Items',
+                        params: {
+                            location: siteLocation,
+                            offset: 0,
+                            pageSize: 10,
+                            relatedAds: itemId
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        err = null;
+                        res = {
+                            relatedItems: []
+                        };
+                    }
+                    else {
+                        res.relatedItems = res.relatedItems.toJSON();
+                    }
+                    done(_categories, _item, res.relatedItems);
+                }.bind(this));
+            }
+
+            function success(_categories, _item, _relatedItems) {
+                var item = _item.toJSON();
+                var subcategory = _categories.search(item.category.id);
+                var category = _categories.get(subcategory.get('parentId'));
+
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('category', category.toJSON());
+                analytics.addParam('subcategory', subcategory.toJSON());
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
+                callback(err, {
+                    user: user,
+                    item: item,
+                    sk: securityKey,
+                    category: category.toJSON(),
+                    subcategory: subcategory.toJSON(),
+                    relatedItems: _relatedItems,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .then(findRelatedItems.bind(this))
+                .val(success.bind(this));
         }
     },
     edit: function(params, callback) {
@@ -364,105 +492,6 @@ module.exports = {
                     analytics.addParam('category', category.toJSON());
                     analytics.addParam('subcategory', subcategory.toJSON());
                     result.analytics = analytics.generateURL.call(this);
-                    callback(err, result);
-                }.bind(this));
-            }
-        }
-    },
-    success: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller() {
-            var user = this.app.session.get('user');
-            var securityKey = params.sk;
-            var itemId = params.itemId;
-            var siteLocation = this.app.session.get('siteLocation');
-            var anonymousItem;
-            
-            if (user) {
-                params.token = user.token;
-            }
-            else if (typeof window !== 'undefined' && localStorage) {
-                anonymousItem = localStorage.getItem('anonymousItem');
-                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                if (securityKey) {
-                    anonymousItem[params.itemId] = securityKey;
-                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                }
-                else {
-                    securityKey = anonymousItem[params.itemId];
-                }
-            }
-            params.id = params.itemId;
-            delete params.itemId;
-            delete params.title;
-            delete params.sk;
-
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err) {
-                    callback(err, result);
-                    return;
-                }
-                findRelatedItems.call(this, err, result);
-            }.bind(this));
-
-            function findRelatedItems(err, data) {
-                var item = data.item.toJSON();
-
-                this.app.fetch({
-                    relatedItems: {
-                        collection : 'Items',
-                        params: {
-                            location: siteLocation,
-                            offset: 0,
-                            pageSize: 10,
-                            relatedAds: itemId
-                        }
-                    }
-                }, {
-                    readFromCache: false
-                }, function afterFetch(err, result) {
-                    var user = this.app.session.get('user');
-                    var subcategory = data.categories.search(item.category.id);
-                    var category = data.categories.get(subcategory.get('parentId'));
-
-                    if (err) {
-                        err = null;
-                        result = {
-                            relatedItems: []
-                        };
-                    }
-                    else {
-                        result.relatedItems = result.relatedItems.toJSON();
-                    }
-                    result.user = user;
-                    result.item = item;
-                    result.pos = Number(params.pos) || 0;
-                    result.sk = securityKey;
-                    result.category = category.toJSON();
-                    result.subcategory = subcategory.toJSON();
-                    analytics.reset();
-                    analytics.addParam('item', item);
-                    analytics.addParam('category', category.toJSON());
-                    analytics.addParam('subcategory', subcategory.toJSON());
-                    result.analytics = analytics.generateURL.call(this);
-                    seo.addMetatag('robots', 'noindex, nofollow');
-                    seo.addMetatag('googlebot', 'noindex, nofollow');
-                    seo.update();
                     callback(err, result);
                 }.bind(this));
             }

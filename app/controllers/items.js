@@ -353,9 +353,9 @@ module.exports = {
                 }
                 var item = _item.toJSON();
                 var platform = this.app.session.get('platform');
+                var slug = helpers.common.slugToUrl(item);
                 var subcategory;
 
-                slug = helpers.common.slugToUrl(item);
                 if (platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
