@@ -325,8 +325,8 @@ module.exports = function itemRouter(app, dataAdapter) {
                 success: function(req) {
                     graphite.send([req.query.location, 'reply', 'success', req.query.platform], 1, '+');
                 },
-                fail: function(req) {
-                    graphite.send([req.query.location, 'reply', 'fail', req.query.platform], 1, '+');
+                error: function(req) {
+                    graphite.send([req.query.location, 'reply', 'error', req.query.platform], 1, '+');
                 }
             }
         };
