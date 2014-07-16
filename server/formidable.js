@@ -100,12 +100,18 @@ function error(req, url, err, values, callback) {
     }
     else {
         errors = {};
-        err.forEach(function each(error) {
-            if (typeof errors[error.selector] === 'undefined') {
-                errors[error.selector] = [];
-            }
-            errors[error.selector].push(error.message);
-        });
+        if (err.forEach) {
+            err.forEach(function each(error) {
+                if (typeof errors[error.selector] === 'undefined') {
+                    errors[error.selector] = [];
+                }
+                errors[error.selector].push(error.message);
+            });
+        }
+        else {
+            console.log('[OLX_DEBUG] posting error ' + err);
+            errors.main = err;
+        }
         req.rendrApp.session.persist({
             form: {
                 values: values,
