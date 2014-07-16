@@ -2,7 +2,7 @@
 {% view 'partials/search' %}
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, category.trName) }}
+{{ Breadcrumb(dictionary, link, subcategory.trName) }}
 <div id="itemListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">
