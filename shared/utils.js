@@ -9,7 +9,10 @@ var utils = {
     fullizeUrl: fullizeUrl,
     params: params,
     removeParams: removeParams,
-    get: get
+    get: get,
+    defaults: {
+        userAgent: 'Mozilla/5.0 (compatible; OlxArwen/1.0; +http://www.olx.com)'
+    }
 };
 var linkParams = {
     location: function (href, query) {
@@ -51,7 +54,7 @@ var linkParams = {
         }
         return href;
     }
-}
+};
 
 function link(href, app, query) {
     query = query || {};

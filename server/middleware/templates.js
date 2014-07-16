@@ -6,6 +6,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var minify = require('../config').get(['uglify', 'enabled'], true);
         var localization = require('../../app/config').get('localization', {});
         var _ = require('underscore');
+        var utils = require('../../shared/utils');
 
         function isLocalized(platform, siteLocation) {
             return !!(localization[platform] && ~localization[platform].indexOf(siteLocation));
@@ -19,7 +20,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var app = req.rendrApp;
             var location = app.session.get('location');
             var siteLocation = app.session.get('location').url;
-            var userAgent = req.get('user-agent');
+            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
 
             function callback(err, response, body) {
                 if (err) {

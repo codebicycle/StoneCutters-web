@@ -14,7 +14,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
-            var userAgent = req.get('user-agent');
+            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
 
             function callback(err, response, body) {
                 var platform;
