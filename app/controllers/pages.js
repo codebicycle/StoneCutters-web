@@ -3,6 +3,7 @@
 var helpers = require('../helpers');
 var analytics = require('../analytics');
 var config = require('../config');
+var seo = require('../seo');
 
 module.exports = {
     terms: function(params, callback) {
@@ -147,6 +148,9 @@ module.exports = {
                 this.app.session.clear('error');
             }
             analytics.reset();
+            seo.addMetatag('robots', 'noindex, nofollow');
+            seo.addMetatag('googlebot', 'noindex, nofollow');
+            seo.update();
             callback(null, {
                 error: err,
                 analytics: analytics.generateURL.call(this)
