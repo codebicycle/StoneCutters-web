@@ -95,6 +95,10 @@ module.exports = (function() {
             callback = status;
             status = 404;
         }
+        if (!res) {
+            res = {};
+        }
+        res.error = err;
         if (typeof window === 'undefined') {
             this.app.req.res.status(status);
         }
