@@ -147,6 +147,10 @@ module.exports = {
                 var subcategory;
                 var response;
 
+
+                if (err) {
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
                 }
@@ -334,7 +338,7 @@ module.exports = {
             var itemId = params.itemId;
             var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
-            
+
             if (user) {
                 params.token = user.token;
             }

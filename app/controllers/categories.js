@@ -42,6 +42,9 @@ function handleItems(category, subcategory, params, callback) {
     }, function afterFetch(err, result) {
         var url = '/' + query.title + '-cat-' + query.catId;
 
+        if (err) {
+            return helpers.common.error.call(this, null, {}, callback);
+        }
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
             return helpers.common.redirect.call(this, '/' + slug);
         }
@@ -67,7 +70,6 @@ function handleItems(category, subcategory, params, callback) {
                 subcategory: subcategory.get('id')
             }
         });
-
         if (result.items.metadata.seo) {
             seo.addMetatag('title', result.items.metadata.seo.title);
             seo.addMetatag('description', result.items.metadata.seo.description);
