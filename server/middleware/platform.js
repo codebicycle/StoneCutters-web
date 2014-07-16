@@ -14,7 +14,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
-            var userAgent = req.get('user-agent') || 'Nokia6100/1.0 (04.01) Profile/MIDP-1.0 Configuration/CLDC-1.0';
+            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
 
             function callback(err, response, body) {
                 var platform;
