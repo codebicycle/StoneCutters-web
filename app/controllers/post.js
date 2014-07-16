@@ -147,10 +147,6 @@ module.exports = {
                 var subcategory;
                 var response;
 
-
-                if (err) {
-                    return helpers.common.error.call(this, null, {}, callback);
-                }
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
                 }
@@ -297,7 +293,8 @@ module.exports = {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var subcategory = response.categories.search(item.category.id);
-                    var category = response.categories.get(subcategory.get('parentId'));
+                    var parentId = subcategory.get('parentId');
+                    var category = parentId ? response.categories.get(parentId) : subcategory;
 
                     result.item = item;
                     result.user = user;
@@ -398,7 +395,8 @@ module.exports = {
                 }, function afterFetch(err, result) {
                     var user = this.app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
-                    var category = data.categories.get(subcategory.get('parentId'));
+                    var parentId = subcategory.get('parentId');
+                    var category = parentId ? data.categories.get(parentId) : subcategory;
 
                     if (err) {
                         err = null;
