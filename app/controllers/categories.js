@@ -43,6 +43,9 @@ function handleItems(category, subcategory, params, callback) {
         var url = '/' + query.title + '-cat-' + query.catId;
         var currentPage;
 
+        if (err) {
+            return helpers.common.error.call(this, null, {}, callback);
+        }
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
             return helpers.common.redirect.call(this, '/' + slug, null, {
                 status: 302
@@ -73,9 +76,11 @@ function handleItems(category, subcategory, params, callback) {
             }
         });
 
-        currentPage = result.metadata.page;
-        seo.addMetatag('title', result.metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
-        seo.addMetatag('description', result.metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
+        if (result.items.metadata.seo) {
+            currentPage = result.metadata.page;
+            seo.addMetatag('title', result.items.metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            seo.addMetatag('description', result.items.metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
+        }
         seo.update();
         callback(err, result);
     }.bind(this));
@@ -89,7 +94,7 @@ function handleShow(category, params, callback) {
     seo.resetHead.call(this, currentRouter);
 
     slug = helpers.common.slugToUrl(category.toJSON());
-    if (slug.indexOf(params.title + '-cat-')) {
+    if (!category.checkSlug(slug, params.title)) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
     analytics.reset();
