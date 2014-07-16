@@ -373,6 +373,7 @@ module.exports = {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var url = '/nf/search/' + query.search + '/';
+                var currentPage;
 
                 result.metadata = result.items.metadata;
                 result.items = result.items.toJSON();
@@ -384,14 +385,15 @@ module.exports = {
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');
                 }
-                seo.addMetatag('title', query.search);
-                seo.addMetatag('description');
-                seo.update();
-
                 helpers.pagination.paginate(result.metadata, query, url);
                 analytics.addParam('page_nb', result.metadata.totalPages);
                 result.analytics = analytics.generateURL.call(this);
                 result.search = query.search;
+
+                currentPage = result.metadata.page;
+                seo.addMetatag('title', query.search + (currentPage > 1 ? (' - ' + currentPage) : ''));
+                seo.addMetatag('description');
+                seo.update();
                 callback(err, result);
             }.bind(this));
         }

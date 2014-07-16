@@ -41,9 +41,12 @@ function handleItems(category, subcategory, params, callback) {
         readFromCache: false
     }, function afterFetch(err, result) {
         var url = '/' + query.title + '-cat-' + query.catId;
+        var currentPage;
 
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
-            return helpers.common.redirect.call(this, '/' + slug);
+            return helpers.common.redirect.call(this, '/' + slug, null, {
+                status: 302
+            });
         }
         if (result.items.metadata.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
@@ -54,6 +57,8 @@ function handleItems(category, subcategory, params, callback) {
         result.subcategory = subcategory.toJSON();
         result.relatedAds = query.relatedAds;
         result.type = 'items';
+        result.metadata = result.items.metadata;
+        result.items = result.items.toJSON();
 
         analytics.reset();
         analytics.setPage('listing');
@@ -68,11 +73,10 @@ function handleItems(category, subcategory, params, callback) {
             }
         });
 
-        seo.addMetatag('title', result.items.metadata.seo.title);
-        seo.addMetatag('description', result.items.metadata.seo.description);
+        currentPage = result.metadata.page;
+        seo.addMetatag('title', result.metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
+        seo.addMetatag('description', result.metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
         seo.update();
-        result.metadata = result.items.metadata;
-        result.items = result.items.toJSON();
         callback(err, result);
     }.bind(this));
 }
@@ -100,7 +104,6 @@ function handleShow(category, params, callback) {
 
     seo.addMetatag.call(this, 'title', category.get('trName'));
     seo.addMetatag.call(this, 'description', category.get('trName'));
-
     seo.update();
     callback(null, {
         category: category.toJSON(),

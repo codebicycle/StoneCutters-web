@@ -9,10 +9,18 @@ var head = {
 };
 var specials = {
     title: function(content) {
-        head.title = content + getLocationName.call(this, ' - ');
+        if (content) {
+            head.title = content + getLocationName.call(this, ' - ');
+            return;
+        }
+        delete head.title;
     },
     description: function(content) {
-        head.metatags.description = content + getLocationName.call(this, ' - ');
+        if (content) {
+            head.metatags.description = content + getLocationName.call(this, ' - ');
+            return;
+        }
+        delete head.metatags.description;
     },
     canonical: function(content) {
         var platform = this.app.session.get('platform');
@@ -43,10 +51,13 @@ var specials = {
 };
 
 function getLocationName(prefix) {
-    if (this && this.app) {
-        var location = this.app.session.get('location');
+    var location;
 
-        return prefix + (location.current ? location.current.name : location.name);
+    if (this && this.app) {
+        location = this.app.session.get('location');
+        if (location) {
+            return prefix + (location.current ? location.current.name : location.name);
+        }
     }
     return '';
 }
@@ -97,17 +108,14 @@ function addMetatag(name, content) {
     head.metatags[name] = content;
 }
 
-function getMetatagName(page, currentRoute) {
-    if (page) {
-        return page;
-    }
+function getMetatagName(currentRoute) {
     return [currentRoute.controller, currentRoute.action];
 }
 
 module.exports = {
     getHead: getHead,
     resetHead: function(page) {
-        var metatag = getMetatagName(page, this.app.session.get('currentRoute'));
+        var metatag = page || getMetatagName(this.app.session.get('currentRoute'));
         var defaultMetatags = utils.get(METATAGS, 'default');
         var metatags = utils.get(METATAGS, metatag, {});
 
