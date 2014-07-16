@@ -173,7 +173,8 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
-                formidable.error(req, req.headers.referer.split('?').shift(), err, item, function redirect(url) {
+                var url = req.headers.referer || '/posting';
+                formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
                     graphite.send([location.name, 'posting', 'error', platform], 1, '+');

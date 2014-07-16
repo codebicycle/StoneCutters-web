@@ -41,9 +41,15 @@ function handleItems(category, subcategory, params, callback) {
         readFromCache: false
     }, function afterFetch(err, result) {
         var url = '/' + query.title + '-cat-' + query.catId;
+        var currentPage;
 
+        if (err) {
+            return helpers.common.error.call(this, null, {}, callback);
+        }
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
-            return helpers.common.redirect.call(this, '/' + slug);
+            return helpers.common.redirect.call(this, '/' + slug, null, {
+                status: 302
+            });
         }
         if (result.items.metadata.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
@@ -54,15 +60,14 @@ function handleItems(category, subcategory, params, callback) {
         result.subcategory = subcategory.toJSON();
         result.relatedAds = query.relatedAds;
         result.type = 'items';
+        result.metadata = result.items.metadata;
+        result.items = result.items.toJSON();
 
         analytics.reset();
         analytics.setPage('listing');
         analytics.addParam('category', category.toJSON());
         analytics.addParam('subcategory', subcategory.toJSON());
         result.analytics = analytics.generateURL.call(this);
-        seo.addMetatag('title', result.items.metadata.seo.title);
-        seo.addMetatag('description', result.items.metadata.seo.description);
-        seo.update();
 
         this.app.session.update({
             postingLink: {
@@ -70,8 +75,13 @@ function handleItems(category, subcategory, params, callback) {
                 subcategory: subcategory.get('id')
             }
         });
-        result.metadata = result.items.metadata;
-        result.items = result.items.toJSON();
+
+        if (result.items.metadata.seo) {
+            currentPage = result.metadata.page;
+            seo.addMetatag('title', result.items.metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            seo.addMetatag('description', result.items.metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
+        }
+        seo.update();
         callback(err, result);
     }.bind(this));
 }
@@ -84,15 +94,12 @@ function handleShow(category, params, callback) {
     seo.resetHead.call(this, currentRouter);
 
     slug = helpers.common.slugToUrl(category.toJSON());
-    if (slug.indexOf(params.title + '-cat-')) {
+    if (!category.checkSlug(slug, params.title)) {
         return helpers.common.redirect.call(this, '/' + slug);
     }
     analytics.reset();
     analytics.addParam('user', this.app.session.get('user'));
     analytics.addParam('category', category.toJSON());
-    seo.addMetatag.call(this, 'title', category.get('trName'));
-    seo.addMetatag.call(this, 'description', category.get('trName'));
-    seo.update();
 
     this.app.session.update({
         postingLink: {
@@ -100,6 +107,9 @@ function handleShow(category, params, callback) {
         }
     });
 
+    seo.addMetatag.call(this, 'title', category.get('trName'));
+    seo.addMetatag.call(this, 'description', category.get('trName'));
+    seo.update();
     callback(null, {
         category: category.toJSON(),
         type: 'categories',

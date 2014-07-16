@@ -110,7 +110,7 @@ module.exports = {
                 var slug;
 
                 slug = helpers.common.slugToUrl(item);
-                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
+                if (!_item.checkSlug(slug, slugUrl)) {
                     slug = ('/' + slug);
                     if (favorite) {
                         slug = helpers.common.params(slug, 'favorite', favorite);
@@ -141,7 +141,8 @@ module.exports = {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var subcategory = _categories.search(item.category.id);
-                    var category;
+                    var parentId = subcategory.get('parentId');
+                    var category = _categories.get(parentId);
 
                     if (err) {
                         err = null;
@@ -156,7 +157,6 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    category = _categories.get(subcategory.get('parentId'));
                     result.relatedAdsLink = ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join('');
                     result.subcategory = subcategory.toJSON();
                     result.category = category.toJSON();
@@ -264,7 +264,7 @@ module.exports = {
                 if (platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
+                if (!_item.checkSlug(slug, slugUrl)) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (!item.images || !item.images.length) {
@@ -359,7 +359,7 @@ module.exports = {
                 if (platform !== 'html4') {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                if ((slugUrl && !slug) || (!slugUrl && slug) || (slugUrl && slug && slug.indexOf(slugUrl + '-iid-'))) {
+                if (!_item.checkSlug(slug, slugUrl)) {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
 
@@ -582,6 +582,7 @@ module.exports = {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 var url = '/nf/search/' + query.search + '/';
+                var currentPage;
 
                 result.metadata = result.items.metadata;
                 result.items = result.items.toJSON();
@@ -593,14 +594,15 @@ module.exports = {
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');
                 }
-                seo.addMetatag('title', query.search);
-                seo.addMetatag('description');
-                seo.update();
-
                 helpers.pagination.paginate(result.metadata, query, url);
                 analytics.addParam('page_nb', result.metadata.totalPages);
                 result.analytics = analytics.generateURL.call(this);
                 result.search = query.search;
+
+                currentPage = result.metadata.page;
+                seo.addMetatag('title', query.search + (currentPage > 1 ? (' - ' + currentPage) : ''));
+                seo.addMetatag('description');
+                seo.update();
                 callback(err, result);
             }.bind(this));
         }
