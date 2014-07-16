@@ -4,8 +4,10 @@
             <tbody>
                 <tr>
                     <td style="border-top: solid thin #808080;">
-                        <strong style="color: #0075BD;">{{category.trName}}</strong>
-                        <small style="color: #999;">({{category.counter}})</small>
+                        <strong style="color: #0075BD;">{{subcategory.trName}}</strong>
+                        {% if subcategory.counter %}
+                            <small style="color: #999;">({{subcategory.counter}})</small>
+                        {% endif %}
                     </td>
                 </tr>
             </tbody>
