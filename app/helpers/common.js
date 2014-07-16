@@ -95,13 +95,11 @@ module.exports = (function() {
             callback = status;
             status = 404;
         }
-        if (!res) {
-            res = {};
-        }
-        res.error = err;
         if (typeof window === 'undefined') {
             this.app.req.res.status(status);
         }
+        res = (res || {});
+        res.error = err;
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
         seo.update();
