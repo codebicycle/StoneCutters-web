@@ -121,6 +121,9 @@ module.exports = {
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
+                if (err || !result.myAds) {
+                    return helpers.common.error.call(this, err, result, callback);
+                }
                 result.myAdsMetadata = result.myAds.metadata;
                 result.myAds = result.myAds.toJSON();
                 result.deleted = params.deleted;
@@ -128,7 +131,7 @@ module.exports = {
                     item.date.since = helpers.timeAgo(item.date);
                 });
                 callback(err, result);
-            });
+            }.bind(this));
         }
     },
     favorites: function(params, callback) {
@@ -167,6 +170,9 @@ module.exports = {
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
+                if (err || !result.favorites) {
+                    return helpers.common.error.call(this, err, result, callback);
+                }
                 result.favoritesMetadata = result.favorites.metadata;
                 result.favorites = result.favorites.toJSON();
                 result.favorite = favorite;
@@ -174,7 +180,7 @@ module.exports = {
                     item.date.since = helpers.timeAgo(item.date);
                 });
                 callback(err, result);
-            });
+            }.bind(this));
         }
     }
 };

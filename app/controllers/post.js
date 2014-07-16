@@ -380,7 +380,7 @@ module.exports = {
                 id: params.itemId,
                 languageId: languageId,
                 languageCode: languageCode
-            }
+            };
 
             checkAuthentication(_params, _params.id);
 
@@ -438,7 +438,7 @@ module.exports = {
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
                         query: {
-                            location: item.getLocation().url;
+                            location: item.getLocation().url
                         }
                     });
                 }
@@ -462,14 +462,13 @@ module.exports = {
             }
 
             function findFields(done) {
-                var item = _item.toJSON();
                 var _params = {
                     intent: 'edit',
                     location: siteLocation,
                     languageId: languageId,
                     languageCode: languageCode,
-                    itemId: item.id,
-                    categoryId: item.category.id
+                    itemId: _item.get('id'),
+                    categoryId: _item.get('category').id
                 };
 
                 checkAuthentication(_params, _params.itemId);
@@ -486,47 +485,40 @@ module.exports = {
                     }
                     done(res.fields.models[0].attributes);
                 }.bind(this));
-
-                    var subcategory = response.categories.search(item.category.id);
-                    var category = response.categories.get(subcategory.get('parentId'));
-                    var _form;
-
-                   if (!form || !form.values) {
-                        _form = {
-                            values: item
-                        };
-                    }
-                    else {
-                        _form = form;
-                    }
-                    analytics.reset();
-                    analytics.addParam('item', item);
-                    analytics.addParam('category', category.toJSON());
-                    analytics.addParam('subcategory', subcategory.toJSON());
-                    callback(err, {
-                        analytics: analytics.generateURL.call(this)
-                    });
             }
 
             function success(_postingSession, _fields) {
                 var item = _item.toJSON();
                 var subcategory = _categories.search(item.category.id);
                 var category = _categories.get(subcategory.get('parentId'));
+                var _form;
 
+                if (!form || !form.values) {
+                    _form = {
+                        values: item
+                    };
+                }
+                else {
+                    _form = form;
+                }
                 analytics.reset();
                 analytics.addParam('item', item);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                seo.addMetatag('robots', 'noindex, nofollow');
-                seo.addMetatag('googlebot', 'noindex, nofollow');
-                seo.update();
-                callback(null, {
-                    user: user,
+                callback(null, { 
                     item: item,
-                    sk: securityKey,
+                    user: user,
+                    postingSession: _postingSession,
+                    intent: 'edit',
+                    fields: _fields.fields,
                     category: category.toJSON(),
                     subcategory: subcategory.toJSON(),
-                    relatedItems: _relatedItems,
+                    language: languageId,
+                    languageCode: languageCode,
+                    errField: params.errField,
+                    errMsg: params.errMsg,
+                    sk: securityKey,
+                    form: _form,
                     analytics: analytics.generateURL.call(this)
                 });
             }
@@ -560,7 +552,7 @@ module.exports = {
             asynquence().or(error.bind(this))
                 .gate(findCategories.bind(this), findItem.bind(this))
                 .then(checkItem.bind(this))
-                .then(findFields.bind(this))
+                .gate(findPostingSession.bind(this), findFields.bind(this))
                 .val(success.bind(this));
         }
     }

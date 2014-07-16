@@ -76,10 +76,10 @@ function handleItems(category, subcategory, params, callback) {
             }
         });
 
-        if (result.items.metadata.seo) {
+        if (result.metadata.seo) {
             currentPage = result.metadata.page;
-            seo.addMetatag('title', result.items.metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
-            seo.addMetatag('description', result.items.metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            seo.addMetatag('title', result.metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            seo.addMetatag('description', result.metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
         }
         seo.update();
         callback(err, result);
