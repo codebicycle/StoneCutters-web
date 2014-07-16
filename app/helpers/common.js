@@ -99,7 +99,6 @@ module.exports = (function() {
             this.app.req.res.status(status);
         }
         res = (res || {});
-        res.error = err;
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
         seo.update();
