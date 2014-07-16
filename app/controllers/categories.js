@@ -68,8 +68,10 @@ function handleItems(category, subcategory, params, callback) {
             }
         });
 
-        seo.addMetatag('title', result.items.metadata.seo.title);
-        seo.addMetatag('description', result.items.metadata.seo.description);
+        if (result.items.metadata.seo) {
+            seo.addMetatag('title', result.items.metadata.seo.title);
+            seo.addMetatag('description', result.items.metadata.seo.description);
+        }
         seo.update();
         result.metadata = result.items.metadata;
         result.items = result.items.toJSON();

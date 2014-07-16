@@ -25,6 +25,9 @@ module.exports = function analyticsHelper() {
         var user = this.app.session.get('user');
         var location;
 
+        if (!params) {
+            params = {};
+        }
         if (user) {
             params.user_id = user.id;
         }

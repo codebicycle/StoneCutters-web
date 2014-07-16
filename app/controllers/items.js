@@ -142,7 +142,8 @@ module.exports = {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var subcategory = _categories.search(item.category.id);
-                    var category;
+                    var parentId = subcategory.get('parentId');
+                    var category = _categories.get(parentId);
 
                     if (err) {
                         err = null;
@@ -157,7 +158,6 @@ module.exports = {
                     result.item = item;
                     result.pos = Number(params.pos) || 0;
                     result.sk = securityKey;
-                    category = _categories.get(subcategory.get('parentId'));
                     result.relatedAdsLink = ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join('');
                     result.subcategory = subcategory.toJSON();
                     result.category = category.toJSON();
