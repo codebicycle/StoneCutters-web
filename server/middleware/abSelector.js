@@ -15,7 +15,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var clientId = req.rendrApp.session.get('clientId') || uuid.v4();
-            var session = new sixpack.Session(clientId, config.url, req.ip, req.get('user-agent'));
+            var userAgent = req.get('user-agent') || 'Nokia6100/1.0 (04.01) Profile/MIDP-1.0 Configuration/CLDC-1.0';
+            var session = new sixpack.Session(clientId, config.url, req.ip, userAgent);
             var gate = [];
             var sixpackData = {};
 

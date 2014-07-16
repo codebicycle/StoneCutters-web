@@ -19,7 +19,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var app = req.rendrApp;
             var location = app.session.get('location');
             var siteLocation = app.session.get('location').url;
-            var userAgent = req.get('user-agent');
+            var userAgent = req.get('user-agent') || 'Nokia6100/1.0 (04.01) Profile/MIDP-1.0 Configuration/CLDC-1.0';
 
             function callback(err, response, body) {
                 if (err) {
