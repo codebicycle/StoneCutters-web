@@ -142,6 +142,10 @@ module.exports = {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var subcategory = _categories.search(item.category.id);
+                    if (!subcategory) {
+                        console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                        return helpers.common.error.call(this, null, {}, callback);
+                    }
                     var parentId = subcategory.get('parentId');
                     var category = parentId ? _categories.get(parentId) : subcategory;
 
@@ -255,6 +259,10 @@ module.exports = {
                     return helpers.common.redirect.call(this, ('/' + slug + '/gallery'));
                 }
                 var subcategory = result.categories.search(item.category.id);
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + this.app.session.get('siteLocation') + ' (' + result.categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
                 var parentId = subcategory.get('parentId');
                 var category = parentId ? result.categories.get(parentId) : subcategory;
 
@@ -319,6 +327,10 @@ module.exports = {
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 var subcategory = result.categories.search(item.category.id);
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + this.app.session.get('siteLocation') + ' (' + result.categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
                 var parentId = subcategory.get('parentId');
                 var category = parentId ? result.categories.get(parentId) : subcategory;
 
@@ -437,6 +449,10 @@ module.exports = {
                     return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
                 }
                 var subcategory = result.categories.search(item.category.id);
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + this.app.session.get('siteLocation') + ' (' + result.categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
                 var parentId = subcategory.get('parentId');
                 var category = parentId ? result.categories.get(parentId) : subcategory;
 
@@ -484,6 +500,10 @@ module.exports = {
                 }
                 var item = result.item.toJSON();
                 var subcategory = result.categories.search(item.category.id);
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + this.app.session.get('siteLocation') + ' (' + result.categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return helpers.common.error.call(this, null, {}, callback);
+                }
                 var parentId = subcategory.get('parentId');
                 var category = parentId ? result.categories.get(parentId) : subcategory;
 
