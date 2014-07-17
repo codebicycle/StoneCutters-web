@@ -230,24 +230,27 @@ module.exports = {
             var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
             
-            if (user) {
-                params.token = user.token;
-            }
-            else if (typeof window !== 'undefined' && localStorage) {
-                anonymousItem = localStorage.getItem('anonymousItem');
-                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                if (securityKey) {
-                    anonymousItem[params.itemId] = securityKey;
-                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+            function prepare(done) {
+                if (user) {
+                    params.token = user.token;
                 }
-                else {
-                    securityKey = anonymousItem[params.itemId];
+                else if (typeof window !== 'undefined' && localStorage) {
+                    anonymousItem = localStorage.getItem('anonymousItem');
+                    anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                    if (securityKey) {
+                        anonymousItem[params.itemId] = securityKey;
+                        localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                    }
+                    else {
+                        securityKey = anonymousItem[params.itemId];
+                    }
                 }
+                params.id = params.itemId;
+                delete params.itemId;
+                delete params.title;
+                delete params.sk;
+                done();
             }
-            params.id = params.itemId;
-            delete params.itemId;
-            delete params.title;
-            delete params.sk;
 
             function findCategories(done) {
                 this.app.fetch({
@@ -260,12 +263,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findItem(done) {
@@ -276,12 +274,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.item);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findRelatedItems(done, _categories, _item) {
@@ -318,8 +311,15 @@ module.exports = {
             function success(_categories, _item, _relatedItems) {
                 var item = _item.toJSON();
                 var subcategory = _categories.search(item.category.id);
-                var parentId = subcategory.get('parentId');
-                var category = parentId ? _categories.get(parentId) : subcategory;
+                var category;
+                var parentId;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
 
                 analytics.reset();
                 analytics.addParam('item', item);
@@ -344,6 +344,7 @@ module.exports = {
             }
 
             asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
                 .gate(findCategories.bind(this), findItem.bind(this))
                 .then(findRelatedItems.bind(this))
                 .val(success.bind(this));
@@ -366,24 +367,27 @@ module.exports = {
             var _categories;
             var _item;
 
-            if (!user && !securityKey) {
-                return helpers.common.redirect.call(this, '/login', null, {
-                    status: 302
-                });
+            function prepare(done) {
+                if (!user && !securityKey) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/login', null, {
+                        status: 302
+                    });
+                }
+
+                siteLocation = this.app.session.get('siteLocation');
+                language = this.app.session.get('selectedLanguage');
+                languages = this.app.session.get('languages');
+                languageId = languages._byId[language].id;
+                languageCode = languages._byId[language].isocode.toLowerCase();
+                _params = {
+                    id: params.itemId,
+                    languageId: languageId,
+                    languageCode: languageCode
+                };
+                checkAuthentication(_params, _params.id);
+                done();
             }
-
-            siteLocation = this.app.session.get('siteLocation');
-            language = this.app.session.get('selectedLanguage');
-            languages = this.app.session.get('languages');
-            languageId = languages._byId[language].id;
-            languageCode = languages._byId[language].isocode.toLowerCase();
-            _params = {
-                id: params.itemId,
-                languageId: languageId,
-                languageCode: languageCode
-            };
-
-            checkAuthentication(_params, _params.id);
 
             function findCategories(done) {
                 this.app.fetch({
@@ -491,9 +495,16 @@ module.exports = {
             function success(_postingSession, _fields) {
                 var item = _item.toJSON();
                 var subcategory = _categories.search(item.category.id);
-                var parentId = subcategory.get('parentId');
-                var category = parentId ? _categories.get(parentId) : subcategory;
+                var category;
+                var parentId;
                 var _form;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
 
                 if (!form || !form.values) {
                     _form = {
@@ -552,6 +563,7 @@ module.exports = {
             }
 
             asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
                 .gate(findCategories.bind(this), findItem.bind(this))
                 .then(checkItem.bind(this))
                 .gate(findPostingSession.bind(this), findFields.bind(this))

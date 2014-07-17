@@ -56,12 +56,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findItem(done) {
@@ -104,6 +99,7 @@ module.exports = {
             }
 
             function checkItem(done, _categories, _item) {
+                console.log(arguments);
                 if (!_categories || !_item) {
                     return done.fail(null, {});
                 }
@@ -162,14 +158,20 @@ module.exports = {
                 }.bind(this));
             }
 
-            function success(done, _categories, _item, _relatedItems) {
+            function success(_categories, _item, _relatedItems) {
                 var item = _item.toJSON();
                 var subcategory = _categories.search(_item.get('category').id);
-                var parentId = subcategory.get('parentId');
-                var category = parentId ? _categories.get(parentId) : subcategory;
+                var category;
+                var parentId;
                 var analytics;
                 var url;
-
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
+                
                 if (!item.purged) {
                     analytics.reset();
                     analytics.addParam('user', user);
@@ -265,12 +267,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findItem(done) {
@@ -281,12 +278,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.item);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function checkItem(done, _categories, _item) {
