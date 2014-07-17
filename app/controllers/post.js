@@ -293,6 +293,10 @@ module.exports = {
                     readFromCache: false
                 }, function afterFetch(err, result) {
                     var subcategory = response.categories.search(item.category.id);
+                    if (!subcategory) {
+                        console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + this.app.session.get('siteLocation') + ' (' + response.categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                        return helpers.common.error.call(this, null, {}, callback);
+                    }
                     var parentId = subcategory.get('parentId');
                     var category = parentId ? response.categories.get(parentId) : subcategory;
 
@@ -395,6 +399,10 @@ module.exports = {
                 }, function afterFetch(err, result) {
                     var user = this.app.session.get('user');
                     var subcategory = data.categories.search(item.category.id);
+                    if (!subcategory) {
+                        console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + this.app.session.get('siteLocation') + ' (' + data.categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                        return helpers.common.error.call(this, null, {}, callback);
+                    }
                     var parentId = subcategory.get('parentId');
                     var category = parentId ? data.categories.get(parentId) : subcategory;
 
