@@ -125,13 +125,12 @@ module.exports = {
             var platform = this.app.session.get('platform');
             var icons = config.get(['icons', platform], []);
             var country = this.app.session.get('location').url;
-            var siteLocation = this.app.session.get('siteLocation');
-
+            
             this.app.fetch({
                 categories: {
                     collection: 'Categories',
                     params: {
-                        location: siteLocation,
+                        location: this.app.session.get('siteLocation'),
                         languageCode: this.app.session.get('selectedLanguage'),
                         seo: true
                     }
@@ -158,6 +157,44 @@ module.exports = {
         }, controller);
 
         function controller() {
+
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection: 'Categories',
+                        params: {
+                            location: this.app.session.get('siteLocation'),
+                            languageCode: this.app.session.get('selectedLanguage'),
+                            seo: true
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        return done.fail(err, res);
+                    }
+                    done(res.categories);
+                }.bind(this));
+            }
+
+            function router(_categories) {
+                var category = result.categories.get(params.catId);
+                var subcategory;
+
+                if (!category) {
+                    category = result.categories.find(function each(category) {
+                        return !!category.get('children').get(params.catId);
+                    });
+                    if (!category) {
+                        return helpers.common.redirect.call(this, '/');
+                    }
+                    subcategory = category.get('children').get(params.catId);
+                    return handleItems.call(this, category, subcategory, params, callback);
+                }
+                handleShow.call(this, category, params, callback);
+            }
+
             this.app.fetch({
                 categories: {
                     collection: 'Categories',

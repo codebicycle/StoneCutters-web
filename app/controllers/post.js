@@ -182,7 +182,7 @@ module.exports = {
                 }
                 var category = _categories.get(params.categoryId);
                 var subcategory;
-
+                
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
                 }
@@ -318,7 +318,8 @@ module.exports = {
             function success(_categories, _item, _relatedItems) {
                 var item = _item.toJSON();
                 var subcategory = _categories.search(item.category.id);
-                var category = _categories.get(subcategory.get('parentId'));
+                var parentId = subcategory.get('parentId');
+                var category = parentId ? _categories.get(parentId) : subcategory;
 
                 analytics.reset();
                 analytics.addParam('item', item);
@@ -490,7 +491,8 @@ module.exports = {
             function success(_postingSession, _fields) {
                 var item = _item.toJSON();
                 var subcategory = _categories.search(item.category.id);
-                var category = _categories.get(subcategory.get('parentId'));
+                var parentId = subcategory.get('parentId');
+                var category = parentId ? _categories.get(parentId) : subcategory;
                 var _form;
 
                 if (!form || !form.values) {
