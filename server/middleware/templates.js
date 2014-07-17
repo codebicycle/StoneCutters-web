@@ -26,6 +26,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (err) {
                     return fail(err);
                 }
+                if (!body) {
+                    console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
+                    return fail();
+                }
                 var device = body;
 
                 if (device.browserName == 'Opera Mini') {

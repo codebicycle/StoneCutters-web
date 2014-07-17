@@ -22,6 +22,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (err) {
                     return fail(err);
                 }
+                if (!body) {
+                    console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
+                    return fail();
+                }
                 platform = body.web_platform || 'wap';
                 res.set('Vary', 'User-Agent');
                 res.redirect(302, req.protocol + '://' + platform + '.' + req.headers.host + req.originalUrl);

@@ -17,12 +17,17 @@ module.exports = function(dataAdapter, excludedUrls) {
             var location = app.session.get('location');
             var languages;
             var selectedLanguage;
+            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
 
             function fetchLanguages(done) {
                 dataAdapter.get(req, '/countries/' + siteLocation + '/languages', done.errfcb);
             }
 
             function parse(done, response, _languages) {
+                if (!_languages) {
+                    console.log('[OLX_DEBUG] Empty languages response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
+                    return fail();
+                }
                 languages = {
                     models: _languages,
                     _byId: {}
