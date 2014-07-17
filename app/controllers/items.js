@@ -141,9 +141,10 @@ module.exports = {
                 }, {
                     readFromCache: false
                 }, function afterFetch(err, result) {
+                    item.category.id = 651561616186181;
                     var subcategory = _categories.search(item.category.id);
                     if (!subcategory) {
-                        console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                        console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                         return helpers.common.error.call(this, null, {}, callback);
                     }
                     var parentId = subcategory.get('parentId');
