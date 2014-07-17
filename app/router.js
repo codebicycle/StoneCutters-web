@@ -84,7 +84,7 @@ Router.prototype.getParamsHash = function(pattern, paramsArray, search) {
         });
     }
     params = (paramNames || []).reduce(function(memo, name, i) {
-        memo[name] = decodeURIComponent(paramsArray[i]);
+        memo[name] = decodeURIComponent(paramsArray[i] || '');
         return memo;
     }, {});
     query = search.slice(1).split('&').reduce(function(memo, queryPart) {

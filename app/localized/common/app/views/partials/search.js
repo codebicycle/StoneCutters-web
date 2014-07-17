@@ -18,7 +18,10 @@ module.exports = Base.extend({
 
         $form.on('submit', function onSubmit(event) {
             event.preventDefault();
-            helpers.common.redirect.call(this.app.router, '/nf/search/' + $input.val() || '', null, {
+
+            var search = $input.val();
+
+            helpers.common.redirect.call(this.app.router, '/nf/search' + (search ? ('/' + search) : ''), null, {
                 status: 200
             });
         }.bind(this));
