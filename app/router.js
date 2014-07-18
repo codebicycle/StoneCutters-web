@@ -25,7 +25,12 @@ Router.prototype.constructor = BaseClientRouter;
 Router.prototype.postInitialize = function() {
     this.on('action:start', this.setReferer, this);
     this.on('action:start', this.trackImpression, this);
+    this.on('action:end', this.scrollTop, this);
     this._router.on('route', this.triggerRoute, this);
+};
+
+Router.prototype.scrollTop = function(event) {
+    $('html, body').scrollTop(0);
 };
 
 Router.prototype.triggerRoute = function(event) {
