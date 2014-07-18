@@ -9,6 +9,9 @@ module.exports = function(dataAdapter, excludedUrls) {
         var utils = require('../../shared/utils');
         var testing = config.get(['publicEnvironments', 'testing'], {});
         var staging = config.get(['publicEnvironments', 'staging'], {});
+        var path = require('path');
+        var errorPath = path.resolve('server/templates/error.html');
+        var graphite = require('../graphite')();
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -89,7 +92,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                res.send(400, err);
+                graphite.send(['Unknown Location', 'middleware', 'location', 'error'], 1, '+');
+                res.status(500).sendfile(errorPath);
             }
 
             if (!siteLocation) {

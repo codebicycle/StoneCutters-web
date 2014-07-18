@@ -7,6 +7,9 @@ module.exports = function(dataAdapter, excludedUrls) {
         var localization = require('../../app/config').get('localization', {});
         var _ = require('underscore');
         var utils = require('../../shared/utils');
+        var path = require('path');
+        var errorPath = path.resolve('server/templates/error.html');
+        var graphite = require('../graphite')();
 
         function isLocalized(platform, siteLocation) {
             return !!(localization[platform] && ~localization[platform].indexOf(siteLocation));
@@ -28,7 +31,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 if (!body) {
                     console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
-                    return fail();
+                    return fail(new Error());
                 }
                 var device = body;
 
@@ -93,7 +96,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                res.send(400, err);
+                graphite.send([location.name, 'middleware', 'templates', 'error'], 1, '+');
+                res.status(500).sendfile(errorPath);
             }
 
             dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), callback);

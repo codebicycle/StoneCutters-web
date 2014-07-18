@@ -31,6 +31,7 @@ module.exports = Base.extend({
         }
         else {
             console.log('[OLX_DEBUG] Empty listing response');
+            this.metadata = {};
             return [];
         }
     }
