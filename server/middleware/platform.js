@@ -9,6 +9,9 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
+        var path = require('path');
+        var errorPath = path.resolve('server/templates/error.html');
+        var graphite = require('../graphite')();
 
         return function platform(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -24,7 +27,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 if (!body) {
                     console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
-                    return fail();
+                    return fail(new Error());
                 }
                 platform = body.web_platform || 'wap';
                 res.set('Vary', 'User-Agent');
@@ -38,6 +41,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (err) {
                     return fail(err);
                 }
+                if (!body) {
+                    console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
+                    return fail(new Error());
+                }
                 platform = body.web_platform || 'wap';
 
                 if (platform !== req.subdomains.pop()) {
@@ -50,7 +57,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                res.send(400, err);
+                graphite.send(['Unknown Location', 'middleware', 'platform', 'error'], 1, '+');
+                res.status(500).sendfile(errorPath);
             }
 
             if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && _.contains(config.get('hosts', ['olx']), req.subdomains.shift()))) && 'm' === req.subdomains.pop()) {
