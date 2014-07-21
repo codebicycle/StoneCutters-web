@@ -74,9 +74,17 @@ module.exports = function(app, dataAdapter) {
             var oldImages = [];
 
             function parse(done) {
+                function callback(err) {
+                    if (err === 'aborted') {
+                        done.abort();
+                        return fail(err, 'aborted');
+                    }
+                    done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
+                }
+
                 formidable.parse(req, {
                     acceptFiles: true
-                }, done.errfcb);
+                }, callback);
             }
 
             function checkWapChangeLocation(done, _item, _images) {
