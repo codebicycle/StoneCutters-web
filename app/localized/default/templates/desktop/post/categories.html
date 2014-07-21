@@ -6,7 +6,7 @@
 		<h2><strong>1</strong>Selecione uma categoria:</h2>
 		<ul class="catList">
 			{% for category in categories %}
-	            <li id="cat{{category.id}}" class="category" >
+	            <li id="cat{{category.id}}" class="category icons icon-cat-{{ category.id }}" >
 	            	{{category.trName}}
 	            	<div class="cat{{category.id}} catContent">
 		            	<h2><strong>2</strong> Selecione uma subcategoria:</h2>
