@@ -96,7 +96,7 @@ module.exports = function(app, dataAdapter) {
                         done.abort();
                         return fail(body, 'invalid');
                     }
-                    done(err, response, body);
+                    done(response, body);
                 }
 
                 item = _item;
