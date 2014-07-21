@@ -1,0 +1,6 @@
+
+<ul>
+	{% for category in categories %}
+		<li><a href="{{ category | slugToUrl | link }}" class="cat-{{ category.id }}">{{ category.name }}</a></li>
+	{% endfor %}
+</ul>
