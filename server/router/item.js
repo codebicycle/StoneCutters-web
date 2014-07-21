@@ -76,7 +76,8 @@ module.exports = function(app, dataAdapter) {
             function parse(done) {
                 formidable.parse(req, {
                     acceptFiles: true
-                }, errfcb(done, 'error'));
+                }, done.errfcb);
+                //}, errfcb(done, 'error'));
             }
 
             function checkWapChangeLocation(done, _item, _images) {
@@ -88,12 +89,12 @@ module.exports = function(app, dataAdapter) {
             }
 
             function validate(done, _item, _images) {
-                function callback(err, res, body) {
+                /*function callback(err, res, body) {
                     if (body) {
                         return errfcb(done, 'invalid').apply(null, [arguments[2], arguments[1]]);
                     }
                     errfcb(done, 'error').apply(null, Array.prototype.slice.call(arguments, 0));
-                }
+                }*/
 
                 item = _item;
                 images = _images;
@@ -118,7 +119,8 @@ module.exports = function(app, dataAdapter) {
                         languageCode: item.languageCode
                     },
                     data: item
-                }, callback);
+                }, done.errfcb);
+                //}, callback);
             }
 
             function postImages(done) {
@@ -138,7 +140,8 @@ module.exports = function(app, dataAdapter) {
                     },
                     data: data,
                     multipart: true
-                }, errfcb(done, 'error'));
+                }, done.errfcb);
+                //}, errfcb(done, 'error'));
             }
 
             function post(done, response, _images) {
@@ -170,30 +173,31 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/items' + (item.id ? '/' + item.id + '/edit' : ''), {
                     query: query,
                     data: item
-                }, errfcb(done, 'error'));
+                }, done.errfcb);
+                //}, errfcb(done, 'error'));
             }
 
-            function errfcb(done, track) {
+            /*function errfcb(done, track) {
                 return function callback(err) {
                     if (err) {
-                        console.log('\n' + track + '\n');
                         graphite.send([location.name, 'posting', track, platform], 1, '+');
                     }
                     done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
                 };
-            }
+            }*/
 
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
+                graphite.send([location.name, 'posting', 'success', platform], 1, '+');
                 res.redirect(utils.link(url, req.rendrApp));
                 clean();
-                graphite.send([location.name, 'posting', 'success', platform], 1, '+');
             }
 
             function error(err) {
                 var url = req.headers.referer || '/posting';
 
+                graphite.send([location.name, 'posting', 'error', platform], 1, '+');
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
