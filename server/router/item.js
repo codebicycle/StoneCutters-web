@@ -77,7 +77,6 @@ module.exports = function(app, dataAdapter) {
                 formidable.parse(req, {
                     acceptFiles: true
                 }, done.errfcb);
-                //}, errfcb(done, 'error'));
             }
 
             function checkWapChangeLocation(done, _item, _images) {
@@ -89,12 +88,17 @@ module.exports = function(app, dataAdapter) {
             }
 
             function validate(done, _item, _images) {
-                /*function callback(err, res, body) {
-                    if (body) {
-                        return errfcb(done, 'invalid').apply(null, [arguments[2], arguments[1]]);
+                function callback(err, res, body) {
+                    if (err) {
+                        return done.fail(err);
                     }
-                    errfcb(done, 'error').apply(null, Array.prototype.slice.call(arguments, 0));
-                }*/
+                    if (body) {
+                        done.abort();
+                        graphite.send([location.name, 'posting', 'invalid', platform], 1, '+');
+                        return fail(body);
+                    }
+                    done(err, res, body);
+                }
 
                 item = _item;
                 images = _images;
@@ -119,8 +123,7 @@ module.exports = function(app, dataAdapter) {
                         languageCode: item.languageCode
                     },
                     data: item
-                }, done.errfcb);
-                //}, callback);
+                }, callback);
             }
 
             function postImages(done) {
@@ -141,7 +144,6 @@ module.exports = function(app, dataAdapter) {
                     data: data,
                     multipart: true
                 }, done.errfcb);
-                //}, errfcb(done, 'error'));
             }
 
             function post(done, response, _images) {
@@ -170,21 +172,11 @@ module.exports = function(app, dataAdapter) {
                 if (item.images) {
                     item.images = item.images.join(',');
                 }
-                dataAdapter.post(req, '/items' + (item.id ? '/' + item.id + '/edit' : ''), {
+                dataAdapter.post(req, '/itemssssss' + (item.id ? '/' + item.id + '/edit' : ''), {
                     query: query,
                     data: item
                 }, done.errfcb);
-                //}, errfcb(done, 'error'));
             }
-
-            /*function errfcb(done, track) {
-                return function callback(err) {
-                    if (err) {
-                        graphite.send([location.name, 'posting', track, platform], 1, '+');
-                    }
-                    done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
-                };
-            }*/
 
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
@@ -195,9 +187,13 @@ module.exports = function(app, dataAdapter) {
             }
 
             function error(err) {
+                graphite.send([location.name, 'posting', 'error', platform], 1, '+');
+                fail(err);
+            }
+
+            function fail(err) {
                 var url = req.headers.referer || '/posting';
 
-                graphite.send([location.name, 'posting', 'error', platform], 1, '+');
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
