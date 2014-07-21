@@ -172,7 +172,7 @@ module.exports = function(app, dataAdapter) {
                 if (item.images) {
                     item.images = item.images.join(',');
                 }
-                dataAdapter.post(req, '/itemssssss' + (item.id ? '/' + item.id + '/edit' : ''), {
+                dataAdapter.post(req, '/items' + (item.id ? '/' + item.id + '/edit' : ''), {
                     query: query,
                     data: item
                 }, done.errfcb);
