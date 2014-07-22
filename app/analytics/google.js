@@ -91,7 +91,7 @@ function initParams() {
         gaCs: today,
         gaNs: ++gaNs,
         gaDh: Math.round(Math.random() * 10000000),
-        gaUid: Math.round(Math.random() * 1000000)
+        gaUid: Math.round(Math.random() * 100000000)
     });
 }
 
