@@ -21,9 +21,15 @@ module.exports = Base.extend({
         return category;
     },
     parse: function(response) {
-        if (response.categories) {
-            this.metadata = response.metadata;
-            return response.categories;
+        if (response) {
+            if (response.categories) {
+                this.metadata = response.metadata;
+                return response.categories;
+            }
+        }
+        else {
+            console.log('[OLX_DEBUG] Empty category listing response');
+            response = [];
         }
         return response;
     }
