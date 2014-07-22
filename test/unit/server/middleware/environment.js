@@ -125,6 +125,19 @@ describe('server', function test() {
                     done();
                 });
             });
+            describe('platform', function test() {
+                it('should be added to the session', function test(done) {
+                    var before = response.body.before;
+                    var after = response.body.after;
+
+                    (function existance(before, after) {
+                        before.should.not.have.property('platform');
+                        after.should.have.property('platform');
+                    })(before.session, after.session);
+
+                    done();
+                });
+            });
         });
     });
 });
