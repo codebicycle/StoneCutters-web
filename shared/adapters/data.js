@@ -1,7 +1,7 @@
 'use strict';
 
 var PROTOCOL = 'http';
-var HOST = 'api-v2.olx.com';
+var HOST = 'localhost:9000';
 
 var _ = require('underscore');
 var logger = require('../logger')('adapter data');

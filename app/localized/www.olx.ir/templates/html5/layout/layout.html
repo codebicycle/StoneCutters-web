@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    {% view 'layout/head' %}
+    <body dir="rtl">
+        <div id="progressBar"></div>
+        {% view 'header/bar' %}
+        {% view 'header/index' %}
+        <article>
+            <div id="content">
+                {{body}}
+            </div>
+        </article>
+        {% view 'footer/downloadapp' %}
+        {% view 'footer/languages' %}
+        {% view 'footer/footer' %}
+        <div class="loading"></div>
+        <script>function init() {
+            $LAB
+                .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
+                .script("{{ [jsDir, directory, 'templates', platform, 'templates.js'] | join('/') | static }}").wait()
+                .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
+                    var App = window.App = new (require('app/app'))({% json appData %});
+                    App.bootstrapData({% json bootstrappedData %});
+                    App.start();
+                });
+        }</script>
+        <script async src="{{ '/js/LAB.js' | static }}" onload="init()"></script>
+    </body>
+</html>
