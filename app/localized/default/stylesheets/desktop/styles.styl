@@ -45,11 +45,24 @@ ul, li {
     margin: 1.25rem 0 0;
     overflow: hidden;
 }
+.clear {
+	clear: both;
+}
 
 section {
+	position: relative;
+	
+	h1, h2 {
+		color: #333;
+	}
 	h1 {
 		padding: .625rem 0 .125rem 1.25rem;
         font-size: 1.875rem;
+	}
+	h2 {
+		padding: 0 0 .125rem 1.25rem;
+        font-size: 1.625rem;
+        font-weight: normal;
 	}
 	p {
         padding: 0 1.25rem;
@@ -62,6 +75,7 @@ section {
 	display: inline-block;
     font-family: 'olx-icon-font';
     vertical-align: middle;
+    font-weight: normal;
 }
 .icon-cat-811:before {
 content:'\e05d';
