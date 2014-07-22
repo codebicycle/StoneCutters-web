@@ -49,7 +49,7 @@ module.exports = {
                         collection : 'Categories',
                         params: {
                             location: siteLocation,
-                            languageCode: params.languageId
+                            languageId: params.languageId
                         }
                     }
                 }, {
