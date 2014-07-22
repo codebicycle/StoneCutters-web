@@ -38,7 +38,7 @@ module.exports = {
                     }
                 }
                 params.id = itemId;
-                params.languageCode = languages._byId[this.app.session.get('selectedLanguage')].id;
+                params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
                 params.seo = true;
                 delete params.itemId;
                 delete params.title;
@@ -95,22 +95,21 @@ module.exports = {
                         res.item.set('purged', true);
                         err = null;
                     }
-                    done(res.item);
+                    done(res);
                 }.bind(this));
             }
 
-            function checkItem(done, _categories, _item) {
-                console.log(arguments);
-                if (!_categories || !_item) {
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
                     return done.fail(null, {});
                 }
-                var item = _item.toJSON();
+                var item = resItem.item.toJSON();
                 var slug = helpers.common.slugToUrl(item);
                 var protocol = this.app.session.get('protocol');
                 var platform = this.app.session.get('platform');
                 var url;
 
-                if (!_item.checkSlug(slug, slugUrl)) {
+                if (!resItem.item.checkSlug(slug, slugUrl)) {
                     slug = ('/' + slug);
                     if (favorite) {
                         slug = helpers.common.params(slug, 'favorite', favorite);
@@ -125,11 +124,11 @@ module.exports = {
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
                         query: {
-                            location: _item.getLocation().url
+                            location: resItem.item.getLocation().url
                         }
                     });
                 }
-                done(_categories, _item);
+                done(resCategories.categories, resItem.item);
             }
 
             function findRelatedItems(done, _categories, _item) {
@@ -164,7 +163,7 @@ module.exports = {
                 var subcategory = _categories.search(_item.get('category').id);
                 var category;
                 var parentId;
-                var analytics;
+                var analyticUrl;
                 var url;
 
                 if (!subcategory) {
@@ -180,7 +179,7 @@ module.exports = {
                     analytics.addParam('item', item);
                     analytics.addParam('category', category.toJSON());
                     analytics.addParam('subcategory', subcategory.toJSON());
-                    analytics = analytics.generateURL.call(this);
+                    analyticUrl = analytics.generateURL.call(this);
                     seo.addMetatag('title', item.metadata.itemPage.title);
                     seo.addMetatag('description', item.metadata.itemPage.description);
                 }
@@ -209,7 +208,7 @@ module.exports = {
                     subcategory: subcategory.toJSON(),
                     category: category.toJSON(),
                     favorite: favorite,
-                    analytics: analytics
+                    analytics: analyticUrl
                 });
             }
 
@@ -270,11 +269,11 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function checkItem(done, _categories, _item) {
-                if (!_categories || !_item) {
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
                     return done.fail(null, {});
                 }
-                var item = _item.toJSON();
+                var item = resItem.item.toJSON();
                 var slug = helpers.common.slugToUrl(item);
                 var platform = this.app.session.get('platform');
 
@@ -282,7 +281,7 @@ module.exports = {
                     done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                if (!_item.checkSlug(slug, slugUrl)) {
+                if (!resItem.item.checkSlug(slug, slugUrl)) {
                     done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
@@ -294,7 +293,7 @@ module.exports = {
                     done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug + '/gallery'));
                 }
-                done(_categories, _item);
+                done(resCategories.categories, resItem.item);
             }
 
             function success(_categories, _item) {
@@ -378,11 +377,11 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function checkItem(done, _categories, _item) {
-                if (!_categories || !_item) {
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
                     return done.fail(null, {});
                 }
-                var item = _item.toJSON();
+                var item = resItem.item.toJSON();
                 var slug = helpers.common.slugToUrl(item);
                 var platform = this.app.session.get('platform');
 
@@ -390,11 +389,11 @@ module.exports = {
                     done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                if (!_item.checkSlug(slug, slugUrl)) {
+                if (!resItem.item.checkSlug(slug, slugUrl)) {
                     done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
-                done(_categories, _item);
+                done(resCategories.categories, resItem.item);
             }
 
             function success(_categories, _item) {
@@ -474,18 +473,18 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function checkItem(done, _categories, _item) {
-                if (!_categories || !_item) {
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
                     return done.fail(null, {});
                 }
-                var item = _item.toJSON();
+                var item = resItem.item.toJSON();
                 var platform = this.app.session.get('platform');
 
                 if (platform === 'html5') {
                     done.abort();
                     return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
                 }
-                done(_categories, _item);
+                done(resCategories.categories, resItem.item);
             }
 
             function success(_categories, _item) {
@@ -524,7 +523,7 @@ module.exports = {
             asynquence().or(error.bind(this))
                 .then(prepare.bind(this))
                 .gate(findCategories.bind(this), findItem.bind(this))
-                .then(checkItem.bind(this));
+                .then(checkItem.bind(this))
                 .val(success.bind(this));
         }
     },
@@ -539,6 +538,7 @@ module.exports = {
             function prepare(done) {
                 params.id = params.itemId;
                 delete params.itemId;
+                done();
             }
 
             function findCategories(done) {
@@ -566,11 +566,11 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function checkItem(done, _categories, _item) {
-                if (!_categories || !_item) {
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
                     return done.fail(null, {});
                 }
-                done(_categories, _item);
+                done(resCategories.categories, resItem.item);
             }
 
             function success(_categories, _item) {
@@ -655,31 +655,25 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.item);
-                }.bind(this));
+                }, done.errfcb);
             }
 
-            function checkSearch(done, _items) {
-                if (!_items) {
-                    return error.call(this, null, {});
+            function checkSearch(done, res) {
+                if (!res.items) {
+                    return done.fail(null, {});
                 }
-                var items = _items.toJSON();
-                
-                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !items.length)) {
+
+                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
                     done.abort();
                     return helpers.common.redirect.call(this, '/nf/search/' + query.search);
                 }
-                done(_items);
+                done(res.items);
             }
 
             function success(_items) {
                 var url = ['/nf/search/', query.search, '/'].join('');
                 var metadata = _items.metadata;
-                
+
                 if (metadata.total < 5) {
                     seo.addMetatag('robots', 'noindex, follow');
                     seo.addMetatag('googlebot', 'noindex, follow');

@@ -109,15 +109,19 @@ module.exports = {
             var languageId;
             var languageCode;
 
-            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                return helpers.common.redirect.call(this, '/location?target=posting', null, {
-                    status: 302
-                });
+            function prepare(done) {
+                if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                        status: 302
+                    });
+                }
+                language = this.app.session.get('selectedLanguage');
+                languages = this.app.session.get('languages');
+                languageId = languages._byId[language].id;
+                languageCode = languages._byId[language].isocode.toLowerCase();
+                done();
             }
-            language = this.app.session.get('selectedLanguage');
-            languages = this.app.session.get('languages');
-            languageId = languages._byId[language].id;
-            languageCode = languages._byId[language].isocode.toLowerCase();
 
             function findCategories(done) {
                 this.app.fetch({
@@ -130,12 +134,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findPostingSession(done) {
@@ -146,18 +145,13 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.postingSession.get('postingSession'));
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findFields(done) {
                 this.app.fetch({
                     fields: {
-                        collection: 'Fields',
+                        model: 'Field',
                         params: {
                             intent: 'post',
                             location: siteLocation,
@@ -168,28 +162,32 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.fields.models[0].attributes);
-                }.bind(this));
+                }, done.errfcb);
             }
 
-            function success(_categories, _postingSession, _fields) {
-                if (!_categories || !_postingSession || !_fields) {
-                    return helpers.common.error.call(this, null, {}, callback);
+            function checkFields(done, resCategories, resPostingSession, resFields) {
+                if (!resCategories.categories || !resPostingSession.postingSession || !resFields.fields) {
+                    done.abort();
+                    return done.fail(null, {});
                 }
-                var category = _categories.get(params.categoryId);
+                var category = resCategories.categories.get(params.categoryId);
                 var subcategory;
                 
                 if (!category) {
+                    done.abort();
                     return helpers.common.redirect.call(this, '/posting');
                 }
                 subcategory = category.get('children').get(params.subcategoryId);
                 if (!subcategory) {
+                    done.abort();
                     return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
                 }
+                done(resCategories.categories, resPostingSession.postingSession, resFields.fields);
+            }
+
+            function success(_categories, _postingSession, _field) {
+                var category = _categories.get(params.categoryId);
+                var subcategory = category.get('children').get(params.subcategoryId);
 
                 analytics.reset();
                 analytics.addParam('category', category.toJSON());
@@ -198,9 +196,9 @@ module.exports = {
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
                 callback(null, {
-                    postingSession: _postingSession,
+                    postingSession: _postingSession.get('postingSession'),
                     intent: 'create',
-                    fields: _fields.fields,
+                    fields: _field.attributes.fields,
                     category: category.toJSON(),
                     subcategory: subcategory.toJSON(),
                     language: languageId,
@@ -216,7 +214,9 @@ module.exports = {
             }
 
             asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
                 .gate(findCategories.bind(this), findPostingSession.bind(this), findFields.bind(this))
+                .then(checkFields.bind(this))
                 .val(success.bind(this));
         }
     },
@@ -277,11 +277,14 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function findRelatedItems(done, _categories, _item) {
-                if (!_categories || !_item) {
-                    return helpers.common.error.call(this, null, {}, callback);
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
+                    return done.fail(null, {});
                 }
+                done(resCategories.categories, resItem.item);
+            }
 
+            function findRelatedItems(done, _categories, _item) {
                 this.app.fetch({
                     relatedItems: {
                         collection : 'Items',
@@ -346,6 +349,7 @@ module.exports = {
             asynquence().or(error.bind(this))
                 .then(prepare.bind(this))
                 .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this))
                 .then(findRelatedItems.bind(this))
                 .val(success.bind(this));
         }
@@ -400,12 +404,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findItem(done) {
@@ -416,26 +415,21 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.item);
-                }.bind(this));
+                }, done.errfcb);
             }
 
-            function checkItem(done, categories, item) {
-                if (!categories || !item) {
-                    return helpers.common.error.call(this, null, {}, callback);
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
+                    return done.fail(null, {});
                 }
                 var protocol = this.app.session.get('protocol');
                 var platform = this.app.session.get('platform');
                 var currentLocation = this.app.session.get('location');
-                var location = item.get('location');
+                var location = resItem.item.get('location');
                 var url;
 
-                _categories = categories;
-                _item = item;
+                _categories = resCategories.categories;
+                _item = resItem.item;
 
                 if (location.url !== currentLocation.url) {
                     url = [protocol, '://', platform, '.', location.url.replace('www.', 'm.'), '/login'].join('');
@@ -443,7 +437,7 @@ module.exports = {
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
                         query: {
-                            location: item.getLocation().url
+                            location: _item.getLocation().url
                         }
                     });
                 }
@@ -458,12 +452,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.postingSession.get('postingSession'));
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findFields(done) {
@@ -479,20 +468,23 @@ module.exports = {
                 checkAuthentication(_params, _params.itemId);
                 this.app.fetch({
                     fields: {
-                        collection: 'Fields',
+                        model: 'Field',
                         params: _params
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.fields.models[0].attributes);
-                }.bind(this));
+                }, done.errfcb);
             }
 
-            function success(_postingSession, _fields) {
+            function checkFields(done, resPostingSession, resField) {
+                if (!resPostingSession.postingSession || !resField.fields) {
+                    done.abort();
+                    return done.fail(null, {});
+                }
+                done(resPostingSession.postingSession, resField.fields);
+            }
+
+            function success(_postingSession, _field) {
                 var item = _item.toJSON();
                 var subcategory = _categories.search(item.category.id);
                 var category;
@@ -521,9 +513,9 @@ module.exports = {
                 callback(null, { 
                     item: item,
                     user: user,
-                    postingSession: _postingSession,
+                    postingSession: _postingSession.get('postingSession'),
                     intent: 'edit',
-                    fields: _fields.fields,
+                    fields: _field.attributes.fields,
                     category: category.toJSON(),
                     subcategory: subcategory.toJSON(),
                     language: languageId,
@@ -567,6 +559,7 @@ module.exports = {
                 .gate(findCategories.bind(this), findItem.bind(this))
                 .then(checkItem.bind(this))
                 .gate(findPostingSession.bind(this), findFields.bind(this))
+                .then(checkFields.bind(this))
                 .val(success.bind(this));
         }
     }

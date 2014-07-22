@@ -22,11 +22,11 @@
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
                     </a>
                     <div class="itemInfo">
-                        <h2>{{ item.price.displayPrice }}</h2>
+                        <p class="itemPrice">{{ item.price.displayPrice }}</p>
                         <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
                         <div class="centerCont">
                             <a href="{{ item | slugToUrl | link }}">
-                                <p>{{ item.title }}</p>
+                                <h2>{{ item.title }}</h2>
                             </a>
                         </div>
                         <span>{{ item.displayLocation }}</span>
