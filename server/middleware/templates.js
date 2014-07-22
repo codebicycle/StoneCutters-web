@@ -70,7 +70,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 };
                 var directory = 'default';
                 var jsDir = '/js/' + (minify ? 'min' : 'src');
-                var platform = req.cookies.forcedPlatform || req.subdomains.pop() || 'wap';
+                var platform = req.rendrApp.session.get('platform');
                 var template;
 
                 if (isLocalized(platform, siteLocation)) {
@@ -80,7 +80,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 app.session.update({
                     device: device,
                     directory: directory,
-                    platform: platform,
                     template: template,
                     marketing: marketing,
                     jsDir: jsDir
@@ -88,7 +87,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 app.req.app.locals({
                     device: device,
                     directory: directory,
-                    platform: platform,
                     template: template,
                     jsDir: jsDir
                 });

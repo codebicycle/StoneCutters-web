@@ -74,9 +74,17 @@ module.exports = function(app, dataAdapter) {
             var oldImages = [];
 
             function parse(done) {
+                function callback(err) {
+                    if (err === 'aborted') {
+                        done.abort();
+                        return fail(err, 'aborted');
+                    }
+                    done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
+                }
+
                 formidable.parse(req, {
                     acceptFiles: true
-                }, done.errfcb);
+                }, callback);
             }
 
             function checkWapChangeLocation(done, _item, _images) {
@@ -88,16 +96,15 @@ module.exports = function(app, dataAdapter) {
             }
 
             function validate(done, _item, _images) {
-                function callback(err, res, body) {
+                function callback(err, response, body) {
                     if (err) {
                         return done.fail(err);
                     }
                     if (body) {
                         done.abort();
-                        graphite.send([location.name, 'posting', 'invalid', platform], 1, '+');
-                        return fail(body);
+                        return fail(body, 'invalid');
                     }
-                    done(err, res, body);
+                    done(response, body);
                 }
 
                 item = _item;
@@ -130,6 +137,17 @@ module.exports = function(app, dataAdapter) {
                 var data = {};
                 var image;
 
+                function callback(err, response, _images) {
+                    if (err) {
+                        done.abort();
+                        if (response.statusCode === 400) {
+                            return fail(err, 'invalid_images');
+                        }
+                        return fail(err, 'error_images');
+                    }
+                    done(response, _images);
+                }
+
                 if (!images || typeof images !== 'object' || !Object.keys(images).length) {
                     return done([]);
                 }
@@ -143,7 +161,7 @@ module.exports = function(app, dataAdapter) {
                     },
                     data: data,
                     multipart: true
-                }, done.errfcb);
+                }, callback);
             }
 
             function post(done, response, _images) {
@@ -172,7 +190,7 @@ module.exports = function(app, dataAdapter) {
                 if (item.images) {
                     item.images = item.images.join(',');
                 }
-                dataAdapter.post(req, '/itemssssss' + (item.id ? '/' + item.id + '/edit' : ''), {
+                dataAdapter.post(req, '/items' + (item.id ? '/' + item.id + '/edit' : ''), {
                     query: query,
                     data: item
                 }, done.errfcb);
@@ -186,14 +204,10 @@ module.exports = function(app, dataAdapter) {
                 clean();
             }
 
-            function error(err) {
-                graphite.send([location.name, 'posting', 'error', platform], 1, '+');
-                fail(err);
-            }
-
-            function fail(err) {
+            function fail(err, track) {
                 var url = req.headers.referer || '/posting';
 
+                graphite.send([location.name, 'posting', track || 'error', platform], 1, '+');
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
@@ -211,7 +225,7 @@ module.exports = function(app, dataAdapter) {
                 }
             }
 
-            asynquence().or(error)
+            asynquence().or(fail)
                 .then(parse)
                 .then(checkWapChangeLocation)
                 .then(validate)

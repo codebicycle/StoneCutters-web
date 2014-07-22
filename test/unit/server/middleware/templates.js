@@ -86,17 +86,6 @@ describe('server', function test() {
                     }
                 })(Object.keys(userAgents));
             });
-            it('should add a platform attribute to the session', function test(done) {
-                var before = response.body.before;
-                var after = response.body.after;
-
-                (function existance(before, after) {
-                    before.should.not.have.property('platform');
-                    after.should.have.property('platform');
-                })(before.session, after.session);
-
-                done();
-            });
             it('should add a template attribute to the session', function test(done) {
                 var before = response.body.before;
                 var after = response.body.after;
