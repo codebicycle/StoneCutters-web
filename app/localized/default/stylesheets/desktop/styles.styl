@@ -4,6 +4,9 @@
     margin: 0;
     padding: 0;
 }
+*, *:before, *:after {
+    box-sizing: border-box;
+}
 body {
     font-family: arial,helvetica,sans-serif;
 }
@@ -55,11 +58,11 @@ section {
 	h1, h2 {
 		color: #333;
 	}
-	h1 {
+	> h1 {
 		padding: .625rem 0 .125rem 1.25rem;
         font-size: 1.875rem;
 	}
-	h2 {
+	> h2 {
 		padding: 0 0 .125rem 1.25rem;
         font-size: 1.625rem;
         font-weight: normal;
@@ -250,4 +253,10 @@ content:"\e62d";
 
 .icon-cat-301:before {
 content:"\e62e";
+}
+.icon-cat-831:before{	
+	content: "\e051";
+}
+.icon-cat-857:before{	
+	content: "\e03e";
 }
