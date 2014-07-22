@@ -56,7 +56,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             var visitorId = req.rendrApp.session.get('visitorId');
             var referer = req.headers.referer;
             var platform = req.rendrApp.session.get('forcedPlatform') || req.subdomains.pop() || utils.defaults.platform;
-            console.log(req.rendrApp.session.get());
 
             if (typeof clientId === 'undefined') {
                 req.rendrApp.session.persist({

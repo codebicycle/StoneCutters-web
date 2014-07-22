@@ -112,13 +112,6 @@ var CookiesSession = function(req, res, callback) {
 var MemcachedSession = function(req, res, callback) {
     var sid = req.param('sid');
 
-if (!sid) {
-    console.log('URL', req.originalUrl);
-    console.log('STACK', new Error().stack);
-}
-console.log('SID', sid);
-
-
     if (!sid || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(sid)) {
         sid = uuid.v4();
     }
