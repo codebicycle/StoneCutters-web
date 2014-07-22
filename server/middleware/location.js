@@ -37,9 +37,16 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function fetch(done) {
                 function after(err, result) {
+                    var params = null;
+
                     if (err) {
+                        if (previousLocation) {
+                            params = {
+                                location: previousLocation
+                            };
+                        }
                         done.abort();
-                        return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
+                        return res.redirect(301, utils.link('/', req.rendrApp, params));
                     }
                     done(result.location);
                 }
@@ -58,10 +65,16 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function check(done, location) {
                 var url = location.get('url');
+                var params = null;
 
                 if (_.contains(req.subdomains, 'm') && host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
+                    if (previousLocation) {
+                        params = {
+                            location: previousLocation
+                        };
+                    }
                     done.abort();
-                    return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
+                    return res.redirect(301, utils.link('/', req.rendrApp, params));
                 }
                 done(location);
             }
@@ -108,7 +121,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 siteLocation = siteLocation[0];
             }
             if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
-                return res.redirect(301, '/?location=' + previousLocation);
+                return res.redirect(301, utils.link('/', req.rendrApp, {
+                    location: previousLocation
+                }));
             }
             asynquence().or(fail)
                 .then(fetch)
