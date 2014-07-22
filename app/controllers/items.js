@@ -19,6 +19,7 @@ module.exports = {
             var slugUrl = params.title;
             var favorite = params.favorite;
             var siteLocation = this.app.session.get('siteLocation');
+            var languages = this.app.session.get('languages');
             var anonymousItem;
 
             function prepare(done) {
@@ -37,7 +38,7 @@ module.exports = {
                     }
                 }
                 params.id = itemId;
-                params.languageCode = this.app.session.get('selectedLanguage');
+                params.languageCode = languages._byId[this.app.session.get('selectedLanguage')].id;
                 params.seo = true;
                 delete params.itemId;
                 delete params.title;
@@ -51,7 +52,7 @@ module.exports = {
                         collection : 'Categories',
                         params: {
                             location: siteLocation,
-                            languageCode: params.languageCode
+                            languageId: params.languageId
                         }
                     }
                 }, {
@@ -165,8 +166,9 @@ module.exports = {
                 var parentId;
                 var analytics;
                 var url;
+
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     return error.call(this);
                 }
                 parentId = subcategory.get('parentId');
@@ -197,20 +199,6 @@ module.exports = {
                         subcategory: subcategory.get('id')
                     }
                 });
-
-                console.log({
-                    item: item,
-                    user: user,
-                    pos: Number(params.pos) || 0,
-                    sk: securityKey,
-                    relatedItems: _relatedItems,
-                    relatedAdsLink: ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join(''),
-                    subcategory: subcategory.toJSON(),
-                    category: category.toJSON(),
-                    favorite: favorite,
-                    analytics: analytics
-                });
-
                 callback(null, {
                     item: item,
                     user: user,
@@ -245,6 +233,7 @@ module.exports = {
             var itemId = params.itemId;
             var slugUrl = params.title;
             var pos = Number(params.pos) || 0;
+            var siteLocation = this.app.session.get('siteLocation');
 
             function prepare(done) {
                 if (user) {
@@ -261,7 +250,7 @@ module.exports = {
                     categories: {
                         collection : 'Categories',
                         params: {
-                            location: this.app.session.get('siteLocation'),
+                            location: siteLocation,
                             languageCode: this.app.session.get('selectedLanguage')
                         }
                     }
@@ -309,18 +298,26 @@ module.exports = {
             }
 
             function success(_categories, _item) {
+                var item = _item.toJSON();
                 var subcategory = _categories.search(_item.get('category').id);
-                var parentId = subcategory.get('parentId');
-                var category = parentId ? _categories.get(parentId) : subcategory;
+                var category;
+                var parentId;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
                 
                 analytics.reset();
                 analytics.addParam('user', user);
-                analytics.addParam('item', _item.toJSON());
+                analytics.addParam('item', item);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 callback(null, {
                     user: user,
-                    item: _item.toJSON(),
+                    item: item,
                     pos: pos,
                     analytics: analytics.generateURL.call(this)
                 });
@@ -344,6 +341,7 @@ module.exports = {
             var user = this.app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
+            var siteLocation = this.app.session.get('siteLocation');
 
             function prepare(done) {
                 if (user) {
@@ -360,18 +358,13 @@ module.exports = {
                     categories: {
                         collection : 'Categories',
                         params: {
-                            location: this.app.session.get('siteLocation'),
+                            location: siteLocation,
                             languageCode: this.app.session.get('selectedLanguage')
                         }
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findItem(done) {
@@ -382,12 +375,7 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.item);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function checkItem(done, _categories, _item) {
@@ -410,9 +398,17 @@ module.exports = {
             }
 
             function success(_categories, _item) {
+                var item = _item.toJSON();
                 var subcategory = _categories.search(_item.get('category').id);
-                var parentId = subcategory.get('parentId');
-                var category = parentId ? _categories.get(parentId) : subcategory;
+                var category;
+                var parentId;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
 
                 analytics.reset();
                 analytics.addParam('user', user);
@@ -444,6 +440,8 @@ module.exports = {
 
         function controller(form) {
             var user = this.app.session.get('user');
+            var itemId = params.itemId;
+            var siteLocation = this.app.session.get('siteLocation');
 
             function prepare(done) {
                 params.id = params.itemId;
@@ -456,18 +454,13 @@ module.exports = {
                     categories: {
                         collection : 'Categories',
                         params: {
-                            location: this.app.session.get('siteLocation'),
+                            location: siteLocation,
                             languageCode: this.app.session.get('selectedLanguage')
                         }
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findItem(done) {
@@ -478,30 +471,36 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.item);
-                }.bind(this));
+                }, done.errfcb);
             }
 
-            function success(_categories, _item) {
+            function checkItem(done, _categories, _item) {
                 if (!_categories || !_item) {
-                    return error.call(this, null, {});
+                    return done.fail(null, {});
                 }
                 var item = _item.toJSON();
                 var platform = this.app.session.get('platform');
-                var subcategory;
+
+                if (platform === 'html5') {
+                    done.abort();
+                    return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
+                }
+                done(_categories, _item);
+            }
+
+            function success(_categories, _item) {
+                var item = _item.toJSON();
+                var subcategory = _categories.search(item.category.id);
                 var category;
                 var parentId;
 
-                if (platform === 'html5') {
-                    return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
                 }
-                subcategory = _categories.search(item.category.id);
                 parentId = subcategory.get('parentId');
                 category = parentId ? _categories.get(parentId) : subcategory;
+
                 analytics.reset();
                 analytics.addParam('item', item);
                 analytics.addParam('user', user);
@@ -525,6 +524,7 @@ module.exports = {
             asynquence().or(error.bind(this))
                 .then(prepare.bind(this))
                 .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this));
                 .val(success.bind(this));
         }
     },
@@ -533,6 +533,8 @@ module.exports = {
 
         function controller() {
             var user = this.app.session.get('user');
+            var itemId = params.itemId;
+            var siteLocation = this.app.session.get('siteLocation');
 
             function prepare(done) {
                 params.id = params.itemId;
@@ -544,18 +546,13 @@ module.exports = {
                     categories: {
                         collection : 'Categories',
                         params: {
-                            location: this.app.session.get('siteLocation'),
+                            location: siteLocation,
                             languageCode: this.app.session.get('selectedLanguage')
                         }
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.categories);
-                }.bind(this));
+                }, done.errfcb);
             }
 
             function findItem(done) {
@@ -566,22 +563,28 @@ module.exports = {
                     }
                 }, {
                     readFromCache: false
-                }, function afterFetch(err, res) {
-                    if (err) {
-                        return done.fail(err, res);
-                    }
-                    done(res.item);
-                }.bind(this));
+                }, done.errfcb);
+            }
+
+            function checkItem(done, _categories, _item) {
+                if (!_categories || !_item) {
+                    return done.fail(null, {});
+                }
+                done(_categories, _item);
             }
 
             function success(_categories, _item) {
-                if (!_categories || !_item) {
-                    return error.call(this, null, {});
-                }
                 var item = _item.toJSON();
                 var subcategory = _categories.search(item.category.id);
-                var parentId = subcategory.get('parentId');
-                var category = parentId ? _categories.get(parentId) : subcategory;
+                var category;
+                var parentId;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
 
                 analytics.reset();
                 analytics.addParam('item', item);
@@ -602,6 +605,7 @@ module.exports = {
             asynquence().or(error.bind(this))
                 .then(prepare.bind(this))
                 .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this))
                 .val(success.bind(this));
         }
     },

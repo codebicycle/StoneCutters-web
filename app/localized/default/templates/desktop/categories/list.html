@@ -1,0 +1,68 @@
+{% from macros import Map %}
+
+<section id="home" class="fullCont">
+	<h1>Desapegar é só começar!</h1>
+	<h2>Temos <strong>7.856.040</strong> anúncios hoje.</h2>
+
+	<section class="categories">
+		<h3>Categorias mais populares na OLX</h3>
+		<span class="slideBtn icons prev"></span>
+		<ul class="swiper-container">
+			<div class="swiper-wrapper">
+	            {% for category in categories %}
+	                <li class="swiper-slide">
+	                    <a href="{{ category | slugToUrl | link }}">
+	                    	<span class="icons icon-cat-{{ category.id }}"></span>
+	                      	{{ category.trName }}
+	                    </a>
+	                </li>
+	            {% endfor %}
+            </div>
+        </ul>
+        <span class="slideBtn icons next"></span>
+	</section>
+
+	<section class="apps">
+		<a href="http://ad-x.co.uk/API/click/olxinc789048jo/web252cae107b6be2" target="_blank"></a>
+		<a href="http://ad-x.co.uk/API/click/olxinc789048jo/web2531a45323c5e4" target="_blank"></a>
+	</section>
+
+	<section class="states">
+		<ul>
+			<li>Selecione seu Estado:</li>
+			<li><a href="">AC</a></li>
+			<li><a href="">AL</a></li>
+			<li><a href="">AP</a></li>
+			<li><a href="">AM</a></li>
+			<li><a href="">BA</a></li>
+			<li><a href="">CE</a></li>
+			<li><a href="">DF</a></li>
+			<li><a href="">ES</a></li>
+			<li><a href="">GO</a></li>
+			<li><a href="">MA</a></li>
+			<li><a href="">MT</a></li>
+			<li><a href="">MS</a></li>
+			<li><a href="">MG</a></li>
+			<li><a href="">PR</a></li>
+			<li><a href="">PB</a></li>
+			<li><a href="">PA</a></li>
+			<li><a href="">PE</a></li>
+			<li><a href="">PI</a></li>
+			<li><a href="">RJ</a></li>
+			<li><a href="">RN</a></li>
+			<li><a href="">RS</a></li>
+			<li><a href="">RR</a></li>
+			<li><a href="">SC</a></li>
+			<li><a href="">SE</a></li>
+			<li><a href="">SP</a></li>
+			<li><a href="">TO</a></li>
+			<li><a href=""><strong>Brasil</strong></a></li>
+		</ul>
+	</section>
+
+	<section class="map">
+		{{ Map() }}
+	</section>
+	
+	<div class="clear"></div>
+</section>

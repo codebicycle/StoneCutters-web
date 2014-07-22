@@ -35,7 +35,7 @@ module.exports = Base.extend({
         }.bind(this));
 
         $form.on('submit', function onSubmit(event) {
-            var url = '/location?search=' + $input.val() || '';
+            var url = '/location?search=' + ($input.val() || '');
 
             event.preventDefault();
             if (this.options.target) {

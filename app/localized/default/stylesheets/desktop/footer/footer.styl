@@ -17,18 +17,26 @@
 					color: #369;
 					text-decoration: underline;
 				}
+				&:not([href]) {
+					cursor: pointer;
+				}
 			}
 		}
 	}
 	> p {
-		border-top: solid thin #EEE;
+		border-top: solid thin #DDD;
 	}
 
 	.teaser {
 		
 		position: relative;
-		border: solid thin #EEE;
+		display: none;
+		border: solid thin #DDD;
 		box-shadow: 0 -1rem 1rem -1rem rgba(0, 0, 0, .25);
+
+		&.open {
+			display: block;
+		}
 
 		> header {
 

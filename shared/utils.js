@@ -3,17 +3,6 @@
 var _ = require('underscore');
 var querystring = require('querystring')
 var isServer = (typeof window === 'undefined');
-var utils = {
-    isServer: isServer,
-    link: link,
-    fullizeUrl: fullizeUrl,
-    params: params,
-    removeParams: removeParams,
-    get: get,
-    defaults: {
-        userAgent: 'Mozilla/5.0 (compatible; OlxArwen/1.0; +http://www.olx.com)'
-    }
-};
 var linkParams = {
     location: function (href, query) {
         var siteLocation = this.session.get('siteLocation');
@@ -48,12 +37,18 @@ var linkParams = {
     },
     sid: function (href, query) {
         var sid = this.session.get('sid');
+        var platform = this.session.get('platform');
+        var originalPlatform = this.session.get('originalPlatform');
 
-        if (this.session.get('platform') === 'wap' && sid) {
+        if ((platform === 'wap' || originalPlatform === 'wap') && sid) {
             href = params(href, 'sid', sid);
         }
         return href;
     }
+};
+var defaults = {
+    userAgent: 'Mozilla/5.0 (compatible; OlxArwen/1.0; +http://www.olx.com)',
+    platform: 'wap'
 };
 
 function link(href, app, query) {
@@ -171,4 +166,12 @@ function get(obj, keys, defaultValue) {
     return _.isFunction(value) ? value : _.clone(value);
 }
 
-module.exports = utils;
+module.exports = {
+    isServer: isServer,
+    link: link,
+    fullizeUrl: fullizeUrl,
+    params: params,
+    removeParams: removeParams,
+    get: get,
+    defaults: defaults
+};

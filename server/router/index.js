@@ -28,12 +28,11 @@ var Router = function(server) {
     this.route = function() {
         fs.readdirSync(__dirname).forEach(function(filename) {
             var name = path.basename(filename, '.js');
-            if (name === 'index' || name === 'pages') {
+            if (name === 'index') {
                 return;
             }
             require('./' + name)(server.expressApp, server.dataAdapter);
         });
-        require('./pages')(server.expressApp, server.dataAdapter);
     };
 
 };

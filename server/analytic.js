@@ -1,24 +1,10 @@
 'use strict';
 
+var _ = require('underscore');
 var restler = require('restler');
 
-function defaults(obj) {
-    var slice = Array.prototype.slice;
-
-    slice.call(arguments, 1).forEach(function(source) {
-        if (source) {
-            for (var prop in source) {
-                if (obj[prop] === void 0) {
-                    obj[prop] = source[prop];
-                }
-            }
-        }
-    });
-    return obj;
-}
-
-function makeTrack(url, callback) {
-    restler.get(url)
+function makeTrack(url, options, callback) {
+    restler.get(url, options)
         .on('success', success)
         .on('fail', fail)
         .on('error', fail);
@@ -52,7 +38,7 @@ function dynamics(obj, params) {
             params = params.call(null, obj);
         }
         if (params === Object(params)) {
-            obj = defaults({}, params, obj);
+            obj = _.defaults({}, params, obj);
         }
     }
     return obj;
@@ -118,7 +104,8 @@ Analytic.types = {
             guid: 'ON',
             utmv: '1',
             utmr: options.referer,
-            utmcc: ['__utma=', random, '.', Math.round(Math.random() * 1000000), '.', today, '.', today, '.', today, '.3; __utmz=', random, '.', today, '.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none);'].join('')
+            utmwv: '4.4sh',
+            utmcc: ['__utma=', random, '.', Math.round(Math.random() * 1000000), '.', today, '.', today, '.', today, '.3;'].join('')
         };
     },
     google: function(options) {
@@ -153,7 +140,7 @@ Analytic.types = {
         if (options.nonInteraction) {
             obj.utmni = 1;
         }
-        obj = dynamics(defaults(obj, objGoogle), options.dynamics);
+        obj = dynamics(_.defaults(obj, objGoogle), options.dynamics);
 
         url.push('http://www.google-analytics.com/__utm.gif?');
         url.push(serialize(obj));
@@ -162,21 +149,26 @@ Analytic.types = {
     }
 };
 
-Analytic.prototype.trackPage = function(options, callback) {
+Analytic.prototype.track = function(optionsTrack, optionsRequest, callback) {
     var analytic = Analytic.types[ this.type ];
     var url;
 
-    if (typeof options === 'string') {
-        options = {
-            page: options
+    if (_.isFunction(optionsRequest)) {
+        callback = optionsRequest;
+        optionsRequest = {};
+    }
+    if (typeof optionsTrack === 'string') {
+        optionsTrack = {
+            page: optionsTrack
         };
     }
     if (analytic) {
-        url = analytic(defaults({}, options, this.options));
+        url = analytic(_.defaults({}, optionsTrack, this.options));
+        optionsRequest = optionsRequest || {};
         if (this.debug) {
-            console.log('Analytic [' + this.type + '] - URL [' + url + ']');
+            console.log('Analytic [' + this.type + '] - URL ' + url);
         }
-        makeTrack(url, callback);
+        makeTrack(url, optionsRequest, callback);
     }
     return url;
 };

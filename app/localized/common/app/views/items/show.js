@@ -28,8 +28,6 @@ module.exports = Base.extend({
     postRender: function() {
         var that = this;
 
-        $('html, body').scrollTop(0);
-
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
