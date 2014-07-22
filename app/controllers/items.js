@@ -19,6 +19,7 @@ module.exports = {
             var slugUrl = params.title;
             var favorite = params.favorite;
             var siteLocation = this.app.session.get('siteLocation');
+            var languages = this.app.session.get('languages');
             var anonymousItem;
 
             if (user) {
@@ -36,7 +37,7 @@ module.exports = {
                 }
             }
             params.id = itemId;
-            params.languageCode = this.app.session.get('selectedLanguage');
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             params.seo = true;
             delete params.itemId;
             delete params.title;
@@ -48,7 +49,7 @@ module.exports = {
                         collection : 'Categories',
                         params: {
                             location: siteLocation,
-                            languageCode: params.languageCode
+                            languageId: params.languageId
                         }
                     }
                 }, {
