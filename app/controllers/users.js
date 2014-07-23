@@ -94,6 +94,7 @@ module.exports = {
         function controller() {
             var platform = this.app.session.get('platform');
             var user;
+            var spec;
 
             if (platform === 'wap') {
                 return helpers.common.redirect.call(this, '/');
@@ -104,7 +105,7 @@ module.exports = {
                     status: 302
                 });
             }
-            var spec = {
+            spec = {
                 myAds: {
                     collection: 'Items',
                     params: {
@@ -113,7 +114,6 @@ module.exports = {
                     }
                 }
             };
-
             _.extend(spec.myAds.params, params, {
                 location: this.app.session.get('siteLocation'),
                 item_type: 'myAds'
@@ -121,16 +121,17 @@ module.exports = {
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                function processItem(item) {
-                    item.date.since = helpers.timeAgo(item.date);
+                if (err || !result.myAds) {
+                    return helpers.common.error.call(this, err, result, callback);
                 }
-
                 result.myAdsMetadata = result.myAds.metadata;
                 result.myAds = result.myAds.toJSON();
                 result.deleted = params.deleted;
-                _.each(result.myAds, processItem);
+                _.each(result.myAds, function processItem(item) {
+                    item.date.since = helpers.timeAgo(item.date);
+                });
                 callback(err, result);
-            });
+            }.bind(this));
         }
     },
     favorites: function(params, callback) {
@@ -162,7 +163,6 @@ module.exports = {
             };
             favorite = params.favorite;
             delete params.favorite;
-
             _.extend(spec.favorites.params, params, {
                 location: this.app.session.get('siteLocation'),
                 item_type: 'favorites'
@@ -170,16 +170,17 @@ module.exports = {
             this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, result) {
-                function processItem(item) {
-                    item.date.since = helpers.timeAgo(item.date);
+                if (err || !result.favorites) {
+                    return helpers.common.error.call(this, err, result, callback);
                 }
-
                 result.favoritesMetadata = result.favorites.metadata;
                 result.favorites = result.favorites.toJSON();
                 result.favorite = favorite;
-                _.each(result.favorites, processItem);
+                _.each(result.favorites, function processItem(item) {
+                    item.date.since = helpers.timeAgo(item.date);
+                });
                 callback(err, result);
-            });
+            }.bind(this));
         }
     }
 };
