@@ -7,8 +7,9 @@
 *, *:before, *:after {
     box-sizing: border-box;
 }
-body {
+body, html {
     font-family: arial,helvetica,sans-serif;
+    font-size: 16px;
 }
 a {
     text-decoration: none;
@@ -54,6 +55,34 @@ ul, li {
 
 section {
 	position: relative;
+
+	nav.breadcrumb {
+		width: 100%;
+		float: left;
+		margin: 1rem 0;
+		font-size: .875rem;
+		color: #000;
+
+		a {
+			color: #38b;
+		}
+
+		span.arrow {
+
+			&:before {
+			    color: #000;
+			    content: "";
+			    display: inline-block;
+			    font-family: 'olx-icon-font';
+			    font-size: 15px;
+			    line-height: 10px;
+			    vertical-align: middle;
+			}
+		}
+		span.count {
+			color: #888;
+		}
+	}
 	
 	h1, h2 {
 		color: #333;

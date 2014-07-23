@@ -1,1 +1,24 @@
-itempage
+<section id="itemPage">
+	<nav class="breadcrumb">
+		<a href="">Todas as Categorias</a> <span class="arrow"></span> <a href="">{{ category.trName }}</a> <span class="arrow"></span> <a href="">{{ item.category.name }}</a>
+	</nav>
+
+	<section class="itemInfo">
+		<h1>{{ item.title }}</h1>
+		<div class="dateInfo">
+			<span class="status">Publicado</span>
+			<span class="icons time"></span>
+			<span>{{ dictionary[item.date.since.dictionary] }}</span>
+			<span class="icons map"></span>
+			<span>{{ item.location.cityName if item.location.cityName }}</span>
+		</div>
+		<div id="photos">
+			<div class="bigPhoto" style="background-image: url('{{ item.images[0].url }}');"><span></span></div>
+			<ul>
+				{% for image in item.images %}
+                    <li  style="background-image: url('{{ image.thumbnail }}');"></li>
+                {% endfor %}
+			</ul>
+		</div>
+	</section>
+</section>
