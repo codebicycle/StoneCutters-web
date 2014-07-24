@@ -1,0 +1,143 @@
+<section id="itemListing">
+	<nav class="breadcrumb">
+		<a href="">Todas as Categorias</a> <span class="arrow"></span> <strong>{{ category.trName }}</strong> em Mato Grosso <span class="count">(35)</span>
+	</nav>
+
+	<nav class="categories">
+		<div class="categories">
+			<h2>Selecione a categoria</h2>
+			<a href="" >Todas as categorias</a>
+			<h3>{{ category.trName }} <span>35</span></h3>
+			<div class="subCat">
+				<a href="" ><span class="icons icon-cat-831"></span> Celulares e Smartphones <span class="count">10</span></a>
+				<a href="" ><span class="icons icon-cat-857"></span> Tablets - iPads <span class="count">10</span></a>
+			</div>
+		</div>
+		<div class="filters">
+			<h3>Preço</h3>
+			<div class="price">
+				<input type="text" class="values defaultContent numeric" placeholder="Mín." size="7" value="" id="min-Navigator_price" name="min" >
+				<input type="text" class="values defaultContent numeric" placeholder="Máx." size="7" value="" id="max-Navigator_price" name="max" >
+				<button type="button" class="icons"></button>
+			</div>
+		</div>
+	</nav>
+	<nav class="location">
+		<ul>
+			<li><a href="http://www.olx.com.br/celulares-tablets-cat-830" rel="nofollow">Brasil</a></li>
+			<li>Mato Grosso<a href="http://www.olx.com.br/celulares-tablets-cat-830"></a></li>
+		</ul>
+		<div>
+		</div>
+	</nav>
+	<section class="list">
+		<nav>
+			<div class="tabs">
+				<a href="" class="galery icons">Fotos Maiores</a>
+				<a href="" class="list icons active">Exibição em Lista</a>
+			</div>
+			<div class="sort">
+				<label>Ordenado por:</label>
+				<select name="listing-order-combo">
+					<option selected="selected" value="date*to*showdesc">Mais recentes</option>
+					<option value="price">Menor preço</option>
+					<option value="pricedesc">Maior preço</option>
+				</select>
+			</div>
+		</nav>
+		<ul class="listing">
+			{% for item in items %}
+				<li>
+					<a href="{{ item | slugToUrl | link }}">
+						<div  class="photo">
+							<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}"></div>
+						</div>
+						<div class="title">
+							<h3>{{ item.title }}</h3>
+							<span>{{ item.displayLocation }}</span>
+						</div>
+						<div class="price">
+							{{ item.price.displayPrice }}
+						</div>
+						<div class="date">
+							{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (',<br> ' + item.date.since.hour) if item.date.since.hour }}
+						</div>
+					</a>
+					<div class="clear"></div>
+				</li>
+			{% endfor %}
+		</ul>
+		{% if metadata.next or metadata.previous %}
+            <div id="itemPagination">
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
+            </div>
+        {% endif %}
+	</section>
+	<aside class="postBanner">
+		<h2>Venda isso na OLX</h2>
+		<ul>
+			<li>
+				<a href="{{ '/posting/830/831' | link }}">
+					<div class="icons icon-cat-831"></div>
+					<span>Celulares</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/800/803' | link }}">
+					<div class="icons icon-cat-800"></div>
+					<span>Notebooks</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/830/857' | link }}">
+					<div class="icons icon-cat-857"></div>
+					<span>Tablets</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/881/882' | link }}">
+					<div class="icons icon-cat-881"></div>
+					<span>Bicicletas</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/815/817' | link }}">
+					<div class="icons icon-cat-817"></div>
+					<span>Roupas</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/800/802' | link }}">
+					<div class="icons icon-cat-802"></div>
+					<span>Video Games</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/800/805' | link }}">
+					<div class="icons icon-cat-805"></div>
+					<span>TVs</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/806/807' | link }}">
+					<div class="icons icon-cat-806"></div>
+					<span>Móveis e Decoração</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/853/856' | link }}">
+					<div class="icons icon-cat-856"></div>
+					<span>Carrinhos de Bebê</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ '/posting/185/243' | link }}">
+					<div class="icons icon-cat-243"></div>
+					<span>Instrumentos Musicais</span>
+				</a>
+			</li>
+		</ul>
+		<a href="{{ '/posting' | link }}" class="btn orange">Venda mais !</a>
+	</aside>
+	<div class="clear"></div>
+</section>

@@ -30,7 +30,7 @@ module.exports = Base.extend({
             return response.data;
         }
         else {
-            console.log('[OLX_DEBUG] Empty listing response');
+            console.log('[OLX_DEBUG] Empty item listing response');
             this.metadata = {};
             return [];
         }

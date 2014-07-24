@@ -1,1 +1,61 @@
-itempage
+<section id="itemPage">
+	<nav class="breadcrumb">
+		<a href="">Todas as Categorias</a> <span class="arrow"></span> <a href="">{{ category.trName }}</a> <span class="arrow"></span> <a href="">{{ item.category.name }}</a>
+	</nav>
+
+	<section class="itemInfo">
+		<h1>{{ item.title }}</h1>
+		<div class="dateInfo">
+			<span class="status">Publicado</span>
+			<span class="icons time"></span>
+			<span>{{ dictionary[item.date.since.dictionary] }}</span>
+			<span class="icons map"></span>
+			<span>{{ item.location.cityName if item.location.cityName }}</span>
+		</div>
+		<div id="photos">
+			<div class="bigPhoto" style="background-image: url('{{ item.images[0].url }}');"><span></span></div>
+			<ul>
+				{% for image in item.images %}
+                    <li  style="background-image: url('{{ image.thumbnail }}');"></li>
+                {% endfor %}
+			</ul>
+			<div class="clear"></div>
+		</div>
+		
+	    {% if item.optionals %}
+	     	<div id="optionals">
+	            <ul>
+	                {% for optional in item.optionals %}
+	                    {% if optional.label and optional.value %}
+	                        <li><strong>{{ optional.label }}:</strong><br>{{ optional.value }}</li>
+	                    {% endif %}
+	                {% endfor %}
+	                <div class="clear"></div>
+	            </ul>
+	    	</div>
+	    {% endif %}
+
+	    <div id="description">
+	        <p>{{ item.description }}</p>
+	        <div class="clear"></div>
+	    </div>
+
+	    <div id="location">
+	    	<h2><span class="icons"></span>Localização</h2>
+	    	<ul>
+	    		<li>{{ item.location.cityName }}, {{ item.location.abbreviation }}</li>
+	    		<li>{{ item.location.neighborhoodName }}</li>
+	    	</ul>
+	    </div>
+
+	    <div id="actions">
+	    	<a class="share facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ href }}" target="_blank" >Facebook</a>
+			<a class="share twitter" href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title | escape }}&url={{ href }}" target="_blank">Twitter</a>
+			<a class="share google" href="https://plus.google.com/share?url={{ href }}" target="_blank" >Google</a>
+
+			<a class="olxAction denunciar" href="" >Denunciar</a>
+			<a class="olxAction favorite" href="" >Adicionar aos Favoritos</a>
+	    </div>
+
+	</section>
+</section>
