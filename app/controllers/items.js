@@ -614,10 +614,16 @@ module.exports = {
 
         function controller() {
             var page = params ? params.page : undefined;
+            var infiniteScroll = config.get('infiniteScroll', false);
+            var platform = this.app.session.get('platform');
             var user = this.app.session.get('user');
             var query;
 
             function prepare(done) {
+                if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/nf/search/' + params.search);
+                }
                 helpers.pagination.prepare(this.app, params);
                 query = _.clone(params);
                 delete params.search;
@@ -688,6 +694,7 @@ module.exports = {
                     items: _items.toJSON(),
                     metadata: metadata,
                     search: query.search,
+                    infiniteScroll: infiniteScroll,
                     analytics: analytics.generateURL.call(this)
                 });
             }
