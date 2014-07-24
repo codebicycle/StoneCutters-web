@@ -76,7 +76,9 @@ module.exports = {
                         if (err.status !== 422) {
                             return done.fail(err, res);
                         }
-                        res.item = new Item(err.body);
+                        res.item = new Item(err.body, {
+                            app: this.app
+                        });
                         res.item.set('id', itemId);
                         res.item.set('slug', '/des-iid-' + itemId);
                         res.item.set('location', this.app.session.get('location'));
@@ -213,6 +215,7 @@ module.exports = {
             }
 
             function error(err, res) {
+                console.log(err ? err.stack : err);
                 return helpers.common.error.call(this, err, res, callback);
             }
 
