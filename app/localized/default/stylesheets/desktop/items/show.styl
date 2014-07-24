@@ -66,9 +66,13 @@ section#itemPage {
 	    	}
     	}
 	}
-	#photos {
+	#photos, #optionals, #description {
 		width: 38.69rem;
-		margin: 0 0 0 1.25rem;
+		margin: 0 0 .5rem 1.25rem;
+	}
+	#photos {
+		height: 25rem;
+		overflow: hidden;
 
 		.bigPhoto {
 			width: 33.75rem;
@@ -99,11 +103,13 @@ section#itemPage {
 		}
 		ul {
 			width: 3.75rem;
+			height: 25rem;
 			float: right;
+			overflow: hidden;
 			li {
 				width: 3.75rem;
 				height: 3.75rem;
-				margin: 0 0 .625rem 0;
+				margin: 0 0 .5rem 0;
 				background-size: cover;
 				background-repeat: no-repeat;
 				cursor: pointer;
@@ -112,6 +118,34 @@ section#itemPage {
 					border: 3px solid #2b8dd6;
 				}
 			}
+		}
+	}
+	#optionals {
+		border-bottom: 1px solid #eee;
+
+		ul {
+			font-size: .875rem;
+
+			li {
+				width: 50%; 
+				float: left;
+				margin: .5rem 0;
+			}
+		}
+	}
+	#description {
+		p {
+			font-size: .8125rem;
+		}
+	}
+	#location {
+		width: 19.13rem;
+		min-height: 10.13rem;
+		margin: 0 0 .5rem 1.25rem;
+		border: 1px solid #eeeeee;
+
+		h2 {
+			
 		}
 	}
 }
