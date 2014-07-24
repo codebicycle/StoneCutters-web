@@ -10,6 +10,7 @@ var config = require('./config').get('graphite', {
 var dgram = require('dgram');
 var util = require('util');
 var logger = require('../shared/logger')('graphite');
+var cluster = require('cluster');
 var client;
 
 function Client(options) {
@@ -132,7 +133,7 @@ module.exports = function(options) {
     options = options || {};
 
     if (config.enabled) {
-        client = client || new Client(options);
+        client = client || (cluster.worker ? cluster.worker.process.env.GRAPHITE : false) || new Client(options);
     }
     else {
         client = {
