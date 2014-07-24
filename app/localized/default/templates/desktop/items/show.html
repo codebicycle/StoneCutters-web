@@ -41,9 +41,21 @@
 	    </div>
 
 	    <div id="location">
-
+	    	<h2><span class="icons"></span>Localização</h2>
+	    	<ul>
+	    		<li>{{ item.location.cityName }}, {{ item.location.abbreviation }}</li>
+	    		<li>{{ item.location.neighborhoodName }}</li>
+	    	</ul>
 	    </div>
-	        
-	    
+
+	    <div id="actions">
+	    	<a class="share facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ href }}" target="_blank" >Facebook</a>
+			<a class="share twitter" href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title | escape }}&url={{ href }}" target="_blank">Twitter</a>
+			<a class="share google" href="https://plus.google.com/share?url={{ href }}" target="_blank" >Google</a>
+
+			<a class="olxAction denunciar" href="" >Denunciar</a>
+			<a class="olxAction favorite" href="" >Adicionar aos Favoritos</a>
+	    </div>
+
 	</section>
 </section>
