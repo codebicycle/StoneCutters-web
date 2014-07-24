@@ -9,6 +9,7 @@ var config = require('./config').get('graphite', {
         type: 'udp4'
     }
 });
+var hostname = require('os').hostname();
 var dgram = require('dgram');
 var util = require('util');
 var logger = require('../shared/logger')('graphite');
@@ -68,7 +69,7 @@ function Client(options) {
         if (Array.isArray(name)) {
             name = name.join('.');
         }
-        name = [config.namespace, name].join('.');
+        name = [config.namespace, hostname, name].join('.');
         if(typeof queue[name] === 'undefined') {
             queue[name] = {
                 value: value
