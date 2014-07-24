@@ -215,7 +215,6 @@ module.exports = {
             }
 
             function error(err, res) {
-                console.log(err ? err.stack : err);
                 return helpers.common.error.call(this, err, res, callback);
             }
 
