@@ -97,11 +97,12 @@ function Client(options) {
 
     function getQueueAsPlainText() {
         var date = new Date();
+        var timestamp = String(date.getTime()).substr(0, 10);
         var text = '';
         var name;
 
         for(name in queue) {
-            text += name +' '+ queue[name].value +' '+ (String(date.getTime()).substr(0, 10)) +'\n';
+            text += name +' '+ queue[name].value +' '+ timestamp +'\n';
         }
         if (text) {
             logger.log('Sending: ' + text);
