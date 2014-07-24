@@ -8,6 +8,7 @@ module.exports = {
     breadcrumb: require('./breadcrumb'),
     pagination: require('./pagination'),
     dataAdapter: require('./dataAdapter'),
+    hijri: require('./hijri'),
     timeAgo: function(itemDate) {
         var current = new Date();
         var currentMonth = current.getMonth() + 1;
