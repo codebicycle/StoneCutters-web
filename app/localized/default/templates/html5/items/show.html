@@ -51,7 +51,7 @@
         <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
         <h2>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h2>
         <h1>{{ item.title }}</h1>
-        <p>{{ item.description }}</p>
+        <p>{{ item.descriptionReplace }}</p>
         <div class="clear"></div>
     </section>
 

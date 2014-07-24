@@ -103,6 +103,7 @@ function handleItems(params, promise) {
             category: category.toJSON(),
             subcategory: subcategory.toJSON(),
             relatedAds: query.relatedAds,
+            metadata: metadata,
             items: _items.toJSON(),
             analytics: analytics.generateURL.call(this)
         });

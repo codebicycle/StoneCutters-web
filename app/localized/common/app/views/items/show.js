@@ -17,7 +17,7 @@ module.exports = Base.extend({
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
             data.item.location.cityName = data.item.location.children[0].children[0].name;
-            data.item.description = data.item.description.replace(/(<([^>]+)>)/ig,'');
+            data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
             data.item.date.since = helpers.timeAgo(data.item.date);
         }
 
