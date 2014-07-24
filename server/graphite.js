@@ -1,11 +1,13 @@
 'use strict';
 
 var config = require('./config').get('graphite', {
-    host: '127.0.0.1',
-    port: 2003,
-    debug: false,
-    interval: 5000,
-    type: 'udp4'
+    client: {
+        host: '127.0.0.1',
+        port: 2003,
+        debug: false,
+        interval: 10000,
+        type: 'udp4'
+    }
 });
 var dgram = require('dgram');
 var util = require('util');
@@ -95,11 +97,13 @@ function Client(options) {
     }
 
     function getQueueAsPlainText() {
+        var date = new Date();
+        var timestamp = String(date.getTime()).substr(0, 10);
         var text = '';
         var name;
 
         for(name in queue) {
-            text += name +' '+ queue[name].value +' '+ queue[name].timestamp +'\n';
+            text += name +' '+ queue[name].value +' '+ timestamp +'\n';
         }
         if (text) {
             logger.log('Sending: ' + text);
