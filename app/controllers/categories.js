@@ -9,6 +9,8 @@ var config = require('../config');
 
 function handleItems(params, promise) {
     var page = params ? params.page : undefined;
+    var infiniteScroll = config.get('infiniteScroll', false);
+    var platform = this.app.session.get('platform');
     var category;
     var subcategory;
     var query;
@@ -24,6 +26,10 @@ function handleItems(params, promise) {
         seo.resetHead.call(this, currentRouter);
 
         slug = helpers.common.slugToUrl(subcategory.toJSON());
+        if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+            done.abort();
+            return helpers.common.redirect.call(this, '/' + slug);
+        }
         if (slug.indexOf(params.title + '-cat-')) {
             done.abort();
             if (typeof page === 'undefined' || (isNaN(page) || page <= 1 || page >= 999999)) {
@@ -105,6 +111,7 @@ function handleItems(params, promise) {
             relatedAds: query.relatedAds,
             metadata: metadata,
             items: _items.toJSON(),
+            infiniteScroll: infiniteScroll,
             analytics: analytics.generateURL.call(this)
         });
     }

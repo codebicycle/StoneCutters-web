@@ -21,7 +21,9 @@ module.exports = function(nunjucks) {
             this.run = function(context, id) {
                 var app = getProperty('_app', context);
                 var parentView = getProperty('_view', context);
-                var options = {};
+                var options = {
+                    context: context
+                };
                 var ViewClass;
                 var view;
 
