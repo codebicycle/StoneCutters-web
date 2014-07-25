@@ -22,6 +22,14 @@ module.exports = Base.extend({
             e.preventDefault();
             categories.swipePrev();
         });
+
+        $('.states a').hover(function() {
+            var current = $(this).text().toLowerCase();
+            $('a.' + current).attr('class', current + ' active');
+        }, function() {
+            var current = $(this).text().toLowerCase();
+            $('a.' + current).attr('class', current);
+        });
     }
 
 });
