@@ -1,11 +1,13 @@
 <tr>
     <td style="border-top: solid thin #808080; padding:1px 4px;">
-        <small>
-            {% if location.current and location.current.type != 'country' %}
-				{{location.current.name}} <small><a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a></small>
-			{% else %}
-				{{location.name}} <small><a href="{{ '/location' | link }}">{{ dictionary["countryoptions.SelectACity"] }}</a></small>
-			{% endif %}
-		</small>
+        <h1>
+        	<small>
+	            {% if location.current and location.current.type != 'country' %}
+					{{location.current.name}} <small><a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a></small>
+				{% else %}
+					{{location.name}} <small><a href="{{ '/location' | link }}">{{ dictionary["countryoptions.SelectACity"] }}</a></small>
+				{% endif %}
+			</small>
+		</h1>
     </td>
 </tr>
