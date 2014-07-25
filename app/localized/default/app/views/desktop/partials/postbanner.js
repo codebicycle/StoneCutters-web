@@ -5,7 +5,6 @@ module.exports = Base.extend({
     className: 'partials_postbanner_view',
     postRender: function() {
         
-        console.log('postbanner');
     }
 
 });
