@@ -1,5 +1,3 @@
-{% from macros import Map %}
-
 <section id="home" class="fullCont">
 	<h1>Desapegar é só começar!</h1>
 	<h2>Temos <strong>7.856.040</strong> anúncios hoje.</h2>
@@ -60,9 +58,7 @@
 		</ul>
 	</section>
 
-	<section class="map">
-		{{ Map() }}
-	</section>
+	{% view 'partials/map' %}
 	
 	<div class="clear"></div>
 </section>
