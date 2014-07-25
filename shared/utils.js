@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var querystring = require('querystring')
+var querystring = require('querystring');
 var isServer = (typeof window === 'undefined');
 var linkParams = {
     location: function (href, query) {

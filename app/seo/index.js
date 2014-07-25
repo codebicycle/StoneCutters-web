@@ -2,8 +2,8 @@
 
 var _ = require('underscore');
 var config = require('../config');
+var configSeo = require('./config');
 var utils = require('../../shared/utils');
-var METATAGS = require('./metatags');
 var head = {
     metatags: {}
 };
@@ -112,12 +112,58 @@ function getMetatagName(currentRoute) {
     return [currentRoute.controller, currentRoute.action];
 }
 
+function desktopizeReplace(url, params) {
+    _.each(params, function(value, i) {
+        url = url.replace('$' + i, value);
+    });
+    return url;
+}
+
+function desktopizeUrl(url, options) {
+    var protocol = options.protocol;
+    var host = options.host;
+    var path = options.path;
+    var location = utils.params(url, 'location');
+    var exceptions = utils.get(configSeo, ['redirect', 'onDesktop'], {});
+    var regexp;
+    var match;
+    var port;
+
+    url = utils.removeParams(url, 'sid');
+    url = utils.removeParams(url, 'language');
+    url = utils.removeParams(url, 'location');
+
+    _.each(exceptions, function(exception) {
+        if (!match && (regexp = new RegExp(exception.regexp)).test(path)) {
+            match = exception;
+        }
+    });
+    if (match) {
+        url = match.path;
+        if (url === 'replace') {
+            url = desktopizeReplace(match.replace, match.regexp.exec(path));
+        }
+    }
+    if (location) {
+        host = location.split('.');
+    }
+    else {
+        host = host.split('.');
+        host.shift();
+        host.shift();
+        port = host.pop();
+        host.push(port.split(':').shift());
+        host.unshift('www');
+    }
+    return [protocol, '://', host.join('.'), url].join('');
+}
+
 module.exports = {
     getHead: getHead,
     resetHead: function(page) {
         var metatag = page || getMetatagName(this.app.session.get('currentRoute'));
-        var defaultMetatags = utils.get(METATAGS, 'default');
-        var metatags = utils.get(METATAGS, metatag, {});
+        var defaultMetatags = utils.get(configSeo, ['metatags', 'default']);
+        var metatags = utils.get(configSeo, ['metatags'].concat(metatag), {});
 
         delete head.canonical;
         head.metatags = {};
@@ -126,5 +172,6 @@ module.exports = {
         }.bind(this));
     },
     addMetatag: addMetatag,
-    update: update
+    update: update,
+    desktopizeUrl: desktopizeUrl
 };
