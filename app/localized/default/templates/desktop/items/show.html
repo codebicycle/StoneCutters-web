@@ -3,7 +3,7 @@
 		<a href="">Todas as Categorias</a> <span class="arrow"></span> <a href="">{{ category.trName }}</a> <span class="arrow"></span> <a href="">{{ item.category.name }}</a>
 	</nav>
 
-	<section class="itemInfo">
+	<section id="itemInfoL">
 		<h1>{{ item.title }}</h1>
 		<div class="dateInfo">
 			<span class="status">Publicado</span>
@@ -58,4 +58,43 @@
 	    </div>
 
 	</section>
+
+	<section id="itemInfoR">
+		{{ ('<h1>'+item.price.displayPrice+'</h1>') if item.price.displayPrice else "" }}
+		<div id="reply">
+			{{ ('<h2 class="icons contact">'+item.contactName+'</h2>') if item.contactName else "" }}
+			<a href="">Todos os anúncios do usuário</a>
+			{{ ('<h2 class="icons phone">'+item.phone+'</h2>') if item.phone else "" }}
+			<span>Ao ligar, diga que viu o anúncio na OLX</span>
+			<form action="ajax/contact_seller.php" id="contact-seller" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="669761484" name="itemId" id="itemId">
+				<input type="hidden" value="1157437652" name="token">
+				<input type="hidden" name="formHash" id="formHash" value="41af50ad51503c7ebc15436316b7f9721406228449">
+				<input type="hidden" name="contentType" value="textHtml">
+
+				<textarea placeholder="Mensagem" rows="6" cols="30" name="comment" id="comment"></textarea>
+				<span class="error icons">Ops! Escreva uma mensagem</span>
+				<input type="text" placeholder="Nome" maxlength="200" value="" id="name" name="name">
+				<span class="error icons">Ops! Escreva uma mensagem</span>
+				<input type="text" placeholder="E-mail" maxlength="200" value="" id="email" name="email">
+				<span class="error icons">Ops! Escreva uma mensagem</span>
+				<input type="text" placeholder="Telefone" maxlength="15" value="" id="phone" name="phone">
+
+				<input type="submit" value="Enviar e-mail" class="btn orange" >
+				<p>Enviando um e-mail você aceita nossos <a target="_blank" href="http://www.olx.com.br/terms.php">Termos</a></p>
+
+			</form>
+		</div>
+		<div id="securityTips">
+			<p>Dicas de Segurança</p>
+			<ul>
+				<li>Combine de encontrar pessoalmente</li>
+				<li>Verifique se o vendedor é o proprietário</li>
+				<li>Consulte se há multas e IPVA pendentes</li>
+			</ul>
+		</div>
+	</section>
+
+	{% view 'partials/postbanner' %}
+
 </section>
