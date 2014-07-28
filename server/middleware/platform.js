@@ -39,13 +39,11 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function checkDevice(err, response, body) {
                 if (err) {
-                    fail(err);
-                    return;
+                    return fail(err);
                 }
                 if (!body) {
                     console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
-                    fail(new Error());
-                    return;
+                    return fail(new Error());
                 }
                 return body;
             }
