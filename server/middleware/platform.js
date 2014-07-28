@@ -34,7 +34,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                    protocol: req.protocol,
                    host: req.headers.host,
                    path: req.path
-                }));
+                }, req.query));
             }
 
             function checkDevice(err, response, body) {

@@ -119,12 +119,12 @@ function desktopizeReplace(url, params) {
     return url;
 }
 
-function desktopizeUrl(url, options) {
+function desktopizeUrl(url, options, params) {
     var protocol = options.protocol;
     var host = options.host;
     var path = options.path;
     var location = utils.params(url, 'location');
-    var exceptions = utils.get(configSeo, ['redirect', 'onDesktop'], {});
+    var exceptions = utils.get(configSeo, ['redirects', 'onDesktop'], {});
     var regexp;
     var match;
     var port;
@@ -133,7 +133,7 @@ function desktopizeUrl(url, options) {
     url = utils.removeParams(url, 'language');
     url = utils.removeParams(url, 'location');
 
-    _.each(exceptions, function(exception) {
+    _.each(exceptions, function findException(exception) {
         if (!match && (regexp = new RegExp(exception.regexp)).test(path)) {
             match = exception;
         }
@@ -142,6 +142,9 @@ function desktopizeUrl(url, options) {
         url = match.path;
         if (url === 'replace') {
             url = desktopizeReplace(match.replace, match.regexp.exec(path));
+        }
+        if (match.params && params) {
+            url = desktopizeReplace(url, params);
         }
     }
     if (location) {
