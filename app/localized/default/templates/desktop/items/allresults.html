@@ -1,0 +1,86 @@
+<section id="itemListing">
+	<nav class="breadcrumb">
+		<a href="">Todas as Categorias</a> <span class="arrow"></span> <strong>{{ category.trName }}</strong> em Mato Grosso <span class="count">(35)</span>
+	</nav>
+
+	<nav class="categories">
+		<div class="categories">
+			<h2>Selecione a categoria</h2>
+			<a href="" >Todas as categorias</a>
+			<h3>{{ category.trName }} <span>35</span></h3>
+			<div class="subCat">
+				<a href="" ><span class="icons icon-cat-831"></span> Celulares e Smartphones <span class="count">10</span></a>
+				<a href="" ><span class="icons icon-cat-857"></span> Tablets - iPads <span class="count">10</span></a>
+			</div>
+		</div>
+		<div class="filters">
+			<h3>Preço</h3>
+			<div class="price">
+				<input type="text" class="values defaultContent numeric" placeholder="Mín." size="7" value="" id="min-Navigator_price" name="min" >
+				<input type="text" class="values defaultContent numeric" placeholder="Máx." size="7" value="" id="max-Navigator_price" name="max" >
+				<button type="button" class="icons"></button>
+			</div>
+		</div>
+	</nav>
+	<nav class="location">
+		<ul>
+			<li><a href="{{ '/nf/all-results' | link({location: 'www.olx.com.br'}) }}" rel="nofollow">Brasil</a></li>
+			<li>{{location.current.name}}<a href="{{ '/nf/all-results' | link({location: 'www.olx.com.br'}) }}"></a></li>
+		</ul>
+		<div class="list">
+			<ul>
+				{% for city in metadata.filters.city.value %}
+					<li><a href="{{ '/nf/all-results' | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count }}</span></a></li>
+				{% endfor %}
+				<div class="clear"></div>
+			</ul>
+		</div>
+	</nav>
+	<section class="list">
+		<nav>
+			<div class="tabs">
+				<a href="" class="galery icons">Fotos Maiores</a>
+				<a href="" class="list icons active">Exibição em Lista</a>
+			</div>
+			<div class="sort">
+				<label>Ordenado por:</label>
+				<select name="listing-order-combo">
+					<option selected="selected" value="date*to*showdesc">Mais recentes</option>
+					<option value="price">Menor preço</option>
+					<option value="pricedesc">Maior preço</option>
+				</select>
+			</div>
+		</nav>
+		<ul class="listing">
+			{% for item in items %}
+				<li>
+					<a href="{{ item | slugToUrl | link }}">
+						<div  class="photo">
+							<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}"></div>
+						</div>
+						<div class="title">
+							<h3>{{ item.title }}</h3>
+							<span>{{ item.displayLocation }}</span>
+						</div>
+						<div class="price">
+							{{ item.price.displayPrice }}
+						</div>
+						<div class="date">
+							{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (',<br> ' + item.date.since.hour) if item.date.since.hour }}
+						</div>
+					</a>
+					<div class="clear"></div>
+				</li>
+			{% endfor %}
+		</ul>
+		{% if metadata.next or metadata.previous %}
+            <div id="itemPagination">
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
+            </div>
+        {% endif %}
+	</section>
+	
+	{% view 'partials/postbanner' %}
+	
+	<div class="clear"></div>
+</section>

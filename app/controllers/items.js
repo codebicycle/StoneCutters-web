@@ -712,6 +712,95 @@ module.exports = {
                 .val(success.bind(this));
         }
     },
+    allresults: function(params, callback) {
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            var page = params ? params.page : undefined;
+            var infiniteScroll = config.get('infiniteScroll', false);
+            var platform = this.app.session.get('platform');
+            var user = this.app.session.get('user');
+            var query;
+
+            function prepare(done) {
+                if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/nf/all-results');
+                }
+                delete params.search;
+
+                helpers.pagination.prepare(this.app, params);
+                query = _.clone(params);
+                
+                delete params.page;
+                delete params.filters;
+                delete params.urlFilters;
+
+                analytics.reset();
+                analytics.addParam('page_nb', 0);
+                analytics.addParam('user', user);
+
+                done();
+            }
+
+            function findItems(done) {
+                this.app.fetch({
+                    items: {
+                        collection: 'Items',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkSearch(done, res) {
+                if (!res.items) {
+                    return done.fail(null, {});
+                }
+
+                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/nf/all-results');
+                }
+                done(res.items);
+            }
+
+            function success(_items) {
+                var url = '/nf/all-results/';
+                var metadata = _items.metadata;
+
+                if (metadata.total < 5) {
+                    seo.addMetatag('robots', 'noindex, follow');
+                    seo.addMetatag('googlebot', 'noindex, follow');
+                }
+                helpers.pagination.paginate(metadata, query, url);
+                helpers.filters.prepare(metadata);
+                analytics.addParam('page_nb', metadata.totalPages);
+                seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+                seo.addMetatag('description');
+                seo.update();
+                callback(null, {
+                    user: user,
+                    items: _items.toJSON(),
+                    metadata: metadata,
+                    //search: query.search,
+                    infiniteScroll: infiniteScroll
+                    //analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .then(findItems.bind(this))
+                .then(checkSearch.bind(this))
+                .val(success.bind(this));
+        }
+    },
     favorite: function(params, callback) {
         var user;
         var intent;
