@@ -4,113 +4,113 @@ module.exports = {
     onDesktop: [
         {
             regexp: /^\/category\/(\d+)\/.+?/,
-            path: 'replace',
-            replace: '/des-cat-$1'
+            url: '/des-cat-$1',
+            replace: true
         },
         {
             regexp: /^\/item\/(gallery|list_comments|reply|show)\/(\d+)(\/.+)?/,
-            path: 'replace',
-            replace: '/des-iid-$2'
+            url: '/des-iid-$2',
+            replace: true
         },
         {
             regexp: /^\/item\/post\/.+/,
-            path: '/posting.php'
+            url: '/posting.php'
         },
         {
             regexp: /^\/item\/(\d+)\/.+?/,
-            path: 'replace',
-            replace: '/des-cat-$1'
+            url: '/des-cat-$1',
+            replace: true
         },
         {
             regexp: /^\/auth\/login/,
-            path: '/login.php'
+            url: '/login.php'
         },
         {
             regexp: /^\/registration\/index/,
-            path: '/register.php'
+            url: '/register.php'
         },
         {
             regexp: /^\/user\/(\d+)\/(index|active_ads)/,
-            path: '/myolx/myolx.php'
+            url: '/myolx/myolx.php'
         },
         {
             regexp: /^\/user\/(\d+)\/favorites/,
-            path: '/myolx/favoritelisting.php'
+            url: '/myolx/favoritelisting.php'
         },
         {
             regexp: /^\/user\/edit_item\/(\d+)\/(\d+)/,
-            path: 'replace',
-            replace: '/myolx/edititem.php?editid=$2'
+            url: '/myolx/edititem.php?editid=$2',
+            replace: true
         },
         {
             regexp: /^\/location\/page\/.+/,
-            path: '/'
+            url: '/'
         },
         {
             regexp: /^\/search\/page\/.+/,
-            path: 'replace',
-            replace: '/nf/search/$search',
+            url: '/nf/search/$search',
+            replace: true,
             params: true
         },
         {
             regexp: /^\/posting\/success\/.*?/,
-            path: '/posting_success.php'
+            url: '/posting_success.php'
         },
         {
             regexp: /^\/posting(\/\d+)?(\/\d+)?/,
-            path: '/posting.php'
+            url: '/posting.php'
         },
         {
             regexp: /^\/location/,
-            path: '/'
+            url: '/'
         },
         {
             regexp: /^\/login/,
-            path: '/login.php'
+            url: '/login.php'
         },
         {
             regexp: /^\/logout/,
-            path: '/logout.php'
+            url: '/logout.php'
         },
         {
             regexp: /^\/register/,
-            path: '/register.php'
+            url: '/register.php'
         },
         {
             regexp: /^\/terms/,
-            path: '/terms.php'
+            url: '/terms.php'
         },
         {
             regexp: /^\/help/,
-            path: '/help.php'
+            url: '/help.php'
         },
         {
             regexp: /^\/myolx\/edititem\/(\d+)/,
-            path: 'replace',
-            replace: '/myolx/edititem.php?editid=$1'
+            url: '/myolx/edititem.php?editid=$1',
+            replace: true
         },
         {
             regexp: /^\/myolx\/favoritelisting/,
-            path: '/myolx/favoritelisting.php'
+            url: '/myolx/favoritelisting.php'
         },
         {
             regexp: /^\/myolx(\/myadslisting)?/,
-            path: '/myolx/myolx.php'
+            url: '/myolx/myolx.php'
         },
         {
             regexp: /^(.+)\/gallery/,
-            path: 'replace',
-            replace: '$1'
+            url: '$1',
+            replace: true
         },
         {
             regexp: /^(.+)\/map/,
-            path: 'replace',
-            replace: '$1'
+            url: '$1',
+            replace: true
         },
         {
             regexp: /^(.+)\/reply(\/success)?/,
-            path: 'replace',
-            replace: '$1'
+            url: '$1',
+            replace: true
         }
     ]
 };

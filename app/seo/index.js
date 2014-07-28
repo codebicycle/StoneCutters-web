@@ -139,9 +139,9 @@ function desktopizeUrl(url, options, params) {
         }
     });
     if (match) {
-        url = match.path;
-        if (url === 'replace') {
-            url = desktopizeReplace(match.replace, match.regexp.exec(path));
+        url = match.url;
+        if (match.replace) {
+            url = desktopizeReplace(url, match.regexp.exec(path));
         }
         if (match.params && params) {
             url = desktopizeReplace(url, params);
