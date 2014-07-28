@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var URLParser = require('url');
 var config = require('../config');
 var configSeo = require('./config');
 var utils = require('../../shared/utils');
@@ -129,10 +130,7 @@ function desktopizeUrl(url, options, params) {
     var match;
     var port;
 
-    url = utils.removeParams(url, 'sid');
-    url = utils.removeParams(url, 'language');
-    url = utils.removeParams(url, 'location');
-
+    url = utils.cleanParams(url);
     _.each(exceptions, function findException(exception) {
         if (!match && (regexp = new RegExp(exception.regexp)).test(path)) {
             match = exception;
@@ -158,7 +156,15 @@ function desktopizeUrl(url, options, params) {
         host.push(port.split(':').shift());
         host.unshift('www');
     }
-    return [protocol, '://', host.join('.'), url].join('');
+    if (!url.indexOf(protocol + '://')) {
+        url = URLParser.parse(url);
+        url = [url.pathname, (url.search || '')].join('');
+    }
+    url = [protocol, '://', host.join('.'), url].join('');
+    if (url.slice(url.length - 1) === '/') {
+        url = url.slice(0, url.length - 1);
+    }
+    return url;
 }
 
 module.exports = {
