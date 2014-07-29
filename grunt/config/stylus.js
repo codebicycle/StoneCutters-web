@@ -91,5 +91,57 @@ module.exports = function(grunt) {
         }
     }
 
+    (function stylusIcons() {
+        var iconsLocalization = require('../../app/config').get('icons');
+        var files = {};
+        var platform;
+        var key;
+
+        for (platform in iconsLocalization) {
+            if (platform !== 'html5') {
+                continue;
+            }
+            iconsLocalization[platform].forEach(eachIconLocation);
+        }
+
+        function eachIconLocation(location) {
+            var environment;
+
+            addIconToStylus(location, 'development');
+            for (environment in environments) {
+                addIconToStylus(location, environment);
+            }
+        }
+
+        function addIconToStylus(location, environment) {
+            var fileName = ['public/css/', location, '/', platform, '/icons'];
+            var key = ['icons-', environment].join('');
+
+            if (!stylus[key]) {
+                stylus[key] = {
+                    files: {},
+                    options: {
+                        define: {
+                            staticUrl: '',
+                            imageUrl: ''
+                        }
+                    }
+                };
+            }
+            if (environment !== 'development') {
+                fileName.push('-');
+                fileName.push(environment);
+                stylus[key].options.define.staticUrl = environments[environment].urls.static;
+                stylus[key].options.define.imageUrl = environments[environment].urls.image;
+            }
+            fileName.push('.css');
+            fileName = fileName.join('');
+            stylus[key].files[fileName] = fileName;
+        }
+
+        platform = 'html5';
+        eachIconLocation('default');
+    })();
+
     return stylus;
 };

@@ -10,6 +10,16 @@ module.exports = Base.extend({
 
         result.children = new Collection(result.children);
         return result;
+    },
+    checkSlug: function(categorySlug, urlSlug) {
+        var slug = [(urlSlug ? (urlSlug + '-') : ''), 'cat-', this.get('id')].join('');
+
+        if (categorySlug === slug) {
+            if (this.app.session.get('path').slice(1).indexOf('-cat-')) {
+                return true;
+            }
+        }       
+        return false;
     }
 });
 

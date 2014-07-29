@@ -6,6 +6,9 @@ module.exports = function(dataAdapter, excludedUrls) {
         var asynquence = require('asynquence');
         var _ = require('underscore');
         var utils = require('../../shared/utils');
+        var path = require('path');
+        var errorPath = path.resolve('server/templates/error.html');
+        var graphite = require('../graphite')();
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -17,12 +20,17 @@ module.exports = function(dataAdapter, excludedUrls) {
             var location = app.session.get('location');
             var languages;
             var selectedLanguage;
+            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
 
             function fetchLanguages(done) {
                 dataAdapter.get(req, '/countries/' + siteLocation + '/languages', done.errfcb);
             }
 
             function parse(done, response, _languages) {
+                if (!_languages) {
+                    console.log('[OLX_DEBUG] Empty languages response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
+                    return fail(new Error());
+                }
                 languages = {
                     models: _languages,
                     _byId: {}
@@ -85,8 +93,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                console.log(err.stack);
-                res.send(400, err);
+                graphite.send([location.name, 'middleware', 'languages', 'error'], 1, '+');
+                res.status(500).sendfile(errorPath);
             }
 
             asynquence().or(fail)

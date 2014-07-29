@@ -10,6 +10,9 @@ module.exports = {
     'redirections#subcategory': {
         url: 'item/:categoryId/:title/:subTitle/page/:page'
     },
+    'redirections#subcategoryListWithParams': {
+        url: 'item/:categoryId/:title/:subTitle/:description/page/:page'
+    },
     'redirections#related': {
         url: 'item/:categoryId/related-ads/page/:page'
     },
@@ -67,6 +70,9 @@ module.exports = {
     'redirections#edit': {
         url: 'user/edit_item/:userId/:itemId'
     },
+    'redirections#subcategoryList': {
+        url: 'item/:categoryId'
+    },
     'categories#list': {
         url: ''
     },
@@ -101,6 +107,9 @@ module.exports = {
                 url: 'nf/search(/)(:search)'
             }
         }
+    },
+    'items#allresults': {
+        url: 'nf/all-results'
     },
     'users#register': {
         url: 'register'
@@ -195,6 +204,14 @@ module.exports = {
             }
         }
     },
+    'items#show#noSlug': {
+        urls: {
+            server: '-iid-:itemId([0-9]+)',
+            client: {
+                url: '-iid-:itemId'
+            }
+        }
+    },
     'items#show': {
         urls: {
             server: 'iid-:itemId([0-9]+)',
@@ -203,7 +220,7 @@ module.exports = {
             }
         }
     },
-    'categories#show#listing': {
+    'categories#show#pageSlug': {
         urls: {
             server: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?',
             client: {
@@ -211,11 +228,43 @@ module.exports = {
             }
         }
     },
-    'categories#show': {
+    'categories#show#pageNoSlug': {
+        urls: {
+            server: '-cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?',
+            client: {
+                url: '-cat-:catId-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'categories#show#page': {
+        urls: {
+            server: 'cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?',
+            client: {
+                url: 'cat-:catId-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'categories#show#slug': {
         urls: {
             server: ':title-cat-:catId([0-9]+)',
             client: {
                 url: ':title-cat-:catId'
+            }
+        }
+    },
+    'categories#show#noSlug': {
+        urls: {
+            server: '-cat-:catId([0-9]+)',
+            client: {
+                url: '-cat-:catId'
+            }
+        }
+    },
+    'categories#show': {
+        urls: {
+            server: 'cat-:catId([0-9]+)',
+            client: {
+                url: 'cat-:catId'
             }
         }
     },
@@ -228,6 +277,6 @@ module.exports = {
         }
     },
     'pages#error': {
-        url: /^\/(?!((health$)|(stats($|\/))|(esi($|\/))|(analytics\/))).*/
+        url: /^\/(?!((health$)|(force($|\/))|(esi($|\/))|(stats($|\/))|(analytics($|\/)))).*/
     }
 };

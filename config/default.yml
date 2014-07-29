@@ -55,8 +55,15 @@ middleware:
       - /stats/threads
       - /stats/check
       - /stats/sockets
+      - /analytics
       - /analytics/pageview.gif
       - /analytics/pageevent.gif
+      - /analytics/graphite.gif
+      - /force
+      - /force/wap
+      - /force/html4
+      - /force/html5
+      - /force/desktop
       - /esi
 
 stylus:
@@ -119,3 +126,6 @@ hosts:
   - haibao
   - olxalgerie
   - jaovat
+
+redirect:
+  onDesktop: false

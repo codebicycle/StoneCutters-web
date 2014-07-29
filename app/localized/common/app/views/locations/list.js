@@ -14,7 +14,6 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            location: this.app.session.get('location'),
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     },
@@ -36,7 +35,7 @@ module.exports = Base.extend({
         }.bind(this));
 
         $form.on('submit', function onSubmit(event) {
-            var url = '/location?search=' + $input.val() || '';
+            var url = '/location?search=' + ($input.val() || '');
 
             event.preventDefault();
             if (this.options.target) {

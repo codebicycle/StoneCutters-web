@@ -1,7 +1,8 @@
 'use strict';
 
-var config = require('../config');
 var _ = require('underscore');
+var config = require('../config');
+var seo = require('../seo');
 var utils = require('../../shared/utils');
 
 module.exports = (function() {
@@ -89,6 +90,20 @@ module.exports = (function() {
         }));
     }
 
+    function error(err, res, status, callback) {
+        if (_.isFunction(status)) {
+            callback = status;
+            status = 404;
+        }
+        if (typeof window === 'undefined') {
+            this.app.req.res.status(status);
+        }
+        seo.addMetatag('robots', 'noindex, nofollow');
+        seo.addMetatag('googlebot', 'noindex, nofollow');
+        seo.update();
+        return callback(null, 'pages/error', res || {});
+    }
+
     function daysDiff(date) {
         var now = new Date();
         var diff = now.getTime() - date.getTime();
@@ -99,9 +114,11 @@ module.exports = (function() {
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
+        fullizeUrl: utils.fullizeUrl,
         params: utils.params,
         removeParams: utils.removeParams,
         redirect: redirect,
+        error: error,
         daysDiff: daysDiff,
         'static': statics
     };

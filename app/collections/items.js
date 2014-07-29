@@ -23,6 +23,17 @@ module.exports = Base.extend({
             break;
         }
         return url;
+    },
+    parse: function(response) {
+        if (response) {
+            this.metadata = response.metadata;
+            return response.data;
+        }
+        else {
+            console.log('[OLX_DEBUG] Empty item listing response');
+            this.metadata = {};
+            return [];
+        }
     }
 });
 

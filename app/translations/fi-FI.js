@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Vaihda kaupunkia',
     'countryoptions.EnterCity': 'Sy\xF6t\xE4 kaupunki',
+    'countryoptions.Region': 'Sijainti',
     'countryoptions.SelectACity': 'Valitse kaupunki',
     'defaultfooter.Back': 'Takaisin',
     'defaultfooter.FreeSite': '100% ilmaiset ilmoitukset',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Selaa <<BRAND>>:n kategorioita',
     'countrystatecityv2.MessageFromPost': 'Valitse kaupunki tehd\xE4ksesi ilmoituksen',
     'listingpageitemslisting.AllResultsNew': 'Kaikki tulokset',
+    'listingpageitemslisting.Posted': 'L\xE4hetetty',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
     'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Hyl\xE4tty ilmoitus',
     'misc.SeeAdIn2Hrs_Mob': 'N\xE4et sen OLX:n sivustolla 2 tunnin sis\xE4ll\xE4',
+    'misc.SeeMoreAds': 'Katso lis\xE4\xE4 ilmoituksia',
     'misc.Sell_Post_Mobile_India': 'Julkaise',
     'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)',
     'misc.YouAreIn_Mob': 'Olet kohteessa <<LOCATION>>',

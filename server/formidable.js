@@ -86,26 +86,30 @@ function error(req, url, err, values, callback) {
     }
     if (req.rendrApp.session.get('platform') === 'wap') {
         errors = [];
-        err.forEach(function each(error) {
-            var message = '';
+        if (err.forEach) {
+            err.forEach(function each(error) {
+                var message = '';
 
-            if (error.selector !== 'main') {
-                message += error.selector + ' | ';
-            }
-            errors.push(message + error.message);
-        });
-        url += '?' + querystring.stringify({
-            errors: errors
-        });
+                if (error.selector !== 'main') {
+                    message += error.selector + ' | ';
+                }
+                errors.push(message + error.message);
+            });
+            url += '?' + querystring.stringify({
+                errors: errors
+            });
+        }
     }
     else {
         errors = {};
-        err.forEach(function each(error) {
-            if (typeof errors[error.selector] === 'undefined') {
-                errors[error.selector] = [];
-            }
-            errors[error.selector].push(error.message);
-        });
+        if (err.forEach) {
+            err.forEach(function each(error) {
+                if (typeof errors[error.selector] === 'undefined') {
+                    errors[error.selector] = [];
+                }
+                errors[error.selector].push(error.message);
+            });
+        }
         req.rendrApp.session.persist({
             form: {
                 values: values,

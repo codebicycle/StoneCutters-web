@@ -15,7 +15,7 @@
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
                     </a>
                     <div class="itemInfo">
-                        <h2>{{ item.price.displayPrice }}</h2>
+                        <p class="itemPrice">{{ item.price.displayPrice }}</p>
                         {% if item.status == 'pending' %}
                             <span class="status pending">{{ dictionary["itemslisting.PendingAd"] }}</span>
                         {% elif item.status == 'rejected' %}
@@ -25,7 +25,7 @@
                         {% endif %}
                         <div class="centerCont">
                             <a href="{{ item | slugToUrl | link }}">
-                                <p>{{ item.title }}</p>
+                                <h2>{{ item.title }}</h2>
                             </a>
                         </div>
                         {% if item.status == 'ready' %}

@@ -25,7 +25,12 @@ Router.prototype.constructor = BaseClientRouter;
 Router.prototype.postInitialize = function() {
     this.on('action:start', this.setReferer, this);
     this.on('action:start', this.trackImpression, this);
+    this.on('action:end', this.scrollTop, this);
     this._router.on('route', this.triggerRoute, this);
+};
+
+Router.prototype.scrollTop = function(event) {
+    $('html, body').scrollTop(0);
 };
 
 Router.prototype.triggerRoute = function(event) {
@@ -46,6 +51,14 @@ Router.prototype.setReferer = function(event) {
 Router.prototype.trackImpression = function() {
     if (window._gaq) {
         _gaq.push(['_trackPageview']);
+    }
+    if (window._trq) {
+        window._trq.push(function track(t) {
+            t.track({
+                url: 'http://tracking.olx-st.com/h/imgt/mob/web/',
+                host: window.location.hostname
+            });
+        });
     }
 };
 
@@ -76,7 +89,7 @@ Router.prototype.getParamsHash = function(pattern, paramsArray, search) {
         });
     }
     params = (paramNames || []).reduce(function(memo, name, i) {
-        memo[name] = decodeURIComponent(paramsArray[i]);
+        memo[name] = decodeURIComponent(paramsArray[i] || '');
         return memo;
     }, {});
     query = search.slice(1).split('&').reduce(function(memo, queryPart) {

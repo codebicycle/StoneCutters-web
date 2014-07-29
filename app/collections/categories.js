@@ -8,15 +8,30 @@ module.exports = Base.extend({
     url: '/countries/:location/categories',
     search: function(id) {
         var category = this.get(id);
+        var parent;
 
         if (!category) {
-            category = this.find(function each(category) {
+            parent = this.find(function each(category) {
                 return !!category.get('children').get(id);
             });
-            if (category) {
-                return category.get('children').get(id);
+            if (parent) {
+                category = parent.get('children').get(id);
             }
         }
+        return category;
+    },
+    parse: function(response) {
+        if (response) {
+            if (response.categories) {
+                this.metadata = response.metadata;
+                return response.categories;
+            }
+        }
+        else {
+            console.log('[OLX_DEBUG] Empty category listing response');
+            response = [];
+        }
+        return response;
     }
 });
 

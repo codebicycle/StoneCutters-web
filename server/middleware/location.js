@@ -9,6 +9,9 @@ module.exports = function(dataAdapter, excludedUrls) {
         var utils = require('../../shared/utils');
         var testing = config.get(['publicEnvironments', 'testing'], {});
         var staging = config.get(['publicEnvironments', 'staging'], {});
+        var path = require('path');
+        var errorPath = path.resolve('server/templates/error.html');
+        var graphite = require('../graphite')();
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -37,9 +40,16 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function fetch(done) {
                 function after(err, result) {
+                    var params = null;
+
                     if (err) {
+                        if (previousLocation) {
+                            params = {
+                                location: previousLocation
+                            };
+                        }
                         done.abort();
-                        return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
+                        return res.redirect(301, utils.link('/', req.rendrApp, params));
                     }
                     done(result.location);
                 }
@@ -58,10 +68,16 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function check(done, location) {
                 var url = location.get('url');
+                var params = null;
 
                 if (_.contains(req.subdomains, 'm') && host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
+                    if (previousLocation) {
+                        params = {
+                            location: previousLocation
+                        };
+                    }
                     done.abort();
-                    return res.redirect(301, '/' + (previousLocation ? '?location=' + previousLocation : ''));
+                    return res.redirect(301, utils.link('/', req.rendrApp, params));
                 }
                 done(location);
             }
@@ -89,7 +105,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                res.send(400, err);
+                graphite.send(['Unknown Location', 'middleware', 'location', 'error'], 1, '+');
+                res.status(500).sendfile(errorPath);
             }
 
             if (!siteLocation) {
@@ -101,14 +118,16 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (siteLocation.indexOf(staging.host || '.m-staging.olx.com') === platform) {
                     siteLocation = platform + staging.mask || '.m.olx.com';
                 }
-                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2),'www');
+                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2), 'www');
                 previousLocation = siteLocation;
             }
             else if (_.isArray(siteLocation)) {
                 siteLocation = siteLocation[0];
             }
             if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
-                return res.redirect(301, '/?location=' + previousLocation);
+                return res.redirect(301, utils.link('/', req.rendrApp, {
+                    location: previousLocation
+                }));
             }
             asynquence().or(fail)
                 .then(fetch)

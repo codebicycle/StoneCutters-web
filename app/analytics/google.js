@@ -91,29 +91,24 @@ function initParams() {
         gaCs: today,
         gaNs: ++gaNs,
         gaDh: Math.round(Math.random() * 10000000),
-        gaUid: Math.round(Math.random() * 1000000)
+        gaUid: Math.round(Math.random() * 100000000)
     });
 }
 
 function persistParams() {
-    var today = new Date().getTime();
-    var gaCs = today;
-    var gaPs = this.app.session.get('gaCs') || gaCs;
-    var gaIs = this.app.session.get('gaIs') || gaCs;
-    var gaNs = this.app.session.get('gaNs') || 0;
-    var gaDh = this.app.session.get('gaDh') || Math.round(Math.random() * 10000000);
-    var gaUid = this.app.session.get('gaUid') || Math.round(Math.random() * 1000000);
+    var gaCs = new Date().getTime();
 
     this.app.session.persist({
-        gaIs: gaIs,
-        gaPs: gaPs,
-        gaNs: ++gaNs,
-        gaDh: gaDh,
-        gaUid: gaUid
+        gaCs: gaCs,
+        gaPs: this.app.session.get('gaCs') || gaCs,
+        gaIs: this.app.session.get('gaIs') || gaCs,
+        gaNs: this.app.session.get('gaNs') || 0,
+        gaDh: this.app.session.get('gaDh') || Math.round(Math.random() * 10000000),
+        gaUid: this.app.session.get('gaUid') || Math.round(Math.random() * 1000000)
     });
 }
 
-function checkParams() {
+function checkInitParams() {
     var gaIs = this.app.session.get('gaIs');
     var gaCs;
 
@@ -133,7 +128,7 @@ function checkParams() {
 
 function generate(params, page, options) {
     params.page = generatePage.call(this, page, options);
-    if (!checkParams.call(this)) {
+    if (checkInitParams.call(this)) {
         persistParams.call(this);
     }
 }

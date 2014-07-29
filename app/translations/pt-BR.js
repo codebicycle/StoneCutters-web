@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Alterar cidade',
     'countryoptions.EnterCity': 'Digite uma Cidade',
+    'countryoptions.Region': 'Localiza\xE7\xE3o',
     'countryoptions.SelectACity': 'Selecione uma cidade',
     'defaultfooter.Back': 'Voltar',
     'defaultfooter.FreeSite': '100% An\xFAncios gr\xE1tis',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Pesquisar as categorias do <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Por favor selecione uma cidade para publicar um an\xFAncio',
     'listingpageitemslisting.AllResultsNew': 'Todos os resultados',
+    'listingpageitemslisting.Posted': 'Publicado',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultados para <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desculpe, mas n\xE3o temos resultados para a sua pesquisa.',
     'listingpageitemslisting.ZeroResultsPage': 'Desculpe, mas n\xE3o encontramos <<RESULTS>> na <<CATEGORY>> da <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'Ops! N\xE3o encontramos resultados para sua pesquisa, mas n\xF3s temos o que voc\xEA est\xE1 procurando!',
     'misc.RejectedAd_Caps': 'An\xFAncio recusado',
     'misc.SeeAdIn2Hrs_Mob': 'Seu an\xFAncio estar\xE1 no ar dentro de 2 horas.',
+    'misc.SeeMoreAds': 'Veja mais an\xFAncios',
     'misc.Sell_Post_Mobile_India': 'Publicar',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'Voc\xEA est\xE1 em <<LOCATION>>',

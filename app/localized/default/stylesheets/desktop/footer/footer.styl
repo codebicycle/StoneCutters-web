@@ -1,0 +1,166 @@
+#footer {
+	clear: both;
+	position: relative;
+	
+	> ul, > p {
+		font-size: .75rem;
+		line-height: 2rem;
+		color: #AAA;
+	}
+	> ul {
+		li {
+			display: inline;
+			&:not(:first-child):before {
+				content: '\2022\a0';
+			}
+			a, span {
+				color: inherit;
+				cursor: pointer;
+
+				&:hover {
+					color: #369;
+					text-decoration: underline;
+				}
+				
+			}
+		}
+	}
+	> p {
+		border-top: solid thin #DDD;
+	}
+
+	.teaser {
+		width: 100%;
+		position: absolute;
+		bottom: 65px;
+		display: none;
+		border: solid thin #DDD;
+		background: #fff;
+		/*box-shadow: 0 -1rem 1rem -1rem rgba(0, 0, 0, .25);*/
+
+		&.open {
+			display: block;
+		}
+		> header {
+
+			position: absolute;
+			top: -1rem;
+			right: 1rem;
+
+			> a {
+
+				position: relative;
+				display: block;
+				width: 2rem;
+				height: 2rem;
+				text-indent: -9000em;
+				background-color: #FFF;
+				border: solid thin #DDD;
+
+				border-radius: 2rem;
+
+				-webkit-transition: all .25s;
+    			transition: all .25s;
+
+				&:before,
+				&:after {
+
+					content: '';
+					position: absolute;
+					top: .8875rem;
+					right: .2875rem;
+					bottom: .8875rem;
+					left: .2875rem;
+					display: block;
+					background-color: #DDD;
+					
+					-webkit-transition: all .5s;
+    				transition: all .5s;
+				}
+
+				&:before {
+					transform: rotate(45deg) scale(.8, .8);
+					-ms-transform: rotate(45deg) scale(.8, .8);
+					-webkit-transform: rotate(45deg) scale(.8, .8);
+				}
+
+				&:after {
+					transform: rotate(-45deg) scale(.8, .8);
+					-ms-transform: rotate(-45deg) scale(.8, .8);
+					-webkit-transform: rotate(-45deg) scale(.8, .8);
+				}
+
+				&:hover:before,
+				&:hover:after {
+					background-color: #999;
+				}
+
+				&:hover:before {
+					transform: rotate(225deg) scale(.8, .8);
+					-ms-transform: rotate(225deg) scale(.9, .9);
+					-webkit-transform: rotate(225deg) scale(.9, .9);
+				}
+
+				&:hover:after {
+					transform: rotate(-225deg) scale(.8, .8);
+					-ms-transform: rotate(-225deg) scale(.9, .9);
+					-webkit-transform: rotate(-225deg) scale(.9, .9);
+				}
+
+			}
+
+		}
+
+		> div {
+
+			padding: 0 1rem 1rem 1rem;
+
+			> h5 {
+
+				padding-top: 1rem;
+				color: #666;
+				border-bottom: solid thin #DDD;
+
+			}
+
+			> ul {
+
+				padding-top: 1rem;
+				font-size: .75rem;
+
+				-webkit-column-count: 8;
+			    -moz-column-count: 8;
+			    column-count: 8;
+			    -webkit-column-count: .5rem;
+			    -moz-column-count: .5rem;
+			    column-count: .5rem;
+
+				> li {
+
+					overflow: hidden;
+					color: #AAA;
+					text-overflow: ellipsis;
+
+					> a {
+
+						color: #38B;
+						white-space: nowrap;
+
+						&:hover {
+
+							color: #369;
+							text-decoration: underline;
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+}

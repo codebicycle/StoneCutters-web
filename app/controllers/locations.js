@@ -10,19 +10,14 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var spec = {
-                cities: {
-                    collection: 'Cities',
-                    params: {
-                        type: 'topcities',
-                        location: this.app.session.get('siteLocation')
-                    }
-                }
+            var citiesParams = {
+                type: 'topcities',
+                location: this.app.session.get('siteLocation')
             };
 
             if (params.search) {
-                spec.cities.params.type = 'cities';
-                spec.cities.params.name = params.search;
+                citiesParams.type = 'cities';
+                citiesParams.name = params.search;
             }
             if (params.location) {
                 seo.addMetatag('robots', 'noindex, follow');
@@ -31,8 +26,16 @@ module.exports = {
             analytics.reset();
             if (params.target && params.target === 'posting') {
                 analytics.setPage('post#location');
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
             }
-            this.app.fetch(spec, {
+            this.app.fetch({
+                cities: {
+                    collection: 'Cities',
+                    params: citiesParams
+                }
+            }, {
                 readFromCache: false
             }, function afterFetch(err, result) {
                 callback(err, {

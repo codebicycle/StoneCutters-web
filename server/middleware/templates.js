@@ -6,6 +6,10 @@ module.exports = function(dataAdapter, excludedUrls) {
         var minify = require('../config').get(['uglify', 'enabled'], true);
         var localization = require('../../app/config').get('localization', {});
         var _ = require('underscore');
+        var utils = require('../../shared/utils');
+        var path = require('path');
+        var errorPath = path.resolve('server/templates/error.html');
+        var graphite = require('../graphite')();
 
         function isLocalized(platform, siteLocation) {
             return !!(localization[platform] && ~localization[platform].indexOf(siteLocation));
@@ -19,26 +23,37 @@ module.exports = function(dataAdapter, excludedUrls) {
             var app = req.rendrApp;
             var location = app.session.get('location');
             var siteLocation = app.session.get('location').url;
-            var userAgent = req.get('user-agent');
+            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
 
             function callback(err, response, body) {
                 if (err) {
                     return fail(err);
+                }
+                if (!body) {
+                    console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
+                    return fail(new Error());
                 }
                 var device = body;
 
                 if (device.browserName == 'Opera Mini') {
                     var alternativeUA = ['device-stock-ua','x-operamini-phone-ua'];
                     var headers = req.headers;
+                    var match;
 
                     for (var i = alternativeUA.length - 1; i >= 0; i--) {
                         if (alternativeUA[i] in headers) {
                             userAgent = headers[alternativeUA[i]];
                             if (device.osName == 'Android') {
-                                device.osVersion = userAgent.match(/Android [\d+\.]{3,5}/)[0].replace('Android ','');
+                                match = userAgent.match(/Android [\d+\.]{3,5}/);
+                                if (match) {
+                                    device.osVersion = match[0].replace('Android ','');
+                                }
                             }
                             else if (device.osName == 'iOS') {
-                                device.osVersion = userAgent.match(/iPhone OS [\d+\_]{3,5}/)[0].replace('iPhone OS ','');
+                                match = userAgent.match(/iPhone OS [\d+\_]{3,5}/);
+                                if (match) {
+                                    device.osVersion = match[0].replace('iPhone OS ','');
+                                }
                             }
                         }
                     }
@@ -55,7 +70,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 };
                 var directory = 'default';
                 var jsDir = '/js/' + (minify ? 'min' : 'src');
-                var platform = req.subdomains.pop() || 'wap';
+                var platform = req.rendrApp.session.get('platform');
                 var template;
 
                 if (isLocalized(platform, siteLocation)) {
@@ -65,7 +80,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 app.session.update({
                     device: device,
                     directory: directory,
-                    platform: platform,
                     template: template,
                     marketing: marketing,
                     jsDir: jsDir
@@ -73,7 +87,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 app.req.app.locals({
                     device: device,
                     directory: directory,
-                    platform: platform,
                     template: template,
                     jsDir: jsDir
                 });
@@ -81,7 +94,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                res.send(400, err);
+                graphite.send([location.name, 'middleware', 'templates', 'error'], 1, '+');
+                res.status(500).sendfile(errorPath);
             }
 
             dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), callback);

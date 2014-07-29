@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Badilisha Mji',
     'countryoptions.EnterCity': 'Ingiza Mji',
+    'countryoptions.Region': 'Eneo',
     'countryoptions.SelectACity': 'Chagua mji',
     'defaultfooter.Back': 'Nyuma',
     'defaultfooter.FreeSite': '100% Free Classifieds',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Tafuta makundi <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Tafadhali chagua mji ili kuchapisha bidhaa',
     'listingpageitemslisting.AllResultsNew': 'Matokeo yote',
+    'listingpageitemslisting.Posted': 'Ilichapishwa',
     'listingpageitemslisting.ResultsForNew4': 'Matokeo <<NUMBER>> ya <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',
     'listingpageitemslisting.ZeroResultsPage': 'Tunasikitika, hatukupata matokeo katika <<CATEGORY>> at <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'Hatukupata kitu chochote, lakini tuna kile unachotafuta!',
     'misc.RejectedAd_Caps': 'Tangazo lililokataliwa',
     'misc.SeeAdIn2Hrs_Mob': 'Utaiona kwa OLX ndani ya ipindi cha masaa 2 ijayo',
+    'misc.SeeMoreAds': 'Kuona matangazo zaidi',
     'misc.Sell_Post_Mobile_India': 'Kuuza',
     'misc.SpecificFields_title': 'Uga ya Kundi Maalum (Hiari)',
     'misc.YouAreIn_Mob': 'Uko katika <<LOCATION>>',

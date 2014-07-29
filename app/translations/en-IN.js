@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Change City',
     'countryoptions.EnterCity': 'Enter a City',
+    'countryoptions.Region': 'Location',
     'countryoptions.SelectACity': 'Select a city',
     'defaultfooter.Back': 'Back',
     'defaultfooter.FreeSite': '100% Free Classifieds',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Browse <<BRAND>>\'s categories',
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.AllResultsNew': 'All results',
+    'listingpageitemslisting.Posted': 'Posted',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': 'We are sorry, we haven\'t found results in <<CATEGORY>> at <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Rejected ad',
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
+    'misc.SeeMoreAds': 'See more ads',
     'misc.Sell_Post_Mobile_India': 'Sell',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',

@@ -2,10 +2,27 @@
 <html>
     {% view 'layout/head' %}
     <body>
-        {% view 'header/index' %}
-        <div id="supercontainer">
-            {{body}}
+        {% view 'header/bar' %}
+        <div id="wrapper">
+            
+            {% view 'header/index' %}
+            
+            <section id="content">
+                {{ body }}            
+            </section>        	
+            {% view 'footer/footer' %}
         </div>
-        {% view 'footer/footer' %}
-    </body>
+        <script>function init() {
+            $LAB
+                .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
+                .script("{{ [jsDir, directory, 'templates', platform, 'templates.js'] | join('/') | static }}").wait()
+                .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
+                    var App = window.App = new (require('app/app'))({% json appData %});
+                    App.bootstrapData({% json bootstrappedData %});
+                    App.start();
+                });
+        }</script>
+        <script async src="{{ '/js/LAB.js' | static }}" onload="init()"></script>
+	</body>
 </html>

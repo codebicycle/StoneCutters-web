@@ -6,106 +6,136 @@ var helpers = require('../helpers');
 var seo = require('../seo');
 var analytics = require('../analytics');
 var config = require('../config');
+var Item = require('../models/item');
 
 module.exports = {
     show: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var securityKey = params.sk;
             var itemId = params.itemId;
             var slugUrl = params.title;
             var favorite = params.favorite;
-            var siteLocation = app.session.get('siteLocation');
+            var siteLocation = this.app.session.get('siteLocation');
+            var languages = this.app.session.get('languages');
             var anonymousItem;
-            var spec;
 
-            if (user) {
-                params.token = user.token;
-            }
-            else if (typeof window !== 'undefined' && localStorage) {
-                anonymousItem = localStorage.getItem('anonymousItem');
-                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                if (securityKey) {
-                    anonymousItem[params.itemId] = securityKey;
-                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+            function prepare(done) {
+                if (user) {
+                    params.token = user.token;
                 }
-                else {
-                    securityKey = anonymousItem[params.itemId];
-                }
-            }
-            params.id = params.itemId;
-            params.languageCode = app.session.get('selectedLanguage');
-            delete params.itemId;
-            delete params.title;
-            delete params.sk;
-
-            spec = {
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                else if (typeof window !== 'undefined' && localStorage) {
+                    anonymousItem = localStorage.getItem('anonymousItem');
+                    anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                    if (securityKey) {
+                        anonymousItem[itemId] = securityKey;
+                        localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
+                    else {
+                        securityKey = anonymousItem[itemId];
+                    }
                 }
-            };
+                params.id = itemId;
+                params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+                params.seo = true;
+                delete params.itemId;
+                delete params.title;
+                delete params.sk;
+                done();
+            }
 
-            app.fetch(spec, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err) {
-                    return helpers.common.redirect.call(this, '/404');
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageId: params.languageId
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, function afterFetch(err, res) {
+                    if (!res) {
+                        res = {};
+                    }
+                    if (err) {
+                        if (err.status !== 422) {
+                            return done.fail(err, res);
+                        }
+                        res.item = new Item(err.body, {
+                            app: this.app
+                        });
+                        res.item.set('id', itemId);
+                        res.item.set('slug', '/des-iid-' + itemId);
+                        res.item.set('location', this.app.session.get('location'));
+                        res.item.set('title', 'Item title');
+                        res.item.set('date', {
+                            timestamp: new Date().toISOString()
+                        });
+                        res.item.set('description', 'Item description');
+                        res.item.set('category', {
+                            id: res.item.get('categoryId'),
+                            name: res.item.get('categoryName')
+                        });
+                        res.item.set('status', {
+                            deprecated: true
+                        });
+                        res.item.set('purged', true);
+                        err = null;
+                    }
+                    done(res);
+                }.bind(this));
+            }
+
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
+                    return done.fail(null, {});
                 }
-                findRelatedItems.call(this, err, result);
-            }.bind(this));
+                var item = resItem.item.toJSON();
+                var slug = helpers.common.slugToUrl(item);
+                var protocol = this.app.session.get('protocol');
+                var platform = this.app.session.get('platform');
+                var url;
 
-            function findRelatedItems(err, data) {
-                if (err || !data.item) {
-                    return helpers.common.redirect.call(this, '/404');
-                }
-
-                var item = data.item.toJSON();
-                var slug;
-                var itemLocation;
-                var currentLocation;
-                var spec;
-
-                slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-')) {
+                if (!resItem.item.checkSlug(slug, slugUrl)) {
                     slug = ('/' + slug);
                     if (favorite) {
                         slug = helpers.common.params(slug, 'favorite', favorite);
                     }
+                    done.abort();
                     return helpers.common.redirect.call(this, slug);
                 }
-                itemLocation = item.location;
-                currentLocation = app.session.get('location');
-                if (itemLocation.url !== currentLocation.url) {
-                    var protocol = app.session.get('protocol');
-                    var platform = app.session.get('platform');
-                    var url = [protocol, '://', platform, '.', itemLocation.url.replace('www.', 'm.'), '/', slug].join('');
+                if (item.location.url !== this.app.session.get('location').url) {
+                    url = [protocol, '://', platform, '.', item.location.url.replace('www.', 'm.'), '/', slug].join('');
 
-                    if (itemLocation.children) {
-                        itemLocation = itemLocation.children[0];
-                        if (itemLocation.children) {
-                            itemLocation = itemLocation.children[0];
-                        }
-                    }
+                    done.abort();
                     return helpers.common.redirect.call(this, url, null, {
                         pushState: false,
                         query: {
-                            location: itemLocation.url
+                            location: resItem.item.getLocation().url
                         }
                     });
                 }
-                spec = {
-                    items: {
+                done(resCategories.categories, resItem.item);
+            }
+
+            function findRelatedItems(done, _categories, _item) {
+                this.app.fetch({
+                    relatedItems: {
                         collection : 'Items',
                         params: {
                             location: siteLocation,
@@ -114,242 +144,294 @@ module.exports = {
                             relatedAds: itemId
                         }
                     }
-                };
-                app.fetch(spec, {
+                }, {
                     readFromCache: false
-                }, function afterFetch(err, result) {
-                    var model = result.items.models[0];
-                    var user = app.session.get('user');
-                    var subcategory = data.categories.search(item.category.id);
-                    var category;
-                    
-                    result.relatedItems = model.get('data');
-                    result.user = user;
-                    result.item = item;
-                    result.pos = Number(params.pos) || 0;
-                    result.sk = securityKey;
+                }, function afterFetch(err, res) {
+                    if (err) {
+                        err = null;
+                        res = {
+                            relatedItems: []
+                        };
+                    }
+                    else {
+                        res.relatedItems = res.relatedItems.toJSON();
+                    }
+                    done(_categories, _item, res.relatedItems);
+                }.bind(this));
+            }
+
+            function success(_categories, _item, _relatedItems) {
+                var item = _item.toJSON();
+                var subcategory = _categories.search(_item.get('category').id);
+                var category;
+                var parentId;
+                var analyticUrl;
+                var url;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
+                
+                if (!item.purged) {
                     analytics.reset();
                     analytics.addParam('user', user);
                     analytics.addParam('item', item);
-                    category = data.categories.get(subcategory.get('parentId'));
                     analytics.addParam('category', category.toJSON());
                     analytics.addParam('subcategory', subcategory.toJSON());
-                    result.analytics = analytics.generateURL.call(this);
-                    result.relatedAdsLink = '/' + helpers.common.slugToUrl(subcategory.toJSON()) + '?relatedAds=' + itemId;
-                    result.favorite = favorite;
-
-                    this.app.session.update({
-                        postingLink: {
-                            category: category.get('id'),
-                            subcategory: subcategory.get('id')
-                        }
-                    });
-
-                    seo.addMetatag('title', data.item.shortTitle());
-                    seo.addMetatag('description', data.item.shortDescription());
-                    seo.update();
-
-                    callback(err, result);
-                }.bind(this));
+                    analyticUrl = analytics.generateURL.call(this);
+                    seo.addMetatag('title', item.metadata.itemPage.title);
+                    seo.addMetatag('description', item.metadata.itemPage.description);
+                }
+                else {
+                    seo.addMetatag('robots', 'noindex, nofollow');
+                    seo.addMetatag('googlebot', 'noindex, nofollow');
+                }
+                if (siteLocation && !~siteLocation.indexOf('www.')) {
+                    url = helpers.common.removeParams(this.app.session.get('url'), 'location');
+                    seo.addMetatag.call(this, 'canonical', helpers.common.fullizeUrl(url, this.app));
+                }
+                seo.update();
+                this.app.session.update({
+                    postingLink: {
+                        category: category.get('id'),
+                        subcategory: subcategory.get('id')
+                    }
+                });
+                callback(null, {
+                    item: item,
+                    user: user,
+                    pos: Number(params.pos) || 0,
+                    sk: securityKey,
+                    relatedItems: _relatedItems,
+                    relatedAdsLink: ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join(''),
+                    subcategory: subcategory.toJSON(),
+                    category: category.toJSON(),
+                    favorite: favorite,
+                    analytics: analyticUrl
+                });
             }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this))
+                .then(findRelatedItems.bind(this))
+                .val(success.bind(this));
         }
     },
     gallery: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
             var pos = Number(params.pos) || 0;
-            var siteLocation = app.session.get('siteLocation');
-            var spec;
-            var slug;
+            var siteLocation = this.app.session.get('siteLocation');
 
-            if (user) {
-                params.token = user.token;
+            function prepare(done) {
+                if (user) {
+                    params.token = user.token;
+                }
+                params.id = params.itemId;
+                delete params.itemId;
+                delete params.title;
+                done();
             }
-            params.id = params.itemId;
-            delete params.itemId;
-            delete params.title;
 
-            spec = {
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            };
-            app.fetch(spec, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
-                }
-                
-                var item = result.item.toJSON();
-                var platform = this.app.session.get('platform');
-                var subcategory;
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
 
-                slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
+                    return done.fail(null, {});
+                }
+                var item = resItem.item.toJSON();
+                var slug = helpers.common.slugToUrl(item);
+                var platform = this.app.session.get('platform');
+
+                if (platform !== 'html4') {
+                    done.abort();
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                if (!resItem.item.checkSlug(slug, slugUrl)) {
+                    done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (!item.images || !item.images.length) {
+                    done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
                 if (pos < 0 || pos >= item.images.length) {
+                    done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug + '/gallery'));
                 }
+                done(resCategories.categories, resItem.item);
+            }
 
-                subcategory = result.categories.search(item.category.id);
-                result.item = item;
-                result.user = user;
-                result.pos = pos;
+            function success(_categories, _item) {
+                var item = _item.toJSON();
+                var subcategory = _categories.search(_item.get('category').id);
+                var category;
+                var parentId;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
+                
                 analytics.reset();
                 analytics.addParam('user', user);
                 analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                callback(err, result);
-            }.bind(this));
+                callback(null, {
+                    user: user,
+                    item: item,
+                    pos: pos,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this))
+                .val(success.bind(this));
         }
     },
     map: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            helpers.controllers.changeHeaders.call(this, config.get(['cache', 'headers', 'items', 'map'], config.get(['cache', 'headers', 'default'], {})));
-
-            var app = this.app;
-            var user = app.session.get('user');
+            var user = this.app.session.get('user');
             var itemId = params.itemId;
             var slugUrl = params.title;
-            var siteLocation = app.session.get('siteLocation');
-            var spec;
-            var slug;
+            var siteLocation = this.app.session.get('siteLocation');
 
-            if (user) {
-                params.token = user.token;
+            function prepare(done) {
+                if (user) {
+                    params.token = user.token;
+                }
+                params.id = params.itemId;
+                delete params.itemId;
+                delete params.title;
+                done();
             }
-            params.id = params.itemId;
-            delete params.itemId;
-            delete params.title;
 
-            spec = {
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            };
-            app.fetch(spec, {
-                'readFromCache': false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
-                }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
 
-                var item = result.item.toJSON();
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
+                    return done.fail(null, {});
+                }
+                var item = resItem.item.toJSON();
+                var slug = helpers.common.slugToUrl(item);
                 var platform = this.app.session.get('platform');
-                var subcategory;
 
-                slug = helpers.common.slugToUrl(item);
-                if (slugUrl && slug.indexOf(slugUrl + '-iid-') || platform !== 'html4') {
+                if (platform !== 'html4') {
+                    done.abort();
                     return helpers.common.redirect.call(this, ('/' + slug));
                 }
+                if (!resItem.item.checkSlug(slug, slugUrl)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, ('/' + slug));
+                }
+                done(resCategories.categories, resItem.item);
+            }
 
-                subcategory = result.categories.search(item.category.id);
-                result.item = item;
-                result.user = user;
+            function success(_categories, _item) {
+                var item = _item.toJSON();
+                var subcategory = _categories.search(_item.get('category').id);
+                var category;
+                var parentId;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
+
                 analytics.reset();
                 analytics.addParam('user', user);
-                analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('item', _item.toJSON());
+                analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                callback(err, result);
-            }.bind(this));
-        }
-    },
-    search: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller() {
-            var page = params ? params.page : undefined;
-            var user = this.app.session.get('user');
-            var query;
-
-            helpers.pagination.prepare(this.app, params);
-            query = _.clone(params);
-            delete params.search;
-            delete params.page;
-            delete params.filters;
-            delete params.urlFilters;
-            
-            analytics.reset();
-            analytics.setPage('nf');
-            analytics.addParam('keyword', query.search);
-            analytics.addParam('page_nb', 0);
-            analytics.addParam('user', user);
-
-            if (!query.search || _.isEmpty(query.search.trim())) {
-                seo.addMetatag('robots', 'noindex, follow');
-                seo.addMetatag('googlebot', 'noindex, follow');
-                return callback(null, {
-                    analytics: analytics.generateURL.call(this),
-                    search: '',
-                    metadata: {
-                        total: 0
-                    }
+                callback(null, {
+                    item: _item.toJSON(),
+                    user: user,
+                    analytics: analytics.generateURL.call(this)
                 });
             }
 
-            this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                var url = '/nf/search/' + query.search + '/';
-                var model = result.items.models[0];
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
 
-                result.items = model.get('data');
-                result.metadata = model.get('metadata');
-                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !result.items.length)) {
-                    return helpers.common.redirect.call(this, '/nf/search/' + query.search);
-                }
-
-                if (result.metadata.total < 5){
-                    seo.addMetatag('robots', 'noindex, follow');
-                    seo.addMetatag('googlebot', 'noindex, follow');
-                }
-                seo.addMetatag.call(this, 'title', query.search);
-                seo.addMetatag.call(this, 'description', query.search);
-                seo.update();
-
-                helpers.pagination.paginate(result.metadata, query, url);
-                analytics.addParam('page_nb', result.metadata.totalPages);
-                result.analytics = analytics.generateURL.call(this);
-                result.search = query.search;
-                callback(err, result);
-            }.bind(this));
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this))
+                .val(success.bind(this));
         }
     },
     reply: function(params, callback) {
@@ -358,50 +440,93 @@ module.exports = {
         }, controller);
 
         function controller(form) {
-            var app = this.app;
-            var user = app.session.get('user');
-            var platform = app.session.get('platform');
-            var spec = {
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage')
+            var user = this.app.session.get('user');
+            var itemId = params.itemId;
+            var siteLocation = this.app.session.get('siteLocation');
+
+            function prepare(done) {
+                params.id = params.itemId;
+                delete params.itemId;
+                done();
+            }
+
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
+                    return done.fail(null, {});
                 }
-            };
-
-            params.id = params.itemId;
-            delete params.itemId;
-
-            app.fetch(spec, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
-                }
-
-                var item = result.item.toJSON();
-                var subcategory;
+                var item = resItem.item.toJSON();
+                var platform = this.app.session.get('platform');
 
                 if (platform === 'html5') {
-                    return helpers.common.redirect.call(this, '/' + params.title + '-iid-' + item.id);
+                    done.abort();
+                    return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
                 }
-                subcategory = result.categories.search(item.category.id);
+                done(resCategories.categories, resItem.item);
+            }
+
+            function success(_categories, _item) {
+                var item = _item.toJSON();
+                var subcategory = _categories.search(item.category.id);
+                var category;
+                var parentId;
+
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
+                }
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
+
                 analytics.reset();
                 analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('user', user);
+                analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                result.user = user;
-                result.item = item;
-                result.form = form;
-                callback(err, result);
-            }.bind(this));
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
+                callback(null, {
+                    user: user,
+                    item: item,
+                    form: form,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this))
+                .val(success.bind(this));
         }
     },
     success: function(params, callback) {
@@ -409,63 +534,297 @@ module.exports = {
 
         function controller() {
             var user = this.app.session.get('user');
-            var spec = {
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage')
+            var itemId = params.itemId;
+            var siteLocation = this.app.session.get('siteLocation');
+
+            function prepare(done) {
+                params.id = params.itemId;
+                delete params.itemId;
+                done();
+            }
+
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
                     }
-                },
-                item: {
-                    model: 'Item',
-                    params: params
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function findItem(done) {
+                this.app.fetch({
+                    item: {
+                        model: 'Item',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkItem(done, resCategories, resItem) {
+                if (!resCategories.categories || !resItem.item) {
+                    return done.fail(null, {});
                 }
-            };
+                done(resCategories.categories, resItem.item);
+            }
 
-            params.id = params.itemId;
-            delete params.itemId;
+            function success(_categories, _item) {
+                var item = _item.toJSON();
+                var subcategory = _categories.search(item.category.id);
+                var category;
+                var parentId;
 
-            this.app.fetch(spec, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.item) {
-                    return helpers.common.redirect.call(this, '/404');
+                if (!subcategory) {
+                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
+                    return error.call(this);
                 }
-
-                var item = result.item.toJSON();
-                var subcategory;
-
-                subcategory = result.categories.search(item.category.id);
+                parentId = subcategory.get('parentId');
+                category = parentId ? _categories.get(parentId) : subcategory;
 
                 analytics.reset();
                 analytics.addParam('item', item);
-                analytics.addParam('category', result.categories.get(subcategory.get('parentId')).toJSON());
+                analytics.addParam('user', user);
+                analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                result.analytics = analytics.generateURL.call(this);
-                result.user = user;
-                result.item = item;
-                callback(err, result);
-            }.bind(this));
+                callback(null, {
+                    item: item,
+                    user: user,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .gate(findCategories.bind(this), findItem.bind(this))
+                .then(checkItem.bind(this))
+                .val(success.bind(this));
+        }
+    },
+    search: function(params, callback) {
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            var page = params ? params.page : undefined;
+            var infiniteScroll = config.get('infiniteScroll', false);
+            var platform = this.app.session.get('platform');
+            var user = this.app.session.get('user');
+            var query;
+
+            function prepare(done) {
+                if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/nf/search/' + params.search);
+                }
+                helpers.pagination.prepare(this.app, params);
+                query = _.clone(params);
+                delete params.search;
+                delete params.page;
+                delete params.filters;
+                delete params.urlFilters;
+
+                analytics.reset();
+                analytics.setPage('nf');
+                analytics.addParam('keyword', query.search);
+                analytics.addParam('page_nb', 0);
+                analytics.addParam('user', user);
+
+                if (!query.search || _.isEmpty(query.search.trim())) {
+                    seo.addMetatag('robots', 'noindex, follow');
+                    seo.addMetatag('googlebot', 'noindex, follow');
+                    seo.update();
+                    done.abort();
+                    return callback(null, {
+                        search: '',
+                        metadata: {
+                            total: 0
+                        },
+                        analytics: analytics.generateURL.call(this)
+                    });
+                }
+                done();
+            }
+
+            function findItems(done) {
+                this.app.fetch({
+                    items: {
+                        collection: 'Items',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkSearch(done, res) {
+                if (!res.items) {
+                    return done.fail(null, {});
+                }
+
+                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/nf/search/' + query.search);
+                }
+                done(res.items);
+            }
+
+            function success(_items) {
+                var url = ['/nf/search/', query.search, '/'].join('');
+                var metadata = _items.metadata;
+
+                if (metadata.total < 5) {
+                    seo.addMetatag('robots', 'noindex, follow');
+                    seo.addMetatag('googlebot', 'noindex, follow');
+                }
+                helpers.pagination.paginate(metadata, query, url);
+                analytics.addParam('page_nb', metadata.totalPages);
+                seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+                seo.addMetatag('description');
+                seo.update();
+                callback(null, {
+                    user: user,
+                    items: _items.toJSON(),
+                    metadata: metadata,
+                    search: query.search,
+                    infiniteScroll: infiniteScroll,
+                    analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .then(findItems.bind(this))
+                .then(checkSearch.bind(this))
+                .val(success.bind(this));
+        }
+    },
+    allresults: function(params, callback) {
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            var page = params ? params.page : undefined;
+            var infiniteScroll = config.get('infiniteScroll', false);
+            var platform = this.app.session.get('platform');
+            var user = this.app.session.get('user');
+            var query;
+
+            function prepare(done) {
+                if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/nf/all-results');
+                }
+                delete params.search;
+
+                helpers.pagination.prepare(this.app, params);
+                query = _.clone(params);
+                
+                delete params.page;
+                delete params.filters;
+                delete params.urlFilters;
+
+                analytics.reset();
+                analytics.addParam('page_nb', 0);
+                analytics.addParam('user', user);
+
+                done();
+            }
+
+            function findItems(done) {
+                this.app.fetch({
+                    items: {
+                        collection: 'Items',
+                        params: params
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkSearch(done, res) {
+                if (!res.items) {
+                    return done.fail(null, {});
+                }
+
+                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/nf/all-results');
+                }
+                done(res.items);
+            }
+
+            function success(_items) {
+                var url = '/nf/all-results/';
+                var metadata = _items.metadata;
+
+                if (metadata.total < 5) {
+                    seo.addMetatag('robots', 'noindex, follow');
+                    seo.addMetatag('googlebot', 'noindex, follow');
+                }
+                helpers.pagination.paginate(metadata, query, url);
+                helpers.filters.prepare(metadata);
+                analytics.addParam('page_nb', metadata.totalPages);
+                seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+                seo.addMetatag('description');
+                seo.update();
+                callback(null, {
+                    user: user,
+                    items: _items.toJSON(),
+                    metadata: metadata,
+                    //search: query.search,
+                    infiniteScroll: infiniteScroll
+                    //analytics: analytics.generateURL.call(this)
+                });
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(prepare.bind(this))
+                .then(findItems.bind(this))
+                .then(checkSearch.bind(this))
+                .val(success.bind(this));
         }
     },
     favorite: function(params, callback) {
-        var platform = this.app.session.get('platform');
         var user;
         var intent;
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
-        }
-        user = this.app.session.get('user');
-        if (!user) {
-            var url = helpers.common.params('/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
+        function prepare(done) {
+            var platform = this.app.session.get('platform');
+            var url;
 
-            return helpers.common.redirect.call(this, url, null, {
-                status: 302
-            });
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
+            if (!user) {
+                url = helpers.common.params('/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
+
+                done.abort();
+                return helpers.common.redirect.call(this, url, null, {
+                    status: 302
+                });
+            }
+            intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
+            done();
         }
-        intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
 
         function add(done) {
             helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
@@ -475,7 +834,7 @@ module.exports = {
             }, done.errfcb);
         }
 
-        function success(done) {
+        function success() {
             var url = (params.redirect || '/des-iid-' + params.itemId);
 
             url = helpers.common.params(url, 'favorite', (intent || 'add'));
@@ -484,31 +843,38 @@ module.exports = {
             });
         }
 
-        function error(done) {
+        function error() {
             helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
                 status: 302
             });
         }
 
         asynquence().or(error.bind(this))
+            .then(prepare.bind(this))
             .then(add.bind(this))
             .val(success.bind(this));
     },
     delete: function(params, callback) {
-        var platform = this.app.session.get('platform');
         var user;
         var itemId;
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
+        function prepare(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
+            if (!user) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
+            done();
         }
-        user = this.app.session.get('user');
-        if (!user) {
-            return helpers.common.redirect.call(this, '/login', null, {
-                status: 302
-            });
-        }
-        itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
 
         function remove(done) {
             helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
@@ -518,19 +884,20 @@ module.exports = {
             }, done.errfcb);
         }
 
-        function success(done) {
+        function success() {
             helpers.common.redirect.call(this, '/myolx/myadslisting?deleted=true', null, {
                 status: 302
             });
         }
 
-        function error(done) {
+        function error() {
             helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
                 status: 302
             });
         }
 
         asynquence().or(error.bind(this))
+            .then(prepare.bind(this))
             .then(remove.bind(this))
             .val(success.bind(this));
     }

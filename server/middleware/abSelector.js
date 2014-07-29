@@ -8,6 +8,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var uuid = require('node-uuid');
         var asynquence = require('asynquence');
         var _ = require('underscore');
+        var utils = require('../../shared/utils');
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path) || _.contains(excludedUrls.data, req.path) || !config.enabled || !config.experiments || !Object.keys(config.experiments)) {
@@ -15,7 +16,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var clientId = req.rendrApp.session.get('clientId') || uuid.v4();
-            var session = new sixpack.Session(clientId, config.url, req.ip, req.get('user-agent'));
+            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
+            var session = new sixpack.Session(clientId, config.url, req.ip, userAgent);
             var gate = [];
             var sixpackData = {};
 

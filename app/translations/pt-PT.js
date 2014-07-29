@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Alterar cidade',
     'countryoptions.EnterCity': 'Introduza uma Cidade',
+    'countryoptions.Region': 'Localiza\xE7\xE3o',
     'countryoptions.SelectACity': 'Selecione uma cidade',
     'defaultfooter.Back': 'Voltar',
     'defaultfooter.FreeSite': '100% An\xFAncios gr\xE1tis',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Pesquisar as categorias do <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Por favor seleccione uma cidade para publicar um an\xFAncio',
     'listingpageitemslisting.AllResultsNew': 'Todos os resultados',
+    'listingpageitemslisting.Posted': 'Publicado',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultados para <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Lamentamos, mas n\xE3o temos resultados para a sua pesquisa.',
     'listingpageitemslisting.ZeroResultsPage': 'Pedimos desculpa, mas n\xE3o encontramos <<RESULTS>> na <<CATEGORY>> da <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'An\xFAncio recusado',
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
+    'misc.SeeMoreAds': 'See more ads',
     'misc.Sell_Post_Mobile_India': 'Sell',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',

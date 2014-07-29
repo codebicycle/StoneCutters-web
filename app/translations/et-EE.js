@@ -3,6 +3,7 @@
 module.exports = {
     'countryoptions.ChangeCity': 'Muuda linn',
     'countryoptions.EnterCity': 'Sisestage linn',
+    'countryoptions.Region': 'Asukoht',
     'countryoptions.SelectACity': 'Valige linn',
     'defaultfooter.Back': 'Tagasi',
     'defaultfooter.FreeSite': '100% tasuta kuulutused',
@@ -55,6 +56,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Lehitsege <<BRAND>>i kategooriaid',
     'countrystatecityv2.MessageFromPost': 'Kuulutuse postitamiseks sisestage palun linn',
     'listingpageitemslisting.AllResultsNew': 'K\xF5ik tulemused',
+    'listingpageitemslisting.Posted': 'Postitatud',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulemust m\xE4rks\xF5nale <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vabandame, kuid meil ei ole Teie otsingule tulemusi',
     'listingpageitemslisting.ZeroResultsPage': 'Vabandame, me ei leidnud tulemusi <<CATEGORY>>  <<REGION>>.',
@@ -154,6 +156,7 @@ module.exports = {
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
     'misc.RejectedAd_Caps': 'Tagasi l\xFCkatud kuulutus',
     'misc.SeeAdIn2Hrs_Mob': 'J\xE4rgmise 2 tunni jooksul ilmub see OLXis n\xE4htavale',
+    'misc.SeeMoreAds': 'Rohkem kuulutusi',
     'misc.Sell_Post_Mobile_India': 'Postita',
     'misc.SpecificFields_title': 'Kategooriatele vastavad v\xE4ljad (valikulised)',
     'misc.YouAreIn_Mob': 'Olete asukohas <<LOCATION>>',

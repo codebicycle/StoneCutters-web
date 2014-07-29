@@ -1,16 +1,8 @@
 'use strict';
 
 var _ = require('underscore');
-var querystring = require('querystring')
+var querystring = require('querystring');
 var isServer = (typeof window === 'undefined');
-var utils = {
-    isServer: isServer,
-    link: link,
-    params: params,
-    removeParams: removeParams,
-    get: get,
-    qs: querystring
-};
 var linkParams = {
     location: function (href, query) {
         var siteLocation = this.session.get('siteLocation');
@@ -23,7 +15,7 @@ var linkParams = {
     language: function (href, query) {
         var selectedLanguage;
         var languages;
-        
+
         if (!query.language) {
             selectedLanguage = this.session.get('selectedLanguage');
 
@@ -44,12 +36,20 @@ var linkParams = {
         return href;
     },
     sid: function (href, query) {
-        if (this.session.get('platform') === 'wap') {
-            href = params(href, 'sid', this.session.get('sid'));
+        var sid = this.session.get('sid');
+        var platform = this.session.get('platform');
+        var originalPlatform = this.session.get('originalPlatform');
+
+        if ((platform === 'wap' || originalPlatform === 'wap') && sid) {
+            href = params(href, 'sid', sid);
         }
         return href;
     }
-}
+};
+var defaults = {
+    userAgent: 'Mozilla/5.0 (compatible; OlxArwen/1.0; +http://www.olx.com)',
+    platform: 'wap'
+};
 
 function link(href, app, query) {
     query = query || {};
@@ -62,6 +62,18 @@ function link(href, app, query) {
     return href;
 }
 
+function fullizeUrl(href, app) {
+    var protocol;
+    var host;
+
+    if (href.indexOf('http://')) {
+        protocol = app.session.get('protocol');
+        host = app.session.get('host');
+        href = [protocol, '://', host, (href.indexOf('/') ? '/' : ''), href].join('');
+    }
+    return href;
+}
+
 function params(url, keys, value) {
     var parts = url.split('?');
     var parameters = {};
@@ -69,7 +81,7 @@ function params(url, keys, value) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = utils.qs.parse(parts.join('?'));
+        parameters = querystring.parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.extend(parameters, keys);
@@ -82,7 +94,7 @@ function params(url, keys, value) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(utils.qs.stringify(parameters));
+        out.push(querystring.stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');
@@ -97,7 +109,7 @@ function removeParams(url, keys) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = utils.qs.parse(parts.join('?'));
+        parameters = querystring.parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.filter(parameters, function filter(key) {
@@ -109,8 +121,19 @@ function removeParams(url, keys) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(utils.qs.stringify(parameters));
+        out.push(querystring.stringify(parameters));
     }
+    if (url.slice(url.length - 1) === '#') {
+        out.push('#');
+    }
+    return out.join('');
+}
+
+function cleanParams(url) {
+    var parts = url.split('?');
+    var out = [];
+
+    out.push(parts.shift());
     if (url.slice(url.length - 1) === '#') {
         out.push('#');
     }
@@ -151,7 +174,16 @@ function get(obj, keys, defaultValue) {
     if (typeof value === 'undefined' || value === null) {
         return defaultValue;
     }
-    return _.clone(value);
+    return _.isFunction(value) ? value : _.clone(value);
 }
 
-module.exports = utils;
+module.exports = {
+    isServer: isServer,
+    link: link,
+    fullizeUrl: fullizeUrl,
+    params: params,
+    removeParams: removeParams,
+    cleanParams: cleanParams,
+    get: get,
+    defaults: defaults
+};

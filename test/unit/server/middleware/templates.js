@@ -86,17 +86,6 @@ describe('server', function test() {
                     }
                 })(Object.keys(userAgents));
             });
-            it('should add a platform attribute to the session', function test(done) {
-                var before = response.body.before;
-                var after = response.body.after;
-
-                (function existance(before, after) {
-                    before.should.not.have.property('platform');
-                    after.should.have.property('platform');
-                })(before.session, after.session);
-
-                done();
-            });
             it('should add a template attribute to the session', function test(done) {
                 var before = response.body.before;
                 var after = response.body.after;
@@ -164,10 +153,10 @@ describe('server', function test() {
                         var locations = localization[userAgents[userAgent].platform];
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
-                                it('should be "' + location + '/' + userAgents[userAgent].platform + '" for host ' + location, function test(done) {
+                                it('should be "' + location + '/' + userAgents[userAgent].platform + '" for host ' + location.replace('www.', userAgents[userAgent].platform + '.m.'), function test(done) {
                                     request(server.expressApp)
                                         .get('/')
-                                        .set('host', location)
+                                        .set('host', location.replace('www.', userAgents[userAgent].platform + '.m.'))
                                         .set('user-agent', userAgent)
                                         .end(end);
 
@@ -214,10 +203,10 @@ describe('server', function test() {
                         var locations = localization[userAgents[userAgent].platform];
                         if (locations.length) {
                             locations.forEach(function iteration(location) {
-                                it('should be "' + location + '" for host ' + location, function test(done) {
+                                it('should be "' + location + '" for host ' + location.replace('www.', userAgents[userAgent].platform + '.m.'), function test(done) {
                                     request(server.expressApp)
                                         .get('/')
-                                        .set('host', location)
+                                        .set('host', location.replace('www.', userAgents[userAgent].platform + '.m.'))
                                         .set('user-agent', userAgent)
                                         .end(end);
 

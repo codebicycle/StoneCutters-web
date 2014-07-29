@@ -41,9 +41,6 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         options = {};
     }
     api = this.apiDefaults(api, req);
-    if (location) {
-        graphite.send([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-')], 1, '+');
-    }
     restler.request(api.url, _.extend(api, options))
         .on('success', success)
         .on('fail', fail)
@@ -63,11 +60,20 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
             body.itemProperties = {};
         }
         logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
+        if (location) {
+            graphite.send([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode], 1, '+');
+        }
         callback(null, res, body);
     }
 
     function fail(err, res) {
+        res = res || {
+            statusCode: 599
+        };
         elapsed = getElapsed(start, elapsed);
+        if (!err && res.statusCode == 503) {
+            err = 'Service Unavailable';
+        }
         try {
             err = JSON.parse(err);
         }
@@ -78,6 +84,10 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
             });
         }
         logger.error('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
+        if (location) {
+            graphite.send([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode], 1, '+');
+        }
+        graphite.send(['smaug', 'error', res.statusCode], 1, '+');
         callback(err, res);
     }
 };

@@ -1,0 +1,110 @@
+<section id="itemListing">
+	<nav class="breadcrumb">
+		<a href="">Todas as Categorias</a> <span class="arrow"></span> <strong>{{ category.trName }}</strong> em Mato Grosso <span class="count">(35)</span>
+	</nav>
+
+	<nav class="categories">
+		<div class="categories">
+			<h2>Selecione a categoria</h2>
+			<a href="" >Todas as categorias</a>
+			<h3>{{ category.trName }} <span>35</span></h3>
+			<div class="subCat">
+				<a href="" ><span class="icons icon-cat-831"></span> Celulares e Smartphones <span class="count">10</span></a>
+				<a href="" ><span class="icons icon-cat-857"></span> Tablets - iPads <span class="count">10</span></a>
+			</div>
+		</div>
+		<div class="filters">
+			<h3>Preço</h3>
+			<div class="price">
+				<input type="text" class="values defaultContent numeric" placeholder="Mín." size="7" value="" id="min-Navigator_price" name="min" >
+				<input type="text" class="values defaultContent numeric" placeholder="Máx." size="7" value="" id="max-Navigator_price" name="max" >
+				<button type="button" class="icons"></button>
+			</div>
+		</div>
+	</nav>
+	<nav class="location">
+		<ul>
+			<li><a href="http://www.olx.com.br/celulares-tablets-cat-830" rel="nofollow">Brasil</a></li>
+			<li>Mato Grosso<a href="http://www.olx.com.br/celulares-tablets-cat-830"></a></li>
+		</ul>
+		<div class="list">
+			<ul>
+				<li><a href="#">Acre <span>631</span></a></li>
+				<li><a href="#">Alagoas <span>436</span></a></li>
+				<li><a href="#">Amapá <span>4.585</span></a></li>
+				<li><a href="#">Amazonas <span>748</span></a></li>
+				<li><a href="#">Bahia <span>453</span></a></li>
+				<li><a href="#">Ceará <span>1.567</span></a></li>
+				<li><a href="#">Distrito Federal <span>2.369</span></a></li>
+				<li><a href="#">Espírito Santo <span>789</span></a></li>
+				<li><a href="#">Goiás <span>89</span></a></li>
+				<li><a href="#">Maranhão <span>12.369</span></a></li>
+				<li><a href="#">Mato Grosso <span>555</span></a></li>
+				<li><a href="#">Mato Grosso do Sul <span>666</span></a></li>
+				<li><a href="#">Minas Gerais <span>487</span></a></li>
+				<li><a href="#">Pará <span>5.369</span></a></li>
+				<li><a href="#">Paraíba <span>789</span></a></li>
+				<li><a href="#">Paraná <span>413</span></a></li>
+				<li><a href="#">Pernambuco <span>85</span></a></li>
+				<li><a href="#">Piauí <span>423</span></a></li>
+				<li><a href="#">Rio de Janeiro <span>4.323</span></a></li>
+				<li><a href="#">Rio Grande do Norte <span>785</span></a></li>
+				<li><a href="#">Rio Grande do Sul <span>924</span></a></li>
+				<li><a href="#">Rondônia <span>4.522</span></a></li>
+				<li><a href="#">Roraima <span>6.589</span></a></li>
+				<li><a href="#">Santa Catarina <span>453</span></a></li>
+				<li><a href="#">São Paulo <span>456</span></a></li>
+				<li><a href="#">Sergipe <span>123</span></a></li>
+				<li><a href="#">Tocantins <span>777</span></a></li>
+				<div class="clear"></div>
+			</ul>
+		</div>
+	</nav>
+	<section class="list">
+		<nav>
+			<div class="tabs">
+				<a href="" class="galery icons">Fotos Maiores</a>
+				<a href="" class="list icons active">Exibição em Lista</a>
+			</div>
+			<div class="sort">
+				<label>Ordenado por:</label>
+				<select name="listing-order-combo">
+					<option selected="selected" value="date*to*showdesc">Mais recentes</option>
+					<option value="price">Menor preço</option>
+					<option value="pricedesc">Maior preço</option>
+				</select>
+			</div>
+		</nav>
+		<ul class="listing">
+			{% for item in items %}
+				<li>
+					<a href="{{ item | slugToUrl | link }}">
+						<div  class="photo">
+							<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}"></div>
+						</div>
+						<div class="title">
+							<h3>{{ item.title }}</h3>
+							<span>{{ item.displayLocation }}</span>
+						</div>
+						<div class="price">
+							{{ item.price.displayPrice }}
+						</div>
+						<div class="date">
+							{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (',<br> ' + item.date.since.hour) if item.date.since.hour }}
+						</div>
+					</a>
+					<div class="clear"></div>
+				</li>
+			{% endfor %}
+		</ul>
+		{% if metadata.next or metadata.previous %}
+            <div id="itemPagination">
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
+            </div>
+        {% endif %}
+	</section>
+	
+	{% view 'partials/postbanner' %}
+	
+	<div class="clear"></div>
+</section>

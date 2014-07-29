@@ -2,9 +2,14 @@ var config = require('./config');
 var utils = require('../shared/utils');
 
 var env = process.env.NODE_ENV || 'development';
+var path = require('path');
+var errorPath = path.resolve('server/templates/error.html');
 
 exports = module.exports = function errorHandler() {
     function isRedirection(app) {
+        if (!app || !app.session) {
+            return true;
+        }
         if (app.session.get('errorDirection')) {
             app.session.clear('errorDirection');
             return true;
@@ -25,12 +30,10 @@ exports = module.exports = function errorHandler() {
             res.statusCode = 500;
         }
         if (env === 'development') {
-            console.error(err.stack);
+            console.error(err.stack || err);
         }
         if (isRedirection(req.rendrApp)) {
-            res.setHeader('Content-Type', 'text/plain');
-            res.end(config.get(['error', 'detail'], true) ? err.stack : err.toString());
-            return;
+            return res.status(500).sendfile(errorPath);
         }
         if (~accept.indexOf('html')) {
             if (config.get(['error', 'detail'], true)) {

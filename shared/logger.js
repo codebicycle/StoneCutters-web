@@ -1,10 +1,12 @@
 'use strict';
 
+var debugModule = './debug/node';
+var Debug = typeof window === 'undefined' ? require(debugModule) : require('./debug/browser');
 var debuggers = {};
 
 function getDebug(key) {
     if (!debuggers[key]) {
-        debuggers[key] = require('debug')(key);
+        debuggers[key] = Debug(key);
     }
     return debuggers[key];
 }
