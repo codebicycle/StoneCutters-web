@@ -1,4 +1,4 @@
-<footer id="languages">
+<footer id="languages"{{ ' class="disabled"' if postingFlow }}>
 	<ul class="footer-links">
 		{% for language in languages.models %}
 			{% if language.locale == selectedLanguage %}

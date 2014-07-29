@@ -1,0 +1,11 @@
+{% for category in categories %}
+    <ul id="category-{{ category.id }}" class="list">
+        {% for subcategory in category.children %}
+            <li class="subcategory">
+                <h2>
+                    <a>{{subcategory.trName}}</a>
+                </h2>
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}

@@ -1,18 +1,17 @@
 'use strict';
 
 var _ = require('underscore');
-var sixpackName = 'sixpack-client';
-var sixpack = require(sixpackName);
 var helpers = require('../helpers');
 var seo = require('../seo');
 var analytics = require('../analytics');
 var config = require('../config');
+var asynquence = require('asynquence');
 
 module.exports = {
-    categories: function(params, callback) {
+    categoriesOrFlow: function(params, callback) {
         helpers.controllers.control.call(this, params, controller);
 
-        function controller() {
+        function controller(form) {
             var siteLocation = this.app.session.get('siteLocation');
 
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -20,41 +19,58 @@ module.exports = {
                     status: 302
                 });
             }
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                var sixpackConfig = config.get('sixpack', {});
 
+            var fetchCategories = function(done) {
+                console.log({
+                    location: siteLocation,
+                    languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                });
+                this.app.fetch({
+                    categories: {
+                        collection: 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }.bind(this);
+
+            var control = function(result) {
                 analytics.reset();
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
-                if (!sixpackConfig.enabled ||
-                    !sixpackConfig['post-button'] ||
-                    !sixpackConfig['post-button'].enabled ||
-                    !params.sixpack || params.sixpack !== 'post-button') {
-                    return callback(null, {
-                        analytics: analytics.generateURL.call(this),
-                        categories: result.categories.toJSON()
-                    });
+                if (this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], true)) {
+                    postingFlowController.call(this, result.categories);
                 }
-                var session = new sixpack.Session(this.app.session.get('clientId'), sixpackConfig.url);
+                else {
+                    postingCategoriesController.call(this, result.categories);
+                }
+            }.bind(this);
 
-                session.convert('post-button', function(err, res) {
-                    callback(null, {
-                        analytics: analytics.generateURL.call(this),
-                        categories: result.categories.toJSON()
-                    });
+            var fail = function(err) {
+                helpers.common.error.call(this, err, {}, callback);
+            }.bind(this);
+
+            asynquence().or(fail)
+                .then(fetchCategories)
+                .val(control);
+
+            function postingCategoriesController(categories) {
+                callback(null, {
+                    analytics: analytics.generateURL.call(this),
+                    categories: categories.toJSON()
                 });
-            }.bind(this));
+            }
+
+            function postingFlowController(categories) {
+                callback(null, 'post/flow/index', {
+                    categories: categories
+                });
+            }
         }
     },
     subcategories: function(params, callback) {

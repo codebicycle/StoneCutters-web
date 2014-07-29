@@ -4,6 +4,9 @@ header#topBar {
 	position: relative;
 	background: #4275BA;
 }
+header#topBar.disabled {
+	display: none;
+}
 header#topBar > a{
 	width: 94px;
 	height: 48px;
@@ -33,7 +36,7 @@ header#topBar > ul > li > span, header#topBar > ul > li > a{
 	padding: 0.45rem 0.75rem;
 	font-size: 1rem;
 	font-weight: bold;
-} 
+}
 header#topBar > ul > li.logOut a, header#topBar > ul > li.logIn span, header#topBar > ul > li.logInMsg span {
 	width: 10px;
 }
@@ -41,12 +44,12 @@ header#topBar > ul > li.logOut a {
 	background-image: url(imageUrl/images/html5/userLogOut.png);
 }
 header#topBar > ul > li.logIn span {
-	background-image: url(imageUrl/images/html5/userLogIn.png); 
+	background-image: url(imageUrl/images/html5/userLogIn.png);
 }
 header#topBar > ul > li.logInMsg span {
 	background-image: url(imageUrl/images/html5/userLogInMsg.png);
 }
-header#topBar > ul > li.postBtn.disabled{
+header#topBar .disabled {
 	display: none;
 }
 header#topBar > ul > li.postBtn a{

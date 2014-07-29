@@ -1,0 +1,9 @@
+<ul class="{{ icons[icons.length - 1] }}-icons" data-title="Elige una subcategoria">
+    {% for category in categories %}
+        <li class="category" data-id="{{ category.id }}">
+            <h2>
+                <a><span class="icon cat-{{ category.id }}"></span>{{category.trName}}</a>
+            </h2>
+        </li>
+    {% endfor %}
+</ul>
