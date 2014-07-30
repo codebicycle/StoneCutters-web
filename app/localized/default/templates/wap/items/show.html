@@ -22,183 +22,175 @@
                 </td>
             </tr>
         </table>
-        {% if not item.status.deprecated %}
-            {% if item.images.length > 0 %}
-                <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                    <tr>
-                        <td align="center" valign="top" style="border-top: solid thin #808080;">
-                            {% set imgIndex = pos if item.images.length > 1 else 0 %}
-                            <img src="{{ item.images[imgIndex].url }}" alt="{{ item.title }}" align="top" width="100%" style="display: block;" />
-                        </td>
-                    </tr>
-                    {% if item.images.length > 1 %}
-                        <tr>
-                            <td align="center">
-                                <small style="display: block;">
-                                    {% if pos > 0 %}
-                                        {% set posImage = "" %}
-                                        {% if pos - 1 > 0 %}
-                                            {% set posImage = "?pos=" + (pos - 1) %}
-                                        {% endif %}
-                                        <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&lt;</a> |
-                                    {% else %}
-                                        <font color="#CCCCCC">&lt;</font> |
-                                    {% endif %}
-                                        {{ pos + 1 }} of {{ item.images.length }}
-                                    {% if pos < item.images.length - 1 %}
-                                        {% set posImage = '?pos=' + (pos + 1) %}
-                                         | <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>
-                                    {% else %}
-                                         | <font color="#CCCCCC">&gt;</font>
-                                    {% endif %}
-                                </small>
-                            </td>
-                        </tr>
-                    {% endif %}
-                </table>
-            {% endif %}
-            {% if item.status.contactable and item.email %}
-                <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                    <tr>
-                        <td style="border-top: solid thin #808080;">
-                            <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
-                                <tr>
-                                    <td align="center" style="border: solid thin #F30;">
-                                        <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            {% endif %}
-            <table width="100%" cellspacing="0" cellpadding="4" border="0" class="itemDescription">
-                <tr>
-                    <td style="border-top: solid thin #808080;">
-                        <small style="display: block;"><strong>{{ dictionary["itemdescription.Description"] }}:</strong></small>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <small style="display: block;">{{ item.descriptionReplace }}</small>
-                    </td>
-                </tr>
-            </table>
+        
+        {% if item.images.length > 0 %}
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
-                    <td>
-                        <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                            {% if item.price %}
-                                <tr>
-                                    <th align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Price"] }}:</small>
-                                    </th>
-                                    <td align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block;">{{ item.price.displayPrice }}</small>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                            {% if item.optionals %}
-                                {% for optional in item.optionals %}
-                                    {% if optional.label and optional.value %}
-                                        <tr>
-                                            <th align="left" style="border-top: solid 1px #CCC;">
-                                                <small style="display: block; text-transform: capitalize;">{{ optional.label }}:</small>
-                                            </th>
-                                            <td align="left" style="border-top: solid 1px #CCC;">
-                                                <small style="display: block;">{{ optional.value }}</small>
-                                            </td>
-                                        </tr>
+                    <td align="center" valign="top" style="border-top: solid thin #808080;">
+                        {% set imgIndex = pos if item.images.length > 1 else 0 %}
+                        <img src="{{ item.images[imgIndex].url }}" alt="{{ item.title }}" align="top" width="100%" style="display: block;" />
+                    </td>
+                </tr>
+                {% if item.images.length > 1 %}
+                    <tr>
+                        <td align="center">
+                            <small style="display: block;">
+                                {% if pos > 0 %}
+                                    {% set posImage = "" %}
+                                    {% if pos - 1 > 0 %}
+                                        {% set posImage = "?pos=" + (pos - 1) %}
                                     {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            {% set city = item.location.cityName %}
-                            {% set state = item.location.stateName %}
-                            {% set country = item.location.name %}
-                            {% if city %}
-                                <tr>
-                                    <th align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.City"] }}:</small>
-                                    </th>
-                                    <td align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block;">{{ city }}</small>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                            {% if state %}
-                                <tr>
-                                    <th align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.State"] }}:</small>
-                                    </th>
-                                    <td align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block;">{{ state }}</small>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                            {% if country %}
-                                <tr>
-                                    <th align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block; text-transform: capitalize;">{{ dictionary["postingstep1_selector.SelectCountry"] }}:</small>
-                                    </th>
-                                    <td align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block;">{{ country }}</small>
-                                    </td>
-                                </tr>
-                            {% endif %}
+                                    <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&lt;</a> |
+                                {% else %}
+                                    <font color="#CCCCCC">&lt;</font> |
+                                {% endif %}
+                                    {{ pos + 1 }} of {{ item.images.length }}
+                                {% if pos < item.images.length - 1 %}
+                                    {% set posImage = '?pos=' + (pos + 1) %}
+                                     | <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>
+                                {% else %}
+                                     | <font color="#CCCCCC">&gt;</font>
+                                {% endif %}
+                            </small>
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        {% endif %}
+        {% if item.status.contactable and item.email %}
+            <table width="100%" cellspacing="0" cellpadding="4" border="0">
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
                             <tr>
-                                <th align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.User"] }}:</small>
-                                </th>
-                                <td align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block;">{{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</small>
-                                </td>
-                            </tr>
-                            {% if item.phone %}
-                                <tr>
-                                    <th align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Phone"] }}:</small>
-                                    </th>
-                                    <td align="left" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block;">{{ item.phone }}</small>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                            <tr>
-                                <th align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.DatePosted"] }}:</small>
-                                </th>
-                                <td align="left" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block;">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</small>
+                                <td align="center" style="border: solid thin #F30;">
+                                    <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
             </table>
-            {% if item.status.contactable and item.email %}
-                <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                    <tr>
-                        <td style="border-top: solid thin #808080;">
-                            <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
-                                <tr>
-                                    <td align="center" style="border: solid thin #F30;">
-                                        <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            {% endif %}
-        {% else %}
+        {% endif %}
+        <table width="100%" cellspacing="0" cellpadding="4" border="0" class="itemDescription">
+            <tr>
+                <td style="border-top: solid thin #808080;">
+                    <small style="display: block;"><strong>{{ dictionary["itemdescription.Description"] }}:</strong></small>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <small style="display: block;">{{ item.descriptionReplace }}</small>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="4" border="0">
+            <tr>
+                <td>
+                    <table width="100%" cellspacing="0" cellpadding="4" border="0">
+                        {% if item.price %}
+                            <tr>
+                                <th align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Price"] }}:</small>
+                                </th>
+                                <td align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block;">{{ item.price.displayPrice }}</small>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if item.optionals %}
+                            {% for optional in item.optionals %}
+                                {% if optional.label and optional.value %}
+                                    <tr>
+                                        <th align="left" style="border-top: solid 1px #CCC;">
+                                            <small style="display: block; text-transform: capitalize;">{{ optional.label }}:</small>
+                                        </th>
+                                        <td align="left" style="border-top: solid 1px #CCC;">
+                                            <small style="display: block;">{{ optional.value }}</small>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% set city = item.location.cityName %}
+                        {% set state = item.location.stateName %}
+                        {% set country = item.location.name %}
+                        {% if city %}
+                            <tr>
+                                <th align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.City"] }}:</small>
+                                </th>
+                                <td align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block;">{{ city }}</small>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if state %}
+                            <tr>
+                                <th align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.State"] }}:</small>
+                                </th>
+                                <td align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block;">{{ state }}</small>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if country %}
+                            <tr>
+                                <th align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block; text-transform: capitalize;">{{ dictionary["postingstep1_selector.SelectCountry"] }}:</small>
+                                </th>
+                                <td align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block;">{{ country }}</small>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th align="left" style="border-top: solid 1px #CCC;">
+                                <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.User"] }}:</small>
+                            </th>
+                            <td align="left" style="border-top: solid 1px #CCC;">
+                                <small style="display: block;">{{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</small>
+                            </td>
+                        </tr>
+                        {% if item.phone %}
+                            <tr>
+                                <th align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Phone"] }}:</small>
+                                </th>
+                                <td align="left" style="border-top: solid 1px #CCC;">
+                                    <small style="display: block;">{{ item.phone }}</small>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th align="left" style="border-top: solid 1px #CCC;">
+                                <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.DatePosted"] }}:</small>
+                            </th>
+                            <td align="left" style="border-top: solid 1px #CCC;">
+                                <small style="display: block;">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</small>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        {% if item.status.contactable and item.email %}
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
                     <td style="border-top: solid thin #808080;">
-                        <small style="display: block;">{{ dictionary["unexistingitem.ListingUnavailable"] }}</small>
+                        <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
+                            <tr>
+                                <td align="center" style="border: solid thin #F30;">
+                                    <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
         {% endif %}
+        
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}

@@ -202,6 +202,7 @@ module.exports = {
             }
 
             function success(_categories, _item, _relatedItems) {
+               
                 var item = _item.toJSON();
                 var subcategory = _categories.search(_item.get('category').id);
                 var category;
@@ -251,7 +252,7 @@ module.exports = {
                     pos: Number(params.pos) || 0,
                     sk: securityKey,
                     relatedItems: _relatedItems,
-                    relatedAdsLink: ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join(''),
+                    relatedAdsLink: (subcategory) ? ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join('') : undefined,
                     subcategory: (subcategory) ? subcategory.toJSON() : undefined,
                     category: (category) ? category.toJSON() : undefined,
                     favorite: favorite,
