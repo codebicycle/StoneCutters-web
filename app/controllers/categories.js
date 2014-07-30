@@ -113,7 +113,7 @@ function handleItems(params, promise) {
         done({
             type: 'items',
             category: category.toJSON(),
-            subcategory: (subcategory ? subcategory.toJSON() : undefined),
+            subcategory: (subcategory || category).toJSON(),
             currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
             metadata: metadata,
