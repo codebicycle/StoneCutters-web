@@ -1,9 +1,6 @@
 'use strict';
 
 module.exports = {
-    'pages#esi': {
-        url: 'akamai/esi'
-    },
     'redirections#category': {
         url: 'category/:categoryId/:title'
     },
