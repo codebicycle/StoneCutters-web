@@ -84,7 +84,8 @@ function handleItems(params, promise) {
         var currentPage;
         
         helpers.pagination.paginate(metadata, query, url);
-        
+        helpers.filters.prepare(metadata);
+
         if (subcategory) {
             postingLink.subcategory = subcategory.get('id');
         }
@@ -112,7 +113,8 @@ function handleItems(params, promise) {
         done({
             type: 'items',
             category: category.toJSON(),
-            subcategory: (subcategory || category).toJSON(),
+            subcategory: (subcategory ? subcategory.toJSON() : undefined),
+            currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
             metadata: metadata,
             items: _items.toJSON(),
