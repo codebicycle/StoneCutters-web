@@ -6,20 +6,7 @@
 	<nav class="categories">
 		<div class="categories">
 			<h2>Selecione a categoria</h2>
-			<a href="" >Todas as categorias</a>
-			<h3>{{ category.trName }} <span>35</span></h3>
-			<div class="subCat">
-				<a href="" ><span class="icons icon-cat-831"></span> Celulares e Smartphones <span class="count">10</span></a>
-				<a href="" ><span class="icons icon-cat-857"></span> Tablets - iPads <span class="count">10</span></a>
-			</div>
-		</div>
-		<div class="filters">
-			<h3>Preço</h3>
-			<div class="price">
-				<input type="text" class="values defaultContent numeric" placeholder="Mín." size="7" value="" id="min-Navigator_price" name="min" >
-				<input type="text" class="values defaultContent numeric" placeholder="Máx." size="7" value="" id="max-Navigator_price" name="max" >
-				<button type="button" class="icons"></button>
-			</div>
+			{{ categories | log }}
 		</div>
 	</nav>
 	<nav class="location">

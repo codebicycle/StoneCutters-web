@@ -719,6 +719,7 @@ module.exports = {
             var page = params ? params.page : undefined;
             var infiniteScroll = config.get('infiniteScroll', false);
             var platform = this.app.session.get('platform');
+            var siteLocation = this.app.session.get('siteLocation');
             var user = this.app.session.get('user');
             var query;
 
@@ -743,6 +744,20 @@ module.exports = {
                 done();
             }
 
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection : 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
             function findItems(done) {
                 this.app.fetch({
                     items: {
@@ -754,19 +769,19 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function checkSearch(done, res) {
-                if (!res.items) {
+            function checkSearch(done, resCategories, resItems) {
+                if (!resCategories.categories || !resItems.items) {
                     return done.fail(null, {});
                 }
-
-                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+                
+                if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !resItems.items.length)) {
                     done.abort();
                     return helpers.common.redirect.call(this, '/nf/all-results');
                 }
-                done(res.items);
+                done(resCategories.categories, resItems.items);
             }
 
-            function success(_items) {
+            function success(_categories, _items) {
                 var url = '/nf/all-results/';
                 var metadata = _items.metadata;
 
@@ -782,6 +797,7 @@ module.exports = {
                 seo.update();
                 callback(null, {
                     user: user,
+                    categories: _categories.toJSON(),
                     items: _items.toJSON(),
                     metadata: metadata,
                     //search: query.search,
@@ -791,12 +807,13 @@ module.exports = {
             }
 
             function error(err, res) {
+                console.log(err ? err.stack : err);
                 return helpers.common.error.call(this, err, res, callback);
             }
 
             asynquence().or(error.bind(this))
                 .then(prepare.bind(this))
-                .then(findItems.bind(this))
+                .gate(findCategories.bind(this), findItems.bind(this))
                 .then(checkSearch.bind(this))
                 .val(success.bind(this));
         }

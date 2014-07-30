@@ -9,8 +9,12 @@
 			<a href="" >Todas as categorias</a>
 			<h3>{{ category.trName }} <span>35</span></h3>
 			<div class="subCat">
-				<a href="" ><span class="icons icon-cat-831"></span> Celulares e Smartphones <span class="count">10</span></a>
-				<a href="" ><span class="icons icon-cat-857"></span> Tablets - iPads <span class="count">10</span></a>
+			{% if category.id == subcategory.id %}
+				{% for subcategory in category.children.toJSON() %}
+					<a href="{{ subcategory | slugToUrl | link }}" ><span class="icons icon-cat-{{ subcategory.id }}"></span> {{subcategory.trName}} <span class="count">{{ ('(' + subcategory.counter + ')') if subcategory.counter > 0 }}</span></a>	                
+		        {% endfor %}
+			{% endif %}
+			
 			</div>
 		</div>
 		<div class="filters">
