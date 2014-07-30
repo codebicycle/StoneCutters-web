@@ -95,7 +95,8 @@ var CookiesSession = function(req, res, callback) {
     this.put = function(key, value, options) {
         if (res.cookie) {
             res.cookie(key, value, _.defaults({}, (options || {}), {
-                path: '/'
+                path: '/',
+                maxAge: 1728000000
             }));
         }
     };
@@ -172,7 +173,8 @@ var ClientSession = function(app, callback) {
     function put(key, value, options) {
         var cookie = key + '=' + value;
         var properties = _.defaults(options || {}, {
-            path: '/'
+            path: '/',
+            maxAge: 1728000000
         });
 
         for (var option in properties) {

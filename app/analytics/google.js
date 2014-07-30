@@ -1,7 +1,11 @@
 'use strict';
 
 var _ = require('underscore');
+var config = require('../config');
+var configAnalytics = require('./config');
 var helpers = require('../helpers');
+var utils = require('../../shared/utils');
+var googleId;
 
 var analyticsParams = {
     category: {
@@ -81,11 +85,17 @@ function generatePage(page, options) {
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
+function saveParams(params, options) {
+    this.app.session.persist(params, _.defaults({}, options, {
+        maxAge: 1728000000
+    }));
+}
+
 function initParams() {
     var today = new Date().getTime();
     var gaNs = this.app.session.get('gaNs') || 0;
 
-    this.app.session.persist({
+    saveParams.call(this, {
         gaIs: today,
         gaPs: today,
         gaCs: today,
@@ -98,7 +108,7 @@ function initParams() {
 function persistParams() {
     var gaCs = new Date().getTime();
 
-    this.app.session.persist({
+    saveParams.call(this, {
         gaCs: gaCs,
         gaPs: this.app.session.get('gaCs') || gaCs,
         gaIs: this.app.session.get('gaIs') || gaCs,
@@ -126,13 +136,34 @@ function checkInitParams() {
     return true;
 }
 
+function getId() {
+    if (googleId) {
+        return googleId;
+    }
+    var env = config.get(['environment', 'type'], 'development');
+
+    googleId = 'MO-50756825-1';
+    if (env !== 'development') {
+        googleId = utils.get(configAnalytics, ['google', 'id'], googleId);
+
+        if (env !== 'production') {
+            googleId = googleId.replace(/(.+)-2/, '$1-4');
+        }
+    }
+    return googleId;
+}
+
 function generate(params, page, options) {
-    params.page = generatePage.call(this, page, options);
+    var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
+
+    params.id = getId.call(this);
+    params.page = generatePage.call(this, googlePage, options);
     if (checkInitParams.call(this)) {
         persistParams.call(this);
     }
 }
 
 module.exports = {
+    getId: getId,
     generate: generate
 };
