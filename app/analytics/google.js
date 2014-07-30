@@ -1,7 +1,11 @@
 'use strict';
 
 var _ = require('underscore');
+var config = require('../config');
+var configAnalytics = require('./config');
 var helpers = require('../helpers');
+var utils = require('../../shared/utils');
+var googleId;
 
 var analyticsParams = {
     category: {
@@ -132,13 +136,34 @@ function checkInitParams() {
     return true;
 }
 
+function getId() {
+    if (googleId) {
+        return googleId;
+    }
+    var env = config.get(['environment', 'type'], 'development');
+
+    googleId = 'MO-50756825-1';
+    if (env !== 'development') {
+        googleId = utils.get(configAnalytics, ['google', 'id'], googleId);
+
+        if (env !== 'production') {
+            googleId = googleId.replace(/(.+)-2/, '$1-4');
+        }
+    }
+    return googleId;
+}
+
 function generate(params, page, options) {
-    params.page = generatePage.call(this, page, options);
+    var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
+
+    params.id = getId.call(this);
+    params.page = generatePage.call(this, googlePage, options);
     if (checkInitParams.call(this)) {
         persistParams.call(this);
     }
 }
 
 module.exports = {
+    getId: getId,
     generate: generate
 };

@@ -1,7 +1,10 @@
 'use strict';
 
 var _ = require('underscore');
+var config = require('../config');
+var configAnalytics = require('./config');
 var helpers = require('../helpers');
+var utils = require('../../shared/utils');
 
 module.exports = function analyticsHelper() {
     var actionTypes = {
@@ -122,17 +125,18 @@ module.exports = function analyticsHelper() {
         return params;
     }
 
-    function generateParams(ati, options) {
-        var params = _.clone(ati.names);
+    function generate(params, page, options) {
+        var ati = utils.get(configAnalytics, ['ati', 'params', page], {});
+        var custom = _.clone(ati.names);
 
-        prepareDefaultParams.call(this, params);
+        prepareDefaultParams.call(this, custom);
         if (ati.process) {
-            params = prepareParams(params, options);
+            custom = prepareParams(custom, options);
         }
-        return JSON.stringify(params);
+        params.custom = JSON.stringify(custom);
     }
 
     return {
-        generateParams: generateParams
+        generate: generate
     };
 }();

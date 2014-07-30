@@ -11,6 +11,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     var utils = require('../../shared/utils');
     var graphite = require('../graphite')();
     var Analytic = require('../analytic');
+    var analytics = require('../../app/analytics');
 
     function defaultOptions(req) {
         return {
@@ -56,7 +57,7 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var analytic = new Analytic('google', {
-                id: 'MO-50756825-1',
+                id: analytics.google.getId(),
                 host: req.host
             });
             var ip = googleIp(req);
