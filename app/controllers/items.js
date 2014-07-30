@@ -165,12 +165,6 @@ module.exports = {
                     });
                 }
                 
-                // Get return category
-                if (resItem.item.get('purged')) {
-                    var catId = resItem.item.get('category').id || resItem.item.get('category').parentId;
-                    resItem.item.set('slug', (catId) ? 'des-cat-' + catId : '/' );
-                }
-                
                 done(resCategories.categories, resItem.item);
             }
 
