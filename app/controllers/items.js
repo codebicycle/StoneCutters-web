@@ -69,34 +69,68 @@ module.exports = {
                 }, {
                     readFromCache: false
                 }, function afterFetch(err, res) {
+                    
                     if (!res) {
                         res = {};
                     }
+                    
                     if (err) {
                         if (err.status !== 422) {
                             return done.fail(err, res);
                         }
+
                         res.item = new Item(err.body, {
                             app: this.app
                         });
-                        res.item.set('id', itemId);
-                        res.item.set('slug', '/des-iid-' + itemId);
-                        res.item.set('location', this.app.session.get('location'));
-                        res.item.set('title', 'Item title');
-                        res.item.set('date', {
-                            timestamp: new Date().toISOString()
-                        });
-                        res.item.set('description', 'Item description');
-                        res.item.set('category', {
-                            id: res.item.get('categoryId'),
-                            name: res.item.get('categoryName')
-                        });
-                        res.item.set('status', {
-                            deprecated: true
-                        });
-                        res.item.set('purged', true);
+
+                        if (!res.item.get('id')) {
+                            res.item.set('id', res.item.get('itemId'));
+                            res.item.unset('itemId');
+                        }
+
+                        if (!res.item.get('location')) { // Check
+                            res.item.set('location', this.app.session.get('location'));
+                        }
+
+                        if (!res.item.get('description')) { // Check if needed
+                            res.item.set('description', '');
+                        }
+
+                        if (!res.item.get('slug')) {
+                            res.item.set('slug', '/title-iid-' + res.item.get('id'));
+                        }
+
+                        if (!res.item.get('status')) { // Check if needed
+                            res.item.set('status', {
+                                label: 'deprecated',
+                                deprecated: true
+                            });
+                        }
+
+                        if (!res.item.get('category')) {
+                            res.item.set('category', {
+                                id: res.item.get('categoryId'),
+                                name: res.item.get('categoryName'),
+                                parentId: res.item.get('parentCategoryId')
+                            });
+                            res.item.unset('categoryId');
+                            res.item.unset('categoryName');
+                            res.item.unset('parentCategoryId');
+                            res.item.unset('parentCategoryName');
+                        }
+
+                        if (!res.item.get('title')) {
+                            res.item.set('title', '');
+                        }
+
                         err = null;
+
                     }
+
+                    if (res.item.get('status').deprecated) {
+                        res.item.set('purged', true);
+                    }
+
                     done(res);
                 }.bind(this));
             }
@@ -130,6 +164,13 @@ module.exports = {
                         }
                     });
                 }
+                
+                // Get return category
+                if (resItem.item.get('purged')) {
+                    var catId = resItem.item.get('category').id || resItem.item.get('category').parentId;
+                    resItem.item.set('slug', (catId) ? 'des-cat-' + catId : '/' );
+                }
+                
                 done(resCategories.categories, resItem.item);
             }
 
@@ -170,10 +211,14 @@ module.exports = {
 
                 if (!subcategory) {
                     console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
-                    return error.call(this);
+                    _item.set('purged', true);
+                    item = _item.toJSON();
                 }
-                parentId = subcategory.get('parentId');
-                category = parentId ? _categories.get(parentId) : subcategory;
+                else {
+                    // Check here!!
+                    parentId = subcategory.get('parentId');
+                    category = parentId ? _categories.get(parentId) : subcategory;
+                }
                 
                 if (!item.purged) {
                     analytics.reset();
@@ -196,19 +241,19 @@ module.exports = {
                 seo.update();
                 this.app.session.update({
                     postingLink: {
-                        category: category.get('id'),
-                        subcategory: subcategory.get('id')
+                        category: (category) ? category.get('id') : undefined,
+                        subcategory: (subcategory) ? subcategory.get('id') : undefined
                     }
                 });
-                callback(null, {
+                callback(null, (item.purged) ? 'items/unavailable' : 'items/show', {
                     item: item,
                     user: user,
                     pos: Number(params.pos) || 0,
                     sk: securityKey,
                     relatedItems: _relatedItems,
                     relatedAdsLink: ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join(''),
-                    subcategory: subcategory.toJSON(),
-                    category: category.toJSON(),
+                    subcategory: (subcategory) ? subcategory.toJSON() : undefined,
+                    category: (category) ? category.toJSON() : undefined,
                     favorite: favorite,
                     analytics: analyticUrl
                 });
