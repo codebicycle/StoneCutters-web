@@ -63,13 +63,12 @@ function link(href, app, query) {
 }
 
 function fullizeUrl(href, app) {
-    var protocol;
+    var protocol = app.session.get('protocol') + '://';
     var host;
 
-    if (href.indexOf('http://')) {
-        protocol = app.session.get('protocol');
+    if (href.slice(0, protocol.length) !== protocol) {
         host = app.session.get('host');
-        href = [protocol, '://', host, (href.indexOf('/') ? '/' : ''), href].join('');
+        href = [protocol, host, (href.indexOf('/') ? '/' : ''), href].join('');
     }
     return href;
 }

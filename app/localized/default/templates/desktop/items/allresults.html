@@ -1,25 +1,29 @@
 <section id="itemListing">
 	<nav class="breadcrumb">
-		<a href="">Todas as Categorias</a> <span class="arrow"></span> <strong>{{ category.trName }}</strong> em Mato Grosso <span class="count">(35)</span>
+		<a href="">Todas as Categorias</a> 
+		<span class="arrow"></span> <strong>{{ category.trName }}</strong> 
+		{% if location.current and location.current.type != 'country' %}
+			Anúncios em {{location.current.name}}
+		{% else %}
+			Anúncios no {{location.name}}
+		{% endif %}
+		<span class="count">({{ metadata.total | countFormat }})</span>
 	</nav>
 
 	<nav class="categories">
-		<div class="categories">
+		<div class="subCategories">
 			<h2>Selecione a categoria</h2>
-			<a href="" >Todas as categorias</a>
-			<h3>{{ category.trName }} <span>35</span></h3>
-			<div class="subCat">
-				<a href="" ><span class="icons icon-cat-831"></span> Celulares e Smartphones <span class="count">10</span></a>
-				<a href="" ><span class="icons icon-cat-857"></span> Tablets - iPads <span class="count">10</span></a>
-			</div>
-		</div>
-		<div class="filters">
-			<h3>Preço</h3>
-			<div class="price">
-				<input type="text" class="values defaultContent numeric" placeholder="Mín." size="7" value="" id="min-Navigator_price" name="min" >
-				<input type="text" class="values defaultContent numeric" placeholder="Máx." size="7" value="" id="max-Navigator_price" name="max" >
-				<button type="button" class="icons"></button>
-			</div>
+			<ul>
+				{% for category in categories  %}
+					<li>
+						<a href="{{ category | slugToUrl | link }}">
+							<span class="icons icon-cat-{{ category.id }}"></span>
+							{{ category.trName }}<br>
+							<span class="count">{{ (category.counter | countFormat) if category.counter > 0  }}</span>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
 		</div>
 	</nav>
 	<nav class="location">
@@ -29,8 +33,11 @@
 		</ul>
 		<div class="list">
 			<ul>
+				{% for state in metadata.filters.state.value %}
+					<li><a href="{{ '/nf/all-results' | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
+				{% endfor %}
 				{% for city in metadata.filters.city.value %}
-					<li><a href="{{ '/nf/all-results' | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count }}</span></a></li>
+					<li><a href="{{ '/nf/all-results' | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
 				{% endfor %}
 				<div class="clear"></div>
 			</ul>

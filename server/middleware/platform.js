@@ -28,12 +28,13 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.redirect(status || 302, url);
             }
 
-            function redirectDesktop() {
+            function redirectDesktop(hasPlatform) {
                 res.set('Vary', 'User-Agent');
                 res.redirect(302, seo.desktopizeUrl(req.originalUrl, {
                    protocol: req.protocol,
                    host: req.headers.host,
-                   path: req.path
+                   path: req.path,
+                   hasPlatform: hasPlatform
                 }, req.query));
             }
 
@@ -58,7 +59,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 platform = device.web_platform || utils.defaults.platform;
                 if (redirectOnDesktop && device.isBrowser) {
-                    return redirectDesktop();
+                    return redirectDesktop(false);
                 }
                 redirect([req.protocol, '://', platform, '.', host, req.originalUrl].join(''));
             }
@@ -73,7 +74,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 platform = device.web_platform || utils.defaults.platform;
                 if (redirectOnDesktop && device.isBrowser) {
-                    return redirectDesktop();
+                    return redirectDesktop(true);
                 }
                 else if (platform !== req.subdomains.pop()) {
                     host = host.split('.');
