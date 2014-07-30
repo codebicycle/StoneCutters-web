@@ -5,9 +5,11 @@
             <tr>
                 <td style="border-top: solid thin #808080;">
                     <small style="display: block;">{{ item.category.name }}</small>
-                    <strong style="display: block;">
-                        <font color="{{ '#0075BD' if item.status.label == 'ready' else '#FF0000' }}">{{ item.title }}</font>
-                    </strong>
+                    <h1>
+                        <strong style="display: block;">
+                            <font color="{{ '#0075BD' if item.status.label == 'ready' else '#FF0000' }}">{{ item.title }}</font>
+                        </strong>
+                    </h1>
                     {% if item.status.onReview %}
                         <small style="display: block;">
                             <font color="#FF0000">{{ dictionary["myolx.ApprovalPending"] }}</font>
@@ -80,7 +82,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <small style="display: block;">{{ item.description }}</small>
+                        <small style="display: block;">{{ item.descriptionReplace }}</small>
                     </td>
                 </tr>
             </table>

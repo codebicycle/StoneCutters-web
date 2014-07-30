@@ -17,7 +17,7 @@ module.exports = Base.extend({
     events: {
         'flow': 'onFlow'
     },
-    onFlow: function(event, title, from, to) {
+    onFlow: function(event, title, from, to, data) {
         if (!title) {
             title = this.$('#hub #steps').data('title');
         }
@@ -25,7 +25,7 @@ module.exports = Base.extend({
             to = 'hub';
         }
         this.$('header').trigger('change', [title, to, from]);
-        this.$('#' + to).trigger('show');
-        this.$('#' + from).trigger('hide');
+        this.$('#' + to).trigger('show', data);
+        this.$('#' + from).trigger('hide', data);
     }
 });

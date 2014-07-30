@@ -1,9 +1,10 @@
 'use strict';
 
 var _ = require('underscore');
+var URLParser = require('url');
 var config = require('../config');
+var configSeo = require('./config');
 var utils = require('../../shared/utils');
-var METATAGS = require('./metatags');
 var head = {
     metatags: {}
 };
@@ -112,12 +113,66 @@ function getMetatagName(currentRoute) {
     return [currentRoute.controller, currentRoute.action];
 }
 
+function desktopizeReplace(url, params) {
+    _.each(params, function(value, i) {
+        url = url.replace('$' + i, value);
+    });
+    return url;
+}
+
+function desktopizeUrl(url, options, params) {
+    var protocol = options.protocol;
+    var host = options.host;
+    var path = options.path;
+    var location = utils.params(url, 'location');
+    var exceptions = utils.get(configSeo, ['redirects', 'onDesktop'], {});
+    var regexp;
+    var match;
+    var port;
+
+    url = utils.cleanParams(url);
+    _.each(exceptions, function findException(exception) {
+        if (!match && (regexp = new RegExp(exception.regexp)).test(path)) {
+            match = exception;
+        }
+    });
+    if (match) {
+        url = match.url;
+        if (match.replace) {
+            url = desktopizeReplace(url, match.regexp.exec(path));
+        }
+        if (match.params && params) {
+            url = desktopizeReplace(url, params);
+        }
+    }
+    if (location) {
+        host = location.split('.');
+    }
+    else {
+        host = host.split('.');
+        host.shift();
+        host.shift();
+        port = host.pop();
+        host.push(port.split(':').shift());
+        host.unshift('www');
+    }
+    if (!url.indexOf(protocol + '://')) {
+        url = URLParser.parse(url);
+        url = [url.pathname, (url.search || '')].join('');
+    }
+    url = [protocol, '://', host.join('.'), url].join('');
+    if (url.slice(url.length - 1) === '/') {
+        url = url.slice(0, url.length - 1);
+    }
+    return url;
+}
+
 module.exports = {
     getHead: getHead,
     resetHead: function(page) {
         var metatag = page || getMetatagName(this.app.session.get('currentRoute'));
-        var defaultMetatags = utils.get(METATAGS, 'default');
-        var metatags = utils.get(METATAGS, metatag, {});
+        var defaultMetatags = utils.get(configSeo, ['metatags', 'default']);
+        var metatags = utils.get(configSeo, ['metatags'].concat(metatag), {});
 
         delete head.canonical;
         head.metatags = {};
@@ -126,5 +181,6 @@ module.exports = {
         }.bind(this));
     },
     addMetatag: addMetatag,
-    update: update
+    update: update,
+    desktopizeUrl: desktopizeUrl
 };

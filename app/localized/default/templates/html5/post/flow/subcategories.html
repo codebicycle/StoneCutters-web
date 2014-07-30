@@ -1,7 +1,7 @@
 {% for category in categories %}
-    <ul id="category-{{ category.id }}" class="list">
+    <ul id="category-{{ category.id }}" class="list disabled">
         {% for subcategory in category.children %}
-            <li class="subcategory">
+            <li class="subcategory" data-id="{{ subcategory.id }}" data-parent-id="{{ category.id }}">
                 <h2>
                     <a>{{subcategory.trName}}</a>
                 </h2>

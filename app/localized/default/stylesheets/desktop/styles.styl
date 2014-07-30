@@ -4,8 +4,12 @@
     margin: 0;
     padding: 0;
 }
-body {
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+body, html {
     font-family: arial,helvetica,sans-serif;
+    font-size: 16px;
 }
 a {
     text-decoration: none;
@@ -45,23 +49,65 @@ ul, li {
     margin: 1.25rem 0 0;
     overflow: hidden;
 }
+.clear {
+	clear: both;
+}
 
 section {
-	h1 {
+	position: relative;
+
+	nav.breadcrumb {
+		width: 100%;
+		float: left;
+		margin: 1rem 0;
+		font-size: .875rem;
+		color: #000;
+
+		a {
+			color: #38b;
+		}
+
+		span.arrow {
+
+			&:before {
+			    color: #000;
+			    content: "";
+			    display: inline-block;
+			    font-family: 'olx-icon-font';
+			    font-size: 15px;
+			    line-height: 10px;
+			    vertical-align: middle;
+			}
+		}
+		span.count {
+			color: #888;
+		}
+	}
+	
+	h1, h2 {
+		color: #333;
+	}
+	> h1 {
 		padding: .625rem 0 .125rem 1.25rem;
         font-size: 1.875rem;
 	}
-	p {
+	> h2 {
+		padding: 0 0 .125rem 1.25rem;
+        font-size: 1.625rem;
+        font-weight: normal;
+	}
+	> p {
         padding: 0 1.25rem;
         font-size: .8125rem;
     }
 }
 
 /*----Icons----*/
-.icons:before {
+.icons:before, .icons:after {
 	display: inline-block;
     font-family: 'olx-icon-font';
     vertical-align: middle;
+    font-weight: normal;
 }
 .icon-cat-811:before {
 content:'\e05d';
@@ -237,3 +283,30 @@ content:"\e62d";
 .icon-cat-301:before {
 content:"\e62e";
 }
+.icon-cat-831:before{	
+	content: "\e051";
+}
+.icon-cat-857:before{	
+	content: "\e03e";
+}
+.icon-cat-817:before{	
+	content: "";
+}
+.icon-cat-802:before{	
+	content: "F";
+}
+.icon-cat-805:before{
+	content: "";
+}
+.icon-cat-856:before {
+    content: "";
+}
+.icon-cat-243:before {
+    content: "";
+}
+
+
+
+
+
+

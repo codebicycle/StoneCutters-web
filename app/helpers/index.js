@@ -7,6 +7,7 @@ module.exports = {
     routes: require('./routes'),
     breadcrumb: require('./breadcrumb'),
     pagination: require('./pagination'),
+    filters: require('./filters'),
     dataAdapter: require('./dataAdapter'),
     timeAgo: function(itemDate) {
         var current = new Date();

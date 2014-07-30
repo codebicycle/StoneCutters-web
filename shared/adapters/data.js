@@ -67,7 +67,13 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
     }
 
     function fail(err, res) {
+        res = res || {
+            statusCode: 599
+        };
         elapsed = getElapsed(start, elapsed);
+        if (!err && res.statusCode == 503) {
+            err = 'Service Unavailable';
+        }
         try {
             err = JSON.parse(err);
         }

@@ -3,7 +3,6 @@
 var Base = require('../../../../../../common/app/bases/view');
 var config = require('../../../../../../../config');
 var _ = require('underscore');
-var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     className: 'post_flow_categories_view list disabled',
@@ -53,8 +52,9 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $category = $(event.currentTarget);
+        var categoryId = $category.data('id');
 
-        this.parentView.$el.trigger('flow', [$category.parent().data('title'), this.id, 'category-' + $category.data('id')]);
+        this.parentView.$el.trigger('flow', [$category.parent().data('title'), this.id, 'category-' + categoryId, categoryId]);
     }
 });
 

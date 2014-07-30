@@ -108,6 +108,9 @@ module.exports = {
             }
         }
     },
+    'items#allresults': {
+        url: 'nf/all-results'
+    },
     'users#register': {
         url: 'register'
     },

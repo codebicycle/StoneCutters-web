@@ -98,11 +98,10 @@ module.exports = (function() {
         if (typeof window === 'undefined') {
             this.app.req.res.status(status);
         }
-        res = (res || {});
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
         seo.update();
-        return callback(null, 'pages/error', res);
+        return callback(null, 'pages/error', res || {});
     }
 
     function daysDiff(date) {

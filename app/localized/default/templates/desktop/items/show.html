@@ -1,1 +1,100 @@
-itempage
+<section id="itemPage">
+	<nav class="breadcrumb">
+		<a href="">Todas as Categorias</a> <span class="arrow"></span> <a href="">{{ category.trName }}</a> <span class="arrow"></span> <a href="">{{ item.category.name }}</a>
+	</nav>
+
+	<section id="itemInfoL">
+		<h1>{{ item.title }}</h1>
+		<div class="dateInfo">
+			<span class="status">Publicado</span>
+			<span class="icons time"></span>
+			<span>{{ dictionary[item.date.since.dictionary] }}</span>
+			<span class="icons map"></span>
+			<span>{{ item.location.cityName if item.location.cityName }}</span>
+		</div>
+		<div id="photos">
+			<div class="bigPhoto" style="background-image: url('{{ item.images[0].url }}');"><span></span></div>
+			<ul>
+				{% for image in item.images %}
+                    <li  style="background-image: url('{{ image.thumbnail }}');"></li>
+                {% endfor %}
+			</ul>
+			<div class="clear"></div>
+		</div>
+		
+	    {% if item.optionals %}
+	     	<div id="optionals">
+	            <ul>
+	                {% for optional in item.optionals %}
+	                    {% if optional.label and optional.value %}
+	                        <li><strong>{{ optional.label }}:</strong><br>{{ optional.value }}</li>
+	                    {% endif %}
+	                {% endfor %}
+	                <div class="clear"></div>
+	            </ul>
+	    	</div>
+	    {% endif %}
+
+	    <div id="description">
+	        <p>{{ item.description }}</p>
+	        <div class="clear"></div>
+	    </div>
+
+	    <div id="location">
+	    	<h2><span class="icons"></span>Localização</h2>
+	    	<ul>
+	    		<li>{{ item.location.cityName }}, {{ item.location.abbreviation }}</li>
+	    		<li>{{ item.location.neighborhoodName }}</li>
+	    	</ul>
+	    </div>
+
+	    <div id="actions">
+	    	<a class="share facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ href }}" target="_blank" >Facebook</a>
+			<a class="share twitter" href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title | escape }}&url={{ href }}" target="_blank">Twitter</a>
+			<a class="share google" href="https://plus.google.com/share?url={{ href }}" target="_blank" >Google</a>
+
+			<a class="olxAction denunciar" href="" >Denunciar</a>
+			<a class="olxAction favorite" href="" >Adicionar aos Favoritos</a>
+	    </div>
+
+	</section>
+
+	<section id="itemInfoR">
+		{{ ('<h1>'+item.price.displayPrice+'</h1>') if item.price.displayPrice else "" }}
+		<div id="reply">
+			{{ ('<h2 class="icons contact">'+item.contactName+'</h2>') if item.contactName else "" }}
+			<a href="">Todos os anúncios do usuário</a>
+			{{ ('<h2 class="icons phone">'+item.phone+'</h2>') if item.phone else "" }}
+			<span>Ao ligar, diga que viu o anúncio na OLX</span>
+			<form action="ajax/contact_seller.php" id="contact-seller" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="669761484" name="itemId" id="itemId">
+				<input type="hidden" value="1157437652" name="token">
+				<input type="hidden" name="formHash" id="formHash" value="41af50ad51503c7ebc15436316b7f9721406228449">
+				<input type="hidden" name="contentType" value="textHtml">
+
+				<textarea placeholder="Mensagem" rows="6" cols="30" name="comment" id="comment"></textarea>
+				<span class="error icons">Ops! Escreva uma mensagem</span>
+				<input type="text" placeholder="Nome" maxlength="200" value="" id="name" name="name">
+				<span class="error icons">Ops! Escreva uma mensagem</span>
+				<input type="text" placeholder="E-mail" maxlength="200" value="" id="email" name="email">
+				<span class="error icons">Ops! Escreva uma mensagem</span>
+				<input type="text" placeholder="Telefone" maxlength="15" value="" id="phone" name="phone">
+
+				<input type="submit" value="Enviar e-mail" class="btn orange" >
+				<p>Enviando um e-mail você aceita nossos <a target="_blank" href="http://www.olx.com.br/terms.php">Termos</a></p>
+
+			</form>
+		</div>
+		<div id="securityTips">
+			<p>Dicas de Segurança</p>
+			<ul>
+				<li>Combine de encontrar pessoalmente</li>
+				<li>Verifique se o vendedor é o proprietário</li>
+				<li>Consulte se há multas e IPVA pendentes</li>
+			</ul>
+		</div>
+	</section>
+
+	{% view 'partials/postbanner' %}
+
+</section>

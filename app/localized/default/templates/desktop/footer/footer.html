@@ -1,7 +1,7 @@
 <ul>
-	<li><a>Categorias</a>
-	<li><a>Popular na OLX</a>
-	<li><a>OLX perto de você</a>
+	<li><span class="categories">Categorias</span>
+	<li><span class="country">Popular na OLX</span>
+	<li><span class="populars">OLX perto de você</span>
 	<li><a href="{{ '/help' | link }}" rel="nofollow">Ajuda</a>
 	<li><a href="{{ '/about' | link }}" rel="nofollow">Sobre a OLX</a>
 	<li><a href="{{ '/terms' | link }}" rel="nofollow">Termos e condi&ccedil;&otilde;es</a>
@@ -10,16 +10,17 @@
 </ul>
 <p>Classificados gr&aacute;tis - <strong>Brasil</strong> - Copyright &copy; 2006-2014 OLX, Inc. | Rua Gomes de Carvalho, 1510, S&atilde;o Paulo - SP</p>
 
-<div class="teaser">
+<div class="teaser" id="categories">
+categories
+</div>
+<div class="teaser" id="populars">
+populars
+</div>
+<div class="teaser" id="country">
 	<header>
 		<a title="Close" href="#">Close</a>
 	</header>
 	<div>
-		<!--<ul>
-			{% for country in countries %}
-				<li><a title="An&uacute;ncios na {{ country.name }}" rel="nofollow" href="http://{{ country.url }}">{{ country.name }}</a></li>
-			{% endfor %}
-		</ul>-->
 		<h5>OLX ao redor do mundo:</h5>
 		<ul>
 			<li><a title="Anúncios na África do Sul" rel="nofollow" href="http://www.olx.co.za">África do Sul</a></li>

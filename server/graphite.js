@@ -1,12 +1,15 @@
 'use strict';
 
 var config = require('./config').get('graphite', {
-    host: '127.0.0.1',
-    port: 2003,
-    debug: false,
-    interval: 5000,
-    type: 'udp4'
+    client: {
+        host: '127.0.0.1',
+        port: 2003,
+        debug: false,
+        interval: 10000,
+        type: 'udp4'
+    }
 });
+var hostname = require('os').hostname();
 var dgram = require('dgram');
 var util = require('util');
 var logger = require('../shared/logger')('graphite');
@@ -66,7 +69,7 @@ function Client(options) {
         if (Array.isArray(name)) {
             name = name.join('.');
         }
-        name = [config.namespace, name].join('.');
+        name = [config.namespace, hostname, name].join('.');
         if(typeof queue[name] === 'undefined') {
             queue[name] = {
                 value: value
@@ -95,11 +98,13 @@ function Client(options) {
     }
 
     function getQueueAsPlainText() {
+        var date = new Date();
+        var timestamp = String(date.getTime()).substr(0, 10);
         var text = '';
         var name;
 
         for(name in queue) {
-            text += name +' '+ queue[name].value +' '+ queue[name].timestamp +'\n';
+            text += name +' '+ queue[name].value +' '+ timestamp +'\n';
         }
         if (text) {
             logger.log('Sending: ' + text);

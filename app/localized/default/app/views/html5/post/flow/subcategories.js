@@ -3,7 +3,6 @@
 var Base = require('../../../../../../common/app/bases/view');
 var config = require('../../../../../../../config');
 var _ = require('underscore');
-var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     className: 'post_flow_subcategories_view disabled',
@@ -27,7 +26,25 @@ module.exports = Base.extend({
         this.$el.html(this.getInnerHtml());
     },
     events: {
+        'show': 'onShow',
+        'hide': 'onHide',
         'click .subcategory': 'onClickSubcategory'
+    },
+    onShow: function(event, categoryId) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$el.removeClass('disabled');
+        this.$('ul.list').addClass('disabled');
+        this.$('#category-' + categoryId).removeClass('disabled');
+    },
+    onHide: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$el.addClass('disabled');
     },
     onClickSubcategory: function(event) {
         event.preventDefault();
