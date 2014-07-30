@@ -125,3 +125,6 @@ hosts:
   - haibao
   - olxalgerie
   - jaovat
+
+redirect:
+  onDesktop: true

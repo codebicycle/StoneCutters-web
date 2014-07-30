@@ -20,8 +20,8 @@ module.exports = function appUseConf(done) {
     var http = require('http');
     var https = require('https');
 
-    http.globalAgent.maxSockets = config.get(['server', 'maxSockets', 'http'], http.globalAgent.maxSockets);
-    https.globalAgent.maxSockets = config.get(['server', 'maxSockets', 'https'], http.globalAgent.maxSockets);
+    http.globalAgent = false;
+    https.globalAgent = false;
 
     function expressConfiguration() {
         server.expressApp.disable('x-powered-by');

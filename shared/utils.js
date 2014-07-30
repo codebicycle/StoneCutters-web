@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var querystring = require('querystring')
+var querystring = require('querystring');
 var isServer = (typeof window === 'undefined');
 var linkParams = {
     location: function (href, query) {
@@ -129,6 +129,17 @@ function removeParams(url, keys) {
     return out.join('');
 }
 
+function cleanParams(url) {
+    var parts = url.split('?');
+    var out = [];
+
+    out.push(parts.shift());
+    if (url.slice(url.length - 1) === '#') {
+        out.push('#');
+    }
+    return out.join('');
+}
+
 function get(obj, keys, defaultValue) {
     var value;
 
@@ -172,6 +183,7 @@ module.exports = {
     fullizeUrl: fullizeUrl,
     params: params,
     removeParams: removeParams,
+    cleanParams: cleanParams,
     get: get,
     defaults: defaults
 };
