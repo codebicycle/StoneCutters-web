@@ -73,7 +73,8 @@
         {% endfor %}
 
         <input type="hidden" name="postingSession" value="{{postingSession}}">
-        <input type="hidden" name="location" value="{{itemLocation.url}}">
+        <input type="hidden" name="location" value="{% if itemLocation and itemLocation.url %}{{ itemLocation.url }}{% elif (form and form.values and form.values.location) %}{{ form.values.location }}{% endif %}">
+        <input type="hidden" name="locationName" value="{% if itemLocation and itemLocation.name %}{{ itemLocation.name }}{% elif (form and form.values and form.values.locationName) %}{{ form.values.locationName }}{% endif %}" >
         <input type="hidden" name="languageId" value="{{language}}">
         <input type="hidden" name="languageCode" value="{{languageCode}}">
         <input type="hidden" name="platform" value="{{platform}}">
