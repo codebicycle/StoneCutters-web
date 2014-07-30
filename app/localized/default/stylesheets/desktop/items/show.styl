@@ -289,7 +289,7 @@ section#itemPage {
 	    	> span {
 	    		color: #333;
 	    	}
-	    	input[type="text"], textarea {
+	    	input[type="text"], input[type="email"], input[type="number"], textarea {
 	    		width: 16.13rem;
 	    		padding: .5rem .625rem;
 	    		margin: .5rem 0 0 0;
@@ -303,8 +303,7 @@ section#itemPage {
 	    		height: 4.875rem;
 	    		resize: none;
 	    	}
-	    	span.error {
-	    		display: block;
+	    	small {
 	    		position: relative;
 	    		margin: 0.2rem 0 0.2rem 0.625rem;
 	    		color: #c33;
@@ -320,7 +319,7 @@ section#itemPage {
 				    font-size: 1.5rem;
 			    }
 	    	}
-	    	input[type="submit"] {
+	    	input[type="button"] {
 	    		width: 16.13rem;
 	    		padding: .625rem 0;
 	    		margin: .625rem 0 0 0;
@@ -334,6 +333,38 @@ section#itemPage {
 	    		color: #666;
 	    		font-size: .75rem;
 	    		letter-spacing: -0.2px;
+	    	}
+	    	p.replySuccses {
+	    		position: relative;
+	    		padding: .9375rem 0 0 2.5rem;
+	    		margin: 1.25rem 0;
+	    		font-size: .875rem;
+	    		color: #000;
+
+	    		&:before {
+	    			display: inline-block;
+	    			position: absolute;
+				    left: 10px;
+				    top: 12px;
+				    margin-right: 10px;
+				    padding-right: 1.25rem;
+				    content: url(imageUrl/images/desktop/success.png);
+	    		}
+	    		span {
+	    			color: #38b;
+	    			cursor: pointer;
+	    			&:hover {
+	    				text-decoration: underline;
+	    			}
+	    		}
+	    	}
+	    	span.loading {
+	    		width: 20px;
+	    		height: 20px;
+	    		display: inline-block;
+	    		padding: 0;
+	    		margin: 1rem 0;
+	    		background: url(imageUrl/images/desktop/spinner-bgYellow.gif);
 	    	}
 		}
 		#securityTips {
