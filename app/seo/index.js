@@ -121,7 +121,7 @@ function desktopizeReplace(url, params) {
 }
 
 function desktopizeUrl(url, options, params) {
-    var protocol = options.protocol;
+    var protocol = options.protocol + '://';
     var host = options.host;
     var path = options.path;
     var location = utils.params(url, 'location');
@@ -151,16 +151,18 @@ function desktopizeUrl(url, options, params) {
     else {
         host = host.split('.');
         host.shift();
-        host.shift();
+        if (options.hasPlatform) {
+            host.shift();
+        }
         port = host.pop();
         host.push(port.split(':').shift());
         host.unshift('www');
     }
-    if (!url.indexOf(protocol + '://')) {
+    if (url.slice(0, protocol.length) === protocol) {
         url = URLParser.parse(url);
         url = [url.pathname, (url.search || '')].join('');
     }
-    url = [protocol, '://', host.join('.'), url].join('');
+    url = [protocol, host.join('.'), url].join('');
     if (url.slice(url.length - 1) === '/') {
         url = url.slice(0, url.length - 1);
     }
