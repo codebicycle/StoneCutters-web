@@ -89,7 +89,8 @@ module.exports = function itemRouter(app, dataAdapter) {
         function googleTracking(req) {
             var analytic = new Analytic('google', {
                 id: req.query.id,
-                host: req.host
+                host: req.host,
+                clientId: req.rendrApp.session.get('visitorId')
             });
             var ip = googleIp(req);
             var options = defaultOptions(req);
@@ -97,11 +98,7 @@ module.exports = function itemRouter(app, dataAdapter) {
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
-                ip: ip,
-                dynamics: {
-                    utmcc: googleUTMCC(req),
-                    utmvid: req.rendrApp.session.get('visitorId')
-                }
+                ip: ip
             }, options);
         }
 
@@ -161,17 +158,15 @@ module.exports = function itemRouter(app, dataAdapter) {
 
         function googleTracking(req) {
             var analytic = new Analytic('google-event', {
-                host: req.host
+                id: req.query.id,
+                host: req.host,
+                clientId: req.rendrApp.session.get('visitorId')
             });
             var ip = googleIp(req);
             var options = defaultOptions(req);
 
             analytic.track(_.extend({
-                ip: ip,
-                dynamics: {
-                    utmcc: googleUTMCC(req),
-                    utmvid: req.rendrApp.session.get('visitorId')
-                }
+                ip: ip
             }, req.query), options);
         }
 

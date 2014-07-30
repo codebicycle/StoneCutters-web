@@ -89,13 +89,21 @@ module.exports = function analyticsHelper() {
             params.poster_id = options.item.user.id;
             params.poster_type = 'registered_logged';
         }
-        if(params.page_name === 'expired_category' && options.category) {
-            params.page_name = 'listing_' + options.category.name;
+        if(params.page_name === 'expired_category') {
+            if (options.subcategory) {
+                params.page_name = 'listing_' + options.subcategory.name;
+            }
+            else if (options.category) {
+                params.page_name = 'listing_' + options.category.name;
+            }
             params.category = options.category.name;
         }
         if(params.page_name === 'posting_step4' && options.category) {
             params.ad_category = options.category.name;
             params.ad_subcategory = options.subcategory.name;
+        }
+        if(params.subcategory === 'expired_subCategory') {
+            delete params.subcategory;
         }
     }
 

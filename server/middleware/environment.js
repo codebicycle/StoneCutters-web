@@ -65,8 +65,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (typeof visitorId === 'undefined') {
                 req.rendrApp.session.persist({
                     visitorId: generateVisitorId(req)
-                }, {
-                    maxAge: (new Date().getTime() + 63072000)
                 });
             }
             req.rendrApp.session.update({

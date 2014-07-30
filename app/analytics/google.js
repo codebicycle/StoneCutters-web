@@ -81,11 +81,17 @@ function generatePage(page, options) {
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
+function saveParams(params, options) {
+    this.app.session.persist(params, _.defaults({}, options, {
+        maxAge: 1728000000
+    }));
+}
+
 function initParams() {
     var today = new Date().getTime();
     var gaNs = this.app.session.get('gaNs') || 0;
 
-    this.app.session.persist({
+    saveParams.call(this, {
         gaIs: today,
         gaPs: today,
         gaCs: today,
@@ -98,7 +104,7 @@ function initParams() {
 function persistParams() {
     var gaCs = new Date().getTime();
 
-    this.app.session.persist({
+    saveParams.call(this, {
         gaCs: gaCs,
         gaPs: this.app.session.get('gaCs') || gaCs,
         gaIs: this.app.session.get('gaIs') || gaCs,
