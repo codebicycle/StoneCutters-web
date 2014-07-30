@@ -69,7 +69,7 @@ function Client(options) {
         if (Array.isArray(name)) {
             name = name.join('.');
         }
-        name = [config.namespace, hostname, name].join('.');
+        name = [config.namespace, hostname, cluster.worker.id, name].join('.');
         if(typeof queue[name] === 'undefined') {
             queue[name] = {
                 value: value
@@ -138,7 +138,7 @@ module.exports = function(options) {
     options = options || {};
 
     if (config.enabled) {
-        client = client || (cluster.worker ? cluster.worker.process.env.GRAPHITE : false) || new Client(options);
+        client = client || new Client(options);
     }
     else {
         client = {
