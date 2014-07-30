@@ -21,33 +21,77 @@ section#itemListing {
 			color: #888;
 			font-weight: normal;
 		}
-		.subCat {
-			background: #fff;
-			border-left: 1px solid #f6f6f6;
-			border-right: 1px solid #f6f6f6;
-		}
-		a {
-			display: block;
-			border-top: 1px solid #fff;
-			padding: .625rem .9375rem;
-			color: #38b;
+		div.categories {
+			.subCat {
+				background: #fff;
+				border-left: 1px solid #f6f6f6;
+				border-right: 1px solid #f6f6f6;
+			}
+			a {
+				display: block;
+				border-top: 1px solid #fff;
+				padding: .3125rem 0 .3125rem .625rem;
+				color: #38b;
 
-			span.icons {
-				float: left;
+				span.icons {
+					float: left;
 
-				&:before {
-					width: 1.625rem;
-					display: inline-block;
-					color: #0076be;
-				    font-size: 1.375rem;
-				    line-height: .9375rem;
-				    text-transform: none;
-				    vertical-align: top;				    
+					&:before {
+						width: 1.625rem;
+						display: inline-block;
+						color: #0076be;
+					    font-size: 1.375rem;
+					    line-height: .9375rem;
+					    text-transform: none;
+					    vertical-align: top;				    
+					}
+				}
+				span.count {
+					color: #888;
+					font-size: .625rem;
 				}
 			}
-			span.count {
-				color: #888;
-				font-size: .625rem;
+		}
+		div.subCategories {
+			ul {
+				li {
+					width: 50%;
+					height: 3.563rem;
+					float: left;
+					border: 1px solid #fff;
+
+					&:hover {
+							background: #fff;
+							box-shadow: 0 0 0 1px #7bd inset;
+						}
+					a {
+						display: block;
+						padding: .625rem 0 0px 0px;
+						color: #38b;
+						font-weight: bold;
+						font-size: .75rem;
+
+
+						span.icons {
+							float: left;
+							&:before {
+								width: 2.188rem;
+								display: inline-block;
+								color: #0076be;
+							    font-size: 2rem;
+							    font-weight: normal;
+							    line-height: normal;
+							    vertical-align: middle;
+							}
+						}
+						span.count {
+							color: #888 !important;
+    font-size: 10px;
+    font-weight: normal;
+    padding-left: 0;
+						}
+					}
+				}
 			}
 		}
 		.filters {

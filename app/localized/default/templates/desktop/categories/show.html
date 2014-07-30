@@ -1,16 +1,37 @@
 <section id="itemListing">
 	<nav class="breadcrumb">
-		<a href="">Todas as Categorias</a> <span class="arrow"></span> <strong>{{ category.trName }}</strong> em Mato Grosso <span class="count">(35)</span>
+		<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a>
+		<span class="arrow"></span>
+		{% if not currentCategory.parentId %}
+				<strong>{{ category.trName }}</strong>
+		{% else %}
+			<a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> <strong>{{ currentCategory.trName }}</strong>
+		{% endif %}
+		{% if location.current and location.current.type != 'country' %}
+			em {{location.current.name}}
+		{% else %}
+			no {{location.name}}
+		{% endif %}
+		<span class="count">({{ metadata.total | countFormat }})</span>
 	</nav>
 
 	<nav class="categories">
 		<div class="categories">
 			<h2>Selecione a categoria</h2>
-			<a href="" >Todas as categorias</a>
-			<h3>{{ category.trName }} <span>35</span></h3>
+			<a href="{{ '/nf/all-results' | link }}" ><span class="icons icon-arrow"></span>Todas as categorias</a>
+			{% if not currentCategory.parentId %}
+				<h3>{{ category.trName }} <span>{{ metadata.total | countFormat }}</span></h3>
+			{% else %}
+				<h3>{{ currentCategory.trName }} <span>{{ metadata.total | countFormat }}</span></h3>
+			{% endif %}
 			<div class="subCat">
-				<a href="" ><span class="icons icon-cat-831"></span> Celulares e Smartphones <span class="count">10</span></a>
-				<a href="" ><span class="icons icon-cat-857"></span> Tablets - iPads <span class="count">10</span></a>
+				{% if not currentCategory.parentId %}
+					{% for subcategory in currentCategory.children.toJSON() %}
+						<a href="{{ subcategory | slugToUrl | link }}" ><span class="icons icon-cat-{{ subcategory.id }}"></span> {{subcategory.trName}} <span class="count">{{ (subcategory.counter | countFormat) if subcategory.counter > 0 }}</span></a>	                
+			        {% endfor %}
+				{% else %}
+					<a href="{{ category | slugToUrl | link }}" ><span class="icons icon-cat-{{ category.id }}"></span> {{ category.trName }} </a>
+				{% endif %}
 			</div>
 		</div>
 		<div class="filters">
@@ -24,38 +45,17 @@
 	</nav>
 	<nav class="location">
 		<ul>
-			<li><a href="http://www.olx.com.br/celulares-tablets-cat-830" rel="nofollow">Brasil</a></li>
-			<li>Mato Grosso<a href="http://www.olx.com.br/celulares-tablets-cat-830"></a></li>
+			<li><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">Brasil</a></li>
+			<li>{{location.current.name}}<a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}"></a></li>
 		</ul>
 		<div class="list">
 			<ul>
-				<li><a href="#">Acre <span>631</span></a></li>
-				<li><a href="#">Alagoas <span>436</span></a></li>
-				<li><a href="#">Amapá <span>4.585</span></a></li>
-				<li><a href="#">Amazonas <span>748</span></a></li>
-				<li><a href="#">Bahia <span>453</span></a></li>
-				<li><a href="#">Ceará <span>1.567</span></a></li>
-				<li><a href="#">Distrito Federal <span>2.369</span></a></li>
-				<li><a href="#">Espírito Santo <span>789</span></a></li>
-				<li><a href="#">Goiás <span>89</span></a></li>
-				<li><a href="#">Maranhão <span>12.369</span></a></li>
-				<li><a href="#">Mato Grosso <span>555</span></a></li>
-				<li><a href="#">Mato Grosso do Sul <span>666</span></a></li>
-				<li><a href="#">Minas Gerais <span>487</span></a></li>
-				<li><a href="#">Pará <span>5.369</span></a></li>
-				<li><a href="#">Paraíba <span>789</span></a></li>
-				<li><a href="#">Paraná <span>413</span></a></li>
-				<li><a href="#">Pernambuco <span>85</span></a></li>
-				<li><a href="#">Piauí <span>423</span></a></li>
-				<li><a href="#">Rio de Janeiro <span>4.323</span></a></li>
-				<li><a href="#">Rio Grande do Norte <span>785</span></a></li>
-				<li><a href="#">Rio Grande do Sul <span>924</span></a></li>
-				<li><a href="#">Rondônia <span>4.522</span></a></li>
-				<li><a href="#">Roraima <span>6.589</span></a></li>
-				<li><a href="#">Santa Catarina <span>453</span></a></li>
-				<li><a href="#">São Paulo <span>456</span></a></li>
-				<li><a href="#">Sergipe <span>123</span></a></li>
-				<li><a href="#">Tocantins <span>777</span></a></li>
+				{% for state in metadata.filters.state.value %}
+					<li><a href="{{ category | slugToUrl | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
+				{% endfor %}
+				{% for city in metadata.filters.city.value %}
+					<li><a href="{{ category | slugToUrl | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
+				{% endfor %}
 				<div class="clear"></div>
 			</ul>
 		</div>
