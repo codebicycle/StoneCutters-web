@@ -2,6 +2,33 @@
 
 module.exports = function(date) {
 
+	// Settings
+
+	var language = 'persian';
+
+	var translations = {
+		english: {
+			months: ['Farvardīn','Ordībehešt','Xordād','Tīr','Mordād','Šahrīvar','Mehr','Ābān','Āzar','Dey','Bahman','Esfand'],
+			//days: ['Shanbeh (Saturday)','Yekshambe (Sunday)','Doshambe (Monday)','Seshambe (Tuesday)','Chæharshambe (Wednesday)','Panjshambe (Thursday)','Jom\'e (Friday)'],
+			words: {
+				today: 'Today',
+				yesterday: 'Yesterday'
+			}
+		},
+		persian: {
+			months: ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'],
+			//days: ['شنبه‎','یکشنبه','دوشنبه','سهشنبه','چهار شنبه','پنج شنبه','جمعه‎'],
+			words: {
+				today: 'امروز',
+				yesterday: 'دیروز'
+			}
+		}
+	};
+
+	var dictionary = translations[language];
+
+	//
+
 	function toHijri(g_y, g_m, g_d) {
 			
 		var g_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -52,26 +79,16 @@ module.exports = function(date) {
 		
 	}
 
-	var today = {
-		english: 'Today',
-		persian: 'امروز'
-	};
-
-	var yesterday = {
-		english: 'Yesterday',
-		persian: 'دیروز'
-	};
-
 	function checkAge(date) {
 		var today = new Date();
 		if (today.getFullYear() === date.year && today.getMonth() + 1 === date.month) {
 			var word;
 			switch (today.getDate() - date.day) {
 				case 0:
-					word = today.persian; // (Today) Get this from dictionary
+					word = dictionary.words.today; // (Today) Get this from dictionary
 					break;
 				case 1:
-					word = yesterday.persian; // (Yesterday) Get this from dictionary
+					word = dictionary.words.yesterday; // (Yesterday) Get this from dictionary
 					break;
 				default:
 					word = false;
@@ -87,7 +104,7 @@ module.exports = function(date) {
 		return word + ', ' + date.hour + ':' + date.minute;
 	} else {
 		var hijri = toHijri(date.year, date.month, date.day);
-		return hijri.year + '/' + hijri.month + '/' + hijri.day + '(' + date.year + '/' + date.month + '/' + date.day + ')';
+		return dictionary.months[hijri.month - 1] + ' ' + hijri.day;
 	}
 
 };
