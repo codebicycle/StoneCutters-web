@@ -249,8 +249,13 @@ describe('app', function test() {
                             itemId: params[1]
                         };
                         reset(req, res, 'show');
-                        function callback(err, data) {
+                        function callback(err, view, data) {
+                            if (!_.isString(view)) {
+                                data = view;
+                                view = [context.currentRoute.controller, '/', context.currentRoute.action].join('');
+                            }
                             result.err = err;
+                            result.view = view;
                             result.data = data;
                             res.json(result);
                         }
