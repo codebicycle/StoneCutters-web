@@ -9,7 +9,6 @@ module.exports = function(date) {
 	var translations = {
 		english: {
 			months: ['Farvardīn','Ordībehešt','Xordād','Tīr','Mordād','Šahrīvar','Mehr','Ābān','Āzar','Dey','Bahman','Esfand'],
-			//days: ['Shanbeh (Saturday)','Yekshambe (Sunday)','Doshambe (Monday)','Seshambe (Tuesday)','Chæharshambe (Wednesday)','Panjshambe (Thursday)','Jom\'e (Friday)'],
 			words: {
 				today: 'Today',
 				yesterday: 'Yesterday'
@@ -17,7 +16,6 @@ module.exports = function(date) {
 		},
 		persian: {
 			months: ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'],
-			//days: ['شنبه‎','یکشنبه','دوشنبه','سهشنبه','چهار شنبه','پنج شنبه','جمعه‎'],
 			words: {
 				today: 'امروز',
 				yesterday: 'دیروز'
