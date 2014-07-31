@@ -21,6 +21,9 @@ ul, li {
 .visible {
     display: block!important;
 }
+.hide {
+	display: none!important;
+}
 #wrapper {
 	width: 61.25rem;
 	margin: .625rem auto;
@@ -100,6 +103,34 @@ section {
         padding: 0 1.25rem;
         font-size: .8125rem;
     }
+}
+
+/*----Progres Bar----*/
+#progressBar {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #FF7700;
+    border-radius: 10%;
+    -moz-transition: width 500ms ease-out,opacity 400ms linear;
+    -ms-transition: width 500ms ease-out,opacity 400ms linear;
+    -o-transition: width 500ms ease-out,opacity 400ms linear;
+    -webkit-transition: width 500ms ease-out,opacity 400ms linear;
+    transition: width 500ms ease-out,opacity 400ms linear;
+}
+#progressBar:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    opacity: 1;
+    width: 10%;
+    right: 0px;
+    height: 2px;
+    box-shadow: #BD5901 1px 0 6px 2px;
+    border-radius: 50%;
 }
 
 /*----Icons----*/
