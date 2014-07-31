@@ -117,23 +117,6 @@ describe('app', function test() {
                     })(result.data);
                     done();
                 });
-                it('should be added the correct analytics URL', function test(done) {
-                    (function existance(response) {
-                        response.should.have.property('id');
-                        response.should.have.property('random');
-                        response.should.have.property('referer', '-');
-                        response.should.have.property('page', 'home/');
-                        response.should.have.property('custom');
-                        response.custom = JSON.parse(response.custom);
-                        response.custom.should.have.property('page_name', 'home_page');
-                        response.custom.should.have.property('category', 'home');
-                        response.custom.should.not.have.property('subcategory');
-                        response.custom.should.have.property('language');
-                        response.custom.should.have.property('platform');
-                        response.should.have.property('platform', 'html4');
-                    })(utils.analyitcsParams(result.data.analytics));
-                    done();
-                });
                 it('should be added seo title to the head object', function test(done) {
                     (function equality(head) {
                         // Necesary for 'use strict'
@@ -298,23 +281,6 @@ describe('app', function test() {
                     })(result.data);
                     done();
                 });
-                it('should be added the correct analytics URL', function test(done) {
-                    (function existance(response) {
-                        response.should.have.property('id');
-                        response.should.have.property('random');
-                        response.should.have.property('referer', '-');
-                        response.should.have.property('page', category.name + '/' + subcategory.id + '/listing/');
-                        response.should.have.property('custom');
-                        response.custom = JSON.parse(response.custom);
-                        response.custom.should.have.property('page_name', 'listing_' + category.name);
-                        response.custom.should.have.property('category', category.name);
-                        response.custom.should.have.property('subcategory', subcategory.name);
-                        response.custom.should.have.property('language');
-                        response.custom.should.have.property('platform');
-                        response.should.have.property('platform', 'html4');
-                    })(utils.analyitcsParams(result.data.analytics));
-                    done();
-                });
                 it('should not redirect', function test(done) {
                     (function existance(response) {
                         response.should.not.have.property('redirect');
@@ -465,23 +431,6 @@ describe('app', function test() {
                     (function existance(response) {
                         response.should.have.property('analytics');
                     })(result.data);
-                    done();
-                });
-                it('should be added the correct analytics URL', function test(done) {
-                    (function existance(response) {
-                        response.should.have.property('id');
-                        response.should.have.property('random');
-                        response.should.have.property('referer', '-');
-                        response.should.have.property('page', category.name + '/subcategory_list/');
-                        response.should.have.property('custom');
-                        response.custom = JSON.parse(response.custom);
-                        response.custom.should.have.property('page_name', 'listing_' + category.name);
-                        response.custom.should.have.property('category', category.name);
-                        response.custom.should.have.property('subcategory', 'expired_subCategory');
-                        response.custom.should.have.property('language');
-                        response.custom.should.have.property('platform');
-                        response.should.have.property('platform', 'html4');
-                    })(utils.analyitcsParams(result.data.analytics));
                     done();
                 });
                 it('should be added seo title to the head object', function test(done) {
