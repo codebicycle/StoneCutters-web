@@ -207,7 +207,7 @@ module.exports = {
                 
                 subcategory = (subcategory ? subcategory.toJSON() : undefined);
                 category = (category ? category.toJSON() : undefined);
-                
+
                 if (!item.purged) {
                     analytics.reset();
                     analytics.addParam('user', user);
