@@ -21,8 +21,8 @@
                 <input type="submit" value="{{dictionary["itemgeneraldetails.addFavorites"]}}" class="favorite favoriteOff" />
             </form>
         {% endif %}
-        <h2>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h2>
-        <span>{{ item.date | hijri }}{{ (', ' + item.location.cityName) if item.location.cityName }}</span>
+        <h2>{% if item.price.displayPrice %}&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount }}{% endif %}</h2>
+        <span>{{ item.date | hijri }}</span>
         <div id="itemPhotos">
             {% if item.images.length == 0 %}
                 <span>({{ dictionary["itemgeneraldetails.NoPicture"] }})</span>
@@ -38,7 +38,7 @@
                 </a>
                 <div id="galeryPagination">
                     <a href="{{ ([item | slugToUrl, '?pos=', pos - 1] | join('') | link) if pos != 0 else '#' }}" class="arrow {{ "leftD" if pos == 0 else "leftA" }}"></a>
-                    <div class="center"><strong>{{ pos + 1 }}/{{ item.images.length }}</strong></div>
+                    <div class="center"><strong><span dir="rtl">{{ pos + 1 }}</span> / <span dir="rtl">{{ item.images.length }}</span></strong></div>
                     <a href="{{ ([item | slugToUrl, '?pos=', pos + 1] | join('') | link) if pos + 1 != item.images.length else '#' }}" class="arrow {{ "rightD" if pos + 1 == item.images.length else "rightA" }}"></a>
                 </div>
             {% endif %}
@@ -84,7 +84,7 @@
 
         <h3>{{ dictionary["itemgeneraldetails.Description"] }}</h3>
 
-        <p>{{ item.description }}</p>
+        <p>{{ item.descriptionReplace }}</p>
         {% if relatedItems.length %}
             <div class="line"></div>
 
