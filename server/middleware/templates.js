@@ -77,6 +77,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                     directory = siteLocation;
                 }
                 template = directory + '/' + platform;
+                app.session.persist({
+                    osName: device.osName || 'Others'
+                });
                 app.session.update({
                     device: device,
                     directory: directory,

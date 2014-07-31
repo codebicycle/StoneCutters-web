@@ -5,10 +5,10 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/esi', handler);
 
         function handler(req, res) {
-            console.log('esi');
-            var user = req.rendrApp.session.get('user');
             var result = {
-                user_loggedin: !!user
+                user_loggedin: !!req.rendrApp.session.get('user'),
+                clientId: req.rendrApp.session.get('clientId'),
+                osName: req.rendrApp.session.get('osName')
             };
             var esi = '';
 
