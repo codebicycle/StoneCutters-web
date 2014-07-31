@@ -154,7 +154,6 @@ function handleShow(params, promise) {
         });
 
         analytics.reset();
-        analytics.addParam('user', this.app.session.get('user'));
         analytics.addParam('category', _category.toJSON());
         seo.addMetatag.call(this, 'title', _category.get('trName'));
         seo.addMetatag.call(this, 'description', _category.get('trName'));

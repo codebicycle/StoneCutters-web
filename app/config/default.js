@@ -102,5 +102,27 @@ module.exports = {
                 html5: 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo'
             }
         }
+    },
+    tracking: {
+        serverSide: false,
+        trackers: {
+            ati: {
+                enabled: true
+            },
+            'ati-event': {
+                enabled: true,
+                isEvent: true
+            },
+            google: {
+                enabled: true
+            },
+            'google-event': {
+                enabled: true,
+                isEvent: true
+            },
+            graphite: {
+                enabled: true
+            }
+        }
     }
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function itemRouter(app, dataAdapter) {
+module.exports = function pagesRouter(app, dataAdapter) {
     var _ = require('underscore');
     var configServer = require('../config');
     var configClient = require('../../app/config');

@@ -138,6 +138,11 @@ module.exports = function(nunjucks) {
             return out.join('');
         },
         is: function(value, type) {
+            var fn = _[['is', type.charAt(0).toUpperCase(), type.slice(1)].join('')];
+
+            if (fn) {
+                return fn.call(_, value);
+            }
             return typeof value === type;
         },
         link: function (href, query) {
