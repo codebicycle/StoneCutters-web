@@ -1,0 +1,18 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, item.category.name) }}
+<div id="itemPage">
+	<div id="itemDisable">
+		<h4>{{ dictionary["item.AdNotAvailable"] | replace ('<<AD_TITLE>>', '<strong>' + item.title + '</strong>') }}</h4>
+		<p>
+			{% if subcategory.slug %}
+				{{ dictionary["item.SeeMoreAds"] | replace ('<<LINK_TO_CATEGORY>>', '<a href="' + (subcategory | slugToUrl | link) + '">' + subcategory.trName + '</a>') }}
+			{% else %}
+				<a href="{{ '/' | link }}">{{ dictionary["defaultfooter.Back"] }}</a>
+			{% endif %}
+		</p>
+		{% set templateName = template + '/partials/analytics.html' %}
+	    {% include templateName %}
+	</div>
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

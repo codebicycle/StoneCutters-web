@@ -150,6 +150,9 @@ module.exports = function(nunjucks) {
         date: function(timestamp) {
             return dateformat(new Date(timestamp), 'dd/mm/yyyy');
         },
+        countFormat: function(count) {
+            return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        },
         log: function() {
             console.log.apply(console, arguments);
         },

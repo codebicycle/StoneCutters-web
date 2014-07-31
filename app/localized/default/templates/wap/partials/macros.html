@@ -68,9 +68,11 @@
     <label style="display: block; padding-top: .5em;">
         <small>{{ '* ' if mandatory == 'true' }}{{ label }}</small>
         <br />
-        <input type="text" name="{{name}}" id="text-{{name}}" 
-        {% if (form and form.values and form.values[name]) or ((name == 'email' or name == 'name') and user)%}     
-            value="{{ form.values[name] if form.values[name] else (user.email if name == 'email' else user.username) }}"
+        <input type="text" name="{{name}}" id="text-{{name}}"
+        {% if name == 'email' %}
+            value="{{ user.email if (user and user.email) else '' }}"
+        {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
+            value="{{ form.values[name] if form.values[name] else user.username }}"
         {% endif %}>
     </label>
 {% endmacro %}

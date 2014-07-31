@@ -25,7 +25,7 @@ function handleItems(params, promise) {
         helpers.controllers.changeHeaders.call(this, false, currentRouter);
         seo.resetHead.call(this, currentRouter);
 
-        slug = helpers.common.slugToUrl(subcategory.toJSON());
+        slug = helpers.common.slugToUrl((subcategory || category).toJSON());
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
             return helpers.common.redirect.call(this, '/' + slug);
@@ -68,7 +68,7 @@ function handleItems(params, promise) {
 
         if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
             done.abort();
-            return helpers.common.redirect.call(this, '/' + helpers.common.slugToUrl(subcategory.toJSON()), null, {
+            return helpers.common.redirect.call(this, '/' + helpers.common.slugToUrl((subcategory || category).toJSON()), null, {
                 status: 302
             });
         }
@@ -78,21 +78,27 @@ function handleItems(params, promise) {
     function success(done, _items) {
         var url = '/' + query.title + '-cat-' + query.catId;
         var metadata = _items.metadata;
+        var postingLink = {
+            category: category.get('id')
+        };
         var currentPage;
-
-        helpers.pagination.paginate(metadata, query, url);
         
+        helpers.pagination.paginate(metadata, query, url);
+        helpers.filters.prepare(metadata);
+
+        if (subcategory) {
+            postingLink.subcategory = subcategory.get('id');
+        }
         this.app.session.update({
-            postingLink: {
-                category: category.get('id'),
-                subcategory: subcategory.get('id')
-            }
+            postingLink: postingLink 
         });
 
         analytics.reset();
         analytics.setPage('listing');
         analytics.addParam('category', category.toJSON());
-        analytics.addParam('subcategory', subcategory.toJSON());
+        if (subcategory) {
+            analytics.addParam('subcategory', subcategory.toJSON());
+        }
         if (metadata.seo) {
             currentPage = metadata.page;
             seo.addMetatag('title', metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
@@ -107,7 +113,8 @@ function handleItems(params, promise) {
         done({
             type: 'items',
             category: category.toJSON(),
-            subcategory: subcategory.toJSON(),
+            subcategory: (subcategory || category).toJSON(),
+            currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
             metadata: metadata,
             items: _items.toJSON(),
@@ -228,6 +235,7 @@ module.exports = {
                     return done.fail(null, {});
                 }
                 var category = res.categories.get(params.catId);
+                var platform = this.app.session.get('platform');
                 var subcategory;
 
                 if (!category) {
@@ -241,6 +249,9 @@ module.exports = {
                     subcategory = category.get('children').get(params.catId);
                     handleItems.call(this, params, promise);
                 } 
+                else if (platform === 'desktop') {
+                    handleItems.call(this, params, promise);
+                }
                 else {
                     handleShow.call(this, params, promise);
                 }

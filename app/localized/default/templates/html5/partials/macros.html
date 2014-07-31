@@ -36,8 +36,10 @@
 {% macro FieldText(label, name, mandatory, form, user) %}
     <label>{{ '* ' if mandatory == 'true' }}{{ label }}</label>
     <input type="text" name="{{name}}" id="text-{{name}}"
-    {% if (form and form.values and form.values[name]) or ((name == 'email' or name == 'name') and user)%}     
-        value="{{ form.values[name] if form.values[name] else (user.email if name == 'email' else user.username) }}"
+    {% if name == 'email' %}
+        value="{{ user.email if (user and user.email) else '' }}"
+    {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
+        value="{{ form.values[name] if form.values[name] else user.username }}"
     {% endif %}>
 {% endmacro %}
 

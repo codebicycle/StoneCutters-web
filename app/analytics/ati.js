@@ -1,7 +1,10 @@
 'use strict';
 
 var _ = require('underscore');
+var config = require('../config');
+var configAnalytics = require('./config');
 var helpers = require('../helpers');
+var utils = require('../../shared/utils');
 
 module.exports = function analyticsHelper() {
     var actionTypes = {
@@ -89,13 +92,21 @@ module.exports = function analyticsHelper() {
             params.poster_id = options.item.user.id;
             params.poster_type = 'registered_logged';
         }
-        if(params.page_name === 'expired_category' && options.category) {
-            params.page_name = 'listing_' + options.category.name;
+        if(params.page_name === 'expired_category') {
+            if (options.subcategory) {
+                params.page_name = 'listing_' + options.subcategory.name;
+            }
+            else if (options.category) {
+                params.page_name = 'listing_' + options.category.name;
+            }
             params.category = options.category.name;
         }
         if(params.page_name === 'posting_step4' && options.category) {
             params.ad_category = options.category.name;
             params.ad_subcategory = options.subcategory.name;
+        }
+        if(params.subcategory === 'expired_subCategory') {
+            delete params.subcategory;
         }
     }
 
@@ -114,17 +125,18 @@ module.exports = function analyticsHelper() {
         return params;
     }
 
-    function generateParams(ati, options) {
-        var params = _.clone(ati.names);
+    function generate(params, page, options) {
+        var ati = utils.get(configAnalytics, ['ati', 'params', page], {});
+        var custom = _.clone(ati.names);
 
-        prepareDefaultParams.call(this, params);
+        prepareDefaultParams.call(this, custom);
         if (ati.process) {
-            params = prepareParams(params, options);
+            custom = prepareParams(custom, options);
         }
-        return JSON.stringify(params);
+        params.custom = JSON.stringify(custom);
     }
 
     return {
-        generateParams: generateParams
+        generate: generate
     };
 }();
