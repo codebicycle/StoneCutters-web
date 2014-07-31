@@ -9,7 +9,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var uuid = require('node-uuid');
         var crypto = require('crypto');
         var utils = require('../../shared/utils');
-        var configAnalytics = require('../../app/analytics/config');
+        var analytics = require('../../app/analytics');
 
         function generateGuid(req) {
             var guid = req.header('HTTP_X_DCMGUID');
@@ -31,7 +31,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var visitorId;
 
             if (guid) {
-                visitorId = guid + utils.get(configAnalytics, ['google', 'id'], 'MO-50756825-1');
+                visitorId = guid + analytics.google.getId();
             } 
             else {
                 visitorId = (req.get('user-agent') || '') + uuid.v1();
@@ -65,8 +65,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (typeof visitorId === 'undefined') {
                 req.rendrApp.session.persist({
                     visitorId: generateVisitorId(req)
-                }, {
-                    maxAge: (new Date().getTime() + 63072000)
                 });
             }
             req.rendrApp.session.update({

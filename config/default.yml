@@ -127,4 +127,4 @@ hosts:
   - jaovat
 
 redirect:
-  onDesktop: true
+  onDesktop: false

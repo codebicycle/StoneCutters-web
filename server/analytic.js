@@ -96,16 +96,15 @@ Analytic.types = {
         var today = new Date().getTime().toString();
 
         return {
-            utmhn: options.host,
-            utmp: options.page,
-            utmac: options.id,
-            utmip: options.ip,
-            utmn: today,
-            guid: 'ON',
-            utmv: '1',
-            utmr: options.referer,
             utmwv: '4.4sh',
-            utmcc: ['__utma=', random, '.', Math.round(Math.random() * 1000000), '.', today, '.', today, '.', today, '.3;'].join('')
+            utmn: today,
+            utmhn: options.host,
+            utmr: options.referer,
+            utmac: options.id,
+            utmcc: '__utma=999.999.999.999.999.1;',
+            utmvid: options.clientId,
+            utmip: options.ip,
+            utmp: options.page
         };
     },
     google: function(options) {
@@ -128,13 +127,13 @@ Analytic.types = {
 
         ['category', 'action', 'label'].forEach(function(key) {
             var value = options[key];
-            if (value !== null) {
+            if (value) {
                 payload.push(value);
             }
         });
         obj.utme = '5(' + payload.join('*') + ')';
 
-        if (options.value !== null) {
+        if (options.value) {
             obj.utme += '(' + Math.round(options.value) + ')';
         }
         if (options.nonInteraction) {
