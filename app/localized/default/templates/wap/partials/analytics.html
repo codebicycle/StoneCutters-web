@@ -1,3 +1,9 @@
 {% if analytics %}
-    <img src="{{analytics}}" style="display: none;" >
+    {% if (analytics | is('array')) %}
+        {% for url in analytics %}
+            <img src="{{url}}" style="display: none;" width="1px" height="1px">
+        {% endfor %}
+    {% else %}
+        <img src="{{analytics}}" style="display: none;" width="1px" height="1px">
+    {% endif %}
 {% endif %}

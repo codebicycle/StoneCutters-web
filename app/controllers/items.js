@@ -210,7 +210,6 @@ module.exports = {
 
                 if (!item.purged) {
                     analytics.reset();
-                    analytics.addParam('user', user);
                     analytics.addParam('item', item);
                     analytics.addParam('category', category);
                     analytics.addParam('subcategory', subcategory);
@@ -345,7 +344,6 @@ module.exports = {
                 category = parentId ? _categories.get(parentId) : subcategory;
                 
                 analytics.reset();
-                analytics.addParam('user', user);
                 analytics.addParam('item', item);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
@@ -445,7 +443,6 @@ module.exports = {
                 category = parentId ? _categories.get(parentId) : subcategory;
 
                 analytics.reset();
-                analytics.addParam('user', user);
                 analytics.addParam('item', _item.toJSON());
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
@@ -537,7 +534,6 @@ module.exports = {
 
                 analytics.reset();
                 analytics.addParam('item', item);
-                analytics.addParam('user', user);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 seo.addMetatag('robots', 'noindex, nofollow');
@@ -623,7 +619,6 @@ module.exports = {
 
                 analytics.reset();
                 analytics.addParam('item', item);
-                analytics.addParam('user', user);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 callback(null, {
@@ -670,7 +665,6 @@ module.exports = {
                 analytics.setPage('nf');
                 analytics.addParam('keyword', query.search);
                 analytics.addParam('page_nb', 0);
-                analytics.addParam('user', user);
 
                 if (!query.search || _.isEmpty(query.search.trim())) {
                     seo.addMetatag('robots', 'noindex, follow');
@@ -772,7 +766,6 @@ module.exports = {
 
                 analytics.reset();
                 analytics.addParam('page_nb', 0);
-                analytics.addParam('user', user);
 
                 done();
             }
@@ -833,7 +826,6 @@ module.exports = {
                     categories: _categories.toJSON(),
                     items: _items.toJSON(),
                     metadata: metadata,
-                    //search: query.search,
                     infiniteScroll: infiniteScroll
                     //analytics: analytics.generateURL.call(this)
                 });
