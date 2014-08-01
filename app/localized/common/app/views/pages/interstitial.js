@@ -19,6 +19,7 @@ module.exports = Base.extend({
         var interstitial = this.$('#interstitial');
         var views = '[data-view]';
         var img;
+        var urls;
 
         if (interstitial.length) {
             interstitial.prependTo($('body'));
@@ -43,10 +44,18 @@ module.exports = Base.extend({
             }, {
                 maxAge: this.app.session.get('downloadApp')
             });
-            img = $('<img/>');
-            img.addClass('analytics');
-            img.attr('src', analytics.generateURL.call(this));
-            interstitial.append(img);
+
+            urls = analytics.generateURL.call(this);
+            if (!_.isArray(urls)) {
+                urls = [urls];
+            }
+
+            _.each(urls, function(url) {
+                img = $('<img/>');
+                img.addClass('analytics');
+                img.attr('src', url);
+                interstitial.append(img);
+            });
         }
     }
 });

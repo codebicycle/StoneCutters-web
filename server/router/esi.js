@@ -5,13 +5,17 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/esi', handler);
 
         function handler(req, res) {
+            var user = req.rendrApp.session.get('user');
             var result = {
-                user_loggedin: !!req.rendrApp.session.get('user'),
+                user_loggedin: !!user,
                 clientId: req.rendrApp.session.get('clientId'),
                 osName: req.rendrApp.session.get('osName')
             };
             var esi = '';
 
+            if (result.user_loggedin) {
+                result.user_id = user.id;
+            }
             for (var variable in result) {
                 esi += '<esi:text><esi:assign name="' + variable + '">\'\'\'</esi:text>' + result[variable] + '<esi:text>\'\'\'</esi:assign></esi:text>';
             }

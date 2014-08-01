@@ -47,7 +47,7 @@
 			top: -1rem;
 			right: 1rem;
 
-			> a {
+			> span {
 
 				position: relative;
 				display: block;
@@ -56,11 +56,10 @@
 				text-indent: -9000em;
 				background-color: #FFF;
 				border: solid thin #DDD;
-
 				border-radius: 2rem;
-
 				-webkit-transition: all .25s;
     			transition: all .25s;
+    			cursor: pointer;
 
 				&:before,
 				&:after {
@@ -138,7 +137,7 @@
 				> li {
 
 					overflow: hidden;
-					color: #AAA;
+					color: #aaa;
 					text-overflow: ellipsis;
 
 					> a {
@@ -153,6 +152,9 @@
 
 						}
 
+					}
+					> title {
+						margin: 20px 0 10px;
 					}
 
 				}

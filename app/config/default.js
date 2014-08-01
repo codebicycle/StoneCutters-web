@@ -100,6 +100,48 @@ module.exports = {
                 wap:   'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo',
                 html4: 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo',
                 html5: 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo'
+            },
+            'www.olx.com.bo': {
+                wap:   '_3dWQgd7S7XLeekqcv7n-A7exgaeZitXSo7mtI5K7ng',
+                html4: '_3dWQgd7S7XLeekqcv7n-A7exgaeZitXSo7mtI5K7ng',
+                html5: '_3dWQgd7S7XLeekqcv7n-A7exgaeZitXSo7mtI5K7ng'
+            },
+            'www.olx.com.ec': {
+                wap:   'nZ4_aLo9SMrcvU0HxEc_gGol5g9QlRoHKoQEhRYaE7Q',
+                html4: 'nZ4_aLo9SMrcvU0HxEc_gGol5g9QlRoHKoQEhRYaE7Q',
+                html5: 'nZ4_aLo9SMrcvU0HxEc_gGol5g9QlRoHKoQEhRYaE7Q'
+            },
+            'www.olx.com.pe': {
+                wap:   'GceKe59dW4b_OWmDFmNgJvrAi5Jve9zov4uy5ItklAY',
+                html4: 'GceKe59dW4b_OWmDFmNgJvrAi5Jve9zov4uy5ItklAY',
+                html5: 'GceKe59dW4b_OWmDFmNgJvrAi5Jve9zov4uy5ItklAY'
+            },
+            'www.olx.com.ve': {
+                wap:   'ElLjb-uA1Oel1D9y3P4-WbbvrHB4NO2UOtkcLomsFkg',
+                html4: 'ElLjb-uA1Oel1D9y3P4-WbbvrHB4NO2UOtkcLomsFkg',
+                html5: 'ElLjb-uA1Oel1D9y3P4-WbbvrHB4NO2UOtkcLomsFkg'
+            }
+        }
+    },
+    tracking: {
+        serverSide: false,
+        trackers: {
+            ati: {
+                enabled: true
+            },
+            'ati-event': {
+                enabled: true,
+                isEvent: true
+            },
+            google: {
+                enabled: true
+            },
+            'google-event': {
+                enabled: true,
+                isEvent: true
+            },
+            graphite: {
+                enabled: true
             }
         }
     }

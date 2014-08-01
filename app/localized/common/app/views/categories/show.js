@@ -184,18 +184,25 @@ module.exports = Base.extend({
             var subcategory = buildCategory('#subcategory');
             var img;
             var analyticImg;
+            var urls;
 
             analytics.reset();
             analytics.setPage('listing');
             analytics.addParam('category', category);
             analytics.addParam('subcategory', subcategory);
 
-            img = $('<img/>');
-            img.addClass('analytics');
-            img.attr('src', analytics.generateURL.call(this));
-            analyticImg = $('.analytics:last');
-            analyticImg.after(img);
-            analyticImg.remove();
+            urls = analytics.generateURL.call(this);
+            if (!_.isArray(urls)) {
+                urls = [urls];
+            }
+
+            _.each(urls, function(url) {
+                img = $('<img/>');
+                img.addClass('analytics');
+                img.attr('src', url);
+                analyticImg = $('.analytics:last');
+                analyticImg.after(img);
+            });
 
             done(_items);
         }

@@ -4,6 +4,7 @@ var _ = require('underscore');
 var config = require('../config');
 var configAnalytics = require('./config');
 var helpers = require('../helpers');
+var esi = require('../esi');
 var utils = require('../../shared/utils');
 
 module.exports = function analyticsHelper() {
@@ -26,19 +27,20 @@ module.exports = function analyticsHelper() {
 
     function prepareDefaultParams(params) {
         var user = this.app.session.get('user');
+        var platform = this.app.session.get('platform');
         var location;
 
         if (!params) {
             params = {};
         }
         if (user) {
-            params.user_id = user.id;
+            params.user_id = esi.esify.call(this, 'user_id', user.id);
         }
         location = this.app.session.get('location');
         if (location && location.current) {
             params.geo2 = standarizeName(location.current.name || '');
         }
-        params.platform = this.app.session.get('platform');
+        params.platform = esi.esify.call(this, 'platform', platform);
         params.language = this.app.session.get('selectedLanguage');
     }
 
