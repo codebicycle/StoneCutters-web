@@ -35,6 +35,9 @@ module.exports = Base.extend({
                 });
             }
         });
+        $('#footer .teaser header span').click(function() {
+            $('.teaser.open').slideToggle('slow');
+        });
     }
 
 });

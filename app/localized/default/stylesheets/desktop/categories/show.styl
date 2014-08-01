@@ -26,15 +26,20 @@ section#itemListing {
 				background: #fff;
 				border-left: 1px solid #f6f6f6;
 				border-right: 1px solid #f6f6f6;
+
+				a {
+					padding: .3125rem 0 .3125rem .625rem;
+				}
 			}
 			a {
 				display: block;
-				border-top: 1px solid #fff;
-				padding: .3125rem 0 .3125rem .625rem;
+				border: 1px solid #fff;
+				padding: .625rem .3125rem .625rem .625rem;
 				color: #38b;
 
 				span.icons {
 					float: left;
+					line-height: 1.125rem;
 
 					&:before {
 						width: 1.625rem;
@@ -49,6 +54,12 @@ section#itemListing {
 				span.count {
 					color: #888;
 					font-size: .625rem;
+				}
+
+				&:hover {
+					background: #fff;
+					color:  #369;
+					border-color: #b9ddf3;
 				}
 			}
 		}
