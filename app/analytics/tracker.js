@@ -24,6 +24,7 @@ var paramsGenerators = {
             params.id = atiConfig.siteId;
             params.host = atiConfig.logServer;
         }
+        params.clientId = this.app.session.get('clientId').substr(24);
         return params;
     },
     google: function generateGoogleParams(defaults) {

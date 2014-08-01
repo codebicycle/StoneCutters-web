@@ -117,7 +117,8 @@ Tracking.types = {
             locNm: options.locNm,
             osNm: options.osNm,
             platform: options.platform,
-            metric: 'pageview'
+            metric: 'pageview',
+            random: Math.round(Math.random() * 1000000)
         };
 
         params = dynamics(params, options.dynamics);
