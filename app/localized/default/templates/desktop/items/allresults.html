@@ -58,29 +58,15 @@
 				</select>
 			</div>
 		</nav>
-		<ul class="listing">
-			{% for item in items %}
-				<li>
-					<a href="{{ item | slugToUrl | link }}">
-						<div  class="photo">
-							<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}"></div>
-						</div>
-						<div class="title">
-							<h3>{{ item.title }}</h3>
-							<span>{{ item.displayLocation }}</span>
-						</div>
-						<div class="price">
-							{{ item.price.displayPrice }}
-						</div>
-						<div class="date">
-							{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (',<br> ' + item.date.since.hour) if item.date.since.hour }}
-						</div>
-					</a>
-					<div class="clear"></div>
-				</li>
-			{% endfor %}
+		<ul class="listing itemListing">
+			{% view 'items/items' %}
 		</ul>
-		{% if metadata.next or metadata.previous %}
+		{% if infiniteScroll %}
+            <div class="loader is-loading" style="display: none;">
+                <img src="{{ '/images/html5/loading.gif' | static }}" alt="Loading...">
+            </div>
+            <input id="currentUrl" type="hidden" class="hide" value="{{ metadata.current | link }}">
+        {% elif metadata.next or metadata.previous %}
             <div id="itemPagination">
                 <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
             </div>
