@@ -61,7 +61,7 @@ module.exports = Base.extend({
 
         if ($img.length) {
             analytics = $img.last().attr('src');
-            analytics = $.deparam(analytics.replace(/\/analytics\/(pageview|graphite)\.gif\?|/, ''));
+            analytics = $.deparam(analytics.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
         }
         obj = _.defaults(obj, data, analytics);
 
