@@ -1,0 +1,21 @@
+{% for item in items %}
+    <li>
+        <a href="{{ item | slugToUrl | link }}">
+            <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
+            <p>
+                <span>{{ item.date | hijri }}</span>
+                {% if item.displayLocation %}
+                    {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
+                {% endif %}
+            </p>
+            {% if item.price.displayPrice %}<h3>&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount }}</h3>{% endif %}
+            <div class="title">
+                <h2>
+                    <span>
+                        <span>{{ item.title }}</span>
+                    </span>
+                </h2>
+            </div>
+        </a>
+    </li>
+{% endfor %}
