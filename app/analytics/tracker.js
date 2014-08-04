@@ -25,17 +25,41 @@ var paramsGenerators = {
             params.id = atiConfig.siteId;
             params.host = atiConfig.logServer;
         }
-        params.clientId = defaults.cliId;
+        params.clientId = esi.esify.call(this, '$substr($(clientId), 24)', defaults.cliId.substr(24));;
         return params;
     },
     google: function generateGoogleParams(defaults) {
         var params = {};
         
         params.host = this.app.session.get('host');
-        params.clientId =  esi.esify.call(this, '$(visitorId)', this.app.session.get('visitorId'));
+        params.clientId = defaults.cliId;
+        params.userAgent = getUserAgent.call(this);
         return params;
     }
 };
+
+function getUserAgent() {
+    var userAgent;
+    var device;
+
+    if (this.app.session.get('isServer')) {
+        userAgent = this.app.req.get('user-agent') || utils.defaults.userAgent;
+        device = this.app.session.get('device');
+
+        if (device.browserName == 'Opera Mini') {
+            ['device-stock-ua', 'x-operamini-phone-ua'].forEach(function(header) {
+                header = this.app.req.header(header);
+                if (header) {
+                    userAgent = header;
+                }
+            });
+        }
+    }
+    else {
+        userAgent = window.navigator.userAgent;
+    }
+    return userAgent;
+}
 
 function stringifyParams(params) {
     var str = [];
@@ -76,7 +100,7 @@ function generateDefaultParams(query) {
     params.platform = esi.esify.call(this, '$(platform)', platform);
     params.random = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
     params.referer = esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'));
-    params.cliId = esi.esify.call(this, '$substr($(clientId), 24)', this.app.session.get('clientId').substr(24));
+    params.cliId = esi.esify.call(this, '$(clientId)', this.app.session.get('clientId'));
     params.osNm = esi.esify.call(this, '$(osNm)', (this.app.session.get('device').osName  || 'Others'));
     if (sid) {
         params.sid = esi.esify.call(this, '$(QUERY_STRING{\'sid\'})', sid);
@@ -125,7 +149,7 @@ function generateURLs(query) {
 }
 
 function generateURL(query) {
-    var serverSide = config.get(['tracking', 'serverSide'], false);
+    var serverSide = config.get(['tracking', 'serverSide'], true);
 
     if (serverSide) {
         return generateSingleURL.call(this, query);

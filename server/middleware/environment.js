@@ -7,53 +7,28 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var _ = require('underscore');
         var uuid = require('node-uuid');
-        var crypto = require('crypto');
         var utils = require('../../shared/utils');
-        var analytics = require('../../app/analytics');
 
-        function generateGuid(req) {
-            var guid = req.header('HTTP_X_DCMGUID');
+        function getIp(req) {
+            var ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
 
-            if (!guid) {
-                guid = req.header('HTTP_X_UP_SUBNO');
-            }
-            if (!guid) {
-                guid = req.header('HTTP_X_JPHONE_UID');
-            }
-            if (!guid) {
-                guid = req.header('HTTP_X_EM_UID');
-            }
-            return guid;
-        }
-        
-        function generateVisitorId(req) {
-            var guid = generateGuid(req);
-            var visitorId;
+            if (!ip) {
+                ip = req.header('HTTP_X_FORWARDED_FOR');
 
-            if (guid) {
-                visitorId = guid + analytics.google.getId();
-            } 
-            else {
-                visitorId = (req.get('user-agent') || '') + uuid.v1();
+                if(!ip) {
+                    ip = req.ip;
+                }
+                ip = ip.split(',').pop();
             }
-            return '0x' + crypto
-                .createHash('md5')
-                .update(visitorId, 'utf8')
-                .digest('hex')
-                .substr(0, 16);
+            return ip;
         }
 
         return function environment(req, res, next) {
-            if (_.contains(excludedUrls.all, req.path)) {
-                return next();
-            }
-
             var path = req._parsedUrl.pathname;
             var protocol = req.protocol;
             var host = req.headers.host;
             var url = req.originalUrl;
             var clientId = req.rendrApp.session.get('clientId');
-            var visitorId = req.rendrApp.session.get('visitorId');
             var referer = req.headers.referer;
             var platform = req.rendrApp.session.get('forcedPlatform') || req.subdomains.pop() || utils.defaults.platform;
 
@@ -62,18 +37,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                     clientId: uuid.v4()
                 });
             }
-            if (typeof visitorId === 'undefined') {
-                req.rendrApp.session.persist({
-                    visitorId: generateVisitorId(req)
-                });
-            }
             req.rendrApp.session.update({
                 path: path,
                 protocol: protocol,
                 host: host,
                 url: url,
                 referer: referer,
-                platform: platform
+                platform: platform,
+                ip: getIp(req)
             });
             req.rendrApp.req.app.locals({
                 platform: platform
