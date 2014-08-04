@@ -12,21 +12,16 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
 
+    function getUserAgent(req) {
+        return (req.get('user-agent') || utils.defaults.userAgent);
+    }
+
     function defaultOptions(req) {
         return {
             headers: { 
-                'User-Agent': (req.get('user-agent') || utils.defaults.userAgent)
+                'User-Agent': getUserAgent(req)
             }
         };
-    }
-
-    function googleIp(req) {
-        var ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
-
-        if (!ip) {
-            ip = req.ip;
-        }
-        return ip;
     }
     
     function googleUTMCC(req) {
@@ -75,7 +70,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 var params = {};
                 
                 params.host = req.host;
-                params.clientId = (req.rendrApp.session.get('visitorId') || '0xd3fa017c0de00000');
+                params.clientId = (req.rendrApp.session.get('clientId') || 'ac33b570-90e2-4669-ba83-d3fa017c0de0');
                 return params;
             }
         };
@@ -151,15 +146,17 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var analytic = new Tracker('google', {
                 id: req.query.id,
                 host: req.host,
-                clientId: req.rendrApp.session.get('visitorId')
+                clientId: req.query.cliId
             });
-            var ip = googleIp(req);
+            var ip = req.rendrApp.session.get('ip');
             var options = defaultOptions(req);
 
+            options.method = 'post';
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
-                ip: ip
+                ip: ip,
+                userAgent: getUserAgent(req)
             }, options);
         }
 
@@ -179,7 +176,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer,
-                    clientId: req.query.cliId
+                    clientId: req.query.cliId.substr(24)
                 });
 
                 analytic.track({
@@ -217,13 +214,15 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var analytic = new Tracker('google-event', {
                 id: req.query.id,
                 host: req.host,
-                clientId: req.rendrApp.session.get('visitorId')
+                clientId: req.query.cliId
             });
-            var ip = googleIp(req);
+            var ip = req.rendrApp.session.get('ip');
             var options = defaultOptions(req);
 
+            options.method = 'post';
             analytic.track(_.extend({
-                ip: ip
+                ip: ip,
+                userAgent: getUserAgent(req)
             }, req.query), options);
         }
 
@@ -243,7 +242,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer,
-                    clientId: req.query.cliId
+                    clientId: req.query.cliId.substr(24)
                 });
                 analytic.track({
                     custom: req.query.custom,

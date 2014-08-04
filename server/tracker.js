@@ -23,6 +23,26 @@ function makeTrack(url, options, callback) {
     }
 }
 
+function prepare(options, params) {
+    var query;
+
+    options = _.defaults({
+        method: 'get'
+    }, options);
+
+    if (options.method === 'get') {
+        query = {};
+        _.each(params, function(value, key) {
+            query[key] = encodeURIComponent(value);
+        });
+        options.query = query;
+    }
+    else {
+        options.data = params;
+    }
+    return options;
+}
+
 var Tracker = function(type, options) {
     this.type = type;
     this.options = options;
@@ -31,7 +51,6 @@ var Tracker = function(type, options) {
 
 Tracker.prototype.track = function(optionsTrack, optionsRequest, callback) {
     var api;
-    var query;
     var options;
 
     if (!tracking.has(this.type)) {
@@ -44,16 +63,7 @@ Tracker.prototype.track = function(optionsTrack, optionsRequest, callback) {
             callback = optionsRequest;
             optionsRequest = {};
         }
-
-        optionsRequest = optionsRequest || {};
-        query = {};
-        _.each(api.params, function(value, key) {
-            query[key] = encodeURIComponent(value);
-        });
-        makeTrack(api.url, _.defaults({
-            method: 'get',
-            query: query
-        }, optionsRequest), callback);
+        makeTrack(api.url, prepare(optionsRequest || {}, api.params), callback);
         return api.url;
     }
 };

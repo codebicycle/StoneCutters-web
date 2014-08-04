@@ -4,6 +4,12 @@ var _ = require('underscore');
 var config = require('../app/config');
 
 var Tracking = function() {};
+var GoogleEventsKeys = {
+    ec: 'category',
+    ea: 'action',
+    el: 'label',
+    ev: 'value'
+};
 
 function dynamics(defaults, params) {
     if (params) {
@@ -58,54 +64,46 @@ Tracking.types = {
         var random = (options.userId || Math.round(Math.random() * 1000000));
         var today = new Date().getTime().toString();
         var params = {
-            utmwv: '4.4sh',
-            utmn: today,
-            utmhn: options.host,
-            utmr: options.referer,
-            utmac: options.id,
-            utmcc: '__utma=999.999.999.999.999.1;',
-            utmvid: options.clientId,
-            utmp: options.page
+            v: '1',
+            tid: options.id,
+            cid: options.clientId,
+            t: 'pageview',
+            dh: options.host,
+            dp: options.page,
+            dr: options.referer
         };
 
         if (options.ip) {
-            params.utmip = options.ip;
+            params.uip = options.ip;
+        }
+        if (options.userAgent) {
+            params.ua = options.userAgent;
         }
         return params;
     },
     google: function(options) {
-        var url = 'http://www.google-analytics.com/__utm.gif';
+        var url = 'http://www.google-analytics.com/collect';
         var params = Tracking.types.__google_internal__.call(null, options);
 
         params = dynamics(params, options.dynamics);
+        params.z = Math.round(Math.random() * 1000000);
         return {
             url: url,
             params: params
         };
     },
     'google-event': function(options) {
-        var url = 'http://www.google-analytics.com/__utm.gif';
-        var payload = [];
-        var params = {
-            utmt: 'event'
-        };
-        var defaultParams = Tracking.types.__google_internal__.call(null, options);
+        var url = 'http://www.google-analytics.com/collect';
+        var params = Tracking.types.__google_internal__.call(null, options);
 
-        ['category', 'action', 'label'].forEach(function(key) {
-            var value = options[key];
-            if (value) {
-                payload.push(value);
+        params.t = 'event';
+        _.each(GoogleEventsKeys, function(value, key) {
+            if (options[value]) {
+                params[key] = options[value];
             }
         });
-        params.utme = '5(' + payload.join('*') + ')';
-
-        if (options.value) {
-            params.utme += '(' + Math.round(options.value) + ')';
-        }
-        if (options.nonInteraction) {
-            params.utmni = 1;
-        }
-        params = dynamics(_.defaults(params, defaultParams), options.dynamics);
+        params = dynamics(params, options.dynamics);
+        params.z = Math.round(Math.random() * 1000000);
         return {
             url: url,
             params: params
@@ -114,13 +112,18 @@ Tracking.types = {
     graphite: function(options) {
         var url = '/analytics/graphite.gif';
         var params = {
+            id: options.id,
+            host: options.host,
+            cliId: options.cliId,
+            referer: options.referer,
+            page: options.page,
+            locId: options.locId,
             locNm: options.locNm,
             osNm: options.osNm,
             platform: options.platform,
             metric: 'pageview',
             random: Math.round(Math.random() * 1000000)
         };
-
         params = dynamics(params, options.dynamics);
         return {
             url: url,
