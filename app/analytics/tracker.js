@@ -24,17 +24,41 @@ var paramsGenerators = {
             params.id = atiConfig.siteId;
             params.host = atiConfig.logServer;
         }
-        params.clientId = this.app.session.get('clientId').substr(24);
+        params.clientId = defaults.cliId.substr(24);
         return params;
     },
     google: function generateGoogleParams(defaults) {
         var params = {};
         
         params.host = this.app.session.get('host');
-        params.clientId = this.app.session.get('visitorId');
+        params.clientId = defaults.cliId;
+        params.userAgent = getUserAgent.call(this);
         return params;
     }
 };
+
+function getUserAgent() {
+    var userAgent;
+    var device;
+
+    if (this.app.session.get('isServer')) {
+        userAgent = this.app.req.get('user-agent') || utils.defaults.userAgent;
+        device = this.app.session.get('device');
+
+        if (device.browserName == 'Opera Mini') {
+            ['device-stock-ua', 'x-operamini-phone-ua'].forEach(function(header) {
+                header = this.app.req.header(header);
+                if (header) {
+                    userAgent = header;
+                }
+            });
+        }
+    }
+    else {
+        userAgent = window.navigator.userAgent;
+    }
+    return userAgent;
+}
 
 function stringifyParams(params) {
     var str = [];
@@ -76,7 +100,7 @@ function generateDefaultParams(query) {
     params.platform = this.app.session.get('platform');
     params.locNm = location.name;
     params.locId = location.id;
-    params.cliId = this.app.session.get('clientId').substr(24);
+    params.cliId = this.app.session.get('clientId');
     params.osNm = (this.app.session.get('device').osName  || 'Others');
     google.generate.call(this, params, page, query.params);
     ati.generate.call(this, params, page, query.params);
@@ -120,7 +144,7 @@ function generateURLs(query) {
 }
 
 function generateURL(query) {
-    var serverSide = config.get(['tracking', 'serverSide'], false);
+    var serverSide = config.get(['tracking', 'serverSide'], true);
 
     if (serverSide) {
         return generateSingleURL.call(this, query);
