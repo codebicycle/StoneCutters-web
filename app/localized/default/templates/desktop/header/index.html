@@ -1,7 +1,12 @@
 <section id="headerSession">
 	<ul>
-		<li><a href="{{ '/login' | link }}">Entrar</a></li>
-		<li><a href="{{ '/login' | link }}">Meus anúncios</a></li>
+		{% if not user %}
+			<li><a href="{{ '/login' | link }}">Entrar</a></li>
+		{% else %}
+			<li>Olá, {{ user.username }}</li>
+			<li><a href="{{ '/logout' | link }}">Slair</a></li>
+			<li><a href="{{ '/login' | link }}">Meus anúncios</a></li>
+		{% endif %}
 	</ul>
 </section>
 <section id="header">

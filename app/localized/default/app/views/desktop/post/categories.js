@@ -21,9 +21,6 @@ module.exports = Base.extend({
         $('html').click(function() {
             $('.catContent').removeClass('visible');
         });
-        $('.category').click(function(event){
-            event.stopPropagation();
-        });
     }
 
 });
