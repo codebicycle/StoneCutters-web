@@ -44,7 +44,7 @@ function getUserAgent() {
     if (this.app.session.get('isServer')) {
         userAgent = this.app.req.get('user-agent') || utils.defaults.userAgent;
         device = this.app.session.get('device');
-console.log(device);
+
         if (device.browserName == 'Opera Mini') {
             ['device-stock-ua', 'x-operamini-phone-ua'].forEach(function(header) {
                 header = this.app.req.header(header);
@@ -57,7 +57,6 @@ console.log(device);
     else {
         userAgent = window.navigator.userAgent;
     }
-console.log(userAgent);
     return userAgent;
 }
 
