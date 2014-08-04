@@ -40,11 +40,10 @@ var specials = {
         }
     },
     'google-site-verification': function(content) {
-        var platform = this.app.session.get('platform');
         var country = this.app.session.get('location').url;
         var gsVerification;
 
-        gsVerification = config.get(['seo', 'wmtools', country, platform]);
+        gsVerification = config.get(['seo', 'wmtools', country]);
         if (gsVerification) {
             head.metatags['google-site-verification'] = gsVerification;
         }
