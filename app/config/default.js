@@ -180,7 +180,7 @@ module.exports = {
         }
     },
     tracking: {
-        serverSide: false,
+        serverSide: true,
         trackers: {
             ati: {
                 enabled: true
