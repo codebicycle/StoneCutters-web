@@ -8,6 +8,9 @@ module.exports = {
         },
         html5: {
             maxPageSize: 26
+        },
+        desktop: {
+            maxPageSize: 25
         }
     },
     staticAccept: ['css', 'js'],
