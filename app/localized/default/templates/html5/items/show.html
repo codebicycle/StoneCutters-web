@@ -22,9 +22,8 @@
         <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
         <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
     </ul>'] | join) }}
-    {% endif %}
-    
-    {% if not item.images %}
+
+    {% if item.images.length == 0 %}
         <section id="noPicture">
             <span></span>
             <p>{{ dictionary["itemgeneraldetails.NoPicture"] }}</p>

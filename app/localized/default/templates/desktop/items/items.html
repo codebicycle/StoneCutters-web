@@ -2,7 +2,7 @@
 	<li>
 		<a href="{{ item | slugToUrl | link }}">
 			<div  class="photo">
-				<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}"></div>
+				<div {{ ('style="background-image:url(' + item.thumbnail + ');"') if item.thumbnail else ('class="noPhoto"') }} data-fullimg="{{ item.fullImage }}"></div>
 			</div>
 			<div class="title">
 				<h3>{{ item.title }}</h3>

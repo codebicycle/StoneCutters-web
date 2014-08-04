@@ -109,7 +109,12 @@ module.exports = {
         }
     },
     'items#allresults': {
-        url: 'nf/all-results'
+        urls: {
+            server: 'nf/all-results/:filters?',
+            client: {
+                url: 'nf/all-results(/)(:filters)'
+            }
+        }
     },
     'users#register': {
         url: 'register'
@@ -241,6 +246,30 @@ module.exports = {
             server: 'cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?',
             client: {
                 url: 'cat-:catId-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'categories#show#pageSlugWithFilter': {
+        urls: {
+            server: ':title-cat-:catId([0-9]+)/?:filters?',
+            client: {
+                url: ':title-cat-:catId(/)(:filters)'
+            }
+        }
+    },
+    'categories#show#pageNoSlugWithFilter': {
+        urls: {
+            server: '-cat-:catId([0-9]+)/?:filters?',
+            client: {
+                url: '-cat-:catId(/)(:filters)'
+            }
+        }
+    },
+    'categories#show#pageWithFilter': {
+        urls: {
+            server: 'cat-:catId([0-9]+)/?:filters?',
+            client: {
+                url: 'cat-:catId(/)(:filters)'
             }
         }
     },
