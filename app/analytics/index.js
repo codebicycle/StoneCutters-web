@@ -1,5 +1,6 @@
 'use strict';
 
+var esi = require('../esi');
 var tracker = require('./tracker');
 var google = require('./google');
 var ati = require('./ati');
@@ -22,12 +23,7 @@ function addParam(name, value) {
 }
 
 function generateURL() {
-    var platform = this.app.session.get('platform');
-    
-    if (platform === 'wap' || platform === 'html4') {
-        platform = '<esi:vars>$(platform)</esi:vars>';
-    }
-    addParam('rendering', platform);
+    addParam('rendering', esi.esify.call(this, '$(platform)', this.app.session.get('platform')));
     addParam('user', this.app.session.get('user'));
     return tracker.generateURL.call(this, query);
 }

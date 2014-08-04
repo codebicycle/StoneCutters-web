@@ -34,13 +34,13 @@ module.exports = function analyticsHelper() {
             params = {};
         }
         if (user) {
-            params.user_id = esi.esify.call(this, 'user_id', user.id);
+            params.user_id = esi.esify.call(this, '$(user_id)', user.id);
         }
         location = this.app.session.get('location');
         if (location && location.current) {
             params.geo2 = standarizeName(location.current.name || '');
         }
-        params.platform = esi.esify.call(this, 'platform', platform);
+        params.platform = esi.esify.call(this, '$(platform)', platform);
         params.language = this.app.session.get('selectedLanguage');
     }
 

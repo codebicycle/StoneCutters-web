@@ -19,7 +19,7 @@ module.exports = function esiHelper() {
             return false;
         }
         if (str.length >= esiTag.length && str.slice(0, esiTag.length) === esiTag) {
-            return true
+            return true;
         }
         return false;
     }
@@ -30,7 +30,7 @@ module.exports = function esiHelper() {
 
     function esify(name, _default) {
         if (isEnabled.call(this)) {
-            return generateVar(['$(', name, ')'].join(''));
+            return generateVar(name.join(''));
         }
         return _default;
     }

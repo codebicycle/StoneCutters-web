@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var querystring = require('querystring');
 var config = require('../config');
+var esi = require('../esi');
 var utils = require('../../shared/utils');
 var tracking = require('../../shared/tracking');
 var configAnalytics = require('./config');
@@ -24,14 +25,14 @@ var paramsGenerators = {
             params.id = atiConfig.siteId;
             params.host = atiConfig.logServer;
         }
-        params.clientId = this.app.session.get('clientId').substr(24);
+        params.clientId = defaults.cliId;
         return params;
     },
     google: function generateGoogleParams(defaults) {
         var params = {};
         
         params.host = this.app.session.get('host');
-        params.clientId = this.app.session.get('visitorId');
+        params.clientId =  esi.esify.call(this, '$(visitorId)', this.app.session.get('visitorId'));
         return params;
     }
 };
@@ -40,10 +41,10 @@ function stringifyParams(params) {
     var str = [];
 
     _.each(params, function(value, name) {
-        if (typeof value === 'string' && !~value.indexOf('<esi:')) {
+        if (!esi.isEsiString(value)) {
             value = encodeURIComponent(value);
         }
-        str.push(name + '=' + encodeURIComponent(value));
+        str.push(name + '=' + value);
     });
     return str.join('&');
 }
@@ -65,21 +66,6 @@ function getURLName(page) {
     return name.join('');
 }
 
-function generateEsiParams(params) {
-    params.random = '<esi:vars>$rand()</esi:vars>';
-    params.referer = "<esi:vars>$url_encode($(HTTP_REFERER|'-'))</esi:vars>";
-    params.cliId = '<esi:vars>$substr($(clientId), 24)</esi:vars>';
-    params.osName = '<esi:vars>$(osName)</esi:vars>';
-    params.sid = "<esi:vars>$(QUERY_STRING{'sid'})</esi:vars>";
-}
-
-function generateCommonParams(params) {
-    params.random = Math.round(Math.random() * 1000000);
-    params.referer = (this.app.session.get('referer') || '-');
-    params.cliId = this.app.session.get('clientId').substr(24);
-    params.osNm = (this.app.session.get('device').osName  || 'Others');
-}
-
 function generateDefaultParams(query) {
     var page = getURLName.call(this, query.page);
     var sid = this.app.session.get('sid');
@@ -87,18 +73,16 @@ function generateDefaultParams(query) {
     var platform = this.app.session.get('platform');
     var params = {};
 
-    if (platform === 'wap' || platform === 'html4') {
-        generateEsiParams.call(this, params);
-    }
-    else {
-        if (sid) {
-            params.sid = sid;
-        }
-        generateCommonParams.call(this, params);
+    params.platform = esi.esify.call(this, '$(platform)', platform);
+    params.random = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
+    params.referer = esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'));
+    params.cliId = esi.esify.call(this, '$substr($(clientId), 24)', this.app.session.get('clientId').substr(24));
+    params.osNm = esi.esify.call(this, '$(osNm)', (this.app.session.get('device').osName  || 'Others'));
+    if (sid) {
+        params.sid = esi.esify.call(this, '$(QUERY_STRING{\'sid\'})', sid);
     }
     params.locNm = location.name;
     params.locId = location.id;
-    params.platform = query.platform;
     google.generate.call(this, params, page, query.params);
     ati.generate.call(this, params, page, query.params);
 
