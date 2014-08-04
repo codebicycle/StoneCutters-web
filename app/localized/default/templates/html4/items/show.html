@@ -45,8 +45,8 @@
     </div>
 
     <h3>{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</h3>
-
-    {% if item.status.contactable %}
+    
+    {% if item.status.label == 'ready' %}
         <div id="centerBtns">
             {% if item.phone %}
                 {% if device.uriSchemeTel %}
@@ -60,15 +60,15 @@
                 <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange">{{ dictionary["register_mail.Email"] }}</a>
             {% endif %}
         </div>
+        {% if item.phone %}
+            <div id="phone">
+                <img alt="" src="{{ "/images/html4/phone.png" | static }}">
+                <span>{{ item.phone }}</span>
+            </div>
+        {% endif %}
     {% endif %}
-    {% if item.phone %}
-        <div id="phone">
-            <img alt="" src="{{ "/images/html4/phone.png" | static }}">
-            <span>{{ item.phone }}</span>
-        </div>
-    {% endif %}
+    
     <div class="line"></div>
-
     <ul>
         {% if item.optionals %}
             {% for optional in item.optionals %}
