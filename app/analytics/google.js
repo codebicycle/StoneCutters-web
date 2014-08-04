@@ -142,7 +142,7 @@ function getId() {
     }
     var env = config.get(['environment', 'type'], 'development');
 
-    googleId = 'MO-50718833-1';
+    googleId = 'MO-50756825-1';
     if (env !== 'development') {
         googleId = utils.get(configAnalytics, ['google', 'id'], googleId);
 
