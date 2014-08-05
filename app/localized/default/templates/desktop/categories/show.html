@@ -13,6 +13,13 @@
 			no {{location.name}}
 		{% endif %}
 		<span class="count">({{ metadata.total | countFormat }})</span>
+		{% if not infiniteScroll and (metadata.next or metadata.previous) %}
+			<div class="itemPagination">
+			{{ metadata | log }}
+            	<p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="icons left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="icons right {{ "disable" if not metadata.next }}"></a>
+            </div>
+        {% endif %}
 	</nav>
 
 	<nav class="categories">
@@ -84,7 +91,7 @@
             </div>
             <input id="currentUrl" type="hidden" class="hide" value="{{ metadata.current | link }}">
         {% elif metadata.next or metadata.previous %}
-            <div id="itemPagination">
+            <div class="itemPagination">
                 <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
             </div>
         {% endif %}
