@@ -5,7 +5,7 @@ var restler = require('restler');
 var tracking = require('../shared/tracking');
 
 function makeTrack(url, options, callback) {
-    restler.get(url, options)
+    restler[options.method || 'get'](url, options)
         .on('success', success)
         .on('fail', fail)
         .on('error', fail);
@@ -24,10 +24,10 @@ function makeTrack(url, options, callback) {
 }
 
 function prepare(options, params) {
-    options = _.defaults({
+    options = _.defaults(options, {
         method: 'get',
         query: params
-    }, options);
+    });
 
     if (options.method === 'post') {
         options.data = options.query;
