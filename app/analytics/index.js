@@ -23,7 +23,7 @@ function addParam(name, value) {
 }
 
 function generateURL() {
-    addParam('rendering', esi.esify.call(this, '$(platform)', this.app.session.get('platform')));
+    addParam('rendering', this.app.session.get('platform'));
     addParam('user', this.app.session.get('user'));
     return tracker.generateURL.call(this, query);
 }

@@ -2,13 +2,14 @@
 
 var _ = require('underscore');
 var querystring = require('querystring');
+var esi = require('../app/esi');
 var isServer = (typeof window === 'undefined');
 var linkParams = {
     location: function (href, query) {
-        var siteLocation = this.session.get('siteLocation');
+        var siteLocation = this.app.session.get('siteLocation');
 
         if (!query.location && siteLocation && !~siteLocation.indexOf('www.')) {
-            href = params(href, 'location', siteLocation);
+            href = params.call(this, href, 'location', siteLocation, true);
         }
         return href;
     },
@@ -17,31 +18,31 @@ var linkParams = {
         var languages;
 
         if (!query.language) {
-            selectedLanguage = this.session.get('selectedLanguage');
+            selectedLanguage = this.app.session.get('selectedLanguage');
 
             if (selectedLanguage) {
-                languages = this.session.get('languages');
+                languages = this.app.session.get('languages');
 
                 if (languages && selectedLanguage === languages.models[0].locale) {
-                    href = removeParams(href, 'language');
+                    href = removeParams.call(this, href, 'language', true);
                 }
                 else {
-                    href = params(href, 'language', selectedLanguage);
+                    href = params.call(this, href, 'language', selectedLanguage, true);
                 }
             }
         }
         else {
-            href = params(href, 'language', query.language);
+            href = params.call(this, href, 'language', query.language, true);
         }
         return href;
     },
     sid: function (href, query) {
-        var sid = this.session.get('sid');
-        var platform = this.session.get('platform');
-        var originalPlatform = this.session.get('originalPlatform');
-
+        var sid = this.app.session.get('sid');
+        var platform = this.app.session.get('platform');
+        var originalPlatform = this.app.session.get('originalPlatform');
+        
         if ((platform === 'wap' || originalPlatform === 'wap') && sid) {
-            href = params(href, 'sid', sid);
+            href = params.call(this, href, 'sid', esi.esify.call(this, '$(sid)', sid), true);
         }
         return href;
     }
@@ -51,13 +52,63 @@ var defaults = {
     platform: 'wap'
 };
 
+function stringifyPrimitive(v) {
+    switch (typeof v) {
+        case 'string':
+            return v;
+
+        case 'boolean':
+            return v ? 'true' : 'false';
+
+        case 'number':
+            return isFinite(v) ? v : '';
+
+        default:
+            return '';
+    }
+}
+
+function stringify(obj, sep, eq, name) {
+    var context = this;
+
+    sep = sep || '&';
+    eq = eq || '=';
+
+    if (obj !== null && typeof obj === 'object') {
+        return _.map(_.keys(obj), function(k) {
+            var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+
+            if (_.isArray(obj[k])) {
+                return _.map(obj[k], function(v) {
+                    v = stringifyPrimitive(v);
+                    return ks + (esi.isEsiString.call(context, v) ? v : encodeURIComponent(v));
+                }).join(sep);
+            } 
+            else {
+                k = stringifyPrimitive(obj[k]);
+                return ks + (esi.isEsiString.call(context, k) ? k : encodeURIComponent(k));
+            }
+        }).join(sep);
+    }
+
+    if (!name) {
+        return '';
+    }
+    obj = stringifyPrimitive(obj);
+    return encodeURIComponent(stringifyPrimitive(name)) + eq + (esi.isEsiString.call(context, obj) ? obj : encodeURIComponent(obj));
+}
+
 function link(href, app, query) {
+    var context = {
+        app: app
+    };
+
     query = query || {};
     _.each(linkParams, function(checker, name) {
-        href = checker.call(app, href, query);
+        href = checker.call(context, href, query);
     });
     if (!_.isEmpty(query)) {
-        href = params(href, query);
+        href = params.call(context, href, query, null, true);
     }
     return href;
 }
@@ -73,7 +124,7 @@ function fullizeUrl(href, app) {
     return href;
 }
 
-function params(url, keys, value) {
+function params(url, keys, value, withApp) {
     var parts = url.split('?');
     var parameters = {};
     var out = [];
@@ -93,7 +144,7 @@ function params(url, keys, value) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(querystring.stringify(parameters));
+        out.push(withApp ? stringify.call(this, parameters) : querystring.stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');
@@ -101,7 +152,7 @@ function params(url, keys, value) {
     return out.join('');
 }
 
-function removeParams(url, keys) {
+function removeParams(url, keys, withApp) {
     var parts = url.split('?');
     var parameters = {};
     var out = [];
@@ -120,7 +171,7 @@ function removeParams(url, keys) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(querystring.stringify(parameters));
+        out.push(withApp ? stringify.call(this, parameters) : querystring.stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');

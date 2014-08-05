@@ -30,7 +30,7 @@ module.exports = function esiHelper() {
 
     function esify(name, _default) {
         if (isEnabled.call(this)) {
-            return generateVar(name.join(''));
+            return generateVar(name);
         }
         return _default;
     }

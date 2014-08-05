@@ -24,7 +24,7 @@ module.exports = Base.extend({
 
             if (currentLocation !== siteLocation) {
                 if (siteLocation && ~siteLocation.indexOf('www')) {
-                    href = utils.removeParams(href, 'location');
+                    href = utils.removeParams.call(this, href, 'location', true);
                 }
                 else {
                     href = utils.link(href, this.app, {

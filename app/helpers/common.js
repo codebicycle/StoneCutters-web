@@ -83,7 +83,7 @@ module.exports = (function() {
         options = (options || {});
         url = utils.link(url, this.app, options.query);
         if (parameters) {
-            url = utils.params(url, parameters);
+            url = utils.params.call(this, url, parameters);
         }
         this.redirectTo(url, _.defaults(options, {
             status: 301

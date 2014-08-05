@@ -40,7 +40,7 @@ module.exports = function analyticsHelper() {
         if (location && location.current) {
             params.geo2 = standarizeName(location.current.name || '');
         }
-        params.platform = esi.esify.call(this, '$(platform)', platform);
+        params.platform = platform;
         params.language = this.app.session.get('selectedLanguage');
     }
 

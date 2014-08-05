@@ -9,17 +9,23 @@ module.exports = function itemRouter(app, dataAdapter) {
             var result = {
                 user_loggedin: !!user,
                 clientId: req.rendrApp.session.get('clientId'),
-                osName: req.rendrApp.session.get('osName')
+                osName: req.rendrApp.session.get('osName') || 'Others',
+                sid: req.rendrApp.session.get('sid')
             };
-            var esi = '';
+            var esi = [];
 
             if (result.user_loggedin) {
                 result.user_id = user.id;
             }
+            console.log(result);
             for (var variable in result) {
-                esi += '<esi:text><esi:assign name="' + variable + '">\'\'\'</esi:text>' + result[variable] + '<esi:text>\'\'\'</esi:assign></esi:text>';
+                esi.push('<esi:text><esi:assign name="');
+                esi.push(variable);
+                esi.push('">\'\'\'</esi:text>');
+                esi.push(result[variable]);
+                esi.push('<esi:text>\'\'\'</esi:assign></esi:text>');
             }
-            res.send(esi);
+            res.send(esi.join(''));
         }
     })();
 };

@@ -25,7 +25,7 @@ var paramsGenerators = {
             params.id = atiConfig.siteId;
             params.host = atiConfig.logServer;
         }
-        params.clientId = esi.esify.call(this, '$substr($(clientId), 24)', defaults.cliId.substr(24));;
+        params.clientId = esi.esify.call(this, '$substr($(clientId), 24)', defaults.cliId.substr(24));
         return params;
     },
     google: function generateGoogleParams(defaults) {
@@ -97,14 +97,14 @@ function generateDefaultParams(query) {
     var platform = this.app.session.get('platform');
     var params = {};
 
-    params.platform = esi.esify.call(this, '$(platform)', platform);
     params.random = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
     params.referer = esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'));
     params.cliId = esi.esify.call(this, '$(clientId)', this.app.session.get('clientId'));
-    params.osNm = esi.esify.call(this, '$(osNm)', (this.app.session.get('device').osName  || 'Others'));
+    params.osNm = esi.esify.call(this, '$(osName)', (this.app.session.get('device').osName  || 'Others'));
     if (sid) {
-        params.sid = esi.esify.call(this, '$(QUERY_STRING{\'sid\'})', sid);
+        params.sid = esi.esify.call(this, '$(sid)', sid);
     }
+    params.platform = platform;
     params.locNm = location.name;
     params.locId = location.id;
     google.generate.call(this, params, page, query.params);
@@ -127,7 +127,6 @@ function generateURLs(query) {
     // END - Remove default object when client configuration is found in the master
     var paramsGenerator;
     var params;
-    var data;
     var api;
 
     _.each(trackers, function(x, type) {
@@ -139,11 +138,7 @@ function generateURLs(query) {
             params = paramsGenerator.call(this, defaultParams);
         }
         api = tracking.generate(type, _.defaults({}, params, defaultParams));
-        data = {};
-        _.each(api.params, function(value, key) {
-            data[key] = encodeURIComponent(value);
-        });
-        urls.push([api.url, '?', querystring.stringify(data)].join(''));
+        urls.push([api.url, '?', querystring.stringify(api.params)].join(''));
     }, this);
     return urls;
 }

@@ -1,7 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <esi:eval src="http://$(HTTP_HOST)/esi?$(QUERY_STRING)" dca="esi" setheader="'set-cookie: ' + $(HTTP_COOKIE)"/>
-<esi:assign name="host_list" value="$string_split($(HTTP_HOST), '.')"/>
-<esi:assign name="platform" value="$(host_list{0})"/>
 <html>
     {% view 'layout/head' %}
     <body>

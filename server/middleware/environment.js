@@ -33,6 +33,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var platform = req.rendrApp.session.get('forcedPlatform') || req.subdomains.pop() || utils.defaults.platform;
 
             if (typeof clientId === 'undefined') {
+                console.log('new Client id');
                 req.rendrApp.session.persist({
                     clientId: uuid.v4()
                 });

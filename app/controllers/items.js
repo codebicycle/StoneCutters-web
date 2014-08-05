@@ -140,7 +140,7 @@ module.exports = {
                 if (!resItem.item.checkSlug(slug, slugUrl)) {
                     slug = ('/' + slug);
                     if (favorite) {
-                        slug = helpers.common.params(slug, 'favorite', favorite);
+                        slug = helpers.common.params.call(this, slug, 'favorite', favorite);
                     }
                     done.abort();
                     return helpers.common.redirect.call(this, slug);
@@ -856,7 +856,7 @@ module.exports = {
             }
             user = this.app.session.get('user');
             if (!user) {
-                url = helpers.common.params('/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
+                url = helpers.common.params.call(this, '/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
@@ -878,7 +878,7 @@ module.exports = {
         function success() {
             var url = (params.redirect || '/des-iid-' + params.itemId);
 
-            url = helpers.common.params(url, 'favorite', (intent || 'add'));
+            url = helpers.common.params.call(this, url, 'favorite', (intent || 'add'));
             helpers.common.redirect.call(this, url, null, {
                 status: 302
             });
