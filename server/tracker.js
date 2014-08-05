@@ -6,6 +6,7 @@ var tracking = require('../shared/tracking');
 
 function makeTrack(url, options, callback) {
     if (options.method === 'post' && options.data && options.data.tid && options.data.uip) {
+        options.data.tid = 'UA-5247560-2';
         console.log('[OLX_DEBUG] GA pageview for ' + options.data.tid + ' from ' + options.data.uip);
     }
     restler[options.method || 'get'](url, options)
