@@ -119,7 +119,7 @@ module.exports = {
                         res.item = buildItemPurged.call(this, err.body);
                         err = null;
                     }
-                    if (res.item.get('status').label === 'rejected') {
+                    if (!res.item.get('status').open) {
                         res.item.set('purged', true);
                     }
                     done(res);

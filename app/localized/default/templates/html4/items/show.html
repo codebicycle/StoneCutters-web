@@ -46,7 +46,7 @@
 
     <h3>{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</h3>
     
-    {% if item.status.label == 'ready' %}
+    {% if item.status.contactable %}
         <div id="centerBtns">
             {% if item.phone %}
                 {% if device.uriSchemeTel %}
