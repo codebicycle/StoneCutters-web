@@ -212,8 +212,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
         app.get('/analytics/pageevent.gif', handler);
 
         function googleTracking(req) {
+            var env = config.get(['environment', 'type'], 'development');
             var analytic = new Tracker('google-event', {
-                id: req.query.id,
+                id: env === 'production' ? 'UA-5247560-2' : 'UA-50756825-1',
                 host: req.host,
                 clientId: req.query.cliId
             });
