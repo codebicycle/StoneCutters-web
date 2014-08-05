@@ -10,8 +10,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var utils = require('../../shared/utils');
 
         function getIp(req) {
-            var ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR') ||
-                req.header('HTTP_X_FORWARDED_FOR') ||
+            var ip = req.header('x-forwarded-for') ||
                 req.connection.remoteAddress ||
                 req.socket.remoteAddress ||
                 req.connection.socket.remoteAddress;
