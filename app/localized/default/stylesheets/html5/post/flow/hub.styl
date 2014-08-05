@@ -71,15 +71,15 @@
     width: 100%;
 }
 
-#hub .step.disabled {
-    opacity: .25;
-}
-
 #hub .step .title {
     font-weight: normal;
     color: #494949;
     float: left;
     font-size: 1em;
+}
+
+#hub .step.error .title {
+    color: #999;
 }
 
 #hub .step:after {
@@ -97,6 +97,15 @@
     border-radius: 100%;
 }
 
+#hub .step.success:after {
+    background-color: #a7b52c;
+}
+
+#hub .step.error:after {
+    background-color: #d38811;
+    content: "!";
+}
+
 #hub #post {
     padding: 1rem;
     text-align: center;
@@ -109,6 +118,6 @@
     width: 100%;
 }
 
-#hub #post.disabled {
+#hub #post.opaque {
     background: #FDC99E;
 }

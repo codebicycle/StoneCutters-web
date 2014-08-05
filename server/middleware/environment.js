@@ -25,14 +25,14 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             return guid;
         }
-        
+
         function generateVisitorId(req) {
             var guid = generateGuid(req);
             var visitorId;
 
             if (guid) {
                 visitorId = guid + analytics.google.getId();
-            } 
+            }
             else {
                 visitorId = (req.get('user-agent') || '') + uuid.v1();
             }
@@ -73,7 +73,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 host: host,
                 url: url,
                 referer: referer,
-                platform: platform
+                platform: platform,
+                ip: req.ip
             });
             req.rendrApp.req.app.locals({
                 platform: platform

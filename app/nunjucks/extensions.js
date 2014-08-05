@@ -18,11 +18,12 @@ module.exports = function(nunjucks) {
                 parser.advanceAfterBlockEnd(tok.value);
                 return new nodes.CallExtension(this, 'run', args);
             };
-            this.run = function(context, id) {
+            this.run = function(context, id, subId) {
                 var app = getProperty('_app', context);
                 var parentView = getProperty('_view', context);
                 var options = {
-                    context: context
+                    context: context,
+                    subId: subId
                 };
                 var ViewClass;
                 var view;

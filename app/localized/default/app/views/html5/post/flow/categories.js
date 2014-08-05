@@ -8,24 +8,14 @@ module.exports = Base.extend({
     className: 'post_flow_categories_view list disabled',
     id: 'categories',
     tagName: 'section',
+    selected: {},
     getTemplateData: function() {
-        var data = this.parentView.getTemplateData.call(this);
-        var categories = this.app.fetcher.collectionStore.get('categories', {
-            location: this.app.session.get('siteLocation'),
-            languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-        });
-        var icons = config.get(['icons', this.app.session.get('platform')], []);
+        var data = Base.prototype.getTemplateData.call(this);
 
-        if (categories) {
-            categories = categories.toJSON();
-        }
         return _.extend({}, data, {
-            categories: categories || [],
-            icons: icons
+            categories: this.parentView.options.categories.toJSON(),
+            icons: config.get(['icons', this.app.session.get('platform')], [])
         });
-    },
-    postRender: function() {
-        this.$el.html(this.getInnerHtml());
     },
     events: {
         'show': 'onShow',
@@ -37,6 +27,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        this.parentView.$el.trigger('headerChange', ['Elige una categoria', this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -45,6 +36,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
+        this.parentView.$el.trigger('categorySubmit', [this.selected, 'Debe seleccionar la categoria']);
     },
     onClickCategory: function(event) {
         event.preventDefault();
@@ -52,9 +44,9 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $category = $(event.currentTarget);
-        var categoryId = $category.data('id');
 
-        this.parentView.$el.trigger('flow', [$category.parent().data('title'), this.id, 'category-' + categoryId, categoryId]);
+        this.selected.id = $category.data('id');
+        this.parentView.$el.trigger('flow', [this.id, 'subcategories', this.selected]);
     }
 });
 

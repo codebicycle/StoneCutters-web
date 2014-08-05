@@ -13,6 +13,7 @@ module.exports = {
 
         function controller(form) {
             var siteLocation = this.app.session.get('siteLocation');
+            var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], true);
 
             function prepare(done) {
                 if (!siteLocation || siteLocation.indexOf('www.') === 0) {
@@ -38,16 +39,27 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function success(res) {
+            function fetchPostingSession(done) {
+                this.app.fetch({
+                    postingSession: {
+                        model: 'PostingSession',
+                        params: {}
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function success(res1, res2) {
                 analytics.reset();
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
-                if (this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], true)) {
-                    postingFlowController.call(this, res.categories);
+                if (isPostingFlow) {
+                    postingFlowController.call(this, res1.categories, res2.postingSession);
                 }
                 else {
-                    postingCategoriesController.call(this, res.categories);
+                    postingCategoriesController.call(this, res1.categories);
                 }
             }
 
@@ -55,23 +67,30 @@ module.exports = {
                 helpers.common.error.call(this, err, {}, callback);
             }
 
-            asynquence().or(error.bind(this))
-                .then(prepare.bind(this))
-                .then(fetchCategories.bind(this))
-                .val(success.bind(this));
+            function postingFlowController(categories, postingSession) {
+                callback(null, 'post/flow/index', {
+                    categories: categories,
+                    postingSession: postingSession.get('postingSession')
+                });
+            }
 
             function postingCategoriesController(categories) {
-                callback(null, {
+                callback(null, 'post/categories', {
                     analytics: analytics.generateURL.call(this),
                     categories: categories.toJSON()
                 });
             }
 
-            function postingFlowController(categories) {
-                callback(null, 'post/flow/index', {
-                    categories: categories
-                });
+            var promise = asynquence().or(error.bind(this))
+                .then(prepare.bind(this));
+
+            if (isPostingFlow) {
+                promise.gate(fetchCategories.bind(this), fetchPostingSession.bind(this));
             }
+            else {
+                promise.then(fetchCategories.bind(this));
+            }
+            promise.val(success.bind(this));
         }
     },
     subcategories: function(params, callback) {
@@ -188,7 +207,7 @@ module.exports = {
                 }
                 var category = resCategories.categories.get(params.categoryId);
                 var subcategory;
-                
+
                 if (!category) {
                     done.abort();
                     return helpers.common.redirect.call(this, '/posting');
@@ -245,7 +264,7 @@ module.exports = {
             var itemId = params.itemId;
             var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
-            
+
             function prepare(done) {
                 if (user) {
                     params.token = user.token;
@@ -526,7 +545,7 @@ module.exports = {
                 analytics.addParam('item', item);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                callback(null, { 
+                callback(null, {
                     item: item,
                     user: user,
                     postingSession: _postingSession.get('postingSession'),

@@ -16,30 +16,32 @@ module.exports = Base.extend({
         'change': 'onChange',
         'click #back': 'onBackClick'
     },
-    onChange: function(event, title, current, prev) {
+    onChange: function(event, title, current, back, data) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        if (prev) {
+        this.$('#title').text(title);
+        if (current && back) {
             this.$('.logo').hide();
             this.$('#back').removeClass('disabled');
-            this.$el.data('prev', prev);
+            this.$el.data('current', current);
+            this.$el.data('back', back);
         }
         else {
             this.$('.logo').show();
             this.$('#back').addClass('disabled');
-            this.$el.removeData('prev', prev);
+            this.$el.removeData('current');
+            this.$el.removeData('back');
         }
-        this.$el.data('current', current);
-        this.$('#title').text(title);
+        this.data = data;
     },
     onBackClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('flow', ['', this.$el.data('current'), this.$el.data('prev')]);
+        this.parentView.$el.trigger('flow', [this.$el.data('current'), this.$el.data('back'), this.data]);
     }
 });
 

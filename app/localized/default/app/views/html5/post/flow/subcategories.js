@@ -5,39 +5,32 @@ var config = require('../../../../../../../config');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'post_flow_subcategories_view disabled',
+    className: 'post_flow_subcategories_view list disabled',
     id: 'subcategories',
     tagName: 'section',
+    selected: {},
     getTemplateData: function() {
-        var data = this.parentView.getTemplateData.call(this);
-        var categories = this.app.fetcher.collectionStore.get('categories', {
-            location: this.app.session.get('siteLocation'),
-            languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-        });
+        var data = Base.prototype.getTemplateData.call(this);
 
-        if (categories) {
-            categories = categories.toJSON();
-        }
+        this.options.categories = this.parentView.options.categories;
         return _.extend({}, data, {
-            categories: categories || []
+            categories: this.options.categories.toJSON()
         });
-    },
-    postRender: function() {
-        this.$el.html(this.getInnerHtml());
     },
     events: {
         'show': 'onShow',
         'hide': 'onHide',
-        'click .subcategory': 'onClickSubcategory'
+        'flow': 'onFlow',
+        'subcategorySubmit': 'onSubcategorySubmit'
     },
-    onShow: function(event, categoryId) {
+    onShow: function(event, category) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        this.parentView.$el.trigger('headerChange', ['Elige una subcategoria', this.id, 'categories']);
         this.$el.removeClass('disabled');
-        this.$('ul.list').addClass('disabled');
-        this.$('#category-' + categoryId).removeClass('disabled');
+        this.$('#category-' + category.id).trigger('show');
     },
     onHide: function(event) {
         event.preventDefault();
@@ -45,16 +38,22 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
+        this.$('.category:not(".disabled")').trigger('hide', this.selected);
     },
-    onClickSubcategory: function(event) {
+    onFlow: function(event, from, to, subcategory) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $subcategory = $(event.currentTarget);
-        var $category = $subcategory.parent();
+        this.selected = subcategory;
+        this.parentView.$el.trigger('flow', [this.id, to, this.selected]);
+    },
+    onSubcategorySubmit: function(event, subcategory, error) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('flow', [$category.data('title'), $category.attr('id')]);
+        this.parentView.$el.trigger('subcategorySubmit', [subcategory, error]);
     }
 });
 
