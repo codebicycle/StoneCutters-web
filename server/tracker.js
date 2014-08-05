@@ -24,21 +24,14 @@ function makeTrack(url, options, callback) {
 }
 
 function prepare(options, params) {
-    var query;
-
     options = _.defaults({
-        method: 'get'
+        method: 'get',
+        query: params
     }, options);
 
-    if (options.method === 'get') {
-        query = {};
-        _.each(params, function(value, key) {
-            query[key] = encodeURIComponent(value);
-        });
-        options.query = query;
-    }
-    else {
-        options.data = params;
+    if (options.method === 'post') {
+        options.data = options.query;
+        delete options.query;
     }
     return options;
 }
