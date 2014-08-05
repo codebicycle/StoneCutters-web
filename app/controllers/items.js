@@ -80,8 +80,7 @@ module.exports = {
                 }
                 if (!item.get('status')) {
                     item.set('status', {
-                        label: 'deprecated',
-                        deprecated: true
+                        label: 'rejected',
                     });
                 }
                 if (!item.get('category')) {
@@ -120,7 +119,7 @@ module.exports = {
                         res.item = buildItemPurged.call(this, err.body);
                         err = null;
                     }
-                    if (res.item.get('status').deprecated) {
+                    if (res.item.get('status').label === 'rejected') {
                         res.item.set('purged', true);
                     }
                     done(res);

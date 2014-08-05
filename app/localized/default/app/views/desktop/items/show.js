@@ -9,6 +9,11 @@ module.exports = Base.extend({
     postRender: function() {
 		var that = this;
 
+        this.$('span.addPhoto').click(function(e) {
+            e.preventDefault();
+            $('.message').val('Tenho interesse e gostaria de ver fotos. Você pode, por favor, adicionar fotos no seu anúncio?');
+        });
+
         this.$('#photos ul li').hover(function(e) {
             e.preventDefault();
             if(!$(this).hasClass('active')) {
