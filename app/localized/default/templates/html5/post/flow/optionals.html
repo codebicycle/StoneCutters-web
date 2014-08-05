@@ -1,11 +1,20 @@
-{% from macros import FieldText, FieldTextArea, FieldCombobox %}
-{% for field in fields %}
-    {% if field.fieldType == 'text' %}
-        {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
-    {% elif field.fieldType == 'combobox' %}
-        {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
-    {% endif %}
-{% endfor %}
-<div class="btnCenter">
-    <input type="submit" value="Continuar" class="btns orange">
+<div id="category-summary">
+    <small class="small">Categoría seleccionada: </small>
+    <div class="summary"><span>{{category.trName}}</span> :: <span>{{subcategory.trName}}</span></div>
+    <span class="change">cambiar</span>
 </div>
+<section id="posting">
+    <form>
+        {% from macros import FieldText, FieldTextArea, FieldCombobox %}
+        {% for field in fields %}
+            {% if field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+            {% endif %}
+        {% endfor %}
+        <div class="btnCenter">
+            <input type="submit" value="Continuar" class="btns orange">
+        </div>
+    </form>
+</section>

@@ -9,6 +9,7 @@ module.exports = Base.extend({
     events: {
         'show': 'onShow',
         'hide': 'onHide',
+        'stepChange': 'onStepChange',
         'click .step:not(".opaque")': 'onClickStep',
         'categoryChange': 'onCategoryChange',
         'descriptionChange': 'onDescriptionChange',
@@ -32,6 +33,13 @@ module.exports = Base.extend({
 
         this.$el.addClass('disabled');
     },
+    onStepChange: function(event, before, after) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#step-' + before).attr('id', 'step-' + after);
+    },
     onClickStep: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -46,7 +54,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $step = this.$('#step-categories').removeClass('success error');
+        var $step = this.$('#step-categories, #step-optionals').removeClass('success error');
         var message = error;
         var subMessage = subError;
         var category;

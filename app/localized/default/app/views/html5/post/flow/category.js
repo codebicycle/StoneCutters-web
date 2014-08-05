@@ -72,8 +72,16 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res) {
+            var hasOptionals = !!res.fields.get('fields').categoryAttributes.length;
+
             $('body > .loading').hide();
-            this.parentView.$el.trigger('flow', [this.$el.attr('id'), res.fields.get('fields').categoryAttributes.length ? 'optionals' : '', {
+            if (hasOptionals) {
+                this.parentView.$el.trigger('stepChange', ['categories', 'optionals']);
+            }
+            else {
+                this.parentView.$el.trigger('stepChange', ['optionals', 'categories']);
+            }
+            this.parentView.$el.trigger('flow', [this.$el.attr('id'), hasOptionals ? 'optionals' : '', {
                 id: id,
                 fields: res.fields
             }]);

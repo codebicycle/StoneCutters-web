@@ -21,6 +21,7 @@ module.exports = Base.extend({
     events: {
         'flow': 'onFlow',
         'headerChange': 'onHeaderChange',
+        'stepChange': 'onStepChange',
         'categorySubmit': 'onCategorySubmit',
         'subcategorySubmit': 'onSubcategorySubmit',
         'optionalsSubmit': 'onOptionalsSubmit',
@@ -43,6 +44,13 @@ module.exports = Base.extend({
 
         this.$('header').trigger('change', [title, current, back || 'hub', data]);
     },
+    onStepChange: function(event, before, after) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#hub').trigger('stepChange', [before, after]);
+    },
     onCategorySubmit: function(event, category, error) {
         event.preventDefault();
         event.stopPropagation();
@@ -63,7 +71,7 @@ module.exports = Base.extend({
         this.form['category.id'] = subcategory.id;
         this.errors['category.id'] = error;
         this.$('#hub').trigger('categoryChange', [this.form['category.parentId'], this.form['category.id'], this.errors['category.parentId'], this.errors['category.id']]);
-        this.$('#optionals').trigger('fieldsChange', [subcategory.fields.get('fields').categoryAttributes, this.form['category.parentId'], this.form['category.id']]);
+        this.$('#optionals').trigger('fieldsChange', [subcategory.fields.get('fields').categoryAttributes, this.form['category.parentId'], this.form['category.id'], true]);
         this.$('#description').trigger('fieldsChange', [subcategory.fields.get('fields').productDescription]);
         this.$('#contact').trigger('fieldsChange', [subcategory.fields.get('fields').contactInformation]);
     },

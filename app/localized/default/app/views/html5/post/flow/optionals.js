@@ -8,24 +8,48 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'post_flow_optionals_view disabled',
-    tagName: 'form',
+    tagName: 'section',
     id: 'optionals',
     allFields: [],
     fields: [],
     form: {
         values: {}
     },
+    selected: {},
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var category = this.parentView.options.categories.search(this.selected.id) || {};
+        var subcategory = this.parentView.options.categories.search(this.selected.subId) || {};
 
+        if (category.toJSON) {
+            category = category.toJSON();
+        }
+        if (subcategory.toJSON) {
+            subcategory = subcategory.toJSON();
+        }
         return _.extend({}, data, {
             fields: this.fields || [],
+            category: category,
+            subcategory: subcategory,
             form: this.form
         });
+    },
+    postRender: function() {
+        if (!this.firstRender) {
+            return;
+        }
+        this.firstRender = false;
+        this.fields.forEach(function each(field) {
+            if (!field.related) {
+                return;
+            }
+            this.$('[name="' + field.name + '"]').trigger('change');
+        }.bind(this));
     },
     events: {
         'show': 'onShow',
         'hide': 'onHide',
+        'click .change': 'onChangeClick',
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
         'submit': 'onSubmit'
@@ -35,7 +59,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['Elige una categoria', this.id, 'subcategories', this.selected]);
+        this.parentView.$el.trigger('headerChange', ['Elige una categoria', this.id, '']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -56,7 +80,10 @@ module.exports = Base.extend({
         this.$el.addClass('disabled');
         this.parentView.$el.trigger('optionalsSubmit', [this.fields, errors]);
     },
-    onFieldsChange: function(event, fields, categoryId, subcategoryId) {
+    onChangeClick: function(event) {
+        this.parentView.$el.trigger('flow', [this.id, 'categories']);
+    },
+    onFieldsChange: function(event, fields, categoryId, subcategoryId, firstRender) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -65,6 +92,7 @@ module.exports = Base.extend({
         var related = [];
         var names = [];
 
+        this.firstRender = !!firstRender;
         this.selected = {
             id: categoryId,
             subId: subcategoryId
@@ -89,7 +117,7 @@ module.exports = Base.extend({
             this.$el.trigger('show');
         }
     },
-    onChange: function() {
+    onChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();

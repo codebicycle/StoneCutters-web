@@ -16,7 +16,8 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            fields: this.fields || []
+            fields: this.fields || [],
+            form: this.form
         });
     },
     events: {
