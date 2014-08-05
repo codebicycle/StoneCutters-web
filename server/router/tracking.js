@@ -18,12 +18,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
     function defaultOptions(req) {
         return {
-            headers: { 
+            headers: {
                 'User-Agent': getUserAgent(req)
             }
         };
     }
-    
+
     function googleUTMCC(req) {
         var utmcc = [];
         var gaDh = req.rendrApp.session.get('gaDh');
@@ -55,7 +55,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 var countryId = 2;
                 var params = {};
                 var atiConfig;
-                
+
                 if (env !== 'production') {
                     countryId = 0;
                 }
@@ -68,7 +68,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             },
             google: function generateGoogleParams(req) {
                 var params = {};
-                
+
                 params.host = req.host;
                 params.clientId = (req.rendrApp.session.get('clientId') || 'ac33b570-90e2-4669-ba83-d3fa017c0de0');
                 return params;
@@ -102,8 +102,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             function callback() {
                 var trackers = {
-                    ati: true, 
-                    google: true, 
+                    ati: true,
+                    google: true,
                     graphite: true
                 };
                 var defaultParams = generateDefaultParams(req);
@@ -143,8 +143,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function googleTracking(req) {
+            var env = config.get(['environment', 'type'], 'development');
             var analytic = new Tracker('google', {
-                id: req.query.id,
+                id: env === 'production' ? 'MO-5247560-2' : 'MO-50756825-1',
                 host: req.host,
                 clientId: req.query.cliId
             });
