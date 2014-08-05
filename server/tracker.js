@@ -5,6 +5,9 @@ var restler = require('restler');
 var tracking = require('../shared/tracking');
 
 function makeTrack(url, options, callback) {
+    if (options.method === 'post' && options.data && options.data.tid && options.data.uip) {
+        console.log('[OLX_DEBUG] GA pageview for ' + options.data.tid + ' from ' + options.data.uip);
+    }
     restler[options.method || 'get'](url, options)
         .on('success', success)
         .on('fail', fail)
