@@ -139,7 +139,7 @@ module.exports = {
                 if (!resItem.item.checkSlug(slug, slugUrl)) {
                     slug = ('/' + slug);
                     if (favorite) {
-                        slug = helpers.common.params.call(this, slug, 'favorite', favorite);
+                        slug = helpers.common.params(slug, 'favorite', favorite);
                     }
                     done.abort();
                     return helpers.common.redirect.call(this, slug);

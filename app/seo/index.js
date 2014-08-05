@@ -36,7 +36,7 @@ var specials = {
             protocol = this.app.session.get('protocol');
             host = this.app.session.get('host');
 
-            head.canonical = [protocol, '://', host, utils.removeParams.call(this, url, 'sid', true)].join('');
+            head.canonical = [protocol, '://', host, utils.removeParams(url, 'sid')].join('');
         }
     },
     'google-site-verification': function(content) {

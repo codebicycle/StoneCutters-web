@@ -6,10 +6,10 @@ var esi = require('../app/esi');
 var isServer = (typeof window === 'undefined');
 var linkParams = {
     location: function (href, query) {
-        var siteLocation = this.app.session.get('siteLocation');
+        var siteLocation = this.session.get('siteLocation');
 
         if (!query.location && siteLocation && !~siteLocation.indexOf('www.')) {
-            href = params.call(this, href, 'location', siteLocation, true);
+            href = params(href, 'location', siteLocation);
         }
         return href;
     },
@@ -18,31 +18,31 @@ var linkParams = {
         var languages;
 
         if (!query.language) {
-            selectedLanguage = this.app.session.get('selectedLanguage');
+            selectedLanguage = this.session.get('selectedLanguage');
 
             if (selectedLanguage) {
-                languages = this.app.session.get('languages');
+                languages = this.session.get('languages');
 
                 if (languages && selectedLanguage === languages.models[0].locale) {
-                    href = removeParams.call(this, href, 'language', true);
+                    href = removeParams(href, 'language');
                 }
                 else {
-                    href = params.call(this, href, 'language', selectedLanguage, true);
+                    href = params(href, 'language', selectedLanguage);
                 }
             }
         }
         else {
-            href = params.call(this, href, 'language', query.language, true);
+            href = params(href, 'language', query.language);
         }
         return href;
     },
     sid: function (href, query) {
-        var sid = this.app.session.get('sid');
-        var platform = this.app.session.get('platform');
-        var originalPlatform = this.app.session.get('originalPlatform');
+        var sid = this.session.get('sid');
+        var platform = this.session.get('platform');
+        var originalPlatform = this.session.get('originalPlatform');
         
         if ((platform === 'wap' || originalPlatform === 'wap') && sid) {
-            href = params.call(this, href, 'sid', esi.esify.call(this, '$(sid)', sid), true);
+            href = params(href, 'sid', esi.esify.call(this, '$(sid)', sid));
         }
         return href;
     }
@@ -69,8 +69,6 @@ function stringifyPrimitive(v) {
 }
 
 function stringify(obj, sep, eq, name) {
-    var context = this;
-
     sep = sep || '&';
     eq = eq || '=';
 
@@ -81,12 +79,12 @@ function stringify(obj, sep, eq, name) {
             if (_.isArray(obj[k])) {
                 return _.map(obj[k], function(v) {
                     v = stringifyPrimitive(v);
-                    return ks + (esi.isEsiString.call(context, v) ? v : encodeURIComponent(v));
+                    return ks + (esi.isEsiString(v) ? v : encodeURIComponent(v));
                 }).join(sep);
             } 
             else {
                 k = stringifyPrimitive(obj[k]);
-                return ks + (esi.isEsiString.call(context, k) ? k : encodeURIComponent(k));
+                return ks + (esi.isEsiString(k) ? k : encodeURIComponent(k));
             }
         }).join(sep);
     }
@@ -95,20 +93,16 @@ function stringify(obj, sep, eq, name) {
         return '';
     }
     obj = stringifyPrimitive(obj);
-    return encodeURIComponent(stringifyPrimitive(name)) + eq + (esi.isEsiString.call(context, obj) ? obj : encodeURIComponent(obj));
+    return encodeURIComponent(stringifyPrimitive(name)) + eq + (esi.isEsiString(obj) ? obj : encodeURIComponent(obj));
 }
 
 function link(href, app, query) {
-    var context = {
-        app: app
-    };
-
     query = query || {};
     _.each(linkParams, function(checker, name) {
-        href = checker.call(context, href, query);
+        href = checker.call(app, href, query);
     });
     if (!_.isEmpty(query)) {
-        href = params.call(context, href, query, null, true);
+        href = params(href, query);
     }
     return href;
 }
@@ -124,7 +118,7 @@ function fullizeUrl(href, app) {
     return href;
 }
 
-function params(url, keys, value, withApp) {
+function params(url, keys, value) {
     var parts = url.split('?');
     var parameters = {};
     var out = [];
@@ -144,7 +138,7 @@ function params(url, keys, value, withApp) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(withApp ? stringify.call(this, parameters) : querystring.stringify(parameters));
+        out.push(stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');
@@ -152,10 +146,11 @@ function params(url, keys, value, withApp) {
     return out.join('');
 }
 
-function removeParams(url, keys, withApp) {
+function removeParams(url, keys) {
     var parts = url.split('?');
     var parameters = {};
     var out = [];
+    var withApp = (this && this.app);
 
     out.push(parts.shift());
     if (parts.length) {
@@ -171,7 +166,7 @@ function removeParams(url, keys, withApp) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(withApp ? stringify.call(this, parameters) : querystring.stringify(parameters));
+        out.push(stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');

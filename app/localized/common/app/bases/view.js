@@ -8,7 +8,7 @@ var helpers = require('../../../../helpers');
 var translations = require('../../../../translations');
 
 module.exports = Base.extend({
-    nonAttributeOptions: Base.prototype.nonAttributeOptions.concat(['analytics']), 
+    nonAttributeOptions: Base.prototype.nonAttributeOptions.concat(['analytics']),
     initialize: function() {
         if (this.app.session.get('platform') === 'wap') {
             if (this.tagName === 'div') {
