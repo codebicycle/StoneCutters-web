@@ -53,14 +53,16 @@
                         <tr>
                             <td style="border-top: solid thin #808080;">
                                 <a style="display: block;" tabindex="1" href="{{ item | slugToUrl | link }}">
-                                    <small style="display: block;">
-                                        {% if item.thumbnail %}
-                                            <img border="0" alt="" src="{{ '/images/wap/photo.gif' | static }}">
-                                        {% else %}
-                                            <img border="0" alt="" src="{{ '/images/common/gif1x1.gif' | static }}" width="12" height="9" >
-                                        {% endif %}
-                                        {{ item.title }} {{ " - "+item.price.displayPrice if item.price.displayPrice }}
-                                    </small>
+                                    <h2>
+                                        <small style="display: block;">
+                                            {% if item.thumbnail %}
+                                                <img border="0" alt="" src="{{ '/images/wap/photo.gif' | static }}">
+                                            {% else %}
+                                                <img border="0" alt="" src="{{ '/images/common/gif1x1.gif' | static }}" width="12" height="9" >
+                                            {% endif %}
+                                            {{ item.title }} {{ " - "+item.price.displayPrice if item.price.displayPrice }}
+                                        </small>
+                                    </h2>
                                 </a>
                             </td>
                         </tr>
