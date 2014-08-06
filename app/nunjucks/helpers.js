@@ -7,6 +7,21 @@ var helpers = require('../helpers');
 
 module.exports = function(nunjucks) {
     return {
+        linkFilter: function (filter, metadata, query) {
+            var name = '-' + filter.name + '_';
+            var regExp = new RegExp(name + '-p-([0-9]+)', 'g');
+            var current = metadata.current.replace(regExp, '-p-1');
+            var href = current + name + true;
+
+            if (~current.indexOf(name)) {
+                regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
+                href = current.replace(regExp, name + true);
+            }
+            href = helpers.common.fullizeUrl(href, this.ctx.app);
+            href = helpers.common.link(href, this.ctx.app, query || {});
+
+            return href;
+        },
         filter: function(filter, currentURL) {
             var out = [];
             var current;
@@ -138,6 +153,11 @@ module.exports = function(nunjucks) {
             return out.join('');
         },
         is: function(value, type) {
+            var fn = _[['is', type.charAt(0).toUpperCase(), type.slice(1)].join('')];
+
+            if (fn) {
+                return fn.call(_, value);
+            }
             return typeof value === type;
         },
         link: function (href, query) {

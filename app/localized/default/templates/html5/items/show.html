@@ -4,23 +4,32 @@
     <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
     <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav">
     <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav">
-    {% set favClass = 'remove' %}
-    {% set favLink = '#' %}
-    {% set favText = dictionary["item.RemoveFromFavorites"] %}
-    {% if not item.isFavorite %}
-        {% set favClass = 'add' %}
-        {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
-        {% if not user %}
-            {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
+    
+    {% if not item.status.onReview %}
+        {% set favClass = 'remove' %}
+        {% set favLink = '#' %}
+        {% set favText = dictionary["item.RemoveFromFavorites"] %}
+        {% if not item.isFavorite %}
+            {% set favClass = 'add' %}
+            {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
+            {% if not user %}
+                {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
+            {% endif %}
         {% endif %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, item.category.name, ['<ul>
+            <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
+            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
+        </ul>'] | join) }}
+    {% else %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, item.category.name) }}
     {% endif %}
-    {% from macros import Breadcrumb %}
-    {% set link = (breadcrumb | link) %}
-    {{ Breadcrumb(dictionary, link, item.category.name, ['<ul>
-        <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
-        <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
-    </ul>'] | join) }}
-    {% if not item.images %}
+
+
+    {% if item.images.length == 0 %}
         <section id="noPicture">
             <span></span>
             <p>{{ dictionary["itemgeneraldetails.NoPicture"] }}</p>

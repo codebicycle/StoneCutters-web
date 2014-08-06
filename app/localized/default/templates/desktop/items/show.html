@@ -1,6 +1,11 @@
 <section id="itemPage">
+	<input type="hidden" value="{{ dictionary["postingerror.InvalidEmail"] }}" name="errMsgMail" class="errMsgMail">
+    <input type="hidden" value="{{ dictionary["postingerror.PleaseCompleteThisField"] }}" name="errMsgMandatory" class="errMsgMandatory">
+    <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
+    <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav">
+    <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav">
 	<nav class="breadcrumb">
-		<a href="">Todas as Categorias</a> <span class="arrow"></span> <a href="">{{ category.trName }}</a> <span class="arrow"></span> <a href="">{{ item.category.name }}</a>
+		<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a> <span class="arrow"></span> <a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> <a href="{{ item.category | slugToUrl | link }}">{{ item.category.name }}</a>
 	</nav>
 
 	<section id="itemInfoL">
@@ -13,12 +18,23 @@
 			<span>{{ item.location.cityName if item.location.cityName }}</span>
 		</div>
 		<div id="photos">
-			<div class="bigPhoto" style="background-image: url('{{ item.images[0].url }}');"><span></span></div>
-			<ul>
-				{% for image in item.images %}
-                    <li  style="background-image: url('{{ image.thumbnail }}');"></li>
-                {% endfor %}
-			</ul>
+			{% if item.images.length == 0 %}
+				<div class="noPhoto" >
+					<p>
+						<span class="icons camera"></span>
+						Anúncio sem foto<br>
+						<span class="icons addPhoto">Peça para o vendedor inserir fotos</span>
+					</p>
+
+				</div>
+			{% else %}
+				<div class="bigPhoto" style="background-image: url('{{ item.images[0].url }}');"><span></span></div>
+				<ul>
+					{% for image in item.images %}
+	                    <li style="background-image: url('{{ image.thumbnail }}');" data-image="{{ image.url }}" class="{{ 'active' if loop.first }}" ></li>
+	                {% endfor %}
+				</ul>
+			{% endif %}
 			<div class="clear"></div>
 		</div>
 		
@@ -66,24 +82,31 @@
 			<a href="">Todos os anúncios do usuário</a>
 			{{ ('<h2 class="icons phone">'+item.phone+'</h2>') if item.phone else "" }}
 			<span>Ao ligar, diga que viu o anúncio na OLX</span>
-			<form action="ajax/contact_seller.php" id="contact-seller" method="post" enctype="multipart/form-data">
-				<input type="hidden" value="669761484" name="itemId" id="itemId">
-				<input type="hidden" value="1157437652" name="token">
-				<input type="hidden" name="formHash" id="formHash" value="41af50ad51503c7ebc15436316b7f9721406228449">
-				<input type="hidden" name="contentType" value="textHtml">
+			<form id="replyForm" action="">
+				<input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
+                <input type="hidden" class="itemCategory" value="{{ item.category.id }}">
+                <input type="hidden" class="itemSubcategory" value="{{ item.category.parentId }}">
 
-				<textarea placeholder="Mensagem" rows="6" cols="30" name="comment" id="comment"></textarea>
-				<span class="error icons">Ops! Escreva uma mensagem</span>
-				<input type="text" placeholder="Nome" maxlength="200" value="" id="name" name="name">
-				<span class="error icons">Ops! Escreva uma mensagem</span>
-				<input type="text" placeholder="E-mail" maxlength="200" value="" id="email" name="email">
-				<span class="error icons">Ops! Escreva uma mensagem</span>
-				<input type="text" placeholder="Telefone" maxlength="15" value="" id="phone" name="phone">
+				<textarea placeholder="Mensagem" rows="6" cols="30" name="message" class="message"></textarea>
+				<small class="message hide icons"></small>
 
-				<input type="submit" value="Enviar e-mail" class="btn orange" >
+				<input type="text" placeholder="Nome" value="{{ user.username if user.username }}" class="name" name="name">
+
+				<input type="email" placeholder="E-mail" value="{{ user.email if user.email }}" class="email" name="email">
+				<small class="email hide icons"></small>
+
+				<input type="number" placeholder="Telefone" class="phone" name="phone">
+
+				<input type="button" value="Enviar e-mail" class="btn orange submit" >
 				<p>Enviando um e-mail você aceita nossos <a target="_blank" href="http://www.olx.com.br/terms.php">Termos</a></p>
 
 			</form>
+			<span class="loading hide"></span>
+			<p class="replySuccses hide" >
+				<strong>E-mail enviado com sucesso!</strong>
+				<br>
+				<span>Enviar outro e-mail</span>
+			</p>
 		</div>
 		<div id="securityTips">
 			<p>Dicas de Segurança</p>

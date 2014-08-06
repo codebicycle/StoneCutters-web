@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(app, dataAdapter) {
+module.exports = function userRouter(app, dataAdapter) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
     var formidable = require('../formidable');

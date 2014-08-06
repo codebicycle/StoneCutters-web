@@ -9,10 +9,11 @@ module.exports = Base.extend({
 
         var categories = this.$('.swiper-container').swiper({
             mode:'horizontal',
-            loop: true,
             slidesPerView: 3,
-            autoplay: 5000         
-        });
+            loop: true,
+            autoplay: 10000,
+            onlyExternal: true
+            });
 
         this.$('.slideBtn.next').click(function(e) {
             e.preventDefault();

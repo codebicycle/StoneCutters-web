@@ -60,6 +60,46 @@ module.exports = {
                 }, done.errfcb);
             }
 
+            function buildItemPurged(properties) {
+                var item = new Item(properties, {
+                    app: this.app
+                });
+
+                if (!item.get('id')) {
+                    item.set('id', item.get('itemId'));
+                    item.unset('itemId');
+                }
+                if (!item.get('location')) {
+                    item.set('location', this.app.session.get('location'));
+                }
+                if (!item.get('description')) {
+                    item.set('description', '');
+                }
+                if (!item.get('slug')) {
+                    item.set('slug', '/title-iid-' + item.get('id'));
+                }
+                if (!item.get('status')) {
+                    item.set('status', {
+                        label: 'rejected',
+                    });
+                }
+                if (!item.get('category')) {
+                    item.set('category', {
+                        id: item.get('categoryId'),
+                        name: item.get('categoryName'),
+                        parentId: item.get('parentCategoryId')
+                    });
+                    item.unset('categoryId');
+                    item.unset('categoryName');
+                    item.unset('parentCategoryId');
+                    item.unset('parentCategoryName');
+                }
+                if (!item.get('title')) {
+                    item.set('title', '');
+                }
+                return item;
+            }
+
             function findItem(done) {
                 this.app.fetch({
                     item: {
@@ -69,68 +109,19 @@ module.exports = {
                 }, {
                     readFromCache: false
                 }, function afterFetch(err, res) {
-                    
                     if (!res) {
                         res = {};
                     }
-                    
                     if (err) {
                         if (err.status !== 422) {
                             return done.fail(err, res);
                         }
-
-                        res.item = new Item(err.body, {
-                            app: this.app
-                        });
-
-                        if (!res.item.get('id')) {
-                            res.item.set('id', res.item.get('itemId'));
-                            res.item.unset('itemId');
-                        }
-
-                        if (!res.item.get('location')) { // Check
-                            res.item.set('location', this.app.session.get('location'));
-                        }
-
-                        if (!res.item.get('description')) { // Check if needed
-                            res.item.set('description', '');
-                        }
-
-                        if (!res.item.get('slug')) {
-                            res.item.set('slug', '/title-iid-' + res.item.get('id'));
-                        }
-
-                        if (!res.item.get('status')) { // Check if needed
-                            res.item.set('status', {
-                                label: 'deprecated',
-                                deprecated: true
-                            });
-                        }
-
-                        if (!res.item.get('category')) {
-                            res.item.set('category', {
-                                id: res.item.get('categoryId'),
-                                name: res.item.get('categoryName'),
-                                parentId: res.item.get('parentCategoryId')
-                            });
-                            res.item.unset('categoryId');
-                            res.item.unset('categoryName');
-                            res.item.unset('parentCategoryId');
-                            res.item.unset('parentCategoryName');
-                        }
-
-                        if (!res.item.get('title')) {
-                            res.item.set('title', '');
-                        }
-
+                        res.item = buildItemPurged.call(this, err.body);
                         err = null;
-
                     }
-
-                    if (res.item.get('status').deprecated) {
+                    if (!res.item.get('status').open) {
                         res.item.set('purged', true);
                     }
-
                     done(res);
                 }.bind(this));
             }
@@ -196,7 +187,6 @@ module.exports = {
             }
 
             function success(_categories, _item, _relatedItems) {
-               
                 var item = _item.toJSON();
                 var subcategory = _categories.search(_item.get('category').id);
                 var category;
@@ -210,17 +200,18 @@ module.exports = {
                     item = _item.toJSON();
                 }
                 else {
-                    // Check here!!
                     parentId = subcategory.get('parentId');
                     category = parentId ? _categories.get(parentId) : subcategory;
                 }
                 
+                subcategory = (subcategory ? subcategory.toJSON() : undefined);
+                category = (category ? category.toJSON() : undefined);
+
                 if (!item.purged) {
                     analytics.reset();
-                    analytics.addParam('user', user);
                     analytics.addParam('item', item);
-                    analytics.addParam('category', category.toJSON());
-                    analytics.addParam('subcategory', subcategory.toJSON());
+                    analytics.addParam('category', category);
+                    analytics.addParam('subcategory', subcategory);
                     analyticUrl = analytics.generateURL.call(this);
                     seo.addMetatag('title', item.metadata.itemPage.title);
                     seo.addMetatag('description', item.metadata.itemPage.description);
@@ -236,8 +227,8 @@ module.exports = {
                 seo.update();
                 this.app.session.update({
                     postingLink: {
-                        category: (category) ? category.get('id') : undefined,
-                        subcategory: (subcategory) ? subcategory.get('id') : undefined
+                        category: (category ? category.id : undefined),
+                        subcategory: (subcategory ? subcategory.id : undefined)
                     }
                 });
                 callback(null, (item.purged) ? 'items/unavailable' : 'items/show', {
@@ -246,9 +237,9 @@ module.exports = {
                     pos: Number(params.pos) || 0,
                     sk: securityKey,
                     relatedItems: _relatedItems,
-                    relatedAdsLink: (subcategory) ? ['/', helpers.common.slugToUrl(subcategory.toJSON()), '?relatedAds=', itemId].join('') : undefined,
-                    subcategory: (subcategory) ? subcategory.toJSON() : undefined,
-                    category: (category) ? category.toJSON() : undefined,
+                    relatedAdsLink: (subcategory ? ['/', helpers.common.slugToUrl(subcategory), '?relatedAds=', itemId].join('') : undefined),
+                    subcategory: subcategory,
+                    category: category,
                     favorite: favorite,
                     analytics: analyticUrl
                 });
@@ -352,7 +343,6 @@ module.exports = {
                 category = parentId ? _categories.get(parentId) : subcategory;
                 
                 analytics.reset();
-                analytics.addParam('user', user);
                 analytics.addParam('item', item);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
@@ -452,7 +442,6 @@ module.exports = {
                 category = parentId ? _categories.get(parentId) : subcategory;
 
                 analytics.reset();
-                analytics.addParam('user', user);
                 analytics.addParam('item', _item.toJSON());
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
@@ -544,7 +533,6 @@ module.exports = {
 
                 analytics.reset();
                 analytics.addParam('item', item);
-                analytics.addParam('user', user);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 seo.addMetatag('robots', 'noindex, nofollow');
@@ -630,7 +618,6 @@ module.exports = {
 
                 analytics.reset();
                 analytics.addParam('item', item);
-                analytics.addParam('user', user);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
                 callback(null, {
@@ -677,7 +664,6 @@ module.exports = {
                 analytics.setPage('nf');
                 analytics.addParam('keyword', query.search);
                 analytics.addParam('page_nb', 0);
-                analytics.addParam('user', user);
 
                 if (!query.search || _.isEmpty(query.search.trim())) {
                     seo.addMetatag('robots', 'noindex, follow');
@@ -779,7 +765,6 @@ module.exports = {
 
                 analytics.reset();
                 analytics.addParam('page_nb', 0);
-                analytics.addParam('user', user);
 
                 done();
             }
@@ -840,7 +825,6 @@ module.exports = {
                     categories: _categories.toJSON(),
                     items: _items.toJSON(),
                     metadata: metadata,
-                    //search: query.search,
                     infiniteScroll: infiniteScroll
                     //analytics: analytics.generateURL.call(this)
                 });

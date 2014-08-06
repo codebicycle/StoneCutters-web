@@ -88,12 +88,6 @@ zombie:
       - 'html4.m.olx.de'
       - 'html4.m.olx.in'
 
-analytics:
-  google:
-    enabled: true
-  atinternet:
-    enabled: true
-
 uglify:
   enabled: false
 

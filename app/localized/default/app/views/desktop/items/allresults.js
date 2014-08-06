@@ -1,27 +1,11 @@
-'use strict';
-
-var Base = require('../../bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('items/allresults');
 var _ = require('underscore');
-var querystring = require('querystring');
+var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
-var helpers = require('../../../../../helpers');
-var analytics = require('../../../../../analytics');
 
 module.exports = Base.extend({
-    className: 'categories_show_view',
-    wapAttributes: {
-        cellpadding: 0,
-        bgcolor: '#DDDDDD'
-    },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-
-        _.each(data.items, this.processItem);
-        return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data),
-            items: data.items
-        });
-    },
+    className: 'items_allresults_view',
+    
     postRender: function() {
         var listingView = 'listView';
 
@@ -94,7 +78,7 @@ module.exports = Base.extend({
                     .then(prepare.bind(this))
                     .then(findItems.bind(this))
                     .then(check.bind(this))
-                    .then(track.bind(this))
+                    //.then(track.bind(this))
                     .val(success.bind(this));
             }
         }
@@ -230,7 +214,7 @@ module.exports = Base.extend({
             _.each(_items, this.processItem);
             this.items = _items;
             $html = loadHTMLView.call(this, 'items/items');
-            this.$('li:last', container).after($html.find('li'));
+            $('li:last', container).after($html.find('li'));
             finalize.call(this);
         }
 
@@ -246,6 +230,5 @@ module.exports = Base.extend({
         $(window).off('scroll.infinite');
         return this;
     }
-});
 
-module.exports.id = 'categories/show';
+});

@@ -13,6 +13,12 @@
 			no {{location.name}}
 		{% endif %}
 		<span class="count">({{ metadata.total | countFormat }})</span>
+		{% if not infiniteScroll and (metadata.next or metadata.previous) %}
+			<div class="itemPagination">
+            	<p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="icons left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="icons right {{ "disable" if not metadata.next }}"></a>
+            </div>
+        {% endif %}
 	</nav>
 
 	<nav class="categories">
@@ -43,22 +49,33 @@
 			</div>
 		</div>
 	</nav>
+	
 	<nav class="location">
 		<ul>
-			<li><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">Brasil</a></li>
-			<li>{{location.current.name}}<a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}"></a></li>
+			{% if not location.current or location.current.type == 'country' %}
+				<li class="one"><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">{{ location.name }}</a></li>
+			{% elif location.current and location.current.type == 'state' %}
+				<li class="parent"><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">{{ location.name }}</a></li>
+				<li class="current">{{ location.current.name }}<a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}"></a></li>
+			{% elif location.current and location.current.type == 'city' %}
+				<li class="parent"><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">{{ location.name }}</a></li>
+				<li class="parent"><a href="{{ category | slugToUrl | link({location: location.children[0].url }) }}" rel="nofollow">{{ location.children[0].name }}</a></li>
+				<li class="current">{{ location.current.name }}<a href="{{ category | slugToUrl | link({location: location.children[0].url }) }}"></a></li>
+			{% endif %}
 		</ul>
-		<div class="list">
-			<ul>
-				{% for state in metadata.filters.state.value %}
-					<li><a href="{{ category | slugToUrl | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
-				{% endfor %}
-				{% for city in metadata.filters.city.value %}
-					<li><a href="{{ category | slugToUrl | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
-				{% endfor %}
-				<div class="clear"></div>
-			</ul>
-		</div>
+		{% if metadata.filters.state or metadata.filters.city %}
+			<div class="list">
+				<ul>
+					{% for state in metadata.filters.state.value %}
+						<li><a href="{{ category | slugToUrl | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
+					{% endfor %}
+					{% for city in metadata.filters.city.value %}
+						<li><a href="{{ category | slugToUrl | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
+					{% endfor %}
+					<div class="clear"></div>
+				</ul>
+			</div>
+		{% endif %}
 	</nav>
 	<section class="list">
 		<nav>
@@ -75,30 +92,16 @@
 				</select>
 			</div>
 		</nav>
-		<ul class="listing">
-			{% for item in items %}
-				<li>
-					<a href="{{ item | slugToUrl | link }}">
-						<div  class="photo">
-							<div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}"></div>
-						</div>
-						<div class="title">
-							<h3>{{ item.title }}</h3>
-							<span>{{ item.displayLocation }}</span>
-						</div>
-						<div class="price">
-							{{ item.price.displayPrice }}
-						</div>
-						<div class="date">
-							{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (',<br> ' + item.date.since.hour) if item.date.since.hour }}
-						</div>
-					</a>
-					<div class="clear"></div>
-				</li>
-			{% endfor %}
+		<ul class="listing itemListing">
+			{% view 'items/items' %}
 		</ul>
-		{% if metadata.next or metadata.previous %}
-            <div id="itemPagination">
+		{% if infiniteScroll %}
+            <div class="loader is-loading" style="display: none;">
+                <img src="{{ '/images/html5/loading.gif' | static }}" alt="Loading...">
+            </div>
+            <input id="currentUrl" type="hidden" class="hide" value="{{ metadata.current | link }}">
+        {% elif metadata.next or metadata.previous %}
+            <div class="itemPagination">
                 <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
             </div>
         {% endif %}

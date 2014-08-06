@@ -133,24 +133,6 @@ describe('app', function test() {
                     })(result.data);
                     done();
                 });
-                it('should be added the correct analytics URL', function test(done) {
-                    (function existance(response) {
-                        response.should.have.property('id');
-                        response.should.have.property('random');
-                        response.should.have.property('referer', '-');
-                        response.should.have.property('page', '/nocat/search/');
-                        response.should.have.property('custom');
-                        response.custom = JSON.parse(response.custom);
-                        response.custom.should.have.property('page_name', 'listing_all');
-                        response.custom.should.have.property('category', 'listing');
-                        response.custom.should.have.property('keyword', 'i');
-                        response.custom.should.have.property('page_nb');
-                        response.custom.should.have.property('language');
-                        response.custom.should.have.property('platform');
-                        response.should.have.property('platform', 'html4');
-                    })(utils.analyitcsParams(result.data.analytics));
-                    done();
-                });
                 it('should have others items when change page 1 to 2', function test(done) {
                     var beforeResult = _.clone(result);
                     request(server.expressApp)
@@ -249,8 +231,13 @@ describe('app', function test() {
                             itemId: params[1]
                         };
                         reset(req, res, 'show');
-                        function callback(err, data) {
+                        function callback(err, view, data) {
+                            if (!_.isString(view)) {
+                                data = view;
+                                view = [context.currentRoute.controller, '/', context.currentRoute.action].join('');
+                            }
                             result.err = err;
+                            result.view = view;
                             result.data = data;
                             res.json(result);
                         }
@@ -328,32 +315,6 @@ describe('app', function test() {
                     (function existance(response) {
                         response.should.have.property('analytics');
                     })(result.data);
-                    done();
-                });
-                it('should be added the correct analytics URL', function test(done) {
-                    (function existance(response) {
-                        response.should.have.property('id');
-                        response.should.have.property('random');
-                        response.should.have.property('referer', '-');
-                        response.should.have.property('page');
-                        response.should.have.property('custom');
-                        response.custom = JSON.parse(response.custom);
-                        response.custom.should.have.property('page_name', 'detail_page');
-                        response.custom.should.have.property('category');
-                        response.custom.should.have.property('ad_category');
-                        response.custom.should.have.property('ad_subcategory');
-                        response.custom.should.have.property('ad_id');
-                        response.custom.should.have.property('ad_photo');
-                        response.custom.should.have.property('poster_id');
-                        response.custom.should.have.property('poster_type');
-                        response.custom.should.have.property('action_type', 'loaded');
-                        response.custom.should.have.property('posting_to_action');
-                        response.custom.should.have.property('geo1');
-                        response.custom.should.have.property('geo2');
-                        response.custom.should.have.property('language');
-                        response.custom.should.have.property('platform');
-                        response.should.have.property('platform', 'html4');
-                    })(utils.analyitcsParams(result.data.analytics));
                     done();
                 });
                 it('should have other item when change itemId', function test(done) {
