@@ -143,35 +143,55 @@ section#itemListing {
 		font-size: .875rem;
 
 		> ul {
-		    height: 33px;
-		    width: 730px;
-		    list-style: none outside none;
-		    margin: 0px 0px -1px;
-		    padding: 0px;
+			width: 45.63rem;
+		    height: 2.063rem;
+		    position: relative;
+		    margin: 0 0 -1px;
+		    padding: 0;
+		    z-index: 10;
 
 		    &:after {
 			    clear: both;
 			    visibility: hidden;
 			    width: 730px;
 			    content: '.';
-			    list-style: none outside none;
 			    margin: 0px;
 			    padding: 0px;
 		    }
+		    li {
+		    	height: 33px;
+		    	float: left;
+		    	position: relative;
+		    	border-style: solid;
+    			border-width: 1px;
+    			padding: .375rem .625rem .375rem .9375rem;
+		    
+		    	&.one {
+		    		background: #ffee77;
+		    		border-color: #dbd4a8;
+		    		border-bottom-color: #ffee77;
+		    		border-radius: 3px 3px 0 0;
 
-		    li:first-child {
-			    float: left;
-			    height: 33px;
-			    position: relative;
-			    width: 56px;
-			    background: #fff;
-			    border-top: 1px solid rgb(241, 238, 220);
-			    border-bottom: 1px solid rgb(219, 212, 168);
-			    border-left: 1px solid rgb(241, 238, 220);
-			    list-style: none outside none;
-			    padding: 6px 10px;
+		    		&:after {
+		    			width: 333px;
+		    			height: 41px;
+		    			position: absolute;
+		    			left: -16px;
+		    			top: -5px;
+		    			margin-right: 0;
+		    			background: url(imageUrl/images/desktop/escolhaEstado.png);
+					    content: "";
+		    		}
+		    	}
 
-			    &:after {
+		    	&.parent {
+				    background: #fff;
+				    border-top: 1px solid rgb(241, 238, 220);
+				    border-bottom: 1px solid rgb(241, 238, 220);
+				    border-left: 1px solid rgb(241, 238, 220);
+				    border-right: 0;
+
+				    &:after {
 					    display: block;
 					    height: 31px;
 					    position: absolute;
@@ -185,96 +205,96 @@ section#itemListing {
 					    border-bottom: 15px solid rgba(0, 0, 0, 0);
 					    border-left: 11px solid rgb(255, 255, 255);
 					    list-style: none outside none;
-			    }
-			    &:before {
-				    display: block;
-				    height: 31px;
-				    position: absolute;
-				    right: -12px;
-				    top: 0px;
-				    width: 11px;
-				    z-index: 9;
-				    content: '';
-				    border-top: 16px solid rgba(0, 0, 0, 0);
-				    border-right: 0px;
-				    border-bottom: 15px solid rgba(0, 0, 0, 0);
-				    border-left: 11px solid rgb(241, 238, 220);
-				    list-style: none outside none;
-			    }
-
-			    a {
-				    color: rgb(51, 136, 187);
-				    text-decoration: none solid rgb(51, 136, 187);
-				    border: 0px none rgb(51, 136, 187);
-				    line-height: 1.188rem;
-				    list-style: none outside none;
-				    outline: rgb(51, 136, 187) none 0px;
-			    }
-		    }
-		    li:last-child {
-			    float: left;
-			    height: 33px;
-			    position: relative;
-			    z-index: 10;
-			    background: rgb(255, 238, 119);
-			    border-top: 1px solid rgb(219, 212, 168);
-			    border-right: 1px solid rgb(219, 212, 168);
-			    border-bottom: 1px solid rgb(255, 238, 119);
-			    border-left: 1px solid rgb(219, 212, 168);
-			    border-radius: 3px 3px 0 0;
-			    font: normal normal normal 14px/19.600000381469727px arial, helvetica, sans-serif;
-			    list-style: none outside none;
-			    padding: 6px 10px 6px 20px;
-
-			    &:before {
-				    display: block;
-				    height: 31px;
-				    left: 0px;
-				    position: absolute;
-				    right: -12px;
-				    top: 0px;
-				    width: 146px;
-				    z-index: 10;
-				    content: '';
-				    border-top: 16px solid rgba(0, 0, 0, 0);
-				    border-bottom: 15px solid rgba(0, 0, 0, 0);
-				    border-left: 11px solid rgb(219, 212, 168);
-				    list-style: none outside none;
-			    }
-			    a {
-				    color: rgb(243, 243, 243);
-				    display: inline-block;
-				    height: 14px;
+				    }
+				    &:before {
+					    display: block;
+					    height: 31px;
+					    position: absolute;
+					    right: -12px;
+					    top: 0px;
+					    width: 11px;
+					    z-index: 9;
+					    content: '';
+					    border-top: 16px solid rgba(0, 0, 0, 0);
+					    border-right: 0px;
+					    border-bottom: 15px solid rgba(0, 0, 0, 0);
+					    border-left: 11px solid rgb(241, 238, 220);
+					    list-style: none outside none;
+				    }
+				    a {
+					    color: rgb(51, 136, 187);
+					    text-decoration: none solid rgb(51, 136, 187);
+					    border: 0px none rgb(51, 136, 187);
+					    line-height: 1.188rem;
+					    list-style: none outside none;
+					    outline: rgb(51, 136, 187) none 0px;
+				    }
+		    	}
+		    	&.current {
+		    		float: left;
+				    height: 33px;
 				    position: relative;
-				    right: -4px;
-				    top: 0px;
-				    width: 18px;
 				    z-index: 10;
+				    background: rgb(255, 238, 119);
+				    border-top: 1px solid rgb(219, 212, 168);
+				    border-right: 1px solid rgb(219, 212, 168);
+				    border-bottom: 1px solid rgb(255, 238, 119);
+				    border-left: 1px solid rgb(219, 212, 168);
+				    border-radius: 3px 3px 0 0;
+				    font: normal normal normal 14px/19.600000381469727px arial, helvetica, sans-serif;
 				    list-style: none outside none;
-				    outline: rgb(243, 243, 243) none 0px;
 
 				    &:before {
-					    color: rgb(204, 204, 51);
 					    display: block;
-					    height: 39px;
-					    left: -5px;
+					    height: 31px;
+					    left: 0px;
 					    position: absolute;
-					    top: -10px;
-					    width: 28px;
-					    content: '';
-					    line-height: 2.438rem;
-					    font-family: olx-icon-font;
-					    font-size: 28px;
+					    right: -12px;
+					    top: 0px;
+					    width: 146px;
+					    z-index: 10;
+					    content: '';
+					    border-top: 16px solid rgba(0, 0, 0, 0);
+					    border-bottom: 15px solid rgba(0, 0, 0, 0);
+					    border-left: 11px solid rgb(219, 212, 168);
 					    list-style: none outside none;
-					    outline: rgb(204, 204, 51) none 0px;
 				    }
-			    }
+
+				    a {
+					    color: rgb(243, 243, 243);
+					    display: inline-block;
+					    height: 14px;
+					    position: relative;
+					    right: -4px;
+					    top: 0px;
+					    width: 18px;
+					    z-index: 10;
+					    list-style: none outside none;
+					    outline: rgb(243, 243, 243) none 0px;
+
+					    &:before {
+						    color: rgb(204, 204, 51);
+						    display: block;
+						    height: 39px;
+						    left: -5px;
+						    position: absolute;
+						    top: -10px;
+						    width: 28px;
+						    content: '';
+						    line-height: 2.438rem;
+						    font-family: olx-icon-font;
+						    font-size: 28px;
+						    list-style: none outside none;
+						    outline: rgb(204, 204, 51) none 0px;
+					    }
+				    }
+		    	}
 		    }
 		}
 
 		div.list {
-			width: 730px;
-		    position: relative;
+			width: 45.63rem;
+			position: relative;
 		    text-align: left;
 		    z-index: 1;
 		    background: #fe7;
