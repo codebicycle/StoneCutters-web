@@ -27,7 +27,6 @@ module.exports = function analyticsHelper() {
 
     function prepareDefaultParams(params) {
         var user = this.app.session.get('user');
-        var platform = this.app.session.get('platform');
         var location;
 
         if (!params) {
@@ -40,7 +39,7 @@ module.exports = function analyticsHelper() {
         if (location && location.current) {
             params.geo2 = standarizeName(location.current.name || '');
         }
-        params.platform = platform;
+        params.platform = this.app.session.get('platform');
         params.language = this.app.session.get('selectedLanguage');
     }
 

@@ -17,7 +17,6 @@ module.exports = function itemRouter(app, dataAdapter) {
             if (result.user_loggedin) {
                 result.user_id = user.id;
             }
-            console.log(result);
             for (var variable in result) {
                 esi.push('<esi:text><esi:assign name="');
                 esi.push(variable);

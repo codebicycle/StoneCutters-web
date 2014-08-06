@@ -1,6 +1,5 @@
 'use strict';
 
-var esi = require('../esi');
 var tracker = require('./tracker');
 var google = require('./google');
 var ati = require('./ati');
@@ -23,8 +22,8 @@ function addParam(name, value) {
 }
 
 function generateURL() {
-    addParam('rendering', this.app.session.get('platform'));
     addParam('user', this.app.session.get('user'));
+    addParam('rendering', this.app.session.get('platform'));
     return tracker.generateURL.call(this, query);
 }
 

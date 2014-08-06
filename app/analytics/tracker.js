@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var querystring = require('querystring');
 var config = require('../config');
 var esi = require('../esi');
 var utils = require('../../shared/utils');
@@ -94,7 +93,6 @@ function generateDefaultParams(query) {
     var page = getURLName.call(this, query.page);
     var sid = this.app.session.get('sid');
     var location = this.app.session.get('location');
-    var platform = this.app.session.get('platform');
     var params = {};
 
     params.random = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
@@ -104,7 +102,7 @@ function generateDefaultParams(query) {
     if (sid) {
         params.sid = esi.esify.call(this, '$(sid)', sid);
     }
-    params.platform = platform;
+    params.platform = this.app.session.get('platform');
     params.locNm = location.name;
     params.locId = location.id;
     google.generate.call(this, params, page, query.params);
@@ -138,7 +136,7 @@ function generateURLs(query) {
             params = paramsGenerator.call(this, defaultParams);
         }
         api = tracking.generate(type, _.defaults({}, params, defaultParams));
-        urls.push([api.url, '?', querystring.stringify(api.params)].join(''));
+        urls.push([api.url, '?', utils.stringify(api.params)].join(''));
     }, this);
     return urls;
 }

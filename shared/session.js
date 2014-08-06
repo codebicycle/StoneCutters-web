@@ -114,8 +114,6 @@ var MemcachedSession = function(req, res, callback) {
     var sid = req.param('sid');
 
     if (!sid || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(sid)) {
-        console.log('new SID', req.originalUrl);
-        console.log(new Error().stack);
         sid = uuid.v4();
     }
     memcached.get(sid, after.bind(this));

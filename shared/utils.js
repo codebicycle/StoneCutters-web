@@ -40,7 +40,7 @@ var linkParams = {
         var sid = this.session.get('sid');
         var platform = this.session.get('platform');
         var originalPlatform = this.session.get('originalPlatform');
-        
+
         if ((platform === 'wap' || originalPlatform === 'wap') && sid) {
             href = params(href, 'sid', esi.esify.call(this, '$(sid)', sid));
         }
@@ -150,7 +150,6 @@ function removeParams(url, keys) {
     var parts = url.split('?');
     var parameters = {};
     var out = [];
-    var withApp = (this && this.app);
 
     out.push(parts.shift());
     if (parts.length) {
@@ -230,5 +229,6 @@ module.exports = {
     removeParams: removeParams,
     cleanParams: cleanParams,
     get: get,
+    stringify: stringify,
     defaults: defaults
 };
