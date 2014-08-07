@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var config = require('../../../../../config');
+var config = require('../../../../../../shared/config');
 var utils = require('../../../../../../shared/utils');
 
 function readPostButtonConfig(platform, currentRoute) {

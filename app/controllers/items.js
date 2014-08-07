@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var helpers = require('../helpers');
 var seo = require('../seo');
 var analytics = require('../analytics');
-var config = require('../config');
+var config = require('../../shared/config');
 var Item = require('../models/item');
 
 module.exports = {

@@ -2,7 +2,7 @@
 
 var helpers = require('../helpers');
 var analytics = require('../analytics');
-var config = require('../config');
+var config = require('../../shared/config');
 var seo = require('../seo');
 
 module.exports = {

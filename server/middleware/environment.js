@@ -1,13 +1,12 @@
 'use strict';
 
-var uuid = require('node-uuid');
-
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
         var uuid = require('node-uuid');
         var utils = require('../../shared/utils');
+        var config = require('../../app/config');
 
         function getIp(req) {
             var ip = req.header('x-forwarded-for') ||
@@ -45,7 +44,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 ip: getIp(req)
             });
             req.rendrApp.req.app.locals({
-                platform: platform
+                platform: platform,
+                environment: config.get(['environment', 'type'], 'development')
             });
             next();
         };

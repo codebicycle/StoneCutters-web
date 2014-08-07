@@ -11,11 +11,13 @@ module.exports = function(grunt) {
 
     grunt.registerTask('translate', ['exec:removeTranslations', 'translations', 'browserify:translations', 'uglify:common']);
 
+    grunt.registerTask('flags', ['exec:removeDistGit', 'gitclone:flags-testing', 'browserify:flags-testing', 'exec:removeDistGit', 'gitclone:flags-production', 'browserify:flags-production', 'exec:removeDistGit', 'copy:flags']);
+
     grunt.registerTask('sprites', ['sprite', 'copy:sprites']);
 
     grunt.registerTask('icons', ['copy:icons', 'sprites']);
 
-    grunt.registerTask('build', ['template', 'javascript', 'icons', 'stylus']);
+    grunt.registerTask('build', ['template', 'flags', 'javascript', 'icons', 'stylus']);
 
     grunt.registerTask('compile', ['clean', 'build']);
 
@@ -29,7 +31,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('pipeline', ['artifactory:static:publish', 'artifactory:dynamic:publish']);
 
-    grunt.registerTask('pipetest', ['prepipeline', 'copy:dynamic', 'gitclone', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'atest', 'watch:dist']);
+    grunt.registerTask('pipetest', ['prepipeline', 'copy:dynamic', 'gitclone:config', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'atest', 'watch:dist']);
 
     grunt.registerTask('utest', ['jshint:utests', 'mochacov:unit', 'mochacov:coverage']);
 

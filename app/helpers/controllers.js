@@ -6,7 +6,7 @@ var URLParser = require('url');
 var seo = require('../seo');
 var common = require('./common');
 var marketing = require('./marketing');
-var config = require('../config');
+var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var intertitial = config.get(['interstitial', 'enabled'], false);
 var isServer = typeof window === 'undefined';

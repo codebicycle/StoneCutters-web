@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var querystring = require('querystring');
-var config = require('../config');
+var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var tracking = require('../../shared/tracking');
 var configAnalytics = require('./config');

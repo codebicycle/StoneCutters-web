@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             var parts = subdir.split('/');
             var target = 'public/css/default/' + parts[0] + '/styles';
 
-            if (environment !== 'development') {
+            if (environment !== 'production') {
                 target += '-' + environment;
             }
             target += '.css';
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
             var defaultTarget = 'public/css/default/' + platform + '/styles';
             var target = 'public/css/' + location + '/' + platform + '/styles';
 
-            if (environment !== 'development') {
+            if (environment !== 'production') {
                 defaultTarget += '-' + environment;
                 target += '-' + environment;
             }

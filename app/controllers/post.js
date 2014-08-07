@@ -7,7 +7,7 @@ var sixpack = require(sixpackName);
 var helpers = require('../helpers');
 var seo = require('../seo');
 var analytics = require('../analytics');
-var config = require('../config');
+var config = require('../../shared/config');
 
 module.exports = {
     categories: function(params, callback) {

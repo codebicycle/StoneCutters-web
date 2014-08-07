@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var dateformat = require('dateformat');
-var config = require('../config');
+var config = require('../../shared/config');
 var helpers = require('../helpers');
 
 module.exports = function(nunjucks) {

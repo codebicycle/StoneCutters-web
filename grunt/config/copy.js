@@ -13,6 +13,7 @@ module.exports = function(grunt) {
     }];
     var icons = [];
     var sprites = [];
+    var flags = [];
 
     (function copyTemplates() {
         var files = {};
@@ -157,7 +158,7 @@ module.exports = function(grunt) {
         }
 
         function addIconForEnvironment(location, environment) {
-            if (environment === 'development') {
+            if (environment === 'production') {
                 return;
             }
             files[[location, '-', environment].join('')] = {
@@ -171,6 +172,30 @@ module.exports = function(grunt) {
 
         for (var sprite in files) {
             sprites.push(files[sprite]);
+        }
+    })();
+
+    (function copyFlags() {
+        var environments = require('../../server/config').get('stylus');
+        var files = {};
+        var environment;
+
+        for (environment in environments) {
+            addFlagsForEnvironment(environment);
+        }
+
+        function addFlagsForEnvironment(environment) {
+            if (environment === 'production' || environment === 'testing') {
+                return;
+            }
+            files[['flags-', environment].join('')] = {
+                src: ['public/js/src/common/config.js'].join(''),
+                dest: ['public/js/src/common/config-', environment, '.js'].join('')
+            };
+        }
+
+        for (var flag in files) {
+            flags.push(files[flag]);
         }
     })();
 
@@ -205,6 +230,9 @@ module.exports = function(grunt) {
         },
         sprites: {
             files: sprites
+        },
+        flags: {
+            files: flags
         }
     };
 };

@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var URLParser = require('url');
-var config = require('../config');
+var config = require('../../shared/config');
 var configSeo = require('./config');
 var utils = require('../../shared/utils');
 var head = {

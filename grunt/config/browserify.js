@@ -15,8 +15,33 @@ module.exports = function(grunt) {
             src: ['app/translations/**/*.js'],
             dest: 'public/js/src/common/translations.js',
             options: {
-                alias: ['app/translations/index.js:../translations']
-            }
+                alias: ['app/translations/index.js:../app/translations']
+            },
+            exclude: ['underscore', 'url', 'querystring']
+        },
+        config: {
+            src: ['app/config/**/*.js'],
+            dest: 'public/js/src/common/config-development.js',
+            options: {
+                alias: ['app/config/index.js:../app/config']
+            },
+            exclude: ['underscore', 'url', 'querystring']
+        },
+        'flags-testing': {
+            src: ['dist/git/app/config/**/*.js'],
+            dest: 'public/js/src/common/config-testing.js',
+            options: {
+                alias: ['app/config/index.js:../app/config']
+            },
+            exclude: ['underscore', 'url', 'querystring']
+        },
+        'flags-production': {
+            src: ['dist/git/app/config/**/*.js'],
+            dest: 'public/js/src/common/config.js',
+            options: {
+                alias: ['app/config/index.js:../app/config']
+            },
+            exclude: ['underscore', 'url', 'querystring']
         }
     };
 
@@ -38,7 +63,13 @@ module.exports = function(grunt) {
                     cwd: 'app/',
                     dest: 'app/'
                 }],
-                external: ['jquery', 'nunjucks', '../translations', 'EXIF']
+                external: [
+                    'EXIF',
+                    'jquery',
+                    'nunjucks',
+                    '../app/translations',
+                    '../app/config'
+                ]
             }
         };
         browserify[target].files[target] = [];
@@ -49,7 +80,7 @@ module.exports = function(grunt) {
             if (subdir) {
                 parts = subdir.split('/');
             }
-            if ((parts[0] === 'localized' && parts[1] && parts[1] !== 'common' && parts[1] !== 'default' && parts[1] !== location) || parts[0] === 'translations' || filename.split('.').pop() !== 'js') {
+            if ((parts[0] === 'localized' && parts[1] && parts[1] !== 'common' && parts[1] !== 'default' && parts[1] !== location) || parts[0] === 'translations' || parts[0] === 'config' || filename.split('.').pop() !== 'js') {
                 return;
             }
             browserify[target].files[target].unshift(abspath);
