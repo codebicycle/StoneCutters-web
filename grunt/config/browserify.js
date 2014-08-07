@@ -8,8 +8,8 @@ module.exports = function(grunt) {
             src: ['public/js/lib/**/*.js'],
             dest: 'public/js/src/common/libs.js',
             options: {
-                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client'],
-                external: ['underscore', 'url', 'querystring']
+                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client', 'node_modules/underscore/underscore.js:underscore'],
+                external: ['url', 'querystring']
             }
         },
         translations: {
@@ -23,26 +23,24 @@ module.exports = function(grunt) {
             src: ['app/config/**/*.js'],
             dest: 'public/js/src/common/config-development.js',
             options: {
-                alias: [],
-                external: ['underscore', '../../shared/utils']
+                alias: ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'],
+                external: ['underscore', 'querystring']
             }
         },
         'flags-testing': {
             src: ['dist/git/app/config/**/*.js'],
             dest: 'public/js/src/common/config-testing.js',
             options: {
-                alias: ['app/config/index.js:../app/config'],
-                external: ['underscore', './default', '../../shared/utils'],
-                exclude: ['../app/config/default']
+                alias: ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'],
+                external: ['underscore', 'querystring', './default']
             }
         },
         'flags-production': {
             src: ['dist/git/app/config/**/*.js'],
             dest: 'public/js/src/common/config.js',
             options: {
-                alias: ['app/config/index.js:../app/config'],
-                external: ['underscore', './default', '../../shared/utils'],
-                exclude: ['../app/config/default']
+                alias: ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'],
+                external: ['underscore', 'querystring', './default']
             }
         }
     };
@@ -65,11 +63,15 @@ module.exports = function(grunt) {
                     cwd: 'app/',
                     dest: 'app/'
                 }],
+                alias: ['shared/utils.js:../../../../../../shared/utils'],
                 external: [
                     'EXIF',
                     'jquery',
                     'nunjucks',
+                    'underscore',
                     '../app/translations',
+                    '../../../../../../shared/utils',
+                    '../../shared/utils',
                     '../app/config'
                 ]
             }
