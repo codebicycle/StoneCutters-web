@@ -1,0 +1,215 @@
+section#myads {
+	margin: 1.25rem 0 0 0;
+
+	> ul {
+		width: 100%;
+		float: left;
+	}
+
+	ul.tabs {
+		display: inline-block;
+		text-align: center;
+		li {
+			width: 14.12rem;
+			float: left;
+			margin: .375rem 0 0 .625rem;
+			
+			border: 1px #e3e3e3 solid;
+		    border-bottom: 0;
+    		font-size: 1.313rem;
+			background: #e8e8e8;
+			background: -moz-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#e8e8e8));
+			background: -webkit-linear-gradient(top, #fff 0%,#e8e8e8 100%);
+			background: -o-linear-gradient(top, #fff 0%,#e8e8e8 100%);
+			background: -ms-linear-gradient(top, #fff 0%,#e8e8e8 100%);
+			background: linear-gradient(to bottom, #fff 0%,#e8e8e8 100%);
+
+			&:hover {
+				background: #E9E9E9;
+			}
+			&.current {
+				width: 17rem;
+				padding: .6875rem 1.25rem;
+				margin: 0;
+				color: #000;
+				font-weight: bold;
+				background: #fff;
+			}
+
+			a {
+				width: 100%;
+				display: inline-block;
+				padding: .5rem 1.25rem;
+				color: #0266de;
+			}
+		}
+	}
+	ul.myAds {
+		margin: 0 0 1.25rem 0;
+		border: 1px solid #e3e3e3;
+		border-top: none;
+
+		> li {
+			padding: 1.563rem 1.875rem;
+			border-top: 1px solid #e3e3e3;
+
+			.image {
+				width: 11.44rem;
+				height: 8.938rem;
+				float: left;
+				position: relative;
+				margin: 0 1.438rem 0 0;
+				border: 1px solid #e1e1e1;
+
+				a {
+					width: 11.44rem;
+					height: 8.938rem;
+					display: block;
+					background-size: cover;
+	 				background-position: center;
+	 				background-repeat: no-repeat;
+
+					&.noPhoto {
+						background-image: url(imageUrl/images/html5/noPhoto.png);
+						background-size: auto;
+					}
+
+				}
+				.status {
+					width: 8.125rem;
+					height: 1.375rem;
+					position: absolute;
+					left: -.6875rem;
+					top: 1.25rem;
+					color: #fff;
+					display: block;
+					font-size: .8125rem;
+					font-weight: bold;
+					line-height: 1.375rem;					
+					text-align: center;
+					text-transform: uppercase;
+
+					&:before {
+						position: absolute;
+						left: 0;
+						bottom: -6px;
+						border-color: #869300 rgba(0, 0, 0, 0);
+						border-style: solid;
+						border-width: 6px 0 0 11px;
+						content: "";
+					}
+
+					&:after {
+						width: 0;
+						height: 0;
+						position: absolute;
+						right: -1.188rem;
+						border-style: solid;
+						border-width: .6875rem;
+						bottom: 0;
+						content: " ";
+					}
+					
+					&.pending {
+						background: #f1b41d;
+
+						&:after {
+							border-color: #f1b41d transparent #f1b41d #f1b41d;
+						}
+						&:before {
+							border-color: #efa010 rgba(0, 0, 0, 0);
+						}
+					}
+					&.rejected {
+						background: #d51e34;
+
+						&:after {
+							border-color: #d51e34 transparent #d51e34 #d51e34;
+						}
+						&:before {
+							border-color: #7e2235 rgba(0, 0, 0, 0);
+						}
+					}
+					&.ready {
+						background: #a7bc09;
+
+						&:after {
+							border-color: #a7bc09 transparent #a7bc09 #a7bc09;
+						}
+						&:before {
+							border-color: #869300 rgba(0, 0, 0, 0);
+						}
+					}
+				}
+
+			}
+
+			.description {
+				width: 32.5rem;
+				min-height: 9.063rem;
+				float: left;
+				position: relative;
+				overflow: hidden;
+
+				h1 {
+					padding: 0;
+					font-size: 1.313rem;
+					color: #bebcbd;
+				}
+				ul {
+					position: absolute;
+					left: 0;
+					bottom: 0;
+
+					li {
+						font-size: .875rem;
+						margin: 0 .625rem 0 0;
+						display: inline-block;
+						color: #010101;
+
+						a {
+							color: #0266de;
+							line-height: 1.563rem; 
+
+							&.option {
+								min-width: 5rem;
+								display: inline-block;
+								padding: 0 .9375rem;
+								background: #f9f9f9;
+								border-color: #e3e3e3 #e1e1e1 #e1e1e1 #e3e3e3;
+								border-style: solid;
+								border-width: 1px 2px 2px 1px;
+								cursor: pointer;
+								border-radius: 3px;
+							    text-align: center;
+							}
+
+							span:before {
+								display: inline-block;
+							    font-size: 25px;
+							    vertical-align: bottom;
+							}
+							span.edit:before {
+						    	content: "";
+						    }
+						    span.delete:before {
+						    	content: "";
+						    }
+						}
+					}
+				}
+			}
+
+			> span {
+				float: right;
+				margin-left: .9375rem;
+				font-size: 1.25rem;
+				font-weight: bold;
+				text-align: right;
+				color: #000;
+				text-transform: uppercase;
+			}
+		}
+	}
+}
