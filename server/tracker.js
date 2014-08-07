@@ -17,7 +17,7 @@ function makeTrack(url, options, callback) {
         // keep going to normal tracker
         options.data.tid = 'MO-5247560-2';
     }
-    restler[options.method || 'get'](url, options)
+    restler[options.method ? options.method.toLowerCase() : 'get'](url, options)
         .on('success', success)
         .on('fail', fail)
         .on('error', fail);
