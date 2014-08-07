@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('icons', ['copy:icons', 'sprites']);
 
-    grunt.registerTask('build', ['template', 'flags', 'javascript', 'icons', 'stylus']);
+    grunt.registerTask('build', ['template', 'javascript', 'flags', 'icons', 'stylus']);
 
     grunt.registerTask('compile', ['clean', 'build']);
 

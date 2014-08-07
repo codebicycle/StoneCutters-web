@@ -8,7 +8,8 @@ module.exports = function(grunt) {
             src: ['public/js/lib/**/*.js'],
             dest: 'public/js/src/common/libs.js',
             options: {
-                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client']
+                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client'],
+                external: ['underscore', 'url', 'querystring']
             }
         },
         translations: {
@@ -16,32 +17,33 @@ module.exports = function(grunt) {
             dest: 'public/js/src/common/translations.js',
             options: {
                 alias: ['app/translations/index.js:../app/translations']
-            },
-            exclude: ['underscore', 'url', 'querystring']
+            }
         },
         config: {
             src: ['app/config/**/*.js'],
             dest: 'public/js/src/common/config-development.js',
             options: {
-                alias: ['app/config/index.js:../app/config']
-            },
-            exclude: ['underscore', 'url', 'querystring']
+                alias: [],
+                external: ['underscore', '../../shared/utils']
+            }
         },
         'flags-testing': {
             src: ['dist/git/app/config/**/*.js'],
             dest: 'public/js/src/common/config-testing.js',
             options: {
-                alias: ['app/config/index.js:../app/config']
-            },
-            exclude: ['underscore', 'url', 'querystring']
+                alias: ['app/config/index.js:../app/config'],
+                external: ['underscore', './default', '../../shared/utils'],
+                exclude: ['../app/config/default']
+            }
         },
         'flags-production': {
             src: ['dist/git/app/config/**/*.js'],
             dest: 'public/js/src/common/config.js',
             options: {
-                alias: ['app/config/index.js:../app/config']
-            },
-            exclude: ['underscore', 'url', 'querystring']
+                alias: ['app/config/index.js:../app/config'],
+                external: ['underscore', './default', '../../shared/utils'],
+                exclude: ['../app/config/default']
+            }
         }
     };
 

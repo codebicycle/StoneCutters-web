@@ -128,9 +128,11 @@ module.exports = function(grunt) {
                     }
                 };
             }
-            if (environment !== 'development') {
+            if (environment !== 'production') {
                 fileName.push('-');
                 fileName.push(environment);
+            }
+            if (environment !== 'development') {
                 stylus[key].options.define.staticUrl = environments[environment].urls.static;
                 stylus[key].options.define.imageUrl = environments[environment].urls.image;
             }
