@@ -9,15 +9,15 @@ function makeTrack(url, options, callback) {
 
         // QA2 Tracker testing
         options.data.tid = 'MO-31226936-4';
-        restler[options.method](url, options)
-        .on('success', success)
-        .on('fail', fail)
-        .on('error', fail);
+        restler.request(url, _.clone(options))
+            .on('success', success)
+            .on('fail', fail)
+            .on('error', fail);
 
         // keep going to normal tracker
         options.data.tid = 'MO-5247560-2';
     }
-    restler[options.method ? options.method.toLowerCase() : 'get'](url, options)
+    restler.request(url, _.clone(options))
         .on('success', success)
         .on('fail', fail)
         .on('error', fail);
