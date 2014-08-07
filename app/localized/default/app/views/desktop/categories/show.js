@@ -168,19 +168,15 @@ module.exports = Base.extend({
             var subcategory = buildCategory('#subcategory');
             var img;
             var analyticImg;
-            var urls;
+            var analyticInfo;
 
             analytics.reset();
             analytics.setPage('listing');
             analytics.addParam('category', category);
             analytics.addParam('subcategory', subcategory);
 
-            urls = analytics.generateURL.call(this);
-            if (!_.isArray(urls)) {
-                urls = [urls];
-            }
-
-            _.each(urls, function(url) {
+            analyticInfo = analytics.generateURL.call(this);
+            _.each(analyticInfo.urls, function(url) {
                 img = $('<img/>');
                 img.addClass('analytics');
                 img.attr('src', url);

@@ -22,9 +22,13 @@ function addParam(name, value) {
 }
 
 function generateURL() {
+    var analytics;
+
     addParam('user', this.app.session.get('user'));
     addParam('rendering', this.app.session.get('platform'));
-    return tracker.generateURL.call(this, query);
+    analytics = tracker.generate.call(this, query);
+    analytics.params.host = this.app.session.get('host');
+    return analytics;
 }
 
 module.exports = {

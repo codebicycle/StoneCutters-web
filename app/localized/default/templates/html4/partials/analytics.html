@@ -1,9 +1,5 @@
 {% if analytics %}
-    {% if (analytics | is('array')) %}
-        {% for url in analytics %}
-            <img src="{{url}}" class="analytics" width="1px" height="1px">
-        {% endfor %}
-    {% else %}
-        <img src="{{analytics}}" class="analytics" width="1px" height="1px">
-    {% endif %}
+    {% for url in analytics.urls %}
+        <img src="{{url}}" class="analytics" width="1px" height="1px">
+    {% endfor %}
 {% endif %}

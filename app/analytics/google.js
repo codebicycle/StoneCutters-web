@@ -82,61 +82,20 @@ function generatePage(page, options) {
             page = analyticParam.parse(page, options);
         }
     });
+
+    // BEGIN - Check item closed
+    if (options && options.item && options.item.purged) {
+        page = page.replace('/item/', '/item_closed/');
+    }
+    // END - Check item closed
+
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
-function saveParams(params, options) {
-    this.app.session.persist(params, _.defaults({}, options, {
-        maxAge: 1728000000
-    }));
-}
-
-function initParams() {
-    var today = new Date().getTime();
-    var gaNs = this.app.session.get('gaNs') || 0;
-
-    saveParams.call(this, {
-        gaIs: today,
-        gaPs: today,
-        gaCs: today,
-        gaNs: ++gaNs,
-        gaDh: Math.round(Math.random() * 10000000),
-        gaUid: Math.round(Math.random() * 100000000)
-    });
-}
-
-function persistParams() {
-    var gaCs = new Date().getTime();
-
-    saveParams.call(this, {
-        gaCs: gaCs,
-        gaPs: this.app.session.get('gaCs') || gaCs,
-        gaIs: this.app.session.get('gaIs') || gaCs,
-        gaNs: this.app.session.get('gaNs') || 0,
-        gaDh: this.app.session.get('gaDh') || Math.round(Math.random() * 10000000),
-        gaUid: this.app.session.get('gaUid') || Math.round(Math.random() * 1000000)
-    });
-}
-
-function checkInitParams() {
-    var gaIs = this.app.session.get('gaIs');
-    var gaCs;
-
-    if (!gaIs) {
-        initParams.call(this);
-        return false;
-    }
-
-    gaCs = this.app.session.get('gaCs');
-    gaIs = this.app.session.get('gaIs');
-    if ((Number(gaCs) - Number(gaIs)) > 1800000) {
-        initParams.call(this);
-        return false;
-    }
-    return true;
-}
-
 function getId() {
+    if (1 === 1) {
+        return 'UA-50718833-1';
+    }
     if (googleId) {
         return googleId;
     }
@@ -156,11 +115,8 @@ function getId() {
 function generate(params, page, options) {
     var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
 
-    params.id = getId.call(this);
+    params.id = getId();
     params.page = generatePage.call(this, googlePage, options);
-    if (checkInitParams.call(this)) {
-        persistParams.call(this);
-    }
 }
 
 module.exports = {
