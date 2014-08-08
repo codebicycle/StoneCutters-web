@@ -6,6 +6,7 @@ module.exports = {
     hosts: {
         ar: 'm.olx.com.ar', 
         br: 'm.olx.com.br',
+        py: 'm.olx.com.py',
         de: 'm.olx.de',
         in: 'm.olx.in'
     },
@@ -16,6 +17,10 @@ module.exports = {
         },
         br: {
             www: 'www.olx.com.br'
+        },
+        py: {
+            www: 'www.olx.com.py',
+            asuncionciudad: 'asuncionciudad.olx.com.py'
         },
         de: {
             www: 'www.olx.de'
