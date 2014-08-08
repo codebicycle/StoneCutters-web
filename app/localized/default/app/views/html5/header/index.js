@@ -40,18 +40,14 @@ module.exports = Base.extend({
         'click .logIn span': 'onLoginClick',
         'click #myOlx li a': 'onMenuClick'
     },
-    onLoginClick: function(events) {
+    onLoginClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         this.$('#myOlx').slideToggle();
     },
-    onMenuClick: function(events) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
+    onMenuClick: function(event) {
         this.$('#myOlx').slideUp();
     },
     changeLocation: function (e, siteLocation) {
