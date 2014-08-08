@@ -8,6 +8,11 @@ var _ = require('underscore');
 module.exports = Base.extend({
     form: {},
     errors: {},
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.form = {};
+        this.errors = {};
+    },
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
@@ -22,12 +27,15 @@ module.exports = Base.extend({
         'flow': 'onFlow',
         'headerChange': 'onHeaderChange',
         'stepChange': 'onStepChange',
+        'imagesSubmit': 'onImagesSubmit',
         'categorySubmit': 'onCategorySubmit',
         'subcategorySubmit': 'onSubcategorySubmit',
         'optionalsSubmit': 'onOptionalsSubmit',
         'descriptionSubmit': 'onDescriptionSubmit',
         'contactSubmit': 'onContactSubmit',
-        'submit': 'onSubmit'
+        'locationSubmit': 'onLocationSubmit',
+        'submit': 'onSubmit',
+        'restart': 'onRestart'
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();
@@ -36,6 +44,7 @@ module.exports = Base.extend({
 
         this.$('#' + (to || 'hub')).trigger('show', data || {});
         this.$('#' + from).trigger('hide', data || {});
+        this.$el.scrollTop();
     },
     onHeaderChange: function(event, title, current, back, data) {
         event.preventDefault();
@@ -50,6 +59,26 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('#hub').trigger('stepChange', [before, after]);
+    },
+    onImagesSubmit: function(event, images) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var ids = [];
+        var files = [];
+
+        Object.keys(images).sort().forEach(function each(image) {
+            ids.push(images[image].id);
+            files.push(images[image].file);
+        });
+        if (ids.length) {
+            this.form.images = ids;
+        }
+        else {
+            delete this.form.images;
+        }
+        this.$('#hub').trigger('imageChange', [files.shift()]);
     },
     onCategorySubmit: function(event, category, error) {
         event.preventDefault();
@@ -71,9 +100,11 @@ module.exports = Base.extend({
         this.form['category.id'] = subcategory.id;
         this.errors['category.id'] = error;
         this.$('#hub').trigger('categoryChange', [this.form['category.parentId'], this.form['category.id'], this.errors['category.parentId'], this.errors['category.id']]);
-        this.$('#optionals').trigger('fieldsChange', [subcategory.fields.get('fields').categoryAttributes, this.form['category.parentId'], this.form['category.id'], true]);
-        this.$('#description').trigger('fieldsChange', [subcategory.fields.get('fields').productDescription]);
-        this.$('#contact').trigger('fieldsChange', [subcategory.fields.get('fields').contactInformation]);
+        if (subcategory.fields) {
+            this.$('#optionals').trigger('fieldsChange', [subcategory.fields.get('fields').categoryAttributes, this.form['category.parentId'], this.form['category.id'], true]);
+            this.$('#description').trigger('fieldsChange', [subcategory.fields.get('fields').productDescription]);
+            this.$('#contact').trigger('fieldsChange', [subcategory.fields.get('fields').contactInformation]);
+        }
     },
     onOptionalsSubmit: function(event, fields, errors) {
         event.preventDefault();
@@ -104,7 +135,7 @@ module.exports = Base.extend({
         }.bind(this));
         this.$('#hub').trigger('descriptionChange', [fields, errors]);
     },
-    onContactSubmit: function(event, fields, errors) {
+    onContactSubmit: function(event, fields, city, errors, cityError) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -117,7 +148,15 @@ module.exports = Base.extend({
                 delete this.form[field.name];
             }
         }.bind(this));
-        this.$('#hub').trigger('contactChange', [fields, errors]);
+        this.form.location = city.url;
+        this.$('#hub').trigger('contactChange', [fields, city, errors, cityError]);
+    },
+    onLocationSubmit: function(event, city, error) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#contact').trigger('locationChange', [city, error]);
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -131,6 +170,7 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
+            console.log('validate', this.form);
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -139,6 +179,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var post = function(done, response) {
+            console.log('create', this.form);
             query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -155,6 +196,7 @@ module.exports = Base.extend({
 
         var success = function(item) {
             this.app.router.once('action:end', always);
+            //this.$el.trigger('restart');
             helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
                 status: 200
             });
@@ -169,12 +211,24 @@ module.exports = Base.extend({
         }
         this.form.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
         this.form.platform = this.app.session.get('platform');
-        this.form.location = this.app.session.get('siteLocation');
         this.form.ipAddress = this.app.session.get('ip');
-        console.log(this.form);
+        if (this.form.images) {
+            this.form.images = this.form.images.join(',');
+        }
         asynquence().or(fail)
             .then(validate)
             .then(post)
             .val(success);
+    },
+    onRestart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.form = {};
+        this.errors = {};
+        this.childViews.forEach(function each(view) {
+            view.$el.trigger('restart');
+        });
     }
 });

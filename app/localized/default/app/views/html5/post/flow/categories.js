@@ -9,6 +9,10 @@ module.exports = Base.extend({
     id: 'categories',
     tagName: 'section',
     selected: {},
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.selected = {};
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -20,7 +24,8 @@ module.exports = Base.extend({
     events: {
         'show': 'onShow',
         'hide': 'onHide',
-        'click .category': 'onClickCategory'
+        'click .category': 'onClickCategory',
+        'restart': 'onRestart'
     },
     onShow: function(event) {
         event.preventDefault();
@@ -47,6 +52,13 @@ module.exports = Base.extend({
 
         this.selected.id = $category.data('id');
         this.parentView.$el.trigger('flow', [this.id, 'subcategories', this.selected]);
+    },
+    onRestart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.selected = {};
     }
 });
 

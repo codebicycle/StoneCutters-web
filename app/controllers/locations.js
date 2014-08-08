@@ -11,6 +11,7 @@ module.exports = {
 
         function controller() {
             var citiesParams = {
+                level: 'countries',
                 type: 'topcities',
                 location: this.app.session.get('siteLocation')
             };

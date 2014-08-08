@@ -2,14 +2,14 @@
     counter-reset: index;
 }
 
-#hub #pictures {
+#hub #image {
     background-color: #DDD;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
 }
 
-#hub #pictures > div {
+#hub #image > div {
     width: 100%;
     height: 100%;
     background-image: url(imageUrl/images/html5/cameraBig.png);
@@ -22,7 +22,11 @@
     box-sizing: border-box;
 }
 
-#hub #pictures > div > span {
+#hub #image.fill > div {
+    opacity: 0;
+}
+
+#hub #image > div > span {
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -31,7 +35,7 @@
     font-size: 5vw;
 }
 
-#hub #pictures > p {
+#posting-flow .image-label {
     float: left;
     width: 100%;
     height: 1.5rem;
@@ -45,7 +49,7 @@
     box-sizing: border-box;
 }
 
-#hub #pictures > p > small {
+#posting-flow .image-label > small {
     overflow: hidden;
     display: block;
     white-space: nowrap;

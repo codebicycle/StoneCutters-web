@@ -9,13 +9,16 @@ module.exports = Base.extend({
     events: {
         'show': 'onShow',
         'hide': 'onHide',
+        'click #image': 'onImageClick',
         'stepChange': 'onStepChange',
-        'click .step:not(".opaque")': 'onClickStep',
+        'click .step:not(".opaque")': 'onStepClick',
+        'imageChange': 'onImageChange',
         'categoryChange': 'onCategoryChange',
         'descriptionChange': 'onDescriptionChange',
         'contactChange': 'onContactChange',
         'change': 'onChange',
-        'click #post': 'onSubmit'
+        'click #post': 'onSubmit',
+        'restart': 'onRestart'
     },
     onShow: function(event, error) {
         event.preventDefault();
@@ -33,6 +36,13 @@ module.exports = Base.extend({
 
         this.$el.addClass('disabled');
     },
+    onImageClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.parentView.$el.trigger('flow', [this.id, 'images']);
+    },
     onStepChange: function(event, before, after) {
         event.preventDefault();
         event.stopPropagation();
@@ -40,7 +50,7 @@ module.exports = Base.extend({
 
         this.$('#step-' + before).attr('id', 'step-' + after);
     },
-    onClickStep: function(event) {
+    onStepClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -48,6 +58,18 @@ module.exports = Base.extend({
         var $step = $(event.currentTarget);
 
         this.parentView.$el.trigger('flow', [this.id, $step.attr('id').split('-').pop()]);
+    },
+    onImageChange: function(event, image) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        if (image) {
+            this.$('#image').addClass('fill').css('background-image', 'url(' + image + ')');
+        }
+        else {
+            this.$('#image').removeClass('fill').removeAttr('style');
+        }
     },
     onCategoryChange: function(event, id, subId, error, subError) {
         event.preventDefault();
@@ -124,7 +146,7 @@ module.exports = Base.extend({
         $step.find('.title').html(message + '<br/>' + subMessage);
         this.$el.trigger('change');
     },
-    onContactChange: function(event, fields, errors) {
+    onContactChange: function(event, fields, city, errors, cityError) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -145,13 +167,20 @@ module.exports = Base.extend({
                 }
             }
         });
+        if (!city || !city.url) {
+            failed = true;
+            subMessage = cityError;
+        }
+        else {
+            subMessage = city.name;
+        }
         if (failed) {
             $step.addClass('error');
         }
         else {
             $step.addClass('success');
         }
-        $step.find('.title').html(message + '<br/>' + (subMessage || ''));
+        $step.find('.title').html(message + '<br/>' + subMessage);
         this.$el.trigger('change');
     },
     onChange: function(event) {
@@ -172,6 +201,11 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('submit');
+    },
+    onRestart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
     }
 });
 

@@ -14,9 +14,10 @@ module.exports = {
         function controller(form) {
             var siteLocation = this.app.session.get('siteLocation');
             var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], true);
+            var location = this.app.session.get('location');
 
             function prepare(done) {
-                if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                if (!isPostingFlow && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                     done.abort();
                     return helpers.common.redirect.call(this, '/location?target=posting', null, {
                         status: 302
@@ -50,13 +51,43 @@ module.exports = {
                 }, done.errfcb);
             }
 
-            function success(res1, res2) {
+            function fetchCities(done) {
+                this.app.fetch({
+                    topCities: {
+                        collection: 'Cities',
+                        params: {
+                            level: 'countries',
+                            type: 'topcities',
+                            location: location.url,
+                            languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function fetchStates(done) {
+                this.app.fetch({
+                    states: {
+                        collection: 'States',
+                        params: {
+                            location: location.url,
+                            languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function success(res1, res2, res3, res4) {
                 analytics.reset();
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
                 if (isPostingFlow) {
-                    postingFlowController.call(this, res1.categories, res2.postingSession);
+                    postingFlowController.call(this, res1.categories, res2.postingSession, res3.topCities, res4.states);
                 }
                 else {
                     postingCategoriesController.call(this, res1.categories);
@@ -67,10 +98,12 @@ module.exports = {
                 helpers.common.error.call(this, err, {}, callback);
             }
 
-            function postingFlowController(categories, postingSession) {
+            function postingFlowController(categories, postingSession, topCities, states) {
                 callback(null, 'post/flow/index', {
                     categories: categories,
-                    postingSession: postingSession.get('postingSession')
+                    postingSession: postingSession.get('postingSession'),
+                    topCities: topCities,
+                    states: states
                 });
             }
 
@@ -85,7 +118,7 @@ module.exports = {
                 .then(prepare.bind(this));
 
             if (isPostingFlow) {
-                promise.gate(fetchCategories.bind(this), fetchPostingSession.bind(this));
+                promise.gate(fetchCategories.bind(this), fetchPostingSession.bind(this), fetchCities.bind(this), fetchStates.bind(this));
             }
             else {
                 promise.then(fetchCategories.bind(this));
@@ -98,8 +131,14 @@ module.exports = {
 
         function controller() {
             var siteLocation = this.app.session.get('siteLocation');
+            var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], true);
 
-            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+            if (isPostingFlow) {
+                return helpers.common.redirect.call(this, '/posting', null, {
+                    status: 302
+                });
+            }
+            else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
                 return helpers.common.redirect.call(this, '/location?target=posting', null, {
                     status: 302
                 });
@@ -139,13 +178,20 @@ module.exports = {
 
         function controller(form) {
             var siteLocation = this.app.session.get('siteLocation');
+            var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], true);
             var language;
             var languages;
             var languageId;
             var languageCode;
 
             function prepare(done) {
-                if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                if (isPostingFlow) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/posting', null, {
+                        status: 302
+                    });
+                }
+                else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
                     done.abort();
                     return helpers.common.redirect.call(this, '/location?target=posting', null, {
                         status: 302

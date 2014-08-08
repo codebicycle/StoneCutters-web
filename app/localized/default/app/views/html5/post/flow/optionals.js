@@ -1,7 +1,6 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
-var config = require('../../../../../../../config');
 var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
@@ -16,6 +15,15 @@ module.exports = Base.extend({
         values: {}
     },
     selected: {},
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.allFields = [];
+        this.fields = [];
+        this.form = {
+            values: {}
+        };
+        this.selected = {};
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var category = this.parentView.options.categories.search(this.selected.id) || {};
@@ -52,7 +60,8 @@ module.exports = Base.extend({
         'click .change': 'onChangeClick',
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
-        'submit': 'onSubmit'
+        'submit': 'onSubmit',
+        'restart': 'onRestart'
     },
     onShow: function(event) {
         event.preventDefault();
@@ -174,6 +183,18 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('flow', [this.id, '']);
+    },
+    onRestart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.allFields = [];
+        this.fields = [];
+        this.form = {
+            values: {}
+        };
+        this.selected = {};
     }
 });
 

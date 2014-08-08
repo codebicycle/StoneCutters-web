@@ -9,9 +9,11 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
+        var postingFlowEnabled = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true);
 
         return _.extend({}, data, {
-            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true)
+            postingFlowEnabled: postingFlowEnabled,
+            postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow'
         });
     },
     postRender: function() {

@@ -1,7 +1,6 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
-var config = require('../../../../../../../config');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 
@@ -13,9 +12,10 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var subcategories = this.parentView.options.categories.get(this.options.subId).get('children');
 
         return _.extend({}, data, {
-            subcategories: this.parentView.options.categories.get(this.options.subId).get('children').toJSON()
+            subcategories: subcategories.toJSON ? subcategories.toJSON() : subcategories
         });
     },
     postRender: function() {
@@ -49,7 +49,7 @@ module.exports = Base.extend({
         var $subcategory = $(event.currentTarget);
         var id = $subcategory.data('id');
 
-        var fetchFields = function(done) {
+        var fetch = function(done) {
             $('body > .loading').show();
             this.app.fetch({
                 fields: {
@@ -88,7 +88,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         asynquence().or(error)
-            .then(fetchFields)
+            .then(fetch)
             .val(success);
     }
 });

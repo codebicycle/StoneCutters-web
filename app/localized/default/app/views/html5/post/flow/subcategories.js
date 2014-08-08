@@ -1,7 +1,6 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
-var config = require('../../../../../../../config');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -9,6 +8,10 @@ module.exports = Base.extend({
     id: 'subcategories',
     tagName: 'section',
     selected: {},
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.selected = {};
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -21,7 +24,8 @@ module.exports = Base.extend({
         'show': 'onShow',
         'hide': 'onHide',
         'flow': 'onFlow',
-        'subcategorySubmit': 'onSubcategorySubmit'
+        'subcategorySubmit': 'onSubcategorySubmit',
+        'restart': 'onRestart'
     },
     onShow: function(event, category) {
         event.preventDefault();
@@ -54,6 +58,13 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('subcategorySubmit', [subcategory, error]);
+    },
+    onRestart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.selected = {};
     }
 });
 

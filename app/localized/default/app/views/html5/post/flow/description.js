@@ -1,7 +1,6 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
-var config = require('../../../../../../../config');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -11,6 +10,13 @@ module.exports = Base.extend({
     fields: [],
     form: {
         values: {}
+    },
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.fields = [];
+        this.form = {
+            values: {}
+        };
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -25,7 +31,8 @@ module.exports = Base.extend({
         'hide': 'onHide',
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
-        'submit': 'onSubmit'
+        'submit': 'onSubmit',
+        'restart': 'onRestart'
     },
     onShow: function(event, categoryId) {
         event.preventDefault();
@@ -96,6 +103,16 @@ module.exports = Base.extend({
             $description.addClass('error').after('<small class="error">La descripcion debe tener al menos 10 caracteres</small>');
         }
         return !failed;
+    },
+    onRestart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.fields = [];
+        this.form = {
+            values: {}
+        };
     }
 });
 

@@ -9,7 +9,7 @@
             <li class="logIn"><span class="btns blue"></span></li>
         {% endif %}
         <li class="postBtn{% if not postButton %} disabled{% endif %}">
-            {% if location.current %}
+            {% if location.current or postingFlowEnabled %}
                 <a href="{{ ['/posting', postLink] | join('') | link }}" class="btns orange posting-link trackMe">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% else %}
                 <a href="{{ '/location?target=posting' | link }}" class="btns orange posting-link trackMe" data-tracking="Posting-ClickSelectLocation" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
