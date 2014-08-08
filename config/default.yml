@@ -37,6 +37,14 @@ newrelic:
 graphite:
   enabled: false
 
+statsD:
+  enabled: false
+  client:
+    host: graphite-sever
+    port: 8125
+    cacheDns: true
+    prefix: application.mobile.webapp.
+
 formidable:
   uploadDir: /tmp
   keepExtensions: true
