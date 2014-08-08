@@ -2,7 +2,9 @@
     {% for category in categories %}
         <li class="category" data-id="{{ category.id }}">
             <h2>
-                <a><span class="icon cat-{{ category.id }}"></span>{{category.trName}}</a>
+                <a class="trackMe" data-tracking="Posting-ClickSubCategoryList">
+                    <span class="icon cat-{{ category.id }}"></span>{{category.trName}}
+                </a>
             </h2>
         </li>
     {% endfor %}

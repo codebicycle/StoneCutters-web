@@ -16,6 +16,11 @@ module.exports = Base.extend({
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
+        this.attachTrackMe(this.className, function(category, action) {
+            return {
+                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
+            };
+        }.bind(this));
     },
     onStart: function(event) {
         this.appView.trigger('postingflow:start');
@@ -35,7 +40,8 @@ module.exports = Base.extend({
         'contactSubmit': 'onContactSubmit',
         'locationSubmit': 'onLocationSubmit',
         'submit': 'onSubmit',
-        'restart': 'onRestart'
+        'restart': 'onRestart',
+        'trackEventNext': 'onNext'
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();
@@ -134,6 +140,7 @@ module.exports = Base.extend({
             }
         }.bind(this));
         this.$('#hub').trigger('descriptionChange', [fields, errors]);
+        this.$el.trigger('trackEventNext', ['ClickDescribeAdNext']);
     },
     onContactSubmit: function(event, fields, city, errors, cityError) {
         event.preventDefault();
@@ -150,6 +157,7 @@ module.exports = Base.extend({
         }.bind(this));
         this.form.location = city.url;
         this.$('#hub').trigger('contactChange', [fields, city, errors, cityError]);
+        this.$el.trigger('trackEventNext', ['ClickContactInfoNext']);
     },
     onLocationSubmit: function(event, city, error) {
         event.preventDefault();
@@ -195,6 +203,14 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(item) {
+            var category = 'Posting';
+            var action = 'PostingSuccess';
+
+            this.track({
+                category: category,
+                action: action,
+                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
+            });
             this.app.router.once('action:end', always);
             //this.$el.trigger('restart');
             helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
@@ -229,6 +245,37 @@ module.exports = Base.extend({
         this.errors = {};
         this.childViews.forEach(function each(view) {
             view.$el.trigger('restart');
+        });
+    },
+    onNext: function(event, action) {
+        var category = 'Posting';
+
+        this.track({
+            category: category,
+            action: action,
+            custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
+        });
+    },
+    onExitFlow: function(event) {
+        var category = 'Posting';
+        var action = 'DropSection';
+        var images = this.form.images;
+        var status = [];
+        
+        status.push('section:' + 'hub');
+        status.push('category:' + this.form['category.parentId'] ? 1 : 0);
+        status.push('subcategory:' + this.form['category.id'] ? 1 : 0);
+        status.push('title:' + this.form['title'] ? 1 : 0);
+        status.push('description:' + this.form['description'] ? 1 : 0);
+        status.push('email:' + this.form['email'] ? 1 : 0);
+        status.push('state:' + this.form['location'] ? 1 : 0);
+        status.push('city:' + this.form['location'] ? 1 : 0);
+        status.push('pictures:' + (images ? (_.isString(images) ? images.split(',') : images).length : 0));
+
+        this.track({
+            category: category,
+            action: action,
+            custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].concat(status).join('::')
         });
     }
 });

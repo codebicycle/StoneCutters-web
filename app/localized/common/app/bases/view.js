@@ -52,7 +52,6 @@ module.exports = Base.extend({
         });
     },
     track: function(data, callback) {
-        var that = this;
         var obj = {
             url: helpers.common.static('/images/common/gif1x1.gif')
         };
@@ -75,10 +74,8 @@ module.exports = Base.extend({
         });
     },
     attachTrackMe: function(context, handler) {
-        var that = this;
-
-        $('.' + context + ' .trackMe').on('click', function(e) {
-            var $this = $(this);
+        this.$('.trackMe').on('click', function(e) {
+            var $this = $(e.currentTarget);
             var data = $this.data('tracking');
             var obj;
             var category;
@@ -94,10 +91,10 @@ module.exports = Base.extend({
                         category: category,
                         action: action
                     });
-                    that.track(obj);
+                    this.track(obj);
                 }
             }
-        });
+        }.bind(this));
     }
 });
 

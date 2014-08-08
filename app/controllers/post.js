@@ -99,18 +99,21 @@ module.exports = {
             }
 
             function postingFlowController(categories, postingSession, topCities, states) {
+                analytics.setPage('post#flow');
                 callback(null, 'post/flow/index', {
                     categories: categories,
                     postingSession: postingSession.get('postingSession'),
                     topCities: topCities,
-                    states: states
+                    states: states,
+                    analytics: analytics.generateURL.call(this)
                 });
             }
 
             function postingCategoriesController(categories) {
+                analytics.setPage('post#categories');
                 callback(null, 'post/categories', {
-                    analytics: analytics.generateURL.call(this),
-                    categories: categories.toJSON()
+                    categories: categories.toJSON(),
+                    analytics: analytics.generateURL.call(this)
                 });
             }
 

@@ -151,6 +151,18 @@ module.exports = {
             funnel_subcategory: ''
         }
     },
+    'post#flow': {
+        process: false,
+        names: {
+            page_name: 'posting_new',
+            category: 'posting',
+            ad_category: 'not_set',
+            ad_subcategory: 'not_set',
+            funnel_page: 'posting_new',
+            funnel_category: 'not_set',
+            funnel_subcategory: 'not_set'
+        }
+    },
     'pages#terms': {
         process: false,
         names: {
