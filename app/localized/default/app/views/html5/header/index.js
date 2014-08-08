@@ -17,43 +17,15 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
-<<<<<<< HEAD
-        $('#topBar ul li.logIn span').click(function(e){
-            $('menu#myOlx').slideToggle();
-        });
-        $('menu#myOlx ul li a').click(function(e){
-            $('menu#myOlx').slideUp();
-        });
-=======
->>>>>>> develop
         this.attachTrackMe(this.className, function(category, action) {
             return {
                 custom: [category, '-', '-', action].join('::')
             };
         });
-<<<<<<< HEAD
-        $(document).on('route', function onRoute() {
-            var platform = this.app.session.get('platform');
-            var currentRoute = this.app.session.get('currentRoute');
-            var button = $('.postBtn', '#topBar');
-            var postButton = this.readPostButtonConfig(platform, currentRoute);
-
-            if (postButton) {
-                button.removeClass('disabled');
-            }
-            else {
-                button.addClass('disabled');
-            }
-        }.bind(this));
-
-=======
->>>>>>> develop
         $('body').on('change:location', this.changeLocation.bind(this));
         $('body').on('update:postingLink', this.updatePostingLink.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
-<<<<<<< HEAD
-=======
         this.app.router.on('action:end', this.onActionEnd.bind(this));
     },
     onActionEnd: function() {
@@ -81,7 +53,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('#myOlx').slideUp();
->>>>>>> develop
     },
     changeLocation: function (e, siteLocation) {
         this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {

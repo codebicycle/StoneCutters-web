@@ -17,7 +17,7 @@ module.exports = Base.extend({
         'descriptionChange': 'onDescriptionChange',
         'contactChange': 'onContactChange',
         'change': 'onChange',
-        'click #post': 'onSubmit',
+        'click #post:not(".opaque")': 'onSubmit',
         'restart': 'onRestart'
     },
     onShow: function(event, error) {
