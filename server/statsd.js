@@ -1,11 +1,44 @@
 'use strict';
 
-var config = require('./config').get('statsd', {
+var config = require('./config').get('statsD', {
     client: {
         host: 'graphite-server',
         port: 8125,
+        cacheDns: true,
         prefix: 'application.mobile.webapp.'
     }
 });
 var StatsD = require('node-statsd').StatsD;
-module.exports = new StatsD({ prefix: config.client.prefix, host: config.client.host, cacheDns: true, });
+var logger = require('../shared/logger')('statsD');
+var client;
+
+var Client = function(options) {
+    var statsD = new StatsD(config.client);
+
+    function increment(metric) {
+        if (Array.isArray(metric)) {
+            metric = metric.join('.');
+        }
+        statsD.increment(metric);
+    }
+
+    return {
+        increment: increment
+    };
+};
+
+module.exports = function() {
+    if (config.enabled) {
+        if (!client) {
+            logger.log('Creating new StatsD client');
+            client = new Client(config.client);
+        }
+    }
+    else {
+        client = {
+            increment: function() {}
+        };
+    }
+    return client;
+};
+
