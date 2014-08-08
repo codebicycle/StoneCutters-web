@@ -9,6 +9,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var utils = require('../../shared/utils');
     var tracking = require('../../shared/tracking');
     var graphite = require('../graphite')();
+    var statsd  = require('../statsd');
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
 
@@ -139,7 +140,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function graphiteTracking(req) {
             graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
+            statsd.increment('countries.' + req.query.locNm + '.pageview.' + req.query.platform);
             graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
+            statsd.increment(req.query.locNm + '.devices.' + req.query.osNm + "." + req.query.platform);
         }
 
         function googleTracking(req) {
