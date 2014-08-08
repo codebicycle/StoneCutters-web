@@ -17,17 +17,21 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
+<<<<<<< HEAD
         $('#topBar ul li.logIn span').click(function(e){
             $('menu#myOlx').slideToggle();
         });
         $('menu#myOlx ul li a').click(function(e){
             $('menu#myOlx').slideUp();
         });
+=======
+>>>>>>> develop
         this.attachTrackMe(this.className, function(category, action) {
             return {
                 custom: [category, '-', '-', action].join('::')
             };
         });
+<<<<<<< HEAD
         $(document).on('route', function onRoute() {
             var platform = this.app.session.get('platform');
             var currentRoute = this.app.session.get('currentRoute');
@@ -42,10 +46,42 @@ module.exports = Base.extend({
             }
         }.bind(this));
 
+=======
+>>>>>>> develop
         $('body').on('change:location', this.changeLocation.bind(this));
         $('body').on('update:postingLink', this.updatePostingLink.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
+<<<<<<< HEAD
+=======
+        this.app.router.on('action:end', this.onActionEnd.bind(this));
+    },
+    onActionEnd: function() {
+        if (this.isPostButtonEnabled()) {
+            this.$('.postBtn').removeClass('disabled');
+        }
+        else {
+            this.$('.postBtn').addClass('disabled');
+        }
+    },
+    events: {
+        'click .logIn span': 'onLoginClick',
+        'click #myOlx li a': 'onMenuClick'
+    },
+    onLoginClick: function(events) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#myOlx').slideToggle();
+    },
+    onMenuClick: function(events) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#myOlx').slideUp();
+>>>>>>> develop
     },
     changeLocation: function (e, siteLocation) {
         this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {

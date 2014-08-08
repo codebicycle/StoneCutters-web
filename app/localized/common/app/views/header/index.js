@@ -12,15 +12,11 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var platform = this.app.session.get('platform');
-        var currentRoute = this.app.session.get('currentRoute');
-        var postButton = this.readPostButtonConfig(platform, currentRoute);
-        var postLink = this.getPostLink();
 
         return _.extend({}, data, {
             user: this.app.session.get('user'),
-            postButton: postButton,
-            postLink: postLink
+            postButton: this.isPostButtonEnabled(),
+            postLink: this.getPostLink()
         });
     },
     getPostLink: function() {
@@ -37,24 +33,20 @@ module.exports = Base.extend({
         }
         return link.join('');
     },
-    readPostButtonConfig: function(platform, currentRoute) {
-        var buttonsConfig = config.get('disablePostingButton', {});
-        var match = _.find(buttonsConfig[platform], function(conf) {
-            conf = conf.split(':');
-            var configRoute = {
-                controller: conf[0],
-                action: conf[1]
-            };
+    isPostButtonEnabled: function() {
+        var platform = this.app.session.get('platform');
+        var currentRoute = this.app.session.get('currentRoute');
+        var buttonConfig = config.get('disablePostingButton', {});
 
-            if (configRoute.action) {
-                return (configRoute.controller === currentRoute.controller && configRoute.action === currentRoute.action);
+        return !_.find(buttonConfig[platform], function each(conf) {
+            conf = conf.split(':');
+            if (conf[1]) {
+                return (conf[0] === currentRoute.controller && conf[1] === currentRoute.action);
             }
             else {
-                return (configRoute.controller === currentRoute.controller);
+                return (conf[0] === currentRoute.controller);
             }
         });
-
-        return (match) ? false : true;
     }
 });
 
