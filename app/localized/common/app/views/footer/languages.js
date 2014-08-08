@@ -15,7 +15,7 @@ module.exports = Base.extend({
             languages: this.app.session.get('languages'),
             selectedLanguage: this.app.session.get('selectedLanguage')
         });
-    },
+    }
 });
 
 module.exports.id = 'footer/languages';
