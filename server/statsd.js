@@ -19,6 +19,7 @@ var Client = function(options) {
         if (Array.isArray(metric)) {
             metric = metric.join('.');
         }
+        logger.log('Incrementing metric: '+ metric);
         statsD.increment(metric);
     }
 
