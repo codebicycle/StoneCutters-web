@@ -64,8 +64,8 @@ describe('server', function test() {
                 server.configure(rendrConfiguration);
                 request(server.expressApp)
                     .get('/')
-                    .set('host', utils.getHost('html5', 'ar'))
-                    .set('user-agent', utils.userAgents.html5)
+                    .set('host', utils.getHost('html4', 'py'))
+                    .set('user-agent', utils.userAgents.html4)
                     .end(end);
 
                 function end(err, res) {
@@ -88,8 +88,8 @@ describe('server', function test() {
             it('should be the same for the same host', function test(done) {
                 request(server.expressApp)
                     .get('/')
-                    .set('host', utils.getHost('html5', 'ar'))
-                    .set('user-agent', utils.userAgents.html5)
+                    .set('host', utils.getHost('html4', 'py'))
+                    .set('user-agent', utils.userAgents.html4)
                     .set('cookie', response.get('set-cookie'))
                     .end(end);
 
@@ -105,16 +105,16 @@ describe('server', function test() {
             it('should be different for different hosts', function test(done) {
                 request(server.expressApp)
                     .get('/?location=' + utils.locations.in.www)
-                    .set('host', utils.getHost('html5', 'in'))
-                    .set('user-agent', utils.userAgents.html5)
+                    .set('host', utils.getHost('html4', 'in'))
+                    .set('user-agent', utils.userAgents.html4)
                     .set('cookie', response.get('set-cookie'))
                     .end(next);
 
                 function next(err, response) {
                     request(server.expressApp)
                         .get('/')
-                        .set('host', utils.getHost('html5', 'in'))
-                        .set('user-agent', utils.userAgents.html5)
+                        .set('host', utils.getHost('html4', 'in'))
+                        .set('user-agent', utils.userAgents.html4)
                         .set('cookie', response.get('set-cookie'))
                         .end(end);
 
