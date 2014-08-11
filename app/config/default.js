@@ -200,5 +200,6 @@ module.exports = {
                 enabled: true
             }
         }
-    }
+    },
+    test: '123456'
 };
