@@ -13,9 +13,17 @@ module.exports = Base.extend({
         return _.extend({}, data, {});
     },
     events: {
+        'click .logo': 'onLogoClick',
         'change': 'onChange',
         'click #back': 'onBackClick',
         'restart': 'onRestart'
+    },
+    onLogoClick: function(event) {
+        if (!confirm('Are you sure you want to leave this page?')) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+        }
     },
     onChange: function(event, title, current, back, data) {
         event.preventDefault();

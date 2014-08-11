@@ -14,6 +14,8 @@ module.exports = Base.extend({
         this.errors = {};
     },
     postRender: function() {
+        $(window).on('beforeunload', this.onBeforeUnload);
+        // TODO: ON UNLOAD EVENT
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
         this.attachTrackMe(this.className, function(category, action) {
@@ -22,10 +24,15 @@ module.exports = Base.extend({
             };
         }.bind(this));
     },
+    onBeforeUnload: function(event) {
+        return ' ';
+    },
     onStart: function(event) {
         this.appView.trigger('postingflow:start');
     },
     onEnd: function(event) {
+        $(window).off('beforeunload', this.onBeforeUnload);
+        this.currentView.$el.trigger('exit');
         this.appView.trigger('postingflow:end');
     },
     events: {
@@ -41,7 +48,8 @@ module.exports = Base.extend({
         'locationSubmit': 'onLocationSubmit',
         'submit': 'onSubmit',
         'restart': 'onRestart',
-        'trackEventNext': 'onNext'
+        'trackEventNext': 'onNext',
+        'exit': 'onExit'
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();
@@ -212,7 +220,6 @@ module.exports = Base.extend({
                 custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
             });
             this.app.router.once('action:end', always);
-            //this.$el.trigger('restart');
             helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
                 status: 200
             });
@@ -256,20 +263,20 @@ module.exports = Base.extend({
             custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
         });
     },
-    onExitFlow: function(event) {
+    onExit: function(event) {
         var category = 'Posting';
         var action = 'DropSection';
         var images = this.form.images;
         var status = [];
-        
+
         status.push('section:' + 'hub');
         status.push('category:' + this.form['category.parentId'] ? 1 : 0);
         status.push('subcategory:' + this.form['category.id'] ? 1 : 0);
-        status.push('title:' + this.form['title'] ? 1 : 0);
-        status.push('description:' + this.form['description'] ? 1 : 0);
-        status.push('email:' + this.form['email'] ? 1 : 0);
-        status.push('state:' + this.form['location'] ? 1 : 0);
-        status.push('city:' + this.form['location'] ? 1 : 0);
+        status.push('title:' + this.form.title ? 1 : 0);
+        status.push('description:' + this.form.description ? 1 : 0);
+        status.push('email:' + this.form.email ? 1 : 0);
+        status.push('state:' + this.form.location ? 1 : 0);
+        status.push('city:' + this.form.location ? 1 : 0);
         status.push('pictures:' + (images ? (_.isString(images) ? images.split(',') : images).length : 0));
 
         this.track({
