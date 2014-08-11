@@ -89,7 +89,6 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, data) {
-                var analytics;
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                 var category = $('.itemCategory').val();
                 var subcategory = $('.itemSubcategory').val();
