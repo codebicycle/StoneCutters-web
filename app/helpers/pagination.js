@@ -1,7 +1,7 @@
 'use strict';
 
-var config = require('../config');
 var _ = require('underscore');
+var config = require('../../shared/config');
 
 module.exports = (function() {
 

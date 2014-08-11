@@ -3,7 +3,7 @@
 module.exports = function pagesRouter(app, dataAdapter) {
     var _ = require('underscore');
     var configServer = require('../config');
-    var configClient = require('../../app/config');
+    var configClient = require('../../shared/config');
     var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
     var http = require('http');

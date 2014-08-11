@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('pipeline', ['artifactory:static:publish', 'artifactory:dynamic:publish']);
 
-    grunt.registerTask('pipetest', ['prepipeline', 'copy:dynamic', 'gitclone', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'atest', 'watch:dist']);
+    grunt.registerTask('pipetest', ['prepipeline', 'copy:dynamic', 'gitclone:config', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'atest', 'watch:dist']);
 
     grunt.registerTask('utest', ['jshint:utests', 'mochacov:unit', 'mochacov:coverage']);
 

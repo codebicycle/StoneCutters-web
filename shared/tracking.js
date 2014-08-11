@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../app/config');
+var config = require('./config');
 
 var Tracking = function() {};
 var GoogleEventsKeys = {

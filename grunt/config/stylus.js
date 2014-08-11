@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localization = require('../../app/config').get('localization');
+    var localization = require('../../shared/config').get('localization');
     var environments = require('../../server/config').get('stylus');
     var stylus = {
         options: {
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             var parts = subdir.split('/');
             var target = 'public/css/default/' + parts[0] + '/styles';
 
-            if (environment !== 'development') {
+            if (environment !== 'production') {
                 target += '-' + environment;
             }
             target += '.css';
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
             var defaultTarget = 'public/css/default/' + platform + '/styles';
             var target = 'public/css/' + location + '/' + platform + '/styles';
 
-            if (environment !== 'development') {
+            if (environment !== 'production') {
                 defaultTarget += '-' + environment;
                 target += '-' + environment;
             }
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
     }
 
     (function stylusIcons() {
-        var iconsLocalization = require('../../app/config').get('icons');
+        var iconsLocalization = require('../../shared/config').get('icons');
         var files = {};
         var platform;
         var key;
@@ -128,9 +128,11 @@ module.exports = function(grunt) {
                     }
                 };
             }
-            if (environment !== 'development') {
+            if (environment !== 'production') {
                 fileName.push('-');
                 fileName.push(environment);
+            }
+            if (environment !== 'development') {
                 stylus[key].options.define.staticUrl = environments[environment].urls.static;
                 stylus[key].options.define.imageUrl = environments[environment].urls.image;
             }

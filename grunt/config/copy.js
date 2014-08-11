@@ -5,8 +5,9 @@ module.exports = function(grunt) {
     var dependencies = grunt.file.readJSON('package.json').dependencies;
     var path = require('path');
     var _ = require('underscore');
-    var localization = require('../../app/config').get('localization');
-    var iconsLocalization = require('../../app/config').get('icons');
+    var config = require('../../shared/config');
+    var localization = config.get('localization');
+    var iconsLocalization = config.get('icons');
     var templates = [{
         src: ['app/localized/common/templates/__layout.html'],
         dest: 'app/templates/__layout.html'
@@ -157,7 +158,7 @@ module.exports = function(grunt) {
         }
 
         function addIconForEnvironment(location, environment) {
-            if (environment === 'development') {
+            if (environment === 'production') {
                 return;
             }
             files[[location, '-', environment].join('')] = {

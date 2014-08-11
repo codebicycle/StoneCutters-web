@@ -3,7 +3,7 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var config = require('../../app/config');
+        var config = require('../../shared/config');
         var build = config.get(['deploy'], false);
         var env = config.get(['environment', 'type'], 'DEV');
         var _ = require('underscore');
