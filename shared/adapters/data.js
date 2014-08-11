@@ -9,11 +9,9 @@ var utils = require('../utils');
 var isServer = utils.isServer;
 
 if (isServer) {
-    var graphiteName = '../../server/graphite';
-    var graphite = require(graphiteName)();
     var rGraphite = /\./g;
-    var statsDName = '../../server/statsd';
-    var statsD = require(statsDName)();
+    var statsdName = '../../server/statsd';
+    var statsd = require(statsdName)();
     var restlerName = 'restler';
     var restler = require(restlerName);
 }
@@ -63,8 +61,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         }
         logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
         if (location) {
-            graphite.send([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode], 1, '+');
-            statsD.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode]);
+            statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode]);
         }
         callback(null, res, body);
     }
@@ -88,10 +85,9 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         }
         logger.error('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
         if (location) {
-            graphite.send([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode], 1, '+');
-            statsD.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode]);
+            statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode]);
         }
-        graphite.send(['smaug', 'error', res.statusCode], 1, '+');
+        statsd.increment(['smaug', 'error', res.statusCode]);
         callback(err, res);
     }
 };

@@ -9,7 +9,6 @@ module.exports = function(dataAdapter, excludedUrls) {
         var utils = require('../../shared/utils');
         var path = require('path');
         var errorPath = path.resolve('server/templates/error.html');
-        var graphite = require('../graphite')();
         var statsd  = require('../statsd')();
 
         function isLocalized(platform, siteLocation) {
@@ -95,7 +94,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                graphite.send([location.name, 'middleware', 'templates', 'error'], 1, '+');
                 statsd.increment([location.name, 'middleware', 'templates', 'error']);
                 res.status(500).sendfile(errorPath);
             }
