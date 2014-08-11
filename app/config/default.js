@@ -201,5 +201,5 @@ module.exports = {
             }
         }
     },
-    test: '123456'
+    test: 'abcdef'
 };
