@@ -82,20 +82,10 @@ function generatePage(page, options) {
             page = analyticParam.parse(page, options);
         }
     });
-
-    // BEGIN - Check item closed
-    if (options && options.item && options.item.purged) {
-        page = page.replace('/item/', '/item_closed/');
-    }
-    // END - Check item closed
-
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
 function getId() {
-    if (1 === 1) {
-        return 'UA-50718833-1';
-    }
     if (googleId) {
         return googleId;
     }
@@ -115,7 +105,7 @@ function getId() {
 function generate(params, page, options) {
     var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
 
-    params.id = getId();
+    params.id = getId.call(this);
     params.page = generatePage.call(this, googlePage, options);
 }
 
