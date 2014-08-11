@@ -1,3 +1,12 @@
 'use strict';
 
-module.exports = require('../app/config')(process && process.env && process.env.NODE_ENV ? process.env.NODE_ENV : 'production');
+var environment = 'production';
+
+if (typeof window === 'undefined') {
+    var configName = '../server/config';
+    var config = require(configName);
+
+    environment = config.get('environment', 'development');
+}
+
+module.exports = require('../app/config')(environment);
