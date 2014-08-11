@@ -10,17 +10,15 @@ module.exports = function(dataAdapter, excludedUrls) {
         var utils = require('../../shared/utils');
 
         function getIp(req) {
-            var ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
+            var ip = req.header('x-forwarded-for') ||
+                req.connection.remoteAddress ||
+                req.socket.remoteAddress ||
+                req.connection.socket.remoteAddress;
 
-            if (!ip) {
-                ip = req.header('HTTP_X_FORWARDED_FOR');
-
-                if(!ip) {
-                    ip = req.ip;
-                }
-                ip = ip.split(',').pop();
+            if (Array.isArray(ip)) {
+                ip = ip.shift();
             }
-            return ip;
+            return ip.split(',').shift();
         }
 
         return function environment(req, res, next) {

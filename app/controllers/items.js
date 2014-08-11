@@ -80,7 +80,7 @@ module.exports = {
                 }
                 if (!item.get('status')) {
                     item.set('status', {
-                        label: 'rejected',
+                        label: 'rejected'
                     });
                 }
                 if (!item.get('category')) {
@@ -119,7 +119,7 @@ module.exports = {
                         res.item = buildItemPurged.call(this, err.body);
                         err = null;
                     }
-                    if (res.item.get('status').label === 'rejected') {
+                    if (!res.item.get('status').open) {
                         res.item.set('purged', true);
                     }
                     done(res);
@@ -207,12 +207,12 @@ module.exports = {
                 subcategory = (subcategory ? subcategory.toJSON() : undefined);
                 category = (category ? category.toJSON() : undefined);
 
+                analytics.reset();
+                analytics.addParam('item', item);
+                analytics.addParam('category', category);
+                analytics.addParam('subcategory', subcategory);
+                analyticUrl = analytics.generateURL.call(this);
                 if (!item.purged) {
-                    analytics.reset();
-                    analytics.addParam('item', item);
-                    analytics.addParam('category', category);
-                    analytics.addParam('subcategory', subcategory);
-                    analyticUrl = analytics.generateURL.call(this);
                     seo.addMetatag('title', item.metadata.itemPage.title);
                     seo.addMetatag('description', item.metadata.itemPage.description);
                 }

@@ -9,6 +9,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var utils = require('../../shared/utils');
     var tracking = require('../../shared/tracking');
     var graphite = require('../graphite')();
+    var statsd  = require('../statsd')();
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
 
@@ -18,32 +19,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
     function defaultOptions(req) {
         return {
-            headers: { 
+            headers: {
                 'User-Agent': getUserAgent(req)
             }
         };
-    }
-    
-    function googleUTMCC(req) {
-        var utmcc = [];
-        var gaDh = req.rendrApp.session.get('gaDh');
-        var gaCs = req.rendrApp.session.get('gaCs');
-        var gaNs = req.rendrApp.session.get('gaNs');
-
-        utmcc.push('__utma=');
-        utmcc.push(gaDh);
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaUid'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaIs'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaPs'));
-        utmcc.push('.');
-        utmcc.push(gaCs);
-        utmcc.push('.');
-        utmcc.push(gaNs);
-        utmcc.push(';');
-        return utmcc.join('');
     }
 
     (function analyticsInfo() {
@@ -55,7 +34,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 var countryId = 2;
                 var params = {};
                 var atiConfig;
-                
+
                 if (env !== 'production') {
                     countryId = 0;
                 }
@@ -68,7 +47,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             },
             google: function generateGoogleParams(req) {
                 var params = {};
-                
+
                 params.host = req.host;
                 params.clientId = (req.rendrApp.session.get('clientId') || 'ac33b570-90e2-4669-ba83-d3fa017c0de0');
                 return params;
@@ -102,8 +81,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             function callback() {
                 var trackers = {
-                    ati: true, 
-                    google: true, 
+                    ati: true,
+                    google: true,
                     graphite: true
                 };
                 var defaultParams = generateDefaultParams(req);
@@ -139,23 +118,24 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function graphiteTracking(req) {
             graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
+            statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
             graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
+            statsd.increment([req.query.locNm, 'devices', req.query.osNm, req.query.platform]);
         }
 
         function googleTracking(req) {
             var analytic = new Tracker('google', {
-                id: req.query.id,
+                id: analytics.google.getId(),
                 host: req.host,
                 clientId: req.query.cliId
             });
-            var ip = req.rendrApp.session.get('ip');
             var options = defaultOptions(req);
 
             options.method = 'post';
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
-                ip: ip,
+                ip: req.rendrApp.session.get('ip'),
                 userAgent: getUserAgent(req)
             }, options);
         }
@@ -212,16 +192,15 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function googleTracking(req) {
             var analytic = new Tracker('google-event', {
-                id: req.query.id,
+                id: analytics.google.getId(),
                 host: req.host,
                 clientId: req.query.cliId
             });
-            var ip = req.rendrApp.session.get('ip');
             var options = defaultOptions(req);
 
             options.method = 'post';
             analytic.track(_.extend({
-                ip: ip,
+                ip: req.rendrApp.session.get('ip'),
                 userAgent: getUserAgent(req)
             }, req.query), options);
         }
@@ -276,14 +255,18 @@ module.exports = function trackingRouter(app, dataAdapter) {
         var metrics = {
             pageview: function(req) {
                 graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
+                statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
                 graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
+                statsd.increment([req.query.locNm, 'devices', req.query.platform]);
             },
             reply: {
                 success: function(req) {
                     graphite.send([req.query.location, 'reply', 'success', req.query.platform], 1, '+');
+                    statsd.increment([req.query.location, 'reply', 'success', req.query.platform]);
                 },
                 error: function(req) {
                     graphite.send([req.query.location, 'reply', 'error', req.query.platform], 1, '+');
+                    statsd.increment([req.query.location, 'reply', 'error', req.query.platform]);
                 }
             }
         };

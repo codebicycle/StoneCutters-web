@@ -5,7 +5,10 @@
     <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav">
     <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav">
 	<nav class="breadcrumb">
-		<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a> <span class="arrow"></span> <a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> <a href="{{ item.category | slugToUrl | link }}">{{ item.category.name }}</a>
+		<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a> 
+		<span class="arrow"></span> <a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> 
+		<span class="arrow"></span> <a href="{{ item.category | slugToUrl | link }}">{{ item.category.name }}</a>
+		<a href="{{ '/nf/all-results' | link }}" class="fRight" >Voltar para Resultados</a> <span class="arrow fRight"></span> 
 	</nav>
 
 	<section id="itemInfoL">
@@ -119,5 +122,6 @@
 	</section>
 
 	{% view 'partials/postbanner' %}
-
 </section>
+
+<div id="overlay"></div>

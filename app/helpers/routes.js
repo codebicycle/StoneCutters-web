@@ -105,6 +105,14 @@ module.exports = {
             }
         }
     },
+    'items#allresults#page': {
+        urls: {
+            server: 'nf/all-results/-p-:page/:filters?',
+            client: {
+                url: 'nf/all-results/-p-:page(/)(:filters)'
+            }
+        }
+    },
     'items#allresults': {
         urls: {
             server: 'nf/all-results/:filters?',

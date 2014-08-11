@@ -60,22 +60,20 @@
             </table>
         {% endif %}
         
-        {% if item.status.label == 'ready' %}
-            {% if item.status.contactable and item.email %}
-                <table width="100%" cellspacing="0" cellpadding="4" border="0">
-                    <tr>
-                        <td style="border-top: solid thin #808080;">
-                            <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
-                                <tr>
-                                    <td align="center" style="border: solid thin #F30;">
-                                        <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            {% endif %}
+        {% if item.status.contactable and item.email %}
+            <table width="100%" cellspacing="0" cellpadding="4" border="0">
+                <tr>
+                    <td style="border-top: solid thin #808080;">
+                        <table width="100%" cellpadding="4" cellspacing="0" border="0" bgcolor="#FF6600">
+                            <tr>
+                                <td align="center" style="border: solid thin #F30;">
+                                    <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" style="display: block;"><font color="#FFFFFF">{{ dictionary["contactseller_form.ReplyToListing"] }}</font></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
         {% endif %}
         
         <table width="100%" cellspacing="0" cellpadding="4" border="0" class="itemDescription">
@@ -159,7 +157,7 @@
                                 <small style="display: block;">{{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</small>
                             </td>
                         </tr>
-                        {% if item.phone and item.status.label == 'ready' %}
+                        {% if item.phone and item.status.contactable %}
                             <tr>
                                 <th align="left" style="border-top: solid 1px #CCC;">
                                     <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Phone"] }}:</small>

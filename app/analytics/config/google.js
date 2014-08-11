@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    id: 'MO-5247560-2',
+    id: 'UA-5247560-2',
     pages: {
         'categories#list': 'home',
         'items#search#filters': '[category-name]/[subcategory-id]/search/[filter_name_value]',

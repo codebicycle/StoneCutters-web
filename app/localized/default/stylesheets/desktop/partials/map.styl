@@ -2,6 +2,41 @@ section#map {
 	position: absolute;
 	right: 1rem;
 	top: 1.5rem;
+	background: url(imageUrl/images/desktop/mapMessage.png) no-repeat 32px 260px;
+
+	#mapTooltip {
+		padding: .375rem .625rem;
+		position: fixed;
+		display: none;
+		margin: -65px -11px 0;
+		background-color: #fff;
+		border: 1px solid #bbb;
+		color: #666;
+		font-size: .8125rem;
+		line-height: 1rem;
+		text-align: left;
+		z-index: 2002;
+
+		&:after, &:before {
+			width: 0;
+			position: absolute;
+			display: block;
+			content: "";
+			border-style: solid;
+		}
+		&:after {
+			border-color: #fff transparent;
+			border-width: .5rem .5rem 0 0;
+			bottom: -.5rem;
+			left: .625rem;
+		}
+		&:before {
+			border-color: #ccc transparent;
+			border-width: .625rem .625rem 0 0;
+			bottom: -.625rem;
+			left: .5625rem;
+		}
+	}
 }
 
 #svg-map path {

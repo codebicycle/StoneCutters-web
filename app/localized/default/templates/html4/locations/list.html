@@ -1,6 +1,13 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["distancediv.changeLocation"]) }}
+{{ Breadcrumb(dictionary, link, dictionary["misc.Sell_Post_Mobile_India"] if target == 'posting' else dictionary["distancediv.changeLocation"]) }}
+
+{% if target and target == 'posting' %}
+    <div class="messages errors">
+        <span>{{ dictionary["countrystatecityv2.MessageFromPost"]}}</span><br>
+    </div>
+{% endif %}
+
 <div id="locationSelect" class="locationBreadcrumb">
     <p><a href="{{ ['/', target or ''] | join | link({location: location.url}) }}">{{ location.name }}</a>{% if location.current and location.current.type != 'country' %} &#62; {{ location.current.name }}{% endif %}</p>
 </div>
