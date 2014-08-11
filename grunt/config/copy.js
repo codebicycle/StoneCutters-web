@@ -14,7 +14,6 @@ module.exports = function(grunt) {
     }];
     var icons = [];
     var sprites = [];
-    var flags = [];
 
     (function copyTemplates() {
         var files = {};
@@ -176,30 +175,6 @@ module.exports = function(grunt) {
         }
     })();
 
-    (function copyFlags() {
-        var environments = require('../../server/config').get('stylus');
-        var files = {};
-        var environment;
-
-        for (environment in environments) {
-            addFlagsForEnvironment(environment);
-        }
-
-        function addFlagsForEnvironment(environment) {
-            if (environment === 'production' || environment === 'testing') {
-                return;
-            }
-            files[['flags-', environment].join('')] = {
-                src: ['public/js/src/common/config.js'].join(''),
-                dest: ['public/js/src/common/config-', environment, '.js'].join('')
-            };
-        }
-
-        for (var flag in files) {
-            flags.push(files[flag]);
-        }
-    })();
-
     for(var module in dependencies) {
         dynamic.push('node_modules/' + module + '/**/*');
     }
@@ -231,9 +206,6 @@ module.exports = function(grunt) {
         },
         sprites: {
             files: sprites
-        },
-        flags: {
-            files: flags
         }
     };
 };
