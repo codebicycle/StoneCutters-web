@@ -6,6 +6,7 @@ var _ = require('underscore');
 module.exports = Base.extend({
     className: 'post_flow_hub_view',
     id: 'hub',
+    tagName: 'section',
     events: {
         'show': 'onShow',
         'hide': 'onHide',

@@ -1,4 +1,337 @@
-#hub {
+.post_flow_hub_view {
+
+    counter-reset: index;
+
+    ul {
+
+        > li {
+
+            > a {
+
+                display: block;
+
+            }
+
+        }
+
+        > li:first-child {
+
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            border-bottom: solid 1.5rem #DDD;
+
+            a {
+
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: #DDD;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+
+                > div {
+
+                    width: 100%;
+                    height: 100%;
+                    background-image:url(imageUrl/images/html5/cameraBig.png);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 45%; 
+                    text-align: center;
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+
+                    span {
+
+                        display: inline-block;
+                        text-align: center;
+                        vertical-align: middle;
+                        color: #A3B606;
+                        margin: 37% 0 0 0;
+                        font-size: 5vw;
+
+                    }
+
+                    h3 {
+
+                        span:before {
+
+                            content: 'q';
+                            display: block;
+                            font-family: olx-icon-font;
+                            font-size: 10em;
+                            line-height: .55em;
+                            font-size: 36vw;
+
+                        }
+
+                    }
+
+                }
+
+                p {
+
+                    position: relative;
+                    overflow: hidden;
+                    height: 1.5rem;
+                    padding: 0 1rem;
+                    background-color: #5C2A81;
+                    color: #FFF;
+                    line-height: 1.5rem;
+                    text-align: center;
+
+                    small {
+
+                        overflow: hidden;
+                        display: block;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        font-size: .75rem;
+
+                    }
+
+                }
+
+                &.fill {
+
+                    > div {
+
+                        opacity: 0;
+
+                    }
+
+                }
+
+                &.filled {
+
+                    h3,
+                    p {
+
+                        display: none;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        > li:not(:first-child) {
+
+            overflow: hidden;
+            border-top: solid thin #CCC;
+            min-height: 3em;
+
+            a {
+
+                position: relative;
+                padding: 1rem 3.5rem 1rem 1rem;
+                line-height: 1.25rem;
+
+                &:after {
+
+                    counter-increment: index;
+                    content: counter(index);
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    display: block;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    margin: -.125rem;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    color: #FFF;
+                    text-align: center;
+                    background-color: #555;
+                    border-radius: 100%;
+
+                }
+
+                h3 {
+
+                    width: auto;
+                    padding: 0;
+                    font-size: inherit;
+                    font-weight: normal;
+                    color: #494949;
+
+                }
+
+                &.error {
+
+                    &:after {
+                    
+                        background-color: #D38811;
+                        content: "!";
+                    
+                    }
+
+                    h3 {
+
+                        display: none;
+
+                    }
+
+                    ol {
+
+                        display: block;
+
+                    }
+
+                }
+
+                &.success {
+
+                    &:after {
+                    
+                        background-color: #A7B52C;
+                    
+                    }
+
+                    h3 {
+
+                        display: none;
+
+                    }
+
+                    ol {
+
+                        display: block;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    footer {
+
+        #post {
+
+            display: block;
+            padding: 1rem;
+            text-align: center;
+            color: #FFF;
+            background-color: #F60;
+
+            &.opaque {
+
+                cursor: default;
+                background: #FDC99E;
+
+            }
+
+        }
+
+        p {
+
+            padding: .5rem 1rem 1rem;
+            text-align: center;
+            color: #999;
+
+            small {
+
+                display: block;
+                font-size: .75rem;
+
+            }
+
+            a {
+
+                display: inline;
+                color: #06C;
+                text-decoration: underline;
+                white-space: nowrap;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+
+
+/*
+#hub ul > li:not(:first-child) a ol {
+    display: none;
+    list-style: none;
+}
+
+#hub ul > li:not(:first-child) a ol li {
+    overflow: hidden;
+    color: #666;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#hub ul > li:not(:first-child) a ol li.hint {
+    color: #999;
+}
+
+#hub ul > li:not(:first-child) a ol li.hint:before {
+    display: inline-block;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0 .5rem 0 0;
+    color: #FFF;
+    background-color: #D38811;
+    font-family: monospace;
+    font-weight: bold;
+    line-height: 1.1rem;
+    text-align: center;
+    border-radius: 100%;
+    font-size: .8rem;
+    opacity: .5;
+    vertical-align: top;
+}
+
+
+
+
+
+            
+
+            
+
+            
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*#hub {
     counter-reset: index;
 }
 
@@ -124,4 +457,4 @@
 
 #hub #post.opaque {
     background: #FDC99E;
-}
+}*/
