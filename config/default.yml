@@ -67,7 +67,6 @@ middleware:
       - /force/html4
       - /force/html5
       - /force/desktop
-      - /esi
 
 stylus:
   testing:
