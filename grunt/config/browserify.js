@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localization = require('../../app/config').get('localization');
+    var localization = require('../../shared/config').get('localization');
     var browserify = {
         lib: {
             src: ['public/js/lib/**/*.js'],
@@ -19,28 +19,36 @@ module.exports = function(grunt) {
                 alias: ['app/translations/index.js:../app/translations']
             }
         },
-        config: {
-            src: ['app/config/**/*.js'],
+        'config-development': {
+            src: ['app/config/**/*.js', '!app/config/default-testing.js', '!app/config/default-staging.js', '!app/config/default.js'],
             dest: 'public/js/src/common/config-development.js',
             options: {
-                alias: ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'],
+                alias: ['app/config/index.js:../app/config', 'app/config/default-development.js:./default', 'shared/utils.js:../../shared/utils'],
                 external: ['underscore', 'querystring']
             }
         },
-        'flags-testing': {
-            src: ['dist/git/app/config/**/*.js'],
+        'config-testing': {
+            src: ['app/config/**/*.js', '!app/config/default-development.js', '!app/config/default-staging.js', '!app/config/default.js'],
             dest: 'public/js/src/common/config-testing.js',
             options: {
-                alias: ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'],
-                external: ['underscore', 'querystring', './default']
+                alias: ['app/config/index.js:../app/config', 'app/config/default-testing.js:./default', 'shared/utils.js:../../shared/utils'],
+                external: ['underscore', 'querystring']
             }
         },
-        'flags-production': {
-            src: ['dist/git/app/config/**/*.js'],
+        'config-staging': {
+            src: ['app/config/**/*.js', '!app/config/default-development.js', '!app/config/default-testing.js', '!app/config/default.js'],
+            dest: 'public/js/src/common/config-staging.js',
+            options: {
+                alias: ['app/config/index.js:../app/config', 'app/config/default-staging.js:./default', 'shared/utils.js:../../shared/utils'],
+                external: ['underscore', 'querystring']
+            }
+        },
+        config: {
+            src: ['app/config/**/*.js', '!app/config/default-development.js', '!app/config/default-testing.js', '!app/config/default-staging.js'],
             dest: 'public/js/src/common/config.js',
             options: {
-                alias: ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'],
-                external: ['underscore', 'querystring', './default']
+                alias: ['app/config/index.js:../app/config', 'app/config/default.js:./default', 'shared/utils.js:../../shared/utils'],
+                external: ['underscore', 'querystring']
             }
         }
     };

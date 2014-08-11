@@ -16,9 +16,7 @@ module.exports = {
     staticAccept: ['css', 'js'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
-        type: 'production',
-        staticPath: 'http://static[[basenumber]].olx-st.com/mobile-webapp',
-        imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
+        type: 'development'
     },
     localization: {
         wap: ['www.olx.de','www.olx.fr','www.olx.es'],
@@ -54,15 +52,17 @@ module.exports = {
     cache: {
         enabled: false,
         headers: {
-            home: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
-            location: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
+            locations: {
+                list: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                }
             },
             categories: {
+                list: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                },
                 subcategories: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'

@@ -3,7 +3,7 @@
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
     var querystring = require('querystring');
-    var config = require('../../app/config');
+    var config = require('../../shared/config');
     var configAnalytics = require('../../app/analytics/config');
     var Session = require('../../shared/session');
     var utils = require('../../shared/utils');

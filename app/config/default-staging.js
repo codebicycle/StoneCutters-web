@@ -16,9 +16,9 @@ module.exports = {
     staticAccept: ['css', 'js'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
-        type: 'production',
-        staticPath: 'http://static[[basenumber]].olx-st.com/mobile-webapp',
-        imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
+        type: 'staging',
+        staticPath: 'http://static-staging.olx-st.com/mobile-webapp',
+        imagePath: 'http://images-staging.olx-st.com/mobile-webapp'
     },
     localization: {
         wap: ['www.olx.de','www.olx.fr','www.olx.es'],
@@ -45,57 +45,11 @@ module.exports = {
     },
     infiniteScroll: false,
     interstitial: {
-        enabled: false,
+        enabled: true,
         clicks: 1,
         time: 432000000,
         ignorePath: ['/health', '/login', '/interstitial', '/404', '/500', /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
-    },
-    cache: {
-        enabled: false,
-        headers: {
-            home: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
-            location: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
-            categories: {
-                subcategories: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                },
-                items: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                }
-            },
-            items: {
-                search: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                },
-                show: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                }
-            },
-            post: {
-                categories: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                },
-                subcategories: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                }
-            },
-            'default': {
-                'Cache-Control': 'no-cache, max-age=0, s-maxage=0, no-store'
-            }
-        }
     },
     seo: {
         wmtools: {

@@ -4,7 +4,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var minify = require('../config').get(['uglify', 'enabled'], true);
-        var localization = require('../../app/config').get('localization', {});
+        var localization = require('../../shared/config').get('localization', {});
         var _ = require('underscore');
         var utils = require('../../shared/utils');
         var path = require('path');

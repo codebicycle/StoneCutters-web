@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
     var _ = require('underscore');
     var util = require('util');
-    var iconsLocalization = require('../../app/config').get('icons');
+    var iconsLocalization = require('../../shared/config').get('icons');
     var sprites = {};
 
     (function spriteIcons() {
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
                 return defaultsIcons;
             }
             var path = defaultsSrc.replace(repPlatform, platform);
-            
+
             defaultsIcons = {};
             grunt.file.recurse(path, function callback(abspath, rootdir, subdir, filename) {
                 if (!~images.indexOf(filename.split('.').pop())) {
@@ -71,15 +71,15 @@ module.exports = function(grunt) {
         function findIconsSrcs(location, platform) {
             var defaults = _.clone(findDefaultIconsSrcs(platform));
             var path = defaultsSrcLocalized.replace(repLocation, location).replace(repPlatform, platform);
-            
+
             grunt.file.recurse(path, function callback(abspath, rootdir, subdir, filename) {
                 if (!~images.indexOf(filename.split('.').pop())) {
                     return;
                 }
                 defaults[filename] = abspath;
             });
-            return _.map(defaults, function(abspath, filename) { 
-                return abspath; 
+            return _.map(defaults, function(abspath, filename) {
+                return abspath;
             });
         }
     })();

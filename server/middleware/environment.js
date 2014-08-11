@@ -6,7 +6,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var uuid = require('node-uuid');
         var utils = require('../../shared/utils');
-        var config = require('../../app/config');
+        var config = require('../../shared/config');
 
         function getIp(req) {
             var ip = req.header('x-forwarded-for') ||

@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localization = require('../../app/config').get('localization');
+    var localization = require('../../shared/config').get('localization');
     var environments = require('../../server/config').get('stylus');
     var stylus = {
         options: {
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
     }
 
     (function stylusIcons() {
-        var iconsLocalization = require('../../app/config').get('icons');
+        var iconsLocalization = require('../../shared/config').get('icons');
         var files = {};
         var platform;
         var key;
