@@ -51,20 +51,23 @@ module.exports = Base.extend({
             interstitial: this.app.session.get('interstitial')
         });
     },
-    track: function(data, callback) {
+    track: function(data, callback, options) {
         var obj = {
             url: helpers.common.static('/images/common/gif1x1.gif')
         };
         var analytics = {};
         var $img = $('img.analytics');
 
+        if (callback && !_.isFunction(callback)) {
+            options = callback;
+            callback = $.noop;
+        }
         if ($img.length) {
             analytics = $img.last().attr('src');
             analytics = $.deparam(analytics.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
         }
         obj = _.defaults(obj, data, analytics);
-
-        $.ajax({
+        options = _.defaults((options || {}), {
             url: '/analytics/pageevent.gif',
             type: 'GET',
             global: false,
@@ -72,6 +75,7 @@ module.exports = Base.extend({
             data: obj,
             always: (callback || $.noop)
         });
+        $.ajax(options);
     },
     attachTrackMe: function(context, handler) {
         this.$('.trackMe').on('click', function(e) {

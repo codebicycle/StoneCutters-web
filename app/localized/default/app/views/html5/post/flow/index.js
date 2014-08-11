@@ -12,10 +12,13 @@ module.exports = Base.extend({
         Base.prototype.initialize.call(this);
         this.form = {};
         this.errors = {};
+        this.currentViewName = 'hub';
     },
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);
-        // TODO: ON UNLOAD EVENT
+        $(window).on('unload', {
+            async: false
+        }, this.onExit.bind(this));
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
         this.attachTrackMe(this.className, function(category, action) {
@@ -56,7 +59,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('#' + (to || 'hub')).trigger('show', data || {});
+        this.currentViewName = (to || 'hub');
+        this.$('#' + this.currentViewName).trigger('show', data || {});
         this.$('#' + from).trigger('hide', data || {});
         this.$el.scrollTop();
     },
@@ -269,20 +273,22 @@ module.exports = Base.extend({
         var images = this.form.images;
         var status = [];
 
-        status.push('section:' + 'hub');
-        status.push('category:' + this.form['category.parentId'] ? 1 : 0);
-        status.push('subcategory:' + this.form['category.id'] ? 1 : 0);
-        status.push('title:' + this.form.title ? 1 : 0);
-        status.push('description:' + this.form.description ? 1 : 0);
-        status.push('email:' + this.form.email ? 1 : 0);
-        status.push('state:' + this.form.location ? 1 : 0);
-        status.push('city:' + this.form.location ? 1 : 0);
+        status.push('section:' + this.currentViewName);
+        status.push('category:' + (this.form['category.parentId'] ? 1 : 0));
+        status.push('subcategory:' + (this.form['category.id'] ? 1 : 0));
+        status.push('title:' + (this.form.title ? 1 : 0));
+        status.push('description:' + (this.form.description ? 1 : 0));
+        status.push('email:' + (this.form.email ? 1 : 0));
+        status.push('state:' + (this.form.location ? 1 : 0));
+        status.push('city:' + (this.form.location ? 1 : 0));
         status.push('pictures:' + (images ? (_.isString(images) ? images.split(',') : images).length : 0));
 
         this.track({
             category: category,
             action: action,
             custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].concat(status).join('::')
+        }, {
+            async: (event.data && !_.isUndefined(event.data.async) ? event.data.async : true)
         });
     }
 });
