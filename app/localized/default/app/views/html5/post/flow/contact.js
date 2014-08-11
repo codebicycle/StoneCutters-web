@@ -76,7 +76,7 @@ module.exports = Base.extend({
         this.fields = fields;
         this.render();
     },
-    onChange: function() {
+    onChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
