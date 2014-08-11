@@ -24,7 +24,7 @@ function addParam(name, value) {
 function generateURL() {
     addParam('user', this.app.session.get('user'));
     addParam('rendering', this.app.session.get('platform'));
-    return tracker.generateURL.call(this, query);
+    return tracker.generate.call(this, query);
 }
 
 module.exports = {

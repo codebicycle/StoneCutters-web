@@ -108,13 +108,16 @@ function generateDefaultParams(query) {
     return params;
 }
 
-function generateSingleURL(query) {
+function generateServerSide(query) {
     var params = generateDefaultParams.call(this, query);
 
-    return '/analytics/pageview.gif?' + stringifyParams(params);
+    return {
+        urls: ['/analytics/pageview.gif?' + stringifyParams(params)],
+        params: params
+    };
 }
 
-function generateURLs(query) {
+function generateClientSide(query) {
     var urls = [];
     var defaultParams = generateDefaultParams.call(this, query);
     // BEGIN - Remove default object when client configuration is found in the master
@@ -140,19 +143,22 @@ function generateURLs(query) {
         });
         urls.push([api.url, '?', querystring.stringify(data)].join(''));
     }, this);
-    return urls;
+
+    return {
+        urls: urls,
+        params: defaultParams
+    };
 }
 
-function generateURL(query) {
+function generate(query) {
     var serverSide = config.get(['tracking', 'serverSide'], true);
 
     if (serverSide) {
-        return generateSingleURL.call(this, query);
+        return generateServerSide.call(this, query);
     }
-    return generateURLs.call(this, query);
+    return generateClientSide.call(this, query);
 }
 
 module.exports = {
-    generateURL: generateURL,
-    generateURLs: generateURLs
+    generate: generate
 };

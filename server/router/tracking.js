@@ -25,28 +25,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         };
     }
 
-    function googleUTMCC(req) {
-        var utmcc = [];
-        var gaDh = req.rendrApp.session.get('gaDh');
-        var gaCs = req.rendrApp.session.get('gaCs');
-        var gaNs = req.rendrApp.session.get('gaNs');
-
-        utmcc.push('__utma=');
-        utmcc.push(gaDh);
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaUid'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaIs'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaPs'));
-        utmcc.push('.');
-        utmcc.push(gaCs);
-        utmcc.push('.');
-        utmcc.push(gaNs);
-        utmcc.push(';');
-        return utmcc.join('');
-    }
-
     (function analyticsInfo() {
         app.get('/analytics', handler);
 
@@ -146,20 +124,18 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function googleTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
             var analytic = new Tracker('google', {
-                id: env === 'production' ? 'UA-5247560-2' : 'UA-50756825-1',
+                id: analytics.google.getId(),
                 host: req.host,
                 clientId: req.query.cliId
             });
-            var ip = req.rendrApp.session.get('ip');
             var options = defaultOptions(req);
 
             options.method = 'post';
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
-                ip: ip,
+                ip: req.rendrApp.session.get('ip'),
                 userAgent: getUserAgent(req)
             }, options);
         }
@@ -215,18 +191,16 @@ module.exports = function trackingRouter(app, dataAdapter) {
         app.get('/analytics/pageevent.gif', handler);
 
         function googleTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
             var analytic = new Tracker('google-event', {
-                id: env === 'production' ? 'UA-5247560-2' : 'UA-50756825-1',
+                id: analytics.google.getId(),
                 host: req.host,
                 clientId: req.query.cliId
             });
-            var ip = req.rendrApp.session.get('ip');
             var options = defaultOptions(req);
 
             options.method = 'post';
             analytic.track(_.extend({
-                ip: ip,
+                ip: req.rendrApp.session.get('ip'),
                 userAgent: getUserAgent(req)
             }, req.query), options);
         }
