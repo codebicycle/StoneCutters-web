@@ -37,7 +37,7 @@
     <label>{{ '* ' if mandatory == 'true' }}{{ label }}</label>
     <input type="text" name="{{name}}" id="text-{{name}}"
     {% if name == 'email' %}
-        value="{{ user.email if (user and user.email) else '' }}"
+        value="{% if user and user.email %}{{ user.email }}{% elif form.values[name] %}{{ form.values[name] }}{% endif %}"
     {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
         value="{{ form.values[name] if form.values[name] else user.username }}"
     {% endif %}>
