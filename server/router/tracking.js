@@ -163,6 +163,24 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }, options);
         }
 
+        function googleTrackingNew(req, isNewSession) {
+            var analytic = new Tracker('google', {
+                id: 'UA-53773218-1',
+                host: req.host
+            });
+            var options = defaultOptions(req);
+
+            options.method = 'post';
+            analytic.track({
+                page: req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: getUserAgent(req),
+                isNewSession: isNewSession
+            }, options);
+        }
+
         function atiTracking(req, isNewSession) {
             var countryId = req.query.locId;
             var atiConfig;
@@ -211,6 +229,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 graphiteTracking(req, isNewSession);
                 googleTracking(req, isNewSession);
                 googleTrackingQA2(req, isNewSession);
+                googleTrackingNew(req, isNewSession);
                 atiTracking(req, isNewSession);
             }
         }
