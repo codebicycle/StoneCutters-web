@@ -195,7 +195,6 @@ module.exports = {
                 var url;
 
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     _item.set('purged', true);
                     item = _item.toJSON();
                 }
@@ -336,7 +335,6 @@ module.exports = {
                 var parentId;
 
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     return error.call(this);
                 }
                 parentId = subcategory.get('parentId');
@@ -435,7 +433,6 @@ module.exports = {
                 var parentId;
 
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     return error.call(this);
                 }
                 parentId = subcategory.get('parentId');
@@ -525,7 +522,6 @@ module.exports = {
                 var parentId;
 
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     return error.call(this);
                 }
                 parentId = subcategory.get('parentId');
@@ -610,7 +606,6 @@ module.exports = {
                 var parentId;
 
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     return error.call(this);
                 }
                 parentId = subcategory.get('parentId');

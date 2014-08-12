@@ -318,7 +318,6 @@ module.exports = {
                 var parentId;
 
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' for item ' + item.id + ' (' + itemId + ') on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     return error.call(this);
                 }
                 parentId = subcategory.get('parentId');
@@ -492,7 +491,6 @@ module.exports = {
                 var _form;
 
                 if (!subcategory) {
-                    console.log('[OLX_DEBUG] No subcategory ' + item.category.id + ' on ' + siteLocation + ' (' + _categories.length + ') - Controller ' + this.currentRoute.controller + ' / Action ' + this.currentRoute.action);
                     return error.call(this);
                 }
                 parentId = subcategory.get('parentId');

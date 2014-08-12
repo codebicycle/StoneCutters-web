@@ -12,7 +12,6 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var path = require('path');
         var errorPath = path.resolve('server/templates/error.html');
-        var graphite = require('../graphite')();
         var statsd  = require('../statsd')();
 
         return function platform(req, res, next) {
@@ -86,7 +85,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                graphite.send(['Unknown Location', 'middleware', 'platform', 'error'], 1, '+');
                 statsd.increment(['Unknown Location', 'middleware', 'platform', 'error']);
                 res.status(500).sendfile(errorPath);
             }

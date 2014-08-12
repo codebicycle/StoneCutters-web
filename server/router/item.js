@@ -6,7 +6,6 @@ module.exports = function(app, dataAdapter) {
     var querystring = require('querystring');
     var utils = require('../../shared/utils');
     var fs = require('fs');
-    var graphite = require('../graphite')();
     var statsd  = require('../statsd')();
 
     (function reply() {
@@ -45,7 +44,6 @@ module.exports = function(app, dataAdapter) {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                graphite.send([location.name, 'reply', 'success', platform], 1, '+');
                 statsd.increment([location.name, 'reply', 'success', platform]);
             }
 
@@ -54,7 +52,6 @@ module.exports = function(app, dataAdapter) {
 
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    graphite.send([location.name, 'reply', 'error', platform], 1, '+');
                     statsd.increment([location.name, 'reply', 'error', platform]);
                 });
             }
@@ -202,7 +199,6 @@ module.exports = function(app, dataAdapter) {
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                graphite.send([location.name, 'posting', 'success', platform], 1, '+');
                 statsd.increment([location.name, 'posting', 'success', platform]);
                 res.redirect(utils.link(url, req.rendrApp));
                 clean();
@@ -211,7 +207,6 @@ module.exports = function(app, dataAdapter) {
             function fail(err, track) {
                 var url = req.headers.referer || '/posting';
 
-                graphite.send([location.name, 'posting', track || 'error', platform], 1, '+');
                 statsd.increment([location.name, 'posting', track || 'error', platform]);
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
