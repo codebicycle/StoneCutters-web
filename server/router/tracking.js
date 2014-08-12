@@ -117,9 +117,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function graphiteTracking(req) {
             var platform = req.rendrApp.session.get('platform');
-            
+            var osName = req.rendrApp.session.get('osName') || 'Others';
+
             statsd.increment([req.query.locNm, 'pageview', platform]);
-            statsd.increment([req.query.locNm, 'devices', req.query.osNm, platform]);
+            statsd.increment([req.query.locNm, 'devices', osName, platform]);
         }
 
         function googleTracking(req) {
