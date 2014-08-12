@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var helpers = require('../helpers');
-var config = require('../config');
+var config = require('../../shared/config');
 
 module.exports = {
     register: function(params, callback) {

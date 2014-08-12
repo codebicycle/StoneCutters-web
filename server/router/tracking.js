@@ -3,15 +3,16 @@
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
     var querystring = require('querystring');
-    var config = require('../../app/config');
+    var config = require('../../shared/config');
     var configAnalytics = require('../../app/analytics/config');
     var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
     var tracking = require('../../shared/tracking');
-    var graphite = require('../graphite')();
     var statsd  = require('../statsd')();
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
+    var env = config.get(['environment', 'type'], 'development');
+    var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
     function getUserAgent(req) {
         return (req.get('user-agent') || utils.defaults.userAgent);
@@ -30,7 +31,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         var paramsGenerators = {
             ati: function generateAtiParams(req) {
-                var env = config.get(['environment', 'type'], 'development');
                 var countryId = 2;
                 var params = {};
                 var atiConfig;
@@ -116,18 +116,21 @@ module.exports = function trackingRouter(app, dataAdapter) {
     (function pageview() {
         app.get('/analytics/pageview.gif', handler);
 
-        function graphiteTracking(req) {
-            graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
-            statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
-            graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
-            statsd.increment([req.query.locNm, 'devices', req.query.osNm, req.query.platform]);
+        function graphiteTracking(req, isNewSession) {
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'Others';
+
+            statsd.increment([req.query.locNm, 'pageview', platform]);
+            statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            if (isNewSession) {
+                statsd.increment([req.query.locNm, 'sessions', platform]);
+            }
         }
 
-        function googleTracking(req) {
+        function googleTracking(req, isNewSession) {
             var analytic = new Tracker('google', {
                 id: analytics.google.getId(),
-                host: req.host,
-                clientId: req.query.cliId
+                host: req.host
             });
             var options = defaultOptions(req);
 
@@ -136,12 +139,31 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
-                userAgent: getUserAgent(req)
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: getUserAgent(req),
+                isNewSession: isNewSession
             }, options);
         }
 
-        function atiTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
+        function googleTrackingQA2(req, isNewSession) {
+            var analytic = new Tracker('google', {
+                id: 'UA-31226936-4',
+                host: req.host
+            });
+            var options = defaultOptions(req);
+
+            options.method = 'post';
+            analytic.track({
+                page: req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: getUserAgent(req),
+                isNewSession: isNewSession
+            }, options);
+        }
+
+        function atiTracking(req, isNewSession) {
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -155,34 +177,41 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 options = defaultOptions(req);
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId.substr(24)
+                    host: atiConfig.logServer
                 });
 
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
-                    custom: req.query.custom
+                    custom: req.query.custom,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
-
-            image = new Buffer(image, 'base64');
-            res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
-
             Session.call(req.rendrApp, false, {
                 isServer: true
             }, callback);
 
             function callback() {
-                graphiteTracking(req);
-                googleTracking(req);
-                atiTracking(req);
+                var lastPageview = req.rendrApp.session.get('lastPageview');
+                var thisPageview = new Date().getTime();
+                var isNewSession = !lastPageview || thisPageview - lastPageview > 1800000;
+
+                req.rendrApp.session.persist({
+                    lastPageview: thisPageview
+                });
+
+                image = new Buffer(image, 'base64');
+                res.set('Content-Type', 'image/gif');
+                res.set('Content-Length', image.length);
+                res.end(image);
+
+                graphiteTracking(req, isNewSession);
+                googleTracking(req, isNewSession);
+                googleTrackingQA2(req, isNewSession);
+                atiTracking(req, isNewSession);
             }
         }
     })();
@@ -193,20 +222,19 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function googleTracking(req) {
             var analytic = new Tracker('google-event', {
                 id: analytics.google.getId(),
-                host: req.host,
-                clientId: req.query.cliId
+                host: req.host
             });
             var options = defaultOptions(req);
 
             options.method = 'post';
             analytic.track(_.extend({
                 ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
                 userAgent: getUserAgent(req)
             }, req.query), options);
         }
 
         function atiTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -220,19 +248,17 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 options = defaultOptions(req);
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId.substr(24)
+                    host: atiConfig.logServer
                 });
                 analytic.track({
                     custom: req.query.custom,
-                    url: req.query.url
+                    url: req.query.url,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
-
             image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', image.length);
@@ -254,18 +280,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         var metrics = {
             pageview: function(req) {
-                graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
                 statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
-                graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
-                statsd.increment([req.query.locNm, 'devices', req.query.platform]);
+                statsd.increment([req.query.locNm, 'devices', req.query.osNm, req.query.platform]);
             },
             reply: {
                 success: function(req) {
-                    graphite.send([req.query.location, 'reply', 'success', req.query.platform], 1, '+');
                     statsd.increment([req.query.location, 'reply', 'success', req.query.platform]);
                 },
                 error: function(req) {
-                    graphite.send([req.query.location, 'reply', 'error', req.query.platform], 1, '+');
                     statsd.increment([req.query.location, 'reply', 'error', req.query.platform]);
                 }
             }
@@ -274,8 +296,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function noop() {}
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
-
             image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', image.length);

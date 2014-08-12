@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../app/config');
+var config = require('./config');
 
 var Tracking = function() {};
 var GoogleEventsKeys = {
@@ -79,6 +79,9 @@ Tracking.types = {
         if (options.userAgent) {
             params.ua = options.userAgent;
         }
+        if (options.isNewSession) {
+            params.sc = 'start';
+        }
         return params;
     },
     google: function(options) {
@@ -114,12 +117,10 @@ Tracking.types = {
         var params = {
             id: options.id,
             host: options.host,
-            cliId: options.cliId,
             referer: options.referer,
             page: options.page,
             locId: options.locId,
             locNm: options.locNm,
-            osNm: options.osNm,
             platform: options.platform,
             metric: 'pageview',
             random: Math.round(Math.random() * 1000000)

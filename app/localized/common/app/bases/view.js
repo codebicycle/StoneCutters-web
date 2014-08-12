@@ -3,9 +3,9 @@
 var Base = require('rendr/shared/base/view');
 var _ = require('underscore');
 var async = require('async');
-var localization = require('../../../../config').get('localization', {});
+var localization = require('../../../../../shared/config').get('localization', {});
 var helpers = require('../../../../helpers');
-var translations = require('../../../../translations');
+var translations = require('../../../../../shared/translations');
 
 module.exports = Base.extend({
     nonAttributeOptions: Base.prototype.nonAttributeOptions.concat(['analytics']),

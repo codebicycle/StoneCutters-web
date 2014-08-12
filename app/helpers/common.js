@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../config');
+var config = require('../../shared/config');
 var seo = require('../seo');
 var utils = require('../../shared/utils');
 
@@ -9,34 +9,32 @@ module.exports = (function() {
 
     var staticsHandler = {
         static: function(env, filePath, path) {
-            var baseNumber = '0' + ((filePath.length % 4) + 1);
+            var pointIndex = filePath.lastIndexOf('.');
+            var fileName = filePath.substr(0, pointIndex);
+            var ext = filePath.substr(pointIndex + 1);
+            var revision = '';
+            var envName = '';
+            var envPath;
 
             if (env !== 'development') {
-                var pointIndex = filePath.lastIndexOf('.');
-                var ext = filePath.substr(pointIndex + 1);
-                var fileName = filePath.substr(0, pointIndex);
-                var revision = config.get(['deploy', 'revision'], '0');
-
-                filePath = (fileName + '-' + revision + '.' + ext);
-                if (ext === 'css') {
-                    filePath = (fileName + '-' + env + '-' + revision + '.' + ext);
-                }
+                revision = '-' + config.get(['deploy', 'revision'], '0');
             }
-            var envPath = config.get(['environment', 'staticPath'], '');
-
+            if (ext === 'css' && env !== 'production') {
+                envName = '-' + env;
+            }
+            envPath = config.get(['environment', 'staticPath'], '');
             if (env === 'production') {
-                return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
+                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
             }
-            return envPath + filePath;
+            return [envPath, fileName, envName, revision, '.', ext].join('');
         },
         image: function(env, filePath) {
             var envPath = config.get(['environment', 'imagePath'], '');
 
             if (env === 'production') {
-                var baseNumber = '0' + ((filePath.length % 4) + 1);
-                return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
+                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
             }
-            return envPath + filePath;
+            return [envPath, filePath].join('');
         }
     };
 

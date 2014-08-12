@@ -25,8 +25,6 @@ module.exports = function() {
         app.then(require('./cluster'));
     }
 
-    require('./graphite')();
-
     app.val(require('./bootstrap'));
 };
 

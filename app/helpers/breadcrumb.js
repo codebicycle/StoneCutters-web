@@ -1,9 +1,9 @@
 'use strict';
 
-var config = require('../config');
+var _ = require('underscore');
+var config = require('../../shared/config');
 var common = require('./common');
 var navigation = require('./navigation');
-var _ = require('underscore');
 
 module.exports = (function() {
     var handlers = {

@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var querystring = require('querystring');
 var esi = require('../app/esi');
 var isServer = (typeof window === 'undefined');
 var linkParams = {
@@ -52,19 +51,76 @@ var defaults = {
     platform: 'wap'
 };
 
+function hasOwnProperty(obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+function parse(qs, sep, eq, options) {
+    sep = sep || '&';
+    eq = eq || '=';
+    var obj = {};
+
+    if (typeof qs !== 'string' || qs.length === 0) {
+      return obj;
+    }
+
+    var regexp = /\+/g;
+    qs = qs.split(sep);
+
+    var maxKeys = 1000;
+    if (options && typeof options.maxKeys === 'number') {
+      maxKeys = options.maxKeys;
+    }
+
+    var len = qs.length;
+    // maxKeys <= 0 means that we should not limit keys count
+    if (maxKeys > 0 && len > maxKeys) {
+      len = maxKeys;
+    }
+
+    for (var i = 0; i < len; ++i) {
+      var x = qs[i].replace(regexp, '%20'),
+          idx = x.indexOf(eq),
+          kstr, vstr, k, v;
+
+      if (idx >= 0) {
+        kstr = x.substr(0, idx);
+        vstr = x.substr(idx + 1);
+      } 
+      else {
+        kstr = x;
+        vstr = '';
+      }
+
+      k = decodeURIComponent(kstr);
+      v = decodeURIComponent(vstr);
+
+      if (!hasOwnProperty(obj, k)) {
+        obj[k] = v;
+      } 
+      else if (_.isArray(obj[k])) {
+        obj[k].push(v);
+      } 
+      else {
+        obj[k] = [obj[k], v];
+      }
+    }
+    return obj;
+};
+
 function stringifyPrimitive(v) {
     switch (typeof v) {
-        case 'string':
-            return v;
+      case 'string':
+        return v;
 
-        case 'boolean':
-            return v ? 'true' : 'false';
+      case 'boolean':
+        return v ? 'true' : 'false';
 
-        case 'number':
-            return isFinite(v) ? v : '';
+      case 'number':
+        return isFinite(v) ? v : '';
 
-        default:
-            return '';
+      default:
+        return '';
     }
 }
 
@@ -125,7 +181,7 @@ function params(url, keys, value) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = querystring.parse(parts.join('?'));
+        parameters = parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.extend(parameters, keys);
@@ -153,7 +209,7 @@ function removeParams(url, keys) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = querystring.parse(parts.join('?'));
+        parameters = parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.filter(parameters, function filter(key) {
@@ -229,6 +285,7 @@ module.exports = {
     removeParams: removeParams,
     cleanParams: cleanParams,
     get: get,
+    parse: parse,
     stringify: stringify,
     defaults: defaults
 };

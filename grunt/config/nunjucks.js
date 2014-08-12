@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
     var path = require('path');
     var _ = require('underscore');
-    var localization = require('../../app/config').get('localization');
+    var localization = require('../../shared/config').get('localization');
     var rendrNunjucks = require('rendr-nunjucks')();
     var nunjucks = {
         options: {

@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../config');
+var config = require('../../shared/config');
 var configAnalytics = require('./config');
 var helpers = require('../helpers');
 var esi = require('../esi');

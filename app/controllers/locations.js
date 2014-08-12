@@ -3,7 +3,7 @@
 var helpers = require('../helpers');
 var seo = require('../seo');
 var analytics = require('../analytics');
-var config = require('../config');
+var config = require('../../shared/config');
 
 module.exports = {
     list: function(params, callback) {

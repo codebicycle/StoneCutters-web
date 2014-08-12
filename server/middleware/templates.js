@@ -4,12 +4,11 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var minify = require('../config').get(['uglify', 'enabled'], true);
-        var localization = require('../../app/config').get('localization', {});
+        var localization = require('../../shared/config').get('localization', {});
         var _ = require('underscore');
         var utils = require('../../shared/utils');
         var path = require('path');
         var errorPath = path.resolve('server/templates/error.html');
-        var graphite = require('../graphite')();
         var statsd  = require('../statsd')();
 
         function isLocalized(platform, siteLocation) {
@@ -74,7 +73,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 template = directory + '/' + platform;
                 app.session.persist({
-                    osName: device.osName || 'Others',
+                    osName: (device.osName || 'Others'),
                     osVersion: parseFloat(String(device.osVersion).replace('_','.')),
                     browserName: device.browserName
                 });
@@ -94,7 +93,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                graphite.send([location.name, 'middleware', 'templates', 'error'], 1, '+');
                 statsd.increment([location.name, 'middleware', 'templates', 'error']);
                 res.status(500).sendfile(errorPath);
             }

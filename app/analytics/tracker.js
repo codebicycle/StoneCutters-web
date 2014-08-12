@@ -1,13 +1,13 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../config');
-var esi = require('../esi');
+var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var tracking = require('../../shared/tracking');
 var configAnalytics = require('./config');
 var google = require('./google');
 var ati = require('./ati');
+var esi = require('../esi');
 
 var paramsGenerators = {
     ati: function generateAtiParams(defaults) {
@@ -95,14 +95,11 @@ function generateDefaultParams(query) {
     var location = this.app.session.get('location');
     var params = {};
 
-    params.random = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
+    params.r = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
     params.referer = esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'));
-    params.cliId = esi.esify.call(this, '$(clientId)', this.app.session.get('clientId'));
-    params.osNm = esi.esify.call(this, '$(osName)', (this.app.session.get('device').osName  || 'Others'));
     if (sid) {
         params.sid = esi.esify.call(this, '$(sid)', sid);
     }
-    params.platform = this.app.session.get('platform');
     params.locNm = location.name;
     params.locId = location.id;
     google.generate.call(this, params, page, query.params);
@@ -123,9 +120,7 @@ function generateServerSide(query) {
 function generateClientSide(query) {
     var urls = [];
     var defaultParams = generateDefaultParams.call(this, query);
-    // BEGIN - Remove default object when client configuration is found in the master
-    var trackers = config.get(['tracking', 'trackers'], {ati: true, google: true, graphite: true});
-    // END - Remove default object when client configuration is found in the master
+    var trackers = config.get(['tracking', 'trackers'], {});
     var paramsGenerator;
     var params;
     var api;
