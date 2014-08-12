@@ -116,15 +116,17 @@ module.exports = function trackingRouter(app, dataAdapter) {
         app.get('/analytics/pageview.gif', handler);
 
         function graphiteTracking(req) {
-            statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
-            statsd.increment([req.query.locNm, 'devices', req.query.osNm, req.query.platform]);
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'Others';
+
+            statsd.increment([req.query.locNm, 'pageview', platform]);
+            statsd.increment([req.query.locNm, 'devices', osName, platform]);
         }
 
         function googleTracking(req) {
             var analytic = new Tracker('google', {
                 id: analytics.google.getId(),
-                host: req.host,
-                clientId: req.query.cliId
+                host: req.host
             });
             var options = defaultOptions(req);
 
@@ -133,6 +135,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
                 userAgent: getUserAgent(req)
             }, options);
         }
@@ -140,8 +143,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function googleTrackingQA2(req) {
             var analytic = new Tracker('google', {
                 id: 'UA-31226936-4',
-                host: req.host,
-                clientId: req.query.cliId
+                host: req.host
             });
             var options = defaultOptions(req);
 
@@ -150,6 +152,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
                 userAgent: getUserAgent(req)
             }, options);
         }
@@ -168,14 +171,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 options = defaultOptions(req);
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId.substr(24)
+                    host: atiConfig.logServer
                 });
 
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
-                    custom: req.query.custom
+                    custom: req.query.custom,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
@@ -207,14 +210,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function googleTracking(req) {
             var analytic = new Tracker('google-event', {
                 id: analytics.google.getId(),
-                host: req.host,
-                clientId: req.query.cliId
+                host: req.host
             });
             var options = defaultOptions(req);
 
             options.method = 'post';
             analytic.track(_.extend({
                 ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
                 userAgent: getUserAgent(req)
             }, req.query), options);
         }
@@ -233,12 +236,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 options = defaultOptions(req);
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId.substr(24)
+                    host: atiConfig.logServer
                 });
                 analytic.track({
                     custom: req.query.custom,
-                    url: req.query.url
+                    url: req.query.url,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
@@ -268,7 +271,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
         var metrics = {
             pageview: function(req) {
                 statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
-                statsd.increment([req.query.locNm, 'devices', req.query.platform]);
+                statsd.increment([req.query.locNm, 'devices', req.query.osNm, req.query.platform]);
             },
             reply: {
                 success: function(req) {

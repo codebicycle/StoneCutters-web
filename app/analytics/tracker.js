@@ -95,13 +95,10 @@ function generateDefaultParams(query) {
     if (sid) {
         params.sid = sid;
     }
-    params.random = Math.round(Math.random() * 1000000);
+    params.r = Math.round(Math.random() * 1000000);
     params.referer = (this.app.session.get('referer') || '-');
-    params.platform = this.app.session.get('platform');
     params.locNm = location.name;
     params.locId = location.id;
-    params.cliId = this.app.session.get('clientId');
-    params.osNm = (this.app.session.get('device').osName  || 'Others');
     google.generate.call(this, params, page, query.params);
     ati.generate.call(this, params, page, query.params);
 
