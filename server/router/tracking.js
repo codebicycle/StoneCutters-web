@@ -12,6 +12,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
     var env = config.get(['environment', 'type'], 'development');
+    var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
     function getUserAgent(req) {
         return (req.get('user-agent') || utils.defaults.userAgent);
@@ -115,15 +116,18 @@ module.exports = function trackingRouter(app, dataAdapter) {
     (function pageview() {
         app.get('/analytics/pageview.gif', handler);
 
-        function graphiteTracking(req) {
+        function graphiteTracking(req, isNewSession) {
             var platform = req.rendrApp.session.get('platform');
             var osName = req.rendrApp.session.get('osName') || 'Others';
 
             statsd.increment([req.query.locNm, 'pageview', platform]);
             statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            if (isNewSession) {
+                statsd.increment([req.query.locNm, 'sessions', platform]);
+            }
         }
 
-        function googleTracking(req) {
+        function googleTracking(req, isNewSession) {
             var analytic = new Tracker('google', {
                 id: analytics.google.getId(),
                 host: req.host
@@ -131,23 +135,17 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var options = defaultOptions(req);
 
             options.method = 'post';
-            if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
-                options.log = {
-                    tracker: 'GA',
-                    platform: req.rendrApp.session.get('platform'),
-                    ip: req.rendrApp.session.get('ip')
-                };
-            }
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req)
+                userAgent: getUserAgent(req),
+                isNewSession: isNewSession
             }, options);
         }
 
-        function googleTrackingQA2(req) {
+        function googleTrackingQA2(req, isNewSession) {
             var analytic = new Tracker('google', {
                 id: 'UA-31226936-4',
                 host: req.host
@@ -155,23 +153,17 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var options = defaultOptions(req);
 
             options.method = 'post';
-            if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
-                options.log = {
-                    tracker: 'QA2',
-                    platform: req.rendrApp.session.get('platform'),
-                    ip: req.rendrApp.session.get('ip')
-                };
-            }
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req)
+                userAgent: getUserAgent(req),
+                isNewSession: isNewSession
             }, options);
         }
 
-        function atiTracking(req) {
+        function atiTracking(req, isNewSession) {
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -188,13 +180,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     host: atiConfig.logServer
                 });
 
-                if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
-                    options.log = {
-                        tracker: 'ATI',
-                        platform: req.rendrApp.session.get('platform'),
-                        ip: req.rendrApp.session.get('ip')
-                    };
-                }
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
@@ -205,22 +190,28 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
-
-            image = new Buffer(image, 'base64');
-            res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
-
             Session.call(req.rendrApp, false, {
                 isServer: true
             }, callback);
 
             function callback() {
-                graphiteTracking(req);
-                googleTracking(req);
-                googleTrackingQA2(req);
-                atiTracking(req);
+                var lastPageview = req.rendrApp.session.get('lastPageview');
+                var thisPageview = new Date().getTime();
+                var isNewSession = !lastPageview || thisPageview - lastPageview > 1800000;
+
+                req.rendrApp.session.persist({
+                    lastPageview: thisPageview
+                });
+
+                image = new Buffer(image, 'base64');
+                res.set('Content-Type', 'image/gif');
+                res.set('Content-Length', image.length);
+                res.end(image);
+
+                graphiteTracking(req, isNewSession);
+                googleTracking(req, isNewSession);
+                googleTrackingQA2(req, isNewSession);
+                atiTracking(req, isNewSession);
             }
         }
     })();
@@ -268,8 +259,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
-
             image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', image.length);
@@ -307,8 +296,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function noop() {}
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
-
             image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', image.length);

@@ -6,21 +6,6 @@ var tracking = require('../shared/tracking');
 var crypto = require('crypto');
 
 function makeTrack(url, options, callback) {
-    if (options.log) {
-        var md5 = crypto.createHash('md5');
-        var cid;
-
-        md5.update(options.headers['User-Agent']);
-        md5.update(options.log.ip);
-        if (options.method === 'post') {
-            cid = options.data.cid;
-        }
-        else {
-            cid = options.query.idclient;
-        }
-        console.log('[OLX_DEBUG]', 'tracker:', options.log.tracker, '|', 'platform:', options.log.platform, '|', 'user:', md5.digest('hex'), '|', 'cid:', cid);
-        delete options.log;
-    }
     restler.request(url, options)
         .on('success', success)
         .on('fail', fail)
