@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('debug', ['compile', 'jshint:node', 'concurrent:debug']);
 
-    grunt.registerTask('prepipeline', ['compile'/*, 'utest'*/]);
+    grunt.registerTask('prepipeline', ['compile', 'utest']);
 
     grunt.registerTask('pipeline', ['artifactory:static:publish', 'artifactory:dynamic:publish']);
 
