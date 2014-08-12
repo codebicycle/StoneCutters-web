@@ -166,24 +166,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }, options);
         }
 
-        function googleTrackingNew(req, isNewSession) {
-            var analytic = new Tracker('google', {
-                id: 'UA-53773218-1',
-                host: req.host
-            });
-            var options = defaultOptions(req);
-
-            options.method = 'post';
-            analytic.track({
-                page: req.query.page,
-                referer: req.query.referer,
-                ip: req.rendrApp.session.get('ip'),
-                clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req),
-                isNewSession: isNewSession
-            }, options);
-        }
-
         function atiTracking(req, isNewSession) {
             var countryId = req.query.locId;
             var atiConfig;
@@ -218,7 +200,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
             function callback() {
                 var lastPageview = req.rendrApp.session.get('lastPageview');
                 var thisPageview = new Date().getTime();
-                var isNewSession = !lastPageview || thisPageview - lastPageview > 1800000;
+                var diff = Math.abs(thisPageview - lastPageview);
+                var isNewSession = !lastPageview || diff > 1800000;
+
+                if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
+                    console.log('[OLX_DEBUG] clientId:', req.rendrApp.session.get('clientId'), ' | diff:', diff);
+                }
 
                 req.rendrApp.session.persist({
                     lastPageview: thisPageview
@@ -232,7 +219,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 graphiteTracking(req, isNewSession);
                 googleTracking(req, isNewSession);
                 googleTrackingQA2(req, isNewSession);
-                googleTrackingNew(req, isNewSession);
                 atiTracking(req, isNewSession);
             }
         }
