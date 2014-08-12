@@ -24,14 +24,18 @@ module.exports = Base.extend({
 
         this.$('#title').text(title);
         if (current && back) {
-            this.$('.logo').hide();
-            this.$('#back').removeClass('disabled');
+            this.$el.addClass('internal');
+
+            //this.$('.logo').hide();
+            //this.$('#back').removeClass('disabled');
             this.$el.data('current', current);
             this.$el.data('back', back);
         }
         else {
-            this.$('.logo').show();
-            this.$('#back').addClass('disabled');
+            this.$el.removeClass('internal');
+
+            //this.$('.logo').show();
+            //this.$('#back').addClass('disabled');
             this.$el.removeData('current');
             this.$el.removeData('back');
         }
