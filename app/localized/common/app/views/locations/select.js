@@ -10,7 +10,7 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var heading = (data.url !== '/') ? 3 : 1;
+        var heading = data.url === '/';
 
         return _.extend({}, data, {
             heading: heading
