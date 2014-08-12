@@ -114,12 +114,10 @@ Tracking.types = {
         var params = {
             id: options.id,
             host: options.host,
-            cliId: options.cliId,
             referer: options.referer,
             page: options.page,
             locId: options.locId,
             locNm: options.locNm,
-            osNm: options.osNm,
             platform: options.platform,
             metric: 'pageview',
             random: Math.round(Math.random() * 1000000)
