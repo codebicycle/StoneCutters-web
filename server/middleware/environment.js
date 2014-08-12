@@ -9,7 +9,8 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../../shared/config');
 
         function getIp(req) {
-            var ip = req.header('x-forwarded-for') ||
+            var ip = req.header('x-proxy-x-netli-forwarded-for') ||
+                req.header('x-forwarded-for') ||
                 req.connection.remoteAddress ||
                 req.socket.remoteAddress ||
                 req.connection.socket.remoteAddress;
