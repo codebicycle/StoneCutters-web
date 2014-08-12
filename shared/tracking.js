@@ -79,6 +79,9 @@ Tracking.types = {
         if (options.userAgent) {
             params.ua = options.userAgent;
         }
+        if (options.isNewSession) {
+            params.sc = 'start';
+        }
         return params;
     },
     google: function(options) {
