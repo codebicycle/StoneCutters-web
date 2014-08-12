@@ -9,16 +9,33 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../../shared/config');
 
         function getIp(req) {
-            var ip = req.header('x-proxy-x-netli-forwarded-for') ||
-                req.header('x-forwarded-for') ||
-                req.connection.remoteAddress ||
-                req.socket.remoteAddress ||
-                req.connection.socket.remoteAddress;
+            var ip = req.header('x-forwarded-for');
 
-            if (Array.isArray(ip)) {
-                ip = ip.shift();
+            if (!ip && req.connection) {
+                ip = req.connection.remoteAddress;
             }
-            return ip.split(',').shift();
+            if (!ip && req.socket) {
+                ip = req.socket.remoteAddress;
+            }
+            if (!ip && req.connection && req.connection.socket) {
+                ip = req.connection.socket.remoteAddress;
+            }
+            if (!ip) {
+                ip = '1.1.1.1';
+                console.log('[OLX_DEBUG]', 'No IP');
+            }
+            if (!Array.isArray(ip)) {
+                ip = ip.split(',');
+            }
+            ip = _.find(ip, function each(_ip) {
+                var isPublic = !!(_ip.indexOf('192.') && _ip.indexOf('10.'));
+
+                if (!isPublic) {
+                    console.log('[OLX_DEBUG]', 'Private IP', ip.join(','));
+                }
+                return isPublic;
+            });
+            return ip;
         }
 
         return function environment(req, res, next) {
