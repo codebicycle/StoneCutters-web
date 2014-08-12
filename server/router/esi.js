@@ -46,8 +46,8 @@ module.exports = function itemRouter(app, dataAdapter) {
                     data['marketing_' + key] = info[key];
                 }
                 dictionary = translations[req.rendrApp.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
-                data['marketing_forOsKey'] = dictionary[ data['marketing_forOsKey'] ];
-                data['marketing_freeInKey'] = dictionary[ data['marketing_freeInKey'] ];
+                data.marketing_forOsKey = dictionary[data.marketing_forOsKey];
+                data.marketing_freeInKey = dictionary[data.marketing_freeInKey];
             }
             return data;
         }
