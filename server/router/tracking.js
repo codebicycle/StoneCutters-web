@@ -123,7 +123,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
             statsd.increment([req.query.locNm, 'pageview', platform]);
             statsd.increment([req.query.locNm, 'devices', osName, platform]);
             if (isNewSession) {
-                statsd.increment([req.query.locNm, 'sessions', platform]);
+                statsd.increment([req.query.locNm, 'sessions', 'new', platform]);
+            }
+            else {
+                statsd.increment([req.query.locNm, 'sessions', 'returning', platform]);
             }
         }
 
