@@ -129,6 +129,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var options = defaultOptions(req);
 
             options.method = 'post';
+            if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
+                options.log = {
+                    tracker: 'GA',
+                    platform: req.rendrApp.session.get('platform'),
+                    ip: req.rendrApp.session.get('ip')
+                };
+            }
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
@@ -146,6 +153,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var options = defaultOptions(req);
 
             options.method = 'post';
+            if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
+                options.log = {
+                    tracker: 'QA2',
+                    platform: req.rendrApp.session.get('platform'),
+                    ip: req.rendrApp.session.get('ip')
+                };
+            }
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
@@ -172,6 +186,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     clientId: req.query.cliId.substr(24)
                 });
 
+                if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
+                    options.log = {
+                        tracker: 'ATI',
+                        platform: req.rendrApp.session.get('platform'),
+                        ip: req.rendrApp.session.get('ip')
+                    };
+                }
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
