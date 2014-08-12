@@ -86,9 +86,6 @@ function generatePage(page, options) {
 }
 
 function getId() {
-    if (true) {
-        return 'UA-50718833-1';
-    }
     if (googleId) {
         return googleId;
     }
