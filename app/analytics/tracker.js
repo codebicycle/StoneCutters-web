@@ -97,6 +97,7 @@ function generateDefaultParams(query) {
     }
     params.r = Math.round(Math.random() * 1000000);
     params.referer = (this.app.session.get('referer') || '-');
+    params.osNm = (this.app.session.get('device').osName  || 'Others');
     params.locNm = location.name;
     params.locId = location.id;
     google.generate.call(this, params, page, query.params);
