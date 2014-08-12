@@ -3,20 +3,25 @@
 var _ = require('underscore');
 var restler = require('restler');
 var tracking = require('../shared/tracking');
+var crypto = require('crypto');
 
 function makeTrack(url, options, callback) {
-    if (options.method === 'post' && options.data && options.data.tid && options.data.uip) {
-        // QA2 Tracker testing
-        options.data.tid = 'UA-31226936-4';
-        restler.request(url, _.clone(options))
-            .on('success', success)
-            .on('fail', fail)
-            .on('error', fail);
+    if (options.log) {
+        var md5 = crypto.createHash('md5');
+        var cid;
 
-        // keep going to normal tracker
-        options.data.tid = 'UA-5247560-2';
+        md5.update(options.headers['User-Agent']);
+        md5.update(options.log.ip);
+        if (options.method === 'post') {
+            cid = options.data.cid;
+        }
+        else {
+            cid = options.query.idclient;
+        }
+        console.log('[OLX_DEBUG]', 'tracker:', options.log.tracker, '|', 'platform:', options.log.platform, '|', 'user:', md5.digest('hex'), '|', 'cid:', cid);
+        delete options.log;
     }
-    restler.request(url, _.clone(options))
+    restler.request(url, options)
         .on('success', success)
         .on('fail', fail)
         .on('error', fail);
