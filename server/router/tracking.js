@@ -11,6 +11,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var statsd  = require('../statsd')();
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
+    var env = config.get(['environment', 'type'], 'development');
 
     function getUserAgent(req) {
         return (req.get('user-agent') || utils.defaults.userAgent);
@@ -29,7 +30,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         var paramsGenerators = {
             ati: function generateAtiParams(req) {
-                var env = config.get(['environment', 'type'], 'development');
                 var countryId = 2;
                 var params = {};
                 var atiConfig;
@@ -137,8 +137,24 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }, options);
         }
 
+        function googleTrackingQA2(req) {
+            var analytic = new Tracker('google', {
+                id: 'UA-31226936-4',
+                host: req.host,
+                clientId: req.query.cliId
+            });
+            var options = defaultOptions(req);
+
+            options.method = 'post';
+            analytic.track({
+                page: req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                userAgent: getUserAgent(req)
+            }, options);
+        }
+
         function atiTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -179,6 +195,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             function callback() {
                 graphiteTracking(req);
                 googleTracking(req);
+                googleTrackingQA2(req);
                 atiTracking(req);
             }
         }
@@ -203,7 +220,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;

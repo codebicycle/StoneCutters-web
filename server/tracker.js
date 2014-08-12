@@ -5,18 +5,7 @@ var restler = require('restler');
 var tracking = require('../shared/tracking');
 
 function makeTrack(url, options, callback) {
-    if (options.method === 'post' && options.data && options.data.tid && options.data.uip) {
-        // QA2 Tracker testing
-        options.data.tid = 'UA-31226936-4';
-        restler.request(url, _.clone(options))
-            .on('success', success)
-            .on('fail', fail)
-            .on('error', fail);
-
-        // keep going to normal tracker
-        options.data.tid = 'UA-5247560-2';
-    }
-    restler.request(url, _.clone(options))
+    restler.request(url, options)
         .on('success', success)
         .on('fail', fail)
         .on('error', fail);
