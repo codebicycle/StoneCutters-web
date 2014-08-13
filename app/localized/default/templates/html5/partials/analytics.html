@@ -10,5 +10,9 @@
 
             tracker._trackPageview('{{ analytics.params.page }}');
         });
+
+        ga('send', 'pageview', {
+          'page': '{{ analytics.params.page }}'
+        });
     </script>
 {% endif %}

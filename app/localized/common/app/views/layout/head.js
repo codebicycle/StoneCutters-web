@@ -15,6 +15,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             head: seo.getHead(),
+            host: this.app.session.get('host'),
             icons: (~icons.indexOf(country) ? country : 'default')
         });
     },
