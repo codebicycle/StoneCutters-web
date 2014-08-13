@@ -69,7 +69,7 @@ Tracking.types = {
             cid: options.clientId,
             uid: options.clientId,
             t: 'pageview',
-            dh: _.tail(options.host.split('.')),
+            dh: _.rest(options.host.split('.')).join('.'),
             dp: options.page,
             dr: options.referer,
             ul: options.language,
