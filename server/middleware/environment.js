@@ -22,20 +22,18 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             if (!ip) {
                 ip = '1.1.1.1';
-                console.log('[OLX_DEBUG]', 'No IP');
             }
             if (!Array.isArray(ip)) {
                 ip = ip.split(',');
             }
-            ip = _.find(ip, function each(_ip) {
-                var isPublic = !!(_ip.indexOf('192.') && _ip.indexOf('10.'));
-
-                if (!isPublic) {
-                    console.log('[OLX_DEBUG]', 'Private IP', ip.join(','));
-                }
-                return isPublic;
+            var _ip = _.find(ip, function each(_ip) {
+                return !!(_ip.indexOf('192.') && _ip.indexOf('10.'));
             });
-            return ip;
+            if (!_ip) {
+                console.log('[OLX_DEBUG]', ip.join(','), _.keys(req.headers).join(',') , _.values(req.headers).join(','));
+                _ip = ip.join(',');
+            }
+            return _ip;
         }
 
         return function environment(req, res, next) {
