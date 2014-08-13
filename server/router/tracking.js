@@ -112,7 +112,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var sessionStarted = !!req.rendrApp.session.get('sessionStarted');
-            var ip = req.rendrApp.session.get('ip');
+            var location = req.rendrApp.session.get('siteLocation');
             var gif;
 
             req.rendrApp.session.persist({
@@ -121,11 +121,11 @@ module.exports = function trackingRouter(app, dataAdapter) {
             gif = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
+            if (location && (~location.indexOf('.olx.cl') || ~location.indexOf('.olx.jp'))) {
+                console.log('[OLX_DEBUG]', location, 'set-cookie:', res._headers['set-cookie']);
+            }
             res.end(gif);
 
-            if (!ip.indexOf('192.') || !ip.indexOf('10.')) {
-                console.log('[OLX_DEBUG]', ip, _.keys(req.headers).join(',') , _.values(req.headers).join(','));
-            }
             graphiteTracking(req, sessionStarted);
             googleTracking(req, sessionStarted);
             googleTrackingQA2(req, sessionStarted);
