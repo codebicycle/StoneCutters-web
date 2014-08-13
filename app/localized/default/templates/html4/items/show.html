@@ -1,6 +1,6 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, item.category.name, level=3) }}
+{{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
 <div id="itemPage">
     
     <h1>{{ item.title }}</h1>

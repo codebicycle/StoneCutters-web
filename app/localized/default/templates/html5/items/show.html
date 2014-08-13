@@ -18,14 +18,14 @@
         {% endif %}
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link, item.category.name, level=3, ['<ul>
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false, ['<ul>
             <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
             <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
         </ul>'] | join) }}
     {% else %}
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link, item.category.name, level=3) }}
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
     {% endif %}
 
 
@@ -58,7 +58,7 @@
 
     <section id="description">
         <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
-        <h2>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h2>
+        <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
         <h1>{{ item.title }}</h1>
         <p>{{ item.descriptionReplace }}</p>
         <div class="clear"></div>
