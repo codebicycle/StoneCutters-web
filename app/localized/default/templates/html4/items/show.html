@@ -44,7 +44,7 @@
         {% endif %}
     </div>
 
-    <h3>{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</h3>
+    <div class="highlight">{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</div>
     
     {% if item.status.contactable %}
         <div id="centerBtns">
@@ -82,7 +82,7 @@
         {% endif %}
     </ul>
 
-    <h3>{{ dictionary["itemgeneraldetails.Description"] }}</h3>
+    <div class="highlight">{{ dictionary["itemgeneraldetails.Description"] }}</div>
 
     <p>{{ item.descriptionReplace }}</p>
     {% if relatedItems.length %}
