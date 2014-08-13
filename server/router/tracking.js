@@ -48,15 +48,18 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 host: req.host
             });
             var options = defaultOptions(req);
+            var language = req.rendrApp.session.get('selectedLanguage');
 
             options.method = 'post';
+            if (language) {
+                options.language = language.toLowerCase();
+            }
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req),
-                language: req.rendrApp.session.get('selectedLanguage').toLowerCase()
+                userAgent: getUserAgent(req)
             }, options);
         }
 
@@ -66,15 +69,18 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 host: req.host
             });
             var options = defaultOptions(req);
+            var language = req.rendrApp.session.get('selectedLanguage');
 
             options.method = 'post';
+            if (language) {
+                options.language = language.toLowerCase();
+            }
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req),
-                language: req.rendrApp.session.get('selectedLanguage').toLowerCase()
+                userAgent: getUserAgent(req)
             }, options);
         }
 
