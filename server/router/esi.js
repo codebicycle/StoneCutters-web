@@ -41,7 +41,7 @@ module.exports = function itemRouter(app, dataAdapter) {
             var dictionary;
             var key;
 
-            if (info) {
+            if (info && !_.isEmpty(info)) {
                 for (key in info) {
                     data['marketing_' + key] = info[key];
                 }
