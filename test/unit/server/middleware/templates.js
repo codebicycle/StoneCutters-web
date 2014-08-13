@@ -10,7 +10,7 @@ var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
 var middleware = require('../../../../server/middleware')(dataAdapter);
-var localization = require('../../../../app/config').get('localization');
+var localization = require('../../../../shared/config').get('localization');
 var hosts = ['html5.m.olx.com.ar', 'html4.m.olx.com', 'wap.m.olx.in'];
 var userAgents = {
     /*'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0': {
