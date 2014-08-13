@@ -1,31 +1,104 @@
-
 @keyframes popCloseButton {
 	from {
-		-moz-transform: scale(0);
-		-webkit-transform: scale(0);
-		transform: scale(0);
+		-moz-transform: scale3d(0, 0, 0);
+		-webkit-transform: scale3d(0, 0, 0);
+		transform: scale3d(0, 0, 0);
 	}
 	to {
-		-moz-transform: scale(100%);
-		-webkit-transform: scale(100%);
-		transform: scale(100%);
+		-moz-transform: scale3d(1, 1, 1);
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
 	}
 }
 
 @-webkit-keyframes popCloseButton {
 	from {
-		-moz-transform: scale(0);
-		-webkit-transform: scale(0);
-		transform: scale(0);
+		-moz-transform: scale3d(0, 0, 0);
+		-webkit-transform: scale3d(0, 0, 0);
+		transform: scale3d(0, 0, 0);
 	}
 	to {
-		-moz-transform: scale(100%);
-		-webkit-transform: scale(100%);
-		transform: scale(100%);
+		-moz-transform: scale3d(1, 1, 1);
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
 	}
 }
 
 .post_flow_images_view {
+
+	&.disabled {
+
+		ul > li {
+
+			opacity: 0;
+			-moz-transform: scale3d(0, 0, 0);
+			-webkit-transform: scale3d(0, 0, 0);
+			transform: scale3d(0, 0, 0);
+
+		}
+
+	}
+
+	&:not(.disabled) {
+
+		ul > li {
+
+			opacity: 1;
+			-moz-transform: scale3d(1, 1, 1);
+			-webkit-transform: scale3d(1, 1, 1);
+			transform: scale3d(1, 1, 1);
+
+			&:nth-child(1) {
+
+				-moz-transition-delay: 10ms;
+				-webkit-transition-delay: 10ms;
+				transition-delay: 10ms;
+
+			}
+
+			&:nth-child(2) {
+
+				-moz-transition-delay: 110ms;
+				-webkit-transition-delay: 110ms;
+				transition-delay: 110ms;
+
+			}
+
+			&:nth-child(3) {
+
+				-moz-transition-delay: 210ms;
+				-webkit-transition-delay: 210ms;
+				transition-delay: 210ms;
+
+			}
+
+			&:nth-child(4) {
+
+				-moz-transition-delay: 110ms;
+				-webkit-transition-delay: 110ms;
+				transition-delay: 110ms;
+
+			}
+
+			&:nth-child(5) {
+
+				-moz-transition-delay: 210ms;
+				-webkit-transition-delay: 210ms;
+				transition-delay: 210ms;
+
+			}
+
+			&:nth-child(6) {
+
+				-moz-transition-delay: 310ms;
+				-webkit-transition-delay: 310ms;
+				transition-delay: 310ms;
+
+			}
+
+		}
+
+	}
 
 	form > input {
 
@@ -49,6 +122,10 @@
 			-moz-box-sizing: border-box;
 			-webkit-box-sizing: border-box;
 			box-sizing: border-box;
+
+			-moz-transition: all 250ms ease-in-out 200ms;
+	        -webkit-transition: all 250ms ease-in-out 200ms;
+	        transition: all 250ms ease-in-out 200ms;
 
 			.image {
 
