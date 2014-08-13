@@ -6,7 +6,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var configAnalytics = require('../../app/analytics/config');
     var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
-    var tracking = require('../../shared/tracking');
     var statsd  = require('../statsd')();
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
@@ -43,27 +42,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function googleTracking(req, isNewSession) {
-            var analytic = new Tracker('google', {
-                id: analytics.google.getId(),
-                host: req.host
-            });
-            var options = defaultOptions(req);
-            var language = req.rendrApp.session.get('selectedLanguage');
-
-            options.method = 'post';
-            if (language) {
-                options.language = language.toLowerCase();
-            }
-            analytic.track({
-                page: req.query.page,
-                referer: req.query.referer,
-                ip: req.rendrApp.session.get('ip'),
-                clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req)
-            }, options);
-        }
-
-        function googleTrackingQA2(req, isNewSession) {
             var analytic = new Tracker('google', {
                 id: 'UA-31226936-4',
                 host: req.host
@@ -128,7 +106,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             graphiteTracking(req, sessionStarted);
             googleTracking(req, sessionStarted);
-            googleTrackingQA2(req, sessionStarted);
             atiTracking(req, sessionStarted);
         }
     })();
@@ -138,7 +115,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function googleTracking(req) {
             var analytic = new Tracker('google-event', {
-                id: analytics.google.getId(),
+                id: 'UA-31226936-4',
                 host: req.host
             });
             var options = defaultOptions(req);
