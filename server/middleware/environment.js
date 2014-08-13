@@ -30,7 +30,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return !!(_ip.indexOf('192.') && _ip.indexOf('10.'));
             });
             if (!_ip) {
-                console.log('[OLX_DEBUG]', ip.join(','), _.keys(req.headers).join(',') , _.values(req.headers).join(','));
                 _ip = ip.join(',');
             }
             return _ip;

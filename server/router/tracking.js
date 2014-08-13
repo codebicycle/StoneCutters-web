@@ -199,6 +199,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             function callback() {
                 var sessionStarted = !!req.rendrApp.session.get('sessionStarted');
+                var ip = req.rendrApp.session.get('ip');
 
                 req.rendrApp.session.persist({
                     sessionStarted: true
@@ -209,6 +210,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 res.set('Content-Length', image.length);
                 res.end(image);
 
+                if (!ip.indexOf('192.') || !ip.indexOf('10.')) {
+                    console.log('[OLX_DEBUG]', ip, _.keys(req.headers).join(',') , _.values(req.headers).join(','));
+                }
                 graphiteTracking(req, sessionStarted);
                 googleTracking(req, sessionStarted);
                 googleTrackingQA2(req, sessionStarted);
