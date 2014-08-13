@@ -200,10 +200,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
             function callback() {
                 var sessionStarted = !!req.rendrApp.session.get('sessionStarted');
 
-                if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
-                    console.log('[OLX_DEBUG] clientId:', req.rendrApp.session.get('clientId'), ' | diff:', diff);
-                }
-
                 req.rendrApp.session.persist({
                     sessionStarted: true
                 });
