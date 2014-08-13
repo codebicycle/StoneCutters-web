@@ -67,10 +67,13 @@ Tracking.types = {
             v: '1',
             tid: options.id,
             cid: options.clientId,
+            uid: options.clientId,
             t: 'pageview',
             dh: options.host,
             dp: options.page,
-            dr: options.referer
+            dr: options.referer,
+            ul: options.language,
+            z: today
         };
 
         if (options.ip) {
@@ -78,9 +81,6 @@ Tracking.types = {
         }
         if (options.userAgent) {
             params.ua = options.userAgent;
-        }
-        if (options.isNewSession) {
-            params.sc = 'start';
         }
         return params;
     },

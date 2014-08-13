@@ -144,7 +144,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
                 userAgent: getUserAgent(req),
-                isNewSession: isNewSession
+                language: req.rendrApp.session.get('selectedLanguage').toLowerCase()
             }, options);
         }
 
@@ -162,7 +162,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
                 userAgent: getUserAgent(req),
-                isNewSession: isNewSession
+                language: req.rendrApp.session.get('selectedLanguage').toLowerCase()
             }, options);
         }
 
@@ -198,17 +198,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }, callback);
 
             function callback() {
-                var lastPageview = req.rendrApp.session.get('lastPageview');
-                var thisPageview = new Date().getTime();
-                var diff = Math.abs(thisPageview - lastPageview);
-                var isNewSession = !lastPageview || diff > 1800000;
+                var sessionStarted = !!req.rendrApp.session.get('sessionStarted');
 
                 if (~req.rendrApp.session.get('siteLocation').indexOf('.olx.cl')) {
                     console.log('[OLX_DEBUG] clientId:', req.rendrApp.session.get('clientId'), ' | diff:', diff);
                 }
 
                 req.rendrApp.session.persist({
-                    lastPageview: thisPageview
+                    sessionStarted: true
                 });
 
                 image = new Buffer(image, 'base64');
@@ -216,10 +213,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 res.set('Content-Length', image.length);
                 res.end(image);
 
-                graphiteTracking(req, isNewSession);
-                googleTracking(req, isNewSession);
-                googleTrackingQA2(req, isNewSession);
-                atiTracking(req, isNewSession);
+                graphiteTracking(req, sessionStarted);
+                googleTracking(req, sessionStarted);
+                googleTrackingQA2(req, sessionStarted);
+                atiTracking(req, sessionStarted);
             }
         }
     })();
