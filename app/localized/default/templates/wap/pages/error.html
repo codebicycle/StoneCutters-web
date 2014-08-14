@@ -39,7 +39,7 @@
             </table>
         {% endif %}
         {% from macros import Breadcrumb %}
-        {% set link = (breadcrumb | link) %}
+        {% set link = ((breadcrumb if breadcrumb else '/') | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
     </td>
 </tr>
