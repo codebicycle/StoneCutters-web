@@ -82,7 +82,7 @@ function handleItems(params, promise) {
             category: category.get('id')
         };
         var currentPage;
-        
+
         helpers.pagination.paginate(metadata, query, url);
         helpers.filters.prepare(metadata);
 
@@ -90,7 +90,7 @@ function handleItems(params, promise) {
             postingLink.subcategory = subcategory.get('id');
         }
         this.app.session.update({
-            postingLink: postingLink 
+            postingLink: postingLink
         });
 
         analytics.reset();
@@ -175,32 +175,45 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var platform = this.app.session.get('platform');
-            var icons = config.get(['icons', platform], []);
-            var country = this.app.session.get('location').url;
-            
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
-                        seo: true
+            var fetch = function(done) {
+                this.app.fetch({
+                    categories: {
+                        collection: 'Categories',
+                        params: {
+                            location: this.app.session.get('siteLocation'),
+                            languageCode: this.app.session.get('selectedLanguage'),
+                            seo: true
+                        }
                     }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }.bind(this);
+
+            var success = function(response) {
+                var platform = this.app.session.get('platform');
+                var icons = config.get(['icons', platform], []);
+                var country = this.app.session.get('location').url;
+
                 analytics.reset();
-                seo.addMetatag('title', result.categories.metadata.title);
-                seo.addMetatag('description', result.categories.metadata.description);
+                seo.addMetatag('title', response.categories.metadata.title);
+                seo.addMetatag('description', response.categories.metadata.description);
                 seo.update();
+
                 callback(null, {
-                    categories: result.categories.toJSON(),
+                    categories: response.categories.toJSON(),
                     icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
                     analytics: analytics.generateURL.call(this)
                 });
-            }.bind(this));
+            }.bind(this);
+
+            var error = function(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }.bind(this);
+
+            asynquence().or(error)
+                .then(fetch)
+                .val(success);
         }
     },
     show: function(params, callback) {
@@ -247,7 +260,7 @@ module.exports = {
                     }
                     subcategory = category.get('children').get(params.catId);
                     handleItems.call(this, params, promise);
-                } 
+                }
                 else if (platform === 'desktop') {
                     handleItems.call(this, params, promise);
                 }
