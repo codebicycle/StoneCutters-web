@@ -346,7 +346,7 @@ module.exports = {
             if (options.cache) {
                 changeHeaders.call(this);
             }
-            if (!this.app.session.get('isServer')) {
+            if (this.app.session.get('isServer')) {
                 this.app.req.res.setHeader('Edge-Control', 'dca=esi');
             }
             callback.call(this, processForm.call(this, params, options.isForm));
