@@ -4,6 +4,7 @@ var _ = require('underscore');
 var config = require('../../shared/config');
 var configAnalytics = require('./config');
 var helpers = require('../helpers');
+var esi = require('../esi');
 var utils = require('../../shared/utils');
 
 module.exports = function analyticsHelper() {
@@ -32,7 +33,7 @@ module.exports = function analyticsHelper() {
             params = {};
         }
         if (user) {
-            params.user_id = user.id;
+            params.user_id = esi.esify.call(this, '$(user_id)', user.id);
         }
         location = this.app.session.get('location');
         if (location && location.current) {

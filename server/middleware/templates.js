@@ -63,11 +63,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                     device.osVersion = '0';
                 }
 
-                var marketing = {
-                    osName: device.osName,
-                    osVersion: parseFloat(String(device.osVersion).replace('_','.')),
-                    browserName: device.browserName
-                };
                 var directory = 'default';
                 var jsDir = '/js/' + (minify ? 'min' : 'src');
                 var platform = req.rendrApp.session.get('platform');
@@ -78,13 +73,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 template = directory + '/' + platform;
                 app.session.persist({
-                    osName: (device.osName || 'Others')
+                    osName: (device.osName || 'Others'),
+                    osVersion: parseFloat(String(device.osVersion).replace('_','.')),
+                    browserName: device.browserName
                 });
                 app.session.update({
                     device: device,
                     directory: directory,
                     template: template,
-                    marketing: marketing,
                     jsDir: jsDir
                 });
                 app.req.app.locals({
