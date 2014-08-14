@@ -1,13 +1,13 @@
 <div id="languages">
-    <ul>
-        {% for language in languages.models %}
-            {% if language.locale == selectedLanguage %}
-                <li><strong>{{language.name}}</strong></li>
-                {{ ' | ' if not loop.last }}
-            {% else %}
-                <li><a href="{{ url | link({language: language.locale}) }}" rel="nofollow" >{{language.name}}</a></li>
-                {{ ' | ' if not loop.last }}
-            {% endif %}
-        {% endfor %}
-    </ul>
+	<ul>
+		{% for language in languages.models %}
+			{% if language.locale == selectedLanguage %}
+				<li><strong>{{language.name}}</strong></li>
+				{{ ' | ' if not loop.last }}
+			{% else %}
+				<li><a href="{{ url | link({language: language.locale}) }}" rel="nofollow" >{{language.name}}</a></li>
+				{{ ' | ' if not loop.last }}
+			{% endif %}
+		{% endfor %}
+	</ul>
 </div>

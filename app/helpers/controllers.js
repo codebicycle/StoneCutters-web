@@ -209,7 +209,7 @@ function setLocation(params, done) {
         });
         done.abort();
         return;
-    }
+    } 
     else if (params.location && params.location.split('.').shift() === 'www') {
         redirect = true;
     }
@@ -345,9 +345,6 @@ module.exports = {
             }
             if (options.cache) {
                 changeHeaders.call(this);
-            }
-            if (this.app.session.get('isServer')) {
-                this.app.req.res.setHeader('Edge-Control', 'dca=esi');
             }
             callback.call(this, processForm.call(this, params, options.isForm));
         }

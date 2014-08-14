@@ -116,7 +116,7 @@ module.exports.attach = Base.attach = function(app, parentView, callback) {
             options = Base.getViewOptions($el);
             options.app = app;
             viewName = options.view;
-            fetchSummary = options.fetch_summary || {};
+            fetchSummary = options.fetch_summary || {};
             app.fetcher.hydrate(fetchSummary, {
                 app: app
             }, function done(err, results) {
