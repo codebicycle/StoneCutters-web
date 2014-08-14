@@ -2,6 +2,7 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
+    var ua = require('universal-analytics');
     var config = require('../../shared/config');
     var configAnalytics = require('../../app/analytics/config');
     var utils = require('../../shared/utils');
@@ -58,6 +59,26 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }, options);
         }
 
+        function googleTrackingUniversal(req) {
+            var options = defaultRequestOptions(req);
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var visitor;
+
+            if (language) {
+                language = language.toLowerCase();
+            }
+
+            visitor = ua('UA-50718833-1', req.rendrApp.session.get('clientId'), options);
+            visitor.pageview({
+                dh: req.host,
+                dp: req.query.page,
+                dr: req.query.referer,
+                ua: options.headers['User-Agent'],
+                ul: language,
+                uip: req.rendrApp.session.get('ip')
+            }).send();
+        }
+
         function atiTracking(req) {
             var countryId = req.query.locId;
             var atiConfig;
@@ -102,6 +123,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             graphiteTracking(req, sessionStarted);
             googleTracking(req);
+            googleTrackingUniversal(req);
             atiTracking(req);
         }
     })();
