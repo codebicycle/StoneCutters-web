@@ -105,7 +105,6 @@ function getId() {
 function generate(params, page, options) {
     var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
 
-    params.id = getId.call(this);
     params.page = generatePage.call(this, googlePage, options);
 }
 

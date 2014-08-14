@@ -15,7 +15,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             head: seo.getHead(),
-            host: this.app.session.get('host'),
+            clientId: this.app.session.get('clientId'),
             icons: (~icons.indexOf(country) ? country : 'default')
         });
     },

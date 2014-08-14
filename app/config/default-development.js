@@ -178,27 +178,5 @@ module.exports = {
             'www.olx.co.uk': '3avqcjFDvQyE7sGOGGNH1HbN1VWV5D5THYJKu35BbZY',
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
-    },
-    tracking: {
-        serverSide: true,
-        trackers: {
-            ati: {
-                enabled: true
-            },
-            'ati-event': {
-                enabled: true,
-                isEvent: true
-            },
-            google: {
-                enabled: true
-            },
-            'google-event': {
-                enabled: true,
-                isEvent: true
-            },
-            graphite: {
-                enabled: true
-            }
-        }
     }
 };
