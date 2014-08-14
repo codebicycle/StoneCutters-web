@@ -4,22 +4,19 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
     var config = require('../../shared/config');
     var configAnalytics = require('../../app/analytics/config');
-    var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
     var statsd  = require('../statsd')();
     var Tracker = require('../tracker');
-    var analytics = require('../../app/analytics');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function getUserAgent(req) {
-        return (req.get('user-agent') || utils.defaults.userAgent);
-    }
-
-    function defaultOptions(req) {
+    function defaultRequestOptions(req) {
         return {
             headers: {
-                'User-Agent': getUserAgent(req)
+                'User-Agent': (req.get('user-agent') || utils.defaults.userAgent),
+                'Accept-Encoding': 'gzip,deflate,sdch',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
             }
         };
     }
@@ -41,15 +38,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
         }
 
-        function googleTracking(req, isNewSession) {
+        function googleTracking(req) {
             var analytic = new Tracker('google', {
                 id: 'UA-31226936-4',
                 host: req.host
             });
-            var options = defaultOptions(req);
+            var options = defaultRequestOptions(req);
             var language = req.rendrApp.session.get('selectedLanguage');
 
-            options.method = 'post';
             if (language) {
                 options.language = language.toLowerCase();
             }
@@ -58,11 +54,11 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req)
+                userAgent: options.headers['User-Agent']
             }, options);
         }
 
-        function atiTracking(req, isNewSession) {
+        function atiTracking(req) {
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -73,7 +69,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultOptions(req);
+                options = defaultRequestOptions(req);
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
@@ -105,8 +101,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req, sessionStarted);
-            googleTracking(req, sessionStarted);
-            atiTracking(req, sessionStarted);
+            googleTracking(req);
+            atiTracking(req);
         }
     })();
 
@@ -118,13 +114,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 id: 'UA-31226936-4',
                 host: req.host
             });
-            var options = defaultOptions(req);
+            var options = defaultRequestOptions(req);
 
-            options.method = 'post';
             analytic.track(_.extend({
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req)
+                userAgent: options.headers['User-Agent']
             }, req.query), options);
         }
 
@@ -139,7 +134,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultOptions(req);
+                options = defaultRequestOptions(req);
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
