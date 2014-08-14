@@ -175,32 +175,53 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            var platform = this.app.session.get('platform');
-            var icons = config.get(['icons', platform], []);
-            var country = this.app.session.get('location').url;
-            
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
-                        seo: true
+            function findCategories(done) {
+                this.app.fetch({
+                    categories: {
+                        collection: 'Categories',
+                        params: {
+                            location: this.app.session.get('siteLocation'),
+                            languageCode: this.app.session.get('selectedLanguage'),
+                            seo: true
+                        }
                     }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }
+
+            function checkCategories(done, res) {
+                if (!res.categories) {
+                    return done.fail(null, {});
                 }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
+                done(res.categories);
+            }
+
+            function success(categories) {
+                var platform = this.app.session.get('platform');
+                var icons = config.get(['icons', platform], []);
+                var country = this.app.session.get('location').url;
+
                 analytics.reset();
-                seo.addMetatag('title', result.categories.metadata.title);
-                seo.addMetatag('description', result.categories.metadata.description);
+                seo.addMetatag('title', categories.metadata.title);
+                seo.addMetatag('description', categories.metadata.description);
                 seo.update();
+
                 callback(null, {
-                    categories: result.categories.toJSON(),
+                    categories: categories.toJSON(),
                     icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
                     analytics: analytics.generateURL.call(this)
                 });
-            }.bind(this));
+            }
+
+            function error(err, res) {
+                return helpers.common.error.call(this, err, res, callback);
+            }
+
+            asynquence().or(error.bind(this))
+                .then(findCategories.bind(this))
+                .then(checkCategories.bind(this))
+                .val(success.bind(this));
         }
     },
     show: function(params, callback) {
