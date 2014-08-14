@@ -21,3 +21,5 @@
     {% endif %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+{% set templateName = template + '/partials/analytics.html' %}
+{% include templateName %}
