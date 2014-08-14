@@ -6,7 +6,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var configAnalytics = require('../../app/analytics/config');
     var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
-    var tracking = require('../../shared/tracking');
     var statsd  = require('../statsd')();
     var Tracker = require('../tracker');
     var analytics = require('../../app/analytics');
@@ -44,37 +43,22 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function googleTracking(req, isNewSession) {
             var analytic = new Tracker('google', {
-                id: analytics.google.getId(),
-                host: req.host
-            });
-            var options = defaultOptions(req);
-
-            options.method = 'post';
-            analytic.track({
-                page: req.query.page,
-                referer: req.query.referer,
-                ip: req.rendrApp.session.get('ip'),
-                clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req),
-                language: req.rendrApp.session.get('selectedLanguage').toLowerCase()
-            }, options);
-        }
-
-        function googleTrackingQA2(req, isNewSession) {
-            var analytic = new Tracker('google', {
                 id: 'UA-31226936-4',
                 host: req.host
             });
             var options = defaultOptions(req);
+            var language = req.rendrApp.session.get('selectedLanguage');
 
             options.method = 'post';
+            if (language) {
+                options.language = language.toLowerCase();
+            }
             analytic.track({
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: getUserAgent(req),
-                language: req.rendrApp.session.get('selectedLanguage').toLowerCase()
+                userAgent: getUserAgent(req)
             }, options);
         }
 
@@ -106,7 +90,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var sessionStarted = !!req.rendrApp.session.get('sessionStarted');
-            var ip = req.rendrApp.session.get('ip');
+            var location = req.rendrApp.session.get('siteLocation');
             var gif;
 
             req.rendrApp.session.persist({
@@ -115,14 +99,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             gif = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
+            if (location && (~location.indexOf('.olx.cl') || ~location.indexOf('.olx.jp'))) {
+                console.log('[OLX_DEBUG]', location, 'set-cookie:', res._headers['set-cookie']);
+            }
             res.end(gif);
 
-            if (!ip.indexOf('192.') || !ip.indexOf('10.')) {
-                console.log('[OLX_DEBUG]', ip, _.keys(req.headers).join(',') , _.values(req.headers).join(','));
-            }
             graphiteTracking(req, sessionStarted);
             googleTracking(req, sessionStarted);
-            googleTrackingQA2(req, sessionStarted);
             atiTracking(req, sessionStarted);
         }
     })();
@@ -132,7 +115,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function googleTracking(req) {
             var analytic = new Tracker('google-event', {
-                id: analytics.google.getId(),
+                id: 'UA-31226936-4',
                 host: req.host
             });
             var options = defaultOptions(req);
