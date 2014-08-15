@@ -18,7 +18,7 @@
         <ul class="itemListing">
             {% for item in items %}
                 <li>
-                    <a href="{{ item | slugToUrl | link }}">
+                    <a href="{{ item | slugToUrl | link }}" class="qa-list-item">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
                     </a>
                     <div class="itemInfo">

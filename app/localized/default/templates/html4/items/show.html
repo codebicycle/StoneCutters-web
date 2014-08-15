@@ -1,8 +1,8 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
-<div id="itemPage">
-    
+<div id="itemPage" class="qa-item">
+
     <h1>{{ item.title }}</h1>
     {% if item.isFavorite %}
         <form action="{{ ['/items/', item.id, '/favorite/delete'] | join('') | link }}" >
@@ -45,7 +45,7 @@
     </div>
 
     <div class="highlight">{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</div>
-    
+
     {% if item.status.contactable %}
         <div id="centerBtns">
             {% if item.phone %}
@@ -67,7 +67,7 @@
             </div>
         {% endif %}
     {% endif %}
-    
+
     <div class="line"></div>
     <ul>
         {% if item.optionals %}
