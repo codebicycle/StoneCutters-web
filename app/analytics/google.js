@@ -5,6 +5,8 @@ var config = require('../../shared/config');
 var configAnalytics = require('./config');
 var helpers = require('../helpers');
 var utils = require('../../shared/utils');
+var SECOND = 1000;
+var MINUTE = 60 * SECOND;
 var googleId;
 
 var analyticsParams = {
@@ -106,6 +108,11 @@ function generate(params, page, options) {
     var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
 
     params.page = generatePage.call(this, googlePage, options);
+    this.app.session.persist({
+        hitCount: Number(this.app.session.get('hitCount') || 0) + 1
+    }, {
+        maxAge: 30 * MINUTE
+    });
 }
 
 module.exports = {

@@ -10,8 +10,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var Tracker = require('../tracker');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
-    var SECOND = 1000;
-    var MINUTE = 60 * SECOND;
 
     function defaultRequestOptions(req) {
         return {
@@ -97,11 +95,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
 
-            req.rendrApp.session.persist({
-                hitCount: Number(req.rendrApp.session.get('hitCount') || 0) + 1
-            }, {
-                maxAge: 30 * MINUTE
-            });
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
