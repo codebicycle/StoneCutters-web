@@ -81,12 +81,10 @@ Tracker.types = {
         };
     },
     __google_internal__: function(options) {
-        var today = new Date().getTime().toString();
         var params = {
             v: '1',
             tid: options.id,
             cid: options.clientId,
-            uid: options.clientId,
             t: 'pageview',
             dh: _.rest(options.host.split('.')).join('.'),
             dp: options.page,
@@ -97,8 +95,8 @@ Tracker.types = {
         if (options.ip) {
             params.uip = options.ip;
         }
-        if (options.userAgent) {
-            params.ua = options.userAgent;
+        if (options.hitCount) {
+            params._s = options.hitCount;
         }
         return params;
     },

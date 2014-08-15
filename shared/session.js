@@ -8,6 +8,11 @@ if (isServer) {
     var uuidModule = 'node-uuid';
     var uuid = require(uuidModule);
 }
+var SECOND = 1000;
+var MINUTE = 60 * SECOND;
+var HOUR = 60 * MINUTE;
+var DAY = 24 * HOUR;
+var MONTH = 30 * DAY;
 
 function noop() {}
 
@@ -94,9 +99,9 @@ var CookiesSession = function(req, res, callback) {
 
     this.put = function(key, value, options) {
         if (res.cookie) {
-            res.cookie(key, value, _.defaults({}, (options || {}), {
+            res.cookie(key, value, _.defaults(options || {}, {
                 path: '/',
-                maxAge: 1728000000
+                maxAge: 2 * MONTH
             }));
         }
     };

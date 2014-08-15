@@ -10,6 +10,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var Tracker = require('../tracker');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+    var SECOND = 1000;
+    var MINUTE = 60 * SECOND;
 
     function defaultRequestOptions(req) {
         return {
@@ -25,17 +27,21 @@ module.exports = function trackingRouter(app, dataAdapter) {
     (function pageview() {
         app.get('/analytics/pageview.gif', handler);
 
-        function graphiteTracking(req, isNewSession) {
+        function graphiteTracking(req) {
             var platform = req.rendrApp.session.get('platform');
             var osName = req.rendrApp.session.get('osName') || 'Others';
+            var hitCount = req.rendrApp.session.get('hitCount');
 
             statsd.increment([req.query.locNm, 'pageview', platform]);
             statsd.increment([req.query.locNm, 'devices', osName, platform]);
-            if (isNewSession) {
-                statsd.increment([req.query.locNm, 'sessions', 'new', platform]);
+            if (!hitCount) {
+                statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
+            }
+            else if (hitCount > 1) {
+                statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
             }
             else {
-                statsd.increment([req.query.locNm, 'sessions', 'returning', platform]);
+                statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
             }
         }
 
@@ -44,39 +50,22 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 id: 'UA-31226936-4',
                 host: req.host
             });
-            var options = defaultRequestOptions(req);
             var language = req.rendrApp.session.get('selectedLanguage');
-
-            if (language) {
-                options.language = language.toLowerCase();
-            }
-            analytic.track({
+            var options = defaultRequestOptions(req);
+            var params = {
                 page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: options.headers['User-Agent']
-            }, options);
-        }
-
-        function googleTrackingUniversal(req) {
-            var options = defaultRequestOptions(req);
-            var language = req.rendrApp.session.get('selectedLanguage');
-            var visitor;
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
 
             if (language) {
-                language = language.toLowerCase();
+                params.language = language.toLowerCase();
             }
-
-            visitor = ua('UA-50718833-1', req.rendrApp.session.get('clientId'), options);
-            visitor.pageview({
-                dh: req.host,
-                dp: req.query.page,
-                dr: req.query.referer,
-                ua: options.headers['User-Agent'],
-                ul: language,
-                uip: req.rendrApp.session.get('ip')
-            }).send();
+            options.method = 'post';
+            analytic.track(params, options);
         }
 
         function atiTracking(req) {
@@ -106,24 +95,19 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function handler(req, res) {
-            var sessionStarted = !!req.rendrApp.session.get('sessionStarted');
-            var location = req.rendrApp.session.get('siteLocation');
-            var gif;
+            var gif = new Buffer(image, 'base64');
 
             req.rendrApp.session.persist({
-                sessionStarted: true
+                hitCount: Number(req.rendrApp.session.get('hitCount') || 0) + 1
+            }, {
+                maxAge: 30 * MINUTE
             });
-            gif = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
-            if (location && (~location.indexOf('.olx.cl') || ~location.indexOf('.olx.jp'))) {
-                console.log('[OLX_DEBUG]', location, 'set-cookie:', res._headers['set-cookie']);
-            }
             res.end(gif);
 
-            graphiteTracking(req, sessionStarted);
+            graphiteTracking(req);
             googleTracking(req);
-            googleTrackingUniversal(req);
             atiTracking(req);
         }
     })();
