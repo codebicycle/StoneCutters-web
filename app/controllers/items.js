@@ -119,7 +119,7 @@ module.exports = {
                         res.item = buildItemPurged.call(this, err.body);
                         err = null;
                     }
-                    if (!res.item.get('status').open) {
+                    if (!res.item.get('status').open && !res.item.get('status').onReview) {
                         res.item.set('purged', true);
                     }
                     done(res);
