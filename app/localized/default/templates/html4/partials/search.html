@@ -1,7 +1,7 @@
 <div id="search">
     <form action="{{ '/nf/search/redirect' | link }}" method="post">
-        <input type="text" name="search" value="" class="search qa-search-input">
-        <input type="submit" value="{{ dictionary["homeheader.Search"] }}" class="submit qa-search-submit">
+        <input type="text" name="search" value="" class="search" data-qa="search-input">
+        <input type="submit" value="{{ dictionary["homeheader.Search"] }}" class="submit" data-qa="search-submit">
         <span>{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}</span>
     </form>
 </div>

@@ -1,7 +1,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
-<div id="itemPage" class="qa-item">
+<div id="itemPage" data-qa="item">
 
     <h1>{{ item.title }}</h1>
     {% if item.isFavorite %}
