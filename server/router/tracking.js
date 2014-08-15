@@ -29,17 +29,21 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var platform = req.rendrApp.session.get('platform');
             var osName = req.rendrApp.session.get('osName') || 'Others';
             var hitCount = req.rendrApp.session.get('hitCount');
+            var clientId = req.rendrApp.session.get('clientId');
 
             statsd.increment([req.query.locNm, 'pageview', platform]);
             statsd.increment([req.query.locNm, 'devices', osName, platform]);
             if (!hitCount) {
                 statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
             }
-            else if (hitCount > 1) {
-                statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
-            }
             else {
-                statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
+                if (hitCount > 1) {
+                    statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
+                }
+                else {
+                    statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                }
             }
         }
 
