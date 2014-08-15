@@ -75,7 +75,7 @@ module.exports = function analyticsHelper() {
                     params.geo2 = standarizeName(location.children[0].children[0].name || '');
                 }
             }
-            if(!_.isUndefined(params.posting_to_action)) {
+            if(!_.isUndefined(params.posting_to_action) && options.item.date) {
                 params.posting_to_action = helpers.common.daysDiff(new Date(options.item.date.timestamp));
             }
         }
