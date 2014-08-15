@@ -1,11 +1,11 @@
 {% if analytics %}
     {% for url in analytics.urls %}
-        <img src="{{url}}" class="analytics" width="1px" height="1px">
+        <img src="{{url}}" class="analytics" width="1" height="1">
     {% endfor %}
 
     <script type="text/javascript">
         ga('send', 'pageview', {
-          'page': '{{ analytics.params.page }}'
+            page: '{{ analytics.params.page }}'
         });
     </script>
 {% endif %}
