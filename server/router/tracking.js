@@ -37,7 +37,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
             }
             else {
-                statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
+                // statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
                 if (hitCount > 1) {
                     statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
                 }
