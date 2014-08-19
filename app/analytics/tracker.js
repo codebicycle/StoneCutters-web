@@ -33,8 +33,7 @@ function getURLName(page) {
 function generateGoogleUrl(options) {
     var language = this.app.session.get('selectedLanguage');
     var params = {
-        // id: 'UA-31226936-4',
-        id: 'UA-50718833-1',
+        id: 'UA-31226936-4',
         page: options.page,
         referer: options.referer,
         ip: this.app.session.get('ip'),
