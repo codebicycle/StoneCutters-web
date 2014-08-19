@@ -60,6 +60,9 @@ module.exports = function userRouter(app, dataAdapter) {
                 });
             }
 
+            if (typeof password !== 'string') {
+                password = '';
+            }
             asynquence().or(error)
                 .then(getChallenge)
                 .then(getCredentials)

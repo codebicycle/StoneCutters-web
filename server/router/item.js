@@ -291,12 +291,28 @@ module.exports = function(app, dataAdapter) {
         app.post('/nf/search/redirect', handler);
 
         function handler(req, res, next) {
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
 
-            formidable.parse(req, function callback(err, data) {
+            function success(data) {
                 var url = '/nf/search' + (data.search ? ('/' + data.search) : '');
 
                 res.redirect(utils.link(url, req.rendrApp));
-            });
+            }
+
+            function error(err) {
+                var location = req.rendrApp.session.get('location');
+                var platform = req.rendrApp.session.get('platform');
+                var url = req.headers.referer || '/';
+
+                res.redirect(utils.link(url.split('?').shift(), req.rendrApp));
+                statsd.increment([location.name, 'search', 'error', platform]);
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .val(success);
         }
     })();
 

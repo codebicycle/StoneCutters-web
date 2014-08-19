@@ -16,46 +16,43 @@ module.exports = {
         function controller() {
             var siteLocation = this.app.session.get('siteLocation');
 
+            var fetch = function(done) {
+                this.app.fetch({
+                    categories: {
+                        collection: 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
+                    }
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }.bind(this);
+
+            var success = function(response) {
+                analytics.reset();
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
+                seo.update();
+                callback(null, {
+                    analytics: analytics.generateURL.call(this),
+                    categories: response.categories.toJSON()
+                });
+            }.bind(this);
+
+            var error = function(err) {
+                helpers.common.error.call(this, err, null, callback);
+            }.bind(this);
+
             if (!siteLocation || siteLocation.indexOf('www.') === 0) {
                 return helpers.common.redirect.call(this, '/location?target=posting', null, {
                     status: 302
                 });
             }
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                var sixpackConfig = config.get('sixpack', {});
-
-                analytics.reset();
-                seo.addMetatag('robots', 'noindex, nofollow');
-                seo.addMetatag('googlebot', 'noindex, nofollow');
-                seo.update();
-                if (!sixpackConfig.enabled ||
-                    !sixpackConfig['post-button'] ||
-                    !sixpackConfig['post-button'].enabled ||
-                    !params.sixpack || params.sixpack !== 'post-button') {
-                    return callback(null, {
-                        analytics: analytics.generateURL.call(this),
-                        categories: result.categories.toJSON()
-                    });
-                }
-                var session = new sixpack.Session(this.app.session.get('clientId'), sixpackConfig.url);
-
-                session.convert('post-button', function(err, res) {
-                    callback(null, {
-                        analytics: analytics.generateURL.call(this),
-                        categories: result.categories.toJSON()
-                    });
-                });
-            }.bind(this));
+            asynquence().or(error)
+                .then(fetch)
+                .val(success);
         }
     },
     subcategories: function(params, callback) {
@@ -64,23 +61,22 @@ module.exports = {
         function controller() {
             var siteLocation = this.app.session.get('siteLocation');
 
-            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                return helpers.common.redirect.call(this, '/location?target=posting', null, {
-                    status: 302
-                });
-            }
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+            var fetch = function(done) {
+                this.app.fetch({
+                    categories: {
+                        collection: 'Categories',
+                        params: {
+                            location: siteLocation,
+                            languageCode: this.app.session.get('selectedLanguage')
+                        }
                     }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                var category = result.categories.get(params.categoryId);
+                }, {
+                    readFromCache: false
+                }, done.errfcb);
+            }.bind(this);
+
+            var success = function(response) {
+                var category = response.categories.get(params.categoryId);
 
                 if (!category) {
                     return helpers.common.redirect.call(this, '/posting');
@@ -94,7 +90,20 @@ module.exports = {
                     subcategories: category.get('children').toJSON(),
                     analytics: analytics.generateURL.call(this)
                 }));
-            }.bind(this));
+            }.bind(this);
+
+            var error = function(err) {
+                helpers.common.error.call(this, err, null, callback);
+            }.bind(this);
+
+            if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                    status: 302
+                });
+            }
+            asynquence().or(error)
+                .then(fetch)
+                .val(success);
         }
     },
     form: function(params, callback) {
@@ -172,7 +181,7 @@ module.exports = {
                 }
                 var category = resCategories.categories.get(params.categoryId);
                 var subcategory;
-                
+
                 if (!category) {
                     done.abort();
                     return helpers.common.redirect.call(this, '/posting');
@@ -229,7 +238,7 @@ module.exports = {
             var itemId = params.itemId;
             var siteLocation = this.app.session.get('siteLocation');
             var anonymousItem;
-            
+
             function prepare(done) {
                 if (user) {
                     params.token = user.token;
@@ -508,7 +517,7 @@ module.exports = {
                 analytics.addParam('item', item);
                 analytics.addParam('category', category.toJSON());
                 analytics.addParam('subcategory', subcategory.toJSON());
-                callback(null, { 
+                callback(null, {
                     item: item,
                     user: user,
                     postingSession: _postingSession.get('postingSession'),
