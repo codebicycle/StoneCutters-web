@@ -99,6 +99,12 @@ var CookiesSession = function(req, res, callback) {
 
     this.put = function(key, value, options) {
         if (res.cookie) {
+            try {
+                encodeURIComponent(value);
+            }
+            catch (e) {
+                return;
+            }
             res.cookie(key, value, _.defaults(options || {}, {
                 path: '/',
                 maxAge: 2 * MONTH
