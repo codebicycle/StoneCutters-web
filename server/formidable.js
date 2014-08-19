@@ -38,7 +38,6 @@ function parse(req, options, callback) {
     }
     if (options.aborted && options.aborted instanceof Function) {
         aborted = options.aborted;
-        form.on('aborted', aborted);
     }
     else if (error) {
         aborted = function() {
@@ -80,9 +79,6 @@ function error(req, url, err, values, callback) {
     }
     if (!err) {
         return callback(url);
-    }
-    if (err instanceof Error) {
-        throw err;
     }
     if (req.rendrApp.session.get('platform') === 'wap') {
         errors = [];
