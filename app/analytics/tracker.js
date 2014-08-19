@@ -38,9 +38,9 @@ function generateGoogleUrl(options) {
         page: options.page,
         referer: options.referer,
         ip: this.app.session.get('ip'),
+        host: this.app.session.get('host'),
         clientId: this.app.session.get('clientId'),
-        hitCount: this.app.session.get('hitCount'),
-        host: _.rest(this.app.session.get('host').split('.')).join('.')
+        hitCount: this.app.session.get('hitCount')
     };
     var ga;
 
