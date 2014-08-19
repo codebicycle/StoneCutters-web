@@ -104,7 +104,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req);
-            googleTracking(req);
+             if (!_.contains(['www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe'], req.query.locUrl)) {
+                googleTracking(req);
+            }
             atiTracking(req);
         }
     })();

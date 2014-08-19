@@ -30,11 +30,34 @@ function getURLName(page) {
     return name.join('');
 }
 
+function generateGoogleUrl(options) {
+    var language = this.app.session.get('selectedLanguage');
+    var params = {
+        id: 'UA-31226936-4',
+        page: options.page,
+        referer: options.referer,
+        ip: this.app.session.get('ip'),
+        host: this.app.session.get('host'),
+        clientId: this.app.session.get('clientId'),
+        hitCount: this.app.session.get('hitCount')
+    };
+    var ga;
+
+    if (language) {
+        params.language = language.toLowerCase();
+    }
+    ga = google.generateUrl.call(this, params);
+
+    return [ga.url, '?', stringifyParams(ga.params)].join('');
+}
+
 function generate(query) {
+    var urls = [];
     var page = getURLName.call(this, query.page);
     var sid = this.app.session.get('sid');
     var location = this.app.session.get('location');
     var params = {};
+    var ga;
 
     if (sid) {
         params.sid = sid;
@@ -43,11 +66,16 @@ function generate(query) {
     params.referer = (this.app.session.get('referer') || '-');
     params.locNm = location.name;
     params.locId = location.id;
+    params.locUrl = location.url;
     google.generate.call(this, params, page, query.params);
     ati.generate.call(this, params, page, query.params);
+    urls.push('/analytics/pageview.gif?' + stringifyParams(params));
 
+    if (_.contains(['www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe'], location.url)) {
+        urls.push(generateGoogleUrl.call(this, params));
+    }
     return {
-        urls: ['/analytics/pageview.gif?' + stringifyParams(params)],
+        urls: urls,
         params: params
     };
 }
