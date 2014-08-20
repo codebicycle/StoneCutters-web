@@ -46,15 +46,15 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
         }
 
-        function googleTracking(req) {
+        function googleTracking(req, trackerId, page) {
             var analytic = new Tracker('google', {
-                id: 'UA-31226936-4',
+                id: trackerId,
                 host: req.host
             });
             var language = req.rendrApp.session.get('selectedLanguage');
             var options = defaultRequestOptions(req);
             var params = {
-                page: req.query.page,
+                page: page || req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
@@ -103,8 +103,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req);
+            googleTracking(req, 'UA-5247560-2', '/webapp/');
              if (!_.contains(['www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe'], req.query.locUrl)) {
-                googleTracking(req);
+                googleTracking(req, 'UA-31226936-4');
+            }
+             if (_.contains(['www.olx.cl'], req.query.locUrl)) {
+                googleTracking(req, 'UA-31226936-2');
             }
             atiTracking(req);
         }

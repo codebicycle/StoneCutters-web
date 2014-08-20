@@ -80,7 +80,8 @@ function formatArgs() {
       + args[0] + '\u001b[3' + c + 'm'
       + ' +' + exports.humanize(this.diff) + '\u001b[0m';
   } else {
-    args[0] = new Date().toString()
+    args[0] = '\[OLX_DEBUG\] '
+      + new Date().toString()
       + ' ' + name + ' ' + args[0];
   }
   return args;
