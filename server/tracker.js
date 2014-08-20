@@ -128,7 +128,6 @@ Tracker.types = {
         };
 
         params = dynamics(params, options.dynamics);
-        console.log(url, params);
         return {
             url: url,
             params: params
