@@ -126,7 +126,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req);
-            googleTrackingGA(req, 'UA-5247560-4');
+            googleTrackingGA(req, 'UA-5247560-2');
             atiTracking(req);
         }
     })();
