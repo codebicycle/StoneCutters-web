@@ -7,7 +7,7 @@ var Router = module.exports = function Router(options) {
     BaseClientRouter.call(this, options);
 };
 
-var routes = require('./helpers').routes;
+var routes = require('./urls');
 
 var trigger = false;
 

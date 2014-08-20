@@ -1,9 +1,9 @@
 'use strict';
 
 var helpers = require('../helpers');
-var analytics = require('../analytics');
+var seo = require('../modules/seo');
+var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
-var seo = require('../seo');
 
 module.exports = {
     terms: function(params, callback) {

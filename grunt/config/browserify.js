@@ -71,15 +71,13 @@ module.exports = function(grunt) {
                     cwd: 'app/',
                     dest: 'app/'
                 }],
-                alias: ['shared/utils.js:../../../../../../shared/utils'],
+                alias: [],
                 external: [
                     'EXIF',
                     'jquery',
                     'nunjucks',
                     'underscore',
                     '../app/translations',
-                    '../../../../../../shared/utils',
-                    '../../shared/utils',
                     '../app/config'
                 ]
             }

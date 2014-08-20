@@ -3,7 +3,7 @@
 var Base = require('../../bases/view');
 var _ = require('underscore');
 var config = require('../../../../../../shared/config');
-var seo = require('../../../../../seo');
+var seo = require('../../../../../modules/seo');
 
 module.exports = Base.extend({
     className: 'layout_head_view',

@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     }
 
     rendrNunjucks.init();
-    rendrNunjucks.registerExtensions(require('../../app/nunjucks').extensions);
+    rendrNunjucks.registerExtensions(require('../../app/modules/nunjucks').extensions);
     nunjucks.options.env = rendrNunjucks.nunjucks;
 
     grunt.file.recurse('app/localized/default/templates', function callback(abspath, rootdir, subdir, filename) {

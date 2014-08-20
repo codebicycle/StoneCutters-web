@@ -1,18 +1,16 @@
 'use strict';
 
-var _ = require('underscore');
-var URLParser = require('url');
-var config = require('../config');
-var seo = require('../../app/seo');
-var utils = require('../../shared/utils');
-
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
         var path = require('path');
+        var URLParser = require('url');
+        var config = require('../config');
+        var statsd  = require('../modules/statsd')();
+        var utils = require('../../shared/utils');
+        var seo = require('../../app/modules/seo');
         var errorPath = path.resolve('server/templates/error.html');
-        var statsd  = require('../statsd')();
 
         return function platform(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
