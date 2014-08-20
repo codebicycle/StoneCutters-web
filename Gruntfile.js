@@ -21,9 +21,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask('jshint:node', ['jshint:server', 'jshint:client']);
 
-    grunt.registerTask('start', ['compile', 'jshint:node', 'concurrent:start']);
+    grunt.registerTask('start', ['compile', 'jshint:node', 'csslint:lax', 'concurrent:start']);
 
-    grunt.registerTask('debug', ['compile', 'jshint:node', 'concurrent:debug']);
+    grunt.registerTask('debug', ['compile', 'jshint:node', 'csslint:lax', 'concurrent:debug']);
 
     grunt.registerTask('prepipeline', ['compile', 'utest']);
 

@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         },
         stylesheets: {
             files: ['app/**/*.styl', 'app/**/*.css'],
-            tasks: ['exec:removeStyles', 'sprites', 'stylus']
+            tasks: ['exec:removeStyles', 'sprites', 'stylus', 'csslint:lax']
         },
         node: {
             files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'shared/**/*.js', 'grunt/**/*.js', '!translations/**/*', '!app/translations/**/*', '!public/**/*'],
