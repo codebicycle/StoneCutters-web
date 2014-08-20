@@ -103,7 +103,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req);
-            googleTracking(req, 'UA-5247560-2', '/webapp/');
+//            googleTracking(req, 'UA-5247560-2', '/webapp/');
+            googleTracking(req, 'UA-5247560-2');
              if (!_.contains(['www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe'], req.query.locUrl)) {
                 googleTracking(req, 'UA-31226936-4');
             }
