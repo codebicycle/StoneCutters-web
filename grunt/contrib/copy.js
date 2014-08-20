@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     var dependencies = grunt.file.readJSON('package.json').dependencies;
     var path = require('path');
     var _ = require('underscore');
-    var config = require('../../shared/config');
+    var config = require('../config');
     var localization = config.get('localization');
     var iconsLocalization = config.get('icons');
     var templates = [{
@@ -137,7 +137,7 @@ module.exports = function(grunt) {
     })();
 
     (function copySprites() {
-        var environments = require('../../server/config').get('stylus');
+        var environments = config.get('environments');
         var files = {};
         var platform;
 
@@ -148,13 +148,17 @@ module.exports = function(grunt) {
             iconsLocalization[platform].forEach(eachIconLocation);
         }
 
-        function eachIconLocation(location) {
-            var environment;
+        platform = 'html5';
+        eachIconLocation('default');
 
-            addIconForEnvironment(location, 'development');
-            for (environment in environments) {
+        for (var sprite in files) {
+            sprites.push(files[sprite]);
+        }
+
+        function eachIconLocation(location) {
+            environments.forEach(function eachEnvironments(environment) {
                 addIconForEnvironment(location, environment);
-            }
+            });
         }
 
         function addIconForEnvironment(location, environment) {
@@ -165,13 +169,6 @@ module.exports = function(grunt) {
                 src: ['public/css/', location, '/', platform, '/icons.css'].join(''),
                 dest: ['public/css/', location, '/', platform, '/icons-', environment, '.css'].join('')
             };
-        }
-
-        platform = 'html5';
-        eachIconLocation('default');
-
-        for (var sprite in files) {
-            sprites.push(files[sprite]);
         }
     })();
 

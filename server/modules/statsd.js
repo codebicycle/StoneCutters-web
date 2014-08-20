@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('./config').get('statsD', {
+var config = require('../config').get('statsD', {
     client: {
         host: 'graphite-server',
         port: 8125,
@@ -9,7 +9,7 @@ var config = require('./config').get('statsD', {
     }
 });
 var StatsD = require('node-statsd').StatsD;
-var logger = require('../shared/logger')('statsD');
+var logger = require('../../shared/logger')('statsD');
 var client;
 
 var Client = function(options) {

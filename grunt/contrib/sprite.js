@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
     var _ = require('underscore');
     var util = require('util');
-    var iconsLocalization = require('../../shared/config').get('icons');
+    var iconsLocalization = require('../config').get('icons');
     var sprites = {};
 
     (function spriteIcons() {
