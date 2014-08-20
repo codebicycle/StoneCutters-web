@@ -2,7 +2,6 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
-    var ua = require('universal-analytics');
     var config = require('../../shared/config');
     var configAnalytics = require('../../app/analytics/config');
     var utils = require('../../shared/utils');
