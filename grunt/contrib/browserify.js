@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localization = require('../../shared/config').get('localization');
+    var localization = require('../config').get('localization');
     var browserify = {
         lib: {
             src: ['public/js/lib/**/*.js'],
