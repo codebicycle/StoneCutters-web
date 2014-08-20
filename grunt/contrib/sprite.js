@@ -8,15 +8,15 @@ module.exports = function(grunt) {
 
     (function spriteIcons() {
         var platforms = ['html5'];
-        var defaultsSrc = 'app/icons/default/PLATFORM';
-        var defaultsSrcLocalized = 'app/icons/LOCALIZATION/PLATFORM';
+        var defaultsSrc = 'app/localized/default/icons/PLATFORM';
+        var defaultsSrcLocalized = 'app/localized/LOCALIZATION/icons/PLATFORM';
         var defaultsDestImg = 'public/images/PLATFORM/icons/LOCALIZATION/icons.png';
         var defaultsDestCSS = 'public/css/LOCALIZATION/PLATFORM/icons.css';
         var defaultsImgPath = 'imageUrl/images/PLATFORM/icons/LOCALIZATION/icons.png';
         var repLocation = 'LOCALIZATION';
         var repPlatform = 'PLATFORM';
         var defaults = {
-            cssTemplate: 'app/icons/css.template.mustache',
+            cssTemplate: 'grunt/template/css.template.mustache',
             cssFormat: 'css'
         };
         var images = ['gif', 'png', 'ico', 'jpg', 'jpeg'];
@@ -31,8 +31,13 @@ module.exports = function(grunt) {
         }
 
         function addIconLocation(location) {
+            var src = findIconsSrcs(location, platform);
+
+            if (!src) {
+                return;
+            }
             sprites[location] = _.extend({}, defaults, {
-                src: findIconsSrcs(location, platform),
+                src: src,
                 destImg: defaultsDestImg.replace(repLocation, location).replace(repPlatform, platform),
                 destCSS: defaultsDestCSS.replace(repLocation, location).replace(repPlatform, platform),
                 imgPath: defaultsImgPath.replace(repLocation, location).replace(repPlatform, platform),
@@ -56,10 +61,10 @@ module.exports = function(grunt) {
             if (defaultsIcons) {
                 return defaultsIcons;
             }
-            var path = defaultsSrc.replace(repPlatform, platform);
+            var dir = defaultsSrc.replace(repPlatform, platform);
 
             defaultsIcons = {};
-            grunt.file.recurse(path, function callback(abspath, rootdir, subdir, filename) {
+            grunt.file.recurse(dir, function callback(abspath, rootdir, subdir, filename) {
                 if (!~images.indexOf(filename.split('.').pop())) {
                     return;
                 }
@@ -70,17 +75,19 @@ module.exports = function(grunt) {
 
         function findIconsSrcs(location, platform) {
             var defaults = _.clone(findDefaultIconsSrcs(platform));
-            var path = defaultsSrcLocalized.replace(repLocation, location).replace(repPlatform, platform);
+            var dir = defaultsSrcLocalized.replace(repLocation, location).replace(repPlatform, platform);
 
-            grunt.file.recurse(path, function callback(abspath, rootdir, subdir, filename) {
-                if (!~images.indexOf(filename.split('.').pop())) {
-                    return;
-                }
-                defaults[filename] = abspath;
-            });
-            return _.map(defaults, function(abspath, filename) {
-                return abspath;
-            });
+            if (grunt.file.exists(dir)) {
+                grunt.file.recurse(dir, function callback(abspath, rootdir, subdir, filename) {
+                    if (!~images.indexOf(filename.split('.').pop())) {
+                        return;
+                    }
+                    defaults[filename] = abspath;
+                });
+                return _.map(defaults, function(abspath, filename) {
+                    return abspath;
+                });
+            }
         }
     })();
 

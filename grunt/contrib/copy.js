@@ -77,7 +77,7 @@ module.exports = function(grunt) {
         var files = {};
         var platform;
 
-        grunt.file.recurse('app/icons/default', function callback(abspath, rootdir, subdir, filename) {
+        grunt.file.recurse('app/localized/default/icons', function callback(abspath, rootdir, subdir, filename) {
             var dest = 'public/images/' + subdir + '/icons/default/' + filename;
 
             if (!(~['gif', 'png', 'ico', 'jpg', 'jpeg'].indexOf(filename.split('.').pop()))) {
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
         }
 
         function eachIconLocation(location) {
-            var dir = 'app/icons/' + location + '/' + platform;
+            var dir = 'app/localized/' + location + '/icons/' + platform;
 
             if (grunt.file.exists(dir)) {
                 grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
