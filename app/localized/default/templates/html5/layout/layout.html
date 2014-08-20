@@ -14,6 +14,16 @@
         {% view 'footer/languages' %}
         {% view 'footer/footer' %}
         <div class="loading"></div>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setDomainName', '{{ appData.session.host }}']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script'); s = s[s.length - 1]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
