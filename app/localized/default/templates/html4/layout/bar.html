@@ -1,0 +1,5 @@
+{% if environment != 'production' %}
+    <div class="env">
+        <strong>{{ environment | upper }} ({{ platform | upper }} v. {{ version }} :: {{ revision }})</strong>
+    </div>
+{% endif %}

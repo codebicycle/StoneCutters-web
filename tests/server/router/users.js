@@ -7,14 +7,14 @@ var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
 
-var utils = require('../../../utils');
-var SmaugAdapter = require('../../../../shared/adapters/data');
+var utils = require('../../utils');
+var SmaugAdapter = require('../../../shared/adapters/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: utils.smaugUserAgent
 });
-var middleware = require('../../../../server/middleware')(dataAdapter);
-var helpers = require('../../../../app/helpers');
-var Router = require('../../../../server/router');
+var middleware = require('../../../server/middleware')(dataAdapter);
+var helpers = require('../../../app/helpers');
+var Router = require('../../../server/router');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {
@@ -41,7 +41,6 @@ describe('server', function test() {
                     function rendrConfiguration(rendrApp) {
                         rendrApp.use(middleware.platform());
                         rendrApp.use(middleware.session());
-                        rendrApp.use(middleware.abSelector());
                         rendrApp.use(middleware.environment());
                         rendrApp.use(middleware.location());
                         rendrApp.use(middleware.languages());

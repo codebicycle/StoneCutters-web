@@ -28,7 +28,7 @@
                 </td>
             </tr>
         </table>
-        {% if blackBar.show and error %}
+        {% if environment != 'production' and error %}
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
                     <td bgcolor="#EEEEEE" style="border-top: solid thin #CCC; background-color: #EEE;">

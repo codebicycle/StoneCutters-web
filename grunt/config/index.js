@@ -6,7 +6,6 @@ var CONFIG = require('./default');
 var configClient = require('../../shared/config');
 
 module.exports = function() {
-    
     function get(keys, defaultValue) {
         var value = utils.get(CONFIG, keys);
 

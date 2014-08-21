@@ -3,7 +3,8 @@
     {% view 'layout/head' %}
     <body>
         <div id="progressBar"></div>
-        {% view 'header/bar' %}
+        {% set bar = template + "/layout/bar.html" %}
+        {% include bar %}
         {% view 'header/index' %}
         <article>
             <div id="content">
