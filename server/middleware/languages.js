@@ -31,6 +31,23 @@ module.exports = function(dataAdapter, excludedUrls) {
                     console.log('[OLX_DEBUG] Empty languages response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
                     return fail(new Error());
                 }
+                // FIX: If SMAUG response is empty we hardcode values
+                if (!_languages.length) {
+                    _languages.push({
+                        id: 85,
+                        isocode: 'FA',
+                        name: 'فارسی',
+                        locale: 'fa-IR'
+                    });
+                    _languages.push({
+                        id: 1,
+                        isocode: 'EN',
+                        name: 'English',
+                        locale: 'en-US'
+                    });
+
+                }
+
                 languages = {
                     models: _languages,
                     _byId: {}
