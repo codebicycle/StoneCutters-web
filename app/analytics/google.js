@@ -113,6 +113,9 @@ function saveParams(utmcc) {
 }
 
 function parseParams(utmcc) {
+    if (!utmcc) {
+        return defaultParams();
+    }
     utmcc = utmcc.split('.');
 
     return {
@@ -125,17 +128,21 @@ function parseParams(utmcc) {
     };
 }
 
-function initParams(hash) {
+function defaultParams() {
     var today = new Date().getTime();
 
-    saveParams.call(this, {
+    return {
         domainHash: Math.round(Math.random() * 1000000000),
         userId: Math.round(Math.random() * 1000000000),
         initialSession: today,
         previousSession: today,
         currentSession: today,
         numberSessions: 1
-    });
+    };
+}
+
+function initParams() {
+    saveParams.call(this, defaultParams());
 }
 
 function updateParams() {
