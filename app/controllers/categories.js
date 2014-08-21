@@ -2,10 +2,127 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
 var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
+
+module.exports = {
+    list: middlewares(list),
+    show: middlewares(show)
+};
+
+function list(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var fetch = function(done) {
+            this.app.fetch({
+                categories: {
+                    collection: 'Categories',
+                    params: {
+                        location: this.app.session.get('siteLocation'),
+                        languageCode: this.app.session.get('selectedLanguage'),
+                        seo: true
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            var platform = this.app.session.get('platform');
+            var icons = config.get(['icons', platform], []);
+            var country = this.app.session.get('location').url;
+
+            analytics.reset();
+            seo.addMetatag('title', response.categories.metadata.title);
+            seo.addMetatag('description', response.categories.metadata.description);
+            seo.update();
+
+            callback(null, {
+                categories: response.categories.toJSON(),
+                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+                analytics: analytics.generateURL.call(this)
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(fetch)
+            .val(success);
+    }
+}
+
+function show(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        seo: false,
+        cache: false
+    }, controller);
+
+    function controller() {
+        var findCategories = function(done) {
+            this.app.fetch({
+                categories: {
+                    collection: 'Categories',
+                    params: {
+                        location: this.app.session.get('siteLocation'),
+                        languageCode: this.app.session.get('selectedLanguage'),
+                        seo: true
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var router = function(done, res) {
+            if (!res.categories) {
+                return done.fail(null, {});
+            }
+            var category = res.categories.get(params.catId);
+            var platform = this.app.session.get('platform');
+            var subcategory;
+
+            if (!category) {
+                category = res.categories.find(function each(category) {
+                    return !!category.get('children').get(params.catId);
+                });
+                if (!category) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/');
+                }
+                subcategory = category.get('children').get(params.catId);
+                handleItems.call(this, params, promise);
+            }
+            else if (platform === 'desktop') {
+                handleItems.call(this, params, promise);
+            }
+            else {
+                handleShow.call(this, params, promise);
+            }
+            promise.val(success);
+            done(category, subcategory);
+        }.bind(this);
+
+        var success = function(_result) {
+            callback(null, _result);
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        var promise = asynquence().or(error)
+            .then(findCategories)
+            .then(router);
+    }
+}
 
 function handleItems(params, promise) {
     var page = params ? params.page : undefined;
@@ -15,7 +132,7 @@ function handleItems(params, promise) {
     var subcategory;
     var query;
 
-    function prepare(done, _category, _subcategory) {
+    var prepare = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
         var slug;
 
@@ -49,9 +166,9 @@ function handleItems(params, promise) {
         delete params.filters;
         delete params.urlFilters;
         done();
-    }
+    }.bind(this);
 
-    function findItems(done) {
+    var findItems = function(done) {
         this.app.fetch({
             items: {
                 collection: 'Items',
@@ -60,9 +177,9 @@ function handleItems(params, promise) {
         }, {
             readFromCache: false
         }, done.errfcb);
-    }
+    }.bind(this);
 
-    function checkItems(done, res) {
+    var check = function(done, res) {
         var url = '/' + query.title + '-cat-' + query.catId;
         var currentPage;
 
@@ -73,9 +190,9 @@ function handleItems(params, promise) {
             });
         }
         done(res.items);
-    }
+    }.bind(this);
 
-    function success(done, _items) {
+    var success = function(done, _items) {
         var url = '/' + query.title + '-cat-' + query.catId;
         var metadata = _items.metadata;
         var postingLink = {
@@ -121,17 +238,17 @@ function handleItems(params, promise) {
             infiniteScroll: infiniteScroll,
             analytics: analytics.generateURL.call(this)
         });
-    }
+    }.bind(this);
 
-    promise.then(prepare.bind(this));
-    promise.then(findItems.bind(this));
-    promise.then(checkItems.bind(this));
-    promise.then(success.bind(this));
+    promise.then(prepare);
+    promise.then(findItems);
+    promise.then(check);
+    promise.then(success);
 }
 
 function handleShow(params, promise) {
 
-    function prepare(done, _category) {
+    var prepare = function(done, _category) {
         var currentRouter = ['categories', 'subcategories'];
         var slug;
 
@@ -144,9 +261,9 @@ function handleShow(params, promise) {
             return helpers.common.redirect.call(this, '/' + slug);
         }
         done(_category);
-    }
+    }.bind(this);
 
-    function success(done, _category) {
+    var success = function(done, _category) {
         this.app.session.update({
             postingLink: {
                 category: _category.get('id')
@@ -164,120 +281,8 @@ function handleShow(params, promise) {
             category: _category.toJSON(),
             analytics: analytics.generateURL.call(this)
         });
-    }
+    }.bind(this);
 
-    promise.then(prepare.bind(this));
-    promise.then(success.bind(this));
+    promise.then(prepare);
+    promise.then(success);
 }
-
-module.exports = {
-    list: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller() {
-            var fetch = function(done) {
-                this.app.fetch({
-                    categories: {
-                        collection: 'Categories',
-                        params: {
-                            location: this.app.session.get('siteLocation'),
-                            languageCode: this.app.session.get('selectedLanguage'),
-                            seo: true
-                        }
-                    }
-                }, {
-                    readFromCache: false
-                }, done.errfcb);
-            }.bind(this);
-
-            var success = function(response) {
-                var platform = this.app.session.get('platform');
-                var icons = config.get(['icons', platform], []);
-                var country = this.app.session.get('location').url;
-
-                analytics.reset();
-                seo.addMetatag('title', response.categories.metadata.title);
-                seo.addMetatag('description', response.categories.metadata.description);
-                seo.update();
-
-                callback(null, {
-                    categories: response.categories.toJSON(),
-                    icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                    analytics: analytics.generateURL.call(this)
-                });
-            }.bind(this);
-
-            var error = function(err, res) {
-                return helpers.common.error.call(this, err, res, callback);
-            }.bind(this);
-
-            asynquence().or(error)
-                .then(fetch)
-                .val(success);
-        }
-    },
-    show: function(params, callback) {
-        helpers.controllers.control.call(this, params, {
-            seo: false,
-            cache: false
-        }, controller);
-
-        function controller() {
-            var promise = asynquence().or(error.bind(this))
-                .then(findCategories.bind(this))
-                .then(router.bind(this));
-
-            function findCategories(done) {
-                this.app.fetch({
-                    categories: {
-                        collection: 'Categories',
-                        params: {
-                            location: this.app.session.get('siteLocation'),
-                            languageCode: this.app.session.get('selectedLanguage'),
-                            seo: true
-                        }
-                    }
-                }, {
-                    readFromCache: false
-                }, done.errfcb);
-            }
-
-            function router(done, res) {
-                if (!res.categories) {
-                    return done.fail(null, {});
-                }
-                var category = res.categories.get(params.catId);
-                var platform = this.app.session.get('platform');
-                var subcategory;
-
-                if (!category) {
-                    category = res.categories.find(function each(category) {
-                        return !!category.get('children').get(params.catId);
-                    });
-                    if (!category) {
-                        done.abort();
-                        return helpers.common.redirect.call(this, '/');
-                    }
-                    subcategory = category.get('children').get(params.catId);
-                    handleItems.call(this, params, promise);
-                }
-                else if (platform === 'desktop') {
-                    handleItems.call(this, params, promise);
-                }
-                else {
-                    handleShow.call(this, params, promise);
-                }
-                promise.val(success.bind(this));
-                done(category, subcategory);
-            }
-
-            function success(_result) {
-                callback(null, _result);
-            }
-
-            function error(err, res) {
-                return helpers.common.error.call(this, err, res, callback);
-            }
-        }
-    }
-};
