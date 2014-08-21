@@ -104,6 +104,98 @@ function getId() {
     return googleId;
 }
 
+function saveParams(utmcc) {
+    this.app.session.persist({
+        _gaUtmcc: [utmcc.domainHash, utmcc.userId, utmcc.initialSession, utmcc.previousSession, utmcc.currentSession, utmcc.numberSessions].join('.')
+    }, {
+        maxAge: 30 * MINUTE
+    });
+}
+
+function parseParams(utmcc) {
+    utmcc = utmcc.split('.');
+
+    return {
+        domainHash: utmcc[0],
+        userId: utmcc[1],
+        initialSession: utmcc[2],
+        previousSession: utmcc[3],
+        currentSession: utmcc[4],
+        numberSessions: utmcc[5]
+    };
+}
+
+function initParams(hash) {
+    var today = new Date().getTime();
+
+    saveParams.call(this, {
+        domainHash: Math.round(Math.random() * 1000000000),
+        userId: Math.round(Math.random() * 1000000000),
+        initialSession: today,
+        previousSession: today,
+        currentSession: today,
+        numberSessions: 1
+    });
+}
+
+function updateParams() {
+    var today = new Date().getTime();
+    var utmcc = this.app.session.get('_gaUtmcc');
+
+    utmcc = parseParams(utmcc);
+    saveParams.call(this, {
+        domainHash: utmcc.domainHash,
+        userId: utmcc.userId,
+        initialSession: utmcc.initialSession,
+        previousSession: utmcc.currentSession,
+        currentSession: today,
+        numberSessions: 1
+    });
+}
+
+function checkParams() {
+    var utmcc = this.app.session.get('_gaUtmcc');
+
+    if (!utmcc) {
+        initParams.call(this);
+        return false;
+    }
+
+    utmcc = parseParams(utmcc);
+    if ((Number(utmcc.currentSession) - Number(utmcc.initialSession)) > (30 * MINUTE)) {
+        initParams.call(this);
+        return false;
+    }
+    return true;
+}
+
+function getUtmcc(app) {
+    var utmcc = app.session.get('_gaUtmcc');
+    var utmccOut = [];
+
+    utmcc = parseParams(utmcc);
+    utmccOut.push('__utma=');
+    utmccOut.push(utmcc.domainHash);
+    utmccOut.push('.');
+    utmccOut.push(utmcc.userId);
+    utmccOut.push('.');
+    utmccOut.push(utmcc.initialSession);
+    utmccOut.push('.');
+    utmccOut.push(utmcc.previousSession);
+    utmccOut.push('.');
+    utmccOut.push(utmcc.currentSession);
+    utmccOut.push('.');
+    utmccOut.push(utmcc.numberSessions);
+    utmccOut.push(';+__utmz=');
+    utmccOut.push(utmcc.domainHash);
+    utmccOut.push('.');
+    utmccOut.push(utmcc.currentSession);
+    utmccOut.push('.');
+    utmccOut.push(utmcc.numberSessions);
+    utmccOut.push('.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none);');
+    return utmccOut.join('');
+}
+
 function generate(params, page, options) {
     var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
 
@@ -113,9 +205,13 @@ function generate(params, page, options) {
     }, {
         maxAge: 30 * MINUTE
     });
+    if (checkParams.call(this)) {
+        updateParams.call(this);
+    }
 }
 
 module.exports = {
     getId: getId,
+    getUtmcc: getUtmcc,
     generate: generate
 };
