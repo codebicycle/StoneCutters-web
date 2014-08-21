@@ -69,6 +69,29 @@ module.exports = function trackingRouter(app, dataAdapter) {
             analytic.track(params, options);
         }
 
+        function googleTrackingGA(req, trackerId) {
+            var analytic = new Tracker('googleGA', {
+                id: trackerId,
+                host: req.host
+            });
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var options = defaultRequestOptions(req);
+            var params = {
+                page: req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
+
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            options.method = 'post';
+            analytic.track(params, options);
+        }
+
         function atiTracking(req) {
             var countryId = req.query.locId;
             var atiConfig;
@@ -103,13 +126,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req);
-            googleTracking(req, 'UA-5247560-2', '/webapp/');
-             if (!_.contains(['www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe'], req.query.locUrl)) {
-                googleTracking(req, 'UA-31226936-4');
-            }
-             if (_.contains(['www.olx.cl'], req.query.locUrl)) {
-                googleTracking(req, 'UA-31226936-2');
-            }
+            googleTrackingGA(req, 'UA-5247560-2');
             atiTracking(req);
         }
     })();

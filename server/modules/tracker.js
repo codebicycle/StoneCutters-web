@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var restler = require('restler');
+var crypto = require('crypto');
 
 var GoogleEventsKeys = {
     ec: 'category',
@@ -106,6 +107,27 @@ Tracker.types = {
 
         params = dynamics(params, options.dynamics);
         params.z = Math.round(Math.random() * 1000000);
+        return {
+            url: url,
+            params: params
+        };
+    },
+    googleGA: function(options) {
+        var url = 'http://www.google-analytics.com/__utm.gif';
+        var utmvid = '0x' + crypto.createHash('md5').update(options.clientId).digest('hex').substr(0, 16);
+        var params = {
+            utmwv: '4.4sh',
+            utmn: Math.round(Math.random() * 1000000),
+            utmhn: _.rest(options.host.split('.')).join('.'),
+            utmr: options.referer,
+            utmp: options.page,
+            utmac: options.id,
+            utmcc: '__utma%3D999.999.999.999.999.1%3B',
+            utmvid: utmvid,
+            utmip: options.ip
+        };
+
+        params = dynamics(params, options.dynamics);
         return {
             url: url,
             params: params

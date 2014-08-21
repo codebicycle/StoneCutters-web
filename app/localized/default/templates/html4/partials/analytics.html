@@ -4,9 +4,11 @@
     {% endfor %}
 
     <script type="text/javascript">
-        ga('send', 'pageview', {
-            // page: '{{ analytics.params.page }}'
-            page: '/webapp/'
+        var _gaq = _gaq || [];
+        _gaq.push(function() {
+            var tracker = _gat._getTracker('UA-5247560-17');
+
+            tracker._trackPageview('{{ analytics.params.page }}');
         });
     </script>
 {% endif %}

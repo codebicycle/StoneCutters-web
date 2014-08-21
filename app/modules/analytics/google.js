@@ -115,34 +115,7 @@ function generate(params, page, options) {
     });
 }
 
-function generateUrl(options) {
-    var url = 'http://www.google-analytics.com/collect';
-    var params = {
-        v: '1',
-        tid: options.id,
-        cid: options.clientId,
-        t: 'pageview',
-        dh: _.rest(options.host.split('.')).join('.'),
-        dp: options.page,
-        dr: options.referer,
-        ul: options.language
-    };
-
-    if (options.ip) {
-        params.uip = options.ip;
-    }
-    if (options.hitCount) {
-        params._s = options.hitCount;
-    }
-    params.z = Math.round(Math.random() * 1000000);
-    return {
-        url: url,
-        params: params
-    };
-}
-
 module.exports = {
     getId: getId,
-    generate: generate,
-    generateUrl: generateUrl
+    generate: generate
 };
