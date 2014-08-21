@@ -45,7 +45,6 @@ module.exports = Base.extend({
             referer: this.app.session.get('referer'),
             url: this.app.session.get('url'),
             href: this.app.session.get('href'),
-            sixpack: this.app.session.get('sixpack'),
             macros: template + '/partials/macros.html',
             currentRoute: this.app.session.get('currentRoute'),
             interstitial: this.app.session.get('interstitial')

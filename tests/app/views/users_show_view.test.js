@@ -1,5 +1,5 @@
 /*var should = require("should");
-var UsersShowView = require('../../../app/views/users/show');
+var UsersShowView = require('../../app/views/users/show');
 
 describe('UsersShowView', function() {
 

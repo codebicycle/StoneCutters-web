@@ -5,11 +5,11 @@ var should = require('should');
 var request = require('supertest');
 var express = require('express');
 var rendr = require('rendr');
-var SmaugAdapter = require('../../../../shared/adapters/data');
+var SmaugAdapter = require('../../../shared/adapters/data');
 var dataAdapter = new SmaugAdapter({
     userAgent: 'Arwen/mocha-test (node.js ' + process.version + ')'
 });
-var middleware = require('../../../../server/middleware')(dataAdapter);
+var middleware = require('../../../server/middleware')(dataAdapter);
 var paths = {
     '/': 'home',
     '/items': 'listing',
@@ -18,7 +18,7 @@ var paths = {
     '/categories': 'categoryList',
     '/api/.*': 'api'
 };
-var Router = require('../../../../server/router');
+var Router = require('../../../server/router');
 
 function expressConfiguration(app) {
     return function expressConfiguration() {

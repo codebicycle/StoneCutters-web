@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         var repLocation = 'LOCALIZATION';
         var repPlatform = 'PLATFORM';
         var defaults = {
-            cssTemplate: 'grunt/template/css.template.mustache',
+            cssTemplate: 'grunt/templates/css.template.mustache',
             cssFormat: 'css'
         };
         var images = ['gif', 'png', 'ico', 'jpg', 'jpeg'];

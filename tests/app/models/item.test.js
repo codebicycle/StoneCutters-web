@@ -1,5 +1,5 @@
 var should = require("should");
-var Item = require('../../../../app/models/item');
+var Item = require('../../../app/models/item');
 
 describe('app', function test() {
     describe('models', function test() {

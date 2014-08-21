@@ -37,7 +37,6 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.languages());
         rendrApp.use(middleware.templates());
-        rendrApp.use(middleware.bar());
     }
 
     server.expressApp.configure(expressConfiguration);

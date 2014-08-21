@@ -2,8 +2,6 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var sixpackName = 'sixpack-client';
-var sixpack = require(sixpackName);
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
 var analytics = require('../modules/analytics');
