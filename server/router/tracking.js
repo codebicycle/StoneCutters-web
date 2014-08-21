@@ -97,6 +97,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 host: req.host
             });
             var language = req.rendrApp.session.get('selectedLanguage');
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'unknown';
+            var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
             var options = defaultRequestOptions(req);
             var params = {
                 page: req.query.page,
@@ -110,8 +113,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (language) {
                 params.language = language.toLowerCase();
             }
+            osName = osName.replace(/\s*/g, '').toLowenCase();
             params.dynamics = {
-                utmcc: analytics.google.getUtmcc(req.rendrApp)
+                utmcc: analytics.google.getUtmcc(req.rendrApp),
+                utme: ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('')
             };
             analytic.track(params, options);
         }

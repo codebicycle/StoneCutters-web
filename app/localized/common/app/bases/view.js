@@ -47,7 +47,11 @@ module.exports = Base.extend({
             href: this.app.session.get('href'),
             macros: template + '/partials/macros.html',
             currentRoute: this.app.session.get('currentRoute'),
-            interstitial: this.app.session.get('interstitial')
+            interstitial: this.app.session.get('interstitial'),
+            os: {
+                name: this.app.session.get('osName').replace(/\s*/g, ''),
+                version: this.app.session.get('osVersion')
+            }
         });
     },
     track: function(data, callback) {

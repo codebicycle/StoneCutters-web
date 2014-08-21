@@ -78,7 +78,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 template = directory + '/' + platform;
                 app.session.persist({
-                    osName: (device.osName || 'Others')
+                    osName: (device.osName || 'Others'),
+                    osVersion: parseFloat(String(device.osVersion).replace('_','.'))
                 });
                 app.session.update({
                     device: device,
