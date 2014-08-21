@@ -7,6 +7,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var uuid = require('node-uuid');
         var utils = require('../../shared/utils');
         var config = require('../../shared/config');
+        var deploy = config.get('deploy', {});
 
         function getIp(req) {
             var ip = req.header('x-forwarded-for');
@@ -60,7 +61,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             });
             req.rendrApp.req.app.locals({
                 platform: platform,
-                environment: config.get(['environment', 'type'], 'development')
+                environment: config.get(['environment', 'type'], 'development'),
+                version: deploy.version,
+                revision: deploy.revision
             });
             next();
         };

@@ -3,8 +3,8 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var helpers = require('../helpers');
-var seo = require('../seo');
-var analytics = require('../analytics');
+var seo = require('../modules/seo');
+var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
 var Item = require('../models/item');
 

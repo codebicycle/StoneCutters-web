@@ -3,13 +3,13 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
+        var _ = require('underscore');
+        var path = require('path');
         var minify = require('../config').get(['uglify', 'enabled'], true);
         var localization = require('../../shared/config').get('localization', {});
-        var _ = require('underscore');
+        var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
-        var path = require('path');
         var errorPath = path.resolve('server/templates/error.html');
-        var statsd  = require('../statsd')();
 
         function isLocalized(platform, siteLocation) {
             return !!(localization[platform] && ~localization[platform].indexOf(siteLocation));

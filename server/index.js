@@ -22,7 +22,7 @@ module.exports = function() {
     }
 
     if (config.get(['cluster', 'enabled'], false)) {
-        app.then(require('./cluster'));
+        app.then(require('./modules/cluster'));
     }
 
     app.val(require('./bootstrap'));

@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var isServer = typeof window === 'undefined';
 if (isServer) {
-    var memcachedModule = '../server/memcached';
+    var memcachedModule = '../server/modules/memcached';
     var memcached = require(memcachedModule);
     var uuidModule = 'node-uuid';
     var uuid = require(uuidModule);

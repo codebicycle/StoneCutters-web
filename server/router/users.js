@@ -3,10 +3,10 @@
 module.exports = function userRouter(app, dataAdapter) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
-    var formidable = require('../formidable');
     var querystring = require('querystring');
     var crypto = require('crypto');
     var utils = require('../../shared/utils');
+    var formidable = require('../modules/formidable');
 
     var loginHandler = (function login() {
 

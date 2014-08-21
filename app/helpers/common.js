@@ -2,8 +2,8 @@
 
 var _ = require('underscore');
 var config = require('../../shared/config');
-var seo = require('../seo');
 var utils = require('../../shared/utils');
+var seo = require('../modules/seo');
 
 module.exports = (function() {
 

@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     return function task() {
         var asynquence = require('asynquence');
         var _ = require('underscore');
-        var config = require('../../shared/config');
+        var config = require('../config');
 
         var done = this.async();
         var root = 'app/localized';

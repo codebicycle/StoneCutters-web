@@ -2,12 +2,12 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
+    var statsd  = require('../modules/statsd')();
+    var Tracker = require('../modules/tracker');
     var config = require('../../shared/config');
-    var configAnalytics = require('../../app/analytics/config');
-    var analytics = require('../../app/analytics');
     var utils = require('../../shared/utils');
-    var statsd  = require('../statsd')();
-    var Tracker = require('../tracker');
+    var analytics = require('../../app/modules/analytics');
+    var configAnalytics = require('../../app/modules/analytics/config');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
