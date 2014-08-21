@@ -113,7 +113,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (language) {
                 params.language = language.toLowerCase();
             }
-            osName = osName.replace(/\s*/g, '').toLowenCase();
+            osName = osName.replace(/\s*/g, '').toLowerCase();
             params.dynamics = {
                 utmcc: analytics.google.getUtmcc(req.rendrApp),
                 utme: ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('')
