@@ -4,7 +4,6 @@ module.exports = {
     controllers: require('./controllers'),
     marketing: require('./marketing'),
     common: require('./common'),
-    routes: require('./routes'),
     breadcrumb: require('./breadcrumb'),
     pagination: require('./pagination'),
     filters: require('./filters'),

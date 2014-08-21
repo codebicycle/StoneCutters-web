@@ -8,6 +8,30 @@ module.exports = Base.extend({
 
     postRender: function() {
 		var that = this;
+
+        this.$('span.addPhoto').click(function(e) {
+            e.preventDefault();
+            $('.message').val('Tenho interesse e gostaria de ver fotos. Você pode, por favor, adicionar fotos no seu anúncio?');
+        });
+
+        this.$('#photos ul li').hover(function(e) {
+            e.preventDefault();
+            if(!$(this).hasClass('active')) {
+                var image = $(this).attr('data-image');
+                var currentImage = $(this).css('background-image');
+                $('#photos ul li').removeClass('active');
+                $(this).addClass('active');
+                $('#photos .bigPhoto').css('background-image', currentImage);
+                var newImg = new Image();
+                newImg.src = image;
+                newImg.onload = function() {
+                    $('#photos .bigPhoto').css('background-image', 'url(' + image + ')');
+                };
+                
+            }
+        });
+        
+
 		that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
 
 		this.$('p.replySuccses span').click(function(e) {
@@ -65,7 +89,6 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, data) {
-                var analytics;
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                 var category = $('.itemCategory').val();
                 var subcategory = $('.itemSubcategory').val();

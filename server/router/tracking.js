@@ -1,110 +1,127 @@
 'use strict';
 
-module.exports = function itemRouter(app, dataAdapter) {
+module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
-    var uuid = require('node-uuid');
-    var crypto = require('crypto');
-    var configServer = require('../config');
-    var configClient = require('../../app/config');
-    var configAnalytics = require('../../app/analytics/config');
-    var Session = require('../../shared/session');
+    var statsd  = require('../modules/statsd')();
+    var Tracker = require('../modules/tracker');
+    var config = require('../../shared/config');
     var utils = require('../../shared/utils');
-    var graphite = require('../graphite')();
-    var Analytic = require('../analytic');
-    var analytics = require('../../app/analytics');
+    var analytics = require('../../app/modules/analytics');
+    var configAnalytics = require('../../app/modules/analytics/config');
+    var env = config.get(['environment', 'type'], 'development');
+    var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function defaultOptions(req) {
+    function defaultRequestOptions(req) {
         return {
-            headers: { 
-                'User-Agent': (req.get('user-agent') || utils.defaults.userAgent)
+            headers: {
+                'User-Agent': (req.get('user-agent') || utils.defaults.userAgent),
+                'Accept-Encoding': 'gzip,deflate,sdch',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
             }
         };
     }
-
-    function googleIp(req) {
-        var ip = req.header('HTTP_X_PROXY_X_NETLI_FORWARDED_FOR');
-
-        if (!ip) {
-            ip = req.ip;
-        }
-        return ip;
-    }
-    
-    function googleUTMCC(req) {
-        var utmcc = [];
-        var gaDh = req.rendrApp.session.get('gaDh');
-        var gaCs = req.rendrApp.session.get('gaCs');
-        var gaNs = req.rendrApp.session.get('gaNs');
-
-        utmcc.push('__utma=');
-        utmcc.push(gaDh);
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaUid'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaIs'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaPs'));
-        utmcc.push('.');
-        utmcc.push(gaCs);
-        utmcc.push('.');
-        utmcc.push(gaNs);
-        utmcc.push(';');
-        return utmcc.join('');
-    }
-
-    (function analytics() {
-        app.get('/analytics', handler);
-
-        function handler(req, res) {
-            var analytic = new Analytic('google', {
-                id: analytics.google.getId(),
-                host: req.host
-            });
-            var ip = googleIp(req);
-            var options = defaultOptions(req);
-            var url = analytic.track({
-                page: 'test',
-                referer: '-',
-                ip: ip,
-                dynamics: {
-                    utmcc: googleUTMCC(req),
-                    utmvid: req.rendrApp.session.get('visitorId')
-                }
-            }, options);
-
-            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-            res.json({
-                url: url
-            });
-        }
-    })();
 
     (function pageview() {
         app.get('/analytics/pageview.gif', handler);
 
         function graphiteTracking(req) {
-            graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
-            graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'Others';
+            var hitCount = req.rendrApp.session.get('hitCount');
+            var clientId = req.rendrApp.session.get('clientId');
+
+            statsd.increment([req.query.locNm, 'pageview', platform]);
+            statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            if (!hitCount) {
+                statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
+            }
+            else {
+                // statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
+                if (hitCount > 1) {
+                    statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
+                }
+                else {
+                    statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                }
+            }
         }
 
-        function googleTracking(req) {
-            var analytic = new Analytic('google', {
-                id: req.query.id,
-                host: req.host,
-                clientId: req.rendrApp.session.get('visitorId')
+        function googleTracking(req, trackerId, page) {
+            var analytic = new Tracker('google', {
+                id: trackerId,
+                host: req.host
             });
-            var ip = googleIp(req);
-            var options = defaultOptions(req);
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var options = defaultRequestOptions(req);
+            var params = {
+                page: page || req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
 
-            analytic.track({
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            analytic.track(params, options);
+        }
+
+        function googleTrackingGA(req, trackerId) {
+            var analytic = new Tracker('googleGA', {
+                id: trackerId,
+                host: req.host
+            });
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var options = defaultRequestOptions(req);
+            var params = {
                 page: req.query.page,
                 referer: req.query.referer,
-                ip: ip
-            }, options);
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
+
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            analytic.track(params, options);
+        }
+
+        function googleTrackingTest(req) {
+            var analytic = new Tracker('googleGA', {
+                id: 'UA-50756825-1',
+                host: req.host
+            });
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'unknown';
+            var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
+            var options = defaultRequestOptions(req);
+            var params = {
+                page: req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
+
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            osName = osName.replace(/\s*/g, '').toLowerCase();
+            params.dynamics = {
+                utmcc: analytics.google.getUtmcc(req.rendrApp),
+                utme: ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('')
+            };
+            analytic.track(params, options);
         }
 
         function atiTracking(req) {
-            var env = configClient.get(['environment', 'type'], 'development');
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -115,42 +132,32 @@ module.exports = function itemRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultOptions(req);
-                analytic = new Analytic('ati', {
+                options = defaultRequestOptions(req);
+                analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId
+                    host: atiConfig.logServer
                 });
 
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
-                    custom: req.query.custom
+                    custom: req.query.custom,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+            var gif = new Buffer(image, 'base64');
 
-            image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
+            res.set('Content-Length', gif.length);
+            res.end(gif);
 
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
-
-            function callback() {
-                graphiteTracking(req);
-                if (configServer.get(['analytics', 'google', 'enabled'], true)) {
-                    googleTracking(req);
-                }
-                if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
-                    atiTracking(req);
-                }
-            }
+            graphiteTracking(req);
+            googleTrackingGA(req, 'UA-5247560-2');
+            googleTrackingTest(req);
+            atiTracking(req);
         }
     })();
 
@@ -158,21 +165,20 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/analytics/pageevent.gif', handler);
 
         function googleTracking(req) {
-            var analytic = new Analytic('google-event', {
-                id: req.query.id,
-                host: req.host,
-                clientId: req.rendrApp.session.get('visitorId')
+            var analytic = new Tracker('google-event', {
+                id: 'UA-31226936-4',
+                host: req.host
             });
-            var ip = googleIp(req);
-            var options = defaultOptions(req);
+            var options = defaultRequestOptions(req);
 
             analytic.track(_.extend({
-                ip: ip
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent']
             }, req.query), options);
         }
 
         function atiTracking(req) {
-            var env = configClient.get(['environment', 'type'], 'development');
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -183,39 +189,28 @@ module.exports = function itemRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultOptions(req);
-                analytic = new Analytic('ati-event', {
+                options = defaultRequestOptions(req);
+                analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId
+                    host: atiConfig.logServer
                 });
                 analytic.track({
                     custom: req.query.custom,
-                    url: req.query.url
+                    url: req.query.url,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+            var gif = new Buffer(image, 'base64');
 
-            image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
+            res.set('Content-Length', gif.length);
+            res.end(gif);
 
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
-
-            function callback() {
-                if (configServer.get(['analytics', 'google', 'enabled'], true)) {
-                    googleTracking(req);
-                }
-                if (configServer.get(['analytics', 'atinternet', 'enabled'], true)) {
-                    atiTracking(req);
-                }
-            }
+            googleTracking(req);
+            atiTracking(req);
         }
     })();
 
@@ -223,12 +218,16 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.get('/analytics/graphite.gif', handler);
 
         var metrics = {
+            pageview: function(req, options) {
+                statsd.increment([req.query.locNm, 'pageview', options.platform]);
+                statsd.increment([req.query.locNm, 'devices', options.osName, options.platform]);
+            },
             reply: {
-                success: function(req) {
-                    graphite.send([req.query.location, 'reply', 'success', req.query.platform], 1, '+');
+                success: function(req, options) {
+                    statsd.increment([req.query.location, 'reply', 'success', options.platform]);
                 },
-                error: function(req) {
-                    graphite.send([req.query.location, 'reply', 'error', req.query.platform], 1, '+');
+                error: function(req, options) {
+                    statsd.increment([req.query.location, 'reply', 'error', options.platform]);
                 }
             }
         };
@@ -236,20 +235,16 @@ module.exports = function itemRouter(app, dataAdapter) {
         function noop() {}
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+            var gif = new Buffer(image, 'base64');
 
-            image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
+            res.set('Content-Length', gif.length);
+            res.end(gif);
 
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
-
-            function callback() {
-                utils.get(metrics, (req.query.metric || '').split(','), noop)(req);
-            }
+            utils.get(metrics, (req.query.metric || '').split(','), noop)(req, {
+                platform: req.rendrApp.session.get('platform'),
+                osName: req.rendrApp.session.get('osName') || 'Others'
+            });
         }
     })();
 };

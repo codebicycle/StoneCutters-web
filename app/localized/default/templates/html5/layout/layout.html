@@ -3,7 +3,8 @@
     {% view 'layout/head' %}
     <body>
         <div id="progressBar"></div>
-        {% view 'header/bar' %}
+        {% set bar = template + "/layout/bar.html" %}
+        {% include bar %}
         {% view 'header/index' %}
         <article>
             <div id="content">
@@ -14,10 +15,21 @@
         {% view 'footer/languages' %}
         {% view 'footer/footer' %}
         <div class="loading"></div>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setDomainName', '{{ appData.session.host }}']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script'); s = s[s.length - 1]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
                 .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', ((['config-', environment, '.js'] | join('')) if (environment != 'production') else 'config.js')] | join('/') | static }}")
                 .script("{{ [jsDir, directory, 'templates', platform, 'templates.js'] | join('/') | static }}").wait()
                 .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
                     var App = window.App = new (require('app/app'))({% json appData %});

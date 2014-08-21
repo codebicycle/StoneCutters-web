@@ -3,8 +3,8 @@
         <td style="border-top: solid thin #B0B0B0;">
             <small>{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}</small>
             <form action="{{ '/nf/search/redirect' | link }}" method="post">
-                <input type="text" name="search" value="">
-                <input type="submit" name="search_button" value="{{ dictionary["homeheader.Search"] }}">
+                <input type="text" data-qa="search-input" name="search" value="">
+                <input type="submit" data-qa="search-submit" name="search_button" value="{{ dictionary["homeheader.Search"] }}">
             </form>
         </td>
     </tr>

@@ -3,126 +3,13 @@
 var asynquence = require('asynquence');
 var _ = require('underscore');
 var URLParser = require('url');
-var seo = require('../seo');
+var seo = require('../modules/seo');
 var common = require('./common');
 var marketing = require('./marketing');
-var config = require('../config');
+var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var intertitial = config.get(['interstitial', 'enabled'], false);
 var isServer = typeof window === 'undefined';
-
-function setUrlVars(done) {
-    var href;
-    if (isServer) {
-        href = this.app.session.get('protocol') + '://' + this.app.session.get('siteLocation') + this.app.session.get('path');
-
-        this.app.session.update({
-            href: href
-        });
-    }
-    else {
-        var location = window.location;
-        href = this.app.session.get('protocol') + '://' + this.app.session.get('siteLocation') + location.pathname;
-
-        this.app.session.update({
-            path: location.pathname,
-            url: location.href,
-            href: href
-        });
-    }
-    done();
-}
-
-function redirect(done) {
-    var path = this.app.session.get('path');
-
-    if (path.length <= 1 || path.slice(-1) !== '/') {
-        if (intertitial && setInterstitial.call(this)) {
-            done.abort();
-            return;
-        }
-        return done();
-    }
-    this.redirectTo(common.link(path.slice(0, -1), this.app), {
-        status: 301
-    });
-    done.abort();
-    return;
-}
-
-function setInterstitial() {
-    var url = '/interstitial';
-    var platform;
-    var platforms;
-    var path;
-    var paths;
-    var info;
-    var downloadApp;
-    var clicks;
-    var currentClicks;
-
-    platform = this.app.session.get('platform');
-    platforms = config.get(['interstitial', 'ignorePlatform'], []);
-    if (_.contains(platforms, platform)) {
-        return false;
-    }
-
-    path = this.app.session.get('path');
-    paths = config.get(['interstitial', 'ignorePath'], []);
-    paths = _.filter(paths, function filterInterstitial(ignorePath) {
-        if (_.isString(ignorePath)) {
-            return path === ignorePath;
-        }
-        return ignorePath.test(path);
-    });
-    if (paths.length) {
-        return false;
-    }
-
-    if (utils.params(this.app.session.get('url') || '', 'target') === 'posting') {
-        return false;
-    }
-
-    info = marketing.getInfo(this.app, 'interstitial');
-    if (!info || _.isEmpty(info)) {
-        return false;
-    }
-
-    downloadApp = this.app.session.get('downloadApp');
-    if (_.isUndefined(downloadApp) || downloadApp !== '1') {
-        clicks = config.get(['interstitial', 'clicks'], 1);
-        currentClicks = this.app.session.get('clicks') || 0;
-
-        if (currentClicks < clicks) {
-            currentClicks++;
-            this.app.session.persist({
-                clicks: currentClicks
-            });
-        }
-        else {
-            var protocol = this.app.session.get('protocol');
-            var host = this.app.session.get('host');
-            var time = config.get(['interstitial', 'time'], 60000);
-
-            this.app.session.clear('clicks');
-            this.app.session.persist({
-                downloadApp: time
-            });
-            if (!isServer || platform === 'html5') {
-                this.app.session.update({
-                    interstitial: true
-                });
-            }
-            else {
-                common.redirect.call(this, [url, '?ref=', protocol, '://', host, this.app.session.get('url')].join(''), null, {
-                    status: 302
-                });
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 function clearSession(done) {
     this.app.session.clear('page');
@@ -330,8 +217,6 @@ module.exports = {
             cache: true
         });
         asynquence().or(fail.bind(this))
-            .then(setUrlVars.bind(this))
-            .then(redirect.bind(this))
             .then(clearSession.bind(this))
             .then(setCurrentRoute.bind(this))
             .then(setReferer.bind(this))

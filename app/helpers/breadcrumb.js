@@ -1,9 +1,9 @@
 'use strict';
 
-var config = require('../config');
+var _ = require('underscore');
+var config = require('../../shared/config');
 var common = require('./common');
 var navigation = require('./navigation');
-var _ = require('underscore');
 
 module.exports = (function() {
     var handlers = {
@@ -162,13 +162,34 @@ module.exports = (function() {
                 navigation.clear.call(this);
                 return '/';
             },
+            login: function() {
+                var fragment = navigation.getState.call(this);
+
+                if (fragment && fragment.url) {
+                    return fragment.url;
+                }
+                else {
+                    navigation.clear.call(this);
+                    return '/';
+                }
+            },
+            register: function() {
+                var fragment = navigation.getState.call(this);
+
+                if (fragment && fragment.url) {
+                    return fragment.url;
+                }
+                else {
+                    return '/login';
+                }
+            },
             myads: function() {
                 var platform = this.app.session.get('platform');
                 var breadcrumb;
 
                 if (platform === 'wap' || platform === 'html4') {
                     breadcrumb = '/myolx';
-                } 
+                }
                 else {
                     navigation.clear.call(this);
                     breadcrumb = '/';
@@ -184,7 +205,7 @@ module.exports = (function() {
 
                 if (platform === 'wap' || platform === 'html4') {
                     breadcrumb = '/myolx';
-                } 
+                }
                 else {
                     navigation.clear.call(this);
                     breadcrumb = '/';
@@ -230,7 +251,7 @@ module.exports = (function() {
         var referer = data.app.session.get('referer');
         var breadcrumb;
         var controller;
-        
+
         prepareNavigation(data);
         if (currentRoute.controller !== this.name.split('/').shift()) {
             return data.app.session.get('breadcrumb');

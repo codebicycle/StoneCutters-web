@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = function(app, dataAdapter) {
+    var fs = require('fs');
     var asynquence = require('asynquence');
-    var formidable = require('../formidable');
     var querystring = require('querystring');
     var utils = require('../../shared/utils');
-    var fs = require('fs');
-    var graphite = require('../graphite')();
+    var formidable = require('../modules/formidable');
+    var statsd  = require('../modules/statsd')();
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -44,7 +44,7 @@ module.exports = function(app, dataAdapter) {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                graphite.send([location.name, 'reply', 'success', platform], 1, '+');
+                statsd.increment([location.name, 'reply', 'success', platform]);
             }
 
             function error(err) {
@@ -52,7 +52,7 @@ module.exports = function(app, dataAdapter) {
 
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    graphite.send([location.name, 'reply', 'error', platform], 1, '+');
+                    statsd.increment([location.name, 'reply', 'error', platform]);
                 });
             }
 
@@ -199,7 +199,7 @@ module.exports = function(app, dataAdapter) {
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                graphite.send([location.name, 'posting', 'success', platform], 1, '+');
+                statsd.increment([location.name, 'posting', 'success', platform]);
                 res.redirect(utils.link(url, req.rendrApp));
                 clean();
             }
@@ -207,7 +207,7 @@ module.exports = function(app, dataAdapter) {
             function fail(err, track) {
                 var url = req.headers.referer || '/posting';
 
-                graphite.send([location.name, 'posting', track || 'error', platform], 1, '+');
+                statsd.increment([location.name, 'posting', track || 'error', platform]);
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
@@ -291,12 +291,28 @@ module.exports = function(app, dataAdapter) {
         app.post('/nf/search/redirect', handler);
 
         function handler(req, res, next) {
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
 
-            formidable.parse(req, function callback(err, data) {
+            function success(data) {
                 var url = '/nf/search' + (data.search ? ('/' + data.search) : '');
 
                 res.redirect(utils.link(url, req.rendrApp));
-            });
+            }
+
+            function error(err) {
+                var location = req.rendrApp.session.get('location');
+                var platform = req.rendrApp.session.get('platform');
+                var url = req.headers.referer || '/';
+
+                res.redirect(utils.link(url.split('?').shift(), req.rendrApp));
+                statsd.increment([location.name, 'search', 'error', platform]);
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .val(success);
         }
     })();
 

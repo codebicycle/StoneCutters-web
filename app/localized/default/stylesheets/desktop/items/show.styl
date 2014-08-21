@@ -72,6 +72,42 @@ section#itemPage {
 		#photos {
 			height: 25rem;
 			overflow: hidden;
+			.noPhoto {
+				width: 38.5rem;
+				height: 21.88rem;
+				float: left;
+				background: #eee;
+				border: 1px solid #ccc;
+				text-align: center;
+
+				p {
+					font-size: 1.25rem;
+					color: #aaa;
+					margin: 6rem 0 0 0;
+
+					span.camera {
+						display: block;
+
+						&:before {
+							color: #aaa;
+						    content: "z";
+						    font-size: 3.375rem;
+						}
+					}
+					span.addPhoto {
+						font-size: .875rem;
+						color: #38b;
+						cursor: pointer;
+
+						&:after {
+							content: "";
+						}
+						&:hover {
+							color: #369;
+						}
+					}
+				}
+			}
 
 			.bigPhoto {
 				width: 33.75rem;
@@ -113,7 +149,7 @@ section#itemPage {
 					background-repeat: no-repeat;
 					cursor: pointer;
 
-					&:hover {
+					&:hover, &.active {
 						border: 3px solid #2b8dd6;
 					}
 				}

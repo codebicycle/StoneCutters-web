@@ -2,7 +2,7 @@
 
 var Base = require('rendr/shared/app');
 var Session = require('../shared/session');
-var nunjucks = require('./nunjucks');
+var nunjucks = require('./modules/nunjucks');
 
 module.exports = Base.extend({
     defaults: {

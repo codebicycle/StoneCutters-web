@@ -7,6 +7,14 @@ module.exports = Base.extend({
     className: 'locations_select_view',
     wapAttributes: {
         bgcolor: '#DDDDDD'
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var heading = data.url === '/';
+
+        return _.extend({}, data, {
+            heading: heading
+        });
     }
 });
 

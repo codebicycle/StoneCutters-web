@@ -1,3 +1,5 @@
 {% if analytics %}
-    <img src="{{analytics}}" style="display: none;" >
+    {% for url in analytics.urls %}
+        <img src="{{url}}" style="display: none;" width="1" height="1">
+    {% endfor %}
 {% endif %}

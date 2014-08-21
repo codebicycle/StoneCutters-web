@@ -1,13 +1,21 @@
 <div id="locationSelect">
-	{% if location.current and location.current.type != 'country' %}
-        <h1>
+	
+    {% if heading %}
+        {% set tag = 'h1' %}
+    {% else %}
+        {% set tag = 'strong' %}
+    {% endif %}
+
+
+    {% if location.current and location.current.type != 'country' %}
+        <{{ tag }}>
             <strong>{{location.current.name}}</strong> 
-        </h1>
+        </{{ tag }}>
         <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
     {% else %}
-        <h1>
+        <{{ tag }}>
             <strong>{{location.name}}</strong> 
-        </h1>
+        </{{ tag }}>
         <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.SelectACity"] }}</a>
     {% endif %}
 </div>

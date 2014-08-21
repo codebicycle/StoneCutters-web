@@ -5,7 +5,7 @@ var _ = require('underscore');
 var querystring = require('querystring');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
-var analytics = require('../../../../../analytics');
+var analytics = require('../../../../../modules/analytics');
 
 module.exports = Base.extend({
     className: 'categories_show_view',
@@ -184,18 +184,21 @@ module.exports = Base.extend({
             var subcategory = buildCategory('#subcategory');
             var img;
             var analyticImg;
+            var analyticInfo;
 
             analytics.reset();
             analytics.setPage('listing');
             analytics.addParam('category', category);
             analytics.addParam('subcategory', subcategory);
 
-            img = $('<img/>');
-            img.addClass('analytics');
-            img.attr('src', analytics.generateURL.call(this));
-            analyticImg = $('.analytics:last');
-            analyticImg.after(img);
-            analyticImg.remove();
+            analyticInfo = analytics.generateURL.call(this);
+            _.each(analyticInfo.urls, function(url) {
+                img = $('<img/>');
+                img.addClass('analytics');
+                img.attr('src', url);
+                analyticImg = $('.analytics:last');
+                analyticImg.after(img);
+            });
 
             done(_items);
         }

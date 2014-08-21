@@ -3,12 +3,12 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var asynquence = require('asynquence');
         var _ = require('underscore');
-        var utils = require('../../shared/utils');
         var path = require('path');
+        var asynquence = require('asynquence');
+        var statsd  = require('../modules/statsd')();
+        var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
-        var graphite = require('../graphite')();
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -110,7 +110,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                graphite.send([location.name, 'middleware', 'languages', 'error'], 1, '+');
+                statsd.increment([location.name, 'middleware', 'languages', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 

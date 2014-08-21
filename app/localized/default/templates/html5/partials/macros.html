@@ -1,7 +1,12 @@
-{% macro Breadcrumb(dictionary, link, title, suffix='') %}
+{% macro Breadcrumb(dictionary, link, title, suffix='', heading=true) %}
     <div class="breadcrumb">
-        <a href="{{link}}">{{dictionary["defaultfooter.Back"]}}</a>
-        <h3>{{title}}</h3>{{suffix}}
+        <a href="{{ link }}">{{ dictionary["defaultfooter.Back"] }}</a>
+        {% if heading %}
+            {% set tag = 'h1' %}
+        {% else %}
+            {% set tag = 'strong' %}
+        {% endif %}
+        {{ (['<', tag, '>', title, '</', tag, '>'] | join) if title }}{{ suffix }}
     </div>
 {% endmacro %}
 

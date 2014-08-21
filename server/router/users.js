@@ -1,12 +1,12 @@
 'use strict';
 
-module.exports = function(app, dataAdapter) {
+module.exports = function userRouter(app, dataAdapter) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
-    var formidable = require('../formidable');
     var querystring = require('querystring');
     var crypto = require('crypto');
     var utils = require('../../shared/utils');
+    var formidable = require('../modules/formidable');
 
     var loginHandler = (function login() {
 
@@ -60,6 +60,9 @@ module.exports = function(app, dataAdapter) {
                 });
             }
 
+            if (typeof password !== 'string') {
+                password = '';
+            }
             asynquence().or(error)
                 .then(getChallenge)
                 .then(getCredentials)

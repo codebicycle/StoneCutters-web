@@ -1,13 +1,18 @@
 'use strict';
 
-module.exports = function itemRouter(app, dataAdapter) {
+module.exports = function pagesRouter(app, dataAdapter) {
     var _ = require('underscore');
     var configServer = require('../config');
-    var configClient = require('../../app/config');
+    var configClient = require('../../shared/config');
     var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
     var http = require('http');
     var https = require('https');
+    var json2html = require('node-json2html');
+    var transform = {
+        tag: 'li',
+        html: '<strong>${key}:</strong> ${value}'
+    };
 
     (function health() {
         app.get('/health', handler);
@@ -90,6 +95,20 @@ module.exports = function itemRouter(app, dataAdapter) {
             res.json({
                 headers: req.headers
             });
+        }
+    })();
+
+    (function statsHeadersHtml() {
+        app.get('/stats/headers.html', handler);
+
+        function handler(req, res) {
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+            res.send('<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /></head><body><ul>' + json2html.transform(Object.keys(req.headers).map(function each(key) {
+                return {
+                    key: key,
+                    value: req.headers[key]
+                };
+            }), transform) + '</ul></body></html>');
         }
     })();
 
