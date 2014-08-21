@@ -77,8 +77,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var language = req.rendrApp.session.get('selectedLanguage');
             var options = defaultRequestOptions(req);
             var params = {
-                // page: req.query.page,
-                page: '/webapp/',
+                page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
@@ -100,8 +99,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var language = req.rendrApp.session.get('selectedLanguage');
             var options = defaultRequestOptions(req);
             var params = {
-                // page: req.query.page,
-                page: '/webapp/',
+                page: req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
