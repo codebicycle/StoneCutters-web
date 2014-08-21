@@ -4,6 +4,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
     var config = require('../../shared/config');
     var configAnalytics = require('../../app/analytics/config');
+    var analytics = require('../../app/analytics');
     var utils = require('../../shared/utils');
     var statsd  = require('../statsd')();
     var Tracker = require('../tracker');
@@ -65,7 +66,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (language) {
                 params.language = language.toLowerCase();
             }
-            options.method = 'post';
             analytic.track(params, options);
         }
 
@@ -77,7 +77,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var language = req.rendrApp.session.get('selectedLanguage');
             var options = defaultRequestOptions(req);
             var params = {
-                page: req.query.page,
+                // page: req.query.page,
+                page: '/webapp/',
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
@@ -88,7 +89,32 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (language) {
                 params.language = language.toLowerCase();
             }
-            options.method = 'post';
+            analytic.track(params, options);
+        }
+
+        function googleTrackingTest(req) {
+            var analytic = new Tracker('googleGA', {
+                id: 'UA-50756825-1',
+                host: req.host
+            });
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var options = defaultRequestOptions(req);
+            var params = {
+                // page: req.query.page,
+                page: '/webapp/',
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
+
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            params.dynamics = {
+                utmcc: analytics.google.getUtmcc(req.rendrApp)
+            };
             analytic.track(params, options);
         }
 
@@ -127,6 +153,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             graphiteTracking(req);
             googleTrackingGA(req, 'UA-5247560-2');
+            googleTrackingTest(req);
             atiTracking(req);
         }
     })();
