@@ -91,7 +91,7 @@ function generatePage(page, options) {
 function getId(siteLocation) {
     var tracker = environment;
 
-    if (tracker == 'production') {
+    if (tracker === 'production') {
         tracker = siteLocation.split('.');
         tracker[0] = 'www';
         tracker = tracker.join('.');
