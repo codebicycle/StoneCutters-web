@@ -3,9 +3,11 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = {
+    device: require('./device'),
     environment: require('./environment'),
     redirections: require('./redirections'),
-    interstitial: require('./interstitial')
+    interstitial: require('./interstitial'),
+    languages: require('./languages')
 };
 
 module.exports = function(controller, exclude) {
