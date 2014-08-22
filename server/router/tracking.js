@@ -69,7 +69,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             analytic.track(params, options);
         }
 
+        var _trackerId;
+
         function googleTrackingGA(req, trackerId) {
+            if (!_trackerId) {
+                _trackerId = trackerId;
+                console.log('[OLX_DEBUG]', env, trackerId);
+            }
             var analytic = new Tracker('googleGA', {
                 id: trackerId,
                 host: req.host
@@ -149,13 +155,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
+            var siteLocation = req.rendrApp.session.get('siteLocation') || req.query.locUrl;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
 
             graphiteTracking(req);
-            googleTrackingGA(req, 'UA-5247560-2');
+            googleTrackingGA(req, analytics.google.getId(siteLocation));
             googleTrackingTest(req);
             atiTracking(req);
         }

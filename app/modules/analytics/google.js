@@ -5,9 +5,10 @@ var helpers = require('../../helpers');
 var configAnalytics = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
+var environment = config.get(['environment', 'type'], 'development');
+var defaultTrackerId = utils.get(configAnalytics, ['google', 'trackers', 'default']);
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
-var googleId;
 
 var analyticsParams = {
     category: {
@@ -87,21 +88,15 @@ function generatePage(page, options) {
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
-function getId() {
-    if (googleId) {
-        return googleId;
-    }
-    var env = config.get(['environment', 'type'], 'development');
+function getId(siteLocation) {
+    var tracker = environment;
 
-    googleId = 'MO-50756825-1';
-    if (env !== 'development') {
-        googleId = utils.get(configAnalytics, ['google', 'id'], googleId);
-
-        if (env !== 'production') {
-            googleId = googleId.replace(/(.+)-2/, '$1-4');
-        }
+    if (tracker === 'production') {
+        tracker = siteLocation.split('.');
+        tracker[0] = 'www';
+        tracker = tracker.join('.');
     }
-    return googleId;
+    return utils.get(configAnalytics, ['google', 'trackers', tracker], defaultTrackerId);
 }
 
 function saveParams(utmcc) {
