@@ -149,13 +149,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
+            var siteLocation = req.rendrApp.session.get('siteLocation') || req.query.locUrl;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
 
             graphiteTracking(req);
-            googleTrackingGA(req, analytics.google.getId(req.rendrApp.session.get('siteLocation')));
+            googleTrackingGA(req, analytics.google.getId(siteLocation));
             googleTrackingTest(req);
             atiTracking(req);
         }
