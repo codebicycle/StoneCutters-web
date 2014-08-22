@@ -47,10 +47,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
         }
 
-        function googleTracking(req, trackerId) {
+        function googleTracking(req, trackerId, host, page) {
             var analytic = new Tracker('googleGA', {
                 id: trackerId,
-                host: req.host
+                host: host || req.host
             });
             var language = req.rendrApp.session.get('selectedLanguage');
             var platform = req.rendrApp.session.get('platform');
@@ -58,7 +58,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
             var options = defaultRequestOptions(req);
             var params = {
-                page: req.query.page,
+                page: page || req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
@@ -105,6 +105,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
             var siteLocation = req.rendrApp.session.get('siteLocation') || req.query.locUrl;
+            var host = req.host;
+            var page = req.query.page;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
@@ -113,6 +115,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             graphiteTracking(req);
             if (~siteLocation.indexOf('.olx.com.ve')) {
                 googleTracking(req, analytics.google.getId(siteLocation));
+            }
+            if (~siteLocation.indexOf('.olx.cl')) {
+                if (req.rendrApp.session.get('internet.org')) {
+                    host = host.replace('olx', 'olx-internet-org');
+                    page = '/internet.org' + page;
+                }
+                googleTracking(req, 'UA-31226936-2', host, page);
             }
             atiTracking(req);
         }
