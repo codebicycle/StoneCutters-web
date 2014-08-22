@@ -2,7 +2,8 @@
 <html dir="rtl">
     {% view 'layout/head' %}
     <body>
-        {% view 'header/bar' %}
+        {% set bar = template + "/layout/bar.html" %}
+        {% include bar %}
         {% view 'header/index' %}
         {{body}}
         {% view 'footer/downloadapp' %}
