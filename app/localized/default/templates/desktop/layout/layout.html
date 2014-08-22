@@ -3,14 +3,13 @@
     {% view 'layout/head' %}
     <body>
         <div id="progressBar"></div>
-        {% view 'header/bar' %}
+        {% set bar = template + "/layout/bar.html" %}
+        {% include bar %}
         <div id="wrapper">
-            
             {% view 'header/index' %}
-            
             <section id="content">
-                {{ body }}            
-            </section>        	
+                {{ body }}
+            </section>
             {% view 'footer/footer' %}
         </div>
         <script>function init() {

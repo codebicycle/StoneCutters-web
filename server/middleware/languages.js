@@ -3,12 +3,12 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var asynquence = require('asynquence');
         var _ = require('underscore');
-        var utils = require('../../shared/utils');
         var path = require('path');
+        var asynquence = require('asynquence');
+        var statsd  = require('../modules/statsd')();
+        var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
-        var statsd  = require('../statsd')();
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {

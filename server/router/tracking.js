@@ -2,11 +2,12 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
+    var statsd  = require('../modules/statsd')();
+    var Tracker = require('../modules/tracker');
     var config = require('../../shared/config');
-    var configAnalytics = require('../../app/analytics/config');
     var utils = require('../../shared/utils');
-    var statsd  = require('../statsd')();
-    var Tracker = require('../tracker');
+    var analytics = require('../../app/modules/analytics');
+    var configAnalytics = require('../../app/modules/analytics/config');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
@@ -65,7 +66,58 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (language) {
                 params.language = language.toLowerCase();
             }
-            options.method = 'post';
+            analytic.track(params, options);
+        }
+
+        function googleTrackingGA(req, trackerId) {
+            var analytic = new Tracker('googleGA', {
+                id: trackerId,
+                host: req.host
+            });
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var options = defaultRequestOptions(req);
+            var params = {
+                page: req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
+
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            analytic.track(params, options);
+        }
+
+        function googleTrackingTest(req) {
+            var analytic = new Tracker('googleGA', {
+                id: 'UA-50756825-1',
+                host: req.host
+            });
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'unknown';
+            var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
+            var options = defaultRequestOptions(req);
+            var params = {
+                page: req.query.page,
+                referer: req.query.referer,
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount')
+            };
+
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            osName = osName.replace(/\s*/g, '').toLowerCase();
+            params.dynamics = {
+                utmcc: analytics.google.getUtmcc(req.rendrApp),
+                utme: ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('')
+            };
             analytic.track(params, options);
         }
 
@@ -103,13 +155,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req);
-            googleTracking(req, 'UA-5247560-2', '/webapp/');
-             if (!_.contains(['www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe'], req.query.locUrl)) {
-                googleTracking(req, 'UA-31226936-4');
-            }
-             if (_.contains(['www.olx.cl'], req.query.locUrl)) {
-                googleTracking(req, 'UA-31226936-2');
-            }
+            googleTrackingGA(req, 'UA-5247560-2');
+            googleTrackingTest(req);
             atiTracking(req);
         }
     })();

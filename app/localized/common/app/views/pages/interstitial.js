@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../bases/view');
 var helpers = require('../../../../../helpers');
-var analytics = require('../../../../../analytics');
+var analytics = require('../../../../../modules/analytics');
 
 module.exports = Base.extend({
     className: 'pages_intertitial_view',

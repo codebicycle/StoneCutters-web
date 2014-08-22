@@ -10,7 +10,7 @@ var isServer = utils.isServer;
 
 if (isServer) {
     var rGraphite = /\./g;
-    var statsdName = '../../server/statsd';
+    var statsdName = '../../server/modules/statsd';
     var statsd = require(statsdName)();
     var restlerName = 'restler';
     var restler = require(restlerName);

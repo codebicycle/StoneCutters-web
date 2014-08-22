@@ -23,12 +23,12 @@ config/runtime.json
 *.swo
 conf.json
 build.json
-test/output
-test/coverage.html
-test/unit/coverage.html
 newrelic_agent.log
 mobile-webapp-static-*
 mobile-webapp-dynamic-*
 dist
+
+test/unit/coverage.html
+tests/coverage.html
 
 public/images/*/icons

@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = function(app, dataAdapter) {
+    var fs = require('fs');
     var asynquence = require('asynquence');
-    var formidable = require('../formidable');
     var querystring = require('querystring');
     var utils = require('../../shared/utils');
-    var fs = require('fs');
-    var statsd  = require('../statsd')();
+    var formidable = require('../modules/formidable');
+    var statsd  = require('../modules/statsd')();
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);

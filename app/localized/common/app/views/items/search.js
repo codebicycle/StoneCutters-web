@@ -5,7 +5,7 @@ var _ = require('underscore');
 var querystring = require('querystring');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
-var analytics = require('../../../../../analytics');
+var analytics = require('../../../../../modules/analytics');
 
 module.exports = Base.extend({
     className: 'items_search_view',
