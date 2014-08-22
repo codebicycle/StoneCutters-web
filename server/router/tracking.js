@@ -47,59 +47,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
         }
 
-        function googleTracking(req, trackerId, page) {
-            var analytic = new Tracker('google', {
-                id: trackerId,
-                host: req.host
-            });
-            var language = req.rendrApp.session.get('selectedLanguage');
-            var options = defaultRequestOptions(req);
-            var params = {
-                page: page || req.query.page,
-                referer: req.query.referer,
-                ip: req.rendrApp.session.get('ip'),
-                clientId: req.rendrApp.session.get('clientId'),
-                userAgent: options.headers['User-Agent'],
-                hitCount: req.rendrApp.session.get('hitCount')
-            };
-
-            if (language) {
-                params.language = language.toLowerCase();
-            }
-            analytic.track(params, options);
-        }
-
-        var _trackerId;
-
-        function googleTrackingGA(req, trackerId) {
-            if (!_trackerId) {
-                _trackerId = trackerId;
-                console.log('[OLX_DEBUG]', env, trackerId);
-            }
+        function googleTracking(req, trackerId) {
             var analytic = new Tracker('googleGA', {
                 id: trackerId,
-                host: req.host
-            });
-            var language = req.rendrApp.session.get('selectedLanguage');
-            var options = defaultRequestOptions(req);
-            var params = {
-                page: req.query.page,
-                referer: req.query.referer,
-                ip: req.rendrApp.session.get('ip'),
-                clientId: req.rendrApp.session.get('clientId'),
-                userAgent: options.headers['User-Agent'],
-                hitCount: req.rendrApp.session.get('hitCount')
-            };
-
-            if (language) {
-                params.language = language.toLowerCase();
-            }
-            analytic.track(params, options);
-        }
-
-        function googleTrackingTest(req) {
-            var analytic = new Tracker('googleGA', {
-                id: 'UA-50756825-1',
                 host: req.host
             });
             var language = req.rendrApp.session.get('selectedLanguage');
@@ -162,8 +112,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.end(gif);
 
             graphiteTracking(req);
-            googleTrackingGA(req, analytics.google.getId(siteLocation));
-            googleTrackingTest(req);
+            if (~siteLocation.indexOf('.olx.com.ve')) {
+                googleTracking(req, analytics.google.getId(siteLocation));
+            }
             atiTracking(req);
         }
     })();
