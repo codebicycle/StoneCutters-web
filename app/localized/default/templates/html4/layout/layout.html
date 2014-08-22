@@ -2,6 +2,8 @@
 <html>
     {% view 'layout/head' %}
     <body>
+        {% set googleTagManager = template + "/google/tagmanager.html" %}
+        {% include googleTagManager %}
         {% set bar = template + "/layout/bar.html" %}
         {% include bar %}
         {% view 'header/index' %}
