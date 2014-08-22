@@ -69,7 +69,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             analytic.track(params, options);
         }
 
+        var _trackerId;
+
         function googleTrackingGA(req, trackerId) {
+            if (!_trackerId) {
+                _trackerId = trackerId;
+                console.log('[OLX_DEBUG]', env, trackerId);
+            }
             var analytic = new Tracker('googleGA', {
                 id: trackerId,
                 host: req.host
