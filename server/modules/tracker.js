@@ -116,16 +116,24 @@ Tracker.types = {
         var url = 'http://www.google-analytics.com/__utm.gif';
         var utmvid = '0x' + crypto.createHash('md5').update(options.clientId).digest('hex').substr(0, 16);
         var params = {
-            utmwv: '4.4sh',
-            utmn: Math.round(Math.random() * 1000000),
+            utmwv: '5.5.4',
+            utms: options.hitCount,
             utmhn: _.rest(options.host.split('.')).join('.'),
+            utmn: Math.round(Math.random() * 1000000),
             utmr: options.referer,
             utmp: options.page,
             utmac: options.id,
-            utmcc: '__utma%3D999.999.999.999.999.1%3B',
+            utmcc: (options.visitor || '__utma%3D999.999.999.999.999.1%3B'),
             utmvid: utmvid,
             utmip: options.ip
         };
+
+        if (options.custom) {
+            params.utme = options.custom;
+        }
+        if (options.language) {
+            params.utmul = options.language;
+        }
 
         params = dynamics(params, options.dynamics);
         return {

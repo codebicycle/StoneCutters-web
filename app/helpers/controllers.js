@@ -1,13 +1,11 @@
 'use strict';
 
-var asynquence = require('asynquence');
 var _ = require('underscore');
 var URLParser = require('url');
+var asynquence = require('asynquence');
 var seo = require('../modules/seo');
 var common = require('./common');
-var marketing = require('./marketing');
 var config = require('../../shared/config');
-var utils = require('../../shared/utils');
 var intertitial = config.get(['interstitial', 'enabled'], false);
 var isServer = typeof window === 'undefined';
 
@@ -30,42 +28,6 @@ function setReferer(done) {
             referer: this.app.session.get('referer')
         });
     }
-    done();
-}
-
-function setLanguage(params, done) {
-    if (isServer) {
-        return done();
-    }
-    var selectedLanguage = this.app.session.get('selectedLanguage');
-    var languages = this.app.session.get('languages');
-    var language = (params ? params.language : undefined);
-    var redirect;
-    var url;
-
-    if (selectedLanguage === languages.models[0].locale && language) {
-        redirect = true;
-    }
-    else if (selectedLanguage !== languages.models[0].locale && !language) {
-        redirect = true;
-    }
-    else if (language && language !== selectedLanguage) {
-        redirect = true;
-    }
-    if (redirect) {
-        done.abort();
-        url = URLParser.parse(this.app.session.get('url'));
-        url = [url.pathname, (url.search || '')].join('');
-        return common.redirect.call(this.app.router || this, url, null, {
-            status: 200
-        });
-    }
-    if (!params || !language || selectedLanguage === language || !languages._byId[language]) {
-        return done();
-    }
-    this.app.session.persist({
-        selectedLanguage: language
-    });
     done();
 }
 
@@ -220,7 +182,6 @@ module.exports = {
             .then(clearSession.bind(this))
             .then(setCurrentRoute.bind(this))
             .then(setReferer.bind(this))
-            .then(setLanguage.bind(this, params))
             .then(setLocation.bind(this, params))
             .val(success.bind(this));
 

@@ -63,17 +63,16 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
                 userAgent: options.headers['User-Agent'],
-                hitCount: req.rendrApp.session.get('hitCount')
+                hitCount: req.rendrApp.session.get('hitCount'),
+                visitor: analytics.google.getUtmcc(req.rendrApp)
             };
 
             if (language) {
                 params.language = language.toLowerCase();
             }
             osName = osName.replace(/\s*/g, '').toLowerCase();
-            params.dynamics = {
-                utmcc: analytics.google.getUtmcc(req.rendrApp),
-                utme: ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('')
-            };
+            params.custom = ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('');
+
             analytic.track(params, options);
         }
 
