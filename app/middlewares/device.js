@@ -29,7 +29,7 @@ function findDevice(next) {
             console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + this.app.session.get('host'));
             done.fail(new Error());
         }
-        done(response, device);
+        done(device);
     }.bind(this);
 
     var success = function(done, device) {
