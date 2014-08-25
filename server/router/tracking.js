@@ -105,7 +105,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
             var location = req.rendrApp.session.get('siteLocation');
-            var siteLocation = siteLocation || req.query.locUrl;
+            var siteLocation = location || req.query.locUrl;
             var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
             var osName = req.rendrApp.session.get('osName');
             var osVersion = req.rendrApp.session.get('osVersion');
