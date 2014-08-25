@@ -6,8 +6,7 @@ var middlewares = {
     device: require('./device'),
     environment: require('./environment'),
     redirections: require('./redirections'),
-    interstitial: require('./interstitial'),
-    languages: require('./languages')
+    interstitial: require('./interstitial')
 };
 
 module.exports = function(controller, exclude) {

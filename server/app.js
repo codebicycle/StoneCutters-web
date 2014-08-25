@@ -35,6 +35,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.session());
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.location());
+        rendrApp.use(middleware.languages());
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.internetOrg());
     }
