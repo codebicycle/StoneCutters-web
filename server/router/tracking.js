@@ -104,7 +104,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
-            var siteLocation = req.rendrApp.session.get('siteLocation') || req.query.locUrl;
+            var location = req.rendrApp.session.get('siteLocation');
+            var siteLocation = siteLocation || req.query.locUrl;
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
+            var osName = req.rendrApp.session.get('osName');
+            var osVersion = req.rendrApp.session.get('osVersion');
+            var userAgent = req.get('user-agent');
             var host = req.host;
             var page = req.query.page;
 
@@ -112,11 +117,26 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.set('Content-Length', gif.length);
             res.end(gif);
 
-            if (!siteLocation) {
-                return console.log('[OLX_DEBUG]', 'no session', '|', req.get('user-agent'), '|', req.originalUrl);
+            if (!location) {
+                if (!siteLocation) {
+                    return console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl);
+                }
+                console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
             }
             graphiteTracking(req);
             if (~siteLocation.indexOf('.olx.com.ve')) {
+                if (/googlebot/i.test(userAgent)) {
+                    return console.log('[OLX_DEBUG]', 'google bot', '|', userAgent, '|', req.originalUrl);
+                }
+                osName = osName !== 'Others' ? osName.toLowerCase() : 'unknown';
+                if ((osName === 'unknown' && osVersion === 'unknown') ||
+                    (platform === 'wap' && osName === 'others' && osVersion === 'unknown') ||
+                    (platform === 'wap' && osName === 'ios' && osVersion == 4) ||
+                    (platform === 'wap' && osName === 'samsungproprietary') ||
+                    (platform === 'wap' && osName === 'bada') ||
+                    (platform === 'html4' && osName === 'nokiaos' && (osVersion === 0 || osVersion === '0'))) {
+                    return console.log('[OLX_DEBUG]', 'bot', platform, osName, osVersion, '|', userAgent, '|', req.originalUrl);
+                }
                 googleTracking(req, analytics.google.getId(siteLocation));
             }
             if (~siteLocation.indexOf('.olx.cl')) {
