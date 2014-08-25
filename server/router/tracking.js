@@ -104,16 +104,29 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
-            var siteLocation = req.rendrApp.session.get('siteLocation') || req.query.locUrl;
+            var location = req.rendrApp.session.get('siteLocation');
+            var siteLocation = location || req.query.locUrl;
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
+            var osName = req.rendrApp.session.get('osName');
+            var osVersion = req.rendrApp.session.get('osVersion');
+            var userAgent = req.get('user-agent');
             var host = req.host;
             var page = req.query.page;
+            var bot;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
 
-            if (!siteLocation) {
-                return console.log('[OLX_DEBUG]', 'no session', '|', req.get('user-agent'), '|', req.originalUrl);
+            if (!location) {
+                if (!siteLocation) {
+                    return console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl);
+                }
+                return console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
+            }
+            bot = isBot(userAgent, platform, osName, osVersion);
+            if (bot) {
+                return statsd.increment([req.query.locNm, 'bot', bot, platform]);
             }
             graphiteTracking(req);
             if (~siteLocation.indexOf('.olx.com.ve')) {
@@ -216,4 +229,48 @@ module.exports = function trackingRouter(app, dataAdapter) {
             });
         }
     })();
+
+    function isBot(userAgent, platform, osName, osVersion) {
+        if (/googlebot/i.test(userAgent)) {
+            return 'google';
+        }
+        osName = osName && osName !== 'Others' ? osName.toLowerCase() : 'unknown';
+        osVersion = osVersion ? String(osVersion).toLowerCase() : 'unknown';
+        return isBotPlatform(platform, osName, osVersion);
+    }
+
+    function isBotPlatform(platform, osName, osVersion) {
+        switch (platform) {
+            case 'wap':
+                return isBotWap(osName);
+            case 'html4':
+                return isBotHtml4(osName);
+            default:
+                return osName === 'unknown' && osVersion === 'unknown' ? 'others' : false;
+        }
+    }
+
+    function isBotWap(osName, osVersion) {
+        switch (osName) {
+            case 'others':
+                return osVersion === 'unknown' ? 'others' : false;
+            case 'ios':
+                return osVersion === '4' ? 'others' : false;
+            case 'samsungproprietary':
+            case 'bada':
+                return 'others';
+            default:
+                return false;
+        }
+    }
+
+    function isBotHtml4(osName, osVersion) {
+        switch (osName) {
+            case 'nokiaos':
+                return osVersion === '0' ? 'others' : false;
+            default:
+                return false;
+        }
+    }
+
 };
