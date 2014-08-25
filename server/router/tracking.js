@@ -112,6 +112,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
             res.set('Content-Length', gif.length);
             res.end(gif);
 
+            if (!siteLocation) {
+                return console.log('[OLX_DEBUG]', 'no session', '|', req.get('user-agent'), '|', req.originalUrl);
+            }
             graphiteTracking(req);
             if (~siteLocation.indexOf('.olx.com.ve')) {
                 googleTracking(req, analytics.google.getId(siteLocation));
