@@ -13,7 +13,7 @@ module.exports = function(params, next) {
     var languages;
     var language;
     var url;
-    
+
     if (!this.app.session.get('isServer')) {
         selectedLanguage = this.app.session.get('selectedLanguage');
         languages = this.app.session.get('languages');
@@ -41,7 +41,7 @@ module.exports = function(params, next) {
 
 function checkRedirection(languages, language) {
     var selectedLanguage = this.app.session.get('selectedLanguage');
-    
+
     if (selectedLanguage === languages.models[0].locale && language) {
         return true;
     }
