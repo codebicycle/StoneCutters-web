@@ -121,7 +121,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 if (!siteLocation) {
                     return console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl);
                 }
-                console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
+                return console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
             }
             graphiteTracking(req);
             if (~siteLocation.indexOf('.olx.com.ve')) {
