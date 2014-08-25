@@ -87,7 +87,7 @@ Tracker.types = {
             tid: options.id,
             cid: options.clientId,
             t: 'pageview',
-            dh: _.rest(options.host.split('.')).join('.'),
+            dh: options.host,
             dp: options.page,
             dr: options.referer,
             ul: options.language
