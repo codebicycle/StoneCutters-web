@@ -124,7 +124,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 return console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
             }
-            bot = isBot(userAgent, userAgent, platform, osName, osVersion);
+            bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
                 return statsd.increment([req.query.locNm, 'bot', bot, platform]);
             }
