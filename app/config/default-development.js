@@ -22,7 +22,7 @@ module.exports = {
         wap: ['www.olx.de', 'www.olx.fr', 'www.olx.es'],
         html4: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
         html5: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
-        desktop: []
+        desktop: ['www.olx.com.br']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk'],
