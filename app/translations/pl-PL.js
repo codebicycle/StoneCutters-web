@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edytuj moje og\u0142oszenie',
-    'unexistingitem.ListingUnavailable': 'Og\u0142oszenie niedost\u0119pne ',
     'landingbody.EmailAddress': 'Adres e-mail',
     'lostform.Username': 'Nazwa U\u017Cytkownika',
     'registrationconfirmsuccesstext.Browse': 'Przejrzyj kategorie <<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Wy\u015Blij',
     'contactseller_form.AttachPicture': 'Do\u0142\u0105cz Zdj\u0119cie',
     'contactseller_form.ReplyToListing': 'Odpowiedz na og\u0142oszenie',
+    'contactseller_form.ViewFullSite': 'Zobacz pe\u0142ny serwis',
     'register_form.245': 'Rejestracja nowego u\u017Cytkownika',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Oczekuje na zatwierdzenie',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Zobaczysz je w serwisie OLX w ci\u0105gu 2 godzin',
     'misc.Sell_Post_Mobile_India': 'Publikuj',
     'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)',
-    'misc.YouAreIn_Mob': 'Jeste\u015B w miejscu: <<LOCATION>>',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'mo\u017Cna teraz znale\u017A\u0107 w kategorii:'
 };

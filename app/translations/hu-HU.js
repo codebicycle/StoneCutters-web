@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'N\xE9vtelen',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'A hirdet\xE9sem szerkeszt\xE9se',
-    'unexistingitem.ListingUnavailable': 'A hirdet\xE9s m\xE1r nem el\xE9rhet\u0151',
     'landingbody.EmailAddress': 'E-mail c\xEDm',
     'lostform.Username': 'Felhaszn\xE1l\xF3i n\xE9v',
     'registrationconfirmsuccesstext.Browse': '<<BRAND>> kateg\xF3ri\xE1k b\xF6ng\xE9sz\xE9se',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'K\xFCld\xE9s',
     'contactseller_form.AttachPicture': 'K\xE9p csatol\xE1sa:',
     'contactseller_form.ReplyToListing': 'V\xE1lasz a hirdet\xE9sre',
+    'contactseller_form.ViewFullSite': 'Teljes honlap megtekint\xE9se',
     'register_form.245': '\xDAj felhaszn\xE1l\xF3 regisztr\xE1l\xE1sa',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'A j\xF3v\xE1hagy\xE1s folyamatban van',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'K\xE9t \xF3ra m\xFAlva megjelenik az OLX-en',
     'misc.Sell_Post_Mobile_India': 'Elk\xFCld',
     'misc.SpecificFields_title': 'Kateg\xF3riaf\xFCgg\u0151 mez\u0151k (V\xE1laszthat\xF3k)',
-    'misc.YouAreIn_Mob': 'Tart\xF3zkod\xE1si helye: <<LOCATION>>',
     'business_directory.Map': 'T\xE9rk\xE9p',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'kateg\xF3ria:'
 };

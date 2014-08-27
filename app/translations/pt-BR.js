@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'An\xF4nimo',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
-    'unexistingitem.ListingUnavailable': 'Este an\xFAncio n\xE3o est\xE1 mais dispon\xEDvel',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
     'lostform.Username': 'Nome de usu\xE1rio',
     'registrationconfirmsuccesstext.Browse': 'Pesquisar as categorias do <<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Enviar',
     'contactseller_form.AttachPicture': 'Anexar uma foto:',
     'contactseller_form.ReplyToListing': 'Enviar um e-mail',
+    'contactseller_form.ViewFullSite': 'Visualizar site completo',
     'register_form.245': 'Novo Registro de Utilizador',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Pendente de aprova\xE7\xE3o',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Seu an\xFAncio estar\xE1 no ar dentro de 2 horas.',
     'misc.Sell_Post_Mobile_India': 'Publicar',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
-    'misc.YouAreIn_Mob': 'Voc\xEA est\xE1 em <<LOCATION>>',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Ambiente Laboral',
     'crm_new_version.RenameCategory_3': 'em'
 };

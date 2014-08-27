@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editarea anun\u0163ului meu',
-    'unexistingitem.ListingUnavailable': 'Listarea nu mai ste disponibil\u0103',
     'landingbody.EmailAddress': 'Adresa de email',
     'lostform.Username': 'Nume de utilizator',
     'registrationconfirmsuccesstext.Browse': 'Caut\u0103 \xEEn categoriile <<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Trimite',
     'contactseller_form.AttachPicture': 'Ata\u015Fa\u0163i o imagine:',
     'contactseller_form.ReplyToListing': 'R\u0103spunde la Listare',
+    'contactseller_form.ViewFullSite': 'Vizualizare site complet',
     'register_form.245': '\xCEnregistrarea Noului Utilizator',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': '\xCEn a\u015Fteptarea aprob\u0103rii',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': '\xCEl ve\u0163i vedea pe OLX \xEEn urm\u0103toarele 2 ore',
     'misc.Sell_Post_Mobile_India': 'Publicare',
     'misc.SpecificFields_title': 'C\xE2mpuri specifice categorie (Op\u0163ionale)',
-    'misc.YouAreIn_Mob': 'V\u0103 afla\u0163i la <<LOCATION>>',
     'business_directory.Map': 'Hart\u0103',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\xEEn'
 };

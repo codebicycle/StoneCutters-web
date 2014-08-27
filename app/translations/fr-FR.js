@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonyme',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Modifier mon annonce',
-    'unexistingitem.ListingUnavailable': 'Cette annonce n\'est plus disponible',
     'landingbody.EmailAddress': 'Email',
     'lostform.Username': 'Nom d\'Utilisateur',
     'registrationconfirmsuccesstext.Browse': 'Naviguer les cat\xE9gories d\'<<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Envoyer ma question',
     'contactseller_form.AttachPicture': 'Ajouter une photo :',
     'contactseller_form.ReplyToListing': 'R\xE9pondre \xE0 l\'annonce',
+    'contactseller_form.ViewFullSite': 'Voir le site complet',
     'register_form.245': 'Enregistrement d\'un nouvel utilisateur',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Approbation en cours',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Vous la verrez sur OLX dans les 2 prochaines heures',
     'misc.Sell_Post_Mobile_India': 'Publier',
     'misc.SpecificFields_title': 'Champs de Cat\xE9gorie Sp\xE9cifiques (Facultatif)',
-    'misc.YouAreIn_Mob': 'Vous \xEAtes \xE0 <<LOCATION>>',
     'business_directory.Map': 'Carte',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'dans'
 };

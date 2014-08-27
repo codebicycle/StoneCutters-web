@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anoniminis',
     'messages_site_class.30': 'Gerai',
     'messages_user_management_current_ads.EditMyListing': 'Redaguoti mano skelbim\u0105',
-    'unexistingitem.ListingUnavailable': '\u0160io skelbimo daugiau neb\u0117ra',
     'landingbody.EmailAddress': 'El. pa\u0161to adresas',
     'lostform.Username': 'Vartotojo vardas',
     'registrationconfirmsuccesstext.Browse': 'Nar\u0161ykite <<BRAND>> kategorijas',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Si\u0173sti',
     'contactseller_form.AttachPicture': 'Prisegti nuotrauk\u0105:',
     'contactseller_form.ReplyToListing': 'Atsakyti \u012F skelbim\u0105',
+    'contactseller_form.ViewFullSite': 'Rodyti visavert\u0119 tinklaviet\u0117s versij\u0105',
     'register_form.245': 'Naujo vartotojo registracija',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Laukiama patvirtinimo',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Pamatysite j\u012F OLX tinklaviet\u0117je per artimiausias 2 valandas',
     'misc.Sell_Post_Mobile_India': 'Skelbti',
     'misc.SpecificFields_title': 'Special\u016Bs kategorij\u0173 laukai (papildomi)',
-    'misc.YouAreIn_Mob': 'J\u016Bs esate <<LOCATION>>',
     'business_directory.Map': '\u017Dem\u0117lapis',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'patalpint\u0105'
 };

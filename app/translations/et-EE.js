@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anon\xFC\xFCmne',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Muutke "Minu kuulutust"',
-    'unexistingitem.ListingUnavailable': 'See kuulutus ei ole enam k\xE4ttesaadav',
     'landingbody.EmailAddress': 'E-posti aadress',
     'lostform.Username': 'Kasutajanimi',
     'registrationconfirmsuccesstext.Browse': 'Lehitsege <<BRAND>>i kategooriaid',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Saada',
     'contactseller_form.AttachPicture': 'Manustage pilt:',
     'contactseller_form.ReplyToListing': 'Vastake kuulutusele',
+    'contactseller_form.ViewFullSite': 'Vaata kogu saiti',
     'register_form.245': 'Uue kasutajana registreerumine',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Kinnitamine ootel',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'J\xE4rgmise 2 tunni jooksul ilmub see OLXis n\xE4htavale',
     'misc.Sell_Post_Mobile_India': 'Postita',
     'misc.SpecificFields_title': 'Kategooriatele vastavad v\xE4ljad (valikulised)',
-    'misc.YouAreIn_Mob': 'Olete asukohas <<LOCATION>>',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'asukohast'
 };

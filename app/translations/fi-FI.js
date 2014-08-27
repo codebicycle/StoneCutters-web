@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Nimet\xF6n',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Muokkaa omaa ilmoitusta',
-    'unexistingitem.ListingUnavailable': 'Ilmoitus ei ole en\xE4\xE4 n\xE4ht\xE4viss\xE4',
     'landingbody.EmailAddress': 'S\xE4hk\xF6postiosoite',
     'lostform.Username': 'K\xE4ytt\xE4j\xE4tunnus',
     'registrationconfirmsuccesstext.Browse': 'Selaa <<BRAND>>:n kategorioita',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'L\xE4het\xE4',
     'contactseller_form.AttachPicture': 'Liit\xE4 kuva:',
     'contactseller_form.ReplyToListing': 'Vastaa ilmoitukseen',
+    'contactseller_form.ViewFullSite': 'N\xE4yt\xE4 koko sivusto',
     'register_form.245': 'Uuden k\xE4ytt\xE4j\xE4n rekister\xF6inti',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Hyv\xE4ksynn\xE4ss\xE4',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'N\xE4et sen OLX:n sivustolla 2 tunnin sis\xE4ll\xE4',
     'misc.Sell_Post_Mobile_India': 'Julkaise',
     'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)',
-    'misc.YouAreIn_Mob': 'Olet kohteessa <<LOCATION>>',
     'business_directory.Map': 'Kartta',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'kohdassa'
 };

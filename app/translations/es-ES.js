@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'An\xF3nimo',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar mi listado',
-    'unexistingitem.ListingUnavailable': 'El anuncio ya no est\xE1 disponible',
     'landingbody.EmailAddress': 'Direcci\xF3n de Email',
     'lostform.Username': 'Nombre de Usuario',
     'registrationconfirmsuccesstext.Browse': 'Buscar las categor\xEDas de <<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Enviar Consulta',
     'contactseller_form.AttachPicture': 'Adjuntar Imagen:',
     'contactseller_form.ReplyToListing': 'Contactar al Anunciante',
+    'contactseller_form.ViewFullSite': 'View full site',
     'register_form.245': 'Registro de Usuario Nuevo',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Pendiente de aprobaci\xF3n',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Podr\xE1s verlo en OLX en las pr\xF3ximas 2 horas',
     'misc.Sell_Post_Mobile_India': 'Publicar',
     'misc.SpecificFields_title': 'Campos espec\xEDficos de categor\xEDa (opcionales)',
-    'misc.YouAreIn_Mob': 'Est\xE1s en <<LOCATION>>',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Localizaci\xF3n',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'en'
 };

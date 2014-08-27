@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': '\u1EA8n danh',
     'messages_site_class.30': '\u0110\u1ED3ng \xFD',
     'messages_user_management_current_ads.EditMyListing': 'Ch\u1EC9nh s\u1EEDa rao v\u1EB7t',
-    'unexistingitem.ListingUnavailable': 'Danh m\u1EE5c n\xE0y kh\xF4ng c\xF2n n\u1EEFa. ',
     'landingbody.EmailAddress': '\u0110\u1ECBa ch\u1EC9 email',
     'lostform.Username': 'T\xEAn truy nh\u1EADp',
     'registrationconfirmsuccesstext.Browse': 'Duy\u1EC7t c\xE1c h\u1EA1ng m\u1EE5c c\u1EE7a <<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'G\u1EEDi',
     'contactseller_form.AttachPicture': '\u0110\xEDnh k\xE8m \u1EA3nh:',
     'contactseller_form.ReplyToListing': 'Tr\u1EA3 l\u1EDDi danh m\u1EE5c n\xE0y',
+    'contactseller_form.ViewFullSite': 'Xem trang \u0111\u1EA7y \u0111\u1EE7',
     'register_form.245': '\u0110\u0103ng k\xFD th\xE0nh vi\xEAn m\u1EDBi',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Ch\u1EDD ph\xEA duy\u1EC7t',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'B\u1EA1n s\u1EBD th\u1EA5y n\xF3 tr\xEAn OLX trong v\xF2ng 2 gi\u1EDD \u0111\u1ED3ng h\u1ED3 n\u1EEFa',
     'misc.Sell_Post_Mobile_India': '\u0110\u0103ng',
     'misc.SpecificFields_title': 'C\xE1c tr\u01B0\u1EDDng c\u1EE5 th\u1EC3 c\u1EE7a Nh\xF3m h\xE0ng (c\xE1c t\xF9y ch\u1ECDn)',
-    'misc.YouAreIn_Mob': 'B\u1EA1n \u0111ang \u1EDF <<LOCATION>>',
     'business_directory.Map': 'B\u1EA3n \u0111\u1ED3',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\u1EDF trong'
 };

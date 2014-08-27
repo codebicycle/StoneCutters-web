@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Tanpa nama',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
-    'unexistingitem.ListingUnavailable': 'Iklan ini sudah tiada lagi',
     'landingbody.EmailAddress': 'Alamat Emel ',
     'lostform.Username': 'Nama pengguna',
     'registrationconfirmsuccesstext.Browse': 'Semak lewa kategori <<BRAND>> ',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Kirim',
     'contactseller_form.AttachPicture': 'Lampirkan Gambar:',
     'contactseller_form.ReplyToListing': 'Jawab Penyenaraian',
+    'contactseller_form.ViewFullSite': 'Lihat laman penuh',
     'register_form.245': 'Pendaftaran Pengguna Baru',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Menunggu kelulusan',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Anda akan dapat melihatnya di OLX dalam masa 2 jam yang akan datang',
     'misc.Sell_Post_Mobile_India': 'Siar',
     'misc.SpecificFields_title': 'Medan Spesifik Kategori (Opsyenal)',
-    'misc.YouAreIn_Mob': 'Anda berada di <<LOCATION>>',
     'business_directory.Map': 'Peta',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'dalam'
 };

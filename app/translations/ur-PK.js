@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': '\u06AF\u0645\u0646\u0627\u0645',
     'messages_site_class.30': '\u0679\u06BE\u06CC\u06A9 \u06C1\u06D2',
     'messages_user_management_current_ads.EditMyListing': '\u0627\u067E\u0646\u06CC \u0644\u0633\u0679\u0646\u06AF \u0645\u06CC\u06BA \u0631\u062F\u0648\u0628\u062F\u0644:',
-    'unexistingitem.ListingUnavailable': '\u06CC\u06C1 \u0627\u0634\u062A\u06C1\u0627\u0631 \u0627\u0628 \u0645\u0632\u06CC\u062F \u062F\u0633\u062A\u06CC\u0627\u0628 \u0646\u06C1\u06CC\u06BA \u06C1\u06D2',
     'landingbody.EmailAddress': '\u0627\u06CC \u0645\u06CC\u0644 \u067E\u062A\u06C1',
     'lostform.Username': '\u06CC\u0648\u0632\u0631\u0646\u06CC\u0645',
     'registrationconfirmsuccesstext.Browse': '<<BRAND>> \u06A9\u06D2 \u0632\u0645\u0631\u06D2 \u0628\u0631\u0627\u0624\u0632 \u06A9\u0631\u06CC\u06BA ',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': '\u0628\u06BE\u06CC\u062C \u062F\u06CC\u06BA',
     'contactseller_form.AttachPicture': '\u062A\u0635\u0648\u06CC\u0631 \u0645\u0646\u0633\u0644\u06A9 \u06A9\u0631\u06CC\u06BA:',
     'contactseller_form.ReplyToListing': '\u0641\u06C1\u0631\u0633\u062A \u06A9\u0627 \u062C\u0648\u0627\u0628 \u062F\u06CC\u06BA',
+    'contactseller_form.ViewFullSite': '\u0645\u06A9\u0645\u0644 \u0633\u0627\u0626\u0679 \u062F\u06CC\u06A9\u06BE\u06CC\u06BA',
     'register_form.245': '\u0646\u0626\u06D2 \u0635\u0627\u0631\u0641 \u06A9\u06CC \u0631\u062C\u0633\u0679\u0631\u06CC\u0634\u0646',
     'itempagepostcomment.Sms': '\u0627\u06CC\u0633 \u0627\u06CC\u0645 \u0627\u06CC\u0633',
     'myolx.ApprovalPending': '\u0645\u0646\u0638\u0648\u0631\u06CC \u0632\u06CC\u0631 \u063A\u0648\u0631 \u06C1\u06D2',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': '\u0622\u067E \u0627\u0633\u06D2 \u0627\u06AF\u0644\u06D2 2 \u06AF\u06BE\u0646\u0679\u0648\u06BA \u06A9\u06D2 \u0627\u0646\u062F\u0631 OLX \u067E\u0631 \u062F\u06CC\u06A9\u06BE\u06CC\u06BA \u06AF\u06D2',
     'misc.Sell_Post_Mobile_India': '\u0641\u0631\u0648\u062E\u062A \u06A9\u0631\u06CC\u06BA',
     'misc.SpecificFields_title': '\u06A9\u06CC\u0679\u06AF\u0631\u06CC \u0645\u0631\u06A9\u0632\u06CC \u062E\u0627\u0646\u06D2 (\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC)',
-    'misc.YouAreIn_Mob': '\u0622\u067E <<LOCATION>> \u0645\u06CC\u06BA \u06C1\u06CC\u06BA',
     'business_directory.Map': '\u0646\u0642\u0634\u06C1',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\u0645\u06CC\u06BA'
 };

@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': '\u0627\u0644\u0645\u062C\u0647\u0648\u0644\u0647',
     'messages_site_class.30': '\u0646\u0639\u0645',
     'messages_user_management_current_ads.EditMyListing': '\u0645\u0639\u0627\u0644\u062C\u0629 \u0623\u0639\u0644\u0627\u0646\u064A',
-    'unexistingitem.ListingUnavailable': '\u0627\u0639\u0644\u0627\u0646 \u0644\u064A\u0633 \u062C\u0627\u0647\u0632 ',
     'landingbody.EmailAddress': ' Email \u0639\u0646\u0648\u0627\u0646 ',
     'lostform.Username': '\u0623\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645',
     'registrationconfirmsuccesstext.Browse': ' <<BRAND>> \u0645\u0644\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u062A\u0628\u0627\u062A \u0645\u0646',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': '\u0623\u0631\u0633\u0627\u0644 \u0633\u0624\u0627\u0644',
     'contactseller_form.AttachPicture': 'Attach a Picture:',
     'contactseller_form.ReplyToListing': '\u0623\u062C\u0627\u0628\u0629 \u0627\u0644\u0623\u0639\u0644\u0627\u0646',
+    'contactseller_form.ViewFullSite': 'View full site',
     'register_form.245': '\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645 ',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Approval pending',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
     'misc.Sell_Post_Mobile_India': 'Sell',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
-    'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',
     'business_directory.Map': 'Map',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'in'
 };

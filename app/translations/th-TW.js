@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': '\u0E19\u0E34\u0E23\u0E19\u0E32\u0E21',
     'messages_site_class.30': '\u0E15\u0E01\u0E25\u0E07',
     'messages_user_management_current_ads.EditMyListing': '\u0E41\u0E01\u0E49\u0E44\u0E02\u0E42\u0E06\u0E29\u0E13\u0E32\u0E02\u0E2D\u0E07\u0E09\u0E31\u0E19',
-    'unexistingitem.ListingUnavailable': '\u0E44\u0E21\u0E48\u0E21\u0E35\u0E42\u0E06\u0E29\u0E13\u0E32\u0E19\u0E35\u0E49',
     'landingbody.EmailAddress': '\u0E2D\u0E35\u0E40\u0E21\u0E25\u0E41\u0E2D\u0E14\u0E40\u0E14\u0E23\u0E2A',
     'lostform.Username': '\u0E0A\u0E37\u0E48\u0E2D\u0E1C\u0E39\u0E49\u0E43\u0E0A\u0E49',
     'registrationconfirmsuccesstext.Browse': '\u0E04\u0E49\u0E19\u0E2B\u0E32\u0E43\u0E19\u0E2B\u0E21\u0E27\u0E14\u0E2B\u0E21\u0E39\u0E48\u0E15\u0E48\u0E32\u0E07\u0E46\u0E02\u0E2D\u0E07 <<BRAND>>',
@@ -136,6 +135,5 @@ module.exports = {
     'register_confirmation.782': '\u0E04\u0E38\u0E13\u0E15\u0E49\u0E2D\u0E07\u0E22\u0E2D\u0E21\u0E23\u0E31\u0E1A\u0E02\u0E49\u0E2D\u0E15\u0E01\u0E25\u0E07\u0E1C\u0E39\u0E49\u0E43\u0E0A\u0E49\u0E02\u0E2D\u0E07\u0E40\u0E23\u0E32\u0E01\u0E48\u0E2D\u0E19\u0E17\u0E35\u0E48\u0E08\u0E30\u0E17\u0E33\u0E01\u0E32\u0E23\u0E25\u0E07\u0E17\u0E30\u0E40\u0E1A\u0E35\u0E22\u0E19',
     'terms.TermsOfUse': '\u0E02\u0E49\u0E2D\u0E01\u0E33\u0E2B\u0E19\u0E14\u0E01\u0E32\u0E23\u0E43\u0E0A\u0E49\u0E07\u0E32\u0E19',
     'business_directory.Map': '\u0E41\u0E1C\u0E19\u0E17\u0E35\u0E48',
-    'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment'
+    'optionals.opt-138-323-translation-location': 'Location'
 };

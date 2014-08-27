@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Viesis',
     'messages_site_class.30': 'Labi',
     'messages_user_management_current_ads.EditMyListing': 'Redi\u0123\u0113t manu sludin\u0101jumu',
-    'unexistingitem.ListingUnavailable': '\u0160is sludin\u0101jums vairs nav pieejams',
     'landingbody.EmailAddress': 'E-pasta adrese',
     'lostform.Username': 'Lietot\u0101jv\u0101rds',
     'registrationconfirmsuccesstext.Browse': 'P\u0101rl\u016Bkot <<BRAND>> kategorijas',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Nos\u016Bt\u012Bt',
     'contactseller_form.AttachPicture': 'Pievienot att\u0113lu:',
     'contactseller_form.ReplyToListing': 'Atbild\u0113t uz sludin\u0101jumu',
+    'contactseller_form.ViewFullSite': 'Apskatiet pilno vietni',
     'register_form.245': 'Jauna lietot\u0101ja re\u0123istr\u0101cija',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Gaida apstiprin\u0101jumu',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
     'misc.Sell_Post_Mobile_India': 'Public\u0113t',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
-    'misc.YouAreIn_Mob': 'You are in <<LOCATION>>',
     'business_directory.Map': 'Karte',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\u0161eit'
 };

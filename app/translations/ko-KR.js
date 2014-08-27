@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': '\uBB34\uBA85',
     'messages_site_class.30': '\uD655\uC778',
     'messages_user_management_current_ads.EditMyListing': '\uB098\uC758 \uCE74\uD14C\uACE0\uB9AC \uC218\uC815\uD558\uAE30',
-    'unexistingitem.ListingUnavailable': '\uBCF8 \uC81C\uD488\uBAA9\uB85D\uC11C\uB294 \uC874\uC7AC\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4',
     'landingbody.EmailAddress': '\uC774\uBA54\uC77C \uC8FC\uC18C',
     'lostform.Username': '\uC0AC\uC6A9\uC790\uBA85',
     'registrationconfirmsuccesstext.Browse': '<<BRAND>> \uCE74\uD14C\uACE0\uB9AC \uBE0C\uB77C\uC6B0\uC988\uD558\uAE30',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': '\uBCF4\uB0B4\uAE30',
     'contactseller_form.AttachPicture': '\uC0AC\uC9C4 \uCCA8\uBD80\uD558\uAE30:',
     'contactseller_form.ReplyToListing': '\uC81C\uD488\uBAA9\uB85D\uC11C\uC5D0 \uC751\uB2F5\uD558\uAE30',
+    'contactseller_form.ViewFullSite': '\uC815\uC2DD \uD648\uD398\uC774\uC9C0 \uBCF4\uAE30',
     'register_form.245': '\uC0C8 \uC0AC\uC6A9\uC790 \uB4F1\uB85D',
     'itempagepostcomment.Sms': '\uBB38\uC790 \uBA54\uC2DC\uC9C0',
     'myolx.ApprovalPending': '\uC2B9\uC778 \uB300\uAE30',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': '\uB2E4\uC74C 2\uC2DC\uAC04 \uC774\uB0B4\uC5D0 OLX\uC5D0\uC11C \uBCF4\uC2E4 \uC218 \uC788\uC2B5\uB2C8\uB2E4',
     'misc.Sell_Post_Mobile_India': '\uAC8C\uC2DC',
     'misc.SpecificFields_title': '\uCE74\uD14C\uACE0\uB9AC \uACE0\uC720 \uD544\uB4DC (\uC120\uD0DD \uC0AC\uD56D)',
-    'misc.YouAreIn_Mob': '\uD604\uC7AC \uC704\uCE58\uB294 <<LOCATION>>\uC785\uB2C8\uB2E4',
     'business_directory.Map': '\uC9C0\uB3C4',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\uCE74\uD14C\uACE0\uB9AC'
 };

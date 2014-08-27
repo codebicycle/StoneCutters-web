@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anoniem',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Redigeer My Lysting',
-    'unexistingitem.ListingUnavailable': 'Hierdie lysting is nie meer beskikbaar nie',
     'landingbody.EmailAddress': 'E-posadres',
     'lostform.Username': 'Gebruikersnaam',
     'registrationconfirmsuccesstext.Browse': 'Blaai rond in <<BRAND>> se kategorie\xEB',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Stuur',
     'contactseller_form.AttachPicture': 'Heg \'n Beeld Aan:',
     'contactseller_form.ReplyToListing': 'Antwoord op Lysting',
+    'contactseller_form.ViewFullSite': 'Bekyk volledige webtuiste',
     'register_form.245': 'Nuwe Gebruikersregistrasie',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Goedkeuring hangende',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Dit sal binne die volgende 2 ure op OLX te sien wees.',
     'misc.Sell_Post_Mobile_India': 'Publiseer',
     'misc.SpecificFields_title': 'Kategorie-spesifieke Velde (Opsionele)',
-    'misc.YouAreIn_Mob': 'Jy is in <<LOCATION>>',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'in'
 };

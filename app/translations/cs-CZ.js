@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonymn\xED',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravit m\u016Fj z\xE1znam',
-    'unexistingitem.ListingUnavailable': 'Z\xE1znam u\u017E nen\xED k dispozici.',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'lostform.Username': 'U\u017Eivatelsk\xE9 jm\xE9no',
     'registrationconfirmsuccesstext.Browse': 'Proch\xE1zet kategorie webu <<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Odeslat',
     'contactseller_form.AttachPicture': 'P\u0159ilo\u017Eit obr\xE1zek:',
     'contactseller_form.ReplyToListing': 'Odpov\u011Bd\u011Bt na z\xE1znam',
+    'contactseller_form.ViewFullSite': 'Prohl\xED\u017Eet \xFAplnou verzi str\xE1nky',
     'register_form.245': 'Registrace nov\xE9ho u\u017Eivatele',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': '\u010Cek\xE1 se na schv\xE1len\xED',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Inzer\xE1t na OLX uvid\xEDte do 2 hodin',
     'misc.Sell_Post_Mobile_India': 'Zaslat',
     'misc.SpecificFields_title': 'Specifick\xE1 pole kategori\xED (Voliteln\xE9)',
-    'misc.YouAreIn_Mob': 'Nach\xE1z\xEDte se v <<LOCATION>>',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'v'
 };

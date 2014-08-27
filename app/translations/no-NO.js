@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonse',
-    'unexistingitem.ListingUnavailable': 'Annonsen er ikke lenger tilgjengelig',
     'landingbody.EmailAddress': 'E-postadresse',
     'lostform.Username': 'Brukernavn',
     'registrationconfirmsuccesstext.Browse': 'S\xF8k i <<BRAND>>\'s kategorier',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Send',
     'contactseller_form.AttachPicture': 'Legg ved et bilde:',
     'contactseller_form.ReplyToListing': 'Svar p\xE5 annonsen',
+    'contactseller_form.ViewFullSite': 'Vis komplett nettside',
     'register_form.245': 'Ny bruker registrering',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Venter p\xE5 godkjenning',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Du vil kunne se den p\xE5 OLX innen de neste to timene',
     'misc.Sell_Post_Mobile_India': 'Legg ut',
     'misc.SpecificFields_title': 'Felter for spesifikk kategori (valgfritt)',
-    'misc.YouAreIn_Mob': 'Du er i <<LOCATION>>',
     'business_directory.Map': 'Kart',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'i'
 };

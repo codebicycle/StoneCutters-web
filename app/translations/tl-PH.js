@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Di Kilala',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'I-edit ang aking Patalastas',
-    'unexistingitem.ListingUnavailable': 'Ang patalastas na ito ay hindi na available.',
     'landingbody.EmailAddress': 'Email Address',
     'lostform.Username': 'Username',
     'registrationconfirmsuccesstext.Browse': 'Maghanap sa mga Kategorya ng <<BRAND>>',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Ipadala',
     'contactseller_form.AttachPicture': 'Mag-attach ng litrato',
     'contactseller_form.ReplyToListing': 'Sumagot sa Listahan',
+    'contactseller_form.ViewFullSite': 'Tingnan ang full site',
     'register_form.245': 'Pagrehistro ng Bagong User',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Nakabinbin ang pag-apruba',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Makikita ninyo ito sa OLX sa loob ng susunod na 2 oras',
     'misc.Sell_Post_Mobile_India': 'Ipaskil',
     'misc.SpecificFields_title': 'Mga Partikular na Field ng Kategorya (Mga Opsyonal)',
-    'misc.YouAreIn_Mob': 'Kayo ay nasa <<LOCATION>>',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'sa'
 };

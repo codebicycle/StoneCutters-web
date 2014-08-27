@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Meine Kleinanzeige bearbeiten',
-    'unexistingitem.ListingUnavailable': 'Die Anzeige ist nicht verf\xFCgbar',
     'landingbody.EmailAddress': 'E-Mailadresse',
     'lostform.Username': 'Benutzername',
     'registrationconfirmsuccesstext.Browse': '<<BRAND>>\'s Kategorien durchsuchen',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Senden',
     'contactseller_form.AttachPicture': 'Bild anh\xE4ngen:',
     'contactseller_form.ReplyToListing': 'Auf Kleinanzeige antworten',
+    'contactseller_form.ViewFullSite': 'Komplette Seite ansehen',
     'register_form.245': 'Registrierung eines neuen Benutzers',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Wartet auf Freigabe',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Sie erscheint auf OLX innerhalb der n\xE4chsten 2 Stunden',
     'misc.Sell_Post_Mobile_India': 'Ver\xF6ffentlichen',
     'misc.SpecificFields_title': 'Kategoriespezifische Felder (Kann-Eingaben)',
-    'misc.YouAreIn_Mob': 'Sie sind in <<LOCATION>>',
     'business_directory.Map': 'Karte',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'in'
 };

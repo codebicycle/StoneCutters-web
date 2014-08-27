@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Nafnlaust',
     'messages_site_class.30': '\xCD lagi',
     'messages_user_management_current_ads.EditMyListing': 'Breyta augl\xFDsingunni minni',
-    'unexistingitem.ListingUnavailable': '\xDEessi augl\xFDsing er ekki lengur f\xE1anleg',
     'landingbody.EmailAddress': 'T\xF6lvup\xF3stfang',
     'lostform.Username': 'Notandanafn',
     'registrationconfirmsuccesstext.Browse': 'Sko\xF0a\xF0u <<BRAND>> flokkana',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Senda',
     'contactseller_form.AttachPicture': 'Hengja mynd vi\xF0:',
     'contactseller_form.ReplyToListing': 'Svara augl\xFDsingu',
+    'contactseller_form.ViewFullSite': 'Opna heildar\xFAtg\xE1fu',
     'register_form.245': 'N\xFDskr\xE1ning notanda',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'B\xED\xF0ur sam\xFEykkis',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Augl\xFDsingin mun birtast \xE1 OLX innan tvegga klukkustunda',
     'misc.Sell_Post_Mobile_India': 'Birta',
     'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)',
-    'misc.YouAreIn_Mob': '\xDE\xFA ert \xED/\xE1 <<LOCATION>>',
     'business_directory.Map': 'Kort',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'h\xE9\xF0an \xED fr\xE1 \xED flokknum'
 };

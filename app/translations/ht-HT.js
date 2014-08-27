@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Chanje Anons Mwen ',
-    'unexistingitem.ListingUnavailable': 'Anons sa a pa disponib ank\xF2.',
     'landingbody.EmailAddress': 'Adr\xE8s Im\xE8l',
     'lostform.Username': 'Nom Manm',
     'registrationconfirmsuccesstext.Browse': 'Ch\xE8ch\xE8 kategori <<BRAND>> yo',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Voye',
     'contactseller_form.AttachPicture': 'Ajouter yon foto:',
     'contactseller_form.ReplyToListing': 'Reponn a Anons sa',
+    'contactseller_form.ViewFullSite': 'Gade sit konpl\xE8 a',
     'register_form.245': 'Enskripsyon pou nouvo manm',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Nou ap tann pou otorizasyon',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'W ap w\xE8 li sou OLX nan 2 \xE8dtan',
     'misc.Sell_Post_Mobile_India': 'Vann',
     'misc.SpecificFields_title': 'Chan Espesifik Kategori (Opsyon\xE8l)',
-    'misc.YouAreIn_Mob': 'Ou nan<<LOCATION>>',
     'business_directory.Map': 'Kat Jewografik',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'nan'
 };

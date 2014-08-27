@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonimno',
     'messages_site_class.30': 'U redu',
     'messages_user_management_current_ads.EditMyListing': 'Uredi moj oglas',
-    'unexistingitem.ListingUnavailable': 'Ovaj oglas nije vi\u0161e dostupan',
     'landingbody.EmailAddress': 'Adresa e-po\u0161te',
     'lostform.Username': 'Korisni\u010Dko ime',
     'registrationconfirmsuccesstext.Browse': 'Pretra\u017Eite <<BRAND>> kategorije',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Po\u0161alji',
     'contactseller_form.AttachPicture': 'Prilo\u017Eite sliku:',
     'contactseller_form.ReplyToListing': 'Odgovor na oglas',
+    'contactseller_form.ViewFullSite': 'Pogledaj zvani\u010Dnu stranicu',
     'register_form.245': 'Registracija novog korisnika',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Odobrenje na \u010Dekanju',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Vidjet \u0107ete ga na OLX-u za 2 sata',
     'misc.Sell_Post_Mobile_India': 'Objavi',
     'misc.SpecificFields_title': 'Specifi\u010Dna polja kategorija (po izboru)',
-    'misc.YouAreIn_Mob': 'Vi ste u <<LOCATION>>',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'u'
 };

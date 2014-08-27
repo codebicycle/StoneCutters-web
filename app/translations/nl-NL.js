@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anoniem',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Mijn advertentie bewerken',
-    'unexistingitem.ListingUnavailable': 'Deze advertentie is niet meer beschikbaar',
     'landingbody.EmailAddress': 'E-mailadres',
     'lostform.Username': 'Gebruikersnaam',
     'registrationconfirmsuccesstext.Browse': 'Zoek in de <<BRAND>> rubrieken',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Verzenden',
     'contactseller_form.AttachPicture': 'Foto toevoegen',
     'contactseller_form.ReplyToListing': 'Reageer op advertentie',
+    'contactseller_form.ViewFullSite': 'Bekijk volledige site',
     'register_form.245': 'Registratie nieuwe gebruiker',
     'itempagepostcomment.Sms': 'Sms',
     'myolx.ApprovalPending': 'In afwachting van goedkeuring',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Je advertentie staat binnen twee uur op OLX',
     'misc.Sell_Post_Mobile_India': 'Plaatsen',
     'misc.SpecificFields_title': 'Rubriekspecifieke velden (optioneel)',
-    'misc.YouAreIn_Mob': 'U bent  in <<LOCATION>>',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'in'
 };

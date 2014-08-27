@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Redigera min annons',
-    'unexistingitem.ListingUnavailable': 'Annonsen \xE4r inte l\xE4ngre tillg\xE4nglig',
     'landingbody.EmailAddress': 'E-postadress',
     'lostform.Username': 'Anv\xE4ndarnamn',
     'registrationconfirmsuccesstext.Browse': 'S\xF6k <<BRAND>>:s kategorier',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'Skicka',
     'contactseller_form.AttachPicture': 'Bifoga en bild:',
     'contactseller_form.ReplyToListing': 'Svara p\xE5 annons',
+    'contactseller_form.ViewFullSite': 'Visa hela webbplatsen',
     'register_form.245': 'Registrering av ny anv\xE4ndare',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Godk\xE4nnande under behandling',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': 'Du kommer att se din annons p\xE5 OLX inom de n\xE4rmaste 2 timmar',
     'misc.Sell_Post_Mobile_India': 'L\xE4gg upp',
     'misc.SpecificFields_title': 'Kategorispecifikka f\xE4lt (tillval)',
-    'misc.YouAreIn_Mob': 'Du \xE4r i <<LOCATION>>',
     'business_directory.Map': 'Karta',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': 'i'
 };

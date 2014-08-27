@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': '\u533F\u540D',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': '\u7F16\u8F91\u6211\u7684\u5E7F\u544A',
-    'unexistingitem.ListingUnavailable': '\u5E7F\u544A\u65E0\u6CD5\u67E5\u770B',
     'landingbody.EmailAddress': '\u7535\u5B50\u90AE\u7BB1\u5730\u5740',
     'lostform.Username': '\u7528\u6236\u540D',
     'registrationconfirmsuccesstext.Browse': '\u6D4F\u89C8<<BRAND>>\u5168\u90E8\u7C7B\u5225',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': '\u5BC4\u9001',
     'contactseller_form.AttachPicture': '\u9644\u52A0\u56FE\u7247:',
     'contactseller_form.ReplyToListing': '\u56DE\u590D\u4FE1\u606F',
+    'contactseller_form.ViewFullSite': '\u67E5\u770B\u5B8C\u6574\u7F51\u7AD9',
     'register_form.245': '\u65B0\u7528\u6236\u6CE8\u518C',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': '\u7B49\u5F85\u6279\u51C6',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': '2\u4E2A\u5C0F\u65F6\u4E4B\u5185\u60A8\u4F1A\u5728OLX\u7F51\u7AD9\u4E0A\u770B\u5230',
     'misc.Sell_Post_Mobile_India': '\u53D1\u5E16',
     'misc.SpecificFields_title': '\u7C7B\u522B\u7279\u6709\u5B57\u6BB5 (\u53EF\u9009)',
-    'misc.YouAreIn_Mob': '\u60A8\u4F4D\u4E8E<<LOCATION>>',
     'business_directory.Map': '\u5730\u56FE',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': '\u5728'
 };

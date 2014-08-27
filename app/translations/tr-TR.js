@@ -50,7 +50,6 @@ module.exports = {
     'messages_item_page.57': 'Ad\u0131z',
     'messages_site_class.30': 'Tamam',
     'messages_user_management_current_ads.EditMyListing': '\u0130lanlar\u0131m\u0131 D\xFCzenle',
-    'unexistingitem.ListingUnavailable': 'Bu ilan art\u0131k ge\xE7erli de\u011Fil',
     'landingbody.EmailAddress': 'E-Posta Adresi',
     'lostform.Username': 'Kullan\u0131c\u0131 Ad\u0131',
     'registrationconfirmsuccesstext.Browse': '<<BRAND>> kategorilerine g\xF6z at',
@@ -101,6 +100,7 @@ module.exports = {
     'contactseller_form.60': 'G\xF6nder',
     'contactseller_form.AttachPicture': 'Resim Ekle:',
     'contactseller_form.ReplyToListing': '\u0130lana Yan\u0131t Ver',
+    'contactseller_form.ViewFullSite': 'Sitenin tamam\u0131n\u0131 g\xF6r\xFCnt\xFCle',
     'register_form.245': 'Yeni \xDCye Kayd\u0131',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Onay beklemede',
@@ -159,9 +159,7 @@ module.exports = {
     'misc.SeeAdIn2Hrs_Mob': '\xD6n\xFCm\xFCzdeki 2 saat i\xE7erisinde OLX\'te \xE7\u0131kacakt\u0131r',
     'misc.Sell_Post_Mobile_India': 'G\xF6nder',
     'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)',
-    'misc.YouAreIn_Mob': '<<LOCATION>> konumundas\u0131n\u0131z',
     'business_directory.Map': 'Harita',
     'optionals.opt-138-323-translation-location': 'Location',
-    'optionals.opt-215-generaltopics-workenvironment': 'Work Environment',
     'crm_new_version.RenameCategory_3': ''
 };
