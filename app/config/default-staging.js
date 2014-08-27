@@ -22,8 +22,8 @@ module.exports = {
     },
     localization: {
         wap: ['www.olx.de', 'www.olx.fr', 'www.olx.es'],
-        html4: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
-        html5: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
+        html4: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.com.py'],
+        html5: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.com.py'],
         desktop: []
     },
     icons: {
@@ -127,4 +127,3 @@ module.exports = {
         }
     }
 };
-
