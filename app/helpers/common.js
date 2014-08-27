@@ -102,13 +102,6 @@ module.exports = (function() {
         return callback(null, 'pages/error', res || {});
     }
 
-    function daysDiff(date) {
-        var now = new Date();
-        var diff = now.getTime() - date.getTime();
-        
-        return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
-    }
-
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
@@ -117,7 +110,6 @@ module.exports = (function() {
         removeParams: utils.removeParams,
         redirect: redirect,
         error: error,
-        daysDiff: daysDiff,
         'static': statics
     };
 })();

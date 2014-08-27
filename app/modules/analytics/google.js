@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var helpers = require('../../helpers');
 var configAnalytics = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
@@ -52,7 +51,7 @@ var analyticsParams = {
                 else if (!item.id) {
                     str.push('/age_unavailable');
                 }
-                else if (helpers.common.daysDiff(new Date(item.date.timestamp)) > 30) {
+                else if (utils.daysDiff(new Date(item.date.timestamp)) > 30) {
                     str.push('/age_30');
                 }
 

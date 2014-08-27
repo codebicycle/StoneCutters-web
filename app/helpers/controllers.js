@@ -2,8 +2,9 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var seo = require('../modules/seo');
 var common = require('./common');
+var seo = require('../modules/seo');
+var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
 var isServer = typeof window === 'undefined';
 
@@ -21,8 +22,18 @@ function prepare(done) {
     done();
 }
 
+function processAnalytics(done) {
+    analytics.reset();
+    done();
+}
+
 function processSeo(done) {
     seo.resetHead.call(this);
+    done();
+}
+
+function processHeaders(done) {
+    changeHeaders.call(this);
     done();
 }
 
@@ -43,11 +54,6 @@ function changeHeaders(headers, page) {
     for (var header in headers) {
         this.app.req.res.setHeader(header, headers[header]);
     }
-}
-
-function processHeaders(done) {
-    changeHeaders.call(this);
-    done();
 }
 
 function processForm(params, done) {
@@ -101,6 +107,7 @@ module.exports = {
             options = {};
         }
         _.defaults(options, {
+            analytics: true,
             seo: true,
             cache: true,
             isForm: false
@@ -108,6 +115,9 @@ module.exports = {
 
         promise = asynquence().or(fail.bind(this))
             .then(prepare.bind(this));
+        if (options.analytics) {
+            promise.then(processAnalytics.bind(this));
+        }
         if (options.seo) {
             promise.then(processSeo.bind(this));
         }
