@@ -16,19 +16,19 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             var userAgent = req.get('user-agent') || utils.defaults.userAgent;
             
-            var fetch = function(done) {
+            function fetch(done) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), done.errfcb);
-            }.bind(this);
+            }
             
-            var check = function(done, response, device) {
+            function check(done, response, device) {
                 if (!device) {
                     console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.rendrApp.session.get('host'));
                     done.fail(new Error());
                 }
                 done(device);
-            }.bind(this);
+            }
 
-            var success = function(done, device) {
+            function success(done, device) {
                 if (device.browserName == 'Opera Mini') {
                     var alternativeUA = ['device-stock-ua','x-operamini-phone-ua'];
                     var headers = req.headers;
@@ -56,11 +56,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (device.osVersion === undefined) {
                     device.osVersion = '0';
                 }
-
                 done(device);
-            }.bind(this);
+            }
 
-            var store = function(done, device) {
+            function store(done, device) {
                 var marketing = {
                     osName: (device.osName || 'Others'),
                     osVersion: parseFloat(String(device.osVersion).replace('_','.'))
@@ -75,15 +74,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                 });
 
                 done();
-            }.bind(this);
+            }
 
-            var fail = function(err) {
+            function fail(err) {
                 var location = req.rendrApp.session.get('location');
 
-                statsd.increment([location.name, 'middleware', 'templates', 'error']);
-                next.abort();
+                statsd.increment([location.name, 'middleware', 'device', 'error']);
                 res.status(500).sendfile(errorPath);
-            }.bind(this);
+            }
 
             asynquence().or(fail)
                 .then(fetch)
