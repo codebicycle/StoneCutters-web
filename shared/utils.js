@@ -273,6 +273,13 @@ function get(obj, keys, defaultValue) {
     return _.isFunction(value) ? value : _.clone(value);
 }
 
+function daysDiff(date) {
+    var now = new Date();
+    var diff = now.getTime() - date.getTime();
+
+    return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
+}
+
 module.exports = {
     isServer: isServer,
     link: link,
@@ -281,5 +288,6 @@ module.exports = {
     removeParams: removeParams,
     cleanParams: cleanParams,
     get: get,
+    daysDiff: daysDiff,
     defaults: defaults
 };

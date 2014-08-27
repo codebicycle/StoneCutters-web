@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var helpers = require('../../helpers');
 var configAnalytics = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
@@ -76,7 +75,7 @@ module.exports = function analyticsHelper() {
                 }
             }
             if(!_.isUndefined(params.posting_to_action) && options.item.date) {
-                params.posting_to_action = helpers.common.daysDiff(new Date(options.item.date.timestamp));
+                params.posting_to_action = utils.daysDiff(new Date(options.item.date.timestamp));
             }
         }
         if(!_.isUndefined(params.funnel_category) && options.category) {
@@ -134,6 +133,11 @@ module.exports = function analyticsHelper() {
             custom = prepareParams(custom, options);
         }
         params.custom = JSON.stringify(custom);
+        if (!params.custom) {
+            try {
+                console.log('[OLX_DEBUG]', 'ati-custom', page, JSON.stringify(params));
+            } catch(e) {}
+        }
     }
 
     return {

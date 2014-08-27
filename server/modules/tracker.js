@@ -37,7 +37,6 @@ function prepare(options, params) {
     }
     return options;
 }
-
 var Tracker = function(type, options) {
     this.type = type;
     this.options = options;
@@ -175,7 +174,6 @@ Tracker.prototype.track = function(options, optionsRequest, callback) {
             callback = optionsRequest;
             optionsRequest = {};
         }
-
         restler.request(api.url, prepare(optionsRequest || {}, api.params))
             .on('success', (callback || noop))
             .on('fail', (callback || noop))

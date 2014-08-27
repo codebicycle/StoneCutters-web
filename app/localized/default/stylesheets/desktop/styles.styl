@@ -25,8 +25,8 @@ ul, li {
 	display: none!important;
 }
 #wrapper {
-	width: 61.25rem;
-	margin: .625rem auto;
+	width: 100%;
+	margin: 0;
     text-align: left;
 }
 .btn {
@@ -45,13 +45,6 @@ ul, li {
 	background-color: #f70;
 }
 
-.fullCont {
-	width: 100%;
-	border: 1px solid #ccc;
-    border-radius: 3px;
-    margin: .625rem 0 0;
-    overflow: hidden;
-}
 .clear {
 	clear: both;
 }
@@ -59,7 +52,45 @@ ul, li {
 	float: right;
 }
 
+/*----Progres Bar----*/
+#progressBar {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #FF7700;
+    border-radius: 10%;
+    -moz-transition: width 500ms ease-out,opacity 400ms linear;
+    -ms-transition: width 500ms ease-out,opacity 400ms linear;
+    -o-transition: width 500ms ease-out,opacity 400ms linear;
+    -webkit-transition: width 500ms ease-out,opacity 400ms linear;
+    transition: width 500ms ease-out,opacity 400ms linear;
+}
+#progressBar:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    opacity: 1;
+    width: 10%;
+    right: 0px;
+    height: 2px;
+    box-shadow: #BD5901 1px 0 6px 2px;
+    border-radius: 50%;
+}
+
 section {
+	position: relative;
+
+	&#content {
+		width: 61.25rem;
+		margin: 0 auto 1.25rem;
+
+	}
+}
+
+/*section {
 	position: relative;
 
 	nav.breadcrumb {
@@ -160,47 +191,7 @@ section {
     }
 }
 
-/*----Progres Bar----*/
-#progressBar {
-    position: fixed;
-    z-index: 999999;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: #FF7700;
-    border-radius: 10%;
-    -moz-transition: width 500ms ease-out,opacity 400ms linear;
-    -ms-transition: width 500ms ease-out,opacity 400ms linear;
-    -o-transition: width 500ms ease-out,opacity 400ms linear;
-    -webkit-transition: width 500ms ease-out,opacity 400ms linear;
-    transition: width 500ms ease-out,opacity 400ms linear;
-}
-#progressBar:before {
-    position: absolute;
-    content: '';
-    top: 0;
-    opacity: 1;
-    width: 10%;
-    right: 0px;
-    height: 2px;
-    box-shadow: #BD5901 1px 0 6px 2px;
-    border-radius: 50%;
-}
 
-/*----Popups----*/
-#overlay {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	display: none;
-	background: rgba(0, 0, 0, .5);
-	z-index: 100;
-}
 
 /*----Icons----*/
 .icons:before, .icons:after {
@@ -209,6 +200,7 @@ section {
     vertical-align: middle;
     font-weight: normal;
 }
+/*
 .icon-cat-811:before, .icon-cat-812:before {
 content:'\e05d';
 }
@@ -442,8 +434,4 @@ content:"\e62e";
 .icon-arrow:before {
     content: "";
 }
-
-
-
-
-
+*/

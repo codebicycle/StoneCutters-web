@@ -57,8 +57,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 url: url,
                 referer: referer,
                 platform: platform,
-                ip: getIp(req),
-                excludeMiddlewares: _.contains(excludedUrls.all, req.path)
+                ip: getIp(req)
             });
             req.rendrApp.req.app.locals({
                 platform: platform,

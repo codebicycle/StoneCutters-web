@@ -17,7 +17,8 @@ module.exports = {
 
 function register(params, callback) {
     helpers.controllers.control.call(this, params, {
-        isForm: true
+        isForm: true,
+        analytics: false
     }, controller);
 
     function controller(form) {
@@ -42,7 +43,8 @@ function register(params, callback) {
 
 function login(params, callback) {
     helpers.controllers.control.call(this, params, {
-        isForm: true
+        isForm: true,
+        analytics: false
     }, controller);
 
     function controller(form) {
@@ -66,7 +68,9 @@ function login(params, callback) {
 }
 
 function logout(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        analytics: false
+    }, controller);
 
     function controller() {
         this.app.session.clear('user');
@@ -78,7 +82,9 @@ function logout(params, callback) {
 }
 
 function myolx(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        analytics: false
+    }, controller);
 
     function controller() {
         var platform = this.app.session.get('platform');
@@ -103,7 +109,9 @@ function myolx(params, callback) {
 }
 
 function myads(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        analytics: false
+    }, controller);
 
     function controller() {
         var deleted;
@@ -182,7 +190,9 @@ function myads(params, callback) {
 }
 
 function favorites(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        analytics: false
+    }, controller);
 
     function controller(form) {
         var favorite;

@@ -3,9 +3,10 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = {
-    device: require('./device'),
     environment: require('./environment'),
     redirections: require('./redirections'),
+    location: require('./location'),
+    languages: require('./languages'),
     interstitial: require('./interstitial')
 };
 

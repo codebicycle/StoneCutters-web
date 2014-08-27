@@ -29,7 +29,6 @@ function list(params, callback) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
-            analytics.reset();
             if (params.target && params.target === 'posting') {
                 analytics.setPage('post#location');
                 seo.addMetatag('robots', 'noindex, nofollow');

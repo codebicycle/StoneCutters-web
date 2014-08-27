@@ -14,7 +14,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var staging = config.get(['publicEnvironments', 'staging'], {});
 
         return function middleware(req, res, next) {
-            if (req.rendrApp.session.get('excludeMiddlewares')) {
+            if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 

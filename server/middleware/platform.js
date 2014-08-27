@@ -44,6 +44,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                     console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
                     return fail(new Error());
                 }
+                req.data = req.data || {};
+                req.data.device = body;
                 return body;
             }
 
