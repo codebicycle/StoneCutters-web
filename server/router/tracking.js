@@ -131,7 +131,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             graphiteTracking(req);
             trackerId = analytics.google.getId(siteLocation);
-            if (trackerId) {
+            if (trackerId && ~siteLocation.indexOf('.olx.com.ve')) {
                 if (req.rendrApp.session.get('internet.org')) {
                     host = host.replace('olx', 'olx-internet-org');
                     page = '/internet.org' + page;
