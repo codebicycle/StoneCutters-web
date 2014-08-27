@@ -97,14 +97,14 @@ module.exports = {
         helpers.common.redirect.call(this, '/myolx/edititem/' + params.itemId);
     },
     redirecttomain: function(params, callback) {
-        var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('siteLocation');
 
         this.app.session.persist({
             olx_mobile_full_site_redirect: true
         }, {
             maxAge: 7200,
-            domain: siteLocation.replace('www', '')
+            domain: location.split('.').slice(1).join('.')
         });
-        helpers.common.redirect.call(this, 'http://' + siteLocation, null, { status: 302 });
+        helpers.common.redirect.call(this, 'http://' + location, null, { status: 302 });
     }
 };
