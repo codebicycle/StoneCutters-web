@@ -95,5 +95,14 @@ module.exports = {
     },
     edit: function(params, callback) {
         helpers.common.redirect.call(this, '/myolx/edititem/' + params.itemId);
+    },
+    redirecttomain: function(params, callback) {
+        this.app.session.persist({
+            olx_mobile_full_site_redirect: true
+        }, {
+            maxAge: 7200,
+            domain: '.olx.in'
+        });
+        helpers.common.redirect.call(this, 'http://' + this.app.session.get('siteLocation'), null, { status: 302 });
     }
 };

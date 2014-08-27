@@ -73,6 +73,9 @@ module.exports = {
     'redirections#subcategoryList': {
         url: 'item/:categoryId'
     },
+    'redirections#redirecttomain': {
+        url: 'redirecttomain'
+    },
     'categories#list': {
         url: ''
     },
