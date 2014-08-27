@@ -218,7 +218,6 @@ function show(params, callback) {
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
 
-            analytics.reset();
             analytics.addParam('item', item);
             analytics.addParam('category', category);
             analytics.addParam('subcategory', subcategory);
@@ -352,8 +351,7 @@ function gallery(params, callback) {
             }
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
-            
-            analytics.reset();
+
             analytics.addParam('item', item);
             analytics.addParam('category', category.toJSON());
             analytics.addParam('subcategory', subcategory.toJSON());
@@ -452,7 +450,6 @@ function map(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.reset();
             analytics.addParam('item', _item.toJSON());
             analytics.addParam('category', category.toJSON());
             analytics.addParam('subcategory', subcategory.toJSON());
@@ -542,7 +539,6 @@ function reply(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.reset();
             analytics.addParam('item', item);
             analytics.addParam('category', category.toJSON());
             analytics.addParam('subcategory', subcategory.toJSON());
@@ -627,7 +623,6 @@ function success(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.reset();
             analytics.addParam('item', item);
             analytics.addParam('category', category.toJSON());
             analytics.addParam('subcategory', subcategory.toJSON());
@@ -672,7 +667,6 @@ function search(params, callback) {
             delete params.filters;
             delete params.urlFilters;
 
-            analytics.reset();
             analytics.setPage('nf');
             analytics.addParam('keyword', query.search);
             analytics.addParam('page_nb', 0);
@@ -776,7 +770,6 @@ function allresults(params, callback) {
             delete params.filters;
             delete params.urlFilters;
 
-            analytics.reset();
             analytics.addParam('page_nb', 0);
 
             done();
