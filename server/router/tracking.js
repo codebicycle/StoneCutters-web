@@ -113,6 +113,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var host = req.host;
             var page = req.query.page;
             var bot;
+            var trackerId;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
@@ -129,15 +130,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 return statsd.increment([req.query.locNm, 'bot', bot, platform]);
             }
             graphiteTracking(req);
-            if (~siteLocation.indexOf('.olx.com.ve')) {
-                googleTracking(req, analytics.google.getId(siteLocation));
-            }
-            if (~siteLocation.indexOf('.olx.cl')) {
+            trackerId = analytics.google.getId(siteLocation);
+            if (trackerId) {
                 if (req.rendrApp.session.get('internet.org')) {
                     host = host.replace('olx', 'olx-internet-org');
                     page = '/internet.org' + page;
                 }
-                googleTracking(req, 'UA-31226936-2', host, page);
+                googleTracking(req, trackerId, host, page);
             }
             atiTracking(req);
         }
