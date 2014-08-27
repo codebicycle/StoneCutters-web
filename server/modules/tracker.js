@@ -162,7 +162,6 @@ Tracker.types = {
 Tracker.prototype.track = function(options, optionsRequest, callback) {
     var tracking = Tracker.types[this.type];
     var api;
-    var platform;
 
     if (_.isUndefined(tracking)) {
         console.log('[OLX_DEBUG] Invalid tracker type [', this.type, ']');
@@ -174,15 +173,6 @@ Tracker.prototype.track = function(options, optionsRequest, callback) {
         if (_.isFunction(optionsRequest)) {
             callback = optionsRequest;
             optionsRequest = {};
-        }
-        if (optionsRequest.debug) {
-            try {
-                platform = JSON.parse(api.params.stc).platform;
-            }
-            catch (err) {}
-            if (platform !== 'wap' && platform !== 'html4' && platform !== 'html5') {
-                console.log('[OLX_DEBUG]', 'ati', api.params.stc, optionsRequest.headers['User-Agent']);
-            }
         }
         restler.request(api.url, prepare(optionsRequest || {}, api.params))
             .on('success', (callback || noop))
