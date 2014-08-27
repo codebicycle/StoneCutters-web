@@ -114,6 +114,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var page = req.query.page;
             var bot;
             var trackerId;
+            var platformUrl;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
@@ -128,6 +129,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
                 return statsd.increment([req.query.locNm, 'bot', bot, platform]);
+            }
+            try {
+                platformUrl = JSON.parse(req.query.custom).platform;
+            }
+            catch (err) {}
+            if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
+                return console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl);
             }
             graphiteTracking(req);
             trackerId = analytics.google.getId(siteLocation);
