@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Nos\u016Bt\u012Bt',
     'contactseller_form.AttachPicture': 'Pievienot att\u0113lu:',
     'contactseller_form.ReplyToListing': 'Atbild\u0113t uz sludin\u0101jumu',
+    'contactseller_form.ViewFullSite': 'Apskatiet pilno vietni',
     'register_form.245': 'Jauna lietot\u0101ja re\u0123istr\u0101cija',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Gaida apstiprin\u0101jumu',

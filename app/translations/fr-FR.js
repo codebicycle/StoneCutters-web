@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Envoyer ma question',
     'contactseller_form.AttachPicture': 'Ajouter une photo :',
     'contactseller_form.ReplyToListing': 'R\xE9pondre \xE0 l\'annonce',
+    'contactseller_form.ViewFullSite': 'Voir le site complet',
     'register_form.245': 'Enregistrement d\'un nouvel utilisateur',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Approbation en cours',

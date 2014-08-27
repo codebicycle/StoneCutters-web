@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Trimite',
     'contactseller_form.AttachPicture': 'Ata\u015Fa\u0163i o imagine:',
     'contactseller_form.ReplyToListing': 'R\u0103spunde la Listare',
+    'contactseller_form.ViewFullSite': 'Vizualizare site complet',
     'register_form.245': '\xCEnregistrarea Noului Utilizator',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': '\xCEn a\u015Fteptarea aprob\u0103rii',

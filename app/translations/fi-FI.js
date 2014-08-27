@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'L\xE4het\xE4',
     'contactseller_form.AttachPicture': 'Liit\xE4 kuva:',
     'contactseller_form.ReplyToListing': 'Vastaa ilmoitukseen',
+    'contactseller_form.ViewFullSite': 'N\xE4yt\xE4 koko sivusto',
     'register_form.245': 'Uuden k\xE4ytt\xE4j\xE4n rekister\xF6inti',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Hyv\xE4ksynn\xE4ss\xE4',

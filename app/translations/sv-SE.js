@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Skicka',
     'contactseller_form.AttachPicture': 'Bifoga en bild:',
     'contactseller_form.ReplyToListing': 'Svara p\xE5 annons',
+    'contactseller_form.ViewFullSite': 'Visa hela webbplatsen',
     'register_form.245': 'Registrering av ny anv\xE4ndare',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Godk\xE4nnande under behandling',

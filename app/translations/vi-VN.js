@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'G\u1EEDi',
     'contactseller_form.AttachPicture': '\u0110\xEDnh k\xE8m \u1EA3nh:',
     'contactseller_form.ReplyToListing': 'Tr\u1EA3 l\u1EDDi danh m\u1EE5c n\xE0y',
+    'contactseller_form.ViewFullSite': 'Xem trang \u0111\u1EA7y \u0111\u1EE7',
     'register_form.245': '\u0110\u0103ng k\xFD th\xE0nh vi\xEAn m\u1EDBi',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Ch\u1EDD ph\xEA duy\u1EC7t',

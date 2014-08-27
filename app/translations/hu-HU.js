@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'K\xFCld\xE9s',
     'contactseller_form.AttachPicture': 'K\xE9p csatol\xE1sa:',
     'contactseller_form.ReplyToListing': 'V\xE1lasz a hirdet\xE9sre',
+    'contactseller_form.ViewFullSite': 'Teljes honlap megtekint\xE9se',
     'register_form.245': '\xDAj felhaszn\xE1l\xF3 regisztr\xE1l\xE1sa',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'A j\xF3v\xE1hagy\xE1s folyamatban van',

@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'G\xF6nder',
     'contactseller_form.AttachPicture': 'Resim Ekle:',
     'contactseller_form.ReplyToListing': '\u0130lana Yan\u0131t Ver',
+    'contactseller_form.ViewFullSite': 'Sitenin tamam\u0131n\u0131 g\xF6r\xFCnt\xFCle',
     'register_form.245': 'Yeni \xDCye Kayd\u0131',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Onay beklemede',

@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Tuma',
     'contactseller_form.AttachPicture': 'Ambatanisha Picha:',
     'contactseller_form.ReplyToListing': 'Reply to this Ad',
+    'contactseller_form.ViewFullSite': 'Angalia tovuti kamili',
     'register_form.245': 'Usajili Mpya wa Mtumiaji',
     'itempagepostcomment.Sms': 'Ujumbe mfupi',
     'myolx.ApprovalPending': 'Idhini inasubiri',

@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Send',
     'contactseller_form.AttachPicture': 'Legg ved et bilde:',
     'contactseller_form.ReplyToListing': 'Svar p\xE5 annonsen',
+    'contactseller_form.ViewFullSite': 'Vis komplett nettside',
     'register_form.245': 'Ny bruker registrering',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Venter p\xE5 godkjenning',

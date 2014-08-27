@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Saada',
     'contactseller_form.AttachPicture': 'Manustage pilt:',
     'contactseller_form.ReplyToListing': 'Vastake kuulutusele',
+    'contactseller_form.ViewFullSite': 'Vaata kogu saiti',
     'register_form.245': 'Uue kasutajana registreerumine',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Kinnitamine ootel',

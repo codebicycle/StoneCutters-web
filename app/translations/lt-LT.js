@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Si\u0173sti',
     'contactseller_form.AttachPicture': 'Prisegti nuotrauk\u0105:',
     'contactseller_form.ReplyToListing': 'Atsakyti \u012F skelbim\u0105',
+    'contactseller_form.ViewFullSite': 'Rodyti visavert\u0119 tinklaviet\u0117s versij\u0105',
     'register_form.245': 'Naujo vartotojo registracija',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Laukiama patvirtinimo',

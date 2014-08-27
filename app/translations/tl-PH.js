@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Ipadala',
     'contactseller_form.AttachPicture': 'Mag-attach ng litrato',
     'contactseller_form.ReplyToListing': 'Sumagot sa Listahan',
+    'contactseller_form.ViewFullSite': 'Tingnan ang full site',
     'register_form.245': 'Pagrehistro ng Bagong User',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Nakabinbin ang pag-apruba',
