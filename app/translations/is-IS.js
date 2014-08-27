@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Senda',
     'contactseller_form.AttachPicture': 'Hengja mynd vi\xF0:',
     'contactseller_form.ReplyToListing': 'Svara augl\xFDsingu',
+    'contactseller_form.ViewFullSite': 'Opna heildar\xFAtg\xE1fu',
     'register_form.245': 'N\xFDskr\xE1ning notanda',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'B\xED\xF0ur sam\xFEykkis',

@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Voye',
     'contactseller_form.AttachPicture': 'Ajouter yon foto:',
     'contactseller_form.ReplyToListing': 'Reponn a Anons sa',
+    'contactseller_form.ViewFullSite': 'Gade sit konpl\xE8 a',
     'register_form.245': 'Enskripsyon pou nouvo manm',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Nou ap tann pou otorizasyon',

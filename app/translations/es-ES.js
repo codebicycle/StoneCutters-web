@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Enviar Consulta',
     'contactseller_form.AttachPicture': 'Adjuntar Imagen:',
     'contactseller_form.ReplyToListing': 'Contactar al Anunciante',
+    'contactseller_form.ViewFullSite': 'View full site',
     'register_form.245': 'Registro de Usuario Nuevo',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Pendiente de aprobaci\xF3n',

@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Stuur',
     'contactseller_form.AttachPicture': 'Heg \'n Beeld Aan:',
     'contactseller_form.ReplyToListing': 'Antwoord op Lysting',
+    'contactseller_form.ViewFullSite': 'Bekyk volledige webtuiste',
     'register_form.245': 'Nuwe Gebruikersregistrasie',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Goedkeuring hangende',

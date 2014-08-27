@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Wy\u015Blij',
     'contactseller_form.AttachPicture': 'Do\u0142\u0105cz Zdj\u0119cie',
     'contactseller_form.ReplyToListing': 'Odpowiedz na og\u0142oszenie',
+    'contactseller_form.ViewFullSite': 'Zobacz pe\u0142ny serwis',
     'register_form.245': 'Rejestracja nowego u\u017Cytkownika',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Oczekuje na zatwierdzenie',

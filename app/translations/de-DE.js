@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Senden',
     'contactseller_form.AttachPicture': 'Bild anh\xE4ngen:',
     'contactseller_form.ReplyToListing': 'Auf Kleinanzeige antworten',
+    'contactseller_form.ViewFullSite': 'Komplette Seite ansehen',
     'register_form.245': 'Registrierung eines neuen Benutzers',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Wartet auf Freigabe',

@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Po\u0161alji',
     'contactseller_form.AttachPicture': 'Prilo\u017Eite sliku:',
     'contactseller_form.ReplyToListing': 'Odgovori na oglas',
+    'contactseller_form.ViewFullSite': 'Pogledaj zvani\u010Dnu stranicu',
     'register_form.245': 'Registracija  novog korisnika',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Odobrenja na \u010Dakanju',

@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Verzenden',
     'contactseller_form.AttachPicture': 'Foto toevoegen',
     'contactseller_form.ReplyToListing': 'Reageer op advertentie',
+    'contactseller_form.ViewFullSite': 'Bekijk volledige site',
     'register_form.245': 'Registratie nieuwe gebruiker',
     'itempagepostcomment.Sms': 'Sms',
     'myolx.ApprovalPending': 'In afwachting van goedkeuring',

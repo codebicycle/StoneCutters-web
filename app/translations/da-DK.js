@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Send',
     'contactseller_form.AttachPicture': 'Vedh\xE6ft et billede:',
     'contactseller_form.ReplyToListing': 'Svar p\xE5 annonce',
+    'contactseller_form.ViewFullSite': 'Se hele sitet.',
     'register_form.245': 'Ny brugertilmelding',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Afventer godkendelse',

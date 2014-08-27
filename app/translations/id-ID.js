@@ -102,6 +102,7 @@ module.exports = {
     'contactseller_form.60': 'Kirim',
     'contactseller_form.AttachPicture': 'Melampirkan Gambar:',
     'contactseller_form.ReplyToListing': 'Membalas Iklan',
+    'contactseller_form.ViewFullSite': 'Lihat situs lengkap',
     'register_form.245': 'Pendaftaran Pengguna Baru',
     'itempagepostcomment.Sms': 'SMS',
     'myolx.ApprovalPending': 'Menunggu persetujuan',
