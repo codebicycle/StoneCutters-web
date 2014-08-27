@@ -134,7 +134,9 @@ module.exports = function analyticsHelper() {
         }
         params.custom = JSON.stringify(custom);
         if (!params.custom) {
-            console.log('[OLX_DEBUG]', 'ati-custom', page, params, options);
+            try {
+                console.log('[OLX_DEBUG]', 'ati-custom', page, JSON.stringify(params));
+            } catch(e) {}
         }
     }
 
