@@ -133,6 +133,9 @@ module.exports = function analyticsHelper() {
             custom = prepareParams(custom, options);
         }
         params.custom = JSON.stringify(custom);
+        if (!params.custom) {
+            console.log('[OLX_DEBUG]', 'ati-custom', page, params, options);
+        }
     }
 
     return {
