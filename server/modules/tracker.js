@@ -180,7 +180,7 @@ Tracker.prototype.track = function(options, optionsRequest, callback) {
                 platform = JSON.parse(api.params.stc).platform;
             }
             catch (err) {}
-            if (platform !== 'wap', platform !== 'html4', platform !== 'html5') {
+            if (platform !== 'wap' && platform !== 'html4' && platform !== 'html5') {
                 console.log('[OLX_DEBUG]', 'ati', api.params.stc, optionsRequest.headers['User-Agent']);
             }
         }
