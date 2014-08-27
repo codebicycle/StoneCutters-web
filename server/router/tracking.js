@@ -92,7 +92,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
                 });
-
+                options.debug = true;
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
