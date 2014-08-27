@@ -102,7 +102,7 @@ module.exports = {
     control: function(params, options, callback) {
         var promise;
 
-        if (options instanceof Function) {
+        if (_.isFunction(options)) {
             callback = options;
             options = {};
         }
