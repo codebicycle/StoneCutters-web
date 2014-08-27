@@ -17,6 +17,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             var userAgent = req.get('user-agent') || utils.defaults.userAgent;
             
             function fetch(done) {
+                if (req.data && req.data.device) {
+                    return done(null, req.data.device);
+                }
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), done.errfcb);
             }
             
