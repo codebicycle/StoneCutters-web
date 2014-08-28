@@ -85,19 +85,21 @@ module.exports = function analyticsHelper() {
         if(!_.isUndefined(params.funnel_subcategory) && options.subcategory) {
             params.funnel_subcategory = options.subcategory.name;
         }
+        if(!_.isUndefined(params.subcategory) && options.subcategory) {
+            params.subcategory = standarizeName(options.subcategory.name);
+        }
         if(!_.isUndefined(params.poster_id) && options.item.user) {
             params.poster_id = options.item.user.id;
             params.poster_type = 'registered_logged';
         }
-        if(params.page_name === 'expired_category') {
+        if(params.page_name === 'expired_category' && options.category) {
             if (options.subcategory) {
-                params.category = standarizeName(options.subcategory.name);
                 params.page_name = 'listing_' + standarizeName(options.subcategory.name);
             }
-            else if (options.category) {
-                params.category = standarizeName(options.category.name);
+            else {
                 params.page_name = 'listing_' + standarizeName(options.category.name);
             }
+            params.category = standarizeName(options.category.name);
         }
         if((params.page_name === 'posting_step4' || params.page_name === 'edit_ad_form') && options.category) {
             params.ad_category = options.category.name;
