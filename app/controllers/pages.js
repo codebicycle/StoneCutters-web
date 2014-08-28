@@ -171,9 +171,7 @@ function esi(params, callback) {
     if (!enabled) {
         return helpers.common.redirect.call(this, '/');
     }
-    helpers.controllers.control.call(this, params, {
-        analytics: false
-    }, controller);
+    helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         if (this.app.session.get('isServer')) {

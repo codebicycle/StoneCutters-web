@@ -16,10 +16,10 @@ module.exports = function analyticsHelper() {
 
     function standarizeName(name) {
         name = name.toLowerCase();
-        name = name.replace('  ', ' ');
-        name = name.replace(' ', '_');
-        name = name.replace('/', '_');
-        name = name.replace('-', '');
+        name = name.replace(/-/g, '');
+        name = name.replace(/\s\s/g, ' ');
+        name = name.replace(/\s/g, '_');
+        name = name.replace(/\//g, '_');
         return name;
     }
 
@@ -56,11 +56,12 @@ module.exports = function analyticsHelper() {
                 params.ad_photo = options.item.images.length;
             }
             if(options.category) {
-                params.category = options.category.name;
-                params.ad_category = options.category.name;
+                params.category = standarizeName(options.category.name);
+                params.ad_category = standarizeName(options.category.name);
             }
             if(options.subcategory) {
-                params.ad_subcategory = options.subcategory.name;
+                params.subcategory = standarizeName(options.subcategory.name);
+                params.ad_subcategory = standarizeName(options.subcategory.name);
             }
             if(!_.isUndefined(params.geo1)) {
                 location = options.item.location;
@@ -84,28 +85,25 @@ module.exports = function analyticsHelper() {
         if(!_.isUndefined(params.funnel_subcategory) && options.subcategory) {
             params.funnel_subcategory = options.subcategory.name;
         }
-        if(!_.isUndefined(params.subcategory) && options.subcategory) {
-            params.subcategory = options.subcategory.name;
-        }
         if(!_.isUndefined(params.poster_id) && options.item.user) {
             params.poster_id = options.item.user.id;
             params.poster_type = 'registered_logged';
         }
         if(params.page_name === 'expired_category') {
             if (options.subcategory) {
+                params.category = standarizeName(options.subcategory.name);
                 params.page_name = 'listing_' + options.subcategory.name;
             }
             else if (options.category) {
+                params.category = standarizeName(options.category.name);
                 params.page_name = 'listing_' + options.category.name;
             }
-            params.category = options.category.name;
         }
-        if(params.page_name === 'posting_step4' && options.category) {
+        if((params.page_name === 'posting_step4' || params.page_name === 'edit_ad_form') && options.category) {
             params.ad_category = options.category.name;
-            params.ad_subcategory = options.subcategory.name;
-        }
-        if(params.subcategory === 'expired_subCategory') {
-            delete params.subcategory;
+            if (options.subcategory) {
+                params.ad_subcategory = options.subcategory.name;
+            }
         }
     }
 

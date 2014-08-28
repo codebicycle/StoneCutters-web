@@ -203,7 +203,6 @@ function show(params, callback) {
             var subcategory = _categories.search(_item.get('category').id);
             var category;
             var parentId;
-            var analyticUrl;
             var url;
 
             if (!subcategory) {
@@ -221,7 +220,6 @@ function show(params, callback) {
             analytics.addParam('item', item);
             analytics.addParam('category', category);
             analytics.addParam('subcategory', subcategory);
-            analyticUrl = analytics.generateURL.call(this);
             if (!item.purged) {
                 seo.addMetatag('title', item.metadata.itemPage.title);
                 seo.addMetatag('description', item.metadata.itemPage.description);
@@ -251,7 +249,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
-                analytics: analyticUrl
+                analytics: analytics.generateURL.call(this)
             });
         }.bind(this);
 
