@@ -16,10 +16,10 @@ module.exports = function analyticsHelper() {
 
     function standarizeName(name) {
         name = name.toLowerCase();
-        name = name.replace('  ', ' ');
-        name = name.replace(' ', '_');
-        name = name.replace('/', '_');
-        name = name.replace('-', '');
+        name = name.replace(/-/g, '');
+        name = name.replace(/\s\s/g, ' ');
+        name = name.replace(/\s/g, '_');
+        name = name.replace(/\//g, '_');
         return name;
     }
 
@@ -56,11 +56,12 @@ module.exports = function analyticsHelper() {
                 params.ad_photo = options.item.images.length;
             }
             if(options.category) {
-                params.category = options.category.name;
-                params.ad_category = options.category.name;
+                params.category = standarizeName(options.category.name);
+                params.ad_category = standarizeName(options.category.name);
             }
             if(options.subcategory) {
-                params.ad_subcategory = options.subcategory.name;
+                params.subcategory = standarizeName(options.subcategory.name);
+                params.ad_subcategory = standarizeName(options.subcategory.name);
             }
             if(!_.isUndefined(params.geo1)) {
                 location = options.item.location;
@@ -100,12 +101,11 @@ module.exports = function analyticsHelper() {
             }
             params.category = options.category.name;
         }
-        if(params.page_name === 'posting_step4' && options.category) {
+        if((params.page_name === 'posting_step4' || params.page_name === 'edit_ad_form') && options.category) {
             params.ad_category = options.category.name;
-            params.ad_subcategory = options.subcategory.name;
-        }
-        if(params.subcategory === 'expired_subCategory') {
-            delete params.subcategory;
+            if (options.subcategory) {
+                params.ad_subcategory = options.subcategory.name;
+            }
         }
     }
 
