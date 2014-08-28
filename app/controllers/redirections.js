@@ -3,6 +3,10 @@
 var _ = require('underscore');
 var helpers = require('../helpers');
 
+var SECOND = 1000;
+var MINUTE = 60 * SECOND;
+var HOUR = 60 * MINUTE;
+
 module.exports = {
     category: function(params, callback) {
         helpers.common.redirect.call(this, '/des-cat-' + params.categoryId);
@@ -102,7 +106,7 @@ module.exports = {
         this.app.session.persist({
             olx_mobile_full_site_redirect: true
         }, {
-            maxAge: 7200,
+            maxAge: 2 * HOUR,
             domain: location.split('.').slice(1).join('.')
         });
         helpers.common.redirect.call(this, 'http://' + location, null, { status: 302 });

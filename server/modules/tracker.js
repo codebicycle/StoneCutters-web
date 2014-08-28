@@ -117,7 +117,7 @@ Tracker.types = {
         var params = {
             utmwv: '5.5.4',
             utms: options.hitCount,
-            utmhn: options.host,
+            utmhn: _.rest(options.host.split('.')).join('.'),
             utmn: Math.round(Math.random() * 1000000),
             utmr: options.referer,
             utmp: options.page,
