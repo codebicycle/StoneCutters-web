@@ -1,14 +1,14 @@
 section.home {
-	width: 41.25rem;
-	float: left;
-	border: 1px solid #ccc;
+    width: 41.25rem;
+    float: left;
+    border: 1px solid #ccc;
     border-radius: 3px;
-
     .titleBar {
-    	width: 100%;
-    	padding: .9375rem 1.25rem;
-    	background: #f1f1f1;
-    	border-bottom: 1px solid #ccc;
+        width: 100%;
+        padding: .9375rem 1.25rem;
+        background: #f1f1f1;
+        border-bottom: 1px solid #ccc;
+        
         &.small {
             padding: .625rem 1.25rem;
         }
@@ -19,129 +19,119 @@ section.home {
             font-weight: normal;
             color: #000;
         }
-    	h1 {
-			font-size: 1.5rem;
-			
-    	}
+        h1 {
+            font-size: 1.5rem;
+        }
         h2 {
             font-size: 1.125rem;
         }
-    	span {
-    		display: inline-block;
-    		font-size: .875rem;
-    		color: #0076be;
-    		cursor: pointer;
-    		&:after {
-    			display: inline-block;
-				margin: -1px 0 1px 5px;
-				border-color: #777 transparent;
-				border-style: solid;
-				border-width: .4375rem .375rem 0;
-				content: "";
-			}
-    	}
+        span {
+            display: inline-block;
+            font-size: .875rem;
+            color: #0076be;
+            cursor: pointer;
+            &:after {
+                display: inline-block;
+                margin: -1px 0 1px 5px;
+                border-color: #777 transparent;
+                border-style: solid;
+                border-width: .4375rem .375rem 0;
+                content: "";
+            }
+        }
     }
-
     > ul.icons {
-    	display: inline-block;
-    	margin: .625rem 0 0 1.25rem;
-
-    	> li {
-    		width: 12.81rem;
-    		height: 9.813rem;
-    		float: left;
-    		padding: .625rem .3125rem;
-    		text-align: center;
-    		&:hover {
-    			background: #f1f1f1;
-    			border-radius: 3px;
-    		}
-
-    		span.icon {
-    			width: 100%;
+        display: inline-block;
+        margin: .625rem 0 0 1.25rem;
+        > li {
+            width: 12.81rem;
+            height: 9.813rem;
+            float: left;
+            padding: .625rem .3125rem;
+            text-align: center;
+            &:hover {
+                background: #f1f1f1;
+                border-radius: 3px;
+            }
+            span.icon {
+                width: 100%;
                 height: 64px;
-    			float: left;
-    			margin: 0;
-    			background: url(imageUrl/images/desktop/spriteIconsVE.png);
-    			background-repeat: no-repeat;
-
-    			&.cat-830 {
-    				background-position: center 0;
-    			}
-    			&.cat-800 {
-    				background-position: center -64px;
-    			}
-    			&.cat-806 {
-    				background-position: center -128px;
-    			}
-    			&.cat-815 {
-    				background-position: center -192px;
-    			}
-    			&.cat-362 {
-    				background-position: center -256px;
-    			}
-    			&.cat-811 {
-    				background-position: center -320px;
-    			}
-    			&.cat-859 {
-    				background-position: center -384px;
-    			}
-    			&.cat-190 {
-    				background-position: center -448px;
-    			}
-    			&.cat-191 {
-    				background-position: center -512px;
-    			}
-    			&.cat-16 {
-    				background-position: center -576px;
-    			}
-    			&.cat-187 {
-    				background-position: center -640px;
-    			}
-    			&.cat-186 {
-    				background-position: center -704px;
-    			}
-    			&.cat-821 {
-    				background-position: center -768px;
-    			}
-    		}
-    		strong {
-    			width: 100%;
-    			float: left;
-    			color: #0076be;
-    			font-size: .9375rem;
-    		}
-
-    		ul {
-    			width: 100%;
-    			float: left;
-    			margin: .5rem 0 0 0;
-
-    			li {
-    				display: inline-block;
-    				font-size: .6875rem;
-    				a {
-    					color: #777;
-    					&:hover {
-    						text-decoration: underline;
-    					}
-    				}
-    			}
-    		}
-    	}
+                float: left;
+                margin: 0;
+                background: url(imageUrl/images/desktop/spriteIconsVE.png);
+                background-repeat: no-repeat;
+                &.cat-830 {
+                    background-position: center 0;
+                }
+                &.cat-800 {
+                    background-position: center -64px;
+                }
+                &.cat-806 {
+                    background-position: center -128px;
+                }
+                &.cat-815 {
+                    background-position: center -192px;
+                }
+                &.cat-362 {
+                    background-position: center -256px;
+                }
+                &.cat-811 {
+                    background-position: center -320px;
+                }
+                &.cat-859 {
+                    background-position: center -384px;
+                }
+                &.cat-190 {
+                    background-position: center -448px;
+                }
+                &.cat-191 {
+                    background-position: center -512px;
+                }
+                &.cat-16 {
+                    background-position: center -576px;
+                }
+                &.cat-187 {
+                    background-position: center -640px;
+                }
+                &.cat-186 {
+                    background-position: center -704px;
+                }
+                &.cat-821 {
+                    background-position: center -768px;
+                }
+            }
+            strong {
+                width: 100%;
+                float: left;
+                color: #0076be;
+                font-size: .9375rem;
+            }
+            ul {
+                width: 100%;
+                float: left;
+                margin: .5rem 0 0 0;
+                li {
+                    display: inline-block;
+                    font-size: .6875rem;
+                    a {
+                        color: #777;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
     }
     > h1, ul.cities {
         width: 19.375rem;
         float: left;
         margin: 1rem 0 0 .625rem;
     }
-    > h1.full, ul.cities.full {
-        width: 38.75rem;
-    }
     > h1 {
         padding: 0 0 .625rem;
         font-size: .8125rem;
-        border-bottom: 1px solid #ccc; 
+        border-bottom: 1px solid #ccc;
     }
     ul.cities {
         li {
@@ -149,7 +139,6 @@ section.home {
             float: left;
             padding: 0 0 .3125rem 0;
             font-size: .8125rem;
-
             a {
                 color: #0076be;
             }
@@ -163,12 +152,10 @@ aside.banner {
     margin: 0 0 1.25rem 0;
     border-radius: 5px;
     cursor: pointer;
-
     &.howto {
         padding: 0 0 .9375rem;
         background: #582983 url(imageUrl/images/desktop/bannerHowToSell.gif) no-repeat top center;
         text-align: center;
-
         h1 {
             margin: 11rem 0 .625rem 0;
             padding: 0 .9375rem;
@@ -183,29 +170,25 @@ aside.banner {
             background: #8a6aa8;
             border-bottom: 2px solid #684488;
             border-radius: 5px;
-            color: #fff;            
+            color: #fff;
             font-size: 1.063rem;
             font-weight: bold;
-            line-height:  2.375rem;
-
+            line-height: 2.375rem;
             &:hover {
                 border-bottom: 2px solid #72568b;
                 background: #9b7fb5;
             }
         }
     }
-
     &.tv {
         padding: .9375rem;
         background: #fff url(imageUrl/images/desktop/tvadbannerFuton.jpg) no-repeat top center;
         border: 1px solid #ccc;
         font-size: .75rem;
-
         &:hover {
             border-color: #999;
             opacity: .85;
         }
-
         span {
             width: 36px;
             height: 35px;
@@ -224,7 +207,6 @@ aside.banner {
             color: #0076be;
         }
     }
-
     .ios , .android {
         width: 48%;
         height: 3.375rem;
@@ -236,7 +218,6 @@ aside.banner {
         border-width: 1px 1px 3px;
         background-position: center;
         background-repeat: no-repeat;
-
         &:first-child {
             margin: 0 4% 0 0;
         }
@@ -244,10 +225,10 @@ aside.banner {
             border-color: #999;
         }
         &.ios {
-            background-image: url(imageUrl/images/desktop/ios.gif) 
+            background-image: url(imageUrl/images/desktop/ios.gif)
         }
         &.android {
-            background-image: url(imageUrl/images/desktop/android.gif) 
+            background-image: url(imageUrl/images/desktop/android.gif)
         }
     }
 }
@@ -256,15 +237,12 @@ aside.postBanner {
     float: left;
     margin: 1.25rem 0;
     text-align: center;
-
-
     h2, p {
         width: 100%;
     }
     h2 {
         margin: .5rem 0;
         font-size: 1.5rem;
-
     }
     p {
         font-size: 1.125rem;
@@ -274,7 +252,6 @@ aside.postBanner {
         padding: .625rem 1.25rem;
         margin: 1rem 0 0 0;
         color: #fff;
-
         &:before, &:after {
             width: 3rem;
             height: 3.188rem;
