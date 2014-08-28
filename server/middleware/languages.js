@@ -15,14 +15,13 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
 
-            var app = req.rendrApp;
-            var siteLocation = app.session.get('siteLocation');
-            var location = app.session.get('location');
-            var languages;
-            var selectedLanguage;
+            var location = req.rendrApp.session.get('location');
+            var siteLocation = req.rendrApp.session.get('siteLocation');
             var userAgent = req.get('user-agent') || utils.defaults.userAgent;
+            var selectedLanguage;
+            var languages;
 
-            function fetchLanguages(done) {
+            function fetch(done) {
                 dataAdapter.get(req, '/countries/' + siteLocation + '/languages', done.errfcb);
             }
 
@@ -52,7 +51,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                     models: _languages,
                     _byId: {}
                 };
-
                 languages.models.forEach(function each(language) {
                     languages._byId[language.locale] = language;
                 });
@@ -61,10 +59,10 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function transition(done) {
-                var lastSelectedLanguage = app.session.get('selectedLanguage');
+                var lastSelectedLanguage = req.rendrApp.session.get('selectedLanguage');
 
                 if (!isNaN(lastSelectedLanguage)) {
-                    app.session.clear('selectedLanguage');
+                    req.rendrApp.session.clear('selectedLanguage');
                 }
                 done();
             }
@@ -75,22 +73,22 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
-                selectedLanguage = language || app.session.get('selectedLanguage') || languages.models[0].locale;
+                selectedLanguage = language || req.rendrApp.session.get('selectedLanguage') || languages.models[0].locale;
                 done();
             }
 
             function store(done) {
-                app.session.update({
+                req.rendrApp.session.update({
                     languages: languages
                 });
-                app.session.persist({
+                req.rendrApp.session.persist({
                     selectedLanguage: selectedLanguage
                 });
                 done();
             }
 
             function check(done) {
-                var selectedLanguage = app.session.get('selectedLanguage');
+                var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
                 var language = req.param('language');
                 var redirect;
 
@@ -115,7 +113,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             asynquence().or(fail)
-                .then(fetchLanguages)
+                .then(fetch)
                 .then(parse)
                 .then(transition)
                 .then(select)

@@ -1,0 +1,32 @@
+'use strict';
+
+module.exports = {
+    'default': false,
+    'development': 'UA-50756825-1',
+    'staging': 'UA-50756825-1',
+    'testing': 'UA-50756825-1',
+    'www.olx.com.ve': 'UA-54083301-1',
+    'www.olx.com.pe': 'UA-54083301-17',
+    'www.olx.com.ec': 'UA-54083301-18',
+    'www.olx.com.bo': 'UA-54083301-19',
+    'www.olx.com.br': 'UA-54083301-20',
+    'www.olx.co.za': 'UA-54083301-21',
+    'www.olx.com.ar': 'UA-54083301-22',
+    'www.olx.co.ke': 'UA-54083301-23',
+    'www.olx.com.ng': 'UA-54083301-24',
+    'www.olx.com.gh': 'UA-54083301-25',
+    'www.olx.com.co': 'UA-54083301-27',
+    'www.olx.com.sv': 'UA-54083301-28',
+    'www.olx.cl': 'UA-54083301-29',
+    'www.olx.com': 'UA-54083301-30',
+    'www.olx.co.cr': 'UA-54083301-31',
+    'www.olx.com.gt': 'UA-54083301-32',
+    'www.olx.com.pa': 'UA-54083301-33',
+    'www.olx.co.tz': 'UA-54083301-34',
+    'www.olx.co.ug': 'UA-54083301-35',
+    'www.olx.com.mx': 'UA-54083301-36',
+    'www.olx.es': 'UA-54083301-37',
+    'www.olx.com.py': 'UA-54083301-38',
+    'www.olx.hn': 'UA-54083301-39',
+    'www.olx.com.uy': 'UA-54083301-40'
+};

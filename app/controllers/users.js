@@ -4,6 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
+var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -35,7 +36,8 @@ function register(params, callback) {
         }
         callback(null, {
             form: form,
-            agreeTerms: params.agreeTerms
+            agreeTerms: params.agreeTerms,
+            analytics: analytics.generateURL.call(this)
         });
     }
 }
@@ -60,7 +62,8 @@ function login(params, callback) {
         }
         callback(null, {
             form: form,
-            redirect: params.redirect
+            redirect: params.redirect,
+            analytics: analytics.generateURL.call(this)
         });
     }
 }

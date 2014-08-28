@@ -1,64 +1,78 @@
-<section id="home" class="fullCont">
-	<h1>Desapegar é só começar!</h1>
-	<h2>Temos <strong>7.856.040</strong> anúncios hoje.</h2>
-
-	<section class="categories">
-		<h3>Categorias mais populares na OLX</h3>
-		<span class="slideBtn icons prev"></span>
-		<ul class="swiper-container">
-			<div class="swiper-wrapper">
-	            {% for category in categories %}
-	                <li class="swiper-slide">
-	                    <a href="{{ category | slugToUrl | link }}">
-	                    	<span class="icons icon-cat-{{ category.id }}"></span>
-	                      	{{ category.trName }}
-	                    </a>
-	                </li>
-	            {% endfor %}
-            </div>
-        </ul>
-        <span class="slideBtn icons next"></span>
-	</section>
-
-	<section class="apps">
-		<a href="http://ad-x.co.uk/API/click/olxinc789048jo/web252cae107b6be2" target="_blank"></a>
-		<a href="http://ad-x.co.uk/API/click/olxinc789048jo/web2531a45323c5e4" target="_blank"></a>
-	</section>
-
-	<section class="states">
-		<ul>
-			<li>Selecione seu Estado:</li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'acre.olx.com.br'}) }}">AC</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'alagoas.olx.com.br'}) }}">AL</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'amapa.olx.com.br'}) }}">AP</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'amazonas.olx.com.br'}) }}">AM</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'bahia.olx.com.br'}) }}">BA</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'ceara.olx.com.br'}) }}">CE</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'distritofederal.olx.com.br'}) }}">DF</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'espiritosanto.olx.com.br'}) }}">ES</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'goias.olx.com.br'}) }}">GO</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'maranhao.olx.com.br'}) }}">MA</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'matogrosso.olx.com.br'}) }}">MT</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'mattogrossodosul.olx.com.br'}) }}">MS</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'minasgerais.olx.com.br'}) }}">MG</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'parana.olx.com.br'}) }}">PR</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'paraiba.olx.com.br'}) }}">PB</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'para.olx.com.br'}) }}">PA</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'pernambuco.olx.com.br'}) }}">PE</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'piaui.olx.com.br'}) }}">PI</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'riodejaneiro.olx.com.br'}) }}">RJ</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'riograndedonorte.olx.com.br'}) }}">RN</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'riograndedosul.olx.com.br'}) }}">RS</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'roraima.olx.com.br'}) }}">RR</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'santacatarina.olx.com.br'}) }}">SC</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'sergipe.olx.com.br'}) }}">SE</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'saopaulo.olx.com.br'}) }}">SP</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'tocantins.olx.com.br'}) }}">TO</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'www.olx.com.br'}) }}"><strong>Brasil</strong></a></li>
-		</ul>
-	</section>
-
-	{% view 'partials/map' %}
-	
-	<div class="clear"></div>
+<section class="home">
+	<div class="titleBar">
+		<h1>Encuentra anuncios en <strong>San Cristóbal</strong></h1>
+		<span>Cambia tu ubicación</span>
+	</div>
+	<ul class="icons">
+		{% for category in categories %}
+			<li>
+				<a href="{{ category | slugToUrl | link }}">
+					<span class="icon cat-{{ category.id }}"></span>
+					<strong>{{ category.trName }}</strong>
+				</a>
+				<ul>
+					<li><a href="">Sub cat, </a></li>
+					<li><a href="">Sub cat2, </a></li>
+					<li><a href="">Sub cat 3, </a></li>
+					<li><a href="">Sub cat dsff</a></li>
+				</ul>
+			</li>
+	{% endfor %}
+	</ul>
+</section>
+<aside class="banner howto">
+	<h1>Todos pueden vender en OLX</h1>
+	<span>Aprende a vender</span>
+</aside>
+<aside class="banner tv">
+	<span></span>
+	<h1>¿Lo has visto?</h1>
+	<p>¡Ya puedes ver nuestro nuevo anuncio de TV!</p>
+</aside>
+<aside class="banner">
+	<a href="" class="ios"></a>
+	<a href="" class="android"></a>
+</aside>
+<aside class="postBanner">
+	<h2>¿Tienes algo que vender?</h2>
+	<p>Publica tu anuncio GRATIS en OLX</p>
+	<a class="btn orange" href="">Publica un anuncio gratis</a>
+</aside>
+<section class="home">
+	<div class="titleBar small">
+		<h2>Popular en olx.com.ve</h2>
+	</div>
+	<h1>Ciudades populares:</h1>
+	<h1>Otras Ciudades en Táchira:</h1>
+	<ul class="cities">
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+	</ul>
+	<ul class="cities">
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+		<li><a href="">Ciudedatila</a></li>
+	</ul>
 </section>

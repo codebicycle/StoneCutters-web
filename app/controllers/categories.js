@@ -37,7 +37,6 @@ function list(params, callback) {
             var icons = config.get(['icons', platform], []);
             var country = this.app.session.get('location').url;
 
-            analytics.reset();
             seo.addMetatag('title', response.categories.metadata.title);
             seo.addMetatag('description', response.categories.metadata.description);
             seo.update();
@@ -210,7 +209,6 @@ function handleItems(params, promise) {
             postingLink: postingLink
         });
 
-        analytics.reset();
         analytics.setPage('listing');
         analytics.addParam('category', category.toJSON());
         if (subcategory) {
@@ -270,7 +268,6 @@ function handleShow(params, promise) {
             }
         });
 
-        analytics.reset();
         analytics.addParam('category', _category.toJSON());
         seo.addMetatag.call(this, 'title', _category.get('trName'));
         seo.addMetatag.call(this, 'description', _category.get('trName'));

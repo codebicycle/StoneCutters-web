@@ -47,7 +47,6 @@ function categories(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            analytics.reset();
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
             seo.update();
@@ -104,7 +103,6 @@ function subcategories(params, callback) {
             if (!category) {
                 return helpers.common.redirect.call(this, '/posting');
             }
-            analytics.reset();
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
             seo.update();
@@ -218,7 +216,6 @@ function form(params, callback) {
             var category = _categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
-            analytics.reset();
             analytics.addParam('category', category.toJSON());
             analytics.addParam('subcategory', subcategory.toJSON());
             seo.addMetatag('robots', 'noindex, nofollow');
@@ -353,7 +350,6 @@ function success(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.reset();
             analytics.addParam('item', item);
             analytics.addParam('category', category.toJSON());
             analytics.addParam('subcategory', subcategory.toJSON());
@@ -535,7 +531,6 @@ function edit(params, callback) {
             else {
                 _form = form;
             }
-            analytics.reset();
             analytics.addParam('item', item);
             analytics.addParam('category', category.toJSON());
             analytics.addParam('subcategory', subcategory.toJSON());

@@ -5,6 +5,8 @@ var asynquence = require('asynquence');
 var middlewares = {
     environment: require('./environment'),
     redirections: require('./redirections'),
+    location: require('./location'),
+    languages: require('./languages'),
     interstitial: require('./interstitial')
 };
 

@@ -1,153 +1,65 @@
 'use strict';
 
-var asynquence = require('asynquence');
 var _ = require('underscore');
-var URLParser = require('url');
-var seo = require('../modules/seo');
+var asynquence = require('asynquence');
 var common = require('./common');
-var marketing = require('./marketing');
+var seo = require('../modules/seo');
+var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
-var utils = require('../../shared/utils');
-var intertitial = config.get(['interstitial', 'enabled'], false);
 var isServer = typeof window === 'undefined';
 
-function clearSession(done) {
+function prepare(done) {
+    if (!isServer) {
+        this.app.session.update({
+            referer: this.app.session.get('referer')
+        });
+    }
     this.app.session.clear('page');
     this.app.session.clear('postingLink');
-    done();
-}
-
-function setCurrentRoute(done) {
     this.app.session.update({
         currentRoute: this.currentRoute
     });
     done();
 }
 
-function setReferer(done) {
-    if (!isServer) {
-        this.app.session.update({
-            referer: this.app.session.get('referer')
-        });
-    }
+function processAnalytics(done) {
+    analytics.reset();
     done();
 }
 
-function setLanguage(params, done) {
-    if (isServer) {
-        return done();
-    }
-    var selectedLanguage = this.app.session.get('selectedLanguage');
-    var languages = this.app.session.get('languages');
-    var language = (params ? params.language : undefined);
-    var redirect;
-    var url;
-
-    if (selectedLanguage === languages.models[0].locale && language) {
-        redirect = true;
-    }
-    else if (selectedLanguage !== languages.models[0].locale && !language) {
-        redirect = true;
-    }
-    else if (language && language !== selectedLanguage) {
-        redirect = true;
-    }
-    if (redirect) {
-        done.abort();
-        url = URLParser.parse(this.app.session.get('url'));
-        url = [url.pathname, (url.search || '')].join('');
-        return common.redirect.call(this.app.router || this, url, null, {
-            status: 200
-        });
-    }
-    if (!params || !language || selectedLanguage === language || !languages._byId[language]) {
-        return done();
-    }
-    this.app.session.persist({
-        selectedLanguage: language
-    });
+function processSeo(done) {
+    seo.resetHead.call(this);
     done();
 }
 
-function setLocation(params, done) {
-    if (isServer) {
-        return done();
-    }
-    var app = this.app;
-    var location = this.app.session.get('location');
-    var previousLocation;
-    var redirect;
-    var url;
+function processHeaders(done) {
+    changeHeaders.call(this);
+    done();
+}
 
-    if (!params || !params.location) {
-        return done();
-    }
-    previousLocation = this.app.session.get('siteLocation');
-    if (previousLocation === params.location) {
-        return done();
-    }
-    if (!params.location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
-        url = URLParser.parse(this.app.session.get('url'));
-        url = [url.pathname, (url.search || '')].join('');
-        common.redirect.call(this.app.router || this, url, {
-            location: previousLocation
-        }, {
-            status: 200
-        });
-        done.abort();
+function changeHeaders(headers, page) {
+    if (!isServer || !config.get(['cache', 'enabled'], false) || (headers && _.isEmpty(headers))) {
         return;
-    } 
-    else if (params.location && params.location.split('.').shift() === 'www') {
-        redirect = true;
     }
-    this.app.fetch({
-        location: {
-            model: 'City',
-            params: {
-                location: params.location
-            }
+    if (!headers) {
+        if (!page) {
+            var currentRoute = this.app.session.get('currentRoute');
+            page = [currentRoute.controller, currentRoute.action];
         }
-    }, {
-        readFromCache: false
-    }, function afterFetch(err, result) {
-        if (err) {
-            return done.fail(err);
-        }
-        url = result.location.get('url');
-        if (location.url.split('.').pop() !== url.split('.').pop()) {
-            common.redirect.call(this.app.router || this, '/', null, {
-                status: 200
-            });
-            done.abort();
-            return;
-        }
-        location.current = result.location.toJSON();
-        app.session.persist({
-            siteLocation: url
-        });
-        app.session.update({
-            location: location
-        });
-        if (redirect) {
-            url = URLParser.parse(this.app.session.get('url'));
-            url = [url.pathname, (url.search || '')].join('');
-            common.redirect.call(this.app.router || this, common.removeParams(url, 'location'), null, {
-                status: 200
-            });
-            done.abort();
-            return;
-        }
-        done();
-    }.bind(this));
+        headers = config.get(['cache', 'headers'].concat(page), config.get(['cache', 'headers', 'default'], {}));
+    }
+    if (_.isEmpty(headers)) {
+        return;
+    }
+    for (var header in headers) {
+        this.app.req.res.setHeader(header, headers[header]);
+    }
 }
 
-function processForm(params, isForm) {
+function processForm(params, done) {
     var form;
     var errors;
 
-    if (!isForm) {
-        return;
-    }
     if (this.app.session.get('platform') === 'wap' && params && params.errors) {
         if (typeof params.errors === 'string') {
             params.errors = [params.errors];
@@ -183,56 +95,36 @@ function processForm(params, isForm) {
         form = _.clone(this.app.session.get('form'));
         this.app.session.clear('form');
     }
-    return form;
-}
-
-function changeHeaders(headers, page) {
-    if (!isServer || !config.get(['cache', 'enabled'], false) || (headers && _.isEmpty(headers))) {
-        return;
-    }
-    if (!headers) {
-        if (!page) {
-            var currentRoute = this.app.session.get('currentRoute');
-            page = [currentRoute.controller, currentRoute.action];
-        }
-        headers = config.get(['cache', 'headers'].concat(page), config.get(['cache', 'headers', 'default'], {}));
-    }
-    if (_.isEmpty(headers)) {
-        return;
-    }
-    for (var header in headers) {
-        this.app.req.res.setHeader(header, headers[header]);
-    }
+    done(form);
 }
 
 module.exports = {
     control: function(params, options, callback) {
-        if (options instanceof Function) {
+        var promise;
+
+        if (_.isFunction(options)) {
             callback = options;
             options = {};
         }
         _.defaults(options, {
-            isForm: false,
             seo: true,
-            cache: true
+            cache: true,
+            isForm: false
         });
-        asynquence().or(fail.bind(this))
-            .then(clearSession.bind(this))
-            .then(setCurrentRoute.bind(this))
-            .then(setReferer.bind(this))
-            .then(setLanguage.bind(this, params))
-            .then(setLocation.bind(this, params))
-            .val(success.bind(this));
 
-        function success() {
-            if (options.seo) {
-                seo.resetHead.call(this);
-            }
-            if (options.cache) {
-                changeHeaders.call(this);
-            }
-            callback.call(this, processForm.call(this, params, options.isForm));
+        promise = asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(processAnalytics.bind(this));
+        if (options.seo) {
+            promise.then(processSeo.bind(this));
         }
+        if (options.cache) {
+            promise.then(processHeaders.bind(this));
+        }
+        if (options.isForm) {
+            promise.then(processForm.bind(this, params));
+        }
+        promise.val(callback.bind(this));
 
         function fail(err) {
             this.app.session.persist({
