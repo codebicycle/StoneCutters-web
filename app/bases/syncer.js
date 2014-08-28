@@ -54,9 +54,14 @@ function serverSync(method, model, options) {
 
 module.exports = {
     serverSync: serverSync,
-    sync: function() {
+    sync: function(method, model, options) {
         var syncMethod = isServer ? serverSync : this.clientSync;
 
+        if (options) {
+            options.data = _.defaults(options.data || {}, {
+                platform: this.app.session.get('platform')
+            });
+        }
         return syncMethod.apply(this, arguments);
     },
     formatClientUrl: function(url, api) {
