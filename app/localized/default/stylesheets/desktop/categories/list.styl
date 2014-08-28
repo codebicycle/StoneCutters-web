@@ -1,4 +1,4 @@
-section#homeIcons {
+section.home {
 	width: 41.25rem;
 	float: left;
 	border: 1px solid #ccc;
@@ -9,15 +9,23 @@ section#homeIcons {
     	padding: .9375rem 1.25rem;
     	background: #f1f1f1;
     	border-bottom: 1px solid #ccc;
-
+        &.small {
+            padding: .625rem 1.25rem;
+        }
+        h1, h2 {
+            display: inline;
+            line-height: 1.875rem;
+            margin: 0 .625rem 0 0 ;
+            font-weight: normal;
+            color: #000;
+        }
     	h1 {
-			display: inline;
 			font-size: 1.5rem;
-			line-height: 1.875rem;
-			margin: 0 .625rem 0 0 ;
-			font-weight: normal;
-			color: #000;
+			
     	}
+        h2 {
+            font-size: 1.125rem;
+        }
     	span {
     		display: inline-block;
     		font-size: .875rem;
@@ -34,7 +42,7 @@ section#homeIcons {
     	}
     }
 
-    > ul {
+    > ul.icons {
     	display: inline-block;
     	margin: .625rem 0 0 1.25rem;
 
@@ -121,6 +129,28 @@ section#homeIcons {
     			}
     		}
     	}
+    }
+    > h1, ul.cities {
+        width: 19.375rem;
+        float: left;
+        margin: 1rem 0 0 .625rem;
+    } 
+    > h1 {
+        padding: 0 0 .625rem;
+        font-size: .8125rem;
+        border-bottom: 1px solid #ccc; 
+    }
+    ul.cities {
+        li {
+            width: 33%;
+            float: left;
+            padding: 0 0 .3125rem 0;
+            font-size: .8125rem;
+
+            a {
+                color: #0076be;
+            }
+        }
     }
 }
 aside.banner {
@@ -215,6 +245,48 @@ aside.banner {
         }
         &.android {
             background-image: url(imageUrl/images/desktop/android.gif) 
+        }
+    }
+}
+aside.postBanner {
+    width: 41.25rem;
+    float: left;
+    margin: 1.25rem 0;
+    text-align: center;
+
+
+    h2, p {
+        width: 100%;
+    }
+    h2 {
+        margin: .5rem 0;
+        font-size: 1.5rem;
+
+    }
+    p {
+        font-size: 1.125rem;
+    }
+    a {
+        position: relative;
+        padding: .625rem 1.25rem;
+        margin: 1rem 0 0 0;
+        color: #fff;
+
+        &:before, &:after {
+            width: 3rem;
+            height: 3.188rem;
+            position: absolute;
+            top: -1.25rem;
+            background-image: url("/images/desktop/arrows.gif");
+            content: "";
+        }
+        &:before {
+            background-position: 0 0;
+            left: -4rem;;
+        }
+        &:after {
+            background-position: -3rem 0;
+            right: -4rem;
         }
     }
 }
