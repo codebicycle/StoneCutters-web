@@ -24,10 +24,12 @@ module.exports = function(app, dataAdapter) {
             function submit(done, data) {
                 var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
                 var language = req.rendrApp.session.get('languages')._byId[selectedLanguage] || {};
+                var platform = req.rendrApp.session.get('platform');
                 var options = {
                     data: data,
                     query: {
-                        languageId: language.id
+                        languageId: language.id,
+                        platform: platform
                     }
                 };
                 var user = req.rendrApp.session.get('user');
@@ -36,7 +38,7 @@ module.exports = function(app, dataAdapter) {
                 if (user) {
                     options.query.token = user.token;
                 }
-                data.platform = req.rendrApp.session.get('platform');
+                data.platform = platform;
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
@@ -127,7 +129,8 @@ module.exports = function(app, dataAdapter) {
                     query: {
                         intent: 'validate',
                         postingSession: item.postingSession,
-                        languageCode: item.languageCode
+                        languageCode: item.languageCode,
+                        platform: platform
                     },
                     data: item
                 }, callback);
@@ -157,7 +160,8 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/images', {
                     query: {
                         postingSession: item.postingSession,
-                        url: req.rendrApp.session.get('siteLocation')
+                        url: req.rendrApp.session.get('siteLocation'),
+                        platform: platform
                     },
                     data: data,
                     multipart: true
@@ -167,7 +171,8 @@ module.exports = function(app, dataAdapter) {
             function post(done, response, _images) {
                 var query = {
                     postingSession: item.postingSession,
-                    languageCode: item.languageCode
+                    languageCode: item.languageCode,
+                    platform: platform
                 };
                 var user = req.rendrApp.session.get('user');
 

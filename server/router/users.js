@@ -11,6 +11,7 @@ module.exports = function userRouter(app, dataAdapter) {
     var loginHandler = (function login() {
 
         return function handler(req, res, data) {
+            var platform = req.rendrApp.session.get('platform');
             var usernameOrEmail = data.usernameOrEmail;
             var password = data.password;
             var redirect = data.redirect;
@@ -18,7 +19,8 @@ module.exports = function userRouter(app, dataAdapter) {
             function getChallenge(done) {
                 dataAdapter.get(req, '/users/challenge', {
                     query: {
-                        u: usernameOrEmail
+                        u: usernameOrEmail,
+                        platform: platform
                     }
                 }, done.errfcb);
             }
@@ -28,7 +30,8 @@ module.exports = function userRouter(app, dataAdapter) {
 
                 done({
                     c: data.challenge,
-                    h: crypto.createHash('sha512').update(hash + usernameOrEmail).digest('hex')
+                    h: crypto.createHash('sha512').update(hash + usernameOrEmail).digest('hex'),
+                    platform: platform
                 });
             }
 
@@ -95,6 +98,9 @@ module.exports = function userRouter(app, dataAdapter) {
                 data.languageId = 10;
                 user = _.clone(data);
                 dataAdapter.post(req, '/users', {
+                    query: {
+                        platform: req.rendrApp.session.get('platform')
+                    },
                     data: data
                 }, done.errfcb);
             }
