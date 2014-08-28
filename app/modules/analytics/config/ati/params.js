@@ -122,10 +122,9 @@ module.exports = {
         process: true,
         names: {
             page_name: 'edit_ad_form',
-            category: 'expired_category',
-            subcategory: 'expired_subCategory',
-            ad_category: 'expired_category',
-            ad_subcategory: 'expired_subCategory',
+            category: 'posting',
+            ad_category: '',
+            ad_subcategory: '',
             ad_id: '',
             ad_photo: 0,
             funnel_page: 'edit_ad_form',
@@ -251,7 +250,7 @@ module.exports = {
         process: true,
         names: {
             page_name: 'expired_category',
-            category: 'expired_category',
+            category: 'listing',
             subcategory: 'expired_subCategory'
         }
     },
@@ -259,8 +258,7 @@ module.exports = {
         process: true,
         names: {
             page_name: 'expired_category',
-            category: 'expired_category',
-            subcategory: 'expired_subCategory'
+            category: 'static'
         }
     },
     'pages#error': {

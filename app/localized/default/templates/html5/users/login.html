@@ -15,4 +15,6 @@
         </div>
     </form>
     <a href="{{ '/register' | link }}">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
+    {% set templateName = template + '/partials/analytics.html' %}
+    {% include templateName %}
 </section>
