@@ -102,22 +102,19 @@ module.exports = {
     control: function(params, options, callback) {
         var promise;
 
-        if (options instanceof Function) {
+        if (_.isFunction(options)) {
             callback = options;
             options = {};
         }
         _.defaults(options, {
-            analytics: true,
             seo: true,
             cache: true,
             isForm: false
         });
 
         promise = asynquence().or(fail.bind(this))
-            .then(prepare.bind(this));
-        if (options.analytics) {
-            promise.then(processAnalytics.bind(this));
-        }
+            .then(prepare.bind(this))
+            .then(processAnalytics.bind(this));
         if (options.seo) {
             promise.then(processSeo.bind(this));
         }
