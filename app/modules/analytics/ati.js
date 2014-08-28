@@ -92,11 +92,11 @@ module.exports = function analyticsHelper() {
         if(params.page_name === 'expired_category') {
             if (options.subcategory) {
                 params.category = standarizeName(options.subcategory.name);
-                params.page_name = 'listing_' + options.subcategory.name;
+                params.page_name = 'listing_' + standarizeName(options.subcategory.name);
             }
             else if (options.category) {
                 params.category = standarizeName(options.category.name);
-                params.page_name = 'listing_' + options.category.name;
+                params.page_name = 'listing_' + standarizeName(options.category.name);
             }
         }
         if((params.page_name === 'posting_step4' || params.page_name === 'edit_ad_form') && options.category) {
