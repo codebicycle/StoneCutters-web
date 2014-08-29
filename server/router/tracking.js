@@ -102,6 +102,29 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
         }
 
+        function atiTrackingDev(req) {
+            var countryId = 0; // req.query.locId;
+            var atiConfig;
+            var analytic;
+            var options;
+
+            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+            if (atiConfig) {
+                options = defaultRequestOptions(req);
+                analytic = new Tracker('ati', {
+                    id: atiConfig.siteId,
+                    host: atiConfig.logServer
+                });
+                options.debug = true;
+                analytic.track({
+                    page: req.query.page,
+                    referer: req.query.referer,
+                    custom: req.query.custom,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
+                }, options);
+            }
+        }
+
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
             var location = req.rendrApp.session.get('siteLocation');
@@ -147,6 +170,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 googleTracking(req, trackerId, host, page);
             }
             atiTracking(req);
+            atiTrackingDev(req);
         }
     })();
 
