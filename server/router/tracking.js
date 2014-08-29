@@ -176,10 +176,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
     (function pageevent() {
         app.get('/analytics/pageevent.gif', handler);
 
-        function googleTracking(req) {
+        function googleTracking(req, trackerId, host) {
             var analytic = new Tracker('google-event', {
-                id: 'UA-31226936-4',
-                host: req.host
+                id: trackerId,
+                host: host
             });
             var options = defaultRequestOptions(req);
 
@@ -190,39 +190,40 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }, req.query), options);
         }
 
-        function atiTracking(req) {
-            var countryId = req.query.locId;
-            var atiConfig;
-            var analytic;
-            var options;
-
-            if (env !== 'production') {
-                countryId = 0;
-            }
-            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
-            if (atiConfig) {
-                options = defaultRequestOptions(req);
-                analytic = new Tracker('ati-event', {
-                    id: atiConfig.siteId,
-                    host: atiConfig.logServer
-                });
-                analytic.track({
-                    custom: req.query.custom,
-                    url: req.query.url,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
-                }, options);
-            }
-        }
-
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
+            var location = req.rendrApp.session.get('siteLocation');
+            var siteLocation = location || req.query.locUrl;
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
+            var osName = req.rendrApp.session.get('osName');
+            var osVersion = req.rendrApp.session.get('osVersion');
+            var userAgent = req.get('user-agent');
+            var host = req.host;
+            var bot;
+            var trackerId;
+            var platformUrl;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
 
-            googleTracking(req);
-            atiTracking(req);
+            if (!location) {
+                if (!siteLocation) {
+                    return console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl);
+                }
+                return console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
+            }
+            bot = isBot(userAgent, platform, osName, osVersion);
+            if (bot) {
+                return statsd.increment([req.query.locNm, 'bot', bot, platform]);
+            }
+            trackerId = analytics.google.getId(siteLocation);
+            if (trackerId && ~siteLocation.indexOf('.olx.com.ve')) {
+                if (req.rendrApp.session.get('internet.org')) {
+                    host = host.replace('olx', 'olx-internet-org');
+                }
+                googleTracking(req, trackerId, host);
+            }
         }
     })();
 

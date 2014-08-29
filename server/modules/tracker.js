@@ -164,8 +164,7 @@ Tracker.prototype.track = function(options, optionsRequest, callback) {
     var api;
 
     if (_.isUndefined(tracking)) {
-        console.log('[OLX_DEBUG] Invalid tracker type [', this.type, ']');
-        return;
+        return console.log('[OLX_DEBUG] Invalid tracker type [', this.type, ']');
     }
     options = _.defaults({}, options, this.options);
     api = tracking.call(this, _.clone(options));
