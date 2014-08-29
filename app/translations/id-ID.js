@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Jelajahi kategori <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Silakan pilih kota untuk memasang barang',
     'listingpageitemslisting.AllResultsNew': 'Semua hasil',
+    'listingpageitemslisting.FindAdsIn2': 'Cari iklan di <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> hasil untuk <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Maaf tidak ada hasil untuk pencarian Anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Maaf, kami tidak menemukan hasil untuk <<CATEGORY>> di <<REGION>>.',

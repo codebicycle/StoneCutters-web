@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': '\u6D4F\u89C8<<BRAND>>\u5168\u90E8\u7C7B\u5225',
     'countrystatecityv2.MessageFromPost': '\u8BF7\u9009\u62E9\u4E00\u4E2A\u57CE\u5E02\u6765\u520A\u767B\u5E7F\u544A',
     'listingpageitemslisting.AllResultsNew': '\u6240\u6709\u7ED3\u679C',
+    'listingpageitemslisting.FindAdsIn2': '\u5728<<LOCATION>>\u627E\u5E7F\u544A',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>>\u7684<<NUMBER>>\u7D50\u679C',
     'listingpageitemslisting.WeAreSorryNoResults': '\u5BF9\u4E0D\u8D77\uFF0C\u6CA1\u6709\u627E\u5230\u60A8\u641C\u7D22\u7684\u7ED3\u679C',
     'listingpageitemslisting.ZeroResultsPage': '\u5BF9\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u5728<<REGION>> \u7684 <<CATEGORY>> \u76F8\u5173\u7ED3\u679C\u3002',

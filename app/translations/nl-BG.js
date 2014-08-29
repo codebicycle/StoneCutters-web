@@ -56,6 +56,7 @@ module.exports = {
     'lostform.Username': 'Gebruikersnaam',
     'registrationconfirmsuccesstext.Browse': 'Zoek in de <<BRAND>> rubrieken',
     'countrystatecityv2.MessageFromPost': 'Kies een stad om een advertentie te kunnen plaatsen',
+    'listingpageitemslisting.FindAdsIn2': 'Vind advertenties in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',

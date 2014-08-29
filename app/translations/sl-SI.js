@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Prebrskaj kategorije <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Za objavo oglasa je potrebno izbrati kraj.',
     'listingpageitemslisting.AllResultsNew': 'Vsi rezultati',
+    'listingpageitemslisting.FindAdsIn2': 'Najdi oglase v <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultata/i/ov za <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Za va\u0161e iskanje ni rezultatov.',
     'listingpageitemslisting.ZeroResultsPage': 'V <<CATEGORY>> na <<REGION>> ni nobenih rezultatov.',

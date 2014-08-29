@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Pretra\u017Eite <<BRAND>> kategorije',
     'countrystatecityv2.MessageFromPost': 'Molimo, odaberite grad kako biste poslali stavku',
     'listingpageitemslisting.AllResultsNew': 'Svi rezultati',
+    'listingpageitemslisting.FindAdsIn2': 'Prona\u0111i oglase u <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultata za <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Trenutno nema rezultata za va\u0161e pretra\u017Eivanje.',
     'listingpageitemslisting.ZeroResultsPage': 'Na\u017Ealost, nije prona\u0111en niti jedan rezultat u <<CATEGORY>> u <<REGION>>.',
