@@ -1,8 +1,10 @@
 'use strict';
 
 var _ = require('underscore');
+var configAnalytics = require('./config');
 var google = require('./google');
 var ati = require('./ati');
+var utils = require('../../../shared/utils');
 
 function stringifyParams(params) {
     var str = [];
@@ -30,24 +32,36 @@ function getURLName(page) {
     return name.join('');
 }
 
-function generate(query) {
-    var urls = [];
-    var page = getURLName.call(this, query.page);
-    var sid = this.app.session.get('sid');
-    var location = this.app.session.get('location');
-    var params = {};
+function checkPage(page) {
+    var googlePage = utils.get(configAnalytics, ['google', 'pages', page]);
+    var ati = utils.get(configAnalytics, ['ati', 'params', page]);
 
-    if (sid) {
-        params.sid = sid;
+    return (!!googlePage && !!ati);
+}
+
+function generate(query) {
+    var page = getURLName.call(this, query.page);
+    var urls = [];
+    var params = {};
+    var location;
+    var sid;
+
+    if (checkPage(page)) {
+        location = this.app.session.get('location');
+        sid = this.app.session.get('sid');
+
+        if (sid) {
+            params.sid = sid;
+        }
+        params.r = Math.round(Math.random() * 1000000);
+        params.referer = (this.app.session.get('referer') || '-');
+        params.locNm = location.name;
+        params.locId = location.id;
+        params.locUrl = location.url;
+        google.generate.call(this, params, page, query.params);
+        ati.generate.call(this, params, page, query.params);
+        urls.push('/analytics/pageview.gif?' + stringifyParams(params));
     }
-    params.r = Math.round(Math.random() * 1000000);
-    params.referer = (this.app.session.get('referer') || '-');
-    params.locNm = location.name;
-    params.locId = location.id;
-    params.locUrl = location.url;
-    google.generate.call(this, params, page, query.params);
-    ati.generate.call(this, params, page, query.params);
-    urls.push('/analytics/pageview.gif?' + stringifyParams(params));
 
     return {
         urls: urls,
