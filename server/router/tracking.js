@@ -190,6 +190,30 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }, req.query), options);
         }
 
+        function atiTracking(req) {
+            var countryId = req.query.locId;
+            var atiConfig;
+            var analytic;
+            var options;
+
+            if (env !== 'production') {
+                countryId = 0;
+            }
+            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+            if (atiConfig) {
+                options = defaultRequestOptions(req);
+                analytic = new Tracker('ati-event', {
+                    id: atiConfig.siteId,
+                    host: atiConfig.logServer
+                });
+                analytic.track({
+                    custom: req.query.custom,
+                    url: req.query.url,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
+                }, options);
+            }
+        }
+
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
             var location = req.rendrApp.session.get('siteLocation');
@@ -224,6 +248,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 googleTracking(req, trackerId, host);
             }
+            atiTracking(req);
         }
     })();
 
