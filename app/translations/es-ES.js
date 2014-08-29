@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Buscar las categor\xEDas de <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Por favor selecciona una ciudad para continuar publicando',
     'listingpageitemslisting.AllResultsNew': 'Todos los resultados',
+    'listingpageitemslisting.FindAdsIn2': 'Encuentra anuncios en <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultados para <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Lo lamentamos pero no hay resultados para tu b\xFAsqueda.',
     'listingpageitemslisting.ZeroResultsPage': 'Disculpa, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',

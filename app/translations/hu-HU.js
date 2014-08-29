@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': '<<BRAND>> kateg\xF3ri\xE1k b\xF6ng\xE9sz\xE9se',
     'countrystatecityv2.MessageFromPost': 'T\xE9tel felad\xE1s\xE1hoz v\xE1lasszon egy telep\xFCl\xE9st',
     'listingpageitemslisting.AllResultsNew': '\xD6sszes tal\xE1lat',
+    'listingpageitemslisting.FindAdsIn2': 'Hirdet\xE9sek keres\xE9se a k\xF6vetkez\u0151 helyr\u0151l: <<LOCATION>>.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> eredm\xE9ny <<KEYWORD>> kulcssz\xF3ra',
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',
     'listingpageitemslisting.ZeroResultsPage': 'Sajn\xE1ljuk, nem tal\xE1ltunk eredm\xE9nyeket a <<CATEGORY>> kateg\xF3ri\xE1ban <<REGION>> r\xE9gi\xF3ban.',

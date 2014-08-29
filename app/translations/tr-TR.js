@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': '<<BRAND>> kategorilerine g\xF6z at',
     'countrystatecityv2.MessageFromPost': 'L\xFCtfen bir \xFCr\xFCn ilan\u0131 yollamak i\xE7in bir il girin',
     'listingpageitemslisting.AllResultsNew': 'B\xFCt\xFCn sonu\xE7lar',
+    'listingpageitemslisting.FindAdsIn2': '<<LOCATION>> konumunda ilan bul',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>> i\xE7in <<NUMBER>> sonu\xE7',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z bulunamad\u0131.',
     'listingpageitemslisting.ZeroResultsPage': '\xDCzg\xFCn\xFCz <<CATEGORY>> kategorisinde b\xF6lgesi <<REGION>> olan sonuca rastlanmad\u0131.',

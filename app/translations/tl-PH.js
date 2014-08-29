@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Maghanap sa mga Kategorya ng <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Pumili ng lungsod para magpost ng item',
     'listingpageitemslisting.AllResultsNew': 'Lahat ng resulta',
+    'listingpageitemslisting.FindAdsIn2': 'Maghanap ng mga anunsyo sa <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> na mga resulta para sa <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',
     'listingpageitemslisting.ZeroResultsPage': 'Paumanhin, walang resulta sa <<CATEGORY>> sa <<REGION>>.',

@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'P\u0101rl\u016Bkot <<BRAND>> kategorijas',
     'countrystatecityv2.MessageFromPost': 'L\u016Bdzu, izv\u0113lieties pils\u0113tu, lai ievietotu sludin\u0101jumu par preci',
     'listingpageitemslisting.AllResultsNew': 'Visi rezult\u0101ti',
+    'listingpageitemslisting.FindAdsIn2': 'Atrast sludin\u0101jumus \u0161aj\u0101 viet\u0101: <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezult\u0101ti p\u0113c <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Diem\u017E\u0113l nevaram atrast j\u016Bsu nor\u0101d\u012Btajiem parametriem atbilsto\u0161us rezult\u0101tus.',
     'listingpageitemslisting.ZeroResultsPage': 'Diem\u017E\u0113l m\u0113s neatrad\u0101m rezult\u0101tus <<CATEGORY>>, <<REGION>>.',

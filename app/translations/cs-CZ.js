@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Proch\xE1zet kategorie webu <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Vyberte pros\xEDm m\u011Bsto, abyste mohli zadat nab\xEDdku zbo\u017E\xED',
     'listingpageitemslisting.AllResultsNew': 'V\u0161echny v\xFDsledky hled\xE1n\xED',
+    'listingpageitemslisting.FindAdsIn2': 'Najd\u011Bte inzer\xE1ty v <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> v\xFDsledk\u016F pro <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Je n\xE1m l\xEDto, ale pro V\xE1mi zadan\xE9 vyhled\xE1v\xE1n\xED nem\xE1me v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Omlouv\xE1me se, ale nena\u0161li jsme \u017E\xE1dn\xE9 v\xFDsledky v kategorii <<CATEGORY>> pro oblast <<REGION>>.',

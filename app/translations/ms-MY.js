@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Semak lewa kategori <<BRAND>> ',
     'countrystatecityv2.MessageFromPost': 'Sila pilih bandar untuk menyiarkan item',
     'listingpageitemslisting.AllResultsNew': 'Semua keputusan',
+    'listingpageitemslisting.FindAdsIn2': 'Cari iklan di <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> keputusan untuk <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Kami minta maaf kerana kami tidak mendapat keputusan untuk carian anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Kami minta maaf, kami masih tidak menjumpai keputusan dalam <<CATEGORY>> di <<REGION>>.',
