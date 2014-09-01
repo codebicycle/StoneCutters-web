@@ -35,7 +35,7 @@ module.exports = {
     'www.olx.hn': 'UA-54083301-39',
     'www.olx.co.ug': 'UA-54083301-35',
     'www.olx.com.ni': 'UA-54083301-26',
-    'www.olx.com.au': 'UA-54083301-46',
+    'www.olx.com.au': 'UA-54083301-43',
     'www.olx.co.tz': 'UA-54083301-34',
     'www.olx.cm': 'UA-54083301-45',
     'www.olx.bz': 'UA-54083301-47',
