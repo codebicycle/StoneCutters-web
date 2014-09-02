@@ -1,0 +1,126 @@
+{% from macros import Breadcrumb, ErrorsPosting, FieldText, FieldTextArea, FieldCombobox %}
+<tr>
+    <td style="padding: .25em .5em; border-top: solid thin #808080;">
+        <strong style="color: #0075BD;">{{ dictionary["postingheader.Post"] }}</strong>
+        <br>
+        <small>{{ dictionary["wap_posting_step4.PostingDetails"] }}</small>
+    </td>
+</tr>
+<tr>
+    <td>
+        {% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
+        <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .5em; border-top: solid thin #808080;">
+                        <small>
+                            <strong>{{ dictionary["itemslisting.Category"] }}</strong>
+                            <span>{{subcategory.trName}}</span>
+                        </small>
+                        <br />
+                        <br style="display: none;" />
+
+                        <label style="display: block; padding-top: .5em;">
+                            <small>{{ dictionary["contactseller_form.AttachPicture"] }}</small><br />
+                            <small style="color: #ff6700;"><small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></small>
+                            <br>
+                            <input type="file" style="font-size: small" name="images[0]">
+                            <br>
+                            <input type="file" style="font-size: small" name="images[1]">
+                        </label>
+                        {% for field in fields.productDescription %}
+                            {% if  field.name == 'description' %}
+                                {{ FieldTextArea(field.label, field.name, field.mandatory, form,  user) }}
+                            {% elif field.fieldType == 'text' %}
+                                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                            {% elif field.fieldType == 'combobox' %}
+                                {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {% if fields.categoryAttributes.length %}
+                                </td>
+                            </tr>
+                        </table>
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                            <tr>
+                            <td style="padding: .5em; border-top: solid thin #808080;">
+                            <small>
+                                <strong>{{ dictionary["misc.SpecificFields_title"] }}</strong>
+                            </small>
+                            {% for field in fields.categoryAttributes %}
+                                {% if (field.values) or (field.fieldType == 'text') %}
+                                    {% if field.fieldType == 'text' %}
+                                        {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                                    {% elif field.fieldType == 'combobox' %}
+                                        {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+                <tr>
+                    <td style="padding: .5em; border-top: solid thin #808080;">
+                        <small>
+                            <strong>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</strong>
+                        </small>
+                        {% for field in fields.contactInformation %}
+                            {% if field.name == 'phone' %}
+                                {% set label = 'Mobile phone number' %}
+                            {% else %}
+                                {% set label = field.label %}
+                            {% endif %}
+                            {% if field.fieldType == 'text' %}
+                                {{ FieldText(label, field.name, field.mandatory, form,  user) }}
+                            {% elif field.fieldType == 'combobox' %}
+                                {{ FieldCombobox(field.label, field.name , form, field.value) }}
+                            {% endif %}
+                            {% if field.name == 'phone' %}
+                                <small>Ex. 0XX 1234567</small>
+                                <label style="display: block; padding-top: .5em;">
+                                    <small>And / Or</small>
+                                </label>
+                            {% endif %}
+                        {% endfor %}
+                        <input type="hidden" name="postingSession" value="{{postingSession}}">
+                        <input type="hidden" name="location" value="{{siteLocation}}">
+                        <input type="hidden" name="languageId" value="{{language}}">
+                        <input type="hidden" name="languageCode" value="{{languageCode}}">
+                        <input type="hidden" name="platform" value="{{platform}}">
+                        <input type="hidden" name="category.parentId" value="{{category.id}}">
+                        <input type="hidden" name="category.id" value="{{subcategory.id}}">
+                        <br>
+                        <small>
+                            <strong>{{ dictionary["itemslisting.NavigatorByLocation"] }}:</strong>
+                            <span>
+                                {{location.current.name}}
+                                <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="{{ '/post/location' | link }}" name="btnChangeLocation" >
+                            </span>
+                        </small>
+                        <br>
+                        <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
+
+                        <span style="display: block; padding-top: .5em;"><input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}"></span>
+                    </td>
+                </tr>
+                <tr style="display: none;">
+                    <td>
+                        {% set templateName = template + '/partials/analytics.html' %}
+                        {% include templateName %}
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </td>
+</tr>
+<tr>
+    <td>
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>

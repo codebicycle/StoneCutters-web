@@ -21,7 +21,7 @@ module.exports = {
         imagePath: 'http://images-staging.olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.de', 'www.olx.fr', 'www.olx.es'],
+        wap: ['www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
         html4: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
         html5: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
         desktop: []
