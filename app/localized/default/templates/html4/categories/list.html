@@ -6,7 +6,7 @@
             <li class="{{ "last" if loop.last else "" }}" >
                 <h2>
                     <a href="{{ category | slugToUrl | link }}">
-                        <img border="0" alt="{{ category.trName }}" src="{{ ['/images/', platform, '/icons/', icons.join('.'), '/', category.id, '.png'] | join('') | static }}" />
+                        <img border="0" alt="{{ category.trName }}" src="{{ ['/images/html4/icons/', icons.join('.'), '/', category.id, '.png'] | join('') | static }}" />
                         <span>{{category.trName}}</span>
                     </a>
                 </h2>
