@@ -4,6 +4,10 @@ var _ = require('underscore');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var seo = require('../modules/seo');
+if (typeof window === 'undefined') {
+    var statsdModule = '../../server/modules/statsd';
+    var statsd = require(statsdModule)();
+}
 
 module.exports = (function() {
 
@@ -93,8 +97,9 @@ module.exports = (function() {
             callback = status;
             status = 404;
         }
-        if (typeof window === 'undefined') {
+        if (this.app.session.get('isServer')) {
             this.app.req.res.status(status);
+            statsd.increment([this.app.session.get('location').name, 'errors', 404]);
         }
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
