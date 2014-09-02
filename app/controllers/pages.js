@@ -5,6 +5,10 @@ var helpers = require('../helpers');
 var seo = require('../modules/seo');
 var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
+if (typeof window === 'undefined') {
+    var statsdModule = '../../server/modules/statsd';
+    var statsd = require(statsdModule)();
+}
 
 module.exports = {
     terms: middlewares(terms),
@@ -148,9 +152,14 @@ function error(params, callback) {
 
     function controller() {
         var err = this.app.session.get('error');
-
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
+            if (this.app.session.get('path') !== '/500') {
+                statsd.increment(['All', 'errors', 500]);
+            }
+            else {
+                statsd.increment(['All', 'errors', 400]);
+            }
         }
         if (err) {
             this.app.session.clear('error');
