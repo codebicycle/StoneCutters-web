@@ -155,10 +155,10 @@ function error(params, callback) {
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
             if (this.app.session.get('path') !== '/500') {
-                statsd.increment(['All', 'errors', 500]);
+                statsd.increment(['All', 'errors', 404]);
             }
             else {
-                statsd.increment(['All', 'errors', 400]);
+                statsd.increment(['All', 'errors', 500]);
             }
         }
         if (err) {

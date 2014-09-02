@@ -99,7 +99,7 @@ module.exports = (function() {
         }
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(status);
-            statsd.increment([this.app.session.get('location').name, 'errors', 404]);
+            statsd.increment([this.app.session.get('location').name, 'errors', 400]);
         }
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
