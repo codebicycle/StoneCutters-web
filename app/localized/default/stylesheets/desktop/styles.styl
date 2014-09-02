@@ -83,6 +83,66 @@ ul, li {
 section {
 	position: relative;
 
+    nav.breadcrumb {
+        width: 100%;
+        float: left;
+        margin: .5rem 0;
+        font-size: .8125rem;
+        color: #000;
+
+        a {
+            color: #38b;
+        }
+
+        span.arrow {
+
+            &:before {
+                color: #ccc;
+                content: "[";
+                display: inline-block;
+                font-family: 'olx-icon-font';
+                line-height: 1;
+                vertical-align: middle;
+            }
+            &.fRight:before {
+                content: "";
+            }
+        }
+
+        .itemPagination {
+            float: right;
+            margin: -.75rem 0 0;
+
+            p {
+                margin: 0 .3125rem 0 0;
+                display: inline-block;
+                color: #333;
+                font-size: .875rem;
+                line-height: 1.875rem;
+            }
+            span {
+                height: 1.875rem;
+                display: inline-block;
+                font-size: 1rem;
+                color: #ccc;
+                line-height: 1.75;
+            }
+            a {
+                width: 1.875rem;
+                height: 1.875rem;
+                font-size: 1.438rem;
+                line-height: 1.3;
+                text-align: center;
+                &.left:after {
+                    content: "{";
+                }
+                &.right:after {
+                    content: "[";                    
+                }
+            }
+        }
+    }
+
 	&#template {
 		width: 61.25rem;
 		margin: 0 auto 1.25rem;
