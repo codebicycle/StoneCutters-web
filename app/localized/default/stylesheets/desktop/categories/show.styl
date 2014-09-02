@@ -1,0 +1,136 @@
+nav.leftContent {
+	width: 14.38rem;
+	float: left;
+	clear: left;
+	border-radius: 3px;
+
+	&.topLocation {
+		margin: 0 0 .625rem 0;
+		padding: .9375rem;
+		background-color: #1c8fcf;
+		color: #fff;
+		font-size: 1.313rem;
+		font-weight: normal;
+		cursor: pointer;
+		line-height: 1.313rem;
+
+		&:after {
+			left: 13px;
+			top: 3px;
+			display: inline-block;
+			position: relative;
+			border-color: #fff transparent transparent;
+			border-image: none;
+			border-right: 6px solid transparent;
+			border-style: solid;
+			border-width: 5px 6px 6px;
+			content: "";
+				
+			
+		}
+	}
+	&.refine {
+		background: #e8f6ff;
+		border: 1px solid #e8f6ff;
+
+		h3 {
+			padding: .625rem 0 .3125rem .9375rem;
+			display: block;
+			font-size: 1.313rem;
+			font-weight: normal;
+		}
+		.filters {
+			padding: 0 .625rem .625rem;
+
+			> ul {
+				li {
+					a {
+						border-bottom: 1px solid #cce7f8;
+					}
+					&:first-child a, &:last-child a {
+						border-bottom: none;
+					}
+				}
+			}
+			a, p {
+				padding: .5rem 0 .5rem 2.375rem;
+				position: relative;
+				display: block;
+				border-radius: 3px;
+				font-size: .8125rem;
+
+				span.icons {
+					position: absolute;
+					font-size: 1.75rem;
+					left: .3125rem;
+					top: 0;
+
+					&.arrow {
+						font-size: 1.438rem;
+						letter-spacing: -1rem;
+					}
+					&.arrow:before {
+						content:"{{";
+					}
+				}
+				span.counter {
+					font-size: .6875rem;
+					color: #666;
+				}
+			}
+			a{
+				margin: 0 0 1px;
+				color: #0076be;
+				
+				span.counter {
+					color: #666;
+				}
+				&:hover {
+					background: #0076be!important;
+					color: #fff;
+
+					span {
+						color: #fff;
+					}
+				}
+			}
+			p {
+				margin: 0 0 5px;
+				background: #666;
+				color: #fff;
+				
+				span.counter {
+					color: #fff;
+				}
+				&:after {
+					border-color: #666 transparent;
+					border-style: solid;
+					border-width: 9px 10px 0;
+					bottom: -9px;
+					content: "";
+					left: 10px;
+					position: absolute !important;
+					z-index: 9999;
+				}
+			}
+			ul.subCat {
+				a {
+					padding: .625rem;
+					background: #fff;
+				}
+			}
+		}
+		&.location {
+			margin: .625rem 0 0 0;
+
+			ul {
+				li {
+					a {
+						border: none;
+						padding: .375rem;
+					}
+				}
+			}
+		}
+	}
+}
