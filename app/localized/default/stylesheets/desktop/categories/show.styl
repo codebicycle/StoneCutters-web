@@ -270,17 +270,11 @@ section.list {
 		text-align: center;
 
 		> a {
-			
-			
 			margin: 0;
 		    padding: 0 .625rem;
-			
 		    border: medium none;
 		    border-radius: .3125rem;
-		    
-		    
 		    font-size: 1.125rem;
-		    
 		    line-height: 2.813rem;
 
 		    &.next{
@@ -320,6 +314,25 @@ section.list {
 				    
 				}
 			}
-		}		
+		}
+		> div {
+			width: 86.7%;
+			float: right;
+			text-align: center;
+
+			&.full {
+				width: 100%;
+			}
+			strong , a {
+				height: 1.875rem;
+				margin: .9375rem .1875rem;
+				display: inline-block;
+				font-size: .875rem;
+				line-height: 1.875rem;
+			}
+			a {
+				color: #0076be;
+			}
+		}
 	}
 }
