@@ -70,8 +70,7 @@
 	            	{% else %}
 	            		<a href="{{ metadata.previous | link }}" class="icons prev">Volver</a> <a href="{{ metadata.next | link }}" class="next">Siguiente página</a>
 	            	{% endif %}
-
-	               <div class="center">{{ metadata | pagination }}</div>
+	               <div class="{{ 'full' if not metadata.previous and metadata.next }}">{{ metadata | pagination }}</div>
 	            </div>
 	        {% endif %}
 		</section>
