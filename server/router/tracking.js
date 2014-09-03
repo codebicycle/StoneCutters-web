@@ -122,9 +122,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             if (!location) {
                 if (!siteLocation) {
-                    return console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl);
+                    return/* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl)*/;
                 }
-                return console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
+                return/* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl)*/;
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
@@ -135,7 +135,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             catch (err) {}
             if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
-                return console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl);
+                return/* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl)*/;
             }
             graphiteTracking(req);
             trackerId = analytics.google.getId(siteLocation);
