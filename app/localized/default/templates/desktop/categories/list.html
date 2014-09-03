@@ -2,7 +2,7 @@
 <section id="template">
 	<section class="home">
 		<div class="titleBar">
-			<h1>{{ dictionary["listingpageitemslisting.FindAdsIn2"] | replace('<<LOCATION>>','<strong>' + location.current.name if location.current and location.current.type != 'country' else location.name + '</strong>')}}</h1>
+			<h1>{{ dictionary["listingpageitemslisting.FindAdsIn2"] | replace('<<LOCATION>>', location.current.name if location.current and location.current.type != 'country' else location.name )}}</h1>
 			<span>Cambia tu ubicación</span>
 		</div>
 		<ul class="icons">
