@@ -212,6 +212,9 @@ module.exports = function(app, dataAdapter) {
             function fail(err, track) {
                 var url = req.headers.referer || '/posting';
 
+                if (!track || track === 'error') {
+                    console.log('[OLX_DEBUG]', 'post', err);
+                }
                 statsd.increment([location.name, 'posting', track || 'error', platform]);
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
@@ -226,7 +229,14 @@ module.exports = function(app, dataAdapter) {
                     return;
                 }
                 for (field in images) {
-                    fs.unlink(images[field].path);
+                    fs.unlink(images[field].path, callback);
+                }
+
+                function callback(err) {
+                    if (err) {
+                        return console.log('[OLX_DEBUG]', 'tmp', err);
+                    }
+                    console.log('[OLX_DEBUG]', 'tmp', 'success');
                 }
             }
 
