@@ -27,7 +27,7 @@
         <ul class="normalList">
             {% for city in cities %}
                 <li class="{{ "last" if loop.last else "" }}">
-                    <a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city" style="color:black;">{{city.name}}</a>
+                    <a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city" style="color:black;" data-qa="city_name" >{{city.name}}</a>
                 </li>
             {% endfor %}
         </ul>
