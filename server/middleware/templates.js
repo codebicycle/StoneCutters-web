@@ -6,14 +6,13 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var configServer = require('../config');
         var configClient = require('../../shared/config');
-        var utils = require('../../shared/utils');
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
-            var platform = req.rendrApp.session.get('forcedPlatform') || req.subdomains.pop() || utils.defaults.platform;
+            var platform = req.rendrApp.session.get('platform');
             var location = req.rendrApp.session.get('location');
             var directory = 'default';
             var minify = configServer.get(['uglify', 'enabled'], true);
@@ -31,7 +30,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 template: template,
                 jsDir: jsDir
             });
-            req.rendrApp.req.app.locals({
+            res.locals({
                 directory: directory,
                 template: template,
                 jsDir: jsDir

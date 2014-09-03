@@ -59,7 +59,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 platform: platform,
                 ip: getIp(req)
             });
-            req.rendrApp.req.app.locals({
+            res.locals({
                 platform: platform,
                 environment: config.get(['environment', 'type'], 'development'),
                 version: deploy.version,
