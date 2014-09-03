@@ -23,6 +23,59 @@
 	            </div>
 	        {% endif %}
 		</nav>
+
+		<section class="list">
+			<nav>
+				<div class="tabs">
+					<a href="" class="galery icons">Galeria</a>
+					<a href="" class="list icons active">Listado</a>
+				</div>
+				<div class="sort">
+					<label>Ordenado por:</label>
+					<select name="listing-order-combo">
+						<option selected="selected" value="date*to*showdesc">Mais recentes</option>
+						<option value="price">Menor preço</option>
+						<option value="pricedesc">Maior preço</option>
+					</select>
+				</div>
+			</nav>
+			<ul class="listing itemListing">
+				{% for item in items %}
+					<li>
+						<a href="{{ item | slugToUrl | link }}">
+							<div  class="photo">
+								<div {{ ('style="background-image:url(' + item.thumbnail + ');"') if item.thumbnail else ('class="noPhoto"') }} data-fullimg="{{ item.fullImage }}"></div>
+							</div>
+							<div class="title">
+								<h3>{{ item.title }}</h3>
+								<span>{{ item.displayLocation }}</span>
+							</div>
+							<div class="price">
+								{{ item.price.displayPrice }}
+							</div>
+							<div class="date">
+								{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
+							</div>
+						</a>
+						<div class="clear"></div>
+					</li>
+				{% endfor %}
+			</ul>
+	        {% if metadata.next or metadata.previous %}
+	            <div class="itemPagination">
+	            	{% if not metadata.previous %}
+	            		<a href="{{ metadata.next | link }}" class="next first">Siguiente página</a>
+	            	{% elif not metadata.next %}
+	            		<a href="{{ metadata.previous | link }}" class="icons prev last">Volver</a>
+	            	{% else %}
+	            		<a href="{{ metadata.previous | link }}" class="icons prev">Volver</a> <a href="{{ metadata.next | link }}" class="next">Siguiente página</a>
+	            	{% endif %}
+
+	               <div class="center">{{ metadata | pagination }}</div>
+	            </div>
+	        {% endif %}
+		</section>
+
 		<nav class="leftContent topLocation">
 			Venezuela
 		</nav>

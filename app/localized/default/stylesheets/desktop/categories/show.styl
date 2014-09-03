@@ -134,3 +134,192 @@ nav.leftContent {
 		}
 	}
 }
+
+section.list {
+	width: 732px;
+	float: right;
+    position: relative;
+
+    nav {
+    	height: 2.125rem;
+	    font-size: 14px;
+
+	    .tabs {
+	    	float: left;
+
+	    	a {
+			    height: 2.063rem;
+			    float: left;
+			    display: block;
+			    margin-right: .625;
+			    padding: .4375rem .625rem .25rem;
+			    text-decoration: none;
+			    color: #06d;
+
+			    &.active {
+			    	height: 2.25rem;
+				    margin-top: -1px;
+				    padding: .5rem .625rem .3125rem;
+			    	background: #fff;
+			    	border-color: #ccc;
+				    border-image: none;
+				    border-radius: .25rem .25rem 0 0;
+				    border-style: solid solid none;
+				    border-width: 1px 1px 0;
+				    color: #000;
+				    font-weight: bold;
+			    }
+			    &:before {
+			    	display: inline-block;
+			    	line-height: .625rem;
+			    	font-size: 1.5rem;
+			    }
+			    &.galery:before {
+			    	content: "o";
+				    height: .75rem;
+				    padding-right: 2px;
+			    }
+			    &.list:before {
+			    	content: "n";
+				    height: .875rem;
+			    }
+	    	}
+	    }
+
+	    .sort {
+	    	height: 1.875rem;
+	    	float: right;line-height: 1.875rem;
+	    	position: relative;
+	    }
+	}
+	ul.listing {
+		width: 100%;
+		border-bottom: 1px solid #ccc;
+		 li {
+		 	border: 1px solid #ccc;
+		 	border-bottom: none;
+		 	padding: 1.25rem;
+
+		 	a {
+		 		display: block;
+		 		color: #666;
+
+		 		> div {
+		 			height:  5.688rem;
+		 			float: left;
+		 		}
+		 		.photo {
+		 			width: 7.563rem;
+		 			padding: .1875rem;
+		 			border: 1px solid #ccc;
+		 			background: #fff;
+
+		 			div {
+		 				width: 100%;
+		 				height: 100%;
+		 				display: block;
+		 				background-size: contain;
+		 				background-position: center;
+		 				background-repeat: no-repeat;
+
+		 				&.noPhoto {
+		 					background-image: url(imageUrl/images/html5/noPhoto.png); 
+		 				}
+		 			}
+		 		}
+		 		.title {
+		 			width: 50%;
+		 			padding-left: 1rem;
+
+		 			h3, span {
+		 				width: 100%;
+		 				float: left;
+		 				line-height: 1.5rem;
+		 			}
+		 			h3 {
+		 				color: #38b;
+		 				font-size: 1rem;
+		 				font-weight: normal;
+		 			}
+		 			span {
+		 				font-size: .75rem;
+		 				color: #666;
+		 			}
+		 		}
+		 		.price {
+		 			width: 20%; 
+		 			color: #333;
+		 			font-size: .9375rem;
+		 			font-weight: bold;
+		 			padding-right: .625rem;
+		 		}
+		 		.date {
+		 			width: 10%;
+		 			font-size: .75rem;
+		 			color: #666;
+		 		}
+		 	}
+		 	&:hover {
+	 			background: #e0f4ff;
+	 		}
+		 }
+	}
+	.itemPagination {
+		width: 100%;
+		margin: 2.5rem 0 0 0;
+		text-align: center;
+
+		> a {
+			
+			
+			margin: 0;
+		    padding: 0 .625rem;
+			
+		    border: medium none;
+		    border-radius: .3125rem;
+		    
+		    
+		    font-size: 1.125rem;
+		    
+		    line-height: 2.813rem;
+
+		    &.next{
+		    	width: 86.7%;
+		    	float: right;
+		    	background: #2e9ada;
+		    	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.3);
+		    	font-weight: bold;
+		    	color: #fff;
+
+			    &.first {
+			    	width: 100%;
+			    }
+			}
+			&.prev {
+				width: 12%;
+				float: left;
+				padding: 0 0 0 .9375rem;
+				position: relative;
+				background: #e0e0e0;
+				box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.3);
+				font-size: .875rem;
+				color: #0076be;
+				text-align: center;
+
+				&.last {
+					width: 100%;
+				}
+
+				&:before {
+					position: absolute;
+					left: 3px;
+				    top: 0;
+					color: #707070;
+				    content: "{";
+				    font-size: 1.875rem;
+				    
+				}
+			}
+		}		
+	}
+}
