@@ -69,8 +69,11 @@ module.exports = function(app, dataAdapter) {
         app.post('/post', handler);
 
         function handler(req, res, next) {
+            var siteLocation = req.rendrApp.session.get('siteLocation');
             var location = req.rendrApp.session.get('location');
             var platform = req.rendrApp.session.get('platform');
+            var languages = req.rendrApp.session.get('languages');
+            var language = languages._byId[req.rendrApp.session.get('selectedLanguage')];
             var item;
             var images;
             var oldImages = [];
@@ -112,7 +115,9 @@ module.exports = function(app, dataAdapter) {
                 item = _item;
                 images = _images;
                 item.ipAddress = req.ip;
-
+                item.location = siteLocation;
+                item.languageId = language.id;
+                item.platform = platform;
                 for (var key in item) {
                     if (!key.indexOf('opt.') && !item[key]) {
                         delete item[key];
@@ -129,7 +134,7 @@ module.exports = function(app, dataAdapter) {
                     query: {
                         intent: 'validate',
                         postingSession: item.postingSession,
-                        languageCode: item.languageCode,
+                        languageId: language.id,
                         platform: platform
                     },
                     data: item
@@ -171,7 +176,7 @@ module.exports = function(app, dataAdapter) {
             function post(done, response, _images) {
                 var query = {
                     postingSession: item.postingSession,
-                    languageCode: item.languageCode,
+                    languageId: language.id,
                     platform: platform
                 };
                 var user = req.rendrApp.session.get('user');
@@ -236,7 +241,6 @@ module.exports = function(app, dataAdapter) {
                     if (err) {
                         return console.log('[OLX_DEBUG]', 'tmp', err);
                     }
-                    console.log('[OLX_DEBUG]', 'tmp', 'success');
                 }
             }
 
