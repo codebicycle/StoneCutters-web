@@ -39,9 +39,9 @@ module.exports = {
     infiniteScroll: false,
     interstitial: {
         enabled: true,
-        clicks: 1,
+        clicks: 0,
         time: 432000000,
-        ignorePath: ['/health', '/login', '/interstitial', '/404', '/500', /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
+        ignorePath: ['/login', '/interstitial', '/500', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
     seo: {

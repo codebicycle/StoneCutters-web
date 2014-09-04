@@ -25,6 +25,12 @@ module.exports = Base.extend({
             interstitial.prependTo($('body'));
             $(views).addClass('hide');
 
+            $('.downloadApp').on('click', function(e) {
+                this.app.session.persist({
+                    downloadApp: '1'
+                });
+            }.bind(this));
+
             $('.closeInterstitial').on('click', function(e) {
                 interstitial.remove();
                 $(views).removeClass('hide');
@@ -40,9 +46,9 @@ module.exports = Base.extend({
             analytics.reset();
             analytics.setPage('pages#interstitial');
             this.app.session.persist({
-                downloadApp: '1'
+                showInterstitial: '1'
             }, {
-                maxAge: this.app.session.get('downloadApp')
+                maxAge: this.app.session.get('showInterstitial')
             });
 
             analyticInfo = analytics.generateURL.call(this);
