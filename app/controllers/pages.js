@@ -5,6 +5,10 @@ var helpers = require('../helpers');
 var seo = require('../modules/seo');
 var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
+if (typeof window === 'undefined') {
+    var statsdModule = '../../server/modules/statsd';
+    var statsd = require(statsdModule)();
+}
 
 module.exports = {
     terms: middlewares(terms),
@@ -131,10 +135,17 @@ function interstitial(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        if (params.downloadApp) {
+            this.app.session.persist({
+                downloadApp: '1'
+            });
+            return helpers.common.redirect.call(this, params.ref);
+        }
+
         this.app.session.persist({
-            downloadApp: '1'
+            showInterstitial: '1'
         }, {
-            maxAge: this.app.session.get('downloadApp')
+            maxAge: this.app.session.get('showInterstitial')
         });
         callback(null, {
             analytics: analytics.generateURL.call(this),
@@ -148,9 +159,14 @@ function error(params, callback) {
 
     function controller() {
         var err = this.app.session.get('error');
-
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
+            if (this.app.session.get('path') !== '/500') {
+                statsd.increment(['All', 'errors', 404]);
+            }
+            else {
+                statsd.increment(['All', 'errors', 500]);
+            }
         }
         if (err) {
             this.app.session.clear('error');

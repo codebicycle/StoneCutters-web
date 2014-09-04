@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Duy\u1EC7t c\xE1c h\u1EA1ng m\u1EE5c c\u1EE7a <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Vui l\xF2ng l\u1EF1a ch\u1ECDn m\u1ED9t th\xE0nh ph\u1ED1 \u0111\u1EC3 \u0111\u0103ng m\u1ED9t m\xF3n h\xE0ng ',
     'listingpageitemslisting.AllResultsNew': 'T\u1EA5t c\u1EA3 k\u1EBFt qu\u1EA3',
+    'listingpageitemslisting.FindAdsIn2': 'T\xECm th\u1EA5y nh\u1EEFng qu\u1EA3ng c\xE1o t\u1EA1i <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> k\u1EBFt qu\u1EA3 c\u1EE7a <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ch\xFAng t\xF4i r\u1EA5t ti\u1EBFc ch\xFAng t\xF4i kh\xF4ng c\xF3 k\u1EBFt qu\u1EA3 cho t\xECm ki\u1EBFm c\u1EE7a b\u1EA1n.',
     'listingpageitemslisting.ZeroResultsPage': 'Xin l\u1ED7i, ch\xFAng t\xF4i kh\xF4ng t\xECm th\u1EA5y k\u1EBFt qu\u1EA3 trong <<CATEGORY>> t\u1EA1i <<REGION>>.',

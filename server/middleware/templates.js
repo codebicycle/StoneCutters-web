@@ -30,7 +30,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 template: template,
                 jsDir: jsDir
             });
-            req.app.locals({
+            res.locals({
                 directory: directory,
                 template: template,
                 jsDir: jsDir

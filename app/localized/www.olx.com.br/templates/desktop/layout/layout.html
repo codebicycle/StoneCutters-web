@@ -17,7 +17,7 @@
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
                 .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
                 .script("{{ [jsDir, 'common', ((['config-', environment, '.js'] | join('')) if (environment != 'production') else 'config.js')] | join('/') | static }}")
-                .script("{{ [jsDir, directory, 'templates', platform, 'templates.js'] | join('/') | static }}").wait()
+                .script("{{ [jsDir, directory, 'templates', 'desktop', 'templates.js'] | join('/') | static }}").wait()
                 .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
                     var App = window.App = new (require('app/app'))({% json appData %});
                     App.bootstrapData({% json bootstrappedData %});

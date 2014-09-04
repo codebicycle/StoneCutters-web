@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Pesquisar as categorias do <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Por favor selecione uma cidade para publicar um an\xFAncio',
     'listingpageitemslisting.AllResultsNew': 'Todos os resultados',
+    'listingpageitemslisting.FindAdsIn2': 'Encontre an\xFAncios em <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultados para <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desculpe, mas n\xE3o temos resultados para a sua pesquisa.',
     'listingpageitemslisting.ZeroResultsPage': 'Desculpe, mas n\xE3o encontramos <<RESULTS>> na <<CATEGORY>> da <<REGION>>.',

@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Zoek in de <<BRAND>> rubrieken',
     'countrystatecityv2.MessageFromPost': 'Kies een plaats om een advertentie te kunnen plaatsen',
     'listingpageitemslisting.AllResultsNew': 'Alle resultaten',
+    'listingpageitemslisting.FindAdsIn2': 'Vind advertenties in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',

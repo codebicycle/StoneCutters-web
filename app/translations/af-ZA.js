@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Blaai rond in <<BRAND>> se kategorie\xEB',
     'countrystatecityv2.MessageFromPost': 'Kies asseblief \'n stad om \'n item te pos',
     'listingpageitemslisting.AllResultsNew': 'Alle resultate',
+    'listingpageitemslisting.FindAdsIn2': 'Vind advts. in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultate vir <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ons is jammer, maar jou soektog geen resultate opgelewer nie.',
     'listingpageitemslisting.ZeroResultsPage': 'Jammer, ons het geen resultate in <<CATEGORY>> in <<REGION>> gekry nie.',

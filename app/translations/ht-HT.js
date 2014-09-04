@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Ch\xE8ch\xE8 kategori <<BRAND>> yo',
     'countrystatecityv2.MessageFromPost': 'Tanpri chwazi yon vil pou ou ka pase yon anons',
     'listingpageitemslisting.AllResultsNew': 'Tout resilta yo',
+    'listingpageitemslisting.FindAdsIn2': 'W ap jwenn reklam yo nan <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezilta pou <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nou regr\xE8t men nou pa jwenn okenn rezilta pou rech\xE8ch ou an. ',
     'listingpageitemslisting.ZeroResultsPage': 'Nou regr\xE8t, nou pa jwenn okenn rezilta nan<<CATEGORY>> pou <<REGION>>.',

@@ -70,10 +70,21 @@
                             <strong>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</strong>
                         </small>
                         {% for field in fields.contactInformation %}
+                            {% if field.name == 'phone' %}
+                                {% set label = 'Mobile phone number' %}
+                            {% else %}
+                                {% set label = field.label %}
+                            {% endif %}
                             {% if field.fieldType == 'text' %}
-                                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                                {{ FieldText(label, field.name, field.mandatory, form,  user) }}
                             {% elif field.fieldType == 'combobox' %}
                                 {{ FieldCombobox(field.label, field.name , form, field.value) }}
+                            {% endif %}
+                            {% if field.name == 'phone' %}
+                                <small>Ex. 0XX 1234567</small>
+                                <label style="display: block; padding-top: .5em;">
+                                    <small>And / Or</small>
+                                </label>
                             {% endif %}
                         {% endfor %}
                         <input type="hidden" name="postingSession" value="{{postingSession}}">
@@ -90,7 +101,7 @@
                         <br>
                         <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
 
-                        <span style="display: block; padding-top: .5em;"><input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" data-qa="submit_button" ></span>
+                        <span style="display: block; padding-top: .5em;"><input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}"></span>
                     </td>
                 </tr>
                 <tr style="display: none;">

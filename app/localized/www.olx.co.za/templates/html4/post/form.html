@@ -1,27 +1,20 @@
 {% from macros import Breadcrumb, BreadcrumbHome, ErrorsPosting, FieldText, FieldTextArea, FieldCombobox %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Back"]) }}
-{% if form and form.errors %}{{ ErrorsPosting(form.errors) }}{% endif %}
+{% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
 <div id="posting">
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
-        <h4 class="title" >{{ dictionary["itemslisting.NavigatorByCategory"] }} :: {{ subcategory.name }}</h4>
+        <h4 class="title" >
+            {{ dictionary["itemslisting.Category"] }} {{ subcategory.trName }}
+            <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
+        </h4>
         <div class="formField">
             <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
-            {% for image in item.images %}
-                <div class="imgHolder">
-                    <img src="{{image.thumbnail}}" alt="OLX - Item image" style="display: inline-block;">
-                    <label style="display: block; padding-top: .5em;">
-                        <input type="checkbox" name="del.image.{{image.id}}" value="{{image.id}}" >
-                        <small>{{ dictionary["posting_photos.RemovePhoto"] }}</small>
-                        <input type="hidden" name="image.{{image.id}}" value="{{image.id}}" style="display: none;" >
-                    </label>
-                </div>
-            {% endfor %}
             <div class="imgHolder">
-                <input id="file1" type="file" name="images[]" />
+                <input id="file1" type="file" name="images[0]" />
             </div>
             <div class="imgHolder">
-                <input id="file2" type="file" name="images[]" />
+                <input id="file2" type="file" name="images[1]" />
             </div>
         </div>
 
@@ -52,28 +45,36 @@
         <div class="line"></div>
         <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
         {% for field in fields.contactInformation %}
+
+            {% if field.name == 'phone' %}
+                {% set label = 'Mobile phone number' %}
+            {% else %}
+                {% set label = field.label %}
+            {% endif %}
+
             {% if field.fieldType == 'text' %}
-                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                {{ FieldText(label, field.name, field.mandatory, form,  user) }}
             {% elif field.fieldType == 'combobox' %}
                 {{ FieldCombobox(field.label, field.name , form, field.value) }}
+            {% endif %}
+            {% if field.name == 'phone' %}
+                <div style="padding: 0 16px 8px; margin-top: -4px; color: #999; font-size: 11px;">Ex. 0XX 1234567</div>
+                <div class="formField"><label>And / Or</label></div>
             {% endif %}
         {% endfor %}
 
         <input type="hidden" name="postingSession" value="{{postingSession}}">
-        <input type="hidden" name="location" value="{% if itemLocation and itemLocation.url %}{{ itemLocation.url }}{% elif (form and form.values and form.values.location) %}{{ form.values.location }}{% endif %}" >
-        <input type="hidden" name="locationName" value="{% if itemLocation and itemLocation.name %}{{ itemLocation.name }}{% elif (form and form.values and form.values.locationName) %}{{ form.values.locationName }}{% endif %}" >
-        <input type="hidden" name="languageId" value="{{language}}">
-        <input type="hidden" name="languageCode" value="{{languageCode}}">
-        <input type="hidden" name="platform" value="html4">
         <input type="hidden" name="category.parentId" value="{{category.id}}">
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
-        <input type="hidden" name="id" value="{{item.id}}">
-        <input type="hidden" name="sk" value="{{sk}}">
-
         <div class="formField">
             <h3>
-                {{ dictionary["itemslisting.NavigatorByLocation"] }}: {% if itemLocation and itemLocation.name %}{{ itemLocation.name }}{% elif (form and form.values and form.values.locationName) %}{{ form.values.locationName }}{% endif %}<br>
+                {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{location.current.name}}<br>
+                <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="{{ '/post/location' | link }}">
             </h3>
+        </div>
+
+        <div class="formField">
+            <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
         </div>
 
         <div class="formActions">

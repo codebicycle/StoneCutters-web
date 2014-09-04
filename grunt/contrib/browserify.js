@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 
     compile('default');
     for (var platform in localization) {
-        if (platform !== 'html5') {
+        if (platform === 'wap' || platform === 'html4') {
             continue;
         }
         localization[platform].forEach(compile);

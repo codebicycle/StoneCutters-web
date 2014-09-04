@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'S\xF8k i <<BRAND>>\'s kategorier',
     'countrystatecityv2.MessageFromPost': 'Vennligst velg en by for \xE5 legge inn en gjenstand',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
+    'listingpageitemslisting.FindAdsIn2': 'Finn annonser i <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultater for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi beklager men vi fant ingen s\xF8keresultater.',
     'listingpageitemslisting.ZeroResultsPage': 'Beklager, men vi har ikke funnet noen resultater i <<CATEGORY>> i <<REGION>>.',

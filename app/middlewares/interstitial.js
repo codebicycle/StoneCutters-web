@@ -17,6 +17,7 @@ module.exports = function(params, next) {
     var paths;
     var info;
     var downloadApp;
+    var showInterstitial;
     var clicks;
     var currentClicks;
 
@@ -48,7 +49,12 @@ module.exports = function(params, next) {
     }
 
     downloadApp = this.app.session.get('downloadApp');
-    if (_.isUndefined(downloadApp) || downloadApp !== '1') {
+    if (downloadApp && downloadApp === '1') {
+        return next();
+    }
+
+    showInterstitial = this.app.session.get('showInterstitial');
+    if (_.isUndefined(showInterstitial) || showInterstitial !== '1') {
         clicks = config.get(['interstitial', 'clicks'], 1);
         currentClicks = this.app.session.get('clicks') || 0;
 
@@ -65,7 +71,7 @@ module.exports = function(params, next) {
 
             this.app.session.clear('clicks');
             this.app.session.persist({
-                downloadApp: time
+                showInterstitial: time
             });
             if (!this.app.session.get('isServer') || platform === 'html5') {
                 this.app.session.update({

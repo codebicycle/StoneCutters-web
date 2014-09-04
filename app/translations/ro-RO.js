@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Caut\u0103 \xEEn categoriile <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'V\u0103 rug\u0103m s\u0103 intra\u0163i un ora\u015F pentru a posta un obiect',
     'listingpageitemslisting.AllResultsNew': 'Toate rezultatele',
+    'listingpageitemslisting.FindAdsIn2': 'G\u0103sire anun\u0163uri \xEEn <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultate pentru <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ne pare r\u0103u dar nu avem rezultate pentru c\u0103utarea dvs.',
     'listingpageitemslisting.ZeroResultsPage': 'Ne pare r\u0103u, nu am g\u0103sit rezultate \xEEn <<CATEGORY>> \xEEn <<REGION>>.',

@@ -5,7 +5,7 @@
     <ul class="normalList">
         {% for category in subcategories %}
             <li class="{{ "last" if loop.last else "" }}">
-                <a href="{{ ['/posting/', categoryId, '/', category.id] | join('') | link }}">{{category.trName}}</a>
+                <a href="{{ ['/posting/', categoryId, '/', category.id] | join('') | link }}" data-qa="subcategory_name">{{category.trName}}</a>
             </li>
         {% endfor %}
     <ul>

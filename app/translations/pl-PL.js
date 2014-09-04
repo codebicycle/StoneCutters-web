@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Przejrzyj kategorie <<BRAND>>',
     'countrystatecityv2.MessageFromPost': 'Prosz\u0119 wybra\u0107 miasto aby doda\u0107 og\u0142oszenie',
     'listingpageitemslisting.AllResultsNew': 'Wszystkie wyniki',
+    'listingpageitemslisting.FindAdsIn2': 'Wyszukaj og\u0142oszenia w lokalizacji <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> wyniki dla <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',
     'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',

@@ -22,7 +22,11 @@ module.exports = function(dataAdapter, excludedUrls) {
             var languages;
 
             function fetch(done) {
-                dataAdapter.get(req, '/countries/' + siteLocation + '/languages', done.errfcb);
+                dataAdapter.get(req, '/countries/' + siteLocation + '/languages', {
+                    query: {
+                        platform: req.rendrApp.session.get('platform')
+                    }
+                }, done.errfcb);
             }
 
             function parse(done, response, _languages) {

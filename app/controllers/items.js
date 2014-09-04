@@ -18,7 +18,7 @@ module.exports = {
     search: middlewares(search),
     allresults: middlewares(allresults),
     favorite: middlewares(favorite),
-    delete: middlewares(deleteItem)
+    'delete': middlewares(deleteItem)
 };
 
 function show(params, callback) {
@@ -167,7 +167,7 @@ function show(params, callback) {
                     }
                 });
             }
-            
+
             done(resCategories.categories, resItem.item);
         }.bind(this);
 
@@ -213,7 +213,7 @@ function show(params, callback) {
                 parentId = subcategory.get('parentId');
                 category = parentId ? _categories.get(parentId) : subcategory;
             }
-            
+
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
 
@@ -763,7 +763,7 @@ function allresults(params, callback) {
 
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
-            
+
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
@@ -802,7 +802,7 @@ function allresults(params, callback) {
             if (!resCategories.categories || !resItems.items) {
                 return done.fail(null, {});
             }
-            
+
             if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !resItems.items.length)) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/nf/all-results');
@@ -874,7 +874,8 @@ function favorite(params, callback) {
     var add = function(done) {
         helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
             query: {
-                token: user.token
+                token: user.token,
+                platform: this.app.session.get('platform')
             }
         }, done.errfcb);
     }.bind(this);
@@ -925,7 +926,8 @@ function deleteItem(params, callback) {
     var remove = function(done) {
         helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
             query: {
-                token: user.token
+                token: user.token,
+                platform: this.app.session.get('platform')
             }
         }, done.errfcb);
     }.bind(this);

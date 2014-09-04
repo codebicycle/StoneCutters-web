@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': 'Selaa <<BRAND>>:n kategorioita',
     'countrystatecityv2.MessageFromPost': 'Valitse kaupunki tehd\xE4ksesi ilmoituksen',
     'listingpageitemslisting.AllResultsNew': 'Kaikki tulokset',
+    'listingpageitemslisting.FindAdsIn2': 'L\xF6yd\xE4 mainoksia kohteessa <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
     'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',

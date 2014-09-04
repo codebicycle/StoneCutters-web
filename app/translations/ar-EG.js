@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': ' <<BRAND>> \u0645\u0644\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u062A\u0628\u0627\u062A \u0645\u0646',
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.AllResultsNew': 'All results',
+    'listingpageitemslisting.FindAdsIn2': 'Find ads in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',

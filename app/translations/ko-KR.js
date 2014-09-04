@@ -57,6 +57,7 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': '<<BRAND>> \uCE74\uD14C\uACE0\uB9AC \uBE0C\uB77C\uC6B0\uC988\uD558\uAE30',
     'countrystatecityv2.MessageFromPost': '\uBB3C\uD488\uC744 \uC62C\uB9AC\uC2DC\uB824\uBA74 \uB3C4\uC2DC\uBA85\uC744 \uC120\uC815\uD558\uC5EC \uC8FC\uC138\uC694',
     'listingpageitemslisting.AllResultsNew': '\uBAA8\uB4E0 \uACB0\uACFC',
+    'listingpageitemslisting.FindAdsIn2': '<<LOCATION>>\uC5D0\uC11C \uAD11\uACE0\uB97C \uCC3E\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4.',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>>\uC5D0 \uB300\uD55C <<NUMBER>> \uACB0\uACFC\uB4E4',
     'listingpageitemslisting.WeAreSorryNoResults': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uAC80\uC0C9\uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'listingpageitemslisting.ZeroResultsPage': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4, <<REGION>>\uC758 <<CATEGORY>>\uC5D0\uC11C \uCC3E\uC740 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
