@@ -92,10 +92,21 @@ module.exports = function(app, dataAdapter) {
                 }, callback);
             }
 
+            function log(done, _item, _images) {
+                var field;
+
+                if (images && typeof images === 'object' && Object.keys(images).length) {
+                    for (field in images) {
+                        statsd.increment([location.name, 'posting', 'image', platform]);
+                    }
+                }
+                done(_item, _images);
+            }
+
             function checkWapChangeLocation(done, _item, _images) {
                 if (_item.btnChangeLocation) {
                     done.abort();
-                    return handlerPostLocation(_item, req, res, next);
+                    return handlerPostLocation(_item, _images, req, res, next);
                 }
                 done(_item, _images);
             }
@@ -234,6 +245,7 @@ module.exports = function(app, dataAdapter) {
                     return;
                 }
                 for (field in images) {
+                    statsd.increment([location.name, 'posting', 'delete_image', platform]);
                     fs.unlink(images[field].path, callback);
                 }
 
@@ -246,6 +258,7 @@ module.exports = function(app, dataAdapter) {
 
             asynquence().or(fail)
                 .then(parse)
+                .then(log)
                 .then(checkWapChangeLocation)
                 .then(validate)
                 .then(postImages)
@@ -254,7 +267,9 @@ module.exports = function(app, dataAdapter) {
         }
     })();
 
-    function handlerPostLocation(item, req, res, next) {
+    function handlerPostLocation(item, images, req, res, next) {
+        var location = req.rendrApp.session.get('location');
+        var platform = req.rendrApp.session.get('platform');
 
         function store(done) {
             req.rendrApp.session.persist({
@@ -268,11 +283,33 @@ module.exports = function(app, dataAdapter) {
         function redirect(item) {
             var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
 
+            statsd.increment([location.name, 'post', 'location', platform]);
             res.redirect(utils.link(url, req.rendrApp));
+            clean();
         }
 
         function error(err) {
+            statsd.increment([location.name, 'post', 'error_location', platform]);
             res.redirect(utils.link('/location?target=posting', req.rendrApp));
+            clean();
+        }
+
+        function clean() {
+            var field;
+
+            if (!images || typeof images !== 'object' || !Object.keys(images).length) {
+                return;
+            }
+            for (field in images) {
+                statsd.increment([location.name, 'posting', 'delete_image', platform]);
+                fs.unlink(images[field].path, callback);
+            }
+
+            function callback(err) {
+                if (err) {
+                    return console.log('[OLX_DEBUG]', 'tmp', err);
+                }
+            }
         }
 
         asynquence().or(error)
@@ -291,8 +328,8 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function redirect(item) {
-                handlerPostLocation(item, req, res, next);
+            function redirect(item, images) {
+                handlerPostLocation(item, images, req, res, next);
             }
 
             function error(err) {
