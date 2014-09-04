@@ -1,13 +1,12 @@
 'use strict';
 
 module.exports = function(app, dataAdapter) {
+    var fs = require('fs');
     var asynquence = require('asynquence');
-    var formidable = require('../formidable');
     var querystring = require('querystring');
     var utils = require('../../shared/utils');
-    var fs = require('fs');
-    var graphite = require('../graphite')();
-    var statsd  = require('../statsd')();
+    var formidable = require('../modules/formidable');
+    var statsd  = require('../modules/statsd')();
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -25,10 +24,12 @@ module.exports = function(app, dataAdapter) {
             function submit(done, data) {
                 var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
                 var language = req.rendrApp.session.get('languages')._byId[selectedLanguage] || {};
+                var platform = req.rendrApp.session.get('platform');
                 var options = {
                     data: data,
                     query: {
-                        languageId: language.id
+                        languageId: language.id,
+                        platform: platform
                     }
                 };
                 var user = req.rendrApp.session.get('user');
@@ -37,7 +38,7 @@ module.exports = function(app, dataAdapter) {
                 if (user) {
                     options.query.token = user.token;
                 }
-                data.platform = req.rendrApp.session.get('platform');
+                data.platform = platform;
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
@@ -45,7 +46,6 @@ module.exports = function(app, dataAdapter) {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                graphite.send([location.name, 'reply', 'success', platform], 1, '+');
                 statsd.increment([location.name, 'reply', 'success', platform]);
             }
 
@@ -54,7 +54,6 @@ module.exports = function(app, dataAdapter) {
 
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    graphite.send([location.name, 'reply', 'error', platform], 1, '+');
                     statsd.increment([location.name, 'reply', 'error', platform]);
                 });
             }
@@ -70,8 +69,11 @@ module.exports = function(app, dataAdapter) {
         app.post('/post', handler);
 
         function handler(req, res, next) {
+            var siteLocation = req.rendrApp.session.get('siteLocation');
             var location = req.rendrApp.session.get('location');
             var platform = req.rendrApp.session.get('platform');
+            var languages = req.rendrApp.session.get('languages');
+            var language = languages._byId[req.rendrApp.session.get('selectedLanguage')];
             var item;
             var images;
             var oldImages = [];
@@ -113,7 +115,9 @@ module.exports = function(app, dataAdapter) {
                 item = _item;
                 images = _images;
                 item.ipAddress = req.ip;
-
+                item.location = siteLocation;
+                item.languageId = language.id;
+                item.platform = platform;
                 for (var key in item) {
                     if (!key.indexOf('opt.') && !item[key]) {
                         delete item[key];
@@ -130,7 +134,8 @@ module.exports = function(app, dataAdapter) {
                     query: {
                         intent: 'validate',
                         postingSession: item.postingSession,
-                        languageCode: item.languageCode
+                        languageId: language.id,
+                        platform: platform
                     },
                     data: item
                 }, callback);
@@ -160,7 +165,8 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/images', {
                     query: {
                         postingSession: item.postingSession,
-                        url: req.rendrApp.session.get('siteLocation')
+                        url: req.rendrApp.session.get('siteLocation'),
+                        platform: platform
                     },
                     data: data,
                     multipart: true
@@ -170,7 +176,8 @@ module.exports = function(app, dataAdapter) {
             function post(done, response, _images) {
                 var query = {
                     postingSession: item.postingSession,
-                    languageCode: item.languageCode
+                    languageId: language.id,
+                    platform: platform
                 };
                 var user = req.rendrApp.session.get('user');
 
@@ -202,7 +209,6 @@ module.exports = function(app, dataAdapter) {
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                graphite.send([location.name, 'posting', 'success', platform], 1, '+');
                 statsd.increment([location.name, 'posting', 'success', platform]);
                 res.redirect(utils.link(url, req.rendrApp));
                 clean();
@@ -211,7 +217,9 @@ module.exports = function(app, dataAdapter) {
             function fail(err, track) {
                 var url = req.headers.referer || '/posting';
 
-                graphite.send([location.name, 'posting', track || 'error', platform], 1, '+');
+                if (!track || track === 'error') {
+                    console.log('[OLX_DEBUG]', 'post', err);
+                }
                 statsd.increment([location.name, 'posting', track || 'error', platform]);
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
@@ -226,7 +234,13 @@ module.exports = function(app, dataAdapter) {
                     return;
                 }
                 for (field in images) {
-                    fs.unlink(images[field].path);
+                    fs.unlink(images[field].path, callback);
+                }
+
+                function callback(err) {
+                    if (err) {
+                        return console.log('[OLX_DEBUG]', 'tmp', err);
+                    }
                 }
             }
 
@@ -296,12 +310,28 @@ module.exports = function(app, dataAdapter) {
         app.post('/nf/search/redirect', handler);
 
         function handler(req, res, next) {
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
 
-            formidable.parse(req, function callback(err, data) {
+            function success(data) {
                 var url = '/nf/search' + (data.search ? ('/' + data.search) : '');
 
                 res.redirect(utils.link(url, req.rendrApp));
-            });
+            }
+
+            function error(err) {
+                var location = req.rendrApp.session.get('location');
+                var platform = req.rendrApp.session.get('platform');
+                var url = req.headers.referer || '/';
+
+                res.redirect(utils.link(url.split('?').shift(), req.rendrApp));
+                statsd.increment([location.name, 'search', 'error', platform]);
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .val(success);
         }
     })();
 

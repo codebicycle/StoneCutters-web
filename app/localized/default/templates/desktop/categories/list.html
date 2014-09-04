@@ -1,64 +1,82 @@
-<section id="home" class="fullCont">
-	<h1>Desapegar é só começar!</h1>
-	<h2>Temos <strong>7.856.040</strong> anúncios hoje.</h2>
-
-	<section class="categories">
-		<h3>Categorias mais populares na OLX</h3>
-		<span class="slideBtn icons prev"></span>
-		<ul class="swiper-container">
-			<div class="swiper-wrapper">
-	            {% for category in categories %}
-	                <li class="swiper-slide">
-	                    <a href="{{ category | slugToUrl | link }}">
-	                    	<span class="icons icon-cat-{{ category.id }}"></span>
-	                      	{{ category.trName }}
-	                    </a>
-	                </li>
-	            {% endfor %}
-            </div>
-        </ul>
-        <span class="slideBtn icons next"></span>
-	</section>
-
-	<section class="apps">
-		<a href="http://ad-x.co.uk/API/click/olxinc789048jo/web252cae107b6be2" target="_blank"></a>
-		<a href="http://ad-x.co.uk/API/click/olxinc789048jo/web2531a45323c5e4" target="_blank"></a>
-	</section>
-
-	<section class="states">
-		<ul>
-			<li>Selecione seu Estado:</li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'acre.olx.com.br'}) }}">AC</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'alagoas.olx.com.br'}) }}">AL</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'amapa.olx.com.br'}) }}">AP</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'amazonas.olx.com.br'}) }}">AM</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'bahia.olx.com.br'}) }}">BA</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'ceara.olx.com.br'}) }}">CE</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'distritofederal.olx.com.br'}) }}">DF</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'espiritosanto.olx.com.br'}) }}">ES</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'goias.olx.com.br'}) }}">GO</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'maranhao.olx.com.br'}) }}">MA</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'matogrosso.olx.com.br'}) }}">MT</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'mattogrossodosul.olx.com.br'}) }}">MS</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'minasgerais.olx.com.br'}) }}">MG</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'parana.olx.com.br'}) }}">PR</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'paraiba.olx.com.br'}) }}">PB</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'para.olx.com.br'}) }}">PA</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'pernambuco.olx.com.br'}) }}">PE</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'piaui.olx.com.br'}) }}">PI</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'riodejaneiro.olx.com.br'}) }}">RJ</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'riograndedonorte.olx.com.br'}) }}">RN</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'riograndedosul.olx.com.br'}) }}">RS</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'roraima.olx.com.br'}) }}">RR</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'santacatarina.olx.com.br'}) }}">SC</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'sergipe.olx.com.br'}) }}">SE</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'saopaulo.olx.com.br'}) }}">SP</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'tocantins.olx.com.br'}) }}">TO</a></li>
-			<li><a href="{{ '/nf/all-results' | link({location: 'www.olx.com.br'}) }}"><strong>Brasil</strong></a></li>
+{% view 'header/index' %}
+<section id="template">
+	<section class="home">
+		<div class="titleBar">
+			<h1>{{ dictionary["listingpageitemslisting.FindAdsIn2"] | replace('<<LOCATION>>', location.current.name if location.current and location.current.type != 'country' else location.name )}}</h1>
+			<span>Cambia tu ubicación</span>
+		</div>
+		<ul class="icons">
+			{% for category in categories %}
+				<li>
+					<a href="{{ category | slugToUrl | link }}">
+						<span class="icon cat-{{ category.id }}"></span>
+						<strong>{{ category.trName }}</strong>
+					</a>
+					<ul>
+					{% for subcategory in category.children.toJSON() %}
+						<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName}}</a></li>
+					{% endfor %}
+					</ul>
+				</li>
+		{% endfor %}
 		</ul>
 	</section>
-
-	{% view 'partials/map' %}
-	
+	<aside class="banner howto">
+		<h1>Todos pueden vender en OLX</h1>
+		<span>Aprende a vender</span>
+	</aside>
+	<aside class="banner tv">
+		<span></span>
+		<h1>¿Lo has visto?</h1>
+		<p>¡Ya puedes ver nuestro nuevo anuncio de TV!</p>
+	</aside>
+	<aside class="banner">
+		<a href="http://itunes.apple.com/app/olx-classifieds/id382059698" class="ios" target="_blank"></a>
+		<a href="https://play.google.com/store/apps/details?id=com.olx.olx" class="android" target="_blank"></a>
+	</aside>
+	<aside class="postBanner">
+		<h2>¿Tienes algo que vender?</h2>
+		<p>Publica tu anuncio GRATIS en OLX</p>
+		<a class="btn orange" href="">Publica un anuncio gratis</a>
+	</aside>
+	<section class="home">
+		<div class="titleBar small">
+			<h2>Popular en {{ location.url }}</h2>
+		</div>
+		<h1>Ciudades populares:</h1>
+		<h1>Otras Ciudades en Táchira:</h1>
+		<ul class="cities">
+			<li><a href="{{ '/' | link({location: 'acarigua.olx.com.ve'}) }}">Acarigua</a></li>
+			<li><a href="{{ '/' | link({location: 'anaco.olx.com.ve'}) }}">Anaco</a></li>
+			<li><a href="{{ '/' | link({location: 'barcelona.olx.com.ve'}) }}">Barcelona</a></li>
+			<li><a href="{{ '/' | link({location: 'ciudadbarinas.olx.com.ve'}) }}">Barinas</a></li>
+			<li><a href="{{ '/' | link({location: 'barquisimeto.olx.com.ve'}) }}">Barquisimeto</a></li>
+			<li><a href="{{ '/' | link({location: 'baruta.olx.com.ve'}) }}">Baruta</a></li>
+			<li><a href="{{ '/' | link({location: 'cabimas.olx.com.ve'}) }}">Cabimas</a></li>
+			<li><a href="{{ '/' | link({location: 'cabudare.olx.com.ve'}) }}">Cabudare</a></li>
+		</ul>
+		<ul class="cities">
+			<li><a href="{{ '/' | link({location: 'acarigua.olx.com.ve'}) }}">Acarigua</a></li>
+			<li><a href="{{ '/' | link({location: 'anaco.olx.com.ve'}) }}">Anaco</a></li>
+			<li><a href="{{ '/' | link({location: 'barcelona.olx.com.ve'}) }}">Barcelona</a></li>
+			<li><a href="{{ '/' | link({location: 'ciudadbarinas.olx.com.ve'}) }}">Barinas</a></li>
+			<li><a href="{{ '/' | link({location: 'barquisimeto.olx.com.ve'}) }}">Barquisimeto</a></li>
+			<li><a href="{{ '/' | link({location: 'baruta.olx.com.ve'}) }}">Baruta</a></li>
+			<li><a href="{{ '/' | link({location: 'cabimas.olx.com.ve'}) }}">Cabimas</a></li>
+			<li><a href="{{ '/' | link({location: 'cabudare.olx.com.ve'}) }}">Cabudare</a></li>
+		</ul>
+		<h1 class="full">Más Buscados</h1>
+		<ul class="cities full">
+			<li><a href="">Casa en alquiler</a></li>
+			<li><a href="">Alquiler de estudio amoblado</a></li>
+			<li><a href="">Piso en alquiler</a></li>
+			<li><a href="">Alquiler Piso amueblado</a></li>
+			<li><a href="">Piso 2 dormitorios en alquiler</a></li>
+			<li><a href="">Apartamentos en alquiler 3 dormitorios</a></li>
+			<li><a href="">Alquiler de casa con jardín</a></li>
+			<li><a href="">Departamentos Amoblados</a></li>
+		</ul>
+	</section>
 	<div class="clear"></div>
 </section>
+{% view 'footer/footer' %}

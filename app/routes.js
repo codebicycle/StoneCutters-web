@@ -1,11 +1,11 @@
 'use strict';
 
 var _ = require('underscore');
-var helpers = require('./helpers');
+var urls = require('./urls');
 
 module.exports = function(match) {
-    Object.keys(helpers.routes).forEach(function each(view) {
-        var route = helpers.routes[view];
+    Object.keys(urls).forEach(function each(view) {
+        var route = urls[view];
         var url;
 
         if (!route.urls) {

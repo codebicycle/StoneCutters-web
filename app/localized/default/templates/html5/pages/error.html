@@ -1,5 +1,5 @@
 {% from macros import Breadcrumb %}
-{% set link = (breadcrumb | link) %}
+{% set link = ((breadcrumb if breadcrumb else '/') | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["postingerror.Error"]) }}
 <div class="errorPage">
     <p><strong>{{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}</strong></p>
@@ -20,3 +20,5 @@
         </div>
     {% endif %}
 </div>
+{% set templateName = template + '/partials/analytics.html' %}
+{% include templateName %}

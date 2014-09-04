@@ -6,19 +6,7 @@ module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer',
     className: 'footer_view',
-    /*events: {
-        'click ul li span': 'toggleTeaser',
-        'click .teaser header a': 'closeTeaser'
-    },
-    toggleTeaser: function(e) {
-        var $teaser = $('.teaser', this.$el);
-        console.log(this);
-        $teaser.slideToggle();
-    },
-    closeTeaser: function(e) {
-        var $teaser = $('.teaser', this.$el);
-        $teaser.slideToggle();
-    }*/
+    
     postRender: function() {
         $('#footer ul li span').click(function() {
             var current = $(this).attr('class');

@@ -1,0 +1,84 @@
+{% from macros import ErrorsPosting, FieldText, FieldTextArea, FieldCombobox %}
+
+{% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}
+
+<section id="posting" class="fullCont">
+    <h1>Falta pouco para você desapegar!</h1>
+    <p>Preencha o formulário abaixo e clique em "Publicar anúncio grátis", você não precisa se cadastrar.<br>Os campos marcados com asterisco (*) são obrigatórios </p>
+    <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+        <div class="field">
+            <label>Categoria escolhida:</label>
+            <div class="categoryBox">
+                <span class="icons icon-cat-{{ category.id }}"></span>
+                <p><strong>{{ category.trName }}</strong><br>{{ subcategory.trName }}</p>
+                <a href="{{ '/posting' | link }}" >Alterar Categoria</a>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Insira fotos:</label>
+            <div id="photos">
+                <div class="photos"><span>Adicionar Fotos</span></div>
+                <div class="photos disable"><span>Adicionar</span></div>
+                <div class="photos disable"><span>Adicionar</span></div>
+                <div class="photos disable"><span>Adicionar</span></div>
+                <div class="photos disable"><span>Adicionar</span></div>
+                <div class="photos disable"><span>Adicionar</span></div>
+                <div class="photos disable"><span>Adicionar</span></div>
+            </div>
+        </div>
+
+        {% if fields.categoryAttributes.length %}
+            {% for field in fields.categoryAttributes %}
+                {% if (field.values) or (field.fieldType == 'text') %}
+                    <div class="field">
+                        {% if field.fieldType == 'text' %}
+                            {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                        {% elif field.fieldType == 'combobox' %}
+                            {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% for field in fields.productDescription %}
+            <div class="field">
+                {% if  field.name == 'description' %}
+                    {{ FieldTextArea(field.label, field.name, field.mandatory, form,  user) }}
+                {% elif field.fieldType == 'text' %}
+                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                    {{ '<span>0 caracteres. Um bom título precisa de pelo menos 60 caracteres. </span>' if  field.name == 'title'}}
+                {% elif field.fieldType == 'combobox' %}
+                    {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <h1>Suas informações:</h1>
+        {% for field in fields.contactInformation %}
+            <div class="field">
+                {% if field.fieldType == 'text' %}
+                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                    {{ '<span>Insira um e-mail válido. Não se preocupe, ele não será divulgado.</span>' if  field.name == 'email'}}
+                {% elif field.fieldType == 'combobox' %}
+                    {{ FieldCombobox(field.label, field.name , form, field.value) }}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <input type="hidden" name="postingSession" value="{{postingSession}}">
+        <input type="hidden" name="category.parentId" value="{{category.id}}" class="itemCategory">
+        <input type="hidden" name="category.id" value="{{subcategory.id}}"  class="itemSubcategory">
+
+
+        <div class="formFooter"></div>
+        <div class="field">
+            <label></label>
+            <input type="submit" value="Publicar anúncio grátis" class="btn orange" >
+            <span>Ao incluir um anúncio você concorda e aceita com os <a target="_blank" href="http://www.olx.com.br/terms.php"> Termos e Condições </a> da OLX.</span>
+        </div>
+
+    </form>
+
+</section>

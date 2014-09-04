@@ -1,42 +1,44 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../config');
-var seo = require('../seo');
+var config = require('../../shared/config');
 var utils = require('../../shared/utils');
+var seo = require('../modules/seo');
+if (typeof window === 'undefined') {
+    var statsdModule = '../../server/modules/statsd';
+    var statsd = require(statsdModule)();
+}
 
 module.exports = (function() {
 
     var staticsHandler = {
         static: function(env, filePath, path) {
-            var baseNumber = '0' + ((filePath.length % 4) + 1);
+            var pointIndex = filePath.lastIndexOf('.');
+            var fileName = filePath.substr(0, pointIndex);
+            var ext = filePath.substr(pointIndex + 1);
+            var revision = '';
+            var envName = '';
+            var envPath;
 
             if (env !== 'development') {
-                var pointIndex = filePath.lastIndexOf('.');
-                var ext = filePath.substr(pointIndex + 1);
-                var fileName = filePath.substr(0, pointIndex);
-                var revision = config.get(['deploy', 'revision'], '0');
-
-                filePath = (fileName + '-' + revision + '.' + ext);
-                if (ext === 'css') {
-                    filePath = (fileName + '-' + env + '-' + revision + '.' + ext);
-                }
+                revision = '-' + config.get(['deploy', 'revision'], '0');
             }
-            var envPath = config.get(['environment', 'staticPath'], '');
-
+            if (ext === 'css' && env !== 'production') {
+                envName = '-' + env;
+            }
+            envPath = config.get(['environment', 'staticPath'], '');
             if (env === 'production') {
-                return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
+                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
             }
-            return envPath + filePath;
+            return [envPath, fileName, envName, revision, '.', ext].join('');
         },
         image: function(env, filePath) {
             var envPath = config.get(['environment', 'imagePath'], '');
 
             if (env === 'production') {
-                var baseNumber = '0' + ((filePath.length % 4) + 1);
-                return envPath.replace(/\[\[basenumber\]\]/, baseNumber) + filePath;
+                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
             }
-            return envPath + filePath;
+            return [envPath, filePath].join('');
         }
     };
 
@@ -95,20 +97,14 @@ module.exports = (function() {
             callback = status;
             status = 404;
         }
-        if (typeof window === 'undefined') {
+        if (this.app.session.get('isServer')) {
             this.app.req.res.status(status);
+            statsd.increment([this.app.session.get('location').name, 'errors', 400]);
         }
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
         seo.update();
         return callback(null, 'pages/error', res || {});
-    }
-
-    function daysDiff(date) {
-        var now = new Date();
-        var diff = now.getTime() - date.getTime();
-        
-        return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
     }
 
     return {
@@ -119,7 +115,6 @@ module.exports = (function() {
         removeParams: utils.removeParams,
         redirect: redirect,
         error: error,
-        daysDiff: daysDiff,
         'static': statics
     };
 })();

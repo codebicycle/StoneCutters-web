@@ -2,11 +2,10 @@
 
 module.exports = {
     getInfo: function(app, medium) {
-        var marketing = app.session.get('marketing');
         var platform = app.session.get('platform');
-        var osName = marketing.osName;
-        var osVersion = marketing.osVersion;
-        var browserName = marketing.browserName;
+        var osName = app.session.get('osName');
+        var osVersion = app.session.get('osVersion');
+        var browserName = app.session.get('browserName');
         var data = {};
 
         if((osVersion < 2.1 && osName == 'Android') || (osVersion < 3.2 && osName == 'iOS') || (osVersion < 4.5 && osName == 'RIM') || (osVersion < 8 && osName == 'Windows Phone')){

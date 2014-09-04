@@ -1,38 +1,101 @@
 #footer {
-	clear: both;
+	width: 100%;
 	position: relative;
+	margin: 0 auto;
+	clear: both;
+	background: #fafafa;
+	border-top: 1px solid #ebebeb;
 	
-	> ul, > p {
-		font-size: .75rem;
-		line-height: 2rem;
-		color: #AAA;
-	}
-	> ul {
-		li {
-			display: inline;
-			&:not(:first-child):before {
-				content: '\2022\a0';
-			}
-			a, span {
-				color: inherit;
-				cursor: pointer;
+	section#links {
+		width: 61.25rem;
+		margin: 0 auto;
+		padding: 1.25rem .625rem;
 
-				&:hover {
-					color: #369;
-					text-decoration: underline;
+		> ul {
+			width: 25%;
+			float: left;
+
+			li {
+				width: 100%;
+				float: left;
+				position: relative;
+
+				 h5 {
+				 	margin: 0 0 .625rem 0;
+				 	font-size: 1.125rem;
+				 	color: #333;
+				 	font-weight: normal;
+				 }
+				 a, span {
+				 	width: 100%;
+				 	display: inline-block;
+				 	margin: .3rem 0;
+				 	font-size: .8125rem;
+				 	color: #0076be;
+
+				 	div {
+						position: absolute;
+						right: 10px;
+						top: 10px;
+						border-color: #777 transparent;
+						border-style: solid;
+						border-width: .25rem .25rem 0;
+					}
+				 }
+
+				 &.select {
+					width: 11.56rem;
+					margin: -.125rem 0 0 -.5rem;
+					padding: 0 .5rem;
+					background: #fff;
+					border: 1px solid #ccc;
+					border-radius: .125rem;
+					cursor: pointer;
+
+					a{
+						margin: .4rem 0;
+					}
 				}
-				
+				span.icons {
+					position: absolute;
+					top: -.4375rem;
+					left: -.375rem;
+					color: #777777;
+					font-size: 28px;
+					vertical-align: middle;
+
+					&.movil:before {
+						content:"W";
+					}
+					&.facebook:before {
+						content:"";
+					}
+					&.twitter:before {
+						content:"";
+					}
+				}
+			}
+			&.social li a {
+				padding: 0 0 0 1.5rem;
 			}
 		}
-	}
-	> p {
-		border-top: solid thin #DDD;
+
 	}
 
+	section#copy {
+		width: 100%;
+		padding: .625rem;
+		background: #ebebeb;
+		font-size: .6875rem;
+		text-align: center;
+		color: #333;
+	}
+	
 	.teaser {
 		width: 100%;
 		position: absolute;
-		bottom: 65px;
+		bottom: 123px;
+		left: 0;
 		display: none;
 		border: solid thin #DDD;
 		background: #fff;

@@ -130,6 +130,9 @@ module.exports = Base.extend({
 
                 $('.loading').show();
                 helpers.dataAdapter.post(this.app.req, url.join(''), {
+                    query: {
+                        platform: this.app.session.get('platform')
+                    },
                     cache: false,
                     json: true,
                     done: function() {

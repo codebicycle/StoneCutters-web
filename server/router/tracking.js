@@ -2,170 +2,81 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
-    var querystring = require('querystring');
-    var config = require('../../app/config');
-    var configAnalytics = require('../../app/analytics/config');
-    var Session = require('../../shared/session');
+    var statsd  = require('../modules/statsd')();
+    var Tracker = require('../modules/tracker');
+    var config = require('../../shared/config');
     var utils = require('../../shared/utils');
-    var tracking = require('../../shared/tracking');
-    var graphite = require('../graphite')();
-    var statsd  = require('../statsd')();
-    var Tracker = require('../tracker');
-    var analytics = require('../../app/analytics');
+    var analytics = require('../../app/modules/analytics');
+    var configAnalytics = require('../../app/modules/analytics/config');
+    var env = config.get(['environment', 'type'], 'development');
+    var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function getUserAgent(req) {
-        return (req.get('user-agent') || utils.defaults.userAgent);
-    }
-
-    function defaultOptions(req) {
+    function defaultRequestOptions(req) {
         return {
             headers: {
-                'User-Agent': getUserAgent(req)
+                'User-Agent': (req.get('user-agent') || utils.defaults.userAgent),
+                'Accept-Encoding': 'gzip,deflate,sdch',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
             }
         };
     }
-
-    function googleUTMCC(req) {
-        var utmcc = [];
-        var gaDh = req.rendrApp.session.get('gaDh');
-        var gaCs = req.rendrApp.session.get('gaCs');
-        var gaNs = req.rendrApp.session.get('gaNs');
-
-        utmcc.push('__utma=');
-        utmcc.push(gaDh);
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaUid'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaIs'));
-        utmcc.push('.');
-        utmcc.push(req.rendrApp.session.get('gaPs'));
-        utmcc.push('.');
-        utmcc.push(gaCs);
-        utmcc.push('.');
-        utmcc.push(gaNs);
-        utmcc.push(';');
-        return utmcc.join('');
-    }
-
-    (function analyticsInfo() {
-        app.get('/analytics', handler);
-
-        var paramsGenerators = {
-            ati: function generateAtiParams(req) {
-                var env = config.get(['environment', 'type'], 'development');
-                var countryId = 2;
-                var params = {};
-                var atiConfig;
-
-                if (env !== 'production') {
-                    countryId = 0;
-                }
-                atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
-                if (atiConfig) {
-                    params.id = atiConfig.siteId;
-                    params.host = atiConfig.logServer;
-                }
-                return params;
-            },
-            google: function generateGoogleParams(req) {
-                var params = {};
-
-                params.host = req.host;
-                params.clientId = (req.rendrApp.session.get('clientId') || 'ac33b570-90e2-4669-ba83-d3fa017c0de0');
-                return params;
-            }
-        };
-
-        function generateDefaultParams(req) {
-            var sid = req.rendrApp.session.get('sid');
-            var location = (req.rendrApp.session.get('location') || {});
-            var params = {};
-
-            if (sid) {
-                params.sid = sid;
-            }
-            params.id = analytics.google.getId();
-            params.page = 'test';
-            params.random = Math.round(Math.random() * 1000000);
-            params.referer = (req.rendrApp.session.get('referer') || '-');
-            params.platform = (req.rendrApp.session.get('platform') || utils.defaults.platform);
-            params.clientId = (req.rendrApp.session.get('clientId') || 'ac33b570-90e2-4669-ba83-d3fa017c0de0').substr(24);
-            params.osNm = 'Others';
-            params.locNm = 'TestLocation';
-            params.custom = ['{"page_name":"test","platform":"', params.platform, '","category":"test"}'].join('');
-            return params;
-        }
-
-        function handler(req, res) {
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
-
-            function callback() {
-                var trackers = {
-                    ati: true,
-                    google: true,
-                    graphite: true
-                };
-                var defaultParams = generateDefaultParams(req);
-                var json = {};
-                var paramsGenerator;
-                var params;
-                var data;
-                var api;
-
-                _.each(trackers, function(x, type) {
-                    paramsGenerator = paramsGenerators[type];
-                    if (paramsGenerator) {
-                        params = paramsGenerator.call(this, req, defaultParams);
-                    }
-                    api = tracking.generate(type, _.defaults({}, params, defaultParams), false, true);
-                    data = {};
-                    _.each(api.params, function(value, key) {
-                        data[key] = encodeURIComponent(value);
-                    });
-                    json[type] = [api.url, '?', querystring.stringify(data)].join('');
-                });
-
-                res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-                res.json({
-                    trackers: json
-                });
-            }
-        }
-    })();
 
     (function pageview() {
         app.get('/analytics/pageview.gif', handler);
 
         function graphiteTracking(req) {
-            graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
-            statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
-            graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
-            statsd.increment([req.query.locNm, 'devices', req.query.osNm, req.query.platform]);
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'Others';
+            var hitCount = req.rendrApp.session.get('hitCount');
+            var clientId = req.rendrApp.session.get('clientId');
+
+            statsd.increment([req.query.locNm, 'pageview', platform]);
+            statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            if (!hitCount) {
+                statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
+            }
+            else {
+                // statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
+                if (hitCount > 1) {
+                    statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
+                }
+                else {
+                    statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                }
+            }
         }
 
-        function googleTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
-            var analytic = new Tracker('google', {
-                id: env === 'production' ? 'UA-5247560-2' : 'UA-50756825-1',
-                host: req.host,
-                clientId: req.query.cliId
+        function googleTracking(req, trackerId, host, page) {
+            var analytic = new Tracker('googleGA', {
+                id: trackerId,
+                host: host || req.host
             });
-            var ip = req.rendrApp.session.get('ip');
-            var options = defaultOptions(req);
-
-            options.method = 'post';
-            analytic.track({
-                page: req.query.page,
+            var language = req.rendrApp.session.get('selectedLanguage');
+            var platform = req.rendrApp.session.get('platform');
+            var osName = req.rendrApp.session.get('osName') || 'unknown';
+            var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
+            var options = defaultRequestOptions(req);
+            var params = {
+                page: page || req.query.page,
                 referer: req.query.referer,
-                ip: ip,
-                userAgent: getUserAgent(req)
-            }, options);
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent'],
+                hitCount: req.rendrApp.session.get('hitCount'),
+                visitor: analytics.google.getUtmcc(req.rendrApp)
+            };
+
+            if (language) {
+                params.language = language.toLowerCase();
+            }
+            osName = osName.replace(/\s*/g, '').toLowerCase();
+            params.custom = ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('');
+
+            analytic.track(params, options);
         }
 
         function atiTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -176,63 +87,87 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultOptions(req);
+                options = defaultRequestOptions(req);
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId.substr(24)
+                    host: atiConfig.logServer
                 });
-
+                options.debug = true;
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
-                    custom: req.query.custom
+                    custom: req.query.custom,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+            var gif = new Buffer(image, 'base64');
+            var location = req.rendrApp.session.get('siteLocation');
+            var siteLocation = location || req.query.locUrl;
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
+            var osName = req.rendrApp.session.get('osName');
+            var osVersion = req.rendrApp.session.get('osVersion');
+            var userAgent = req.get('user-agent');
+            var host = req.host;
+            var page = req.query.page;
+            var bot;
+            var trackerId;
+            var platformUrl;
 
-            image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
+            res.set('Content-Length', gif.length);
+            res.end(gif);
 
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
-
-            function callback() {
-                graphiteTracking(req);
-                googleTracking(req);
-                atiTracking(req);
+            if (!location) {
+                if (!siteLocation) {
+                    return/* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl)*/;
+                }
+                return/* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl)*/;
             }
+            bot = isBot(userAgent, platform, osName, osVersion);
+            if (bot) {
+                return statsd.increment([req.query.locNm, 'bot', bot, platform]);
+            }
+            try {
+                platformUrl = JSON.parse(req.query.custom).platform;
+            }
+            catch (err) {}
+            if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
+                return/* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl)*/;
+            }
+            graphiteTracking(req);
+            trackerId = analytics.google.getId(siteLocation);
+            if (trackerId) {
+                if (req.rendrApp.session.get('internet.org')) {
+                    host = host.replace('olx', 'olx-internet-org');
+                    page = '/internet.org' + page;
+                }
+                googleTracking(req, trackerId, host, page);
+            }
+            atiTracking(req);
         }
     })();
 
     (function pageevent() {
         app.get('/analytics/pageevent.gif', handler);
 
-        function googleTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
+        function googleTracking(req, trackerId, host) {
             var analytic = new Tracker('google-event', {
-                id: env === 'production' ? 'UA-5247560-2' : 'UA-50756825-1',
-                host: req.host,
-                clientId: req.query.cliId
+                id: trackerId,
+                host: host
             });
-            var ip = req.rendrApp.session.get('ip');
-            var options = defaultOptions(req);
+            var options = defaultRequestOptions(req);
 
-            options.method = 'post';
             analytic.track(_.extend({
-                ip: ip,
-                userAgent: getUserAgent(req)
+                ip: req.rendrApp.session.get('ip'),
+                clientId: req.rendrApp.session.get('clientId'),
+                userAgent: options.headers['User-Agent']
             }, req.query), options);
         }
 
         function atiTracking(req) {
-            var env = config.get(['environment', 'type'], 'development');
             var countryId = req.query.locId;
             var atiConfig;
             var analytic;
@@ -243,35 +178,54 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultOptions(req);
+                options = defaultRequestOptions(req);
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
-                    host: atiConfig.logServer,
-                    clientId: req.query.cliId.substr(24)
+                    host: atiConfig.logServer
                 });
                 analytic.track({
                     custom: req.query.custom,
-                    url: req.query.url
+                    url: req.query.url,
+                    clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
         }
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+            var gif = new Buffer(image, 'base64');
+            var location = req.rendrApp.session.get('siteLocation');
+            var siteLocation = location || req.query.locUrl;
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
+            var osName = req.rendrApp.session.get('osName');
+            var osVersion = req.rendrApp.session.get('osVersion');
+            var userAgent = req.get('user-agent');
+            var host = req.host;
+            var bot;
+            var trackerId;
+            var platformUrl;
 
-            image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
+            res.set('Content-Length', gif.length);
+            res.end(gif);
 
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
-
-            function callback() {
-                googleTracking(req);
-                atiTracking(req);
+            if (!location) {
+                if (!siteLocation) {
+                    return console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl);
+                }
+                return console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
             }
+            bot = isBot(userAgent, platform, osName, osVersion);
+            if (bot) {
+                return statsd.increment([req.query.locNm, 'bot', bot, platform]);
+            }
+            trackerId = analytics.google.getId(siteLocation);
+            if (trackerId) {
+                if (req.rendrApp.session.get('internet.org')) {
+                    host = host.replace('olx', 'olx-internet-org');
+                }
+                googleTracking(req, trackerId, host);
+            }
+            atiTracking(req);
         }
     })();
 
@@ -279,20 +233,16 @@ module.exports = function trackingRouter(app, dataAdapter) {
         app.get('/analytics/graphite.gif', handler);
 
         var metrics = {
-            pageview: function(req) {
-                graphite.send([req.query.locNm, 'pageview', req.query.platform], 1, '+');
-                statsd.increment([req.query.locNm, 'pageview', req.query.platform]);
-                graphite.send([req.query.locNm, 'devices', req.query.osNm, req.query.platform], 1, '+');
-                statsd.increment([req.query.locNm, 'devices', req.query.platform]);
+            pageview: function(req, options) {
+                statsd.increment([req.query.locNm, 'pageview', options.platform]);
+                statsd.increment([req.query.locNm, 'devices', options.osName, options.platform]);
             },
             reply: {
-                success: function(req) {
-                    graphite.send([req.query.location, 'reply', 'success', req.query.platform], 1, '+');
-                    statsd.increment([req.query.location, 'reply', 'success', req.query.platform]);
+                success: function(req, options) {
+                    statsd.increment([req.query.location, 'reply', 'success', options.platform]);
                 },
-                error: function(req) {
-                    graphite.send([req.query.location, 'reply', 'error', req.query.platform], 1, '+');
-                    statsd.increment([req.query.location, 'reply', 'error', req.query.platform]);
+                error: function(req, options) {
+                    statsd.increment([req.query.location, 'reply', 'error', options.platform]);
                 }
             }
         };
@@ -300,20 +250,60 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function noop() {}
 
         function handler(req, res) {
-            var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+            var gif = new Buffer(image, 'base64');
 
-            image = new Buffer(image, 'base64');
             res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', image.length);
-            res.end(image);
+            res.set('Content-Length', gif.length);
+            res.end(gif);
 
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
-
-            function callback() {
-                utils.get(metrics, (req.query.metric || '').split(','), noop)(req);
-            }
+            utils.get(metrics, (req.query.metric || '').split(','), noop)(req, {
+                platform: req.rendrApp.session.get('platform'),
+                osName: req.rendrApp.session.get('osName') || 'Others'
+            });
         }
     })();
+
+    function isBot(userAgent, platform, osName, osVersion) {
+        if (/googlebot/i.test(userAgent)) {
+            return 'google';
+        }
+        osName = osName && osName !== 'Others' ? osName.toLowerCase() : 'unknown';
+        osVersion = osVersion ? String(osVersion).toLowerCase() : 'unknown';
+        return isBotPlatform(platform, osName, osVersion);
+    }
+
+    function isBotPlatform(platform, osName, osVersion) {
+        switch (platform) {
+            case 'wap':
+                return isBotWap(osName);
+            case 'html4':
+                return isBotHtml4(osName);
+            default:
+                return osName === 'unknown' && osVersion === 'unknown' ? 'others' : false;
+        }
+    }
+
+    function isBotWap(osName, osVersion) {
+        switch (osName) {
+            case 'others':
+                return osVersion === 'unknown' ? 'others' : false;
+            case 'ios':
+                return osVersion === '4' ? 'others' : false;
+            case 'samsungproprietary':
+            case 'bada':
+                return 'others';
+            default:
+                return false;
+        }
+    }
+
+    function isBotHtml4(osName, osVersion) {
+        switch (osName) {
+            case 'nokiaos':
+                return osVersion === '0' ? 'others' : false;
+            default:
+                return false;
+        }
+    }
+
 };

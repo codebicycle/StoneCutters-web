@@ -1,13 +1,13 @@
 'use strict';
 
-var uuid = require('node-uuid');
-
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
         var uuid = require('node-uuid');
         var utils = require('../../shared/utils');
+        var config = require('../../shared/config');
+        var deploy = config.get('deploy', {});
 
         function getIp(req) {
             var ip = req.header('x-forwarded-for');
@@ -24,10 +24,16 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!ip) {
                 ip = '1.1.1.1';
             }
-            if (Array.isArray(ip)) {
-                ip = ip.shift();
+            if (!Array.isArray(ip)) {
+                ip = ip.split(',');
             }
-            return ip.split(',').shift();
+            var _ip = _.find(ip, function each(_ip) {
+                return !!(_ip.indexOf('192.') && _ip.indexOf('10.'));
+            });
+            if (!_ip) {
+                _ip = ip.join(',');
+            }
+            return _ip;
         }
 
         return function environment(req, res, next) {
@@ -53,8 +59,11 @@ module.exports = function(dataAdapter, excludedUrls) {
                 platform: platform,
                 ip: getIp(req)
             });
-            req.rendrApp.req.app.locals({
-                platform: platform
+            res.locals({
+                platform: platform,
+                environment: config.get(['environment', 'type'], 'development'),
+                version: deploy.version,
+                revision: deploy.revision
             });
             next();
         };

@@ -64,7 +64,7 @@
         <input type="hidden" name="locationName" value="{% if itemLocation and itemLocation.name %}{{ itemLocation.name }}{% elif (form and form.values and form.values.locationName) %}{{ form.values.locationName }}{% endif %}" >
         <input type="hidden" name="languageId" value="{{language}}">
         <input type="hidden" name="languageCode" value="{{languageCode}}">
-        <input type="hidden" name="platform" value="{{platform}}">
+        <input type="hidden" name="platform" value="html4">
         <input type="hidden" name="category.parentId" value="{{category.id}}">
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
         <input type="hidden" name="id" value="{{item.id}}">

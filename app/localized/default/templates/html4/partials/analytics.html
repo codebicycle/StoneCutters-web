@@ -1,9 +1,15 @@
 {% if analytics %}
-    {% if (analytics | is('array')) %}
-        {% for url in analytics %}
-            <img src="{{url}}" class="analytics" width="1px" height="1px">
-        {% endfor %}
-    {% else %}
-        <img src="{{analytics}}" class="analytics" width="1px" height="1px">
-    {% endif %}
+    {% for url in analytics.urls %}
+        <img src="{{url}}" class="analytics" width="1" height="1">
+    {% endfor %}
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(function() {
+            var tracker = _gat._getTracker('UA-5247560-17');
+
+            tracker._setCustomVar(1, 'olx_visitor_country', 'html4_{{ os.name | lower if (os.name != "Others") else "unknown" }}_{{ os.version }}_{{ location.name }}', 1);
+            tracker._trackPageview('{{ analytics.params.page }}');
+        });
+    </script>
 {% endif %}

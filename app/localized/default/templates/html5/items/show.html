@@ -1,10 +1,10 @@
-<section id="itemPage">
+<section id="itemPage" data-qa="item">
     <input type="hidden" value="{{ dictionary["postingerror.InvalidEmail"] }}" name="errMsgMail" class="errMsgMail">
     <input type="hidden" value="{{ dictionary["postingerror.PleaseCompleteThisField"] }}" name="errMsgMandatory" class="errMsgMandatory">
     <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
     <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav">
     <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav">
-    
+
     {% if not item.status.onReview %}
         {% set favClass = 'remove' %}
         {% set favLink = '#' %}
@@ -18,14 +18,14 @@
         {% endif %}
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link, item.category.name, level=3, ['<ul>
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false, ['<ul>
             <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
             <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
         </ul>'] | join) }}
     {% else %}
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link, item.category.name, level=3) }}
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
     {% endif %}
 
 
@@ -58,7 +58,7 @@
 
     <section id="description">
         <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
-        <h2>{{ item.price.displayPrice if item.price.displayPrice else "" }}</h2>
+        <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
         <h1>{{ item.title }}</h1>
         <p>{{ item.descriptionReplace }}</p>
         <div class="clear"></div>
@@ -262,7 +262,7 @@
 <div id="share" class="popup">
     <div class="popup-wrapper">
         <div class="popup-container">
-            <h4>{{ dictionary["itemgeneraldetails.ShareThisAd"] }}</h4>
+            <div class="popup-title">{{ dictionary["itemgeneraldetails.ShareThisAd"] }}</div>
             <div>
                 <ul>
                     <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ href }}" target="_blank" class="facebookButton">Facebook</a></li>

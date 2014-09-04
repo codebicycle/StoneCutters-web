@@ -1,113 +1,173 @@
-<section id="itemListing">
-	<nav class="breadcrumb">
-		<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a>
-		<span class="arrow"></span>
-		{% if not currentCategory.parentId %}
-				<strong>{{ category.trName }}</strong>
-		{% else %}
-			<a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> <strong>{{ currentCategory.trName }}</strong>
-		{% endif %}
-		{% if location.current and location.current.type != 'country' %}
-			em {{location.current.name}}
-		{% else %}
-			no {{location.name}}
-		{% endif %}
-		<span class="count">({{ metadata.total | countFormat }})</span>
-		{% if not infiniteScroll and (metadata.next or metadata.previous) %}
-			<div class="itemPagination">
-            	<p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
-                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="icons left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="icons right {{ "disable" if not metadata.next }}"></a>
-            </div>
-        {% endif %}
-	</nav>
-
-	<nav class="categories">
-		<div class="categories">
-			<h2>Selecione a categoria</h2>
-			<a href="{{ '/nf/all-results' | link }}" ><span class="icons icon-arrow"></span>Todas as categorias</a>
+{% view 'header/index' %}
+	<section id="template">
+		<nav class="breadcrumb">
+			<a href="{{ '' | link }}">Inicio</a>
+			<span class="arrow"></span>
 			{% if not currentCategory.parentId %}
-				<h3>{{ category.trName }} <span>{{ metadata.total | countFormat }}</span></h3>
+					{{ category.trName }}<span class="arrow"></span> {{ metadata.total | countFormat }} Resultados para <strong>"{{ category.trName }}"</strong> 
 			{% else %}
-				<h3>{{ currentCategory.trName }} <span>{{ metadata.total | countFormat }}</span></h3>
+				<a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> {{ currentCategory.trName }} <span class="arrow"></span> {{ metadata.total | countFormat }} Resultados para <strong>"{{ currentCategory.trName }}"</strong> 
 			{% endif %}
-			<div class="subCat">
-				{% if not currentCategory.parentId %}
-					{% for subcategory in currentCategory.children.toJSON() %}
-						<a href="{{ subcategory | slugToUrl | link }}" ><span class="icons icon-cat-{{ subcategory.id }}"></span> {{subcategory.trName}} <span class="count">{{ (subcategory.counter | countFormat) if subcategory.counter > 0 }}</span></a>	                
-			        {% endfor %}
-				{% else %}
-					<a href="{{ category | slugToUrl | link }}" ><span class="icons icon-cat-{{ category.id }}"></span> {{ category.trName }} </a>
-				{% endif %}
-			</div>
-		</div>
-		<div class="filters">
-			<h3>Preço</h3>
-			<div class="price">
-				<input type="text" class="values defaultContent numeric" placeholder="Mín." size="7" value="" id="min-Navigator_price" name="min" >
-				<input type="text" class="values defaultContent numeric" placeholder="Máx." size="7" value="" id="max-Navigator_price" name="max" >
-				<button type="button" class="icons"></button>
-			</div>
-		</div>
-	</nav>
-	
-	<nav class="location">
-		<ul>
-			{% if not location.current or location.current.type == 'country' %}
-				<li class="one"><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">{{ location.name }}</a></li>
-			{% elif location.current and location.current.type == 'state' %}
-				<li class="parent"><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">{{ location.name }}</a></li>
-				<li class="current">{{ location.current.name }}<a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}"></a></li>
-			{% elif location.current and location.current.type == 'city' %}
-				<li class="parent"><a href="{{ category | slugToUrl | link({location: 'www.olx.com.br'}) }}" rel="nofollow">{{ location.name }}</a></li>
-				<li class="parent"><a href="{{ category | slugToUrl | link({location: location.children[0].url }) }}" rel="nofollow">{{ location.children[0].name }}</a></li>
-				<li class="current">{{ location.current.name }}<a href="{{ category | slugToUrl | link({location: location.children[0].url }) }}"></a></li>
-			{% endif %}
-		</ul>
-		{% if metadata.filters.state or metadata.filters.city %}
-			<div class="list">
-				<ul>
-					{% for state in metadata.filters.state.value %}
-						<li><a href="{{ category | slugToUrl | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
-					{% endfor %}
-					{% for city in metadata.filters.city.value %}
-						<li><a href="{{ category | slugToUrl | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
-					{% endfor %}
-					<div class="clear"></div>
+			en {{ location.current.name if location.current and location.current.type != 'country' else location.name }}
+
+			{% if metadata.next or metadata.previous %}
+				<div class="itemPagination">
+	            	<p>Página <strong>{{ metadata.page }}</strong> de <strong>{{ metadata.totalPages | countFormat }}</strong></p>
+	            	{% if not metadata.previous %}
+	            		<a href="{{ metadata.next | link }}" class="icons right"></a>
+	            	{% elif not metadata.next %}
+	            		<a href="{{ metadata.previous | link }}" class="icons left"></a>
+	            	{% else %}
+	            		<a href="{{ metadata.previous | link }}" class="icons left"></a> <span>|</span> <a href="{{ metadata.next | link }}" class="icons right"></a>
+	            	{% endif %}
+	            </div>
+	        {% endif %}
+		</nav>
+
+		<section class="list">
+			<nav>
+				<div class="tabs">
+					<a href="" class="galery icons">Galeria</a>
+					<a href="" class="list icons active">Listado</a>
+				</div>
+				<div class="sort">
+					<label>Ordenado por:</label>
+					<select name="listing-order-combo">
+						<option selected="selected" value="date*to*showdesc">Mais recentes</option>
+						<option value="price">Menor preço</option>
+						<option value="pricedesc">Maior preço</option>
+					</select>
+				</div>
+			</nav>
+			<ul class="listing itemListing">
+				{% for item in items %}
+					<li>
+						<a href="{{ item | slugToUrl | link }}">
+							<div  class="photo">
+								<div {{ ('style="background-image:url(' + item.thumbnail + ');"') if item.thumbnail else ('class="noPhoto"') }} data-fullimg="{{ item.fullImage }}"></div>
+							</div>
+							<div class="title">
+								<h3>{{ item.title }}</h3>
+								<span>{{ item.displayLocation }}</span>
+							</div>
+							<div class="price">
+								{{ item.price.displayPrice }}
+							</div>
+							<div class="date">
+								{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
+							</div>
+						</a>
+						<div class="clear"></div>
+					</li>
+				{% endfor %}
+			</ul>
+	        {% if metadata.next or metadata.previous %}
+	            <div class="itemPagination">
+	            	{% if not metadata.previous %}
+	            		<a href="{{ metadata.next | link }}" class="next first">Siguiente página</a>
+	            	{% elif not metadata.next %}
+	            		<a href="{{ metadata.previous | link }}" class="icons prev last">Volver</a>
+	            	{% else %}
+	            		<a href="{{ metadata.previous | link }}" class="icons prev">Volver</a> <a href="{{ metadata.next | link }}" class="next">Siguiente página</a>
+	            	{% endif %}
+	               <div class="{{ 'full' if not metadata.previous and metadata.next }}">{{ metadata | pagination }}</div>
+	            </div>
+	        {% endif %}
+		</section>
+
+		<nav class="leftContent topLocation">
+			Venezuela
+		</nav>
+		<nav class="leftContent refine">
+			<h3>Categoria</h3>
+			<div class="filters">
+				<a href=""><span class="icons arrow"></span>Todas las categorías</a>
+				<ul class="categories">
+					<li>
+						<p>
+							<span class="icons icon-cat-830"></span>
+							Teléfonos - Tablets, <br>
+							<span class="counter">152.365</span>
+						</p>
+						<ul class="subCat">
+							<li>
+								<a href="">
+									Sub catttt, <br>
+									<span class="counter">152.365</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									Sub catttt, <br>
+									<span class="counter">152.365</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									Sub catttt, <br>
+									<span class="counter">152.365</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									Sub catttt, <br>
+									<span class="counter">152.365</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="">
+							<span class="icons icon-cat-830"></span>
+							Teléfonos - Tablets, <br>
+							<span class="counter">152.365</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<span class="icons icon-cat-830"></span>
+							Teléfonos - Tablets, <br>
+							<span class="counter">152.365</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<span class="icons icon-cat-830"></span>
+							Teléfonos - Tablets, <br>
+							<span class="counter">152.365</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<span class="icons icon-cat-830"></span>
+							Teléfonos - Tablets, <br>
+							<span class="counter">152.365</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<span class="icons icon-cat-830"></span>
+							Teléfonos - Tablets, <br>
+							<span class="counter">152.365</span>
+						</a>
+					</li>
 				</ul>
 			</div>
-		{% endif %}
-	</nav>
-	<section class="list">
-		<nav>
-			<div class="tabs">
-				<a href="" class="galery icons">Fotos Maiores</a>
-				<a href="" class="list icons active">Exibição em Lista</a>
-			</div>
-			<div class="sort">
-				<label>Ordenado por:</label>
-				<select name="listing-order-combo">
-					<option selected="selected" value="date*to*showdesc">Mais recentes</option>
-					<option value="price">Menor preço</option>
-					<option value="pricedesc">Maior preço</option>
-				</select>
+		</nav>
+		<nav class="leftContent refine location">
+			<h3>Ubicación</h3>
+			<div class="filters">
+				<ul>
+					<li><a href="">Barcelona</a></li>
+					<li><a href="">Barcelona</a></li>
+					<li><a href="">Barcelona</a></li>
+					<li><a href="">Barcelona</a></li>
+					<li><a href="">Barcelona</a></li>
+					<li><a href="">Barcelona</a></li>
+					<li><a href=""><strong>Mas</strong></a></li>
+				</ul>
 			</div>
 		</nav>
-		<ul class="listing itemListing">
-			{% view 'items/items' %}
-		</ul>
-		{% if infiniteScroll %}
-            <div class="loader is-loading" style="display: none;">
-                <img src="{{ '/images/html5/loading.gif' | static }}" alt="Loading...">
-            </div>
-            <input id="currentUrl" type="hidden" class="hide" value="{{ metadata.current | link }}">
-        {% elif metadata.next or metadata.previous %}
-            <div class="itemPagination">
-                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
-            </div>
-        {% endif %}
+		<div class="clear"></div>
 	</section>
-	
-	{% view 'partials/postbanner' %}
-	
-	<div class="clear"></div>
-</section>
+{% view 'footer/footer' %}

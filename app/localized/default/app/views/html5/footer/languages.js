@@ -2,7 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('footer/languages');
 var utils = require('../../../../../../../shared/utils');
-var config = require('../../../../../../config');
+var config = require('../../../../../../../shared/config');
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
@@ -52,7 +52,7 @@ module.exports = Base.extend({
     },
     onPostingFlowAfter: function() {
         this.$('#languages').removeClass('disabled');
-    },    
+    },
     onActionEnd: function(e, loading) {
         this.$('#languages .footer-links a').each(function(i, link) {
             var $link = $(link);

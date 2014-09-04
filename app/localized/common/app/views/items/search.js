@@ -5,7 +5,7 @@ var _ = require('underscore');
 var querystring = require('querystring');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
-var analytics = require('../../../../../analytics');
+var analytics = require('../../../../../modules/analytics');
 
 module.exports = Base.extend({
     className: 'items_search_view',
@@ -172,19 +172,15 @@ module.exports = Base.extend({
         function track(done, _items, metadata) {
             var img;
             var analyticImg;
-            var urls;
+            var analyticInfo;
 
             analytics.reset();
             analytics.setPage('nf');
             analytics.addParam('keyword', search);
             analytics.addParam('page_nb', Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1));
 
-            urls = analytics.generateURL.call(this);
-            if (!_.isArray(urls)) {
-                urls = [urls];
-            }
-
-            _.each(urls, function(url) {
+            analyticInfo = analytics.generateURL.call(this);
+            _.each(analyticInfo.urls, function(url) {
                 img = $('<img/>');
                 img.addClass('analytics');
                 img.attr('src', url);

@@ -11,7 +11,7 @@ module.exports = function appUseConf(done) {
     var middleware = require('./middleware')(dataAdapter);
     var server = rendr.createServer({
         dataAdapter: dataAdapter,
-        errorHandler: require('./errorHandler')(),
+        errorHandler: require('./modules/errorHandler')(),
         apiPath: config.get(['smaug', 'protocol'], 'http') + '://' + config.get(['smaug', 'url'], 'api-v2.olx.com'),
         viewsPath: 'app/localized/common/app/views'
     });
@@ -33,12 +33,12 @@ module.exports = function appUseConf(done) {
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
-        rendrApp.use(middleware.abSelector());
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.languages());
         rendrApp.use(middleware.templates());
-        //rendrApp.use(middleware.bar());
+        rendrApp.use(middleware.device());
+        rendrApp.use(middleware.internetOrg());
     }
 
     server.expressApp.configure(expressConfiguration);

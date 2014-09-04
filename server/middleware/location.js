@@ -3,16 +3,15 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var config = require('../config');
-        var asynquence = require('asynquence');
         var _ = require('underscore');
+        var path = require('path');
+        var asynquence = require('asynquence');
+        var config = require('../config');
+        var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
+        var errorPath = path.resolve('server/templates/error.html');
         var testing = config.get(['publicEnvironments', 'testing'], {});
         var staging = config.get(['publicEnvironments', 'staging'], {});
-        var path = require('path');
-        var errorPath = path.resolve('server/templates/error.html');
-        var graphite = require('../graphite')();
-        var statsd  = require('../statsd')();
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -106,7 +105,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                graphite.send(['Unknown Location', 'middleware', 'location', 'error'], 1, '+');
                 statsd.increment(['Unknown Location', 'middleware', 'platform', 'error']);
                 res.status(500).sendfile(errorPath);
             }

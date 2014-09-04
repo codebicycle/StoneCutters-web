@@ -3,21 +3,19 @@
     {% view 'layout/head' %}
     <body>
         <div id="progressBar"></div>
-        {% view 'header/bar' %}
+        {% set bar = template + "/layout/bar.html" %}
+        {% include bar %}
         <div id="wrapper">
-            
-            {% view 'header/index' %}
-            
             <section id="content">
-                {{ body }}            
-            </section>        	
-            {% view 'footer/footer' %}
+                {{ body }}
+            </section>
         </div>
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
                 .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
-                .script("{{ [jsDir, directory, 'templates', platform, 'templates.js'] | join('/') | static }}").wait()
+                .script("{{ [jsDir, 'common', ((['config-', environment, '.js'] | join('')) if (environment != 'production') else 'config.js')] | join('/') | static }}")
+                .script("{{ [jsDir, directory, 'templates', 'desktop', 'templates.js'] | join('/') | static }}").wait()
                 .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
                     var App = window.App = new (require('app/app'))({% json appData %});
                     App.bootstrapData({% json bootstrappedData %});

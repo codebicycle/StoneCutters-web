@@ -3,28 +3,30 @@
 module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
-        var asynquence = require('asynquence');
         var _ = require('underscore');
-        var utils = require('../../shared/utils');
         var path = require('path');
+        var asynquence = require('asynquence');
+        var statsd  = require('../modules/statsd')();
+        var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
-        var graphite = require('../graphite')();
-        var statsd  = require('../statsd')();
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
-            var app = req.rendrApp;
-            var siteLocation = app.session.get('siteLocation');
-            var location = app.session.get('location');
-            var languages;
-            var selectedLanguage;
+            var location = req.rendrApp.session.get('location');
+            var siteLocation = req.rendrApp.session.get('siteLocation');
             var userAgent = req.get('user-agent') || utils.defaults.userAgent;
+            var selectedLanguage;
+            var languages;
 
-            function fetchLanguages(done) {
-                dataAdapter.get(req, '/countries/' + siteLocation + '/languages', done.errfcb);
+            function fetch(done) {
+                dataAdapter.get(req, '/countries/' + siteLocation + '/languages', {
+                    query: {
+                        platform: req.rendrApp.session.get('platform')
+                    }
+                }, done.errfcb);
             }
 
             function parse(done, response, _languages) {
@@ -36,7 +38,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                     models: _languages,
                     _byId: {}
                 };
-
                 languages.models.forEach(function each(language) {
                     languages._byId[language.locale] = language;
                 });
@@ -45,10 +46,10 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function transition(done) {
-                var lastSelectedLanguage = app.session.get('selectedLanguage');
+                var lastSelectedLanguage = req.rendrApp.session.get('selectedLanguage');
 
                 if (!isNaN(lastSelectedLanguage)) {
-                    app.session.clear('selectedLanguage');
+                    req.rendrApp.session.clear('selectedLanguage');
                 }
                 done();
             }
@@ -59,22 +60,22 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (language && !languages._byId[language]) {
                     language = null;
                 }
-                selectedLanguage = language || app.session.get('selectedLanguage') || languages.models[0].locale;
+                selectedLanguage = language || req.rendrApp.session.get('selectedLanguage') || languages.models[0].locale;
                 done();
             }
 
             function store(done) {
-                app.session.update({
+                req.rendrApp.session.update({
                     languages: languages
                 });
-                app.session.persist({
+                req.rendrApp.session.persist({
                     selectedLanguage: selectedLanguage
                 });
                 done();
             }
 
             function check(done) {
-                var selectedLanguage = app.session.get('selectedLanguage');
+                var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
                 var language = req.param('language');
                 var redirect;
 
@@ -94,13 +95,12 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                graphite.send([location.name, 'middleware', 'languages', 'error'], 1, '+');
                 statsd.increment([location.name, 'middleware', 'languages', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 
             asynquence().or(fail)
-                .then(fetchLanguages)
+                .then(fetch)
                 .then(parse)
                 .then(transition)
                 .then(select)

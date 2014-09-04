@@ -1,0 +1,43 @@
+<section id="myOlxItemList">
+    <ul class="tabs">
+        <li class="current">Seus Anúncios</li>
+        <li><a href="{{ '/myolx/favoritelisting' | link }}" >Favoritos</a></li>
+        <li><a href="" >Configurações</a></li>
+        <li><a href="" >Mensagens</a></li>
+    </ul>
+    {% if myAds.length %}
+        <ul class="myAds">
+            {% for item in myAds %}
+                <li>
+                    <div class="image">
+                        <a href="{{ item | slugToUrl | link }}" {{ ('style="background-image:url(' + item.thumbnail + ');"') if item.thumbnail else ('class="noPhoto"') }} ></a>
+                        {% if item.status == 'pending' %}
+                            <span class="status pending">Ativo em breve</span>
+                        {% elif item.status == 'rejected' %}
+                            <span class="status rejected">Recusado</span>
+                        {% elif item.status == 'ready' %}
+                            <span class="status ready">Ready</span>
+                        {% endif %}
+                    </div>
+                    <div class="description">
+                        <h1>{{ item.title }}</h1>
+                        <ul>
+                            <li><a href="" class="option"><span class="icons edit"></span> Editar</a></li>
+                            {% if item.status != 'pending' %}
+                                <li><a href="" class="option"><span class="icons delete"></span> Remover dessa lista</a></li>
+                            {% endif %}
+                            <li>ou, <a href="">contate-nos</a> para ajuda.</li>
+                        </ul>
+                    </div>
+                    <span>{{ item.price.displayPrice }}</span>
+                    <div class="clear"></div>
+                </li>
+            {% endfor %}
+            <div class="clear"></div>
+        </ul>
+        {% else %}
+            <div class="emtyList">
+                {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}
+            </div>
+        {% endif %}
+</section>

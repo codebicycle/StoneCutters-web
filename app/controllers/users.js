@@ -1,147 +1,199 @@
 'use strict';
 
 var _ = require('underscore');
+var asynquence = require('asynquence');
+var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var config = require('../config');
+var analytics = require('../modules/analytics');
+var config = require('../../shared/config');
 
 module.exports = {
-    register: function(params, callback) {
-        helpers.controllers.control.call(this, params, {
-            isForm: true
-        }, controller);
+    register: middlewares(register),
+    login: middlewares(login),
+    logout: middlewares(logout),
+    myolx: middlewares(myolx),
+    myads: middlewares(myads),
+    favorites: middlewares(favorites)
+};
 
-        function controller(form) {
-            var platform = this.app.session.get('platform');
-            var user;
+function register(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
 
-            if (platform === 'wap') {
-                return helpers.common.redirect.call(this, '/');
-            }
-            user = this.app.session.get('user');
-            if (user) {
-                return helpers.common.redirect.call(this, '/', null, {
-                    status: 302
-                });
-            }
-            callback(null, {
-                form: form,
-                agreeTerms: params.agreeTerms
-            });
+    function controller(form) {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
         }
-    },
-    login: function(params, callback) {
-        helpers.controllers.control.call(this, params, {
-            isForm: true
-        }, controller);
-
-        function controller(form) {
-            var platform = this.app.session.get('platform');
-            var user;
-
-            if (platform === 'wap') {
-                return helpers.common.redirect.call(this, '/');
-            }
-            user = this.app.session.get('user');
-            if (user) {
-                return helpers.common.redirect.call(this, '/', null, {
-                    status: 302
-                });
-            }
-            callback(null, {
-                form: form,
-                redirect: params.redirect
-            });
-        }
-    },
-    logout: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller() {
-            this.app.session.clear('user');
+        user = this.app.session.get('user');
+        if (user) {
             return helpers.common.redirect.call(this, '/', null, {
-                status: 302,
-                pushState: false
+                status: 302
             });
         }
-    },
-    myolx: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+        callback(null, {
+            form: form,
+            agreeTerms: params.agreeTerms,
+            analytics: analytics.generateURL.call(this)
+        });
+    }
+}
 
-        function controller() {
-            var platform = this.app.session.get('platform');
-            var user;
+function login(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
 
-            if (platform === 'wap') {
-                return helpers.common.redirect.call(this, '/');
-            }
-            user = this.app.session.get('user');
-            if (platform === 'html5' && user) {
-                return helpers.common.redirect.call(this, '/', null, {
-                    status: 302
-                });
-            }
-            if (!user) {
-                return helpers.common.redirect.call(this, '/login', null, {
-                    status: 302
-                });
-            }
-            callback(null, {});
+    function controller(form) {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
         }
-    },
-    myads: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+        user = this.app.session.get('user');
+        if (user) {
+            return helpers.common.redirect.call(this, '/', null, {
+                status: 302
+            });
+        }
+        callback(null, {
+            form: form,
+            redirect: params.redirect,
+            analytics: analytics.generateURL.call(this)
+        });
+    }
+}
 
-        function controller() {
+function logout(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        this.app.session.clear('user');
+        return helpers.common.redirect.call(this, '/', null, {
+            status: 302,
+            pushState: false
+        });
+    }
+}
+
+function myolx(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        user = this.app.session.get('user');
+        if (platform === 'html5' && user) {
+            return helpers.common.redirect.call(this, '/', null, {
+                status: 302
+            });
+        }
+        if (!user) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+        callback(null, {});
+    }
+}
+
+function myads(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
             var platform = this.app.session.get('platform');
-            var user;
-            var spec;
-
+            
             if (platform === 'wap') {
+                done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
             user = this.app.session.get('user');
             if (!user) {
+                done.abort();
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
-            spec = {
-                myAds: {
-                    collection: 'Items',
-                    params: {
-                        token: user.token,
-                        userId: user.userId
-                    }
-                }
-            };
-            _.extend(spec.myAds.params, params, {
+
+            deleted = params.deleted;
+            delete params.deleted;
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId,
                 location: this.app.session.get('siteLocation'),
                 item_type: 'myAds'
-            });
-            this.app.fetch(spec, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.myAds) {
-                    return helpers.common.error.call(this, err, result, callback);
-                }
-                result.myAdsMetadata = result.myAds.metadata;
-                result.myAds = result.myAds.toJSON();
-                result.deleted = params.deleted;
-                _.each(result.myAds, function processItem(item) {
-                    item.date.since = helpers.timeAgo(item.date);
-                });
-                callback(err, result);
-            }.bind(this));
-        }
-    },
-    favorites: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+            }, params);
 
-        function controller(form) {
+            done();
+        }.bind(this);
+
+        var findAds = function(done) {
+            this.app.fetch({
+                myAds: {
+                    collection: 'Items',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var check = function(done, res) {
+            if (!res.myAds) {
+                return done.fail(null, res);
+            }
+            done(res.myAds);
+        }.bind(this);
+            
+        var success = function(_myAds) {
+            var myAds = _myAds.toJSON();
+
+            _.each(myAds, function processItem(item) {
+                item.date.since = helpers.timeAgo(item.date);
+            });
+
+            callback(null, {
+                myAdsMetadata: _myAds.metadata,
+                myAds: myAds,
+                deleted: deleted
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(findAds)
+            .then(check)
+            .val(success);
+    }
+}
+
+function favorites(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller(form) {
+        var favorite;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
             var platform = this.app.session.get('platform');
-            var user;
-            var favorite;
-            var spec;
 
             if (platform === 'wap') {
                 return helpers.common.redirect.call(this, '/');
@@ -152,35 +204,59 @@ module.exports = {
                     status: 302
                 });
             }
-            spec = {
-                favorites: {
-                    collection: 'Items',
-                    params: {
-                        token: user.token,
-                        userId: user.userId
-                    }
-                }
-            };
+
             favorite = params.favorite;
             delete params.favorite;
-            _.extend(spec.favorites.params, params, {
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId,
                 location: this.app.session.get('siteLocation'),
                 item_type: 'favorites'
-            });
-            this.app.fetch(spec, {
-                readFromCache: false
-            }, function afterFetch(err, result) {
-                if (err || !result.favorites) {
-                    return helpers.common.error.call(this, err, result, callback);
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var findFavorites = function(done) {
+            this.app.fetch({
+                favorites: {
+                    collection: 'Items',
+                    params: _params
                 }
-                result.favoritesMetadata = result.favorites.metadata;
-                result.favorites = result.favorites.toJSON();
-                result.favorite = favorite;
-                _.each(result.favorites, function processItem(item) {
-                    item.date.since = helpers.timeAgo(item.date);
-                });
-                callback(err, result);
-            }.bind(this));
-        }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var check = function(done, res) {
+            if (!res.favorites) {
+                return done.fail(null, res);
+            }
+            done(res.favorites);
+        }.bind(this);
+            
+        var success = function(_favorites) {
+            var favorites = _favorites.toJSON();
+
+            _.each(favorites, function processItem(item) {
+                item.date.since = helpers.timeAgo(item.date);
+            });
+
+            callback(null, {
+                favoritesMetadata: _favorites.metadata,
+                favorites: favorites,
+                favorite: favorite
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(findFavorites)
+            .then(check)
+            .val(success);
     }
-};
+}

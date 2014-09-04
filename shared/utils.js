@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var querystring = require('querystring');
 var isServer = (typeof window === 'undefined');
 var linkParams = {
     location: function (href, query) {
@@ -51,6 +50,104 @@ var defaults = {
     platform: 'wap'
 };
 
+function hasOwnProperty(obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+function parse(qs, sep, eq, options) {
+    sep = sep || '&';
+    eq = eq || '=';
+    var obj = {};
+
+    if (typeof qs !== 'string' || qs.length === 0) {
+      return obj;
+    }
+
+    var regexp = /\+/g;
+    qs = qs.split(sep);
+
+    var maxKeys = 1000;
+    if (options && typeof options.maxKeys === 'number') {
+      maxKeys = options.maxKeys;
+    }
+
+    var len = qs.length;
+    // maxKeys <= 0 means that we should not limit keys count
+    if (maxKeys > 0 && len > maxKeys) {
+      len = maxKeys;
+    }
+
+    for (var i = 0; i < len; ++i) {
+      var x = qs[i].replace(regexp, '%20'),
+          idx = x.indexOf(eq),
+          kstr, vstr, k, v;
+
+      if (idx >= 0) {
+        kstr = x.substr(0, idx);
+        vstr = x.substr(idx + 1);
+      } 
+      else {
+        kstr = x;
+        vstr = '';
+      }
+
+      k = decodeURIComponent(kstr);
+      v = decodeURIComponent(vstr);
+
+      if (!hasOwnProperty(obj, k)) {
+        obj[k] = v;
+      } 
+      else if (_.isArray(obj[k])) {
+        obj[k].push(v);
+      } 
+      else {
+        obj[k] = [obj[k], v];
+      }
+    }
+    return obj;
+};
+
+function stringifyPrimitive(v) {
+    switch (typeof v) {
+      case 'string':
+        return v;
+
+      case 'boolean':
+        return v ? 'true' : 'false';
+
+      case 'number':
+        return isFinite(v) ? v : '';
+
+      default:
+        return '';
+    }
+}
+
+function stringify(obj, sep, eq, name) {
+    sep = sep || '&';
+    eq = eq || '=';
+
+    if (obj !== null && typeof obj === 'object') {
+      return _.map(_.keys(obj), function(k) {
+        var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+
+        if (_.isArray(obj[k])) {
+          return _.map(obj[k], function(v) {
+            return ks + encodeURIComponent(stringifyPrimitive(v));
+          }).join(sep);
+        } 
+        else {
+          return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+        }
+      }).join(sep);
+    }
+
+    if (!name) {
+      return '';
+    }
+    return encodeURIComponent(stringifyPrimitive(name)) + eq + encodeURIComponent(stringifyPrimitive(obj));
+}
+
 function link(href, app, query) {
     query = query || {};
     _.each(linkParams, function(checker, name) {
@@ -80,7 +177,7 @@ function params(url, keys, value) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = querystring.parse(parts.join('?'));
+        parameters = parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.extend(parameters, keys);
@@ -93,7 +190,7 @@ function params(url, keys, value) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(querystring.stringify(parameters));
+        out.push(stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');
@@ -108,7 +205,7 @@ function removeParams(url, keys) {
 
     out.push(parts.shift());
     if (parts.length) {
-        parameters = querystring.parse(parts.join('?'));
+        parameters = parse(parts.join('?'));
     }
     if (_.isObject(keys)) {
         parameters = _.filter(parameters, function filter(key) {
@@ -120,7 +217,7 @@ function removeParams(url, keys) {
     }
     if (!_.isEmpty(parameters)) {
         out.push('?');
-        out.push(querystring.stringify(parameters));
+        out.push(stringify(parameters));
     }
     if (url.slice(url.length - 1) === '#') {
         out.push('#');
@@ -176,6 +273,13 @@ function get(obj, keys, defaultValue) {
     return _.isFunction(value) ? value : _.clone(value);
 }
 
+function daysDiff(date) {
+    var now = new Date();
+    var diff = now.getTime() - date.getTime();
+
+    return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
+}
+
 module.exports = {
     isServer: isServer,
     link: link,
@@ -184,5 +288,6 @@ module.exports = {
     removeParams: removeParams,
     cleanParams: cleanParams,
     get: get,
+    daysDiff: daysDiff,
     defaults: defaults
 };

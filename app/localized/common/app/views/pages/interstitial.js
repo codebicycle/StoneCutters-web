@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../bases/view');
 var helpers = require('../../../../../helpers');
-var analytics = require('../../../../../analytics');
+var analytics = require('../../../../../modules/analytics');
 
 module.exports = Base.extend({
     className: 'pages_intertitial_view',
@@ -19,7 +19,7 @@ module.exports = Base.extend({
         var interstitial = this.$('#interstitial');
         var views = '[data-view]';
         var img;
-        var urls;
+        var analyticInfo;
 
         if (interstitial.length) {
             interstitial.prependTo($('body'));
@@ -45,12 +45,8 @@ module.exports = Base.extend({
                 maxAge: this.app.session.get('downloadApp')
             });
 
-            urls = analytics.generateURL.call(this);
-            if (!_.isArray(urls)) {
-                urls = [urls];
-            }
-
-            _.each(urls, function(url) {
+            analyticInfo = analytics.generateURL.call(this);
+            _.each(analyticInfo.urls, function(url) {
                 img = $('<img/>');
                 img.addClass('analytics');
                 img.attr('src', url);

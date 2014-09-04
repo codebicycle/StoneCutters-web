@@ -1,15 +1,21 @@
 'use strict';
 
+var asynquence = require('asynquence');
+var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../seo');
-var analytics = require('../analytics');
-var config = require('../config');
+var seo = require('../modules/seo');
+var analytics = require('../modules/analytics');
+var config = require('../../shared/config');
 
 module.exports = {
-    list: function(params, callback) {
-        helpers.controllers.control.call(this, params, controller);
+    list: middlewares(list)
+};
 
-        function controller() {
+function list(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var fetch = function(done) {
             var citiesParams = {
                 level: 'countries',
                 type: 'topcities',
@@ -24,7 +30,6 @@ module.exports = {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
-            analytics.reset();
             if (params.target && params.target === 'posting') {
                 analytics.setPage('post#location');
                 seo.addMetatag('robots', 'noindex, nofollow');
@@ -38,15 +43,25 @@ module.exports = {
                 }
             }, {
                 readFromCache: false
-            }, function afterFetch(err, result) {
-                callback(err, {
-                    cities: result.cities.toJSON(),
-                    search: params.search,
-                    posting: params.posting,
-                    target: params.target,
-                    analytics: analytics.generateURL.call(this)
-                });
-            }.bind(this));
-        }
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                cities: response.cities.toJSON(),
+                search: params.search,
+                posting: params.posting,
+                target: params.target,
+                analytics: analytics.generateURL.call(this)
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(fetch)
+            .val(success);
     }
-};
+}

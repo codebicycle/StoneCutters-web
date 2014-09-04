@@ -3,9 +3,9 @@
 var Base = require('rendr/shared/base/view');
 var _ = require('underscore');
 var async = require('async');
-var localization = require('../../../../config').get('localization', {});
+var localization = require('../../../../../shared/config').get('localization', {});
 var helpers = require('../../../../helpers');
-var translations = require('../../../../translations');
+var translations = require('../../../../../shared/translations');
 
 module.exports = Base.extend({
     initialize: function() {
@@ -45,10 +45,13 @@ module.exports = Base.extend({
             referer: this.app.session.get('referer'),
             url: this.app.session.get('url'),
             href: this.app.session.get('href'),
-            sixpack: this.app.session.get('sixpack'),
             macros: template + '/partials/macros.html',
             currentRoute: this.app.session.get('currentRoute'),
-            interstitial: this.app.session.get('interstitial')
+            interstitial: this.app.session.get('interstitial'),
+            os: {
+                name: this.app.session.get('osName').replace(/\s*/g, ''),
+                version: this.app.session.get('osVersion')
+            }
         });
     },
     track: function(data, callback, options) {

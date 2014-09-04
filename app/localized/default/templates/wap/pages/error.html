@@ -28,7 +28,7 @@
                 </td>
             </tr>
         </table>
-        {% if blackBar.show and error %}
+        {% if environment != 'production' and error %}
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
                     <td bgcolor="#EEEEEE" style="border-top: solid thin #CCC; background-color: #EEE;">
@@ -39,7 +39,9 @@
             </table>
         {% endif %}
         {% from macros import Breadcrumb %}
-        {% set link = (breadcrumb | link) %}
+        {% set link = ((breadcrumb if breadcrumb else '/') | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+        {% set templateName = template + '/partials/analytics.html' %}
+        {% include templateName %}
     </td>
 </tr>
