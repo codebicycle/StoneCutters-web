@@ -95,8 +95,8 @@ module.exports = function(app, dataAdapter) {
             function log(done, _item, _images) {
                 var field;
 
-                if (images && typeof images === 'object' && Object.keys(images).length) {
-                    for (field in images) {
+                if (_images && typeof _images === 'object' && Object.keys(_images).length) {
+                    for (field in _images) {
                         statsd.increment([location.name, 'posting', 'image', platform]);
                     }
                 }
@@ -283,13 +283,13 @@ module.exports = function(app, dataAdapter) {
         function redirect(item) {
             var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
 
-            statsd.increment([location.name, 'post', 'location', platform]);
+            statsd.increment([location.name, 'posting', 'location', platform]);
             res.redirect(utils.link(url, req.rendrApp));
             clean();
         }
 
         function error(err) {
-            statsd.increment([location.name, 'post', 'error_location', platform]);
+            statsd.increment([location.name, 'posting', 'error_location', platform]);
             res.redirect(utils.link('/location?target=posting', req.rendrApp));
             clean();
         }
