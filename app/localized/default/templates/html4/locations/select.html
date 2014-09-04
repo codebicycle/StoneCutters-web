@@ -11,11 +11,11 @@
         <{{ tag }}>
             <strong>{{location.current.name}}</strong> 
         </{{ tag }}>
-        <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a>
+        <a href="{{ '/location' | link }}" data-qa="change_city" >{{ dictionary["countryoptions.ChangeCity"] }}</a>
     {% else %}
         <{{ tag }}>
             <strong>{{location.name}}</strong> 
         </{{ tag }}>
-        <a href="{{ '/location' | link }}">{{ dictionary["countryoptions.SelectACity"] }}</a>
+        <a href="{{ '/location' | link }}" data-qa="select_city" >{{ dictionary["countryoptions.SelectACity"] }}</a>
     {% endif %}
 </div>

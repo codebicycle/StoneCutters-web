@@ -3,9 +3,9 @@
         {% if heading %}<h1>{% endif %}
         	<small>
 	            {% if location.current and location.current.type != 'country' %}
-					{{location.current.name}} <small><a href="{{ '/location' | link }}">{{ dictionary["countryoptions.ChangeCity"] }}</a></small>
+					{{location.current.name}} <small><a href="{{ '/location' | link }}" data-qa="change_city" >{{ dictionary["countryoptions.ChangeCity"] }}</a></small>
 				{% else %}
-					{{location.name}} <small><a href="{{ '/location' | link }}">{{ dictionary["countryoptions.SelectACity"] }}</a></small>
+					{{location.name}} <small><a href="{{ '/location' | link }}" data-qa="select_city" >{{ dictionary["countryoptions.SelectACity"] }}</a></small>
 				{% endif %}
 			</small>
 		{% if heading %}</h1>{% endif %}

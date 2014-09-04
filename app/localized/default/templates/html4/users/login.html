@@ -7,21 +7,21 @@
         <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>
         <div class="formField">
             <label>{{ dictionary["loginbox.Username"] }}</label>
-            <input type="text" value="" name="usernameOrEmail">
+            <input type="text" value="" name="usernameOrEmail" data-qa="username_field">
         </div>
         <div class="formField">
             <label>{{ dictionary["loginbox.Password"] }}</label>
-            <input type="password" value="" name="password">
+            <input type="password" value="" name="password" data-qa="password_field">
         </div>
         <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit" class="btns orange">
+                <input type="submit" value="{{ dictionary["loginbox.Login"] }}" name="submit" class="btns orange" data-qa="login_button" >
             </div>
         </div>
     </form>
     <div class="formField" style="padding-top:0;">
-        <a href="{{ '/register' | link }}">{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
+        <a href="{{ '/register' | link }}" data-qa="register_link" >{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
     </div>
     {% set templateName = template + '/partials/analytics.html' %}
     {% include templateName %}
