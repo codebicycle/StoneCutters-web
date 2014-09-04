@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'An\xF4nimo',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
+    'unexistingitem.ListingUnavailable': 'Este an\xFAncio n\xE3o est\xE1 mais dispon\xEDvel',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
     'lostform.Username': 'Nome de usu\xE1rio',
     'registrationconfirmsuccesstext.Browse': 'Pesquisar as categorias do <<BRAND>>',

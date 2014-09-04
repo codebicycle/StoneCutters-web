@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Anonymous',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit My Ad',
+    'unexistingitem.ListingUnavailable': 'This ad is no longer available',
     'landingbody.EmailAddress': 'Email Address',
     'lostform.Username': 'Username',
     'registrationconfirmsuccesstext.Browse': 'Browse <<BRAND>>\'s categories',

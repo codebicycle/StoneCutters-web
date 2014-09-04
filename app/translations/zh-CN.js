@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': '\u533F\u540D',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': '\u7F16\u8F91\u6211\u7684\u5E7F\u544A',
+    'unexistingitem.ListingUnavailable': '\u5E7F\u544A\u65E0\u6CD5\u67E5\u770B',
     'landingbody.EmailAddress': '\u7535\u5B50\u90AE\u7BB1\u5730\u5740',
     'lostform.Username': '\u7528\u6236\u540D',
     'registrationconfirmsuccesstext.Browse': '\u6D4F\u89C8<<BRAND>>\u5168\u90E8\u7C7B\u5225',

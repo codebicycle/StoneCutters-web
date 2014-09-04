@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
+    'unexistingitem.ListingUnavailable': 'Iklan ini tidak lagi tersedia',
     'landingbody.EmailAddress': 'Alamat Email',
     'lostform.Username': 'Nama Pengguna',
     'registrationconfirmsuccesstext.Browse': 'Jelajahi kategori <<BRAND>>',

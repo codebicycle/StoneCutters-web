@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Anonymn\xED',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravit m\u016Fj z\xE1znam',
+    'unexistingitem.ListingUnavailable': 'Z\xE1znam u\u017E nen\xED k dispozici.',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'lostform.Username': 'U\u017Eivatelsk\xE9 jm\xE9no',
     'registrationconfirmsuccesstext.Browse': 'Proch\xE1zet kategorie webu <<BRAND>>',

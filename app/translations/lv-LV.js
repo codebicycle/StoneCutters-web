@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Viesis',
     'messages_site_class.30': 'Labi',
     'messages_user_management_current_ads.EditMyListing': 'Redi\u0123\u0113t manu sludin\u0101jumu',
+    'unexistingitem.ListingUnavailable': '\u0160is sludin\u0101jums vairs nav pieejams',
     'landingbody.EmailAddress': 'E-pasta adrese',
     'lostform.Username': 'Lietot\u0101jv\u0101rds',
     'registrationconfirmsuccesstext.Browse': 'P\u0101rl\u016Bkot <<BRAND>> kategorijas',

@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Anonimno',
     'messages_site_class.30': 'U redu',
     'messages_user_management_current_ads.EditMyListing': 'Uredi moj oglas',
+    'unexistingitem.ListingUnavailable': 'Ovaj oglas nije vi\u0161e dostupan',
     'landingbody.EmailAddress': 'Adresa e-po\u0161te',
     'lostform.Username': 'Korisni\u010Dko ime',
     'registrationconfirmsuccesstext.Browse': 'Pretra\u017Eite <<BRAND>> kategorije',

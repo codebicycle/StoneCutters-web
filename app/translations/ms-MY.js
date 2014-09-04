@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Tanpa nama',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
+    'unexistingitem.ListingUnavailable': 'Iklan ini sudah tiada lagi',
     'landingbody.EmailAddress': 'Alamat Emel ',
     'lostform.Username': 'Nama pengguna',
     'registrationconfirmsuccesstext.Browse': 'Semak lewa kategori <<BRAND>> ',

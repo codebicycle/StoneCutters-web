@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Di Kilala',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'I-edit ang aking Patalastas',
+    'unexistingitem.ListingUnavailable': 'Ang patalastas na ito ay hindi na available.',
     'landingbody.EmailAddress': 'Email Address',
     'lostform.Username': 'Username',
     'registrationconfirmsuccesstext.Browse': 'Maghanap sa mga Kategorya ng <<BRAND>>',

@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': '\u1EA8n danh',
     'messages_site_class.30': '\u0110\u1ED3ng \xFD',
     'messages_user_management_current_ads.EditMyListing': 'Ch\u1EC9nh s\u1EEDa rao v\u1EB7t',
+    'unexistingitem.ListingUnavailable': 'Danh m\u1EE5c n\xE0y kh\xF4ng c\xF2n n\u1EEFa. ',
     'landingbody.EmailAddress': '\u0110\u1ECBa ch\u1EC9 email',
     'lostform.Username': 'T\xEAn truy nh\u1EADp',
     'registrationconfirmsuccesstext.Browse': 'Duy\u1EC7t c\xE1c h\u1EA1ng m\u1EE5c c\u1EE7a <<BRAND>>',

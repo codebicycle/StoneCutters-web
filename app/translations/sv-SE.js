@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Redigera min annons',
+    'unexistingitem.ListingUnavailable': 'Annonsen \xE4r inte l\xE4ngre tillg\xE4nglig',
     'landingbody.EmailAddress': 'E-postadress',
     'lostform.Username': 'Anv\xE4ndarnamn',
     'registrationconfirmsuccesstext.Browse': 'S\xF6k <<BRAND>>:s kategorier',

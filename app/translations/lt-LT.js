@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'Anoniminis',
     'messages_site_class.30': 'Gerai',
     'messages_user_management_current_ads.EditMyListing': 'Redaguoti mano skelbim\u0105',
+    'unexistingitem.ListingUnavailable': '\u0160io skelbimo daugiau neb\u0117ra',
     'landingbody.EmailAddress': 'El. pa\u0161to adresas',
     'lostform.Username': 'Vartotojo vardas',
     'registrationconfirmsuccesstext.Browse': 'Nar\u0161ykite <<BRAND>> kategorijas',

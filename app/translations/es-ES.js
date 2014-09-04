@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': 'An\xF3nimo',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar mi listado',
+    'unexistingitem.ListingUnavailable': 'El anuncio ya no est\xE1 disponible',
     'landingbody.EmailAddress': 'Direcci\xF3n de Email',
     'lostform.Username': 'Nombre de Usuario',
     'registrationconfirmsuccesstext.Browse': 'Buscar las categor\xEDas de <<BRAND>>',

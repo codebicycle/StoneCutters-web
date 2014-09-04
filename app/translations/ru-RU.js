@@ -52,6 +52,7 @@ module.exports = {
     'messages_item_page.57': '\u0410\u043D\u043E\u043D\u0438\u043C',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0439',
+    'unexistingitem.ListingUnavailable': '\u041E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E',
     'landingbody.EmailAddress': 'E-mail \u0430\u0434\u0440\u0435\u0441',
     'lostform.Username': '\u041B\u043E\u0433\u0438\u043D',
     'registrationconfirmsuccesstext.Browse': '\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0440\u0443\u0431\u0440\u0438\u043A\u0438 \u043D\u0430 <<BRAND>>',
