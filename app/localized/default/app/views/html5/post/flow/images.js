@@ -18,7 +18,7 @@ module.exports = Base.extend({
         'show': 'onShow',
         'hide': 'onHide',
         'click .image:not(.fill .image)': 'onImageClick',
-        'click .fill .remove': 'onRemoveClick',
+        'click .remove': 'onRemoveClick',
         'change form': 'onChange',
         'submit form': 'onSubmit',
         'restart': 'onRestart'
@@ -59,7 +59,7 @@ module.exports = Base.extend({
         var $container = $remove.parent().removeClass('fill');
         var $input = this.$('#' + $container.data('input')).val('');
 
-        $container.children('.image').removeAttr('style');
+        $container.removeAttr('style');
         delete this.selected[$input.attr('name')];
     },
     onChange: function(event) {
@@ -70,7 +70,7 @@ module.exports = Base.extend({
         var $input = $(event.target);
         var $container = this.$('[data-input=' + $input.attr('id') + ']');
         var $image = $container.children('.image');
-        var $loading = $('body > .loading').show();
+        //var $loading = $('body > .loading').show();
         var imageUrl = window.URL.createObjectURL(event.target.files[0]);
         var image = new window.Image();
 
@@ -82,6 +82,8 @@ module.exports = Base.extend({
 
             var post = function(done) {
                 var data = new FormData();
+
+                $image.addClass('load');
 
                 data.append(0, event.target.files[0]);
                 helpers.dataAdapter.post(this.app.req, '/images', {
@@ -134,8 +136,8 @@ module.exports = Base.extend({
                     }
                 }
                 $image.css(css);
-                $container.addClass('fill');
-                $loading.hide();
+                $image.removeClass('load').addClass('fill');
+                //$loading.hide();
             }.bind(this);
 
             asynquence().or(image.onerror)
@@ -147,7 +149,7 @@ module.exports = Base.extend({
         image.onerror = function(err) {
             delete this.selected[$input.attr('name')];
             $input.val('');
-            $loading.hide();
+            //$loading.hide();
         }.bind(this);
     },
     onSubmit: function(event) {
