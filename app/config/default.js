@@ -38,10 +38,10 @@ module.exports = {
     },
     infiniteScroll: false,
     interstitial: {
-        enabled: false,
-        clicks: 1,
+        enabled: true,
+        clicks: 0,
         time: 432000000,
-        ignorePath: ['/health', '/login', '/interstitial', '/404', '/500', /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
+        ignorePath: ['/login', '/interstitial', '/500', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
@@ -183,4 +183,3 @@ module.exports = {
         }
     }
 };
-
