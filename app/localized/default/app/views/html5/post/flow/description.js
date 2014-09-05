@@ -5,7 +5,7 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'post_flow_description_view disabled',
-    tagName: 'form',
+    tagName: 'section',
     id: 'description',
     fields: [],
     form: {

@@ -7,7 +7,7 @@ var _ = require('underscore');
 module.exports = Base.extend({
     className: 'post_flow_location_view list cities-links disabled',
     id: 'location',
-    tagName: 'form',
+    tagName: 'section',
     selected: {},
     firstRender: true,
     initialize: function() {

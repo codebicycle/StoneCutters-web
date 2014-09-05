@@ -5,10 +5,7 @@
 {% view 'post/flow/subcategories' %}
 {% view 'post/flow/optionals' %}
 {% view 'post/flow/location' %}
-<section id="posting" style="display: none;">
-    {% view 'post/flow/description' %}
-    {% view 'post/flow/contact' %}
-</section>
-
+{% view 'post/flow/description' %}
+{% view 'post/flow/contact' %}
 {% set templateName = template + '/partials/analytics.html' %}
 {% include templateName %}
