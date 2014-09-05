@@ -10,7 +10,7 @@
             {{ dictionary["misc.ContinueMobileSite"] }} &gt;
         </a>
     </div>
-    <img src="{{ '/images/common/marketing/' + marketing.image + '_.png' | static }}" alt="" id="mobileImg"> 
+    <img src="{{ ('/images/common/marketing/' + marketing.image + '.png') | static }}" alt="" id="mobileImg"> 
 </div>
 {% set templateName = template + '/partials/analytics.html' %}
 {% include templateName %}
