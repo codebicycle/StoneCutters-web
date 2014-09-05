@@ -47,6 +47,7 @@ describe('app', function test() {
                     rendrApp.use(middleware.environment());
                     rendrApp.use(middleware.location());
                     rendrApp.use(middleware.templates());
+                    rendrApp.use(middleware.device());
                     rendrApp.use(afterMiddleware);
                 }
 
