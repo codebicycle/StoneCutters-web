@@ -8,73 +8,6 @@ module.exports = function userRouter(app, dataAdapter) {
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
 
-    var loginHandler = (function login() {
-
-        return function handler(req, res, data) {
-            var platform = req.rendrApp.session.get('platform');
-            var usernameOrEmail = data.usernameOrEmail;
-            var password = data.password;
-            var redirect = data.redirect;
-
-            function getChallenge(done) {
-                dataAdapter.get(req, '/users/challenge', {
-                    query: {
-                        u: usernameOrEmail,
-                        platform: platform
-                    }
-                }, done.errfcb);
-            }
-
-            function getCredentials(done, response, data) {
-                var hash = crypto.createHash('md5').update(password).digest('hex');
-
-                done({
-                    c: data.challenge,
-                    h: crypto.createHash('sha512').update(hash + usernameOrEmail).digest('hex'),
-                    platform: platform
-                });
-            }
-
-            function submit(done, credentials) {
-                dataAdapter.get(req, '/users/login', {
-                    query: credentials
-                }, done.errfcb);
-            }
-
-            function save(done, response, user) {
-                req.rendrApp.session.persist({
-                    user: user
-                });
-                done();
-            }
-
-            function success() {
-                res.redirect(utils.link(redirect, req.rendrApp));
-            }
-
-            function error(err) {
-                var link = '/login';
-
-                if (redirect && redirect !== '/') {
-                    link += '?redirect=' + redirect;
-                }
-                formidable.error(req, link, err, function redirect(url) {
-                    res.redirect(utils.link(url, req.rendrApp));
-                });
-            }
-
-            if (typeof password !== 'string') {
-                password = '';
-            }
-            asynquence().or(error)
-                .then(getChallenge)
-                .then(getCredentials)
-                .then(submit)
-                .then(save)
-                .val(success);
-        };
-    })();
-
     (function registration() {
         app.post('/register', handler);
 
@@ -150,5 +83,71 @@ module.exports = function userRouter(app, dataAdapter) {
                 .then(parse)
                 .val(submit);
         }
+    })();
+
+    var loginHandler = (function login() {
+        return function handler(req, res, data) {
+            var platform = req.rendrApp.session.get('platform');
+            var usernameOrEmail = data.usernameOrEmail;
+            var password = data.password;
+            var redirect = data.redirect;
+
+            function getChallenge(done) {
+                dataAdapter.get(req, '/users/challenge', {
+                    query: {
+                        u: usernameOrEmail,
+                        platform: platform
+                    }
+                }, done.errfcb);
+            }
+
+            function getCredentials(done, response, data) {
+                var hash = crypto.createHash('md5').update(password).digest('hex');
+
+                done({
+                    c: data.challenge,
+                    h: crypto.createHash('sha512').update(hash + usernameOrEmail).digest('hex'),
+                    platform: platform
+                });
+            }
+
+            function submit(done, credentials) {
+                dataAdapter.get(req, '/users/login', {
+                    query: credentials
+                }, done.errfcb);
+            }
+
+            function save(done, response, user) {
+                req.rendrApp.session.persist({
+                    user: user
+                });
+                done();
+            }
+
+            function success() {
+                res.redirect(utils.link(redirect, req.rendrApp));
+            }
+
+            function error(err) {
+                var link = '/login';
+
+                if (redirect && redirect !== '/') {
+                    link += '?redirect=' + redirect;
+                }
+                formidable.error(req, link, err, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                });
+            }
+
+            if (typeof password !== 'string') {
+                password = '';
+            }
+            asynquence().or(error)
+                .then(getChallenge)
+                .then(getCredentials)
+                .then(submit)
+                .then(save)
+                .val(success);
+        };
     })();
 };

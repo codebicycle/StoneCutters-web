@@ -16,6 +16,16 @@ module.exports = function(grunt) {
                 output: 'tests/coverage.html',
                 timeout: '15000'
             }
+        },
+        tdd: {
+            src: ['tests2/index.js', 'tests2/**/*.test.js'],
+            options: {
+                globals: ['expect', 'sinon'],
+                timeout: 3000,
+                ignoreLeaks: false,
+                ui: 'bdd',
+                reporter: 'spec'
+            }
         }
     };
 };
