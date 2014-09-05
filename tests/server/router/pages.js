@@ -37,6 +37,7 @@ describe('server', function test() {
                     rendrApp.use(middleware.environment());
                     rendrApp.use(middleware.location());
                     rendrApp.use(middleware.templates());
+                    rendrApp.use(middleware.device());
                 }
 
                 server.expressApp.configure(expressConfiguration(server.expressApp));
