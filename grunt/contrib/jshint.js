@@ -29,7 +29,8 @@ module.exports = function(grunt) {
         tests: {
             src: ['tests/**/*.js'],
             options: {
-                predef: ['describe', 'before', 'it']
+                predef: ['expect', 'sinon', 'describe', 'before', 'it'],
+                '-W030': true
             }
         }
     };

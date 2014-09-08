@@ -7,13 +7,12 @@ module.exports = function userRouter(app, dataAdapter) {
     var crypto = require('crypto');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
+    var user = require('../controllers/user');
 
-    (function registration() {
+    (function register() {
         app.post('/register', handler);
 
         function handler(req, res) {
-            var user;
-
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
@@ -27,18 +26,10 @@ module.exports = function userRouter(app, dataAdapter) {
             }
 
             function submit(done, data) {
-                data.location = req.rendrApp.session.get('siteLocation');
-                data.languageId = 10;
-                user = _.clone(data);
-                dataAdapter.post(req, '/users', {
-                    query: {
-                        platform: req.rendrApp.session.get('platform')
-                    },
-                    data: data
-                }, done.errfcb);
+                user.register(done, req, data);
             }
 
-            function success() {
+            function success(user) {
                 user.usernameOrEmail = user.username;
                 user.redirect = '/?register_success=true';
                 loginHandler(req, res, user);
@@ -87,34 +78,11 @@ module.exports = function userRouter(app, dataAdapter) {
 
     var loginHandler = (function login() {
         return function handler(req, res, data) {
-            var platform = req.rendrApp.session.get('platform');
-            var usernameOrEmail = data.usernameOrEmail;
             var password = data.password;
             var redirect = data.redirect;
 
-            function getChallenge(done) {
-                dataAdapter.get(req, '/users/challenge', {
-                    query: {
-                        u: usernameOrEmail,
-                        platform: platform
-                    }
-                }, done.errfcb);
-            }
-
-            function getCredentials(done, response, data) {
-                var hash = crypto.createHash('md5').update(password).digest('hex');
-
-                done({
-                    c: data.challenge,
-                    h: crypto.createHash('sha512').update(hash + usernameOrEmail).digest('hex'),
-                    platform: platform
-                });
-            }
-
             function submit(done, credentials) {
-                dataAdapter.get(req, '/users/login', {
-                    query: credentials
-                }, done.errfcb);
+                user.login(done, req, credentials);
             }
 
             function save(done, response, user) {
@@ -143,8 +111,6 @@ module.exports = function userRouter(app, dataAdapter) {
                 password = '';
             }
             asynquence().or(error)
-                .then(getChallenge)
-                .then(getCredentials)
                 .then(submit)
                 .then(save)
                 .val(success);
