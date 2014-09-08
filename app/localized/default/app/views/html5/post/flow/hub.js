@@ -78,34 +78,40 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $step = this.$('#step-categories, #step-optionals').removeClass('success error');
-        var message = error;
-        var subMessage = subError;
-        var category;
+        var $categorySummary = $('#categorySummary', $step);
+        var $subcategorySummary = $('#subcategorySummary', $step);
 
         if (!id || !subId) {
             $step.addClass('error');
             $step.siblings().addClass('opaque');
         }
         if (id) {
-            category = this.parentView.options.categories.get(id);
-            message = category.get('trName');
+            var category = this.parentView.options.categories.get(id);
+            var categoryName = category.get('trName');
+
+            $categorySummary.removeClass('error').addClass('success').text(categoryName);
             if (subId) {
                 var subcategories = category.get('children');
 
                 if (subcategories.toJSON) {
                     subcategories = subcategories.toJSON();
                 }
-                subMessage = _.find(subcategories, function each(subcategory) {
+                
+                var subcategoryName = _.find(subcategories, function each(subcategory) {
                     return subcategory.id === subId;
                 }).trName;
+
+                $subcategorySummary.removeClass('error').addClass('success').text(subcategoryName);
                 $step.addClass('success');
                 $step.siblings().removeClass('opaque');
             }
+            else {
+                $subcategorySummary.removeClass('success').addClass('error').text(subError);
+            }
         }
-        if (subMessage) {
-            message += '<br/>' + subMessage;
+        else {
+            $categorySummary.removeClass('success').addClass('error').text(error);
         }
-        $step.find('.title').html(message);
         this.$el.trigger('change');
     },
     onDescriptionChange: function(event, fields, errors) {

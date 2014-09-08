@@ -1,9 +1,5 @@
 .post_flow_index_view {
 
-	/**/
-	#back {display: block; background: red; width: 2em; height: 2em; position: relative;}
-	/**/
-
 	.disabled {
 
 		display: none;
@@ -13,6 +9,45 @@
 	.opaque {
 
 		opacity: .5;
+
+	}
+
+	/* Forms */
+
+	section form {
+
+		padding: 0 1em;
+
+		label {
+
+			padding: 1rem 0 .25rem;
+
+		}
+
+		input,
+		textarea {
+
+			margin: 0;
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			color: #999;
+			
+		}
+
+		input {
+
+			line-height: 1.25em;
+
+		}
+
+		textarea {
+
+			line-height: 1.25em;
+			height: (@line-height * 5) + 1;
+			resize: none;
+
+		}
 
 	}
 
