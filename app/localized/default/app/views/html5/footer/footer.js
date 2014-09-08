@@ -10,7 +10,7 @@ module.exports = Base.extend({
 
 		this.attachTrackMe(this.className, function(category, action) {
 			return {
-				custom: [category, this.data('id'), '-', action].join('::')
+				custom: [category, '-', action].join('::')
 			};
 		});
 
