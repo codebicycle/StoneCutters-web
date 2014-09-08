@@ -31,11 +31,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask('pipetest', ['prepipeline', 'copy:dynamic', 'gitclone:config', 'copy:config', 'exec:removeDistGit', 'exec:chmodDistStart', 'dist', 'watch:dist']);
 
-    grunt.registerTask('utest', ['jshint:tests', 'mochacov:unit']);
+    grunt.registerTask('test', ['jshint:tests', 'mochaTest']);
 
-    grunt.registerTask('cover', ['jshint:tests', 'mochacov:coverage']);
-
-    grunt.registerTask('test', ['utest', 'mochacov:coverage']);
+    grunt.registerTask('cover', ['jshint:tests', 'coverage']);
 
     grunt.registerTask('localize', ['localization']);
 };
