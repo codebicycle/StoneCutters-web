@@ -94,7 +94,7 @@ module.exports = Base.extend({
         this.parentView.$el.trigger('flow', [this.id, 'categories']);
     },
     onChangeSubcategoryClick: function(event) {
-
+        this.parentView.$el.trigger('flow', [this.id, 'subcategories', this.selected]);
     },
     onFieldsChange: function(event, fields, categoryId, subcategoryId, firstRender) {
         event.preventDefault();
