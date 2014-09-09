@@ -6,11 +6,11 @@
     <h1>{{ item.title }}</h1>
     {% if item.isFavorite %}
         <form action="{{ ['/items/', item.id, '/favorite/delete'] | join('') | link }}" >
-            <input type="submit" value="{{dictionary["mobilepromo.RemoveFromFavorites"]}}" class="favorite favoriteOn" />
+            <input type="submit" value="{{dictionary["mobilepromo.RemoveFromFavorites"]}}" class="favorite favoriteOn" data-qa="remove-favorite" />
         </form>
     {% elif user %}
         <form action="{{ ['/items/', item.id, '/favorite'] | join('') | link }}" >
-            <input type="submit" value="{{dictionary["itemgeneraldetails.addFavorites"]}}" class="favorite favoriteOff" />
+            <input type="submit" value="{{dictionary["itemgeneraldetails.addFavorites"]}}" class="favorite favoriteOff" data-qa="add-favorite" />
         </form>
     {% else %}
         <form action="{{ '/login' | link }}">
@@ -18,7 +18,7 @@
                 <input type="hidden" name="location" value="{{ siteLocation }}">
             {% endif %}
             <input type="hidden" name="redirect" value="{{ ['/items/', item.id, '/favorite'] | join('') | link }}">
-            <input type="submit" value="{{dictionary["itemgeneraldetails.addFavorites"]}}" class="favorite favoriteOff" />
+            <input type="submit" value="{{dictionary["itemgeneraldetails.addFavorites"]}}" class="favorite favoriteOff" data-qa="add-favorite" />
         </form>
     {% endif %}
     <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
@@ -57,7 +57,7 @@
                 {% endif %}
             {% endif %}
             {% if item.email %}
-                <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply_button" >{{ dictionary["register_mail.Email"] }}</a>
+                <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
             {% endif %}
         </div>
         {% if item.phone %}
