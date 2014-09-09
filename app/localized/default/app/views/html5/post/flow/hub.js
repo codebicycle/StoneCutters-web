@@ -78,8 +78,8 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $step = this.$('#step-categories, #step-optionals').removeClass('success error');
-        var $categorySummary = $('#categorySummary', $step);
-        var $subcategorySummary = $('#subcategorySummary', $step);
+        var $categorySummary = this.$('#categorySummary').removeClass('success error');
+        var $subcategorySummary = this.$('#subcategorySummary').removeClass('success error');
 
         if (!id || !subId) {
             $step.addClass('error');
@@ -89,7 +89,7 @@ module.exports = Base.extend({
             var category = this.parentView.options.categories.get(id);
             var categoryName = category.get('trName');
 
-            $categorySummary.removeClass('error').addClass('success').text(categoryName);
+            $categorySummary.addClass('success').text(categoryName);
             if (subId) {
                 var subcategories = category.get('children');
 
@@ -101,16 +101,16 @@ module.exports = Base.extend({
                     return subcategory.id === subId;
                 }).trName;
 
-                $subcategorySummary.removeClass('error').addClass('success').text(subcategoryName);
+                $subcategorySummary.addClass('success').text(subcategoryName);
                 $step.addClass('success');
                 $step.siblings().removeClass('opaque');
             }
             else {
-                $subcategorySummary.removeClass('success').addClass('error').text(subError);
+                $subcategorySummary.addClass('error').text(subError);
             }
         }
         else {
-            $categorySummary.removeClass('success').addClass('error').text(error);
+            $categorySummary.addClass('error').text(error);
         }
         this.$el.trigger('change');
     },
@@ -120,27 +120,27 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $step = this.$('#step-description').removeClass('success error');
+        var $titleSummary = this.$('#titleSummary').removeClass('success error');
+        var $descriptionSummary = this.$('#descriptionSummary').removeClass('success error');
         var failed = false;
-        var message;
-        var subMessage;
-
+        
         fields.forEach(function each(field) {
             if (field.name === 'title') {
                 if (errors[field.name] || !field.value) {
                     failed = true;
-                    message = errors[field.name] || field.label;
+                    $titleSummary.addClass('error').text(errors[field.name] || field.label);
                 }
                 else {
-                    message = field.value;
+                    $titleSummary.addClass('success').text(field.value);
                 }
             }
             else if (field.name === 'description') {
                 if (errors[field.name] || !field.value) {
                     failed = true;
-                    subMessage = errors[field.name] || field.label;
+                    $descriptionSummary.addClass('error').text(errors[field.name] || field.label);
                 }
                 else {
-                    subMessage = field.value;
+                    $descriptionSummary.addClass('success').text(field.value);
                 }
             }
         });
@@ -150,7 +150,6 @@ module.exports = Base.extend({
         else {
             $step.addClass('success');
         }
-        $step.find('.title').html(message + '<br/>' + subMessage);
         this.$el.trigger('change');
     },
     onContactChange: function(event, fields, city, errors, cityError) {
@@ -159,27 +158,27 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $step = this.$('#step-contact').removeClass('success error');
+        var $emailSummary = this.$('#emailSummary').removeClass('success error');
+        var $locationSummary = this.$('#locationSummary').removeClass('success error');
         var failed = false;
-        var message;
-        var subMessage;
-
+        
         fields.forEach(function each(field) {
             if (field.name === 'email') {
                 if (errors[field.name] || !field.value) {
                     failed = true;
-                    message = errors[field.name] || field.label;
+                    $emailSummary.addClass('error').text(errors[field.name] || field.label);
                 }
                 else {
-                    message = field.value;
+                    $emailSummary.addClass('success').text(field.value);
                 }
             }
         });
         if (!city || !city.url) {
             failed = true;
-            subMessage = cityError;
+            $locationSummary.addClass('error').text(cityError);
         }
         else {
-            subMessage = city.name;
+            $locationSummary.addClass('success').text(city.name);
         }
         if (failed) {
             $step.addClass('error');
@@ -187,7 +186,6 @@ module.exports = Base.extend({
         else {
             $step.addClass('success');
         }
-        $step.find('.title').html(message + '<br/>' + subMessage);
         this.$el.trigger('change');
     },
     onChange: function(event) {
