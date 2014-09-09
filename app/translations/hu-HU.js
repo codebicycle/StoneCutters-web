@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Vissza az elej\xE9re',
     'misc.BrandFor_Mob': 'OLX',
     'misc.Call': 'H\xEEv\xE1s',
+    'misc.ContactInformation_Mob': 'Kapcsolatfelv\xE9tel',
     'misc.ContinueMobileSite': 'Tov\xE1bb a mobilos oldalra',
     'misc.CreateAnotherAd_Mob': '\xDAjabb hirdet\xE9s l\xE9trehoz\xE1sa',
     'misc.EmailAdActivated_Mob': 'Hirdet\xE9se aktiv\xE1l\xE1s\xE1r\xF3l e-mailben \xE9rtes\xEDtj\xFCk',

@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Volver al principio',
     'misc.BrandFor_Mob': 'OLX para',
     'misc.Call': 'Llamar',
+    'misc.ContactInformation_Mob': 'Informaci\xF3n de contacto',
     'misc.ContinueMobileSite': 'Continuar al sitio m\xF3vil',
     'misc.CreateAnotherAd_Mob': 'Seguir vendiendo',
     'misc.EmailAdActivated_Mob': 'Recibir\xE1s un email en cuanto tu aviso se haya activado',

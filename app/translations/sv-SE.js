@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Tillbaka till start',
     'misc.BrandFor_Mob': 'OLX f\xF6r',
     'misc.Call': 'Ringa',
+    'misc.ContactInformation_Mob': 'Kontaktinformation',
     'misc.ContinueMobileSite': 'Forts\xE4tt till webbplatsen f\xF6r mobiltelefon',
     'misc.CreateAnotherAd_Mob': 'Skapa en annan annons',
     'misc.EmailAdActivated_Mob': 'Du kommer att f\xE5 ett e-mail n\xE4r din annons \xE4r aktiverat',

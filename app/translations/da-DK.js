@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Tilbage til start',
     'misc.BrandFor_Mob': 'OLX til',
     'misc.Call': 'Ring',
+    'misc.ContactInformation_Mob': 'Kontaktinformation',
     'misc.ContinueMobileSite': 'G\xE5 videre til mobilsitet',
     'misc.CreateAnotherAd_Mob': 'Opret en til annonce',
     'misc.EmailAdActivated_Mob': 'Du f\xE5r en e-mail, n\xE5r din annonce er aktiveret',

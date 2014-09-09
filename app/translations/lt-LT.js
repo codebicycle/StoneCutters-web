@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Atgal \u012F prad\u017Ei\u0105',
     'misc.BrandFor_Mob': 'OLX, skirtas',
     'misc.Call': 'Skambinti',
+    'misc.ContactInformation_Mob': 'Kontaktin\u0117 informacija',
     'misc.ContinueMobileSite': 'Toliau \u012F mobili\u0105j\u0105 tinklaviet\u0119',
     'misc.CreateAnotherAd_Mob': 'Kurti kit\u0105 skelbim\u0105',
     'misc.EmailAdActivated_Mob': 'Gausite el. prane\u0161im\u0105, kai J\u016Bs\u0173 skelbimas bus suaktyvintas',

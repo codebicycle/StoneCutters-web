@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Terug na begin.',
     'misc.BrandFor_Mob': 'OLX vir',
     'misc.Call': 'Bel',
+    'misc.ContactInformation_Mob': 'Kontakinligting',
     'misc.ContinueMobileSite': 'Gaan voort na die selfoontuiste',
     'misc.CreateAnotherAd_Mob': 'Skep nog \'n advt.',
     'misc.EmailAdActivated_Mob': 'Jy sal \'n e-posboodskap ontvang sodra jou advt. geaktiveer is.',

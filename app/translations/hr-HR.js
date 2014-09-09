@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Nazada na po\u010Detak',
     'misc.BrandFor_Mob': 'OLX za',
     'misc.Call': 'Pozovi',
+    'misc.ContactInformation_Mob': 'Kontakt informacije',
     'misc.ContinueMobileSite': 'Nastavite ne stranicu na mobitelu',
     'misc.CreateAnotherAd_Mob': 'Kreiraj jo\u0161 jedan oglas',
     'misc.EmailAdActivated_Mob': 'Primit \u0107ete e-po\u0161tu kad se va\u0161 oglas aktivira',

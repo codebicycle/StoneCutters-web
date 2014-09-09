@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': '\u8FD4\u56DE\u5230\u5F00\u59CB',
     'misc.BrandFor_Mob': '\u79FB\u52A8OLX',
     'misc.Call': '\u547C\u53EB',
+    'misc.ContactInformation_Mob': '\u8054\u7CFB\u4FE1\u606F',
     'misc.ContinueMobileSite': '\u7EE7\u7EED\u5230\u79FB\u52A8\u7F51\u5740',
     'misc.CreateAnotherAd_Mob': '\u521B\u5EFA\u53E6\u4E00\u4E2A\u5E7F\u544A',
     'misc.EmailAdActivated_Mob': '\u60A8\u7684\u5E7F\u544A\u6FC0\u6D3B\u65F6\uFF0C\u4F1A\u53D1\u7ED9\u60A8\u4E00\u4E2A\u7535\u5B50\u90AE\u4EF6\u3002',

@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Kembali untuk memulai',
     'misc.BrandFor_Mob': 'OLX untuk',
     'misc.Call': 'Telepon',
+    'misc.ContactInformation_Mob': 'Informasi Kontak',
     'misc.ContinueMobileSite': 'Lanjutkan ke situs nirkabel',
     'misc.CreateAnotherAd_Mob': 'Buat iklan lain',
     'misc.EmailAdActivated_Mob': 'Anda akan menerima sebuah email ketika iklan Anda diaktifkan',

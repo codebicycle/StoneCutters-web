@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Takaisin alkuun',
     'misc.BrandFor_Mob': 'OLX palvelulle',
     'misc.Call': 'Soita',
+    'misc.ContactInformation_Mob': 'Yhteystiedot',
     'misc.ContinueMobileSite': 'Jatka mobiilisivustolle',
     'misc.CreateAnotherAd_Mob': 'Luo toinen ilmoitus',
     'misc.EmailAdActivated_Mob': 'Saat s\xE4hk\xF6postia kun imoituksesi on aktivoitu',

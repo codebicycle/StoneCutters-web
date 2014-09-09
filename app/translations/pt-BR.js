@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Voltar ao in\xEDcio.',
     'misc.BrandFor_Mob': 'OLX para',
     'misc.Call': 'Ligar',
+    'misc.ContactInformation_Mob': 'Informa\xE7\xE3o para contato',
     'misc.ContinueMobileSite': 'Continuar no site m\xF3vel',
     'misc.CreateAnotherAd_Mob': 'Crie um novo an\xFAncio.',
     'misc.EmailAdActivated_Mob': 'Voc\xEA ir\xE1 receber um e-mail quando o an\xFAncio estiver ativo.',

@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Terug naar start',
     'misc.BrandFor_Mob': 'OLX voor',
     'misc.Call': 'Bellen',
+    'misc.ContactInformation_Mob': 'Contactgegevens',
     'misc.ContinueMobileSite': 'Doorgaan naar de mobiele site',
     'misc.CreateAnotherAd_Mob': 'Nog een advertentie maken',
     'misc.EmailAdActivated_Mob': 'Je ontvangt een e-mail wanneer je advertentie is geactiveerd',

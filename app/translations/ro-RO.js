@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': '\xCEnapoi la \xEEnceput',
     'misc.BrandFor_Mob': 'OLX pentru',
     'misc.Call': 'Suna\u0163i',
+    'misc.ContactInformation_Mob': 'Informa\u0163ii de contact',
     'misc.ContinueMobileSite': 'Continua\u0163i pe site-ul mobil',
     'misc.CreateAnotherAd_Mob': 'Crea\u0163i un alt anun\u0163',
     'misc.EmailAdActivated_Mob': 'Ve\u0163i primi un e-mail c\xE2nd anun\u0163ul dvs. va fi activ',

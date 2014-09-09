@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Zp\u011Bt na za\u010D\xE1tek',
     'misc.BrandFor_Mob': 'OLX pro',
     'misc.Call': 'Zavolat',
+    'misc.ContactInformation_Mob': 'Kontaktn\xED informace',
     'misc.ContinueMobileSite': 'Pokra\u010Dovat na mobiln\xED str\xE1nku',
     'misc.CreateAnotherAd_Mob': 'Vytvo\u0159it dal\u0161\xED inzer\xE1t',
     'misc.EmailAdActivated_Mob': 'Po aktivaci va\u0161eho inzer\xE1tu obdr\u017E\xEDte e-mail',

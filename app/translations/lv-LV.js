@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Atpaka\u013C uz s\u0101kumu',
     'misc.BrandFor_Mob': 'OLX priek\u0161:',
     'misc.Call': 'Zvan\u012Bt',
+    'misc.ContactInformation_Mob': 'Kontaktinform\u0101cija',
     'misc.ContinueMobileSite': 'Turpiniet ar\u012B ar mobilo vietni',
     'misc.CreateAnotherAd_Mob': 'Izveidojiet citu sludin\u0101jumu',
     'misc.EmailAdActivated_Mob': 'J\u016Bs sa\u0146emsiet e-pastu, kad j\u016Bsu sludin\u0101jums b\u016Bs aktiv\u0113ts',

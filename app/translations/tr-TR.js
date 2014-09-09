@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Ba\u015Flang\u0131ca d\xF6n',
     'misc.BrandFor_Mob': 'OLX:',
     'misc.Call': 'Ara',
+    'misc.ContactInformation_Mob': '\u0130leti\u015Fim Bilgisi',
     'misc.ContinueMobileSite': 'Mobil siteyi a\xE7',
     'misc.CreateAnotherAd_Mob': 'Ba\u015Fka bir ilan olu\u015Ftur',
     'misc.EmailAdActivated_Mob': '\u0130lan\u0131n\u0131z etkinle\u015Ftirildi\u011Finde bir e-posta alacaks\u0131n\u0131z',

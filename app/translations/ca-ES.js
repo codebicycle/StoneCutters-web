@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Tornar a l\'inici',
     'misc.BrandFor_Mob': 'OLX per a',
     'misc.Call': 'Telefonar',
+    'misc.ContactInformation_Mob': 'Informaci\xF3 de contacte',
     'misc.ContinueMobileSite': 'Continua a la web per a m\xF2bils',
     'misc.CreateAnotherAd_Mob': 'Crea un altre anunci',
     'misc.EmailAdActivated_Mob': 'Quan el teu anunci sigui activat rebr\xE0s un correu electr\xF2nic',

@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Aftur \xE1 upphafss\xED\xF0u',
     'misc.BrandFor_Mob': 'OLX fyrir',
     'misc.Call': 'Hringja',
+    'misc.ContactInformation_Mob': 'Samskiptauppl\xFDsingar',
     'misc.ContinueMobileSite': 'Halda \xE1fram \xE1 fars\xEDmavefinn',
     'misc.CreateAnotherAd_Mob': 'B\xFAa til a\xF0ra augl\xFDsingu',
     'misc.EmailAdActivated_Mob': '\xDE\xFA f\xE6r\xF0 t\xF6lvup\xF3st \xFEegar augl\xFDsingin fer \xED birtingu',

@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Quay l\u1EA1i \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u',
     'misc.BrandFor_Mob': 'OLX cho',
     'misc.Call': 'G\u1ECDi',
+    'misc.ContactInformation_Mob': 'Th\xF4ng tin Li\xEAn h\u1EC7',
     'misc.ContinueMobileSite': 'Ti\u1EBFp t\u1EE5c \u0111\u1EBFn trang di \u0111\u1ED9ng',
     'misc.CreateAnotherAd_Mob': 'T\u1EA1o m\u1ED9t qu\u1EA3ng c\xE1o kh\xE1c',
     'misc.EmailAdActivated_Mob': 'B\u1EA1n s\u1EBD nh\u1EADn \u0111\u01B0\u1EE3c m\u1ED9t e-mail khi qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n \u0111\u01B0\u1EE3c k\xEDch ho\u1EA1t',

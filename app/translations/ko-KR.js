@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': '\uCC98\uC74C\uC73C\uB85C \uB418\uB3CC\uC544\uAC00\uAE30',
     'misc.BrandFor_Mob': 'OLX\uC758',
     'misc.Call': '\uD1B5\uD654\uD558\uAE30',
+    'misc.ContactInformation_Mob': '\uC5F0\uB77D\uCC98 \uC815\uBCF4',
     'misc.ContinueMobileSite': '\uBAA8\uBC14\uC77C \uC0AC\uC774\uD2B8\uB85C \uACC4\uC18D',
     'misc.CreateAnotherAd_Mob': '\uB2E4\uB978 \uAD11\uACE0 \uC791\uC131',
     'misc.EmailAdActivated_Mob': '\uADC0\uD558\uC758 \uAD11\uACE0\uAC00 \uD65C\uC131\uD654\uB418\uBA74 \uC774\uBA54\uC77C\uC744 \uBCF4\uB0B4\uB4DC\uB9BD\uB2C8\uB2E4',

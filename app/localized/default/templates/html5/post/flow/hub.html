@@ -1,112 +1,46 @@
-
-    <header id="image">
-        <div><span>Agregar Fotos</span></div>
-        <p><small>&#9733; Agrega fotos para vender más rapido</small></p>
-    </header>
-    <ul id="steps">
-        <li id="step-categories" class="step trackMe" data-tracking="Posting-ClickCategoryList">
-            <h3 class="title">Elige una categoria</h3>
-            <div class="stepSummary">
-                <div>
-                    <small>Categor&iacute;a</small>
-                    <span id="categorySummary"></span>
-                </div>
-                <div>
-                    <small>Subcategor&iacute;a</small>
-                    <span id="subcategorySummary"></span>
-                </div>
-            </div>
-        </li>
-        <li id="step-description" class="step opaque trackMe" data-tracking="Posting-ClickDescribeAd">
-            <h3 class="title">Describe tu aviso</h3>
-            <div class="stepSummary">
-                <div>
-                    <small>T&iacute;tulo</small>
-                    <span id="titleSummary"></span>
-                </div>
-                <div>
-                    <small>Descripci&oacute;n</small>
-                    <span id="descriptionSummary"></span>
-                </div>
-            </div>
-        </li>
-        <li id="step-contact" class="step opaque trackMe" data-tracking="Posting-ClickContactInfo">
-            <h3 class="title">{{ dictionary["misc.ContactInformation_Mob"] }}</h3>
-            <div class="stepSummary">
-                <div>
-                    <small>Email</small>
-                    <span id="emailSummary"></span>
-                </div>
-                <div>
-                    <small>Ubicaci&oacute;n</small>
-                    <span id="locationSummary"></span>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <footer id="post" class="opaque trackMe" data-tracking="Posting-ClickPostButton">Publicar</footer>
-
-
-
-
-
-<!--
-<div id="image">
-    <div><span>Agregar Fotos</span></div>
-    <p class="image-label"><small>★ Agrega fotos para vender más rapido</small></p>
-</div>
+<header id="image">
+    <div><span>{{dictionary["misc.AddPhotos_Mob"] }}</span></div>
+    <p><small>&#9733; {{ dictionary["misc.AddPhotosSellFaster_Mob"] }}</small></p>
+</header>
 <ul id="steps">
     <li id="step-categories" class="step trackMe" data-tracking="Posting-ClickCategoryList">
-        <h3 class="title">Elige una categoria</h3>
+        <h3 class="title">{{ dictionary["misc.ChooseACategory_Mob"] }}</h3>
+        <div class="stepSummary">
+            <div>
+                <small>{{ dictionary["posting_selectcategory.categories"] }}</small>
+                <span id="categorySummary"></span>
+            </div>
+            <div>
+                <small>{{ dictionary["posting_selectcategory.subCategories"] }}</small>
+                <span id="subcategorySummary"></span>
+            </div>
+        </div>
     </li>
     <li id="step-description" class="step opaque trackMe" data-tracking="Posting-ClickDescribeAd">
-        <h3 class="title">Describe tu aviso</h3>
+        <h3 class="title">{{ dictionary["misc.DescribeYourAd_Mob"] }}</h3>
+        <div class="stepSummary">
+            <div>
+                <small>{{ dictionary["misc.Title_Mob"] }}</small>
+                <span id="titleSummary"></span>
+            </div>
+            <div>
+                <small>{{ dictionary["misc.Description_Mob"] }}</small>
+                <span id="descriptionSummary"></span>
+            </div>
+        </div>
     </li>
     <li id="step-contact" class="step opaque trackMe" data-tracking="Posting-ClickContactInfo">
-        <h3 class="title">Informacion de contacto</h3>
+        <h3 class="title">{{ dictionary["misc.ContactInformation_Mob"] }}</h3>
+        <div class="stepSummary">
+            <div>
+                <small>{{ dictionary["misc.Email_Mob"] }}</small>
+                <span id="emailSummary"></span>
+            </div>
+            <div>
+                <small>Ubicaci&oacute;n</small>
+                <span id="locationSummary"></span>
+            </div>
+        </div>
     </li>
 </ul>
-<div id="post" class="opaque trackMe" data-tracking="Posting-ClickPostButton">PUBLICAR</div>-->
-
-
-
-
-
-  <!--       
-                    <ul>
-                        <li>
-                            <a data-action="navigate" href="#pictures" data-tracking="posting-clickUploadPicture" class="trackMe cover" id="hubPictures">
-                                <div><span>Agregar Fotos</span></div>
-                                <p><small>★ Agrega fotos para vender más rapido</small></p>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-action="navigate" href="#category" data-tracking="posting-clickSelectCategory" class="trackMe" id="hubCategory">
-                                <h3>Elige una categoria</h3>
-                                <ol>
-                                    <li data-related="category"></li>
-                                    <li data-related="subcategory"></li>
-                                </ol>
-                            </a>
-                        </li>
-                        <li class="disabled">
-                            <a data-action="navigate" href="#description" data-tracking="posting-clickDescribeAd" class="trackMe" id="hubDescription">
-                                <h3>Describe tu aviso</h3>
-                                <ol>
-                                    <li data-related="title"></li>
-                                    <li data-related="description"></li>
-                                </ol>
-                            </a>
-                        </li>
-                        <li class="disabled">
-                            <a data-action="navigate" href="#contact" data-tracking="posting-clickContactInfo" class="trackMe" id="hubContact">
-                                <h3>Información de contacto</h3>
-                                <ol>
-                                    <li data-related="email"></li>
-                                    <li data-related="city"></li>
-                                </ol>
-                            </a>
-                        </li>
-                    </ul>-->
-  
-
+<footer id="post" class="opaque trackMe" data-tracking="Posting-ClickPostButton">{{ dictionary["misc.PostYourFreeAdCaps_Mob"] }}</footer>

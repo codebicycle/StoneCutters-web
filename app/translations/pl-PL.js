@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Powr\xF3t do pocz\u0105tku',
     'misc.BrandFor_Mob': 'OLX do',
     'misc.Call': 'Zadzwo\u0144',
+    'misc.ContactInformation_Mob': 'Dane teleadresowe',
     'misc.ContinueMobileSite': 'Przejd\u017A do strony mobilnej',
     'misc.CreateAnotherAd_Mob': 'Utw\xF3rz inne og\u0142oszenie',
     'misc.EmailAdActivated_Mob': 'Po aktywowaniu og\u0142oszenia otrzymasz wiadomo\u015B\u0107 e-mail z potwierdzeniem',

@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Rejea mpaka mwanzo',
     'misc.BrandFor_Mob': 'OLX ya',
     'misc.Call': 'Piga simu',
+    'misc.ContactInformation_Mob': 'Taarifa ya Kuwasiliana',
     'misc.ContinueMobileSite': 'Endelea kwa tovuti bebezi',
     'misc.CreateAnotherAd_Mob': 'Unda tangazo lingine',
     'misc.EmailAdActivated_Mob': 'Utapokea barua pepe wakati tangazo lako limeamilishwa',

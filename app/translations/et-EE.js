@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Tagasi algusse',
     'misc.BrandFor_Mob': 'OLX OS (e.g. Android, Blackberry, etc.) jaoks',
     'misc.Call': 'Helista',
+    'misc.ContactInformation_Mob': 'Kontaktandmed',
     'misc.ContinueMobileSite': 'Siirduge mobiilisaidile',
     'misc.CreateAnotherAd_Mob': 'Koostage veel \xFCks kuulutus',
     'misc.EmailAdActivated_Mob': 'Kui teie kuulutus on aktiveeritud, saate sellekohase e-kirja',

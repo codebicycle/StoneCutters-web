@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Sp\xE4\u0165 na \u0161tart',
     'misc.BrandFor_Mob': 'OLX pre',
     'misc.Call': 'Vola\u0165',
+    'misc.ContactInformation_Mob': 'Kontaktn\xE1 inform\xE1cia',
     'misc.ContinueMobileSite': 'Prejs\u0165 na mobiln\xFA verziu',
     'misc.CreateAnotherAd_Mob': 'Vytvori\u0165 \u010Fal\u0161\xED inzer\xE1t',
     'misc.EmailAdActivated_Mob': 'Po aktiv\xE1cii v\xE1\u0161ho inzer\xE1tu v\xE1m bude zaslan\xFD email',

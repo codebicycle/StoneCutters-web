@@ -152,6 +152,7 @@ module.exports = {
     'misc.BackToStart_Mob': 'Balik sa simula',
     'misc.BrandFor_Mob': 'OLX para sa',
     'misc.Call': 'Tumawag',
+    'misc.ContactInformation_Mob': 'Impormasyon sa Pakikipag-ugnayan',
     'misc.ContinueMobileSite': 'Magpatuloy sa site ng cellphone',
     'misc.CreateAnotherAd_Mob': 'Gumawa ng isa pang anunsyo',
     'misc.EmailAdActivated_Mob': 'Makakatanggap kayo ng isang e-mail kapag inaktiba na ang inyong anunsyo',
