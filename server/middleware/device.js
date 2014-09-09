@@ -15,14 +15,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
             var userAgent = req.get('user-agent') || utils.defaults.userAgent;
-            
+
             function fetch(done) {
                 if (req.data && req.data.device) {
                     return done(null, req.data.device);
                 }
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), done.errfcb);
             }
-            
+
             function check(done, response, device) {
                 if (!device) {
                     console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.rendrApp.session.get('host'));
