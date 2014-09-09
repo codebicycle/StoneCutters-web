@@ -66,6 +66,8 @@ module.exports = {
     'posting_selector.SelectSubCategory': '\u0627\u062E\u062A\u0631 \u0642\u0628\u0644 \u0627\u0644\u0645\u0631\u062A\u0628\u0629 ',
     'postingtitle.viewListing': '\u0645\u0634\u0627\u0647\u062F\u0629 \u0627\u0639\u0644\u0627\u0646 ',
     'postingstep1_selector.SelectCountry': '\u0628\u0644\u062F ',
+    'posting_selectcategory.categories': '\u0645\u0631\u062A\u0628\u0629 ',
+    'posting_selectcategory.subCategories': '\u0642\u0628\u0644 \u0627\u0644\u0645\u0631\u062A\u0628\u0629 ',
     'itemgeneraldetails.addFavorites': '\u0623\u0636\u0627\u0641\u0629 \u0644\u0644\u0645\u0641\u0636\u0644\u0627\u062A ',
     'itemgeneraldetails.City': '\u0645\u062F\u064A\u0646\u0629 ',
     'itemgeneraldetails.DatePosted': '\u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0627\u0639\u0644\u0627\u0645 ',
