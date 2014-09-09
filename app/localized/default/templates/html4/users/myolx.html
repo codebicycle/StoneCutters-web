@@ -1,6 +1,6 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["homeheader.My OLX"], ['<a href="', '/logout' | link, '" class="logout" data-qa="logout_link">', dictionary["myolx.SignOut"], '</a>'] | join) }}
+{{ Breadcrumb(dictionary, link, dictionary["homeheader.My OLX"], ['<a href="', '/logout' | link, '" class="logout" data-qa="logout-link">', dictionary["myolx.SignOut"], '</a>'] | join) }}
 <div id="myolx">
     <ul class="normalList">
         <li>

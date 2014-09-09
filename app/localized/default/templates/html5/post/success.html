@@ -5,7 +5,7 @@
         <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
         <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
         <p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}<br></p>
-        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="{{ item | slugToUrl | link }}" data-qa="posted_ad_link" >{{ dictionary["itemwarning.Here"] }}</a></p>
+        <p>{{ dictionary["postingtitlelisting.view"] }} <a href="{{ item | slugToUrl | link }}" data-qa="posted-ad-link" >{{ dictionary["itemwarning.Here"] }}</a></p>
         <input type="hidden" class="hide itemId" value="{{ item.id }}">
         <input type="hidden" class="hide itemCategory" value="{{ item.category.id }}">
         <input type="hidden" class="hide itemSubcategory" value="{{ item.category.parentId }}">

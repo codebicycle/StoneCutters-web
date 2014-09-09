@@ -143,14 +143,14 @@
                 <span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
             {% endif %}
             {% if item.email and not item.phone %}
-                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                     <div>
                         <span>{{ dictionary["replymessage.Email"] }}</span>
                     </div>
                 </div>
             {% elif item.email and item.phone %}
                 {% if device.uriSchemeTel and device.uriSchemeSms %}
-                    <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -166,7 +166,7 @@
                         </a>
                     </div>
                 {% elif device.uriSchemeTel and not device.uriSchemeSms %}
-                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -177,7 +177,7 @@
                         </a>
                     </div>
                 {% elif device.uriSchemeSms and not device.uriSchemeTel %}
-                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -188,7 +188,7 @@
                         </a>
                     </div>
                 {% else %}
-                    <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>

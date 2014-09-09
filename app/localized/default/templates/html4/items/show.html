@@ -57,7 +57,7 @@
                 {% endif %}
             {% endif %}
             {% if item.email %}
-                <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply_button" >{{ dictionary["register_mail.Email"] }}</a>
+                <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
             {% endif %}
         </div>
         {% if item.phone %}
