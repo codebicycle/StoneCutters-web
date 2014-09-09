@@ -21,9 +21,9 @@ module.exports = {
         imagePath: 'http://images-testing.olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
-        html4: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
-        html5: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
+        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
+        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
+        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
         desktop: []
     },
     icons: {
