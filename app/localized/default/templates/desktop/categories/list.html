@@ -3,7 +3,7 @@
 	<section class="home">
 		<div class="titleBar">
 			<h1>{{ dictionary["listingpageitemslisting.FindAdsIn2"] | replace('<<LOCATION>>', location.current.name if location.current and location.current.type != 'country' else location.name )}}</h1>
-			<span>Cambia tu ubicación</span>
+			<span>{{ dictionary["changelocationheader.ChangeLocation"] }}</span>
 		</div>
 		<ul class="icons">
 			{% for category in categories %}
@@ -22,29 +22,29 @@
 		</ul>
 	</section>
 	<aside class="banner howto">
-		<h1>Todos pueden vender en OLX</h1>
-		<span>Aprende a vender</span>
+		<h1>{{ dictionary["misc.EveryoneCanSell"] | replace('<<BRAND>>','OLX') }}</h1>
+		<span>{{ dictionary["misc.LearnToSell"] }}</span>
 	</aside>
 	<aside class="banner tv">
 		<span></span>
-		<h1>¿Lo has visto?</h1>
-		<p>¡Ya puedes ver nuestro nuevo anuncio de TV!</p>
+		<h1>{{ dictionary["defaulthtmlhead.HaveYouSeenThis"] }}</h1>
+		<p>{{ dictionary["defaulthtmlhead.CheckOutOurNewTvAd"] }}</p>
 	</aside>
 	<aside class="banner">
 		<a href="http://itunes.apple.com/app/olx-classifieds/id382059698" class="ios" target="_blank"></a>
 		<a href="https://play.google.com/store/apps/details?id=com.olx.olx" class="android" target="_blank"></a>
 	</aside>
 	<aside class="postBanner">
-		<h2>¿Tienes algo que vender?</h2>
-		<p>Publica tu anuncio GRATIS en OLX</p>
-		<a class="btn orange" href="">Publica un anuncio gratis</a>
+		<h2>{{ dictionary["misc.SomethingToSell"] }}</h2>
+		<p>{{ dictionary["misc.PostForFree_LandingPage"] | replace('<<BRAND>>','OLX') }}</p>
+		<a class="btn orange" href="">{{ dictionary["countryoptions.PostAdd"] }}</a>
 	</aside>
 	<section class="home">
 		<div class="titleBar small">
-			<h2>Popular en {{ location.url }}</h2>
+			<h2>{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>',location.url) }}</h2>
 		</div>
-		<h1>Ciudades populares:</h1>
-		<h1>Otras Ciudades en Táchira:</h1>
+		<h1>{{ dictionary["popularsearchesbody.PopularCities"] }}:</h1>
+		<h1>{{ dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>','Region') }}:</h1>
 		<ul class="cities">
 			<li><a href="{{ '/' | link({location: 'acarigua.olx.com.ve'}) }}">Acarigua</a></li>
 			<li><a href="{{ '/' | link({location: 'anaco.olx.com.ve'}) }}">Anaco</a></li>
@@ -65,7 +65,7 @@
 			<li><a href="{{ '/' | link({location: 'cabimas.olx.com.ve'}) }}">Cabimas</a></li>
 			<li><a href="{{ '/' | link({location: 'cabudare.olx.com.ve'}) }}">Cabudare</a></li>
 		</ul>
-		<h1 class="full">Más Buscados</h1>
+		<h1 class="full">{{ dictionary["defaultheader.PopularSearches"] }}</h1>
 		<ul class="cities full">
 			<li><a href="">Casa en alquiler</a></li>
 			<li><a href="">Alquiler de estudio amoblado</a></li>
