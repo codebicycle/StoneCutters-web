@@ -21,6 +21,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'De gezochte pagina is helaas niet beschikbaar.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Probeer de pagina rechtstreeks te openen via de <<LINK_HOME_PAGE>>homepage<</LINK_HOME_PAGE>> van OLX.',
     'itemslisting.Category': 'Rubriek',
+    'itemslisting.FreeClassifieds': 'Gratis advertenties',
     'itemslisting.NavigatorByCategory': 'Rubriek',
     'itemslisting.NavigatorByLocation': 'Locatie',
     'itemslisting.NewContactName': 'Naam contactpersoon',

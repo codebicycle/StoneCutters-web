@@ -21,6 +21,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Sorry, the page you are looking for is not available.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Try to access the page directly from the OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': '\u0645\u0631\u062A\u0628\u0627\u062A',
+    'itemslisting.FreeClassifieds': '\u0627\u0639\u0644\u0627\u0646 \u0645\u062C\u0627\u0646\u064A ',
     'itemslisting.NavigatorByCategory': '\u0645\u0631\u062A\u0628\u0629',
     'itemslisting.NavigatorByLocation': '\u0645\u0648\u0642\u0639',
     'itemslisting.NewContactName': 'Contact name',

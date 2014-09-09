@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
     var languages = ['af-ZA', 'ar-AE', 'ar-EG', 'bg-BG', 'bn-BD', 'bs-BA', 'ca-ES', 'cs-CZ', 'da-DK', 'de-DE', 'el-GR', 'en-IN', 'en-US', 'es-AR', 'es-CO', 'es-EC', 'es-ES', 'es-GT', 'es-MX', 'es-PE', 'es-SV', 'es-VZ', 'et-EE', 'fi-FI', 'fr-CA', 'fr-FR', 'gu-IN', 'he-IL', 'hi-IN', 'hr-HR', 'ht-HT', 'hu-HU', 'id-ID', 'is-IS', 'it-IT', 'ja-JP', 'kn-IN', 'ko-KR', 'lt-LT', 'lv-LV', 'ml-IN', 'mr-IN', 'ms-MY', 'nl-BG', 'nl-NL', 'no-NO', 'pa-PK', 'pl-PL', 'pt-BR', 'pt-PT', 'ro-RO', 'ru-RU', 'si-LK', 'sk-SK', 'sl-SI', 'sr-RS', 'sv-SE', 'sw-TZ', 'ta-IN', 'te-IN', 'th-TH', 'th-TW', 'tl-PH', 'tr-TR', 'uk-UA', 'ur-PK', 'vi-VN', 'zh-CN', 'zh-TW'];
-    var includeKeys = ['misc.BrandFor_Mob', 'misc.FreeIn_Mob', 'messages_date_format.Today', 'messages_date_format.Yesterday', 'messages_date_format.101', 'messages_date_format.102', 'messages_date_format.103', 'messages_date_format.104', 'messages_date_format.105', 'messages_date_format.106', 'messages_date_format.107', 'messages_date_format.108', 'messages_date_format.109', 'messages_date_format.110', 'messages_date_format.111', 'messages_date_format.112', 'posting_fields_1.title', 'posting_fields_1.description', 'posting_fields_1.email', 'posting_fields_1.phoneNumber' ];
+    var includeKeys = ['misc.BrandFor_Mob', 'misc.FreeIn_Mob', 'messages_date_format.Today', 'messages_date_format.Yesterday', 'messages_date_format.101', 'messages_date_format.102', 'messages_date_format.103', 'messages_date_format.104', 'messages_date_format.105', 'messages_date_format.106', 'messages_date_format.107', 'messages_date_format.108', 'messages_date_format.109', 'messages_date_format.110', 'messages_date_format.111', 'messages_date_format.112', 'posting_fields_1.title', 'posting_fields_1.description', 'posting_fields_1.email', 'posting_fields_1.phoneNumber', 'itemslisting.FreeClassifieds', 'about.AboutBrand', 'about.AboutText1', 'about.AboutText2', 'about.Mission', 'about.MissionText1', 'about.Presence' ];
     var rBrand = /<<BRAND>>/g;
     var BRAND = 'OLX';
 
@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         var http = require('http');
         var ProgressBar = require('progress');
         var fs = require('fs');
-        var AdmZip = require('adm-zip');
+        var unzip = require('unzip');
         var csv = require('csv');
         var _ = require('underscore');
         var jsesc = require('jsesc');
@@ -78,8 +78,8 @@ module.exports = function(grunt) {
                 }
 
                 function onEnd() {
-                    console.log();
-                    file.close(done);
+                    console.log('Finished downloading');
+                    file.end(done);
                 }
 
                 console.log();
@@ -90,10 +90,10 @@ module.exports = function(grunt) {
         }
 
         function unZip(done) {
-            var zip = new AdmZip(dest);
-
-            zip.extractAllTo(destDir, true);
-            done();
+            console.log('Unzipping', destDir);
+            fs.createReadStream(dest).pipe(unzip.Extract({
+                path: destDir
+            })).on('close', done).on('end', done).on('error', done.fail);
         }
 
         function getTranslations(done) {
