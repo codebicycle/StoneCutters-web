@@ -57,7 +57,8 @@ module.exports = Base.extend({
     events: {
         'show': 'onShow',
         'hide': 'onHide',
-        'click .change': 'onChangeClick',
+        'click .changeCategory': 'onChangeCategoryClick',
+        'click .changeSubcategory': 'onChangeSubcategoryClick',
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
         'submit': 'onSubmit',
@@ -89,8 +90,11 @@ module.exports = Base.extend({
         this.$el.addClass('disabled');
         this.parentView.$el.trigger('optionalsSubmit', [this.fields, errors]);
     },
-    onChangeClick: function(event) {
+    onChangeCategoryClick: function(event) {
         this.parentView.$el.trigger('flow', [this.id, 'categories']);
+    },
+    onChangeSubcategoryClick: function(event) {
+
     },
     onFieldsChange: function(event, fields, categoryId, subcategoryId, firstRender) {
         event.preventDefault();

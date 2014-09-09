@@ -1,9 +1,15 @@
-<div class="wrapper">
-    <div id="category-summary">
-        <small class="small">Categoría seleccionada: </small>
-        <div class="summary"><span>{{category.trName}}</span> :: <span>{{subcategory.trName}}</span></div>
-        <span class="change">cambiar</span>
+
+    <div class="summary" id="category-summary">
+        <div>
+            <small>{{ dictionary["posting_selectcategory.categories"] }}</small>
+            <span>{{ category.trName }} <span class="change">{{ dictionary["defaultfooter.change"] }}</span></span>
+        </div>
+        <div>
+            <small>{{ dictionary["posting_selectcategory.subCategories"] }}</small>
+            <span>{{ subcategory.trName }} <span class="change">{{ dictionary["defaultfooter.change"] }}</span></span>
+        </div>
     </div>
+    
     <div id="posting">
         <form>
             {% from macros import FieldText, FieldTextArea, FieldCombobox %}
@@ -19,4 +25,4 @@
             </div>
         </form>
     </div>
-</div>
+
