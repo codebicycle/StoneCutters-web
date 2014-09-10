@@ -135,10 +135,17 @@ function interstitial(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        if (params.downloadApp) {
+            this.app.session.persist({
+                downloadApp: '1'
+            });
+            return helpers.common.redirect.call(this, params.ref);
+        }
+
         this.app.session.persist({
-            downloadApp: '1'
+            showInterstitial: '1'
         }, {
-            maxAge: this.app.session.get('downloadApp')
+            maxAge: this.app.session.get('showInterstitial')
         });
         callback(null, {
             analytics: analytics.generateURL.call(this),

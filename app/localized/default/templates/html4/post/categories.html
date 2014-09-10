@@ -5,10 +5,10 @@
     <ul class="normalList">
         {% for category in categories %}
             <li class="{{ "last" if loop.last else "" }}">
-                <a href="{{ ['/posting/', category.id] | join('') | link }}">{{category.trName}}</a>
+                <a href="{{ ['/posting/', category.id] | join('') | link }}" data-qa="category-name" >{{category.trName}}</a>
             </li>
         {% endfor %}
-    <ul>
+    </ul>
 
     {% set templateName = template + '/partials/analytics.html' %}
     {% include templateName %}

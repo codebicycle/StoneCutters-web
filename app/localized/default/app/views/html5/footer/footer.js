@@ -4,6 +4,8 @@ var Base = require('../../../../../common/app/bases/view').requireView('footer/f
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
+var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     getTemplateData: function() {
@@ -18,6 +20,11 @@ module.exports = Base.extend({
         $('body').on('change:location', this.changeLocation.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
+        this.attachTrackMe(this.className, function(category, action) {
+            return {
+                custom: [category, '-', '-', action].join('::')
+            };
+        });
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {

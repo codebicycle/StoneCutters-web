@@ -21,9 +21,9 @@ module.exports = {
         imagePath: 'http://images-staging.olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
-        html4: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
-        html5: ['www.olx.com.br', 'www.olx.de', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
+        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
+        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
+        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
         desktop: []
     },
     icons: {
@@ -39,9 +39,9 @@ module.exports = {
     infiniteScroll: false,
     interstitial: {
         enabled: true,
-        clicks: 1,
+        clicks: 0,
         time: 432000000,
-        ignorePath: ['/health', '/login', '/interstitial', '/404', '/500', /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
+        ignorePath: ['/closed', '/login', '/interstitial', '/500', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
     seo: {

@@ -6,7 +6,7 @@
             <div class="clear"></div>
         </div>
         <div class="interstitial-action btn-adjust btnOrange">
-            <a href="{{ marketing.link }}" class="trackMe" data-tracking="Interstitial-DownloadApp" >
+            <a href="{{ marketing.link }}" class="donwloadApp trackMe" data-tracking="Interstitial-DownloadApp" >
             {{ dictionary["misc.GetTheFreeApp"] }}
             </a>
         </div>
@@ -15,6 +15,6 @@
                 {{ dictionary["misc.ContinueMobileSite"] }} &gt;
             </a>
         </div>
-        <img src="{{ '/images/common/marketing/iphone_.png' | static }}" alt="" id="mobileImg"> 
+        <img src="{{ ('/images/common/marketing/' + marketing.image + '_.png') | static }}" alt="" id="mobileImg"> 
     </div>
 {% endif %}

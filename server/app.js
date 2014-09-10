@@ -31,11 +31,13 @@ module.exports = function appUseConf(done) {
     }
 
     function rendrConfiguration(rendrApp) {
+        rendrApp.use(middleware.manifest());
         rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.location());
         rendrApp.use(middleware.languages());
+        rendrApp.use(middleware.closed());
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.device());
         rendrApp.use(middleware.internetOrg());

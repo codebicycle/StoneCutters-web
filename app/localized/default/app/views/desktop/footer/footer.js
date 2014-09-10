@@ -6,26 +6,32 @@ module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer',
     className: 'footer_view',
-    
-    postRender: function() {
-        $('#footer ul li span').click(function() {
-            var current = $(this).attr('class');
-            if($('#footer').find('.teaser').hasClass('open') && !$('.teaser#' + current).hasClass('open')) {
-                $('.teaser.open').slideToggle( "slow", function() {
-                    $('.teaser.open').toggleClass('open');
-                    $('.teaser#' + current).slideToggle( "slow", function() {
-                        $('.teaser#' + current).toggleClass('open');      
-                    });   
-                });
-            } else {
-                $('.teaser#' + current).slideToggle( "slow", function() {
-                    $('.teaser#' + current).toggleClass('open');      
-                });
-            }
-        });
-        $('#footer .teaser header span').click(function() {
-            $('.teaser.open').slideToggle('slow');
-        });
-    }
+    events: {
+        'click ul li span': 'handleLiClick',
+        'click .teaser header span': 'handleSpanClick'
+    },
+    handleLiClick: function(event) {
+        var current = $(event.currentTarget).attr('class');
+        var $currentTeaser = this.$('.teaser#' + current);
+        var $teasers = this.$('.teaser');
 
+        if($teasers.hasClass('open') && !$currentTeaser.hasClass('open')) {
+            $teasers.filter('.open').slideToggle('slow', function() {
+                $teasers.filter('.open').toggleClass('open');
+                $currentTeaser.slideToggle('slow', function() {
+                    $currentTeaser.toggleClass('open');      
+                });   
+            });
+        } else {
+            $currentTeaser.slideToggle('slow', function() {
+                $currentTeaser.toggleClass('open');      
+            });
+        }
+    },
+    handleSpanClick: function() {
+        this.$('.teaser.open').slideToggle('slow');
+    },
+    postRender: function() {
+        
+    }
 });

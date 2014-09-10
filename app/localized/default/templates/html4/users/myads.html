@@ -1,6 +1,6 @@
 {% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["myolx.MyAds"], ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
+{{ Breadcrumb(dictionary, link, dictionary["myolx.MyAds"], ['<a href="', '/logout' | link, '" class="logout" data-qa="logout-button">', dictionary["myolx.SignOut"], '</a>'] | join) }}
 {% if deleted %}
     <div id="messages">
         <div class="messages feedback">{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</div>

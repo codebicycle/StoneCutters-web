@@ -1,13 +1,13 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["homeheader.My OLX"], ['<a href="', '/logout' | link, '" class="logout" >', dictionary["myolx.SignOut"], '</a>'] | join) }}
+{{ Breadcrumb(dictionary, link, dictionary["homeheader.My OLX"], ['<a href="', '/logout' | link, '" class="logout" data-qa="logout-link">', dictionary["myolx.SignOut"], '</a>'] | join) }}
 <div id="myolx">
     <ul class="normalList">
         <li>
-            <a href="{{ 'myolx/myadslisting' | link }}">{{ dictionary["myolx.MyAds"] }}</a>
+            <a href="{{ 'myolx/myadslisting' | link }}" data-qa="my-ads-link" >{{ dictionary["myolx.MyAds"] }}</a>
         </li>
         <li class="last">
-            <a href="{{ 'myolx/favoritelisting' | link }}">{{ dictionary["myolx.MyFavorites"] }}</a>
+            <a href="{{ 'myolx/favoritelisting' | link }}" data-qa="my-favorites-link" >{{ dictionary["myolx.MyFavorites"] }}</a>
         </li>
     </ul>
 </div>

@@ -1,4 +1,4 @@
-<section id="itemPage">
+<section id="itemPage" data-qa="item" >
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, item.category.name) }}

@@ -5,7 +5,7 @@
     <ul>
         {% for category in subcategories %}
             <li>
-                <a href="{{ ['/posting/', categoryId, '/', category.id] | join('') | link }}" class="trackMe" data-tracking="Posting-ClickSelectSubcategoryList" data-id="{{category.id}}" data-parent.id="{{categoryId}}" >{{category.trName}}</a>
+                <a href="{{ ['/posting/', categoryId, '/', category.id] | join('') | link }}" class="trackMe" data-tracking="Posting-ClickSelectSubcategoryList" data-id="{{category.id}}" data-parent.id="{{categoryId}}" data-qa="subcategory-name" >{{category.trName}}</a>
             </li>
         {% endfor %}
     </ul>

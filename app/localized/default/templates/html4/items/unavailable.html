@@ -1,7 +1,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, item.category.name) }}
-<div id="itemPage">
+<div id="itemPage" data-qa="item" >
 	<div id="itemDisable">
 		<h4>{{ dictionary["item.AdNotAvailable"] | replace ('<<AD_TITLE>>', '<strong>' + item.title + '</strong>') }}</h4>
 		<p>

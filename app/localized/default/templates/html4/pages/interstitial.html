@@ -4,13 +4,13 @@
         <h1>{{ dictionary["defaultfooter.FreeSite"] }}</h1>
         <div class="clear"></div>
     </div>
-    <a href="{{ marketing.link }}" class="trackMe btns orange" data-tracking="interstitial-DownloadApp" >{{ dictionary["misc.GetTheFreeApp"] }}</a>
+    <a href="{{ ['/interstitial?downloadApp=true&ref=', marketing.link] | join('') | link }}" class="trackMe btns orange" data-tracking="interstitial-DownloadApp" >{{ dictionary["misc.GetTheFreeApp"] }}</a>
     <div class="interstitial-action continue">
         <a href="{{ ref | link }}" class="closeInterstitial trackMe" data-tracking="interstitial-DownloadApp_NoThanks" >
             {{ dictionary["misc.ContinueMobileSite"] }} &gt;
         </a>
     </div>
-    <img src="{{ '/images/common/marketing/iphone_.png' | static }}" alt="" id="mobileImg"> 
+    <img src="{{ ('/images/common/marketing/' + marketing.image + '_.png') | static }}" alt="" id="mobileImg"> 
 </div>
 {% set templateName = template + '/partials/analytics.html' %}
 {% include templateName %}
