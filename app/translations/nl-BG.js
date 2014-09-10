@@ -66,6 +66,8 @@ module.exports = {
     'posting_selector.SelectSubCategory': 'Kies subrubriek',
     'postingtitle.viewListing': 'Advertentie weergeven',
     'postingstep1_selector.SelectCountry': 'Land',
+    'posting_selectcategory.categories': 'Rubriek',
+    'posting_selectcategory.subCategories': 'Subrubriek',
     'itemgeneraldetails.addFavorites': 'Toevoegen aan favorieten',
     'itemgeneraldetails.City': 'stad',
     'itemgeneraldetails.DatePosted': 'Plaatsingsdatum',

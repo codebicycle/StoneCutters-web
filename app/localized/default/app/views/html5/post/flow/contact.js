@@ -6,7 +6,7 @@ var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
 
 module.exports = Base.extend({
     className: 'post_flow_contact_view disabled',
-    tagName: 'form',
+    tagName: 'section',
     id: 'contact',
     fields: [],
     form: {

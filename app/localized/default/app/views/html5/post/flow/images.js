@@ -56,10 +56,9 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $remove = $(event.currentTarget);
-        var $container = $remove.parent().removeClass('fill');
+        var $container = $remove.parent().removeClass('fill').removeAttr('style');
         var $input = this.$('#' + $container.data('input')).val('');
 
-        $container.removeAttr('style');
         delete this.selected[$input.attr('name')];
     },
     onChange: function(event) {
@@ -70,7 +69,6 @@ module.exports = Base.extend({
         var $input = $(event.target);
         var $container = this.$('[data-input=' + $input.attr('id') + ']');
         var $image = $container.children('.image');
-        //var $loading = $('body > .loading').show();
         var imageUrl = window.URL.createObjectURL(event.target.files[0]);
         var image = new window.Image();
 
@@ -137,7 +135,6 @@ module.exports = Base.extend({
                 }
                 $image.css(css);
                 $image.removeClass('load').addClass('fill');
-                //$loading.hide();
             }.bind(this);
 
             asynquence().or(image.onerror)
@@ -149,7 +146,6 @@ module.exports = Base.extend({
         image.onerror = function(err) {
             delete this.selected[$input.attr('name')];
             $input.val('');
-            //$loading.hide();
         }.bind(this);
     },
     onSubmit: function(event) {
