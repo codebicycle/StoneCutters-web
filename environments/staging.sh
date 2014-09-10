@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Validate permissions (sudo)
+if [ "$(whoami)" != "root" ]; then
+	echo "Sorry, you are not root (sudo)."
+	exit 1
+fi
+
+CURRENT=${PWD##*/}
+
+if [ "$CURRENT" != "environments" ]
+then
+	cd 'environments'
+fi
+
 LOCAL_AUXI=$(cat /etc/sudoers | grep 'dev-laptop' | head -n1 | awk '{print $3}');
 LOCAL=${LOCAL_AUXI:0};
 
