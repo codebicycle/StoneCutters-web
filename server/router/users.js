@@ -1,38 +1,108 @@
 'use strict';
 
-module.exports = function userRouter(app, dataAdapter) {
+module.exports = function userRouter(app) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
-    var querystring = require('querystring');
-    var crypto = require('crypto');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
-    var user = require('../controllers/user');
+    var User = require('../../app/models/user');
 
-    (function register() {
-        app.post('/register', handler);
+    function login() {
+        app.post('/login', handler);
 
-        function handler(req, res) {
+        function handler(req, res, next) {
+            var user;
+
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function validate(done, data) {
-                if (!data.agreeTerms) {
-                    res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
-                    return;
+            function prepare(done, data) {
+                user = new User(_.extend(data, {
+                    location: req.rendrApp.session.get('siteLocation'),
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: req.rendrApp.session.get('platform')
+                }));
+                done();
+            }
+
+            function submit(done) {
+                user.login(done, req);
+            }
+
+            function success() {
+                var redirect = user.get('redirect');
+
+                if (!redirect || redirect.match(/(\/register|\/login|\/logout)/g)) {
+                    redirect = '/';
                 }
-                done(data);
+                res.redirect(utils.link(redirect, req.rendrApp));
+                if (next && next.errfcb) {
+                    next.errfcb();
+                }
             }
 
-            function submit(done, data) {
-                user.register(done, req, data);
+            function error(err) {
+                var link = '/login';
+                var redirect = user ? user.get('redirect') : '';
+
+                if (redirect && redirect !== '/') {
+                    link += '?redirect=' + redirect;
+                }
+                formidable.error(req, link, err, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    if (next && next.errfcb) {
+                        next.errfcb(err);
+                    }
+                });
             }
 
-            function success(user) {
-                user.usernameOrEmail = user.username;
-                user.redirect = '/?register_success=true';
-                loginHandler(req, res, user);
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
+                .val(success);
+        }
+
+        return handler;
+    }
+
+    function register() {
+        app.post('/register', handler);
+
+        function handler(req, res) {
+            var user;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                user = new User(_.extend(data, {
+                    location: req.rendrApp.session.get('siteLocation'),
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: req.rendrApp.session.get('platform')
+                }));
+                done();
+            }
+
+            function validate(done) {
+                if (!user.get('agreeTerms')) {
+                    return res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
+                }
+                done(user);
+            }
+
+            function submit(done) {
+                user.register(done, req);
+            }
+
+            function login(done) {
+                user.login(done, req);
+            }
+
+            function success() {
+                res.redirect(utils.link('/?register_success=true', req.rendrApp));
             }
 
             function error(err) {
@@ -43,77 +113,18 @@ module.exports = function userRouter(app, dataAdapter) {
 
             asynquence().or(error)
                 .then(parse)
+                .then(prepare)
                 .then(validate)
                 .then(submit)
+                .then(login)
                 .val(success);
         }
-    })();
 
-    (function login() {
-        app.post('/login', handler);
+        return handler;
+    }
 
-        function handler(req, res) {
-            function parse(done) {
-                formidable.parse(req, done);
-            }
-
-            function submit(done, data) {
-                if (!data.redirect || data.redirect.match(/(\/register|\/login|\/logout)/g)) {
-                    data.redirect = '/';
-                }
-                loginHandler(req, res, data);
-            }
-
-            function error(err) {
-                formidable.error(req, '/login', err, function redirect(url) {
-                    res.redirect(utils.link(url, req.rendrApp));
-                });
-            }
-
-            asynquence().or(error)
-                .then(parse)
-                .val(submit);
-        }
-    })();
-
-    var loginHandler = (function login() {
-        return function handler(req, res, data) {
-            var password = data.password;
-            var redirect = data.redirect;
-
-            function submit(done, credentials) {
-                user.login(done, req, credentials);
-            }
-
-            function save(done, response, user) {
-                req.rendrApp.session.persist({
-                    user: user
-                });
-                done();
-            }
-
-            function success() {
-                res.redirect(utils.link(redirect, req.rendrApp));
-            }
-
-            function error(err) {
-                var link = '/login';
-
-                if (redirect && redirect !== '/') {
-                    link += '?redirect=' + redirect;
-                }
-                formidable.error(req, link, err, function redirect(url) {
-                    res.redirect(utils.link(url, req.rendrApp));
-                });
-            }
-
-            if (typeof password !== 'string') {
-                password = '';
-            }
-            asynquence().or(error)
-                .then(submit)
-                .then(save)
-                .val(success);
-        };
-    })();
+    return {
+        login: login(),
+        register: register()
+    };
 };
