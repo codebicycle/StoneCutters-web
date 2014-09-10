@@ -34,6 +34,15 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
+    posting: {
+        flow: {
+            enabled: {
+                'www.olx.com.mx': true,
+                'www.olx.com.ar': true,
+                'www.olx.co.za': true
+            }
+        }
+    },
     infiniteScroll: false,
     interstitial: {
         enabled: false,
