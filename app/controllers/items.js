@@ -131,7 +131,11 @@ function show(params, callback) {
                     res.item = buildItemPurged(err.body);
                     err = null;
                 }
-                if (!res.item.get('status').open && !res.item.get('status').onReview) {
+                if (!res.item.get('status')) {
+                    console.log('[OLX_DEBUG]', 'no status', res.item.get('id'));
+                    return error(new Error(), res);
+                }
+                else if (!res.item.get('status').open && !res.item.get('status').onReview) {
                     res.item.set('purged', true);
                 }
                 done(res);
