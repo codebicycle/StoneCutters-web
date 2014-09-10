@@ -15,7 +15,7 @@ module.exports = Base.extend({
         this.currentViewName = 'hub';
     },
     postRender: function() {
-        //$(window).on('beforeunload', this.onBeforeUnload);
+        $(window).on('beforeunload', this.onBeforeUnload);
         $(window).on('unload', {
             async: false
         }, this.onExit.bind(this));
