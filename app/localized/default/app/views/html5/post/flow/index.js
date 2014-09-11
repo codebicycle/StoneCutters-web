@@ -42,7 +42,6 @@ module.exports = Base.extend({
         'flow': 'onFlow',
         'headerChange': 'onHeaderChange',
         'stepChange': 'onStepChange',
-        'imagesSubmit': 'onImagesSubmit',
         'categorySubmit': 'onCategorySubmit',
         'subcategorySubmit': 'onSubcategorySubmit',
         'optionalsSubmit': 'onOptionalsSubmit',
@@ -52,7 +51,10 @@ module.exports = Base.extend({
         'submit': 'onSubmit',
         'restart': 'onRestart',
         'trackEventNext': 'onNext',
-        'exit': 'onExit'
+        'exit': 'onExit',
+        'imagesLoadStart': 'onImagesLoadStart',
+        'imagesLoadEnd': 'onImagesLoadEnd'
+
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();
@@ -77,26 +79,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('#hub').trigger('stepChange', [before, after]);
-    },
-    onImagesSubmit: function(event, images) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var ids = [];
-        var files = [];
-
-        Object.keys(images).sort().forEach(function each(image) {
-            ids.push(images[image].id);
-            files.push(images[image].file);
-        });
-        if (ids.length) {
-            this.form.images = ids;
-        }
-        else {
-            delete this.form.images;
-        }
-        this.$('#hub').trigger('imageChange', [files.shift()]);
     },
     onCategorySubmit: function(event, category, error) {
         event.preventDefault();
@@ -290,5 +272,32 @@ module.exports = Base.extend({
         }, {
             async: (event.data && !_.isUndefined(event.data.async) ? event.data.async : true)
         });
+    },
+    onImagesLoadStart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#hub').trigger('imagesLoadStart');
+    },
+    onImagesLoadEnd: function(event, images) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var ids = [];
+        var files = [];
+
+        Object.keys(images).sort().forEach(function each(image) {
+            ids.push(images[image].id);
+            files.push(images[image].file);
+        });
+        if (ids.length) {
+            this.form.images = ids;
+        }
+        else {
+            delete this.form.images;
+        }
+        this.$('#hub').trigger('imagesLoadEnd', [files.shift()]);
     }
 });

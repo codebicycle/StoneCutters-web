@@ -10,6 +10,7 @@ module.exports = Base.extend({
     id: 'images',
     tagName: 'section',
     selected: {},
+    pending: 0,
     initialize: function() {
         Base.prototype.initialize.call(this);
         this.selected = {};
@@ -21,7 +22,9 @@ module.exports = Base.extend({
         'click .remove': 'onRemoveClick',
         'change form': 'onChange',
         'submit form': 'onSubmit',
-        'restart': 'onRestart'
+        'restart': 'onRestart',
+        'imageLoadStart': 'onImageLoadStart',
+        'imageLoadEnd': 'onImageLoadEnd'
     },
     onShow: function(event) {
         event.preventDefault();
@@ -37,7 +40,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('imagesSubmit', [this.selected]);
     },
     onImageClick: function(event) {
         event.preventDefault();
@@ -56,10 +58,12 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $remove = $(event.currentTarget);
-        var $container = $remove.parent().removeClass('fill').removeAttr('style');
+        var $container = $remove.parent().removeClass('loaded');
+        var $image = $container.find('.image').removeClass('fill').removeAttr('style');
         var $input = this.$('#' + $container.data('input')).val('');
 
         delete this.selected[$input.attr('name')];
+        this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
     },
     onChange: function(event) {
         event.preventDefault();
@@ -81,8 +85,8 @@ module.exports = Base.extend({
             var post = function(done) {
                 var data = new FormData();
 
-                $image.addClass('load');
-
+                this.$el.trigger('imageLoadStart');
+                $container.addClass('loading');
                 data.append(0, event.target.files[0]);
                 helpers.dataAdapter.post(this.app.req, '/images', {
                     query: {
@@ -103,6 +107,7 @@ module.exports = Base.extend({
                     id: res.shift(),
                     file: imageUrl
                 };
+                this.$el.trigger('imageLoadEnd');
                 done();
             }.bind(this);
 
@@ -134,7 +139,8 @@ module.exports = Base.extend({
                     }
                 }
                 $image.css(css);
-                $image.removeClass('load').addClass('fill');
+                $image.addClass('fill');
+                $container.removeClass('loading').addClass('loaded');
             }.bind(this);
 
             asynquence().or(image.onerror)
@@ -144,6 +150,7 @@ module.exports = Base.extend({
                 .then(display);
         }.bind(this);
         image.onerror = function(err) {
+            this.$el.trigger('imageLoadEnd');
             delete this.selected[$input.attr('name')];
             $input.val('');
         }.bind(this);
@@ -161,6 +168,26 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.selected = {};
+    },
+    onImageLoadStart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.pending++;
+        if (this.pending === 1) {
+            this.parentView.$el.trigger('imagesLoadStart');
+        }
+    },
+    onImageLoadEnd: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.pending--;
+        if (this.pending === 0) {
+            this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
+        }
     }
 });
 
