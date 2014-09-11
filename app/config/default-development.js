@@ -16,7 +16,7 @@ module.exports = {
     staticAccept: ['css', 'js'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
-        type: 'development'
+        type: 'testing'
     },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
