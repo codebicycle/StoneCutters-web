@@ -1,5 +1,5 @@
 <form>
-    <h3>{% if firstRender %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% else %}Ciudades{% endif %}</h3>
+    <h3>{% if firstRender %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% else %}{{ dictionary["defaultheader.Cities"] }}{% endif %}</h3>
     <ul>
         {% for city in cities %}
             <li class="city" data-url="{{ city.url }}"><a>{{ city.name }}</a></li>
@@ -7,7 +7,7 @@
     </ul>
     <br/>
     {% if states and states.length %}
-        <h3>Estados</h3>
+        <h3>{{ dictionary["misc.States"] }}</h3>
         <ul>
             {% for state in states %}
                 <li class="state" data-url="{{ state.url }}"><a>{{ state.name }}</a></li>
