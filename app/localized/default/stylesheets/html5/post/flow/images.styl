@@ -172,21 +172,6 @@ vendors = moz webkit o official
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 
-	}
-
-	.image {
-
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-color: #DDD;
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-image: url(imageUrl/images/html5/cameraSmall.png);
-		background-size: 50%;
-
 		&:after {
 
 			content: '';
@@ -203,7 +188,7 @@ vendors = moz webkit o official
 
 		}
 
-		&.load {
+		&.loading {
 
 			&:after {
 
@@ -216,11 +201,19 @@ vendors = moz webkit o official
 
 		}
 
-		&.fill {
+		&.loaded {
 
-			background-size: cover;
+			&:after {
 
-			span {
+				width: 100%;
+				opacity: 0;
+				-moz-transition: width 250ms ease-in-out, opacity 250ms linear 250ms;
+				-webkit-transition: width 250ms ease-in-out, opacity 250ms linear 250ms;
+				transition: width 250ms ease-in-out, opacity 250ms linear 250ms;
+
+			}
+
+			.remove {
 
 				display: block;
 				position: absolute;
@@ -276,15 +269,26 @@ vendors = moz webkit o official
 
 			}
 
-			&:after {
+		}
 
-				width: 100%;
-				opacity: 0;
-				-moz-transition: width 250ms ease-in-out, opacity 250ms linear 250ms;
-				-webkit-transition: width 250ms ease-in-out, opacity 250ms linear 250ms;
-				transition: width 250ms ease-in-out, opacity 250ms linear 250ms;
+	}
 
-			}
+	.image {
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: #DDD;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-image: url(imageUrl/images/html5/cameraSmall.png);
+		background-size: 50%;
+
+		&.fill {
+
+			background-size: cover;
 
 		}
 

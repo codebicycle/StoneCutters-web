@@ -13,13 +13,14 @@ module.exports = Base.extend({
         'click #image': 'onImageClick',
         'stepChange': 'onStepChange',
         'click .step:not(".opaque")': 'onStepClick',
-        'imageChange': 'onImageChange',
         'categoryChange': 'onCategoryChange',
         'descriptionChange': 'onDescriptionChange',
         'contactChange': 'onContactChange',
         'change': 'onChange',
         'click #post:not(".opaque")': 'onSubmit',
-        'restart': 'onRestart'
+        'restart': 'onRestart',
+        'imagesLoadStart': 'onImagesLoadStart',
+        'imagesLoadEnd': 'onImagesLoadEnd'
     },
     onShow: function(event, error) {
         event.preventDefault();
@@ -59,18 +60,6 @@ module.exports = Base.extend({
         var $step = $(event.currentTarget);
 
         this.parentView.$el.trigger('flow', [this.id, $step.attr('id').split('-').pop()]);
-    },
-    onImageChange: function(event, image) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        if (image) {
-            this.$('#image').addClass('fill').css('background-image', 'url(' + image + ')');
-        }
-        else {
-            this.$('#image').removeClass('fill').removeAttr('style');
-        }
     },
     onCategoryChange: function(event, id, subId, error, subError) {
         event.preventDefault();
@@ -193,7 +182,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        if (this.$('.step.success').length === 3) {
+        if (this.$('.step.success').length === 3 && !this.$('#image').hasClass('pending')) {
             this.$('#post').removeClass('opaque');
         }
         else {
@@ -211,6 +200,27 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+    },
+    onImagesLoadStart: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#image').addClass('pending');
+        this.$el.trigger('change');
+    },
+    onImagesLoadEnd: function(event, image) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        if (image) {
+            this.$('#image').removeClass('pending').addClass('fill').css('background-image', 'url(' + image + ')');
+        }
+        else {
+            this.$('#image').removeClass('pending fill').removeAttr('style');
+        }
+        this.$el.trigger('change');
     }
 });
 
