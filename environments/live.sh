@@ -21,9 +21,9 @@ if [ "$LOCAL" == "" ]; then
 	exit 1;
 fi
 
-if [ ! -f /etc/hosts_bkp ]
+if [ ! -f /etc/hosts_bkp_arwen ]
 then
-	cp /etc/hosts /etc/hosts_bkp
+	cp /etc/hosts /etc/hosts_bkp_arwen
 fi
 
 cp empty /etc/hosts;
