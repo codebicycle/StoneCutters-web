@@ -9,9 +9,9 @@
 	        {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
 	    {% endif %}
 	{% endfor %}
-	<label>Ubicacion</label>
+	<label>{{ dictionary["homeheader.Selected_Region"] }}</label>
 	<div class="location">{{ location.name if location and location.name else 'Selecciona una ubicacion' }}</div>
 	<div class="btnCenter">
-	    <input type="submit" value="Continuar" class="btns orange">
+	    <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange">
 	</div>
 </form>
