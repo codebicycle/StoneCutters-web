@@ -34,12 +34,21 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
+    posting: {
+        flow: {
+            enabled: {
+                'www.olx.com.mx': true,
+                'www.olx.com.ar': true,
+                'www.olx.co.za': true
+            }
+        }
+    },
     infiniteScroll: false,
     interstitial: {
         enabled: true,
         clicks: 0,
         time: 432000000,
-        ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
+        ignorePath: ['/closed', '/login', '/interstitial', '/500', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
