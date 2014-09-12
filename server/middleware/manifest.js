@@ -8,6 +8,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (req.path !== '/manifest.webapp') {
                 return next();
             }
+            res.set('Content-Type', 'application/x-web-app-manifest+json');
             res.json(manifest);
         };
     };
