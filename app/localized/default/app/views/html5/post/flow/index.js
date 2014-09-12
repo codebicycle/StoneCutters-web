@@ -4,6 +4,7 @@ var Base = require('../../../../../../common/app/bases/view').requireView('post/
 var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
+var translations = require('../../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     form: {},
@@ -13,6 +14,7 @@ module.exports = Base.extend({
         this.form = {};
         this.errors = {};
         this.currentViewName = 'hub';
+        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);
@@ -70,7 +72,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
+        title = this.dictionary[title];
         this.$('header').trigger('change', [title, current, back || 'hub', data]);
     },
     onStepChange: function(event, before, after) {

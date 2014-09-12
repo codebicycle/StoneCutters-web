@@ -32,7 +32,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['Elige una categoria', this.id]);
+        this.parentView.$el.trigger('headerChange', ['misc.ChooseACategory_Mob', this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {

@@ -47,7 +47,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['Detalles de contacto', this.id]);
+        this.parentView.$el.trigger('headerChange', ['misc.ContactDetails_Mob', this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
