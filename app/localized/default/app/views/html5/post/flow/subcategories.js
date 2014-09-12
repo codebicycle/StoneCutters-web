@@ -32,7 +32,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['Elige una subcategoria', this.id, 'categories']);
+        this.parentView.$el.trigger('headerChange', ['misc.ChooseASubcategory_Mob', this.id, 'categories']);
         this.$el.removeClass('disabled');
         this.$('#category-' + category.id).trigger('show');
     },
