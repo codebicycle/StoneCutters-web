@@ -92,7 +92,6 @@ module.exports = Base.extend({
         var $title = this.$('input[name=title]').removeClass('error');
         var $description = this.$('textarea[name=description]').removeClass('error');
         var failed = false;
-        console.log(this.dictionary);
 
         this.$el.removeClass('error').find('small').remove();
         if ($title.val().length < 10) {
