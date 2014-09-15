@@ -63,11 +63,12 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 console.log('[OLX_DEBUG]', 'redirection', edgescape, 'from', req.protocol + '://' + req.get('host') + req.originalUrl, 'to', host + req.originalUrl);
                 statsd.increment([country.name, 'middleware', 'com', 'redirection']);
+                res.header('Cache-Control', 'no-cache, no-store');
                 res.redirect(host + req.originalUrl);
             }
 
             function error(err) {
-                console.log('[OLX_DEBUG]', 'com', err);
+                console.log('[OLX_DEBUG]', 'com', edgescape, err);
                 statsd.increment(['Unknown Location', 'middleware', 'com', 'error']);
                 next();
             }
