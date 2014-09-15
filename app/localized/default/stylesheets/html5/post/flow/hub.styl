@@ -1,3 +1,25 @@
+/*vendors = moz webkit o official
+
+@keyframes spinLoader {
+
+	from {
+
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+
+	}
+
+	to {
+
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+
+	}
+
+}*/
+
 .post_flow_hub_view {
 
 	counter-reset: index;
@@ -30,6 +52,42 @@
 				span {
 
 					display: none;
+
+				}
+
+			}
+
+			/*&:after {
+
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 46vw;
+				height: 46vw;
+				margin: -23vw 0 0 -23vw;
+				box-sizing: border-box;
+				border-style: solid;
+				border-width: 2vw;
+				border-color: rgba(163, 182, 6, 1) rgba(163, 182, 6, .5)  rgba(163, 182, 6, .5);
+				border-radius: 100%;
+
+				animation: spinLoader 1s ease-in-out infinite;
+				-webkit-animation: spinLoader 1s ease-in-out infinite;
+
+			}*/
+				
+			&.pending {
+
+				&:after {
+
+					content: 'Cargando imagenes';
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					background-color: rgba(255, 255, 255, .75);
 
 				}
 

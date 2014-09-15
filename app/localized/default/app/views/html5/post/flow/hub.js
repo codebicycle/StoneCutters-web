@@ -28,7 +28,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('headerChange', 'misc.CreateYourFreeAd_Mob');
-
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -100,6 +99,7 @@ module.exports = Base.extend({
         }
         else {
             $categorySummary.addClass('error').text(error);
+            $subcategorySummary.addClass('error').text(subError);
         }
         this.$el.trigger('change');
     },

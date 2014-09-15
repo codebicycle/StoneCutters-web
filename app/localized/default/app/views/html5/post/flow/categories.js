@@ -41,7 +41,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('categorySubmit', [this.selected, 'Debe seleccionar la categoria']);
+        this.parentView.$el.trigger('categorySubmit', [this.selected, 'Debe seleccionar la categoria', 'Debe seleccionar la subcategoria']);
     },
     onClickCategory: function(event) {
         event.preventDefault();
@@ -50,6 +50,9 @@ module.exports = Base.extend({
 
         var $category = $(event.currentTarget);
 
+        if (this.selected.id) {
+            this.parentView.$el.trigger('categoryReset');
+        }
         this.selected.id = $category.data('id');
         this.parentView.$el.trigger('flow', [this.id, 'subcategories', this.selected]);
     },

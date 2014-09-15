@@ -55,8 +55,8 @@ module.exports = Base.extend({
         'trackEventNext': 'onNext',
         'exit': 'onExit',
         'imagesLoadStart': 'onImagesLoadStart',
-        'imagesLoadEnd': 'onImagesLoadEnd'
-
+        'imagesLoadEnd': 'onImagesLoadEnd',
+        'categoryReset': 'onCategoryReset',
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();
@@ -82,7 +82,7 @@ module.exports = Base.extend({
 
         this.$('#hub').trigger('stepChange', [before, after]);
     },
-    onCategorySubmit: function(event, category, error) {
+    onCategorySubmit: function(event, category, error, subError) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -92,6 +92,7 @@ module.exports = Base.extend({
         }
         this.form['category.parentId'] = category.id;
         this.errors['category.parentId'] = error;
+        this.errors['category.id'] = subError;
         this.$('#hub').trigger('categoryChange', [this.form['category.parentId'], this.form['category.id'], this.errors['category.parentId'], this.errors['category.id']]);
     },
     onSubcategorySubmit: function(event, subcategory, error) {
@@ -301,5 +302,10 @@ module.exports = Base.extend({
             delete this.form.images;
         }
         this.$('#hub').trigger('imagesLoadEnd', [files.shift()]);
+    },
+    onCategoryReset: function(event) {
+        this.$el.trigger('stepChange', ['optionals', 'categories']);
+        this.$('#subcategories').trigger('restart');
+        this.$('#optionals').trigger('restart');
     }
 });

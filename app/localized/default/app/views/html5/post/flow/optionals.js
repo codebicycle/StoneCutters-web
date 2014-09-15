@@ -199,6 +199,7 @@ module.exports = Base.extend({
             values: {}
         };
         this.selected = {};
+        this.render();
     }
 });
 
