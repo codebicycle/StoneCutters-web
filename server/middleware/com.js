@@ -36,6 +36,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             else if (countryCode === 'US' || countryCode === 'us') {
                 return next();
             }
+            else if (countryCode === 'VN' || countryCode === 'vn') {
+                return next();
+            }
             asynquence().or(error)
                 .then(fetch)
                 .val(redirect);
