@@ -3,6 +3,7 @@
 module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var path = require('path');
+        var _ = require('underscore');
         var asynquence = require('asynquence');
         var statsd = require('../modules/statsd')();
         var errorPath = path.resolve('server/templates/error.html');
@@ -12,6 +13,10 @@ module.exports = function(dataAdapter, excludedUrls) {
         }
 
         return function middleware(req, res, next) {
+            if (_.contains(excludedUrls.all, req.path)) {
+                return next();
+            }
+
             var edgescape = req.get('x-akamai-edgescape');
             var countryCode;
 
@@ -24,7 +29,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                     countryCode = property[1];
                 }
             });
-
+            if (!countryCode) {
+                statsd.increment(['Unknown Location', 'middleware', 'com', 'miss']);
+                return next();
+            }
             asynquence().or(error)
                 .then(fetch)
                 .val(redirect);
@@ -40,6 +48,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (origin.length > 1) {
                     host += ':' + origin[1];
                 }
+                console.log('[OLX_DEBUG]', 'redirection', 'from', req.protocol + '://' + req.get('host') + req.originalUrl, 'to', host + req.originalUrl);
+                console.log('[OLX_DEBUG]', 'edgescape', edgescape);
+                statsd.increment([country.name, 'middleware', 'com', 'redirection']);
                 res.redirect(host + req.originalUrl);
             }
 
