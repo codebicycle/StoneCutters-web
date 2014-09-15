@@ -3,6 +3,7 @@
 var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
 var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
+var translations = require('../../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     className: 'post_flow_contact_view disabled',
@@ -18,6 +19,7 @@ module.exports = Base.extend({
         this.form = {
             values: {}
         };
+        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -47,7 +49,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['Detalles de contacto', this.id]);
+        this.parentView.$el.trigger('headerChange', ['misc.ContactDetails_Mob', this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -124,15 +126,15 @@ module.exports = Base.extend({
         this.$el.removeClass('error').find('small').remove();
         if (!$contactName.val().length) {
             failed = true;
-            $contactName.addClass('error').after('<small class="error">Ingresa tu nombre para que los compradores sepan quien sos</small>');
+            $contactName.addClass('error').after('<small class="error">' + this.dictionary['misc.EnterNameForBuyers_Mob'] + '</small>');
         }
         if (!rEmail.test($email.val())) {
             failed = true;
-            $email.addClass('error').after('<small class="error">Ingresa un email válido</small>');
+            $email.addClass('error').after('<small class="error">' + this.dictionary['postingerror.InvalidEmail'] + '</small>');
         }
         if (!this.city) {
             failed = true;
-            $location.addClass('error').after('<small class="error">Tu aviso debe estar localizado en una ciudad</small>');
+            $location.addClass('error').after('<small class="error">' + this.dictionary['misc.AdNeedsLocation_Mob'] + '</small>');
         }
         if (failed) {
             this.$el.addClass('error');

@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var translations = require('../../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     className: 'post_flow_description_view disabled',
@@ -17,6 +18,7 @@ module.exports = Base.extend({
         this.form = {
             values: {}
         };
+        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -39,7 +41,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['Describe tu aviso', this.id]);
+        this.parentView.$el.trigger('headerChange', ['misc.DescribeYourAd_Mob', this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -95,12 +97,12 @@ module.exports = Base.extend({
         if ($title.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
-            $title.addClass('error').after('<small class="error">El titulo debe tener al menos 10 caracteres</small>');
+            $title.addClass('error').after('<small class="error">' + this.dictionary['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
         }
         if ($description.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
-            $description.addClass('error').after('<small class="error">La descripcion debe tener al menos 10 caracteres</small>');
+            $description.addClass('error').after('<small class="error">' + this.dictionary['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
         }
         return !failed;
     },

@@ -27,7 +27,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', 'Crea tu anuncio gratis');
+        this.parentView.$el.trigger('headerChange', 'misc.CreateYourFreeAd_Mob');
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {

@@ -41,7 +41,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['Elige una ciudad', this.id, 'contact']);
+        this.parentView.$el.trigger('headerChange', ['countryoptions.Home_SelectCity', this.id, 'contact']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
