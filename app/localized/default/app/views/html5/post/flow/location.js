@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'post_flow_location_view list cities-links disabled',
+    className: 'post_flow_location_view cities-links disabled',
     id: 'location',
     tagName: 'section',
     selected: {},
