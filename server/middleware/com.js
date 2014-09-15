@@ -49,6 +49,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     host += ':' + origin[1];
                 }
                 console.log('[OLX_DEBUG]', 'redirection', 'from', req.protocol + '://' + req.get('host') + req.originalUrl, 'to', host + req.originalUrl);
+                console.log('[OLX_DEBUG]', 'edgescape', edgescape);
                 statsd.increment([country.name, 'middleware', 'com', 'redirection']);
                 res.redirect(host + req.originalUrl);
             }
