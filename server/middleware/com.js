@@ -2,11 +2,10 @@
 
 module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
-        var path = require('path');
         var _ = require('underscore');
         var asynquence = require('asynquence');
         var statsd = require('../modules/statsd')();
-        var errorPath = path.resolve('server/templates/error.html');
+        var comCountries = ['tn', 'TN', 'us', 'US', 'nl', 'NL', 'vn', 'VN', 'mc', 'MC', 'dz', 'DZ'];
 
         function endsWith(str, suffix) {
             return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -33,11 +32,19 @@ module.exports = function(dataAdapter, excludedUrls) {
                 statsd.increment(['Unknown Location', 'middleware', 'com', 'miss']);
                 return next();
             }
-            else if (countryCode === 'US' || countryCode === 'us') {
+            else if (_.contains(comCountries, countryCode)) {
                 return next();
             }
-            else if (countryCode === 'VN' || countryCode === 'vn') {
-                return next();
+            else if (countryCode === 'TH' || countryCode === 'th') {
+                return (function thailand() {
+                    var origin = req.get('host').split(':');
+                    var host = req.protocol + '://www.olx.co.th';
+
+                    if (origin.length > 1) {
+                        host += ':' + origin[1];
+                    }
+                    res.redirect(host + req.originalUrl);
+                })();
             }
             asynquence().or(error)
                 .then(fetch)
@@ -60,8 +67,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function error(err) {
+                console.log('[OLX_DEBUG]', 'com', err);
                 statsd.increment(['Unknown Location', 'middleware', 'com', 'error']);
-                res.status(500).sendfile(errorPath);
+                next();
             }
         };
     };
