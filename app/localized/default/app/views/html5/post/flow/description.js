@@ -18,7 +18,6 @@ module.exports = Base.extend({
         this.form = {
             values: {}
         };
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -41,7 +40,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['misc.DescribeYourAd_Mob', this.id]);
+        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['misc.DescribeYourAd_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -56,7 +55,7 @@ module.exports = Base.extend({
 
             field.value = $field.val();
             if ($field.hasClass('error')) {
-                errors[field.name] = field.label;
+                errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
             }
         }.bind(this));
         this.$el.addClass('disabled');
@@ -97,12 +96,12 @@ module.exports = Base.extend({
         if ($title.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
-            $title.addClass('error').after('<small class="error">' + this.dictionary['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
+            $title.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
         }
         if ($description.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
-            $description.addClass('error').after('<small class="error">' + this.dictionary['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
+            $description.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
         }
         return !failed;
     },

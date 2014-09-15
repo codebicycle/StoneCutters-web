@@ -32,7 +32,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['misc.ChooseASubcategory_Mob', this.id, 'categories']);
+        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['misc.ChooseASubcategory_Mob'], this.id, 'categories']);
         this.$el.removeClass('disabled');
         this.$('#category-' + category.id).trigger('show');
     },
@@ -57,7 +57,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('subcategorySubmit', [subcategory, error]);
+        this.parentView.$el.trigger('subcategorySubmit', [subcategory, this.parentView.dictionary[error]]);
     },
     onRestart: function(event) {
         event.preventDefault();

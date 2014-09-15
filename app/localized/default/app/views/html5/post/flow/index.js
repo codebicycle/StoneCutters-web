@@ -72,7 +72,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        title = this.dictionary[title];
+        
         this.$('header').trigger('change', [title, current, back || 'hub', data]);
     },
     onStepChange: function(event, before, after) {

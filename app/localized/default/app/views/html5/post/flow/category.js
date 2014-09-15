@@ -39,7 +39,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('subcategorySubmit', [subcategory, 'Debe seleccionar la subcategoria']);
+        this.parentView.$el.trigger('subcategorySubmit', [subcategory, 'postingerror.PleaseSelectSubcategory']);
     },
     onClickSubcategory: function(event) {
         event.preventDefault();

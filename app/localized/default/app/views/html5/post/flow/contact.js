@@ -19,7 +19,6 @@ module.exports = Base.extend({
         this.form = {
             values: {}
         };
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -49,7 +48,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['misc.ContactDetails_Mob', this.id]);
+        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['misc.ContactDetails_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -58,17 +57,16 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var errors = {};
-
         this.fields.forEach(function each(field) {
             var $field = this.$('[name=' + field.name + ']');
 
             field.value = $field.val();
             if (field.name == 'email' && $field.hasClass('error')) {
-                errors[field.name] = field.label;
+                errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
             }
         }.bind(this));
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('contactSubmit', [this.fields, this.city || {}, errors, 'Ubicacion']);
+        this.parentView.$el.trigger('contactSubmit', [this.fields, this.city || {}, errors, this.parentView.dictionary['postingerror.InvalidLocation']]);
     },
     onFieldsChange: function(event, fields) {
         event.preventDefault();
@@ -126,15 +124,15 @@ module.exports = Base.extend({
         this.$el.removeClass('error').find('small').remove();
         if (!$contactName.val().length) {
             failed = true;
-            $contactName.addClass('error').after('<small class="error">' + this.dictionary['misc.EnterNameForBuyers_Mob'] + '</small>');
+            $contactName.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.EnterNameForBuyers_Mob'] + '</small>');
         }
         if (!rEmail.test($email.val())) {
             failed = true;
-            $email.addClass('error').after('<small class="error">' + this.dictionary['postingerror.InvalidEmail'] + '</small>');
+            $email.addClass('error').after('<small class="error">' + this.parentView.dictionary['postingerror.InvalidEmail'] + '</small>');
         }
         if (!this.city) {
             failed = true;
-            $location.addClass('error').after('<small class="error">' + this.dictionary['misc.AdNeedsLocation_Mob'] + '</small>');
+            $location.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.AdNeedsLocation_Mob'] + '</small>');
         }
         if (failed) {
             this.$el.addClass('error');

@@ -32,7 +32,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['misc.ChooseACategory_Mob', this.id]);
+        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['misc.ChooseACategory_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -41,7 +41,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('categorySubmit', [this.selected, 'Debe seleccionar la categoria', 'Debe seleccionar la subcategoria']);
+        this.parentView.$el.trigger('categorySubmit', [this.selected, this.parentView.dictionary['postingerror.PleaseSelectCategory'], this.parentView.dictionary['postingerror.PleaseSelectSubcategory']]);
     },
     onClickCategory: function(event) {
         event.preventDefault();
