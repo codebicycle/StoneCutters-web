@@ -121,10 +121,10 @@
 	}
 
 	li {
-
 		position: relative;
-		padding: 1em;
 		overflow: hidden;
+		padding: 1rem;
+		cursor: pointer;
 
 		&:not(:first-child) {
 
@@ -133,35 +133,33 @@
 		}
 
 		&:before {
-
-			content: counter(index, decimal);
-    		counter-increment: index;
-    		position: absolute;
-    		right: -.05em;
-    		top: 0;
-    		display: block;
-    		color: #999;
-    		font-size: 8em;
-    		font-weight: bold;
-    		line-height: 0.66em;
-    		text-align: center;
-    		opacity: .25;
-    
+			width: 1.6rem;
+			height: 1.6rem;
+			display: block;
+			position: absolute;
+			top: 1.5rem;
+		    right: 1rem;
+			background-color: #555;
+		    border-radius: 100%;
+		    color: #fff;
+		    content: counter(index, decimal);
+		    counter-increment: index;
+		    font-size: 1rem;
+		    line-height: 1.6rem;
+		    text-align: center;
 		}
 
 		h3 {
-
 			position: relative;
+			padding: 0;
 			z-index: 1;
 			overflow: hidden;
-			padding: 0;
 			font-weight: normal;
 			font-size: 1em;
 			line-height: 3em;
 			color: #333;
 			white-space: nowrap;
 			text-overflow: ellipsis;
-
 		}
 
 		.stepSummary {
@@ -229,7 +227,8 @@
 
 			&:before {
 
-				color: #C00;
+				background-color: #d38811;
+    			content: "!";
 
 			}
 
@@ -251,7 +250,7 @@
 
 			&:before {
 
-				color: #A3B606;
+				background: #a7b52c;
 
 			}
 
@@ -273,12 +272,11 @@
 
 	footer {
 
-		padding: 1em;
+		padding: 1rem;
 		background-color: #F60;
 		color: #FFF;
 		text-transform: uppercase;
 		text-align: center;
-		line-height: 3em;
 
 	}
 

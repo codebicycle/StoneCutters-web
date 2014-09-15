@@ -1,20 +1,30 @@
 <form>
-    <h3>{% if firstRender %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% else %}{{ dictionary["defaultheader.Cities"] }}{% endif %}</h3>
-    <ul>
-        {% for city in cities %}
-            <li class="city" data-url="{{ city.url }}"><a>{{ city.name }}</a></li>
-        {% endfor %}
-    </ul>
-    <br/>
-    {% if states and states.length %}
-        <h3>{{ dictionary["misc.States"] }}</h3>
-        <ul>
-            {% for state in states %}
-                <li class="state" data-url="{{ state.url }}"><a>{{ state.name }}</a></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <div class="btnCenter">
-        <input type="submit" value="Cancelar" class="btns orange">
+    <div class="popup">
+        <div class="popup-wrapper">
+            <div class="popup-container">
+                <div>
+                    <div class="popup-title">{% if firstRender %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% else %}{{ dictionary["defaultheader.Cities"] }}{% endif %}</div>
+                    <ul>
+                        {% for city in cities %}
+                            <li class="city" data-url="{{ city.url }}"><a>{{ city.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                
+                    {% if states and states.length %}
+                        <div class="popup-title">{{ dictionary["misc.States"] }}</div>
+                        <div>
+                            <ul>
+                                {% for state in states %}
+                                    <li class="state" data-url="{{ state.url }}"><a>{{ state.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                <footer>
+                    <input type="submit" value="Cancelar" class="btns grey">
+                </footer>
+            </div>
+        </div>
     </div>
 </form>
