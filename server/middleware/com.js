@@ -33,6 +33,12 @@ module.exports = function(dataAdapter, excludedUrls) {
                 statsd.increment(['Unknown Location', 'middleware', 'com', 'miss']);
                 return next();
             }
+            else if (countryCode === 'US' || countryCode === 'us') {
+                return next();
+            }
+            else if (countryCode === 'VN' || countryCode === 'vn') {
+                return next();
+            }
             asynquence().or(error)
                 .then(fetch)
                 .val(redirect);
