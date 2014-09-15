@@ -41,7 +41,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['countryoptions.Home_SelectCity', this.id, 'contact']);
+        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['countryoptions.Home_SelectCity'], this.id, 'contact']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -51,7 +51,7 @@ module.exports = Base.extend({
 
         this.firstRender = true;
         this.render();
-        this.parentView.$el.trigger('locationSubmit', [this.selected, 'Tu aviso debe estar localizado en una ciudad']);
+        this.parentView.$el.trigger('locationSubmit', [this.selected, this.parentView.dictionary['postingerror.InvalidLocation']]);
     },
     onClickCity: function(event) {
         event.preventDefault();

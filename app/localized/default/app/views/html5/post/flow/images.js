@@ -31,7 +31,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', ['item.AddPhotos', this.id]);
+        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['item.AddPhotos'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {

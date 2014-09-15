@@ -27,7 +27,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', 'misc.CreateYourFreeAd_Mob');
+        this.parentView.$el.trigger('headerChange', this.parentView.dictionary['misc.CreateYourFreeAd_Mob']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -117,7 +117,7 @@ module.exports = Base.extend({
             if (field.name === 'title') {
                 if (errors[field.name] || !field.value) {
                     failed = true;
-                    $titleSummary.addClass('error').text(errors[field.name] || field.label);
+                    $titleSummary.addClass('error').text(errors[field.name] || field.label); // Check for translation since we are just passing the field label as error
                 }
                 else {
                     $titleSummary.addClass('success').text(field.value);
@@ -126,7 +126,7 @@ module.exports = Base.extend({
             else if (field.name === 'description') {
                 if (errors[field.name] || !field.value) {
                     failed = true;
-                    $descriptionSummary.addClass('error').text(errors[field.name] || field.label);
+                    $descriptionSummary.addClass('error').text(errors[field.name] || field.label); // Check for translation since we are just passing the field label as error
                 }
                 else {
                     $descriptionSummary.addClass('success').text(field.value);
@@ -155,7 +155,7 @@ module.exports = Base.extend({
             if (field.name === 'email') {
                 if (errors[field.name] || !field.value) {
                     failed = true;
-                    $emailSummary.addClass('error').text(errors[field.name] || field.label);
+                    $emailSummary.addClass('error').text(errors[field.name] || field.label); // Check for translation since we are just passing the field label as error
                 }
                 else {
                     $emailSummary.addClass('success').text(field.value);
