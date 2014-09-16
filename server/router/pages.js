@@ -6,6 +6,7 @@ module.exports = function pagesRouter(app, dataAdapter) {
     var configClient = require('../../shared/config');
     var Session = require('../../shared/session');
     var utils = require('../../shared/utils');
+    var statsd  = require('../modules/statsd')();
     var http = require('http');
     var https = require('https');
     var json2html = require('node-json2html');
@@ -18,6 +19,7 @@ module.exports = function pagesRouter(app, dataAdapter) {
         app.get('/health', handler);
 
         function handler(req, res) {
+            statsd.increment(['health']);
             res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
             res.json({
                 online: true,
