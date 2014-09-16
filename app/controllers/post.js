@@ -142,7 +142,8 @@ function subcategories(params, callback) {
 
     function controller() {
         var siteLocation = this.app.session.get('siteLocation');
-        var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], false);
+        var location = this.app.session.get('location');
+        var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', location.url], false);
 
         var prepare = function(done) {
             var redirect;
@@ -210,7 +211,8 @@ function form(params, callback) {
 
     function controller(form) {
         var siteLocation = this.app.session.get('siteLocation');
-        var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', siteLocation], false);
+        var location = this.app.session.get('location');
+        var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', location.url], false);
         var language;
         var languages;
         var languageId;

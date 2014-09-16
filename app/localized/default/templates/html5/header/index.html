@@ -9,7 +9,9 @@
             <li class="logIn"><span class="btns blue" data-qa="my-olx" ></span></li>
         {% endif %}
         <li class="postBtn{% if not postButton %} disabled{% endif %}">
-            {% if location.current or postingFlowEnabled %}
+            {% if postingFlowEnabled %}
+                <a href="{{ '/posting' | link }}" class="btns orange trackMe" data-qa="post-button">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% elif location.current %}
                 <a href="{{ ['/posting', postLink] | join('') | link }}" class="btns orange posting-link trackMe" data-qa="post-button">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% else %}
                 <a href="{{ '/location?target=posting' | link }}" class="btns orange posting-link trackMe" data-tracking="Posting-ClickSelectLocation" data-qa="post-button" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
