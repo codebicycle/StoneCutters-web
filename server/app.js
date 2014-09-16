@@ -1,12 +1,13 @@
 'use strict';
 
 module.exports = function appUseConf(done) {
-    var config = require('./config');
     var express = require('express');
     var rendr = require('rendr');
+    var config = require('./config');
+    var environment = config.get('environment', 'development');
     var DataAdapter = require('../shared/adapters/data');
     var dataAdapter = new DataAdapter({
-        userAgent: 'Arwen/' + config.get('environment', 'development') + ' (node.js ' + process.version + ')'
+        userAgent: 'Arwen/' + environment + ' (node.js ' + process.version + ')'
     });
     var middleware = require('./middleware')(dataAdapter);
     var server = rendr.createServer({
@@ -25,13 +26,16 @@ module.exports = function appUseConf(done) {
 
     function expressConfiguration() {
         server.expressApp.disable('x-powered-by');
-        server.expressApp.use(express.compress());
+        if (environment !== 'development') {
+            server.expressApp.use(express.compress());
+        }
         server.expressApp.use(express.static(__dirname + '/../public'));
         server.expressApp.use(express.cookieParser());
     }
 
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.manifest());
+        rendrApp.use(middleware.com());
         rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
         rendrApp.use(middleware.environment());
