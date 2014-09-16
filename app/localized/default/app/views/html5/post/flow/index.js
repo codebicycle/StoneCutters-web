@@ -56,7 +56,7 @@ module.exports = Base.extend({
         'exit': 'onExit',
         'imagesLoadStart': 'onImagesLoadStart',
         'imagesLoadEnd': 'onImagesLoadEnd',
-        'categoryReset': 'onCategoryReset',
+        'categoryReset': 'onCategoryReset'
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();

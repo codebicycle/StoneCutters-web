@@ -88,7 +88,7 @@ module.exports = Base.extend({
             var category;
             var action;
 
-            if (data && !$this.hasClass('disabled')) {
+            if (data && !$this.hasClass('disabled') && !$this.hasClass('opaque')) {
                 data = data.split('-');
 
                 if (data.length === 2) {
