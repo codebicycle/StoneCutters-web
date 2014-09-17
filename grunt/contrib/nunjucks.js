@@ -25,7 +25,6 @@ module.exports = function(grunt) {
         return filename.replace('app/templates/', '');
     }
 
-    rendrNunjucks.init();
     rendrNunjucks.registerExtensions(require('../../app/modules/nunjucks').extensions);
     nunjucks.options.env = rendrNunjucks.nunjucks;
 
