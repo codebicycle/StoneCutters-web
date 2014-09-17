@@ -46,6 +46,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                     res.redirect(host + req.originalUrl);
                 })();
             }
+            else if (countryCode === 'VE' || countryCode === 've') {
+                countryCode = 'VZ';
+            }
+
             asynquence().or(error)
                 .then(fetch)
                 .val(redirect);

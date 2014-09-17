@@ -2,11 +2,11 @@
     <a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a>
     <ul class="header-links">
         {% if not user %}
-            <li class="logOut"><a href="{{ '/login' | link }}" class="btns blue header-link" data-qa="my-olx" ></a></li>
+            <li class="logOut"><a href="{{ '/login' | link }}" class="btns blue header-link" data-qa="my-olx-loggedOut" ></a></li>
         {% elif user.unreadMessagesCount > 0 %}
-            <li class="logInMsg"><span class="btns blue" data-qa="my-olx" ></span></li>
+            <li class="logInMsg"><span class="btns blue" data-qa="my-olx-loggedIn" ></span></li>
         {% else %}
-            <li class="logIn"><span class="btns blue" data-qa="my-olx" ></span></li>
+            <li class="logIn"><span class="btns blue" data-qa="my-olx-loggedIn" ></span></li>
         {% endif %}
         <li class="postBtn{% if not postButton %} disabled{% endif %}">
             {% if postingFlowEnabled %}
