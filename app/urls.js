@@ -1,9 +1,6 @@
 'use strict';
 
 module.exports = {
-    'pages#esi': {
-        url: 'esi'
-    },
     'redirections#category': {
         url: 'category/:categoryId/:title'
     },
@@ -157,7 +154,7 @@ module.exports = {
     'post#subcategories': {
         url: 'posting/:categoryId'
     },
-    'post#categories': {
+    'post#categoriesOrFlow': {
         url :'posting'
     },
     'post#edit': {
@@ -317,6 +314,6 @@ module.exports = {
         }
     },
     'pages#error': {
-        url: /^\/(?!((health$)|(force($|\/))|(stats($|\/))|(analytics($|\/)))).*/
+        url: /^\/(?!((health$)|(force($|\/))|(esi($|\/))|(stats($|\/))|(analytics($|\/)))).*/
     }
 };

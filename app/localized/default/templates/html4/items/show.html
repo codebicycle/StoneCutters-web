@@ -2,7 +2,6 @@
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
 <div id="itemPage" data-qa="item">
-
     <h1>{{ item.title }}</h1>
     {% if item.isFavorite %}
         <form action="{{ ['/items/', item.id, '/favorite/delete'] | join('') | link }}" >

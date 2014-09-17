@@ -49,6 +49,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             else if (countryCode === 'VE' || countryCode === 've') {
                 countryCode = 'VZ';
             }
+
             asynquence().or(error)
                 .then(fetch)
                 .val(redirect);
