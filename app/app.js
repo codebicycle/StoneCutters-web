@@ -12,7 +12,6 @@ module.exports = Base.extend({
         Session.call(this, true, {
             isServer: typeof window === 'undefined'
         });
-        this.templateAdapter.init();
         this.templateAdapter.registerHelpers(nunjucks.helpers);
         this.templateAdapter.registerExtensions(nunjucks.extensions);
     },
