@@ -27,6 +27,10 @@ module.exports = function() {
         require('newrelic');
     }
 
+    if (config.get(['memwatch', 'enabled'], false)) {
+        require('./modules/memwatch');
+    }
+
     if (config.get(['cluster', 'enabled'], false)) {
         app.then(require('./modules/cluster'));
     }

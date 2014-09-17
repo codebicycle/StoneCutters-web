@@ -34,6 +34,9 @@ cluster:
 newrelic:
   enabled: false
 
+memwatch:
+  enabled: true
+
 graphite:
   enabled: false
 
