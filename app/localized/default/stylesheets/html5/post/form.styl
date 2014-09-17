@@ -1,6 +1,7 @@
 section#posting {
 	padding: 0.9375rem;
 }
+
 .changeCat {
 	overflow: hidden;
 	padding: .5rem 1rem;
@@ -10,117 +11,21 @@ section#posting {
 	color: #333;
 	font-size: 1rem;
 }
+
 .changeCat a {
 	color: #4275BA;
 	font-weight: normal;
 	text-decoration: none;
 }
+
 section#posting > form > h4 {
 	border-top: 1px solid #CCCCCC;
 }
-section#posting > form .fileUpload , section#posting > form .normalUpload {
-	width: 100%;
-	height: auto;
-	display: inline-block;
-	margin: .5rem;
-}
-section#posting > form .fileUpload input[type="file"] {
-	width: 0;
-	height: 0;
-	display: block;
-	visibility: hidden;
-	z-index: -100;
-}
-section#posting > form .normalUpload input[type="file"] {
-    border: none;
-    margin: .5rem 0 0 0;
-}
-section#posting > form .fileUpload .image {
-	position: relative;
-    width: 100% !important;
-    z-index: 10;
-	float: left;
-	position: relative;
-	background-color: #ddd;
-	background-image: url(imageUrl/images/html5/cameraSmall.png);
-	background-size: 75% auto;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-section#posting > form .fileUpload .image:before {
-    content: "";
-    display: block;
-    padding-top: 100% !important;
+
+form.error input.error, form.error textarea.error {
+    border-color: red;
 }
 
-section#posting > form .imgCont{
-    width: 20% !important;
-    float: left;
-    position: relative;
-    margin: 0 .625rem 0 0;
-}
-
-section#posting > form .fileUpload span {
-    -moz-box-sizing: border-box;
-    animation: 250ms ease-in-out 0s normal none 1 popCloseButton;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 2px solid #FFFFFF;
-    border-radius: 100%;
-    color: #FFFFFF;
-    display: none;
-    height: 35%;
-    position: absolute;
-    right: 5%;
-    top: 5%;
-    width: 35%;
-    cursor: pointer;
-    z-index: 10;
-}
-section#posting > form .fileUpload .imgCont.fill span {
-	display: block;
-}
-section#posting > form .fileUpload .imgCont.fill .image {
-    background-size: cover;
-}
-section#posting > form .fileUpload .imgCont.empty .image {
-    background-image: url(imageUrl/images/html5/cameraSmall.png)!important;
-    background-size: 75% auto;
-    transform: rotate(0);
-    -webkit-transform: rotate(0);
-    -moz-transform: rotate(0);
-    -ms-transform: rotate(0);
-}
-
-section#posting > form .fileUpload span:after {
-    border: 1px solid #FFFFFF;
-    content: "";
-    height: 0;
-    left: 15%;
-    margin: -1px 0 0 -1px;
-    position: absolute;
-    top: 50%;
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    width: 70%;
-}
-
-section#posting > form .fileUpload  span:before {
-    border: 1px solid #FFFFFF;
-    content: "";
-    height: 0;
-    left: 15%;
-    margin: -1px 0 0 -1px;
-    position: absolute;
-    top: 50%;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    width: 70%;
-}
-
-section#posting > form .btnCenter input {
-	width: 100%;
+form.error small.error {
+    color: red;
 }

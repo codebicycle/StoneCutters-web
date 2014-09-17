@@ -1,4 +1,4 @@
-<header id="topBar">
+<header id="topBar"{{ ' class="disabled"' if postingFlow }}>
     <a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a>
     <ul class="header-links">
         {% if not user %}
@@ -9,8 +9,10 @@
             <li class="logIn"><span class="btns blue" data-qa="my-olx-loggedIn" ></span></li>
         {% endif %}
         <li class="postBtn{% if not postButton %} disabled{% endif %}">
-            {% if location.current %}
-                <a href="{{ ['/posting', postLink] | join('') | link }}" class="btns orange posting-link trackMe" data-qa="post-button" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% if postingFlowEnabled %}
+                <a href="{{ '/posting' | link }}" class="btns orange trackMe" data-qa="post-button">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% elif location.current %}
+                <a href="{{ ['/posting', postLink] | join('') | link }}" class="btns orange posting-link trackMe" data-qa="post-button">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% else %}
                 <a href="{{ '/location?target=posting' | link }}" class="btns orange posting-link trackMe" data-tracking="Posting-ClickSelectLocation" data-qa="post-button" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% endif %}
@@ -18,7 +20,7 @@
     </ul>
 </header>
 {% if user %}
-<menu id="myOlx">
+    <menu id="myOlx"{{ ' class="disabled"' if postingFlow }}>
         <ul class="header-links" >
             <li><a href="{{ '/myolx/myadslisting' | link }}" class="header-link" data-qa="my-ads-link" >{{ dictionary["myolx.MyAds"] }}</a></li>
             <li><a href="{{ '/myolx/favoritelisting' | link }}" class="header-link" data-qa="my-favorites-link" >{{ dictionary["myolx.MyFavorites"] }}</a></li>

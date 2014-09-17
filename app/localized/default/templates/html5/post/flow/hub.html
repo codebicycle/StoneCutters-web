@@ -1,0 +1,46 @@
+<header>
+    <div id="image"><span>{{dictionary["misc.AddPhotos_Mob"] }}</span></div>
+    <p><small>&#9733; {{ dictionary["misc.AddPhotosSellFaster_Mob"] }}</small></p>
+</header>
+<ul id="steps">
+    <li id="step-categories" class="step trackMe" data-tracking="Posting-ClickCategoryList">
+        <h3 class="title">{{ dictionary["misc.ChooseACategory_Mob"] }}</h3>
+        <div class="stepSummary">
+            <div>
+                <small>{{ dictionary["posting_selectcategory.categories"] }}</small>
+                <span id="categorySummary"></span>
+            </div>
+            <div>
+                <small>{{ dictionary["posting_selectcategory.subCategories"] }}</small>
+                <span id="subcategorySummary"></span>
+            </div>
+        </div>
+    </li>
+    <li id="step-description" class="step opaque trackMe" data-tracking="Posting-ClickDescribeAd">
+        <h3 class="title">{{ dictionary["misc.DescribeYourAd_Mob"] }}</h3>
+        <div class="stepSummary">
+            <div>
+                <small>{{ dictionary["misc.Title_Mob"] }}</small>
+                <span id="titleSummary"></span>
+            </div>
+            <div>
+                <small>{{ dictionary["misc.Description_Mob"] }}</small>
+                <span id="descriptionSummary"></span>
+            </div>
+        </div>
+    </li>
+    <li id="step-contact" class="step opaque trackMe" data-tracking="Posting-ClickContactInfo">
+        <h3 class="title">{{ dictionary["misc.ContactInformation_Mob"] }}</h3>
+        <div class="stepSummary">
+            <div>
+                <small>{{ dictionary["misc.Email_Mob"] }}</small>
+                <span id="emailSummary"></span>
+            </div>
+            <div>
+                <small>{{ dictionary["homeheader.Selected_Region"] }}</small>
+                <span id="locationSummary"></span>
+            </div>
+        </div>
+    </li>
+</ul>
+<footer id="post" class="opaque trackMe" data-tracking="Posting-ClickPostButton">{{ dictionary["misc.PostYourFreeAdCaps_Mob"] }}</footer>
