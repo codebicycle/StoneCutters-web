@@ -83,6 +83,7 @@ module.exports = Base.extend({
 
         var $field = $(event.target);
 
+        $field.val(this.cleanValue($field.val()));
         this.form.values[$field.attr('name')] = $field.val();
     },
     onLocationClick: function(event) {
@@ -148,6 +149,14 @@ module.exports = Base.extend({
         this.form = {
             values: {}
         };
+    },
+    cleanValue: function(value) {
+        value = value.replace(/\s{2,}/g, ' ');
+        value.trim();
+        if (value === value.toUpperCase()) {
+            value.toLowerCase();
+        }
+        return value;
     }
 });
 
