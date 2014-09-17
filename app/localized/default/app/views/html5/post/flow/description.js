@@ -33,7 +33,8 @@ module.exports = Base.extend({
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
         'submit': 'onSubmit',
-        'restart': 'onRestart'
+        'restart': 'onRestart',
+        'priceTypeChange': 'onPriceTypeChange'
     },
     onShow: function(event, categoryId) {
         event.preventDefault();
@@ -90,6 +91,8 @@ module.exports = Base.extend({
     validate: function() {
         var $title = this.$('input[name=title]').removeClass('error');
         var $description = this.$('textarea[name=description]').removeClass('error');
+        var $priceType = this.$('select[name=priceType]');
+        var $priceC = this.$('input[name=priceC]').removeClass('error');
         var failed = false;
 
         this.$el.removeClass('error').find('small').remove();
@@ -102,6 +105,11 @@ module.exports = Base.extend({
             failed = true;
             this.$el.addClass('error');
             $description.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
+        }
+        if ($priceType.val() === 'FIXED' && $priceC.val() < 1) {
+            failed = true;
+            this.$el.addClass('error');
+            $priceC.addClass('error').after('<small class="error">' + this.parentView.dictionary["postingerror.PleaseEnterANumericalValue"] + '</small>');
         }
         return !failed;
     },

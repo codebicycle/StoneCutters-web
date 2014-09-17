@@ -57,7 +57,8 @@ module.exports = Base.extend({
         'exit': 'onExit',
         'imagesLoadStart': 'onImagesLoadStart',
         'imagesLoadEnd': 'onImagesLoadEnd',
-        'categoryReset': 'onCategoryReset'
+        'categoryReset': 'onCategoryReset',
+        'errors': 'onErrors'
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();
@@ -176,7 +177,7 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
-            console.log('validate', this.form);
+            console.log('validate', this.form); // Remove log
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -185,7 +186,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var post = function(done, response) {
-            console.log('create', this.form);
+            console.log('create', this.form); // Remove log
             query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -196,8 +197,17 @@ module.exports = Base.extend({
         }.bind(this);
 
         var fail = function(err) {
+            // TODO: Improve error handling
             always();
-            console.log(err); // TODO: HANDLE ERRORS
+            console.log('error', err); // Remove log
+            if (err) {
+                if (err.responseText) {
+                    err = JSON.parse(err.responseText);
+                }
+                if (_.isArray(err)) {
+                    this.$el.trigger('errors', [err]);
+                }
+            }
         }.bind(this);
 
         var success = function(item) {
@@ -225,8 +235,8 @@ module.exports = Base.extend({
         this.form.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
         this.form.platform = this.app.session.get('platform');
         this.form.ipAddress = this.app.session.get('ip');
-        if (this.form.images) {
-            this.form.images = this.form.images.join(',');
+        if (this.form._images) {
+            this.form.images = this.form._images.join(',');
         }
         asynquence().or(fail)
             .then(validate)
@@ -297,9 +307,10 @@ module.exports = Base.extend({
             files.push(images[image].file);
         });
         if (ids.length) {
-            this.form.images = ids;
+            this.form._images = ids;
         }
         else {
+            delete this.form._images;
             delete this.form.images;
         }
         this.$('#hub').trigger('imagesLoadEnd', [files.shift()]);
@@ -308,5 +319,12 @@ module.exports = Base.extend({
         this.$el.trigger('stepChange', ['optionals', 'categories']);
         this.$('#subcategories').trigger('restart');
         this.$('#optionals').trigger('restart');
+    },
+    onErrors: function(event, errors) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#errors').trigger('show', [errors]);
     }
 });

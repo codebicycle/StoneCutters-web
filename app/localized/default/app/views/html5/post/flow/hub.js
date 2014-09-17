@@ -132,6 +132,11 @@ module.exports = Base.extend({
                     $descriptionSummary.addClass('success').text(field.value);
                 }
             }
+            else if (field.name === 'priceC') {
+                if (errors[field.name]) {
+                    failed = true;
+                }
+            }
         });
         if (failed) {
             $step.addClass('error');
