@@ -33,7 +33,7 @@
     "js-yaml": "3.0.2",
     "express": "3.4.8",
     "rendr": "git://github.com/rendrjs/rendr#6497522d78",
-    "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks",
+    "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks#develop",
     "underscore": "1.6.0",
     "debug": "0.7.4",
     "newrelic": "1.5.1",
