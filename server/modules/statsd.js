@@ -15,12 +15,12 @@ var client;
 var Client = function(options) {
     var statsD = new StatsD(config.client);
 
-    function increment(metric) {
+    function increment(metric, value) {
         if (Array.isArray(metric)) {
             metric = metric.join('.');
         }
         logger.log('Incrementing metric: '+ metric);
-        statsD.increment(metric);
+        statsD.increment(metric, value);
     }
 
     return {
@@ -42,4 +42,3 @@ module.exports = function() {
     }
     return client;
 };
-
