@@ -73,10 +73,7 @@ module.exports = Base.extend({
         var $input = $(event.target);
         var $container = this.$('[data-input=' + $input.attr('id') + ']');
         var $image = $container.children('.image');
-
-        window.URL = window.URL || window.webkitURL;
         var imageUrl = window.URL.createObjectURL(event.target.files[0]);
-
         var image = new window.Image();
 
         image.src = imageUrl;

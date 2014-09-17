@@ -5,6 +5,7 @@ var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
+window.URL = window.URL || window.webkitURL;
 
 module.exports = Base.extend({
     form: {},
