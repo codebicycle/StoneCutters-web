@@ -143,7 +143,8 @@ module.exports = Base.extend({
         }
         else {
             $currency.attr('disabled', 'disabled');
-            $price.attr('disabled', 'disabled');
+            $price.attr('disabled', 'disabled').removeClass('error');
+            $price.next('small').remove();
         }
     },
     cleanValue: function(value) {
