@@ -77,6 +77,12 @@ module.exports = Base.extend({
 
         var $field = $(event.target);
 
+        if ($field.attr('name') === 'priceType') {
+            this.$el.trigger('priceTypeChange', [$field.val()]);
+        }
+        else {
+            $field.val(this.cleanValue($field.val()));
+        }
         this.form.values[$field.attr('name')] = $field.val();
     },
     onSubmit: function(event) {
@@ -122,6 +128,32 @@ module.exports = Base.extend({
         this.form = {
             values: {}
         };
+    },
+    onPriceTypeChange: function(event, value) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $currency = this.$('select[name=currency_type]');
+        var $price = this.$('input[name=priceC]');
+
+        if (value === 'FIXED') {
+            $currency.removeAttr('disabled');
+            $price.removeAttr('disabled');
+        }
+        else {
+            $currency.attr('disabled', 'disabled');
+            $price.attr('disabled', 'disabled').removeClass('error');
+            $price.next('small').remove();
+        }
+    },
+    cleanValue: function(value) {
+        value = value.replace(/\s{2,}/g, ' ');
+        value.trim();
+        if (value === value.toUpperCase()) {
+            value.toLowerCase();
+        }
+        return value;
     }
 });
 

@@ -38,9 +38,9 @@
     </div>
 {% endmacro %}
 
-{% macro FieldText(label, name, mandatory, form, user) %}
+{% macro FieldText(label, name, mandatory, form, user, type='text') %}
     <label>{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-    <input type="text" name="{{name}}" id="text-{{name}}"
+    <input type="{{ type }}" name="{{ name }}" id="text-{{ name }}"
     {% if name == 'email' %}
         value="{% if user and user.email %}{{ user.email }}{% elif form.values[name] %}{{ form.values[name] }}{% endif %}"
     {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
