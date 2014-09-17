@@ -98,13 +98,6 @@ function processForm(params, done) {
     done(form);
 }
 
-function esi(done) {
-    if (isServer) {
-        this.app.req.res.setHeader('Edge-Control', 'dca=esi');
-    }
-    done();
-}
-
 module.exports = {
     control: function(params, options, callback) {
         var promise;
@@ -131,9 +124,7 @@ module.exports = {
         if (options.isForm) {
             promise.then(processForm.bind(this, params));
         }
-        promise
-            .then(esi.bind(this))
-            .val(callback.bind(this));
+        promise.val(callback.bind(this));
 
         function fail(err) {
             this.app.session.persist({
