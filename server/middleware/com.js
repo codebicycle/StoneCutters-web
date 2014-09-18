@@ -71,8 +71,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function error(err) {
-                console.log('[OLX_DEBUG]', 'com', edgescape, err);
-                statsd.increment(['Unknown Location', 'middleware', 'com', 'error']);
                 next();
             }
         };
