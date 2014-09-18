@@ -77,7 +77,9 @@ module.exports = Base.extend({
         var image = new window.Image();
 
         image.src = imageUrl;
+        
         image.onload = function() {
+        
             var exif = function(done) {
                 EXIF.getData(image, done);
             }.bind(this);
@@ -105,7 +107,8 @@ module.exports = Base.extend({
             var success = function(done, res) {
                 this.selected[$input.attr('name')] = {
                     id: res.shift(),
-                    file: imageUrl
+                    file: imageUrl,
+                    orientation: 1
                 };
                 this.$el.trigger('imageLoadEnd');
                 done();
@@ -113,33 +116,16 @@ module.exports = Base.extend({
 
             var display = function() {
                 var orientation = EXIF.getTag(image, 'Orientation');
-                var css = {
-                    'background-image' : 'url(' + imageUrl + ')'
-                };
-                var deg;
-
-                if (orientation && orientation != 1) {
-                    switch (orientation) {
-                        case 3:
-                            deg = 180;
-                        break;
-                        case 6:
-                            deg = 90;
-                        break;
-                        case 8:
-                            deg = 270;
-                        break;
-                    }
-                    if (deg) {
-                        css['-webkit-transform'] = 'rotate(' + deg + 'deg)';
-                        css['-moz-transform'] = 'rotate(' + deg + 'deg)';
-                        css['-o-transform'] = 'rotate(' + deg + 'deg)';
-                        css['-ms-transform'] = 'rotate(' + deg + 'deg)';
-                        css.transform = 'rotate(' + deg + 'deg)';
-                    }
+                var cssClass = 'fill r' + (orientation || 1);
+                
+                if (orientation) {
+                    this.selected[$input.attr('name')] = {
+                        orientation: orientation
+                    };
                 }
-                $image.css(css);
-                $image.addClass('fill');
+                $image.addClass(cssClass).css({
+                    'background-image': 'url(' + imageUrl + ')'
+                });
                 $container.removeClass('loading').addClass('loaded');
             }.bind(this);
 
@@ -149,6 +135,7 @@ module.exports = Base.extend({
                 .then(success)
                 .then(display);
         }.bind(this);
+        
         image.onerror = function(err) {
             this.$el.trigger('imageLoadEnd');
             delete this.selected[$input.attr('name')];

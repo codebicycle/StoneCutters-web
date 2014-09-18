@@ -301,10 +301,12 @@ module.exports = Base.extend({
 
         var ids = [];
         var files = [];
+        var orientations = [];
 
         Object.keys(images).sort().forEach(function each(image) {
             ids.push(images[image].id);
             files.push(images[image].file);
+            orientations.push(images[image].orientation);
         });
         if (ids.length) {
             this.form._images = ids;
@@ -313,7 +315,7 @@ module.exports = Base.extend({
             delete this.form._images;
             delete this.form.images;
         }
-        this.$('#hub').trigger('imagesLoadEnd', [files.shift()]);
+        this.$('#hub').trigger('imagesLoadEnd', [files.shift(), orientations.shift()]);
     },
     onCategoryReset: function(event) {
         this.$el.trigger('stepChange', ['optionals', 'categories']);
