@@ -122,15 +122,19 @@ module.exports = Base.extend({
     },
     validate: function() {
         var $contactName = this.$('input[name=contactName]').removeClass('error');
+        var $phone = this.$('input[name=phone]').removeClass('error');
         var $email = this.$('input[name=email]').removeClass('error');
         var $location = this.$('.location').removeClass('error');
-        var $phone = this.$('input[name=phone]').removeClass('error');
         var failed = false;
 
         this.$el.removeClass('error').find('small').remove();
         if (!$contactName.val().length) {
             failed = true;
             $contactName.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.EnterNameForBuyers_Mob'] + '</small>');
+        }
+        if ($phone.val() !== '' && !rPhone.test($phone.val())) {
+            failed = true;
+            $phone.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.PhoneNumberNotValid'] + '</small>');
         }
         if (!rEmail.test($email.val())) {
             failed = true;
@@ -139,10 +143,6 @@ module.exports = Base.extend({
         if (!this.city) {
             failed = true;
             $location.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.AdNeedsLocation_Mob'] + '</small>');
-        }
-        if (!rPhone.test($phone.val())) {
-            failed = true;
-            $phone.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.PhoneNumberNotValid'] + '</small>');
         }
         if (failed) {
             this.$el.addClass('error');
