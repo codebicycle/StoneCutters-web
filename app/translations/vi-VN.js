@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'B\u1EA1n s\u1EBD nh\u1EADn \u0111\u01B0\u1EE3c m\u1ED9t e-mail khi qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n \u0111\u01B0\u1EE3c k\xEDch ho\u1EA1t',
     'misc.Email_Mob': 'Email',
     'misc.EnterNameForBuyers_Mob': '\u0110i\u1EC1n t\xEAn c\u1EE7a b\u1EA1n v\xE0o \u0111\u1EC3 nh\u1EEFng ng\u01B0\u1EDDi mua ti\u1EC1m n\u0103ng bi\u1EBFt b\u1EA1n l\xE0 ai',
+    'misc.ErrorPleaseTryLater': 'Xin l\u1ED7i, c\xF3 l\u1ED7i x\u1EA3y ra v\xE0 y\xEAu c\u1EA7u c\u1EE7a b\u1EA1n kh\xF4ng th\u1EC3 \u0111\u01B0\u1EE3c th\u1EF1c hi\u1EC7n. H\xE3y th\u1EED l\u1EA1i sau.',
     'misc.EveryoneCanSell': 'M\u1ECDi ng\u01B0\u1EDDi \u0111\u1EC1u c\xF3 th\u1EC3 b\xE1n tr\xEAn OLX',
     'misc.FreeIn_Mob': 'Mi\u1EC5n ph\xED t\u1EA1i',
     'misc.GetTheFreeApp': 'T\u1EA2I \u1EE8NG D\u1EE4NG MI\u1EC4N PH\xCD',

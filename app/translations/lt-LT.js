@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Gausite el. prane\u0161im\u0105, kai J\u016Bs\u0173 skelbimas bus suaktyvintas',
     'misc.Email_Mob': 'El. pa\u0161tas',
     'misc.EnterNameForBuyers_Mob': '\u012Era\u0161ykite savo vard\u0105, kad potencial\u016Bs pirk\u0117jai \u017Einot\u0173, kas esate',
+    'misc.ErrorPleaseTryLater': 'Apgailestaujame: \u012Fvyko klaida ir J\u016Bs\u0173 u\u017Eklausos apdoroti nepavyko. Bandykite v\u0117liau dar kart\u0105.',
     'misc.EveryoneCanSell': 'Kiekvienas gali parduoti naudojantis OLX',
     'misc.FreeIn_Mob': 'Nemokamai',
     'misc.GetTheFreeApp': 'GAUKITE NEMOKAM\u0104 PROGRAM\u0116L\u0118',

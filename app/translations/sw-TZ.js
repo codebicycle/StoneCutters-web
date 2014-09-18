@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Utapokea barua pepe wakati tangazo lako limeamilishwa',
     'misc.Email_Mob': 'Barua pepe',
     'misc.EnterNameForBuyers_Mob': 'Ingia jina lako ili wanunuzi wajue wewe ni nani',
+    'misc.ErrorPleaseTryLater': 'Samahani, kulikuwa na hitilafu na ombi lako halikushughulikiwa.Tafadhali jaribu tena baadaye.',
     'misc.EveryoneCanSell': 'ila mtu anaweza kuuza kwa OLX',
     'misc.FreeIn_Mob': 'Bure katika',
     'misc.GetTheFreeApp': 'PATA PROG YA BURE',

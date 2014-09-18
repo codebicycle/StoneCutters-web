@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': '\xDE\xFA f\xE6r\xF0 t\xF6lvup\xF3st \xFEegar augl\xFDsingin fer \xED birtingu',
     'misc.Email_Mob': 'Netfang',
     'misc.EnterNameForBuyers_Mob': 'F\xE6r\xF0u inn nafn til a\xF0 m\xF6gulegir kaupendur viti hver \xFE\xFA ert',
+    'misc.ErrorPleaseTryLater': '\xDEv\xED mi\xF0ur kom upp villa og ekki t\xF3kst a\xF0 vinna \xFAr bei\xF0ninni \xFEinni. Reyndu aftur s\xED\xF0ar.',
     'misc.EveryoneCanSell': '\xDEa\xF0 geta allir selt \xE1 OLX',
     'misc.FreeIn_Mob': '\xD3keypis \xE1',
     'misc.GetTheFreeApp': 'S\xC6KJA FORRITI\xD0 \xD3KEYPIS',

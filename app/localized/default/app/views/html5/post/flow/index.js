@@ -177,7 +177,6 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
-            console.log('validate', this.form); // Remove log
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -186,7 +185,6 @@ module.exports = Base.extend({
         }.bind(this);
 
         var post = function(done, response) {
-            console.log('create', this.form); // Remove log
             query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -199,7 +197,6 @@ module.exports = Base.extend({
         var fail = function(err) {
             // TODO: Improve error handling
             always();
-            console.log('error', err); // Remove log
             if (err) {
                 if (err.responseText) {
                     err = JSON.parse(err.responseText);
@@ -228,6 +225,8 @@ module.exports = Base.extend({
         var always = function() {
             $loading.hide();
         }.bind(this);
+
+        this.$('#errors').trigger('hide');
 
         if (user) {
             query.token = user.token;

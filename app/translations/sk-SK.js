@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Po aktiv\xE1cii v\xE1\u0161ho inzer\xE1tu v\xE1m bude zaslan\xFD email',
     'misc.Email_Mob': 'Email',
     'misc.EnterNameForBuyers_Mob': 'Zadajte svoje meno, aby potenci\xE1lni kupuj\xFAci vedeli, o koho ide',
+    'misc.ErrorPleaseTryLater': 'Prep\xE1\u010Dte, vyskytla sa chyba a va\u0161u po\u017Eiadavku nebolo mo\u017En\xE9 spracova\u0165. Vysk\xFA\u0161ajte nesk\xF4r, pros\xEDm.',
     'misc.EveryoneCanSell': 'Na OLX m\xF4\u017Ee pred\xE1va\u0165 ka\u017Ed\xFD',
     'misc.FreeIn_Mob': 'Zadarmo na',
     'misc.GetTheFreeApp': 'Z\xCDSKA\u0164 BEZPLATN\xDA APLIK\xC1CIU',
