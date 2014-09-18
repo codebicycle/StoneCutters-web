@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Fotodega kuulutuste abil on m\xFC\xFCgiv\xF5imalus kuni 5 korda parem!',
     'item.AddPhotos': 'Fotode lisamine',
     'item.AdNotAvailable': 'Kuulutus pealkirjaga <<AD_TITLE>> ei ole enam k\xE4ttesaadav.',
+    'item.ChosenCategory': 'Valitud kategooria',
     'item.RemoveFromFavorites': 'Eemalda lemmikutest',
     'item.SeeMoreAds': 'Vaadake veel kuulutusi kategoorias <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'See kuulutus pole enam k\xE4ttesaadav',

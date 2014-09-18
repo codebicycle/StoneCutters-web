@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Rzeczy ze zdj\u0119\u0107 sprzedaj\u0105 si\u0119 nawet 5 razy cz\u0119\u015Bciej!',
     'item.AddPhotos': 'Dodaj zdj\u0119cia',
     'item.AdNotAvailable': 'Og\u0142oszenie <<AD_TITLE>> ju\u017C nie jest dost\u0119pne.',
+    'item.ChosenCategory': 'Wybierz kategori\u0119',
     'item.RemoveFromFavorites': 'Usu\u0144 z ulubionych',
     'item.SeeMoreAds': 'Zobacz wi\u0119cej og\u0142osze\u0144 w kategorii <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Og\u0142oszenie jest niedost\u0119pne.',

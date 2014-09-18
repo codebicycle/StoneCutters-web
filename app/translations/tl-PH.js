@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Ang mga anunsyo na may mga litrato ay mas nabibili nang 5 beses!',
     'item.AddPhotos': 'Magdagdag ng mga larawan',
     'item.AdNotAvailable': 'Ang anunsyong <<AD_TITLE>> ay hindi na magagamit.',
+    'item.ChosenCategory': 'Napiling kategorya',
     'item.RemoveFromFavorites': 'Tanggalin mula sa mga paborito',
     'item.SeeMoreAds': 'Makakita ng higit pang mga anunsyo sa <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Hindi na available ang patalastas na ito',

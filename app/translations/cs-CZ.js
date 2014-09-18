@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Inzer\xE1ty s fotografiemi maj\xED a\u017E 5x v\u011Bt\u0161\xED \xFAsp\u011Bch p\u0159i prodeji!',
     'item.AddPhotos': 'P\u0159idat fotky',
     'item.AdNotAvailable': 'Inzer\xE1t <<AD_TITLE>> ji\u017E nen\xED dostupn\xFD.',
+    'item.ChosenCategory': 'Zvolen\xE1 kategorie',
     'item.RemoveFromFavorites': 'Odstranit z obl\xEDben\xFDch',
     'item.SeeMoreAds': 'Prohl\xE9dnout v\xEDce inzer\xE1t\u016F v kategorii <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Tento inzer\xE1t ji\u017E nen\xED k dispozici',

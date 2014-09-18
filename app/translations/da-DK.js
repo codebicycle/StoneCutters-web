@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'En annonce med foto s\xE6lges 5 gange mere!',
     'item.AddPhotos': 'Tilf\xF8j fotos',
     'item.AdNotAvailable': 'Annoncen <<AD_TITLE>> findes ikke l\xE6ngere.',
+    'item.ChosenCategory': 'V\xE6lg kategori',
     'item.RemoveFromFavorites': 'Fjern fra favoritter',
     'item.SeeMoreAds': 'Se flere annoncer p\xE5 <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Annoncen er ikke l\xE6ngere tilg\xE6ngelig',

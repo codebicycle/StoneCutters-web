@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Augl\xFDsingar me\xF0 myndum eru allt a\xF0 fimm sinnum s\xF6luv\xE6nni.',
     'item.AddPhotos': 'B\xE6ti\xF0 vi\xF0 myndum',
     'item.AdNotAvailable': 'Augl\xFDsingin <<AD_TITLE>> er ekki lengur tilt\xE6k.',
+    'item.ChosenCategory': 'Valinn flokkur',
     'item.RemoveFromFavorites': 'Fjarl\xE6gja \xFAr upp\xE1halds',
     'item.SeeMoreAds': 'Sj\xE1 fleiri augl\xFDsingar \xED <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': '\xDEessi augl\xFDsing er ekki lengur \xED bo\xF0i',

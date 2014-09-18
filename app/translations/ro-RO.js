@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Anun\u0163urile cu imagini au de 5 ori mai multe v\xE2nz\u0103ri!',
     'item.AddPhotos': 'Ad\u0103ugare imagini',
     'item.AdNotAvailable': 'Anun\u021Bul <<AD_TITLE>> nu mai este disponibil.',
+    'item.ChosenCategory': 'Categorie aleas\u0103',
     'item.RemoveFromFavorites': 'Elimin\u0103 din favorite',
     'item.SeeMoreAds': 'Vezi mai multe anun\u0163uri din <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Acest anun\u0163 nu mai este disponibil',

@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': '\uC0AC\uC9C4\uC774 \uC788\uB294 \uAD11\uACE0\uB294 \uD310\uB9E4\uAC00 \uB2E4\uC12F \uBC30 \uB354 \uB9CE\uC2B5\uB2C8\uB2E4!',
     'item.AddPhotos': '\uC0AC\uC9C4 \uCD94\uAC00',
     'item.AdNotAvailable': '<<AD_TITLE>> \uAD11\uACE0\uB294 \uB354 \uC774\uC0C1 \uC774\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4.',
+    'item.ChosenCategory': '\uC120\uD0DD\uB41C \uBC94\uC8FC',
     'item.RemoveFromFavorites': '\uC990\uACA8\uCC3E\uAE30\uC5D0\uC11C \uC81C\uAC70',
     'item.SeeMoreAds': '<<LINK_TO_CATEGORY>>\uC5D0\uC11C \uB354 \uB9CE\uC740 \uAD11\uACE0\uB97C \uBCF4\uC2ED\uC2DC\uC624',
     'item.ThisAdIsNoLongerAvailable': '\uBCF8 \uAD11\uACE0\uB294 \uB354 \uC774\uC0C1 \uC874\uC7AC\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.',

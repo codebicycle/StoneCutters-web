@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Qu\u1EA3ng c\xE1o c\xF3 \u1EA3nh s\u1EBD b\xE1n \u0111\u01B0\u1EE3c nhi\u1EC1u h\u01A1n g\u1EA5p 5 l\u1EA7n!',
     'item.AddPhotos': 'Th\xEAm \u1EA3nh',
     'item.AdNotAvailable': 'Rao v\u1EB7t <<AD_TITLE>> kh\xF4ng c\xF2n t\u1ED3n t\u1EA1i.',
+    'item.ChosenCategory': 'H\u1EA1ng m\u1EE5c \u0111\xE3 ch\u1ECDn',
     'item.RemoveFromFavorites': 'G\u1EE1 b\u1ECF kh\u1ECFi m\u1EE5c \u0111\u01B0\u1EE3c \u01B0a th\xEDch',
     'item.SeeMoreAds': 'Xem th\xEAm c\xE1c rao v\u1EB7t trong <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Rao v\u1EB7t n\xE0y kh\xF4ng c\xF2n',

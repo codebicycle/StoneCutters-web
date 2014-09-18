@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Oglasi s fotografijami so 5-krat bolj uspe\u0161ni!',
     'item.AddPhotos': 'Dodaj slike',
     'item.AdNotAvailable': 'Oglas <<AD_TITLE>> ni ve\u010D na voljo.',
+    'item.ChosenCategory': 'Izbrana kategorija',
     'item.RemoveFromFavorites': 'Odstranite iz priljubljenih',
     'item.SeeMoreAds': 'Poglejte ve\u010D oglasov v <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Ta oglas ne obstaja ve\u010D',

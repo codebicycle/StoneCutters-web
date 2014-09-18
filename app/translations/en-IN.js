@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Ads with photos sell up to 5X more!',
     'item.AddPhotos': 'Add photos',
     'item.AdNotAvailable': 'The ad <<AD_TITLE>> is no longer available.',
+    'item.ChosenCategory': 'Chosen category',
     'item.RemoveFromFavorites': 'Remove from favorites',
     'item.SeeMoreAds': 'See more ads in <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'This ad is no longer available',

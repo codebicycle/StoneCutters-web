@@ -1,31 +1,21 @@
-
-    <div class="summary" id="category-summary">
-        <div class="changeCategory">
-            <small>{{ dictionary["posting_selectcategory.categories"] }}</small>
-            {# Showing category and subcategory until we improve the navigationj handling
-            <span>{{ category.trName }} <span class="change">{{ dictionary["defaultfooter.change"] }}</span></span>
-            #}
-            <span>{{ category.trName }} :: {{ subcategory.trName }} <span class="change">{{ dictionary["defaultfooter.change"] }}</span></span>
-        </div>
-        <div class="changeSubcategory">
-            <small>{{ dictionary["posting_selectcategory.subCategories"] }}</small>
-            <span>{{ subcategory.trName }} <span class="change">{{ dictionary["defaultfooter.change"] }}</span></span>
-        </div>
+<div class="summary" id="category-summary">
+    <div class="changeCategory">
+        <small>{{ dictionary["item.ChosenCategory"] }}</small>
+        <span>{{ category.trName }} :: {{ subcategory.trName }}</span> <span class="change">{{ dictionary["defaultfooter.change"] }}</span>
     </div>
-    
-    <div id="posting">
-        <form>
-            {% from macros import FieldText, FieldTextArea, FieldCombobox %}
-            {% for field in fields %}
-                {% if field.fieldType == 'text' %}
-                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
-                {% elif field.fieldType == 'combobox' %}
-                    {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
-                {% endif %}
-            {% endfor %}
-            <div class="btnCenter">
-                <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange">
-            </div>
-        </form>
-    </div>
-
+</div>
+<div id="posting">
+    <form>
+        {% from macros import FieldText, FieldTextArea, FieldCombobox %}
+        {% for field in fields %}
+            {% if field.fieldType == 'text' %}
+                {{ FieldText(field.label, field.name, field.mandatory, form, user) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ FieldCombobox(field.label, field.name, field.mandatory, form, user, field.values) }}
+            {% endif %}
+        {% endfor %}
+        <div class="btnCenter">
+            <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange">
+        </div>
+    </form>
+</div>
