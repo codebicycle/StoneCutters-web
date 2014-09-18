@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Oglasi sa fotografijama privla\u010De do 5X vi\u0161e kupaca!',
     'item.AddPhotos': 'Dodajte fotografije',
     'item.AdNotAvailable': 'Oglas <<AD_TITLE>> vi\u0161e nije dostupan.',
+    'item.ChosenCategory': 'Odabrana kategorija',
     'item.RemoveFromFavorites': 'Ukloni iz omiljenih',
     'item.SeeMoreAds': 'Pogledajte jo\u0161 oglasa u <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Ovaj oglas vi\u0161e nije dostupan',

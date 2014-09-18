@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Matangazo yaliyo na huuza hadi mara 5x zaidi!',
     'item.AddPhotos': 'Ongeza picha',
     'item.AdNotAvailable': 'Tangazo <<AD_TITLE>> halipatikani tena.',
+    'item.ChosenCategory': 'Kundi lililochaguliwa',
     'item.RemoveFromFavorites': 'Ondoa kutoka kwa vibwedo',
     'item.SeeMoreAds': 'Angalia matangazo zaidi katika <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Tangazo hili halipatikani tena',

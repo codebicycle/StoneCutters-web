@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Foto\u011Frafl\u0131 ilanlarda sat\u0131\u015F \u015Fans\u0131 5 kat daha fazlad\u0131r!',
     'item.AddPhotos': 'Foto\u011Fraf Ekle',
     'item.AdNotAvailable': '<<AD_TITLE>> ba\u015Fl\u0131kl\u0131 ilan art\u0131k mevcut de\u011Fil.',
+    'item.ChosenCategory': 'Se\xE7ilen kategori',
     'item.RemoveFromFavorites': 'Favorilerden kald\u0131r\u0131n',
     'item.SeeMoreAds': '<<LINK_TO_CATEGORY>> kategorisinden daha fazla ilan g\xF6r\xFCn',
     'item.ThisAdIsNoLongerAvailable': 'Bu ilan art\u0131k kullan\u0131lam\u0131yor',

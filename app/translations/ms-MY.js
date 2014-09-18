@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Iklan yang ada foto senang dijual lebih daripada 5X!',
     'item.AddPhotos': 'Tambah foto',
     'item.AdNotAvailable': 'Iklan <<AD_TITLE>> sudah tiada.',
+    'item.ChosenCategory': 'Kategori yang dipilih',
     'item.RemoveFromFavorites': 'Alih keluar daripada kegemaran',
     'item.SeeMoreAds': 'Lihat lebih banyak iklan dalam <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Iklan ini kini sudah tiada.',

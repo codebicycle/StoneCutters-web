@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Naudojant skelbimus su nuotraukomis, parduodama iki 5 kart\u0173 daugiau!',
     'item.AddPhotos': 'Prid\u0117ti nuotrauk\u0173',
     'item.AdNotAvailable': 'Skelbimo <<AD_TITLE>> jau neb\u0117ra.',
+    'item.ChosenCategory': 'Pasirinkta kategorija',
     'item.RemoveFromFavorites': '\u0160alinti i\u0161 megiamiausi\u0173',
     'item.SeeMoreAds': '\u017Dr. daugiau skelbim\u0173, esan\u010Di\u0173 <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': '\u0160is skelbimas pa\u0161alintas',

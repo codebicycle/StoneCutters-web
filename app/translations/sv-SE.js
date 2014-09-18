@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Annonser med bilder s\xE4ljer upp till 5X mer!',
     'item.AddPhotos': 'L\xE4gg till bilder',
     'item.AdNotAvailable': 'Annonsen <<AD_TITLE>> \xE4r inte l\xE4ngre tillg\xE4nglig.',
+    'item.ChosenCategory': 'Vald kategori',
     'item.RemoveFromFavorites': 'Ta bort fr\xE5n favoriter',
     'item.SeeMoreAds': 'Visa fler annonser i <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Denna annons \xE4r inte l\xE4ngre tillg\xE4nglig',

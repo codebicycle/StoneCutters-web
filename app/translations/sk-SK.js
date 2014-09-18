@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Inzer\xE1ty s fotkami maj\xFA a\u017E 5x v\xE4\u010D\u0161iu predajnos\u0165!',
     'item.AddPhotos': 'prida\u0165 fotografie',
     'item.AdNotAvailable': 'Inzer\xE1t <<AD_TITLE>> u\u017E nie je dostupn\xFD.',
+    'item.ChosenCategory': 'Zvolen\xE1 kateg\xF3ria',
     'item.RemoveFromFavorites': 'Odobra\u0165 z ob\u013E\xFAben\xFDch',
     'item.SeeMoreAds': 'Pozrie\u0165 viac inzer\xE1tov v kateg\xF3rii <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Toto ozn\xE1menie u\u017E nie je dostupn\xE9.',

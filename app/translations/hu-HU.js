@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'A f\xE9nyk\xE9ppel hirdetett term\xE9kek 5-sz\xF6r nagyobb val\xF3sz\xEDn\u0171s\xE9ggel kelnek el!',
     'item.AddPhotos': 'K\xE9pek hozz\xE1ad\xE1sa',
     'item.AdNotAvailable': 'A hirdet\xE9s (<<AD_TITLE>>) m\xE1r nem \xE9rhet\u0151 el.',
+    'item.ChosenCategory': 'V\xE1lasztott kateg\xF3ria',
     'item.RemoveFromFavorites': 'T\xF6rl\xE9s a kedvencekb\u0151l',
     'item.SeeMoreAds': 'Tov\xE1bbi hirdet\xE9sek: <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'A hirdet\xE9s m\xE1r nem el\xE9rhet\u0151',

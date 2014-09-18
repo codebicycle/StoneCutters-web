@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Advts. met foto\'s vekoop tot 5X meer dikwels!',
     'item.AddPhotos': 'Voeg foto\'s by',
     'item.AdNotAvailable': 'Die advt. <<AD_TITLE>> is nie meer beskikbaar nie.',
+    'item.ChosenCategory': 'Kies \'n kategorie',
     'item.RemoveFromFavorites': 'Verwyder van gunstelinge',
     'item.SeeMoreAds': 'Kyk na nog advts. <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Hierdie advt. is nie meer beskikbaar nie.',

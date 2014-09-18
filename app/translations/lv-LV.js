@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Sludin\u0101jumi ar fotogr\u0101fij\u0101m ir l\u012Bdz pat 5 reiz\u0113m efekt\u012Bv\u0101ki!',
     'item.AddPhotos': 'Pievienojiet fotogr\u0101fijas',
     'item.AdNotAvailable': 'Sludin\u0101jums <<AD_TITLE>> vairs nav pieejams.',
+    'item.ChosenCategory': 'Izv\u0113l\u0113t\u0101 kategorija',
     'item.RemoveFromFavorites': 'Iz\u0146emt no favor\u012Btiem',
     'item.SeeMoreAds': 'Skatiet vair\u0101k sludin\u0101jumus \u0161eit: <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': '\u0160is sludin\u0101jums vairs nav pieejams',

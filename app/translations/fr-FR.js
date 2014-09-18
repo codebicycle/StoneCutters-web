@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Les Annonces avec photos vendent jusqu\'\xE0 5 fois plus!',
     'item.AddPhotos': 'Ajouter des photos',
     'item.AdNotAvailable': 'L\'annonce <<AD_TITLE>> n\'est plus disponible.',
+    'item.ChosenCategory': 'Cat\xE9gorie choisie',
     'item.RemoveFromFavorites': 'Supprimer des favoris',
     'item.SeeMoreAds': 'Voir plus d\'annonces dans <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Cette annonce n\'est plus disponiblle',

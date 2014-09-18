@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Annoncen mit Fotos werden bis zu 5x \xF6fter angeklickt!',
     'item.AddPhotos': 'Photos hinzuf\xFCgen',
     'item.AdNotAvailable': 'Die Annonce <<AD_TITLE>> ist nicht mehr verf\xFCgbar.',
+    'item.ChosenCategory': 'Gew\xE4hlte Kategorie',
     'item.RemoveFromFavorites': 'Aus den Favoriten entfernen',
     'item.SeeMoreAds': 'Weitere Anzeigen in <<LINK_TO_CATEGORY>> ansehen',
     'item.ThisAdIsNoLongerAvailable': 'Diese Annonce gibt es nicht mehr',

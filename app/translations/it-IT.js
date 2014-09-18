@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Gli annunci con foto vendono fino a 5 volte di pi\xF9!',
     'item.AddPhotos': 'Aggiungi delle foto',
     'item.AdNotAvailable': 'L\'annuncio <<AD_TITLE>> non \xE8 pi\xF9 disponibile.',
+    'item.ChosenCategory': 'Categoria scelta',
     'item.RemoveFromFavorites': 'Rimuovi dai Preferiti',
     'item.SeeMoreAds': 'Guarda altri annunci in <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Questo annuncio non \xE8 pi\xF9 disponibile',

@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': '\u6709\u7167\u7247\u7684\u5EE3\u544A\u92B7\u552E\u984D\u662F\u6C92\u6709\u5EE3\u544A\u8005\u76845\u500D\uFF01',
     'item.AddPhotos': '\u6DFB\u52A0\u7167\u7247',
     'item.AdNotAvailable': '\u5EE3\u544A<<AD_TITLE>>\u5DF2\u4E0D\u53EF\u7528\u3002',
+    'item.ChosenCategory': '\u5DF2\u9078\u4E2D\u7684\u985E\u5225',
     'item.RemoveFromFavorites': '\u5F9E\u6536\u85CF\u593E\u4E2D\u522A\u9664',
     'item.SeeMoreAds': '\u5728 <<LINK_TO_CATEGORY>>\u67E5\u770B\u66F4\u591A\u5EE3\u544A',
     'item.ThisAdIsNoLongerAvailable': '\u9019\u500B\u5EE3\u544A\u5DF2\u7D93\u4E0D\u5B58\u5728',

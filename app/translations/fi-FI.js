@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Valokuvilla varustetut ilmoitukset myyv\xE4t jopa 5 kertaa enemm\xE4n!',
     'item.AddPhotos': 'Lis\xE4\xE4 kuvia',
     'item.AdNotAvailable': '<<AD_TITLE>> -ilmoitus ei ole en\xE4\xE4 saatavissa.',
+    'item.ChosenCategory': 'Valittu kategoria',
     'item.RemoveFromFavorites': 'Poista suosikeista',
     'item.SeeMoreAds': 'Katso lis\xE4\xE4 ilmoituksia kohdassa <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'T\xE4m\xE4 ilmoitus ei ole en\xE4\xE4 saatavilla',

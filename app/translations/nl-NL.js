@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Advertenties met foto\'s verkopen vijf keer beter!',
     'item.AddPhotos': 'Voeg een foto toe',
     'item.AdNotAvailable': 'De advertentie <<AD_TITLE>> is niet meer beschikbaar.',
+    'item.ChosenCategory': 'Gekozen rubriek',
     'item.RemoveFromFavorites': 'Uit favorieten verwijderen',
     'item.SeeMoreAds': 'Bekijk meer advertenties in <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Deze advertentie is niet meer beschikbaar',

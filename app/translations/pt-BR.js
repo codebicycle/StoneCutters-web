@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'An\xFAncios com foto(s) recebem 5x mais contatos.',
     'item.AddPhotos': 'Adicionar fotos',
     'item.AdNotAvailable': 'O an\xFAncio <<AD_TITLE>> n\xE3o est\xE1 mais dispon\xEDvel.',
+    'item.ChosenCategory': 'Categoria escolhida',
     'item.RemoveFromFavorites': 'Remover dos favoritos',
     'item.SeeMoreAds': 'Veja mais an\xFAncios em <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Esse an\xFAncio n\xE3o est\xE1 mais dispon\xEDvel',

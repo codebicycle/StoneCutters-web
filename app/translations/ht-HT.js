@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Ajoute foto pou w ka vann menm 5 fa plis.',
     'item.AddPhotos': 'Ajoute foto',
     'item.AdNotAvailable': 'Anons <<AD_TITLE>> pa disponib ank\xF2.',
+    'item.ChosenCategory': 'Kategori w cwazi a',
     'item.RemoveFromFavorites': 'Retire nan favorites',
     'item.SeeMoreAds': 'Gade plis anons nan <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Anons sa a pa disponib ank\xF2',

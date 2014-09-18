@@ -103,6 +103,7 @@ module.exports = {
     'posting_photos.UpTo5XMore': 'Els anuncis amb foto es venen fins a 5 cops m\xE9s!',
     'item.AddPhotos': 'Afegeix fotos',
     'item.AdNotAvailable': 'L\'anunci <<AD_TITLE>> ja no est\xE0 disponible.',
+    'item.ChosenCategory': 'Categoria escollida',
     'item.RemoveFromFavorites': 'Treure de favorits',
     'item.SeeMoreAds': 'Veure m\xE9s anuncis a <<LINK_TO_CATEGORY>>',
     'item.ThisAdIsNoLongerAvailable': 'Aquest anunci ja no est\xE0 disponible',
