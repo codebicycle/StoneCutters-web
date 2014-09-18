@@ -20,7 +20,7 @@
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, item.category.name, heading=false, ['<ul>
             <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
-            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
+            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '" data-qa="', favClass, '-favorite" >', favText, '</a></li>
         </ul>'] | join) }}
     {% else %}
         {% from macros import Breadcrumb %}
