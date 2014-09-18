@@ -214,16 +214,23 @@ module.exports = Base.extend({
         this.$('#image').addClass('pending');
         this.$el.trigger('change');
     },
-    onImagesLoadEnd: function(event, image) {
+    onImagesLoadEnd: function(event, image, orientation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var $container = this.$('#image');
+        var $image = this.$('#imagesDisplay');
+
         if (image) {
-            this.$('#image').removeClass('pending').addClass('fill').css('background-image', 'url(' + image + ')');
+            $container.removeClass('pending').addClass('fill');
+            $image.removeAttr('class').addClass('r' + orientation).css({
+                'background-image': 'url(' + image + ')'
+            });
         }
         else {
-            this.$('#image').removeClass('pending fill').removeAttr('style');
+            $container.removeClass('pending fill');
+            $image.removeAttr('class style');
         }
         this.$el.trigger('change');
     }
