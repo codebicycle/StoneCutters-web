@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'GAUKITE NEMOKAM\u0104 PROGRAM\u0116L\u0118',
     'misc.LearnToSell': 'Su\u017Einokite, kaip parduoti',
     'misc.NoResults': 'Mes nieko neradome, bet turime tai, ko ie\u0161kote!',
+    'misc.PhoneNumberNotValid': 'J\u016Bs\u0173 \u012Fvestas telefono numeris yra neteisingas. Patikrinkite.',
     'misc.PostForFree_LandingPage': 'NEMOKAMAI \u012Fd\u0117kite savo skelbim\u0105 \u012F OLX',
     'misc.PostYourFreeAdCaps_Mob': '\u012ED\u0116KITE NEMOKAM\u0104 SKELBIM\u0104',
     'misc.RejectedAd_Caps': 'Atmestas skelbimas',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Kilo problema',
     'misc.TitleCharacters_Mob': 'Pavadinimas privalo b\u016Bti sudarytas bent i\u0161 <<NUMBER>> \u017Eenkl\u0173',
     'misc.Title_Mob': 'Pavadinimas',
+    'misc.WantToGoBack': 'Ar tikrai norite sugr\u012F\u017Eti atgal?',
     'business_directory.Map': '\u017Dem\u0117lapis',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'patalpint\u0105'

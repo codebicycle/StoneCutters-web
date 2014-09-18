@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DESC\u0102RCA\u0162I APLICA\u0162IA GRATUIT\u0102',
     'misc.LearnToSell': 'Afl\u0103 cum s\u0103 vinzi',
     'misc.NoResults': 'Nu am g\u0103sit nimic, \xEEns\u0103 avem ceea ce c\u0103uta\u0163i!',
+    'misc.PhoneNumberNotValid': 'Num\u0103rul de telefon pe care l-a\u0163i introdus nu este valabil. V\u0103 rug\u0103m s\u0103 verifica\u0163i.',
     'misc.PostForFree_LandingPage': 'Publica\u0163i GRATUIT anun\u0163ul dvs. pe OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLICA\u0162I ANUN\u0162UL DVS. GRATUIT',
     'misc.RejectedAd_Caps': 'Anun\u021B refuzat',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'A ap\u0103rut o problem\u0103',
     'misc.TitleCharacters_Mob': 'Titlul trebuie s\u0103 con\u0163in\u0103  cel pu\u0163in <<NUMBER>> caractere',
     'misc.Title_Mob': 'Titlu',
+    'misc.WantToGoBack': 'Sunte\u0163i sigur c\u0103 dori\u0163i s\u0103 merge\u0163i \xEEnapoi?',
     'business_directory.Map': 'Hart\u0103',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': '\xEEn'

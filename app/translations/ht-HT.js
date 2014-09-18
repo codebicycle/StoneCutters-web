@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PRAN APLIKASYON GRATIS LA',
     'misc.LearnToSell': 'Aprann jan pou vann',
     'misc.NoResults': 'Nou pa te jwenn anyen, men nou gen sa w ap ch\xE8che a.',
+    'misc.PhoneNumberNotValid': 'Nimewo telef\xF2n ou mete a pa valid. Tanpri, verifye.',
     'misc.PostForFree_LandingPage': 'Pibliye anons ou GRATIS souOLX',
     'misc.PostYourFreeAdCaps_Mob': 'PIBLIYE ANONS OU GRATIS',
     'misc.RejectedAd_Caps': 'Refize li',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Te gen yon pwobl\xE8m',
     'misc.TitleCharacters_Mob': 'Tit sa a dwe gen omwen <<NUMBER>> karakt\xE8',
     'misc.Title_Mob': 'TIt',
+    'misc.WantToGoBack': 'Eske w vle retounen?',
     'business_directory.Map': 'Kat Jewografik',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'nan'

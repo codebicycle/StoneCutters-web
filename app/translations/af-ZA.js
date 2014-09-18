@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'KRY DIE GRATIS TOEPASSING',
     'misc.LearnToSell': 'Leer hoe om te verkoop',
     'misc.NoResults': 'Ons kon niks vind nie, maar ons het beslis waarna jy soek!',
+    'misc.PhoneNumberNotValid': 'Die selfoonnommer wat jy ingevoer het, is nie geldig nie. Gaan dit asseblief na.',
     'misc.PostForFree_LandingPage': 'Plaas jou advt. GRATIS op OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PLAAS JOU GRATIS ADVT.',
     'misc.RejectedAd_Caps': 'Afgekeurde advt.',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Daar was \'n probleem',
     'misc.TitleCharacters_Mob': 'Titel moet ten minste <<NUMBER>> karakters bevat.',
     'misc.Title_Mob': 'Titel',
+    'misc.WantToGoBack': 'Is jy seker jy wil teruggaan?',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'in'

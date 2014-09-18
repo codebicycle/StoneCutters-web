@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'T\u1EA2I \u1EE8NG D\u1EE4NG MI\u1EC4N PH\xCD',
     'misc.LearnToSell': 'H\xE3y h\u1ECDc c\xE1ch b\xE1n h\xE0ng',
     'misc.NoResults': 'Ch\xFAng t\xF4i kh\xF4ng t\xECm th\u1EA5y g\xEC c\u1EA3 nh\u01B0ng ch\xFAng t\xF4i c\xF3 nh\u1EEFng c\xE1i b\u1EA1n t\xECm ki\u1EBFm!',
+    'misc.PhoneNumberNotValid': 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i b\u1EA1n nh\u1EADp v\xE0o kh\xF4ng h\u1EE3p l\u1EC7. H\xE3y ki\u1EC3m tra l\u1EA1i.',
     'misc.PostForFree_LandingPage': '\u0110\u0103ng rao v\u1EB7t c\u1EE7a b\u1EA1n MI\u1EC4N PH\xCD tr\xEAn OLX',
     'misc.PostYourFreeAdCaps_Mob': '\u0110\u0102NG QU\u1EA2NG C\xC1O MI\u1EC4N PH\xCD',
     'misc.RejectedAd_Caps': 'Qu\u1EA3ng c\xE1o b\u1ECB t\u1EEB ch\u1ED1i',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'C\xF3 l\u1ED7i',
     'misc.TitleCharacters_Mob': 'T\xEAn ch\u1EE7 \u0111\u1EC1 c\u1EA7n ch\u1EE9a \xEDt nh\u1EA5t <<NUMBER>> k\xED t\u1EF1',
     'misc.Title_Mob': 'T\xEAn ch\u1EE7 \u0111\u1EC1',
+    'misc.WantToGoBack': 'B\u1EA1n c\xF3 ch\u1EAFc l\xE0 m\xECnh mu\u1ED1n quay l\u1EA1i kh\xF4ng?',
     'business_directory.Map': 'B\u1EA3n \u0111\u1ED3',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': '\u1EDF trong'

@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': '\u7372\u53D6\u514D\u8CBB\u7A0B\u5F0F',
     'misc.LearnToSell': '\u77AD\u89E3\u5982\u4F55\u92B7\u552E',
     'misc.NoResults': '\u6C92\u6709\u641C\u7D22\u7D50\u679C\uFF0C\u4E0D\u904E\u6211\u5011\u6709\u60A8\u6240\u8981\u5C0B\u627E\u7684\u5546\u54C1\uFF01',
+    'misc.PhoneNumberNotValid': '\u60A8\u8F38\u5165\u7684\u96FB\u8A71\u865F\u78BC\u7121\u6548\u3002\u8ACB\u6AA2\u67E5\u3002',
     'misc.PostForFree_LandingPage': '\u5728OLX\u4E0A\u514D\u8CBB\u5F35\u8CBC\u5EE3\u544A',
     'misc.PostYourFreeAdCaps_Mob': '\u514D\u8CBB\u767C\u4F48\u5EE3\u544A',
     'misc.RejectedAd_Caps': '\u88AB\u62D2\u7D55\u7684\u5EE3\u544A',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': '\u51FA\u73FE\u4E86\u554F\u984C',
     'misc.TitleCharacters_Mob': '\u6A19\u984C\u5FC5\u9808\u5305\u542B\u81F3\u5C11 <<NUMBER>>\u5B57\u5143',
     'misc.Title_Mob': '\u6A19\u984C',
+    'misc.WantToGoBack': '\u78BA\u5B9A\u60F3\u8FD4\u56DE\u55CE\uFF1F',
     'business_directory.Map': '\u5730\u5716',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': '\u5728'

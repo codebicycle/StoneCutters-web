@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'F\xC5 GRATISAPPEN',
     'misc.LearnToSell': 'L\xE4r dig att s\xE4lja',
     'misc.NoResults': 'Vi hittade inte n\xE5got, men vi har det du s\xF6ker!',
+    'misc.PhoneNumberNotValid': 'Telefonnumret som du angav \xE4r inte giltigt. Kontrollera',
     'misc.PostForFree_LandingPage': 'Publicera din annons gratis p\xE5 OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLICERA DIN GRATIS ANNONS',
     'misc.RejectedAd_Caps': 'Avvisade annons',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Det fanns ett problem',
     'misc.TitleCharacters_Mob': 'Titel m\xE5ste best\xE5 av minst <<NUMBER>> tecken',
     'misc.Title_Mob': 'Titel',
+    'misc.WantToGoBack': '\xC4r du s\xE4ker p\xE5 att du vill g\xE5 tillbaka?',
     'business_directory.Map': 'Karta',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'i'

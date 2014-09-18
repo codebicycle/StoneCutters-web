@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'HANKIGE TASUTA RAKENDUS',
     'misc.LearnToSell': '\xD5ppige m\xFC\xFCma',
     'misc.NoResults': 'Me ei leidnud midagi, kuid meil on olemas see, mida otsite!',
+    'misc.PhoneNumberNotValid': 'Sisestatud telefoninumber on kehtetu. Palun kontrollige seda.',
     'misc.PostForFree_LandingPage': 'Postitage oma kuulutus OLXis TASUTA',
     'misc.PostYourFreeAdCaps_Mob': 'POSTITAGE TASUTA KUULUTUS',
     'misc.RejectedAd_Caps': 'Tagasi l\xFCkatud kuulutus',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Ilmnes probleem',
     'misc.TitleCharacters_Mob': 'Pealkirjas peab olema v\xE4hemalt <<NUMBER>> t\xE4hem\xE4rki',
     'misc.Title_Mob': 'Pealkiri',
+    'misc.WantToGoBack': 'Kas olete kindel, et soovite tagasi minna?',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'asukohast'

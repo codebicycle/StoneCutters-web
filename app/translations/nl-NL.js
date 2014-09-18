@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DOWNLOAD DE GRATIS APP',
     'misc.LearnToSell': 'Leren verkopen',
     'misc.NoResults': 'Er zijn geen resultaten gevonden, maar we hebben vast en zeker datgene wat je zoekt!',
+    'misc.PhoneNumberNotValid': 'Het opgegeven telefoonnummer is niet geldig. Wil je dit nog even controleren?',
     'misc.PostForFree_LandingPage': 'Plaats je advertentie GRATIS op OLX',
     'misc.PostYourFreeAdCaps_Mob': 'JE GRATIS ADVERTENTIE PLAATSEN',
     'misc.RejectedAd_Caps': 'Geweigerde advertentie',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Er is een probleem',
     'misc.TitleCharacters_Mob': 'De titel moet ten minste <<NUMBER>> tekens bevatten',
     'misc.Title_Mob': 'Titel',
+    'misc.WantToGoBack': 'Weet je zeker dat je terug wilt gaan?',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'in'

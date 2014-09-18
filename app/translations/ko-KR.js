@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': '\uBB34\uB8CC \uC571 \uBC1B\uAE30',
     'misc.LearnToSell': '\uD310\uB9E4 \uBC29\uBC95 \uBCF4\uAE30',
     'misc.NoResults': '\uC544\uBB34\uAC83\uB3C4 \uBC1C\uACAC\uD558\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4\uB9CC \uC800\uD76C\uC5D0\uAC8C \uADC0\uD558\uAED8\uC11C \uCC3E\uACE0 \uACC4\uC2E0 \uD488\uBAA9\uC774 \uC788\uC2B5\uB2C8\uB2E4.',
+    'misc.PhoneNumberNotValid': '\uC785\uB825\uD55C \uC804\uD654 \uBC88\uD638\uAC00 \uC624\uB958\uC774\uB2C8 \uD655\uC778 \uBD80\uD0C1\uD569\uB2C8\uB2E4.',
     'misc.PostForFree_LandingPage': 'OLX\uC5D0 \uAD11\uACE0\uB97C \uBB34\uB8CC\uB85C \uAC8C\uC2DC\uD558\uC2ED\uC2DC\uC624',
     'misc.PostYourFreeAdCaps_Mob': '\uBB34\uB8CC \uAD11\uACE0\uB97C \uAC8C\uC2DC\uD558\uC138\uC694',
     'misc.RejectedAd_Caps': '\uAC70\uC808\uB41C \uAD11\uACE0',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': '\uBB38\uC81C\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4',
     'misc.TitleCharacters_Mob': '\uC81C\uBAA9\uC740 \uCD5C\uC18C <<NUMBER>>\uBB38\uC790\uB97C \uD3EC\uD568\uD574\uC57C \uD569\uB2C8\uB2E4',
     'misc.Title_Mob': '\uC81C\uBAA9',
+    'misc.WantToGoBack': '\uB418\uB3CC\uC544\uAC00\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?',
     'business_directory.Map': '\uC9C0\uB3C4',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': '\uCE74\uD14C\uACE0\uB9AC'

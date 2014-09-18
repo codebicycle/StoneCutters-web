@@ -3,6 +3,7 @@
 var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
 var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
+var rPhone = /^[\d -]+$/;
 var translations = require('../../../../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -64,6 +65,9 @@ module.exports = Base.extend({
             if (field.name == 'email' && $field.hasClass('error')) {
                 errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
             }
+            if (field.name == 'phone' && $field.hasClass('error')) {
+                errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
+            }
         }.bind(this));
         this.$el.addClass('disabled');
         this.parentView.$el.trigger('contactSubmit', [this.fields, this.city || {}, errors, this.parentView.dictionary['postingerror.InvalidLocation']]);
@@ -120,6 +124,7 @@ module.exports = Base.extend({
         var $contactName = this.$('input[name=contactName]').removeClass('error');
         var $email = this.$('input[name=email]').removeClass('error');
         var $location = this.$('.location').removeClass('error');
+        var $phone = this.$('input[name=phone]').removeClass('error');
         var failed = false;
 
         this.$el.removeClass('error').find('small').remove();
@@ -134,6 +139,10 @@ module.exports = Base.extend({
         if (!this.city) {
             failed = true;
             $location.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.AdNeedsLocation_Mob'] + '</small>');
+        }
+        if (!rPhone.test($phone.val())) {
+            failed = true;
+            $phone.addClass('error').after('<small class="error">' + this.parentView.dictionary['misc.PhoneNumberNotValid'] + '</small>');
         }
         if (failed) {
             this.$el.addClass('error');

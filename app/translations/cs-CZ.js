@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'Z\xCDSKAT APLIKACI ZDARMA',
     'misc.LearnToSell': 'Dozv\u011Bd\u011Bt se jak prod\xE1vat',
     'misc.NoResults': 'Nic jsme nena\u0161li, ale m\xE1me, co hled\xE1te!',
+    'misc.PhoneNumberNotValid': 'Telefonn\xED \u010D\xEDslo, kter\xE9 jste zadali, nen\xED platn\xE9. Zkontrolujte jej, pros\xEDm.',
     'misc.PostForFree_LandingPage': 'Zadejte v\xE1\u0161 inzer\xE1t na OLX ZDARMA',
     'misc.PostYourFreeAdCaps_Mob': 'ZADEJTE INZER\xC1T ZDARMA',
     'misc.RejectedAd_Caps': 'Odm\xEDtnut\xFD inzer\xE1t',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Do\u0161lo k probl\xE9mu',
     'misc.TitleCharacters_Mob': 'Nadpis mus\xED obsahovat alespo\u0148 <<NUMBER>> znak\u016F',
     'misc.Title_Mob': 'Nadpis',
+    'misc.WantToGoBack': 'Opravdu se chcete vr\xE1tit zp\u011Bt?',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'v'

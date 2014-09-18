@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'SA\u0145EMIET BEZMAKSAS LIETOTNI',
     'misc.LearnToSell': 'Learn how to sell',
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
+    'misc.PhoneNumberNotValid': 'T\u0101lru\u0146a numurs, ko ievad\u012Bj\u0101t, nav der\u012Bgs. L\u016Bdzu, p\u0101rbaudiet to.',
     'misc.PostForFree_LandingPage': 'Post your ad FOR FREE on OLX',
     'misc.PostYourFreeAdCaps_Mob': 'POST YOUR FREE AD',
     'misc.RejectedAd_Caps': 'Noraid\u012Btais sludin\u0101jums',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'There was a problem',
     'misc.TitleCharacters_Mob': 'Title must contain at least <<NUMBER>> characters',
     'misc.Title_Mob': 'Title',
+    'misc.WantToGoBack': 'Are you sure you want to go back?',
     'business_directory.Map': 'Karte',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': '\u0161eit'

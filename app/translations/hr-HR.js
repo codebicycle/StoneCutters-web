@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PREUZMITE BESPLATNU APLIKACIJU',
     'misc.LearnToSell': 'Nau\u010Dite kako prodavati',
     'misc.NoResults': 'Nismo ni\u0161ta prona\u0161li ali imamo ono \u0161to tra\u017Eite!',
+    'misc.PhoneNumberNotValid': 'Broj telefona koji ste unijeli je neva\u017Ee\u0107i. Molimo, provjerite.',
     'misc.PostForFree_LandingPage': 'Postavite BESPLATNO svoj oglas na OLX',
     'misc.PostYourFreeAdCaps_Mob': 'POSTAVITE SVOJ BESPLATAN OGLAS',
     'misc.RejectedAd_Caps': 'Odbijen oglas',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Pojavio se problem',
     'misc.TitleCharacters_Mob': 'Naziv mora sadr\u017Eavati najmanje <<NUMBER>> znakova',
     'misc.Title_Mob': 'Naziv',
+    'misc.WantToGoBack': 'Sigurno se \u017Eelite vratiti nazad?',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'u'

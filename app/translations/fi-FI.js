@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'HANKI ILMAINEN SOVELLUS',
     'misc.LearnToSell': 'Opi myym\xE4\xE4n',
     'misc.NoResults': 'Me emme l\xF6yt\xE4neet mit\xE4\xE4n, mutta meill\xE4 on sit\xE4 mit\xE4 etsit!',
+    'misc.PhoneNumberNotValid': 'Antamasi puhelinnumero on virheellinen. Ole hyv\xE4 ja tarkista.',
     'misc.PostForFree_LandingPage': 'Julkaise ilmoituksesi ILMAISEKSI kohteessa OLX',
     'misc.PostYourFreeAdCaps_Mob': 'ILMOITA ILMAISEKSI',
     'misc.RejectedAd_Caps': 'Hyl\xE4tty ilmoitus',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Ongelma ilmeni',
     'misc.TitleCharacters_Mob': 'Otsikossa pit\xE4\xE4 olla v\xE4hint\xE4\xE4n <<NUMBER>> merkki\xE4',
     'misc.Title_Mob': 'Otsikko',
+    'misc.WantToGoBack': 'Haluatko varmasti palata takaisin?',
     'business_directory.Map': 'Kartta',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'kohdassa'

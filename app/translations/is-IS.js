@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'S\xC6KJA FORRITI\xD0 \xD3KEYPIS',
     'misc.LearnToSell': 'L\xE6r\xF0u a\xF0 selja',
     'misc.NoResults': 'Vi\xF0 fundum ekkert, en vi\xF0 me\xF0 \xFEa\xF0 sem \xFE\xFA ert a\xF0 leita a\xF0!',
+    'misc.PhoneNumberNotValid': 'S\xEDman\xFAmeri\xF0 sem \xFE\xFA sl\xF3st inn er \xF3gilt. Athuga\xF0u \xFEa\xF0.',
     'misc.PostForFree_LandingPage': 'Birtu augl\xFDsinguna \xFE\xEDna \xD3KEYPIS \xE1 OLX',
     'misc.PostYourFreeAdCaps_Mob': 'BIRTU \xD3KEYPIS AUGL\xDDSINGU',
     'misc.RejectedAd_Caps': 'Augl\xFDsingu var hafna\xF0',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Vandam\xE1l kom upp',
     'misc.TitleCharacters_Mob': 'Titillinn ver\xF0ur a\xF0 innihalda a.m.k. <<NUMBER>> ritt\xE1kn',
     'misc.Title_Mob': 'Titill',
+    'misc.WantToGoBack': 'Viltu \xF6rugglega fara til baka?',
     'business_directory.Map': 'Kort',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'h\xE9\xF0an \xED fr\xE1 \xED flokknum'

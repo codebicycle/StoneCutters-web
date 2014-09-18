@@ -202,6 +202,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'UYGULAMAYI \xDCCRETS\u0130Z \u0130ND\u0130R\u0130N',
     'misc.LearnToSell': 'Nas\u0131l sat\u0131\u015F yapaca\u011F\u0131n\u0131z\u0131 \xF6\u011Frenin',
     'misc.NoResults': 'Bir \u015Fey bulamad\u0131k, ancak arad\u0131\u011F\u0131n\u0131z \u015Feyi not ettik!',
+    'misc.PhoneNumberNotValid': 'Girdi\u011Finiz telefon numaras\u0131 ge\xE7erli de\u011Fil. L\xFCtfen kontrol edin.',
     'misc.PostForFree_LandingPage': 'OLX markas\u0131nda ilan\u0131n\u0131z\u0131 \xDCCRETS\u0130Z olarak yay\u0131nlay\u0131n',
     'misc.PostYourFreeAdCaps_Mob': '\xDCCRETS\u0130Z \u0130LANINIZI YAYINLAYIN',
     'misc.RejectedAd_Caps': 'Reddedilen ilan',
@@ -213,6 +214,7 @@ module.exports = {
     'misc.ThereWasProb': 'Bir sorun olu\u015Ftu',
     'misc.TitleCharacters_Mob': 'Ba\u015Fl\u0131k en az <<NUMBER>> karakter i\xE7ermelidir',
     'misc.Title_Mob': 'Unvan',
+    'misc.WantToGoBack': 'Geri gitmek istedi\u011Finizden emin misiniz?',
     'business_directory.Map': 'Harita',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': ''
