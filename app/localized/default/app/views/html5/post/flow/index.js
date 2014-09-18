@@ -29,6 +29,18 @@ module.exports = Base.extend({
                 custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
             };
         }.bind(this));
+        history.pushState(null, "", window.location.pathname);
+
+        $(window).on('popstate', onpopstate);
+        function onpopstate() {
+            if (confirm('Are you sure you want to leave this page?')) {
+                $(window).off('popstate', onpopstate);
+                history.back();
+            }
+            else {
+                history.pushState(null, "", window.location.pathname);
+            }
+        }
     },
     onBeforeUnload: function(event) {
         return ' ';
@@ -74,7 +86,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        
+
         this.$('header').trigger('change', [title, current, back || 'hub', data]);
     },
     onStepChange: function(event, before, after) {
