@@ -161,8 +161,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.pending++;
-        if (this.pending === 1) {
+        if (++this.pending === 1) {
+            console.log('this.pending:start inside', this.pending);
             this.parentView.$el.trigger('imagesLoadStart');
         }
     },
@@ -171,8 +171,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.pending--;
-        if (this.pending === 0) {
+        if (--this.pending === 0) {
+            console.log('this.pending:end inside', this.pending);
             this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
         }
     }
