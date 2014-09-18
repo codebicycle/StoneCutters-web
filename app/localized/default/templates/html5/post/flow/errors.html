@@ -1,9 +1,10 @@
-<header>{{ dictionary["misc.ThereWasProb"] }}</header><!-- posting_buttonpublish.ValidationError -->
-<ul>
-    {% for error in errors %}
-        <li><strong>{{ error.selector }}:</strong> {{ error.message }}</li>
-    {% endfor %}
-</ul>
-<footer>
-    <span class="close">{{ dictionary["contactseller_form.Close"] }}</span>
-</footer>
+<div class="summary">
+	<header class="title">{{ dictionary["misc.ThereWasProb"] }}</header><!-- posting_buttonpublish.ValidationError -->
+	<ul class="issues">
+	    {% for error in errors %}
+	        <li class="issue"><strong>{{ error.selector }}:</strong> {{ error.message }}</li>
+	    {% endfor %}
+	</ul>
+	<p class="message">{{ dictionary["misc.ErrorPleaseTryLater"] }}</p>
+</div>
+<footer class="close">{{ dictionary["contactseller_form.Close"] }}</footer>

@@ -29,16 +29,22 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        console.log(errors);
         this.errors = errors;
         this.render();
         this.$el.addClass('visible');
+        
+        this.timeout = setTimeout(function onTimeout() {
+            this.$el.trigger('hide');
+        }.bind(this), 15000);
     },
     onHide: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
         this.$el.removeClass('visible');
     },
     onCloseClick: function(event) {

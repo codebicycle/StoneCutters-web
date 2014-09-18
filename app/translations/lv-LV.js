@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'J\u016Bs sa\u0146emsiet e-pastu, kad j\u016Bsu sludin\u0101jums b\u016Bs aktiv\u0113ts',
     'misc.Email_Mob': 'E-pasts',
     'misc.EnterNameForBuyers_Mob': 'Ievadiet savu v\xAD\u0101rdu, lai iesp\u0113jamie pirc\u0113ji zin\u0101tu, kas j\u016Bs esat',
+    'misc.ErrorPleaseTryLater': 'Atvainojiet, gad\u012Bj\u0101s k\u013C\u016Bda, un j\u016Bsu piepras\u012Bjumu nevar\u0113ja apstr\u0101d\u0101t. L\u016Bdzu, v\u0113l\u0101k m\u0113\u0123iniet v\u0113lreiz.',
     'misc.EveryoneCanSell': 'Ikviens var p\u0101rdot vietn\u0113 OLX',
     'misc.FreeIn_Mob': 'Free in',
     'misc.GetTheFreeApp': 'SA\u0145EMIET BEZMAKSAS LIETOTNI',

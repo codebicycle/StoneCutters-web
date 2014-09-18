@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Anda akan menerima sebuah email ketika iklan Anda diaktifkan',
     'misc.Email_Mob': 'Email',
     'misc.EnterNameForBuyers_Mob': 'Masukkan nama Anda agar calon pembeli tahu siapa Anda',
+    'misc.ErrorPleaseTryLater': 'Maaf, terdapat kesalahan dan permintaan Anda tidak dapat diproses. Harap coba lagi nanti.',
     'misc.EveryoneCanSell': 'Setiap orang dapat menjual di OLX',
     'misc.FreeIn_Mob': 'Gratis di',
     'misc.GetTheFreeApp': 'DAPATKAN APL GRATIS',

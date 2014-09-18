@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Primit \u0107ete e-po\u0161tu kad se va\u0161 oglas aktivira',
     'misc.Email_Mob': 'E-po\u0161ta',
     'misc.EnterNameForBuyers_Mob': 'Unesite svoje ime kako bi potencijalni kupci mogli znati tko ste.',
+    'misc.ErrorPleaseTryLater': '\u017Dao nam je, postoji neka gre\u0161ka i va\u0161 zahtjev se ne mo\u017Ee sprovesti. Molimo poku\u0161ajte kasnije.',
     'misc.EveryoneCanSell': 'Svako mo\u017Ee prodavati na  OLX-u',
     'misc.FreeIn_Mob': 'Besplatno u',
     'misc.GetTheFreeApp': 'PREUZMITE BESPLATNU APLIKACIJU',

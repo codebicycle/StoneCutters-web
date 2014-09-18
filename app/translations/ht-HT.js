@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'W ap resevwa yon im\xE8l l\xE8 anons ou a aktive',
     'misc.Email_Mob': 'Im\xE8l',
     'misc.EnterNameForBuyers_Mob': 'Mete non w pou moun ki vle achte yo ka konnen kiy\xE8s ou ye',
+    'misc.ErrorPleaseTryLater': 'Nou regr\xE8t, te gen yon er\xE8 epi nou pa te ka trete demann ou a. Tanpri eseye ank\xF2 pita.',
     'misc.EveryoneCanSell': 'Tout moun ka vann souOLX',
     'misc.FreeIn_Mob': 'Gratis sou',
     'misc.GetTheFreeApp': 'PRAN APLIKASYON GRATIS LA',

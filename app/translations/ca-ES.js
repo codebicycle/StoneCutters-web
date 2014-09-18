@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Quan el teu anunci sigui activat rebr\xE0s un correu electr\xF2nic',
     'misc.Email_Mob': 'Correu electr\xF2nic',
     'misc.EnterNameForBuyers_Mob': 'Escriu el teu nom perqu\xE8 els compradors potencials s\xE0piguen qui ets',
+    'misc.ErrorPleaseTryLater': 'Ho sentim. Hi ha hagut un error i la teva sol\xB7licitud no ha pogut ser processada. Si us plau, torna-ho a intentar m\xE9s tard.',
     'misc.EveryoneCanSell': 'Tothom pot vendre a OLX',
     'misc.FreeIn_Mob': 'Gratis a',
     'misc.GetTheFreeApp': 'ACONSEGUEIX L\'APLICACI\xD3 GRATU\xCFTA',

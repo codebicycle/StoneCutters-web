@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Voc\xEA ir\xE1 receber um e-mail quando o an\xFAncio estiver ativo.',
     'misc.Email_Mob': 'email',
     'misc.EnterNameForBuyers_Mob': 'Preencha seu nome para que os compradores saibam quem \xE9 voc\xEA.',
+    'misc.ErrorPleaseTryLater': 'Desculpe, houve um erro e o seu pedido n\xE3o pode ser processado. Tente novamente mais tarde, por favor.',
     'misc.EveryoneCanSell': 'Everyone can sell on OLX',
     'misc.FreeIn_Mob': 'Gr\xE1tis na',
     'misc.GetTheFreeApp': 'BAIXAR APLICATIVO GR\xC1TIS',

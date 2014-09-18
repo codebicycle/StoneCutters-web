@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Saat s\xE4hk\xF6postia kun imoituksesi on aktivoitu',
     'misc.Email_Mob': 'S\xE4hk\xF6posti',
     'misc.EnterNameForBuyers_Mob': 'Kirjoita nimesi, jotta mahdolliset ostajat tiet\xE4v\xE4t, kuka olet',
+    'misc.ErrorPleaseTryLater': 'Virhe ilmeni ja pyynt\xF6\xE4 ei voida k\xE4sitell\xE4. Yrit\xE4 my\xF6hemmin uudelleen.',
     'misc.EveryoneCanSell': 'Kaikki voivat myyd\xE4 kohteessa OLX',
     'misc.FreeIn_Mob': 'Ilmainen palvelussa',
     'misc.GetTheFreeApp': 'HANKI ILMAINEN SOVELLUS',

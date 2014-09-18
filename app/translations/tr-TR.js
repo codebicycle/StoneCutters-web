@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': '\u0130lan\u0131n\u0131z etkinle\u015Ftirildi\u011Finde bir e-posta alacaks\u0131n\u0131z',
     'misc.Email_Mob': 'E-posta',
     'misc.EnterNameForBuyers_Mob': 'Potansiyel al\u0131c\u0131lar\u0131n\u0131z\u0131n kim oldu\u011Funuzu g\xF6rebilmesi i\xE7in ad\u0131n\u0131z\u0131 girin',
+    'misc.ErrorPleaseTryLater': '\xDCzg\xFCn\xFCz, bir hata oldu ve iste\u011Finiz ger\xE7ekle\u015Ftirilemedi. L\xFCtfen daha sonra tekrar deneyin.',
     'misc.EveryoneCanSell': 'Herkes OLX i\xE7erisinde sat\u0131\u015F yapabilir',
     'misc.FreeIn_Mob': '\u015Eurada \xFCcretsiz:',
     'misc.GetTheFreeApp': 'UYGULAMAYI \xDCCRETS\u0130Z \u0130ND\u0130R\u0130N',

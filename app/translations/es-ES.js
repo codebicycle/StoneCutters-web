@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Recibir\xE1s un email en cuanto tu aviso se haya activado',
     'misc.Email_Mob': 'Email',
     'misc.EnterNameForBuyers_Mob': 'Ingresa tu nombre para que los compradores sepan quien sos',
+    'misc.ErrorPleaseTryLater': 'Lo sentimos, se ha producido un error y no hemos podido procesar tu solicitud. Int\xE9ntalo de nuevo m\xE1s tarde.',
     'misc.EveryoneCanSell': 'En OLX todos pueden vender',
     'misc.FreeIn_Mob': 'Gratis en',
     'misc.GetTheFreeApp': 'DESCARGA LA APP GRATIS',

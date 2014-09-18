@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Makakatanggap kayo ng isang e-mail kapag inaktiba na ang inyong anunsyo',
     'misc.Email_Mob': 'Mag-email',
     'misc.EnterNameForBuyers_Mob': 'Ilagay ang inyong pangalan para alam ng mga maaaring bumili kung sino kayo',
+    'misc.ErrorPleaseTryLater': 'Paumanhin, nagkaroon ng error at hindi maiproseso ang inyong kahilingan. Mangyaring subukan muli mamaya.',
     'misc.EveryoneCanSell': 'Maaaring magbenta ang sinuman sa OLX',
     'misc.FreeIn_Mob': 'Libre sa',
     'misc.GetTheFreeApp': 'KUNIN ANG LIBRENG APP',

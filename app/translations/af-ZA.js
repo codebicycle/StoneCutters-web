@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Jy sal \'n e-posboodskap ontvang sodra jou advt. geaktiveer is.',
     'misc.Email_Mob': 'E-pos',
     'misc.EnterNameForBuyers_Mob': 'Voer jou naam s\xF3 in dat potensi\xEBle kopers sal weet wie jy is.',
+    'misc.ErrorPleaseTryLater': 'Jammer, daar was \'n fout en jou versoek kon nie verwerk word nie. Probeer asseblief weer later.',
     'misc.EveryoneCanSell': 'Almal kan op OLX verkoop',
     'misc.FreeIn_Mob': 'Gratis in',
     'misc.GetTheFreeApp': 'KRY DIE GRATIS TOEPASSING',

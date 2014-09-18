@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Po aktywowaniu og\u0142oszenia otrzymasz wiadomo\u015B\u0107 e-mail z potwierdzeniem',
     'misc.Email_Mob': 'E-mail',
     'misc.EnterNameForBuyers_Mob': 'Przedstaw si\u0119, \u017Ceby potencjalni kupuj\u0105cy wiedzieli, kim jeste\u015B',
+    'misc.ErrorPleaseTryLater': 'Przepraszamy, ale wyst\u0105pi\u0142 b\u0142\u0105d i nie mo\u017Cemy obs\u0142u\u017Cy\u0107 Twojej pro\u015Bby. Spr\xF3buj ponownie p\xF3\u017Aniej.',
     'misc.EveryoneCanSell': 'Ka\u017Cdy mo\u017Ce sprzedawa\u0107 w serwisie OLX',
     'misc.FreeIn_Mob': 'Bezp\u0142atnie w',
     'misc.GetTheFreeApp': 'OTRZYMAJ BEZP\u0141ATN\u0104 APLIKACJ\u0118',

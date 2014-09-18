@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Ve\u0163i primi un e-mail c\xE2nd anun\u0163ul dvs. va fi activ',
     'misc.Email_Mob': 'E-mail',
     'misc.EnterNameForBuyers_Mob': 'Introduce\u0163i numele dvs. astfel \xEEnc\xE2t poten\u0163ialii clienti s\u0103 \u015Ftie cine sunte\u0163i',
+    'misc.ErrorPleaseTryLater': 'Ne pare r\u0103u, a ap\u0103rut o eroare \u015Fi cererea dvs. nu a putut fi procesat\u0103. V\u0103 rug\u0103m s\u0103 \xEEncerca\u0163i mai t\xE2rziu.',
     'misc.EveryoneCanSell': 'Toata lumea poate vinde pe OLX',
     'misc.FreeIn_Mob': 'Gratis \xEEn',
     'misc.GetTheFreeApp': 'DESC\u0102RCA\u0162I APLICA\u0162IA GRATUIT\u0102',

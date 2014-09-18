@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Hirdet\xE9se aktiv\xE1l\xE1s\xE1r\xF3l e-mailben \xE9rtes\xEDtj\xFCk',
     'misc.Email_Mob': 'E-mail',
     'misc.EnterNameForBuyers_Mob': '\xCDrja be a nev\xE9t, hogy potenci\xE1lis v\xE1s\xE1rl\xF3i tudj\xE1k, ki \xD6n.',
+    'misc.ErrorPleaseTryLater': 'Sajn\xE1ljuk, hiba t\xF6rt\xE9nt \xE9s k\xE9r\xE9s\xE9t nem siker\xFClt teljes\xEDten\xFCnk. K\xE9rj\xFCk, pr\xF3b\xE1lja meg \xFAjra k\xE9s\u0151bb.',
     'misc.EveryoneCanSell': 'N\xE1lunk mindenki eladhat: OLX',
     'misc.FreeIn_Mob': 'Ingyenesen innen:',
     'misc.GetTheFreeApp': 'T\xD6LTSE LE AZ INGYENES ALKALMAZ\xC1ST',

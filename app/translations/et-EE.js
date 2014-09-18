@@ -195,6 +195,7 @@ module.exports = {
     'misc.EmailAdActivated_Mob': 'Kui teie kuulutus on aktiveeritud, saate sellekohase e-kirja',
     'misc.Email_Mob': 'E-kiri',
     'misc.EnterNameForBuyers_Mob': 'Sisestage oma nimi, et potentsiaalsed ostjad teaksid, kes te olete',
+    'misc.ErrorPleaseTryLater': 'Kahjuks tekkis viga ja teie taotlust ei saadud k\xE4sitleda. Palun proovige veidi aja p\xE4rast uuesti.',
     'misc.EveryoneCanSell': 'Iga\xFCks v\xF5ib OLXis m\xFC\xFCa',
     'misc.FreeIn_Mob': 'Tasuta rakenduses',
     'misc.GetTheFreeApp': 'HANKIGE TASUTA RAKENDUS',
