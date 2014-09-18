@@ -35,7 +35,7 @@ module.exports = function() {
         app.then(require('./modules/cluster'));
     }
 
-    if (config.get(['crons', 'enabled'], true)) {
+    if (config.get(['cron', 'enabled'], false)) {
         app.then(require('./crons'));
     }
 

@@ -40,6 +40,9 @@ memwatch:
 graphite:
   enabled: false
 
+cron:
+  enabled: false
+
 statsD:
   enabled: false
 
