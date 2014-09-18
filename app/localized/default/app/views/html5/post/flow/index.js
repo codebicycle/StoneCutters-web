@@ -32,8 +32,9 @@ module.exports = Base.extend({
         history.pushState(null, "", window.location.pathname);
 
         $(window).on('popstate', onpopstate);
+        var popText = this.dictionary['misc.WantToGoBack'];
         function onpopstate() {
-            if (confirm('Are you sure you want to leave this page?')) {
+            if (confirm(popText)) { // Now find a better translation
                 $(window).off('popstate', onpopstate);
                 history.back();
             }
