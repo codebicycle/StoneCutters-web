@@ -161,6 +161,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        $('body > .loading').show();
+
         if (++this.pending === 1) {
             this.parentView.$el.trigger('imagesLoadStart');
         }
@@ -169,6 +171,8 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+
+        $('body > .loading').hide();
 
         if (--this.pending === 0) {
             this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
