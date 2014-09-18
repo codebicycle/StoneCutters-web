@@ -11,7 +11,7 @@ var HOUR = 60 * MINUTE;
 var DAY = 24 * HOUR;
 var MONTH = 30 * DAY;
 
-new CronJob('0 0 */6 * * *', onTick, onEnd, true);
+new CronJob('0 0 */1 * * *', onTick, onEnd, true);
 
 function onEnd() {
     console.log('[OLX_DEBUG]', 'cron', 'tmp', 'end');

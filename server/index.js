@@ -35,7 +35,7 @@ module.exports = function() {
         app.then(require('./modules/cluster'));
     }
 
-    require('./crons/tmp');
+    require('./crons');
 
     app.val(require('./bootstrap'));
 };
