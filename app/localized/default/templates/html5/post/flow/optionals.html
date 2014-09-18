@@ -2,7 +2,10 @@
     <div class="summary" id="category-summary">
         <div class="changeCategory">
             <small>{{ dictionary["posting_selectcategory.categories"] }}</small>
+            {# Showing category and subcategory until we improve the navigationj handling
             <span>{{ category.trName }} <span class="change">{{ dictionary["defaultfooter.change"] }}</span></span>
+            #}
+            <span>{{ category.trName }} :: {{ subcategory.trName }} <span class="change">{{ dictionary["defaultfooter.change"] }}</span></span>
         </div>
         <div class="changeSubcategory">
             <small>{{ dictionary["posting_selectcategory.subCategories"] }}</small>
