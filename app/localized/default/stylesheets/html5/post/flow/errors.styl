@@ -8,9 +8,88 @@
 
 	}
 
+	&#errors {
+
+		padding: 1rem;
+		position: relative;
+		font-size: 1em;
+		border: none;
+
+	}
+
+	.summary {
+
+		padding-right: 3rem;
+
+	}
+
+	.title {
+
+		font-size: 1.25em;
+		line-height: 1em;
+
+	}
+
+	.issues {
+
+		padding-top: .5em;
+
+		.issue {
+
+			font-size: .8em;
+
+		}
+
+	}
+
+	.message {
+
+		padding-top: .5rem;
+		font-size: .8em;
+
+	}
+
 	.close {
 
-		
+		position: absolute;
+		top: .5rem;
+		right: .5rem;
+		overflow: hidden;
+		width: 1.5rem;
+		height: 1.5rem;
+		border: solid 2px #F00;
+		border-radius: 100%;
+		text-indent: -9000em;
+
+		&:before,
+		&:after {
+
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 0;
+			height: 1rem;
+			margin: -0.5rem 0 0 -1px;
+			border-right: 2px solid red;
+
+		}
+
+		&:before {
+
+			-ms-transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+
+		}
+
+		&:after {
+
+			-ms-transform: rotate(-45deg);
+			-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+			
+		}
 
 	}
 

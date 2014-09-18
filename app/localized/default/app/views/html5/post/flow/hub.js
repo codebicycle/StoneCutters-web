@@ -166,6 +166,11 @@ module.exports = Base.extend({
                     $emailSummary.addClass('success').text(field.value);
                 }
             }
+            else if (field.name === 'phone') {
+                if (errors[field.name]) {
+                    failed = true;
+                }
+            }
         });
         if (!city || !city.url) {
             failed = true;

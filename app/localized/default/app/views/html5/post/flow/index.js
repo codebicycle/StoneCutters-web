@@ -29,6 +29,18 @@ module.exports = Base.extend({
                 custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
             };
         }.bind(this));
+        history.pushState(null, "", window.location.pathname);
+
+        $(window).on('popstate', onpopstate);
+        function onpopstate() {
+            if (confirm('Are you sure you want to leave this page?')) {
+                $(window).off('popstate', onpopstate);
+                history.back();
+            }
+            else {
+                history.pushState(null, "", window.location.pathname);
+            }
+        }
     },
     onBeforeUnload: function(event) {
         return ' ';
@@ -74,7 +86,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        
+
         this.$('header').trigger('change', [title, current, back || 'hub', data]);
     },
     onStepChange: function(event, before, after) {
@@ -177,7 +189,6 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
-            console.log('validate', this.form); // Remove log
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -186,7 +197,6 @@ module.exports = Base.extend({
         }.bind(this);
 
         var post = function(done, response) {
-            console.log('create', this.form); // Remove log
             query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -199,7 +209,6 @@ module.exports = Base.extend({
         var fail = function(err) {
             // TODO: Improve error handling
             always();
-            console.log('error', err); // Remove log
             if (err) {
                 if (err.responseText) {
                     err = JSON.parse(err.responseText);
@@ -228,6 +237,8 @@ module.exports = Base.extend({
         var always = function() {
             $loading.hide();
         }.bind(this);
+
+        this.$('#errors').trigger('hide');
 
         if (user) {
             query.token = user.token;
