@@ -201,6 +201,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'T\xD6LTSE LE AZ INGYENES ALKALMAZ\xC1ST',
     'misc.LearnToSell': '\xCDgy adjon el',
     'misc.NoResults': 'Nem tal\xE1ltunk semmit, de biztosan megtal\xE1lja n\xE1lunk, amit keres!',
+    'misc.PhoneNumberNotValid': 'Az \xD6n \xE1ltal megadott telefonsz\xE1m \xE9rv\xE9nytelen. K\xE9rj\xFCk, ellen\u0151rizze!',
     'misc.PostForFree_LandingPage': 'Adja fel hirdet\xE9s\xE9t ingyenesen: OLX',
     'misc.PostYourFreeAdCaps_Mob': 'ADJON FEL INGYENES HIRDET\xC9ST',
     'misc.RejectedAd_Caps': 'Elutas\xEDtott hirdet\xE9s',
@@ -212,6 +213,7 @@ module.exports = {
     'misc.ThereWasProb': 'Hiba mer\xFClt fel',
     'misc.TitleCharacters_Mob': 'A c\xEDm minim\xE1lis hossza: <<NUMBER>> karakter',
     'misc.Title_Mob': 'C\xEDm',
+    'misc.WantToGoBack': 'Biztos vissza akar t\xE9rni?',
     'business_directory.Map': 'T\xE9rk\xE9p',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'kateg\xF3ria:'

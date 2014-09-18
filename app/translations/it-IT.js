@@ -201,6 +201,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'SCARICA L\'APP GRATUITA',
     'misc.LearnToSell': 'Impara a vendere',
     'misc.NoResults': 'Non abbiamo trovato nulla, ma abbiamo ci\xF2 che stai cercando!',
+    'misc.PhoneNumberNotValid': 'Il numero di telefono che hai inserito non \xE8 valido. Sei pregato di controllarlo.',
     'misc.PostForFree_LandingPage': 'Pubblica il tuo annuncio GRATUITAMENTE su OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBBLICA IL TUO ANNUNCIO GRATUITO',
     'misc.RejectedAd_Caps': 'Annuncio respinto',
@@ -212,6 +213,7 @@ module.exports = {
     'misc.ThereWasProb': 'Si \xE8 verificato un problema',
     'misc.TitleCharacters_Mob': 'il titolo deve contenere almeno <<NUMBER>> caratteri',
     'misc.Title_Mob': 'Titolo',
+    'misc.WantToGoBack': 'Sei sicuro di voler tornare indietro?',
     'business_directory.Map': 'Mappa',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'in'

@@ -201,6 +201,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'OTRZYMAJ BEZP\u0141ATN\u0104 APLIKACJ\u0118',
     'misc.LearnToSell': 'Naucz si\u0119 sprzedawa\u0107',
     'misc.NoResults': 'Niczego nie znale\u017Ali\u015Bmy, ale mamy to, czego potrzebujesz!',
+    'misc.PhoneNumberNotValid': 'Wprowadzony numer telefonu jest nieprawid\u0142owy. Spr\xF3buj ponownie.',
     'misc.PostForFree_LandingPage': 'Opublikuj BEZP\u0141ATNE og\u0142oszenie w serwisie OLX',
     'misc.PostYourFreeAdCaps_Mob': 'OPUBLIKUJ BEZP\u0141ATNE OG\u0141OSZENIE',
     'misc.RejectedAd_Caps': 'Og\u0142oszenie odrzucone',
@@ -212,6 +213,7 @@ module.exports = {
     'misc.ThereWasProb': 'Wyst\u0105pi\u0142 problem',
     'misc.TitleCharacters_Mob': 'Tytu\u0142 powinien zawiera\u0107 przynajmniej <<NUMBER>> znak\xF3w',
     'misc.Title_Mob': 'Tytu\u0142',
+    'misc.WantToGoBack': 'Czy na pewno chcesz si\u0119 cofn\u0105\u0107?',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'mo\u017Cna teraz znale\u017A\u0107 w kategorii:'

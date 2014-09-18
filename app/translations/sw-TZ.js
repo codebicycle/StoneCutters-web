@@ -201,6 +201,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PATA PROG YA BURE',
     'misc.LearnToSell': 'Kujifunza jinsi ya kuuza',
     'misc.NoResults': 'Hatukupata kitu chochote, lakini tuna kile unachotafuta!',
+    'misc.PhoneNumberNotValid': 'Namba ya simu uliyoingiza si halali. Tafadhali, angalia.',
     'misc.PostForFree_LandingPage': 'Chapisha tangazo BURE kwenye OLX',
     'misc.PostYourFreeAdCaps_Mob': 'CHAPISHA TANGAZO LAKO BURE',
     'misc.RejectedAd_Caps': 'Tangazo lililokataliwa',
@@ -212,6 +213,7 @@ module.exports = {
     'misc.ThereWasProb': 'Kulikuwa na tatizo',
     'misc.TitleCharacters_Mob': 'Kichwa ni lazima iwe na vibambo <<NUMBER>>',
     'misc.Title_Mob': 'Kichwa',
+    'misc.WantToGoBack': 'Je, una uhakika unataka kurejea nyuma?',
     'business_directory.Map': 'Ramani',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'katika'

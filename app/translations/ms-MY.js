@@ -201,6 +201,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DAPATKAN APLIKASI PERCUMA',
     'misc.LearnToSell': 'Pelajari cara untuk menjual',
     'misc.NoResults': 'Kami tak menjumpai apa-apa, tapi kami ada apa yang anda cari!',
+    'misc.PhoneNumberNotValid': 'Nombor telefon yang anda masukkan tidak sah. Sila semak.',
     'misc.PostForFree_LandingPage': 'Siarkan iklan anda SECARA PERCUMA di OLX',
     'misc.PostYourFreeAdCaps_Mob': 'SIARKAN IKLAN PERCUMA ANDA',
     'misc.RejectedAd_Caps': 'Iklan yang ditolak',
@@ -212,6 +213,7 @@ module.exports = {
     'misc.ThereWasProb': 'Terdapat masalah',
     'misc.TitleCharacters_Mob': 'Tajuk mesti mengandungi sekurang-kurangnya <<NUMBER>> aksara',
     'misc.Title_Mob': 'Tajuk',
+    'misc.WantToGoBack': 'Anda apasti anda hendak undur?',
     'business_directory.Map': 'Peta',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'dalam'

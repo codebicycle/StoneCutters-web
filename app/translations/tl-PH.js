@@ -201,6 +201,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'KUNIN ANG LIBRENG APP',
     'misc.LearnToSell': 'Alamin kung paano magbenta',
     'misc.NoResults': 'Wala kaming nahanap na anumang bagay, pero mayroon kami ng hinahanap mo!',
+    'misc.PhoneNumberNotValid': 'Hindi wasto ang numero ng telepono na ipinasok mo. Mangyaring tignan.',
     'misc.PostForFree_LandingPage': 'I-post ang inyong anunsyo NANG LIBRE sa OLX',
     'misc.PostYourFreeAdCaps_Mob': 'I-POST ANG INYONG ANUNSYO NANG LIBRE',
     'misc.RejectedAd_Caps': 'tinanggihan na ad',
@@ -212,6 +213,7 @@ module.exports = {
     'misc.ThereWasProb': 'Nagkaroon ng problema',
     'misc.TitleCharacters_Mob': 'Ang pamagat ay dapat naglalaman ng hindi bababa sa <<NUMBER>> (na) character',
     'misc.Title_Mob': 'Pamagat',
+    'misc.WantToGoBack': 'Sigurado ba kayong gusto ninyong bumalik?',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
     'crm_new_version.RenameCategory_3': 'sa'
