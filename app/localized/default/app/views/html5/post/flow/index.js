@@ -18,9 +18,6 @@ module.exports = Base.extend({
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     postRender: function() {
-        var app = this.app;
-        var popText = this.dictionary['misc.WantToGoBack'];
-
         $(window).on('beforeunload', this.onBeforeUnload);
         $(window).on('unload', {
             async: false
@@ -32,20 +29,6 @@ module.exports = Base.extend({
                 custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
             };
         }.bind(this));
-        history.pushState(null, "", window.location.pathname);
-
-        $(window).on('popstate', onpopstate);
-        function onpopstate() {
-            if (!app.get('loading')) {
-                if (confirm(popText)) { // Now find a better translation
-                    $(window).off('popstate', onpopstate);
-                    history.back();
-                }
-                else {
-                    history.pushState(null, "", window.location.pathname);
-                }
-            }
-        }
     },
     onBeforeUnload: function(event) {
         return ' ';
@@ -86,6 +69,26 @@ module.exports = Base.extend({
         this.$('#' + this.currentViewName).trigger('show', data || {});
         this.$('#' + from).trigger('hide', data || {});
         this.$el.scrollTop();
+        if (!this.edited) {
+            this.handleBack();
+        }
+    },
+    handleBack: function() {
+        var popText = this.dictionary['misc.WantToGoBack'];
+
+        this.edited = true;
+        history.pushState(null, '', window.location.pathname);
+        $(window).on('popstate', onpopstate);
+
+        function onpopstate(event) {
+            if (confirm(popText)) { // Now find a better translation
+                $(window).off('popstate', onpopstate);
+                history.back();
+            }
+            else {
+                history.pushState(null, '', window.location.pathname);
+            }
+        }
     },
     onHeaderChange: function(event, title, current, back, data) {
         event.preventDefault();
