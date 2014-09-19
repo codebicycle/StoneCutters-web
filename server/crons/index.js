@@ -2,15 +2,23 @@
 
 var fs = require('fs');
 var path = require('path');
-var crons = {};
 
-fs.readdirSync(__dirname).forEach(function(filename) {
-    var name = path.basename(filename, '.js');
+module.exports = function(done) {
+    var crons = {};
+    var args = arguments;
 
-    if (name === 'index') {
-        return;
-    }
-    crons[name] = require('./' + name);
-});
+    fs.readdir(__dirname, function callback(err, files) {
+        if (err) {
+            return done.fail(err);
+        }
+        files.forEach(function(filename) {
+            var name = path.basename(filename, '.js');
 
-module.exports = crons;
+            if (name === 'index') {
+                return;
+            }
+            crons[name] = require('./' + name);
+        });
+        done.apply(null, [].slice.call(args, 1).concat([crons]));
+    });
+};

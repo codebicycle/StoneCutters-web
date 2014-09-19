@@ -41,7 +41,7 @@ graphite:
   enabled: false
 
 cron:
-  enabled: false
+  enabled: true
 
 statsD:
   enabled: false
