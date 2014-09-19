@@ -119,6 +119,8 @@ module.exports = Base.extend({
                     json: true,
                     done: function() {
                         $this.toggleClass('add remove');
+                        $this.attr('data-qa', $this.attr('data-qa') == 'add-favorite' ? 'remove-favorite' : 'add-favorite');
+
                         $('.msgCont').addClass('visible');
                         setTimeout(function(){
                             $('.msgCont').removeClass('visible');
