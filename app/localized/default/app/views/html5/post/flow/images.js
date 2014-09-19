@@ -88,7 +88,8 @@ module.exports = Base.extend({
             window.URL.revokeObjectURL(this.src);
 
             var exif = function(done) {
-                EXIF.getData(image, done);
+                EXIF.getData(image);
+                done();
             }.bind(this);
 
             var post = function(done) {
@@ -112,7 +113,7 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, res) {
-                this.selected[$input.attr('name')] = {
+                    this.selected[$input.attr('name')] = {
                     id: res.shift(),
                     file: imageUrl,
                     orientation: 1
