@@ -18,6 +18,9 @@ module.exports = Base.extend({
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     postRender: function() {
+        var app = this.app;
+        var popText = this.dictionary['misc.WantToGoBack'];
+
         $(window).on('beforeunload', this.onBeforeUnload);
         $(window).on('unload', {
             async: false
@@ -32,14 +35,15 @@ module.exports = Base.extend({
         history.pushState(null, "", window.location.pathname);
 
         $(window).on('popstate', onpopstate);
-        var popText = this.dictionary['misc.WantToGoBack'];
         function onpopstate() {
-            if (confirm(popText)) { // Now find a better translation
-                $(window).off('popstate', onpopstate);
-                history.back();
-            }
-            else {
-                history.pushState(null, "", window.location.pathname);
+            if (!app.get('loading')) {
+                if (confirm(popText)) { // Now find a better translation
+                    $(window).off('popstate', onpopstate);
+                    history.back();
+                }
+                else {
+                    history.pushState(null, "", window.location.pathname);
+                }
             }
         }
     },
