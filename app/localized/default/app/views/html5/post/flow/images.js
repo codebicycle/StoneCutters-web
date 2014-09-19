@@ -80,6 +80,8 @@ module.exports = Base.extend({
         
         image.onload = function() {
         
+            window.URL.revokeObjectURL(this.src);
+
             var exif = function(done) {
                 EXIF.getData(image, done);
             }.bind(this);
@@ -110,7 +112,6 @@ module.exports = Base.extend({
                     file: imageUrl,
                     orientation: 1
                 };
-                this.$el.trigger('imageLoadEnd');
                 done();
             }.bind(this);
 
@@ -119,14 +120,13 @@ module.exports = Base.extend({
                 var cssClass = 'fill r' + (orientation || 1);
                 
                 if (orientation) {
-                    this.selected[$input.attr('name')] = {
-                        orientation: orientation
-                    };
+                    this.selected[$input.attr('name')].orientation = orientation;
                 }
                 $image.addClass(cssClass).css({
                     'background-image': 'url(' + imageUrl + ')'
                 });
                 $container.removeClass('loading').addClass('loaded');
+                this.$el.trigger('imageLoadEnd');
             }.bind(this);
 
             asynquence().or(image.onerror)
@@ -161,8 +161,6 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        $('body > .loading').show();
-
         if (++this.pending === 1) {
             this.parentView.$el.trigger('imagesLoadStart');
         }
@@ -171,8 +169,6 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
-        $('body > .loading').hide();
 
         if (--this.pending === 0) {
             this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
