@@ -1,17 +1,19 @@
+'use strict';
+
+var os = require('os');
 var fs = require('fs');
 var _ = require('underscore');
 var async = require('async');
 var asynquence = require('asynquence');
 var CronJob = require('cron').CronJob;
-var dir = '/tmp/';
-var extensions = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF'];
+var config = require('../config');
+var DIR = config.get(['formidable', 'uploadDir'], os.tmpDir()) + '/';
+var EXTENSIONS = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF'];
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
-var DAY = 24 * HOUR;
-var MONTH = 30 * DAY;
 
-new CronJob('0 0 */3 * * *', onTick, onEnd, true);
+new CronJob('0 0 */6 * * *', onTick, onEnd, true);
 
 function onEnd() {
     console.log('[OLX_DEBUG]', 'cron', 'tmp', 'end');
@@ -26,7 +28,7 @@ function onTick(end) {
         .val(end);
 
     function read(done) {
-        fs.readdir(dir, done.errfcb);
+        fs.readdir(DIR, done.errfcb);
     }
 
     function filter(done, files) {
@@ -35,7 +37,7 @@ function onTick(end) {
         function _filter(file, callback) {
             var extension = file.split('.').pop();
 
-            if (!_.contains(extensions, extension)) {
+            if (!_.contains(EXTENSIONS, extension)) {
                 return callback(false);
             }
             asynquence().or(done.fail)
@@ -43,7 +45,7 @@ function onTick(end) {
                 .val(evaluate);
 
             function stat(done) {
-               fs.stat(dir + file, done.errfcb);
+               fs.stat(DIR + file, done.errfcb);
             }
 
             function evaluate(stats) {
@@ -60,12 +62,11 @@ function onTick(end) {
         async.each(files, _unlink, done.errfcb);
 
         function _unlink(file, callback) {
-            fs.unlink(dir + file, callback);
+            fs.unlink(DIR + file, callback);
         }
     }
 
     function error(err) {
-        console.log('[OLX_DEBUG]', 'cron', 'tmp', 'err', err);
         end();
     }
 }
