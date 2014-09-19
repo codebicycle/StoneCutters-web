@@ -48,7 +48,7 @@ module.exports = {
         enabled: true,
         clicks: 0,
         time: 432000000,
-        ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
+        ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi','/posting' ,'/posting/success' , /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
