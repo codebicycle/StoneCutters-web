@@ -20,6 +20,7 @@ module.exports = Base.extend({
         'hide': 'onHide',
         'click .image:not(.fill .image)': 'onImageClick',
         'click .remove': 'onRemoveClick',
+        'click input[type=file]': 'onInputClick',
         'change form': 'onChange',
         'submit form': 'onSubmit',
         'restart': 'onRestart',
@@ -64,6 +65,10 @@ module.exports = Base.extend({
 
         delete this.selected[$input.attr('name')];
         this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
+    },
+    onInputClick: function(event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
     },
     onChange: function(event) {
         event.preventDefault();
