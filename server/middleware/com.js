@@ -19,7 +19,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var edgescape = req.get('x-akamai-edgescape');
             var countryCode;
 
-            if (!edgescape || !endsWith(req.host, '.com')) {
+            if (!edgescape || req.path !== '/' || !endsWith(req.host, '.com')) {
                 return next();
             }
             edgescape.split(',').forEach(function each(property) {
