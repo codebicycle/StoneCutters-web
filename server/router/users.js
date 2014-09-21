@@ -46,7 +46,7 @@ module.exports = function userRouter(app) {
                 var link = '/login';
                 var redirect = user ? user.get('redirect') : '';
 
-                if (redirect && redirect !== '/') {
+                if (redirect && redirect.match(/(\/register|\/login|\/logout|\/)/g)) {
                     link += '?redirect=' + redirect;
                 }
                 formidable.error(req, link, err, function redirect(url) {
