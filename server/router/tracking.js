@@ -186,7 +186,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 analytic.track({
                     custom: req.query.custom,
                     url: req.query.url,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
+                    clientId: req.rendrApp.session.get('clientId').substr(24),
+                    dynamics: {
+                        x20: req.rendrApp.session.get('platform') || utils.defaults.platform
+                    }
                 }, options);
             }
         }
