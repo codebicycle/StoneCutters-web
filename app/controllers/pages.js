@@ -14,8 +14,7 @@ module.exports = {
     terms: middlewares(terms),
     help: middlewares(help),
     interstitial: middlewares(interstitial),
-    error: middlewares(error),
-    esi: middlewares(esi)
+    error: middlewares(error)
 };
 
 function terms(params, callback) {
@@ -178,21 +177,5 @@ function error(params, callback) {
             error: err,
             analytics: analytics.generateURL.call(this)
         });
-    }
-}
-
-function esi(params, callback) {
-    var enabled = config.get('esi', true);
-
-    if (!enabled) {
-        return helpers.common.redirect.call(this, '/');
-    }
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        if (this.app.session.get('isServer')) {
-            this.app.req.res.setHeader('Edge-Control', 'dca=esi');
-        }
-        callback();
     }
 }

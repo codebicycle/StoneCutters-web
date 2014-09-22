@@ -2,8 +2,8 @@
     <input type="hidden" value="{{ dictionary["postingerror.InvalidEmail"] }}" name="errMsgMail" class="errMsgMail">
     <input type="hidden" value="{{ dictionary["postingerror.PleaseCompleteThisField"] }}" name="errMsgMandatory" class="errMsgMandatory">
     <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
-    <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav">
-    <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav">
+    <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav" >
+    <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav" >
 
     {% if not item.status.onReview %}
         {% set favClass = 'remove' %}
@@ -20,7 +20,7 @@
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, item.category.name, heading=false, ['<ul>
             <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
-            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
+            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '" data-qa="', favClass, '-favorite" >', favText, '</a></li>
         </ul>'] | join) }}
     {% else %}
         {% from macros import Breadcrumb %}
@@ -128,7 +128,7 @@
                 <span>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</span>
 
                 <div class="btnCenter">
-                    <input type="button" class="btns orange submit trackMe" value="{{ dictionary["contactseller_form.60"] }}" data-tracking="ItemPage-ClickReply" >
+                    <input type="button" class="btns orange submit trackMe" value="{{ dictionary["contactseller_form.60"] }}" data-tracking="ItemPage-ClickReply" data-qa="reply-send-button" >
                 </div>
             </form>
         <div class="clear"></div>
@@ -143,14 +143,14 @@
                 <span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
             {% endif %}
             {% if item.email and not item.phone %}
-                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                     <div>
                         <span>{{ dictionary["replymessage.Email"] }}</span>
                     </div>
                 </div>
             {% elif item.email and item.phone %}
                 {% if device.uriSchemeTel and device.uriSchemeSms %}
-                    <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -166,7 +166,7 @@
                         </a>
                     </div>
                 {% elif device.uriSchemeTel and not device.uriSchemeSms %}
-                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -177,7 +177,7 @@
                         </a>
                     </div>
                 {% elif device.uriSchemeSms and not device.uriSchemeTel %}
-                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>
@@ -188,7 +188,7 @@
                         </a>
                     </div>
                 {% else %}
-                    <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply_button" >
+                    <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
                         <div>
                             <span>{{ dictionary["replymessage.Email"] }}</span>
                         </div>

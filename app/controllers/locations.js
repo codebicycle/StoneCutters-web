@@ -17,6 +17,7 @@ function list(params, callback) {
     function controller() {
         var fetch = function(done) {
             var citiesParams = {
+                level: 'countries',
                 type: 'topcities',
                 location: this.app.session.get('siteLocation')
             };

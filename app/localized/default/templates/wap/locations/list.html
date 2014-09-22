@@ -57,7 +57,7 @@
                 {% for city in cities %}
                     <tr>
                         <td style="border-top: solid thin #808080;">
-                            <a style="display: block; padding: .25em .5em;" href="{{ ['/', target or ''] | join | link({location: city.url}) }}" data-qa="city_name" >
+                            <a style="display: block; padding: .25em .5em;" href="{{ ['/', target or ''] | join | link({location: city.url}) }}" data-qa="city-name" >
                                 <small style="display: block;">{{ city.name }}</small>
                             </a>
                         </td>
