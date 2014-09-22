@@ -247,6 +247,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 error: function(req, options) {
                     statsd.increment([req.query.location, 'reply', 'error', options.platform]);
                 }
+            },
+            post: {
+                success: function(req, options) {
+                    statsd.increment([req.query.location, 'posting', 'success', options.platform]);
+                },
+                error: function(req, options) {
+                    statsd.increment([req.query.location, 'posting', req.query.error, options.platform]);
+                }
             }
         };
 
