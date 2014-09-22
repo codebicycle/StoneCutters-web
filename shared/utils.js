@@ -284,7 +284,7 @@ function getUserAgent(req) {
     if (!isServer) {
         return '';
     }
-    return req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || req.get('user-agent') || defaults.userAgent;
+    return /*req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || */req.get('user-agent') || defaults.userAgent;
 }
 
 module.exports = {
