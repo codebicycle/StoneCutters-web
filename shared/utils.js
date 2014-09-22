@@ -85,7 +85,7 @@ function parse(qs, sep, eq, options) {
       if (idx >= 0) {
         kstr = x.substr(0, idx);
         vstr = x.substr(idx + 1);
-      } 
+      }
       else {
         kstr = x;
         vstr = '';
@@ -96,10 +96,10 @@ function parse(qs, sep, eq, options) {
 
       if (!hasOwnProperty(obj, k)) {
         obj[k] = v;
-      } 
+      }
       else if (_.isArray(obj[k])) {
         obj[k].push(v);
-      } 
+      }
       else {
         obj[k] = [obj[k], v];
       }
@@ -135,7 +135,7 @@ function stringify(obj, sep, eq, name) {
           return _.map(obj[k], function(v) {
             return ks + encodeURIComponent(stringifyPrimitive(v));
           }).join(sep);
-        } 
+        }
         else {
           return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
         }
@@ -280,6 +280,13 @@ function daysDiff(date) {
     return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
 }
 
+function getUserAgent(req) {
+    if (!isServer) {
+        return '';
+    }
+    return /*req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || */req.get('user-agent') || defaults.userAgent;
+}
+
 module.exports = {
     isServer: isServer,
     link: link,
@@ -289,5 +296,6 @@ module.exports = {
     cleanParams: cleanParams,
     get: get,
     daysDiff: daysDiff,
-    defaults: defaults
+    defaults: defaults,
+    getUserAgent: getUserAgent
 };
