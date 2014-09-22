@@ -16,7 +16,7 @@ function serverSync(method, model, options) {
     var req;
 
     options = _.clone(options);
-    options.url = this.getUrl(options.url, false, options.data);
+    options.url = this.getUrl(options.url, false);
     verb = methodMap[method];
     urlParts = options.url.split('?');
     req = this.app.req;

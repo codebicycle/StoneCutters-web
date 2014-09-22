@@ -13,7 +13,7 @@ then
 	cd 'environments'
 fi
 
-LOCAL_AUXI=$(cat /etc/sudoers | grep 'dev-laptop' | head -n1 | awk '{print $3}');
+LOCAL_AUXI=$(cat /etc/sudoers | grep 'LOCAL' | head -n1 | awk '{print $3}');
 LOCAL=${LOCAL_AUXI:0};
 
 if [ "$LOCAL" == "" ]; then

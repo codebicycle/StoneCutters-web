@@ -154,7 +154,7 @@ module.exports = {
     'post#subcategories': {
         url: 'posting/:categoryId'
     },
-    'post#categories': {
+    'post#categoriesOrFlow': {
         url :'posting'
     },
     'post#edit': {

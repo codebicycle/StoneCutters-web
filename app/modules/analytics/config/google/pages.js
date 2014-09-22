@@ -15,6 +15,7 @@ module.exports = {
     'post#subcategories': 'post_subcategorylist/[rendering]',
     'post#categories': 'post_categorylist/[rendering]',
     'post#edit': 'edititem',
+    'post#flow': 'not_set/post_form/[rendering]',
     'pages#terms': 'terms',
     'pages#help': 'help',
     'pages#interstitial': 'interstitial',

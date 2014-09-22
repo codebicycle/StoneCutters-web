@@ -5,10 +5,13 @@ var City = require('../models/city');
 
 module.exports = Base.extend({
     model: City,
-    url: '/countries/:location/:type',
+    url: '/:level/:location/:type',
     parse: function(response) {
-        this.metadata = response.metadata;
-        return response.data;
+        if (response.data) {
+            this.metadata = response.metadata;
+            return response.data;
+        }
+        return response;
     }
 });
 
