@@ -23,6 +23,7 @@ config/runtime.json
 *.swo
 conf.json
 build.json
+jmeter.log
 newrelic_agent.log
 mobile-webapp-static-*
 mobile-webapp-dynamic-*
