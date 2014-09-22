@@ -178,6 +178,8 @@ module.exports = function(nunjucks) {
         },
         'static': helpers.common.static,
         slugToUrl: helpers.common.slugToUrl,
-        hijri: helpers.hijri
+        hijri: helpers.hijri,
+        persianDigits: helpers.numbers.toPersian,
+        romanDigits: helpers.numbers.toRoman
     };
 };
