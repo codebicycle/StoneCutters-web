@@ -188,7 +188,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     url: req.query.url,
                     clientId: req.rendrApp.session.get('clientId').substr(24),
                     dynamics: {
-                        x20: req.rendrApp.session.get('platform')
+                        x20: req.rendrApp.session.get('platform') || utils.defaults.platform
                     }
                 }, options);
             }
