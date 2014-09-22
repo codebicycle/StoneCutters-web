@@ -284,18 +284,7 @@ function getUserAgent(req) {
     if (!isServer) {
         return '';
     }
-    var userAgent = req.header('device-stock-ua');
-
-    if (userAgent) {
-        console.log('[OLX_DEBUG]', 'getUserAgent', 'device-stock-ua', userAgent);
-        return userAgent;
-    }
-    userAgent = req.header('x-operamini-phone-ua');
-    if (userAgent) {
-        console.log('[OLX_DEBUG]', 'getUserAgent', 'x-operamini-phone-ua', userAgent);
-        return userAgent;
-    }
-    return req.get('user-agent') || defaults.userAgent;
+    return req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || req.get('user-agent') || defaults.userAgent;
 }
 
 module.exports = {
