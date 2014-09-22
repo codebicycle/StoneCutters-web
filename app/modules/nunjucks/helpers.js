@@ -164,7 +164,7 @@ module.exports = function(nunjucks) {
             href = helpers.common.fullizeUrl(href, this.ctx.app);
             return helpers.common.link(href, this.ctx.app, query || {});
         },
-        escape: function (text) {
+        encode: function (text) {
             return encodeURIComponent(text);
         },
         date: function(timestamp) {
