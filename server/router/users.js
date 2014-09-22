@@ -70,7 +70,7 @@ module.exports = function userRouter(app) {
     function register() {
         app.post('/register', handler);
 
-        function handler(req, res) {
+        function handler(req, res, next) {
             var user;
 
             function parse(done) {
@@ -103,12 +103,23 @@ module.exports = function userRouter(app) {
 
             function success() {
                 res.redirect(utils.link('/?register_success=true', req.rendrApp));
+                end();
             }
 
             function error(err) {
                 formidable.error(req, '/register', err, function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp));
+                    end(err);
                 });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    if (err) {
+                        console.log('NEXT for error', err.toString());
+                    }
+                    next.errfcb(err);
+                }
             }
 
             asynquence().or(error)
