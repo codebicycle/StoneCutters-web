@@ -10,7 +10,7 @@
             <li>
                 <h2>
                     <a href="{{ subcategory | slugToUrl | link }}">
-                        {{subcategory.trName}} &#x202A;<span dir="ltr">{{ ('(' + subcategory.counter + ')') if subcategory.counter > 0 }}</span>&#x202C;
+                        {{subcategory.trName}} &#x202A;<span dir="ltr">{{ ('(' + subcategory.counter | persianDigits + ')') if subcategory.counter > 0 }}</span>&#x202C;
                     </a>
                 </h2>
             </li>
