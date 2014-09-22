@@ -44,14 +44,14 @@ function test() {
         expect(users.login).to.be.instanceOf(Function);
     });
 
-    it('should login a user with valid credentials', function(done) {
-        var credentials = {
+    it('should login a valid user', function(done) {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456'
         };
 
-        mock(credentials);
-        success(done, assert, credentials);
+        mock(data);
+        success(done, assert, data);
 
         function assert(done) {
             expect(User.prototype.login).to.have.been.calledOnce;
@@ -60,12 +60,12 @@ function test() {
         }
     });
 
-    it('should not login a user with no credentials', function(done) {
-        var credentials = {};
+    it('should not login an empty user', function(done) {
+        var data = {};
 
-        mock(credentials);
-        mockFail(credentials);
-        fail(done, assert, credentials);
+        mock(data);
+        mockFail(data);
+        fail(done, assert, data);
 
         function assert(done, err) {
             expect(err).to.be.instanceOf(Error);
@@ -78,14 +78,14 @@ function test() {
     });
 
     it('should not login a user with no languages', function(done) {
-        var credentials = {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456'
         };
 
-        mock(credentials);
+        mock(data);
         req.rendrApp.session.get.withArgs('languages').returns();
-        fail(done, assert, credentials);
+        fail(done, assert, data);
 
         function assert(done, err) {
             expect(err).to.be.instanceOf(Error);
@@ -98,14 +98,14 @@ function test() {
     });
 
     it('should not login a user with no selectedLanguage', function(done) {
-        var credentials = {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456'
         };
 
-        mock(credentials);
+        mock(data);
         req.rendrApp.session.get.withArgs('selectedLanguage').returns();
-        fail(done, assert, credentials);
+        fail(done, assert, data);
 
         function assert(done, err) {
             expect(err).to.be.instanceOf(Error);
@@ -118,14 +118,14 @@ function test() {
     });
 
     it('should redirect after success', function(done) {
-        var credentials = {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456',
             redirect: '/test'
         };
 
-        mock(credentials);
-        success(done, assert, credentials);
+        mock(data);
+        success(done, assert, data);
 
         function assert(done) {
             expect(res.redirect).to.have.been.calledOnce;
@@ -134,13 +134,13 @@ function test() {
     });
 
     it('should redirect to / by default after success', function(done) {
-        var credentials = {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456'
         };
 
-        mock(credentials);
-        success(done, assert, credentials);
+        mock(data);
+        success(done, assert, data);
 
         function assert(done) {
             expect(utils.link).to.have.been.calledOnce;
@@ -150,31 +150,31 @@ function test() {
     });
 
     it('should redirect to "redirect" by default after success', function(done) {
-        var credentials = {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456',
             redirect: '/test'
         };
 
-        mock(credentials);
-        success(done, assert, credentials);
+        mock(data);
+        success(done, assert, data);
 
         function assert(done) {
             expect(utils.link).to.have.been.calledOnce;
-            expect(utils.link).to.have.been.calledWithExactly(credentials.redirect, req.rendrApp);
+            expect(utils.link).to.have.been.calledWithExactly(data.redirect, req.rendrApp);
             done();
         }
     });
 
     it('should not redirect after fail', function(done) {
-        var credentials = {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456'
         };
 
-        mock(credentials);
-        mockFail(credentials);
-        fail(done, assert, credentials);
+        mock(data);
+        mockFail(data);
+        fail(done, assert, data);
 
         function assert(done) {
             expect(formidable.error).to.have.been.calledWith(req, '/login');
@@ -185,18 +185,18 @@ function test() {
     });
 
     it('should not redirect but append "redirect" after fail', function(done) {
-        var credentials = {
+        var data = {
             usernameOrEmail: 'test@arwen.com',
             password: '123456',
             redirect: '/test'
         };
 
-        mock(credentials);
-        mockFail(credentials);
-        fail(done, assert, credentials);
+        mock(data);
+        mockFail(data);
+        fail(done, assert, data);
 
         function assert(done) {
-            expect(formidable.error).to.have.been.calledWith(req, '/login?redirect=' + credentials.redirect);
+            expect(formidable.error).to.have.been.calledWith(req, '/login?redirect=' + data.redirect);
             done();
         }
     });
@@ -238,7 +238,7 @@ function mockFail(data) {
     });
 }
 
-function success(done, assert, credentials) {
+function success(done, assert, data) {
     asynquence().or(done)
         .then(login)
         .then(assert)
@@ -249,7 +249,7 @@ function success(done, assert, credentials) {
     }
 }
 
-function fail(done, assert, credentials) {
+function fail(done, assert, data) {
     asynquence().or(done)
         .then(failure)
         .then(assert)
