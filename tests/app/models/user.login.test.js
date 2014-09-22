@@ -1,26 +1,31 @@
 'use strict';
 
-var asynquence = require('asynquence');
-var proxyquire = require('proxyquire');
-var dataAdapter = {};
-var User = proxyquire('../../../app/models/user', {
-    '../helpers/dataAdapter': dataAdapter
-});
-var req = {
-    rendrApp: {
-        session: {}
-    }
-};
+var dataAdapter;
+var User;
+var req;
 
 describe('app', function() {
     describe('models', function() {
         describe('user', function() {
             describe('.login', function() {
+                beforeEach(reset);
                 test();
             });
         });
     });
 });
+
+function reset() {
+    dataAdapter = {};
+    req = {
+        rendrApp: {
+            session: {}
+        }
+    };
+    User = proxyquire('../app/models/user', {
+        '../helpers/dataAdapter': dataAdapter
+    });
+}
 
 function test() {
     it('should be a method', function() {
