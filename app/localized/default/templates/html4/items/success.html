@@ -1,7 +1,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToListing"]) }}
-<div id="itemPage">
+<div id="itemPage" data-qa="reply-message-sent" >
     {% if item.status.visible %}
         <div>{{ item.title }}</div>
         </br>

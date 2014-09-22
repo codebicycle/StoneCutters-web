@@ -17,7 +17,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             var location = req.rendrApp.session.get('location');
             var siteLocation = req.rendrApp.session.get('siteLocation');
-            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
+            var userAgent = utils.getUserAgent(req);
             var selectedLanguage;
             var languages;
 

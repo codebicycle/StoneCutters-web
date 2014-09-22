@@ -1,0 +1,133 @@
+vendors = moz webkit o official
+
+@keyframes defaultTitle {
+
+	from {
+		
+		opacity: 0;
+		-moz-transform: translateX(100%);
+		-webkit-transform: translateX(100%);
+		transform: translateX(100%);
+	
+	}
+	
+	to {
+	
+		opacity: 1;
+		-moz-transform: translateX(0);
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+	
+	}
+
+}
+
+@keyframes internalTitle {
+
+	from {
+
+		opacity: 0;
+		-moz-transform: translateX(100%);
+		-webkit-transform: translateX(100%);
+		transform: translateX(100%);
+
+	}
+
+	to {
+
+		opacity: 1;
+		-moz-transform: translateX(0);
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+
+	}
+
+}
+
+.post_flow_header_view {
+	
+	z-index: 1;
+	
+	> .logo {
+
+		position: absolute;
+		top: 0;
+		left: .8rem;
+		z-index: 2;
+		-moz-transition: all 250ms ease-in-out;
+		-webkit-transition: all 250ms ease-in-out;
+		transition: all 250ms ease-in-out;
+		-moz-transform: translateX(0);
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+
+	}
+	
+	> #back {
+
+		position: absolute;
+		top: 50%;
+		left: 0;
+		z-index: 1;
+		float: left;
+		width: 30px;
+		height: 30px;
+		margin: -1rem 0 -1rem .8rem
+		background: #335c93 url(imageUrl/images/html5/back.png) no-repeat center;
+		border: 1px solid #294b78;
+		border-radius: .5em;
+		-moz-transition: all 250ms ease-in-out;
+		-webkit-transition: all 250ms ease-in-out;
+		transition: all 250ms ease-in-out;
+		-moz-transform: scale3d(0, 0, 0);
+		-webkit-transform: scale3d(0, 0, 0);
+		transform: scale3d(0, 0, 0);
+		opacity: 1;
+
+	}
+	
+	> #title {
+
+		overflow: hidden;
+		padding-left: 94px;
+		font-size: inherit;
+		font-weight: normal;
+		line-height: 3rem;
+		color: #FFF;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		animation: defaultTitle 250ms ease-in-out;
+		-webkit-animation: defaultTitle 250ms ease-in-out;
+
+	}
+	
+	&.internal {
+		
+		> .logo {
+
+			-moz-transform: translateX(-200%);
+			-webkit-transform: translateX(-200%);
+			transform: translateX(-200%);
+
+		}
+		
+		> #back {
+
+			-moz-transform: scale3d(1, 1, 1);
+			-webkit-transform: scale3d(1, 1, 1);
+			transform: scale3d(1, 1, 1);
+			opacity: 1;
+
+		}
+		
+		> #title {
+		
+			padding-left: 2.5rem;
+			animation: internalTitle 250ms ease-in-out;
+			-webkit-animation: internalTitle 250ms ease-in-out;
+		
+		}
+	
+	}
+
+}

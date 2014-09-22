@@ -1,6 +1,5 @@
 <header id="location">
-	
-	{% if heading %}
+    {% if heading %}
         {% set tag = 'h1' %}
     {% else %}
         {% set tag = 'strong' %}
@@ -8,9 +7,9 @@
 
 	<{{ tag }}>
 		{% if location.current and location.current.type != 'country' %}
-			{{location.current.name}} <a href="{{ '/location' | link }}" data-qa="change_city" >{{ dictionary["countryoptions.ChangeCity"] }}</a>
+			{{location.current.name}} <a href="{{ '/location' | link }}" data-qa="change-city" >{{ dictionary["countryoptions.ChangeCity"] }}</a>
 		{% else %}
-			{{location.name}} <a href="{{ '/location' | link }}" data-qa="select_city" >{{ dictionary["countryoptions.SelectACity"] }}</a>
+			{{location.name}} <a href="{{ '/location' | link }}" data-qa="select-city" >{{ dictionary["countryoptions.SelectACity"] }}</a>
 		{% endif %}
 	</{{ tag }}>
 </header>

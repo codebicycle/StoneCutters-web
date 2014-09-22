@@ -22,7 +22,7 @@ module.exports = function(grunt) {
             options: {
                 ignores: ['app/lib/**/*.js'],
                 browser: true,
-                predef: ['$', '_gaq', 'EXIF'],
+                predef: ['$', '_gaq', 'EXIF', 'confirm'],
                 '-W040': true
             }
         },

@@ -22,7 +22,7 @@
     "js-yaml": "3.0.2",
     "express": "3.4.8",
     "rendr": "git://github.com/rendrjs/rendr#6497522d78",
-    "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks",
+    "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks#develop",
     "underscore": "1.6.0",
     "debug": "0.7.4",
     "newrelic": "1.5.1",
@@ -35,7 +35,11 @@
     "async": "0.9.0",
     "ms": "0.6.2",
     "node-statsd": "0.0.7",
-    "node-json2html": "0.4.1"
+    "node-json2html": "0.4.1",
+    "heapdump": "0.2.10",
+    "memwatch": "0.2.2",
+    "cron": "1.0.4",
+    "time": "0.11.0"
   },
   "devDependencies": {
     "browserify": "3.33.0",
@@ -61,10 +65,10 @@
     "jsesc": "0.4.3",
     "progress": "1.1.5",
     "unzip": "0.1.9",
-    "chai": "~1.9.1",
-    "sinon": "~1.10.3",
-    "sinon-chai": "~2.5.0",
-    "proxyquire": "^1.0.1",
+    "chai": "1.9.1",
+    "sinon": "1.10.3",
+    "sinon-chai": "2.5.0",
+    "proxyquire": "1.0.1",
     "grunt-mocha-test": "0.11.0",
     "blanket": "1.1.6"
   }

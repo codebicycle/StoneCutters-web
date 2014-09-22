@@ -54,21 +54,23 @@ module.exports = Base.extend({
             }
         });
     },
-    track: function(data, callback) {
-        var that = this;
+    track: function(data, callback, options) {
         var obj = {
             url: helpers.common.static('/images/common/gif1x1.gif')
         };
         var analytics = {};
         var $img = $('img.analytics');
 
+        if (callback && !_.isFunction(callback)) {
+            options = callback;
+            callback = $.noop;
+        }
         if ($img.length) {
             analytics = $img.last().attr('src');
             analytics = $.deparam(analytics.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
         }
         obj = _.defaults(obj, data, analytics);
-
-        $.ajax({
+        options = _.defaults((options || {}), {
             url: '/analytics/pageevent.gif',
             type: 'GET',
             global: false,
@@ -76,18 +78,17 @@ module.exports = Base.extend({
             data: obj,
             always: (callback || $.noop)
         });
+        $.ajax(options);
     },
     attachTrackMe: function(context, handler) {
-        var that = this;
-
-        $('.' + context + ' .trackMe').on('click', function(e) {
-            var $this = $(this);
+        this.$('.trackMe').on('click', function(e) {
+            var $this = $(e.currentTarget);
             var data = $this.data('tracking');
             var obj;
             var category;
             var action;
 
-            if (data && !$this.hasClass('disabled')) {
+            if (data && !$this.hasClass('disabled') && !$this.hasClass('opaque')) {
                 data = data.split('-');
 
                 if (data.length === 2) {
@@ -97,10 +98,10 @@ module.exports = Base.extend({
                         category: category,
                         action: action
                     });
-                    that.track(obj);
+                    this.track(obj);
                 }
             }
-        });
+        }.bind(this));
     }
 });
 

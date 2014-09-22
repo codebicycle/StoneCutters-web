@@ -16,7 +16,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
-            var userAgent = req.get('user-agent') || utils.defaults.userAgent;
+            var userAgent = utils.getUserAgent(req);
             var redirectOnDesktop = config.get(['redirect', 'onDesktop'], false);
             var refererHost;
             var subdomains;
