@@ -1,5 +1,5 @@
 {% if marketing.link %}
-	<footer id="downloadapp">
+	<footer id="downloadapp"{{ ' class="disabled"' if postingFlow }}>
 		<div class="logoOlx"></div>
 		<div class="data">
 			<h1>{{ dictionary[marketing.forOsKey] }} {{ marketing.forOs }}</h1>

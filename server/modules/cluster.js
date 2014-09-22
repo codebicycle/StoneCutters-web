@@ -4,6 +4,7 @@ module.exports = function(done) {
     var cluster = require('cluster');
 
     if (cluster.isMaster) {
+        done.abort();
         var cpuCount = require('os').cpus().length;
         var i;
 
@@ -16,6 +17,6 @@ module.exports = function(done) {
         });
     }
     else {
-        done(cluster.worker);
+        done.apply(null, [].slice.call(arguments, 1).concat([cluster.worker]));
     }
 };

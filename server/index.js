@@ -19,13 +19,6 @@ module.exports = function() {
 
     process.env.NODE_ENV = config.get('environment');
 
-    if (process.env.NODE_ENV === 'production' && os.hostname() === '578648-app30-mobile-webapp1') {
-        require('nodetime').profile({
-            accountKey: '466eb88cdca1cd9ef637804794177a8b8adad180',
-            appName: 'Mobile-WebApp'
-        });
-    }
-
     if (process.env.NODE_ENV === 'production') {
         require('heapdump');
     }
@@ -34,8 +27,16 @@ module.exports = function() {
         require('newrelic');
     }
 
+    if (config.get(['memwatch', 'enabled'], false)) {
+        require('./modules/memwatch');
+    }
+
     if (config.get(['cluster', 'enabled'], false)) {
         app.then(require('./modules/cluster'));
+    }
+
+    if (config.get(['cron', 'enabled'], false)) {
+        app.then(require('./crons'));
     }
 
     app.val(require('./bootstrap'));

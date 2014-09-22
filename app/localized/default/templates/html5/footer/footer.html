@@ -1,7 +1,7 @@
-<footer id="footer">
-	<ul class="footer-links">
-		<li><a target="_blank" href="{{ '/terms' | link }}" rel="nofollow" class="footer-link"> {{ dictionary["terms.TermsOfUse"] }}</a></li>
-		<li><a href="{{ 'redirecttomain' | link }}" class="trackMe" data-tracking="click-viewfullsite" >{{ dictionary["contactseller_form.ViewFullSite"] }}</a></li>
-	</ul>
+<footer id="footer"{{ ' class="disabled"' if postingFlow }}>
+    <ul class="footer-links">
+        <li><a target="_blank" href="{{ '/terms' | link }}" rel="nofollow" class="footer-link"> {{ dictionary["terms.TermsOfUse"] }}</a></li>
+        <li><a href="{{ 'redirecttomain' | link }}" class="trackMe" data-tracking="click-viewfullsite" >{{ dictionary["contactseller_form.ViewFullSite"] }}</a></li>
+    </ul>
     <p>Copyright &copy; 2006-2014 OLX, Inc.</p>
 </footer> 

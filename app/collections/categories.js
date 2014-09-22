@@ -2,6 +2,13 @@
 
 var Base = require('../bases/collection');
 var Category = require('../models/category');
+var _ = require('underscore');
+
+function get(categories, id) {
+    return _.find(categories, function each(category) {
+        return category.id === id;
+    });
+}
 
 module.exports = Base.extend({
     model: Category,
@@ -12,10 +19,22 @@ module.exports = Base.extend({
 
         if (!category) {
             parent = this.find(function each(category) {
-                return !!category.get('children').get(id);
+                var children = category.get('children');
+
+                if (children.get) {
+                    return !!children.get(id);
+                }
+                return !!get(children, id);
             });
             if (parent) {
-                category = parent.get('children').get(id);
+                var children = parent.get('children');
+
+                if (children.get) {
+                    category = children.get(id);
+                }
+                else {
+                    category = get(children, id);
+                }
             }
         }
         return category;

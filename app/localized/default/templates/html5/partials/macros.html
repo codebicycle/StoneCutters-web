@@ -35,14 +35,14 @@
                 {% endif %}
             {% endfor %}
         {% endfor %}
-    </div> 
+    </div>
 {% endmacro %}
 
-{% macro FieldText(label, name, mandatory, form, user) %}
+{% macro FieldText(label, name, mandatory, form, user, type='text') %}
     <label>{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-    <input type="text" name="{{name}}" id="text-{{name}}"
+    <input type="{{ type }}" name="{{ name }}" id="text-{{ name }}"
     {% if name == 'email' %}
-        value="{{ user.email if (user and user.email) else '' }}"
+        value="{% if user and user.email %}{{ user.email }}{% elif form.values[name] %}{{ form.values[name] }}{% endif %}"
     {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
         value="{{ form.values[name] if form.values[name] else user.username }}"
     {% endif %}>
@@ -61,7 +61,7 @@
         <label>{{label}}</label>
         <select id="select-{{name}}" name="{{name}}">
             {% for value in values %}
-                <option value="{{value.key}}"{% if form and form.values and form.values[field.name] and form.values[field.name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
+                <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
             {% endfor %}
         </select>
     {% endif %}

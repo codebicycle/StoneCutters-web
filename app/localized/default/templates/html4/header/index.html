@@ -4,10 +4,10 @@
         <li>
             <esi:choose>
                 <esi:when test="$(user_loggedin)=='true'">
-                    <a class="user loggedIn" href="{{ '/myolx' | link }}" title="{{ dictionary['homeheader.My OLX'] }}">{{ dictionary['homeheader.My OLX'] }}</a>
+                    <a class="user loggedIn" href="{{ '/myolx' | link }}" title="{{ dictionary['homeheader.My OLX'] }}" data-qa="my-olx-loggedIn" >{{ dictionary['homeheader.My OLX'] }}</a>
                 </esi:when>
                 <esi:otherwise>
-                    <a class="user loggedOut" href="{{ '/login' | link }}" title="{{ dictionary['homeheader.Sign_In'] }}">{{ dictionary['homeheader.Sign_In'] }}</a>
+                    <a class="user loggedOut" href="{{ '/login' | link }}" title="{{ dictionary['homeheader.Sign_In'] }}" data-qa="my-olx-loggedOut" >{{ dictionary['homeheader.Sign_In'] }}</a>
                 </esi:otherwise>
             </esi:choose>
         </li>
