@@ -14,7 +14,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     function defaultRequestOptions(req) {
         return {
             headers: {
-                'User-Agent': (req.get('user-agent') || utils.defaults.userAgent),
+                'User-Agent': utils.getUserAgent(req),
                 'Accept-Encoding': 'gzip,deflate,sdch',
                 'Cache-Control': 'no-cache',
                 'Pragma': 'no-cache'
@@ -109,7 +109,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
             var osName = req.rendrApp.session.get('osName');
             var osVersion = req.rendrApp.session.get('osVersion');
-            var userAgent = req.get('user-agent');
+            var userAgent = utils.getUserAgent(req);
             var host = req.host;
             var page = req.query.page;
             var bot;
@@ -186,7 +186,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 analytic.track({
                     custom: req.query.custom,
                     url: req.query.url,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
+                    clientId: req.rendrApp.session.get('clientId').substr(24),
+                    dynamics: {
+                        x20: req.rendrApp.session.get('platform') || utils.defaults.platform
+                    }
                 }, options);
             }
         }
@@ -198,7 +201,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
             var osName = req.rendrApp.session.get('osName');
             var osVersion = req.rendrApp.session.get('osVersion');
-            var userAgent = req.get('user-agent');
+            var userAgent = utils.getUserAgent(req);
             var host = req.host;
             var bot;
             var trackerId;
@@ -243,6 +246,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 },
                 error: function(req, options) {
                     statsd.increment([req.query.location, 'reply', 'error', options.platform]);
+                }
+            },
+            post: {
+                success: function(req, options) {
+                    statsd.increment([req.query.location, 'posting', 'success', options.platform]);
+                },
+                error: function(req, options) {
+                    statsd.increment([req.query.location, 'posting', req.query.error, options.platform]);
                 }
             }
         };
