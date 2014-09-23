@@ -62,8 +62,91 @@ function test() {
         }
     });
 
+    it('should not register an user when not username', function(done) {
+        var data = {
+            email: 'damianb@olx.com',
+            password: 'dami21',
+            agreeTerms: 'on'
+        };
+
+        mock(data);
+        mockFail(data);
+        fail(done, assert, data);
+
+        function assert(done, err) {
+            expect(err).to.be.instanceOf(Error);
+            expect(err.toString()).to.equal('Error: Invalid Data');
+            expect(User.prototype.register).to.have.been.calledOnce;
+            expect(formidable.error).to.have.been.calledOnce;
+            expect(res.redirect).to.have.been.calledOnce;
+            done();
+        }
+    });
+
+    it('should not register an user when not email', function(done) {
+        var data = {
+            username: 'damianb',
+            password: 'dami21',
+            agreeTerms: 'on'
+        };
+
+        mock(data);
+        mockFail(data);
+        fail(done, assert, data);
+
+        function assert(done, err) {
+            expect(err).to.be.instanceOf(Error);
+            expect(err.toString()).to.equal('Error: Invalid Data');
+            expect(User.prototype.register).to.have.been.calledOnce;
+            expect(formidable.error).to.have.been.calledOnce;
+            expect(res.redirect).to.have.been.calledOnce;
+            done();
+        }
+    });
+
+    it('should not register an user when not password', function(done) {
+        var data = {
+            username: 'damianb',
+            email: 'damianb@olx.com',
+            agreeTerms: 'on'
+        };
+
+        mock(data);
+        mockFail(data);
+        fail(done, assert, data);
+
+        function assert(done, err) {
+            expect(err).to.be.instanceOf(Error);
+            expect(err.toString()).to.equal('Error: Invalid Data');
+            expect(User.prototype.register).to.have.been.calledOnce;
+            expect(formidable.error).to.have.been.calledOnce;
+            expect(res.redirect).to.have.been.calledOnce;
+            done();
+        }
+    });
+
+    it('should not register an user when not accept terms', function(done) {
+        var data = {
+            username: 'damianb',
+            email: 'damianb@olx.com',
+            password: 'dami21'
+        };
+
+        mock(data);
+        fail(done, assert, data);
+
+        function assert(done, err) {
+            expect(utils.link).to.have.been.calledOnce;
+            expect(utils.link).to.have.been.calledWithExactly('/register?agreeTerms=0', req.rendrApp);
+            expect(res.redirect).to.have.been.calledOnce;
+            done();
+        }
+    });
+
     it('should not register an empty user', function(done) {
-        var data = {};
+        var data = {
+            agreeTerms: 'on'
+        };
 
         mock(data);
         mockFail(data);

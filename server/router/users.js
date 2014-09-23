@@ -37,9 +37,7 @@ module.exports = function userRouter(app) {
                     redirect = '/';
                 }
                 res.redirect(utils.link(redirect, req.rendrApp));
-                if (next && next.errfcb) {
-                    next.errfcb();
-                }
+                end();
             }
 
             function error(err) {
@@ -51,10 +49,14 @@ module.exports = function userRouter(app) {
                 }
                 formidable.error(req, link, err, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    if (next && next.errfcb) {
-                        next.errfcb(err);
-                    }
+                    end(err);
                 });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
             }
 
             asynquence().or(error)
@@ -88,7 +90,8 @@ module.exports = function userRouter(app) {
 
             function validate(done) {
                 if (!user.get('agreeTerms')) {
-                    return res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
+                    res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
+                    return end();
                 }
                 done(user);
             }
@@ -115,9 +118,6 @@ module.exports = function userRouter(app) {
 
             function end(err) {
                 if (next && next.errfcb) {
-                    if (err) {
-                        console.log('NEXT for error', err.toString());
-                    }
                     next.errfcb(err);
                 }
             }
