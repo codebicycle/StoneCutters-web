@@ -35,14 +35,21 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return fail(new Error());
                 }
                 
-                // REMOVE THIS!!!
-                // Added english language as control
-                _languages.push({
-                    id: 1,
-                    isocode: 'EN',
-                    name: 'English',
-                    locale: 'en-US'
-                });
+                // TODO: Hardcoded until SMAUG stops asking OCL for languages
+                if (siteLocation === 'www.olx.ir' && !_languages.length) {
+                    _languages.push({
+                        id: 85,
+                        isocode: 'FA',
+                        name: 'فارسی',
+                        locale: 'fa-IR'
+                    });
+                    _languages.push({
+                        id: 1,
+                        isocode: 'EN',
+                        name: 'English',
+                        locale: 'en-US'
+                    });
+                }
 
                 languages = {
                     models: _languages,
