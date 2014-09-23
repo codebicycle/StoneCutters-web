@@ -27,6 +27,7 @@ newrelic_agent.log
 mobile-webapp-static-*
 mobile-webapp-dynamic-*
 dist
+coverage
 
 test/unit/coverage.html
 tests/coverage.html

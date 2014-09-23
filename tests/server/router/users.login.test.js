@@ -32,7 +32,7 @@ function reset() {
         }
     };
     res = {};
-    users = proxyquire('../server/router/users', {
+    users = proxyquire(ROOT + '/server/router/users', {
         '../../app/models/user': User,
         '../modules/formidable': formidable,
         '../../shared/utils': utils

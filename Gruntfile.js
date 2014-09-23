@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', ['jshint:tests', 'mochaTest']);
 
-    grunt.registerTask('cover', ['jshint:tests', 'coverage']);
+    grunt.registerTask('cover', ['jshint:tests', 'exec:removeCoverage', 'jscoverage', 'coverage']);
 
     grunt.registerTask('localize', ['localization']);
 };

@@ -23,7 +23,7 @@ function reset() {
             session: {}
         }
     };
-    User = proxyquire('../app/models/user', {
+    User = proxyquire(ROOT + '/app/models/user', {
         '../helpers/dataAdapter': dataAdapter
     });
     user = undefined;

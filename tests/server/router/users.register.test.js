@@ -32,7 +32,7 @@ function reset() {
         }
     };
     res = {};
-    users = proxyquire('../server/router/users', {
+    users = proxyquire(ROOT + '/server/router/users', {
         '../../app/models/user': User,
         '../modules/formidable': formidable,
         '../../shared/utils': utils
@@ -44,7 +44,7 @@ function test() {
         expect(users.register).to.be.instanceOf(Function);
     });
 
-    it('should register a user with valid data', function(done) {
+    it('should register a valid user', function(done) {
         var data = {
             username: 'damianb',
             email: 'damianb@olx.com',
@@ -62,7 +62,7 @@ function test() {
         }
     });
 
-    it('should not register an user when not username', function(done) {
+    it('should not register a user with no username', function(done) {
         var data = {
             email: 'damianb@olx.com',
             password: 'dami21',
@@ -71,19 +71,10 @@ function test() {
 
         mock(data);
         mockFail(data);
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('Error: Invalid Data');
-            expect(User.prototype.register).to.have.been.calledOnce;
-            expect(formidable.error).to.have.been.calledOnce;
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
+        fail(done, assertFail, data);
     });
 
-    it('should not register an user when not email', function(done) {
+    it('should not register a user with no email', function(done) {
         var data = {
             username: 'damianb',
             password: 'dami21',
@@ -92,19 +83,10 @@ function test() {
 
         mock(data);
         mockFail(data);
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('Error: Invalid Data');
-            expect(User.prototype.register).to.have.been.calledOnce;
-            expect(formidable.error).to.have.been.calledOnce;
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
+        fail(done, assertFail, data);
     });
 
-    it('should not register an user when not password', function(done) {
+    it('should not register a user with no password', function(done) {
         var data = {
             username: 'damianb',
             email: 'damianb@olx.com',
@@ -113,19 +95,20 @@ function test() {
 
         mock(data);
         mockFail(data);
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('Error: Invalid Data');
-            expect(User.prototype.register).to.have.been.calledOnce;
-            expect(formidable.error).to.have.been.calledOnce;
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
+        fail(done, assertFail, data);
     });
 
-    it('should not register an user when not accept terms', function(done) {
+    it('should not register an empty user', function(done) {
+        var data = {
+            agreeTerms: 'on'
+        };
+
+        mock(data);
+        mockFail(data);
+        fail(done, assertFail, data);
+    });
+
+    it('should not register a user with no accepted terms', function(done) {
         var data = {
             username: 'damianb',
             email: 'damianb@olx.com',
@@ -138,25 +121,6 @@ function test() {
         function assert(done, err) {
             expect(utils.link).to.have.been.calledOnce;
             expect(utils.link).to.have.been.calledWithExactly('/register?agreeTerms=0', req.rendrApp);
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
-    });
-
-    it('should not register an empty user', function(done) {
-        var data = {
-            agreeTerms: 'on'
-        };
-
-        mock(data);
-        mockFail(data);
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('Error: Invalid Data');
-            expect(User.prototype.register).to.have.been.calledOnce;
-            expect(formidable.error).to.have.been.calledOnce;
             expect(res.redirect).to.have.been.calledOnce;
             done();
         }
@@ -239,6 +203,7 @@ function test() {
         function assert(done) {
             expect(utils.link).to.have.been.calledOnce;
             expect(utils.link).to.have.been.calledWithExactly('/?register_success=true', req.rendrApp);
+            expect(res.redirect).to.have.been.calledOnce;
             done();
         }
     });
@@ -328,4 +293,13 @@ function fail(done, assert, data) {
             users.register(req, res, done);
         }
     }
+}
+
+function assertFail(done, err) {
+    expect(err).to.be.instanceOf(Error);
+    expect(err.toString()).to.equal('Error: Invalid Data');
+    expect(User.prototype.register).to.have.been.calledOnce;
+    expect(formidable.error).to.have.been.calledOnce;
+    expect(res.redirect).to.have.been.calledOnce;
+    done();
 }
