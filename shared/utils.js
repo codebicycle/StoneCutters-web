@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var isServer = (typeof window === 'undefined');
+var esi = require('../app/modules/esi');
 var linkParams = {
     location: function (href, query) {
         var siteLocation = this.session.get('siteLocation');
@@ -40,7 +41,7 @@ var linkParams = {
         var originalPlatform = this.session.get('originalPlatform');
 
         if ((platform === 'wap' || originalPlatform === 'wap') && sid) {
-            href = params(href, 'sid', sid);
+            href = params(href, 'sid', esi.esify.call(this, '$(sid)', sid));
         }
         return href;
     }
@@ -128,24 +129,27 @@ function stringify(obj, sep, eq, name) {
     eq = eq || '=';
 
     if (obj !== null && typeof obj === 'object') {
-      return _.map(_.keys(obj), function(k) {
-        var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+        return _.map(_.keys(obj), function(k) {
+            var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
 
-        if (_.isArray(obj[k])) {
-          return _.map(obj[k], function(v) {
-            return ks + encodeURIComponent(stringifyPrimitive(v));
-          }).join(sep);
-        }
-        else {
-          return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-        }
-      }).join(sep);
+            if (_.isArray(obj[k])) {
+                return _.map(obj[k], function(v) {
+                    v = stringifyPrimitive(v);
+                    return ks + (esi.isEsiString(v) ? v : encodeURIComponent(v));
+                }).join(sep);
+            }
+            else {
+                k = stringifyPrimitive(obj[k]);
+                return ks + (esi.isEsiString(k) ? k : encodeURIComponent(k));
+            }
+        }).join(sep);
     }
 
     if (!name) {
-      return '';
+        return '';
     }
-    return encodeURIComponent(stringifyPrimitive(name)) + eq + encodeURIComponent(stringifyPrimitive(obj));
+    obj = stringifyPrimitive(obj);
+    return encodeURIComponent(stringifyPrimitive(name)) + eq + (esi.isEsiString(obj) ? obj : encodeURIComponent(obj));
 }
 
 function link(href, app, query) {
@@ -297,5 +301,7 @@ module.exports = {
     get: get,
     daysDiff: daysDiff,
     defaults: defaults,
+    parse: parse,
+    stringify: stringify,
     getUserAgent: getUserAgent
 };
