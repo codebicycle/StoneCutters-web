@@ -1,12 +1,15 @@
 'use strict';
 
 module.exports = function(app, dataAdapter) {
+    var _ = require('underscore');
     var fs = require('fs');
     var asynquence = require('asynquence');
     var querystring = require('querystring');
+    var restler  = require('restler');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
+    var keyades = ['www.olx.com.ng', 'www.olx.co.ke'];
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -42,11 +45,18 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
-            function success() {
+            function success(response, body) {
                 var url = '/iid-' + itemId + '/reply/success';
 
+                track(body);
                 res.redirect(utils.link(url, req.rendrApp));
                 statsd.increment([location.name, 'reply', 'success', platform]);
+            }
+
+            function track(body) {
+                if (_.contains(keyades, location.url)) {
+                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69473&kaEvAcId=3&kaEvMcId=', body.id, '&kaEvCt1=1'].join(''));
+                }
             }
 
             function error(err) {
@@ -171,7 +181,7 @@ module.exports = function(app, dataAdapter) {
                     return done([]);
                 }
                 for (image in images) {
-                    data[image] = require('restler').file(images[image].path, null, images[image].size, null, images[image].type);
+                    data[image] = restler.file(images[image].path, null, images[image].size, null, images[image].type);
                 }
                 dataAdapter.post(req, '/images', {
                     query: {
@@ -220,9 +230,16 @@ module.exports = function(app, dataAdapter) {
             function success(response, item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                statsd.increment([location.name, 'posting', 'success', platform]);
+                track(item);
                 res.redirect(utils.link(url, req.rendrApp));
+                statsd.increment([location.name, 'posting', 'success', platform]);
                 clean();
+            }
+
+            function track(item) {
+                if (_.contains(keyades, location.url)) {
+                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69472&kaEvAcId=2&kaEvMcId=', item.id, '&kaEvCt1=1'].join(''));
+                }
             }
 
             function fail(err, track) {
