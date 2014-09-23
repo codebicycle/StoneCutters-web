@@ -106,7 +106,6 @@ module.exports = Base.extend({
 
         this.city = city.url ? city : this.app.session.get('location').current;
         this.render();
-        this.validate();
         if (show) {
             this.$el.trigger('show');
         }

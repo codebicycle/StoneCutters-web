@@ -284,6 +284,13 @@ function daysDiff(date) {
     return Math.abs(Math.round(diff / (24 * 60 * 60 * 1000)));
 }
 
+function getUserAgent(req) {
+    if (!isServer) {
+        return '';
+    }
+    return /*req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || */req.get('user-agent') || defaults.userAgent;
+}
+
 module.exports = {
     isServer: isServer,
     link: link,
@@ -295,5 +302,6 @@ module.exports = {
     daysDiff: daysDiff,
     defaults: defaults,
     parse: parse,
-    stringify: stringify
+    stringify: stringify,
+    getUserAgent: getUserAgent
 };

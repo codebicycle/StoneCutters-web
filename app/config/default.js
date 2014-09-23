@@ -36,6 +36,15 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
+    posting: {
+        flow: {
+            enabled: {
+                'www.olx.com.mx': true,
+                'www.olx.com.ar': true,
+                'www.olx.co.za': true
+            }
+        }
+    },
     infiniteScroll: false,
     interstitial: {
         enabled: true,
@@ -181,5 +190,6 @@ module.exports = {
             'www.olx.com': 'JwT4VZIdr9x8Ctn4jWX3pA1qaewK3uMlnFS4iVoM4Zs',
             'www.olx.com.mx': 'NYmbUbWCvkxL9ADmytt25vu68NpFeyy3CkWCu3ZTppM'
         }
-    }
+    },
+    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
 };

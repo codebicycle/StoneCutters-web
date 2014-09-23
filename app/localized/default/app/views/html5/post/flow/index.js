@@ -197,6 +197,17 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
+            function callback(err, response, body) {
+                if (err) {
+                    return done.fail(err);
+                }
+                if (body) {
+                    done.abort();
+                    return fail(body, 'invalid');
+                }
+                done(response, body);
+            }
+            
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -214,7 +225,7 @@ module.exports = Base.extend({
             });
         }.bind(this);
 
-        var fail = function(err) {
+        var fail = function(err, track) {
             // TODO: Improve error handling
             always();
             if (err) {
@@ -225,6 +236,20 @@ module.exports = Base.extend({
                     this.$el.trigger('errors', [err]);
                 }
             }
+            trackFail(track);
+        }.bind(this);
+
+        var trackFail = function() {
+            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+
+            $.ajax({
+                url: helpers.common.link(url, this.app, {
+                    metric: 'post,error',
+                    location: this.app.session.get('location').name,
+                    error: track || 'error'
+                }),
+                cache: false
+            });
         }.bind(this);
 
         var success = function(item) {
@@ -239,6 +264,19 @@ module.exports = Base.extend({
             this.app.router.once('action:end', always);
             helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
                 status: 200
+            });
+            track();
+        }.bind(this);
+
+        var track = function() {
+            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+
+            $.ajax({
+                url: helpers.common.link(url, this.app, {
+                    metric: 'post,success',
+                    location: this.app.session.get('location').name
+                }),
+                cache: false
             });
         }.bind(this);
 

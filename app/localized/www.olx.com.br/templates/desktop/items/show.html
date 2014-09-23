@@ -5,10 +5,10 @@
     <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav">
     <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav">
 	<nav class="breadcrumb">
-		<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a> 
-		<span class="arrow"></span> <a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> 
+		<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a>
+		<span class="arrow"></span> <a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a>
 		<span class="arrow"></span> <a href="{{ item.category | slugToUrl | link }}">{{ item.category.name }}</a>
-		<a href="{{ '/nf/all-results' | link }}" class="fRight" >Voltar para Resultados</a> <span class="arrow fRight"></span> 
+		<a href="{{ '/nf/all-results' | link }}" class="fRight" >Voltar para Resultados</a> <span class="arrow fRight"></span>
 	</nav>
 
 	<section id="itemInfoL">
@@ -40,7 +40,7 @@
 			{% endif %}
 			<div class="clear"></div>
 		</div>
-		
+
 	    {% if item.optionals %}
 	     	<div id="optionals">
 	            <ul>
@@ -69,7 +69,7 @@
 
 	    <div id="actions">
 	    	<a class="share facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ href }}" target="_blank" >Facebook</a>
-			<a class="share twitter" href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title | escape }}&url={{ href }}" target="_blank">Twitter</a>
+			<a class="share twitter" href="https://twitter.com/intent/tweet?original_referer={{ href }}&text={{ item.title | encode }}&url={{ href }}" target="_blank">Twitter</a>
 			<a class="share google" href="https://plus.google.com/share?url={{ href }}" target="_blank" >Google</a>
 
 			<a class="olxAction denunciar" href="" >Denunciar</a>
