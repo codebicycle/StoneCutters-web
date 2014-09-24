@@ -9,7 +9,8 @@ module.exports = Base.extend({
     url: '/users',
     getUsernameOrEmail: getUsernameOrEmail,
     login: login,
-    register: register
+    register: register,
+    reply: reply
 });
 
 module.exports.id = 'User';
@@ -72,4 +73,34 @@ function register(done, req) {
         this.set(user);
         done();
     }
+}
+
+function reply(done, req, data) {
+    var prepare = function(done) {
+        var query = {
+            languageId: data.languageId,
+            platform: data.platform
+        };
+
+        if (data.token) {
+            query.token = data.token;
+        }
+        done(query);
+    }.bind(this);
+
+    var submit = function(done, query) {
+        dataAdapter.post(req, '/items/' + data.id + '/messages', {
+            data: data,
+            query: query
+        }, done.errfcb);
+    }.bind(this);
+
+    var persist = function(res, body) {
+        done(body);
+    }.bind(this);
+
+    asynquence().or(done.fail)
+        .then(prepare)
+        .then(submit)
+        .val(persist);
 }
