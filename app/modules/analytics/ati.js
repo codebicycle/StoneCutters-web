@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var configAnalytics = require('./config');
-var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 

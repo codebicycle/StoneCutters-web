@@ -1,11 +1,10 @@
 'use strict';
 
 var _ = require('underscore');
-var config = require('../../../shared/config');
 
 module.exports = function esiHelper() {
-    var esiTag = config.get(['esi', 'tag'], '<esi:');
-    var platforms = config.get(['esi', 'platforms'], []);
+    var esiTag = '<esi:';
+    var platforms = ['wap', 'html4'];
 
     function isEnabled() {
         var platform = (this.app || this).session.get('platform');
