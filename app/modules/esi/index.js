@@ -7,7 +7,7 @@ module.exports = function esiHelper() {
     var platforms = [];
 
     function isEnabled() {
-        var platform = (this.app || this).session.get('platform');
+        // var platform = (this.app || this).session.get('platform');
 
         // if (_.contains(platforms, platform)) {
         //     return true;
