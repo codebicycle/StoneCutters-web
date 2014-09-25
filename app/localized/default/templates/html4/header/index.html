@@ -4,14 +4,16 @@
         {% if user %}
             {% set status = 'loggedInUnreadMessages' if user.unreadMessagesCount else 'loggedIn' %}
             {% set url = '/myolx' %}
+            {% set dataQa = 'my-olx-loggedIn' %}
             {% set text = dictionary['homeheader.My OLX'] %}
         {% else %}
             {% set status = 'loggedOut' %}
             {% set url = '/login' %}
+            {% set dataQa = 'my-olx-loggedOut' %}
             {% set text = dictionary['homeheader.Sign_In'] %}
         {% endif %}
          <li>
-            <a class="user {{ status }}" href="{{ url | link }}" title="{{ text }}" data-qa="my-olx">{{ text }}</a>
+            <a class="user {{ status }}" href="{{ url | link }}" title="{{ text }}" data-qa="{{ dataQa }}">{{ text }}</a>
         </li>
         {% if postButton %}
             <li>
