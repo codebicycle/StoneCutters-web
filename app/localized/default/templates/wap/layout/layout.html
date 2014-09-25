@@ -1,5 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<esi:eval src="http://$(HTTP_HOST)/esi?$(QUERY_STRING)" setheader="'set-cookie: ' + $(HTTP_COOKIE)"{% if environment == 'testing' or environment == 'staging' %} setheader="X-Origin-OLX: {{ environment }}" setheader="X-Netli-Forwarded-For: 181.30.14.130"{% endif %}/>
 <html>
     {% view 'layout/head' %}
     <body style="margin: 0; padding: 0; font-family: Sans-Serif;" text="#666666" link="#0066FF" vlink="#0066FF">
