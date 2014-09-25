@@ -15,10 +15,10 @@
             <li>
                 <esi:choose>
                     <esi:when test="$exists($(QUERY_STRING{'location'}))">
-                        <a class="post" href="{{ ['/posting', postLink] | join('') | link }}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+                        <a class="post" href="{{ ['/posting', postLink] | join('') | link }}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}" data-qa="post-button" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
                     </esi:when>
                     <esi:otherwise>
-                        <a class="post" href="{{ '/location?target=posting' | link }}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+                        <a class="post" href="{{ '/location?target=posting' | link }}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}" data-qa="post-button" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
                     </esi:otherwise>
                 </esi:choose>
             </li>
