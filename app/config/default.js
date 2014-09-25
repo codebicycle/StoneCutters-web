@@ -54,17 +54,13 @@ module.exports = {
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
-        enabled: false,
+        enabled: true,
         headers: {
-            home: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
-            location: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
             categories: {
+                list: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                },
                 subcategories: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'
@@ -80,16 +76,6 @@ module.exports = {
                     'Edge-Control': '!no-store,max-age=600s'
                 },
                 show: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                }
-            },
-            post: {
-                categories: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                },
-                subcategories: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'
                 }
