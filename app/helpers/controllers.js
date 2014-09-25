@@ -57,7 +57,7 @@ function setCache(headers, currentRoute) {
 }
 
 function setEsi(headers) {
-    if (!esi.isEnabled.call(this)) {
+    if (!config.get(['cache', 'enabled'], false) || !esi.isEnabled.call(this)) {
         return;
     }
     if (headers['Edge-Control']) {
