@@ -55,6 +55,14 @@ module.exports = function itemRouter(app, dataAdapter) {
         function handler(req, res) {
             var result = {};
             var esi = [];
+            var xOriginOlx = req.param('x-origin-olx');
+
+            if (xOriginOlx) {
+                req.rendrApp.session.persist({
+                    'x-origin-olx': xOriginOlx
+                });
+                return res.redirect('/');
+            }
 
             _.extend(result, getDataDefault(req, result));
             _.extend(result, getDataUser(req, result));
