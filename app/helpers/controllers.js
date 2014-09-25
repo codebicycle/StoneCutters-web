@@ -4,6 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var common = require('./common');
 var seo = require('../modules/seo');
+var esi = require('../modules/esi');
 var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
 var isServer = typeof window === 'undefined';
@@ -48,7 +49,7 @@ function changeHeaders(headers, currentRoute) {
 }
 
 function setCache(headers, currentRoute) {
-    if (!config.get(['cache', 'enabled'], false)) {
+    if (!config.get(['cache', 'enabled'], false) || !esi.isEnabled.call(this)) {
         return;
     }
     currentRoute = currentRoute || this.app.session.get('currentRoute');
@@ -56,9 +57,7 @@ function setCache(headers, currentRoute) {
 }
 
 function setEsi(headers) {
-    var platform = this.app.session.get('platform');
-
-    if (platform !== 'wap' && platform !== 'html4') {
+    if (!esi.isEnabled.call(this)) {
         return;
     }
     if (headers['Edge-Control']) {
