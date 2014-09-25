@@ -138,7 +138,7 @@ function handleItems(params, promise) {
         category = _category;
         subcategory = _subcategory;
 
-        helpers.controllers.changeHeaders.call(this, false, currentRouter);
+        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         seo.resetHead.call(this, currentRouter);
 
         slug = helpers.common.slugToUrl((subcategory || category).toJSON());
@@ -250,7 +250,7 @@ function handleShow(params, promise) {
         var currentRouter = ['categories', 'subcategories'];
         var slug;
 
-        helpers.controllers.changeHeaders.call(this, false, currentRouter);
+        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         seo.resetHead.call(this, currentRouter);
 
         slug = helpers.common.slugToUrl(_category.toJSON());
