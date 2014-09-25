@@ -45,6 +45,10 @@ module.exports = {
             }
         }
     },
+    esi: {
+        tag: '<esi:',
+        platforms: ['wap', 'html4']
+    },
     infiniteScroll: false,
     interstitial: {
         enabled: true,

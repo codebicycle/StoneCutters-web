@@ -45,6 +45,10 @@ module.exports = {
             }
         }
     },
+    esi: {
+        tag: '<esi:',
+        platforms: ['wap', 'html4']
+    },
     infiniteScroll: false,
     interstitial: {
         enabled: true,
@@ -135,6 +139,5 @@ module.exports = {
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
     },
-    keyade: ['www.olx.com.ng', 'www.olx.co.ke'],
-    esi: true
+    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
 };
