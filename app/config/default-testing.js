@@ -135,6 +135,5 @@ module.exports = {
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
     },
-    keyade: ['www.olx.com.ng', 'www.olx.co.ke'],
-    esi: true
+    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
 };

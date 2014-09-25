@@ -4,11 +4,12 @@ var _ = require('underscore');
 
 module.exports = function esiHelper() {
     var esiTag = '<esi:';
+    var platforms = ['wap', 'html4'];
 
     function isEnabled() {
         var platform = (this.app || this).session.get('platform');
 
-        if (platform === 'wap' || platform === 'html4') {
+        if (_.contains(platforms, platform)) {
             return true;
         }
         return false;
