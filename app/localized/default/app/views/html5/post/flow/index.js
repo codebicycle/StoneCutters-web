@@ -7,6 +7,19 @@ var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
 window.URL = window.URL || window.webkitURL;
 
+function onpopstate(event) {
+    var $loading = $('body > .loading');
+    var status = ($loading.is(":visible")) ? false : confirm(event.data.message);
+
+    if (status) {
+        $(window).off('popstate', onpopstate);
+        history.back();
+    }
+    else {
+        history.pushState(null, '', window.location.pathname);
+    }
+}
+
 module.exports = Base.extend({
     form: {},
     errors: {},
@@ -38,6 +51,7 @@ module.exports = Base.extend({
     },
     onEnd: function(event) {
         $(window).off('beforeunload', this.onBeforeUnload);
+        $(window).off('popstate', onpopstate);
         this.currentView.$el.trigger('exit');
         this.appView.trigger('postingflow:end');
     },
@@ -74,21 +88,9 @@ module.exports = Base.extend({
         }
     },
     handleBack: function() {
-        var popText = this.dictionary['misc.WantToGoBack'];
-
         this.edited = true;
         history.pushState(null, '', window.location.pathname);
-        $(window).on('popstate', onpopstate);
-
-        function onpopstate(event) {
-            if (confirm(popText)) { // Now find a better translation
-                $(window).off('popstate', onpopstate);
-                history.back();
-            }
-            else {
-                history.pushState(null, '', window.location.pathname);
-            }
-        }
+        $(window).on('popstate', {message: this.dictionary['misc.WantToGoBack']}, onpopstate);
     },
     onHeaderChange: function(event, title, current, back, data) {
         event.preventDefault();
