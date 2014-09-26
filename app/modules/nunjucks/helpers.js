@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var dateformat = require('dateformat');
-var config = require('../../../shared/config');
 var helpers = require('../../helpers');
 
 module.exports = function(nunjucks) {
@@ -164,7 +163,7 @@ module.exports = function(nunjucks) {
             href = helpers.common.fullizeUrl(href, this.ctx.app);
             return helpers.common.link(href, this.ctx.app, query || {});
         },
-        escape: function (text) {
+        encode: function (text) {
             return encodeURIComponent(text);
         },
         date: function(timestamp) {

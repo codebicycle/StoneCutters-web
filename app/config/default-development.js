@@ -52,14 +52,8 @@ module.exports = {
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
-        enabled: false,
+        enabled: true,
         headers: {
-            locations: {
-                list: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                }
-            },
             categories: {
                 list: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
@@ -80,16 +74,6 @@ module.exports = {
                     'Edge-Control': '!no-store,max-age=600s'
                 },
                 show: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                }
-            },
-            post: {
-                categories: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                },
-                subcategories: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'
                 }
@@ -180,5 +164,6 @@ module.exports = {
             'www.olx.co.uk': '3avqcjFDvQyE7sGOGGNH1HbN1VWV5D5THYJKu35BbZY',
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
-    }
+    },
+    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
 };

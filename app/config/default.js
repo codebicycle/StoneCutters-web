@@ -36,6 +36,15 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
+    posting: {
+        flow: {
+            enabled: {
+                'www.olx.com.mx': true,
+                'www.olx.com.ar': true,
+                'www.olx.co.za': true
+            }
+        }
+    },
     infiniteScroll: false,
     interstitial: {
         enabled: true,
@@ -45,17 +54,13 @@ module.exports = {
         ignorePlatform: ['wap', 'desktop']
     },
     cache: {
-        enabled: false,
+        enabled: true,
         headers: {
-            home: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
-            location: {
-                'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                'Edge-Control': '!no-store,max-age=600s'
-            },
             categories: {
+                list: {
+                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
+                    'Edge-Control': '!no-store,max-age=600s'
+                },
                 subcategories: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'
@@ -71,16 +76,6 @@ module.exports = {
                     'Edge-Control': '!no-store,max-age=600s'
                 },
                 show: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                }
-            },
-            post: {
-                categories: {
-                    'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
-                    'Edge-Control': '!no-store,max-age=600s'
-                },
-                subcategories: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'
                 }
@@ -181,5 +176,6 @@ module.exports = {
             'www.olx.com': 'JwT4VZIdr9x8Ctn4jWX3pA1qaewK3uMlnFS4iVoM4Zs',
             'www.olx.com.mx': 'NYmbUbWCvkxL9ADmytt25vu68NpFeyy3CkWCu3ZTppM'
         }
-    }
+    },
+    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
 };
