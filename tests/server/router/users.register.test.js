@@ -126,50 +126,6 @@ function test() {
         }
     });
 
-    it('should not register a user with no languages', function(done) {
-        var data = {
-            username: 'damianb',
-            email: 'damianb@olx.com',
-            password: 'dami21',
-            agreeTerms: 'on'
-        };
-
-        mock(data);
-        req.rendrApp.session.get.withArgs('languages').returns();
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('TypeError: Cannot read property \'_byId\' of undefined');
-            expect(User.prototype.register).to.have.not.been.called;
-            expect(formidable.error).to.have.been.calledOnce;
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
-    });
-
-    it('should not register a user with no selectedLanguage', function(done) {
-        var data = {
-            username: 'damianb',
-            email: 'damianb@olx.com',
-            password: 'dami21',
-            agreeTerms: 'on'
-        };
-
-        mock(data);
-        req.rendrApp.session.get.withArgs('selectedLanguage').returns();
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('TypeError: Cannot read property \'id\' of undefined');
-            expect(User.prototype.register).to.have.not.been.called;
-            expect(formidable.error).to.have.been.calledOnce;
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
-    });
-
     it('should login after success', function(done) {
         var data = {
             username: 'damianb',

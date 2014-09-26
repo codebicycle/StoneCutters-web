@@ -1,5 +1,7 @@
 'use strict';
 
+var Base;
+var syncer;
 var dataAdapter;
 var req;
 var User;
@@ -23,7 +25,12 @@ function reset() {
             session: {}
         }
     };
+    syncer = {};
+    Base = proxyquire(ROOT + '/app/bases/model', {
+        './syncer': syncer
+    });
     User = proxyquire(ROOT + '/app/models/user', {
+        '../bases/model': Base,
         '../helpers/dataAdapter': dataAdapter
     });
     user = undefined;
@@ -40,7 +47,8 @@ function test() {
             message: 'This is the message',
             email: 'robot_test@olx.com',
             name: 'robot_test',
-            phone: ''
+            phone: '123456789',
+            token: '123456789'
         };
 
         mock(data);
@@ -65,7 +73,8 @@ function test() {
             itemId: '123456789',
             email: 'robot_test@olx.com',
             name: 'robot_test',
-            phone: ''
+            phone: '123456789',
+            token: '123456789'
         };
 
         mock(data);
@@ -78,7 +87,8 @@ function test() {
             itemId: '123456789',
             message: 'This is the message',
             name: 'robot_test',
-            phone: ''
+            phone: '123456789',
+            token: '123456789'
         };
 
         mock(data);
@@ -91,7 +101,8 @@ function test() {
             itemId: '123456789',
             message: 'This is the message',
             email: 'robot_test@olx.com',
-            phone: ''
+            phone: '123456789',
+            token: '123456789'
         };
 
         mock(data);
@@ -104,7 +115,22 @@ function test() {
             itemId: '123456789',
             message: 'This is the message',
             email: 'robot_test@olx.com',
-            name: 'robot_test'
+            name: 'robot_test',
+            token: '123456789'
+        };
+
+        mock(data);
+        mockFail(data);
+        fail(done, assertFail, data);
+    });
+
+    it('should reply with no token', function(done) {
+        var data = {
+            itemId: '123456789',
+            message: 'This is the message',
+            email: 'robot_test@olx.com',
+            name: 'robot_test',
+            phone: '123456789'
         };
 
         mock(data);

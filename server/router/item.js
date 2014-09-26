@@ -31,15 +31,16 @@ module.exports = function(app, dataAdapter) {
                     data.token = userSession.token;
                 }
                 reply = data;
-                user = new User();
+                user = new User({
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: platform
+                });
                 done();
             }
 
             function submit(done) {
                 user.reply(done, req, _.extend({}, reply, {
-                    id: itemId,
-                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
-                    platform: platform
+                    id: itemId
                 }));
             }
 

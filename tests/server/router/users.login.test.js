@@ -77,46 +77,6 @@ function test() {
         }
     });
 
-    it('should not login a user with no languages', function(done) {
-        var data = {
-            usernameOrEmail: 'test@arwen.com',
-            password: '123456'
-        };
-
-        mock(data);
-        req.rendrApp.session.get.withArgs('languages').returns();
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('TypeError: Cannot read property \'_byId\' of undefined');
-            expect(User.prototype.login).to.have.not.been.called;
-            expect(formidable.error).to.have.been.calledOnce;
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
-    });
-
-    it('should not login a user with no selectedLanguage', function(done) {
-        var data = {
-            usernameOrEmail: 'test@arwen.com',
-            password: '123456'
-        };
-
-        mock(data);
-        req.rendrApp.session.get.withArgs('selectedLanguage').returns();
-        fail(done, assert, data);
-
-        function assert(done, err) {
-            expect(err).to.be.instanceOf(Error);
-            expect(err.toString()).to.equal('TypeError: Cannot read property \'id\' of undefined');
-            expect(User.prototype.login).to.have.not.been.called;
-            expect(formidable.error).to.have.been.calledOnce;
-            expect(res.redirect).to.have.been.calledOnce;
-            done();
-        }
-    });
-
     it('should redirect after success', function(done) {
         var data = {
             usernameOrEmail: 'test@arwen.com',

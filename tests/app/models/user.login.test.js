@@ -1,5 +1,7 @@
 'use strict';
 
+var Base;
+var syncer;
 var dataAdapter;
 var req;
 var User;
@@ -23,7 +25,12 @@ function reset() {
             session: {}
         }
     };
+    syncer = {};
+    Base = proxyquire(ROOT + '/app/bases/model', {
+        './syncer': syncer
+    });
     User = proxyquire(ROOT + '/app/models/user', {
+        '../bases/model': Base,
         '../helpers/dataAdapter': dataAdapter
     });
     user = undefined;
