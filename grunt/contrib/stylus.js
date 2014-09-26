@@ -106,6 +106,10 @@ module.exports = function(grunt) {
             environments.forEach(function eachEnvironments(environment) {
                 addIconToStylus(location, environment);
             });
+
+            if (!_.contains(environments, 'production')) {
+                addIconToStylus(location, 'production');
+            }
         }
 
         function addIconToStylus(location, environment) {
