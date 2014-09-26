@@ -46,18 +46,18 @@ module.exports = function(app, dataAdapter) {
                 dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
             }
 
-            function success(response, body) {
+            function store(done, res, reply) {
+                req.rendrApp.session.persist({
+                    replyId: reply.id
+                });
+                done();
+            }
+
+            function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
                 statsd.increment([location.name, 'reply', 'success', platform]);
-                track(body);
-            }
-
-            function track(body) {
-                if (_.contains(keyade, location.url)) {
-                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69473&kaEvAcId=3&kaEvMcId=', body.id, '&kaEvCt1=1'].join(''));
-                }
             }
 
             function error(err) {
@@ -72,6 +72,7 @@ module.exports = function(app, dataAdapter) {
             asynquence().or(error)
                 .then(parse)
                 .then(submit)
+                .then(store)
                 .val(success);
         }
     })();
@@ -228,19 +229,19 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function success(response, item) {
+            function store(done, res, item) {
+                req.rendrApp.session.persist({
+                    itemId: item.id
+                });
+                done(item);
+            }
+
+            function success(item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
                 res.redirect(utils.link(url, req.rendrApp));
                 statsd.increment([location.name, 'posting', 'success', platform]);
-                track(item);
                 clean();
-            }
-
-            function track(item) {
-                if (_.contains(keyade, location.url)) {
-                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69472&kaEvAcId=2&kaEvMcId=', item.id, '&kaEvCt1=1'].join(''));
-                }
             }
 
             function fail(err, track) {
@@ -281,6 +282,7 @@ module.exports = function(app, dataAdapter) {
                 .then(validate)
                 .then(postImages)
                 .then(post)
+                .then(store)
                 .val(success);
         }
     })();
