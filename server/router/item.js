@@ -45,7 +45,7 @@ module.exports = function(app, dataAdapter) {
                 }));
             }
 
-            function store(done, res, reply) {
+            function store(done, reply) {
                 req.rendrApp.session.persist({
                     replyId: reply.id
                 });
