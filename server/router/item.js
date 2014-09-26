@@ -10,40 +10,41 @@ module.exports = function(app, dataAdapter) {
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
+    var User = require('../../app/models/user');
     var keyade = config.get('keyade', []);
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
-        function handler(req, res) {
+        function handler(req, res, next) {
             var location = req.rendrApp.session.get('location');
             var platform = req.rendrApp.session.get('platform');
             var itemId = req.param('itemId', null);
+            var user;
             var reply;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function submit(done, data) {
-                var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
-                var language = req.rendrApp.session.get('languages')._byId[selectedLanguage] || {};
-                var platform = req.rendrApp.session.get('platform');
-                var options = {
-                    data: data,
-                    query: {
-                        languageId: language.id,
-                        platform: platform
-                    }
-                };
-                var user = req.rendrApp.session.get('user');
+            function prepare(done, data) {
+                var userSession = req.rendrApp.session.get('user');
 
-                reply = data;
-                if (user) {
-                    options.query.token = user.token;
+                if (userSession) {
+                    data.token = userSession.token;
                 }
-                data.platform = platform;
-                dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
+                reply = data;
+                user = new User({
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: platform
+                });
+                done();
+            }
+
+            function submit(done) {
+                user.reply(done, req, _.extend({}, reply, {
+                    id: itemId
+                }));
             }
 
             function store(done, res, reply) {
@@ -58,6 +59,7 @@ module.exports = function(app, dataAdapter) {
 
                 res.redirect(utils.link(url, req.rendrApp));
                 statsd.increment([location.name, 'reply', 'success', platform]);
+                end();
             }
 
             function error(err) {
@@ -66,11 +68,19 @@ module.exports = function(app, dataAdapter) {
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     statsd.increment([location.name, 'reply', 'error', platform]);
+                    end(err);
                 });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
             }
 
             asynquence().or(error)
                 .then(parse)
+                .then(prepare)
                 .then(submit)
                 .then(store)
                 .val(success);
