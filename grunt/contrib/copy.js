@@ -6,6 +6,7 @@ module.exports = function(grunt) {
     var path = require('path');
     var _ = require('underscore');
     var config = require('../config');
+    var utils = require('../utils');
     var localization = config.get('localization');
     var iconsLocalization = config.get('icons');
     var templates = [{
@@ -137,7 +138,7 @@ module.exports = function(grunt) {
     })();
 
     (function copySprites() {
-        var environments = config.get('environments');
+        var environments = utils.getEnvironments(grunt);
         var files = {};
         var platform;
 
