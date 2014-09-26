@@ -19,7 +19,7 @@ module.exports = Base.extend({
         'restart': 'onRestart'
     },
     onLogoClick: function(event) {
-        if (!confirm(this.parentView.dictionary['misc.WantToGoBack'])) { // Now find a better translation
+        if (this.parentView.edited && !confirm(this.parentView.dictionary['misc.WantToGoBack'])) { // Now find a better translation
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
