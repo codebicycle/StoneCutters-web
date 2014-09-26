@@ -1,154 +1,141 @@
 'use strict';
 
-module.exports = function userRouter(app, dataAdapter) {
+module.exports = function userRouter(app) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
-    var querystring = require('querystring');
-    var crypto = require('crypto');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
+    var User = require('../../app/models/user');
 
-    var loginHandler = (function login() {
+    function login() {
+        app.post('/login', handler);
 
-        return function handler(req, res, data) {
-            var platform = req.rendrApp.session.get('platform');
-            var usernameOrEmail = data.usernameOrEmail;
-            var password = data.password;
-            var redirect = data.redirect;
-
-            function getChallenge(done) {
-                dataAdapter.get(req, '/users/challenge', {
-                    query: {
-                        u: usernameOrEmail,
-                        platform: platform
-                    }
-                }, done.errfcb);
-            }
-
-            function getCredentials(done, response, data) {
-                var hash = crypto.createHash('md5').update(password).digest('hex');
-
-                done({
-                    c: data.challenge,
-                    h: crypto.createHash('sha512').update(hash + usernameOrEmail).digest('hex'),
-                    platform: platform
-                });
-            }
-
-            function submit(done, credentials) {
-                dataAdapter.get(req, '/users/login', {
-                    query: credentials
-                }, done.errfcb);
-            }
-
-            function save(done, response, user) {
-                req.rendrApp.session.persist({
-                    user: user
-                });
-                done();
-            }
-
-            function success() {
-                res.redirect(utils.link(redirect, req.rendrApp));
-            }
-
-            function error(err) {
-                var link = '/login';
-
-                if (redirect && redirect !== '/') {
-                    link += '?redirect=' + redirect;
-                }
-                formidable.error(req, link, err, function redirect(url) {
-                    res.redirect(utils.link(url, req.rendrApp));
-                });
-            }
-
-            if (typeof password !== 'string') {
-                password = '';
-            }
-            asynquence().or(error)
-                .then(getChallenge)
-                .then(getCredentials)
-                .then(submit)
-                .then(save)
-                .val(success);
-        };
-    })();
-
-    (function registration() {
-        app.post('/register', handler);
-
-        function handler(req, res) {
+        function handler(req, res, next) {
             var user;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function validate(done, data) {
-                if (!data.agreeTerms) {
-                    res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
-                    return;
-                }
-                done(data);
+            function prepare(done, data) {
+                user = new User(_.extend(data, {
+                    location: req.rendrApp.session.get('siteLocation'),
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: req.rendrApp.session.get('platform')
+                }));
+                done();
             }
 
-            function submit(done, data) {
-                data.location = req.rendrApp.session.get('siteLocation');
-                data.languageId = 10;
-                user = _.clone(data);
-                dataAdapter.post(req, '/users', {
-                    query: {
-                        platform: req.rendrApp.session.get('platform')
-                    },
-                    data: data
-                }, done.errfcb);
+            function submit(done) {
+                user.login(done, req);
             }
 
             function success() {
-                user.usernameOrEmail = user.username;
-                user.redirect = '/?register_success=true';
-                loginHandler(req, res, user);
+                var redirect = user.get('redirect');
+
+                if (!redirect || redirect.match(/(\/register|\/login|\/logout)/g)) {
+                    redirect = '/';
+                }
+                res.redirect(utils.link(redirect, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                var link = '/login';
+                var redirect = user ? user.get('redirect') : '';
+
+                if (redirect && redirect.match(/(\/register|\/login|\/logout|\/)/g)) {
+                    link += '?redirect=' + redirect;
+                }
+                formidable.error(req, link, err, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
+                .val(success);
+        }
+
+        return handler;
+    }
+
+    function register() {
+        app.post('/register', handler);
+
+        function handler(req, res, next) {
+            var user;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                user = new User(_.extend(data, {
+                    location: req.rendrApp.session.get('siteLocation'),
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: req.rendrApp.session.get('platform')
+                }));
+                done();
+            }
+
+            function validate(done) {
+                if (!user.get('agreeTerms')) {
+                    res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
+                    return end();
+                }
+                done(user);
+            }
+
+            function submit(done) {
+                user.register(done, req);
+            }
+
+            function login(done) {
+                user.login(done, req);
+            }
+
+            function success() {
+                res.redirect(utils.link('/?register_success=true', req.rendrApp));
+                end();
             }
 
             function error(err) {
                 formidable.error(req, '/register', err, function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp));
+                    end(err);
                 });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
             }
 
             asynquence().or(error)
                 .then(parse)
+                .then(prepare)
                 .then(validate)
                 .then(submit)
+                .then(login)
                 .val(success);
         }
-    })();
 
-    (function login() {
-        app.post('/login', handler);
+        return handler;
+    }
 
-        function handler(req, res) {
-            function parse(done) {
-                formidable.parse(req, done);
-            }
-
-            function submit(done, data) {
-                if (!data.redirect || data.redirect.match(/(\/register|\/login|\/logout)/g)) {
-                    data.redirect = '/';
-                }
-                loginHandler(req, res, data);
-            }
-
-            function error(err) {
-                formidable.error(req, '/login', err, function redirect(url) {
-                    res.redirect(utils.link(url, req.rendrApp));
-                });
-            }
-
-            asynquence().or(error)
-                .then(parse)
-                .val(submit);
-        }
-    })();
+    return {
+        login: login(),
+        register: register()
+    };
 };
