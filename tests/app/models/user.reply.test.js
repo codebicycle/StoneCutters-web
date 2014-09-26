@@ -10,7 +10,7 @@ var user;
 describe('app', function() {
     describe('models', function() {
         describe('user', function() {
-            describe('.register', function() {
+            describe('.reply', function() {
                 beforeEach(reset);
                 test();
             });
@@ -38,14 +38,17 @@ function reset() {
 
 function test() {
     it('should be a method', function() {
-        expect(User.prototype.register).to.be.instanceOf(Function);
+        expect(User.prototype.reply).to.be.instanceOf(Function);
     });
 
-    it('should register a valid user', function(done) {
+    it('should reply a valid user', function(done) {
         var data = {
-            username: 'arwen',
-            email: 'test@arwen.com',
-            password: '123456'
+            itemId: '123456789',
+            message: 'This is the message',
+            email: 'robot_test@olx.com',
+            name: 'robot_test',
+            phone: '123456789',
+            token: '123456789'
         };
 
         mock(data);
@@ -53,13 +56,11 @@ function test() {
 
         function assert(done) {
             expect(dataAdapter.post).to.have.been.calledOnce;
-            expect(user.set).to.have.been.calledOnce;
-            expect(user.toJSON()).to.deep.equal(data);
             done();
         }
     });
 
-    it('should not register an empty user', function(done) {
+    it('should not reply an empty form', function(done) {
         var data = {};
 
         mock(data);
@@ -67,10 +68,13 @@ function test() {
         fail(done, assertFail, data);
     });
 
-    it('should not register a user with no username', function(done) {
+    it('should not reply with no message', function(done) {
         var data = {
-            email: 'test@arwen.com',
-            password: '123456'
+            itemId: '123456789',
+            email: 'robot_test@olx.com',
+            name: 'robot_test',
+            phone: '123456789',
+            token: '123456789'
         };
 
         mock(data);
@@ -78,10 +82,13 @@ function test() {
         fail(done, assertFail, data);
     });
 
-    it('should not register a user with no email', function(done) {
+    it('should not reply with no email', function(done) {
         var data = {
-            username: 'arwen',
-            password: '123456'
+            itemId: '123456789',
+            message: 'This is the message',
+            name: 'robot_test',
+            phone: '123456789',
+            token: '123456789'
         };
 
         mock(data);
@@ -89,10 +96,41 @@ function test() {
         fail(done, assertFail, data);
     });
 
-    it('should not register a user with no password', function(done) {
+    it('should not reply with no name', function(done) {
         var data = {
-            username: 'arwen',
-            email: 'test@arwen.com'
+            itemId: '123456789',
+            message: 'This is the message',
+            email: 'robot_test@olx.com',
+            phone: '123456789',
+            token: '123456789'
+        };
+
+        mock(data);
+        mockFail(data);
+        fail(done, assertFail, data);
+    });
+
+    it('should reply with no phone', function(done) {
+        var data = {
+            itemId: '123456789',
+            message: 'This is the message',
+            email: 'robot_test@olx.com',
+            name: 'robot_test',
+            token: '123456789'
+        };
+
+        mock(data);
+        mockFail(data);
+        fail(done, assertFail, data);
+    });
+
+    it('should reply with no token', function(done) {
+        var data = {
+            itemId: '123456789',
+            message: 'This is the message',
+            email: 'robot_test@olx.com',
+            name: 'robot_test',
+            phone: '123456789'
         };
 
         mock(data);
@@ -104,8 +142,6 @@ function test() {
 function mock(data) {
     user = new User(data);
 
-    sinon.spy(user, 'set');
-
     dataAdapter.post = sinon.stub();
     dataAdapter.post.callsArgWith(3, null, null, data);
 }
@@ -116,12 +152,12 @@ function mockFail(data) {
 
 function success(done, assert, data) {
     asynquence().or(done)
-        .then(register)
+        .then(reply)
         .then(assert)
         .val(done);
 
-    function register(done) {
-        user.register(done, req, data);
+    function reply(done) {
+        user.reply(done, req, data);
     }
 }
 
@@ -133,11 +169,11 @@ function fail(done, assert, data) {
 
     function failure(done) {
         asynquence().or(done)
-            .then(register)
+            .then(reply)
             .val(done);
 
-        function register(done) {
-            user.register(done, req, data);
+        function reply(done) {
+            user.reply(done, req, data);
         }
     }
 }
@@ -146,6 +182,5 @@ function assertFail(done, err) {
     expect(err).to.be.instanceOf(Error);
     expect(err.toString()).to.equal('Error: Invalid Data');
     expect(dataAdapter.post).to.have.been.calledOnce;
-    expect(user.set).to.have.not.been.called;
     done();
 }
