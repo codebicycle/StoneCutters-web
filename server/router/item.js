@@ -6,13 +6,11 @@ module.exports = function(app, dataAdapter) {
     var asynquence = require('asynquence');
     var querystring = require('querystring');
     var restler  = require('restler');
-    var config = require('../../shared/config');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
-    var keyade = config.get('keyade', []);
-
+    
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
