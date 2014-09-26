@@ -10,6 +10,7 @@ module.exports = function(grunt) {
         removeIcons: 'rm -rf public/images/**/icons',
         removeDist: 'rm -rf dist',
         removeDistGit: 'rm -rf dist/git',
+        removeCoverage: 'rm -rf coverage',
         chmodDistStart: 'chmod 777 dist/start.sh'
     };
 };
