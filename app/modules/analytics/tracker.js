@@ -4,6 +4,7 @@ var _ = require('underscore');
 var configAnalytics = require('./config');
 var google = require('./google');
 var ati = require('./ati');
+var keyade = require('./keyade');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
@@ -49,6 +50,7 @@ function generate(query) {
     var params = {};
     var location;
     var sid;
+    var url;
 
     if (checkPage(page)) {
         location = this.app.session.get('location');
@@ -65,6 +67,14 @@ function generate(query) {
         google.generate.call(this, params, page, query.params);
         ati.generate.call(this, params, page, query.params);
         urls.push('/analytics/pageview.gif?' + stringifyParams(params));
+
+        if (keyade.check.call(this)) {
+            url = keyade.generate.call(this, page);
+
+            if (url) {
+                urls.push(url);
+            }
+        }
     }
 
     return {
