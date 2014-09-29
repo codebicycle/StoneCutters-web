@@ -966,6 +966,18 @@ function staticSearch(params, callback) {
         var user = this.app.session.get('user');
         var query;
 
+        var redirect = function(done) {
+            if (platform !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (params.search && params.search.toLowerCase() === 'gumtree' && this.app.session.get('location').url === 'www.olx.co.za') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/q/-');
+            }
+            done();
+        }.bind(this);
+
         var prepare = function(done) {
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
@@ -1047,6 +1059,7 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findItems)
             .then(checkSearch)

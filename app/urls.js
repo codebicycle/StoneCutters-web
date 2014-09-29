@@ -109,10 +109,16 @@ module.exports = {
         }
     },
     'items#staticSearch': {
-        url: 'q/(:search)/c-(:catId)'
+        url: 'q/:search'
     },
     'items#staticSearch#page': {
-        url: 'q/(:search)/c-:catId/p-:page'
+        url: 'q/:search/p-:page'
+    },
+    'items#staticSearch#cat': {
+        url: 'q/:search/c-:catId'
+    },
+    'items#staticSearch#catPage': {
+        url: 'q/:search/c-:catId/p-:page'
     },
     'redirections#nfallresults#page': {
         urls: {
