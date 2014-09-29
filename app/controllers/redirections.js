@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var helpers = require('../helpers');
-
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
@@ -46,6 +45,9 @@ module.exports = {
     },
     search: function(params, callback) {
         helpers.common.redirect.call(this, '/nf/search/' + (params.search || '') + '/-p-' + params.page);
+    },
+    popularSearches: function(params, callback) {
+        helpers.common.redirect.call(this, '/');
     },
     nfsearch: function(params, callback) {
         helpers.common.redirect.call(this, '/nf/search/' + (params.search || '') + '/-p-' + params.page);
