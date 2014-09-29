@@ -167,7 +167,7 @@ function handleItems(params, promise) {
         done();
     }.bind(this);
 
-    var findItems = function(done) {
+    var fetch = function(done) {
         this.app.fetch({
             items: {
                 collection: 'Items',
@@ -178,28 +178,28 @@ function handleItems(params, promise) {
         }, done.errfcb);
     }.bind(this);
 
-    var check = function(done, res) {
+    var paginate = function(done, res) {
         var url = '/' + query.title + '-cat-' + query.catId;
-        var currentPage;
+        var realPage = res.items.paginate(page, query, url);
 
-        if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+        if (page == 1) {
             done.abort();
-            return helpers.common.redirect.call(this, '/' + helpers.common.slugToUrl((subcategory || category).toJSON()), null, {
-                status: 302
-            });
+            return helpers.common.redirect.call(this, url);
+        }
+        if (realPage) {
+            done.abort();
+            return helpers.common.redirect.call(this, url + '-p-' + realPage);
         }
         done(res.items);
     }.bind(this);
 
     var success = function(done, _items) {
-        var url = '/' + query.title + '-cat-' + query.catId;
         var metadata = _items.metadata;
         var postingLink = {
             category: category.get('id')
         };
         var currentPage;
 
-        helpers.pagination.paginate(metadata, query, url);
         helpers.filters.prepare(metadata);
 
         if (subcategory) {
@@ -239,8 +239,8 @@ function handleItems(params, promise) {
     }.bind(this);
 
     promise.then(prepare);
-    promise.then(findItems);
-    promise.then(check);
+    promise.then(fetch);
+    promise.then(paginate);
     promise.then(success);
 }
 
