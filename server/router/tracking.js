@@ -11,13 +11,24 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function defaultRequestOptions(req) {
+    function defaultRequestOptions(req, type, tracker) {
+        var platform = req.rendrApp.session.get('platform');
+
         return {
             headers: {
                 'User-Agent': utils.getUserAgent(req),
                 'Accept-Encoding': 'gzip,deflate,sdch',
                 'Cache-Control': 'no-cache',
                 'Pragma': 'no-cache'
+            },
+            success: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+            },
+            error: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+            },
+            fail: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
             }
         };
     }
@@ -56,7 +67,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var platform = req.rendrApp.session.get('platform');
             var osName = req.rendrApp.session.get('osName') || 'unknown';
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
-            var options = defaultRequestOptions(req);
+            var options = defaultRequestOptions(req, 'pageview', 'google');
             var params = {
                 page: page || req.query.page,
                 referer: req.query.referer,
@@ -87,7 +98,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultRequestOptions(req);
+                options = defaultRequestOptions(req, 'pageview', 'ati');
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
@@ -158,7 +169,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 id: trackerId,
                 host: host
             });
-            var options = defaultRequestOptions(req);
+            var options = defaultRequestOptions(req, 'pageevent', 'google');
 
             analytic.track(_.extend({
                 ip: req.rendrApp.session.get('ip'),
@@ -178,7 +189,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultRequestOptions(req);
+                options = defaultRequestOptions(req, 'pageevent', 'ati');
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
