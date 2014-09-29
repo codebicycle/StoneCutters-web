@@ -5,11 +5,14 @@
         <div id="progressBar"></div>
         {% set bar = template + "/layout/bar.html" %}
         {% include bar %}
+        {% view 'header/usernav' %}
+        {% view 'header/index' %}
         <div id="wrapper">
             <section id="content">
                 {{ body }}
             </section>
         </div>
+        {% view 'footer/footer' %}
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
