@@ -6,13 +6,11 @@ module.exports = function(app, dataAdapter) {
     var asynquence = require('asynquence');
     var querystring = require('querystring');
     var restler  = require('restler');
-    var config = require('../../shared/config');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
-    var keyade = config.get('keyade', []);
-
+    
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
@@ -47,19 +45,19 @@ module.exports = function(app, dataAdapter) {
                 }));
             }
 
-            function success(response, body) {
+            function store(done, reply) {
+                req.rendrApp.session.persist({
+                    replyId: reply.id
+                });
+                done();
+            }
+
+            function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
                 statsd.increment([location.name, 'reply', 'success', platform]);
-                track(body);
                 end();
-            }
-
-            function track(body) {
-                if (_.contains(keyade, location.url)) {
-                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69473&kaEvAcId=3&kaEvMcId=', body.id, '&kaEvCt1=1'].join(''));
-                }
             }
 
             function error(err) {
@@ -82,6 +80,7 @@ module.exports = function(app, dataAdapter) {
                 .then(parse)
                 .then(prepare)
                 .then(submit)
+                .then(store)
                 .val(success);
         }
     })();
@@ -238,19 +237,19 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function success(response, item) {
+            function store(done, res, item) {
+                req.rendrApp.session.persist({
+                    itemId: item.id
+                });
+                done(item);
+            }
+
+            function success(item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
                 res.redirect(utils.link(url, req.rendrApp));
                 statsd.increment([location.name, 'posting', 'success', platform]);
-                track(item);
                 clean();
-            }
-
-            function track(item) {
-                if (_.contains(keyade, location.url)) {
-                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69472&kaEvAcId=2&kaEvMcId=', item.id, '&kaEvCt1=1'].join(''));
-                }
             }
 
             function fail(err, track) {
@@ -291,6 +290,7 @@ module.exports = function(app, dataAdapter) {
                 .then(validate)
                 .then(postImages)
                 .then(post)
+                .then(store)
                 .val(success);
         }
     })();

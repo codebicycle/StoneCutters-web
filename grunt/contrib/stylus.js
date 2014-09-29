@@ -3,8 +3,9 @@
 module.exports = function(grunt) {
     var _ = require('underscore');
     var config = require('../config');
-    var environments = config.get('environments');
+    var utils = require('../utils');
     var stylusConfig = config.get('stylus');
+    var environments = utils.getEnvironments(grunt);
     var stylus = {
         options: {
             'include css': true
@@ -105,6 +106,10 @@ module.exports = function(grunt) {
             environments.forEach(function eachEnvironments(environment) {
                 addIconToStylus(location, environment);
             });
+
+            if (!_.contains(environments, 'production')) {
+                addIconToStylus(location, 'production');
+            }
         }
 
         function addIconToStylus(location, environment) {
