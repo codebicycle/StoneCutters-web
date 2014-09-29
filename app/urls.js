@@ -108,9 +108,8 @@ module.exports = {
             }
         }
     },
-    'items#staticSearch': {        
-                url: 'q/(:search)/c-(:catId)'
-        
+    'items#staticSearch': {
+        url: 'q/(:search)/c-(:catId)'
     },
     'items#staticSearch#page': {
         url: 'q/(:search)/c-:catId/p-:page'

@@ -23,7 +23,6 @@ module.exports = {
     staticSearch: middlewares(staticSearch)
 };
 
-
 function show(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -675,7 +674,6 @@ function search(params, callback) {
             analytics.setPage('nf');
             analytics.addParam('keyword', query.search);
             analytics.addParam('page_nb', 0);
-            
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
