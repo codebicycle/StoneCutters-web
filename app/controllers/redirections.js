@@ -47,6 +47,12 @@ module.exports = {
     search: function(params, callback) {
         helpers.common.redirect.call(this, '/nf/search/' + (params.search || '') + '/-p-' + params.page);
     },
+    nfsearch: function(params, callback) {
+        helpers.common.redirect.call(this, '/nf/search/' + (params.search || '') + '/-p-' + params.page);
+    },
+    nfallresults: function(params, callback) {
+        helpers.common.redirect.call(this, '/nf/all-results/-p-' + params.page);
+    },
     login: function(params, callback) {
         helpers.common.redirect.call(this, '/login');
     },
