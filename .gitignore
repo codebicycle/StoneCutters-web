@@ -40,3 +40,5 @@ test/unit/coverage.html
 tests/coverage.html
 
 public/images/*/icons
+
+.idea
