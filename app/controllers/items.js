@@ -18,7 +18,8 @@ module.exports = {
     search: middlewares(search),
     allresults: middlewares(allresults),
     favorite: middlewares(favorite),
-    'delete': middlewares(deleteItem)
+    'delete': middlewares(deleteItem),
+    staticSearch: middlewares(staticSearch)
 };
 
 function show(params, callback) {
@@ -672,7 +673,7 @@ function search(params, callback) {
             analytics.setPage('nf');
             analytics.addParam('keyword', query.search);
             analytics.addParam('page_nb', 0);
-
+            
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
@@ -952,4 +953,102 @@ function deleteItem(params, callback) {
         .then(prepare)
         .then(remove)
         .val(success);
+}
+
+function staticSearch(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var page = params ? params.page : undefined;
+        var infiniteScroll = config.get('infiniteScroll', false);
+        var platform = this.app.session.get('platform');
+        var user = this.app.session.get('user');
+        var query;
+
+        var prepare = function(done) {
+            helpers.pagination.prepare(this.app, params);
+            query = _.clone(params);
+            delete params.search;
+            delete params.page;
+            delete params.filters;
+            delete params.urlFilters;
+            
+            analytics.setPage('staticSearch'); // @todo Check this
+            analytics.addParam('keyword', query.search);
+            analytics.addParam('page_nb', 0);
+
+            if (!query.search || _.isEmpty(query.search.trim())) {
+                seo.addMetatag('robots', 'noindex, follow');
+                seo.addMetatag('googlebot', 'noindex, follow');
+                seo.update();
+                done.abort();
+                return callback(null, {
+                    search: '',
+                    metadata: {
+                        total: 0
+                    },
+                    analytics: analytics.generateURL.call(this)
+                });
+            }            
+            done();            
+        }.bind(this);
+
+        var findItems = function(done) {
+            params.item_type = 'staticSearch';
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var checkSearch = function(done, res) {
+            if (!res.items) {
+                return done.fail(null, {});
+            }
+
+            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done(res.items);
+        }.bind(this);
+
+        var success = function(_items) {
+            var url = ['/q/', query.search, '/c-', params.catId ,  '/'];
+            url = url.join('');
+            var metadata = _items.metadata;
+
+            if (metadata.total < 5) {
+                seo.addMetatag('robots', 'noindex, follow');
+                seo.addMetatag('googlebot', 'noindex, follow');
+            }
+            helpers.pagination.paginate(metadata, query, url);
+            analytics.addParam('page_nb', metadata.totalPages);
+            seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+            seo.addMetatag('description');
+            seo.update();
+            callback(null, 'items/search', {
+                user: user,
+                items: _items.toJSON(),
+                metadata: metadata,
+                search: query.search,
+                infiniteScroll: infiniteScroll
+//                analytics: analytics.generateURL.call(this)
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(findItems)
+            .then(checkSearch)
+            .val(success);
+    }
 }

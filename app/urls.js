@@ -108,6 +108,14 @@ module.exports = {
             }
         }
     },
+    'items#staticSearch': {        
+                url: 'q/(:search)/c-(:catId)'
+        
+    },
+    'items#staticSearch#page': {        
+                url: 'q/(:search)/c-:catId/p-:page'
+        
+    },
     'items#allresults#page': {
         urls: {
             server: 'nf/all-results/-p-:page/:filters?',
