@@ -108,6 +108,12 @@ module.exports = {
             }
         }
     },
+    'items#staticSearch': {
+        url: 'q/(:search)/c-(:catId)'
+    },
+    'items#staticSearch#page': {
+        url: 'q/(:search)/c-:catId/p-:page'
+    },
     'redirections#nfallresults#page': {
         urls: {
             server: 'all-results/-p-:page/:filters?',
