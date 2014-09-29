@@ -159,7 +159,7 @@ function handleItems(params, promise) {
         }
         if (slug.indexOf(params.title + '-cat-')) {
             done.abort();
-            if (typeof page === 'undefined' || (isNaN(page) || page <= 1 || page >= 999999)) {
+            if (page === undefined || isNaN(page) || page <= 1) {
                 return helpers.common.redirect.call(this, '/' + slug);
             }
             return helpers.common.redirect.call(this, '/' + slug + '-p-' + page);
