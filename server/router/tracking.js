@@ -157,7 +157,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 googleTracking(req, trackerId, host, page);
             }
-            atiTracking(req);
+            if (req.query.locUrl !== 'www.olx.com.co') {
+                atiTracking(req);
+            }
         }
     })();
 
