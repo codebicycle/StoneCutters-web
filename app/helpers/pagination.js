@@ -109,8 +109,13 @@ module.exports = (function() {
         return url.join('');
     }
 
-    function prepare(app, params) {
-        var max = config.get(['smaug', app.session.get('platform'), 'maxPageSize'], 25);
+    function prepare(app, params, type) {
+        var platform = app.session.get('platform');
+        var location = app.session.get('location').url;
+        var mobile = ['smaug', platform, 'maxPageSize'];
+        var desktop = ['markets', location, 'ads', 'quantity', type || 'listing'];
+        var emerging = ['markets', 'emerging', 'ads', 'quantity', type || 'listing'];
+        var max = config.get(mobile, config.get(desktop, config.get(emerging, 25)));
 
         if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
             params.pageSize = max;
