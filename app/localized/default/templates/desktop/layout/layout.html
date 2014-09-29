@@ -7,10 +7,11 @@
         {% include bar %}
         {% view 'header/usernav' %}
         {% view 'header/index' %}
-        <div id="wrapper">
-            <section id="content">
+        <div id="wrapper" class="content-centered">
+            <main id="content">
                 {{ body }}
-            </section>
+            </main>
+            {% view 'footer/footer' %}
         </div>
         {% view 'footer/footer' %}
         <script>function init() {
