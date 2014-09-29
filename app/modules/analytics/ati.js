@@ -124,6 +124,10 @@ module.exports = function analyticsHelper() {
         return params;
     }
 
+    function check(page) {
+        return !!utils.get(configAnalytics, ['ati', 'params', page]);
+    }
+
     function generate(params, page, options) {
         var ati = utils.get(configAnalytics, ['ati', 'params', page], {});
         var custom = _.clone(ati.names);
@@ -140,7 +144,21 @@ module.exports = function analyticsHelper() {
         }
     }
 
+    function getParams() {
+        var location = this.app.session.get('location');
+        var config = utils.get(configAnalytics, ['ati', 'paths', 0/*location.id*/]);
+
+        return {
+            siteId: config.siteId,
+            server: config.logServer,
+            host: location.url.replace('www', ''),
+            protocol: 'http'
+        };
+    }
+
     return {
-        generate: generate
+        check: check,
+        generate: generate,
+        getParams: getParams
     };
 }();

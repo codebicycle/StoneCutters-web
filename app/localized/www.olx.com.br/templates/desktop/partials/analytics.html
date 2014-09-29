@@ -1,0 +1,10 @@
+{% if analytics %}
+    <script type="text/javascript">
+        var xtdmc    = '{{ analytics.params.ati.host }}';
+        var xtnv     = document;
+        var xtsd     = [ '{{ analytics.params.ati.protocol }}', '://', '{{ analytics.params.ati.server }}'].join('');
+        var xtsite   = '{{ analytics.params.ati.siteId }}';
+        var xtcustom = JSON.parse('{{ analytics.params.custom }}');
+        var xtergo   = '1';
+    </script>
+{% endif %}

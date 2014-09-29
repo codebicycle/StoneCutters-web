@@ -37,13 +37,6 @@ function getURLName(page) {
     return name.join('');
 }
 
-function checkPage(page) {
-    var googlePage = utils.get(configAnalytics, ['google', 'pages', page]);
-    var ati = utils.get(configAnalytics, ['ati', 'params', page]);
-
-    return (!!googlePage && !!ati);
-}
-
 function generate(query) {
     var page = getURLName.call(this, query.page);
     var urls = [];
@@ -52,7 +45,7 @@ function generate(query) {
     var sid;
     var url;
 
-    if (checkPage(page)) {
+    if (google.check.call(this, page) && ati.check.call(this, page)) {
         location = this.app.session.get('location');
         sid = this.app.session.get('sid');
 
@@ -67,13 +60,19 @@ function generate(query) {
         google.generate.call(this, params, page, query.params);
         ati.generate.call(this, params, page, query.params);
         urls.push('/analytics/pageview.gif?' + stringifyParams(params));
+    }
 
-        if (keyade.check.call(this)) {
-            url = keyade.generate.call(this, page);
+    if (ati.check.call(this, page)) {
+        params = _.extend(params, {
+            ati: ati.getParams.call(this)
+        });
+    }
 
-            if (url) {
-                urls.push(url);
-            }
+    if (keyade.check.call(this)) {
+        url = keyade.generate.call(this, page);
+
+        if (url) {
+            urls.push(url);
         }
     }
 
