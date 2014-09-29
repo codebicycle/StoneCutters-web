@@ -146,9 +146,9 @@ module.exports = function analyticsHelper() {
         }
     }
 
-    function generateUrl(params, page, options) {
+    function generateUrl(params) {
         var location = this.app.session.get('location');
-        var countryId;
+        var countryId = location.id;
         var config;
         var url;
 
