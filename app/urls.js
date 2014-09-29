@@ -76,7 +76,7 @@ module.exports = {
     'categories#list': {
         url: ''
     },
-    'items#search#filters': {
+    'redirections#nfsearch#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',
             client: {
@@ -84,7 +84,7 @@ module.exports = {
             }
         }
     },
-    'items#search': {
+    'redirections#nfsearch': {
         urls: {
             server: 'search/:search?',
             client: {
@@ -92,7 +92,7 @@ module.exports = {
             }
         }
     },
-    'items#search#nfFilters': {
+    'items#search#filters': {
         urls: {
             server: 'nf/search/:search/-p-:page/:filters?',
             client: {
@@ -100,11 +100,27 @@ module.exports = {
             }
         }
     },
-    'items#search#nf': {
+    'items#search': {
         urls: {
             server: 'nf/search/:search?',
             client: {
                 url: 'nf/search(/)(:search)'
+            }
+        }
+    },
+    'redirections#nfallresults#page': {
+        urls: {
+            server: 'all-results/-p-:page/:filters?',
+            client: {
+                url: 'all-results/-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'redirections#nfallresults': {
+        urls: {
+            server: 'all-results/:filters?',
+            client: {
+                url: 'all-results(/)(:filters)'
             }
         }
     },
