@@ -63,7 +63,7 @@ function generate(query) {
 
     if (ati.check.call(this, page)) {
         if (location.url === 'www.olx.com.co') {
-            url = ati.generateUrl.call(this, params, page, query.params);
+            url = ati.generateUrl.call(this, params);
 
             if (url) {
                 urls.push(url);
