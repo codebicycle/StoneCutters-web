@@ -2,8 +2,10 @@
 
 var _ = require('underscore');
 var configAnalytics = require('./config');
+var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
+var env = config.get(['environment', 'type'], 'production');
 
 module.exports = function analyticsHelper() {
     var actionTypes = {
@@ -144,10 +146,39 @@ module.exports = function analyticsHelper() {
         }
     }
 
-    function getParams() {
+    function generateUrl(params) {
+        var location = this.app.session.get('location');
+        var countryId = location.id;
+        var config;
+        var url;
+
+        if (env !== 'production') {
+            countryId = 0;
+        }
+
+        config = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+        if (!config) {
+            return;
+        }
+
+        url = ['http://', config.logServer, '.ati-host.net/hit.xiti'].join('');
+        url = utils.params(url, {
+            s: config.siteId,
+            stc: params.custom,
+            idclient: this.app.session.get('clientId').substr(24),
+            na: Math.round(Math.random() * 1000000),
+            ref: params.referer
+        });
+        return url;
+    }
+    
+    function getConfig() {
         var location = this.app.session.get('location');
         var config = utils.get(configAnalytics, ['ati', 'paths', 0/*location.id*/]);
 
+        if (!config) {
+            return;
+        }
         return {
             siteId: config.siteId,
             server: config.logServer,
@@ -159,6 +190,7 @@ module.exports = function analyticsHelper() {
     return {
         check: check,
         generate: generate,
-        getParams: getParams
+        generateUrl: generateUrl,
+        getConfig: getConfig
     };
 }();

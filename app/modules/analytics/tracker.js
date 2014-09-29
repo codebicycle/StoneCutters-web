@@ -39,14 +39,13 @@ function getURLName(page) {
 
 function generate(query) {
     var page = getURLName.call(this, query.page);
+    var location = this.app.session.get('location');
     var urls = [];
     var params = {};
-    var location;
     var sid;
     var url;
 
     if (google.check.call(this, page) && ati.check.call(this, page)) {
-        location = this.app.session.get('location');
         sid = this.app.session.get('sid');
 
         if (sid) {
@@ -63,8 +62,15 @@ function generate(query) {
     }
 
     if (ati.check.call(this, page)) {
+        if (location.url === 'www.olx.com.co') {
+            url = ati.generateUrl.call(this, params);
+
+            if (url) {
+                urls.push(url);
+            }
+        }
         params = _.extend(params, {
-            ati: ati.getParams.call(this)
+            ati: ati.getConfig.call(this)
         });
     }
 
