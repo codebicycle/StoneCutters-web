@@ -31,7 +31,7 @@ var specials = {
 
         if (_.isString(content)) {
             head.canonical = content;
-        } 
+        }
         else if (platform === 'wap' && utils.params(url, 'sid')) {
             protocol = this.app.session.get('protocol');
             host = this.app.session.get('host');
@@ -168,6 +168,10 @@ function desktopizeUrl(url, options, params) {
     return url;
 }
 
+function getCategoryId(categoryId) {
+    return configSeo.categories.closed[categoryId] || configSeo.categories.migrated[categoryId];
+}
+
 module.exports = {
     getHead: getHead,
     resetHead: function(page) {
@@ -183,5 +187,6 @@ module.exports = {
     },
     addMetatag: addMetatag,
     update: update,
-    desktopizeUrl: desktopizeUrl
+    desktopizeUrl: desktopizeUrl,
+    getCategoryId: getCategoryId
 };

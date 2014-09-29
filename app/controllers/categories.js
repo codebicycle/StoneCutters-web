@@ -65,7 +65,17 @@ function show(params, callback) {
     }, controller);
 
     function controller() {
-        var findCategories = function(done) {
+        var redirect = function(done){
+            var categoryId = seo.getCategoryId(params.catId);
+
+            if (categoryId) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/cat-' + categoryId);
+            }
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
             this.app.fetch({
                 categories: {
                     collection: 'Categories',
@@ -118,7 +128,8 @@ function show(params, callback) {
         }.bind(this);
 
         var promise = asynquence().or(error)
-            .then(findCategories)
+            .then(redirect)
+            .then(fetch)
             .then(router);
     }
 }
