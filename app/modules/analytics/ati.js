@@ -169,7 +169,6 @@ module.exports = function analyticsHelper() {
             na: Math.round(Math.random() * 1000000),
             ref: params.referer
         });
-console.log('ATI Colombia', url);
         return url;
     }
 

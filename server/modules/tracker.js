@@ -186,13 +186,8 @@ Tracker.prototype.track = function(options, optionsRequest) {
         fail = getOption(optionsRequest, 'fail', noop);
         error = getOption(optionsRequest, 'error', noop);
 
-        var _success = function() {
-            console.log('#########', this.type);
-            success.apply(null, arguments);
-        }.bind(this);
-
         restler.request(api.url, optionsRequest)
-            .on('success', _success)
+            .on('success', success)
             .on('fail', fail)
             .on('error', error);
         return api.url;
