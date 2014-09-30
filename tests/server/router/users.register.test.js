@@ -7,6 +7,8 @@ var utils;
 var users;
 var req;
 var res;
+var statsd;
+var Statsd;
 
 describe('server', function() {
     describe('router', function() {
@@ -32,9 +34,14 @@ function reset() {
         }
     };
     res = {};
+    statsd = {};
+    Statsd = function() {
+        return statsd;
+    };
     users = proxyquire(ROOT + '/server/router/users', {
         '../../app/models/user': User,
         '../modules/formidable': formidable,
+        '../modules/statsd': Statsd,
         '../../shared/utils': utils
     })(app);
 }
@@ -202,6 +209,9 @@ function mock(data) {
         }
     });
     req.rendrApp.session.get.withArgs('selectedLanguage').returns('es-AR');
+    req.rendrApp.session.get.withArgs('location').returns({
+        name: 'Test'
+    });
 
     User.prototype.register = sinon.stub();
     User.prototype.register.callsArgWith(0);
@@ -215,6 +225,8 @@ function mock(data) {
     }
 
     utils.link = sinon.stub();
+
+    statsd.increment = sinon.stub();
 }
 
 function mockFail(data) {

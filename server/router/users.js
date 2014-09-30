@@ -21,7 +21,7 @@ module.exports = function userRouter(app) {
             function prepare(done, data) {
                 user = new User(_.extend(data, {
                     location: req.rendrApp.session.get('siteLocation'),
-                    locationName: req.rendrApp.session.get('location').name,
+                    country: req.rendrApp.session.get('location').name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
                 }));
@@ -87,7 +87,7 @@ module.exports = function userRouter(app) {
                 user = new User(_.extend(data, {
                     'new': true,
                     location: req.rendrApp.session.get('siteLocation'),
-                    locationName: location.name,
+                    country: location.name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: platform
                 }));
