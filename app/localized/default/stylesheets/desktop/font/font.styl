@@ -8,3 +8,12 @@
     font-weight: normal;
     font-style: normal;
 }
+
+[data-icon]::before {
+	content: attr(data-icon);
+	display: inline-block;
+	font-family: 'olx-icon-font', sans-serif;
+	line-height: 1;
+	vertical-align: middle;
+}
+
