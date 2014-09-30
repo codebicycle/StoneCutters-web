@@ -1,0 +1,7 @@
+{% if not currentCategory.parentId %}
+	{% for subcategory in currentCategory.children.toJSON() %}
+		<a href="{{ subcategory | slugToUrl | link }}" ><span class="icons icon-cat-{{ subcategory.id }}"></span> {{subcategory.trName}} <span class="count">{{ (subcategory.counter | countFormat) if subcategory.counter > 0 }}</span></a>	                
+    {% endfor %}
+{% else %}
+	<a href="{{ category | slugToUrl | link }}" ><span class="icons icon-cat-{{ category.id }}"></span> {{ category.trName }} </a>
+{% endif %}
