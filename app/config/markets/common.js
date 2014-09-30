@@ -5,6 +5,9 @@ module.exports = {
             'static': 50,
             gallery: 18,
             related: 30
+        },
+        maxPage: {
+            allResults: 500
         }
     }
 };
