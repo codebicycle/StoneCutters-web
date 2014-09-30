@@ -4,6 +4,7 @@ var Base = require('../bases/model');
 var crypto = require('crypto');
 var asynquence = require('asynquence');
 var dataAdapter = require('../helpers/dataAdapter');
+var statsd = require('../../shared/statsd')();
 
 module.exports = Base.extend({
     url: '/users',
@@ -41,7 +42,7 @@ function login(done, req) {
         }, done.errfcb);
     }.bind(this);
 
-    var persist = function(res, user) {
+    var persist = function(done, res, user) {
         this.set(user);
         req.rendrApp.session.persist({
             user: user
@@ -49,10 +50,25 @@ function login(done, req) {
         done();
     }.bind(this);
 
-    asynquence().or(done.fail)
+    var success = function(res) {
+        if (!this.has('new')) {
+            statsd.increment([this.get('country'), 'login', 'success', this.get('platform')]);
+        }
+        done();
+    }.bind(this);
+
+    var error = function(err) {
+        if (!this.has('new')) {
+            statsd.increment([this.get('country'), 'login', 'error', this.get('platform')]);
+        }
+        done.fail(err);
+    }.bind(this);
+
+    asynquence().or(error)
         .then(challenge)
         .then(submit)
-        .val(persist);
+        .then(persist)
+        .val(success);
 }
 
 function register(done, req) {
@@ -65,14 +81,26 @@ function register(done, req) {
         }, done.errfcb);
     }.bind(this);
 
-    var persist = function(res, user) {
+    var persist = function(done, res, user) {
+        delete user.password;
         this.set(user);
         done();
     }.bind(this);
 
-    asynquence().or(done.fail)
+    var success = function(res) {
+        statsd.increment([this.get('country'), 'register', 'success', this.get('platform')]);
+        done();
+    }.bind(this);
+
+    var error = function(err) {
+        statsd.increment([this.get('country'), 'register', 'error', err.status, this.get('platform')]);
+        done.fail(err);
+    }.bind(this);
+
+    asynquence().or(error)
         .then(submit)
-        .val(persist);
+        .then(persist)
+        .val(success);
 }
 
 function reply(done, req, data) {
