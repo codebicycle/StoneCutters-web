@@ -18,7 +18,8 @@ module.exports = {
     search: middlewares(search),
     allresults: middlewares(allresults),
     favorite: middlewares(favorite),
-    'delete': middlewares(deleteItem)
+    'delete': middlewares(deleteItem),
+    filter: middlewares(filter)
 };
 
 function show(params, callback) {
@@ -952,4 +953,62 @@ function deleteItem(params, callback) {
         .then(prepare)
         .then(remove)
         .val(success);
+}
+
+function filter(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    console.log('paso por el controller');
+
+    function controller() {
+        
+        var prepare = function(done) {
+            
+            params.location = this.app.session.get('siteLocation');
+            
+            if (params.search) {
+                params.searchTerm = params.search;
+                delete params.search;
+            }
+
+            delete params.platform;
+            delete params.page;
+
+            console.log('params', params);
+            done();
+        }.bind(this);
+
+        var find = function(done) {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                
+                console.log('res.items.metadata.filters', res.items.metadata.filters);
+
+                done(res.items.metadata.filters);
+            }.bind(this));
+        }.bind(this);
+
+        var success = function(filters) {
+            callback(null, 'items/filter', {
+                filters: filters
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            console.log('err', err);
+            console.log('res', res);
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);        
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(find)
+            .val(success);
+    }
 }

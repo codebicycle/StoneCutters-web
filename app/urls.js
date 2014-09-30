@@ -76,6 +76,16 @@ module.exports = {
     'categories#list': {
         url: ''
     },
+
+    'items#filter': {
+        urls: {
+            server: 'nf/search/:search/-p-:page?/filter',
+            client: {
+                url: 'nf/search/:search(/-p-:page)/filter'
+            }
+        }
+    },
+
     'items#search#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',
