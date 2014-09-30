@@ -1,7 +1,7 @@
 @import 'helpers/normalize.css'
+@import 'helpers/variables.styl'
+@import 'helpers/mixins.styl'
 @import 'font/font.css'
-
-$border-radius = 3px
 
 ::-webkit-input-placeholder {
    color: #999;
@@ -17,6 +17,23 @@ $border-radius = 3px
 
 :-ms-input-placeholder {  
    color: #999;  
+}
+
+/*----Progres Bar----*/
+#progressBar {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #FF7700;
+    border-radius: 10%;
+    -moz-transition: width 500ms ease-out,opacity 400ms linear;
+    -ms-transition: width 500ms ease-out,opacity 400ms linear;
+    -o-transition: width 500ms ease-out,opacity 400ms linear;
+    -webkit-transition: width 500ms ease-out,opacity 400ms linear;
+    transition: width 500ms ease-out,opacity 400ms linear;
 }
 
 a {
@@ -37,35 +54,16 @@ body {
 	font-size: 13px;
 }
 
-.clearfix::after {
-	content: " ";
-	clear: both;
-	display: block;
-}
-
-.list-without-styles {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
 .text-field {
 	border-color: #ccc;
 	border-style: solid;
 	border-width: 1px;
-	border-radius: $border-radius;
+	border-radius(3px);
 	color: #000;
 	font-size: 1.15em;
 	height: 32px;
 	line-height: 32px;
 	padding: 0 10px;
-}
-
-.white-box {
-	background: #fff;
-	border: 1px solid #e4e4e4;
-	border-radius: $border-radius;
-	padding: 8px;
 }
 
 .wrapper-main {

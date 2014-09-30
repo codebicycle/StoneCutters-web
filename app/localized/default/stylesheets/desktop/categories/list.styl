@@ -1,3 +1,6 @@
+@import '../helpers/variables.styl'
+@import '../helpers/mixins.styl'
+
 .title-bar {
 	border-bottom: 1px solid #e4e4e4;
 
@@ -14,31 +17,23 @@
 	}
 }
 
-.categories_list_view {
-	border: 1px solid #e4e4e4;
-	border-radius: 3px;
+.categories-list-view {
 	width: 660px;
+	box();
 
 	ul {
-		padding: 0;
-		margin: 0;
+		ul-reset();
+	}
+	.icons {
+		padding-left: 24px;
+		clear-fix();
 
-		&.icons {
-			padding-left: 24px;
-		}
-
-		li {
-			list-style: none;
- 
-			&.category {
-				width: 33%;
-				float: left;
-			}
+		.category {
+			width: 33%;
+			float: left;
 		}
 	}
- 
 	a {
-		text-decoration: none;
 		margin-bottom: 10px;
 		
 		strong {

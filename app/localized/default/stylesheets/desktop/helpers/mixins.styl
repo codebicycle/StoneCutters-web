@@ -1,0 +1,24 @@
+border-radius(n)
+	-webkit-border-radius n
+	-moz-border-radius n
+	border-radius n
+
+box(bgcolor = #fff, bordercolor = #e4e4e4 , radius = 3px, padding = 8px)
+	background: bgcolor;
+	border: 1px solid bordercolor;
+	border-radius(radius);
+	padding: padding;
+
+clear-fix()
+	&:after
+		content: " ";
+		clear: both;
+		display: block;
+
+ul-reset()
+	margin: 0
+	padding: 0
+	list-style-type: none
+
+
+

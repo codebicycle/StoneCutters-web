@@ -1,22 +1,27 @@
+@import '../helpers/variables.styl'
+@import '../helpers/mixins.styl'
+
 .header-usernav-view {
 	padding: 10px 0;
+	clear-fix();
 	
 	ul {
 		float: right;
-
-		li:first-child {
-			border-left: none;
-			}
+		ul-reset();
 		li {
 			border-left: 1px solid #ccc;
 			display: inline-block;
 			vertical-align: middle;
-		}
-			li:last-child a {
+			
+			&:first-child {
+				border-left: none;
+			}
+			&:last-child a {
 				padding-right: 0;
 			}
-			li a {
+			a {
 				padding: 0 5px;
 			}
+		}
 	}
 }
