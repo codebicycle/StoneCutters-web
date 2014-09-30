@@ -5,7 +5,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('header/i
 module.exports = Base.extend({
     tagName: 'header',
     id: 'header',
-    className: 'header-view',
+    className: 'header-view clearfix',
     postRender: function() {
 
     }
