@@ -1,6 +1,10 @@
-<ul class="icons">
+<div class="title-bar">
+	<h1>Encuentra anuncios en <strong>Venezuela</strong></h1>
+	<a href="#">Cambia tu ubicación ></a>
+</div>
+<ul class="icons clearfix">
 	{% for category in categories %}
-		<li>
+		<li class="category">
 			<a href="{{ category | slugToUrl | link }}">
 				<span class="icon cat-{{ category.id }}"></span>
 				<strong>{{ category.trName }}</strong>
