@@ -5,6 +5,8 @@ var config = require('../../../../../../../shared/config');
 var _ = require('underscore');
 
 module.exports = Base.extend({
+	tagName: 'aside',
+	id: 'user-nav-bar',
     className: 'header_usernav_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
