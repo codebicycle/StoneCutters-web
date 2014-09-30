@@ -30,7 +30,7 @@ Details of the latest version can be found on the Project's Github Wiki.
 
 4. Install nodemon:
 
-    `sudo npm -g nodemon`
+    `sudo npm install -g nodemon`
 
 5. Download and install the node modules running:
 

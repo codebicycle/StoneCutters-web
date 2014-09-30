@@ -173,6 +173,5 @@ module.exports = {
             'www.olx.com': 'JwT4VZIdr9x8Ctn4jWX3pA1qaewK3uMlnFS4iVoM4Zs',
             'www.olx.com.mx': 'NYmbUbWCvkxL9ADmytt25vu68NpFeyy3CkWCu3ZTppM'
         }
-    },
-    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
+    }
 };

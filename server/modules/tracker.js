@@ -37,6 +37,14 @@ function prepare(options, params) {
     }
     return options;
 }
+
+function getOption(options, name, _default) {
+    var value = options[name] || _default;
+
+    delete options[name];
+    return value;
+}
+
 var Tracker = function(type, options) {
     this.type = type;
     this.options = options;
@@ -159,8 +167,11 @@ Tracker.types = {
     }
 };
 
-Tracker.prototype.track = function(options, optionsRequest, callback) {
+Tracker.prototype.track = function(options, optionsRequest) {
     var tracking = Tracker.types[this.type];
+    var success;
+    var fail;
+    var error;
     var api;
 
     if (_.isUndefined(tracking)) {
@@ -169,14 +180,16 @@ Tracker.prototype.track = function(options, optionsRequest, callback) {
     options = _.defaults({}, options, this.options);
     api = tracking.call(this, _.clone(options));
     if (api) {
-        if (_.isFunction(optionsRequest)) {
-            callback = optionsRequest;
-            optionsRequest = {};
-        }
-        restler.request(api.url, prepare(optionsRequest || {}, api.params))
-            .on('success', (callback || noop))
-            .on('fail', (callback || noop))
-            .on('error', (callback || noop));
+        optionsRequest = prepare(optionsRequest || {}, api.params);
+
+        success = getOption(optionsRequest, 'success', noop);
+        fail = getOption(optionsRequest, 'fail', noop);
+        error = getOption(optionsRequest, 'error', noop);
+
+        restler.request(api.url, optionsRequest)
+            .on('success', success)
+            .on('fail', fail)
+            .on('error', error);
         return api.url;
     }
 };
