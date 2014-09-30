@@ -1,4 +1,4 @@
-border-radius(n)
+border-radius(n = 3px)
 	-webkit-border-radius n
 	-moz-border-radius n
 	border-radius n
@@ -8,6 +8,11 @@ box(bgcolor = #fff, bordercolor = #e4e4e4 , radius = 3px, padding = 8px)
 	border: 1px solid bordercolor;
 	border-radius(radius);
 	padding: padding;
+
+box-sizing()
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 
 clear-fix()
 	&:after

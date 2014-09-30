@@ -6,6 +6,8 @@ var dataAdapter;
 var req;
 var User;
 var user;
+var statsd;
+var Statsd;
 
 describe('app', function() {
     describe('models', function() {
@@ -29,9 +31,14 @@ function reset() {
     Base = proxyquire(ROOT + '/app/bases/model', {
         './syncer': syncer
     });
+    statsd = {};
+    Statsd = function() {
+        return statsd;
+    };
     User = proxyquire(ROOT + '/app/models/user', {
         '../bases/model': Base,
-        '../helpers/dataAdapter': dataAdapter
+        '../helpers/dataAdapter': dataAdapter,
+        '../../shared/statsd': Statsd
     });
     user = undefined;
 }
@@ -123,7 +130,14 @@ function mock(data) {
         token: '123456'
     });
 
+    req.rendrApp.session.get = sinon.stub();
+    req.rendrApp.session.get.withArgs('location').returns({
+        name: 'Test'
+    });
+
     req.rendrApp.session.persist = sinon.stub();
+
+    statsd.increment = sinon.stub();
 }
 
 function mockFailChallenge(data) {
