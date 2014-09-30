@@ -5,6 +5,7 @@ module.exports = function userRouter(app) {
     var asynquence = require('asynquence');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
+    var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
 
     function login() {
@@ -20,6 +21,7 @@ module.exports = function userRouter(app) {
             function prepare(done, data) {
                 user = new User(_.extend(data, {
                     location: req.rendrApp.session.get('siteLocation'),
+                    country: req.rendrApp.session.get('location').name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
                 }));
@@ -73,6 +75,8 @@ module.exports = function userRouter(app) {
         app.post('/register', handler);
 
         function handler(req, res, next) {
+            var location = req.rendrApp.session.get('location');
+            var platform = req.rendrApp.session.get('platform');
             var user;
 
             function parse(done) {
@@ -81,9 +85,11 @@ module.exports = function userRouter(app) {
 
             function prepare(done, data) {
                 user = new User(_.extend(data, {
+                    'new': true,
                     location: req.rendrApp.session.get('siteLocation'),
+                    country: location.name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
-                    platform: req.rendrApp.session.get('platform')
+                    platform: platform
                 }));
                 done();
             }
@@ -91,6 +97,7 @@ module.exports = function userRouter(app) {
             function validate(done) {
                 if (!user.get('agreeTerms')) {
                     res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
+                    statsd.increment([location.name, 'register', 'error', 'terms', platform]);
                     return end();
                 }
                 done(user);
