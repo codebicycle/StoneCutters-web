@@ -1,2 +1,14 @@
+{% set topbanner = template + "/marketing/topbanner.html" %}
+{% include topbanner %}
+
+{% set subcategories = template + "/categories/subcategories.html" %}
+{% include subcategories %}
+
+{% set locations = template + "/items/locations.html" %}
+{% include locations %}
+
 {% set itemlist = template + "/items/list.html" %}
 {% include itemlist %}
+
+{% set pagination = template + "/items/pagination.html" %}
+{% include pagination %}
