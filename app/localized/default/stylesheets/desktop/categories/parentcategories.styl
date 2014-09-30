@@ -1,6 +1,46 @@
-@import '../helpers/variables.styl'
-@import '../helpers/mixins.styl'
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
 
 .parent-categories {
 	ul-reset();
+
+	li {
+		width: 50%;
+		height: 57px;
+		float: left;
+		box-sizing();
+		&:hover {
+			background: #fff;
+			box-shadow: 0 0 0 1px #7bd inset;
+		}
+		a {
+			display: block;
+			padding: .625rem 0 0 0;
+			color: #38b;
+			font-weight: bold;
+			font-size: .75rem;
+
+
+			span.icons {
+				float: left;
+				&:before {
+					width: 2.188rem;
+					display: inline-block;
+					color: #0076be;
+					font-size: 2rem;
+					font-weight: normal;
+					line-height: normal;
+					vertical-align: middle;
+					font-family: 'olx-icon-font';
+					content: "a";
+				}
+			}
+			span.count {
+				color: #888;
+				font-size: .7692rem;
+				font-weight: normal;
+				padding-left: 0;
+			}
+		}
+	}
 }
