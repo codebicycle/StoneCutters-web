@@ -197,6 +197,10 @@ function getUtmcc(app) {
     return utmccOut.join('');
 }
 
+function check(page) {
+    return !!utils.get(configAnalytics, ['google', 'pages', page]);
+}
+
 function generate(params, page, options) {
     var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
 
@@ -212,6 +216,7 @@ function generate(params, page, options) {
 }
 
 module.exports = {
+    check: check,
     getId: getId,
     getUtmcc: getUtmcc,
     generate: generate
