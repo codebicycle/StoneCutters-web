@@ -1,14 +1,18 @@
-{% set topbanner = template + "/marketing/topbanner.html" %}
-{% include topbanner %}
+<section id="left-content">
+	{% set subcategories = template + "/categories/subcategories.html" %}
+	{% include subcategories %}
+</section>
 
-{% set subcategories = template + "/categories/subcategories.html" %}
-{% include subcategories %}
+<section id="right-content">
+	{% set locations = template + "/items/locations.html" %}
+	{% include locations %}
 
-{% set locations = template + "/items/locations.html" %}
-{% include locations %}
+	{% set itemlist = template + "/items/list.html" %}
+	{% include itemlist %}
 
-{% set itemlist = template + "/items/list.html" %}
-{% include itemlist %}
+	{% set pagination = template + "/items/pagination.html" %}
+	{% include pagination %}
+</section>
 
-{% set pagination = template + "/items/pagination.html" %}
-{% include pagination %}
+{% set postbanner = template + "/partials/postbanner.html" %}
+{% include postbanner %}

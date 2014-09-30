@@ -3,15 +3,12 @@
     {% view 'layout/head' %}
     <body>
         <div id="progressBar"></div>
-        {% set bar = template + "/layout/bar.html" %}
-        {% include bar %}
         {% view 'header/usernav' %}
         {% view 'header/index' %}
         <div id="wrapper" class="content-centered">
             <main id="content">
                 {{ body }}
             </main>
-            {% view 'footer/footer' %}
         </div>
         {% view 'footer/footer' %}
         <script>function init() {
