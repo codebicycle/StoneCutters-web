@@ -6,6 +6,8 @@ var dataAdapter;
 var req;
 var User;
 var user;
+var statsd;
+var Statsd;
 
 describe('app', function() {
     describe('models', function() {
@@ -29,9 +31,14 @@ function reset() {
     Base = proxyquire(ROOT + '/app/bases/model', {
         './syncer': syncer
     });
+    statsd = {};
+    Statsd = function() {
+        return statsd;
+    };
     User = proxyquire(ROOT + '/app/models/user', {
         '../bases/model': Base,
-        '../helpers/dataAdapter': dataAdapter
+        '../helpers/dataAdapter': dataAdapter,
+        '../../shared/statsd': Statsd
     });
     user = undefined;
 }
@@ -54,7 +61,8 @@ function test() {
         function assert(done) {
             expect(dataAdapter.post).to.have.been.calledOnce;
             expect(user.set).to.have.been.calledOnce;
-            expect(user.toJSON()).to.deep.equal(data);
+            expect(user.get('email')).to.equal(data.email);
+            expect(user.get('username')).to.equal(data.username);
             done();
         }
     });
@@ -108,6 +116,8 @@ function mock(data) {
 
     dataAdapter.post = sinon.stub();
     dataAdapter.post.callsArgWith(3, null, null, data);
+
+    statsd.increment = sinon.stub();
 }
 
 function mockFail(data) {
