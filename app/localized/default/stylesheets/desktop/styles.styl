@@ -1,14 +1,40 @@
 @import 'helpers/normalize.css'
 @import 'font/font.css'
 
+$border-radius = 3px
+
+::-webkit-input-placeholder {
+   color: #999;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #999;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #999;  
+}
+
+:-ms-input-placeholder {  
+   color: #999;  
+}
+
+a {
+	color: #38b;
+	display: inline-block;
+	text-decoration: none;
+	vertical-align: middle;
+
+	&:hover {
+		color: #369;
+		text-decoration: underline;
+	}
+}
+
 body {
 	background: #fafafa;
 	font-family: arial, helvetica, sans-serif;
-	font-size: 16px;
-}
-
-header {
-	position: relative;
+	font-size: 13px;
 }
 
 .clearfix::after {
@@ -17,16 +43,32 @@ header {
 	display: block;
 }
 
-.content-centered {
-	margin: 10px auto;
-	max-width: 980px;
+.list-without-styles {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
-.enviroment {
-	background: #ff0;
-	color: #fff;
-	left: 0;
-	padding: 10px;
-	position: absolute;
-	top: 0;
+.text-field {
+	border-color: #ccc;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: $border-radius;
+	color: #000;
+	font-size: 1.15em;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+}
+
+.white-box {
+	background: #fff;
+	border: 1px solid #e4e4e4;
+	border-radius: $border-radius;
+	padding: 8px;
+}
+
+.wrapper-main {
+	margin: auto;
+	max-width: 980px;
 }
