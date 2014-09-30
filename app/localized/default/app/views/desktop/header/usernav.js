@@ -7,7 +7,7 @@ var _ = require('underscore');
 module.exports = Base.extend({
 	tagName: 'aside',
 	id: 'user-nav-bar',
-    className: 'header-usernav-view clearfix',
+    className: 'header-usernav-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 

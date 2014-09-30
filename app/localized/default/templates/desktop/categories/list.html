@@ -2,7 +2,7 @@
 	<h1>Encuentra anuncios en <strong>Venezuela</strong></h1>
 	<a href="#">Cambia tu ubicación ></a>
 </div>
-<ul class="icons clearfix">
+<ul class="icons">
 	{% for category in categories %}
 		<li class="category">
 			<a href="{{ category | slugToUrl | link }}">
