@@ -1,4 +1,5 @@
-<ul>
+<h2>Seleccione categoria</h2>
+<ul class="parent-categories">
 	{% for category in categories  %}
 		<li>
 			<a href="{{ category | slugToUrl | link }}">

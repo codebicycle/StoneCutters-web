@@ -1,11 +1,22 @@
-#left-content {
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+
+#listing-filters {
 	width: 240px;
 	float: left;
 	padding: 10px 0;
 	margin-right: 20px; 
-	background: #eee;
+	box(#f6f6f6, #e4e4e4, 3px, 0);
+	box-sizing();
+
+	h2 {
+		font-size: 13px;
+		padding: 10px;
+		margin: 0;
+		border-bottom: 1px solid #ccc;
+	}
 }
-#right-content {
+#listing-items{
 	width: 720px;
 	float: left;
 	background: #aaa;
