@@ -1,5 +1,5 @@
 module.exports = {
-    'default': require('./default'),
+    common: require('./common'),
     emerging: require('./emerging'),
     'www.olx.co.za': require('./www.olx.co.za'),
     'www.olx.com.br': require('./www.olx.com.br'),

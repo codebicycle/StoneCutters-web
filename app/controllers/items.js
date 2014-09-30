@@ -759,15 +759,22 @@ function allresults(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location').url;
         var siteLocation = this.app.session.get('siteLocation');
         var user = this.app.session.get('user');
         var query;
 
-        var prepare = function(done) {
-            if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+        var redirect = function(done) {
+            if (page !== undefined && !isNaN(page) && page > 1 &&
+                (page > config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500) ||
+                 (platform === 'html5' && infiniteScroll))) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/nf/all-results');
             }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
             delete params.search;
 
             helpers.pagination.prepare(this.app, params);
@@ -845,6 +852,7 @@ function allresults(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(fetch)
             .then(paginate)
