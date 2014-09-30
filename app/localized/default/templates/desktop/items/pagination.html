@@ -1,0 +1,5 @@
+{% if metadata.next or metadata.previous %}
+    <div class="itemPagination">
+        <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
+    </div>
+{% endif %}
