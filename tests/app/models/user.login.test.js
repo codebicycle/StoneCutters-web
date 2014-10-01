@@ -152,9 +152,7 @@ function mockFailChallenge(data) {
 function mockFailLogin(data) {
     var err = new Error('Invalid Credentials');
 
-    err.res = {
-        statusCode: 599
-    };
+    err.statusCode = 599;
     dataAdapter.get.onSecondCall().callsArgWith(3, err);
 }
 

@@ -233,9 +233,7 @@ function mockFail(data) {
     User.prototype.register = sinon.spy(function(done) {
         var err = new Error('Invalid Data');
 
-        err.res = {
-            statusCode: 599
-        };
+        err.statusCode = 599;
         done.fail(err);
     });
 }
