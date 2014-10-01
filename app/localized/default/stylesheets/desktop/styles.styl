@@ -7,11 +7,7 @@ input::-webkit-input-placeholder {
    color: #999;
 }
 
-input:-moz-placeholder { /* Firefox 18- */
-   color: #999;  
-}
-
-input::-moz-placeholder {  /* Firefox 19+ */
+input::-moz-placeholder {
    color: #999;  
 }
 
@@ -55,6 +51,34 @@ body {
 	font-size: 13px;
 }
 
+.search-box {
+	fieldset {
+		clear-fix();
+		border: none;
+		margin: 0;
+		padding: 0;
+	}
+	.button,
+	.text-field {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.button {
+		action-button($green, #fff, 0 3px 3px 0, 0);
+		border: none;
+		font-size: 1.53rem;
+		height: 40px;
+		line-height: 1;
+		width: 40px;
+	}
+	.text-field {
+		border-color: $green;
+		border-radius(3px 0 0 3px);
+		height: 18px;
+		width: 253px;
+	}
+}
+
 .text-field {
 	border-color: #ccc;
 	border-style: solid;
@@ -62,9 +86,7 @@ body {
 	border-radius();
 	color: #000;
 	font-size: 1.15em;
-	height: 32px;
-	line-height: 32px;
-	padding: 0 10px;
+	padding: 10px;
 }
 
 .wrapper-main {
