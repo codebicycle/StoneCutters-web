@@ -206,7 +206,10 @@ function mock(data) {
 
 function mockFail(data) {
     User.prototype.login = sinon.spy(function(done) {
-        done.fail(new Error('Invalid Credentials'));
+        var err = new Error('Invalid Credentials');
+
+        err.statusCode = 599;
+        done.fail(err);
     });
 }
 

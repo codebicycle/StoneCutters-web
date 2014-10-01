@@ -265,7 +265,7 @@ function show(params, callback) {
             .then(prepare)
             .gate(findCategories, findItem)
             .then(checkItem)
-            //.then(findRelatedItems)
+            .then(findRelatedItems)
             .val(success);
     }
 }
