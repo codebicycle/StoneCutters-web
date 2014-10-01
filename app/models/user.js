@@ -59,7 +59,7 @@ function login(done, req) {
 
     var error = function(err) {
         if (!this.has('new')) {
-            statsd.increment([this.get('country'), 'login', 'error', err.res.statusCode, this.get('platform')]);
+            statsd.increment([this.get('country'), 'login', 'error', err.statusCode, this.get('platform')]);
         }
         done.fail(err);
     }.bind(this);
@@ -93,7 +93,7 @@ function register(done, req) {
     }.bind(this);
 
     var error = function(err) {
-        statsd.increment([this.get('country'), 'register', 'error', err.res.statusCode, this.get('platform')]);
+        statsd.increment([this.get('country'), 'register', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
@@ -129,7 +129,7 @@ function reply(done, req, data) {
     }.bind(this);
 
     var error = function(err) {
-        statsd.increment([this.get('country'), 'reply', 'error', err.res.statusCode, this.get('platform')]);
+        statsd.increment([this.get('country'), 'reply', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
