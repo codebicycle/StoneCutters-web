@@ -2,17 +2,28 @@
 @import '../helpers/mixins.styl';
 
 .header-view {
-	height: 60px;
 	margin: 0 0 20px 0;
 	position: relative;
 	box();
 	clear-fix();
 
+	&::before {
+	  background-image: -moz-linear-gradient(left center, $violet 14%, $green 14%, $green 28%, $orange 28%, $orange 42%, $violet 42%, $violet 56%, $green 56%, $green 70%, $orange 70%, $orange 84%, $violet 84%, $violet 100%);
+	  background-image: -ms-linear-gradient(left center, $violet 14%, $green 14%, $green 28%, $orange 28%, $orange 42%, $violet 42%, $violet 56%, $green 56%, $green 70%, $orange 70%, $orange 84%, $violet 84%, $violet 100%);
+	  background-image: linear-gradient(to left, $violet 14%, $green 14%, $green 28%, $orange 28%, $orange 42%, $violet 42%, $violet 56%, $green 56%, $green 70%, $orange 70%, $orange 84%, $violet 84%, $violet 100%);
+	  bottom: 100%;
+	  content: "";
+	  height: 5px;
+	  left: 0;
+	  position: absolute;
+	  width: 980px;
+	}
+
 	.brand {
 		left: 30px;
 		margin: 0;
 		position: absolute;
-		top: -9px;
+		top: -13px;
 
 		img {
 			display: block;
@@ -20,44 +31,30 @@
 	}
 
 	.posting {
-		background: $orange;
-		color: #fff;
+		border-radius();
+		action-button($orange, #fff, 3px, 15px 30px);
 		float: right;
 		font-size: 1.53em;
 		font-weight: bold;
-		padding: 10px;
-		text-align: center;
-	}
-}
+		line-height: 1;
+		position: relative;
 
-.search-box {
-	float: left;
-	margin: 0 0 0 132px;
+		/*&::after {
+			content: "";
+			border-bottom: 26px solid transparent;
+			border-left: 20px solid $orange;
+			border-top: 26px solid transparent;
+			height: 0;
+			left: 100%;
+			position: absolute;
+			top: 0;
+			width: 0; 
+		} We should discuss this arrow with Vincent */
 
-	fieldset {
-		clear-fix();
-		border: none;
-		line-height: 60px;
-		margin: 0;
-		padding: 0;
 	}
-	.cta,
-	.text-field {
-		display: inline-block;
-		vertical-align: middle;
-	}
-	.cta {
-		background: $green;
-		border: none;
-		border-radius(0 3px 3px 0);
-		color: #fff;
-		font-size: 1.53em;
-		height: 34px;
-		line-height: 34px;
-		width: 40px;
-	}
-	.text-field {
-		border-color: $green;
-		border-radius(3px 0 0 3px);
+
+	.search-box {
+		float: left;
+		margin: 6px 0 0 132px;
 	}
 }
