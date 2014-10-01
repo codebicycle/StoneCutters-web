@@ -1,1 +1,22 @@
-locations
+<ul>
+	{% if not location.current or location.current.type == 'country' %}
+		<li class="one"><a href="{{ '/nf/all-results' | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
+	{% elif location.current and location.current.type == 'state' %}
+		<li class="parent"><a href="{{ '/nf/all-results' | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
+		<li class="current">{{ location.current.name }}<a href="{{ '/nf/all-results' | link({location: 'www.olx.com.br'}) }}"></a></li>
+	{% elif location.current and location.current.type == 'city' %}
+		<li class="parent"><a href="{{ '/nf/all-results' | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
+		<li class="parent"><a href="{{ '/nf/all-results' | link({location: location.children[0].url }) }}" rel="nofollow">{{ location.children[0].name }}</a></li>
+		<li class="current">{{ location.current.name }}<a href="{{ '/nf/all-results' | link({location: location.children[0].url}) }}"></a></li>
+	{% endif %}
+</ul>
+{% if metadata.filters.state or metadata.filters.city %}
+	<ul>
+		{% for state in metadata.filters.state.value %}
+			<li><a href="{{ '/nf/all-results' | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
+		{% endfor %}
+		{% for city in metadata.filters.city.value %}
+			<li><a href="{{ '/nf/all-results' | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
+		{% endfor %}
+	</ul>
+{% endif %}

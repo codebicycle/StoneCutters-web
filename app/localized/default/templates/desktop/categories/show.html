@@ -10,8 +10,10 @@
 	{% set itemlist = template + "/items/list.html" %}
 	{% include itemlist %}
 
-	{% set pagination = template + "/items/pagination.html" %}
-	{% include pagination %}
+	{% if metadata.next or metadata.previous %}
+		{% set pagination = template + "/items/pagination.html" %}
+		{% include pagination %}
+	{% endif %}
 </section>
 
 {% set postbanner = template + "/partials/postbanner.html" %}

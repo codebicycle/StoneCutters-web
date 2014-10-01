@@ -1,19 +1,9 @@
-<div class="title-bar">
-	<h1>Encuentra anuncios en <strong>Venezuela</strong></h1>
-	<a href="#">Cambia tu ubicación ></a>
-</div>
-<ul class="icons">
-	{% for category in categories %}
-		<li class="category">
-			<a href="{{ category | slugToUrl | link }}">
-				<span class="icon cat-{{ category.id }}"></span>
-				<strong>{{ category.trName }}</strong>
-			</a>
-			<ul>
-			{% for subcategory in category.children.toJSON() %}
-				<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName}}</a></li>
-			{% endfor %}
-			</ul>
-		</li>
-	{% endfor %}
-</ul>
+<aside id="marketing-banners">
+	{% set bannervideo = template + "/marketing/bannervideo.html" %}
+	{% include bannervideo %}
+</aside>
+
+<section id="category-tree">
+	{% set categorytree = template + "/categories/categorytree.html" %}
+	{% include categorytree %}
+</section>
