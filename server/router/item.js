@@ -15,8 +15,6 @@ module.exports = function(app, dataAdapter) {
         app.post('/items/:itemId/reply', handler);
 
         function handler(req, res, next) {
-            var location = req.rendrApp.session.get('location');
-            var platform = req.rendrApp.session.get('platform');
             var itemId = req.param('itemId', null);
             var user;
             var reply;
@@ -33,8 +31,9 @@ module.exports = function(app, dataAdapter) {
                 }
                 reply = data;
                 user = new User({
+                    country: req.rendrApp.session.get('location').name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
-                    platform: platform
+                    platform: req.rendrApp.session.get('platform')
                 });
                 done();
             }
@@ -56,7 +55,6 @@ module.exports = function(app, dataAdapter) {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                statsd.increment([location.name, 'reply', 'success', platform]);
                 end();
             }
 
@@ -65,7 +63,6 @@ module.exports = function(app, dataAdapter) {
 
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    statsd.increment([location.name, 'reply', 'error', platform]);
                     end(err);
                 });
             }

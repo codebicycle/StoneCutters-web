@@ -156,7 +156,12 @@ function mock(data) {
 }
 
 function mockFail(data) {
-    dataAdapter.post.callsArgWith(3, new Error('Invalid Data'));
+    var err = new Error('Invalid Data');
+
+    err.res = {
+        statusCode: 599
+    };
+    dataAdapter.post.callsArgWith(3, err);
 }
 
 function success(done, assert, data) {
