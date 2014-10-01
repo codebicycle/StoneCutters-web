@@ -1,1 +1,15 @@
-item page
+{% set breadcrumb = template + "/partials/breadcrumb.html" %}
+{% include breadcrumb %}
+
+<section id="item-page">
+	item page
+</section>
+
+{% set relateditems = template + "/items/relateditems.html" %}
+{% include relateditems %}
+
+{% set adsense = template + "/partials/adsense.html" %}
+{% include adsense %}
+
+{% set postbanner = template + "/partials/postbanner.html" %}
+{% include postbanner %}
