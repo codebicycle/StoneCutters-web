@@ -16,6 +16,15 @@ module.exports = Base.extend({
 
 module.exports.id = 'User';
 
+function checkResponse(res) {
+    if (!res || !res.statusCode) {
+        res = {
+            statusCode: '599'
+        };
+    }
+    return res;
+}
+
 function getUsernameOrEmail() {
     return this.get('usernameOrEmail') || this.get('username') || this.get('email');
 }
@@ -57,9 +66,9 @@ function login(done, req) {
         done();
     }.bind(this);
 
-    var error = function(err) {
+    var error = function(err, res) {
         if (!this.has('new')) {
-            statsd.increment([this.get('country'), 'login', 'error', this.get('platform')]);
+            statsd.increment([this.get('country'), 'login', 'error', checkResponse(res).statusCode, this.get('platform')]);
         }
         done.fail(err);
     }.bind(this);
@@ -92,8 +101,8 @@ function register(done, req) {
         done();
     }.bind(this);
 
-    var error = function(err) {
-        statsd.increment([this.get('country'), 'register', 'error', err.status, this.get('platform')]);
+    var error = function(err, res) {
+        statsd.increment([this.get('country'), 'register', 'error', checkResponse(res).statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
@@ -124,10 +133,16 @@ function reply(done, req, data) {
     }.bind(this);
 
     var success = function(res, reply) {
+        statsd.increment([this.get('country'), 'reply', 'success', this.get('platform')]);
         done(reply);
     }.bind(this);
 
-    asynquence().or(done.fail)
+    var error = function(err, res) {
+        statsd.increment([this.get('country'), 'reply', 'error', checkResponse(res).statusCode, this.get('platform')]);
+        done.fail(err);
+    }.bind(this);
+
+    asynquence().or(error)
         .then(prepare)
         .then(submit)
         .val(success);
