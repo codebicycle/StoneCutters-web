@@ -15,9 +15,6 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        console.log('paso por la view items/filter');
-        console.log('data', data);
-
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });

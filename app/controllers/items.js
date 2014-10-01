@@ -958,23 +958,23 @@ function deleteItem(params, callback) {
 function filter(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    console.log('paso por el controller');
-
     function controller() {
         
         var prepare = function(done) {
-            
             params.location = this.app.session.get('siteLocation');
-            
             if (params.search) {
                 params.searchTerm = params.search;
                 delete params.search;
             }
-
+            if (params.catId) {
+                params.categoryId = params.catId;
+                delete params.catId;
+            }
+            if (params.title) {
+                delete params.title;
+            }
             delete params.platform;
             delete params.page;
-
-            console.log('params', params);
             done();
         }.bind(this);
 
@@ -987,9 +987,6 @@ function filter(params, callback) {
             }, {
                 readFromCache: false
             }, function afterFetch(err, res) {
-                
-                console.log('res.items.metadata.filters', res.items.metadata.filters);
-
                 done(res.items.metadata.filters);
             }.bind(this));
         }.bind(this);
@@ -1001,8 +998,6 @@ function filter(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            console.log('err', err);
-            console.log('res', res);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);        
 
