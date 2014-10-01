@@ -7,11 +7,7 @@ input::-webkit-input-placeholder {
    color: #999;
 }
 
-input:-moz-placeholder { /* Firefox 18- */
-   color: #999;  
-}
-
-input::-moz-placeholder {  /* Firefox 19+ */
+input::-moz-placeholder {
    color: #999;  
 }
 
@@ -55,6 +51,42 @@ body {
 	font-size: 13px;
 }
 
+.search-box {
+	fieldset {
+		clear-fix();
+		border: none;
+		margin: 0;
+		padding: 0;
+	}
+	.button,
+	.text-field {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.button {
+		background: $green;
+		background-image: -moz-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+		background-image: -ms-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+		background-image: linear-gradient(to bottom, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+		border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, .25);
+		border-radius(0 3px 3px 0);
+		border: none;
+		color: #fff;
+		font-size: 1.53rem;
+		height: 40px;
+		line-height: 1;
+		text-align: center;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+		width: 40px;
+	}
+	.text-field {
+		border-color: $green;
+		border-radius(3px 0 0 3px);
+		height: 18px;
+		width: 253px;
+	}
+}
+
 .text-field {
 	border-color: #ccc;
 	border-style: solid;
@@ -62,9 +94,7 @@ body {
 	border-radius();
 	color: #000;
 	font-size: 1.15em;
-	height: 32px;
-	line-height: 32px;
-	padding: 0 10px;
+	padding: 10px;
 }
 
 .wrapper-main {
