@@ -103,7 +103,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
                 });
-                options.debug = true;
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
@@ -111,6 +110,27 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
+        }
+
+        function atiTrackingColombia(req) {
+            var analytic;
+            var options;
+
+            if (env !== 'production') {
+                return;
+            }
+
+            options = defaultRequestOptions(req, 'pageview', 'ati');
+            analytic = new Tracker('ati', {
+                id: 539154,
+                host: 'logw306'
+            });
+            analytic.track({
+                page: req.query.page,
+                referer: req.query.referer,
+                custom: req.query.custom,
+                clientId: req.rendrApp.session.get('clientId').substr(24)
+            }, options);
         }
 
         function handler(req, res) {
@@ -159,6 +179,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             if (req.query.locUrl !== 'www.olx.com.co') {
                 atiTracking(req);
+            }
+            else {
+                atiTrackingColombia(req);
             }
         }
     })();
