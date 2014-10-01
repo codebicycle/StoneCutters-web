@@ -16,15 +16,6 @@ module.exports = Base.extend({
 
 module.exports.id = 'User';
 
-function checkResponse(res) {
-    if (!res || !res.statusCode) {
-        res = {
-            statusCode: '599'
-        };
-    }
-    return res;
-}
-
 function getUsernameOrEmail() {
     return this.get('usernameOrEmail') || this.get('username') || this.get('email');
 }
@@ -66,9 +57,9 @@ function login(done, req) {
         done();
     }.bind(this);
 
-    var error = function(err, res) {
+    var error = function(err) {
         if (!this.has('new')) {
-            statsd.increment([this.get('country'), 'login', 'error', checkResponse(res).statusCode, this.get('platform')]);
+            statsd.increment([this.get('country'), 'login', 'error', err.res.statusCode, this.get('platform')]);
         }
         done.fail(err);
     }.bind(this);
@@ -101,8 +92,8 @@ function register(done, req) {
         done();
     }.bind(this);
 
-    var error = function(err, res) {
-        statsd.increment([this.get('country'), 'register', 'error', checkResponse(res).statusCode, this.get('platform')]);
+    var error = function(err) {
+        statsd.increment([this.get('country'), 'register', 'error', err.res.statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
@@ -137,8 +128,8 @@ function reply(done, req, data) {
         done(reply);
     }.bind(this);
 
-    var error = function(err, res) {
-        statsd.increment([this.get('country'), 'reply', 'error', checkResponse(res).statusCode, this.get('platform')]);
+    var error = function(err) {
+        statsd.increment([this.get('country'), 'reply', 'error', err.res.statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
