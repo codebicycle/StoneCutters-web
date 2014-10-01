@@ -1,18 +1,15 @@
-<section id="left-content">
-	{% set parentcategories = template + "/items/parentcategories.html" %}
-	{% include parentcategories %}
+<section id="listing-filters">
+    {% include (template + '/items/parentcategories.html') %}
 </section>
 
-<section id="right-content">
-	{% set locations = template + "/items/locations.html" %}
-	{% include locations %}
+<section id='listing-items'>
+    {% include (template + '/items/locations.html') %}
 
-	{% set itemlist = template + "/items/list.html" %}
-	{% include itemlist %}
+    {% include (template + '/items/list.html') %}
 
-	{% set pagination = template + "/items/pagination.html" %}
-	{% include pagination %}
+    {% if metadata.next or metadata.previous %}
+        {% include (template + '/items/pagination.html') %}
+    {% endif %}
 </section>
 
-{% set postbanner = template + "/partials/postbanner.html" %}
-{% include postbanner %}
+{% include (template + '/partials/postbanner.html') %}

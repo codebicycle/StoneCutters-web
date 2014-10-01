@@ -1,20 +1,15 @@
 <section id="listing-filters">
-	{% set subcategories = template + "/categories/subcategories.html" %}
-	{% include subcategories %}
+    {% include (template + '/categories/subcategories.html') %}
 </section>
 
-<section id="listing-items">
-	{% set locations = template + "/items/locations.html" %}
-	{% include locations %}
+<section id='listing-items'>
+    {% include (template + '/items/locations.html') %}
 
-	{% set itemlist = template + "/items/list.html" %}
-	{% include itemlist %}
+    {% include (template + '/items/list.html') %}
 
-	{% if metadata.next or metadata.previous %}
-		{% set pagination = template + "/items/pagination.html" %}
-		{% include pagination %}
-	{% endif %}
+    {% if metadata.next or metadata.previous %}
+        {% include (template + '/items/pagination.html') %}
+    {% endif %}
 </section>
 
-{% set postbanner = template + "/partials/postbanner.html" %}
-{% include postbanner %}
+{% include (template + '/partials/postbanner.html') %}

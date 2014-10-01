@@ -1,9 +1,7 @@
 <aside id="marketing-banners">
-	{% set bannervideo = template + "/marketing/bannervideo.html" %}
-	{% include bannervideo %}
+	{% include (template + '/marketing/bannervideo.html') %}
 </aside>
 
 <section id="category-tree">
-	{% set categorytree = template + "/categories/categorytree.html" %}
-	{% include categorytree %}
+	{% include (template + '/categories/categorytree.html') %}
 </section>
