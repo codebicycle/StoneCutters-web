@@ -88,6 +88,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
             statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode]);
         }
         statsd.increment(['smaug', 'error', res.statusCode]);
+        err.statusCode = res.statusCode;
         callback(err, res);
     }
 };

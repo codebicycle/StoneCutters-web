@@ -112,7 +112,7 @@ function test() {
         };
 
         mock(data);
-        dataAdapter.get.onSecondCall().callsArgWith(3, new Error('Invalid Credentials'));
+        mockFailLogin(data);
         fail(done, assertFailLogin, data);
     });
 }
@@ -141,11 +141,19 @@ function mock(data) {
 }
 
 function mockFailChallenge(data) {
-    dataAdapter.get.onFirstCall().callsArgWith(3, new Error('Invalid Credentials'));
+    var err = new Error('Invalid Credentials');
+
+    err.res = {
+        statusCode: 599
+    };
+    dataAdapter.get.onFirstCall().callsArgWith(3, err);
 }
 
 function mockFailLogin(data) {
-    dataAdapter.get.onSecondCall().callsArgWith(3, new Error('Invalid Credentials'));
+    var err = new Error('Invalid Credentials');
+
+    err.statusCode = 599;
+    dataAdapter.get.onSecondCall().callsArgWith(3, err);
 }
 
 function success(done, assert, data) {
