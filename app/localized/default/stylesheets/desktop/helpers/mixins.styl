@@ -1,24 +1,38 @@
+arrow(bgColor, borderW )
+    position: absolute
+    display: inline-block
+    border-color: bgColor
+    border-image: none
+    border-style: solid
+    border-width: borderW
+    content: ""
+
 border-radius(n = 3px)
-	-webkit-border-radius n
-	-moz-border-radius n
-	border-radius n
+    -webkit-border-radius n
+    -moz-border-radius n
+    border-radius n
 
 box(bgcolor = #fff, bordercolor = #e4e4e4 , radius = 3px, padding = 8px)
-	background: bgcolor;
-	border: 1px solid bordercolor;
-	border-radius(radius);
-	padding: padding;
+    background: bgcolor;
+    border: 1px solid bordercolor;
+    border-radius(radius);
+    padding: padding;
+
+box-shadow(args)
+   -webkit-box-shadow args
+   -moz-box-shadow args
+   box-shadow args
 
 box-sizing()
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 
 clear-fix()
-	&:after
-		content: " ";
-		clear: both;
-		display: block;
+    &:after
+        content: " ";
+        clear: both;
+        display: block;
 
 action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px)
 	background: bgcolor;
@@ -39,9 +53,9 @@ action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px)
 		}
 
 ul-reset()
-	margin: 0
-	padding: 0
-	list-style-type: none
+    margin: 0
+    padding: 0
+    list-style-type: none
 
 
 
