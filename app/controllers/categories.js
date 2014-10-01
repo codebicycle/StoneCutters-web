@@ -131,16 +131,13 @@ function handleItems(params, promise) {
     var subcategory;
     var query;
 
-    delete params.relatedAds;
-
     var prepare = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
-
         var slug;
 
         category = _category;
-
         subcategory = _subcategory;
+
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
 
         seo.resetHead.call(this, currentRouter);
