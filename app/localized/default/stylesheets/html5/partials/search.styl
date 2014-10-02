@@ -1,23 +1,47 @@
+header#search .search-form{
+	width:62%;
+	float:left;
+}
 header#search {
-	padding: .4rem .8rem .8rem .8rem;
-	background: #ddd;
+	padding: .5rem;
+	background: #dadada;
+	overflow:hidden;	
 }
 header#search input {
 	height: 1.875rem;
 	display: inline-block;
 }
 header#search input[name=search] {
-	width: 85%;
+	width: 81%;
 	padding: 0 0 0 .3rem;
 	font-size: 0.8125rem;
 	border: none;
+	border: 1px solid #3b67a2;
+	border-radius: 0.3125rem 0 0 0.3125rem;
+	float:left;
 }
 header#search input[type=submit] {
-	width: 12%;
+	width: 15%;
 	float: right;
-	padding: 0.125rem;
-	background: #818080 url(imageUrl/images/html5/lupa.png) center center no-repeat;
-	border: 1px solid #706F6F;
-	border-radius: 0.3125rem;
+	height:32px;
+	background: #3b67a2 url(imageUrl/images/html5/icon_lupa.png) center center no-repeat;
+	border: 1px solid #3b67a2;
+	border-radius: 0 0.3125rem 0.3125rem 0;
 	text-indent: -100em;
+	float:left;
+}
+.btnfilter {
+	border-radius:0.150rem;
+	border:.1rem solid #e2e2e2;
+	color: #178cc8;
+	box-shadow: 0 1px 1px rgba(96, 96, 96, 0.5);    
+    float: right;
+    font-family: Arial;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 6px 30px;    
+}
+.btnlocation{
+	background:#fff url(imageUrl/images/html5/icon_location.png) 10px center no-repeat;
+	color: #494949;
 }

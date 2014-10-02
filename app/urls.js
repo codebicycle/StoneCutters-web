@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+module.exports = {    
     'redirections#category': {
         url: 'category/:categoryId/:title'
     },
@@ -312,7 +312,7 @@ module.exports = {
                 url: 'items/:itemId/favorite(/:intent)'
             }
         }
-    },
+    },    
     'pages#error': {
         url: /^\/(?!((health$)|(force($|\/))|(esi($|\/))|(stats($|\/))|(analytics($|\/)))).*/
     }

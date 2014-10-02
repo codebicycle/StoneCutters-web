@@ -1,7 +1,10 @@
-{% view 'locations/select' %}
+{#s% view 'locations/select' %#}
 {% view 'partials/search' %}
+{% include (template + '/partials/filterorder.html') %}
 <section id="categories" class="list">
+    
     <ul class="{{ icons[icons.length - 1] }}-icons">
+
         {% for category in categories %}
             <li>
                 <h2>
