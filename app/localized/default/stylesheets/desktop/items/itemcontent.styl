@@ -1,12 +1,17 @@
 @import '../helpers/variables.styl';
 @import '../helpers/mixins.styl';
+@import '../helpers/functions.styl';
 
 #item-content {
-    box();
+    box(#fff, #e4e4e4 , 3px, 0 20px);
     display: inline-block;
-    width: 660px;
+    width: 620px
 
     > h1 {
-        padding: 0 20px 0 30px;
+        font-size: 2.7rem;
+        padding-right: 40px
+    }
+    .item-info {
+        color: grey(40%)
     }
 }
