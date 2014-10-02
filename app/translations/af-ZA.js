@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Popul\xEAre Soeke',
     'defaultheader.WhatAreYouLookingFor': 'Waarna soek jy?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Kyk na ons nuwe TV-advt.!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Gratis snuffeladvertensies in <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Gaan terug na vorige bladsy.',
     'defaulthtmlhead.HaveYouSeenThis': 'Het jy dit al gesien?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Verseker dat die webadres wat jy ingesleutel het korrek is.',

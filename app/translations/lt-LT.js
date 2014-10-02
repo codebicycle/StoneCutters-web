@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Populiarios paie\u0161kos',
     'defaultheader.WhatAreYouLookingFor': 'Ko ie\u0161kote?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Per\u017Ei\u016Br\u0117kite m\u016Bs\u0173 nauj\u0105 TV skelbim\u0105!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Nemokami klasifikuoti skelbimai <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Atsiverskite ankstesn\u012F puslap\u012F.',
     'defaulthtmlhead.HaveYouSeenThis': 'Ar mat\u0117te tai?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Patikrinkite, ar tinkamai \u012Fved\u0117te tinklaviet\u0117s adres\u0105.',

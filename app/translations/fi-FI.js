@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Suositut haut',
     'defaultheader.WhatAreYouLookingFor': 'Mit\xE4 etsit?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Katso uusi TV-mainos!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Ilmaisia ilmoituksia alueella <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Siirry takaisin edelliselle sivulle.',
     'defaulthtmlhead.HaveYouSeenThis': 'Oletko n\xE4hnyt t\xE4m\xE4n?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Varmista, ett\xE4 sy\xF6tt\xE4m\xE4si verkko-osoite on virheet\xF6n.',

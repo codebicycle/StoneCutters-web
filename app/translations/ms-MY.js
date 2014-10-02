@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Carian Popular',
     'defaultheader.WhatAreYouLookingFor': 'Apa yang anda cari?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tontonlah iklan TV baru kami!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Iklaneka percuma dalam <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Kembali ke halaman sebelumnya.',
     'defaulthtmlhead.HaveYouSeenThis': 'Anda pernah lihat ini?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Pastikan alamat Web yang anda masukkan itu betul.',

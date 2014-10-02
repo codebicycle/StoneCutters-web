@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'N\xE9pszer\u0171 keres\xE9sek',
     'defaultheader.WhatAreYouLookingFor': 'Mit keres?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tekintse meg az \xFAj TV-rekl\xE1munkat!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Ingyenes apr\xF3hirdet\xE9sek a <AREA> z\xF3n\xE1ban',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Vissza az el\u0151z\u0151 oldalra',
     'defaulthtmlhead.HaveYouSeenThis': 'L\xE1tta m\xE1r?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Ellen\u0151rizze, hogy a megadott webc\xEDm helyes',

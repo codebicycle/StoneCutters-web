@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': '\u71B1\u9580\u641C\u7D22',
     'defaultheader.WhatAreYouLookingFor': '\u4F60\u5728\u627E\u751A\u9EBC?',
     'defaulthtmlhead.CheckOutOurNewTvAd': '\u67E5\u770B\u6211\u5011\u7684\u65B0\u96FB\u8996\u5EE3\u544A!',
+    'defaulthtmlhead.FreeClassifiedsInArea': '\u514D\u8CBB\u5206\u985E\u5EE3\u544A\u5728 <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\u56DE\u4E0A\u4E00\u9801\u9762\u3002',
     'defaulthtmlhead.HaveYouSeenThis': '\u60A8\u770B\u5230\u9019\u500B\u55CE?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': '\u78BA\u8A8D\u60A8\u586B\u5BEB\u7684\u7DB2\u5740\u6B63\u78BA\u3002',

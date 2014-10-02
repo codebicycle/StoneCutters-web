@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Mga Paghahanap na Popular',
     'defaultheader.WhatAreYouLookingFor': 'Ano ang hinahanap mo?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tingnan ang aming bagong patalastas sa TV!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Libreng Patalastas sa <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Bumalik sa naunang pahina',
     'defaulthtmlhead.HaveYouSeenThis': 'Nakita mo na ba ito?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Siguraduhing tama ang nailagay na Web address',

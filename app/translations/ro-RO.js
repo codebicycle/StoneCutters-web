@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'C\u0103utari populare',
     'defaultheader.WhatAreYouLookingFor': 'Ce c\u0103uta\u0163i?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Uita\u0163i-v\u0103 la noul nostru anun\u0163 TV!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Clasific\u0103ri Gratuite \xEEn<AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\xCEnapoi la pagina anterioar\u0103.',
     'defaulthtmlhead.HaveYouSeenThis': 'A\u0163i v\u0103zut asta?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Asigura\u0163i-v\u0103 c\u0103 adresa web introdus\u0103 este corect\u0103.',

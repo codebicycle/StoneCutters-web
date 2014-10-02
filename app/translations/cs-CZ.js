@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Obl\xEDben\xE1 vyhled\xE1v\xE1n\xED',
     'defaultheader.WhatAreYouLookingFor': 'Co hled\xE1te?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pod\xEDvejte se na na\u0161i novou televizn\xED reklamu!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Bezplatn\xE9 inzer\xE1ty v z\xF3n\u011B <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'N\xE1vrat na p\u0159edchoz\xED str\xE1nku.',
     'defaulthtmlhead.HaveYouSeenThis': 'Vid\u011Bli jste tohle?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Zkontrolujte, zda jste zadali spr\xE1vnou webovou adresu.',
