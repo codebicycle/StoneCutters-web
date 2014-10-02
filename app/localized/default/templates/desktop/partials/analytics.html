@@ -1,0 +1,10 @@
+<img src="{{url}}" class="analytics" width="1" height="1">
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(function() {
+            var tracker = _gat._getTracker('UA-137146-17');
+
+            tracker._setCustomVar(2, 'keep_referral', referrerDomain, 2);
+            tracker._trackPageview('{{ analytics.params.page }}');
+        });
+    </script>

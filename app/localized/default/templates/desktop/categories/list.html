@@ -1,4 +1,4 @@
-{% view 'header/index' %}
+	{% view 'header/index' %}
 <section id="template">
 	<section class="home">
 		<div class="titleBar">
@@ -78,5 +78,6 @@
 		</ul>
 	</section>
 	<div class="clear"></div>
+    {% include (template + '/partials/analytics.html') %}
 </section>
 {% view 'footer/footer' %}
