@@ -1,0 +1,53 @@
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+
+.parent-categories {
+    ul-reset();
+
+    li {
+        width: 50%;
+        height: 57px;
+        float: left;
+        &:hover {
+            background: #fff;
+            box-shadow(0 0 0 1px #38b inset);
+            cursor: pointer;
+            a, span.count {
+                color: #000;
+            }
+            span.icons:before {
+                color: #666;
+            }
+        }
+        a {
+            display: block;
+            height: 42px;
+            padding: 15px 0 0 0;
+            color: #38b;
+            font-weight: bold;
+            font-size: .9231rem;
+            text-decoration: none;
+
+
+            span.icons {
+                float: left;
+                &:before {
+                    display: inline-block;
+                    color: #38b;
+                    font-size: 2.5rem;
+                    font-weight: normal;
+                    line-height: normal;
+                    vertical-align: middle;
+                    font-family: 'olx-icon-font';
+                    content: "a";
+                }
+            }
+            span.count {
+                color: #888;
+                font-size: .8462rem;
+                font-weight: normal;
+                padding-left: 0;
+            }
+        }
+    }
+}

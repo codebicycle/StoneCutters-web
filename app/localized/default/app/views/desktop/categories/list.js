@@ -1,10 +1,11 @@
+'use strict';
+
 var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
-var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'categories_list_view',
+    id: 'categories-list-view',
+    className: 'categories-list-view',
     postRender: function() {
-        
-    }
 
+    }
 });

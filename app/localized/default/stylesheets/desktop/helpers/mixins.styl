@@ -1,0 +1,61 @@
+arrow(bgColor, borderW )
+    position: absolute
+    display: inline-block
+    border-color: bgColor
+    border-image: none
+    border-style: solid
+    border-width: borderW
+    content: ""
+
+border-radius(n = 3px)
+    -webkit-border-radius n
+    -moz-border-radius n
+    border-radius n
+
+box(bgcolor = #fff, bordercolor = #e4e4e4 , radius = 3px, padding = 8px)
+    background: bgcolor;
+    border: 1px solid bordercolor;
+    border-radius(radius);
+    padding: padding;
+
+box-shadow(args)
+   -webkit-box-shadow args
+   -moz-box-shadow args
+   box-shadow args
+
+box-sizing()
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+clear-fix()
+    &:after
+        content: " ";
+        clear: both;
+        display: block;
+
+action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px)
+	background: bgcolor;
+	background-image: -moz-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+	background-image: -ms-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+	border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, .25);
+	border-radius(radius);
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 1px 2px rgba(0, 0, 0, .05);
+	color: fontcolor;
+	padding: padding;
+	text-align: center;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+	&:hover {
+			text-decoration: none;
+		}
+
+ul-reset()
+    margin: 0
+    padding: 0
+    list-style-type: none
+
+
+

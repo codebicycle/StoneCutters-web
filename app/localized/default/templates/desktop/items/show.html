@@ -1,1 +1,13 @@
-item page
+{% include (template + "/partials/breadcrumb.html") %}
+
+<section id="item-page">
+    {% include (template + "/items/itemcontent.html") %}
+
+    {% include (template + "/items/contactform.html") %}
+</section>
+
+{% include (template + "/items/relateditems.html") %}
+
+{% include (template + "/partials/adsense.html") %}
+
+{% include (template + "/partials/postbanner.html") %}

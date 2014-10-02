@@ -1,0 +1,14 @@
+<span class="title">Seleccione categoria</span>
+<a href="{{ 'nf/all-results' | link }}" class="icons">Todas las categorias</a>
+{% if not currentCategory.parentId %}
+    <span class="category-selected icons">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
+    <ul class="sub-categories">
+        {% for subcategory in currentCategory.children.toJSON() %}
+            <li>
+                <a href="{{ subcategory | slugToUrl | link }}" >{{subcategory.trName}} <span class="count">{{ (subcategory.counter | countFormat) if subcategory.counter > 0 }}</span></a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <a href="{{ category | slugToUrl | link }}" ><span class="icons icon-cat-{{ category.id }}"></span> {{ category.trName }} </a>
+{% endif %}

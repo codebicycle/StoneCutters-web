@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'olx-icon-font';
+    src: url(staticUrl/fonts/olx-icon-font.eot);
+    src: url(staticUrl/fonts/olx-icon-font.eot?#iefix) format('embedded-opentype'),
+         url(staticUrl/fonts/olx-icon-font.woff) format('woff'),
+         url(staticUrl/fonts/olx-icon-font.ttf) format('truetype'),
+         url(staticUrl/fonts/olx-icon-font.svg#olx-icon-fontregular) format('svg');
+    font-style: normal;
+    font-weight: normal;
+}
+
+.icons::before {
+    display: inline-block;
+    font-family: 'olx-icon-font';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    speak: none;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+}
+
+.icon-lupa::before {
+    content: "q";
+}
