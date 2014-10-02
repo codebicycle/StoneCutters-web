@@ -1,4 +1,37 @@
-#items-locations {
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+
+.items-locations {
 	width: 100%;
-	float: left;
+    display: inline-block;
+    margin-bottom: 15px;
+
+    ul {
+        ul-reset();
+    }
+    .locations-tabs {
+        font-size: 1.077rem;
+        li {
+            display: inline-block;
+            box(#fe7, #cc0, 3px 3px 0 0, 5px 10px);
+            border-bottom: none;
+            margin-bottom: -1px;
+            a {
+                color: #000;
+            }
+        }
+    }
+    .locations-list {
+        box(#fe7, #cc0, 0 3px 3px 3px, 10px);
+
+        li {
+            width: 24%;
+            display: inline-block;
+            margin: 1px 0;
+            span {
+                font-size: .7692rem;
+                color: #666;
+            }
+        }
+    }
 }
