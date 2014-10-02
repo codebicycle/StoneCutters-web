@@ -2,6 +2,7 @@
 @import '../helpers/mixins.styl';
 
 #category-tree {
+	padding: 8px 0;
 
 	.title-bar {
 		border-bottom: 1px solid #e4e4e4;
@@ -10,12 +11,14 @@
 			display: inline-block;
 			font-size: 1.538rem;
 			font-weight: normal;
-			padding: 0 20px 0 24px;
+			padding: 12px 20px 20px 24px;
+			margin: 0;
 		}
 
 		a {
 			font-weight: bold;
 			font-size: 1.077rem;
+			margin-bottom: 4px;
 		}
 	}
 
@@ -29,24 +32,60 @@
 		.category {
 			width: 33%;
 			float: left;
+
+			ul a {
+				&:hover {
+					text-decoration: underline;
+				} 
+			}
 		}
 	}
-	a {
-		margin-bottom: 10px;
-		
+	a {	
 		strong {
 			font-size: 1.231rem;
 			color: #333;
 			display: block;
 			margin-bottom: 20px;
 		}
+		
+		&:hover {
+			text-decoration: none;
+		}
 
 		.icon {
-			background: #000;
+			background: url(imageUrl/images/desktop/sprite-home-icons.png)  0 0 no-repeat;
 			display: block;
-			height: 52px;
-			margin: 30px 0 15px;
-			width: 52px;
+			height: 54px;
+			margin: 30px 0 9px;
+			width: 54px;
+		}
+
+		.cat-186 {
+			background-position: 0 -108px; 
+		}
+
+		.cat-187 {
+			background-position: 0 -432px;
+		}
+
+		.cat-16 {
+			background-position: 0 -216px;
+		}
+		
+		.cat-185 {
+			background-position: 0 -378px;
+		}
+
+		.cat-190 {
+			background-position: 0 -54px;
+		}
+	
+		.cat-191 {
+			background-position: 0 -162px;
+		}
+
+		.cat-362 {
+			background-position: 0 -648px;
 		}
 	}
 }
