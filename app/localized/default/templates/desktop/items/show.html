@@ -1,15 +1,13 @@
-{% set breadcrumb = template + "/partials/breadcrumb.html" %}
-{% include breadcrumb %}
+{% include (template + "/partials/breadcrumb.html") %}
 
 <section id="item-page">
-	item page
+    {% include (template + "/items/itemcontent.html") %}
+
+    {% include (template + "/items/contactform.html") %}
 </section>
 
-{% set relateditems = template + "/items/relateditems.html" %}
-{% include relateditems %}
+{% include (template + "/items/relateditems.html") %}
 
-{% set adsense = template + "/partials/adsense.html" %}
-{% include adsense %}
+{% include (template + "/partials/adsense.html") %}
 
-{% set postbanner = template + "/partials/postbanner.html" %}
-{% include postbanner %}
+{% include (template + "/partials/postbanner.html") %}
