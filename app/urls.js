@@ -76,6 +76,34 @@ module.exports = {
     'categories#list': {
         url: ''
     },
+
+    // Filters routes
+    'items#filter#1': {
+        url: 'nf/search/:search/filter'
+    },
+    'items#filter#2': {
+        url: 'nf/search/:search/-p-:page/filter'
+    },
+    'items#filter#3': {
+        url: 'nf/search/:search/:filters/filter'
+    },
+    'items#filter#4': {
+        url: 'nf/search/:search/-p-:page/:filters/filter'
+    },
+
+    'items#filter#5': {
+        url: ':title-cat-:catId([0-9]+)/filter'
+    },
+    'items#filter#6': {
+        url: ':title-cat-:catId([0-9]+)-p-:page/filter'
+    },
+    'items#filter#7': {
+        url: ':title-cat-:catId([0-9]+):filters/filter'
+    },
+    'items#filter#8': {
+        url: ':title-cat-:catId([0-9]+)-p-:page:filters/filter'
+    },
+
     'items#search#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',
