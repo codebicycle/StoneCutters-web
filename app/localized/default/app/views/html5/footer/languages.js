@@ -11,22 +11,24 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var languages = this.app.session.get('languages').models;
         var selected = this.app.session.get('selectedLanguage');
-        var languagesSort = [];
 
-        for (var i in languages) {
-            if (languages[i].locale == selected) {
-                languagesSort.unshift(languages[i]);
-            } else {
-                languagesSort.push(languages[i]);
-            }
-        }
+        var selectedLanguage = _.find(languages, function(language){
+            return language.locale === selected;
+        });
+
+        var languagesList = _.filter(languages, function(language){
+            return language.locale !== selected;
+        });
 
         return _.extend({}, data, {
-            languages: languagesSort
+            languages: {
+                selected: selectedLanguage,
+                list: languagesList
+            }
         });
     },
     events: {
-        'click strong.open': 'languageToggle'
+        'click strong.drop': 'languageToggle'
     },
     postRender: function() {
         $('body').on('change:location', this.changeLocation.bind(this));
@@ -35,13 +37,12 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
-        if ($(this).children('span').hasClass('arrow-down')) {
-            $(this).children('span').removeClass('arrow-down').addClass('arrow-up');
-        } else if ($(this).children('span').hasClass('arrow-up')) {
-            $(this).children('span').removeClass('arrow-up').addClass('arrow-down');
+        var btn = $(event.target);
+        if (btn.hasClass('open')) {
+            btn.removeClass('open').addClass('close');
+        } else if (btn.hasClass('close')) {
+            btn.removeClass('close').addClass('open');
         }
-
         $('.footer-links').slideToggle();
     },
     changeLocation: function (e, siteLocation) {
