@@ -249,7 +249,7 @@ function show(params, callback) {
                 user: user,
                 pos: Number(params.pos) || 0,
                 sk: securityKey,
-                relatedItems: _relatedItems,
+                relatedItems: _relatedItems || [],
                 relatedAdsLink: (subcategory ? ['/', helpers.common.slugToUrl(subcategory), '?relatedAds=', itemId].join('') : undefined),
                 subcategory: subcategory,
                 category: category,
