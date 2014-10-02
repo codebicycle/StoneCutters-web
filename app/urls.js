@@ -104,6 +104,33 @@ module.exports = {
         url: ':title-cat-:catId([0-9]+)-p-:page:filters/filter'
     },
 
+    // Sorting routes
+    'items#sort#1': {
+        url: 'nf/search/:search/sort'
+    },
+    'items#sort#2': {
+        url: 'nf/search/:search/-p-:page/sort'
+    },
+    'items#sort#3': {
+        url: 'nf/search/:search/:filters/sort'
+    },
+    'items#sort#4': {
+        url: 'nf/search/:search/-p-:page/:filters/sort'
+    },
+
+    'items#sort#5': {
+        url: ':title-cat-:catId([0-9]+)/sort'
+    },
+    'items#sort#6': {
+        url: ':title-cat-:catId([0-9]+)-p-:page/sort'
+    },
+    'items#sort#7': {
+        url: ':title-cat-:catId([0-9]+):filters/sort'
+    },
+    'items#sort#8': {
+        url: ':title-cat-:catId([0-9]+)-p-:page:filters/sort'
+    },
+
     'items#search#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',
