@@ -4,6 +4,7 @@ var _ = require('underscore');
 var configAnalytics = require('./config');
 var google = require('./google');
 var ati = require('./ati');
+var keyade = require('./keyade');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
@@ -36,22 +37,15 @@ function getURLName(page) {
     return name.join('');
 }
 
-function checkPage(page) {
-    var googlePage = utils.get(configAnalytics, ['google', 'pages', page]);
-    var ati = utils.get(configAnalytics, ['ati', 'params', page]);
-
-    return (!!googlePage && !!ati);
-}
-
 function generate(query) {
     var page = getURLName.call(this, query.page);
+    var location = this.app.session.get('location');
     var urls = [];
     var params = {};
-    var location;
     var sid;
+    var url;
 
-    if (checkPage(page)) {
-        location = this.app.session.get('location');
+    if (google.check.call(this, page) && ati.check.call(this, page)) {
         sid = this.app.session.get('sid');
 
         if (sid) {
@@ -65,6 +59,24 @@ function generate(query) {
         google.generate.call(this, params, page, query.params);
         ati.generate.call(this, params, page, query.params);
         urls.push('/analytics/pageview.gif?' + stringifyParams(params));
+    }
+
+    if (ati.check.call(this, page)) {
+        if (location.url === 'www.olx.com.co') {
+            url = ati.generateUrl.call(this, params);
+
+            if (url) {
+                urls.push(url);
+            }
+        }
+    }
+
+    if (keyade.check.call(this)) {
+        url = keyade.generate.call(this, page);
+
+        if (url) {
+            urls.push(url);
+        }
     }
 
     return {

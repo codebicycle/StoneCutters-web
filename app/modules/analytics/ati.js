@@ -2,8 +2,10 @@
 
 var _ = require('underscore');
 var configAnalytics = require('./config');
+var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
+var env = config.get(['environment', 'type'], 'production');
 
 module.exports = function analyticsHelper() {
     var actionTypes = {
@@ -124,6 +126,10 @@ module.exports = function analyticsHelper() {
         return params;
     }
 
+    function check(page) {
+        return !!utils.get(configAnalytics, ['ati', 'params', page]);
+    }
+
     function generate(params, page, options) {
         var ati = utils.get(configAnalytics, ['ati', 'params', page], {});
         var custom = _.clone(ati.names);
@@ -140,7 +146,35 @@ module.exports = function analyticsHelper() {
         }
     }
 
+    function generateUrl(params) {
+        var location = this.app.session.get('location');
+        var countryId = location.id;
+        var config;
+        var url;
+
+        if (env !== 'production') {
+            countryId = 0;
+        }
+
+        config = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+        if (!config) {
+            return;
+        }
+
+        url = ['http://', config.logServer, '.ati-host.net/hit.xiti'].join('');
+        url = utils.params(url, {
+            s: config.siteId,
+            stc: params.custom,
+            idclient: this.app.session.get('clientId').substr(24),
+            na: Math.round(Math.random() * 1000000),
+            ref: params.referer
+        });
+        return url;
+    }
+
     return {
-        generate: generate
+        check: check,
+        generate: generate,
+        generateUrl: generateUrl
     };
 }();

@@ -6,58 +6,56 @@ module.exports = function(app, dataAdapter) {
     var asynquence = require('asynquence');
     var querystring = require('querystring');
     var restler  = require('restler');
-    var config = require('../../shared/config');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
-    var keyade = config.get('keyade', []);
-
+    var User = require('../../app/models/user');
+    
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
-        function handler(req, res) {
-            var location = req.rendrApp.session.get('location');
-            var platform = req.rendrApp.session.get('platform');
+        function handler(req, res, next) {
             var itemId = req.param('itemId', null);
+            var user;
             var reply;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function submit(done, data) {
-                var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
-                var language = req.rendrApp.session.get('languages')._byId[selectedLanguage] || {};
-                var platform = req.rendrApp.session.get('platform');
-                var options = {
-                    data: data,
-                    query: {
-                        languageId: language.id,
-                        platform: platform
-                    }
-                };
-                var user = req.rendrApp.session.get('user');
+            function prepare(done, data) {
+                var userSession = req.rendrApp.session.get('user');
 
-                reply = data;
-                if (user) {
-                    options.query.token = user.token;
+                if (userSession) {
+                    data.token = userSession.token;
                 }
-                data.platform = platform;
-                dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
+                reply = data;
+                user = new User({
+                    country: req.rendrApp.session.get('location').name,
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: req.rendrApp.session.get('platform')
+                });
+                done();
             }
 
-            function success(response, body) {
+            function submit(done) {
+                user.reply(done, req, _.extend({}, reply, {
+                    id: itemId
+                }));
+            }
+
+            function store(done, reply) {
+                req.rendrApp.session.persist({
+                    replyId: reply.id
+                });
+                done();
+            }
+
+            function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                statsd.increment([location.name, 'reply', 'success', platform]);
-                track(body);
-            }
-
-            function track(body) {
-                if (_.contains(keyade, location.url)) {
-                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69473&kaEvAcId=3&kaEvMcId=', body.id, '&kaEvCt1=1'].join(''));
-                }
+                end();
             }
 
             function error(err) {
@@ -65,13 +63,21 @@ module.exports = function(app, dataAdapter) {
 
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    statsd.increment([location.name, 'reply', 'error', platform]);
+                    end(err);
                 });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
             }
 
             asynquence().or(error)
                 .then(parse)
+                .then(prepare)
                 .then(submit)
+                .then(store)
                 .val(success);
         }
     })();
@@ -228,19 +234,19 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function success(response, item) {
+            function store(done, res, item) {
+                req.rendrApp.session.persist({
+                    itemId: item.id
+                });
+                done(item);
+            }
+
+            function success(item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
                 res.redirect(utils.link(url, req.rendrApp));
                 statsd.increment([location.name, 'posting', 'success', platform]);
-                track(item);
                 clean();
-            }
-
-            function track(item) {
-                if (_.contains(keyade, location.url)) {
-                    restler.get(['http://k.keyade.com/kaev/1/?kaPcId=98678&kaEvId=69472&kaEvAcId=2&kaEvMcId=', item.id, '&kaEvCt1=1'].join(''));
-                }
             }
 
             function fail(err, track) {
@@ -281,6 +287,7 @@ module.exports = function(app, dataAdapter) {
                 .then(validate)
                 .then(postImages)
                 .then(post)
+                .then(store)
                 .val(success);
         }
     })();
