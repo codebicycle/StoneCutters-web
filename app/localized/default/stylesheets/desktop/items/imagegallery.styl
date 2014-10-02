@@ -3,24 +3,29 @@
 @import '../helpers/functions.styl';
 
 #image-gallery {
-    height: 400px;
+    height: 435px;
     .img-viewer {
-        // border: 1px solid grey(20%)
         box(#f2f2f2, grey(20%) , 0, 0);
-        float: left;
+        display:inline-block;
         height: 100%;
         width: 540px;
     }
     .img-navigator {
-        float: right;
+        display:inline-block;
         height: 100%;
+        margin-left: 14px;
+        vertical-align:top;
         ul {
             list-style: none;
             margin: 0;
             padding: 0;
             li {
                 height: 60px;
+                margin-bottom: 15px;
                 width: 60px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
                 a {
                     box(#f2f2f2, grey(20%) , 0, 0);
                     color: grey(20%);
