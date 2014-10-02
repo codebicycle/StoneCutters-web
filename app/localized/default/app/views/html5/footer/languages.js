@@ -9,19 +9,40 @@ var _ = require('underscore');
 module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var currentRoute = this.app.session.get('currentRoute');
+        var languages = this.app.session.get('languages').models;
+        var selected = this.app.session.get('selectedLanguage');
+        var languagesSort = [];
+
+        for (var i in languages) {
+            if (languages[i].locale == selected) {
+                languagesSort.unshift(languages[i]);
+            } else {
+                languagesSort.push(languages[i]);
+            }
+        }
 
         return _.extend({}, data, {
-            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true),
-            languages: this.app.session.get('languages'),
-            selectedLanguage: this.app.session.get('selectedLanguage')
+            languages: languagesSort
         });
+    },
+    events: {
+        'click strong.open': 'languageToggle'
     },
     postRender: function() {
         $('body').on('change:location', this.changeLocation.bind(this));
-        this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
-        this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
-        this.app.router.on('action:end', this.onActionEnd.bind(this));
+    },
+    languageToggle: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        if ($(this).children('span').hasClass('arrow-down')) {
+            $(this).children('span').removeClass('arrow-down').addClass('arrow-up');
+        } else if ($(this).children('span').hasClass('arrow-up')) {
+            $(this).children('span').removeClass('arrow-up').addClass('arrow-down');
+        }
+
+        $('.footer-links').slideToggle();
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {
@@ -43,15 +64,6 @@ module.exports = Base.extend({
                 });
             }
         }.bind(this));
-    },
-    onPostingFlowStart: function() {
-        this.$('#languages').addClass('disabled');
-    },
-    onPostingFlowEnd: function() {
-        this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));
-    },
-    onPostingFlowAfter: function() {
-        this.$('#languages').removeClass('disabled');
     },
     onActionEnd: function(e, loading) {
         this.$('#languages .footer-links a').each(function(i, link) {

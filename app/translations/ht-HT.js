@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Rech\xE8ch ki pi popile',
     'defaultheader.WhatAreYouLookingFor': 'Kisa Wap Ch\xE8che?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tcheke nouvo anons televizyon nou an!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Anons gratis nan<AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Retounen sou paj  avan an.',
     'defaulthtmlhead.HaveYouSeenThis': '\xC8ske ou te w\xE8 sa a?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Asire w ke adr\xE8s Ent\xE8n\xE8t ou mete a kor\xE8k.',

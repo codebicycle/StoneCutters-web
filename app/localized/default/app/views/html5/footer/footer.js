@@ -8,13 +8,11 @@ var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 
 module.exports = Base.extend({
+    tagName: 'footer',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var currentRoute = this.app.session.get('currentRoute');
 
-        return _.extend({}, data, {
-            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true)
-        });
+        return _.extend({}, data);
     },
     postRender: function() {
         $('body').on('change:location', this.changeLocation.bind(this));
@@ -48,12 +46,12 @@ module.exports = Base.extend({
         }.bind(this));
     },
     onPostingFlowStart: function() {
-        this.$('#footer').addClass('disabled');
+        this.$el.addClass('disabled');
     },
     onPostingFlowEnd: function() {
         this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));
     },
     onPostingFlowAfter: function() {
-        this.$('#footer').removeClass('disabled');
+        this.$el.removeClass('disabled');
     }
 });

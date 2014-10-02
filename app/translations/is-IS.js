@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Algeng leitaror\xF0',
     'defaultheader.WhatAreYouLookingFor': 'Hverju ertu a\xF0 leita a\xF0?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Horf\xF0u \xE1 n\xFDju sj\xF3nvarpsaugl\xFDsinguna okkar!',
+    'defaulthtmlhead.FreeClassifiedsInArea': '\xD3keypis sm\xE1augl\xFDsingar \xED/\xE1 <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Fara aftur \xE1 s\xED\xF0ustu s\xED\xF0u.',
     'defaulthtmlhead.HaveYouSeenThis': 'Hefuru s\xE9\xF0 \xFEetta?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Gakktu \xFAr skugga um a\xF0 vefsl\xF3\xF0in sem \xFE\xFA f\xE6r\xF0ir inn s\xE9 r\xE9tt.',
