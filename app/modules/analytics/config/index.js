@@ -2,5 +2,6 @@
 
 module.exports = {
     ati: require('./ati'),
-    google: require('./google')
+    google: require('./google'),
+    keyade: require('./keyade')
 };

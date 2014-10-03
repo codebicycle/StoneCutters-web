@@ -11,13 +11,24 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function defaultRequestOptions(req) {
+    function defaultRequestOptions(req, type, tracker) {
+        var platform = req.rendrApp.session.get('platform');
+
         return {
             headers: {
                 'User-Agent': utils.getUserAgent(req),
                 'Accept-Encoding': 'gzip,deflate,sdch',
                 'Cache-Control': 'no-cache',
                 'Pragma': 'no-cache'
+            },
+            success: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+            },
+            error: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+            },
+            fail: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
             }
         };
     }
@@ -56,7 +67,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var platform = req.rendrApp.session.get('platform');
             var osName = req.rendrApp.session.get('osName') || 'unknown';
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
-            var options = defaultRequestOptions(req);
+            var options = defaultRequestOptions(req, 'pageview', 'google');
             var params = {
                 page: page || req.query.page,
                 referer: req.query.referer,
@@ -87,12 +98,11 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultRequestOptions(req);
+                options = defaultRequestOptions(req, 'pageview', 'ati');
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
                 });
-                options.debug = true;
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
@@ -100,6 +110,27 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
+        }
+
+        function atiTrackingColombia(req) {
+            var analytic;
+            var options;
+
+            if (env !== 'production') {
+                return;
+            }
+
+            options = defaultRequestOptions(req, 'pageview', 'ati');
+            analytic = new Tracker('ati', {
+                id: 539154,
+                host: 'logw306'
+            });
+            analytic.track({
+                page: req.query.page,
+                referer: req.query.referer,
+                custom: req.query.custom,
+                clientId: req.rendrApp.session.get('clientId').substr(24)
+            }, options);
         }
 
         function handler(req, res) {
@@ -146,7 +177,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 googleTracking(req, trackerId, host, page);
             }
-            atiTracking(req);
+            if (req.query.locUrl !== 'www.olx.com.co') {
+                atiTracking(req);
+            }
+            else {
+                atiTrackingColombia(req);
+            }
         }
     })();
 
@@ -158,7 +194,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 id: trackerId,
                 host: host
             });
-            var options = defaultRequestOptions(req);
+            var options = defaultRequestOptions(req, 'pageevent', 'google');
 
             analytic.track(_.extend({
                 ip: req.rendrApp.session.get('ip'),
@@ -178,7 +214,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultRequestOptions(req);
+                options = defaultRequestOptions(req, 'pageevent', 'ati');
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
@@ -186,7 +222,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 analytic.track({
                     custom: req.query.custom,
                     url: req.query.url,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
+                    clientId: req.rendrApp.session.get('clientId').substr(24),
+                    dynamics: {
+                        x20: req.rendrApp.session.get('platform') || utils.defaults.platform
+                    }
                 }, options);
             }
         }
@@ -243,6 +282,14 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 },
                 error: function(req, options) {
                     statsd.increment([req.query.location, 'reply', 'error', options.platform]);
+                }
+            },
+            post: {
+                success: function(req, options) {
+                    statsd.increment([req.query.location, 'posting', 'success', options.platform]);
+                },
+                error: function(req, options) {
+                    statsd.increment([req.query.location, 'posting', req.query.error, options.platform]);
                 }
             }
         };

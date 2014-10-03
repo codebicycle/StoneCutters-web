@@ -4,9 +4,11 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var common = require('./common');
 var seo = require('../modules/seo');
+var esi = require('../modules/esi');
 var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
 var isServer = typeof window === 'undefined';
+var cacheDefault = config.get(['cache', 'headers', 'default']);
 
 function prepare(done) {
     if (!isServer) {
@@ -32,27 +34,37 @@ function processSeo(done) {
     done();
 }
 
-function processHeaders(done) {
-    changeHeaders.call(this);
-    done();
+function changeHeaders(headers, currentRoute) {
+    var header;
+
+    if (!isServer) {
+        return;
+    }
+    headers = headers || {};
+    setCache.call(this, headers, currentRoute);
+    setEsi.call(this, headers);
+    for (header in headers) {
+        this.app.req.res.setHeader(header, headers[header]);
+    }
 }
 
-function changeHeaders(headers, page) {
-    if (!isServer || !config.get(['cache', 'enabled'], false) || (headers && _.isEmpty(headers))) {
+function setCache(headers, currentRoute) {
+    if (!config.get(['cache', 'enabled'], false) || !esi.isEnabled.call(this)) {
         return;
     }
-    if (!headers) {
-        if (!page) {
-            var currentRoute = this.app.session.get('currentRoute');
-            page = [currentRoute.controller, currentRoute.action];
-        }
-        headers = config.get(['cache', 'headers'].concat(page), config.get(['cache', 'headers', 'default'], {}));
-    }
-    if (_.isEmpty(headers)) {
+    currentRoute = currentRoute || this.app.session.get('currentRoute');
+    headers = _.extend(headers, config.get(['cache', 'headers', currentRoute.controller, currentRoute.action], cacheDefault || {}));
+}
+
+function setEsi(headers) {
+    if (!config.get(['cache', 'enabled'], false) || !esi.isEnabled.call(this)) {
         return;
     }
-    for (var header in headers) {
-        this.app.req.res.setHeader(header, headers[header]);
+    if (headers['Edge-Control']) {
+        headers['Edge-Control'] += ',dca=esi';
+    }
+    else {
+        headers['Edge-Control'] = 'dca=esi';
     }
 }
 
@@ -119,7 +131,7 @@ module.exports = {
             promise.then(processSeo.bind(this));
         }
         if (options.cache) {
-            promise.then(processHeaders.bind(this));
+            promise.val(changeHeaders.bind(this));
         }
         if (options.isForm) {
             promise.then(processForm.bind(this, params));

@@ -192,7 +192,7 @@ module.exports = {
     'misc.CreateAnotherAd_Mob': 'Crear otro aviso',
     'misc.CreateYourFreeAd_Mob': 'Crear tu aviso gratis',
     'misc.DescribeYourAd_Mob': 'Describe tu Aviso',
-    'misc.DescriptionCharacters_Mob': 'La descripci\xF3n debe tener a menos <<NUMBER>> caracteres',
+    'misc.DescriptionCharacters_Mob': 'La descripci\xF3n debe tener al menos <<NUMBER>> caracteres',
     'misc.Description_Mob': 'Descripci\xF3n',
     'misc.EmailAdActivated_Mob': 'Recibir\xE1s un correo electr\xF3nico cuando tu aviso est\xE9 activado',
     'misc.Email_Mob': 'Correo electr\xF3nico',

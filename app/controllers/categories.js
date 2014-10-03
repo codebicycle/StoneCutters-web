@@ -138,9 +138,9 @@ function handleItems(params, promise) {
         category = _category;
         subcategory = _subcategory;
 
-        helpers.controllers.changeHeaders.call(this, false, currentRouter);
-        seo.resetHead.call(this, currentRouter);
+        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
 
+        seo.resetHead.call(this, currentRouter);
         slug = helpers.common.slugToUrl((subcategory || category).toJSON());
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
@@ -154,8 +154,8 @@ function handleItems(params, promise) {
             return helpers.common.redirect.call(this, '/' + slug + '-p-' + page);
         }
         helpers.pagination.prepare(this.app, params);
-        query = _.clone(params);
 
+        query = _.clone(params);
         params.categoryId = params.catId;
         params.seo = true;
         params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
@@ -250,7 +250,7 @@ function handleShow(params, promise) {
         var currentRouter = ['categories', 'subcategories'];
         var slug;
 
-        helpers.controllers.changeHeaders.call(this, false, currentRouter);
+        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         seo.resetHead.call(this, currentRouter);
 
         slug = helpers.common.slugToUrl(_category.toJSON());

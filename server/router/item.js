@@ -1,52 +1,61 @@
 'use strict';
 
 module.exports = function(app, dataAdapter) {
+    var _ = require('underscore');
     var fs = require('fs');
     var asynquence = require('asynquence');
     var querystring = require('querystring');
+    var restler  = require('restler');
     var utils = require('../../shared/utils');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
-
+    var User = require('../../app/models/user');
+    
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
-        function handler(req, res) {
-            var location = req.rendrApp.session.get('location');
-            var platform = req.rendrApp.session.get('platform');
+        function handler(req, res, next) {
             var itemId = req.param('itemId', null);
+            var user;
             var reply;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function submit(done, data) {
-                var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
-                var language = req.rendrApp.session.get('languages')._byId[selectedLanguage] || {};
-                var platform = req.rendrApp.session.get('platform');
-                var options = {
-                    data: data,
-                    query: {
-                        languageId: language.id,
-                        platform: platform
-                    }
-                };
-                var user = req.rendrApp.session.get('user');
+            function prepare(done, data) {
+                var userSession = req.rendrApp.session.get('user');
 
-                reply = data;
-                if (user) {
-                    options.query.token = user.token;
+                if (userSession) {
+                    data.token = userSession.token;
                 }
-                data.platform = platform;
-                dataAdapter.post(req, '/items/' + itemId + '/messages', options, done.errfcb);
+                reply = data;
+                user = new User({
+                    country: req.rendrApp.session.get('location').name,
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: req.rendrApp.session.get('platform')
+                });
+                done();
+            }
+
+            function submit(done) {
+                user.reply(done, req, _.extend({}, reply, {
+                    id: itemId
+                }));
+            }
+
+            function store(done, reply) {
+                req.rendrApp.session.persist({
+                    replyId: reply.id
+                });
+                done();
             }
 
             function success() {
                 var url = '/iid-' + itemId + '/reply/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                statsd.increment([location.name, 'reply', 'success', platform]);
+                end();
             }
 
             function error(err) {
@@ -54,13 +63,21 @@ module.exports = function(app, dataAdapter) {
 
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    statsd.increment([location.name, 'reply', 'error', platform]);
+                    end(err);
                 });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
             }
 
             asynquence().or(error)
                 .then(parse)
+                .then(prepare)
                 .then(submit)
+                .then(store)
                 .val(success);
         }
     })();
@@ -171,7 +188,7 @@ module.exports = function(app, dataAdapter) {
                     return done([]);
                 }
                 for (image in images) {
-                    data[image] = require('restler').file(images[image].path, null, images[image].size, null, images[image].type);
+                    data[image] = restler.file(images[image].path, null, images[image].size, null, images[image].type);
                 }
                 dataAdapter.post(req, '/images', {
                     query: {
@@ -217,11 +234,18 @@ module.exports = function(app, dataAdapter) {
                 }, done.errfcb);
             }
 
-            function success(response, item) {
+            function store(done, res, item) {
+                req.rendrApp.session.persist({
+                    itemId: item.id
+                });
+                done(item);
+            }
+
+            function success(item) {
                 var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
 
-                statsd.increment([location.name, 'posting', 'success', platform]);
                 res.redirect(utils.link(url, req.rendrApp));
+                statsd.increment([location.name, 'posting', 'success', platform]);
                 clean();
             }
 
@@ -263,6 +287,7 @@ module.exports = function(app, dataAdapter) {
                 .then(validate)
                 .then(postImages)
                 .then(post)
+                .then(store)
                 .val(success);
         }
     })();
