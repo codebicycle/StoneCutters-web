@@ -7,15 +7,15 @@ module.exports = {
     },
     development: {
         'default': 'UA-50756825-1',
-        desktop: 'UA-50756825-1'
+        desktop: 'UA-55365098-1'
     },
     staging: {
         'default': 'UA-50756825-1',
-        desktop: ''
+        desktop: 'UA-55365098-1'
     },
     testing: {
         'default': 'UA-50756825-1',
-        desktop: ''
+        desktop: 'UA-55365098-1'
     },
     'www.olx.com.br': {
         'default': 'UA-54083301-20',
@@ -131,7 +131,7 @@ module.exports = {
     },
     'www.olx.co.ug': {
         'default': 'UA-54083301-35',
-        desktop: ''
+        desktop: 'UA-137146-118'
     },
     'www.olx.com.ni': {
         'default': 'UA-54083301-26',
@@ -139,7 +139,7 @@ module.exports = {
     },
     'www.olx.com.au': {
         'default': 'UA-54083301-43',
-        desktop: ''
+        desktop: 'UA-137146-77'
     },
     'www.olx.co.tz': {
         'default': 'UA-54083301-34',
@@ -151,7 +151,7 @@ module.exports = {
     },
     'www.olx.bz': {
         'default': 'UA-54083301-47',
-        desktop: ''
+        desktop: 'UA-137146-89'
     },
     'www.olx.ba': {
         'default': 'UA-54083301-49',

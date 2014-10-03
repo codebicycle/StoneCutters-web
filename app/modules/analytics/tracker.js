@@ -71,6 +71,12 @@ function generate(query) {
         }
     }
 
+    if (google.check.call(this, page)) {
+        params = _.extend(params, {
+            google: google.getConfig.call(this)
+        });
+    }
+
     if (keyade.check.call(this)) {
         url = keyade.generate.call(this, page);
 
