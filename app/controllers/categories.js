@@ -10,8 +10,7 @@ var config = require('../../shared/config');
 
 module.exports = {
     list: middlewares(list),
-    show: middlewares(show),
-    sort: middlewares(sort)
+    show: middlewares(show)
 };
 
 function list(params, callback) {
@@ -283,45 +282,4 @@ function handleShow(params, promise) {
 
     promise.then(prepare);
     promise.then(success);
-}
-
-function sort(params, callback){
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        //var siteLocation = this.app.session.get('siteLocation');
-        //var location = this.app.session.get('location');
-        var prepare = function(done) {
-            done();
-        }.bind(this);
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
-                        seo: false
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-        var success = function(response) {
-            var campeones={equipo: 'River PLate'};
-            callback(null, {
-                categories: response.categories.toJSON(),
-                campeones: campeones
-            });
-        }.bind(this);
-        var error = function(err) {
-            helpers.common.error.call(this, err, null, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(fetch)
-            .val(success);
-    }
 }

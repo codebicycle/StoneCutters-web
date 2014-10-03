@@ -1,7 +1,9 @@
-<p><a href="{{ [url, 'filter'] | join('/') | link }}">filter</a></p>
-<p><a href="{{ [url, 'sort'] | join('/') | link }}">sort</a></p>
-{% view 'locations/select' %}
 {% view 'partials/search' %}
+<div class="filter_order">
+    <span>1.786 ads</span>
+    <a href="{{ [url, 'sort'] | join('/') | link }}" class="btnfilter btnsort">Sort</a>
+    <a href="{{ [url, 'filter'] | join('/') | link }}" class="btnfilter btnfil">Filter</a>
+</div>
 <section id="itemListing">
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}

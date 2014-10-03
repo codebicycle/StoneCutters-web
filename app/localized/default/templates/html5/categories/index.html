@@ -1,6 +1,5 @@
 {% view 'locations/select' %}
 {% view 'partials/search' %}
-{% view 'partials/filterorder' %}
 {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, category.trName) }}

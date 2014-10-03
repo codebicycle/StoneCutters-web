@@ -992,15 +992,23 @@ function filter(params, callback) {
         }.bind(this);
 
         var success = function(filters) {
+            console.log("river 2");
             callback(null, 'items/filter', {
                 filters: filters
             });
+            console.log("river 22");            
+        }.bind(this);
+
+        var buscar = function() {
+            console.log("river buscar");
+            //filters: filters
         }.bind(this);
 
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);        
 
+        
         asynquence().or(error)
             .then(prepare)
             .then(find)

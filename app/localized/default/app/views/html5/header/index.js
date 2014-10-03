@@ -21,11 +21,13 @@ module.exports = Base.extend({
             return {
                 custom: [category, '-', '-', action].join('::')
             };
-        });
+        });        
         $('body').on('change:location', this.changeLocation.bind(this));
         $('body').on('update:postingLink', this.updatePostingLink.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
+        this.app.router.appView.on('filter:start', this.onSelectFilterStart.bind(this));
+        this.app.router.appView.on('filter:end', this.onSelectFilterEnd.bind(this));
         this.app.router.on('action:end', this.onActionEnd.bind(this));
     },
     onActionEnd: function() {
@@ -104,5 +106,14 @@ module.exports = Base.extend({
     },
     onPostingFlowAfter: function() {
         this.$('#topBar, #myOlx').removeClass('disabled');
+    },
+    onSelectFilterStart: function(){
+        this.$('.logo, .header-links').hide();
+        this.$('.content-filter').show();
+        console.log("aki iria a ocultar 222 start");
+    },
+    onSelectFilterEnd: function(){
+        //this.$('#topBar, #myOlx').slideUp();
+        console.log("Fin");
     }
 });
