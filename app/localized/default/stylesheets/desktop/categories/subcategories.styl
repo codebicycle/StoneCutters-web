@@ -10,10 +10,13 @@
 			font-size: .7692rem;
 			font-weight: normal;
 		}
-		&:after {
+		&.arrow:after {
 			left: 10px;
 			bottom: -11px;
 			arrow(#666 transparent transparent, 5px 6px 6px);
+		}
+		&:before {
+			font-size: 1.8rem;
 		}
 	}
 	.sub-categories {
@@ -31,6 +34,43 @@
 			.count {
 				color: #888;
 				font-size: .7692rem;
+			}
+		}
+	}
+	.filter {
+		display: block;
+		padding: 10px;
+		border-bottom: 1px solid #ddd;
+		&:last-child {
+			border: none;
+		}
+
+		&.price {
+			.text-field {
+				width: 60px;
+				float: left;
+				margin-right: 10px;
+			}
+			.button {
+				width: 34px;
+				height: 34px;
+				background: #999;
+				color: #fff;
+				border: none;
+				text-align: center;
+				border-radius();
+			}
+		}
+		&.check-box {
+			label {
+				display: block;
+				padding: 5px 0;
+				color: #38b;
+				input {
+					vertical-align: bottom;
+					position: relative;
+					top: -1px;
+				}
 			}
 		}
 	}

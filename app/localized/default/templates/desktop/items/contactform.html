@@ -1,3 +1,38 @@
 <section id="contact-form">
-    contact form
+    <div class="user-info">
+        <p class="user-name">User Name</p>
+        <p class="user-status">User Status</p>
+        <p class="user-phone">User Phone</p>
+        <span>Ao ligar, diga que viu o anúncio na OLX</span>
+    </div>
+    
+    <form method="post" id="contact-seller" action="">
+        <p class="error">
+            <label for="comment">
+                <span class="icon icon-alert"><textarea id="comment" name="comment" cols="30" rows="6" placeholder="Mensagem"></textarea></span>
+                <span class="error">Ops! Escreva uma mensagem</span>
+            </label>
+        </p>
+        <p class="error">
+            <label for="name">
+            <span class="icon icon-alert"><input type="text" name="name" id="name" value="" maxlength="200" placeholder="Nome"></span>
+            <span class="error">Informe o seu nome</span>
+            </label>
+        </p>
+        <p class="error">
+            <label for="email">
+            <span class="icon icon-alert"><input type="text" name="email" id="email" value="" maxlength="200" placeholder="E-mail"></span>
+            <span class="error">Insira o seu endereço de e-mail</span>
+            </label>
+        </p>
+        <p>
+            <label for="phone">
+            <input type="text" name="phone" id="phone" value="" maxlength="15" placeholder="Telefone ( Opcional )">
+            </label>
+        </p>
+        <p>
+            <img id="spinner" src="" alt="">
+            <label for="submit"><input type="submit" value="Enviar e-mail" id="submit" class="olx-ui-button orange"></label>
+        </p>
+    </form>
 </section>
