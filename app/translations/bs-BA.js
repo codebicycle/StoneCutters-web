@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Popularne pretrage',
     'defaultheader.WhatAreYouLookingFor': '\u0160ta tra\u017Eite?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pogledajte na\u0161 novi TV oglas!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Besplatni oglasi u <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Nazad na prethodnu stranu.',
     'defaulthtmlhead.HaveYouSeenThis': 'Jeste li ovo vidjeli?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Provjerite ispravnost unijete web adrese.',

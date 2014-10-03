@@ -19,7 +19,8 @@ module.exports = {
     allresults: middlewares(allresults),
     favorite: middlewares(favorite),
     'delete': middlewares(deleteItem),
-    filter: middlewares(filter)
+    filter: middlewares(filter),
+    sort: middlewares(sort)
 };
 
 function show(params, callback) {
@@ -1012,6 +1013,43 @@ function filter(params, callback) {
         asynquence().or(error)
             .then(prepare)
             .then(find)
+            .val(success);
+    }
+}
+
+function sort(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        
+        var build = function(done) {
+            var options = [
+                {
+                    name: 'price_descendant'
+                },
+                {
+                    name: 'price_ascendant'
+                },
+                {
+                    name: 'date_descendant'
+                }
+            ];
+
+            done(options);
+        }.bind(this);
+
+        var success = function(options) {
+            callback(null, 'items/sort', {
+                sorts: options
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);        
+
+        asynquence().or(error)
+            .then(build)
             .val(success);
     }
 }

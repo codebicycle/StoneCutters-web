@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Popul\xE1rne h\u013Eadania',
     'defaultheader.WhatAreYouLookingFor': '\u010Co h\u013Ead\xE1te?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pozrite si na\u0161u nov\xFA telev\xEDznu reklamu!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Bezplatn\xE9 inzer\xE1ty v <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Sp\xE4\u0165 na predch\xE1dzaj\xFAcu str\xE1nku.',
     'defaulthtmlhead.HaveYouSeenThis': 'U\u017E ste to videli?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Uistite sa, \u017Ee zadan\xE1 webov\xE1 adresa je spr\xE1vna.',

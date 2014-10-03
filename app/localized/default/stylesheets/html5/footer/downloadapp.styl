@@ -1,76 +1,82 @@
-footer#downloadapp {
-	background: #e8e6e6;
+.footer_downloadapp_view {
+
 	text-align: center;
 	padding: .5625rem .9375rem .375rem;
-}
-footer#downloadapp {
-	padding: .7em 15px .5em;
-}
-footer#downloadapp .logoOlx {
-	width: 53px; 
-	height: 53px; 
-	float: left; 
-	background: url(imageUrl/images/common/marketing/logo50.png);
-	margin: 0 .5rem 0 0;
-}
-footer#downloadapp .data {
-	float: left;
-	margin: 0;
-	text-align: left;
-	line-height: 1.188rem;
-}
-footer#downloadapp .data h1 {
-	font-size: .8125rem;
-	color: #303030;
-}
-footer#downloadapp .data .stars {
-	border-bottom: 1px solid #B2B1B1;
-	font-size: .625rem;
-	color: #827e7e;
-	height: 16px;
-}
-footer#downloadapp .data .stars span {
-	height: 10px;
-	float: left;
-	line-height: normal;
-	margin: 0 .3em 0 0;
-}
-footer#downloadapp .data .stars span.star {
-	width: 10px;
-	background: url(imageUrl/images/common/marketing/star.png) no-repeat;
-}
-footer#downloadapp .data .stars span.star.midstar {
-	background: url(imageUrl/images/common/marketing/midStar.png) no-repeat;
-}
-footer#downloadapp .data .stars span.star.emptystar {
-	background: url(imageUrl/images/common/marketing/emptyStar.png) no-repeat;
-}
-footer#downloadapp .data h2 {
-	font-size: .625rem;
-	color: #5C2A81;
-	font-weight: normal;
-	margin: 1px 0 0 0;
-}
-footer#downloadapp .data h2 span {
-	font-weight: bold;
-}
-footer#downloadapp .btns {
-	width: 40%;
-	float: right;
-	margin: .4375rem 0 0;
-	padding: .4375rem .5rem;
-	font-size: 1.188rem;	
-	text-transform: uppercase;
-}
-@media screen and (max-width: 480px) { 
-	footer#downloadapp .btns{
-		width: 27%;
-		margin: .625rem 0 0;	
-		padding: .4375rem 1.188rem;	
-		font-size: .6875rem;	
+	border-top: 1px solid #eaeaea;
+	margin-top: 1.250rem;
+	padding: .7rem .625rem .5rem;
+
+	.container {
+		padding: .5rem;
+		background: #d8d7d7;
 	}
 
-	footer#downloadapp .data h2 {
-		font-size: .525rem;
+	.logoOlx {
+		width: 37px;
+		height: 37px;
+		float: left;
+		background: url(imageUrl/images/common/marketing/logo37.png);
+		margin: 0 .500rem 0 0;
 	}
+
+	.data {
+		float: left;
+		margin: .1rem 0 0 0;
+		text-align: left;
+		line-height: 1.188rem;
+
+		h1 {
+			font-size: .875rem;
+			color: #494949;
+		}
+
+	}
+
+	.stars {
+		font-size: .625rem;
+		color: #827e7e;
+		height: 16px;
+		span {
+			height: 10px;
+			float: left;
+			line-height: normal;
+			margin: 0 .3em 0 0;
+		}
+		.star {
+			width: 10px;
+			background: url(imageUrl/images/common/marketing/starG.png) no-repeat;
+			&.midstar {
+				background: url(imageUrl/images/common/marketing/midStarG.png) no-repeat;
+			}
+			&.emptystar {
+				background: url(imageUrl/images/common/marketing/emptyStar.png) no-repeat;
+			}
+		}
+	}
+
+	.btns {
+		max-width: 40%;
+		float: right;
+		margin: .4375rem 0 0;
+		padding: .4375rem .5rem;
+		font-size: 1.188rem;
+		text-transform: uppercase;
+
+		&.download {
+			background: #4275ba;
+			border-radius: .125rem;
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		.btns{
+			max-width: 33%;
+			margin: .313rem 0 0;
+			padding: .4375rem .5rem;
+			font-size: .750rem;
+		}
+	}
+
 }
+
+
