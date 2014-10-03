@@ -1,6 +1,12 @@
 <nav class="items-locations">
 	<ul class="locations-tabs">
-		<li><a href="">Bolivia</a></li>
+		{% if not location.current or location.current.type == 'country' %}
+			<li><a href="" rel="nofollow">{{ location.name }}</a></li>
+		{% elif location.current and location.current.type == 'state' %}
+			<li><a href="" rel="nofollow">{{ location.name }}</a></li><li>{{ location.current.name }}<a href=""></a></li>
+		{% elif location.current and location.current.type == 'city' %}
+			<li><a href="" rel="nofollow">{{ location.name }}</a></li><li><a href="" rel="nofollow">{{ location.children[0].name }}</a></li><li>{{ location.current.name }}<a href=""></a></li>
+		{% endif %}
 	</ul>
 	{% if metadata.filters.state or metadata.filters.city %}
 		<ul class="locations-list">
