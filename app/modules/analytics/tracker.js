@@ -69,6 +69,9 @@ function generate(query) {
                 urls.push(url);
             }
         }
+        params = _.extend(params, {
+            ati: ati.getConfig.call(this)
+        });
     }
 
     if (google.check.call(this, page)) {
