@@ -3,7 +3,11 @@
 <section id="item-page">
     {% include (template + "/items/itemcontent.html") %}
 
-    {% include (template + "/items/contactform.html") %}
+    <div class="right-column">
+        {% include (template + "/items/itemprice.html") %}
+
+        {% include (template + "/items/contactform.html") %}
+    </div>
 </section>
 
 {% include (template + "/items/relateditems.html") %}
