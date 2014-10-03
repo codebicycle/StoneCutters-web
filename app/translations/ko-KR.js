@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': '\uC778\uAE30 \uAC80\uC0C9',
     'defaultheader.WhatAreYouLookingFor': '\uBB34\uC5C7\uC744 \uCC3E\uACE0 \uACC4\uC2ED\uB2C8\uAE4C?',
     'defaulthtmlhead.CheckOutOurNewTvAd': '\uC800\uD76C \uC0C8 TV \uAD11\uACE0\uC785\uB2C8\uB2E4!',
+    'defaulthtmlhead.FreeClassifiedsInArea': '\uBB34\uB8CC \uC548\uB0B4\uAD11\uACE0 \uC9C0\uC5ED <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\uC774\uC804 \uD398\uC774\uC9C0\uB85C \uB3CC\uC544\uAC00\uC138\uC694',
     'defaulthtmlhead.HaveYouSeenThis': '\uC774\uB97C \uBCF4\uC2E0 \uC801\uC774 \uC788\uC73C\uC2ED\uB2C8\uAE4C?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': '\uC785\uB825\uD558\uC2E0 \uC6F9\uC8FC\uC18C\uB97C \uD655\uC778\uD558\uC5EC \uC8FC\uC138\uC694',

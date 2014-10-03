@@ -1,11 +1,13 @@
-<footer id="languages"{{ ' class="disabled"' if postingFlow }}>
-	<ul class="footer-links">
-		{% for language in languages.models %}
-			{% if language.locale == selectedLanguage %}
-				<li><strong>{{language.name}}</strong></li>
-			{% else %}
-				<li><a href="{{ url | link({language: language.locale}) }}" rel="nofollow" class="footer-link" data-pass-thru="true" data-language="{{ language.locale }}" >{{language.name}}</a></li>
-			{% endif %}
+<div class="select-language">
+
+	<strong {{ ' class="drop open"' if languages.list|length >= 1 }}>{{ languages.selected.name }}</strong>
+
+	{% if languages.list|length >= 1 %}
+		<ul class="footer-links">
+		{% for language in languages.list %}
+			<li><a href="{{ url | link({language: language.locale}) }}" rel="nofollow" class="footer-link" data-pass-thru="true" data-language="{{ language.locale }}" >{{language.name}}</a></li>
 		{% endfor %}
-	</ul>
-</footer>
+		</ul>
+	{% endif %}
+</div>
+<a target="_blank" href="{{ '/terms' | link }}" rel="nofollow" class="terms-link"> {{ dictionary["terms.TermsOfUse"] }}</a>

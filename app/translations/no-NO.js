@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Popul\xE6re s\xF8k',
     'defaultheader.WhatAreYouLookingFor': 'Hva ser du etter?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Sjekk ut v\xE5r nye TV reklame!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Gratis rubrikkannonser i <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'G\xE5 tilbake til forrige side.',
     'defaulthtmlhead.HaveYouSeenThis': 'Har du sett dette?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Kontroller at nettsiden du har skrevet inn er riktig.',

@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'En S\u0131k Arananlar',
     'defaultheader.WhatAreYouLookingFor': 'Arad\u0131\u011F\u0131n\u0131z \u015Fey nedir?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Yeni TV reklam\u0131m\u0131za g\xF6z at\u0131n!',
+    'defaulthtmlhead.FreeClassifiedsInArea': '\xDCcretsiz seri ilanlar: <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\xD6nceki sayfaya geri d\xF6n.',
     'defaulthtmlhead.HaveYouSeenThis': 'Bunu g\xF6rm\xFC\u015F m\xFCyd\xFCn\xFCz?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Girdi\u011Finiz Web adresinin do\u011Fru oldu\u011Fundan emin olun.',

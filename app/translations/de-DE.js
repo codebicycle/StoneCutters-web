@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'H\xE4ufige Suchbegriffe',
     'defaultheader.WhatAreYouLookingFor': 'Wonach suchen Sie?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Schauen Sie sich unseren neuen Werbespot an!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Kostenlose Kleinanzeigen in <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Zur\xFCck zur vorherigen Seite.',
     'defaulthtmlhead.HaveYouSeenThis': 'Haben Sie das schon gesehen?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Achten Sie darauf, dass die von Ihnen eingegebene Webadresse richtig ist.',

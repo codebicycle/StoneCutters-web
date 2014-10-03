@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Populaarsed otsingud',
     'defaultheader.WhatAreYouLookingFor': 'Mida otsite?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Vaata meie uut TV-reklaami!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Tasuta kuulutused <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Minge tagasi eelmisele lehek\xFCljele.',
     'defaulthtmlhead.HaveYouSeenThis': 'Kas olete seda n\xE4inud?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Veenduge, et sisestatud veebiaadress on \xF5ige.',

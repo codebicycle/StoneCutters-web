@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Utafutaji Maarufu',
     'defaultheader.WhatAreYouLookingFor': 'Je, unatafuta nini?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Angalia tangazo letu jipya la runinga!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Matangazo ya bure katika <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Rudi kwenye ukurasa uliopita.',
     'defaulthtmlhead.HaveYouSeenThis': 'Umeona hii?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Hakikisha kwamba anwani ya tovuti uliyoingiza ni sahihi.',

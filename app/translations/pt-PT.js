@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Pesquisas mais populares',
     'defaultheader.WhatAreYouLookingFor': 'O que procura?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pode v\xEA-lo no nosso novo an\xFAncio televisivo!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Classificados gr\xE1tis em <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Regressar \xE0 p\xE1gina anterior.',
     'defaulthtmlhead.HaveYouSeenThis': 'J\xE1 viu?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Certifique-se de que o endere\xE7o Web introduzido est\xE1 correcto.',

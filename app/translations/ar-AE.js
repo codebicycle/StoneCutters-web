@@ -18,6 +18,7 @@ module.exports = {
     'defaultheader.PopularSearches': '\u0627\u0644\u0628\u062D\u0648\u062B \u0627\u0644\u0634\u0627\u0621\u0639\u0647',
     'defaultheader.WhatAreYouLookingFor': 'What are you looking for?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Check out our new TV ad!',
+    'defaulthtmlhead.FreeClassifiedsInArea': 'Free classifieds in <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Go back to the previous page.',
     'defaulthtmlhead.HaveYouSeenThis': 'Have you seen this?',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Make sure the Web address you entered is correct.',
