@@ -993,11 +993,9 @@ function filter(params, callback) {
         }.bind(this);
 
         var success = function(filters) {
-            console.log("river 2");
             callback(null, 'items/filter', {
                 filters: filters
-            });
-            console.log("river 22");            
+            });       
         }.bind(this);
 
         var buscar = function() {
