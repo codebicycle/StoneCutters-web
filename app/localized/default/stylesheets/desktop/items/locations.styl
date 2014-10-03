@@ -14,7 +14,6 @@
         li {
             display: inline-block;
             position: relative;
-            border-bottom: none!important;
         }
         li:only-child {
             box(#fe7, #cc0, 3px 3px 0 0, 5px 10px);
@@ -27,9 +26,11 @@
         li:not(:last-child) {
             box(#fff, #ddd, 0, 5px 10px 5px 15px);
             tab-arrow(right, #fff, #ddd, 1px, 13px, 10);
+            border-bottom: none;
         }
         li:first-child {
             box(#fff, #ddd, 3px 0 0 0, 5px 10px);
+            border-bottom: none;
         }
         li:last-child {
             box(#fe7, #cc0, 0 3px 0 0, 6px 20px 6px);
