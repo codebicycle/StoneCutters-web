@@ -16,15 +16,12 @@
         margin-left: 14px;
         vertical-align:top;
         ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+            ul-reset();
             li {
                 height: 60px;
-                margin-bottom: 15px;
                 width: 60px;
-                &:last-child {
-                    margin-bottom: 0;
+                &:not(:last-child) {
+                    margin-bottom: 15px;
                 }
                 a {
                     box(#f2f2f2, grey(20%) , 0, 0);
