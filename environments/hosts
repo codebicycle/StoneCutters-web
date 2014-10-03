@@ -2,7 +2,8 @@
 127.0.0.1       {LOCAL}
 
 #SMAUG
-190.210.62.60             api-v2.olx.com
+#190.210.62.60	api-v2.olx.com	
+108.171.171.70	api-v2.olx.com	# Testing
 
 #ARWEN
 {IP}  m.olx.com           # United States
@@ -118,6 +119,12 @@
 {IP}  html4.m.olx.it            # Italy
 {IP}  html5.m.olx.it            # Italy
 {IP}  desktop.m.olx.it            # Italy
+
+{IP}  m.olx.ir			# Iran
+{IP}  wap.m.olx.ir		# Iran
+{IP}  html4.m.olx.ir		# Iran
+{IP}  html5.m.olx.ir		# Iran
+{IP}  desktop.m.olx.ir		# Iran
 
 {IP}  m.olx.co.ke         # Kenia
 {IP}  wap.m.olx.co.ke         # Kenia
