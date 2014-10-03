@@ -24,9 +24,8 @@ arrow(bgColor, borderW )
     border-width: borderW
     content: ""
 
-border-styles(color, image, radius, style, width)
+border-styles(color = #e4e4e4, radius = 3px, style = solid, width = 1px)
     border-color: color;
-    border-image: image;
     border-radius(radius);
     border-style: style;
     border-width: width;
@@ -36,10 +35,9 @@ border-radius(n = 3px)
     -moz-border-radius n
     border-radius n
 
-box(bgcolor = #fff, bordercolor = #e4e4e4 , radius = 3px, padding = 8px)
+box(bgcolor = #fff, bordercolor = #e4e4e4 , radius = 3px, padding = 8px, style = solid, width = 1px)
     background: bgcolor;
-    border: 1px solid bordercolor;
-    border-radius(radius);
+    border-styles(bordercolor, radius, style, width);
     padding: padding;
 
 box-shadow(args)
