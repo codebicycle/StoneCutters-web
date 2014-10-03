@@ -1,8 +1,5 @@
 <nav class="items-locations">
 	<ul class="locations-tabs">
-
-		{{ location | log }}
-
 		{% if not location.current or location.current.type == 'country' %}
 			<li><a href="{{ '/nf/all-results' | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
 		{% elif location.current and location.current.type == 'state' %}
