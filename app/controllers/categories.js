@@ -49,7 +49,6 @@ function list(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            console.log(err ? err.stack || err : err);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
