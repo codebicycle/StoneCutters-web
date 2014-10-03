@@ -18,6 +18,9 @@ module.exports = {
     environment: {
         type: 'development'
     },
+    tracking: {
+        enabled: true
+    },
     localization: {
         wap: [],
         html4: [],

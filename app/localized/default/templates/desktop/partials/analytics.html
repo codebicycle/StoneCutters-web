@@ -1,0 +1,14 @@
+{% if analytics %}
+    <script type="text/javascript">
+        var atiapi = (atiapi || []);
+
+        atiapi.push({
+            xtdmc: '{{ analytics.params.ati.host }}',
+            xtnv: document,
+            xtsd: '{{ analytics.params.ati.protocol }}://{{ analytics.params.ati.logServer }}',
+            xtsite: '{{ analytics.params.ati.siteId }}',
+            xtcustom: JSON.parse('{{ analytics.params.custom }}'),
+            xtergo: '1'
+        });
+    </script>
+{% endif %}
