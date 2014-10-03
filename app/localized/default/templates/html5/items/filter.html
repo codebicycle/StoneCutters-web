@@ -1,3 +1,34 @@
+<div class="topBarFilters">
+	<a href="#" class="filter-btns blue">Cancelar</a>
+	<h2>Filtrar resultados</h2>
+</div>
+<form class="filters">
+	<fieldset>
+		<strong>Precio</strong>
+		<div class="left">
+			<label>Min $:</label>
+			<input type="number" value="">
+		</div>
+		<div class="right">
+			<label>Max $:</label>
+			<input type="number" value="">
+		</div>
+	</fieldset>
+	<fieldset>
+		<label>Ubicacion:</label>
+		<a class="bold" href="#">Toda Argentina</a>
+	</fieldset>
+	<fieldset>
+		<label>Categoria:</label>
+		<a class="bold" href="#">Todas</a>
+	</fieldset>
+	<fieldset class="no-border">
+		<a href="#">Limpiar filtros</a>
+	</fieldset>
+	<fieldset class="center no-border">
+		<input class="filter-btns orange" type="submit" value="aceptar" />
+	</fieldset>
+</form>
 <ul>
     {% for filter in filters %}
         <li>{{ filter.name }}</li>
