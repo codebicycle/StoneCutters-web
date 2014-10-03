@@ -1,0 +1,24 @@
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+
+#contact-form {
+    box($yellow, $yellowDarker , 3px, 20px);
+    margin-left: 20px;
+
+    form {
+        p.error :before {
+            display: inline-block;
+            color: $red;
+            margin: 5px 0 0 231px;
+            position: absolute;
+        }
+        span {
+            .error {
+                // display: none;
+                margin: 0 0 10px 10px;
+                font-size: 12px;
+                color: $red;
+            }
+        }
+    }
+}

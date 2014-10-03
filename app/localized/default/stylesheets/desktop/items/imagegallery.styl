@@ -1,0 +1,35 @@
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+@import '../helpers/functions.styl';
+
+#image-gallery {
+    height: 435px;
+    .img-viewer {
+        box(#f2f2f2, grey(20%) , 0, 0);
+        display:inline-block;
+        height: 100%;
+        width: 540px;
+    }
+    .img-navigator {
+        display:inline-block;
+        height: 100%;
+        margin-left: 14px;
+        vertical-align:top;
+        ul {
+            ul-reset();
+            li {
+                height: 60px;
+                width: 60px;
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+                a {
+                    box(#f2f2f2, grey(20%) , 0, 0);
+                    color: grey(20%);
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

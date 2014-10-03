@@ -1,0 +1,12 @@
+<span class="title">Seleccione categoria</span>
+<ul class="parent-categories">
+    {% for category in categories  %}
+        <li>
+            <a href="{{ category | slugToUrl | link }}">
+                <span class="icons icon-cat-{{ category.id }}"></span>
+                {{ category.trName }}<br>
+                <span class="count">{{ (category.counter | countFormat) if category.counter > 0  }}</span>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
