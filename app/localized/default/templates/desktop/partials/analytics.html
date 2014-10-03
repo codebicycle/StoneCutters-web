@@ -1,5 +1,6 @@
 {% if analytics %}
     <script type="text/javascript">
+        var _gaq = _gaq || [];
         var atiapi = (atiapi || []);
 
         atiapi.push({
@@ -9,6 +10,25 @@
             xtsite: '{{ analytics.params.ati.siteId }}',
             xtcustom: JSON.parse('{{ analytics.params.custom }}'),
             xtergo: '1'
+        });
+
+        _gaq.push(function() {
+            var host = '{{ analytics.params.google.host }}';
+            var tracker = _gat._getTracker('{{ analytics.params.google.id }}');
+            var referrerDomain = 'emptyReferrer';
+            var doStore = true;
+
+            if (typeof document.referrer != 'undefined' && document.referrer != '') {
+                referrerDomain = document.referrer.match(/:\/\/(.[^/]+)/)[1];
+
+                if (referrerDomain.indexOf(host) != -1) {
+                    doStore = false;
+                }
+            }
+            if (doStore) {
+                tracker._setCustomVar(2, 'keep_referral', referrerDomain, 2);
+            }
+            tracker._trackPageview('{{ analytics.params.page }}');
         });
     </script>
 {% endif %}

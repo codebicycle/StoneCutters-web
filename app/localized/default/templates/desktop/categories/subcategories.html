@@ -1,7 +1,7 @@
 <span class="title">Seleccione categoria</span>
-<a href="{{ 'nf/all-results' | link }}" class="icons">Todas las categorias</a>
+<a href="{{ 'nf/all-results' | link }}" class="icons icon-arrow-left">Todas las categorias</a>
 {% if not currentCategory.parentId %}
-    <span class="category-selected icons">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
+    <span class="category-selected arrow icons icon-cat">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
     <ul class="sub-categories">
         {% for subcategory in currentCategory.children.toJSON() %}
             <li>
@@ -10,5 +10,29 @@
         {% endfor %}
     </ul>
 {% else %}
-    <a href="{{ category | slugToUrl | link }}" ><span class="icons icon-cat-{{ category.id }}"></span> {{ category.trName }} </a>
+    <a href="{{ category | slugToUrl | link }}" class="icons icon-cat" > {{ category.trName }} </a>
+    <span class="category-selected">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
 {% endif %}
+
+<span class="title filter-title">Precio<span class="icons icon-arrow-top open"></span></span>
+<div class="filter price">
+    <input type="text" placeholder="Min." class="text-field" />
+    <input type="text" placeholder="Max." class="text-field" />
+    <button id="price-submit" class="icons icon-check button" type="submit"></button>
+</div>
+
+<span class="title filter-title">Marca<span class="icons icon-arrow-top open"></span></span>
+<div class="filter check-box">
+    <label>
+        <input type="checkbox">
+        Marca 1
+    </label>
+    <label>
+        <input type="checkbox">
+        Marca 2
+    </label>
+    <label>
+        <input type="checkbox">
+        Marca 3
+    </label>
+</div>

@@ -1,0 +1,40 @@
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+
+.listing-tabs {
+    height: 34px;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.077rem;
+
+    .tabs {
+        float: left;
+        ul-reset();
+
+        li {
+            display: inline-block;
+            margin-right: 5px;
+            a {
+                height: 33px;
+                display: block;
+                float: left;
+                background: #eee;
+                border-styles(#ddd, 3px 3px 0 0, solid solid none, 1px 1px 0);
+                color: #666;
+                line-height: 2.3;
+                padding: 0 5px;
+
+                &.active {
+                    height: 34px;
+                    margin-bottom: -1px;
+                    background: #fafafa;
+                    color: #000;
+                }
+                &:before {
+                    display: inline-block;
+                    line-height: 10px;
+                }
+            }
+        }
+    }
+}
