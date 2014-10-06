@@ -18,7 +18,8 @@ module.exports = {
     search: middlewares(search),
     allresults: middlewares(allresults),
     favorite: middlewares(favorite),
-    'delete': middlewares(deleteItem)
+    'delete': middlewares(deleteItem),
+    staticSearch: middlewares(staticSearch)
 };
 
 function show(params, callback) {
@@ -38,7 +39,7 @@ function show(params, callback) {
             if (user) {
                 params.token = user.token;
             }
-            else if (typeof window !== 'undefined' && localStorage) {
+            else if (window !== undefined && localStorage) {
                 anonymousItem = localStorage.getItem('anonymousItem');
                 anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
                 if (securityKey) {
@@ -672,7 +673,6 @@ function search(params, callback) {
             analytics.setPage('nf');
             analytics.addParam('keyword', query.search);
             analytics.addParam('page_nb', 0);
-
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
@@ -689,7 +689,7 @@ function search(params, callback) {
             done();
         }.bind(this);
 
-        var findItems = function(done) {
+        var fetch = function(done) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
@@ -700,34 +700,39 @@ function search(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkSearch = function(done, res) {
+        var paginate = function(done, res) {
+            var url = '/nf/search/' + query.search + '/';
+            var realPage;
+
             if (!res.items) {
                 return done.fail(null, {});
             }
-
-            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+            if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/nf/search/' + query.search);
+                return helpers.common.redirect.call(this, url);
             }
+            realPage = res.items.paginate(page, query, url);
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, url + '-p-' + realPage);
+            }
+            analytics.addParam('page_nb', res.items.metadata.totalPages);
             done(res.items);
         }.bind(this);
 
-        var success = function(_items) {
-            var url = ['/nf/search/', query.search, '/'].join('');
-            var metadata = _items.metadata;
+        var success = function(items) {
+            var metadata = items.metadata;
 
             if (metadata.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
-            helpers.pagination.paginate(metadata, query, url);
-            analytics.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
             seo.update();
             callback(null, {
                 user: user,
-                items: _items.toJSON(),
+                items: items.toJSON(),
                 metadata: metadata,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
@@ -741,8 +746,8 @@ function search(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .then(findItems)
-            .then(checkSearch)
+            .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }
@@ -754,15 +759,22 @@ function allresults(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location').url;
         var siteLocation = this.app.session.get('siteLocation');
         var user = this.app.session.get('user');
         var query;
 
-        var prepare = function(done) {
-            if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+        var redirect = function(done) {
+            if (page !== undefined && !isNaN(page) && page > 1 &&
+                (page > config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500) ||
+                 (platform === 'html5' && infiniteScroll))) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/nf/all-results');
             }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
             delete params.search;
 
             helpers.pagination.prepare(this.app, params);
@@ -777,7 +789,7 @@ function allresults(params, callback) {
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
+        var fetch = function(done) {
             this.app.fetch({
                 categories: {
                     collection : 'Categories',
@@ -785,14 +797,7 @@ function allresults(params, callback) {
                         location: siteLocation,
                         languageCode: this.app.session.get('selectedLanguage')
                     }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var findItems = function(done) {
-            this.app.fetch({
+                },
                 items: {
                     collection: 'Items',
                     params: params
@@ -802,16 +807,20 @@ function allresults(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkSearch = function(done, resCategories, resItems) {
-            if (!resCategories.categories || !resItems.items) {
-                return done.fail(null, {});
-            }
+        var paginate = function(done, res) {
+            var url = '/nf/all-results/';
+            var realPage;
 
-            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !resItems.items.length)) {
+            if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/nf/all-results');
+                return helpers.common.redirect.call(this, url);
             }
-            done(resCategories.categories, resItems.items);
+            realPage = res.items.paginate(page, query, url);
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, url + '-p-' + realPage);
+            }
+            done(res.categories, res.items);
         }.bind(this);
 
         var success = function(_categories, _items) {
@@ -843,9 +852,10 @@ function allresults(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
-            .gate(findCategories, findItems)
-            .then(checkSearch)
+            .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }
@@ -952,4 +962,115 @@ function deleteItem(params, callback) {
         .then(prepare)
         .then(remove)
         .val(success);
+}
+
+function staticSearch(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var page = params ? params.page : undefined;
+        var infiniteScroll = config.get('infiniteScroll', false);
+        var platform = this.app.session.get('platform');
+        var user = this.app.session.get('user');
+        var query;
+
+        var redirect = function(done) {
+            if (platform !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (params.search && params.search.toLowerCase() === 'gumtree' && this.app.session.get('location').url === 'www.olx.co.za') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/q/-');
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            helpers.pagination.prepare(this.app, params);
+            query = _.clone(params);
+            delete params.search;
+            delete params.page;
+            delete params.filters;
+            delete params.urlFilters;
+            
+            analytics.setPage('staticSearch'); // @todo Check this
+            analytics.addParam('keyword', query.search);
+            analytics.addParam('page_nb', 0);
+
+            if (!query.search || _.isEmpty(query.search.trim())) {
+                seo.addMetatag('robots', 'noindex, follow');
+                seo.addMetatag('googlebot', 'noindex, follow');
+                seo.update();
+                done.abort();
+                return callback(null, {
+                    search: '',
+                    metadata: {
+                        total: 0
+                    },
+                    analytics: analytics.generateURL.call(this)
+                });
+            }            
+            done();            
+        }.bind(this);
+
+        var findItems = function(done) {
+            params.item_type = 'staticSearch';
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var checkSearch = function(done, res) {
+            if (!res.items) {
+                return done.fail(null, {});
+            }
+
+            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done(res.items);
+        }.bind(this);
+
+        var success = function(_items) {
+            var url = ['/q/', query.search, '/c-', params.catId ,  '/'];
+            url = url.join('');
+            var metadata = _items.metadata;
+
+            if (metadata.total < 5) {
+                seo.addMetatag('robots', 'noindex, follow');
+                seo.addMetatag('googlebot', 'noindex, follow');
+            }
+            helpers.pagination.paginate(metadata, query, url);
+            analytics.addParam('page_nb', metadata.totalPages);
+            seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+            seo.addMetatag('description');
+            seo.update();
+            callback(null, 'items/search', {
+                user: user,
+                items: _items.toJSON(),
+                metadata: metadata,
+                search: query.search,
+                infiniteScroll: infiniteScroll
+//                analytics: analytics.generateURL.call(this)
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(findItems)
+            .then(checkSearch)
+            .val(success);
+    }
 }

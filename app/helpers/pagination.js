@@ -67,23 +67,21 @@ module.exports = (function() {
             url.push('-');
             url.push(name);
             url.push('_');
-            switch(filter.type) {
+            switch (filter.type) {
                 case 'SELECT':
                     url.push(filter.value);
                     params['f.' + name] = filter.value;
-                    break;
+                break;
                 case 'BOOLEAN':
                     url.push(filter.value);
                     params['f.' + name] = filter.value;
-                    break;
+                break;
                 case 'RANGE':
                     url.push(filter.value.from);
                     url.push('_');
                     url.push(filter.value.to);
                     params['f.' + name] = filter.value.from + 'TO' + filter.value.to;
-                    break;
-                default:
-                    break;
+                break;
             }
         });
         if (sort) {
@@ -109,8 +107,10 @@ module.exports = (function() {
         return url.join('');
     }
 
-    function prepare(app, params) {
-        var max = config.get(['smaug', app.session.get('platform'), 'maxPageSize'], 25);
+    function prepare(app, params, type) {
+        var platform = app.session.get('platform');
+        var location = app.session.get('location').url;
+        var max = config.get(['smaug', platform, 'maxPageSize']) || config.getForMarket(location, ['ads', 'quantity', type || 'listing'], 25);
 
         if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
             params.pageSize = max;
