@@ -12,8 +12,8 @@
 	    {% endif %}
 	{% endfor %}
 	<label>{{ dictionary["homeheader.Selected_Region"] }}</label>
-	<div class="location">{{ location.name if location and location.name else 'Selecciona una ubicacion' }}</div>
+	<div class="location" data-qa="location-list" >{{ location.name if location and location.name else 'Selecciona una ubicacion' }}</div>
 	<div class="btnCenter">
-	    <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange">
+	    <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange" data-qa="contact-continue-button" >
 	</div>
 </form>
