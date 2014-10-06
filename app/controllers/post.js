@@ -22,8 +22,8 @@ function categoriesOrFlow(params, callback) {
     function controller(form) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
-        var isPostingFlow = this.app.session.get('platform') === 'html5';
-        
+        var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
+
         var prepare = function(done) {
             if (!isPostingFlow && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
@@ -143,7 +143,7 @@ function subcategories(params, callback) {
     function controller() {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
-        var isPostingFlow = this.app.session.get('platform') === 'html5';
+        var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
 
         var prepare = function(done) {
             var redirect;
@@ -212,7 +212,8 @@ function form(params, callback) {
     function controller(form) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
-        var isPostingFlow = this.app.session.get('platform') === 'html5';
+        var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
+
         var language;
         var languages;
         var languageId;
