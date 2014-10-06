@@ -31,15 +31,6 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
-    posting: {
-        flow: {
-            enabled: {
-                'www.olx.com.mx': true,
-                'www.olx.com.ar': true,
-                'www.olx.co.za': true
-            }
-        }
-    },
     infiniteScroll: false,
     interstitial: {
         enabled: true,
@@ -77,6 +68,14 @@ module.exports = {
             },
             'default': {
                 'Cache-Control': 'no-cache, max-age=0, s-maxage=0, no-store'
+            }
+        }
+    },
+    features: {
+        html5: {
+            postingFlow: {
+                worldwide: false,
+                countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
             }
         }
     },
