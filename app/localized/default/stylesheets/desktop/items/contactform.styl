@@ -5,20 +5,72 @@
     box($yellow, $yellowDarker , 3px, 20px);
     margin-left: 20px;
 
-    form {
-        p.error :before {
-            display: inline-block;
-            color: $red;
-            margin: 5px 0 0 231px;
-            position: absolute;
+    .icons:before {
+        font-size: 2rem;
+    }
+
+    .user-info {
+        p {
+            font-size: 1.36rem;
+            font-weight: bold;
+            margin-bottom: 0;
+            &:first-child {
+                margin-top: 0;
+            }
+            &.user-phone {
+                font-size: 1.7rem;
+            }
         }
         span {
-            .error {
+            font-size: 0.93rem;
+            margin-left: 28px;
+        }
+    }
+
+    form {
+        p {
+            &.error {
+                textarea,
+                input[type="text"] {
+                    border-color: $red;
+                }
+            }
+            .spinner {
+                display: none;
+            }
+        }
+        span {
+            &.icons:before {
+                display: inline-block;
+                color: $red;
+                margin: 5px 0 0 224px;
+                position: absolute;
+            }
+            &.error {
                 // display: none;
                 margin: 0 0 10px 10px;
                 font-size: 12px;
                 color: $red;
             }
+        }
+        textarea {
+            height: 80px;
+        }
+        input[type="text"] {
+            height: 20px;
+        }
+        textarea,
+        input[type="text"] {
+            border: 1px solid #ccc;
+            border-radius(3px);
+            padding: 8px 10px;
+            resize: none;
+            width: 92%;
+        }
+        input[type="submit"] {
+            action-button($orange, #fff, 3px, padding = 10px 0);
+            font-size: 1.6rem;
+            width: 100%;
         }
     }
 }
