@@ -1,3 +1,20 @@
-<div class="itemPagination">
-    <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
+<div id="items-pagination">
+    <div class="items-paginations-buttons">
+        <a href="" role="button" class="pagination-button previous">Volver</a><a href="" role="button" class="pagination-button next">Siguiente página</a>
+    </div>
+
+    <ul class="items-paginations-numbers">
+        <li><a href="" class="icons pagination-arrow icon-arrow-left disable"></a></li>
+        <li><a href="" class="pagination-number current">1</a></li>
+        <li><a href="" class="pagination-number">2</a></li>
+        <li><a href="" class="pagination-number">3</a></li>
+        <li><a href="" class="pagination-number">4</a></li>
+        <li><a href="" class="pagination-number">5</a></li>
+        <li><a href="" class="pagination-number">6</a></li>
+        <li><a href="" class="pagination-number">7</a></li>
+        <li><a href="" class="pagination-number">8</a></li>
+        <li><a href="" class="pagination-number">9</a></li>
+        <li><a href="" class="pagination-number">10</a></li>
+        <li><a href="" class="icons pagination-arrow icon-arrow-right"></a></li>
+    </ul>
 </div>
