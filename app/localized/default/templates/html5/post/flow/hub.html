@@ -6,8 +6,8 @@
     <p><small>&#9733; {{ dictionary["misc.AddPhotosSellFaster_Mob"] }}</small></p>
 </header>
 <ul id="steps">
-    <li id="step-categories" class="step trackMe" data-tracking="Posting-ClickCategoryList">
-        <h3 class="title">{{ dictionary["misc.ChooseACategory_Mob"] }}</h3>
+    <li id="step-categories" class="step trackMe" data-tracking="Posting-ClickCategoryList" >
+        <h3 class="title" data-qa="step1-button">{{ dictionary["misc.ChooseACategory_Mob"] }}</h3>
         <div class="stepSummary">
             <div>
                 <small>{{ dictionary["posting_selectcategory.categories"] }}</small>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </li>
-    <li id="step-description" class="step opaque trackMe" data-tracking="Posting-ClickDescribeAd">
+    <li id="step-description" class="step opaque trackMe" data-tracking="Posting-ClickDescribeAd" data-qa="step2-button" >
         <h3 class="title">{{ dictionary["misc.DescribeYourAd_Mob"] }}</h3>
         <div class="stepSummary">
             <div>
@@ -32,8 +32,8 @@
             </div>
         </div>
     </li>
-    <li id="step-contact" class="step opaque trackMe" data-tracking="Posting-ClickContactInfo">
-        <h3 class="title">{{ dictionary["misc.ContactInformation_Mob"] }}</h3>
+    <li id="step-contact" class="step opaque trackMe" data-tracking="Posting-ClickContactInfo" >
+        <h3 class="title" data-qa="step3-button" >{{ dictionary["misc.ContactInformation_Mob"] }}</h3>
         <div class="stepSummary">
             <div>
                 <small>{{ dictionary["misc.Email_Mob"] }}</small>
@@ -46,4 +46,4 @@
         </div>
     </li>
 </ul>
-<footer id="post" class="opaque trackMe" data-tracking="Posting-ClickPostButton">{{ dictionary["misc.PostYourFreeAdCaps_Mob"] }}</footer>
+<footer id="post" class="opaque trackMe" data-tracking="Posting-ClickPostButton" data-qa="submit-button">{{ dictionary["misc.PostYourFreeAdCaps_Mob"] }}</footer>
