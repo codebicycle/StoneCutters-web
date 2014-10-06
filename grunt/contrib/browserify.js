@@ -27,10 +27,9 @@ module.exports = function(grunt) {
         var environments = utils.getEnvironments(grunt);
         var allEnvironments = ['development', 'testing', 'staging', 'production'];
         var defaultSrc = ['app/config/**/*.js'];
-        var defaultOptions = {
-            alias: ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'],
-            external: ['underscore', 'querystring']
-        };
+        var defaultOptionAlias = ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'];
+        var defaultOptionExternal = ['underscore', 'querystring'];
+
         var srcTemplate = '!app/config/defaultENVIRONMENT.js';
         var aliasTemplate = 'app/config/defaultENVIRONMENT.js:./default';
         var destTemplate = 'public/js/src/common/configENVIRONMENT.js';
@@ -42,15 +41,19 @@ module.exports = function(grunt) {
 
             browserifyConfig.src = getSrc(environment);
             browserifyConfig.dest = replace(destTemplate, environment);
-            browserifyConfig.options = _.clone(defaultOptions);
+            browserifyConfig.options = {
+                alias: _.clone(defaultOptionAlias),
+                external: defaultOptionExternal
+            };
             browserifyConfig.options.alias.push(replace(aliasTemplate, environment));
             browserify[replace(nameTemplate, environment)] = browserifyConfig;
+
         });
 
         function getSrc(env) {
             var srcs = [];
 
-            environments.forEach(function(environment) {
+            allEnvironments.forEach(function(environment) {
                 if (env === environment) {
                     return;
                 }
