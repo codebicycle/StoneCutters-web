@@ -7,13 +7,13 @@ module.exports = (function() {
 
     function isEnabled(featureName) {
         var status = false;
+        var countryStatus;
         var featureConfig = config.get(['features', this.app.session.get('platform'), featureName], false);
 
         if (featureConfig) {
-            var countryStatus = _.contains(featureConfig.countries, this.app.session.get('location').url);
+            countryStatus = _.contains(featureConfig.countries, this.app.session.get('location').url);
             status = (featureConfig.worldwide) ? !countryStatus : countryStatus;
         }
-
         return status;
     }
 
