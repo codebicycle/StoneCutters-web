@@ -10,6 +10,7 @@ module.exports = function(app, dataAdapter) {
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
+    var helpers = require('../../app/helpers');
     
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -139,6 +140,10 @@ module.exports = function(app, dataAdapter) {
                     }
                     done(response, body);
                 }
+
+                var numerosNormales = helpers.numbers.toRoman(_item.priceC);
+                console.log(numerosNormales);
+                console.log(_item.priceC);
 
                 item = _item;
                 images = _images;
