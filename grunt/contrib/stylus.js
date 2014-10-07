@@ -38,9 +38,10 @@ module.exports = function(grunt) {
             grunt.file.recurse('app/localized/default/stylesheets', function callback(abspath, rootdir, subdir, filename) {
                 var parts = subdir.split('/');
                 var target = 'public/css/default/' + parts[0] + '/styles';
+                var helpers;
 
-                if (parts[1] !== undefined && parts[1] === 'helpers') {
-                    var helpers = rootdir + '/' + parts[0];
+                if (parts[1] && parts[1] === 'helpers') {
+                    helpers = rootdir + '/' + parts[0];
                     stylus[environment].options.paths = [helpers];
                     stylus[environment].options.import = ['helpers'];
                     return false;
@@ -84,7 +85,7 @@ module.exports = function(grunt) {
                 }
                 if (grunt.file.exists(dir)) {
                     grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
-                        if (subdir !== undefined && subdir === 'helpers') {
+                        if (subdir && subdir === 'helpers') {
                             stylus[environment].options.paths = [rootdir];
                             stylus[environment].options.import = ['helpers'];
                             return false;
