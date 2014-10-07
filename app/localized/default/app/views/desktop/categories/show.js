@@ -1,20 +1,24 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view');
-var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
+var _ = require('underscore');
 
 module.exports = Base.extend({
+    id: 'categories-show-view',
+    className: 'categories-show-view',
     tagName: 'main',
-    id: 'categories-list-view',
-    className: 'categories-list-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
+        _.each(data.items, this.processItem);
         return _.extend({}, data, {
-            location: this.app.session.get('location')
+            items: data.items
         });
+    },
+    processItem: function(item) {
+        item.date.since = helpers.timeAgo(item.date);
     }
 });
 
-module.exports.id = 'categories/list';
+module.exports.id = 'categories/show';
