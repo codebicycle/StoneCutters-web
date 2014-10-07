@@ -10,7 +10,7 @@ module.exports = {
             maxPageSize: 26
         },
         desktop: {
-            maxPageSize: 1
+            maxPageSize: 25
         }
     },
     staticAccept: ['css', 'js'],

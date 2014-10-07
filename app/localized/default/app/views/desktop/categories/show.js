@@ -6,8 +6,8 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    id: 'items-allresults-view',
-    className: 'items-allresults-view',
+    id: 'categories-show-view',
+    className: 'categories-show-view',
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -25,4 +25,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/allresults';
+module.exports.id = 'categories/show';

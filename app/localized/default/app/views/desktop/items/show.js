@@ -6,7 +6,7 @@ var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 
 module.exports = Base.extend({
-    tagName: 'section',
+    tagName: 'main',
     id: 'items-show-view',
     className: 'items-show-view',
     getTemplateData: function() {
