@@ -2,9 +2,9 @@
 @import '../helpers/mixins.styl';
 
 #post-banner {
-	width: 980px;
-	float: left;
-	clear: both;
+    clear: both;
+    float: left;
+    width: 980px;
 
     .post-banner-title {
         display: block;
@@ -14,11 +14,11 @@
         text-align: center;
 
         &:before, &:after {
-            width: 31px;
+            background: url(imageUrl/images/desktop/doubleArrows.jpg);
+            content: "";
             height: 31px;
             position: absolute;
-            content: "";
-            background: url(imageUrl/images/desktop/doubleArrows.jpg);
+            width: 31px;
         }
         &:after {
             background-position: -31px 0;
@@ -44,12 +44,13 @@
                 &:hover {
                     text-decoration: none;
                 }
-                div {
+                span.icons {
+                    box(#008fd3, #fff, 50%, 0, solid, 4px);
                     color: #fff;
+                    display: block;
                     font-size: 4.615rem;
                     height: 80px;
                     width: 80px;
-                    box(#008fd3, #fff, 50%, 0, solid, 4px);
 
                     &:hover {
                         border-color: #abd2e5;
