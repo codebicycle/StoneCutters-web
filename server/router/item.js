@@ -141,9 +141,9 @@ module.exports = function(app, dataAdapter) {
                     done(response, body);
                 }
 
-                var numerosNormales = helpers.numbers.toRoman(_item.priceC);
-                console.log(numerosNormales);
-                console.log(_item.priceC);
+                var numerosNormales = helpers.numbers.toLatin(_item.priceC);
+                console.log(numerosNormales + 'item');
+                console.log(_item.priceC + 'item');
 
                 item = _item;
                 images = _images;

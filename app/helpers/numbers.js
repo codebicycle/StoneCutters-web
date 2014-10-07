@@ -33,6 +33,6 @@ function toPersian(input) {
 }
 
 module.exports = {
-    toRoman: toRoman,
+    toLatin: toLatin,
     toPersian: toPersian
 };
