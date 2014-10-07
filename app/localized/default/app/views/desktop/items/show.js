@@ -3,7 +3,6 @@
 var Base = require('../../../../../common/app/bases/view');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -11,8 +10,8 @@ module.exports = Base.extend({
     className: 'items-show-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        data.category_name = this.options.category_name;
 
+        data.category_name = this.options.category_name;
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
             data.item.location.cityName = data.item.location.children[0].children[0].name;
