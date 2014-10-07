@@ -1,7 +1,27 @@
-@import '../helpers/variables.styl';
-@import '../helpers/mixins.styl';
-@import '../helpers/functions.styl';
-
 #item-description {
-    clear: both;
+    > p {
+        color: grey(80%);
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+    div {
+        display: inline-block;
+
+        &.optionals {
+            min-width: 200px;
+        }
+    }
+    ul {
+        ul-reset();
+        li {
+            padding: 7px;
+            &:nth-child(odd) {
+                background-color: grey(5%)
+            }
+            span:last-child {
+                color: $blue;
+                float: right;
+            }
+        }
+    }
 }

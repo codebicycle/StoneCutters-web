@@ -7,9 +7,9 @@
         <div id="wrapper" class="wrapper-main">
             {% view 'header/usernav' %}
             {% view 'header/index' %}
-            <main id="content">
+            <div id="content">
                 {{ body }}
-            </main>
+            </div>
             {% view 'footer/footer' %}
         </div>
         {% include (template + '/partials/modal.html') %}

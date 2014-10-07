@@ -1,3 +1,16 @@
-<nav>
-	Breadcrumb
+<nav id="breadcrumb">
+    <div class="breadcrumb-navigation">
+    	<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a>
+        <span class="icons icon-arrow-right"></span>
+        Anúncios en {{ location.current.name if location.current and location.current.type != 'country' else location.name }}
+        {% if metadata.total %}
+            <span class="count">({{ metadata.total | countFormat }})</span>
+        {% endif %}
+    </div>
+    {% if metadata.next or metadata.previous %}
+        <div class="breadcrumb-pagination">
+            <p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
+            <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="icons icon-arrow-left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="icons icon-arrow-right {{ "disable" if not metadata.next }}"></a>
+        </div>
+    {% endif %}
 </nav>
