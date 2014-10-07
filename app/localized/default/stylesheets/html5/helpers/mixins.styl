@@ -1,0 +1,72 @@
+vendor(name, args)
+    -webkit-{name} args
+    -moz-{name} args
+    -ms-{name} args
+    -o-{name} args
+    {name} args
+
+transition($t)
+    vendor('transition', $t)
+
+rotate($degrees)
+    vendor('transform', rotate($degrees))
+
+scale($ratio)
+    vendor('transform', scale($ratio))
+
+translate($x = 0, $y = 0)
+    vendor('transform', translate(arguments))
+
+skew($x = 0, $y = 0)
+    vendor('transform', skew(arguments))
+
+border-radius()
+    -webkit-border-radius: arguments
+    -moz-border-radius: arguments
+    border-radius: arguments
+
+box-shadow()
+    -webkit-box-shadow: arguments
+    -moz-box-shadow: arguments
+    box-shadow: arguments
+
+background-clip()
+    -webkit-background-clip: arguments
+    -moz-background-clip: arguments
+    background-clip: arguments
+
+background-size()
+    -webkit-background-size: arguments
+    -moz-background-size: arguments
+    -o-background-size: arguments
+    background-size: arguments
+
+box-sizing()
+    -webkit-box-sizing: arguments
+    -moz-box-sizing: arguments
+    box-sizing: arguments
+
+linear_gradient(origin, colors...)
+    fallback = colors[1][0]
+    colors = join(', ', colors)
+    colors = unquote(colors)
+    background-color: fallback
+    background-image: -webkit-linear-gradient(origin, colors)
+    background-image: -moz-linear-gradient(origin, colors)
+    background-image: -ms-linear-gradient(origin, colors)
+    background-image: -o-linear-gradient(origin, colors)
+    background-image: linear-gradient(origin, colors)
+
+clear-fix()
+    &:after
+        content: " ";
+        clear: both;
+        display: block;
+
+square()
+    height: arguments
+    width: arguments
+
+circle()
+    border-radius: 50%
+    square(arguments)

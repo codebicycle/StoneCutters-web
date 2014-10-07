@@ -7,7 +7,7 @@ module.exports = {
             maxPageSize: 25
         },
         html5: {
-            maxPageSize: 26
+            maxPageSize: 30
         },
         desktop: {
             maxPageSize: 25

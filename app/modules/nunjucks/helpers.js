@@ -89,6 +89,13 @@ module.exports = function(nunjucks) {
             var max;
             var i;
 
+            if (platform === 'html5') {
+                pagination.unshift(page-3);
+                pagination.push(page+3);
+            }
+
+            var paginationLength = pagination.length;
+
             function prepareStyle(isLast, start, end) {
                 if (platform !== 'wap') {
                     out.push(start || '" ');
@@ -144,7 +151,7 @@ module.exports = function(nunjucks) {
                     pagination.pop();
                 }
             }
-            max = 5;
+            max = paginationLength;
             for (i = 0; i < pagination.length && count < max; i++) {
                 prepareURL(pagination[i], ((count + 1) === max));
             }
