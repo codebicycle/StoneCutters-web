@@ -19,6 +19,8 @@ module.exports = function(grunt) {
             stylus[environment] = {
                 files: {},
                 options: {
+                    paths: [],
+                    import: [],
                     define: {
                         staticUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.static : ''),
                         imageUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.image : '')
@@ -37,6 +39,12 @@ module.exports = function(grunt) {
                 var parts = subdir.split('/');
                 var target = 'public/css/default/' + parts[0] + '/styles';
 
+                if (parts[1] !== undefined && parts[1] === 'helpers') {
+                    var helpers = rootdir + '/' + parts[0];
+                    stylus[environment].options.paths = [helpers];
+                    stylus[environment].options.import = ['helpers'];
+                    return false;
+                }
                 if (environment !== 'production') {
                     target += '-' + environment;
                 }
@@ -76,6 +84,11 @@ module.exports = function(grunt) {
                 }
                 if (grunt.file.exists(dir)) {
                     grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
+                        if (subdir !== undefined && subdir === 'helpers') {
+                            stylus[environment].options.paths = [rootdir];
+                            stylus[environment].options.import = ['helpers'];
+                            return false;
+                        }
                         if (filename.split('.').pop() !== 'styl') {
                             return;
                         }
