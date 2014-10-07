@@ -12,6 +12,7 @@
             </main>
             {% view 'footer/footer' %}
         </div>
+        {% include (template + '/partials/modal.html') %}
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
