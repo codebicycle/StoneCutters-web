@@ -7,7 +7,7 @@ module.exports = Base.extend({
     className: 'app_view',
     events: {
         'click .modal-close': 'closeModal',
-        'click .title-bar a': 'openModal'
+        'click .open-modal': 'openModal'
     },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
@@ -50,28 +50,60 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         hideModal(event.currentTarget.dataset.modal);
+    },
+    openVideo: function(event) {
+
     }
 });
 
-function showModal(classToShow) {
+function showModal(idToShow) {
+    
     var windowHeight = window.innerHeight,
-        modal = $('.' + classToShow),
+        modalTitle,
+        modal = $('.modal'),
+        modalHeader = modal.children('.modal-header'),
+        content = $('#' + idToShow).html(),
         top = 0,
-        modalHeight = modal.height();
-    if(modalHeight < windowHeight){
-        top = (windowHeight/2) -(modalHeight/2);
+        marginLeft,
+        modalWidth,
+        calculateModalHeight,
+        modalHeight = 'auto';
+
+        
+    modal.children('.modal-content').html(content);
+    calculateModalHeight = modal.height();
+    
+    if(idToShow == 'video-gallery') {
+        modalTitle = '<span class="first-part">Vender es fácil </span><span class="second-part">Publica gratis en OLX</span>';
+        modalWidth = '960';
+        modal.addClass('video-modal');  
+        calculateModalHeight = 498;  
+    } else {
+        modalTitle = 'Selecciona tu ciudad o provincia en Bolivia';
+        modalWidth = '720';
     }
-    modal.css('top',top);
+
+    marginLeft = -(modalWidth/2);
+    if(calculateModalHeight < windowHeight){
+        top = (windowHeight/2) -(calculateModalHeight/2);
+    }
+
+    modalHeader.children("h3").html(modalTitle);   
+
+    modal.css('top',top).
+        css('margin-left', marginLeft).
+        css('height',modalHeight).
+        css('width',modalWidth);
 
     $('body').css('overflow','hidden');
     $('#modal-overlay').removeClass('modal-hide');
-    $('.' + classToShow).removeClass('modal-hide');
+    $('.modal').removeClass('modal-hide');
 }
 
 function hideModal(classToHide) {
     $('body').css('overflow','auto');
     $('#modal-overlay').addClass('modal-hide');
-    $('.' + classToHide).addClass('modal-hide');
+    $('.modal').addClass('modal-hide').removeClass('video-modal');
 }
 
 module.exports.id = 'app_view/index';
