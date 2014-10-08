@@ -1,1 +1,7 @@
-<h1>Categorias</h1>
+<h1>Categorias la</h1>
+{% for category in categories %}
+    {{category.trName}}<br>
+        {% for subCategory in category.children.toJSON() %}
+            {{ subCategory.trName }}
+        {% endfor %}
+{% endfor %}
