@@ -56,6 +56,60 @@ clear-fix()
         clear: both;
         display: block;
 
+lines(bgColor, width, height1, pos1, sep1, height2, pos2, sep2, position)
+    &:after, &:before
+        background: bgColor;
+        content: "";
+        position: absolute;
+        if position == top or position == bottom
+            height: width;
+            &:before
+                width: height1;
+            &:after
+                width: height2;
+        else
+            width: width;
+            &:before
+                height: height1;
+            &:after
+                height: height2;
+    if position == top or position == bottom
+        &:before
+            width: height1;
+            left: pos1;
+        &:after
+            width: height2;
+            left: pos2;
+    else
+        &:before
+            height: height1;
+            top: pos1;
+        &:after
+            height: height2;
+            top: pos2
+    if position == top
+        &:before
+            top: sep1;
+            left: pos1;
+        &:after
+            top: sep2;
+            left: pos2;
+    else if position == bottom
+        &:before
+            bottom: sep1;
+        &:after
+            bottom: sep2;
+    else if position == right
+        &:before
+            right: sep1;
+        &:after
+            right: sep2;
+    else if position == left
+        &:before
+            left: sep1;
+        &:after
+            left: sep2;
+
 tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
     &:after, &:before
         border: solid transparent;
@@ -112,3 +166,13 @@ ul-reset()
     margin: 0
     padding: 0
     list-style-type: none
+
+transition($t)
+    vendor('transition', $t)
+
+vendor(name, args)
+    -webkit-{name} args
+    -moz-{name} args
+    -ms-{name} args
+    -o-{name} args
+    {name} args
