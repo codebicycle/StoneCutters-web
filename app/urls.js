@@ -10,6 +10,9 @@ module.exports = {
     'redirections#subcategoryListWithParams': {
         url: 'item/:categoryId/:title/:subTitle/:description/page/:page'
     },
+    'redirections#categoryExpired': {
+        url: ':title-cat-:categoryId-e'
+    },
     'redirections#related': {
         url: 'item/:categoryId/related-ads/page/:page'
     },
