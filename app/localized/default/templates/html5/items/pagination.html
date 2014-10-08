@@ -1,0 +1,10 @@
+<div class="pagination-listing">
+	<div class="backtop">
+		<a href="#"></a>
+	</div>
+
+	{% if metadata.previous %}<a href="{{ (metadata.previous | link) }}">{% endif %}<span class="button-previous">{{ dictionary["itemslisting.Previous"] }}</span>{% if metadata.previous %}</a>{% endif %}<!--
+	-->{% if metadata.next %}<a href="{{ (metadata.next | link) }}">{% endif %}<span class="button-next">{{ dictionary["itemslisting.Next"] }}</span>{% if metadata.next %}</a>{% endif %}
+
+	<div class="pages">{{ metadata | pagination('html5') }}</div>
+</div>
