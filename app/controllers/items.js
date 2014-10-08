@@ -995,19 +995,13 @@ function filter(params, callback) {
         var success = function(filters) {
             callback(null, 'items/filter', {
                 filters: filters
-            });       
-        }.bind(this);
-
-        var buscar = function() {
-            console.log("river buscar");
-            //filters: filters
+            });
         }.bind(this);
 
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);        
 
-        
         asynquence().or(error)
             .then(prepare)
             .then(find)
@@ -1023,13 +1017,13 @@ function sort(params, callback) {
         var build = function(done) {
             var options = [
                 {
-                    name: 'price_descendant'
+                    name: 'pricedesc'
                 },
                 {
-                    name: 'price_ascendant'
+                    name: 'price'
                 },
                 {
-                    name: 'date_descendant'
+                    name: 'date*to*showdesc'
                 }
             ];
 

@@ -125,10 +125,10 @@ module.exports = {
         url: ':title-cat-:catId([0-9]+)-p-:page/sort'
     },
     'items#sort#7': {
-        url: ':title-cat-:catId([0-9]+):filters/sort'
+        url: ':title-cat-:catId([0-9]+)/:filters/sort'
     },
     'items#sort#8': {
-        url: ':title-cat-:catId([0-9]+)-p-:page:filters/sort'
+        url: ':title-cat-:catId([0-9]+)-p-:page/:filters/sort'
     },
 
     'items#search#filters': {

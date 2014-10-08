@@ -1,7 +1,8 @@
-<header id="topBar"{{ ' class="disabled"' if postingFlow }}>
-    <div class="content-filter" style="display:none;">
-        <button class="btn-cancel" >Cancelar</button>
-        <span>Sort</span>
+<header id="topBar"{{ ' class="disabled"' if postingFlow }}>    
+    <div class="topBarFilters hide">
+        
+        <a href="#" class="filter-btns blue">Cancelar</a><!-- 
+        --><h2>PEPITO {{ headerTitle }}</h2>
     </div>
     <a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a>
     <ul class="header-links">

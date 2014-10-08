@@ -1,5 +1,5 @@
 <div class="filter_order">
-	<span>1.786 ads</span>
-	<a href="{{ '/sort' | link }}" class="btnfilter btnsort">Sort</a>
-	<a href="filter" class="btnfilter btnfil">Filter</a>
+	<span>1.786 ads</span>	
+	<a href="{{ [url, 'sort'] | join('/') | link }}" class="btnfilter btnsort">Sort</a>
+    <a href="{{ [url, 'filter'] | join('/') | link }}" class="btnfilter btnfil">Filter</a>
 </div>

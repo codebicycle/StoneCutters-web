@@ -1,5 +1,9 @@
-<ul>
+<form id="form-sort">
+   {% from macros import  FieldCheckFilter %}
     {% for sort in sorts %}
-        <li>{{ sort.name }}</li>
+		{{ FieldCheckFilter(sort.name, 'sort' ,'radio',sort.name) }}        	
     {% endfor %}
-</ul>
+<fieldset class="center no-border">
+	<button id="btn-sort" disabled="disabled" type="submit" class="disabled btns orange">SORT</button>
+</fieldset>
+</form>

@@ -107,6 +107,21 @@ module.exports = (function() {
         return callback(null, 'pages/error', res || {});
     }
 
+    function serializeFormJSON(datos) {
+       var o = {};       
+       $.each(datos, function() {
+           if (o[this.name]) {
+               if (!o[this.name].push) {
+                   o[this.name] = [o[this.name]];
+               }
+               o[this.name].push(this.value || '');
+           } else {
+               o[this.name] = this.value || '';
+           }
+       });
+       return o;
+    }
+
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
@@ -115,6 +130,7 @@ module.exports = (function() {
         removeParams: utils.removeParams,
         redirect: redirect,
         error: error,
+        serializeFormJSON: serializeFormJSON,
         'static': statics
     };
 })();
