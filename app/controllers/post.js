@@ -23,9 +23,11 @@ function categoriesOrFlow(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
+        var platform = this.app.session.get('platform');
+        var isDesktop = platform === 'desktop';
 
         var prepare = function(done) {
-            if (!isPostingFlow && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
+            if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/location?target=posting', null, {
                     status: 302
@@ -96,9 +98,23 @@ function categoriesOrFlow(params, callback) {
             if (isPostingFlow) {
                 postingFlowController(res1.categories, res2.postingSession, res3.topCities, res4.states);
             }
+            else if (isDesktop) {
+                postingController(res1.categories, res2.postingSession, res3.topCities, res4.states);
+            }
             else {
                 postingCategoriesController(res1.categories);
             }
+        }.bind(this);
+
+        var postingController = function(categories, postingSession, topCities, states) {
+            //analytics.setPage('post#flow');
+            callback(null, 'post/index', {
+                categories: categories,
+                postingSession: postingSession.get('postingSession'),
+                topCities: topCities,
+                states: states,
+                //analytics: analytics.generateURL.call(this)
+            });
         }.bind(this);
 
         var postingFlowController = function(categories, postingSession, topCities, states) {
@@ -127,7 +143,7 @@ function categoriesOrFlow(params, callback) {
         var promise = asynquence().or(error)
             .then(prepare);
 
-        if (isPostingFlow) {
+        if (isPostingFlow || isDesktop) {
             promise.gate(fetchCategories, fetchPostingSession, fetchCities, fetchStates);
         }
         else {
