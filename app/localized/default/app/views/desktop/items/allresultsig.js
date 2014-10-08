@@ -5,13 +5,12 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    id: 'categories-show-view',
-    className: 'categories-show-view',
+    id: 'items-allresultsig-view',
+    className: 'items-allresultsig-view',
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var galeryLink = helpers.common.slugToUrl(data.currentCategory);
-        data.tabNav = {galeryLink: galeryLink + '-ig', listLink: galeryLink, listAct: 'active'};
+        data.tabNav = {galeryLink: 'nf/all-results-ig', listLink: 'nf/all-results', galeryAct: 'active'};
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
@@ -23,4 +22,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'categories/show';
+module.exports.id = 'items/allresultsig';
