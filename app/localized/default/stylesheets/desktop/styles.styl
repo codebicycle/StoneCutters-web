@@ -52,7 +52,6 @@ main {
 .search-form {
 	fieldset {
 		border: none;
-		clear-fix();
 		margin: 0;
 		padding: 0;
 	}
@@ -72,8 +71,12 @@ main {
 	.text-field {
 		border-color: $green;
 		border-radius(3px 0 0 3px);
-		height: 18px;
-		width: 253px;
+		height: 38px;
+		&:focus {
+	    	border-color: $green;
+	    	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
+	    	color: #000;
+	    }
 	}
 }
 
@@ -82,10 +85,16 @@ main {
 	border-radius();
 	border-style: solid;
 	border-width: 1px;
-	color: #000;
-	font-size: 1.15em;
-	padding: 10px;
-    height: 12px;
+	color: #ccc;
+	font-size: 1.076rem;
+	line-height: 1;
+	padding: 0 10px;
+    height: 40px;
+    &:focus {
+    	border-color: #999;
+    	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
+    	color: #000;
+    }
 }
 
 .wrapper-main {

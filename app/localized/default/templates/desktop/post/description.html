@@ -1,1 +1,13 @@
-<h1>description</h1>
+<fieldset class="wrapper">
+	<label for="title" class="posting-label">* Título</label>
+	<input id="title" class="text-field" type="text" placeholder="Titulo" required />
+</fieldset>
+{% view 'post/images' %}
+<fieldset class="wrapper">
+	<label for="description" class="posting-label">* Descripción de tu anuncio</label>
+	<textarea id="description" class="text-filed" required></textarea>
+</fieldset>
+<fieldset class="wrapper">
+	<label for="price" class="posting-label">* Precio</label>
+	<input id="price" class="text-field" type="text" placeholder="Precio" required />
+</fieldset>
