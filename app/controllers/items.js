@@ -51,6 +51,7 @@ function show(params, callback) {
                 }
             }
             params.id = itemId;
+            params.seo = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             params.seo = true;
             delete params.itemId;
@@ -750,6 +751,7 @@ function search(params, callback) {
 
 function allresults(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
@@ -765,6 +767,7 @@ function allresults(params, callback) {
             }
             delete params.search;
 
+            params.seo = true;
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
 
@@ -852,7 +855,7 @@ function allresults(params, callback) {
 
 function allresultsig(params, callback) {
     helpers.controllers.control.call(this, params, controller);
-    params['f.hasimage'] = true;
+
     function controller() {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
@@ -868,6 +871,8 @@ function allresultsig(params, callback) {
             }
             delete params.search;
 
+            params.seo = true;
+            params['f.hasimage'] = true;
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
 
