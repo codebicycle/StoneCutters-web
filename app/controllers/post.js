@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
-var analytics = require('../modules/analytics');
+var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -22,8 +22,8 @@ function categoriesOrFlow(params, callback) {
     function controller(form) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
-        var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', location.url], false);
-        
+        var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
+
         var prepare = function(done) {
             if (!isPostingFlow && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
@@ -102,21 +102,21 @@ function categoriesOrFlow(params, callback) {
         }.bind(this);
 
         var postingFlowController = function(categories, postingSession, topCities, states) {
-            analytics.setPage('post#flow');
+            tracking.setPage('post#flow');
             callback(null, 'post/flow/index', {
                 categories: categories,
                 postingSession: postingSession.get('postingSession'),
                 topCities: topCities,
                 states: states,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
         var postingCategoriesController = function(categories) {
-            analytics.setPage('post#categories');
+            tracking.setPage('post#categories');
             callback(null, 'post/categories', {
                 categories: categories.toJSON(),
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -143,7 +143,7 @@ function subcategories(params, callback) {
     function controller() {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
-        var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', location.url], false);
+        var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
 
         var prepare = function(done) {
             var redirect;
@@ -189,7 +189,7 @@ function subcategories(params, callback) {
             callback(null, _.extend(params, {
                 category: category.toJSON(),
                 subcategories: category.get('children').toJSON(),
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             }));
         }.bind(this);
 
@@ -212,7 +212,7 @@ function form(params, callback) {
     function controller(form) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
-        var isPostingFlow = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', location.url], false);
+        var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
         var language;
         var languages;
         var languageId;
@@ -306,8 +306,8 @@ function form(params, callback) {
             var category = _categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
-            analytics.addParam('category', category.toJSON());
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
             seo.update();
@@ -321,7 +321,7 @@ function form(params, callback) {
                 languageCode: languageCode,
                 siteLocation: siteLocation,
                 form: form,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -440,9 +440,9 @@ function success(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.addParam('item', item);
-            analytics.addParam('category', category.toJSON());
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('item', item);
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
             seo.update();
@@ -453,7 +453,7 @@ function success(params, callback) {
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 relatedItems: _relatedItems,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -621,9 +621,9 @@ function edit(params, callback) {
             else {
                 _form = form;
             }
-            analytics.addParam('item', item);
-            analytics.addParam('category', category.toJSON());
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('item', item);
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
             callback(null, {
                 item: item,
                 user: user,
@@ -638,7 +638,7 @@ function edit(params, callback) {
                 errMsg: params.errMsg,
                 sk: securityKey,
                 form: _form,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
