@@ -193,7 +193,7 @@ pursuant to copyrights laws, other laws, and international conventions. Any repr
 		{% from macros import Breadcrumb %}
 		{% set link = (breadcrumb | link) %}
 		{{ Breadcrumb(dictionary, link, ('/' | link)) }}
-        {% set templateName = template + '/partials/analytics.html' %}
+        {% set templateName = template + '/partials/tracking.html' %}
         {% include templateName %}
 	</td>
 </tr>
