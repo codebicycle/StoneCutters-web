@@ -11,10 +11,10 @@
 	{% if metadata.filters.state or metadata.filters.city %}
 		<ul class="locations-list">
 			{% for state in metadata.filters.state.value %}
-				<li><a href="{{ '/nf/all-results' | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
+				<li><a href="{{ nav.link | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
 			{% endfor %}
 			{% for city in metadata.filters.city.value %}
-				<li><a href="{{ '/nf/all-results' | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
+				<li><a href="{{ nav.link | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
 			{% endfor %}
 		</ul>
 	{% endif %}

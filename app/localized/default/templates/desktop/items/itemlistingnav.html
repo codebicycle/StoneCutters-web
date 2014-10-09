@@ -1,10 +1,10 @@
 <nav class="listing-tabs">
     <ul class="tabs">
         <li>
-            <a href="{{ tabNav.galeryLink | link }}" class="icons {{ tabNav.galeryAct }} icon-galery">Fotos Mayores</a>
+            <a href="{{ (nav.link + '-ig') | link }}" class="icons {{ nav.galeryAct }} icon-galery">Fotos Mayores</a>
         </li>
         <li>
-            <a href="{{ tabNav.listLink | link }}" class="icons {{ tabNav.listAct }} icon-list">Lista</a>
+            <a href="{{ nav.link | link }}" class="icons {{ nav.listAct }} icon-list">Lista</a>
         </li>
     </ul>
 </nav>

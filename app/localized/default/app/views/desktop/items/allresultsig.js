@@ -10,7 +10,7 @@ module.exports = Base.extend({
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        data.tabNav = {galeryLink: 'nf/all-results-ig', listLink: 'nf/all-results', galeryAct: 'active'};
+        data.nav = { link: 'nf/all-results', galeryAct: 'active' };
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
