@@ -3,7 +3,7 @@
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
-var analytics = require('../modules/analytics');
+var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -22,7 +22,7 @@ function terms(params, callback) {
 
     function controller() {
         callback(null, {
-            analytics: analytics.generateURL.call(this)
+            tracking: tracking.generateURL.call(this)
         });
     }
 }
@@ -147,7 +147,7 @@ function interstitial(params, callback) {
             maxAge: this.app.session.get('showInterstitial')
         });
         callback(null, {
-            analytics: analytics.generateURL.call(this),
+            tracking: tracking.generateURL.call(this),
             ref: params.ref
         });
     }
@@ -175,7 +175,7 @@ function error(params, callback) {
         seo.update();
         callback(null, {
             error: err,
-            analytics: analytics.generateURL.call(this)
+            tracking: tracking.generateURL.call(this)
         });
     }
 }
