@@ -208,6 +208,8 @@ function show(params, callback) {
             var category;
             var parentId;
             var url;
+            var title;
+            var description;
 
             if (!subcategory) {
                 _item.set('purged', true);
@@ -225,8 +227,13 @@ function show(params, callback) {
             tracking.addParam('category', category);
             tracking.addParam('subcategory', subcategory);
             if (!item.purged) {
-                seo.addMetatag('title', item.metadata.itemPage.title);
-                seo.addMetatag('description', item.metadata.itemPage.description);
+                title = item.title;
+                if (item.metadata && item.metadata.itemPage) {
+                    title = item.metadata.itemPage.title;
+                    description = item.metadata.itemPage.description;
+                }
+                seo.addMetatag('title', title);
+                seo.addMetatag('description', description);
             }
             else {
                 seo.addMetatag('robots', 'noindex, nofollow');
