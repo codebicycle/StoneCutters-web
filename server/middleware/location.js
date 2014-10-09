@@ -19,7 +19,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             var location = req.param('location');
-            var previousLocation = req.rendrApp.session.get('siteLocation');
+            var previousLocation = req.rendrApp.session.get('previousLocation');
             var redirect = false;
 
             if (!_.contains(excludedUrls.data, req.path)) {
@@ -33,9 +33,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
             }
 
-            var siteLocation = req.param('location', previousLocation);
-            var host = req.rendrApp.session.get('host');
-            var index = host.indexOf(':');
+            var siteLocation = req.param('location', previousLocation || req.rendrApp.session.get('siteLocation'));
+            var host = req.rendrApp.session.get('shortHost');
             var platform;
 
             function fetch(done) {
@@ -109,19 +108,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.status(500).sendfile(errorPath);
             }
 
-            if (!siteLocation) {
-                siteLocation = (index === -1) ? host : host.substring(0, index);
-                platform = siteLocation.split('.').shift().length;
-                if (siteLocation.indexOf(testing.host || '.m-testing.olx.com') === platform) {
-                    siteLocation = platform + testing.mask || '.m.olx.com';
-                }
-                if (siteLocation.indexOf(staging.host || '.m-staging.olx.com') === platform) {
-                    siteLocation = platform + staging.mask || '.m.olx.com';
-                }
-                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2), 'www');
-                previousLocation = siteLocation;
-            }
-            else if (_.isArray(siteLocation)) {
+            if (_.isArray(siteLocation)) {
                 siteLocation = siteLocation[0];
             }
             if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {

@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var configAnalytics = require('./config');
 var google = require('./google');
 var ati = require('./ati');
 var keyade = require('./keyade');

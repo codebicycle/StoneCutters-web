@@ -1,14 +1,14 @@
 'use strict';
 
 var _ = require('underscore');
-var configAnalytics = require('./config');
+var configTracking = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 var env = config.get(['environment', 'type'], 'production');
 var defaultConfig = utils.get(configAnalytics, ['ati', 'paths', 'default']);
 
-module.exports = function analyticsHelper() {
+module.exports = function trackingHelper() {
     var actionTypes = {
         edited: function (params, options) {
             if (options.itemEdited) {
@@ -128,11 +128,11 @@ module.exports = function analyticsHelper() {
     }
 
     function check(page) {
-        return !!utils.get(configAnalytics, ['ati', 'params', page]);
+        return !!utils.get(configTracking, ['ati', 'params', page]);
     }
 
     function generate(params, page, options) {
-        var ati = utils.get(configAnalytics, ['ati', 'params', page], {});
+        var ati = utils.get(configTracking, ['ati', 'params', page], {});
         var custom = _.clone(ati.names);
 
         prepareDefaultParams.call(this, custom);
@@ -150,6 +150,12 @@ module.exports = function analyticsHelper() {
     function generateUrl(params) {
         var config = getConfig.call(this);
         var url;
+
+        if (env !== 'production') {
+            countryId = 0;
+        }
+
+        config = utils.get(configTracking, ['ati', 'paths', countryId]);
 
         if (!config) {
             return;

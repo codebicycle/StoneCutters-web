@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
-var analytics = require('../modules/analytics');
+var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -44,7 +44,7 @@ function list(params, callback) {
             callback(null, {
                 categories: response.categories.toJSON(),
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -220,10 +220,10 @@ function handleItems(params, promise) {
             postingLink: postingLink
         });
 
-        analytics.setPage('listing');
-        analytics.addParam('category', category.toJSON());
+        tracking.setPage('listing');
+        tracking.addParam('category', category.toJSON());
         if (subcategory) {
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
         }
         if (metadata.seo) {
             currentPage = metadata.page;
@@ -245,7 +245,7 @@ function handleItems(params, promise) {
             metadata: metadata,
             items: _items.toJSON(),
             infiniteScroll: infiniteScroll,
-            analytics: analytics.generateURL.call(this)
+            tracking: tracking.generateURL.call(this)
         });
     }.bind(this);
 
@@ -279,7 +279,7 @@ function handleShow(params, promise) {
             }
         });
 
-        analytics.addParam('category', _category.toJSON());
+        tracking.addParam('category', _category.toJSON());
         seo.addMetatag.call(this, 'title', _category.get('trName'));
         seo.addMetatag.call(this, 'description', _category.get('trName'));
         seo.update();
@@ -287,7 +287,7 @@ function handleShow(params, promise) {
         done({
             type: 'categories',
             category: _category.toJSON(),
-            analytics: analytics.generateURL.call(this)
+            tracking: tracking.generateURL.call(this)
         });
     }.bind(this);
 

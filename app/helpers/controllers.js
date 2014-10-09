@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var common = require('./common');
 var seo = require('../modules/seo');
 var esi = require('../modules/esi');
-var analytics = require('../modules/analytics');
+var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var isServer = typeof window === 'undefined';
 var cacheDefault = config.get(['cache', 'headers', 'default']);
@@ -25,7 +25,7 @@ function prepare(done) {
 }
 
 function processAnalytics(done) {
-    analytics.reset();
+    tracking.reset();
     done();
 }
 
