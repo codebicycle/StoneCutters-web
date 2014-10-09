@@ -1,15 +1,15 @@
 'use strict';
 
 var _ = require('underscore');
-var configAnalytics = require('./config');
+var configTracking = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var environment = config.get(['environment', 'type'], 'development');
-var defaultTrackerId = utils.get(configAnalytics, ['google', 'trackers', 'default']);
+var defaultTracker = utils.get(configTracking, ['google', 'trackers', 'default']);
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
-var analyticsParams = {
+var pageNameParsers = {
     category: {
         name: 'category-name',
         nameParentNameSubId: '[category-name]/[subcategory-id]',
@@ -78,24 +78,29 @@ var analyticsParams = {
 function generatePage(page, options) {
     var token;
 
-    _.each(analyticsParams, function(analyticParam) {
-        token = '[' + analyticParam.name + ']';
+    _.each(pageNameParsers, function(parser) {
+        token = '[' + parser.name + ']';
         if (~page.indexOf(token)) {
-            page = analyticParam.parse(page, options);
+            page = parser.parse(page, options);
         }
     });
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
-function getId(siteLocation) {
+function getId(siteLocation, platform) {
     var tracker = environment;
+
+    if (platform !== 'desktop') {
+        platform = 'default';
+    }
 
     if (tracker === 'production') {
         tracker = siteLocation.split('.');
         tracker[0] = 'www';
         tracker = tracker.join('.');
     }
-    return utils.get(configAnalytics, ['google', 'trackers', tracker], defaultTrackerId);
+
+    return utils.get(configTracking, ['google', 'trackers', tracker, platform], defaultTracker[platform]);
 }
 
 function saveParams(utmcc) {
@@ -198,11 +203,11 @@ function getUtmcc(app) {
 }
 
 function check(page) {
-    return !!utils.get(configAnalytics, ['google', 'pages', page]);
+    return !!utils.get(configTracking, ['google', 'pages', page]);
 }
 
 function generate(params, page, options) {
-    var googlePage = utils.get(configAnalytics, ['google', 'pages', page], '');
+    var googlePage = utils.get(configTracking, ['google', 'pages', page], '');
 
     params.page = generatePage.call(this, googlePage, options);
     this.app.session.persist({
@@ -215,9 +220,20 @@ function generate(params, page, options) {
     }
 }
 
+function getConfig() {
+    var platform = this.app.session.get('platform');
+    var siteLocation = this.app.session.get('siteLocation');
+
+    return {
+        host: this.app.session.get('host'),
+        id: getId(siteLocation, platform)
+    };
+}
+
 module.exports = {
     check: check,
     getId: getId,
     getUtmcc: getUtmcc,
-    generate: generate
+    generate: generate,
+    getConfig: getConfig
 };

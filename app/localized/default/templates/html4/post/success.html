@@ -16,7 +16,7 @@
         <a href="{{ '/' | link }}" class="back">{{ dictionary["misc.BackToStart_Mob"] }}</a>
     </div>
 
-    {% set templateName = template + '/partials/analytics.html' %}
+    {% set templateName = template + '/partials/tracking.html' %}
     {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

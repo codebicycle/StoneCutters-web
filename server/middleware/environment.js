@@ -39,11 +39,10 @@ module.exports = function(dataAdapter, excludedUrls) {
         return function environment(req, res, next) {
             var path = req._parsedUrl.pathname;
             var protocol = req.protocol;
-            var host = req.headers.host;
             var url = req.originalUrl;
             var clientId = req.rendrApp.session.get('clientId');
             var referer = req.headers.referer;
-            var platform = req.rendrApp.session.get('forcedPlatform') || req.subdomains.pop() || utils.defaults.platform;
+            var platform = req.rendrApp.session.get('forcedPlatform') || req.rendrApp.session.get('platform') || utils.defaults.platform;
 
             if (typeof clientId === 'undefined') {
                 req.rendrApp.session.persist({
@@ -53,7 +52,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             req.rendrApp.session.update({
                 path: path,
                 protocol: protocol,
-                host: host,
                 url: url,
                 referer: referer,
                 platform: platform,

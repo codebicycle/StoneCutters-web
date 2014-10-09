@@ -4,7 +4,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
-var analytics = require('../modules/analytics');
+var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -31,7 +31,7 @@ function list(params, callback) {
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
             if (params.target && params.target === 'posting') {
-                analytics.setPage('post#location');
+                tracking.setPage('post#location');
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
                 seo.update();
@@ -52,7 +52,7 @@ function list(params, callback) {
                 search: params.search,
                 posting: params.posting,
                 target: params.target,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 

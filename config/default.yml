@@ -99,11 +99,11 @@ sixpack:
 
 publicEnvironments:
   testing:
-    host: '.m-testing.olx.com'
-    mask: '.m.olx.com.py'
+    host: 'm-testing'
+    mask: 'py'
   staging:
-    host: '.m-staging.olx.com'
-    mask: '.m.olx.com.py'
+    host: 'm-staging'
+    mask: 'py'
 
 hosts:
   - olx
@@ -116,4 +116,4 @@ hosts:
   - jaovat
 
 redirect:
-  onDesktop: false
+  onDesktop: true
