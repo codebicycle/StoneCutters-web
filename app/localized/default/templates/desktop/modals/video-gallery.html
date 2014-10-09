@@ -1,0 +1,45 @@
+{% extends (template + '/modals/modal.html') %}
+
+{% block title %}
+    video content title
+{% endblock %}
+
+{% block content %}
+    <div id="video-gallery">
+        <div class="video-content">
+            <iframe width="635px" height="390px" frameborder="0" allowfullscreen="" id="video-container-iframe" src="http://www.youtube.com/embed/FmYRXopMdow"></iframe>
+        </div>
+        <div class="video-thumbnails">
+            <ul class="content">
+                <li>
+                    <a href="#29QoFeoJldU">
+                        <span class="video-title">OLX Uruguay - Celular - Vender es fácil</span>
+                        <span class="icon-play"></span>
+                        <img alt="video" src="http://img.youtube.com/vi/29QoFeoJldU/default.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#Z3wwfLdLgj8">
+                        <span class="video-title">OLX Uruguay - Bicicleta - Vender es fácil</span>
+                        <span class="icon-play"></span>
+                        <img alt="video" src="http://img.youtube.com/vi/Z3wwfLdLgj8/default.jpg" />
+                    </a>
+                </li>
+            </ul>
+            <div class="social-share">
+                <p>Compartir este video:</p>
+                <ul>
+                    <li>
+                        <a class="icons icon-galery"></a>
+                    </li>
+                    <li>
+                        <a class="icons icon-galery"></a>
+                    </li>
+                    <li>
+                        <a class="icons icon-galery"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
