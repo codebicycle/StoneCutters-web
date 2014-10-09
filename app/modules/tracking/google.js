@@ -5,7 +5,7 @@ var configTracking = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var environment = config.get(['environment', 'type'], 'development');
-var defaultTrackerId = utils.get(configTracking, ['google', 'trackers', 'default']);
+var defaultTracker = utils.get(configAnalytics, ['google', 'trackers', 'default']);
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
@@ -87,15 +87,20 @@ function generatePage(page, options) {
     return (page.indexOf('/') ? '/' : '') + page + '/';
 }
 
-function getId(siteLocation) {
+function getId(siteLocation, platform) {
     var tracker = environment;
+
+    if (platform !== 'desktop') {
+        platform = 'default';
+    }
 
     if (tracker === 'production') {
         tracker = siteLocation.split('.');
         tracker[0] = 'www';
         tracker = tracker.join('.');
     }
-    return utils.get(configTracking, ['google', 'trackers', tracker], defaultTrackerId);
+
+    return utils.get(configAnalytics, ['google', 'trackers', tracker, platform], defaultTracker[platform]);
 }
 
 function saveParams(utmcc) {
@@ -215,9 +220,20 @@ function generate(params, page, options) {
     }
 }
 
+function getConfig() {
+    var platform = this.app.session.get('platform');
+    var siteLocation = this.app.session.get('siteLocation');
+
+    return {
+        host: this.app.session.get('host'),
+        id: getId(siteLocation, platform)
+    };
+}
+
 module.exports = {
     check: check,
     getId: getId,
     getUtmcc: getUtmcc,
-    generate: generate
+    generate: generate,
+    getConfig: getConfig
 };
