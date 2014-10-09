@@ -66,7 +66,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (hasPort) {
                 port = fullHost.split(':').pop();
             }
-            console.log(host, platform);
+
             req.rendrApp.session.update({
                 shortHost: host,
                 host: fullHost,
