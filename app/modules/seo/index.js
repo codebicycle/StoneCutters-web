@@ -31,7 +31,7 @@ var specials = {
 
         if (_.isString(content)) {
             head.canonical = content;
-        } 
+        }
         else if (platform === 'wap' && utils.params(url, 'sid')) {
             protocol = this.app.session.get('protocol');
             host = this.app.session.get('host');
