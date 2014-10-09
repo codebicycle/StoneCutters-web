@@ -1,0 +1,63 @@
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+
+#post-banner {
+    clear: both;
+    float: left;
+    width: 980px;
+
+    .post-banner-title {
+        display: block;
+        font-size: 2rem;
+        font-weight: bold;
+        height: 70px;
+        text-align: center;
+
+        &:before, &:after {
+            background: url(imageUrl/images/desktop/doubleArrows.jpg);
+            content: "";
+            height: 31px;
+            position: absolute;
+            width: 31px;
+        }
+        &:after {
+            background-position: -31px 0;
+            margin: 23px 0 0 22px;
+        }
+        &:before {
+            margin: 23px 0 0 -50px;
+        }
+
+    }
+
+    ul {
+        display: block;
+        text-align: center;
+        ul-reset();
+
+        li {
+            display: inline-block;
+            margin-right: 5px;
+            a {
+                font-size: 1rem;
+                font-weight: bold;
+                &:hover {
+                    text-decoration: none;
+                }
+                span.icons {
+                    box(#008fd3, #fff, 50%, 0, solid, 4px);
+                    color: #fff;
+                    display: block;
+                    font-size: 4.615rem;
+                    height: 80px;
+                    width: 80px;
+
+                    &:hover {
+                        border-color: #abd2e5;
+                    }
+                }
+            }
+        }
+    }
+
+}

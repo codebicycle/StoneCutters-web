@@ -6,6 +6,7 @@ var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 var env = config.get(['environment', 'type'], 'production');
+var defaultConfig = utils.get(configTracking, ['ati', 'paths', 'default']);
 
 module.exports = function trackingHelper() {
     var actionTypes = {
@@ -147,16 +148,9 @@ module.exports = function trackingHelper() {
     }
 
     function generateUrl(params) {
-        var location = this.app.session.get('location');
-        var countryId = location.id;
-        var config;
+        var config = getConfig.call(this);
         var url;
 
-        if (env !== 'production') {
-            countryId = 0;
-        }
-
-        config = utils.get(configTracking, ['ati', 'paths', countryId]);
         if (!config) {
             return;
         }
@@ -171,10 +165,31 @@ module.exports = function trackingHelper() {
         });
         return url;
     }
+    
+    function getConfig() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var country = location.url;
+        var config;
+
+        if (env !== 'production') {
+            country = env;
+        }
+        if (platform !== 'desktop') {
+            platform = 'default';
+        }
+
+        config = utils.get(configTracking, ['ati', 'paths', country, platform], defaultConfig[platform]);
+        return _.extend({}, config, {
+            host: location.url.replace('www', ''),
+            protocol: 'http'
+        });
+    }
 
     return {
         check: check,
         generate: generate,
-        generateUrl: generateUrl
+        generateUrl: generateUrl,
+        getConfig: getConfig
     };
 }();

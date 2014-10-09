@@ -1,0 +1,24 @@
+.header-usernav-view {
+	padding: 10px 0;
+	clear-fix();
+
+	ul {
+		float: right;
+		ul-reset();
+		li {
+			border-left: 1px solid #ccc;
+			display: inline-block;
+			vertical-align: middle;
+
+			&:first-child {
+				border-left: none;
+			}
+			&:last-child a {
+				padding-right: 0;
+			}
+			a {
+				padding: 0 5px;
+			}
+		}
+	}
+}

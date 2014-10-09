@@ -1,0 +1,19 @@
+<div class="title-bar">
+	<h1>Encuentra anuncios en <strong>Bolivia</strong></h1>
+	<a data-modal="modal" href="#">Cambia tu ubicación ></a>
+</div>
+<ul class="icons">
+	{% for category in categories %}
+		<li class="category">
+			<a href="{{ category | slugToUrl | link }}">
+				<span class="icon cat-{{ category.id }}"></span>
+				<strong>{{ category.trName }}</strong>
+			</a>
+			<ul>
+			{% for subcategory in category.children.toJSON() %}
+				<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName}}</a></li>
+			{% endfor %}
+			</ul>
+		</li>
+	{% endfor %}
+</ul>

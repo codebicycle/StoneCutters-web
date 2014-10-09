@@ -1,0 +1,46 @@
+<section id="contact-form">
+    <div class="user-info">
+        <p class="icons icon-user user-name">User Name</p>
+        <span class="user-status">User Status</span>
+        <p class="icons icon-phone user-phone">User Phone</p>
+        <span>Ao ligar, diga que viu o anúncio na OLX</span>
+    </div>
+    
+    <form method="post" id="contact-seller" action="">
+        <p class="error">
+            <label for="comment">
+                <span class="icons icon-attention">
+                    <textarea id="comment" name="comment" cols="30" rows="6" placeholder="Mensagem"></textarea>
+                </span>
+                <span class="error">Ops! Escreva uma mensagem</span>
+            </label>
+        </p>
+        <p class="error">
+            <label for="name">
+            <span class="icons icon-attention">
+                <input type="text" name="name" id="name" value="" maxlength="200" placeholder="Nome">
+            </span>
+            <span class="error">Informe o seu nome</span>
+            </label>
+        </p>
+        <p class="error">
+            <label for="email">
+            <span class="icons icon-attention">
+                <input type="text" name="email" id="email" value="" maxlength="200" placeholder="E-mail">
+            </span>
+            <span class="error">Insira o seu endereço de e-mail</span>
+            </label>
+        </p>
+        <p>
+            <label for="phone">
+                <input type="text" name="phone" id="phone" value="" maxlength="15" placeholder="Telefone ( Opcional )">
+            </label>
+        </p>
+        <p>
+            <img class="spinner" src="{{ '/images/desktop/spinner-bgYellow.gif' | static }}" alt="">
+            <label for="submit">
+                <input type="submit" value="Enviar e-mail" id="submit" class="olx-ui-button orange">
+            </label>
+        </p>
+    </form>
+</section>
