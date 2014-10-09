@@ -151,12 +151,6 @@ module.exports = function trackingHelper() {
         var config = getConfig.call(this);
         var url;
 
-        if (env !== 'production') {
-            countryId = 0;
-        }
-
-        config = utils.get(configTracking, ['ati', 'paths', countryId]);
-
         if (!config) {
             return;
         }
