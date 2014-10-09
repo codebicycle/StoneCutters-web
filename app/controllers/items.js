@@ -880,7 +880,7 @@ function allresultsig(params, callback) {
             delete params.filters;
             delete params.urlFilters;
 
-            analytics.addParam('page_nb', 0);
+            tracking.addParam('page_nb', 0);
 
             done();
         }.bind(this);
@@ -932,7 +932,7 @@ function allresultsig(params, callback) {
             }
             helpers.pagination.paginate(metadata, query, url);
             helpers.filters.prepare(metadata);
-            analytics.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
             seo.update();

@@ -1,15 +1,18 @@
-<div id="modal-overlay" class="modal-hide"></div>
-<div class="modal modal-hide">
-    <div class="modal-header">
-        <a href="#" class="icons icon-close modal-close" title="close"></a>
-        {% block title %}
-             Title
-        {% endblock %}
+<div class="modal" id="{% block id %}base-modal{% endblock %}" data-modal="{% block id %}base-modal{% endblock %}" >
+    <div class="modal-wrapper" >
+        <div class="modal-container">
+            <div class="modal-header">
+                <a href="#" class="icons icon-close modal-close" data-modal="{% block id %}base-modal{% endblock %}" title="close"></a>
+                {% block title %}
+
+                {% endblock %}
+            </div>
+            <div class="modal-content">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+            <div class="modal-footer"></div>
+        </div>
     </div>
-    <div class="modal-content">
-        {% block content %}
-             Content
-        {% endblock %}
-    </div>
-    <div class="modal-footer"></div>
 </div>

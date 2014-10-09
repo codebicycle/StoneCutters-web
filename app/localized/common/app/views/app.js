@@ -5,10 +5,10 @@ var URLParser = require('url');
 
 module.exports = Base.extend({
     className: 'app_view',
-    /*events: {
-        'click .modal-close': 'closeModal',
-        'click .open-modal': 'openModal'
-    },*/
+    events: {
+        'click .modal-close': 'toggleModal',
+        'click .open-modal': 'toggleModal'
+    },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
         window.initTracker();
@@ -38,72 +38,14 @@ module.exports = Base.extend({
             e.preventDefault();
             this.app.router.redirectTo(href);
         }
+    },
+    toggleModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('body').toggleClass('noscroll');
+        $('#' + event.currentTarget.dataset.modal).toggleClass('modal-visible');
     }
-    /*openModal: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        showModal(event.currentTarget.dataset.modal);
-    },
-    closeModal: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        hideModal(event.currentTarget.dataset.modal);
-    },
-    openVideo: function(event) {
-
-    }*/
 });
-
-/*function showModal(idToShow) {
-
-    var windowHeight = window.innerHeight,
-        modalTitle,
-        modal = $('.modal'),
-        modalHeader = modal.children('.modal-header'),
-        content = $('#' + idToShow).html(),
-        top = 0,
-        marginLeft,
-        modalWidth,
-        calculateModalHeight,
-        modalHeight = 'auto';
-
-
-    //modal.children('.modal-content').html(content);
-    calculateModalHeight = modal.height();
-
-    if(idToShow == 'video-gallery') {
-        modalTitle = '<span class="first-part">Vender es fácil </span><span class="second-part">Publica gratis en OLX</span>';
-        modalWidth = '960';
-        modal.addClass('video-modal');
-        calculateModalHeight = 498;
-    } else {
-        modalTitle = 'Selecciona tu ciudad o provincia en Bolivia';
-        modalWidth = '720';
-    }
-
-    marginLeft = -(modalWidth/2);
-    if(calculateModalHeight < windowHeight){
-        top = (windowHeight/2) -(calculateModalHeight/2);
-    }
-
-    //modalHeader.children("h3").html(modalTitle);
-
-    modal.css('top',top).
-        css('margin-left', marginLeft).
-        css('height',modalHeight).
-        css('width',modalWidth);
-
-    $('body').css('overflow','hidden');
-    $('#modal-overlay').removeClass('modal-hide');
-    $('.modal').removeClass('modal-hide');
-}
-
-function hideModal(classToHide) {
-    $('body').css('overflow','auto');
-    $('#modal-overlay').addClass('modal-hide');
-    $('.modal').addClass('modal-hide').removeClass('video-modal');
-}*/
 
 module.exports.id = 'app_view/index';

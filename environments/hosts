@@ -29,7 +29,9 @@
 {IP}  html5.m.olx.com.bd        # Bangladesh
 {IP}  desktop.m.olx.com.bd        # Bangladesh
 
-{IP}  m.olx.com.bo        # Bolivia
+{IP}  olx.com.bo            # Bolivia
+{IP}  www.olx.com.bo        # Bolivia
+{IP}  m.olx.com.bo          # Bolivia
 {IP}  wap.m.olx.com.bo        # Bolivia
 {IP}  html4.m.olx.com.bo        # Bolivia
 {IP}  html5.m.olx.com.bo        # Bolivia
