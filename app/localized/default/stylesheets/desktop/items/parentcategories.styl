@@ -9,10 +9,11 @@
             background: #fff;
             box-shadow(0 0 0 1px #38b inset);
             cursor: pointer;
-            a, span.count {
+            a, 
+            .count {
                 color: #000;
             }
-            span.icons:before {
+            .icons::before {
                 color: #666;
             }
         }
@@ -25,15 +26,14 @@
             font-size: .9231rem;
             text-decoration: none;
 
-
-            span.icons {
+            .icons {
                 float: left;
                 &:before {
                     color: #38b;
                     font-size: 2.5rem;
                 }
             }
-            span.count {
+            .count {
                 color: #888;
                 font-size: .8462rem;
                 font-weight: normal;

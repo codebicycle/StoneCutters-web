@@ -1,1 +1,22 @@
-<h1>description</h1>
+<fieldset class="wrapper">
+	<label for="title" class="posting-label">* Título</label>
+	<div class="wrapper-inputs">
+		<input id="title" class="text-field" type="text" placeholder="Titulo" required />
+		<small class="advice">0 caracteres. Un buen título precisa de por lo menos 60 caracteres.</small>
+	</div>
+</fieldset>
+{% view 'post/images' %}
+<fieldset class="wrapper">
+	<label for="description" class="posting-label">* Descripción de tu anuncio</label>
+	<textarea id="description" class="text-field" rows="12" required></textarea>
+</fieldset>
+<fieldset class="wrapper">
+	<label for="price" class="posting-label">* Precio</label>
+	<div class="wrapper-inputs">
+		<input id="price" class="text-field" type="text" placeholder="$" required />
+		<div class="wrapper-inner-inputs">
+			<input id="price-option" type="checkbox" />
+			<label for="price-option" class="price-checkbox-label">Negociable</label>
+		</div>
+	</div><!-- Maybe we should discuss this naming -->
+</fieldset>

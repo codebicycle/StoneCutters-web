@@ -5,9 +5,9 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    tagName: 'section',
+    tagName: 'fieldset',
     id: 'posting-images-view',
-    className: 'posting-images-view'
+    className: 'posting-images-view wrapper'
 });
 
 module.exports.id = 'post/images';
