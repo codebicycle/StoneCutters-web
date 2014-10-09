@@ -118,10 +118,10 @@ module.exports = {
         url: 'q/:search/p-:page'
     },
     'items#staticSearch#cat': {
-        url: 'q/:search/c-:catId'
+        url: 'q/:search/c-:categoryId'
     },
     'items#staticSearch#catPage': {
-        url: 'q/:search/c-:catId/p-:page'
+        url: 'q/:search/c-:categoryId/p-:page'
     },
     'redirections#nfallresults#page': {
         urls: {

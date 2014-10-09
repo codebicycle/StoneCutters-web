@@ -4,7 +4,8 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
+//var seo = require('../modules/seo');
+var Seo = require('../modules/seo/seo');
 var analytics = require('../modules/analytics');
 var config = require('../../shared/config');
 var Item = require('../models/item');
@@ -26,6 +27,7 @@ function show(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var itemId = params.itemId;
@@ -481,6 +483,7 @@ function reply(params, callback) {
     }, controller);
 
     function controller(form) {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
@@ -572,6 +575,7 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
@@ -652,6 +656,7 @@ function search(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
@@ -756,6 +761,7 @@ function allresults(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
@@ -960,6 +966,7 @@ function staticSearch(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');

@@ -8,7 +8,6 @@ var configSeo = require('./config');
 var defaultConfig = config.get(['markets', 'default', 'seo']);
 var URLParser = require('url');
 var seo;
-var seoContructor = 0;
 
 var emergingMarketsDomains = [
     'www.olx.com.bo',
@@ -24,7 +23,6 @@ function _getMetatagName(currentRoute) {
 
 function SeoModule(app) {
     this.app = app;
-    console.log("Seo Constructor:" + (seoContructor++));
     this.initialize();
 }
 
@@ -219,9 +217,15 @@ _.extend(SeoModule.prototype, {
         this.seoContent = content;
     },
     get: function (key) {
-        if (!!this.seoContent) {
+        if (!!this.seoContent && this.config[key]) {
             return this.seoContent[key];
         }
+    },
+    isEnabled: function () {
+        return this.config.enabled;
+    },
+    debug: function () {
+        this.getHead();
     }
 });
 

@@ -110,4 +110,9 @@
 	{% view 'partials/postbanner' %}
 	
 	<div class="clear"></div>
+    <div class="popuparSearches">
+        {% for popular in seo.get('popularSearches') %}
+            <a href="{{ popular.url | link }}" >{{ popular.anchor }}</a>
+        {% endfor %}
+    </div>
 </section>
