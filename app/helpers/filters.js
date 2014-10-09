@@ -16,7 +16,7 @@ module.exports = (function() {
     }
 
 
-    function generarFilterOrder(fields, data, action) {
+    function generateFilterOrder(fields, data, action) {
         var aux = data.split('/');
         var urllocal = '';
         var url = '';
@@ -106,6 +106,6 @@ module.exports = (function() {
 
     return {
         prepare: prepare,
-        generarFilterOrder: generarFilterOrder
+        generateFilterOrder: generateFilterOrder
     };
 })();

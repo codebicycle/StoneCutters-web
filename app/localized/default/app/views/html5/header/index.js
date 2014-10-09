@@ -14,7 +14,7 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             postingFlowEnabled: postingFlowEnabled,
             postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow',
-            headerTitle: currentRoute=='filter'?'Filter':'Sort'
+            headerTitle: (currentRoute == 'filter')?data.dictionary["mobilepromo.Filters"]:data.dictionary["unavailableitemrelateditems.SortBy"]
         });
     },    
     postRender: function() {

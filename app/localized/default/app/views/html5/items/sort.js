@@ -31,7 +31,7 @@ module.exports = Base.extend({
         event.preventDefault();
         var toOrder = $("#form-sort input[type='radio']:checked").val();
         var datos = $('#form-sort').serializeArray();            
-        var newurl = helpers.filters.generarFilterOrder(datos,this.getCurrentUrl(),'sort');            
+        var newurl = helpers.filters.generateFilterOrder(datos,this.getCurrentUrl(),'sort');            
         helpers.common.redirect.call(this.app.router, '' + newurl, null, {
             status: 200
         });

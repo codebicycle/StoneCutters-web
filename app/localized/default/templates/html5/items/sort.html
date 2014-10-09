@@ -1,9 +1,13 @@
 <form id="form-sort">
    {% from macros import  FieldCheckFilter %}
-    {% for sort in sorts %}
-		{{ FieldCheckFilter(sort.name, 'sort' ,'radio',sort.name) }}        	
-    {% endfor %}
+    {#% for sort in sorts %#}
+		{{ FieldCheckFilter(dictionary["itemslisting.NewlyListed"],'sort' ,'radio',sorts[2].name) }}        	
+		{{ FieldCheckFilter(dictionary["itemslisting.HighestFirst"], 'sort' ,'radio',sorts[0].name) }}        	
+		{{ FieldCheckFilter(dictionary["itemslisting.LowestFirst"], 'sort' ,'radio',sorts[1].name) }}        	
+    {#% endfor  itemslisting.NewlyListed itemslisting.HighestFirst itemslisting.LowestFirst  %#}
 <fieldset class="center no-border">
-	<button id="btn-sort" disabled="disabled" type="submit" class="disabled btns orange">SORT</button>
+	<button id="btn-sort" disabled="disabled" type="submit" class="disabled btns orange">
+		{{ dictionary["unavailableitemrelateditems.SortBy"] }}
+	</button>
 </fieldset>
 </form>
