@@ -1,12 +1,12 @@
 'use strict';
 
 var _ = require('underscore');
-var configAnalytics = require('./config');
+var configTracking = require('./config');
 var utils = require('../../../shared/utils');
 
 module.exports = function keyadeHelper() {
     var baseUrl = 'http://k.keyade.com/kaev/1/?kaPcId=98678';
-    var keyades = utils.get(configAnalytics, ['keyade', 'countries'], []);
+    var keyades = utils.get(configTracking, ['keyade', 'countries'], []);
     var generators = {
         'items#success': function generate() {
             var replyId = this.app.session.get('replyId');

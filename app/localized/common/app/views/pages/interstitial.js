@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../bases/view');
 var helpers = require('../../../../../helpers');
-var analytics = require('../../../../../modules/analytics');
+var tracking = require('../../../../../modules/tracking');
 var config = require('../../../../../../shared/config');
 var maxAge = config.get(['interstitial', 'time'], 60000);
 
@@ -49,15 +49,15 @@ module.exports = Base.extend({
             };
         });
 
-        analytics.reset();
-        analytics.setPage('pages#interstitial');
+        tracking.reset();
+        tracking.setPage('pages#interstitial');
         this.app.session.persist({
             showInterstitial: '1'
         }, {
             maxAge: maxAge
         });
 
-        analyticInfo = analytics.generateURL.call(this);
+        analyticInfo = tracking.generateURL.call(this);
         _.each(analyticInfo.urls, function(url) {
             img = $('<img/>');
             img.addClass('analytics');

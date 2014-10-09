@@ -194,7 +194,7 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, data) {
-                var analytics;
+                var tracking;
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                 var category = $('.itemCategory').val();
                 var subcategory = $('.itemSubcategory').val();
@@ -206,9 +206,9 @@ module.exports = Base.extend({
                 $('.email').val('');
                 $('.phone').val('');
                 $msg.text(this.messages.msgSend);
-                analytics = $('<div></div>').append(data);
-                analytics = $('#replySuccess', analytics);
-                $msg.append(analytics.length ? analytics : '');
+                tracking = $('<div></div>').append(data);
+                tracking = $('#replySuccess', tracking);
+                $msg.append(tracking.length ? tracking : '');
                 this.track({
                     category: 'Reply',
                     action: 'ReplySuccess',

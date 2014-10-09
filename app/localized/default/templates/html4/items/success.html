@@ -10,7 +10,7 @@
         <h1>{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</h1>
     {% endif %}
 
-    {% set templateName = template + '/partials/analytics.html' %}
+    {% set templateName = template + '/partials/tracking.html' %}
     {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
