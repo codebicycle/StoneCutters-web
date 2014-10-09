@@ -10,6 +10,9 @@ module.exports = {
     'redirections#subcategoryListWithParams': {
         url: 'item/:categoryId/:title/:subTitle/:description/page/:page'
     },
+    'redirections#categoryExpired': {
+        url: ':title-cat-:categoryId-e'
+    },
     'redirections#related': {
         url: 'item/:categoryId/related-ads/page/:page'
     },
@@ -105,6 +108,22 @@ module.exports = {
             server: 'nf/search/:search?',
             client: {
                 url: 'nf/search(/)(:search)'
+            }
+        }
+    },
+    'items#allresultsig#page': {
+        urls: {
+            server: 'nf/all-results-ig/-p-:page/:filters?',
+            client: {
+                url: 'nf/all-results-ig/-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'items#allresultsig': {
+        urls: {
+            server: 'nf/all-results-ig/:filters?',
+            client: {
+                url: 'nf/all-results-ig(/)(:filters)'
             }
         }
     },

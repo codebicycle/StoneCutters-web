@@ -1,3 +1,5 @@
+@import 'helpers/normalize.css';
+
 input::-webkit-input-placeholder {
    color: #999;
 }
@@ -20,11 +22,7 @@ input:-ms-input-placeholder {
     height: 2px;
     background: #FF7700;
     border-radius: 10%;
-    -moz-transition: width 500ms ease-out,opacity 400ms linear;
-    -ms-transition: width 500ms ease-out,opacity 400ms linear;
-    -o-transition: width 500ms ease-out,opacity 400ms linear;
-    -webkit-transition: width 500ms ease-out,opacity 400ms linear;
-    transition: width 500ms ease-out,opacity 400ms linear;
+    transition(width 500ms ease-out,opacity 400ms linear)
 }
 
 a {
@@ -39,13 +37,13 @@ a {
 		text-decoration: underline;
 	}
 }
-html {
+html,
+body {
 	font-size: 13px;
 }
 body {
 	background: #fafafa;
 	font-family: arial, helvetica, sans-serif;
-	font-size: 13px;
 }
 main {
     clear-fix();

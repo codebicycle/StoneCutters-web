@@ -10,6 +10,8 @@ module.exports = Base.extend({
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var slugUrl = helpers.common.slugToUrl(data.currentCategory);
+        data.nav = { link: slugUrl, listAct: 'active' };
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {

@@ -1,11 +1,15 @@
 <nav id="breadcrumb">
     <div class="breadcrumb-navigation">
-    	<a href="{{ '/nf/all-results' | link }}">Todas as Categorias</a>
-        <span class="icons icon-arrow-right"></span>
-        Anúncios en {{ location.current.name if location.current and location.current.type != 'country' else location.name }}
-        {% if metadata.total %}
-            <span class="count">({{ metadata.total | countFormat }})</span>
-        {% endif %}
+        {% for level in metadata.seo.levelPath.bottom.category  %}
+            {% if loop.last %}
+                <span class="icons icon-arrow-right" >{{ level.anchor }}</span>
+                {% if metadata.total %}
+                    <span class="count">({{ metadata.total | countFormat }})</span>
+                {% endif %}
+            {% else %}
+                <a href="{{ level.url }}" {{ 'class="icons icon-arrow-right"' if not loop.first }} {{ 'rel="nofollow"' if level.noFollow }} >{{ level.anchor }}</a>
+            {% endif %}
+        {% endfor %}
     </div>
     {% if metadata.next or metadata.previous %}
         <div class="breadcrumb-pagination">
