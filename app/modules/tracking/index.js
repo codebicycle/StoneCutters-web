@@ -1,5 +1,6 @@
 'use strict';
 
+var config = require('../../../shared/config');
 var tracker = require('./tracker');
 var google = require('./google');
 var ati = require('./ati');
@@ -23,6 +24,10 @@ function addParam(name, value) {
 
 function generateURL() {
     var data; 
+
+    if (!config.get(['tracking', 'enabled'], true)) {
+        return;
+    }
 
     addParam('user', this.app.session.get('user'));
     addParam('rendering', this.app.session.get('platform'));

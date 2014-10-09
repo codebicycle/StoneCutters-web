@@ -2,6 +2,7 @@
 
 var Base = require('../bases/collection');
 var Item = require('../models/item');
+var helpers = require('../helpers');
 
 module.exports = Base.extend({
     model: Item,
@@ -18,6 +19,9 @@ module.exports = Base.extend({
             case 'favorites':
                 url = '/users/:userId/favorites';
             break;
+            case 'staticSearch':
+                url = '/items/static';
+            break;
             default:
                 url = '/items';
             break;
@@ -29,10 +33,19 @@ module.exports = Base.extend({
             this.metadata = response.metadata;
             return response.data;
         }
-        else {
-            console.log('[OLX_DEBUG] Empty item listing response');
-            this.metadata = {};
-            return [];
+        console.log('[OLX_DEBUG] Empty item listing response');
+        this.metadata = {};
+        return [];
+    },
+    paginate: function (page, query, url) {
+        helpers.pagination.paginate(this.metadata, query, url);
+        if (page !== undefined) {
+            if (isNaN(page) || page <= 1) {
+                return 1;
+            }
+            if (page > this.metadata.totalPages) {
+                return this.metadata.totalPages;
+            }
         }
     }
 });

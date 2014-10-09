@@ -8,9 +8,6 @@ module.exports = {
         },
         html5: {
             maxPageSize: 26
-        },
-        desktop: {
-            maxPageSize: 25
         }
     },
     staticAccept: ['css', 'js'],
@@ -19,6 +16,9 @@ module.exports = {
         type: 'production',
         staticPath: 'http://static[[basenumber]].olx-st.com/mobile-webapp',
         imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
+    },
+    tracking: {
+        enabled: true
     },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
