@@ -1,2 +1,26 @@
-<h1>Contacto</h1>
+<h2 class="title-module">Tus datos de contacto</h2>
+<fieldset class="wrapper error">
+	<label for="seller-name" class="posting-label">* Nombre de contacto</label>
+	<div class="wrapper-inputs">
+		<input id="seller-name" class="text-field" type="text" placeholder="Ingrese su nombre" required />
+		<small class="advice">Oops! Completá este campo</small>
+	</div>
+</fieldset>
+<fieldset class="wrapper">
+	<label for="seller-email" class="posting-label">* E-mail</label>
+	<div class="wrapper-inputs">
+		<input id="seller-email" class="text-field" type="email" placeholder="nombre@servidor.com.bo" required />
+		<small class="advice icons icon-lock">Ingrese un e-mail válido. No se preocupe, no será divulgado.</small>
+	</div>
+</fieldset>
+<fieldset class="wrapper">
+	<label for="seller-phone" class="posting-label">* Teléfono</label>
+	<input id="seller-phone" class="text-field" type="tel" placeholder="(00) 0000 0000" required />
+</fieldset>
 {% view 'post/locations' %}
+<fieldset class="seller-post">
+	<input id="seller-remember" type="checkbox" checked />
+	<label for="seller-remember">Recordarme</label>
+	<input type="submit" value="Publicar Anuncio" class="posting" />
+	<small class="advice">Al publicar un anuncio usted acepta los <a href="#">Términos y condiciones</a> de OLX</small>
+</fieldset>
