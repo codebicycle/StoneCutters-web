@@ -6,7 +6,7 @@ var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 var env = config.get(['environment', 'type'], 'production');
-var defaultConfig = utils.get(configAnalytics, ['ati', 'paths', 'default']);
+var defaultConfig = utils.get(configTracking, ['ati', 'paths', 'default']);
 
 module.exports = function trackingHelper() {
     var actionTypes = {
@@ -185,7 +185,7 @@ module.exports = function trackingHelper() {
             platform = 'default';
         }
 
-        config = utils.get(configAnalytics, ['ati', 'paths', country, platform], defaultConfig[platform]);
+        config = utils.get(configTracking, ['ati', 'paths', country, platform], defaultConfig[platform]);
         return _.extend({}, config, {
             host: location.url.replace('www', ''),
             protocol: 'http'

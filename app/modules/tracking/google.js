@@ -5,7 +5,7 @@ var configTracking = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var environment = config.get(['environment', 'type'], 'development');
-var defaultTracker = utils.get(configAnalytics, ['google', 'trackers', 'default']);
+var defaultTracker = utils.get(configTracking, ['google', 'trackers', 'default']);
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
@@ -100,7 +100,7 @@ function getId(siteLocation, platform) {
         tracker = tracker.join('.');
     }
 
-    return utils.get(configAnalytics, ['google', 'trackers', tracker, platform], defaultTracker[platform]);
+    return utils.get(configTracking, ['google', 'trackers', tracker, platform], defaultTracker[platform]);
 }
 
 function saveParams(utmcc) {
