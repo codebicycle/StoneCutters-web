@@ -1,4 +1,25 @@
 @import 'helpers/normalize.css';
+a {
+	color: #38b;
+	display: inline-block;
+	outline: none;
+	text-decoration: none;
+	vertical-align: middle;
+
+	&:hover {
+		color: #369;
+		text-decoration: underline;
+	}
+}
+
+body {
+	background: #fafafa;
+	font-family: arial, helvetica, sans-serif;
+}
+
+html {
+	font-size: 13px;
+}
 
 input::-webkit-input-placeholder {
    color: #999;
@@ -12,45 +33,34 @@ input:-ms-input-placeholder {
    color: #999;
 }
 
-/*----Progres Bar----*/
-#progressBar {
-    position: fixed;
-    z-index: 999999;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: #FF7700;
-    border-radius: 10%;
-    transition(width 500ms ease-out,opacity 400ms linear)
-}
-
-a {
-	color: #38b;
-	display: inline-block;
-	text-decoration: none;
-	vertical-align: middle;
-	outline: none;
-
-	&:hover {
-		color: #369;
-		text-decoration: underline;
-	}
-}
-html,
-body {
-	font-size: 13px;
-}
-body {
-	background: #fafafa;
-	font-family: arial, helvetica, sans-serif;
-}
 main {
     clear-fix();
 }
+
+#progressBar {
+    background: #FF7700;
+    border-radius: 10%;
+    height: 2px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transition(width 500ms ease-out,opacity 400ms linear);
+    width: 0%;
+    z-index: 999999;
+}
+
+.posting {
+	border-radius();
+	action-button($orange, #fff, 3px, 15px 30px);
+	font-size: 1.53em;
+	font-weight: bold;
+	line-height: 1;
+}
+.noscroll{
+    overflow: hidden;
+}
 .search-form {
 	fieldset {
-		clear-fix();
 		border: none;
 		margin: 0;
 		padding: 0;
@@ -71,20 +81,37 @@ main {
 	.text-field {
 		border-color: $green;
 		border-radius(3px 0 0 3px);
-		height: 18px;
-		width: 253px;
+		height: 38px;
+		&:focus {
+	    	border-color: $green;
+	    	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
+	    	color: #000;
+	    }
 	}
 }
 
 .text-field {
-    height: 12px;
 	border-color: #ccc;
+	border-radius();
 	border-style: solid;
 	border-width: 1px;
-	border-radius();
-	color: #000;
-	font-size: 1.15em;
-	padding: 10px;
+	color: #ccc;
+	font-size: 1.076rem;
+	line-height: 1;
+	padding: 0 10px;
+    height: 40px;
+    &:focus {
+    	border-color: #999;
+    	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
+    	color: #000;
+    }
+}
+
+.title-module {
+	font-size: 1.538rem;
+	font-weight: normal;
+	line-height: 1;
+	margin: 0;
 }
 
 .wrapper-main {

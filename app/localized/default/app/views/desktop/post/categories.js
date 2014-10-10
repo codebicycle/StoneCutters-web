@@ -7,10 +7,9 @@ var _ = require('underscore');
 module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-categories-view',
-    className: 'posting-categories-view',
+    className: 'posting-categories-view wrapper',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
         return _.extend({}, data, {
             categories: this.parentView.options.categories.toJSON()
         });
