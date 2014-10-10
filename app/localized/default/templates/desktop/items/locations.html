@@ -1,0 +1,21 @@
+<nav class="items-locations">
+	<ul class="locations-tabs">
+		{% if not location.current or location.current.type == 'country' %}
+			<li><a href="{{ '/nf/all-results' | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
+		{% elif location.current and location.current.type == 'state' %}
+			<li><a href="{{ '/nf/all-results' | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li><li>{{ location.current.name }}<a href=""></a></li>
+		{% elif location.current and location.current.type == 'city' %}
+			<li><a href="{{ '/nf/all-results' | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li><li><a href="" rel="nofollow">{{ location.children[0].name }}</a></li><li>{{ location.current.name }}<a href=""></a></li>
+		{% endif %}
+	</ul>
+	{% if metadata.filters.state or metadata.filters.city %}
+		<ul class="locations-list">
+			{% for state in metadata.filters.state.value %}
+				<li><a href="{{ nav.link | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
+			{% endfor %}
+			{% for city in metadata.filters.city.value %}
+				<li><a href="{{ nav.link | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+</nav>

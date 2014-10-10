@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
-var analytics = require('../modules/analytics');
+var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var Seo = require('../modules/seo/seo');
 
@@ -45,7 +45,7 @@ function list(params, callback) {
                 categories: response.categories.toJSON(),
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
                 seo: seo,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -154,8 +154,8 @@ function handleItems(params, promise) {
         subcategory = _subcategory;
 
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        seo.resetHead.call(this, currentRouter);
 
+        seo.resetHead.call(this, currentRouter);
         slug = helpers.common.slugToUrl((subcategory || category).toJSON());
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
@@ -169,8 +169,8 @@ function handleItems(params, promise) {
             return helpers.common.redirect.call(this, '/' + slug + '-p-' + page);
         }
         helpers.pagination.prepare(this.app, params);
-        query = _.clone(params);
 
+        query = _.clone(params);
         params.categoryId = params.catId;
         params.seo = true;
         params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
@@ -227,10 +227,10 @@ function handleItems(params, promise) {
             postingLink: postingLink
         });
 
-        analytics.setPage('listing');
-        analytics.addParam('category', category.toJSON());
+        tracking.setPage('listing');
+        tracking.addParam('category', category.toJSON());
         if (subcategory) {
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
         }
         if (metadata.seo) {
             currentPage = metadata.page;
@@ -252,7 +252,7 @@ function handleItems(params, promise) {
             seo: seo,
             items: _items.toJSON(),
             infiniteScroll: infiniteScroll,
-            analytics: analytics.generateURL.call(this)
+            tracking: tracking.generateURL.call(this)
         });
     }.bind(this);
 
@@ -286,7 +286,7 @@ function handleShow(params, promise) {
             }
         });
 
-        analytics.addParam('category', _category.toJSON());
+        tracking.addParam('category', _category.toJSON());
         seo.addMetatag.call(this, 'title', _category.get('trName'));
         seo.addMetatag.call(this, 'description', _category.get('trName'));
         seo.update();
@@ -294,7 +294,7 @@ function handleShow(params, promise) {
         done({
             type: 'categories',
             category: _category.toJSON(),
-            analytics: analytics.generateURL.call(this)
+            tracking: tracking.generateURL.call(this)
         });
     }.bind(this);
 

@@ -4,4 +4,4 @@
 npm install
 
 # execute grunt job
-grunt prepipeline
+grunt prepipeline --reporter=spec

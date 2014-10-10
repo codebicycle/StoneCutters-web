@@ -1,178 +1,20 @@
-{% view 'header/index' %}
-	<section id="template">
-		<nav class="breadcrumb">
-			<a href="{{ '' | link }}">Inicio</a>
-			<span class="arrow"></span>
-			{% if not currentCategory.parentId %}
-					{{ category.trName }}<span class="arrow"></span> {{ metadata.total | countFormat }} Resultados para <strong>"{{ category.trName }}"</strong> 
-			{% else %}
-				<a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> {{ currentCategory.trName }} <span class="arrow"></span> {{ metadata.total | countFormat }} Resultados para <strong>"{{ currentCategory.trName }}"</strong> 
-			{% endif %}
-			en {{ location.current.name if location.current and location.current.type != 'country' else location.name }}
+{% include (template + "/partials/breadcrumb.html") %}
 
-			{% if metadata.next or metadata.previous %}
-				<div class="itemPagination">
-	            	<p>Página <strong>{{ metadata.page }}</strong> de <strong>{{ metadata.totalPages | countFormat }}</strong></p>
-	            	{% if not metadata.previous %}
-	            		<a href="{{ metadata.next | link }}" class="icons right"></a>
-	            	{% elif not metadata.next %}
-	            		<a href="{{ metadata.previous | link }}" class="icons left"></a>
-	            	{% else %}
-	            		<a href="{{ metadata.previous | link }}" class="icons left"></a> <span>|</span> <a href="{{ metadata.next | link }}" class="icons right"></a>
-	            	{% endif %}
-	            </div>
-	        {% endif %}
-		</nav>
+<nav id="listing-filters">
+    {% include (template + '/categories/subcategories.html') %}
+</nav>
 
-		<section class="list">
-			<nav>
-				<div class="tabs">
-					<a href="" class="galery icons">Galeria</a>
-					<a href="" class="list icons active">Listado</a>
-				</div>
-				<div class="sort">
-					<label>Ordenado por:</label>
-					<select name="listing-order-combo">
-						<option selected="selected" value="date*to*showdesc">Mais recentes</option>
-						<option value="price">Menor preço</option>
-						<option value="pricedesc">Maior preço</option>
-					</select>
-				</div>
-			</nav>
-			<ul class="listing itemListing">
-				{% for item in items %}
-					<li>
-						<a href="{{ item | slugToUrl | link }}">
-							<div  class="photo">
-								<div {{ ('style="background-image:url(' + item.thumbnail + ');"') if item.thumbnail else ('class="noPhoto"') }} data-fullimg="{{ item.fullImage }}"></div>
-							</div>
-							<div class="title">
-								<h3>{{ item.title }}</h3>
-								<span>{{ item.displayLocation }}</span>
-							</div>
-							<div class="price">
-								{{ item.price.displayPrice }}
-							</div>
-							<div class="date">
-								{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
-							</div>
-						</a>
-						<div class="clear"></div>
-					</li>
-				{% endfor %}
-			</ul>
-	        {% if metadata.next or metadata.previous %}
-	            <div class="itemPagination">
-	            	{% if not metadata.previous %}
-	            		<a href="{{ metadata.next | link }}" class="next first">Siguiente página</a>
-	            	{% elif not metadata.next %}
-	            		<a href="{{ metadata.previous | link }}" class="icons prev last">Volver</a>
-	            	{% else %}
-	            		<a href="{{ metadata.previous | link }}" class="icons prev">Volver</a> <a href="{{ metadata.next | link }}" class="next">Siguiente página</a>
-	            	{% endif %}
-	               <div class="{{ 'full' if not metadata.previous and metadata.next }}">{{ metadata | pagination }}</div>
-	            </div>
-	        {% endif %}
-		</section>
+<section id='listing-items'>
+    {% include (template + '/items/locations.html') %}
 
-		<nav class="leftContent topLocation">
-			Venezuela
-		</nav>
-		<nav class="leftContent refine">
-			<h3>Categoria</h3>
-			<div class="filters">
-				<a href=""><span class="icons arrow"></span>Todas las categorías</a>
-				<ul class="categories">
-					<li>
-						<p>
-							<span class="icons icon-cat-830"></span>
-							Teléfonos - Tablets, <br>
-							<span class="counter">152.365</span>
-						</p>
-						<ul class="subCat">
-							<li>
-								<a href="">
-									Sub catttt, <br>
-									<span class="counter">152.365</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Sub catttt, <br>
-									<span class="counter">152.365</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Sub catttt, <br>
-									<span class="counter">152.365</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									Sub catttt, <br>
-									<span class="counter">152.365</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="">
-							<span class="icons icon-cat-830"></span>
-							Teléfonos - Tablets, <br>
-							<span class="counter">152.365</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span class="icons icon-cat-830"></span>
-							Teléfonos - Tablets, <br>
-							<span class="counter">152.365</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span class="icons icon-cat-830"></span>
-							Teléfonos - Tablets, <br>
-							<span class="counter">152.365</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span class="icons icon-cat-830"></span>
-							Teléfonos - Tablets, <br>
-							<span class="counter">152.365</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<span class="icons icon-cat-830"></span>
-							Teléfonos - Tablets, <br>
-							<span class="counter">152.365</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		<nav class="leftContent refine location">
-			<h3>Ubicación</h3>
-			<div class="filters">
-				<ul>
-					<li><a href="">Barcelona</a></li>
-					<li><a href="">Barcelona</a></li>
-					<li><a href="">Barcelona</a></li>
-					<li><a href="">Barcelona</a></li>
-					<li><a href="">Barcelona</a></li>
-					<li><a href="">Barcelona</a></li>
-					<li><a href=""><strong>Mas</strong></a></li>
-				</ul>
-			</div>
-		</nav>
-		<div class="clear"></div>
-        <div class="popuparSearches">
-            {% for popular in seo.get('popularSearches') %}
-            <a href="{{ popular.url | link }}" >{{ popular.anchor }}</a>
-            {% endfor %}
-        </div>
-	</section>
-{% view 'footer/footer' %}
+    {% include (template + '/items/list.html') %}
+
+    {% if metadata.next or metadata.previous %}
+        {% include (template + '/items/pagination.html') %}
+    {% endif %}
+</section>
+
+{% include (template + '/partials/postbanner.html') %}
+
+{% include (template + '/partials/tracking.html') %}
+

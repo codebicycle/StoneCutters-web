@@ -8,9 +8,6 @@ module.exports = {
         },
         html5: {
             maxPageSize: 26
-        },
-        desktop: {
-            maxPageSize: 25
         }
     },
     staticAccept: ['css', 'js'],
@@ -19,6 +16,9 @@ module.exports = {
         type: 'staging',
         staticPath: 'http://static-staging.olx-st.com/mobile-webapp',
         imagePath: 'http://images-staging.olx-st.com/mobile-webapp'
+    },
+    tracking: {
+        enabled: true
     },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
@@ -35,15 +35,6 @@ module.exports = {
         wap: ['home', 'post', 'location'],
         html4: ['post', 'location'],
         html5: ['post', 'location']
-    },
-    posting: {
-        flow: {
-            enabled: {
-                'www.olx.com.mx': true,
-                'www.olx.com.ar': true,
-                'www.olx.co.za': true
-            }
-        }
     },
     infiniteScroll: false,
     interstitial: {
@@ -82,6 +73,14 @@ module.exports = {
             },
             'default': {
                 'Cache-Control': 'no-cache, max-age=0, s-maxage=0, no-store'
+            }
+        }
+    },
+    features: {
+        html5: {
+            postingFlow: {
+                worldwide: false,
+                countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
             }
         }
     },
@@ -166,6 +165,5 @@ module.exports = {
             'www.olx.co.uk': '3avqcjFDvQyE7sGOGGNH1HbN1VWV5D5THYJKu35BbZY',
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
-    },
-    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
+    }
 };

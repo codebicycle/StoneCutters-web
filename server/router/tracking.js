@@ -6,18 +6,29 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var Tracker = require('../modules/tracker');
     var config = require('../../shared/config');
     var utils = require('../../shared/utils');
-    var analytics = require('../../app/modules/analytics');
-    var configAnalytics = require('../../app/modules/analytics/config');
+    var tracking = require('../../app/modules/tracking');
+    var configTracking = require('../../app/modules/tracking/config');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function defaultRequestOptions(req) {
+    function defaultRequestOptions(req, type, tracker) {
+        var platform = req.rendrApp.session.get('platform');
+
         return {
             headers: {
                 'User-Agent': utils.getUserAgent(req),
                 'Accept-Encoding': 'gzip,deflate,sdch',
                 'Cache-Control': 'no-cache',
                 'Pragma': 'no-cache'
+            },
+            success: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+            },
+            error: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+            },
+            fail: function() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
             }
         };
     }
@@ -56,7 +67,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var platform = req.rendrApp.session.get('platform');
             var osName = req.rendrApp.session.get('osName') || 'unknown';
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
-            var options = defaultRequestOptions(req);
+            var options = defaultRequestOptions(req, 'pageview', 'google');
             var params = {
                 page: page || req.query.page,
                 referer: req.query.referer,
@@ -64,7 +75,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 clientId: req.rendrApp.session.get('clientId'),
                 userAgent: options.headers['User-Agent'],
                 hitCount: req.rendrApp.session.get('hitCount'),
-                visitor: analytics.google.getUtmcc(req.rendrApp)
+                visitor: tracking.google.getUtmcc(req.rendrApp)
             };
 
             if (language) {
@@ -85,14 +96,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (env !== 'production') {
                 countryId = 0;
             }
-            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultRequestOptions(req);
+                options = defaultRequestOptions(req, 'pageview', 'ati');
                 analytic = new Tracker('ati', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
                 });
-                options.debug = true;
                 analytic.track({
                     page: req.query.page,
                     referer: req.query.referer,
@@ -100,6 +110,27 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     clientId: req.rendrApp.session.get('clientId').substr(24)
                 }, options);
             }
+        }
+
+        function atiTrackingColombia(req) {
+            var analytic;
+            var options;
+
+            if (env !== 'production') {
+                return;
+            }
+
+            options = defaultRequestOptions(req, 'pageview', 'ati');
+            analytic = new Tracker('ati', {
+                id: 539154,
+                host: 'logw306'
+            });
+            analytic.track({
+                page: req.query.page,
+                referer: req.query.referer,
+                custom: req.query.custom,
+                clientId: req.rendrApp.session.get('clientId').substr(24)
+            }, options);
         }
 
         function handler(req, res) {
@@ -138,7 +169,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 return/* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl)*/;
             }
             graphiteTracking(req);
-            trackerId = analytics.google.getId(siteLocation);
+            trackerId = tracking.google.getId(siteLocation);
             if (trackerId) {
                 if (req.rendrApp.session.get('internet.org')) {
                     host = host.replace('olx', 'olx-internet-org');
@@ -146,7 +177,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 googleTracking(req, trackerId, host, page);
             }
-            atiTracking(req);
+            if (req.query.locUrl !== 'www.olx.com.co') {
+                atiTracking(req);
+            }
+            else {
+                atiTrackingColombia(req);
+            }
         }
     })();
 
@@ -158,7 +194,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 id: trackerId,
                 host: host
             });
-            var options = defaultRequestOptions(req);
+            var options = defaultRequestOptions(req, 'pageevent', 'google');
 
             analytic.track(_.extend({
                 ip: req.rendrApp.session.get('ip'),
@@ -176,9 +212,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (env !== 'production') {
                 countryId = 0;
             }
-            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
             if (atiConfig) {
-                options = defaultRequestOptions(req);
+                options = defaultRequestOptions(req, 'pageevent', 'ati');
                 analytic = new Tracker('ati-event', {
                     id: atiConfig.siteId,
                     host: atiConfig.logServer
@@ -221,7 +257,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (bot) {
                 return statsd.increment([req.query.locNm, 'bot', bot, platform]);
             }
-            trackerId = analytics.google.getId(siteLocation);
+            trackerId = tracking.google.getId(siteLocation);
             if (trackerId) {
                 if (req.rendrApp.session.get('internet.org')) {
                     host = host.replace('olx', 'olx-internet-org');

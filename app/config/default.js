@@ -17,6 +17,9 @@ module.exports = {
         staticPath: 'http://static[[basenumber]].olx-st.com/mobile-webapp',
         imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
     },
+    tracking: {
+        enabled: true
+    },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za'],
@@ -32,15 +35,6 @@ module.exports = {
         wap: ['home', 'post', 'location'],
         html4: ['post', 'location'],
         html5: ['post', 'location']
-    },
-    posting: {
-        flow: {
-            enabled: {
-                'www.olx.com.mx': true,
-                'www.olx.com.ar': true,
-                'www.olx.co.za': true
-            }
-        }
     },
     infiniteScroll: false,
     interstitial: {
@@ -79,6 +73,14 @@ module.exports = {
             },
             'default': {
                 'Cache-Control': 'no-cache, max-age=0, s-maxage=0, no-store'
+            }
+        }
+    },
+    features: {
+        html5: {
+            postingFlow: {
+                worldwide: false,
+                countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
             }
         }
     },
@@ -173,6 +175,5 @@ module.exports = {
             'www.olx.com': 'JwT4VZIdr9x8Ctn4jWX3pA1qaewK3uMlnFS4iVoM4Zs',
             'www.olx.com.mx': 'NYmbUbWCvkxL9ADmytt25vu68NpFeyy3CkWCu3ZTppM'
         }
-    },
-    keyade: ['www.olx.com.ng', 'www.olx.co.ke']
+    }
 };

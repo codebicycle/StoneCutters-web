@@ -137,7 +137,7 @@ module.exports = Base.extend({
         var $currency = this.$('select[name=currency_type]');
         var $price = this.$('input[name=priceC]');
 
-        if (value === 'FIXED') {
+        if (value === 'FIXED' || value === 'NEGOTIABLE') {
             $currency.removeAttr('disabled');
             $price.removeAttr('disabled');
         }

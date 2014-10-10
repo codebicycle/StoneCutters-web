@@ -1,0 +1,22 @@
+{% include (template + '/items/itemlistingnav.html') %}
+<ul class="items-list">
+    {% for item in items %}
+        <li>
+            <a href="{{ item | slugToUrl | link }}">
+                <div class="item-image {{ 'lines' if item.thumbnail }}">
+                    <img src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}">
+                </div><p
+                 class="item-info">
+                    {{ item.title }}<br>
+                    <span>Category | {{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
+                </p><p
+                 class="item-price">
+                    {{ item.price.displayPrice }}
+                </p><p
+                 class="item-date">
+                    {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', <br>' + item.date.since.hour) if item.date.since.hour }}
+                </p>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

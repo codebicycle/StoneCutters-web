@@ -40,12 +40,45 @@ module.exports = function(grunt) {
             callback();
         }
 
-        function getVersion(done) {
-            restler
-                .get('http://elvira.olx.com.ar/tags/api/query.php?repo=smaug-translations&env=testing')
-                .on('success', done)
+        function localVersion(done) {
+            done((grunt.file.exists(destDir + '/TAG')) ? grunt.file.read(destDir + '/TAG').trim() : false);
+        }
+
+        function remoteVersion(done) {
+            restler.get('http://elvira.olx.com.ar/tags/api/query.php?repo=smaug-translations&env=testing')
                 .on('error', done.fail)
-                .on('fail', done.fail);
+                .on('fail', done.fail)
+                .on('success', function onSuccess(data) {
+                    done(data);
+                });
+        }
+
+        function decide(done, local, remote) {
+            if (local === remote) {
+                console.log('\nLocal files version (' + local + ') is up to date with remote (' + remote + ')');
+                done();
+            }
+            else {
+                if (local) {
+                    console.log('\nLocal files version (' + local + ') is outdated from remote (' + remote + ')\n');
+                }
+                else {
+                    console.log('\nLocal files are missing\n');
+                }
+                asynquence(remote).or(done.fail)
+                    .then(clean)
+                    .then(create)
+                    .then(download)
+                    .then(unZip)
+                    .val(done);
+            }
+        }
+
+        function clean(done, version) {
+            if (grunt.file.exists(destDir)) {
+                grunt.file.delete(destDir);
+            }
+            done(version);
         }
 
         function create(done, version) {
@@ -78,11 +111,9 @@ module.exports = function(grunt) {
                 }
 
                 function onEnd() {
-                    console.log('Finished downloading');
                     file.end(done);
                 }
 
-                console.log();
                 res
                     .on('data', onData)
                     .on('end', onEnd);
@@ -90,7 +121,6 @@ module.exports = function(grunt) {
         }
 
         function unZip(done) {
-            console.log('Unzipping', destDir);
             fs.createReadStream(dest).pipe(unzip.Extract({
                 path: destDir
             })).on('close', done).on('end', done).on('error', done.fail);
@@ -158,23 +188,15 @@ module.exports = function(grunt) {
             });
             index += '\n};\n';
             grunt.file.write('app/translations/index.js', index);
-            console.log('File "app/translations/index.js" created');
+            console.log('\nFile "app/translations/index.js" created');
             promise.val(done);
         }
 
-        function clean(done) {
-            grunt.file.delete(destDir);
-            done();
-        }
-
         asynquence().or(fail)
-            .then(getVersion)
-            .then(create)
-            .then(download)
-            .then(unZip)
+            .gate(localVersion, remoteVersion)
+            .then(decide)
             .then(getTranslations)
             .then(getDictionaries)
-            .then(clean)
             .val(done);
     };
 };

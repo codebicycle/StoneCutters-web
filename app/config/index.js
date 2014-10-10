@@ -16,7 +16,12 @@ module.exports = function(environment) {
         return utils.get(CONFIG, keys, defaultValue);
     }
 
+    function getForMarket(location, keys, defaultValue) {
+        return utils.get(MARKETS, [location].concat(keys)) || utils.get(MARKETS, ['emerging'].concat(keys)) || utils.get(MARKETS, ['common'].concat(keys), defaultValue);
+    }
+
     return {
-        get: get
+        get: get,
+        getForMarket: getForMarket
     };
 };

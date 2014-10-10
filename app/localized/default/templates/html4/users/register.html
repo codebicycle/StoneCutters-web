@@ -12,31 +12,31 @@
     <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
             <label>{{ dictionary["lostform.Username"] }}</label>
-            <input type="text" name="username">
+            <input type="text" name="username" data-qa="username-field">
         </div>
         <div class="formField">
             <label>{{ dictionary["landingbody.EmailAddress"] }}</label>
-            <input type="text" name="email">
+            <input type="text" name="email" data-qa="email-field">
             <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small>
         </div>
         <div class="formField">
             <label>{{ dictionary["loginbox.Password"] }}</label>
-            <input type="password" name="password">
+            <input type="password" name="password" data-qa="password-field">
         </div>
         <div class="formField">
-            <input type="checkbox" name="agreeTerms" class="checkbox" checked="true">
+            <input type="checkbox" name="agreeTerms" class="checkbox" checked="true" data-qa="agree-terms-checkbox">
             <label>{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>", (["<a href='" , "/terms" | link, "'>"] | join(''))) | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
         </div>
         <div class="formActions">
             <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="{{ dictionary["registerheader.Register"] }}" name="submit" class="btns orange">
+                <input type="submit" value="{{ dictionary["registerheader.Register"] }}" name="submit" class="btns orange" data-qa="registrate-button">
             </div>
         </div>
     </form>
     <div class="formField">
         <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
     </div>
-    {% set templateName = template + '/partials/analytics.html' %}
+    {% set templateName = template + '/partials/tracking.html' %}
     {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

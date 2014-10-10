@@ -1,84 +1,10 @@
-{% view 'header/index' %}
-<section id="template">
-	<section class="home">
-		<div class="titleBar">
-			<h1>{{ dictionary["listingpageitemslisting.FindAdsIn2"] | replace('<<LOCATION>>', location.current.name if location.current and location.current.type != 'country' else location.name )}}</h1>
-			<span>{{ dictionary["changelocationheader.ChangeLocation"] }}</span>
-		</div>
-		<ul class="icons">
-			{% for category in categories %}
-				<li>
-					<a href="{{ category | slugToUrl | link }}">
-						<span class="icon cat-{{ category.id }}"></span>
-						<strong>{{ category.trName }}</strong>
-					</a>
-					<ul>
-					{% for subcategory in category.children.toJSON() %}
-						<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName}}</a></li>
-					{% endfor %}
-					</ul>
-				</li>
-		{% endfor %}
-		</ul>
-	</section>
-	<aside class="banner howto">
-		<h1>{{ dictionary["misc.EveryoneCanSell"] | replace('<<BRAND>>','OLX') }}</h1>
-		<span>{{ dictionary["misc.LearnToSell"] }}</span>
-	</aside>
-	<aside class="banner tv">
-		<span></span>
-		<h1>{{ dictionary["defaulthtmlhead.HaveYouSeenThis"] }}</h1>
-		<p>{{ dictionary["defaulthtmlhead.CheckOutOurNewTvAd"] }}</p>
-	</aside>
-	<aside class="banner">
-		<a href="http://itunes.apple.com/app/olx-classifieds/id382059698" class="ios" target="_blank"></a>
-		<a href="https://play.google.com/store/apps/details?id=com.olx.olx" class="android" target="_blank"></a>
-	</aside>
-	<aside class="postBanner">
-		<h2>{{ dictionary["misc.SomethingToSell"] }}</h2>
-		<p>{{ dictionary["misc.PostForFree_LandingPage"] | replace('<<BRAND>>','OLX') }}</p>
-		<a class="btn orange" href="">{{ dictionary["countryoptions.PostAdd"] }}</a>
-	</aside>
-	<section class="home">
-		<div class="titleBar small">
-			<h2>{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>',location.url) }}</h2>
-		</div>
-		<h1>{{ dictionary["popularsearchesbody.PopularCities"] }}:</h1>
-		<h1>{{ dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>','Region') }}:</h1>
-		<ul class="cities">
-			<li><a href="{{ '/' | link({location: 'acarigua.olx.com.ve'}) }}">Acarigua</a></li>
-			<li><a href="{{ '/' | link({location: 'anaco.olx.com.ve'}) }}">Anaco</a></li>
-			<li><a href="{{ '/' | link({location: 'barcelona.olx.com.ve'}) }}">Barcelona</a></li>
-			<li><a href="{{ '/' | link({location: 'ciudadbarinas.olx.com.ve'}) }}">Barinas</a></li>
-			<li><a href="{{ '/' | link({location: 'barquisimeto.olx.com.ve'}) }}">Barquisimeto</a></li>
-			<li><a href="{{ '/' | link({location: 'baruta.olx.com.ve'}) }}">Baruta</a></li>
-			<li><a href="{{ '/' | link({location: 'cabimas.olx.com.ve'}) }}">Cabimas</a></li>
-			<li><a href="{{ '/' | link({location: 'cabudare.olx.com.ve'}) }}">Cabudare</a></li>
-		</ul>
-		<ul class="cities">
-			<li><a href="{{ '/' | link({location: 'acarigua.olx.com.ve'}) }}">Acarigua</a></li>
-			<li><a href="{{ '/' | link({location: 'anaco.olx.com.ve'}) }}">Anaco</a></li>
-			<li><a href="{{ '/' | link({location: 'barcelona.olx.com.ve'}) }}">Barcelona</a></li>
-			<li><a href="{{ '/' | link({location: 'ciudadbarinas.olx.com.ve'}) }}">Barinas</a></li>
-			<li><a href="{{ '/' | link({location: 'barquisimeto.olx.com.ve'}) }}">Barquisimeto</a></li>
-			<li><a href="{{ '/' | link({location: 'baruta.olx.com.ve'}) }}">Baruta</a></li>
-			<li><a href="{{ '/' | link({location: 'cabimas.olx.com.ve'}) }}">Cabimas</a></li>
-			<li><a href="{{ '/' | link({location: 'cabudare.olx.com.ve'}) }}">Cabudare</a></li>
-		</ul>
-		<h1 class="full">{{ dictionary["defaultheader.PopularSearches"] }}</h1>
-		<ul class="cities full">
-			<li><a href="">Casa en alquiler</a></li>
-			<li><a href="">Alquiler de estudio amoblado</a></li>
-			<li><a href="">Piso en alquiler</a></li>
-			<li><a href="">Alquiler Piso amueblado</a></li>
-			<li><a href="">Piso 2 dormitorios en alquiler</a></li>
-			<li><a href="">Apartamentos en alquiler 3 dormitorios</a></li>
-			<li><a href="">Alquiler de casa con jardín</a></li>
-			<li><a href="">Departamentos Amoblados</a></li>
-		</ul>
-	</section>
-	<div class="clear"></div>
+<aside id="marketing-banners">
+    {% include (template + '/marketing/bannervideo.html') %}
+    {% include (template + '/marketing/appStores.html') %}
+</aside>
 
+<section id="category-tree">
+    {% include (template + '/categories/categorytree.html') %}
 </section>
 
-{% view 'footer/footer' %}
+{% include (template + '/partials/tracking.html') %}

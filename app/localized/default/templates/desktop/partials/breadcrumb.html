@@ -1,0 +1,20 @@
+<nav id="breadcrumb">
+    <div class="breadcrumb-navigation">
+        {% for level in metadata.seo.levelPath.bottom.category  %}
+            {% if loop.last %}
+                <span class="icons icon-arrow-right" >{{ level.anchor }}</span>
+                {% if metadata.total %}
+                    <span class="count">({{ metadata.total | countFormat }})</span>
+                {% endif %}
+            {% else %}
+                <a href="{{ level.url }}" {{ 'class="icons icon-arrow-right"' if not loop.first }} {{ 'rel="nofollow"' if level.noFollow }} >{{ level.anchor }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if metadata.next or metadata.previous %}
+        <div class="breadcrumb-pagination">
+            <p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
+            <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="icons icon-arrow-left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="icons icon-arrow-right {{ "disable" if not metadata.next }}"></a>
+        </div>
+    {% endif %}
+</nav>

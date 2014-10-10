@@ -2,7 +2,9 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var localization = require('../config').get('localization');
+    var config = require('../config');
+    var utils = require('../utils');
+    var localization = config.get('localization');
     var browserify = {
         lib: {
             src: ['public/js/lib/**/*.js'],
@@ -18,40 +20,55 @@ module.exports = function(grunt) {
             options: {
                 alias: ['app/translations/index.js:../app/translations']
             }
-        },
-        'config-development': {
-            src: ['app/config/**/*.js', '!app/config/default-testing.js', '!app/config/default-staging.js', '!app/config/default.js'],
-            dest: 'public/js/src/common/config-development.js',
-            options: {
-                alias: ['app/config/index.js:../app/config', 'app/config/default-development.js:./default', 'shared/utils.js:../../shared/utils'],
-                external: ['underscore', 'querystring']
-            }
-        },
-        'config-testing': {
-            src: ['app/config/**/*.js', '!app/config/default-development.js', '!app/config/default-staging.js', '!app/config/default.js'],
-            dest: 'public/js/src/common/config-testing.js',
-            options: {
-                alias: ['app/config/index.js:../app/config', 'app/config/default-testing.js:./default', 'shared/utils.js:../../shared/utils'],
-                external: ['underscore', 'querystring']
-            }
-        },
-        'config-staging': {
-            src: ['app/config/**/*.js', '!app/config/default-development.js', '!app/config/default-testing.js', '!app/config/default.js'],
-            dest: 'public/js/src/common/config-staging.js',
-            options: {
-                alias: ['app/config/index.js:../app/config', 'app/config/default-staging.js:./default', 'shared/utils.js:../../shared/utils'],
-                external: ['underscore', 'querystring']
-            }
-        },
-        config: {
-            src: ['app/config/**/*.js', '!app/config/default-development.js', '!app/config/default-testing.js', '!app/config/default-staging.js'],
-            dest: 'public/js/src/common/config.js',
-            options: {
-                alias: ['app/config/index.js:../app/config', 'app/config/default.js:./default', 'shared/utils.js:../../shared/utils'],
-                external: ['underscore', 'querystring']
-            }
         }
     };
+
+    (function browserifyConfig() {
+        var environments = utils.getEnvironments(grunt);
+        var allEnvironments = ['development', 'testing', 'staging', 'production'];
+        var defaultSrc = ['app/config/**/*.js'];
+        var defaultOptionAlias = ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'];
+        var defaultOptionExternal = ['underscore', 'querystring'];
+
+        var srcTemplate = '!app/config/defaultENVIRONMENT.js';
+        var aliasTemplate = 'app/config/defaultENVIRONMENT.js:./default';
+        var destTemplate = 'public/js/src/common/configENVIRONMENT.js';
+        var nameTemplate = 'configENVIRONMENT';
+        var repEnvironment = 'ENVIRONMENT';
+
+        environments.forEach(function(environment) {
+            var browserifyConfig = {};
+
+            browserifyConfig.src = getSrc(environment);
+            browserifyConfig.dest = replace(destTemplate, environment);
+            browserifyConfig.options = {
+                alias: _.clone(defaultOptionAlias),
+                external: defaultOptionExternal
+            };
+            browserifyConfig.options.alias.push(replace(aliasTemplate, environment));
+            browserify[replace(nameTemplate, environment)] = browserifyConfig;
+
+        });
+
+        function getSrc(env) {
+            var srcs = [];
+
+            allEnvironments.forEach(function(environment) {
+                if (env === environment) {
+                    return;
+                }
+                srcs.push(replace(srcTemplate, environment));
+            });
+            return _.clone(defaultSrc).concat(srcs);
+        }
+
+        function replace(key, environment) {
+            if (environment === 'production') {
+                return key.replace(repEnvironment, '');
+            }
+            return key.replace(repEnvironment, '-' + environment);
+        }
+    })();
 
     compile('default');
     for (var platform in localization) {

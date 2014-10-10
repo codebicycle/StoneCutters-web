@@ -3,8 +3,10 @@
 module.exports = function(grunt) {
     var _ = require('underscore');
     var config = require('../config');
-    var environments = config.get('environments');
+    var utils = require('../utils');
     var stylusConfig = config.get('stylus');
+    var environments = utils.getEnvironments(grunt);
+    var platforms = config.get('platforms');
     var stylus = {
         options: {
             'include css': true
@@ -13,21 +15,29 @@ module.exports = function(grunt) {
 
     (function stylusGeneral() {
         var localization = config.get('localization');
+        var key;
 
         environments.forEach(function eachEnvironments(environment) {
-            stylus[environment] = {
-                files: {},
-                options: {
-                    define: {
-                        staticUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.static : ''),
-                        imageUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.image : '')
+            platforms.forEach(function (platform) {
+                key = environment + '-' + platform;
+
+                stylus[key] = {
+                    files: {},
+                    options: {
+                        paths: [],
+                        import: [],
+                        define: {
+                            staticUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.static : ''),
+                            imageUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.image : '')
+                        }
                     }
-                }
-            };
-            getFiles(environment);
+                };
+                getFiles(environment, platform);
+            });
         });
 
-        function getFiles(environment) {
+
+        function getFiles(environment, _platform) {
             var files = {};
             var file;
             var platform;
@@ -35,7 +45,19 @@ module.exports = function(grunt) {
             grunt.file.recurse('app/localized/default/stylesheets', function callback(abspath, rootdir, subdir, filename) {
                 var parts = subdir.split('/');
                 var target = 'public/css/default/' + parts[0] + '/styles';
+                var helpers = {};
+                var platform = parts[0];
 
+                if (platform !== _platform) {
+                    return;
+                }
+
+                if (parts[1] && parts[1] === 'helpers') {
+                    helpers = rootdir + '/' + platform;
+                    stylus[key].options.paths = [helpers];
+                    stylus[key].options.import = ['helpers'];
+                    return false;
+                }
                 if (environment !== 'production') {
                     target += '-' + environment;
                 }
@@ -46,16 +68,20 @@ module.exports = function(grunt) {
                 if (!files[target]) {
                     files[target] = {};
                 }
+
                 files[target][abspath] = abspath;
             });
 
             for (platform in localization) {
+                if (platform !== _platform) {
+                    continue;
+                }
                 localization[platform].forEach(eachLocation);
             }
             for (var target in files) {
-                stylus[environment].files[target] = [];
+                stylus[key].files[target] = [];
                 for (file in files[target]) {
-                    stylus[environment].files[target].unshift(files[target][file]);
+                    stylus[key].files[target].unshift(files[target][file]);
                 }
             }
 
@@ -75,6 +101,11 @@ module.exports = function(grunt) {
                 }
                 if (grunt.file.exists(dir)) {
                     grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
+                        if (subdir && subdir === 'helpers') {
+                            stylus[key].options.paths = [rootdir];
+                            stylus[key].options.import = ['helpers'];
+                            return false;
+                        }
                         if (filename.split('.').pop() !== 'styl') {
                             return;
                         }
@@ -105,6 +136,10 @@ module.exports = function(grunt) {
             environments.forEach(function eachEnvironments(environment) {
                 addIconToStylus(location, environment);
             });
+
+            if (!_.contains(environments, 'production')) {
+                addIconToStylus(location, 'production');
+            }
         }
 
         function addIconToStylus(location, environment) {

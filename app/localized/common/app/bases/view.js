@@ -58,7 +58,7 @@ module.exports = Base.extend({
         var obj = {
             url: helpers.common.static('/images/common/gif1x1.gif')
         };
-        var analytics = {};
+        var tracking = {};
         var $img = $('img.analytics');
 
         if (callback && !_.isFunction(callback)) {
@@ -66,10 +66,10 @@ module.exports = Base.extend({
             callback = $.noop;
         }
         if ($img.length) {
-            analytics = $img.last().attr('src');
-            analytics = $.deparam(analytics.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
+            tracking = $img.last().attr('src');
+            tracking = $.deparam(tracking.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
         }
-        obj = _.defaults(obj, data, analytics);
+        obj = _.defaults(obj, data, tracking);
         options = _.defaults((options || {}), {
             url: '/analytics/pageevent.gif',
             type: 'GET',

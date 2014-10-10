@@ -20,7 +20,7 @@ module.exports = Base.extend({
                 url = '/users/:userId/favorites';
             break;
             case 'staticSearch':
-                url = '/items';
+                url = '/items/static';
             break;
             default:
                 url = '/items';
