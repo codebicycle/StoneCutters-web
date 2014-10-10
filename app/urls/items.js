@@ -1,6 +1,12 @@
 'use strict';
 
 module.exports = {
+    'items#staticSearch': {
+        url: 'q/:search/c-:catId'
+    },
+    'items#staticSearch#nocat': {
+        url: 'q/:search'
+    },
     'items#search#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',
