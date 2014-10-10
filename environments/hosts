@@ -9,25 +9,29 @@
 {IP}  wap.m.olx.com           # United States
 {IP}  html4.m.olx.com           # United States
 {IP}  html5.m.olx.com           # United States
-{IP}  desktop.m.olx.com           # United States
+{IP}  www.olx.com           # United States
+{IP}  olx.com           # United States
 
 {IP}  m.olx.com.ar        # Argentina
 {IP}  wap.m.olx.com.ar        # Argentina
 {IP}  html4.m.olx.com.ar        # Argentina
 {IP}  html5.m.olx.com.ar        # Argentina
-{IP}  desktop.m.olx.com.ar        # Argentina
+{IP}  www.olx.com.ar        # Argentina
+{IP}  olx.com.ar        # Argentina
 
 {IP}  m.olx.co.ao         # Angola
 {IP}  wap.m.olx.co.ao         # Angola
 {IP}  html4.m.olx.co.ao         # Angola
 {IP}  html5.m.olx.co.ao         # Angola
-{IP}  desktop.m.olx.co.ao         # Angola
+{IP}  www.olx.co.ao         # Angola
+{IP}  olx.co.ao         # Angola
 
 {IP}  m.olx.com.bd        # Bangladesh
 {IP}  wap.m.olx.com.bd        # Bangladesh
 {IP}  html4.m.olx.com.bd        # Bangladesh
 {IP}  html5.m.olx.com.bd        # Bangladesh
-{IP}  desktop.m.olx.com.bd        # Bangladesh
+{IP}  www.olx.com.bd        # Bangladesh
+{IP}  olx.com.bd        # Bangladesh
 
 {IP}  olx.com.bo            # Bolivia
 {IP}  www.olx.com.bo        # Bolivia
@@ -35,7 +39,6 @@
 {IP}  wap.m.olx.com.bo        # Bolivia
 {IP}  html4.m.olx.com.bo        # Bolivia
 {IP}  html5.m.olx.com.bo        # Bolivia
-{IP}  desktop.m.olx.com.bo        # Bolivia
 {IP}  www.olx.com.bo        # Bolivia
 {IP}  olx.com.bo        # Bolivia
 
@@ -43,214 +46,250 @@
 {IP}  wap.m.olx.ba            # Bosnia and Herzegovina
 {IP}  html4.m.olx.ba            # Bosnia and Herzegovina
 {IP}  html5.m.olx.ba            # Bosnia and Herzegovina
-{IP}  desktop.m.olx.ba            # Bosnia and Herzegovina
+{IP}  www.olx.ba            # Bosnia and Herzegovina
+{IP}  olx.ba            # Bosnia and Herzegovina
 
 {IP}  m.olx.com.br        # Brazil
 {IP}  wap.m.olx.com.br        # Brazil
 {IP}  html4.m.olx.com.br        # Brazil
 {IP}  html5.m.olx.com.br        # Brazil
-{IP}  desktop.m.olx.com.br        # Brazil
+{IP}  www.olx.com.br        # Brazil
+{IP}  olx.com.br        # Brazil
 
 {IP}  m.olx.cl            # Chile
 {IP}  wap.m.olx.cl            # Chile
 {IP}  html4.m.olx.cl            # Chile
 {IP}  html5.m.olx.cl            # Chile
-{IP}  desktop.m.olx.cl            # Chile
+{IP}  www.olx.cl            # Chile
+{IP}  olx.cl            # Chile
 
 {IP}  m.olx.com.co        # Colombia
 {IP}  wap.m.olx.com.co        # Colombia
 {IP}  html4.m.olx.com.co        # Colombia
 {IP}  html5.m.olx.com.co        # Colombia
-{IP}  desktop.m.olx.com.co        # Colombia
+{IP}  www.olx.com.co        # Colombia
+{IP}  olx.com.co        # Colombia
 
 {IP}  m.olx.co.cr         # Costa Rica
 {IP}  wap.m.olx.co.cr         # Costa Rica
 {IP}  html4.m.olx.co.cr         # Costa Rica
 {IP}  html5.m.olx.co.cr         # Costa Rica
-{IP}  desktop.m.olx.co.cr         # Costa Rica
+{IP}  www.olx.co.cr         # Costa Rica
+{IP}  olx.co.cr         # Costa Rica
 
 {IP}  m.olx.com.ec        # Ecuador
 {IP}  wap.m.olx.com.ec        # Ecuador
 {IP}  html4.m.olx.com.ec        # Ecuador
 {IP}  html5.m.olx.com.ec        # Ecuador
-{IP}  desktop.m.olx.com.ec        # Ecuador
+{IP}  www.olx.com.ec        # Ecuador
+{IP}  olx.com.ec        # Ecuador
 
 {IP}  m.olx.com.eg        # Egypt
 {IP}  wap.m.olx.com.eg        # Egypt
 {IP}  html4.m.olx.com.eg        # Egypt
 {IP}  html5.m.olx.com.eg        # Egypt
-{IP}  desktop.m.olx.com.eg        # Egypt
+{IP}  www.olx.com.eg        # Egypt
+{IP}  olx.com.eg        # Egypt
 
 {IP}  m.olx.com.sv        # El Salvador
 {IP}  wap.m.olx.com.sv        # El Salvador
 {IP}  html4.m.olx.com.sv        # El Salvador
 {IP}  html5.m.olx.com.sv        # El Salvador
-{IP}  desktop.m.olx.com.sv        # El Salvador
+{IP}  www.olx.com.sv        # El Salvador
+{IP}  olx.com.sv        # El Salvador
 
 {IP}  m.olx.fr            # France
 {IP}  wap.m.olx.fr            # France
 {IP}  html4.m.olx.fr            # France
 {IP}  html5.m.olx.fr            # France
-{IP}  desktop.m.olx.fr            # France
+{IP}  www.olx.fr            # France
+{IP}  olx.fr            # France
 
 {IP}  m.olx.com.gh        # Ghana
 {IP}  wap.m.olx.com.gh        # Ghana
 {IP}  html4.m.olx.com.gh        # Ghana
 {IP}  html5.m.olx.com.gh        # Ghana
-{IP}  desktop.m.olx.com.gh        # Ghana
+{IP}  www.olx.com.gh        # Ghana
+{IP}  olx.com.gh        # Ghana
 
 {IP}  m.olx.com.gt        # Guatemala
 {IP}  wap.m.olx.com.gt        # Guatemala
 {IP}  html4.m.olx.com.gt        # Guatemala
 {IP}  html5.m.olx.com.gt        # Guatemala
-{IP}  desktop.m.olx.com.gt        # Guatemala
+{IP}  www.olx.com.gt        # Guatemala
+{IP}  olx.com.gt        # Guatemala
 
 {IP}  m.olx.hn            # Honduras
 {IP}  wap.m.olx.hn            # Honduras
 {IP}  html4.m.olx.hn            # Honduras
 {IP}  html5.m.olx.hn            # Honduras
-{IP}  desktop.m.olx.hn            # Honduras
+{IP}  www.olx.hn            # Honduras
+{IP}  olx.hn            # Honduras
 
 {IP}  m.olx.in            # India
 {IP}  wap.m.olx.in            # India
 {IP}  html4.m.olx.in            # India
 {IP}  html5.m.olx.in            # India
-{IP}  desktop.m.olx.in            # India
+{IP}  www.olx.in            # India
+{IP}  olx.in            # India
 
 {IP}  m.olx.it            # Italy
 {IP}  wap.m.olx.it            # Italy
 {IP}  html4.m.olx.it            # Italy
 {IP}  html5.m.olx.it            # Italy
-{IP}  desktop.m.olx.it            # Italy
+{IP}  www.olx.it            # Italy
+{IP}  olx.it            # Italy
 
 {IP}  m.olx.co.ke         # Kenia
 {IP}  wap.m.olx.co.ke         # Kenia
 {IP}  html4.m.olx.co.ke         # Kenia
 {IP}  html5.m.olx.co.ke         # Kenia
-{IP}  desktop.m.olx.co.ke         # Kenia
+{IP}  www.olx.co.ke         # Kenia
+{IP}  olx.co.ke         # Kenia
 
 {IP}  m.olx.com.mx        # Mexico
 {IP}  wap.m.olx.com.mx        # Mexico
 {IP}  html4.m.olx.com.mx        # Mexico
 {IP}  html5.m.olx.com.mx        # Mexico
-{IP}  desktop.m.olx.com.mx        # Mexico
+{IP}  www.olx.com.mx        # Mexico
+{IP}  olx.com.mx        # Mexico
 
 {IP}  m.olx.co.mz         # Mozambique
 {IP}  wap.m.olx.co.mz         # Mozambique
 {IP}  html4.m.olx.co.mz         # Mozambique
 {IP}  html5.m.olx.co.mz         # Mozambique
-{IP}  desktop.m.olx.co.mz         # Mozambique
+{IP}  www.olx.co.mz         # Mozambique
+{IP}  olx.co.mz         # Mozambique
 
 {IP}  m.olx.com.ni        # Nicaragua
 {IP}  wap.m.olx.com.ni        # Nicaragua
 {IP}  html4.m.olx.com.ni        # Nicaragua
 {IP}  html5.m.olx.com.ni        # Nicaragua
-{IP}  desktop.m.olx.com.ni        # Nicaragua
+{IP}  www.olx.com.ni        # Nicaragua
+{IP}  olx.com.ni        # Nicaragua
 
 {IP}  m.olx.com.ng        # Nigeria
 {IP}  wap.m.olx.com.ng        # Nigeria
 {IP}  html4.m.olx.com.ng        # Nigeria
 {IP}  html5.m.olx.com.ng        # Nigeria
-{IP}  desktop.m.olx.com.ng        # Nigeria
+{IP}  www.olx.com.ng        # Nigeria
+{IP}  olx.com.ng        # Nigeria
 
 {IP}  m.olx.com.pk        # Pakistan
 {IP}  wap.m.olx.com.pk        # Pakistan
 {IP}  html4.m.olx.com.pk        # Pakistan
 {IP}  html5.m.olx.com.pk        # Pakistan
-{IP}  desktop.m.olx.com.pk        # Pakistan
+{IP}  www.olx.com.pk        # Pakistan
+{IP}  olx.com.pk        # Pakistan
 
 {IP}  m.olx.com.pa        # Panama
 {IP}  wap.m.olx.com.pa        # Panama
 {IP}  html4.m.olx.com.pa        # Panama
 {IP}  html5.m.olx.com.pa        # Panama
-{IP}  desktop.m.olx.com.pa        # Panama
+{IP}  www.olx.com.pa        # Panama
+{IP}  olx.com.pa        # Panama
 
 {IP}  m.olx.com.py        # Paraguay
 {IP}  wap.m.olx.com.py        # Paraguay
 {IP}  html4.m.olx.com.py        # Paraguay
 {IP}  html5.m.olx.com.py        # Paraguay
-{IP}  desktop.m.olx.com.py        # Paraguay
+{IP}  www.olx.com.py        # Paraguay
+{IP}  olx.com.py        # Paraguay
 
 {IP}  m.olx.com.pe        # Peru
 {IP}  wap.m.olx.com.pe        # Peru
 {IP}  html4.m.olx.com.pe        # Peru
 {IP}  html5.m.olx.com.pe        # Peru
-{IP}  desktop.m.olx.com.pe        # Peru
+{IP}  www.olx.com.pe        # Peru
+{IP}  olx.com.pe        # Peru
 
 {IP}  m.olx.pt            # Portugal
 {IP}  wap.m.olx.pt            # Portugal
 {IP}  html4.m.olx.pt            # Portugal
 {IP}  html5.m.olx.pt            # Portugal
-{IP}  desktop.m.olx.pt            # Portugal
+{IP}  www.olx.pt            # Portugal
+{IP}  olx.pt            # Portugal
 
 {IP}  m.olx.ru            # Russia
 {IP}  wap.m.olx.ru            # Russia
 {IP}  html4.m.olx.ru            # Russia
 {IP}  html5.m.olx.ru            # Russia
-{IP}  desktop.m.olx.ru            # Russia
+{IP}  www.olx.ru            # Russia
+{IP}  olx.ru            # Russia
 
 {IP}  m.olx.co.za         # South Africa
 {IP}  wap.m.olx.co.za         # South Africa
 {IP}  html4.m.olx.co.za         # South Africa
 {IP}  html5.m.olx.co.za         # South Africa
-{IP}  desktop.m.olx.co.za         # South Africa
+{IP}  www.olx.co.za         # South Africa
+{IP}  olx.co.za         # South Africa
 
 {IP}  m.olx.es            # Spain
 {IP}  wap.m.olx.es            # Spain
 {IP}  html4.m.olx.es            # Spain
 {IP}  html5.m.olx.es            # Spain
-{IP}  desktop.m.olx.es            # Spain
+{IP}  www.olx.es            # Spain
+{IP}  olx.es            # Spain
 
 {IP}  m.olx.lk            # Sri Lanka
 {IP}  wap.m.olx.lk            # Sri Lanka
 {IP}  html4.m.olx.lk            # Sri Lanka
 {IP}  html5.m.olx.lk            # Sri Lanka
-{IP}  desktop.m.olx.lk            # Sri Lanka
+{IP}  www.olx.lk            # Sri Lanka
+{IP}  olx.lk            # Sri Lanka
 
 {IP}  m.olx.co.tz         # Tanzania
 {IP}  wap.m.olx.co.tz         # Tanzania
 {IP}  html4.m.olx.co.tz         # Tanzania
 {IP}  html5.m.olx.co.tz         # Tanzania
-{IP}  desktop.m.olx.co.tz         # Tanzania
+{IP}  www.olx.co.tz         # Tanzania
+{IP}  olx.co.tz         # Tanzania
 
 {IP}  m.olxtunisie.com    # Tunisia
 {IP}  wap.m.olxtunisie.com    # Tunisia
 {IP}  html4.m.olxtunisie.com    # Tunisia
 {IP}  html5.m.olxtunisie.com    # Tunisia
-{IP}  desktop.m.olxtunisie.com    # Tunisia
+{IP}  www.olxtunisie.com    # Tunisia
+{IP}  olxtunisie.com    # Tunisia
 
 {IP}  m.olx.co.ug         # Uganda
 {IP}  wap.m.olx.co.ug         # Uganda
 {IP}  html4.m.olx.co.ug         # Uganda
 {IP}  html5.m.olx.co.ug         # Uganda
-{IP}  desktop.m.olx.co.ug         # Uganda
+{IP}  www.olx.co.ug         # Uganda
+{IP}  olx.co.ug         # Uganda
 
 {IP}  m.olx.com.ua        # Ukraine
 {IP}  wap.m.olx.com.ua        # Ukraine
 {IP}  html4.m.olx.com.ua        # Ukraine
 {IP}  html5.m.olx.com.ua        # Ukraine
-{IP}  desktop.m.olx.com.ua        # Ukraine
+{IP}  www.olx.com.ua        # Ukraine
+{IP}  olx.com.ua        # Ukraine
 
 {IP}  m.olx.ae            # United Arab Emirates
 {IP}  wap.m.olx.ae            # United Arab Emirates
 {IP}  html4.m.olx.ae            # United Arab Emirates
 {IP}  html5.m.olx.ae            # United Arab Emirates
-{IP}  desktop.m.olx.ae            # United Arab Emirates
+{IP}  www.olx.ae            # United Arab Emirates
+{IP}  olx.ae            # United Arab Emirates
 
 {IP}  m.olx.com.uy        # Uruguay
 {IP}  wap.m.olx.com.uy        # Uruguay
 {IP}  html4.m.olx.com.uy        # Uruguay
 {IP}  html5.m.olx.com.uy        # Uruguay
-{IP}  desktop.m.olx.com.uy        # Uruguay
+{IP}  www.olx.com.uy        # Uruguay
+{IP}  olx.com.uy        # Uruguay
 
 {IP}  m.olx.com.ve        # Venezuela
 {IP}  wap.m.olx.com.ve        # Venezuela
 {IP}  html4.m.olx.com.ve        # Venezuela
 {IP}  html5.m.olx.com.ve        # Venezuela
-{IP}  desktop.m.olx.com.ve        # Venezuela
+{IP}  www.olx.com.ve        # Venezuela
+{IP}  olx.com.ve        # Venezuela
 
 {IP}  m.jaovat.com        # Jaovat - Vietnam
 {IP}  wap.m.jaovat.com        # Jaovat - Vietnam
 {IP}  html4.m.jaovat.com        # Jaovat - Vietnam
 {IP}  html5.m.jaovat.com        # Jaovat - Vietnam
-{IP}  desktop.m.jaovat.com        # Jaovat - Vietnam
+{IP}  www.jaovat.com        # Jaovat - Vietnam
+{IP}  jaovat.com        # Jaovat - Vietnam
