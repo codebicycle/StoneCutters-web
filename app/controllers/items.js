@@ -40,7 +40,7 @@ function show(params, callback) {
             if (user) {
                 params.token = user.token;
             }
-            else if (window !== undefined && localStorage) {
+            else if (typeof window !== 'undefined' && localStorage) {
                 anonymousItem = localStorage.getItem('anonymousItem');
                 anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
                 if (securityKey) {
