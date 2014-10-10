@@ -1,9 +1,9 @@
 #item-content {
-    box(#fff, #e4e4e4 , 3px, 0 20px);
-    display: inline-block;
+    box(#fff, #ccc , 3px, 0);
+    float: left;
     tab-arrow(right, $white, #e4e4e4, 1px, 40px, 1);
     position: relative;
-    width: 620px;
+    width: 664px;
 
     &:after {
         margin-top: -185px;
@@ -11,11 +11,19 @@
     &:before {
         margin-top: -186px;
     }
-    > h1 {
-        font-size: 2.7rem;
-        padding-right: 40px
+    > div {
+        &:first-child {
+            padding: 0 20px;
+        }
+        > h1 {
+            font-size: 2.7rem;
+            padding-right: 40px
+        }
     }
     .item-info {
-        color: grey(40%)
+        color: grey(40%);
+        .icons:before {
+            font-size: 1.7rem;
+        }
     }
 }

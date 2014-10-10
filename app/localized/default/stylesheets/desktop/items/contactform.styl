@@ -1,5 +1,5 @@
 #contact-form {
-    box($yellow, $yellowDarker , 3px, 20px);
+    box($yellow, $yellowDarker , 3px, 20px 20px 0 20px);
     margin-left: 20px;
 
     .icons:before {
@@ -25,7 +25,10 @@
     }
 
     form {
-        p {
+        fieldset {
+            border: 0 none;
+            margin: 13px 0;
+            padding: 0;
             &.error {
                 textarea,
                 input[type="text"] {
@@ -69,5 +72,8 @@
             font-size: 1.6rem;
             width: 100%;
         }
+    }
+    .disclaimer p {
+        font-size: 0.93rem;
     }
 }
