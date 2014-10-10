@@ -108,15 +108,15 @@ module.exports = (function() {
     }
 
     function serializeFormJSON(datos) {
-       var o = {};       
-       $.each(datos, function() {
-           if (o[this.name]) {
-               if (!o[this.name].push) {
-                   o[this.name] = [o[this.name]];
+       var o = {};
+        _.each(datos, function each(dato) {        
+           if (o[dato.name]) {
+               if (!o[dato.name].push) {
+                   o[dato.name] = [o[dato.name]];
                }
-               o[this.name].push(this.value || '');
+               o[dato.name].push(dato.value || '');
            } else {
-               o[this.name] = this.value || '';
+               o[dato.name] = dato.value || '';
            }
        });
        return o;

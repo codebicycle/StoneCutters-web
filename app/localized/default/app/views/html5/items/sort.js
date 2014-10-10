@@ -8,9 +8,7 @@ var _ = require('underscore');
 module.exports = Base.extend({    
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);        
-        return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
-        });
+        return _.extend({}, data, {});
     },
     getCurrentUrl :function(){
         var data = Base.prototype.getTemplateData.call(this);
@@ -30,9 +28,10 @@ module.exports = Base.extend({
     onSort: function(event){
         event.preventDefault();
         var toOrder = $("#form-sort input[type='radio']:checked").val();
-        var datos = $('#form-sort').serializeArray();            
-        var newurl = helpers.filters.generateFilterOrder(datos,this.getCurrentUrl(),'sort');            
-        helpers.common.redirect.call(this.app.router, '' + newurl, null, {
+        var datos = $('#form-sort').serializeArray();
+        var data = Base.prototype.getTemplateData.call(this);
+        var newurl = helpers.filters.generateFilterOrder(datos, data, 'sort');
+        helpers.common.redirect.call(this.app.router, newurl, null, {
             status: 200
         });
     },

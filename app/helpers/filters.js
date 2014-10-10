@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var common = require('./common');
-var navigation = require('./navigation');
 module.exports = (function() {
 
     function prepare(metadata) {
@@ -16,8 +15,8 @@ module.exports = (function() {
     }
 
 
-    function generateFilterOrder(fields, data, action) {
-        var aux = data.split('/');
+    function generateFilterOrder(fields, data, action) {        
+        var aux = data.url.split('/');
         var urllocal = '';
         var url = '';
         var filtergenerate = '';
@@ -32,19 +31,18 @@ module.exports = (function() {
             filtergenerate = verifyActualSort(urllocal);
         } else {
             filtergenerate = verifyActualFilter(urllocal);
-        }
-
-        $.each(params, function (index, value) {
-            if(value !== ''){
+        }        
+        _.each(params, function each(index, value) {
+            if(index !== ''){
                 url = url + '-';
                 if (Array.isArray(value)) {
-                    if (parseInt(value[0]) <= parseInt(value[1])) {
-                        param = index + '_' + value[0] + '_' + value[1];
+                    if (parseInt(index[0]) <= parseInt(index[1])) {
+                        param = value + '_' + index[0] + '_' + index[1];
                     } else {
-                        param = index + '_' + value[1] + '_' +value[0];
+                        param = value + '_' + index[1] + '_' +index[0];
                     }
                 }else{
-                    param = index + '_' + value;
+                    param = value + '_' + index;
                 }
                 url = url + '' + param;
             }
