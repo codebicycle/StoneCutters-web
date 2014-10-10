@@ -4,7 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var Seo = require('../modules/seo/seo');
+var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var Item = require('../models/item');
@@ -53,9 +53,8 @@ function show(params, callback) {
                 }
             }
             params.id = itemId;
-            params.seo = true;
+            params.seo = seo.isEnabled();
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
-            params.seo = true;
             delete params.itemId;
             delete params.title;
             delete params.sk;
@@ -245,7 +244,7 @@ function show(params, callback) {
             }
             if (siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
-                seo.addMetatag.call(this, 'canonical', helpers.common.fullizeUrl(url, this.app));
+                seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
             }
             //seo.update();
             this.app.session.update({
@@ -793,7 +792,7 @@ function allresults(params, callback) {
         var prepare = function(done) {
             delete params.search;
 
-            params.seo = true;
+            params.seo = seo.isEnabled();
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
 
@@ -881,6 +880,7 @@ function allresultsig(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
@@ -895,7 +895,7 @@ function allresultsig(params, callback) {
             }
             delete params.search;
 
-            params.seo = true;
+            params.seo = seo.isEnabled();
             params['f.hasimage'] = true;
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);

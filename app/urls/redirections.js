@@ -40,7 +40,6 @@ module.exports = {
     'redirections#search': {
         url: 'search/page/:page'
     },
-
     'redirections#login': {
         url: 'auth/login'
     },

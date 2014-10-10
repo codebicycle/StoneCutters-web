@@ -4,10 +4,9 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
-var Seo = require('../modules/seo/seo');
+var Seo = require('../modules/seo');
 
 module.exports = {
     list: middlewares(list),
@@ -61,7 +60,7 @@ function list(params, callback) {
 
 function show(params, callback) {
     helpers.controllers.control.call(this, params, {
-        seo: true,
+        seo: false,
         cache: false
     }, controller);
 
@@ -138,7 +137,7 @@ function show(params, callback) {
 }
 
 function handleItems(params, promise) {
-//    var seo = Seo.instance(this.app);
+    var seo = Seo.instance(this.app);
     var page = params ? params.page : undefined;
     var infiniteScroll = config.get('infiniteScroll', false);
     var platform = this.app.session.get('platform');
@@ -155,7 +154,7 @@ function handleItems(params, promise) {
 
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
 
-        seo.resetHead.call(this, currentRouter);
+        seo.reset(this.app, currentRouter);
         slug = helpers.common.slugToUrl((subcategory || category).toJSON());
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
@@ -172,7 +171,7 @@ function handleItems(params, promise) {
 
         query = _.clone(params);
         params.categoryId = params.catId;
-        params.seo = true;
+        params.seo = seo.isEnabled();
         params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
         delete params.catId;
         delete params.title;
@@ -194,7 +193,7 @@ function handleItems(params, promise) {
     }.bind(this);
 
     var paginate = function(done, res) {
-        var seo = Seo.instance(this.app);
+       // var seo = Seo.instance(this.app);
         seo.setContent(res.items.metadata.seo);
         var url = '/' + query.title + '-cat-' + query.catId;
         var realPage = res.items.paginate(page, query, url);
@@ -263,13 +262,14 @@ function handleItems(params, promise) {
 }
 
 function handleShow(params, promise) {
+    var seo = Seo.instance(this.app);
 
     var prepare = function(done, _category) {
         var currentRouter = ['categories', 'subcategories'];
         var slug;
 
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        seo.resetHead.call(this, currentRouter);
+        seo.reset(this.app, currentRouter);
 
         slug = helpers.common.slugToUrl(_category.toJSON());
         if (!_category.checkSlug(slug, params.title)) {
@@ -287,9 +287,8 @@ function handleShow(params, promise) {
         });
 
         tracking.addParam('category', _category.toJSON());
-        seo.addMetatag.call(this, 'title', _category.get('trName'));
-        seo.addMetatag.call(this, 'description', _category.get('trName'));
-        seo.update();
+        seo.addMetatag('title', _category.get('trName'));
+        seo.addMetatag('description', _category.get('trName'));
 
         done({
             type: 'categories',
