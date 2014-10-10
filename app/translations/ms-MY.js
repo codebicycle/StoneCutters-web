@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Terima',
     'countryoptions.ChangeCity': 'Tukar Bandar',
     'countryoptions.EnterCity': 'Masukkan Bandar ',
     'countryoptions.OtherCitiesInRegion': 'Bandar lain di <<REGION>>',

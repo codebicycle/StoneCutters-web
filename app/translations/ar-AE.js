@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': '\u0648\u0641\u0627\u0642 ',
     'countryoptions.ChangeCity': 'Change City',
     'countryoptions.EnterCity': '\u0623\u062F\u062E\u0644 \u0627\u0644\u0645\u062F\u064A\u0646\u0629 ',
     'countryoptions.OtherCitiesInRegion': 'Other Cities in <<REGION>>',

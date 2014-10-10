@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Akcept\u0113t',
     'countryoptions.ChangeCity': 'Main\u012Bt pils\u0113tu',
     'countryoptions.EnterCity': 'Ievadiet pils\u0113tu',
     'countryoptions.OtherCitiesInRegion': 'Citas pils\u0113tas no <<REGION>>',

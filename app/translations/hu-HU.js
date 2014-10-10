@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Elfogad\xE1s',
     'countryoptions.ChangeCity': 'V\xE1ros megv\xE1ltoztat\xE1sa',
     'countryoptions.EnterCity': 'Adjon meg egy telep\xFCl\xE9st',
     'countryoptions.OtherCitiesInRegion': 'M\xE1s v\xE1rosok <<REGION>> r\xE9gi\xF3ban',

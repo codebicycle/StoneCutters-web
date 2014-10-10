@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': '\u0A38\u0A35\u0A40\u0A15\u0A3E\u0A30 \u0A15\u0A30\u0A4B',
     'countryoptions.ChangeCity': '\u0A36\u0A39\u0A3F\u0A30 \u0A2C\u0A26\u0A32\u0A4B',
     'countryoptions.EnterCity': '\u0A15\u0A4B\u0A08 \u0A36\u0A39\u0A3F\u0A30 \u0A26\u0A3E\u0A16\u0A32 \u0A15\u0A30\u0A4B',
     'countryoptions.OtherCitiesInRegion': '<<REGION>> \u0A35\u0A3F\u0A71\u0A1A \u0A39\u0A4B\u0A30 \u0A26\u0A47\u0A36',

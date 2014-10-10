@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Menyetujui',
     'countryoptions.ChangeCity': 'Ganti Kota',
     'countryoptions.EnterCity': 'Masukkan Kota',
     'countryoptions.OtherCitiesInRegion': 'Kota lainnya di <<REGION>>',

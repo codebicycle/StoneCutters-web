@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Accepter',
     'countryoptions.ChangeCity': 'Skift by',
     'countryoptions.EnterCity': 'Indtast en by',
     'countryoptions.OtherCitiesInRegion': '\xD8vrige byer i <<REGION>>',

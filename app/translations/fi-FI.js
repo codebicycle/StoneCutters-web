@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Hyv\xE4ksy',
     'countryoptions.ChangeCity': 'Vaihda kaupunkia',
     'countryoptions.EnterCity': 'Sy\xF6t\xE4 kaupunki',
     'countryoptions.OtherCitiesInRegion': 'Muut kaupungit alueella <<REGION>>',

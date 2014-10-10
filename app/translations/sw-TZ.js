@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Kubali',
     'countryoptions.ChangeCity': 'Badilisha Mji',
     'countryoptions.EnterCity': 'Ingiza Mji',
     'countryoptions.OtherCitiesInRegion': 'Miji Mingine katika <<REGION>>',

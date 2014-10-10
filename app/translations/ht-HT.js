@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Aksepte ',
     'countryoptions.ChangeCity': 'Chanje Vil',
     'countryoptions.EnterCity': 'Mete yon vil',
     'countryoptions.OtherCitiesInRegion': 'L\xF2t vil nan<<REGION>>',

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Akzeptieren',
     'countryoptions.ChangeCity': 'Stadt \xE4ndern',
     'countryoptions.EnterCity': 'Geben Sie eine Stadt ein',
     'countryoptions.OtherCitiesInRegion': 'Andere St\xE4dte in <<REGION>>',

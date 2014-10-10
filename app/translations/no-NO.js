@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Godkjenn',
     'countryoptions.ChangeCity': 'Endre by',
     'countryoptions.EnterCity': 'Angi en by',
     'countryoptions.OtherCitiesInRegion': 'Andre kommuner i <<REGION>>',

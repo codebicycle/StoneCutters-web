@@ -42,7 +42,7 @@ module.exports = Base.extend({
     events: {
         'click .logIn span': 'onLoginClick',
         'click #myOlx li a': 'onMenuClick',
-        'click .topBarFilters .filter-btns':'onCancelFilter'
+        'click .topBarFilters .filter-btns': 'onCancelFilter'
     },
     onLoginClick: function(event) {
         event.preventDefault();
@@ -55,7 +55,10 @@ module.exports = Base.extend({
         this.$('#myOlx').slideUp();
     },
     onCancelFilter: function(event) {
-        history.back();
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        window.history.back();
     },
     changeLocation: function (e, siteLocation) {
         this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {

@@ -14,6 +14,9 @@ module.exports = {
     subcategory: function(params, callback) {
         helpers.common.redirect.call(this, '/des-cat-' + params.categoryId + '-p-' + params.page);
     },
+    categoryExpired: function(params, callback) {
+        helpers.common.redirect.call(this, params.title + '-cat-' + params.categoryId);
+    },
     subcategoryList: function(params, callback) {
         helpers.common.redirect.call(this, '/des-cat-' + params.categoryId);
     },

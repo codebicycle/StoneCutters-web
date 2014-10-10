@@ -76,6 +76,14 @@ module.exports = {
             }
         }
     },
+    features: {
+        html5: {
+            postingFlow: {
+                worldwide: false,
+                countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
+            }
+        }
+    },
     seo: {
         wmtools: {
             'www.olx.com.py': 'wZQiDDga0qV3b77xrK_HOc56dEgl9H00BfKwXVXXjeo',

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Kabul',
     'countryoptions.ChangeCity': '\u015Eehri De\u011Fi\u015Ftir',
     'countryoptions.EnterCity': 'Bir \u0130l Girin',
     'countryoptions.OtherCitiesInRegion': '<<REGION>> B\xF6lgesindeki Di\u011Fer \u015Eehirler',

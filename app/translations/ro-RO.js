@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Accept\u0103',
     'countryoptions.ChangeCity': 'Modificare ora\u015F',
     'countryoptions.EnterCity': 'Intr\u0103 un Ora\u015F',
     'countryoptions.OtherCitiesInRegion': 'Alte ora\u015Fe \xEEn <<REGION>>',

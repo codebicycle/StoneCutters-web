@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'P\u0159ijmout',
     'countryoptions.ChangeCity': 'Zm\u011Bnit m\u011Bsto',
     'countryoptions.EnterCity': 'Zadejte m\u011Bsto',
     'countryoptions.OtherCitiesInRegion': 'Jin\xE1 m\u011Bsta v oblasti <<REGION>>',

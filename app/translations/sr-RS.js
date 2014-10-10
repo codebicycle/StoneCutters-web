@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Prihvati',
     'countryoptions.ChangeCity': 'Promenite grad',
     'countryoptions.EnterCity': 'Unesite grad',
     'countryoptions.OtherCitiesInRegion': 'Drugi gradovi u <<REGION>>',

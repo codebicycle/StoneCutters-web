@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'N\xF5ustu',
     'countryoptions.ChangeCity': 'Muuda linn',
     'countryoptions.EnterCity': 'Sisestage linn',
     'countryoptions.OtherCitiesInRegion': '<<REGION>> teised linnad',

@@ -1,0 +1,91 @@
+.pagination-listing {
+    overflow: hidden;
+    padding: 20px 10px 10px;
+    text-align: center;
+
+    a,
+    span,
+    strong {
+        color: #494949;
+        display: inline-block;
+        font-size: 14px;
+        line-height: 14px;
+        vertical-align: middle;
+    }
+
+    > span {
+        opacity: .4;
+    }
+    
+    .pages {
+        padding: 10px 18px 0 10px;
+
+        a {
+            border-radius: 50%;
+        }
+
+        a,
+        strong {
+            margin-left: 8px;
+            min-width: 20px;
+            padding: 3px;
+        }   
+    }
+
+    .button-previous,
+    .button-next {
+        background-color: #FFF;
+        border-radius: 3px;
+        border: 1px solid #CCC;
+        box-shadow: 1px 1px 0 0 #CCC;
+        font-weight: bold;
+        min-width: 70px;
+        padding: 9px;
+    }
+
+    .button-previous::before,
+    .button-next::after,
+    .backtop a::before {
+        background: url(imageUrl/images/html5/arrow_sprite.png) no-repeat 0 -8px;
+        content: "";
+        display: inline-block;
+        height: 9px;
+        width: 16px;
+    }
+
+    .backtop {
+        overflow: hidden;
+        padding-bottom: 25px;
+        
+        a {
+            background-color: #DDD;
+            square(30px);
+            float: right;
+
+            &::before {
+                background-position: 0 0;
+                border-top: 12px solid transparent;
+                height: 5px;
+                width: 9px;
+            }
+        }
+    }
+
+    .button-next {
+        margin-left: 10px;
+
+        &::after {
+            background-position: 7px -20px;
+        }
+    }
+
+    .button-previous,
+    .button-next,
+    .backtop a,
+    .pages a {
+
+        &:active {
+            background-color: #F6F6F6;
+        }
+    }
+}

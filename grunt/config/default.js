@@ -2,6 +2,7 @@
 
 module.exports = {
     environments: ['development', 'testing', 'staging', 'production'],
+    platforms: ['html4', 'html5', 'desktop'],
     stylus: {
         testing: {
             urls: {

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Aanvaar',
     'countryoptions.ChangeCity': 'Verander Stad',
     'countryoptions.EnterCity': 'Voer \'n Stad in',
     'countryoptions.OtherCitiesInRegion': 'Ander Stede in <<REGION>>',

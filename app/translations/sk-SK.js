@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Prija\u0165',
     'countryoptions.ChangeCity': 'Zmena obce',
     'countryoptions.EnterCity': 'Zadajte mesto',
     'countryoptions.OtherCitiesInRegion': 'In\xE9 mest\xE1 v regi\xF3ne <<REGION>>',

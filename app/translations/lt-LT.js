@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Priimti',
     'countryoptions.ChangeCity': 'Keisti miest\u0105',
     'countryoptions.EnterCity': '\u012Eveskite miest\u0105',
     'countryoptions.OtherCitiesInRegion': 'Kiti miestai, esantys <<REGION>>',

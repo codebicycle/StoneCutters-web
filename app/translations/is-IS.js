@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Sam\xFEykkja',
     'countryoptions.ChangeCity': 'Breyta borg',
     'countryoptions.EnterCity': 'Sl\xE1\xF0u inn borg',
     'countryoptions.OtherCitiesInRegion': 'A\xF0rar borgir \xED <<REGION>>',

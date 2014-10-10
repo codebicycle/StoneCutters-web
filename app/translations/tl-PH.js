@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Tanggapin',
     'countryoptions.ChangeCity': 'Baguhin ang Lungsod',
     'countryoptions.EnterCity': 'Magbigay ng Lungsod',
     'countryoptions.OtherCitiesInRegion': 'Ibang mga Lungsod sa <<REGION>>',

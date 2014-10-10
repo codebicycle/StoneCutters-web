@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'countryoptions.Accept': 'Sprejmi',
     'countryoptions.ChangeCity': 'Spremeni kraj',
     'countryoptions.EnterCity': 'Vnesite kraj',
     'countryoptions.OtherCitiesInRegion': 'Drugi kraji v <<REGION>>',
