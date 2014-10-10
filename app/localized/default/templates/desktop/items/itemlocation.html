@@ -1,0 +1,24 @@
+<section id="item-location">
+    <div class="box">
+        <h2>
+            <span class="icons icon-pin"></span>
+            Localização
+        </h2>
+        
+        {% if item.location.cityName != "" and item.location.stateName != "" %}
+            <p>
+                {% if item.location.cityName != "" %}
+                    {{ item.location.cityName }}
+                {% endif %}
+                {% if item.location.stateName != "" %}
+                    {{ item.location.stateName }}
+                {% endif %}
+            </p>
+        {% endif %}
+        <p>{{ item.location.name }}</p>
+        <a href=""><span class="icons icon-zoom"></span>Ver mapa más grande</a>
+    </div>
+    <div class="map">
+        
+    </div>
+</section>
