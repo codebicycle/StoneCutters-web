@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Prijs',
+    'countryoptions.Accept': 'Accepteren',
     'countryoptions.ChangeCity': 'Plaats wijzigen',
     'countryoptions.EnterCity': 'Vul een plaats in',
     'countryoptions.OtherCitiesInRegion': 'Andere plaatsen in <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'De gezochte pagina is helaas niet beschikbaar.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Probeer de pagina rechtstreeks te openen via de <<LINK_HOME_PAGE>>homepage<</LINK_HOME_PAGE>> van OLX.',
     'itemslisting.Category': 'Rubriek:',
+    'itemslisting.ClearAll': 'Alles wissen',
     'itemslisting.FreeClassifieds': 'Gratis advertenties',
     'itemslisting.NavigatorByCategory': 'Rubriek',
     'itemslisting.NavigatorByLocation': 'Locatie',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Kies een plaats om een advertentie te kunnen plaatsen',
     'listingpageitemslisting.AllResultsNew': 'Alle resultaten',
     'listingpageitemslisting.FindAdsIn2': 'Vind advertenties in <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Land',
     'posting_selectcategory.categories': 'Rubriek',
     'posting_selectcategory.subCategories': 'Subrubriek',
+    'posting_optionallist.OnlyWithPictures': 'Alleen met foto\'s',
     'itemgeneraldetails.addFavorites': 'Toevoegen aan favorieten',
     'itemgeneraldetails.City': 'plaats',
     'itemgeneraldetails.DatePosted': 'Plaatsingsdatum',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Naam',
     'loginheader.Identification': 'Identificatie',
     'register_confirmation.782': 'Je moet akkoord gaan met onze gebruikersovereenkomst om de registratie te kunnen voltooien.',
+    'alertsbody.AlertsCreate_0252_All': 'Alle',
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
     'about.AboutBrand': 'Over OLX',
     'about.AboutText1': 'OLX is het meest toonaangevende advertentieplatform ter wereld en is gericht op opkomende markten, zowel mobiel als online',

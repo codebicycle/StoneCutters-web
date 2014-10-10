@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Cena',
+    'countryoptions.Accept': 'Akceptuj',
     'countryoptions.ChangeCity': 'Zmie\u0144 Miasto',
     'countryoptions.EnterCity': 'Wpisz miasto',
     'countryoptions.OtherCitiesInRegion': 'Inne miasta w obszarze:  <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Przykro nam, strona, kt\xF3rej szukasz nie jest dost\u0119pna.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Spr\xF3buj otworzy\u0107 stron\u0119 bezpo\u015Brednio ze Strony G\u0142\xF3wnej  OLX <<LINK_HOME_PAGE>><</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategoria:',
+    'itemslisting.ClearAll': 'Usu\u0144 wszystko',
     'itemslisting.FreeClassifieds': 'Darmowe og\u0142oszenia',
     'itemslisting.NavigatorByCategory': 'Kategoria',
     'itemslisting.NavigatorByLocation': 'Lokalizacja',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Prosz\u0119 wybra\u0107 miasto aby doda\u0107 og\u0142oszenie',
     'listingpageitemslisting.AllResultsNew': 'Wszystkie wyniki',
     'listingpageitemslisting.FindAdsIn2': 'Wyszukaj og\u0142oszenia w lokalizacji <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> wyniki dla <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',
     'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Kraj',
     'posting_selectcategory.categories': 'Kategoria',
     'posting_selectcategory.subCategories': 'Podkategoria',
+    'posting_optionallist.OnlyWithPictures': 'Tylko ze zdj\u0119ciem',
     'itemgeneraldetails.addFavorites': 'Dodaj do ulubionych',
     'itemgeneraldetails.City': 'miasto',
     'itemgeneraldetails.DatePosted': 'Data opublikowania',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Twoje imi\u0119',
     'loginheader.Identification': 'Identyfikacja',
     'register_confirmation.782': 'Musisz zaakceptowa\u0107 warunki regulaminu, aby doko\u0144czy\u0107 rejestracj\u0119.',
+    'alertsbody.AlertsCreate_0252_All': 'Wszystkie',
     'terms.TermsOfUse': 'Warunki u\u017Cytkowania',
     'about.AboutBrand': 'O serwisie OLX',
     'about.AboutText1': 'OLX jest najwi\u0119ksz\u0105 na \u015Bwiecie platform\u0105 og\u0142oszeniow\u0105 przeznaczon\u0105 g\u0142\xF3wnie na rynki wschodz\u0105ce. Serwis jest dost\u0119pny zar\xF3wno na urz\u0105dzeniach przeno\u015Bnych jak i online.',

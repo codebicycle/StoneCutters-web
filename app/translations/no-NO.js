@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Pris',
+    'countryoptions.Accept': 'Godkjenn',
     'countryoptions.ChangeCity': 'Endre by',
     'countryoptions.EnterCity': 'Angi en by',
     'countryoptions.OtherCitiesInRegion': 'Andre kommuner i <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Vi beklager at siden du leter etter er ikke tilgjengelig.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pr\xF8v \xE5 aksessere siden direkte fra OLX <<LINK_HOME_PAGE>>Hjemmesiden<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.ClearAll': 'Slett alle',
     'itemslisting.FreeClassifieds': 'Gratis rubrikkannonser',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Sted',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Vennligst velg en by for \xE5 legge inn en gjenstand',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
     'listingpageitemslisting.FindAdsIn2': 'Finn annonser i <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maks',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultater for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi beklager men vi fant ingen s\xF8keresultater.',
     'listingpageitemslisting.ZeroResultsPage': 'Beklager, men vi har ikke funnet noen resultater i <<CATEGORY>> i <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Land',
     'posting_selectcategory.categories': 'Kategori',
     'posting_selectcategory.subCategories': 'Underkategori',
+    'posting_optionallist.OnlyWithPictures': 'Kun med bilder',
     'itemgeneraldetails.addFavorites': 'Legg til favoritter',
     'itemgeneraldetails.City': 'By',
     'itemgeneraldetails.DatePosted': 'Dato satt inn',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Navn',
     'loginheader.Identification': 'Identifikasjon',
     'register_confirmation.782': 'Du m\xE5 godta v\xE5re brukervilk\xE5r for \xE5 avslutte registreringsprosessen.',
+    'alertsbody.AlertsCreate_0252_All': 'Alle',
     'terms.TermsOfUse': 'Bruker Vilk\xE5r',
     'about.AboutBrand': 'Om OLX',
     'about.AboutText1': 'OLX er verdens ledende annonseplattform fokusert p\xE5 fremvoksende markeder, b\xE5de for mobil og p\xE5 nettet',

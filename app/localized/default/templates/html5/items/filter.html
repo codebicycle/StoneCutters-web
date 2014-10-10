@@ -1,36 +1,42 @@
-<div class="topBarFilters">
-	<a href="#" class="filter-btns blue">Cancelar</a>
-	<h2>Filtrar resultados</h2>
-</div>
-<form class="filters">
-	<fieldset>
-		<strong>Precio</strong>
-		<div class="left">
-			<label>Min $:</label>
-			<input type="number" value="">
-		</div>
-		<div class="right">
-			<label>Max $:</label>
-			<input type="number" value="">
-		</div>
-	</fieldset>
-	<fieldset>
-		<label>Ubicacion:</label>
-		<a class="bold" href="#">Toda Argentina</a>
-	</fieldset>
-	<fieldset>
-		<label>Categoria:</label>
-		<a class="bold" href="#">Todas</a>
-	</fieldset>
+<form id="filter" class="filters">
+	{% from macros import FieldRangeFilter, FieldCheckFilter, FieldSelectorFilter %}
+	{% for filter in filtersOrd %}
+		{% if filter.name == 'pricerange' %}
+			{% if appliedFilter[filter.name] %}
+				{% set min = appliedFilter[filter.name][0] %}
+				{% set max = appliedFilter[filter.name][1] %}
+			{% else %}
+				{% set min = '' %}
+				{% set max = '' %}
+			{% endif %}
+			{{ FieldRangeFilter(dictionary["buyerinfo.Price"], dictionary["listingpageitemslisting.Max"]+' $:', dictionary["listingpageitemslisting.Min"]+' $:', filter.name, min, max) }}
+		{% endif %}
+
+		{% if filter.name == 'hasimage' %}
+			{% if appliedFilter[filter.name] %}
+				{% set check = 'checked' %}
+			{% else %}
+				{% set check = '' %}
+			{% endif %}
+			{{ FieldCheckFilter(dictionary["posting_optionallist.OnlyWithPictures"]+':', filter.name, 'checkbox', 'true', check) }}
+		{% endif %}
+
+		{% if filter.name == 'hasimage' %}
+			{{ FieldSelectorFilter(dictionary["homeheader.Selected_Region"]+':', '', location.current.name if location.current.name else location.name, 'location') }}
+		{% endif %}
+
+		{% if filter.name == 'parentcategory' %}
+			{{ FieldSelectorFilter(dictionary["itemslisting.Category"], '/', dictionary["alertsbody.AlertsCreate_0252_All"], '') }}
+		{% endif %}
+
+	{% endfor %}
+
 	<fieldset class="no-border">
-		<a href="#">Limpiar filtros</a>
+		<a href="#" class="clear">{{ dictionary["itemslisting.ClearAll"] }}</a>
 	</fieldset>
+
 	<fieldset class="center no-border">
-		<input class="filter-btns orange" type="submit" value="aceptar" />
+		<input class="btns orange" type="submit" value="{{ dictionary["countryoptions.Accept"] }}" />
 	</fieldset>
+
 </form>
-<ul>
-    {% for filter in filters %}
-        <li>{{ filter.name }}</li>
-    {% endfor %}
-</ul>

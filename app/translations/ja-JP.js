@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': '\u4FA1\u683C',
+    'countryoptions.Accept': '\u627F\u8AFE\u3059\u308B',
     'countryoptions.ChangeCity': '\u9055\u3046\u5E02\u3092\u9078\u629E\u3059\u308B',
     'countryoptions.EnterCity': '\u5E02\u3092\u5165\u529B\u3059\u308B',
     'countryoptions.OtherCitiesInRegion': '<<REGION>>\u306B\u3042\u308B\u305D\u306E\u4ED6\u306E\u90FD\u5E02',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': '\u304A\u63A2\u3057\u306E\u30DA\u30FC\u30B8\u306F\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'OLX <<LINK_HOME_PAGE>>\u30DB\u30FC\u30E0\u30DA\u30FC\u30B8<</LINK_HOME_PAGE>>\u304B\u3089\u76F4\u63A5\u30DA\u30FC\u30B8\u306B\u30A2\u30AF\u30BB\u30B9\u3057\u3066\u304F\u3060\u3055\u3044\u3002',
     'itemslisting.Category': '\u30AB\u30C6\u30B4\u30EA\u30FC:',
+    'itemslisting.ClearAll': '\u5168\u3066\u30AF\u30EA\u30A2',
     'itemslisting.FreeClassifieds': '\u7121\u6599\u30AF\u30E9\u30B7\u30D5\u30A1\u30A4\u30C9',
     'itemslisting.NavigatorByCategory': '\u30AB\u30C6\u30B4\u30EA\u30FC',
     'itemslisting.NavigatorByLocation': '\u30ED\u30B1\u30FC\u30B7\u30E7\u30F3',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': '\u30A2\u30A4\u30C6\u30E0\u3092\u63B2\u8F09\u3059\u308B\u306B\u306F\u5E02/\u90FD\u5E02\u3092\u304A\u9078\u3073\u304F\u3060\u3055\u3044',
     'listingpageitemslisting.AllResultsNew': '\u3059\u3079\u3066\u306E\u7D50\u679C',
     'listingpageitemslisting.FindAdsIn2': '<<LOCATION>>\u306E\u5E83\u544A\u3092\u63A2\u3059',
+    'listingpageitemslisting.Max': '\u6700\u5927',
+    'listingpageitemslisting.Min': '\u6700\u5C0F',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> \u306E\u7D50\u679C <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3002\u691C\u7D22\u7D50\u679C\u306F\u3054\u3056\u3044\u307E\u305B\u3093\u3002',
     'listingpageitemslisting.ZeroResultsPage': '\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3002<<REGION>>\u306E<<CATEGORY>>\u3067\u7D50\u679C\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002 ',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': '\u56FD',
     'posting_selectcategory.categories': '\u30AB\u30C6\u30B4\u30EA\u30FC',
     'posting_selectcategory.subCategories': '\u30B5\u30D6\u30AB\u30C6\u30B4\u30EA\u30FC',
+    'posting_optionallist.OnlyWithPictures': '\u5199\u771F\u4ED8\u304D\u306E\u307F',
     'itemgeneraldetails.addFavorites': '\u304A\u6C17\u306B\u5165\u308A\u306B\u8FFD\u52A0\u3059\u308B',
     'itemgeneraldetails.City': '\u5E02',
     'itemgeneraldetails.DatePosted': '\u63B2\u8F09\u65E5',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': '\u304A\u540D\u524D',
     'loginheader.Identification': '\u8EAB\u5206\u8A3C\u660E',
     'register_confirmation.782': '\u767B\u9332\u3092\u5B8C\u4E86\u3059\u308B\u305F\u3081\u3001\u5F53\u793E\u306E\u30E6\u30FC\u30B6\u30FC\u898F\u7D04\u306B\u3054\u540C\u610F\u304F\u3060\u3055\u3044\u3002',
+    'alertsbody.AlertsCreate_0252_All': '\u3059\u3079\u3066',
     'terms.TermsOfUse': '\u5229\u7528\u898F\u7D04',
     'about.AboutBrand': 'OLX\u306B\u3064\u3044\u3066',
     'about.AboutText1': 'OLX \u306F\u30E2\u30D0\u30A4\u30EB\u3068\u30AA\u30F3\u30E9\u30A4\u30F3\u4E21\u65B9\u306E\u632F\u8208\u5E02\u5834\u306B\u5546\u5E97\u3092\u5F53\u3066\u305F\u3001\u4E16\u754C\u3092\u30EA\u30FC\u30C9\u3059\u308B\u5E83\u544A\u30D7\u30E9\u30C3\u30C8\u30D5\u30A9\u30FC\u30E0\u3067\u3059\u3002',

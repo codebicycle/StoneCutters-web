@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Preu',
+    'countryoptions.Accept': 'Accepta',
     'countryoptions.ChangeCity': 'Canvia la ciutat',
     'countryoptions.EnterCity': 'Introdu\xEFu una ciutat',
     'countryoptions.OtherCitiesInRegion': 'Altres ciutats de <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Ho sentim, la p\xE0gina que busques no est\xE0 disponible.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Prova d\'accedir a la p\xE0gina directament des de OLX <<LINK_HOME_PAGE>>p\xE0gina d\'inici<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Categoria:',
+    'itemslisting.ClearAll': 'Borrar tots',
     'itemslisting.FreeClassifieds': 'Classificats gratu\xEFts',
     'itemslisting.NavigatorByCategory': 'Categoria',
     'itemslisting.NavigatorByLocation': 'Ubicaci\xF3',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Seleccioneu una ciutat per publicar un article',
     'listingpageitemslisting.AllResultsNew': 'Tots els resultats',
     'listingpageitemslisting.FindAdsIn2': 'Troba anuncis a <<LOCATION>>',
+    'listingpageitemslisting.Max': 'M\xE0x.',
+    'listingpageitemslisting.Min': 'M\xEDn.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultats per a <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ho sentim, no hem trobat resultats de <<CATEGORY>> a <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Pa\xEDs',
     'posting_selectcategory.categories': 'Categoria',
     'posting_selectcategory.subCategories': 'Subcategoria',
+    'posting_optionallist.OnlyWithPictures': 'Nom\xE9s amb fotos',
     'itemgeneraldetails.addFavorites': 'Afegir a favorits',
     'itemgeneraldetails.City': 'Ciutat',
     'itemgeneraldetails.DatePosted': 'Data de publicaci\xF3',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Nom',
     'loginheader.Identification': 'Identificaci\xF3',
     'register_confirmation.782': 'Heu d\'acceptar el nostre acord d\'usuari per completar el registre.',
+    'alertsbody.AlertsCreate_0252_All': 'Tot',
     'terms.TermsOfUse': 'Condicions d\'\xFAs',
     'about.AboutBrand': 'Sobre OLX',
     'about.AboutText1': 'OLX\xE9s la plataforma l\xEDder al m\xF3n en anuncis classificats centrada en mercats emergents, tant en el sector m\xF2bil com online',

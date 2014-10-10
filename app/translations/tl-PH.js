@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Halaga',
+    'countryoptions.Accept': 'Tanggapin',
     'countryoptions.ChangeCity': 'Baguhin ang Lungsod',
     'countryoptions.EnterCity': 'Magbigay ng Lungsod',
     'countryoptions.OtherCitiesInRegion': 'Ibang mga Lungsod sa <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Ipagpaumanhin, ang pahinang iyong hinahanap ay hindi available.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Subukang i-access ang pahina ng tuwiran mula sa  OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorya:',
+    'itemslisting.ClearAll': 'Alisin lahat',
     'itemslisting.FreeClassifieds': 'Libreng mga klasipikadong patalastas',
     'itemslisting.NavigatorByCategory': 'Kategorya',
     'itemslisting.NavigatorByLocation': 'Lokasyon',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Pumili ng lungsod para magpost ng item',
     'listingpageitemslisting.AllResultsNew': 'Lahat ng resulta',
     'listingpageitemslisting.FindAdsIn2': 'Maghanap ng mga anunsyo sa <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> na mga resulta para sa <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',
     'listingpageitemslisting.ZeroResultsPage': 'Paumanhin, walang resulta sa <<CATEGORY>> sa <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Bansa',
     'posting_selectcategory.categories': 'Kategorya',
     'posting_selectcategory.subCategories': 'Subcategory',
+    'posting_optionallist.OnlyWithPictures': 'May mga larawan lamang',
     'itemgeneraldetails.addFavorites': 'Ilagay sa mga paborito',
     'itemgeneraldetails.City': 'lungsod',
     'itemgeneraldetails.DatePosted': 'Petsa kung Kailan Pinost',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Pangalan',
     'loginheader.Identification': 'Identipikasyon',
     'register_confirmation.782': 'Dapat na sumang-ayon ka sa aming user agreement upang makumpleto ang pagrehistro.',
+    'alertsbody.AlertsCreate_0252_All': 'Lahat',
     'terms.TermsOfUse': 'Patakaran ng Paggamit',
     'about.AboutBrand': 'Tungkol sa OLX',
     'about.AboutText1': 'Ang OLX ay ang nangungunang platform ng mga anunsyo sa mundo na nakatuon sa mga umuunlad na merkado, sa cellphone at online',

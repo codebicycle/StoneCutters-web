@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': '\uAC00\uACA9',
+    'countryoptions.Accept': '\uC218\uB77D',
     'countryoptions.ChangeCity': '\uB3C4\uC2DC \uBCC0\uACBD\uD558\uAE30',
     'countryoptions.EnterCity': '\uB3C4\uC2DC\uB97C \uC785\uB825\uD558\uC138\uC694',
     'countryoptions.OtherCitiesInRegion': '\uAE30\uD0C0 \uB3C4\uC2DC, <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uC6D0\uD558\uC2DC\uB294 \uD398\uC774\uC9C0\uAC00 \uC874\uC7AC\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'OLX <<LINK_HOME_PAGE>>Home \uD398\uC774\uC9C0<</LINK_HOME_PAGE>>\uC5D0\uC11C \uC9C1\uC811 \uD574\uB2F9 \uD398\uC774\uC9C0\uB85C \uB4E4\uC5B4\uAC00\uC138\uC694 ',
     'itemslisting.Category': '\uCE74\uD14C\uACE0\uB9AC:',
+    'itemslisting.ClearAll': '\uC804\uCCB4 \uC0AD\uC81C\uD558\uAE30',
     'itemslisting.FreeClassifieds': '\uBB34\uB8CC \uC548\uB0B4\uAD11\uACE0',
     'itemslisting.NavigatorByCategory': '\uBC94\uC704\uBCC4',
     'itemslisting.NavigatorByLocation': '\uC704\uCE58',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': '\uBB3C\uD488\uC744 \uC62C\uB9AC\uC2DC\uB824\uBA74 \uB3C4\uC2DC\uBA85\uC744 \uC120\uC815\uD558\uC5EC \uC8FC\uC138\uC694',
     'listingpageitemslisting.AllResultsNew': '\uBAA8\uB4E0 \uACB0\uACFC',
     'listingpageitemslisting.FindAdsIn2': '<<LOCATION>>\uC5D0\uC11C \uAD11\uACE0\uB97C \uCC3E\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4.',
+    'listingpageitemslisting.Max': '\uCD5C\uB300',
+    'listingpageitemslisting.Min': '\uCD5C\uC18C',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>>\uC5D0 \uB300\uD55C <<NUMBER>> \uACB0\uACFC\uB4E4',
     'listingpageitemslisting.WeAreSorryNoResults': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uAC80\uC0C9\uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'listingpageitemslisting.ZeroResultsPage': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4, <<REGION>>\uC758 <<CATEGORY>>\uC5D0\uC11C \uCC3E\uC740 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': '\uB098\uB77C',
     'posting_selectcategory.categories': '\uCE74\uD14C\uACE0\uB9AC',
     'posting_selectcategory.subCategories': '\uBD80\uCE74\uD14C\uACE0\uB9AC',
+    'posting_optionallist.OnlyWithPictures': '\uC0AC\uC9C4\uC73C\uB85C\uB9CC',
     'itemgeneraldetails.addFavorites': '\uAD00\uC2EC\uB9AC\uC2A4\uD2B8 \uCD94\uAC00',
     'itemgeneraldetails.City': '\uB3C4\uC2DC',
     'itemgeneraldetails.DatePosted': '\uB4F1\uB85D\uC77C\uC790',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Name',
     'loginheader.Identification': '\uC2E0\uC6D0',
     'register_confirmation.782': '\uC0AC\uC6A9\uC790 \uB3D9\uC758\uC11C\uC5D0 \uB3D9\uC758\uD558\uC2E0 \uD6C4 \uB4F1\uB85D\uACFC\uC815\uC774 \uC885\uB8CC\uB418\uAC8C \uB429\uB2C8\uB2E4.',
+    'alertsbody.AlertsCreate_0252_All': '\uC804\uBD80',
     'terms.TermsOfUse': '\uC0AC\uC6A9\uC57D\uC815',
     'about.AboutBrand': 'OLX \uC18C\uAC1C',
     'about.AboutText1': 'OLX \uBE0C\uB79C\uB4DC\uB294 \uC2E0\uD765 \uC2DC\uC7A5, \uBAA8\uBC14\uC77C \uBC0F \uC628\uB77C\uC778\uC744 \uC804\uBB38\uC73C\uB85C \uD558\uB294 \uC138\uACC4 \uC120\uB450\uC758 \uBD84\uB958 \uAD11\uACE0 \uD50C\uB7AB\uD3FC\uC785\uB2C8\uB2E4',

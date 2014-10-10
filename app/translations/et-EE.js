@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Hind',
+    'countryoptions.Accept': 'N\xF5ustu',
     'countryoptions.ChangeCity': 'Muuda linn',
     'countryoptions.EnterCity': 'Sisestage linn',
     'countryoptions.OtherCitiesInRegion': '<<REGION>> teised linnad',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Kahjuks pole otsitav lehek\xFClg k\xE4ttesaadav.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Proovige sellele lehek\xFCljele minna otse OLXi <<LINK_HOME_PAGE>>kodulehe kaudu<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategooria:',
+    'itemslisting.ClearAll': 'T\xFChjenda k\xF5ik',
     'itemslisting.FreeClassifieds': 'Tasuta kuulutused',
     'itemslisting.NavigatorByCategory': 'Kategooria',
     'itemslisting.NavigatorByLocation': 'Asukoht',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Kuulutuse postitamiseks sisestage palun linn',
     'listingpageitemslisting.AllResultsNew': 'K\xF5ik tulemused',
     'listingpageitemslisting.FindAdsIn2': 'Leidke kuulutusi asukohas <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulemust m\xE4rks\xF5nale <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vabandame, kuid meil ei ole Teie otsingule tulemusi',
     'listingpageitemslisting.ZeroResultsPage': 'Vabandame, me ei leidnud tulemusi <<CATEGORY>>  <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Riik',
     'posting_selectcategory.categories': 'Kategooria',
     'posting_selectcategory.subCategories': 'Alamkategooria',
+    'posting_optionallist.OnlyWithPictures': 'Ainult piltidega',
     'itemgeneraldetails.addFavorites': 'Lisa lemmikutesse',
     'itemgeneraldetails.City': 'Linn',
     'itemgeneraldetails.DatePosted': 'Postituse kuup\xE4ev',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Nimi',
     'loginheader.Identification': 'Identifitseerimine',
     'register_confirmation.782': 'Registreerimise l\xF5petamiseks peate Te n\xF5ustuma meie kasutajalepinguga.',
+    'alertsbody.AlertsCreate_0252_All': 'K\xF5ik',
     'terms.TermsOfUse': 'Kasutustingimused',
     'about.AboutBrand': 'Mis on OLX',
     'about.AboutText1': 'OLX on maailma juhtivaid kuulutuste avaldamise platvorme ning keskendub arenevatele turgudele \u2013 nii mobiilside kui veebi vahendusel.',

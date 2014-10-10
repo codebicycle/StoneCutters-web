@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Pris',
+    'countryoptions.Accept': 'Accepter',
     'countryoptions.ChangeCity': 'Skift by',
     'countryoptions.EnterCity': 'Indtast en by',
     'countryoptions.OtherCitiesInRegion': '\xD8vrige byer i <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Desv\xE6rre kan siden du leder efter ikke vises,',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pr\xF8v at f\xE5 adgang til siden direkte fra <<LINK_HOME_PAGE>>hjemmesiden<</LINK_HOME_PAGE>> for OLX.',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.ClearAll': 'Ryd alle',
     'itemslisting.FreeClassifieds': 'gratis annoncer',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Sted',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'V\xE6lg venligst en by for at kunne indrykke en annonce',
     'listingpageitemslisting.AllResultsNew': 'Alle resultater',
     'listingpageitemslisting.FindAdsIn2': 'Find annoncer i <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maks.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultater for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desv\xE6rre kan vi ikke finde noget resultat p\xE5 din s\xF8gning.',
     'listingpageitemslisting.ZeroResultsPage': 'Vi beklager, men vi har ikke fundet nogle resultater i <<CATEGORY>> i <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Land',
     'posting_selectcategory.categories': 'Kategori',
     'posting_selectcategory.subCategories': 'Underkategori',
+    'posting_optionallist.OnlyWithPictures': 'Kun med billeder',
     'itemgeneraldetails.addFavorites': 'Tilf\xF8j til favoritter',
     'itemgeneraldetails.City': 'By',
     'itemgeneraldetails.DatePosted': 'Dato bragt',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Navn',
     'loginheader.Identification': 'Identifikation',
     'register_confirmation.782': 'Du skal acceptere vores brugeraftale for at f\xE6rdigg\xF8re din tilmelding.',
+    'alertsbody.AlertsCreate_0252_All': 'Alle',
     'terms.TermsOfUse': 'Regler for anvendelse',
     'about.AboutBrand': 'Om OLX',
     'about.AboutText1': 'OLX er verdens f\xF8rende platform for rubrikannoncer med fokus p\xE5 nye markeder, b\xE5de mobil og online',

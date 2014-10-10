@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Pri',
+    'countryoptions.Accept': 'Aksepte ',
     'countryoptions.ChangeCity': 'Chanje Vil',
     'countryoptions.EnterCity': 'Mete yon vil',
     'countryoptions.OtherCitiesInRegion': 'L\xF2t vil nan<<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Nou regr\xE8t, men paj wap ch\xE8che an pa disponib. ',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Eseye antre sou paj la dir\xE8ktman de<<LINK_HOME_PAGE>>Paj Dak\xE8y <</LINK_HOME_PAGE>> OLX  la.',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.ClearAll': 'Efase Tout',
     'itemslisting.FreeClassifieds': 'Anons Gratis',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Kote',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Tanpri chwazi yon vil pou ou ka pase yon anons',
     'listingpageitemslisting.AllResultsNew': 'Tout resilta yo',
     'listingpageitemslisting.FindAdsIn2': 'W ap jwenn reklam yo nan <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maksim\xF2m',
+    'listingpageitemslisting.Min': 'Minim\xF2m',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezilta pou <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nou regr\xE8t men nou pa jwenn okenn rezilta pou rech\xE8ch ou an. ',
     'listingpageitemslisting.ZeroResultsPage': 'Nou regr\xE8t, nou pa jwenn okenn rezilta nan<<CATEGORY>> pou <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Peyi',
     'posting_selectcategory.categories': 'Kategori',
     'posting_selectcategory.subCategories': 'Dezy\xE8m Kategori',
+    'posting_optionallist.OnlyWithPictures': 'S\xE8lman sa k gen foto',
     'itemgeneraldetails.addFavorites': 'Ajoute sou favori yo',
     'itemgeneraldetails.City': 'Vil',
     'itemgeneraldetails.DatePosted': 'Dat li te pibliye',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Non',
     'loginheader.Identification': 'Idantifikayon',
     'register_confirmation.782': 'F\xF2k ou aksepte regleman nou yo avan pou nou  ka fin enskri ou. ',
+    'alertsbody.AlertsCreate_0252_All': 'Tout',
     'terms.TermsOfUse': 'Regleman pou Itilize',
     'about.AboutBrand': 'Enf\xF2masyon sou OLX',
     'about.AboutText1': 'OLX se dirijan mondyal platf\xF2m anons mobil ak ent\xE8n\xE8t ki konsantre nan mache k ap grandi',

@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': '\u0633\u0639\u0631',
+    'countryoptions.Accept': '\u0648\u0641\u0627\u0642 ',
     'countryoptions.ChangeCity': 'Change City',
     'countryoptions.EnterCity': '\u0623\u062F\u062E\u0644 \u0627\u0644\u0645\u062F\u064A\u0646\u0629 ',
     'countryoptions.OtherCitiesInRegion': 'Other Cities in <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Sorry, the page you are looking for is not available.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Try to access the page directly from the OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': '\u0645\u0631\u062A\u0628\u0627\u062A',
+    'itemslisting.ClearAll': 'Clear All',
     'itemslisting.FreeClassifieds': '\u0627\u0639\u0644\u0627\u0646 \u0645\u062C\u0627\u0646\u064A ',
     'itemslisting.NavigatorByCategory': '\u0645\u0631\u062A\u0628\u0629',
     'itemslisting.NavigatorByLocation': '\u0645\u0648\u0642\u0639',
@@ -66,6 +69,8 @@ module.exports = {
     'registrationconfirmsuccesstext.Browse': ' OLX \u0645\u0644\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u062A\u0628\u0627\u062A \u0645\u0646',
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.FindAdsIn2': 'Find ads in <<LOCATION>>',
+    'listingpageitemslisting.Max': '\u0645\u0627\u0643\u0633',
+    'listingpageitemslisting.Min': '\u062F\u0642\u064A\u0642\u0629',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',
@@ -78,6 +83,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': '\u0628\u0644\u062F ',
     'posting_selectcategory.categories': '\u0645\u0631\u062A\u0628\u0629 ',
     'posting_selectcategory.subCategories': '\u0642\u0628\u0644 \u0627\u0644\u0645\u0631\u062A\u0628\u0629 ',
+    'posting_optionallist.OnlyWithPictures': 'Only with pictures',
     'itemgeneraldetails.addFavorites': '\u0623\u0636\u0627\u0641\u0629 \u0644\u0644\u0645\u0641\u0636\u0644\u0627\u062A ',
     'itemgeneraldetails.City': '\u0645\u062F\u064A\u0646\u0629 ',
     'itemgeneraldetails.DatePosted': '\u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0627\u0639\u0644\u0627\u0645 ',
@@ -155,6 +161,7 @@ module.exports = {
     'replymessage.Name': '\u0623\u0633\u0645',
     'loginheader.Identification': 'Identification ',
     'register_confirmation.782': 'You must agree our user agreement to complete registration.',
+    'alertsbody.AlertsCreate_0252_All': '\u0643\u0644',
     'terms.TermsOfUse': '\u0634\u0631\u0648\u0637 \u0627\u0644\u0627\u0633\u062A\u062E\u062F\u0627\u0645',
     'business_directory.Map': 'Map',
     'optionals.opt-138-323-translation-location': 'Location'

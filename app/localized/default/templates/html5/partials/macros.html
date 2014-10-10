@@ -66,3 +66,33 @@
         </select>
     {% endif %}
 {% endmacro %}
+
+
+{% macro FieldRangeFilter(title, label1, label2, name, val1 = '', val2 = '') %}
+    <fieldset>
+        <strong>{{ title }}</strong>
+        <div class="left">
+            <label>{{ label1 }}</label>
+            <input type="number" name="{{ name }}" value="{{ val1 }}">
+        </div>
+        <div class="right">
+            <label>{{ label2 }}</label>
+            <input type="number" name="{{ name }}" value="{{ val2 }}">
+        </div>
+    </fieldset>
+{% endmacro %}
+
+{% macro FieldCheckFilter(label, name, type, value, checked = '') %}
+    <fieldset>
+        <label class="block">{{ label }}
+            <input type="{{ type }}" name="{{ name }}" value="{{ value }}" {{ checked }}>
+        </label>
+    </fieldset>
+{% endmacro %}
+
+{% macro FieldSelectorFilter(label, href, value, class) %}
+    <fieldset>
+        <label>{{ label }}</label>
+        <a class="bold {{ class }}" href="{{ href }}">{{ value }}</a>
+    </fieldset>
+{% endmacro %}

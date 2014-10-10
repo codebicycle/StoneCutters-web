@@ -2,35 +2,18 @@
 	font-size: .875rem;
 	color: #494949;
 
-	.topBarFilters {
-		// background: #432;
-		padding: .313rem .625rem;
-
-		a {
-			width: 25%;
-			// background: ;
-		}
-
-		h2 {
-			width: 75%;
-			text-align: center;
-			// font-size: ;
-		}
-	}
-
 	form.filters {
-		// font-size: ;
-		// color: ;
 
 		fieldset {
 			padding: 1.250rem .625rem;
 			border: 0;
 			border-bottom: 1px solid #ccc;
-			&:first-child {
-				padding: .625em;
-			}
 			&.center {
 				text-align: center;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				box-sizing: border-box;
 			}
 			&.no-border {
 				border: 0;
@@ -60,6 +43,9 @@
 		label {
 			float: left;
 			padding-right: .625em;
+			&.block {
+				width: 100%;
+			}
 		}
 
 		input[type="number"] {
@@ -72,12 +58,15 @@
 		}
 
 		input[type="submit"] {
-			background: #f70;
-			border: 0;
 			padding: .625rem 1.875rem;
 			text-transform: uppercase;
 			font-weight: bold;
 			color: #fff;
+		}
+
+		input[type="checkbox"],
+		input[type="radio"] {
+			float: right;
 		}
 
 		a {
@@ -86,6 +75,16 @@
 
 			&.bold {
 				font-weight: bold;
+			}
+			&.bold::after {
+				content: '';
+				font-size: 0;
+				line-height: 0;
+				width: 5px;
+				height: 9px;
+				background: url(imageUrl/images/html5/nextArrow.png) no-repeat;
+				margin-left: 6px;
+				display: inline-block;
 			}
 		}
 	}

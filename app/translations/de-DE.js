@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Preis',
+    'countryoptions.Accept': 'Akzeptieren',
     'countryoptions.ChangeCity': 'Stadt \xE4ndern',
     'countryoptions.EnterCity': 'Geben Sie eine Stadt ein',
     'countryoptions.OtherCitiesInRegion': 'Andere St\xE4dte in <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Es tut uns leid, aber die Seite, die Sie suchen, ist nicht verf\xFCgbar. ',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Versuchen Sie bitte, direkt von der <<LINK_HOME_PAGE>>OLX-Homepage<</LINK_HOME_PAGE>> auf die Seite zuzugreifen. ',
     'itemslisting.Category': 'Kategorie:',
+    'itemslisting.ClearAll': 'Alle l\xF6schen',
     'itemslisting.FreeClassifieds': 'Kostenlose Kleinanzeigen.',
     'itemslisting.NavigatorByCategory': 'Kategorie',
     'itemslisting.NavigatorByLocation': 'Location',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Bitte w\xE4hlen Sie eine Stadt aus, um einen Artikel aufgeben zu k\xF6nnen',
     'listingpageitemslisting.AllResultsNew': 'Alle Resultate',
     'listingpageitemslisting.FindAdsIn2': 'Annoncen in <<LOCATION>> finden',
+    'listingpageitemslisting.Max': 'Max.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultate f\xFCr <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Es tut uns leid, aber wir haben keine Ergebnosse f\xFCr Ihre Suche.',
     'listingpageitemslisting.ZeroResultsPage': 'Es konnten leider keine Ergebnisse in <<CATEGORY>> in <<REGION>> gefunden werden.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Land',
     'posting_selectcategory.categories': 'Kategorie',
     'posting_selectcategory.subCategories': 'Unterkategorie',
+    'posting_optionallist.OnlyWithPictures': 'Nur mit Bildern',
     'itemgeneraldetails.addFavorites': 'Zu Favoriten hinzuf\xFCgen',
     'itemgeneraldetails.City': 'Stadt',
     'itemgeneraldetails.DatePosted': 'Datum der Ver\xF6ffentlichung',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Name',
     'loginheader.Identification': 'Identifikation ',
     'register_confirmation.782': 'Sie m\xFCssen unseren Nutzungsbedingungen akzeptieren, um  Ihre Registrierung zu vervollst\xE4ndigen.',
+    'alertsbody.AlertsCreate_0252_All': 'Alle',
     'terms.TermsOfUse': 'Nutzungsbedingungen',
     'about.AboutBrand': '\xDCber OLX',
     'about.AboutText1': 'OLX ist mobil und online die weltweit f\xFChrende Kleinanzeigenplattform mit Fokus auf  Schwellenl\xE4nder und neue M\xE4rkte.',

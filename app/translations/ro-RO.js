@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Pre\u0163',
+    'countryoptions.Accept': 'Accept\u0103',
     'countryoptions.ChangeCity': 'Modificare ora\u015F',
     'countryoptions.EnterCity': 'Intr\u0103 un Ora\u015F',
     'countryoptions.OtherCitiesInRegion': 'Alte ora\u015Fe \xEEn <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Ne pare r\u0103u, pagina pe care o c\u0103uta\u0163i nu este disponibil\u0103.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': '\xCEncerca\u0163i s\u0103 accesa\u0163i pagina direct de pe OLX <<LINK_HOME_PAGE>>Pagina ini\u0163ial\u0103<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Categorie:',
+    'itemslisting.ClearAll': '\u015Eterge tot',
     'itemslisting.FreeClassifieds': 'Anun\u0163uri publicitare gratuite',
     'itemslisting.NavigatorByCategory': 'Categorie',
     'itemslisting.NavigatorByLocation': 'Loca\u0163ie',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'V\u0103 rug\u0103m s\u0103 intra\u0163i un ora\u015F pentru a posta un obiect',
     'listingpageitemslisting.AllResultsNew': 'Toate rezultatele',
     'listingpageitemslisting.FindAdsIn2': 'G\u0103sire anun\u0163uri \xEEn <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maxim',
+    'listingpageitemslisting.Min': 'Minim',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultate pentru <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ne pare r\u0103u dar nu avem rezultate pentru c\u0103utarea dvs.',
     'listingpageitemslisting.ZeroResultsPage': 'Ne pare r\u0103u, nu am g\u0103sit rezultate \xEEn <<CATEGORY>> \xEEn <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': '\u0162ara',
     'posting_selectcategory.categories': 'Categorie',
     'posting_selectcategory.subCategories': 'Subcategorie',
+    'posting_optionallist.OnlyWithPictures': 'Numai cu imagini',
     'itemgeneraldetails.addFavorites': 'Ad\u0103ugare la favorite',
     'itemgeneraldetails.City': 'Ora\u015F',
     'itemgeneraldetails.DatePosted': 'Data public\u0103rii',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Nume',
     'loginheader.Identification': 'Identificare',
     'register_confirmation.782': 'Trebuie s\u0103 fi\u0163i de acord cu \xEEn\u0163elegerea noastr\u0103 de utilizator pentru a completa \xEEnregistrarea.',
+    'alertsbody.AlertsCreate_0252_All': 'Toate',
     'terms.TermsOfUse': 'Condi\u0163ii de Utilizare',
     'about.AboutBrand': 'Despre OLX',
     'about.AboutText1': 'OLX este principala platform\u0103 de anun\u0163uri publicitare gratuite din lume, concentrat\u0103 pe pie\u0163ele \xEEn dezvoltare, at\xE2t \xEEn spa\u0163iul dispozitivelor mobile, c\xE2t \u015Fi online',

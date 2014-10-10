@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Cena',
+    'countryoptions.Accept': 'P\u0159ijmout',
     'countryoptions.ChangeCity': 'Zm\u011Bnit m\u011Bsto',
     'countryoptions.EnterCity': 'Zadejte m\u011Bsto',
     'countryoptions.OtherCitiesInRegion': 'Jin\xE1 m\u011Bsta v oblasti <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Litujeme, ale str\xE1nka, kterou hled\xE1te, nen\xED k dispozici.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Zkuste na str\xE1nku p\u0159ej\xEDt p\u0159\xEDmo z <<LINK_HOME_PAGE>>domovsk\xE9 str\xE1nky<</LINK_HOME_PAGE>> OLX.',
     'itemslisting.Category': 'Kategorie:',
+    'itemslisting.ClearAll': 'Vymazat v\u0161e',
     'itemslisting.FreeClassifieds': 'Bezplatn\xE9 inzer\xE1ty',
     'itemslisting.NavigatorByCategory': 'Kategorie',
     'itemslisting.NavigatorByLocation': 'M\xEDsto',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Vyberte pros\xEDm m\u011Bsto, abyste mohli zadat nab\xEDdku zbo\u017E\xED',
     'listingpageitemslisting.AllResultsNew': 'V\u0161echny v\xFDsledky hled\xE1n\xED',
     'listingpageitemslisting.FindAdsIn2': 'Najd\u011Bte inzer\xE1ty v <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> v\xFDsledk\u016F pro <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Je n\xE1m l\xEDto, ale pro V\xE1mi zadan\xE9 vyhled\xE1v\xE1n\xED nem\xE1me v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Omlouv\xE1me se, ale nena\u0161li jsme \u017E\xE1dn\xE9 v\xFDsledky v kategorii <<CATEGORY>> pro oblast <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Zem\u011B',
     'posting_selectcategory.categories': 'Kategorie',
     'posting_selectcategory.subCategories': 'Subkategorie',
+    'posting_optionallist.OnlyWithPictures': 'Pouze s obr\xE1zky',
     'itemgeneraldetails.addFavorites': 'P\u0159idat k obl\xEDben\xFDm',
     'itemgeneraldetails.City': 'M\u011Bsto',
     'itemgeneraldetails.DatePosted': 'Datum odesl\xE1n\xED',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Jm\xE9no',
     'loginheader.Identification': 'Identifikace',
     'register_confirmation.782': 'Chcete-li registraci dokon\u010Dit, mus\xEDte vyj\xE1d\u0159it sv\u016Fj souhlas s na\u0161\xED dohodou s u\u017Eivateli.',
+    'alertsbody.AlertsCreate_0252_All': 'V\u0161e',
     'terms.TermsOfUse': 'Podm\xEDnky pou\u017E\xEDv\xE1n\xED',
     'about.AboutBrand': 'O OLX',
     'about.AboutText1': 'OLX je p\u0159edn\xED inzer\xE1tov\xE1 platforma zam\u011B\u0159en\xE1 na rozv\xEDjej\xEDc\xED se trhy, v mobiln\xED i on-line verzi',

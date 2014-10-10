@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Gi\xE1 ',
+    'countryoptions.Accept': 'Ch\u1EA5p nh\u1EADn',
     'countryoptions.ChangeCity': '\u0110\u1ED5i th\xE0nh ph\u1ED1',
     'countryoptions.EnterCity': 'Nh\u1EADp m\u1ED9t th\xE0nh ph\u1ED1',
     'countryoptions.OtherCitiesInRegion': 'C\xE1c th\xE0nh ph\u1ED1 kh\xE1c trong <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Xin l\u1ED7i, trang b\u1EA1n t\xECm ki\u1EBFm hi\u1EC7n kh\xF4ng c\xF3.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Th\u1EED truy c\u1EADp trang tr\u1EF1c ti\u1EBFp t\u1EEB OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'H\u1EA1ng m\u1EE5c:',
+    'itemslisting.ClearAll': 'X\xF3a t\u1EA5t c\u1EA3',
     'itemslisting.FreeClassifieds': 'Rao v\u1EB7t mi\u1EC5n ph\xED',
     'itemslisting.NavigatorByCategory': 'H\u1EA1ng m\u1EE5c',
     'itemslisting.NavigatorByLocation': '\u0110\u1ECBa \u0111i\u1EC3m',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Vui l\xF2ng l\u1EF1a ch\u1ECDn m\u1ED9t th\xE0nh ph\u1ED1 \u0111\u1EC3 \u0111\u0103ng m\u1ED9t m\xF3n h\xE0ng ',
     'listingpageitemslisting.AllResultsNew': 'T\u1EA5t c\u1EA3 k\u1EBFt qu\u1EA3',
     'listingpageitemslisting.FindAdsIn2': 'T\xECm th\u1EA5y nh\u1EEFng qu\u1EA3ng c\xE1o t\u1EA1i <<LOCATION>>',
+    'listingpageitemslisting.Max': 'T\u1ED1i \u0111a',
+    'listingpageitemslisting.Min': 'T\u1ED1i thi\u1EC3u',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> k\u1EBFt qu\u1EA3 c\u1EE7a <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ch\xFAng t\xF4i r\u1EA5t ti\u1EBFc ch\xFAng t\xF4i kh\xF4ng c\xF3 k\u1EBFt qu\u1EA3 cho t\xECm ki\u1EBFm c\u1EE7a b\u1EA1n.',
     'listingpageitemslisting.ZeroResultsPage': 'Xin l\u1ED7i, ch\xFAng t\xF4i kh\xF4ng t\xECm th\u1EA5y k\u1EBFt qu\u1EA3 trong <<CATEGORY>> t\u1EA1i <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Qu\u1ED1c gia',
     'posting_selectcategory.categories': 'H\u1EA1ng m\u1EE5c',
     'posting_selectcategory.subCategories': 'H\u1EA1ng m\u1EE5c con',
+    'posting_optionallist.OnlyWithPictures': 'Ch\u1EC9 v\u1EDBi \u1EA3nh',
     'itemgeneraldetails.addFavorites': 'Th\xEAm v\xE0o m\u1EE5c y\xEAu th\xEDch',
     'itemgeneraldetails.City': 'Th\xE0nh ph\u1ED1',
     'itemgeneraldetails.DatePosted': 'Ng\xE0y \u0111\u0103ng ',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'T\xEAn',
     'loginheader.Identification': 'Nh\u1EADn d\u1EA1ng',
     'register_confirmation.782': 'B\u1EA1n ph\u1EA3i \u0111\u1ED3ng \xFD v\u1EDBi th\u1ECFa thu\u1EADn ng\u01B0\u1EDDi d\xF9ng \u0111\u1EC3 ho\xE0n t\u1EA5t vi\u1EC7c \u0111\u0103ng k\xFD.',
+    'alertsbody.AlertsCreate_0252_All': 'T\u1EA5t c\u1EA3',
     'terms.TermsOfUse': '\u0110i\u1EC1u kho\u1EA3n s\u1EED d\u1EE5ng',
     'about.AboutBrand': 'V\u1EC1 OLX',
     'about.AboutText1': 'OLX l\xE0 n\u1EC1n t\u1EA3ng rao v\u1EB7t h\xE0ng \u0111\u1EA7u th\u1EBF gi\u1EDBi t\u1EADp trung v\xE0o c\xE1c th\u1ECB tr\u01B0\u1EDDng \u0111ang n\u1ED5i, c\u1EA3 di \u0111\u1ED9ng v\xE0 tr\u1EF1c tuy\u1EBFnCEO Europe',

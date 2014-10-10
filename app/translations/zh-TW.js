@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': '\u50F9\u683C',
+    'countryoptions.Accept': '\u63A5\u53D7',
     'countryoptions.ChangeCity': '\u66F4\u6539\u57CE\u5E02',
     'countryoptions.EnterCity': '\u8F38\u5165\u57CE\u5E02',
     'countryoptions.OtherCitiesInRegion': '<<REGION>>\u7684\u5176\u4ED6\u57CE\u5E02',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': '\u5C0D\u4E0D\u8D77, \u60A8\u5C0B\u627E\u7684\u9801\u9762\u4E0D\u5B58\u5728.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': '\u8ACB\u5617\u8A66\u76F4\u63A5\u5F9EOLX <<LINK_HOME_PAGE>>\u9996\u9801<</LINK_HOME_PAGE>>\u9032\u5165\u60A8\u6240\u8981\u7684\u9801\u9762\u3002',
     'itemslisting.Category': '\u5206\u985E:',
+    'itemslisting.ClearAll': '\u5168\u6E05\u9664',
     'itemslisting.FreeClassifieds': '\u514D\u8CBB\u5206\u985E\u4FE1\u606F',
     'itemslisting.NavigatorByCategory': '\u985E\u5225',
     'itemslisting.NavigatorByLocation': '\u4F4D\u7F6E',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': '\u8ACB\u9078\u64C7\u4E00\u500B\u57CE\u5E02\u4F86\u520A\u767B\u5EE3\u544A',
     'listingpageitemslisting.AllResultsNew': '\u6240\u6709\u7D50\u679C',
     'listingpageitemslisting.FindAdsIn2': '\u5728<<LOCATION>>\u627E\u5EE3\u544A',
+    'listingpageitemslisting.Max': '\u6700\u9AD8',
+    'listingpageitemslisting.Min': '\u6700\u4F4E',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>> \u7684 <<NUMBER>> \u500B\u7D50\u679C',
     'listingpageitemslisting.WeAreSorryNoResults': '\u5C0D\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u60A8\u641C\u7D22\u7684\u7D50\u679C',
     'listingpageitemslisting.ZeroResultsPage': '\u5C0D\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u5728<<REGION>> \u7684 <<CATEGORY>> \u76F8\u95DC\u7D50\u679C\u3002',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': '\u570B\u5BB6',
     'posting_selectcategory.categories': '\u985E\u5225',
     'posting_selectcategory.subCategories': '\u6B21\u985E\u5225',
+    'posting_optionallist.OnlyWithPictures': '\u53EA\u6709\u542B\u5716\u7247',
     'itemgeneraldetails.addFavorites': '\u6DFB\u52A0\u5230\u6211\u7684\u6536\u85CF',
     'itemgeneraldetails.City': '\u57CE\u5E02',
     'itemgeneraldetails.DatePosted': '\u767C\u4F48\u6642\u9593',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': '\u540D\u5B57',
     'loginheader.Identification': '\u8EAB\u4EFD\u8B49',
     'register_confirmation.782': '\u60A8\u5FC5\u9808\u540C\u610F\u6211\u5011\u7684\u7528\u6236\u4F7F\u7528\u689D\u6B3E\u624D\u80FD\u5B8C\u6210\u8A3B\u518A\uFF0E',
+    'alertsbody.AlertsCreate_0252_All': '\u6240\u6709',
     'terms.TermsOfUse': '\u4F7F\u7528\u689D\u6B3E',
     'about.AboutBrand': '\u95DC\u65BC OLX',
     'about.AboutText1': 'OLX \u662F\u4E16\u754C\u9818\u5148\u5EE3\u544A\u5E73\u81FA\uFF0C\u5C08\u6CE8\u65BC\u624B\u6A5F\u548C\u7DB2\u8DEF\u5E73\u81FA\u4E0A\u7684\u65B0\u8208\u5E02\u5834\u3002',

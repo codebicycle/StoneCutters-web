@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Cena',
+    'countryoptions.Accept': 'Prija\u0165',
     'countryoptions.ChangeCity': 'Zmena obce',
     'countryoptions.EnterCity': 'Zadajte mesto',
     'countryoptions.OtherCitiesInRegion': 'In\xE9 mest\xE1 v regi\xF3ne <<REGION>>',
@@ -29,6 +31,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': '\u013Dutujeme, h\u013Eadan\xE1 str\xE1nka nie je k dispoz\xEDcii.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Sk\xFAste prejs\u0165 na str\xE1nku priamo z <<LINK_HOME_PAGE>>\xFAvodnej str\xE1nky<</LINK_HOME_PAGE>> OLX.',
     'itemslisting.Category': 'Kateg\xF3ria:',
+    'itemslisting.ClearAll': 'Zmaza\u0165 v\u0161etko',
     'itemslisting.FreeClassifieds': 'Bezplatn\xE9 inzer\xE1ty',
     'itemslisting.NavigatorByCategory': 'Kateg\xF3ria',
     'itemslisting.NavigatorByLocation': 'Miesto',
@@ -67,6 +70,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Zvo\u013Ete mesto, aby ste mohli uverejni\u0165 polo\u017Eku',
     'listingpageitemslisting.AllResultsNew': 'V\u0161etky v\xFDsledky',
     'listingpageitemslisting.FindAdsIn2': 'N\xE1jdi reklamy v <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> v\xFDsledkov na k\u013E\xFA\u010Dov\xE9 slovo <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\u013Dutujeme, neboli n\xE1jden\xE9 \u017Eiadne v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Je n\xE1m \u013E\xFAto, nena\u0161li sme v\xFDsledky v kateg\xF3rii <<CATEGORY>> v regi\xF3ne <<REGION>>.',
@@ -79,6 +84,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Krajina',
     'posting_selectcategory.categories': 'Kateg\xF3ria',
     'posting_selectcategory.subCategories': 'Podkateg\xF3ria',
+    'posting_optionallist.OnlyWithPictures': 'Len s obr\xE1zkami',
     'itemgeneraldetails.addFavorites': 'Prida\u0165 medzi ob\u013E\xFAben\xE9',
     'itemgeneraldetails.City': 'Mesto',
     'itemgeneraldetails.DatePosted': 'D\xE1tum uverejnenia',
@@ -168,6 +174,7 @@ module.exports = {
     'replymessage.Name': 'Meno',
     'loginheader.Identification': 'Identifik\xE1cia',
     'register_confirmation.782': 'Pre ukon\u010Denie registr\xE1cie mus\xEDte s\xFAhlasi\u0165 s na\u0161ou Dohodou.',
+    'alertsbody.AlertsCreate_0252_All': 'V\u0161etko',
     'terms.TermsOfUse': 'Podmienky pou\u017E\xEDvania',
     'about.AboutBrand': 'O OLX',
     'about.AboutText1': 'OLX je ved\xFAcou celosvetovou platformou pre inzer\xE1ty, ktor\xE1 sa zameriava na rozvojov\xE9 trhy mobilnou aj online formou',
