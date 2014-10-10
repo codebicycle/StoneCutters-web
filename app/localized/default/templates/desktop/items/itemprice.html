@@ -1,4 +1,6 @@
 <div id="item-price">
-    <p class="price">R$ 1.260.999 </p>
-    <p class="price-type">Topa negociar</p>
+    {% if item.price.displayPrice %}
+        <p class="price">{{ item.price.displayPrice }}</p>
+    {% endif %}
+    <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
 </div>
