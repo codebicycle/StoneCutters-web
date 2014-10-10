@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'U\u017Eivatel',
     'itemdescription.Description': 'Popis',
     'comments.YourMessageHasBeenSent': '<br />Va\u0161e zpr\xE1va byla odesl\xE1na.<br /><br /> ',
+    'itemcategorypath.Ads': 'Inzer\xE1ty',
     'posting_fields_1.description': 'Popis',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'Va\u0161e e-mailov\xE1 adresa nebude s nik\xFDm sd\xEDlena.',

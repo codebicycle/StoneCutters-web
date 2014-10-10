@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Mtumiaji',
     'itemdescription.Description': 'Maelezo',
     'comments.YourMessageHasBeenSent': '<br />Ujumbe wako umetumwa.<br /><br />',
+    'itemcategorypath.Ads': 'Matangazo',
     'posting_fields_1.description': 'Maelezo',
     'posting_fields_1.email': 'Barua pepe',
     'posting_fields_1.Email_address_not_shared': 'Anwani yako ya barua pepe itashirikishwa',

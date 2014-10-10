@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Ng\u01B0\u1EDDi s\u1EED d\u1EE5ng',
     'itemdescription.Description': 'M\xF4 t\u1EA3',
     'comments.YourMessageHasBeenSent': '<br />Tin nh\u1EAFn c\u1EE7a b\u1EA1n \u0111\xE3 \u0111\u01B0\u1EE3c g\u1EEDi.<br /><br />',
+    'itemcategorypath.Ads': 'Tin rao v\u1EB7t',
     'posting_fields_1.description': 'M\xF4 t\u1EA3',
     'posting_fields_1.email': 'Email',
     'posting_fields_1.Email_address_not_shared': '\u0110\u1ECBa ch\u1EC9 email c\u1EE7a b\u1EA1n s\u1EBD kh\xF4ng b\u1ECB ph\u1ED5 bi\u1EBFn',

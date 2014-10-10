@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Gebruiker',
     'itemdescription.Description': 'Beskrywing',
     'comments.YourMessageHasBeenSent': '<br />Jou Boodskap is gestuur.<br /><br />',
+    'itemcategorypath.Ads': 'Advertensies',
     'posting_fields_1.description': 'Beskrywing',
     'posting_fields_1.email': 'E-pos',
     'posting_fields_1.Email_address_not_shared': 'Jou e-posadres bly konfidensieel',

@@ -1,5 +1,5 @@
 {% view 'partials/search' %}
-{% view 'partials/filterorder' %}
+{% view 'partials/filterorder' , { quantity : metadata.total } %}
 <section id="itemListing">
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}

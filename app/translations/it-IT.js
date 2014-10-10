@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Utente',
     'itemdescription.Description': 'Descrizione',
     'comments.YourMessageHasBeenSent': '<br /> Il tuo messaggio \xE8 stato inviato. <br /><br />',
+    'itemcategorypath.Ads': 'Aggiungi',
     'posting_fields_1.description': 'Descrizione',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'Il tuo indirizzo e-mail non sar\xE0 condiviso',

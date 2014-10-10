@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Kasutaja',
     'itemdescription.Description': 'Kirjeldus',
     'comments.YourMessageHasBeenSent': '<br />Teie s\xF5num on saadetud.<br /><br /> ',
+    'itemcategorypath.Ads': 'Kuulutused',
     'posting_fields_1.description': 'Kirjeldus',
     'posting_fields_1.email': 'E-post',
     'posting_fields_1.Email_address_not_shared': 'Teie e-posti aadressi ei jagata',

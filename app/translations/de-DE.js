@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Benutzer',
     'itemdescription.Description': 'Beschreibung',
     'comments.YourMessageHasBeenSent': '<br />Ihre Nachricht wurde erfolgreich versandt.<br /><br /> ',
+    'itemcategorypath.Ads': 'Kleinanzeigen',
     'posting_fields_1.description': 'Beschreibung',
     'posting_fields_1.email': 'E-Mail',
     'posting_fields_1.Email_address_not_shared': 'Ihre E-Mailadresse wird nicht weitergegeben',

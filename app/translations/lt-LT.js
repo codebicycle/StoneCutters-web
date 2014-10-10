@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Vartotojas',
     'itemdescription.Description': 'Apra\u0161ymas',
     'comments.YourMessageHasBeenSent': '<br />J\u016Bs\u0173 prane\u0161imas i\u0161si\u0173stas.<br /><br />',
+    'itemcategorypath.Ads': 'Skelbimai',
     'posting_fields_1.description': 'Apra\u0161ymas',
     'posting_fields_1.email': 'El. pa\u0161to adresas',
     'posting_fields_1.Email_address_not_shared': 'J\u016Bs\u0173 el. pa\u0161to adresas nebus rodomas',

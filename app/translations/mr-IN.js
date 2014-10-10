@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': '\u0935\u093E\u092A\u0930\u0915\u0930\u094D\u0924\u093E',
     'itemdescription.Description': '\u0935\u0930\u094D\u0923\u0928',
     'comments.YourMessageHasBeenSent': '<br />\u0924\u0941\u092E\u091A\u093E \u0928\u093F\u0930\u094B\u092A \u092A\u093E\u0920\u0935\u0932\u093E \u0906\u0939\u0947.<br /><br />',
+    'itemcategorypath.Ads': '\u091C\u093E\u0939\u093F\u0930\u093E\u0924\u0940',
     'posting_fields_1.description': '\u0935\u0930\u094D\u0923\u0928',
     'posting_fields_1.email': '\u0908\u092A\u0924\u094D\u0930',
     'posting_fields_1.Email_address_not_shared': '\u0924\u0941\u092E\u091A\u093E \u0907-\u092A\u0924\u094D\u0930 \u092A\u0924\u094D\u0924\u093E \u0936\u0947\u0905\u0930 \u0915\u0947\u0932\u093E \u091C\u093E\u0923\u093E\u0930 \u0928\u093E\u0939\u0940',

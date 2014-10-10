@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Pengguna',
     'itemdescription.Description': 'Keterangan',
     'comments.YourMessageHasBeenSent': '<br />Mesej anda telah dikirim.<br /><br /> ',
+    'itemcategorypath.Ads': 'Iklan',
     'posting_fields_1.description': 'Keterangan',
     'posting_fields_1.email': 'Emel',
     'posting_fields_1.Email_address_not_shared': 'Alamat e-mel anda tidak akan dikongsi dengan orang lain.',

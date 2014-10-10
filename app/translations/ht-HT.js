@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Manm',
     'itemdescription.Description': 'Deskripsyon',
     'comments.YourMessageHasBeenSent': '<br />Mesaj ou an ale <br /><br />',
+    'itemcategorypath.Ads': 'Tout Anons yo',
     'posting_fields_1.description': 'Deskripsyon',
     'posting_fields_1.email': 'Im\xE8l',
     'posting_fields_1.Email_address_not_shared': 'Nou pap pataje im\xE8 ou ak l\xF2t moun ',

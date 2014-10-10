@@ -10,7 +10,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
-        var postingFlowEnabled = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true);        
+        var postingFlowEnabled = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true);
         return _.extend({}, data, {
             postingFlowEnabled: postingFlowEnabled,
             postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow',

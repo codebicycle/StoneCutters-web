@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Pengguna',
     'itemdescription.Description': 'Uraian',
     'comments.YourMessageHasBeenSent': '<br />Pesan Anda telah dikirim.<br /><br /> ',
+    'itemcategorypath.Ads': 'Iklan',
     'posting_fields_1.description': 'Uraian',
     'posting_fields_1.email': 'Email',
     'posting_fields_1.Email_address_not_shared': 'Alamat email Anda tidak akan diberitahukan ke orang lain.',

@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Usu\xE1rio',
     'itemdescription.Description': 'Descri\xE7\xE3o',
     'comments.YourMessageHasBeenSent': '<br />A sua mensagem foi enviada. <br /><br />',
+    'itemcategorypath.Ads': 'An\xFAncios',
     'posting_fields_1.description': 'Descri\xE7\xE3o',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'Seu endere\xE7o de e-mail n\xE3o ser\xE1 divulgado',

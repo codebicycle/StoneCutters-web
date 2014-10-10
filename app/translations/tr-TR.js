@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Kullan\u0131c\u0131',
     'itemdescription.Description': 'A\xE7\u0131klama',
     'comments.YourMessageHasBeenSent': '<br />\u0130letiniz g\xF6nderildi.<br /><br />',
+    'itemcategorypath.Ads': '\u0130lanlar',
     'posting_fields_1.description': 'A\xE7\u0131klama',
     'posting_fields_1.email': 'E-Posta',
     'posting_fields_1.Email_address_not_shared': 'E-Posta adresiniz kimseyle payla\u015F\u0131lmayacakt\u0131r',

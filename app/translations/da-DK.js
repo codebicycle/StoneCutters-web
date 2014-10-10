@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Bruger',
     'itemdescription.Description': 'Beskrivelse',
     'comments.YourMessageHasBeenSent': '<br />Din besked er blevet sendt.<br /><br />',
+    'itemcategorypath.Ads': 'Annoncer',
     'posting_fields_1.description': 'Beskrivelse',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'Din e-mail adresse vil ikke blive delt med andre',

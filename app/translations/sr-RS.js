@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Korisnik',
     'itemdescription.Description': 'Opis',
     'comments.YourMessageHasBeenSent': '<br />Va\u0161a poruka je poslata.<br /><br />',
+    'itemcategorypath.Ads': 'Oglasi',
     'posting_fields_1.description': 'Opis',
     'posting_fields_1.email': 'E-adresa',
     'posting_fields_1.Email_address_not_shared': 'Ne\u0107emo deliti va\u0161u e-adresu',

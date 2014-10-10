@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Bruker',
     'itemdescription.Description': 'Beskrivelse',
     'comments.YourMessageHasBeenSent': '<br />Din melding har blitt sendt.<br /><br />',
+    'itemcategorypath.Ads': 'Annonser',
     'posting_fields_1.description': 'Beskrivelse',
     'posting_fields_1.email': 'Epost',
     'posting_fields_1.Email_address_not_shared': 'Din e-post adresse vil ikke bli avsl\xF8rt',

@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Anv\xE4ndare',
     'itemdescription.Description': 'Beskrivning',
     'comments.YourMessageHasBeenSent': '<br />Ditt meddelande har skickats.<br /><br />',
+    'itemcategorypath.Ads': 'Annonser',
     'posting_fields_1.description': 'Beskrivning',
     'posting_fields_1.email': 'E-post',
     'posting_fields_1.Email_address_not_shared': 'Din e-postadress delas inte ut',

@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Tagagamit',
     'itemdescription.Description': 'Paglalarawan',
     'comments.YourMessageHasBeenSent': '<br />Ang iyong mensahe ay naipadala na.<br /><br />',
+    'itemcategorypath.Ads': 'Mga Patalastas',
     'posting_fields_1.description': 'Paglalarawan',
     'posting_fields_1.email': 'Email',
     'posting_fields_1.Email_address_not_shared': 'Ang iyong email address ay hindi ipapamahagi',

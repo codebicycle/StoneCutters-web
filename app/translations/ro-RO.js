@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Utilizator',
     'itemdescription.Description': 'Descriere',
     'comments.YourMessageHasBeenSent': '<br />Mesajul dvs. a fost trimis.<br /><br /> ',
+    'itemcategorypath.Ads': 'Anun\u0163uri',
     'posting_fields_1.description': 'Descriere',
     'posting_fields_1.email': 'Email',
     'posting_fields_1.Email_address_not_shared': 'Adresa dvs. de email nu va fi \xEEmp\u0103rt\u0103\u015Fit\u0103',

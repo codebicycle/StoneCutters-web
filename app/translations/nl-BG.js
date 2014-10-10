@@ -95,6 +95,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Gebruiker',
     'itemdescription.Description': 'Omschrijving',
     'comments.YourMessageHasBeenSent': '<br />Je bericht is verzonden.<br /><br /> ',
+    'itemcategorypath.Ads': 'Advertenties',
     'posting_fields_1.description': 'Omschrijving',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'Je emailadres wordt niet weergegeven',

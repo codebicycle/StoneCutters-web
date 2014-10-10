@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'U\u017Cytkownik',
     'itemdescription.Description': 'Opis',
     'comments.YourMessageHasBeenSent': '<br />Twoja wiadomo\u015B\u0107 zosta\u0142a wys\u0142ana.<br /><br />',
+    'itemcategorypath.Ads': 'Og\u0142oszenia',
     'posting_fields_1.description': 'Opis',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'Tw\xF3j e-mail nie b\u0119dzie widoczny',

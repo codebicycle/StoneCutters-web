@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Notandi',
     'itemdescription.Description': 'L\xFDsing',
     'comments.YourMessageHasBeenSent': '<br />Skilabo\xF0 \xFE\xEDn hafa veri\xF0 send..<br /><br />',
+    'itemcategorypath.Ads': 'Augl\xFDsingar',
     'posting_fields_1.description': 'L\xFDsing',
     'posting_fields_1.email': 'T\xF6lvup\xF3stur',
     'posting_fields_1.Email_address_not_shared': 'T\xF6lvup\xF3stfangi \xFE\xEDnu ver\xF0ur ekki deilt me\xF0 \xF6\xF0rum',

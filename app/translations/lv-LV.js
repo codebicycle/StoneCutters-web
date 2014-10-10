@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Lietot\u0101js',
     'itemdescription.Description': 'Apraksts',
     'comments.YourMessageHasBeenSent': '<br />J\u016Bsu zi\u0146ojums nos\u016Bt\u012Bts.<br /><br /> ',
+    'itemcategorypath.Ads': 'Sludin\u0101jumi',
     'posting_fields_1.description': 'Apraksts',
     'posting_fields_1.email': 'E-pasts',
     'posting_fields_1.Email_address_not_shared': 'J\u016Bsu e-pasta adrese b\u016Bs konfidenci\u0101la.',

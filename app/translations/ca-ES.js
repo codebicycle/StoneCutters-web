@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Usuari',
     'itemdescription.Description': 'Descripci\xF3',
     'comments.YourMessageHasBeenSent': '<br />El vostre missatge s\'ha enviat.<br /><br />',
+    'itemcategorypath.Ads': 'Anuncis',
     'posting_fields_1.description': 'Descripci\xF3',
     'posting_fields_1.email': 'Correu electr\xF2nic',
     'posting_fields_1.Email_address_not_shared': 'La vostra adre\xE7a de correu electr\xF2nic no es compartir\xE0',

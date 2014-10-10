@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'User',
     'itemdescription.Description': 'Description',
     'comments.YourMessageHasBeenSent': '<br />Your Message has been sent.<br /><br /> ',
+    'itemcategorypath.Ads': 'Ads',
     'posting_fields_1.description': 'Description',
     'posting_fields_1.email': 'Email',
     'posting_fields_1.Email_address_not_shared': 'Your email address won\'t be shared',

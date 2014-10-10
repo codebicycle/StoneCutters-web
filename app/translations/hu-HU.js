@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Felhaszn\xE1l\xF3',
     'itemdescription.Description': 'Le\xEDr\xE1s',
     'comments.YourMessageHasBeenSent': '<br />Az \xFCzenet\xE9t tov\xE1bb\xEDtottuk.<br /><br />',
+    'itemcategorypath.Ads': 'Hirdet\xE9sek',
     'posting_fields_1.description': 'Le\xEDr\xE1s',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'E-mail c\xEDm\xE9t nem osztjuk meg m\xE1sokkal',

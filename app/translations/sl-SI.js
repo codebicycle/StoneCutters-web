@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'Uporabnik',
     'itemdescription.Description': 'Opis',
     'comments.YourMessageHasBeenSent': '<br />Va\u0161e sporo\u010Dilo je bilo poslano.<br /><br />',
+    'itemcategorypath.Ads': 'Oglasi',
     'posting_fields_1.description': 'Opis',
     'posting_fields_1.email': 'E-po\u0161ta',
     'posting_fields_1.Email_address_not_shared': 'Va\u0161 e-po\u0161tni naslov ne bo prikazan',

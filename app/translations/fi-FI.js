@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': 'K\xE4ytt\xE4j\xE4',
     'itemdescription.Description': 'Kuvaus',
     'comments.YourMessageHasBeenSent': '<br />Viestisi on l\xE4hetetty.<br /><br />',
+    'itemcategorypath.Ads': 'Ilmoitukset',
     'posting_fields_1.description': 'Kuvaus',
     'posting_fields_1.email': 's\xE4hk\xF6posti',
     'posting_fields_1.Email_address_not_shared': 'S\xE4hk\xF6postiosoitettasi ei paljasteta',

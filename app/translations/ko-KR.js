@@ -96,6 +96,7 @@ module.exports = {
     'itemgeneraldetails.User': '\uC0AC\uC6A9\uC790',
     'itemdescription.Description': '\uC124\uBA85',
     'comments.YourMessageHasBeenSent': '<br />\uADC0\uD558\uC758 \uBA54\uC2DC\uC9C0\uAC00 \uC804\uB2EC\uB418\uC5C8\uC2B5\uB2C8\uB2E4.<br /><br /> ',
+    'itemcategorypath.Ads': '\uAD11\uACE0',
     'posting_fields_1.description': '\uB0B4\uC6A9',
     'posting_fields_1.email': 'Email',
     'posting_fields_1.Email_address_not_shared': '\uADC0\uD558\uC758 \uC774\uBA54\uC77C \uC8FC\uC18C\uB294 \uACF5\uC720\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4',
