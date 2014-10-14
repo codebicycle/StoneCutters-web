@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Cijena',
     'countryoptions.Accept': 'Prihvati',
     'countryoptions.ChangeCity': 'Promjenite grad',
     'countryoptions.EnterCity': 'Unesite grad',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Oprostite, stranica koju tra\u017Eite nije dostupna.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Poku\u0161ajte pristupiti stranici direktno s OLX <<LINK_HOME_PAGE>>po\u010Detne stranice<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorija:',
+    'itemslisting.ClearAll': 'O\u010Disti sve',
     'itemslisting.FreeClassifieds': 'Besplatni oglasi',
     'itemslisting.HighestFirst': 'Najprije najvi\u0161a cijena',
     'itemslisting.LowestFirst': 'Najprije najni\u017Ea cijena',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Molimo, odaberite grad kako biste poslali stavku',
     'listingpageitemslisting.AllResultsNew': 'Svi rezultati',
     'listingpageitemslisting.FindAdsIn2': 'Prona\u0111i oglase u <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maks.',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultata za <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Trenutno nema rezultata za va\u0161e pretra\u017Eivanje.',
     'listingpageitemslisting.ZeroResultsPage': 'Na\u017Ealost, nije prona\u0111en niti jedan rezultat u <<CATEGORY>> u <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Dr\u017Eava',
     'posting_selectcategory.categories': 'Kategorija',
     'posting_selectcategory.subCategories': 'Podkategorija',
+    'posting_optionallist.OnlyWithPictures': 'Samo sa slikama',
     'itemgeneraldetails.addFavorites': 'Dodaj u omiljene',
     'itemgeneraldetails.City': 'Grad',
     'itemgeneraldetails.DatePosted': 'Datum postavljanja',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Ime',
     'loginheader.Identification': 'Identifikacija',
     'register_confirmation.782': 'Za dovr\u0161etak registracije trebate potvrditi da ste suglasni s uvjetima uporabe.',
+    'alertsbody.AlertsCreate_0252_All': 'Sve',
     'terms.TermsOfUse': 'Uvjeti uporabe',
     'about.AboutBrand': 'Sve o OLX-u',
     'about.AboutText1': 'OLX je svjetska vode\u0107a platforma za oglase, fokusirana na rastu\u0107e tr\u017Ei\u0161te kako na mobilnim telefonima tako i na internetskoj vezi.',

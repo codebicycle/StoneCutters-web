@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Prix',
     'countryoptions.Accept': 'Accepter',
     'countryoptions.ChangeCity': 'Changer la Ville',
     'countryoptions.EnterCity': 'Indiquez une ville',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'D\xE9sol\xE9, cette page n\'est pas disponible.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Essayez d\'acc\xE9der directement \xE0 la page depuis la OLX <<LINK_HOME_PAGE>> Page d\'Accueil<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Cat\xE9gorie:',
+    'itemslisting.ClearAll': 'Tout Effacer',
     'itemslisting.FreeClassifieds': 'Annonces gratuites',
     'itemslisting.HighestFirst': 'Prix le plus \xE9lev\xE9 en premier',
     'itemslisting.LowestFirst': 'Prix le moins \xE9lev\xE9 en premier',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Veuillez choisir une ville pour passer une annonce',
     'listingpageitemslisting.AllResultsNew': 'Tous les r\xE9sultats',
     'listingpageitemslisting.FindAdsIn2': 'D\xE9couvrir les annonces <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> r\xE9sultats pour <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nous sommes d\xE9sol\xE9s mais il n\'y pas de r\xE9sultats pour votre recherche.',
     'listingpageitemslisting.ZeroResultsPage': 'D\xE9sol\xE9 mais nous n\'avons trouv\xE9 aucun r\xE9sultat dans <<CATEGORY>> pour <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Pays',
     'posting_selectcategory.categories': 'Cat\xE9gorie',
     'posting_selectcategory.subCategories': 'Sous-cat\xE9gorie',
+    'posting_optionallist.OnlyWithPictures': 'Seulement avec photos',
     'itemgeneraldetails.addFavorites': 'Ajouter \xE0 vos Favoris',
     'itemgeneraldetails.City': 'Ville',
     'itemgeneraldetails.DatePosted': 'Publi\xE9e le',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Nom',
     'loginheader.Identification': 'Identification ',
     'register_confirmation.782': 'Vous devez accepter nos Conditions d\'utilisation afin de finaliser votre enregistrement.',
+    'alertsbody.AlertsCreate_0252_All': 'Tout',
     'terms.TermsOfUse': 'Conditions d\'Utilisation',
     'about.AboutBrand': 'A propos d\'OLX',
     'about.AboutText1': 'OLX est la plate-forme leader des petites annonces en ligne qui se concentre sur les march\xE9s \xE9mergents, \xE0 la fois mobile et en ligne.',

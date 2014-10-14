@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Prys',
     'countryoptions.Accept': 'Aanvaar',
     'countryoptions.ChangeCity': 'Verander Stad',
     'countryoptions.EnterCity': 'Voer \'n Stad in',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Jammer! Die bladsy wat jy soek is nie beskikbaar nie.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Probeer om direk vanaf die OLX <<LINK_HOME_PAGE>>Tuisblad<</LINK_HOME_PAGE>>toegang te verkry.',
     'itemslisting.Category': 'Kategorie:',
+    'itemslisting.ClearAll': 'Maak alles skoon',
     'itemslisting.FreeClassifieds': 'Gratis snuffeladvertensies',
     'itemslisting.HighestFirst': 'Hoogste Prys Eerste',
     'itemslisting.LowestFirst': 'Laagste Prys Eerste',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Kies asseblief \'n stad om \'n item te pos',
     'listingpageitemslisting.AllResultsNew': 'Alle resultate',
     'listingpageitemslisting.FindAdsIn2': 'Vind advts. in <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maks.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultate vir <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ons is jammer, maar jou soektog geen resultate opgelewer nie.',
     'listingpageitemslisting.ZeroResultsPage': 'Jammer, ons het geen resultate in <<CATEGORY>> in <<REGION>> gekry nie.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Land',
     'posting_selectcategory.categories': 'Kategorie',
     'posting_selectcategory.subCategories': 'Subkategorie',
+    'posting_optionallist.OnlyWithPictures': 'Slegs met foto\'s',
     'itemgeneraldetails.addFavorites': 'Voeg by gunstelinge',
     'itemgeneraldetails.City': 'Stad',
     'itemgeneraldetails.DatePosted': 'Datum Gepos',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Naam',
     'loginheader.Identification': 'Identifikasie ',
     'register_confirmation.782': 'Jy moet met ons gebruikersooreenkoms instem om die registrasie te kan voltooi.',
+    'alertsbody.AlertsCreate_0252_All': 'Alle',
     'terms.TermsOfUse': 'Gebruiksvoorwaardes',
     'about.AboutBrand': 'Iets oor OLX',
     'about.AboutText1': 'OLX is die w\xEAreld se leidende kleinadvertensieplatform wat op opkomende markte gefokus is, op mobiele fone sowel as aanlyn.',

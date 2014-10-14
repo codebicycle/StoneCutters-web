@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Bei',
     'countryoptions.Accept': 'Kubali',
     'countryoptions.ChangeCity': 'Badilisha Mji',
     'countryoptions.EnterCity': 'Ingiza Mji',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Samahani, ukurasa unaotafuta haipatikani.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Jaribu kupata ukurasa moja kwa moja kutoka OLX <<LINK_HOME_PAGE>>Ukurasa wa Nyumbani<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kundi:',
+    'itemslisting.ClearAll': 'Futa Zote',
     'itemslisting.FreeClassifieds': 'Matangazo ya bure',
     'itemslisting.HighestFirst': 'Bei ya juu Kwanza',
     'itemslisting.LowestFirst': 'Bei ya CHini Kwanza',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Tafadhali chagua mji ili kuchapisha bidhaa',
     'listingpageitemslisting.AllResultsNew': 'Matokeo yote',
     'listingpageitemslisting.FindAdsIn2': 'Tafuta matangazo katika <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Juu',
+    'listingpageitemslisting.Min': 'Chini',
     'listingpageitemslisting.ResultsForNew4': 'Matokeo <<NUMBER>> ya <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',
     'listingpageitemslisting.ZeroResultsPage': 'Tunasikitika, hatukupata matokeo katika <<CATEGORY>> at <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Nchi',
     'posting_selectcategory.categories': 'Kundi',
     'posting_selectcategory.subCategories': 'Kundi ndogo',
+    'posting_optionallist.OnlyWithPictures': 'Only with pictures',
     'itemgeneraldetails.addFavorites': 'Ongeza kwa vibwedo',
     'itemgeneraldetails.City': 'Mji',
     'itemgeneraldetails.DatePosted': 'Tarehe Iliyochapishwa',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'JIna',
     'loginheader.Identification': 'Kitambulisho',
     'register_confirmation.782': 'Ni lazima ukubaliane masharti yetu ya mtumizi ili kukamilisha usajili.',
+    'alertsbody.AlertsCreate_0252_All': 'Zote',
     'terms.TermsOfUse': 'Masharti ya Matumizi',
     'about.AboutBrand': 'Kuhusu OLX',
     'about.AboutText1': 'OLX ni jukwaa la ulimwengu linaloongoza kwa matangazo linalolenga katika masoko yanayoibukia, yote ya simu ya mkononi na mtandaoni',

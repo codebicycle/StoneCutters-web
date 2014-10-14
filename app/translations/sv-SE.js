@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Pris',
     'countryoptions.Accept': 'Acceptera',
     'countryoptions.ChangeCity': '\xC4ndra Stad',
     'countryoptions.EnterCity': 'Ange en stad',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Tyv\xE4rr, sidan du s\xF6ker efter \xE4r inte tillg\xE4nglig.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'F\xF6rs\xF6k att n\xE5 sidan direkt fr\xE5n  OLX <<LINK_HOME_PAGE>>Hemsida<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.ClearAll': 'Rensa Alla',
     'itemslisting.FreeClassifieds': 'Gratis annonser',
     'itemslisting.HighestFirst': 'H\xF6gsta pris f\xF6rst',
     'itemslisting.LowestFirst': 'L\xE4gsta pris f\xF6rst',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'V\xE4nligen v\xE4lj en stad f\xF6r att l\xE4gga upp ett objekt',
     'listingpageitemslisting.AllResultsNew': 'Alla resultat',
     'listingpageitemslisting.FindAdsIn2': 'Hitta annonser i <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultat f\xF6r <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi \xE4r ledsna, men vi har inga resultat f\xF6r din s\xF6kning.',
     'listingpageitemslisting.ZeroResultsPage': 'Vi \xE4r ledsna, vi har inte hittat resultat i <<CATEGORY>> i <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Land',
     'posting_selectcategory.categories': 'Kategori',
     'posting_selectcategory.subCategories': 'Underkategori',
+    'posting_optionallist.OnlyWithPictures': 'Endast med bilder',
     'itemgeneraldetails.addFavorites': 'L\xE4gg till i favoriter',
     'itemgeneraldetails.City': 'Stad',
     'itemgeneraldetails.DatePosted': 'Datum upplagd',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Namn',
     'loginheader.Identification': 'Identifikation',
     'register_confirmation.782': 'Du m\xE5ste godk\xE4nna v\xE5ra Anv\xE4ndarvillkor f\xF6r att slutf\xF6ra registreringen.',
+    'alertsbody.AlertsCreate_0252_All': 'Alla',
     'terms.TermsOfUse': 'Anv\xE4ndarvillkor',
     'about.AboutBrand': 'Om OLX',
     'about.AboutText1': 'OLX \xE4r v\xE4rldens ledande annonsplattform med fokus p\xE5 tillv\xE4xtmarknader, b\xE5de f\xF6r mobil och p\xE5 n\xE4tet',

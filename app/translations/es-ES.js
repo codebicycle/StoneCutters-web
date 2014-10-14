@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Precio',
     'countryoptions.Accept': 'Aceptar',
     'countryoptions.ChangeCity': 'Cambiar Ciudad',
     'countryoptions.EnterCity': 'Introduce la ciudad',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Disculpa, la p\xE1gina que buscas no est\xE1 disponible.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Intenta acceder a la p\xE1gina directamente desde la <<LINK_HOME_PAGE>>p\xE1gina principal<</LINK_HOME_PAGE>> de OLX.',
     'itemslisting.Category': 'Categor\xEDa:',
+    'itemslisting.ClearAll': 'Borrar todos',
     'itemslisting.FreeClassifieds': 'Clasificados Gratis',
     'itemslisting.HighestFirst': 'Precio: primero m\xE1s alto',
     'itemslisting.LowestFirst': 'Precio: primero m\xE1s bajo',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Por favor selecciona una ciudad para continuar publicando',
     'listingpageitemslisting.AllResultsNew': 'Todos los resultados',
     'listingpageitemslisting.FindAdsIn2': 'Encuentra anuncios en <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultados para <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Lo lamentamos pero no hay resultados para tu b\xFAsqueda.',
     'listingpageitemslisting.ZeroResultsPage': 'Disculpa, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Pa\xEDs',
     'posting_selectcategory.categories': 'Categor\xEDa',
     'posting_selectcategory.subCategories': 'Subcategor\xEDa',
+    'posting_optionallist.OnlyWithPictures': 'S\xF3lo con fotos',
     'itemgeneraldetails.addFavorites': 'A\xF1adir a favoritos',
     'itemgeneraldetails.City': 'Ciudad',
     'itemgeneraldetails.DatePosted': 'Fecha de publicaci\xF3n',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Nombre',
     'loginheader.Identification': 'Identificaci\xF3n',
     'register_confirmation.782': 'Debes comprometerte a nuestro acuerdo de usuarios para completar la registraci\xF3n',
+    'alertsbody.AlertsCreate_0252_All': 'Todas',
     'terms.TermsOfUse': 'Condiciones de Uso',
     'about.AboutBrand': 'Sobre OLX',
     'about.AboutText1': 'OLX es la plataforma l\xEDder mundial de anuncios clasificados centrada en mercados emergentes, tanto en m\xF3viles como online',

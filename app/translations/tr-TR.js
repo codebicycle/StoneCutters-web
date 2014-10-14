@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Fiyat',
     'countryoptions.Accept': 'Kabul',
     'countryoptions.ChangeCity': '\u015Eehri De\u011Fi\u015Ftir',
     'countryoptions.EnterCity': 'Bir \u0130l Girin',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z sayfaya eri\u015Filemiyor.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'L\xFCtfen sayfaya OLX <<LINK_HOME_PAGE>>Ana Sayfa<</LINK_HOME_PAGE>> \xFCzerinden do\u011Frudan eri\u015Fmeye \xE7al\u0131\u015F\u0131n.',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.ClearAll': 'T\xFCm\xFCn\xFC Temizle',
     'itemslisting.FreeClassifieds': '\xDCcretsiz seri ilanlar',
     'itemslisting.HighestFirst': 'Y\xFCksek Fiyatl\u0131dan Ba\u015Flayarak',
     'itemslisting.LowestFirst': 'D\xFC\u015F\xFCk Fiyatl\u0131dan Ba\u015Flayarak',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'L\xFCtfen bir \xFCr\xFCn ilan\u0131 yollamak i\xE7in bir il girin',
     'listingpageitemslisting.AllResultsNew': 'B\xFCt\xFCn sonu\xE7lar',
     'listingpageitemslisting.FindAdsIn2': '<<LOCATION>> konumunda ilan bul',
+    'listingpageitemslisting.Max': 'Maks.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>> i\xE7in <<NUMBER>> sonu\xE7',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z bulunamad\u0131.',
     'listingpageitemslisting.ZeroResultsPage': '\xDCzg\xFCn\xFCz <<CATEGORY>> kategorisinde b\xF6lgesi <<REGION>> olan sonuca rastlanmad\u0131.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': '\xDClke',
     'posting_selectcategory.categories': 'Kategori',
     'posting_selectcategory.subCategories': 'Alt Kategori',
+    'posting_optionallist.OnlyWithPictures': 'Resimli olanlar',
     'itemgeneraldetails.addFavorites': 'Favorilere Ekle',
     'itemgeneraldetails.City': '\u0130l',
     'itemgeneraldetails.DatePosted': '\u0130lan Tarihi',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Ad',
     'loginheader.Identification': 'Kimlik ',
     'register_confirmation.782': '\xDCye olabilmek i\xE7in kullan\u0131c\u0131 s\xF6zle\u015Fmesindeki \u015Fartlar\u0131 kabul etmeniz gerekir. ',
+    'alertsbody.AlertsCreate_0252_All': 'T\xFCm\xFC',
     'terms.TermsOfUse': 'Kullan\u0131m \u015Eartlar\u0131',
     'about.AboutBrand': 'OLX Hakk\u0131nda',
     'about.AboutText1': 'OLX , hem mobil hem de internet ortam\u0131nda b\xFCy\xFCmekte olan piyasalara odaklanm\u0131\u015F en b\xFCy\xFCk seri ilan platformudur',

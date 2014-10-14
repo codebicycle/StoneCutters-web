@@ -9,20 +9,32 @@ var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     tagName: 'footer',
+    className: function() {
+        if (this.isFilter()) {
+            return 'footer_footer_view disabled';
+        }
+        return 'footer_footer_view';
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
         return _.extend({}, data);
     },
     postRender: function() {
         $('body').on('change:location', this.changeLocation.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
+        this.app.router.appView.on('filterFlow:start', this.onPostingFlowStart.bind(this));
+        this.app.router.appView.on('filterFlow:end', this.onPostingFlowEnd.bind(this));
         this.attachTrackMe(this.className, function(category, action) {
             return {
                 custom: [category, '-', '-', action].join('::')
             };
         });
+    },
+    isFilter: function() {
+        var currentRoute = this.app.session.get('currentRoute');
+        
+        return (currentRoute.action === 'filter' || currentRoute.action === 'sort');
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {

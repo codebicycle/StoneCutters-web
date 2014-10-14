@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Ver\xF0',
     'countryoptions.Accept': 'Sam\xFEykkja',
     'countryoptions.ChangeCity': 'Breyta borg',
     'countryoptions.EnterCity': 'Sl\xE1\xF0u inn borg',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'S\xED\xF0an sem \xFE\xFA reyndir a\xF0 sko\xF0a er ekki tilt\xE6k.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pr\xF3fa\xF0u a\xF0 opna s\xED\xF0una beint af <<LINK_HOME_PAGE>>upphafss\xED\xF0u<</LINK_HOME_PAGE>> OLX.',
     'itemslisting.Category': 'Flokkur:',
+    'itemslisting.ClearAll': 'Hreinsa allt',
     'itemslisting.FreeClassifieds': '\xD3keypis sm\xE1augl\xFDsingar',
     'itemslisting.HighestFirst': 'H\xE6sta ver\xF0 fyrst',
     'itemslisting.LowestFirst': 'L\xE6gsta ver\xF0 fyrst',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Veldu borg til a\xF0 birta atri\xF0i\xF0',
     'listingpageitemslisting.AllResultsNew': 'Allar ni\xF0urst\xF6\xF0ur',
     'listingpageitemslisting.FindAdsIn2': 'Finndu aug\xFDsingar fyrir <<LOCATION>>',
+    'listingpageitemslisting.Max': 'H\xE1mark',
+    'listingpageitemslisting.Min': 'L\xE1gmark',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> ni\xF0urst\xF6\xF0ur fyrir <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDEv\xED mi\xF0ur fundust engar ni\xF0urst\xF6\xF0ur fyrir leit \xFE\xEDna.',
     'listingpageitemslisting.ZeroResultsPage': '\xDEv\xED mi\xF0ur fundum vi\xF0 engar ni\xF0urst\xF6\xF0ur \xED <<CATEGORY>> \xED <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Land',
     'posting_selectcategory.categories': 'Flokkur',
     'posting_selectcategory.subCategories': 'Undirflokkur',
+    'posting_optionallist.OnlyWithPictures': 'A\xF0eins me\xF0 myndum',
     'itemgeneraldetails.addFavorites': 'B\xE6ta \xED upp\xE1hald',
     'itemgeneraldetails.City': 'Borg',
     'itemgeneraldetails.DatePosted': 'Dagsetning skr\xE1ningar',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Nafn',
     'loginheader.Identification': 'Au\xF0kenning',
     'register_confirmation.782': '\xDE\xFA \xFEarft a\xF0 sam\xFEykkja notendasamning okkar til a\xF0 kl\xE1ra n\xFDskr\xE1ninguna.',
+    'alertsbody.AlertsCreate_0252_All': 'Allt',
     'terms.TermsOfUse': 'Notkunarskilm\xE1lar',
     'about.AboutBrand': 'Um OLX',
     'about.AboutText1': 'OLX er \xED fararbroddi sm\xE1augl\xFDsinga \xE1 netinu og leggur \xE1herslu \xE1 vaxandi marka\xF0ssv\xE6\xF0i, b\xE6\xF0i fyrir fars\xEDma og \xE1 vefnum',

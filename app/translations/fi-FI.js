@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Hinta',
     'countryoptions.Accept': 'Hyv\xE4ksy',
     'countryoptions.ChangeCity': 'Vaihda kaupunkia',
     'countryoptions.EnterCity': 'Sy\xF6t\xE4 kaupunki',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Pahoittelemme, mutta hakemasi sivu ei ole saatavilla.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Kokeile avata sivu suoraan valitsemalla OLX <<LINK_HOME_PAGE>>Kotisivu<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategoria:',
+    'itemslisting.ClearAll': 'Poista kaikki',
     'itemslisting.FreeClassifieds': 'ilmaiset ilmoitukset',
     'itemslisting.HighestFirst': 'Korkein hinta ensin',
     'itemslisting.LowestFirst': 'Alhaisin hinta ensin',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Valitse kaupunki tehd\xE4ksesi ilmoituksen',
     'listingpageitemslisting.AllResultsNew': 'Kaikki tulokset',
     'listingpageitemslisting.FindAdsIn2': 'L\xF6yd\xE4 mainoksia kohteessa <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
     'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Maa',
     'posting_selectcategory.categories': 'Kategoria',
     'posting_selectcategory.subCategories': 'Alakategoria',
+    'posting_optionallist.OnlyWithPictures': 'Vain kohteet, joista on kuvia.',
     'itemgeneraldetails.addFavorites': 'Lis\xE4\xE4 suosikkeihin',
     'itemgeneraldetails.City': 'Kaupunki',
     'itemgeneraldetails.DatePosted': 'Ilmoituksen j\xE4tt\xF6p\xE4iv\xE4',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Nimi',
     'loginheader.Identification': 'Tunnistautuminen ',
     'register_confirmation.782': 'Sinun tulee hyv\xE4ksy\xE4 k\xE4ytt\xF6ehdot rekister\xF6ity\xE4ksesi.',
+    'alertsbody.AlertsCreate_0252_All': 'Kaikki',
     'terms.TermsOfUse': 'K\xE4ytt\xF6ehdot',
     'about.AboutBrand': 'Tietoja kohteesta OLX',
     'about.AboutText1': 'OLX on maailman johtava ilmoitusfoorumi, joka keskittyy kehittyville markkinoille, sek\xE4 mobiili-ja onlinemarkkinoille',

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Harga',
     'countryoptions.Accept': 'Menyetujui',
     'countryoptions.ChangeCity': 'Ganti Kota',
     'countryoptions.EnterCity': 'Masukkan Kota',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Maaf, halaman yang Anda cari tidak tersedia.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Cobalah mengakses halaman langsung dari OLX <<LINK_HOME_PAGE>>Laman Beranda<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategori:',
+    'itemslisting.ClearAll': 'Kosongkan Semuanya',
     'itemslisting.FreeClassifieds': 'Iklan baris gratis',
     'itemslisting.HighestFirst': 'Harga Tertinggi Dahulu',
     'itemslisting.LowestFirst': 'Harga Terendah Dahulu',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Silakan pilih kota untuk memasang barang',
     'listingpageitemslisting.AllResultsNew': 'Semua hasil',
     'listingpageitemslisting.FindAdsIn2': 'Cari iklan di <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maks',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> hasil untuk <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Maaf tidak ada hasil untuk pencarian Anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Maaf, kami tidak menemukan hasil untuk <<CATEGORY>> di <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Negara',
     'posting_selectcategory.categories': 'Kategori',
     'posting_selectcategory.subCategories': 'Subkategori',
+    'posting_optionallist.OnlyWithPictures': 'Hanya yang berisi gambar',
     'itemgeneraldetails.addFavorites': 'Tambahkan ke favorit',
     'itemgeneraldetails.City': 'Kota',
     'itemgeneraldetails.DatePosted': 'Tanggal Terpasang',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Nama',
     'loginheader.Identification': 'Identifikasi',
     'register_confirmation.782': 'Anda harus menyetujui perjanjian pengguna kami untuk menyelesaikan pendaftaran.',
+    'alertsbody.AlertsCreate_0252_All': 'Semua',
     'terms.TermsOfUse': 'Ketentuan Penggunaan',
     'about.AboutBrand': 'Tentang OLX',
     'about.AboutText1': 'OLX merupakan platform iklan baris terkemuka dunia yang berfokus pada pasar yang baru tumbuh, baik secara nirkabel maupun online',

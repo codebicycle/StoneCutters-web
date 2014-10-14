@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Price',
     'countryoptions.Accept': 'Accept',
     'countryoptions.ChangeCity': 'Change City',
     'countryoptions.EnterCity': 'Enter a City',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Sorry, the page you are looking for is not available.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Try to access the page directly from the OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Category:',
+    'itemslisting.ClearAll': 'Clear All',
     'itemslisting.FreeClassifieds': 'Free classifieds',
     'itemslisting.HighestFirst': 'Highest Price First',
     'itemslisting.LowestFirst': 'Lowest Price First',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.AllResultsNew': 'All results',
     'listingpageitemslisting.FindAdsIn2': 'Find ads in <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': 'We are sorry, we haven\'t found results in <<CATEGORY>> at <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Country',
     'posting_selectcategory.categories': 'Category',
     'posting_selectcategory.subCategories': 'Subcategory',
+    'posting_optionallist.OnlyWithPictures': 'Only with pictures',
     'itemgeneraldetails.addFavorites': 'Add to favorites',
     'itemgeneraldetails.City': 'City',
     'itemgeneraldetails.DatePosted': 'Date Posted',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Name',
     'loginheader.Identification': 'Identification ',
     'register_confirmation.782': 'You must agree our user agreement to complete registration.',
+    'alertsbody.AlertsCreate_0252_All': 'All',
     'terms.TermsOfUse': 'Terms Of Use',
     'about.AboutBrand': 'About OLX',
     'about.AboutText1': 'OLXis the world\u2019s leading classifieds platform focused in emerging markets, both mobile and online',

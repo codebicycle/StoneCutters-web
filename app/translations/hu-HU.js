@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'V\xE9tel\xE1r',
     'countryoptions.Accept': 'Elfogad\xE1s',
     'countryoptions.ChangeCity': 'V\xE1ros megv\xE1ltoztat\xE1sa',
     'countryoptions.EnterCity': 'Adjon meg egy telep\xFCl\xE9st',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Sajn\xE1ljuk, a keresett oldal nem tal\xE1lhat\xF3.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pr\xF3b\xE1lja meg az oldal el\xE9r\xE9s\xE9t k\xF6zvetlen\xFCl az OLX <<LINK_HOME_PAGE>>kezd\u0151lapj\xE1r\xF3l<</LINK_HOME_PAGE>>',
     'itemslisting.Category': 'Kateg\xF3ria:',
+    'itemslisting.ClearAll': '\xD6sszes t\xF6rl\xE9se',
     'itemslisting.FreeClassifieds': 'Ingyenes apr\xF3hirdet\xE9sek',
     'itemslisting.HighestFirst': 'El\u0151sz\xF6r a legmagasabb \xE1rak',
     'itemslisting.LowestFirst': 'El\u0151sz\xF6r a legalacsonyabb \xE1rak',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'T\xE9tel felad\xE1s\xE1hoz v\xE1lasszon egy telep\xFCl\xE9st',
     'listingpageitemslisting.AllResultsNew': '\xD6sszes tal\xE1lat',
     'listingpageitemslisting.FindAdsIn2': 'Hirdet\xE9sek keres\xE9se a k\xF6vetkez\u0151 helyr\u0151l: <<LOCATION>>.',
+    'listingpageitemslisting.Max': 'Max',
+    'listingpageitemslisting.Min': 'Min',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> eredm\xE9ny <<KEYWORD>> kulcssz\xF3ra',
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',
     'listingpageitemslisting.ZeroResultsPage': 'Sajn\xE1ljuk, nem tal\xE1ltunk eredm\xE9nyeket a <<CATEGORY>> kateg\xF3ri\xE1ban <<REGION>> r\xE9gi\xF3ban.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Orsz\xE1g',
     'posting_selectcategory.categories': 'Kateg\xF3ria',
     'posting_selectcategory.subCategories': 'Alkateg\xF3ria',
+    'posting_optionallist.OnlyWithPictures': 'Csak k\xE9pekkel',
     'itemgeneraldetails.addFavorites': 'Hozz\xE1ad\xE1s a kedvencekhez',
     'itemgeneraldetails.City': 'Telep\xFCl\xE9s',
     'itemgeneraldetails.DatePosted': 'A felad\xE1s d\xE1tuma',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'N\xE9v',
     'loginheader.Identification': 'Azonos\xEDt\xE1s',
     'register_confirmation.782': 'A regisztr\xE1ci\xF3 befejez\xE9s\xE9hez egyet kell \xE9rtenie a felhaszn\xE1l\xF3i felt\xE9telekkel.',
+    'alertsbody.AlertsCreate_0252_All': 'Minden',
     'terms.TermsOfUse': 'Haszn\xE1lati felt\xE9telek',
     'about.AboutBrand': 'R\xF3lunk: OLX',
     'about.AboutText1': 'Az OLXa vil\xE1g vezet\u0151 apr\xF3hirdet\xE9s port\xE1lja, amely a felt\xF6rekv\u0151 piacokra \xF6sszpontos\xEDt, mobilos \xE9s online ter\xFCleten egyar\xE1nt.',

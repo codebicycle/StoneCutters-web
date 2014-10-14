@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Cena',
     'countryoptions.Accept': 'Akcept\u0113t',
     'countryoptions.ChangeCity': 'Main\u012Bt pils\u0113tu',
     'countryoptions.EnterCity': 'Ievadiet pils\u0113tu',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Atvainojiet, lapa, ko j\u016Bs mekl\u0113jat, nav pieejama.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pam\u0113\u0123iniet piek\u013C\u016Bt \u0161ai lapai tie\u0161i no OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorija:',
+    'itemslisting.ClearAll': 'Nodz\u0113st visu',
     'itemslisting.FreeClassifieds': 'Bezmaksas sludin\u0101jumi',
     'itemslisting.HighestFirst': 'Augst\u0101k\u0101 cena vispirms',
     'itemslisting.LowestFirst': 'Zem\u0101k\u0101 cena vispirms',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'L\u016Bdzu, izv\u0113lieties pils\u0113tu, lai ievietotu sludin\u0101jumu par preci',
     'listingpageitemslisting.AllResultsNew': 'Visi rezult\u0101ti',
     'listingpageitemslisting.FindAdsIn2': 'Atrast sludin\u0101jumus \u0161aj\u0101 viet\u0101: <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maks.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezult\u0101ti p\u0113c <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Diem\u017E\u0113l nevaram atrast j\u016Bsu nor\u0101d\u012Btajiem parametriem atbilsto\u0161us rezult\u0101tus.',
     'listingpageitemslisting.ZeroResultsPage': 'Diem\u017E\u0113l m\u0113s neatrad\u0101m rezult\u0101tus <<CATEGORY>>, <<REGION>>.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': 'Valsts',
     'posting_selectcategory.categories': 'Kategorija',
     'posting_selectcategory.subCategories': 'Apak\u0161kategorija',
+    'posting_optionallist.OnlyWithPictures': 'Tikai ar att\u0113liem',
     'itemgeneraldetails.addFavorites': 'Pievienot favor\u012Btiem',
     'itemgeneraldetails.City': 'Pils\u0113ta',
     'itemgeneraldetails.DatePosted': 'Public\u0113\u0161anas datums',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'V\u0101rds',
     'loginheader.Identification': 'Identific\u0113\u0161ana',
     'register_confirmation.782': 'Lai pabeigtu re\u0123ist\u0101ciju, jums j\u0101piekr\u012Bt m\u016Bsu vietnes lieto\u0161anas noteikumiem.',
+    'alertsbody.AlertsCreate_0252_All': 'Visi',
     'terms.TermsOfUse': 'Izmanto\u0161anas noteikumi',
     'about.AboutBrand': 'ParOLX',
     'about.AboutText1': 'OLX ir pasaules vado\u0161\u0101 sludin\u0101jumu platforma, kas koncentr\u0113jas uz jauniem tirgiem - gan tie\u0161saistes, gan mobilajiem',

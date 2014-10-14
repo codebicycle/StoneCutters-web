@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    'buyerinfo.Price': 'Kaina',
     'countryoptions.Accept': 'Priimti',
     'countryoptions.ChangeCity': 'Keisti miest\u0105',
     'countryoptions.EnterCity': '\u012Eveskite miest\u0105',
@@ -31,6 +32,7 @@ module.exports = {
     'defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable': 'Apgailestaujame, bet puslapis, kurio ie\u0161kote, nepasiekiamas.',
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pabandykite atdaryti puslap\u012F tiesiai i\u0161 OLX <<LINK_HOME_PAGE>>Pradinio puslapio<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorija:',
+    'itemslisting.ClearAll': 'I\u0161trinti visk\u0105',
     'itemslisting.FreeClassifieds': 'Nemokami klasifikuoti skelbimai',
     'itemslisting.HighestFirst': 'Auk\u0161\u010Diausia kaina pirmiausiai',
     'itemslisting.LowestFirst': 'Ma\u017Eiausia kaina pirmiausiai',
@@ -72,6 +74,8 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Nor\u0117dami paskelbti prek\u0119 pasirinkite miest\u0105',
     'listingpageitemslisting.AllResultsNew': 'Visi rezultatai',
     'listingpageitemslisting.FindAdsIn2': 'Rasti skelbimus, kurie yra <<LOCATION>>',
+    'listingpageitemslisting.Max': 'Maks.',
+    'listingpageitemslisting.Min': 'Min.',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> <<KEYWORD>> rezultatai',
     'listingpageitemslisting.WeAreSorryNoResults': 'Atsipra\u0161ome, ta\u010Diau neturime j\u016Bs\u0173 paie\u0161kos rezultat\u0173.',
     'listingpageitemslisting.ZeroResultsPage': 'Atsipra\u0161ome, <<CATEGORY>>, esan\u010Di\u0173 <<REGION>>, neradome.',
@@ -85,6 +89,7 @@ module.exports = {
     'postingstep1_selector.SelectCountry': '\u0160alis',
     'posting_selectcategory.categories': 'Kategorija',
     'posting_selectcategory.subCategories': 'Papildoma kategorija',
+    'posting_optionallist.OnlyWithPictures': 'Tik su nuotraukomis',
     'itemgeneraldetails.addFavorites': 'Prid\u0117ti prie m\u0117gstamiausi\u0173',
     'itemgeneraldetails.City': 'Miestas',
     'itemgeneraldetails.DatePosted': 'Paskelbimo data',
@@ -177,6 +182,7 @@ module.exports = {
     'replymessage.Name': 'Vardas',
     'loginheader.Identification': 'Identifikacija ',
     'register_confirmation.782': 'Jei norite u\u017Ebaigti registracij\u0105, turite sutikti su m\u016Bs\u0173 vartotojo sutarties s\u0105lygomis.',
+    'alertsbody.AlertsCreate_0252_All': 'Visi',
     'terms.TermsOfUse': 'Naudojimosi s\u0105lygos',
     'about.AboutBrand': 'Apie OLX',
     'about.AboutText1': 'OLX yra pagrindin\u0117 viso pasaulio klasifikuot\u0173 skelbim\u0173 sistema, orientuota \u012F kylan\u010Dias rinkas \u2013 ir mobili\u0105sias, ir internetines',
