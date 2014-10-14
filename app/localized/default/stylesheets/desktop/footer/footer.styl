@@ -23,7 +23,9 @@ footer {
 
             a {
                 color: #666;
-                padding: 8px 0 8px 10px;
+                height: 32px;
+                line-height: 32px;
+                padding-left: 10px;
 
                 &:hover {
                     text-decoration: none;
@@ -35,10 +37,13 @@ footer {
                 display: inline-block;
                 font-size: $s;
                 margin-left: 20px;
-                vertical-align: sub;
-                -ms-transform: rotate(-90deg);
-                -webkit-transform: rotate(-90deg);
-                transform: rotate(-90deg);
+            }
+
+            .icon-sketchyarrowleft:before,
+            .icon-sketchyarrowright:before {
+                -ms-transform: rotate(90deg); /* IE 9 */
+                -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+                transform: rotate(90deg);
             }
         }
     }
