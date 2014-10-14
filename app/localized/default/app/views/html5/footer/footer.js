@@ -33,7 +33,8 @@ module.exports = Base.extend({
     },
     isFilter: function() {
         var currentRoute = this.app.session.get('currentRoute');
-        return currentRoute.action === 'filter' || currentRoute.action === 'sort' ? true : false;
+        
+        return (currentRoute.action === 'filter' || currentRoute.action === 'sort');
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {
