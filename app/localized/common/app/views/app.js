@@ -6,8 +6,8 @@ var URLParser = require('url');
 module.exports = Base.extend({
     className: 'app_view',
     events: {
-        'click .modal-close': 'closeModal',
-        'click .title-bar a': 'openModal'
+        'click .modal-close': 'toggleModal',
+        'click .open-modal': 'toggleModal'
     },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
@@ -39,39 +39,13 @@ module.exports = Base.extend({
             this.app.router.redirectTo(href);
         }
     },
-    openModal: function(event) {
+    toggleModal: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        showModal(event.currentTarget.dataset.modal);
-    },
-    closeModal: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        hideModal(event.currentTarget.dataset.modal);
+        $('body').toggleClass('noscroll');
+        $('#' + event.currentTarget.dataset.modal).toggleClass('modal-visible');
     }
 });
-
-function showModal(classToShow) {
-    var windowHeight = window.innerHeight,
-        modal = $('.' + classToShow),
-        top = 0,
-        modalHeight = modal.height();
-    if(modalHeight < windowHeight){
-        top = (windowHeight/2) -(modalHeight/2);
-    }
-    modal.css('top',top);
-
-    $('body').css('overflow','hidden');
-    $('#modal-overlay').removeClass('modal-hide');
-    $('.' + classToShow).removeClass('modal-hide');
-}
-
-function hideModal(classToHide) {
-    $('body').css('overflow','auto');
-    $('#modal-overlay').addClass('modal-hide');
-    $('.' + classToHide).addClass('modal-hide');
-}
 
 module.exports.id = 'app_view/index';
