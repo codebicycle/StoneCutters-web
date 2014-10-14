@@ -1,14 +1,20 @@
 <section id="item-content">
-    <h1>Title</h1>
-    
-    <p class="item-info">
-        <span class="icons icon-time"></span>
-        Publicado fecha
-        <span class="icons icon-pin"></span>
-        Ubicacion
-    </p>
+    <div>
+        <h1>{{ item.title }}</h1>
+        
+        <p class="item-info">
+            <span class="icons icon-time"></span>
+            Publicado fecha
+            <span class="icons icon-pin"></span>
+            Ubicacion
+        </p>
 
-    {% include (template + "/items/imagegallery.html") %}
+        {% include (template + "/items/imagegallery.html") %}
 
-    {% include (template + "/items/itemdescription.html") %}
+        {% include (template + "/items/itemdescription.html") %}
+
+        {% include (template + "/items/itemlocation.html") %}
+    </div>
+
+    {% include (template + "/items/socialsharing.html") %}
 </section>
