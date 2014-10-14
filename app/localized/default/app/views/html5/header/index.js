@@ -14,8 +14,7 @@ module.exports = Base.extend({
         
         return _.extend({}, data, {
             postingFlowEnabled: postingFlowEnabled,
-            postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow',
-            headerTitle: (currentRoute == 'filter') ? data.dictionary["mobilepromo.Filters"] : data.dictionary["unavailableitemrelateditems.SortBy"]
+            postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow'
         });
     },    
     postRender: function() {
@@ -29,7 +28,11 @@ module.exports = Base.extend({
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
         this.app.router.appView.on('sort:start', this.onSelectSortStart.bind(this));
-        this.app.router.appView.on('sort:end', this.onSelectSortEnd.bind(this));
+        this.app.router.appView.on('sort:end', this.restore.bind(this));
+
+        this.app.router.appView.on('filter:start', this.onSelectFilterStart.bind(this));
+        this.app.router.appView.on('filter:end', this.restore.bind(this));
+
         this.app.router.on('action:end', this.onActionEnd.bind(this));        
     },
     onActionEnd: function() {
@@ -117,11 +120,25 @@ module.exports = Base.extend({
         this.$('#topBar, #myOlx').removeClass('disabled');
     },
     onSelectSortStart: function(){
+        this.customize("unavailableitemrelateditems.SortBy");
+    },
+    onSelectFilterStart: function(){
+        this.customize("mobilepromo.Filters");        
+    },
+    customize: function(key) {
+        var data = Base.prototype.getTemplateData.call(this);
+
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
+        this.$('.topBarFilters .title').text(data.dictionary[key]); 
     },
-    onSelectSortEnd: function(){
-        this.$('.logo, .header-links').show();
-        this.$('.topBarFilters').addClass('hide');
+    restore: function() {
+        var $links = this.$('.logo, .header-links');
+        var $text = this.$('.topBarFilters');
+
+        this.app.router.once('action:end', function afterEnd() {
+            $links.show();
+            $text.addClass('hide').find('.title').text('');
+        });
     }
 });

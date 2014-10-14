@@ -23,8 +23,10 @@ module.exports = Base.extend({
         $('body').on('change:location', this.changeLocation.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
-        this.app.router.appView.on('filterFlow:start', this.onPostingFlowStart.bind(this));
-        this.app.router.appView.on('filterFlow:end', this.onPostingFlowEnd.bind(this));
+        this.app.router.appView.on('filter:start', this.hide.bind(this));
+        this.app.router.appView.on('filter:end', this.show.bind(this));
+        this.app.router.appView.on('sort:start', this.hide.bind(this));
+        this.app.router.appView.on('sort:end', this.show.bind(this));
         this.attachTrackMe(this.className, function(category, action) {
             return {
                 custom: [category, '-', '-', action].join('::')
@@ -65,5 +67,15 @@ module.exports = Base.extend({
     },
     onPostingFlowAfter: function() {
         this.$el.removeClass('disabled');
+    },
+    hide: function() {
+        this.$el.addClass('disabled');
+    },
+    show: function() {
+        var $footer = this.$el;
+
+        this.app.router.once('action:end', function afterEnd() {
+            $footer.removeClass('disabled');
+        });
     }
 });

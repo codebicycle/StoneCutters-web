@@ -6,16 +6,16 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 
 module.exports = Base.extend({    
-    postRender: function() {
-        this.app.router.once('action:end', this.onStart);
-        this.app.router.once('action:start', this.onEnd);        
-        $('#form-sort #btn-sort').on('click', this.onSort.bind(this));        
-    },
     events: {
         'click .logIn span': 'onLoginClick',
         'click #myOlx li a': 'onMenuClick',
         'click .topBarFilters .filter-btns':'onCancelFilter',
-        'click #form-sort input[type="radio"]': 'onEnableSort'
+        'click #form-sort input[type="radio"]': 'onEnableSort',
+    },
+    postRender: function() {
+        this.app.router.once('action:end', this.onStart);
+        this.app.router.once('action:start', this.onEnd);        
+        $('#form-sort #btn-sort').on('click', this.onSort.bind(this));        
     },
     onSort: function(event){
         event.preventDefault();
