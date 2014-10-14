@@ -26,4 +26,65 @@
 	<a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>Elige la categoría</span></a>
 </aside>
 
+<section id="item-preview">
+	<section class="item-preview-content">
+		<div class="header-edit">
+			<p>Así aparecerá tu anuncio en el sitio</p>
+			<a href="#" class="icons icon-edit">Editar anuncio</a>
+		</div>
+		<div class="image-viewer">
+	        {% if item.images.length > 0 %}
+	            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image big-size" />
+	        {% endif %}
+    	</div>
+    	<div class="item-price">
+		    {% if item.price.displayPrice %}
+		        <p class="price">{{ item.price.displayPrice }}</p>
+		    {% endif %}
+		    <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
+		</div>
+		<div id="item-description">
+		    <p>Detalles del aviso</p>
+		    <div>
+		        {{ item.description }}
+		    </div>
+		    {% if item.optionals and item.optionals.length > 1 %}
+		        <div class="optionals">
+		            <ul>
+		                {% for option in item.optionals %}
+		                    <li>
+		                        <span>{{ option.label }}</span>
+		                        <span>{{ option.value }}</span>
+		                    </li>
+		                {% endfor %}
+		            </ul>
+		        </div>
+		    {% endif %}
+		</div>
+		<div class="item-location">
+		    <div class="box">
+		        <h2 class="icons icon-pin">Localización</h2>
+		        {% if item.location.cityName or item.location.stateName %}
+		            <p>{{ item.location.cityName }}, {{ item.location.stateName }}
+		        {% endif %}
+		        <span>{{ item.location.name }}</span></p>
+		        <a href="" class="icons icon-zoom">Ver mapa más grande</a>
+		    </div>
+		    <div class="map"></div>
+		</div>
+	</section>
+	<aside class="right-column">
+		<div class="header-edit">
+			<p>Datos de contacto</p>
+			<a href="#" class="icons icon-edit">Editar anuncio</a>
+		</div>
+		<div class="user-info">
+	        <p class="icons icon-user user-name">{{ item.contactName }}</p>
+	        <span class="user-status">User Status</span>
+	        <p class="icons icon-phone user-phone">{{ item.phone }}</p>
+	        <span>Ao ligar, diga que viu o anúncio na OLX</span>
+	    </div>
+    </aside>
+</section>
+
 {% include (template + '/partials/tracking.html') %}
