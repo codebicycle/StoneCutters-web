@@ -960,7 +960,6 @@ function filter(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-
         var appf, appliedString;
 
         if (params.filters) {

@@ -11,7 +11,7 @@ module.exports = Base.extend({
         var order = ['pricerange','hasimage','state','parentcategory'];
         var list = [];
 
-        var e = _.each(order, function(obj, i){
+        _.each(order, function(obj, i){
             _.find(filters, function(obj){
                 return obj.name == order[i] ? list.push(obj) : false;
             });
@@ -27,7 +27,7 @@ module.exports = Base.extend({
     },
     clearForm: function(event) {
         event.preventDefault();
-        var data = Base.prototype.getTemplateData.call(this);
+        var data = this.getData();
         var applied = data.appliedstring;
         var url;
 
@@ -71,7 +71,7 @@ module.exports = Base.extend({
     },
     getData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        return data.url;
+        return data;
     },
     setUrlLocation: function(event) {
         var datos = this.$('#filter').serializeArray();
