@@ -1024,13 +1024,13 @@ function sort(params, callback) {
         var build = function(done) {
             var options = [
                 {
-                    name: 'price_descendant'
+                    name: 'pricedesc'
                 },
                 {
-                    name: 'price_ascendant'
+                    name: 'price'
                 },
                 {
-                    name: 'date_descendant'
+                    name: 'date*to*showdesc'
                 }
             ];
 

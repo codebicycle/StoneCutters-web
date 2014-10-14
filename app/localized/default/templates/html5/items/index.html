@@ -1,11 +1,7 @@
-<p>
-    <a href="{{ [url, 'filter'] | join('/') | link }}">filter</a>
-</p>
-<p>
-    <a href="{{ [url, 'sort'] | join('/') | link }}">sort</a>
-</p>
-{% view 'locations/select' %}
 {% view 'partials/search' %}
+
+{% include (template + '/partials/filterorder.html') %}
+
 <section id="itemListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">
