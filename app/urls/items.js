@@ -7,6 +7,9 @@ module.exports = {
     'items#staticSearch#nocat': {
         url: 'q/:search'
     },
+    'items#staticSearch#page': {
+        url: 'q/:search/p-:page'
+    },
     'items#search#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',

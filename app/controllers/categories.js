@@ -37,7 +37,7 @@ function list(params, callback) {
             var platform = this.app.session.get('platform');
             var icons = config.get(['icons', platform], []);
             var country = this.app.session.get('location').url;
-
+            seo.setContent(response.categories.metadata.seo);
             seo.addMetatag('title', response.categories.metadata.title);
             seo.addMetatag('description', response.categories.metadata.description);
             callback(null, {
@@ -193,8 +193,6 @@ function handleItems(params, promise) {
     }.bind(this);
 
     var paginate = function(done, res) {
-       // var seo = Seo.instance(this.app);
-        seo.setContent(res.items.metadata.seo);
         var url = '/' + query.title + '-cat-' + query.catId;
         var realPage = res.items.paginate(page, query, url);
 
@@ -218,14 +216,13 @@ function handleItems(params, promise) {
         var currentPage;
 
         helpers.filters.prepare(metadata);
-
         if (subcategory) {
             postingLink.subcategory = subcategory.get('id');
         }
         this.app.session.update({
             postingLink: postingLink
         });
-
+        seo.setContent(_items.metadata.seo);
         tracking.setPage('listing');
         tracking.addParam('category', category.toJSON());
         if (subcategory) {
