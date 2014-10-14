@@ -1,29 +1,30 @@
 #listing-filters {
-    width: 238px;
     float: left;
     margin-right: 20px;
+    width: 238px;
     box(#eee, #ddd, 3px, 0);
     > span {
         display: block;
+        font-size: $s;
+        font-weight: bold;
         margin: 0;
         padding: 10px;
-        font-weight: bold;
-        font-size: $s;
     }
     span.title {
-        position: relative;
         border-bottom: 1px solid #ddd;
-        color: #000;
         border: none;
+        color: #000;
+        padding: 10px 10px 0;
+        position: relative;
         &.filter-title{
             font-size: $s;
         }
         .icons {
+            color: #999;
+            font-size: 1.5rem;
             position: absolute;
             right: 5px;
             top: 5px;
-            font-size: 1.5rem;
-            color: #999;
         }
     }
     a {
@@ -35,6 +36,6 @@
     }
 }
 #listing-items{
-    width: 720px;
     float: left;
+    width: 720px;
 }
