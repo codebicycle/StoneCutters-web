@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var seo = require('../modules/seo');
-var analytics = require('../modules/analytics');
+var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var Item = require('../models/item');
 
@@ -210,6 +210,8 @@ function show(params, callback) {
             var category;
             var parentId;
             var url;
+            var title;
+            var description;
 
             if (!subcategory) {
                 _item.set('purged', true);
@@ -223,12 +225,17 @@ function show(params, callback) {
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
 
-            analytics.addParam('item', item);
-            analytics.addParam('category', category);
-            analytics.addParam('subcategory', subcategory);
+            tracking.addParam('item', item);
+            tracking.addParam('category', category);
+            tracking.addParam('subcategory', subcategory);
             if (!item.purged) {
-                seo.addMetatag('title', item.metadata.itemPage.title);
-                seo.addMetatag('description', item.metadata.itemPage.description);
+                title = item.title;
+                if (item.metadata && item.metadata.itemPage) {
+                    title = item.metadata.itemPage.title;
+                    description = item.metadata.itemPage.description;
+                }
+                seo.addMetatag('title', title);
+                seo.addMetatag('description', description);
             }
             else {
                 seo.addMetatag('robots', 'noindex, nofollow');
@@ -255,7 +262,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -356,14 +363,14 @@ function gallery(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.addParam('item', item);
-            analytics.addParam('category', category.toJSON());
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('item', item);
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
             callback(null, {
                 user: user,
                 item: item,
                 pos: pos,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -454,13 +461,13 @@ function map(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.addParam('item', _item.toJSON());
-            analytics.addParam('category', category.toJSON());
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('item', _item.toJSON());
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
             callback(null, {
                 item: _item.toJSON(),
                 user: user,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -543,9 +550,9 @@ function reply(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.addParam('item', item);
-            analytics.addParam('category', category.toJSON());
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('item', item);
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
             seo.update();
@@ -553,7 +560,7 @@ function reply(params, callback) {
                 user: user,
                 item: item,
                 form: form,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -627,13 +634,13 @@ function success(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
-            analytics.addParam('item', item);
-            analytics.addParam('category', category.toJSON());
-            analytics.addParam('subcategory', subcategory.toJSON());
+            tracking.addParam('item', item);
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
             callback(null, {
                 item: item,
                 user: user,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -671,9 +678,9 @@ function search(params, callback) {
             delete params.filters;
             delete params.urlFilters;
 
-            analytics.setPage('nf');
-            analytics.addParam('keyword', query.search);
-            analytics.addParam('page_nb', 0);
+            tracking.setPage('nf');
+            tracking.addParam('keyword', query.search);
+            tracking.addParam('page_nb', 0);
 
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
@@ -685,7 +692,7 @@ function search(params, callback) {
                     metadata: {
                         total: 0
                     },
-                    analytics: analytics.generateURL.call(this)
+                    tracking: tracking.generateURL.call(this)
                 });
             }
             done();
@@ -723,7 +730,7 @@ function search(params, callback) {
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
             helpers.pagination.paginate(metadata, query, url);
-            analytics.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
             seo.update();
@@ -733,7 +740,7 @@ function search(params, callback) {
                 metadata: metadata,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
-                analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -774,7 +781,7 @@ function allresults(params, callback) {
             delete params.filters;
             delete params.urlFilters;
 
-            analytics.addParam('page_nb', 0);
+            tracking.addParam('page_nb', 0);
 
             done();
         }.bind(this);
@@ -826,7 +833,7 @@ function allresults(params, callback) {
             }
             helpers.pagination.paginate(metadata, query, url);
             helpers.filters.prepare(metadata);
-            analytics.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
             seo.update();
@@ -836,7 +843,7 @@ function allresults(params, callback) {
                 items: _items.toJSON(),
                 metadata: metadata,
                 infiniteScroll: infiniteScroll
-                //analytics: analytics.generateURL.call(this)
+                //tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -1048,13 +1055,13 @@ function sort(params, callback) {
         var build = function(done) {
             var options = [
                 {
-                    name: 'price_descendant'
+                    name: 'pricedesc'
                 },
                 {
-                    name: 'price_ascendant'
+                    name: 'price'
                 },
                 {
-                    name: 'date_descendant'
+                    name: 'date*to*showdesc'
                 }
             ];
 

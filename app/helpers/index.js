@@ -8,6 +8,7 @@ module.exports = {
     pagination: require('./pagination'),
     filters: require('./filters'),
     dataAdapter: require('./dataAdapter'),
+    features: require('./features'),
     timeAgo: function(itemDate) {
         var current = new Date();
         var currentMonth = current.getMonth() + 1;

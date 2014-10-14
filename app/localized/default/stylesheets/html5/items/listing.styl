@@ -1,0 +1,75 @@
+.item-listing {
+    background: #DDD;
+
+    a {
+        background: #FFF;
+        border-bottom: 1px solid #ECECEC;
+        display: block;
+        min-height: 96px;
+        overflow: hidden;
+        padding: 7px;
+        position: relative;
+
+        &:active {
+            background-color: #F6F6F6;
+        }
+    }
+
+    .image {
+        background: #FFF url(imageUrl/images/html5/noPhoto.png) 50% 50% no-repeat;
+        box-shadow: 0 0 0 1px #EEE inset;
+        float: left;
+        height: 95px;
+        margin: 0 8px 0 0;
+        width: 95px;
+
+        &.filled {
+            background-size: cover;
+        }
+    }
+
+    .datetime {
+        color: #B0B0B0;
+        font-size: 12px;
+        line-height: 1;
+        overflow: hidden;
+        padding: 4px 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .title {
+        color: #333;
+        font-size: 14px;
+        font-weight: normal;
+        height: 48px;
+        line-height: 1.2;
+        overflow: hidden;
+        padding: 4px 0;
+        word-wrap: break-word;
+    }
+
+    .price {
+        color: #F70;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1;
+        text-align: right;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .item-listing li {
+        box-sizing: border-box;
+        float: left;
+        width: 50%;
+
+        &:nth-child(odd){
+            border-right: 5px solid transparent;
+            clear: both;
+        }
+
+        &:nth-child(even){
+            border-left: 5px solid transparent;
+        }
+    }
+}

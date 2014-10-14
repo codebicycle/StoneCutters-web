@@ -170,12 +170,12 @@ module.exports = Base.extend({
             var analyticImg;
             var analyticInfo;
 
-            analytics.reset();
-            analytics.setPage('listing');
-            analytics.addParam('category', category);
-            analytics.addParam('subcategory', subcategory);
+            tracking.reset();
+            tracking.setPage('listing');
+            tracking.addParam('category', category);
+            tracking.addParam('subcategory', subcategory);
 
-            analyticInfo = analytics.generateURL.call(this);
+            analyticInfo = tracking.generateURL.call(this);
             _.each(analyticInfo.urls, function(url) {
                 img = $('<img/>');
                 img.addClass('analytics');
