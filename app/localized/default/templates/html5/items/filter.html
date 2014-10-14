@@ -1,5 +1,42 @@
-<ul>
-    {% for filter in filters %}
-        <li>{{ filter.name }}</li>
-    {% endfor %}
-</ul>
+<form id="filter" class="filters">
+	{% from macros import FieldRangeFilter, FieldCheckFilter, FieldSelectorFilter %}
+	{% for filter in filtersOrd %}
+		{% if filter.name == 'pricerange' %}
+			{% if appliedFilter[filter.name] %}
+				{% set min = appliedFilter[filter.name][0] %}
+				{% set max = appliedFilter[filter.name][1] %}
+			{% else %}
+				{% set min = '' %}
+				{% set max = '' %}
+			{% endif %}
+			{{ FieldRangeFilter(dictionary["buyerinfo.Price"], dictionary["listingpageitemslisting.Max"]+' $:', dictionary["listingpageitemslisting.Min"]+' $:', filter.name, min, max) }}
+		{% endif %}
+
+		{% if filter.name == 'hasimage' %}
+			{% if appliedFilter[filter.name] %}
+				{% set check = 'checked' %}
+			{% else %}
+				{% set check = '' %}
+			{% endif %}
+			{{ FieldCheckFilter(dictionary["posting_optionallist.OnlyWithPictures"]+':', filter.name, 'checkbox', 'true', check) }}
+		{% endif %}
+
+		{% if filter.name == 'hasimage' %}
+			{{ FieldSelectorFilter(dictionary["homeheader.Selected_Region"]+':', '', location.current.name if location.current.name else location.name, 'location') }}
+		{% endif %}
+
+		{% if filter.name == 'parentcategory' %}
+			{{ FieldSelectorFilter(dictionary["itemslisting.Category"], '/', dictionary["alertsbody.AlertsCreate_0252_All"], '') }}
+		{% endif %}
+
+	{% endfor %}
+
+	<fieldset class="no-border">
+		<a href="#" class="clear">{{ dictionary["itemslisting.ClearAll"] }}</a>
+	</fieldset>
+
+	<fieldset class="center no-border">
+		<input class="btns orange" type="submit" value="{{ dictionary["countryoptions.Accept"] }}" />
+	</fieldset>
+
+</form>

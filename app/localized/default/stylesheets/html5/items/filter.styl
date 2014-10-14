@@ -1,0 +1,96 @@
+.items_filter_view {
+	font-size: .875rem;
+	color: #494949;
+
+	form.filters {
+
+		fieldset {
+			padding: 1.250rem .625rem;
+			border: 0;
+			border-bottom: 1px solid #ccc;
+			&.center {
+				text-align: center;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				box-sizing: border-box;
+			}
+			&.no-border {
+				border: 0;
+			}
+			.left,
+			.right {
+				width: 48%;
+				box-sizing: border-box;
+				label {
+					width: 35%;
+					padding: .625rem 0;
+				}
+			}
+			.left{
+				float: left;
+			}
+			.right {
+				float: right;
+			}
+		}
+
+		strong {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		label {
+			float: left;
+			padding-right: .625em;
+			&.block {
+				width: 100%;
+			}
+		}
+
+		input[type="number"] {
+			float: left;
+			border: 1px solid #ccc;
+			padding: .625rem .313em;
+			width: 65%;
+			box-sizing: border-box;
+			border-radius: 3px;
+		}
+
+		input[type="submit"] {
+			padding: .625rem 1.875rem;
+			text-transform: uppercase;
+			font-weight: bold;
+			color: #fff;
+		}
+
+		input[type="checkbox"],
+		input[type="radio"] {
+			float: right;
+		}
+
+		a {
+			float: right;
+			color: #4275ba;
+
+			&.bold {
+				font-weight: bold;
+			}
+			&.bold::after {
+				content: '';
+				font-size: 0;
+				line-height: 0;
+				width: 5px;
+				height: 9px;
+				background: url(imageUrl/images/html5/nextArrow.png) no-repeat;
+				margin-left: 6px;
+				display: inline-block;
+			}
+		}
+	}
+
+	.filter-btns {
+		border-radius: 3px;
+	}
+
+}

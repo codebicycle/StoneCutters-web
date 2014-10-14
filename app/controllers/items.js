@@ -967,7 +967,13 @@ function filter(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        
+        var appf, appliedString;
+
+        if (params.filters) {
+            appf = params.filters;
+            appliedString = params.filters;
+        }
+
         var prepare = function(done) {
             params.location = this.app.session.get('siteLocation');
             if (params.search) {
@@ -999,19 +1005,44 @@ function filter(params, callback) {
             }.bind(this));
         }.bind(this);
 
+        var findApplied = function (done, filters) {
+
+            function getFilters(arr) {
+                var fil;
+                var obj = {};
+
+                for (var i = 1; i < arr.length; i++) {
+                    fil = arr[i].split('_');
+                    obj[fil[0]] = [];
+                    for (var j = 1; j < fil.length; j++) {
+                        obj[fil[0]].push(fil[j]);
+                    }
+                }
+
+                return obj;
+            }
+            if (appf) {
+                appf = getFilters(appf.split('-'));
+            }
+            done(filters);
+        };
+
         var success = function(filters) {
             callback(null, 'items/filter', {
-                filters: filters
+                filters: filters,
+                appliedFilter: appf,
+                appliedstring: appliedString
             });
         }.bind(this);
 
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);        
+        }.bind(this);
 
         asynquence().or(error)
             .then(prepare)
             .then(find)
+            .then(findApplied)
             .val(success);
     }
 }
@@ -1020,17 +1051,17 @@ function sort(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        
+
         var build = function(done) {
             var options = [
                 {
-                    name: 'price_descendant'
+                    name: 'pricedesc'
                 },
                 {
-                    name: 'price_ascendant'
+                    name: 'price'
                 },
                 {
-                    name: 'date_descendant'
+                    name: 'date*to*showdesc'
                 }
             ];
 
@@ -1045,7 +1076,7 @@ function sort(params, callback) {
 
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);        
+        }.bind(this);
 
         asynquence().or(error)
             .then(build)

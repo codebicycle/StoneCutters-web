@@ -1,4 +1,8 @@
-<header id="topBar"{{ ' class="disabled"' if postingFlow }}>
+<header id="topBar"{{ ' class="disabled"' if postingFlow }}>    
+    <div class="topBarFilters hide">
+        <a href="#" class="filter-btns blue">{{ dictionary["distancediv.Cancel"] }}</a><!-- 
+        --><h2>{{ headerTitle }}</h2>
+    </div>
     <a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a>
     <ul class="header-links">
         {% if not user %}

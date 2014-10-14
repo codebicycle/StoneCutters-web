@@ -1,5 +1,7 @@
-{% view 'locations/select' %}
 {% view 'partials/search' %}
+{% if currentRoute.action == 'list' %}
+    {% view 'locations/select' %}
+{% endif %}
 <section id="categories" class="categories-list">
     <h3 class="categories-title">{{ dictionary["posting_selector.SelectCategory"] }}</h3>
     <ul class="{{ icons[icons.length - 1] }}-icons">
@@ -10,7 +12,6 @@
                         <span class="icon cat-{{ category.id }}"></span>{{category.trName}}
                     </a>
                 </h2>
-
                 <ul class="subcategories">
                     {% for subcategory in category.children.toJSON() %}
                         <li class="subcategory">

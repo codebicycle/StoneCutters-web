@@ -1,24 +1,26 @@
 header#location {
 
-	padding: .4rem .8rem .2rem .8rem;
-	background: #DDD;
-
+	padding: 0.4rem 0.8rem 0.5rem 0.5rem;
+	background: #EFEFEF;
+	border-bottom:1px solid #BCBCBC;
+	border-top:1px solid #BCBCBC;
 	h1,
 	h3,
 	strong {
 
-		width: 100%;
+		width: 60%;
 		display: inline-block;
 		font-size: 1.063rem;
 		color: #333;
 		font-weight: normal;
-
+		float: right;
+		text-align: right;
 		a {
-
-			color: #1C7BD4;
-			
-			font-size: .75rem;
-
+			background: url(imageUrl/images/html5/flecha_home.png) right center no-repeat;
+			color: #008dcb;
+		    font-size: 0.85rem;
+		    font-weight: bold;
+		    padding: 0 0.6rem;
 			&.big {
 
 				font-size: 1.063rem;
@@ -33,6 +35,12 @@ header#location {
 
 		}
 
+	}
+	.locationtext {
+		background: url(imageUrl/images/html5/icon_location.png) left center no-repeat;
+		color: #494949;
+		font-size: .95rem;
+		padding: 0 1.2rem;
 	}
 
 }
