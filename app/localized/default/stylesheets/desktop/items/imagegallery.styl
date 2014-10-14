@@ -1,16 +1,30 @@
-#image-galery {
+#image-gallery {
     clear-fix();
+    margin-top: 10px;
 
     .image-viewer {
-        box(#f2f2f2, grey(20%) , 0, 0);
+        border: 1px solid $greyBorders;
         float: left;
+        height: 400px;
         width: 538px;
+        position: relative;
+
+        .big-size {
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
     }
 
     .image-navigator {
-        float: right;
-        height: 400px;
-        width: 60px;
+       float: right;
+       height: 402px;
+       width: 60px;
 
         a {
             display: block;
@@ -19,11 +33,6 @@
                 margin-top: 0;
             }
         }
-
-    }
-
-    .img-navigator {
-       float: right;
 
         .icon-navarrowdown,
         .icon-navarrowup {
@@ -36,13 +45,11 @@
             border: 1px solid $greyBorders;
             height: 58px;
             line-height: 58px;
-            text-align: center;
+            width: 58px;
         }
     }
 
     .item-image {
         display: block;
-        height: auto;
-        width: 100%;
     }
 }
