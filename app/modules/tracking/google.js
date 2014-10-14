@@ -22,8 +22,7 @@ var pageNameParsers = {
                 url = url.replace(this.nameSubId, options.subcategory.id);
             }
             else if (options.category && !options.subcategory) {
-                url = url.replace(this.nameParentName, options.category.name);
-                url = url.replace(this.nameSubId, 'nocat');
+                url = url.replace(this.nameParentNameSubId, options.category.name);
             }
             else {
                 url = url.replace(this.nameParentNameSubId, 'nocat');
