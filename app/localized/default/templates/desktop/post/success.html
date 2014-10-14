@@ -1,2 +1,29 @@
-<h2>Tu anuncio se posteo con éxito!</h2>
+<aside class="notification advice icons icon-time">
+	<h4>{{ dictionary["misc.AdSubmittedApproval"] }}</h4>
+	<p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</p>
+</aside>
+
+<aside class="notification warning">
+	<h3>Continúe <span>vendiendo!</span></h3>
+	<p>De seguro <span>tenés alguna otra cosa para vender</span> Publica cuántos anuncios quieras. Es gratis.</p>
+	<div class="categories populars">
+		<a href="#">
+			<article>
+				<p>Publicar en <strong>Celulares y Smartphones</strong></p>
+			</article>
+		</a>
+		<a href="#">
+			<article>
+				<p>Publicar en <strong>Videojuegos y Consolas</strong></p>
+			</article>
+		</a>
+		<a href="#">
+			<article>
+				<p>Publicar en <strong>TV y Video</strong></p>
+			</article>
+		</a>
+	</div>
+	<a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>Elige la categoría</span></a>
+</aside>
+
 {% include (template + '/partials/tracking.html') %}
