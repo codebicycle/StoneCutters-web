@@ -23,7 +23,15 @@
     .item-info {
         color: grey(40%);
         font-size: $xs;
-        .icons:before {
+        margin: 0 0 10px 0;
+        ul-reset();
+
+        li {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .icons::before {
             font-size: 1.7rem;
         }
     }

@@ -1,17 +1,11 @@
 <section id="item-location">
     <div class="box">
-        <h2>
-            <span class="icons icon-pin"></span>
-            Localização
-        </h2>
-        
+        <h2 class="icons icon-pin">Localización</h2>
         {% if item.location.cityName or item.location.stateName %}
-            <p>{{ item.location.cityName }}, {{ item.location.stateName }}</p>
+            <p>{{ item.location.cityName }}, {{ item.location.stateName }}
         {% endif %}
-        <p>{{ item.location.name }}</p>
-        <a href=""><span class="icons icon-zoom"></span>Ver mapa más grande</a>
+        <span>{{ item.location.name }}</span></p>
+        <a href="" class="icons icon-zoom">Ver mapa más grande</a>
     </div>
-    <div class="map">
-        
-    </div>
+    <div class="map"></div>
 </section>
