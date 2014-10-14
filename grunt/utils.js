@@ -3,6 +3,15 @@
 var _ = require('underscore');
 var config = require('./config');
 
+var replaces = {
+    environments: {
+        d: 'development',
+        t: 'testing',
+        s: 'staging',
+        p: 'production'
+    }
+};
+
 function getEnvironments(grunt) {
     var environments = grunt.option('env');
 
@@ -12,7 +21,14 @@ function getEnvironments(grunt) {
     if (!_.isArray(environments)) {
         environments = environments.split(',');
     }
-    return environments;
+    return environments.map(function(environment) {
+        var replace = replaces.environments[environment.toLowerCase()];
+
+        if (replace) {
+            environment = replace;
+        }
+        return environment;
+    });
 }
 
 module.exports = {
