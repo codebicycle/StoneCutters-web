@@ -1,4 +1,5 @@
 <div id="image-gallery">
+<<<<<<< HEAD
     <div class="image-viewer">
         <a href="#"><img src="http://dailypicksandflicks.com/wp-content/uploads/2014/02/Business-Baby-Meme-No-Bullshit-Business-Baby-11.jpg" alt="" title="" class="item-image big-size" /></a>
     </div>
@@ -10,5 +11,20 @@
         <a href="#"><img src="http://dailypicksandflicks.com/wp-content/uploads/2014/02/Business-Baby-Meme-No-Bullshit-Business-Baby-11.jpg" alt="" title="" class="item-image thumbnail" /></a>
         <a href="#"><img src="http://dailypicksandflicks.com/wp-content/uploads/2014/02/Business-Baby-Meme-No-Bullshit-Business-Baby-11.jpg" alt="" title="" class="item-image thumbnail" /></a>
         <a href="#" class="icons icon-navarrowdown"></a>
+=======
+    <div class="img-viewer">
+        {% if item.images.length > 0 %}
+            <img src="{{ item.images[0].url }}">
+        {% endif %}
+    </div>
+    <div class="img-navigator">
+        <ul>
+            {% for image in item.images %}
+                <li>
+                    <img src="{{ image.thumbnail }}" data-image="{{ image.url }}" class="{{ 'active' if loop.first }}" >
+                </li>
+            {% endfor %}
+        </ul>
+>>>>>>> 92876e63a0ffc8772c1382fc7ff8e44976d33bf5
     </div>
 </div>
