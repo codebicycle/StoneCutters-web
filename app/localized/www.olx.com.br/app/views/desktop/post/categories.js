@@ -3,6 +3,7 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'post_categories_view',
+    tagName: 'section',
     postRender: function() {
         $('.category').hover(function() {
             $('.catContent').removeClass('visible');

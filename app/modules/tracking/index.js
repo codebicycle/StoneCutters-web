@@ -23,7 +23,7 @@ function addParam(name, value) {
 }
 
 function generateURL() {
-    var analytics; 
+    var data; 
 
     if (!config.get(['tracking', 'enabled'], true)) {
         return;
@@ -31,9 +31,9 @@ function generateURL() {
 
     addParam('user', this.app.session.get('user'));
     addParam('rendering', this.app.session.get('platform'));
-    analytics = tracker.generate.call(this, query);
+    data = tracker.generate.call(this, query);
     reset();
-    return analytics;
+    return data;
 }
 
 module.exports = {

@@ -1,10 +1,8 @@
-@import '../helpers/variables.styl';
-@import '../helpers/mixins.styl';
-
 .items-list {
     ul-reset();
-    margin: 10px 0;
     border-bottom: 1px solid #ddd;
+    display: block;
+    margin: 10px 0;
 
     li {
         box(#fff, #ddd, 0, 5px);
@@ -18,43 +16,53 @@
         }
         p, .item-image {
             display: inline-block;
-            vertical-align: top;
             margin: 0;
+            vertical-align: top;
         }
         p {
             padding-top: 10px;
         }
         .item-image {
-            width: 141px;
-            height: 110px;
             border: 1px solid #ccc;
-            text-align: center;
+            height: 110px;
+            position: relative;
+            width: 141px;
+
+            &.lines {
+                lines(#ccc, 1px, 96%, 2%, -3px, 92%, 4%, -5px, right);
+            }
 
             img {
-                width: 100%;
-                display: inline-block;
-                vertical-align: middle;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                max-height: 100%;
+                max-width: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
             }
         }
         .item-info {
-            width: 340px;
             font-size: 1.231rem;
-            padding-left: 5px;
+            padding-left: 15px;
+            width: 340px;
+
             span {
                 color: #666;
                 font-size: .9231rem;
             }
         }
         .item-price {
-            width: 148px;
-            font-weight: bold;
-            font-size: 1.231;
             color: #000;
+            font-size: 1.231rem;
+            font-weight: bold;
+            width: 145px;
         }
         .item-date {
-            width: 72px;
             color: #666;
             font-size: .9231rem;
+            width: 65px;
         }
     }
 }

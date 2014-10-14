@@ -1,0 +1,72 @@
+.items-list-ig {
+    clear-fix()
+    ul-reset();
+    display: block;
+    margin: 10px 0;
+
+    li {
+        border: 1px solid #fafafa;
+        float: left;
+        height: 260px;
+        padding: 12px;
+        width: 214px;
+
+        &:hover {
+            border: 1px solid #ccc;
+        }
+
+        a {
+            display: block;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        p, .item-image {
+            display: block;
+            margin: 0;
+            vertical-align: top;
+        }
+        .item-image {
+            border: 1px solid #ccc;
+            height: 161px;
+            position: relative;
+            width: 214px;
+
+            img {
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                max-height: 100%;
+                max-width: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+        .item-info {
+            font-size: 1.231rem;
+            margin: 10px 0 0;
+
+            span {
+                color: #666;
+                font-size: .9231rem;
+            }
+        }
+        .item-price {
+            color: #000;
+            font-size: 1.231rem;
+            font-weight: bold;
+            margin: 5px 0;
+
+            span {
+                font-size: .9231rem;
+            }
+        }
+        .item-date {
+            color: #666;
+            font-size: .9231rem;
+        }
+
+    }
+}

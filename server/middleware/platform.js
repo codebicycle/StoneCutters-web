@@ -17,7 +17,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
             var userAgent = utils.getUserAgent(req);
-            var redirectOnDesktop = config.get(['redirect', 'onDesktop'], false);
             var refererHost;
             var subdomains;
 
@@ -58,10 +57,13 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return;
                 }
                 platform = device.web_platform || utils.defaults.platform;
-                if (redirectOnDesktop && device.isBrowser) {
-                    return redirectDesktop(false);
+                if (device.isBrowser) {
+                    if (!host.indexOf('www')) {
+                        return next();
+                    }
+                    return redirect([req.protocol, '://', host.replace(new RegExp('^m', 'i'), 'www'), req.originalUrl].join(''));
                 }
-                redirect([req.protocol, '://', platform, '.', host, req.originalUrl].join(''));
+                redirect([req.protocol, '://', platform, '.', host.replace(new RegExp('^www', 'i'), 'm'), req.originalUrl].join(''));
             }
 
             function checkCorrectPlatform(err, response, body) {
@@ -73,7 +75,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return;
                 }
                 platform = device.web_platform || utils.defaults.platform;
-                if (redirectOnDesktop && device.isBrowser) {
+                if (device.isBrowser) {
                     return redirectDesktop(true);
                 }
                 else if (platform !== req.subdomains.pop()) {
@@ -84,14 +86,37 @@ module.exports = function(dataAdapter, excludedUrls) {
                 next();
             }
 
+            function checkUnknownSubdomain(err, response, body) {
+                var device = checkDevice(err, response, body);
+                var subdomains = req.subdomains.reverse();
+                var host = req.headers.host;
+                var subdomain = 'm.';
+                var platform;
+
+                if (!device) {
+                    return;
+                }
+                platform = device.web_platform || utils.defaults.platform;
+                if (device.isBrowser) {
+                    subdomain = 'www.';
+                }
+
+                if (_.contains(config.get('hosts', ['olx']), subdomains[subdomains.length - 1])) {
+                    subdomains = subdomains.slice(0, subdomains.length - 1);
+                }
+                redirect([req.protocol, '://', req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), subdomain)].join(''), 301);
+            }
+
             function fail(err) {
                 statsd.increment(['Unknown Location', 'middleware', 'platform', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 
-            if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && _.contains(config.get('hosts', ['olx']), req.subdomains.shift()))) && 'm' === req.subdomains.pop()) {
+            // m.olx.com or www.olx.com
+            if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && _.contains(config.get('hosts', ['olx']), req.subdomains.shift()))) && ('m' === req.subdomains.pop() ||  'www' === req.subdomains.pop())) {
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), redirectCorrectPlatform);
             }
+            // platform.olx.com 
             else if (req.subdomains.length <= 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
                 if (!~userAgent.indexOf('Googlebot')) {
                     if (!req.headers.referer) {
@@ -111,13 +136,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
                 next();
             }
+            // location.olx.com or olx.com
             else {
-                subdomains = req.subdomains.reverse();
-
-                if (_.contains(config.get('hosts', ['olx']), subdomains[subdomains.length - 1])) {
-                    subdomains = subdomains.slice(0, subdomains.length - 1);
-                }
-                redirect([req.protocol, '://', req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), 'm')].join(''), 301);
+                return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), checkUnknownSubdomain);
             }
         };
 
