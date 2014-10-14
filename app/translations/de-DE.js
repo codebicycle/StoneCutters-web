@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Ver\xF6ffentlichen',
     'defaultheader.change': 'Wechseln',
     'defaultheader.Cities': 'St\xE4dte',
+    'defaultheader.Location': 'Ort',
     'defaultheader.PopularSearches': 'H\xE4ufige Suchbegriffe',
     'defaultheader.WhatAreYouLookingFor': 'Wonach suchen Sie?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Schauen Sie sich unseren neuen Werbespot an!',

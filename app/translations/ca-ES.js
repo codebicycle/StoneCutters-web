@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'PUBLICA',
     'defaultheader.change': 'Canvia',
     'defaultheader.Cities': 'Ciutats',
+    'defaultheader.Location': 'Ubicaci\xF3',
     'defaultheader.PopularSearches': 'Cerques populars',
     'defaultheader.WhatAreYouLookingFor': 'Qu\xE8 busques?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Mira el nostre nou anunci de TV!',

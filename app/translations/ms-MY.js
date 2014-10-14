@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Siar',
     'defaultheader.change': 'Tukar',
     'defaultheader.Cities': 'Bandar',
+    'defaultheader.Location': 'Lokasi',
     'defaultheader.PopularSearches': 'Carian Popular',
     'defaultheader.WhatAreYouLookingFor': 'Apa yang anda cari?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tontonlah iklan TV baru kami!',

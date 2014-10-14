@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Uverejni\u0165',
     'defaultheader.change': 'Zmeni\u0165',
     'defaultheader.Cities': 'Mest\xE1',
+    'defaultheader.Location': 'Miesto',
     'defaultheader.PopularSearches': 'Popul\xE1rne h\u013Eadania',
     'defaultheader.WhatAreYouLookingFor': '\u010Co h\u013Ead\xE1te?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pozrite si na\u0161u nov\xFA telev\xEDznu reklamu!',

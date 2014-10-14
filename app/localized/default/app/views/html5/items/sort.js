@@ -6,14 +6,6 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 
 module.exports = Base.extend({    
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);        
-        return _.extend({}, data, {});
-    },
-    getCurrentUrl :function(){
-        var data = Base.prototype.getTemplateData.call(this);
-        return data.url;
-    },
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);        
@@ -31,6 +23,7 @@ module.exports = Base.extend({
         var datos = $('#form-sort').serializeArray();
         var data = Base.prototype.getTemplateData.call(this);
         var newurl = helpers.filters.generateFilterOrder(datos, data, 'sort');
+        
         helpers.common.redirect.call(this.app.router, newurl, null, {
             status: 200
         });

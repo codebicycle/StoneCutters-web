@@ -66,33 +66,3 @@
         </select>
     {% endif %}
 {% endmacro %}
-
-
-{% macro FieldRangeFilter(title, label1, label2, name) %}
-    <fieldset>
-        <strong>{{ title }}</strong>
-        <div class="left">
-            <label>{{ label1 }}</label>
-            <input type="number" name="{{ name }}" value="">
-        </div>
-        <div class="right">
-            <label>{{ label2 }}</label>
-            <input type="number" name="{{ name }}" value="">
-        </div>
-    </fieldset>
-{% endmacro %}
-
-{% macro FieldCheckFilter(label, name, type, value) %}
-    <fieldset>
-        <label class="block">{{ label }}
-            <input type="{{ type }}" name="{{ name }}" value="{{ value }}">
-        </label>
-    </fieldset>
-{% endmacro %}
-
-{% macro FieldSelectorFilter(label, href, value) %}
-    <fieldset>
-        <label>{{ label }}</label>
-        <a class="bold" href="{{ href }}">{{ value }}</a>
-    </fieldset>
-{% endmacro %}

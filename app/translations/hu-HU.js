@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Felad\xE1s',
     'defaultheader.change': 'V\xE1ltoztat\xE1s',
     'defaultheader.Cities': 'V\xE1rosok',
+    'defaultheader.Location': 'Hely',
     'defaultheader.PopularSearches': 'N\xE9pszer\u0171 keres\xE9sek',
     'defaultheader.WhatAreYouLookingFor': 'Mit keres?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tekintse meg az \xFAj TV-rekl\xE1munkat!',

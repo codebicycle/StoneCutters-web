@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Yolla',
     'defaultheader.change': 'De\u011Fi\u015Ftir',
     'defaultheader.Cities': '\u015Eehirler',
+    'defaultheader.Location': 'Yer',
     'defaultheader.PopularSearches': 'En S\u0131k Arananlar',
     'defaultheader.WhatAreYouLookingFor': 'Arad\u0131\u011F\u0131n\u0131z \u015Fey nedir?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Yeni TV reklam\u0131m\u0131za g\xF6z at\u0131n!',

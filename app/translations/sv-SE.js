@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'PUBLICERA',
     'defaultheader.change': '\xE4ndra',
     'defaultheader.Cities': 'St\xE4der',
+    'defaultheader.Location': 'Ort',
     'defaultheader.PopularSearches': 'Popul\xE4ra s\xF6kningar',
     'defaultheader.WhatAreYouLookingFor': 'Vad s\xF6ker du?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Kolla in v\xE5r nya TV-annons!',

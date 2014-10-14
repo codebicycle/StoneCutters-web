@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'OBJAVI',
     'defaultheader.change': 'Promjena',
     'defaultheader.Cities': 'Gradovi',
+    'defaultheader.Location': 'Lokacija',
     'defaultheader.PopularSearches': 'Popularne pretrage',
     'defaultheader.WhatAreYouLookingFor': '\u0160ta tra\u017Eite?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pogledajte na\u0161 novi TV oglas!',

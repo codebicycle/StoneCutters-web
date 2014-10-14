@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'CHAPISHA',
     'defaultheader.change': 'Badilisha',
     'defaultheader.Cities': 'Miji',
+    'defaultheader.Location': 'Eneo',
     'defaultheader.PopularSearches': 'Utafutaji Maarufu',
     'defaultheader.WhatAreYouLookingFor': 'Je, unatafuta nini?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Angalia tangazo letu jipya la runinga!',

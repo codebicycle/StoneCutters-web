@@ -17,20 +17,20 @@ module.exports = (function() {
 
     function generateFilterOrder(fields, data, action) {        
         var aux = data.url.split('/');
-        var urllocal = '';
+        var urlLocal = '';
         var url = '';
-        var filtergenerate = '';
+        var filterGenerate = '';
         var param = '';
         var params = common.serializeFormJSON(fields);
         var baseUrl = '';
 
         aux.pop();
-        urllocal = aux.join('/');
+        urlLocal = aux.join('/');
 
         if (action == 'sort') {
-            filtergenerate = verifyActualSort(urllocal);
+            filterGenerate = verifyActualSort(urlLocal);
         } else {
-            filtergenerate = verifyActualFilter(urllocal);
+            filterGenerate = verifyActualFilter(urlLocal);
         }        
         _.each(params, function each(index, value) {
             if(index !== ''){
@@ -48,23 +48,23 @@ module.exports = (function() {
             }
         });
 
-        if (filtergenerate !== '') {
-            filtergenerate = '-' + filtergenerate;
+        if (filterGenerate !== '') {
+            filterGenerate = '-' + filterGenerate;
         }
 
         if (action == 'sort') {
-            url = filtergenerate + '' + url;
+            url = filterGenerate + '' + url;
         } else {
-            url = url + '' + filtergenerate;
+            url = url + '' + filterGenerate;
         }
 
-        baseUrl = urllocal.split('/');
+        baseUrl = urlLocal.split('/');
         if (baseUrl[baseUrl.length-1][0] === '-') {
             baseUrl.pop();
-            urllocal = baseUrl.join('/');
+            urlLocal = baseUrl.join('/');
         }
 
-        return urllocal + '/' + url;
+        return urlLocal + '/' + url;
     }
 
     function verifyActualSort(url) {

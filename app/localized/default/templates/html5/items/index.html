@@ -1,5 +1,7 @@
 {% view 'partials/search' %}
-{% view 'partials/filterorder' , { quantity : metadata.total } %}
+
+{% include (template + '/partials/filterorder.html') %}
+
 <section id="itemListing">
     {% if metadata.total == 0 %}
         <div class="emtyList">

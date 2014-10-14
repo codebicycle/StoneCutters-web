@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': '\u067E\u0648\u0633\u0679 \u06A9\u0631\u06CC\u06BA',
     'defaultheader.change': '\u062A\u0628\u062F\u06CC\u0644 \u06A9\u0631\u06CC\u06BA',
     'defaultheader.Cities': '\u0634\u06C1\u0631',
+    'defaultheader.Location': '\u0645\u0642\u0627\u0645',
     'defaultheader.PopularSearches': '\u0645\u0642\u0628\u0648\u0644 \u062A\u0644\u0627\u0634\u06CC\u06BA',
     'defaultheader.WhatAreYouLookingFor': '\u0622\u067E \u06A9\u06CC\u0627 \u062A\u0644\u0627\u0634 \u06A9\u0631\u0631\u06C1\u06D2 \u06C1\u06CC\u06BA\u061F',
     'defaulthtmlhead.CheckOutOurNewTvAd': '\u0679\u06CC \u0648\u06CC \u067E\u0631\u06C1\u0645\u0627\u0631\u0627 \u0646\u06CC\u0627 \u0627\u0634\u062A\u06C1\u0627\u0631 \u062F\u06CC\u06A9\u06BE\u06CC\u06BA',

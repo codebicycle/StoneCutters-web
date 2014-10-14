@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'PLAAS',
     'defaultheader.change': 'Verander',
     'defaultheader.Cities': 'Stede',
+    'defaultheader.Location': 'Ligging',
     'defaultheader.PopularSearches': 'Popul\xEAre Soeke',
     'defaultheader.WhatAreYouLookingFor': 'Waarna soek jy?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Kyk na ons nuwe TV-advt.!',

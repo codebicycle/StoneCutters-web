@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Ievietot',
     'defaultheader.change': 'Main\u012Bt',
     'defaultheader.Cities': 'Pils\u0113tas',
+    'defaultheader.Location': 'Atra\u0161an\u0101s vieta',
     'defaultheader.PopularSearches': 'bie\u017Ei mekl\u0113ti v\u0101rdi',
     'defaultheader.WhatAreYouLookingFor': 'Ko j\u016Bs mekl\u0113jat?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Piev\u0113rsiet uzman\u012Bbu m\u016Bsu jaunajai TV rekl\u0101mai!',

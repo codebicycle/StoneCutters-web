@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Zadat',
     'defaultheader.change': 'Zm\u011Bnit',
     'defaultheader.Cities': 'M\u011Bsta',
+    'defaultheader.Location': 'M\xEDsto',
     'defaultheader.PopularSearches': 'Obl\xEDben\xE1 vyhled\xE1v\xE1n\xED',
     'defaultheader.WhatAreYouLookingFor': 'Co hled\xE1te?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pod\xEDvejte se na na\u0161i novou televizn\xED reklamu!',

@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'PUBLICAR',
     'defaultheader.change': 'Cambiar',
     'defaultheader.Cities': 'Ciudades',
+    'defaultheader.Location': 'Localizaci\xF3n',
     'defaultheader.PopularSearches': 'B\xFAsquedas Populares',
     'defaultheader.WhatAreYouLookingFor': '\xBFQu\xE9 est\xE1s buscando?',
     'defaulthtmlhead.CheckOutOurNewTvAd': '\xA1Ya puedes ver nuestro nuevo anuncio de TV!',

@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Mag-Post',
     'defaultheader.change': 'Baguhin',
     'defaultheader.Cities': 'Mga Lungsod',
+    'defaultheader.Location': 'Lokasyon',
     'defaultheader.PopularSearches': 'Mga Paghahanap na Popular',
     'defaultheader.WhatAreYouLookingFor': 'Ano ang hinahanap mo?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tingnan ang aming bagong patalastas sa TV!',

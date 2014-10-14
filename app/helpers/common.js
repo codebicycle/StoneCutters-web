@@ -107,19 +107,19 @@ module.exports = (function() {
         return callback(null, 'pages/error', res || {});
     }
 
-    function serializeFormJSON(datos) {
-       var o = {};
-        _.each(datos, function each(dato) {        
-           if (o[dato.name]) {
-               if (!o[dato.name].push) {
-                   o[dato.name] = [o[dato.name]];
+    function serializeFormJSON(data) {
+       var output = {};
+        _.each(data, function each(item) {        
+           if (output[item.name]) {
+               if (!output[item.name].push) {
+                   output[item.name] = [output[item.name]];
                }
-               o[dato.name].push(dato.value || '');
+               output[item.name].push(item.value || '');
            } else {
-               o[dato.name] = dato.value || '';
+               output[item.name] = item.value || '';
            }
        });
-       return o;
+       return output;
     }
 
     return {

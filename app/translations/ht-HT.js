@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'PIBLIYE',
     'defaultheader.change': 'Chanje',
     'defaultheader.Cities': 'Vil',
+    'defaultheader.Location': 'Kote',
     'defaultheader.PopularSearches': 'Rech\xE8ch ki pi popile',
     'defaultheader.WhatAreYouLookingFor': 'Kisa Wap Ch\xE8che?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tcheke nouvo anons televizyon nou an!',

@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'INDRYK',
     'defaultheader.change': 'Skift',
     'defaultheader.Cities': 'Byer',
+    'defaultheader.Location': 'Sted',
     'defaultheader.PopularSearches': 'Popul\xE6re s\xF8gninger ',
     'defaultheader.WhatAreYouLookingFor': 'Hvad leder du efter?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Se vores nye tv-reklame!',

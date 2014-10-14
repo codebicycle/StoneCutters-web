@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Posta\u0163i',
     'defaultheader.change': 'Modificare',
     'defaultheader.Cities': 'Ora\u015Fe',
+    'defaultheader.Location': 'Loca\u0163ia',
     'defaultheader.PopularSearches': 'C\u0103utari populare',
     'defaultheader.WhatAreYouLookingFor': 'Ce c\u0103uta\u0163i?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Uita\u0163i-v\u0103 la noul nostru anun\u0163 TV!',

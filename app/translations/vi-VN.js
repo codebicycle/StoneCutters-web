@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'POST',
     'defaultheader.change': 'Thay \u0111\u1ED5i',
     'defaultheader.Cities': 'Th\xE0nh ph\u1ED1',
+    'defaultheader.Location': '\u0110\u1ECBa \u0111i\u1EC3m',
     'defaultheader.PopularSearches': 'T\xECm ki\u1EBFm ph\u1ED5 bi\u1EBFn ',
     'defaultheader.WhatAreYouLookingFor': 'B\u1EA1n \u0111ang t\xECm ki\u1EBFm th\xF4ng tin g\xEC?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Xem qu\u1EA3ng c\xE1o truy\u1EC1n h\xECnh m\u1EDBi c\u1EE7a ch\xFAng t\xF4i!',

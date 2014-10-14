@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Plaats',
     'defaultheader.change': 'Wijzig',
     'defaultheader.Cities': 'Plaatsen',
+    'defaultheader.Location': 'Locatie',
     'defaultheader.PopularSearches': 'Populaire zoekopdrachten',
     'defaultheader.WhatAreYouLookingFor': 'Wat zoek je?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Bekijk onze nieuwe tv-advertentie!',

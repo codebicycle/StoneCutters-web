@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'ILMOITA',
     'defaultheader.change': 'Muuta',
     'defaultheader.Cities': 'Paikkakunnat',
+    'defaultheader.Location': 'Sijainti',
     'defaultheader.PopularSearches': 'Suositut haut',
     'defaultheader.WhatAreYouLookingFor': 'Mit\xE4 etsit?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Katso uusi TV-mainos!',

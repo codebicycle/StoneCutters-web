@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Postitage',
     'defaultheader.change': 'Muutke',
     'defaultheader.Cities': 'Linnad',
+    'defaultheader.Location': 'Asukoht',
     'defaultheader.PopularSearches': 'Populaarsed otsingud',
     'defaultheader.WhatAreYouLookingFor': 'Mida otsite?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Vaata meie uut TV-reklaami!',

@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Publicar um an\xFAncio',
     'defaultheader.change': 'Alterar',
     'defaultheader.Cities': 'Cidades',
+    'defaultheader.Location': 'Localiza\xE7\xE3o',
     'defaultheader.PopularSearches': 'Pesquisas mais populares',
     'defaultheader.WhatAreYouLookingFor': 'O que voc\xEA est\xE1 procurando?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Assista nossa campanha publicit\xE1ria!',

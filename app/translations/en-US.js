@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'Post',
     'defaultheader.change': 'Change',
     'defaultheader.Cities': 'Cities',
+    'defaultheader.Location': 'Location',
     'defaultheader.PopularSearches': 'Popular Searches',
     'defaultheader.WhatAreYouLookingFor': 'What are you looking for?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Check out our new TV ad!',

@@ -12,18 +12,18 @@ module.exports = function(nunjucks) {
         View: function() {
             this.tags = ['view'];
             this.parse = function(parser, nodes, lexer) {
-
                 var tok = parser.nextToken();
                 var args = parser.parseSignature(null,true);
+                
                 parser.advanceAfterBlockEnd(tok.value);
                 return new nodes.CallExtension(this, 'run', args);
             };
-            this.run = function(context, id, parameters) {
-                var app = getProperty('_app', context);                
+            this.run = function(context, id, subId) {
+                var app = getProperty('_app', context);
                 var parentView = getProperty('_view', context);
                 var options = {
                     context: context,
-                    extraparameter: parameters
+                    subId: subId
                 };
                 var ViewClass;
                 var view;

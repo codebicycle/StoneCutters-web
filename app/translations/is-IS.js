@@ -16,6 +16,7 @@ module.exports = {
     'defaultheader2.Post': 'BIRTA',
     'defaultheader.change': 'Breyta',
     'defaultheader.Cities': 'Borgir',
+    'defaultheader.Location': 'Sta\xF0setning',
     'defaultheader.PopularSearches': 'Algeng leitaror\xF0',
     'defaultheader.WhatAreYouLookingFor': 'Hverju ertu a\xF0 leita a\xF0?',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Horf\xF0u \xE1 n\xFDju sj\xF3nvarpsaugl\xFDsinguna okkar!',
