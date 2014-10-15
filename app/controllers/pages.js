@@ -2,7 +2,7 @@
 
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
+var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 if (typeof window === 'undefined') {
@@ -157,6 +157,7 @@ function error(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var err = this.app.session.get('error');
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
@@ -172,7 +173,6 @@ function error(params, callback) {
         }
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
-        seo.update();
         callback(null, {
             error: err,
             tracking: tracking.generateURL.call(this)

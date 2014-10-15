@@ -4,9 +4,9 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var Seo = require('../modules/seo');
 
 module.exports = {
     list: middlewares(list),
@@ -17,6 +17,7 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var fetch = function(done) {
             this.app.fetch({
                 categories: {
@@ -24,7 +25,7 @@ function list(params, callback) {
                     params: {
                         location: this.app.session.get('siteLocation'),
                         languageCode: this.app.session.get('selectedLanguage'),
-                        seo: true
+                        seo: seo.isEnabled()
                     }
                 }
             }, {
@@ -36,14 +37,13 @@ function list(params, callback) {
             var platform = this.app.session.get('platform');
             var icons = config.get(['icons', platform], []);
             var country = this.app.session.get('location').url;
-
+            seo.setContent(response.categories.metadata.seo);
             seo.addMetatag('title', response.categories.metadata.title);
             seo.addMetatag('description', response.categories.metadata.description);
-            seo.update();
-
             callback(null, {
                 categories: response.categories.toJSON(),
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+                seo: seo,
                 tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
@@ -65,6 +65,8 @@ function show(params, callback) {
     }, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
+
         var redirect = function(done){
             var categoryId = seo.getCategoryId(params.catId);
 
@@ -82,7 +84,7 @@ function show(params, callback) {
                     params: {
                         location: this.app.session.get('siteLocation'),
                         languageCode: this.app.session.get('selectedLanguage'),
-                        seo: true
+                        seo: seo.isEnabled()
                     }
                 }
             }, {
@@ -135,6 +137,7 @@ function show(params, callback) {
 }
 
 function handleItems(params, promise) {
+    var seo = Seo.instance(this.app);
     var page = params ? params.page : undefined;
     var infiniteScroll = config.get('infiniteScroll', false);
     var platform = this.app.session.get('platform');
@@ -151,7 +154,7 @@ function handleItems(params, promise) {
 
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
 
-        seo.resetHead.call(this, currentRouter);
+        seo.reset(this.app, currentRouter);
         slug = helpers.common.slugToUrl((subcategory || category).toJSON());
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
@@ -168,7 +171,7 @@ function handleItems(params, promise) {
 
         query = _.clone(params);
         params.categoryId = params.catId;
-        params.seo = true;
+        params.seo = seo.isEnabled();
         params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
         delete params.catId;
         delete params.title;
@@ -205,6 +208,7 @@ function handleItems(params, promise) {
     }.bind(this);
 
     var success = function(done, _items) {
+        var seo = Seo.instance(this.app);
         var metadata = _items.metadata;
         var postingLink = {
             category: category.get('id')
@@ -212,14 +216,13 @@ function handleItems(params, promise) {
         var currentPage;
 
         helpers.filters.prepare(metadata);
-
         if (subcategory) {
             postingLink.subcategory = subcategory.get('id');
         }
         this.app.session.update({
             postingLink: postingLink
         });
-
+        seo.setContent(_items.metadata.seo);
         tracking.setPage('listing');
         tracking.addParam('category', category.toJSON());
         if (subcategory) {
@@ -234,7 +237,6 @@ function handleItems(params, promise) {
             seo.addMetatag('robots', 'noindex, follow');
             seo.addMetatag('googlebot', 'noindex, follow');
         }
-        seo.update();
 
         done({
             type: 'items',
@@ -243,6 +245,7 @@ function handleItems(params, promise) {
             currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
             metadata: metadata,
+            seo: seo,
             items: _items.toJSON(),
             infiniteScroll: infiniteScroll,
             tracking: tracking.generateURL.call(this)
@@ -256,13 +259,14 @@ function handleItems(params, promise) {
 }
 
 function handleShow(params, promise) {
+    var seo = Seo.instance(this.app);
 
     var prepare = function(done, _category) {
         var currentRouter = ['categories', 'subcategories'];
         var slug;
 
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        seo.resetHead.call(this, currentRouter);
+        seo.reset(this.app, currentRouter);
 
         slug = helpers.common.slugToUrl(_category.toJSON());
         if (!_category.checkSlug(slug, params.title)) {
@@ -280,9 +284,8 @@ function handleShow(params, promise) {
         });
 
         tracking.addParam('category', _category.toJSON());
-        seo.addMetatag.call(this, 'title', _category.get('trName'));
-        seo.addMetatag.call(this, 'description', _category.get('trName'));
-        seo.update();
+        seo.addMetatag('title', _category.get('trName'));
+        seo.addMetatag('description', _category.get('trName'));
 
         done({
             type: 'categories',

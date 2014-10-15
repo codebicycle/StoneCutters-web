@@ -43,6 +43,9 @@ module.exports = {
     'redirections#login': {
         url: 'auth/login'
     },
+    'redirections#popularSearches': {
+        url: 'popular-searches(-cat-:categoryId)'
+    },
     'redirections#register': {
         url: 'registration/index'
     },

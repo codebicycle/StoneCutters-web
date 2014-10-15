@@ -4,7 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
+var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var Item = require('../models/item');
@@ -27,6 +27,7 @@ function show(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var itemId = params.itemId;
@@ -52,9 +53,8 @@ function show(params, callback) {
                 }
             }
             params.id = itemId;
-            params.seo = true;
+            params.seo = seo.isEnabled();
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
-            params.seo = true;
             delete params.itemId;
             delete params.title;
             delete params.sk;
@@ -244,9 +244,8 @@ function show(params, callback) {
             }
             if (siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
-                seo.addMetatag.call(this, 'canonical', helpers.common.fullizeUrl(url, this.app));
+                seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
             }
-            seo.update();
             this.app.session.update({
                 postingLink: {
                     category: (category ? category.id : undefined),
@@ -490,6 +489,7 @@ function reply(params, callback) {
     }, controller);
 
     function controller(form) {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
@@ -556,7 +556,6 @@ function reply(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
-            seo.update();
             callback(null, {
                 user: user,
                 item: item,
@@ -581,6 +580,7 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
@@ -661,6 +661,7 @@ function search(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
@@ -686,7 +687,6 @@ function search(params, callback) {
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
-                seo.update();
                 done.abort();
                 return callback(null, {
                     search: '',
@@ -732,7 +732,6 @@ function search(params, callback) {
 
         var success = function(items) {
             var metadata = items.metadata;
-
             if (metadata.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
@@ -740,7 +739,6 @@ function search(params, callback) {
 
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
-            seo.update();
             callback(null, {
                 user: user,
                 items: items.toJSON(),
@@ -767,6 +765,7 @@ function allresults(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
@@ -788,7 +787,7 @@ function allresults(params, callback) {
         var prepare = function(done) {
             delete params.search;
 
-            params.seo = true;
+            params.seo = seo.isEnabled();
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
 
@@ -848,7 +847,6 @@ function allresults(params, callback) {
             tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
-            seo.update();
             callback(null, {
                 user: user,
                 categories: _categories.toJSON(),
@@ -876,6 +874,7 @@ function allresultsig(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
@@ -890,7 +889,7 @@ function allresultsig(params, callback) {
             }
             delete params.search;
 
-            params.seo = true;
+            params.seo = seo.isEnabled();
             params['f.hasimage'] = true;
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
@@ -944,6 +943,7 @@ function allresultsig(params, callback) {
         var success = function(_categories, _items) {
             var url = '/nf/all-results-ig/';
             var metadata = _items.metadata;
+            var seo = Seo.instance(this.app);
 
             if (metadata.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
@@ -954,7 +954,7 @@ function allresultsig(params, callback) {
             tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
-            seo.update();
+
             callback(null, {
                 user: user,
                 categories: _categories.toJSON(),
@@ -1085,6 +1085,7 @@ function staticSearch(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
@@ -1118,7 +1119,6 @@ function staticSearch(params, callback) {
             if (!query.search || _.isEmpty(query.search.trim())) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
-                seo.update();
                 done.abort();
                 return callback(null, {
                     search: '',
@@ -1133,6 +1133,7 @@ function staticSearch(params, callback) {
 
         var findItems = function(done) {
             params.item_type = 'staticSearch';
+            params.seo = seo.isEnabled();
             this.app.fetch({
                 items: {
                     collection: 'Items',
@@ -1159,7 +1160,7 @@ function staticSearch(params, callback) {
             var url = ['/q/', query.search, '/c-', params.catId ,  '/'];
             url = url.join('');
             var metadata = _items.metadata;
-
+            seo.setContent(_items.metadata.seo);
             if (metadata.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
@@ -1168,12 +1169,12 @@ function staticSearch(params, callback) {
             tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
-            seo.update();
             callback(null, 'items/search', {
                 user: user,
                 items: _items.toJSON(),
                 metadata: metadata,
                 search: query.search,
+                seo: seo,
                 infiniteScroll: infiniteScroll
 //                tracking: tracking.generateURL.call(this)
             });
