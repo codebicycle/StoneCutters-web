@@ -5,7 +5,7 @@ module.exports = {
         urls: {
             server: ':title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:filters?',
             client: {
-                url: ':title-cat-:catId-p-:page(/)-ig(:filters)'
+                url: ':title-cat-:catId-p-:page-ig(/)(:filters)'
             }
         }
     },
@@ -13,7 +13,7 @@ module.exports = {
         urls: {
             server: '-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:filters?',
             client: {
-                url: '-cat-:catId-p-:page(/)-ig(:filters)'
+                url: '-cat-:catId-p-:page-ig(/)(:filters)'
             }
         }
     },
@@ -21,7 +21,7 @@ module.exports = {
         urls: {
             server: 'cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:filters?',
             client: {
-                url: 'cat-:catId-p-:page(/)-ig(:filters)'
+                url: 'cat-:catId-p-:page-ig(/)(:filters)'
             }
         }
     },
@@ -29,7 +29,7 @@ module.exports = {
         urls: {
             server: ':title-cat-:catId([0-9]+)-ig/?:filters?',
             client: {
-                url: ':title-cat-:catId(/)-ig(:filters)'
+                url: ':title-cat-:catId-ig(/)(:filters)'
             }
         }
     },
@@ -37,7 +37,7 @@ module.exports = {
         urls: {
             server: '-cat-:catId([0-9]+)-ig/?:filters?',
             client: {
-                url: '-cat-:catId(/)-ig(:filters)'
+                url: '-cat-:catId-ig(/)(:filters)'
             }
         }
     },
@@ -45,7 +45,7 @@ module.exports = {
         urls: {
             server: 'cat-:catId([0-9]+)-ig/?:filters?',
             client: {
-                url: 'cat-:catId(/)-ig(:filters)'
+                url: 'cat-:catId-ig(/)(:filters)'
             }
         }
     },
