@@ -18,19 +18,25 @@
                 float: left;
                 background: $greyBoxBg;
                 border-styles($greyBorders, 3px 3px 0 0, solid solid none, 1px 1px 0);
-                color: #666;
+                color: $greyStrong;
+                display: block;
+                float: left;
+                height: 33px;
                 line-height: 2.3;
-                padding: 0 5px;
+                padding: 0 10px;
 
                 &.active {
                     height: 34px;
                     margin-bottom: -1px;
                     background: $greyPageBg;
                     color: #000;
+                    height: 34px;
+                    margin-bottom: -1px;
                 }
                 &:before {
                     display: inline-block;
-                    line-height: 10px;
+                    font-size: 24px;
+                    height: 27px;
                 }
             }
         }
