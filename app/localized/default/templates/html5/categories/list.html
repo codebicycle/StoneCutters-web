@@ -26,7 +26,7 @@
     </ul>
     {% if register_success %}
         <input type="hidden" value="true"  class="registerSuccess">
-    {% endif %}
-    {% include (template + '/partials/tracking.html') %}
+    {% endif %}    
 </section>
+{% include (template + '/partials/tracking.html') %}
 {% view 'pages/interstitial' %}
