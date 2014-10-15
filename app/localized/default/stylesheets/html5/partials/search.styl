@@ -1,14 +1,19 @@
 header#search .search-form{
-	width:62%;
-	float:left;
+	/*width:62%;
+	float:left;*/
+	display: table-cell;
+	width: 100%;
+	padding: 0 0px 0 10px;
 }
 header#search .search-form.home{
 	width:100%;
 }
 header#search {
-	padding: .5rem;
+	padding: .5rem 0;
 	background: #dadada;
-	overflow:hidden;	
+	overflow: hidden;
+	display: table;
+	width: 100%;
 }
 header#search input {
 	height: 1.875rem;
@@ -43,17 +48,20 @@ header#search .home input[name=search]{
 	border-radius:0.150rem;
 	border:.1rem solid #e2e2e2;
 	color: #178cc8;
-	box-shadow: 0 1px 1px rgba(96, 96, 96, 0.5);    
-    float: right;
+	box-shadow: 0 1px 1px rgba(96, 96, 96, 0.5);        
     font-family: Arial;
     font-size: 0.9rem;
     font-weight: bold;
-    padding: 6px 10px 6px 30px;    
+    padding: 6px 7px 6px 30px;
+    display: table-cell;
+    text-align: center;
+    float: right;
 }
 .btnlocation{
 	background:#fff url(imageUrl/images/html5/icon_location.png) 10px center no-repeat;
 	color: #494949;
-	width: 24%;
+	display: table-cell;
+	margin-right: 10px;
 }
 
 
