@@ -155,20 +155,9 @@ _.extend(SeoModule.prototype, {
         }.bind(this));
     },
     reset: function (app, page) {
-        var content = {
-            'title': "",
-            'topTitle': "",
-            'keywords': "",
-            'description': "",
-            'metatitle': "",
-            'metas': [],
-            'levelPath': [],
-            'popularSearches': [],
-            'relatedListings': []
-        };
         this.app = app;
         this.resetHead(page);
-        this.setContent(content);
+        this.setContent({});
     },
     setContent: function (content) {
         this.seoContent = content;
