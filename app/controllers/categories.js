@@ -60,81 +60,8 @@ function list(params, callback) {
 }
 
 function showig(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        seo: false,
-        cache: false
-    }, controller);
-
-    function controller() {
-        var redirect = function(done){
-            var categoryId = seo.getCategoryId(params.catId);
-
-            if (categoryId) {
-                done.abort();
-                return helpers.common.redirect.call(this, '/cat-' + categoryId);
-            }
-            done();
-        }.bind(this);
-
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
-                        seo: true
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var router = function(done, res) {
-            if (!res.categories) {
-                return done.fail(null, {});
-            }
-            var category = res.categories.get(params.catId);
-            var platform = this.app.session.get('platform');
-            var subcategory;
-
-            params['f.hasimage'] = true;
-
-            if (!category) {
-                category = res.categories.find(function each(category) {
-                    return !!category.get('children').get(params.catId);
-                });
-                if (!category) {
-                    done.abort();
-                    return helpers.common.redirect.call(this, '/');
-                }
-                subcategory = category.get('children').get(params.catId);
-                handleItems.call(this, params, promise);
-            }
-            else if (platform === 'desktop') {
-                handleItems.call(this, params, promise);
-            }
-            else {
-                handleShow.call(this, params, promise);
-            }
-            promise.val(success);
-            done(category, subcategory);
-        }.bind(this);
-
-        var success = function(_result) {
-            callback(null, _result);
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        var promise = asynquence().or(error)
-            .then(redirect)
-            .then(fetch)
-            .then(router);
-    }
+    params['f.hasimage'] = true;
+    show.call(this, params, callback);
 }
 
 function show(params, callback) {
