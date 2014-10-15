@@ -23,7 +23,7 @@ module.exports = Base.extend({
     postRender: function() {
         var seo = Seo.instance(this.app);
 
-        $(document).on('route', seo.update);
+        $(document).on('route', seo.update.bind(seo));
     }
 });
 

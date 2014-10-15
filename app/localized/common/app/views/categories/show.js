@@ -128,9 +128,10 @@ module.exports = Base.extend({
         function prepare(done) {
             var urlFull = $('#currentUrl').val();
             var pairs = urlFull.split('?');
+            var seo = Seo.instance(this.app);
             var params;
             var url;
-            var seo = Seo.instance(this.app);
+
 
             pairs.shift();
             url = pairs.join('?');
