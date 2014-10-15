@@ -6,22 +6,22 @@
         height: 57px;
         float: left;
         &:hover {
-            background: #fff;
-            box-shadow(0 0 0 1px #38b inset);
+            background: $white;
+            box-shadow(0 0 0 1px $blue inset);
             cursor: pointer;
             a,
             .count {
-                color: #000;
+                color: $black;
             }
             .icons::before {
-                color: #666;
+                color: $greyStrong;
             }
         }
         a {
             display: block;
             height: 42px;
             padding: 15px 0 0 0;
-            color: #38b;
+            color: $blue;
             font-weight: bold;
             font-size: $xs;
             text-decoration: none;
@@ -29,7 +29,7 @@
             .icons {
                 float: left;
                 &:before {
-                    color: #38b;
+                    color: $blue;
                     font-size: 2.5rem;
                 }
             }

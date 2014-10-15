@@ -5,14 +5,14 @@
     margin: 10px 0;
 
     li {
-        border: 1px solid #fafafa;
+        border: 1px solid $greyPageBg;
         float: left;
         height: 260px;
         padding: 12px;
         width: 214px;
 
         &:hover {
-            border: 1px solid #ccc;
+            border: 1px solid $greyBorders;
         }
 
         a {
@@ -22,13 +22,14 @@
                 text-decoration: none;
             }
         }
-        p, .item-image {
+        p, 
+        .item-image {
             display: block;
             margin: 0;
             vertical-align: top;
         }
         .item-image {
-            border: 1px solid #ccc;
+            border: 1px solid $greyBorders;
             height: 161px;
             position: relative;
             width: 214px;
@@ -49,12 +50,12 @@
             margin: 10px 0 0;
 
             span {
-                color: #666;
+                color: $greyStrong;
                 font-size: $xs;
             }
         }
         .item-price {
-            color: #000;
+            color: $black;
             font-size: $m;
             font-weight: bold;
             margin: 5px 0;
@@ -64,7 +65,7 @@
             }
         }
         .item-date {
-            color: #666;
+            color: $greyStrong;
             font-size: $xs;
         }
 

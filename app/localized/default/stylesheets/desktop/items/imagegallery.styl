@@ -1,45 +1,60 @@
 #image-gallery {
-    height: 435px;
-    .img-viewer {
-        box(#f2f2f2, grey(20%) , 0, 0);
-        display:inline-block;
-        height: 100%;
-        width: 540px;
+    clear-fix();
+    margin-top: 10px;
+
+    .image-viewer {
+        border: 1px solid $greyBorders;
+        float: left;
+        height: 400px;
+        margin: 0;
+        width: 538px;
         position: relative;
 
-    }
-    .img-navigator {
-        display:inline-block;
-        height: 100%;
-        margin-left: 14px;
-        vertical-align:top;
-        ul {
-            ul-reset();
-            li {
-                height: 60px;
-                width: 60px;
-                box(#f2f2f2, grey(20%) , 0, 0);
-                color: grey(20%);
-                position: relative;
-
-                &:not(:last-child) {
-                    margin-bottom: 15px;
-                }
-
-
-
-            }
+        .big-size {
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
         }
     }
-    img {
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        max-height: 100%;
-        max-width: 100%;
-        position: absolute;
-        right: 0;
-        top: 0;
-        cursor: pointer;
+
+    .image-navigator {
+       float: right;
+       height: 402px;
+       width: 60px;
+
+        a {
+            display: block;
+            margin-top: 10px;
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        .icon-navarrowdown,
+        .icon-navarrowup {
+            border: 1px solid $greyBorders;
+            color: $greyStrong;
+            text-align: center;
+        }
+            
+        .thumbnail {
+            border: 1px solid $greyBorders;
+            height: 58px;
+            line-height: 58px;
+            width: 58px;
+        }
+    }
+
+    .item-image {
+        display: block;
     }
 }

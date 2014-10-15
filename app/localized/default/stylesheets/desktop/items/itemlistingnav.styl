@@ -1,5 +1,5 @@
 .listing-tabs {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $greyBorders;
     display: block;
     font-size: $s;
     height: 34px;
@@ -13,9 +13,12 @@
             display: inline-block;
             margin-right: 5px;
             a {
-                background: #eee;
-                border-styles(#ddd, 3px 3px 0 0, solid solid none, 1px 1px 0);
-                color: #666;
+                height: 33px;
+                display: block;
+                float: left;
+                background: $greyBoxBg;
+                border-styles($greyBorders, 3px 3px 0 0, solid solid none, 1px 1px 0);
+                color: $greyStrong;
                 display: block;
                 float: left;
                 height: 33px;
@@ -23,7 +26,9 @@
                 padding: 0 10px;
 
                 &.active {
-                    background: #fafafa;
+                    height: 34px;
+                    margin-bottom: -1px;
+                    background: $greyPageBg;
                     color: #000;
                     height: 34px;
                     margin-bottom: -1px;
