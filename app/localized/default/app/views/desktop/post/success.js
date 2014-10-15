@@ -10,6 +10,7 @@ module.exports = Base.extend({
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
