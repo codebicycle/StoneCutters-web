@@ -1,0 +1,64 @@
+#ad-options {
+    background: #eee;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid $greyBorders;
+    padding: 10px 20px;
+    width: auto;
+    > div {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .social-sharing {
+        width: 40%;
+        p {
+            color: #666;
+            display: inline-block;
+            margin: 8px 8px 0 0;
+            vertical-align: top;
+        }
+        ul {
+            display: inline-block;
+            ul-reset();
+            li {
+                float: left;
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+
+                &.button-fb span {
+                    background: $blueFacebook;
+                }
+                &.button-twitter span {
+                    background: $cyanTwitter;
+                }
+                &.button-googleplus span {
+                    background: $redGooglePlus;
+                }
+                span {
+                    border-radius(50%);
+                    color: #fff;
+                    display: block;
+                    font-size: $xl;
+                    height: 28px;
+                    width: 28px;
+                    &:before {
+                        margin: -4px 0 0 2px;
+                    }
+                }
+            }
+        }
+    }
+    .actions {
+        text-align: right;
+        width: 59%;
+        a{
+            action-button(#f9f9f9, #666, 3px, 6px 15px);
+            font-size: $xs;
+
+            &:hover{
+                action-button(#999, #fff, 3px, 6px 15px);
+            }
+        }
+    }
+}

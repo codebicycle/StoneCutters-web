@@ -42,6 +42,22 @@ module.exports = {
             }
         }
     },
+    'items#allresultsig#page': {
+        urls: {
+            server: 'nf/all-results-ig/-p-:page/:filters?',
+            client: {
+                url: 'nf/all-results-ig/-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'items#allresultsig': {
+        urls: {
+            server: 'nf/all-results-ig/:filters?',
+            client: {
+                url: 'nf/all-results-ig(/)(:filters)'
+            }
+        }
+    },
     'items#allresults#page': {
         urls: {
             server: 'nf/all-results/-p-:page/:filters?',

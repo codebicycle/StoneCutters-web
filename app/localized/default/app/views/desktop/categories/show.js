@@ -11,11 +11,14 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var slugUrl = helpers.common.slugToUrl(data.currentCategory);
-        data.nav = { link: slugUrl, listAct: 'active' };
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
-            items: data.items
+            items: data.items,
+            nav: {
+                link: slugUrl,
+                listAct: 'active'
+            }
         });
     },
     processItem: function(item) {

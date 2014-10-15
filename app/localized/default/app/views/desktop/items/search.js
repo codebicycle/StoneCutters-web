@@ -10,6 +10,7 @@ module.exports = Base.extend({
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        data.nav = { link: data.url + '/', listAct: 'active' };
 
         data.nav = { link: data.url + '/', listAct: 'active' };
         _.each(data.items, this.processItem);

@@ -10,7 +10,8 @@ var Seo = require('../modules/seo');
 
 module.exports = {
     list: middlewares(list),
-    show: middlewares(show)
+    show: middlewares(show),
+    showig: middlewares(showig)
 };
 
 function list(params, callback) {
@@ -56,6 +57,11 @@ function list(params, callback) {
             .then(fetch)
             .val(success);
     }
+}
+
+function showig(params, callback) {
+    params['f.hasimage'] = true;
+    show.call(this, params, callback);
 }
 
 function show(params, callback) {

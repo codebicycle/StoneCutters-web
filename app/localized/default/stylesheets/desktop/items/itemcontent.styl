@@ -1,21 +1,38 @@
 #item-content {
-    box(#fff, #e4e4e4 , 3px, 0 20px);
-    display: inline-block;
-    tab-arrow(right, $white, #e4e4e4, 1px, 40px, 1);
+    box($white, $greyBorders , 3px, 0);
+    float: left;
     position: relative;
-    width: 620px;
+    tab-arrow(right, $white, $greyBorders, 1px, 30px, 1);
+    width: 664px;
 
     &:after {
-        margin-top: -185px;
+        top: 265px;
     }
     &:before {
-        margin-top: -186px;
+        top: 266px;
     }
-    > h1 {
-        font-size: 2.7rem;
-        padding-right: 40px
+    > div {
+        &:first-child {
+            padding: 0 20px;
+        }
+        > h1 {
+            font-size: $xl;
+            padding-right: 40px
+        }
     }
     .item-info {
-        color: grey(40%)
+        color: grey(40%);
+        font-size: $xs;
+        margin: 0 0 10px 0;
+        ul-reset();
+
+        li {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .icons::before {
+            font-size: remify(24px);
+        }
     }
 }

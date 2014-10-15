@@ -1,8 +1,14 @@
-<h1>Categorias</h1>
+<h3 class="posting-label">* Categoría</h3>
+<ul class="posting-categories-list">
 {% for category in categories %}
-    {{category.trName}}<br>
+    <li>
+   		<a href="#" class="icons icon-cat-{{category.id}}">{{category.trName}}</a>
+        <ul class="child-categories-list">
         {% for subCategory in category.children.toJSON() %}
-            {{ subCategory.trName }}
+            <li><a href="#">{{ subCategory.trName }}</a></li>
         {% endfor %}
+        </ul>
+    </li>
 {% endfor %}
+</ul>
 {% include (template + '/partials/tracking.html') %}

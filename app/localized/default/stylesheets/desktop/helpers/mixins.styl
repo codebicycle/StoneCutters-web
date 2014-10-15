@@ -13,6 +13,7 @@ action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px)
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
     &:hover
+        color: fontcolor;
         text-decoration: none;
 
 arrow(bgColor, borderW )
@@ -24,7 +25,7 @@ arrow(bgColor, borderW )
     border-width: borderW
     content: ""
 
-border-styles(color = #e4e4e4, radius = 3px, style = solid, width = 1px)
+border-styles(color = #ccc, radius = 3px, style = solid, width = 1px)
     border-color: color;
     border-radius(radius);
     border-style: style;
@@ -35,7 +36,7 @@ border-radius(n = 3px)
     -moz-border-radius n
     border-radius n
 
-box(bgcolor = #fff, bordercolor = #e4e4e4 , radius = 3px, padding = 8px, style = solid, width = 1px)
+box(bgcolor = #fff, bordercolor = #ccc, radius = 3px, padding = 10px, style = solid, width = 1px)
     background: bgcolor;
     border-styles(bordercolor, radius, style, width);
     padding: padding;
@@ -44,11 +45,6 @@ box-shadow(args)
    -webkit-box-shadow args
    -moz-box-shadow args
    box-shadow args
-
-box-sizing()
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
 
 clear-fix()
     &:after
@@ -162,13 +158,16 @@ tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
             margin-top: - (borderWidth + size);
             border-right-color: borderColor;
 
+transition(t)
+    vendor('transition', t)
+
+transform(t)
+    vendor('transform', t)
+
 ul-reset()
     margin: 0
     padding: 0
     list-style-type: none
-
-transition(t)
-    vendor('transition', t)
 
 vendor(name, args)
     -webkit-{name} args

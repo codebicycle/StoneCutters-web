@@ -1,39 +1,39 @@
 #contact-form {
-    box($yellow, $yellowDarker , 3px, 20px);
+    box($yellow, $yellowBorders , 3px, 20px 20px 0 20px);
     margin-left: 20px;
 
     .icons:before {
-        font-size: 2rem;
+        font-size: $xl;
     }
 
     .user-info {
         p {
-            font-size: 1.36rem;
+            font-size: $m;
             font-weight: bold;
             margin-bottom: 0;
             &:first-child {
                 margin-top: 0;
             }
             &.user-phone {
-                font-size: 1.7rem;
+                font-size: $l;
             }
         }
         span {
-            font-size: 0.93rem;
+            font-size: $xs;
             margin-left: 28px;
         }
     }
 
     form {
-        p {
+        fieldset {
+            border: 0 none;
+            margin: 13px 0;
+            padding: 0;
             &.error {
                 textarea,
                 input[type="text"] {
                     border-color: $red;
                 }
-            }
-            .spinner {
-                display: none;
             }
         }
         span {
@@ -44,9 +44,8 @@
                 position: absolute;
             }
             &.error {
-                // display: none;
                 margin: 0 0 10px 10px;
-                font-size: 12px;
+                font-size: $xs;
                 color: $red;
             }
         }
@@ -58,16 +57,43 @@
         }
         textarea,
         input[type="text"] {
-            border: 1px solid #ccc;
             border-radius(3px);
+            border: 1px solid #ccc;
             padding: 8px 10px;
             resize: none;
             width: 92%;
         }
         input[type="submit"] {
             action-button($orange, #fff, 3px, padding = 10px 0);
-            font-size: 1.6rem;
+            font-size: $l;
             width: 100%;
         }
+        p.replySuccses {
+            box(#ef8, #ef8, 3px, 5px, solid, 0);
+            color: #000;
+            font-size: $s;
+            height: 40px;
+            position: relative;
+
+            &:before {
+                color: $green;
+                content: '"';
+                font-size: $xxl;
+            }
+
+            span {
+                color: #38b;
+                cursor: pointer;
+                left: 41px;
+                position: absolute;
+                top: 27px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .disclaimer p {
+        font-size: $xs;
     }
 }

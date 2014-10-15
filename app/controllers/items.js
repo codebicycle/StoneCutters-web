@@ -41,7 +41,7 @@ function show(params, callback) {
             if (user) {
                 params.token = user.token;
             }
-            else if (window !== undefined && localStorage) {
+            else if (typeof window !== 'undefined' && localStorage) {
                 anonymousItem = localStorage.getItem('anonymousItem');
                 anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
                 if (securityKey) {
@@ -871,110 +871,8 @@ function allresults(params, callback) {
 }
 
 function allresultsig(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        var seo = Seo.instance(this.app);
-        var page = params ? params.page : undefined;
-        var infiniteScroll = config.get('infiniteScroll', false);
-        var platform = this.app.session.get('platform');
-        var siteLocation = this.app.session.get('siteLocation');
-        var user = this.app.session.get('user');
-        var query;
-
-        var prepare = function(done) {
-            if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
-                done.abort();
-                return helpers.common.redirect.call(this, '/nf/all-results-ig');
-            }
-            delete params.search;
-
-            params.seo = seo.isEnabled();
-            params['f.hasimage'] = true;
-            helpers.pagination.prepare(this.app, params);
-            query = _.clone(params);
-
-            delete params.page;
-            delete params.filters;
-            delete params.urlFilters;
-
-            tracking.addParam('page_nb', 0);
-
-            done();
-        }.bind(this);
-
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var findItems = function(done) {
-            this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var checkSearch = function(done, resCategories, resItems) {
-            if (!resCategories.categories || !resItems.items) {
-                return done.fail(null, {});
-            }
-
-            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !resItems.items.length)) {
-                done.abort();
-                return helpers.common.redirect.call(this, '/nf/all-results-ig');
-            }
-            done(resCategories.categories, resItems.items);
-        }.bind(this);
-
-        var success = function(_categories, _items) {
-            var url = '/nf/all-results-ig/';
-            var metadata = _items.metadata;
-            var seo = Seo.instance(this.app);
-
-            if (metadata.total < 5) {
-                seo.addMetatag('robots', 'noindex, follow');
-                seo.addMetatag('googlebot', 'noindex, follow');
-            }
-            helpers.pagination.paginate(metadata, query, url);
-            helpers.filters.prepare(metadata);
-            tracking.addParam('page_nb', metadata.totalPages);
-            seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
-            seo.addMetatag('description');
-
-            callback(null, {
-                user: user,
-                categories: _categories.toJSON(),
-                items: _items.toJSON(),
-                metadata: metadata,
-                infiniteScroll: infiniteScroll
-                //tracking: tracking.generateURL.call(this)
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .gate(findCategories, findItems)
-            .then(checkSearch)
-            .val(success);
-    }
+    params['f.hasimage'] = true;
+    allresults.call(this, params, callback);
 }
 
 function favorite(params, callback) {
@@ -1111,7 +1009,7 @@ function staticSearch(params, callback) {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
-            
+
             tracking.setPage('staticSearch'); // @todo Check this
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
@@ -1127,8 +1025,8 @@ function staticSearch(params, callback) {
                     },
                     tracking: tracking.generateURL.call(this)
                 });
-            }            
-            done();            
+            }
+            done();
         }.bind(this);
 
         var findItems = function(done) {
