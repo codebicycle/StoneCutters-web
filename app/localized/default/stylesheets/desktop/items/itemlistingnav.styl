@@ -13,24 +13,25 @@
             display: inline-block;
             margin-right: 5px;
             a {
-                height: 33px;
-                display: block;
-                float: left;
                 background: #eee;
                 border-styles(#ddd, 3px 3px 0 0, solid solid none, 1px 1px 0);
                 color: #666;
+                display: block;
+                float: left;
+                height: 33px;
                 line-height: 2.3;
-                padding: 0 5px;
+                padding: 0 10px;
 
                 &.active {
-                    height: 34px;
-                    margin-bottom: -1px;
                     background: #fafafa;
                     color: #000;
+                    height: 34px;
+                    margin-bottom: -1px;
                 }
                 &:before {
                     display: inline-block;
-                    line-height: 10px;
+                    font-size: 24px;
+                    height: 27px;
                 }
             }
         }
