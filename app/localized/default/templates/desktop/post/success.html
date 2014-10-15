@@ -32,14 +32,16 @@
 			<p>Así aparecerá tu anuncio en el sitio</p>
 			<a href="#" class="icons icon-edit">Editar anuncio</a>
 		</div>
-		<figure id="image-viewer" class="image-viewer">
-	        {% if item.images.length > 0 %}
-	            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image big-size" />
-	        {% endif %}
-    	</figure>
-    	{% include (template + "/items/itemprice.html") %}
-    	{% include (template + "/items/itemdescription.html") %}
-    	{% include (template + "/items/itemlocation.html") %}
+		<div class="wrapper">
+			<figure id="image-viewer" class="image-viewer">
+		        {% if item.images.length > 0 %}
+		            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image big-size" />
+		        {% endif %}
+	    	</figure>
+	    	{% include (template + "/items/itemprice.html") %}
+	    	{% include (template + "/items/itemdescription.html") %}
+	    	{% include (template + "/items/itemlocation.html") %}
+    	</div>
 	</section><!-- item-preview-content -->
 
 	<aside class="side-column">
