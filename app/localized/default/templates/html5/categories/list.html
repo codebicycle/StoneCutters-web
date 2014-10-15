@@ -2,26 +2,31 @@
 {% if currentRoute.action == 'list' %}
     {% view 'locations/select' %}
 {% endif %}
-{#% include (template + '/partials/filterorder.html') %#}
-<section id="categories" class="list">
-    
+<section id="categories" class="categories-list">
+    <h3 class="categories-title">{{ dictionary["posting_selector.SelectCategory"] }}</h3>
     <ul class="{{ icons[icons.length - 1] }}-icons">
-
         {% for category in categories %}
-            <li>
+            <li class="category" id="cat-{{ category.id }}">
                 <h2>
-                    <a href="{{ category | slugToUrl | link }}" >
-                        <span class="icon cat-{{ category.id }}"></span>
-                        {{category.trName}}
+                    <a href="#cat-{{ category.id }}">
+                        <span class="icon cat-{{ category.id }}"></span>{{category.trName}}
                     </a>
                 </h2>
+                <ul class="subcategories">
+                    {% for subcategory in category.children.toJSON() %}
+                        <li class="subcategory">
+                            <h2>
+                                <a href="{{ subcategory | slugToUrl | link }}">{{subcategory.trName}}</a>
+                            </h2>
+                        </li>
+                    {% endfor %}
+                </ul>
             </li>
         {% endfor %}
     </ul>
     {% if register_success %}
         <input type="hidden" value="true"  class="registerSuccess">
-    {% endif %}
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
+    {% endif %}    
 </section>
+{% include (template + '/partials/tracking.html') %}
 {% view 'pages/interstitial' %}
