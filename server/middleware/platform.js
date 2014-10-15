@@ -9,7 +9,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var config = require('../config');
         var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
-        var seo = require('../../app/modules/seo');
+        var Seo = require('../../app/modules/seo');
         var errorPath = path.resolve('server/templates/error.html');
 
         return function platform(req, res, next) {
@@ -27,7 +27,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function redirectDesktop(hasPlatform) {
                 res.set('Vary', 'User-Agent');
-                res.redirect(302, seo.desktopizeUrl(req.originalUrl, {
+                res.redirect(302, Seo.desktopizeUrl(req.originalUrl, {
                    protocol: req.protocol,
                    host: req.headers.host,
                    path: req.path,

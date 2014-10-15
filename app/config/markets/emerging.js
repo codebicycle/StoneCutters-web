@@ -6,5 +6,10 @@ module.exports = {
             gallery: 18,
             related: 30
         }
+    },
+    seo: {
+        enabled: true,
+        popularSearches: true,
+        relatedListings: true
     }
 };
