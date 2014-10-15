@@ -5,17 +5,18 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    id: 'items-allresultsig-view',
-    className: 'items-allresultsig-view',
+    id: 'categories-showig-view',
+    className: 'categories-showig-view',
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var slugUrl = helpers.common.slugToUrl(data.currentCategory);
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
             items: data.items,
             nav: {
-                link: 'nf/all-results',
+                link: slugUrl,
                 galeryAct: 'active'
             }
         });
@@ -25,4 +26,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/allresultsig';
+module.exports.id = 'categories/showig';
