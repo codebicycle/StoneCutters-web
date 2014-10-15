@@ -1,65 +1,97 @@
-header#search .search-form{
-	display: table-cell;
-	width: 100%;
-	padding: 0 0px 0 10px;
+.partials_search_view {
+	header#search {
+		background: #dadada;
+		display: table;
+		overflow: hidden;
+		padding: .5rem 0;
+		width: 100%;	
+		.search-form {
+			display: table-cell;
+			padding: 0 0 0 10px;
+			width: 100%;
+		}
+		.search-form.home {
+			width:100%;
+		}
+		input {
+			display: inline-block;
+			height: 1.875rem;
+		}
+		input[name=search] {
+			border-radius: 0.3125rem 0 0 0.3125rem;
+			border: 1px solid #3b67a2;
+			float:left;
+			font-size: 0.8125rem;
+			padding: 0 0 0 .3rem;
+			width: 81%;
+		}
+		input[name=search] {
+			border-radius: 0.3125rem 0 0 0.3125rem;
+			border: 1px solid #3b67a2;
+			float:left;
+			font-size: 0.8125rem;
+			padding: 0 0 0 .3rem;
+			width: 81%;
+		}
+		input[type=submit] {
+			background: #3b67a2 url(imageUrl/images/html5/icon_lupa.png) center center no-repeat;
+			border-radius: 0 0.3125rem 0.3125rem 0;
+			border: 1px solid #3b67a2;
+			float: right;
+			float: left;
+			height: 32px;
+			text-indent: -100em;
+			width: 15%
+		}
+	}
+	
+
+	@media only screen and (max-width : 214px) {
+		header#search {
+		    .search-form {
+		    	width: 91%;
+		    	display: block;
+		    	margin-bottom: 5px;
+		    	overflow: hidden;
+		    }
+	    }
+	    
+	}
 }
-header#search .search-form.home{
-	width:100%;
-}
-header#search {
-	background: #dadada;
-	display: table;
-	overflow: hidden;
-	padding: .5rem 0;
-	width: 100%;
-}
-header#search input {
-	height: 1.875rem;
-	display: inline-block;
-}
-header#search input[name=search] {
-	width: 81%;
-	padding: 0 0 0 .3rem;
-	font-size: 0.8125rem;
-	border: none;
-	border: 1px solid #3b67a2;
-	border-radius: 0.3125rem 0 0 0.3125rem;
-	float:left;
-}
-header#search input[type=submit] {
-	width: 15%;
-	float: right;
-	height:32px;
-	background: #3b67a2 url(imageUrl/images/html5/icon_lupa.png) center center no-repeat;
-	border: 1px solid #3b67a2;
-	border-radius: 0 0.3125rem 0.3125rem 0;
-	text-indent: -100em;
-	float:left;
-}
-header#search .home input[type=submit]{
-	width: 15%;
-}
-header#search .home input[name=search]{
-	width: 82%;
-}
+
 .btnfilter {
-	border-radius:0.150rem;
-	border:.1rem solid #e2e2e2;
-	color: #178cc8;
+	border-radius: 0.150rem;
+	border: .1rem solid #e2e2e2;
 	box-shadow: 0 1px 1px rgba(96, 96, 96, 0.5);        
+	color: #178cc8;
+    display: table-cell;
+    float: right;
     font-family: Arial;
     font-size: 0.9rem;
     font-weight: bold;
     padding: 7px 7px 7px 30px;
-    display: table-cell;
     text-align: center;
-    float: right;
 }
-.btnlocation{
-	background:#fff url(imageUrl/images/html5/icon_location.png) 10px center no-repeat;
+.btnlocation {
+	background: #fff url(imageUrl/images/html5/icon_location.png) 10px center no-repeat;
 	color: #494949;
 	display: table-cell;
 	margin-right: 10px;
+	margin-left: 8px;
 }
-
-
+@media  (max-width : 279px) {
+	.btnfilter {
+    	margin-bottom: 5px;
+    	width: 72%;
+    }
+    .btnlocation {
+    	margin-bottom: 0;
+    }
+}
+@media (min-width: 280px) and (max-width : 320px) {
+	.partials_search_view {
+		header#search {
+			padding-bottom: 2px;
+		}	
+	}
+}
