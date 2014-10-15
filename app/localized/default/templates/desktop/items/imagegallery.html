@@ -1,13 +1,13 @@
 <div id="image-gallery">
-    <div class="image-viewer">
+    <figure id="image-viewer" class="image-viewer">
         {% if item.images.length > 0 %}
             <img src="{{ item.images[0].url }}" alt="" title="" class="item-image big-size" />
         {% endif %}
-    </div>
+    </figure>
     <div class="image-navigator">
         <a href="#" class="icons icon-navarrowup"></a>
         {% for image in item.images %}
-            <a href="#"><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" class="item-image thumbnail {{ 'active' if loop.first }}" ></a>
+            <a href="#"><figure><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" class="item-image thumbnail {{ 'active' if loop.first }}" ></figure></a>
         {% endfor %}
         <a href="#" class="icons icon-navarrowdown"></a>
     </div>

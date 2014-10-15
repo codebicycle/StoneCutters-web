@@ -1,79 +1,48 @@
-<aside class="notification advice icons icon-time">
+<aside id="notification-message" class="notification-message icons icon-time">
 	<h4>{{ dictionary["misc.AdSubmittedApproval"] }}</h4>
 	<p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</p>
 </aside>
 
-<aside class="notification warning">
-	<h3>Continúe <span>vendiendo!</span></h3>
-	<p>De seguro <span>tenés alguna otra cosa para vender</span> Publica cuántos anuncios quieras. Es gratis.</p>
-	<div class="categories populars">
-		<a href="#">
-			<article>
+<aside id="notification-keep-posting" class="notification-keep-posting">
+	<h3 class="title">Continúe <span class="highlight">vendiendo!</span></h3>
+	<p class="message">De seguro <span class="highlight">tenés alguna otra cosa para vender</span> Publica cuántos anuncios quieras. Es gratis.</p>
+	<div class="categories-best-selling">
+		<a href="#" class="module">
+			<article class="icons icon-cat-16">
 				<p>Publicar en <strong>Celulares y Smartphones</strong></p>
 			</article>
-		</a>
-		<a href="#">
-			<article>
+		</a><!--
+		--><a href="#" class="module">
+			<article class="icons icon-cat-186">
 				<p>Publicar en <strong>Videojuegos y Consolas</strong></p>
 			</article>
-		</a>
-		<a href="#">
-			<article>
+		</a><!--
+		--><a href="#" class="module">
+			<article class="icons icon-cat-190">
 				<p>Publicar en <strong>TV y Video</strong></p>
 			</article>
-		</a>
+		</a><!--
+		--><a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>Elige la categoría</span></a>
 	</div>
-	<a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>Elige la categoría</span></a>
 </aside>
 
-<section id="item-preview">
+<section id="item-preview" class="item-preview">
 	<section class="item-preview-content">
 		<div class="header-edit">
 			<p>Así aparecerá tu anuncio en el sitio</p>
 			<a href="#" class="icons icon-edit">Editar anuncio</a>
 		</div>
-		<div class="image-viewer">
+		<figure id="image-viewer" class="image-viewer">
 	        {% if item.images.length > 0 %}
 	            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image big-size" />
 	        {% endif %}
-    	</div>
-    	<div class="item-price">
-		    {% if item.price.displayPrice %}
-		        <p class="price">{{ item.price.displayPrice }}</p>
-		    {% endif %}
-		    <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
-		</div>
-		<div id="item-description">
-		    <p>Detalles del aviso</p>
-		    <div>
-		        {{ item.description }}
-		    </div>
-		    {% if item.optionals and item.optionals.length > 1 %}
-		        <div class="optionals">
-		            <ul>
-		                {% for option in item.optionals %}
-		                    <li>
-		                        <span>{{ option.label }}</span>
-		                        <span>{{ option.value }}</span>
-		                    </li>
-		                {% endfor %}
-		            </ul>
-		        </div>
-		    {% endif %}
-		</div>
-		<div class="item-location">
-		    <div class="box">
-		        <h2 class="icons icon-pin">Localización</h2>
-		        {% if item.location.cityName or item.location.stateName %}
-		            <p>{{ item.location.cityName }}, {{ item.location.stateName }}
-		        {% endif %}
-		        <span>{{ item.location.name }}</span></p>
-		        <a href="" class="icons icon-zoom">Ver mapa más grande</a>
-		    </div>
-		    <div class="map"></div>
-		</div>
-	</section>
-	<aside class="right-column">
+    	</figure>
+    	{% include (template + "/items/itemprice.html") %}
+    	{% include (template + "/items/itemdescription.html") %}
+    	{% include (template + "/items/itemlocation.html") %}
+	</section><!-- item-preview-content -->
+
+	<aside class="side-column">
 		<div class="header-edit">
 			<p>Datos de contacto</p>
 			<a href="#" class="icons icon-edit">Editar anuncio</a>
@@ -84,7 +53,7 @@
 	        <p class="icons icon-phone user-phone">{{ item.phone }}</p>
 	        <span>Ao ligar, diga que viu o anúncio na OLX</span>
 	    </div>
-    </aside>
-</section>
+    </aside><!-- right-column -->
+</section><!-- item-preview -->
 
 {% include (template + '/partials/tracking.html') %}

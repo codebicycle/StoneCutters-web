@@ -1,6 +1,6 @@
 @import 'helpers/normalize.css';
 a {
-	color: #38b;
+	color: $blue;
 	display: inline-block;
 	outline: none;
 	text-decoration: none;
@@ -13,7 +13,7 @@ a {
 }
 
 body {
-	background: #fafafa;
+	background: $greyPageBg;
 	font-family: arial, helvetica, sans-serif;
 }
 
@@ -22,15 +22,15 @@ html {
 }
 
 input::-webkit-input-placeholder {
-   color: #999;
+   color: $greyStrong;
 }
 
 input::-moz-placeholder {
-   color: #999;
+   color: $greyStrong;
 }
 
 input:-ms-input-placeholder {
-   color: #999;
+   color: $greyStrong;
 }
 
 main {
@@ -38,7 +38,7 @@ main {
 }
 
 #progressBar {
-    background: #FF7700;
+    background: $orange;
     border-radius: 10%;
     height: 2px;
     left: 0;
@@ -52,9 +52,11 @@ main {
 .noscroll{
     overflow: hidden;
 }
+
 .hide {
     display: none;
 }
+
 .posting {
 	border-radius();
 	action-button($orange, #fff, 3px, 15px 30px);
@@ -88,13 +90,13 @@ main {
 		&:focus {
 	    	border-color: $green;
 	    	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
-	    	color: #000;
+	    	color: $black;
 	    }
 	}
 }
 
 .text-field {
-	border-color: #ccc;
+	border-color: $greyBorders;
 	border-radius();
 	border-style: solid;
 	border-width: 1px;

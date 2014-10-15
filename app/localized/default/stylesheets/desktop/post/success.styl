@@ -1,0 +1,118 @@
+.categories-best-selling {
+	margin-top: 20px;
+
+	.module {
+		box($greyPageBg, $yellowBorders, 3px, 8px 8px 18px 8px, solid, 1px);
+		display: inline-block;
+		margin: 0 20px 0 0;
+		text-align: center;
+		vertical-align: middle;
+		width: 177px;
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		p {
+			font-size: $xs;
+			margin: 0;
+			strong {
+				display: block;
+				word-break: break-all;
+			}
+		}
+
+		.icons::before {
+			color: $blue;
+			font-size: remify(48px);
+		}
+	}
+
+	.posting {
+		margin-left: 10px;
+
+		span {
+			display: block;
+			font-size: $s;
+			font-weight: normal;
+		}
+	}
+}
+
+.item-preview {
+	clear-fix();
+
+	.item-preview-content {
+		box($greyBoxBg, $greyBorders, 3px, 10px, solid, 1px);
+		float: left;
+		width: 658px;
+	}
+
+	.image-viewer {
+		margin: 0;
+	}
+
+	.side-column {
+		box($greyBoxBg, $greyBorders, 3px, 10px, solid, 1px);
+		float: right;
+		width: 278px;
+	}
+}
+
+.notification-keep-posting {
+	box($yellow, $yellowBorders, 3px, 30px, solid, 1px);
+	clear-fix();
+
+	.categories-best-selling,
+	.posting {
+		clear: both;
+	}
+
+	.highlight {
+		color: $orange;
+		font-weight: bold;
+	}
+
+	.message,
+	.title {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0;
+		width: 45%;
+	}
+
+	.message {
+		font-size: $m;
+		line-height: 1.4;
+	}
+
+	.title {
+		font-size: $xxl;
+		font-weight: normal;
+	}
+}
+
+.notification-message {
+	box(#E8F6FF, #B9DDF3, 3px, 20px 20px 20px 90px, solid, 1px);
+	clear-fix();
+	margin-bottom: 10px;
+	position: relative;
+
+	&.icon-time::before {
+		color: $blue;
+		font-size: remify(100px);
+		left: 0;
+		position: absolute;
+		top: 0;
+	}
+
+	h4,
+	p {
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	h4 {
+		font-size: $l;
+	}
+}
