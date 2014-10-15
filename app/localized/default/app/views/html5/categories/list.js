@@ -20,14 +20,11 @@ module.exports = Base.extend({
         var currentCategory = $(event.target).parents('.category');
         var allCategories = this.$('.category');
         var allSubCategories = this.$('.subcategories');
+        var currentCategoryHasClass = currentCategory.hasClass(className);
 
-        if(!currentCategory.hasClass(className)){
-            allCategories.removeClass(className);
-            allSubCategories.stop(1, 1).slideUp();
-            currentCategory.addClass(className).find('.subcategories').stop(1, 1).slideDown();
-        }else {
-            allCategories.removeClass(className);
-            allSubCategories.stop(1, 1).slideUp();
-        }
+        allCategories.removeClass(className);
+        allSubCategories.stop(1, 1).slideUp();
+
+        if(!currentCategoryHasClass) currentCategory.addClass(className).find('.subcategories').stop(1, 1).slideDown();
     }
 });
