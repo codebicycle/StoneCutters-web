@@ -1,13 +1,11 @@
-<section id="item-content">
+<article id="item-content">
     <div>
         <h1>{{ item.title }}</h1>
         
-        <p class="item-info">
-            <span class="icons icon-time"></span>
-            Publicado fecha
-            <span class="icons icon-pin"></span>
-            Ubicacion
-        </p>
+        <ul class="item-info">
+            <li class="icons icon-time">Publicado <time datetime="2014-10-14">fecha</time></li><!--
+            --><li class="icons icon-pin">Ubicacion</li>
+        </ul>
 
         {% include (template + "/items/imagegallery.html") %}
 
@@ -17,4 +15,4 @@
     </div>
 
     {% include (template + "/items/socialsharing.html") %}
-</section>
+</article>

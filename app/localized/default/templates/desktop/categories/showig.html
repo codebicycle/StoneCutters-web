@@ -7,7 +7,7 @@
 <section id='listing-items'>
     {% include (template + '/items/locations.html') %}
 
-    {% include (template + '/items/list.html') %}
+    {% include (template + '/items/listig.html') %}
 
     {% if metadata.next or metadata.previous %}
         {% include (template + '/items/pagination.html') %}
@@ -17,4 +17,3 @@
 {% include (template + '/partials/postbanner.html') %}
 
 {% include (template + '/partials/tracking.html') %}
-

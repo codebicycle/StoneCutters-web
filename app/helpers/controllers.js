@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var common = require('./common');
-var seo = require('../modules/seo');
+var Seo = require('../modules/seo');
 var esi = require('../modules/esi');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
@@ -30,7 +30,9 @@ function processAnalytics(done) {
 }
 
 function processSeo(done) {
-    seo.resetHead.call(this);
+    var seo = Seo.instance(this.app);
+
+    seo.reset(this.app);
     done();
 }
 

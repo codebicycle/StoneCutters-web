@@ -4,7 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
+var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
@@ -25,6 +25,7 @@ function categoriesOrFlow(params, callback) {
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
         var platform = this.app.session.get('platform');
         var isDesktop = platform === 'desktop';
+        var seo = Seo.instance(this.app);
 
         var prepare = function(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
@@ -94,7 +95,6 @@ function categoriesOrFlow(params, callback) {
         var success = function(res1, res2, res3, res4) {
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
-            seo.update();
             if (isPostingFlow) {
                 postingFlowController(res1.categories, res2.postingSession, res3.topCities, res4.states);
             }
@@ -157,6 +157,7 @@ function subcategories(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -201,7 +202,6 @@ function subcategories(params, callback) {
             }
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
-            seo.update();
             callback(null, _.extend(params, {
                 category: category.toJSON(),
                 subcategories: category.get('children').toJSON(),
@@ -226,6 +226,7 @@ function form(params, callback) {
     }, controller);
 
     function controller(form) {
+        var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -326,7 +327,6 @@ function form(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
-            seo.update();
             callback(null, {
                 postingSession: _postingSession.get('postingSession'),
                 intent: 'create',
@@ -445,6 +445,7 @@ function success(params, callback) {
         }.bind(this);
 
         var success = function(_categories, _item, _relatedItems) {
+            var seo = Seo.instance(this.app);
             var item = _item.toJSON();
             var subcategory = _categories.search(item.category.id);
             var category;
@@ -461,7 +462,6 @@ function success(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
-            seo.update();
             callback(null, {
                 user: user,
                 item: item,

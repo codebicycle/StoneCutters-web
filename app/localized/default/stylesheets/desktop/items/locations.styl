@@ -6,40 +6,41 @@
         ul-reset();
     }
     .locations-tabs {
+        height: 32px;
         font-size: $m;
         li {
             display: inline-block;
+            float: left;
             position: relative;
         }
-        li:only-child {
-            box(#fe7, #cc0, 3px 3px 0 0, 5px 10px);
+        li:not(:last-child) {
             border-bottom: none;
-            top: 1px;
+            box($white, #ddd, 0, 5px 10px 5px 15px);
+            tab-arrow(right, $white, #ddd, 1px, 13px, 10);
+        }
+        li:first-child {
+            box($white, #ddd, 3px 0 0 0, 5px 10px);
+            border-bottom: none;
+        }
+        li:last-child {
+            box($yellow, $yellowBorders, 0 3px 0 0, 6px 20px 6px);
+            border-bottom: none;
             a {
                 color: #000;
             }
         }
-        li:not(:last-child) {
-            box(#fff, #ddd, 0, 5px 10px 5px 15px);
-            tab-arrow(right, #fff, #ddd, 1px, 13px, 10);
-            border-bottom: none;
-        }
-        li:first-child {
-            box(#fff, #ddd, 3px 0 0 0, 5px 10px);
-            border-bottom: none;
-        }
-        li:last-child {
-            box(#fe7, #cc0, 0 3px 0 0, 6px 20px 6px);
+        li:only-child {
+            box($yellow, $yellowBorders, 3px 3px 0 0, 6px 10px);
             border-bottom: none;
             top: 1px;
             a {
-                color: #000;
+                color: $black;
             }
         }
 
     }
     .locations-list {
-        box(#fe7, #cc0, 0 3px 3px 3px, 10px);
+        box($yellow, $yellowBorders, 0 3px 3px 3px, 10px);
 
         li {
             width: 24%;

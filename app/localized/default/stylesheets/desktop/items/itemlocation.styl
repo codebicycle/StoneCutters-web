@@ -1,26 +1,29 @@
 #item-location {
+    clear-fix();
     margin: 20px 0;
-    div {
-        box(#fff, #e4e4e4, none, 0 15px 18px, solid, 1px);
-        display: inline-block;
-        height:140px;
-        vertical-align: top;
-        width: 43%;
+    .box,
+    .map {
+        box($white, $greyBorders, none, 0 15px 18px, solid, 1px);
+        height: 140px;
+        width: 275px;
     }
     .box {
-        margin-right: 10px;
-        .icon-pin {
+        float: left;
+        .icon-pin::before {
             font-size: 1.9rem;
         }
-        .icon-zoom {
+        .icon-zoom::before {
             font-size: 1.5rem;
         }
         p,
         a {
-            margin-left:30px;
+            margin-left: 30px;
+            span {
+                display: block;
+            }
         }
     }
     .map {
-
+        float: right;
     }
 }
