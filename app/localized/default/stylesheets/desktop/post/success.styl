@@ -42,26 +42,87 @@
 .item-preview {
 	clear-fix();
 
-	.item-preview-content {
-		box($greyBoxBg, $greyBorders, 3px, 10px, solid, 1px);
-		float: left;
-		width: 658px;
+	.header-edit {
+		box($greyBoxBg, $greyBorders, 3px 3px 0 0, 10px 20px, solid, 1px);
+		border-bottom: none;
+		clear-fix();
+
+		p {
+			float: left;
+			margin: 0;
+		}
+		.icons {
+			float: right;
+			&::before {
+				font-size: $l;
+			}
+		}
 	}
 
-	.image-viewer {
-		margin: 0;
+	.item-preview-content {
+		float: left;
+		width: 660px;
+		
+		.item-location {
+			margin: 0;
+		}
+		
+		.item-price {
+		    height: 30px;
+		    left: 10px;
+		    margin: 0;
+		    position: absolute;
+		    tab-arrow(right, $violet, $violet, 1px, 25px, 1000);
+		    top: 125px;
+
+		    .price {
+		    	font-size: $l;
+		    }
+		    .price-type {
+		    	font-size: $xs;
+		    	line-height: 1;
+		    	margin: 0;
+		    }
+		}
+
+		.item-title {
+			font-size: $xl;
+			margin: 0;
+		}
+
+		.wrapper {
+			box($white, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+			position: relative;
+		}
 	}
 
 	.side-column {
-		box($greyBoxBg, $greyBorders, 3px, 10px, solid, 1px);
 		float: right;
-		width: 278px;
+		width: 300px;
+		
+		.user-info {
+			box($greyBoxBg, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+
+			.icons::before {
+				font-size: $xl;
+			}
+
+	        .user-name {
+	            font-size: $m;
+	        	margin: 0;
+	        }
+            .user-phone {
+                font-size: $l;
+	            font-weight: bold;
+            }
+    	}
 	}
 }
 
 .notification-keep-posting {
 	box($yellow, $yellowBorders, 3px, 30px, solid, 1px);
 	clear-fix();
+	margin-bottom: 20px;
 
 	.categories-best-selling,
 	.posting {

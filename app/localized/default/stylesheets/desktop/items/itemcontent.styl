@@ -3,7 +3,7 @@
     float: left;
     position: relative;
     tab-arrow(right, $white, $greyBorders, 1px, 30px, 1);
-    width: 664px;
+    width: 660px;
 
     &:after {
         top: 265px;
@@ -15,25 +15,10 @@
         &:first-child {
             padding: 0 20px;
         }
-        > h1 {
+        .item-title {
             font-size: $xl;
             padding-right: 40px;
             margin: 20px 0;
-        }
-    }
-    .item-info {
-        color: grey(40%);
-        font-size: $xs;
-        margin: 0 0 10px 0;
-        ul-reset();
-
-        li {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .icons::before {
-            font-size: remify(24px);
         }
     }
 }
