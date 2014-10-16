@@ -1,22 +1,46 @@
-.filter_order{
-	overflow:hidden;
-	background:#dadada;
-	border-bottom:1px solid #cccbcb;
-	padding:0 0.5rem 0.5rem;
-	span{
+.filter_order {
+	background: #dadada;
+	border-bottom: 1px solid #cccbcb;
+	display: table;
+	overflow: hidden;
+	padding: 0 0 0.5rem 0;
+	width: 100%;
+	span {
 		color: #4a148c;
 	    display: block;
 	    float: left;
 	    font-family: Arial;
-	    font-size: 1.1rem;
+	    font-size: 1rem;
 	    font-weight: normal;
-	    margin-top: 6px;
+	    line-height: 2.2;
+	    margin: 0 0 0 10px;
 	}
-	.btnsort{
-		background:#fff url(imageUrl/images/html5/icon_flechas.png) 10px center no-repeat;
-		margin-left:10px;
+	.btnsort {
+		background: #fff url(imageUrl/images/html5/icon_flechas.png) 10px center no-repeat;
+		margin-right: 10px;
 	}
-	.btnfil{
-		background:#fff url(imageUrl/images/html5/icon_filter.png) 10px center no-repeat;
+	.btnfil {
+		background: #fff url(imageUrl/images/html5/icon_filter.png) 10px center no-repeat;
+		margin-right: 10px;
+	}
+}
+
+@media (max-width : 279px) {
+	.filter_order {	
+		span {
+			line-height: 1.2;
+		}
+	}
+}
+@media (min-width: 280px) and (max-width : 320px) {
+	.filter_order {	
+		span {
+			display: block;
+			float: none;
+			line-height: 1.6;
+		}
+		.btnfilter {
+			width: 33%;
+		}
 	}
 }
