@@ -34,25 +34,33 @@ function parse(url) {
     return url;
 }
 
+function add(match, url, view) {
+    if (!isServer && _.isString(url)) {
+        url = parse(url);
+    }
+    if (typeof url === 'undefined') {
+        return;
+    }
+    if (!isServer) {
+        if (url instanceof RegExp) {
+            url = new RegExp(url.toString().slice(1, -1) + '\\/?');
+        }
+        else {
+            url += '(/)';
+        }
+    }
+    match(url, view.split('#').slice(0, 2).join('#'));
+}
+
 module.exports = function(match) {
     Object.keys(urls).forEach(function each(view) {
         var route = urls[view];
-        var url = route.url;
 
-        if (!isServer && _.isString(url)) {
-            url = parse(url);
+        if (route.urls) {
+            return route.urls.forEach(function each(url) {
+                add(match, url, view);
+            });
         }
-        if (typeof url === 'undefined') {
-            return;
-        }
-        if (!isServer) {
-            if (url instanceof RegExp) {
-                url = new RegExp(url.toString().slice(1, -1) + '\\/?');
-            }
-            else {
-                url += '(/)';
-            }
-        }
-        match(url, view.split('#').slice(0, 2).join('#'));
+        add(match, route.url, view);
     });
 };
