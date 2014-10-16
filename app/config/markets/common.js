@@ -9,5 +9,11 @@ module.exports = {
         maxPage: {
             allResults: 500
         }
+    },
+    seo: {
+        enabled: true,
+        levelPath: true,
+        popularSearches: true,
+        relatedListings: false
     }
 };
