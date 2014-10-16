@@ -214,11 +214,10 @@ function show(params, callback) {
             var title;
             var description;
 
-            seo.setContent(_item.changed.metadata.seo);
-            if(typeof _item.changed.metadata.itemPage.h1 !== 'undefined') {
-                seo.setExtendedTitle(_item.changed.metadata.itemPage.h1);
+            seo.setContent(item.metadata.seo);
+            if(typeof item.metadata.itemPage.h1 !== 'undefined') {
+                seo.setExtendedTitle(item.metadata.itemPage.h1);
             }
-
             if (!subcategory) {
                 _item.set('purged', true);
                 item = _item.toJSON();
@@ -227,7 +226,6 @@ function show(params, callback) {
                 parentId = subcategory.get('parentId');
                 category = parentId ? _categories.get(parentId) : subcategory;
             }
-
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
 
