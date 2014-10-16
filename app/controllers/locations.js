@@ -3,7 +3,7 @@
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
+var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
@@ -16,6 +16,8 @@ function list(params, callback) {
 
     function controller() {
         var fetch = function(done) {
+            var seo = Seo.instance(this.app);
+
             var citiesParams = {
                 level: 'countries',
                 type: 'topcities',
@@ -34,7 +36,6 @@ function list(params, callback) {
                 tracking.setPage('post#location');
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
-                seo.update();
             }
             this.app.fetch({
                 cities: {

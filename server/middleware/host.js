@@ -15,14 +15,16 @@ module.exports = function(dataAdapter, excludedUrls) {
             var host = req.host;
             var subdomains = req.host.split('.');
             var com = subdomains.indexOf('com');
-            var hasCom = com !== -1;
+            var hasCom = (com !== -1);
+            var co = subdomains.indexOf('co');
+            var hasCo = (co !== -1);
             var isTesting = _.contains(subdomains, 'm-testing');
             var isStaging = _.contains(subdomains, 'm-staging');
             var m = subdomains.indexOf('m') || subdomains.indexOf(testing.host || 'm-testing') || subdomains.indexOf(staging.host || 'm-staging');
             var hasM = m !== -1;
             var www = subdomains.indexOf('www');
             var hasWww = www !== -1;
-            var domain = hasCom ? subdomains[com - 1] : subdomains[subdomains.length - 2];
+            var domain = hasCom || hasCo ? subdomains[(hasCo ? co : com) - 1] : subdomains[subdomains.length - 2];
             var siteLocation = [];
             var platform;
             var country;
@@ -58,6 +60,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             siteLocation.push(domain);
             if (hasCom) {
                 siteLocation.push('com');
+            }
+            if (hasCo) {
+                siteLocation.push('co');
             }
             if (country) {
                 siteLocation.push(country);
