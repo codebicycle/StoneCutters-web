@@ -1,0 +1,19 @@
+{% include (template + "/partials/breadcrumb.html") %}
+
+<nav id="listing-filters">
+    {% include (template + '/categories/subcategories.html') %}
+</nav>
+
+<section id='listing-items'>
+    {% include (template + '/items/locations.html') %}
+
+    {% include (template + '/items/listig.html') %}
+
+    {% if metadata.next or metadata.previous %}
+        {% include (template + '/items/pagination.html') %}
+    {% endif %}
+</section>
+
+{% include (template + '/partials/postbanner.html') %}
+
+{% include (template + '/partials/tracking.html') %}

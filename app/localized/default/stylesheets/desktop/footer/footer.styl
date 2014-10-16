@@ -1,15 +1,15 @@
 footer {
-    margin-top: 30px; 
+    margin-top: 30px;
     padding-bottom: 40px;
 
     .select {
-        box(#fff, #e4e4e4, 5px, 0);
+        box($white, $greyBorders, 5px, 0);
         ul-reset();
         margin-bottom: 10px;
         float: left;
-        
+
         li {
-            border-right: 1px solid #e4e4e4;
+            border-right: 1px solid $greyBorders;
             padding-right: 6px;
             float: left;
 
@@ -18,12 +18,14 @@ footer {
             }
 
             &::after {
-                transform: rotate(-90deg);
+                transform(rotate(-90deg));
             }
-            
+
             a {
                 color: #666;
-                padding: 8px 0 8px 10px;
+                height: 32px;
+                line-height: 32px;
+                padding-left: 10px;
 
                 &:hover {
                     text-decoration: none;
@@ -33,12 +35,13 @@ footer {
             span {
                 color: #666;
                 display: inline-block;
-                font-size: 1.2rem;
+                font-size: $s;
                 margin-left: 20px;
-                vertical-align: sub;
-                -ms-transform: rotate(-90deg); 
-                -webkit-transform: rotate(-90deg);
-                transform: rotate(-90deg);
+            }
+
+            .icon-sketchyarrowleft:before,
+            .icon-sketchyarrowright:before {
+                transform(rotate(90deg));
             }
         }
     }
@@ -50,12 +53,12 @@ footer {
             color: #999;
             display: block;
             float: left;
-            font-size: 0.75rem;
+            font-size: $xs;
             margin: 0;
             padding-top: 10px;
         }
-        
-        .social {           
+
+        .social {
             ul-reset();
             clear-fix();
 
@@ -69,12 +72,12 @@ footer {
                 font-size: 2.154rem;
 
                 &:hover {
-                    color: #333; 
+                    color: #333;
                 }
             }
         }
     }
-    
+
     .footer-options {
         clear-fix();
     }

@@ -1,11 +1,8 @@
-{% view 'post/categories' %}
-
+<section id="posting-item-information" class="posting-item-information">
+	{% view 'post/categories' %}
+	{% view 'post/images' %}
+	{# {% view 'post/optionals' %} --> This has to be defined with design team #}
+	{% view 'post/description' %}
+</section>
 {% view 'post/contact' %}
-
-{% view 'post/images' %}
-
-{% view 'post/description' %}
-
-{% view 'post/locations' %}
-
-{% view 'post/optionals' %}
+{% include (template + '/partials/tracking.html') %}

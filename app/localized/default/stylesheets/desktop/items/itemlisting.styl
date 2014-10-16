@@ -1,40 +1,41 @@
 #listing-filters {
-    width: 238px;
     float: left;
     margin-right: 20px;
-    box(#eee, #ddd, 3px, 0);
+    width: 238px;
+    box($greyBoxBg, $greyBorders, 3px, 0);
     > span {
         display: block;
+        font-size: $s;
+        font-weight: bold;
         margin: 0;
         padding: 10px;
-        font-weight: bold;
-        font-size: 1.077rem;
     }
     span.title {
-        position: relative;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid $greyBorders;
         color: #000;
-        border: none;
+        font-size: $s;
+        position: relative;
         &.filter-title{
-            font-size: 1rem;
+            border: none;
         }
         .icons {
+            color: $greyStrong;
+            font-size: 1.5rem;
             position: absolute;
             right: 5px;
             top: 5px;
-            font-size: 1.5rem;
-            color: #999;
         }
     }
     a {
         display: block;
-        padding: 10px;
+        font-size: $xs;
+        padding: 9px;
         &:before {
-            font-size: 1.8rem;
+            font-size: $s;
         }
     }
 }
 #listing-items{
-    width: 720px;
     float: left;
+    width: 720px;
 }

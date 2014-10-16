@@ -1,6 +1,15 @@
 'use strict';
 
 module.exports = {
+    'items#staticSearch': {
+        url: 'q/:search/c-:catId'
+    },
+    'items#staticSearch#nocat': {
+        url: 'q/:search'
+    },
+    'items#staticSearch#page': {
+        url: 'q/:search/p-:page'
+    },
     'items#search#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',
@@ -30,6 +39,22 @@ module.exports = {
             server: 'nf/search/:search?',
             client: {
                 url: 'nf/search(/)(:search)'
+            }
+        }
+    },
+    'items#allresultsig#page': {
+        urls: {
+            server: 'nf/all-results-ig/-p-:page/:filters?',
+            client: {
+                url: 'nf/all-results-ig/-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'items#allresultsig': {
+        urls: {
+            server: 'nf/all-results-ig/:filters?',
+            client: {
+                url: 'nf/all-results-ig(/)(:filters)'
             }
         }
     },

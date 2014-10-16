@@ -1,24 +1,14 @@
 <div id="image-gallery">
-    <div class="img-viewer">
-        Big image
-    </div>
-    <div class="img-navigator">
-        <ul>
-            <li>
-                <a href="#">
-                    <img src="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="">
-                </a>
-            </li>
-        </ul>
+    <figure id="image-viewer" class="image-viewer">
+        {% if item.images.length > 0 %}
+            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image big-size" />
+        {% endif %}
+    </figure>
+    <div class="image-navigator">
+        <a href="#" class="icons icon-navarrowup"></a>
+        {% for image in item.images %}
+            <a href="#"><figure><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" class="item-image thumbnail {{ 'active' if loop.first }}" ></figure></a>
+        {% endfor %}
+        <a href="#" class="icons icon-navarrowdown"></a>
     </div>
 </div>

@@ -1,10 +1,13 @@
 #listing-filters {
+	.categories-link {
+		border-bottom: 1px solid $greyBorders;
+	}
 	.category-selected {
 		background: #666;
 		color: #fff;
 		position: relative;
 		span {
-			font-size: .7692rem;
+			font-size: $xs;
 			font-weight: normal;
 		}
 		&.arrow:after {
@@ -13,7 +16,7 @@
 			arrow(#666 transparent transparent, 5px 6px 6px);
 		}
 		&:before {
-			font-size: 1.8rem;
+			font-size: $m;
 		}
 	}
 	.sub-categories {
@@ -30,7 +33,7 @@
 			}
 			.count {
 				color: #888;
-				font-size: .7692rem;
+				font-size: $xs;
 			}
 		}
 	}
@@ -60,9 +63,10 @@
 		}
 		&.check-box {
 			label {
+				color: $blue;
 				display: block;
+				font-size: $xs;
 				padding: 5px 0;
-				color: #38b;
 				input {
 					vertical-align: bottom;
 					position: relative;

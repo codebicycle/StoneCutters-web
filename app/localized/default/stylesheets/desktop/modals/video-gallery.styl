@@ -1,0 +1,110 @@
+.modal {
+    &#video-modal {
+
+        .modal-wrapper {
+
+            .modal-container {
+                width: 920px;
+                padding: 10px 20px 0;
+
+                .modal-header {
+                    background: none;
+                    border-bottom: none;
+
+                    .modal-title {
+                        color: $violet;
+                        font-size: $xxl;
+                        font-weight: bold;
+                    }
+                    .modal-title:last-child {
+                        color: $orange;
+                        font-weight: normal;
+                    }
+                }
+
+                .video-content {
+                    background: #666;
+                    float: left;
+                    width: 636px;
+                    padding: 10px;
+                }
+
+                .video-thumbnails {
+                    background: #ab0;
+                    float: left;
+                    height: 393px;
+                    padding: 10px;
+                    position: relative;
+                    width: 244px;
+
+                    .content {
+                        ul-reset();
+
+                        li {
+                            height: 90px;
+                            margin-bottom: 1px;
+
+                            a {
+                                background: #fff;
+                                clear-fix();
+                                position: relative;
+                            }
+                        }
+                    }
+
+                    .video-title {
+                        display: block;
+                        float: left;
+                        font-size: $xs;
+                        padding: 10px;
+                        width: 104px;
+                    }
+
+                    img {
+                        float: right;
+                    }
+
+                    .social-share {
+                        bottom: 10px;
+                        left: 0;
+                        position: absolute;
+                        text-align: center;
+                        width: 100%;
+                        p {
+                            color: #fff;
+                            font-weight: bold;
+                        }
+
+                        ul {
+                            ul-reset();
+                        }
+
+                        li {
+                            display: inline-block;
+
+                        }
+
+                        a {
+                            background: $white;
+                            border-radius: 50%;
+                            color: #ab0;
+                            display: block;
+                            font-size: 1.692rem;
+                            height: 28px;
+                            line-height: 28px;
+                            text-align: center;
+                            width: 28px;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+
+
+
+
+

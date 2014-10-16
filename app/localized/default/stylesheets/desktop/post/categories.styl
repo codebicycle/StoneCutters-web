@@ -1,3 +1,61 @@
 .posting-categories-view {
-    box();
+	clear-fix()
+	.posting-label {
+		font-weight: normal;
+		margin: 0;
+	}
+}
+
+.posting-categories-list {
+	background: $greyPageBg;
+	border-radius();
+	float: left;
+	list-style-type: none;
+	margin: 0;
+	padding: 5px;
+	width: 200px;
+
+	a {
+		border-radius()
+		display: block;
+		padding: 5px;
+
+		&:hover {
+			background: $greyStrong;
+			color: $white;
+			padding-left: 5px;
+			text-decoration: none;
+
+			&::before {
+				color: $white;
+			}
+		}
+	}
+
+	li {
+		position: relative;
+
+		&:hover .child-categories-list {
+			display: block;
+		}
+	}
+
+	.child-categories-list {
+		background: $greyPageBg;
+		border-radius();
+		display: none;
+		left: 100%;
+		list-style-type: none;
+		margin: 0;
+		padding: 5px;
+		position: absolute;
+		top: 0;
+		width: 200px;
+		z-index: 9999;
+	}
+
+	.icons::before {
+		font-size: 1.53em;
+		padding: 0 5px 0 0;
+	}
 }

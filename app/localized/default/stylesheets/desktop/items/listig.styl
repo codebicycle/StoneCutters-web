@@ -5,14 +5,18 @@
     margin: 10px 0;
 
     li {
-        border: 1px solid #fafafa;
+        border: 1px solid $greyPageBg;
         float: left;
         height: 260px;
         padding: 12px;
+        position: relative;
         width: 214px;
 
         &:hover {
-            border: 1px solid #ccc;
+            background: $white;
+            border: 1px solid $greyBorders;
+            box-shadow(0 0 2px 2px rgba(0,0,0,0.1));
+            z-index: 100;
         }
 
         a {
@@ -22,13 +26,14 @@
                 text-decoration: none;
             }
         }
-        p, .item-image {
+        p,
+        .items-image {
             display: block;
             margin: 0;
             vertical-align: top;
         }
-        .item-image {
-            border: 1px solid #ccc;
+        .items-image {
+            border: 1px solid $greyBorders;
             height: 161px;
             position: relative;
             width: 214px;
@@ -44,28 +49,28 @@
                 top: 0;
             }
         }
-        .item-info {
-            font-size: 1.231rem;
+        .items-info {
+            font-size: $m;
             margin: 10px 0 0;
 
             span {
-                color: #666;
-                font-size: .9231rem;
+                color: $greyStrong;
+                font-size: $xs;
             }
         }
-        .item-price {
-            color: #000;
-            font-size: 1.231rem;
+        .items-price {
+            color: $black;
+            font-size: $m;
             font-weight: bold;
             margin: 5px 0;
 
             span {
-                font-size: .9231rem;
+                font-size: $xs;
             }
         }
-        .item-date {
-            color: #666;
-            font-size: .9231rem;
+        .items-date {
+            color: $greyStrong;
+            font-size: $xs;
         }
 
     }
