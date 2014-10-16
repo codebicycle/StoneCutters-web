@@ -7,7 +7,9 @@
         <div id="wrapper" class="wrapper-main">
             {% view 'header/usernav' %}
             {% view 'header/index' %}
-            {{ body }}
+            <div id="content">
+                {{ body }}
+            </div>
             {% view 'footer/footer' %}
         </div>
         <script>
