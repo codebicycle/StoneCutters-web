@@ -147,16 +147,9 @@ module.exports = function trackingHelper() {
     }
 
     function generateUrl(params) {
-        var location = this.app.session.get('location');
-        var countryId = location.id;
-        var config;
+        var config = getConfig.call(this);
         var url;
 
-        if (env !== 'production') {
-            countryId = 0;
-        }
-
-        config = utils.get(configTracking, ['ati', 'paths', countryId]);
         if (!config) {
             return;
         }
@@ -172,9 +165,26 @@ module.exports = function trackingHelper() {
         return url;
     }
 
+    function getConfig() {
+        var location = this.app.session.get('location');
+        var country = location.id;
+        var config;
+
+        if (env !== 'production') {
+            country = 0;
+        }
+
+        config = utils.get(configTracking, ['ati', 'paths', country]);
+        return _.extend({}, config, {
+            host: location.url.replace('www', ''),
+            protocol: 'http'
+        });
+    }
+
     return {
         check: check,
         generate: generate,
-        generateUrl: generateUrl
+        generateUrl: generateUrl,
+        getConfig: getConfig
     };
 }();

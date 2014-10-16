@@ -68,6 +68,9 @@ function generate(query) {
                 urls.push(url);
             }
         }
+        params = _.extend(params, {
+            ati: ati.getConfig.call(this)
+        });
     }
 
     if (keyade.check.call(this)) {
