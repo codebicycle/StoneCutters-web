@@ -29,10 +29,8 @@ module.exports = Base.extend({
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
         this.app.router.appView.on('sort:start', this.onSelectSortStart.bind(this));
         this.app.router.appView.on('sort:end', this.restore.bind(this));
-
         this.app.router.appView.on('filter:start', this.onSelectFilterStart.bind(this));
         this.app.router.appView.on('filter:end', this.restore.bind(this));
-
         this.app.router.on('action:end', this.onActionEnd.bind(this));        
     },
     onActionEnd: function() {

@@ -10,7 +10,7 @@ module.exports = Base.extend({
         'click .logIn span': 'onLoginClick',
         'click #myOlx li a': 'onMenuClick',
         'click .topBarFilters .filter-btns':'onCancelFilter',
-        'click #form-sort input[type="radio"]': 'onEnableSort',
+        'click #form-sort input[type="radio"]': 'onEnableSort'
     },
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
