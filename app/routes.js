@@ -49,7 +49,7 @@ function add(match, url, view) {
             url += '(/)';
         }
     }
-    match(url, view.split('#').slice(0, 2).join('#'));
+    match(url, view);
 }
 
 module.exports = function(match) {
