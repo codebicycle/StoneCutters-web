@@ -14,12 +14,14 @@
     <span class="category-selected">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
 {% endif %}
 
-<span class="title filter-title">Precio<span class="icons icon-arrow-bottom"></span></span>
-<div class="filter price">
-    <input type="text" placeholder="Min." class="text-field" />
-    <input type="text" placeholder="Max." class="text-field" />
-    <button id="price-submit" class="icons icon-check button" type="submit"></button>
-</div>
+{% if metadata.filters.pricerange %}
+    <span class="title filter-title">{{ metadata.filters.pricerange.description }}<span class="icons icon-arrow-bottom"></span></span>
+    <div class="filter price">
+        <input type="text" placeholder="Min." class="text-field" />
+        <input type="text" placeholder="Max." class="text-field" />
+        <button id="price-submit" class="icons icon-check button" type="submit"></button>
+    </div>
+{% endif %}
 
 <span class="title filter-title">Marca<span class="icons icon-arrow-top"></span></span>
 <div class="filter check-box">
@@ -36,3 +38,14 @@
         Marca 3
     </label>
 </div>
+{{ metadata.filters | log }}
+
+{% for name, filter in metadata.filters %}
+    {% if filter.type == 'SELECT' %}
+
+    {% elif filter.type == 'RANGE' %}
+
+    {% elif filter.type == 'BOOLEAN' %}
+
+    {% endif %}
+{% endfor %}
