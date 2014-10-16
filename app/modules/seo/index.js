@@ -5,7 +5,7 @@ var Backbone = require('backbone');
 var utils = require('../../../shared/utils');
 var config = require('../../../shared/config');
 var configSeo = require('./config');
-var defaultConfig = config.get(['markets', 'default', 'seo']);
+var defaultConfig = config.get(['markets', 'common', 'seo']);
 var URLParser = require('url');
 var seo;
 
@@ -169,6 +169,9 @@ _.extend(SeoModule.prototype, {
     },
     isEnabled: function () {
         return this.config.enabled;
+    },
+    setExtendedTitle: function (title) {
+        this.seoContent.extendedTitle = title;
     }
 });
 
