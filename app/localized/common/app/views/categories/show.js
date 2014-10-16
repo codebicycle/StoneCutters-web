@@ -6,6 +6,7 @@ var querystring = require('querystring');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
 var tracking = require('../../../../../modules/tracking');
+var Seo = require('../../../../../modules/seo');
 
 module.exports = Base.extend({
     className: 'categories_show_view',
@@ -127,8 +128,10 @@ module.exports = Base.extend({
         function prepare(done) {
             var urlFull = $('#currentUrl').val();
             var pairs = urlFull.split('?');
+            var seo = Seo.instance(this.app);
             var params;
             var url;
+
 
             pairs.shift();
             url = pairs.join('?');
@@ -138,7 +141,7 @@ module.exports = Base.extend({
 
             helpers.pagination.prepare(this.app, params);
             params.categoryId = params.catId;
-            params.seo = true;
+            params.seo = seo.isEnabled();
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
             delete params.catId;
             delete params.title;

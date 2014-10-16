@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var seo = require('../modules/seo');
+var Seo = require('../modules/seo');
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
     var statsd = require(statsdModule)();
@@ -93,6 +93,7 @@ module.exports = (function() {
     }
 
     function error(err, res, status, callback) {
+        var seo = Seo.instance(this.app);
         if (_.isFunction(status)) {
             callback = status;
             status = 404;
@@ -103,7 +104,6 @@ module.exports = (function() {
         }
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
-        seo.update();
         return callback(null, 'pages/error', res || {});
     }
 

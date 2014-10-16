@@ -163,6 +163,18 @@ module.exports = function(nunjucks) {
             href = helpers.common.fullizeUrl(href, this.ctx.app);
             return helpers.common.link(href, this.ctx.app, query || {});
         },
+        linkig: function (href, query) {
+            var pair = href.split('?');
+
+            if (this.ctx.nav && this.ctx.nav.galeryAct) {
+                href = pair[0] + '-ig';
+                if (pair[1]) {
+                    href = '?' + pair[1];
+                }
+            }
+            href = helpers.common.fullizeUrl(href, this.ctx.app);
+            return helpers.common.link(href, this.ctx.app, query || {});
+        },
         encode: function (text) {
             return encodeURIComponent(text);
         },
