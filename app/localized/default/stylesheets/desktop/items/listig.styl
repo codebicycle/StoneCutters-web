@@ -9,10 +9,14 @@
         float: left;
         height: 260px;
         padding: 12px;
+        position: relative;
         width: 214px;
 
         &:hover {
+            background: $white;
             border: 1px solid $greyBorders;
+            box-shadow(0 0 2px 2px rgba(0,0,0,0.1));
+            z-index: 100;
         }
 
         a {
@@ -22,13 +26,13 @@
                 text-decoration: none;
             }
         }
-        p, 
-        .item-image {
+        p,
+        .items-image {
             display: block;
             margin: 0;
             vertical-align: top;
         }
-        .item-image {
+        .items-image {
             border: 1px solid $greyBorders;
             height: 161px;
             position: relative;
@@ -45,7 +49,7 @@
                 top: 0;
             }
         }
-        .item-info {
+        .items-info {
             font-size: $m;
             margin: 10px 0 0;
 
@@ -54,7 +58,7 @@
                 font-size: $xs;
             }
         }
-        .item-price {
+        .items-price {
             color: $black;
             font-size: $m;
             font-weight: bold;
@@ -64,7 +68,7 @@
                 font-size: $xs;
             }
         }
-        .item-date {
+        .items-date {
             color: $greyStrong;
             font-size: $xs;
         }

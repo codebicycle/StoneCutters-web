@@ -7,14 +7,17 @@
     li {
         box(#fff, #ddd, 0, 10px);
         border-bottom-color: #fff;
+        position: relative;
         &:hover {
-            border: 1px solid #ccc;
+            border: 1px solid $greyBorders;
+            box-shadow(0 0 2px 2px rgba(0,0,0,0.1));
+            z-index: 100;
         }
 
         a {
             display: block;
         }
-        p, .item-image {
+        p, .items-image {
             display: inline-block;
             margin: 0;
             vertical-align: top;
@@ -22,14 +25,21 @@
         p {
             padding-top: 10px;
         }
-        .item-image {
-            border: 1px solid #ccc;
+        .items-image {
+            border: 1px solid $greyBorders;
             height: 110px;
+            line-height: 95px;
             position: relative;
+            text-align: center;
             width: 141px;
 
             &.lines {
-                lines(#ccc, 1px, 96%, 2%, -3px, 92%, 4%, -5px, right);
+                lines($greyBorders, 1px, 96%, 2%, -3px, 92%, 4%, -5px, right);
+            }
+
+            &.icon-photo {
+                color: $greyBorders;
+                font-size: remify(90px);
             }
 
             img {
@@ -43,7 +53,7 @@
                 top: 0;
             }
         }
-        .item-info {
+        .items-info {
             font-size: $m;
             padding-left: 15px;
             width: 340px;
@@ -53,13 +63,13 @@
                 font-size: $xs;
             }
         }
-        .item-price {
+        .items-price {
             color: #000;
             font-size: $m;
             font-weight: bold;
             width: 140px;
         }
-        .item-date {
+        .items-date {
             color: #666;
             font-size: $xs;
             width: 60px;
