@@ -64,10 +64,10 @@ module.exports = Base.extend({
         this.app.router.once('action:start', this.onEnd);
     },
     onStart: function(event) {
-        this.appView.trigger('filterFlow:start');
+        this.appView.trigger('filter:start');
     },
     onEnd: function(event) {
-        this.appView.trigger('filterFlow:end');
+        this.appView.trigger('filter:end');
     },
     getData: function() {
         var data = Base.prototype.getTemplateData.call(this);

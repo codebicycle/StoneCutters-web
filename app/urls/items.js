@@ -1,6 +1,33 @@
 'use strict';
 
 module.exports = {
+    
+    'items#filter#1': {
+        url: 'nf/search/:search/-p-:page/:filters/filter'
+    },
+    'items#filter#2': {
+        url: 'nf/search/:search/-p-:page/filter'
+    },
+    'items#filter#3': {
+        url: 'nf/search/:search/:filters/filter'
+    },
+    'items#filter#4': {
+        url: 'nf/search/:search/filter'
+    },
+
+    'items#sort#1': {
+        url: 'nf/search/:search/-p-:page/:filters/sort'
+    },
+    'items#sort#2': {
+        url: 'nf/search/:search/-p-:page/sort'
+    },
+    'items#sort#3': {
+        url: 'nf/search/:search/:filters/sort'
+    },
+    'items#sort#4': {
+        url: 'nf/search/:search/sort'
+    },
+
     'items#search#filters': {
         urls: {
             server: 'search/:search/-p-:page/:filters?',
@@ -17,11 +44,21 @@ module.exports = {
             }
         }
     },
-    'items#search#nfFilters': {
+
+    
+    'items#search#nfFiltersPage': {
         urls: {
             server: 'nf/search/:search/-p-:page/:filters?',
             client: {
                 url: 'nf/search/:search/-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'items#search#nfFilters': {
+        urls: {
+            server: 'nf/search/:search/:filters?',
+            client: {
+                url: 'nf/search/:search(/)(:filters)'
             }
         }
     },
