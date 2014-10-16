@@ -1,5 +1,5 @@
 <span class="title">Seleccione categoria</span>
-<a href="{{ 'nf/all-results' | linkig }}" class="icons icon-arrow-left">Todas las categorias</a>
+<a href="{{ 'nf/all-results' | linkig }}" class="icons icon-arrow-left categories-link">Todas las categorias</a>
 {% if not currentCategory.parentId %}
     <span class="category-selected arrow icons icon-cat">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
     <ul class="sub-categories">
@@ -14,14 +14,14 @@
     <span class="category-selected">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
 {% endif %}
 
-<span class="title filter-title">Precio<span class="icons icon-arrow-top open"></span></span>
+<span class="title filter-title">Precio<span class="icons icon-arrow-bottom"></span></span>
 <div class="filter price">
     <input type="text" placeholder="Min." class="text-field" />
     <input type="text" placeholder="Max." class="text-field" />
     <button id="price-submit" class="icons icon-check button" type="submit"></button>
 </div>
 
-<span class="title filter-title">Marca<span class="icons icon-arrow-top open"></span></span>
+<span class="title filter-title">Marca<span class="icons icon-arrow-top"></span></span>
 <div class="filter check-box">
     <label>
         <input type="checkbox">
