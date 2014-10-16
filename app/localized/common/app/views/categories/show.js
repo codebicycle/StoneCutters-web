@@ -19,7 +19,8 @@ module.exports = Base.extend({
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data),
-            items: data.items
+            items: data.items,
+            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
         });
     },
     postRender: function() {

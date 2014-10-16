@@ -2,23 +2,6 @@
 
 module.exports = {
     
-    'items#search#filters': {
-        urls: {
-            server: 'search/:search/-p-:page/:filters?',
-            client: {
-                url: 'search/:search/-p-:page(/)(:filters)'
-            }
-        }
-    },
-    'items#search': {
-        urls: {
-            server: 'search/:search?',
-            client: {
-                url: 'search(/)(:search)'
-            }
-        }
-    },
-
     'items#filter#1': {
         url: 'nf/search/:search/-p-:page/:filters/filter'
     },
@@ -45,11 +28,37 @@ module.exports = {
         url: 'nf/search/:search/sort'
     },
 
-    'items#search#nfFilters': {
+    'items#search#filters': {
+        urls: {
+            server: 'search/:search/-p-:page/:filters?',
+            client: {
+                url: 'search/:search/-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'items#search': {
+        urls: {
+            server: 'search/:search?',
+            client: {
+                url: 'search(/)(:search)'
+            }
+        }
+    },
+
+    
+    'items#search#nfFiltersPage': {
         urls: {
             server: 'nf/search/:search/-p-:page/:filters?',
             client: {
                 url: 'nf/search/:search/-p-:page(/)(:filters)'
+            }
+        }
+    },
+    'items#search#nfFilters': {
+        urls: {
+            server: 'nf/search/:search/:filters?',
+            client: {
+                url: 'nf/search/:search(/)(:filters)'
             }
         }
     },
