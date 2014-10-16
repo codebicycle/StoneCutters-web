@@ -53,6 +53,9 @@
 		}
 		.icons {
 			float: right;
+			&::before {
+				font-size: $l;
+			}
 		}
 	}
 
@@ -60,14 +63,6 @@
 		float: left;
 		width: 660px;
 		
-		.item-description {
-			margin: 20px 0;
-		}
-
-		.image-viewer {
-			margin: 0;
-		}
-
 		.item-location {
 			margin: 0;
 		}
@@ -78,7 +73,21 @@
 		    margin: 0;
 		    position: absolute;
 		    tab-arrow(right, $violet, $violet, 1px, 25px, 1000);
-		    top: 50px;
+		    top: 125px;
+
+		    .price {
+		    	font-size: $l;
+		    }
+		    .price-type {
+		    	font-size: $xs;
+		    	line-height: 1;
+		    	margin: 0;
+		    }
+		}
+
+		.item-title {
+			font-size: $xl;
+			margin: 0;
 		}
 
 		.wrapper {
@@ -93,7 +102,20 @@
 		
 		.user-info {
 			box($greyBoxBg, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+
+			.icons::before {
+				font-size: $xl;
 			}
+
+	        .user-name {
+	            font-size: $m;
+	        	margin: 0;
+	        }
+            .user-phone {
+                font-size: $l;
+	            font-weight: bold;
+            }
+    	}
 	}
 }
 

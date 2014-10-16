@@ -1,18 +1,16 @@
 <div id="item-description" class="item-description">
-    <p>Detalles del aviso</p>
-    <div>
+    <h4 class="description-title">Detalles del aviso</h4>
+    <div class="text">
         {{ item.description }}
     </div>
     {% if item.optionals and item.optionals.length > 1 %}
-        <div class="optionals">
-            <ul>
-                {% for option in item.optionals %}
-                    <li>
-                        <span>{{ option.label }}</span>
-                        <span>{{ option.value }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <ul class="optionals">
+            {% for option in item.optionals %}
+                <li>
+                    <span>{{ option.label }}</span>
+                    <span>{{ option.value }}</span>
+                </li>
+            {% endfor %}
+        </ul>
     {% endif %}
 </div>
