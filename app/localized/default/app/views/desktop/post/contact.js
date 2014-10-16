@@ -8,26 +8,24 @@ module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-contact-view',
     className: 'posting-contact-view',
-    validations: {},
     events: {
         'update': 'onUpdate',
         'validate': 'onValidate'
     },
+    fields: [],
 
     onUpdate: function(event, fields) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        _.each(fields, function(field) {
-            this.validations[field.name] = field.validations;
-        }, this);
+        this.fields = fields;
     },
     onValidate: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
+/*
         _.each(this.validations, function(validations, field) {
             _.each(validations, function(validation) {
                 if (field === 'email') {
@@ -42,6 +40,7 @@ module.exports = Base.extend({
                 }
             });
         });
+*/
     }
 });
 

@@ -35,8 +35,8 @@ module.exports = Base.extend({
                         intent: 'post',
                         location: this.app.session.get('siteLocation'),
                         categoryId: id,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        spike: true
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        //spike: true
                     }
                 }
             }, {
@@ -52,6 +52,7 @@ module.exports = Base.extend({
             var fields = res.fields.get('fields');
 
             if (fields) {
+                $('#posting-optionals-view').trigger('update', [fields.categoryAttributes]);
                 $('#posting-contact-view').trigger('update', [fields.contactInformation]);
             }
         }.bind(this);
