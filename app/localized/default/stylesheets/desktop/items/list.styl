@@ -5,10 +5,13 @@
     margin: 10px 0;
 
     li {
-        box(#fff, #ddd, 0, 10px);
         border-bottom-color: #fff;
+        box(#fff, #ddd, 0, 10px);
+        position: relative;
         &:hover {
             border: 1px solid $greyBorders;
+            box-shadow(0 0 5px 5px rgba(0,0,0,0.5));
+            z-index: 100;
         }
 
         a {

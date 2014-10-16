@@ -9,10 +9,13 @@
         float: left;
         height: 260px;
         padding: 12px;
+        position: relative;
         width: 214px;
-
         &:hover {
+            background: $white;
             border: 1px solid $greyBorders;
+            box-shadow(0 0 5px 5px rgba(0,0,0,0.5));
+            z-index: 100;
         }
 
         a {
