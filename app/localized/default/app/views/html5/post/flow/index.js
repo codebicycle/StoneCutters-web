@@ -73,7 +73,8 @@ module.exports = Base.extend({
         'imagesLoadEnd': 'onImagesLoadEnd',
         'categoryReset': 'onCategoryReset',
         'errors': 'onErrors',
-        'mousedown select': 'changeSelectValue'
+        'mousedown select': 'changeSelectValue',
+        'touchstart select': 'changeSelectValue'
     },
     changeSelectValue: function(event){
         var select = $(event.target);
