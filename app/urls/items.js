@@ -9,7 +9,7 @@ module.exports = {
             'nf/search/:search?'
         ]
     },
-    'items#allresults#page': {
+    'items#allresults': {
         urls: [
             'nf/all-results/-p-:page/:filters?',
             'nf/all-results/:filters?'
