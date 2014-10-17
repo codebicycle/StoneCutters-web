@@ -1,16 +1,10 @@
 <article id="item-content">
     <div>
-        <h1>{{ item.title }}</h1>
+        <h1 class="item-title">{{ item.title }}</h1>
         
-        <ul class="item-info">
-            <li class="icons icon-time">Publicado <time datetime="2014-10-14">fecha</time></li><!--
-            --><li class="icons icon-pin">Ubicacion</li>
-        </ul>
-
+        {% include (template + "/items/iteminfo.html") %}
         {% include (template + "/items/imagegallery.html") %}
-
         {% include (template + "/items/itemdescription.html") %}
-
         {% include (template + "/items/itemlocation.html") %}
     </div>
 
