@@ -1,7 +1,9 @@
-<section id="posting-item-information" class="posting-item-information">
-	{% view 'post/categories' %}
-	{% view 'post/images' %}
-	{# {% view 'post/optionals' %} --> This has to be defined with design team #}
-	{% view 'post/description' %}
-</section>
-{% view 'post/contact' %}
+<form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+    <section id="posting-item-information" class="posting-item-information">
+    	{% view 'post/categories' %}
+    	{% view 'post/images' %}
+    	{% view 'post/description' %}
+        {% view 'post/optionals' %}
+    </section>
+    {% view 'post/contact' %}
+</form>
