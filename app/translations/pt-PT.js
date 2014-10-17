@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'An\xF4nimo',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
+    'topcities.SelectLocation': 'Selecione um Local',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
     'lostform.Username': 'Nome de utilizador',
     'registrationconfirmsuccesstext.Browse': 'Pesquisar as categorias do OLX',

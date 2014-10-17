@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'An\xF2nim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar el meu anunci',
+    'topcities.SelectLocation': 'Selecciona una ubicaci\xF3',
     'landingbody.EmailAddress': 'Adre\xE7a de correu electr\xF2nic',
     'lostform.Username': 'Nom d\'usuari',
     'registrationconfirmsuccesstext.Browse': 'Cercar categories OLX',

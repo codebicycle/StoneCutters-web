@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Redigera min annons',
+    'topcities.SelectLocation': 'V\xE4lj en plats',
     'landingbody.EmailAddress': 'E-postadress',
     'lostform.Username': 'Anv\xE4ndarnamn',
     'registrationconfirmsuccesstext.Browse': 'S\xF6k OLX:s kategorier',

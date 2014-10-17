@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Chanje Anons Mwen ',
+    'topcities.SelectLocation': 'Chwazi yon kote',
     'landingbody.EmailAddress': 'Adr\xE8s Im\xE8l',
     'lostform.Username': 'Nom Manm',
     'registrationconfirmsuccesstext.Browse': 'Ch\xE8ch\xE8 kategori OLX yo',

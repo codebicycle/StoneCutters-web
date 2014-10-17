@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Anon\xFC\xFCmne',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Muutke "Minu kuulutust"',
+    'topcities.SelectLocation': 'Valige asukoht',
     'landingbody.EmailAddress': 'E-posti aadress',
     'lostform.Username': 'Kasutajanimi',
     'registrationconfirmsuccesstext.Browse': 'Lehitsege OLXi kategooriaid',

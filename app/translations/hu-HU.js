@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'N\xE9vtelen',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'A hirdet\xE9sem szerkeszt\xE9se',
+    'topcities.SelectLocation': 'Jel\xF6lj\xF6n meg egy helysz\xEDnt',
     'landingbody.EmailAddress': 'E-mail c\xEDm',
     'lostform.Username': 'Felhaszn\xE1l\xF3i n\xE9v',
     'registrationconfirmsuccesstext.Browse': 'OLX kateg\xF3ri\xE1k b\xF6ng\xE9sz\xE9se',

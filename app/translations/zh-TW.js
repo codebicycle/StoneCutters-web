@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': '\u533F\u540D',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': '\u7DE8\u8F2F\u6211\u7684\u5EE3\u544A',
+    'topcities.SelectLocation': '\u9078\u64C7\u5730\u9EDE',
     'landingbody.EmailAddress': '\u96FB\u5B50\u90F5\u7BB1\u5730\u5740',
     'lostform.Username': '\u7528\u6236\u540D',
     'registrationconfirmsuccesstext.Browse': '\u700F\u89BDOLX\u5168\u90E8\u985E\u5225',

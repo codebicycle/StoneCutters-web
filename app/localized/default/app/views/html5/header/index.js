@@ -31,6 +31,8 @@ module.exports = Base.extend({
         this.app.router.appView.on('sort:end', this.restore.bind(this));
         this.app.router.appView.on('filter:start', this.onSelectFilterStart.bind(this));
         this.app.router.appView.on('filter:end', this.restore.bind(this));
+        this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
+        this.app.router.appView.on('location:end', this.restore.bind(this));
         this.app.router.on('action:end', this.onActionEnd.bind(this));        
     },
     onActionEnd: function() {
@@ -122,10 +124,12 @@ module.exports = Base.extend({
     },
     onSelectFilterStart: function(){
         this.customize("mobilepromo.Filters");        
+    },    
+    onSelectLocation: function(){
+        this.customize("defaultheader.Location");        
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
-
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]); 

@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Ad\u0131z',
     'messages_site_class.30': 'Tamam',
     'messages_user_management_current_ads.EditMyListing': '\u0130lanlar\u0131m\u0131 D\xFCzenle',
+    'topcities.SelectLocation': 'Bir Konum Se\xE7in',
     'landingbody.EmailAddress': 'E-Posta Adresi',
     'lostform.Username': 'Kullan\u0131c\u0131 Ad\u0131',
     'registrationconfirmsuccesstext.Browse': 'OLX kategorilerine g\xF6z at',

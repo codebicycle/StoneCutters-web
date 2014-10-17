@@ -1,14 +1,3 @@
-{% from macros import Breadcrumb %}
-{% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["misc.Sell_Post_Mobile_India"] if target == 'posting' else dictionary["distancediv.changeLocation"]) }}
-<header id="location">
-	<p>
-		<a class="big country-link" href="{{ ['/', target or ''] | join | link({location: location.url}) }}">{{ location.name }}</a>
-		{% if location.current and location.current.type != 'country' %}
-			<span>&#62; {{ location.current.name }}</span>
-		{% endif %}
-	</p>
-</header>
 <header id="search">
 	<form class="search-form" action="{{ '/location' | link }}">
 		<input type="text" name="search" placeholder="{{ dictionary["countryoptions.EnterCity"] }}" />
@@ -18,6 +7,8 @@
 		{% endif %}
 	</form>
 </header>
+
+{% view 'locations/select' %}
 <div class="list cities-links">
 	{% if cities.length %}
 		<h3>{% if search %}{{ dictionary["listingpageitemslisting.AllResultsNew"] }}{% else %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% endif %}</h3>
