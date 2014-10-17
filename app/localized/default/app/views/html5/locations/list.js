@@ -6,11 +6,6 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 
 module.exports = Base.extend({    
-    events: {
-        'click .logIn span': 'onLoginClick',
-        'click #myOlx li a': 'onMenuClick',
-        'click .topBarFilters .filter-btns':'onCancelFilter'
-    },
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);        
