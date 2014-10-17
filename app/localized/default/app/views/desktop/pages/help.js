@@ -10,7 +10,7 @@ module.exports = Base.extend({
     className: 'pages-help-view',
     events: {
         'click .help-toggle-content': 'helpToggleContent',
-        'click h4.icons': 'helpToggleQuestion'
+        'click .question .icons': 'helpToggleQuestion'
     },
 
     helpToggleContent: function(event) {

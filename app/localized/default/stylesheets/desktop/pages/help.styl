@@ -1,7 +1,7 @@
 .pages-help-view {
     clear-fix();
     .help-navigation {
-        box(#e8f6ff, #b9ddf3 , 3px, 0, solid, 1px);
+        box($lightBlue, $lightBlueBorder , 3px, 0, solid, 1px);
         float: left;
         width: 294px;
         h3 {
@@ -12,7 +12,6 @@
         }
         ul {
             ul-reset();
-
             li {
                 border-top: 1px solid #b9ddf3;
             }
@@ -20,7 +19,6 @@
 
         .icons{
             padding-right: 4px;
-
             &:before {
                 font-size: $l;
             }
@@ -33,7 +31,7 @@
             
             a,
             .icons:before {
-                color: #999;
+                color: $greyStrong;
             }
         }
         .selected:after, .selected:before { 
@@ -75,7 +73,7 @@
         }
 
         .icon-arrowright:before {
-            color: #999;
+            color: $greyStrong;
         }
 
         .question {
