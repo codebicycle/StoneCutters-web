@@ -21,9 +21,6 @@ module.exports = Base.extend({
         var $form = this.$('.search-form');
         var $input = $form.find('input[name=search]');
 
-        this.app.router.once('action:end', this.onStart);
-        this.app.router.once('action:start', this.onEnd);        
-
         this.attachTrackMe(this.className, function(category, action) {
             return {
                 custom: [category, '-', '-', action].join('::')
@@ -48,12 +45,6 @@ module.exports = Base.extend({
                 status: 200
             });
         }.bind(this));
-    },
-    onStart: function(event) {
-        this.appView.trigger('location:start');
-    },
-    onEnd: function(event) {
-        this.appView.trigger('location:end');
     }
 });
 
