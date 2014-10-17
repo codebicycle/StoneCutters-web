@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': '\u0627\u0644\u0645\u062C\u0647\u0648\u0644\u0647',
     'messages_site_class.30': '\u0646\u0639\u0645',
     'messages_user_management_current_ads.EditMyListing': '\u0645\u0639\u0627\u0644\u062C\u0629 \u0623\u0639\u0644\u0627\u0646\u064A',
+    'topcities.SelectLocation': 'Select a Location',
     'landingbody.EmailAddress': ' Email \u0639\u0646\u0648\u0627\u0646 ',
     'lostform.Username': '\u0623\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645',
     'registrationconfirmsuccesstext.Browse': ' OLX \u0645\u0644\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u062A\u0628\u0627\u062A \u0645\u0646',

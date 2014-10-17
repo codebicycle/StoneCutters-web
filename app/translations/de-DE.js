@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Anonym',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Meine Kleinanzeige bearbeiten',
+    'topcities.SelectLocation': 'W\xE4hlen Sie einen Standort',
     'landingbody.EmailAddress': 'E-Mailadresse',
     'lostform.Username': 'Benutzername',
     'registrationconfirmsuccesstext.Browse': 'OLX\'s Kategorien durchsuchen',

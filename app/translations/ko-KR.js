@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': '\uBB34\uBA85',
     'messages_site_class.30': '\uD655\uC778',
     'messages_user_management_current_ads.EditMyListing': '\uB098\uC758 \uCE74\uD14C\uACE0\uB9AC \uC218\uC815\uD558\uAE30',
+    'topcities.SelectLocation': '\uC704\uCE58\uD558\uC2E0 \uACF3\uC744 \uC120\uD0DD\uD574 \uC8FC\uC138\uC694.',
     'landingbody.EmailAddress': '\uC774\uBA54\uC77C \uC8FC\uC18C',
     'lostform.Username': '\uC0AC\uC6A9\uC790\uBA85',
     'registrationconfirmsuccesstext.Browse': 'OLX \uCE74\uD14C\uACE0\uB9AC \uBE0C\uB77C\uC6B0\uC988\uD558\uAE30',

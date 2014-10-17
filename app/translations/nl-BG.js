@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Anoniem',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Mijn advertentie bewerken',
+    'topcities.SelectLocation': 'Kies een locatie',
     'landingbody.EmailAddress': 'E-mailadres',
     'lostform.Username': 'Gebruikersnaam',
     'registrationconfirmsuccesstext.Browse': 'Zoek in de OLX rubrieken',

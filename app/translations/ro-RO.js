@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Anonim',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editarea anun\u0163ului meu',
+    'topcities.SelectLocation': 'Selecteaz\u0103 o loca\u0163ie',
     'landingbody.EmailAddress': 'Adresa de email',
     'lostform.Username': 'Nume de utilizator',
     'registrationconfirmsuccesstext.Browse': 'Caut\u0103 \xEEn categoriile OLX',

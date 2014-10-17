@@ -68,6 +68,7 @@ module.exports = {
     'messages_item_page.57': 'Nimet\xF6n',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Muokkaa omaa ilmoitusta',
+    'topcities.SelectLocation': 'Valitse Sijainti',
     'landingbody.EmailAddress': 'S\xE4hk\xF6postiosoite',
     'lostform.Username': 'K\xE4ytt\xE4j\xE4tunnus',
     'registrationconfirmsuccesstext.Browse': 'Selaa OLX:n kategorioita',

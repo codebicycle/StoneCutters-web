@@ -27,6 +27,8 @@ module.exports = Base.extend({
         this.app.router.appView.on('filter:end', this.show.bind(this));
         this.app.router.appView.on('sort:start', this.hide.bind(this));
         this.app.router.appView.on('sort:end', this.show.bind(this));
+        this.app.router.appView.on('location:start', this.hide.bind(this));
+        this.app.router.appView.on('location:end', this.show.bind(this));
         this.attachTrackMe(this.className, function(category, action) {
             return {
                 custom: [category, '-', '-', action].join('::')
@@ -36,7 +38,7 @@ module.exports = Base.extend({
     isFilter: function() {
         var currentRoute = this.app.session.get('currentRoute');
         
-        return (currentRoute.action === 'filter' || currentRoute.action === 'sort');
+        return (currentRoute.action === 'filter' || currentRoute.action === 'sort' || currentRoute.action === 'location');
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {
