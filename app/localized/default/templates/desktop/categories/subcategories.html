@@ -15,7 +15,7 @@
 {% endif %}
 
 {% for name, filter in metadata.filters %}
-    {% if filter.name != 'state' and filter.name != 'city'  %}
+    {% if fiter.name != 'state' and filter.name != 'city'  %}
         {% if filter.type == 'SELECT' %}
             <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-top"></span></span>
             <div class="filter check-box">
@@ -24,6 +24,7 @@
                         <input type="checkbox" value="{{ value.id }}" >
                         {{ value.value }}
                     </label>
+                    <a href="-{{ filter.name }}_{{ value.id }}">{{ value.value }}</a>
                     {% endfor %}
             </div>
         {% elif filter.type == 'RANGE' %}

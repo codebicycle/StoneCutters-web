@@ -11,6 +11,18 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var slugUrl = helpers.common.slugToUrl(data.currentCategory);
+        var filters = data.metadata.filters;
+        var order = ['pricerange','hasimage','state','parentcategory'];
+        var list = [];
+        console.log(filters);
+
+        _.each(order, function(obj, i){
+            _.find(filters, function(obj){
+                return obj.name == order[i] ? list.push(obj) : false;
+            });
+        });
+
+        console.log(list);
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
