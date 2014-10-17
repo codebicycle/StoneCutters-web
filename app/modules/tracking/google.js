@@ -209,6 +209,7 @@ function generate(params, page, options) {
     var googlePage = utils.get(configTracking, ['google', 'pages', page], '');
 
     params.page = generatePage.call(this, googlePage, options);
+    params.keyword = options.keyword;
     this.app.session.persist({
         hitCount: Number(this.app.session.get('hitCount') || 0) + 1
     }, {
