@@ -42,6 +42,8 @@
             <label for="submit">
                 <input type="submit" value="Enviar e-mail" id="submit" class="olx-ui-button orange">
             </label>
+            <input type="hidden" class="hide itemCategory" value="{{ item.category.id }}">
+            <input type="hidden" class="hide itemSubcategory" value="{{ item.category.parentId }}">
         </fieldset>
         <p class="replySuccses icons hide" >
             E-mail enviado com sucesso!
