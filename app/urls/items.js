@@ -2,143 +2,70 @@
 
 module.exports = {
     'items#staticSearch': {
-        url: 'q/:search/c-:catId'
-    },
-    'items#staticSearch#nocat': {
-        url: 'q/:search'
-    },
-    'items#staticSearch#page': {
-        url: 'q/:search/p-:page'
-    },
-    'items#search#filters': {
-        urls: {
-            server: 'search/:search/-p-:page/:filters?',
-            client: {
-                url: 'search/:search/-p-:page(/)(:filters)'
-            }
-        }
-    },
-    'items#search': {
-        urls: {
-            server: 'search/:search?',
-            client: {
-                url: 'search(/)(:search)'
-            }
-        }
-    },
-    'items#search#nfFilters': {
-        urls: {
-            server: 'nf/search/:search/-p-:page/:filters?',
-            client: {
-                url: 'nf/search/:search/-p-:page(/)(:filters)'
-            }
-        }
-    },
-    'items#search#nf': {
-        urls: {
-            server: 'nf/search/:search?',
-            client: {
-                url: 'nf/search(/)(:search)'
-            }
-        }
-    },
-    'items#allresultsig#page': {
-        urls: {
-            server: 'nf/all-results-ig/-p-:page/:filters?',
-            client: {
-                url: 'nf/all-results-ig/-p-:page(/)(:filters)'
-            }
-        }
+        urls: [
+            'q/:search/c-:catId',
+            'q/:search/p-:page'
+        ]
     },
     'items#allresultsig': {
-        urls: {
-            server: 'nf/all-results-ig/:filters?',
-            client: {
-                url: 'nf/all-results-ig(/)(:filters)'
-            }
-        }
+        urls: [
+            'nf/all-results-ig/-p-:page/:filters?',
+            'nf/all-results-ig/:filters?'
+        ]
     },
-    'items#allresults#page': {
-        urls: {
-            server: 'nf/all-results/-p-:page/:filters?',
-            client: {
-                url: 'nf/all-results/-p-:page(/)(:filters)'
-            }
-        }
+    'items#filter': {
+        urls: [
+            'nf/search/:search/-p-:page/:filters/filter',
+            'nf/search/:search/-p-:page/filter',
+            'nf/search/:search/:filters/filter',
+            'nf/search/:search/filter',
+        ]
+    },
+    'items#sort': {
+        urls: [
+            'nf/search/:search/-p-:page/:filters/sort',
+            'nf/search/:search/-p-:page/sort',
+            'nf/search/:search/:filters/sort',
+            'nf/search/:search/sort',
+        ]
+    },
+    'items#search': {
+        urls: [
+            'search/:search/-p-:page/:filters?',
+            'search/:search?',
+            'nf/search/:search/-p-:page/:filters?',
+            'nf/search/:search?'
+        ]
     },
     'items#allresults': {
-        urls: {
-            server: 'nf/all-results/:filters?',
-            client: {
-                url: 'nf/all-results(/)(:filters)'
-            }
-        }
+        urls: [
+            'nf/all-results/-p-:page/:filters?',
+            'nf/all-results/:filters?'
+        ]
     },
     'items#delete': {
         url: 'myolx/deleteitem/:itemId'
     },
     'items#success': {
-        urls: {
-            server: 'iid-:itemId([0-9]+)/reply/success',
-            client: {
-                url: 'iid-:itemId/reply/success'
-            }
-        }
+        url: 'iid-:itemId([0-9]+)/reply/success'
     },
     'items#reply': {
-        urls: {
-            server: 'iid-:itemId([0-9]+)/reply',
-            client: {
-                url: 'iid-:itemId/reply'
-            }
-        }
+        url: 'iid-:itemId([0-9]+)/reply'
     },
     'items#gallery': {
-        urls: {
-            server: ':title-iid-:itemId([0-9]+)/gallery',
-            client: {
-                url: ':title-iid-:itemId/gallery'
-            }
-        }
+        url: ':title-iid-:itemId([0-9]+)/gallery'
     },
     'items#map': {
-        urls: {
-            server: ':title-iid-:itemId([0-9]+)/map',
-            client: {
-                url: ':title-iid-:itemId/map'
-            }
-        }
-    },
-    'items#show#slug': {
-        urls: {
-            server: ':title-iid-:itemId([0-9]+)',
-            client: {
-                url: ':title-iid-:itemId'
-            }
-        }
-    },
-    'items#show#noSlug': {
-        urls: {
-            server: '-iid-:itemId([0-9]+)',
-            client: {
-                url: '-iid-:itemId'
-            }
-        }
+        url: ':title-iid-:itemId([0-9]+)/map'
     },
     'items#show': {
-        urls: {
-            server: 'iid-:itemId([0-9]+)',
-            client: {
-                url: 'iid-:itemId'
-            }
-        }
+        urls: [
+            ':title-iid-:itemId([0-9]+)',
+            '-iid-:itemId([0-9]+)',
+            'iid-:itemId([0-9]+)'
+        ]
     },
     'items#favorite': {
-        urls: {
-            server: 'items/:itemId/favorite/?:intent?',
-            client: {
-                url: 'items/:itemId/favorite(/:intent)'
-            }
-        }
+        url: 'items/:itemId/favorite/?:intent?'
     }
 };

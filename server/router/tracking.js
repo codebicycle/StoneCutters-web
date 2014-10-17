@@ -178,6 +178,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 googleTracking(req, trackerId, host, page);
             }
+            if (req.query.locUrl === 'www.olx.com.br' && platformUrl !== 'wap') {
+                return;
+            }
             if (req.query.locUrl !== 'www.olx.com.co') {
                 atiTracking(req);
             }
