@@ -84,7 +84,7 @@ module.exports = {
             },
             listingFilters: {
                 worldwide: false,
-                countries: []
+                countries: ['www.olx.com.ar']
             }
         }
     },

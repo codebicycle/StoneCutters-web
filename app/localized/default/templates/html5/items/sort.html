@@ -3,9 +3,7 @@
 	{{ FieldCheckFilter(dictionary["itemslisting.NewlyListed"],'sort' ,'radio',sorts[2].name) }}
 	{{ FieldCheckFilter(dictionary["itemslisting.HighestFirst"], 'sort' ,'radio',sorts[0].name) }}
 	{{ FieldCheckFilter(dictionary["itemslisting.LowestFirst"], 'sort' ,'radio',sorts[1].name) }}
-<fieldset class="center no-border">
-	<button id="btn-sort" disabled="disabled" type="submit" class="disabled btns orange">
-		{{ dictionary["countryoptions.Accept"] }}
-	</button>
-</fieldset>
+	<fieldset class="center no-border">
+	<button id="btn-sort" type="submit" class="btns orange">{{ dictionary["countryoptions.Accept"] }}</button>
+	</fieldset>
 </form>

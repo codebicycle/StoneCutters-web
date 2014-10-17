@@ -1,6 +1,8 @@
 {% view 'partials/search' %}
 
-{% include (template + '/partials/filterorder.html') %}
+{% if metadata.total > 0 %}
+    {% include (template + '/partials/filterorder.html') %}
+{% endif %}
 
 <section id="itemListing">
     {% if metadata.total == 0 %}
