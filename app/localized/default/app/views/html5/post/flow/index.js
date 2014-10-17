@@ -72,7 +72,29 @@ module.exports = Base.extend({
         'imagesLoadStart': 'onImagesLoadStart',
         'imagesLoadEnd': 'onImagesLoadEnd',
         'categoryReset': 'onCategoryReset',
-        'errors': 'onErrors'
+        'errors': 'onErrors',
+        'mousedown select': 'changeSelectValue',
+        'touchstart select': 'changeSelectValue'
+    },
+    changeSelectValue: function(event){
+        var select = $(event.target);
+        var options = select.children().length;
+        var nextValue;
+
+        if (options == 2) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            nextValue = select.find('option:not(:selected)').val();
+
+            select.val(nextValue);
+
+            if (select.attr('name') === 'priceType') {
+                this.$('#description').trigger('priceTypeChange', [select.val()]);
+            }
+        }
+
     },
     onFlow: function(event, from, to, data) {
         event.preventDefault();
@@ -209,7 +231,7 @@ module.exports = Base.extend({
                 }
                 done(response, body);
             }
-            
+
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
