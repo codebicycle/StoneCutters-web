@@ -21,9 +21,12 @@ module.exports = Base.extend({
         });
     },
     events: {
-        'click .orange': 'applyFilter',
-        'click .clear': 'clearForm',
-        'click a.location': 'setUrlLocation'
+        //'click .orange': 'applyFilter',
+        //'click .clear': 'clearForm',
+        //'click a.location': 'setUrlLocation',
+
+        'submit': 'onSubmit',
+        'click a': 'aClick'
     },
     clearForm: function(event) {
         event.preventDefault();
@@ -94,5 +97,23 @@ module.exports = Base.extend({
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200
         });
+    },
+
+    onSubmit: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var data = this.getData();
+        var url = data.referer || data.url.replace('/filter', '');
+
+        helpers.common.redirect.call(this.app.router, url, null, {
+            status: 200
+        });
+    },
+    aClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
     }
 });
