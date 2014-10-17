@@ -214,6 +214,10 @@ function show(params, callback) {
             var title;
             var description;
 
+            seo.setContent(item.metadata.seo);
+            if(typeof item.metadata.itemPage.h1 !== 'undefined') {
+                seo.setExtendedTitle(item.metadata.itemPage.h1);
+            }
             if (!subcategory) {
                 _item.set('purged', true);
                 item = _item.toJSON();
@@ -222,7 +226,6 @@ function show(params, callback) {
                 parentId = subcategory.get('parentId');
                 category = parentId ? _categories.get(parentId) : subcategory;
             }
-
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
 
@@ -255,6 +258,7 @@ function show(params, callback) {
             callback(null, (item.purged) ? 'items/unavailable' : 'items/show', {
                 item: item,
                 user: user,
+                seo: seo,
                 pos: Number(params.pos) || 0,
                 sk: securityKey,
                 relatedItems: _relatedItems || [],

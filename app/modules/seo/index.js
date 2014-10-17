@@ -169,6 +169,9 @@ _.extend(SeoModule.prototype, {
     },
     isEnabled: function () {
         return this.config.enabled;
+    },
+    setExtendedTitle: function (title) {
+        this.seoContent.extendedTitle = title;
     }
 });
 

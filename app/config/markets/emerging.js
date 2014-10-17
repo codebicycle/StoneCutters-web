@@ -10,6 +10,7 @@ module.exports = {
     seo: {
         enabled: true,
         popularSearches: true,
-        relatedListings: true
+        relatedListings: true,
+        extendedTitle: true
     }
 };
