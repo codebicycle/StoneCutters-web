@@ -24,17 +24,25 @@
 			height: 75px;
 			line-height: 75px;
 			margin: 0 0 10px 10px;
+			opacity: .3;
 			position: relative;
 			text-align: center;
+			transition(250ms);
 			vertical-align: top;
 			width: 100px;
+
 			&:first-child,
 			&:nth-child(4n + 1) {
 				margin: 0 0 10px 0;
 			}
 
+			&:hover {
+				cursor: pointer;
+				opacity: 1;
+			}
+
 			.image {
-				background: #E8F6FF;
+				background: $lightBlue;
 				bottom: 0;
 				left: 0;
 				position: absolute;
@@ -44,7 +52,6 @@
 				&.icon-photo::before {
 					color: $blue;
 					font-size: remify(64px);
-					opacity: .6;
 				}
 			}
 		}
