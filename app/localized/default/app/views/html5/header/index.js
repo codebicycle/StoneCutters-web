@@ -62,7 +62,11 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        window.history.back();
+        
+        helpers.common.redirect.call(this.app.router, '/', null, {
+            status: 200
+        });
+    
     },
     changeLocation: function (e, siteLocation) {
         this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {
@@ -130,6 +134,7 @@ module.exports = Base.extend({
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
+
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]); 
