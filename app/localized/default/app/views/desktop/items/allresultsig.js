@@ -10,11 +10,14 @@ module.exports = Base.extend({
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        data.nav = { link: 'nf/all-results', galeryAct: 'active' };
 
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
-            items: data.items
+            items: data.items,
+            nav: {
+                link: 'nf/all-results',
+                galeryAct: 'active'
+            }
         });
     },
     processItem: function(item) {

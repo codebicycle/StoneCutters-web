@@ -2,15 +2,13 @@
     background: #eee;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid $greyBorders;
     padding: 10px 20px;
     width: auto;
-    > div {
-        display: inline-block;
-        vertical-align: middle;
-    }
+    clear-fix();
+
     .social-sharing {
-        width: 40%;
+        float: left;
         p {
             color: #666;
             display: inline-block;
@@ -50,8 +48,7 @@
         }
     }
     .actions {
-        text-align: right;
-        width: 59%;
+        float: right;
         a{
             action-button(#f9f9f9, #666, 3px, 6px 15px);
             font-size: $xs;

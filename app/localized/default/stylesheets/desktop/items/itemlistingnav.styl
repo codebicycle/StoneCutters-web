@@ -1,8 +1,8 @@
 .listing-tabs {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $greyBorders;
     display: block;
     font-size: $s;
-    height: 34px;
+    height: 30px;
     margin: 0;
 
     .tabs {
@@ -16,21 +16,27 @@
                 height: 33px;
                 display: block;
                 float: left;
-                background: #eee;
-                border-styles(#ddd, 3px 3px 0 0, solid solid none, 1px 1px 0);
-                color: #666;
+                background: $greyBoxBg;
+                border-styles($greyBorders, 3px 3px 0 0, solid solid none, 1px 1px 0);
+                color: $greyStrong;
+                display: block;
+                float: left;
+                height: 33px;
                 line-height: 2.3;
-                padding: 0 5px;
+                padding: 0 10px;
 
                 &.active {
                     height: 34px;
                     margin-bottom: -1px;
-                    background: #fafafa;
+                    background: $greyPageBg;
                     color: #000;
+                    height: 34px;
+                    margin-bottom: -1px;
                 }
                 &:before {
                     display: inline-block;
-                    line-height: 10px;
+                    font-size: 24px;
+                    height: 27px;
                 }
             }
         }

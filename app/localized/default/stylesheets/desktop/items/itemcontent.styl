@@ -1,30 +1,24 @@
 #item-content {
-    box(#fff, #ccc , 3px, 0);
+    box($white, $greyBorders , 3px, 0);
     float: left;
-    tab-arrow(right, $white, #e4e4e4, 1px, 40px, 1);
     position: relative;
-    width: 664px;
+    tab-arrow(right, $white, $greyBorders, 1px, 30px, 1);
+    width: 660px;
 
     &:after {
-        margin-top: -185px;
+        top: 265px;
     }
     &:before {
-        margin-top: -186px;
+        top: 266px;
     }
     > div {
         &:first-child {
             padding: 0 20px;
         }
-        > h1 {
+        .item-title {
             font-size: $xl;
-            padding-right: 40px
-        }
-    }
-    .item-info {
-        color: grey(40%);
-        font-size: $xs;
-        .icons:before {
-            font-size: 1.7rem;
+            padding-right: 40px;
+            margin: 20px 0;
         }
     }
 }

@@ -1,31 +1,56 @@
-#image-gallery {
-    height: 435px;
-    .img-viewer {
-        box(#f2f2f2, grey(20%) , 0, 0);
-        display:inline-block;
-        height: 100%;
-        width: 540px;
+.image-gallery {
+    clear-fix();
+    overflow: hidden; /* remove this after JS implementation */
+
+    .image-wrapper {
+        border: 1px solid $greyBorders;
+        position: relative;
+        
+        .item-image {
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            margin: auto;
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
     }
-    .img-navigator {
-        display:inline-block;
-        height: 100%;
-        margin-left: 14px;
-        vertical-align:top;
-        ul {
-            ul-reset();
-            li {
-                height: 60px;
-                width: 60px;
-                &:not(:last-child) {
-                    margin-bottom: 15px;
-                }
-                a {
-                    box(#f2f2f2, grey(20%) , 0, 0);
-                    color: grey(20%);
-                    height: 100%;
-                    width: 100%;
-                }
-            }
+
+    .image-viewer {
+        background: $greyPageBg;
+        float: left;
+        height: 400px;
+        margin: 0;
+        width: 538px;
+    }
+
+    .image-navigator {
+       float: right;
+       height: 402px;
+       width: 60px;
+
+        figure {
+            margin: 0 0 10px;
+        }
+
+        .icon-navarrowdown,
+        .icon-navarrowup {
+            border: 1px solid $greyBorders;
+            color: $greyStrong;
+            display: block;
+            text-align: center;
+        }
+
+        .icon-navarrowup + figure {
+            margin: 10px 0;
+        }
+        
+        .image-wrapper {
+            display: block;
+            height: 60px;
         }
     }
 }

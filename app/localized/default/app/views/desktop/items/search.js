@@ -12,6 +12,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         data.nav = { link: data.url + '/', listAct: 'active' };
 
+        data.nav = { link: data.url + '/', listAct: 'active' };
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
             items: data.items

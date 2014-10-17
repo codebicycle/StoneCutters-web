@@ -1,13 +1,13 @@
 {% include (template + "/partials/breadcrumb.html") %}
 
-<section id="item-page">
+<section id="item-page" data-qa="item" >
     {% include (template + "/items/itemcontent.html") %}
 
-    <div class="right-column">
+    <aside class="side-column">
         {% include (template + "/items/itemprice.html") %}
 
         {% include (template + "/items/contactform.html") %}
-    </div>
+    </aside>
 </section>
 
 {% include (template + "/items/relateditems.html") %}

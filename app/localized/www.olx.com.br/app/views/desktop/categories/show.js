@@ -2,6 +2,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('categori
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
+var Seo = require('../../../../../../modules/seo');
 
 module.exports = Base.extend({
     className: 'categories_show_view',
@@ -109,6 +110,7 @@ module.exports = Base.extend({
         }
 
         function prepare(done) {
+            var seo = Seo.instance(this.app);
             var urlFull = $('#currentUrl').val();
             var pairs = urlFull.split('?');
             var params;
@@ -122,7 +124,7 @@ module.exports = Base.extend({
 
             helpers.pagination.prepare(this.app, params);
             params.categoryId = params.catId;
-            params.seo = true;
+            params.seo = seo.isEnabled();
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
             delete params.catId;
             delete params.title;

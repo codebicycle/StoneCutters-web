@@ -3,17 +3,17 @@
     {% for item in items %}
         <li>
             <a href="{{ item | slugToUrl | link }}">
-                <div class="item-image">
+                <div class="items-image">
                     <img src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}">
                 </div>
-                <p class="item-info">
+                <p class="items-info">
                     {{ item.title | truncate( 50, True) }}
                 </p>
-                <p class="item-price">
+                <p class="items-price">
                     {{ item.price.displayPrice }}
                     <span>{{ item.priceTypeData.displayPriceType }}</span>
                 </p>
-                <p class="item-date">
+                <p class="items-date">
                     {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
                 </p>
             </a>
