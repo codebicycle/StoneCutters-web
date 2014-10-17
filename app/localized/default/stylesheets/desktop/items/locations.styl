@@ -6,8 +6,8 @@
         ul-reset();
     }
     .locations-tabs {
-        height: 32px;
-        font-size: $m;
+        height: 29px;
+        font-size: $s;
         li {
             display: inline-block;
             float: left;
@@ -16,14 +16,14 @@
         li:not(:last-child) {
             border-bottom: none;
             box($white, #ddd, 0, 5px 10px 5px 15px);
-            tab-arrow(right, $white, #ddd, 1px, 13px, 10);
+            tab-arrow(right, $white, #ddd, 1px, 14px, 10);
         }
         li:first-child {
             box($white, #ddd, 3px 0 0 0, 5px 10px);
             border-bottom: none;
         }
         li:last-child {
-            box($yellow, $yellowBorders, 0 3px 0 0, 6px 20px 6px);
+            box($yellow, $yellowBorders, 0 3px 0 0, 6px 20px 6px, solid, 1px 1px 0 0);
             border-bottom: none;
             a {
                 color: #000;
@@ -46,8 +46,8 @@
             width: 24%;
             display: inline-block;
             margin: 1px 0;
+            font-size: $xs;
             span {
-                font-size: $xs;
                 color: #666;
             }
         }

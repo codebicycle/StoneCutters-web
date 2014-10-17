@@ -32,14 +32,14 @@
 			<p>Así aparecerá tu anuncio en el sitio</p>
 			<a href="#" class="icons icon-edit">Editar anuncio</a>
 		</div>
-		<figure id="image-viewer" class="image-viewer">
-	        {% if item.images.length > 0 %}
-	            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image big-size" />
-	        {% endif %}
-    	</figure>
-    	{% include (template + "/items/itemprice.html") %}
-    	{% include (template + "/items/itemdescription.html") %}
-    	{% include (template + "/items/itemlocation.html") %}
+		<div class="wrapper">
+			<h1 class="item-title">{{ item.title }}</h1>
+			{% include (template + "/items/iteminfo.html") %}
+			{% include (template + "/items/imagegallery.html") %}
+	    	{% include (template + "/items/itemprice.html") %}
+	    	{% include (template + "/items/itemdescription.html") %}
+	    	{% include (template + "/items/itemlocation.html") %}
+    	</div>
 	</section><!-- item-preview-content -->
 
 	<aside class="side-column">
@@ -49,9 +49,7 @@
 		</div>
 		<div class="user-info">
 	        <p class="icons icon-user user-name">{{ item.contactName }}</p>
-	        <span class="user-status">User Status</span>
 	        <p class="icons icon-phone user-phone">{{ item.phone }}</p>
-	        <span>Ao ligar, diga que viu o anúncio na OLX</span>
 	    </div>
     </aside><!-- right-column -->
 </section><!-- item-preview -->

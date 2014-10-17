@@ -1,14 +1,9 @@
-<fieldset class="wrapper">
-	<label for="title" class="posting-label">* Título</label>
-	<div class="wrapper-inputs">
-		<input id="title" class="text-field" type="text" placeholder="Titulo" required />
-		<small class="advice">0 caracteres. Un buen título precisa de por lo menos 60 caracteres.</small>
-	</div>
-</fieldset>
-<fieldset class="wrapper">
-	<label for="description" class="posting-label">* Descripción de tu anuncio</label>
-	<textarea id="description" class="text-field" rows="12" required></textarea>
-</fieldset>
+{% from macros import FieldText, FieldTextArea, FieldCombobox %}
+
+{{ FieldText('Título', 'title', 'true', '0 caracteres. Un buen título precisa de por lo menos 60 caracteres.') }}
+
+{{ FieldTextArea('Descripción de tu anuncio', 'description', 'true') }}
+
 <fieldset class="wrapper">
 	<label for="price" class="posting-label">* Precio</label>
 	<div class="wrapper-inputs">

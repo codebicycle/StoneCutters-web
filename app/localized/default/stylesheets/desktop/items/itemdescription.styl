@@ -1,26 +1,36 @@
-#item-description {
-    > p {
-        color: $black;
-        font-size: $l;
-        font-weight: bold;
-        margin-bottom: 0;
-    }
-    div {
-        display: inline-block;
+.description-title {
+    font-size: $l;
+    margin: 0 0 20px 0;
+}
 
-        &.optionals {
-            min-width: 200px;
+.item-description {
+    clear-fix();
+    margin: 20px 0;
+
+    .text {
+        float: left;
+        max-width: 365px;
+        p {
+            margin: 0;
         }
     }
-    ul {
+    .optionals {
+        float: right;
+        width: 210px;
         ul-reset();
+        
         li {
+            clear-fix();
             padding: 7px;
             &:nth-child(odd) {
-                background-color: grey(5%)
+                background-color: $greyBorders;
             }
-            span:last-child {
+            span {
+                font-size: $xs;
                 float: right;
+                &:first-child {
+                    float: left;
+                }
             }
         }
     }
