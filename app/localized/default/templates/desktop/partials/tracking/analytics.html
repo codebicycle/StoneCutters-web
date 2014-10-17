@@ -17,6 +17,7 @@
         if (doStore) {
             tracker._setCustomVar(2, 'keep_referral', referrerDomain, 2);
         }
+        tracker._set("title",'{{ tracking.params.keyword }}');
         tracker._trackPageview('{{ tracking.params.page }}');
     });
 </script>
