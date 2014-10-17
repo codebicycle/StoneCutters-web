@@ -1,19 +1,16 @@
-#image-gallery {
+.image-gallery {
     clear-fix();
-    margin-top: 10px;
+    overflow: hidden; /* remove this after JS implementation */
 
-    .image-viewer {
+    .image-wrapper {
         border: 1px solid $greyBorders;
-        float: left;
-        height: 400px;
-        margin: 0;
-        width: 538px;
         position: relative;
-
-        .big-size {
+        
+        .item-image {
             bottom: 0;
             cursor: pointer;
             left: 0;
+            margin: auto;
             max-height: 100%;
             max-width: 100%;
             position: absolute;
@@ -22,39 +19,38 @@
         }
     }
 
+    .image-viewer {
+        background: $greyPageBg;
+        float: left;
+        height: 400px;
+        margin: 0;
+        width: 538px;
+    }
+
     .image-navigator {
        float: right;
        height: 402px;
        width: 60px;
 
-        a {
-            display: block;
-            margin-top: 10px;
-            &:first-child {
-                margin-top: 0;
-            }
-        }
-
         figure {
-            margin: 0;
+            margin: 0 0 10px;
         }
 
         .icon-navarrowdown,
         .icon-navarrowup {
             border: 1px solid $greyBorders;
             color: $greyStrong;
+            display: block;
             text-align: center;
         }
-            
-        .thumbnail {
-            border: 1px solid $greyBorders;
-            height: 58px;
-            line-height: 58px;
-            width: 58px;
-        }
-    }
 
-    .item-image {
-        display: block;
+        .icon-navarrowup + figure {
+            margin: 10px 0;
+        }
+        
+        .image-wrapper {
+            display: block;
+            height: 60px;
+        }
     }
 }

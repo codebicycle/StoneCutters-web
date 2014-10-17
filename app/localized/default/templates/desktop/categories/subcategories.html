@@ -14,25 +14,27 @@
     <span class="category-selected">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
 {% endif %}
 
-<span class="title filter-title">Precio<span class="icons icon-arrow-bottom"></span></span>
-<div class="filter price">
-    <input type="text" placeholder="Min." class="text-field" />
-    <input type="text" placeholder="Max." class="text-field" />
-    <button id="price-submit" class="icons icon-check button" type="submit"></button>
-</div>
+{% for name, filter in metadata.filters %}
+    {% if filter.name != 'state' and filter.name != 'city'  %}
+        {% if filter.type == 'SELECT' %}
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-top"></span></span>
+            <div class="filter check-box">
+                {% for value in filter.value %}
+                    <label>
+                        <input type="checkbox" value="{{ value.id }}" >
+                        {{ value.value }}
+                    </label>
+                    {% endfor %}
+            </div>
+        {% elif filter.type == 'RANGE' %}
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom"></span></span>
+            <div class="filter price">
+                <input type="text" placeholder="Min." class="text-field" />
+                <input type="text" placeholder="Max." class="text-field" />
+                <button id="price-submit" class="icons icon-check button" type="submit"></button>
+            </div>
+        {% elif filter.type == 'BOOLEAN' %}
 
-<span class="title filter-title">Marca<span class="icons icon-arrow-top"></span></span>
-<div class="filter check-box">
-    <label>
-        <input type="checkbox">
-        Marca 1
-    </label>
-    <label>
-        <input type="checkbox">
-        Marca 2
-    </label>
-    <label>
-        <input type="checkbox">
-        Marca 3
-    </label>
-</div>
+        {% endif %}
+    {% endif %}
+{% endfor %}
