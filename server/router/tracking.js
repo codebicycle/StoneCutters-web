@@ -75,7 +75,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 clientId: req.rendrApp.session.get('clientId'),
                 userAgent: options.headers['User-Agent'],
                 hitCount: req.rendrApp.session.get('hitCount'),
-                visitor: tracking.google.getUtmcc(req.rendrApp)
+                visitor: tracking.google.getUtmcc(req.rendrApp),
+                keyword: req.query.keyword
             };
 
             if (language) {
