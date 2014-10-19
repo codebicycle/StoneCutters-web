@@ -44,15 +44,35 @@ module.exports = Base.extend({
 
         var filterName = $(event.currentTarget).data('filter');
         var filterValue = $(event.currentTarget).val();
-        var currentFilter = '/-' + filterName + '_' + filterValue;
+        var newFilter = '-' + filterName + '_' + filterValue;
         var currentUrl = window.location.pathname;
-        var ulrParts = currentUrl.split('/');
+        var catPath = currentUrl.split('/-')[0];
+        var filterPath = currentUrl.split('/-')[1];
+        var path;
+        
+        if (currentUrl.indexOf(filterValue) == -1) {
+            if(filterPath && filterPath.indexOf(filterName) >= 0) {
+                var currentsFilters = filterPath.split('-');
+                var newFilter2 = '';
+                for (var i = 0; i < currentsFilters.length; i++) {
+                    if (currentsFilters[i].indexOf(filterName) >= 0 ){
+                        newFilter2 += currentsFilters[i] + 'OR' + filterValue;
+                    }else{
+                        newFilter2 += newFilter;
+                    }
+                }
+                path = catPath + '/-' + newFilter2;
+            } else if (filterPath) {
+                currentUrl = catPath + '/-' + filterPath;
+                path = currentUrl + newFilter;
+            } else {
+                path = catPath + '/' + newFilter;
+            }
 
-        currentUrl = currentUrl.split('/-')[0];
+            path = helpers.common.link(path, this.app);
 
-        var path = helpers.common.link(currentUrl + currentFilter, this.app);
-
-        this.app.router.redirectTo(path);
+            this.app.router.redirectTo(path);
+        }
     }
 });
 
