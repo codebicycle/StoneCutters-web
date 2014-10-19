@@ -9,7 +9,8 @@ module.exports = Base.extend({
     className: 'categories-show-view',
     tagName: 'main',
     events: {
-        'click .check-box input': 'filterCheckbox'
+        'click .check-box input': 'filterCheckbox',
+        'click .clean-filters': 'cleanFilters'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -34,8 +35,26 @@ module.exports = Base.extend({
             }
         });
     },
+    postRender: function() {
+        var currentUrl = window.location.pathname;
+        var filterPath = currentUrl.split('/-')[1];
+        if (filterPath){
+            var filterNames = filterPath.split('-');
+            var currentValue;
+            $.each(filterNames, function( index, value ) {
+                currentValue = value.split('_')[1];
+                $('.check-box input[value='+ value.split('_')[1] +']').attr('checked', 'checked');
+            });
+        }
+    },
     processItem: function(item) {
         item.date.since = helpers.timeAgo(item.date);
+    },
+    cleanFilters: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
     },
     filterCheckbox: function(event) {
         event.preventDefault();
@@ -49,7 +68,7 @@ module.exports = Base.extend({
         var catPath = currentUrl.split('/-')[0];
         var filterPath = currentUrl.split('/-')[1];
         var path;
-        
+
         if (currentUrl.indexOf(filterValue) == -1) {
             if(filterPath && filterPath.indexOf(filterName) >= 0) {
                 var currentsFilters = filterPath.split('-');
