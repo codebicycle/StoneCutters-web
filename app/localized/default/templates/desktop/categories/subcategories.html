@@ -13,16 +13,15 @@
     <a href="{{ category | slugToUrl | linkig }}" class="icons icon-cat" > {{ category.trName }} </a>
     <span class="category-selected">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
 {% endif %}
-
-{% for name, filter in metadata.filters %}
-    {% if filter.name != 'state' and filter.name != 'city'  %}
+{% for filter in filters %}
+    {% if fiter.name != 'state' and filter.name != 'city'  %}
         {% if filter.type == 'SELECT' %}
             <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-top"></span></span>
             <div class="filter check-box">
                 {% for value in filter.value %}
                     <label>
-                        <input type="checkbox" value="{{ value.id }}" >
-                        {{ value.value }}
+                        <input type="checkbox" value="{{ value.id }}" data-filter="{{ filter.name }}" >
+                        {{ value.value }} <span class="count">{{ value.count }}</span>
                     </label>
                     {% endfor %}
             </div>
