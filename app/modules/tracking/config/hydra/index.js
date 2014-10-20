@@ -1,5 +1,6 @@
 'use strict';
 
 module.exports = {
-    paths: require('./paths')
+    pages: require('./pages'),
+    params: require('./params')
 };

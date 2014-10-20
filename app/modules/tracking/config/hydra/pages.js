@@ -24,9 +24,9 @@ module.exports = {
     'pages#terms': 'static/terms',
     'pages#help': 'static/help',
     'pages#interstitial': 'static/interstitial',
-    'pages#error': 'error'
+    'pages#error': 'error',
     'users#register': 'register',
     'users#login': 'login',
     'users#myads': 'myolx/yourads',
-    'users#favorites': 'myolx/favoritelisting',
+    'users#favorites': 'myolx/favoritelisting'
 };

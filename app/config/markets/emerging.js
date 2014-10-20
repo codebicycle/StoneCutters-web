@@ -11,5 +11,15 @@ module.exports = {
         enabled: true,
         popularSearches: true,
         relatedListings: true
+    },
+    tracking: {
+        enabled: true,
+        trackers: {
+            server: true,
+            ati: true,
+            google: true,
+            hydra: true,
+            keyade: false
+        }
     }
 };

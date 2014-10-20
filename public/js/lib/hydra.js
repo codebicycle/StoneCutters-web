@@ -104,12 +104,21 @@
 
     var trackWithIframe = function(url) {
         var iframe = document.getElementById('tracker');
+
         setupDataLayer(url);
-        if ( ! iframe) {
-            document.write('<iframe id="tracker" src="#" style="border: none; height:0px; width: 0px" frameborder="0" scrolling="0" rel="nofollow"></iframe>');
-            var iframe = document.getElementById('tracker');
+        if (iframe) {
+            document.body.removeChild(iframe);
+            iframe = null;
         }
 
+        iframe = document.createElement("iframe");
+        iframe.setAttribute('id', 'tracker');
+        iframe.setAttribute('src', url);
+        iframe.setAttribute('style', 'border: none; height:0px; width: 0px');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('scrolling', '0');
+        iframe.setAttribute('rel', 'nofollow');
+        document.body.appendChild(iframe);
         iframe.src = url;
     };
 
@@ -123,9 +132,9 @@
             exports = module.exports = hydra;
         }
         exports.hydra = hydra;
-    } else {
-        root.hydra = hydra;
     }
+    root.hydra = hydra;
+    
 
     // Configs
     hydra.config = {
@@ -161,4 +170,4 @@
         'tracking.olx-st.com' === e.origin.substring(7) && eval(e.data);
     }, true);
 
-}).call(this);
+}).call(window);

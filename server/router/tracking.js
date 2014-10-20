@@ -2,6 +2,7 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
+    var restler = require('restler');
     var statsd  = require('../modules/statsd')();
     var Tracker = require('../modules/tracker');
     var config = require('../../shared/config');
@@ -31,6 +32,43 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
             }
         };
+    }
+
+    function prepare(options, params) {
+        options = _.defaults(options, {
+            method: 'get',
+            query: params
+        });
+
+        if (options.method === 'post') {
+            options.data = options.query;
+            delete options.query;
+        }
+        return options;
+    }
+
+    function getOption(options, name, _default) {
+        var value = options[name] || _default;
+
+        delete options[name];
+        return value;
+    }
+
+    function track(url, params, options) {
+        var success;
+        var fail;
+        var error;
+
+        options = prepare(options || {}, params);
+
+        success = getOption(options, 'success', utils.noop);
+        fail = getOption(options, 'fail', utils.noop);
+        error = getOption(options, 'error', utils.noop);
+
+        restler.request(url, options)
+            .on('success', success)
+            .on('fail', fail)
+            .on('error', error);
     }
 
     (function pageview() {
@@ -89,28 +127,26 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var countryId = req.query.locId;
-            var atiConfig;
-            var analytic;
-            var options;
+            if (!req.query.custom) {
+                return;
+            }
 
-            if (env !== 'production') {
-                countryId = 0;
-            }
-            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
-            if (atiConfig) {
-                options = defaultRequestOptions(req, 'pageview', 'ati');
-                analytic = new Tracker('ati', {
-                    id: atiConfig.siteId,
-                    host: atiConfig.logServer
-                });
-                analytic.track({
-                    page: req.query.page,
-                    referer: req.query.referer,
-                    custom: req.query.custom,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
-                }, options);
-            }
+            var params = {
+                clientId: req.rendrApp.session.get('clientId').substr(24),
+                custom: req.query.custom,
+                referer: req.query.referer
+            };
+            var config = {
+                platform: req.rendrApp.session.get('platform'),
+                locUrl: req.query.locUrl
+            };
+            var options = defaultRequestOptions(req, 'pageview', 'ati');
+            var tracker = tracking.ati.pageview.call({
+                app: req.rendrApp
+            }, params, config);
+
+            _.extend(tracker.options, options);
+            track(tracker.url, tracker.params, tracker.options);
         }
 
         function atiTrackingColombia(req) {
@@ -205,33 +241,28 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            var countryId = req.query.locId;
-            var atiConfig;
-            var analytic;
-            var options;
+            var params = {
+                clientId: req.rendrApp.session.get('clientId').substr(24),
+                custom: req.query.custom,
+                url: req.query.url
+            };
+            var config = {
+                platform: req.rendrApp.session.get('platform'),
+                locUrl: req.query.locUrl
+            };
+            var options = defaultRequestOptions(req, 'pageevent', 'ati');
+            var tracker = tracking.ati.pageevent.call({
+                app: req.rendrApp
+            }, params, config);
 
-            if (env !== 'production') {
-                countryId = 0;
-            }
-            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
-            if (atiConfig) {
-                options = defaultRequestOptions(req, 'pageevent', 'ati');
-                analytic = new Tracker('ati-event', {
-                    id: atiConfig.siteId,
-                    host: atiConfig.logServer
-                });
-                analytic.track({
-                    custom: req.query.custom,
-                    url: req.query.url,
-                    clientId: req.rendrApp.session.get('clientId').substr(24),
-                    dynamics: {
-                        x20: req.rendrApp.session.get('platform') || utils.defaults.platform
-                    }
-                }, options);
-            }
+            _.extend(tracker.options, options);
+            track(tracker.url, tracker.params, tracker.options);
         }
 
         function handler(req, res) {
+            var context = {
+                app: req.rendrApp
+            };
             var gif = new Buffer(image, 'base64');
             var location = req.rendrApp.session.get('siteLocation');
             var siteLocation = location || req.query.locUrl;

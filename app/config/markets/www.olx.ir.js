@@ -6,5 +6,10 @@ module.exports = {
             gallery: 36,
             related: 30
         }
+    },
+    tracking: {
+        trackers: {
+            google: false
+        }
     }
 };

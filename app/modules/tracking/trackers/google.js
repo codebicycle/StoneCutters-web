@@ -1,9 +1,9 @@
 'use strict';
 
 var _ = require('underscore');
-var configTracking = require('./config');
-var config = require('../../../shared/config');
-var utils = require('../../../shared/utils');
+var configTracking = require('../config');
+var config = require('../../../../shared/config');
+var utils = require('../../../../shared/utils');
 var environment = config.get(['environment', 'type'], 'development');
 var defaultTracker = utils.get(configTracking, ['google', 'trackers', 'default']);
 var SECOND = 1000;
@@ -174,6 +174,44 @@ function checkParams() {
     return true;
 }
 
+function check(page) {
+    var location = this.app.session.get('location');
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'google'], true);
+
+    if (!enabled) {
+        return false;
+    }
+    return !!utils.get(configTracking, ['google', 'pages', page]);
+}
+
+function generateParams(page, options) {
+    var googlePage = utils.get(configTracking, ['google', 'pages', page], '');
+    var params = {};
+
+    params.page = generatePage.call(this, googlePage, options);
+    params.keyword = options.keyword;
+    this.app.session.persist({
+        hitCount: Number(this.app.session.get('hitCount') || 0) + 1
+    }, {
+        maxAge: 30 * MINUTE
+    });
+    if (checkParams.call(this)) {
+        updateParams.call(this);
+    }
+    return params;
+}
+
+function getParams(page, options) {
+    var params = generateParams.call(this, page, options);
+    var platform = this.app.session.get('platform');
+    var siteLocation = this.app.session.get('siteLocation');
+
+    return _.extend(params, {
+        host: this.app.session.get('host'),
+        id: getId(siteLocation, platform)
+    });
+}
+
 function getUtmcc(app) {
     var utmcc = app.session.get('_gaUtmcc');
     var utmccOut = [];
@@ -201,39 +239,9 @@ function getUtmcc(app) {
     return utmccOut.join('');
 }
 
-function check(page) {
-    return !!utils.get(configTracking, ['google', 'pages', page]);
-}
-
-function generate(params, page, options) {
-    var googlePage = utils.get(configTracking, ['google', 'pages', page], '');
-
-    params.page = generatePage.call(this, googlePage, options);
-    params.keyword = options.keyword;
-    this.app.session.persist({
-        hitCount: Number(this.app.session.get('hitCount') || 0) + 1
-    }, {
-        maxAge: 30 * MINUTE
-    });
-    if (checkParams.call(this)) {
-        updateParams.call(this);
-    }
-}
-
-function getConfig() {
-    var platform = this.app.session.get('platform');
-    var siteLocation = this.app.session.get('siteLocation');
-
-    return {
-        host: this.app.session.get('host'),
-        id: getId(siteLocation, platform)
-    };
-}
-
 module.exports = {
     check: check,
     getId: getId,
-    getUtmcc: getUtmcc,
-    generate: generate,
-    getConfig: getConfig
+    getParams: getParams,
+    getUtmcc: getUtmcc
 };

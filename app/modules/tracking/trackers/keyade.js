@@ -1,8 +1,8 @@
 'use strict';
 
 var _ = require('underscore');
-var configTracking = require('./config');
-var utils = require('../../../shared/utils');
+var configTracking = require('../config');
+var utils = require('../../../../shared/utils');
 var keyades = utils.get(configTracking, ['keyade', 'countries'], []);
 
 var baseUrl = 'http://k.keyade.com/kaev/1/?kaPcId=98678';
@@ -23,11 +23,15 @@ var generators = {
 
 function check() {
     var location = this.app.session.get('location');
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'keyade'], true);
 
+    if (!enabled) {
+        return false;
+    }
     return _.contains(keyades, location.url);
 }
 
-function generate(page) {
+function pageview(page) {
     var generator = utils.get(generators, page);
 
     if (generator && _.isFunction(generator)) {
@@ -37,5 +41,5 @@ function generate(page) {
 
 module.exports = {
     check: check,
-    generate: generate
+    pageview: pageview
 };
