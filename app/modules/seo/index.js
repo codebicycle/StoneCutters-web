@@ -172,9 +172,6 @@ _.extend(SeoModule.prototype, {
     },
     isEnabled: function () {
         return this.config.enabled;
-    },
-    isReferences: function() {
-        return this.config.references;
     }
 });
 
