@@ -179,6 +179,6 @@ module.exports = function(nunjucks) {
         slugToUrl: helpers.common.slugToUrl,
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
-        romanDigits: helpers.numbers.toRoman
+        latinDigits: helpers.numbers.toLatin
     };
 };
