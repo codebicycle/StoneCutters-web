@@ -35,6 +35,7 @@ module.exports = function appUseConf(done) {
 
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.manifest());
+        rendrApp.use(middleware.robots());
         rendrApp.use(middleware.com());
         rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
