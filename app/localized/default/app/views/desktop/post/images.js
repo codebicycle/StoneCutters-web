@@ -41,7 +41,7 @@ module.exports = Base.extend({
 
         var $remove = $(event.currentTarget);
         var $container = $remove.parent().removeClass('loaded');
-        var $image = $container.find('.image').removeClass('fill').removeAttr('style');
+        var $image = $container.find('.image').removeClass('fill').removeAttr('style').addClass('icons icon-addpicture');
         var $input = this.$('#' + $container.data('input')).val('');
 
         delete this.selected[$input.attr('name')];
@@ -109,6 +109,7 @@ module.exports = Base.extend({
                 if (orientation) {
                     this.selected[$input.attr('name')].orientation = orientation;
                 }
+                $image.removeClass('icons icon-addpicture');
                 $image.addClass(cssClass).css({
                     'background-image': 'url(' + imageUrl + ')'
                 });
