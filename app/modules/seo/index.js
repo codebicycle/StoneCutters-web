@@ -167,11 +167,14 @@ _.extend(SeoModule.prototype, {
             return this.seoContent[key];
         }
     },
+    set: function (key,value) {
+        this.seoContent[key] = value;
+    },
     isEnabled: function () {
         return this.config.enabled;
     },
-    setExtendedTitle: function (title) {
-        this.seoContent.extendedTitle = title;
+    isReferences: function() {
+        return this.config.references;
     }
 });
 
