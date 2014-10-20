@@ -16,21 +16,21 @@
 {% for filter in filters %}
     {% if fiter.name != 'state' and filter.name != 'city'  %}
         {% if filter.type == 'SELECT' %}
-            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-top"></span></span>
-            <div class="filter check-box">
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
+            <div class="filter check-box {{ filter.name }}">
                 {% for value in filter.value %}
                     <label>
-                        <input type="checkbox" value="{{ value.id }}" data-filter="{{ filter.name }}" >
+                        <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}"  data-filter-type="{{ filter.type }}">
                         {{ value.value }} <span class="count">{{ value.count }}</span>
                     </label>
                     {% endfor %}
             </div>
         {% elif filter.type == 'RANGE' %}
-            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom"></span></span>
-            <div class="filter price">
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}"></span></span>
+            <div class="filter range {{ filter.name }}">
                 <input type="text" placeholder="Min." class="text-field" />
                 <input type="text" placeholder="Max." class="text-field" />
-                <button id="price-submit" class="icons icon-check button" type="submit"></button>
+                <button id="range-submit" class="icons icon-check button" type="submit"></button>
             </div>
         {% elif filter.type == 'BOOLEAN' %}
 
