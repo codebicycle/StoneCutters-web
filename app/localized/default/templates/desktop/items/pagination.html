@@ -1,16 +1,16 @@
 <div id="items-pagination">
     <div class="items-paginations-buttons">
         {% if  metadata.previous and metadata.next %}
-            <a href="{{ metadata.previous | linkig }}" role="button" class="pagination-button previous">Volver</a><a href="{{ metadata.next | linkig }}" role="button" class="pagination-button next">Siguiente página</a>
+            <a href="{{ metadata.previous | linkig }}"  rel="prev" role="button" class="pagination-button previous">Volver</a><a href="{{ metadata.next | linkig }}" rel="next" role="button" class="pagination-button next">Siguiente página</a>
         {% elif metadata.next %}
-            <a href="{{ metadata.next | linkig }}" role="button" class="pagination-button next">Siguiente página</a>
+            <a href="{{ metadata.next | linkig }}" rel="next" role="button" class="pagination-button next">Siguiente página</a>
         {% else %}
-            <a href="{{ metadata.previous | linkig }}" role="button" class="pagination-button previous">Volver</a>
+            <a href="{{ metadata.previous | linkig }}" rel="prev" role="button" class="pagination-button previous">Volver</a>
         {% endif %}
     </div>
 
     <ul class="items-paginations-numbers">
-        <li><a href="{{ (metadata.previous | linkig) if metadata.previous else '#' }}" class="icons pagination-arrow icon-arrow-left {{ "disable" if not metadata.previous }}"></a></li>
+        <li><a href="{{ (metadata.previous | linkig) if metadata.previous else '#' }}" rel="prev" class="icons pagination-arrow icon-arrow-left {{ "disable" if not metadata.previous }}"></a></li>
         <li><a href="" class="pagination-number current">1</a></li>
         <li><a href="" class="pagination-number">2</a></li>
         <li><a href="" class="pagination-number">3</a></li>
@@ -21,6 +21,6 @@
         <li><a href="" class="pagination-number">8</a></li>
         <li><a href="" class="pagination-number">9</a></li>
         <li><a href="" class="pagination-number">10</a></li>
-        <li><a href="{{ (metadata.next | linkig) if metadata.next else '#' }}" class="icons pagination-arrow icon-arrow-right {{ "disable" if not metadata.next }}"></a></li>
+        <li><a href="{{ (metadata.next | linkig) if metadata.next else '#' }}" rel="next" class="icons pagination-arrow icon-arrow-right {{ "disable" if not metadata.next }}"></a></li>
     </ul>
 </div>
