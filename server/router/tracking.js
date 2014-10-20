@@ -6,8 +6,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var Tracker = require('../modules/tracker');
     var config = require('../../shared/config');
     var utils = require('../../shared/utils');
-    var analytics = require('../../app/modules/analytics');
-    var configAnalytics = require('../../app/modules/analytics/config');
+    var tracking = require('../../app/modules/tracking');
+    var configTracking = require('../../app/modules/tracking/config');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
@@ -75,7 +75,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 clientId: req.rendrApp.session.get('clientId'),
                 userAgent: options.headers['User-Agent'],
                 hitCount: req.rendrApp.session.get('hitCount'),
-                visitor: analytics.google.getUtmcc(req.rendrApp)
+                visitor: tracking.google.getUtmcc(req.rendrApp)
             };
 
             if (language) {
@@ -96,7 +96,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (env !== 'production') {
                 countryId = 0;
             }
-            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
             if (atiConfig) {
                 options = defaultRequestOptions(req, 'pageview', 'ati');
                 analytic = new Tracker('ati', {
@@ -169,13 +169,16 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 return/* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl)*/;
             }
             graphiteTracking(req);
-            trackerId = analytics.google.getId(siteLocation);
+            trackerId = tracking.google.getId(siteLocation);
             if (trackerId) {
                 if (req.rendrApp.session.get('internet.org')) {
                     host = host.replace('olx', 'olx-internet-org');
                     page = '/internet.org' + page;
                 }
                 googleTracking(req, trackerId, host, page);
+            }
+            if (req.query.locUrl === 'www.olx.com.br' && platformUrl !== 'wap') {
+                return;
             }
             if (req.query.locUrl !== 'www.olx.com.co') {
                 atiTracking(req);
@@ -212,7 +215,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (env !== 'production') {
                 countryId = 0;
             }
-            atiConfig = utils.get(configAnalytics, ['ati', 'paths', countryId]);
+            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
             if (atiConfig) {
                 options = defaultRequestOptions(req, 'pageevent', 'ati');
                 analytic = new Tracker('ati-event', {
@@ -257,7 +260,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (bot) {
                 return statsd.increment([req.query.locNm, 'bot', bot, platform]);
             }
-            trackerId = analytics.google.getId(siteLocation);
+            trackerId = tracking.google.getId(siteLocation);
             if (trackerId) {
                 if (req.rendrApp.session.get('internet.org')) {
                     host = host.replace('olx', 'olx-internet-org');

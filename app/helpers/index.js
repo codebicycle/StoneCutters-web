@@ -10,6 +10,7 @@ module.exports = {
     dataAdapter: require('./dataAdapter'),
     hijri: require('./hijri'),
     numbers: require('./numbers'),
+    features: require('./features'),
     timeAgo: function(itemDate) {
         var current = new Date();
         var currentMonth = current.getMonth() + 1;

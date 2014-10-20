@@ -1,13 +1,13 @@
 'use strict';
 
 var _ = require('underscore');
-var configAnalytics = require('./config');
+var configTracking = require('./config');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 var env = config.get(['environment', 'type'], 'production');
 
-module.exports = function analyticsHelper() {
+module.exports = function trackingHelper() {
     var actionTypes = {
         edited: function (params, options) {
             if (options.itemEdited) {
@@ -127,11 +127,11 @@ module.exports = function analyticsHelper() {
     }
 
     function check(page) {
-        return !!utils.get(configAnalytics, ['ati', 'params', page]);
+        return !!utils.get(configTracking, ['ati', 'params', page]);
     }
 
     function generate(params, page, options) {
-        var ati = utils.get(configAnalytics, ['ati', 'params', page], {});
+        var ati = utils.get(configTracking, ['ati', 'params', page], {});
         var custom = _.clone(ati.names);
 
         prepareDefaultParams.call(this, custom);
@@ -147,16 +147,9 @@ module.exports = function analyticsHelper() {
     }
 
     function generateUrl(params) {
-        var location = this.app.session.get('location');
-        var countryId = location.id;
-        var config;
+        var config = getConfig.call(this);
         var url;
 
-        if (env !== 'production') {
-            countryId = 0;
-        }
-
-        config = utils.get(configAnalytics, ['ati', 'paths', countryId]);
         if (!config) {
             return;
         }
@@ -172,9 +165,26 @@ module.exports = function analyticsHelper() {
         return url;
     }
 
+    function getConfig() {
+        var location = this.app.session.get('location');
+        var country = location.id;
+        var config;
+
+        if (env !== 'production') {
+            country = 0;
+        }
+
+        config = utils.get(configTracking, ['ati', 'paths', country]);
+        return _.extend({}, config, {
+            host: location.url.replace('www', ''),
+            protocol: 'http'
+        });
+    }
+
     return {
         check: check,
         generate: generate,
-        generateUrl: generateUrl
+        generateUrl: generateUrl,
+        getConfig: getConfig
     };
 }();

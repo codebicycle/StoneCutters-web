@@ -16,7 +16,6 @@
             </li>
         {% endfor %}
     </ul>
-    {% set templateName = template + '/partials/analytics.html' %}
-    {% include templateName %}
+    {% include (template + '/partials/tracking.html') %}
 </section>
 {% view 'pages/interstitial' %}

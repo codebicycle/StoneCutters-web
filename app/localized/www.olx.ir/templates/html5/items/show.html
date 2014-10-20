@@ -215,8 +215,7 @@
         </section>
     {% endif %}
 
-    {% set templateName = template + '/partials/analytics.html' %}
-    {% include templateName %}
+    {% include (template + '/partials/tracking.html') %}
 </section>
 
 {% if item.images.length == 1 %}
