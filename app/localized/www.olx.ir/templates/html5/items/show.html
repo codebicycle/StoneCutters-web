@@ -49,7 +49,7 @@
 
     <section id="description">
         <span>{{ item.date | hijri }}</span>
-        {% if item.price.displayPrice %}<h2>&#x202A;<em dir="ltr">{{ item.price.preCurrency }}</em>&#x202C;{{ item.price.amount }}</h2>{% endif %}
+        {% if item.price.displayPrice %}<h2>&#x202A;<em dir="ltr">{{ item.price.preCurrency }}</em>&#x202C;{{ item.price.amount | persianDigits }}</h2>{% endif %}
         <h1>{{ item.title }}</h1>
         <p>{{ item.descriptionReplace }}</p>
         <div class="clear"></div>
