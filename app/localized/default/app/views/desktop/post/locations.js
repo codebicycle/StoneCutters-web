@@ -7,7 +7,8 @@ var _ = require('underscore');
 module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-locations-view',
-    className: 'posting-locations-view'
+    className: 'posting-locations-view',
+
 });
 
 module.exports.id = 'post/locations';

@@ -34,28 +34,30 @@
                     float: left;
                     height: 393px;
                     padding: 10px;
+                    position: relative;
                     width: 244px;
 
                     .content {
                         ul-reset();
-                    }
 
-                    li {
-                        height: 90px;
-                        margin-bottom: 1px;
-                    }
+                        li {
+                            height: 90px;
+                            margin-bottom: 1px;
 
-                    a {
-                        clear-fix();
-                        background: #fff;
-                        position: relative;
+                            a {
+                                background: #fff;
+                                clear-fix();
+                                position: relative;
+                            }
+                        }
                     }
 
                     .video-title {
                         display: block;
                         float: left;
-                        padding: 10px 0 0 10px;
-                        width: 114px;
+                        font-size: $xs;
+                        padding: 10px;
+                        width: 104px;
                     }
 
                     img {
@@ -63,10 +65,14 @@
                     }
 
                     .social-share {
+                        bottom: 10px;
+                        left: 0;
+                        position: absolute;
+                        text-align: center;
+                        width: 100%;
                         p {
                             color: #fff;
                             font-weight: bold;
-                            text-align: center;
                         }
 
                         ul {
@@ -75,10 +81,12 @@
 
                         li {
                             display: inline-block;
+
                         }
 
                         a {
-                            border-radius: 16px;
+                            background: $white;
+                            border-radius: 50%;
                             color: #ab0;
                             display: block;
                             font-size: 1.692rem;
