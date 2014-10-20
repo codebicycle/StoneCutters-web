@@ -9,13 +9,30 @@ module.exports = Base.extend({
     id: 'posting-view',
     className: 'posting-view',
     events: {
-        'click input.posting': 'onSubmit'
+        'focus .text-field': 'onFocus',
+        'blur .text-field': 'onBlur',
+        'click .posting': 'onSubmit'
     },
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
         return _.extend({}, data);
+    },
+    onBlur: function(event) {
+        event.preventDefault();
+        var $input = $(event.currentTarget);
+        var $container = $input.closest('.wrapper');
+        var $removeFocus = $container.removeClass('input-focus');
+
+        $removeFocus.blur();
+    },
+    onFocus: function(event) {
+        event.preventDefault();
+        var $input = $(event.currentTarget);
+        var $container = $input.closest('.wrapper');
+        var $addFocus = $container.addClass('input-focus');
+
+        $addFocus.focus();
     },
     onSubmit: function(event) {
         event.preventDefault();
