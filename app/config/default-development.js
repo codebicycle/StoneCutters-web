@@ -77,8 +77,8 @@ module.exports = {
     features: {
         html5: {
             postingFlow: {
-                worldwide: false,
-                countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
+                worldwide: true,
+                countries: []
             }
         }
     },
