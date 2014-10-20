@@ -2,6 +2,10 @@
 <script type="text/javascript"
 src="http://tdp01.tvdata.com.br/?advertiser=6&timeframe=300"></script>
  
+<script type="text/javascript">
+    var xtcustom = JSON.parse('{{ tracking.params.custom }}');
+</script>
+
 <!-- Chamada do script de integração da TVdata e AT Internet -->
 <script type="text/javascript" src="{{'/js/at_tvdata_sync.min.js' | static }}"></script>
 
@@ -13,7 +17,7 @@ src="http://tdp01.tvdata.com.br/?advertiser=6&timeframe=300"></script>
         xtnv: document,
         xtsd: '{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}',
         xtsite: '{{ tracking.params.ati.siteId }}',
-        xtcustom: JSON.parse('{{ tracking.params.custom }}'),
+        xtcustom: xtcustom,
         xtergo: '1'
     });
 </script>
