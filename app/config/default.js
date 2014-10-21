@@ -84,13 +84,13 @@ module.exports = {
             },
             interstitialByADX: {
                 worldwide: false,
-                countries: ['www.olx.com.py']
+                countries: ['www.olx.com.ar', , 'www.olx.cl']
             }
         },
         html4: {
             interstitialByADX: {
                 worldwide: false,
-                countries: ['www.olx.com.py']
+                countries: ['www.olx.com.ar', 'www.olx.cl']
             }
         }
     },
