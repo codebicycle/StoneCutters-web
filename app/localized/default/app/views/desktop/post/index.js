@@ -9,20 +9,16 @@ module.exports = Base.extend({
     id: 'posting-view',
     className: 'posting-view',
     events: {
-        'click input.posting': 'onSubmit'
+        'focus .text-field': 'active',
+        'blur .text-field': 'active'
     },
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
         return _.extend({}, data);
     },
-    onSubmit: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.$('#posting-contact-view').trigger('validate');
+    active: function(event) {
+        $(event.currentTarget).closest('.wrapper').toggleClass('input-focus');
     }
 });
 
