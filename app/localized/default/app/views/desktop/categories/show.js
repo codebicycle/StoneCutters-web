@@ -11,7 +11,8 @@ module.exports = Base.extend({
     tagName: 'main',
     events: {
         'click .check-box input': 'selectFilter',
-        'click .range-submit': 'rangeFilter',
+        'click .range-submit': 'rangeFilterInputs',
+        'click .link-range': 'rangeFilterLinks',
         'click .clean-filters': 'cleanFilters',
         'click .filter-title span.icons': 'toogleFilter'
     },
@@ -58,8 +59,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        console.log('CLEAN FILTROS');
-
+        var path = window.location.pathname.split('/-')[0];
+        this.app.router.redirectTo(path);
     },
     selectFilter: function(event) {
         event.preventDefault();
@@ -96,7 +97,7 @@ module.exports = Base.extend({
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
-    rangeFilter: function(event) {
+    rangeFilterInputs: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -111,6 +112,33 @@ module.exports = Base.extend({
         var path = catUrl + '/';
         var _filters = filters.parse(window.location.pathname);
 
+
+        newfilters = filters.add(_filters, {
+            name: filterName,
+            type: filterType,
+            value: {
+                from: from,
+                to: to
+            }
+        });
+        path += filters.prepareFilterUrl(newfilters);
+        this.app.router.redirectTo(path);
+
+    },
+    rangeFilterLinks: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target =  $(event.currentTarget);
+        var filterType = $target.data('filter-type');
+        var filterName = $target.data('filter-name');
+        var from = $target.data('filter-from');
+        var to = $target.data('filter-to');
+        var catUrl = window.location.pathname.split('/-')[0];
+        var newfilters;
+        var path = catUrl + '/';
+        var _filters = filters.parse(window.location.pathname);
 
         newfilters = filters.add(_filters, {
             name: filterName,

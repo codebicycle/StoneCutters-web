@@ -25,6 +25,15 @@
                     </label>
                     {% endfor %}
             </div>
+        {% elif filter.type == 'RANGE' and filter.name == 'kilometers' %}
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
+            <div class="filter check-box {{ filter.name }}">
+                <span class="link-range" data-filter-from="0" data-filter-to="30000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">Menos de 30.000 Kms</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="50000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">Menos de 50.000 Kms</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="80000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">Menos de 80.000 Kms</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="120000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">Menos de 120.000 Kms</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="150000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">Menos de 150.000 Kms</span>
+            </div>
         {% elif filter.type == 'RANGE' %}
             <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}"></span></span>
             <div class="filter range {{ filter.name }}">
@@ -38,4 +47,4 @@
         {% endif %}
     {% endif %}
 {% endfor %}
-<span class="clean-filters">Clean filters</span>
+<span class="clean-filters">[Limpiar]</span>
