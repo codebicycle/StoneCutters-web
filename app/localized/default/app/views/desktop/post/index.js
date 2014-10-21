@@ -18,9 +18,7 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     active: function(event) {
-        var $input = $(event.currentTarget);
-        var $container = $input.closest('.wrapper');
-        var $toggleFocus = $container.toggleClass('input-focus');
+        $(event.currentTarget).closest('.wrapper').toggleClass('input-focus');
     }
 });
 
