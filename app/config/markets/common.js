@@ -14,6 +14,8 @@ module.exports = {
         enabled: true,
         levelPath: true,
         popularSearches: true,
-        relatedListings: false
+        relatedListings: true,
+        extendedTitle: true,
+        references: true
     }
 };

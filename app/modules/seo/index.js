@@ -167,6 +167,9 @@ _.extend(SeoModule.prototype, {
             return this.seoContent[key];
         }
     },
+    set: function (key,value) {
+        this.seoContent[key] = value;
+    },
     isEnabled: function () {
         return this.config.enabled;
     }

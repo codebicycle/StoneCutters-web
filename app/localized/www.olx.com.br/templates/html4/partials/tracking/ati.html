@@ -1,0 +1,34 @@
+<!-- Chamada do script de TV da TVdata -->
+<script type="text/javascript"
+src="http://tdp01.tvdata.com.br/?advertiser=6&timeframe=300"></script>
+
+<script type="text/javascript">
+    var xtcustom = JSON.parse('{{ tracking.params.custom }}');
+</script>
+ 
+<!-- Chamada do script de integração da TVdata e AT Internet -->
+<script type="text/javascript" src="{{'/js/at_tvdata_sync.min.js' | static }}"></script>
+
+<script type="text/javascript">
+    var atiapi = (atiapi || []);
+
+    atiapi.push({
+        xtdmc: '{{ tracking.params.ati.host }}',
+        xtnv: document,
+        xtsd: '{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}',
+        xtsite: '{{ tracking.params.ati.siteId }}',
+        xtcustom: xtcustom,
+        xtergo: '1'
+    });
+
+    (function() {
+        var at   = document.createElement('script');
+        at.type  = 'text/javascript';
+        at.async = true;
+        at.src = "{{'/js/lib/xtcore.js' | static }}";
+        (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]||document.getElementsByTagName('script')[0].parentNode).insertBefore(at,null);
+    })();
+</script>
+<noscript>
+    <img width="1" height="1" alt="" src="{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}.ati-host.net/hit.xiti?s={{ tracking.params.ati.siteId }}&stc={{ tracking.params.custom | encode }}"/>
+</noscript>

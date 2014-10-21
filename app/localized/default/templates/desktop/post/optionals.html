@@ -1,1 +1,10 @@
-<h1>Optionals</h1>
+{% from macros import FieldText, FieldTextArea, FieldCombobox %}
+{% for field in fields %}
+    {% if field.fieldType == 'text' %}
+        {{ FieldText(field.label, field.name, field.mandatory) }}
+    {% elif field.fieldType == 'combobox' %}
+        {{ FieldCombobox(field.label, field.name, field.mandatory, field.values) }}
+    {% endif %}
+{% endfor %}
+
+

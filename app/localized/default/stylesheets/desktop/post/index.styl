@@ -16,6 +16,15 @@
 		font-size: $xs;
 		margin: 5px 0 0 0;
 	}
+	.error {
+		.advice,
+		.posting-label {
+			color: $red;
+		}
+		.text-field {
+			border-color: $red;
+		}
+	}
 	.posting-label {
 		float: left;
 		font-size: $s;
@@ -26,6 +35,11 @@
 	.text-field {
 		display: block;
 		width: 418px;
+		&.select-field {
+			background: $white;
+			margin-bottom: 10px;
+			width: 440px !important;
+		}
 	}
 	.title-module {
 		border-bottom: 1px solid $greyBorders;
@@ -35,7 +49,7 @@
 	}
 	.wrapper {
 		padding: 10px;
-		&:hover {
+		&.input-focus {
 			background: $yellowPosting;
 		}
 	}
@@ -46,4 +60,5 @@
 		float: left;
 		position: relative;
 	}
+
 }
