@@ -82,6 +82,17 @@ module.exports = {
                 worldwide: false,
                 countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
             }
+        },
+            interstitialByADX: {
+                worldwide: false,
+                countries: ['www.olx.com.py']
+            }
+        },
+        html4: {
+            interstitialByADX: {
+                worldwide: false,
+                countries: ['www.olx.com.py']
+            }
         }
     },
     seo: {
