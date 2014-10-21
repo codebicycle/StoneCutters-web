@@ -120,7 +120,6 @@ module.exports = function filtersHelper() {
 
     function prepareFilterUrl(filters) {
         var url = '';
-        console.log(filters);
         _.each(filters, function(filter, name) {
             url += '-' + name + '_' + filter.value.join('_');
         });
