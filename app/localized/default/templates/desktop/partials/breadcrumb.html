@@ -1,4 +1,4 @@
-<nav id="breadcrumb">
+<div id="breadcrumb" role="navigation">
     <div class="breadcrumb-navigation">
         {% for level in metadata.seo.levelPath.bottom.category  %}
             {% if loop.last %}
@@ -17,4 +17,4 @@
             <a href="{{ (metadata.previous | linkig) if metadata.previous else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | linkig) if metadata.next else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not metadata.next }}"></a>
         </div>
     {% endif %}
-</nav>
+</div>
