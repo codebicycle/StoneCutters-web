@@ -14,7 +14,7 @@
     {% if metadata.next or metadata.previous %}
         <div class="breadcrumb-pagination">
             <p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
-            <a href="{{ (metadata.previous | linkig) if metadata.previous else '#' }}" class="icons icon-arrow-left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | linkig) if metadata.next else '#' }}" class="icons icon-arrow-right {{ "disable" if not metadata.next }}"></a>
+            <a href="{{ (metadata.previous | linkig) if metadata.previous else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | linkig) if metadata.next else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not metadata.next }}"></a>
         </div>
     {% endif %}
 </nav>
