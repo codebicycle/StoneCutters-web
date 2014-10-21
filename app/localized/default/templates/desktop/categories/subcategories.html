@@ -1,5 +1,5 @@
 <span class="title">Seleccione categoria</span>
-<a href="{{ 'nf/all-results' | linkig }}" class="icons icon-arrow-left categories-link">Todas las categorias</a>
+<a href="{{ 'nf/all-results' | linkig }}" rel="nofollow"  class="icons icon-arrow-left categories-link">Todas las categorias</a>
 {% if not currentCategory.parentId %}
     <span class="category-selected arrow icons icon-cat-{{category.id}}">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
     <ul class="sub-categories">
