@@ -10,7 +10,8 @@ module.exports = Base.extend({
     className: 'categories-show-view',
     tagName: 'main',
     events: {
-        'click .check-box input': 'filterCheckbox',
+        'click .check-box input': 'selectFilter',
+        'click .range-submit': 'rangeFilter',
         'click .clean-filters': 'cleanFilters',
         'click .filter-title span.icons': 'toogleFilter'
     },
@@ -60,7 +61,7 @@ module.exports = Base.extend({
         console.log('CLEAN FILTROS');
 
     },
-    filterCheckbox: function(event) {
+    selectFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -94,6 +95,34 @@ module.exports = Base.extend({
 
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
+    },
+    rangeFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target =  $(event.currentTarget);
+        var filterType = $target.data('filter-type');
+        var filterName = $target.data('filter-name');
+        var from = $target.siblings('[data-filter-id=from]').val();
+        var to = $target.siblings('[data-filter-id=to]').val();
+        var catUrl = window.location.pathname.split('/-')[0];
+        var newfilters;
+        var path = catUrl + '/';
+        var _filters = filters.parse(window.location.pathname);
+
+
+        newfilters = filters.add(_filters, {
+            name: filterName,
+            type: filterType,
+            value: {
+                from: from,
+                to: to
+            }
+        });
+        path += filters.prepareFilterUrl(newfilters);
+        this.app.router.redirectTo(path);
+
     }
 });
 

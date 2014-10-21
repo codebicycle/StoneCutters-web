@@ -28,9 +28,10 @@
         {% elif filter.type == 'RANGE' %}
             <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}"></span></span>
             <div class="filter range {{ filter.name }}">
-                <input type="text" placeholder="Min." class="text-field" />
-                <input type="text" placeholder="Max." class="text-field" />
-                <button id="range-submit" class="icons icon-check button" type="submit"></button>
+                {% for input in filter.value  %}
+                    <input type="number" placeholder="{{ input.value }}" class="text-field" data-filter-id="{{ input.id }}"  />
+                {% endfor %}
+                <button class="icons icon-check button range-submit" type="submit" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" ></button>
             </div>
         {% elif filter.type == 'BOOLEAN' %}
 

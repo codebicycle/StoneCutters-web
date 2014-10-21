@@ -120,7 +120,12 @@ module.exports = function filtersHelper() {
 
     function prepareFilterUrl(filters) {
         var url = '';
+
         _.each(filters, function(filter, name) {
+            if (filter.type === 'RANGE') {
+                url += ['-', name, '_', filter.value.from, '_', filter.value.to].join('');
+                return;
+            }
             url += '-' + name + '_' + filter.value.join('_');
         });
         return url;
