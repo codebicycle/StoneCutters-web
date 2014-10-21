@@ -9,15 +9,15 @@ module.exports = Base.extend({
     id: 'posting-view',
     className: 'posting-view',
     events: {
-        'focus .text-field': 'active',
-        'blur .text-field': 'active'
+        'focus .text-field': 'fieldFocus',
+        'blur .text-field': 'fieldFocus'
     },
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         return _.extend({}, data);
     },
-    active: function(event) {
+    fieldFocus: function(event) {
         $(event.currentTarget).closest('.wrapper').toggleClass('input-focus');
     }
 });
