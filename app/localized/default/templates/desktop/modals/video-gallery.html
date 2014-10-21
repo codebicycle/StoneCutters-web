@@ -3,7 +3,7 @@
 {% block id %}video-modal{% endblock %}
 
 {% block title %}
-    <span class="modal-title">Vender es fácil </span><span class="modal-title">Publica gratis en OLX</span>
+    <span class="modal-title">{{ dictionary["misc.SellingIsEasy"] }} </span><span class="modal-title">{{ dictionary["misc.PostFreeOn"] | replace('<<BRAND>>','OLX') }} </span>
 {% endblock %}
 
 {% block content %}
@@ -28,7 +28,7 @@
             </li>
         </ul>
         <div class="social-share">
-            <p>Compartir este video:</p>
+            <p>{{ dictionary["defaulthtmlhead.ShareThisVideo"] }}:</p>
             <ul>
                 <li>
                     <a class="icons icon-facebook"></a>

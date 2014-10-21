@@ -1,6 +1,6 @@
 <ul class="list-without-styles">
-	<li><a href="#">Ingresar</a> o <a href="#">Registrarse</a></li><!--
-	--><li><a href="#">Mis Anuncios</a></li><!--
-	--><li><a href="#">Favoritos</a></li><!--
-	--><li><a href="#">Mensajes</a></li>
+	<li><a href="#">{{ dictionary["loginbox.Login"] }} </a> o <a href="#">{{ dictionary["postbox.RegisterNow"] }} </a></li><!--
+	--><li><a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["myolx.MyAds"] }}</a></li><!--
+	--><li><a href="{{ '/myolx/favoritelisting' | link }}">{{ dictionary["myolx.MyFavorites"] }}</a></li><!--
+	--><li><a href="#">{{ dictionary["myolx.Messages"] }} </a></li>
 </ul>

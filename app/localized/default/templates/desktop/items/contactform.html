@@ -11,7 +11,7 @@
         <fieldset class="comment">
             <label for="comment">
                 <span class="icons">
-                    <textarea id="comment" class="comment" name="comment" cols="30" rows="6" placeholder="Mensagem"></textarea>
+                    <textarea id="comment" class="comment" name="comment" cols="30" rows="6" placeholder="{{ dictionary["supportform.Message"] | replace(':','') }} "></textarea>
                 </span>
                 <span class="error hide comment"></span>
             </label>
@@ -19,7 +19,7 @@
         <fieldset class="name">
             <label for="name">
             <span class="icons">
-                <input type="text" name="name" id="name" class="name" value="" maxlength="200" placeholder="Nome">
+                <input type="text" name="name" id="name" class="name" value="" maxlength="200" placeholder="{{ dictionary["comments.CommentsFormName"] }} ">
             </span>
             <span class="error hide name"></span>
             </label>
@@ -27,28 +27,28 @@
         <fieldset  class="email">
             <label for="email">
             <span class="icons">
-                <input type="text" name="email" id="email" class="email" value="" maxlength="200" placeholder="E-mail">
+                <input type="text" name="email" id="email" class="email" value="" maxlength="200" placeholder="{{ dictionary["buyerinfo.E-mail"] }} ">
             </span>
             <span class="error hide email"></span>
             </label>
         </fieldset>
         <fieldset>
             <label for="phone">
-                <input type="text" name="phone" id="phone" value="" maxlength="15" placeholder="Telefone ( Opcional )">
+                <input type="text" name="phone" id="phone" value="" maxlength="15" placeholder="{{ dictionary["item.YourPhoneNumberOptionalZA"] }} ">
             </label>
         </fieldset>
         <img class="spinner hide" src="{{ '/images/desktop/spinner-bgYellow.gif' | static }}" alt="">
         <fieldset class="submit">
             <label for="submit">
-                <input type="submit" value="Enviar e-mail" id="submit" class="olx-ui-button orange" data-qa="reply-send-button" >
+                <input type="submit" value="{{ dictionary["misc.SendEmail"] }} " id="submit" class="olx-ui-button orange" data-qa="reply-send-button" >
             </label>
         </fieldset>
         <p class="replySuccses icons hide" >
-            E-mail enviado com sucesso!
-            <span>Enviar outro e-mail</span>
+            {{ dictionary["item.YourMessageHasBeenSent"] }}
+            <span>{{ dictionary["replymessage.SendAnotherMessage"] }} </span>
         </p>
     </form>
     <div class="disclaimer">
-        <p>Enviando um e-mail você aceita nossos <a href="" target="_blank">Termos</a></p>
+        <p>Al hacer clic en Enviar un email Ud. acepta nuestras <a href="{{ '/term' | link }}" target="_blank">Condiciones de Uso.</a></p>
     </div>
 </section>
