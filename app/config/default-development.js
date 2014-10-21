@@ -83,6 +83,16 @@ module.exports = {
             listingFilters: {
                 worldwide: false,
                 countries: []
+            },
+            interstitialByADX: {
+                worldwide: false,
+                countries: ['www.olx.com.py']
+            }
+        },
+        html4: {
+            interstitialByADX: {
+                worldwide: false,
+                countries: ['www.olx.com.py']
             }
         }
     },
