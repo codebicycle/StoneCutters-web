@@ -2,49 +2,9 @@
 
 var _ = require('underscore');
 var config = require('../../shared/config');
+var filters = require('../modules/filters');
 
 module.exports = (function() {
-
-    function findFilters(filters) {
-        var match = filters.match(/-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g);
-
-        return(match ? match : []);
-    }
-
-    function parseValueFilter(value, filter) {
-        if (!~value.indexOf('_')) {
-            filter.type = _.contains(['true', 'false'], value) ? 'BOOLEAN' : 'SELECT';
-            return value;
-        }
-        value = value.split('_');
-        filter.type = 'RANGE';
-        return {
-            from: value[0],
-            to: value[1]
-        };
-    }
-
-    function parseFilter(filter) {
-        var keyValue = filter.replace(/-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g, '$1#$2');
-
-        keyValue = keyValue.split('#');
-        filter = {
-            name: keyValue[0]
-        };
-        filter.value = parseValueFilter(keyValue[1], filter);
-        return filter;
-    }
-
-    function prepareFilters(params) {
-        var filters = {};
-        var listFilters = findFilters(params.filters);
-
-        _.each(listFilters, function parseFilters(filter, i) {
-            filter = parseFilter(filter);
-            filters[ filter.name ] = filter;
-        });
-        return filters;
-    }
 
     function prepareURLFilters(params) {
         var url;
@@ -69,8 +29,8 @@ module.exports = (function() {
             url.push('_');
             switch (filter.type) {
                 case 'SELECT':
-                    url.push(filter.value);
-                    params['f.' + name] = filter.value;
+                    url.push(filter.value.join('_'));
+                    params['f.' + name] = filter.value.join('OR');
                 break;
                 case 'BOOLEAN':
                     url.push(filter.value);
@@ -129,7 +89,7 @@ module.exports = (function() {
             params.searchTerm = params.search;
         }
         if (params.filters) {
-            params.filters = prepareFilters(params);
+            params.filters = filters.parse(params.filters);
             params.urlFilters = prepareURLFilters(params);
         }
     }
