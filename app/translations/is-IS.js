@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Undirflokkur',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'B\xE6ta \xED upp\xE1hald',
+    'itemgeneraldetails.BackResults': 'Til baka \xED leitarni\xF0urst\xF6\xF0ur',
     'itemgeneraldetails.City': 'Borg',
     'itemgeneraldetails.DatePosted': 'Dagsetning skr\xE1ningar',
     'itemgeneraldetails.Description': 'L\xFDsing',

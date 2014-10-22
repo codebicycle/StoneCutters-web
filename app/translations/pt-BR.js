@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Subcategoria',
     'posting_optionallist.Kms': 'Km',
     'itemgeneraldetails.addFavorites': 'Adicionar aos Favoritos',
+    'itemgeneraldetails.BackResults': 'Voltar para os Resultados',
     'itemgeneraldetails.City': 'Cidade',
     'itemgeneraldetails.DatePosted': 'Data de publica\xE7\xE3o',
     'itemgeneraldetails.Description': 'Descri\xE7\xE3o',

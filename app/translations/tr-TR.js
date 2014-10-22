@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Alt Kategori',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Favorilere Ekle',
+    'itemgeneraldetails.BackResults': 'Sonu\xE7lara D\xF6n',
     'itemgeneraldetails.City': '\u0130l',
     'itemgeneraldetails.DatePosted': '\u0130lan Tarihi',
     'itemgeneraldetails.Description': 'A\xE7\u0131klama',

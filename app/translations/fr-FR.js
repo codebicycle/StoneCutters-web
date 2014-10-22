@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Sous-cat\xE9gorie',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Ajouter \xE0 vos Favoris',
+    'itemgeneraldetails.BackResults': 'Retour aux R\xE9sultats',
     'itemgeneraldetails.City': 'Ville',
     'itemgeneraldetails.DatePosted': 'Publi\xE9e le',
     'itemgeneraldetails.Description': 'Description',

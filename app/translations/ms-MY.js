@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Subkategori',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Tambah ke kegemaran',
+    'itemgeneraldetails.BackResults': 'Kembali ke Keputusan',
     'itemgeneraldetails.City': 'Bandar ',
     'itemgeneraldetails.DatePosted': 'Tarikh Disiarkan',
     'itemgeneraldetails.Description': 'Keterangan',

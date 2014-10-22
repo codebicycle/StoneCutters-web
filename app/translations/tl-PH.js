@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Subcategory',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Ilagay sa mga paborito',
+    'itemgeneraldetails.BackResults': 'Balik sa mga Resulta',
     'itemgeneraldetails.City': 'lungsod',
     'itemgeneraldetails.DatePosted': 'Petsa kung Kailan Pinost',
     'itemgeneraldetails.Description': 'Deskripsiyon',
