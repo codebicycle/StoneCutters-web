@@ -91,8 +91,7 @@
             <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
         </div>
     {% endif %}
-
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

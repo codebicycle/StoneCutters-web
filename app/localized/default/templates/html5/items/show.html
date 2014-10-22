@@ -223,9 +223,6 @@
             <div class="clear"></div>
         </section>
     {% endif %}
-
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </section>
 
 {% if item.images.length == 1 %}
@@ -282,3 +279,5 @@
         <div class="msgCont-container"></div>
     </div>
 </div>
+
+{% view 'partials/tracking' %}

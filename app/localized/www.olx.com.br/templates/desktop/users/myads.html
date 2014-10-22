@@ -35,9 +35,11 @@
             {% endfor %}
             <div class="clear"></div>
         </ul>
-        {% else %}
-            <div class="emtyList">
-                {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}
-            </div>
-        {% endif %}
+    {% else %}
+        <div class="emtyList">
+            {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}
+        </div>
+    {% endif %}
 </section>
+
+{% view 'partials/tracking' %}

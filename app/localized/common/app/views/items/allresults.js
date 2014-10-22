@@ -2,8 +2,6 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var querystring = require('querystring');
-var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
 
 module.exports = Base.extend({
@@ -19,7 +17,7 @@ module.exports = Base.extend({
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     }
-    
+
 });
 
 module.exports.id = 'items/allresults';

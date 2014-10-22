@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Subkategorie',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Voeg by gunstelinge',
+    'itemgeneraldetails.BackResults': 'Terug na Resultate',
     'itemgeneraldetails.City': 'Stad',
     'itemgeneraldetails.DatePosted': 'Datum Gepos',
     'itemgeneraldetails.Description': 'Beskrywing',

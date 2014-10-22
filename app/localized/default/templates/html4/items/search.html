@@ -45,8 +45,7 @@
             <div id="itemPaginationCaption">&#160;</div>
         {% endif %}
     {% endif %}
-
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

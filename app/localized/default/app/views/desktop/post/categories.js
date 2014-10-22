@@ -13,9 +13,9 @@ module.exports = Base.extend({
     events: {
         'click .child-categories-list a': 'onSubCategoryClick'
     },
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+
         return _.extend({}, data, {
             categories: this.parentView.options.categories.toJSON()
         });
@@ -25,7 +25,9 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var id = $(event.currentTarget).data('id');
+        var subcategory = $(event.currentTarget);
+        var subcategoryId = subcategory.data('id');
+        var categoryId = subcategory.parents('.subcategories').siblings('.category').data('id');
 
         var fetch = function(done) {
             $('body > .loading').show();
@@ -35,9 +37,8 @@ module.exports = Base.extend({
                     params: {
                         intent: 'post',
                         location: this.app.session.get('siteLocation'),
-                        categoryId: id,
+                        categoryId: subcategoryId,
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                        //spike: true
                     }
                 }
             }, {
@@ -46,6 +47,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var error = function(err) {
+            $('body > .loading').hide();
             console.log(err); // TODO: HANDLE ERRORS
         }.bind(this);
 
@@ -99,12 +101,12 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res) {
-            var fields = res.fields.get('fields');
-
-            if (fields) {
-                $('#posting-optionals-view').trigger('update', [fields.categoryAttributes]);
-                $('#posting-contact-view').trigger('update', [fields.contactInformation]);
-            }
+            $('body > .loading').hide();
+            this.parentView.$el.trigger('subcategorySubmit', {
+                parentId: categoryId,
+                id: subcategoryId,
+                fields: res.fields.get('fields')
+            });
         }.bind(this);
 
         asynquence().or(error)

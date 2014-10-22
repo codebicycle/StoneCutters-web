@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Subkategorie',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'P\u0159idat k obl\xEDben\xFDm',
+    'itemgeneraldetails.BackResults': 'Zp\u011Bt na v\xFDsledky',
     'itemgeneraldetails.City': 'M\u011Bsto',
     'itemgeneraldetails.DatePosted': 'Datum odesl\xE1n\xED',
     'itemgeneraldetails.Description': 'Popis',
