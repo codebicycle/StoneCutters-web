@@ -1,10 +1,8 @@
 {% from macros import FieldText, FieldTextArea, FieldCombobox %}
 {% for field in fields %}
     {% if field.fieldType == 'text' %}
-        {{ FieldText(field.label, field.name, field.mandatory) }}
+        {{ FieldText(field.label, field.name, field.mandatory, '', form) }}
     {% elif field.fieldType == 'combobox' %}
-        {{ FieldCombobox(field.label, field.name, field.mandatory, field.values) }}
+        {{ FieldCombobox(field.label, field.name, field.mandatory, field.values, form) }}
     {% endif %}
 {% endfor %}
-
-

@@ -209,7 +209,7 @@ module.exports = Base.extend({
                 }
                 done(response, body);
             }
-            
+
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
