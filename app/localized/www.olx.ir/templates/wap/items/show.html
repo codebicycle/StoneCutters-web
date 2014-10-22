@@ -17,8 +17,7 @@
             </tr>
             <tr style="display: none;">
                 <td>
-                    {% set templateName = template + '/partials/tracking.html' %}
-                    {% include templateName %}
+                    {% include (template + '/partials/tracking.html') %}
                 </td>
             </tr>
         </table>

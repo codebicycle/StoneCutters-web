@@ -49,9 +49,12 @@ section#itemListing ul.gallery-list li a .title {
 section#itemListing ul.gallery-list li a .title h2 {
     height: auto;
 }
+
+
+
 section#itemListing #itemPagination {
     width: 100%;
-    height: 32px;
+    height: 33px;
     margin: 20px auto 30px;
     font-size: 15px;
     text-align: center;
@@ -62,34 +65,37 @@ section#itemListing #itemPagination .arrow {
     position: relative;
     display: inline-block;
 }
-section#itemListing #itemPagination .arrow.leftA {
+section#itemListing #itemPagination .arrow.rightA {
     background: url(imageUrl/images/html4/leftA.png) no-repeat;
 }
-section#itemListing #itemPagination .arrow.leftD {
+section#itemListing #itemPagination .arrow.rightD {
     background: url(imageUrl/images/html4/leftD.png) no-repeat;
 }
-section#itemListing #itemPagination .arrow.rightA {
+section#itemListing #itemPagination .arrow.leftA {
     background: url(imageUrl/images/html4/rightA.png) no-repeat;
 }
-section#itemListing #itemPagination .arrow.rightD {
+section#itemListing #itemPagination .arrow.leftD {
     background: url(imageUrl/images/html4/rightD.png) no-repeat;
 }
+
 section#itemListing #itemPagination .center {
     height: 33px;
     display: inline-block;
-    padding: 0;
+    padding: 8px 0;
     text-align: center;
+    line-height: 17px;
+    vertical-align: top;
 }
+
 section#itemListing #itemPagination .center a, section#itemListing #itemPagination .center strong {
-    float: left;
-    padding: 0 6px;
-    margin: 7px 0 0;
-    display: inline;
+    padding: 0 8px;
+    display: inline-block;
     vertical-align: top;
     color: #333333;
+    border-left: solid thin #CCC;
 }
 section#itemListing #itemPagination .center a.last, section#itemListing #itemPagination .center strong.last {
-    border-right: 0 solid #000000;
+    border-left-width: 0;
 }
 
 section#itemListing #itemPagination a span {
@@ -98,12 +104,15 @@ section#itemListing #itemPagination a span {
     color: #aaaaaa;
     font-size: 13px;
 }
-section#itemListing #itemPagination a span:first-child {
+section#itemListing #itemPagination a:first-child span {
     left: 0;
 }
-section#itemListing #itemPagination a span:last-child {
+section#itemListing #itemPagination a:last-child span {
     right: 0;
 }
+
+
+
 
 @media only screen and (min-width : 768px) {
     section#itemListing ul.gallery-list li a {
