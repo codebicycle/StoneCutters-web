@@ -17,5 +17,14 @@ module.exports = {
         relatedListings: true,
         extendedTitle: true,
         references: true
+    },
+    tracking: {
+        enabled: true,
+        trackers: {
+            server: true,
+            ati: true,
+            analytics: true,
+            hydra: true
+        }
     }
 };
