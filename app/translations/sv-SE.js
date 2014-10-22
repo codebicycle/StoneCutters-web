@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategorier',
     'popularsearchesbody.PopularCities': 'Popul\xE4ra st\xE4der',
     'popularsearchesbody.PopularOn': 'Popul\xE4r p\xE5 <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Ta bort fr\xE5n favoriter',
     'itemheader.AddedFavorites': 'Lagd till i Favoriter',
     'itemheader.RemovedFavorites': 'Raderad fr\xE5n Favoriter',

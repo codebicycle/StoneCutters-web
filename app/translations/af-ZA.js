@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategorie\xEB ',
     'popularsearchesbody.PopularCities': 'Gewilde stede',
     'popularsearchesbody.PopularOn': 'Gewild op <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Verwyder van gunstelinge',
     'itemheader.AddedFavorites': 'By Gunstelinge gevoeg',
     'itemheader.RemovedFavorites': 'Van Gunstelinge verwyder',

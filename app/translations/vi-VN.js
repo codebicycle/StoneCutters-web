@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'H\u1EA1ng m\u1EE5c',
     'popularsearchesbody.PopularCities': 'Nh\u1EEFng th\xE0nh ph\u1ED1 \u0111\u01B0\u1EE3c nhi\u1EC1u ng\u01B0\u1EDDi \u01B0a th\xEDch',
     'popularsearchesbody.PopularOn': 'Ph\u1ED5 bi\u1EBFn tr\xEAn <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'X\xF3a kh\u1ECFi danh s\xE1ch \u01B0a th\xEDch',
     'itemheader.AddedFavorites': 'Th\xEAm v\xE0o m\u1EE5c y\xEAu th\xEDch',
     'itemheader.RemovedFavorites': 'X\xF3a kh\u1ECFi m\u1EE5c y\xEAu th\xEDch',

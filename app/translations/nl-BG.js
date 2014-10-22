@@ -147,6 +147,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Rubrieken',
     'popularsearchesbody.PopularCities': 'Populaire steden',
     'popularsearchesbody.PopularOn': 'Populair op <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Uit favorieten verwijderen',
     'itemheader.AddedFavorites': 'Toegevoegd aan Favorieten',
     'itemheader.RemovedFavorites': 'Verwijderd uit Favorieten',

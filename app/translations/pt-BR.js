@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Categorias ',
     'popularsearchesbody.PopularCities': 'Cidades populares',
     'popularsearchesbody.PopularOn': 'Popular na <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Baixe gr\xE1tis',
     'mobilepromo.RemoveFromFavorites': 'Remover de favoritos',
     'itemheader.AddedFavorites': 'Inclu\xEDdo nos favoritos',
     'itemheader.RemovedFavorites': 'Removido dos favoritos',

@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Categorii ',
     'popularsearchesbody.PopularCities': 'Ora\u015Fe bine cunoscute',
     'popularsearchesbody.PopularOn': 'Bine cunoscute pe <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Eliminare din preferin\u0163e',
     'itemheader.AddedFavorites': 'Adaugat(\u0103)',
     'itemheader.RemovedFavorites': '\u015Eters de la Favori\u0163i',

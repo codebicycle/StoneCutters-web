@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategorie',
     'popularsearchesbody.PopularCities': 'Obl\xEDben\xE1 m\u011Bsta',
     'popularsearchesbody.PopularOn': 'Obl\xEDben\xFD v <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Odstranit z obl\xEDben\xFDch',
     'itemheader.AddedFavorites': 'P\u0159id\xE1no k obl\xEDben\xFDm',
     'itemheader.RemovedFavorites': 'Odstran\u011Bno z obl\xEDben\xFDch',

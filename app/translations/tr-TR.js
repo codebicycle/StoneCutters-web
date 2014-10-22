@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategoriler  ',
     'popularsearchesbody.PopularCities': 'Pop\xFCler \u015Fehirler',
     'popularsearchesbody.PopularOn': '<<OLX_DOMAIN>>\'de pop\xFCler',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'S\u0131k kullan\u0131lanlardan \xE7\u0131kar',
     'itemheader.AddedFavorites': 'Favorilere Eklendi',
     'itemheader.RemovedFavorites': 'Favorilerden Silindi',

@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Makundi',
     'popularsearchesbody.PopularCities': 'Miji maarufu',
     'popularsearchesbody.PopularOn': 'Maarufu kwenye <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Ondoa kutoka kwa vibwedo',
     'itemheader.AddedFavorites': 'Imeongezwa kwa Vibwedo',
     'itemheader.RemovedFavorites': 'Imeondolewa kutoka kwa Vibwedo',

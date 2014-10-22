@@ -2,47 +2,7 @@ footer {
     margin-top: 30px;
     padding-bottom: 40px;
 
-    .select {
-        box($white, $greyBorders, 5px, 0);
-        ul-reset();
-        margin-bottom: 10px;
-        float: left;
-
-        li {
-            border-right: 1px solid $greyBorders;
-            padding-right: 6px;
-            float: left;
-
-            &:last-child {
-               border-right: none;
-            }
-
-            &::after {
-                transform(rotate(-90deg));
-            }
-
-            a {
-                color: $greyStrong;
-                height: 32px;
-                line-height: 32px;
-                padding-left: 10px;
-
-                &:hover {
-                    text-decoration: none;
-                }
-            }
-
-            .icon-arrow::before {
-                color: $greyStrong;
-                display: inline-block;
-                font-size: $s;
-                margin-left: 20px;
-                transform(rotate(-90deg));
-            }
-        }
-    }
-
-    .container{
+    .container {
         border-top: 1px solid $greyBorders;
         clear-fix();
         padding: 10px 0 0 0;
@@ -88,5 +48,42 @@ footer {
 
     .footer-options {
         clear-fix();
+    }
+
+    .select {
+        ul-reset();
+        float: left;
+        margin: 13px 0 0 0;
+
+        li {
+            border-right: 1px solid $greyBorders;
+            display: inline-block;
+            padding-right: 5px;
+            vertical-align: middle;
+
+            &:last-child {
+               border-right: none;
+            }
+
+            a {
+                color: $black;
+                height: 32px;
+                line-height: 32px;
+                padding-left: 10px;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .icon-arrow::before {
+                color: $greyStrong;
+                display: inline-block;
+                font-size: remify(10px);
+                margin: 0 5px;
+                transform(rotate(-90deg));
+                vertical-align: middle;
+            }
+        }
     }
 }

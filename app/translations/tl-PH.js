@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Mga kategorya',
     'popularsearchesbody.PopularCities': 'Mga sikat na lungsod',
     'popularsearchesbody.PopularOn': 'Sikat sa <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Tanggalin mula sa mga paborito',
     'itemheader.AddedFavorites': 'Idinagdag sa mga Paborito',
     'itemheader.RemovedFavorites': 'Tanggalin sa Mga Paborito',

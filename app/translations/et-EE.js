@@ -162,6 +162,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategooriad ',
     'popularsearchesbody.PopularCities': 'Menukas j\xE4rgmistes linnades',
     'popularsearchesbody.PopularOn': 'Menukas domeenis <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Eemalda lemmikutest',
     'itemheader.AddedFavorites': 'Lisatud lemmikutesse',
     'itemheader.RemovedFavorites': 'Eemaldatud lemmikutest',
