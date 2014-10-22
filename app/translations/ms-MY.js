@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategori ',
     'popularsearchesbody.PopularCities': 'Bandar popular',
     'popularsearchesbody.PopularOn': 'Popular di <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Keluarkan dari kegemaran',
     'itemheader.AddedFavorites': 'Ditambah ke Kegemaran',
     'itemheader.RemovedFavorites': 'Dibuang dari Kegemaran',

@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategori',
     'popularsearchesbody.PopularCities': 'Vil kote l alam\xF2d',
     'popularsearchesbody.PopularOn': 'Li alam\xF2d sou <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Retire nan favori mwen yo',
     'itemheader.AddedFavorites': 'Anons sa te ajoute sou Favori ou yo',
     'itemheader.RemovedFavorites': 'Anons sa te retire sou Favori ou yo',

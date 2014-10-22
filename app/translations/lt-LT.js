@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategorijos',
     'popularsearchesbody.PopularCities': 'Populiar\u016Bs miestai',
     'popularsearchesbody.PopularOn': 'populiarus, \u017Einomas(kuo) <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Pa\u0161alinti i\u0161 m\u0117gstam\u0173',
     'itemheader.AddedFavorites': 'Prid\u0117ta prie m\u0117gstamiausi\u0173j\u0173',
     'itemheader.RemovedFavorites': 'Pa\u0161alinta i\u0161 m\u0117gstamiausi\u0173j\u0173',

@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategorijas',
     'popularsearchesbody.PopularCities': 'Popul\u0101ras pils\u0113tas',
     'popularsearchesbody.PopularOn': 'Popul\u0101rs attiec\u012Bb\u0101 uz <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Iz\u0146emt no izlases',
     'itemheader.AddedFavorites': 'Pievienot favor\u012Btiem',
     'itemheader.RemovedFavorites': 'Dz\u0113st no favor\u012Btiem',

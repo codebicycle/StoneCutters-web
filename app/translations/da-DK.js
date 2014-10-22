@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategorier  ',
     'popularsearchesbody.PopularCities': 'Popul\xE6re byer',
     'popularsearchesbody.PopularOn': 'Popul\xE6rt p\xE5 <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Fjern fra favoritter',
     'itemheader.AddedFavorites': 'Tilf\xF8jet favoritter',
     'itemheader.RemovedFavorites': 'Fjernet fra favoritter',

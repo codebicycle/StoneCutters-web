@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Kategoriat',
     'popularsearchesbody.PopularCities': 'suosituissa paikkakunnissa',
     'popularsearchesbody.PopularOn': 'suosittuja <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Poista suosikeista',
     'itemheader.AddedFavorites': 'Lis\xE4tty suosikkeihin',
     'itemheader.RemovedFavorites': 'Poistettu suosikeista',

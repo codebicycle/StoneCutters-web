@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'Flokkar',
     'popularsearchesbody.PopularCities': 'Vins\xE6lar borgir',
     'popularsearchesbody.PopularOn': 'Vins\xE6lt \xE1 <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Frj\xE1l\xE6ga fr\xE1 Upp\xE1haldi',
     'itemheader.AddedFavorites': 'B\xE6tt \xED upp\xE1hald',
     'itemheader.RemovedFavorites': 'Fjarl\xE6gt \xFAr upp\xE1haldi',

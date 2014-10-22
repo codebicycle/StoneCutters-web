@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': 'W poni\u017Cszych kategoriach ',
     'popularsearchesbody.PopularCities': 'Popularne miasta',
     'popularsearchesbody.PopularOn': 'Popularne w kategorii <<OLX_DOMAIN>>',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': 'Usu\u0144 z ulubionych',
     'itemheader.AddedFavorites': 'Dodaj do ulubionych',
     'itemheader.RemovedFavorites': 'Usu\u0144 z ulubionych',
