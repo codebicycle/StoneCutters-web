@@ -47,32 +47,41 @@ footer {
     }
 
     .container{
-        border-top: 1px solid #ddd;
+        border-top: 1px solid $greyBorders;
+        clear-fix();
+        padding: 10px 0 0 0;
 
         p {
-            color: #999;
-            display: block;
+            color: $greyStrong;
             float: left;
             font-size: $xs;
             margin: 0;
-            padding-top: 10px;
         }
 
         .social {
-            ul-reset();
             clear-fix();
+            float: right;
+            ul-reset();
 
             li {
-                float: right;
-                padding-top: 2px;
-            }
+                display: inline-block;
+                margin: 0 0 0 10px;
+                vertical-align: middle;
+                text-align: center;
+                a {
+                    background: $greyStrong
+                    border-radius(50%);
+                    color: $greyPageBg;
+                    display: inline-block;
+                    font-size: .8rem;
+                    height: 25px;
+                    line-height: 24px;
+                    vertical-align: middle;
+                    width: 25px;
 
-            a {
-                color: #999;
-                font-size: 2.154rem;
-
-                &:hover {
-                    color: #333;
+                    &:hover {
+                        background: $black;
+                    }
                 }
             }
         }
