@@ -1,11 +1,11 @@
 <div id="items-pagination">
     <div class="items-paginations-buttons">
         {% if  metadata.previous and metadata.next %}
-            <a href="{{ metadata.previous | linkig }}"  rel="prev" role="button" class="pagination-button previous">Volver</a><a href="{{ metadata.next | linkig }}" rel="next" role="button" class="pagination-button next">Siguiente página</a>
+            <a href="{{ metadata.previous | linkig }}"  rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }} </a><a href="{{ metadata.next | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
         {% elif metadata.next %}
-            <a href="{{ metadata.next | linkig }}" rel="next" role="button" class="pagination-button next">Siguiente página</a>
+            <a href="{{ metadata.next | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
         {% else %}
-            <a href="{{ metadata.previous | linkig }}" rel="prev" role="button" class="pagination-button previous">Volver</a>
+            <a href="{{ metadata.previous | linkig }}" rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }}</a>
         {% endif %}
     </div>
 

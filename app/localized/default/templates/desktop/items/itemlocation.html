@@ -1,12 +1,12 @@
 <div id="item-location" class="item-location">
     <div class="box">
-        <h2 class="icons icon-pin">Localización</h2>
-        <p>	
+        <h2 class="icons icon-pin">{{ dictionary["optionals.opt-138-323-translation-location"] }} </h2>
+        <p>
         {% if item.location.cityName or item.location.stateName %}
             {{ item.location.cityName }}, {{ item.location.stateName }}
         {% endif %}
         <span>{{ item.location.name }}</span></p>
-        <a href="" class="icons icon-zoom">Ver mapa más grande</a>
+        <a href="" class="icons icon-zoom">{{ dictionary["item.ViewBiggerMap"] }} </a>
     </div>
     <div class="map"></div>
 </div>
