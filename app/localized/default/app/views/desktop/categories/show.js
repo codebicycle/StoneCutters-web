@@ -39,9 +39,6 @@ module.exports = Base.extend({
             }
         });
     },
-    postRender: function() {
-
-    },
     processItem: function(item) {
         item.date.since = helpers.timeAgo(item.date);
     },
