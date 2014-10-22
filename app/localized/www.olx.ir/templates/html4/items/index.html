@@ -25,7 +25,7 @@
                     </a>
                     <div class="itemInfo">
                         <p class="itemPrice">{% if item.price.displayPrice %}&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount | persianDigits }}{% endif %}</p>
-                        <span>{{ item.date | hijri }}</span>
+                        <span>{{ item.date | hijri | persianDigits }}</span>
                         <div class="centerCont">
                             <a href="{{ item | slugToUrl | link }}">
                                 <h2>{{ item.title }}</h2>
