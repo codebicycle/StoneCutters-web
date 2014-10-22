@@ -1,0 +1,41 @@
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td style="padding: .25em .5em; border-top: solid thin #808080;">
+                <strong style="color: #0075BD;">{{ dictionary["defaulthtmlhead.My Listings"] }}</strong>
+                {% if params.deleted %}
+                    <small style="display: block; color: #0C0;">{{ dictionary["showactivelistings.SuccessRemove"] }}</small>
+                {% endif %}
+                {% if params.err %}
+                    {% for err in params.err %}
+                        <small style="display: block; color: red;">{{err}}</small>
+                    {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table width="100%" border="0" align="left" cellspacing="0" cellpadding="0">
+    <tbody>
+        {% for item in myAds %}
+            <tr>
+                <td style="border-top: solid thin #808080; text-align: left;">
+                    <a style="display: block; padding: .25em .5em 0;" tabindex="1" href="{{ item | slugToUrl | link }}">
+                        <small style="display: block;">
+                            {% if item.thumbnail %}
+                                *
+                            {% endif %}
+                            {{item.title}} - {% if item.price.displayPrice %}&#x202A;{{ item.price.postCurrency }}&#x202C;{{ item.price.amount | persianDigits }}{% endif %}
+                        </small>
+                    </a>
+                    <small style="display: block; padding: .25em .5em;">
+                        <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">{{ dictionary["myolx.EditListing"] }}</a>
+                        &#160;|&#160;
+                        <a href="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" style="display: inline-block; background-color: transparent; border: 0; color: #06F; cursor: pointer;">{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                    </small>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

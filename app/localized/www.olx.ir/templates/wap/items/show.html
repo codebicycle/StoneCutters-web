@@ -17,7 +17,7 @@
             </tr>
             <tr style="display: none;">
                 <td>
-                    {% set templateName = template + '/partials/analytics.html' %}
+                    {% set templateName = template + '/partials/tracking.html' %}
                     {% include templateName %}
                 </td>
             </tr>
@@ -95,7 +95,7 @@
                                         <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.Price"] }}:</small>
                                     </th>
                                     <td align="right" style="border-top: solid 1px #CCC;">
-                                        <small style="display: block;">&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount }}</small>
+                                        <small style="display: block;">&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount | persianDigits }}</small>
                                     </td>
                                 </tr>
                             {% endif %}
@@ -169,7 +169,7 @@
                                     <small style="display: block; text-transform: capitalize;">{{ dictionary["itemgeneraldetails.DatePosted"] }}:</small>
                                 </th>
                                 <td align="right" style="border-top: solid 1px #CCC;">
-                                    <small style="display: block;">{{ item.date | hijri }}</small>
+                                    <small style="display: block;">{{ item.date | hijri | persianDigits }}</small>
                                 </td>
                             </tr>
                         </table>

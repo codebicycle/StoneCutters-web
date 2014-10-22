@@ -57,7 +57,7 @@
                                         {% else %}
                                             <img border="0" alt="" src="{{ '/images/common/gif1x1.gif' | static }}" width="12" height="9" >
                                         {% endif %}
-                                        {{ item.title }}{% if item.price.displayPrice %} - <span>&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount }}</span>{% endif %}
+                                        {{ item.title }}{% if item.price.displayPrice %} - <span>&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount | persianDigits }}</span>{% endif %}
                                     </small>
                                 </a>
                             </td>
@@ -65,7 +65,7 @@
                     {% endfor %}
                     <tr style="display: none;">
                         <td>
-                            {% set templateName = template + '/partials/analytics.html' %}
+                            {% set templateName = template + '/partials/tracking.html' %}
                             {% include templateName %}
                         </td>
                     </tr>

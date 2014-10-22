@@ -25,9 +25,9 @@ module.exports = {
         desktop: []
     },
     icons: {
-        wap: [],
-        html4: [],
-        html5: []
+        wap: ['www.olx.ir'],
+        html4: ['www.olx.ir'],
+        html5: ['www.olx.ir']
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],

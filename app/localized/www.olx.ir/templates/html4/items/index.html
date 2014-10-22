@@ -24,8 +24,8 @@
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
                     </a>
                     <div class="itemInfo">
-                        <p class="itemPrice">{% if item.price.displayPrice %}&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount }}{% endif %}</p>
-                        <span>{{ item.date | hijri }}</span>
+                        <p class="itemPrice">{% if item.price.displayPrice %}&#x202A;<span dir="ltr">{{ item.price.preCurrency }}</span>&#x202C;{{ item.price.amount | persianDigits }}{% endif %}</p>
+                        <span>{{ item.date | hijri | persianDigits }}</span>
                         <div class="centerCont">
                             <a href="{{ item | slugToUrl | link }}">
                                 <h2>{{ item.title }}</h2>
@@ -48,7 +48,7 @@
         {% endif %}
     {% endif %}
 
-    {% set templateName = template + '/partials/analytics.html' %}
+    {% set templateName = template + '/partials/tracking.html' %}
     {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

@@ -17,7 +17,6 @@
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, item.category.name, ['<ul>
-        <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
         <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '">', favText, '</a></li>
     </ul>'] | join) }}
     {% if not item.images %}
@@ -48,8 +47,8 @@
     {% endif %}
 
     <section id="description">
-        <span>{{ item.date | hijri }}</span>
-        {% if item.price.displayPrice %}<h2>&#x202A;<em dir="ltr">{{ item.price.preCurrency }}</em>&#x202C;{{ item.price.amount }}</h2>{% endif %}
+        <span>{{ item.date | hijri | persianDigits }}</span>
+        {% if item.price.displayPrice %}<h2>&#x202A;<em dir="ltr">{{ item.price.preCurrency }}</em>&#x202C;{{ item.price.amount | persianDigits }}</h2>{% endif %}
         <h1>{{ item.title }}</h1>
         <p>{{ item.descriptionReplace }}</p>
         <div class="clear"></div>
