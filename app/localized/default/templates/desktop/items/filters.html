@@ -1,0 +1,35 @@
+{% for filter in filters %}
+    {% if fiter.name != 'state' and filter.name != 'city'  %}
+        {% if filter.type == 'SELECT' %}
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
+            <div class="filter check-box {{ filter.name }}">
+                {% for value in filter.value %}
+                    <label>
+                        <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}"  data-filter-type="{{ filter.type }}">
+                        {{ value.value }} <span class="count">{{ value.count }}</span>
+                    </label>
+                    {% endfor %}
+            </div>
+        {% elif filter.type == 'RANGE' and filter.name == 'kilometers' %}
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
+            <div class="filter check-box {{ filter.name }}">
+                <span class="link-range" data-filter-from="0" data-filter-to="30000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 30.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="50000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 50.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="80000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 80.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="120000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 120.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
+                <span class="link-range" data-filter-from="0" data-filter-to="150000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 150.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
+            </div>
+        {% elif filter.type == 'RANGE' %}
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}"></span></span>
+            <div class="filter range {{ filter.name }}">
+                {% for input in filter.value  %}
+                    <input type="number" placeholder="{{ input.value }}" class="text-field" data-filter-id="{{ input.id }}"  />
+                {% endfor %}
+                <button class="icons icon-check button range-submit" type="submit" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" ></button>
+            </div>
+        {% elif filter.type == 'BOOLEAN' %}
+
+        {% endif %}
+    {% endif %}
+{% endfor %}
+<span class="clean-filters">[{{ dictionary["item.Clear"] }} ]</span>

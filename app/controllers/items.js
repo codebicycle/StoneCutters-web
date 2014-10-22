@@ -208,6 +208,7 @@ function show(params, callback) {
         var success = function(_categories, _item, _relatedItems) {
             var item = _item.toJSON();
             var subcategory = _categories.search(_item.get('category').id);
+            var view = 'items/show';
             var category;
             var parentId;
             var url;
@@ -255,7 +256,15 @@ function show(params, callback) {
                     subcategory: (subcategory ? subcategory.id : undefined)
                 }
             });
-            callback(null, (item.purged) ? 'items/unavailable' : 'items/show', {
+
+            if (item.purged) {
+                view = 'items/unavailable';
+            }
+            else if (item.status.deprecated) {
+                view = 'items/expired';
+            }
+
+            callback(null, view, {
                 item: item,
                 user: user,
                 seo: seo,
@@ -266,7 +275,8 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
-                tracking: tracking.generateURL.call(this)
+                tracking: tracking.generateURL.call(this),
+                categories: _categories.toJSON()
             });
         }.bind(this);
 

@@ -1,5 +1,5 @@
 <div class="help-navigation">
-    <h3>Necesita ayuda</h3>
+    <h3>{{ dictionary["contactseller_form.BarAdviceB"] }}</h3>
     <ul>
         <li class="selected">
             <a class="help-toggle-content" data-help-content="new-olx" href="#"><span class="icons icon-user"></span>{{ dictionary["help.NewToBrand"] }}</a>
@@ -181,8 +181,7 @@
                 <h4 class="icons icon-arrowright">{{ dictionary["help.HowCanICreateAPartnershipWithBrand"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        Si tienes varios avisos y quieres publicarlos en OLX, puedes hacerlo en los formatos XML o CSV. Los publicaremos gratuitamente y estos avisos se actualizarán regularmente. Puedes encontrar información detallada en <a href="http://www.olx.com.bo/feeds/specifications.html">http://www.olx.com.bo/feeds/specifications.html</a>
-                        Póngase en contacto con el <a href="contacts.php?fv[contact]=ContactLegalIssues">Departamento de asociación</a> donde le informarán sobre cómo configurar su listado de avisos (feed).
+                        {{ dictionary["partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed"] }}
                     </p>
                 </div>
             </div>
@@ -190,121 +189,46 @@
         </div>
     </div>
     <div id="more-suggestions" class="help-content-display" style="display: none;">
-        <h3>Más Sugerencias</h3>
+        <h3>{{ dictionary["help.MoreGuidelines"] }}</h3>
         <div class="faqs">
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Qué cosas hacen los vendedores potencialmente fraudulentos?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo"] }}</h4>
                 <div class="question-content" style="display:none;">
-                    <ul>
-                        <li>Pedirán que envíes dinero a sus cuentas internacionales. El vendedor puede pedir que envíes dinero al exterior y aceptar sólo Western Union o algún otro servicio de envío o transferencia de dinero (e-Gold).</li>
-                        <li>Darán una dirección distinta a la indicada en la página con los detalles del producto.</li>
-                        <li>Recomendarán servicios de pagos o de envío de dinero o de depósitos en garantía desconocidos.</li>
-                        <li>No serán honestos sobre la autenticidad de sus productos en venta.</li>
-                        <li>No proveerán un número de teléfono verificable o rastreable.</li>
-                        <li>Tratarán de convercerta para que no uses servicios de pago que ofrezcan protección (servicios conocidos y aceptables como PayPal, Escrow.com, etc.).</li>
-                        <li>En general no contestarán tus llamados telefónicos ni tus emails en varias ocasiones.</li>
-                        <li>Continuamente te darán excusas de por qué no recibiste el artículo.</li>
-                        <li>Venderán copias sospechas de software, música, videos, etc.</li>
-                        <li>Se negarán a darte un número de seguimiento de envíos válido.</li>
-                        <li>Venderán productos caros y populares a precios sospechosamente bajos.</li>
-                    </ul>
+                    {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo_content"] }}
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Qué puedo hacer si sospecho de un vendedor fraudulento?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        Si sospechas que un aviso del sitio es falso o fraudulento, por favor contáctanos a través de <a href="contacts.php?fv[contact]=ContactLegalIssues">Asuntos Legales</a>
+                        {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller_content"] | replace('<<CONTACTLINK>>','<a href="">') | replace('<</CONTACTLINK>>','</a>') }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Cómo puedo evitar un fraude?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.HowCanIAvoidAFraud"] }}</h4>
                 <div class="question-content" style="display:none;">
-                        <p>
-                            En OLX, creemos que la compra de artículos publicados en tu zona - donde puedes ver y evaluar el artículo, encontrarte con el vendedor y pagar al momento de la entrega - es la manera más segura y recomendable de operar. Con respecto a la compra de artículos nacionales o internacionales, recomendamos firmemente tomar, como mínimo, las siguientes medidas para protegerse de los vendedores fraudulentos:
-                        </p>
-                        <ul>
-                            <li>Utiliza siempre el sistema de OLX
-                                <br>Para comunicarte con los vendedores de OLX siempre utiliza el botón  "Responder a este aviso" en la página que brinda detalles del aviso. Se enviará un email al vendedor con tu dirección de email y todas las operaciones tendrán lugar directamente entre tú y el vendedor a través de nuestro sistema. De esta manera, si se nos notifica de una actividad fraudulenta relacionada con el vendedor, tendremos tus datos para contactarte y brindarte mayor información. Debido a que nuestro mercado es siempre gratuito, debemos desalentar el mantener comunicaciones fuera de línea.
-                            </li>
-                            <li>Conoce e infórmate sobre lo que estás comprando.
-                                <br>Antes de hacerle una oferta al vendedor, pregúntale lo necesario para saber más acerca de lo que te está vendiendo. Puedes enviarle al vendedor comentarios y mensajes anteriores a la venta, luego hacer una oferta una vez que te sientas seguro de comprar el artículo. También te recomendamos comparar los precios minoristas y los precios de otros vendedores del sitio. Recuerda, si el precio es demasiado bueno para ser cierto, posiblemente sea un fraude. Debes ser especialmente cuidadoso al comprar artículos de alta tecnología, sobre todo cuando los precios son mucho más bajos que los precios de distribuidores o los precios del gremio. Algunos artículos de alta tecnología como monitores planos, computadoras, notebooks, netbooks y teléfonos celulares son los artículos más comunes de los estafadores. En muchos casos, es adecuado solicitar el número de serie antes de enviar el dinero.
-                            </li>
-                            <li>Solicítale a los vendedores su dirección y número de teléfono
-                                <br>Una vez que hayas negociado el precio y hayas decidido comprar el artículo,  solicítale al vendedor su número telefónico y llámalo a distintos horarios para asegurarte de que reciben tus llamados. Los vendedores honestos deberían poder brindarte esta información. Contar con un vendedor que tiene un número telefónico registrado, hará que ese vendedor resulte más fácil de encontrar y, por ende, habrá menos posibilidades de que sea fraudulento.
-                            </li>
-                            <li> Utiliza un método de pago con protección contra fraudes.
-                                <br>Recomendamos fuertemente NO HACER envíos de dinero a través de transferencias bancarias.  Muchos vendedores fraudulentos aceptan únicamente dinero a través de transferencias, Money Gram o transferencias similares debido a que los compradores no pueden recuperar su dinero y no se puede rastrear a los vendedores. Si estás en Estados Unidos y tienes que pagar mediante orden de pago, te sugerimos usar una orden de pago postal. Las órdenes de pago postal pueden investigarse, mientras que otras órdenes de pago no.
-                                <br>Hay muchas formas de pago que le ofrecen protección a los compradores. Las tarjetas de crédito, los servicios de custodia tales como Escrow.com, el sistema de Pago contra Entrega y otros servicios de pago online ofrecen distintos grados de protección.
-                            </li>
-                            <li> Hazle seguimiento a tu envío.
-                                <br>La mayoría de las empresas de envíos y transportes permiten a las personas seguir sus envíos mientras están en tránsito. Recomendamos que le pidas el número de identificación y seguimiento del envío al vendedor para que puedas controlar tu artículo mientras esté en tránsito. Asegúrate de conocer la empresa de transportes que usa el vendedor y ten en cuenta que hay empresas de transporte ficticias en la Web que simulan hacer el seguimiento de un envío falso o virtual.
-                            </li>
-                        </ul>
-                        <p>
-                            Si así y todo sospechas que el vendedor es fraudulento o tiene comportamientos fraudulentos, por favor contacta inmediatamente a OLX a través de <a href="contacts.php?fv[contact]=ContactLegalIssues">Asuntos Legales</a>.
-                        </p>
+                        {{ dictionary["help.HowCanIAvoidAFraud_content"] | replace('<<CONTACTLINK>>','<a href="">') | replace('<</CONTACTLINK>>','</a>') }}
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Qué cosas hacen los compradores potencialmente fraudulentos?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo"] }}</h4>
                 <div class="question-content" style="display:none;">
-                   <ul>
-                        <li>- Pedirán que gires dinero a sus cuentas.</li>
-                        <li>- El comprador ofrecerá cheques de caja de grandes valores (pero falsos) a cambio de tu producto a la venta. El valor del cheque de caja generalmente excederá bastante el valor de tu artículo y el comprador pedirá que le gires el saldo excedente a través de algún servicio de envío de dinero. Los bancos normalmente pagarán esos cheques falsos pero TE HARÁN RESPONSABLE A TI cuando falle el clearing de los mismos. La estafa normalmente involucra una tercera parte (empresas fantasmas de envíos, socios de negocios que le deben dinero al comprador, representantes del comprador, etc). Recomendamos fuertemente que no realices giros ni transferencias de dinero.</li>
-                        <li>- Recomendarán servicios de pagos o envío de dinero desconocidos.</li>
-                        <li>- Pedirán grandes cantidades de tu artículo para ser enviadas al exterior.</li>
-                        <li>- Ofrecerán pagar la mitad del valor de tu artículo antes del envío del mismo y la otra mitad al recibirlo.</li>
-                        <li>- No proveerán un número de teléfono verificable o rastreable.</li>
-                        <li>- Pagarán con tarjetas de crédito internacionales o con cheques de caja.</li>
-                   </ul>
+                   {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo_content"] }}
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Qué puedo hacer si sospecho de un comprador fraudulento?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        Si sospechas que un comprador está actuando fraudulentamente, por favor contáctanos a través de <a href="contacts.php?fv[contact]=ContactLegalIssues">Asuntos Legales</a>
+                        {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer_content"] | replace('<<CONTACTLINK>>','<a href="">') | replace('<</CONTACTLINK>>','</a>') }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Qué tipo de avisos están prohibidos/no permitidos en OLX?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.WhatKindOfPostingsAreForbiddenNotAllowedOnBrand"] }}</h4>
                 <div class="question-content" style="display:none;">
-                    <p>
-                        OLX prohíbe listar o vender cualquier producto que sea ilegal, en virtud de cualquier ley, estatuto, ordenanza o reglamento local, estatal, provincial, nacional o internacional. Los siguientes tipos de avisos están prohibidos en el sitio OLX: Avisos de cualquier franquicia, esquema piramidal, "membresías de clubes", comercialización multi-nivel, distribuciones o representaciones de ventas, arreglos u otras oportunidades de negocios que requieran adelanto de pagos o pagos periódicos, contratación de otros miembros, subdistribuidores o subagentes, o pago de comisiones únicamente (excepto para avisos que indiquen claramente que el trabajo disponible paga comisiones únicamente y describen claramente el producto o servicio que la persona que busca empleo debería comercializar u ofrecer, en cuyo caso dichos avisos serían permitidos).
-Otros elementos que están específicamente prohibidos incluyen:
-                    </p>
-                    <ul>
-                        <li>- Bebidas Alcohólicas</li>
-                        <li>- Sangre, fluídos corporales y  partes del cuerpo</li>
-                        <li>- Herramientas para robos o hurtos</li>
-                        <li>- Dinero, monedas o estampillas falsificadas</li>
-                        <li>- Productos falsificados</li>
-                        <li>- Equipo electrónico de vigilancia</li>
-                        <li>- Bienes embargados</li>
-                        <li>- Uniformes, identificaciones, licencias gubernamentales, de tránsito o de la policía</li>
-                        <li>- Drogas ilegales y elementos o accesorios para drogas.</li>
-                        <li>- Todo tipo de productos y servicios ilegales.</li>
-                        <li>- Materiales peligrosos.</li>
-                        <li>- Fuegos artificiales, dispositivos de destrucción y explosivos.</li>
-                        <li>- Documentos de identidad, información financiera personal, información personal (de cualquier tipo, incluyendo listas de emails, amigos, etc).</li>
-                        <li>- Avisos, productos o artículos que faciliten, inciten o alienten actividades ilegales.</li>
-                        <li>- Billetes de lotería, tragamonedas, tickets de sorteos.</li>
-                        <li>- Material obsceno y todo tipo de pornografía.</li>
-                        <li>- Todo tipo de material ofensivo.</li>
-                        <li>- Pesticidas</li>
-                        <li>- Fotos o imágenes que contengan desnudez.</li>
-                        <li>- Uniformes, placas o identificaciones de la Policía o de otras fuerzas de seguridad.</li>
-                        <li>- Prescripciones de drogas y elementos para drogarse.</li>
-                        <li>- Artículos o productos retirados del mercado</li>
-                        <li>- Acciones y otros valores.</li>
-                        <li>- Objetos robados</li>
-                        <li>- Tabaco y productos derivados del tabaco.</li>
-                        <li>- Cosméticos usados.</li>
-                        <li>- Armas y elementos relacionados a las armas (como armas de fuego, partes y accesorios de armas de fuego, revistas sobre armas, municiones, escopetas de perdigones y de gas comprimido, gases lacrimógenos,  pistolas de descargas eléctricas, navajas, armas de artes marciales, etc).</li>
-                    </ul>
+                    {{ dictionary["help.WhatKindOfPostingsAreForbiddenNotAllowedOnBrand_content"] }}
                 </div>
             </div>
         </div>
