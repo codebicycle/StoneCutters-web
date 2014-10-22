@@ -22,7 +22,7 @@ footer {
             }
 
             a {
-                color: #666;
+                color: $greyStrong;
                 height: 32px;
                 line-height: 32px;
                 padding-left: 10px;
@@ -32,16 +32,12 @@ footer {
                 }
             }
 
-            span {
-                color: #666;
+            .icon-arrow::before {
+                color: $greyStrong;
                 display: inline-block;
                 font-size: $s;
                 margin-left: 20px;
-            }
-
-            .icon-sketchyarrowleft:before,
-            .icon-sketchyarrowright:before {
-                transform(rotate(90deg));
+                transform(rotate(-90deg));
             }
         }
     }
@@ -64,8 +60,11 @@ footer {
             ul-reset();
 
             li {
+                &first-child {
+                    margin: 0;
+                }
                 display: inline-block;
-                margin: 0 0 0 10px;
+                margin: 0 0 0 5px;
                 vertical-align: middle;
                 text-align: center;
                 a {
