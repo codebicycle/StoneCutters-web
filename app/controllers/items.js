@@ -216,8 +216,8 @@ function show(params, callback) {
             var description;
 
             seo.setContent(item.metadata.seo);
-            if(typeof item.metadata.itemPage.h1 !== 'undefined') {
-                seo.setExtendedTitle(item.metadata.itemPage.h1);
+            if(item.metadata.itemPage.h1) {
+                seo.set('extendedTitle',item.metadata.itemPage.h1);
             }
             if (!subcategory) {
                 _item.set('purged', true);

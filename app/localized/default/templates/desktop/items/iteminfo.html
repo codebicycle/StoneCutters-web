@@ -1,4 +1,4 @@
 <ul class="item-info">
-    <li class="icons icon-time">Publicado <time>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (',' + item.date.since.hour) if item.date.since.hour }}</time></li><!--
+    <li class="icons icon-time">{{ dictionary["listingpageitemslisting.Posted"] }}  <time>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (',' + item.date.since.hour) if item.date.since.hour }}</time></li><!--
     --><li class="icons icon-pin">{{ item.location.cityName }}, {{ item.location.stateName }}</li>
 </ul>
