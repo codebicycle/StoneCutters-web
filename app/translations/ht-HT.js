@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Dezy\xE8m Kategori',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Ajoute sou favori yo',
+    'itemgeneraldetails.BackResults': 'Retounen nan Rezilta',
     'itemgeneraldetails.City': 'Vil',
     'itemgeneraldetails.DatePosted': 'Dat li te pibliye',
     'itemgeneraldetails.Description': 'Deskripsyon',

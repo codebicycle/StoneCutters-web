@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Alamkategooria',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Lisa lemmikutesse',
+    'itemgeneraldetails.BackResults': 'Tagasi tulemuste juurde',
     'itemgeneraldetails.City': 'Linn',
     'itemgeneraldetails.DatePosted': 'Postituse kuup\xE4ev',
     'itemgeneraldetails.Description': 'Kirjeldus',

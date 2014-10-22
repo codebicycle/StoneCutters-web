@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Papildoma kategorija',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Prid\u0117ti prie m\u0117gstamiausi\u0173',
+    'itemgeneraldetails.BackResults': 'Atgal \u012F Rezultatus',
     'itemgeneraldetails.City': 'Miestas',
     'itemgeneraldetails.DatePosted': 'Paskelbimo data',
     'itemgeneraldetails.Description': 'Apra\u0161ymas',

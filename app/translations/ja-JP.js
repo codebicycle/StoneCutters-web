@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': '\u30B5\u30D6\u30AB\u30C6\u30B4\u30EA\u30FC',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': '\u304A\u6C17\u306B\u5165\u308A\u306B\u8FFD\u52A0\u3059\u308B',
+    'itemgeneraldetails.BackResults': '\u7D50\u679C\u753B\u9762\u306B\u623B\u308B',
     'itemgeneraldetails.City': '\u5E02',
     'itemgeneraldetails.DatePosted': '\u63B2\u8F09\u65E5',
     'itemgeneraldetails.Description': '\u8A73\u7D30',
