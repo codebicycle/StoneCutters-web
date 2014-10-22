@@ -11,8 +11,8 @@ module.exports = Base.extend({
     className: 'posting-view',
     form: {},
     events: {
-        'focus .text-field': 'active',
-        'blur .text-field': 'active',
+        'focus .text-field': 'fieldFocus',
+        'blur .text-field': 'fieldFocus',
         'subcategorySubmit': 'onSubcategorySubmit',
         'fieldSubmit': 'onFieldSubmit',
         'imagesLoadEnd': 'onImagesLoadEnd',
@@ -27,7 +27,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data);
     },
-    active: function(event) {
+    fieldFocus: function(event) {
         $(event.currentTarget).closest('.wrapper').toggleClass('input-focus');
     },
     onSubcategorySubmit: function(event, subcategory) {

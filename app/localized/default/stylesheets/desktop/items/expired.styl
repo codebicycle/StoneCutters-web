@@ -1,0 +1,99 @@
+.items_expired_view {
+    clear-fix();
+    color: $black;
+    font-size: $s;
+
+    h3, p {
+        margin: 0;
+    }
+
+    .related-category {
+        box($lightBlue, $lightBlueBorder, 3px, 20px, solid, 1px);
+        clear-fix();
+        margin-bottom: 20px;
+
+        &::before {
+            background: $blue;
+            border-radius(40px)
+            color: $white;
+            font-size: remify(40px);
+            height: 40px;
+            margin-right: 10px;
+            padding: 15px;
+            width: 40px;
+        }
+
+        &::before, h3, p {
+            float: left;
+        }
+
+        h3 {
+            font-size: $l;
+            margin-bottom: 5px;
+            padding-top: 5px;
+            vertical-align: top;
+        }
+
+        p {
+            width: 855px;
+        }
+
+    }
+
+    .expired-item {
+        box($white, #ccc, 3px, 20px, solid, 1px);
+        overflow: hidden;
+
+        .item-image {
+            box-shadow(0 0 2px 2px rgba(0,0,0,0.1));
+            float: left;
+            height: 90px;
+            margin-right: 20px;
+            position: relative;
+            text-align: center;
+            width: 120px;
+            img {
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                max-height: 100%;
+                max-width: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+
+        h3 {
+            font-size: $l;
+            font-weight: normal;
+            margin-bottom: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .description {
+            line-height: 1;
+            overflow: hidden;
+            height: 55px;
+        }
+
+        .label {
+            background: #ccc;
+            border-radius();
+            color: $white;
+            display: inline-block;
+            font-size: $s;
+            font-weight: bold;
+            margin-right: 10px;
+            padding: 3px 10px;
+        }
+    }
+
+    .title {
+        font-size: $m;
+        margin: 30px 0 20px;
+    }
+
+}
