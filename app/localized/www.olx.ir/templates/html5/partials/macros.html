@@ -59,18 +59,16 @@
         <input type="hidden" id="select-{{name}}" name="{{name}}" value="{{ values[0].key }}">
     {% else %}
         <label>{{label}}</label>
-        {% if name == "experience_from" or name == "experience_to" %}
-            <select id="select-{{name}}" name="{{name}}">
-                {% for value in values %}
-                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{ value.value | persianDigits }}</option>
-                {% endfor %}
-            </select>
-        {% else %}
-            <select id="select-{{name}}" name="{{name}}">
-                {% for value in values %}
-                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
-                {% endfor %}
-            </select>
-        {% endif %}
+        <select id="select-{{name}}" name="{{name}}">
+            {% for value in values %}
+                <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>
+                    {% if name == "experience_from" or name == "experience_to" %}
+                        {{ value.value | persianDigits }}
+                    {% else %}
+                        {{ value.value }}
+                    {% endif %}
+                </option>
+            {% endfor %}
+        </select>
     {% endif %}
 {% endmacro %}
