@@ -107,7 +107,7 @@ function categoriesOrFlow(params, callback) {
         }.bind(this);
 
         var postingController = function(categories, postingSession, topCities, states) {
-            tracking.setPage('post#form');
+            tracking.setPage('post#index');
             callback(null, 'post/index', {
                 categories: categories,
                 postingSession: postingSession.get('postingSession'),
