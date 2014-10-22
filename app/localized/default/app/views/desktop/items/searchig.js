@@ -6,8 +6,8 @@ var filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    id: 'items-search-view',
-    className: 'items-search-view',
+    id: 'items-searchig-view',
+    className: 'items-searchig-view',
     tagName: 'main',
     events: {
         'click .sub-categories li a': 'categoryFilter',
@@ -31,15 +31,15 @@ module.exports = Base.extend({
             items: data.items,
             filters: list,
             nav: {
-                link: data.url + '/',
-                listAct: 'active',
+                link: data.url.replace('/-ig',''),
+                galeryAct: 'active',
             }
         });
     },
     processItem: function(item) {
         item.date.since = helpers.timeAgo(item.date);
     },
-    toogleFilter: function(event) {
+        toogleFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -65,18 +65,16 @@ module.exports = Base.extend({
         var filterSlug = $target.data('filter-slug');
         var filterName;
         var filterId;
-        var path;
+        var path = window.location.pathname.replace('/-ig','');
 
         if (!filterSlug) {
             filterId = $target.data('filter-id');
-            filterSlug  = ['des', (typeof filterId !== 'undefined' ? '-cat-' : '-iid-'), filterId].join('');
+            filterSlug  = ['des', (typeof filterId !== 'undefined' ? '-cat-' : '-iid-'), filterId].join('') + '-ig';
         }
-
-        path = window.location.pathname.replace('search', filterSlug);
-
+        path = path.replace('search', filterSlug);
         this.app.router.redirectTo(path);
 
     }
 });
 
-module.exports.id = 'items/search';
+module.exports.id = 'items/searchig';

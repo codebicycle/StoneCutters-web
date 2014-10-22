@@ -6,8 +6,8 @@ var filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    id: 'items-search-view',
-    className: 'items-search-view',
+    id: 'items-searchfilterig-view',
+    className: 'items-searchfilter-view',
     tagName: 'main',
     events: {
         'click .sub-categories li a': 'categoryFilter',
@@ -31,15 +31,15 @@ module.exports = Base.extend({
             items: data.items,
             filters: list,
             nav: {
-                link: data.url + '/',
-                listAct: 'active',
+                link: data.url,
+                galeryAct: 'active',
             }
         });
     },
     processItem: function(item) {
         item.date.since = helpers.timeAgo(item.date);
     },
-    toogleFilter: function(event) {
+        toogleFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -79,4 +79,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/search';
+module.exports.id = 'items/searchfilterig';

@@ -10,17 +10,17 @@ module.exports = Base.extend({
     className: 'categories-showig-view',
     tagName: 'main',
     events: {
-    'click .check-box input': 'selectFilter',
-    'click .range-submit': 'rangeFilterInputs',
-    'click .link-range': 'rangeFilterLinks',
-    'click .clean-filters': 'cleanFilters',
-    'click .filter-title span.icons': 'toogleFilter'
+        'click .check-box input': 'selectFilter',
+        'click .range-submit': 'rangeFilterInputs',
+        'click .link-range': 'rangeFilterLinks',
+        'click .clean-filters': 'cleanFilters',
+        'click .filter-title span.icons': 'toogleFilter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var slugUrl = helpers.common.slugToUrl(data.currentCategory);
         var filters = data.metadata.filters;
-        var order = ['pricerange','carbrand','condition','kilometers','year'];
+        var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
         var list = [];
 
         _.each(order, function(obj, i){
