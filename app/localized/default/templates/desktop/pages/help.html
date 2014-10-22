@@ -2,213 +2,185 @@
     <h3>Necesita ayuda</h3>
     <ul>
         <li class="selected">
-            <a class="help-toggle-content" data-help-content="new-olx" href="#"><span class="icons icon-user"></span>Nuevo en OLX</a>
+            <a class="help-toggle-content" data-help-content="new-olx" href="#"><span class="icons icon-user"></span>{{ dictionary["help.NewToBrand"] }}</a>
         </li>
         <li>
-            <a class="help-toggle-content" data-help-content="ads" href="#"><span class="icons icon-listview"></span>Anucios</a>
+            <a class="help-toggle-content" data-help-content="ads" href="#"><span class="icons icon-list"></span>{{ dictionary["itemslisting.Classifieds"] }}</a>
         </li>
         <li>
-            <a class="help-toggle-content" data-help-content="faqs" href="#"><span class="icons icon-question"></span>Preguntas frecuentes</a>
+            <a class="help-toggle-content" data-help-content="faqs" href="#"><span class="icons icon-question"></span>{{ dictionary["help.GeneralQuestions"] }}</a>
         </li>
-        <li class="">
-            <a class="help-toggle-content" data-help-content="more-suggestions" href="#"><span class="icons icon-more"></span>Mas sugerencias</a>
+        <li>
+            <a class="help-toggle-content" data-help-content="more-suggestions" href="#"><span class="icons icon-more"></span>{{ dictionary["help.MoreGuidelines"] }}</a>
         </li>
     </ul>
 </div>
 <div class="help-content">
     <div id="new-olx" class="help-content-display">
-        <h3>Nuevo en OLX</h3>
+        <h3>{{ dictionary["help.NewToBrand"] }}</h3>
         <div class="faqs">
             <div class="question">
                 <h4 class="icons icon-arrowright">¿Qué es OLX?</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        OLX es el mercado en línea del mundo para comprar y vender localmente, intercambiar y comunicarse con otros usuarios.
+                        {{ dictionary["help.WhatIsBrand_content"] }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Es GRATIS OLX?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.IsBrandFree"] }} </h4>
                 <div class="question-content" style="display:none;">
-                    <p>¡Si, OLX es 100% gratis!</p>
+                    <p>{{ dictionary["help.IsBrandFree_content"] }} </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Debo registrarme para usar OLX?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.DoIHaveToRegisterToUseBrand"] }} </h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        No. Puedes navegar el sitio y publicar avisos sin registrarte. Registrarse en OLX es GRATUITO y muy simple:
-                    </p>
-                    <ol>
-                        <li>Haz click en "Registrarte" y completa la información básica de contacto.</li>
-                        <li>¡Ya estás registrado en OLX!</li>
-                        <li>OLX te enviará un email con un link e instrucciones para confirmar tu registro.</li>
-                    </ol>
-                    <p>
-                        Una vez que tengas una cuenta de OLX, puedes administrar tus avisos e información personal incluso más fácilmente desde la sección "Mi OLX" del sitio.
+                        {{ dictionary["help.DoIHaveToRegisterToUseBrand_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Cómo busco un aviso en OLX?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIFindAnItemAtBrand"] }} </h4>
                 <div class="question-content" style="display:none;">
                 <p>
-                    Puedes navegar los listados cuando no estás seguro de lo que buscas o cuando simplemente quieres ver la variedad de avisos de OLX o de una categoría en particular. Haz click sobre las categorías y las subcategorías y, si encuentras un aviso en el que estás interesado, simplemente haz click en el título del aviso.
-                </p>
-                <p>
-                    También puedes buscar avisos específicos usando algunas palabras que los describan. En este caso, ingresa las palabras que desciben el aviso que buscas en el campo de búsqueda y haz click en el botón de búsqueda o con forma de lupa. Verás una página de resultados con avisos de OLX que contienen las palabras que usaste para realizar la búsqueda. Recorre esos resultados y si algún aviso te interesa, haz click en su título. 
+                    {{ dictionary["help.HowDoIFindAnItemAtBrand_content"] }}
                 </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Qué es Mi OLX?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.WhatIsMyClassifieds"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }} </h4>
                 <div class="question-content" style="display:none;">
-                    <p>Con Mi OLX, puedes seguir y administrar tus avisos, compras, ventas, datos personales, informaciones de OLX, mensajes, favoritos y mucho más desde un único lugar seguro. </p>
+                    <p>{{ dictionary["help.WhatIsMyClassifieds_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}  </p>
                 </div>
             </div>
-           
+
         </div>
     </div>
     <div id="ads" class="help-content-display" style="display: none;">
-        <h3>Anuncios</h3>
+        <h3>{{ dictionary["itemslisting.Classifieds"] }} </h3>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Cómo publico un aviso en OLX?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIPostAnItemAtBrand"] }}</h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    - Haz clic en el botón "Publica un aviso gratis".
-                </p>
-                <p>
-                    - Si todavía no tienes una cuenta y no deseas registrarte, simplemente selecciona la localidad, la categoría y subcategoría donde aparecerá tu aviso y estarás listo para publicarlo. También puedes registrarte y obtener una cuenta de OLX, solo tendrás que indicar la información básica de contacto. Luego te pediremos que subas fotos y que proporciones un título y una descripción de tu aviso.
-                </p>
-                <p>    
-                    - Este proceso de registro es muy breve y nada más terminar podrás publicar avisos.
-                </p>
-                <p>
-                    - Si ya tienes una cuenta en OLX, simplemente inicia la sesión y sigue el proceso.
-                </p>
-                <p>
-                    - Publicar en OLX es GRATIS.
+                    {{ dictionary["help.HowDoIPostAnItemAtBrand_content"] }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Cómo agrego una imagen?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIUploadAPicture"] }} </h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    En el formulario de publicación, debajo del título del aviso, encontrará un botón que te permitirá añadir una o más fotos. Si pulsas sobre "Seleccionar fotos", 
-                    aparecerá una ventana que te permitirá seleccionar archivos de tu equipo. Selecciona el archivo con la imagen que quieras subir y pulsa "Aceptar". 
-                    De esta forma se subirá la foto a tu aviso. Para subir más imágenes, pulsa sobre el botón "Explorar". La imagen que subas en primer lugar será la imagen principal
-                     de tu aviso y aparecerá junto al título del aviso en la categoría correspondiente. El proceso de subir fotos en OLX es fácil y sencillo, puedes subir hasta 20 (veinte) 
-                     fotos en cada aviso. Cuanto menos pese la foto más rápido se cargará. Recomendamos que las fotos no pesen más de 200 kb. Hemos notado que los avisos con fotos 
-                     reciben más respuestas que los avisos sin ellas. Subir fotos a OLX es GRATIS. 
+                    {{ dictionary["help.HowDoIUploadAPicture_content"] | replace('<<NUMBER>>','8') | replace('<<NUMBER_IN_WORDS>>','ocho') }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Cómo edito un aviso?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIEditAPosting"] }}</h4>
             <div class="question-content" style="display:none;">
                 <p>
-                   Si tienes una cuenta en OLX podrás editar tus avisos mediante la opción "Avisos activos" en la sección Mi OLX del sitio. Selecciona el artículo y pulsa sobre el botón "Editar". Cuando hayas hecho y aprobado los cambios se actualizarán inmediatamente. Puedes repetir este proceso todas las veces que quieras. Si todavía no tienes una cuenta en OLX, podrás acceder a las mismas funciones a través del enlace que aparece en el email de confirmación que recibirás cada vez que publiques un aviso en el sitio, y mediante el botón editar en la página que indica que se ha completado con éxito el proceso de publicación. 
+                   {{ dictionary["help.HowDoIEditAPosting_contentNew"] }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Cómo cambio una foto o imagen?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIChangeAPicture"] }}</h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    Puedes editar una imagen siguiendo los pasos para modificar un aviso. Cuando estés en la página de edición, ve a la sección Fotos, haz click en "Quitar esta foto" para eliminarla y luego en "Agregar otra foto" para agregar una nueva imagen. 
+                    {{ dictionary["help.HowDoIChangeAPicture_content"] }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Durante cuánto tiempo aparecerá mi aviso en OLX?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowLongWillMyPostingAppearOnBrand"] }}</h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    Actualmente los avisos en OLX caducan a los 180 días. Elimine el aviso manualmente si ya no necesita publicarlo. Publique un nuevo aviso si desea continuar ofreciendo su item o servicio luego de que el aviso haya caducado. 
+                    {{ dictionary["help.HowLongWillMyPostingAppearOnBrand_contentNew"] | replace('<<NUMBER>>','180') }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Cómo elimino mi aviso?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIRemoveMyPosting"] }} </h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    Si tienes una cuenta de OLX y vendiste tu producto o simplemente deseas dejar de publicarlo, puedes hacerlo a través de la opción \'Avisos Activos\' en la sección Mi OLX del sitio. Haz click en la cajita a la izquierda del aviso o avisos que deseas dejar de publicar y luego haz click en el botón ‘Eliminar los avisos seleccionados’. Si todavía no tienes una cuenta en OLX, puedes acceder a la misma funcionalidad usando el link dentro del email de confirmación recibido al publicar el aviso en el sitio. 
+                    {{ dictionary["help.HowDoIRemoveMyPosting_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Cómo puedo guardar un aviso para recuperarlo más tarde?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoISaveAPostingToRecallItLater"] }} </h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    Ve al aviso que te interesa y haz click en "Agregar a Favoritos" para realizarle seguimiento. 
+                    {{ dictionary["help.HowDoISaveAPostingToRecallItLater_content"] }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Cómo comparto mi aviso en Facebook/Twitter/etc?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc"] }}</h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    Ve a la página del aviso. Debajo del texto hay una columna llamada "Comparte este aviso”. Debajo hay una lista de aplicaciones en dónde puedes compartir tu aviso tan solo haciendo click sobre ellas: Facebook, Twitter, y correo electrónico entre muchas otras.
+                    {{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc_content"] }}
                 </p>
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrowright">¿Puedo incluir información personal de contacto en mis avisos?</h4>
+            <h4 class="icons icon-arrowright">{{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings"] }}</h4>
             <div class="question-content" style="display:none;">
                 <p>
-                    Sí. Puedes incluir información personal de contacto en tus avisos.
+                    {{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings_content"] }}
                 </p>
             </div>
         </div>
     </div>
 
     <div id="faqs" class="help-content-display" style="display: none;">
-        <h3>Preguntas Generales</h3>
+        <h3>{{ dictionary["help.GeneralQuestions"] }}</h3>
         <div class="faqs">
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Qué son avisos clasificados?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.WhatAreClassifieds"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        En los avisos clasificados, los compradores siempre contactan al vendedor para negociar, incluso cuando el vendedor publica un precio. 
+                        {{ dictionary["help.WhatAreClassifieds_content"] }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Cómo cambio la información de mi registración?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIChangeMyRegistrationDetails"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        Si tienes una cuenta de OLX, ingresa a "Mi OLX" haciendo click en el link Mi OLX ubicado en la parte superior derecha de la página principal de OLX y escribe tu nombre de usuario y contraseña. Verás una página con tus avisos activos. Busca la sección "Configuraciones". Debajo encontrarás el link "Cambiar dirección de email o contraseña”, haz click sobre el mismo e ingresarás a una página donde puedes editar tu información personal, incluyendo el email y la contraseña. 
+                        {{ dictionary["help.HowDoIChangeMyRegistrationDetails_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Cómo reviso mis mensajes?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoICheckMyMessages"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        Hay dos formas de leer mensajes cuando tienes una cuenta en OLX. La primera es iniciar sesión en Mi OLX. Cuando estés en la pantalla de Mi OLX, busca el título "Mensajes". Debajo habrá un link que te llevará a la bandeja de entrada, donde podrás ver todos los mensajes que has recibido en tus avisos. Si haces clic en el mensaje, podrás ver el mensaje completo, y tendrás la opción de responder. El segundo método es respondiendo directamente al mensaje que recibiste en tu cuenta personal de correo electrónico.
+                        {{ dictionary["help.HowDoICheckMyMessages_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Cómo contesto un mensaje consultando por mi aviso?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.HowDoIAnswerAMessageSentToMyAd"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        Existen dos formas de responder un email que te enviaron por uno de tus avisos. Si tienes una cuenta de OLX, puedes responder fácilmente a través de Mi OLX < Mis Mensajes. Al seleccionar y abrir el mensaje, verás una cajita en la pantalla para ingresar tu respuesta. O puedes responder al email directamente. Si no tienes una cuenta de OLX, puedes ir a Mi OLX y a Mis Mensajes haciendo click en el link del primer email que recibiste al publicar tu aviso o puedes responder directamente desde tu cuenta de email.
+                        {{ dictionary["help.HowDoIAnswerAMessageSentToMyAd_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">Como comprador, ¿cómo contacto a un vendedor?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.AsABuyerHowDoIContactASeller"] }}</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        contacto incluyendo tu dirección de correo electrónico y el mensaje que quieres enviarle al vendedor y luego presiona "Enviar".
+                        {{ dictionary["help.AsABuyerHowDoIContactASeller_content"] }}
                     </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrowright">¿Cómo puedo asociarme con OLX?</h4>
+                <h4 class="icons icon-arrowright">{{ dictionary["help.HowCanICreateAPartnershipWithBrand"] }}</h4>
                 <div class="question-content" style="display:none;">
-                    <p>    
+                    <p>
                         Si tienes varios avisos y quieres publicarlos en OLX, puedes hacerlo en los formatos XML o CSV. Los publicaremos gratuitamente y estos avisos se actualizarán regularmente. Puedes encontrar información detallada en <a href="http://www.olx.com.bo/feeds/specifications.html">http://www.olx.com.bo/feeds/specifications.html</a>
                         Póngase en contacto con el <a href="contacts.php?fv[contact]=ContactLegalIssues">Departamento de asociación</a> donde le informarán sobre cómo configurar su listado de avisos (feed).
                     </p>
@@ -242,7 +214,7 @@
                 <h4 class="icons icon-arrowright">¿Qué puedo hacer si sospecho de un vendedor fraudulento?</h4>
                 <div class="question-content" style="display:none;">
                     <p>
-                        Si sospechas que un aviso del sitio es falso o fraudulento, por favor contáctanos a través de <a href="contacts.php?fv[contact]=ContactLegalIssues">Asuntos Legales</a> 
+                        Si sospechas que un aviso del sitio es falso o fraudulento, por favor contáctanos a través de <a href="contacts.php?fv[contact]=ContactLegalIssues">Asuntos Legales</a>
                     </p>
                 </div>
             </div>
@@ -254,7 +226,7 @@
                         </p>
                         <ul>
                             <li>Utiliza siempre el sistema de OLX
-                                <br>Para comunicarte con los vendedores de OLX siempre utiliza el botón  "Responder a este aviso" en la página que brinda detalles del aviso. Se enviará un email al vendedor con tu dirección de email y todas las operaciones tendrán lugar directamente entre tú y el vendedor a través de nuestro sistema. De esta manera, si se nos notifica de una actividad fraudulenta relacionada con el vendedor, tendremos tus datos para contactarte y brindarte mayor información. Debido a que nuestro mercado es siempre gratuito, debemos desalentar el mantener comunicaciones fuera de línea. 
+                                <br>Para comunicarte con los vendedores de OLX siempre utiliza el botón  "Responder a este aviso" en la página que brinda detalles del aviso. Se enviará un email al vendedor con tu dirección de email y todas las operaciones tendrán lugar directamente entre tú y el vendedor a través de nuestro sistema. De esta manera, si se nos notifica de una actividad fraudulenta relacionada con el vendedor, tendremos tus datos para contactarte y brindarte mayor información. Debido a que nuestro mercado es siempre gratuito, debemos desalentar el mantener comunicaciones fuera de línea.
                             </li>
                             <li>Conoce e infórmate sobre lo que estás comprando.
                                 <br>Antes de hacerle una oferta al vendedor, pregúntale lo necesario para saber más acerca de lo que te está vendiendo. Puedes enviarle al vendedor comentarios y mensajes anteriores a la venta, luego hacer una oferta una vez que te sientas seguro de comprar el artículo. También te recomendamos comparar los precios minoristas y los precios de otros vendedores del sitio. Recuerda, si el precio es demasiado bueno para ser cierto, posiblemente sea un fraude. Debes ser especialmente cuidadoso al comprar artículos de alta tecnología, sobre todo cuando los precios son mucho más bajos que los precios de distribuidores o los precios del gremio. Algunos artículos de alta tecnología como monitores planos, computadoras, notebooks, netbooks y teléfonos celulares son los artículos más comunes de los estafadores. En muchos casos, es adecuado solicitar el número de serie antes de enviar el dinero.
@@ -274,7 +246,7 @@
                             Si así y todo sospechas que el vendedor es fraudulento o tiene comportamientos fraudulentos, por favor contacta inmediatamente a OLX a través de <a href="contacts.php?fv[contact]=ContactLegalIssues">Asuntos Legales</a>.
                         </p>
                 </div>
-            </div> 
+            </div>
             <div class="question">
                 <h4 class="icons icon-arrowright">¿Qué cosas hacen los compradores potencialmente fraudulentos?</h4>
                 <div class="question-content" style="display:none;">

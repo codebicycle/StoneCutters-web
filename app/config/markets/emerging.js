@@ -9,8 +9,10 @@ module.exports = {
     },
     seo: {
         enabled: true,
+        levelPath: true,
         popularSearches: true,
         relatedListings: true,
-        extendedTitle: true
+        extendedTitle: true,
+        references: true
     }
 };
