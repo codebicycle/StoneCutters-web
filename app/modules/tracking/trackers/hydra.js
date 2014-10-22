@@ -2,7 +2,9 @@
 
 var _ = require('underscore');
 var configTracking = require('../config');
+var config = require('../../../../shared/config');
 var utils = require('../../../../shared/utils');
+var common = require('./common');
 
 var customParams = {
     cat: function(params, options) {
@@ -17,7 +19,7 @@ var customParams = {
     }
 };
 
-function check(page) {
+function isEnabled(page) {
     var location = this.app.session.get('location');
     var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'hydra'], true);
     var pageName;
@@ -26,7 +28,7 @@ function check(page) {
     if (!enabled) {
         return false;
     }
-    pageName = utils.get(configTracking, ['hydra', 'pages', page]);
+    pageName = utils.get(configTracking, ['common', 'pages', page]);
     params = utils.get(configTracking, ['hydra', 'params', location.url]);
     return !!params && !!pageName;
 }
@@ -35,7 +37,7 @@ function getParams(page, options) {
     var location = this.app.session.get('location');
     var language = this.app.session.get('selectedLanguage');
     var params = utils.get(configTracking, ['hydra', 'params', location.url], {});
-    var pageName = utils.get(configTracking, ['hydra', 'pages', page]);
+    var pageName = common.getPageName.call(this, page, options);
 
     params = _.extend({}, params, {
         lang: language.split('-').shift(),
@@ -52,6 +54,6 @@ function getParams(page, options) {
 }
 
 module.exports = {
-    check: check,
+    isEnabled: isEnabled,
     getParams: getParams
 };

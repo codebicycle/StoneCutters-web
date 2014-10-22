@@ -152,17 +152,15 @@ function getParams(page, options) {
 }
 
 function getConfig(options) {
+    var siteLocation;
     var platform;
-    var location;
     var country;
     var config;
 
     options = options || {};
-    platform = this.app.session.get('platform') || options.platform;
-    location = this.app.session.get('location') || {
-        url: options.locUrl
-    };
-    country = location.url;
+    siteLocation = options.siteLocation || this.app.session.get('siteLocation');
+    platform = options.platform || this.app.session.get('platform');
+    country = siteLocation;
 
     if (env !== 'production') {
         country = env;
@@ -172,51 +170,47 @@ function getConfig(options) {
     }
 
     config = utils.get(configTracking, ['ati', 'paths', country, platform], defaultConfig[platform]);
-    return _.extend({}, config, {
-        host: location.url.replace('www', ''),
+    config = _.extend({}, config, {
+        host: siteLocation.replace('www', ''),
         protocol: 'http'
     });
+
+    if (options.siteId) {
+        config.siteId = options.siteId;
+    }
+    if (options.logServer) {
+        config.logServer = options.logServer;
+    }
+    return config;
 }
 
 function pageview(params, options) {
     var config = getConfig.call(this, options);
 
-    return {
-        url: ['http://', config.logServer, '.ati-host.net/hit.xiti'].join(''),
-        params: {
-            s: config.siteId,
-            stc: params.custom,
-            idclient: params.clientId,
-            ref: params.referer,
-            na: Math.round(Math.random() * 1000000)
-        },
-        options: {
-            method: 'GET'
-        }
-    };
+    return utils.params(['http://', config.logServer, '.ati-host.net/hit.xiti'].join(''), {
+        s: config.siteId,
+        stc: params.custom,
+        idclient: params.clientId,
+        ref: params.referer,
+        na: Math.round(Math.random() * 1000000)
+    });
 }
 
-function pageevent(params) {
-    var config = getConfig.call(this);
+function event(params, options) {
+    var config = getConfig.call(this, options);
 
-    return {
-        url: ['http://', config.logServer, '.ati-host.net/go.click'].join(''),
-        params: {
-            xts: config.siteId,
-            p: params.custom,
-            clic: 'A',
-            type: 'click',
-            idclient: params.clientId,
-            url: params.url,
-            na: Math.round(Math.random() * 1000000)
-        },
-        options: {
-            method: 'GET'
-        }
-    };
+    return utils.params(['http://', config.logServer, '.ati-host.net/go.click'].join(''), {
+        xts: config.siteId,
+        p: params.custom,
+        clic: 'A',
+        type: 'click',
+        idclient: params.clientId,
+        url: params.url,
+        na: Math.round(Math.random() * 1000000)
+    });
 }
 
-function check(page) {
+function isEnabled(page) {
     var location = this.app.session.get('location');
     var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ati'], true);
 
@@ -227,8 +221,8 @@ function check(page) {
 }
 
 module.exports = {
-    check: check,
+    isEnabled: isEnabled,
     getParams: getParams,
     pageview: pageview,
-    pageevent: pageevent
+    event: event
 };

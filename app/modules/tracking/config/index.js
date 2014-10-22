@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = {
+    common: require('./common'),
     ati: require('./ati'),
-    google: require('./google'),
+    analytics: require('./analytics'),
     keyade: require('./keyade'),
     hydra: require('./hydra')
 };

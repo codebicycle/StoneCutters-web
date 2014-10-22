@@ -21,18 +21,12 @@ var generators = {
     }
 };
 
-function check() {
-    var location = this.app.session.get('location');
-    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'keyade'], true);
-
-    if (!enabled) {
-        return false;
-    }
-    return _.contains(keyades, location.url);
+function isEnabled() {
+    return _.contains(keyades, this.app.session.get('location').url);
 }
 
-function pageview(page) {
-    var generator = utils.get(generators, page);
+function pageview(params, options) {
+    var generator = utils.get(generators, options.page);
 
     if (generator && _.isFunction(generator)) {
         return generator.call(this);
@@ -40,6 +34,6 @@ function pageview(page) {
 }
 
 module.exports = {
-    check: check,
+    isEnabled: isEnabled,
     pageview: pageview
 };

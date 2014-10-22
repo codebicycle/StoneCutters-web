@@ -2,7 +2,7 @@
 
 var config = require('../../../shared/config');
 var tracker = require('./tracker');
-var google = require('./trackers/google');
+var analytics = require('./trackers/analytics');
 var ati = require('./trackers/ati');
 
 var query = {};
@@ -38,7 +38,7 @@ function generateURL() {
 }
 
 module.exports = {
-    google: google,
+    analytics: analytics,
     ati: ati,
     reset: reset,
     setPage: setPage,

@@ -93,7 +93,8 @@
     var defaults = {
         wait: false,
         frequency: 1000,
-        timeout: 5000
+        timeout: 5000,
+        executed: false
     };
 
     _.extend(asyncApi, {
@@ -121,10 +122,11 @@
                 options = _.defaults({}, obj, defaults);
 
                 new TimerExec(function callback(te) {
-                    if (options.timeout <= te.time()) {
+                    if (options.executed || options.timeout <= te.time()) {
                         return te.stop();
                     }
                     if (!options.wait || (_.isFunction(options.wait) && options.wait())) {
+                        options.executed = true;
                         options.callback();
                         return te.stop();
                     }

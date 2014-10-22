@@ -5,6 +5,6 @@
         var tracker = _gat._getTracker('UA-5247560-17');
 
         tracker._setCustomVar(1, 'olx_visitor_country', 'html4_{{ os.name | lower if (os.name != "Others") else "unknown" }}_{{ os.version }}_{{ location.name }}', 1);
-        tracker._trackPageview('{{ tracking.params.google.page }}');
+        tracker._trackPageview('{{ tracking.params.analytics.page }}');
     });
 </script>

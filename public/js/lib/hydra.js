@@ -119,7 +119,6 @@
         iframe.setAttribute('scrolling', '0');
         iframe.setAttribute('rel', 'nofollow');
         document.body.appendChild(iframe);
-        iframe.src = url;
     };
 
     var trackWithImage = function(url) {

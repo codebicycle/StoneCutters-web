@@ -18,11 +18,10 @@ module.exports = {
     tracking: {
         enabled: true,
         trackers: {
-            server: true,
+            serverSide: true,
             ati: true,
-            google: true,
-            hydra: true,
-            keyade: false
+            analytics: true,
+            hydra: true
         }
     }
 };

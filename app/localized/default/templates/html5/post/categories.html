@@ -9,8 +9,8 @@
             </li>
         {% endfor %}
     </ul>
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
     {% set templateName = template + '/pixels/post/categories.html' %}
     {% include templateName %}
 </section>
+
+{% view 'partials/tracking' %}
