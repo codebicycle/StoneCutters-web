@@ -18,7 +18,8 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var slugUrl = helpers.common.slugToUrl(data.currentCategory);
+        var link = this.app.session.get('path');
+        var linkig = link + '-ig/';
         var filters = data.metadata.filters;
         var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
         var list = [];
@@ -28,14 +29,17 @@ module.exports = Base.extend({
                 return obj.name == order[i] ? list.push(obj) : false;
             });
         });
-
+        if (link.indexOf('/-') != -1) {
+            linkig = link.replace('/-','-ig/-');
+        }
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
             items: data.items,
             filters: list,
             nav: {
-                link: slugUrl,
-                listAct: 'active',
+                link: link,
+                linkig: linkig,
+                listAct: 'active'
             }
         });
     },
