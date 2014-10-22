@@ -1,0 +1,277 @@
+.users_myolx_view {
+    .myolxmenu {
+        display: table;        
+        margin-bottom: 0;
+        padding: 0;
+        position: relative;
+        width: 100%;
+
+        li {
+            display: table-cell;
+            list-style: none;
+            position: relative;    
+            vertical-align: bottom;
+            width:25%;
+
+
+            a {
+                background: #eee;
+                border-color: #ccc;
+                border-radius: 3px;
+                border-style: solid;
+                border-width: 1px 1px 0 1px;
+                color: #38B;
+                font-size: 20px;
+                padding: 10px 0;
+                text-align: center;
+                width: 95%;
+                &:hover{
+                    color: #369;
+                    text-decoration: underline;
+                }
+            }
+            &:last-child {
+                a {
+                    width: 100%;
+                }
+            }            
+            &.active {
+                a {
+                    background: #fff;
+                    color: #000;
+                    font-weight: bold;
+                    padding: 15px 0;                    
+                }
+                &:before, &:after {
+                    border-style:solid;
+                    border-width:10px 9px 0;
+                    bottom: -10px;
+                    content:"";
+                    display:inline-block;
+                    left: 44%;
+                    position:absolute;
+                }
+                &:before {
+                    background: #fff;
+                    border-color:transparent #ccc;
+                    bottom:-9px;
+                }
+                &:after {
+                    border-color:transparent #FAFAFA;
+                }
+            }
+        }
+    }
+
+    .my-items {
+        background: #fff;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        width: 100%;
+
+        .item {
+            border-bottom: 1px solid #ccc;
+            overflow: hidden;
+
+            .image {
+                border-radius: 3px;
+                border: 1px solid #ccc;
+                display: inline-block;
+                float: left;
+                margin: 30px 25px 30px;
+                max-height: 139px; 
+                min-height: 139px; 
+                padding: 2px;
+                position: relative;
+                text-align: center;
+                width: 185px;
+
+                img {
+                    margin: 0 auto;
+                    max-width: 100%;
+                }
+
+                .status {
+                    background: #AB0;
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: bold;
+                    left: -10px;
+                    padding: 3px;
+                    position: absolute;
+                    position: absolute;
+                    top: 20px;
+                    width: 70%;
+
+                    &:after {
+                        border-color: #AABB00 transparent #AABB00 #AABB00;
+                        border-style: solid;
+                        border-width: 11px;
+                        bottom: 0;
+                        content: " ";
+                        height: 0;
+                        position: absolute;
+                        right: -10px;
+                        width: 0;
+                    }
+
+                    &:before {
+                        border-color: #869000 transparent;
+                        border-style: solid;
+                        border-width: 8px 0 0 9px;
+                        content: "";
+                        left: 0;
+                        position: absolute;
+                        top: 100%;
+                    }
+                }
+
+            }
+
+            .description {
+                color: #000;
+                display: table;
+                float: left;
+                font-size: 14px;
+                height: 145px;
+                margin: 30px 30px 30px 0;
+                width: 564px;
+
+                h3.title {
+                    color: #38B;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin: 0;
+                }
+
+                .tips span {
+                    display: inline-block;
+                    padding: 3px;
+                }
+
+                .text {
+                    color: #C33;
+                    font-size: 14px;
+                }
+            }
+
+            .price {
+                float: left;
+                margin: 30px 30px 30px 0;
+                text-align: right;
+                width: 115px;
+
+                span {
+                    color: #000;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .expired, .deleted, .recusado {
+            .image {
+                .withoutimg {
+                    color: #c7c7c7;
+                    display: block;
+                    font-size: 100px;
+                    margin: 0 auto;
+                    max-width: 100%;
+                    padding: 12px 0;
+                }
+
+                .status {
+                    background: #CCC;
+
+                    &:after {
+                        border-color: #CCC transparent #CCC #CCC;                        
+                    }
+
+                    &:before {
+                        border-color: #CCC transparent;                        
+                    }
+                }
+
+            }
+
+            .description {                
+                h3.title {
+                    color: #AEAEAE
+                }
+            }
+            .price {               
+                span {
+                    color: #AEAEAE
+                }
+            }    
+        }
+        
+        .deleted {
+            .image {
+                .status {
+                    background: #999;
+
+                    &:after {
+                        border-color: #999 transparent #999 #999;                        
+                    }
+                    &:before {
+                        border-color: #999 transparent;                        
+                    }
+                }
+
+            }
+        }
+        .rejected {
+            .image {
+                .status {
+                    background: #D41D34;
+                    &:after {
+                        border-color: #D41D34 transparent #D41D34 #D41D34;
+                    }
+                    &:before {
+                        border-color: #D41D34 transparent;                        
+                    }
+                }
+
+            }
+        }
+    }
+
+    .buttons {
+        .btn {        
+            action-button(#EFEFEF, #686868, 3px, 0 20px);
+            font-weight: bold;
+            height: 31px;
+            line-height: 30px;
+            margin-right: 5px;
+            text-align: left;
+            
+            i {
+                color: #686868;
+                display: block;
+                float: left;
+                font-size: 20px;
+                font-weight: bold;
+                margin: 0 6px 0 0;
+            }        
+        }
+        &:hover {
+            background-image: -moz-linear-gradient(center top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+            background-image: -ms-linear-gradient(center top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+            text-decoration: none;
+        }
+        .orange {
+            border-radius();
+            action-button($orange, #fff, 3px, 0 20px);
+
+            i {
+                color: #fff;
+            }
+        }
+    }
+}

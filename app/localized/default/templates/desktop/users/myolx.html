@@ -1,0 +1,15 @@
+<ul class="myolxmenu">
+    <li class="{{ 'active' if viewname == 'myads' else '' }}">
+        <a href="{{ '/myolx/myadslisting' | link }} ">Mis Anuncios</a>
+    </li>
+    <li class="{{ 'active' if viewname == 'favorites' else '' }}">
+        <a href="{{ '/myolx/favoritelisting' | link }}">Favoritos</a>
+    </li>
+    <li>
+        <a href="#">Configuración</a>
+    </li>
+    <li>
+        <a href="#">Mensajes</a>
+    </li>
+</ul>
+{% view 'users/' + viewname  %}
