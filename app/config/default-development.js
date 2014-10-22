@@ -78,7 +78,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             interstitialByADX: {
                 worldwide: false,
