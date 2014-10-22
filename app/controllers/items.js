@@ -16,6 +16,9 @@ module.exports = {
     reply: middlewares(reply),
     success: middlewares(success),
     search: middlewares(search),
+    searchig: middlewares(searchig),
+    searchfilter: middlewares(searchfilter),
+    searchfilterig: middlewares(searchfilterig),
     allresults: middlewares(allresults),
     allresultsig: middlewares(allresultsig),
     favorite: middlewares(favorite),
@@ -670,7 +673,19 @@ function success(params, callback) {
             .val(success);
     }
 }
-
+function searchfilter(params, callback) {
+    params.categoryId = params.catId;
+    search.call(this, params, callback);
+}
+function searchfilterig(params, callback) {
+    params['f.hasimage'] = true;
+    params.categoryId = params.catId;
+    search.call(this, params, callback);
+}
+function searchig(params, callback) {
+    params['f.hasimage'] = true;
+    search.call(this, params, callback);
+}
 function search(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -751,6 +766,7 @@ function search(params, callback) {
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
 
+            helpers.filters.prepare(metadata);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
             callback(null, {
