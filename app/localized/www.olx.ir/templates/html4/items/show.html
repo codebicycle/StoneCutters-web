@@ -95,8 +95,6 @@
     {% else %}
         <div id="itemDisable">{{ dictionary["item.ThisAdIsNoLongerAvailable"] }}</div>
     {% endif %}
-
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
+    {% include (template + '/partials/tracking.html') %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

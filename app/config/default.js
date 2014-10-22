@@ -81,6 +81,16 @@ module.exports = {
             postingFlow: {
                 worldwide: false,
                 countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
+            },
+            interstitialByADX: {
+                worldwide: false,
+                countries: ['www.olx.com.ar', , 'www.olx.cl']
+            }
+        },
+        html4: {
+            interstitialByADX: {
+                worldwide: false,
+                countries: ['www.olx.com.ar', 'www.olx.cl']
             }
         }
     },

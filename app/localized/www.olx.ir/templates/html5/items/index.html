@@ -1,0 +1,44 @@
+{% view 'locations/select' %}
+{% view 'partials/search' %}
+<section id="itemListing">
+    {% from macros import Breadcrumb %}
+    {% set link = (breadcrumb | link) %}
+    {{ Breadcrumb(dictionary, link, category.trName, '<span class="switchView"></span>') }}
+    {% if metadata.total == 0 %}
+        <div class="emtyList">
+            <div></div>
+            <p>
+                {% if location.current.name %}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
+                {% else %}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}
+                {% endif %}
+            </p>
+            <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
+        </div>
+    {% else %}
+        <ul class="itemListing">
+            {% view 'items/items' %}
+            <div class="clear"></div>
+        </ul>
+        {% if infiniteScroll %}
+            <div class="loader is-loading" style="display: none;">
+                <img src="{{ '/images/html5/loading.gif' | static }}" alt="Loading...">
+            </div>
+            <input id="category" type="hidden" class="hide" value="{{ category.id }},{{ category.name }}">
+            <input id="subcategory" type="hidden" class="hide" value="{{ subcategory.id }},{{ subcategory.name }}">
+            <input id="currentUrl" type="hidden" class="hide" value="{{ metadata.current | link }}">
+        {% elif metadata.next or metadata.previous %}
+            <div id="itemPagination">
+                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"><span>{{ dictionary["itemslisting.Previous"] }}</span></a>
+                <div class="center">
+                    {{ metadata | pagination | persianDigits }}
+                </div>
+                <a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"><span>{{ dictionary["itemslisting.Next"] }}</span></a>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% set templateName = template + '/partials/tracking.html' %}
+    {% include templateName %}
+</section>
+{% view 'pages/interstitial' %}

@@ -16,7 +16,6 @@
             </li>
         {% endfor %}
     </ul>
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
+    {% include (template + '/partials/tracking.html') %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
