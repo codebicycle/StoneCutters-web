@@ -9,38 +9,19 @@ module.exports = Base.extend({
     id: 'posting-contact-view',
     className: 'posting-contact-view',
     events: {
-        'update': 'onUpdate',
-        'validate': 'onValidate'
+        'change': 'onChange'
     },
-    fields: [],
-
-    onUpdate: function(event, fields) {
+    onChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.fields = fields;
-    },
-    onValidate: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-/*
-        _.each(this.validations, function(validations, field) {
-            _.each(validations, function(validation) {
-                if (field === 'email') {
-                    if (validation.match) {
-                        if (!$('#seller-email').val().match(eval(validation.match))) {
-                            alert('Invalid');
-                        }
-                        else {
-                            alert('Valid');
-                        }
-                    }
-                }
-            });
+        var $field = $(event.target);
+
+        this.parentView.$el.trigger('fieldSubmit', {
+            name: $field.attr('name'),
+            value: $field.val()
         });
-*/
     }
 });
 
