@@ -31,7 +31,8 @@ module.exports = Base.extend({
             items: data.items,
             filters: list,
             nav: {
-                link: data.url,
+                link: data.url.replace('-ig',''),
+                linkig: data.url,
                 galeryAct: 'active',
             }
         });
