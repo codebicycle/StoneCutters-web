@@ -1,29 +1,30 @@
-{% macro FieldText(label, name, mandatory, advice) %}
+{% macro FieldText(label, name, mandatory, advice, form) %}
     <fieldset class="wrapper">
         <label for="{{ label }}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
         <div class="wrapper-inputs">
-            <input id="text-{{name}}" class="text-field" type="text" placeholder="{{label}}" {{ 'required' if mandatory == 'true' }} name="{{name}}" />
+            <input id="text-{{name}}" class="text-field" type="text" placeholder="{{label}}" {{ 'required' if mandatory == 'true' }} name="{{name}}"
+            {% if form and form.values and form.values[name] %} value="{{ form.values[name] }}" {% endif %} />
             {{ ('<small class="advice">' + advice + '</small>') if advice }}
         </div>
     </fieldset>
 {% endmacro %}
 
-{% macro FieldCombobox(label, name, mandatory, values) %}
+{% macro FieldCombobox(label, name, mandatory, values, form) %}
     <fieldset class="wrapper">
         <label for="{{label}}" class="posting-label">{{label}}</label>
         <div class="wrapper-inputs">
-            <select id="{{name}}" class="text-field select-field">
+            <select id="{{name}}" class="text-field select-field" name="{{name}}">
                 {% for value in values %}
-                    <option value="{{value.key}}">{{value.value}}</option>
+                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
                 {% endfor %}
             </select>
         </div>
     </fieldset>
 {% endmacro %}
 
-{% macro FieldTextArea(label, name, mandatory) %}
+{% macro FieldTextArea(label, name, mandatory, form) %}
     <fieldset class="wrapper">
         <label for="{{name}}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-        <textarea id="{{name}}" class="text-field" rows="12" {{ 'required' if mandatory == 'true' }} ></textarea>
+        <textarea id="{{name}}" class="text-field" rows="12" {{ 'required' if mandatory == 'true' }} name="{{name}}">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
     </fieldset>
 {% endmacro %}

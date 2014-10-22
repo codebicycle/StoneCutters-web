@@ -14,8 +14,19 @@ module.exports = {
     terms: middlewares(terms),
     help: middlewares(help),
     interstitial: middlewares(interstitial),
-    error: middlewares(error)
+    error: middlewares(error),
+    featured_listings: middlewares(featured_listings)
 };
+
+function featured_listings(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
+        });
+    }
+}
 
 function terms(params, callback) {
     helpers.controllers.control.call(this, params, controller);

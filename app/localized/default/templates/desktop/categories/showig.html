@@ -2,6 +2,7 @@
 
 <nav id="listing-filters">
     {% include (template + '/categories/subcategories.html') %}
+    {% include (template + '/items/filters.html') %}
 </nav>
 
 <section id='listing-items'>
@@ -13,7 +14,5 @@
         {% include (template + '/items/pagination.html') %}
     {% endif %}
 </section>
-
-{% include (template + '/partials/postbanner.html') %}
 
 {% view 'partials/tracking' %}

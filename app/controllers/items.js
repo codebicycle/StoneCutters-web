@@ -16,6 +16,9 @@ module.exports = {
     reply: middlewares(reply),
     success: middlewares(success),
     search: middlewares(search),
+    searchig: middlewares(searchig),
+    searchfilter: middlewares(searchfilter),
+    searchfilterig: middlewares(searchfilterig),
     allresults: middlewares(allresults),
     allresultsig: middlewares(allresultsig),
     favorite: middlewares(favorite),
@@ -208,6 +211,7 @@ function show(params, callback) {
         var success = function(_categories, _item, _relatedItems) {
             var item = _item.toJSON();
             var subcategory = _categories.search(_item.get('category').id);
+            var view = 'items/show';
             var category;
             var parentId;
             var url;
@@ -255,7 +259,15 @@ function show(params, callback) {
                     subcategory: (subcategory ? subcategory.id : undefined)
                 }
             });
-            callback(null, (item.purged) ? 'items/unavailable' : 'items/show', {
+
+            if (item.purged) {
+                view = 'items/unavailable';
+            }
+            else if (item.status.deprecated) {
+                view = 'items/expired';
+            }
+
+            callback(null, view, {
                 item: item,
                 user: user,
                 seo: seo,
@@ -266,7 +278,8 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
-                tracking: tracking.generateURL.call(this)
+                tracking: tracking.generateURL.call(this),
+                categories: _categories.toJSON()
             });
         }.bind(this);
 
@@ -660,7 +673,19 @@ function success(params, callback) {
             .val(success);
     }
 }
-
+function searchfilter(params, callback) {
+    params.categoryId = params.catId;
+    search.call(this, params, callback);
+}
+function searchfilterig(params, callback) {
+    params['f.hasimage'] = true;
+    params.categoryId = params.catId;
+    search.call(this, params, callback);
+}
+function searchig(params, callback) {
+    params['f.hasimage'] = true;
+    search.call(this, params, callback);
+}
 function search(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -741,6 +766,7 @@ function search(params, callback) {
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
 
+            helpers.filters.prepare(metadata);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
             callback(null, {

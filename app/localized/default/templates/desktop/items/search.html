@@ -1,8 +1,8 @@
 {% include (template + "/partials/breadcrumb.html") %}
 
-<section id="listing-filters">
-    {% include (template + '/items/parentcategories.html') %}
-</section>
+<nav id="listing-filters">
+    {% include (template + '/items/filters.html') %}
+</nav>
 
 <section id='listing-items'>
     {% include (template + '/items/locations.html') %}
@@ -13,7 +13,5 @@
         {% include (template + '/items/pagination.html') %}
     {% endif %}
 </section>
-
-{% include (template + '/partials/postbanner.html') %}
 
 {% view 'partials/tracking' %}
