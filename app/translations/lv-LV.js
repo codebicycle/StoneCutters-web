@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Apak\u0161kategorija',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Pievienot favor\u012Btiem',
+    'itemgeneraldetails.BackResults': 'Atpaka\u013C pie Rezult\u0101tiem',
     'itemgeneraldetails.City': 'Pils\u0113ta',
     'itemgeneraldetails.DatePosted': 'Public\u0113\u0161anas datums',
     'itemgeneraldetails.Description': 'Apraksts',

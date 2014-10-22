@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Underkategori',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'L\xE4gg till i favoriter',
+    'itemgeneraldetails.BackResults': 'Tillbaka till Resultat',
     'itemgeneraldetails.City': 'Stad',
     'itemgeneraldetails.DatePosted': 'Datum upplagd',
     'itemgeneraldetails.Description': 'Beskrivning',

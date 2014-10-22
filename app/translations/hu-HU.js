@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Alkateg\xF3ria',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Hozz\xE1ad\xE1s a kedvencekhez',
+    'itemgeneraldetails.BackResults': 'Vissza az eredm\xE9nyekre',
     'itemgeneraldetails.City': 'Telep\xFCl\xE9s',
     'itemgeneraldetails.DatePosted': 'A felad\xE1s d\xE1tuma',
     'itemgeneraldetails.Description': 'Le\xEDr\xE1s',

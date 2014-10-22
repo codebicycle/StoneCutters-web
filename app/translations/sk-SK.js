@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Podkateg\xF3ria',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Prida\u0165 medzi ob\u013E\xFAben\xE9',
+    'itemgeneraldetails.BackResults': 'Nasp\xE4\u0165 na V\xFDsledky',
     'itemgeneraldetails.City': 'Mesto',
     'itemgeneraldetails.DatePosted': 'D\xE1tum uverejnenia',
     'itemgeneraldetails.Description': 'Popis',

@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Kundi ndogo',
     'posting_optionallist.Kms': 'Km',
     'itemgeneraldetails.addFavorites': 'Ongeza kwa vibwedo',
+    'itemgeneraldetails.BackResults': 'Rejea kwa Matokeo',
     'itemgeneraldetails.City': 'Mji',
     'itemgeneraldetails.DatePosted': 'Tarehe Iliyochapishwa',
     'itemgeneraldetails.Description': 'Maelezo',

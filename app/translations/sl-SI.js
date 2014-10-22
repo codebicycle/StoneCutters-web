@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Podkategorija',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Dodaj med priljubljene',
+    'itemgeneraldetails.BackResults': 'Nazaj na Rezultate',
     'itemgeneraldetails.City': 'Kraj',
     'itemgeneraldetails.DatePosted': 'Datum objave',
     'itemgeneraldetails.Description': 'Opis',

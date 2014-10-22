@@ -96,6 +96,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Subrubriek',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Toevoegen aan favorieten',
+    'itemgeneraldetails.BackResults': 'Terug naar Resultaten',
     'itemgeneraldetails.City': 'stad',
     'itemgeneraldetails.DatePosted': 'Plaatsingsdatum',
     'itemgeneraldetails.Description': 'Omschrijving',

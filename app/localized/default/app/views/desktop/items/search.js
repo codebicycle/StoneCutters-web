@@ -10,16 +10,14 @@ module.exports = Base.extend({
     className: 'items-search-view',
     tagName: 'main',
     events: {
-        'click .check-box input': 'selectFilter',
-        'click .range-submit': 'rangeFilterInputs',
-        'click .link-range': 'rangeFilterLinks',
+        'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
         'click .filter-title span.icons': 'toogleFilter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var filters = data.metadata.filters;
-        var order = ['pricerange','carbrand','condition','kilometers','year','parentcategory'];
+        var order = ['parentcategory','state','city'];
         var list = [];
 
         _.each(order, function(obj, i){
@@ -33,7 +31,7 @@ module.exports = Base.extend({
             items: data.items,
             filters: list,
             nav: {
-                link: data.url,
+                link: data.url + '/',
                 listAct: 'active',
             }
         });
@@ -58,93 +56,24 @@ module.exports = Base.extend({
         var path = window.location.pathname.split('/-')[0];
         this.app.router.redirectTo(path);
     },
-    selectFilter: function(event) {
+    categoryFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $target =  $(event.currentTarget);
-        var filterType = $target.data('filter-type');
-        var filterName = $target.data('filter-name');
-        var filterValue = $target.val();
-        var catUrl = window.location.pathname.split('/-')[0];
-        var newfilters;
-        var path = catUrl + '/';
-        var _filters = filters.parse(window.location.pathname);
+        var filterSlug = $target.data('filter-slug');
+        var filterName;
+        var filterId;
+        var path;
 
-
-        if($target.is(':checked')){
-            newfilters = filters.add(_filters, {
-                name: filterName,
-                type: filterType,
-                value: filterValue
-            });
-            path += filters.prepareFilterUrl(newfilters);
-        }
-        else {
-            newfilters = filters.remove(_filters, {
-                name: filterName,
-                type: filterType,
-                value: filterValue
-            });
-            path += filters.prepareFilterUrl(newfilters);
+        if (!filterSlug) {
+            filterId = $target.data('filter-id');
+            filterSlug  = ['des', (typeof filterId !== 'undefined' ? '-cat-' : '-iid-'), filterId].join('');
         }
 
-        path = helpers.common.link(path, this.app);
-        this.app.router.redirectTo(path);
-    },
-    rangeFilterInputs: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+        path = window.location.pathname.replace('search', filterSlug);
 
-        var $target =  $(event.currentTarget);
-        var filterType = $target.data('filter-type');
-        var filterName = $target.data('filter-name');
-        var from = $target.siblings('[data-filter-id=from]').val();
-        var to = $target.siblings('[data-filter-id=to]').val();
-        var catUrl = window.location.pathname.split('/-')[0];
-        var newfilters;
-        var path = catUrl + '/';
-        var _filters = filters.parse(window.location.pathname);
-
-
-        newfilters = filters.add(_filters, {
-            name: filterName,
-            type: filterType,
-            value: {
-                from: from,
-                to: to
-            }
-        });
-        path += filters.prepareFilterUrl(newfilters);
-        this.app.router.redirectTo(path);
-
-    },
-    rangeFilterLinks: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $target =  $(event.currentTarget);
-        var filterType = $target.data('filter-type');
-        var filterName = $target.data('filter-name');
-        var from = $target.data('filter-from');
-        var to = $target.data('filter-to');
-        var catUrl = window.location.pathname.split('/-')[0];
-        var newfilters;
-        var path = catUrl + '/';
-        var _filters = filters.parse(window.location.pathname);
-
-        newfilters = filters.add(_filters, {
-            name: filterName,
-            type: filterType,
-            value: {
-                from: from,
-                to: to
-            }
-        });
-        path += filters.prepareFilterUrl(newfilters);
         this.app.router.redirectTo(path);
 
     }

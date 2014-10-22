@@ -20,7 +20,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var slugUrl = helpers.common.slugToUrl(data.currentCategory);
         var filters = data.metadata.filters;
-        var order = ['pricerange','carbrand','condition','kilometers','year'];
+        var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
         var list = [];
 
         _.each(order, function(obj, i){

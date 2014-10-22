@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'H\u1EA1ng m\u1EE5c con',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Th\xEAm v\xE0o m\u1EE5c y\xEAu th\xEDch',
+    'itemgeneraldetails.BackResults': 'Tr\u1EDF l\u1EA1i k\u1EBFt qu\u1EA3 k\u1EBFt qu\u1EA3',
     'itemgeneraldetails.City': 'Th\xE0nh ph\u1ED1',
     'itemgeneraldetails.DatePosted': 'Ng\xE0y \u0111\u0103ng ',
     'itemgeneraldetails.Description': 'M\xF4 t\u1EA3',

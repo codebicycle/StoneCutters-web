@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Alakategoria',
     'posting_optionallist.Kms': 'Kms',
     'itemgeneraldetails.addFavorites': 'Lis\xE4\xE4 suosikkeihin',
+    'itemgeneraldetails.BackResults': 'Takaisin tuloksiin',
     'itemgeneraldetails.City': 'Kaupunki',
     'itemgeneraldetails.DatePosted': 'Ilmoituksen j\xE4tt\xF6p\xE4iv\xE4',
     'itemgeneraldetails.Description': 'Kuvaus',

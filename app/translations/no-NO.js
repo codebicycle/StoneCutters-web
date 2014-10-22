@@ -98,6 +98,7 @@ module.exports = {
     'posting_selectcategory.subCategories': 'Underkategori',
     'posting_optionallist.Kms': 'Km',
     'itemgeneraldetails.addFavorites': 'Legg til favoritter',
+    'itemgeneraldetails.BackResults': 'Tilbake til Resultatet',
     'itemgeneraldetails.City': 'By',
     'itemgeneraldetails.DatePosted': 'Dato satt inn',
     'itemgeneraldetails.Description': 'Beskrivelse',
