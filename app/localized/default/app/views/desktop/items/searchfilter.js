@@ -19,6 +19,9 @@ module.exports = Base.extend({
         var filters = data.metadata.filters;
         var order = ['parentcategory','state','city'];
         var list = [];
+        var linkig = this.app.session.get('path').split('/');
+        linkig[2] = linkig[2] + '-ig';
+        linkig = linkig.join('/');
 
         _.each(order, function(obj, i){
             _.find(filters, function(obj){
@@ -32,6 +35,7 @@ module.exports = Base.extend({
             filters: list,
             nav: {
                 link: data.url,
+                linkig: linkig,
                 listAct: 'active',
             }
         });

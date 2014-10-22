@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': '\u0935\u0930\u094D\u0917',
     'popularsearchesbody.PopularCities': '\u0932\u094B\u0915\u092A\u094D\u0930\u093F\u092F \u0936\u0939\u0930',
     'popularsearchesbody.PopularOn': '<<OLX_DOMAIN>> \u092E\u0947\u0902 \u0932\u094B\u0915\u092A\u094D\u0930\u093F\u092F',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': '\u092A\u0938\u0902\u0926\u0940\u0926\u093E \u0938\u0947 \u0939\u091F\u093E\u090F\u0902',
     'itemheader.AddedFavorites': '\u092A\u0938\u0902\u0926\u0947\u0902 \u092E\u0947\u0902 \u091C\u094B\u0921\u093C\u093E \u0917\u092F\u093E',
     'itemheader.RemovedFavorites': '\u092A\u0938\u0902\u0926\u0940\u0926\u093E \u0938\u0947 \u0939\u091F\u093E \u0926\u093F\u092F\u093E',

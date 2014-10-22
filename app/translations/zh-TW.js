@@ -163,6 +163,7 @@ module.exports = {
     'popularsearchesbody.CATEGORIES_BOX': '\u5206\u985E',
     'popularsearchesbody.PopularCities': '\u71B1\u9580\u57CE\u5E02',
     'popularsearchesbody.PopularOn': '\u5728<<OLX_DOMAIN>>\u7684\u71B1\u9580',
+    'mobilepromo.DownloadNowForFree': 'Download now for free',
     'mobilepromo.RemoveFromFavorites': '\u5F9E\u6700\u611B\u88E1\u522A\u9664',
     'itemheader.AddedFavorites': '\u6DFB\u52A0\u5230\u6211\u7684\u6536\u85CF',
     'itemheader.RemovedFavorites': '\u5F9E\u6211\u7684\u6536\u85CF\u522A\u9664',

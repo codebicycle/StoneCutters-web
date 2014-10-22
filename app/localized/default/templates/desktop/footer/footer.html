@@ -1,10 +1,11 @@
 <div class="footer-options">
 	<ul class="select">
-		<li><a href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-navarrowup"></span></a></li>
-		<li><a href="#">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','') }}<span class="icons icon-navarrowup"></span></a></li>
-		<li><a href="#" >{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}<span class="icons icon-navarrowup"></span></a></li>
-		<li><a href="{{ '/help' | link }} " rel="nofollow" >{{ dictionary["biderrorheader.Help"] }}<span class="icons icon-navarrowup"></span></a></li>
+		<li><a href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-arrow"></span></a></li><!--
+		--><li><a href="#">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','') }}<span class="icons icon-arrow"></span></a></li><!--
+		--><li><a href="#" >{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}<span class="icons icon-arrow"></span></a></li><!--
+		--><li><a href="{{ '/help' | link }} " rel="nofollow" >{{ dictionary["biderrorheader.Help"] }}<span class="icons icon-arrow"></span></a></li>
 	</ul>
+	{% include (template + '/marketing/appStores.html') %}
 </div>
 <div class="container">
 	<p>{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2014 OLX, Inc.</p>
