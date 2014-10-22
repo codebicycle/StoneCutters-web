@@ -99,7 +99,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var language = req.rendrApp.session.get('selectedLanguage');
             var osName = req.rendrApp.session.get('osName') || 'unknown';
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
-            var options = defaultRequestOptions(req, 'pageview', 'ati');
+            var options = defaultRequestOptions(req, 'pageview', 'google');
             var params = {
                 host: host || req.host,
                 page: page || req.query.page,
