@@ -8,22 +8,29 @@
 
 {% block content %}
     <div class="video-content">
-        <iframe width="635" height="390" frameborder="0" allowfullscreen="" id="video-container-iframe" src="http://www.youtube.com/embed/FmYRXopMdow"></iframe>
+        <iframe width="635" height="390" frameborder="0" allowfullscreen="" id="video-container-iframe" src="http://www.youtube.com/embed/FmYRXopMdow" data-video-title="OLX. Vender es fácil - Sillón"></iframe>
     </div>
     <div class="video-thumbnails">
         <ul class="content">
-            <li>
-                <a href="#29QoFeoJldU">
-                    <span class="video-title">OLX Uruguay - Celular - Vender es fácil</span>
+            <li style="display: none">
+                <a data-video-item="FmYRXopMdow" href="#">
+                    <span class="video-title">OLX. Vender es fácil - Sillón</span>
                     <span class="icon-play"></span>
-                    <img alt="video" src="http://img.youtube.com/vi/29QoFeoJldU/default.jpg" />
+                    <img alt="OLX. Vender es fácil - Sillón" src="http://img.youtube.com/vi/FmYRXopMdow/default.jpg" />
                 </a>
             </li>
             <li>
-                <a href="#Z3wwfLdLgj8">
-                    <span class="video-title">OLX Uruguay - Bicicleta - Vender es fácil</span>
+                <a data-video-item="XAbGc_JDWdU" href="#">
+                    <span class="video-title">OLX. Vender es fácil - Raqueta</span>
                     <span class="icon-play"></span>
-                    <img alt="video" src="http://img.youtube.com/vi/Z3wwfLdLgj8/default.jpg" />
+                    <img alt="OLX. Vender es fácil - Raqueta" src="http://img.youtube.com/vi/XAbGc_JDWdU/default.jpg" />
+                </a>
+            </li>
+            <li>
+                <a data-video-item="Y2b76k1TFz4" href="#">
+                    <span class="video-title">OLX. Vender es fácil - Smartphone</span>
+                    <span class="icon-play"></span>
+                    <img alt="OLX. Vender es fácil - Raqueta" src="http://img.youtube.com/vi/Y2b76k1TFz4/default.jpg" />
                 </a>
             </li>
         </ul>
@@ -31,13 +38,13 @@
             <p>{{ dictionary["defaulthtmlhead.ShareThisVideo"] }}:</p>
             <ul>
                 <li>
-                    <a class="icons icon-facebook"></a>
+                    <a data-icon-facebook="true" class="icons icon-facebook" href="#"></a>
                 </li>
                 <li>
-                    <a class="icons icon-twitter"></a>
+                    <a data-icon-twitter="true" class="icons icon-twitter" href="#"></a>
                 </li>
                 <li>
-                    <a class="icons icon-googleplus"></a>
+                    <a data-icon-gplus="true" class="icons icon-googleplus" href="#"></a>
                 </li>
             </ul>
         </div>
