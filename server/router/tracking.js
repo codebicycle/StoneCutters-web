@@ -60,7 +60,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         var fail = getOption(options, 'fail');
         var error = getOption(options, 'error');
 
-console.log(url);
         restler.request(url, options)
             .on('success', success)
             .on('fail', fail)
