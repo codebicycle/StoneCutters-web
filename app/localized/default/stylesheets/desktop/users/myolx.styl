@@ -84,6 +84,15 @@
                 text-align: center;
                 width: 185px;
 
+                .withoutimg {
+                    color: $greyBorders;
+                    display: block;
+                    font-size: 100px;
+                    margin: 0 auto;
+                    max-width: 100%;
+                    padding: 12px 0;
+                }
+
                 img {
                     margin: 0 auto;
                     max-width: 100%;
@@ -144,6 +153,7 @@
                 .tips span {
                     display: inline-block;
                     padding: 3px;
+                    text-transform: lowercase;
                 }
 
                 .text {
@@ -172,15 +182,7 @@
         }
 
         .expired, .deleted, .rejected {
-            .image {
-                .withoutimg {
-                    color: $greyBorders;
-                    display: block;
-                    font-size: 100px;
-                    margin: 0 auto;
-                    max-width: 100%;
-                    padding: 12px 0;
-                }
+            .image {                
 
                 .status {
                     background: $greyBorders;
