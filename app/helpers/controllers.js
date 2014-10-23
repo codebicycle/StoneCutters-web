@@ -24,7 +24,7 @@ function prepare(done) {
     done();
 }
 
-function processAnalytics(done) {
+function processTracking(done) {
     tracking.reset();
     done();
 }
@@ -128,7 +128,7 @@ module.exports = {
 
         promise = asynquence().or(fail.bind(this))
             .then(prepare.bind(this))
-            .then(processAnalytics.bind(this));
+            .then(processTracking.bind(this));
         if (options.seo) {
             promise.then(processSeo.bind(this));
         }

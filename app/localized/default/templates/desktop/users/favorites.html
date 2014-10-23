@@ -2,4 +2,4 @@
 {% for fav in favorites %}
    item  <strong>{{ fav.title }}</strong><br>
 {% endfor %}
-{% include (template + '/partials/tracking.html') %}
+{% view 'partials/tracking' %}

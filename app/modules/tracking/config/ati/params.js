@@ -102,6 +102,30 @@ module.exports = {
             funnel_subcategory: ''
         }
     },
+    'post#index': {
+        process: true,
+        names: {
+            page_name: 'posting_step1',
+            category: 'posting',
+            funnel_page: 'posting_step1',
+            ad_category: '',
+            ad_subcategory: '',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
+    'post#subcat': {
+        process: true,
+        names: {
+            page_name: 'posting_step2',
+            category: 'posting',
+            funnel_page: 'posting_step2',
+            ad_category: '',
+            ad_subcategory: '',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
     'post#subcategories': {
         process: false,
         names: {
@@ -165,14 +189,14 @@ module.exports = {
     'pages#terms': {
         process: false,
         names: {
-            page_name: 'terms_and_conditions',
+            page_name: 'static/terms',
             category: 'static'
         }
     },
     'pages#help': {
         process: false,
         names: {
-            page_name: 'help_page',
+            page_name: 'static/help',
             category: 'static'
         }
     },

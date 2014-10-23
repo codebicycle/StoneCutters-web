@@ -194,10 +194,10 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, data) {
-                var tracking;
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                 var category = $('.itemCategory').val();
                 var subcategory = $('.itemSubcategory').val();
+                var tracking;
 
                 $('.loading').hide();
                 $('body').removeClass('noscroll');
@@ -258,7 +258,6 @@ module.exports = Base.extend({
             var always = function() {
                 $('.loading').hide();
             }.bind(this);
-
 
             asynquence().or(fail)
                 .then(validate)
