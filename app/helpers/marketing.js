@@ -1,11 +1,15 @@
 'use strict';
 
+var helpers = require('./features');
+
 module.exports = {
     getInfo: function(app, medium) {
         var platform = app.session.get('platform');
+        var location = app.session.get('location');
         var osName = app.session.get('osName');
         var osVersion = app.session.get('osVersion');
         var browserName = app.session.get('browserName');
+        var useADX = helpers.isEnabled.call(this, 'interstitialByADX', platform, location.url);
         var data = {};
 
         if((osVersion < 2.1 && osName == 'Android') || (osVersion < 3.2 && osName == 'iOS') || (osVersion < 4.5 && osName == 'RIM') || (osVersion < 8 && osName == 'Windows Phone')){
@@ -42,6 +46,9 @@ module.exports = {
                 data.image = 'windowsphone';
                 data.browserName = browserName;
             break;
+        }
+        if (useADX) {
+            data.link = 'http://ad-x.co.uk/API/click/olxinc789048jo/am5543eccbc236fa';
         }
         return data;
 

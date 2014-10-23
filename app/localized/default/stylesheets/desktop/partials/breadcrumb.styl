@@ -1,34 +1,46 @@
 #breadcrumb {
     clear-fix();
-    color: #000;
+    color: $black;
     font-size: $xs;
     margin: 0 0 20px 0;
 
     .breadcrumb-navigation {
         float: left;
+
+        a,
+        span,
         .count {
-            color: #999;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .count {
+            color: $greyStrong;
         }
     }
 
     .breadcrumb-pagination {
         float: right;
-        p, 
         a {
+            color: $greyStrong;
+            &.disable {
+                color: $greyBorders;
+            }
+            &[rel="prev"] {
+                box($white, $greyBorders, 3px 0 0 3px, 6px, solid, 1px 0 1px 1px);
+            }
+            &[rel="next"] {
+                box($white, $greyBorders, 0 3px 3px 0, 6px, solid, 1px);
+            }
+        }
+        p {
             display: inline-block;
             margin: 0;
+            vertical-align: middle;
         }
-        a {
-            color: #666;
-            &.disable {
-                color: #ddd;
-            }
-            &:nth-child(2) {
-                box(#fff, #ddd , 3px 0 0 3px, 6px, solid, 1px 0 1px 1px);
-            }
-            &:last-child {
-                box(#fff, #ddd , 0 3ox 3px 0, 6px);
-            }
-        }
+    }
+
+    .icon-arrow::before {
+        font-size: remify(8px);
+        margin: 0 4px;
     }
 }

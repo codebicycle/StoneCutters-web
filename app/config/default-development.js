@@ -25,12 +25,12 @@ module.exports = {
         wap: [],
         html4: [],
         html5: [],
-        desktop: ['www.olx.com.br', 'www.olx.com.ve']
+        desktop: []
     },
     icons: {
-        wap: [],
-        html4: [],
-        html5: []
+        wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.com.uy'],
+        html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.com.uy'],
+        html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.com.uy']
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
@@ -80,8 +80,18 @@ module.exports = {
     features: {
         html5: {
             postingFlow: {
+                worldwide: true,
+                countries: []
+            },
+            interstitialByADX: {
                 worldwide: false,
-                countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
+                countries: ['www.olx.com.py']
+            }
+        },
+        html4: {
+            interstitialByADX: {
+                worldwide: false,
+                countries: ['www.olx.com.py']
             }
         }
     },

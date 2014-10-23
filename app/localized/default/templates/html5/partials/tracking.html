@@ -1,5 +1,7 @@
 {% if tracking %}
-    {% include (template + '/partials/tracking/common.html') %}
+    {% for url in tracking.urls %}
+        <img src="{{url}}" class="analytics" width="1" height="1">
+    {% endfor %}
 
-    {% include (template + '/partials/tracking/analytics.html') %}
+    <div id="tracking-data" data-params='{% json tracking.params %}'></div>
 {% endif %}

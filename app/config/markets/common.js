@@ -14,7 +14,17 @@ module.exports = {
         enabled: true,
         levelPath: true,
         popularSearches: true,
-        relatedListings: false,
-        extendedTitle: true
+        relatedListings: true,
+        extendedTitle: true,
+        references: true
+    },
+    tracking: {
+        enabled: true,
+        trackers: {
+            server: true,
+            ati: true,
+            analytics: true,
+            hydra: true
+        }
     }
 };

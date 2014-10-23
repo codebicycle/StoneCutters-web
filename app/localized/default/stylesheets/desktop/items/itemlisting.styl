@@ -10,32 +10,41 @@
         margin: 0;
         padding: 10px;
     }
-    span.title {
+    .title {
         border-bottom: 1px solid $greyBorders;
-        color: #000;
+        color: $black;
         font-size: $s;
         position: relative;
-        &.filter-title{
+        &.filter-title {
             border: none;
         }
-        .icons {
+        .icons::before {
             color: $greyStrong;
-            font-size: 1.5rem;
+            cursor: pointer;
+            font-size: remify(22px);
             position: absolute;
-            right: 5px;
-            top: 5px;
+            right: 10px;
+            top: 10px;
+        }
+        .icon-arrow-up::before {
+            font-size: remify(10px);
         }
     }
     a {
         display: block;
         font-size: $xs;
         padding: 9px;
-        &:before {
-            font-size: $s;
+        &.icons::before {
+            font-size: $m;
+        }
+        &.icon-arrow-left::before {
+            font-size: $xs;
+            margin-right: 5px;
         }
     }
 }
-#listing-items{
-    float: left;
+
+#listing-items {
+    float: right;
     width: 720px;
 }

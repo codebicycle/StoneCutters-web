@@ -1,29 +1,32 @@
 .appStores {
-    margin-top: 20px;
+    float: right;
     .container-stores {
-        clear-fix();
-
+        display: inline-block;
+        vertical-align: middle;
         a {
-            float: right;
-            display: block;
-
-            &:first-child {
-                float: left;
+            display: inline-block;
+            vertical-align: middle;
+            img {
+                display: block;
+                max-height: 40px;
             }
         }
     }
 
     p {
-        color: #652387;
+        color: $violet;
+        display: inline-block;
         font-size: $s;
         font-weight: bold;
+        margin: 0;
         text-align: center;
+        vertical-align: middle;
     }
 
-    .icon-sketchyarrowright:before,
-    .icon-sketchyarrowleft:before {
-        font-size: remify(20px);
-        padding: 15px 10px 0;
-        transform(rotate(180deg));
+    .icon-sketchyarrow::before {
+        float: right;
+        font-size: $s;
+        margin: 0 5px;
+        transform(rotate(270deg));
     }
 }

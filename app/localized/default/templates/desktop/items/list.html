@@ -3,14 +3,14 @@
     {% for item in items %}
         <li>
             <a href="{{ item | slugToUrl | link }}" data-qa="item-list" >
-                <div class="items-image {{ 'lines' if item.thumbnail else 'icons icon-photo' }}">
+                <figure class="items-image {{ 'lines' if item.thumbnail else 'icons icon-photo' }}">
                     {% if item.thumbnail %}
                         <img src="{{ item.thumbnail }}">
                     {% endif %}
-                </div><p
+                </figure><p
                  class="items-info">
                     {{ item.title }}<br>
-                    <span>Category | {{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
+                    <span>{{ dictionary["itemslisting.NavigatorByCategory"] }}  | {{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
                 </p><p
                  class="items-price">
                     {{ item.price.displayPrice }}

@@ -41,7 +41,7 @@ module.exports = Base.extend({
 
         var $remove = $(event.currentTarget);
         var $container = $remove.parent().removeClass('loaded');
-        var $image = $container.find('.image').removeClass('fill').removeAttr('style');
+        var $image = $container.find('.image').removeClass('fill').removeAttr('style').addClass('icons icon-addpicture');
         var $input = this.$('#' + $container.data('input')).val('');
 
         delete this.selected[$input.attr('name')];
@@ -63,9 +63,9 @@ module.exports = Base.extend({
         var image = new window.Image();
 
         image.src = imageUrl;
-        
+
         image.onload = function() {
-        
+
             window.URL.revokeObjectURL(this.src);
 
             var exif = function(done) {
@@ -94,7 +94,7 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, res) {
-                    this.selected[$input.attr('name')] = {
+                this.selected[$input.attr('name')] = {
                     id: res.shift(),
                     file: imageUrl,
                     orientation: 1
@@ -105,10 +105,11 @@ module.exports = Base.extend({
             var display = function() {
                 var orientation = EXIF.getTag(image, 'Orientation');
                 var cssClass = 'fill r' + (orientation || 1);
-                
+
                 if (orientation) {
                     this.selected[$input.attr('name')].orientation = orientation;
                 }
+                $image.removeClass('icons icon-addpicture');
                 $image.addClass(cssClass).css({
                     'background-image': 'url(' + imageUrl + ')'
                 });
@@ -122,7 +123,7 @@ module.exports = Base.extend({
                 .then(success)
                 .then(display);
         }.bind(this);
-        
+
         image.onerror = function(err) {
             this.$el.trigger('imageLoadEnd');
             delete this.selected[$input.attr('name')];

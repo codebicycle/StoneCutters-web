@@ -1,4 +1,4 @@
-{% include (template + "/partials/breadcrumb.html") %}
+{% include (template + "/items/breadcrumb.html") %}
 
 <section id="item-page" data-qa="item" >
     {% include (template + "/items/itemcontent.html") %}
@@ -14,6 +14,4 @@
 
 {% include (template + "/partials/adsense.html") %}
 
-{% include (template + "/partials/postbanner.html") %}
-
-{% include (template + '/partials/tracking.html') %}
+{% view 'partials/tracking' %}

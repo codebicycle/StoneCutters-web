@@ -3,12 +3,12 @@
 		border-bottom: 1px solid $greyBorders;
 	}
 	.count {
-		color: #888;
+		color: $greyStrong;
 		font-size: $xs;
 	}
 	.category-selected {
-		background: #666;
-		color: #fff;
+		background: $greyStrong;
+		color: $white;
 		position: relative;
 		span {
 			font-size: $xs;
@@ -17,54 +17,60 @@
 		&.arrow:after {
 			left: 10px;
 			bottom: -11px;
-			arrow(#666 transparent transparent, 5px 6px 6px);
+			arrow($greyStrong transparent transparent, 5px 6px 6px);
 		}
-		&:before {
+		&.icons::before {
 			font-size: $m;
+			margin-right: 5px;
 		}
 	}
 	.sub-categories {
-		background: #fff;
+		background: $white;
 		ul-reset();
 
 		li {
 			&:hover {
-				box-shadow(0 0 0 1px #38b inset);
-				a, .count {
+				box-shadow(0 0 0 1px $blue inset);
+				a, 
+				.count {
 					text-decoration: none;
-					color: #666;
+					color: $greyStrong;
 				}
 			}
 
 		}
 	}
 	.filter {
+		border-bottom: 1px solid $greyBorders;
 		display: block;
 		padding: 10px;
-		border-bottom: 1px solid #ddd;
 		&:last-child {
 			border: none;
 		}
 
-		&.price {
+		&.range {
 			.text-field {
+				display: inline-block;
+				margin-right: 6px;
+				vertical-align: middle;
 				width: 60px;
-				float: left;
-				margin-right: 10px;
 			}
 			.button {
-				width: 34px;
-				height: 34px;
-				background: #999;
-				color: #fff;
-				border: none;
-				text-align: center;
+				background: $greyStrong;
 				border-radius();
+				border: none;
+				color: $white;
+				height: 34px;
+				line-height: 1;
+				text-align: center;
+				width: 34px;
 			}
 		}
 		&.check-box {
-			label {
+			label, 
+			.link-range {
 				color: $blue;
+				cursor: pointer;
 				display: block;
 				font-size: $xs;
 				padding: 5px 0;
