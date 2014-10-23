@@ -90,9 +90,8 @@
         <div class="btnCenter">
             <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="btns orange">
         </div>
-
-        {% set templateName = template + '/partials/tracking.html' %}
-        {% include templateName %}
     </form>
 
 </section>
+
+{% view 'partials/tracking' %}
