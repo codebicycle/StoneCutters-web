@@ -10,28 +10,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function defaultRequestOptions(req, type, tracker) {
-        var platform = req.rendrApp.session.get('platform');
-
-        return {
-            headers: {
-                'User-Agent': utils.getUserAgent(req),
-                'Accept-Encoding': 'gzip,deflate,sdch',
-                'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache'
-            },
-            success: function() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
-            },
-            error: function() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
-            },
-            fail: function() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
-            }
-        };
-    }
-
     function prepare(options, params) {
         options = _.defaults(options, {
             method: 'get',
@@ -52,18 +30,30 @@ module.exports = function trackingRouter(app, dataAdapter) {
         return value;
     }
 
-    function track(url, options, params) {
+    function track(req, url, type, tracker) {
         if (!url) {
             return;
         }
-        var success = getOption(options, 'success');
-        var fail = getOption(options, 'fail');
-        var error = getOption(options, 'error');
+        var platform = req.rendrApp.session.get('platform');
+        var options = {
+            headers: {
+                'User-Agent': utils.getUserAgent(req),
+                'Accept-Encoding': 'gzip,deflate,sdch',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
+            }
+        };
 
         restler.request(url, options)
-            .on('success', success)
-            .on('fail', fail)
-            .on('error', error);
+            .on('success', function success() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+            })
+            .on('fail', function error() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+            })
+            .on('error', function fail() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
+            });
     }
 
     (function pageview() {
@@ -99,14 +89,12 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var language = req.rendrApp.session.get('selectedLanguage');
             var osName = req.rendrApp.session.get('osName') || 'unknown';
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
-            var options = defaultRequestOptions(req, 'pageview', 'google');
             var params = {
                 host: host || req.host,
                 page: page || req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: options.headers['User-Agent'],
                 hitCount: req.rendrApp.session.get('hitCount'),
                 keyword: req.query.keyword
             };
@@ -125,14 +113,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 app: req.rendrApp
             }, params, config);
 
-            track(url, options);
+            track(req, url, 'pageview', 'google');
         }
 
         function atiTracking(req) {
             if (!req.query.custom) {
                 return;
             }
-            var options = defaultRequestOptions(req, 'pageview', 'ati');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
                 custom: req.query.custom,
@@ -146,7 +133,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 app: req.rendrApp
             }, params, config);
 
-            track(url, options);
+            track(req, url, 'pageview', 'ati');
         }
 
         function atiTrackingColombia(req) {
@@ -156,7 +143,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (!req.query.custom) {
                 return;
             }
-            var options = defaultRequestOptions(req, 'pageview', 'ati');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
                 custom: req.query.custom,
@@ -172,7 +158,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 app: req.rendrApp
             }, params, config);
 
-            track(url, options);
+            track(req, url, 'pageview', 'ati');
         }
 
         function check(req) {
@@ -246,12 +232,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (!req.query.page) {
                 return;
             }
-            var options = defaultRequestOptions(req, 'pageevent', 'google');
             var params = _.extend({
                 host: host,
                 ip: req.rendrApp.session.get('ip'),
-                clientId: req.rendrApp.session.get('clientId'),
-                userAgent: options.headers['User-Agent']
+                clientId: req.rendrApp.session.get('clientId')
             }, req.query);
             var config = {
                 platform: req.rendrApp.session.get('platform'),
@@ -261,14 +245,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 app: req.rendrApp
             }, params, config);
 
-            track(url, options);
+            track(req, url, 'pageevent', 'google');
         }
 
         function atiTracking(req) {
             if (!req.query.custom) {
                 return;
             }
-            var options = defaultRequestOptions(req, 'pageevent', 'ati');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
                 custom: req.query.custom,
@@ -282,7 +265,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 app: req.rendrApp
             }, params, config);
 
-            track(url, options);
+            track(req, url, 'pageevent', 'ati');
         }
 
         function check(req) {
