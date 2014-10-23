@@ -8,7 +8,10 @@ module.exports = Base.extend({
     className: 'users_myads_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        return data.context.ctx;
+        return _.extend({}, data, {
+            breadcrumb: helpers.breadcrumb.get.call(this, data),
+            myAds: data.context.ctx.myAds
+        });
     },
     postRender: function() {
         $('.edit').click(function(e) {
