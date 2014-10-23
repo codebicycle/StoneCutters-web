@@ -25,7 +25,7 @@ module.exports = {
         wap: [],
         html4: [],
         html5: [],
-        desktop: ['www.olx.com.br', 'www.olx.com.ve']
+        desktop: []
     },
     icons: {
         wap: [],
