@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
+var order = ['parentcategory','state','city'];
 
 module.exports = Base.extend({
     id: 'items-searchfilter-view',
@@ -16,20 +17,14 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var filters = data.metadata.filters;
-        var order = ['parentcategory','state','city'];
-        var list = [];
         var linkig = this.app.session.get('path').split('/');
+        var list = filters.orderFilters(order, data.metadata.filters);
+
         linkig[2] = linkig[2] + '-ig';
         linkig = linkig.join('/');
 
-        _.each(order, function(obj, i){
-            _.find(filters, function(obj){
-                return obj.name == order[i] ? list.push(obj) : false;
-            });
-        });
-
         _.each(data.items, this.processItem);
+
         return _.extend({}, data, {
             items: data.items,
             filters: list,
