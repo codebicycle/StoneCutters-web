@@ -44,7 +44,10 @@ module.exports = {
         url: 'auth/login'
     },
     'redirections#popularSearches': {
-        url: 'popular-searches(-cat-:categoryId)'
+        urls: [
+            'popular-searches(-cat-:categoryId)',
+            'popular-searches'
+        ]
     },
     'redirections#register': {
         url: 'registration/index'

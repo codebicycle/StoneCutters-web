@@ -4,7 +4,8 @@ module.exports = {
     'items#staticSearch': {
         urls: [
             'q/:search/c-:catId',
-            'q/:search/p-:page'
+            'q/:search/p-:page',
+            'q/:search'
         ]
     },
     'items#allresultsig': {

@@ -5,6 +5,7 @@ var _ = require('underscore');
 var async = require('async');
 var localization = require('../../../../../shared/config').get('localization', {});
 var helpers = require('../../../../helpers');
+var Seo = require('../../../../modules/seo');
 var translations = require('../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -51,7 +52,8 @@ module.exports = Base.extend({
             os: {
                 name: this.app.session.get('osName').replace(/\s*/g, ''),
                 version: this.app.session.get('osVersion')
-            }
+            },
+            seo: Seo.instance(this.app)
         });
     },
     track: function(data, callback, options) {
