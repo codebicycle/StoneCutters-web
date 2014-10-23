@@ -1,6 +1,15 @@
 {% for filter in filters %}
-    {% if fiter.name != 'state' and filter.name != 'city'  %}
-        {% if filter.type == 'SELECT' %}
+    {% if filter.name != 'state' and filter.name != 'city'  %}
+        {% if filter.type == 'SELECT' and filter.name == 'parentcategory' %}
+            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
+            <ul class="sub-categories">
+                {% for value in filter.value %}
+                    <li>
+                        <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" >{{ value.value }} <span class="count">{{ value.count }}</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elif filter.type == 'SELECT' %}
             <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
             <div class="filter check-box {{ filter.name }}">
                 {% for value in filter.value %}

@@ -10,17 +10,18 @@ module.exports = Base.extend({
     className: 'categories-showig-view',
     tagName: 'main',
     events: {
-    'click .check-box input': 'selectFilter',
-    'click .range-submit': 'rangeFilterInputs',
-    'click .link-range': 'rangeFilterLinks',
-    'click .clean-filters': 'cleanFilters',
-    'click .filter-title span.icons': 'toogleFilter'
+        'click .check-box input': 'selectFilter',
+        'click .range-submit': 'rangeFilterInputs',
+        'click .link-range': 'rangeFilterLinks',
+        'click .clean-filters': 'cleanFilters',
+        'click .filter-title span.icons': 'toogleFilter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var slugUrl = helpers.common.slugToUrl(data.currentCategory);
+        var linkig = this.app.session.get('path');
+        var link = linkig.replace('-ig','');
         var filters = data.metadata.filters;
-        var order = ['pricerange','carbrand','condition','kilometers','year'];
+        var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
         var list = [];
 
         _.each(order, function(obj, i){
@@ -28,13 +29,13 @@ module.exports = Base.extend({
                 return obj.name == order[i] ? list.push(obj) : false;
             });
         });
-
         _.each(data.items, this.processItem);
         return _.extend({}, data, {
             items: data.items,
             filters: list,
             nav: {
-                link: slugUrl,
+                link: link,
+                linkig: linkig,
                 galeryAct: 'active',
             }
         });

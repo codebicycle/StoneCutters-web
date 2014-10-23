@@ -16,6 +16,7 @@ module.exports = Base.extend({
             items: data.items,
             nav: {
                 link: 'nf/all-results',
+                linkig: 'nf/all-results-ig',
                 listAct: 'active'
             }
         });
