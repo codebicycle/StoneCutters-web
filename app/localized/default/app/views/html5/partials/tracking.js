@@ -40,7 +40,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        if (tracking) {
+        if (tracking && tracking.params) {
             this.$el.trigger('trackAnalytics', tracking);
         }
     },
