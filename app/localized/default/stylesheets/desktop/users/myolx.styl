@@ -14,7 +14,7 @@
             width: 24.68%;
 
             a {
-                box($greyBoxBg, $greyBorders, 3px, 10px 0, solid, 1px 1px 0 1px)
+                box($greyBoxBg, $greyBorders, 3px 3px 0 0, 10px 0, solid, 1px 1px 0 1px)
                 color: $blue;
                 display: block;
                 font-size: 20px;
@@ -52,7 +52,7 @@
                     bottom:-9px;
                 }
                 &:after {
-                    border-color:transparent $greyPageBg;
+                    border-color:transparent $white;
                 }
             }
         }
@@ -60,7 +60,7 @@
 
     .my-items {
         background: $white;
-        border-radius: 3px;
+        border-radius: 0 0 3px 3px;
         border: 1px solid $greyBorders;
         margin-top: 0;
         padding: 0;
