@@ -6,7 +6,7 @@ var URLParser = require('url');
 module.exports = Base.extend({
     className: 'app_view',
     events: {
-        'click .icon-close': 'toggleModal',
+        'click [data-modal-close]': 'toggleModal',
         'click .open-modal': 'toggleModal',
         'click [data-video-item]': 'changeVideo',
         'click [data-icon-facebook]': 'openFacebook',
