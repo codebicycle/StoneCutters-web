@@ -4,8 +4,8 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var _ = require('underscore');
         var path = require('path');
-        var robots = path.resolve('server/templates/robots/web.txt');
-        var mRobots = path.resolve('server/templates/robots/mobile.txt');
+        var robots = path.resolve('server/files/robots/web.txt');
+        var mRobots = path.resolve('server/files/robots/mobile.txt');
         var mobile = ['m', 'wap', 'html4', 'html5'];
 
         return function middleware(req, res, next) {
