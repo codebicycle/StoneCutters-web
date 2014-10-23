@@ -189,7 +189,7 @@ module.exports = {
     'pages#terms': {
         process: false,
         names: {
-            page_name: 'terms_and_conditions',
+            page_name: 'static/terms',
             category: 'static'
         }
     },

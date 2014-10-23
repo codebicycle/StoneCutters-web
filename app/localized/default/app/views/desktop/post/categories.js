@@ -52,50 +52,12 @@ module.exports = Base.extend({
         }.bind(this);
 
         var track = function(done, res) {
-            var img;
-            var analyticImg;
-            var trackingInfo;
+            var $view = $('#partials-tracking-view');
 
             tracking.reset();
             tracking.setPage('post#subcat');
 
-            trackingInfo = tracking.generateURL.call(this);
-            _.each(trackingInfo.urls, function(url) {
-                img = $('<img/>');
-                img.addClass('analytics');
-                img.attr('src', url);
-                analyticImg = $('.analytics:last');
-                analyticImg.after(img);
-            });
-
-            _gaq.push(function() {
-                var host = trackingInfo.params.google.host;
-                var tracker = window._gat._getTracker(trackingInfo.params.google.id);
-                var referrerDomain = 'emptyReferrer';
-                var doStore = true;
-
-                if (typeof document.referrer !== 'undefined' && document.referrer !== '') {
-                    referrerDomain = document.referrer.match(/:\/\/(.[^/]+)/)[1];
-
-                    if (referrerDomain.indexOf(host) != -1) {
-                        doStore = false;
-                    }
-                }
-                if (doStore) {
-                    tracker._setCustomVar(2, 'keep_referral', referrerDomain, 2);
-                }
-                tracker._set("title",trackingInfo.params.keyword);
-                tracker._trackPageview(trackingInfo.params.page);
-            });
-
-            window.atiapi.push({
-                xtdmc: trackingInfo.params.ati.host,
-                xtnv: document,
-                xtsd: trackingInfo.params.ati.protocol + '://' + trackingInfo.params.ati.logServer,
-                xtsite: trackingInfo.params.ati.siteId,
-                xtcustom: JSON.parse(trackingInfo.params.custom),
-                xtergo: '1'
-            });
+            $view.trigger('update', tracking.generateURL.call(this));
 
             done(res);
         }.bind(this);

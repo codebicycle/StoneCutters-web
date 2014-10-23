@@ -19,7 +19,7 @@ module.exports = {
         'post#categories': 'post_categorylist/[rendering]',
         'post#edit': 'edititem',
         'post#flow': 'not_set/post_form/[rendering]',
-        'pages#terms': 'terms',
+        'pages#terms': 'static/terms',
         'pages#help': 'static/help',
         'pages#interstitial': 'interstitial',
         'items#success': '[category-name]/[subcategory-id]/reply/[item_attributes]',
