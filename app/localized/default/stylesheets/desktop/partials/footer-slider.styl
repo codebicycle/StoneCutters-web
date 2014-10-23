@@ -1,0 +1,25 @@
+.category-slider {
+    clear-fix();
+    box($white, $greyBorders, 3px, 30px, solid, 1px)
+    ul {
+        ul-reset();
+    }
+    .category-list {
+        float: left;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        width: 224px;
+        li {
+            a {
+                font-size: $xs;
+                font-weight: bold;
+            }
+            &.category {
+                margin-bottom: 10px;
+                > a {
+                    font-size: $s;
+                }
+            }
+        }
+    }
+}
