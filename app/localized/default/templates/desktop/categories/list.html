@@ -1,11 +1,11 @@
-<aside id="marketing-banners">
-    {% include (template + '/marketing/bannervideo.html') %}
-</aside>
+<section id="marketing-top">
+    {% include (template + '/partials/country-area.html') %}
+    {% include (template + '/partials/marketing-box-sell.html') %}
+</section>
 
 <section id="category-tree">
-	{% include (template + '/categories/categorytree.html') %}
+    {% include (template + '/categories/categorytree.html') %}
 </section>
 
 {% include (template + '/modals/location.html') %}
-{% include (template + '/modals/video-gallery.html') %}
 {% include (template + '/partials/tracking.html') %}
