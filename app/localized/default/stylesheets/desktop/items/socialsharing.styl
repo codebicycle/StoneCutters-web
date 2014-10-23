@@ -18,41 +18,44 @@
         ul {
             display: inline-block;
             ul-reset();
+            margin-top: 3px;
             li {
+                border-radius(50%);
                 float: left;
+                font-size: $m;
+                height: 28px;
+                width: 28px;
+
                 &:not(:last-child) {
                     margin-right: 10px;
                 }
-
-                &.button-fb span {
+                &.button-fb {
                     background: $blueFacebook;
                 }
-                &.button-twitter span {
+                &.button-twitter {
                     background: $cyanTwitter;
                 }
-                &.button-googleplus span {
+                &.button-googleplus {
                     background: $redGooglePlus;
                 }
-                span {
-                    border-radius(50%);
+                a {
                     color: #fff;
-                    display: block;
-                    font-size: $xl;
-                    height: 28px;
-                    width: 28px;
-                    &:before {
-                        margin: -4px 0 0 2px;
-                    }
+                    display:block;
+                    margin: 5px 0 0 6px;
                 }
             }
         }
     }
     .actions {
         float: right;
+        margin-top: 8px;
         a{
             action-button(#f9f9f9, #666, 3px, 6px 15px);
             font-size: $xs;
 
+            &.addToFavorites {
+                margin-right: 10px;
+            }
             &:hover{
                 action-button(#999, #fff, 3px, 6px 15px);
             }
