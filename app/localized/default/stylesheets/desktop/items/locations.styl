@@ -15,26 +15,50 @@
         }
         li:not(:last-child) {
             border-bottom: none;
-            box($white, #ddd, 0, 5px 10px 5px 15px);
-            tab-arrow(right, $white, #ddd, 1px, 14px, 10);
+            box($white, $greyBorders, 0, 6px 10px 6px 15px);
+            tab-arrow(right, $white, $greyBorders, 1px, 14px, 10);
         }
         li:first-child {
-            box($white, #ddd, 3px 0 0 0, 5px 10px);
+            box($white, $greyBorders, 3px 0 0 0, 6px 10px);
             border-bottom: none;
         }
         li:last-child {
-            box($yellow, $yellowBorders, 0 3px 0 0, 6px 20px 6px, solid, 1px 1px 0 0);
+            box($yellow, $yellowBorders, 0 3px 0 0, 6px 30px 7px 20px, solid, 1px 1px 0 0);
             border-bottom: none;
             a {
-                color: #000;
+                color: $black;
             }
         }
         li:only-child {
-            box($yellow, $yellowBorders, 3px 3px 0 0, 6px 10px);
+            box($yellow, $yellowBorders, 3px 3px 0 0, 6px 10px 7px);
             border-bottom: none;
-            top: 1px;
             a {
                 color: $black;
+            }
+        }
+        &.locations-empty {
+            li{
+                background: $white;
+                border: 1px solid $greyBorders;
+                padding-bottom: 6px;
+                a.icon-close {
+                    color: $white;
+                }
+            }
+        }
+        li {
+            a.icon-close {
+                background: $greyBorders;
+                border-radius(50%);
+                color: $yellow;
+                font-size: remify(8px);
+                padding: 1px 4px 4px;
+                position: absolute;
+                right: 7px;
+                top: 6px;
+                &:hover {
+                    background: $greyStrong;
+                }
             }
         }
 

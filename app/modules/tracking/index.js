@@ -2,8 +2,8 @@
 
 var config = require('../../../shared/config');
 var tracker = require('./tracker');
-var google = require('./google');
-var ati = require('./ati');
+var analytics = require('./trackers/analytics');
+var ati = require('./trackers/ati');
 
 var query = {};
 
@@ -23,9 +23,10 @@ function addParam(name, value) {
 }
 
 function generateURL() {
-    var data; 
+    var location = this.app.session.get('location');
+    var data;
 
-    if (!config.get(['tracking', 'enabled'], true)) {
+    if (!config.getForMarket(location.url, ['tracking', 'enabled'], true)) {
         return;
     }
 
@@ -37,7 +38,7 @@ function generateURL() {
 }
 
 module.exports = {
-    google: google,
+    analytics: analytics,
     ati: ati,
     reset: reset,
     setPage: setPage,

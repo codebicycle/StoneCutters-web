@@ -3,6 +3,7 @@ var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var Seo = require('../../../../../../modules/seo');
+var tracking = require('../../../../../../modules/tracking');
 
 module.exports = Base.extend({
     className: 'categories_show_view',
@@ -166,25 +167,16 @@ module.exports = Base.extend({
         }
 
         function track(done, _items) {
+            var $view = $('#partials-tracking-view');
             var category = buildCategory('#category');
             var subcategory = buildCategory('#subcategory');
-            var img;
-            var analyticImg;
-            var analyticInfo;
 
             tracking.reset();
             tracking.setPage('listing');
             tracking.addParam('category', category);
             tracking.addParam('subcategory', subcategory);
 
-            analyticInfo = tracking.generateURL.call(this);
-            _.each(analyticInfo.urls, function(url) {
-                img = $('<img/>');
-                img.addClass('analytics');
-                img.attr('src', url);
-                analyticImg = $('.analytics:last');
-                analyticImg.after(img);
-            });
+            $view.trigger('update', tracking.generateURL.call(this));
 
             done(_items);
         }

@@ -127,6 +127,7 @@ Tracker.types = {
             utms: options.hitCount,
             utmhn: options.host,
             utmn: Math.round(Math.random() * 1000000),
+            utmdt: options.keyword,
             utmr: options.referer,
             utmp: options.page,
             utmac: options.id,

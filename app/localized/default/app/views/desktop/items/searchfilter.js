@@ -31,7 +31,7 @@ module.exports = Base.extend({
             nav: {
                 link: data.url,
                 linkig: linkig,
-                listAct: 'active',
+                listAct: 'active'
             }
         });
     },

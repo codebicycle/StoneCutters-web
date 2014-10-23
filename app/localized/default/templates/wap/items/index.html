@@ -67,12 +67,6 @@
                             </td>
                         </tr>
                     {% endfor %}
-                    <tr style="display: none;">
-                        <td>
-                            {% set templateName = template + '/partials/tracking.html' %}
-                            {% include templateName %}
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             {% if metadata.next or metadata.previous %}
@@ -98,5 +92,10 @@
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>
