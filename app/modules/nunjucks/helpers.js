@@ -167,7 +167,17 @@ module.exports = function(nunjucks) {
             var pair = href.split('?');
 
             if (this.ctx.nav && this.ctx.nav.galeryAct) {
-                href = pair[0] + '-ig';
+                if (this.ctx.nav.current === 'searchig') {
+                    href = pair[0] + '/-ig';
+                }
+                else if (this.ctx.nav.current === 'searchfilterig') {
+                    var catPath = pair[0].split('/');
+                    catPath[2] = catPath[2] + '-ig';
+                    href = catPath.join('/');
+                }else {
+                    href = pair[0] + '-ig';
+                }
+
                 if (pair[1]) {
                     href = '?' + pair[1];
                 }

@@ -1,8 +1,3 @@
 <h1 class="brand"><a href="{{ '/' | link }}"><img src="{{ '/images/desktop/logo.png' | static }}" alt="OLX Logo" /></a></h1>
-<form class="search-form" action="{{ 'nf/search/redirect' | link }}" method="post" role="search">
-    <fieldset>
-        <input class="text-field" name="search" type="text" placeholder="¿Qué estás buscando?" tabindex="1" data-qa="search-input" /><!--
-        --><button class="icons icon-search button" type="submit" data-qa="search-submit"></button>
-    </fieldset>
-</form>
-<a href="{{ '/posting' | link }}" class="posting" role="button" data-qa="post-button" >{{ dictionary["defaultheader2.Post"] }}</a>
+{% view 'partials/search' %}
+<a href="{{ '/posting' | link }}" rel="nofollow" class="posting" role="button" data-qa="post-button" >{{ dictionary["defaultheader2.Post"] }}</a>

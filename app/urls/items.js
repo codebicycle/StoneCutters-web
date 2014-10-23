@@ -30,12 +30,40 @@ module.exports = {
             'nf/search/:search/sort',
         ]
     },
+    'items#searchig': {
+        urls: [
+            'search/:search/-p-:page/:filters?/-ig',
+            'search/:search?/-ig',
+            'nf/search/:search/-p-:page/:filters?/-ig',
+            'nf/search/:search?/-ig'
+        ]
+    },
     'items#search': {
         urls: [
             'search/:search/-p-:page/:filters?',
             'search/:search?',
             'nf/search/:search/-p-:page/:filters?',
             'nf/search/:search?'
+        ]
+    },
+    'items#searchfilterig': {
+        urls: [
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?',
+            'nf/:title-cat-:catId([0-9]+)-ig/?:search?',
+            'nf/-cat-:catId([0-9]+)-ig/?:search?',
+            'nf/cat-:catId([0-9]+)-ig/?:search?'
+        ]
+    },
+    'items#searchfilter': {
+        urls: [
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?',
+            'nf/:title-cat-:catId([0-9]+)/?:search?',
+            'nf/-cat-:catId([0-9]+)/?:search?',
+            'nf/cat-:catId([0-9]+)/?:search?'
         ]
     },
     'items#allresults': {

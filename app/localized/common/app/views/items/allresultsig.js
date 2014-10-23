@@ -2,10 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var querystring = require('querystring');
-var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
-var tracking = require('../../../../../modules/tracking');
 
 module.exports = Base.extend({
     className: 'items_allresultsig_view',
