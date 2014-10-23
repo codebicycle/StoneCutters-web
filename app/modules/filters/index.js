@@ -9,6 +9,14 @@ module.exports = function filtersHelper() {
         return (filters.match(/-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g) || []);
     }
 
+    function orderFilters(order, filters) {
+        return order.filter(function each(filter) {
+            return _.contains(Object.keys(filters), filter);
+        }).map(function each(filter) {
+            return filters[filter];
+        });
+    }
+
     function parseValue(value, filter) {
         var pairs;
 
@@ -135,6 +143,7 @@ module.exports = function filtersHelper() {
         parse: parse,
         add: add,
         remove: remove,
-        prepareFilterUrl : prepareFilterUrl
+        prepareFilterUrl : prepareFilterUrl,
+        orderFilters: orderFilters
     };
 }();
