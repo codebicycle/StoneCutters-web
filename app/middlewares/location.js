@@ -14,7 +14,7 @@ module.exports = function(params, next) {
     var redirect = false;
     var previousLocation;
     var url;
-    
+
     if (!params || !params.location) {
         return next();
     }
@@ -23,7 +23,7 @@ module.exports = function(params, next) {
     if (previousLocation === params.location) {
         return next();
     }
-    
+
     if (!params.location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
         url = URLParser.parse(this.app.session.get('url'));
         url = [url.pathname, (url.search || '')].join('');
@@ -33,7 +33,7 @@ module.exports = function(params, next) {
             status: 200
         });
         return next.abort();
-    } 
+    }
     else if (params.location && params.location.split('.').shift() === 'www') {
         redirect = true;
     }
@@ -41,12 +41,12 @@ module.exports = function(params, next) {
 };
 
 function findCity(params, _redirect, next) {
-    var location = this.app.session.get('location');
+    var siteLocation = this.app.session.get('siteLocation');
 
     var fetch = function(done) {
         this.app.fetch({
             location: {
-                model: 'City',
+                model: 'Location',
                 params: {
                     location: params.location
                 }
@@ -60,10 +60,7 @@ function findCity(params, _redirect, next) {
         if (!res || !res.location) {
             return done.fail(new Error('Invalid location'));
         }
-
-        var url = res.location.get('url');
-
-        if (location.url.split('.').pop() !== url.split('.').pop()) {
+        if (siteLocation.split('.').pop() !== res.location.get('url').split('.').pop()) {
             helpers.common.redirect.call(this.app.router || this, '/', null, {
                 status: 200
             });
@@ -73,13 +70,14 @@ function findCity(params, _redirect, next) {
         done(res.location);
     }.bind(this);
 
-    var store = function(done, _location) {
-        location.current = _location.toJSON();
+    var store = function(done, location) {
+        var current = location.get('current');
+
         this.app.session.persist({
-            siteLocation: _location.get('url')
+            siteLocation: current ? current.url : location.get('url')
         });
         this.app.session.update({
-            location: location
+            location: location.toJSON()
         });
         done();
     }.bind(this);
