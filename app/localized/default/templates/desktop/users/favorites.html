@@ -1,5 +1,31 @@
-<h1>my favorites</h1>
+<ul class="my-items">
 {% for fav in favorites %}
-   item  <strong>{{ fav.title }}</strong><br>
+    <li class="item">
+        <figure class="image">
+            {% if fav.thumbnail %}
+                <img src="{{ fav.thumbnail }}" alt="" class="thumbnail">
+            {% else %}
+                <span class="icons icon-photo withoutimg"></span>
+            {% endif %}
+        </figure>
+        <div class="description">
+            <h3 class="title">{{ fav.title }}</h3>
+            <div class="tips">
+                <span>0  {{ dictionary["myolx.Messages"] }}</span>
+                <span>0 {{ dictionary["netvibes_myolx.content.Views"] }} </span>
+                <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', fav.date.timestamp | date("MMM DD, YYYY")) }}</span>
+            </div>
+            <div class="text">
+            </div>
+            <div class="buttons">
+                <a href="#" class="btn orange">Contactar</a>
+                <a href="#" class="btn icons icon-trash removeItem" data-itemid="{{ fav.id }}">{{ dictionary["confirmremoveitem.Delete"] }} </a>
+            </div>
+        </div>
+        <div class="price">
+            <span>{{ fav.price.displayPrice }}</span>
+        </div>
+    </li>
 {% endfor %}
+</ul>
 {% include (template + '/partials/tracking.html') %}
