@@ -1,6 +1,8 @@
 'use strict';
 
+var _ = require('underscore');
 var middlewares = require('../middlewares');
+var asynquence = require('asynquence');
 var helpers = require('../helpers');
 var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
@@ -14,7 +16,8 @@ module.exports = {
     terms: middlewares(terms),
     help: middlewares(help),
     interstitial: middlewares(interstitial),
-    error: middlewares(error)
+    error: middlewares(error),
+    allstates: middlewares(allstates)
 };
 
 function terms(params, callback) {
@@ -177,5 +180,77 @@ function error(params, callback) {
             error: err,
             tracking: tracking.generateURL.call(this)
         });
+    }
+}
+
+function allstates(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var siteLocation = this.app.session.get('siteLocation');
+
+        var decide = function(done) {
+            var spec = {
+                states: {
+                    collection : 'States',
+                    params: {
+                        location: siteLocation,
+                        withCities: true
+                    }
+                }
+            };
+
+            if (params.state) {
+                spec.cities = {
+                    collection : 'Cities',
+                    params : {
+                        level: 'states',
+                        location : siteLocation.replace('www', params.state),
+                        type: 'cities',
+                        withStats: true
+                    }
+                };
+            }
+            done(spec);
+        }.bind(this);
+
+        var fetch = function(done, spec) {
+            this.app.fetch(spec, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var formatResponse = function(done, res) {
+            if (res.cities) {
+                var url = siteLocation.replace('www', params.state);
+                var currentState = res.states.get(url);
+
+                currentState.set({
+                    'children' : res.cities.toJSON(),
+                    'selected': true
+                });
+                res.states.set([currentState]);
+            }
+            done(res);
+        }.bind(this);
+
+        var success = function(response) {
+            var metadata = response.metadata;
+
+            callback(null, {
+                states: response.states.toJSON(),
+                metadata: metadata
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.redirect.call(this, '/all-states');
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(decide)
+            .then(fetch)
+            .then(formatResponse)
+            .val(success);
     }
 }

@@ -7,6 +7,12 @@ module.exports = {
     'pages#help': {
         url: 'help'
     },
+    'pages#allstates': {
+        urls: [
+            'all-states',
+            'all-states/:state'
+        ]
+    },
     'pages#interstitial': {
         url: 'interstitial'
     }
