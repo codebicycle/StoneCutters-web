@@ -235,6 +235,7 @@ function handleItems(params, promise) {
         if (subcategory) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
+        tracking.addParam('page', metadata.page);
         if (metadata.seo) {
             currentPage = metadata.page;
             seo.addMetatag('title', metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));

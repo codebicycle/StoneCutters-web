@@ -27,7 +27,7 @@ module.exports = {
         'items#map': 'item/locate_in_map/[item_attributes]',
         'items#show': '[category-name]/[subcategory-id]/item/[item_attributes]',
         'items#gallery': '[category-name]/[subcategory-id]/item/[item_attributes]/gallery',
-        'categories#show#listing': '[category-name]/[subcategory-id]/listing/[filter_name_value]',
+        'categories#show#listing': '[category-name]/[subcategory-id]/listing/[page]/[filter_name_value]',
         'categories#show': '[category-name]/subcategory_list',
         'pages#error': 'error'
     }

@@ -63,6 +63,15 @@ var pageNameParsers = {
         parse: function (url, options) {
             return url.replace('[' + this.name + ']', options.rendering);
         }
+    },
+    page: {
+        name: 'page',
+        parse: function (url, options) {
+            if (options.page !== 1) {
+                url = url.replace('[' + this.name + ']', 'pag_' + options.page);
+            }
+            return url.replace('/[' + this.name + ']', '');
+        }
     }
 };
 
