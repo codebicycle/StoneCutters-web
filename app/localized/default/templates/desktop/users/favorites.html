@@ -1,2 +1,5 @@
-my favorites
+<h1>my favorites</h1>
+{% for fav in favorites %}
+   item  <strong>{{ fav.title }}</strong><br>
+{% endfor %}
 {% view 'partials/tracking' %}
