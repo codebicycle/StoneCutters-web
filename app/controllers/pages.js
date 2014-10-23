@@ -16,7 +16,7 @@ module.exports = {
     help: middlewares(help),
     interstitial: middlewares(interstitial),
     error: middlewares(error),
-    allstates: middlewares(allstates)
+    allstates: middlewares(allstates),
     featured_listings: middlewares(featured_listings)
 };
 
