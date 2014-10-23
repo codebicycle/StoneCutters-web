@@ -1,2 +1,47 @@
-my ads
-{% include (template + '/partials/tracking.html') %}
+<ul class="my-items">
+    {% for item in myAds %}
+        {% set status = '' %}
+        {% set statustxt = 'ACTIVO' %}
+        {% if item.status == 'expired' %}
+            {% set status = 'expired' %}
+            {% set statustxt = 'EXPIRADO' %}
+        {% elif item.status == 'deleted' %}
+            {% set status = 'deleted' %}
+            {% set statustxt = 'ELIMINADO' %}
+        {% elif item.status == 'rejected' %}
+            {% set status = 'rejected' %}    
+            {% set statustxt = 'RECHAZADO' %}    
+        {% endif %}
+        <li class="item {{ status }}">
+
+            <figure class="image">
+                {% if item.thumbnail %}
+                <img src="{{ item.thumbnail }}" alt="" class="thumbnail">
+                {% else %}
+                <span class="icons icon-photo withoutimg"></span>
+                {% endif %}
+                <span class="status">
+                    {{ statustxt }}
+                </span>
+            </figure>
+            <div class="description">
+                <h3 class="title">{{ item.title }}</h3>
+                <div class="tips">
+                    <span>0  {{ dictionary["myolx.Messages"] }}</span>
+                    <span>0 {{ dictionary["netvibes_myolx.content.Views"] }} </span>
+                    <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', item.date.timestamp | date("MMM DD, YYYY")) }}</span>
+                </div>
+                <div class="text">                    
+                </div>
+                <div class="buttons">
+                    <a href="" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
+                    <a href="" class="btn icons icon-trash">{{ dictionary["confirmremoveitem.Delete"] }} </a>
+                    <a href="" class="btn orange icons icon-feature">{{ dictionary["featured_listings.Feature"] }}</a>
+                </div>
+            </div>
+            <div class="price">
+                <span>{{ item.price.displayPrice }}</span>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
