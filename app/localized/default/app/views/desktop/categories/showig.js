@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
+var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
 
 module.exports = Base.extend({
     id: 'categories-showig-view',
@@ -20,16 +21,10 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var linkig = this.app.session.get('path');
         var link = linkig.replace('-ig','');
-        var filters = data.metadata.filters;
-        var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
-        var list = [];
+        var list = filters.orderFilters(order, data.metadata.filters);
 
-        _.each(order, function(obj, i){
-            _.find(filters, function(obj){
-                return obj.name == order[i] ? list.push(obj) : false;
-            });
-        });
         _.each(data.items, this.processItem);
+
         return _.extend({}, data, {
             items: data.items,
             filters: list,

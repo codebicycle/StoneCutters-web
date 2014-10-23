@@ -17,8 +17,9 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             items: data.relatedItems,
             nav: {
-                link: '/nf/all-results',
-                listAct: 'active'
+                link: 'nf/all-results',
+                linkig: 'nf/all-results-ig',
+                galeryAct: 'active'
             }
         });
     },

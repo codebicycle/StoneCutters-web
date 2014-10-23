@@ -19,6 +19,7 @@ function list(params, callback) {
 
     function controller() {
         var seo = Seo.instance(this.app);
+
         var fetch = function(done) {
             this.app.fetch({
                 categories: {

@@ -1,25 +1,89 @@
 'use strict';
 
 var _ = require('underscore');
-var google = require('./google');
-var ati = require('./ati');
-var keyade = require('./keyade');
+var ati = require('./trackers/ati');
+var analytics = require('./trackers/analytics');
+var hydra = require('./trackers/hydra');
+var serverSide = require('./trackers/serverSide');
+var keyade = require('./trackers/keyade');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
-function stringifyParams(params) {
-    var str = [];
-
-    _.each(params, function(value, name) {
-        if (!esi.isEsiString(value)) {
-            value = encodeURIComponent(value);
+var trackers = {
+    ati: function(ctx, page, query) {
+        if (ati.isEnabled.call(this, page)) {
+            _.extend(ctx.params, {
+                ati: ati.getParams.call(this, page, query)
+            });
         }
-        str.push(name + '=' + value);
-    });
-    return str.join('&');
-}
+    },
+    analytics: function(ctx, page, query) {
+        if (analytics.isEnabled.call(this, page)) {
+            _.extend(ctx.params, {
+                analytics: analytics.getParams.call(this, page, query)
+            });
+        }
+    },
+    hydra: function(ctx, page, query) {
+        if (hydra.isEnabled.call(this, page)) {
+            _.extend(ctx.params, {
+                hydra: hydra.getParams.call(this, page, query)
+            });
+        }
+    },
+    serverSide: function(ctx, page, query) {
+        var url;
 
-function getURLName(page) {
+        if (serverSide.isEnabled.call(this, page)) {
+            _.extend(ctx.params, {
+                serverSide: serverSide.getParams.call(this, page, {
+                    atiParams: ctx.params.ati,
+                    analyticsParams: ctx.params.analytics,
+                    query: query
+                })
+            });
+            url = serverSide.pageview.call(this, ctx.params.serverSide, {
+                page: page
+            });
+
+            if (url) {
+                ctx.urls.push(url);
+            }
+        }
+    },
+    keyade: function(ctx, page, query) {
+        var url;
+
+        if (keyade.isEnabled.call(this, page)) {
+            url = keyade.pageview.call(this, null, {
+                page: page
+            });
+
+            if (url) {
+                ctx.urls.push(url);
+            }
+        }
+    },
+    colombia: function(ctx, page, query) {
+        var location = this.app.session.get('location');
+        var atiParams;
+        var url;
+
+        if (ati.isEnabled.call(this, page)) {
+            if (location.url === 'www.olx.com.co') {
+                atiParams = ctx.params.ati || ati.getParams.call(this, page, query);
+                url = ati.pageview.call(this, _.extend({}, atiParams, {
+                    clientId: this.app.session.get('clientId').substr(24),
+                    referer: esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'))
+                }));
+
+                ctx.urls.push(utils.params(url.url, url.params));
+            }
+        }
+    }
+};
+
+function getPageName(page) {
     if (~page.indexOf('#')) {
         return page;
     }
@@ -37,60 +101,16 @@ function getURLName(page) {
 }
 
 function generate(query) {
-    var page = getURLName.call(this, query.page);
-    var location = this.app.session.get('location');
-    var urls = [];
-    var params = {};
-    var sid;
-    var url;
-
-    if (google.check.call(this, page) && ati.check.call(this, page)) {
-        sid = this.app.session.get('sid');
-
-        if (sid) {
-            params.sid = esi.esify.call(this, '$(sid)', sid);
-        }
-        params.r = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
-        params.referer = esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'));
-        params.locNm = location.name;
-        params.locId = location.id;
-        params.locUrl = location.url;
-        google.generate.call(this, params, page, query.params);
-        ati.generate.call(this, params, page, query.params);
-        urls.push('/analytics/pageview.gif?' + stringifyParams(params));
-    }
-
-    if (ati.check.call(this, page)) {
-        if (location.url === 'www.olx.com.co') {
-            url = ati.generateUrl.call(this, params);
-
-            if (url) {
-                urls.push(url);
-            }
-        }
-        params = _.extend(params, {
-            ati: ati.getConfig.call(this)
-        });
-    }
-
-    if (google.check.call(this, page)) {
-        params = _.extend(params, {
-            google: google.getConfig.call(this)
-        });
-    }
-
-    if (keyade.check.call(this)) {
-        url = keyade.generate.call(this, page);
-
-        if (url) {
-            urls.push(url);
-        }
-    }
-
-    return {
-        urls: urls,
-        params: params
+    var page = getPageName.call(this, query.page);
+    var tracking = {
+        urls: [],
+        params: {}
     };
+
+    _.each(trackers, function(tracker, name) {
+        tracker.call(this, tracking, page, query.params);
+    }, this);
+    return tracking;
 }
 
 module.exports = {

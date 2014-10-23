@@ -110,19 +110,24 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(done, data) {
-            /*var category = $('.itemCategory').val();
-            var subcategory = $('.itemSubcategory').val();*/
+            var $replySuccess = $('.replySuccses');
+            var category = $('.itemCategory').val();
+            var subcategory = $('.itemSubcategory').val();
+            var tracking;
+
             $('.comment').val('');
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
-
-            $('.replySuccses').removeClass('hide');
-            /*this.track({
+            tracking = $('<div></div>').append(data);
+            tracking = $('#replySuccess', tracking);
+            $replySuccess.append(tracking.length ? tracking : '');
+            this.track({
                 category: 'Reply',
                 action: 'ReplySuccess',
                 custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
-            });*/
+            });
+            $replySuccess.removeClass('hide');
         }.bind(this);
 
         var track = function(done) {
