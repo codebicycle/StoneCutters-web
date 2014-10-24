@@ -8,7 +8,11 @@ module.exports = Base.extend({
     className: 'users_favorites_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var favs = (data.context !== undefined) ? data.context.ctx.favorites : '';
+        var favs;
+
+        if (data.context && data.context.ctx) {
+            favs = data.context.ctx.favorites || {};
+        }
 
         return _.extend({}, data, {
             favorites: favs
