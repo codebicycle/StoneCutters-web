@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Cuba akses halaman terus dari <<LINK_HOME_PAGE>>Laman Utama<</LINK_HOME_PAGE>>  OLX .',
     'itemslisting.Category': 'Kategori:',
     'itemslisting.Classifieds': 'Iklaneka',
+    'itemslisting.ContactSeller': 'Hubungi Penjual',
     'itemslisting.FreeClassifieds': 'Iklaneka percuma',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Lokasi',
