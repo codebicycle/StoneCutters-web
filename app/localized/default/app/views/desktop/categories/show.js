@@ -4,7 +4,7 @@ var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
-var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
+var order = ['pricerange','carbrand','condition','kilometers','year','bedrooms','bathrooms','surface','state','city'];
 
 module.exports = Base.extend({
     id: 'categories-show-view',
@@ -15,7 +15,7 @@ module.exports = Base.extend({
         'click .range-submit': 'rangeFilterInputs',
         'click .link-range': 'rangeFilterLinks',
         'click .clean-filters': 'cleanFilters',
-        'click .filter-title span.icons': 'toogleFilter'
+        'click .filter-title': 'toogleFilter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -49,7 +49,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var currentFilter = $(event.currentTarget).data('filter-name');
-        $(event.currentTarget).toggleClass('icon-arrow-top');
+        $(event.currentTarget).find('.icons').toggleClass('icon-arrow-down');
         $('.' + currentFilter).slideToggle();
     },
     cleanFilters: function(event) {

@@ -129,6 +129,11 @@ _.extend(SeoModule.prototype, {
             $('head').append('<link rel="canonical" href="' + head.canonical + '" >');
         }
     },
+    updateContent: function () {
+        if(this.seoContent.levelPath && this.seoContent.levelPath.wikititles) {
+           this.set('wikititles', this.seoContent.levelPath.wikititles );
+        }
+    },
     getLocationName: function (prefix) {
         var location;
 
@@ -161,6 +166,7 @@ _.extend(SeoModule.prototype, {
     },
     setContent: function (content) {
         this.seoContent = content;
+        this.updateContent();
     },
     get: function (key) {
         if (!!this.seoContent && this.config[key]) {

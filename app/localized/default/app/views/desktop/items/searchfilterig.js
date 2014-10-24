@@ -8,16 +8,17 @@ var order = ['parentcategory','state','city'];
 
 module.exports = Base.extend({
     id: 'items-searchfilterig-view',
-    className: 'items-searchfilter-view',
+    className: 'items-searchfilterig-view',
     tagName: 'main',
     events: {
         'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
-        'click .filter-title span.icons': 'toogleFilter'
+        'click .filter-title': 'toogleFilter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var list = filters.orderFilters(order, data.metadata.filters);
+        var link = this.app.session.get('path');
 
         _.each(data.items, this.processItem);
 
@@ -25,22 +26,23 @@ module.exports = Base.extend({
             items: data.items,
             filters: list,
             nav: {
-                link: data.url.replace('-ig',''),
-                linkig: data.url,
+                link: link.replace('-ig',''),
+                linkig: link,
                 galeryAct: 'active',
+                current: 'searchfilterig'
             }
         });
     },
     processItem: function(item) {
         item.date.since = helpers.timeAgo(item.date);
     },
-        toogleFilter: function(event) {
+    toogleFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var currentFilter = $(event.currentTarget).data('filter-name');
-        $(event.currentTarget).toggleClass('icon-arrow-top');
+        $(event.currentTarget).find('.icons').toggleClass('icon-arrow-down');
         $('.' + currentFilter).slideToggle();
     },
     cleanFilters: function(event) {

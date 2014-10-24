@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Zkuste na str\xE1nku p\u0159ej\xEDt p\u0159\xEDmo z <<LINK_HOME_PAGE>>domovsk\xE9 str\xE1nky<</LINK_HOME_PAGE>> OLX.',
     'itemslisting.Category': 'Kategorie:',
     'itemslisting.Classifieds': 'Inzer\xE1ty',
+    'itemslisting.ContactSeller': 'Kontaktovat prodejce',
     'itemslisting.FreeClassifieds': 'Bezplatn\xE9 inzer\xE1ty',
     'itemslisting.NavigatorByCategory': 'Kategorie',
     'itemslisting.NavigatorByLocation': 'M\xEDsto',

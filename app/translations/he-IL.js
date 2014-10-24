@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': '\u05E0\u05E1\u05D4 \u05DC\u05D4\u05D9\u05DB\u05E0\u05E1 \u05DC\u05E2\u05DE\u05D5\u05D3 \u05D9\u05E9\u05D9\u05E8\u05D5\u05EA \u05DE\u05EA\u05D5\u05DA  <<LINK_HOME_PAGE>>\u05D3\u05E3 \u05D4\u05D1\u05D9\u05EA<</LINK_HOME_PAGE>> \u05E9\u05DC OLX.',
     'itemslisting.Category': ':\u05E7\u05D8\u05D2\u05D5\u05E8\u05D9\u05D4',
     'itemslisting.Classifieds': '\u05D3\u05E8\u05D5\u05E9\u05D9\u05DD',
+    'itemslisting.ContactSeller': '\u05E6\u05D5\u05E8 \u05E7\u05E9\u05E8 \u05E2\u05DD \u05D4\u05DE\u05D5\u05DB\u05E8',
     'itemslisting.FreeClassifieds': '\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA \u05DC\u05D5\u05D7 \u05D1\u05D7\u05D9\u05E0\u05DD',
     'itemslisting.NavigatorByCategory': '\u05E7\u05D8\u05D2\u05D5\u05E8\u05D9\u05D4',
     'itemslisting.NavigatorByLocation': '\u05DE\u05D9\u05E7\u05D5\u05DD',

@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': '\xCEncerca\u0163i s\u0103 accesa\u0163i pagina direct de pe OLX <<LINK_HOME_PAGE>>Pagina ini\u0163ial\u0103<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Categorie:',
     'itemslisting.Classifieds': 'Clasific\u0103ri',
+    'itemslisting.ContactSeller': 'Contacteaz\u0103 V\xE2nz\u0103torul',
     'itemslisting.FreeClassifieds': 'Anun\u0163uri publicitare gratuite',
     'itemslisting.NavigatorByCategory': 'Categorie',
     'itemslisting.NavigatorByLocation': 'Loca\u0163ie',

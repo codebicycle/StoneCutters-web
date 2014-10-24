@@ -13,11 +13,12 @@ module.exports = Base.extend({
     events: {
         'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
-        'click .filter-title span.icons': 'toogleFilter'
+        'click .filter-title': 'toogleFilter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var list = filters.orderFilters(order, data.metadata.filters);
+        var link = this.app.session.get('path');
 
         _.each(data.items, this.processItem);
 
@@ -25,8 +26,8 @@ module.exports = Base.extend({
             items: data.items,
             filters: list,
             nav: {
-                link: data.url + '/',
-                linkig: data.url + '/-ig',
+                link: link,
+                linkig: link + '/-ig',
                 listAct: 'active',
             }
         });
@@ -40,7 +41,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var currentFilter = $(event.currentTarget).data('filter-name');
-        $(event.currentTarget).toggleClass('icon-arrow-top');
+        $(event.currentTarget).find('.icons').toggleClass('icon-arrow-down');
         $('.' + currentFilter).slideToggle();
     },
     cleanFilters: function(event) {

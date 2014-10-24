@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Essayez d\'acc\xE9der directement \xE0 la page depuis la  <<LINK_HOME_PAGE>> Page d\'Accueil<</LINK_HOME_PAGE>> d\'OLX.',
     'itemslisting.Category': 'Cat\xE9gorie:',
     'itemslisting.Classifieds': 'Annonces',
+    'itemslisting.ContactSeller': 'Contactez le Vendeur',
     'itemslisting.FreeClassifieds': 'Annonces Gratuites',
     'itemslisting.NavigatorByCategory': 'Cat\xE9gorie',
     'itemslisting.NavigatorByLocation': 'Endroit:',

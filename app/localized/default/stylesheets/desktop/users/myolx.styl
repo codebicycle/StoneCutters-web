@@ -1,6 +1,6 @@
 .users_myolx_view {
     .myolxmenu {
-        display: inline-block;        
+        display: inline-block;
         margin-bottom: 0;
         padding: 0;
         position: relative;
@@ -9,7 +9,7 @@
         li {
             display: inline-block;
             list-style: none;
-            position: relative;    
+            position: relative;
             vertical-align: bottom;
             width: 25%;
 
@@ -29,13 +29,13 @@
                 a {
                     width: 100%;
                 }
-            }            
+            }
             &.active {
                 a {
                     background: $white;
                     color: $black;
                     font-weight: bold;
-                    padding: 15px 0;                    
+                    padding: 15px 0;
                 }
                 &:before, &:after {
                     border-style:solid;
@@ -77,8 +77,8 @@
                 display: inline-block;
                 float: left;
                 margin: 30px 25px 30px;
-                max-height: 144px; 
-                min-height: 144px; 
+                max-height: 144px;
+                min-height: 144px;
                 padding: 2px;
                 position: relative;
                 text-align: center;
@@ -189,7 +189,7 @@
         }
 
         .expired, .deleted, .rejected, .pending {
-            .image {                
+            .image {
 
                 .status {
                     background: #666;
@@ -210,11 +210,11 @@
                     color: $greyBorders;
                 }
             }
-            .price {               
+            .price {
                 span {
                     color: $greyBorders
                 }
-            }    
+            }
         }
         .expired {
             vendor(opacity,0.5)
@@ -229,10 +229,10 @@
                     background: $greyStrong;
 
                     &:after {
-                        border-color: $greyStrong transparent $greyStrong $greyStrong;                        
+                        border-color: $greyStrong transparent $greyStrong $greyStrong;
                     }
                     &:before {
-                        border-color: $greyStrong transparent;                        
+                        border-color: $greyStrong transparent;
                     }
                 }
 
@@ -269,22 +269,36 @@
     }
 
     .buttons {
-        .btn {        
+        .btn {
             action-button($white, $black, 3px, 5px 20px);
             margin-right: 5px;
             text-align: left;
             font-size: 14px;
-            float: left;            
+            float: left;
             box-shadow(0 0.5px 0 rgba(0,0,0,0.4))
 
             &:before {
                 line-height: 1.5;
                 margin: -2px 5px 0;
-            }        
-        }        
+            }
+        }
         .orange {
             border-radius();
             action-button($orange, $white, 3px, 5px 20px);
         }
     }
+
+    .empty {
+        font-size: $l;
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .removeAd {
+        vendor(opacity, 0.4);
+        .removeItem {
+            cursor: default;
+        }
+    }
+
 }

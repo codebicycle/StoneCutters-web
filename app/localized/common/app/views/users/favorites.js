@@ -8,7 +8,7 @@ module.exports = Base.extend({
     className: 'users_favorites_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        
+
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
