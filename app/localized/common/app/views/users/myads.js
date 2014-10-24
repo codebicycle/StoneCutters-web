@@ -9,8 +9,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data),
-            myAds: data.context.ctx.myAds
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {

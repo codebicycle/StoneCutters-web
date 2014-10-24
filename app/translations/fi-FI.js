@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Kokeile avata sivu suoraan valitsemalla OLX <<LINK_HOME_PAGE>>Kotisivu<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategoria:',
     'itemslisting.Classifieds': 'Ilmoitukset',
+    'itemslisting.ContactSeller': 'Ota yhteys myyj\xE4\xE4n',
     'itemslisting.FreeClassifieds': 'ilmaiset ilmoitukset',
     'itemslisting.NavigatorByCategory': 'Kategoria',
     'itemslisting.NavigatorByLocation': 'Sijainti',

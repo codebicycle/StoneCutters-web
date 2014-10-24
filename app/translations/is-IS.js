@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pr\xF3fa\xF0u a\xF0 opna s\xED\xF0una beint af <<LINK_HOME_PAGE>>upphafss\xED\xF0u<</LINK_HOME_PAGE>> OLX.',
     'itemslisting.Category': 'Flokkur:',
     'itemslisting.Classifieds': 'Sm\xE1augl\xFDsingar',
+    'itemslisting.ContactSeller': 'Hafa samband vi\xF0 seljanda',
     'itemslisting.FreeClassifieds': '\xD3keypis sm\xE1augl\xFDsingar',
     'itemslisting.NavigatorByCategory': 'Flokkur',
     'itemslisting.NavigatorByLocation': 'Sta\xF0setning',

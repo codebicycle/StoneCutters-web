@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pam\u0113\u0123iniet piek\u013C\u016Bt \u0161ai lapai tie\u0161i no OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorija:',
     'itemslisting.Classifieds': 'Sludin\u0101jumi',
+    'itemslisting.ContactSeller': 'Sazin\u0101ties ar p\u0101rdev\u0113ju',
     'itemslisting.FreeClassifieds': 'Bezmaksas sludin\u0101jumi',
     'itemslisting.NavigatorByCategory': 'Kategorija',
     'itemslisting.NavigatorByLocation': 'Atra\u0161an\u0101s vieta',

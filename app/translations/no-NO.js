@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pr\xF8v \xE5 aksessere siden direkte fra OLX <<LINK_HOME_PAGE>>Hjemmesiden<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategori:',
     'itemslisting.Classifieds': 'Rubrikkannonser',
+    'itemslisting.ContactSeller': 'Kontakt Selger',
     'itemslisting.FreeClassifieds': 'Gratis rubrikkannonser',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Sted',

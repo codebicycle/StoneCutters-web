@@ -8,9 +8,10 @@ module.exports = Base.extend({
     className: 'users_favorites_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var favs = (data.context !== undefined) ? data.context.ctx.favorites : '';
 
         return _.extend({}, data, {
-            favorites: data.context.ctx.favorites
+            favorites: favs
         });
     },
     postRender: function() {
@@ -21,11 +22,7 @@ module.exports = Base.extend({
 
             var $item = $(event.currentTarget).closest('li.item');
             var api = this.app.get('apiPath');
-            // var user = this.app.session.get('user');
-            var user = {
-                    userId: '14788911',
-                    token: 'MTQ3ODg5MTF8MTQxMzkxMTk5ODc3Mw%253D%253D'
-                };
+            var user = this.app.session.get('user');
             var itemId = $(event.currentTarget).data('itemid');
             var url = [];
 
@@ -47,9 +44,12 @@ module.exports = Base.extend({
                     data: {}
                 })
                 .done(function done() {
-                    $item.fadeOut('fast', function () {
+                    $item.fadeOut('fast', function deleteFav () {
                         $item.remove();
-                    });
+                        if (!this.$('.my-items').children().length) {
+                            this.render();
+                        }
+                    }.bind(this));
                 }.bind(this))
                 .fail(function fail() {
                     console.log('Error');

@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': '\u0E25\u0E2D\u0E07\u0E40\u0E02\u0E49\u0E32\u0E2A\u0E39\u0E48\u0E2B\u0E19\u0E49\u0E32\u0E44\u0E14\u0E49\u0E42\u0E14\u0E22\u0E15\u0E23\u0E07\u0E08\u0E32\u0E01OLX <<LINK_HOME_PAGE>>\u0E2B\u0E19\u0E49\u0E32\u0E2B\u0E25\u0E31\u0E01<</LINK_HOME_PAGE>>',
     'itemslisting.Category': '\u0E2B\u0E21\u0E27\u0E14\u0E2B\u0E21\u0E39\u0E48:',
     'itemslisting.Classifieds': '\u0E42\u0E06\u0E29\u0E13\u0E32',
+    'itemslisting.ContactSeller': '\u0E15\u0E34\u0E14\u0E15\u0E48\u0E2D\u0E1C\u0E39\u0E49\u0E02\u0E32\u0E22',
     'itemslisting.FreeClassifieds': '\u0E42\u0E06\u0E29\u0E13\u0E32\u0E1F\u0E23\u0E35',
     'itemslisting.NavigatorByCategory': '\u0E2B\u0E21\u0E27\u0E14\u0E2B\u0E21\u0E39\u0E48',
     'itemslisting.NavigatorByLocation': '\u0E2A\u0E16\u0E32\u0E19\u0E17\u0E35\u0E48',

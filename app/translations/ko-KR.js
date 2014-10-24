@@ -36,6 +36,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'OLX <<LINK_HOME_PAGE>>Home \uD398\uC774\uC9C0<</LINK_HOME_PAGE>>\uC5D0\uC11C \uC9C1\uC811 \uD574\uB2F9 \uD398\uC774\uC9C0\uB85C \uB4E4\uC5B4\uAC00\uC138\uC694 ',
     'itemslisting.Category': '\uCE74\uD14C\uACE0\uB9AC:',
     'itemslisting.Classifieds': '\uC548\uB0B4\uAD11\uACE0',
+    'itemslisting.ContactSeller': '\uD310\uB9E4\uC790 \uC5F0\uB77D\uCC98',
     'itemslisting.FreeClassifieds': '\uBB34\uB8CC \uC548\uB0B4\uAD11\uACE0',
     'itemslisting.NavigatorByCategory': '\uBC94\uC704\uBCC4',
     'itemslisting.NavigatorByLocation': '\uC704\uCE58',
