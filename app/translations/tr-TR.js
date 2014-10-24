@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'L\xFCtfen sayfaya OLX <<LINK_HOME_PAGE>>Ana Sayfa<</LINK_HOME_PAGE>> \xFCzerinden do\u011Frudan eri\u015Fmeye \xE7al\u0131\u015F\u0131n.',
     'itemslisting.Category': 'Kategori:',
     'itemslisting.Classifieds': 'Seri \u0130lanlar',
+    'itemslisting.ContactSeller': 'Sat\u0131c\u0131ya E-Posta Yolla ',
     'itemslisting.FreeClassifieds': '\xDCcretsiz seri ilanlar',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Yer',

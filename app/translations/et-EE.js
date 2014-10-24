@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Proovige sellele lehek\xFCljele minna otse OLXi <<LINK_HOME_PAGE>>kodulehe kaudu<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategooria:',
     'itemslisting.Classifieds': 'Kuulutused',
+    'itemslisting.ContactSeller': 'V\xF5tke \xFChendust m\xFC\xFCjaga',
     'itemslisting.FreeClassifieds': 'Tasuta kuulutused',
     'itemslisting.NavigatorByCategory': 'Kategooria',
     'itemslisting.NavigatorByLocation': 'Asukoht',

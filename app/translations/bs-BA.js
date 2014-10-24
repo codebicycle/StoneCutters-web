@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Poku\u0161ajte direktno pristupiti stranici sa OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorija:',
     'itemslisting.Classifieds': 'Mali oglasi',
+    'itemslisting.ContactSeller': 'Kontaktirajte s prodava\u010Dem',
     'itemslisting.FreeClassifieds': 'Besplatni oglasi',
     'itemslisting.NavigatorByCategory': 'Kategorija',
     'itemslisting.NavigatorByLocation': 'Lokacija',

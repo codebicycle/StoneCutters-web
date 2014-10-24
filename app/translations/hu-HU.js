@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pr\xF3b\xE1lja meg az oldal el\xE9r\xE9s\xE9t k\xF6zvetlen\xFCl az OLX <<LINK_HOME_PAGE>>kezd\u0151lapj\xE1r\xF3l<</LINK_HOME_PAGE>>',
     'itemslisting.Category': 'Kateg\xF3ria:',
     'itemslisting.Classifieds': 'Apr\xF3hirdet\xE9sek',
+    'itemslisting.ContactSeller': 'Vegye fel a kapcsolatot az elad\xF3val',
     'itemslisting.FreeClassifieds': 'Ingyenes apr\xF3hirdet\xE9sek',
     'itemslisting.NavigatorByCategory': 'Kateg\xF3ria',
     'itemslisting.NavigatorByLocation': 'Helysz\xEDn',

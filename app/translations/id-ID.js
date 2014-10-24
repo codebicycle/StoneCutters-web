@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Cobalah mengakses halaman langsung dari OLX <<LINK_HOME_PAGE>>Laman Beranda<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategori:',
     'itemslisting.Classifieds': 'Iklan Baris',
+    'itemslisting.ContactSeller': 'Hubungi Penjual',
     'itemslisting.FreeClassifieds': 'Iklan baris gratis',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Lokasi',

@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Spr\xF3buj otworzy\u0107 stron\u0119 bezpo\u015Brednio ze Strony G\u0142\xF3wnej  OLX <<LINK_HOME_PAGE>><</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategoria:',
     'itemslisting.Classifieds': 'Og\u0142oszenia',
+    'itemslisting.ContactSeller': 'Kontakt ze sprzedaj\u0105cym',
     'itemslisting.FreeClassifieds': 'Darmowe og\u0142oszenia',
     'itemslisting.NavigatorByCategory': 'Kategoria',
     'itemslisting.NavigatorByLocation': 'Lokalizacja',

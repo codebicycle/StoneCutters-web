@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Jaribu kupata ukurasa moja kwa moja kutoka OLX <<LINK_HOME_PAGE>>Ukurasa wa Nyumbani<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kundi:',
     'itemslisting.Classifieds': 'Classifieds',
+    'itemslisting.ContactSeller': 'Wasiliana na Muuzaji',
     'itemslisting.FreeClassifieds': 'Matangazo ya bure',
     'itemslisting.NavigatorByCategory': 'Kundi',
     'itemslisting.NavigatorByLocation': 'Eneo',

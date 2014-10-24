@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Probeer om direk vanaf die OLX <<LINK_HOME_PAGE>>Tuisblad<</LINK_HOME_PAGE>>toegang te verkry.',
     'itemslisting.Category': 'Kategorie:',
     'itemslisting.Classifieds': 'Snuffeladvertensies',
+    'itemslisting.ContactSeller': 'Kontak Verkoper',
     'itemslisting.FreeClassifieds': 'Gratis snuffeladvertensies',
     'itemslisting.NavigatorByCategory': 'Kategorie',
     'itemslisting.NavigatorByLocation': 'Plek',

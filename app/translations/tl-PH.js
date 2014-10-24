@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Subukang i-access ang pahina ng tuwiran mula sa  OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorya:',
     'itemslisting.Classifieds': 'Mga Anunsyo',
+    'itemslisting.ContactSeller': 'Makipag-ugnayan sa Nagbebenta',
     'itemslisting.FreeClassifieds': 'Libreng mga klasipikadong patalastas',
     'itemslisting.NavigatorByCategory': 'Kategorya',
     'itemslisting.NavigatorByLocation': 'Lokasyon',

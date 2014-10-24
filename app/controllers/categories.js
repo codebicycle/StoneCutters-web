@@ -29,6 +29,14 @@ function list(params, callback) {
                         languageCode: this.app.session.get('selectedLanguage'),
                         seo: seo.isEnabled()
                     }
+                },
+                cities: {
+                    collection: 'Cities',
+                    params: {
+                        level: 'countries',
+                        type: 'topcities',
+                        location: this.app.session.get('siteLocation')
+                    }
                 }
             }, {
                 readFromCache: false
@@ -43,6 +51,7 @@ function list(params, callback) {
             seo.addMetatag('title', response.categories.metadata.title);
             seo.addMetatag('description', response.categories.metadata.description);
             callback(null, {
+                cities: response.cities.toJSON(),
                 categories: response.categories.toJSON(),
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
                 seo: seo,

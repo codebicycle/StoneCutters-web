@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Pabandykite atdaryti puslap\u012F tiesiai i\u0161 OLX <<LINK_HOME_PAGE>>Pradinio puslapio<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'Kategorija:',
     'itemslisting.Classifieds': 'Klasifikuoti skelbimai',
+    'itemslisting.ContactSeller': 'Kreiptis \u012F pardav\u0117j\u0105',
     'itemslisting.FreeClassifieds': 'Nemokami klasifikuoti skelbimai',
     'itemslisting.NavigatorByCategory': 'Kategorija',
     'itemslisting.NavigatorByLocation': 'Vieta',

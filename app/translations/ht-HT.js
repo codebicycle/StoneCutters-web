@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Eseye antre sou paj la dir\xE8ktman de<<LINK_HOME_PAGE>>Paj Dak\xE8y <</LINK_HOME_PAGE>> OLX  la.',
     'itemslisting.Category': 'Kategori:',
     'itemslisting.Classifieds': 'Anons Klase',
+    'itemslisting.ContactSeller': 'Kontakte moun kap vann nan',
     'itemslisting.FreeClassifieds': 'Anons Gratis',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Kote',

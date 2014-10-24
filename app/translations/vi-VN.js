@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Th\u1EED truy c\u1EADp trang tr\u1EF1c ti\u1EBFp t\u1EEB OLX <<LINK_HOME_PAGE>>Home Page<</LINK_HOME_PAGE>>.',
     'itemslisting.Category': 'H\u1EA1ng m\u1EE5c:',
     'itemslisting.Classifieds': 'Rao v\u1EB7t',
+    'itemslisting.ContactSeller': 'Li\xEAn h\u1EC7 ng\u01B0\u1EDDi b\xE1n',
     'itemslisting.FreeClassifieds': 'Rao v\u1EB7t mi\u1EC5n ph\xED',
     'itemslisting.NavigatorByCategory': 'H\u1EA1ng m\u1EE5c',
     'itemslisting.NavigatorByLocation': '\u0110\u1ECBa \u0111i\u1EC3m',

@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': 'Sk\xFAste prejs\u0165 na str\xE1nku priamo z <<LINK_HOME_PAGE>>\xFAvodnej str\xE1nky<</LINK_HOME_PAGE>> OLX.',
     'itemslisting.Category': 'Kateg\xF3ria:',
     'itemslisting.Classifieds': 'Inzer\xE1ty',
+    'itemslisting.ContactSeller': 'Kontaktova\u0165 predajcu',
     'itemslisting.FreeClassifieds': 'Bezplatn\xE9 inzer\xE1ty',
     'itemslisting.NavigatorByCategory': 'Kateg\xF3ria',
     'itemslisting.NavigatorByLocation': 'Miesto',

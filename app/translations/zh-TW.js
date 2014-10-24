@@ -37,6 +37,7 @@ module.exports = {
     'defaulthtmlhead.TryToAccessThePageDirectlyFromTheBrandHomePage': '\u8ACB\u5617\u8A66\u76F4\u63A5\u5F9EOLX <<LINK_HOME_PAGE>>\u9996\u9801<</LINK_HOME_PAGE>>\u9032\u5165\u60A8\u6240\u8981\u7684\u9801\u9762\u3002',
     'itemslisting.Category': '\u5206\u985E:',
     'itemslisting.Classifieds': '\u5206\u985E\u5EE3\u544A',
+    'itemslisting.ContactSeller': '\u806F\u7D61\u8CE3\u5BB6',
     'itemslisting.FreeClassifieds': '\u514D\u8CBB\u5206\u985E\u4FE1\u606F',
     'itemslisting.NavigatorByCategory': '\u985E\u5225',
     'itemslisting.NavigatorByLocation': '\u4F4D\u7F6E',

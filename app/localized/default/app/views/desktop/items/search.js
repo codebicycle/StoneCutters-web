@@ -13,7 +13,7 @@ module.exports = Base.extend({
     events: {
         'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
-        'click .filter-title span.icons': 'toogleFilter'
+        'click .filter-title': 'toogleFilter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -41,7 +41,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var currentFilter = $(event.currentTarget).data('filter-name');
-        $(event.currentTarget).toggleClass('icon-arrow-top');
+        $(event.currentTarget).find('.icons').toggleClass('icon-arrow-down');
         $('.' + currentFilter).slideToggle();
     },
     cleanFilters: function(event) {
