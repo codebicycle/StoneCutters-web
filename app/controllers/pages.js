@@ -17,18 +17,8 @@ module.exports = {
     interstitial: middlewares(interstitial),
     error: middlewares(error),
     allstates: middlewares(allstates),
-    featured_listings: middlewares(featured_listings)
+    featuredListings: middlewares(featuredListings)
 };
-
-function featured_listings(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        callback(null, {
-
-        });
-    }
-}
 
 function terms(params, callback) {
     helpers.controllers.control.call(this, params, controller);
@@ -190,5 +180,15 @@ function allstates(params, callback) {
             .then(fetch)
             .then(formatResponse)
             .val(success);
+    }
+}
+
+function featuredListings(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
+        });
     }
 }
