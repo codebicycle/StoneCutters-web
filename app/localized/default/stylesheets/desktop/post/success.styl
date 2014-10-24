@@ -24,7 +24,7 @@
 
 		.icons::before {
 			color: $blue;
-			font-size: remify(48px);
+			font-size: remify(64px);
 		}
 	}
 
@@ -56,7 +56,8 @@
 		.icons {
 			float: right;
 			&::before {
-				font-size: $l;
+				font-size: $xs;
+				margin-right: 5px
 			}
 		}
 	}
@@ -106,7 +107,8 @@
 			box($greyBoxBg, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
 
 			.icons::before {
-				font-size: $xl;
+				font-size: $m;
+				margin-right: 5px;
 			}
 
 	        .user-name {
@@ -136,6 +138,13 @@
 		font-weight: bold;
 	}
 
+	.icon-arrow::before {
+		color: $orange;
+		font-size: $l;
+		left: -35px;
+		position: absolute;
+		top: 15px;
+	}
 	.message,
 	.title {
 		display: inline-block;
@@ -147,16 +156,17 @@
 	.message {
 		font-size: $m;
 		line-height: 1.4;
+		position: relative;
 	}
 
 	.title {
-		font-size: $xxl;
-		font-weight: normal;
+		font-size: remify(38px);
+		font-weight: normal; 
 	}
 }
 
 .notification-message {
-	box($lightBlue, $lightBlueBorder, 3px, 20px 20px 20px 90px, solid, 1px);
+	box($lightBlue, $lightBlueBorder, 3px, 20px 20px 20px 100px, solid, 1px);
 	clear-fix();
 	margin-bottom: 10px;
 	position: relative;
@@ -164,9 +174,9 @@
 	&.icon-time::before {
 		color: $blue;
 		font-size: remify(64px);
-		left: 0;
+		left: 20px;
 		position: absolute;
-		top: 0;
+		top: 20px;
 	}
 
 	h4,
