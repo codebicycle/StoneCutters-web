@@ -2,14 +2,14 @@
 
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
-var filters = require('../../../../../../modules/filters');
+var Filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
-var order = ['pricerange','carbrand','condition','kilometers','year','state','city'];
 
 module.exports = Base.extend({
     id: 'categories-showig-view',
     className: 'categories-showig-view',
     tagName: 'main',
+    order: ['pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'state', 'city'],
     events: {
         'click .check-box input': 'selectFilter',
         'click .range-submit': 'rangeFilterInputs',
@@ -17,23 +17,34 @@ module.exports = Base.extend({
         'click .clean-filters': 'cleanFilters',
         'click .filter-title span.icons': 'toogleFilter'
     },
+
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var linkig = this.app.session.get('path');
-        var link = linkig.replace('-ig','');
-        var list = filters.orderFilters(order, data.metadata.filters);
+        var link = linkig.replace('-ig', '');
+        var filters = Filters.sort(this.order, data.metadata.filters);
 
+        if (!this.filters) {
+            this.filters = new Filters(link);
+        }
         _.each(data.items, this.processItem);
 
         return _.extend({}, data, {
             items: data.items,
-            filters: list,
+            filters: filters,
+            wFilters: this.filters,
             nav: {
                 link: link,
                 linkig: linkig,
                 galeryAct: 'active',
+                current: 'showig'
             }
         });
+    },
+    postRender: function() {
+        if (!this.filters) {
+            this.filters = new Filters(this.app.session.get('path'));
+        }
     },
     processItem: function(item) {
         item.date.since = helpers.timeAgo(item.date);
@@ -43,50 +54,40 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var currentFilter = $(event.currentTarget).data('filter-name');
-        $(event.currentTarget).toggleClass('icon-arrow-top');
-        $('.' + currentFilter).slideToggle();
+        var $filter = $(event.currentTarget);
+        var filterName = $filter.data('filter-name');
+
+        $filter.toggleClass('icon-arrow-top');
+        $('.' + filterName).slideToggle();
     },
     cleanFilters: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = window.location.pathname.split('/-')[0];
-        this.app.router.redirectTo(path);
+        this.app.router.redirectTo(this.app.session.get('path').split('/-').shift());
     },
     selectFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $target =  $(event.currentTarget);
-        var filterType = $target.data('filter-type');
-        var filterName = $target.data('filter-name');
-        var filterValue = $target.val();
-        var catUrl = window.location.pathname.split('/-')[0];
-        var newfilters;
-        var path = catUrl + '/';
-        var _filters = filters.parse(window.location.pathname);
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type'),
+            value: $target.val()
+        };
 
-
-        if($target.is(':checked')){
-            newfilters = filters.add(_filters, {
-                name: filterName,
-                type: filterType,
-                value: filterValue
-            });
-            path += filters.prepareFilterUrl(newfilters);
+        if ($target.is(':checked') && !this.filters.has(filter.name, filter.value)) {
+            this.filters.set(filter);
         }
         else {
-            newfilters = filters.remove(_filters, {
-                name: filterName,
-                type: filterType,
-                value: filterValue
-            });
-            path += filters.prepareFilterUrl(newfilters);
+            this.filters.remove(filter);
         }
 
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
@@ -95,26 +96,20 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $target =  $(event.currentTarget);
-        var filterType = $target.data('filter-type');
-        var filterName = $target.data('filter-name');
-        var from = $target.siblings('[data-filter-id=from]').val();
-        var to = $target.siblings('[data-filter-id=to]').val();
-        var catUrl = window.location.pathname.split('/-')[0];
-        var newfilters;
-        var path = catUrl + '/';
-        var _filters = filters.parse(window.location.pathname);
-
-
-        newfilters = filters.add(_filters, {
-            name: filterName,
-            type: filterType,
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type'),
             value: {
-                from: from,
-                to: to
+                from: $target.siblings('[data-filter-id=from]').val(),
+                to: $target.siblings('[data-filter-id=to]').val()
             }
-        });
-        path += filters.prepareFilterUrl(newfilters);
+        };
+
+        this.filters.set(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
 
     },
@@ -123,27 +118,21 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $target =  $(event.currentTarget);
-        var filterType = $target.data('filter-type');
-        var filterName = $target.data('filter-name');
-        var from = $target.data('filter-from');
-        var to = $target.data('filter-to');
-        var catUrl = window.location.pathname.split('/-')[0];
-        var newfilters;
-        var path = catUrl + '/';
-        var _filters = filters.parse(window.location.pathname);
-
-        newfilters = filters.add(_filters, {
-            name: filterName,
-            type: filterType,
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type'),
             value: {
-                from: from,
-                to: to
+                from: $target.data('filter-from'),
+                to: $target.data('filter-to')
             }
-        });
-        path += filters.prepareFilterUrl(newfilters);
-        this.app.router.redirectTo(path);
+        };
 
+        this.filters.set(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
     }
 });
 

@@ -2,35 +2,45 @@
 
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
-var filters = require('../../../../../../modules/filters');
+var Filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
-var order = ['parentcategory','state','city'];
 
 module.exports = Base.extend({
     id: 'items-search-view',
     className: 'items-search-view',
     tagName: 'main',
+    order: ['parentcategory', 'state', 'city'],
     events: {
         'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
         'click .filter-title span.icons': 'toogleFilter'
     },
+
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var list = filters.orderFilters(order, data.metadata.filters);
         var link = this.app.session.get('path');
+        var filters = Filters.sort(this.order, data.metadata.filters);
 
+        if (!this.filters) {
+            this.filters = new Filters(link);
+        }
         _.each(data.items, this.processItem);
 
         return _.extend({}, data, {
             items: data.items,
-            filters: list,
+            filters: filters,
+            wFilters: this.filters,
             nav: {
                 link: link,
                 linkig: link + '/-ig',
                 listAct: 'active',
             }
         });
+    },
+    postRender: function() {
+        if (!this.filters) {
+            this.filters = new Filters(this.app.session.get('path'));
+        }
     },
     processItem: function(item) {
         item.date.since = helpers.timeAgo(item.date);
@@ -40,16 +50,20 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var currentFilter = $(event.currentTarget).data('filter-name');
-        $(event.currentTarget).toggleClass('icon-arrow-top');
-        $('.' + currentFilter).slideToggle();
+        var $filter = $(event.currentTarget);
+        var filterName = $filter.data('filter-name');
+
+        $filter.toggleClass('icon-arrow-top');
+        $('.' + filterName).slideToggle();
     },
     cleanFilters: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = window.location.pathname.split('/-')[0];
+        var path = this.app.session.get('path').split('/-').shift();
+        path = this.cleanPath(path);
+
         this.app.router.redirectTo(path);
     },
     categoryFilter: function(event) {
@@ -57,21 +71,53 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $target =  $(event.currentTarget);
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
         var filterSlug = $target.data('filter-slug');
-        var filterName;
-        var filterId;
-        var path;
 
         if (!filterSlug) {
-            filterId = $target.data('filter-id');
-            filterSlug  = ['des', (typeof filterId !== 'undefined' ? '-cat-' : '-iid-'), filterId].join('');
+            filterSlug  = ['/des-cat-', $target.data('filter-id'), '/'].join('');
         }
 
-        path = window.location.pathname.replace('search', filterSlug);
+        path = path.replace('/search/', filterSlug);
+        path = this.refactorPath(path);
 
         this.app.router.redirectTo(path);
+    },
+    refactorPath: function(path) {
+        var regexpFindPage = /-p-[0-9]+-/;
+        var regexpReplacePage = /(-p-[0-9]+)/;
+        var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
+        var page = '';
 
+        if (path.match(regexpFindPage)) {
+            page = path.match(regexpFindPage).shift();
+            path = path.replace(regexpReplacePage, '');
+        }
+        path = path.replace(regexpReplaceCategory, '$1' + page);
+
+        if (path.slice(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
+        }
+        return path;
+    },
+    cleanPath: function(path) {
+        var regexpFindPage = /-p-[0-9]+/;
+        var regexpReplacePage = /(-p-[0-9]+)/;
+        var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
+        var page = '';
+
+        if (path.match(regexpFindPage)) {
+            page = path.match(regexpFindPage).shift();
+            path = path.replace(regexpReplacePage, '');
+        }
+        path = path.replace(regexpReplaceCategory, 'search');
+
+        if (path.slice(path.length - 1) !== '/') {
+            path += '/';
+        }
+        path += page;
+        return path;
     }
 });
 
