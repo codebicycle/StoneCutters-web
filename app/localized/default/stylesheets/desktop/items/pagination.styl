@@ -14,13 +14,13 @@
             font-weight: bold;
             height: 33px;
             &.next {
-                action-button($green, #fff, 3px, 13px 0 0);
+                action-button($green, $white, 3px, 13px 0 0);
                 &:last-child {
                     width:606px;
                 }
             }
             &.previous {
-                action-button(#eee, #000, 3px, 13px 0 0);
+                action-button($greyBoxBg, $black, 3px, 13px 0 0);
                 &:first-child {
                     margin-right: 10px;
                     width:100px;
@@ -47,7 +47,7 @@
                 padding: 2px 7px;
             }
             .pagination-arrow {
-                color: #000;
+                color: $black;
                 &.disable {
                     color: $greyBorders;
                 }
@@ -55,15 +55,15 @@
             .pagination-number {
                 font-weight: bold;
                 &:hover {
-                    background: #38b;
-                    border-radius: 23px;
+                    background: $blue;
+                    border-radius(25px);
                     color: $white;
                     text-decoration: none;
                 }
             }
             &.current {
-                background: #666;
-                border-radius: 23px;
+                background: $greyStrong;
+                border-radius(25px);
                 color: $white;
                 margin: 5px 0;
                 padding: 2px 7px;
