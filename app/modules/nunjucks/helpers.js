@@ -195,7 +195,7 @@ module.exports = function(nunjucks) {
         function prepareSeparator(isLast) {
             if (platform === 'wap' && !isLast) {
                 out.push(' | ');
-            }
+           }
         }
 
         function prepareURL(_page, isLast) {

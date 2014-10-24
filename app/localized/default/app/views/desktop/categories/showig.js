@@ -9,13 +9,13 @@ module.exports = Base.extend({
     id: 'categories-showig-view',
     className: 'categories-showig-view',
     tagName: 'main',
-    order: ['pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'state', 'city'],
+    order: ['pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city'],
     events: {
         'click .check-box input': 'selectFilter',
         'click .range-submit': 'rangeFilterInputs',
         'click .link-range': 'rangeFilterLinks',
         'click .clean-filters': 'cleanFilters',
-        'click .filter-title span.icons': 'toogleFilter'
+        'click .filter-title': 'toogleFilter'
     },
 
     getTemplateData: function() {
@@ -57,7 +57,7 @@ module.exports = Base.extend({
         var $filter = $(event.currentTarget);
         var filterName = $filter.data('filter-name');
 
-        $filter.toggleClass('icon-arrow-top');
+        $filter.find('.icons').toggleClass('icon-arrow-top');
         $('.' + filterName).slideToggle();
     },
     cleanFilters: function(event) {
