@@ -182,14 +182,11 @@ module.exports = function(nunjucks) {
                     pagination.pop();
                 }
             }
-            max = paginationLength;
-            if (platform === 'desktop') {
-                for (i = 0; i < pagination.length && count < max; i++) {
-                    prepareDesktopURL(pagination[i], ((count + 1) === max));
-                }
-            }
-            else {
-                for (i = 0; i < pagination.length && count < max; i++) {
+
+            for (i = 0; i < pagination.length && count < paginationLength; i++) {
+                if (platform === 'desktop') {
+                    prepareDesktopURL(pagination[i], ((count + 1) === paginationLength));
+                } else {
                     prepareURL(pagination[i], ((count + 1) === max));
                 }
             }
