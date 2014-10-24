@@ -19,44 +19,19 @@ function list(params, callback) {
 
     function controller() {
         var seo = Seo.instance(this.app);
+        var platform = this.app.session.get('platform');
+        var icons = config.get(['icons', platform], []);
+        var country = this.app.session.get('location').url;
+        var categories = this.app.session.get('categories');
 
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
-                        seo: seo.isEnabled()
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(response) {
-            var platform = this.app.session.get('platform');
-            var icons = config.get(['icons', platform], []);
-            var country = this.app.session.get('location').url;
-            seo.setContent(response.categories.metadata.seo);
-            seo.addMetatag('title', response.categories.metadata.title);
-            seo.addMetatag('description', response.categories.metadata.description);
-            callback(null, {
-                categories: response.categories.toJSON(),
-                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                seo: seo,
-                tracking: tracking.generateURL.call(this)
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        seo.setContent(categories.metadata.seo);
+        seo.addMetatag('title', categories.metadata.title);
+        seo.addMetatag('description', categories.metadata.description);
+        callback(null, {
+            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+            seo: seo,
+            tracking: tracking.generateURL.call(this)
+        });
     }
 }
 
