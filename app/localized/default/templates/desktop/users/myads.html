@@ -10,7 +10,10 @@
             {% set statustxt = 'ELIMINADO' %}
         {% elif item.status == 'rejected' %}
             {% set status = 'rejected' %}    
-            {% set statustxt = 'RECHAZADO' %}    
+            {% set statustxt = 'RECHAZADO' %}
+        {% elif item.status == 'pending' %}
+            {% set status = 'expired' %}    
+            {% set statustxt = 'PENDIENTE' %} 
         {% endif %}
         <li class="item {{ status }}">
 

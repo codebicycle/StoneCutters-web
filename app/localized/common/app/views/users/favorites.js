@@ -10,8 +10,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data),
-            favorites: data.context.ctx.favorites
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {
