@@ -7,6 +7,17 @@ module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
     className: 'footer-view',
+     events: {
+        'click [data-footer-sliderUp]': 'slideUpContent'
+    },
+    slideUpContent: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        var element = $(event.currentTarget);
+        element.parent().addClass('active');
+        $('.' + element.attr('data-footer-sliderUp')).show();
+    },
 });
 
 module.exports.id = 'footer/footer';

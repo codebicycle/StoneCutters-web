@@ -1,5 +1,15 @@
 <div class="slide-container">
-    <div class="category-slider">
+    <div class="category-slider footer-slider" style="display: none;">
         {% include (template + '/categories/categorytree.html') %}
+    </div>
+    <div class="help-slider footer-slider" style="display: none;">
+        <a title="close" data-footer-sliderDown="help-slider" class="icons icon-close" href="#"></a>
+        <h3 class="title">Ayuda</h3>
+        <ul>
+            <li><a href="/help">Ayuda</a></li>
+            <li><a href="/terms">Condiciones de uso</a></li>
+            <li><a href="#">Acerca de OLX</a></li>
+            <li><a href="#">Contactate con OLX</a></li>
+        </ul>
     </div>
 </div>
