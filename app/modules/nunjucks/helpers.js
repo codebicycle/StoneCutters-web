@@ -89,6 +89,16 @@ module.exports = function(nunjucks) {
             var max;
             var i;
 
+            if (platform === 'html5') {
+                pagination.unshift(page - 3);
+                pagination.push(page + 3);
+            }
+            if (platform === 'desktop') {
+                pagination = [page-5, page-4, page-3, page-2, page-1, page, page+1, page+2, page+3, page+4];
+            }
+
+            var paginationLength = pagination.length;
+
             function prepareStyle(isLast, start, end) {
                 if (platform !== 'wap') {
                     out.push(start || '" ');
@@ -134,6 +144,34 @@ module.exports = function(nunjucks) {
                 }
             }
 
+            function prepareDesktopURL(_page, isLast) {
+                if (_page > 0 && _page <= pages) {
+                    if (_page === page) {
+                        out.push('<li class="current">');
+                        out.push(_page);
+                        out.push('</li>');
+                    }
+                    else {
+                        var replace = '';
+                        out.push('<li>');
+                        out.push('<a href="');
+                        if (_page > 1) {
+                            replace = '-p-' + _page;
+                        }
+                        out.push(helpers.common.link(url.replace(regExp, replace), context.app));
+                        out.push('" class="pagination-number" >');
+                        out.push(_page);
+                        out.push('</a>');
+                        out.push('</li>');
+                    }
+                    prepareSeparator(isLast);
+                    count++;
+                }
+                else if (_page < pages) {
+                    pagination.push(pagination[pagination.length - 1] + 1);
+                }
+            }
+
             if (!url.match(regExp)) {
                 url += '-p-0';
             }
@@ -144,9 +182,16 @@ module.exports = function(nunjucks) {
                     pagination.pop();
                 }
             }
-            max = 5;
-            for (i = 0; i < pagination.length && count < max; i++) {
-                prepareURL(pagination[i], ((count + 1) === max));
+            max = paginationLength;
+            if (platform === 'desktop') {
+                for (i = 0; i < pagination.length && count < max; i++) {
+                    prepareDesktopURL(pagination[i], ((count + 1) === max));
+                }
+            }
+            else {
+                for (i = 0; i < pagination.length && count < max; i++) {
+                    prepareURL(pagination[i], ((count + 1) === max));
+                }
             }
 
             return out.join('');
