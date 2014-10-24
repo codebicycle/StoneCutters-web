@@ -56,7 +56,7 @@ module.exports = Base.extend({
                     }.bind(this));
                 }.bind(this))
                 .fail(function fail() {
-                    console.log('Error');
+                    console.log('Remove Favorite :: Error');
                 })
                 .always(function always() {
                     $item.removeClass('removeAd');
