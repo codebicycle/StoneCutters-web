@@ -2,41 +2,42 @@
     ul-reset();
 
     li {
-        width: 50%;
-        height: 57px;
         float: left;
+        height: 57px;
+        width: 50%;
         &:hover {
             background: $white;
             box-shadow(0 0 0 1px $blue inset);
             cursor: pointer;
             a,
-            .count {
-                color: $black;
-            }
+            .count,
             .icons::before {
                 color: $greyStrong;
             }
         }
         a {
+            color: $blue;
             display: block;
+            font-size: $xs;
+            font-weight: bold;
+            line-height: 1;
             height: 42px;
             padding: 15px 0 0 0;
-            color: $blue;
-            font-weight: bold;
-            font-size: $xs;
             text-decoration: none;
 
             .icons {
                 float: left;
                 height: 42px;
-                margin-top: -4px;
-                &:before {
+                margin-right: 5px;
+                
+                &::before {
                     color: $blue;
-                    font-size: remify(28px);
+                    font-size: remify(22px);
                 }
             }
             .count {
-                color: #888;
+                color: $greyStrong;
+                display: block;
                 font-size: $xs;
                 font-weight: normal;
                 padding-left: 0;

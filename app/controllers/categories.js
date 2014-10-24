@@ -229,7 +229,7 @@ function handleItems(params, promise) {
         this.app.session.update({
             postingLink: postingLink
         });
-        seo.setContent(_items.metadata.seo);
+        seo.setContent(metadata.seo);
         tracking.setPage('listing');
         tracking.addParam('category', category.toJSON());
         if (subcategory) {

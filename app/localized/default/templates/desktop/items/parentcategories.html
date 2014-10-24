@@ -4,7 +4,7 @@
         <li>
             <a href="{{ category | slugToUrl | linkig }}">
                 <span class="icons icon-cat-{{ category.id }}"></span>
-                {{ category.trName }}<br>
+                {{ category.trName }}
                 <span class="count">{{ (category.counter | countFormat) if category.counter > 0  }}</span>
             </a>
         </li>

@@ -1,0 +1,21 @@
+{% if seo %}
+<div class="footer-options">
+    <div id="kw-footer" class="clearfix cbb">
+        <p class="pop-rel nuevo">
+            Lo más buscado:
+            {% for popular in seo.get('popularSearches') %}
+            <a class="keyWords" href="{{ popular.url }}" >{{ popular.anchor }}</a>
+            {% endfor %}
+        </p>
+    </div>
+    <div id="kw-footer" class="clearfix cbb">
+        <h3>Avisos Relacionados</h3>
+        <ul>
+            {% for related in seo.get('relatedListings') %}
+            <li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+{% endif %}

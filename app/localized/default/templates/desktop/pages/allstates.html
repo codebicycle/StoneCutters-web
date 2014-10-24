@@ -1,0 +1,27 @@
+<ul>
+    {% for state in states %}
+    <li class="state">
+        <h2 class="state-name">
+            <a href="{{ '/' | link({ location: state.url }) }}">{{ state.name }}</a>
+        </h2>
+        {% if state.count %}<span class="counter">({{ state.count }})</span>{% endif %}
+        {% if state.children | length > 0 %}
+            {% if not state.selected %}
+                <h4 class="state-all-link">
+                    <a href="{{ (url + '/' + state.hostname) | link }}">[Ver todas las ciudades de {{ state.name }}]</a>
+                </h4>
+            {% endif %}
+            <ul class="cities">
+                {% for city in state.children %}
+                <li class="city">
+                    <h3 class="city-name">
+                        <a href="{{ '/' | link({ location: city.url }) }}">{{ city.name }}</a>
+                    </h3>
+                    {% if city.count %}<span class="counter">({{ city.count }})</span>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
