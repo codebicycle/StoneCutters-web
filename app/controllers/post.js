@@ -107,13 +107,13 @@ function categoriesOrFlow(params, callback) {
         }.bind(this);
 
         var postingController = function(categories, postingSession, topCities, states) {
-            //analytics.setPage('post#flow');
+            tracking.setPage('post#index');
             callback(null, 'post/index', {
                 categories: categories,
                 postingSession: postingSession.get('postingSession'),
                 topCities: topCities,
                 states: states,
-                //analytics: analytics.generateURL.call(this)
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 

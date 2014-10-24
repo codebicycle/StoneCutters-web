@@ -18,6 +18,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var list = filters.orderFilters(order, data.metadata.filters);
+        var link = this.app.session.get('path');
 
         _.each(data.items, this.processItem);
 
@@ -25,9 +26,10 @@ module.exports = Base.extend({
             items: data.items,
             filters: list,
             nav: {
-                link: data.url.replace('/-ig',''),
-                linkig: data.url,
+                link: link.replace('/-ig',''),
+                linkig: link,
                 galeryAct: 'active',
+                current: 'searchig'
             }
         });
     },

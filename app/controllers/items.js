@@ -712,10 +712,10 @@ function search(params, callback) {
             tracking.setPage('nf');
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
+            seo.addMetatag('robots', 'noindex, nofollow');
+            seo.addMetatag('googlebot', 'noindex, nofollow');
 
             if (!query.search || _.isEmpty(query.search.trim())) {
-                seo.addMetatag('robots', 'noindex, follow');
-                seo.addMetatag('googlebot', 'noindex, follow');
                 done.abort();
                 return callback(null, {
                     search: '',
@@ -762,8 +762,8 @@ function search(params, callback) {
         var success = function(items) {
             var metadata = items.metadata;
             if (metadata.total < 5) {
-                seo.addMetatag('robots', 'noindex, follow');
-                seo.addMetatag('googlebot', 'noindex, follow');
+                seo.addMetatag('robots', 'noindex, nofollow');
+                seo.addMetatag('googlebot', 'noindex, nofollow');
             }
 
             helpers.filters.prepare(metadata);
@@ -868,10 +868,8 @@ function allresults(params, callback) {
             var url = '/nf/all-results/';
             var metadata = _items.metadata;
 
-            if (metadata.total < 5) {
-                seo.addMetatag('robots', 'noindex, follow');
-                seo.addMetatag('googlebot', 'noindex, follow');
-            }
+            seo.addMetatag('robots', 'noindex, nofollow');
+            seo.addMetatag('googlebot', 'noindex, nofollow');
             helpers.pagination.paginate(metadata, query, url);
             helpers.filters.prepare(metadata);
             tracking.addParam('page_nb', metadata.totalPages);

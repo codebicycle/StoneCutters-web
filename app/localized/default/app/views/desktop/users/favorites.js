@@ -8,7 +8,10 @@ module.exports = Base.extend({
     className: 'users_favorites_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        return data.context.ctx;
+
+        return _.extend({}, data, {
+            favorites: data.context.ctx.favorites
+        });
     },
     postRender: function() {
         var $removeItem = $('.removeItem');
@@ -23,7 +26,7 @@ module.exports = Base.extend({
                     userId: '14788911',
                     token: 'MTQ3ODg5MTF8MTQxMzkxMTk5ODc3Mw%253D%253D'
                 };
-            var itemId = $removeItem.data('itemid');
+            var itemId = $(event.currentTarget).data('itemid');
             var url = [];
 
             url.push(api);
@@ -35,7 +38,6 @@ module.exports = Base.extend({
             url.push(user.token);
 
             if (!$item.hasClass('removeAd')) {
-                console.log($item.hasClass('removeAd'));
                 $item.addClass('removeAd');
                 $.ajax({
                     type: 'POST',
@@ -55,7 +57,6 @@ module.exports = Base.extend({
                 .always(function always() {
                     $item.removeClass('removeAd');
                 });
-
             }
 
 

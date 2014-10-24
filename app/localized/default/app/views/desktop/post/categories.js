@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
+var tracking = require('../../../../../../modules/tracking');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 
@@ -50,6 +51,17 @@ module.exports = Base.extend({
             console.log(err); // TODO: HANDLE ERRORS
         }.bind(this);
 
+        var track = function(done, res) {
+            var $view = $('#partials-tracking-view');
+
+            tracking.reset();
+            tracking.setPage('post#subcat');
+
+            $view.trigger('update', tracking.generateURL.call(this));
+
+            done(res);
+        }.bind(this);
+
         var success = function(res) {
             $('body > .loading').hide();
             this.parentView.$el.trigger('subcategorySubmit', {
@@ -61,6 +73,7 @@ module.exports = Base.extend({
 
         asynquence().or(error)
             .then(fetch)
+            .then(track)
             .val(success);
     }
 });

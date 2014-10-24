@@ -18,11 +18,10 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
+        var $view = $('#partials-tracking-view');
         var interstitial = this.$('#interstitial');
         var header = $('.header_index_view');
         var views = $('[data-view]');
-        var img;
-        var analyticInfo;
 
         if (!interstitial.length) {
             return;
@@ -57,13 +56,7 @@ module.exports = Base.extend({
             maxAge: maxAge
         });
 
-        analyticInfo = tracking.generateURL.call(this);
-        _.each(analyticInfo.urls, function(url) {
-            img = $('<img/>');
-            img.addClass('analytics');
-            img.attr('src', url);
-            interstitial.append(img);
-        }, this);
+        $view.trigger('update', tracking.generateURL.call(this));
     }
 });
 

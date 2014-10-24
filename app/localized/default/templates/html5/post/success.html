@@ -15,8 +15,8 @@
         <a href="{{ '/posting' | link }}" class="posting">{{ dictionary["misc.CreateAnotherAd_Mob"] }}</a>
         <a class="home" href="{{ '/' | link }}">{{ dictionary["misc.BackToStart_Mob"] }}</a>
     </article>
-
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </section>
+
 {% view 'pages/interstitial' %}
+
+{% view 'partials/tracking' %}

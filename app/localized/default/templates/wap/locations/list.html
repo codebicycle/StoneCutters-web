@@ -35,9 +35,6 @@
                         <input type="submit" value="{{ dictionary["homeheader.Search"] }}" />
                         <input type="hidden" value="{{ target }}" name="target" style="display: none;" />
                     </form>
-
-                    {% set templateName = template + '/partials/tracking.html' %}
-                    {% include templateName %}
                 </td>
             </tr>
         </table>
@@ -76,5 +73,10 @@
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>
