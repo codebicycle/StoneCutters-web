@@ -10,20 +10,18 @@
 	background: $greyPageBg;
 	border-radius();
 	float: left;
-	list-style-type: none;
-	margin: 0;
-	padding: 5px;
-	width: 200px;
+	height: 100%
+	position: relative;
+	ul-reset();
+	width: 220px;
 
 	a {
-		border-radius()
 		display: block;
-		padding: 5px;
+		padding: 7px 10px;
 
 		&:hover {
-			background: $greyStrong;
+			background: $blue;
 			color: $white;
-			padding-left: 5px;
 			text-decoration: none;
 
 			&::before {
@@ -33,7 +31,6 @@
 	}
 
 	li {
-		position: relative;
 
 		&:hover .child-categories-list {
 			display: block;
@@ -41,21 +38,27 @@
 	}
 
 	.child-categories-list {
-		background: $greyPageBg;
-		border-radius();
+		background: $white;
+		border-left: 3px solid $blue;
 		display: none;
+		max-height: 100%;
 		left: 100%;
-		list-style-type: none;
-		margin: 0;
-		padding: 5px;
+		overflow-y: auto;
 		position: absolute;
 		top: 0;
-		width: 200px;
+		ul-reset();
+		width: 217px;
 		z-index: 9999;
+		.subcategory {
+			border-top: 1px solid $white;
+			&:first-child {
+				border-top: none;
+			}
+		}
 	}
 
 	.icons::before {
-		font-size: 1.53em;
-		padding: 0 5px 0 0;
+		font-size: $m;
+		padding: 0 10px 0 0;
 	}
 }
