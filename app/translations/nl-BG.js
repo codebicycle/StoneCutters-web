@@ -236,7 +236,6 @@ module.exports = {
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
     'misc.SinceDate': 'Sinds <<DATE>>',
     'widgets.Denounce': 'Denounce',
-    'featured_listings.Feature': 'Als topper plaatsen',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Als je veel advertenties wilt indienen bij OLX, kun je ons de advertenties sturen in XML- of CSV-indeling. De advertenties worden gratis gepubliceerd en regelmatig bijgewerkt.',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location'

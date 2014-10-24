@@ -11,7 +11,7 @@
             list-style: none;
             position: relative;    
             vertical-align: bottom;
-            width: 24.694%;
+            width: 25%;
 
             a {
                 box($greyBoxBg, $greyBorders, 3px 3px 0 0, 10px 0, solid, 1px 1px 0 1px)
@@ -112,6 +112,7 @@
                     left: -10px;
                     padding: 3px;
                     position: absolute;
+                    text-transform: uppercase;
                     top: 20px;
                     width: 70%;
 
@@ -187,25 +188,25 @@
             border-bottom: none;
         }
 
-        .expired, .deleted, .rejected {
+        .expired, .deleted, .rejected, .pending {
             .image {                
 
                 .status {
-                    background: $greyBorders;
+                    background: #666;
 
                     &:after {
-                        border-color: $greyBorders transparent $greyBorders $greyBorders;                        
+                        border-color: #666 transparent #666 #666;                        
                     }
 
                     &:before {
-                        border-color: $greyBorders transparent;                        
+                        border-color: #666 transparent;                        
                     }
                 }
 
             }
 
             .description {                
-                h3.title {
+                .title {
                     color: $greyBorders;
                 }
             }
@@ -215,8 +216,14 @@
                 }
             }    
         }
-        
+        .expired {
+            vendor(opacity,0.5)
+            ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+        }
         .deleted {
+            vendor(opacity,0.5)
+            ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";            
+
             .image {
                 .status {
                     background: $greyStrong;
@@ -234,12 +241,26 @@
         .rejected {
             .image {
                 .status {
-                    background: #D41D34;
+                    background: #D51E34;
                     &:after {
-                        border-color: #D41D34 transparent #D41D34 #D41D34;
+                        border-color: #D51E34 transparent #D51E34 #D51E34;
                     }
                     &:before {
-                        border-color: #D41D34 transparent;                        
+                        border-color: #7E2235 transparent;                        
+                    }
+                }
+
+            }
+        }
+        .pending {
+            .image {
+                .status {
+                    background: #f1b41d;
+                    &:after {
+                        border-color: #f1b41d transparent #f1b41d #f1b41d;
+                    }
+                    &:before {
+                        border-color: #efa010 transparent;                        
                     }
                 }
 
