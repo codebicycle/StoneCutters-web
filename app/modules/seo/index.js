@@ -174,7 +174,6 @@ _.extend(SeoModule.prototype, {
         }
     },
     set: function (key,value) {
-        console.log(key,value);
         this.seoContent[key] = value;
     },
     isEnabled: function () {
