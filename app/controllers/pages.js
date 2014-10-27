@@ -70,7 +70,7 @@ function interstitial(params, callback) {
             this.app.session.persist({
                 downloadApp: '1'
             });
-            return helpers.common.redirect.call(this, params.featuredListingsref);
+            return helpers.common.redirect.call(this, params.ref);
         }
 
         this.app.session.persist({
