@@ -1,17 +1,18 @@
+{% include (template + '/partials/footer-slider.html') %}
 <div class="footer-options">
-	<ul class="select">
-		<li><a href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-arrow"></span></a></li><!--
-		--><li><a href="#">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','') }}<span class="icons icon-arrow"></span></a></li><!--
-		--><li><a href="#" >{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}<span class="icons icon-arrow"></span></a></li><!--
-		--><li><a href="{{ '/help' | link }} " rel="nofollow" >{{ dictionary["biderrorheader.Help"] }}<span class="icons icon-arrow"></span></a></li>
-	</ul>
-	{% include (template + '/marketing/appStores.html') %}
+    <ul class="select">
+        <li><a data-footer-slideUp="category-slide" href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-arrow"></span></a></li><!--
+        --><li><a data-footer-slideUp="popular-slide" href="#">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','') }}<span class="icons icon-arrow"></span></a></li><!--
+        --><li><a data-footer-slideUp="around-slide" href="#" >{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}<span class="icons icon-arrow"></span></a></li><!--
+        --><li><a data-footer-slideUp="help-slide" href="#" rel="nofollow" >{{ dictionary["biderrorheader.Help"] }}<span class="icons icon-arrow"></span></a></li>
+    </ul>
+    {% include (template + '/marketing/appStores.html') %}
 </div>
 <div class="container">
-	<p>{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2014 OLX, Inc.</p>
-	<ul class="social">
-		<li><a class="icons icon-facebook" title="facebook" href="#" rel="nofollow"></a></li>
-		<li><a class="icons icon-twitter" title="Twitter" href="#" rel="nofollow"></a></li>
-		<li><a class="icons icon-googleplus" title="google-plus" href="#" rel="nofollow"></a></li>
-	</ul>
-</div>
+    <p>{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2014 OLX, Inc.</p>
+    <!--ul class="social">
+        <li><a class="icons icon-facebook" title="facebook" href="#" rel="nofollow"></a></li>
+        <li><a class="icons icon-twitter" title="Twitter" href="#" rel="nofollow"></a></li>
+        <li><a class="icons icon-googleplus" title="google-plus" href="#" rel="nofollow"></a></li>
+    </ul>
+</div-->

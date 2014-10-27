@@ -9,7 +9,9 @@ module.exports = {
     },
     tracking: {
         trackers: {
-            analytics: false
+            analytics: {
+                enabled: false
+            }
         }
     }
 };

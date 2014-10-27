@@ -10,6 +10,9 @@ module.exports = Base.extend({
     className: 'items-search-view',
     tagName: 'main',
     order: ['parentcategory', 'state', 'city'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
+    regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     events: {
         'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
@@ -62,8 +65,8 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var path = this.app.session.get('path').split('/-').shift();
-        path = this.cleanPath(path);
 
+        path = this.cleanPath(path);
         this.app.router.redirectTo(path);
     },
     categoryFilter: function(event) {
@@ -81,42 +84,20 @@ module.exports = Base.extend({
 
         path = path.replace('/search/', filterSlug);
         path = this.refactorPath(path);
-
         this.app.router.redirectTo(path);
     },
     refactorPath: function(path) {
-        var regexpFindPage = /-p-[0-9]+-/;
-        var regexpReplacePage = /(-p-[0-9]+)/;
-        var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
-        var page = '';
-
-        if (path.match(regexpFindPage)) {
-            page = path.match(regexpFindPage).shift();
-            path = path.replace(regexpReplacePage, '');
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
         }
-        path = path.replace(regexpReplaceCategory, '$1' + page);
-
         if (path.slice(path.length - 1) === '/') {
             path = path.substring(0, path.length - 1);
         }
         return path;
     },
     cleanPath: function(path) {
-        var regexpFindPage = /-p-[0-9]+/;
-        var regexpReplacePage = /(-p-[0-9]+)/;
-        var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
-        var page = '';
-
-        if (path.match(regexpFindPage)) {
-            page = path.match(regexpFindPage).shift();
-            path = path.replace(regexpReplacePage, '');
-        }
-        path = path.replace(regexpReplaceCategory, 'search');
-
-        if (path.slice(path.length - 1) !== '/') {
-            path += '/';
-        }
-        path += page;
+        path = this.refactorPath(path);
+        path = path.replace(this.regexpReplaceCategory, 'search');
         return path;
     }
 });

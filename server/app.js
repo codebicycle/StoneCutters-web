@@ -47,6 +47,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.device());
         rendrApp.use(middleware.internetOrg());
+        rendrApp.use(middleware.categories());
     }
 
     server.expressApp.configure(expressConfiguration);

@@ -10,6 +10,8 @@ module.exports = Base.extend({
     className: 'categories-show-view',
     tagName: 'main',
     order: ['pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
     events: {
         'click .check-box input': 'selectFilter',
         'click .range-submit': 'rangeFilterInputs',
@@ -23,6 +25,10 @@ module.exports = Base.extend({
         var link = this.app.session.get('path');
         var linkig = link + '-ig/';
         var filters = Filters.sort(this.order, data.metadata.filters);
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var showAdSenseListingBottom = helpers.features.isEnabled.call(this, 'adSenseListingBottom', platform, location.url);
+        var showAdSenseListingTop = helpers.features.isEnabled.call(this, 'adSenseListingTop', platform, location.url);
 
         if (~link.indexOf('/-')) {
             linkig = link.replace('/-', '-ig/-');
@@ -36,6 +42,8 @@ module.exports = Base.extend({
             items: data.items,
             filters: filters,
             wFilters: this.filters,
+            showAdSenseListingBottom: showAdSenseListingBottom,
+            showAdSenseListingTop: showAdSenseListingTop,
             nav: {
                 link: link,
                 linkig: linkig,
@@ -44,6 +52,7 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
+
         if (!this.filters) {
             this.filters = new Filters(this.app.session.get('path'));
         }
@@ -67,7 +76,18 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.app.router.redirectTo(this.app.session.get('path').split('/-').shift());
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type')
+        };
+
+        this.filters.remove(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
     },
     selectFilter: function(event) {
         event.preventDefault();
@@ -81,7 +101,7 @@ module.exports = Base.extend({
             type: $target.data('filter-type'),
             value: $target.val()
         };
-        
+
         if ($target.is(':checked') && !this.filters.has(filter.name, filter.value)) {
             this.filters.set(filter);
         }
@@ -90,6 +110,7 @@ module.exports = Base.extend({
         }
 
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
@@ -111,6 +132,7 @@ module.exports = Base.extend({
 
         this.filters.set(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
 
@@ -133,8 +155,18 @@ module.exports = Base.extend({
 
         this.filters.set(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
+    },
+    cleanPath: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
+        if (path.slice(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
+        }
+        return path;
     }
 });
 

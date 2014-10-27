@@ -55,7 +55,7 @@ module.exports = Base.extend({
             var $view = $('#partials-tracking-view');
 
             tracking.reset();
-            tracking.setPage('post#subcat');
+            tracking.setPage('desktop_step2');
 
             $view.trigger('update', tracking.generateURL.call(this));
 
