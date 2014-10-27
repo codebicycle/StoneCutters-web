@@ -30,6 +30,10 @@ module.exports = function(nunjucks) {
         return typeof value === type;
     }
 
+    function inArray(arr, value) {
+       return _.indexOf(arr, value) > -1;
+    }
+
     function link(href, query) {
         href = helpers.common.fullizeUrl(href, this.ctx.app);
         return helpers.common.link(href, this.ctx.app, query || {});
@@ -283,6 +287,7 @@ module.exports = function(nunjucks) {
         date: date,
         countFormat: countFormat,
         is: is,
+        inArray: inArray,
         link: link,
         linkig: linkig,
         linkFilter: linkFilter,
