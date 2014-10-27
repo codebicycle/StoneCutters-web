@@ -24,6 +24,7 @@ module.exports = Base.extend({
         }
         else{
             $progressBar.width('100%');
+            $('body').removeClass('noscroll');
             window.setTimeout(function onTimeout(){
                 $progressBar.hide();
                 $progressBar.width('0');
@@ -100,11 +101,11 @@ module.exports = Base.extend({
         left = (screen.width/2)-(width/2),
         top = (screen.height/2)-(height/2);
         window.open(
-            url, 
-            'myWindow', 
-            'height=' + height + 
-            ',width=' + width + 
-            ', top=' + top + 
+            url,
+            'myWindow',
+            'height=' + height +
+            ',width=' + width +
+            ', top=' + top +
             ', left=' + left
         );
     },

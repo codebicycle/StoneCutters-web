@@ -1,26 +1,25 @@
-<h2 class="title-module">Tus datos de contacto</h2>
+<h2 class="title-module">{{ dictionary["posting_step4.ContactInformation"] }} </h2>
 <fieldset class="wrapper error">
-    <label for="seller-name" class="posting-label">* Nombre de contacto</label>
+    <label for="seller-name" class="posting-label">{{ dictionary["itemslisting.NewContactName"] }} </label>
     <div class="wrapper-inputs">
-        <input id="seller-name" class="text-field" type="text" placeholder="Ingrese su nombre" name="contactName" required />
-        <small class="advice">Oops! Completá este campo</small>
+        <input id="seller-name" class="text-field" type="text" placeholder="{{ dictionary["itemslisting.NewContactName"] }}" name="contactName" required />
+        <small class="advice">{{ dictionary["posting_changecategorymod.ValidationError"] }} </small>
     </div>
 </fieldset>
 <fieldset class="wrapper">
-    <label for="seller-email" class="posting-label">* E-mail</label>
+    <label for="seller-email" class="posting-label">{{ dictionary["messages_browse_notify_friend.ErrorMail"] }} </label>
     <div class="wrapper-inputs">
-        <input id="seller-email" class="text-field" type="email" placeholder="nombre@servidor.com.bo" name="email" required />
-        <small class="advice icons icon-lock">Ingrese un e-mail válido. No se preocupe, no será divulgado.</small>
+        <input id="seller-email" class="text-field" type="email" placeholder="{{ dictionary["contactseller_form.CompleteYourEmail"] }}" name="email" required />
+        <small class="advice icons icon-lock">{{ dictionary["contactseller_form.CompleteYourEmail"] }}</small>
     </div>
 </fieldset>
 <fieldset class="wrapper">
-    <label for="seller-phone" class="posting-label">* Teléfono</label>
-    <input id="seller-phone" class="text-field" type="tel" placeholder="(00) 0000 0000" name="phone" required />
+    <label for="seller-phone" class="posting-label">{{ dictionary["contactseller_reply_mail.ContactPhone"] }} </label>
+    <input id="seller-phone" class="text-field" type="tel" placeholder="{{ dictionary['seccion-40.274'] }} " name="phone" required />
 </fieldset>
 {% view 'post/locations' %}
 <fieldset class="seller-post">
     <input id="seller-remember" type="checkbox" checked />
-    <label for="seller-remember">Recordarme</label>
-    <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="posting" data-qa="submit-button" >
-    <small class="advice">Al publicar un anuncio usted acepta los <a href="#">Términos y condiciones</a> de OLX</small>
+    <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" >
+    <small class="advice">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a href="/terms">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>    
 </fieldset>

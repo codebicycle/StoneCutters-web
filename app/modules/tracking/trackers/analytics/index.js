@@ -16,12 +16,32 @@ var eventsKeys = {
 
 function isEnabled(page) {
     var location = this.app.session.get('location');
-    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'analytics'], true);
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', 'enabled'], true);
 
     if (!enabled) {
         return false;
     }
     return !!utils.get(configTracking, ['common', 'pages', page]);
+}
+
+function isEnabledServer(page) {
+    var location = this.app.session.get('location');
+    var enabled = isEnabled.call(this, page);
+
+    if (!enabled) {
+        return false;
+    }
+    return config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', 'server'], true);
+}
+
+function isEnabledClient(page) {
+    var location = this.app.session.get('location');
+    var enabled = isEnabled.call(this, page);
+
+    if (!enabled) {
+        return false;
+    }
+    return config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', 'client'], true);
 }
 
 function getParams(page, options) {
@@ -104,6 +124,8 @@ function event(params, options) {
 
 module.exports = {
     isEnabled: isEnabled,
+    isEnabledServer: isEnabledServer,
+    isEnabledClient: isEnabledClient,
     getParams: getParams,
     pageview: pageview,
     event: event

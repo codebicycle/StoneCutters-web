@@ -17,18 +17,9 @@ module.exports = {
     interstitial: middlewares(interstitial),
     error: middlewares(error),
     allstates: middlewares(allstates),
-    featured_listings: middlewares(featured_listings)
+    sitemap: middlewares(sitemap),
+    featured_listings: middlewares(featuredListings)
 };
-
-function featured_listings(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        callback(null, {
-
-        });
-    }
-}
 
 function terms(params, callback) {
     helpers.controllers.control.call(this, params, controller);
@@ -190,5 +181,25 @@ function allstates(params, callback) {
             .then(fetch)
             .then(formatResponse)
             .val(success);
+    }
+}
+
+function sitemap(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {        
+        callback(null, {
+            tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
+function featuredListings(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
+        });
     }
 }
