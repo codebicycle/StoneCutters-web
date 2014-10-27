@@ -17,7 +17,7 @@ module.exports = {
     interstitial: middlewares(interstitial),
     error: middlewares(error),
     allstates: middlewares(allstates),
-    featuredListings: middlewares(featuredListings)
+    featured_listings: middlewares(featuredListings)
 };
 
 function terms(params, callback) {
