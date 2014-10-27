@@ -18,5 +18,11 @@ module.exports = {
     },
     'users#favorites': {
         url: 'myolx/favoritelisting'
+    },
+    'users#messages': {
+        url: 'myolx/myolxmessages'
+    },
+    'users#readmessages': {
+        url: 'myolx/readmessages'
     }
 };

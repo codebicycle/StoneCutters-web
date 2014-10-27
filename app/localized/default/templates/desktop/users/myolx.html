@@ -1,6 +1,6 @@
 <ul class="myolxmenu">
     <li class="{{ 'active' if viewname == 'myads' else '' }}">
-        <a href="{{ '/myolx/myadslisting' | link }} ">{{ dictionary["defaulthtmlhead.My Listings"] }}</a>
+        <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["defaulthtmlhead.My Listings"] }}</a>
     </li>
     <li class="{{ 'active' if viewname == 'favorites' else '' }}">
         <a href="{{ '/myolx/favoritelisting' | link }}">{{ dictionary["defaulthtmlhead.My Favorites"] }}</a>
@@ -8,8 +8,13 @@
     <li>
         <a href="#">{{ dictionary["myolx.Settings"] }} </a>
     </li>
-    <li>
-        <a href="#">{{ dictionary["myolx.Messages"] }}</a>
+    {% if viewname == 'messages' %}
+        {% set messages =  'active messages' %}
+    {% elif viewname == 'readmessages' %}
+        {% set messages = 'active' %}
+    {% endif %}
+    <li class="{{ messages }}">
+        <a href="{{ '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
     </li>
 </ul>
 {% view 'users/' + viewname  %}

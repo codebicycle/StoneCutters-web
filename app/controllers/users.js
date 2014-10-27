@@ -13,7 +13,9 @@ module.exports = {
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
-    favorites: middlewares(favorites)
+    favorites: middlewares(favorites),
+    messages: middlewares(messages),
+    readmessages: middlewares(readmessages)
 };
 
 function register(params, callback) {
@@ -157,7 +159,7 @@ function myads(params, callback) {
             }
             done(res.myAds);
         }.bind(this);
-            
+
         var success = function(_myAds) {
             var myAds = _myAds.toJSON();
             var platform = this.app.session.get('platform');
@@ -177,7 +179,7 @@ function myads(params, callback) {
                     myAds: myAds,
                     deleted: deleted
                 });
-            }    
+            }
         }.bind(this);
 
         var error = function(err, res) {
@@ -242,7 +244,7 @@ function favorites(params, callback) {
             }
             done(res.favorites);
         }.bind(this);
-            
+
         var success = function(_favorites) {
             var favorites = _favorites.toJSON();
             var platform = this.app.session.get('platform');
@@ -264,7 +266,7 @@ function favorites(params, callback) {
                     favorites: favorites,
                     favorite: favorite
                 });
-            }    
+            }
         }.bind(this);
 
         var error = function(err, res) {
@@ -275,6 +277,60 @@ function favorites(params, callback) {
             .then(prepare)
             .then(findFavorites)
             .then(check)
+            .val(success);
+    }
+}
+
+function messages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var success = function(_myAds) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'desktop') {
+                callback(null,'users/myolx', {
+                    viewname: 'messages'
+                });
+            }
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .val(success);
+    }
+}
+
+function readmessages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var success = function(_myAds) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'desktop') {
+                callback(null,'users/myolx', {
+                    viewname: 'readmessages'
+                });
+            }
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
             .val(success);
     }
 }
