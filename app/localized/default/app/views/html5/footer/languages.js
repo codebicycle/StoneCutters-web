@@ -21,17 +21,6 @@ module.exports = Base.extend({
             return language.locale !== selected;
         });
 
-        var languages = this.app.session.get('languages').models;
-        var selected = this.app.session.get('selectedLanguage');
-
-        var selectedLanguage = _.find(languages, function(language){
-            return language.locale === selected;
-        });
-
-        var languagesList = _.filter(languages, function(language){
-            return language.locale !== selected;
-        });
-
         return _.extend({}, data, {
             languages: {
                 selected: selectedLanguage,
