@@ -25,6 +25,10 @@ module.exports = Base.extend({
         var link = this.app.session.get('path');
         var linkig = link + '-ig/';
         var filters = Filters.sort(this.order, data.metadata.filters);
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var showAdSenseListingBottom = helpers.features.isEnabled.call(this, 'adSenseListingBottom', platform, location.url);
+        var showAdSenseListingTop = helpers.features.isEnabled.call(this, 'adSenseListingTop', platform, location.url);
 
         if (~link.indexOf('/-')) {
             linkig = link.replace('/-', '-ig/-');
@@ -38,6 +42,8 @@ module.exports = Base.extend({
             items: data.items,
             filters: filters,
             wFilters: this.filters,
+            showAdSenseListingBottom: showAdSenseListingBottom,
+            showAdSenseListingTop: showAdSenseListingTop,
             nav: {
                 link: link,
                 linkig: linkig,
@@ -46,6 +52,7 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
+
         if (!this.filters) {
             this.filters = new Filters(this.app.session.get('path'));
         }
