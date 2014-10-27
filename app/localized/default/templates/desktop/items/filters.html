@@ -14,7 +14,7 @@
             <div class="filter check-box {{ filter.name }}">
                 {% for value in filter.value %}
                     <label>
-                        <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}"  data-filter-type="{{ filter.type }}" {{ 'checked' if wFilters.filters[filter.name].value | inArray (value.id) }}>
+                        <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}"  data-filter-type="{{ filter.type }}" {{ 'checked' if wFilters.has(filter.name, value.id) }}>
                         {{ value.value }} <span class="count">{{ value.count }}</span>
                     </label>
                     {% endfor %}
