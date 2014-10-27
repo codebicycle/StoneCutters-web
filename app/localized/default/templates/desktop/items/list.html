@@ -1,5 +1,11 @@
 {% include (template + '/items/itemlistingnav.html') %}
 <ul class="items-list">
+    {% if showAdSenseListingTop %}
+        <li>
+            <!-- TODO: Replace this markup with actual Google AdSense markup -->
+            <p>AdSenseListingTop</p>
+        </li>
+    {% endif %}
     {% for item in items %}
         <li>
             <a href="{{ item | slugToUrl | link }}" data-qa="item-list" >
@@ -21,4 +27,10 @@
             </a>
         </li>
     {% endfor %}
+    {% if showAdSenseListingBottom %}
+        <li>
+            <!-- TODO: Replace this markup with actual Google AdSense markup -->
+            <p>AdSenseListingBottom</p>
+        </li>
+    {% endif %}
 </ul>
