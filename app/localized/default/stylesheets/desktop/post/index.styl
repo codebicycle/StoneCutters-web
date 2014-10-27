@@ -15,9 +15,12 @@
 		display: block;
 		font-size: $xs;
 		margin: 5px 0 0 0;
+
+		&.error {
+			color: $red;
+		}
 	}
 	.error {
-		.advice,
 		.posting-label {
 			color: $red;
 		}
@@ -25,6 +28,16 @@
 			border-color: $red;
 		}
 	}
+	.success {
+		.text-field {
+			border-color: $green;
+			color: $greyStrong;
+		}
+	}
+	.validating {
+		background: transparent url(imageUrl/images/desktop/validating.gif) no-repeat 412px 10px;
+	}
+
 	.posting-label {
 		float: left;
 		font-size: $s;
@@ -37,7 +50,6 @@
 		width: 418px;
 		&.select-field {
 			background: $white;
-			margin-bottom: 10px;
 			width: 440px !important;
 		}
 	}

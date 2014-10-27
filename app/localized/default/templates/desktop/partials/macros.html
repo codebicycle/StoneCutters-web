@@ -9,6 +9,45 @@
     </fieldset>
 {% endmacro %}
 
+{% macro FieldText2(type = 'text', name = '', label = '', placeholder = false, mandatory = false, validate = false, advice = false) %}
+    <fieldset class="wrapper">
+        <label for="text-{{ name }}" class="posting-label">{{ '* ' if mandatory }}{{ label }}</label>
+        <div class="wrapper-inputs">
+            <input
+                id="text-{{ name }}"
+                type="{{ type }}"
+                name="{{ name }}"
+                class="text-field"
+                {% if placeholder %}
+                    placeholder="{{ placeholder }}"
+                {% endif %}
+                {{'required' if mandatory }}
+                {{ 'data-validate="true"' if validate }}
+            />
+            {% if advice %}<small class="advice">{{ advice }}</small>{% endif %}
+        </div>
+    </fieldset>
+{% endmacro %}
+
+{% macro FieldTextArea(label, name, mandatory, form) %}
+    <fieldset class="wrapper">
+        <label for="{{name}}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
+        <div class="wrapper-inputs">
+            <textarea id="{{name}}" class="text-field" rows="12" {{ 'required' if mandatory == 'true' }} name="{{name}}">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
+        </div>
+    </fieldset>
+{% endmacro %}
+
+{% macro FieldTextArea2(name = '', label = '', mandatory = false, validate = false, advice = false) %}
+    <fieldset class="wrapper">
+        <label for="textarea-{{ name }}" class="posting-label">{{ '* ' if mandatory }}{{ label }}</label>
+        <div class="wrapper-inputs">
+            <textarea id="textarea-{{ name }}" name="{{ name }}" rows="12" class="text-field" {{'required' if mandatory }} {{ 'data-validate="true"' if validate }}></textarea>
+            {% if advice %}<small class="advice">{{ advice }}</small>{% endif %}
+        </div>
+    </fieldset>
+{% endmacro %}
+
 {% macro FieldCombobox(label, name, mandatory, values, form) %}
     <fieldset class="wrapper">
         <label for="{{label}}" class="posting-label">{{label}}</label>
@@ -19,12 +58,5 @@
                 {% endfor %}
             </select>
         </div>
-    </fieldset>
-{% endmacro %}
-
-{% macro FieldTextArea(label, name, mandatory, form) %}
-    <fieldset class="wrapper">
-        <label for="{{name}}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-        <textarea id="{{name}}" class="text-field" rows="12" {{ 'required' if mandatory == 'true' }} name="{{name}}">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
     </fieldset>
 {% endmacro %}

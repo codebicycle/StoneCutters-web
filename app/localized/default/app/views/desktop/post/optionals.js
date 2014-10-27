@@ -87,6 +87,7 @@ module.exports = Base.extend({
         var field = _.find(this.fields, function each(field) {
             return field.name === name;
         });
+        var fieldData;
 
         var fetch = function(done) {
             $loading.show();
@@ -120,10 +121,14 @@ module.exports = Base.extend({
         }.bind(this);
 
         this.form.values[field.name] = $field.val();
-        this.parentView.$el.trigger('fieldSubmit', {
+        fieldData = {
             name: field.name,
             value: this.form.values[field.name]
-        });
+        };
+        if ($field.data('validate')) {
+            field.validate = true;
+        }
+        this.parentView.$el.trigger('fieldSubmit', fieldData);
         if (!field.related) {
             return;
         }

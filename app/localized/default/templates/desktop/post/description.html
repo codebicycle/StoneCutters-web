@@ -1,8 +1,8 @@
-{% from macros import FieldText, FieldTextArea, FieldCombobox %}
+{% from macros import FieldText, FieldTextArea, FieldCombobox, FieldText2, FieldTextArea2 %}
 
-{{ FieldText('Título', 'title', 'true', '0 caracteres. Un buen título precisa de por lo menos 60 caracteres.') }}
+{{ FieldText2(name = 'title', label = 'Titulo', mandatory = true, validate = true, advice = '0 caracteres. Un buen título precisa de por lo menos 60 caracteres.') }}
 
-{{ FieldTextArea('Descripción de tu anuncio', 'description', 'true') }}
+{{ FieldTextArea2(name = 'description', label = 'Descripción de tu anuncio', mandatory = true, validate = true) }}
 
 <fieldset class="wrapper">
     <label for="price" class="posting-label">* Precio</label>
