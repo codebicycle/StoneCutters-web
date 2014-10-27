@@ -6,10 +6,15 @@
 
     li {
         display: inline-block;
+        magin-left: 10px;
         vertical-align: middle;
+        &:first-child {
+            margin-left: 0;
+        }
     }
 
     .icons::before {
-        font-size: remify(24px);
+        font-size: $m;
+        margin-right: 5px;
     }
 }

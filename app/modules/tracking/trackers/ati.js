@@ -112,7 +112,7 @@ function processOptions(params, options) {
             params.ad_subcategory = options.subcategory.name;
         }
     }
-    if(!_.isUndefined(params.subcategory) && params.subcategory === 'expired_subCategory' && options.subcategory) {
+    if(params.subcategory === 'expired_subCategory') {
         delete params.subcategory;
     }
 }
@@ -212,7 +212,7 @@ function event(params, options) {
 
 function isEnabled(page) {
     var location = this.app.session.get('location');
-    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ati'], true);
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ati', 'enabled'], true);
 
     if (!enabled) {
         return false;
@@ -220,8 +220,28 @@ function isEnabled(page) {
     return !!utils.get(configTracking, ['ati', 'params', page]);
 }
 
+function isEnabledServer(page) {
+    var enabled = isEnabled.call(this, page);
+
+    if (!enabled) {
+        return false;
+    }
+    return config.getForMarket(location.url, ['tracking', 'trackers', 'ati', 'server'], true);
+}
+
+function isEnabledClient(page) {
+    var enabled = isEnabled.call(this, page);
+
+    if (!enabled) {
+        return false;
+    }
+    return config.getForMarket(location.url, ['tracking', 'trackers', 'ati', 'client'], true);
+}
+
 module.exports = {
     isEnabled: isEnabled,
+    isEnabledServer: isEnabledServer,
+    isEnabledClient: isEnabledClient,
     getParams: getParams,
     pageview: pageview,
     event: event

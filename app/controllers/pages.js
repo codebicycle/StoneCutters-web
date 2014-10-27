@@ -18,18 +18,8 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
-    featured_listings: middlewares(featured_listings)
+    featured_listings: middlewares(featuredListings)
 };
-
-function featured_listings(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        callback(null, {
-
-        });
-    }
-}
 
 function terms(params, callback) {
     helpers.controllers.control.call(this, params, controller);
@@ -55,7 +45,7 @@ function help(params, callback) {
             items: {
                 collection: 'Help',
                 params: params
-            }
+            }featuredListings
         };
         */
         /** don't read from cache, because rendr caching expects an array response
@@ -80,7 +70,7 @@ function interstitial(params, callback) {
             this.app.session.persist({
                 downloadApp: '1'
             });
-            return helpers.common.redirect.call(this, params.ref);
+            return helpers.common.redirect.call(this, params.featuredListingsref);
         }
 
         this.app.session.persist({
@@ -200,6 +190,16 @@ function sitemap(params, callback) {
     function controller() {        
         callback(null, {
             tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
+function featuredListings(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
         });
     }
 }

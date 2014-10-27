@@ -1,24 +1,33 @@
 <ul class="my-items">
     {% for item in myAds %}
-        {% set status = '' %}
-        {% set statustxt = 'ACTIVO' %}
+        {% set status = 'ready' %}
+        {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
         {% if item.status == 'expired' %}
             {% set status = 'expired' %}
-            {% set statustxt = 'EXPIRADO' %}
+            {% set statustxt = dictionary["misc.Expired"] %}
         {% elif item.status == 'deleted' %}
             {% set status = 'deleted' %}
-            {% set statustxt = 'ELIMINADO' %}
+            {% set statustxt = dictionary["misc.Removed"] %}
         {% elif item.status == 'rejected' %}
             {% set status = 'rejected' %}    
-            {% set statustxt = 'RECHAZADO' %}    
+            {% set statustxt = 'RECHAZADO' %}
+        {% elif item.status == 'pending' %}
+            {% set status = 'pending' %}    
+            {% set statustxt = dictionary["misc.Pending_BR"] %} 
         {% endif %}
         <li class="item {{ status }}">
 
             <figure class="image">
-                {% if item.thumbnail %}
-                <img src="{{ item.thumbnail }}" alt="" class="thumbnail">
-                {% else %}
-                <span class="icons icon-photo withoutimg"></span>
+                {% if (status == 'ready') %}
+                    <a href="{{ item | slugToUrl | link }}">
+                {% endif %}
+                        {% if item.thumbnail %}
+                        <img src="{{ item.thumbnail }}" alt="" class="thumbnail">
+                        {% else %}
+                        <span class="icons icon-photo withoutimg"></span>
+                        {% endif %}
+                {% if (status == 'ready') %}
+                    </a>
                 {% endif %}
                 <span class="status">
                     {{ statustxt }}
@@ -34,9 +43,18 @@
                 <div class="text">                    
                 </div>
                 <div class="buttons">
-                    <a href="" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
-                    <a href="" class="btn icons icon-trash">{{ dictionary["confirmremoveitem.Delete"] }} </a>
-                    <a href="" class="btn orange icons icon-feature">{{ dictionary["featured_listings.Feature"] }}</a>
+                    {% if (status == 'ready' or status == 'pending') %}
+                        <a href="" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
+                        {% if (status == 'ready') %}
+                            <a href="" class="btn icons icon-trash">{{ dictionary["confirmremoveitem.Delete"] }} </a>
+                        {% endif %}
+                    {% endif %}
+                    {% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
+                        {% if status == 'expired' %}
+                            <a href="" class="btn icons icon-repulish">Republicar</a>
+                        {% endif %}
+                        <a href="" class="btn icons icon-trash">Eliminar de esta lista</a>
+                    {% endif %}                    
                 </div>
             </div>
             <div class="price">

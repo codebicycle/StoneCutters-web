@@ -98,11 +98,13 @@ function myolx(params, callback) {
             return helpers.common.redirect.call(this, '/login', null, {
                 status: 302
             });
-        } else {
+        }
+        if (platform == 'desktop' ){
             return helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
                 status: 302
             });
         }
+        
         callback(null, {});
     }
 }

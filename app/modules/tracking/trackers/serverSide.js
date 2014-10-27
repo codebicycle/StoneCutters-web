@@ -21,8 +21,8 @@ function isEnabled(page) {
 function getParams(page, options) {
     var location = this.app.session.get('location');
     var sid = this.app.session.get('sid');
-    var analyticsEnabled = analytics.isEnabled.call(this, page);
-    var atiEnabled = ati.isEnabled.call(this, page);
+    var analyticsEnabled = analytics.isEnabledServer.call(this, page);
+    var atiEnabled = ati.isEnabledServer.call(this, page);
     var params = {};
     var analyticsParams;
     var atiParams;
@@ -50,8 +50,8 @@ function getParams(page, options) {
 
 function pageview(params, options) {
     var page = options.page;
-    var analyticsEnabled = analytics.isEnabled.call(this, page);
-    var atiEnabled = ati.isEnabled.call(this, page);
+    var analyticsEnabled = analytics.isEnabledServer.call(this, page);
+    var atiEnabled = ati.isEnabledServer.call(this, page);
 
     if (analyticsEnabled || atiEnabled) {
         return utils.params('/analytics/pageview.gif?', params);
