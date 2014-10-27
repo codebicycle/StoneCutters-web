@@ -183,7 +183,7 @@ module.exports = {
             funnel_subcategory: 'not_set'
         }
     },
-    'post#flow#desktop_steb1': {
+    'post#flow#desktop_step1': {
         process: true,
         names: {
             page_name: 'posting_step1',
@@ -195,7 +195,7 @@ module.exports = {
             funnel_subcategory: ''
         }
     },
-    'post#flow#desktop_steb2': {
+    'post#flow#desktop_step2': {
         process: true,
         names: {
             page_name: 'posting_step2',

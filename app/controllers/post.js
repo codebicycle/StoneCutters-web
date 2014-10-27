@@ -107,7 +107,7 @@ function flow(params, callback) {
         }.bind(this);
 
         var postingController = function(categories, postingSession, topCities, states) {
-            tracking.setPage('desktop_steb1');
+            tracking.setPage('desktop_step1');
             callback(null, 'post/index', {
                 categories: categories,
                 postingSession: postingSession.get('postingSession'),
