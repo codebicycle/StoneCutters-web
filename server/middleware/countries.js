@@ -8,6 +8,7 @@ module.exports = function(dataAdapter) {
         var asynquence = require('asynquence');
         var config = require('../config');
         var statsd  = require('../modules/statsd')();
+        var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
         var testing = config.get(['publicEnvironments', 'testing'], {});
         var staging = config.get(['publicEnvironments', 'staging'], {});
@@ -25,7 +26,6 @@ module.exports = function(dataAdapter) {
             }
 
             function store(done, response) {
-                console.log(response);
                 req.rendrApp.session.update({
                     countries: response.countries
                 });

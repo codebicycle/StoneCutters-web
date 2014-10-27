@@ -11,6 +11,17 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
 
+        var languages = this.app.session.get('languages').models;
+        var selected = this.app.session.get('selectedLanguage');
+
+        var selectedLanguage = _.find(languages, function(language){
+            return language.locale === selected;
+        });
+
+        var languagesList = _.filter(languages, function(language){
+            return language.locale !== selected;
+        });
+
         return _.extend({}, data, {
             languages: {
                 selected: selectedLanguage,
