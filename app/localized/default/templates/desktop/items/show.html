@@ -12,6 +12,8 @@
 
 {% include (template + "/items/relateditems.html") %}
 
-{% include (template + "/partials/adsense.html") %}
+{% if showAdSenseItemBottom %}
+	{% include (template + "/partials/adsense.html") %}
+{% endif %}
 
 {% view 'partials/tracking' %}
