@@ -33,20 +33,16 @@ module.exports = function(dataAdapter) {
             }
 
             function store(done, response) {
-
                 req.rendrApp.session.update({
                     categories: response.categories
                 });
-
                 res.locals({
                     categories: response.categories.toJSON()
                 });
-
                 done();
             }
 
             function fail(err) {
-                console.log(err);
                 statsd.increment(['Unknown Category', 'middleware', 'categories', 'error']);
                 res.status(500).sendfile(errorPath);
             }

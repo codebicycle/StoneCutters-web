@@ -45,7 +45,7 @@ function help(params, callback) {
             items: {
                 collection: 'Help',
                 params: params
-            }featuredListings
+            }
         };
         */
         /** don't read from cache, because rendr caching expects an array response
