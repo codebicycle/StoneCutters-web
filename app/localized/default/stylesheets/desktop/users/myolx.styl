@@ -192,14 +192,14 @@
             .image {
 
                 .status {
-                    background: #666;
+                    background: $greyStrong;
 
                     &:after {
-                        border-color: #666 transparent #666 #666;                        
+                        border-color: $greyStrong transparent $greyStrong $greyStrong;                        
                     }
 
                     &:before {
-                        border-color: #666 transparent;                        
+                        border-color: $greyStrong transparent;                        
                     }
                 }
 
@@ -295,7 +295,7 @@
     }
 
     .removeAd {
-        vendor(opacity, 0.4);
+        opacity: .5
         .removeItem {
             cursor: default;
         }
