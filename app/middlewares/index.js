@@ -7,6 +7,7 @@ var middlewares = {
     redirections: require('./redirections'),
     location: require('./location'),
     languages: require('./languages'),
+    categories: require('./categories'),
     interstitial: require('./interstitial')
 };
 

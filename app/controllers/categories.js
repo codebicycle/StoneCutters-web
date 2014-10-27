@@ -22,14 +22,6 @@ function list(params, callback) {
 
         var fetch = function(done) {
             this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
-                        seo: seo.isEnabled()
-                    }
-                },
                 cities: {
                     collection: 'Cities',
                     params: {
@@ -47,14 +39,15 @@ function list(params, callback) {
             var platform = this.app.session.get('platform');
             var icons = config.get(['icons', platform], []);
             var country = this.app.session.get('location').url;
+            var categories = this.app.session.get('categories');
 
-            seo.setContent(response.categories.metadata.seo);
-            seo.addMetatag('title', response.categories.metadata.title);
-            seo.addMetatag('description', response.categories.metadata.description);
+            seo.setContent(categories.metadata.seo);
+            seo.addMetatag('title', categories.metadata.title);
+            seo.addMetatag('description', categories.metadata.description);
 
             callback(null, {
                 cities: response.cities.toJSON(),
-                categories: response.categories.toJSON(),
+                categories: categories.toJSON(),
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
                 tracking: tracking.generateURL.call(this),
                 seo: seo
