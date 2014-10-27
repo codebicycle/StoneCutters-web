@@ -5,15 +5,15 @@
         {% if item.status == 'expired' %}
             {% set status = 'expired' %}
             {% set statustxt = dictionary["misc.Expired"] %}
-        {% elif item.status == 'deleted' %}
+        {% elif item.status == 'closed' %}
             {% set status = 'deleted' %}
             {% set statustxt = dictionary["misc.Removed"] %}
         {% elif item.status == 'rejected' %}
-            {% set status = 'rejected' %}    
+            {% set status = 'rejected' %}
             {% set statustxt = 'RECHAZADO' %}
         {% elif item.status == 'pending' %}
-            {% set status = 'pending' %}    
-            {% set statustxt = dictionary["misc.Pending_BR"] %} 
+            {% set status = 'pending' %}
+            {% set statustxt = dictionary["misc.Pending_BR"] %}
         {% endif %}
         <li class="item {{ status }}">
 
@@ -22,7 +22,7 @@
                     <a href="{{ item | slugToUrl | link }}">
                 {% endif %}
                         {% if item.thumbnail %}
-                        <img src="{{ item.thumbnail }}" alt="" class="thumbnail">
+                        <img src="{{ item.thumbnailLarge }}" alt="" class="thumbnail">
                         {% else %}
                         <span class="icons icon-photo withoutimg"></span>
                         {% endif %}
@@ -40,7 +40,7 @@
                     <span>0 {{ dictionary["netvibes_myolx.content.Views"] }} </span>
                     <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', item.date.timestamp | date("MMM DD, YYYY")) }}</span>
                 </div>
-                <div class="text">                    
+                <div class="text">
                 </div>
                 <div class="buttons">
                     {% if (status == 'ready' or status == 'pending') %}
@@ -54,7 +54,7 @@
                             <a href="" class="btn icons icon-repulish">Republicar</a>
                         {% endif %}
                         <a href="" class="btn icons icon-trash">Eliminar de esta lista</a>
-                    {% endif %}                    
+                    {% endif %}
                 </div>
             </div>
             <div class="price">
