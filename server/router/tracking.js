@@ -43,7 +43,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 'Pragma': 'no-cache'
             }
         };
-console.log('\n', tracker, '\n', url, '\n');
+
         restler.request(url, options)
             .on('success', function success() {
                 statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
