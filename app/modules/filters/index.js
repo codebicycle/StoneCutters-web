@@ -81,6 +81,9 @@ function setSelect(filter) {
 
 function set(filter) {
     if (filter.type === 'SELECT') {
+        if (this.has(filter.name, filter.value)) {
+            return this.remove(filter);
+        }
         setSelect.call(this, filter);
     }
     else {

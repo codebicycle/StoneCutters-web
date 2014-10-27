@@ -9,14 +9,14 @@ var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
 module.exports = {
-    categoriesOrFlow: middlewares(categoriesOrFlow),
+    flow: middlewares(flow),
     subcategories: middlewares(subcategories),
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit)
 };
 
-function categoriesOrFlow(params, callback) {
+function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller(form) {
@@ -107,7 +107,7 @@ function categoriesOrFlow(params, callback) {
         }.bind(this);
 
         var postingController = function(categories, postingSession, topCities, states) {
-            tracking.setPage('post#index');
+            tracking.setPage('desktop_steb1');
             callback(null, 'post/index', {
                 categories: categories,
                 postingSession: postingSession.get('postingSession'),
@@ -118,7 +118,6 @@ function categoriesOrFlow(params, callback) {
         }.bind(this);
 
         var postingFlowController = function(categories, postingSession, topCities, states) {
-            tracking.setPage('post#flow');
             callback(null, 'post/flow/index', {
                 categories: categories,
                 postingSession: postingSession.get('postingSession'),
@@ -129,7 +128,7 @@ function categoriesOrFlow(params, callback) {
         }.bind(this);
 
         var postingCategoriesController = function(categories) {
-            tracking.setPage('post#categories');
+            tracking.setPage('categories');
             callback(null, 'post/categories', {
                 categories: categories.toJSON(),
                 tracking: tracking.generateURL.call(this)

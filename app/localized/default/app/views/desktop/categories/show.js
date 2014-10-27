@@ -10,6 +10,8 @@ module.exports = Base.extend({
     className: 'categories-show-view',
     tagName: 'main',
     order: ['pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
     events: {
         'click .check-box input': 'selectFilter',
         'click .range-submit': 'rangeFilterInputs',
@@ -90,6 +92,7 @@ module.exports = Base.extend({
         }
 
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
@@ -111,6 +114,7 @@ module.exports = Base.extend({
 
         this.filters.set(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
 
@@ -133,8 +137,18 @@ module.exports = Base.extend({
 
         this.filters.set(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
+    },
+    cleanPath: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
+        if (path.slice(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
+        }
+        return path;
     }
 });
 

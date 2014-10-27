@@ -172,7 +172,6 @@ module.exports = Base.extend({
             var subcategory = buildCategory('#subcategory');
 
             tracking.reset();
-            tracking.setPage('listing');
             tracking.addParam('category', category);
             tracking.addParam('subcategory', subcategory);
 

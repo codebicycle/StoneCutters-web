@@ -104,6 +104,7 @@ module.exports = (function() {
         }
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
+        console.log('Error', err ? err.stack || err : err);
         return callback(null, 'pages/error', res || {});
     }
 

@@ -8,13 +8,27 @@ module.exports = {
             category: 'home'
         }
     },
-    'items#search#filters': {
+    'categories#show#listing': {
         process: true,
         names: {
-            page_name: 'listing_all',
+            page_name: 'expired_category',
             category: 'listing',
-            keyword: '',
-            page_nb: 0
+            subcategory: 'expired_subCategory'
+        }
+    },
+    'categories#showig#listing': {
+        process: true,
+        names: {
+            page_name: 'expired_category',
+            category: 'listing',
+            subcategory: 'expired_subCategory'
+        }
+    },
+    'categories#show': {
+        process: true,
+        names: {
+            page_name: 'expired_category',
+            category: 'static'
         }
     },
     'items#search': {
@@ -26,7 +40,7 @@ module.exports = {
             page_nb: 0
         }
     },
-    'items#search#nfFilters': {
+    'items#searchig': {
         process: true,
         names: {
             page_name: 'listing_all',
@@ -35,7 +49,7 @@ module.exports = {
             page_nb: 0
         }
     },
-    'items#search#nf': {
+    'items#searchfilter': {
         process: true,
         names: {
             page_name: 'listing_all',
@@ -44,167 +58,27 @@ module.exports = {
             page_nb: 0
         }
     },
-    'users#register': {
-        process: false,
-        names: {
-            page_name: 'register_form',
-            category: 'account'
-        }
-    },
-    'users#login': {
-        process: false,
-        names: {
-            page_name: 'login',
-            category: 'account'
-        }
-    },
-    'locations#list': {
-        process: false,
-        names: {
-            page_name: 'select_location',
-            category: 'static'
-        }
-    },
-    'post#location': {
-        process: false,
-        names: {
-            page_name: 'posting_step1',
-            category: 'posting',
-            funnel_page: 'posting_step1'
-        }
-    },
-    'post#success': {
+    'items#searchfilterig': {
         process: true,
         names: {
-            page_name: 'posting_success',
-            category: 'posting',
-            ad_category: '',
-            ad_subcategory: '',
-            ad_id: '',
-            ad_photo: 0,
-            action_type: 'posted',
-            poster_id: '0',
-            poster_type: 'registered_no',
-            funnel_page: 'posting_success',
-            funnel_category: '',
-            funnel_subcategory: ''
+            page_name: 'listing_all',
+            category: 'listing',
+            keyword: '',
+            page_nb: 0
         }
     },
-    'post#form': {
+    'items#allresults': {
         process: true,
         names: {
-            page_name: 'posting_step4',
-            category: 'posting',
-            funnel_page: 'posting_step4',
-            ad_category: '',
-            ad_subcategory: '',
-            funnel_category: '',
-            funnel_subcategory: ''
+            page_name: 'listing_all',
+            category: 'listing'
         }
     },
-    'post#index': {
+    'items#allresultsig': {
         process: true,
         names: {
-            page_name: 'posting_step1',
-            category: 'posting',
-            funnel_page: 'posting_step1',
-            ad_category: '',
-            ad_subcategory: '',
-            funnel_category: '',
-            funnel_subcategory: ''
-        }
-    },
-    'post#subcat': {
-        process: true,
-        names: {
-            page_name: 'posting_step2',
-            category: 'posting',
-            funnel_page: 'posting_step2',
-            ad_category: '',
-            ad_subcategory: '',
-            funnel_category: '',
-            funnel_subcategory: ''
-        }
-    },
-    'post#subcategories': {
-        process: false,
-        names: {
-            page_name: 'posting_step3',
-            category: 'posting',
-            funnel_page: 'posting_step3'
-        }
-    },
-    'post#categories': {
-        process: false,
-        names: {
-            page_name: 'posting_step2',
-            category: 'posting',
-            funnel_page: 'posting_step2'
-        }
-    },
-    'post#edit': {
-        process: true,
-        names: {
-            page_name: 'edit_ad_form',
-            category: 'posting',
-            ad_category: '',
-            ad_subcategory: '',
-            ad_id: '',
-            ad_photo: 0,
-            funnel_page: 'edit_ad_form',
-            funnel_category: '',
-            funnel_subcategory: ''
-        }
-    },
-    'post#editsuccess': {
-        process: true,
-        names: {
-            page_name: 'posting_edit_success',
-            category: 'posting',
-            action_type: 'edited',
-            posting_to_action: '',
-            ad_category: '',
-            ad_subcategory: '',
-            ad_id: '',
-            ad_photo: 0,
-            poster_id: '0',
-            poster_type: 'registered_no',
-            funnel_page: 'posting_edit_success',
-            funnel_category: '',
-            funnel_subcategory: ''
-        }
-    },
-    'post#flow': {
-        process: false,
-        names: {
-            page_name: 'posting_new',
-            category: 'posting',
-            ad_category: 'not_set',
-            ad_subcategory: 'not_set',
-            funnel_page: 'posting_new',
-            funnel_category: 'not_set',
-            funnel_subcategory: 'not_set'
-        }
-    },
-    'pages#terms': {
-        process: false,
-        names: {
-            page_name: 'static/terms',
-            category: 'static'
-        }
-    },
-    'pages#help': {
-        process: false,
-        names: {
-            page_name: 'static/help',
-            category: 'static'
-        }
-    },
-    'pages#interstitial': {
-        process: false,
-        names: {
-            page_name: 'interstitial_page',
-            category: 'interstitial'
+            page_name: 'listing_all',
+            category: 'listing'
         }
     },
     'items#success': {
@@ -282,19 +156,167 @@ module.exports = {
             geo2: ''
         }
     },
-    'categories#show#listing': {
-        process: true,
+    'locations#list': {
+        process: false,
         names: {
-            page_name: 'expired_category',
-            category: 'listing',
-            subcategory: 'expired_subCategory'
+            page_name: 'select_location',
+            category: 'static'
         }
     },
-    'categories#show': {
+    'post#location': {
+        process: false,
+        names: {
+            page_name: 'posting_step1',
+            category: 'posting',
+            funnel_page: 'posting_step1'
+        }
+    },
+    'post#flow': {
+        process: false,
+        names: {
+            page_name: 'posting_new',
+            category: 'posting',
+            ad_category: 'not_set',
+            ad_subcategory: 'not_set',
+            funnel_page: 'posting_new',
+            funnel_category: 'not_set',
+            funnel_subcategory: 'not_set'
+        }
+    },
+    'post#flow#desktop_steb1': {
         process: true,
         names: {
-            page_name: 'expired_category',
+            page_name: 'posting_step1',
+            category: 'posting',
+            funnel_page: 'posting_step1',
+            ad_category: '',
+            ad_subcategory: '',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
+    'post#flow#desktop_steb2': {
+        process: true,
+        names: {
+            page_name: 'posting_step2',
+            category: 'posting',
+            funnel_page: 'posting_step2',
+            ad_category: '',
+            ad_subcategory: '',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
+    'post#flow#categories': {
+        process: false,
+        names: {
+            page_name: 'posting_step2',
+            category: 'posting',
+            funnel_page: 'posting_step2'
+        }
+    },
+    'post#subcategories': {
+        process: false,
+        names: {
+            page_name: 'posting_step3',
+            category: 'posting',
+            funnel_page: 'posting_step3'
+        }
+    },
+    'post#form': {
+        process: true,
+        names: {
+            page_name: 'posting_step4',
+            category: 'posting',
+            funnel_page: 'posting_step4',
+            ad_category: '',
+            ad_subcategory: '',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
+    'post#success': {
+        process: true,
+        names: {
+            page_name: 'posting_success',
+            category: 'posting',
+            ad_category: '',
+            ad_subcategory: '',
+            ad_id: '',
+            ad_photo: 0,
+            action_type: 'posted',
+            poster_id: '0',
+            poster_type: 'registered_no',
+            funnel_page: 'posting_success',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
+    'post#edit': {
+        process: true,
+        names: {
+            page_name: 'edit_ad_form',
+            category: 'posting',
+            ad_category: '',
+            ad_subcategory: '',
+            ad_id: '',
+            ad_photo: 0,
+            funnel_page: 'edit_ad_form',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
+    'post#editsuccess': {
+        process: true,
+        names: {
+            page_name: 'posting_edit_success',
+            category: 'posting',
+            action_type: 'edited',
+            posting_to_action: '',
+            ad_category: '',
+            ad_subcategory: '',
+            ad_id: '',
+            ad_photo: 0,
+            poster_id: '0',
+            poster_type: 'registered_no',
+            funnel_page: 'posting_edit_success',
+            funnel_category: '',
+            funnel_subcategory: ''
+        }
+    },
+    'users#register': {
+        process: false,
+        names: {
+            page_name: 'register_form',
+            category: 'account'
+        }
+    },
+    'users#login': {
+        process: false,
+        names: {
+            page_name: 'login',
+            category: 'account'
+        }
+    },
+    'pages#terms': {
+        process: false,
+        names: {
+            page_name: 'static/terms',
             category: 'static'
+        }
+    },
+    'pages#help': {
+        process: false,
+        names: {
+            page_name: 'static/help',
+            category: 'static'
+        }
+    },
+    'pages#interstitial': {
+        process: false,
+        names: {
+            page_name: 'interstitial_page',
+            category: 'interstitial'
         }
     },
     'pages#error': {

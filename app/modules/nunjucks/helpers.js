@@ -50,7 +50,7 @@ module.exports = function(nunjucks) {
             querystring = pairs[1];
 
             if (!~path.indexOf('-ig')) {
-                if (this.ctx.nav.current === 'searchig' || this.ctx.nav.current === 'searchfilterig') {
+                if (this.ctx.nav.current === 'searchig') {
                     if (path.match(regexpFindPage)) {
                         path = path.match(regexpReplacePage, '$1-ig');
                     }
