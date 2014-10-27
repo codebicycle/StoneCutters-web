@@ -25,6 +25,7 @@ function isEnabled(page) {
 }
 
 function isEnabledServer(page) {
+    var location = this.app.session.get('location');
     var enabled = isEnabled.call(this, page);
 
     if (!enabled) {
@@ -34,6 +35,7 @@ function isEnabledServer(page) {
 }
 
 function isEnabledClient(page) {
+    var location = this.app.session.get('location');
     var enabled = isEnabled.call(this, page);
 
     if (!enabled) {

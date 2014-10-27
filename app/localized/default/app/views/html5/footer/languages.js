@@ -12,8 +12,11 @@ module.exports = Base.extend({
         var currentRoute = this.app.session.get('currentRoute');
 
         return _.extend({}, data, {
+            languages: {
+                selected: selectedLanguage,
+                list: languagesList
+            },
             postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'flow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true),
-            languages: this.app.session.get('languages'),
             selectedLanguage: this.app.session.get('selectedLanguage')
         });
     },
