@@ -76,7 +76,18 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.app.router.redirectTo(this.app.session.get('path').split('/-').shift());
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type')
+        };
+
+        this.filters.remove(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.cleanPath(path);
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
     },
     selectFilter: function(event) {
         event.preventDefault();
@@ -90,7 +101,7 @@ module.exports = Base.extend({
             type: $target.data('filter-type'),
             value: $target.val()
         };
-        
+
         if ($target.is(':checked') && !this.filters.has(filter.name, filter.value)) {
             this.filters.set(filter);
         }
