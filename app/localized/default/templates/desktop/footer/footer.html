@@ -1,9 +1,10 @@
+{% include (template + '/partials/footer-slider.html') %}
 <div class="footer-options">
     <ul class="select">
-        <li><a data-footer-sliderUp="category-slider" href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-arrow"></span></a></li><!--
-        --><li><a data-footer-sliderUp="popular-slider" href="#">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','') }}<span class="icons icon-arrow"></span></a></li><!--
-        --><li><a data-footer-sliderUp="around-slider" href="#" >{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}<span class="icons icon-arrow"></span></a></li><!--
-        --><li><a data-footer-sliderUp="help-slider" href="#" rel="nofollow" >{{ dictionary["biderrorheader.Help"] }}<span class="icons icon-arrow"></span></a></li>
+        <li><a data-footer-slideUp="category-slide" href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-arrow"></span></a></li><!--
+        --><li><a data-footer-slideUp="popular-slide" href="#">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','') }}<span class="icons icon-arrow"></span></a></li><!--
+        --><li><a data-footer-slideUp="around-slide" href="#" >{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}<span class="icons icon-arrow"></span></a></li><!--
+        --><li><a data-footer-slideUp="help-slide" href="#" rel="nofollow" >{{ dictionary["biderrorheader.Help"] }}<span class="icons icon-arrow"></span></a></li>
     </ul>
     {% include (template + '/marketing/appStores.html') %}
 </div>

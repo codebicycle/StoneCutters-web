@@ -1,7 +1,14 @@
 .slide-container {
-    .footer-slider {
+    position: relative;
+    .footer-slide {
+        box($white, $greyBorders $greyBorders $greyStrong, 3px, 30px, solid, 1px 1px 4px);
+        position: absolute;
+        bottom: -13px;
+        left: 0;
+        width: 918px;
+        z-index: 9999;
         .icon-close::before {
-            background: none repeat scroll 0 0 #999;
+            background: none repeat scroll 0 0 $greyStrong;
             border-radius: 3px;
             color: #eee;
             font-size: 0.714286rem;
@@ -10,8 +17,6 @@
             right: 10px;
             top: 10px;
         }
-        box($white, $greyBorders, 3px, 30px, solid, 1px);
-        position: relative;
         ul {
             ul-reset();
         }
@@ -25,10 +30,7 @@
             margin-bottom: 20px;
         }
     }
-    .category-slider {
-
-        .title-bar {
-        }
+    .category-slide {
         clear-fix();
         .category-list {
             float: left;
@@ -48,10 +50,34 @@
             }
         }
     }
-    .help-slider {
+    .help-slide {
         li {
             display: inline-block;
             padding-right: 20px;
+        }
+    }
+    .popular-slide {
+        clear-fix();
+        .popular-column {
+            float: left;
+            width: 448px;
+            ul {
+                float: left;
+            }
+        }
+        .popular-cities {
+            float: right;
+        }
+    }
+    
+    .around-slide {
+        clear-fix();
+        ul {
+            float: left;
+            width: 116px;
+            a {
+                font-size: $xs;
+            }
         }
     }
 }

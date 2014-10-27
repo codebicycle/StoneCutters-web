@@ -12,7 +12,6 @@ module.exports = Base.extend({
         'click [data-icon-facebook]': 'openFacebook',
         'click [data-icon-twitter]': 'openTwitter',
         'click [data-icon-gplus]': 'openGplus',
-        'click [data-footer-sliderdown]': 'slideDownContent'
     },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
@@ -108,15 +107,6 @@ module.exports = Base.extend({
             ', top=' + top + 
             ', left=' + left
         );
-    },
-    slideDownContent: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        var element = $(event.currentTarget),
-        classTochange = element.attr('data-footer-sliderDown');
-         $('a[data-footer-sliderup="' + classTochange + '"]').parent().removeClass('active');
-        $('.' + element.attr('data-footer-sliderDown')).hide();
     },
 });
 
