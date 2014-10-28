@@ -12,6 +12,18 @@ module.exports = Base.extend({
             breadcrumb: helpers.breadcrumb.get.call(this, data),
             myAds: data.context.ctx.myAds
         });
+    },
+    events: {
+        'click .btndelete': 'onDeleteClick',
+    },
+    onDeleteClick: function(event) {
+        var data = Base.prototype.getTemplateData.call(this);
+        var key = data.dictionary['myolx.AreYouSureYouWantToCloseSelectedListings'];
+        if(!confirm(key)){
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+        }
     }
 });
 

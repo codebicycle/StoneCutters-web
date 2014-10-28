@@ -18,5 +18,8 @@ module.exports = {
     },
     'users#favorites': {
         url: 'myolx/favoritelisting'
+    },
+    'users#deleteitem': {
+        url: 'myolx/deleteitem/:itemId'
     }
 };
