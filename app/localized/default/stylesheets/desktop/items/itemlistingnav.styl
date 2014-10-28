@@ -13,9 +13,6 @@
             display: inline-block;
             margin-right: 5px;
             a {
-                height: 33px;
-                display: block;
-                float: left;
                 background: $greyBoxBg;
                 border-styles($greyBorders, 3px 3px 0 0, solid solid none, 1px 1px 0);
                 color: $greyStrong;
@@ -26,17 +23,16 @@
                 padding: 0 10px;
 
                 &.active {
-                    height: 34px;
-                    margin-bottom: -1px;
                     background: $greyPageBg;
-                    color: #000;
+                    color: $black;
                     height: 34px;
                     margin-bottom: -1px;
                 }
                 &:before {
                     display: inline-block;
-                    font-size: 24px;
-                    height: 27px;
+                    font-size: 13px;
+                    height: 17px;
+                    margin-right: 10px;
                 }
             }
         }

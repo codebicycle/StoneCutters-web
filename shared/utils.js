@@ -291,6 +291,8 @@ function getUserAgent(req) {
     return /*req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || */req.get('user-agent') || defaults.userAgent;
 }
 
+function noop() {}
+
 module.exports = {
     isServer: isServer,
     link: link,
@@ -303,5 +305,6 @@ module.exports = {
     defaults: defaults,
     parse: parse,
     stringify: stringify,
-    getUserAgent: getUserAgent
+    getUserAgent: getUserAgent,
+    noop: noop
 };

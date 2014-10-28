@@ -1,12 +1,12 @@
 {% from macros import FieldText, FieldTextArea, FieldCombobox, FieldText2, FieldTextArea2 %}
-<h2 class="title-module">Tus datos de contacto</h2>
-{{ FieldText2(name = 'contactName', label = 'Nombre de contacto', mandatory = true, validate = true) }}
-{{ FieldText2(type = 'email', name = 'email', label = 'E-mail', mandatory = true, validate = true, advice = 'Ingrese un e-mail válido. No se preocupe, no será divulgado.') }}
-{{ FieldText2(type = 'tel', name = 'phone', label = 'Teléfono', placeholder = '(00) 0000 0000', mandatory = true, validate = true) }}
+<h2 class="title-module">{{ dictionary["posting_step4.ContactInformation"] }}</h2>
+{{ FieldText2(name = 'contactName', label = dictionary["itemslisting.NewContactName"], mandatory = true, validate = true, advice = dictionary["posting_changecategorymod.ValidationError"]) }}
+{{ FieldText2(type = 'email', name = 'email', label = dictionary["messages_browse_notify_friend.ErrorMail"], mandatory = true, validate = true, advice = dictionary["contactseller_form.CompleteYourEmail"]) }}
+<!-- <small class="advice icons icon-lock">this should have icon</small> -->
+{{ FieldText2(type = 'tel', name = 'phone', label = dictionary["contactseller_reply_mail.ContactPhone"], placeholder = dictionary['seccion-40.274'], mandatory = true, validate = true) }}
 {% view 'post/locations' %}
 <fieldset class="seller-post">
     <input id="seller-remember" type="checkbox" checked />
-    <label for="seller-remember">Recordarme</label>
-    <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="posting" data-qa="submit-button" >
-    <small class="advice">Al publicar un anuncio usted acepta los <a href="#">Términos y condiciones</a> de OLX</small>
+    <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" >
+    <small class="advice">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a href="/terms">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>    
 </fieldset>

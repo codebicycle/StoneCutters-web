@@ -1,107 +1,104 @@
 #category-tree {
-	padding: 0 0 8px 0;
+    margin-bottom: 20px;
+    .title-bar {
+        border-bottom: 1px solid $greyBorders;
 
-	.title-bar {
-		border-bottom: 1px solid $greyBorders;
+        .title-module {
+            display: inline-block;
+            padding: 12px 20px 20px 24px;
+        }
 
-		.title-module {
-			display: inline-block;
-			padding: 12px 20px 20px 24px;
-		}
+        a {
+            font-size: $s;
+            font-weight: bold;
+            margin-left: 5px;
+            vertical-align: middle;
+            height: 18px;
+        
+            span {
 
-		a {
-			font-size: $s;
-			font-weight: bold;
-			margin-left: 5px;
-			vertical-align: middle;
-			height: 18px;
-		
-			span {
+                &.icon-navarrowup {
+                    padding-left: 4px;
 
-				&.icon-navarrowup {
-					padding-left: 4px;
+                    &:before {
+                        line-height: 1;
+                        font-size: remify(20px);
+                        transform(rotate(90deg));
+                    }
+                }
+            }
+        }
 
-					&:before {
-						line-height: 1;
-						font-size: remify(20px);
-						transform(rotate(90deg));
-					}
-				}
-			}
+        h1 {
+            display: inline-block;
+            padding-left: 24px;
+            font-size: $xl;
+        }
+    }
 
-		}
+    ul {
+        ul-reset();
+    }
+    .category-list {
+        clear-fix();
+        padding-left: 20px;
+        float: left;
+        width: 224px;
+        &:first-child {
+            padding-left: 24px;
+        }
+        .category {
+            float: left;
+            li {
+                padding-bottom: 8px;
+            }
+        }
+    }
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
 
-		h1 {
-			display: inline-block;
-			padding-left: 24px;
-			font-size: $xl;
-		}
-	}
+        .icon {
+            background: url(imageUrl/images/desktop/sprite-home-icons.png)  0 0 no-repeat;
+            display: block;
+            height: 54px;
+            margin: 20px 0 9px;
+            width: 54px;
+        }
 
-	ul {
-		ul-reset();
-	}
-	.icons {
-		padding-left: 24px;
-		clear-fix();
+        .cat-186 {
+            background-position: 0 -108px;
+        }
 
-		.category {
-			width: 33%;
-			float: left;
+        .cat-187 {
+            background-position: 0 -432px;
+        }
 
-			ul a {
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-		}
-	}
-	a {
-		strong {
-			font-size: $s;
-			color: #333;
-			display: block;
-			margin-bottom: 20px;
-		}
+        .cat-16 {
+            background-position: 0 -216px;
+        }
 
-		&:hover {
-			text-decoration: none;
-		}
+        .cat-185 {
+            background-position: 0 -378px;
+        }
 
-		.icon {
-			background: url(imageUrl/images/desktop/sprite-home-icons.png)  0 0 no-repeat;
-			display: block;
-			height: 54px;
-			margin: 30px 0 9px;
-			width: 54px;
-		}
+        .cat-190 {
+            background-position: 0 -54px;
+        }
 
-		.cat-186 {
-			background-position: 0 -108px;
-		}
+        .cat-191 {
+            background-position: 0 -162px;
+        }
 
-		.cat-187 {
-			background-position: 0 -432px;
-		}
-
-		.cat-16 {
-			background-position: 0 -216px;
-		}
-
-		.cat-185 {
-			background-position: 0 -378px;
-		}
-
-		.cat-190 {
-			background-position: 0 -54px;
-		}
-
-		.cat-191 {
-			background-position: 0 -162px;
-		}
-
-		.cat-362 {
-			background-position: 0 -648px;
-		}
-	}
+        .cat-362 {
+            background-position: 0 -648px;
+        }
+    }
+    .category-link {
+        color: #333;
+        display: inline-block;
+        font-size: $l;
+        margin-bottom: 13px; 
+    }
 }

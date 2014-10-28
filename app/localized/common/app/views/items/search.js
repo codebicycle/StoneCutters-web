@@ -172,23 +172,13 @@ module.exports = Base.extend({
         }
 
         function track(done, _items, metadata) {
-            var img;
-            var analyticImg;
-            var analyticInfo;
+            var $view = $('#partials-tracking-view');
 
             tracking.reset();
-            tracking.setPage('nf');
             tracking.addParam('keyword', search);
             tracking.addParam('page_nb', Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1));
 
-            analyticInfo = tracking.generateURL.call(this);
-            _.each(analyticInfo.urls, function(url) {
-                img = $('<img/>');
-                img.addClass('analytics');
-                img.attr('src', url);
-                analyticImg = $('.analytics:last');
-                analyticImg.after(img);
-            });
+            $view.trigger('update', tracking.generateURL.call(this));
 
             done(_items);
         }

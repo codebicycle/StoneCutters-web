@@ -1,19 +1,19 @@
 {% include (template + "/partials/breadcrumb.html") %}
 
 <div class="related-category icons icon-tag">
-    <h3>¡Todo se vende en OLX!</h3>
-    <p>El aviso {{ item.title }} no está disponible. Ver más avisos en <a href="{{ category | slugToUrl | link }}">{{ item.category.name }}</a></p>
+    <h3>{{ dictionary["misc.EverythingSells"]|replace('<<BRAND>>','OLX') }}</h3>
+    <p>{{ dictionary["item.AdNotAvailable"]|replace('<<AD_TITLE>>', item.title) }} {{ dictionary["item.SeeMoreAds"]|replace('<<LINK_TO_CATEGORY>>', '') }} <a href="{{ category | slugToUrl | link }}">{{ item.category.name }}</a></p>
 </div>
 
 <div class="expired-item">
     <div class="item-image">
         <img src="{{ item.images[0].thumbnail if item.images[0].thumbnail else ('/images/html4/noPhoto.png' | static) }}">
     </div>
-    <h3><span class="label">Finalizado</span>{{ item.title }}</h3>
+    <h3><span class="label">{{ dictionary["item.Ended_New"] }}</span>{{ item.title }}</h3>
     <div class="description">{{ item.description }}</div>
 </div>
 
-<h3 class="title">Usuários que viram este anúncio tambén se interessam por:</h3>
+<h3 class="title">{{ dictionary["misc.PeopleWereAlsoInterestedIn"] }}</h3>
 
 <nav id="listing-filters">
     {% include (template + '/items/parentcategories.html') %}

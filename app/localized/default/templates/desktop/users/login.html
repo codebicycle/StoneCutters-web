@@ -1,2 +1,15 @@
-login
-{% include (template + '/partials/tracking.html') %}
+<section id="login">
+    <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
+        <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>
+        <label>{{ dictionary["loginbox.Username"] }}</label>
+        <input type="text" name="usernameOrEmail" data-qa="username-field">
+        <label >{{ dictionary["loginbox.Password"] }}</label>
+        <input type="password" name="password" data-qa="password-field">
+        <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
+        <div class="btnCenter">
+            <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="btns orange" data-qa="login-button" >
+        </div>
+    </form>
+    <a href="{{ '/register' | link }}" data-qa="register-link" >{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
+</section>
+{% view 'partials/tracking' %}

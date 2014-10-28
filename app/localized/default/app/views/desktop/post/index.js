@@ -85,7 +85,6 @@ module.exports = Base.extend({
             delete this.form[field.name];
         }
     },
-
     onFieldValidationStart: function(event) {
         var $field = $(event.target).addClass('validating');
         
@@ -133,7 +132,6 @@ module.exports = Base.extend({
             });
         }
     },
-
     onImagesLoadEnd: function(event, images) {
         this.form._images = Object.keys(images).map(function each(image) {
             return images[image].id;

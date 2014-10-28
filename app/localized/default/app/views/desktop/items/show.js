@@ -14,7 +14,8 @@ module.exports = Base.extend({
         'blur textarea': 'validateField',
         'submit': 'submitForm',
         'click .replySuccses span': 'showSubmit',
-        'mouseover .img-navigator li img': 'updateGalery'
+        'mouseover .image-navigator figure': 'updateGalery',
+        'click .image-navigator [class*="arrow-"]': 'navigator'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -34,24 +35,46 @@ module.exports = Base.extend({
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
     },
-    updateGalery:function(event) {
+    updateGalery: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
         if(!$(event.currentTarget).hasClass('active')) {
-            var image = $(event.currentTarget).data('image');
-            var currentImage = $(event.currentTarget).attr('src');
+            var $image = $(event.currentTarget).find('img');
+            var image = $image.data('image');
+            var currentImage = $image.attr('src');
 
-            $('.img-navigator li img').removeClass('active');
+            $('.image-navigator figure').removeClass('active');
             $(event.currentTarget).addClass('active');
-            $('.img-viewer img').attr('src', currentImage);
+            $('.image-viewer img').attr('src', currentImage);
             var newImg = new Image();
 
             newImg.src = image;
             newImg.onload = function() {
-                $('.img-viewer img').attr('src', image);
+                $('.image-viewer img').attr('src', image);
             };
+        }
+    },
+    navigator: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var active = $('.image-navigator .active');
+        var previous = ($(event.currentTarget).hasClass('arrow-prev')) ? true : false;
+
+        if (previous) {
+            if (active.prev('figure').length > 0) {
+                active.prev().mouseover();
+            } else {
+                $('.image-navigator figure').last().mouseover();
+            }
+        } else {
+            if (active.next('figure').length > 0) {
+                active.next().mouseover();
+            } else {
+                $('.image-navigator figure').first().mouseover();
+            }
         }
     },
     showSubmit: function(event) {
@@ -110,19 +133,24 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(done, data) {
-            /*var category = $('.itemCategory').val();
-            var subcategory = $('.itemSubcategory').val();*/
+            var $replySuccess = $('.replySuccses');
+            var category = $('.itemCategory').val();
+            var subcategory = $('.itemSubcategory').val();
+            var tracking;
+
             $('.comment').val('');
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
-
-            $('.replySuccses').removeClass('hide');
-            /*this.track({
+            tracking = $('<div></div>').append(data);
+            tracking = $('#replySuccess', tracking);
+            $replySuccess.append(tracking.length ? tracking : '');
+            this.track({
                 category: 'Reply',
                 action: 'ReplySuccess',
                 custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
-            });*/
+            });
+            $replySuccess.removeClass('hide');
         }.bind(this);
 
         var track = function(done) {

@@ -46,7 +46,6 @@ function login(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
     }, controller);
-
     function controller(form) {
         var platform = this.app.session.get('platform');
         var user;
@@ -82,7 +81,6 @@ function logout(params, callback) {
 
 function myolx(params, callback) {
     helpers.controllers.control.call(this, params, controller);
-
     function controller() {
         var platform = this.app.session.get('platform');
         var user;
@@ -101,6 +99,12 @@ function myolx(params, callback) {
                 status: 302
             });
         }
+        if (platform == 'desktop' ){
+            return helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
+                status: 302
+            });
+        }
+        
         callback(null, {});
     }
 }
@@ -112,10 +116,8 @@ function myads(params, callback) {
         var deleted;
         var _params;
         var user;
-
         var prepare = function(done) {
             var platform = this.app.session.get('platform');
-            
             if (platform === 'wap') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
@@ -160,16 +162,24 @@ function myads(params, callback) {
             
         var success = function(_myAds) {
             var myAds = _myAds.toJSON();
-
+            var platform = this.app.session.get('platform');
             _.each(myAds, function processItem(item) {
                 item.date.since = helpers.timeAgo(item.date);
             });
-
-            callback(null, {
-                myAdsMetadata: _myAds.metadata,
-                myAds: myAds,
-                deleted: deleted
-            });
+            if (platform === 'desktop') {
+                callback(null,'users/myolx', {
+                    myAdsMetadata: _myAds.metadata,
+                    myAds: myAds,
+                    deleted: deleted,
+                    viewname: 'myads'
+                });
+            } else {
+                callback(null, {
+                    myAdsMetadata: _myAds.metadata,
+                    myAds: myAds,
+                    deleted: deleted
+                });
+            }    
         }.bind(this);
 
         var error = function(err, res) {
@@ -237,16 +247,26 @@ function favorites(params, callback) {
             
         var success = function(_favorites) {
             var favorites = _favorites.toJSON();
+            var platform = this.app.session.get('platform');
 
             _.each(favorites, function processItem(item) {
                 item.date.since = helpers.timeAgo(item.date);
             });
 
-            callback(null, {
-                favoritesMetadata: _favorites.metadata,
-                favorites: favorites,
-                favorite: favorite
-            });
+            if (platform === 'desktop') {
+                callback(null, 'users/myolx', {
+                    favoritesMetadata: _favorites.metadata,
+                    favorites: favorites,
+                    favorite: favorite,
+                    viewname: 'favorites'
+                });
+            } else {
+                callback(null, {
+                    favoritesMetadata: _favorites.metadata,
+                    favorites: favorites,
+                    favorite: favorite
+                });
+            }    
         }.bind(this);
 
         var error = function(err, res) {

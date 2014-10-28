@@ -1,8 +1,8 @@
 {% for filter in filters %}
     {% if filter.name != 'state' and filter.name != 'city'  %}
         {% if filter.type == 'SELECT' and filter.name == 'parentcategory' %}
-            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
-            <ul class="sub-categories">
+            <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
+            <ul class="sub-categories {{ filter.name }}">
                 {% for value in filter.value %}
                     <li>
                         <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" >{{ value.value }} <span class="count">{{ value.count }}</span></a>
@@ -10,17 +10,17 @@
                 {% endfor %}
             </ul>
         {% elif filter.type == 'SELECT' %}
-            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
+            <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
             <div class="filter check-box {{ filter.name }}">
                 {% for value in filter.value %}
                     <label>
-                        <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}"  data-filter-type="{{ filter.type }}">
+                        <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}"  data-filter-type="{{ filter.type }}" {{ 'checked' if wFilters.has(filter.name, value.id) }}>
                         {{ value.value }} <span class="count">{{ value.count }}</span>
                     </label>
                     {% endfor %}
             </div>
         {% elif filter.type == 'RANGE' and filter.name == 'kilometers' %}
-            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}"></span></span>
+            <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
             <div class="filter check-box {{ filter.name }}">
                 <span class="link-range" data-filter-from="0" data-filter-to="30000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 30.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
                 <span class="link-range" data-filter-from="0" data-filter-to="50000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 50.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
@@ -29,7 +29,7 @@
                 <span class="link-range" data-filter-from="0" data-filter-to="150000" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ dictionary["misc.LessThan"] }} 150.000 {{ dictionary["posting_optionallist.Kms"] }}</span>
             </div>
         {% elif filter.type == 'RANGE' %}
-            <span class="title filter-title">{{ filter.description }}<span class="icons icon-arrow-bottom" data-filter-name="{{ filter.name }}"></span></span>
+            <span class="title filter-title" data-filter-name="{{ filter.name }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
             <div class="filter range {{ filter.name }}">
                 {% for input in filter.value  %}
                     <input type="number" placeholder="{{ input.value }}" class="text-field" data-filter-id="{{ input.id }}"  />

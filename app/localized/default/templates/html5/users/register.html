@@ -26,6 +26,6 @@
         </div>
     </form>
     <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </section>
+
+{% view 'partials/tracking' %}

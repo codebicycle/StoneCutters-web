@@ -2,27 +2,72 @@ footer {
     margin-top: 30px;
     padding-bottom: 40px;
 
+    .container {
+        border-top: 1px solid $greyBorders;
+        clear-fix();
+        padding: 10px 0 0 0;
+
+        p {
+            color: $greyStrong;
+            float: left;
+            font-size: $xs;
+            margin: 0;
+            padding-left: 10px;
+        }
+
+        .social {
+            clear-fix();
+            float: right;
+            ul-reset();
+
+            li {
+                &first-child {
+                    margin: 0;
+                }
+                display: inline-block;
+                margin: 0 0 0 5px;
+                vertical-align: middle;
+                text-align: center;
+                a {
+                    background: $greyStrong;
+                    border-radius(50%);
+                    color: $greyPageBg;
+                    display: inline-block;
+                    font-size: .8rem;
+                    height: 25px;
+                    line-height: 24px;
+                    vertical-align: middle;
+                    width: 25px;
+
+                    &:hover {
+                        background: $black;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-options {
+        clear-fix();
+    }
+
     .select {
-        box($white, $greyBorders, 5px, 0);
         ul-reset();
-        margin-bottom: 10px;
         float: left;
+        margin: 13px 0 0 0;
 
         li {
             border-right: 1px solid $greyBorders;
-            padding-right: 6px;
-            float: left;
+            display: inline-block;
+            padding-right: 5px;
+            vertical-align: middle;
 
             &:last-child {
                border-right: none;
             }
 
-            &::after {
-                transform(rotate(-90deg));
-            }
-
             a {
-                color: #666;
+                color: $black;
                 height: 32px;
                 line-height: 32px;
                 padding-left: 10px;
@@ -32,53 +77,25 @@ footer {
                 }
             }
 
-            span {
-                color: #666;
+            .icon-arrow::before {
+                color: $greyStrong;
                 display: inline-block;
-                font-size: $s;
-                margin-left: 20px;
+                font-size: remify(10px);
+                margin: 0 5px;
+                transform(rotate(-90deg));
+                vertical-align: middle;
             }
 
-            .icon-sketchyarrowleft:before,
-            .icon-sketchyarrowright:before {
-                transform(rotate(90deg));
-            }
-        }
-    }
-
-    .container{
-        border-top: 1px solid #ddd;
-
-        p {
-            color: #999;
-            display: block;
-            float: left;
-            font-size: $xs;
-            margin: 0;
-            padding-top: 10px;
-        }
-
-        .social {
-            ul-reset();
-            clear-fix();
-
-            li {
-                float: right;
-                padding-top: 2px;
-            }
-
-            a {
-                color: #999;
-                font-size: 2.154rem;
-
-                &:hover {
-                    color: #333;
+            &.active {
+                background: $greyStrong;
+                a {
+                    color: #fff;
+                }
+                .icon-arrow::before {
+                    color: #fff;
+                    transform(rotate(90deg));                    
                 }
             }
         }
-    }
-
-    .footer-options {
-        clear-fix();
     }
 }

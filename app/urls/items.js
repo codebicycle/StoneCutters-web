@@ -4,13 +4,20 @@ module.exports = {
     'items#staticSearch': {
         urls: [
             'q/:search/c-:catId',
-            'q/:search/p-:page'
+            'q/:search/p-:page',
+            'q/:search'
         ]
     },
     'items#allresultsig': {
         urls: [
-            'nf/all-results-ig/-p-:page/:filters?',
+            'nf/all-results-ig-p-:page/:filters?',
             'nf/all-results-ig/:filters?'
+        ]
+    },
+    'items#allresults': {
+        urls: [
+            'nf/all-results-p-:page/:filters?',
+            'nf/all-results/:filters?'
         ]
     },
     'items#filter': {
@@ -31,9 +38,9 @@ module.exports = {
     },
     'items#searchig': {
         urls: [
-            'search/:search/-p-:page/:filters?/-ig',
+            'search/:search/-p-:page-ig/:filters?',
             'search/:search?/-ig',
-            'nf/search/:search/-p-:page/:filters?/-ig',
+            'nf/search/:search/-p-:page-ig/:filters?',
             'nf/search/:search?/-ig'
         ]
     },
@@ -63,12 +70,6 @@ module.exports = {
             'nf/:title-cat-:catId([0-9]+)/?:search?',
             'nf/-cat-:catId([0-9]+)/?:search?',
             'nf/cat-:catId([0-9]+)/?:search?'
-        ]
-    },
-    'items#allresults': {
-        urls: [
-            'nf/all-results/-p-:page/:filters?',
-            'nf/all-results/:filters?'
         ]
     },
     'items#delete': {

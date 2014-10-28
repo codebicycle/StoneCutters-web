@@ -61,19 +61,27 @@
 				}
 
 				&:hover {
-					.icon-error {
-						color: $orange;
+					.icon-close {
+						background: $greyStrong;
+						color: $white;
 					}
 				}
 				
-				.icon-error {
-					color: $black;
+				.icon-close {
+					background: $blue;
+					border-radius(50%);
+					color: $lightBlue;
 					display: block;
-					font-size: $l;
-					line-height: 1;
+					font-size: remify(8px);
+					height: 8px;
+					line-height: 7px;
+					padding: 5px;
 					position: absolute;
-					right: 0;
-					top: 0;
+					right: 5px;
+					text-align: center;
+					top: 5px;
+					transition(250ms);
+					width: 8px;
 				}
 			}
 
@@ -103,7 +111,7 @@
 
 				&.icon-addpicture::before {
 					color: $blue;
-					font-size: remify(64px);
+					font-size: remify(32px);
 				}
 			}
 		}

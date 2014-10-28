@@ -1,3 +1,11 @@
+
 <aside>
-	related items
+	Related Items
+	{% if seo %}
+	<ul>
+		{% for related in seo.get('relatedListings') %}
+		<li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
 </aside>
