@@ -55,30 +55,14 @@ function generate(query) {
         params.locNm = location.name;
         params.locId = location.id;
         params.locUrl = location.url;
-        google.generate.call(this, params, page, query.params);
         ati.generate.call(this, params, page, query.params);
         urls.push('/analytics/pageview.gif?' + stringifyParams(params));
     }
 
     if (ati.check.call(this, page)) {
-        if (location.url === 'www.olx.com.co') {
-            url = ati.generateUrl.call(this, params);
-
-            if (url) {
-                urls.push(url);
-            }
-        }
         params = _.extend(params, {
             ati: ati.getConfig.call(this)
         });
-    }
-
-    if (keyade.check.call(this)) {
-        url = keyade.generate.call(this, page);
-
-        if (url) {
-            urls.push(url);
-        }
     }
 
     return {

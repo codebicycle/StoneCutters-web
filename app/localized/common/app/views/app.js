@@ -7,7 +7,6 @@ module.exports = Base.extend({
     className: 'app_view',
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
-        window.initTracker();
     },
     loading: function($progressBar, app, isLoading) {
         if (isLoading){

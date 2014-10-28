@@ -59,7 +59,7 @@
             <ul>
                 {% for optional in item.optionals %}
                     {% if optional.label and optional.value %}
-                        <li>{{ optional.label }}: <strong>{{ optional.value }}</strong></li>
+                        <li>{{ optional.label }}: <strong>{{ optional.value | persianDigits }}</strong></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -128,7 +128,7 @@
         <section class="actions">
             <div class="background"></div>
             {% if item.phone and item.contactName %}
-                <span>{{ item.contactName }}: {{ item.phone }}</span>
+                <span>{{ item.contactName }}: {{ item.phone | persianDigits }}</span>
             {% elif item.phone or item.contactName %}
                 <span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
             {% endif %}
