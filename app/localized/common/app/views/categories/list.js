@@ -16,18 +16,6 @@ module.exports = Base.extend({
             location: this.app.session.get('location'),
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
-    },
-    postRender: function() {
-        if ($('.registerSuccess').length) {
-            var category = 'Account';
-            var action = 'register_confirmation';
-
-            this.track({
-                category: category,
-                action: action,
-                custom: [category, '-', '-', action].join('::')
-            });
-        }
     }
 });
 
