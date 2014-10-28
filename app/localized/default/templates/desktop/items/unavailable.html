@@ -11,14 +11,5 @@
     </div>
     <h3><span class="label">{{ dictionary["item.Ended_New"] }}</span>{{ item.title }}</h3>
     <div class="description">{{ item.description }}</div>
+    <p>{{ item | log }}</p>
 </div>
-
-<h3 class="title">{{ dictionary["misc.PeopleWereAlsoInterestedIn"] }}</h3>
-
-<nav id="listing-filters">
-    {% include (template + '/items/parentcategories.html') %}
-</nav>
-
-<section id="listing-items">
-    {% include (template + '/items/list.html') %}
-</section>
