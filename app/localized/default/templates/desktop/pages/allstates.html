@@ -1,3 +1,14 @@
+{% set allStatesLevel = states | length > 1 %}
+<div class="breadcrumb">
+    <a href="{{ '/' | link }}">{{ location.name }}</a><!--
+    -->{% if allStatesLevel %}
+            <span class="icons icon-arrow">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}</spam>
+        {% else %}
+            <span class="icons icon-arrow"></span>
+            <a href="{{ '/all-states' | link({ location: location.url }) }}">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}</a>
+            <span class="icons icon-arrow">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', states[0].name ) }}</span>            
+        {% endif %}
+</div>
 <ul>
     {% for state in states %}
     <li class="state">
