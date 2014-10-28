@@ -17,17 +17,15 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var list = filters.orderFilters(order, data.metadata.filters);
+       // var list = filters.orderFilters(order, data.metadata.filters);
         var link = this.app.session.get('path');
 
         _.each(data.items, this.processItem);
 
         return _.extend({}, data, {
             items: data.items,
-            filters: list,
             nav: {
                 link: link,
-                linkig: link + '/-ig',
                 listAct: 'active',
             }
         });

@@ -3,8 +3,8 @@
 module.exports = {
     'items#staticSearch': {
         urls: [
-            'q/:search/c-:catId',
             'q/:search/c-:catId/-p-:page',
+            'q/:search/c-:catId',
             'q/:search/p-:page',
             'q/:search'
         ]
