@@ -1095,7 +1095,7 @@ function staticSearch(params, callback) {
             tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
-            callback(null, 'items/search', {
+            callback(null, 'items/staticsearch', {
                 user: user,
                 items: _items.toJSON(),
                 metadata: metadata,
