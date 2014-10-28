@@ -12,6 +12,7 @@ footer {
             float: left;
             font-size: $xs;
             margin: 0;
+            padding-left: 10px;
         }
 
         .social {
@@ -28,7 +29,7 @@ footer {
                 vertical-align: middle;
                 text-align: center;
                 a {
-                    background: $greyStrong
+                    background: $greyStrong;
                     border-radius(50%);
                     color: $greyPageBg;
                     display: inline-block;
@@ -83,6 +84,17 @@ footer {
                 margin: 0 5px;
                 transform(rotate(-90deg));
                 vertical-align: middle;
+            }
+
+            &.active {
+                background: $greyStrong;
+                a {
+                    color: #fff;
+                }
+                .icon-arrow::before {
+                    color: #fff;
+                    transform(rotate(90deg));                    
+                }
             }
         }
     }

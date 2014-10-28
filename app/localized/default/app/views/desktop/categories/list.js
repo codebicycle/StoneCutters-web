@@ -1,8 +1,7 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
     tagName: 'main',

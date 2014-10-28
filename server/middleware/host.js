@@ -9,23 +9,36 @@ module.exports = function(dataAdapter, excludedUrls) {
         var testing = config.get(['publicEnvironments', 'testing'], {});
         var staging = config.get(['publicEnvironments', 'staging'], {});
 
+        function getM(subdomains) {
+            var m = subdomains.indexOf('m');
+
+            if (!~m) {
+                m = subdomains.indexOf(testing.host || 'm-testing');
+                if (!~m) {
+                    m = subdomains.indexOf(staging.host || 'm-staging');
+                }
+            }
+            return m;
+        }
+
         return function middleware(req, res, next) {
             var fullHost = req.headers.host;
             var hasPort = !!~fullHost.split('.').pop().indexOf(':');
             var host = req.host;
             var subdomains = req.host.split('.');
             var com = subdomains.indexOf('com');
-            var hasCom = (com !== -1);
+            var hasCom = com !== -1;
             var co = subdomains.indexOf('co');
-            var hasCo = (co !== -1);
+            var hasCo = (!hasCom && co !== -1);
             var isTesting = _.contains(subdomains, 'm-testing');
             var isStaging = _.contains(subdomains, 'm-staging');
-            var m = subdomains.indexOf('m') || subdomains.indexOf(testing.host || 'm-testing') || subdomains.indexOf(staging.host || 'm-staging');
+            var m = getM(subdomains);
             var hasM = m !== -1;
             var www = subdomains.indexOf('www');
             var hasWww = www !== -1;
             var domain = hasCom || hasCo ? subdomains[(hasCo ? co : com) - 1] : subdomains[subdomains.length - 2];
             var siteLocation = [];
+            var locationUrl = ['www'];
             var platform;
             var country;
             var location;
@@ -51,34 +64,49 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!hasM && !hasWww) {
                 location = subdomains[0];
             }
-            if (location) {
-                siteLocation.push(location);
-            }
-            else {
-                siteLocation.push('www');
-            }
-            siteLocation.push(domain);
-            if (hasCom) {
-                siteLocation.push('com');
-            }
-            if (hasCo) {
-                siteLocation.push('co');
-            }
-            if (country) {
-                siteLocation.push(country);
+            if (!hasM) {
+                if (location) {
+                    siteLocation.push(location);
+                }
+                else {
+                    siteLocation.push('www');
+                }
+                siteLocation.push(domain);
+                if (hasCom) {
+                    siteLocation.push('com');
+                }
+                if (hasCo) {
+                    siteLocation.push('co');
+                }
+                if (country) {
+                    siteLocation.push(country);
+                }
             }
             siteLocation = siteLocation.join('.');
+            locationUrl.push(domain);
+            if (hasCom) {
+                locationUrl.push('com');
+            }
+            if (hasCo) {
+                locationUrl.push('co');
+            }
+            if (country) {
+                locationUrl.push(country);
+            }
+            locationUrl = locationUrl.join('.');
             if (hasPort) {
                 port = fullHost.split(':').pop();
             }
-
-            req.rendrApp.session.update({
+            req.rendrApp.set('session', {
                 shortHost: host,
                 host: fullHost,
-                previousLocation: isTesting || isStaging ? siteLocation : req.rendrApp.session.get('siteLocation'),
-                siteLocation: siteLocation,
-                platform: platform
+                platform: req.cookies && req.cookies.forcedPlatform ? req.cookies.forcedPlatform : platform,
+                port: port,
+                locationUrl: locationUrl
             });
+            if (siteLocation.length) {
+                req.rendrApp.get('session').siteLocation = siteLocation;
+            }
             next();
         };
     };

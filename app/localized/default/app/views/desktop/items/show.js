@@ -14,11 +14,15 @@ module.exports = Base.extend({
         'blur textarea': 'validateField',
         'submit': 'submitForm',
         'click .replySuccses span': 'showSubmit',
-        'mouseover .img-navigator li img': 'updateGalery'
+        'mouseover .image-navigator figure': 'updateGalery',
+        'click .image-navigator [class*="arrow-"]': 'navigator'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var showAdSenseItemBottom = helpers.features.isEnabled.call(this, 'adSenseItemBottom', platform, location.url);
+        
         data.category_name = this.options.category_name;
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
@@ -31,27 +35,50 @@ module.exports = Base.extend({
         }
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: helpers.breadcrumb.get.call(this, data),
+            showAdSenseItemBottom: showAdSenseItemBottom
         });
     },
-    updateGalery:function(event) {
+    updateGalery: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
         if(!$(event.currentTarget).hasClass('active')) {
-            var image = $(event.currentTarget).data('image');
-            var currentImage = $(event.currentTarget).attr('src');
+            var $image = $(event.currentTarget).find('img');
+            var image = $image.data('image');
+            var currentImage = $image.attr('src');
 
-            $('.img-navigator li img').removeClass('active');
+            $('.image-navigator figure').removeClass('active');
             $(event.currentTarget).addClass('active');
-            $('.img-viewer img').attr('src', currentImage);
+            $('.image-viewer img').attr('src', currentImage);
             var newImg = new Image();
 
             newImg.src = image;
             newImg.onload = function() {
-                $('.img-viewer img').attr('src', image);
+                $('.image-viewer img').attr('src', image);
             };
+        }
+    },
+    navigator: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var active = $('.image-navigator .active');
+        var previous = ($(event.currentTarget).hasClass('arrow-prev')) ? true : false;
+
+        if (previous) {
+            if (active.prev('figure').length > 0) {
+                active.prev().mouseover();
+            } else {
+                $('.image-navigator figure').last().mouseover();
+            }
+        } else {
+            if (active.next('figure').length > 0) {
+                active.next().mouseover();
+            } else {
+                $('.image-navigator figure').first().mouseover();
+            }
         }
     },
     showSubmit: function(event) {

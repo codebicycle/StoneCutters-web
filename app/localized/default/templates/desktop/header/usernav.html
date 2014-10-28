@@ -1,6 +1,11 @@
 <ul class="list-without-styles">
-	<li><a href="{{ '/login' | link }}" rel="nofollow">{{ dictionary["loginbox.Login"] }}</a> o <a href="#" rel="nofollow">{{ dictionary["postbox.RegisterNow"] }}</a></li><!--
-	--><li><a href="{{ '/myolx/myadslisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyAds"] }}</a></li><!--
-	--><li><a href="{{ '/myolx/favoritelisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyFavorites"] }}</a></li><!--
-	--><li><a href="#" rel="nofollow">{{ dictionary["myolx.Messages"] }}</a></li>
+    {% if not user %}
+        <li><a href="{{ '/login' | link }}" rel="nofollow">{{ dictionary["loginbox.Login"] }}</a> o <a href="#" rel="nofollow">{{ dictionary["postbox.RegisterNow"] }}</a></li>
+    {% else %}
+        <li><a href="{{ '/myolx/myadslisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyAds"] }}</a></li><!--
+        --><li><a href="{{ '/myolx/favoritelisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyFavorites"] }}</a></li><!--
+        --><li><a href="#" rel="nofollow">{{ dictionary["myolx.Messages"] }}</a></li><!--
+        --><li><a href="{{ '/logout' | link }}" data-qa="logout-link" >{{ dictionary["myolx.SignOut"] }}</a></li>
+    {% endif %}
 </ul>
+

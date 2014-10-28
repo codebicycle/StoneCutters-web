@@ -19,8 +19,16 @@ module.exports = {
         enabled: true,
         trackers: {
             serverSide: true,
-            ati: true,
-            analytics: true,
+            ati: {
+                enabled: true,
+                server: true,
+                client: true
+            },
+            analytics: {
+                enabled: true,
+                server: true,
+                client: true
+            },
             hydra: true
         }
     }

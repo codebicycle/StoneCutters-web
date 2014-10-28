@@ -175,7 +175,6 @@ module.exports = Base.extend({
             var $view = $('#partials-tracking-view');
 
             tracking.reset();
-            tracking.setPage('nf');
             tracking.addParam('keyword', search);
             tracking.addParam('page_nb', Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1));
 

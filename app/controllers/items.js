@@ -269,7 +269,6 @@ function show(params, callback) {
 
             callback(null, view, {
                 item: item,
-                user: user,
                 seo: seo,
                 pos: Number(params.pos) || 0,
                 sk: securityKey,
@@ -384,7 +383,6 @@ function gallery(params, callback) {
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
             callback(null, {
-                user: user,
                 item: item,
                 pos: pos,
                 tracking: tracking.generateURL.call(this)
@@ -483,7 +481,6 @@ function map(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
             callback(null, {
                 item: _item.toJSON(),
-                user: user,
                 tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
@@ -507,7 +504,6 @@ function reply(params, callback) {
 
     function controller(form) {
         var seo = Seo.instance(this.app);
-        var user = this.app.session.get('user');
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
 
@@ -568,13 +564,14 @@ function reply(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? _categories.get(parentId) : subcategory;
 
+            seo.addMetatag('robots', 'noindex, nofollow');
+            seo.addMetatag('googlebot', 'noindex, nofollow');
+
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
-            seo.addMetatag('robots', 'noindex, nofollow');
-            seo.addMetatag('googlebot', 'noindex, nofollow');
+
             callback(null, {
-                user: user,
                 item: item,
                 form: form,
                 tracking: tracking.generateURL.call(this)
@@ -598,7 +595,6 @@ function success(params, callback) {
 
     function controller() {
         var seo = Seo.instance(this.app);
-        var user = this.app.session.get('user');
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
 
@@ -655,9 +651,9 @@ function success(params, callback) {
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
+
             callback(null, {
                 item: item,
-                user: user,
                 tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
@@ -673,20 +669,23 @@ function success(params, callback) {
             .val(success);
     }
 }
-function searchfilter(params, callback) {
-    params.categoryId = params.catId;
-    search.call(this, params, callback);
-}
+
 function searchfilterig(params, callback) {
     params['f.hasimage'] = true;
-    params.categoryId = params.catId;
-    search.call(this, params, callback);
+    searchfilter.call(this, params, callback, '-ig');
 }
+
+function searchfilter(params, callback, isGallery) {
+    params.categoryId = params.catId;
+    search.call(this, params, callback, isGallery);
+}
+
 function searchig(params, callback) {
     params['f.hasimage'] = true;
-    search.call(this, params, callback);
+    search.call(this, params, callback, '-ig');
 }
-function search(params, callback) {
+
+function search(params, callback, isGallery) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -694,13 +693,30 @@ function search(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
-        var user = this.app.session.get('user');
         var query;
+        var url;
+
+        var prepareUrl = function(done) {
+            url = ['/nf/'];
+
+            if (params.categoryId) {
+                url.push(params.title);
+                url.push('-cat-');
+                url.push(params.categoryId);
+            }
+            else {
+                url.push('search');
+            }
+            url.push('/');
+            url.push(params.search);
+            url = url.join('');
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/nf/search/' + params.search);
+                return helpers.common.redirect.call(this, [url, '/', isGallery || ''].join(''));
             }
             helpers.pagination.prepare(this.app, params);
             query = _.clone(params);
@@ -709,11 +725,11 @@ function search(params, callback) {
             delete params.filters;
             delete params.urlFilters;
 
-            tracking.setPage('nf');
-            tracking.addParam('keyword', query.search);
-            tracking.addParam('page_nb', 0);
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            tracking.addParam('keyword', query.search);
+            tracking.addParam('page_nb', 0);
 
             if (!query.search || _.isEmpty(query.search.trim())) {
                 done.abort();
@@ -740,7 +756,6 @@ function search(params, callback) {
         }.bind(this);
 
         var paginate = function(done, res) {
-            var url = '/nf/search/' + query.search + '/';
             var realPage;
 
             if (!res.items) {
@@ -748,29 +763,29 @@ function search(params, callback) {
             }
             if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, url);
+                return helpers.common.redirect.call(this, [url, '/', isGallery || ''].join(''));
             }
-            realPage = res.items.paginate(page, query, url);
+            realPage = res.items.paginate(page, query, [url, '/'].join(''), isGallery);
             if (realPage) {
                 done.abort();
-                return helpers.common.redirect.call(this, url + '-p-' + realPage);
+                return helpers.common.redirect.call(this, [url, '/-p-', realPage, isGallery || ''].join(''));
             }
-            tracking.addParam('page_nb', res.items.metadata.totalPages);
             done(res.items);
         }.bind(this);
 
         var success = function(items) {
             var metadata = items.metadata;
+
             if (metadata.total < 5) {
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
             }
-
-            helpers.filters.prepare(metadata);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
-            callback(null, {
-                user: user,
+
+            tracking.addParam('page_nb', metadata.totalPages);
+
+            callback(null, ['items/search', (isGallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
                 metadata: metadata,
                 search: query.search,
@@ -784,6 +799,7 @@ function search(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(prepareUrl)
             .then(prepare)
             .then(fetch)
             .then(paginate)
@@ -791,7 +807,12 @@ function search(params, callback) {
     }
 }
 
-function allresults(params, callback) {
+function allresultsig(params, callback) {
+    params['f.hasimage'] = true;
+    allresults.call(this, params, callback, '-ig');
+}
+
+function allresults(params, callback, isGallery) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -801,7 +822,7 @@ function allresults(params, callback) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location').url;
         var siteLocation = this.app.session.get('siteLocation');
-        var user = this.app.session.get('user');
+        var url = ['/nf/all-results', isGallery || ''].join('');
         var query;
 
         var redirect = function(done) {
@@ -809,7 +830,7 @@ function allresults(params, callback) {
                 (page > config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500) ||
                  (platform === 'html5' && infiniteScroll))) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/nf/all-results');
+                return helpers.common.redirect.call(this, url);
             }
             done();
         }.bind(this);
@@ -824,8 +845,6 @@ function allresults(params, callback) {
             delete params.page;
             delete params.filters;
             delete params.urlFilters;
-
-            tracking.addParam('page_nb', 0);
 
             done();
         }.bind(this);
@@ -849,7 +868,6 @@ function allresults(params, callback) {
         }.bind(this);
 
         var paginate = function(done, res) {
-            var url = '/nf/all-results/';
             var realPage;
 
             if (page == 1) {
@@ -865,23 +883,21 @@ function allresults(params, callback) {
         }.bind(this);
 
         var success = function(_categories, _items) {
-            var url = '/nf/all-results/';
             var metadata = _items.metadata;
 
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
-            helpers.pagination.paginate(metadata, query, url);
-            helpers.filters.prepare(metadata);
-            tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
+
+            tracking.addParam('page_nb', metadata.totalPages);
+
             callback(null, {
-                user: user,
                 categories: _categories.toJSON(),
                 items: _items.toJSON(),
                 metadata: metadata,
-                infiniteScroll: infiniteScroll
-                //tracking: tracking.generateURL.call(this)
+                infiniteScroll: infiniteScroll,
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
@@ -896,11 +912,6 @@ function allresults(params, callback) {
             .then(paginate)
             .val(success);
     }
-}
-
-function allresultsig(params, callback) {
-    params['f.hasimage'] = true;
-    allresults.call(this, params, callback);
 }
 
 function favorite(params, callback) {
@@ -1015,7 +1026,6 @@ function staticSearch(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
-        var user = this.app.session.get('user');
         var query;
 
         var redirect = function(done) {
@@ -1038,7 +1048,6 @@ function staticSearch(params, callback) {
             delete params.filters;
             delete params.urlFilters;
 
-            tracking.setPage('staticSearch'); // @todo Check this
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
 
@@ -1083,26 +1092,28 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var success = function(_items) {
-            var url = ['/q/', query.search, '/c-', params.catId ,  '/'];
-            url = url.join('');
+            var url = ['/q/', query.search, '/c-', params.catId ,  '/'].join('');
             var metadata = _items.metadata;
+
+            helpers.pagination.paginate(metadata, query, url);
+
             seo.setContent(_items.metadata.seo);
             if (metadata.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
-            helpers.pagination.paginate(metadata, query, url);
-            tracking.addParam('page_nb', metadata.totalPages);
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
+
+            tracking.addParam('page_nb', metadata.totalPages);
+
             callback(null, 'items/staticsearch', {
-                user: user,
                 items: _items.toJSON(),
                 metadata: metadata,
                 search: query.search,
-                seo: seo,
-                infiniteScroll: infiniteScroll
-//                tracking: tracking.generateURL.call(this)
+                infiniteScroll: infiniteScroll,
+                tracking: tracking.generateURL.call(this),
+                seo: seo
             });
         }.bind(this);
 
