@@ -1,5 +1,5 @@
 <div id="image-gallery" class="image-gallery">
-    <figure id="image-viewer" class="image-viewer image-wrapper open-modal" data-modal="image-gallery-modal">
+    <figure id="image-viewer" class="image-viewer image-wrapper">
         {% if item.images.length > 0 %}
             <img src="{{ item.images[0].url }}" alt="" title="" class="item-image" data-gallery-image />
         {% endif %}
