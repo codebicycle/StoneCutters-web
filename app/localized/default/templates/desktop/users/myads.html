@@ -1,4 +1,38 @@
+<div class="formdeleteitem">
+    <div class="confirmdelete">
+        <h4 class="subtitle">Va a eliminar su aviso de OLX</h4>
+        <div class="itemdelete">
+            <figure class="image">
+                {% if item.thumbnail %}
+                <img src="{{ item.thumbnail }}" alt="" class="thumbnail">
+                {% else %}
+                <span class="icons icon-photo withoutimg"></span>
+                {% endif %}
+            </figure>
+            <div class="description">
+                {{ item.title }}
+            </div>
+        </div>
+        <h5>Para completar la eliminación, díganos porque desea eliminar este aviso:</h5>
+        <form action="">
+            <div class="reason"><input type="radio" name="close_reason" value="1" id="close_reason1"><label for="close_reason1">Lo he vendido a traves de OLX</label></div>
+            <div class="reason"><input type="radio" name="close_reason" value="2" id="close_reason2"><label for="close_reason2">Lo he vendido a través de otro servicio</label></div>
+            <div class="reason"><input type="radio" name="close_reason" value="3" id="close_reason3"><label for="close_reason3">He decidido no venderlo</label></div>
+            <div class="reason"><input type="radio" name="close_reason" value="4" id="close_reason4"><label for="close_reason4">Otro</label><input type="text" name="close_comment" class="text" id="close_reason5"></div>
+            <div class="buttons deleteitem">
+                <a href="" class="btn orange">Eliminar Anuncio</a>
+                <span>ó</span>
+                <a href="" class="">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
 <ul class="my-items">
+    {% if myAds | length == 0 %}
+        <li class="item empty">
+            {{ dictionary["netvibes_myolx.content.NoActiveListings"] }}
+        </li>
+    {% endif %}
     {% for item in myAds %}
         {% set status = 'ready' %}
         {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
@@ -46,7 +80,7 @@
                     {% if (status == 'ready' or status == 'pending') %}
                         <a href="" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
                         {% if (status == 'ready') %}
-                            <a href="" class="btn icons icon-trash">{{ dictionary["confirmremoveitem.Delete"] }} </a>
+                            <a href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
                         {% endif %}
                     {% endif %}
                     {% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
