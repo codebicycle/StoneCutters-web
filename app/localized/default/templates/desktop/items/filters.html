@@ -18,7 +18,9 @@
                         {{ value.value }} <span class="count">{{ value.count }}</span>
                     </label>
                     {% endfor %}
+                    {{ ('<span class="clean-filters" data-filter-name="' + filter.name + '" data-filter-type="' + filter.type + '" >[' + dictionary["item.Clear"] + ']</span>') if wFilters.has(filter.name) }}
             </div>
+
         {% elif filter.type == 'RANGE' and filter.name == 'kilometers' %}
             <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
             <div class="filter check-box {{ filter.name }}">
@@ -41,4 +43,3 @@
         {% endif %}
     {% endif %}
 {% endfor %}
-<span class="clean-filters">[{{ dictionary["item.Clear"] }} ]</span>

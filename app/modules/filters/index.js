@@ -94,10 +94,14 @@ function set(filter) {
 
 function removeSelect(filter) {
     if (this.filters[filter.name]) {
-        this.filters[filter.name].value = _.filter(this.filters[filter.name].value, function(value) {
-            return value !== filter.value;
-        });
-
+        if (filter.value) {
+            this.filters[filter.name].value = _.filter(this.filters[filter.name].value, function(value) {
+                return value !== filter.value;
+            });
+        }
+        else {
+            this.filters[filter.name].value = [];
+        }
         if (!this.filters[filter.name].value.length) {
             delete this.filters[filter.name];
         }
