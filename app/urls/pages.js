@@ -13,6 +13,9 @@ module.exports = {
             'all-states/:state'
         ]
     },
+    'pages#sitemap': {
+        url: 'sitemap'
+    },
     'pages#interstitial': {
         url: 'interstitial'
     },

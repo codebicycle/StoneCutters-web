@@ -50,10 +50,13 @@ module.exports = Base.extend({
             macros: template + '/partials/macros.html',
             currentRoute: this.app.session.get('currentRoute'),
             interstitial: this.app.session.get('interstitial'),
+            categories: this.app.session.get('categories').toJSON(),
+            countries: this.app.session.get('countries').toJSON(),
             os: {
                 name: this.app.session.get('osName').replace(/\s*/g, ''),
                 version: this.app.session.get('osVersion')
-            }
+            },
+            host: this.app.session.get('host')
         });
     },
     track: function(data, callback, options) {

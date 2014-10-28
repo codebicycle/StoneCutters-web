@@ -19,7 +19,10 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var showAdSenseItemBottom = helpers.features.isEnabled.call(this, 'adSenseItemBottom', platform, location.url);
+        
         data.category_name = this.options.category_name;
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
@@ -32,7 +35,8 @@ module.exports = Base.extend({
         }
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: helpers.breadcrumb.get.call(this, data),
+            showAdSenseItemBottom: showAdSenseItemBottom
         });
     },
     updateGalery: function(event) {

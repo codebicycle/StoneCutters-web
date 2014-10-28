@@ -11,7 +11,7 @@ module.exports = Base.extend({
         'click [data-video-item]': 'changeVideo',
         'click [data-icon-facebook]': 'openFacebook',
         'click [data-icon-twitter]': 'openTwitter',
-        'click [data-icon-gplus]': 'openGplus'
+        'click [data-icon-gplus]': 'openGplus',
     },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
@@ -108,7 +108,7 @@ module.exports = Base.extend({
             ', top=' + top +
             ', left=' + left
         );
-    }
+    },
 });
 
 

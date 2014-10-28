@@ -17,6 +17,7 @@ module.exports = {
     interstitial: middlewares(interstitial),
     error: middlewares(error),
     allstates: middlewares(allstates),
+    sitemap: middlewares(sitemap),
     featured_listings: middlewares(featuredListings)
 };
 
@@ -180,6 +181,16 @@ function allstates(params, callback) {
             .then(fetch)
             .then(formatResponse)
             .val(success);
+    }
+}
+
+function sitemap(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {        
+        callback(null, {
+            tracking: tracking.generateURL.call(this)
+        });
     }
 }
 

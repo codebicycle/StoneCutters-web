@@ -1,12 +1,12 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../bases/view');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    tagName: 'main',
-    id: 'categories-list-view',
-    className: 'categories-list-view',
+    tagName: "section",
+    className: 'pages-sitemap-view',
+    id: "category-tree",    
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var categories = data.categories;
@@ -26,4 +26,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'categories/list';
+module.exports.id = 'pages/sitemap';
