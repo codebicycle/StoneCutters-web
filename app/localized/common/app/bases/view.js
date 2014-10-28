@@ -51,7 +51,8 @@ module.exports = Base.extend({
             os: {
                 name: this.app.session.get('osName').replace(/\s*/g, ''),
                 version: this.app.session.get('osVersion')
-            }
+            },
+            host: this.app.session.get('host')
         });
     },
     track: function(data, callback, options) {

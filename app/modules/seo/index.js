@@ -222,8 +222,6 @@ module.exports = {
             if (options.hasPlatform) {
                 host.shift();
             }
-            port = host.pop();
-            host.push(port.split(':').shift());
             host.unshift('www');
         }
         if (url.slice(0, protocol.length) === protocol) {
