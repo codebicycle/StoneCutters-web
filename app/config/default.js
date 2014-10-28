@@ -37,8 +37,8 @@ module.exports = {
         html5: ['post', 'location']
     },
     infiniteScroll: false,
-    interstitial: 
-{        enabled: true,
+    interstitial: {
+        enabled: true,
         clicks: 0,
         time: 259200000,
         ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi', '/posting', '/posting/success', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
