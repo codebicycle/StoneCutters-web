@@ -784,6 +784,8 @@ function search(params, callback, isGallery) {
             seo.addMetatag('description');
 
             tracking.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('section', query.categoryId);
+            tracking.addParam('page', page);
 
             callback(null, ['items/search', (isGallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
