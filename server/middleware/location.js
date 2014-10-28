@@ -6,51 +6,64 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var path = require('path');
         var asynquence = require('asynquence');
-        var config = require('../config');
         var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
-        var testing = config.get(['publicEnvironments', 'testing'], {});
-        var staging = config.get(['publicEnvironments', 'staging'], {});
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
+            var host = req.rendrApp.session.get('host');
+            var shortHost = req.rendrApp.session.get('shortHost');
+            var platform = req.rendrApp.session.get('platform');
+            var locationUrl = req.rendrApp.session.get('locationUrl');
             var location = req.param('location');
-            var previousLocation = req.rendrApp.session.get('previousLocation');
-            var redirect = false;
+            var siteLocation;
+            var previousLocation;
 
-            if (!_.contains(excludedUrls.data, req.path)) {
-                if (!location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
-                    return res.redirect(302, utils.link(req.originalUrl, req.rendrApp, {
-                        location: previousLocation
+            if (platform === 'desktop') {
+                siteLocation = req.rendrApp.session.get('siteLocation');
+                if (location) {
+                    location = host.replace(shortHost, location);
+                    return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + location + req.originalUrl, req.rendrApp), 'location'));
+                }
+            }
+            else {
+                previousLocation = req.rendrApp.session.get('siteLocation');
+                siteLocation = location || previousLocation || shortHost.replace(platform + '.m.', 'www.');
+                if (!location && siteLocation.indexOf('www.')) {
+                    return res.redirect(302, utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp, {
+                        location: siteLocation
                     }));
                 }
-                else if (location && location.split('.').shift() === 'www') {
-                    redirect = true;
+                else if (location && !siteLocation.indexOf('www.')) {
+                    req.rendrApp.session.persist({
+                        siteLocation: siteLocation
+                    });
+                    return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'location'));
                 }
             }
 
-            var siteLocation = req.param('location', previousLocation || req.rendrApp.session.get('siteLocation'));
-            var host = req.rendrApp.session.get('shortHost');
-            var platform;
-
             function fetch(done) {
-                function after(err, result) {
+                function callback(err, response) {
                     var params = null;
 
                     if (err) {
+                        if (err.status !== 404) {
+                            return done.fail(err);
+                        }
                         if (previousLocation) {
                             params = {
                                 location: previousLocation
                             };
                         }
                         done.abort();
-                        return res.redirect(301, utils.link('/', req.rendrApp, params));
+                        locationUrl = host.replace(shortHost, locationUrl);
+                        return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + locationUrl + req.originalUrl, req.rendrApp), 'location'));
                     }
-                    done(result.location);
+                    done(response.location);
                 }
 
                 req.rendrApp.fetch({
@@ -62,26 +75,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                     }
                 }, {
                     readFromCache: false
-                }, after);
+                }, callback);
             }
 
-            function check(done, location) {
-                var url = location.get('url');
-                var params = null;
-
-                if (_.contains(req.subdomains, 'm') && host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
-                    if (previousLocation) {
-                        params = {
-                            location: previousLocation
-                        };
-                    }
-                    done.abort();
-                    return res.redirect(301, utils.link('/', req.rendrApp, params));
-                }
-                done(location);
-            }
-
-            function store(done, location) {
+            function success(done, location) {
                 var current = location.get('current');
 
                 if (current) {
@@ -96,34 +93,15 @@ module.exports = function(dataAdapter, excludedUrls) {
                 done();
             }
 
-            function redirection(done) {
-                if (redirect) {
-                    return res.redirect(302, utils.link(utils.removeParams(req.originalUrl, 'location'), req.rendrApp));
-                }
-                done();
-            }
-
             function fail(err) {
                 statsd.increment(['Unknown Location', 'middleware', 'location', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 
-            if (_.isArray(siteLocation)) {
-                siteLocation = siteLocation[0];
-            }
-            if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
-                return res.redirect(301, utils.link('/', req.rendrApp, {
-                    location: previousLocation
-                }));
-            }
             asynquence().or(fail)
                 .then(fetch)
-                .then(check)
-                .then(store)
-                .then(redirection)
+                .then(success)
                 .val(next);
         };
-
     };
-
 };

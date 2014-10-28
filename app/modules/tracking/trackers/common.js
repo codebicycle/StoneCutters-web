@@ -66,11 +66,31 @@ var pageNameParsers = {
     },
     page: {
         name: 'page',
+        namePage: '[page]',
         parse: function (url, options) {
-            if (options.page !== 1) {
-                url = url.replace('[' + this.name + ']', 'pag_' + options.page);
+            if (options.page &&  options.page > 1) {
+                url = url.replace(this.namePage, 'pag_' + options.page);
             }
-            return url.replace('/[' + this.name + ']', '');
+            return url.replace('/' + this.namePage, '');
+        }
+    },
+    keyword: {
+        name: 'keyword',
+        parse: function (url, options) {
+            return url.replace('[' + this.name + ']', options.keyword);
+        }
+    },
+    section: {
+        name: 'section',
+        nameSection: '[section]',
+        parse: function (url, options) {
+            if (options.section) {
+                url = url.replace(this.nameSection, options.section);
+            }
+            else {
+                url = url.replace(this.nameSection, '0');
+            }
+            return url;
         }
     }
 };

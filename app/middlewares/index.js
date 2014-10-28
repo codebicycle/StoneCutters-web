@@ -8,6 +8,7 @@ var middlewares = {
     location: require('./location'),
     languages: require('./languages'),
     categories: require('./categories'),
+    countries: require('./countries'),
     interstitial: require('./interstitial')
 };
 

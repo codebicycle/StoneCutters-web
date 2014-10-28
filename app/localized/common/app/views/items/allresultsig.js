@@ -13,6 +13,9 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
+    },
+    processItem: function(item) {
+        item.date.since = helpers.timeAgo(item.date);
     }
 
 });

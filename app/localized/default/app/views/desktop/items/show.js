@@ -1,6 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
@@ -22,20 +22,8 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var showAdSenseItemBottom = helpers.features.isEnabled.call(this, 'adSenseItemBottom', platform, location.url);
-        
-        data.category_name = this.options.category_name;
-        if (!data.item.purged) {
-            data.item.location.stateName = data.item.location.children[0].name;
-            data.item.location.cityName = data.item.location.children[0].children[0].name;
-            if(data.item.location.children[0].children[0].children[0]){
-                data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
-            }
-            data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
-            data.item.date.since = helpers.timeAgo(data.item.date);
-        }
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data),
             showAdSenseItemBottom: showAdSenseItemBottom
         });
     },
@@ -251,5 +239,3 @@ module.exports = Base.extend({
 
     }
 });
-
-module.exports.id = 'items/show';

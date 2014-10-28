@@ -48,15 +48,20 @@
         }
         li {
             a.icon-close {
-                background: $greyBorders;
-                border-radius(50%);
-                color: $yellow;
                 font-size: remify(8px);
-                padding: 1px 4px 4px;
                 position: absolute;
                 right: 7px;
                 top: 6px;
-                &:hover {
+                &::before {
+                    background: $greyBorders;
+                    border-radius(50%);
+                    color: $yellow;
+                    height: 15px;
+                    line-height: 15px;
+                    text-align: center;
+                    width: 15px;
+                }
+                &:hover::before {
                     background: $greyStrong;
                 }
             }

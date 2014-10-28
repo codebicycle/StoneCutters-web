@@ -8,27 +8,17 @@ module.exports = function(dataAdapter, excludedUrls) {
         var asynquence = require('asynquence');
         var config = require('../config');
         var statsd  = require('../modules/statsd')();
-        var utils = require('../../shared/utils');
-        var Seo = require('../../app/modules/seo');
         var errorPath = path.resolve('server/templates/error.html');
-        var testing = config.get(['publicEnvironments', 'testing'], {});
-        var staging = config.get(['publicEnvironments', 'staging'], {});
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
-            }            
-            var seo = Seo.instance(req.rendrApp);
-
+            }
+    
             function fetch(done) {
                 req.rendrApp.fetch({
-                    categories: {
-                        collection: 'Categories',
-                        params: {
-                            location: req.rendrApp.session.get('siteLocation'),
-                            languageCode: req.rendrApp.session.get('selectedLanguage'),
-                            seo: seo.isEnabled()
-                        }
+                    countries: {
+                        collection: 'Countries'
                     }
                 }, {
                     readFromCache: false
@@ -37,16 +27,16 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function store(done, response) {
                 req.rendrApp.session.update({
-                    categories: response.categories
+                    countries: response.countries
                 });
                 res.locals({
-                    categories: response.categories.toJSON()
+                    countries: response.countries.toJSON()
                 });
                 done();
             }
 
             function fail(err) {
-                statsd.increment(['Unknown Category', 'middleware', 'categories', 'error']);
+                statsd.increment(['Unknown Category', 'middleware', 'countries', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 
