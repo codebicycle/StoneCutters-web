@@ -5,7 +5,6 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var _ = require('underscore');
         var uuid = require('node-uuid');
-        var utils = require('../../shared/utils');
         var config = require('../../shared/config');
         var deploy = config.get('deploy', {});
 
@@ -42,7 +41,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             var url = req.originalUrl;
             var clientId = req.rendrApp.session.get('clientId');
             var referer = req.headers.referer;
-            var platform = req.rendrApp.session.get('forcedPlatform') || req.rendrApp.session.get('platform') || utils.defaults.platform;
 
             if (typeof clientId === 'undefined') {
                 req.rendrApp.session.persist({
@@ -54,11 +52,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 protocol: protocol,
                 url: url,
                 referer: referer,
-                platform: platform,
                 ip: getIp(req)
             });
             res.locals({
-                platform: platform,
                 environment: config.get(['environment', 'type'], 'development'),
                 version: deploy.version,
                 revision: deploy.revision

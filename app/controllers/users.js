@@ -13,7 +13,8 @@ module.exports = {
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
-    favorites: middlewares(favorites)
+    favorites: middlewares(favorites),
+    deleteitem: middlewares(deleteitem)
 };
 
 function register(params, callback) {
@@ -104,7 +105,7 @@ function myolx(params, callback) {
                 status: 302
             });
         }
-        
+
         callback(null, {});
     }
 }
@@ -159,7 +160,7 @@ function myads(params, callback) {
             }
             done(res.myAds);
         }.bind(this);
-            
+
         var success = function(_myAds) {
             var myAds = _myAds.toJSON();
             var platform = this.app.session.get('platform');
@@ -179,7 +180,7 @@ function myads(params, callback) {
                     myAds: myAds,
                     deleted: deleted
                 });
-            }    
+            }
         }.bind(this);
 
         var error = function(err, res) {
@@ -244,7 +245,7 @@ function favorites(params, callback) {
             }
             done(res.favorites);
         }.bind(this);
-            
+
         var success = function(_favorites) {
             var favorites = _favorites.toJSON();
             var platform = this.app.session.get('platform');
@@ -266,7 +267,7 @@ function favorites(params, callback) {
                     favorites: favorites,
                     favorite: favorite
                 });
-            }    
+            }
         }.bind(this);
 
         var error = function(err, res) {
@@ -278,5 +279,53 @@ function favorites(params, callback) {
             .then(findFavorites)
             .then(check)
             .val(success);
+    }
+}
+
+function deleteitem(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller(form) {
+        var user;
+
+        var prepare = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'wap') {
+                return helpers.common.redirect.call(this, '/');
+            }
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            done();
+        }.bind(this);
+
+        var deleteitem = function(done) {
+            helpers.dataAdapter.post(this.app.req, '/items/' + params.itemId + '/delete', {
+                query: {
+                    token: user.token,
+                    platform: this.app.session.get('platform')
+                }
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function() {
+            helpers.common.redirect.call(this, 'myolx/myadslisting', null, {
+                status: 302
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(deleteitem)
+            .val(success);
+
     }
 }

@@ -17,4 +17,10 @@
 
 {% include (template + '/partials/seobox.html') %}
 
+{% if seo %}
+    <section id="seo-box">
+        {% include (template + '/partials/seobox.html') %}
+    </section>
+{% endif %}
+
 {% view 'partials/tracking' %}

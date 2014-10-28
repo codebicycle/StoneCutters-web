@@ -784,6 +784,8 @@ function search(params, callback, isGallery) {
             seo.addMetatag('description');
 
             tracking.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('section', query.categoryId);
+            tracking.addParam('page', page);
 
             callback(null, ['items/search', (isGallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
@@ -1107,7 +1109,7 @@ function staticSearch(params, callback) {
 
             tracking.addParam('page_nb', metadata.totalPages);
 
-            callback(null, 'items/search', {
+            callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
                 metadata: metadata,
                 search: query.search,
