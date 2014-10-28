@@ -1,12 +1,15 @@
 'use strict';
 
 var Base = require('../../bases/view');
+var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'categories_showig_view',
+    className: 'header-usernav-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+
+        return data;
     }
 });
 
-module.exports.id = 'categories/showig';
+module.exports.id = 'header/usernav';

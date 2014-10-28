@@ -6,8 +6,9 @@ var esi = require('../app/modules/esi');
 var linkParams = {
     location: function (href, query) {
         var siteLocation = this.session.get('siteLocation');
+        var platform = this.session.get('platform');
 
-        if (!query.location && siteLocation && !~siteLocation.indexOf('www.')) {
+        if (platform !== 'desktop' && !query.location && siteLocation && !~siteLocation.indexOf('www.')) {
             href = params(href, 'location', siteLocation);
         }
         return href;
