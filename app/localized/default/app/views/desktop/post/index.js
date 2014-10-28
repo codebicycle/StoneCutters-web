@@ -24,8 +24,10 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
         return _.extend({}, data);
+    },
+    postRender: function() {
+        this.app.router.once('action:end', this.onStart);
     },
     fieldFocus: function(event) {
         $(event.currentTarget).closest('.wrapper').toggleClass('input-focus');
@@ -58,6 +60,9 @@ module.exports = Base.extend({
         this.form._images = Object.keys(images).map(function each(image) {
             return images[image].id;
         });
+    },
+    onStart: function(event) {
+        this.appView.trigger('posting:start');
     },
     onSubmit: function(event) {
         event.preventDefault();

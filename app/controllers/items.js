@@ -267,7 +267,7 @@ function show(params, callback) {
                 view = 'items/expired';
             }
 
-            callback(null, view, {
+            callback(null, 'items/unavailable', {
                 item: item,
                 seo: seo,
                 pos: Number(params.pos) || 0,
