@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'salasana',
     'loginbox.Register': 'Rekister\xF6idy',
     'loginbox.RememberMe': 'Muista minut',
+    'loginbox.SingInButon': 'Kirjaudu sis\xE4\xE4n',
     'loginbox.Username': 'K\xE4ytt\xE4j\xE4tunnus tai s\xE4hk\xF6postiosoite',
     'messages_browse_notify_friend.ErrorMail': 'Sy\xF6t\xE4 s\xE4hk\xF6postiosoitteesi',
     'messages_date_format.101': 'Tam',

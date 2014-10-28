@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': '\u0A2A\u0A3E\u0A38\u0A35\u0A30\u0A21',
     'loginbox.Register': '\u0A30\u0A1C\u0A3F\u0A38\u0A1F\u0A30 \u0A15\u0A30\u0A4B',
     'loginbox.RememberMe': '\u0A2E\u0A48\u0A28\u0A42\u0A70 \u0A2F\u0A3E\u0A26 \u0A30\u0A71\u0A16\u0A4B',
+    'loginbox.SingInButon': '\u0A38\u0A3E\u0A08\u0A28 \u0A07\u0A28 \u0A15\u0A30\u0A4B',
     'loginbox.Username': '\u0A09\u0A2A\u0A2F\u0A4B\u0A17\u0A15\u0A30\u0A24\u0A3E \u0A28\u0A3E\u0A2E \u0A1C\u0A3E\u0A02 \u0A08\u0A2E\u0A47\u0A32',
     'messages_browse_notify_friend.ErrorMail': '\u0A06\u0A2A\u0A23\u0A40 \u0A08-\u0A2E\u0A47\u0A32 \u0A2A\u0A42\u0A30\u0A40 \u0A15\u0A30\u0A4B',
     'messages_date_format.101': '\u0A1C\u0A28',

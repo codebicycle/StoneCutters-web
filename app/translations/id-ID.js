@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Kata Sandi',
     'loginbox.Register': 'Daftar',
     'loginbox.RememberMe': 'Ingat saya',
+    'loginbox.SingInButon': 'Masuk',
     'loginbox.Username': 'Nama Pengguna (Username) atau Email',
     'messages_browse_notify_friend.ErrorMail': 'Lengkapi e-mail Anda',
     'messages_date_format.101': 'Jan',

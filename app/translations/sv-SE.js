@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'L\xF6senord',
     'loginbox.Register': 'Registrera',
     'loginbox.RememberMe': 'Kom ih\xE5g mig',
+    'loginbox.SingInButon': 'Logga in',
     'loginbox.Username': 'Anv\xE4ndarnamn eller e-post',
     'messages_browse_notify_friend.ErrorMail': 'Fyll i ditt e-postmeddelande',
     'messages_date_format.101': 'Jan',

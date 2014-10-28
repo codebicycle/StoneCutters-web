@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Parola',
     'loginbox.Register': '\xDCye Ol',
     'loginbox.RememberMe': 'Beni Hat\u0131rla',
+    'loginbox.SingInButon': '\xDCye Giri\u015Fi',
     'loginbox.Username': 'Kullan\u0131c\u0131 Ad\u0131 veya E-Posta Adresi ',
     'messages_browse_notify_friend.ErrorMail': 'E-Posta\'n\u0131z\u0131 tamamlay\u0131n',
     'messages_date_format.101': 'Ock',

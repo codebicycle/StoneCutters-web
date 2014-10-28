@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Heslo',
     'loginbox.Register': 'Zaregistrujte sa',
     'loginbox.RememberMe': 'Zapam\xE4ta\u0165 moje \xFAdaje',
+    'loginbox.SingInButon': 'Prihl\xE1si\u0165 sa',
     'loginbox.Username': 'Pou\u017E\xEDvate\u013Esk\xE9 meno alebo e-mail',
     'messages_browse_notify_friend.ErrorMail': 'Vypl\u0148te v\xE1\u0161 e-mail',
     'messages_date_format.101': 'Jan',

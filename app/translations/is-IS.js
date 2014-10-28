@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Lykilor\xF0',
     'loginbox.Register': 'N\xFDskr\xE1ning',
     'loginbox.RememberMe': 'Muna eftir m\xE9r',
+    'loginbox.SingInButon': 'Innskr\xE1ning',
     'loginbox.Username': 'Notandanafn e\xF0a t\xF6lvup\xF3stfang',
     'messages_browse_notify_friend.ErrorMail': 'Vinsamlegast kl\xE1ra\xF0u t\xF6lvup\xF3stfangi\xF0',
     'messages_date_format.101': 'Jan',

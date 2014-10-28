@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Password',
     'loginbox.Register': 'Magrehisto',
     'loginbox.RememberMe': 'Tandaan ako',
+    'loginbox.SingInButon': 'Mag-Sign in',
     'loginbox.Username': 'Username o Email',
     'messages_browse_notify_friend.ErrorMail': 'Pakikumpleto ang iyong email',
     'messages_date_format.101': 'Ene',

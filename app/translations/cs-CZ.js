@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Heslo',
     'loginbox.Register': 'Registrovat se',
     'loginbox.RememberMe': 'Pamatujte si m\u011B',
+    'loginbox.SingInButon': 'P\u0159ihl\xE1sit se',
     'loginbox.Username': 'U\u017Eivatelsk\xE9 jm\xE9no nebo e-mail',
     'messages_browse_notify_friend.ErrorMail': 'Vypl\u0148te sv\u016Fj e-mail',
     'messages_date_format.101': 'Leden',

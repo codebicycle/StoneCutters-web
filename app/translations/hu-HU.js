@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Jelsz\xF3',
     'loginbox.Register': 'Regisztr\xE1ci\xF3',
     'loginbox.RememberMe': 'Jegyezze meg az adataimat',
+    'loginbox.SingInButon': 'Bejelentkez\xE9s',
     'loginbox.Username': 'Felhaszn\xE1l\xF3i n\xE9v vagy e-mail',
     'messages_browse_notify_friend.ErrorMail': 'T\xF6ltse ki az e-mail c\xEDm\xE9t',
     'messages_date_format.101': 'Jan',

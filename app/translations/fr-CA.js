@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Mot de passe',
     'loginbox.Register': 'S\'inscrire',
     'loginbox.RememberMe': 'Se souvenir de moi',
+    'loginbox.SingInButon': 'Se connecter',
     'loginbox.Username': 'Nom d\'Utilisateur ou Email',
     'messages_browse_notify_friend.ErrorMail': 'Veuillez saisir une adresse email valide',
     'messages_date_format.101': 'Janv',

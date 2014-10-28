@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Lozinka',
     'loginbox.Register': 'Registracija',
     'loginbox.RememberMe': 'Zapamti me',
+    'loginbox.SingInButon': 'Prijava',
     'loginbox.Username': 'Korisni\u010Dko ime ili e-mail',
     'messages_browse_notify_friend.ErrorMail': 'Kompletirajte svoj e-mail',
     'messages_date_format.101': 'jan.',

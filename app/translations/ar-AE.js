@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': '\u0633\u0631',
     'loginbox.Register': '\u0633\u062C\u064D\u0644',
     'loginbox.RememberMe': 'Remember me',
+    'loginbox.SingInButon': '\u0623\u062F\u062E\u0644 \u0627\u0644\u0627\u0646',
     'loginbox.Username': '\u0645\u0633\u062A\u062E\u062F\u0645 \u0627\u0648 \u0627\u0645\u0627\u064A\u0644',
     'messages_browse_notify_friend.ErrorMail': '\u0644\u0643 e-mail \u0627\u062F\u062E\u0644 \u0639\u0646\u0648\u0627\u0646 ',
     'messages_date_format.101': '\u0643\u0627\u0646\u0648\u0646 \u062B\u0627\u0646\u064A',

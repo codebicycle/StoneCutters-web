@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Salas\xF5na',
     'loginbox.Register': 'Registreeru',
     'loginbox.RememberMe': 'Pea mind meeles',
+    'loginbox.SingInButon': 'Logi sisse',
     'loginbox.Username': 'Kasutajanimi v\xF5i E-post',
     'messages_browse_notify_friend.ErrorMail': 'L\xF5petage oma e-posti aadress',
     'messages_date_format.101': 'Jaan',

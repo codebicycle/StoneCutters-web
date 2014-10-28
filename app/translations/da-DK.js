@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Kodeord',
     'loginbox.Register': 'Tilmeld',
     'loginbox.RememberMe': 'Husk mig',
+    'loginbox.SingInButon': 'Log ind',
     'loginbox.Username': 'Brugernavn eller e-mail',
     'messages_browse_notify_friend.ErrorMail': 'Angiv din e-mailadresse',
     'messages_date_format.101': 'Jan',

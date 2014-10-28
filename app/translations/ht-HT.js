@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Kod Sekr\xE8',
     'loginbox.Register': 'Enskri',
     'loginbox.RememberMe': 'Sonje enf\xF2masyon mwen',
+    'loginbox.SingInButon': 'Konekte',
     'loginbox.Username': 'Non Manm nan ou Im\xE8l ou',
     'messages_browse_notify_friend.ErrorMail': 'Tanpri mete im\xE8l ou',
     'messages_date_format.101': 'Janv',

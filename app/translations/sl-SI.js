@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Geslo',
     'loginbox.Register': 'Registracija',
     'loginbox.RememberMe': 'Zapomni si me',
+    'loginbox.SingInButon': 'Vpis',
     'loginbox.Username': 'Uporabni\u0161ko ime ali e-po\u0161ta',
     'messages_browse_notify_friend.ErrorMail': 'Vpi\u0161ite svojo e-po\u0161to',
     'messages_date_format.101': 'Jan',

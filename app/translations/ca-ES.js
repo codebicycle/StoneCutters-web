@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Contrasenya',
     'loginbox.Register': 'Registrar',
     'loginbox.RememberMe': 'Recorda\'m',
+    'loginbox.SingInButon': 'Iniciar sessi\xF3',
     'loginbox.Username': 'Nom d\'usuari o correu electr\xF2nic',
     'messages_browse_notify_friend.ErrorMail': 'Completeu el vostre correu electr\xF2nic',
     'messages_date_format.101': 'Gen',

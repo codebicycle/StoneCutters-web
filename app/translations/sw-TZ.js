@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Nenosiri',
     'loginbox.Register': 'Jiandikishe',
     'loginbox.RememberMe': 'Nikumbuke',
+    'loginbox.SingInButon': 'Ingia',
     'loginbox.Username': 'Jina la mtumiaji au Barua pepe',
     'messages_browse_notify_friend.ErrorMail': 'Kamilisha barua pepe yako',
     'messages_date_format.101': 'Jan',

@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Parole',
     'loginbox.Register': 'Re\u0123istr\u0113ties',
     'loginbox.RememberMe': 'Atcer\u0113ties mani',
+    'loginbox.SingInButon': 'Pierakst\u012Bties',
     'loginbox.Username': 'Lietot\u0101jv\u0101rds vai e-pasts',
     'messages_browse_notify_friend.ErrorMail': 'Ievadiet savu e-pasta adresi',
     'messages_date_format.101': 'Janv.',

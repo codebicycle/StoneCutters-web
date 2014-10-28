@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'Contrase\xF1a',
     'loginbox.Register': 'Reg\xEDstrate',
     'loginbox.RememberMe': 'Recordarme',
+    'loginbox.SingInButon': 'Iniciar sesi\xF3n',
     'loginbox.Username': 'Usuario o Email',
     'messages_browse_notify_friend.ErrorMail': 'Completa tu e-mail',
     'messages_date_format.101': 'Ene',

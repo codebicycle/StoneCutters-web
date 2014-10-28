@@ -61,6 +61,7 @@ module.exports = {
     'loginbox.Password': 'slapta\u017Eodis',
     'loginbox.Register': 'Registruotis',
     'loginbox.RememberMe': 'Prisiminkite mane',
+    'loginbox.SingInButon': 'Prisijungti',
     'loginbox.Username': 'Vartotojo vardas ar el. pa\u0161tas',
     'messages_browse_notify_friend.ErrorMail': '\u012Eveskite savo el. pa\u0161to adres\u0105',
     'messages_date_format.101': 'Sau',
