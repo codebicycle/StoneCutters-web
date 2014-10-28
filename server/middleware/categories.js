@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
@@ -15,6 +15,9 @@ module.exports = function(dataAdapter) {
         var staging = config.get(['publicEnvironments', 'staging'], {});
 
         return function middleware(req, res, next) {
+            if (_.contains(excludedUrls.all, req.path)) {
+                return next();
+            }            
             var seo = Seo.instance(req.rendrApp);
 
             function fetch(done) {

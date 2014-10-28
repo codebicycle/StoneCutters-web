@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(dataAdapter) {
+module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
@@ -11,6 +11,9 @@ module.exports = function(dataAdapter) {
         var errorPath = path.resolve('server/templates/error.html');
 
         return function middleware(req, res, next) {
+            if (_.contains(excludedUrls.all, req.path)) {
+                return next();
+            }
     
             function fetch(done) {
                 req.rendrApp.fetch({
