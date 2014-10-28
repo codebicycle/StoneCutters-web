@@ -8,9 +8,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data, {
-            user: this.app.session.get('user')
-        });
+        return data;
     }
 });
 
