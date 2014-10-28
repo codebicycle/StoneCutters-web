@@ -5,11 +5,7 @@
 
     <nav id="breadcrumb" class="item-page">
         <div class="breadcrumb-navigation">
-            <span class="icons icon-arrow-left"></span>
-            <a href="{{ fromOlx if olxReferer else data.childCategoryLevel.url }}" {{ 'rel="nofollow"' if data.locationLevel.noFollow }} >{{ dictionary["itemgeneraldetails.BackResults"] }}</a>
-            <span class="pipe">
-                <a href="/nf/all-results" {{ 'rel="nofollow"' if data.locationLevel.noFollow }} >{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
-            </span>
+            <a href="/nf/all-results" {{ 'rel="nofollow"' if data.locationLevel.noFollow }} >{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
 
             {% if data.categoryLevel %}
                 <a href="{{ data.categoryLevel.url }}" class="icons icon-arrow" {{ 'rel="nofollow"' if data.categoryLevel.noFollow }} >{{ data.categoryLevel.anchor }}</a> 
@@ -17,6 +13,9 @@
             {% if data.childCategoryLevel %}
                 <a href="{{ data.childCategoryLevel.url }}" class="icons icon-arrow" {{ 'rel="nofollow"' if data.childCategoryLevel.noFollow }} >{{ data.childCategoryLevel.anchor }}</a> 
             {% endif %}
+        </div>
+        <div class="back-to-results">
+            <a class="icons icon-arrow-left" href="{{ fromOlx if olxReferer else data.childCategoryLevel.url }}" {{ 'rel="nofollow"' if data.locationLevel.noFollow }} >{{ dictionary["itemgeneraldetails.BackResults"] }}</a>
         </div>
     </nav>
 {% endif %}

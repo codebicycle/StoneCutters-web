@@ -2,7 +2,8 @@
     box($yellow, $yellowBorders , 3px, 15px 20px);
     
     .icons:before {
-        font-size: $xl;
+        font-size: $m;
+        margin: 0 5px 5px;
     }
 
     .user-info {
@@ -26,6 +27,7 @@
     form {
         fieldset {
             border: 0 none;
+            font-size: $xs;
             margin: 13px 0;
             padding: 0;
             &.error {
@@ -35,18 +37,9 @@
                 }
             }
         }
-        span {
-            &.icons:before {
-                display: inline-block;
-                color: $red;
-                margin: 5px 0 0 224px;
-                position: absolute;
-            }
-            &.error {
-                margin: 0 0 10px 10px;
-                font-size: $xs;
-                color: $red;
-            }
+        .error span {
+            color: $red;
+            margin-left: 10px;
         }
         textarea {
             height: 80px;

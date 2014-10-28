@@ -9,12 +9,14 @@
         magin-left: 10px;
         vertical-align: middle;
         &:first-child {
-            margin-left: 0;
+            margin-right: 10px;
+            &::before {
+                margin-right: 5px;
+            }
         }
     }
 
     .icons::before {
         font-size: $m;
-        margin-right: 5px;
     }
 }
