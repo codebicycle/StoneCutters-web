@@ -24,10 +24,6 @@ memcached:
   hosts:
     - 'localhost:11211'
 
-cache:
-  lifetime:
-    default: 60
-
 cluster:
   enabled: true
 
@@ -36,9 +32,6 @@ newrelic:
 
 memwatch:
   enabled: true
-
-graphite:
-  enabled: false
 
 cron:
   enabled: true
@@ -74,28 +67,8 @@ middleware:
       - /force/html5
       - /force/desktop
 
-zombie:
-  dns:
-    localhost: true
-    ip: '127.0.0.1'
-    port: 3030
-    hosts:
-      - 'html4.m.olx.de'
-      - 'html4.m.olx.in'
-
 uglify:
   enabled: false
-
-sixpack:
-  enabled: false
-  url: http://localhost:5000
-  experiments:
-    post-button:
-      enabled: false
-      alternatives:
-        - post
-        - sell
-        - vender
 
 publicEnvironments:
   testing:
@@ -117,3 +90,6 @@ hosts:
 
 redirect:
   onDesktop: true
+
+migrated:
+    - www.olx.com.bo
