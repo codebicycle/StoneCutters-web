@@ -1,8 +1,7 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('pages/help');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -12,7 +11,6 @@ module.exports = Base.extend({
         'click .help-toggle-content': 'helpToggleContent',
         'click .question .icons': 'helpToggleQuestion'
     },
-
     helpToggleContent: function(event) {
         event.preventDefault();
         var element = $(event.currentTarget);
@@ -21,9 +19,8 @@ module.exports = Base.extend({
         $('.help-content-display').hide();
         $('#' + element.attr('data-help-content')).show();
     },
-
     helpToggleQuestion: function(event) {
-        var element_current = $(event.currentTarget).parent('.question');        
+        var element_current = $(event.currentTarget).parent('.question');
 
         $('h4.icon-arrowdown').toggleClass('icon-arrowright icon-arrowdown');
 
@@ -45,5 +42,3 @@ module.exports = Base.extend({
     }
 
 });
-
-module.exports.id = 'pages/help';

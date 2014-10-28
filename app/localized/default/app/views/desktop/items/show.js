@@ -1,6 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
@@ -14,70 +14,58 @@ module.exports = Base.extend({
         'blur textarea': 'validateField',
         'submit': 'submitForm',
         'click .replySuccses span': 'showSubmit',
-        'mouseover .image-navigator figure': 'updateGalery',
-        'click .image-navigator [class*="arrow-"]': 'navigator'
+        'mouseover [data-gallery-thumb]': 'updateGallery',
+        'click [data-gallery-navigator] [class*="arrow-"]': 'navigate'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var showAdSenseItemBottom = helpers.features.isEnabled.call(this, 'adSenseItemBottom', platform, location.url);
-        
-        data.category_name = this.options.category_name;
-        if (!data.item.purged) {
-            data.item.location.stateName = data.item.location.children[0].name;
-            data.item.location.cityName = data.item.location.children[0].children[0].name;
-            if(data.item.location.children[0].children[0].children[0]){
-                data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
-            }
-            data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
-            data.item.date.since = helpers.timeAgo(data.item.date);
-        }
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data),
             showAdSenseItemBottom: showAdSenseItemBottom
         });
     },
-    updateGalery: function(event) {
+    updateGallery: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+
         if(!$(event.currentTarget).hasClass('active')) {
             var $image = $(event.currentTarget).find('img');
             var image = $image.data('image');
             var currentImage = $image.attr('src');
 
-            $('.image-navigator figure').removeClass('active');
+            $('[data-gallery-thumb]').removeClass('active');
             $(event.currentTarget).addClass('active');
-            $('.image-viewer img').attr('src', currentImage);
+            $('[data-gallery-image]').attr('src', currentImage);
             var newImg = new Image();
 
             newImg.src = image;
             newImg.onload = function() {
-                $('.image-viewer img').attr('src', image);
+                $('[data-gallery-image]').attr('src', image);
             };
         }
     },
-    navigator: function(event) {
+    navigate: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var active = $('.image-navigator .active');
-        var previous = ($(event.currentTarget).hasClass('arrow-prev')) ? true : false;
+        var active = $('[data-gallery-thumb].active');
 
-        if (previous) {
-            if (active.prev('figure').length > 0) {
+        if ($(event.currentTarget).hasClass('arrow-prev')) {
+            if (active.prev('[data-gallery-thumb]').length > 0) {
                 active.prev().mouseover();
             } else {
-                $('.image-navigator figure').last().mouseover();
+                $('[data-gallery-thumb]').last().mouseover();
             }
         } else {
-            if (active.next('figure').length > 0) {
+            if (active.next('[data-gallery-thumb]').length > 0) {
                 active.next().mouseover();
             } else {
-                $('.image-navigator figure').first().mouseover();
+                $('[data-gallery-thumb]').first().mouseover();
             }
         }
     },
@@ -250,5 +238,3 @@ module.exports = Base.extend({
 
     }
 });
-
-module.exports.id = 'items/show';
