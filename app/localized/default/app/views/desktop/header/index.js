@@ -1,6 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -8,5 +8,3 @@ module.exports = Base.extend({
     id: 'header-view',
     className: 'header-view',
 });
-
-module.exports.id = 'header/index';

@@ -1,6 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -25,5 +25,3 @@ module.exports = Base.extend({
         });
     }
 });
-
-module.exports.id = 'categories/list';
