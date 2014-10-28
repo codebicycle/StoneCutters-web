@@ -141,7 +141,9 @@ module.exports = function(app, dataAdapter) {
                     done(response, body);
                 }
 
-                _item.priceC = helpers.numbers.toLatin(_item.priceC);
+                if (_item.priceC) {
+                    _item.priceC = helpers.numbers.toLatin(_item.priceC);
+                }
 
                 item = _item;
                 images = _images;
@@ -256,7 +258,7 @@ module.exports = function(app, dataAdapter) {
                 var url = req.headers.referer || '/posting';
 
                 if (!track || track === 'error') {
-                    console.log('[OLX_DEBUG]', 'post', err);
+                    console.log('[OLX_DEBUG]', 'post', err.stack);
                 }
                 statsd.increment([location.name, 'posting', track || 'error', platform]);
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
