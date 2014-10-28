@@ -79,7 +79,7 @@ module.exports = Base.extend({
         }
 
         var _gaq = window._gaq || [];
-        
+
         _gaq.push(function track() {
             var host = tracking.params.analytics.host;
             var tracker = window._gat._getTracker(tracking.params.analytics.id);
@@ -124,5 +124,3 @@ module.exports = Base.extend({
         });
     }
 });
-
-module.exports.id = 'partials/tracking';

@@ -4,12 +4,14 @@ var Base = require('../../bases/view');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'pages_help_view',
+    className: 'header-usernav-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        return data;
+        return _.extend({}, data, {
+            user: this.app.session.get('user')
+        });
     }
 });
 
-module.exports.id = 'pages/help';
+module.exports.id = 'header/usernav';
