@@ -1109,7 +1109,7 @@ function staticSearch(params, callback) {
 
             tracking.addParam('page_nb', metadata.totalPages);
 
-            callback(null, 'items/search', {
+            callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
                 metadata: metadata,
                 search: query.search,
