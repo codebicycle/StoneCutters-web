@@ -38,7 +38,6 @@ module.exports = Base.extend({
             var currentImage = $image.attr('src');
 
             $('[data-gallery-thumb]').removeClass('active');
-            console.log(event.currentTarget);
             $(event.currentTarget).addClass('active');
             $('[data-gallery-image]').attr('src', currentImage);
             var newImg = new Image();
