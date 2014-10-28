@@ -1,0 +1,77 @@
+.users_login_view {
+    box($white, $greyBorders, 3px, 20px, solid, 1px);
+
+    .title {
+        border-bottom: 1px solid $greyBorders;
+        padding-bottom: 5px;
+        font-size: $l;
+        font-weight: normal;
+        margin: 0;
+    }
+
+    form {
+        margin-top: 20px;
+
+        .wrapper {
+            border: 0;
+            padding: 0;
+            margin: 0 0 10px 0;
+
+            &.error {
+                color: $red;
+                .text-field {
+                    border-color: $red;
+                }
+                .advice {
+                    display: block;
+                }
+            }
+        }
+
+        .login-label, .wrapper-inputs {
+            float: left;
+        }
+
+        .login-label {
+            width: 100px;
+            text-align: right;
+            margin: 10px 10px 0 0;
+        }
+
+        .remember {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 110px;
+        }
+
+        .text-field {
+            box($white, $greyBorders, 3px, 0 10px, solid, 1px);
+            width: 250px;
+        }
+
+        .advice {
+            margin-top: 5px;
+            font-size: $xs;
+            display: none;
+        }
+
+        .send {
+            display: inline-block;
+            margin-left: 110px;
+            padding: 10px 30px;
+            font-size: $baseFont;
+            margin-top: 10px;
+        }
+
+        .forgot {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+    }
+
+    .register {
+        margin: 20px 0 0 110px;
+    }
+
+}
