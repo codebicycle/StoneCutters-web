@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.OtherCitiesInRegion': 'Other Cities in <<REGION>>',
     'countryoptions.PostAdd': '\u0636\u0639 \u0627\u0639\u0644\u0627\u0646\u0643 \u0645\u062C\u0627\u0646\u064A\u0627\u064B ',
     'countryoptions.SelectACity': 'Select a city',
+    'defaultfooter.About OLX': ' OLX \u0639\u0646',
     'defaultfooter.Back': '\u0627\u0644\u0649 \u0627\u0644\u0648\u0631\u0627\u0621',
     'defaultfooter.change': '\u0627\u0644\u062A\u063A\u064A\u064A\u0631',
     'defaultfooter.FreeSite': '100 \u066A \u062D\u0631\u0629 \u0627\u0639\u0644\u0627\u0646\u0627\u062A \u0645\u0628\u0648\u0628\u0647',
@@ -143,6 +144,7 @@ module.exports = {
     'contactseller_form.CompleteYourEmail': ' e-mail \u0623\u062F\u062E\u0644',
     'contactseller_form.ReplyToListing': '\u0623\u062C\u0627\u0628\u0629 \u0627\u0644\u0623\u0639\u0644\u0627\u0646 ',
     'register_form.245': '\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645 ',
+    'register_form.termsAgreeB': '\u062A\u0641\u0627\u0647\u0645 \u0648\u0634\u0631\u0648\u0637 ',
     'myolx.ApprovalPending': 'Approval pending',
     'myolx.EditListing': 'Edit Listing',
     'myolx.Messages': 'Messages',
@@ -244,6 +246,7 @@ module.exports = {
     'terms.TermsOfUse': '\u0634\u0631\u0648\u0637 \u0627\u0644\u0627\u0633\u062A\u062E\u062F\u0627\u0645',
     'misc.SinceDate': 'Since <<DATE>>',
     'widgets.Denounce': 'Denounce',
+    'contact_us.ContactBrand': 'Contact OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'If you have lots of listings you want to submit to OLX, you can use an XML feed.',
     'business_directory.Map': 'Map',
     'optionals.opt-138-323-translation-location': 'Location'

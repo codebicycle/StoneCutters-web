@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.OtherCitiesInRegion': 'Andere steden in <<REGION>>',
     'countryoptions.PostAdd': 'Plaats een gratis advertentie',
     'countryoptions.SelectACity': 'Kies een stad',
+    'defaultfooter.About OLX': 'Over OLX',
     'defaultfooter.Back': 'Terug',
     'defaultfooter.change': 'wijzig',
     'defaultfooter.FreeSite': '100% Gratis advertenties',
@@ -143,6 +144,7 @@ module.exports = {
     'contactseller_form.CompleteYourEmail': 'Voltooi je e-mail',
     'contactseller_form.ReplyToListing': 'Reageer op advertentie',
     'register_form.245': 'Registratie nieuwe gebruiker',
+    'register_form.termsAgreeB': 'Gebruiksvoorwaarden',
     'myolx.ApprovalPending': 'In afwachting van goedkeuring',
     'myolx.EditListing': 'Wijzig advertentie',
     'myolx.Messages': 'Berichten',
@@ -244,6 +246,7 @@ module.exports = {
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
     'misc.SinceDate': 'Sinds <<DATE>>',
     'widgets.Denounce': 'Denounce',
+    'contact_us.ContactBrand': 'Contact met OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Als je veel advertenties wilt indienen bij OLX, kun je ons de advertenties sturen in XML- of CSV-indeling. De advertenties worden gratis gepubliceerd en regelmatig bijgewerkt.',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location'
