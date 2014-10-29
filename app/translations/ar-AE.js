@@ -3,6 +3,7 @@
 module.exports = {
     'biderrorheader.Help': '\u0645\u0633\u0627\u0639\u062F\u0629',
     'biderrorheader.My OLX': '\u0628\u0644\u062F\u064A OLX',
+    'biderrorheader.Or': '\u0623\u0648',
     'buyerinfo.E-mail': '\u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0627\u0644\u0643\u062A\u0631\u0648\u0646\u064A',
     'countryoptions.AllDepartaments': 'All Departments',
     'countryoptions.ChangeCity': 'Change City',
@@ -99,6 +100,8 @@ module.exports = {
     'netvibes_myolx.content.NoActiveListings': '\u062D\u0627\u0644\u064A\u0627 \u0644\u064A\u0633 \u0639\u0646\u062F\u0643 \u0623\u0639\u0644\u0627\u0646\u0627\u062A \u0639\u0627\u0645\u0627\u0629 ',
     'netvibes_myolx.content.Views': '\u0632\u064A\u0627\u0631\u0627\u062A',
     'supportform.Message': '\u0631\u0633\u0627\u0644\u0629 ',
+    'supportform.Reset': '\u0627\u0644\u063A\u0627\u0621 ',
+    'seccion-30.478': '',
     'distancediv.changeLocation': '\u062A\u063A\u064A\u0631 \u0645\u0646\u0637\u0642\u0629 ',
     'postingtitlelisting.view': '\u062A\u0633\u062A\u0637\u064A\u0639 \u0645\u0634\u0627\u0647\u062F\u062A \u0627\u0639\u0644\u0627\u0646\u0643',
     'posting_selector.SelectCategory': '\u0627\u062E\u062A\u0631 \u0645\u0631\u062A\u0628\u0629 ',
@@ -111,6 +114,7 @@ module.exports = {
     'posting_selectcategory.categories': '\u0645\u0631\u062A\u0628\u0629 ',
     'posting_selectcategory.subCategories': '\u0642\u0628\u0644 \u0627\u0644\u0645\u0631\u062A\u0628\u0629 ',
     'posting_optionallist.Kms': 'Kms',
+    'posting_optionallist.other': 'Other',
     'itemgeneraldetails.addFavorites': '\u0623\u0636\u0627\u0641\u0629 \u0644\u0644\u0645\u0641\u0636\u0644\u0627\u062A ',
     'itemgeneraldetails.BackResults': '\u0631\u062C\u0648\u0639 \u0644\u0644\u0646\u062A\u0627\u0626\u062C',
     'itemgeneraldetails.City': '\u0645\u062F\u064A\u0646\u0629 ',
@@ -158,6 +162,7 @@ module.exports = {
     'register_form.termsAgreeB': '\u062A\u0641\u0627\u0647\u0645 \u0648\u0634\u0631\u0648\u0637 ',
     'myolx.ApprovalPending': 'Approval pending',
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Are you sure you want to close the selected listings?',
+    'myolx.BackToMyAds': '\u0631\u062C\u0648\u0639 \u0627\u0644\u0649 \u0644\u0627\u0626\u062D\u062A\u064A ',
     'myolx.EditListing': 'Edit Listing',
     'myolx.Messages': 'Messages',
     'myolx.MyAds': '\u0628\u0644\u062F\u064A \u0646\u062A\u0627\u0626\u062C',
@@ -261,5 +266,10 @@ module.exports = {
     'contact_us.ContactBrand': 'Contact OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'If you have lots of listings you want to submit to OLX, you can use an XML feed.',
     'business_directory.Map': 'Map',
-    'optionals.opt-138-323-translation-location': 'Location'
+    'optionals.opt-138-323-translation-location': 'Location',
+    'posting_removedsurvey.RemovedAdSurvey': 'To complete the removal, please tell us why you are removing this ad:',
+    'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Sold it through OLX',
+    'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Sold it through another service',
+    'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Decided not to sell it',
+    'posting_removedsurvey.WarningAdToBeRemoved': 'Your ad is about to be removed from OLX'
 };
