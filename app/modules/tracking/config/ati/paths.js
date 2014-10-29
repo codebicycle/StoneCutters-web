@@ -36,13 +36,13 @@ module.exports = {
     },
     staging: {
         'default': {
-            siteId: 533932,
-            logServer: 'logw306',
-            secureLogServer: 'logws306'
+            siteId: 537448,
+            logServer: 'logw269',
+            secureLogServer: 'logws269'
         },
         desktop: {
-            siteId: 522546,
-            logServer: 'logw306'
+            siteId: 537448,
+            logServer: 'logw269'
         }
     },
     //Argentina+
