@@ -1,21 +1,21 @@
 .page-notfound {
     clear-fix();
     img {
-        margin: 20px auto 0;
         display: block;
+        margin: 20px auto 0;
     }    
     .message {
         color: $greyStrong;
         font-size: $l;
         font-weight: normal;
-        text-align: center;
         margin: 20px 0 50px; 
+        text-align: center;
     }
     h3 {
         font-size: $xl;
         font-weight: normal;
-        text-align: center;
         margin-bottom: 20px;
+        text-align: center;
     }
     ul {
         ul-reset();
@@ -32,25 +32,25 @@
         }
     }
     .search-form {
-        text-align: center;
         display: inline;
+        text-align: center;
         fieldset {
+            margin: 0 auto;
             position: relative;
             width: 317px;
-            margin: 0 auto;
             &::before,
             &::after {
-                content: "";
-                position: absolute;
-                height: 5px;
                 border-bottom: 1px solid #ccc;
+                content: "";
+                height: 19px;
+                height: 5px;
+                position: absolute;
                 top: 0;
                 width: 295px;
-                height: 19px;
             }
             &::before {
-                right: 100%;
                 margin-right: 15px;
+                right: 100%;
             }
             &::after {
                 left: 100%;
