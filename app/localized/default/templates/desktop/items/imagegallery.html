@@ -1,14 +1,16 @@
 <div id="image-gallery" class="image-gallery">
     <figure id="image-viewer" class="image-viewer image-wrapper">
         {% if item.images.length > 0 %}
-            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image" />
+            <img src="{{ item.images[0].url }}" alt="" title="" class="item-image" data-gallery-image />
         {% endif %}
     </figure>
-    <div class="image-navigator">
+    <div class="image-navigator" data-gallery-navigator >
         <a href="#" class="icons icon-arrow-up arrow-prev"></a>
-        {% for image in item.images %}
-            <figure class="{{ 'active' if loop.first }}"><a href="#" class="image-wrapper"><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" class="item-image" ></a></figure>
-        {% endfor %}
+        <div class="thumbnail">
+            {% for image in item.images %}
+                <figure class="{{ 'active' if loop.first }}" data-gallery-thumb ><a href="#" class="image-wrapper"><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" class="item-image" ></a></figure>
+            {% endfor %}
+        </div>
         <a href="#" class="icons icon-arrow-down arrow-next"></a>
     </div>
 </div>

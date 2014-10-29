@@ -1,6 +1,10 @@
-<div id="item-price" class="item-price">
-    {% if item.price.displayPrice %}
-        <p class="price">{{ item.price.displayPrice }}</p>
-    {% endif %}
-    <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
-</div>
+{% if item.price or item.priceTypeData %}
+    <div id="item-price" class="item-price">
+        {% if item.price.displayPrice %}
+            <p class="price">{{ item.price.displayPrice }}</p>
+        {% endif %}
+        {% if item.priceTypeData %}
+            <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
+        {% endif %}
+    </div>
+{% endif %}
