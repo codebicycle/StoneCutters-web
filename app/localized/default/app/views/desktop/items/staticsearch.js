@@ -1,7 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
+var Base = require('../../../../../common/app/bases/view').requireView('items/staticsearch');
 var filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
 var order = ['parentcategory','state','city'];
@@ -20,19 +19,14 @@ module.exports = Base.extend({
        // var list = filters.orderFilters(order, data.metadata.filters);
         var link = this.app.session.get('path');
 
-        _.each(data.items, this.processItem);
-
         return _.extend({}, data, {
-            items: data.items,
             nav: {
                 link: link,
                 listAct: 'active',
             }
         });
     },
-    processItem: function(item) {
-        item.date.since = helpers.timeAgo(item.date);
-    },
+    
     toogleFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -72,5 +66,3 @@ module.exports = Base.extend({
 
     }
 });
-
-module.exports.id = 'items/staticsearch';

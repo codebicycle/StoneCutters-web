@@ -1,4 +1,4 @@
-
+{% set isStaticSearch = true %}
 STATIC SEARCH!
 <nav id="listing-filters">
     {% include (template + '/items/filters.html') %}
@@ -7,28 +7,7 @@ STATIC SEARCH!
 <section id='listing-items'>
 
     <ul class="items-list">
-        {% for item in items %}
-        <li>
-            <a href="{{ item | slugToUrl | link }}" data-qa="item-list" >
-                <figure class="items-image {{ 'lines' if item.thumbnail else 'icons icon-photo' }}">
-                    {% if item.thumbnail %}
-                    <img src="{{ item.thumbnail }}">
-                    {% endif %}
-                </figure><p
-                    class="items-info">
-                {{ item.title }}<br>
-
-                <b>{{ item.description.substring(0,210) }}...</b>
-            </p><p
-                    class="items-price">
-                {{ item.price.displayPrice }}
-            </p><p
-                    class="items-date">
-                {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', <br>' + item.date.since.hour) if item.date.since.hour }}
-            </p>
-            </a>
-        </li>
-        {% endfor %}
+        {% include (template + '/items/items.html') %}
     </ul>
 
     {% if metadata.next or metadata.previous %}
