@@ -37,12 +37,12 @@ module.exports = {
     staging: {
         'default': {
             siteId: 537448,
-            logServer: 'logw269',
-            secureLogServer: 'logws269'
+            logServer: 'logc269',
+            secureLogServer: 'logc269'
         },
         desktop: {
             siteId: 537448,
-            logServer: 'logw269'
+            logServer: 'logc269'
         }
     },
     //Argentina+
