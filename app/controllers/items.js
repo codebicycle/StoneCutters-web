@@ -696,7 +696,7 @@ function search(params, callback, isGallery) {
         var query;
         var url;
 
-        var configute = function(done) {
+        var configure = function(done) {
             url = ['/nf/'];
 
             if (params.categoryId) {
@@ -808,7 +808,7 @@ function search(params, callback, isGallery) {
         }.bind(this);
 
         asynquence().or(error)
-            .then(configute)
+            .then(configure)
             .then(prepare)
             .then(redirect)
             .then(fetch)
