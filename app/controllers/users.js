@@ -9,6 +9,7 @@ var config = require('../../shared/config');
 
 module.exports = {
     register: middlewares(register),
+    success: middlewares(success),
     login: middlewares(login),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
@@ -39,6 +40,16 @@ function register(params, callback) {
             form: form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
+function success(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
         });
     }
 }

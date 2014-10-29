@@ -4,6 +4,9 @@ module.exports = {
     'users#register': {
         url: 'register'
     },
+    'users#success': {
+        url: 'register/success'
+    },
     'users#login': {
         url: 'login'
     },

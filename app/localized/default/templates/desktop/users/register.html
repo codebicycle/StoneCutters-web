@@ -1,0 +1,40 @@
+<h4 class="title">{{ dictionary["loginbox.Register"] }}</h4>
+<form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
+
+    <fieldset class="wrapper username">
+        <label class="login-label">{{ dictionary["messages_email_register.Username"] }}:</label>
+        <div class="wrapper-inputs">
+            <input class="text-field" type="text" name="username" data-qa="username-field">
+            <small class="advice username"></small>
+        </div>
+    </fieldset>
+
+    <fieldset class="wrapper email">
+        <label class="login-label">{{ dictionary["comments.CommentsFormEmail"] }}</label>
+        <div class="wrapper-inputs">
+            <input class="text-field" type="text" name="email" data-qa="email-field" >
+            <small class="advice email"></small>
+            <span class="info">{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</span>
+        </div>
+    </fieldset>
+
+    <fieldset class="wrapper password">
+        <label class="login-label">{{ dictionary["messages_email_register.Password"] }}:</label>
+        <div class="wrapper-inputs">
+            <input class="text-field" type="password" name="password" data-qa="password-field">
+            <small class="advice password"></small>
+        </div>
+    </fieldset>
+
+    <fieldset class="wrapper accept">
+        <div class="wrapper-inputs">
+            <label class="terms"><input type="checkbox" name="agreeTerms" class="checkbox" checked="true" data-qa="agree-terms-checkbox">{{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>", (["<a href='" , "/terms" | link, "'>"] | join(''))) | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}</label>
+            <small class="advice terms">{{ dictionary["register_confirmation.782"] }}</small>
+        </div>
+    </fieldset>
+
+    <fieldset class="wrapper">
+        <input type="submit" value="{{ dictionary["loginbox.Register"] }}" class="posting send" data-qa="registrate-button" >
+    </fieldset>
+</form>
+<a class="login" href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
