@@ -59,9 +59,7 @@
     }
 
     .my-items {
-        background: $white;
-        border-radius: 0 0 3px 3px;
-        border: 1px solid $greyBorders;
+        box($white, $greyBorders,0 0 3px 3px, 0,solid , 1px);
         margin-top: 0;
         padding: 0;
         width: 100%;
@@ -182,20 +180,22 @@
                     font-weight: bold;
                 }
             }
+
+            &:last-child {
+                border-bottom: none;
+            }
         }
 
-        &:last-child {
-            border-bottom: none;
-        }
+
 
         .expired, .deleted, .rejected, .pending {
             .image {
 
                 .status {
-                    background: $greyStrong;
+                    background: $greyBorders;
 
                     &:after {
-                        border-color: $greyStrong transparent $greyStrong $greyStrong;
+                        border-color: $greyBorders transparent $greyBorders $greyBorders;
                     }
 
                     &:before {
@@ -217,12 +217,14 @@
             }
         }
         .expired {
-            opacity: .5;
+            .image {
+                opacity: .5;
+            }
         }
         .deleted {
-            opacity: .5;
-
             .image {
+                opacity: .5;
+
                 .status {
                     background: $greyStrong;
 
@@ -239,9 +241,9 @@
         .rejected {
             .image {
                 .status {
-                    background: #D51E34;
+                    background: $red;
                     &:after {
-                        border-color: #D51E34 transparent #D51E34 #D51E34;
+                        border-color: $red transparent $red $red;
                     }
                     &:before {
                         border-color: #7E2235 transparent;
@@ -268,12 +270,13 @@
 
     .buttons {
         .btn {
-            action-button($white, $black, 3px, 5px 20px);
+            action-button($greyBoxBg, $black, 3px, 5px 20px);
             margin-right: 5px;
             text-align: left;
             font-size: 14px;
             float: left;
-            box-shadow(0 0.5px 0 rgba(0,0,0,0.4))
+            line-height: 1.5;
+            box-shadow(0 1px 0 rgba(255,255,255,0.2) inset)
 
             &:before {
                 line-height: 1.5;
@@ -290,6 +293,7 @@
         font-size: $l;
         padding: 40px 0;
         text-align: center;
+        color: $greyStrong;
     }
 
     .removeAd {

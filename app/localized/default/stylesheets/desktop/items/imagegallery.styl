@@ -28,33 +28,37 @@
     }
 
     .image-navigator {
-       float: right;
-       height: 402px;
-       padding: 0 3px;
-       width: 60px;
-
-        figure {
-            margin: 0 0 10px;
-        }
-
-        .icon-arrow-down,
-        .icon-arrow-up {
+        float: right;
+        height: 402px;
+        width: 66px;
+        .icons {
             border: 1px solid $greyBorders;
             color: $greyStrong;
             display: block;
             text-align: center;
         }
+        .thumbnail {
+            max-height: 366px;
+            overflow-y: hidden;
 
-        .icon-arrow-up + figure {
-            margin: 10px 0;
-
-        }
-        .active {
-            outline: 3px solid $blue;
-        }
-        .image-wrapper {
-            display: block;
-            height: 60px;
+            figure {
+                margin: 0 auto 10px;
+                width: 60px;
+                &:first-child {
+                    margin-top: 10px;
+                }
+            }
+            .active {
+                outline: 3px solid $blue;
+                a {
+                    border: 0 none;
+                }
+            }
+            .image-wrapper {
+                display: block;
+                height: 60px;
+                width: 60px;
+            }
         }
     }
 }

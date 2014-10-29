@@ -696,7 +696,7 @@ function search(params, callback, isGallery) {
         var query;
         var url;
 
-        var prepareUrl = function(done) {
+        var configure = function(done) {
             url = ['/nf/'];
 
             if (params.categoryId) {
@@ -731,8 +731,15 @@ function search(params, callback, isGallery) {
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
 
+            done();
+        }.bind(this);
+
+        var redirect = function(done) {
             if (!query.search || _.isEmpty(query.search.trim())) {
                 done.abort();
+                if (platform === 'desktop') {
+                    return helpers.common.redirect.call(this, '/nf/all-results');
+                }
                 return callback(null, {
                     search: '',
                     metadata: {
@@ -801,8 +808,9 @@ function search(params, callback, isGallery) {
         }.bind(this);
 
         asynquence().or(error)
-            .then(prepareUrl)
+            .then(configure)
             .then(prepare)
+            .then(redirect)
             .then(fetch)
             .then(paginate)
             .val(success);
@@ -1109,7 +1117,7 @@ function staticSearch(params, callback) {
 
             tracking.addParam('page_nb', metadata.totalPages);
 
-            callback(null, 'items/search', {
+            callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
                 metadata: metadata,
                 search: query.search,

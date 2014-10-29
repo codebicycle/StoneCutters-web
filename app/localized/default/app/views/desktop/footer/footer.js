@@ -33,5 +33,3 @@ module.exports = Base.extend({
         $('.' + element.attr('data-footer-slideDown')).slideToggle();
     },
 });
-
-module.exports.id = 'footer/footer';

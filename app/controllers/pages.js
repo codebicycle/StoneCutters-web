@@ -18,7 +18,8 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
-    featured_listings: middlewares(featuredListings)
+    featured_listings: middlewares(featuredListings),
+    php: middlewares(php)
 };
 
 function terms(params, callback) {
@@ -187,7 +188,7 @@ function allstates(params, callback) {
 function sitemap(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    function controller() {        
+    function controller() {
         callback(null, {
             tracking: tracking.generateURL.call(this)
         });
@@ -202,4 +203,9 @@ function featuredListings(params, callback) {
 
         });
     }
+}
+
+function php(params, callback) {
+    statsd.increment(['redirections', 'php', this.app.session.get('path')]);
+    helpers.common.redirect.call(this, '/');
 }

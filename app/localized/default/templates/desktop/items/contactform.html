@@ -10,26 +10,20 @@
         <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
         <fieldset class="comment">
             <label for="comment">
-                <span class="icons">
-                    <textarea id="comment" class="comment" name="comment" cols="30" rows="6" placeholder="{{ dictionary["supportform.Message"] | replace(':','') }} "></textarea>
-                </span>
+                <textarea id="comment" class="comment" name="comment" cols="30" rows="6" placeholder="{{ dictionary["supportform.Message"] | replace(':','') }} "></textarea>
                 <span class="error hide comment"></span>
             </label>
         </fieldset>
         <fieldset class="name">
             <label for="name">
-            <span class="icons">
                 <input type="text" name="name" id="name" class="name" value="" maxlength="200" placeholder="{{ dictionary["comments.CommentsFormName"] }} ">
-            </span>
-            <span class="error hide name"></span>
+                <span class="error hide name"></span>
             </label>
         </fieldset>
         <fieldset  class="email">
             <label for="email">
-            <span class="icons">
                 <input type="text" name="email" id="email" class="email" value="" maxlength="200" placeholder="{{ dictionary["buyerinfo.E-mail"] }} ">
-            </span>
-            <span class="error hide email"></span>
+                <span class="error hide email"></span>
             </label>
         </fieldset>
         <fieldset>
