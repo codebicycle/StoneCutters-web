@@ -2,14 +2,15 @@
     <div class="social-sharing">
         <p>{{ dictionary["itemslisting.NewShareThisAd"] }} :</p>
         <ul>
-            <li class="button-fb">
+            <li class="button-fb" data-share-facebook data-share-url="{{ item.slug }}" >
                 <a href="#" class="icons icon-facebook"></a>
             </li>
-            <li class="button-twitter">
+            <li class="button-twitter" data-share-twitter data-share-url="{{ item.slug }}" data-share-title="{{ item.title }}">
                 <a href="#" rel="nofollow" class="icons icon-twitter"></a>
             </li>
-            <li class="button-googleplus">
-                <a href="#" class="icons icon-googleplus"></a>
+            <li class="button-googleplus" data-share-gplus data-share-url="{{ item.slug }}" >
+                <a href="#" rel="nofollow" class="icons icon-googleplus"></a>
+                {# <a class="icons icon-googleplus" href="https://plus.google.com/share?url={{ item.slug }}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a> #}
             </li>
         </ul>
     </div>
