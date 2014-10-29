@@ -7,10 +7,10 @@ module.exports = Base.extend({
     tagName: 'header',
     id: 'header-view',
     className: 'header-view',
-    postRender: function() {
+    postRender: function () {
     	this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
     },
     onPostingStart: function () {
-    	$('.posting').addClass('disabled');
+		$('.posting').addClass('disabled');
     }
 });
