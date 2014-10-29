@@ -44,10 +44,6 @@ module.exports = Base.extend({
         this.$('.formdeleteitem').find('#idd').val(itemId);
         this.$('.formdeleteitem').show();
 
-        /*var data = Base.prototype.getTemplateData.call(this);
-        var key = data.dictionary['myolx.AreYouSureYouWantToCloseSelectedListings'];
-        if(!confirm(key)){
-        }*/
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -55,9 +51,9 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $form = $(event.target);
-        var reason=this.$('.formdelete input[name="close_reason"]:checked').val();
-        var reason_comment=this.$('.formdelete input[name="close_comment"]').val();
-        var idd=this.$('.formdelete #idd').val();
+        var reason = this.$('.formdelete input[name="close_reason"]:checked').val();
+        var reason_comment = this.$('.formdelete input[name="close_comment"]').val();
+        var idd = this.$('.formdelete #idd').val();
         var user = this.app.session.get('user');
         var _params;
 
