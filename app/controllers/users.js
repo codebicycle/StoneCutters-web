@@ -148,12 +148,12 @@ function myads(params, callback) {
                 token: user.token,
                 userId: user.userId,
                 location: this.app.session.get('siteLocation'),
+                languageCode: this.app.session.get('selectedLanguage'),
                 item_type: 'myAds'
             }, params);
 
             done();
         }.bind(this);
-
         var findAds = function(done) {
             this.app.fetch({
                 myAds: {

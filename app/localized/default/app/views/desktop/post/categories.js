@@ -11,6 +11,7 @@ module.exports = Base.extend({
     id: 'posting-categories-view',
     className: 'posting-categories-view wrapper',
     events: {
+        'click .posting-categories-list a.category': 'onCategoryClick',
         'click .child-categories-list a': 'onSubCategoryClick'
     },
     getTemplateData: function() {
@@ -28,6 +29,13 @@ module.exports = Base.extend({
         var subcategory = $(event.currentTarget);
         var subcategoryId = subcategory.data('id');
         var categoryId = subcategory.parents('.subcategories').siblings('.category').data('id');
+
+        $('a.category').removeClass('select');
+        $('a.subcategory').removeClass('select icon-check');
+        subcategory.addClass('select icon-check');
+        $('.category[data-id="' + categoryId + '"]').addClass('select');
+        $('.child-categories-list').removeClass('select');
+        $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
 
         var fetch = function(done) {
             $('body > .loading').show();
@@ -75,6 +83,18 @@ module.exports = Base.extend({
             .then(fetch)
             .then(track)
             .val(success);
+    },
+    onCategoryClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+
+        $('a.category').removeClass('active');
+        $('.child-categories-list').addClass('hide');
+        $target.addClass('active');
+        $('.child-categories-list[data-id="' + $target.data('id') + '"]').removeClass('hide');
     }
 });
 
