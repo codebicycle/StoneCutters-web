@@ -1,8 +1,4 @@
-{% from macros import FieldText, FieldTextArea, FieldCombobox, FieldText2, FieldTextArea2 %}
+{% from macros import Field %}
 {% for field in fields %}
-    {% if field.fieldType == 'text' %}
-		{{ FieldText2(name = field.name, label = field.label, mandatory = field.mandatory, validate = true) }}
-	{% elif field.fieldType == 'combobox' %}
-        {{ FieldCombobox(field.label, field.name, field.mandatory, field.values, form) }}
-    {% endif %}
+	{{ Field(field) }}
 {% endfor %}

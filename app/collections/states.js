@@ -4,7 +4,7 @@ var Base = require('../bases/collection');
 var State = require('../models/state');
 
 module.exports = Base.extend({
-    model: State
+    model: State,
     url: '/countries/:location/states',
     parse: function(response) {
         if (response && response.data) {

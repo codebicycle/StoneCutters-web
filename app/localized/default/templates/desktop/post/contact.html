@@ -1,12 +1,52 @@
-{% from macros import FieldText, FieldTextArea, FieldCombobox, FieldText2, FieldTextArea2 %}
-<h2 class="title-module">{{ dictionary["posting_step4.ContactInformation"] }}</h2>
-{{ FieldText2(name = 'contactName', label = dictionary["itemslisting.NewContactName"], mandatory = true, validate = true, advice = dictionary["posting_changecategorymod.ValidationError"]) }}
-{{ FieldText2(type = 'email', name = 'email', label = dictionary["messages_browse_notify_friend.ErrorMail"], mandatory = true, validate = true, advice = dictionary["contactseller_form.CompleteYourEmail"]) }}
-<!-- <small class="advice icons icon-lock">this should have icon</small> -->
-{{ FieldText2(type = 'tel', name = 'phone', label = dictionary["contactseller_reply_mail.ContactPhone"], placeholder = dictionary['seccion-40.274'], mandatory = true, validate = true) }}
+{% from macros import Field %}
+
+<h2 class="section-title">{{ dictionary["posting_step4.ContactInformation"] }}</h2>
+
+{% set contactNameField = {
+	isOptional: false,
+	name: "contactName",
+	mandatory: true,
+	label: "Nombre de contacto",
+	fieldType: "text",
+	dataType: "string"
+} %}
+
+{% set emailField = {
+	isOptional: false,
+	name: "email",
+	mandatory: true,
+	label: "Email",
+	fieldType: "text",
+	dataType: "string"
+} %}
+
+{% set phoneField = {
+	isOptional: false,
+	name: "phone",
+	mandatory: false,
+	label: "Número de Teléfono",
+	fieldType: "text",
+	dataType: "string"
+} %}
+
+{% set adressField = {
+	isOptional: true,
+	name: "streetAddress",
+	mandatory: false,
+	label: "Dirección exacta",
+	fieldType: "text",
+	dataType: "string"
+} %}
+
+{{ Field(contactNameField) }}
+{{ Field(hint = dictionary["posting_fields_1.YourEmailAddressWontBeShared"], emailField) }} <!-- <small class="advice icons icon-lock">this should have icon</small> -->
+{{ Field(phoneField) }}
+{{ Field(adressField) }}
+
 {% view 'post/locations' %}
+
 <fieldset class="seller-post">
-    <input id="seller-remember" type="checkbox" checked />
-    <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" >
-    <small class="advice">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a href="/terms">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>    
+    <!--<input id="seller-remember" type="checkbox" checked />--> <!-- LABEL HERE -->
+    <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" />
+    <small class="hint message">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a href="/terms">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>    
 </fieldset>

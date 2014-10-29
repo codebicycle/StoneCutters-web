@@ -2,7 +2,7 @@
 	box($white, $greyBorders , 3px, 8px 0, solid, 1px);
 	margin: 0 0 10px 0;
 }
-
+/*
 .posting-view {
 	fieldset {
 		border: none;
@@ -71,6 +71,128 @@
 	.wrapper-inputs {
 		float: left;
 		position: relative;
+	}
+
+}*/
+
+.posting-view {
+
+	.field-wrapper {
+
+		clear-fix();
+		margin: 0;
+		padding: 10px;
+		border: none;
+		
+		&.focus {
+
+			background: $yellowPosting;
+
+		}
+		
+		&.error {
+
+			.field-label {
+
+				color: $red;
+
+			}
+			
+			.text-field {
+
+				border-color: $red;
+
+			}
+
+		}
+		
+		&.success {
+		
+			.text-field {
+		
+				border-color: $green;
+				color: $black;
+		
+			}
+		
+		}
+
+	}
+	
+	.field-label {
+
+		float: left;
+		width: 170px;
+		padding: 10px 20px 10px 0;
+		font-size: $s;
+		line-height: $m
+		text-align: right;
+
+	}
+
+	.field-controls {
+
+		float: left;
+		width: 440px;
+
+	}
+
+	.text-field {
+
+		box-sizing: border-box;
+		width: 100%;
+		
+		&.validating {
+			background: transparent url(imageUrl/images/desktop/validating.gif) no-repeat 412px 10px;
+		}
+		
+	}
+	
+	.type-text {
+
+		
+		
+	}
+
+	.type-textarea {
+
+		
+		
+	}
+
+	.type-select {
+
+		background: $white;
+
+	}
+	
+	.message {
+
+		display: block;
+		margin: 5px 0 0;
+		font-size: $xs;
+
+		&.hint {
+
+			color: $greyStrong;
+
+		}
+		
+		&.error {
+
+			color: $red;
+
+		}
+
+	}
+	
+	.section-title {
+		
+		padding: 20px;
+		margin: 0 0 15px;
+		border-bottom: thin solid $greyBorders;
+		font-size: $xl;
+		
 	}
 
 }

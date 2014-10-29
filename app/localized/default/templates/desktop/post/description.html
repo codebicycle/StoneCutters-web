@@ -1,16 +1,19 @@
-{% from macros import FieldText, FieldTextArea, FieldCombobox, FieldText2, FieldTextArea2 %}
-
-{{ FieldText2(name = 'title', label = 'Titulo', mandatory = true, validate = true, advice = '0 caracteres. Un buen título precisa de por lo menos 60 caracteres.') }}
-
-{{ FieldTextArea2(name = 'description', label = 'Descripción de tu anuncio', mandatory = true, validate = true) }}
-
-<fieldset class="wrapper">
-    <label for="price" class="posting-label">* Precio</label>
-    <div class="wrapper-inputs">
-        <input id="price" class="text-field" type="text" placeholder="$" name="priceC" required />
-        <div class="wrapper-inner-inputs">
-            <input id="price-option" type="checkbox" />
-            <label for="price-option" class="price-checkbox-label">Negociable</label>
-        </div>
-    </div><!-- Maybe we should discuss this naming -->
-</fieldset>
+{% from macros import Field %}
+{% set titleField = {
+	dataType: "string",
+	fieldType: "text",
+	isOptional: "false",
+	label: "Título",
+	mandatory: "true",
+	name: "title"
+} %}
+{% set descriptionField = {
+	dataType: "string",
+	fieldType: "text",
+	isOptional: "false",
+	label: "Descripción de tu anuncio",
+	mandatory: "true",
+	name: "description"
+} %}
+{{ Field(hint = '0 caracteres. Un buen título precisa de por lo menos 60 caracteres.', titleField) }}
+{{ Field(descriptionField) }}

@@ -34,7 +34,7 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     fieldFocus: function(event) {
-        $(event.currentTarget).closest('.wrapper').toggleClass('input-focus');
+        $(event.currentTarget).closest('.field-wrapper').toggleClass('focus');
     },
     onSubcategorySubmit: function(event, subcategory) {
         event.preventDefault();
@@ -54,6 +54,7 @@ module.exports = Base.extend({
         this.pendingValidations = [];
 
         this.$('#posting-optionals-view').trigger('fieldsChange', [subcategory.fields.categoryAttributes, subcategory.parentId, subcategory.id, true]);
+        this.$('#posting-price-view').trigger('fieldsChange', [subcategory.fields.productDescription]);
     },
     onFieldSubmit: function(event, field) {
         event.preventDefault();
@@ -88,20 +89,20 @@ module.exports = Base.extend({
     onFieldValidationStart: function(event) {
         var $field = $(event.target).addClass('validating');
         
-        $field.siblings('.error.advice').remove();
+        $field.siblings('.error.message').remove();
         this.validateField($field);
     },
     onFieldValidationEnd: function(event, errors) {
         var $field = $(event.target).removeClass('validating');
         
         if (errors) {
-            $field.closest('.wrapper').addClass('error').removeClass('success');
+            $field.closest('.field-wrapper').addClass('error').removeClass('success');
             _.each(errors, function eachError(error) {
-                $field.after('<small class="advice error">' + error.message + '</small>');
+                $field.after('<small class="error message">' + error.message + '</small>');
             });
         }
         else {
-            $field.closest('.wrapper').removeClass('error').addClass('success');
+            $field.closest('.field-wrapper').removeClass('error').addClass('success');
         }
     },
     validateField: function($field) {
