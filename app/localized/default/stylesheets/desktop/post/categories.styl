@@ -19,7 +19,7 @@
 		display: block;
 		padding: 7px 10px;
 
-		&:hover {
+		&:hover, &.active {
 			background: $blue;
 			color: $white;
 			text-decoration: none;
@@ -30,17 +30,9 @@
 		}
 	}
 
-	li {
-
-		&:hover .child-categories-list {
-			display: block;
-		}
-	}
-
 	.child-categories-list {
 		background: $white;
 		border-left: 3px solid $blue;
-		display: none;
 		max-height: 100%;
 		left: 100%;
 		overflow-y: auto;
