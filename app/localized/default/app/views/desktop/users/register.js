@@ -1,9 +1,8 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('users/register');;
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
-var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     className: 'users_register_view',
@@ -24,5 +23,3 @@ module.exports = Base.extend({
     }
 
 });
-
-module.exports.id = 'users/register';
