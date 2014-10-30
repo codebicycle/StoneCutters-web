@@ -17,8 +17,8 @@ module.exports = {
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'staging',
-        staticPath: 'http://static-staging.olx-st.com/mobile-webapp',
-        imagePath: 'http://images-staging.olx-st.com/mobile-webapp'
+        staticPath: 'http://static01.olx-st.com/mobile-webapp',
+        imagePath: 'http://images01.olx-st.com/mobile-webapp'
     },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],

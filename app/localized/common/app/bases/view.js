@@ -56,7 +56,7 @@ module.exports = Base.extend({
     },
     track: function(data, callback, options) {
         var obj = {
-            url: helpers.common.static('/images/common/gif1x1.gif')
+            url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
         };
         var tracking = {};
         var $img = $('img.analytics');

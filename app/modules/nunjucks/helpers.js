@@ -175,7 +175,9 @@ module.exports = function(nunjucks) {
         log: function() {
             console.log.apply(console, arguments);
         },
-        'static': helpers.common.static,
+        static: function() {
+            return helpers.common.static.apply(this.ctx, arguments);
+        },
         slugToUrl: helpers.common.slugToUrl
     };
 };
