@@ -211,7 +211,7 @@
             </ul>
         </div>
         <div class="popular-column popular-cities">
-            <h3 class="title">{{ dictionary["countryoptions.OtherCitiesInRegion"] }}</h3>
+            <h3 class="title">{{ dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>', location.name) }}</h3>
             <ul>
                 <li>
                     <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
