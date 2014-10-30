@@ -46,10 +46,11 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+
         var query = {
             withConfirmation: true
         };
-        console.log(this.validTerms());
+
         var post = function(done) {
             helpers.dataAdapter.post(this.app.req, '/users', {
                 query: query,
@@ -61,32 +62,36 @@ module.exports = Base.extend({
 
         var fail = function(err) {
             // TODO: Improve error handling
+            always();
             if (err) {
                 if (err.responseText) {
                     err = JSON.parse(err.responseText);
                 }
                 if (_.isArray(err)) {
-                    console.log(err);
                     this.$el.trigger('errors', [err]);
                 }
             }
         }.bind(this);
 
-        var success = function(item) {
+        var always = function() {
+            $('body').removeClass('submit');
+        }
 
+        var success = function(item) {
+            always();
             helpers.common.redirect.call(this.app.router, '/register/success', null, {
                 status: 200
             });
 
         }.bind(this);
 
-        if (this.validTerms()) {
+        if (this.validTerms() && !$('body').hasClass('submit')) {
+            $('body').addClass('submit');
             this.termsErrors(this.validTerms());
             asynquence().or(fail)
                 .then(post)
                 .val(success);
         }
-
         this.termsErrors(this.validTerms());
 
     },
