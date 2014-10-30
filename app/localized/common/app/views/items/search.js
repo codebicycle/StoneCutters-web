@@ -145,7 +145,6 @@ module.exports = Base.extend({
             delete params.search;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             done(params);
         }
