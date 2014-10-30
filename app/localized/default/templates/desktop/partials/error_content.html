@@ -2,13 +2,7 @@
     <p class="message">
         {{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}
     </p>
-    <h3>Encuentra lo que estás buscando</h3>
-    {% if error %}
-        <div>
-            <h2>{{ error.statusCode }}</h2>
-            <pre style="display: block; margin: 0;">{{ error.detail }}</pre>
-        </div>
-    {% endif %}
+    <h3>Encuentra lo que estás buscando</h3>   
     {% view 'partials/search' %}
     <ul class="category-list">
         {% for category in categories %}
