@@ -102,7 +102,7 @@
                         {% if status == 'expired' %}
                             <a href="" class="btn icons icon-repulish">Republicar</a>
                         {% endif %}
-                        <a href="" class="btn icons icon-trash">Eliminar de esta lista</a>
+                        <a href="" data-idd="{{ item.id }}" class="btn icons icon-trash btndelforever">Eliminar de esta lista</a>
                     {% endif %}
                 </div>
             </div>
