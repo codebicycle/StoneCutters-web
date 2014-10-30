@@ -175,10 +175,12 @@ module.exports = function(nunjucks) {
         log: function() {
             console.log.apply(console, arguments);
         },
-        'static': helpers.common.static,
-        slugToUrl: helpers.common.slugToUrl,
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
-        latinDigits: helpers.numbers.toLatin
+        latinDigits: helpers.numbers.toLatin,
+        static: function() {
+            return helpers.common.static.apply(this.ctx, arguments);
+        },
+        slugToUrl: helpers.common.slugToUrl
     };
 };
