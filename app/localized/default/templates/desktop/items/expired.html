@@ -8,7 +8,7 @@
 <div class="expired-item">
     <figure class="items-image {{ '' if item.images[0].thumbnail else 'icons icon-photo' }}">
         {% if item.images[0].thumbnail %}
-            <img src="{{ item.images[0].thumbnail }}">
+            <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
         {% endif %}
     </figure>
     <h3><span class="label">{{ dictionary["item.Ended_New"] }}</span>{{ item.title }}</h3>
