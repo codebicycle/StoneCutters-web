@@ -221,6 +221,7 @@ function show(params, callback) {
             seo.setContent(item.metadata.seo);
             if(item.metadata.itemPage.h1) {
                 seo.set('extendedTitle',item.metadata.itemPage.h1);
+                seo.set('h1',item.metadata.itemPage.h1);
             }
             if (!subcategory) {
                 _item.set('purged', true);

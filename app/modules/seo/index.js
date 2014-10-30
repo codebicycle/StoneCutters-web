@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var utils = require('../../../shared/utils');
 var config = require('../../../shared/config');
+var translations = require('../../../shared/translations');
 var configSeo = require('./config');
 var defaultConfig = config.get(['markets', 'common', 'seo']);
 var URLParser = require('url');
@@ -73,7 +74,6 @@ _.extend(SeoModule.prototype, {
             }
         }
     },
-
     initialize: function () {
         var country = this.app.session.get('location').url;
 
@@ -82,6 +82,7 @@ _.extend(SeoModule.prototype, {
         }
         this.config = config.get(['markets', country, 'seo'], defaultConfig);
         this.on('addMetatag', this.update.bind(this));
+        this.on('change:h1', this.onChangeH1.bind(this));
     },
     addMetatag: function (name, content) {
         var special = this._specials[name.toLowerCase()];
@@ -130,9 +131,28 @@ _.extend(SeoModule.prototype, {
         }
     },
     updateContent: function () {
-        if(this.seoContent.levelPath && this.seoContent.levelPath.wikititles) {
-           this.set('wikititles', this.seoContent.levelPath.wikititles );
+        if (this.seoContent.metas && this.seoContent.metas.topTitle) {
+            this.set('h1', this.seoContent.metas.topTitle);
         }
+        if (this.seoContent.levelPath) {
+            if (this.seoContent.levelPath.wikititles) {
+                this.set('wikititles', this.seoContent.levelPath.wikititles);
+            }
+            if (this.seoContent.levelPath.top) {
+                if (_.isArray(this.seoContent.levelPath.top)) {
+                    this.set('h1', this.seoContent.levelPath.top.pop().anchor + this.getLocationName(' - '));
+                    console.log("updating h1...");
+                }
+            }
+        }
+        if(this.app.session.get('currentRoute').action == 'staticSearch') {
+            var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+            var mycategory = 'SUPERCATEGORIA';
+            var myregion = 'SUPERREGION';
+            var h1;
+            //var h1 = dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion);
+        }
+        console.log(this.seoContent);
     },
     getLocationName: function (prefix) {
         var location;
@@ -165,6 +185,8 @@ _.extend(SeoModule.prototype, {
         this.setContent({});
     },
     setContent: function (content) {
+        console.log("SetContent:");
+        console.log(content);
         this.seoContent = content;
         this.updateContent();
     },
@@ -173,11 +195,18 @@ _.extend(SeoModule.prototype, {
             return this.seoContent[key];
         }
     },
-    set: function (key,value) {
+    set: function (key, value) {
         this.seoContent[key] = value;
+        this.trigger('change:' + key, value);
     },
     isEnabled: function () {
         return this.config.enabled;
+    },
+    onChangeH1: function (value) {
+        if (utils.isServer) {
+            return;
+        }
+        $('#header_keywords').text(value);
     }
 });
 

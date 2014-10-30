@@ -41,9 +41,11 @@ function list(params, callback) {
             var country = this.app.session.get('location').url;
             var categories = this.app.session.get('categories');
 
-            seo.setContent(categories.metadata.seo);
             seo.addMetatag('title', categories.metadata.title);
             seo.addMetatag('description', categories.metadata.description);
+            seo.setContent(categories.metadata.seo);
+            console.log(seo.get('h1'));
+
 
             callback(null, {
                 cities: response.cities.toJSON(),
@@ -77,7 +79,7 @@ function show(params, callback, isGallery) {
 
     function controller() {
         var seo = Seo.instance(this.app);
-
+      //  seo.set('h1',seo.get("levelPath").top.pop().anchor);
         var redirect = function(done){
             var categoryId = seo.getCategoryId(params.catId);
 
