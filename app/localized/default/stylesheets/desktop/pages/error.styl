@@ -21,11 +21,11 @@
         ul-reset();
     }
     .options {
-        box($yellowPosting, #e6e7ab, 3px, 15px, solid, 1px)
+        box($yellowPosting, $green, 3px, 15px, solid, 1px)
         margin: 20px auto;
         position: relative;
         width: 285px;
-        tab-arrow(bottom, #ffc, #e6e7ab, 1px, 18px, 90);
+        tab-arrow(bottom, $yellowPosting, $green, 1px, 18px, 90);
         &::before,
         &::after {
             left: 32px;
@@ -40,10 +40,9 @@
             width: 317px;
             &::before,
             &::after {
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid $greyBorders;
                 content: "";
                 height: 19px;
-                height: 5px;
                 position: absolute;
                 top: 0;
                 width: 295px;
