@@ -69,7 +69,7 @@ function showig(params, callback) {
     show.call(this, params, callback, '-ig');
 }
 
-function show(params, callback, isGallery) {
+function show(params, callback, gallery) {
     helpers.controllers.control.call(this, params, {
         seo: false,
         cache: false
@@ -81,9 +81,11 @@ function show(params, callback, isGallery) {
         var redirect = function(done){
             var categoryId = seo.getCategoryId(params.catId);
 
+            gallery = gallery || '';
+
             if (categoryId) {
                 done.abort();
-                return helpers.common.redirect.call(this, ['/cat-', categoryId, isGallery || ''].join(''));
+                return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
             }
             done();
         }.bind(this);
@@ -120,10 +122,10 @@ function show(params, callback, isGallery) {
                     return helpers.common.redirect.call(this, '/');
                 }
                 subcategory = category.get('children').get(params.catId);
-                handleItems.call(this, params, promise, isGallery || '');
+                handleItems.call(this, params, promise, gallery);
             }
             else if (platform === 'desktop') {
-                handleItems.call(this, params, promise, isGallery || '');
+                handleItems.call(this, params, promise, gallery);
             }
             else {
                 handleShow.call(this, params, promise);
@@ -147,43 +149,47 @@ function show(params, callback, isGallery) {
     }
 }
 
-function handleItems(params, promise, isGallery) {
+function handleItems(params, promise, gallery) {
     var seo = Seo.instance(this.app);
     var page = params ? params.page : undefined;
     var infiniteScroll = config.get('infiniteScroll', false);
-    var platform = this.app.session.get('platform');
     var category;
     var subcategory;
     var query;
     var url;
 
-    var prepare = function(done, _category, _subcategory) {
+    var configure = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
-        var slug;
-
-        isGallery = isGallery || '';
 
         category = _category;
         subcategory = _subcategory;
 
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         seo.reset(this.app, currentRouter);
+        done();
+    }.bind(this);
 
-        slug = helpers.common.slugToUrl((subcategory || category).toJSON());
+    var redirect = function(done) {
+        var platform = this.app.session.get('platform');
+        var slug = helpers.common.slugToUrl((subcategory || category).toJSON());
+
         url = ['/', slug].join('');
 
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
-            return helpers.common.redirect.call(this, [url, isGallery].join(''));
+            return helpers.common.redirect.call(this, [url, gallery].join(''));
         }
         if (slug.indexOf(params.title + '-cat-')) {
             done.abort();
             if (page === undefined || isNaN(page) || page <= 1) {
-                return helpers.common.redirect.call(this, [url, isGallery].join(''));
+                return helpers.common.redirect.call(this, [url, gallery].join(''));
             }
-            return helpers.common.redirect.call(this, [url, '-p-', page, isGallery].join(''));
+            return helpers.common.redirect.call(this, [url, '-p-', page, gallery].join(''));
         }
+        done();
+    }.bind(this);
 
+    var prepare = function(done) {
         helpers.pagination.prepare(this.app, params);
 
         query = _.clone(params);
@@ -194,7 +200,6 @@ function handleItems(params, promise, isGallery) {
         delete params.title;
         delete params.page;
         delete params.filters;
-        delete params.urlFilters;
         done();
     }.bind(this);
 
@@ -214,12 +219,12 @@ function handleItems(params, promise, isGallery) {
 
         if (page == 1) {
             done.abort();
-            return helpers.common.redirect.call(this, [url, isGallery].join(''));
+            return helpers.common.redirect.call(this, [url, gallery].join(''));
         }
-        realPage = res.items.paginate(page, query, url, isGallery);
+        realPage = res.items.paginate(page, query, url, gallery);
         if (realPage) {
             done.abort();
-            return helpers.common.redirect.call(this, [url, '-p-', realPage, isGallery].join(''));
+            return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));
         }
         done(res.items);
     }.bind(this);
@@ -263,13 +268,16 @@ function handleItems(params, promise, isGallery) {
             currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
             metadata: metadata,
-            seo: seo,
             items: _items.toJSON(),
+            filters: _items.filters,
             infiniteScroll: infiniteScroll,
-            tracking: tracking.generateURL.call(this)
+            tracking: tracking.generateURL.call(this),
+            seo: seo
         });
     }.bind(this);
 
+    promise.then(configure);
+    promise.then(redirect);
     promise.then(prepare);
     promise.then(fetch);
     promise.then(paginate);
@@ -278,41 +286,48 @@ function handleItems(params, promise, isGallery) {
 
 function handleShow(params, promise) {
     var seo = Seo.instance(this.app);
+    var category;
 
-    var prepare = function(done, _category) {
+    var configure = function(done, _category) {
         var currentRouter = ['categories', 'subcategories'];
-        var slug;
+
+        category = _category;
 
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         seo.reset(this.app, currentRouter);
+        done();
+    }.bind(this);
 
-        slug = helpers.common.slugToUrl(_category.toJSON());
-        if (!_category.checkSlug(slug, params.title)) {
+    var redirect = function(done) {
+        var slug = helpers.common.slugToUrl(category.toJSON());
+
+        if (!category.checkSlug(slug, params.title)) {
             done.abort();
             return helpers.common.redirect.call(this, '/' + slug);
         }
-        done(_category);
+        done();
     }.bind(this);
 
-    var success = function(done, _category) {
+    var success = function(done) {
         this.app.session.update({
             postingLink: {
-                category: _category.get('id')
+                category: category.get('id')
             }
         });
 
-        seo.addMetatag('title', _category.get('trName'));
-        seo.addMetatag('description', _category.get('trName'));
+        seo.addMetatag('title', category.get('trName'));
+        seo.addMetatag('description', category.get('trName'));
 
-        tracking.addParam('category', _category.toJSON());
+        tracking.addParam('category', category.toJSON());
 
         done({
             type: 'categories',
-            category: _category.toJSON(),
+            category: category.toJSON(),
             tracking: tracking.generateURL.call(this)
         });
     }.bind(this);
 
-    promise.then(prepare);
+    promise.then(configure);
+    promise.then(redirect);
     promise.then(success);
 }
