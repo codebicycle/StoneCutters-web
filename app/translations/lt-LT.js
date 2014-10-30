@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Populiarios paie\u0161kos',
     'defaultheader.PostAFreeAd': 'Pateikti nemokam\u0105 skelbim\u0105',
     'defaultheader.WhatAreYouLookingFor': 'Ko ie\u0161kote?',
+    'defaultheader.WhereBuyersMeetSellers': 'kur pirk\u0117jai susitinka su pardav\u0117jais',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Per\u017Ei\u016Br\u0117kite m\u016Bs\u0173 nauj\u0105 TV skelbim\u0105!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Nemokami klasifikuoti skelbimai <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Atsiverskite ankstesn\u012F puslap\u012F.',

@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Priljubljena iskanja',
     'defaultheader.PostAFreeAd': 'Objavite brezpla\u010Dni oglas',
     'defaultheader.WhatAreYouLookingFor': 'Kaj i\u0161\u010Dete?',
+    'defaultheader.WhereBuyersMeetSellers': 'kjer kupci sre\u010Dajo prodajalce',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Poglejte si na\u0161 novi TV oglas!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Brezpla\u010Dni mali oglasi v <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Vrnite se na prej\u0161njo stran.',

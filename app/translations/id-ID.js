@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Penelusuran Populer',
     'defaultheader.PostAFreeAd': 'Pasang Iklan Gratis',
     'defaultheader.WhatAreYouLookingFor': 'Apa yang sedang Anda cari?',
+    'defaultheader.WhereBuyersMeetSellers': 'Di mana pembeli bertemu penjual',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Lihat iklan TV kami yang baru!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Iklan baris gratis di <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Kembali ke halaman sebelumnya.',

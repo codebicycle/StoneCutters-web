@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Carian Popular',
     'defaultheader.PostAFreeAd': 'Siarkan Iklan Percuma',
     'defaultheader.WhatAreYouLookingFor': 'Apa yang anda cari?',
+    'defaultheader.WhereBuyersMeetSellers': 'Tempat pembeli berjumpa penjual',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tontonlah iklan TV baru kami!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Iklaneka percuma dalam <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Kembali ke halaman sebelumnya.',

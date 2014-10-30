@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'T\xECm ki\u1EBFm ph\u1ED5 bi\u1EBFn ',
     'defaultheader.PostAFreeAd': '\u0110\u0103ng tin mi\u1EC5n ph\xED',
     'defaultheader.WhatAreYouLookingFor': 'B\u1EA1n \u0111ang t\xECm ki\u1EBFm th\xF4ng tin g\xEC?',
+    'defaultheader.WhereBuyersMeetSellers': 'n\u01A1i g\u1EB7p g\u1EE1 c\u1EE7a ng\u01B0\u1EDDi b\xE1n v\xE0 ng\u01B0\u1EDDi mua',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Xem qu\u1EA3ng c\xE1o truy\u1EC1n h\xECnh m\u1EDBi c\u1EE7a ch\xFAng t\xF4i!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Rao v\u1EB7t mi\u1EC5n ph\xED trong <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'V\u1EC1 trang tr\u01B0\u1EDBc.',

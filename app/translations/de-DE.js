@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'H\xE4ufige Suchbegriffe',
     'defaultheader.PostAFreeAd': 'Kostenlose Kleinanzeige schalten',
     'defaultheader.WhatAreYouLookingFor': 'Wonach suchen Sie?',
+    'defaultheader.WhereBuyersMeetSellers': 'hier treffen sich K\xE4ufer und Verk\xE4ufer',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Schauen Sie sich unseren neuen Werbespot an!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Kostenlose Kleinanzeigen in <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Zur\xFCck zur vorherigen Seite.',

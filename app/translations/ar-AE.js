@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': '\u0627\u0644\u0628\u062D\u0648\u062B \u0627\u0644\u0634\u0627\u0621\u0639\u0647',
     'defaultheader.PostAFreeAd': '\u0636\u0639 \u0623\u0639\u0644\u0627\u0646\u0643 \u0645\u062C\u0627\u0646\u0627\u064B',
     'defaultheader.WhatAreYouLookingFor': 'What are you looking for?',
+    'defaultheader.WhereBuyersMeetSellers': 'where buyers meet sellers',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Check out our new TV ad!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Free classifieds in <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Go back to the previous page.',

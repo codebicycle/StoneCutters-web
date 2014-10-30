@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Populaarsed otsingud',
     'defaultheader.PostAFreeAd': 'Postitage tasuta kuulutus',
     'defaultheader.WhatAreYouLookingFor': 'Mida otsite?',
+    'defaultheader.WhereBuyersMeetSellers': 'kus ostjad saavad kokku m\xFC\xFCjatega',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Vaata meie uut TV-reklaami!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Tasuta kuulutused <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Minge tagasi eelmisele lehek\xFCljele.',

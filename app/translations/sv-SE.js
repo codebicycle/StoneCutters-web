@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Popul\xE4ra s\xF6kningar',
     'defaultheader.PostAFreeAd': 'L\xE4gg upp gratis annons',
     'defaultheader.WhatAreYouLookingFor': 'Vad s\xF6ker du?',
+    'defaultheader.WhereBuyersMeetSellers': 'd\xE4r k\xF6pare m\xF6ter s\xE4ljare',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Kolla in v\xE5r nya TV-annons!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Gratis annonser i <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'G\xE5 tillbaka till f\xF6reg\xE5ende sida.',

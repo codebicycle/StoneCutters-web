@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'bie\u017Ei mekl\u0113ti v\u0101rdi',
     'defaultheader.PostAFreeAd': 'Ievietot bezmaksas sludin\u0101jumu',
     'defaultheader.WhatAreYouLookingFor': 'Ko j\u016Bs mekl\u0113jat?',
+    'defaultheader.WhereBuyersMeetSellers': 'Kur pirc\u0113ji sastop p\u0101rdev\u0113jus',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Piev\u0113rsiet uzman\u012Bbu m\u016Bsu jaunajai TV rekl\u0101mai!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Bezmaksas sludin\u0101jumi <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Iet atpaka\u013C uz iepriek\u0161\u0113jo lapu.',

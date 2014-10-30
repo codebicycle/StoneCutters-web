@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Rech\xE8ch ki pi popile',
     'defaultheader.PostAFreeAd': 'Pibliye yon anons Gratis',
     'defaultheader.WhatAreYouLookingFor': 'Kisa Wap Ch\xE8che?',
+    'defaultheader.WhereBuyersMeetSellers': 'kote machann rankontre moun k ap achte',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tcheke nouvo anons televizyon nou an!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Anons gratis nan<AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Retounen sou paj  avan an.',

@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'C\u0103utari populare',
     'defaultheader.PostAFreeAd': 'Posta\u0163i un Anun\u0163 Gratuit',
     'defaultheader.WhatAreYouLookingFor': 'Ce c\u0103uta\u0163i?',
+    'defaultheader.WhereBuyersMeetSellers': 'Unde cump\u0103r\u0103torii \xEEi \xEEnt\xE2lnesc pe v\xE2nz\u0103tori',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Uita\u0163i-v\u0103 la noul nostru anun\u0163 TV!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Clasific\u0103ri Gratuite \xEEn<AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\xCEnapoi la pagina anterioar\u0103.',

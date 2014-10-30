@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Obl\xEDben\xE1 vyhled\xE1v\xE1n\xED',
     'defaultheader.PostAFreeAd': 'Zadat bezplatn\xFD inzer\xE1t',
     'defaultheader.WhatAreYouLookingFor': 'Co hled\xE1te?',
+    'defaultheader.WhereBuyersMeetSellers': 'Kde se kupuj\xEDc\xED setk\xE1vaj\xED s prodejci',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pod\xEDvejte se na na\u0161i novou televizn\xED reklamu!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Bezplatn\xE9 inzer\xE1ty v z\xF3n\u011B <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'N\xE1vrat na p\u0159edchoz\xED str\xE1nku.',

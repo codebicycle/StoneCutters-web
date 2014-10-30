@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'En S\u0131k Arananlar',
     'defaultheader.PostAFreeAd': '\xDCcretsiz \u0130lan Yay\u0131nla',
     'defaultheader.WhatAreYouLookingFor': 'Arad\u0131\u011F\u0131n\u0131z \u015Fey nedir?',
+    'defaultheader.WhereBuyersMeetSellers': 'al\u0131c\u0131larla sat\u0131c\u0131lar\u0131n bulu\u015Fma noktas\u0131',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Yeni TV reklam\u0131m\u0131za g\xF6z at\u0131n!',
     'defaulthtmlhead.FreeClassifiedsInArea': '\xDCcretsiz seri ilanlar: <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\xD6nceki sayfaya geri d\xF6n.',

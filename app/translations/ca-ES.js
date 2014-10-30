@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Cerques populars',
     'defaultheader.PostAFreeAd': 'Publicar un Anunci Gratu\xEFt',
     'defaultheader.WhatAreYouLookingFor': 'Qu\xE8 busques?',
+    'defaultheader.WhereBuyersMeetSellers': 'On els compradors queden amb els venedors',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Mira el nostre nou anunci de TV!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Classificats gratu\xEFts a <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Torna a la p\xE0gina anterior.',
