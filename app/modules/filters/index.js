@@ -1,121 +1,21 @@
 'use strict';
 
 var _ = require('underscore');
+var utils = require('../../../shared/utils');
+var config = require('./config');
+var transformers = require('./transformers');
 
 var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g;
 var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g;
 var regexpSort = /([a-zA-Z0-9_]*)(desc)/g;
 var booleans = ['true', 'false'];
-var FILTERS = {
-    'f.location_state': 'SELECT',
-    'f.location_city': 'SELECT',
-    neighborhood: 'SELECT',
-    nbhzone: 'SELECT',
-    directdistancedialing: 'SELECT',
-    category: 'SELECT',
-    parentCategory: 'SELECT',
-    carbrand: 'SELECT',
-    optionals: 'SELECT',
-    carmodel: 'SELECT',
-    furnished: 'SELECT',
-    sellertype: 'SELECT',
-    seller: 'SELECT',
-    imageGallery: 'SELECT',
-    ethnicgroup: 'SELECT',
-    bodytype: 'SELECT',
-    bedrooms: 'SELECT',
-    kilometers: 'RANGE',
-    year: 'RANGE',
-    excludecity: 'SELECT',
-    search: 'SELECT',
-    brokerFree: 'SELECT',
-    petsAllowed: 'SELECT',
-    carType: 'SELECT',
-    keywords: 'SELECT',
-    hasimage: 'BOOLEAN',
-    jobStatus: 'SELECT',
-    age: 'RANGE',
-    bathrooms: 'RANGE',
-    latitude: 'RANGE',
-    longitude: 'RANGE',
-    'f.itemLat': 'RANGE',
-    'f.itemLong': 'RANGE',
-    pricerange: 'RANGE',
-    surface: 'RANGE',
-    featured: 'SELECT',
-    adtype: 'SELECT',
-    distance: 'SELECT',
-    condition: 'SELECT'
-};
 
-function Filters(url) {
+function Filters(url, options) {
     this.url = url;
-    this.parse(url);
-}
-
-function has(name, value) {
-    var filter = this.filters[name];
-    var exists = !!filter;
-
-    if (exists && !_.isUndefined(value)) {
-        if (filter.type === 'SELECT') {
-            return _.contains(filter.value, value);
-        }
-        exists = (filter.value === value);
+    this.options = (options || {});
+    if (this.url) {
+        this.parse(url);
     }
-    return exists;
-}
-
-function get(name) {
-    return this.filters[name];
-}
-
-function setSelect(filter) {
-    if (this.filters[filter.name]) {
-        return this.filters[filter.name].value.push(filter.value);
-    }
-    filter = _.clone(filter);
-    filter.value = [filter.value];
-    this.filters[filter.name] = filter;
-}
-
-function set(filter) {
-    if (filter.type === 'SELECT') {
-        if (this.has(filter.name, filter.value)) {
-            return this.remove(filter);
-        }
-        setSelect.call(this, filter);
-    }
-    else {
-        this.filters[filter.name] = _.clone(filter);
-    }
-    return this;
-}
-
-function removeSelect(filter) {
-    if (this.filters[filter.name]) {
-        if (filter.value) {
-            this.filters[filter.name].value = _.filter(this.filters[filter.name].value, function(value) {
-                return value !== filter.value;
-            });
-        }
-        else {
-            this.filters[filter.name].value = [];
-        }
-        if (!this.filters[filter.name].value.length) {
-            delete this.filters[filter.name];
-        }
-    }
-}
-
-function remove(filter) {
-    if (filter.type === 'SELECT') {
-        removeSelect.call(this, filter);
-    }
-    else if (filter.type === 'RANGE' || filter.type === 'BOOLEAN') {
-        delete this.filters[filter.name];
-    }
-    return this.filters;
 }
 
 function find(url) {
@@ -154,46 +54,19 @@ function parseFilter(filter) {
 
 function parse(url) {
     var listFilters = find(url);
+    var transformer;
 
     this.filters = {};
     _.each(listFilters, function parseFilters(filter, i) {
         filter = parseFilter(filter);
+        transformer = transformers[filter.name];
+
+        if (transformer) {
+            filter = transformer.call(this, filter, this.options);
+        }
         this.filters[ filter.name ] = filter;
     }, this);
     return this.filters;
-}
-
-function format() {
-    var _filters = this.sort();
-    var url = [];
-
-    _.each(_filters, function(filter) {
-        url.push('-');
-        url.push(filter.name);
-        url.push('_');
-        if (filter.type === 'RANGE') {
-            url.push(filter.value.from);
-            url.push('_');
-            return url.push(filter.value.to);
-        }
-        if (filter.type === 'SELECT') {
-            return url.push(filter.value.join('_'));
-        }
-        url.push(filter.value);
-    });
-    return url.join('');
-}
-
-function _sort(order, filters) {
-    return (order || Object.keys(FILTERS)).filter(function each(filter) {
-        return _.contains(Object.keys(filters), filter);
-    }).map(function each(filter) {
-        return filters[filter];
-    });
-}
-
-function sort(order) {
-    return _sort(order, this.filters);
 }
 
 function smaugize() {
@@ -230,29 +103,9 @@ function smaugize() {
     return params;
 }
 
-function prepare(arrayFilters) {
-    var filters = {};
-
-    _.each(arrayFilters, function each(filter) {
-        filters[filter.name] = filter;
-    });
-    return filters;
-}
-
 _.extend(Filters.prototype, {
-    has: has,
-    get: get,
-    set: set,
-    remove: remove,
-    sort: sort,
     parse: parse,
-    format: format,
     smaugize: smaugize
-});
-
-_.extend(Filters, {
-    sort: _sort,
-    prepare: prepare
 });
 
 module.exports = Filters;
