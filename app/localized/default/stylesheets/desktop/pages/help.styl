@@ -9,6 +9,7 @@
             font-weight: normal;
             margin: 0;
             padding: 13px 0 13px 20px;
+            text-transform: capitalize;
         }
         ul {
             ul-reset();
@@ -23,38 +24,38 @@
                 font-size: $l;
             }
         }
-        
+
         .selected {
             position: relative;
             background: #fff;
             border-right: 1px solid #b9ddf3;
-            
+
             a,
             .icons:before {
                 color: $greyStrong;
             }
         }
-        .selected:after, .selected:before { 
-            left: 100%; 
+        .selected:after, .selected:before {
+            left: 100%;
             top: 50%;
             border: solid transparent;
             content: " ";
-            height: 0; 
+            height: 0;
             width: 0;
-            position: absolute; 
+            position: absolute;
             pointer-events: none;
         }
-        .selected:after { 
-            border-color: rgba(255, 255, 255, 0); 
+        .selected:after {
+            border-color: rgba(255, 255, 255, 0);
             border-left-color: #fff;
             border-width: 26    px;
-            margin-top: -26px; 
+            margin-top: -26px;
         }
         .selected:before {
-            border-color: rgba(185, 221, 243, 0); 
-            border-left-color: #b9ddf3; 
+            border-color: rgba(185, 221, 243, 0);
+            border-left-color: #b9ddf3;
             border-width: 27px;
-            margin-top: -27px; 
+            margin-top: -27px;
         }
 
     }
@@ -83,7 +84,7 @@
             }
 
             h4 {
-                cursor: pointer;                
+                cursor: pointer;
                 font-weight: normal;
                 margin: 0;
                 padding: 20px;
@@ -97,7 +98,7 @@
 
         .faq-open {
             background: #eee;
-            
+
             h4 {
                 font-weight: bold;
             }
@@ -113,7 +114,7 @@
                 ul-reset();
             }
             li {
-                line-height: remify(18px);                
+                line-height: remify(18px);
             }
         }
     }
