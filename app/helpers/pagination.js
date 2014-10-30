@@ -2,11 +2,10 @@
 
 var _ = require('underscore');
 var config = require('../../shared/config');
-var Filters = require('../modules/filters');
 
 module.exports = (function() {
 
-    function format(params, urlBase, offset, isGallery) {
+    function format(params, urlBase, offset, options) {
         var url = [];
         var page = params.page + offset;
 
@@ -15,10 +14,13 @@ module.exports = (function() {
             url.push('-p-');
             url.push(page);
         }
-        if (isGallery) {
-            url.push(isGallery);
+        if (options.gallery) {
+            url.push(options.gallery);
         }
-        url.push(params.urlFilters || '');
+        if (options.filters) {
+            url.push('/');
+            url.push(options.filters.format());
+        }
         return url.join('');
     }
 
@@ -44,27 +46,22 @@ module.exports = (function() {
             }
             params.searchTerm = params.search;
         }
-        if (params.filters) {
-            filters = new Filters(params.filters);
-            params.urlFilters = '/' + filters.format();
-            _.extend(params, filters.smaugize());
-        }
     }
 
-    function paginate(metadata, params, url, isGallery) {
+    function paginate(metadata, params, url, options) {
         var next;
         var max = params.pageSize;
 
         metadata.page = params.page;
         metadata.totalPages = Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1);
-        metadata.current = format(params, url, 0, isGallery);
+        metadata.current = format(params, url, 0, options);
         if (metadata.total > 0) {
             next = metadata.next;
             if (next) {
-                metadata.next = format(params, url, 1, isGallery);
+                metadata.next = format(params, url, 1, options);
             }
             if (params.page > 1) {
-                metadata.previous = format(params, url, -1, isGallery);
+                metadata.previous = format(params, url, -1, options);
             }
         }
     }

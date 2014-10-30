@@ -1,16 +1,17 @@
 .users_login_view {
-    box($white, $greyBorders, 3px, 20px, solid, 1px);
+    box($white, $greyBorders, 3px, 0 0 20px 0, solid, 1px);
 
     .title {
         border-bottom: 1px solid $greyBorders;
-        padding-bottom: 5px;
         font-size: $l;
-        font-weight: normal;
         margin: 0;
+        padding-bottom: 5px;
+        padding: 13px 20px;
     }
 
     form {
         margin-top: 20px;
+        padding: 0 20px;
 
         .wrapper {
             border: 0;
@@ -33,20 +34,20 @@
         }
 
         .login-label {
-            width: 100px;
+            width: 160px;
             text-align: right;
-            margin: 10px 10px 0 0;
+            margin: 10px 20px 0 0;
         }
 
         .remember {
             display: inline-block;
             vertical-align: middle;
-            margin-left: 110px;
+            margin-left: 180px;
         }
 
         .text-field {
             box($white, $greyBorders, 3px, 0 10px, solid, 1px);
-            width: 250px;
+            width: 310px;
         }
 
         .advice {
@@ -57,7 +58,7 @@
 
         .send {
             display: inline-block;
-            margin-left: 110px;
+            margin-left: 180px;
             padding: 10px 30px;
             font-size: $baseFont;
             margin-top: 10px;
@@ -71,7 +72,7 @@
     }
 
     .register {
-        margin: 20px 0 0 110px;
+        margin: 20px 0 0 200px;
     }
 
 }

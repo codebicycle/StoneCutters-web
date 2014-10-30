@@ -19,7 +19,7 @@
                     <span>{{ dictionary["itemslisting.NavigatorByCategory"] }}  | {{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
                 </p><p
                  class="items-price">
-                    {{ item.price.displayPrice }}
+                    {{ item.price.displayPrice if item.price and item.price.amount > 0 }}
                 </p><p
                  class="items-date">
                     {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', <br>' + item.date.since.hour) if item.date.since.hour }}

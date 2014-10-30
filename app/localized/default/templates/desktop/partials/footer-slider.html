@@ -1,13 +1,14 @@
 <div data-slide-content="true" class="slide-container">
-    <div class="category-slide footer-slide" style="display: none;">
+    <div class="category-slide footer-slide hide">
         <a title="close" data-footer-slideDown="category-slide" class="icons icon-close" href="#"></a>
-        <h3 class="title">Categorías populares</h3>        <ul class="category-list">        
+        <h3 class="title">Categorías populares</h3>
+        <ul class="category-list">
             <li class="category">
                 <a href="http://www.olx.com.bo:3030/compra-venta-cat-185?location=lapaz.olx.com.bo" class="category-link">
                     <span class="icon cat-185"></span>
                     Compra - Venta
                 </a>
-                <ul>                
+                <ul>
                     <li><a href="http://www.olx.com.bo:3030/moviles-cat-219?location=lapaz.olx.com.bo">Móviles</a></li>
                     <li><a href="http://www.olx.com.bo:3030/ordenadores-cat-240?location=lapaz.olx.com.bo">Ordenadores</a></li>
                     <li><a href="http://www.olx.com.bo:3030/animales-cat-312?location=lapaz.olx.com.bo">Animales</a></li>
@@ -39,7 +40,7 @@
                     <span class="icon cat-186"></span>
                     Clases
                 </a>
-                <ul>                
+                <ul>
                     <li><a href="http://www.olx.com.bo:3030/tutores-clases-particulares-cat-278?location=lapaz.olx.com.bo">Tutores - Clases Particulares</a></li>
                     <li><a href="http://www.olx.com.bo:3030/cursos-de-idiomas-cat-279?location=lapaz.olx.com.bo">Cursos de Idiomas</a></li>
                     <li><a href="http://www.olx.com.bo:3030/otros-cursos-cat-283?location=lapaz.olx.com.bo">Otros cursos</a></li>
@@ -148,7 +149,7 @@
             </li>
         </ul>
     </div>
-    <div class="help-slide footer-slide" style="display: none;">
+    <div class="help-slide footer-slide hide">
         <a title="close" data-footer-slideDown="help-slide" class="icons icon-close" href="#"></a>
         <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
         <ul>
@@ -158,17 +159,17 @@
             <li><a href="#">{{ dictionary["contact_us.ContactBrand"] }} </a></li>
         </ul>
     </div>
-    <div class="popular-slide footer-slide" style="display: none;">
+    <div class="popular-slide footer-slide hide">
         <a title="close" data-footer-slideDown="popular-slide" class="icons icon-close" href="#"></a>
         <div class="popular-column">
             <h3 class="title">{{ dictionary["popularsearchesbody.PopularCities"] }} Bolivia</h3>
             <ul>
                 <li>
                     <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
                 </li>
@@ -177,10 +178,10 @@
                 </li>
                 <li>
                     <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
-                </li>           
+                </li>
                 <li>
                     <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
                 </li>
@@ -188,10 +189,10 @@
             <ul>
                 <li>
                     <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
                 </li>
@@ -200,24 +201,24 @@
                 </li>
                 <li>
                     <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
-                </li>           
+                </li>
                 <li>
                     <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
                 </li>
             </ul>
         </div>
         <div class="popular-column popular-cities">
-            <h3 class="title">{{ dictionary["countryoptions.OtherCitiesInRegion"] }}</h3>
+            <h3 class="title">{{ dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>', location.name) }}</h3>
             <ul>
                 <li>
                     <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
                 </li>
@@ -226,10 +227,10 @@
                 </li>
                 <li>
                     <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
-                </li>           
+                </li>
                 <li>
                     <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
                 </li>
@@ -237,10 +238,10 @@
             <ul>
                 <li>
                     <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
                 </li>
@@ -249,17 +250,17 @@
                 </li>
                 <li>
                     <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
-                </li>           
+                </li>
                 <li>
                     <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
-                </li>           
+                </li>
                 <li>
                     <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="around-slide footer-slide" style="display: none;">
+    <div class="around-slide footer-slide hide">
         <a title="close" data-footer-slideDown="around-slide" class="icons icon-close" href="#"></a>
         <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
         <ul>

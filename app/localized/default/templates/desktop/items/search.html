@@ -1,17 +1,23 @@
-{% include (template + "/partials/breadcrumb.html") %}
+{% if items.length > 0 %}
+    {% include (template + "/partials/breadcrumb.html") %}
 
-<nav id="listing-filters">
-    {% include (template + '/items/filters.html') %}
-</nav>
+    <nav id="listing-filters">
+        {% include (template + '/items/filters.html') %}
+    </nav>
 
-<section id='listing-items'>
-    {% include (template + '/items/locations.html') %}
+    <section id="listing-items">
+        {% include (template + '/items/locations.html') %}
 
-    {% include (template + '/items/list.html') %}
+        {% include (template + '/items/list.html') %}
 
-    {% if metadata.next or metadata.previous %}
-        {% include (template + '/items/pagination.html') %}
-    {% endif %}
-</section>
+        {% if metadata.next or metadata.previous %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    </section>
+{% else %}
+    {% include (template + '/partials/notfound.html') %}
+{% endif %}
 
 {% view 'partials/tracking' %}
+
+
