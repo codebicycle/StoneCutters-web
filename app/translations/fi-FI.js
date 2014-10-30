@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
     'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Sinulla ei ole aktiivisia ilmoituksia.',
+    'netvibes_myolx.content.RemoveListing': 'Poista ilmoitus',
     'netvibes_myolx.content.Views': 'Katsottu',
     'supportform.Message': 'Viesti:',
     'supportform.Reset': 'Tyhjenn\xE4',

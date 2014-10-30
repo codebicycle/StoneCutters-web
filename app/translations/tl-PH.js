@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',
     'listingpageitemslisting.ZeroResultsPage': 'Paumanhin, walang resulta sa <<CATEGORY>> sa <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Wala kang aktibong listahan sa ngayon.',
+    'netvibes_myolx.content.RemoveListing': 'Tanggalin ang patalastas',
     'netvibes_myolx.content.Views': 'Natingnan',
     'supportform.Message': 'Mensahe:',
     'supportform.Reset': 'I-reset',

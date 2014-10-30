@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Je hebt momenteel geen actieve advertenties.',
+    'netvibes_myolx.content.RemoveListing': 'Verwijder advertentie',
     'netvibes_myolx.content.Views': 'Gezien',
     'supportform.Message': 'Bericht:',
     'supportform.Reset': 'Opnieuw',

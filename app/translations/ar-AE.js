@@ -102,6 +102,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',
     'netvibes_myolx.content.NoActiveListings': '\u062D\u0627\u0644\u064A\u0627 \u0644\u064A\u0633 \u0639\u0646\u062F\u0643 \u0623\u0639\u0644\u0627\u0646\u0627\u062A \u0639\u0627\u0645\u0627\u0629 ',
+    'netvibes_myolx.content.RemoveListing': '\u062D\u0630\u0641 \u0623\u0639\u0644\u0627\u0646',
     'netvibes_myolx.content.Views': '\u0632\u064A\u0627\u0631\u0627\u062A',
     'supportform.Message': '\u0631\u0633\u0627\u0644\u0629 ',
     'supportform.Reset': '\u0627\u0644\u063A\u0627\u0621 ',

@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Desculpe, mas n\xE3o temos resultados para a sua pesquisa.',
     'listingpageitemslisting.ZeroResultsPage': 'Desculpe, mas n\xE3o encontramos <<RESULTS>> na <<CATEGORY>> da <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualmente n\xE3o tem an\xFAncios ativos.',
+    'netvibes_myolx.content.RemoveListing': 'Apagar an\xFAncio',
     'netvibes_myolx.content.Views': 'Visualizada',
     'supportform.Message': 'Mensagem:',
     'supportform.Reset': 'Reiniciar',

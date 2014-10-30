@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',
     'listingpageitemslisting.ZeroResultsPage': 'Tunasikitika, hatukupata matokeo katika <<CATEGORY>> at <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'You currently have no active ads.',
+    'netvibes_myolx.content.RemoveListing': 'Ondoa tangazo',
     'netvibes_myolx.content.Views': 'Zilizotazamwa',
     'supportform.Message': 'Ujumbe:',
     'supportform.Reset': 'Seti upya',

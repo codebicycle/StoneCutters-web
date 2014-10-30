@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Ch\xFAng t\xF4i r\u1EA5t ti\u1EBFc ch\xFAng t\xF4i kh\xF4ng c\xF3 k\u1EBFt qu\u1EA3 cho t\xECm ki\u1EBFm c\u1EE7a b\u1EA1n.',
     'listingpageitemslisting.ZeroResultsPage': 'Xin l\u1ED7i, ch\xFAng t\xF4i kh\xF4ng t\xECm th\u1EA5y k\u1EBFt qu\u1EA3 trong <<CATEGORY>> t\u1EA1i <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Hi\u1EC7n t\u1EA1i b\u1EA1n kh\xF4ng c\xF3 rao v\u1EB7t n\xE0o \u0111\u01B0\u1EE3c \u0111\u0103ng.',
+    'netvibes_myolx.content.RemoveListing': 'X\xF3a rao v\u1EB7t',
     'netvibes_myolx.content.Views': '\u0110\xE3 xem',
     'supportform.Message': 'Tin nh\u1EAFn:',
     'supportform.Reset': 'Kh\u1EDFi \u0111\u1ED9ng l\u1EA1i',

@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Ne pare r\u0103u dar nu avem rezultate pentru c\u0103utarea dvs.',
     'listingpageitemslisting.ZeroResultsPage': 'Ne pare r\u0103u, nu am g\u0103sit rezultate \xEEn <<CATEGORY>> \xEEn <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Momentan nu ave\u0163i niciun anun\u0163 activ.',
+    'netvibes_myolx.content.RemoveListing': '\u015Etergere anun\u0163',
     'netvibes_myolx.content.Views': 'Vizualizat',
     'supportform.Message': 'Mesaj:',
     'supportform.Reset': 'Reseteaz\u0103',

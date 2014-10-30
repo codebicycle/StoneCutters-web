@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z bulunamad\u0131.',
     'listingpageitemslisting.ZeroResultsPage': '\xDCzg\xFCn\xFCz <<CATEGORY>> kategorisinde b\xF6lgesi <<REGION>> olan sonuca rastlanmad\u0131.',
     'netvibes_myolx.content.NoActiveListings': '\u015Eu an aktif bir ilan\u0131n\u0131z bulunmuyor.',
+    'netvibes_myolx.content.RemoveListing': '\u0130lan\u0131 sil',
     'netvibes_myolx.content.Views': 'G\xF6r\xFCnt\xFClendi',
     'supportform.Message': '\u0130leti:',
     'supportform.Reset': 'S\u0131f\u0131rla',

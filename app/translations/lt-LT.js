@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Atsipra\u0161ome, ta\u010Diau neturime j\u016Bs\u0173 paie\u0161kos rezultat\u0173.',
     'listingpageitemslisting.ZeroResultsPage': 'Atsipra\u0161ome, <<CATEGORY>>, esan\u010Di\u0173 <<REGION>>, neradome.',
     'netvibes_myolx.content.NoActiveListings': '\u0160iuo metu aktyvi\u0173 skelbim\u0173 n\u0117ra.',
+    'netvibes_myolx.content.RemoveListing': '\u0160alinti skelbim\u0105',
     'netvibes_myolx.content.Views': 'Per\u017Ei\u016Br\u0117ta',
     'supportform.Message': 'Prane\u0161imas:',
     'supportform.Reset': 'Nustatyti i\u0161 naujo',

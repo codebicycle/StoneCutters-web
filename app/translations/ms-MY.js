@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Kami minta maaf kerana kami tidak mendapat keputusan untuk carian anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Kami minta maaf, kami masih tidak menjumpai keputusan dalam <<CATEGORY>> di <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Anda tiada iklan yang aktif buat masa ini.',
+    'netvibes_myolx.content.RemoveListing': 'Buang iklan',
     'netvibes_myolx.content.Views': 'Dilihat',
     'supportform.Message': 'Mesej:',
     'supportform.Reset': 'Set semula',

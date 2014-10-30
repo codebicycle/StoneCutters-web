@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': '\u5BF9\u4E0D\u8D77\uFF0C\u6CA1\u6709\u627E\u5230\u60A8\u641C\u7D22\u7684\u7ED3\u679C',
     'listingpageitemslisting.ZeroResultsPage': '\u5BF9\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u5728<<REGION>> \u7684 <<CATEGORY>> \u76F8\u5173\u7ED3\u679C\u3002',
     'netvibes_myolx.content.NoActiveListings': '\u60A8\u6682\u65F6\u6CA1\u6709\u5728\u7EBF\u5E7F\u544A',
+    'netvibes_myolx.content.RemoveListing': '\u5220\u9664\u5E7F\u544A',
     'netvibes_myolx.content.Views': '\u67E5\u770B',
     'supportform.Message': '\u7559\u8A00\uFF1A',
     'supportform.Reset': '\u91CD\u6765',

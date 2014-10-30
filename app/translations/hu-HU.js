@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',
     'listingpageitemslisting.ZeroResultsPage': 'Sajn\xE1ljuk, nem tal\xE1ltunk eredm\xE9nyeket a <<CATEGORY>> kateg\xF3ri\xE1ban <<REGION>> r\xE9gi\xF3ban.',
     'netvibes_myolx.content.NoActiveListings': 'Jelenleg nincs akt\xEDv hirdet\xE9se.',
+    'netvibes_myolx.content.RemoveListing': 'Hirdet\xE9s elt\xE1vol\xEDt\xE1sa',
     'netvibes_myolx.content.Views': 'Megjelen\xEDtve',
     'supportform.Message': '\xDCzenet:',
     'supportform.Reset': 'Vissza\xE1ll\xEDt\xE1s',

@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': 'We are sorry, we haven\'t found results in <<CATEGORY>> at <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'You currently have no active ads.',
+    'netvibes_myolx.content.RemoveListing': 'Remove ad',
     'netvibes_myolx.content.Views': 'Viewed',
     'supportform.Message': 'Message:',
     'supportform.Reset': 'Reset',

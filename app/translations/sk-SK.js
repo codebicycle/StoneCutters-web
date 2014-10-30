@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': '\u013Dutujeme, neboli n\xE1jden\xE9 \u017Eiadne v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Je n\xE1m \u013E\xFAto, nena\u0161li sme v\xFDsledky v kateg\xF3rii <<CATEGORY>> v regi\xF3ne <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Moment\xE1lne nem\xE1te \u017Eiadne akt\xEDvne ozn\xE1menia.',
+    'netvibes_myolx.content.RemoveListing': 'Odstr\xE1ni\u0165 ozn\xE1menie',
     'netvibes_myolx.content.Views': 'Prezeran\xE9',
     'supportform.Message': 'Spr\xE1va:',
     'supportform.Reset': 'Obnovi\u0165',

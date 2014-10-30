@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ho sentim, no hem trobat resultats de <<CATEGORY>> a <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualment no teniu cap anunci actiu.',
+    'netvibes_myolx.content.RemoveListing': 'Eliminar anunci',
     'netvibes_myolx.content.Views': 'Visualitzat',
     'supportform.Message': 'Missatge:',
     'supportform.Reset': 'Reinicia',

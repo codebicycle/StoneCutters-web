@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Nou regr\xE8t men nou pa jwenn okenn rezilta pou rech\xE8ch ou an. ',
     'listingpageitemslisting.ZeroResultsPage': 'Nou regr\xE8t, nou pa jwenn okenn rezilta nan<<CATEGORY>> pou <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Ou pa genyen anons aktif pou konyea. ',
+    'netvibes_myolx.content.RemoveListing': 'Efase anons lan',
     'netvibes_myolx.content.Views': 'Vizit ',
     'supportform.Message': 'Mesaj :',
     'supportform.Reset': 'Anile',

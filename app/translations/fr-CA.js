@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Nous sommes d\xE9sol\xE9s mais il n\'y pas de r\xE9sultats pour votre recherche.',
     'listingpageitemslisting.ZeroResultsPage': 'D\xE9sol\xE9, mais nous n\'avons trouv\xE9 aucun r\xE9sultat dans <<CATEGORY>> pour <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actuellement vous n\'avez pas d\'annonce active.',
+    'netvibes_myolx.content.RemoveListing': 'Retirer l\'annonce',
     'netvibes_myolx.content.Views': 'Vu',
     'supportform.Message': 'Message :',
     'supportform.Reset': 'R\xE9initialiser',

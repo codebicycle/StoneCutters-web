@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Desv\xE6rre kan vi ikke finde noget resultat p\xE5 din s\xF8gning.',
     'listingpageitemslisting.ZeroResultsPage': 'Vi beklager, men vi har ikke fundet nogle resultater i <<CATEGORY>> i <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Du har ingen aktive annoncer.',
+    'netvibes_myolx.content.RemoveListing': 'Fjern annonce',
     'netvibes_myolx.content.Views': 'Set',
     'supportform.Message': 'Besked:',
     'supportform.Reset': 'Slet',

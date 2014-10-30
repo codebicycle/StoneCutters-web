@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uAC80\uC0C9\uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'listingpageitemslisting.ZeroResultsPage': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4, <<REGION>>\uC758 <<CATEGORY>>\uC5D0\uC11C \uCC3E\uC740 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'netvibes_myolx.content.NoActiveListings': '\uADC0\uD558\uB294 \uD604\uC7AC \uC0AC\uC6A9\uC911\uC778 \uC81C\uD488\uBAA9\uB85D\uC11C\uAC00 \uC5C6\uC73C\uC2ED\uB2C8\uB2E4.',
+    'netvibes_myolx.content.RemoveListing': '\uC81C\uD488\uBAA9\uB85D\uC11C \uC0AD\uC81C\uD558\uAE30',
     'netvibes_myolx.content.Views': '\uBD04',
     'supportform.Message': '\uBA54\uC2DC\uC9C0:',
     'supportform.Reset': '\uB9AC\uC14B',

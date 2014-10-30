@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Lo lamentamos pero no hay resultados para tu b\xFAsqueda.',
     'listingpageitemslisting.ZeroResultsPage': 'Disculpe, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualmente no tiene publicaciones activas.',
+    'netvibes_myolx.content.RemoveListing': 'Eliminar anuncio',
     'netvibes_myolx.content.Views': 'Visitas',
     'supportform.Message': 'Mensaje:',
     'supportform.Reset': 'Cancelar',

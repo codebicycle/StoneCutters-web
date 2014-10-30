@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': '\u017Dao nam je, ali za va\u0161u pretragu nemamo rezultata.',
     'listingpageitemslisting.ZeroResultsPage': '\u017Dao nam je, nismo prona\u0161li rezultate u<<CATEGORY>> u <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Trenutno nemate aktivnih oglasa.',
+    'netvibes_myolx.content.RemoveListing': 'Ukloni oglas',
     'netvibes_myolx.content.Views': 'Pregledano',
     'supportform.Message': 'Poruka:',
     'supportform.Reset': 'Poni\u0161titi',

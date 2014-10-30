@@ -104,6 +104,7 @@ module.exports = {
     'listingpageitemslisting.WeAreSorryNoResults': 'Es tut uns leid, aber wir haben keine Ergebnosse f\xFCr Ihre Suche.',
     'listingpageitemslisting.ZeroResultsPage': 'Es konnten leider keine Ergebnisse in <<CATEGORY>> in <<REGION>> gefunden werden.',
     'netvibes_myolx.content.NoActiveListings': 'Es sind derzeit keine Kleinanzeigen aktiv',
+    'netvibes_myolx.content.RemoveListing': 'Kleinanzeige entfernen',
     'netvibes_myolx.content.Views': 'Gelesen',
     'supportform.Message': 'Nachricht:',
     'supportform.Reset': 'Zur\xFCcksetzen',
