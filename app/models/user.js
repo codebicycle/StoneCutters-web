@@ -72,16 +72,23 @@ function login(done, req) {
 }
 
 function register(done, req) {
+    var query = {
+        platform: this.get('platform')
+    };
+
+    if (this.has('withConfirmation')) {
+        query.withConfirmation = this.get('withConfirmation');
+    }
+
     var submit = function(done) {
         dataAdapter.post(req, '/users', {
-            query: {
-                platform: this.get('platform')
-            },
+            query: query,
             data: this.toJSON()
         }, done.errfcb);
     }.bind(this);
 
     var persist = function(done, res, user) {
+        user = user || {};
         delete user.password;
         this.set(user);
         done();
