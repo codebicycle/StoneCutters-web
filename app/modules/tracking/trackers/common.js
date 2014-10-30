@@ -44,11 +44,10 @@ var pageNameParsers = {
                 else if (utils.daysDiff(new Date(item.date.timestamp)) > 30) {
                     str.push('age_30');
                 }
-                if (str.length!==0) {
-                    str.push('-img_' + ((item.images && item.images.length) ? '1' : '0'));
-                } else {
-                    str.push('img_' + ((item.images && item.images.length) ? '1' : '0'));
+                if (str.length) {
+                    str.push('-');
                 }
+                str.push('img_' + ((item.images && item.images.length) ? '1' : '0'));
                 str.push('-feat_0'); // Referer (Possible values: home, listingchp, listingexp)
                 str.push('-source_' + (item.status.feed ? 'f' : 'o'));
             }

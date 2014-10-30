@@ -9,6 +9,7 @@ module.exports = Base.extend({
     className: 'partials-tracking-view',
     events: {
         'update': 'onUpdate',
+        'updateHtml': 'onUpdateHtml',
         'track': 'onTrack',
         'trackAti': 'onTrackAti',
         'trackAnalytics': 'onTrackAnalytics',
@@ -37,6 +38,14 @@ module.exports = Base.extend({
 
         this.tracking = tracking;
         this.render();
+    },
+    onUpdateHtml: function(event, html) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$el.html(html);
+        this.postRender();
     },
     onTrack: function(event, tracking) {
         event.preventDefault();
