@@ -1,0 +1,31 @@
+<section id="notfound">
+    <img width="349" height="173" src="{{ '/images/desktop/couch.jpg' | static }}" alt="" />
+    {% if items %}
+        <p class="message">
+            Ups! No se encontraron resultados para "{{ search }}"
+        </p>
+        <ul class="options">
+            <li>{{ dictionary["crm_new_version.CheckSpelling"] }}</li>
+            <li>Realice una búsqueda más genérica.</li>
+        </ul>
+    {% else %}
+        <p class="message">
+            {{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}
+        </p>
+        <h3>Encuentra lo que estás buscando</h3>
+    {% endif %}
+
+    {% view 'partials/search' %}
+
+    {{ '<h3>Navegue por las categorías para encontrar un item similar a su búsqueda:</h3>' if items }}
+    <ul class="category-list">
+        {% for category in categories %}
+            <li class="category">
+                <a class="category-link" href="{{ category | slugToUrl | link }}">
+                    <span class="icon cat-{{ category.id }}"></span>
+                    {{ category.trName }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>

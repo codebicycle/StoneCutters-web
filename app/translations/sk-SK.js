@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'N\xE1zov',
     'misc.WantToGoBack': 'Naozaj sa chcete vr\xE1ti\u0165 sp\xE4\u0165?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nena\u0161li sa \u017Eiadne ozn\xE1menia o polo\u017Eke',
     'contact_us.ContactBrand': 'Spojte sa s OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ak m\xE1te ve\u013Ea inzer\xE1tov, ktor\xE9 chcete zverejni\u0165 na str\xE1nkach OLX, po\u0161lite n\xE1m ich vo form\xE1te XML alebo CSV. Tieto inzer\xE1ty zverejn\xEDme bezplatne a pravidelne ich aktualizujeme.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Predan\xE9 prostredn\xEDctvom inej slu\u017Eby',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Rozhodli sme sa nepreda\u0165',
     'posting_removedsurvey.WarningAdToBeRemoved': 'V\xE1\u0161 inzer\xE1t bude odstr\xE1nen\xFD z OLX',
+    'crm_new_version.CheckSpelling': 'Skontrolujte gramatiku.',
     'crm_new_version.RenameCategory_3': 'v',
     'crm_new_version.SomethingElseToPost': 'M\xE1te e\u0161te nie\u010Do in\xE9 na zverejnenie?'
 };

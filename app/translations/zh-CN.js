@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': '\u6807\u9898',
     'misc.WantToGoBack': '\u786E\u5B9A\u60F3\u8FD4\u56DE\u5417\uFF1F',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': '\u6CA1\u6709\u627E\u5230\u8BE5\u4FE1\u606F',
     'contact_us.ContactBrand': '\u8054\u7CFBOLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': '\u60A8\u82E5\u6709\u5F88\u591A\u5E7F\u544A\u8981\u63D0\u4EA4\u7ED9OLX, \u60A8\u53EF\u4EE5\u4F7F\u7528XML\u6216CSV\u5F62\u5F0F. \u6211\u4EEC\u4F1A\u514D\u8D39\u53D1\u5E03\u8FD9\u4E9B\u5E7F\u544A\u800C\u4E14\u5B9A\u671F\u66F4\u65B0.',
     'business_directory.Map': '\u5730\u56FE',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u901A\u8FC7\u5176\u4ED6\u670D\u52A1\u552E\u51FA',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\u51B3\u5B9A\u4E0D\u518D\u51FA\u552E',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u60A8\u7684\u5E7F\u544A\u5373\u5C06\u4ECE  \u79FB\u9664 OLX',
+    'crm_new_version.CheckSpelling': '\u8BF7\u68C0\u67E5\u62FC\u5199',
     'crm_new_version.RenameCategory_3': '\u5728',
     'crm_new_version.SomethingElseToPost': '\u60A8\u8981\u9500\u552E\u5176\u4ED6\u7269\u54C1\u5417\uFF1F'
 };

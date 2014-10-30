@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Title',
     'misc.WantToGoBack': 'Are you sure you want to go back?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Sludin\u0101jumi nav atrasti',
     'contact_us.ContactBrand': 'Sazin\u0101ties ar OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ja jums ir daudz sludin\u0101jumu, ko v\u0113laties iesniegt OLX, j\u016Bs varat tos ats\u016Bt\u012Bt mums XML vai CSV form\u0101t\u0101. M\u0113s tos public\u0113sim bez maksas, un \u0161ie sludin\u0101jumi tiks regul\u0101ri atjaunin\u0101ti.',
     'business_directory.Map': 'Karte',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'P\u0101rdots, izmantojot citu pakalpojuma sniedz\u0113ju',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Nolemts to nep\u0101rdot',
     'posting_removedsurvey.WarningAdToBeRemoved': 'J\u016Bsu sludin\u0101jumu dr\u012Bz iz\u0146ems no OLX',
+    'crm_new_version.CheckSpelling': 'P\u0101rbaudiet pareizrakst\u012Bbu',
     'crm_new_version.RenameCategory_3': '\u0161eit',
     'crm_new_version.SomethingElseToPost': 'Vai jums ir v\u0113l kaut kas, ko public\u0113t?'
 };

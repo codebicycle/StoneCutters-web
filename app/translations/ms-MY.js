@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Tajuk',
     'misc.WantToGoBack': 'Anda apasti anda hendak undur?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Tiada iklan item yang ditemui',
     'contact_us.ContactBrand': 'Hubungi OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Jika anda hendak menghantar banyak iklan  kepada OLX, anda boleh hantar kepada kami dalam format  XML atau CSV. Kami akan terbitkannya secara percuma dan iklan ini akan selalu dikemas kini.',
     'business_directory.Map': 'Peta',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Telah dijual melalui perkhidmatan lain',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Telah buat keputusan untuk tidak menjualnya',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Iklan anda bakal dialih keluar daripada OLX',
+    'crm_new_version.CheckSpelling': 'Semak ejaan anda',
     'crm_new_version.RenameCategory_3': 'dalam',
     'crm_new_version.SomethingElseToPost': 'Anda ada sesuatu yang lain untuk disiarkan?'
 };

@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Kichwa',
     'misc.WantToGoBack': 'Je, una uhakika unataka kurejea nyuma?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Hakuna matangazo ya bidhaa ilipatikana',
     'contact_us.ContactBrand': 'Wasiliana na OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Kama unataka kuwasilisha matangazo mengi kwa OLX, unaweza kuituma kwetu katika muundo wa XML au CSV. Sisi tutaichapisha bure na matangazo haya itakuwa ikisasishwa mara kwa mara..',
     'business_directory.Map': 'Ramani',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Iliuzwa kwa njia ya huduma nyingine',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Niliamua kutoiuza',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Tangazo lako liko katibu kuondolewa kutoka OLX',
+    'crm_new_version.CheckSpelling': 'Angalia lahaja yako',
     'crm_new_version.RenameCategory_3': 'katika',
     'crm_new_version.SomethingElseToPost': 'Je, una kitu kingine cha kuchapisha?'
 };

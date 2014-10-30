@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Tittel',
     'misc.WantToGoBack': 'Er du sikker p\xE5 at du \xF8nsker \xE5 g\xE5 tilbake?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Ingen annonser funnet for gjenstanden',
     'contact_us.ContactBrand': 'Kontakt OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Dersom du \xF8nsker \xE5 sette inn mange annonser p\xE5 OLX, kan du sende dem til oss i XML eller CSV format. Vi vil publisere dem gratis, og annonsene vil bli oppdatert regelmessig.',
     'business_directory.Map': 'Kart',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Solgte den gjennom en annen tjeneste',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Valgte \xE5 ikke selge den',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Annonsen din er i ferd med \xE5 bli fjernet fra OLX',
+    'crm_new_version.CheckSpelling': 'Kontroller stavem\xE5ten',
     'crm_new_version.RenameCategory_3': 'i',
     'crm_new_version.SomethingElseToPost': 'Har du noe annet \xE5 publisere?'
 };

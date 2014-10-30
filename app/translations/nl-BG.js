@@ -263,6 +263,7 @@ module.exports = {
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
     'misc.SinceDate': 'Sinds <<DATE>>',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Geen advertenties gevonden',
     'contact_us.ContactBrand': 'Contact met OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Als je veel advertenties wilt indienen bij OLX, kun je ons de advertenties sturen in XML- of CSV-indeling. De advertenties worden gratis gepubliceerd en regelmatig bijgewerkt.',
     'business_directory.Map': 'Kaart',

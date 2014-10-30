@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': '\uC81C\uBAA9',
     'misc.WantToGoBack': '\uB418\uB3CC\uC544\uAC00\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': '\uD56D\uBAA9 \uBAA9\uB85D\uC11C\uAC00 \uBC1C\uACAC\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.',
     'contact_us.ContactBrand': 'OLX \uC5F0\uB77D\uCC98',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'OLX\uB85C\uC758 \uC81C\uCD9C\uD560 \uAD11\uACE0\uAC00 \uB9CE\uC740 \uACBD\uC6B0, XML \uD639\uC740 CSV \uD3EC\uB9F7\uC73C\uB85C \uBCF4\uB0B4\uC2E4 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uBB34\uB8CC\uB85C\uC774\uB97C \uC62C\uB824 \uB4DC\uB9AC\uACE0 \uBCF8 \uAD11\uACE0\uB4E4\uC740 \uC815\uAE30\uC801\uC73C\uB85C \uC5C5\uB370\uC774\uD2B8\uB418\uAC8C \uB429\uB2C8\uB2E4.',
     'business_directory.Map': '\uC9C0\uB3C4',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\uB2E4\uB978 \uC11C\uBE44\uC2A4\uB97C \uD1B5\uD574 \uADF8\uAC83\uC744 \uD314\uC558\uC2B5\uB2C8\uB2E4',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\uADF8\uAC83\uC744 \uD314\uC9C0 \uC54A\uAE30\uB85C \uACB0\uC815\uD588\uC2B5\uB2C8\uB2E4.',
     'posting_removedsurvey.WarningAdToBeRemoved': '\uC62C\uB9AC\uC2E0 \uAD11\uACE0\uAC00 OLX \uC5D0\uC11C \uC0AD\uC81C\uB420 \uC608\uC815\uC785\uB2C8\uB2E4.',
+    'crm_new_version.CheckSpelling': '\uB9DE\uCDA4\uBC95\uC744 \uD655\uC778\uD569\uB2C8\uB2E4',
     'crm_new_version.RenameCategory_3': '\uCE74\uD14C\uACE0\uB9AC',
     'crm_new_version.SomethingElseToPost': '\uB2E4\uB978 \uAC83\uC744 \uB4F1\uB85D\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?'
 };

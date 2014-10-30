@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Naslov',
     'misc.WantToGoBack': '\u017Delite li zaista da idete nazad?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nisu prona\u0111eni oglasi za ovaj artikal',
     'contact_us.ContactBrand': 'Kontaktirajte OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ako \u017Eelite da po\u0161aljete mnogo oglasa sajtu OLX, mo\u017Eete da nam ih po\u0161aljete u XML ili CSV formatu. Objavi\u0107emo ih besplatno i redovno a\u017Eurirati.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Prodao/la sam artikal preko druge usluge',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Ne \u017Eelim da prodam artikal',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Va\u0161 oglas \u0107e biti uklonjen sa OLX',
+    'crm_new_version.CheckSpelling': 'Proverite pravopis',
     'crm_new_version.RenameCategory_3': 'u',
     'crm_new_version.SomethingElseToPost': 'Da li imate da objavite jo\u0161 ne\u0161to?'
 };

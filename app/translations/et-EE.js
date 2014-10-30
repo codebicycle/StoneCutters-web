@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Pealkiri',
     'misc.WantToGoBack': 'Kas olete kindel, et soovite tagasi minna?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Ei leitud kuulutusi',
     'contact_us.ContactBrand': 'V\xF5tke \xFChendust OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Kui Teil on palju kuulutusi, mida soovite OLXis avaldada, v\xF5ite need saata XML- v\xF5i CSV-formaadis. Me avaldame kuulutused tasuta, kuulutusi ajakohastatakse regulaarselt.',
     'business_directory.Map': 'Kaart',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'M\xFC\xFCdud teise teenusepakkuja kaudu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Otsustasin mitte m\xFC\xFCa',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Hetke p\xE4rast eemaldatakse Teie kuulutus OLXist',
+    'crm_new_version.CheckSpelling': 'Kontrollige \xF5igekirja',
     'crm_new_version.RenameCategory_3': 'asukohast',
     'crm_new_version.SomethingElseToPost': 'On teil veel midagi postitada?'
 };

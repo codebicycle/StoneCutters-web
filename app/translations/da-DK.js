@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Titel',
     'misc.WantToGoBack': 'Er du sikker p\xE5 du vil g\xE5 tilbage?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Ingen annoncer blev fundet',
     'contact_us.ContactBrand': 'Kontakt OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Hvis du har mange annoncer du vil indtrykke for  OLX, s\xE5 kan du sende dem til os i XML-eller CSV-format. Vi udgiver dem gratis og de opdateres j\xE6vnligt',
     'business_directory.Map': 'Kort',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Solgte gennem en anden tjeneste',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Besluttede ikke at s\xE6lge',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Din annonce bliver snart fjernet fra OLX',
+    'crm_new_version.CheckSpelling': 'Udf\xF8r stavekontrol',
     'crm_new_version.RenameCategory_3': 'i',
     'crm_new_version.SomethingElseToPost': 'Har du mere at annoncere?'
 };

@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Titel',
     'misc.WantToGoBack': 'Is jy seker jy wil teruggaan?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Geen itemlystings gevind',
     'contact_us.ContactBrand': 'Kontak OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'As jy baie advts. het om by OLX in te dien, kan jy dit in XML- of CSV-formaat aan ons stuur. Ons sal dit gratis publiseer en hierdie advts. sal gereeld hersien word.',
     'business_directory.Map': 'Kaart',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Dit is deur \'n ander diens verkoop',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Het besluit om dit nie te verkoop nie',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Jou advt. word nou van OLX verwyder',
+    'crm_new_version.CheckSpelling': 'Gaan jou spelling na.',
     'crm_new_version.RenameCategory_3': 'in',
     'crm_new_version.SomethingElseToPost': 'Het jy nog iets om te plaas?'
 };

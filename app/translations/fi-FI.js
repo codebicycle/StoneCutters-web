@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Otsikko',
     'misc.WantToGoBack': 'Haluatko varmasti palata takaisin?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Kohteen listausta ei l\xF6ytynyt',
     'contact_us.ContactBrand': 'Ota yhteytt\xE4 yhti\xF6\xF6n OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Jos haluat l\xE4hett\xE4\xE4 useita ilmoituksia sivustolle OLX, voit l\xE4hett\xE4\xE4 ne meille XML- tai CSV-muodossa. Julkaisemme ne ilmaiseksi ja ilmoitukset p\xE4ivitet\xE4\xE4n s\xE4\xE4nn\xF6llisesti.',
     'business_directory.Map': 'Kartta',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Myin sen muun palvelun kautta',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'P\xE4\xE4tin olla myym\xE4tt\xE4 sit\xE4',
     'posting_removedsurvey.WarningAdToBeRemoved': 'lmoitustasi ollaan poistamassa - palvelusta OLX',
+    'crm_new_version.CheckSpelling': 'Tarkista oikeinkirjoitus',
     'crm_new_version.RenameCategory_3': 'kohdassa',
     'crm_new_version.SomethingElseToPost': 'Onko sinulla muuta ilmoitettavaa?'
 };

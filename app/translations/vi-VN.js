@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'T\xEAn ch\u1EE7 \u0111\u1EC1',
     'misc.WantToGoBack': 'B\u1EA1n c\xF3 ch\u1EAFc l\xE0 m\xECnh mu\u1ED1n quay l\u1EA1i kh\xF4ng?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'kh\xF4ng t\xECm th\u1EA5y rao v\u1EB7t n\xE0o',
     'contact_us.ContactBrand': 'Li\xEAn h\u1EC7 OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'N\u1EBFu b\u1EA1n mu\u1ED1n \u0111\u0103ng nhi\u1EC1u tin rao v\u1EB7t l\xEAn OLX, b\u1EA1n c\xF3 th\u1EC3 g\u1EEDi ch\xFAng cho ch\xFAng t\xF4i theo \u0111\u1ECBnh d\u1EA1ng XML ho\u1EB7c CSV. Ch\xFAng t\xF4i s\u1EBD \u0111\u0103ng t\u1EA3i mi\u1EC5n ph\xED v\xE0 nh\u1EEFng tin rao v\u1EB7t n\xE0y s\u1EBD \u0111\u01B0\u1EE3c c\u1EADp nh\u1EADt \u0111\u1EC1u \u0111\u1EB7n.',
     'business_directory.Map': 'B\u1EA3n \u0111\u1ED3',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u0110\xE3 b\xE1n n\xF3 qua m\u1ED9t d\u1ECBch v\u1EE5 kh\xE1c',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\u0110\xE3 quy\u1EBFt \u0111\u1ECBnh kh\xF4ng b\xE1n n\xF3',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n s\u1EBD b\u1ECB g\u1EE1 kh\u1ECFi OLX',
+    'crm_new_version.CheckSpelling': 'H\xE3y ki\u1EC3m tra l\u1ED7i ch\xEDnh t\u1EA3',
     'crm_new_version.RenameCategory_3': '\u1EDF trong',
     'crm_new_version.SomethingElseToPost': 'B\u1EA1n c\xF3 g\xEC kh\xE1c \u0111\u1EC3 \u0111\u0103ng kh\xF4ng?'
 };

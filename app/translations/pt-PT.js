@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Title',
     'misc.WantToGoBack': 'Are you sure you want to go back?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nenhumas publica\xE7\xF5es de itens encontradas',
     'contact_us.ContactBrand': 'Contacte-nos OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Se pretender submeter v\xE1rios an\xFAncios em OLX, pode envi\xE1-los para n\xF3s no formato XML ou CSV. Public\xE1-los-emos gratuitamente e ser\xE3o actualizados regularmente.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vendeu-o atrav\xE9s de outro servi\xE7o',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Decidi n\xE3o vender',
     'posting_removedsurvey.WarningAdToBeRemoved': 'O seu an\xFAncio est\xE1 prestes a ser removido de OLX',
+    'crm_new_version.CheckSpelling': 'Check your spelling',
     'crm_new_version.RenameCategory_3': 'in',
     'crm_new_version.SomethingElseToPost': 'Do you have something else to post?'
 };
