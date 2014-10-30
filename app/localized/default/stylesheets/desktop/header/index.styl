@@ -26,11 +26,23 @@
 			display: block;
 		}
 	}
+	
+	.disabled {
+		display: none;		
+	}
 
 	.posting {
 		float: right;
-		&.disabled {
-			display: none;		
+	}
+	
+	.posting-title {
+		float: left;
+		font-size: $xl;
+		margin: 6px 0 0 132px;
+		span {
+			color: $greyStrong;
+			display: block;
+			font-size: $m;
 		}
 	}
 

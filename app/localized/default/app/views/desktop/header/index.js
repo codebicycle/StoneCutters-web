@@ -11,6 +11,7 @@ module.exports = Base.extend({
     	this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
     },
     onPostingStart: function () {
-		$('.posting').addClass('disabled');
+		$('.posting, .search-form').addClass('disabled');
+		$('.posting-title').removeClass('disabled');
     }
 });
