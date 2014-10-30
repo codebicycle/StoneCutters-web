@@ -12,13 +12,13 @@ if (typeof window === 'undefined') {
 module.exports = (function() {
 
     var staticsHandler = {
-        static: function(env, filePath, path) {
+        static: function(env, filePath, host) {
+            var envPath = config.get(['environment', 'staticPath'], '');
             var pointIndex = filePath.lastIndexOf('.');
             var fileName = filePath.substr(0, pointIndex);
             var ext = filePath.substr(pointIndex + 1);
             var revision = '';
             var envName = '';
-            var envPath;
 
             if (env !== 'development') {
                 revision = '-' + config.get(['deploy', 'revision'], '0');
@@ -26,21 +26,38 @@ module.exports = (function() {
             if (ext === 'css' && env !== 'production') {
                 envName = '-' + env;
             }
-            envPath = config.get(['environment', 'staticPath'], '');
-            if (env === 'production') {
-                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
-            }
+            envPath = getEnv(envPath, filePath, {
+                env: env,
+                type: 'static',
+                host: host
+            });
             return [envPath, fileName, envName, revision, '.', ext].join('');
         },
-        image: function(env, filePath) {
-            var envPath = config.get(['environment', 'imagePath'], '');
+        image: function(env, filePath, host) {
+            var envPath = config.get(['environment', 'staticPath'], '');
 
-            if (env === 'production') {
-                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
-            }
+            envPath = getEnv(envPath, filePath, {
+                env: env,
+                type: 'static',
+                host: host
+            });
             return [envPath, filePath].join('');
         }
     };
+
+    function getEnv(envPath, filePath, options) {
+        switch (options.env) {
+            case 'production':
+                return envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
+            case 'staging':
+            case 'testing':
+                if (~options.host.indexOf(options.env)) {
+                    return envPath.replace(options.type + '01', [options.type, '-', options.env].join(''));
+                }
+                break;
+        }
+        return envPath;
+    }
 
     function getType(path) {
         var ext = path.substr(path.lastIndexOf('.') + 1);
@@ -60,6 +77,7 @@ module.exports = (function() {
 
     function statics(path, key, value) {
         var env = config.get(['environment', 'type'], 'development');
+        var host = this.app.session.get('host');
         var type;
 
         if (key && value) {
@@ -69,7 +87,7 @@ module.exports = (function() {
         if (!type) {
             return path;
         }
-        return staticsHandler[type](env, path);
+        return staticsHandler[type](env, path, host);
     }
 
     function slugToUrl(obj) {
