@@ -22,7 +22,7 @@
         {% for category in categories %}
             <li class="category">
                 <a class="category-link" href="{{ category | slugToUrl | link }}">
-                    {% block icon %}<span class="icon cat-{{ category.id }}"></span>{% endblock %}
+                    <span class="icon cat-{{ category.id }}"></span>
                     {{ category.trName }}
                 </a>
             </li>
