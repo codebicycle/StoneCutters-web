@@ -49,7 +49,7 @@ module.exports = function userRouter(app) {
                 if (redirect && redirect.match(/(\/register|\/login|\/logout|\/)/g)) {
                     link += '?redirect=' + redirect;
                 }
-                formidable.error(req, link, err, function redirect(url) {
+                formidable.error(req, link, err, user.toJSON(), function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     end(err);
                 });
@@ -117,7 +117,7 @@ module.exports = function userRouter(app) {
             }
 
             function error(err) {
-                formidable.error(req, '/register', err, function redirect(url) {
+                formidable.error(req, '/register', err, user.toJSON(), function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp));
                     end(err);
                 });
@@ -141,8 +141,76 @@ module.exports = function userRouter(app) {
         return handler;
     }
 
+    function registerwithConfirmation() {
+        app.post('/register-withconf', handler);
+
+        function handler(req, res, next) {
+            var location = req.rendrApp.session.get('location');
+            var platform = req.rendrApp.session.get('platform');
+            var user;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                user = new User(_.extend(data, {
+                    'new': true,
+                    location: req.rendrApp.session.get('siteLocation'),
+                    country: location.name,
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    platform: platform,
+                    identityType: 1,
+                    withConfirmation: true
+                }));
+                done();
+            }
+
+            function validate(done) {
+                if (!user.get('agreeTerms')) {
+                    res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
+                    statsd.increment([location.name, 'register', 'error', 'terms', platform]);
+                    return end();
+                }
+                done(user);
+            }
+
+            function submit(done) {
+                user.register(done, req);
+            }
+
+            function success() {
+                res.redirect(utils.link('/register/success', req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                formidable.error(req, '/register', err, user.toJSON(), function redirect(url) {
+                    res.redirect(301, utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(validate)
+                .then(submit)
+                .val(success);
+        }
+
+        return handler;
+    }
+
     return {
         login: login(),
-        register: register()
+        register: register(),
+        registerwithConfirmation: registerwithConfirmation()
     };
 };

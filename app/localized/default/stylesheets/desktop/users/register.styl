@@ -1,4 +1,4 @@
-.users_login_view {
+.users_register_view {
     box($white, $greyBorders, 3px, 0 0 20px 0, solid, 1px);
 
     .title {
@@ -19,7 +19,9 @@
             margin: 0 0 10px 0;
 
             &.error {
-                color: $red;
+                .login-label, .advice {
+                    color: $red;
+                }
                 .text-field {
                     border-color: $red;
                 }
@@ -39,10 +41,13 @@
             margin: 10px 20px 0 0;
         }
 
-        .remember {
+        .terms {
             display: inline-block;
             vertical-align: middle;
             margin-left: 180px;
+            .checkbox {
+                margin-right: 5px;
+            }
         }
 
         .text-field {
@@ -51,9 +56,20 @@
         }
 
         .advice {
-            margin-top: 5px;
-            font-size: $xs;
             display: none;
+            font-size: $xs;
+            margin-top: 5px;
+            width: 700px;
+            &.terms {
+                margin-left: 180px;
+            }
+        }
+
+        .info {
+            display: block;
+            font-size: $xs;
+            margin-top: 5px;
+            color: $greyStrong;
         }
 
         .send {
@@ -71,8 +87,9 @@
 
     }
 
-    .register {
-        margin: 20px 0 0 200px;
+    .login {
+        display: inline-block;
+        margin: 10px 0 20px 200px;
     }
 
 }

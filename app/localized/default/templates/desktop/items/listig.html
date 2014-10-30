@@ -10,7 +10,7 @@
                     {{ item.title | truncate( 50, True) }}
                 </p>
                 <p class="items-price">
-                    {{ item.price.displayPrice }}
+                    {{ item.price.displayPrice if item.price and item.price.amount > 0 }}
                     <span>{{ item.priceTypeData.displayPriceType }}</span>
                 </p>
                 <p class="items-date">
