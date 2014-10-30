@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Titill',
     'misc.WantToGoBack': 'Viltu \xF6rugglega fara til baka?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Engar augl\xFDsingar fundust',
     'contact_us.ContactBrand': 'Hafa samband vi\xF0 OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ef \xFE\xFA virt birta miki\xF0 af augl\xFDsingum \xE1 OLX getur\xF0u nota\xF0 XML-straum e\xF0a CSV-sni\xF0. Vi\xF0 munum birta \xFE\xE6r \xFE\xE9r a\xF0 kostna\xF0arlausu og augl\xFDsingarnar ver\xF0a uppf\xE6r\xF0ar reglulega.',
     'business_directory.Map': 'Kort',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Seldi \xED gegnum a\xF0ra \xFEj\xF3nustu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\xE1kva\xF0 a\xF0 h\xE6tta vi\xF0 s\xF6luna',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Augl\xFDsingin \xFE\xEDn ver\xF0ur n\xFA fjarl\xE6g\xF0 af OLX',
+    'crm_new_version.CheckSpelling': 'Athuga\xF0u stafsetninguna',
     'crm_new_version.RenameCategory_3': 'h\xE9\xF0an \xED fr\xE1 \xED flokknum',
     'crm_new_version.SomethingElseToPost': 'Viltu augl\xFDsa eitthva\xF0 anna\xF0?'
 };

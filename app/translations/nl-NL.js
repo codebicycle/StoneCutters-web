@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Titel',
     'misc.WantToGoBack': 'Weet je zeker dat je terug wilt gaan?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Geen advertenties gevonden',
     'contact_us.ContactBrand': 'Contact met OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Als je veel advertenties wilt indienen bij OLX, kun je ons de advertenties sturen in XML- of CSV-indeling. De advertenties worden gratis gepubliceerd en regelmatig bijgewerkt.',
     'business_directory.Map': 'Kaart',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Verkocht via een andere dienst',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Besloten om het niet te verkopen',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Uw advertentie staat op punt te worden verwijderd vanOLX',
+    'crm_new_version.CheckSpelling': 'Controleer je spelling',
     'crm_new_version.RenameCategory_3': 'in',
     'crm_new_version.SomethingElseToPost': 'Wil je nog iets plaatsen?'
 };

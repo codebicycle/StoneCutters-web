@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Unvan',
     'misc.WantToGoBack': 'Geri gitmek istedi\u011Finizden emin misiniz?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': '\xDCr\xFCn ilan\u0131 bulunamad\u0131',
     'contact_us.ContactBrand': '\u0130leti\u015Fime ge\xE7 OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'OLX\'de yay\u0131nlamak istedi\u011Finiz bir\xE7ok ilan\u0131n\u0131z varsa, bu ilanlar\u0131n\u0131z\u0131 bize XML ya da CSV formatlar\u0131nda g\xF6nderebilirsiniz. \u0130lanlar\u0131n\u0131z sitemizde \xFCcretsiz yay\u0131mlanacak olup, d\xFCzenli olarak g\xFCncellenecektir.',
     'business_directory.Map': 'Harita',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Ba\u015Fka bir hizmeti kullanarak satt\u0131m',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Satmaktan vazge\xE7tim',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u0130lan\u0131n\u0131z OLX\'den kald\u0131r\u0131lmak \xFCzere',
+    'crm_new_version.CheckSpelling': '\u0130mlaya dikkat edin',
     'crm_new_version.RenameCategory_3': '',
     'crm_new_version.SomethingElseToPost': 'G\xF6nderecek ba\u015Fka bir \u015Fey var m\u0131?'
 };

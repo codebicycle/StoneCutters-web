@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Titlu',
     'misc.WantToGoBack': 'Sunte\u0163i sigur c\u0103 dori\u0163i s\u0103 merge\u0163i \xEEnapoi?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nu s-a g\u0103sit nicio listare',
     'contact_us.ContactBrand': 'Contacta\u0163i OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Dac\u0103 dori\u0163i s\u0103 pune\u0163i multe anun\u0163uri pe OLX, ni le pute\u0163i trimite sub form\u0103 de XML sau CSV. Le vom publica gratis \u015Fi aceste anun\u0163uri vor fi actualizate periodic.',
     'business_directory.Map': 'Hart\u0103',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Am v\xE2ndut prin alt serviciu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Am decis s\u0103 nu mai v\xE2nd',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Anun\u0163ul dvs. va fi \u015Fters de pe OLX',
+    'crm_new_version.CheckSpelling': 'Verifica\u0163i ortografia',
     'crm_new_version.RenameCategory_3': '\xEEn',
     'crm_new_version.SomethingElseToPost': 'Ave\u0163i \u015Fi altceva de publicat?'
 };

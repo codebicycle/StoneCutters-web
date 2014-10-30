@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Nadpis',
     'misc.WantToGoBack': 'Opravdu se chcete vr\xE1tit zp\u011Bt?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nenalezeny \u017E\xE1dn\xE9 inzer\xE1ty pro polo\u017Eku',
     'contact_us.ContactBrand': 'Kontaktujte OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Pokud m\xE1te velk\xE9 mno\u017Estv\xED inzer\xE1t\u016F, kter\xE9 chcete zadat na OLX, m\u016F\u017Eete n\xE1m je zaslat ve form\xE1tu XML nebo CSV. Zve\u0159ejn\xEDme je zdarma a budou pravideln\u011B aktualizov\xE1ny.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Prodal(a) jsem to prost\u0159ednictv\xEDm jin\xE9 slu\u017Eby',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Rozhodl(a) jsem se to neprod\xE1vat',
     'posting_removedsurvey.WarningAdToBeRemoved': 'V\xE1\u0161 inzer\xE1t bude z OLXodstran\u011Bn',
+    'crm_new_version.CheckSpelling': 'Zkontrolujte pravopis',
     'crm_new_version.RenameCategory_3': 'v',
     'crm_new_version.SomethingElseToPost': 'Chcete zadat inzer\xE1t k n\u011B\u010Demu jin\xE9mu?'
 };

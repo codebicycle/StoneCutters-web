@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Pavadinimas',
     'misc.WantToGoBack': 'Ar tikrai norite sugr\u012F\u017Eti atgal?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Elemento s\u0105ra\u0161\u0173 nerasta',
     'contact_us.ContactBrand': 'Susisiekite su OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Jeigu \u012F OLX norite \u012Fd\u0117ti daug skelbim\u0173, juos mums galite si\u0173sti XML arba CSV formatu. Mes paskelbsime juos nemokamai ir \u0161ie skelbimai bus reguliariai atnaujinami.',
     'business_directory.Map': '\u017Dem\u0117lapis',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Parduota kitu kanalu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Nusprend\u017Eiau neparduoti',
     'posting_removedsurvey.WarningAdToBeRemoved': 'J\u016Bs\u0173 skelbimas bus pa\u0161alintas i\u0161 OLX',
+    'crm_new_version.CheckSpelling': 'Patikrinkite ra\u0161yb\u0105',
     'crm_new_version.RenameCategory_3': 'patalpint\u0105',
     'crm_new_version.SomethingElseToPost': 'Ar norite \u012Fd\u0117ti dar kok\u012F nors skelbim\u0105?'
 };

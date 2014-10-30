@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Tytu\u0142',
     'misc.WantToGoBack': 'Czy na pewno chcesz si\u0119 cofn\u0105\u0107?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nie znaleziono og\u0142osze\u0144',
     'contact_us.ContactBrand': 'Kontakt z OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Je\u015Bli masz du\u017Co og\u0142osze\u0144, kt\xF3re chcesz zamie\u015Bci\u0107 w serwisie OLX, mo\u017Cesz je nam wys\u0142a\u0107 w formacie XML lub CSV. Twoje og\u0142oszenia opublikujemy bezp\u0142atnie i b\u0119dziemy je regularnie aktualizowa\u0107.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Sprzeda\u0142em to za po\u015Brednictwem innego serwisu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Zdecydowa\u0142em si\u0119 nie sprzedawa\u0107',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Your ad is about to be removed from OLX',
+    'crm_new_version.CheckSpelling': 'Sprawd\u017A, czy w og\u0142oszeniu nie ma b\u0142\u0119d\xF3w ortograficznych.',
     'crm_new_version.RenameCategory_3': 'mo\u017Cna teraz znale\u017A\u0107 w kategorii:',
     'crm_new_version.SomethingElseToPost': 'Czy masz co\u015B jeszcze do sprzedania?'
 };

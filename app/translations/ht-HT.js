@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'TIt',
     'misc.WantToGoBack': 'Eske w vle retounen?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nou pa jwenn okenn anons',
     'contact_us.ContactBrand': 'Kontakte Nou OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Si ou genyen anpil anons ou ta renmen voye bay  OLX, ou ka itilize yon XML oubyen CSV f\xF2ma.  Nou ap pibliye yo gratis epi nou ap f\xE8 chanjman nan anons sa yo regily\xE8man.',
     'business_directory.Map': 'Kat Jewografik',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vann li nan yon l\xF2t s\xE8vis',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Deside pouw pa vann li',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Anons ou-a pr\xE8ske soti nan OLX',
+    'crm_new_version.CheckSpelling': 'Verifye \xF2tograf ou',
     'crm_new_version.RenameCategory_3': 'nan',
     'crm_new_version.SomethingElseToPost': 'Eske w gen yon l\xF2t bagay ou ta renmen pibliye?'
 };

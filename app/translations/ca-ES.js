@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'T\xEDtol',
     'misc.WantToGoBack': 'Segur que vols tornar?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': ' No s\'han trobat anuncis',
     'contact_us.ContactBrand': 'Contacteu amb OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Si vols publicar molts anuncis a  OLX, pots enviar-nos-els per XML o CSV. Els publicarem gratu\xEFtament i seran actualitzats regularment.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'L\'he venut mitjan\xE7ant un altre servei',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'He decidit no vendre\'l',
     'posting_removedsurvey.WarningAdToBeRemoved': 'El teu anunci ser\xE0 eliminat d\'OLX',
+    'crm_new_version.CheckSpelling': 'Revisa l\'ortografia',
     'crm_new_version.RenameCategory_3': 'a',
     'crm_new_version.SomethingElseToPost': 'Tens alguna altra cosa per vendre?'
 };

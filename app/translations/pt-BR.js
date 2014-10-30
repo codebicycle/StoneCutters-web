@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'T\xEDtulo',
     'misc.WantToGoBack': 'Tem certeza de que quer voltar?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nenhuma publica\xE7\xE3o de itens encontrada',
     'contact_us.ContactBrand': 'Fale com a OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Sim, caso tenha um site pr\xF3prio e possua muitos an\xFAncios para publicar, voc\xEApode otimizar a publica\xE7\xE3o atrav\xE9s de arquivos .XML ou .CSV. Ap\xF3s analise,nossa equipe de conte\xFAdo poder\xE1 publica-los gratuitamente e esses an\xFAnciosser\xE3o atualizados regularmente.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vendi por outro servi\xE7o',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'N\xE3o quero mais vender',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Seu an\xFAncio est\xE1 prestes a ser removido da OLX',
+    'crm_new_version.CheckSpelling': 'Verifique a ortografia',
     'crm_new_version.RenameCategory_3': 'em',
     'crm_new_version.SomethingElseToPost': 'Voc\xEA tem outro item para vender?'
 };

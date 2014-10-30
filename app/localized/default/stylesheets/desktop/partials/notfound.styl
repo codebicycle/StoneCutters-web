@@ -9,13 +9,13 @@
         color: $greyStrong;
         font-size: $l;
         font-weight: normal;
-        margin: 20px 0 50px;
+        margin: 20px 0 0;
         text-align: center;
     }
     h3 {
         font-size: $xl;
         font-weight: normal;
-        margin-bottom: 20px;
+        margin: 30px 0 20px;
         text-align: center;
     }
     ul {
@@ -23,7 +23,7 @@
     }
     .options {
         box($yellowPosting, $green, 3px, 15px, solid, 1px)
-        margin: 20px auto;
+        margin: 25px auto;
         position: relative;
         width: 285px;
         tab-arrow(bottom, $yellowPosting, $green, 1px, 18px, 90);
@@ -31,6 +31,8 @@
         &::after {
             left: 32px;
         }
+        list-style-type: inherit;
+        list-style-position: inside;
     }
     .search-form {
         display: inline;
@@ -59,7 +61,6 @@
         }
     }
     .category-list {
-        margin-top: 10px;
         width: 100%;
         .category {
             float: left;

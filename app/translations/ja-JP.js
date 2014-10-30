@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': '\u30BF\u30A4\u30C8\u30EB',
     'misc.WantToGoBack': '\u623B\u308A\u305F\u3044\u306E\u306F\u672C\u5F53\u3067\u3059\u304B\uFF1F',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': '\u8A72\u5F53\u3059\u308B\u30EA\u30B9\u30C8\u306F\u3042\u308A\u307E\u305B\u3093',
     'contact_us.ContactBrand': 'OLX\u306B\u9023\u7D61\u3059\u308B',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': '\u591A\u6570\u306E\u5E83\u544A\u3092OLX\u306B\u63D0\u51FA\u3057\u305F\u3044\u5834\u5408\u3001XML\u65B9\u5F0F\u3001\u307E\u305F\u306FCSV\u65B9\u5F0F\u3092\u3054\u5229\u7528\u9802\u3051\u307E\u3059\u3002\u307E\u305F\u3001\u3053\u306E\u5E83\u544A\u306F\u7121\u6599\u3067\u516C\u958B\u3067\u304D\u3001\u5B9A\u671F\u7684\u306B\u66F4\u65B0\u3055\u308C\u307E\u3059\u3002',
     'business_directory.Map': '\u5730\u56F3',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u4ED6\u306E\u30B5\u30FC\u30D3\u30B9\u7D4C\u7531\u3067\u58F2\u5374',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\u58F2\u5374\u3057\u306A\u3044\u3053\u3068\u306B\u6C7A\u5B9A',
     'posting_removedsurvey.WarningAdToBeRemoved': 'OLX \u304B\u3089\u306E\u5E83\u544A\u524A\u9664\u624B\u7D9A\u304D\u5B8C\u4E86\u307E\u3067\u3042\u3068\u4E00\u6B69\u3067\u3059\u3002',
+    'crm_new_version.CheckSpelling': '\u30B9\u30DA\u30EB\u3092\u3054\u78BA\u8A8D\u4E0B\u3055\u3044\u3002',
     'crm_new_version.RenameCategory_3': '\u306E\u4E2D\u306B',
     'crm_new_version.SomethingElseToPost': '\u4ED6\u306B\u63B2\u8F09\u3059\u308B\u3082\u306E\u306F\u3042\u308A\u307E\u3059\u304B\uFF1F'
 };

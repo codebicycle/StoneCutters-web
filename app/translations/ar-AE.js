@@ -263,6 +263,7 @@ module.exports = {
     'terms.TermsOfUse': '\u0634\u0631\u0648\u0637 \u0627\u0644\u0627\u0633\u062A\u062E\u062F\u0627\u0645',
     'misc.SinceDate': 'Since <<DATE>>',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'No item listings found',
     'contact_us.ContactBrand': 'Contact OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'If you have lots of listings you want to submit to OLX, you can use an XML feed.',
     'business_directory.Map': 'Map',

@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Pamagat',
     'misc.WantToGoBack': 'Sigurado ba kayong gusto ninyong bumalik?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Walang natagpuan na mga patalastas ng item',
     'contact_us.ContactBrand': 'Makipag-ugnay sa OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Kung nais mong magsumite ng maraming patalastas sa OLX,  maaari mong ipadala ang mga ito sa XML o CSV format. Ilalathala namin ang mga ito nang libre at ang mga patalastas na ito ay regular na i-a-update.',
     'business_directory.Map': 'Mapa',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Ibinenta ito sa pamamagitan ng ibang serbisyo',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Napagpasiyahang huwag ito ibenta',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Ang iyong anunsiyo ay aalisin na sa OLX',
+    'crm_new_version.CheckSpelling': 'Tingnan ang inyong pagkabaybay',
     'crm_new_version.RenameCategory_3': 'sa',
     'crm_new_version.SomethingElseToPost': 'Mayroon pa ba kayong ipo-post?'
 };

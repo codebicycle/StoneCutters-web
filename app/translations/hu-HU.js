@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'C\xEDm',
     'misc.WantToGoBack': 'Biztos vissza akar t\xE9rni?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Nincs hirdet\xE9s a t\xE9telre',
     'contact_us.ContactBrand': 'L\xE9pjen kapcsolatba az OLX-szel',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ha sok hirdet\xE9st szeretne nyilv\xE1noss\xE1gra hozni az OLX oldalain, elk\xFCldheti nek\xFCnk XML vagy CSV form\xE1tumban. Mi ingyenesen k\xF6z\xE9tessz\xFCk, \xE9s rendszeresen friss\xEDtj\xFCk ezeket a hirdet\xE9seket.',
     'business_directory.Map': 'T\xE9rk\xE9p',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'M\xE1s szolg\xE1ltat\xE1ssal \xE9rt\xE9kes\xEDtettem a term\xE9ket',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\xDAgy d\xF6nt\xF6ttem, m\xE9gsem adom el',
     'posting_removedsurvey.WarningAdToBeRemoved': 'A hirdet\xE9s\xE9t hamarosan elt\xE1vol\xEDtjuk innen OLX',
+    'crm_new_version.CheckSpelling': 'Ellen\u0151rizze a helyes\xEDr\xE1st.',
     'crm_new_version.RenameCategory_3': 'kateg\xF3ria:',
     'crm_new_version.SomethingElseToPost': 'Akad valami m\xE1s is, amit feladna?'
 };

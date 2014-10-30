@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Title',
     'misc.WantToGoBack': 'Are you sure you want to go back?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Aucune annonce d\'item de trouv\xE9',
     'contact_us.ContactBrand': 'Contactez OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Si vous voulez soumettre plusieurs annonces sur OLX, vous pouvez nous les envoyer en format XML ou CSV. Nous les publierons gratuitement et ces annonces seront mises \xE0 jour r\xE9guli\xE8rement.',
     'business_directory.Map': 'Carte',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vendu par le biais d\'un autre service',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Ne souhaite plus vendre',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Votre annonce sera retir\xE9e prochainement de OLX',
+    'crm_new_version.CheckSpelling': 'Check your spelling',
     'crm_new_version.RenameCategory_3': 'in',
     'crm_new_version.SomethingElseToPost': 'Do you have something else to post?'
 };

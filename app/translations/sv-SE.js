@@ -346,6 +346,7 @@ module.exports = {
     'misc.Title_Mob': 'Titel',
     'misc.WantToGoBack': '\xC4r du s\xE4ker p\xE5 att du vill g\xE5 tillbaka?',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Inga annonser f\xF6r objektet hittade',
     'contact_us.ContactBrand': 'Kontakta OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Om du vill skicka in m\xE5nga annonser till OLX, s\xE5 kan du skicka in dem i XML eller CSV format. Vi publicerar dem gratis och dessa annonser kommer att blir regelbundet uppdaterade.',
     'business_directory.Map': 'Karta',
@@ -355,6 +356,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'S\xE5ld via annan tj\xE4nst',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Best\xE4mde mig f\xF6r att inte s\xE4lja den',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Din annons \xE4r p\xE5 v\xE4g att tas bort fr\xE5n OLX',
+    'crm_new_version.CheckSpelling': 'Kontrollera din stavning',
     'crm_new_version.RenameCategory_3': 'i',
     'crm_new_version.SomethingElseToPost': 'Har du n\xE5got annat att publicera?'
 };
