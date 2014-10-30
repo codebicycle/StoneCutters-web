@@ -31,11 +31,7 @@ module.exports = Base.extend({
         });
     },
     termsErrors: function(val) {
-        if (val) {
-            $('fieldset.accept').removeClass('error');
-        } else {
-            $('fieldset.accept').addClass('error');
-        }
+        $('fieldset.accept').toggleClass('error', !val);
     },
     validTerms: function() {
         var input = this.$("input[name='agreeTerms']");
