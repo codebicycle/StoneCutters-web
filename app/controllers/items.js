@@ -696,7 +696,7 @@ function search(params, callback, isGallery) {
         var query;
         var url;
 
-        var prepareUrl = function(done) {
+        var configure = function(done) {
             url = ['/nf/'];
 
             if (params.categoryId) {
@@ -723,7 +723,6 @@ function search(params, callback, isGallery) {
             delete params.search;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -731,8 +730,15 @@ function search(params, callback, isGallery) {
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
 
+            done();
+        }.bind(this);
+
+        var redirect = function(done) {
             if (!query.search || _.isEmpty(query.search.trim())) {
                 done.abort();
+                if (platform === 'desktop') {
+                    return helpers.common.redirect.call(this, '/nf/all-results');
+                }
                 return callback(null, {
                     search: '',
                     metadata: {
@@ -789,6 +795,7 @@ function search(params, callback, isGallery) {
 
             callback(null, ['items/search', (isGallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
+                filters: items.filters,
                 metadata: metadata,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
@@ -801,8 +808,9 @@ function search(params, callback, isGallery) {
         }.bind(this);
 
         asynquence().or(error)
-            .then(prepareUrl)
+            .then(configure)
             .then(prepare)
+            .then(redirect)
             .then(fetch)
             .then(paginate)
             .val(success);
@@ -846,7 +854,6 @@ function allresults(params, callback, isGallery) {
 
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             done();
         }.bind(this);
@@ -897,6 +904,7 @@ function allresults(params, callback, isGallery) {
             callback(null, {
                 categories: _categories.toJSON(),
                 items: _items.toJSON(),
+                filters: _items.filters,
                 metadata: metadata,
                 infiniteScroll: infiniteScroll,
                 tracking: tracking.generateURL.call(this)
@@ -1028,6 +1036,7 @@ function staticSearch(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
+        var url = ['/q/', params.search, '/c-', params.catId, '/'].join('');
         var query;
 
         var redirect = function(done) {
@@ -1048,7 +1057,6 @@ function staticSearch(params, callback) {
             delete params.search;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
@@ -1093,11 +1101,23 @@ function staticSearch(params, callback) {
             done(res.items);
         }.bind(this);
 
-        var success = function(_items) {
-            var url = ['/q/', query.search, '/c-', params.catId ,  '/'].join('');
-            var metadata = _items.metadata;
+        var paginate = function(done, _items) {
+            var realPage;
 
-            helpers.pagination.paginate(metadata, query, url);
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = _items.paginate(page, query, url);
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, url + '-p-' + realPage);
+            }
+            done(_items);
+        }.bind(this);
+
+        var success = function(_items) {
+            var metadata = _items.metadata;
 
             seo.setContent(_items.metadata.seo);
             if (metadata.total < 5) {
@@ -1111,6 +1131,7 @@ function staticSearch(params, callback) {
 
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
+                filters: _items.filters,
                 metadata: metadata,
                 search: query.search,
                 infiniteScroll: infiniteScroll,

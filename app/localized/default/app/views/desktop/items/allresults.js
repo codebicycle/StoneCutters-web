@@ -1,8 +1,8 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('items/allresults');
-var Filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
+var Filters = require('../../../../../../collections/filters');
 
 module.exports = Base.extend({
     id: 'items-allresults-view',
@@ -12,16 +12,12 @@ module.exports = Base.extend({
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var filters = Filters.sort(this.order, data.metadata.filters);
 
-        if (!this.filters) {
-            this.filters = new Filters(this.app.session.get('path'));
-        }
+        this.filters = data.filters;
+        this.filters.order = this.order;
 
         return _.extend({}, data, {
             items: data.items,
-            filters: filters,
-            wFilters: this.filters,
             nav: {
                 link: 'nf/all-results',
                 linkig: 'nf/all-results-ig',
@@ -31,7 +27,10 @@ module.exports = Base.extend({
     },
     postRender: function() {
         if (!this.filters) {
-            this.filters = new Filters(this.app.session.get('path'));
+            this.filters = new Filters(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
         }
     }
 });

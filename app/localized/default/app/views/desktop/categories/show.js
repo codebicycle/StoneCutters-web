@@ -1,9 +1,9 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('categories/show');
-var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
+var Filters = require('../../../../../../collections/filters');
 
 module.exports = Base.extend({
     id: 'categories-show-view',
@@ -24,7 +24,6 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.app.session.get('path');
         var linkig = link + '-ig/';
-        var filters = Filters.sort(this.order, data.metadata.filters);
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var showAdSenseListingBottom = helpers.features.isEnabled.call(this, 'adSenseListingBottom', platform, location.url);
@@ -33,14 +32,11 @@ module.exports = Base.extend({
         if (~link.indexOf('/-')) {
             linkig = link.replace('/-', '-ig/-');
         }
-        if (!this.filters) {
-            this.filters = new Filters(link);
-        }
+        this.filters = data.filters;
+        this.filters.order = this.order;
 
         return _.extend({}, data, {
             items: data.items,
-            filters: filters,
-            wFilters: this.filters,
             showAdSenseListingBottom: showAdSenseListingBottom,
             showAdSenseListingTop: showAdSenseListingTop,
             nav: {
@@ -51,9 +47,11 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
-
         if (!this.filters) {
-            this.filters = new Filters(this.app.session.get('path'));
+            this.filters = new Filters(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
         }
     },
     toogleFilter: function(event) {
@@ -99,7 +97,7 @@ module.exports = Base.extend({
         };
 
         if ($target.is(':checked') && !this.filters.has(filter.name, filter.value)) {
-            this.filters.set(filter);
+            this.filters.add(filter);
         }
         else {
             this.filters.remove(filter);
@@ -117,16 +115,18 @@ module.exports = Base.extend({
 
         var path = this.app.session.get('path');
         var $target = $(event.currentTarget);
+        var $from = $target.siblings('[data-filter-id=from]');
+        var $to = $target.siblings('[data-filter-id=to]');
         var filter = {
             name: $target.data('filter-name'),
             type: $target.data('filter-type'),
             value: {
-                from: $target.siblings('[data-filter-id=from]').val(),
-                to: $target.siblings('[data-filter-id=to]').val()
+                from: $from.val() || $from.data('filter-value') || '',
+                to: $to.val() || $to.data('filter-value') || ''
             }
         };
 
-        this.filters.set(filter);
+        this.filters.add(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);
@@ -149,7 +149,7 @@ module.exports = Base.extend({
             }
         };
 
-        this.filters.set(filter);
+        this.filters.add(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.cleanPath(path);
         path = helpers.common.link(path, this.app);

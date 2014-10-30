@@ -10,8 +10,8 @@ module.exports = {
         desktop: 'UA-55365098-1'
     },
     staging: {
-        'default': 'UA-50756825-1',
-        desktop: 'UA-55365098-1'
+        'default': 'UA-137146-124',
+        desktop: 'UA-137146-124'
     },
     testing: {
         'default': 'UA-50756825-1',
