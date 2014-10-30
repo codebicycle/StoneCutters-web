@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Pesquisas mais populares',
     'defaultheader.PostAFreeAd': 'Publicar um an\xFAncio gr\xE1tis',
     'defaultheader.WhatAreYouLookingFor': 'O que voc\xEA est\xE1 procurando?',
+    'defaultheader.WhereBuyersMeetSellers': 'Onde compradores encontram vendedores',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Assista nossa campanha publicit\xE1ria!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Classificados gr\xE1tis - <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Voltar \xE0 p\xE1gina anterior.',

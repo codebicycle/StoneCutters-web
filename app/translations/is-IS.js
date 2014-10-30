@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Algeng leitaror\xF0',
     'defaultheader.PostAFreeAd': 'Birta \xF3keypis augl\xFDsingu',
     'defaultheader.WhatAreYouLookingFor': 'Hverju ertu a\xF0 leita a\xF0?',
+    'defaultheader.WhereBuyersMeetSellers': '\xDEar sem kaupendur finna seljendur',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Horf\xF0u \xE1 n\xFDju sj\xF3nvarpsaugl\xFDsinguna okkar!',
     'defaulthtmlhead.FreeClassifiedsInArea': '\xD3keypis sm\xE1augl\xFDsingar \xED/\xE1 <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Fara aftur \xE1 s\xED\xF0ustu s\xED\xF0u.',

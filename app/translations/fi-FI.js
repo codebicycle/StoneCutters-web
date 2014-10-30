@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Suositut haut',
     'defaultheader.PostAFreeAd': 'L\xE4het\xE4 ilmainen ilmoitus',
     'defaultheader.WhatAreYouLookingFor': 'Mit\xE4 etsit?',
+    'defaultheader.WhereBuyersMeetSellers': 'Paikka, jossa ostajat ja myyj\xE4t kohtaavat',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Katso uusi TV-mainos!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Ilmaisia ilmoituksia alueella <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Siirry takaisin edelliselle sivulle.',

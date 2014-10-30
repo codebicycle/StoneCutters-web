@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Popul\xE1rne h\u013Eadania',
     'defaultheader.PostAFreeAd': 'Uverejnite bezplatn\xFA reklamu',
     'defaultheader.WhatAreYouLookingFor': '\u010Co h\u013Ead\xE1te?',
+    'defaultheader.WhereBuyersMeetSellers': 'Kde n\xE1kupcovia stret\xE1vaj\xFA predajcov',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Pozrite si na\u0161u nov\xFA telev\xEDznu reklamu!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Bezplatn\xE9 inzer\xE1ty v <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Sp\xE4\u0165 na predch\xE1dzaj\xFAcu str\xE1nku.',

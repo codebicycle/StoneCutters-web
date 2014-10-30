@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Mga Paghahanap na Popular',
     'defaultheader.PostAFreeAd': 'Mag-post ng Libreng Patalastas',
     'defaultheader.WhatAreYouLookingFor': 'Ano ang hinahanap mo?',
+    'defaultheader.WhereBuyersMeetSellers': 'Kung saan nakikipagkita ang mga buyer sa mga nagbebenta',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tingnan ang aming bagong patalastas sa TV!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Libreng Patalastas sa <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Bumalik sa naunang pahina',

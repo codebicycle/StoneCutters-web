@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Najcz\u0119\u015Bciej szukane',
     'defaultheader.PostAFreeAd': 'Zamie\u015B\u0107 darmowe og\u0142oszenie',
     'defaultheader.WhatAreYouLookingFor': 'Czego szukasz?',
+    'defaultheader.WhereBuyersMeetSellers': 'miejsce, gdzie kupuj\u0105cy spotykaj\u0105 sprzedaj\u0105cych',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Zobacz nasz\u0105 now\u0105 reklam\u0119 telewizyjn\u0105!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Darmowe og\u0142oszenia - <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Wr\xF3\u0107 do poprzedniej strony',

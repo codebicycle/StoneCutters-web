@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Popul\xEAre Soeke',
     'defaultheader.PostAFreeAd': 'Pos \'n Gratis Advertensie',
     'defaultheader.WhatAreYouLookingFor': 'Waarna soek jy?',
+    'defaultheader.WhereBuyersMeetSellers': 'waar kopers verkopers ontmoet',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Kyk na ons nuwe TV-advt.!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Gratis snuffeladvertensies in <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Gaan terug na vorige bladsy.',

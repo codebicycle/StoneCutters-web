@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': '\uC778\uAE30 \uAC80\uC0C9',
     'defaultheader.PostAFreeAd': '\uBB34\uB8CC \uAD11\uACE0\uB97C \uC62C\uB9AC\uC138\uC694',
     'defaultheader.WhatAreYouLookingFor': '\uBB34\uC5C7\uC744 \uCC3E\uACE0 \uACC4\uC2ED\uB2C8\uAE4C?',
+    'defaultheader.WhereBuyersMeetSellers': '\uAD6C\uB9E4\uC790\uC640 \uD310\uB9E4\uC790\uAC00 \uB9CC\uB098\uB294 \uACF3',
     'defaulthtmlhead.CheckOutOurNewTvAd': '\uC800\uD76C \uC0C8 TV \uAD11\uACE0\uC785\uB2C8\uB2E4!',
     'defaulthtmlhead.FreeClassifiedsInArea': '\uBB34\uB8CC \uC548\uB0B4\uAD11\uACE0 \uC9C0\uC5ED <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\uC774\uC804 \uD398\uC774\uC9C0\uB85C \uB3CC\uC544\uAC00\uC138\uC694',

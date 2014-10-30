@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'N\xE9pszer\u0171 keres\xE9sek',
     'defaultheader.PostAFreeAd': 'Adjon fel ingyenes hirdet\xE9st',
     'defaultheader.WhatAreYouLookingFor': 'Mit keres?',
+    'defaultheader.WhereBuyersMeetSellers': 'Ahol vev\u0151 \xE9s elad\xF3 egym\xE1sra tal\xE1l',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Tekintse meg az \xFAj TV-rekl\xE1munkat!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Ingyenes apr\xF3hirdet\xE9sek a <AREA> z\xF3n\xE1ban',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Vissza az el\u0151z\u0151 oldalra',

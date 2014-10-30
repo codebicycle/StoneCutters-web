@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Les plus recherch\xE9s',
     'defaultheader.PostAFreeAd': 'Publier une annonce gratuite',
     'defaultheader.WhatAreYouLookingFor': 'Que recherchez vous?',
+    'defaultheader.WhereBuyersMeetSellers': 'O\xF9 les acheteurs rencontrent les vendeurs',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'D\xE9couvrez notre nouveau spot TV!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Annonces gratuites <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Revenir \xE0 la page pr\xE9c\xE9dente',

@@ -27,6 +27,7 @@ module.exports = {
     'defaultheader.PopularSearches': 'Utafutaji Maarufu',
     'defaultheader.PostAFreeAd': 'Chapisha Tangazo la Bure',
     'defaultheader.WhatAreYouLookingFor': 'Je, unatafuta nini?',
+    'defaultheader.WhereBuyersMeetSellers': 'mahali wanunuzi wanakutana na wauzaji',
     'defaulthtmlhead.CheckOutOurNewTvAd': 'Angalia tangazo letu jipya la runinga!',
     'defaulthtmlhead.FreeClassifiedsInArea': 'Matangazo ya bure katika <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Rudi kwenye ukurasa uliopita.',
