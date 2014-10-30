@@ -288,7 +288,9 @@ module.exports = function(nunjucks) {
         linkFilter: linkFilter,
         filter: filters,
         pagination: paginations,
-        'static': helpers.common.static,
+        static: function() {
+            return helpers.common.static.apply(this.ctx, arguments);
+        },
         slugToUrl: helpers.common.slugToUrl
     };
 };
