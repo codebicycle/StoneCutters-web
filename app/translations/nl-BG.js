@@ -3,6 +3,7 @@
 module.exports = {
     'biderrorheader.Help': 'Help',
     'biderrorheader.My OLX': 'Mijn OLX',
+    'biderrorheader.Or': 'of',
     'buyerinfo.E-mail': 'E-mail',
     'countryoptions.AllDepartaments': 'Alle districten',
     'countryoptions.ChangeCity': 'Plaats wijzigen',
@@ -104,6 +105,8 @@ module.exports = {
     'netvibes_myolx.content.NoActiveListings': 'Je hebt momenteel geen actieve advertenties.',
     'netvibes_myolx.content.Views': 'Gezien',
     'supportform.Message': 'Bericht:',
+    'supportform.Reset': 'Opnieuw',
+    'seccion-30.478': 'Verwijder+Aadvertentie',
     'distancediv.changeLocation': 'Wijzig locatie',
     'postingtitlelisting.view': 'Je kunt je advertentie bekijken op:',
     'posting_selector.SelectCategory': 'Kies een rubriek',
@@ -116,6 +119,7 @@ module.exports = {
     'posting_selectcategory.categories': 'Rubriek',
     'posting_selectcategory.subCategories': 'Subrubriek',
     'posting_optionallist.Kms': 'Kms',
+    'posting_optionallist.other': 'Overig',
     'itemgeneraldetails.addFavorites': 'Toevoegen aan favorieten',
     'itemgeneraldetails.BackResults': 'Terug naar Resultaten',
     'itemgeneraldetails.City': 'stad',
@@ -163,6 +167,7 @@ module.exports = {
     'register_form.termsAgreeB': 'Gebruiksvoorwaarden',
     'myolx.ApprovalPending': 'In afwachting van goedkeuring',
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Weet je zeker dat je de geselecteerde advertenties wilt verwijderen?',
+    'myolx.BackToMyAds': 'Terug naar mijn advertenties',
     'myolx.EditListing': 'Wijzig advertentie',
     'myolx.Messages': 'Berichten',
     'myolx.MyAds': 'Mijn advertenties',
@@ -263,8 +268,14 @@ module.exports = {
     'terms.TermsOfUse': 'Gebruiksvoorwaarden',
     'misc.SinceDate': 'Sinds <<DATE>>',
     'widgets.Denounce': 'Denounce',
+    'widgets.NoListingFound': 'Geen advertenties gevonden',
     'contact_us.ContactBrand': 'Contact met OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Als je veel advertenties wilt indienen bij OLX, kun je ons de advertenties sturen in XML- of CSV-indeling. De advertenties worden gratis gepubliceerd en regelmatig bijgewerkt.',
     'business_directory.Map': 'Kaart',
-    'optionals.opt-138-323-translation-location': 'Location'
+    'optionals.opt-138-323-translation-location': 'Location',
+    'posting_removedsurvey.RemovedAdSurvey': 'Om de verwijdering te voltooien, deelt u ons alstublieft mee waarom u deze advertentie wilt verwijderen:',
+    'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Verkocht via OLX',
+    'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Verkocht via een andere dienst',
+    'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Besloten om het niet te verkopen',
+    'posting_removedsurvey.WarningAdToBeRemoved': 'Uw advertentie staat op punt te worden verwijderd vanOLX'
 };
