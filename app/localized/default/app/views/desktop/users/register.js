@@ -75,7 +75,7 @@ module.exports = Base.extend({
 
         var always = function() {
             $('body').removeClass('submit');
-        }
+        };
 
         var success = function(item) {
             always();
