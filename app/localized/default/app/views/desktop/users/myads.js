@@ -134,7 +134,7 @@ module.exports = Base.extend({
         var key = data.dictionary['myolx.AreYouSureYouWantToCloseSelectedListings'];
 
         if(confirm(key)){
-            console.log("Eliminara");
+            //todo: sin implementar en smaug
             content.fadeOut();
         }
     }
