@@ -19,7 +19,8 @@ module.exports = Base.extend({
         'click .btndelete': 'onDeleteClick',
         'click .btncanceldelete': 'onCancelDeleteClick',
         'click .backtomyolx': 'onCancelDeleteClick',
-        'submit .formdelete': 'onSubmit'
+        'submit .formdelete': 'onSubmit',
+        'click .btndelforever': 'onDeleteForever'
     },
     onDeleteClick: function(event) {
         event.preventDefault();
@@ -82,7 +83,7 @@ module.exports = Base.extend({
             }, done.errfcb);
         }.bind(this);
 
-        var successdos = function(_myAds) {
+        var successmyads = function(_myAds) {
             this.ads = _myAds.myAds.toJSON();
             this.render();
         }.bind(this);
@@ -102,7 +103,7 @@ module.exports = Base.extend({
             asynquence().or(error)
                 .then(prepare)
                 .then(findAds)
-                .val(successdos);
+                .val(successmyads);
         }.bind(this);
 
         var error = function(err) {
@@ -121,5 +122,20 @@ module.exports = Base.extend({
 
         $('.formdeleteitem').hide();
         $('.my-items').show();
+    },
+    onDeleteForever: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $item = $(event.target);
+        var content = $item.parents('li');
+        var data = Base.prototype.getTemplateData.call(this);
+        var key = data.dictionary['myolx.AreYouSureYouWantToCloseSelectedListings'];
+
+        if(confirm(key)){
+            //todo: sin implementar en smaug
+            content.fadeOut();
+        }
     }
 });
