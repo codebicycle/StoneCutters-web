@@ -1118,6 +1118,9 @@ function staticSearch(params, callback) {
 
         var success = function(_items) {
             var metadata = _items.metadata;
+            var categories;
+            var category;
+            var subcategory;
 
             seo.setContent(_items.metadata.seo);
             if (metadata.total < 5) {
@@ -1127,7 +1130,18 @@ function staticSearch(params, callback) {
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
 
+            categories = this.app.session.get('categories');
+            category = categories.search(params.catId);
+
+            if (category.has('parentId')) {
+                subcategory = category;
+                category = categories.get(subcategory.get('parentId'));
+            }
+
             tracking.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('keyword', query.search);
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
 
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
