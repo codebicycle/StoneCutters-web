@@ -1,0 +1,16 @@
+<img width="349" height="173" src="{{ '/images/desktop/couch.jpg' | static }}" alt="" />
+    <p class="message">
+        {{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}
+    </p>
+    <h3>Encuentra lo que estás buscando</h3>   
+    {% view 'partials/search' %}
+    <ul class="category-list">
+        {% for category in categories %}
+            <li class="category">
+                <a class="category-link" href="{{ category | slugToUrl | link }}">
+                    {% block icon %}<span class="icon cat-{{ category.id }}"></span>{% endblock %}
+                    {{ category.trName }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>

@@ -47,6 +47,62 @@ main {
     z-index: 999999;
 }
 
+.category-list {
+    clear-fix();
+    padding-left: 20px;
+    float: left;
+    width: 224px;
+    &:first-child {
+        padding-left: 24px;
+    }
+    .category {
+        float: left;
+        li {
+            padding-bottom: 8px;
+        }
+    }
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            background: url(imageUrl/images/desktop/sprite-home-icons.png)  0 0 no-repeat;
+            display: block;
+            height: 54px;
+            margin: 20px 0 9px;
+            width: 54px;
+        }
+        .cat-186 {
+            background-position: 0 -108px;
+        }
+        .cat-187 {
+            background-position: 0 -432px;
+        }
+        .cat-16 {
+            background-position: 0 -216px;
+        }
+        .cat-185 {
+            background-position: 0 -378px;
+        }
+        .cat-190 {
+            background-position: 0 -54px;
+        }
+        .cat-191 {
+            background-position: 0 -162px;
+        }
+        .cat-362 {
+            background-position: 0 -648px;
+        }
+    }
+    .category-link {
+        color: $black;
+        display: inline-block;
+        font-size: $l;
+        margin-bottom: 13px; 
+    }
+}
+
 .env-label {
 	background: $orange;
 	color: $white;
