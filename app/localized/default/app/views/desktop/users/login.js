@@ -9,7 +9,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var params = this.options.params || {};
-        console.log(data.form);
+
         return _.extend({}, data, {
             params: params
         });
