@@ -6,7 +6,7 @@
 </div>
 
 <div class="expired-item">
-    <figure class="items-image {{ '' if item.images[0].thumbnail else 'icons icon-photo' }}">
+    <figure class="items-image {{ 'icons icon-photo' if item.images[0].thumbnail }}">
         {% if item.images[0].thumbnail %}
             <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
         {% endif %}
