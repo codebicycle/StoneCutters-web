@@ -6,7 +6,7 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'posting-images-view wrapper',
+    className: 'posting-images-view field-wrapper',
     id: 'posting-images-view',
     tagName: 'fieldset',
     selected: {},

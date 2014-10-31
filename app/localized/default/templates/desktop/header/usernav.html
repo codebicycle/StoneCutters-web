@@ -1,6 +1,6 @@
 <ul class="list-without-styles">
     {% if not user %}
-        <li><a href="{{ '/login' | link }}" rel="nofollow">{{ dictionary["loginbox.Login"] }}</a> o <a href="{{ '/register' | link }}" rel="nofollow">{{ dictionary["postbox.RegisterNow"] }}</a></li>
+        <li><a href="{{ '/login' | link }}" rel="nofollow">{{ dictionary["loginbox.Login"] }}</a> o<a href="{{ '/register' | link }}" rel="nofollow">{{ dictionary["postbox.RegisterNow"] }}</a></li>
     {% else %}
         <li><a href="{{ '/myolx/myadslisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyAds"] }}</a></li><!--
         --><li><a href="{{ '/myolx/favoritelisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyFavorites"] }}</a></li><!--

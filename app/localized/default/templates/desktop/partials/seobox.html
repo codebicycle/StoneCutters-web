@@ -1,20 +1,24 @@
 {% set populars = seo.get('popularSearches') %}
 {% set relateds = seo.get('relatedListings') %}
 
-{% if populars.length > 0 %}
-    <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
-    <ul>
-        {% for popular in seo.get('popularSearches') %}
-            <li><a href="{{ popular.url }}" >{{ popular.anchor }}</a></li>
-        {% endfor %}
-    </ul>
-{% endif %}
+{% if populars.length > 0 or relateds.length > 0  %}
+    <section id="seo-box">
+        {% if populars.length > 0 %}
+            <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
+            <ul>
+                {% for popular in seo.get('popularSearches') %}
+                    <li><a href="{{ popular.url }}" >{{ popular.anchor }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-{% if relateds.length > 0 %}
-    <span class="title">{{ dictionary["itemgeneraldetails.RelatedListings"] }}</span>
-    <ul>
-        {% for related in seo.get('relatedListings') %}
-            <li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
-        {% endfor %}
-    </ul>
+        {% if relateds.length > 0 %}
+            <span class="title">{{ dictionary["itemgeneraldetails.RelatedListings"] }}</span>
+            <ul>
+                {% for related in seo.get('relatedListings') %}
+                    <li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
 {% endif %}

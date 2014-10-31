@@ -9,11 +9,12 @@
             font-weight: normal;
             margin: 0;
             padding: 13px 0 13px 20px;
+            text-transform: capitalize;
         }
         ul {
             ul-reset();
             li {
-                border-top: 1px solid #b9ddf3;
+                border-top: 1px solid $lightBlueBorder;
             }
         }
 
@@ -25,10 +26,11 @@
         }
 
         .selected {
-            background: #fff;
-            border-right: 1px solid #b9ddf3;
+            background: $white;
+            border-right: 1px solid $lightBlueBorder;
             cursor: auto;
             position: relative;
+
             a,
             .icons:before {
                 color: $greyStrong;
@@ -45,13 +47,13 @@
         }
         .selected:after {
             border-color: rgba(255, 255, 255, 0);
-            border-left-color: #fff;
-            border-width: 26    px;
+            border-left-color: $white;
+            border-width: 26px;
             margin-top: -26px;
         }
         .selected:before {
             border-color: rgba(185, 221, 243, 0);
-            border-left-color: #b9ddf3;
+            border-left-color: $lightBlueBorder;
             border-width: 27px;
             margin-top: -27px;
         }
@@ -59,7 +61,7 @@
     }
 
     .help-content {
-        box(#fff, $greyBorders , 3px, 0, solid, 1px);
+        box($white, $greyBorders , 3px, 0, solid, 1px);
         float: right;
         width: 656px;
 
@@ -95,13 +97,12 @@
         }
 
         .faq-open {
-            background: #eee;
-
+            background: $greyBoxBg;
             h4 {
                 font-weight: bold;
             }
             .icon-arrowright:before {
-                color: #000;
+                color: $black;
             }
         }
 
