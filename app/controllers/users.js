@@ -330,7 +330,7 @@ function messages(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            callback(null, 'users/messages', {
+            callback(null, {
                 messages: response.messages.toJSON()
             });
         }.bind(this);
@@ -383,7 +383,7 @@ function readmessages(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            callback(null,'users/readmessages', {
+            callback(null, {
                 message: response.message.toJSON()
             });
         }.bind(this);
