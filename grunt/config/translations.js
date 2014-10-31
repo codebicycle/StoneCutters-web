@@ -46,6 +46,8 @@ module.exports = {
         'misc.WantToGoBack',
         'myolx.AreYouSureYouWantToCloseSelectedListings',
         'misc.LessThan',
-        'posting_optionallist.Kms'
+        'posting_optionallist.Kms',
+        'countryoptions.Home_SelectState',
+        'countryoptions.Home_SelectCity'
     ]
 };

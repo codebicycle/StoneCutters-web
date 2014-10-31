@@ -1,22 +1,31 @@
-<fieldset class="wrapper">
-    <label for="seller-state" class="posting-label">* Estado</label>
-    <div class="wrapper-inputs">
-        <select id="seller-state" class="text-field select-field">
-            {% for state in states %}
-                <option class="state" value="{{ state.url }}" data-qa="state"{% if state.url == selectedState %} selected="selected"{% endif %}>{{ state.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-</fieldset>
+{% from macros import Field %}
+
+{% set statesField = {
+    isOptional: "false",
+    name: "state",
+    mandatory: "true",
+    label: "Estado",
+    values: states,
+    fieldType: "combobox",
+    dataType: "select",
+    selected: selected.state
+} %}
+
+{{ Field(statesField) }}
+
 {% if cities %}
-    <fieldset class="wrapper">
-        <label for="seller-city" class="posting-label">* Ciudad</label>
-        <div class="wrapper-inputs">
-            <select id="seller-city" class="text-field select-field">
-                {% for city in cities %}
-                    <option class="city" value="{{ city.url }}" data-qa="city">{{ city.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </fieldset>
+
+    {% set citiesField = {
+        isOptional: "false",
+        name: "location",
+        mandatory: "true",
+        label: "Ciudad",
+        values: cities,
+        fieldType: "combobox",
+        dataType: "select",
+        selected: selected.city
+    } %}
+
+    {{ Field(citiesField) }}
+
 {% endif %}

@@ -1,5 +1,11 @@
+.users_lostpassword_view,
 .users_login_view {
-    box($white, $greyBorders, 3px, 0 0 20px 0, solid, 1px);
+    min-height: 300px;
+
+    .lostpassword_view,
+    .login_view {
+        box($white, $greyBorders, 3px, 0 0 20px 0, solid, 1px);
+    }
 
     .title {
         border-bottom: 1px solid $greyBorders;
@@ -73,6 +79,40 @@
 
     .register {
         margin: 20px 0 0 200px;
+    }
+
+    .lostpassword_view {
+        .forgot-msg {
+            padding: 0 20px;
+        }
+        .text-field {
+            float: left;
+        }
+        form {
+            .send {
+                float: left;
+                padding: 11px 30px;
+                margin: 0 0 0 10px;
+            }
+            .login-label {
+                width: auto;
+                text-align: left;
+            }
+        }
+        .advice {
+            clear: both;
+            float: left;
+        }
+    }
+
+    .lostpassword_success {
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            &::before {
+                margin: -2px 5px 0 0;
+            }
+        }
     }
 
 }

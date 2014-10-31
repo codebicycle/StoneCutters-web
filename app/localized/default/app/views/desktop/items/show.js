@@ -128,24 +128,33 @@ module.exports = Base.extend({
             var $replySuccess = $('.replySuccses');
             var category = $('.itemCategory').val();
             var subcategory = $('.itemSubcategory').val();
-            var tracking;
 
             $('.comment').val('');
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
-            tracking = $('<div></div>').append(data);
-            tracking = $('#replySuccess', tracking);
-            $replySuccess.append(tracking.length ? tracking : '');
             this.track({
                 category: 'Reply',
                 action: 'ReplySuccess',
                 custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
             });
             $replySuccess.removeClass('hide');
+            done(data);
         }.bind(this);
 
-        var track = function(done) {
+        var trackTracking = function(done, data) {
+            var $view = $('#partials-tracking-view');
+            var tracking;
+
+            tracking = $('<div></div>').append(data);
+            tracking = $('#partials-tracking-view', tracking);
+            if (tracking.length) {
+                $view.trigger('updateHtml', tracking.html());
+            }
+            done();
+        }.bind(this);
+
+        var trackGraphite = function(done) {
             var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
 
             $.ajax({
@@ -184,7 +193,9 @@ module.exports = Base.extend({
         asynquence().or(fail)
                 .then(validate)
                 .then(post)
-                .gate(success, track);
+                .then(success)
+                .then(trackTracking)
+                .then(trackGraphite);
 
     },
     validateForm: function(email, name, comment) {
