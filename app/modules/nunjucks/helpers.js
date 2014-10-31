@@ -242,6 +242,10 @@ module.exports = function(nunjucks) {
                     if (_page > 1) {
                         replace = '-p-' + _page;
                     }
+
+                    if (page == 1)
+                        regExp = new RegExp('/-p-([0-9]+)', 'g');
+
                     out.push(helpers.common.link(url.replace(regExp, replace), context.app));
                     out.push('" class="pagination-number" >');
                     out.push(_page);
