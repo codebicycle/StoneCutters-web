@@ -22,16 +22,12 @@ module.exports = Base.extend({
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var link = this.app.session.get('path');
-        var linkig = link + '-ig/';
+        var link = this.cleanPage(this.app.session.get('path'));
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var showAdSenseListingBottom = helpers.features.isEnabled.call(this, 'adSenseListingBottom', platform, location.url);
         var showAdSenseListingTop = helpers.features.isEnabled.call(this, 'adSenseListingTop', platform, location.url);
 
-        if (~link.indexOf('/-')) {
-            linkig = link.replace('/-', '-ig/-');
-        }
         this.filters = data.filters;
         this.filters.order = this.order;
 
@@ -41,7 +37,7 @@ module.exports = Base.extend({
             showAdSenseListingTop: showAdSenseListingTop,
             nav: {
                 link: link,
-                linkig: linkig,
+                linkig: helpers.common.linkig.call(this, link, null, 'showig'),
                 listAct: 'active'
             }
         });
@@ -104,7 +100,7 @@ module.exports = Base.extend({
         }
 
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-        path = this.cleanPath(path);
+        path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
@@ -128,7 +124,7 @@ module.exports = Base.extend({
 
         this.filters.add(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-        path = this.cleanPath(path);
+        path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
 
@@ -151,16 +147,24 @@ module.exports = Base.extend({
 
         this.filters.add(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-        path = this.cleanPath(path);
+        path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
-    cleanPath: function(path) {
-        if (path.match(this.regexpFindPage)) {
-            path = path.replace(this.regexpReplacePage, '');
-        }
+    refactorPath: function(path) {
+        path = this.cleanPage(path);
         if (path.slice(path.length - 1) === '/') {
             path = path.substring(0, path.length - 1);
+        }
+        return path;
+    },
+    cleanPath: function(path) {
+        path = this.refactorPath(path);
+        return path;
+    },
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
         }
         return path;
     }

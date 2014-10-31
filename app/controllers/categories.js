@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
+var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var Seo = require('../modules/seo');
 
@@ -174,7 +175,7 @@ function handleItems(params, promise, gallery) {
         var slug = helpers.common.slugToUrl((subcategory || category).toJSON());
 
         url = ['/', slug].join('');
-
+        
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
             return helpers.common.redirect.call(this, [url, gallery].join(''));
@@ -190,7 +191,7 @@ function handleItems(params, promise, gallery) {
     }.bind(this);
 
     var prepare = function(done) {
-        helpers.pagination.prepare(this.app, params);
+        Paginator.prepare(this.app, params);
 
         query = _.clone(params);
         params.categoryId = params.catId;
@@ -221,7 +222,10 @@ function handleItems(params, promise, gallery) {
             done.abort();
             return helpers.common.redirect.call(this, [url, gallery].join(''));
         }
-        realPage = res.items.paginate(page, query, url, gallery);
+        realPage = res.items.paginate([url, '[page][gallery][filters]'].join(''), query, {
+            page: page,
+            gallery: gallery
+        });
         if (realPage) {
             done.abort();
             return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));

@@ -9,11 +9,11 @@ module.exports = Base.extend({
     className: 'header-view',
     postRender: function () {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
-    	this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
+        this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
     },
     onPostingStart: function () {
-		$('.posting, .search-form').addClass('disabled');
-		$('.posting-title').removeClass('disabled');
+        $('.posting, .search-form').addClass('disabled');
+        $('.posting-title').removeClass('disabled');
     },
     onPostingEnd: function () {
         $('.posting, .search-form').removeClass('disabled');
