@@ -121,14 +121,9 @@ module.exports = Base.extend({
         }.bind(this);
 
         this.form.values[field.name] = $field.val();
-        fieldData = {
-            name: field.name,
-            value: this.form.values[field.name]
-        };
-        if ($field.data('validate')) {
-            field.validate = true;
-        }
-        this.parentView.$el.trigger('fieldSubmit', fieldData);
+        
+        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        
         if (!field.related) {
             return;
         }

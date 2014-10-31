@@ -42,7 +42,7 @@
         {% if placeholder %}
             placeholder="{{ placeholder }}"
         {% endif %}
-        {% if required %}
+        {% if required == true or required == 'true' %}
             required
         {% endif %}
         {% if validate %}
@@ -57,7 +57,7 @@
         name="{{name }}"
         class="text-field type-textarea"
         rows="12"
-        {% if required %}
+        {% if required == true or required == 'true' %}
             required
         {% endif %}
         {% if validate %}
@@ -71,7 +71,7 @@
         id="field-{{ name }}"
         name="{{ name }}"
         class="text-field type-select"
-        {% if required %}
+        {% if required == true or required == 'true' %}
             required
         {% endif %}
     >
@@ -88,7 +88,7 @@
 
 {% macro Field(hint = false, field) %}
     <fieldset class="field-wrapper">
-        {% if field.label %}<label for="field-{{ field.name }}" class="field-label">{{ '* ' if field.mandatory }}{{ field.label }}</label>{% endif %}
+        {% if field.label %}<label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}</label>{% endif %}
         <div class="field-controls">
             {% if field.fieldType == 'text' and field.name == 'description' %}
                 {{ Textarea(name = field.name, required = field.mandatory) }}
@@ -107,7 +107,7 @@
 
 {% macro PriceField(fieldLabel = '', fieldName = '', fieldMandatory = '', hint = false, fields) %}
     <fieldset class="field-wrapper">
-        {% if fieldLabel %}<label for="field-{{ fieldName }}" class="field-label">{{ '* ' if fieldMandatory }}{{ field.label }}{{ fieldLabel }}</label>{% endif %}
+        {% if fieldLabel %}<label for="field-{{ fieldName }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}{{ fieldLabel }}</label>{% endif %}
         <div class="field-controls">
             {% for field in fields %}
                 {% if field.fieldType == 'text' %}

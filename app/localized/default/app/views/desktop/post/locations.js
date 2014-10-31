@@ -10,92 +10,56 @@ module.exports = Base.extend({
     id: 'posting-locations-view',
     className: 'posting-locations-view',
     selected: {},
+    firstRender: true,
     initialize: function() {
+        Base.prototype.initialize.call(this);
         this.selected = {};
+        this.firstRender = true;
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
-        var states;
-        var cities;
 
-        if (location.current && location.current.type === 'state') {
-            this.selected.state = location.current.url;
+        if (location.current) {
+            switch (location.current.type) {
+                case 'state':
+                    this.selected.state = location.current.url;
+                    break;
+                case 'city':
+                    this.selected.city = location.current.url;
+                    this.selected.state = location.children[0].url;
+                    break;
+                default:
+                    break;
+            }
         }
-        else if (location.current && location.current.type === 'city') {
-            this.selected.city = location.current.url;
-            this.selected.state = location.children[0].url;
-        }
-
-        this.states = this.parentView.parentView.options.states;
-        
-        if (this.states) {
-            states = _.map(this.states.toJSON(), function each(state) {
-                return {
-                    key: state.url,
-                    value: state.name
-                };
-            });
-            states.unshift({
-                value: this.parentView.parentView.dictionary["countryoptions.Home_SelectState"]
-            });
-        }
-
-        if (this.cities) {
-            cities = _.map(this.cities.toJSON(), function each(city) {
-                return {
-                    key: city.url,
-                    value: city.name
-                };
-            });
-            cities.unshift({
-                value: this.parentView.parentView.dictionary["countryoptions.Home_SelectCity"]
-            });
-        }
-
+        this.getStates(!this.selected.state);
         return _.extend({}, data, {
-            states: states,
-            cities: cities,
+            states: this.states,
+            cities: this.cities || undefined,
             selected: this.selected
         });
     },
     postRender: function() {
-        this.states = this.states || this.parentView.options.states;
-        
-        if (this.rendered) {
-            return;
-        }
-        
-        if (this.selected.state && !this.$('#field-location').length) {
+        if (this.firstRender && this.selected.state) {
+            this.firstRender = false;
             this.$('#field-state').trigger('change');
-        }
-        else {
-            this.rendered = true;
-            if (this.selected.city) {
-                this.$('#field-location').trigger('change');
-            }
         }
     },
     events: {
         'change #field-state': 'onStateChange',
         'change #field-location': 'onCityChange'
     },
+    
     onStateChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
-
-        if ($field.val()) {
-            $field.closest('.field-wrapper').removeClass('error').addClass('success');
-        }
-        else {
-            $field.closest('.field-wrapper').addClass('error').removeClass('success');
-        }
-
-        this.selected.state = $(event.currentTarget).val();
-        this.getCities();
+        
+        this.selected.state = $field.val();
+        this.getCities(!this.selected.city);
     },
     onCityChange: function(event) {
         event.preventDefault();
@@ -104,18 +68,21 @@ module.exports = Base.extend({
 
         var $field = $(event.target);
 
-        console.log($field.val());
-
-        if ($field.val()) {
-            $field.closest('.field-wrapper').removeClass('error').addClass('success');
-        }
-        else {
-            $field.closest('.field-wrapper').addClass('error').removeClass('success');
-        }
-
+        this.selected.city = $field.val();
         this.parentView.$el.trigger('fieldSubmit', [$field]);
     },
-    getCities: function() {
+    getStates: function(addEmptyOption) {
+        this.states = _.map(this.parentView.parentView.options.states.toJSON(), function each(state) {
+            return {
+                key: state.url,
+                value: state.name
+            };
+        });
+        if (addEmptyOption) {
+            this.addEmptyOption('states', 'countryoptions.Home_SelectState');
+        }
+    },
+    getCities: function(addEmptyOption) {
         var fetch = function(done) {
             this.app.fetch({
                 cities: {
@@ -137,13 +104,27 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(response) {
-            this.cities = response.cities;
+            this.cities = _.map(response.cities.toJSON(), function each(city) {
+                return {
+                    key: city.url,
+                    value: city.name
+                };
+            });
+            if (addEmptyOption) {
+                this.addEmptyOption('cities', 'countryoptions.Home_SelectCity');
+            }
             this.render();
         }.bind(this);
 
         asynquence().or(error)
             .then(fetch)
             .val(success);
+    },
+    addEmptyOption: function(list, key) {
+        this[list].unshift({
+            key: '',
+            value: this.parentView.parentView.dictionary[key]
+        });
     }
 });
 
