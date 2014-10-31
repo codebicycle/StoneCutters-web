@@ -11,6 +11,7 @@ module.exports = {
     register: middlewares(register),
     success: middlewares(success),
     login: middlewares(login),
+    lostpassword: middlewares(lostpassword),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
@@ -51,6 +52,19 @@ function success(params, callback) {
     function controller() {
         callback(null, {
 
+        });
+    }
+}
+
+function lostpassword(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
+
+    function controller(form) {
+        callback(null, {
+            form: form,
+            success: params.success
         });
     }
 }
