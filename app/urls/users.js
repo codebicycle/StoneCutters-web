@@ -4,6 +4,9 @@ module.exports = {
     'users#register': {
         url: 'register'
     },
+    'users#success': {
+        url: 'register/success'
+    },
     'users#login': {
         url: 'login'
     },
@@ -24,5 +27,8 @@ module.exports = {
     },
     'users#readmessages': {
         url: 'myolx/readmessages/:msgId'
+    },
+    'users#deleteitem': {
+        url: 'myolx/deleteitem'
     }
 };

@@ -19,29 +19,29 @@ module.exports = {
             secureLogServer: 'logws306'
         },
         desktop: {
-            siteId: 522546,
+            siteId: 537448,
             logServer: 'logw306'
         }
     },
     testing: {
         'default': {
-            siteId: 533932,
+            siteId: 537448,
             logServer: 'logw306',
             secureLogServer: 'logws306'
         },
         desktop: {
-            siteId: 522546,
+            siteId: 537448,
             logServer: 'logw306'
         }
     },
     staging: {
         'default': {
-            siteId: 533932,
+            siteId: 537448,
             logServer: 'logw306',
             secureLogServer: 'logws306'
         },
         desktop: {
-            siteId: 522546,
+            siteId: 537448,
             logServer: 'logw306'
         }
     },

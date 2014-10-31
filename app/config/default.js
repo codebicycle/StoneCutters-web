@@ -40,7 +40,7 @@ module.exports = {
     interstitial: {
         enabled: true,
         clicks: 0,
-        time: 432000000,
+        time: 259200000,
         ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi', '/posting', '/posting/success', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },
@@ -84,13 +84,13 @@ module.exports = {
             },
             interstitialByADX: {
                 worldwide: false,
-                countries: ['www.olx.com.py']
+                countries: ['www.olx.com.ar', , 'www.olx.cl']
             }
         },
         html4: {
             interstitialByADX: {
                 worldwide: false,
-                countries: ['www.olx.com.py']
+                countries: ['www.olx.com.ar', 'www.olx.cl']
             }
         }
     },

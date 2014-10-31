@@ -1,4 +1,4 @@
-{% include (template + "/partials/breadcrumb.html") %}
+{% include (template + "/items/breadcrumb.html") %}
 
 <div class="related-category icons icon-tag">
     <h3>{{ dictionary["misc.EverythingSells"]|replace('<<BRAND>>','OLX') }}</h3>
@@ -6,9 +6,11 @@
 </div>
 
 <div class="expired-item">
-    <div class="item-image">
-        <img src="{{ item.images[0].thumbnail if item.images[0].thumbnail else ('/images/html4/noPhoto.png' | static) }}">
-    </div>
+    <figure class="items-image {{ 'icons icon-photo' if item.images[0].thumbnail }}">
+        {% if item.images[0].thumbnail %}
+            <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
+        {% endif %}
+    </figure>
     <h3><span class="label">{{ dictionary["item.Ended_New"] }}</span>{{ item.title }}</h3>
     <div class="description">{{ item.description }}</div>
 </div>
@@ -19,6 +21,6 @@
     {% include (template + '/items/parentcategories.html') %}
 </nav>
 
-<section id='listing-items'>
+<section id="listing-items">
     {% include (template + '/items/list.html') %}
 </section>

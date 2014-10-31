@@ -8,28 +8,55 @@ module.exports = Base.extend({
     id: 'footer-view',
     className: 'footer-view',
      events: {
-        'click [data-footer-slideUp]': 'slideUpContent',
-        'click [data-footer-slidedown]': 'slideDownContent'
-    },
-    slideUpContent: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        var element = $(event.currentTarget);
-
-        $('[data-slide-content] > div').css('display','none');
-        $('[data-footer-slideUp]').parent().removeClass('active');
-
-        element.parent().addClass('active');
-        $('.' + element.attr('data-footer-slideUp')).slideToggle();
+        'click [data-footer-slidedown]': 'slideDownContent',
+        'click [data-footer-slide]': 'slideFooter'
     },
     slideDownContent: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        var element = $(event.currentTarget),
-        classTochange = element.attr('data-footer-slideDown');
-        $('a[data-footer-slideUp="' + classTochange + '"]').parent().removeClass('active');
-        $('.' + element.attr('data-footer-slideDown')).slideToggle();
+
+        var $slide = $('.footer-slide.open');
+        var $select = $('.select li.active');
+
+        $slide.addClass('onTransition');
+        $slide.removeClass('open');
+        $slide.slideToggle('slow', function() {
+            $select.removeClass('active');
+            $slide.removeClass('onTransition');
+        });
     },
+    slideFooter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $current = $(event.currentTarget);
+        var $currentSlide = $('.' + $current.data('footer-slide'));
+        var $slide = $('.footer-slide');
+        var $select = $('.select li');
+
+        if(!$select.parent().hasClass('onTransition')){
+            if($slide.hasClass('open') && !$currentSlide.hasClass('open')) {
+                $select.parent().addClass('onTransition');
+                $slide.filter('.open').slideToggle('slow', function() {
+                    $slide.filter('.open').toggleClass('open');
+                    $select.removeClass('active');
+                    $current.parent().addClass('active');
+                    $currentSlide.slideToggle('slow', function() {
+                        $currentSlide.toggleClass('open');
+                        $select.parent().removeClass('onTransition');
+                    });
+                });
+            }
+            else {
+                $select.parent().addClass('onTransition');
+                $currentSlide.slideToggle('slow', function() {
+                    $current.parent().toggleClass('active');
+                    $currentSlide.toggleClass('open');
+                    $select.parent().removeClass('onTransition');
+                });
+            }
+        }
+    }
 });

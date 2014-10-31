@@ -67,6 +67,16 @@ module.exports = {
             page_nb: 0
         }
     },
+    'items#staticSearch': {
+        process: true,
+        names: {
+            page_name: 'expired_category',
+            category: 'listing',
+            subcategory: 'expired_subCategory',
+            keyword: '',
+            page_nb: 0
+        }
+    },
     'items#allresults': {
         process: true,
         names: {

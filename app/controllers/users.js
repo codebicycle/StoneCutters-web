@@ -9,6 +9,7 @@ var config = require('../../shared/config');
 
 module.exports = {
     register: middlewares(register),
+    success: middlewares(success),
     login: middlewares(login),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
@@ -40,6 +41,16 @@ function register(params, callback) {
             form: form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
+function success(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
         });
     }
 }
@@ -106,7 +117,7 @@ function myolx(params, callback) {
                 status: 302
             });
         }
-        
+
         callback(null, {});
     }
 }
@@ -138,12 +149,12 @@ function myads(params, callback) {
                 token: user.token,
                 userId: user.userId,
                 location: this.app.session.get('siteLocation'),
+                languageCode: this.app.session.get('selectedLanguage'),
                 item_type: 'myAds'
             }, params);
 
             done();
         }.bind(this);
-
         var findAds = function(done) {
             this.app.fetch({
                 myAds: {
