@@ -897,7 +897,7 @@ function allresults(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
-            realPage = res.items.paginate(['/nf/all-results[page][gallery][filters]'].join(''), query, {
+            realPage = res.items.paginate(['/nf/all-results[gallery][page][filters]'].join(''), query, {
                 page: page,
                 gallery: gallery
             });

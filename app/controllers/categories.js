@@ -175,7 +175,7 @@ function handleItems(params, promise, gallery) {
         var slug = helpers.common.slugToUrl((subcategory || category).toJSON());
 
         url = ['/', slug].join('');
-        
+
         if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
             done.abort();
             return helpers.common.redirect.call(this, [url, gallery].join(''));

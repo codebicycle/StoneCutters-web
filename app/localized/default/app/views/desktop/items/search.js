@@ -163,7 +163,6 @@ module.exports = Base.extend({
 
         path = path.replace('/search/', filterSlug);
         path = this.refactorPath(path);
-        console.log(path);
         this.app.router.redirectTo(path);
     },
     refactorPath: function(path) {
