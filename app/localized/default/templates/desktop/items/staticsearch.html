@@ -1,18 +1,19 @@
 {% set isStaticSearch = true %}
 STATIC SEARCH!
-<nav id="listing-filters">
-    {% include (template + '/items/filters.html') %}
-</nav>
+<div class="wrapper-main">
+    <nav id="listing-filters">
+        {% include (template + '/items/filters.html') %}
+    </nav>
 
-<section id='listing-items'>
+    <section id='listing-items'>
+        <ul class="items-list">
+            {% include (template + '/items/items.html') %}
+        </ul>
 
-    <ul class="items-list">
-        {% include (template + '/items/items.html') %}
-    </ul>
-
-    {% if metadata.next or metadata.previous %}
-        {% include (template + '/items/pagination.html') %}
-    {% endif %}
-</section>
+        {% if metadata.next or metadata.previous %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    </section>
+</div><!-- wrapper main -->
 
 {% view 'partials/tracking' %}
