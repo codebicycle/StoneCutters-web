@@ -9,12 +9,12 @@ var config = require('../../shared/config');
 
 module.exports = {
     register: middlewares(register),
+    success: middlewares(success),
     login: middlewares(login),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
-    favorites: middlewares(favorites),
-    deleteitem: middlewares(deleteitem)
+    favorites: middlewares(favorites)
 };
 
 function register(params, callback) {
@@ -39,6 +39,16 @@ function register(params, callback) {
             form: form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
+function success(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
         });
     }
 }
@@ -137,12 +147,12 @@ function myads(params, callback) {
                 token: user.token,
                 userId: user.userId,
                 location: this.app.session.get('siteLocation'),
+                languageCode: this.app.session.get('selectedLanguage'),
                 item_type: 'myAds'
             }, params);
 
             done();
         }.bind(this);
-
         var findAds = function(done) {
             this.app.fetch({
                 myAds: {
@@ -279,53 +289,5 @@ function favorites(params, callback) {
             .then(findFavorites)
             .then(check)
             .val(success);
-    }
-}
-
-function deleteitem(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller(form) {
-        var user;
-
-        var prepare = function(done) {
-            var platform = this.app.session.get('platform');
-
-            if (platform === 'wap') {
-                return helpers.common.redirect.call(this, '/');
-            }
-            user = this.app.session.get('user');
-            if (!user) {
-                return helpers.common.redirect.call(this, '/login', null, {
-                    status: 302
-                });
-            }
-            done();
-        }.bind(this);
-
-        var deleteitem = function(done) {
-            helpers.dataAdapter.post(this.app.req, '/items/' + params.itemId + '/delete', {
-                query: {
-                    token: user.token,
-                    platform: this.app.session.get('platform')
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function() {
-            helpers.common.redirect.call(this, 'myolx/myadslisting', null, {
-                status: 302
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(deleteitem)
-            .val(success);
-
     }
 }

@@ -22,3 +22,5 @@ module.exports = Base.extend({
         });
     }
 });
+
+module.exports.id = 'categories/showig';

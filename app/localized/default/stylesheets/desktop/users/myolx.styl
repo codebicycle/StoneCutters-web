@@ -159,6 +159,10 @@
                     display: inline-block;
                     padding: 3px;
                     text-transform: lowercase;
+                    &.city {
+                        padding: 3px 0;
+                        text-transform: capitalize;
+                    }
                 }
 
                 .text {
@@ -186,11 +190,11 @@
             }
         }
 
-
-
-        .expired, .deleted, .rejected, .pending {
+        .expired {
             .image {
-
+                img {
+                    opacity: .5;
+                }
                 .status {
                     background: $greyBorders;
 
@@ -215,27 +219,35 @@
                     color: $greyBorders
                 }
             }
-        }
-        .expired {
-            .image {
-                opacity: .5;
-            }
+
         }
         .deleted {
             .image {
-                opacity: .5;
+                img {
+                    opacity: .5;
+                }
 
                 .status {
-                    background: $greyStrong;
+                    background: $black;
 
                     &:after {
-                        border-color: $greyStrong transparent $greyStrong $greyStrong;
+                        border-color: $black transparent $black $black;
                     }
                     &:before {
-                        border-color: $greyStrong transparent;
+                        border-color: $black transparent;
                     }
                 }
 
+            }
+            .description {
+                .title {
+                    color: $greyBorders;
+                }
+            }
+            .price {
+                span {
+                    color: $greyBorders
+                }
             }
         }
         .rejected {
@@ -250,6 +262,16 @@
                     }
                 }
 
+            }
+            .description {
+                .title {
+                    color: $disableText;
+                }
+            }
+            .price {
+                span {
+                    color: $disableText
+                }
             }
         }
         .pending {
@@ -293,6 +315,7 @@
         font-size: $l;
         padding: 40px 0;
         text-align: center;
+        color: $disableText;
     }
 
     .removeAd {

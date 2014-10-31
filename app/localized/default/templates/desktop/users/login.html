@@ -2,34 +2,29 @@
 {% if form.errors.main %}
     {% set error = dictionary["posting_fields_1.validationError"] %}
 {% endif %}
+
 <h4 class="title">{{ dictionary["loginbox.Login"] }}</h4>
 <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
     <fieldset class="wrapper {{ 'error' if error != '' }}">
         <label class="login-label">{{ dictionary["comments.CommentsFormEmail"] }}</label>
         <div class="wrapper-inputs">
-            <input class="text-field" type="text" name="usernameOrEmail" data-qa="username-field">
+            <input class="text-field" type="text" name="usernameOrEmail" data-qa="username-field" value="{{ form.values.usernameOrEmail if form.values.usernameOrEmail else '' }}">
             <small class="advice">{{ error }}</small>
         </div>
     </fieldset>
     <fieldset class="wrapper {{ 'error' if error != '' }}">
         <label class="login-label">{{ dictionary["messages_email_register.Password"] }}:</label>
         <div class="wrapper-inputs">
-            <input class="text-field" type="password" name="password" data-qa="password-field">
+            <input class="text-field" type="password" name="password" data-qa="password-field" value="{{ form.values.password if form.values.password else '' }}">
             <small class="advice">{{ error }}</small>
         </div>
         <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
-    </fieldset>
-    <fieldset class="wrapper">
-        <label class="remember">
-            <input type="checkbox">
-            {{ dictionary["loginbox.RememberMe"] }}
-        </label>
     </fieldset>
     <fieldset class="wrapper">
         <input type="submit" value="{{ dictionary["loginbox.SingInButon"] }}" class="posting send" data-qa="login-button">
         <a href="#" class="forgot">{{ dictionary["landingbody.ForgotPassword"] }}</a>
     </fieldset>
 </form>
-<p class="register">{{ dictionary["loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand"] }}<a href="{{ '/register' | link }}"> {{ dictionary["loginbox.Register"] }}</a></p>
+<p class="register">{{ dictionary["loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand"] }} <a href="{{ '/register' | link }}">{{ dictionary["loginbox.Register"] }}</a></p>
 
 {% view 'partials/tracking' %}

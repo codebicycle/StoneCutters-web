@@ -4,6 +4,9 @@ module.exports = {
     'users#register': {
         url: 'register'
     },
+    'users#success': {
+        url: 'register/success'
+    },
     'users#login': {
         url: 'login'
     },
@@ -20,6 +23,6 @@ module.exports = {
         url: 'myolx/favoritelisting'
     },
     'users#deleteitem': {
-        url: 'myolx/deleteitem/:itemId'
+        url: 'myolx/deleteitem'
     }
 };
