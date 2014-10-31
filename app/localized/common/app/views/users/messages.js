@@ -7,11 +7,6 @@ module.exports = Base.extend({
     className: 'users_messages_view',
     wapAttributes: {
         cellpadding: 0
-    },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-
-        return data;
     }
 });
 
