@@ -153,7 +153,7 @@ _.extend(SeoModule.prototype, {
                 var mycategory = (staticsearch.category) ? staticsearch.category : '';
                 var query = (staticsearch.query) ? staticsearch.query : '';
                 var myregion = this.app.session.get('location').current.name;
-                this.set('h1', query + ':' + dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion) + ' | OLX');
+                this.set('h1', query + ': ' + dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion) + ' | OLX');
             }
         }
 

@@ -44,8 +44,6 @@ function list(params, callback) {
             seo.addMetatag('title', categories.metadata.title);
             seo.addMetatag('description', categories.metadata.description);
             seo.setContent(categories.metadata.seo);
-            console.log(seo.get('h1'));
-
 
             callback(null, {
                 cities: response.cities.toJSON(),

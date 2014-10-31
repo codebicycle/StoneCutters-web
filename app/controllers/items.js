@@ -1049,7 +1049,11 @@ function staticSearch(params, callback) {
                 categories = this.app.session.get('categories');
                 category = categories.search(params.catId);
                 if (!category) {
-                    category = categories.get(subcategory.get('parentId'));
+                    category = categories.get(params.catId);
+                    if (!category) {
+                        done.abort();
+                        return helpers.common.redirect.call(this, '/');
+                    }
                 }
                 if (category.has('parentId')) {
                     subcategory = category;
