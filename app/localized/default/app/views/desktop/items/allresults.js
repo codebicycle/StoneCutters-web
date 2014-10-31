@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('items/allresults');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
 var Filters = require('../../../../../../collections/filters');
 
 module.exports = Base.extend({
@@ -9,9 +10,12 @@ module.exports = Base.extend({
     className: 'items-allresults-view',
     tagName: 'main',
     order: ['state', 'city'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var link = 'nf/all-results';
 
         this.filters = data.filters;
         this.filters.order = this.order;
@@ -19,8 +23,8 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             items: data.items,
             nav: {
-                link: 'nf/all-results',
-                linkig: 'nf/all-results-ig',
+                link: link,
+                linkig: helpers.common.linkig.call(this, link, null, 'allresultsig'),
                 listAct: 'active'
             }
         });
@@ -32,5 +36,11 @@ module.exports = Base.extend({
                 path: this.app.session.get('path')
             });
         }
+    },
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
+        return path;
     }
 });

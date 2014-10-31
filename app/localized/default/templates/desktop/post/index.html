@@ -1,8 +1,9 @@
-<form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
+<form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data" novalidate>
     <section id="posting-item-information" class="posting-item-information">
     	{% view 'post/categories' %}
     	{% view 'post/images' %}
     	{% view 'post/description' %}
+    	{% view 'post/price' %}
         {% view 'post/optionals' %}
     </section>
     {% view 'post/contact' %}

@@ -5,160 +5,6 @@ var dateformat = require('dateformat');
 var helpers = require('../../helpers');
 
 module.exports = function(nunjucks) {
-    function log() {
-        console.log.apply(console, arguments);
-    }
-
-    function encode(text) {
-        return encodeURIComponent(text);
-    }
-
-    function date(timestamp) {
-        return dateformat(new Date(timestamp), 'dd/mm/yyyy');
-    }
-
-    function countFormat(count) {
-        return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
-    function is(value, type) {
-        var fn = _[['is', type.charAt(0).toUpperCase(), type.slice(1)].join('')];
-
-        if (fn) {
-            return fn.call(_, value);
-        }
-        return typeof value === type;
-    }
-
-    function link(href, query) {
-        href = helpers.common.fullizeUrl(href, this.ctx.app);
-        return helpers.common.link(href, this.ctx.app, query || {});
-    }
-
-    function linkig(href, query) {
-        var regexpFindPage = /-p-[0-9]+/;
-        var regexpReplacePage = /(-p-[0-9]+)/;
-        var regexpFindCategory = /[a-zA-Z0-9-]+-cat-[0-9]+/;
-        var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
-        var querystring;
-        var pairs;
-        var path;
-
-        if (this.ctx.nav && this.ctx.nav.galeryAct) {
-            pairs = href.split('?');
-            path = pairs[0];
-            querystring = pairs[1];
-
-            if (!~path.indexOf('-ig')) {
-                if (this.ctx.nav.current === 'searchig') {
-                    if (path.match(regexpFindPage)) {
-                        path = path.match(regexpReplacePage, '$1-ig');
-                    }
-                    else if (path.match(regexpFindCategory)) {
-                        path = path.match(regexpReplaceCategory, '$1-ig');
-                    }
-                    else if (path.slice(path.length - 1) !== '/') {
-                        path += '/';
-                    }
-                    path += '-ig';
-                }
-                else if (this.ctx.nav.current === 'allresultig') {
-                    if (path.match(regexpFindPage)) {
-                        path = path.match(regexpReplacePage, '-ig$1');
-                    }
-                    else if (path.slice(path.length - 1) === '/') {
-                        path = path.substring(0, path.length - 1);
-                    }
-                    path += '-ig';
-                }
-                else if (this.ctx.nav.current === 'showig') {
-                    if (path.match(regexpFindPage)) {
-                        path = path.match(regexpReplacePage, '$1-ig');
-                    }
-                    else if (path.slice(path.length - 1) === '/') {
-                        path = path.substring(0, path.length - 1);
-                    }
-                    path += '-ig';
-                }
-            }
-
-            href = path;
-            if (querystring) {
-                href = '?' + querystring;
-            }
-        }
-        return link.call(this, href, query);
-    }
-
-    function linkFilter(filter, metadata, query) {
-        var name = '-' + filter.name + '_';
-        var regExp = new RegExp(name + '-p-([0-9]+)', 'g');
-        var current = metadata.current.replace(regExp, '-p-1');
-        var href = current + name + true;
-
-        if (~current.indexOf(name)) {
-            regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
-            href = current.replace(regExp, name + true);
-        }
-        return link.call(this, href, query);
-    }
-
-    function filters(filter, currentURL) {
-        var out = [];
-        var current;
-        var name = '-' + filter.name + '_';
-        var regExp = new RegExp(name + '-p-([0-9]+)', 'g');
-
-        currentURL = currentURL.replace(regExp, '-p-1');
-
-        function prepareURL(value, description) {
-            out.push('<a href="');
-            if (!~currentURL.indexOf(name)) {
-                out.push(currentURL + name + value);
-            } else {
-                regExp = new RegExp(name + '([a-zA-Z0-9_]*)', 'g');
-                out.push(currentURL.replace(regExp, name + value));
-            }
-            out.push('">' + description + '</a>');
-        }
-
-        out.push('<div id="filter-' + filter.name + '">');
-        switch(filter.type) {
-            case 'SELECT':
-                out.push('<h4>' + filter.description + '</h4>');
-                out.push('<ul class="list-group">');
-                _.each(filter.value, function outputSelectFilter(item) {
-                    out.push('<li class="list-group-item">');
-                    prepareURL(item.id, item.value);
-                    out.push('</li>');
-                });
-                out.push('</ul>');
-                break;
-            case 'BOOLEAN':
-                out.push('<div class="checkbox">');
-                out.push(' <label for="filter-check-' + filter.name + '">');
-                prepareURL(true, '<input id="filter-check-' + filter.name + '" type="checkbox"> ' + filter.description);
-                out.push(' </label>');
-                out.push('</div>');
-                break;
-            case 'RANGE':
-                out.push('<h4>' + filter.description + '</h4>');
-                out.push('<form action="/nf/filter/redirect" method="post" class="form-inline" role="form">');
-                _.each(filter.value, function outputRangeFilter(item) {
-                    out.push('<input type="text" class="form-control" name="' + item.id + '_' + filter.name +'" placeholder="' + item.value + '" size="5">');
-                });
-                out.push('  <input type="hidden" class="hide" name="currentURL" value="' + currentURL + '">');
-                out.push('  <input type="hidden" class="hide" name="name" value="' + filter.name + '">');
-                out.push('  <button type="submit" class="btn btn-default">&gt;</button>');
-                out.push(' </form>');
-                out.push('</div>');
-                break;
-            default:
-                break;
-        }
-        out.push('</div>');
-        return out.join('');
-    }
 
     function paginations(metadata, platform) {
         var context = this.ctx;
@@ -242,6 +88,10 @@ module.exports = function(nunjucks) {
                     if (_page > 1) {
                         replace = '-p-' + _page;
                     }
+
+                    if (page == 1)
+                        regExp = new RegExp('/-p-([0-9]+)', 'g');
+
                     out.push(helpers.common.link(url.replace(regExp, replace), context.app));
                     out.push('" class="pagination-number" >');
                     out.push(_page);
@@ -277,18 +127,68 @@ module.exports = function(nunjucks) {
         return out.join('');
     }
 
+    function link(href, query) {
+        href = helpers.common.fullizeUrl(href, this.ctx.app);
+        return helpers.common.link(href, this.ctx.app, query || {});
+    }
+
+    function linkig(href, query) {
+        if (this.ctx.nav && this.ctx.nav.galeryAct) {
+            href = helpers.common.linkig.call(this.ctx, href, query, this.ctx.nav.current);
+        }
+        return helpers.common.fullizeUrl(href, this.ctx.app);
+    }
+
+    function encode(text) {
+        return encodeURIComponent(text);
+    }
+
+    function date(timestamp, complete) {
+        complete = complete || false;
+        var completeDate;
+        var month;
+        if (complete === true) {
+            month = timestamp.split('-')[1];
+            month = this.ctx.dictionary['messages_date_format.1' + month];
+            completeDate = dateformat(new Date(timestamp), 'dd, h:MM:ss TT');
+            completeDate = month + ' ' + completeDate;
+            return completeDate;
+        } else {
+            return dateformat(new Date(timestamp), 'dd/mm/yyyy');
+        }
+    }
+
+    function countFormat(count) {
+        return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function log() {
+        console.log.apply(console, arguments);
+    }
+
+    function is(value, type) {
+        var fn = _[['is', type.charAt(0).toUpperCase(), type.slice(1)].join('')];
+
+        if (fn) {
+            return fn.call(_, value);
+        }
+        return typeof value === type;
+    }
+
+    function statics() {
+        return helpers.common.static.apply(this.ctx, arguments);
+    }
+
     return {
-        log: log,
-        encode: encode,
-        date: date,
-        countFormat: countFormat,
         is: is,
+        log: log,
+        date: date,
         link: link,
         linkig: linkig,
-        linkFilter: linkFilter,
-        filter: filters,
+        encode: encode,
+        'static': statics,
         pagination: paginations,
-        'static': helpers.common.static,
+        countFormat: countFormat,
         slugToUrl: helpers.common.slugToUrl
     };
 };

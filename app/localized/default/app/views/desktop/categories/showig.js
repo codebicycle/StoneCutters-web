@@ -9,16 +9,18 @@ module.exports = Base.extend({
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var link = this.app.session.get('path');
+        var link = this.cleanPage(this.app.session.get('path'));
 
         delete data.nav.listAct;
         return _.extend({}, data, {
             nav: {
-                linkig: link,
                 link: link.replace('-ig', ''),
+                linkig: link,
                 galeryAct: 'active',
                 current: 'showig'
             }
         });
     }
 });
+
+module.exports.id = 'categories/showig';

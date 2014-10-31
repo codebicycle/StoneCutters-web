@@ -9,15 +9,18 @@ module.exports = Base.extend({
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var link = this.cleanPage(this.app.session.get('path'));
 
         delete data.nav.listAct;
         return _.extend({}, data, {
             nav: {
-                link: 'nf/all-results',
-                linkig: 'nf/all-results-ig',
+                link: link.replace('-ig', ''),
+                linkig: link,
                 galeryAct: 'active',
-                current: 'allresultig'
+                current: 'allresultsig'
             }
         });
     }
 });
+
+module.exports.id = 'items/allresultsig';

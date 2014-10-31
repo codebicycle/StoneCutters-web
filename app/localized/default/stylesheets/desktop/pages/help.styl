@@ -4,76 +4,96 @@
         box($lightBlue, $lightBlueBorder , 3px, 0, solid, 1px);
         float: left;
         width: 294px;
-        h3 {
-            font-size: $l;
-            font-weight: normal;
-            margin: 0;
-            padding: 13px 0 13px 20px;
-        }
         ul {
             ul-reset();
             li {
-                border-top: 1px solid #b9ddf3;
+                border-top: 1px solid $lightBlueBorder;
             }
         }
 
-        .icons{
-            padding-right: 4px;
-            &:before {
-                font-size: $l;
+        .help-toggle-content {
+            display: block;
+            padding: 14px 0 15px 20px;
+            &:hover {
+                background: $white;
             }
         }
-        
+
+        .icons::before {
+            font-size: $m;
+            margin-right: 10px;
+        }
+
         .selected {
+            background: $white;
+            border-right: 1px solid $lightBlueBorder;
+            cursor: auto;
             position: relative;
-            background: #fff;
-            border-right: 1px solid #b9ddf3;
-            
+
             a,
-            .icons:before {
+            .icons::before {
                 color: $greyStrong;
             }
+
+            &:hover a {
+                text-decoration: none;
+            }
         }
-        .selected:after, .selected:before { 
-            left: 100%; 
-            top: 50%;
+        .selected::after,
+        .selected::before {
             border: solid transparent;
             content: " ";
-            height: 0; 
+            height: 0;
+            left: 100%;
+            position: absolute;
+            top: 50%;
             width: 0;
-            position: absolute; 
-            pointer-events: none;
         }
-        .selected:after { 
-            border-color: rgba(255, 255, 255, 0); 
-            border-left-color: #fff;
-            border-width: 26    px;
-            margin-top: -26px; 
+        .selected::after {
+            border-color: rgba(255, 255, 255, 0);
+            border-left-color: $white;
+            border-width: 24px;
+            margin-top: -24px;
         }
-        .selected:before {
-            border-color: rgba(185, 221, 243, 0); 
-            border-left-color: #b9ddf3; 
-            border-width: 27px;
-            margin-top: -27px; 
+        .selected::before {
+            border-color: rgba(185, 221, 243, 0);
+            border-left-color: $lightBlueBorder;
+            border-width: 25px;
+            margin-top: -25px;
+        }
+        .title {
+            font-size: $xl;
+            font-weight: normal;
+            margin: 0;
+            padding: 15px 0 15px 20px;
         }
 
     }
 
     .help-content {
-        box(#fff, $greyBorders , 3px, 0, solid, 1px);
+        box($white, $greyBorders , 3px, 0, solid, 1px);
         float: right;
         width: 656px;
 
-        h3 {
-            font-size: $l;
-            font-weight: normal;
-            padding: 13px 0 13px 20px;
-            margin: 0;
-            border-bottom: 1px solid $greyBorders;
+        .help-content-display {
+            display: none;
+            &:first-child {
+                display: block;
+            }
         }
 
-        .icon-arrowright:before {
+        .title {
+            border-bottom: 2px solid $greyBorders;
+            font-size: $l;
+            font-weight: bold;
+            margin: 0;
+            padding: 19px 0 18px 20px;
+        }
+
+        .icon-arrow-right:before {
             color: $greyStrong;
+            font-size: remify(8px);
+            margin-right: 10px;
         }
 
         .question {
@@ -81,47 +101,48 @@
             &:last-child {
                 border-bottom: none;
             }
-
-            h4 {
-                cursor: pointer;                
-                font-weight: normal;
-                margin: 0;
-                padding: 20px;
+            &hover .icon-arrow-right::before {
+                color: $black;
             }
 
-            p {
-                line-height: remify(18px);
+            h4 {
+                cursor: pointer;
+                font-weight: normal;
                 margin: 0;
+                padding: 15px;
             }
         }
 
         .faq-open {
-            background: #eee;
-            
+            background: $greyBoxBg;
             h4 {
                 font-weight: bold;
             }
-            .icon-arrowright:before {
-                color: #000;
+            .icon-arrow-down::before {
+                color: $black;
+                font-size: remify(8px);
+                margin-right: 10px;
             }
         }
 
         .question-content {
-            padding: 0 0 14px 20px;
+            display: none;
+            line-height: 1.5;
+            padding: 0 20px 15px 20px;
+
+            p {
+                margin: 0;
+            }
 
             ul {
                 ul-reset();
-            }
-            li {
-                line-height: remify(18px);                
+                li {
+                    line-height: remify(18px);
+                }
             }
         }
     }
 
-    .help-toggle-content {
-        display: block;
-        padding: 15px 0 15px 18px;
-    }
 }
 
 

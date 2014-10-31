@@ -6,6 +6,7 @@ var querystring = require('querystring');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
 var tracking = require('../../../../../modules/tracking');
+var Paginator = require('../../../../../modules/paginator');
 var Seo = require('../../../../../modules/seo');
 
 module.exports = Base.extend({
@@ -139,7 +140,7 @@ module.exports = Base.extend({
             params.page = preparePageParam(urlFull);
             params.catId = prepareCategoryParam(urlFull);
 
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             params.categoryId = params.catId;
             params.seo = seo.isEnabled();
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;

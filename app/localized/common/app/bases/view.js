@@ -75,7 +75,7 @@ module.exports = Base.extend({
             tracking = $.deparam(tracking.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
         }
         obj = _.defaults(obj, data, tracking, {
-            url: helpers.common.static('/images/common/gif1x1.gif')
+            url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
         });
         options = _.defaults((options || {}), {
             url: '/analytics/pageevent.gif',

@@ -1,9 +1,10 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/allresults');
 var _ = require('underscore');
+var asynquence = require('asynquence');
 var helpers = require('../../../../../../helpers');
 var Seo = require('../../../../../../modules/seo');
 var tracking = require('../../../../../../modules/tracking');
-var asynquence = require('asynquence');
+var Paginator = require('../../../../../../modules/paginator');
 
 module.exports = Base.extend({
     className: 'items_allresults_view',
@@ -123,7 +124,7 @@ module.exports = Base.extend({
             params.page = preparePageParam(urlFull);
             params.catId = prepareCategoryParam(urlFull);
 
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             params.categoryId = params.catId;
             params.seo = seo.isEnabled();
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;

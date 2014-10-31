@@ -9,7 +9,7 @@ var asynquence = require('asynquence');
 module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-categories-view',
-    className: 'posting-categories-view wrapper',
+    className: 'posting-categories-view field-wrapper',
     events: {
         'click .posting-categories-list a.category': 'onCategoryClick',
         'click .child-categories-list a': 'onSubCategoryClick'

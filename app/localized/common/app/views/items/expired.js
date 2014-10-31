@@ -18,7 +18,7 @@ module.exports = Base.extend({
             items: data.relatedItems,
             nav: {
                 link: 'nf/all-results',
-                linkig: 'nf/all-results-ig',
+                linkig: helpers.common.linkig.call(this, 'nf/all-results', null, 'allresultsig'),
                 galeryAct: 'active'
             }
         });

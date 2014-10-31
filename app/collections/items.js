@@ -5,6 +5,7 @@ var _ = require('underscore');
 var Item = require('../models/item');
 var helpers = require('../helpers');
 var Filters = require('./filters');
+var Paginator = require('../modules/paginator');
 
 module.exports = Base.extend({
     model: Item,
@@ -56,9 +57,11 @@ module.exports = Base.extend({
         this.metadata = {};
         return [];
     },
-    paginate: function (page, query, url, gallery) {
-        helpers.pagination.paginate(this.metadata, query, url, {
-            gallery: gallery,
+    paginate: function (url, query, options) {
+        var page = options.page;
+
+        Paginator.paginate(this.metadata, query, url, {
+            gallery: options.gallery,
             filters: this.filters
         });
         if (page !== undefined) {

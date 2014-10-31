@@ -25,6 +25,8 @@ module.exports = Base.extend({
         else{
             $progressBar.width('100%');
             $('body').removeClass('noscroll');
+            $('.footer-slide').hide();
+            $('.select .active').removeClass('active');
             window.setTimeout(function onTimeout(){
                 $progressBar.hide();
                 $progressBar.width('0');
