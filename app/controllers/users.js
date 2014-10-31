@@ -14,7 +14,9 @@ module.exports = {
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
-    favorites: middlewares(favorites)
+    favorites: middlewares(favorites),
+    messages: middlewares(messages),
+    readmessages: middlewares(readmessages)
 };
 
 function register(params, callback) {
@@ -288,6 +290,111 @@ function favorites(params, callback) {
             .then(prepare)
             .then(findFavorites)
             .then(check)
+            .val(success);
+    }
+}
+
+function messages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                messages: {
+                    collection: 'Messages',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                messages: response.messages.toJSON()
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
+    }
+}
+
+function readmessages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId,
+                messageId: params.msgId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                message: {
+                    model: 'Message',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                message: response.message.toJSON()
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
             .val(success);
     }
 }

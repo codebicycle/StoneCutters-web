@@ -6,12 +6,24 @@
 		padding-right: 5px;
 	}
 	.seller-post {
-		padding: 0 0 20px 200px;
-		width: 420px;
+		
+		clear-fix();
+		width: 440px;
+		margin: 0;
+		padding: 10px 10px 20px 200px;
+		border: none;
 
 		.posting {
+		
 			display: block;
-			margin-top: 20px;
+			
+			&[disabled],
+			&[disabled]:hover {
+
+				background: $greyBorders;
+
+			}
+		
 		}
 	}
 }

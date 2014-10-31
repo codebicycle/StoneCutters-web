@@ -88,6 +88,10 @@ module.exports = function(nunjucks) {
                     if (_page > 1) {
                         replace = '-p-' + _page;
                     }
+
+                    if (page == 1)
+                        regExp = new RegExp('/-p-([0-9]+)', 'g');
+
                     out.push(helpers.common.link(url.replace(regExp, replace), context.app));
                     out.push('" class="pagination-number" >');
                     out.push(_page);
@@ -139,8 +143,19 @@ module.exports = function(nunjucks) {
         return encodeURIComponent(text);
     }
 
-    function date(timestamp) {
-        return dateformat(new Date(timestamp), 'dd/mm/yyyy');
+    function date(timestamp, complete) {
+        complete = complete || false;
+        var completeDate;
+        var month;
+        if (complete === true) {
+            month = timestamp.split('-')[1];
+            month = this.ctx.dictionary['messages_date_format.1' + month];
+            completeDate = dateformat(new Date(timestamp), 'dd, h:MM:ss TT');
+            completeDate = month + ' ' + completeDate;
+            return completeDate;
+        } else {
+            return dateformat(new Date(timestamp), 'dd/mm/yyyy');
+        }
     }
 
     function countFormat(count) {

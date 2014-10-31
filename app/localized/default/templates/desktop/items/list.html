@@ -6,27 +6,9 @@
             <p>AdSenseListingTop</p>
         </li>
     {% endif %} #}
-    {% for item in items %}
-        <li>
-            <a href="{{ item | slugToUrl | link }}" data-qa="item-list" >
-                <figure class="items-image {{ 'lines' if item.thumbnail else 'icons icon-photo' }}">
-                    {% if item.thumbnail %}
-                        <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
-                    {% endif %}
-                </figure><!--
-                --><p class="items-info">
-                    {{ item.title }}<br>
-                    <span>{{ dictionary["itemslisting.NavigatorByCategory"] }}  | {{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
-                </p><!--
-                --><p class="items-price">
-                    {{ item.price.displayPrice if item.price and item.price.amount > 0 }}
-                </p><!--
-                --><p class="items-date">
-                    {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', <br>' + item.date.since.hour) if item.date.since.hour }}
-                </p>
-            </a>
-        </li>
-    {% endfor %}
+    
+    {% include (template + '/items/items.html') %}
+
     {# {% if showAdSenseListingBottom %}
         <li>
             <!-- TODO: Replace this markup with actual Google AdSense markup -->

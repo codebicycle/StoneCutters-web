@@ -17,7 +17,8 @@ module.exports = Base.extend({
         'click .range-submit': 'rangeFilterInputs',
         'click .link-range': 'rangeFilterLinks',
         'click .clean-filters': 'cleanFilters',
-        'click .filter-title': 'toogleFilter'
+        'click .filter-title': 'toogleFilter',
+        'keydown .range input': 'onlyNumbers'
     },
 
     getTemplateData: function() {
@@ -167,5 +168,13 @@ module.exports = Base.extend({
             path = path.replace(this.regexpReplacePage, '');
         }
         return path;
+    },
+    onlyNumbers: function(event) {
+        if ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (event.keyCode == 65 && event.ctrlKey === true) || (event.keyCode >= 35 && event.keyCode <= 39)) {
+            return;
+        }
+        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+            event.preventDefault();
+        }
     }
 });
