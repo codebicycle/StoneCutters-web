@@ -167,6 +167,9 @@ function link(href, app, query) {
     if (!_.isEmpty(query)) {
         href = params(href, query);
     }
+    if (href.slice(href.length - 1) === '/') {
+        href = href.substring(0, href.length - 1);
+    }
     return href;
 }
 
