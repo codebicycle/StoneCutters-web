@@ -19,6 +19,7 @@ module.exports = {
     'defaultfooter.Home': 'Home',
     'defaultfooter.PopularSearches': 'Populaire zoekopdrachten',
     'defaultfooter.PublishFreeAd': 'Plaats een gratis advertentie',
+    'defaultfooter.Terms of use': 'Gebruiksvoorwaarden',
     'defaultheader2.Hello': 'Hallo, ',
     'defaultheader2.Post': 'Plaats',
     'defaultheader.change': 'Wijzig',
