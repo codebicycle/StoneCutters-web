@@ -2,9 +2,9 @@
 
 module.exports = {
     pages: {
-        'categories#list': 'home',
-        'categories#show#listing': '[category-name]/[subcategory-id]/listing/[page]/[filter_name_value]',
-        'categories#showig#listing': '[category-name]/[subcategory-id]/listing/[page]/[filter_name_value]',
+        'categories#list': '/home/',
+        'categories#show#listing': '/[category-name]/[subcategory-id]/listing/[page]/[filter_name_value]/',
+        'categories#showig#listing': '/[category-name]/[subcategory-id]/listing/[page]/[filter_name_value]/',
         'categories#show': '[category-name]/subcategory_list',
         'items#success': '[category-name]/[subcategory-id]/reply/[item_attributes]',
         'items#reply': '[category-name]/[subcategory-id]/contact_form/[item_attributes]',
@@ -15,8 +15,9 @@ module.exports = {
         'items#searchig': '[category-name]/[subcategory-id]/search/[page]?searchbox=[keyword]&section=[section]',
         'items#searchfilter': '[category-name]/[subcategory-id]/search/[page]?searchbox=[keyword]&section=[section]',
         'items#searchfilterig': '[category-name]/[subcategory-id]/search/[page]?searchbox=[keyword]&section=[section]',
-        'items#allresults': 'nocat/listing',
-        'items#allresultsig': 'nocat/listing',
+        'items#staticSearch': '[category-name]/[subcategory-id]/staticsearch/statickw_[keyword]',
+        'items#allresults': '/nocat/listing/',
+        'items#allresultsig': '/nocat/listing/',
         'locations#list': 'select_location',
         'post#location': 'post_location/[rendering]',
         'post#flow': 'not_set/post_form/[rendering]',

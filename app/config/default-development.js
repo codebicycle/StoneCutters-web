@@ -78,20 +78,20 @@ module.exports = {
         }
     },
     features: {
-        desktop: {
-            adSenseListingBottom: {
-                worldwide: false,
-                countries: ['www.olx.com.bo']
-            },
-            adSenseListingTop: {
-                worldwide: false,
-                countries: ['www.olx.com.bo']
-            },
-            adSenseItemBottom: {
-                worldwide: false,
-                countries: ['www.olx.com.bo']
-            }
-        },
+        //desktop: { - This is going to be turned on later
+        //    adSenseListingBottom: {
+        //        worldwide: false,
+        //       countries: ['www.olx.com.bo']
+        //    },
+        //    adSenseListingTop: {
+        //        worldwide: false,
+        //        countries: ['www.olx.com.bo']
+        //    },
+        //    adSenseItemBottom: {
+        //        worldwide: false,
+        //        countries: ['www.olx.com.bo']
+        //    }
+        //},
         html5: {
             postingFlow: {
                 worldwide: true,

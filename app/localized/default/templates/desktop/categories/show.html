@@ -5,7 +5,7 @@
     {% include (template + '/items/filters.html') %}
 </nav>
 
-<section id='listing-items'>
+<section id="listing-items">
     {% include (template + '/items/locations.html') %}
 
     {% include (template + '/items/list.html') %}
@@ -15,6 +15,8 @@
     {% endif %}
 </section>
 
-{% include (template + '/partials/seobox.html') %}
+{% if seo %}
+    {% include (template + '/partials/seobox.html') %}
+{% endif %}
 
 {% view 'partials/tracking' %}

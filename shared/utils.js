@@ -155,6 +155,12 @@ function stringify(obj, sep, eq, name) {
 
 function link(href, app, query) {
     query = query || {};
+
+    if (app.session.get('platform') === 'desktop' && query.location) {
+        href = href.replace(/^(.+:\/\/)[^.]*/, '$1' + query.location.split('.').shift());
+        delete query.location;
+    }
+
     _.each(linkParams, function(checker, name) {
         href = checker.call(app, href, query);
     });

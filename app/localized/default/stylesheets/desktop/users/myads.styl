@@ -5,7 +5,7 @@
         height: 31px;
         vertical-align: bottom;
         &.deleteitem {
-            padding: 5px;
+            padding: 1rem;
             display: inline-block;
             line-height: 2.3;
         }
@@ -108,6 +108,16 @@
             }
         }
 
+        .backtomyolx {
+            margin: 20px 40px 0 40px;
+            display: block;
+
+            &:before {
+                color: $black;
+                font-size: .6rem;
+                transform(rotate(180deg));
+            }
+        }
     }
 }
 

@@ -8,6 +8,7 @@ module.exports = Base.extend({
     className: 'partials-tracking-view',
     events: {
         'update': 'onUpdate',
+        'updateHtml': 'onUpdateHtml',
         'track': 'onTrack',
         'trackAnalytics': 'onTrackAnalytics'
     },
@@ -18,7 +19,7 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        var params = this.$('#tracking-data').data('params');
+        var params = $('#tracking-data').data('params');
 
         if (params && _.isString(params)) {
             params = JSON.parse(params);
@@ -34,6 +35,14 @@ module.exports = Base.extend({
 
         this.tracking = tracking;
         this.render();
+    },
+    onUpdateHtml: function(event, html) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$el.html(html);
+        this.postRender();
     },
     onTrack: function(event, tracking) {
         event.preventDefault();
@@ -67,5 +76,3 @@ module.exports = Base.extend({
         });
     }
 });
-
-module.exports.id = 'partials/tracking';

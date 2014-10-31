@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var languages = ['af-ZA', 'ar-AE', 'ar-EG', 'bg-BG', 'bn-BD', 'bs-BA', 'ca-ES', 'cs-CZ', 'da-DK', 'de-DE', 'el-GR', 'en-IN', 'en-US', 'es-AR', 'es-CO', 'es-EC', 'es-ES', 'es-GT', 'es-MX', 'es-PE', 'es-SV', 'es-VZ', 'et-EE', 'fi-FI', 'fr-CA', 'fr-FR', 'gu-IN', 'he-IL', 'hi-IN', 'hr-HR', 'ht-HT', 'hu-HU', 'id-ID', 'is-IS', 'it-IT', 'ja-JP', 'kn-IN', 'ko-KR', 'lt-LT', 'lv-LV', 'ml-IN', 'mr-IN', 'ms-MY', 'nl-BG', 'nl-NL', 'no-NO', 'pa-PK', 'pl-PL', 'pt-BR', 'pt-PT', 'ro-RO', 'ru-RU', 'si-LK', 'sk-SK', 'sl-SI', 'sr-RS', 'sv-SE', 'sw-TZ', 'ta-IN', 'te-IN', 'th-TH', 'th-TW', 'tl-PH', 'tr-TR', 'uk-UA', 'ur-PK', 'vi-VN', 'zh-CN', 'zh-TW'];
-    var includeKeys = ['misc.EnterNameForBuyers_Mob','misc.TitleCharacters_Mob','misc.DescriptionCharacters_Mob','misc.AdNeedsLocation_Mob','item.AddPhotos','misc.ContactDetails_Mob','misc.ChooseASubcategory_Mob','misc.BrandFor_Mob', 'misc.FreeIn_Mob', 'messages_date_format.Today', 'messages_date_format.Yesterday', 'messages_date_format.101', 'messages_date_format.102', 'messages_date_format.103', 'messages_date_format.104', 'messages_date_format.105', 'messages_date_format.106', 'messages_date_format.107', 'messages_date_format.108', 'messages_date_format.109', 'messages_date_format.110', 'messages_date_format.111', 'messages_date_format.112', 'posting_fields_1.title', 'posting_fields_1.description', 'posting_fields_1.email', 'posting_fields_1.phoneNumber', 'itemslisting.FreeClassifieds', 'about.AboutBrand', 'about.AboutText1', 'about.AboutText2', 'about.Mission', 'about.MissionText1', 'about.Presence', 'postingerror.PleaseSelectCategory', 'postingerror.PleaseSelectSubcategory', 'postingerror.InvalidLocation', 'postingerror.InvalidEmailAddress', 'postingerror.PleaseEnterANumericalValue', 'misc.PhoneNumberNotValid', 'misc.WantToGoBack', 'myolx.AreYouSureYouWantToCloseSelectedListings', 'countryoptions.Home_SelectState', 'countryoptions.Home_SelectCity' ];
     var rBrand = /<<BRAND>>/g;
     var BRAND = 'OLX';
 
@@ -19,6 +17,9 @@ module.exports = function(grunt) {
         var csv = require('csv');
         var _ = require('underscore');
         var jsesc = require('jsesc');
+        var config = require('../config');
+        var languages = config.get(['translations', 'languages'], []);
+        var includeKeys = config.get(['translations', 'keys'], []);
         var rTranslations = new RegExp('dictionary\\["[^"]+"]', 'gi');
         var translations = {};
         var i = 0;

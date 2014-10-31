@@ -32,22 +32,24 @@ var pageNameParsers = {
             var item = options.item;
 
             if (item) {
+                if (item.status.deprecated) {
+                    str.push('age_expired');
+                }
+                else if (!item.status.open) {
+                    str.push('age_closed');
+                }
+                if (!item.id) {
+                    str.push('age_unavailable');
+                }
+                else if (utils.daysDiff(new Date(item.date.timestamp)) > 30) {
+                    str.push('age_30');
+                }
+                if (str.length) {
+                    str.push('-');
+                }
                 str.push('img_' + ((item.images && item.images.length) ? '1' : '0'));
                 str.push('-feat_0'); // Referer (Possible values: home, listingchp, listingexp)
                 str.push('-source_' + (item.status.feed ? 'f' : 'o'));
-
-                if (item.status.deprecated) {
-                    str.push('-age_expired');
-                }
-                else if (!item.status.open) {
-                    str.push('-age_closed');
-                }
-                else if (!item.id) {
-                    str.push('-age_unavailable');
-                }
-                else if (utils.daysDiff(new Date(item.date.timestamp)) > 30) {
-                    str.push('-age_30');
-                }
             }
             return url.replace('[' + this.name + ']', str.join(''));
         }

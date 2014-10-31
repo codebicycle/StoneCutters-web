@@ -14,8 +14,8 @@ module.exports = Base.extend({
         'blur textarea': 'validateField',
         'submit': 'submitForm',
         'click .replySuccses span': 'showSubmit',
-        'mouseover .image-navigator figure': 'updateGalery',
-        'click .image-navigator [class*="arrow-"]': 'navigator'
+        'mouseover [data-gallery-thumb]': 'updateGallery',
+        'click [data-gallery-navigator] [class*="arrow-"]': 'navigate'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -27,45 +27,45 @@ module.exports = Base.extend({
             showAdSenseItemBottom: showAdSenseItemBottom
         });
     },
-    updateGalery: function(event) {
+    updateGallery: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+
         if(!$(event.currentTarget).hasClass('active')) {
             var $image = $(event.currentTarget).find('img');
             var image = $image.data('image');
             var currentImage = $image.attr('src');
 
-            $('.image-navigator figure').removeClass('active');
+            $('[data-gallery-thumb]').removeClass('active');
             $(event.currentTarget).addClass('active');
-            $('.image-viewer img').attr('src', currentImage);
+            $('[data-gallery-image]').attr('src', currentImage);
             var newImg = new Image();
 
             newImg.src = image;
             newImg.onload = function() {
-                $('.image-viewer img').attr('src', image);
+                $('[data-gallery-image]').attr('src', image);
             };
         }
     },
-    navigator: function(event) {
+    navigate: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var active = $('.image-navigator .active');
-        var previous = ($(event.currentTarget).hasClass('arrow-prev')) ? true : false;
+        var active = $('[data-gallery-thumb].active');
 
-        if (previous) {
-            if (active.prev('figure').length > 0) {
+        if ($(event.currentTarget).hasClass('arrow-prev')) {
+            if (active.prev('[data-gallery-thumb]').length > 0) {
                 active.prev().mouseover();
             } else {
-                $('.image-navigator figure').last().mouseover();
+                $('[data-gallery-thumb]').last().mouseover();
             }
         } else {
-            if (active.next('figure').length > 0) {
+            if (active.next('[data-gallery-thumb]').length > 0) {
                 active.next().mouseover();
             } else {
-                $('.image-navigator figure').first().mouseover();
+                $('[data-gallery-thumb]').first().mouseover();
             }
         }
     },
@@ -128,24 +128,33 @@ module.exports = Base.extend({
             var $replySuccess = $('.replySuccses');
             var category = $('.itemCategory').val();
             var subcategory = $('.itemSubcategory').val();
-            var tracking;
 
             $('.comment').val('');
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
-            tracking = $('<div></div>').append(data);
-            tracking = $('#replySuccess', tracking);
-            $replySuccess.append(tracking.length ? tracking : '');
             this.track({
                 category: 'Reply',
                 action: 'ReplySuccess',
                 custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
             });
             $replySuccess.removeClass('hide');
+            done(data);
         }.bind(this);
 
-        var track = function(done) {
+        var trackTracking = function(done, data) {
+            var $view = $('#partials-tracking-view');
+            var tracking;
+
+            tracking = $('<div></div>').append(data);
+            tracking = $('#partials-tracking-view', tracking);
+            if (tracking.length) {
+                $view.trigger('updateHtml', tracking.html());
+            }
+            done();
+        }.bind(this);
+
+        var trackGraphite = function(done) {
             var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
 
             $.ajax({
@@ -184,7 +193,9 @@ module.exports = Base.extend({
         asynquence().or(fail)
                 .then(validate)
                 .then(post)
-                .gate(success, track);
+                .then(success)
+                .then(trackTracking)
+                .then(trackGraphite);
 
     },
     validateForm: function(email, name, comment) {

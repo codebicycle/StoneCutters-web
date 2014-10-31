@@ -131,7 +131,6 @@ module.exports = Base.extend({
             delete params.title;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             done(params);
         }

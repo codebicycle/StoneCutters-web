@@ -1,28 +1,42 @@
 <div class="formdeleteitem">
+    <a href="" class="icons icon-arrow backtomyolx">
+        {{ dictionary["myolx.BackToMyAds"] }}
+    </a>
     <div class="confirmdelete">
-        <h4 class="subtitle">Va a eliminar su aviso de OLX</h4>
+        <h4 class="subtitle">{{ dictionary["posting_removedsurvey.WarningAdToBeRemoved"] }} </h4>
         <div class="itemdelete">
             <figure class="image">
-                {% if item.thumbnail %}
-                <img src="{{ item.thumbnail }}" alt="" class="thumbnail">
-                {% else %}
+                <img src="" alt="" class="thumbnail">
                 <span class="icons icon-photo withoutimg"></span>
-                {% endif %}
             </figure>
             <div class="description">
                 {{ item.title }}
             </div>
         </div>
-        <h5>Para completar la eliminación, díganos porque desea eliminar este aviso:</h5>
-        <form action="">
-            <div class="reason"><input type="radio" name="close_reason" value="1" id="close_reason1"><label for="close_reason1">Lo he vendido a traves de OLX</label></div>
-            <div class="reason"><input type="radio" name="close_reason" value="2" id="close_reason2"><label for="close_reason2">Lo he vendido a través de otro servicio</label></div>
-            <div class="reason"><input type="radio" name="close_reason" value="3" id="close_reason3"><label for="close_reason3">He decidido no venderlo</label></div>
-            <div class="reason"><input type="radio" name="close_reason" value="4" id="close_reason4"><label for="close_reason4">Otro</label><input type="text" name="close_comment" class="text" id="close_reason5"></div>
+        <h5>{{ dictionary["posting_removedsurvey.RemovedAdSurvey"] }} </h5>
+        <form action="{{ '/myolx/deleteitem' | link }}" class="formdelete" method="POST">
+            <div class="reason">
+                <input type="radio" name="close_reason" value="1" required id="close_reason1">
+                <label for="close_reason1">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer1"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="2" required id="close_reason2">
+                <label for="close_reason2">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer2"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="3" required id="close_reason3">
+                <label for="close_reason3">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer3"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="4" required id="close_reason4">
+                <label for="close_reason4">{{ dictionary["posting_optionallist.other"] }}</label>
+                <input type="text" name="close_comment" class="text" id="close_reason5">
+            </div>
+            <input type="hidden" name="idd" id="idd" value="">
             <div class="buttons deleteitem">
-                <a href="" class="btn orange">Eliminar Anuncio</a>
-                <span>ó</span>
-                <a href="" class="">Cancelar</a>
+                <button type="submit" class="btn orange">{{ dictionary["seccion-30.478"] }} </button>
+                <span>{{ dictionary["biderrorheader.Or"] }}</span>
+                <a href="" class="btncanceldelete">{{ dictionary["supportform.Reset"] }} </a>
             </div>
         </form>
     </div>
@@ -44,7 +58,7 @@
             {% set statustxt = dictionary["misc.Removed"] %}
         {% elif item.status == 'rejected' %}
             {% set status = 'rejected' %}
-            {% set statustxt = 'RECHAZADO' %}
+            {% set statustxt = dictionary["item.Rejected"] %}
         {% elif item.status == 'pending' %}
             {% set status = 'pending' %}
             {% set statustxt = dictionary["misc.Pending_BR"] %}
@@ -68,26 +82,33 @@
                 </span>
             </figure>
             <div class="description">
-                <h3 class="title">{{ item.title }}</h3>
+                <h3 class="title">
+                    {% if (status == 'ready') %}
+                        <a href="{{ item | slugToUrl | link }}">{{ item.title }}</a>
+                    {% else %}
+                        {{ item.title }}
+                    {% endif %}
+                </h3>
                 <div class="tips">
                     <span>0  {{ dictionary["myolx.Messages"] }}</span>
                     <span>0 {{ dictionary["netvibes_myolx.content.Views"] }} </span>
                     <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', item.date.timestamp | date("MMM DD, YYYY")) }}</span>
                 </div>
                 <div class="text">
+                    {{ item.message }}
                 </div>
                 <div class="buttons">
                     {% if (status == 'ready' or status == 'pending') %}
-                        <a href="" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
+                        <a href="{{ ('/myolx/edititem/'+ item.id) | link }}" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
                         {% if (status == 'ready') %}
-                            <a href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
+                            <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
                         {% endif %}
                     {% endif %}
                     {% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
                         {% if status == 'expired' %}
-                            <a href="" class="btn icons icon-repulish">Republicar</a>
+                            <a href="" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                         {% endif %}
-                        <a href="" class="btn icons icon-trash">Eliminar de esta lista</a>
+                        <a href="" data-idd="{{ item.id }}" class="btn icons icon-trash btndelforever">{{ dictionary["netvibes_myolx.content.RemoveListing"] }}</a>
                     {% endif %}
                 </div>
             </div>
