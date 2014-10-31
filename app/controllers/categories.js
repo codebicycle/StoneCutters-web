@@ -78,7 +78,7 @@ function show(params, callback, gallery) {
 
     function controller() {
         var seo = Seo.instance(this.app);
-      //  seo.set('h1',seo.get("levelPath").top.pop().anchor);
+
         var redirect = function(done){
             var categoryId = seo.getCategoryId(params.catId);
 

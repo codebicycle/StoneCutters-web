@@ -1061,7 +1061,7 @@ function staticSearch(params, callback) {
 
         var configure = function(done) {
             var categories;
-            
+
             if (params.catId) {
                 categories = this.app.session.get('categories');
                 category = categories.search(params.catId);
