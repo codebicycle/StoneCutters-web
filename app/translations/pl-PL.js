@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'Has?o',
     'messages_item_page.12': 'Doda\u0107 do ulubionych',
     'messages_item_page.57': 'Anonim',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> in <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edytuj moje og\u0142oszenie',
     'landingbody.EmailAddress': 'Adres e-mail',

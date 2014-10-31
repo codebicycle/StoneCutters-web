@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': '\u0CAA\u0CBE\u0CB8\u0CCD\u200C\u0CB5\u0CB0\u0CCD\u0CA1\u0CCD',
     'messages_item_page.12': 'add-to-favorites',
     'messages_item_page.57': '\u0C85\u0CA8\u0CBE\u0CAE\u0C95',
+    'messages_item_page.CATEGORY_REGION': '<<REGION>>\u0CA8\u0CB2\u0CCD\u0CB2\u0CBF<<CATEGORY>>',
     'messages_site_class.30': '\u0C93\u0C95\u0CC6',
     'messages_user_management_current_ads.EditMyListing': '\u0CA8\u0CA8\u0CCD\u0CA8 \u0C9C\u0CBE\u0CB9\u0CBF\u0CB0\u0CBE\u0CA4\u0CA8\u0CCD\u0CA8\u0CC1 \u0CAA\u0CB0\u0CBF\u0CB7\u0CCD\u0C95\u0CB0\u0CBF\u0CB8\u0CBF',
     'landingbody.EmailAddress': '\u0C87\u0CAE\u0CC7\u0CB2\u0CCD \u0CB5\u0CBF\u0CB3\u0CBE\u0CB8',

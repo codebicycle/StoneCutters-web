@@ -141,18 +141,22 @@ _.extend(SeoModule.prototype, {
             if (this.seoContent.levelPath.top) {
                 if (_.isArray(this.seoContent.levelPath.top)) {
                     this.set('h1', this.seoContent.levelPath.top.pop().anchor + this.getLocationName(' - '));
-                    console.log("updating h1...");
                 }
             }
         }
         if(this.app.session.get('currentRoute').action == 'staticSearch') {
+
             var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
-            var mycategory = 'SUPERCATEGORIA';
-            var myregion = 'SUPERREGION';
-            var h1;
-            //var h1 = dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion);
+            var staticsearch = this.getStaticSearch();
+
+            if (staticsearch) {
+                var mycategory = (staticsearch.category) ? staticsearch.category : '';
+                var query = (staticsearch.query) ? staticsearch.query : '';
+                var myregion = this.app.session.get('location').current.name;
+                this.set('h1', query + ':' + dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion) + ' | OLX');
+            }
         }
-        console.log(this.seoContent);
+
     },
     getLocationName: function (prefix) {
         var location;
@@ -185,8 +189,6 @@ _.extend(SeoModule.prototype, {
         this.setContent({});
     },
     setContent: function (content) {
-        console.log("SetContent:");
-        console.log(content);
         this.seoContent = content;
         this.updateContent();
     },
@@ -207,7 +209,11 @@ _.extend(SeoModule.prototype, {
             return;
         }
         $('#header_keywords').text(value);
+    },
+    getStaticSearch: function (categoryId) {
+        return this.seoContent.staticsearch;
     }
+
 });
 
 module.exports = {

@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'Mot de passe',
     'messages_item_page.12': 'Ajoutez \xE0 vos favoris',
     'messages_item_page.57': 'Anonyme',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> en <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Modifier Mon Annonce',
     'landingbody.EmailAddress': 'Email',

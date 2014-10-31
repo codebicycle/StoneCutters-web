@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'Senha',
     'messages_item_page.12': 'Adicionar a Favoritos',
     'messages_item_page.57': 'An\xF4nimo',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> in <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',

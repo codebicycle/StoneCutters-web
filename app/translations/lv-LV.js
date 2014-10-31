@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'parole',
     'messages_item_page.12': 'pievienot-favor\u012Btiem',
     'messages_item_page.57': 'Viesis',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> - <<REGION>>',
     'messages_site_class.30': 'Labi',
     'messages_user_management_current_ads.EditMyListing': 'Redi\u0123\u0113t manu sludin\u0101jumu',
     'landingbody.EmailAddress': 'E-pasta adrese',

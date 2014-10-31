@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': '??????',
     'messages_item_page.12': '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435',
     'messages_item_page.57': '\u0410\u043D\u043E\u043D\u0438\u043C',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> - <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0439',
     'landingbody.EmailAddress': 'E-mail \u0430\u0434\u0440\u0435\u0441',

@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'password',
     'messages_item_page.12': 'Idagdag sa mga Paborito',
     'messages_item_page.57': 'Di Kilala',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> sa <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'I-edit ang aking Patalastas',
     'landingbody.EmailAddress': 'Email Address',

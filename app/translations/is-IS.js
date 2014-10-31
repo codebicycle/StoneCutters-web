@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'A\xF0gangsor\xF0',
     'messages_item_page.12': 'b\xE6ta sem eftirl\xE6tiss\xED\xF0u',
     'messages_item_page.57': 'Nafnlaust',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> \xED <<REGION>>',
     'messages_site_class.30': '\xCD lagi',
     'messages_user_management_current_ads.EditMyListing': 'Breyta augl\xFDsingunni minni',
     'landingbody.EmailAddress': 'T\xF6lvup\xF3stfang',

@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'Contrase\xF1a',
     'messages_item_page.12': 'Agregar a favoritos',
     'messages_item_page.57': 'An\xF3nimo',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> en <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar mi listado',
     'landingbody.EmailAddress': 'Direcci\xF3n de Email',

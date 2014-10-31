@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'Modpas',
     'messages_item_page.12': 'Ajoute sou Favori',
     'messages_item_page.57': 'Anonim',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> nan <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Chanje Anons Mwen ',
     'landingbody.EmailAddress': 'Adr\xE8s Im\xE8l',

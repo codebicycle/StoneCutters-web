@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'heslo',
     'messages_item_page.12': 'prida\u0165-medzi-ob\u013E\xFAben\xE9',
     'messages_item_page.57': 'Anonym',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> - <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravi\u0165 moje ozn\xE1menie',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',

@@ -46,6 +46,7 @@ module.exports = {
         'misc.WantToGoBack',
         'myolx.AreYouSureYouWantToCloseSelectedListings',
         'misc.LessThan',
-        'posting_optionallist.Kms'
+        'posting_optionallist.Kms',
+        'messages_item_page.CATEGORY_REGION'
     ]
 };

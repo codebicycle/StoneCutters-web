@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'Nenosiri',
     'messages_item_page.12': 'add-to-favorites',
     'messages_item_page.57': 'Isiokuwa na jina',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> katika <<REGION>>',
     'messages_site_class.30': 'Sawa',
     'messages_user_management_current_ads.EditMyListing': 'Hariri Tangazo Langu',
     'landingbody.EmailAddress': 'Email Address',

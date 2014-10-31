@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'Contrasenya',
     'messages_item_page.12': 'afegir a favorits',
     'messages_item_page.57': 'An\xF2nim',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> a <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar el meu anunci',
     'landingbody.EmailAddress': 'Adre\xE7a de correu electr\xF2nic',

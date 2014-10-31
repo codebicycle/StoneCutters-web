@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'heslo',
     'messages_item_page.12': 'p\u0159idat k obl\xEDben\xFDm',
     'messages_item_page.57': 'Anonymn\xED',
+    'messages_item_page.CATEGORY_REGION': 'Kategorie <<CATEGORY>> v kraji <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravit m\u016Fj z\xE1znam',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',

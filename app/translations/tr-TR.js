@@ -82,6 +82,7 @@ module.exports = {
     'messages_email_register.Password': 'parola',
     'messages_item_page.12': 'favorilere-ekle',
     'messages_item_page.57': 'Ad\u0131z',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> Bulundu\u011Fu yer: <<REGION>> ',
     'messages_site_class.30': 'Tamam',
     'messages_user_management_current_ads.EditMyListing': '\u0130lanlar\u0131m\u0131 D\xFCzenle',
     'landingbody.EmailAddress': 'E-Posta Adresi',
