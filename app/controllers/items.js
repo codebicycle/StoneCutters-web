@@ -1169,8 +1169,6 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            console.log(err);
-            console.log(res);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
