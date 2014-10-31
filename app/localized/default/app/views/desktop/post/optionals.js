@@ -87,8 +87,7 @@ module.exports = Base.extend({
         var field = _.find(this.fields, function each(field) {
             return field.name === name;
         });
-        var fieldData;
-
+        
         var fetch = function(done) {
             $loading.show();
             helpers.dataAdapter.get(this.app.req, '/items/fields/' + encodeURIComponent(field.related) + '/' + this.form.values[field.name] + '/subfields', {
