@@ -1,25 +1,27 @@
 .users_messages_view {
     box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
+    
+    .actions,
+    .backToOlx {
+        background: $greyBoxBg;
+        padding: 15px 20px;
+    }
+    .notification {
+        padding: 10px 20px;
+        border-bottom: 1px solid $greyBorders;
+    }
 
     ul {
         ul-reset();
-
         li {
             padding: 10px 20px;
             border-bottom: 1px solid $greyBorders;
         }
-
-        li:first-child {
-            background: $greyBoxBg;
-            padding: 15px 20px;
-        }
-
-        li:last-child {
-            border-bottom: 0;
-            padding: 20px 0;
-            text-align: center;
-        }
-
+    }
+    .backToOlx {
+        border-bottom: 0;
+        padding: 20px 0;
+        text-align: center;
     }
 
     .btn {

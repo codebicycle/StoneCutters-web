@@ -291,14 +291,37 @@ function messages(params, callback) {
         var _params;
         var user;
 
-        var success = function(_myAds) {
-            var platform = this.app.session.get('platform');
-
-            if (platform === 'desktop') {
-                callback(null,'users/myolx', {
-                    viewname: 'messages'
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
                 });
             }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                messages: {
+                    collection: 'Messages',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, 'users/messages', {
+                messages: response.messages.toJSON()
+            });
         }.bind(this);
 
         var error = function(err, res) {
@@ -306,6 +329,8 @@ function messages(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
             .val(success);
     }
 }
@@ -318,14 +343,38 @@ function readmessages(params, callback) {
         var _params;
         var user;
 
-        var success = function(_myAds) {
-            var platform = this.app.session.get('platform');
-
-            if (platform === 'desktop') {
-                callback(null,'users/myolx', {
-                    viewname: 'readmessages'
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
                 });
             }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId,
+                messageId: params.msgId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                message: {
+                    model: 'Message',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null,'users/readmessages', {
+                message: response.message.toJSON()
+            });
         }.bind(this);
 
         var error = function(err, res) {
@@ -333,6 +382,8 @@ function readmessages(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
             .val(success);
     }
 }

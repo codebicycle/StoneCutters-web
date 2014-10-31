@@ -23,6 +23,6 @@ module.exports = {
         url: 'myolx/myolxmessages'
     },
     'users#readmessages': {
-        url: 'myolx/readmessages'
+        url: 'myolx/readmessages/:msgId'
     }
 };

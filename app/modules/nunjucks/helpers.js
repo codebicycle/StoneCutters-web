@@ -13,8 +13,19 @@ module.exports = function(nunjucks) {
         return encodeURIComponent(text);
     }
 
-    function date(timestamp) {
-        return dateformat(new Date(timestamp), 'dd/mm/yyyy');
+    function date(timestamp, complete) {
+        complete = complete || false;
+        var completeDate;
+        var month;
+        if (complete === true) {
+            month = timestamp.split('-')[1];
+            month = this.ctx.dictionary['messages_date_format.1' + month];
+            completeDate = dateformat(new Date(timestamp), 'dd, h:MM:ss TT');
+            completeDate = month + ' ' + completeDate;
+            return completeDate;
+        } else {
+            return dateformat(new Date(timestamp), 'dd/mm/yyyy');
+        }
     }
 
     function countFormat(count) {
