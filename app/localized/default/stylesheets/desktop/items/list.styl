@@ -8,6 +8,7 @@
         box($white, $greyBorders, 0, 10px);
         border-bottom-color: $white;
         position: relative;
+        overflow: hidden;
         &:hover {
             border: 1px solid $greyBorders;
             box-shadow(0 0 2px 2px rgba(0, 0, 0, .1));
@@ -15,15 +16,12 @@
         }
         a {
             display: block;
+            text-decoration: none;
         }
         p,
         .items-image {
             display: inline-block;
-            margin: 0;
             vertical-align: top;
-        }
-        p {
-            padding-top: 10px;
         }
         .items-image {
             border: 1px solid $greyBorders;
