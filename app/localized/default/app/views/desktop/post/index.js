@@ -26,7 +26,7 @@ module.exports = Base.extend({
         Base.prototype.initialize.call(this);
         this.form = {};
         this.pendingValidations = [];
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
+        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
