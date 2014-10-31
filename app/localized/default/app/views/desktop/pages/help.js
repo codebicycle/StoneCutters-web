@@ -22,7 +22,7 @@ module.exports = Base.extend({
     helpToggleQuestion: function(event) {
         var element_current = $(event.currentTarget).parent('.question');
 
-        $('h4.icon-arrowdown').toggleClass('icon-arrow-right icon-arrow-down');
+        $('h4.icon-arrow-down').toggleClass('icon-arrow-right icon-arrow-down');
 
         if(element_current.hasClass('faq-open')) {
             $(event.currentTarget).removeClass('icon-arrow-down');
@@ -30,7 +30,7 @@ module.exports = Base.extend({
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();
         } else {
-            element_current.find('.icon-arrowright').toggleClass('icon-arrow-down icon-arrow-right');
+            element_current.find('.icon-arrow-right').toggleClass('icon-arrow-down icon-arrow-right');
             $('.faq-open').
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();
