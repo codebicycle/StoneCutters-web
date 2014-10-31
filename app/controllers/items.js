@@ -1036,8 +1036,8 @@ function staticSearch(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
-        var url = ['/q/', params.search, '/c-', params.catId, '/'].join('');
         var query;
+        var url;
 
         var redirect = function(done) {
             if (platform !== 'desktop') {
@@ -1057,6 +1057,14 @@ function staticSearch(params, callback) {
             delete params.search;
             delete params.page;
             delete params.filters;
+
+            url = ['/q/', params.searchTerm];
+            if (params.catId) {
+                url.puhs('/c-');
+                url.puhs(params.catId);
+                url.puhs('/');
+            }
+            url = url.join('');
 
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
@@ -1130,18 +1138,24 @@ function staticSearch(params, callback) {
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
 
-            categories = this.app.session.get('categories');
-            category = categories.search(params.catId);
+            if (params.catId) {
+                categories = this.app.session.get('categories');
+                category = categories.search(params.catId);
 
-            if (category.has('parentId')) {
-                subcategory = category;
-                category = categories.get(subcategory.get('parentId'));
+                if (!category) {
+                    category = categories.get(subcategory.get('parentId'));
+                }
+                if (category.has('parentId')) {
+                    subcategory = category;
+                    category = categories.get(subcategory.get('parentId'));
+                }
+
+                tracking.addParam('category', category.toJSON());
+                tracking.addParam('subcategory', subcategory.toJSON());
             }
 
             tracking.addParam('page_nb', metadata.totalPages);
             tracking.addParam('keyword', query.search);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
 
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
@@ -1155,6 +1169,8 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
+            console.log(err);
+            console.log(res);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
@@ -1163,6 +1179,7 @@ function staticSearch(params, callback) {
             .then(prepare)
             .then(findItems)
             .then(checkSearch)
+            .then(paginate)
             .val(success);
     }
 }
