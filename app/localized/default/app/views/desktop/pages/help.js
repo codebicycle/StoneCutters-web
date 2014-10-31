@@ -22,15 +22,15 @@ module.exports = Base.extend({
     helpToggleQuestion: function(event) {
         var element_current = $(event.currentTarget).parent('.question');
 
-        $('h4.icon-arrowdown').toggleClass('icon-arrowright icon-arrowdown');
+        $('h4.icon-arrowdown').toggleClass('icon-arrow-right icon-arrow-down');
 
         if(element_current.hasClass('faq-open')) {
-            $(event.currentTarget).removeClass('icon-arrowdown');
+            $(event.currentTarget).removeClass('icon-arrow-down');
             $('.faq-open').
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();
         } else {
-            element_current.find('.icon-arrowright').toggleClass('icon-arrowdown icon-arrowright');
+            element_current.find('.icon-arrowright').toggleClass('icon-arrow-down icon-arrow-right');
             $('.faq-open').
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();

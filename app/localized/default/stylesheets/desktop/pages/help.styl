@@ -26,32 +26,33 @@
         }
 
         .selected {
-            position: relative;
             background: $white;
             border-right: 1px solid $lightBlueBorder;
+            position: relative;
 
             a,
             .icons:before {
                 color: $greyStrong;
             }
         }
-        .selected:after, .selected:before {
-            left: 100%;
-            top: 50%;
+        .selected::after,
+        .selected::before {
             border: solid transparent;
             content: " ";
             height: 0;
-            width: 0;
+            left: 100%;
             position: absolute;
+            top: 50%;
+            width: 0;
         }
-        .selected:after {
-            border-color: rgba(255, 255, 255, 0);
+        .selected::after {
+            border-color: $white;
             border-left-color: $white;
             border-width: 26px;
             margin-top: -26px;
         }
-        .selected:before {
-            border-color: rgba(185, 221, 243, 0);
+        .selected::before {
+            border-color: $lightBlueBorder;
             border-left-color: $lightBlueBorder;
             border-width: 27px;
             margin-top: -27px;
@@ -65,14 +66,14 @@
         width: 656px;
 
         h3 {
+            border-bottom: 1px solid $greyBorders;
             font-size: $l;
             font-weight: normal;
-            padding: 13px 0 13px 20px;
             margin: 0;
-            border-bottom: 1px solid $greyBorders;
+            padding: 13px 0 13px 20px;
         }
 
-        .icon-arrowright:before {
+        .icon-arrow-right:before {
             color: $greyStrong;
         }
 
@@ -101,19 +102,20 @@
             h4 {
                 font-weight: bold;
             }
-            .icon-arrowright:before {
+            .icon-arrow-right:before {
                 color: $black;
             }
         }
 
         .question-content {
+            display: none;
             padding: 0 0 14px 20px;
 
             ul {
                 ul-reset();
-            }
-            li {
-                line-height: remify(18px);
+                li {
+                    line-height: remify(18px);
+                }
             }
         }
     }
