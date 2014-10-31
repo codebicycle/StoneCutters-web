@@ -16,12 +16,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $field = $(event.target);
-
-        this.parentView.$el.trigger('fieldSubmit', {
-            name: $field.attr('name'),
-            value: $field.val()
-        });
+        this.parentView.$el.trigger('fieldSubmit', [$(event.target)]);
     }
 });
 
