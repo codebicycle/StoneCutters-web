@@ -33,6 +33,8 @@ module.exports = {
         'pages#terms': 'static/terms',
         'pages#help': 'static/help',
         'pages#interstitial': 'interstitial',
-        'pages#error': 'error'
+        'pages#error': 'error',
+        'pages#allstates': 'sitemap',
+        'pages#sitemap': 'sitemapcalendar'
     }
 };
