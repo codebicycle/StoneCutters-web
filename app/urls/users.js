@@ -10,6 +10,9 @@ module.exports = {
     'users#login': {
         url: 'login'
     },
+    'users#lostpassword': {
+        url: 'lostpassword'
+    },
     'users#logout': {
         url: 'logout'
     },
