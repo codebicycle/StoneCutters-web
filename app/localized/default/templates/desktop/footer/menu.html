@@ -1,0 +1,130 @@
+<div data-slide-content="true" class="slide-container">
+    <div class="category-slide footer-slide hide">
+        <a title="close" data-footer-slidedown="category-slide" class="icons icon-close" href="#"></a>
+        {% view 'footer/categorytree' %}
+    </div>
+    <div class="help-slide footer-slide hide">
+        <a title="close" data-footer-slidedown="help-slide" class="icons icon-close" href="#"></a>
+        <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
+        <ul>
+            <li><a href="/help">{{ dictionary["biderrorheader.Help"] }}</a></li>
+            <li><a href="/terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
+            <li><a href="#">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
+            <li><a href="#">{{ dictionary["contact_us.ContactBrand"] }} </a></li>
+        </ul>
+    </div>
+    <div class="popular-slide footer-slide hide">
+        <a title="close" data-footer-slidedown="popular-slide" class="icons icon-close" href="#"></a>
+        <div class="popular-column">
+            <h3 class="title">{{ dictionary["popularsearchesbody.PopularCities"] }} Bolivia</h3>
+            <ul>
+                <li>
+                    <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
+                </li>
+                <li>
+                    <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
+                </li>
+                <li>
+                    <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
+                </li>
+                <li>
+                    <a alt="Andrés Ibánez" href="{{ '/nf/all-results' | link({location: 'andresibanez.olx.com.bo'}) }}">Andrés Ibánez</a>
+                </li>
+                <li>
+                    <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
+                </li>
+                <li>
+                    <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
+                </li>
+                <li>
+                    <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
+                </li>
+                <li>
+                    <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
+                </li>
+                <li>
+                    <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
+                </li>
+                <li>
+                    <a alt="Andrés Ibánez" href="{{ '/nf/all-results' | link({location: 'andresibanez.olx.com.bo'}) }}">Andrés Ibánez</a>
+                </li>
+                <li>
+                    <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
+                </li>
+                <li>
+                    <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
+                </li>
+                <li>
+                    <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
+                </li>
+            </ul>
+        </div>
+        <div class="popular-column popular-cities">
+            <h3 class="title">{{ dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>', location.name) }}</h3>
+            <ul>
+                <li>
+                    <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
+                </li>
+                <li>
+                    <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
+                </li>
+                <li>
+                    <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
+                </li>
+                <li>
+                    <a alt="Andrés Ibánez" href="{{ '/nf/all-results' | link({location: 'andresibanez.olx.com.bo'}) }}">Andrés Ibánez</a>
+                </li>
+                <li>
+                    <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
+                </li>
+                <li>
+                    <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
+                </li>
+                <li>
+                    <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
+                </li>
+                <li>
+                    <a alt="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
+                </li>
+                <li>
+                    <a alt="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
+                </li>
+                <li>
+                    <a alt="Andrés Ibánez" href="{{ '/nf/all-results' | link({location: 'andresibanez.olx.com.bo'}) }}">Andrés Ibánez</a>
+                </li>
+                <li>
+                    <a alt="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
+                </li>
+                <li>
+                    <a alt="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
+                </li>
+                <li>
+                    <a class="open-modal" alt="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Otros lugares</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="around-slide footer-slide hide">
+        <a title="close" data-footer-slidedown="around-slide" class="icons icon-close" href="#"></a>
+        <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
+        <ul>
+            {% for country in countries %}
+                <li><a href="{{country.url}}" title="{{country.name}}">{{country.name}}</a></li>
+            {% if loop.index%15 == 0 %}
+                </ul>
+                <ul>
+            {% endif%}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
