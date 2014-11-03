@@ -10,7 +10,7 @@ module.exports = Base.extend({
     className: 'posting-description-view',
     events: {
         'change': 'onChange',
-        'keyup [name=title]': 'emailCount'
+        'keyup [name=title]': 'characterCount'
     },
     onChange: function(event) {
         event.preventDefault();
@@ -19,7 +19,7 @@ module.exports = Base.extend({
 
         this.parentView.$el.trigger('fieldSubmit', [$(event.target)]);
     },
-    emailCount: function (event) {
+    characterCount: function (event) {
         var $input = $(event.currentTarget);
         var $msg = $input.next('small');
         var count = $msg.text().split(' ');
