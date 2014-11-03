@@ -13,7 +13,7 @@ module.exports = Base.extend({
         'blur input': 'validateField',
         'blur textarea': 'validateField',
         'submit': 'submitForm',
-        'click .replySuccses span': 'showSubmit',
+        'click .replySuccess span': 'showSubmit',
         'mouseover [data-gallery-thumb]': 'updateGallery',
         'click [data-gallery-navigator] [class*="arrow-"]': 'navigate'
     },
@@ -74,7 +74,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        $('.replySuccses').addClass('hide');
+        $('.replySuccess').addClass('hide');
         $('#replyForm .submit').removeClass('hide');
     },
     submitForm: function(event) {
