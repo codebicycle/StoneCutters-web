@@ -148,6 +148,7 @@ module.exports = {
     'posting_fields_1.description': '\u0645\u0648\u0627\u0635\u0641\u0627\u062A ',
     'posting_fields_1.email': '\u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0627\u0644\u0643\u062A\u0631\u0648\u0646\u064A',
     'posting_fields_1.Email_address_not_shared': '\u0639\u0646\u0648\u0627\u0646 \u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0627\u0644\u0643\u062A\u0631\u0648\u0646\u064A \u0627\u0644\u062E\u0627\u0635 \u0628\u0643 \u0644\u0646 \u064A\u062A\u0645 \u062A\u0642\u0627\u0633\u0645',
+    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'If it is approved you will receive an email confirmation with a link to your ad.',
     'posting_fields_1.phoneNumber': '\u0631\u0642\u0645 \u0647\u0627\u062A\u0641 ',
     'posting_fields_1.photos': '\u0635\u0648\u0631 ',
     'posting_fields_1.Please_Choose': '\u0627\u0644\u0631\u062C\u0627\u0621 \u0627\u0644\u0627\u062E\u062A\u064A\u0627\u0631 :',

@@ -148,6 +148,7 @@ module.exports = {
     'posting_fields_1.description': 'Omschrijving',
     'posting_fields_1.email': 'E-mail',
     'posting_fields_1.Email_address_not_shared': 'Je emailadres wordt niet weergegeven',
+    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'Na goedkeuring ontvang je een e-mailbevestiging met een koppeling naar je advertentie.',
     'posting_fields_1.phoneNumber': 'Telefoonnummer',
     'posting_fields_1.photos': 'Foto\'s',
     'posting_fields_1.Please_Choose': 'Selecteer:',
