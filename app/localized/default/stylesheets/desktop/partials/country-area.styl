@@ -2,18 +2,18 @@
     clear-fix();
     box();
     background: #fff;
-    background: -moz-linear-gradient(top,  #fff 28%, #fafafa 28%); 
+    background: -moz-linear-gradient(top,  #fff 28%, #fafafa 28%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(28%,#fff), color-stop(28%,#fafafa));
-    background: -webkit-linear-gradient(top,  #fff 28%,#fafafa 28%); 
+    background: -webkit-linear-gradient(top,  #fff 28%,#fafafa 28%);
     background: -ms-linear-gradient(top,  #fff 28%,#fafafa 28%);
-    background: linear-gradient(to bottom,  #fff 28%,#fafafa 28%); 
+    background: linear-gradient(to bottom,  #fff 28%,#fafafa 28%);
     float: left;
     margin-bottom: 20px;
     padding-bottom: 20px;
     width: 578px;
     img {
         margin:10px 0 0 10px;
-    }   
+    }
 
     .content-description {
         float: right;
@@ -25,15 +25,16 @@
             font-weight: bold;
             margin: 10px 0 0;
             width: 270px;
-            line-height: 1;
         }
         .cities-title {
             color: $greyStrong;
             font-size: $l;
             margin: 47px 0 10px;
+            padding-left: 25px;
             &::before {
-                padding-right: 8px;
                 font-size: $m;
+                margin-left: -22px;
+                padding-right: 5px;
                 vertical-align: inherit;
             }
         }
@@ -42,7 +43,8 @@
             padding-left: 25px;
         }
         li {
-            padding-bottom: 8px;  
+            line-height: 1.3rem;
+            padding-bottom: 10px;
         }
     }
 }
