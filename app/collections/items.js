@@ -9,7 +9,6 @@ var Paginator = require('../modules/paginator');
 
 module.exports = Base.extend({
     model: Item,
-
     initialize: function() {
         this.filters = new Filters(null, {
             app: this.app,
