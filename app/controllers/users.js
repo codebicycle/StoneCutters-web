@@ -137,7 +137,7 @@ function myads(params, callback) {
                 token: user.token,
                 userId: user.userId,
                 location: this.app.session.get('siteLocation'),
-                languageCode: this.app.session.get('selectedLanguage'),
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'myAds'
             }, params);
 
@@ -169,14 +169,14 @@ function myads(params, callback) {
             });
             if (platform === 'desktop') {
                 callback(null,'users/myolx', {
-                    myAdsMetadata: _myAds.metadata,
+                    myAdsMetadata: _myAds.meta,
                     myAds: myAds,
                     deleted: deleted,
                     viewname: 'myads'
                 });
             } else {
                 callback(null, {
-                    myAdsMetadata: _myAds.metadata,
+                    myAdsMetadata: _myAds.meta,
                     myAds: myAds,
                     deleted: deleted
                 });
@@ -256,14 +256,14 @@ function favorites(params, callback) {
 
             if (platform === 'desktop') {
                 callback(null, 'users/myolx', {
-                    favoritesMetadata: _favorites.metadata,
+                    favoritesMetadata: _favorites.meta,
                     favorites: favorites,
                     favorite: favorite,
                     viewname: 'favorites'
                 });
             } else {
                 callback(null, {
-                    favoritesMetadata: _favorites.metadata,
+                    favoritesMetadata: _favorites.meta,
                     favorites: favorites,
                     favorite: favorite
                 });

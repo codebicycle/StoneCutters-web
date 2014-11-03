@@ -90,10 +90,10 @@ module.exports = function(nunjucks) {
         return link.call(this, href, query);
     }
 
-    function linkFilter(filter, metadata, query) {
+    function linkFilter(filter, meta, query) {
         var name = '-' + filter.name + '_';
         var regExp = new RegExp(name + '-p-([0-9]+)', 'g');
-        var current = metadata.current.replace(regExp, '-p-1');
+        var current = meta.current.replace(regExp, '-p-1');
         var href = current + name + true;
 
         if (~current.indexOf(name)) {
@@ -160,12 +160,12 @@ module.exports = function(nunjucks) {
         return out.join('');
     }
 
-    function paginations(metadata, platform) {
+    function paginations(meta, platform) {
         var context = this.ctx;
         var out = [];
-        var url = metadata.current;
-        var page = metadata.page;
-        var pages = metadata.totalPages;
+        var url = meta.current;
+        var page = meta.page;
+        var pages = meta.totalPages;
         var regExp = new RegExp('-p-([0-9]+)', 'g');
         var pagination = [page-2, page-1, page, page+1, page+2];
         var prepareCallback = prepareURL;

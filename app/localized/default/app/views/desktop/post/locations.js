@@ -59,8 +59,6 @@ module.exports = Base.extend({
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 

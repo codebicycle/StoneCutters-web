@@ -31,25 +31,25 @@ module.exports = Base.extend({
     },
     parse: function(response) {
         if (response) {
-            this.metadata = response.metadata;
+            this.meta = response.metadata;
 
-            if (this.metadata && this.metadata.filters) {
-                this.metadata.filters = Filters.prepare(this.metadata.filters);
+            if (this.meta && this.meta.filters) {
+                this.meta.filters = Filters.prepare(this.meta.filters);
             }
             return response.data;
         }
         console.log('[OLX_DEBUG] Empty item listing response');
-        this.metadata = {};
+        this.meta = {};
         return [];
     },
     paginate: function (page, query, url, isGallery) {
-        helpers.pagination.paginate(this.metadata, query, url, isGallery);
+        helpers.pagination.paginate(this.meta, query, url, isGallery);
         if (page !== undefined) {
             if (isNaN(page) || page <= 1) {
                 return 1;
             }
-            if (page > this.metadata.totalPages) {
-                return this.metadata.totalPages;
+            if (page > this.meta.totalPages) {
+                return this.meta.totalPages;
             }
         }
     }

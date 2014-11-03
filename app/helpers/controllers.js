@@ -112,6 +112,16 @@ function processForm(params, done) {
     done(form);
 }
 
+function fetchDependencies(dependencies, done) {
+    this.app.fetchDependencies(dependencies, function callback(err, response) {
+        if (err) {
+            return done.fail(err);
+        }
+        this.dependencies = response;
+        done();
+    }.bind(this));
+}
+
 module.exports = {
     control: function(params, options, callback) {
         var promise;
@@ -134,6 +144,9 @@ module.exports = {
         }
         if (options.cache) {
             promise.val(changeHeaders.bind(this));
+        }
+        if (options.dependencies) {
+            promise.then(fetchDependencies.bind(this, options.dependencies));
         }
         if (options.isForm) {
             promise.then(processForm.bind(this, params));

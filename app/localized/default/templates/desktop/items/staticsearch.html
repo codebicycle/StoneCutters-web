@@ -31,7 +31,7 @@ STATIC SEARCH!
         {% endfor %}
     </ul>
 
-    {% if metadata.next or metadata.previous %}
+    {% if meta.next or meta.previous %}
         {% include (template + '/items/pagination.html') %}
     {% endif %}
 </section>

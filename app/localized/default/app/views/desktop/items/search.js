@@ -21,7 +21,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.app.session.get('path');
-        var filters = Filters.sort(this.order, data.metadata.filters);
+        var filters = Filters.sort(this.order, data.meta.filters);
 
         if (!this.filters) {
             this.filters = new Filters(link);

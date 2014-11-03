@@ -51,20 +51,20 @@ module.exports = (function() {
         }
     }
 
-    function paginate(metadata, params, url, isGallery) {
+    function paginate(meta, params, url, isGallery) {
         var next;
         var max = params.pageSize;
 
-        metadata.page = params.page;
-        metadata.totalPages = Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1);
-        metadata.current = format(params, url, 0, isGallery);
-        if (metadata.total > 0) {
-            next = metadata.next;
+        meta.page = params.page;
+        meta.totalPages = Math.floor(meta.total / max) + ((meta.total % max) === 0 ? 0 : 1);
+        meta.current = format(params, url, 0, isGallery);
+        if (meta.total > 0) {
+            next = meta.next;
             if (next) {
-                metadata.next = format(params, url, 1, isGallery);
+                meta.next = format(params, url, 1, isGallery);
             }
             if (params.page > 1) {
-                metadata.previous = format(params, url, -1, isGallery);
+                meta.previous = format(params, url, -1, isGallery);
             }
         }
     }

@@ -168,15 +168,15 @@ module.exports = Base.extend({
                 loader.hide();
                 return done.abort();
             }
-            done(res.items.toJSON(), res.items.metadata);
+            done(res.items.toJSON(), res.items.meta);
         }
 
-        function track(done, _items, metadata) {
+        function track(done, _items, meta) {
             var $view = $('#partials-tracking-view');
 
             tracking.reset();
             tracking.addParam('keyword', search);
-            tracking.addParam('page_nb', Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1));
+            tracking.addParam('page_nb', Math.floor(meta.total / max) + ((meta.total % max) === 0 ? 0 : 1));
 
             $view.trigger('update', tracking.generateURL.call(this));
 

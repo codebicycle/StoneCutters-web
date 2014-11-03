@@ -1,5 +1,5 @@
 <nav class="items-locations">
-    <ul class="locations-tabs {{ 'locations-empty' if not (metadata.filters.city or metadata.filters.state) }}" >
+    <ul class="locations-tabs {{ 'locations-empty' if not (meta.filters.city or meta.filters.state) }}" >
         <li><a href="{{ nav.link | linkig({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
         {% if location.children | length == 1 %}
             <li>
@@ -23,7 +23,7 @@
                     {% for value in filter.value %}
                         <li><a href="{{ nav.link | linkig({location: value.id}) }}">{{ value.value }} <span>{{ value.count | countFormat }}</span></a></li>
                     {% endfor %}
-                    {# {% for neighborhood in metadata.filters.neighborhood.value %}
+                    {# {% for neighborhood in meta.filters.neighborhood.value %}
                         <li>
                             <label>
                                 <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" >
