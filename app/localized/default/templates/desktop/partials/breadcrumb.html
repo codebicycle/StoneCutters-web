@@ -1,5 +1,5 @@
-{% if seo %}
-    <div id="breadcrumb" role="navigation">
+<div id="breadcrumb" role="navigation">
+    {% if seo %}
         <div class="breadcrumb-navigation">
             {% for level in seo.get("levelPath").top %}
                 {% if loop.length > 1 and loop.last %}
@@ -12,11 +12,11 @@
                 {% endif %}
             {% endfor %}
         </div>
-        {% if meta.next or meta.previous %}
-            <div class="breadcrumb-pagination">
-                <p>Página {{ meta.page }} de {{ meta.totalPages | countFormat }}</p>
-                <a href="{{ (meta.previous | linkig) if meta.previous else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not meta.previous }}"></a><a href="{{ (meta.next | linkig) if meta.next else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not meta.next }}"></a>
-            </div>
-        {% endif %}
-    </div>
-{% endif %}
+    {% endif %}
+    {% if meta.next or meta.previous %}
+        <div class="breadcrumb-pagination">
+            <p>Página {{ meta.page }} de {{ meta.totalPages | countFormat }}</p>
+            <a href="{{ (meta.previous | linkig) if meta.previous else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not meta.previous }}"></a><a href="{{ (meta.next | linkig) if meta.next else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not meta.next }}"></a>
+        </div>
+    {% endif %}
+</div>
