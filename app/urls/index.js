@@ -27,9 +27,6 @@ _.extend(urls, categories);
 
 // Handler 404
 _.extend(urls, {
-    'pages#php': {
-        url: /^.*\.php/
-    },
     'pages#error': {
         url: /^\/(?!((health$)|(force($|\/))|(esi($|\/))|(stats($|\/))|(analytics($|\/)))).*/
     }

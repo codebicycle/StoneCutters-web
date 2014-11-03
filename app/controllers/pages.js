@@ -18,8 +18,7 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
-    featured_listings: middlewares(featuredListings),
-    php: middlewares(php)
+    featured_listings: middlewares(featuredListings)
 };
 
 function terms(params, callback) {
@@ -202,9 +201,4 @@ function featuredListings(params, callback) {
 
         });
     }
-}
-
-function php(params, callback) {
-    statsd.increment(['redirections', 'php', this.app.session.get('path')]);
-    helpers.common.redirect.call(this, '/');
 }
