@@ -11,6 +11,18 @@ module.exports = Base.extend({
         'click [data-footer-slidedown]': 'slideDownContent',
         'click [data-footer-slide]': 'slideFooter'
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        return _.extend({}, data, {
+            user: this.app.session.get('user'),
+            inHome: this.isHome || false
+        });
+    },
+    postRender: function () {
+        this.app.router.appView.on('home:start', this.onHomeStart.bind(this));
+        this.app.router.appView.on('home:end', this.onHomeEnd.bind(this));
+    },
     slideDownContent: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -58,5 +70,13 @@ module.exports = Base.extend({
                 });
             }
         }
+    },
+    onHomeStart: function () {
+        this.isHome = true;
+        this.render();
+    },
+    onHomeEnd: function () {
+        this.isHome = false;
+        this.render();
     }
 });

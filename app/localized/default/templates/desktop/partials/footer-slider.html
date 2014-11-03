@@ -1,4 +1,6 @@
 <div data-slide-content="true" class="slide-container">
+
+    {% if inHome == false %}
     <div class="category-slide footer-slide hide">
         <a title="close" data-footer-slideDown="category-slide" class="icons icon-close" href="#"></a>
         <h3 class="title">Categorías populares</h3>
@@ -149,6 +151,8 @@
             </li>
         </ul>
     </div>
+    {% endif %}
+
     <div class="help-slide footer-slide hide">
         <a title="close" data-footer-slideDown="help-slide" class="icons icon-close" href="#"></a>
         <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
