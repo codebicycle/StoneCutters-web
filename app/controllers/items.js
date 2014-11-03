@@ -210,6 +210,7 @@ function show(params, callback) {
             seo.setContent(item.metadata.seo);
             if(item.metadata.itemPage.h1) {
                 seo.set('extendedTitle',item.metadata.itemPage.h1);
+                seo.set('h1',item.metadata.itemPage.h1);
             }
             if (!subcategory) {
                 _item.set('purged', true);
@@ -1032,6 +1033,28 @@ function staticSearch(params, callback) {
         var platform = this.app.session.get('platform');
         var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
+        var category;
+        var subcategory;
+
+        var configure = function(done) {
+            var categories;
+            if (params.catId) {
+                categories = this.app.session.get('categories');
+                category = categories.search(params.catId);
+                if (!category) {
+                    category = categories.get(params.catId);
+                    if (!category) {
+                        done.abort();
+                        return helpers.common.redirect.call(this, '/');
+                    }
+                }
+                if (category.has('parentId')) {
+                    subcategory = category;
+                    category = categories.get(subcategory.get('parentId'));
+                }
+            }
+            done();
+        }.bind(this);
 
         var redirect = function(done) {
             if (platform !== 'desktop') {
@@ -1115,17 +1138,28 @@ function staticSearch(params, callback) {
         var success = function(_items) {
             var meta = _items.meta;
 
-            seo.setContent(meta.seo);
-            if (meta.total < 5) {
+            _items.meta.seo.staticsearch = {
+                keyword: query.search,
+                category: function() {
+                    if (subcategory || category) {
+                        return (subcategory || category).get('trName');
+                    }
+                }
+            };
+            seo.setContent(_items.meta.seo);
+            if (_items.meta.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
-            seo.addMetatag('title', query.search + (meta.page > 1 ? (' - ' + meta.page) : ''));
+            seo.addMetatag('title', query.search + (_items.meta.page > 1 ? (' - ' + _items.meta.page) : ''));
             seo.addMetatag('description');
-            tracking.addParam('page_nb', meta.totalPages);
+            tracking.addParam('page_nb', _items.meta.totalPages);
+            tracking.addParam('keyword', query.search);
+            tracking.addParam('category', category ? category.toJSON() : undefined);
+            tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
-                meta: meta,
+                meta: _items.meta,
                 filters: _items.filters,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
@@ -1139,6 +1173,7 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(configure)
             .then(redirect)
             .then(prepare)
             .then(findItems)

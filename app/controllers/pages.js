@@ -167,7 +167,8 @@ function allstates(params, callback) {
 
             callback(null, {
                 states: response.states.toJSON(),
-                meta: meta
+                meta: meta,
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 
