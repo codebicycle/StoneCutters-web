@@ -1024,7 +1024,9 @@ function deleteItem(params, callback) {
 }
 
 function staticSearch(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        dependencies: ['categories']
+    }, controller);
 
     function controller() {
         var seo = Seo.instance(this.app);
@@ -1037,9 +1039,9 @@ function staticSearch(params, callback) {
         var subcategory;
 
         var configure = function(done) {
-            var categories;
+            var categories = this.dependencies.categories;
+
             if (params.catId) {
-                categories = this.app.session.get('categories');
                 category = categories.search(params.catId);
                 if (!category) {
                     category = categories.get(params.catId);
