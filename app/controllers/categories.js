@@ -16,52 +16,24 @@ module.exports = {
 };
 
 function list(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        dependencies: ['categories', 'topCities']
+    }, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var icons = config.get(['icons', platform], []);
+        var country = this.app.session.get('location').url;
         var seo = Seo.instance(this.app);
 
-        var fetch = function(done) {
-            this.app.fetch({
-                cities: {
-                    collection: 'Cities',
-                    params: {
-                        level: 'countries',
-                        type: 'topcities',
-                        location: this.app.session.get('siteLocation')
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(response) {
-            var platform = this.app.session.get('platform');
-            var icons = config.get(['icons', platform], []);
-            var country = this.app.session.get('location').url;
-            var categories = this.app.session.get('categories');
-
-            seo.setContent(categories.metadata.seo);
-            seo.addMetatag('title', categories.metadata.title);
-            seo.addMetatag('description', categories.metadata.description);
-
-            callback(null, {
-                cities: response.cities.toJSON(),
-                categories: categories.toJSON(),
-                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                tracking: tracking.generateURL.call(this),
-                seo: seo
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        seo.setContent(this.dependencies.categories.meta.seo);
+        seo.addMetatag('title', this.dependencies.categories.meta.title);
+        seo.addMetatag('description', this.dependencies.categories.meta.description);
+        callback(null, _.extend(this.dependencies.toJSON(), {
+            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+            tracking: tracking.generateURL.call(this),
+            seo: seo
+        }));
     }
 }
 
@@ -97,12 +69,10 @@ function show(params, callback, gallery) {
                     collection: 'Categories',
                     params: {
                         location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                         seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -234,7 +204,7 @@ function handleItems(params, promise, gallery) {
     }.bind(this);
 
     var success = function(done, _items) {
-        var metadata = _items.metadata;
+        var meta = _items.meta;
         var postingLink = {
             category: category.get('id')
         };
@@ -247,13 +217,13 @@ function handleItems(params, promise, gallery) {
             postingLink: postingLink
         });
 
-        seo.setContent(metadata.seo);
-        if (metadata.seo) {
-            currentPage = metadata.page;
-            seo.addMetatag('title', metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
-            seo.addMetatag('description', metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
+        seo.setContent(meta.seo);
+        if (meta.seo) {
+            currentPage = meta.page;
+            seo.addMetatag('title', meta.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            seo.addMetatag('description', meta.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
         }
-        if (metadata.total < 5) {
+        if (meta.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
             seo.addMetatag('googlebot', 'noindex, follow');
         }
@@ -263,7 +233,7 @@ function handleItems(params, promise, gallery) {
         if (subcategory) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
-        tracking.addParam('page', metadata.page);
+        tracking.addParam('page', meta.page);
 
         done({
             type: 'items',
@@ -271,7 +241,7 @@ function handleItems(params, promise, gallery) {
             subcategory: (subcategory || category).toJSON(),
             currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
-            metadata: metadata,
+            meta: meta,
             items: _items.toJSON(),
             filters: _items.filters,
             infiniteScroll: infiniteScroll,

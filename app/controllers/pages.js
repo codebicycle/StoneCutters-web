@@ -145,9 +145,7 @@ function allstates(params, callback) {
         }.bind(this);
 
         var fetch = function(done, spec) {
-            this.app.fetch(spec, {
-                readFromCache: false
-            }, done.errfcb);
+            this.app.fetch(spec, done.errfcb);
         }.bind(this);
 
         var formatResponse = function(done, res) {
@@ -165,11 +163,12 @@ function allstates(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            var metadata = response.metadata;
+            var meta = response.meta;
 
             callback(null, {
                 states: response.states.toJSON(),
-                metadata: metadata
+                meta: meta,
+                tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
 

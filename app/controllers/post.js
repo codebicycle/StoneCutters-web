@@ -43,11 +43,10 @@ function flow(params, callback) {
                     collection: 'Categories',
                     params: {
                         location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -73,8 +72,6 @@ function flow(params, callback) {
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -87,8 +84,6 @@ function flow(params, callback) {
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -185,11 +180,10 @@ function subcategories(params, callback) {
                     collection: 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -232,7 +226,6 @@ function form(params, callback) {
         var language;
         var languages;
         var languageId;
-        var languageCode;
 
         var prepare = function(done) {
             var redirect;
@@ -252,7 +245,6 @@ function form(params, callback) {
             language = this.app.session.get('selectedLanguage');
             languages = this.app.session.get('languages');
             languageId = languages._byId[language].id;
-            languageCode = languages._byId[language].isocode.toLowerCase();
             done();
         }.bind(this);
 
@@ -262,11 +254,10 @@ function form(params, callback) {
                     collection: 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: language
+                        languageId: languageId,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -289,12 +280,9 @@ function form(params, callback) {
                         intent: 'post',
                         location: siteLocation,
                         categoryId: params.subcategoryId,
-                        languageId: languageId,
-                        languageCode: languageCode
+                        languageId: languageId
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -333,7 +321,6 @@ function form(params, callback) {
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 language: languageId,
-                languageCode: languageCode,
                 siteLocation: siteLocation,
                 form: form,
                 tracking: tracking.generateURL.call(this)
@@ -356,6 +343,7 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var itemId = params.itemId;
@@ -390,11 +378,10 @@ function success(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -491,13 +478,13 @@ function edit(params, callback) {
     }, controller);
 
     function controller(form) {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var siteLocation;
         var language;
         var languages;
         var languageId;
-        var languageCode;
         var _params;
         var _categories;
         var _item;
@@ -514,11 +501,9 @@ function edit(params, callback) {
             language = this.app.session.get('selectedLanguage');
             languages = this.app.session.get('languages');
             languageId = languages._byId[language].id;
-            languageCode = languages._byId[language].isocode.toLowerCase();
             _params = {
                 id: params.itemId,
-                languageId: languageId,
-                languageCode: languageCode
+                languageId: languageId
             };
             checkAuthentication(_params, _params.id);
             done();
@@ -530,11 +515,10 @@ function edit(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: language
+                        languageId: languageId,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -591,7 +575,6 @@ function edit(params, callback) {
                 intent: 'edit',
                 location: siteLocation,
                 languageId: languageId,
-                languageCode: languageCode,
                 itemId: _item.get('id'),
                 categoryId: _item.get('category').id
             };
@@ -602,8 +585,6 @@ function edit(params, callback) {
                     model: 'Field',
                     params: _params
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -648,7 +629,6 @@ function edit(params, callback) {
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 language: languageId,
-                languageCode: languageCode,
                 errField: params.errField,
                 errMsg: params.errMsg,
                 sk: securityKey,

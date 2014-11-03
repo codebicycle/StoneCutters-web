@@ -13,7 +13,7 @@ module.exports = Base.extend({
         'blur input': 'validateField',
         'blur textarea': 'validateField',
         'submit': 'submitForm',
-        'click .replySuccses span': 'showSubmit',
+        'click .replySuccess span': 'showSubmit',
         'mouseover [data-gallery-thumb]': 'updateGallery',
         'click [data-gallery-navigator] [class*="arrow-"]': 'navigate',
         'click [data-fav]': 'addToFavorites'
@@ -75,7 +75,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        $('.replySuccses').addClass('hide');
+        $('.replySuccess').addClass('hide');
         $('#replyForm .submit').removeClass('hide');
     },
     submitForm: function(event) {
@@ -126,7 +126,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(done, data) {
-            var $replySuccess = $('.replySuccses');
+            var $replySuccess = $('.replySuccess');
             var category = $('.itemCategory').val();
             var subcategory = $('.itemSubcategory').val();
 
@@ -134,12 +134,12 @@ module.exports = Base.extend({
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
+            $replySuccess.removeClass('hide');
             this.track({
                 category: 'Reply',
                 action: 'ReplySuccess',
                 custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
             });
-            $replySuccess.removeClass('hide');
             done(data);
         }.bind(this);
 

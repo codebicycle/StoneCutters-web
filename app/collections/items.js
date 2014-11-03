@@ -40,27 +40,26 @@ module.exports = Base.extend({
     },
     parse: function(response) {
         if (response) {
-            this.metadata = response.metadata;
-
-            if (this.metadata && this.metadata.filters) {
+            this.meta = response.metadata;
+            if (this.meta && this.meta.filters) {
                 if (!this.filters) {
                     this.filters = new Filters(null, {
                         app: this.app,
                         path: this.app.session.get('path')
                     });
                 }
-                this.filters.addAll(this.metadata.filters);
+                this.filters.addAll(this.meta.filters);
             }
             return response.data;
         }
         console.log('[OLX_DEBUG] Empty item listing response');
-        this.metadata = {};
+        this.meta = {};
         return [];
     },
     paginate: function (url, query, options) {
         var page = options.page;
 
-        Paginator.paginate(this.metadata, query, url, {
+        Paginator.paginate(this.meta, query, url, {
             gallery: options.gallery,
             filters: this.filters
         });
@@ -68,8 +67,8 @@ module.exports = Base.extend({
             if (isNaN(page) || page <= 1) {
                 return 1;
             }
-            if (page > this.metadata.totalPages) {
-                return this.metadata.totalPages;
+            if (page > this.meta.totalPages) {
+                return this.meta.totalPages;
             }
         }
     },
