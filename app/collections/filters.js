@@ -217,15 +217,15 @@ function format() {
         url.push('_');
         value = filter.get('current');
         switch (filter.get('type')) {
-            case 'RANGE': 
+            case 'RANGE':
                 url.push(value.from);
                 url.push('_');
                 url.push(value.to);
                 break;
-            case 'SELECT': 
+            case 'SELECT':
                 url.push(value.join('_'));
                 break;
-            case 'BOOLEAN': 
+            case 'BOOLEAN':
                 url.push(value);
                 break;
         }

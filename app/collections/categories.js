@@ -55,3 +55,4 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'Categories';
+module.exports.cache = true;

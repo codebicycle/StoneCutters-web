@@ -43,6 +43,9 @@ var Router = function(server) {
             var spec = {};
             var name = key.split(':').shift();
 
+            if (!app.modelUtils.getCollectionConstructor(name).cache) {
+                return;
+            }
             spec[name] = {
                 collection: name.charAt(0).toUpperCase() + name.substring(1).toLowerCase(),
                 params: _.omit(collection.value.options || {}, 'app', 'params', 'platform', 'parse')

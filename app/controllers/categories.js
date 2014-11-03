@@ -44,6 +44,7 @@ function showig(params, callback) {
 
 function show(params, callback, gallery) {
     helpers.controllers.control.call(this, params, {
+        dependencies: ['categories'],
         seo: false,
         cache: false
     }, controller);
@@ -63,29 +64,13 @@ function show(params, callback, gallery) {
             done();
         }.bind(this);
 
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        seo: seo.isEnabled()
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var router = function(done, res) {
-            if (!res.categories) {
-                return done.fail(null, {});
-            }
-            var category = res.categories.get(params.catId);
+        var router = function(done) {
+            var category = this.dependencies.categories.get(params.catId);
             var platform = this.app.session.get('platform');
             var subcategory;
 
             if (!category) {
-                category = res.categories.find(function each(category) {
+                category = this.dependencies.categories.find(function each(category) {
                     return !!category.get('children').get(params.catId);
                 });
                 if (!category) {
@@ -115,7 +100,6 @@ function show(params, callback, gallery) {
 
         var promise = asynquence().or(error)
             .then(redirect)
-            .then(fetch)
             .then(router);
     }
 }

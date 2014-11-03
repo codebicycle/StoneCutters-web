@@ -16,3 +16,4 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'Cities';
+module.exports.cache = true;

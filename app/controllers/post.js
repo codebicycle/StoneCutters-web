@@ -17,7 +17,9 @@ module.exports = {
 };
 
 function flow(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        dependencies: ['categories', 'topCities', 'states']
+    }, controller);
 
     function controller(form) {
         var siteLocation = this.app.session.get('siteLocation');
@@ -37,20 +39,7 @@ function flow(params, callback) {
             done();
         }.bind(this);
 
-        var fetchCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        seo: seo.isEnabled()
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var fetchPostingSession = function(done) {
+        var fetch = function(done) {
             this.app.fetch({
                 postingSession: {
                     model: 'PostingSession',
@@ -61,73 +50,40 @@ function flow(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var fetchCities = function(done) {
-            this.app.fetch({
-                topCities: {
-                    collection: 'Cities',
-                    params: {
-                        level: 'countries',
-                        type: 'topcities',
-                        location: location.url,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var fetchStates = function(done) {
-            this.app.fetch({
-                states: {
-                    collection: 'States',
-                    params: {
-                        location: location.url,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(res1, res2, res3, res4) {
+        var success = function(res) {
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
-                postingFlowController(res1.categories, res2.postingSession, res3.topCities, res4.states);
+                postingFlowController(res.postingSession);
             }
             else if (isDesktop) {
-                postingController(res1.categories, res2.postingSession, res3.topCities, res4.states);
+                postingController(res.postingSession);
             }
             else {
-                postingCategoriesController(res1.categories);
+                postingCategoriesController();
             }
         }.bind(this);
 
-        var postingController = function(categories, postingSession, topCities, states) {
+        var postingController = function(postingSession) {
             tracking.setPage('desktop_step1');
-            callback(null, 'post/index', {
-                categories: categories,
+            callback(null, 'post/index', _.extend(this.dependencies, {
                 postingSession: postingSession.get('postingSession'),
-                topCities: topCities,
-                states: states,
                 tracking: tracking.generateURL.call(this)
-            });
+            }));
         }.bind(this);
 
-        var postingFlowController = function(categories, postingSession, topCities, states) {
-            callback(null, 'post/flow/index', {
-                categories: categories,
+        var postingFlowController = function(postingSession) {
+            callback(null, 'post/flow/index', _.extend(this.dependencies, {
                 postingSession: postingSession.get('postingSession'),
-                topCities: topCities,
-                states: states,
                 tracking: tracking.generateURL.call(this)
-            });
+            }));
         }.bind(this);
 
-        var postingCategoriesController = function(categories) {
+        var postingCategoriesController = function() {
             tracking.setPage('categories');
-            callback(null, 'post/categories', {
-                categories: categories.toJSON(),
+            callback(null, 'post/categories', _.extend(this.dependencies.toJSON(), {
                 tracking: tracking.generateURL.call(this)
-            });
+            }));
         }.bind(this);
 
         var error = function(err) {
@@ -138,10 +94,7 @@ function flow(params, callback) {
             .then(prepare);
 
         if (isPostingFlow || isDesktop) {
-            promise.gate(fetchCategories, fetchPostingSession, fetchCities, fetchStates);
-        }
-        else {
-            promise.then(fetchCategories);
+            promise.then(fetch);
         }
         promise.val(success);
     }
