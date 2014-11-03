@@ -4,18 +4,18 @@
             {% for level in seo.get("levelPath").top %}
                 {% if loop.length > 1 and loop.last %}
                     <span class="icons icon-arrow" >{{ level.anchor }}</span>
-                    {% if metadata.total %}
-                        <span class="count">({{ metadata.total | countFormat }})</span>
+                    {% if meta.total %}
+                        <span class="count">({{ meta.total | countFormat }})</span>
                     {% endif %}
                 {% else %}
                     <a href="{{ level.url }}" {{ 'class="icons icon-arrow"' if not loop.first }} {{ 'rel="nofollow"' if level.noFollow }} >{{ level.anchor }}</a>
                 {% endif %}
             {% endfor %}
         </div>
-        {% if metadata.next or metadata.previous %}
+        {% if meta.next or meta.previous %}
             <div class="breadcrumb-pagination">
-                <p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
-                <a href="{{ (metadata.previous | linkig) if metadata.previous else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | linkig) if metadata.next else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not metadata.next }}"></a>
+                <p>Página {{ meta.page }} de {{ meta.totalPages | countFormat }}</p>
+                <a href="{{ (meta.previous | linkig) if meta.previous else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not meta.previous }}"></a><a href="{{ (meta.next | linkig) if meta.next else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not meta.next }}"></a>
             </div>
         {% endif %}
     </div>

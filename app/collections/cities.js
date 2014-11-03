@@ -8,7 +8,7 @@ module.exports = Base.extend({
     url: '/:level/:location/:type',
     parse: function(response) {
         if (response.data) {
-            this.metadata = response.metadata;
+            this.meta = response.metadata;
             return response.data;
         }
         return response;

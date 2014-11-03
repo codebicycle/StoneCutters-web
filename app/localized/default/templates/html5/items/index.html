@@ -4,7 +4,7 @@
     {% from macros import Breadcrumb %}
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, category.trName, '<span class="switchView"></span>') }}
-    {% if metadata.total == 0 %}
+    {% if meta.total == 0 %}
         <div class="emtyList">
             <div></div>
             <p>
@@ -27,14 +27,14 @@
             </div>
             <input id="category" type="hidden" class="hide" value="{{ category.id }},{{ category.name }}">
             <input id="subcategory" type="hidden" class="hide" value="{{ subcategory.id }},{{ subcategory.name }}">
-            <input id="currentUrl" type="hidden" class="hide" value="{{ metadata.current | link }}">
-        {% elif metadata.next or metadata.previous %}
+            <input id="currentUrl" type="hidden" class="hide" value="{{ meta.current | link }}">
+        {% elif meta.next or meta.previous %}
             <div id="itemPagination">
-                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"><span>{{ dictionary["itemslisting.Previous"] }}</span></a>
+                <a href="{{ (meta.previous | link) if meta.previous else '#' }}" class="arrow {{ "leftA" if meta.previous else "leftD" }}"><span>{{ dictionary["itemslisting.Previous"] }}</span></a>
                 <div class="center">
-                    {{ metadata | pagination }}
+                    {{ meta | pagination }}
                 </div>
-                <a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"><span>{{ dictionary["itemslisting.Next"] }}</span></a>
+                <a href="{{ (meta.next | link) if meta.next else '#' }}" class="arrow {{ "rightA" if meta.next else "rightD" }}"><span>{{ dictionary["itemslisting.Next"] }}</span></a>
             </div>
         {% endif %}
     {% endif %}
