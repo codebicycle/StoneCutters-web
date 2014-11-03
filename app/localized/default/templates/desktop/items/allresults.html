@@ -15,4 +15,9 @@
 	    {% endif %}
 	</section>
 </div><!-- wrapper main -->
+
+{% if seo %}
+    {% include (template + '/partials/seobox.html') %}
+{% endif %}
+
 {% view 'partials/tracking' %}
