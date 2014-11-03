@@ -133,12 +133,12 @@ module.exports = Base.extend({
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
+            $replySuccess.removeClass('hide');
             this.track({
                 category: 'Reply',
                 action: 'ReplySuccess',
                 custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
             });
-            $replySuccess.removeClass('hide');
             done(data);
         }.bind(this);
 

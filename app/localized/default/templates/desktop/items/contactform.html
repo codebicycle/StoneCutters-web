@@ -28,7 +28,7 @@
         </fieldset>
         <fieldset>
             <label for="phone">
-                <input type="text" name="phone" id="phone" value="" maxlength="15" placeholder="{{ dictionary["item.YourPhoneNumberOptionalZA"] }} ">
+                <input type="text" name="phone" id="phone" class="phone" value="" maxlength="15" placeholder="{{ dictionary["item.YourPhoneNumberOptionalZA"] }} ">
             </label>
         </fieldset>
         <img class="spinner hide" src="{{ '/images/desktop/spinner-bgYellow.gif' | static }}" alt="">
@@ -39,7 +39,7 @@
             <input type="hidden" class="hide itemCategory" value="{{ item.category.id }}">
             <input type="hidden" class="hide itemSubcategory" value="{{ item.category.parentId }}">
         </fieldset>
-        <p class="replySuccses icons hide" >
+        <p class="replySuccses icons icon-check hide" >
             {{ dictionary["item.YourMessageHasBeenSent"] }}
             <span>{{ dictionary["replymessage.SendAnotherMessage"] }} </span>
         </p>
