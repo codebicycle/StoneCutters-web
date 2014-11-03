@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': '\u30E6\u30FC\u30B6\u30FC\u30CD\u30FC\u30E0',
     'messages_item_page.12': '\u304A\u6C17\u306B\u5165\u308A\u306B\u8FFD\u52A0\u3059\u308B',
     'messages_item_page.57': '\u533F\u540D',
+    'messages_item_page.CATEGORY_REGION': '<<REGION>>\u3067\u306E<<CATEGORY>> ',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': '\u30EA\u30B9\u30C8\u3092\u7DE8\u96C6\u3059\u308B',
     'landingbody.EmailAddress': '\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9',

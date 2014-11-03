@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'Vartotojo vardas',
     'messages_item_page.12': 'prid\u0117ti prie m\u0117gstamiausi\u0173j\u0173',
     'messages_item_page.57': 'Anoniminis',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>>, esanti <<REGION>>',
     'messages_site_class.30': 'Gerai',
     'messages_user_management_current_ads.EditMyListing': 'Redaguoti mano skelbim\u0105',
     'landingbody.EmailAddress': 'El. pa\u0161to adresas',

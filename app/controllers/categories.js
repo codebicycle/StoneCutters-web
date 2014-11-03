@@ -42,9 +42,9 @@ function list(params, callback) {
             var country = this.app.session.get('location').url;
             var categories = this.app.session.get('categories');
 
-            seo.setContent(categories.metadata.seo);
             seo.addMetatag('title', categories.metadata.title);
             seo.addMetatag('description', categories.metadata.description);
+            seo.setContent(categories.metadata.seo);
 
             callback(null, {
                 cities: response.cities.toJSON(),

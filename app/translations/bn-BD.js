@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': '\u0987\u0989\u099C\u09BE\u09B0 \u09A8\u09C7\u09AE',
     'messages_item_page.12': '\u09AA\u09CD\u09B0\u09BF\u09DF \u09AC\u09BF\u09B7\u09DF\u09C7 \u09AF\u09CB\u0997 \u0995\u09B0\u09C1\u09A8',
     'messages_item_page.57': '\u09AC\u09C7\u09A8\u09BE\u09AE\u09C0',
+    'messages_item_page.CATEGORY_REGION': '<<REGION>> \u098F <<CATEGORY>>',
     'messages_site_class.30': '\u0993\u0995\u09C7',
     'messages_user_management_current_ads.EditMyListing': '\u2018\u0986\u09AE\u09BE\u09B0 \u09A4\u09BE\u09B2\u09BF\u0995\u09BE\u2019 \u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE \u0995\u09B0\u09C1\u09A8',
     'landingbody.EmailAddress': '\u0987-\u09AE\u09C7\u0987\u09B2 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE',

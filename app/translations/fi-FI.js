@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'K\xE4ytt\xE4j\xE4tunnus',
     'messages_item_page.12': 'lis\xE4\xE4-suosikeihin',
     'messages_item_page.57': 'Nimet\xF6n',
+    'messages_item_page.CATEGORY_REGION': 'Kategoria <<CATEGORY>> alueella <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Muokkaa omaa ilmoitusta',
     'landingbody.EmailAddress': 'S\xE4hk\xF6postiosoite',

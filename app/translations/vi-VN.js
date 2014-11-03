@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'T\xEAn \u0111\u0103ng nh\u1EADp',
     'messages_item_page.12': 'th\xEAm-v\xE0o-m\u1EE5c-y\xEAu-th\xEDch',
     'messages_item_page.57': '\u1EA8n danh',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> trong <<REGION>>',
     'messages_site_class.30': '\u0110\u1ED3ng \xFD',
     'messages_user_management_current_ads.EditMyListing': 'Ch\u1EC9nh s\u1EEDa rao v\u1EB7t',
     'landingbody.EmailAddress': '\u0110\u1ECBa ch\u1EC9 email',

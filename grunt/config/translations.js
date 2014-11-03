@@ -47,6 +47,7 @@ module.exports = {
         'myolx.AreYouSureYouWantToCloseSelectedListings',
         'misc.LessThan',
         'posting_optionallist.Kms',
+        'messages_item_page.CATEGORY_REGION',
         'countryoptions.Home_SelectState',
         'countryoptions.Home_SelectCity'
     ]

@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'nama pengguna',
     'messages_item_page.12': 'Tambahkan ke favorit',
     'messages_item_page.57': 'Anonim',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> di <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
     'landingbody.EmailAddress': 'Alamat Email',

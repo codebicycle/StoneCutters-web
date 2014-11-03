@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'felhaszn\xE1l\xF3i n\xE9v',
     'messages_item_page.12': 'hozz\xE1ad\xE1s-a-kedvencekhez',
     'messages_item_page.57': 'N\xE9vtelen',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> itt: <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'A hirdet\xE9sem szerkeszt\xE9se',
     'landingbody.EmailAddress': 'E-mail c\xEDm',

@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'username',
     'messages_item_page.12': 'add-to-favorites',
     'messages_item_page.57': 'Anonymous',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> in <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit My Ad',
     'landingbody.EmailAddress': 'Email Address',

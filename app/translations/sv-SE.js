@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'Anv\xE4ndarnamn',
     'messages_item_page.12': 'l\xE4gg-till-i-favoriter',
     'messages_item_page.57': 'Anonym',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> i <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Redigera min annons',
     'landingbody.EmailAddress': 'E-postadress',

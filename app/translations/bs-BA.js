@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'Korisni\u010Dko ime',
     'messages_item_page.12': 'dodati-u-favorite',
     'messages_item_page.57': 'Anonimno',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> u <<REGION>>',
     'messages_site_class.30': 'U redu',
     'messages_user_management_current_ads.EditMyListing': 'Ure\u0111ivanje Mojih oglasa',
     'landingbody.EmailAddress': 'E-mail adresa',

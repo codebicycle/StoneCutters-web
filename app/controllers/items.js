@@ -222,6 +222,7 @@ function show(params, callback) {
             seo.setContent(item.metadata.seo);
             if(item.metadata.itemPage.h1) {
                 seo.set('extendedTitle',item.metadata.itemPage.h1);
+                seo.set('h1',item.metadata.itemPage.h1);
             }
             if (!subcategory) {
                 _item.set('purged', true);
@@ -1055,6 +1056,28 @@ function staticSearch(params, callback) {
         var platform = this.app.session.get('platform');
         var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
+        var category;
+        var subcategory;
+
+        var configure = function(done) {
+            var categories;
+            if (params.catId) {
+                categories = this.app.session.get('categories');
+                category = categories.search(params.catId);
+                if (!category) {
+                    category = categories.get(params.catId);
+                    if (!category) {
+                        done.abort();
+                        return helpers.common.redirect.call(this, '/');
+                    }
+                }
+                if (category.has('parentId')) {
+                    subcategory = category;
+                    category = categories.get(subcategory.get('parentId'));
+                }
+            }
+            done();
+        }.bind(this);
 
         var redirect = function(done) {
             if (platform !== 'desktop') {
@@ -1137,11 +1160,20 @@ function staticSearch(params, callback) {
 
         var success = function(_items) {
             var metadata = _items.metadata;
-            var categories;
-            var category;
-            var subcategory;
+
+            var staticsearch = {
+                keyword: query.search,
+                category: function() {
+                    if (subcategory || category) {
+                        return (subcategory || category).get('trName');
+                    }
+                }
+            };
+
+            _items.metadata.seo.staticsearch = staticsearch;
 
             seo.setContent(_items.metadata.seo);
+
             if (metadata.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
@@ -1149,24 +1181,10 @@ function staticSearch(params, callback) {
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
 
-            if (params.catId) {
-                categories = this.app.session.get('categories');
-                category = categories.search(params.catId);
-
-                if (!category) {
-                    category = categories.get(subcategory.get('parentId'));
-                }
-                if (category.has('parentId')) {
-                    subcategory = category;
-                    category = categories.get(subcategory.get('parentId'));
-                }
-
-                tracking.addParam('category', category.toJSON());
-                tracking.addParam('subcategory', subcategory.toJSON());
-            }
-
             tracking.addParam('page_nb', metadata.totalPages);
             tracking.addParam('keyword', query.search);
+            tracking.addParam('category', category ? category.toJSON() : undefined);
+            tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
@@ -1184,6 +1202,7 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(configure)
             .then(redirect)
             .then(prepare)
             .then(findItems)

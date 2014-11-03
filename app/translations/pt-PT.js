@@ -86,6 +86,7 @@ module.exports = {
     'messages_email_register.Username': 'Nome de Usu\xE1rio',
     'messages_item_page.12': 'Agregar em favoritos',
     'messages_item_page.57': 'An\xF4nimo',
+    'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> in <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
