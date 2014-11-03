@@ -13,6 +13,7 @@ module.exports = {
         popularSearches: true,
         relatedListings: true,
         extendedTitle: true,
+        h1: true,
         references: true
     },
     tracking: {
