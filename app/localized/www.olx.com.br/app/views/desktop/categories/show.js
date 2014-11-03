@@ -4,6 +4,7 @@ var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var Seo = require('../../../../../../modules/seo');
 var tracking = require('../../../../../../modules/tracking');
+var Paginator = require('../../../../../../modules/paginator');
 
 module.exports = Base.extend({
     className: 'categories_show_view',
@@ -123,7 +124,7 @@ module.exports = Base.extend({
             params.page = preparePageParam(urlFull);
             params.catId = prepareCategoryParam(urlFull);
 
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             params.categoryId = params.catId;
             params.seo = seo.isEnabled();
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
@@ -131,7 +132,6 @@ module.exports = Base.extend({
             delete params.title;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             done(params);
         }

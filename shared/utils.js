@@ -155,11 +155,20 @@ function stringify(obj, sep, eq, name) {
 
 function link(href, app, query) {
     query = query || {};
+
+    if (app.session.get('platform') === 'desktop' && query.location) {
+        href = href.replace(/^(.+:\/\/)[^.]*/, '$1' + query.location.split('.').shift());
+        delete query.location;
+    }
+
     _.each(linkParams, function(checker, name) {
         href = checker.call(app, href, query);
     });
     if (!_.isEmpty(query)) {
         href = params(href, query);
+    }
+    if (href.slice(href.length - 1) === '/') {
+        href = href.substring(0, href.length - 1);
     }
     return href;
 }

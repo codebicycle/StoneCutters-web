@@ -43,7 +43,7 @@ module.exports = Base.extend({
             template: template,
             siteLocation: this.app.session.get('siteLocation'),
             location: this.app.session.get('location'),
-            dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'],
+            dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'],
             referer: this.app.session.get('referer'),
             url: this.app.session.get('url'),
             href: this.app.session.get('href'),
@@ -71,7 +71,7 @@ module.exports = Base.extend({
             tracking = $.deparam(tracking.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
         }
         obj = _.defaults(obj, data, tracking, {
-            url: helpers.common.static('/images/common/gif1x1.gif')
+            url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
         });
         options = _.defaults((options || {}), {
             url: '/analytics/pageevent.gif',

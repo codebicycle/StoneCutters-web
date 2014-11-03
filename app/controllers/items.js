@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
+var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var Item = require('../models/item');
 
@@ -657,9 +658,9 @@ function searchfilterig(params, callback) {
     searchfilter.call(this, params, callback, '-ig');
 }
 
-function searchfilter(params, callback, isGallery) {
+function searchfilter(params, callback, gallery) {
     params.categoryId = params.catId;
-    search.call(this, params, callback, isGallery);
+    search.call(this, params, callback, gallery);
 }
 
 function searchig(params, callback) {
@@ -667,7 +668,7 @@ function searchig(params, callback) {
     search.call(this, params, callback, '-ig');
 }
 
-function search(params, callback, isGallery) {
+function search(params, callback, gallery) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -677,35 +678,44 @@ function search(params, callback, isGallery) {
         var platform = this.app.session.get('platform');
         var query;
         var url;
+        var urlPagination;
 
         var configure = function(done) {
             url = ['/nf/'];
+            urlPagination = [];
+            gallery = gallery || '';
 
             if (params.categoryId) {
                 url.push(params.title);
                 url.push('-cat-');
                 url.push(params.categoryId);
+                urlPagination = urlPagination.concat(url);
+                urlPagination.push('[page][gallery]');
             }
             else {
                 url.push('search');
+                urlPagination = urlPagination.concat(url);
             }
             url.push('/');
             url.push(params.search);
+            urlPagination.push('/');
+            urlPagination.push(params.search);
+            urlPagination.push('[filters]');
             url = url.join('');
+            urlPagination = urlPagination.join('');
             done();
         }.bind(this);
 
         var prepare = function(done) {
             if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '/', isGallery || ''].join(''));
+                return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
             }
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             query = _.clone(params);
             delete params.search;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -752,12 +762,15 @@ function search(params, callback, isGallery) {
             }
             if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '/', isGallery || ''].join(''));
+                return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
             }
-            realPage = res.items.paginate(page, query, [url, '/'].join(''), isGallery);
+            realPage = res.items.paginate(urlPagination, query, {
+                page: page,
+                gallery: gallery
+            });
             if (realPage) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '/-p-', realPage, isGallery || ''].join(''));
+                return helpers.common.redirect.call(this, [url, '/-p-', realPage, gallery].join(''));
             }
             done(res.items);
         }.bind(this);
@@ -776,9 +789,10 @@ function search(params, callback, isGallery) {
             tracking.addParam('section', query.categoryId);
             tracking.addParam('page', page);
 
-            callback(null, ['items/search', (isGallery || '').replace('-', '')].join(''), {
+            callback(null, ['items/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: meta,
+                filters: items.filters,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
                 tracking: tracking.generateURL.call(this)
@@ -804,7 +818,7 @@ function allresultsig(params, callback) {
     allresults.call(this, params, callback, '-ig');
 }
 
-function allresults(params, callback, isGallery) {
+function allresults(params, callback, gallery) {
     helpers.controllers.control.call(this, params, {
         dependencies: ['categories']
     }, controller);
@@ -816,7 +830,7 @@ function allresults(params, callback, isGallery) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location').url;
         var siteLocation = this.app.session.get('siteLocation');
-        var url = ['/nf/all-results', isGallery || ''].join('');
+        var url = ['/nf/all-results', gallery || ''].join('');
         var query;
 
         var redirect = function(done) {
@@ -833,12 +847,11 @@ function allresults(params, callback, isGallery) {
             delete params.search;
 
             params.seo = seo.isEnabled();
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             query = _.clone(params);
 
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             done();
         }.bind(this);
@@ -861,7 +874,10 @@ function allresults(params, callback, isGallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
-            realPage = res.items.paginate(page, query, url);
+            realPage = res.items.paginate(['/nf/all-results[gallery][page][filters]'].join(''), query, {
+                page: page,
+                gallery: gallery
+            });
             if (realPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url + '-p-' + realPage);
@@ -883,6 +899,7 @@ function allresults(params, callback, isGallery) {
                 categories: this.dependencies.categories.toJSON(),
                 items: _items.toJSON(),
                 meta: meta,
+                filters: _items.filters,
                 infiniteScroll: infiniteScroll,
                 tracking: tracking.generateURL.call(this)
             });
@@ -1013,6 +1030,7 @@ function staticSearch(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
+        var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
 
         var redirect = function(done) {
@@ -1028,12 +1046,11 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             query = _.clone(params);
             delete params.search;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
@@ -1078,11 +1095,25 @@ function staticSearch(params, callback) {
             done(res.items);
         }.bind(this);
 
-        var success = function(_items) {
-            var url = ['/q/', query.search, '/c-', params.catId ,  '/'].join('');
-            var meta = _items.meta;
+        var paginate = function(done, _items) {
+            var realPage;
 
-            helpers.pagination.paginate(meta, query, url);
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = _items.paginate([url, '/[page][gallery][filter]'].join(''), query, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, url + '-p-' + realPage);
+            }
+            done(_items);
+        }.bind(this);
+
+        var success = function(_items) {
+            var meta = _items.meta;
 
             seo.setContent(meta.seo);
             if (meta.total < 5) {
@@ -1091,12 +1122,11 @@ function staticSearch(params, callback) {
             }
             seo.addMetatag('title', query.search + (meta.page > 1 ? (' - ' + meta.page) : ''));
             seo.addMetatag('description');
-
             tracking.addParam('page_nb', meta.totalPages);
-
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
                 meta: meta,
+                filters: _items.filters,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
                 tracking: tracking.generateURL.call(this),
@@ -1113,6 +1143,7 @@ function staticSearch(params, callback) {
             .then(prepare)
             .then(findItems)
             .then(checkSearch)
+            .then(paginate)
             .val(success);
     }
 }

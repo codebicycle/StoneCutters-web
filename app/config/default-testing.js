@@ -14,8 +14,8 @@ module.exports = {
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'testing',
-        staticPath: 'http://static-testing.olx-st.com/mobile-webapp',
-        imagePath: 'http://images-testing.olx-st.com/mobile-webapp'
+        staticPath: 'http://static01.olx-st.com/mobile-webapp',
+        imagePath: 'http://images01.olx-st.com/mobile-webapp'
     },
     tracking: {
         enabled: true

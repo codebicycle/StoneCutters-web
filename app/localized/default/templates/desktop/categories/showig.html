@@ -1,26 +1,21 @@
 {% include (template + "/partials/breadcrumb.html") %}
 
-<nav id="listing-filters">
-    {% include (template + '/categories/subcategories.html') %}
-    {% include (template + '/items/filters.html') %}
-</nav>
-
-<section id='listing-items'>
-    {% include (template + '/items/locations.html') %}
-
-    {% include (template + '/items/listig.html') %}
-
-    {% if meta.next or meta.previous %}
-        {% include (template + '/items/pagination.html') %}
-    {% endif %}
-</section>
-
-{% include (template + '/partials/seobox.html') %}
+<div class="wrapper-main">
+    <nav id="listing-filters">
+        {% include (template + '/categories/subcategories.html') %}
+        {% include (template + '/items/filters.html') %}
+    </nav>
+    <section id='listing-items'>
+        {% include (template + '/items/locations.html') %}
+        {% include (template + '/items/listig.html') %}
+        {% if meta.next or meta.previous %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    </section>
+</div>
 
 {% if seo %}
-    <section id="seo-box">
-        {% include (template + '/partials/seobox.html') %}
-    </section>
+    {% include (template + '/partials/seobox.html') %}
 {% endif %}
 
 {% view 'partials/tracking' %}

@@ -2,7 +2,9 @@
 
 var _ = require('underscore');
 var utils = require('../../shared/utils');
-var CONFIG = require('./default');
+var CONFIG = _.extend({}, require('./default'), {
+    translations: require('./translations')
+});
 var configClient = require('../../shared/config');
 
 module.exports = function() {

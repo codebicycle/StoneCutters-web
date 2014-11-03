@@ -11,14 +11,106 @@ if (typeof window === 'undefined') {
 
 module.exports = (function() {
 
-    var staticsHandler = {
-        static: function(env, filePath, path) {
+    var linkIgParsers = (function() {
+        var regexpFindPage = /-p-[0-9]+/;
+        var regexpReplacePage = /(-p-[0-9]+)/;
+        var regexpFindCategory = /[a-zA-Z0-9-]+-cat-[0-9]+/;
+        var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
+        var regexpFindGallery = /-ig/;
+
+        function searchig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindCategory)) {
+                path = path.replace(regexpReplaceCategory, '$1-ig');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) !== '/') {
+                    path += '/';
+                }
+                path += '-ig';
+            }
+            return path;
+        }
+
+        function allresultsig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '-ig$1');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) === '/') {
+                    path = path.substring(0, path.length - 1);
+                }
+                path += '-ig';
+            }
+            return path;
+        }
+
+        function showig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindCategory)) {
+                path = path.replace(regexpReplaceCategory, '$1-ig');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) === '/') {
+                    path = path.substring(0, path.length - 1);
+                }
+                path += '-ig';
+            }
+            return path;
+        }
+
+        return {
+            searchig: searchig,
+            allresultsig: allresultsig,
+            showig: showig
+        };
+    })();
+
+    function linkig(href, query, parser) {
+        var pairs = href.split('?');
+        var path = pairs[0];
+        var querystring = pairs[1];
+        var linkIgParser;
+
+        if (!~path.indexOf('-ig')) {
+            linkIgParser = linkIgParsers[parser];
+            if (linkIgParser) {
+                path = linkIgParser.call(null, path);
+            }
+        }
+        href = path;
+        if (querystring) {
+            href = '?' + querystring;
+        }
+        return utils.link(href, this.app, query);
+    }
+
+    var staticsHandler = (function() {
+        function getEnv(envPath, filePath, options) {
+            switch (options.env) {
+                case 'production':
+                    return envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
+                case 'staging':
+                case 'testing':
+                    if (~options.host.indexOf(options.env)) {
+                        return envPath.replace(options.type + '01', [options.type, '-', options.env].join(''));
+                    }
+                    break;
+            }
+            return envPath;
+        }
+
+        function statics(env, filePath, host) {
+            var envPath = config.get(['environment', 'staticPath'], '');
             var pointIndex = filePath.lastIndexOf('.');
             var fileName = filePath.substr(0, pointIndex);
             var ext = filePath.substr(pointIndex + 1);
             var revision = '';
             var envName = '';
-            var envPath;
 
             if (env !== 'development') {
                 revision = '-' + config.get(['deploy', 'revision'], '0');
@@ -26,21 +118,30 @@ module.exports = (function() {
             if (ext === 'css' && env !== 'production') {
                 envName = '-' + env;
             }
-            envPath = config.get(['environment', 'staticPath'], '');
-            if (env === 'production') {
-                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
-            }
+            envPath = getEnv(envPath, filePath, {
+                env: env,
+                type: 'static',
+                host: host
+            });
             return [envPath, fileName, envName, revision, '.', ext].join('');
-        },
-        image: function(env, filePath) {
-            var envPath = config.get(['environment', 'imagePath'], '');
+        }
 
-            if (env === 'production') {
-                envPath = envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
-            }
+        function image(env, filePath, host) {
+            var envPath = config.get(['environment', 'staticPath'], '');
+
+            envPath = getEnv(envPath, filePath, {
+                env: env,
+                type: 'static',
+                host: host
+            });
             return [envPath, filePath].join('');
         }
-    };
+
+        return {
+            'static': statics,
+            image: image
+        };
+    })();
 
     function getType(path) {
         var ext = path.substr(path.lastIndexOf('.') + 1);
@@ -60,6 +161,7 @@ module.exports = (function() {
 
     function statics(path, key, value) {
         var env = config.get(['environment', 'type'], 'development');
+        var host = this.app.session.get('host');
         var type;
 
         if (key && value) {
@@ -69,7 +171,7 @@ module.exports = (function() {
         if (!type) {
             return path;
         }
-        return staticsHandler[type](env, path);
+        return staticsHandler[type](env, path, host);
     }
 
     function slugToUrl(obj) {
@@ -110,6 +212,7 @@ module.exports = (function() {
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
+        linkig: linkig,
         fullizeUrl: utils.fullizeUrl,
         params: utils.params,
         removeParams: utils.removeParams,

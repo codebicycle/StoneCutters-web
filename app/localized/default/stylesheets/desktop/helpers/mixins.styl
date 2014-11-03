@@ -44,10 +44,20 @@ box(bgcolor = #fff, bordercolor = #ccc, radius = 3px, padding = 10px, style = so
     border-styles(bordercolor, radius, style, width);
     padding: padding;
 
+box-sizing(value)
+    -webkit-box-sizing: value;
+    -moz-box-sizing: value;
+    box-sizing: value; 
+
 box-shadow(args)
    -webkit-box-shadow args
    -moz-box-shadow args
    box-shadow args
+   
+circle(size)
+    border-radius(50%);
+    height: size;
+    width: size;
 
 column-count(args)
    -webkit-column-count args
@@ -118,6 +128,7 @@ lines(bgColor, width, height1, pos1, sep1, height2, pos2, sep2, position)
             left: sep1;
         &:after
             left: sep2;
+
 
 tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
     &:after, &:before

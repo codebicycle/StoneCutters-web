@@ -1,5 +1,5 @@
 <nav class="items-locations">
-    <ul class="locations-tabs {{ 'locations-empty' if not (meta.filters.city or meta.filters.state) }}" >
+    <ul class="locations-tabs {{ 'locations-empty' if not (filters.has('city') or filters.has('state')) }}" >
         <li><a href="{{ nav.link | linkig({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
         {% if location.children | length == 1 %}
             <li>
@@ -16,23 +16,21 @@
             {% endif %}
         {% endif %}
     </ul>
-    {% for filter in filters %}
-
+    {% for filter in filters.toJSON() %}
             {% if filter.name == 'state' or filter.name == 'city' %}
                 <ul class="locations-list">
                     {% for value in filter.value %}
                         <li><a href="{{ nav.link | linkig({location: value.id}) }}">{{ value.value }} <span>{{ value.count | countFormat }}</span></a></li>
                     {% endfor %}
-                    {# {% for neighborhood in meta.filters.neighborhood.value %}
+                    {# {% for neighborhood in filters.get('neighborhood').get('value') %}
                         <li>
                             <label>
                                 <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" >
                                 {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
                             </label>
+                        </li>
                     {% endfor %} #}
                 </ul>
             {% endif %}
-
     {% endfor %}
-
 </nav>

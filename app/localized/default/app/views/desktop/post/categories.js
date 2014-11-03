@@ -9,7 +9,7 @@ var asynquence = require('asynquence');
 module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-categories-view',
-    className: 'posting-categories-view wrapper',
+    className: 'posting-categories-view field-wrapper',
     events: {
         'click .posting-categories-list a.category': 'onCategoryClick',
         'click .child-categories-list a': 'onSubCategoryClick'
@@ -30,8 +30,12 @@ module.exports = Base.extend({
         var subcategoryId = subcategory.data('id');
         var categoryId = subcategory.parents('.subcategories').siblings('.category').data('id');
 
-        $('a.subcategory').removeClass('active');
-        subcategory.addClass('active');
+        $('a.category').removeClass('select');
+        $('a.subcategory').removeClass('select icon-check');
+        subcategory.addClass('select icon-check');
+        $('.category[data-id="' + categoryId + '"]').addClass('select');
+        $('.child-categories-list').removeClass('select');
+        $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
 
         var fetch = function(done) {
             $('body > .loading').show();

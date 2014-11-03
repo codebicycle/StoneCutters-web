@@ -1,9 +1,9 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('categories/show');
-var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../modules/filters');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
+var Filters = require('../../../../../../collections/filters');
 
 module.exports = Base.extend({
     id: 'categories-show-view',
@@ -17,43 +17,38 @@ module.exports = Base.extend({
         'click .range-submit': 'rangeFilterInputs',
         'click .link-range': 'rangeFilterLinks',
         'click .clean-filters': 'cleanFilters',
-        'click .filter-title': 'toogleFilter'
+        'click .filter-title': 'toogleFilter',
+        'keydown .range input': 'onlyNumbers'
     },
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var link = this.app.session.get('path');
-        var linkig = link + '-ig/';
-        var filters = Filters.sort(this.order, data.meta.filters);
+        var link = this.cleanPage(this.app.session.get('path'));
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var showAdSenseListingBottom = helpers.features.isEnabled.call(this, 'adSenseListingBottom', platform, location.url);
         var showAdSenseListingTop = helpers.features.isEnabled.call(this, 'adSenseListingTop', platform, location.url);
 
-        if (~link.indexOf('/-')) {
-            linkig = link.replace('/-', '-ig/-');
-        }
-        if (!this.filters) {
-            this.filters = new Filters(link);
-        }
+        this.filters = data.filters;
+        this.filters.order = this.order;
 
         return _.extend({}, data, {
             items: data.items,
-            filters: filters,
-            wFilters: this.filters,
             showAdSenseListingBottom: showAdSenseListingBottom,
             showAdSenseListingTop: showAdSenseListingTop,
             nav: {
                 link: link,
-                linkig: linkig,
+                linkig: helpers.common.linkig.call(this, link, null, 'showig'),
                 listAct: 'active'
             }
         });
     },
     postRender: function() {
-
         if (!this.filters) {
-            this.filters = new Filters(this.app.session.get('path'));
+            this.filters = new Filters(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
         }
     },
     toogleFilter: function(event) {
@@ -99,14 +94,14 @@ module.exports = Base.extend({
         };
 
         if ($target.is(':checked') && !this.filters.has(filter.name, filter.value)) {
-            this.filters.set(filter);
+            this.filters.add(filter);
         }
         else {
             this.filters.remove(filter);
         }
 
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-        path = this.cleanPath(path);
+        path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
@@ -117,18 +112,20 @@ module.exports = Base.extend({
 
         var path = this.app.session.get('path');
         var $target = $(event.currentTarget);
+        var $from = $target.siblings('[data-filter-id=from]');
+        var $to = $target.siblings('[data-filter-id=to]');
         var filter = {
             name: $target.data('filter-name'),
             type: $target.data('filter-type'),
             value: {
-                from: $target.siblings('[data-filter-id=from]').val(),
-                to: $target.siblings('[data-filter-id=to]').val()
+                from: $from.val() || $from.data('filter-value') || '',
+                to: $to.val() || $to.data('filter-value') || ''
             }
         };
 
-        this.filters.set(filter);
+        this.filters.add(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-        path = this.cleanPath(path);
+        path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
 
@@ -149,19 +146,35 @@ module.exports = Base.extend({
             }
         };
 
-        this.filters.set(filter);
+        this.filters.add(filter);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-        path = this.cleanPath(path);
+        path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
-    cleanPath: function(path) {
-        if (path.match(this.regexpFindPage)) {
-            path = path.replace(this.regexpReplacePage, '');
-        }
+    refactorPath: function(path) {
+        path = this.cleanPage(path);
         if (path.slice(path.length - 1) === '/') {
             path = path.substring(0, path.length - 1);
         }
         return path;
+    },
+    cleanPath: function(path) {
+        path = this.refactorPath(path);
+        return path;
+    },
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
+        return path;
+    },
+    onlyNumbers: function(event) {
+        if ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (event.keyCode == 65 && event.ctrlKey === true) || (event.keyCode >= 35 && event.keyCode <= 39)) {
+            return;
+        }
+        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+            event.preventDefault();
+        }
     }
 });

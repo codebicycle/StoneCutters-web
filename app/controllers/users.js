@@ -9,12 +9,15 @@ var config = require('../../shared/config');
 
 module.exports = {
     register: middlewares(register),
+    success: middlewares(success),
     login: middlewares(login),
+    lostpassword: middlewares(lostpassword),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
     favorites: middlewares(favorites),
-    deleteitem: middlewares(deleteitem)
+    messages: middlewares(messages),
+    readmessages: middlewares(readmessages)
 };
 
 function register(params, callback) {
@@ -39,6 +42,29 @@ function register(params, callback) {
             form: form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
+function success(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+
+        });
+    }
+}
+
+function lostpassword(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
+
+    function controller(form) {
+        callback(null, {
+            form: form,
+            success: params.success
         });
     }
 }
@@ -282,50 +308,107 @@ function favorites(params, callback) {
     }
 }
 
-function deleteitem(params, callback) {
+function messages(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    function controller(form) {
+    function controller() {
+        var deleted;
+        var _params;
         var user;
 
         var prepare = function(done) {
-            var platform = this.app.session.get('platform');
-
-            if (platform === 'wap') {
-                return helpers.common.redirect.call(this, '/');
-            }
             user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId
+            }, params);
+
             done();
         }.bind(this);
 
-        var deleteitem = function(done) {
-            helpers.dataAdapter.post(this.app.req, '/items/' + params.itemId + '/delete', {
-                query: {
-                    token: user.token,
-                    platform: this.app.session.get('platform')
+        var fetch = function(done) {
+            this.app.fetch({
+                messages: {
+                    collection: 'Messages',
+                    params: _params
                 }
+            }, {
+                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
-        var success = function() {
-            helpers.common.redirect.call(this, 'myolx/myadslisting', null, {
-                status: 302
+        var success = function(response) {
+            callback(null, {
+                messages: response.messages.toJSON()
             });
         }.bind(this);
 
         var error = function(err, res) {
-            return helpers.common.error.call(this, err, callback);
+            return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
         asynquence().or(error)
             .then(prepare)
-            .then(deleteitem)
+            .then(fetch)
             .val(success);
+    }
+}
 
+function readmessages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId,
+                messageId: params.msgId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                message: {
+                    model: 'Message',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                message: response.message.toJSON()
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }

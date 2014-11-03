@@ -10,7 +10,10 @@
             <a href="" class="icons icon-zoom">{{ dictionary["item.ViewBiggerMap"] }} </a>
         </div>    
         <div class="map">
-            <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&amp;zoom=15&amp;size=274x140&amp;markers={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&amp;sensor=false">
+            <div class="area">
+                <div class="background"></div>
+            </div>
+            <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&amp;zoom=15&amp;size=302x161&amp;sensor=false">
         </div>
     </div>
 {% endif %}
