@@ -12,9 +12,9 @@ module.exports = {
 };
 
 function list(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var fetch = function(done) {
             var seo = Seo.instance(this.app);
 

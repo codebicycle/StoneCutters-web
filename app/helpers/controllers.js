@@ -109,25 +109,17 @@ function processForm(params, done) {
         form = _.clone(this.app.session.get('form'));
         this.app.session.clear('form');
     }
-    done(form);
-}
-
-function fetchDependencies(dependencies, done) {
-    this.app.fetchDependencies(dependencies, function callback(err, response) {
-        if (err) {
-            return done.fail(err);
-        }
-        this.dependencies = response;
-        done();
-    }.bind(this));
+    this.form = form;
+    done();
 }
 
 module.exports = {
-    control: function(params, options, callback) {
+    control: function(params, options, controller, callback) {
         var promise;
 
         if (_.isFunction(options)) {
-            callback = options;
+            callback = controller;
+            controller = options;
             options = {};
         }
         _.defaults(options, {
@@ -145,19 +137,37 @@ module.exports = {
         if (options.cache) {
             promise.val(changeHeaders.bind(this));
         }
-        if (options.dependencies) {
-            promise.then(fetchDependencies.bind(this, options.dependencies));
-        }
         if (options.isForm) {
             promise.then(processForm.bind(this, params));
         }
-        promise.val(callback.bind(this));
+        promise.val(controller.bind(this, wrapper.bind(this)));
 
         function fail(err) {
             this.app.session.persist({
                 error: err
             });
             return common.redirect.call(this, '/500');
+        }
+
+        function wrapper(err, view, data, json) {
+            if (err) {
+                return callback(err);
+            }
+            if (typeof view === 'string') {
+                data = data || {};
+            }
+            else {
+                data = view || {};
+                view = undefined;
+            }
+            json = json !== undefined ? json : true;
+            data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data);
+            if (!view) {
+                callback(err, data);
+            }
+            else {
+                callback(err, view, data);
+            }
         }
     },
     changeHeaders: changeHeaders

@@ -16,11 +16,9 @@ module.exports = {
 };
 
 function list(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories', 'topCities']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var platform = this.app.session.get('platform');
         var icons = config.get(['icons', platform], []);
         var country = this.app.session.get('location').url;
@@ -29,11 +27,11 @@ function list(params, callback) {
         seo.setContent(this.dependencies.categories.meta.seo);
         seo.addMetatag('title', this.dependencies.categories.meta.title);
         seo.addMetatag('description', this.dependencies.categories.meta.description);
-        callback(null, _.extend(this.dependencies.toJSON(), {
+        callback(null, {
             icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
             tracking: tracking.generateURL.call(this),
             seo: seo
-        }));
+        });
     }
 }
 
@@ -44,12 +42,11 @@ function showig(params, callback) {
 
 function show(params, callback, gallery) {
     helpers.controllers.control.call(this, params, {
-        dependencies: ['categories'],
         seo: false,
         cache: false
-    }, controller);
+    }, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var seo = Seo.instance(this.app);
 
         var redirect = function(done){

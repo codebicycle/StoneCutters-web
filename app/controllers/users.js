@@ -23,9 +23,9 @@ module.exports = {
 function register(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
-    }, controller);
+    }, controller, callback);
 
-    function controller(form) {
+    function controller(callback) {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -39,7 +39,7 @@ function register(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
         });
@@ -47,9 +47,9 @@ function register(params, callback) {
 }
 
 function success(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         callback(null, {
 
         });
@@ -59,11 +59,11 @@ function success(params, callback) {
 function lostpassword(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
-    }, controller);
+    }, controller, callback);
 
-    function controller(form) {
+    function controller(callback) {
         callback(null, {
-            form: form,
+            form: this.form,
             success: params.success
         });
     }
@@ -72,8 +72,8 @@ function lostpassword(params, callback) {
 function login(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
-    }, controller);
-    function controller(form) {
+    }, controller, callback);
+    function controller(callback) {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -87,7 +87,7 @@ function login(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             redirect: params.redirect,
             tracking: tracking.generateURL.call(this)
         });
@@ -95,9 +95,9 @@ function login(params, callback) {
 }
 
 function logout(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         this.app.session.clear('user');
         return helpers.common.redirect.call(this, '/', null, {
             status: 302,
@@ -107,8 +107,8 @@ function logout(params, callback) {
 }
 
 function myolx(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-    function controller() {
+    helpers.controllers.control.call(this, params, controller, callback);
+    function controller(callback) {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -137,9 +137,9 @@ function myolx(params, callback) {
 }
 
 function myads(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var deleted;
         var _params;
         var user;
@@ -222,9 +222,9 @@ function myads(params, callback) {
 }
 
 function favorites(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller(form) {
+    function controller(callback) {
         var favorite;
         var _params;
         var user;
@@ -309,9 +309,9 @@ function favorites(params, callback) {
 }
 
 function messages(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var deleted;
         var _params;
         var user;
@@ -361,9 +361,9 @@ function messages(params, callback) {
 }
 
 function readmessages(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var deleted;
         var _params;
         var user;

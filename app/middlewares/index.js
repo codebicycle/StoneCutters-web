@@ -7,7 +7,8 @@ var middlewares = {
     redirections: require('./redirections'),
     location: require('./location'),
     languages: require('./languages'),
-    interstitial: require('./interstitial')
+    interstitial: require('./interstitial'),
+    dependencies: require('./dependencies')
 };
 
 module.exports = function(controller, exclude) {

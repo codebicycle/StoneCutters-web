@@ -28,11 +28,9 @@ module.exports = {
 };
 
 function show(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
@@ -286,9 +284,9 @@ function show(params, callback) {
 }
 
 function gallery(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var slugUrl = params.title;
@@ -392,9 +390,9 @@ function gallery(params, callback) {
 }
 
 function map(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var slugUrl = params.title;
@@ -488,9 +486,9 @@ function map(params, callback) {
 function reply(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
-    }, controller);
+    }, controller, callback);
 
-    function controller(form) {
+    function controller(callback) {
         var seo = Seo.instance(this.app);
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
@@ -559,7 +557,7 @@ function reply(params, callback) {
 
             callback(null, {
                 item: item,
-                form: form,
+                form: this.form,
                 tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
@@ -577,9 +575,9 @@ function reply(params, callback) {
 }
 
 function success(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var seo = Seo.instance(this.app);
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
@@ -670,9 +668,9 @@ function searchig(params, callback) {
 }
 
 function search(params, callback, gallery) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
@@ -820,11 +818,9 @@ function allresultsig(params, callback) {
 }
 
 function allresults(params, callback, gallery) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
@@ -1024,11 +1020,9 @@ function deleteItem(params, callback) {
 }
 
 function staticSearch(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller, callback);
 
-    function controller() {
+    function controller(callback) {
         var seo = Seo.instance(this.app);
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
