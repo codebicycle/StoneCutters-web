@@ -6,6 +6,12 @@ var Seo = require('../modules/seo');
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
+var phpPaths = ['posting', 'register', 'login'];
+
+if (typeof window === 'undefined') {
+    var statsdModule = '../../server/modules/statsd';
+    var statsd = require(statsdModule)();
+}
 
 module.exports = {
     category: function(params, callback) {
@@ -122,6 +128,15 @@ module.exports = {
             maxAge: 2 * HOUR,
             domain: location.split('.').slice(1).join('.')
         });
-        helpers.common.redirect.call(this, 'http://' + location, null, { status: 302 });
+        helpers.common.redirect.call(this, 'http://' + location, null, {
+            status: 302
+        });
+    },
+    php: function(params, callback) {
+        if (_.contains(phpPaths, params.path)) {
+            return helpers.common.redirect.call(this, '/' + params.path);
+        }
+        statsd.increment(['redirections', 'php', this.app.session.get('path')]);
+        helpers.common.redirect.call(this, '/');
     }
 };
