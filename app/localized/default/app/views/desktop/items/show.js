@@ -278,7 +278,6 @@ module.exports = Base.extend({
                 cache: false,
                 json: true,
                 done: function() {
-                    // $this.attr('data-current', $this.attr('data-current') == 'add' ? 'remove' : 'add');
                     $this.attr('data-qa', $this.attr('data-qa') == 'add-favorite' ? 'remove-favorite' : 'add-favorite');
                     if ($this.attr('data-current') == 'add') {
                         $this.attr('data-current', 'remove');
