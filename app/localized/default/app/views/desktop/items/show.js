@@ -125,7 +125,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(done, data) {
-            var $replySuccess = $('.replySuccses');
+            var $replySuccess = $('.replySuccess');
             var category = $('.itemCategory').val();
             var subcategory = $('.itemSubcategory').val();
 
