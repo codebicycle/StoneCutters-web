@@ -1061,7 +1061,6 @@ function staticSearch(params, callback) {
 
         var configure = function(done) {
             var categories;
-
             if (params.catId) {
                 categories = this.app.session.get('categories');
                 category = categories.search(params.catId);
@@ -1160,20 +1159,15 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var success = function(_items) {
-            var categories;
-            //var category;
-            //var subcategory;
             var metadata = _items.metadata;
 
-            var catname = function () {
-                if (subcategory || category) {
-                    return (subcategory || category).get('trName');
+            var staticsearch = {
+                keyword: query.search,
+                category: function() {
+                    if (subcategory || category) {
+                        return (subcategory || category).get('trName');
+                    }
                 }
-            };
-
-            var staticsearch =  {
-                query: query.search,
-                category: catname
             };
 
             _items.metadata.seo.staticsearch = staticsearch;
@@ -1187,24 +1181,10 @@ function staticSearch(params, callback) {
             seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
             seo.addMetatag('description');
 
-            if (params.catId) {
-                categories = this.app.session.get('categories');
-                category = categories.search(params.catId);
-
-                if (!category) {
-                    category = categories.get(subcategory.get('parentId'));
-                }
-                if (category.has('parentId')) {
-                    subcategory = category;
-                    category = categories.get(subcategory.get('parentId'));
-                }
-
-               // tracking.addParam('category', category.toJSON());
-                //tracking.addParam('subcategory', subcategory.toJSON());
-            }
-
             tracking.addParam('page_nb', metadata.totalPages);
             tracking.addParam('keyword', query.search);
+            tracking.addParam('category', category ? category.toJSON() : undefined);
+            tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),

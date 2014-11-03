@@ -148,12 +148,11 @@ _.extend(SeoModule.prototype, {
 
             var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
             var staticsearch = this.getStaticSearch();
-
             if (staticsearch) {
-                var mycategory = (staticsearch.category) ? staticsearch.category : '';
-                var query = (staticsearch.query) ? staticsearch.query : '';
-                var myregion = this.app.session.get('location').current.name;
-                this.set('h1', query + ': ' + dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion) + ' | OLX');
+                var mycategory = staticsearch.category() || '';
+                var keyword = staticsearch.keyword || '';
+                var myregion = this.app.session.get('location').name  || this.app.session.get('location').current.name;
+                this.set('h1', keyword + ': ' + dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion) + ' | OLX');
             }
         }
 
