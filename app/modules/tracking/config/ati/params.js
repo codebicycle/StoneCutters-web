@@ -297,7 +297,7 @@ module.exports = {
     'users#register': {
         process: false,
         names: {
-            page_name: 'register_form',
+            page_name: 'register_mail',
             category: 'account'
         }
     },
@@ -334,6 +334,20 @@ module.exports = {
         names: {
             page_name: 'not_found',
             category: 'static'
+        }
+    },
+    'pages#allstates': {
+        process: false,
+        names: {
+            page_name: 'sitemap',
+            category: 'static_pages'
+        }
+    },
+    'pages#sitemap': {
+        process: false,
+        names: {
+            page_name: 'sitemapcalendar',
+            category: 'static_pages'
         }
     }
 };
