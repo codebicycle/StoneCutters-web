@@ -28,6 +28,7 @@ module.exports = Base.extend({
         });
     },
     updateGallery: function(event) {
+        console.log('saraza');
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
