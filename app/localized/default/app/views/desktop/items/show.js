@@ -288,7 +288,7 @@ module.exports = Base.extend({
                     }
                 },
                 fail: function() {
-                    console.log('Fail add to favorites :: ERROR');
+                    console.log('[OLX_DEBUG] Fail add to favorites :: ERROR');
                 }
             }, function always() {
                 $this.attr('href', '#');
