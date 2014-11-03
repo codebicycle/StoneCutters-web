@@ -41,11 +41,13 @@
 {{ Field(contactNameField) }}
 {{ Field(hint = dictionary["posting_fields_1.YourEmailAddressWontBeShared"], emailField) }}
 {{ Field(phoneField) }}
-{{ Field(adressField) }}
 
 {% view 'post/locations' %}
 
+{{ Field(adressField) }}
+
+
 <fieldset class="seller-post">
     <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" />
-    <small class="hint message">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a href="/terms">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>    
+    <small class="hint message">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a href="/terms">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>
 </fieldset>
