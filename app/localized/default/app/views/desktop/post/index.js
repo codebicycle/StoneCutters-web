@@ -55,7 +55,7 @@ module.exports = Base.extend({
                     this.errors[$field.attr('name')] = this.dictionary["postingerror.PleaseCompleteThisField"];
                 }
             }.bind(this));
-            //this.$el.trigger('errorsUpdate');
+            this.$el.trigger('errorsUpdate');
         }
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
