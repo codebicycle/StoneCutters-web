@@ -2,226 +2,133 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
+var URLParser = require('url');
 var utils = require('../../../shared/utils');
 var config = require('../../../shared/config');
 var translations = require('../../../shared/translations');
 var configSeo = require('./config');
 var defaultConfig = config.get(['markets', 'common', 'seo']);
-var URLParser = require('url');
-var seo;
+var Head = require('./head');
 
-var emergingMarketsDomains = [
-    'www.olx.com.bo',
-    'www.olx.com.py',
-    'www.olx.com.uy'
-]; //@todo SACAR ESTO DE ACA!
+var getters = {
+    head: getHead,
+    topTitle: getTopTitle
+};
+
+var INSTANCE;
+var Base;
+var Seo;
 
 Backbone.noConflict();
+Base = Backbone.Model;
 
-function _getMetatagName(currentRoute) {
-    return [currentRoute.controller, currentRoute.action];
+function getHead() {
+    return this.head.toJSON();
 }
 
-function SeoModule(app) {
-    app.seo = this;
-    this.app = app;
-    this.initialize();
+function getTopTitle() {
+    return this.head.get('topTitle');
 }
 
-_.extend(SeoModule.prototype, Backbone.Events);
-_.extend(SeoModule.prototype, {
-    head: {
-        metatags: {}
+Seo = Backbone.Model.extend({
+    initialize: function (attrs, options) {
+        this.head = new Head({}, options);
+        this.reset(options.app);
 
+        this.on('change:staticSearch', this.onChangeStaticSearch, this);
     },
-    _specials: {
-        title: function (content) {
-            if (content) {
-                this.head.title = content + this.getLocationName(' - ');
-                return;
-            }
-            delete this.head.title;
-        },
-        description: function (content) {
-            if (content) {
-                this.head.metatags.description = content + this.getLocationName(' - ');
-                return;
-            }
-            delete this.head.metatags.description;
-        },
-        canonical: function (content) {
-            var platform = this.app.session.get('platform');
-            var url = this.app.session.get('url');
-            var protocol;
-            var host;
+    get: function (key) {
+        var attr;
+        var getter;
 
-            if (_.isString(content)) {
-                this.head.canonical = content;
+        if (this.config[key]) {
+            getter = getters[key];
+            if (getter) {
+                attr = getter.apply(this, arguments);
             }
-            else if (platform === 'wap' && utils.params(url, 'sid')) {
-                protocol = this.app.session.get('protocol');
-                host = this.app.session.get('host');
-
-                this.head.canonical = [protocol, '://', host, utils.removeParams(url, 'sid')].join('');
-            }
-        },
-        'google-site-verification': function (content) {
-            var country = this.app.session.get('location').url;
-            var gsVerification;
-
-            gsVerification = config.get(['seo', 'wmtools', country]);
-            if (gsVerification) {
-                this.head.metatags['google-site-verification'] = gsVerification;
+            else {
+                attr = Base.prototype.get.apply(this, arguments);
             }
         }
+        return attr;
     },
-    initialize: function () {
-        var country = this.app.session.get('location').url;
+    setContent: function (meta, options) {
+        var title;
+        var suffix;
 
-        if (_.contains(emergingMarketsDomains, country)) {
-            country = 'emerging';
-        }
-        this.config = config.get(['markets', country, 'seo'], defaultConfig);
-        this.on('addMetatag', this.update.bind(this));
-        this.on('change:h1', this.onChangeH1.bind(this));
-    },
-    addMetatag: function (name, content) {
-        var special = this._specials[name.toLowerCase()];
+        if (meta && meta.seo) {
+            meta = meta.seo;
+            options = _.defaults({}, options || {}, {
+                unset: false
+            });
 
-        if (special) {
-            return special.call(this, content);
-        }
-        else {
-            this.head.metatags[name] = content;
-        }
-        this.trigger('addMetatag', name, content);
-    },
-    getHead: function () {
-        var clone = _.clone(this.head);
+            this.set(meta, options);
+            this.head.setAll(meta.metas, options);
 
-        clone.metatags = Object.keys(clone.metatags).filter(function each(metatag) {
-            return !!clone.metatags[metatag];
-        }).map(function each(metatag) {
-            return {
-                name: metatag,
-                content: clone.metatags[metatag]
-            };
-        });
-        return clone;
-    },
-    update: function () {
-        if (utils.isServer) {
-            return;
-        }
-        var head = this.getHead();
-
-        $('head title').text(head.title);
-        _.each($('meta[name!=viewport]'), function each(metatag) {
-            metatag = $(metatag);
-            if (!metatag.attr('name')) {
-                return;
+            if (meta.itemPage) {
+                this.head.setAll(meta.itemPage, options);
             }
-            metatag.remove();
-        });
-        _.each(head.metatags, function each(metatag) {
-            $('head meta:last').after('<meta name="' + metatag.name + '" content="' + metatag.content + '" />');
-        });
-        $('head link[rel="canonical"]').remove();
-        if (head.canonical) {
-            $('head').append('<link rel="canonical" href="' + head.canonical + '" >');
-        }
-    },
-    updateContent: function () {
-        if (this.seoContent.metas && this.seoContent.metas.topTitle) {
-            this.set('h1', this.seoContent.metas.topTitle);
-        }
-        if (this.seoContent.levelPath) {
-            if (this.seoContent.levelPath.wikititles) {
-                this.set('wikititles', this.seoContent.levelPath.wikititles);
-            }
-            if (this.seoContent.levelPath.top) {
-                if (_.isArray(this.seoContent.levelPath.top)) {
-                    this.set('h1', this.seoContent.levelPath.top.pop().anchor + this.getLocationName(' - '));
+            if (meta.levelPath) {
+                if (meta.levelPath.wikititles) {
+                    this.set('wikititles', meta.levelPath.wikititles);
+                }
+                if (meta.levelPath.top) {
+                    if (_.isArray(meta.levelPath.top)) {
+                        title = meta.levelPath.top.pop().anchor;
+                        suffix = this.head.getLocationName(' - ');
+                        if (title.length >= suffix.length && title.slice(title.length - suffix.length) !== suffix) {
+                            title += suffix;
+                        }
+                        this.head.set('topTitle', title);
+                    }
                 }
             }
         }
-        if(this.app.session.get('currentRoute').action == 'staticSearch') {
-
-            var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
-            var staticsearch = this.getStaticSearch();
-            if (staticsearch) {
-                var mycategory = staticsearch.category() || '';
-                var keyword = staticsearch.keyword || '';
-                var myregion = this.app.session.get('location').name  || this.app.session.get('location').current.name;
-                this.set('h1', keyword + ': ' + dictionary['messages_item_page.CATEGORY_REGION'].replace('<<CATEGORY>>', mycategory).replace('<<REGION>>', myregion) + ' | OLX');
-            }
-        }
-
-    },
-    getLocationName: function (prefix) {
-        var location;
-
-        if (this && this.app) {
-            location = this.app.session.get('location');
-            if (location) {
-                return prefix + (location.current ? location.current.name : location.name);
-            }
-        }
-        return '';
-    },
-    getCategoryId: function (categoryId) {
-        return configSeo.categories.closed[categoryId] || configSeo.categories.migrated[categoryId];
-    },
-    resetHead: function (page) {
-        var metatag = page || _getMetatagName(this.app.session.get('currentRoute'));
-        var defaultMetatags = utils.get(configSeo, ['metatags', 'default']);
-        var metatags = utils.get(configSeo, ['metatags'].concat(metatag), {});
-
-        delete this.head.canonical;
-        this.head.metatags = {};
-        _.each(_.extend({}, metatags, defaultMetatags), function add(value, key) {
-            this.addMetatag(key, value);
-        }.bind(this));
     },
     reset: function (app, page) {
+        app.seo = this;
         this.app = app;
-        this.resetHead(page);
-        this.setContent({});
+        this.config = _.extend({}, config.getForMarket(app.session.get('location').url, ['seo'], defaultConfig), {
+            head: true
+        });
+        this.head.reset(app, page);
+        this.clear();
     },
-    setContent: function (content) {
-        this.seoContent = content;
-        this.updateContent();
-    },
-    get: function (key) {
-        if (!!this.seoContent && this.config[key]) {
-            return this.seoContent[key];
-        }
-    },
-    set: function (key, value) {
-        this.seoContent[key] = value;
-        this.trigger('change:' + key, value);
+    addMetatag: function (name, value) {
+        this.head.set(name, value);
     },
     isEnabled: function () {
         return this.config.enabled;
     },
-    onChangeH1: function (value) {
-        if (utils.isServer) {
-            return;
-        }
-        $('#header_keywords').text(value);
+    isCategoryDeprecated: function (categoryId) {
+        return configSeo.categories.closed[categoryId] || configSeo.categories.migrated[categoryId];
     },
-    getStaticSearch: function (categoryId) {
-        return this.seoContent.staticsearch;
-    }
+    onChangeStaticSearch: function (seo, value) {
+        var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        var location = this.app.session.get('location');
+        var region = (location.current || location).name;
+        var message = dictionary['messages_item_page.CATEGORY_REGION'] || '';
+        var topTitle = [];
 
+        topTitle.push(value.keyword);
+        topTitle.push(': ');
+        topTitle.push(message.replace('<<CATEGORY>>', value.category).replace('<<REGION>>', region));
+        topTitle.push(' | OLX');
+        
+        this.head.set('topTitle', topTitle.push(''), {
+            unset: false
+        });
+    }
 });
 
 module.exports = {
     instance: function (app) {
-        if (!seo) {
-            seo = new SeoModule(app);
+        if (!INSTANCE) {
+            INSTANCE = new Seo({}, {
+                app: app
+            });
         }
-        return seo;
+        return INSTANCE;
     },
     desktopizeReplace: function (url, params) {
         _.each(params, function (value, i) {

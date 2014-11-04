@@ -64,6 +64,7 @@ module.exports = Base.extend({
     },
     getSpecs: function(dependencies) {
         var specs = {};
+        var seo = Seo.instance(this);
 
         dependencies.forEach(function each(dependency) {
             switch (dependency) {
@@ -73,7 +74,7 @@ module.exports = Base.extend({
                         params: {
                             location: this.session.get('siteLocation'),
                             languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id,
-                            seo: Seo.instance(this).isEnabled()
+                            seo: seo.isEnabled()
                         }
                     };
                 break;
