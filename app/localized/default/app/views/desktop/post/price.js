@@ -29,6 +29,14 @@ module.exports = Base.extend({
             fieldMandatory: this.fieldMandatory || ''
         });
     },
+    postRender: function() {
+        this.$('select').each(function eachSelect() {
+            var $select = $(this);
+            if ($select.val()) {
+                $select.trigger('change');
+            }
+        });
+    },
     events: {
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange'
