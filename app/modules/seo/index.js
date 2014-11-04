@@ -104,6 +104,9 @@ Seo = Backbone.Model.extend({
         return configSeo.categories.closed[categoryId] || configSeo.categories.migrated[categoryId];
     },
     onChangeStaticSearch: function (seo, value) {
+        if (!value) {
+            return;
+        }
         var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
         var location = this.app.session.get('location');
         var region = (location.current || location).name;
