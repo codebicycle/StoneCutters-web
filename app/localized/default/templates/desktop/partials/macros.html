@@ -74,6 +74,9 @@
         {% if required == true or required == 'true' %}
             required
         {% endif %}
+        {% if not options %}
+            disabled
+        {% endif %}
     >
         {% for option in options %}
             <option
