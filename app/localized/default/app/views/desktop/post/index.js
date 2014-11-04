@@ -260,7 +260,7 @@ module.exports = Base.extend({
                     this.$el.trigger('error');
                 }
             }
-            //trackFail(track);
+            trackFail(track);
         }.bind(this);
 
         var trackFail = function() {
