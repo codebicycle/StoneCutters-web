@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Myndasafn',
     'listingpageitemslisting.List': 'Listi',
     'listingpageitemslisting.Posted': 'Birt',
+    'listingpageitemslisting.ResultsForNew': 'S\xED\xF0a <<PAGE_NUMBER>> af <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> ni\xF0urst\xF6\xF0ur fyrir <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDEv\xED mi\xF0ur fundust engar ni\xF0urst\xF6\xF0ur fyrir leit \xFE\xEDna.',
     'listingpageitemslisting.ZeroResultsPage': '\xDEv\xED mi\xF0ur fundum vi\xF0 engar ni\xF0urst\xF6\xF0ur \xED <<CATEGORY>> \xED <<REGION>>.',

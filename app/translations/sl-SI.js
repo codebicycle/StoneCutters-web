@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galerija',
     'listingpageitemslisting.List': 'Objavi',
     'listingpageitemslisting.Posted': 'Objavljeno',
+    'listingpageitemslisting.ResultsForNew': 'Stran <<PAGE_NUMBER>> od <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultata/i/ov za <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Za va\u0161e iskanje ni rezultatov.',
     'listingpageitemslisting.ZeroResultsPage': 'V <<CATEGORY>> na <<REGION>> ni nobenih rezultatov.',

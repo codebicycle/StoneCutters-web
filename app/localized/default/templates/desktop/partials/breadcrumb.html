@@ -15,7 +15,7 @@
     {% endif %}
     {% if meta.next or meta.previous %}
         <div class="breadcrumb-pagination">
-            <p>Página {{ meta.page }} de {{ meta.totalPages | countFormat }}</p>
+            <p>{{ dictionary["listingpageitemslisting.ResultsForNew"] | replace('<<PAGE_NUMBER>>', meta.page) | replace('<<TOTAL_PAGE_NUMBER>>', meta.totalPages | countFormat )}}</p>
             <a href="{{ (meta.previous | linkig) if meta.previous else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not meta.previous }}"></a><a href="{{ (meta.next | linkig) if meta.next else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not meta.next }}"></a>
         </div>
     {% endif %}

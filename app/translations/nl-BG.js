@@ -106,6 +106,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galerij',
     'listingpageitemslisting.List': 'Overzicht',
     'listingpageitemslisting.Posted': 'Geplaatst',
+    'listingpageitemslisting.ResultsForNew': 'Pagina <<PAGE_NUMBER>> van <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',

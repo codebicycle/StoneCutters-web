@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galleria',
     'listingpageitemslisting.List': 'Luettelo',
     'listingpageitemslisting.Posted': 'L\xE4hetetty',
+    'listingpageitemslisting.ResultsForNew': 'Sivu <<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
     'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',

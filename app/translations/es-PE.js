@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galer\xEDa',
     'listingpageitemslisting.List': 'Listado',
     'listingpageitemslisting.Posted': 'Publicado',
+    'listingpageitemslisting.ResultsForNew': 'P\xE1gina <<PAGE_NUMBER>> de <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultados para <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Por el momento, no hay resultados coincidentes con tu b\xFAsqueda.',
     'listingpageitemslisting.ZeroResultsPage': 'Disculpe, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',

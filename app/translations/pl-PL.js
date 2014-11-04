@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galeria',
     'listingpageitemslisting.List': 'Lista',
     'listingpageitemslisting.Posted': 'Wys\u0142ane',
+    'listingpageitemslisting.ResultsForNew': 'Strona <<PAGE_NUMBER>> z <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> wyniki dla <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',
     'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',

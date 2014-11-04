@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Foto Gallery',
     'listingpageitemslisting.List': 'Lys',
     'listingpageitemslisting.Posted': 'Gelaai',
+    'listingpageitemslisting.ResultsForNew': 'Pagina <<PAGE_NUMBER>> van<<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultate vir <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ons is jammer, maar jou soektog geen resultate opgelewer nie.',
     'listingpageitemslisting.ZeroResultsPage': 'Jammer, ons het geen resultate in <<CATEGORY>> in <<REGION>> gekry nie.',

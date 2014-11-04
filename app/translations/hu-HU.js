@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Gal\xE9ria',
     'listingpageitemslisting.List': 'Lista',
     'listingpageitemslisting.Posted': 'K\xF6zz\xE9t\xE9ve',
+    'listingpageitemslisting.ResultsForNew': '<<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>> oldal',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> eredm\xE9ny <<KEYWORD>> kulcssz\xF3ra',
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',
     'listingpageitemslisting.ZeroResultsPage': 'Sajn\xE1ljuk, nem tal\xE1ltunk eredm\xE9nyeket a <<CATEGORY>> kateg\xF3ri\xE1ban <<REGION>> r\xE9gi\xF3ban.',

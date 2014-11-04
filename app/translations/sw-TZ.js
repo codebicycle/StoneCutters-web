@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galari',
     'listingpageitemslisting.List': 'Orodha',
     'listingpageitemslisting.Posted': 'Ilichapishwa',
+    'listingpageitemslisting.ResultsForNew': 'Ukurasa <<PAGE_NUMBER>> kati ya <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': 'Matokeo <<NUMBER>> ya <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',
     'listingpageitemslisting.ZeroResultsPage': 'Tunasikitika, hatukupata matokeo katika <<CATEGORY>> at <<REGION>>.',

@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Ekspozisyon Galri',
     'listingpageitemslisting.List': 'Lis',
     'listingpageitemslisting.Posted': 'Afiche',
+    'listingpageitemslisting.ResultsForNew': 'PaJ <<PAGE_NUMBER>> DE <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezilta pou <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nou regr\xE8t men nou pa jwenn okenn rezilta pou rech\xE8ch ou an. ',
     'listingpageitemslisting.ZeroResultsPage': 'Nou regr\xE8t, nou pa jwenn okenn rezilta nan<<CATEGORY>> pou <<REGION>>.',

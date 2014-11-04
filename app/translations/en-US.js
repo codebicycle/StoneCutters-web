@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Gallery',
     'listingpageitemslisting.List': 'List',
     'listingpageitemslisting.Posted': 'Posted',
+    'listingpageitemslisting.ResultsForNew': 'Page <<PAGE_NUMBER>> of <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': 'We are sorry, we haven\'t found results in <<CATEGORY>> at <<REGION>>.',

@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galerii',
     'listingpageitemslisting.List': 'Nimekiri',
     'listingpageitemslisting.Posted': 'Postitatud',
+    'listingpageitemslisting.ResultsForNew': 'Lk <<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulemust m\xE4rks\xF5nale <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vabandame, kuid meil ei ole Teie otsingule tulemusi',
     'listingpageitemslisting.ZeroResultsPage': 'Vabandame, me ei leidnud tulemusi <<CATEGORY>>  <<REGION>>.',
