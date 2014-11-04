@@ -135,6 +135,9 @@ module.exports = function(nunjucks) {
         if (this.ctx.nav && this.ctx.nav.galeryAct) {
             href = helpers.common.linkig.call(this.ctx, href, query, this.ctx.nav.current);
         }
+        else {
+            return link.apply(this, arguments);
+        }
         return helpers.common.fullizeUrl(href, this.ctx.app);
     }
 
