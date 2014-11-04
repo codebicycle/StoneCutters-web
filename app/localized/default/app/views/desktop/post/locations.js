@@ -67,9 +67,14 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
+        var $firstOption = $field.find('option').first();
 
         this.selected.city = $field.val();
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.parentView.$el.trigger('locationSubmit', [this.selected.city]);
+
+        if ($firstOption.attr('value') === '') {
+            $firstOption.remove();
+        }
     },
     getStates: function(addEmptyOption) {
         this.states = _.map(this.parentView.parentView.options.states.toJSON(), function each(state) {

@@ -12,20 +12,25 @@ module.exports = Base.extend({
     className: 'posting-view',
     form: {},
     pendingValidations: [],
+    errors: {},
     events: {
         'focus .text-field': 'fieldFocus',
         'blur .text-field': 'fieldFocus',
         'subcategorySubmit': 'onSubcategorySubmit',
+        'locationSubmit': 'onLocationSubmit',
         'fieldSubmit': 'onFieldSubmit',
         'imagesLoadEnd': 'onImagesLoadEnd',
         'submit': 'onSubmit',
         'fieldValidationStart': 'onFieldValidationStart',
-        'fieldValidationEnd': 'onFieldValidationEnd'
+        'fieldValidationEnd': 'onFieldValidationEnd',
+        'errorsUpdate': 'onErrorsUpdate',
+        'error': 'onError'
     },
     initialize: function() {
         Base.prototype.initialize.call(this);
         this.form = {};
         this.pendingValidations = [];
+        this.errors = {};
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
     },
     getTemplateData: function() {
@@ -33,6 +38,25 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
+        if (this.isValid === undefined || this.isValid === null) {
+            if (!this.form['category.id']) {
+                this.errors['category.id'] = 'Please select a subcategory'; // TRANSLATE THIS
+            }
+            if (!this.form['category.parentId']) {
+                this.errors['category.parentId'] = 'Please select a category'; // TRANSLATE THIS
+            }
+            if (!this.form.location) {
+                this.errors.location = 'Please select a location'; // TRANSLATE THIS
+            }
+            this.$('[required]').each(function eachRequiredField(index, field) {
+                var $field = $(field);
+
+                if ($field.attr('name') !== 'state' && $field.attr('name') !== 'location') {
+                    this.errors[$field.attr('name')] = 'Please complete this field'; // TRANSLATE THIS
+                }
+            }.bind(this));
+            this.$el.trigger('errorsUpdate');
+        }
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
     },
@@ -49,15 +73,26 @@ module.exports = Base.extend({
         }
         this.form['category.parentId'] = subcategory.parentId;
         this.form['category.id'] = subcategory.id;
-
+        delete this.errors['category.parentId'];
+        delete this.errors['category.id'];
         _.each(this.pendingValidations, function eachValidation($field) {
             $field.trigger('fieldValidationStart');
         });
-
         this.pendingValidations = [];
-
+        this.$el.trigger('errorsUpdate');
         this.$('#posting-optionals-view').trigger('fieldsChange', [subcategory.fields.categoryAttributes, subcategory.parentId, subcategory.id, true]);
         this.$('#posting-price-view').trigger('fieldsChange', [subcategory.fields.productDescription]);
+    },
+    onLocationSubmit: function(event, location) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        if (location) {
+            this.form.location = location;
+            delete this.errors.location;
+            this.$el.trigger('errorsUpdate');
+        }
     },
     onFieldSubmit: function(event, field) {
         event.preventDefault();
@@ -91,33 +126,21 @@ module.exports = Base.extend({
     },
     onFieldValidationStart: function(event) {
         var $field = $(event.target).addClass('validating');
-        
+
+        delete this.errors[$field.attr('name')];
         $field.siblings('.error.message').remove();
         this.validateField($field);
     },
-    onFieldValidationEnd: function(event, errors) {
-        var $field = $(event.target).removeClass('validating');
-        
-        if (errors) {
-            $field.closest('.field-wrapper').addClass('error').removeClass('success');
-            _.each(errors, function eachError(error) {
-                $field.after('<small class="error message">' + error.message + '</small>');
-            });
-        }
-        else {
-            $field.closest('.field-wrapper').removeClass('error').addClass('success');
-        }
-    },
     validateField: function($field) {
         var data;
-        var errors = [];
+        var _errors = [];
 
         if ($field.attr('required') && !$field.val().length) {
-            errors.push({
+            _errors.push({
                 selector: $field.attr('name'),
                 message: this.dictionary["postingerror.PleaseCompleteThisField"]
             });
-            $field.trigger('fieldValidationEnd', [errors]);
+            $field.trigger('fieldValidationEnd', [_errors]);
         }
         else {
             data = {
@@ -126,15 +149,33 @@ module.exports = Base.extend({
                 'location': this.app.session.get('location').url,
                 'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
             };
-            
             data[$field.attr('name')] = $field.val();
             helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
                 data: data
             }, function onResponse(response) {
-                errors = response;
-                $field.trigger('fieldValidationEnd', [errors]);
+                _errors = response;
+                $field.trigger('fieldValidationEnd', [_errors]);
             });
         }
+    },
+    onFieldValidationEnd: function(event, _errors) {
+        var $field = $(event.target).removeClass('validating');
+
+        if (_errors) {
+            $field.closest('.field-wrapper').addClass('error').removeClass('success');
+            _.each(_errors, function eachError(error) {
+                this.errors[error.selector] = error.message;
+                $field.after('<small class="error message">' + error.message + '</small>');
+            }.bind(this));
+        }
+        else {
+            $field.closest('.field-wrapper').removeClass('error').addClass('success');
+        }
+        this.$el.trigger('errorsUpdate');
+    },
+    onErrorsUpdate: function() {
+        this.isValid = !(_.size(this.errors));
+        this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
     onImagesLoadEnd: function(event, images) {
         this.form._images = Object.keys(images).map(function each(image) {
@@ -146,6 +187,24 @@ module.exports = Base.extend({
     },
     onStart: function(event) {
         this.appView.trigger('posting:start');
+    },
+    onError: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var errorsSummary = _.clone(this.errors);
+
+        _.each(errorsSummary, function eachError(message, selector) {
+            var $field = this.$('[name="' + selector + '"]');
+
+            if ($field.length) {
+                delete errorsSummary[selector];
+                $field.closest('.field-wrapper').addClass('error').removeClass('success');
+                $field.after('<small class="error message">' + message + '</small>');
+            }
+        }.bind(this));
+        console.log('hacer algo con estos', errorsSummary);
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -187,18 +246,21 @@ module.exports = Base.extend({
             });
         }.bind(this);
 
-        var fail = function(err, track) {
+        var fail = function(_errors, track) {
             // TODO: Improve error handling
             always();
-            if (err) {
-                if (err.responseText) {
-                    err = JSON.parse(err.responseText);
+            if (_errors) {
+                if (_errors.responseText) {
+                    _errors = JSON.parse(_errors.responseText);
                 }
-                if (_.isArray(err)) {
-                    this.$el.trigger('errors', [err]);
+                if (_.isArray(_errors)) {
+                    _.each(_errors, function eachError(error) {
+                        this.errors[error.selector] = error.message;
+                    }.bind(this));
+                    this.$el.trigger('error');
                 }
             }
-            trackFail(track);
+            //trackFail(track);
         }.bind(this);
 
         var trackFail = function() {
