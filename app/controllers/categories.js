@@ -45,7 +45,8 @@ function show(params, callback, gallery) {
     function controller() {
 
         var redirect = function(done){
-            var categoryId = this.app.seo.isCategoryDeprecated(params.catId);
+            var seo = Seo.instance(this.app);
+            var categoryId = seo.isCategoryDeprecated(params.catId);
 
             gallery = gallery || '';
 
@@ -105,8 +106,8 @@ function handleItems(params, promise, gallery) {
     var url;
 
     var configure = function(done, _category, _subcategory) {
-        var currentRouter = ['categories', 'items'];
         var seo = Seo.instance(this.app);
+        var currentRouter = ['categories', 'items'];
 
         category = _category;
         subcategory = _subcategory;
@@ -237,8 +238,8 @@ function handleShow(params, promise) {
     var category;
 
     var configure = function(done, _category) {
-        var currentRouter = ['categories', 'subcategories'];
         var seo = Seo.instance(this.app);
+        var currentRouter = ['categories', 'subcategories'];
 
         category = _category;
 
