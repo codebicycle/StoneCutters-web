@@ -39,23 +39,23 @@ module.exports = Base.extend({
     },
     postRender: function() {
         if (this.isValid === undefined || this.isValid === null) {
-            if (!this.form['category.id']) {
-                this.errors['category.id'] = 'Please select a subcategory'; // TRANSLATE THIS
-            }
             if (!this.form['category.parentId']) {
-                this.errors['category.parentId'] = 'Please select a category'; // TRANSLATE THIS
+                this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
+            }
+            if (!this.form['category.id']) {
+                this.errors['category.id'] = this.dictionary["postingerror.PleaseSelectSubcategory"];
             }
             if (!this.form.location) {
-                this.errors.location = 'Please select a location'; // TRANSLATE THIS
+                this.errors.location = this.dictionary["postingerror.InvalidLocation"];
             }
             this.$('[required]').each(function eachRequiredField(index, field) {
                 var $field = $(field);
 
                 if ($field.attr('name') !== 'state' && $field.attr('name') !== 'location') {
-                    this.errors[$field.attr('name')] = 'Please complete this field'; // TRANSLATE THIS
+                    this.errors[$field.attr('name')] = this.dictionary["postingerror.PleaseCompleteThisField"];
                 }
             }.bind(this));
-            this.$el.trigger('errorsUpdate');
+            //this.$el.trigger('errorsUpdate');
         }
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
@@ -204,7 +204,7 @@ module.exports = Base.extend({
                 $field.after('<small class="error message">' + message + '</small>');
             }
         }.bind(this));
-        console.log('hacer algo con estos', errorsSummary);
+        this.$('#posting-errors-view').trigger('show');
     },
     onSubmit: function(event) {
         event.preventDefault();
