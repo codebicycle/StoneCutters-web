@@ -109,25 +109,16 @@ function processForm(params, done) {
         form = _.clone(this.app.session.get('form'));
         this.app.session.clear('form');
     }
-    done(form);
-}
-
-function fetchDependencies(dependencies, done) {
-    this.app.fetchDependencies(dependencies, function callback(err, response) {
-        if (err) {
-            return done.fail(err);
-        }
-        this.dependencies = response;
-        done();
-    }.bind(this));
+    this.form = form;
+    done();
 }
 
 module.exports = {
-    control: function(params, options, callback) {
+    control: function(params, options, controller) {
         var promise;
 
         if (_.isFunction(options)) {
-            callback = options;
+            controller = options;
             options = {};
         }
         _.defaults(options, {
@@ -145,13 +136,10 @@ module.exports = {
         if (options.cache) {
             promise.val(changeHeaders.bind(this));
         }
-        if (options.dependencies) {
-            promise.then(fetchDependencies.bind(this, options.dependencies));
-        }
         if (options.isForm) {
             promise.then(processForm.bind(this, params));
         }
-        promise.val(callback.bind(this));
+        promise.val(controller.bind(this));
 
         function fail(err) {
             this.app.session.persist({
