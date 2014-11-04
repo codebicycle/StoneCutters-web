@@ -15,15 +15,10 @@ module.exports = Base.extend({
         var seo = Seo.instance(this.app);
 
         return _.extend({}, data, {
-            head: seo.getHead(),
+            head: seo.get('head'),
             clientId: this.app.session.get('clientId'),
             icons: (~icons.indexOf(country) ? country : 'default')
         });
-    },
-    postRender: function() {
-        var seo = Seo.instance(this.app);
-
-        $(document).on('route', seo.update.bind(seo));
     }
 });
 

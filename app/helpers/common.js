@@ -196,6 +196,7 @@ module.exports = (function() {
 
     function error(err, res, status, callback) {
         var seo = Seo.instance(this.app);
+console.log(err.stack);
         if (_.isFunction(status)) {
             callback = status;
             status = 404;
@@ -204,6 +205,7 @@ module.exports = (function() {
             this.app.req.res.status(status);
             statsd.increment([this.app.session.get('location').name, 'errors', 400]);
         }
+        seo.reset(this.app, ['pages', 'error']);
         seo.addMetatag('robots', 'noindex, nofollow');
         seo.addMetatag('googlebot', 'noindex, nofollow');
         return callback(null, 'pages/error', res || {});

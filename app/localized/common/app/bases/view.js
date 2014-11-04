@@ -6,6 +6,7 @@ var async = require('async');
 var localization = require('../../../../../shared/config').get('localization', {});
 var helpers = require('../../../../helpers');
 var translations = require('../../../../../shared/translations');
+var Seo = require('../../../../modules/seo');
 
 module.exports = Base.extend({
     initialize: function() {
@@ -38,6 +39,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             user: user,
+            seo: Seo.instance(this.app),
             device: this.app.session.get('device'),
             platform: this.app.session.get('platform'),
             template: template,

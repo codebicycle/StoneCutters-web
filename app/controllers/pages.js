@@ -92,6 +92,8 @@ function error(params, callback) {
     function controller() {
         var seo = Seo.instance(this.app);
         var err = this.app.session.get('error');
+
+            console.log(err ? err.stack || err : err);
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
             if (this.app.session.get('path') !== '/500') {
