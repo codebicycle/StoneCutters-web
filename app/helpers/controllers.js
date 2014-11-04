@@ -140,34 +140,13 @@ module.exports = {
         if (options.isForm) {
             promise.then(processForm.bind(this, params));
         }
-        promise.val(controller.bind(this, wrapper.bind(this)));
+        promise.val(controller.bind(this, callback.bind(this)));
 
         function fail(err) {
             this.app.session.persist({
                 error: err
             });
             return common.redirect.call(this, '/500');
-        }
-
-        function wrapper(err, view, data, json) {
-            if (err) {
-                return callback(err);
-            }
-            if (typeof view === 'string') {
-                data = data || {};
-            }
-            else {
-                data = view || {};
-                view = undefined;
-            }
-            json = json !== undefined ? json : true;
-            data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data);
-            if (!view) {
-                callback(err, data);
-            }
-            else {
-                callback(err, view, data);
-            }
         }
     },
     changeHeaders: changeHeaders
