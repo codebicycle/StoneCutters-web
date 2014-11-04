@@ -135,17 +135,28 @@ function show(params, callback) {
             }.bind(this));
         }.bind(this);
 
-        var checkItem = function(done, resItem) {
-            if (!resItem.item) {
+        var checkItem = function(done, response) {
+            if (!response.item) {
                 return done.fail(null, {});
             }
-            var item = resItem.item.toJSON();
-            var slug = helpers.common.slugToUrl(item);
+            var slug = helpers.common.slugToUrl(response.item.toJSON());
             var protocol = this.app.session.get('protocol');
+            var host = this.app.session.get('host');
             var platform = this.app.session.get('platform');
             var url;
 
-            if (!resItem.item.checkSlug(slug, slugUrl)) {
+            if (platform === 'desktop' && response.item.getLocation().url !== this.app.session.get('siteLocation')) {
+                url = [protocol, '://', host, '/', slug].join('');
+
+                done.abort();
+                return helpers.common.redirect.call(this, url, null, {
+                    pushState: false,
+                    query: {
+                        location: response.item.getLocation().url
+                    }
+                });
+            }
+            if (!response.item.checkSlug(slug, slugUrl)) {
                 slug = ('/' + slug);
                 if (favorite) {
                     slug = helpers.common.params(slug, 'favorite', favorite);
@@ -153,22 +164,21 @@ function show(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, slug);
             }
-            if (item.location.url !== this.app.session.get('location').url) {
-                url = [protocol, '://', platform, '.', item.location.url.replace('www.', 'm.'), '/', slug].join('');
+            if (response.item.get('location').url !== this.app.session.get('location').url) {
+                url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
                     query: {
-                        location: resItem.item.getLocation().url
+                        location: response.item.getLocation().url
                     }
                 });
             }
-
-            done(resItem.item);
+            done(response.item);
         }.bind(this);
 
-        var findRelatedItems = function(done, _item) {
+        var findRelatedItems = function(done, item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -181,21 +191,21 @@ function show(params, callback) {
                 }
             }, {
                 readFromCache: false
-            }, function afterFetch(err, res) {
+            }, function afterFetch(err, response) {
                 if (err) {
                     err = null;
-                    res = {
+                    response = {
                         relatedItems: []
                     };
                 }
                 else {
-                    res.relatedItems = res.relatedItems.toJSON();
+                    response.relatedItems = response.relatedItems.toJSON();
                 }
-                done(_item, res.relatedItems);
+                done(item, response.relatedItems);
             }.bind(this));
         }.bind(this);
 
-        var success = function(_item, _relatedItems) {
+        var success = function(_item, relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var view = 'items/show';
@@ -260,7 +270,7 @@ function show(params, callback) {
                 seo: seo,
                 pos: Number(params.pos) || 0,
                 sk: securityKey,
-                relatedItems: _relatedItems || [],
+                relatedItems: relatedItems || [],
                 relatedAdsLink: (subcategory ? ['/', helpers.common.slugToUrl(subcategory), '?relatedAds=', itemId].join('') : undefined),
                 subcategory: subcategory,
                 category: category,
