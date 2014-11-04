@@ -10,13 +10,15 @@
             <li><a href="/help">{{ dictionary["biderrorheader.Help"] }}</a></li>
             <li><a href="/terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
             <li><a href="#">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
-            <li><a href="#">{{ dictionary["contact_us.ContactBrand"] }} </a></li>
+            <!--li><a href="#">{{ dictionary["contact_us.ContactBrand"] }} </a></li-->
         </ul>
     </div>
     <div class="popular-slide footer-slide hide">
         <a title="close" data-footer-slidedown="popular-slide" class="icons icon-close" href="#"></a>
         <div class="popular-column">
-            <h3 class="title">{{ dictionary["popularsearchesbody.PopularCities"] }} Bolivia</h3>
+            <div class="title-bar">
+                <h3 class="title">{{ dictionary["popularsearchesbody.PopularCities"] }} Bolivia</h3>
+            </div>
             <ul>
                 <li>
                     <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
@@ -65,7 +67,9 @@
             </ul>
         </div>
         <div class="popular-column popular-cities">
-            <h3 class="title">{{ dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>', location.name) }}</h3>
+            <div class="title-bar">
+                <h3 class="title">{{ dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>', location.name) }}</h3>
+            </div>
             <ul>
                 <li>
                     <a alt="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
@@ -116,7 +120,9 @@
     </div>
     <div class="around-slide footer-slide hide">
         <a title="close" data-footer-slidedown="around-slide" class="icons icon-close" href="#"></a>
-        <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
+        <div class="title-bar">
+            <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
+        </div>
         <ul>
             {% for country in countries %}
                 <li><a href="{{country.url}}" title="{{country.name}}">{{country.name}}</a></li>

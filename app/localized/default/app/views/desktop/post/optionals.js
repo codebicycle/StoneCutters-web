@@ -87,7 +87,7 @@ module.exports = Base.extend({
         var field = _.find(this.fields, function each(field) {
             return field.name === name;
         });
-
+        
         var fetch = function(done) {
             $loading.show();
             helpers.dataAdapter.get(this.app.req, '/items/fields/' + encodeURIComponent(field.related) + '/' + this.form.values[field.name] + '/subfields', {
@@ -120,10 +120,9 @@ module.exports = Base.extend({
         }.bind(this);
 
         this.form.values[field.name] = $field.val();
-        this.parentView.$el.trigger('fieldSubmit', {
-            name: field.name,
-            value: this.form.values[field.name]
-        });
+        
+        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        
         if (!field.related) {
             return;
         }

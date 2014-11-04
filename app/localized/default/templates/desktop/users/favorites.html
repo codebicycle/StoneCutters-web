@@ -16,9 +16,7 @@
         <div class="description">
             <h3 class="title">{{ item.title }}</h3>
             <div class="tips">
-                <span>0  {{ dictionary["myolx.Messages"] }}</span>
-                <span>0 {{ dictionary["netvibes_myolx.content.Views"] }} </span>
-                <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', item.date.timestamp | date("MMM DD, YYYY")) }}</span>
+                <span class="city">{{ item.displayLocation }}</span>
             </div>
             <div class="text">
             </div>

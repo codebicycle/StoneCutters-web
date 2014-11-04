@@ -58,7 +58,7 @@
             {% set statustxt = dictionary["misc.Removed"] %}
         {% elif item.status == 'rejected' %}
             {% set status = 'rejected' %}
-            {% set statustxt = 'RECHAZADO' %}
+            {% set statustxt = dictionary["item.Rejected"] %}
         {% elif item.status == 'pending' %}
             {% set status = 'pending' %}
             {% set statustxt = dictionary["misc.Pending_BR"] %}
@@ -82,7 +82,13 @@
                 </span>
             </figure>
             <div class="description">
-                <h3 class="title">{{ item.title }}</h3>
+                <h3 class="title">
+                    {% if (status == 'ready') %}
+                        <a href="{{ item | slugToUrl | link }}">{{ item.title }}</a>
+                    {% else %}
+                        {{ item.title }}
+                    {% endif %}
+                </h3>
                 <div class="tips">
                     <span>0  {{ dictionary["myolx.Messages"] }}</span>
                     <span>0 {{ dictionary["netvibes_myolx.content.Views"] }} </span>
@@ -100,9 +106,9 @@
                     {% endif %}
                     {% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
                         {% if status == 'expired' %}
-                            <a href="" class="btn icons icon-repulish">Republicar</a>
+                            <a href="" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                         {% endif %}
-                        <a href="" data-idd="{{ item.id }}" class="btn icons icon-trash btndelforever">Eliminar de esta lista</a>
+                        <a href="" data-idd="{{ item.id }}" class="btn icons icon-trash btndelforever">{{ dictionary["netvibes_myolx.content.RemoveListing"] }}</a>
                     {% endif %}
                 </div>
             </div>

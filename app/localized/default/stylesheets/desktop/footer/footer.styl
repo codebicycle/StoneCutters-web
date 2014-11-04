@@ -42,7 +42,6 @@
         }
     }
 
-
     .footer-options {
         clear-fix();
     }
@@ -61,13 +60,14 @@
             }
 
             a {
-                color: $black;
+                color: $greyStrong;
                 display: block;
                 line-height: 32px;
                 padding: 0 10px;
 
-                &:hover {
+                &:hover, &:hover .icons::before {
                     text-decoration: none;
+                    color: $black;
                 }
             }
 
@@ -76,19 +76,26 @@
                 display: inline-block;
                 font-size: remify(8px);
                 margin-left: 10px;
+            }
+
+            .icon-arrow::before {
                 transform(rotate(-90deg));
             }
 
             &.active {
                 background: $greyStrong;
-                a {
-                    color: #fff;
+                a, .icons::before, a:hover .icons::before {
+                    color: $white;
                 }
                 .icon-arrow::before {
-                    color: $black;
                     transform(rotate(90deg));
                 }
             }
         }
+    }
+
+    .appStores {
+        float: right;
+        margin-top: -7px;
     }
 }

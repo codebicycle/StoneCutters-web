@@ -1,17 +1,18 @@
 {% include (template + "/partials/breadcrumb.html") %}
 
-<nav id="listing-filters">
-    {% include (template + '/items/filters.html') %}
-</nav>
+<div class="wrapper-main">
+	<nav id="listing-filters">
+	    {% include (template + '/items/filters.html') %}
+	</nav>
 
-<section id='listing-items'>
-    {% include (template + '/items/locations.html') %}
+	<section id='listing-items'>
+	    {% include (template + '/items/locations.html') %}
 
-    {% include (template + '/items/listig.html') %}
+	    {% include (template + '/items/listig.html') %}
 
-    {% if metadata.next or metadata.previous %}
-        {% include (template + '/items/pagination.html') %}
-    {% endif %}
-</section>
-
+	    {% if metadata.next or metadata.previous %}
+	        {% include (template + '/items/pagination.html') %}
+	    {% endif %}
+	</section>
+</div><!-- wrapper main -->
 {% view 'partials/tracking' %}

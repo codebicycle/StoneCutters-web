@@ -3,7 +3,7 @@
         <p class="icons icon-user user-name">{{ item.contactName }}</p>
         <span class="user-status">User Status</span>
         <p class="icons icon-phone user-phone">{{ item.phone }}</p>
-        <span>Ao ligar, diga que viu o anúncio na OLX</span>
+        <span>{{ dictionary["item.WhenYouCallMentionOLX"] }}</span>
     </div>
 
     <form id="replyForm" action="">
@@ -45,6 +45,9 @@
         </p>
     </form>
     <div class="disclaimer">
-        <p>Al hacer clic en Enviar un email Ud. acepta nuestras <a href="{{ '/term' | link }}" target="_blank">Condiciones de Uso.</a></p>
+        <p>
+            {{ dictionary["item.ClickAgreeTermsZA"] | replace('<<LINK>> condiciones de uso<</LINK>>.','') }}
+            <a href="/terms" target="_blank">{{ dictionary["defaultfooter.Terms of use"] }}</a>
+        </p>
     </div>
 </section>

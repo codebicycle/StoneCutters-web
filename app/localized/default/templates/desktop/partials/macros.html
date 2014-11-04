@@ -9,6 +9,15 @@
     </fieldset>
 {% endmacro %}
 
+{% macro FieldTextArea(label, name, mandatory, form) %}
+    <fieldset class="wrapper">
+        <label for="{{name}}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
+        <div class="wrapper-inputs">
+            <textarea id="{{name}}" class="text-field" rows="12" {{ 'required' if mandatory == 'true' }} name="{{name}}">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
+        </div>
+    </fieldset>
+{% endmacro %}
+
 {% macro FieldCombobox(label, name, mandatory, values, form) %}
     <fieldset class="wrapper">
         <label for="{{label}}" class="posting-label">{{label}}</label>
@@ -22,9 +31,94 @@
     </fieldset>
 {% endmacro %}
 
-{% macro FieldTextArea(label, name, mandatory, form) %}
-    <fieldset class="wrapper">
-        <label for="{{name}}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-        <textarea id="{{name}}" class="text-field" rows="12" {{ 'required' if mandatory == 'true' }} name="{{name}}">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
+{# NEW FIELDS #}
+
+{% macro TextInput(type = 'text', name = '', placeholder = false, required = false, validate = true) %}
+    <input
+        type="{{ type }}"
+        id ="field-{{ name }}"
+        name="{{ name }}"
+        class="text-field type-text"
+        {% if placeholder %}
+            placeholder="{{ placeholder }}"
+        {% endif %}
+        {% if required == true or required == 'true' %}
+            required
+        {% endif %}
+        {% if validate %}
+            data-validate="true"
+        {% endif %}
+    />
+{% endmacro %}
+
+{% macro Textarea(name = '', required = false, validate = true) %}
+    <textarea
+        id="field-{{ name }}"
+        name="{{name }}"
+        class="text-field type-textarea"
+        rows="12"
+        {% if required == true or required == 'true' %}
+            required
+        {% endif %}
+        {% if validate %}
+            data-validate="true"
+        {% endif %}
+    ></textarea>
+{% endmacro %}
+
+{% macro Select(name = '', required = false, options, selected) %}
+    <select
+        id="field-{{ name }}"
+        name="{{ name }}"
+        class="text-field type-select"
+        {% if required == true or required == 'true' %}
+            required
+        {% endif %}
+    >
+        {% for option in options %}
+            <option
+                value="{{ option.key }}"
+                {% if option.key == selected %}
+                    selected
+                {% endif %}
+            >{{ option.value }}</option>
+        {% endfor %}
+    </select>
+{% endmacro %}
+
+{% macro Field(hint = false, field) %}
+    <fieldset class="field-wrapper">
+        {% if field.label %}<label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}</label>{% endif %}
+        <div class="field-controls">
+            {% if field.fieldType == 'text' and field.name == 'description' %}
+                {{ Textarea(name = field.name, required = field.mandatory) }}
+            {% elif field.fieldType == 'text' %}
+                {% set type = field.type or 'text' %}
+                {{ TextInput(type = type, name = field.name, required = field.mandatory) }}
+            {% elif field.fieldType == 'combobox' %}
+                {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.selected) }}
+            {% endif %}
+            {% if hint %}
+                <small class="hint message">{{ hint }}</small>
+            {% endif %}
+        </div>
+    </fieldset>
+{% endmacro %}
+
+{% macro PriceField(fieldLabel = '', fieldName = '', fieldMandatory = '', hint = false, fields) %}
+    <fieldset class="field-wrapper">
+        {% if fieldLabel %}<label for="field-{{ fieldName }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}{{ fieldLabel }}</label>{% endif %}
+        <div class="field-controls">
+            {% for field in fields %}
+                {% if field.fieldType == 'text' %}
+                    {{ TextInput(name = field.name, required = field.mandatory) }}
+                {% elif field.fieldType == 'combobox' %}
+                    {{ Select(name = field.name, required = field.mandatory, options = field.values) }}
+                {% endif %}
+            {% endfor %}
+            {% if hint %}
+                <small class="hint message">{{ hint }}</small>
+            {% endif %}
+        </div>
     </fieldset>
 {% endmacro %}

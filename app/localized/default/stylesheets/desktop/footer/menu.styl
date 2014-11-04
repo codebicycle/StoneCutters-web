@@ -3,7 +3,7 @@
 
     .footer-slide {
         bottom: 0;
-        box($white, $greyBorders $greyBorders $greyStrong, 3px 3px 0 0, 20px, solid, 1px 1px 4px);
+        box($white, $greyBorders $greyBorders $greyStrong, 3px 3px 0 0, 0, solid, 1px 1px 4px);
         left: 0;
         position: absolute;
         right: 0;
@@ -19,39 +19,16 @@
             right: 10px;
             top: 10px;
         }
-        ul {
-            ul-reset();
-        }
+
         .title-bar {
             border-bottom: 1px solid $greyBorders;
+            padding: 10px 40px 10px 20px;
 
             h3 {
-                font-size: $s;
+                font-size: $l;
                 font-weight: bold;
-                padding: 0 0 10px;
                 margin: 0;
-            }
-        }
-    }
-    .footer-categorytree-view {
-        clear-fix();
-        .category-list {
-            box-sizing: boder-box;
-            float: left;
-            padding: 20px 20px 0 0;
-            width: 25%;
-
-            li {
-                a {
-                    font-size: $xs;
-                }
-                &.category {
-                    margin-bottom: 10px;
-                    > a {
-                        font-weight: bold;
-                        font-size: $s;
-                    }
-                }
+                padding: 0;
             }
         }
     }
@@ -84,5 +61,58 @@
                 font-size: $xs;
             }
         }
+    }
+}
+
+.footer-categorytree-view {
+    clear-fix();
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .3);
+
+    ul {
+        ul-reset();
+    }
+
+    .category-list {
+        box-sizing: border-box;
+        float: left;
+        padding: 20px 10px;
+        width: 25%;
+
+        &:last-child {
+            padding-right: 20px;
+        }
+
+        a {
+            font-size: $xs;
+            line-height: 1;
+        }
+
+        li {
+            padding-bottom: 4px;
+        }
+
+        .category {
+            padding-bottom: 20px;
+
+            > a {
+                font-weight: bold;
+                font-size: $m;
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .category-list-first {
+         padding-left: 20px;
+    }
+
+    .category-link {
+        color: $black;
+        display: inline-block;
+        font-size: $m;
+        padding-bottom: 10px;
     }
 }

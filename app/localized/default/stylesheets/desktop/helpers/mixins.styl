@@ -35,24 +35,32 @@ border-styles(color = #ccc, radius = 3px, style = solid, width = 1px)
     border-width: width;
 
 border-radius(n = 3px)
-    -webkit-border-radius n
-    -moz-border-radius n
-    border-radius n
+    -webkit-border-radius arguments
+    -moz-border-radius arguments
+    border-radius arguments
 
 box(bgcolor = #fff, bordercolor = #ccc, radius = 3px, padding = 10px, style = solid, width = 1px)
     background: bgcolor;
     border-styles(bordercolor, radius, style, width);
     padding: padding;
 
-box-shadow(args)
-   -webkit-box-shadow args
-   -moz-box-shadow args
-   box-shadow args
-   
+box-sizing(value)
+    -webkit-box-sizing: value;
+    -moz-box-sizing: value;
+    box-sizing: value;
+
+box-shadow()
+   -webkit-box-shadow arguments
+   -moz-box-shadow arguments
+   box-shadow arguments
+
 circle(size)
     border-radius(50%);
-    height: size;
-    width: size;
+    square(size)
+
+square(size)
+    height: size
+    width: size
 
 column-count(args)
    -webkit-column-count args
