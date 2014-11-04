@@ -109,15 +109,16 @@ function processForm(params, done) {
         form = _.clone(this.app.session.get('form'));
         this.app.session.clear('form');
     }
-    done(form);
+    this.form = form;
+    done();
 }
 
 module.exports = {
-    control: function(params, options, callback) {
+    control: function(params, options, controller) {
         var promise;
 
         if (_.isFunction(options)) {
-            callback = options;
+            controller = options;
             options = {};
         }
         _.defaults(options, {
@@ -138,7 +139,7 @@ module.exports = {
         if (options.isForm) {
             promise.then(processForm.bind(this, params));
         }
-        promise.val(callback.bind(this));
+        promise.val(controller.bind(this));
 
         function fail(err) {
             this.app.session.persist({

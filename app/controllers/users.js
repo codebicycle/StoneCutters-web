@@ -25,7 +25,7 @@ function register(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -39,7 +39,7 @@ function register(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
         });
@@ -61,9 +61,9 @@ function lostpassword(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         callback(null, {
-            form: form,
+            form: this.form,
             success: params.success,
             tracking: tracking.generateURL.call(this)
         });
@@ -74,7 +74,7 @@ function login(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
     }, controller);
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -88,7 +88,7 @@ function login(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             redirect: params.redirect,
             tracking: tracking.generateURL.call(this)
         });
@@ -168,7 +168,7 @@ function myads(params, callback) {
                 token: user.token,
                 userId: user.userId,
                 location: this.app.session.get('siteLocation'),
-                languageCode: this.app.session.get('selectedLanguage'),
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'myAds'
             }, params);
 
@@ -198,7 +198,7 @@ function myads(params, callback) {
             var platform = this.app.session.get('platform');
             var view = 'users/myads';
             var data = {
-                myAdsMetadata: _myAds.metadata,
+                myAdsMetadata: _myAds.meta,
                 myAds: myAds,
                 deleted: deleted
             };
@@ -232,7 +232,7 @@ function myads(params, callback) {
 function favorites(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    function controller(form) {
+    function controller() {
         var favorite;
         var _params;
         var user;
@@ -285,7 +285,7 @@ function favorites(params, callback) {
             var platform = this.app.session.get('platform');
             var view = 'users/favorites';
             var data = {
-                favoritesMetadata: _favorites.metadata,
+                favoritesMetadata: _favorites.meta,
                 favorites: favorites,
                 favorite: favorite
             };

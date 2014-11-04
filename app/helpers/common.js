@@ -161,7 +161,7 @@ module.exports = (function() {
 
     function statics(path, key, value) {
         var env = config.get(['environment', 'type'], 'development');
-        var host = this.app.session.get('host');
+        var host = this.app ? this.app.session.get('host') : '';
         var type;
 
         if (key && value) {

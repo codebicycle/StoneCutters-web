@@ -55,7 +55,7 @@ module.exports = Base.extend({
         var $filter = $(event.currentTarget);
         var filterName = $filter.data('filter-name');
 
-        $filter.find('.icons').toggleClass('icon-arrow-top');
+        $filter.find('.icons').toggleClass('icon-arrow-down');
         $('.' + filterName).slideToggle();
     },
     cleanFilters: function(event) {

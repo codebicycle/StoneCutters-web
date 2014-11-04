@@ -3,7 +3,7 @@
 module.exports = function(params, next) {
     var href;
     var location;
-    
+
     if (this.app.session.get('isServer')) {
         href = this.app.session.get('protocol') + '://' + this.app.session.get('siteLocation') + this.app.session.get('path');
 

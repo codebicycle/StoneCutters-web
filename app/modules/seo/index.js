@@ -23,6 +23,7 @@ function _getMetatagName(currentRoute) {
 }
 
 function SeoModule(app) {
+    app.seo = this;
     this.app = app;
     this.initialize();
 }

@@ -23,5 +23,15 @@ module.exports = Base.extend({
             location: this.app.session.get('location'),
             categories: list
         });
+    },
+    postRender: function() {
+        this.app.router.once('action:end', this.onStart);
+        this.app.router.once('action:start', this.onEnd);
+    },
+    onStart: function(event) {
+        this.appView.trigger('home:start');
+    },
+    onEnd: function(event) {
+        this.appView.trigger('home:end');
     }
 });

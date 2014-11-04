@@ -19,7 +19,7 @@ module.exports = {
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    function controller(form) {
+    function controller() {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -37,21 +37,7 @@ function flow(params, callback) {
             done();
         }.bind(this);
 
-        var fetchCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var fetchPostingSession = function(done) {
+        var fetch = function(done) {
             this.app.fetch({
                 postingSession: {
                     model: 'PostingSession',
@@ -62,75 +48,38 @@ function flow(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var fetchCities = function(done) {
-            this.app.fetch({
-                topCities: {
-                    collection: 'Cities',
-                    params: {
-                        level: 'countries',
-                        type: 'topcities',
-                        location: location.url,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var fetchStates = function(done) {
-            this.app.fetch({
-                states: {
-                    collection: 'States',
-                    params: {
-                        location: location.url,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(res1, res2, res3, res4) {
+        var success = function(res) {
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
-                postingFlowController(res1.categories, res2.postingSession, res3.topCities, res4.states);
+                postingFlowController(res.postingSession);
             }
             else if (isDesktop) {
-                postingController(res1.categories, res2.postingSession, res3.topCities, res4.states);
+                postingController(res.postingSession);
             }
             else {
-                postingCategoriesController(res1.categories);
+                postingCategoriesController();
             }
         }.bind(this);
 
-        var postingController = function(categories, postingSession, topCities, states) {
+        var postingController = function(postingSession) {
             tracking.setPage('desktop_step1');
             callback(null, 'post/index', {
-                categories: categories,
                 postingSession: postingSession.get('postingSession'),
-                topCities: topCities,
-                states: states,
                 tracking: tracking.generateURL.call(this)
-            });
+            }, false);
         }.bind(this);
 
-        var postingFlowController = function(categories, postingSession, topCities, states) {
+        var postingFlowController = function(postingSession) {
             callback(null, 'post/flow/index', {
-                categories: categories,
                 postingSession: postingSession.get('postingSession'),
-                topCities: topCities,
-                states: states,
                 tracking: tracking.generateURL.call(this)
-            });
+            }, false);
         }.bind(this);
 
-        var postingCategoriesController = function(categories) {
+        var postingCategoriesController = function() {
             tracking.setPage('categories');
             callback(null, 'post/categories', {
-                categories: categories.toJSON(),
                 tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
@@ -143,10 +92,7 @@ function flow(params, callback) {
             .then(prepare);
 
         if (isPostingFlow || isDesktop) {
-            promise.gate(fetchCategories, fetchPostingSession, fetchCities, fetchStates);
-        }
-        else {
-            promise.then(fetchCategories);
+            promise.then(fetch);
         }
         promise.val(success);
     }
@@ -160,62 +106,31 @@ function subcategories(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
+        var redirect;
 
-        var prepare = function(done) {
-            var redirect;
+        if (isPostingFlow) {
+            redirect = '/posting';
+        }
+        else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+            redirect = '/location?target=posting';
+        }
+        if (redirect) {
+            return helpers.common.redirect.call(this, redirect, null, {
+                status: 302
+            });
+        }
+        var category = this.dependencies.categories.get(params.categoryId);
 
-            if (isPostingFlow) {
-                redirect = '/posting';
-            }
-            else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                redirect = '/location?target=posting';
-            }
-            if (redirect) {
-                done.abort();
-                return helpers.common.redirect.call(this, redirect, null, {
-                    status: 302
-                });
-            }
-            done();
-        }.bind(this);
-
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(response) {
-            var category = response.categories.get(params.categoryId);
-
-            if (!category) {
-                return helpers.common.redirect.call(this, '/posting');
-            }
-            seo.addMetatag('robots', 'noindex, nofollow');
-            seo.addMetatag('googlebot', 'noindex, nofollow');
-            callback(null, _.extend(params, {
-                category: category.toJSON(),
-                subcategories: category.get('children').toJSON(),
-                tracking: tracking.generateURL.call(this)
-            }));
-        }.bind(this);
-
-        var error = function(err) {
-            helpers.common.error.call(this, err, null, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(fetch)
-            .val(success);
+        if (!category) {
+            return helpers.common.redirect.call(this, '/posting');
+        }
+        seo.addMetatag('robots', 'noindex, nofollow');
+        seo.addMetatag('googlebot', 'noindex, nofollow');
+        callback(null, _.extend(params, {
+            category: category.toJSON(),
+            subcategories: category.get('children').toJSON(),
+            tracking: tracking.generateURL.call(this)
+        }));
     }
 }
 
@@ -224,7 +139,7 @@ function form(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
@@ -232,7 +147,6 @@ function form(params, callback) {
         var language;
         var languages;
         var languageId;
-        var languageCode;
 
         var prepare = function(done) {
             var redirect;
@@ -252,45 +166,22 @@ function form(params, callback) {
             language = this.app.session.get('selectedLanguage');
             languages = this.app.session.get('languages');
             languageId = languages._byId[language].id;
-            languageCode = languages._byId[language].isocode.toLowerCase();
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: language
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var findPostingSession = function(done) {
+        var fetch = function(done) {
             this.app.fetch({
                 postingSession: {
                     model: 'PostingSession',
                     params: {}
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var findFields = function(done) {
-            this.app.fetch({
+                },
                 fields: {
                     model: 'Field',
                     params: {
                         intent: 'post',
                         location: siteLocation,
                         categoryId: params.subcategoryId,
-                        languageId: languageId,
-                        languageCode: languageCode
+                        languageId: languageId
                     }
                 }
             }, {
@@ -298,12 +189,11 @@ function form(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkFields = function(done, resCategories, resPostingSession, resFields) {
-            if (!resCategories.categories || !resPostingSession.postingSession || !resFields.fields) {
-                done.abort();
+        var check = function(done, response) {
+            if (!response.postingSession || !response.fields) {
                 return done.fail(null, {});
             }
-            var category = resCategories.categories.get(params.categoryId);
+            var category = this.dependencies.categories.get(params.categoryId);
             var subcategory;
 
             if (!category) {
@@ -315,11 +205,11 @@ function form(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
             }
-            done(resCategories.categories, resPostingSession.postingSession, resFields.fields);
+            done(response.postingSession, response.fields);
         }.bind(this);
 
-        var success = function(_categories, _postingSession, _field) {
-            var category = _categories.get(params.categoryId);
+        var success = function(_postingSession, _field) {
+            var category = this.dependencies.categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
             tracking.addParam('category', category.toJSON());
@@ -333,7 +223,6 @@ function form(params, callback) {
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 language: languageId,
-                languageCode: languageCode,
                 siteLocation: siteLocation,
                 form: form,
                 tracking: tracking.generateURL.call(this)
@@ -346,8 +235,8 @@ function form(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findPostingSession, findFields)
-            .then(checkFields)
+            .then(fetch)
+            .then(check)
             .val(success);
     }
 }
@@ -356,6 +245,7 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var itemId = params.itemId;
@@ -390,11 +280,10 @@ function success(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -490,14 +379,14 @@ function edit(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
+        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var siteLocation;
         var language;
         var languages;
         var languageId;
-        var languageCode;
         var _params;
         var _categories;
         var _item;
@@ -514,11 +403,9 @@ function edit(params, callback) {
             language = this.app.session.get('selectedLanguage');
             languages = this.app.session.get('languages');
             languageId = languages._byId[language].id;
-            languageCode = languages._byId[language].isocode.toLowerCase();
             _params = {
                 id: params.itemId,
-                languageId: languageId,
-                languageCode: languageCode
+                languageId: languageId
             };
             checkAuthentication(_params, _params.id);
             done();
@@ -530,11 +417,10 @@ function edit(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: language
+                        languageId: languageId,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -591,7 +477,6 @@ function edit(params, callback) {
                 intent: 'edit',
                 location: siteLocation,
                 languageId: languageId,
-                languageCode: languageCode,
                 itemId: _item.get('id'),
                 categoryId: _item.get('category').id
             };
@@ -602,8 +487,6 @@ function edit(params, callback) {
                     model: 'Field',
                     params: _params
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -648,7 +531,6 @@ function edit(params, callback) {
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 language: languageId,
-                languageCode: languageCode,
                 errField: params.errField,
                 errMsg: params.errMsg,
                 sk: securityKey,

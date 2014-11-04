@@ -5,13 +5,12 @@ var dateformat = require('dateformat');
 var helpers = require('../../helpers');
 
 module.exports = function(nunjucks) {
-
-    function paginations(metadata, platform) {
+    function paginations(meta, platform) {
         var context = this.ctx;
         var out = [];
-        var url = metadata.current;
-        var page = metadata.page;
-        var pages = metadata.totalPages;
+        var url = meta.current;
+        var page = meta.page;
+        var pages = meta.totalPages;
         var regExp = new RegExp('-p-([0-9]+)', 'g');
         var pagination = [page-2, page-1, page, page+1, page+2];
         var prepareCallback = prepareURL;

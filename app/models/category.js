@@ -18,7 +18,7 @@ module.exports = Base.extend({
             if (this.app.session.get('path').slice(1).indexOf('-cat-')) {
                 return true;
             }
-        }       
+        }
         return false;
     }
 });
