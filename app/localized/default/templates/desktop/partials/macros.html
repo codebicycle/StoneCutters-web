@@ -81,7 +81,8 @@
         {% for option in options %}
             <option
                 value="{{ option.key }}"
-                {% if option.key == selected %}
+                
+                {% if not selected and loop.index == 1 or option.key == selected %}
                     selected
                 {% endif %}
             >{{ option.value }}</option>
