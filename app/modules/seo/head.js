@@ -10,6 +10,7 @@ var metasDefaults = utils.get(configSeo, ['metatags', 'default']);
 var metasHandler = {
     title: title,
     toptitle: topTitle,
+    h1: topTitle,
     description: description,
     canonical: canonical,
     'google-site-verification': googleSiteVerification
@@ -21,11 +22,17 @@ Backbone.noConflict();
 Base = Backbone.Model;
 
 function title(metas, value) {
+    var suffix;
+
     if (!value) {
         this.unset('title');
     }
     else {
-        Base.prototype.set.call(this, 'title', value + this.getLocationName(' - '), {
+        suffix = this.getLocationName(' - ');
+        if (value.length >= suffix.length && value.slice(value.length - suffix.length) !== suffix) {
+            value += suffix;
+        }
+        Base.prototype.set.call(this, 'title', value, {
             unset: false
         });
     }
@@ -43,11 +50,17 @@ function topTitle(metas, value) {
 }
 
 function description(metas, value) {
+    var suffix;
+
     if (!value) {
         delete metas.description;
     }
     else {
-        metas.description = value + this.getLocationName(' - ');
+        suffix = this.getLocationName(' - ');
+        if (value.length >= suffix.length && value.slice(value.length - suffix.length) !== suffix) {
+            value += suffix;
+        }
+        metas.description = value;
     }
     return metas;
 }
@@ -96,19 +109,6 @@ Head = Backbone.Model.extend({
     initialize: function(attrs, options) {
         this.app = options.app;
 
-function wrapperEvent(fn) {
-    return function onWrapperEvent() {
-        try {
-            return fn.apply(this, arguments);
-        } catch(e) {
-            console.log(e.stack);
-        }
-    };
-}
-this.update = wrapperEvent(this.update);
-this.onChangeTopTitle = wrapperEvent(this.onChangeTopTitle);
-this.onReset = wrapperEvent(this.onReset);
-
         this.on('change', this.update, this);
         this.on('change:topTitle', this.onChangeTopTitle, this);
         this.on('reset', this.onReset, this);
@@ -143,11 +143,9 @@ this.onReset = wrapperEvent(this.onReset);
         }, this);
     },
     update: function () {
-        console.log('update');
         if (utils.isServer) {
             return;
         }
-        console.log('update', head);
         var head = this.toJSON();
 
         $('head title').text(head.title);

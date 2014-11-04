@@ -9,7 +9,9 @@ module.exports = Base.extend({
     id: 'posting-contact-view',
     className: 'posting-contact-view',
     events: {
-        'change': 'onChange'
+        'change': 'onChange',
+        'disablePost': 'onDisablePost',
+        'enablePost': 'onEnablePost'
     },
     onChange: function(event) {
         event.preventDefault();
@@ -17,6 +19,12 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('fieldSubmit', [$(event.target)]);
+    },
+    onDisablePost: function(event) {
+        this.$('.posting').attr('disabled', 'disabled');
+    },
+    onEnablePost: function(event) {
+        this.$('.posting').removeAttr('disabled');
     }
 });
 

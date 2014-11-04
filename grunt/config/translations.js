@@ -39,6 +39,7 @@ module.exports = {
         'about.Presence',
         'postingerror.PleaseSelectCategory',
         'postingerror.PleaseSelectSubcategory',
+        'postingerror.PleaseCompleteThisField',
         'postingerror.InvalidLocation',
         'postingerror.InvalidEmailAddress',
         'postingerror.PleaseEnterANumericalValue',

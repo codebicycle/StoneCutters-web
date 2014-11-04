@@ -32,7 +32,6 @@ function getTopTitle() {
 
 Seo = Backbone.Model.extend({
     initialize: function (attrs, options) {
-        console.log('initialize', new Error().stack);
         this.head = new Head({}, options);
         this.reset(options.app);
 
@@ -54,6 +53,9 @@ Seo = Backbone.Model.extend({
         return attr;
     },
     setContent: function (meta, options) {
+        var title;
+        var suffix;
+
         if (meta && meta.seo) {
             meta = meta.seo;
             options = _.defaults({}, options || {}, {
@@ -63,8 +65,8 @@ Seo = Backbone.Model.extend({
             this.set(meta, options);
             this.head.setAll(meta.metas, options);
 
-            if (meta.itemPage && meta.itemPage.topTitle) {
-                this.set('topTitle', meta.itemPage.topTitle);
+            if (meta.itemPage) {
+                this.head.setAll(meta.itemPage, options);
             }
             if (meta.levelPath) {
                 if (meta.levelPath.wikititles) {
@@ -72,14 +74,18 @@ Seo = Backbone.Model.extend({
                 }
                 if (meta.levelPath.top) {
                     if (_.isArray(meta.levelPath.top)) {
-                        this.head.set('topTitle', meta.levelPath.top.pop().anchor + this.head.getLocationName(' - '));
+                        title = meta.levelPath.top.pop().anchor;
+                        suffix = this.head.getLocationName(' - ');
+                        if (title.length >= suffix.length && title.slice(title.length - suffix.length) !== suffix) {
+                            title += suffix;
+                        }
+                        this.head.set('topTitle', title);
                     }
                 }
             }
         }
     },
     reset: function (app, page) {
-        console.log('reset');
         app.seo = this;
         this.app = app;
         this.config = _.extend({}, config.getForMarket(app.session.get('location').url, ['seo'], defaultConfig), {

@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
+var Seo = require('../modules/seo');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -15,9 +16,7 @@ module.exports = {
 };
 
 function list(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories', 'topCities']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         var platform = this.app.session.get('platform');
@@ -25,10 +24,10 @@ function list(params, callback) {
         var country = this.app.session.get('location').url;
 
         this.app.seo.setContent(this.dependencies.categories.meta);
-        callback(null, _.extend(this.dependencies.toJSON(), {
+        callback(null, {
             icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
             tracking: tracking.generateURL.call(this)
-        }));
+        });
     }
 }
 
@@ -39,7 +38,6 @@ function showig(params, callback) {
 
 function show(params, callback, gallery) {
     helpers.controllers.control.call(this, params, {
-        dependencies: ['categories'],
         seo: false,
         cache: false
     }, controller);
@@ -108,12 +106,13 @@ function handleItems(params, promise, gallery) {
 
     var configure = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
+        var seo = Seo.instance(this.app);
 
         category = _category;
         subcategory = _subcategory;
 
+        seo.reset(this.app, currentRouter);
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        this.app.seo.reset(this.app, currentRouter);
         done();
     }.bind(this);
 
@@ -239,11 +238,12 @@ function handleShow(params, promise) {
 
     var configure = function(done, _category) {
         var currentRouter = ['categories', 'subcategories'];
+        var seo = Seo.instance(this.app);
 
         category = _category;
 
+        seo.reset(this.app, currentRouter);
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        this.app.seo.reset(this.app, currentRouter);
         done();
     }.bind(this);
 

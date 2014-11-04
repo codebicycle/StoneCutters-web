@@ -3,7 +3,7 @@
         <label><input type="checkbox">Selecciona: Todos | Ninguno</label>
         <button class="delete btn icons icon-trash">Eliminar</button>
     </div>
-    {% if messages.lenght == 0 %}
+    {% if messages.length == 0 %}
         <p class="notification">No tenés mensajes nuevos</p>
     {% else %}
         <ul>
@@ -21,3 +21,5 @@
         <a href="{{ '/myolx/myadslisting' | link }}" class="back">Volver a Mi OLX</a>
     </div>
 </form>
+
+{% view 'partials/tracking' %}

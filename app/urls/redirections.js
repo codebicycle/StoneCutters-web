@@ -81,5 +81,8 @@ module.exports = {
     },
     'redirections#redirecttomain': {
         url: 'redirecttomain'
+    },
+    'redirections#php': {
+        url: ':path.php'
     }
 };

@@ -154,7 +154,6 @@ module.exports = {
         promise.val(callback.bind(this));
 
         function fail(err) {
-            console.log(err.stack);
             this.app.session.persist({
                 error: err
             });

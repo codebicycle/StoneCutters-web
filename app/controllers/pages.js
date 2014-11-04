@@ -3,7 +3,6 @@
 var middlewares = require('../middlewares');
 var asynquence = require('asynquence');
 var helpers = require('../helpers');
-var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 if (typeof window === 'undefined') {
@@ -18,8 +17,7 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
-    featured_listings: middlewares(featuredListings),
-    php: middlewares(php)
+    featured_listings: middlewares(featuredListings)
 };
 
 function terms(params, callback) {
@@ -90,10 +88,8 @@ function error(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var seo = Seo.instance(this.app);
         var err = this.app.session.get('error');
 
-            console.log(err ? err.stack || err : err);
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
             if (this.app.session.get('path') !== '/500') {
@@ -106,8 +102,8 @@ function error(params, callback) {
         if (err) {
             this.app.session.clear('error');
         }
-        seo.addMetatag('robots', 'noindex, nofollow');
-        seo.addMetatag('googlebot', 'noindex, nofollow');
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {
             error: err,
             tracking: tracking.generateURL.call(this)
@@ -204,9 +200,4 @@ function featuredListings(params, callback) {
 
         });
     }
-}
-
-function php(params, callback) {
-    statsd.increment(['redirections', 'php', this.app.session.get('path')]);
-    helpers.common.redirect.call(this, '/');
 }

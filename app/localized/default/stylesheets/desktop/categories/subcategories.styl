@@ -27,14 +27,16 @@
 	.sub-categories {
 		background: $white;
 		ul-reset();
-
+		h2 {
+			display: inline-block;
+		}
 		li {
 			&:hover {
 				box-shadow(0 0 0 1px $blue inset);
 				a,
 				.count {
-					text-decoration: none;
 					color: $greyStrong;
+					text-decoration: none;
 				}
 			}
 

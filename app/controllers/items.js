@@ -27,9 +27,7 @@ module.exports = {
 };
 
 function show(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         var user = this.app.session.get('user');
@@ -39,6 +37,7 @@ function show(params, callback) {
         var favorite = params.favorite;
         var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
+        var platform = this.app.session.get('platform');
         var anonymousItem;
 
         var prepare = function(done) {
@@ -135,17 +134,27 @@ function show(params, callback) {
             }.bind(this));
         }.bind(this);
 
-        var check = function(done, resItem) {
-            if (!resItem.item) {
+        var check = function(done, response) {
+            if (!response.item) {
                 return done.fail(null, {});
             }
-            var item = resItem.item.toJSON();
-            var slug = helpers.common.slugToUrl(item);
+            var slug = helpers.common.slugToUrl(response.item.toJSON());
             var protocol = this.app.session.get('protocol');
-            var platform = this.app.session.get('platform');
+            var host = this.app.session.get('host');
             var url;
 
-            if (!resItem.item.checkSlug(slug, slugUrl)) {
+            if (platform === 'desktop' && response.item.getLocation().url !== this.app.session.get('siteLocation')) {
+                url = [protocol, '://', host, '/', slug].join('');
+
+                done.abort();
+                return helpers.common.redirect.call(this, url, null, {
+                    pushState: false,
+                    query: {
+                        location: response.item.getLocation().url
+                    }
+                });
+            }
+            if (!response.item.checkSlug(slug, slugUrl)) {
                 slug = ('/' + slug);
                 if (favorite) {
                     slug = helpers.common.params(slug, 'favorite', favorite);
@@ -153,22 +162,21 @@ function show(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, slug);
             }
-            if (item.location.url !== this.app.session.get('location').url) {
-                url = [protocol, '://', platform, '.', item.location.url.replace('www.', 'm.'), '/', slug].join('');
+            if (response.item.get('location').url !== this.app.session.get('location').url) {
+                url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
                     query: {
-                        location: resItem.item.getLocation().url
+                        location: response.item.getLocation().url
                     }
                 });
             }
-
-            done(resItem.item);
+            done(response.item);
         }.bind(this);
 
-        var fetchRelateds = function(done, _item) {
+        var fetchRelateds = function(done, item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -181,33 +189,29 @@ function show(params, callback) {
                 }
             }, {
                 readFromCache: false
-            }, function afterFetch(err, res) {
+            }, function afterFetch(err, response) {
                 if (err) {
                     err = null;
-                    res = {
+                    response = {
                         relatedItems: []
                     };
                 }
                 else {
-                    res.relatedItems = res.relatedItems.toJSON();
+                    response.relatedItems = response.relatedItems.toJSON();
                 }
-                done(_item, res.relatedItems);
+                done(item, response.relatedItems);
             }.bind(this));
         }.bind(this);
 
-        var success = function(_item, _relatedItems) {
+        var success = function(_item, relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var view = 'items/show';
             var category;
             var url;
-            var title;
-            var description;
 
-            this.app.seo.setContent(item.metadata);
             if (!subcategory) {
-                _item.set('purged', true);
-                item = _item.toJSON();
+                item.purged = true;
             }
             else {
                 category = subcategory;
@@ -218,26 +222,21 @@ function show(params, callback) {
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category);
-            tracking.addParam('subcategory', subcategory);
             if (!item.purged) {
-                title = item.title;
-                if (item.metadata && item.metadata.itemPage) {
-                    title = item.metadata.itemPage.title;
-                    description = item.metadata.itemPage.description;
-                }
-                this.app.seo.addMetatag('title', title);
-                this.app.seo.addMetatag('description', description);
+                this.app.seo.addMetatag('title', item.title);
             }
             else {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
-            if (siteLocation && !~siteLocation.indexOf('www.')) {
+            this.app.seo.setContent(item.metadata);
+            if (platform !== 'desktop' && siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
             }
+            tracking.addParam('item', item);
+            tracking.addParam('category', category);
+            tracking.addParam('subcategory', subcategory);
             this.app.session.update({
                 postingLink: {
                     category: (category ? category.id : undefined),
@@ -256,7 +255,7 @@ function show(params, callback) {
                 item: item,
                 pos: Number(params.pos) || 0,
                 sk: securityKey,
-                relatedItems: _relatedItems || [],
+                relatedItems: relatedItems || [],
                 relatedAdsLink: (subcategory ? ['/', helpers.common.slugToUrl(subcategory), '?relatedAds=', itemId].join('') : undefined),
                 subcategory: subcategory,
                 category: category,
@@ -267,6 +266,7 @@ function show(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
+            console.log(err.stack);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
@@ -474,7 +474,7 @@ function reply(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
 
@@ -542,7 +542,7 @@ function reply(params, callback) {
 
             callback(null, {
                 item: item,
-                form: form,
+                form: this.form,
                 tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
@@ -796,9 +796,7 @@ function search(params, callback, gallery) {
 }
 
 function staticSearch(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         var page = params ? params.page : undefined;
@@ -957,9 +955,7 @@ function allresultsig(params, callback) {
 }
 
 function allresults(params, callback, gallery) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         var page = params ? params.page : undefined;
