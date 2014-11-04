@@ -6,13 +6,13 @@
                     <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
                 {% endif %}
             </figure><!--
-            --><p class="items-info">
-                {{ item.title }}<br>
+            --><div class="items-info">
+                <h3>{{ item.title }}</h3><br>
                 {% if isStaticSearch %}
                     <b>{{ item.description | truncate( 200, True, '...') }}</b><br>
                 {% endif %}
                 <span>{{ dictionary["itemslisting.NavigatorByCategory"] }}  | {{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
-            </p><!--
+            </div><!--
             --><p class="items-price">
                 {{ item.price.displayPrice }}
             </p><!--

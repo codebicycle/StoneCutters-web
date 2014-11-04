@@ -1,9 +1,13 @@
 <section id="contact-form">
     <div class="user-info">
-        <p class="icons icon-user user-name">{{ item.contactName }}</p>
-        <span class="user-status">User Status</span>
+        {% if item.contactName %}
+            <p class="icons icon-user user-name">{{ item.contactName }}</p>
+        {% endif %}
+        {#<span class="user-status">User Status</span>#}
+        {% if item.phone %}
         <p class="icons icon-phone user-phone">{{ item.phone }}</p>
-        <span>{{ dictionary["item.WhenYouCallMentionOLX"] }}</span>
+            <span>{{ dictionary["item.WhenYouCallMentionOLX"] }}</span>
+        {% endif %}
     </div>
 
     <form id="replyForm" action="">

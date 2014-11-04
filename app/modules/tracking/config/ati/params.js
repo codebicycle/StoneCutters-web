@@ -308,6 +308,34 @@ module.exports = {
             category: 'account'
         }
     },
+    'users#myads': {
+        process: false,
+        names: {
+            page_name: 'my_account',
+            category: 'account'
+        }
+    },
+    'users#favorites': {
+        process: false,
+        names: {
+            page_name: 'my_account',
+            category: 'account'
+        }
+    },
+    'users#messages': {
+        process: false,
+        names: {
+            page_name: 'myolx/myolxmessages',
+            category: 'static_pages'
+        }
+    },
+    'users#lostpassword': {
+        process: false,
+        names: {
+            page_name: 'lostpassword',
+            category: 'static_pages'
+        }
+    },
     'pages#terms': {
         process: false,
         names: {
