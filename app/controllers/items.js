@@ -266,7 +266,6 @@ function show(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            console.log(err.stack);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
@@ -280,9 +279,7 @@ function show(params, callback) {
 }
 
 function gallery(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         var user = this.app.session.get('user');
