@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var helpers = require('../helpers');
-var Seo = require('../modules/seo');
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
@@ -81,15 +80,13 @@ module.exports = {
         helpers.common.redirect.call(this, '/posting/' + params.categoryId);
     },
     post: function(params, callback) {
-        var seo = Seo.instance(this.app);
-
         this.app.fetch({
             categories: {
                 collection: 'Categories',
                 params: {
                     location: this.app.session.get('siteLocation'),
                     languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                    seo: seo.isEnabled()
+                    seo: this.app.seo.isEnabled()
                 }
             }
         }, function afterFetch(err, result) {

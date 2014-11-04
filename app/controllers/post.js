@@ -4,7 +4,6 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
@@ -25,7 +24,6 @@ function flow(params, callback) {
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
         var platform = this.app.session.get('platform');
         var isDesktop = platform === 'desktop';
-        var seo = Seo.instance(this.app);
 
         var prepare = function(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
@@ -49,8 +47,8 @@ function flow(params, callback) {
         }.bind(this);
 
         var success = function(res) {
-            seo.addMetatag('robots', 'noindex, nofollow');
-            seo.addMetatag('googlebot', 'noindex, nofollow');
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
                 postingFlowController(res.postingSession);
             }
@@ -102,7 +100,6 @@ function subcategories(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -124,8 +121,8 @@ function subcategories(params, callback) {
         if (!category) {
             return helpers.common.redirect.call(this, '/posting');
         }
-        seo.addMetatag('robots', 'noindex, nofollow');
-        seo.addMetatag('googlebot', 'noindex, nofollow');
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, _.extend(params, {
             category: category.toJSON(),
             subcategories: category.get('children').toJSON(),
@@ -140,7 +137,6 @@ function form(params, callback) {
     }, controller);
 
     function controller() {
-        var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -214,8 +210,8 @@ function form(params, callback) {
 
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
-            seo.addMetatag('robots', 'noindex, nofollow');
-            seo.addMetatag('googlebot', 'noindex, nofollow');
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, {
                 postingSession: _postingSession.get('postingSession'),
                 intent: 'create',
@@ -245,7 +241,6 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var itemId = params.itemId;
@@ -281,7 +276,7 @@ function success(params, callback) {
                     params: {
                         location: siteLocation,
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        seo: seo.isEnabled()
+                        seo: this.app.seo.isEnabled()
                     }
                 }
             }, done.errfcb);
@@ -333,7 +328,6 @@ function success(params, callback) {
         }.bind(this);
 
         var success = function(_categories, _item, _relatedItems) {
-            var seo = Seo.instance(this.app);
             var item = _item.toJSON();
             var subcategory = _categories.search(item.category.id);
             var category;
@@ -348,8 +342,8 @@ function success(params, callback) {
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
-            seo.addMetatag('robots', 'noindex, nofollow');
-            seo.addMetatag('googlebot', 'noindex, nofollow');
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, {
                 user: user,
                 item: item,
@@ -380,7 +374,6 @@ function edit(params, callback) {
     }, controller);
 
     function controller() {
-        var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var siteLocation;
@@ -418,7 +411,7 @@ function edit(params, callback) {
                     params: {
                         location: siteLocation,
                         languageId: languageId,
-                        seo: seo.isEnabled()
+                        seo: this.app.seo.isEnabled()
                     }
                 }
             }, done.errfcb);
