@@ -90,45 +90,46 @@
             padding: 19px 0 18px 20px;
         }
 
-        .icon-arrow-right:before {
-            color: $greyStrong;
-            font-size: remify(8px);
-            margin-right: 10px;
-        }
 
         .question {
             border-bottom: 1px dotted $greyBorders;
             &:last-child {
                 border-bottom: none;
             }
-            &hover .icon-arrow-right::before {
-                color: $black;
-            }
 
-            h4 {
+            .icon-arrow-down,
+            .icon-arrow-right {
                 cursor: pointer;
                 font-weight: normal;
                 margin: 0;
                 padding: 15px;
+                &::before {
+                    color: $greyStrong;
+                    font-size: remify(8px);
+                    margin-right: 10px;
+                }
+                &:hover::before {
+                    color: $black;
+                }
             }
         }
 
         .faq-open {
             background: $greyBoxBg;
-            h4 {
+            .icon-arrow-down{
                 font-weight: bold;
-            }
-            .icon-arrow-down::before {
-                color: $black;
-                font-size: remify(8px);
-                margin-right: 10px;
+                &::before {
+                    color: $black;
+                    font-size: remify(8px);
+                    margin-right: 10px;
+                }
             }
         }
 
         .question-content {
             display: none;
             line-height: 1.5;
-            padding: 0 20px 15px 20px;
+            padding: 0 20px 15px 33px;
 
             p {
                 margin: 0;
