@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var Seo = require('../modules/seo');
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
     var statsd = require(statsdModule)();
@@ -195,7 +194,6 @@ module.exports = (function() {
     }
 
     function error(err, res, status, callback) {
-        var seo = Seo.instance(this.app);
         if (_.isFunction(status)) {
             callback = status;
             status = 404;
@@ -204,8 +202,9 @@ module.exports = (function() {
             this.app.req.res.status(status);
             statsd.increment([this.app.session.get('location').name, 'errors', 400]);
         }
-        seo.addMetatag('robots', 'noindex, nofollow');
-        seo.addMetatag('googlebot', 'noindex, nofollow');
+        this.app.seo.reset(this.app, ['pages', 'error']);
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         return callback(null, 'pages/error', res || {});
     }
 
