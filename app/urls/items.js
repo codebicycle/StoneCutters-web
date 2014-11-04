@@ -55,22 +55,22 @@ module.exports = {
     },
     'items#searchfilterig': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?',
-            'nf/:title-cat-:catId([0-9]+)-ig/?:search?',
-            'nf/-cat-:catId([0-9]+)-ig/?:search?',
-            'nf/cat-:catId([0-9]+)-ig/?:search?'
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/:title-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-ig/?:search?/?:filters?'
         ]
     },
     'items#searchfilter': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?',
-            'nf/:title-cat-:catId([0-9]+)/?:search?',
-            'nf/-cat-:catId([0-9]+)/?:search?',
-            'nf/cat-:catId([0-9]+)/?:search?'
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/:title-cat-:catId([0-9]+)/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)/?:search?/?:filters?'
         ]
     },
     'items#delete': {

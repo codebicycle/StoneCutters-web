@@ -61,25 +61,27 @@
             font-size: $l;
             width: 100%;
         }
-        p.replySuccses {
-            box(#ef8, #ef8, 3px, 5px, solid, 0);
-            color: #000;
+        p.replySuccess {
+            box(#ef8, #ef8, 3px, 10px 5px 10px 40px, solid, 0);
+            color: $black;
             font-size: $s;
-            height: 40px;
             position: relative;
 
             &:before {
-                color: $green;
-                content: '"';
-                font-size: $xxl;
+                background: $green;
+                border-radius: 50%;
+                color: $yellow;
+                font-size: $xs;
+                left: 5px;
+                padding: 5px;
+                position: absolute;
+                top: 7px;
             }
 
             span {
-                color: #38b;
+                color: $blue;
                 cursor: pointer;
-                left: 41px;
-                position: absolute;
-                top: 27px;
+                display: block;
                 &:hover {
                     text-decoration: underline;
                 }

@@ -6,6 +6,7 @@ var querystring = require('querystring');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
 var tracking = require('../../../../../modules/tracking');
+var Paginator = require('../../../../../modules/paginator');
 var Seo = require('../../../../../modules/seo');
 
 module.exports = Base.extend({
@@ -139,7 +140,7 @@ module.exports = Base.extend({
             params.page = preparePageParam(urlFull);
             params.search = prepareSearchParam(urlFull);
 
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             params.seo = seo.isEnabled();
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
             delete params.search;
@@ -167,15 +168,15 @@ module.exports = Base.extend({
                 loader.hide();
                 return done.abort();
             }
-            done(res.items.toJSON(), res.items.metadata);
+            done(res.items.toJSON(), res.items.meta);
         }
 
-        function track(done, _items, metadata) {
+        function track(done, _items, meta) {
             var $view = $('#partials-tracking-view');
 
             tracking.reset();
             tracking.addParam('keyword', search);
-            tracking.addParam('page_nb', Math.floor(metadata.total / max) + ((metadata.total % max) === 0 ? 0 : 1));
+            tracking.addParam('page_nb', Math.floor(meta.total / max) + ((meta.total % max) === 0 ? 0 : 1));
 
             $view.trigger('update', tracking.generateURL.call(this));
 

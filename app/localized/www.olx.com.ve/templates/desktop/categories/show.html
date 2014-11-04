@@ -4,21 +4,21 @@
 			<a href="{{ '' | link }}">Inicio</a>
 			<span class="arrow"></span>
 			{% if not currentCategory.parentId %}
-					{{ category.trName }}<span class="arrow"></span> {{ metadata.total | countFormat }} Resultados para <strong>"{{ category.trName }}"</strong> 
+					{{ category.trName }}<span class="arrow"></span> {{ meta.total | countFormat }} Resultados para <strong>"{{ category.trName }}"</strong>
 			{% else %}
-				<a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> {{ currentCategory.trName }} <span class="arrow"></span> {{ metadata.total | countFormat }} Resultados para <strong>"{{ currentCategory.trName }}"</strong> 
+				<a href="{{ category | slugToUrl | link }}">{{ category.trName }}</a> <span class="arrow"></span> {{ currentCategory.trName }} <span class="arrow"></span> {{ meta.total | countFormat }} Resultados para <strong>"{{ currentCategory.trName }}"</strong>
 			{% endif %}
 			en {{ location.current.name if location.current and location.current.type != 'country' else location.name }}
 
-			{% if metadata.next or metadata.previous %}
+			{% if meta.next or meta.previous %}
 				<div class="itemPagination">
-	            	<p>Página <strong>{{ metadata.page }}</strong> de <strong>{{ metadata.totalPages | countFormat }}</strong></p>
-	            	{% if not metadata.previous %}
-	            		<a href="{{ metadata.next | link }}" class="icons right"></a>
-	            	{% elif not metadata.next %}
-	            		<a href="{{ metadata.previous | link }}" class="icons left"></a>
+	            	<p>Página <strong>{{ meta.page }}</strong> de <strong>{{ meta.totalPages | countFormat }}</strong></p>
+	            	{% if not meta.previous %}
+	            		<a href="{{ meta.next | link }}" class="icons right"></a>
+	            	{% elif not meta.next %}
+	            		<a href="{{ meta.previous | link }}" class="icons left"></a>
 	            	{% else %}
-	            		<a href="{{ metadata.previous | link }}" class="icons left"></a> <span>|</span> <a href="{{ metadata.next | link }}" class="icons right"></a>
+	            		<a href="{{ meta.previous | link }}" class="icons left"></a> <span>|</span> <a href="{{ meta.next | link }}" class="icons right"></a>
 	            	{% endif %}
 	            </div>
 	        {% endif %}
@@ -61,16 +61,16 @@
 					</li>
 				{% endfor %}
 			</ul>
-	        {% if metadata.next or metadata.previous %}
+	        {% if meta.next or meta.previous %}
 	            <div class="itemPagination">
-	            	{% if not metadata.previous %}
-	            		<a href="{{ metadata.next | link }}" class="next first">Siguiente página</a>
-	            	{% elif not metadata.next %}
-	            		<a href="{{ metadata.previous | link }}" class="icons prev last">Volver</a>
+	            	{% if not meta.previous %}
+	            		<a href="{{ meta.next | link }}" class="next first">Siguiente página</a>
+	            	{% elif not meta.next %}
+	            		<a href="{{ meta.previous | link }}" class="icons prev last">Volver</a>
 	            	{% else %}
-	            		<a href="{{ metadata.previous | link }}" class="icons prev">Volver</a> <a href="{{ metadata.next | link }}" class="next">Siguiente página</a>
+	            		<a href="{{ meta.previous | link }}" class="icons prev">Volver</a> <a href="{{ meta.next | link }}" class="next">Siguiente página</a>
 	            	{% endif %}
-	               <div class="{{ 'full' if not metadata.previous and metadata.next }}">{{ metadata | pagination }}</div>
+	               <div class="{{ 'full' if not meta.previous and meta.next }}">{{ meta | pagination }}</div>
 	            </div>
 	        {% endif %}
 		</section>

@@ -19,15 +19,15 @@ html {
 	font-size: $baseFont;
 }
 
-input::-webkit-input-placeholder {
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
    color: $greyStrong;
 }
 
-input::-moz-placeholder {
+input::-moz-placeholder, textarea::-moz-placeholder {
    color: $greyStrong;
 }
 
-input:-ms-input-placeholder {
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
    color: $greyStrong;
 }
 
@@ -58,7 +58,8 @@ main {
     .category {
         float: left;
         li {
-            padding-bottom: 8px;
+            line-height: 1.3rem;
+            padding-bottom: 10px;
         }
     }
     a {
@@ -125,7 +126,7 @@ main {
 
 .posting {
 	border-radius();
-	action-button($orange, #fff, 3px, 15px 30px);
+	action-button($orange, $white, 3px, 15px 30px);
 	font-size: $l;
 	font-weight: bold;
 	line-height: 1;
@@ -143,7 +144,7 @@ main {
 		vertical-align: middle;
 	}
 	.button {
-		action-button($green, #fff, 0 3px 3px 0, 0);
+		action-button($green, $white, 0 3px 3px 0, 0);
 		border: none;
 		font-size: $l;
 		height: 38px;
@@ -173,9 +174,9 @@ main {
 	padding: 0 10px;
     height: 36px;
     &:focus {
-    	border-color: #999;
+    	border-color: $greyStrong;
     	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
-    	color: #000;
+    	color: $black;
     }
 }
 

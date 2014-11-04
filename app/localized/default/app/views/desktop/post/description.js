@@ -9,7 +9,8 @@ module.exports = Base.extend({
     id: 'posting-description-view',
     className: 'posting-description-view',
     events: {
-        'change': 'onChange'
+        'change': 'onChange',
+        'keyup [name=title]': 'characterCount'
     },
     onChange: function(event) {
         event.preventDefault();
@@ -17,6 +18,14 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('fieldSubmit', [$(event.target)]);
+    },
+    characterCount: function (event) {
+        var $input = $(event.currentTarget);
+        var $msg = $input.next('small');
+        var count = $msg.text().split(' ');
+
+        count[0] = $input.val().length;
+        $msg.text(count.join(' '));
     }
 });
 

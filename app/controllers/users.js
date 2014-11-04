@@ -11,10 +11,13 @@ module.exports = {
     register: middlewares(register),
     success: middlewares(success),
     login: middlewares(login),
+    lostpassword: middlewares(lostpassword),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
-    favorites: middlewares(favorites)
+    favorites: middlewares(favorites),
+    messages: middlewares(messages),
+    readmessages: middlewares(readmessages)
 };
 
 function register(params, callback) {
@@ -22,7 +25,7 @@ function register(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -36,7 +39,7 @@ function register(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
         });
@@ -53,11 +56,24 @@ function success(params, callback) {
     }
 }
 
+function lostpassword(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
+
+    function controller() {
+        callback(null, {
+            form: this.form,
+            success: params.success
+        });
+    }
+}
+
 function login(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
     }, controller);
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -71,7 +87,7 @@ function login(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             redirect: params.redirect,
             tracking: tracking.generateURL.call(this)
         });
@@ -147,7 +163,7 @@ function myads(params, callback) {
                 token: user.token,
                 userId: user.userId,
                 location: this.app.session.get('siteLocation'),
-                languageCode: this.app.session.get('selectedLanguage'),
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'myAds'
             }, params);
 
@@ -179,14 +195,14 @@ function myads(params, callback) {
             });
             if (platform === 'desktop') {
                 callback(null,'users/myolx', {
-                    myAdsMetadata: _myAds.metadata,
+                    myAdsMetadata: _myAds.meta,
                     myAds: myAds,
                     deleted: deleted,
                     viewname: 'myads'
                 });
             } else {
                 callback(null, {
-                    myAdsMetadata: _myAds.metadata,
+                    myAdsMetadata: _myAds.meta,
                     myAds: myAds,
                     deleted: deleted
                 });
@@ -208,7 +224,7 @@ function myads(params, callback) {
 function favorites(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    function controller(form) {
+    function controller() {
         var favorite;
         var _params;
         var user;
@@ -266,14 +282,14 @@ function favorites(params, callback) {
 
             if (platform === 'desktop') {
                 callback(null, 'users/myolx', {
-                    favoritesMetadata: _favorites.metadata,
+                    favoritesMetadata: _favorites.meta,
                     favorites: favorites,
                     favorite: favorite,
                     viewname: 'favorites'
                 });
             } else {
                 callback(null, {
-                    favoritesMetadata: _favorites.metadata,
+                    favoritesMetadata: _favorites.meta,
                     favorites: favorites,
                     favorite: favorite
                 });
@@ -288,6 +304,111 @@ function favorites(params, callback) {
             .then(prepare)
             .then(findFavorites)
             .then(check)
+            .val(success);
+    }
+}
+
+function messages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                messages: {
+                    collection: 'Messages',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                messages: response.messages.toJSON()
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
+    }
+}
+
+function readmessages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId,
+                messageId: params.msgId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                message: {
+                    model: 'Message',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                message: response.message.toJSON()
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
             .val(success);
     }
 }

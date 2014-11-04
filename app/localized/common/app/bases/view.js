@@ -35,8 +35,6 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var template = this.app.session.get('template');
         var user = this.app.session.get('user');
-        var categories = this.app.session.get('categories');
-        var countries = this.app.session.get('countries');
 
         return _.extend({}, data, {
             user: user,
@@ -52,8 +50,6 @@ module.exports = Base.extend({
             macros: template + '/partials/macros.html',
             currentRoute: this.app.session.get('currentRoute'),
             interstitial: this.app.session.get('interstitial'),
-            categories: categories.toJSON ? categories.toJSON() : categories,
-            countries: countries.toJSON ? countries.toJSON() : countries,
             os: {
                 name: this.app.session.get('osName').replace(/\s*/g, ''),
                 version: this.app.session.get('osVersion')

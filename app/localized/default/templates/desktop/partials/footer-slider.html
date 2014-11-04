@@ -1,4 +1,6 @@
 <div data-slide-content="true" class="slide-container">
+
+    {% if inHome == false %}
     <div class="category-slide footer-slide hide">
         <a title="close" data-footer-slideDown="category-slide" class="icons icon-close" href="#"></a>
         <h3 class="title">Categorías populares</h3>
@@ -149,14 +151,16 @@
             </li>
         </ul>
     </div>
+    {% endif %}
+
     <div class="help-slide footer-slide hide">
         <a title="close" data-footer-slideDown="help-slide" class="icons icon-close" href="#"></a>
         <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
         <ul>
-            <li><a href="/help">{{ dictionary["biderrorheader.Help"] }}</a></li>
-            <li><a href="/terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
-            <li><a href="#">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
-            {#<li><a href="#">{{ dictionary["contact_us.ContactBrand"] }} </a></li>#}
+            <li><a rel="nofollow" href="/help">{{ dictionary["biderrorheader.Help"] }}</a></li>
+            <li><a rel="nofollow" href="/terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
+            <li><a rel="nofollow" href="#">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
+            {#<li><a rel="nofollow" href="#">{{ dictionary["contact_us.ContactBrand"] }} </a></li>#}
         </ul>
     </div>
     <div class="popular-slide footer-slide hide">
@@ -265,7 +269,7 @@
         <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
         <ul>
             {% for country in countries %}
-                <li><a href="{{country.url}}" title="{{country.name}}">{{country.name}}</a></li>
+                <li><a href="{{('http://' + country.url) | link }}" title="{{country.name}}">{{country.name}}</a></li>
             {% if loop.index%13 == 0 %}
                 </ul>
                 <ul>

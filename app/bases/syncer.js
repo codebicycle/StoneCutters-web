@@ -1,6 +1,5 @@
 'use strict';
 
-var isServer = typeof window === 'undefined';
 var _ = require('underscore');
 var methodMap = {
     'create': 'POST',
@@ -55,7 +54,7 @@ function serverSync(method, model, options) {
 module.exports = {
     serverSync: serverSync,
     sync: function(method, model, options) {
-        var syncMethod = isServer ? serverSync : this.clientSync;
+        var syncMethod = typeof window === 'undefined' ? serverSync : this.clientSync;
 
         if (options) {
             options.data = _.defaults(options.data || {}, {
