@@ -114,11 +114,10 @@ function processForm(params, done) {
 }
 
 module.exports = {
-    control: function(params, options, controller, callback) {
+    control: function(params, options, controller) {
         var promise;
 
         if (_.isFunction(options)) {
-            callback = controller;
             controller = options;
             options = {};
         }
@@ -140,7 +139,7 @@ module.exports = {
         if (options.isForm) {
             promise.then(processForm.bind(this, params));
         }
-        promise.val(controller.bind(this, callback.bind(this)));
+        promise.val(controller.bind(this));
 
         function fail(err) {
             this.app.session.persist({

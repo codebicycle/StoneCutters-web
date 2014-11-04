@@ -17,9 +17,9 @@ module.exports = {
 };
 
 function flow(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -99,9 +99,9 @@ function flow(params, callback) {
 }
 
 function subcategories(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
@@ -137,9 +137,9 @@ function subcategories(params, callback) {
 function form(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
-    }, controller, callback);
+    }, controller);
 
-    function controller(callback) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
@@ -242,9 +242,9 @@ function form(params, callback) {
 }
 
 function success(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;
@@ -377,9 +377,9 @@ function success(params, callback) {
 function edit(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
-    }, controller, callback);
+    }, controller);
 
-    function controller(callback) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;

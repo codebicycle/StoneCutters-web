@@ -22,9 +22,9 @@ module.exports = {
 };
 
 function terms(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         callback(null, {
             tracking: tracking.generateURL.call(this)
         });
@@ -32,9 +32,9 @@ function terms(params, callback) {
 }
 
 function help(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         // Delete this callback
         callback(null, {
             tracking: tracking.generateURL.call(this)
@@ -63,9 +63,9 @@ function help(params, callback) {
 }
 
 function interstitial(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         if (params.downloadApp) {
             this.app.session.persist({
                 downloadApp: '1'
@@ -86,9 +86,9 @@ function interstitial(params, callback) {
 }
 
 function error(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var err = this.app.session.get('error');
         if (this.app.session.get('isServer')) {
@@ -113,9 +113,9 @@ function error(params, callback) {
 }
 
 function allstates(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         var siteLocation = this.app.session.get('siteLocation');
 
         var decide = function(done) {
@@ -184,9 +184,9 @@ function allstates(params, callback) {
 }
 
 function sitemap(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         callback(null, {
             tracking: tracking.generateURL.call(this)
         });
@@ -194,9 +194,9 @@ function sitemap(params, callback) {
 }
 
 function featuredListings(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         callback(null, {
 
         });

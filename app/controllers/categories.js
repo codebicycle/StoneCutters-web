@@ -16,9 +16,9 @@ module.exports = {
 };
 
 function list(params, callback) {
-    helpers.controllers.control.call(this, params, controller, callback);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(callback) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var icons = config.get(['icons', platform], []);
         var country = this.app.session.get('location').url;
@@ -44,9 +44,9 @@ function show(params, callback, gallery) {
     helpers.controllers.control.call(this, params, {
         seo: false,
         cache: false
-    }, controller, callback);
+    }, controller);
 
-    function controller(callback) {
+    function controller() {
         var seo = Seo.instance(this.app);
 
         var redirect = function(done){
