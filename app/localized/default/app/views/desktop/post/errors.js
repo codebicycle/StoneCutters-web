@@ -17,8 +17,7 @@ module.exports = Base.extend({
         });
     },
     events: {
-        'show': 'onShow',
-        'hide': 'onHide'
+        'show': 'onShow'
     },
     onShow: function(event) {
         event.preventDefault();
@@ -26,9 +25,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.render();
-    },
-    onHide: function(event) {
-
     }
 });
 
