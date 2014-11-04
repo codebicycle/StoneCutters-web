@@ -17,11 +17,9 @@ module.exports = {
 };
 
 function flow(params, callback) {
-    helpers.controllers.control.call(this, params, {
-        dependencies: ['categories', 'topCities', 'states']
-    }, controller);
+    helpers.controllers.control.call(this, params, controller);
 
-    function controller(form) {
+    function controller() {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -66,24 +64,24 @@ function flow(params, callback) {
 
         var postingController = function(postingSession) {
             tracking.setPage('desktop_step1');
-            callback(null, 'post/index', _.extend(this.dependencies, {
+            callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
                 tracking: tracking.generateURL.call(this)
-            }));
+            }, false);
         }.bind(this);
 
         var postingFlowController = function(postingSession) {
-            callback(null, 'post/flow/index', _.extend(this.dependencies, {
+            callback(null, 'post/flow/index', {
                 postingSession: postingSession.get('postingSession'),
                 tracking: tracking.generateURL.call(this)
-            }));
+            }, false);
         }.bind(this);
 
         var postingCategoriesController = function() {
             tracking.setPage('categories');
-            callback(null, 'post/categories', _.extend(this.dependencies.toJSON(), {
+            callback(null, 'post/categories', {
                 tracking: tracking.generateURL.call(this)
-            }));
+            });
         }.bind(this);
 
         var error = function(err) {
@@ -108,61 +106,31 @@ function subcategories(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
+        var redirect;
 
-        var prepare = function(done) {
-            var redirect;
+        if (isPostingFlow) {
+            redirect = '/posting';
+        }
+        else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+            redirect = '/location?target=posting';
+        }
+        if (redirect) {
+            return helpers.common.redirect.call(this, redirect, null, {
+                status: 302
+            });
+        }
+        var category = this.dependencies.categories.get(params.categoryId);
 
-            if (isPostingFlow) {
-                redirect = '/posting';
-            }
-            else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-                redirect = '/location?target=posting';
-            }
-            if (redirect) {
-                done.abort();
-                return helpers.common.redirect.call(this, redirect, null, {
-                    status: 302
-                });
-            }
-            done();
-        }.bind(this);
-
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        seo: seo.isEnabled()
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(response) {
-            var category = response.categories.get(params.categoryId);
-
-            if (!category) {
-                return helpers.common.redirect.call(this, '/posting');
-            }
-            seo.addMetatag('robots', 'noindex, nofollow');
-            seo.addMetatag('googlebot', 'noindex, nofollow');
-            callback(null, _.extend(params, {
-                category: category.toJSON(),
-                subcategories: category.get('children').toJSON(),
-                tracking: tracking.generateURL.call(this)
-            }));
-        }.bind(this);
-
-        var error = function(err) {
-            helpers.common.error.call(this, err, null, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(fetch)
-            .val(success);
+        if (!category) {
+            return helpers.common.redirect.call(this, '/posting');
+        }
+        seo.addMetatag('robots', 'noindex, nofollow');
+        seo.addMetatag('googlebot', 'noindex, nofollow');
+        callback(null, _.extend(params, {
+            category: category.toJSON(),
+            subcategories: category.get('children').toJSON(),
+            tracking: tracking.generateURL.call(this)
+        }));
     }
 }
 
@@ -171,7 +139,7 @@ function form(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
@@ -201,32 +169,12 @@ function form(params, callback) {
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: languageId,
-                        seo: seo.isEnabled()
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var findPostingSession = function(done) {
+        var fetch = function(done) {
             this.app.fetch({
                 postingSession: {
                     model: 'PostingSession',
                     params: {}
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var findFields = function(done) {
-            this.app.fetch({
+                },
                 fields: {
                     model: 'Field',
                     params: {
@@ -236,15 +184,16 @@ function form(params, callback) {
                         languageId: languageId
                     }
                 }
+            }, {
+                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
-        var checkFields = function(done, resCategories, resPostingSession, resFields) {
-            if (!resCategories.categories || !resPostingSession.postingSession || !resFields.fields) {
-                done.abort();
+        var check = function(done, response) {
+            if (!response.postingSession || !response.fields) {
                 return done.fail(null, {});
             }
-            var category = resCategories.categories.get(params.categoryId);
+            var category = this.dependencies.categories.get(params.categoryId);
             var subcategory;
 
             if (!category) {
@@ -256,11 +205,11 @@ function form(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
             }
-            done(resCategories.categories, resPostingSession.postingSession, resFields.fields);
+            done(response.postingSession, response.fields);
         }.bind(this);
 
-        var success = function(_categories, _postingSession, _field) {
-            var category = _categories.get(params.categoryId);
+        var success = function(_postingSession, _field) {
+            var category = this.dependencies.categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
             tracking.addParam('category', category.toJSON());
@@ -286,8 +235,8 @@ function form(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findPostingSession, findFields)
-            .then(checkFields)
+            .then(fetch)
+            .then(check)
             .val(success);
     }
 }
@@ -430,7 +379,7 @@ function edit(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var user = this.app.session.get('user');
         var securityKey = params.sk;

@@ -25,7 +25,7 @@ function register(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -39,7 +39,7 @@ function register(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
         });
@@ -61,9 +61,9 @@ function lostpassword(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         callback(null, {
-            form: form,
+            form: this.form,
             success: params.success
         });
     }
@@ -73,7 +73,7 @@ function login(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
     }, controller);
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -87,7 +87,7 @@ function login(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             redirect: params.redirect,
             tracking: tracking.generateURL.call(this)
         });
@@ -224,7 +224,7 @@ function myads(params, callback) {
 function favorites(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    function controller(form) {
+    function controller() {
         var favorite;
         var _params;
         var user;
