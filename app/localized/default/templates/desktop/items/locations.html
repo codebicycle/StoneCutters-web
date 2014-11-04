@@ -1,17 +1,26 @@
-<nav class="items-locations">
+    <nav class="items-locations">
     <ul class="locations-tabs {{ 'locations-empty' if not (filters.has('city') or filters.has('state')) }}" >
-        <li><a href="{{ nav.link | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a></li>
+        <li>
+        {{ location | log }}
+        {% if location.children | length == 0 %}
+            {{ location.name }}
+        {% else %}
+            <a href="{{ nav.link | link({location: location.url}) }}" rel="nofollow">{{ location.name }}</a>
+        {% endif %}
+        </li>
         {% if location.children | length == 1 %}
             <li>
-                <a href="{{ nav.link | link({location: location.children[0].url}) }}" rel="nofollow">{{ location.children[0].name }}</a>
                 {% if location.children[0].children | length == 0 %}
-                    <a href="{{ nav.link | link({location: location.url}) }}" class="icons icon-close state"></a>
+                    {{ location.children[0].name }}
+                    <a href="{{ nav.link | link({location: location.url}) }}" class="icons icon-close state" rel="nofollow"></a>
+                {% else %}
+                    <a href="{{ nav.link | link({location: location.children[0].url}) }}" rel="nofollow">{{ location.children[0].name }}</a>
                 {% endif %}
             </li>
             {% if location.children[0].children | length == 1 %}
                 <li>
                     {{ location.children[0].children[0].name }}
-                    <a href="{{ nav.link | link({location: location.children[0].url}) }}" class="icons icon-close city"></a>
+                    <a href="{{ nav.link | link({location: location.children[0].url}) }}" class="icons icon-close city" rel="nofollow"></a>
                 </li>
             {% endif %}
         {% endif %}
@@ -20,7 +29,7 @@
             {% if filter.name == 'state' or filter.name == 'city' %}
                 <ul class="locations-list">
                     {% for value in filter.value %}
-                        <li><a href="{{ nav.link | linkig({location: value.id}) }}">{{ value.value }} <span>{{ value.count | countFormat }}</span></a></li>
+                        <li><a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a></li>
                     {% endfor %}
                     {# {% for neighborhood in filters.get('neighborhood').get('value') %}
                         <li>
