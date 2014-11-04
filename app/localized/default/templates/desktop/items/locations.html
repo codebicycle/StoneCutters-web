@@ -11,7 +11,7 @@
             {% if location.children[0].children | length == 1 %}
                 <li>
                     {{ location.children[0].children[0].name }}
-                    <a href="{{ nav.link | link({location: location.children[0].url}) }}" class="icons icon-close state"></a>
+                    <a href="{{ nav.link | link({location: location.children[0].url}) }}" class="icons icon-close city"></a>
                 </li>
             {% endif %}
         {% endif %}
