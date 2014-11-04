@@ -55,12 +55,17 @@
                 &::before {
                     background: $greyBorders;
                     circle(15px);
-                    color: $yellow;
                     line-height: 15px;
                     text-align: center;
                 }
                 &:hover::before {
                     background: $greyStrong;
+                }
+                &.city {
+                    color: $white;
+                }
+                &.state {
+                    color: $yellow;
                 }
             }
         }
