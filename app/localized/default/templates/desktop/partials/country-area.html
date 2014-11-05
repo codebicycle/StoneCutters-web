@@ -1,0 +1,32 @@
+<div class="country-area">
+    <a class="open-modal" data-modal="location-modal" rel="nofollow" href="#">
+        <img src="{{ '/images/desktop/bolivia_map.gif' | static }}" alt="Mapa de Bolivia" />
+    </a>
+    <div class="content-description">
+        <h2 class="title">{{ dictionary["misc.FindAdsCity"] }}</h2>
+        <p class="cities-title icons icon-pin">{{ dictionary["misc.FindAdsCity"] }}</p>
+        <ul class="list-cities">
+            <li>
+                <a title="La Paz" href="{{ '/nf/all-results' | link({location: 'lapaz.olx.com.bo'}) }}">La Paz</a>
+            </li>
+            <li>
+                <a title="Cochabamba" href="{{ '/nf/all-results' | link({location: 'cochabamba.olx.com.bo'}) }}">Cochabamba</a>
+            </li>
+            <li>
+                <a title="Santa Cruz" href="{{ '/nf/all-results' | link({location: 'santacruz.olx.com.bo'}) }}">Santa Cruz</a>
+            </li>
+            <li>
+                <a title="Andrés Ibánez" href="{{ '/nf/all-results' | link({location: 'andresibanez.olx.com.bo'}) }}">Andrés Ibánez</a>
+            </li>
+            <li>
+                <a title="Pedro Domingo Murillo" href="{{ '/nf/all-results' | link({location: 'pedrodomingomurillo.olx.com.bo'}) }}">Pedro Domingo Murillo</a>
+            </li>
+            <li>
+                <a title="Cercado" href="{{ '/nf/all-results' | link({location: 'cercado.olx.com.bo'}) }}">Cercado</a>
+            </li>
+            <li>
+                <a class="open-modal" title="Otros lugares" data-modal="location-modal" href="{{ '/nf/all-results' | link({location: 'www.olx.com.bo'}) }}">Otros lugares</a>
+            </li>
+        </ul>
+    </div>
+</div>

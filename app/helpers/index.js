@@ -5,8 +5,6 @@ module.exports = {
     marketing: require('./marketing'),
     common: require('./common'),
     breadcrumb: require('./breadcrumb'),
-    pagination: require('./pagination'),
-    filters: require('./filters'),
     dataAdapter: require('./dataAdapter'),
     features: require('./features'),
     timeAgo: function(itemDate) {

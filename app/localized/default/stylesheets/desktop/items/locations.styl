@@ -1,0 +1,83 @@
+.items-locations {
+    margin-bottom: 15px;
+
+    ul {
+        ul-reset();
+    }
+    .locations-tabs {
+        font-size: $s;
+        height: 37px;
+        li {
+            display: inline-block;
+            position: relative;
+            vertical-align: top;
+            a.icon-close {
+                font-size: remify(8px);
+                position: absolute;
+                right: 7px;
+                top: 6px;
+                &.state {
+                    color: $yellow;
+                }
+                &::before {
+                    background: $greyStrong;
+                    circle(15px);
+                    line-height: 15px;
+                    text-align: center;
+                }
+                &:hover::before {
+                    background: $black;
+                }
+                &.city {
+                    color: $white;
+                }
+                &.state {
+                    color: $yellow;
+                }
+            }
+        }
+        li:not(:last-child) {
+            border-bottom: none;
+            box($white, $greyBorders, 0, 10px 10px 10px 28px);
+            tab-arrow(right, $white, $greyBorders, 1px, 18px, 10);
+        }
+        li:first-child {
+            box($white, $greyBorders, 3px 0 0 0, 10px);
+            border-bottom: none;
+        }
+        li:last-child {
+            box($yellow, $yellowBorders, 0 3px 0 0, 10px 30px 11px 28px, solid, 1px);
+            border-bottom: $yellow;
+        }
+        li:only-child {
+            box($yellow, $yellowBorders, 3px 3px 0 0, 10px 10px 11px 10px);
+            border-bottom: $yellow;
+        }
+        &.locations-empty {
+            li{
+                background: $white;
+                border: 1px solid $greyBorders;
+                .icon-close {
+                    color: $white;
+                }
+                &:last-child {
+                    padding-bottom: 10px;
+                }
+            }
+        }
+    }
+    .locations-list {
+        box($yellow, $yellowBorders, 0 3px 3px 3px, 10px);
+
+        li {
+            display: inline-block;
+            font-size: $xs;
+            margin: 1px 0;
+            vertical-align: top;
+            width: 24%;
+            span {
+                color: $greyStrong;
+            }
+        }
+    }
+}

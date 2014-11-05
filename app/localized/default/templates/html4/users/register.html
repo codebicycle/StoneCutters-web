@@ -36,7 +36,7 @@
     <div class="formField">
         <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
     </div>
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

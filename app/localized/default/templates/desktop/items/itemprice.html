@@ -1,0 +1,10 @@
+{% if item.price or item.priceTypeData %}
+    <div id="item-price" class="item-price">
+        {% if item.price.displayPrice %}
+            <p class="price">{{ item.price.displayPrice }}</p>
+        {% endif %}
+        {% if item.priceTypeData and not(item.priceTypeData.type == 'FIXED') %}
+            <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
+        {% endif %}
+    </div>
+{% endif %}

@@ -1,0 +1,50 @@
+.country-area {
+    clear-fix();
+    box();
+    background: $white;
+    background: -moz-linear-gradient(top,  $white 28%, $greyPageBg 28%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(28%,$white), color-stop(28%,$greyPageBg));
+    background: -webkit-linear-gradient(top,  $white 28%,$greyPageBg 28%);
+    background: -ms-linear-gradient(top,  $white 28%,$greyPageBg 28%);
+    background: linear-gradient(to bottom,  $white 28%,$greyPageBg 28%);
+    float: left;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    width: 578px;
+    img {
+        margin:10px 0 0 10px;
+    }
+
+    .content-description {
+        float: right;
+        width: 286px;
+
+        .title {
+            color: $green;
+            font-size: $xl;
+            font-weight: bold;
+            margin: 10px 0 0;
+            width: 270px;
+        }
+        .cities-title {
+            color: $greyStrong;
+            font-size: $l;
+            margin: 47px 0 10px;
+            padding-left: 25px;
+            &::before {
+                font-size: $m;
+                margin-left: -22px;
+                padding-right: 5px;
+                vertical-align: inherit;
+            }
+        }
+        .list-cities {
+            ul-reset();
+            padding-left: 25px;
+        }
+        li {
+            line-height: 1.3;
+            padding-bottom: 10px;
+        }
+    }
+}

@@ -1,0 +1,71 @@
+.users_readmessages_view {
+    box($white, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+
+    .title {
+        font-size: $l;
+        font-weight: normal;
+    }
+
+    .back {
+        padding-bottom: 10px;
+        &::before {
+            margin: -2px 5px 0 0;
+        }
+    }
+
+    .data {
+        border-bottom: 1px solid $greyBorders;
+        padding-bottom: 20px;
+
+        p {
+            margin: 0;
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .link {
+        padding: 10px 0;
+        span {
+            font-weight: bold;
+        }
+    }
+
+    form {
+        box($greyBoxBg, #ccc, 3px, 10px 10px 20px, solid, 1px);
+        overflow: hidden;
+
+        label, textarea, img, .reply-send {
+            display: block;
+        }
+
+        img {
+            display: none;
+            margin-left: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            box();
+            height: 150px;
+            margin: 10px 0;
+            resize: none;
+            width: 430px;
+        }
+    }
+
+    .btn {
+        action-button($orange, $white, 3px, 5px 20px);
+        box-shadow(0 1px 0 rgba(255,255,255,0.2) inset)
+        display: inline-block;
+        font-weight: bold;
+        margin-left: 5px;
+        padding: 7px 10px 5px 10px;
+        text-align: center;
+    }
+
+}

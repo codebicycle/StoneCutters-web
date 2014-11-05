@@ -1,0 +1,62 @@
+#ad-options {
+    background: #eee;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid $greyBorders;
+    padding: 10px 20px;
+    width: auto;
+    clear-fix();
+
+    .social-sharing {
+        float: left;
+        p {
+            color: #666;
+            display: inline-block;
+            margin: 8px 8px 0 0;
+            vertical-align: top;
+        }
+        ul {
+            display: inline-block;
+            ul-reset();
+            margin-top: 3px;
+            li {
+                circle(28px);
+                float: left;
+                font-size: $m;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+                &.button-fb {
+                    background: $blueFacebook;
+                }
+                &.button-twitter {
+                    background: $cyanTwitter;
+                }
+                &.button-googleplus {
+                    background: $redGooglePlus;
+                }
+                a {
+                    color: #fff;
+                    display:block;
+                    margin: 5px 0 0 6px;
+                }
+            }
+        }
+    }
+    .actions {
+        float: right;
+        margin-top: 8px;
+        a{
+            action-button(#f9f9f9, #666, 3px, 6px 15px);
+            font-size: $xs;
+
+            &.addToFavorites {
+                margin-right: 10px;
+            }
+            &:hover{
+                action-button(#999, #fff, 3px, 6px 15px);
+            }
+        }
+    }
+}

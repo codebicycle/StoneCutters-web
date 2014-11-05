@@ -1,0 +1,117 @@
+.posting-images-view {
+	position: relative;
+
+	.hint {
+		margin-top: -5px;
+	}
+
+	.image-input-file {
+		  height: 0;
+		  left: -99999px;
+		  opacity: 0;
+		  position: absolute;
+		  top: -99999px;
+		  width: 0;
+	}
+
+	.file-upload {
+		ul-reset();
+		max-width: 440px;
+
+		.image-cont {
+			border: 1px dashed $blue;
+			display: inline-block;
+			height: 75px;
+			line-height: 75px;
+			margin: 0 0 10px 10px;
+			opacity: .3;
+			position: relative;
+			text-align: center;
+			vertical-align: top;
+			width: 100px;
+
+			&::after {
+				background-color: $blue;
+				bottom: 0;
+				content: '';
+				display: block;
+				height: .5rem;
+				left: 0;
+				position: absolute;
+				width: 0;
+			}
+
+			&:first-child,
+			&:nth-child(4n + 1) {
+				margin: 0 0 10px 0;
+			}
+
+			&:hover {
+				cursor: pointer;
+				opacity: 1;
+			}
+
+			&.loaded {
+				opacity: 1;
+
+				&::after {
+					opacity: 0;
+					transition(250ms);
+					width: 100%;
+				}
+
+				&:hover {
+					.icon-close {
+						background: $greyStrong;
+						color: $white;
+					}
+				}
+				
+				.icon-close {
+					background: $blue;
+					circle(8px);
+					color: $lightBlue;
+					display: block;
+					font-size: remify(8px);
+					line-height: 7px;
+					padding: 5px;
+					position: absolute;
+					right: 5px;
+					text-align: center;
+					top: 5px;
+					transition(250ms);
+				}
+			}
+
+
+			&.loading {
+				&::after {
+					transition(250ms);
+					width: 66%;
+				}
+			}
+
+			.icon-close {
+				display: none;
+			}
+
+			.image {
+				background: $lightBlue;
+				bottom: 0;
+				left: 0;
+				position: absolute;
+				right: 0;
+				top: 0;
+
+				&.fill {
+					background-size: cover;
+				}
+
+				&.icon-addpicture::before {
+					color: $blue;
+					font-size: remify(32px);
+				}
+			}
+		}
+	}
+}

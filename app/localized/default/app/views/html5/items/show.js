@@ -194,11 +194,10 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, data) {
-                var tracking;
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
                 var category = $('.itemCategory').val();
                 var subcategory = $('.itemSubcategory').val();
-
+                
                 $('.loading').hide();
                 $('body').removeClass('noscroll');
                 $('.message').val('');
@@ -206,9 +205,6 @@ module.exports = Base.extend({
                 $('.email').val('');
                 $('.phone').val('');
                 $msg.text(this.messages.msgSend);
-                tracking = $('<div></div>').append(data);
-                tracking = $('#replySuccess', tracking);
-                $msg.append(tracking.length ? tracking : '');
                 this.track({
                     category: 'Reply',
                     action: 'ReplySuccess',
@@ -218,9 +214,22 @@ module.exports = Base.extend({
                 setTimeout(function(){
                     $('.msgCont').removeClass('visible');
                 }, 3000);
+                done(data);
             }.bind(this);
 
-            var track = function(done) {
+            var trackTracking = function(done, data) {
+                var $view = $('#partials-tracking-view');
+                var tracking;
+
+                tracking = $('<div></div>').append(data);
+                tracking = $('#partials-tracking-view', tracking);
+                if (tracking.length) {
+                    $view.trigger('updateHtml', tracking.html());
+                }
+                done();
+            }.bind(this);
+
+            var trackGraphite = function(done) {
                 var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
 
                 $.ajax({
@@ -259,11 +268,12 @@ module.exports = Base.extend({
                 $('.loading').hide();
             }.bind(this);
 
-
             asynquence().or(fail)
                 .then(validate)
                 .then(post)
-                .gate(success, track);
+                .then(success)
+                .then(trackTracking)
+                .then(trackGraphite);
         }.bind(this));
 
         //window History
