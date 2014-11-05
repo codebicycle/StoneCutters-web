@@ -4,6 +4,8 @@
     .footer-slide {
         bottom: 0;
         box($white, $greyBorders $greyBorders $greyStrong, 3px 3px 0 0, 0, solid, 1px 1px 4px);
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, .3);
+        clear-fix();
         left: 0;
         position: absolute;
         right: 0;
@@ -32,42 +34,16 @@
             }
         }
     }
+
     .help-slide {
         li {
             display: inline-block;
             padding-right: 20px;
         }
     }
-    .popular-slide {
-        clear-fix();
-        .popular-column {
-            float: left;
-            width: 448px;
-            ul {
-                float: left;
-            }
-        }
-        .popular-cities {
-            float: right;
-        }
-    }
-
-    .around-slide {
-        clear-fix();
-        ul {
-            float: left;
-            width: 116px;
-            a {
-                font-size: $xs;
-            }
-        }
-    }
 }
 
 .footer-categorytree-view {
-    clear-fix();
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .3);
-
     ul {
         ul-reset();
     }
@@ -114,5 +90,35 @@
         display: inline-block;
         font-size: $m;
         padding-bottom: 10px;
+    }
+}
+
+.footer-countries-view {
+    ul {
+        ul-reset();
+    }
+
+    .countries-list {
+        box-sizing: border-box;
+        float: left;
+        padding: 20px 5px;
+        width: 16.6%;
+
+        &:last-child {
+            padding-right: 20px;
+        }
+
+        a {
+            font-size: $xs;
+            line-height: 1;
+        }
+
+        li {
+            padding-bottom: 4px;
+        }
+    }
+
+    .countries-list-first {
+         padding-left: 20px;
     }
 }

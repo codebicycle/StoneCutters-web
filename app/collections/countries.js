@@ -9,3 +9,4 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'Countries';
+module.exports.cache = true;

@@ -41,7 +41,7 @@ module.exports = Base.extend({
     },
     events: {
         'fieldsChange': 'onFieldsChange',
-        'change': 'onChange',
+        'change': 'onChange'
     },
     onFieldsChange: function(event, fields, categoryId, subcategoryId, firstRender) {
         event.preventDefault();

@@ -3,7 +3,6 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/unavailable');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var asynquence = require('asynquence');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -13,14 +12,16 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        data.category_name = this.options.category_name;
+        var link = 'nf/all-results';
 
+        data.category_name = this.options.category_name;
         _.each(data.relatedItems, this.processItem);
+
         return _.extend({}, data, {
             items: data.relatedItems,
             nav: {
-                link: 'nf/all-results',
-                linkig: 'nf/all-results-ig',
+                link: link,
+                linkig: helpers.common.linkig.call(this, link, null, 'allresultsig'),
                 galeryAct: 'active'
             }
         });

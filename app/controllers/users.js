@@ -11,10 +11,13 @@ module.exports = {
     register: middlewares(register),
     success: middlewares(success),
     login: middlewares(login),
+    lostpassword: middlewares(lostpassword),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
-    favorites: middlewares(favorites)
+    favorites: middlewares(favorites),
+    messages: middlewares(messages),
+    readmessages: middlewares(readmessages)
 };
 
 function register(params, callback) {
@@ -22,7 +25,7 @@ function register(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -36,7 +39,7 @@ function register(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             agreeTerms: params.agreeTerms,
             tracking: tracking.generateURL.call(this)
         });
@@ -53,11 +56,25 @@ function success(params, callback) {
     }
 }
 
+function lostpassword(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
+
+    function controller() {
+        callback(null, {
+            form: this.form,
+            success: params.success,
+            tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
 function login(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
     }, controller);
-    function controller(form) {
+    function controller() {
         var platform = this.app.session.get('platform');
         var user;
 
@@ -71,7 +88,7 @@ function login(params, callback) {
             });
         }
         callback(null, {
-            form: form,
+            form: this.form,
             redirect: params.redirect,
             tracking: tracking.generateURL.call(this)
         });
@@ -92,6 +109,7 @@ function logout(params, callback) {
 
 function myolx(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var platform = this.app.session.get('platform');
         var user;
@@ -110,13 +128,15 @@ function myolx(params, callback) {
                 status: 302
             });
         }
-        if (platform == 'desktop' ){
+        if (platform === 'desktop' ){
             return helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
                 status: 302
             });
         }
 
-        callback(null, {});
+        callback(null, {
+            tracking: tracking.generateURL.call(this)
+        });
     }
 }
 
@@ -127,6 +147,7 @@ function myads(params, callback) {
         var deleted;
         var _params;
         var user;
+
         var prepare = function(done) {
             var platform = this.app.session.get('platform');
             if (platform === 'wap') {
@@ -147,12 +168,13 @@ function myads(params, callback) {
                 token: user.token,
                 userId: user.userId,
                 location: this.app.session.get('siteLocation'),
-                languageCode: this.app.session.get('selectedLanguage'),
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'myAds'
             }, params);
 
             done();
         }.bind(this);
+
         var findAds = function(done) {
             this.app.fetch({
                 myAds: {
@@ -174,23 +196,25 @@ function myads(params, callback) {
         var success = function(_myAds) {
             var myAds = _myAds.toJSON();
             var platform = this.app.session.get('platform');
+            var view = 'users/myads';
+            var data = {
+                myAdsMetadata: _myAds.meta,
+                myAds: myAds,
+                deleted: deleted
+            };
+
             _.each(myAds, function processItem(item) {
                 item.date.since = helpers.timeAgo(item.date);
             });
+
             if (platform === 'desktop') {
-                callback(null,'users/myolx', {
-                    myAdsMetadata: _myAds.metadata,
-                    myAds: myAds,
-                    deleted: deleted,
-                    viewname: 'myads'
-                });
-            } else {
-                callback(null, {
-                    myAdsMetadata: _myAds.metadata,
-                    myAds: myAds,
-                    deleted: deleted
+                view = 'users/myolx';
+                _.extend(data, {
+                    viewname: 'myads',
+                    tracking: tracking.generateURL.call(this)
                 });
             }
+            callback(null, view, data);
         }.bind(this);
 
         var error = function(err, res) {
@@ -208,7 +232,7 @@ function myads(params, callback) {
 function favorites(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    function controller(form) {
+    function controller() {
         var favorite;
         var _params;
         var user;
@@ -259,25 +283,25 @@ function favorites(params, callback) {
         var success = function(_favorites) {
             var favorites = _favorites.toJSON();
             var platform = this.app.session.get('platform');
+            var view = 'users/favorites';
+            var data = {
+                favoritesMetadata: _favorites.meta,
+                favorites: favorites,
+                favorite: favorite
+            };
 
             _.each(favorites, function processItem(item) {
                 item.date.since = helpers.timeAgo(item.date);
             });
 
             if (platform === 'desktop') {
-                callback(null, 'users/myolx', {
-                    favoritesMetadata: _favorites.metadata,
-                    favorites: favorites,
-                    favorite: favorite,
-                    viewname: 'favorites'
-                });
-            } else {
-                callback(null, {
-                    favoritesMetadata: _favorites.metadata,
-                    favorites: favorites,
-                    favorite: favorite
+                view = 'users/myolx';
+                _.extend(data, {
+                    viewname: 'favorites',
+                    tracking: tracking.generateURL.call(this)
                 });
             }
+            callback(null, view, data);
         }.bind(this);
 
         var error = function(err, res) {
@@ -288,6 +312,112 @@ function favorites(params, callback) {
             .then(prepare)
             .then(findFavorites)
             .then(check)
+            .val(success);
+    }
+}
+
+function messages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                messages: {
+                    collection: 'Messages',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                messages: response.messages.toJSON(),
+                tracking: tracking.generateURL.call(this)
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
+    }
+}
+
+function readmessages(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var deleted;
+        var _params;
+        var user;
+
+        var prepare = function(done) {
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId,
+                messageId: params.msgId
+            }, params);
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                message: {
+                    model: 'Message',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, {
+                message: response.message.toJSON()
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
             .val(success);
     }
 }

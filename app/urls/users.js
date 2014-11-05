@@ -10,6 +10,9 @@ module.exports = {
     'users#login': {
         url: 'login'
     },
+    'users#lostpassword': {
+        url: 'lostpassword'
+    },
     'users#logout': {
         url: 'logout'
     },
@@ -21,6 +24,12 @@ module.exports = {
     },
     'users#favorites': {
         url: 'myolx/favoritelisting'
+    },
+    'users#messages': {
+        url: 'myolx/myolxmessages'
+    },
+    'users#readmessages': {
+        url: 'myolx/readmessages/:msgId'
     },
     'users#deleteitem': {
         url: 'myolx/deleteitem'

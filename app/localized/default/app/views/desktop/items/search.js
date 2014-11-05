@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('items/search');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
 var Filters = require('../../../../../../collections/filters');
 
 module.exports = Base.extend({
@@ -13,6 +14,9 @@ module.exports = Base.extend({
     regexpReplacePage: /(-p-[0-9]+)/,
     regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     events: {
+        'click .check-box input': 'selectFilter',
+        'click .range-submit': 'rangeFilterInputs',
+        'click .link-range': 'rangeFilterLinks',
         'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
         'click .filter-title': 'toogleFilter'
@@ -20,7 +24,7 @@ module.exports = Base.extend({
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var link = this.app.session.get('path');
+        var link = this.cleanPage(this.app.session.get('path'));
 
         this.filters = data.filters;
         this.filters.order = this.order;
@@ -30,7 +34,7 @@ module.exports = Base.extend({
             items: data.items,
             nav: {
                 link: link,
-                linkig: link + '/-ig',
+                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
                 listAct: 'active',
             }
         });
@@ -51,7 +55,7 @@ module.exports = Base.extend({
         var $filter = $(event.currentTarget);
         var filterName = $filter.data('filter-name');
 
-        $filter.find('.icons').toggleClass('icon-arrow-top');
+        $filter.find('.icons').toggleClass('icon-arrow-down');
         $('.' + filterName).slideToggle();
     },
     cleanFilters: function(event) {
@@ -59,9 +63,89 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = this.app.session.get('path').split('/-').shift();
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type')
+        };
 
+        this.filters.remove(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.cleanPath(path);
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    selectFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type'),
+            value: $target.val()
+        };
+
+        if ($target.is(':checked') && !this.filters.has(filter.name, filter.value)) {
+            this.filters.add(filter);
+        }
+        else {
+            this.filters.remove(filter);
+        }
+
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.refactorPath(path);
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    rangeFilterInputs: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var $from = $target.siblings('[data-filter-id=from]');
+        var $to = $target.siblings('[data-filter-id=to]');
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type'),
+            value: {
+                from: $from.val() || $from.data('filter-value') || '',
+                to: $to.val() || $to.data('filter-value') || ''
+            }
+        };
+
+        this.filters.add(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.refactorPath(path);
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+
+    },
+    rangeFilterLinks: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filter = {
+            name: $target.data('filter-name'),
+            type: $target.data('filter-type'),
+            value: {
+                from: $target.data('filter-from'),
+                to: $target.data('filter-to')
+            }
+        };
+
+        this.filters.add(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.refactorPath(path);
+        path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
     },
     categoryFilter: function(event) {
@@ -82,9 +166,7 @@ module.exports = Base.extend({
         this.app.router.redirectTo(path);
     },
     refactorPath: function(path) {
-        if (path.match(this.regexpFindPage)) {
-            path = path.replace(this.regexpReplacePage, '');
-        }
+        path = this.cleanPage(path);
         if (path.slice(path.length - 1) === '/') {
             path = path.substring(0, path.length - 1);
         }
@@ -92,7 +174,13 @@ module.exports = Base.extend({
     },
     cleanPath: function(path) {
         path = this.refactorPath(path);
-        path = path.replace(this.regexpReplaceCategory, 'search');
+        // path = path.replace(this.regexpReplaceCategory, 'search');
+        return path;
+    },
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
         return path;
     }
 });

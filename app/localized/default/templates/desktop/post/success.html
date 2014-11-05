@@ -1,8 +1,8 @@
 <aside id="notification-message" class="notification-message icons icon-time">
-	<h4>{{ dictionary["posting_photos.AdActiveSoon"] }} </h4>
-	<p>{{ dictionary["posting_step4.EmailNotice"] }} </p>
+	<h4>{{ dictionary["posting_step4.WellDoneAdCreated"] }}</h4>
+	<p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }}</p>
 </aside>
-
+{#
 <aside id="notification-keep-posting" class="notification-keep-posting">
 	<h3 class="title">Continúe <span class="highlight">vendiendo</span></h3>
 	<p class="message icons icon-arrow"><span class="highlight">{{ dictionary["crm_new_version.SomethingElseToPost"] }} </span>{{ dictionary["defaultheader.PostAFreeAd"] }}.</p>
@@ -25,12 +25,13 @@
 		--><a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>{{ dictionary["posting_selector.SelectCategory"] }} </span></a>
 	</div>
 </aside>
-
+#}
 <section id="item-preview" class="item-preview">
 	<section class="item-preview-content">
 		<div class="header-edit">
 			<p>{{ dictionary["posting_photos.NeedChangeAd"] }} </p>
-			<a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a>
+			<!-- TODO: We are not having this feature for Bolivian launch
+			<a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a> -->
 		</div>
 		<div class="wrapper">
 			<h1 class="item-title">{{ item.title }}</h1>
@@ -45,7 +46,8 @@
 	<aside class="side-column">
 		<div class="header-edit">
 			<p>{{ dictionary["postingheader.ContactDetails"] }} </p>
-			<a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a>
+			<!-- TODO: We are not having this feature for Bolivian launch
+			<a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a> -->
 		</div>
 		<div class="user-info">
 	        <p class="icons icon-user user-name">{{ item.contactName }}</p>

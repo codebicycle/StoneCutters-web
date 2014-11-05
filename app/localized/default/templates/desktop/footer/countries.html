@@ -1,0 +1,13 @@
+<div class="title-bar">
+    <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
+</div>
+{% set itemsPerColumn = 18 %}
+<ul class="countries-list countries-list-first">
+    {% for country in countries %}
+        <li><a href="{{country.url}}" title="{{country.name}}">{{country.name}}</a></li>
+    {% if loop.index%itemsPerColumn == 0 %}
+        </ul>
+        <ul class="countries-list">
+    {% endif%}
+    {% endfor %}
+</ul>

@@ -1,9 +1,13 @@
 <section id="contact-form">
     <div class="user-info">
-        <p class="icons icon-user user-name">{{ item.contactName }}</p>
-        <span class="user-status">User Status</span>
+        {% if item.contactName %}
+            <p class="icons icon-user user-name">{{ item.contactName }}</p>
+        {% endif %}
+        {#<span class="user-status">User Status</span>#}
+        {% if item.phone %}
         <p class="icons icon-phone user-phone">{{ item.phone }}</p>
-        <span>{{ dictionary["item.WhenYouCallMentionOLX"] }}</span>
+            <span>{{ dictionary["item.WhenYouCallMentionOLX"] }}</span>
+        {% endif %}
     </div>
 
     <form id="replyForm" action="">
@@ -28,7 +32,7 @@
         </fieldset>
         <fieldset>
             <label for="phone">
-                <input type="text" name="phone" id="phone" value="" maxlength="15" placeholder="{{ dictionary["item.YourPhoneNumberOptionalZA"] }} ">
+                <input type="text" name="phone" id="phone" class="phone" value="" maxlength="15" placeholder="{{ dictionary["item.YourPhoneNumberOptionalZA"] }} ">
             </label>
         </fieldset>
         <img class="spinner hide" src="{{ '/images/desktop/spinner-bgYellow.gif' | static }}" alt="">
@@ -39,7 +43,7 @@
             <input type="hidden" class="hide itemCategory" value="{{ item.category.id }}">
             <input type="hidden" class="hide itemSubcategory" value="{{ item.category.parentId }}">
         </fieldset>
-        <p class="replySuccses icons hide" >
+        <p class="replySuccess icons icon-check hide" >
             {{ dictionary["item.YourMessageHasBeenSent"] }}
             <span>{{ dictionary["replymessage.SendAnotherMessage"] }} </span>
         </p>
@@ -47,7 +51,7 @@
     <div class="disclaimer">
         <p>
             {{ dictionary["item.ClickAgreeTermsZA"] | replace('<<LINK>> condiciones de uso<</LINK>>.','') }}
-            <a href="/terms" target="_blank">{{ dictionary["defaultfooter.Terms of use"] }}</a>
+            <a rel="nofollow" href="/terms" target="_blank">{{ dictionary["defaultfooter.Terms of use"] }}</a>
         </p>
     </div>
 </section>

@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
+var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var Seo = require('../modules/seo');
 
@@ -18,49 +19,19 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var icons = config.get(['icons', platform], []);
+        var country = this.app.session.get('location').url;
         var seo = Seo.instance(this.app);
 
-        var fetch = function(done) {
-            this.app.fetch({
-                cities: {
-                    collection: 'Cities',
-                    params: {
-                        level: 'countries',
-                        type: 'topcities',
-                        location: this.app.session.get('siteLocation')
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(response) {
-            var platform = this.app.session.get('platform');
-            var icons = config.get(['icons', platform], []);
-            var country = this.app.session.get('location').url;
-            var categories = this.app.session.get('categories');
-
-            seo.setContent(categories.metadata.seo);
-            seo.addMetatag('title', categories.metadata.title);
-            seo.addMetatag('description', categories.metadata.description);
-
-            callback(null, {
-                cities: response.cities.toJSON(),
-                categories: categories.toJSON(),
-                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                tracking: tracking.generateURL.call(this),
-                seo: seo
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        seo.setContent(this.dependencies.categories.meta.seo);
+        seo.addMetatag('title', this.dependencies.categories.meta.title);
+        seo.addMetatag('description', this.dependencies.categories.meta.description);
+        callback(null, {
+            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+            tracking: tracking.generateURL.call(this),
+            seo: seo
+        });
     }
 }
 
@@ -90,31 +61,13 @@ function show(params, callback, gallery) {
             done();
         }.bind(this);
 
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageCode: this.app.session.get('selectedLanguage'),
-                        seo: seo.isEnabled()
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var router = function(done, res) {
-            if (!res.categories) {
-                return done.fail(null, {});
-            }
-            var category = res.categories.get(params.catId);
+        var router = function(done) {
+            var category = this.dependencies.categories.get(params.catId);
             var platform = this.app.session.get('platform');
             var subcategory;
 
             if (!category) {
-                category = res.categories.find(function each(category) {
+                category = this.dependencies.categories.find(function each(category) {
                     return !!category.get('children').get(params.catId);
                 });
                 if (!category) {
@@ -144,7 +97,6 @@ function show(params, callback, gallery) {
 
         var promise = asynquence().or(error)
             .then(redirect)
-            .then(fetch)
             .then(router);
     }
 }
@@ -190,7 +142,7 @@ function handleItems(params, promise, gallery) {
     }.bind(this);
 
     var prepare = function(done) {
-        helpers.pagination.prepare(this.app, params);
+        Paginator.prepare(this.app, params);
 
         query = _.clone(params);
         params.categoryId = params.catId;
@@ -221,7 +173,10 @@ function handleItems(params, promise, gallery) {
             done.abort();
             return helpers.common.redirect.call(this, [url, gallery].join(''));
         }
-        realPage = res.items.paginate(page, query, url, gallery);
+        realPage = res.items.paginate([url, '[page][gallery][filters]'].join(''), query, {
+            page: page,
+            gallery: gallery
+        });
         if (realPage) {
             done.abort();
             return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));
@@ -230,7 +185,7 @@ function handleItems(params, promise, gallery) {
     }.bind(this);
 
     var success = function(done, _items) {
-        var metadata = _items.metadata;
+        var meta = _items.meta;
         var postingLink = {
             category: category.get('id')
         };
@@ -243,13 +198,13 @@ function handleItems(params, promise, gallery) {
             postingLink: postingLink
         });
 
-        seo.setContent(metadata.seo);
-        if (metadata.seo) {
-            currentPage = metadata.page;
-            seo.addMetatag('title', metadata.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
-            seo.addMetatag('description', metadata.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
+        seo.setContent(meta.seo);
+        if (meta.seo) {
+            currentPage = meta.page;
+            seo.addMetatag('title', meta.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            seo.addMetatag('description', meta.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
         }
-        if (metadata.total < 5) {
+        if (meta.total < 5) {
             seo.addMetatag('robots', 'noindex, follow');
             seo.addMetatag('googlebot', 'noindex, follow');
         }
@@ -259,7 +214,7 @@ function handleItems(params, promise, gallery) {
         if (subcategory) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
-        tracking.addParam('page', metadata.page);
+        tracking.addParam('page', meta.page);
 
         done({
             type: 'items',
@@ -267,7 +222,7 @@ function handleItems(params, promise, gallery) {
             subcategory: (subcategory || category).toJSON(),
             currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
-            metadata: metadata,
+            meta: meta,
             items: _items.toJSON(),
             filters: _items.filters,
             infiniteScroll: infiniteScroll,

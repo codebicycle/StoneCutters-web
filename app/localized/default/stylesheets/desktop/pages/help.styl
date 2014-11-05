@@ -4,13 +4,6 @@
         box($lightBlue, $lightBlueBorder , 3px, 0, solid, 1px);
         float: left;
         width: 294px;
-        h3 {
-            font-size: $l;
-            font-weight: normal;
-            margin: 0;
-            padding: 13px 0 13px 20px;
-            text-transform: capitalize;
-        }
         ul {
             ul-reset();
             li {
@@ -18,11 +11,17 @@
             }
         }
 
-        .icons{
-            padding-right: 4px;
-            &:before {
-                font-size: $l;
+        .help-toggle-content {
+            display: block;
+            padding: 14px 0 15px 20px;
+            &:hover {
+                background: $white;
             }
+        }
+
+        .icons::before {
+            font-size: $m;
+            margin-right: 10px;
         }
 
         .selected {
@@ -32,30 +31,41 @@
             position: relative;
 
             a,
-            .icons:before {
+            .icons::before {
                 color: $greyStrong;
             }
+
+            &:hover a {
+                text-decoration: none;
+            }
         }
-        .selected:after, .selected:before {
-            left: 100%;
-            top: 50%;
+        .selected::after,
+        .selected::before {
             border: solid transparent;
             content: " ";
             height: 0;
-            width: 0;
+            left: 100%;
             position: absolute;
+            top: 50%;
+            width: 0;
         }
-        .selected:after {
+        .selected::after {
             border-color: rgba(255, 255, 255, 0);
             border-left-color: $white;
-            border-width: 26px;
-            margin-top: -26px;
+            border-width: 24px;
+            margin-top: -24px;
         }
-        .selected:before {
+        .selected::before {
             border-color: rgba(185, 221, 243, 0);
             border-left-color: $lightBlueBorder;
-            border-width: 27px;
-            margin-top: -27px;
+            border-width: 25px;
+            margin-top: -25px;
+        }
+        .title {
+            font-size: $xl;
+            font-weight: normal;
+            margin: 0;
+            padding: 15px 0 15px 20px;
         }
 
     }
@@ -65,16 +75,25 @@
         float: right;
         width: 656px;
 
-        h3 {
-            font-size: $l;
-            font-weight: normal;
-            padding: 13px 0 13px 20px;
-            margin: 0;
-            border-bottom: 1px solid $greyBorders;
+        .help-content-display {
+            display: none;
+            &:first-child {
+                display: block;
+            }
         }
 
-        .icon-arrowright:before {
+        .title {
+            border-bottom: 2px solid $greyBorders;
+            font-size: $l;
+            font-weight: bold;
+            margin: 0;
+            padding: 19px 0 18px 20px;
+        }
+
+        .icon-arrow-right:before {
             color: $greyStrong;
+            font-size: remify(8px);
+            margin-right: 10px;
         }
 
         .question {
@@ -82,17 +101,15 @@
             &:last-child {
                 border-bottom: none;
             }
+            &hover .icon-arrow-right::before {
+                color: $black;
+            }
 
             h4 {
                 cursor: pointer;
                 font-weight: normal;
                 margin: 0;
-                padding: 20px;
-            }
-
-            p {
-                line-height: remify(18px);
-                margin: 0;
+                padding: 15px;
             }
         }
 
@@ -101,27 +118,31 @@
             h4 {
                 font-weight: bold;
             }
-            .icon-arrowright:before {
+            .icon-arrow-down::before {
                 color: $black;
+                font-size: remify(8px);
+                margin-right: 10px;
             }
         }
 
         .question-content {
-            padding: 0 0 14px 20px;
+            display: none;
+            line-height: 1.5;
+            padding: 0 20px 15px 20px;
+
+            p {
+                margin: 0;
+            }
 
             ul {
                 ul-reset();
-            }
-            li {
-                line-height: remify(18px);
+                li {
+                    line-height: remify(18px);
+                }
             }
         }
     }
 
-    .help-toggle-content {
-        display: block;
-        padding: 15px 0 15px 18px;
-    }
 }
 
 

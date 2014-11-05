@@ -1,0 +1,21 @@
+<a href="{{ '/myolx/myolxmessages' | link }}" class="back icons icon-arrow-left">Volver a mis mensajes</a>
+<h2 class="title">Mi OLX > {{ message.title }}</h2>
+
+<div class="data">
+    <p><span>De: </span>{{ message.from.username }} ({{ message.from.email }})</p>
+    <p><span>Recibido: </span>{{ message.date.timestamp | date(true) }}</p>
+    <p><span>Asunto: </span>{{ message.title }}</span>
+</div>
+
+<p class="message">{{ message.body }}</p>
+
+<p class="link">
+    <span>Este mensaje se refiere a:</span>
+    <a href="{{ message | slugToUrl | link }}">{{ message | slugToUrl | link }}</a>
+</p>
+
+<form>
+    <label>Responde este mensaje</label>
+    <textarea></textarea>
+    <button class="reply-send btn">Responder</button>
+</form>

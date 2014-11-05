@@ -8,7 +8,7 @@ module.exports = Base.extend({
     url: '/countries/:location/states',
     parse: function(response) {
         if (response && response.data) {
-            this.metadata = response.metadata;
+            this.meta = response.metadata;
             return response.data;
         }
         return response;
@@ -16,3 +16,4 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'States';
+module.exports.cache = true;

@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var Seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
+var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var Item = require('../models/item');
 
@@ -62,20 +63,6 @@ function show(params, callback) {
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
-
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: params.languageId
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
         }.bind(this);
 
         var buildItemPurged = function(properties) {
@@ -148,17 +135,28 @@ function show(params, callback) {
             }.bind(this));
         }.bind(this);
 
-        var checkItem = function(done, resCategories, resItem) {
-            if (!resCategories.categories || !resItem.item) {
+        var checkItem = function(done, response) {
+            if (!response.item) {
                 return done.fail(null, {});
             }
-            var item = resItem.item.toJSON();
-            var slug = helpers.common.slugToUrl(item);
+            var slug = helpers.common.slugToUrl(response.item.toJSON());
             var protocol = this.app.session.get('protocol');
+            var host = this.app.session.get('host');
             var platform = this.app.session.get('platform');
             var url;
 
-            if (!resItem.item.checkSlug(slug, slugUrl)) {
+            if (platform === 'desktop' && response.item.getLocation().url !== this.app.session.get('siteLocation')) {
+                url = [protocol, '://', host, '/', slug].join('');
+
+                done.abort();
+                return helpers.common.redirect.call(this, url, null, {
+                    pushState: false,
+                    query: {
+                        location: response.item.getLocation().url
+                    }
+                });
+            }
+            if (!response.item.checkSlug(slug, slugUrl)) {
                 slug = ('/' + slug);
                 if (favorite) {
                     slug = helpers.common.params(slug, 'favorite', favorite);
@@ -166,22 +164,21 @@ function show(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, slug);
             }
-            if (item.location.url !== this.app.session.get('location').url) {
-                url = [protocol, '://', platform, '.', item.location.url.replace('www.', 'm.'), '/', slug].join('');
+            if (response.item.get('location').url !== this.app.session.get('location').url) {
+                url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
                     query: {
-                        location: resItem.item.getLocation().url
+                        location: response.item.getLocation().url
                     }
                 });
             }
-
-            done(resCategories.categories, resItem.item);
+            done(response.item);
         }.bind(this);
 
-        var findRelatedItems = function(done, _categories, _item) {
+        var findRelatedItems = function(done, item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -194,23 +191,23 @@ function show(params, callback) {
                 }
             }, {
                 readFromCache: false
-            }, function afterFetch(err, res) {
+            }, function afterFetch(err, response) {
                 if (err) {
                     err = null;
-                    res = {
+                    response = {
                         relatedItems: []
                     };
                 }
                 else {
-                    res.relatedItems = res.relatedItems.toJSON();
+                    response.relatedItems = response.relatedItems.toJSON();
                 }
-                done(_categories, _item, res.relatedItems);
+                done(item, response.relatedItems);
             }.bind(this));
         }.bind(this);
 
-        var success = function(_categories, _item, _relatedItems) {
+        var success = function(_item, relatedItems) {
             var item = _item.toJSON();
-            var subcategory = _categories.search(_item.get('category').id);
+            var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var view = 'items/show';
             var category;
             var parentId;
@@ -221,6 +218,7 @@ function show(params, callback) {
             seo.setContent(item.metadata.seo);
             if(item.metadata.itemPage.h1) {
                 seo.set('extendedTitle',item.metadata.itemPage.h1);
+                seo.set('h1',item.metadata.itemPage.h1);
             }
             if (!subcategory) {
                 _item.set('purged', true);
@@ -228,7 +226,7 @@ function show(params, callback) {
             }
             else {
                 parentId = subcategory.get('parentId');
-                category = parentId ? _categories.get(parentId) : subcategory;
+                category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
             }
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
@@ -272,13 +270,13 @@ function show(params, callback) {
                 seo: seo,
                 pos: Number(params.pos) || 0,
                 sk: securityKey,
-                relatedItems: _relatedItems || [],
+                relatedItems: relatedItems || [],
                 relatedAdsLink: (subcategory ? ['/', helpers.common.slugToUrl(subcategory), '?relatedAds=', itemId].join('') : undefined),
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
                 tracking: tracking.generateURL.call(this),
-                categories: _categories.toJSON()
+                categories: this.dependencies.categories.toJSON()
             });
         }.bind(this);
 
@@ -288,7 +286,7 @@ function show(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findItem)
+            .then(findItem)
             .then(checkItem)
             .then(findRelatedItems)
             .val(success);
@@ -304,6 +302,7 @@ function gallery(params, callback) {
         var slugUrl = params.title;
         var pos = Number(params.pos) || 0;
         var siteLocation = this.app.session.get('siteLocation');
+        var seo = Seo.instance(this.app);
 
         var prepare = function(done) {
             if (user) {
@@ -321,11 +320,10 @@ function gallery(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        seo: seo.isEnabled()
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -426,11 +424,9 @@ function map(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -502,7 +498,7 @@ function reply(params, callback) {
         isForm: true
     }, controller);
 
-    function controller(form) {
+    function controller() {
         var seo = Seo.instance(this.app);
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
@@ -519,11 +515,9 @@ function reply(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -573,7 +567,7 @@ function reply(params, callback) {
 
             callback(null, {
                 item: item,
-                form: form,
+                form: this.form,
                 tracking: tracking.generateURL.call(this)
             });
         }.bind(this);
@@ -610,11 +604,9 @@ function success(params, callback) {
                     collection : 'Categories',
                     params: {
                         location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -675,9 +667,9 @@ function searchfilterig(params, callback) {
     searchfilter.call(this, params, callback, '-ig');
 }
 
-function searchfilter(params, callback, isGallery) {
+function searchfilter(params, callback, gallery) {
     params.categoryId = params.catId;
-    search.call(this, params, callback, isGallery);
+    search.call(this, params, callback, gallery);
 }
 
 function searchig(params, callback) {
@@ -685,7 +677,7 @@ function searchig(params, callback) {
     search.call(this, params, callback, '-ig');
 }
 
-function search(params, callback, isGallery) {
+function search(params, callback, gallery) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -695,30 +687,40 @@ function search(params, callback, isGallery) {
         var platform = this.app.session.get('platform');
         var query;
         var url;
+        var urlPagination;
 
         var configure = function(done) {
             url = ['/nf/'];
+            urlPagination = [];
+            gallery = gallery || '';
 
             if (params.categoryId) {
                 url.push(params.title);
                 url.push('-cat-');
                 url.push(params.categoryId);
+                urlPagination = urlPagination.concat(url);
+                urlPagination.push('[page][gallery]');
             }
             else {
                 url.push('search');
+                urlPagination = urlPagination.concat(url);
             }
             url.push('/');
             url.push(params.search);
+            urlPagination.push('/');
+            urlPagination.push(params.search);
+            urlPagination.push('[filters]');
             url = url.join('');
+            urlPagination = urlPagination.join('');
             done();
         }.bind(this);
 
         var prepare = function(done) {
             if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '/', isGallery || ''].join(''));
+                return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
             }
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             query = _.clone(params);
             delete params.search;
             delete params.page;
@@ -741,7 +743,7 @@ function search(params, callback, isGallery) {
                 }
                 return callback(null, {
                     search: '',
-                    metadata: {
+                    meta: {
                         total: 0
                     },
                     tracking: tracking.generateURL.call(this)
@@ -769,34 +771,37 @@ function search(params, callback, isGallery) {
             }
             if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '/', isGallery || ''].join(''));
+                return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
             }
-            realPage = res.items.paginate(page, query, [url, '/'].join(''), isGallery);
+            realPage = res.items.paginate(urlPagination, query, {
+                page: page,
+                gallery: gallery
+            });
             if (realPage) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '/-p-', realPage, isGallery || ''].join(''));
+                return helpers.common.redirect.call(this, [url, '/-p-', realPage, gallery].join(''));
             }
             done(res.items);
         }.bind(this);
 
         var success = function(items) {
-            var metadata = items.metadata;
+            var meta = items.meta;
 
-            if (metadata.total < 5) {
+            if (meta.total < 5) {
                 seo.addMetatag('robots', 'noindex, nofollow');
                 seo.addMetatag('googlebot', 'noindex, nofollow');
             }
-            seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+            seo.addMetatag('title', query.search + (meta.page > 1 ? (' - ' + meta.page) : ''));
             seo.addMetatag('description');
 
-            tracking.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('page_nb', meta.totalPages);
             tracking.addParam('section', query.categoryId);
             tracking.addParam('page', page);
 
-            callback(null, ['items/search', (isGallery || '').replace('-', '')].join(''), {
+            callback(null, ['items/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
+                meta: meta,
                 filters: items.filters,
-                metadata: metadata,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
                 tracking: tracking.generateURL.call(this)
@@ -822,7 +827,7 @@ function allresultsig(params, callback) {
     allresults.call(this, params, callback, '-ig');
 }
 
-function allresults(params, callback, isGallery) {
+function allresults(params, callback, gallery) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -832,7 +837,7 @@ function allresults(params, callback, isGallery) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location').url;
         var siteLocation = this.app.session.get('siteLocation');
-        var url = ['/nf/all-results', isGallery || ''].join('');
+        var url = ['/nf/all-results', gallery || ''].join('');
         var query;
 
         var redirect = function(done) {
@@ -849,7 +854,7 @@ function allresults(params, callback, isGallery) {
             delete params.search;
 
             params.seo = seo.isEnabled();
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             query = _.clone(params);
 
             delete params.page;
@@ -860,13 +865,6 @@ function allresults(params, callback, isGallery) {
 
         var fetch = function(done) {
             this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageCode: this.app.session.get('selectedLanguage')
-                    }
-                },
                 items: {
                     collection: 'Items',
                     params: params
@@ -883,29 +881,32 @@ function allresults(params, callback, isGallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
-            realPage = res.items.paginate(page, query, url);
+            realPage = res.items.paginate(['/nf/all-results[gallery][page][filters]'].join(''), query, {
+                page: page,
+                gallery: gallery
+            });
             if (realPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url + '-p-' + realPage);
             }
-            done(res.categories, res.items);
+            done(res.items);
         }.bind(this);
 
-        var success = function(_categories, _items) {
-            var metadata = _items.metadata;
+        var success = function(_items) {
+            var meta = _items.meta;
 
             seo.addMetatag('robots', 'noindex, nofollow');
             seo.addMetatag('googlebot', 'noindex, nofollow');
-            seo.addMetatag('title', 'all-results' + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+            seo.addMetatag('title', 'all-results' + (meta.page > 1 ? (' - ' + meta.page) : ''));
             seo.addMetatag('description');
 
-            tracking.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('page_nb', meta.totalPages);
 
             callback(null, {
-                categories: _categories.toJSON(),
+                categories: this.dependencies.categories.toJSON(),
                 items: _items.toJSON(),
+                meta: meta,
                 filters: _items.filters,
-                metadata: metadata,
                 infiniteScroll: infiniteScroll,
                 tracking: tracking.generateURL.call(this)
             });
@@ -1036,8 +1037,30 @@ function staticSearch(params, callback) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
-        var url = ['/q/', params.search, '/c-', params.catId, '/'].join('');
+        var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
+        var category;
+        var subcategory;
+
+        var configure = function(done) {
+            var categories = this.dependencies.categories;
+
+            if (params.catId) {
+                category = categories.search(params.catId);
+                if (!category) {
+                    category = categories.get(params.catId);
+                    if (!category) {
+                        done.abort();
+                        return helpers.common.redirect.call(this, '/');
+                    }
+                }
+                if (category.has('parentId')) {
+                    subcategory = category;
+                    category = categories.get(subcategory.get('parentId'));
+                }
+            }
+            done();
+        }.bind(this);
 
         var redirect = function(done) {
             if (platform !== 'desktop') {
@@ -1052,7 +1075,7 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             query = _.clone(params);
             delete params.search;
             delete params.page;
@@ -1067,7 +1090,7 @@ function staticSearch(params, callback) {
                 done.abort();
                 return callback(null, {
                     search: '',
-                    metadata: {
+                    meta: {
                         total: 0
                     },
                     tracking: tracking.generateURL.call(this)
@@ -1108,7 +1131,9 @@ function staticSearch(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
-            realPage = _items.paginate(page, query, url);
+            realPage = _items.paginate([url, '/[page][gallery][filter]'].join(''), query, {
+                page: page
+            });
             if (realPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url + '-p-' + realPage);
@@ -1117,36 +1142,31 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var success = function(_items) {
-            var metadata = _items.metadata;
-            var categories;
-            var category;
-            var subcategory;
+            var meta = _items.meta;
 
-            seo.setContent(_items.metadata.seo);
-            if (metadata.total < 5) {
+            _items.meta.seo.staticsearch = {
+                keyword: query.search,
+                category: function() {
+                    if (subcategory || category) {
+                        return (subcategory || category).get('trName');
+                    }
+                }
+            };
+            seo.setContent(_items.meta.seo);
+            if (_items.meta.total < 5) {
                 seo.addMetatag('robots', 'noindex, follow');
                 seo.addMetatag('googlebot', 'noindex, follow');
             }
-            seo.addMetatag('title', query.search + (metadata.page > 1 ? (' - ' + metadata.page) : ''));
+            seo.addMetatag('title', query.search + (_items.meta.page > 1 ? (' - ' + _items.meta.page) : ''));
             seo.addMetatag('description');
-
-            categories = this.app.session.get('categories');
-            category = categories.search(params.catId);
-
-            if (category.has('parentId')) {
-                subcategory = category;
-                category = categories.get(subcategory.get('parentId'));
-            }
-
-            tracking.addParam('page_nb', metadata.totalPages);
+            tracking.addParam('page_nb', _items.meta.totalPages);
             tracking.addParam('keyword', query.search);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
-
+            tracking.addParam('category', category ? category.toJSON() : undefined);
+            tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
             callback(null, 'items/staticsearch', {
                 items: _items.toJSON(),
+                meta: _items.meta,
                 filters: _items.filters,
-                metadata: metadata,
                 search: query.search,
                 infiniteScroll: infiniteScroll,
                 tracking: tracking.generateURL.call(this),
@@ -1159,10 +1179,12 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(configure)
             .then(redirect)
             .then(prepare)
             .then(findItems)
             .then(checkSearch)
+            .then(paginate)
             .val(success);
     }
 }

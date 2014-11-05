@@ -30,9 +30,15 @@ module.exports = {
         'post#edit': 'edititem',
         'users#register': 'register',
         'users#login': 'login',
+        'users#myads': 'myolx/myolx',
+        'users#favorites': 'myolx/favoritelisting',
+        'users#messages': 'myolx/myolxmessages',
+        'users#lostpassword': 'lostpassword',
         'pages#terms': 'static/terms',
         'pages#help': 'static/help',
         'pages#interstitial': 'interstitial',
-        'pages#error': 'error'
+        'pages#error': 'error',
+        'pages#allstates': 'sitemap',
+        'pages#sitemap': 'sitemapcalendar'
     }
 };
