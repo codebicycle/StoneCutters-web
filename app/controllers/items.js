@@ -825,7 +825,7 @@ function staticSearch(params, callback) {
         var redirect = function(done) {
             if (platform !== 'desktop') {
                 done.abort();
-                return helpers.common.redirect.call(this, '/');
+                return helpers.common.redirect.call(this, '/nf/search/' + params.search);
             }
             if (params.search && params.search.toLowerCase() === 'gumtree' && this.app.session.get('location').url === 'www.olx.co.za') {
                 done.abort();
