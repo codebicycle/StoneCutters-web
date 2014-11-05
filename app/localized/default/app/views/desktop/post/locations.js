@@ -9,57 +9,81 @@ module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-locations-view',
     className: 'posting-locations-view',
-    selected: {},
-    firstRender: true,
     initialize: function() {
         Base.prototype.initialize.call(this);
-        this.selected = {};
-        this.firstRender = true;
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var location = this.app.session.get('location');
+        var states = this.parentView.parentView.options.states;
+        var cities = this.parentView.parentView.options.cities;
+        var location = this.parentView.parentView.options.currentLocation;
 
-        if (location.current) {
-            switch (location.current.type) {
-                case 'state':
-                    this.selected.state = location.current.url;
-                    break;
-                case 'city':
-                    this.selected.city = location.current.url;
-                    this.selected.state = location.children[0].url;
-                    break;
-                default:
-                    break;
-            }
+        if (states) {
+            states = _.map(states.toJSON(), function each(state) {
+                return {
+                    key: state.url,
+                    value: state.name
+                };
+            });
         }
-        this.getStates(!this.selected.state);
+        if (!location.state) {
+            this.addEmptyOption(states, 'countryoptions.Home_SelectState');
+        }
+        if (cities) {
+            cities = _.map(cities.toJSON(), function each(city) {
+                return {
+                    key: city.url,
+                    value: city.name
+                };
+            });
+        }
+        else {
+            cities = [];
+        }
+        if (!location.city) {
+            this.addEmptyOption(cities, 'countryoptions.Home_SelectCity');
+        }
         return _.extend({}, data, {
-            states: this.states,
-            cities: this.cities || undefined,
-            selected: this.selected
+            states: states,
+            cities: cities,
+            location: location
         });
-    },
-    postRender: function() {
-        if (this.firstRender && this.selected.state) {
-            this.firstRender = false;
-            this.$('#field-state').trigger('change');
-        }
     },
     events: {
         'change #field-state': 'onStateChange',
         'change #field-location': 'onCityChange'
     },
-    
+    postRender: function() {
+        var $states = $('#field-state');
+        var $cities = $('#field-location');
+        
+        if ($states.val()) {
+            this.parentView.$el.trigger('fieldSubmit', [$states]);
+        }
+        if ($cities.val()) {
+            this.parentView.$el.trigger('fieldSubmit', [$cities]);
+        }
+    },
+    addEmptyOption: function(list, text) {
+        list.unshift({
+            key: '',
+            value: this.parentView.parentView.dictionary[text]
+        });
+    },
     onStateChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
-        
-        this.selected.state = $field.val();
-        this.getCities(!this.selected.city);
+        var $firstOption = $field.find('option').first();
+
+        if ($firstOption.attr('value') === '') {
+            $firstOption.remove();
+        }
+
+        this.getCities($field.val());
+        this.parentView.$el.trigger('fieldSubmit', [$field]);
     },
     onCityChange: function(event) {
         event.preventDefault();
@@ -69,25 +93,16 @@ module.exports = Base.extend({
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
 
-        this.selected.city = $field.val();
-        this.parentView.$el.trigger('locationSubmit', [this.selected.city]);
-
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
+
+        this.parentView.$el.trigger('fieldSubmit', [$field]);
     },
-    getStates: function(addEmptyOption) {
-        this.states = _.map(this.parentView.parentView.options.states.toJSON(), function each(state) {
-            return {
-                key: state.url,
-                value: state.name
-            };
-        });
-        if (addEmptyOption) {
-            this.addEmptyOption('states', 'countryoptions.Home_SelectState');
-        }
-    },
-    getCities: function(addEmptyOption) {
+    getCities: function(state) {
+        var options;
+        var $cities = this.$('#field-location');
+
         var fetch = function(done) {
             this.app.fetch({
                 cities: {
@@ -95,39 +110,42 @@ module.exports = Base.extend({
                     params: {
                         level: 'states',
                         type: 'cities',
-                        location: this.selected.state,
+                        location: state,
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
             }, done.errfcb);
         }.bind(this);
 
-        var error = function(error) {
-            console.log(error); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(response) {
-            this.cities = _.map(response.cities.toJSON(), function each(city) {
+        var parse = function(done, response) {
+            options = _.map(response.cities.toJSON(), function each(city) {
                 return {
                     key: city.url,
                     value: city.name
                 };
             });
-            if (addEmptyOption) {
-                this.addEmptyOption('cities', 'countryoptions.Home_SelectCity');
-            }
-            this.render();
+            options.unshift({
+                key: '',
+                value: this.parentView.parentView.dictionary['countryoptions.Home_SelectCity']
+            });
+            done(options);
+        }.bind(this);
+
+        var error = function(error) {
+            console.log(error); // TODO: HANDLE ERRORS
+        }.bind(this);
+
+        var success = function(options) {
+            $cities.removeAttr('disabled').empty();
+            _.each(options, function each(city) {
+                $cities.append('<option value="' + city.key + '">' + city.value + '</option>');
+            }.bind(this));
         }.bind(this);
 
         asynquence().or(error)
             .then(fetch)
+            .then(parse)
             .val(success);
-    },
-    addEmptyOption: function(list, key) {
-        this[list].unshift({
-            key: '',
-            value: this.parentView.parentView.dictionary[key]
-        });
     }
 });
 

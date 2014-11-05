@@ -38,12 +38,33 @@ function flow(params, callback) {
         }.bind(this);
 
         var fetch = function(done) {
-            this.app.fetch({
-                postingSession: {
-                    model: 'PostingSession',
-                    params: {}
+            var data = {};
+            var locationUrl;
+
+            data.postingSession = {
+                model: 'PostingSession',
+                params: {}
+            };
+
+            if (isDesktop && location.current) {
+                if (location.current.type === 'state') {
+                    locationUrl = location.url;
                 }
-            }, {
+                else if (location.current.type === 'city') {
+                    locationUrl = location.children[0].url;
+                }
+                data.cities = {
+                    collection: 'Cities',
+                    params: {
+                        level: 'states',
+                        type: 'cities',
+                        location: locationUrl,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                    }
+                };
+            }
+
+            this.app.fetch(data, {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
@@ -55,18 +76,36 @@ function flow(params, callback) {
                 postingFlowController(res.postingSession);
             }
             else if (isDesktop) {
-                postingController(res.postingSession);
+                postingController(res.postingSession, res.cities);
             }
             else {
                 postingCategoriesController();
             }
         }.bind(this);
 
-        var postingController = function(postingSession) {
+        var postingController = function(postingSession, cities) {
+            var currentLocation = {};
+            
             tracking.setPage('desktop_step1');
+            if (location.current) {
+                switch (location.current.type) {
+                    case 'state':
+                        currentLocation.state = location.current.url;
+                        break;
+                    case 'city':
+                        currentLocation.state = location.children[0].url;
+                        currentLocation.city = location.current.url;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
-                tracking: tracking.generateURL.call(this)
+                tracking: tracking.generateURL.call(this),
+                cities: cities,
+                currentLocation: currentLocation
             }, false);
         }.bind(this);
 

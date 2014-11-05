@@ -74,7 +74,7 @@
         {% if required == true or required == 'true' %}
             required
         {% endif %}
-        {% if not options %}
+        {% if not options or options.length < 2 %}
             disabled
         {% endif %}
     >
