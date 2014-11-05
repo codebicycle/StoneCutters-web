@@ -339,7 +339,7 @@ function gallery(params, callback) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var category;
-            
+
             if (!subcategory) {
                 return error();
             }
@@ -650,6 +650,7 @@ function search(params, callback, gallery) {
         var page = params ? params.page : undefined;
         var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
+        var languages = this.app.session.get('languages');
         var query;
         var url;
         var urlPagination;
@@ -708,6 +709,7 @@ function search(params, callback, gallery) {
                 return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
             }
             params.seo = this.app.seo.isEnabled();
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
             query = _.clone(params);
             delete params.search;
@@ -976,6 +978,7 @@ function allresults(params, callback, gallery) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location').url;
         var siteLocation = this.app.session.get('siteLocation');
+        var languages = this.app.session.get('languages');
         var url = ['/nf/all-results', gallery || ''].join('');
         var query;
 
@@ -993,6 +996,7 @@ function allresults(params, callback, gallery) {
             delete params.search;
 
             params.seo = this.app.seo.isEnabled();
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
             query = _.clone(params);
 

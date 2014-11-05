@@ -99,6 +99,7 @@ function show(params, callback, gallery) {
 function handleItems(params, promise, gallery) {
     var page = params ? params.page : undefined;
     var infiniteScroll = config.get('infiniteScroll', false);
+    var languages = this.app.session.get('languages');
     var category;
     var subcategory;
     var query;
@@ -142,7 +143,7 @@ function handleItems(params, promise, gallery) {
         query = _.clone(params);
         params.categoryId = params.catId;
         params.seo = this.app.seo.isEnabled();
-        params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
+        params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
         delete params.catId;
         delete params.title;
         delete params.page;
