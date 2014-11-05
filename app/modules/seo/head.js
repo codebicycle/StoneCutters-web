@@ -166,13 +166,13 @@ Head = Backbone.Model.extend({
             $('head').append('<link rel="canonical" href="' + head.canonical + '" >');
         }
     },
-    reset: function (app, page) {
+    reset: function (app, options) {
         this.app = app;
         this.clear();
         Base.prototype.set.call(this, 'metatags', {}, {
             unset: false
         });
-        this.trigger('reset', this, page);
+        this.trigger('reset', this, options);
     },
     toJSON: function() {
         var head = Base.prototype.toJSON.apply(this, arguments);
@@ -205,14 +205,14 @@ Head = Backbone.Model.extend({
         }
         $('#header_keywords').text(value);
     },
-    onReset: function(head, page) {
+    onReset: function(head, options) {
         var currentRoute = this.app.session.get('currentRoute');
         var metatags;
         
-        if (!page && !currentRoute) {
+        if (!options.page && !currentRoute) {
             return;
         }
-        metatags = utils.get(configSeo, ['metatags'].concat(page || [currentRoute.controller, currentRoute.action]), {});
+        metatags = utils.get(configSeo, ['metatags'].concat(options.page || [currentRoute.controller, currentRoute.action]), {});
         this.setAll(_.extend({}, metatags, metasDefaults));
     }
 });

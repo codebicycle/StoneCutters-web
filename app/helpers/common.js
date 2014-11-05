@@ -202,7 +202,9 @@ module.exports = (function() {
             this.app.req.res.status(status);
             statsd.increment([this.app.session.get('location').name, 'errors', 400]);
         }
-        this.app.seo.reset(this.app, ['pages', 'error']);
+        this.app.seo.reset(this.app, {
+            page: ['pages', 'error']
+        });
         this.app.seo.addMetatag('robots', 'noindex, nofollow');
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         return callback(null, 'pages/error', res || {});
