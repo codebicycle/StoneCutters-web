@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Over OLX',
     'about.AboutText1': 'OLX is het meest toonaangevende advertentieplatform ter wereld en is gericht op opkomende markten, zowel mobiel als online',
     'about.AboutText2': 'OLX is over de hele wereld actief en is aanwezig in meer dan 40 landen',
+    'about.about_Body': '<p>OLX is de gratis online advertentiesite van de volgende generatie.<br /><br />OLX biedt een eenvoudige oplossing op het gebied van koop, verkoop, handel, discussie en organisatie, en is tevens een handig hulpmiddel voor het ontmoeten van mensen bij jou in de buurt (ongeacht waar je woont).<br /><br />Op OLX kun je:<br /><ul><li>ontwerp gemakkelijk kleurrijke advertenties met foto\'s</li><li>Je koop-, verkoop en gemeenschapsactiviteiten beheren in Mijn OLX</li><li>Je advertenties weergeven in je profiel op sociale netwerksites (bijv. Facebook en MySpace)</li><li>Via je mobiele telefoon toegang tot de site verkrijgen</li><li>OLX in je eigen taal bekijken</li></ul><br />OLX wordt gebruikt in meer dan <<QTY_COUNTRIES>> landen en in <<QTY_LANGUAGES>> talen. Het bedrijf is in maart 2006 opgericht en is in particuliere handen.</p>',
     'about.Download_Mob': 'Downloaden',
     'about.Mission': 'Missie',
     'about.MissionText1': 'Wij maken het leven makkelijker door mensen samen te brengen voor \'win-win\'-transacties',

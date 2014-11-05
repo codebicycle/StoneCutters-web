@@ -4,6 +4,9 @@ module.exports = {
     'pages#terms': {
         url: 'terms'
     },
+    'pages#about': {
+        url: 'about'
+    },
     'pages#help': {
         url: 'help'
     },

@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Apie OLX',
     'about.AboutText1': 'OLX yra pagrindin\u0117 viso pasaulio klasifikuot\u0173 skelbim\u0173 sistema, orientuota \u012F kylan\u010Dias rinkas \u2013 ir mobili\u0105sias, ir internetines',
     'about.AboutText2': 'OLX veikia pasauliniu mastu ir apima daugiau nei 40 \u0161ali\u0173',
+    'about.about_Body': '<p>OLX - tai naujos kartos nemokami klasifikuoti skelbimai internete.<br /><br />OLX teikia paprast\u0105 sprendim\u0105 sud\u0117tingiems pardavimams, pirkimams, prekybai, diskusijoms, organizavimui ir netoliese gyvenan\u010Di\u0173 \u017Emoni\u0173 sutikimui, nepriklausomai nuo to, kur beb\u016Btum\u0117te.<br /><br />OLX svetain\u0117je galite:<br /><ul><li>Lengvai sumodeliuokite puikius skelbimus su nuotraukomis.</li><li>Valdyti savo pardavimo, pirkimo ir bendruomen\u0117s veikl\u0105 skiltyje \u201EMano OLX\u201C</li><li>Pateikti skelbimus j\u016Bs\u0173 socialinio tinklalapio profilyje (Facebook, Myspace, ...)</li><li>Per\u017Ei\u016Br\u0117ti svetain\u0119 i\u0161 mobiliojo ry\u0161io telefono</li><li>Per\u017Ei\u016Br\u0117ti OLX savo gimt\u0105ja kalba</li></ul><br />OLX naudojasi \u017Emon\u0117s <<QTY_COUNTRIES>> \u0161ali\u0173, <<QTY_LANGUAGES>> kalb\u0173. \u012Emon\u0117 buvo \u012Fkurta 2006 m. kovo m\u0117n. ir tai yra privati kompanija.</p>',
     'about.Download_Mob': 'Atsisi\u0173sti',
     'about.Mission': 'Misija',
     'about.MissionText1': 'Mes geriname \u017Emoni\u0173 gyvenim\u0105, suteikdami jiems prog\u0105 susisiekti ir gauti abipus\u0117s naudos',
