@@ -107,6 +107,9 @@ module.exports = Base.extend({
         if (field instanceof window.jQuery) {
             $field = field;
             shouldValidateField = !!$field.data('validate');
+            if ($field.attr('name') === 'state' || $field.attr('name') === 'location') {
+                $field.trigger('fieldValidationStart');
+            }
             field.name = $field.attr('name');
             field.value = $field.val();
         }
@@ -142,6 +145,9 @@ module.exports = Base.extend({
                 message: this.dictionary["postingerror.PleaseCompleteThisField"]
             });
             $field.trigger('fieldValidationEnd', [_errors]);
+        }
+        else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
+            $field.trigger('fieldValidationEnd');
         }
         else {
             data = {

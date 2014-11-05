@@ -140,6 +140,7 @@ module.exports = Base.extend({
             _.each(options, function each(city) {
                 $cities.append('<option value="' + city.key + '">' + city.value + '</option>');
             }.bind(this));
+            this.parentView.$el.trigger('fieldSubmit', [$cities]);
         }.bind(this);
 
         asynquence().or(error)
