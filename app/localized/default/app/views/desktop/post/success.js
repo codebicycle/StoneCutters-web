@@ -10,7 +10,14 @@ module.exports = Base.extend({
     tagName: 'main',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        
+
+        data.item.location.stateName = data.item.location.children[0].name;
+        data.item.location.cityName = data.item.location.children[0].children[0].name;
+        if(data.item.location.children[0].children[0].children[0]){
+            data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
+        }
+        data.item.date.since = helpers.timeAgo(data.item.date);
+
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });

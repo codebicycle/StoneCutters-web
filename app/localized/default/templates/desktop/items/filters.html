@@ -31,8 +31,7 @@
             <span class="title filter-title" data-filter-name="{{ filter.name }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
             <div class="filter range {{ filter.name }}">
                 {% for input in filter.value  %}
-                    <input type="text" placeholder="{{ filter.current[input.id] if filters.has(filter.name, input.id) else input.value }}" class="text-field" data-filter-id="{{ input.id }}" data-filter-value="{{ filter.current[input.id] if filters.has(filter.name, input.id) }}" />
-                {% endfor %}
+                    <input type="text" placeholder="{{ filter.current[input.id] if filters.has(filter.name, input.id) else input.value }}" class="text-field" data-filter-id="{{ input.id }}" data-filter-value="{{ filter.current[input.id] if filters.has(filter.name, input.id) }}" />{% endfor %}
                 <button class="icons icon-check button range-submit" type="submit" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" ></button>
                 {{ ('<span class="clean-filters" data-filter-name="' + filter.name + '" data-filter-type="' + filter.type + '" >[' + dictionary["item.Clear"] + ']</span>') if filters.isActive(filter.name) }}
             </div>

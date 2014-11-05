@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galleri',
     'listingpageitemslisting.List': 'Liste',
     'listingpageitemslisting.Posted': 'Publisert',
+    'listingpageitemslisting.ResultsForNew': 'Side <<PAGE_NUMBER>> av <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultater for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi beklager men vi fant ingen s\xF8keresultater.',
     'listingpageitemslisting.ZeroResultsPage': 'Beklager, men vi har ikke funnet noen resultater i <<CATEGORY>> i <<REGION>>.',

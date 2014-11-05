@@ -36,12 +36,33 @@ function flow(params, callback) {
         }.bind(this);
 
         var fetch = function(done) {
-            this.app.fetch({
-                postingSession: {
-                    model: 'PostingSession',
-                    params: {}
+            var data = {};
+            var locationUrl;
+
+            data.postingSession = {
+                model: 'PostingSession',
+                params: {}
+            };
+
+            if (isDesktop && location.current) {
+                if (location.current.type === 'state') {
+                    locationUrl = location.url;
                 }
-            }, {
+                else if (location.current.type === 'city') {
+                    locationUrl = location.children[0].url;
+                }
+                data.cities = {
+                    collection: 'Cities',
+                    params: {
+                        level: 'states',
+                        type: 'cities',
+                        location: locationUrl,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                    }
+                };
+            }
+
+            this.app.fetch(data, {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
@@ -53,33 +74,48 @@ function flow(params, callback) {
                 postingFlowController(res.postingSession);
             }
             else if (isDesktop) {
-                postingController(res.postingSession);
+                postingController(res.postingSession, res.cities);
             }
             else {
                 postingCategoriesController();
             }
         }.bind(this);
 
-        var postingController = function(postingSession) {
+        var postingController = function(postingSession, cities) {
+            var currentLocation = {};
+            
             tracking.setPage('desktop_step1');
+            if (location.current) {
+                switch (location.current.type) {
+                    case 'state':
+                        currentLocation.state = location.current.url;
+                        break;
+                    case 'city':
+                        currentLocation.state = location.children[0].url;
+                        currentLocation.city = location.current.url;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
-                tracking: tracking.generateURL.call(this)
+                tracking: tracking.generateURL.call(this),
+                cities: cities,
+                currentLocation: currentLocation
             }, false);
         }.bind(this);
 
         var postingFlowController = function(postingSession) {
             callback(null, 'post/flow/index', {
-                postingSession: postingSession.get('postingSession'),
-                tracking: tracking.generateURL.call(this)
+                postingSession: postingSession.get('postingSession')
             }, false);
         }.bind(this);
 
         var postingCategoriesController = function() {
             tracking.setPage('categories');
-            callback(null, 'post/categories', {
-                tracking: tracking.generateURL.call(this)
-            });
+            callback(null, 'post/categories', {});
         }.bind(this);
 
         var error = function(err) {
@@ -125,8 +161,7 @@ function subcategories(params, callback) {
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, _.extend(params, {
             category: category.toJSON(),
-            subcategories: category.get('children').toJSON(),
-            tracking: tracking.generateURL.call(this)
+            subcategories: category.get('children').toJSON()
         }));
     }
 }
@@ -220,8 +255,7 @@ function form(params, callback) {
                 subcategory: subcategory.toJSON(),
                 language: languageId,
                 siteLocation: siteLocation,
-                form: form,
-                tracking: tracking.generateURL.call(this)
+                form: form
             });
         }.bind(this);
 
@@ -350,8 +384,7 @@ function success(params, callback) {
                 sk: securityKey,
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems,
-                tracking: tracking.generateURL.call(this)
+                relatedItems: _relatedItems
             });
         }.bind(this);
 
@@ -527,8 +560,7 @@ function edit(params, callback) {
                 errField: params.errField,
                 errMsg: params.errMsg,
                 sk: securityKey,
-                form: _form,
-                tracking: tracking.generateURL.call(this)
+                form: _form
             });
         }.bind(this);
 

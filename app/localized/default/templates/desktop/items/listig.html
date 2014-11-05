@@ -3,15 +3,15 @@
     {% for item in items %}
         <li>
             <a href="{{ item | slugToUrl | link }}">
-                <div class="items-image">
+                <figure class="items-image">
                     <img src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}">
-                </div>
+                </figure>
                 <h3 class="items-info">
                     {{ item.title | truncate( 50, True) }}
                 </h3>
                 <p class="items-price">
                     {{ item.price.displayPrice if item.price and item.price.amount > 0 }}
-                    <span>{{ item.priceTypeData.displayPriceType }}</span>
+                    {{ ('<span>' + item.priceTypeData.displayPriceType + '</span>') if not(item.priceTypeData.type == 'FIXED') }}
                 </p>
                 <p class="items-date">
                     {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}

@@ -1,0 +1,59 @@
+.posting-price-view {
+	
+	.field-controls {
+
+		.text-field {
+
+			float: left;
+
+		}
+
+		.type-select {
+
+			&:first-child {
+
+				width: 15%;
+				border-right-width: 0;
+				border-radius: 3px 0 0 3px;
+
+			}
+			
+			&:last-child {
+
+				width: 25%;
+				border-left-width: 0;
+				border-radius: 0 3px 3px 0;
+
+			}
+
+		}
+		
+		.type-text {
+
+			width: 60%;
+			border-radius: 0;
+
+		}
+	
+	}
+	
+	.field-wrapper {
+
+		&.success {
+
+			.field-controls {
+
+				.text-field {
+
+					border-left-color: $greyBorders;
+					border-right-color: $greyBorders;
+
+				}
+
+			}
+		
+		}
+
+	}
+
+}

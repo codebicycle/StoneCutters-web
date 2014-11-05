@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galleri',
     'listingpageitemslisting.List': 'Lista',
     'listingpageitemslisting.Posted': 'Uppladdad',
+    'listingpageitemslisting.ResultsForNew': 'Sida <<PAGE_NUMBER>> av <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultat f\xF6r <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vi \xE4r ledsna, men vi har inga resultat f\xF6r din s\xF6kning.',
     'listingpageitemslisting.ZeroResultsPage': 'Vi \xE4r ledsna, vi har inte hittat resultat i <<CATEGORY>> i <<REGION>>.',

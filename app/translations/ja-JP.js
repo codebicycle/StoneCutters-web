@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': '\u30AE\u30E3\u30E9\u30EA\u30FC',
     'listingpageitemslisting.List': '\u63B2\u8F09',
     'listingpageitemslisting.Posted': '\u63B2\u793A\u5B8C\u4E86',
+    'listingpageitemslisting.ResultsForNew': '<<TOTAL_PAGE_NUMBER>>\u30DA\u30FC\u30B8\u4E2D<<PAGE_NUMBER>>\u30DA\u30FC\u30B8\u76EE',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> \u306E\u7D50\u679C <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3002\u691C\u7D22\u7D50\u679C\u306F\u3054\u3056\u3044\u307E\u305B\u3093\u3002',
     'listingpageitemslisting.ZeroResultsPage': '\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3002<<REGION>>\u306E<<CATEGORY>>\u3067\u7D50\u679C\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002 ',

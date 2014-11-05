@@ -3,7 +3,7 @@
         {% if item.price.displayPrice %}
             <p class="price">{{ item.price.displayPrice }}</p>
         {% endif %}
-        {% if item.priceTypeData %}
+        {% if item.priceTypeData and not(item.priceTypeData.type == 'FIXED') %}
             <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
         {% endif %}
     </div>

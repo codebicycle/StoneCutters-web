@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': '\u0D9C\u0DD0\u0DBD\u0DBB\u0DD2\u0DBA',
     'listingpageitemslisting.List': '\u0DBD\u0DD0\u0DBA\u0DD2\u0DC3\u0DCA\u0DAD\u0DD4\u0DC0',
     'listingpageitemslisting.Posted': '\u0DB4\u0DC5 \u0D9A\u0DBB\u0DB1 \u0DBD\u0DAF\u0DD2',
+    'listingpageitemslisting.ResultsForNew': '<<PAGE_NUMBER>> \u0D9A\u0DD2\u0DB1\u0DCA <<TOTAL_PAGE_NUMBER>> \u0DC0\u0DB1 \u0DB4\u0DD2\u0DA7\u0DD4\u0DC0',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>>\u0DC3\u0DAF\u0DC4\u0DCF \u0DB4\u0DCA\u200D\u0DBB\u0DAD\u0DD2\u0DB5\u0DBD<<NUMBER>> \u0D9A\u0DCA',
     'listingpageitemslisting.WeAreSorryNoResults': '\u0D9A\u0DAB\u0D9C\u0DCF\u0DA7\u0DD4\u0DBA\u0DD2, \u0D91\u0DC4\u0DD9\u0DAD\u0DCA \u0D94\u0DB6\u0DDA \u0DC3\u0DD9\u0DC0\u0DD3\u0DB8 \u0DC3\u0DB3\u0DC4\u0DCF \u0DB4\u0DCA\u200D\u0DBB\u0DAD\u0DD2\u0DB5\u0DBD \u0DB1\u0DDC\u0DB8\u0DD0\u0DAD.',
     'listingpageitemslisting.ZeroResultsPage': '\u0D9A\u0DAB\u0D9C\u0DCF\u0DA7\u0DD4\u0DBA\u0DD2, \u0DB1\u0DB8\u0DD4\u0DAD\u0DCA <<CATEGORY>> \u0DC4\u0DD2 <<REGION>> \u0DC4\u0DD2 \u0DB4\u0DCA\u200D\u0DBB\u0DAD\u0DD2\u0DB5\u0DBD \u0DB1\u0DDC\u0DB8\u0DD0\u0DAD.',

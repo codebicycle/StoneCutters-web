@@ -260,7 +260,6 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
-                tracking: tracking.generateURL.call(this),
                 categories: this.dependencies.categories.toJSON()
             });
         }.bind(this);
@@ -355,8 +354,7 @@ function gallery(params, callback) {
 
             callback(null, {
                 item: item,
-                pos: pos,
-                tracking: tracking.generateURL.call(this)
+                pos: pos
             });
         }.bind(this);
 
@@ -449,8 +447,7 @@ function map(params, callback) {
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
             callback(null, {
-                item: _item.toJSON(),
-                tracking: tracking.generateURL.call(this)
+                item: _item.toJSON()
             });
         }.bind(this);
 
@@ -539,8 +536,7 @@ function reply(params, callback) {
 
             callback(null, {
                 item: item,
-                form: this.form,
-                tracking: tracking.generateURL.call(this)
+                form: this.form
             });
         }.bind(this);
 
@@ -616,8 +612,7 @@ function success(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
 
             callback(null, {
-                item: item,
-                tracking: tracking.generateURL.call(this)
+                item: item
             });
         }.bind(this);
 
@@ -658,8 +653,10 @@ function search(params, callback, gallery) {
         var query;
         var url;
         var urlPagination;
+        var category;
+        var subcategory;
 
-        var configure = function(done) {
+        var buildUrl = function(done) {
             url = ['/nf/'];
             urlPagination = [];
             gallery = gallery || '';
@@ -682,6 +679,26 @@ function search(params, callback, gallery) {
             urlPagination.push('[filters]');
             url = url.join('');
             urlPagination = urlPagination.join('');
+            done();
+        }.bind(this);
+
+        var configure = function(done) {
+            var categories = this.dependencies.categories;
+
+            if (params.catId) {
+                category = categories.search(params.catId);
+                if (!category) {
+                    category = categories.get(params.catId);
+                    if (!category) {
+                        done.abort();
+                        return helpers.common.redirect.call(this, '/');
+                    }
+                }
+                if (category.has('parentId')) {
+                    subcategory = category;
+                    category = categories.get(subcategory.get('parentId'));
+                }
+            }
             done();
         }.bind(this);
 
@@ -716,8 +733,7 @@ function search(params, callback, gallery) {
                     search: '',
                     meta: {
                         total: 0
-                    },
-                    tracking: tracking.generateURL.call(this)
+                    }
                 });
             }
             done();
@@ -767,14 +783,15 @@ function search(params, callback, gallery) {
             tracking.addParam('page_nb', items.meta.totalPages);
             tracking.addParam('section', query.categoryId);
             tracking.addParam('page', page);
+            tracking.addParam('category', category ? category.toJSON() : undefined);
+            tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
             callback(null, ['items/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: items.meta,
                 filters: items.filters,
                 search: query.search,
-                infiniteScroll: infiniteScroll,
-                tracking: tracking.generateURL.call(this)
+                infiniteScroll: infiniteScroll
             });
         }.bind(this);
 
@@ -783,6 +800,7 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(buildUrl)
             .then(configure)
             .then(prepare)
             .then(redirect)
@@ -807,7 +825,7 @@ function staticSearch(params, callback) {
         var redirect = function(done) {
             if (platform !== 'desktop') {
                 done.abort();
-                return helpers.common.redirect.call(this, '/');
+                return helpers.common.redirect.call(this, '/nf/search/' + params.search);
             }
             if (params.search && params.search.toLowerCase() === 'gumtree' && this.app.session.get('location').url === 'www.olx.co.za') {
                 done.abort();
@@ -854,8 +872,7 @@ function staticSearch(params, callback) {
                     search: '',
                     meta: {
                         total: 0
-                    },
-                    tracking: tracking.generateURL.call(this)
+                    }
                 });
             }
             done();
@@ -926,8 +943,7 @@ function staticSearch(params, callback) {
                 meta: items.meta,
                 filters: items.filters,
                 search: query.search,
-                infiniteScroll: infiniteScroll,
-                tracking: tracking.generateURL.call(this)
+                infiniteScroll: infiniteScroll
             });
         }.bind(this);
 
@@ -1030,8 +1046,7 @@ function allresults(params, callback, gallery) {
                 items: _items.toJSON(),
                 meta: meta,
                 filters: _items.filters,
-                infiniteScroll: infiniteScroll,
-                tracking: tracking.generateURL.call(this)
+                infiniteScroll: infiniteScroll
             });
         }.bind(this);
 

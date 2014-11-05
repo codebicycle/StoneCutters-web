@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galerija',
     'listingpageitemslisting.List': 'S\u0105ra\u0161as',
     'listingpageitemslisting.Posted': 'Paskelbta',
+    'listingpageitemslisting.ResultsForNew': 'Puslapis <<PAGE_NUMBER>> i\u0161 <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> <<KEYWORD>> rezultatai',
     'listingpageitemslisting.WeAreSorryNoResults': 'Atsipra\u0161ome, ta\u010Diau neturime j\u016Bs\u0173 paie\u0161kos rezultat\u0173.',
     'listingpageitemslisting.ZeroResultsPage': 'Atsipra\u0161ome, <<CATEGORY>>, esan\u010Di\u0173 <<REGION>>, neradome.',

@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Tri\u1EC3n l\xE3m',
     'listingpageitemslisting.List': 'Danh m\u1EE5c',
     'listingpageitemslisting.Posted': '\u0110\xE3 \u0111\u0103ng',
+    'listingpageitemslisting.ResultsForNew': 'Trang <<PAGE_NUMBER>> tr\xEAn t\u1ED5ng s\u1ED1 <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> k\u1EBFt qu\u1EA3 c\u1EE7a <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ch\xFAng t\xF4i r\u1EA5t ti\u1EBFc ch\xFAng t\xF4i kh\xF4ng c\xF3 k\u1EBFt qu\u1EA3 cho t\xECm ki\u1EBFm c\u1EE7a b\u1EA1n.',
     'listingpageitemslisting.ZeroResultsPage': 'Xin l\u1ED7i, ch\xFAng t\xF4i kh\xF4ng t\xECm th\u1EA5y k\u1EBFt qu\u1EA3 trong <<CATEGORY>> t\u1EA1i <<REGION>>.',

@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Fotogal\xE9ria',
     'listingpageitemslisting.List': 'Zoznam',
     'listingpageitemslisting.Posted': 'Uverejnen\xE9',
+    'listingpageitemslisting.ResultsForNew': 'Strana <<PAGE_NUMBER>> z <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> v\xFDsledkov na k\u013E\xFA\u010Dov\xE9 slovo <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': '\u013Dutujeme, neboli n\xE1jden\xE9 \u017Eiadne v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Je n\xE1m \u013E\xFAto, nena\u0161li sme v\xFDsledky v kateg\xF3rii <<CATEGORY>> v regi\xF3ne <<REGION>>.',

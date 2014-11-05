@@ -377,5 +377,13 @@ module.exports = {
             page_name: 'sitemapcalendar',
             category: 'static_pages'
         }
+    },
+    'pages#about': {
+        process: false,
+        names: {
+            page_name: 'static/about',
+            category: 'static_pages'
+        }
     }
+
 };

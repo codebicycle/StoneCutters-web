@@ -40,8 +40,7 @@ function register(params, callback) {
         }
         callback(null, {
             form: this.form,
-            agreeTerms: params.agreeTerms,
-            tracking: tracking.generateURL.call(this)
+            agreeTerms: params.agreeTerms
         });
     }
 }
@@ -64,8 +63,7 @@ function lostpassword(params, callback) {
     function controller() {
         callback(null, {
             form: this.form,
-            success: params.success,
-            tracking: tracking.generateURL.call(this)
+            success: params.success
         });
     }
 }
@@ -89,8 +87,7 @@ function login(params, callback) {
         }
         callback(null, {
             form: this.form,
-            redirect: params.redirect,
-            tracking: tracking.generateURL.call(this)
+            redirect: params.redirect
         });
     }
 }
@@ -134,9 +131,7 @@ function myolx(params, callback) {
             });
         }
 
-        callback(null, {
-            tracking: tracking.generateURL.call(this)
-        });
+        callback(null, {});
     }
 }
 
@@ -210,8 +205,7 @@ function myads(params, callback) {
             if (platform === 'desktop') {
                 view = 'users/myolx';
                 _.extend(data, {
-                    viewname: 'myads',
-                    tracking: tracking.generateURL.call(this)
+                    viewname: 'myads'
                 });
             }
             callback(null, view, data);
@@ -297,8 +291,7 @@ function favorites(params, callback) {
             if (platform === 'desktop') {
                 view = 'users/myolx';
                 _.extend(data, {
-                    viewname: 'favorites',
-                    tracking: tracking.generateURL.call(this)
+                    viewname: 'favorites'
                 });
             }
             callback(null, view, data);
@@ -352,9 +345,9 @@ function messages(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            callback(null, {
+            callback(null, 'users/myolx', {
                 messages: response.messages.toJSON(),
-                tracking: tracking.generateURL.call(this)
+                viewname: 'messages'
             });
         }.bind(this);
 
@@ -406,8 +399,9 @@ function readmessages(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            callback(null, {
-                message: response.message.toJSON()
+            callback(null, 'users/myolx', {
+                message: response.message.toJSON(),
+                viewname: 'readmessages'
             });
         }.bind(this);
 

@@ -35,6 +35,7 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+
         return _.extend({}, data);
     },
     postRender: function() {
@@ -106,6 +107,9 @@ module.exports = Base.extend({
         if (field instanceof window.jQuery) {
             $field = field;
             shouldValidateField = !!$field.data('validate');
+            if ($field.attr('name') === 'state' || $field.attr('name') === 'location') {
+                $field.trigger('fieldValidationStart');
+            }
             field.name = $field.attr('name');
             field.value = $field.val();
         }
@@ -141,6 +145,9 @@ module.exports = Base.extend({
                 message: this.dictionary["postingerror.PleaseCompleteThisField"]
             });
             $field.trigger('fieldValidationEnd', [_errors]);
+        }
+        else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
+            $field.trigger('fieldValidationEnd');
         }
         else {
             data = {
@@ -211,7 +218,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $loading = $('body > .loading').show();
+        this.$('#posting-contact-view').trigger('disablePost');
+
         var query = {
             postingSession: this.options.postingsession
         };
@@ -304,9 +312,7 @@ module.exports = Base.extend({
             });
         }.bind(this);
 
-        var always = function() {
-            $loading.hide();
-        }.bind(this);
+        var always = function() {}.bind(this);
 
         this.$('#errors').trigger('hide');
 

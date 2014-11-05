@@ -25,8 +25,7 @@ function list(params, callback) {
 
         this.app.seo.setContent(this.dependencies.categories.meta);
         callback(null, {
-            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-            tracking: tracking.generateURL.call(this)
+            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.')
         });
     }
 }
@@ -221,8 +220,7 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: _items.toJSON(),
             filters: _items.filters,
-            infiniteScroll: infiniteScroll,
-            tracking: tracking.generateURL.call(this)
+            infiniteScroll: infiniteScroll
         });
     }.bind(this);
 
@@ -272,8 +270,7 @@ function handleShow(params, promise) {
 
         done({
             type: 'categories',
-            category: category.toJSON(),
-            tracking: tracking.generateURL.call(this)
+            category: category.toJSON()
         });
     }.bind(this);
 

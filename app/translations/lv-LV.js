@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galerija',
     'listingpageitemslisting.List': 'Saraksts',
     'listingpageitemslisting.Posted': 'Public\u0113ts',
+    'listingpageitemslisting.ResultsForNew': '<<PAGE_NUMBER>>. lappuse no pavisam <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezult\u0101ti p\u0113c <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Diem\u017E\u0113l nevaram atrast j\u016Bsu nor\u0101d\u012Btajiem parametriem atbilsto\u0161us rezult\u0101tus.',
     'listingpageitemslisting.ZeroResultsPage': 'Diem\u017E\u0113l m\u0113s neatrad\u0101m rezult\u0101tus <<CATEGORY>>, <<REGION>>.',

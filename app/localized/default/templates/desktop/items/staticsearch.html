@@ -4,7 +4,7 @@
         {% include (template + '/items/filters.html') %}
     </nav>
     <section id='listing-items'>
-        <ul class="items-list">
+        <ul class="items-list {{ 'staticsearch' if isStaticSearch else '' }}">
             {% include (template + '/items/items.html') %}
         </ul>
         {% if meta.next or meta.previous %}

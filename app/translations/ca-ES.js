@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Gal\xB7leria',
     'listingpageitemslisting.List': 'Llista',
     'listingpageitemslisting.Posted': 'Publicat',
+    'listingpageitemslisting.ResultsForNew': 'P\xE0gina <<PAGE_NUMBER>> de <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultats per a <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ho sentim, no hem trobat resultats de <<CATEGORY>> a <<REGION>>.',

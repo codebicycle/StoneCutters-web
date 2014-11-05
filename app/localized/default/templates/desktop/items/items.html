@@ -1,3 +1,4 @@
+{% set changesearch =  '<strong>' + search + '</strong>' %}
 {% for item in items %}
     <li>
         <a href="{{ item | slugToUrl | link }}" data-qa="item-list" >
@@ -9,7 +10,7 @@
             --><div class="items-info">
                 <h3>{{ item.title }}</h3><br>
                 {% if isStaticSearch %}
-                    <b>{{ item.description | truncate( 200, True, '...') }}</b><br>
+                    <div class="description">{{ item.description | truncate( 200, True, '...') }} </div>
                 {% endif %}
                 <span>{{ dictionary["itemslisting.NavigatorByCategory"] }}  | {{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
             </div><!--

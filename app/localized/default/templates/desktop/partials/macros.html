@@ -74,14 +74,15 @@
         {% if required == true or required == 'true' %}
             required
         {% endif %}
-        {% if not options %}
+        {% if not options or options.length < 2 %}
             disabled
         {% endif %}
     >
         {% for option in options %}
             <option
                 value="{{ option.key }}"
-                {% if option.key == selected %}
+                
+                {% if not selected and loop.index == 1 or option.key == selected %}
                     selected
                 {% endif %}
             >{{ option.value }}</option>

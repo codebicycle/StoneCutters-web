@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Alb\xFCm',
     'listingpageitemslisting.List': 'Liste',
     'listingpageitemslisting.Posted': 'G\xF6nderildi',
+    'listingpageitemslisting.ResultsForNew': 'Sayfa <<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>> i\xE7in <<NUMBER>> sonu\xE7',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z bulunamad\u0131.',
     'listingpageitemslisting.ZeroResultsPage': '\xDCzg\xFCn\xFCz <<CATEGORY>> kategorisinde b\xF6lgesi <<REGION>> olan sonuca rastlanmad\u0131.',
