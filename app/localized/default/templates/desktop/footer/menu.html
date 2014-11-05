@@ -1,5 +1,5 @@
 <div data-slide-content="true" class="slide-container">
-    {% if not inHome %}
+    {% if not hidden.categories %}
         <div class="category-slide footer-slide hide">
             <a title="close" data-footer-slidedown="category-slide" class="icons icon-close" href="#"></a>
             {% view 'footer/categorytree' %}
@@ -12,9 +12,9 @@
             <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
         </div>
         <ul>
-            <li><a href="/help">{{ dictionary["biderrorheader.Help"] }}</a></li>
-            <li><a href="/terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
-            <li><a href="#">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
+            <li><a rel="nofollow" href="{{ '/help' | link }}">{{ dictionary["biderrorheader.Help"] }}</a></li>
+            <li><a rel="nofollow" href="{{ '/terms' | link }}">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
+            <li><a rel="nofollow" href="{{ '/about' | link }}">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
             <!--li><a href="#">{{ dictionary["contact_us.ContactBrand"] }} </a></li-->
         </ul>
     </div>

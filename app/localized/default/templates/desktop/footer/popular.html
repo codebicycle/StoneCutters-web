@@ -1,8 +1,8 @@
 <div class="title-bar">
-    <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
+    <h3 class="title">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','OLX') }}</h3>
 </div>
 {% set itemsPerColumn = 18 %}
-<ul class="countries-list countries-list-first">
+<ul class="popular-list popular-list-first">
     {% for city in topCities %}
         <li><a href="{{ '/nf/all-results' | link({location: city.url}) }}" rel="nofollow">{{ city.name }}</a></li>
     {% endfor %}

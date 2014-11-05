@@ -7,20 +7,32 @@ module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
     className: 'footer-view',
+    postRender: function() {
+        if (!this.hidden) {
+            this.app.on('footer:show', this.onShow.bind(this));
+            this.app.on('footer:hide', this.onHide.bind(this));
+        }
+        this.hidden = {};
+    },
+    onShow: function(element) {
+        delete this.hidden[element];
+        this.render();
+    },
+    onHide: function(element) {
+        this.hidden[element] = true;
+        this.render();
+    },
     events: {
         'click [data-footer-slidedown]': 'slideDownContent',
         'click [data-footer-slide]': 'slideFooter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+
         return _.extend({}, data, {
             user: this.app.session.get('user'),
-            inHome: this.isHome || false
+            hidden: this.hidden
         });
-    },
-    postRender: function () {
-        this.app.router.appView.on('home:start', this.onHomeStart.bind(this));
-        this.app.router.appView.on('home:end', this.onHomeEnd.bind(this));
     },
     slideDownContent: function(event) {
         event.preventDefault();
@@ -69,13 +81,5 @@ module.exports = Base.extend({
                 });
             }
         }
-    },
-    onHomeStart: function () {
-        this.isHome = true;
-        this.render();
-    },
-    onHomeEnd: function () {
-        this.isHome = false;
-        this.render();
     }
 });

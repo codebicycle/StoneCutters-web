@@ -24,14 +24,10 @@ module.exports = Base.extend({
             categories: list
         });
     },
-    postRender: function() {
-        this.app.router.once('action:end', this.onStart);
-        this.app.router.once('action:start', this.onEnd);
+    onActionStart: function(event) {
+        this.app.trigger('footer:hide', 'categories');
     },
-    onStart: function(event) {
-        this.appView.trigger('home:start');
-    },
-    onEnd: function(event) {
-        this.appView.trigger('home:end');
+    onActionEnd: function(event) {
+        this.app.trigger('footer:show', 'categories');
     }
 });
