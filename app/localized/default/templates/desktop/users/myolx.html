@@ -1,7 +1,7 @@
 {% if viewname == 'messages' %}
-    {% set messages =  'active messages' %}
+    {% set messagesClass =  'active messages' %}
 {% elif viewname == 'readmessages' %}
-    {% set messages = 'active' %}
+    {% set messagesClass = 'active' %}
 {% endif %}
 <ul class="myolxmenu">
     <li class="{{ 'active' if viewname == 'myads' else '' }}">
@@ -13,7 +13,7 @@
     {# --><li>
         <a href="#">{{ dictionary["myolx.Settings"] }} </a>
     </li><!-- #}
-    --><li class="{{ messages }}">
+    --><li class="{{ messagesClass }}">
         <a href="{{ '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
     </li>
 </ul>

@@ -1,6 +1,26 @@
 .users_messages_view {
     box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
     
+    .alert {
+        p {
+            font-size: 14px;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+
+            &.success {
+                background: $greenLight;
+                &::before{
+                    color: $green;
+                    font-size: 16px;
+                }
+            }
+            &.fail {
+                background: $pink;
+                color: $red;
+            }
+        }
+    }
     .actions,
     .backToOlx {
         background: $greyBoxBg;
