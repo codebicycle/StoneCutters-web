@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Reddedilen ilan',
     'misc.Removed': 'Kald\u0131r\u0131ld\u0131',
     'misc.SeeAdIn2Hrs_Mob': '\xD6n\xFCm\xFCzdeki 2 saat i\xE7erisinde OLX\'te \xE7\u0131kacakt\u0131r',
+    'misc.SelectAnOption_BR': 'Bir se\xE7enek se\xE7in.',
     'misc.SellingIsEasy': 'Satmak \xE7ok kolay',
     'misc.Sell_Post_Mobile_India': 'G\xF6nder',
     'misc.SendEmail': 'E-Posta G\xF6nder',

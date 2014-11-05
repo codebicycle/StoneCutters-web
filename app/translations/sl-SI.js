@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Zavrnjen oglas',
     'misc.Removed': 'Odstranjen',
     'misc.SeeAdIn2Hrs_Mob': 'Na OLX ga boste videli v naslednjih 2 urah',
+    'misc.SelectAnOption_BR': 'Izberi mo\u017Enost.',
     'misc.SellingIsEasy': 'Prodajanje je enostavno',
     'misc.Sell_Post_Mobile_India': 'Objavi',
     'misc.SendEmail': 'Po\u0161lji e-po\u0161to',

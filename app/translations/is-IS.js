@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Augl\xFDsingu var hafna\xF0',
     'misc.Removed': 'Fjarl\xE6g\xF0',
     'misc.SeeAdIn2Hrs_Mob': 'Augl\xFDsingin mun birtast \xE1 OLX innan tvegga klukkustunda',
+    'misc.SelectAnOption_BR': 'Veldu valkost.',
     'misc.SellingIsEasy': 'Au\xF0velt a\xF0 selja',
     'misc.Sell_Post_Mobile_India': 'Birta',
     'misc.SendEmail': 'Senda t\xF6lvup\xF3st',

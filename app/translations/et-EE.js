@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Tagasi l\xFCkatud kuulutus',
     'misc.Removed': 'Eemaldatud',
     'misc.SeeAdIn2Hrs_Mob': 'J\xE4rgmise 2 tunni jooksul ilmub see OLXis n\xE4htavale',
+    'misc.SelectAnOption_BR': 'Valige suvand.',
     'misc.SellingIsEasy': 'M\xFC\xFCa on lihtne',
     'misc.Sell_Post_Mobile_India': 'Postita',
     'misc.SendEmail': 'Saatke e-kiri',

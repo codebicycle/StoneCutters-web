@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Noraid\u012Btais sludin\u0101jums',
     'misc.Removed': 'Iz\u0146emts',
     'misc.SeeAdIn2Hrs_Mob': 'You will see it on OLX within the next 2 hours',
+    'misc.SelectAnOption_BR': 'Atlasiet iesp\u0113ju.',
     'misc.SellingIsEasy': 'Selling is easy',
     'misc.Sell_Post_Mobile_India': 'Public\u0113t',
     'misc.SendEmail': 'S\u016Bt\u012Bt e-pastu',

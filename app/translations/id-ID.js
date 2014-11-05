@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Iklan yang ditolak',
     'misc.Removed': 'Dihapus',
     'misc.SeeAdIn2Hrs_Mob': 'Anda akan melihatnya di OLX dalam waktu 2 jam ke depan',
+    'misc.SelectAnOption_BR': 'Pilih opsi',
     'misc.SellingIsEasy': 'Menjual itu mudah',
     'misc.Sell_Post_Mobile_India': 'Kirim',
     'misc.SendEmail': 'Kirim Email',

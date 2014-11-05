@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': '\u05DE\u05D5\u05D3\u05E2\u05D4 \u05E9\u05E0\u05D3\u05D7\u05EA\u05D4',
     'misc.Removed': '\u05D4\u05D5\u05E1\u05E8\u05D4',
     'misc.SeeAdIn2Hrs_Mob': '\u05EA\u05E8\u05D0\u05D4 \u05D0\u05D5\u05EA\u05D4 \u05D1-OLX \u05D1\u05E9\u05E2\u05EA\u05D9\u05D9\u05DD \u05D4\u05E7\u05E8\u05D5\u05D1\u05D5\u05EA.',
+    'misc.SelectAnOption_BR': '\u05D1\u05D7\u05E8 \u05D0\u05E4\u05E9\u05E8\u05D5\u05EA.',
     'misc.SellingIsEasy': '\u05DC\u05DE\u05DB\u05D5\u05E8 - \u05D6\u05D4 \u05E7\u05DC',
     'misc.Sell_Post_Mobile_India': '\u05E4\u05E8\u05E1\u05DD',
     'misc.SendEmail': '\u05E9\u05DC\u05D7 \u05D3\u05D5\u05D0"\u05DC',

@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Atmestas skelbimas',
     'misc.Removed': 'Pa\u0161alintas',
     'misc.SeeAdIn2Hrs_Mob': 'Pamatysite j\u012F OLX tinklaviet\u0117je per artimiausias 2 valandas',
+    'misc.SelectAnOption_BR': 'Pasirinkite nuostat\u0105.',
     'misc.SellingIsEasy': 'Parduoti paprasta',
     'misc.Sell_Post_Mobile_India': 'Skelbti',
     'misc.SendEmail': 'Si\u0173sti el. prane\u0161im\u0105',

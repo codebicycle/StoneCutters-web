@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Og\u0142oszenie odrzucone',
     'misc.Removed': 'Usuni\u0119te',
     'misc.SeeAdIn2Hrs_Mob': 'Zobaczysz je w serwisie OLX w ci\u0105gu 2 godzin',
+    'misc.SelectAnOption_BR': 'Wybierz opcj\u0119.',
     'misc.SellingIsEasy': 'Sprzedawanie jest \u0142atwe',
     'misc.Sell_Post_Mobile_India': 'Publikuj',
     'misc.SendEmail': 'Wy\u015Blij e-mail',

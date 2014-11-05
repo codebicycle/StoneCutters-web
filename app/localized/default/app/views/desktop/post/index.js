@@ -172,7 +172,7 @@ module.exports = Base.extend({
             $field.closest('.field-wrapper').addClass('error').removeClass('success');
             _.each(_errors, function eachError(error) {
                 this.errors[error.selector] = error.message;
-                $field.after('<small class="error message">' + error.message + '</small>');
+                $field.parent().append('<small class="error message">' + error.message + '</small>');
             }.bind(this));
         }
         else {

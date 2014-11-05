@@ -66,7 +66,7 @@
     ></textarea>
 {% endmacro %}
 
-{% macro Select(name = '', required = false, options, selected) %}
+{% macro Select(name = '', required = false, options, selected, related) %}
     <select
         id="field-{{ name }}"
         name="{{ name }}"
@@ -76,6 +76,9 @@
         {% endif %}
         {% if not options or options.length < 2 %}
             disabled
+        {% endif %}
+        {% if related %}
+            data-related="{{ related }}"
         {% endif %}
     >
         {% for option in options %}
@@ -100,7 +103,7 @@
                 {% set type = field.type or 'text' %}
                 {{ TextInput(type = type, name = field.name, required = field.mandatory) }}
             {% elif field.fieldType == 'combobox' %}
-                {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.selected) }}
+                {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.selected, related = field.related) }}
             {% endif %}
             {% if hint %}
                 <small class="hint message">{{ hint }}</small>

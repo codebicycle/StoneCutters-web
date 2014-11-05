@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Refize li',
     'misc.Removed': 'Te retire',
     'misc.SeeAdIn2Hrs_Mob': 'W ap w\xE8 li sou OLX nan 2 \xE8dtan',
+    'misc.SelectAnOption_BR': 'Chwazi yon opsyon.',
     'misc.SellingIsEasy': 'LI fasil pou vann',
     'misc.Sell_Post_Mobile_India': 'Vann',
     'misc.SendEmail': 'Voye Yon Im\xE8l',

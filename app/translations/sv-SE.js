@@ -352,6 +352,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Avvisade annons',
     'misc.Removed': 'Avl\xE4gsnad',
     'misc.SeeAdIn2Hrs_Mob': 'Du kommer att se din annons p\xE5 OLX inom de n\xE4rmaste 2 timmar',
+    'misc.SelectAnOption_BR': 'V\xE4lj ett alternativ.',
     'misc.SellingIsEasy': 'Att s\xE4lja \xE4r l\xE4tt',
     'misc.Sell_Post_Mobile_India': 'L\xE4gg upp',
     'misc.SendEmail': 'Skicka e-post',
