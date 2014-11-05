@@ -112,7 +112,9 @@ function handleItems(params, promise, gallery) {
         category = _category;
         subcategory = _subcategory;
 
-        seo.reset(this.app, currentRouter);
+        seo.reset(this.app, {
+            page: currentRouter
+        });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         done();
     }.bind(this);
@@ -236,7 +238,9 @@ function handleShow(params, promise) {
 
         category = _category;
 
-        seo.reset(this.app, currentRouter);
+        seo.reset(this.app, {
+            page: currentRouter
+        });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         done();
     }.bind(this);

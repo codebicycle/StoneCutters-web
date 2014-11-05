@@ -37,7 +37,9 @@ function getPropertyHead(key) {
 Seo = Backbone.Model.extend({
     initialize: function (attrs, options) {
         this.head = new Head({}, options);
-        this.reset(options.app);
+        this.reset(options.app, {
+            silent: true
+        });
 
         this.on('change:staticSearch', this.onChangeStaticSearch, this);
     },
@@ -80,14 +82,19 @@ Seo = Backbone.Model.extend({
             }
         }
     },
-    reset: function (app, page) {
+    reset: function (app, options) {
+        options = _.defaults({}, options || {}, {
+            silent: false
+        });
         app.seo = this;
         this.app = app;
         this.config = _.extend({}, config.getForMarket(app.session.get('location').url, ['seo'], defaultConfig), {
             head: true
         });
-        this.head.reset(app, page);
-        this.clear();
+        if (!options.silent) {
+            this.head.reset(app, options);
+            this.clear();
+        }
     },
     addMetatag: function (name, value) {
         this.head.set(name, value);
