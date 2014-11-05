@@ -1,36 +1,46 @@
 .listing-tabs {
     border-bottom: 1px solid $greyBorders;
-    display: block;
-    font-size: $s;
-    height: 34px;
-    margin: 0;
+    clear-fix();
+
+    .order-by {
+        float: right;
+
+        fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+    }
 
     .tabs {
         float: left;
+        height: 33px;
         ul-reset();
 
         li {
             display: inline-block;
-            margin-right: 5px;
+            margin-right: 10px;
+            vertical-align: top;
+            &:last-child {
+                margin-right: 0;
+            }
+
             a {
                 background: $greyBoxBg;
                 border-styles($greyBorders, 3px 3px 0 0, solid solid none, 1px 1px 0);
                 color: $greyStrong;
                 display: block;
-                float: left;
-                height: 33px;
                 line-height: 2.3;
                 padding: 0 10px;
 
                 &.active {
                     background: $greyPageBg;
                     color: $black;
-                    height: 34px;
-                    margin-bottom: -1px;
+                    height: 33px;
                 }
-                &:before {
+                &::before {
                     display: inline-block;
-                    font-size: 13px;
+                    font-size: $s;
                     height: 17px;
                     margin-right: 10px;
                 }

@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galerya',
     'listingpageitemslisting.List': 'Listahan',
     'listingpageitemslisting.Posted': 'Tapos ng i-post',
+    'listingpageitemslisting.ResultsForNew': 'Pahina <<PAGE_NUMBER>> ng <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> na mga resulta para sa <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',
     'listingpageitemslisting.ZeroResultsPage': 'Paumanhin, walang resulta sa <<CATEGORY>> sa <<REGION>>.',

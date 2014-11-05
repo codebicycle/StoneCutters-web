@@ -1,8 +1,9 @@
 {% include (template + '/partials/footer-slider.html') %}
 <div class="footer-options">
     <ul class="select">
-        {% if inHome == false %}
-        <li class="categories"><a data-footer-slide="category-slide" href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-arrow"></span></a>{% endif %}</li><!--
+        {% if not inHome %}
+            <li class="categories"><a data-footer-slide="category-slide" href="#">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}<span class="icons icon-arrow"></span></a></li>
+        {% endif %}<!--
         --><li><a data-footer-slide="popular-slide" href="#">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','') }}<span class="icons icon-arrow"></span></a></li><!--
         --><li><a data-footer-slide="around-slide" href="#" >{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}<span class="icons icon-arrow"></span></a></li><!--
         --><li><a data-footer-slide="help-slide" href="#" rel="nofollow" >{{ dictionary["biderrorheader.Help"] }}<span class="icons icon-arrow"></span></a></li>

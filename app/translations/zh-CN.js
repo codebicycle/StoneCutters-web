@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': '\u753B\u5ECA',
     'listingpageitemslisting.List': '\u5217\u8868',
     'listingpageitemslisting.Posted': '\u53D1\u5E03',
+    'listingpageitemslisting.ResultsForNew': '<<TOTAL_PAGE_NUMBER>> \u4E4B <<PAGE_NUMBER>> \u9875',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>>\u7684<<NUMBER>>\u7D50\u679C',
     'listingpageitemslisting.WeAreSorryNoResults': '\u5BF9\u4E0D\u8D77\uFF0C\u6CA1\u6709\u627E\u5230\u60A8\u641C\u7D22\u7684\u7ED3\u679C',
     'listingpageitemslisting.ZeroResultsPage': '\u5BF9\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u5728<<REGION>> \u7684 <<CATEGORY>> \u76F8\u5173\u7ED3\u679C\u3002',

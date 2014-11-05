@@ -106,6 +106,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Gallery',
     'listingpageitemslisting.List': 'List',
     'listingpageitemslisting.Posted': 'Posted',
+    'listingpageitemslisting.ResultsForNew': 'Page <<PAGE_NUMBER>> of <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',

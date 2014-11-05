@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galeri',
     'listingpageitemslisting.List': 'Daftar',
     'listingpageitemslisting.Posted': 'Terpajang',
+    'listingpageitemslisting.ResultsForNew': 'Halaman <<PAGE_NUMBER>> dari <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> hasil untuk <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Maaf tidak ada hasil untuk pencarian Anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Maaf, kami tidak menemukan hasil untuk <<CATEGORY>> di <<REGION>>.',

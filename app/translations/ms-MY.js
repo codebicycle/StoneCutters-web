@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galeri',
     'listingpageitemslisting.List': 'Senarai',
     'listingpageitemslisting.Posted': 'Disiarkan',
+    'listingpageitemslisting.ResultsForNew': 'Halaman <<PAGE_NUMBER>> daripada <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> keputusan untuk <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Kami minta maaf kerana kami tidak mendapat keputusan untuk carian anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Kami minta maaf, kami masih tidak menjumpai keputusan dalam <<CATEGORY>> di <<REGION>>.',

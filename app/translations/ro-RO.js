@@ -108,6 +108,7 @@ module.exports = {
     'listingpageitemslisting.Gallery': 'Galerie',
     'listingpageitemslisting.List': 'List\u0103',
     'listingpageitemslisting.Posted': 'Publicat',
+    'listingpageitemslisting.ResultsForNew': 'Pagina <<PAGE_NUMBER>> din <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultate pentru <<KEYWORD>>',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ne pare r\u0103u dar nu avem rezultate pentru c\u0103utarea dvs.',
     'listingpageitemslisting.ZeroResultsPage': 'Ne pare r\u0103u, nu am g\u0103sit rezultate \xEEn <<CATEGORY>> \xEEn <<REGION>>.',

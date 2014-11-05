@@ -6,18 +6,14 @@
         {% else %}
             <a href="{{ nav.link | linkig({location: location.url}) }}" rel="nofollow">{{ location.name }}</a>
         {% endif %}
-        </li>
-        {% if location.children | length == 1 %}
-            <li>
+        </li>{% if location.children | length == 1 %}<li>
                 {% if location.children[0].children | length == 0 %}
                     {{ location.children[0].name }}
                     <a href="{{ nav.link | linkig({location: location.url}) }}" class="icons icon-close state" rel="nofollow"></a>
                 {% else %}
                     <a href="{{ nav.link | linkig({location: location.children[0].url}) }}" rel="nofollow">{{ location.children[0].name }}</a>
                 {% endif %}
-            </li>
-            {% if location.children[0].children | length == 1 %}
-                <li>
+            </li>{% if location.children[0].children | length == 1 %}<li>
                     {{ location.children[0].children[0].name }}
                     <a href="{{ nav.link | linkig({location: location.children[0].url}) }}" class="icons icon-close city" rel="nofollow"></a>
                 </li>

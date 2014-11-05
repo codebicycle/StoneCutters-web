@@ -1,65 +1,32 @@
 .items-locations {
-    display: block;
     margin-bottom: 15px;
 
     ul {
         ul-reset();
     }
     .locations-tabs {
-        height: 29px;
         font-size: $s;
+        height: 37px;
         li {
             display: inline-block;
-            float: left;
             position: relative;
-        }
-        li:not(:last-child) {
-            border-bottom: none;
-            box($white, $greyBorders, 0, 6px 10px 6px 20px);
-            tab-arrow(right, $white, $greyBorders, 1px, 14px, 10);
-        }
-        li:first-child {
-            box($white, $greyBorders, 3px 0 0 0, 6px 10px);
-            border-bottom: none;
-        }
-        li:last-child {
-            box($yellow, $yellowBorders, 0 3px 0 0, 6px 30px 7px 20px, solid, 1px 1px 0 0);
-            border-bottom: none;
-            a {
-                color: $black;
-            }
-        }
-        li:only-child {
-            box($yellow, $yellowBorders, 3px 3px 0 0, 6px 10px 7px);
-            border-bottom: none;
-            a {
-                color: $black;
-            }
-        }
-        &.locations-empty {
-            li{
-                background: $white;
-                border: 1px solid $greyBorders;
-                padding-bottom: 6px;
-                .icon-close {
-                    color: $white;
-                }
-            }
-        }
-        li {
+            vertical-align: top;
             a.icon-close {
                 font-size: remify(8px);
                 position: absolute;
                 right: 7px;
                 top: 6px;
+                &.state {
+                    color: $yellow;
+                }
                 &::before {
-                    background: $greyBorders;
+                    background: $greyStrong;
                     circle(15px);
                     line-height: 15px;
                     text-align: center;
                 }
                 &:hover::before {
-                    background: $greyStrong;
+                    background: $black;
                 }
                 &.city {
                     color: $white;
@@ -69,18 +36,47 @@
                 }
             }
         }
-
+        li:not(:last-child) {
+            border-bottom: none;
+            box($white, $greyBorders, 0, 10px 10px 10px 28px);
+            tab-arrow(right, $white, $greyBorders, 1px, 18px, 10);
+        }
+        li:first-child {
+            box($white, $greyBorders, 3px 0 0 0, 10px);
+            border-bottom: none;
+        }
+        li:last-child {
+            box($yellow, $yellowBorders, 0 3px 0 0, 10px 30px 11px 28px, solid, 1px);
+            border-bottom: $yellow;
+        }
+        li:only-child {
+            box($yellow, $yellowBorders, 3px 3px 0 0, 10px 10px 11px 10px);
+            border-bottom: $yellow;
+        }
+        &.locations-empty {
+            li{
+                background: $white;
+                border: 1px solid $greyBorders;
+                .icon-close {
+                    color: $white;
+                }
+                &:last-child {
+                    padding-bottom: 10px;
+                }
+            }
+        }
     }
     .locations-list {
         box($yellow, $yellowBorders, 0 3px 3px 3px, 10px);
 
         li {
-            width: 24%;
             display: inline-block;
-            margin: 1px 0;
             font-size: $xs;
+            margin: 1px 0;
+            vertical-align: top;
+            width: 24%;
             span {
-                color: #666;
+                color: $greyStrong;
             }
         }
     }
