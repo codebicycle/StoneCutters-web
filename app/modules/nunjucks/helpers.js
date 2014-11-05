@@ -136,7 +136,7 @@ module.exports = function(nunjucks) {
             href = helpers.common.linkig.call(this.ctx, href, query, this.ctx.nav.current);
         }
         else {
-            return link.apply(this, arguments);
+            href = link.call(this, href, query);
         }
         return helpers.common.fullizeUrl(href, this.ctx.app);
     }
