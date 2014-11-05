@@ -25,9 +25,7 @@ function terms(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {
-            tracking: tracking.generateURL.call(this)
-        });
+        callback(null, {});
     }
 }
 
@@ -46,9 +44,7 @@ function help(params, callback) {
 
     function controller() {
         // Delete this callback
-        callback(null, {
-            tracking: tracking.generateURL.call(this)
-        });
+        callback(null, {});
         /*
             TODO [MOB-4717] Help.
         var spec = {
@@ -89,7 +85,6 @@ function interstitial(params, callback) {
             maxAge: this.app.session.get('showInterstitial')
         });
         callback(null, {
-            tracking: tracking.generateURL.call(this),
             ref: params.ref
         });
     }
@@ -116,8 +111,7 @@ function error(params, callback) {
         this.app.seo.addMetatag('robots', 'noindex, nofollow');
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {
-            error: err,
-            tracking: tracking.generateURL.call(this)
+            error: err
         });
     }
 }
@@ -176,8 +170,7 @@ function allstates(params, callback) {
 
             callback(null, {
                 states: response.states.toJSON(),
-                meta: meta,
-                tracking: tracking.generateURL.call(this)
+                meta: meta
             });
         }.bind(this);
 
@@ -197,9 +190,7 @@ function sitemap(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {
-            tracking: tracking.generateURL.call(this)
-        });
+        callback(null, {});
     }
 }
 
