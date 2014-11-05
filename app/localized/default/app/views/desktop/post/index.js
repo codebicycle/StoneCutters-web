@@ -212,7 +212,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $loading = $('body > .loading').show();
+        this.$('#posting-contact-view').trigger('disablePost');
+
         var query = {
             postingSession: this.options.postingsession
         };
@@ -303,10 +304,6 @@ module.exports = Base.extend({
                 }),
                 cache: false
             });
-        }.bind(this);
-
-        var always = function() {
-            $loading.hide();
         }.bind(this);
 
         this.$('#errors').trigger('hide');
