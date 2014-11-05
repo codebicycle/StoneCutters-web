@@ -45,12 +45,12 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
         var order = ['currency_type', 'priceC', 'priceType'];
 
         fields = _.filter(fields, function each(field) {
             return !(field.name === 'title' || field.name === 'description');
         });
+        this.fields = [];
         _.each(order, function find(name) {
             this.fields.push(_.find(fields, function search(field) {
                 if (field.name === 'priceC') {
