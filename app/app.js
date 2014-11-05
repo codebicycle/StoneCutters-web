@@ -28,11 +28,15 @@ module.exports = Base.extend({
             this.set({
                 loading: true
             });
+            if (this.router.currentView) {
+                this.router.currentView.onActionEnd();
+            }
         }, this);
         this.router.on('action:end', function onEnd() {
             this.set({
                 loading: false
             });
+            this.router.currentView.onActionStart();
         }, this);
         Base.prototype.start.call(this);
     },
@@ -64,6 +68,7 @@ module.exports = Base.extend({
     },
     getSpecs: function(dependencies) {
         var specs = {};
+        var seo = Seo.instance(this);
 
         dependencies.forEach(function each(dependency) {
             switch (dependency) {
@@ -73,7 +78,7 @@ module.exports = Base.extend({
                         params: {
                             location: this.session.get('siteLocation'),
                             languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id,
-                            seo: Seo.instance(this).isEnabled()
+                            seo: seo.isEnabled()
                         }
                     };
                 break;

@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var Seo = require('../modules/seo');
 var middlewares = {
     environment: require('./environment'),
     redirections: require('./redirections'),
@@ -42,7 +43,9 @@ module.exports = function(controller, exclude) {
                 view = undefined;
             }
             json = json !== undefined ? json : true;
-            data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data);
+            data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data, {
+                seo: Seo.instance(this.app)
+            });
             if (!view) {
                 callback(err, data);
             }

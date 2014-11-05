@@ -1,11 +1,12 @@
 'use strict';
 
-var Base = require('rendr/shared/base/view');
 var _ = require('underscore');
 var async = require('async');
+var Base = require('rendr/shared/base/view');
 var localization = require('../../../../../shared/config').get('localization', {});
-var helpers = require('../../../../helpers');
 var translations = require('../../../../../shared/translations');
+var utils = require('../../../../../shared/utils');
+var helpers = require('../../../../helpers');
 
 module.exports = Base.extend({
     initialize: function() {
@@ -108,7 +109,9 @@ module.exports = Base.extend({
                 }
             }
         }.bind(this));
-    }
+    },
+    onActionStart: utils.noop,
+    onActionEnd: utils.noop
 });
 
 module.exports.attach = Base.attach = function(app, parentView, callback) {

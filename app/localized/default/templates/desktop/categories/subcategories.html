@@ -5,7 +5,7 @@
     <ul class="sub-categories">
         {% for subcategory in currentCategory.children.toJSON() %}
             <li>
-                <a href="{{ subcategory | slugToUrl | linkig }}" >{{subcategory.trName}} <span class="count">{{ (subcategory.counter | countFormat) if subcategory.counter > 0 }}</span></a>
+                <a href="{{ subcategory | slugToUrl | linkig }}" ><h2>{{subcategory.trName}}</h2> <span class="count">{{ (subcategory.counter | countFormat) if subcategory.counter > 0 }}</span></a>
             </li>
         {% endfor %}
     </ul>

@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Iets oor OLX',
     'about.AboutText1': 'OLX is die w\xEAreld se leidende kleinadvertensieplatform wat op opkomende markte gefokus is, op mobiele fone sowel as aanlyn.',
     'about.AboutText2': 'OLX funsioneer globaal en is teenwoordig in meer as 40 lande..',
+    'about.about_Body': '<p>OLX is die volgende generasie van gratis aanlyn-snuffeladvertensies.<br /><br />OLX bied \'n eenvoudige oplossing vir die ingewikkeldheid van verkoop, koop, handel, beraadslaging, organisering en die ontmoeting van mense naby jou, waar jy ookal mag woon.<br /><br />Op OLX kan jy:<br /><ul><li>Pragtige advertensies met prente maklik ontwerp.</li><li>Jou verkoop, koop en gemeenskapsaktiwiteite in My OLX beheer</li><li>Jou advts. op jou sosiale netwerkrpofiel (Facebook, Myspace, ...) vertoon</li><li>Toegang tot die tuiste vanaf jou selfoon kry</li><li>OLX in jou plaaslike taal sien</li></ul><br />OLX word in meer as <<QTY_COUNTRIES>> lande en in <<QTY_LANGUAGES>> tale gebruik. Die maatskappy is in Maart 2006 gestig en is in privaat besit.</p>',
     'about.Download_Mob': 'Laai af',
     'about.Mission': 'Missie',
     'about.MissionText1': 'Ons verbeter die lewes van mense deur hulle  vir wen-wen wisselings bymekaar te bring.',

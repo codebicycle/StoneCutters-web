@@ -1,12 +1,12 @@
 <div class="title-bar">
-	{% block title %}<h1>Categorías populares</h1>{% endblock %}
+	{% block title %}<h2>Categorías populares</h2>{% endblock %}
 </div>
 <ul class="category-list category-list-first">
 	{% for category in categories %}
 		<li class="category">
 			<a class="category-link" href="{{ category | slugToUrl | link }}">
 				{% block icon %}<span class="icon cat-{{ category.id }}"></span>{% endblock %}
-				{{ category.trName }}
+				<h3>{{ category.trName }}</h3>
 			</a>
 			<ul>
 			{% for subcategory in category.children.toJSON() %}
