@@ -18,6 +18,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.app.session.get('path');
+
         this.filters = data.filters;
         this.filters.order = this.order;
 
@@ -92,8 +93,9 @@ module.exports = Base.extend({
         return path;
     },
     processItem: function(item) {
-        item.date.since = helpers.timeAgo(item.date);
         var expregsearch = new RegExp(this.search, 'gi');
+
+        item.date.since = helpers.timeAgo(item.date);
         item.description = item.description.replace(expregsearch,'<strong>'+this.search+'</strong>');
         item.title = item.title.replace(expregsearch,'<strong>'+this.search+'</strong>');
     }
