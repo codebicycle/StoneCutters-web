@@ -18,16 +18,20 @@
             border: none;
             cursor: pointer;
         }
-        .icons::before {
-            color: $greyStrong;
-            cursor: pointer;
-            font-size: remify(22px);
-            position: absolute;
-            right: 10px;
-            top: 10px;
+        &:hover {
+            .icons::before {
+                color: $black;
+            }
         }
-        .icons::before {
-            font-size: remify(10px);
+        .icons {
+            &::before {
+                color: $greyStrong;
+                cursor: pointer;
+                font-size: remify(10px);
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
         }
     }
     h2 {
