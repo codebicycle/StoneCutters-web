@@ -49,7 +49,7 @@ module.exports = Base.extend({
                     value: this.parentView.dictionary['misc.SelectAnOption_BR']
                 });
             }
-        });
+        }.bind(this));
         this.fields = fields;
         this.render();
     },
