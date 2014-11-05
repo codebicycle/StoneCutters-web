@@ -6,7 +6,7 @@ var _ = require('underscore');
 module.exports = Base.extend({
     tagName: "section",
     className: 'pages-sitemap-view',
-    id: "category-tree",    
+    id: "category-tree",
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var categories = data.categories;
@@ -23,6 +23,12 @@ module.exports = Base.extend({
             location: this.app.session.get('location'),
             categories: list
         });
+    },
+    onActionStart: function(event) {
+        this.app.trigger('footer:hide', 'categories');
+    },
+    onActionEnd: function(event) {
+        this.app.trigger('footer:show', 'categories');
     }
 });
 

@@ -36,6 +36,10 @@
     }
 
     .help-slide {
+        ul {
+            ul-reset();
+            padding: 20px;
+        }
         li {
             display: inline-block;
             padding-right: 20px;
@@ -88,8 +92,13 @@
     .category-link {
         color: $black;
         display: inline-block;
-        font-size: $m;
         padding-bottom: 10px;
+
+        h3 {
+            font-size: $m;
+            font-weight: normal;
+            margin: 0;
+        }
     }
 }
 
@@ -119,6 +128,36 @@
     }
 
     .countries-list-first {
+         padding-left: 20px;
+    }
+}
+
+.footer-popular-view {
+    ul {
+        ul-reset();
+    }
+
+    .popular-list {
+        box-sizing: border-box;
+        float: left;
+        padding: 20px 5px;
+        width: 50%;
+
+        &:last-child {
+            padding-right: 20px;
+        }
+
+        a {
+            font-size: $xs;
+            line-height: 1;
+        }
+
+        li {
+            padding-bottom: 4px;
+        }
+    }
+
+    .popular-list-first {
          padding-left: 20px;
     }
 }
