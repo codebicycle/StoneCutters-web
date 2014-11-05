@@ -1,0 +1,6 @@
+<form action="{{ 'nf/search/redirect' | link }}" method="post" role="search" class="search-form {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" >
+    <fieldset>
+        <input class="text-field" name="search" type="text" placeholder="{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}" tabindex="1" data-qa="search-input" /><!--
+        --><button class="icons icon-search button" type="submit" data-qa="search-submit"></button>
+    </fieldset>
+</form>

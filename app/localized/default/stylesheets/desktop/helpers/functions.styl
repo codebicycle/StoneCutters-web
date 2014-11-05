@@ -1,0 +1,11 @@
+grey(percentage)
+    return $white - percentage
+
+remify(value)
+    u = unit(value);
+
+    if (u is 'px') {
+        return unit(value/$baseFont, 'rem');
+    } else {
+        return unit(value, u);
+    }

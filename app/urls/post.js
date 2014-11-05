@@ -13,7 +13,7 @@ module.exports = {
     'post#subcategories': {
         url: 'posting/:categoryId'
     },
-    'post#categoriesOrFlow': {
+    'post#flow': {
         url :'posting'
     },
     'post#edit': {

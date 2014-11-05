@@ -43,6 +43,12 @@ module.exports = {
     'redirections#login': {
         url: 'auth/login'
     },
+    'redirections#popularSearches': {
+        urls: [
+            'popular-searches(-cat-:categoryId)',
+            'popular-searches'
+        ]
+    },
     'redirections#register': {
         url: 'registration/index'
     },
@@ -75,5 +81,8 @@ module.exports = {
     },
     'redirections#redirecttomain': {
         url: 'redirecttomain'
+    },
+    'redirections#php': {
+        url: ':path.php'
     }
 };

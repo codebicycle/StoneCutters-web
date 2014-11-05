@@ -1,27 +1,4 @@
-
-<h1>
-	<strong>{{ location.current.name if location.current and location.current.type != 'country' else location.name }} anuncios gratis</strong>
-</h1>
-<section id="headerSession">
-	<ul>
-		{% if not user %}
-			<li><a href="{{ '/login' | link }}">Entrar</a></li>
-		{% else %}
-			<li>¡{{ dictionary["defaultheader2.Hello"] }} {{ user.username }}</li>
-			<li><a href="{{ '/logout' | link }}">{{ dictionary["myolx.SignOut"] }}</a></li>
-			<li><a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["defaulthtmlhead.MyOlxTitle"] }}</a></li>
-		{% endif %}
-	</ul>
-</section>
-<section id="headerSearch">
-	<a href="{{ '/' | link }}" class="logo"></a>
-	<div id="search">
-	    <form action="{{ '/nf/search/redirect' | link }}" class="search-form" method="post" >
-	        <input name="search" data-qa="search-input" placeholder="{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}">
-	        <button type="submit">
-				<span class="icons"></span>
-			</button>
-	    </form>
-	</div>
-	<a href="{{ '/posting' | link }}" class="post btn orange">{{ dictionary["defaultheader2.Post"] }}</a>
-</section>
+<div class="brand"><a href="{{ '/' | link }}"><img src="{{ '/images/desktop/logo.png' | static }}" alt="OLX Logo" /></a></div>
+{% view 'partials/search' %}
+<h6 class="posting-title {{ 'disabled' if currentRoute.controller != 'post' and currentRoute.action != 'flow' }}">{{ dictionary["itemslisting.FreeClassifieds"] }}<span>{{ dictionary["defaultheader.WhereBuyersMeetSellers"] }}</span></h6>
+<a href="{{ '/posting' | link }}" rel="nofollow" class="posting {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" role="button" data-qa="post-button" >{{ dictionary["defaultheader2.Post"] }}</a>

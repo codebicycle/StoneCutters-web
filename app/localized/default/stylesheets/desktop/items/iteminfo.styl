@@ -1,0 +1,22 @@
+.item-info {
+    color: $greyStrong;
+    font-size: $xs;
+    ul-reset();
+    margin: 10px 0;
+
+    li {
+        display: inline-block;
+        magin-left: 10px;
+        vertical-align: middle;
+        &:first-child {
+            margin-right: 10px;
+            &::before {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .icons::before {
+        font-size: $m;
+    }
+}

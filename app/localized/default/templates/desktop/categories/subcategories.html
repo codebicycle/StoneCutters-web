@@ -1,0 +1,17 @@
+<span class="title">{{ dictionary["itemslisting.NavigatorByCategory"] }}</span>
+<a href="{{ 'nf/all-results' | linkig }}" rel="nofollow"  class="icons icon-arrow-left categories-link">{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
+{% if not currentCategory.parentId %}
+    <span class="category-selected arrow icons icon-cat-{{category.id}}">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
+    <ul class="sub-categories">
+        {% for subcategory in currentCategory.children.toJSON() %}
+            {% if subcategory.counter > 0 %}
+                <li>
+                    <a href="{{ subcategory | slugToUrl | linkig }}" ><h2>{{subcategory.trName}}</h2> <span class="count">{{ subcategory.counter | countFormat }}</span></a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <a href="{{ category | slugToUrl | linkig }}" class="icons icon-cat-{{category.id}}" > {{ category.trName }} </a>
+    <span class="category-selected">{{ currentCategory.trName }} <span>{{ currentCategory.counter }}</span></span>
+{% endif %}

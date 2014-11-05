@@ -1,14 +1,14 @@
 {% view 'locations/select' %}
 {% view 'partials/search' %}
 {% set s = 's' %}
-{% if metadata.total == 1 %}
+{% if meta.total == 1 %}
     {% set s = '' %}
 {% endif %}
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>' , search) | replace('<<NUMBER>>' , metadata.total)) }}
+{{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>' , search) | replace('<<NUMBER>>' , meta.total)) }}
 <div id="itemListing">
-    {% if metadata.total == 0 %}
+    {% if meta.total == 0 %}
         <div class="emtyList">
             <div></div>
             <p>{{ dictionary["misc.NoResults"] }}</p>
@@ -34,19 +34,18 @@
                 </li>
             {% endfor %}
         </ul>
-        {% if metadata.next or metadata.previous %}
+        {% if meta.next or meta.previous %}
             <div id="itemPagination">
-                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow {{ "leftA" if metadata.previous else "leftD" }}"></a>
+                <a href="{{ (meta.previous | link) if meta.previous else '#' }}" class="arrow {{ "leftA" if meta.previous else "leftD" }}"></a>
                 <div class="center">
-                    {{ metadata | pagination }}
+                    {{ meta | pagination }}
                 </div>
-                <a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow {{ "rightA" if metadata.next else "rightD" }}"></a>
+                <a href="{{ (meta.next | link) if meta.next else '#' }}" class="arrow {{ "rightA" if meta.next else "rightD" }}"></a>
             </div>
             <div id="itemPaginationCaption">&#160;</div>
         {% endif %}
     {% endif %}
-
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

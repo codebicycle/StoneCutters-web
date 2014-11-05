@@ -1,0 +1,104 @@
+.users_messages_view {
+    box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
+    
+    .alert {
+        p {
+            font-size: 14px;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+
+            &.success {
+                background: $greenLight;
+                &::before{
+                    color: $green;
+                    font-size: 16px;
+                }
+            }
+            &.fail {
+                background: $pink;
+                color: $red;
+            }
+        }
+    }
+    .actions,
+    .backToOlx {
+        background: $greyBoxBg;
+        padding: 15px 20px;
+    }
+    .notification {
+        padding: 10px 20px;
+        border-bottom: 1px solid $greyBorders;
+    }
+
+    ul {
+        ul-reset();
+        li {
+            padding: 10px 20px;
+            border-bottom: 1px solid $greyBorders;
+        }
+    }
+    .backToOlx {
+        border-bottom: 0;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .btn {
+        action-button($white, $black, 3px, 5px 20px);
+        box-shadow(0 1px 0 rgba(255,255,255,0.2) inset)
+        display: inline-block;
+        margin-left: 5px;
+        padding: 7px 10px 5px 10px;
+        text-align: center;
+
+        &:before {
+            margin: -3px 5px 0;
+        }
+    }
+
+    .active {
+        &::after {
+            border-color: transparent red;
+        }
+    }
+
+    .name, .title, .date {
+        display: inline-block;
+    }
+
+    .name {
+        width: 220px;
+    }
+
+    .title {
+        margin-left: 20px;
+        width: 450px;
+    }
+
+    .date {
+        float: right;
+        text-align: right;
+        width: 200px;
+    }
+
+    .back {
+        font-size: $xs;
+    }
+
+
+    form {
+
+        label {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        input[type="checkbox"] {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+    }
+}

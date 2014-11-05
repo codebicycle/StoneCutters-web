@@ -1,0 +1,18 @@
+{% include (template + '/items/itemlistingnav.html') %}
+<ul class="items-list">
+    {# {% if showAdSenseListingTop %}
+        <li>
+            <!-- TODO: Replace this markup with actual Google AdSense markup -->
+            <p>AdSenseListingTop</p>
+        </li>
+    {% endif %} #}
+    
+    {% include (template + '/items/items.html') %}
+
+    {# {% if showAdSenseListingBottom %}
+        <li>
+            <!-- TODO: Replace this markup with actual Google AdSense markup -->
+            <p>AdSenseListingBottom</p>
+        </li>
+    {% endif %} #}
+</ul>

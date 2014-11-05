@@ -3,7 +3,6 @@
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var seo = require('../modules/seo');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
@@ -27,22 +26,19 @@ function list(params, callback) {
                 citiesParams.name = params.search;
             }
             if (params.location) {
-                seo.addMetatag('robots', 'noindex, follow');
-                seo.addMetatag('googlebot', 'noindex, follow');
+                this.app.seo.addMetatag('robots', 'noindex, follow');
+                this.app.seo.addMetatag('googlebot', 'noindex, follow');
             }
             if (params.target && params.target === 'posting') {
                 tracking.setPage('post#location');
-                seo.addMetatag('robots', 'noindex, nofollow');
-                seo.addMetatag('googlebot', 'noindex, nofollow');
-                seo.update();
+                this.app.seo.addMetatag('robots', 'noindex, nofollow');
+                this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
             this.app.fetch({
                 cities: {
                     collection: 'Cities',
                     params: citiesParams
                 }
-            }, {
-                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -51,8 +47,7 @@ function list(params, callback) {
                 cities: response.cities.toJSON(),
                 search: params.search,
                 posting: params.posting,
-                target: params.target,
-                tracking: tracking.generateURL.call(this)
+                target: params.target
             });
         }.bind(this);
 

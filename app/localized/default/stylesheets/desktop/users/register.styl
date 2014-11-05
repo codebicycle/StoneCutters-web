@@ -1,0 +1,95 @@
+.users_register_view {
+    box($white, $greyBorders, 3px, 0 0 20px 0, solid, 1px);
+
+    .title {
+        border-bottom: 1px solid $greyBorders;
+        font-size: $l;
+        margin: 0;
+        padding-bottom: 5px;
+        padding: 13px 20px;
+    }
+
+    form {
+        margin-top: 20px;
+        padding: 0 20px;
+
+        .wrapper {
+            border: 0;
+            padding: 0;
+            margin: 0 0 10px 0;
+
+            &.error {
+                .login-label, .advice {
+                    color: $red;
+                }
+                .text-field {
+                    border-color: $red;
+                }
+                .advice {
+                    display: block;
+                }
+            }
+        }
+
+        .login-label, .wrapper-inputs {
+            float: left;
+        }
+
+        .login-label {
+            width: 160px;
+            text-align: right;
+            margin: 10px 20px 0 0;
+        }
+
+        .terms {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 180px;
+            .checkbox {
+                margin-right: 5px;
+            }
+        }
+
+        .text-field {
+            box($white, $greyBorders, 3px, 0 10px, solid, 1px);
+            width: 310px;
+        }
+
+        .advice {
+            display: none;
+            font-size: $xs;
+            margin-top: 5px;
+            width: 700px;
+            &.terms {
+                margin-left: 180px;
+            }
+        }
+
+        .info {
+            display: block;
+            font-size: $xs;
+            margin-top: 5px;
+            color: $greyStrong;
+        }
+
+        .send {
+            display: inline-block;
+            margin-left: 180px;
+            padding: 10px 30px;
+            font-size: $baseFont;
+            margin-top: 10px;
+        }
+
+        .forgot {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+    }
+
+    .login {
+        display: inline-block;
+        margin: 10px 0 20px 200px;
+    }
+
+}

@@ -17,7 +17,7 @@
         {% view 'locations/select' %}
         {% set templateName = template + '/partials/search.html' %}
         {% include templateName %}
-        {% if metadata.total == 0 %}
+        {% if meta.total == 0 %}
             <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4" bgcolor="#FFFFFF">
                 <tbody>
                     <tr>
@@ -67,26 +67,20 @@
                             </td>
                         </tr>
                     {% endfor %}
-                    <tr style="display: none;">
-                        <td>
-                            {% set templateName = template + '/partials/tracking.html' %}
-                            {% include templateName %}
-                        </td>
-                    </tr>
                 </tbody>
             </table>
-            {% if metadata.next or metadata.previous %}
+            {% if meta.next or meta.previous %}
                 <table width="100%" border="0" bgcolor="#DDDDDD" cellspacing="0" cellpadding="4">
                     <tbody>
                         <tr>
                             <td align="center" style="border-top: solid thin #808080;">
                                 <small style="display: block;">
-                                    {% if metadata.previous %}
-                                        <a href="{{ metadata.previous | link }}" >&lt;</a>
+                                    {% if meta.previous %}
+                                        <a href="{{ meta.previous | link }}" >&lt;</a>
                                     {% endif %}
-                                    {{ metadata | pagination('wap') }}
-                                    {% if metadata.next %}
-                                        <a href="{{ metadata.next | link }}" >&gt;</a>
+                                    {{ meta | pagination('wap') }}
+                                    {% if meta.next %}
+                                        <a href="{{ meta.next | link }}" >&gt;</a>
                                     {% endif %}
                                 </small>
                             </td>
@@ -98,5 +92,10 @@
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>

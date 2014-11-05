@@ -1,17 +1,17 @@
 <section id="itemListing">
 	<nav class="breadcrumb">
-		<a href="">Todas as Categorias</a> 
-		<span class="arrow"></span> <strong>{{ category.trName }}</strong> 
+		<a href="">Todas as Categorias</a>
+		<span class="arrow"></span> <strong>{{ category.trName }}</strong>
 		{% if location.current and location.current.type != 'country' %}
 			Anúncios em {{location.current.name}}
 		{% else %}
 			Anúncios no {{location.name}}
 		{% endif %}
-		<span class="count">({{ metadata.total | countFormat }})</span>
-		{% if not infiniteScroll and (metadata.next or metadata.previous) %}
+		<span class="count">({{ meta.total | countFormat }})</span>
+		{% if not infiniteScroll and (meta.next or meta.previous) %}
 			<div class="itemPagination">
-            	<p>Página {{ metadata.page }} de {{ metadata.totalPages | countFormat }}</p>
-                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="icons left {{ "disable" if not metadata.previous }}"></a><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="icons right {{ "disable" if not metadata.next }}"></a>
+            	<p>Página {{ meta.page }} de {{ meta.totalPages | countFormat }}</p>
+                <a href="{{ (meta.previous | link) if meta.previous else '#' }}" class="icons left {{ "disable" if not meta.previous }}"></a><a href="{{ (meta.next | link) if meta.next else '#' }}" class="icons right {{ "disable" if not meta.next }}"></a>
             </div>
         {% endif %}
 	</nav>
@@ -45,13 +45,13 @@
 				<li class="current">{{ location.current.name }}<a href="{{ '/nf/all-results' | link({location: location.children[0].url}) }}"></a></li>
 			{% endif %}
 		</ul>
-		{% if metadata.filters.state or metadata.filters.city %}
+		{% if meta.filters.state or meta.filters.city %}
 			<div class="list">
 				<ul>
-					{% for state in metadata.filters.state.value %}
+					{% for state in meta.filters.state.value %}
 						<li><a href="{{ '/nf/all-results' | link({location: state.id}) }}">{{ state.value }} <span>{{ state.count | countFormat }}</span></a></li>
 					{% endfor %}
-					{% for city in metadata.filters.city.value %}
+					{% for city in meta.filters.city.value %}
 						<li><a href="{{ '/nf/all-results' | link({location: city.id}) }}">{{ city.value }} <span>{{ city.count | countFormat }}</span></a></li>
 					{% endfor %}
 					<div class="clear"></div>
@@ -81,15 +81,17 @@
             <div class="loader is-loading" style="display: none;">
                 <img src="{{ '/images/html5/loading.gif' | static }}" alt="Loading...">
             </div>
-            <input id="currentUrl" type="hidden" class="hide" value="{{ metadata.current | link }}">
-        {% elif metadata.next or metadata.previous %}
+            <input id="currentUrl" type="hidden" class="hide" value="{{ meta.current | link }}">
+        {% elif meta.next or meta.previous %}
             <div class="itemPagination">
-                <a href="{{ (metadata.previous | link) if metadata.previous else '#' }}" class="arrow icons {{ "leftA" if metadata.previous else "leftD" }}"></a><div class="center">{{ metadata | pagination }}</div><a href="{{ (metadata.next | link) if metadata.next else '#' }}" class="arrow icons {{ "rightA" if metadata.next else "rightD" }}"></a>
+                <a href="{{ (meta.previous | link) if meta.previous else '#' }}" class="arrow icons {{ "leftA" if meta.previous else "leftD" }}"></a><div class="center">{{ meta | pagination }}</div><a href="{{ (meta.next | link) if meta.next else '#' }}" class="arrow icons {{ "rightA" if meta.next else "rightD" }}"></a>
             </div>
         {% endif %}
 	</section>
-	
+
 	{% view 'partials/postbanner' %}
-	
+
 	<div class="clear"></div>
 </section>
+
+{% view 'partials/tracking' %}

@@ -1,622 +1,1272 @@
 'use strict';
 
 module.exports = {
-    //Development+
-    0 : {
-        'siteId'          : 533932,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'default': {
+        'default': {
+            siteId: 533932,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522546,
+            logServer: 'logw306'
+        }
+    },
+    development: {
+        'default': {
+            siteId: 533932,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 537448,
+            logServer: 'logw306'
+        }
+    },
+    testing: {
+        'default': {
+            siteId: 537448,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 537448,
+            logServer: 'logw306'
+        }
+    },
+    staging: {
+        'default': {
+            siteId: 537448,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 537448,
+            logServer: 'logw306'
+        }
     },
     //Argentina+
-    2 : {
-        'siteId'          : 533954,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.ar': {
+        'default': {
+            siteId: 533954,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522930,
+            logServer: 'logw306'
+        }
     },
     //Aruba+
-    12 : {
-        'siteId'          : 533955,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.aw': {
+        'default': {
+            siteId: 533955,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522931,
+            logServer: 'logw306'
+        }
     },
     //Bahamas+
-    16 : {
-        'siteId'          : 533956,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.bs': {
+        'default': {
+            siteId: 533956,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522932,
+            logServer: 'logw306'
+        }
     },
     //Belize+
-    22 : {
-        'siteId'          : 533957,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.bz': {
+        'default': {
+            siteId: 533957,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522933,
+            logServer: 'logw306'
+        }
     },
     //Bolivia+
-    26 : {
-        'siteId'          : 533958,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.bo': {
+        'default': {
+            siteId: 533958,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522934,
+            logServer: 'logw306'
+        }
     },
     //Brazil+
-    30 : {
-        'siteId'          : 533959,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.br': {
+        'default': {
+            siteId: 533959,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522935,
+            logServer: 'logw306'
+        }
     },
     //Canada+
-    38 : {
-        'siteId'          : 533960,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.ca': {
+        'default': {
+            siteId: 533960,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522936,
+            logServer: 'logw306'
+        }
     },
     //Chile+
-    43 : {
-        'siteId'          : 533961,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.cl': {
+        'default': {
+            siteId: 533961,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522937,
+            logServer: 'logw306'
+        }
     },
     //Colombia+
-    47 : {
-        'siteId'          : 533962,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.co': {
+        'default': {
+            siteId: 533962,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522938,
+            logServer: 'logw306'
+        }
     },
     //Costa Rica+
-    51 : {
-        'siteId'          : 533933,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.co.cr': {
+        'default': {
+            siteId: 533933,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522821,
+            logServer: 'logw306'
+        }
     },
     //Dominica+
-    59 : {
-        'siteId'          : 533934,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.dm': {
+        'default': {
+            siteId: 533934,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522822,
+            logServer: 'logw306'
+        }
     },
     //Dominican Republic+
-    60 : {
-        'siteId'          : 533935,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.do': {
+        'default': {
+            siteId: 533935,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522823,
+            logServer: 'logw306'
+        }
     },
     //Ecuador+
-    62 : {
-        'siteId'          : 533936,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.ec': {
+        'default': {
+            siteId: 533936,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522824,
+            logServer: 'logw306'
+        }
     },
     //El Salvador+
-    64 : {
-        'siteId'          : 533937,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.sv': {
+        'default': {
+            siteId: 533937,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522825,
+            logServer: 'logw306'
+        }
     },
     //Grenada+
-    86 : {
-        'siteId'          : 533938,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.gd': {
+        'default': {
+            siteId: 533938,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522826,
+            logServer: 'logw306'
+        }
     },
     //Guatemala+
-    89 : {
-        'siteId'          : 533939,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.gt': {
+        'default': {
+            siteId: 533939,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522827,
+            logServer: 'logw306'
+        }
     },
     //Haiti+
-    93 : {
-        'siteId'          : 533940,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.ht': {
+        'default': {
+            siteId: 533940,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522828,
+            logServer: 'logw306'
+        }
     },
     //Honduras+
-    95 : {
-        'siteId'          : 533941,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.hn': {
+        'default': {
+            siteId: 533941,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522829,
+            logServer: 'logw306'
+        }
     },
     //Jamaica+
-    106 : {
-        'siteId'          : 533942,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.jm': {
+        'default': {
+            siteId: 533942,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522830,
+            logServer: 'logw306'
+        }
     },
     //Mexico+
-    138 : {
-        'siteId'          : 533943,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.mx': {
+        'default': {
+            siteId: 533943,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522831,
+            logServer: 'logw306'
+        }
     },
     //Nicaragua+
-    154 : {
-        'siteId'          : 533944,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.ni': {
+        'default': {
+            siteId: 533944,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522832,
+            logServer: 'logw306'
+        }
     },
     //Panama+
-    164 : {
-        'siteId'          : 533945,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.pa': {
+        'default': {
+            siteId: 533945,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522833,
+            logServer: 'logw306'
+        }
     },
     //Paraguay+
-    166 : {
-        'siteId'          : 533946,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.py': {
+        'default': {
+            siteId: 533946,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522834,
+            logServer: 'logw306'
+        }
     },
     //Peru+
-    167 : {
-        'siteId'          : 533947,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.pe': {
+        'default': {
+            siteId: 533947,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522835,
+            logServer: 'logw306'
+        }
     },
     //Puerto Rico+
-    172 : {
-        'siteId'          : 533948,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.pr': {
+        'default': {
+            siteId: 533948,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522836,
+            logServer: 'logw306'
+        }
     },
     //Trinidad and Tobago+
-    213 : {
-        'siteId'          : 533949,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.tt': {
+        'default': {
+            siteId: 533949,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522837,
+            logServer: 'logw306'
+        }
     },
     //Turks and Caicos Islands+
-    217 : {
-        'siteId'          : 533950,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.tc': {
+        'default': {
+            siteId: 533950,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522838,
+            logServer: 'logw306'
+        }
     },
     //United States+
-    1 : {
-        'siteId'          : 533951,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com': {
+        'default': {
+            siteId: 533951,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522839,
+            logServer: 'logw306'
+        }
     },
     //Uruguay+
-    225 : {
-        'siteId'          : 533952,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.uy': {
+        'default': {
+            siteId: 533952,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522840,
+            logServer: 'logw306'
+        }
     },
     //Venezuela+
-    229 : {
-        'siteId'          : 533953,
-        'logServer'       : 'logw306',
-        'secureLogServer' : 'logws306'
+    'www.olx.com.ve': {
+        'default': {
+            siteId: 533953,
+            logServer: 'logw306',
+            secureLogServer: 'logws306'
+        },
+        desktop: {
+            siteId: 522841,
+            logServer: 'logw306'
+        }
     },
     //India+
-    99 : {
-        'siteId'          : 533963,
-        'logServer'       : 'logw307',
-        'secureLogServer' : 'logws1307'
+    'www.olx.in': {
+        'default': {
+            siteId: 533963,
+            logServer: 'logw307',
+            secureLogServer: 'logws1307'
+        },
+        desktop: {
+            siteId: 522842,
+            logServer: 'logw307'
+        }
     },
     //Sri Lanka+
-    196 : {
-        'siteId'          : 533964,
-        'logServer'       : 'logw307',
-        'secureLogServer' : 'logws1307'
+    'www.olx.lk': {
+        'default': {
+            siteId: 533964,
+            logServer: 'logw307',
+            secureLogServer: 'logws1307'
+        },
+        desktop: {
+            siteId: 522843,
+            logServer: 'logw307'
+        }
     },
     //Kazakhstan+
-    109 : {
-        'siteId'          : 533966,
-        'logServer'       : 'logw308',
-        'secureLogServer' : 'logws1308'
+    'www.olx.kz': {
+        'default': {
+            siteId: 533966,
+            logServer: 'logw308',
+            secureLogServer: 'logws1308'
+        },
+        desktop: {
+            siteId: 522844,
+            logServer: 'logw308'
+        }
     },
     //Bangladesh+
-    18 : {
-        'siteId'          : 533967,
-        'logServer'       : 'logw308',
-        'secureLogServer' : 'logws1308'
+    'www.olx.com.bd': {
+        'default': {
+            siteId: 533967,
+            logServer: 'logw308',
+            secureLogServer: 'logws1308'
+        },
+        desktop: {
+            siteId: 522845,
+            logServer: 'logw308'
+        }
     },
     //Mauritius+
-    136 : {
-        'siteId'          : 533968,
-        'logServer'       : 'logw308',
-        'secureLogServer' : 'logws1308'
+    'www.olx.mu': {
+        'default': {
+            siteId: 533968,
+            logServer: 'logw308',
+            secureLogServer: 'logws1308'
+        },
+        desktop: {
+            siteId: 522846,
+            logServer: 'logw308'
+        }
     },
     //Pakistan+
-    162 : {
-        'siteId'          : 533969,
-        'logServer'       : 'logw308',
-        'secureLogServer' : 'logws1308'
+    'www.olx.com.pk': {
+        'default': {
+            siteId: 533969,
+            logServer: 'logw308',
+            secureLogServer: 'logws1308'
+        },
+        desktop: {
+            siteId: 522847,
+            logServer: 'logw308'
+        }
     },
     //United Arab Emirates+
-    221 : {
-        'siteId'          : 533971,
-        'logServer'       : 'logw308',
-        'secureLogServer' : 'logws1308'
+    'www.olx.ae': {
+        'default': {
+            siteId: 533971,
+            logServer: 'logw308',
+            secureLogServer: 'logws1308'
+        },
+        desktop: {
+            siteId: 522849,
+            logServer: 'logw308'
+        }
     },
     //Australia+
-    13 : {
-        'siteId'          : 533972,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.com.au': {
+        'default': {
+            siteId: 533972,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522850,
+            logServer: 'logw305'
+        }
     },
-    //HongKong+
-    96 : {
-        'siteId'          : 533978,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    //Hong Kong+
+    'www.haibao.hk': {
+        'default': {
+            siteId: 533978,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522917,
+            logServer: 'logw305'
+        }
     },
     //Indonesia+
-    100 : {
-        'siteId'          : 533973,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.com.id': {
+        'default': {
+            siteId: 533973,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522852,
+            logServer: 'logw305'
+        }
     },
     //Japan+
-    107 : {
-        'siteId'          : 533979,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.jp': {
+        'default': {
+            siteId: 533979,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522919,
+            logServer: 'logw305'
+        }
     },
     //Malaysia+
-    129 : {
-        'siteId'          : 533974,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.com.my': {
+        'default': {
+            siteId: 533974,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522854,
+            logServer: 'logw305'
+        }
     },
-    //NewZealand+
-    153 : {
-        'siteId'          : 533980,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    //New Zealand+
+    'www.olx.co.nz': {
+        'default': {
+            siteId: 533980,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522921,
+            logServer: 'logw305'
+        }
     },
     //Philippines+
-    168 : {
-        'siteId'          : 533975,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.ph': {
+        'default': {
+            siteId: 533975,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522856,
+            logServer: 'logw305'
+        }
     },
     //Singapore+
-    188 : {
-        'siteId'          : 533981,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.com.sg': {
+        'default': {
+            siteId: 533981,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522923,
+            logServer: 'logw305'
+        }
     },
     //South Korea+
-    113 : {
-        'siteId'          : 533976,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.con.kr': {
+        'default': {
+            siteId: 533976,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522858 ,
+            logServer: 'logw305'
+        }
     },
     //Taiwan+
-    206 : {
-        'siteId'          : 533982,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olx.com.tw': {
+        'default': {
+            siteId: 533982,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522925,
+            logServer: 'logw305'
+        }
     },
     //Thailand+
-    209 : {
-        'siteId'          : 533977,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.olxthailand.com': {
+        'default': {
+            siteId: 533977,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522860,
+            logServer: 'logw305'
+        }
     },
     //Vietnam+
-    246 : {
-        'siteId'          : 533983,
-        'logServer'       : 'logw305',
-        'secureLogServer' : 'logws1305'
+    'www.jaovat.com': {
+        'default': {
+            siteId: 533983,
+            logServer: 'logw305',
+            secureLogServer: 'logws1305'
+        },
+        desktop: {
+            siteId: 522927,
+            logServer: 'logw305'
+        }
     },
     //Algeria+
-    3 : {
-        'siteId'          : 533984,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olxalgerie.com': {
+        'default': {
+            siteId: 533984,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522862,
+            logServer: 'logw309'
+        }
     },
     //Angola+
-    6 : {
-        'siteId'          : 533985,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.co.ao': {
+        'default': {
+            siteId: 533985,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522863,
+            logServer: 'logw309'
+        }
     },
     //Austria+
-    14 : {
-        'siteId'          : 533986,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.at': {
+        'default': {
+            siteId: 533986,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522864,
+            logServer: 'logw309'
+        }
     },
     //Belgium+
-    21 : {
-        'siteId'          : 533987,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.be': {
+        'default': {
+            siteId: 533987,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522865,
+            logServer: 'logw309'
+        }
     },
     //Bosnia and Herzegovina+
-    27 : {
-        'siteId'          : 533988,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.ba': {
+        'default': {
+            siteId: 533988,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522866,
+            logServer: 'logw309'
+        }
     },
     //Croatia+
-    53 : {
-        'siteId'          : 533989,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.com.hr': {
+        'default': {
+            siteId: 533989,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522867,
+            logServer: 'logw309'
+        }
     },
     //Czech Republic+
-    56 : {
-        'siteId'          : 533990,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.cz': {
+        'default': {
+            siteId: 533990,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522868,
+            logServer: 'logw309'
+        }
     },
     //Denmark+
-    57 : {
-        'siteId'          : 533991,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.dk': {
+        'default': {
+            siteId: 533991,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522869,
+            logServer: 'logw309'
+        }
     },
     //France+
-    73 : {
-        'siteId'          : 533992,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.fr': {
+        'default': {
+            siteId: 533992,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522870,
+            logServer: 'logw309'
+        }
     },
     //Germany+
-    81 : {
-        'siteId'          : 533993,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.de': {
+        'default': {
+            siteId: 533993,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522871,
+            logServer: 'logw309'
+        }
     },
     //Ghana+
-    82 : {
-        'siteId'          : 533994,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.gh': {
+        'default': {
+            siteId: 533994,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522872,
+            logServer: 'logw309'
+        }
     },
     //Hungary+
-    97 : {
-        'siteId'          : 533995,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.hu': {
+        'default': {
+            siteId: 533995,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522873,
+            logServer: 'logw309'
+        }
     },
     //Iceland+
-    98 : {
-        'siteId'          : 533996,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.is': {
+        'default': {
+            siteId: 533996,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522874,
+            logServer: 'logw309'
+        }
     },
     //Ireland+
-    103 : {
-        'siteId'          : 533997,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.ie': {
+        'default': {
+            siteId: 533997,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522875,
+            logServer: 'logw309'
+        }
     },
     //Italy+
-    105 : {
-        'siteId'          : 533998,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.it': {
+        'default': {
+            siteId: 533998,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522876,
+            logServer: 'logw309'
+        }
     },
     //Liechtenstein+
-    122 : {
-        'siteId'          : 533999,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.li': {
+        'default': {
+            siteId: 533999,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522877,
+            logServer: 'logw309'
+        }
     },
     //Luxembourg+
-    124 : {
-        'siteId'          : 534000,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.lu': {
+        'default': {
+            siteId: 534000,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522878,
+            logServer: 'logw309'
+        }
     },
     //Malta+
-    132 : {
-        'siteId'          : 534001,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.com.mt': {
+        'default': {
+            siteId: 534001,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522879,
+            logServer: 'logw309'
+        }
     },
     //Monaco+
-    141 : {
-        'siteId'          : 534002,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olxmonaco.com': {
+        'default': {
+            siteId: 534002,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522880,
+            logServer: 'logw309'
+        }
     },
     //Morocco+
-    144 : {
-        'siteId'          : 534003,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.ma': {
+        'default': {
+            siteId: 534003,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522881,
+            logServer: 'logw309'
+        }
     },
     //Netherlands+
-    150 : {
-        'siteId'          : 534004,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx-nederland.com': {
+        'default': {
+            siteId: 534004,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522882,
+            logServer: 'logw309'
+        }
     },
     //Nigeria+
-    156 : {
-        'siteId'          : 534005,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.com.ng': {
+        'default': {
+            siteId: 534005,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522883,
+            logServer: 'logw309'
+        }
     },
     //Norway+
-    160 : {
-        'siteId'          : 534006,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.no': {
+        'default': {
+            siteId: 534006,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522884,
+            logServer: 'logw309'
+        }
     },
     //Poland+
-    170 : {
-        'siteId'          : 534007,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.pl': {
+        'default': {
+            siteId: 534007,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522885,
+            logServer: 'logw309'
+        }
     },
     //Serbia+
-    247 : {
-        'siteId'          : 534009,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.rs': {
+        'default': {
+            siteId: 534009,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522887,
+            logServer: 'logw309'
+        }
     },
     //Slovak Republic+
-    189 : {
-        'siteId'          : 534010,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.sk': {
+        'default': {
+            siteId: 534010,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522888,
+            logServer: 'logw309'
+        }
     },
     //Slovenia+
-    190 : {
-        'siteId'          : 534011,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.si': {
+        'default': {
+            siteId: 534011,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522889,
+            logServer: 'logw309'
+        }
     },
     //Spain+
-    195 : {
-        'siteId'          : 534012,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.es': {
+        'default': {
+            siteId: 534012,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522890,
+            logServer: 'logw309'
+        }
     },
     //Sweden+
-    203 : {
-        'siteId'          : 534013,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.se': {
+        'default': {
+            siteId: 534013,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522891,
+            logServer: 'logw309'
+        }
     },
     //Switzerland+
-    204 : {
-        'siteId'          : 534014,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.ch': {
+        'default': {
+            siteId: 534014,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522892,
+            logServer: 'logw309'
+        }
     },
     //Tunisia+
-    214 : {
-        'siteId'          : 534015,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olxtunisie.com': {
+        'default': {
+            siteId: 534015,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522893,
+            logServer: 'logw309'
+        }
     },
     //United Kingdom+
-    243 : {
-        'siteId'          : 534016,
-        'logServer'       : 'logw309',
-        'secureLogServer' : 'logws1309'
+    'www.olx.co.uk': {
+        'default': {
+            siteId: 534016,
+            logServer: 'logw309',
+            secureLogServer: 'logws1309'
+        },
+        desktop: {
+            siteId: 522894,
+            logServer: 'logw309'
+        }
     },
     //Belarus+
-    20 : {
-        'siteId'          : 534017,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.by': {
+        'default': {
+            siteId: 534017,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522895,
+            logServer: 'logw310'
+        }
     },
     //Botswana+
-    28 : {
-        'siteId'          : 534018,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.co.bw': {
+        'default': {
+            siteId: 534018,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522896,
+            logServer: 'logw310'
+        }
     },
     //Bulgaria+
-    33 : {
-        'siteId'          : 534019,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.bg': {
+        'default': {
+            siteId: 534019,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522897,
+            logServer: 'logw310'
+        }
     },
     //Cyprus+
-    55 : {
-        'siteId'          : 534020,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.com.cy': {
+        'default': {
+            siteId: 534020,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522898,
+            logServer: 'logw310'
+        }
     },
     //Egypt+
-    63 : {
-        'siteId'          : 534021,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.com.eg': {
+        'default': {
+            siteId: 534021,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522899,
+            logServer: 'logw310'
+        }
     },
     //Estonia+
-    67 : {
-        'siteId'          : 534022,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.ee': {
+        'default': {
+            siteId: 534022,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522900,
+            logServer: 'logw310'
+        }
     },
     //Finland+
-    72 : {
-        'siteId'          : 534023,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.fi': {
+        'default': {
+            siteId: 534023,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522901,
+            logServer: 'logw310'
+        }
     },
     //Greece+
-    84 : {
-        'siteId'          : 534024,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.gr': {
+        'default': {
+            siteId: 534024,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522902,
+            logServer: 'logw310'
+        }
     },
     //Israel+
-    104 : {
-        'siteId'          : 534025,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.co.il': {
+        'default': {
+            siteId: 534025,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522903,
+            logServer: 'logw310'
+        }
     },
     //Jordan+
-    108 : {
-        'siteId'          : 534026,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.jo': {
+        'default': {
+            siteId: 534026,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522904,
+            logServer: 'logw310'
+        }
     },
     //Kenya+
-    110 : {
-        'siteId'          : 534027,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.co.ke': {
+        'default': {
+            siteId: 534027,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522905,
+            logServer: 'logw310'
+        }
     },
     //Latvia+
-    117 : {
-        'siteId'          : 534028,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.lv': {
+        'default': {
+            siteId: 534028,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522906,
+            logServer: 'logw310'
+        }
     },
     //Lithuania+
-    123 : {
-        'siteId'          : 534029,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.lt': {
+        'default': {
+            siteId: 534029,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522907,
+            logServer: 'logw310'
+        }
     },
     //Moldova+
-    140 : {
-        'siteId'          : 534030,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.md': {
+        'default': {
+            siteId: 534030,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522908,
+            logServer: 'logw310'
+        }
     },
     //Mozambique+
-    145 : {
-        'siteId'          : 534031,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.co.mz': {
+        'default': {
+            siteId: 534031,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522909,
+            logServer: 'logw310'
+        }
     },
     //Romania+
-    175 : {
-        'siteId'          : 534032,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.ro': {
+        'default': {
+            siteId: 534032,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522910,
+            logServer: 'logw310'
+        }
     },
-    //SouthAfrica+
-    193 : {
-        'siteId'          : 534033,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    //South Africa+
+    'www.olx.co.za': {
+        'default': {
+            siteId: 534033,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522911,
+            logServer: 'logw310'
+        }
     },
     //Tanzania+
-    208 : {
-        'siteId'          : 534034,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.co.tz': {
+        'default': {
+            siteId: 534034,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522912,
+            logServer: 'logw310'
+        }
     },
     //Turkey+
-    215 : {
-        'siteId'          : 534035,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.com.tr': {
+        'default': {
+            siteId: 534035,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522913,
+            logServer: 'logw310'
+        }
     },
     //Uganda+
-    219 : {
-        'siteId'          : 534036,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
+    'www.olx.co.ug': {
+        'default': {
+            siteId: 534036,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522914,
+            logServer: 'logw310'
+        }
     },
     //Ukraine+
-    220 : {
-        'siteId'          : 534037,
-        'logServer'       : 'logw310',
-        'secureLogServer' : 'logws1310'
-    },
+    'www.olx.com.ua': {
+        'default': {
+            siteId: 534037,
+            logServer: 'logw310',
+            secureLogServer: 'logws1310'
+        },
+        desktop: {
+            siteId: 522915,
+            logServer: 'logw310'
+        }
+    }
 };

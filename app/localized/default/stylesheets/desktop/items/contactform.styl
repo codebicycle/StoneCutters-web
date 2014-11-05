@@ -1,0 +1,94 @@
+#contact-form {
+    box($yellow, $yellowBorders , 3px, 15px 20px);
+    
+    .icons:before {
+        font-size: $m;
+        margin: 0 5px 5px;
+    }
+
+    .user-info {
+        p {
+            font-size: $m;
+            font-weight: bold;
+            margin-bottom: 0;
+            &:first-child {
+                margin-top: 0;
+            }
+            &.user-phone {
+                font-size: $l;
+            }
+        }
+        span {
+            font-size: $xs;
+            padding-left: 28px;
+            display: block;
+        }
+    }
+
+    form {
+        fieldset {
+            border: 0 none;
+            font-size: $xs;
+            margin: 13px 0;
+            padding: 0;
+            &.error {
+                textarea,
+                input[type="text"] {
+                    border-color: $red;
+                }
+            }
+        }
+        .error span {
+            color: $red;
+            margin-left: 10px;
+        }
+        textarea {
+            height: 80px;
+        }
+        input[type="text"] {
+            height: 20px;
+        }
+        textarea,
+        input[type="text"] {
+            border-radius(3px);
+            border: 1px solid #ccc;
+            padding: 8px 10px;
+            resize: none;
+            width: 92%;
+        }
+        input[type="submit"] {
+            action-button($orange, #fff, 3px, padding = 10px 0);
+            font-size: $l;
+            width: 100%;
+        }
+        p.replySuccess {
+            box(#ef8, #ef8, 3px, 10px 5px 10px 40px, solid, 0);
+            color: $black;
+            font-size: $s;
+            position: relative;
+
+            &:before {
+                background: $green;
+                border-radius: 50%;
+                color: $yellow;
+                font-size: $xs;
+                left: 5px;
+                padding: 5px;
+                position: absolute;
+                top: 7px;
+            }
+
+            span {
+                color: $blue;
+                cursor: pointer;
+                display: block;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .disclaimer p {
+        font-size: $xs;
+    }
+}

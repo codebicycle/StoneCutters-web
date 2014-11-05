@@ -1,1 +1,20 @@
-all results
+{% include (template + "/partials/breadcrumb.html") %}
+
+<div class="wrapper-main">
+    <nav id="listing-filters">
+        {% include (template + '/items/parentcategories.html') %}
+    </nav>
+    <section id="listing-items">
+        {% include (template + '/items/locations.html') %}
+        {% include (template + '/items/list.html') %}
+        {% if meta.next or meta.previous %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    </section>
+</div>
+
+{% if seo %}
+    {% include (template + '/partials/seobox.html') %}
+{% endif %}
+
+{% view 'partials/tracking' %}

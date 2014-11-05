@@ -1,1 +1,17 @@
-item page
+{% include (template + "/items/breadcrumb.html") %}
+
+<section id="item-page" data-qa="item" >
+    {% include (template + "/items/itemcontent.html") %}
+
+    <aside class="side-column">
+        {% include (template + "/items/itemprice.html") %}
+
+        {% include (template + "/items/contactform.html") %}
+    </aside>
+</section>
+
+{# {% if showAdSenseItemBottom %}
+	{% include (template + "/partials/adsense.html") %}
+{% endif %} #}
+
+{% view 'partials/tracking' %}

@@ -104,12 +104,6 @@
                         <span style="display: block; padding-top: .5em;"><input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}"></span>
                     </td>
                 </tr>
-                <tr style="display: none;">
-                    <td>
-                        {% set templateName = template + '/partials/tracking.html' %}
-                        {% include templateName %}
-                    </td>
-                </tr>
             </table>
         </form>
     </td>
@@ -118,5 +112,10 @@
     <td>
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>

@@ -10,6 +10,7 @@ module.exports = Base.extend({
     url: '/users',
     getUsernameOrEmail: getUsernameOrEmail,
     login: login,
+    lostpassword: lostpassword,
     register: register,
     reply: reply
 });
@@ -71,17 +72,55 @@ function login(done, req) {
         .val(success);
 }
 
+function lostpassword(done, req) {
+    var prepare = function(done) {
+        var query = {
+            email: this.get('email'),
+            url: this.get('location')
+        };
+        done(query);
+    }.bind(this);
+
+    var submit = function(done, query) {
+        dataAdapter.get(req, '/users/forgotpassword', {
+            query: query
+        }, done.errfcb);
+    }.bind(this);
+
+    var success = function(res) {
+        statsd.increment([this.get('country'), 'lostpassword', 'success', this.get('platform')]);
+        done();
+    }.bind(this);
+
+    var error = function(err) {
+        statsd.increment([this.get('country'), 'lostpassword', 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }.bind(this);
+
+    asynquence().or(error)
+        .then(prepare)
+        .then(submit)
+        .val(success);
+}
+
 function register(done, req) {
+    var query = {
+        platform: this.get('platform')
+    };
+
+    if (this.has('withConfirmation')) {
+        query.withConfirmation = this.get('withConfirmation');
+    }
+
     var submit = function(done) {
         dataAdapter.post(req, '/users', {
-            query: {
-                platform: this.get('platform')
-            },
+            query: query,
             data: this.toJSON()
         }, done.errfcb);
     }.bind(this);
 
     var persist = function(done, res, user) {
+        user = user || {};
         delete user.password;
         this.set(user);
         done();

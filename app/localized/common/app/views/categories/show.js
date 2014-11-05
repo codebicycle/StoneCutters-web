@@ -6,6 +6,8 @@ var querystring = require('querystring');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../helpers');
 var tracking = require('../../../../../modules/tracking');
+var Paginator = require('../../../../../modules/paginator');
+var Seo = require('../../../../../modules/seo');
 
 module.exports = Base.extend({
     className: 'categories_show_view',
@@ -127,8 +129,10 @@ module.exports = Base.extend({
         function prepare(done) {
             var urlFull = $('#currentUrl').val();
             var pairs = urlFull.split('?');
+            var seo = Seo.instance(this.app);
             var params;
             var url;
+
 
             pairs.shift();
             url = pairs.join('?');
@@ -136,15 +140,14 @@ module.exports = Base.extend({
             params.page = preparePageParam(urlFull);
             params.catId = prepareCategoryParam(urlFull);
 
-            helpers.pagination.prepare(this.app, params);
+            Paginator.prepare(this.app, params);
             params.categoryId = params.catId;
-            params.seo = true;
+            params.seo = seo.isEnabled();
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
             delete params.catId;
             delete params.title;
             delete params.page;
             delete params.filters;
-            delete params.urlFilters;
 
             done(params);
         }
@@ -180,25 +183,16 @@ module.exports = Base.extend({
         }
 
         function track(done, _items) {
+            var $view = $('#partials-tracking-view');
             var category = buildCategory('#category');
             var subcategory = buildCategory('#subcategory');
-            var img;
-            var analyticImg;
-            var analyticInfo;
 
             tracking.reset();
             tracking.setPage('listing');
             tracking.addParam('category', category);
             tracking.addParam('subcategory', subcategory);
 
-            analyticInfo = tracking.generateURL.call(this);
-            _.each(analyticInfo.urls, function(url) {
-                img = $('<img/>');
-                img.addClass('analytics');
-                img.attr('src', url);
-                analyticImg = $('.analytics:last');
-                analyticImg.after(img);
-            });
+            $view.trigger('update', tracking.generateURL.call(this));
 
             done(_items);
         }

@@ -1,0 +1,17 @@
+<div id="items-pagination">
+    <div class="items-paginations-buttons">
+        {% if  meta.previous and meta.next %}
+            <a href="{{ meta.previous | linkig }}"  rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }} </a><a href="{{ meta.next | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
+        {% elif meta.next %}
+            <a href="{{ meta.next | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
+        {% else %}
+            <a href="{{ meta.previous | linkig }}" rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }}</a>
+        {% endif %}
+    </div>
+
+    <ul class="items-paginations-numbers">
+        <li><a href="{{ (meta.previous | linkig) if meta.previous else '#' }}" rel="prev" class="icons pagination-arrow icon-arrow-left {{ "disable" if not meta.previous }}"></a></li>
+        {{ meta | pagination('desktop') }}
+        <li><a href="{{ (meta.next | linkig) if meta.next else '#' }}" rel="next" class="icons pagination-arrow icon-arrow-right {{ "disable" if not meta.next }}"></a></li>
+    </ul>
+</div>

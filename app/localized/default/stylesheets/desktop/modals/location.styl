@@ -1,0 +1,62 @@
+.modal {
+    &#location-modal {
+
+        .modal-wrapper {
+
+            .modal-container {
+                width: 720px;
+
+                .modal-header {
+                    background: #eee;
+                    border-bottom: 1px solid #ddd;
+                    padding: 10px 20px;
+
+                    .modal-title {
+                        font-size: $xl;
+                    }
+                }
+                .location-content {
+                    padding: 10px 20px;
+
+                    > a {
+                        display: block;
+                        font-size: $s;
+                        font-weight: bold;
+                        margin-bottom: 20px;
+
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+
+                    .column {
+                        float: left;
+                        width: 50%;
+
+                        h4 {
+                            border-bottom: 1px solid #ddd;
+                            font-weight: bold;
+                            font-size: $m;
+                            margin: 0 0 10px 0;
+                            padding-bottom: 10px;
+
+                            &:first-child {
+                                width:95%;
+                            }
+                        }
+
+                        .modal-cities {
+                            ul-reset();
+
+                            li {
+                                line-height: 1.3;
+                                padding-bottom: 10px;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
