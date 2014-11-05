@@ -29,6 +29,14 @@ module.exports = Base.extend({
             fieldMandatory: this.fieldMandatory || ''
         });
     },
+    postRender: function() {
+        this.$('select').each(function eachSelect() {
+            var $select = $(this);
+            if ($select.val()) {
+                $select.trigger('change');
+            }
+        });
+    },
     events: {
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange'
@@ -38,13 +46,20 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.fields = fields.filter(function each(field) {
-            if (field.name === 'priceC') {
-                this.fieldLabel = field.label;
-                this.fieldName = field.name;
-                this.fieldMandatory = field.mandatory;
-            }
+        var order = ['currency_type', 'priceC', 'priceType'];
+
+        fields = _.filter(fields, function each(field) {
             return !(field.name === 'title' || field.name === 'description');
+        });
+        _.each(order, function find(name) {
+            this.fields.push(_.find(fields, function search(field) {
+                if (field.name === 'priceC') {
+                    this.fieldLabel = field.label;
+                    this.fieldName = field.name;
+                    this.fieldMandatory = field.mandatory;
+                }
+                return field.name === name;
+            }.bind(this)));
         }.bind(this));
         this.render();
     },

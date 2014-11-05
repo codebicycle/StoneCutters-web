@@ -8,24 +8,20 @@
     values: states,
     fieldType: "combobox",
     dataType: "select",
-    selected: selected.state
+    selected: location.state
 } %}
 
 {{ Field(statesField) }}
 
+{% set citiesField = {
+    isOptional: "false",
+    name: "location",
+    mandatory: "true",
+    label: "Ciudad",
+    values: cities,
+    fieldType: "combobox",
+    dataType: "select",
+    selected: location.city
+} %}
 
-
-    {% set citiesField = {
-        isOptional: "false",
-        name: "location",
-        mandatory: "true",
-        label: "Ciudad",
-        values: cities,
-        fieldType: "combobox",
-        dataType: "select",
-        selected: selected.city
-    } %}
-
-    {{ Field(citiesField) }}
-
-
+{{ Field(citiesField) }}
