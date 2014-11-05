@@ -9,13 +9,9 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        _.each(data.items, this.processItem);
         return _.extend({}, data, {
             items: data.items
         });
-    },
-    processItem: function(item) {
-        item.date.since = helpers.timeAgo(item.date);
     }
 });
 
