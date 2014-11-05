@@ -306,6 +306,8 @@ module.exports = Base.extend({
             });
         }.bind(this);
 
+        var always = function() {}.bind(this);
+
         this.$('#errors').trigger('hide');
 
         if (user) {
