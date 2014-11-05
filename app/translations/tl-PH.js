@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'tinanggihan na ad',
     'misc.Removed': 'Inalis',
     'misc.SeeAdIn2Hrs_Mob': 'Makikita ninyo ito sa OLX sa loob ng susunod na 2 oras',
+    'misc.SelectAnOption_BR': 'Pumili ng opsyon.',
     'misc.SellingIsEasy': 'Madali ang pagbebenta',
     'misc.Sell_Post_Mobile_India': 'Ipaskil',
     'misc.SendEmail': 'Magpadala ng E-mail',

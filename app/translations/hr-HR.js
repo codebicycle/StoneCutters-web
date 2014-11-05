@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Odbijen oglas',
     'misc.Removed': 'Uklonjeno',
     'misc.SeeAdIn2Hrs_Mob': 'Vidjet \u0107ete ga na OLX-u za 2 sata',
+    'misc.SelectAnOption_BR': 'Izaberi opciju.',
     'misc.SellingIsEasy': 'Prodaja je jednostavna',
     'misc.Sell_Post_Mobile_India': 'Objavi',
     'misc.SendEmail': 'Po\u0161aljite e-po\u0161tu',

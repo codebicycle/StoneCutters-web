@@ -9,19 +9,6 @@ module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-optionals-view',
     className: 'posting-optionals-view',
-    allFields: [],
-    fields: [],
-    form: {
-        values: {}
-    },
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-        this.allFields = [];
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -31,13 +18,16 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
-        if (!this.firstRender) {
-            return;
-        }
-        this.firstRender = false;
-        this.fields.forEach(function each(field) {
-            this.$('[name="' + field.name + '"]').trigger('change');
-        }.bind(this));
+        var $field;
+        var $fields = $('.text-field');
+
+        $fields.each(function() {
+            $field = $(this);
+
+            if ($field.val()) {
+                $field.trigger('change');
+            }
+        });
     },
     events: {
         'fieldsChange': 'onFieldsChange',
@@ -48,32 +38,19 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var related = [];
-        var names = [];
-
-        this.firstRender = !!firstRender;
-        this.selected = {
-            id: categoryId,
-            subId: subcategoryId
-        };
-        this.allFields = fields;
-        fields.forEach(function each(field) {
-            names.push(field.name);
-            if (field.related) {
-                related.push(field.related);
+        this.fields = _.each(fields, function each(field) {
+            if (field.fieldType === 'combobox' && !field.values) {
+                field.values = [];
             }
-        });
-        this.fields = fields.filter(function each(field) {
-            return !_.contains(related, field.name) || field.fieldType !== 'combobox' || (field.values && field.values.length);
-        });
-        for (var name in this.form.values) {
-            if (!_.contains(names, name)) {
-                delete this.form.values[name];
-                this.parentView.$el.trigger('fieldSubmit', {
-                    name: name
+
+            if (field.values) {
+                field.values.unshift({
+                    key: '',
+                    value: this.parentView.dictionary['misc.SelectAnOption_BR']
                 });
             }
-        }
+        });
+        this.fields = fields;
         this.render();
     },
     onChange: function(event) {
@@ -81,25 +58,32 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $loading = $('body > .loading');
         var $field = $(event.target);
-        var name = $field.attr('name');
-        var field = _.find(this.fields, function each(field) {
-            return field.name === name;
-        });
-        
+        var $firstOption = $field.find('option').first();
+
+        if ($field.data('related')) {
+            this.getRelatedFieldValues($field.data('related'), $field.val());
+        }
+        if ($firstOption.attr('value') === '') {
+            $firstOption.remove();
+        }
+        this.parentView.$el.trigger('fieldSubmit', [$field]);
+    },
+    getRelatedFieldValues: function(related, value) {
+        var options;
+        var $field = this.$('[name="' + related + '"]');
+
         var fetch = function(done) {
-            $loading.show();
-            helpers.dataAdapter.get(this.app.req, '/items/fields/' + encodeURIComponent(field.related) + '/' + this.form.values[field.name] + '/subfields', {
+            helpers.dataAdapter.get(this.app.req, '/items/fields/' + encodeURIComponent(related) + '/' + value + '/subfields', {
                 query: {
                     intent: 'post',
                     location: this.app.session.get('siteLocation'),
-                    categoryId: this.selected.subId,
+                    categoryId: this.parentView.form['category.id'],
                     languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                 },
                 done: done,
                 fail: done.fail
-            }, always);
+            });
         }.bind(this);
 
         var error = function(err) {
@@ -107,25 +91,17 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res) {
-            this.$el.trigger('fieldsChange', [this.allFields.map(function each(field) {
-                if (field.name !== res.subfield.name) {
-                    return field;
-                }
-                return res.subfield;
-            }), this.selected.id, this.selected.subId]);
+            $field.removeAttr('disabled').empty();
+            options = res.subfield.values;
+            options.unshift({
+                key: '',
+                value: this.parentView.dictionary['misc.SelectAnOption_BR']
+            });
+            _.each(options, function each(option) {
+                $field.append('<option value="' + option.key + '">' + option.value + '</option>');
+            });
         }.bind(this);
 
-        var always = function() {
-            $loading.hide();
-        }.bind(this);
-
-        this.form.values[field.name] = $field.val();
-        
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
-        
-        if (!field.related) {
-            return;
-        }
         asynquence().or(error)
             .then(fetch)
             .val(success);

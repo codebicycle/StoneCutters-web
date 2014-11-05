@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': '\u88AB\u62D2\u7D55\u7684\u5EE3\u544A',
     'misc.Removed': '\u5DF2\u522A\u9664',
     'misc.SeeAdIn2Hrs_Mob': '2\u500B\u5C0F\u6642\u4E4B\u5167\u60A8\u6703\u5728OLX\u7DB2\u7AD9\u4E0A\u770B\u5230',
+    'misc.SelectAnOption_BR': '\u9078\u64C7\u4E00\u500B\u9078\u9805',
     'misc.SellingIsEasy': '\u92B7\u552E\u975E\u5E38\u5BB9\u6613',
     'misc.Sell_Post_Mobile_India': '\u767C\u5E16',
     'misc.SendEmail': '\u767C\u9001\u96FB\u5B50\u90F5\u4EF6',

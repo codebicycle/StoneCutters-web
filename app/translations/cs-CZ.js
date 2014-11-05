@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Odm\xEDtnut\xFD inzer\xE1t',
     'misc.Removed': 'Odstran\u011Bn\xE9',
     'misc.SeeAdIn2Hrs_Mob': 'Inzer\xE1t na OLX uvid\xEDte do 2 hodin',
+    'misc.SelectAnOption_BR': 'Zvolte mo\u017Enost.',
     'misc.SellingIsEasy': 'Prodej je snadn\xFD',
     'misc.Sell_Post_Mobile_India': 'Zaslat',
     'misc.SendEmail': 'Odeslat e-mail',

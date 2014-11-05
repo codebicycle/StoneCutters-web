@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Anun\u021B refuzat',
     'misc.Removed': 'Eliminat',
     'misc.SeeAdIn2Hrs_Mob': '\xCEl ve\u0163i vedea pe OLX \xEEn urm\u0103toarele 2 ore',
+    'misc.SelectAnOption_BR': 'Selecta\u0163i o op\u0163iune.',
     'misc.SellingIsEasy': 'Este u\u015For s\u0103 vinde\u0163i',
     'misc.Sell_Post_Mobile_India': 'Publicare',
     'misc.SendEmail': 'Trimitere E-mail',

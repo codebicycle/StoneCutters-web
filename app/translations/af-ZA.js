@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Afgekeurde advt.',
     'misc.Removed': 'Verwyder',
     'misc.SeeAdIn2Hrs_Mob': 'Dit sal binne die volgende 2 ure op OLX te sien wees.',
+    'misc.SelectAnOption_BR': 'Kies \\\'n opsie.',
     'misc.SellingIsEasy': 'Verkoop is maklik',
     'misc.Sell_Post_Mobile_India': 'Publiseer',
     'misc.SendEmail': 'Stuur E-pos',

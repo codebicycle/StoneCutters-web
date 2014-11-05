@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Elutas\xEDtott hirdet\xE9s',
     'misc.Removed': 'Elt\xE1vol\xEDtva',
     'misc.SeeAdIn2Hrs_Mob': 'K\xE9t \xF3ra m\xFAlva megjelenik az OLX-en',
+    'misc.SelectAnOption_BR': 'V\xE1lasszon egy lehet\u0151s\xE9get.',
     'misc.SellingIsEasy': 'Eladni gyerekj\xE1t\xE9k',
     'misc.Sell_Post_Mobile_India': 'Elk\xFCld',
     'misc.SendEmail': 'E-mail k\xFCld\xE9se',

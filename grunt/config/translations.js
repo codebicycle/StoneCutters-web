@@ -12,6 +12,7 @@ module.exports = {
         'misc.ChooseASubcategory_Mob',
         'misc.BrandFor_Mob',
         'misc.FreeIn_Mob',
+        'misc.SelectAnOption_BR',
         'messages_date_format.Today',
         'messages_date_format.Yesterday',
         'messages_date_format.101',

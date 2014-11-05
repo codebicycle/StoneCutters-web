@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'An\xFAncio recusado',
     'misc.Removed': 'Removido',
     'misc.SeeAdIn2Hrs_Mob': 'Seu an\xFAncio estar\xE1 no ar dentro de 2 horas.',
+    'misc.SelectAnOption_BR': 'Selecione uma op\xE7\xE3o',
     'misc.SellingIsEasy': 'Vender \xE9 f\xE1cil',
     'misc.Sell_Post_Mobile_India': 'Publicar',
     'misc.SendEmail': 'Enviar E-mail',

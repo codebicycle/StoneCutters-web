@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Tangazo lililokataliwa',
     'misc.Removed': 'Imeondolewa',
     'misc.SeeAdIn2Hrs_Mob': 'Utaiona kwa OLX ndani ya ipindi cha masaa 2 ijayo',
+    'misc.SelectAnOption_BR': 'Chagua chaguo.',
     'misc.SellingIsEasy': 'Kuuza ni rahisi',
     'misc.Sell_Post_Mobile_India': 'Kuuza',
     'misc.SendEmail': 'Tuma Barua pepe',

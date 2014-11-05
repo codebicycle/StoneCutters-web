@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Afvist annonce',
     'misc.Removed': 'Fjernet',
     'misc.SeeAdIn2Hrs_Mob': 'Du kan se den p\xE5 OLX om 2 timer',
+    'misc.SelectAnOption_BR': 'Foretag et valg.',
     'misc.SellingIsEasy': 'Det er let at s\xE6lge',
     'misc.Sell_Post_Mobile_India': 'S\xE6lg',
     'misc.SendEmail': 'Send e-mail',

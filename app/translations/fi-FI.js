@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Hyl\xE4tty ilmoitus',
     'misc.Removed': 'Poistettu',
     'misc.SeeAdIn2Hrs_Mob': 'N\xE4et sen OLX:n sivustolla 2 tunnin sis\xE4ll\xE4',
+    'misc.SelectAnOption_BR': 'Valitse vaihtoehto.',
     'misc.SellingIsEasy': 'Myyminen on helppoa',
     'misc.Sell_Post_Mobile_India': 'Julkaise',
     'misc.SendEmail': 'L\xE4het\xE4 s\xE4hk\xF6postia',

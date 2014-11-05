@@ -351,6 +351,7 @@ module.exports = {
     'misc.RejectedAd_Caps': 'Avviste annonse',
     'misc.Removed': 'Fjernet',
     'misc.SeeAdIn2Hrs_Mob': 'Du vil kunne se den p\xE5 OLX innen de neste to timene',
+    'misc.SelectAnOption_BR': 'Velg et alternativ.',
     'misc.SellingIsEasy': '\xC5 selge er enkelt',
     'misc.Sell_Post_Mobile_India': 'Legg ut',
     'misc.SendEmail': 'Send e-post',
