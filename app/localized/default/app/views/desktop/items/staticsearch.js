@@ -18,10 +18,10 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.app.session.get('path');
-
         this.filters = data.filters;
         this.filters.order = this.order;
-        _.each(data.items, this.processItem);
+
+        _.each(data.items, this.processItem, data);
 
         return _.extend({}, data, {
             items: data.items,
@@ -90,7 +90,12 @@ module.exports = Base.extend({
         path = this.refactorPath(path);
         path = path.replace(this.regexpReplaceCategory, 'search');
         return path;
+    },
+    processItem: function(item) {
+        item.date.since = helpers.timeAgo(item.date);
+        var expregsearch = new RegExp(this.search, 'gi');
+        item.description = item.description.replace(expregsearch,'<strong>'+this.search+'</strong>');
+        item.title = item.title.replace(expregsearch,'<strong>'+this.search+'</strong>');
     }
-});
 
-module.exports.id = 'items/staticsearch';
+});
