@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Enf\xF2masyon sou OLX',
     'about.AboutText1': 'OLX se dirijan mondyal platf\xF2m anons mobil ak ent\xE8n\xE8t ki konsantre nan mache k ap grandi',
     'about.AboutText2': 'OLX opere nan globalman epi li gen prezans nan plis pase 40 peyi',
+    'about.about_Body': '<p>OLX  se yon sit anons gratis sou ent\xE8n\xE8t nouv\xE8l jenerasyon.<br /><br />OLX  pote yon solisyon senp pou evite konplikasyon ki genyen nan vann, achte, f\xE8 echanj, diskisyon ak rankont tou pre lakay ou, nenp\xF2t kote ou abite an.<br /><br />Sou OLX wap kapab:<br /><ul><li>Fasilman konsepsyon anons av\xE8k imaj rich</li><li>Kontwole sa wap vann, achte, ak aktivite nan kominote ou gras a OLX Mwen.</li><li>Pibliye anons ou sou pwofil ou genyen sou l\xF2t sit rezo echanje  (Facebook, Myspace, ...)</li><li>Antre sou sit lan sou telef\xF2n</li><li>Li OLX nan lang ou</li></ul><br />Nou genyen OLX  nan plis pase <<QTY_COUNTRIES>> peyi ak <<QTY_LANGUAGES>> lang. Konpayi prive sa a  te fonde an Mas 2006..</p>',
     'about.Download_Mob': 'Telechaje',
     'about.Mission': 'Misyon',
     'about.MissionText1': 'Nou mete moun ansanm pou f\xE8 echanj ki bon pou tou de epi amelyore lavi yo',

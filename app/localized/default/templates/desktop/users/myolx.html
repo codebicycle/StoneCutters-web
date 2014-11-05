@@ -10,11 +10,14 @@
     --><li class="{{ 'active' if viewname == 'favorites' else '' }}">
         <a href="{{ '/myolx/favoritelisting' | link }}">{{ dictionary["defaulthtmlhead.My Favorites"] }}</a>
     </li><!--
-    --><li>
+    {# --><li>
         <a href="#">{{ dictionary["myolx.Settings"] }} </a>
-    </li><!--
+    </li><!-- #}
     --><li class="{{ messages }}">
         <a href="{{ '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
     </li>
 </ul>
+
 {% view 'users/' + viewname  %}
+
+{% view 'partials/tracking' %}

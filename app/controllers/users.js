@@ -40,8 +40,7 @@ function register(params, callback) {
         }
         callback(null, {
             form: this.form,
-            agreeTerms: params.agreeTerms,
-            tracking: tracking.generateURL.call(this)
+            agreeTerms: params.agreeTerms
         });
     }
 }
@@ -88,8 +87,7 @@ function login(params, callback) {
         }
         callback(null, {
             form: this.form,
-            redirect: params.redirect,
-            tracking: tracking.generateURL.call(this)
+            redirect: params.redirect
         });
     }
 }
@@ -108,6 +106,7 @@ function logout(params, callback) {
 
 function myolx(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var platform = this.app.session.get('platform');
         var user;
@@ -126,7 +125,7 @@ function myolx(params, callback) {
                 status: 302
             });
         }
-        if (platform == 'desktop' ){
+        if (platform === 'desktop' ){
             return helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
                 status: 302
             });
@@ -143,6 +142,7 @@ function myads(params, callback) {
         var deleted;
         var _params;
         var user;
+
         var prepare = function(done) {
             var platform = this.app.session.get('platform');
             if (platform === 'wap') {
@@ -169,6 +169,7 @@ function myads(params, callback) {
 
             done();
         }.bind(this);
+
         var findAds = function(done) {
             this.app.fetch({
                 myAds: {
@@ -190,23 +191,24 @@ function myads(params, callback) {
         var success = function(_myAds) {
             var myAds = _myAds.toJSON();
             var platform = this.app.session.get('platform');
+            var view = 'users/myads';
+            var data = {
+                myAdsMetadata: _myAds.meta,
+                myAds: myAds,
+                deleted: deleted
+            };
+
             _.each(myAds, function processItem(item) {
                 item.date.since = helpers.timeAgo(item.date);
             });
+
             if (platform === 'desktop') {
-                callback(null,'users/myolx', {
-                    myAdsMetadata: _myAds.meta,
-                    myAds: myAds,
-                    deleted: deleted,
+                view = 'users/myolx';
+                _.extend(data, {
                     viewname: 'myads'
                 });
-            } else {
-                callback(null, {
-                    myAdsMetadata: _myAds.meta,
-                    myAds: myAds,
-                    deleted: deleted
-                });
             }
+            callback(null, view, data);
         }.bind(this);
 
         var error = function(err, res) {
@@ -275,25 +277,24 @@ function favorites(params, callback) {
         var success = function(_favorites) {
             var favorites = _favorites.toJSON();
             var platform = this.app.session.get('platform');
+            var view = 'users/favorites';
+            var data = {
+                favoritesMetadata: _favorites.meta,
+                favorites: favorites,
+                favorite: favorite
+            };
 
             _.each(favorites, function processItem(item) {
                 item.date.since = helpers.timeAgo(item.date);
             });
 
             if (platform === 'desktop') {
-                callback(null, 'users/myolx', {
-                    favoritesMetadata: _favorites.meta,
-                    favorites: favorites,
-                    favorite: favorite,
+                view = 'users/myolx';
+                _.extend(data, {
                     viewname: 'favorites'
                 });
-            } else {
-                callback(null, {
-                    favoritesMetadata: _favorites.meta,
-                    favorites: favorites,
-                    favorite: favorite
-                });
             }
+            callback(null, view, data);
         }.bind(this);
 
         var error = function(err, res) {

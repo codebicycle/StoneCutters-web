@@ -8,6 +8,11 @@ var linkParams = {
         var siteLocation = this.session.get('siteLocation');
         var platform = this.session.get('platform');
 
+        if (platform === 'desktop' && query.location) {
+            href = fullizeUrl(href, this);
+            href = href.replace(/^(.+:\/\/)[^.]*/, '$1' + query.location.split('.').shift());
+            delete query.location;
+        }
         if (platform !== 'desktop' && !query.location && siteLocation && !~siteLocation.indexOf('www.')) {
             href = params(href, 'location', siteLocation);
         }
@@ -155,11 +160,6 @@ function stringify(obj, sep, eq, name) {
 
 function link(href, app, query) {
     query = query || {};
-
-    if (app.session.get('platform') === 'desktop' && query.location) {
-        href = href.replace(/^(.+:\/\/)[^.]*/, '$1' + query.location.split('.').shift());
-        delete query.location;
-    }
 
     _.each(linkParams, function(checker, name) {
         href = checker.call(app, href, query);

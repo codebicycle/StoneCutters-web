@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Acerca deOLX',
     'about.AboutText1': 'OLXes la plataforma l\xEDder mundial de avisos clasificados enfocada en los mercados emergentes, tanto m\xF3viles como en l\xEDnea.',
     'about.AboutText2': 'OLX opera de forma global y tiene presencia en m\xE1s de 40 pa\xEDses.',
+    'about.about_Body': '<p>OLX es la pr\xF3xima generaci\xF3n de anuncios gratis online.<br /><br />OLX provee una simple soluci\xF3n para las complicaciones implicadas en venta, compra, intercambio, discusi\xF3n, organizaci\xF3n, y encuentro con gente cerca de ti, dondequiera que te encuentres.<br /><br />En OLX tu puedes:<br /><ul><li>Dise\xF1ar f\xE1cilmente anuncios con fotos.</li><li>Controlar tu actividad en ventas, compras, y comunidad en Mi OLX.</li><li>Mostrar tus anuncios en tu perfil en otros sitios (Facebook, Myspace, ...)</li><li>Acceder al sitio desde tu tel\xE9fono celular</li><li>Ver OLX en tu idioma local</li></ul><br />OLX es usado en m\xE1s de <<QTY_COUNTRIES>> pa\xEDses en <<QTY_LANGUAGES>> idiomas. La compa\xF1\xEDa fue fundada en Marzo 2006 y es dirigida en forma privada.</p>',
     'about.Download_Mob': 'Descargar',
     'about.Mission': 'Misi\xF3n',
     'about.MissionText1': 'Mejoramos la vida de las personas al reunirlas para intercambios gana-gana.',

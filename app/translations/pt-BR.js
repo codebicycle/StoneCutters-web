@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Sobre a OLX',
     'about.AboutText1': 'A OLX \xE9 uma das maiores plataformas de classificados gr\xE1tis do mundo com foco nos mercados emergentes para produtos mobile e online.',
     'about.AboutText2': 'A OLX \xE9 global e est\xE1 presente em mais de 40 pa\xEDses.',
+    'about.about_Body': '<p>OLX \xE9 a pr\xF3xima gera\xE7\xE3o de classificados gratuitos online.<br /><br />A OLX proporciona uma solu\xE7\xE3o simples para as complica\xE7\xF5es associadas \xE0 venda, compra, comercializa\xE7\xE3o, discuss\xE3o, organiza\xE7\xE3o e contato com pessoas que residem perto de voc\xEA, independentemente do local onde voc\xEA resida.<br /><br />Na OLX voc\xEA pode:<br /><ul><li>Criar facilmente an\xFAncios atraentes com imagens;</li><li>Controlar as suas vendas, compras e atividade no site atrav\xE9s do Meu OLX;</li><li>Exibir os seus an\xFAncios no seu perfil nas redes sociais (Facebook, Myspace, etc.)</li><li>Acessar o site a partir do seu celular;</li><li>Consultar a OLX no seu idioma local.</li></ul><br />A OLX \xE9 utilizada em mais de <<QTY_COUNTRIES>> pa\xEDses em <<QTY_LANGUAGES>> idiomas. A empresa foi fundada em mar\xE7o de 2006 e \xE9 gerida de forma privada.</p>',
     'about.Download_Mob': 'Descarregar',
     'about.Mission': 'Miss\xE3o',
     'about.MissionText1': 'Melhorar a vida das pessoas aproximando-as para vender e comprar produtos usados beneficiando ambas as partes.',

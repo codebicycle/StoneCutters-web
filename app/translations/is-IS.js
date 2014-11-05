@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Um OLX',
     'about.AboutText1': 'OLX er \xED fararbroddi sm\xE1augl\xFDsinga \xE1 netinu og leggur \xE1herslu \xE1 vaxandi marka\xF0ssv\xE6\xF0i, b\xE6\xF0i fyrir fars\xEDma og \xE1 vefnum',
     'about.AboutText2': 'OLX starfar \xED meira \xED 40 l\xF6ndum v\xED\xF0svegar um heiminn',
+    'about.about_Body': '<p>OLX er n\xE6sta kynsl\xF3\xF0 \xF3keypis sm\xE1augl\xFDsinga.<br /><br />OLX b\xFD\xF0ur upp \xE1 einfalda lausn \xE1 \xFEeim fl\xE6kjum sem fylgja \xFEv\xED a\xF0 selja, kaupa, stunda verslun, eiga samskipti, skipuleggja og hitta f\xF3lk \xED \xFE\xEDnu umhverfi, hvar sem \xFEa\xF0 kann a\xF0 vera.<br /><br />\xC1 OLX er h\xE6gt a\xF0:<br /><ul><li>Hanna innihaldsmiklar augl\xFDsingar me\xF0 myndum \xE1 au\xF0veldan h\xE1tt</li><li>Hafa stj\xF3rn yfir \xE1, kaupum og samskiptum me\xF0 M\xEDnu OLX</li><li>Birta augl\xFDsingar \xE1 samskiptami\xF0lum (Facebook, Myspace o.s.frv.)</li><li>F\xE1 vefsv\xE6\xF0inu \xED gegnum fars\xEDma</li><li>Nota OLX \xE1 m\xF3\xF0urm\xE1linu</li></ul><br />OLX er nota\xF0 \xED yfir <<QTY_COUNTRIES>> l\xF6ndum og \xE1 <<QTY_LANGUAGES>> tungum\xE1lum. Fyrirt\xE6ki\xF0 var stofna\xF0 \xED mars 2006 og er \xED einkaeigu.</p>',
     'about.Download_Mob': 'S\xE6kja',
     'about.Mission': 'Markmi\xF0',
     'about.MissionText1': 'Vi\xF0 b\xE6tum l\xEDf f\xF3lks me\xF0 \xFEv\xED a\xF0 f\xE6ra \xFEa\xF0 saman fyrir vi\xF0skipti sem allir hagnast \xE1',

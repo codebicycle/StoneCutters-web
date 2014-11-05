@@ -8,12 +8,12 @@ module.exports = {
         // Home
         list: { 
             title: 'Home',
-            Description: 'This is the home page',
+            description: 'This is the home page',
             'google-site-verification': true
         },
         subcategories: {
             title: 'Listing',
-            Description: 'This is a listing page'
+            description: 'This is a listing page'
         },
 
         // On listing size < 5 -> robots = 'noindex, follow'
@@ -24,10 +24,10 @@ module.exports = {
         search: {},
 
         // Title: On title + ' - ' + city + ' | OLX' > 70 characters -> is cut
-        // Description: On title + ' - ' + category + ' ' + city > 130 characters -> is cut
+        // description: On title + ' - ' + category + ' ' + city > 130 characters -> is cut
         show: {
             title: 'title',
-            Description: 'description'
+            description: 'description'
         }
     },
     post: {

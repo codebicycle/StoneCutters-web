@@ -15,8 +15,7 @@ module.exports = {
         levelPath: true,
         popularSearches: true,
         relatedListings: true,
-        extendedTitle: true,
-        h1: true,
+        topTitle: true,
         references: true
     },
     tracking: {

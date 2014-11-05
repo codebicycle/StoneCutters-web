@@ -6,8 +6,8 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
-var config = require('../../shared/config');
 var Seo = require('../modules/seo');
+var config = require('../../shared/config');
 
 module.exports = {
     list: middlewares(list),
@@ -22,15 +22,10 @@ function list(params, callback) {
         var platform = this.app.session.get('platform');
         var icons = config.get(['icons', platform], []);
         var country = this.app.session.get('location').url;
-        var seo = Seo.instance(this.app);
 
-        seo.setContent(this.dependencies.categories.meta.seo);
-        seo.addMetatag('title', this.dependencies.categories.meta.title);
-        seo.addMetatag('description', this.dependencies.categories.meta.description);
+        this.app.seo.setContent(this.dependencies.categories.meta);
         callback(null, {
-            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-            tracking: tracking.generateURL.call(this),
-            seo: seo
+            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.')
         });
     }
 }
@@ -47,10 +42,10 @@ function show(params, callback, gallery) {
     }, controller);
 
     function controller() {
-        var seo = Seo.instance(this.app);
 
         var redirect = function(done){
-            var categoryId = seo.getCategoryId(params.catId);
+            var seo = Seo.instance(this.app);
+            var categoryId = seo.isCategoryDeprecated(params.catId);
 
             gallery = gallery || '';
 
@@ -102,7 +97,6 @@ function show(params, callback, gallery) {
 }
 
 function handleItems(params, promise, gallery) {
-    var seo = Seo.instance(this.app);
     var page = params ? params.page : undefined;
     var infiniteScroll = config.get('infiniteScroll', false);
     var category;
@@ -111,13 +105,14 @@ function handleItems(params, promise, gallery) {
     var url;
 
     var configure = function(done, _category, _subcategory) {
+        var seo = Seo.instance(this.app);
         var currentRouter = ['categories', 'items'];
 
         category = _category;
         subcategory = _subcategory;
 
-        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         seo.reset(this.app, currentRouter);
+        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         done();
     }.bind(this);
 
@@ -146,7 +141,7 @@ function handleItems(params, promise, gallery) {
 
         query = _.clone(params);
         params.categoryId = params.catId;
-        params.seo = seo.isEnabled();
+        params.seo = this.app.seo.isEnabled();
         params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
         delete params.catId;
         delete params.title;
@@ -198,15 +193,15 @@ function handleItems(params, promise, gallery) {
             postingLink: postingLink
         });
 
-        seo.setContent(meta.seo);
+        this.app.seo.setContent(meta);
         if (meta.seo) {
             currentPage = meta.page;
-            seo.addMetatag('title', meta.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
-            seo.addMetatag('description', meta.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            this.app.seo.addMetatag('title', meta.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
+            this.app.seo.addMetatag('description', meta.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
         }
         if (meta.total < 5) {
-            seo.addMetatag('robots', 'noindex, follow');
-            seo.addMetatag('googlebot', 'noindex, follow');
+            this.app.seo.addMetatag('robots', 'noindex, follow');
+            this.app.seo.addMetatag('googlebot', 'noindex, follow');
         }
 
         tracking.setPage('listing');
@@ -225,9 +220,7 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: _items.toJSON(),
             filters: _items.filters,
-            infiniteScroll: infiniteScroll,
-            tracking: tracking.generateURL.call(this),
-            seo: seo
+            infiniteScroll: infiniteScroll
         });
     }.bind(this);
 
@@ -240,16 +233,16 @@ function handleItems(params, promise, gallery) {
 }
 
 function handleShow(params, promise) {
-    var seo = Seo.instance(this.app);
     var category;
 
     var configure = function(done, _category) {
+        var seo = Seo.instance(this.app);
         var currentRouter = ['categories', 'subcategories'];
 
         category = _category;
 
-        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         seo.reset(this.app, currentRouter);
+        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
         done();
     }.bind(this);
 
@@ -270,15 +263,14 @@ function handleShow(params, promise) {
             }
         });
 
-        seo.addMetatag('title', category.get('trName'));
-        seo.addMetatag('description', category.get('trName'));
+        this.app.seo.addMetatag('title', category.get('trName'));
+        this.app.seo.addMetatag('description', category.get('trName'));
 
         tracking.addParam('category', category.toJSON());
 
         done({
             type: 'categories',
-            category: category.toJSON(),
-            tracking: tracking.generateURL.call(this)
+            category: category.toJSON()
         });
     }.bind(this);
 

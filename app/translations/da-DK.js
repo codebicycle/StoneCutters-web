@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Om OLX',
     'about.AboutText1': 'OLX er verdens f\xF8rende platform for rubrikannoncer med fokus p\xE5 nye markeder, b\xE5de mobil og online',
     'about.AboutText2': 'OLX er global og er til stede i over 40 lande',
+    'about.about_Body': '<p>OLX er den n\xE6ste generation af gratis online annoncer.<br /><br />OLX tilbyder en enkel l\xF8sning p\xE5 det besv\xE6r, der kan v\xE6re forbundet med at s\xE6lge, k\xF8be, bytte, diskutere, organisere eller m\xF8de mennesker, der bor i n\xE6rheden af dig, uanset hvor du bor.<br /><br />P\xE5 OLX kan du:<br /><ul><li>Nemt skabe flotte, farverige annoncer med billeder</li><li>Kontrollere dine salgs-, k\xF8bs- og andre aktiviteter i Min OLX</li><li>Vise dine annoncer under din sociale netv\xE6rksprofile (Facebook, Myspace, ...)</li><li>F\xE5 adgang til websiden fra din mobiltelefon</li><li>Bruge OLX p\xE5 dit eget sprog</li></ul><br />OLX findes i mere end <<QTY_COUNTRIES>> lande p\xE5 <<QTY_LANGUAGES>> forskellige sprog. Firmaet blev grundlagt i marts 2006 og er privatejet.</p>',
     'about.Download_Mob': 'Download',
     'about.Mission': 'Mission',
     'about.MissionText1': 'Vi forbedrer folks liv ved at f\xF8re dem sammen og g\xF8re dem begge til vindere',
