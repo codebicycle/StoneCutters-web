@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'Kuhusu OLX',
     'about.AboutText1': 'OLX ni jukwaa la ulimwengu linaloongoza kwa matangazo linalolenga katika masoko yanayoibukia, yote ya simu ya mkononi na mtandaoni',
     'about.AboutText2': 'OLX hufanya kazi kimataifa na ina uwepo katika nchi zaidi ya 40',
+    'about.about_Body': '<p>OLX ni kizazi kijacho bure cha matangazo ya mtandao.<br /><br />OLX hutoa suluhisho rahisi kwa matatizo ya kushiriki katika uuzaji, ununuzi, biashara, majadiliano, maandalizi, na kukutana na watu karibu na wewe, mahali popote unapoishi.<br /><br />Kwenye OLX unaweza:<br /><ul><li>kwa urahisi kubuni matangazo tajiri yaliyo na picha.</li><li>Dhibiti uuzaji wako, kununua, na shughuli za jumuia katikay OLX</li><li>yangu. Onyesha matangazo yako kwenye mfumo wako wa mitandao ya kijamii (Facebook, Myspace, ...)</li><li>fikia mtandao kutoka kwa simu yako ya mkono</li><li>Tazama OLX katika lughay ako ya kawaida</li></ul><br />OLX inatumika kwa zaidi ya  <<QTY_COUNTRIES>> nchi katika lugha <<QTY_LANGUAGES>>. Kampuni ilianzishwa mwezi Machi 2006 na inamilikiwa kibinafsi.</p>',
     'about.Download_Mob': 'Pakua',
     'about.Mission': 'Misheni',
     'about.MissionText1': 'Tunaboresha maisha ya watu na kuwaleta pamoja kwa ajili ya mababadilishanu ya kushinda-kushinda',

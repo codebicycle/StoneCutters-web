@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'O OLX',
     'about.AboutText1': 'OLX je ved\xFAcou celosvetovou platformou pre inzer\xE1ty, ktor\xE1 sa zameriava na rozvojov\xE9 trhy mobilnou aj online formou',
     'about.AboutText2': 'OLX funguje celosvetovo a m\xE1 zast\xFApenie vo viac ako 40 krajin\xE1ch',
+    'about.about_Body': '<p>OLX predstavuje nov\xFA gener\xE1ciu bezplatn\xE9ho inzerovania online.<br /><br />OLX pon\xFAka jednoduch\xE9 rie\u0161enie na komplik\xE1cie s\xFAvisiace s predajom, kupovan\xEDm, v\xFDmenou, jednan\xEDm, organizovan\xEDm a nadviazan\xEDm kontaktov s \u013Eu\u010Fmi vo va\u0161om okol\xED, kdeko\u013Evek \u017Eijete.<br /><br /> Na str\xE1nkach OLX m\xF4\u017Eete:<br /><ul> <li>Pohodlne vytv\xE1ra\u0165 obsahovo bohat\xE9 reklamy s obr\xE1zkami.</li> <li>Riadi\u0165 v\xE1\u0161 predaj, k\xFApu a aktivity komunity na str\xE1nkach M\xF4jOLX</li> <li>Zobrazi\u0165 va\u0161e ozn\xE1menia a profil soci\xE1lnej siete (Facebook, Myspace, ...)</li> <li>Pristupova\u0165 k str\xE1nkam pomocou v\xE1\u0161ho mobiln\xE9ho telef\xF3nu</li> <li>Prezera\u0165 OLX vo va\u0161om jazyku</li></ul> <br /> OLX sa pou\u017E\xEDva v <<QTY_COUNTRIES>> krajin\xE1ch v <<QTY_LANGUAGES>> jazykoch. Spolo\u010Dnos\u0165 bola zalo\u017Een\xE1 v marci 2006 a je v s\xFAkromnom vlastn\xEDctve.</p>',
     'about.Download_Mob': 'Stiahnu\u0165',
     'about.Mission': 'Misia',
     'about.MissionText1': 'Zlep\u0161ujeme \u013Eu\u010Fom ich \u017Eivoty tak, \u017Ee ich sp\xE1jame v r\xE1mci obojstranne v\xFDhodn\xFDch obchodov',

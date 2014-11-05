@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'Tietoja kohteesta OLX',
     'about.AboutText1': 'OLX on maailman johtava ilmoitusfoorumi, joka keskittyy kehittyville markkinoille, sek\xE4 mobiili-ja onlinemarkkinoille',
     'about.AboutText2': 'OLX toimii maailmanlaajuisesti ja on l\xE4sn\xE4 yli 40 maassa',
+    'about.about_Body': '<p>OLX on uuden sukupolven internet-palvelu ilmaisilmoitusten luontia, selailua ja niihin vastaamista varten.<br /><br />OLX tekee myymisest\xE4, ostamisesta, kaupank\xE4ynnist\xE4, keskusteluista ja alueellasi asuvien ihmisten tapaamisesta yksinkertaista.<br /><br />OLX:n ominaisuuksiin lukeutuu mm.:<br /><ul><li>Suunnittele monipuolinen kuvallinen mainos.</li><li>Kaupank\xE4ynti- ja yhteis\xF6toimintasi helppo hallinta Oma OLX -palvelun avulla</li><li>Ilmoituksiesi lis\xE4\xE4minen profiilisivullesi k\xE4ytt\xE4miisi sosiaalisien verkostojen palveluihin kuten Facebookiin ja Myspaceen</li><li>Sivuston k\xE4ytt\xF6 matkapuhelimella</li><li>Paikalliset kielivalinnat</li></ul><br />OLX:\xE4\xE4 k\xE4ytet\xE4\xE4n yli <<QTY_COUNTRIES>> maassa ja yli <<QTY_LANGUAGES>> kielell\xE4. Yritys perustettiin vuonna 2006 ja on yksityisomistuksessa.</p>',
     'about.Download_Mob': 'Lataa',
     'about.Mission': 'Teht\xE4v\xE4',
     'about.MissionText1': 'Me parannamme ihmisten el\xE4m\xE4\xE4 tarjoamalla kaikkia osapuolia hy\xF6dynt\xE4vi\xE4 vaihtoja',

@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'About OLX',
     'about.AboutText1': 'OLX is the world\u2019s leading classifieds platform focused on emerging markets, both mobile and online',
     'about.AboutText2': 'OLX operates globally and has presence in more than 40 countries',
+    'about.about_Body': '<p>OLX is the next generation of free online classifieds.<br /><br />OLX provides a simple solution to the complications involved in selling, buying, trading, discussing, organizing, and meeting people near you, wherever you may reside.<br /><br />On OLX you can:<br /><ul><li>Easily design rich ads with pictures.</li><li>Control your selling, buying, and community activity in My OLX</li><li>Display your ads on your social networking profile (Facebook, Myspace, ...)</li><li>Access the site from your mobile phone</li><li>View OLX in your local language</li></ul><br />OLX is used in over <<QTY_COUNTRIES>> countries in <<QTY_LANGUAGES>> languages. The company was founded in March 2006 and is privately held.</p>',
     'about.Download_Mob': 'Download',
     'about.Mission': 'Mission',
     'about.MissionText1': 'We improve people\u2019s lives by bringing them together for win-win exchanges',

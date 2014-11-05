@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'A propos d\'OLX',
     'about.AboutText1': 'OLX est la plate-forme leader des petites annonces en ligne qui se concentre sur les march\xE9s \xE9mergents, \xE0 la fois mobile et en ligne.',
     'about.AboutText2': 'OLX op\xE8re au niveau mondial et dispose d\'une pr\xE9sence dans plus de 40 pays',
+    'about.about_Body': '<p>OLX est un site d\'annonces gratuites en ligne de nouvelle g\xE9n\xE9ration.<br /><br />OLX apporte une solution simple pour \xE9viter les complications li\xE9es \xE0 la vente, \xE0 l\'achat, aux \xE9changes, \xE0 la discussion et aux rencontres pr\xE8s de chez soi, o\xF9 que l\'on r\xE9side.<br /><br />Sur OLX vous pouvez :<br /><ul><li>Facilement cr\xE9er des annonces tout en couleurs; enrichies de photos</li><li>Contr\xF4ler vos ventes, vos achats et vos activit\xE9s communautaires gr\xE2ce \xE0 Mon OLX</li><li>Publier vos annonces dans votre profil sur vitre reseau d\'\xE9changes (Facebook, Myspace, ...)</li><li>Acc\xE9der aux annonces depuis votre mobile</li><li>Voir le contenu dans votre langue</li></ul><br />OLX est utilis\xE9 dans plus de <<QTY_COUNTRIES>> pays et <<QTY_LANGUAGES>> langues. La soci\xE9t\xE9 a \xE9t\xE9 fond\xE9e en Mars 2006.</p>',
     'about.Download_Mob': 'T\xE9l\xE9charger',
     'about.Mission': 'Mission',
     'about.MissionText1': 'Nous am\xE9liorons la vie des gens en les rapprochant \xE0 travers des \xE9changes gagnant-gagnant',

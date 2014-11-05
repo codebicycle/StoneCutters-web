@@ -51,7 +51,9 @@
 		</div>
 		<div class="user-info">
 	        <p class="icons icon-user user-name">{{ item.contactName }}</p>
-	        <p class="icons icon-phone user-phone">{{ item.phone }}</p>
+	        {% if item.phone %}
+		        <p class="icons icon-phone user-phone">{{ item.phone }}</p>
+	        {% endif %}
 	    </div>
     </aside><!-- right-column -->
 </section><!-- item-preview -->

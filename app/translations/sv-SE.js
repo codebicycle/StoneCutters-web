@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'Om OLX',
     'about.AboutText1': 'OLX \xE4r v\xE4rldens ledande annonsplattform med fokus p\xE5 tillv\xE4xtmarknader, b\xE5de f\xF6r mobil och p\xE5 n\xE4tet',
     'about.AboutText2': 'OLX \xE4r i drift globalt och har n\xE4rvaro i mer \xE4n 40 l\xE4nder',
+    'about.about_Body': '<p>OLX \xE4r n\xE4sta generations gratis annonser.<br /><br />OLX har en enkel l\xF6sning p\xE5 de komplikationer som uppst\xE5r med att s\xE4lja, k\xF6pa, byta, diskutera, organisera och att tr\xE4ffa personer n\xE4ra dig, var du \xE4n bor.<br /><br />P\xE5 OLX kan du:<br /><ul><li>Utforma enkelt fylliga annonser, med bilder.</li><li>Kontrollera dina f\xF6rs\xE4ljningar, k\xF6p och community-aktivitet i Mitt OLX</li><li>Visa dina annonser p\xE5 dina profiler i sociala n\xE4tverk (Facebook, Myspace, ...)</li><li>Ha tillg\xE5ng till webbplatsen fr\xE5n din mobiltelefon</li><li>Se OLX p\xE5 ditt eget spr\xE5k</li></ul><br />OLX anv\xE4nds i \xF6ver <<QTY_COUNTRIES>> l\xE4nder p\xE5 <<QTY_LANGUAGES>> spr\xE5k. F\xF6retaget grundades 2006 och \xE4r privat\xE4gt.</p>',
     'about.Download_Mob': 'Nedladdning',
     'about.Mission': 'Mission',
     'about.MissionText1': 'Vi f\xF6rb\xE4ttrar m\xE4nniskors liv genom att sammanf\xF6ra dem f\xF6r win-win utvekslingar',

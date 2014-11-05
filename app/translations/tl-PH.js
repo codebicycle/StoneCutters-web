@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'Tungkol sa OLX',
     'about.AboutText1': 'Ang OLX ay ang nangungunang platform ng mga anunsyo sa mundo na nakatuon sa mga umuunlad na merkado, sa cellphone at online',
     'about.AboutText2': 'Ang OLX ay nagnenegosyo sa buong mundo at matatagpuan ito sa mahigit sa 40 bansa',
+    'about.about_Body': '<p>Ang OLX ay ang susunod na henerasyon ng libreng online classifieds.<br /><br />Ang OLX ay nagbibigay ng simpleng solusyon sa mga kasalimuutan na kaugnay sa pagbebenta, pagbili, pakikipagpalitan, pakikipag-usap, pagsasaayos, at pakikipagtagpo sa mga tao malapit sa iyo, saan ka man naninirahan.<br /><br />Sa OLX maaari kang::<br /><ul><li>Madaling makakapagdisenyo ng mga digital na patalastas (rich ads) na may mga larawan.</li><li>Makuntrol ang iyong pagbenta, pagbili, at gawain sa komunidad sa My OLX</li><li>Itanghal ang iyong mga patalastas iyong social networking profile (Facebook, Myspace, ...)</li><li>Ma-access ang iyong site mula sa iyong mobile phone</li><li>Tingnan ang OLX sa iyong sariling wika</li></ul><br />Ang OLX ay ginagamit sa higit na <<QTY_COUNTRIES>> bansa sa <<QTY_LANGUAGES>> wika. Ang kumpanya ay naitatag noong Marso 2006 at ito ay pribadong pinanghahawakan.</p>',
     'about.Download_Mob': 'I-download sa/ang',
     'about.Mission': 'Layunin',
     'about.MissionText1': 'Pinagaganda namin ang mga buhay ng tao sa pamamagitan ng pagsasama sa mga ito para sa mga pakikipagpalitan na walang lugi',

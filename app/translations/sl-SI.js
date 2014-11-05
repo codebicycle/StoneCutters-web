@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'O OLX',
     'about.AboutText1': 'OLX je vodilna svetovna platforma za male oglase, ki se osredoto\u010Da na tr\u017Ei\u0161\u010Da v vzponu, tako mobilna, kot na spletu',
     'about.AboutText2': 'OLX deluje globalno in je prisoten v ve\u010D kot 40 dr\u017Eavah',
+    'about.about_Body': '<p>OLX je naslednja generacija brezpla\u010Dnih spletnih malih oglasov.<br /><br />OLX nudi preprosto re\u0161itev pri zapletih, ki se pojavijo pri prodaji, nakupu, menjavi, razpravah, organizaciji in spoznavanju blizu \u017Eive\u010Dih ljudi, kjer koli ste nastanjeni.<br /><br />OLX vam omogo\u010Da:<br /><ul><li>enostavno oblikovanje bogatih oglasov s fotografijami;</li><li>nadzorovanje va\u0161e aktivnosti pri prodaji, nakupu in skupnosti v razdelku Moj OLX\xAB;</li><li>prikaz va\u0161ih objav v va\u0161em profilu dru\u017Eabnih stikov (Facebook, Myspace ...);</li><li>dostop do spletne strani preko va\u0161ega mobilnega telefona;</li><li>ogled  OLX v va\u0161em jeziku.</li></ul><br />OLX uporabljajo v ve\u010D kot <<QTY_COUNTRIES>> dr\u017Eavah, v <<QTY_LANGUAGES>> jezikih. Podjetje je bilo ustanovljeno marca 2006 in je zasebno.</p>',
     'about.Download_Mob': 'Prenos',
     'about.Mission': 'Misija',
     'about.MissionText1': '\u017Divljenje ljudi izbolj\u0161ujemo s tem, da jih zbli\u017Eamo in omogo\u010Dimo izmenjave, kjer so vsi zmagovalci',

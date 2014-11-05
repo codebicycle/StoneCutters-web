@@ -1,4 +1,4 @@
-<h4 class="brand"><a href="{{ '/' | link }}"><img src="{{ '/images/desktop/logo.png' | static }}" alt="OLX Logo" /></a></h4>
+<div class="brand"><a href="{{ '/' | link }}"><img src="{{ '/images/desktop/logo.png' | static }}" alt="OLX Logo" /></a></div>
 {% view 'partials/search' %}
 <h6 class="posting-title {{ 'disabled' if currentRoute.controller != 'post' and currentRoute.action != 'flow' }}">{{ dictionary["itemslisting.FreeClassifieds"] }}<span>{{ dictionary["defaultheader.WhereBuyersMeetSellers"] }}</span></h6>
 <a href="{{ '/posting' | link }}" rel="nofollow" class="posting {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" role="button" data-qa="post-button" >{{ dictionary["defaultheader2.Post"] }}</a>

@@ -306,6 +306,7 @@ module.exports = {
     'about.AboutBrand': 'Mis on OLX',
     'about.AboutText1': 'OLX on maailma juhtivaid kuulutuste avaldamise platvorme ning keskendub arenevatele turgudele \u2013 nii mobiilside kui veebi vahendusel.',
     'about.AboutText2': 'OLX tegutseb kogu maailmas ning on kohal rohkem kui 40 riigis',
+    'about.about_Body': '<p>OLX on tasuta veebikuulutuste uus p\xF5lvkond.<br /><br /> OLX pakub lihtsa lahenduse m\xFC\xFCmise, ostmise, vahetamise, arutelude, organiseerimise ja Teie l\xE4heduses elavate inimestega kohtumisega seotud probleemidele, olenemata Teie elukohast.<br /><br /> OLXis saate Te:<br /><ul> <li>H\xF5lpsasti kujundada piltide ja videotega v\xE4rvikirevaid kuulutusi</li> <li>Kontrollida "Minu OLXis" oma m\xFC\xFCke, oste ja kogukondlikku tegevust.</li> <li>Kuvada kuulutusi oma suhtlusv\xF5rgustiku profiilis (Facebook, Myspace, ...)</li> <li>P\xE4\xE4seda saidile mobiiltelefoni kaudu</li> <li>Vaadata OLXi kohalikus keeles</li></ul> <br /> OLXi kasutatakse rohkem kui <<QTY_COUNTRIES>> riigis <<QTY_LANGUAGES>> keeles. Ettev\xF5te asutati m\xE4rtsis 2006 ja on eraomandis.</p>',
     'about.Download_Mob': 'Allalaadimine',
     'about.Mission': 'Missioon',
     'about.MissionText1': 'Muudame inimeste elu, viies nad kokku vastastikku kasulike tehingute tegemiseks',
