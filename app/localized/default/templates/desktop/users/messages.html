@@ -1,18 +1,22 @@
+<div message-alert class="alert hide">
+    <p message-alert-success class="icon-check success">Tu respuesta ha sido enviada con éxito</p>
+    <p message-alert-fail class="fail">Disculpa pero tu respuesta no ha podido ser enviada. Inténtalo en unos minutos por favor.</p>
+</div>
 <form>
     <div class="actions">
-        <label><input type="checkbox">Selecciona: Todos | Ninguno</label>
-        <button class="delete btn icons icon-trash">Eliminar</button>
+        <label><input data-select-all type="checkbox">Selecciona: Todos | Ninguno</label>
+        <button data-delete-message class="delete btn icons icon-trash">Eliminar</button>
     </div>
     {% if messages.length == 0 %}
         <p class="notification">No tenés mensajes nuevos</p>
     {% else %}
         <ul>
             {% for message in messages %}
-                <li>
-                    <input type="checkbox">
+                <li data-message >
+                    <input type="checkbox" data-message-id="{{ message.id }}" >
                     <span class="name">{{ message.from.username}}</span>
                     <a href="{{ ('/myolx/readmessages/' + message.id) | link }}" class="title">{{ message.title }}</a>
-                    <span class="date">{{ message.date.year }}</span>
+                    <span class="date">{{ message.date.timestamp | date(true) }}</span>
                 </li>
             {% endfor %}
         </ul>

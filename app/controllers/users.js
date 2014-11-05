@@ -345,8 +345,9 @@ function messages(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            callback(null, {
-                messages: response.messages.toJSON()
+            callback(null, 'users/myolx', {
+                messages: response.messages.toJSON(),
+                viewname: 'messages'
             });
         }.bind(this);
 
@@ -398,8 +399,9 @@ function readmessages(params, callback) {
         }.bind(this);
 
         var success = function(response) {
-            callback(null, {
-                message: response.message.toJSON()
+            callback(null, 'users/myolx', {
+                message: response.message.toJSON(),
+                viewname: 'readmessages'
             });
         }.bind(this);
 

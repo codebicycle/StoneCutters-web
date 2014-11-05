@@ -10,7 +10,7 @@ var config = require('../../shared/config');
 var isServer = typeof window === 'undefined';
 var cacheDefault = config.get(['cache', 'headers', 'default']);
 
-function prepare(done) {
+function prepare(params, done) {
     if (!isServer) {
         this.app.session.update({
             referer: this.app.session.get('referer')
@@ -19,7 +19,8 @@ function prepare(done) {
     this.app.session.clear('page');
     this.app.session.clear('postingLink');
     this.app.session.update({
-        currentRoute: this.currentRoute
+        currentRoute: this.currentRoute,
+        params: params
     });
     done();
 }
@@ -128,7 +129,7 @@ module.exports = {
         });
 
         promise = asynquence().or(fail.bind(this))
-            .then(prepare.bind(this))
+            .then(prepare.bind(this, params))
             .then(processTracking.bind(this));
         if (options.seo) {
             promise.then(processSeo.bind(this));

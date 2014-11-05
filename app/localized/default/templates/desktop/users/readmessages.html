@@ -14,8 +14,9 @@
     <a href="{{ message | slugToUrl | link }}">{{ message | slugToUrl | link }}</a>
 </p>
 
-<form>
+<form data-message-reply data-message-id="{{ message.messageId }}">
     <label>Responde este mensaje</label>
-    <textarea></textarea>
-    <button class="reply-send btn">Responder</button>
+    <textarea data-messageText ></textarea>
+    <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
+    <button class="reply-send btn" type="submit">Responder</button>
 </form>

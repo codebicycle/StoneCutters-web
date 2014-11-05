@@ -36,9 +36,13 @@
         box($greyBoxBg, #ccc, 3px, 10px 10px 20px, solid, 1px);
         overflow: hidden;
 
-        label, textarea, .reply-send {
-            float: left;
-            clear: both;
+        label, textarea, img, .reply-send {
+            display: block;
+        }
+
+        img {
+            display: none;
+            margin-left: 10px;
         }
 
         label {
