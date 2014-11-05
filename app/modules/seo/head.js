@@ -28,8 +28,9 @@ function title(metas, value) {
         this.unset('title');
     }
     else {
-        suffix = this.getLocationName(' - ');
-        if (value.length >= suffix.length && value.slice(value.length - suffix.length) !== suffix) {
+        suffix = this.getLocationName();
+        if (!~value.indexOf(suffix)) {
+            value += ' - ';
             value += suffix;
         }
         Base.prototype.set.call(this, 'title', value, {
@@ -56,8 +57,9 @@ function description(metas, value) {
         delete metas.description;
     }
     else {
-        suffix = this.getLocationName(' - ');
-        if (value.length >= suffix.length && value.slice(value.length - suffix.length) !== suffix) {
+        suffix = this.getLocationName();
+        if (!~value.indexOf(suffix)) {
+            value += ' - ';
             value += suffix;
         }
         metas.description = value;
@@ -189,11 +191,11 @@ Head = Backbone.Model.extend({
         }
         return clone;
     },
-    getLocationName: function (prefix) {
+    getLocationName: function () {
         var location = this.app.session.get('location');
 
         if (location) {
-            return prefix + (location.current || location).name;
+            return (location.current || location).name;
         }
         return '';
     },

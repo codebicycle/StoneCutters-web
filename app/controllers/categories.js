@@ -179,12 +179,11 @@ function handleItems(params, promise, gallery) {
         done(res.items);
     }.bind(this);
 
-    var success = function(done, _items) {
-        var meta = _items.meta;
+    var success = function(done, items) {
+        var meta = items.meta;
         var postingLink = {
             category: category.get('id')
         };
-        var currentPage;
 
         if (subcategory) {
             postingLink.subcategory = subcategory.get('id');
@@ -194,11 +193,6 @@ function handleItems(params, promise, gallery) {
         });
 
         this.app.seo.setContent(meta);
-        if (meta.seo) {
-            currentPage = meta.page;
-            this.app.seo.addMetatag('title', meta.seo.title + (currentPage > 1 ? (' - ' + currentPage) : ''));
-            this.app.seo.addMetatag('description', meta.seo.description + (currentPage > 1 ? (' - ' + currentPage) : ''));
-        }
         if (meta.total < 5) {
             this.app.seo.addMetatag('robots', 'noindex, follow');
             this.app.seo.addMetatag('googlebot', 'noindex, follow');
@@ -218,8 +212,8 @@ function handleItems(params, promise, gallery) {
             currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
             relatedAds: query.relatedAds,
             meta: meta,
-            items: _items.toJSON(),
-            filters: _items.filters,
+            items: items.toJSON(),
+            filters: items.filters,
             infiniteScroll: infiniteScroll
         });
     }.bind(this);
