@@ -305,6 +305,7 @@ module.exports = {
     'about.AboutBrand': 'Tentang OLX',
     'about.AboutText1': 'OLX ialah peneraju platform iklaneka dunia yang tertumpu kepada pasaran yang baru muncul secara mudah alih dan dalam talian.',
     'about.AboutText2': 'OLX beroperasi secara global dan terdapat di lebih daripada 40 negara.',
+    'about.about_Body': '<p>OLX merupakan iklaneka dalam talian percuma bagi generasi akan datang.<br /><br />OLX menyediakan penyelesaian mudah untuk kerumitan yang terlibat dalam penjualan, pembelian, perdagangan, perbincangan, pengelolaan, dan pertemuan dengan orang yang dekat dengan anda, di mana sahaja anda tinggal.<br /><br />Di OLX anda boleh:<br /><ul><li> Mereka bentuk penyenaraian yang pelbagai berserta gambar dengan mudah.</li><li> Mengawal penjualan, pembelian dan aktiviti komuniti anda dalam OLX  Saya </li><li> Memaparkan iklan anda pada profil rangkaian sosial anda (Facebook, Myspace, ...)</li><li> Mengakses laman ini dari telefon bimbit anda </li><li> Melihat OLX dalam bahasa anda sendiri </li></ul><br />OLX digunakan dalam lebih  <<QTY_COUNTRIES>> negara dalam <<QTY_LANGUAGES>> bahasa. Syarikat ini ditubuhkan pada bulan Mac 2006 dan adalah milik persendirian.</p>',
     'about.Download_Mob': 'Muat turun',
     'about.Mission': 'Misi',
     'about.MissionText1': 'Kami menambah baik kehidupan orang ramai dengan menemukan mereka dalam pertukaran menang-sama-menang',

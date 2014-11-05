@@ -12,6 +12,7 @@ if (typeof window === 'undefined') {
 
 module.exports = {
     terms: middlewares(terms),
+    about: middlewares(about),
     help: middlewares(help),
     interstitial: middlewares(interstitial),
     error: middlewares(error),
@@ -26,6 +27,16 @@ function terms(params, callback) {
     function controller() {
         callback(null, {
             tracking: tracking.generateURL.call(this)
+        });
+    }
+}
+
+function about(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {
+            //tracking: tracking.generateURL.call(this)
         });
     }
 }
