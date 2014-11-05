@@ -51,8 +51,8 @@ module.exports = {
         error: {}
     },
     'default': {
-        title: 'OLX Mobile',
-        description: 'OLX Mobile',
+        title: 'OLX',
+        description: 'OLX',
         robots: 'index,follow',
         googlebot: 'index,follow',
         canonical: true

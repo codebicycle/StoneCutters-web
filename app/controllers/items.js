@@ -779,8 +779,6 @@ function search(params, callback, gallery) {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
-            this.app.seo.addMetatag('title', query.search + (items.meta.page > 1 ? (' - ' + items.meta.page) : ''));
-            this.app.seo.addMetatag('description');
 
             tracking.addParam('page_nb', items.meta.totalPages);
             tracking.addParam('section', query.categoryId);
@@ -924,25 +922,25 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var success = function(items) {
-            this.app.seo.setContent(items.meta);
+            var meta = items.meta;
+
+            this.app.seo.setContent(meta);
             this.app.seo.set('staticSearch', {
                 keyword: query.search,
                 category: (subcategory || category ? (subcategory || category).get('trName') : '')
             });
-            if (items.meta.total < 5) {
+            if (meta.total < 5) {
                 this.app.seo.addMetatag('robots', 'noindex, follow');
                 this.app.seo.addMetatag('googlebot', 'noindex, follow');
             }
-            this.app.seo.addMetatag('title', query.search + (items.meta.page > 1 ? (' - ' + items.meta.page) : ''));
-            this.app.seo.addMetatag('description');
 
-            tracking.addParam('page_nb', items.meta.totalPages);
+            tracking.addParam('page_nb', meta.totalPages);
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
             callback(null, 'items/staticsearch', {
                 items: items.toJSON(),
-                meta: items.meta,
+                meta: meta,
                 filters: items.filters,
                 search: query.search,
                 infiniteScroll: infiniteScroll
@@ -1035,21 +1033,20 @@ function allresults(params, callback, gallery) {
             done(res.items);
         }.bind(this);
 
-        var success = function(_items) {
-            var meta = _items.meta;
+        var success = function(items) {
+            var meta = items.meta;
 
+            this.app.seo.setContent(items.meta);
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-            this.app.seo.addMetatag('title', 'all-results' + (meta.page > 1 ? (' - ' + meta.page) : ''));
-            this.app.seo.addMetatag('description');
 
             tracking.addParam('page_nb', meta.totalPages);
 
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),
-                items: _items.toJSON(),
+                items: items.toJSON(),
                 meta: meta,
-                filters: _items.filters,
+                filters: items.filters,
                 infiniteScroll: infiniteScroll
             });
         }.bind(this);

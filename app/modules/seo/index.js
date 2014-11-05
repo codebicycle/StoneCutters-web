@@ -12,7 +12,10 @@ var Head = require('./head');
 
 var getters = {
     head: getHead,
-    topTitle: getTopTitle
+    title: getPropertyHead,
+    description: getPropertyHead,
+    keywords: getPropertyHead,
+    topTitle: getPropertyHead
 };
 
 var INSTANCE;
@@ -23,11 +26,12 @@ Backbone.noConflict();
 Base = Backbone.Model;
 
 function getHead() {
-    return this.head.toJSON();
+    var head = this.head.toJSON();
+    return head;
 }
 
-function getTopTitle() {
-    return this.head.get('topTitle');
+function getPropertyHead(key) {
+    return this.head.get(key);
 }
 
 Seo = Backbone.Model.extend({
@@ -41,7 +45,7 @@ Seo = Backbone.Model.extend({
         var attr;
         var getter;
 
-        if (this.config[key]) {
+        // if (this.config[key]) {
             getter = getters[key];
             if (getter) {
                 attr = getter.apply(this, arguments);
@@ -49,38 +53,29 @@ Seo = Backbone.Model.extend({
             else {
                 attr = Base.prototype.get.apply(this, arguments);
             }
-        }
+        // }
         return attr;
     },
     setContent: function (meta, options) {
+        var seo;
         var title;
         var suffix;
 
         if (meta && meta.seo) {
-            meta = meta.seo;
+            seo = meta.seo;
             options = _.defaults({}, options || {}, {
                 unset: false
             });
 
-            this.set(meta, options);
-            this.head.setAll(meta.metas, options);
+            this.set(seo, options);
+            this.head.setAll(seo.metas, options);
 
-            if (meta.itemPage) {
-                this.head.setAll(meta.itemPage, options);
+            if (seo.itemPage) {
+                this.head.setAll(seo.itemPage, options);
             }
-            if (meta.levelPath) {
-                if (meta.levelPath.wikititles) {
-                    this.set('wikititles', meta.levelPath.wikititles);
-                }
-                if (meta.levelPath.top) {
-                    if (_.isArray(meta.levelPath.top)) {
-                        title = meta.levelPath.top.pop().anchor;
-                        suffix = this.head.getLocationName(' - ');
-                        if (title.length >= suffix.length && title.slice(title.length - suffix.length) !== suffix) {
-                            title += suffix;
-                        }
-                        this.head.set('topTitle', title);
-                    }
+            if (seo.levelPath) {
+                if (seo.levelPath.wikititles) {
+                    this.set('wikititles', seo.levelPath.wikititles);
                 }
             }
         }
@@ -118,7 +113,7 @@ Seo = Backbone.Model.extend({
         topTitle.push(message.replace('<<CATEGORY>>', value.category).replace('<<REGION>>', region));
         topTitle.push(' | OLX');
         
-        this.head.set('topTitle', topTitle.push(''), {
+        this.head.set('topTitle', topTitle.join(''), {
             unset: false
         });
     }
