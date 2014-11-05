@@ -1,12 +1,10 @@
 'use strict';
 
-var Base = require('../../bases/view');
+var Base = require('../../../../../common/app/bases/view');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    tagName: "section",
-    className: 'pages-sitemap-view',
-    id: "category-tree",
+    className: 'footer-categorytree-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var categories = data.categories;
@@ -23,13 +21,7 @@ module.exports = Base.extend({
             location: this.app.session.get('location'),
             categories: list
         });
-    },
-    onActionStart: function(event) {
-        this.app.trigger('footer:hide', 'categories');
-    },
-    onActionEnd: function(event) {
-        this.app.trigger('footer:show', 'categories');
     }
 });
 
-module.exports.id = 'pages/sitemap';
+module.exports.id = 'footer/categorytree';

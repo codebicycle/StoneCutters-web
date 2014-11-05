@@ -33,11 +33,11 @@ module.exports = Base.extend({
         return this.app.templateAdapter.getTemplate(template + '/' + this.name);
     },
     getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this) || {};
         var template = this.app.session.get('template');
         var user = this.app.session.get('user');
 
-        return _.extend({}, data, {
+        return _.extend(data, {
             user: user,
             device: this.app.session.get('device'),
             platform: this.app.session.get('platform'),
@@ -124,18 +124,21 @@ module.exports.attach = Base.attach = function(app, parentView, callback) {
         $el = $(el);
         if (!$el.data('view-attached')) {
             options = Base.getViewOptions($el);
-            options.app = app;
-            viewName = options.view;
-            fetchSummary = options.fetch_summary || {};
-            app.fetcher.hydrate(fetchSummary, {
-                app: app
-            }, function done(err, results) {
-                options = _.extend(options, results);
-                Base.getView(app, viewName, app.options.entryPath, function after(ViewClass) {
-                    var view = new ViewClass(options);
+            app.fetchDependencies(['categories', 'topCities', 'states', 'countries'], function done(err, dependencies) {
+                _.extend(options, dependencies.toJSON());
+                options.app = app;
+                viewName = options.view;
+                fetchSummary = options.fetch_summary || {};
+                app.fetcher.hydrate(fetchSummary, {
+                    app: app
+                }, function done(err, results) {
+                    options = _.extend(options, results);
+                    Base.getView(app, viewName, app.options.entryPath, function after(ViewClass) {
+                        var view = new ViewClass(options);
 
-                    view.attach($el, parentView);
-                    cb(null, view);
+                        view.attach($el, parentView);
+                        cb(null, view);
+                    });
                 });
             });
         }

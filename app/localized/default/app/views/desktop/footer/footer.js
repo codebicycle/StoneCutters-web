@@ -7,21 +7,40 @@ module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
     className: 'footer-view',
-     events: {
+    postRender: function() {
+        var currentRoute = this.app.session.get('currentRoute');
+
+        if (!this.hidden) {
+            this.app.on('footer:show', this.onShow.bind(this));
+            this.app.on('footer:hide', this.onHide.bind(this));
+        }
+        this.hidden = this.hidden || {
+            categories: (currentRoute.controller === 'categories' && currentRoute.action == 'list') || (currentRoute.controller === 'pages' && currentRoute.action === 'sitemap')
+        };
+    },
+    onShow: function(element) {
+        delete this.hidden[element];
+        this.render();
+    },
+    onHide: function(element) {
+        this.hidden[element] = true;
+        this.render();
+    },
+    events: {
         'click [data-footer-slidedown]': 'slideDownContent',
         'click [data-footer-slide]': 'slideFooter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var currentRoute = this.app.session.get('currentRoute');
 
+        this.hidden = this.hidden || {
+            categories: (currentRoute.controller === 'categories' && currentRoute.action == 'list') || (currentRoute.controller === 'pages' && currentRoute.action === 'sitemap')
+        };
         return _.extend({}, data, {
             user: this.app.session.get('user'),
-            inHome: this.isHome || false
+            hidden: this.hidden
         });
-    },
-    postRender: function () {
-        this.app.router.appView.on('home:start', this.onHomeStart.bind(this));
-        this.app.router.appView.on('home:end', this.onHomeEnd.bind(this));
     },
     slideDownContent: function(event) {
         event.preventDefault();
@@ -70,13 +89,5 @@ module.exports = Base.extend({
                 });
             }
         }
-    },
-    onHomeStart: function () {
-        this.isHome = true;
-        this.render();
-    },
-    onHomeEnd: function () {
-        this.isHome = false;
-        this.render();
     }
 });

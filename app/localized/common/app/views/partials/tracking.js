@@ -13,7 +13,7 @@ module.exports = Base.extend({
         if (this.tracking) {
             data.tracking = this.tracking;
         }
-        else if (data.context && data.context.ctx && data.context.ctx.tracking){
+        else if (data.context && data.context.ctx && data.context.ctx.tracking) {
             data.tracking = data.context.ctx.tracking;
         }
         return _.extend({}, data);
