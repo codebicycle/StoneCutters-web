@@ -63,23 +63,19 @@ function flow(params, callback) {
         var postingController = function(postingSession) {
             tracking.setPage('desktop_step1');
             callback(null, 'post/index', {
-                postingSession: postingSession.get('postingSession'),
-                tracking: tracking.generateURL.call(this)
+                postingSession: postingSession.get('postingSession')
             }, false);
         }.bind(this);
 
         var postingFlowController = function(postingSession) {
             callback(null, 'post/flow/index', {
-                postingSession: postingSession.get('postingSession'),
-                tracking: tracking.generateURL.call(this)
+                postingSession: postingSession.get('postingSession')
             }, false);
         }.bind(this);
 
         var postingCategoriesController = function() {
             tracking.setPage('categories');
-            callback(null, 'post/categories', {
-                tracking: tracking.generateURL.call(this)
-            });
+            callback(null, 'post/categories', {});
         }.bind(this);
 
         var error = function(err) {
@@ -125,8 +121,7 @@ function subcategories(params, callback) {
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, _.extend(params, {
             category: category.toJSON(),
-            subcategories: category.get('children').toJSON(),
-            tracking: tracking.generateURL.call(this)
+            subcategories: category.get('children').toJSON()
         }));
     }
 }
@@ -220,8 +215,7 @@ function form(params, callback) {
                 subcategory: subcategory.toJSON(),
                 language: languageId,
                 siteLocation: siteLocation,
-                form: form,
-                tracking: tracking.generateURL.call(this)
+                form: form
             });
         }.bind(this);
 
@@ -350,8 +344,7 @@ function success(params, callback) {
                 sk: securityKey,
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems,
-                tracking: tracking.generateURL.call(this)
+                relatedItems: _relatedItems
             });
         }.bind(this);
 
@@ -527,8 +520,7 @@ function edit(params, callback) {
                 errField: params.errField,
                 errMsg: params.errMsg,
                 sk: securityKey,
-                form: _form,
-                tracking: tracking.generateURL.call(this)
+                form: _form
             });
         }.bind(this);
 

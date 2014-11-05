@@ -47,8 +47,7 @@ function list(params, callback) {
                 cities: response.cities.toJSON(),
                 search: params.search,
                 posting: params.posting,
-                target: params.target,
-                tracking: tracking.generateURL.call(this)
+                target: params.target
             });
         }.bind(this);
 
