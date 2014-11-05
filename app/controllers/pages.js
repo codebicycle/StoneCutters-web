@@ -33,9 +33,7 @@ function about(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {
-            //tracking: tracking.generateURL.call(this)
-        });
+        callback(null, {});
     }
 }
 

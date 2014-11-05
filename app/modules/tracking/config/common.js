@@ -39,6 +39,7 @@ module.exports = {
         'pages#interstitial': 'interstitial',
         'pages#error': 'error',
         'pages#allstates': 'sitemap',
-        'pages#sitemap': 'sitemapcalendar'
+        'pages#sitemap': 'sitemapcalendar',
+        'pages#about': 'static/about'
     }
 };
