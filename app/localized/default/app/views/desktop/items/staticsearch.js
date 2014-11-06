@@ -71,10 +71,10 @@ module.exports = Base.extend({
         var filterSlug = $target.data('filter-slug');
 
         if (!filterSlug) {
-            filterSlug  = ['/des-cat-', $target.data('filter-id'), '/'].join('');
+            filterSlug  = ['/nf/des-cat-', $target.data('filter-id'), '/'].join('');
         }
 
-        path = path.replace('/search/', filterSlug);
+        path = path.replace('/q/', filterSlug);
         path = this.refactorPath(path);
         this.app.router.redirectTo(path);
     },
