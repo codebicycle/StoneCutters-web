@@ -77,7 +77,7 @@ var trackers = {
                     referer: esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'))
                 }));
 
-                ctx.urls.push(utils.params(url.url, url.params));
+                ctx.urls.push(url);
             }
         }
     }

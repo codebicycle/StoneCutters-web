@@ -101,7 +101,6 @@ function flow(params, callback) {
 
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
-                tracking: tracking.generateURL.call(this),
                 cities: cities,
                 currentLocation: currentLocation
             }, false);
