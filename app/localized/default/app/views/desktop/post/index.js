@@ -62,6 +62,7 @@ module.exports = Base.extend({
                 }
             }.bind(this));
             this.$el.trigger('errorsUpdate');
+            this.$('#posting-locations-view').trigger('formRendered');
         }
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
