@@ -39,6 +39,9 @@ function list(params, callback) {
                     collection: 'Cities',
                     params: citiesParams
                 }
+            }, {
+                readFromCache: false,
+                store: true
             }, done.errfcb);
         }.bind(this);
 

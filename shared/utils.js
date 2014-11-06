@@ -301,6 +301,15 @@ function getUserAgent(req) {
     return /*req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || */req.get('user-agent') || defaults.userAgent;
 }
 
+function sort(params, comparator) {
+    var sorted = {};
+
+    _.chain(params).keys().sort(comparator).forEach(function(key) {
+        sorted[key] = params[key];
+    });
+    return sorted;
+}
+
 function noop() {}
 
 module.exports = {
@@ -316,5 +325,6 @@ module.exports = {
     parse: parse,
     stringify: stringify,
     getUserAgent: getUserAgent,
+    sort: sort,
     noop: noop
 };

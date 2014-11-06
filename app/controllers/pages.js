@@ -146,7 +146,10 @@ function allstates(params, callback) {
         }.bind(this);
 
         var fetch = function(done, spec) {
-            this.app.fetch(spec, done.errfcb);
+            this.app.fetch(spec, {
+                readFromCache: !this.app.session.get('isServer'),
+                store: true
+            }, done.errfcb);
         }.bind(this);
 
         var formatResponse = function(done, res) {
@@ -155,8 +158,8 @@ function allstates(params, callback) {
                 var currentState = res.states.get(url);
 
                 currentState.set({
-                    'children' : res.cities.toJSON(),
-                    'selected': true
+                    children: res.cities.toJSON(),
+                    selected: true
                 });
                 res.states.set([currentState]);
             }

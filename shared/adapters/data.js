@@ -4,6 +4,7 @@ var PROTOCOL = 'http';
 var HOST = 'api-v2.olx.com';
 
 var _ = require('underscore');
+var asynquence = require('asynquence');
 var logger = require('../logger')('adapter data');
 var utils = require('../utils');
 var isServer = utils.isServer;
@@ -14,6 +15,8 @@ if (isServer) {
     var statsd = require(statsdName)();
     var restlerName = 'restler';
     var restler = require(restlerName);
+    var memcachedModule = '../../server/modules/memcached';
+    var memcached = require(memcachedModule);
 }
 
 function DataAdapter(options) {
@@ -32,65 +35,126 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
     var location = req.rendrApp.session ? req.rendrApp.session.get('location') : null;
     var start = new Date().getTime();
     var elapsed;
+    var key;
 
     if (!isServer) {
         return this.clientRequest(req, api, options, callback);
     }
-    if (options instanceof Function) {
-        callback = options;
-        options = {};
-    }
-    api = this.apiDefaults(api, req);
-    restler.request(api.url, _.extend(api, options))
-        .on('success', success)
-        .on('fail', fail)
-        .on('error', fail);
 
-    function success(body, res) {
-        elapsed = getElapsed(start, elapsed);
-        if (typeof body === 'string' && DataAdapter.prototype.isJSONResponse(res)) {
+    function prepare(done) {
+        if (options instanceof Function) {
+            callback = options;
+            options = {};
+        }
+        api = this.apiDefaults(api, req);
+        api = _.extend(api, options);
+        done();
+    }
+
+    function cache(done) {
+        key = this.getCacheKey(api);
+        if (!key || !api.store) {
+            return done();
+        }
+        memcached.get(key, after);
+
+        function after(err, body) {
+            if (err) {
+                done.abort();
+                return callback(err, {
+                    statusCode: 598
+                });
+            }
+            else if (body) {
+                done.abort();
+                return callback(null, {
+                    statusCode: 200
+                }, body);
+            }
+            done();
+        }
+    }
+
+    function request(done) {
+        restler.request(api.url, api)
+            .on('success', success)
+            .on('fail', fail)
+            .on('error', fail);
+
+        function success(body, res) {
+            elapsed = getElapsed(start, elapsed);
+            if (typeof body === 'string' && DataAdapter.prototype.isJSONResponse(res)) {
+                try {
+                    body = JSON.parse(body);
+                }
+                catch (err) {
+                    return fail(err, res);
+                }
+            }
+            if (body && body.itemProperties === null){
+                body.itemProperties = {};
+            }
+            logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode]);
+            }
+            done(null, res, body);
+        }
+
+        function fail(err, res) {
+            res = res || {
+                statusCode: 599
+            };
+            elapsed = getElapsed(start, elapsed);
+            if (!err && res.statusCode == 503) {
+                err = 'Service Unavailable';
+            }
             try {
-                body = JSON.parse(body);
+                err = JSON.parse(err);
             }
-            catch (err) {
-                return fail(err, res);
+            catch (error) {}
+            if (options.convertErrorCode) {
+                err = DataAdapter.prototype.getErrForResponse(res, {
+                    allow4xx: options.allow4xx
+                });
             }
+            logger.error('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode]);
+            }
+            statsd.increment(['smaug', 'error', res.statusCode]);
+            err.statusCode = res.statusCode;
+            done(err, res);
         }
-        if (body && body.itemProperties === null){
-            body.itemProperties = {};
+    }
+
+    function check(done, err, res, body) {
+        if (err) {
+            done.abort();
+            return callback(err, res);
         }
-        logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
-        if (location) {
-            statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode]);
+        done(res, body);
+    }
+
+    function success(res, body) {
+        if (api.store) {
+            memcached.set(key, body, 360, utils.noop);
         }
         callback(null, res, body);
     }
 
-    function fail(err, res) {
-        res = res || {
-            statusCode: 599
-        };
-        elapsed = getElapsed(start, elapsed);
-        if (!err && res.statusCode == 503) {
-            err = 'Service Unavailable';
-        }
-        try {
-            err = JSON.parse(err);
-        }
-        catch (error) {}
-        if (options.convertErrorCode) {
-            err = DataAdapter.prototype.getErrForResponse(res, {
-                allow4xx: options.allow4xx
-            });
-        }
-        logger.error('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
-        if (location) {
-            statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode]);
-        }
-        statsd.increment(['smaug', 'error', res.statusCode]);
-        err.statusCode = res.statusCode;
-        callback(err, res);
+    function fail(err) {
+        callback(err, {
+            statusCode: 598
+        });
     }
+
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(cache.bind(this))
+        .then(request.bind(this))
+        .then(check.bind(this))
+        .val(success.bind(this));
 };
 
 DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
@@ -234,6 +298,17 @@ DataAdapter.prototype.getErrForResponse = function(res, options) {
         err.body = res.body;
     }
     return err;
+};
+
+DataAdapter.prototype.getCacheKey = function(api) {
+    var key = [];
+
+    if (api.method.toUpperCase() !== 'GET') {
+        return;
+    }
+    key.push(api.url);
+    key.push(JSON.stringify(utils.sort(_.omit(api.query || {}, 'platform'))));
+    return key.join(':');
 };
 
 function getElapsed(start, elapsed) {
