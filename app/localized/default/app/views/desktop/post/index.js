@@ -13,6 +13,7 @@ module.exports = Base.extend({
     form: {},
     pendingValidations: [],
     errors: {},
+    formErrors: [],
     events: {
         'focus .text-field': 'fieldFocus',
         'blur .text-field': 'fieldFocus',
@@ -31,6 +32,7 @@ module.exports = Base.extend({
         this.form = {};
         this.pendingValidations = [];
         this.errors = {};
+        this.formErrors = [];
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
     },
     getTemplateData: function() {
@@ -45,9 +47,12 @@ module.exports = Base.extend({
             }
             if (!this.form['category.id']) {
                 this.errors['category.id'] = this.dictionary["postingerror.PleaseSelectSubcategory"];
+            } 
+            if (!this.form.state) {
+                this.errors.state = this.dictionary["countryoptions.Home_SelectState"];
             }
             if (!this.form.location) {
-                this.errors.location = this.dictionary["postingerror.InvalidLocation"];
+                this.errors.location = this.dictionary["countryoptions.Home_SelectCity"];
             }
             this.$('[required]').each(function eachRequiredField(index, field) {
                 var $field = $(field);
@@ -183,6 +188,7 @@ module.exports = Base.extend({
     onErrorsUpdate: function() {
         this.isValid = !(_.size(this.errors));
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
+        this.$('#posting-errors-view').trigger('update');
     },
     onImagesLoadEnd: function(event, images) {
         this.form._images = Object.keys(images).map(function each(image) {
@@ -200,25 +206,29 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var $field;
         var errorsSummary = _.clone(this.errors);
 
         _.each(errorsSummary, function eachError(message, selector) {
-            var $field = this.$('[name="' + selector + '"]');
+            
+            if (selector === 'category.id' || selector === 'category.parentId') {
+                $field = this.$('.posting-categories-list');
+            } else {
+                $field = this.$('[name="' + selector + '"]');                
+            }
 
             if ($field.length) {
                 delete errorsSummary[selector];
                 $field.closest('.field-wrapper').addClass('error').removeClass('success');
-                $field.after('<small class="error message">' + message + '</small>');
+                $field.parent().append('<small class="error message">' + message + '</small>');
             }
         }.bind(this));
-        this.$('#posting-errors-view').trigger('show');
+        this.$('#posting-errors-view').trigger('update');
     },
     onSubmit: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
-        this.$('#posting-contact-view').trigger('disablePost');
 
         var query = {
             postingSession: this.options.postingsession
@@ -236,7 +246,6 @@ module.exports = Base.extend({
                 }
                 done();
             }
-
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
@@ -256,17 +265,26 @@ module.exports = Base.extend({
 
         var fail = function(_errors, track) {
             // TODO: Improve error handling
-            always();
             if (_errors) {
                 if (_errors.responseText) {
                     _errors = JSON.parse(_errors.responseText);
                 }
                 if (_.isArray(_errors)) {
                     _.each(_errors, function eachError(error) {
-                        this.errors[error.selector] = error.message;
+                        if (error.selector === 'main') {
+                            this.formErrors.push(error.message);
+                        } else {
+                            if (error.selector === 'price') {
+                                error.selector = 'priceC';
+                            }
+                            this.errors[error.selector] = error.message;
+                        }
                     }.bind(this));
-                    this.$el.trigger('error');
                 }
+                else {
+                    this.formErrors.push('Unkown error'); // Translate this
+                }
+                this.$el.trigger('error');
             }
             trackFail(track);
         }.bind(this);
@@ -293,7 +311,6 @@ module.exports = Base.extend({
                 action: action,
                 custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
             });
-            this.app.router.once('action:end', always);
             helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
                 status: 200
             });
@@ -312,10 +329,8 @@ module.exports = Base.extend({
             });
         }.bind(this);
 
-        var always = function() {}.bind(this);
-
-        this.$('#errors').trigger('hide');
-
+        this.$('#posting-contact-view').trigger('disablePost');
+        this.formErrors = [];
         if (user) {
             query.token = user.token;
         }
