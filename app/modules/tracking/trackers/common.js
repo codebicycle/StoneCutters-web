@@ -41,7 +41,7 @@ var pageNameParsers = {
                 if (!item.id) {
                     str.push('age_unavailable');
                 }
-                else if (utils.daysDiff(new Date(item.date.timestamp)) > 30) {
+                else if (item.date && item.date.timestamp && utils.daysDiff(new Date(item.date.timestamp)) > 30) {
                     str.push('age_30');
                 }
                 if (str.length) {
