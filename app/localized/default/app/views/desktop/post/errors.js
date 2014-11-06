@@ -7,24 +7,53 @@ var _ = require('underscore');
 module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-errors-view',
-    className: 'posting-errors-view',
+    className: 'posting-errors-view hide',
     getTemplateData: function() {
+        var errors = this.parentView.errors;
+        var formErrors = this.parentView.formErrors;
         var data = Base.prototype.getTemplateData.call(this);
-        var errors = _.values(this.parentView.errors);
 
+        if (_.size(errors)) {
+            errors = _.map(this.parentView.errors, function eachError(message, field) {
+                return {
+                    field: field,
+                    message: message
+                };
+            });
+        }
+        else {
+            errors = false;
+        }
+        if (!formErrors.length) {
+            formErrors = false;
+        }
         return _.extend({}, data, {
-            errors: errors
+            errors: false,
+            formErrors: formErrors
         });
     },
     events: {
-        'show': 'onShow'
+        'update': 'onUpdate',
+        'click .close': 'onCloseClick'
     },
-    onShow: function(event) {
+    postRender: function() {
+        if (this.$el.text().trim().length) {
+            this.$el.removeClass('hide');
+        }
+    },
+    onUpdate: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         this.render();
+    },
+    onCloseClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$el.addClass('hide');        
     }
 });
 

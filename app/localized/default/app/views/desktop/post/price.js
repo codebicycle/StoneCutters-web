@@ -29,14 +29,6 @@ module.exports = Base.extend({
             fieldMandatory: this.fieldMandatory || ''
         });
     },
-    postRender: function() {
-        this.$('select').each(function eachSelect() {
-            var $select = $(this);
-            if ($select.val()) {
-                $select.trigger('change');
-            }
-        });
-    },
     events: {
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange'
@@ -68,7 +60,12 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('fieldSubmit', [$(event.target)]);
+        var $field = $(event.target);
+
+        if ($field.attr('name') === 'priceC') {
+            this.$('select').trigger('change');
+        }
+        this.parentView.$el.trigger('fieldSubmit', [$field]);
     }
 });
 
