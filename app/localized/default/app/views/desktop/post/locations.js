@@ -50,10 +50,17 @@ module.exports = Base.extend({
         });
     },
     events: {
+        'formRendered': 'onFormRendered',
         'change #field-state': 'onStateChange',
         'change #field-location': 'onCityChange'
     },
-    postRender: function() {
+    addEmptyOption: function(list, text) {
+        list.unshift({
+            key: '',
+            value: this.parentView.parentView.dictionary[text]
+        });
+    },
+    onFormRendered: function(event) {
         var $states = $('#field-state');
         var $cities = $('#field-location');
         
@@ -63,12 +70,6 @@ module.exports = Base.extend({
         if ($cities.val()) {
             this.parentView.$el.trigger('fieldSubmit', [$cities]);
         }
-    },
-    addEmptyOption: function(list, text) {
-        list.unshift({
-            key: '',
-            value: this.parentView.parentView.dictionary[text]
-        });
     },
     onStateChange: function(event) {
         event.preventDefault();
