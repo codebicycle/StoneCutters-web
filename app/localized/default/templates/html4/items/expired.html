@@ -1,6 +1,3 @@
-{% from macros import Breadcrumb, BreadcrumbHome %}
-{% set link = ((breadcrumb if breadcrumb else '/') | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["postingerror.Error"]) }}
 <div class="errorPage">
     <p><strong>{{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}</strong></p>
     <p>{{ dictionary["defaulthtmlhead.PleaseTryOneOfTheFollowingOptions"] }}</p>
@@ -14,4 +11,3 @@
         <li>{{ backToHome }}</li>
     </ul>
 </div>
-{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
