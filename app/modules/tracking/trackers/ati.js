@@ -83,6 +83,10 @@ function processOptions(params, options) {
         if(!_.isUndefined(params.posting_to_action) && options.item.date) {
             params.posting_to_action = utils.daysDiff(new Date(options.item.date.timestamp));
         }
+        if(!_.isUndefined(params.poster_id) && options.item.user) {
+            params.poster_id = options.item.user.id;
+            params.poster_type = 'registered_logged';
+        }
     }
     if(!_.isUndefined(params.funnel_category) && options.category) {
         params.funnel_category = options.category.name;
@@ -92,10 +96,6 @@ function processOptions(params, options) {
     }
     if(!_.isUndefined(params.subcategory) && options.subcategory) {
         params.subcategory = standarizeName(options.subcategory.name);
-    }
-    if(!_.isUndefined(params.poster_id) && options.item.user) {
-        params.poster_id = options.item.user.id;
-        params.poster_type = 'registered_logged';
     }
     if(params.page_name === 'expired_category' && options.category) {
         if (options.subcategory) {
