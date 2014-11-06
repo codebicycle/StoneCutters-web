@@ -1,5 +1,5 @@
 <a href="{{ '/myolx/myolxmessages' | link }}" class="back icons icon-arrow-left">Volver a mis mensajes</a>
-<h2 class="title">Mi OLX > {{ message.title }}</h2>
+<h2 class="title">{{ dictionary["myolx.MyOLX"] }} > {{ message.title }}</h2>
 
 <div class="data">
     <p><span>De: </span>{{ message.from.username }} ({{ message.from.email }})</p>
@@ -10,13 +10,14 @@
 <p class="message">{{ message.body }}</p>
 
 <p class="link">
-    <span>Este mensaje se refiere a:</span>
-    <a href="{{ message | slugToUrl | link }}">{{ message | slugToUrl | link }}</a>
+    <span>{{ dictionary["myolx.ThisMessageIsRegarding"] }}</span>
+    <a href="{{ message | slugToUrl | link() }}">{{ message.title }}</a>
 </p>
 
 <form data-message-reply data-message-id="{{ message.messageId }}">
-    <label>Responde este mensaje</label>
+    <label>{{ dictionary["myolx.ReplyToThisMessage"] }}</label>
     <textarea data-messageText ></textarea>
+    <p data-error class="error hide">Por favor complete el mensaje.</p>
     <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
-    <button class="reply-send btn" type="submit">Responder</button>
+    <button class="reply-send btn" type="submit">{{ dictionary["myolx.Reply"] }}</button>
 </form>

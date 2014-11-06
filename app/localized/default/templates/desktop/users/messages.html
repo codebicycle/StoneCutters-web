@@ -1,14 +1,14 @@
 <div message-alert class="alert hide">
-    <p message-alert-success class="icon-check success">Tu respuesta ha sido enviada con éxito</p>
-    <p message-alert-fail class="fail">Disculpa pero tu respuesta no ha podido ser enviada. Inténtalo en unos minutos por favor.</p>
+    <p message-alert-success class="icons icon-check success">{{ dictionary["itempagepostcomment.CommentPosted"] }}</p>
+    <p message-alert-fail class="fail">{{ dictionary["myolx.MessageNotSent"] }}</p>
 </div>
 <form>
     <div class="actions">
         <label><input data-select-all type="checkbox">Selecciona: Todos | Ninguno</label>
-        <button data-delete-message class="delete btn icons icon-trash">Eliminar</button>
+        <button data-delete-message class="delete btn icons icon-trash">{{ dictionary["readmessage.Delete"] }}</button>
     </div>
     {% if messages.length == 0 %}
-        <p class="notification">No tenés mensajes nuevos</p>
+        <p class="notification">{{ dictionary["netvibes_myolx.content.NoMessages"] }}</p>
     {% else %}
         <ul>
             {% for message in messages %}
@@ -22,7 +22,7 @@
         </ul>
     {% endif %}
     <div class="backToOlx">
-        <a href="{{ '/myolx/myadslisting' | link }}" class="back">Volver a Mi OLX</a>
+        <a href="{{ '/myolx/myadslisting' | link }}" class="back">{{ dictionary["myolx.BackToMyOLX"] }}</a>
     </div>
 </form>
 
