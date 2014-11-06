@@ -55,6 +55,9 @@ module.exports = Base.extend({
             cache = true;
         }
         callback = callback.errfcb ? callback.errfcb : callback;
+        if (this.dependencies) {
+            return callback(null, this.dependencies);
+        }
         this.fetch(this.getSpecs(dependencies), {
             readFromCache: !!cache,
             writeToCache: true
