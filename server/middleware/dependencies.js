@@ -16,7 +16,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fetch(done) {
-                req.rendrApp.fetchDependencies(['categories', 'countries', 'states', 'topCities'], false, done);
+                req.rendrApp.fetchDependencies(['categories', 'countries', 'states', 'topCities'], true, done);
             }
 
             function store(done, response) {
@@ -25,6 +25,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
+                console.log('[OLX DEBUG]', 'dependencies', err);
                 statsd.increment([req.rendrApp.session.get('location').name, 'middleware', 'dependencies', 'error']);
                 res.status(500).sendfile(errorPath);
             }
