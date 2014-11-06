@@ -25,7 +25,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                console.log('[OLX DEBUG]', 'dependencies', err);
+                console.log('[OLX_DEBUG]', 'dependencies', err);
                 statsd.increment([req.rendrApp.session.get('location').name, 'middleware', 'dependencies', 'error']);
                 res.status(500).sendfile(errorPath);
             }
