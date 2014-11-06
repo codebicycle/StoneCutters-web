@@ -63,7 +63,8 @@ function flow(params, callback) {
             }
 
             this.app.fetch(data, {
-                readFromCache: false
+                readFromCache: !this.app.session.get('isServer'),
+                store: true
             }, done.errfcb);
         }.bind(this);
 
@@ -302,19 +303,6 @@ function success(params, callback) {
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        seo: this.app.seo.isEnabled()
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -326,14 +314,14 @@ function success(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkItem = function(done, resCategories, resItem) {
-            if (!resCategories.categories || !resItem.item) {
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
                 return done.fail(null, {});
             }
-            done(resCategories.categories, resItem.item);
+            done(resItem.item);
         }.bind(this);
 
-        var findRelatedItems = function(done, _categories, _item) {
+        var findRelatedItems = function(done, _item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -356,13 +344,13 @@ function success(params, callback) {
                 else {
                     res.relatedItems = res.relatedItems.toJSON();
                 }
-                done(_categories, _item, res.relatedItems);
+                done(_item, res.relatedItems);
             }.bind(this));
         }.bind(this);
 
-        var success = function(_categories, _item, _relatedItems) {
+        var success = function(_item, _relatedItems) {
             var item = _item.toJSON();
-            var subcategory = _categories.search(item.category.id);
+            var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
 
@@ -370,7 +358,7 @@ function success(params, callback) {
                 return error();
             }
             parentId = subcategory.get('parentId');
-            category = parentId ? _categories.get(parentId) : subcategory;
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
@@ -393,7 +381,7 @@ function success(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findItem)
+            .then(findItem)
             .then(checkItem)
             .then(findRelatedItems)
             .val(success);
@@ -413,7 +401,6 @@ function edit(params, callback) {
         var languages;
         var languageId;
         var _params;
-        var _categories;
         var _item;
 
         var prepare = function(done) {
@@ -436,19 +423,6 @@ function edit(params, callback) {
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: languageId,
-                        seo: this.app.seo.isEnabled()
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -460,8 +434,8 @@ function edit(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkItem = function(done, resCategories, resItem) {
-            if (!resCategories.categories || !resItem.item) {
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
                 return done.fail(null, {});
             }
             var protocol = this.app.session.get('protocol');
@@ -470,9 +444,7 @@ function edit(params, callback) {
             var location = resItem.item.get('location');
             var url;
 
-            _categories = resCategories.categories;
             _item = resItem.item;
-
             if (location.url !== currentLocation.url) {
                 url = [protocol, '://', platform, '.', location.url.replace('www.', 'm.'), '/login'].join('');
                 done.abort();
@@ -512,6 +484,8 @@ function edit(params, callback) {
                     model: 'Field',
                     params: _params
                 }
+            }, {
+                readFromCache: false
             }, done.errfcb);
         }.bind(this);
 
@@ -525,7 +499,7 @@ function edit(params, callback) {
 
         var success = function(_postingSession, _field) {
             var item = _item.toJSON();
-            var subcategory = _categories.search(item.category.id);
+            var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
             var _form;
@@ -534,7 +508,7 @@ function edit(params, callback) {
                 return error();
             }
             parentId = subcategory.get('parentId');
-            category = parentId ? _categories.get(parentId) : subcategory;
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
             if (!form || !form.values) {
                 _form = {
@@ -591,7 +565,7 @@ function edit(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findItem)
+            .then(findItem)
             .then(checkItem)
             .gate(findPostingSession, findFields)
             .then(checkFields)

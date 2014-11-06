@@ -16,7 +16,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fetch(done) {
-                req.rendrApp.fetchDependencies(['categories', 'countries', 'states', 'topCities'], true, done);
+                req.rendrApp.fetchDependencies(['categories', 'countries', 'states', 'topCities'], false, done);
             }
 
             function store(done, response) {

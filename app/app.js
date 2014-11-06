@@ -60,7 +60,8 @@ module.exports = Base.extend({
         }
         this.fetch(this.getSpecs(dependencies), {
             readFromCache: !!cache,
-            writeToCache: true
+            writeToCache: true,
+            store: true
         }, function done(err, response) {
             if (err) {
                 return callback(err);

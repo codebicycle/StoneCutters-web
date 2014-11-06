@@ -25,7 +25,8 @@ function serverSync(method, model, options) {
         query: options.data || {},
         headers: options.headers || {},
         api: _.result(this, 'api'),
-        body: {}
+        body: {},
+        store: options.store
     };
     if (verb === 'POST' || verb === 'PUT') {
         api.body = model.toJSON();

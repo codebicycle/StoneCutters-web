@@ -74,7 +74,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                         }
                     }
                 }, {
-                    readFromCache: false
+                    readFromCache: false,
+                    writeToCache: false,
+                    store: true
                 }, callback);
             }
 

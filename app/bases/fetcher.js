@@ -74,5 +74,29 @@ module.exports = {
         }, function done(err) {
             fetcher.storeResults(results);
         });
+    },
+    fetchFromApi: function(spec, options, callback) {
+        var model = this.getModelOrCollectionForSpec(spec);
+        var fetcher = this;
+
+        model.fetch({
+            headers: options.headers || {},
+            data: spec.params,
+            store: options.store,
+            success: function(model, body) {
+                callback(null, model);
+            },
+            error: function(model, resp, options) {
+                var body, respOutput, err;
+
+                body = resp.body;
+                resp.body = typeof body === 'string' ? body.slice(0, 150) : body;
+                respOutput = JSON.stringify(resp);
+                err = new Error("ERROR fetching model '" + fetcher.modelUtils.modelName(model.constructor) + "' with options '" + JSON.stringify(options) + "'. Response: " + respOutput);
+                err.status = resp.status;
+                err.body = body;
+                callback(err);
+            }
+        });
     }
 };
