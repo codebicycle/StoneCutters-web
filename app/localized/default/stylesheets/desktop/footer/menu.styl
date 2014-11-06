@@ -11,15 +11,8 @@
         right: 0;
         z-index: 99;
 
-        .icon-close::before {
-            background-color: $greyStrong;
-            border-radius: 3px;
-            color: #eee;
-            font-size: 0.714286rem;
-            padding: 4px;
-            position: absolute;
-            right: 10px;
-            top: 10px;
+        .icon-close {
+            btn-close();
         }
 
         .title-bar {
@@ -44,7 +37,34 @@
             display: inline-block;
             padding-right: 20px;
         }
+        a {
+            font-size: $xs;
+            line-height: 1;
+        }
     }
+}
+
+.list-tree {
+    ul {
+        ul-reset();
+    }
+
+    .lt-set-column {
+        box-sizing: border-box;
+        float: left;
+        padding: 20px 10px;
+
+        &:first-child {
+            padding-left: 20px;
+        }
+
+        &:last-child {
+            padding-right: 20px;
+        }
+    }
+
+    generate-grid('lt-');
+
 }
 
 .footer-categorytree-view {
@@ -133,6 +153,21 @@
 }
 
 .footer-popular-view {
+
+    .popular-topcities,
+    .popular-states {
+        float: left;
+        width: 50%;
+    }
+
+    .popular-title {
+        color: $black;
+        font-size: $m;
+        font-weight: normal;
+        margin: 0;
+        padding: 20px 20px 0 20px;
+    }
+
     ul {
         ul-reset();
     }
@@ -140,7 +175,7 @@
     .popular-list {
         box-sizing: border-box;
         float: left;
-        padding: 20px 5px;
+        padding: 10px 5px 20px;
         width: 50%;
 
         &:last-child {
