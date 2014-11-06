@@ -2,7 +2,6 @@
 
 var Base = require('../bases/model');
 var asynquence = require('asynquence');
-var dataAdapter = require('../helpers/dataAdapter');
 
 module.exports = Base.extend({
     idAttribute: 'id',

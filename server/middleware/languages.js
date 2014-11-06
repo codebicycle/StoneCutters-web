@@ -25,7 +25,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 dataAdapter.get(req, '/countries/' + siteLocation + '/languages', {
                     query: {
                         platform: req.rendrApp.session.get('platform')
-                    }
+                    },
+                    store: true
                 }, done.errfcb);
             }
 

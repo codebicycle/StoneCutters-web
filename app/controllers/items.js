@@ -389,18 +389,6 @@ function map(params, callback) {
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -412,8 +400,8 @@ function map(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkItem = function(done, resCategories, resItem) {
-            if (!resCategories.categories || !resItem.item) {
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
                 return done.fail(null, {});
             }
             var item = resItem.item.toJSON();
@@ -428,12 +416,12 @@ function map(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, ('/' + slug));
             }
-            done(resCategories.categories, resItem.item);
+            done(resItem.item);
         }.bind(this);
 
-        var success = function(_categories, _item) {
+        var success = function(_item) {
             var item = _item.toJSON();
-            var subcategory = _categories.search(_item.get('category').id);
+            var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var category;
             var parentId;
 
@@ -441,7 +429,7 @@ function map(params, callback) {
                 return error();
             }
             parentId = subcategory.get('parentId');
-            category = parentId ? _categories.get(parentId) : subcategory;
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
             tracking.addParam('item', _item.toJSON());
             tracking.addParam('category', category.toJSON());
@@ -457,7 +445,7 @@ function map(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findItem)
+            .then(findItem)
             .then(checkItem)
             .val(success);
     }
@@ -478,18 +466,6 @@ function reply(params, callback) {
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -501,8 +477,8 @@ function reply(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkItem = function(done, resCategories, resItem) {
-            if (!resCategories.categories || !resItem.item) {
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
                 return done.fail(null, {});
             }
             var item = resItem.item.toJSON();
@@ -512,12 +488,12 @@ function reply(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
             }
-            done(resCategories.categories, resItem.item);
+            done(resItem.item);
         }.bind(this);
 
-        var success = function(_categories, _item) {
+        var success = function(_item) {
             var item = _item.toJSON();
-            var subcategory = _categories.search(item.category.id);
+            var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
 
@@ -525,7 +501,7 @@ function reply(params, callback) {
                 return error();
             }
             parentId = subcategory.get('parentId');
-            category = parentId ? _categories.get(parentId) : subcategory;
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -546,7 +522,7 @@ function reply(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findItem)
+            .then(findItem)
             .then(checkItem)
             .val(success);
     }
@@ -565,18 +541,6 @@ function success(params, callback) {
             done();
         }.bind(this);
 
-        var findCategories = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection : 'Categories',
-                    params: {
-                        location: siteLocation,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, done.errfcb);
-        }.bind(this);
-
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -588,16 +552,16 @@ function success(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkItem = function(done, resCategories, resItem) {
-            if (!resCategories.categories || !resItem.item) {
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
                 return done.fail(null, {});
             }
-            done(resCategories.categories, resItem.item);
+            done(resItem.item);
         }.bind(this);
 
-        var success = function(_categories, _item) {
+        var success = function(_item) {
             var item = _item.toJSON();
-            var subcategory = _categories.search(item.category.id);
+            var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
 
@@ -605,7 +569,7 @@ function success(params, callback) {
                 return error();
             }
             parentId = subcategory.get('parentId');
-            category = parentId ? _categories.get(parentId) : subcategory;
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
@@ -622,7 +586,7 @@ function success(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .gate(findCategories, findItem)
+            .then(findItem)
             .then(checkItem)
             .val(success);
     }

@@ -89,6 +89,9 @@ module.exports = {
                     seo: this.app.seo.isEnabled()
                 }
             }
+        }, {
+            readFromCache: false,
+            store: true
         }, function afterFetch(err, result) {
             if (err) {
                 return helpers.common.redirect.call(this, '/posting');

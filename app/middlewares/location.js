@@ -51,6 +51,8 @@ function findCity(params, _redirect, next) {
                     location: params.location
                 }
             }
+        }, {
+            store: true
         }, done.errfcb);
     }.bind(this);
 

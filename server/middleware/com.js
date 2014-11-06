@@ -55,7 +55,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 .val(redirect);
 
             function fetch(done) {
-                dataAdapter.get(req, '/countries/' + countryCode, done.errfcb);
+                dataAdapter.get(req, '/countries/' + countryCode, {
+                    store: true
+                }, done.errfcb);
             }
 
             function redirect(response, country) {
