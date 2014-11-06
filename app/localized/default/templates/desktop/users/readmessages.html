@@ -11,7 +11,7 @@
 
 <p class="link">
     <span>{{ dictionary["myolx.ThisMessageIsRegarding"] }}</span>
-    <a href="{{ message | slugToUrl | link() }}">{{ message.title }}</a>
+    <a href="{{ message | slugToUrl | link }}">{{ message.title }}</a>
 </p>
 
 <form data-message-reply data-message-id="{{ message.messageId }}">

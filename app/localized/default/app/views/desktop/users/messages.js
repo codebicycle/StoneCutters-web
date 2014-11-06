@@ -21,7 +21,6 @@ module.exports = Base.extend({
     },
     postRender: function() {
         var sent = this.app.session.get('params').sent;
-        var alert = $('[message-alert]');
 
         if (sent !== undefined) {
             if (sent === "true") {
@@ -32,7 +31,7 @@ module.exports = Base.extend({
                 $('[message-alert-fail]').show();
             }
             
-            alert.show().delay( 4000 ).slideUp( 600 );
+            $('[message-alert]').show().delay( 4000 ).slideUp( 600 );
         }
     },
     selectAll: function(event) {
