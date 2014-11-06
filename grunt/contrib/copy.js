@@ -140,29 +140,26 @@ module.exports = function(grunt) {
     (function copySprites() {
         var environments = utils.getEnvironments(grunt);
         var files = {};
-        var platform;
+        var sprite;
 
-        for (platform in iconsLocalization) {
-            if (platform !== 'html5') {
-                continue;
+        environments.forEach(function eachEnvironments(environment) {
+            var icons = config.get('icons', {}, environment);
+            var platform;
+
+            for (platform in icons) {
+                if (platform !== 'html5') {
+                    continue;
+                }
+                addIcons(environment, platform, 'default');
+                icons[platform].forEach(addIcons.bind({}, environment, platform));
             }
-            iconsLocalization[platform].forEach(eachIconLocation);
-        }
+        });
 
-        platform = 'html5';
-        eachIconLocation('default');
-
-        for (var sprite in files) {
+        for (sprite in files) {
             sprites.push(files[sprite]);
         }
 
-        function eachIconLocation(location) {
-            environments.forEach(function eachEnvironments(environment) {
-                addIconForEnvironment(location, environment);
-            });
-        }
-
-        function addIconForEnvironment(location, environment) {
+        function addIcons(environment, platform, location) {
             if (environment === 'production') {
                 return;
             }

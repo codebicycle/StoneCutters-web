@@ -16,16 +16,17 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fetch(done) {
-                req.rendrApp.fetchDependencies(['categories', 'countries', 'states', 'topCities'], true, done);
+                req.rendrApp.fetchDependencies(['categories', 'countries', 'states', 'topCities'], false, done);
             }
 
             function store(done, response) {
+                req.rendrApp.dependencies = response;
                 res.locals(response.toJSON());
                 done();
             }
 
             function fail(err) {
-                console.log('[OLX DEBUG]', 'dependencies', err);
+                console.log('[OLX_DEBUG]', 'dependencies', err);
                 statsd.increment([req.rendrApp.session.get('location').name, 'middleware', 'dependencies', 'error']);
                 res.status(500).sendfile(errorPath);
             }

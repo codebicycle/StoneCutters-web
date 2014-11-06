@@ -14,7 +14,6 @@ module.exports = function(grunt) {
     };
 
     (function stylusGeneral() {
-        var localization = config.get('localization');
         var key;
 
         environments.forEach(function eachEnvironments(environment) {
@@ -38,6 +37,7 @@ module.exports = function(grunt) {
 
 
         function getFiles(environment, _platform) {
+            var localization = config.get('localization', {}, environment);
             var files = {};
             var file;
             var platform;
@@ -117,32 +117,31 @@ module.exports = function(grunt) {
     })();
 
     (function stylusIcons() {
-        var iconsLocalization = config.get('icons');
+        var envs = _.clone(environments);
         var files = {};
-        var platform;
         var key;
 
-        for (platform in iconsLocalization) {
-            if (platform !== 'html5') {
-                continue;
-            }
-            iconsLocalization[platform].forEach(eachIconLocation);
+        if (!_.contains(envs, 'production')) {
+            envs.push('production');
         }
 
-        platform = 'html5';
-        eachIconLocation('default');
+        envs.forEach(function eachEnvironments(environment) {
+            var icons = config.get('icons', {}, environment);
+            var platform;
 
-        function eachIconLocation(location) {
-            environments.forEach(function eachEnvironments(environment) {
-                addIconToStylus(location, environment);
-            });
-
-            if (!_.contains(environments, 'production')) {
-                addIconToStylus(location, 'production');
+            if (_.isEmpty(icons)) {
+                return;
             }
-        }
+            for (platform in icons) {
+                if (platform !== 'html5') {
+                    continue;
+                }
+                addIcons(environment, platform, 'default');
+                icons[platform].forEach(addIcons.bind({}, environment, platform));
+            }
+        });
 
-        function addIconToStylus(location, environment) {
+        function addIcons(environment, platform, location) {
             var fileName = ['public/css/', location, '/', platform, '/icons'];
             var key = ['icons-', environment].join('');
 

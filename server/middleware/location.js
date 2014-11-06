@@ -4,11 +4,14 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
+        var fs = require('fs');
         var path = require('path');
         var asynquence = require('asynquence');
         var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
+        var closedPath = path.resolve('server/templates/closed.html');
+        var translations = require('../../app/translations');
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -74,7 +77,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                         }
                     }
                 }, {
-                    readFromCache: false
+                    readFromCache: false,
+                    writeToCache: false,
+                    store: true
                 }, callback);
             }
 
@@ -94,6 +99,15 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
+                if (err.status === 400) {
+                    return fs.readFile(closedPath, 'utf8', function callback(err, html) {
+                        var template = _.template(html);
+
+                        res.send(template({
+                            dictionary: translations['en-US']
+                        }));
+                    });
+                }
                 statsd.increment(['Unknown Location', 'middleware', 'location', 'error']);
                 res.status(500).sendfile(errorPath);
             }
