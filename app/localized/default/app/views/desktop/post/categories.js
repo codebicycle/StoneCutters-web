@@ -38,7 +38,6 @@ module.exports = Base.extend({
         $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
 
         var fetch = function(done) {
-            $('body > .loading').show();
             this.app.fetch({
                 fields: {
                     model: 'Field',
@@ -53,7 +52,6 @@ module.exports = Base.extend({
         }.bind(this);
 
         var error = function(err) {
-            $('body > .loading').hide();
             console.log(err); // TODO: HANDLE ERRORS
         }.bind(this);
 
@@ -62,14 +60,13 @@ module.exports = Base.extend({
 
             tracking.reset();
             tracking.setPage('desktop_step2');
-
             $view.trigger('update', tracking.generateURL.call(this));
-
             done(res);
         }.bind(this);
 
         var success = function(res) {
-            $('body > .loading').hide();
+            this.$('.error.message').remove();
+            this.$el.removeClass('error').addClass('success');
             this.parentView.$el.trigger('subcategorySubmit', {
                 parentId: categoryId,
                 id: subcategoryId,
