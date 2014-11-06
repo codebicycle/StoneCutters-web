@@ -1,7 +1,19 @@
+{% if errors or formErrors %}
+	<h4 class="title">{{ dictionary["postingerror.Error"] }} <small class="close">{{ dictionary["contactseller_form.Close"] }}</small></h4><!-- Error -->
+{% endif %}
 {% if errors %}
-	<ul>
+	<p class="detail">Por favor, verifica los errores indicados{{ dictionary["posting_publishbutton.ValidationError"] }}<!-- Por favor, verifica los errores indicados --> <em>({{ errors.length }})</em></p>
+	<ul class="summary">
 		{% for error in errors %}
-			<li>{{ error }}</li>
+			<li><strong>{{ error.field }}</strong>: <em>{{ error.message }}</em></li>
+		{% endfor %}
+	</ul>
+{% endif %}
+{% if formErrors %}
+	<p class="detail">Hubo un error. Por favor, intenta nuevamente.{{ dictionary["postingerror.ThereWasAnErrorTryingToFulfillYourRequest"] }} {{ dictionary["postingerror.PleaseTryAgain"] }}</p><!-- Hubo un error. --> <!-- Por favor, intenta nuevamente. -->
+	<ul class="summary">
+		{% for formError in formErrors %}
+			<li>{{ formError }}</li>
 		{% endfor %}
 	</ul>
 {% endif %}
