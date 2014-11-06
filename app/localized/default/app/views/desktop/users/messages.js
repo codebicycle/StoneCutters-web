@@ -21,7 +21,6 @@ module.exports = Base.extend({
     },
     postRender: function() {
         var sent = this.app.session.get('params').sent;
-        var $alert = $('[message-alert]');
 
         if (sent !== undefined) {
             if (sent === "true") {
@@ -32,28 +31,28 @@ module.exports = Base.extend({
                 $('[message-alert-fail]').show();
             }
             
-            $alert.show().delay( 4000 ).slideUp( 600 );
+            $('[message-alert]').show().delay( 4000 ).slideUp( 600 );
         }
     },
     selectAll: function(event) {
-        var $selectAll = $(event.target);
-        var $inputs = $('[data-message] input');
-        var check = $selectAll.is(':checked');
+        var selectAll = $(event.target);
+        var inputs = $('[data-message] input');
+        var check = selectAll.is(':checked');
         
         if (check) {
-            $($inputs).prop('checked', true);
+            $(inputs).prop('checked', true);
         } else {
-            $($inputs).prop('checked', false);            
+            $(inputs).prop('checked', false);            
         }
     },
     deleteMessage: function() {
-        var $messages = $('[data-message] input:checked');
+        var messages = $('[data-message] input:checked');
         var messageId;
         var _app = this.app;
         var user = _app.session.get('user');
         var url;
 
-        async.each($($messages), function each(message, callback) {
+        async.each($(messages), function each(message, callback) {
             messageId = $(message).data('messageId');
             url = [];
             url.push('/users/');
