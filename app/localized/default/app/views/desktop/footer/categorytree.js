@@ -18,7 +18,6 @@ module.exports = Base.extend({
         });
 
         return _.extend({}, data, {
-            location: this.app.session.get('location'),
             categories: list
         });
     }

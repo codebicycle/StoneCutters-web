@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     var _ = require('underscore');
     var config = require('../config');
     var utils = require('../utils');
-    var localization = config.get('localization');
+    var environments = utils.getEnvironments(grunt);
     var browserify = {
         lib: {
             src: ['public/js/lib/**/*.js'],
@@ -24,7 +24,6 @@ module.exports = function(grunt) {
     };
 
     (function browserifyConfig() {
-        var environments = utils.getEnvironments(grunt);
         var allEnvironments = ['development', 'testing', 'staging', 'production'];
         var defaultSrc = ['app/config/**/*.js'];
         var defaultOptionAlias = ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'];
@@ -47,7 +46,6 @@ module.exports = function(grunt) {
             };
             browserifyConfig.options.alias.push(replace(aliasTemplate, environment));
             browserify[replace(nameTemplate, environment)] = browserifyConfig;
-
         });
 
         function getSrc(env) {
@@ -70,53 +68,61 @@ module.exports = function(grunt) {
         }
     })();
 
-    compile('default');
-    for (var platform in localization) {
-        if (platform === 'wap' || platform === 'html4') {
-            continue;
+    (function browserifyApps() {
+        
+        compile('default');
+        environments.forEach(function(environment) {
+            var localization = config.get('localization', {}, environment);
+            var platform;
+
+            for (platform in localization) {
+                if (platform === 'wap' || platform === 'html4') {
+                    continue;
+                }
+                localization[platform].forEach(compile);
+            }
+        });
+
+        function compile(location) {
+            var target = 'public/js/src/' + location + '/app.js';
+
+            browserify[target] = {
+                files: {},
+                options: {
+                    aliasMappings: [{
+                        cwd: 'app/',
+                        dest: 'app/'
+                    }],
+                    alias: [],
+                    external: [
+                        'EXIF',
+                        'jquery',
+                        'nunjucks',
+                        'underscore',
+                        '../app/translations',
+                        '../app/config'
+                    ]
+                }
+            };
+            browserify[target].files[target] = [];
+
+            grunt.file.recurse('app', function callback(abspath, rootdir, subdir, filename) {
+                var parts = [];
+
+                if (subdir) {
+                    parts = subdir.split('/');
+                }
+                if ((parts[0] === 'localized' && parts[1] && parts[1] !== 'common' && parts[1] !== 'default' && parts[1] !== location) || parts[0] === 'translations' || parts[0] === 'config' || filename.split('.').pop() !== 'js') {
+                    return;
+                }
+                browserify[target].files[target].unshift(abspath);
+            });
+
+            browserify[target].options.aliasMappings[0].src = browserify[target].files[target].map(function map(file) {
+                return file.slice(4);
+            });
         }
-        localization[platform].forEach(compile);
-    }
-
-    function compile(location) {
-        var target = 'public/js/src/' + location + '/app.js';
-
-        browserify[target] = {
-            files: {},
-            options: {
-                aliasMappings: [{
-                    cwd: 'app/',
-                    dest: 'app/'
-                }],
-                alias: [],
-                external: [
-                    'EXIF',
-                    'jquery',
-                    'nunjucks',
-                    'underscore',
-                    '../app/translations',
-                    '../app/config'
-                ]
-            }
-        };
-        browserify[target].files[target] = [];
-
-        grunt.file.recurse('app', function callback(abspath, rootdir, subdir, filename) {
-            var parts = [];
-
-            if (subdir) {
-                parts = subdir.split('/');
-            }
-            if ((parts[0] === 'localized' && parts[1] && parts[1] !== 'common' && parts[1] !== 'default' && parts[1] !== location) || parts[0] === 'translations' || parts[0] === 'config' || filename.split('.').pop() !== 'js') {
-                return;
-            }
-            browserify[target].files[target].unshift(abspath);
-        });
-
-        browserify[target].options.aliasMappings[0].src = browserify[target].files[target].map(function map(file) {
-            return file.slice(4);
-        });
-    }
+    })();
 
     return browserify;
 };

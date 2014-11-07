@@ -87,6 +87,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             var platform = req.rendrApp.session.get('platform') || utils.defaults.platform;
             var language = req.rendrApp.session.get('selectedLanguage');
+            var location = req.rendrApp.session.get('location');
             var osName = req.rendrApp.session.get('osName') || 'unknown';
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
             var params = {
@@ -100,7 +101,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: platform,
-                siteLocation: req.rendrApp.session.get('siteLocation') || req.query.locUrl
+                location: (location ? location.url : false) || req.query.locUrl
             };
             var url;
 
@@ -120,6 +121,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (!req.query.custom) {
                 return;
             }
+            var location = req.rendrApp.session.get('location');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
                 custom: req.query.custom,
@@ -127,7 +129,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                siteLocation: req.rendrApp.session.get('siteLocation') || req.query.locUrl
+                location: (location ? location.url : false) || req.query.locUrl
             };
             var url = tracking.ati.pageview.call({
                 app: req.rendrApp

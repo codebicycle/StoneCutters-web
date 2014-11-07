@@ -138,5 +138,68 @@ module.exports = {
         }
         statsd.increment(['redirections', 'php', this.app.session.get('path')]);
         helpers.common.redirect.call(this, '/');
+    },
+    allresultsig: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/nf/all-results');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('-p-');
+            url.push(page);
+        }
+        url.push('-ig');
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    searchfilterig: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/');
+        url.push(params.title);
+        url.push('-cat');
+        url.push(params.catId);
+        url.push('/');
+        url.push(params.search || '');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('/-p-');
+            url.push(page);
+            url.push('-ig');
+        }
+        else {
+            url.push('/-ig');
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    searchfilter: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/');
+        url.push(params.title);
+        url.push('-cat');
+        url.push(params.catId);
+        url.push('/');
+        url.push(params.search || '');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('/-p-');
+            url.push(page);
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
     }
 };

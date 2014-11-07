@@ -27,15 +27,9 @@
             </div>
             <input id="category" type="hidden" class="hide" value="{{ category.id }},{{ category.name }}">
             <input id="subcategory" type="hidden" class="hide" value="{{ subcategory.id }},{{ subcategory.name }}">
-            <input id="currentUrl" type="hidden" class="hide" value="{{ meta.current | link }}">
-        {% elif meta.next or meta.previous %}
-            <div id="itemPagination">
-                <a href="{{ (meta.previous | link) if meta.previous else '#' }}" class="arrow {{ "leftA" if meta.previous else "leftD" }}"><span>{{ dictionary["itemslisting.Previous"] }}</span></a>
-                <div class="center">
-                    {{ meta | pagination }}
-                </div>
-                <a href="{{ (meta.next | link) if meta.next else '#' }}" class="arrow {{ "rightA" if meta.next else "rightD" }}"><span>{{ dictionary["itemslisting.Next"] }}</span></a>
-            </div>
+            <input id="currentUrl" type="hidden" class="hide" value="{{ paginator.get('current') | link }}">
+        {% elif paginator.isEnabled() %}
+            {% include (template + '/items/pagination.html') %}
         {% endif %}
     {% endif %}
 </section>

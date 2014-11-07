@@ -1,12 +1,8 @@
 {% view 'locations/select' %}
 {% view 'partials/search' %}
-{% set s = 's' %}
-{% if meta.total == 1 %}
-    {% set s = '' %}
-{% endif %}
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>' , search) | replace('<<NUMBER>>' , meta.total)) }}
+{{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>', search) | replace('<<NUMBER>>', meta.total)) }}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
@@ -34,15 +30,8 @@
                 </li>
             {% endfor %}
         </ul>
-        {% if meta.next or meta.previous %}
-            <div id="itemPagination">
-                <a href="{{ (meta.previous | link) if meta.previous else '#' }}" class="arrow {{ "leftA" if meta.previous else "leftD" }}"></a>
-                <div class="center">
-                    {{ meta | pagination }}
-                </div>
-                <a href="{{ (meta.next | link) if meta.next else '#' }}" class="arrow {{ "rightA" if meta.next else "rightD" }}"></a>
-            </div>
-            <div id="itemPaginationCaption">&#160;</div>
+        {% if paginator.isEnabled() %}
+            {% include (template + '/items/pagination.html') %}
         {% endif %}
     {% endif %}
 </div>

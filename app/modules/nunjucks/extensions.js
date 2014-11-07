@@ -37,12 +37,6 @@ module.exports = function(nunjucks) {
                 }
                 if (parentView) {
                     options.parentView = parentView;
-                    if (parentView.options) {
-                        if (parentView.options.context) {
-                            _.extend(options, parentView.options.context.ctx);
-                        }
-                        _.extend(options, _.omit(parentView.options, Object.keys(options)));
-                    }
                 }
                 ViewClass = Base.getView(app, id, app.options.entryPath);
                 view = new ViewClass(options);

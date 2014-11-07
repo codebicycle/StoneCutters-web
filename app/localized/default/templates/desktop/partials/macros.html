@@ -112,9 +112,9 @@
     </fieldset>
 {% endmacro %}
 
-{% macro PriceField(fieldLabel = '', fieldName = '', fieldMandatory = '', hint = false, fields) %}
+{% macro PriceField(label = '', name = '', mandatory = '', hint = false, fields) %}
     <fieldset class="field-wrapper">
-        {% if fieldLabel %}<label for="field-{{ fieldName }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}{{ fieldLabel }}</label>{% endif %}
+        {% if label %}<label for="field-{{ name }}" class="field-label">{% if mandatory == true or mandatory == 'true' %}* {% endif %}{{ label }}</label>{% endif %}
         <div class="field-controls">
             {% for field in fields %}
                 {% if field.fieldType == 'text' %}

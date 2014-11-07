@@ -36,8 +36,9 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this) || {};
         var template = this.app.session.get('template');
         var user = this.app.session.get('user');
+        var context = data.context ? data.context.ctx || {} : {};
 
-        return _.extend(data, {
+        return _.extend(context, data, {
             user: user,
             device: this.app.session.get('device'),
             platform: this.app.session.get('platform'),

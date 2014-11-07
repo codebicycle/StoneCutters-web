@@ -37,22 +37,8 @@
                 background: $greyBoxBg;
                 border-bottom: 1px solid $greyBorders;
 
-                .icon-close{
-                    background: none repeat scroll 0 0 $greyStrong;
-                    border-radius: 3px;
-                    height: 18px;
-                    position: absolute;
-                    right: 10px;
-                    text-align: center;
-                    top: 10px;
-                    width: 18px;
-                    &::before {
-                        color: $greyBoxBg;
-                        font-size: remify(10px);
-                    }
-                    &:hover {
-                        background: $black;
-                    }
+                .icon-close {
+                    btn-close();
                 }
 
                 .modal-title {

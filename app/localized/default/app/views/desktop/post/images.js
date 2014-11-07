@@ -81,7 +81,7 @@ module.exports = Base.extend({
                 data.append(0, event.target.files[0]);
                 helpers.dataAdapter.post(this.app.req, '/images', {
                     query: {
-                        postingSession: this.parentView.options.postingsession,
+                        postingSession: this.parentView.options.postingsession || this.parentView.options.postingSession,
                         url: this.app.session.get('location').url
                     },
                     data: data,

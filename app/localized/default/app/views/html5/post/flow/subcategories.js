@@ -15,10 +15,8 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        this.options.categories = this.parentView.options.categories;
-        return _.extend({}, data, {
-            categories: this.options.categories.toJSON()
-        });
+        this.options.categories = data.categories;
+        return _.extend({}, data, {});
     },
     events: {
         'show': 'onShow',

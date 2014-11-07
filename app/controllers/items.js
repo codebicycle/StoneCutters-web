@@ -617,33 +617,47 @@ function search(params, callback, gallery) {
         var languages = this.app.session.get('languages');
         var query;
         var url;
-        var urlPagination;
         var category;
         var subcategory;
 
+        var redirect = function(done) {
+            var path = this.app.session.get('path');
+            var starts = '/nf/';
+
+            if (!params.search || _.isEmpty(params.search.trim())) {
+                done.abort();
+                if (platform === 'desktop') {
+                    return helpers.common.redirect.call(this, '/nf/all-results');
+                }
+                return callback(null, {
+                    search: '',
+                    meta: {
+                        total: 0
+                    }
+                });
+            }
+            if (path.slice(0, starts.length) !== starts) {
+                done.abort();
+                return helpers.common.redirect.call(this, ['/nf', path].join(''));
+            }
+            done();
+        }.bind(this);
+
         var buildUrl = function(done) {
             url = ['/nf/'];
-            urlPagination = [];
             gallery = gallery || '';
 
             if (params.categoryId) {
                 url.push(params.title);
                 url.push('-cat-');
                 url.push(params.categoryId);
-                urlPagination = urlPagination.concat(url);
-                urlPagination.push('[page][gallery]');
             }
             else {
                 url.push('search');
-                urlPagination = urlPagination.concat(url);
             }
             url.push('/');
             url.push(params.search);
-            urlPagination.push('/');
-            urlPagination.push(params.search);
-            urlPagination.push('[filters]');
             url = url.join('');
-            urlPagination = urlPagination.join('');
             done();
         }.bind(this);
 
@@ -689,22 +703,6 @@ function search(params, callback, gallery) {
             done();
         }.bind(this);
 
-        var redirect = function(done) {
-            if (!query.search || _.isEmpty(query.search.trim())) {
-                done.abort();
-                if (platform === 'desktop') {
-                    return helpers.common.redirect.call(this, '/nf/all-results');
-                }
-                return callback(null, {
-                    search: '',
-                    meta: {
-                        total: 0
-                    }
-                });
-            }
-            done();
-        }.bind(this);
-
         var fetch = function(done) {
             this.app.fetch({
                 items: {
@@ -726,7 +724,7 @@ function search(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
             }
-            realPage = res.items.paginate(urlPagination, query, {
+            realPage = res.items.paginate([url, '/[page][gallery][filters]'].join(''), query, {
                 page: page,
                 gallery: gallery
             });
@@ -754,6 +752,7 @@ function search(params, callback, gallery) {
                 items: items.toJSON(),
                 meta: items.meta,
                 filters: items.filters,
+                paginator: items.paginator,
                 search: query.search,
                 infiniteScroll: infiniteScroll
             });
@@ -764,10 +763,10 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(buildUrl)
             .then(configure)
             .then(prepare)
-            .then(redirect)
             .then(fetch)
             .then(paginate)
             .val(success);
@@ -906,6 +905,7 @@ function staticSearch(params, callback) {
                 items: items.toJSON(),
                 meta: meta,
                 filters: items.filters,
+                paginator: items.paginator,
                 search: query.search,
                 infiniteScroll: infiniteScroll
             });
@@ -945,11 +945,18 @@ function allresults(params, callback, gallery) {
         var query;
 
         var redirect = function(done) {
+            var path = this.app.session.get('path');
+            var starts = '/nf/';
+
             if (page !== undefined && !isNaN(page) && page > 1 &&
                 (page > config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500) ||
                  (platform === 'html5' && infiniteScroll))) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
+            }
+            if (path.slice(0, starts.length) !== starts) {
+                done.abort();
+                return helpers.common.redirect.call(this, ['/nf', path].join(''));
             }
             done();
         }.bind(this);
@@ -986,7 +993,7 @@ function allresults(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
-            realPage = res.items.paginate(['/nf/all-results[gallery][page][filters]'].join(''), query, {
+            realPage = res.items.paginate(['/nf/all-results[page][gallery][filters]'].join(''), query, {
                 page: page,
                 gallery: gallery
             });
@@ -1011,6 +1018,7 @@ function allresults(params, callback, gallery) {
                 items: items.toJSON(),
                 meta: meta,
                 filters: items.filters,
+                paginator: items.paginator,
                 infiniteScroll: infiniteScroll
             });
         }.bind(this);
