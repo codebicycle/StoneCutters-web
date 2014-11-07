@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     tagName: 'section',
@@ -55,9 +56,10 @@ module.exports = Base.extend({
         'change #field-location': 'onCityChange'
     },
     addEmptyOption: function(list, text) {
+
         list.unshift({
             key: '',
-            value: this.parentView.parentView.dictionary[text]
+            value: translations[this.app.session.get('selectedLanguage') || 'en-US'][text]
         });
     },
     onFormRendered: function(event) {
@@ -127,7 +129,7 @@ module.exports = Base.extend({
             });
             options.unshift({
                 key: '',
-                value: this.parentView.parentView.dictionary['countryoptions.Home_SelectCity']
+                value: translations[this.app.session.get('selectedLanguage') || 'en-US']['countryoptions.Home_SelectCity']
             });
             done(options);
         }.bind(this);
