@@ -34,7 +34,16 @@ module.exports = Base.extend({
             countries: !this.isCurrentRoute('categories', 'list')
         };
         if (this.firstRender) {
-            $('body').on('click', this.slideDownContent.bind(this));
+            $('body').on('click', function(event){
+                var $slide = $('.footer-slide');
+
+                if (!$slide.hasClass('open')) {
+                    return;
+                }
+                else if (!$(event.target).closest($slide).length) {
+                    this.slideDownContent(event);
+                }
+            }.bind(this));
             this.firstRender = false;
        }
     },
