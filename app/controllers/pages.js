@@ -169,6 +169,9 @@ function allstates(params, callback) {
         var success = function(response) {
             var meta = response.meta;
 
+            this.app.seo.addMetatag('robots', 'noindex, follow');
+            this.app.seo.addMetatag('googlebot', 'noindex, follow');
+
             callback(null, {
                 states: response.states.toJSON(),
                 meta: meta
