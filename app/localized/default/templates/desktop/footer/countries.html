@@ -4,7 +4,7 @@
 {% set itemsPerColumn = ( (countries.length / 6 ) | round(0, 'ceil') ) %}
 <ul class="countries-list countries-list-first">
     {% for country in countries %}
-        <li><a href="{{country.url}}" title="{{country.name}}">{{country.name}}</a></li>
+        <li><a href="{{ ('http://' + country.url) }}" title="{{ country.name }}">{{ country.name }}</a></li>
         {% if loop.index%itemsPerColumn == 0 %}
             </ul>
             <ul class="countries-list">
