@@ -101,7 +101,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: platform,
-                location: (location ? location.url : false) || req.query.locUrl
+                siteLocation: req.rendrApp.session.get('siteLocation') || req.query.locUrl
             };
             var url;
 
@@ -145,6 +145,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (!req.query.custom) {
                 return;
             }
+            var location = req.rendrApp.session.get('location');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
                 custom: req.query.custom,
@@ -152,7 +153,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                siteLocation: req.rendrApp.session.get('siteLocation') || req.query.locUrl,
+                location: (location ? location.url : false) || req.query.locUrl,
                 siteId: 539154,
                 logServer: 'logw306'
             };
@@ -254,6 +255,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (!req.query.custom) {
                 return;
             }
+            var location = req.rendrApp.session.get('location');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
                 custom: req.query.custom,
@@ -261,7 +263,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                siteLocation: req.rendrApp.session.get('siteLocation') || req.query.locUrl
+                location: (location ? location.url : false) || req.query.locUrl
             };
             var url = tracking.ati.event.call({
                 app: req.rendrApp
