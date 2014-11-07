@@ -8,20 +8,40 @@ module.exports = Base.extend({
     id: 'footer-view',
     className: 'footer-view',
     firstRender: true,
-    postRender: function() {
-        var currentRoute = this.app.session.get('currentRoute');
+    events: {
+        'click [data-footer-slidedown]': 'slideDownContent',
+        'click [data-footer-slide]': 'slideFooter'
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
 
+        this.hidden = this.hidden || {
+            categories: this.isCurrentRoute('categories', 'list') || this.isCurrentRoute('pages', 'sitemap'),
+            countries: !this.isCurrentRoute('categories', 'list')
+        };
+        return _.extend({}, data, {
+            user: this.app.session.get('user'),
+            hidden: this.hidden
+        });
+    },
+    postRender: function() {
         if (!this.hidden) {
             this.app.on('footer:show', this.onShow.bind(this));
             this.app.on('footer:hide', this.onHide.bind(this));
         }
         this.hidden = this.hidden || {
-            categories: (currentRoute.controller === 'categories' && currentRoute.action == 'list') || (currentRoute.controller === 'pages' && currentRoute.action === 'sitemap')
+            categories: this.isCurrentRoute('categories', 'list') || this.isCurrentRoute('pages', 'sitemap'),
+            countries: !this.isCurrentRoute('categories', 'list')
         };
         if (this.firstRender) {
             $('body').on('click', this.slideDownContent.bind(this));
             this.firstRender = false;
        }
+    },
+    isCurrentRoute: function(controller, action) {
+        var currentRoute = this.app.session.get('currentRoute');
+
+        return (currentRoute.controller === controller && currentRoute.action === action);
     },
     onShow: function(element) {
         delete this.hidden[element];
@@ -30,22 +50,6 @@ module.exports = Base.extend({
     onHide: function(element) {
         this.hidden[element] = true;
         this.render();
-    },
-    events: {
-        'click [data-footer-slidedown]': 'slideDownContent',
-        'click [data-footer-slide]': 'slideFooter'
-    },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        var currentRoute = this.app.session.get('currentRoute');
-
-        this.hidden = this.hidden || {
-            categories: (currentRoute.controller === 'categories' && currentRoute.action == 'list') || (currentRoute.controller === 'pages' && currentRoute.action === 'sitemap')
-        };
-        return _.extend({}, data, {
-            user: this.app.session.get('user'),
-            hidden: this.hidden
-        });
     },
     slideDownContent: function(event) {
         event.preventDefault();
