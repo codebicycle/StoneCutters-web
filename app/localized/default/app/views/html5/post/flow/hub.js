@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -27,7 +28,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', this.parentView.dictionary['misc.CreateYourFreeAd_Mob']);
+        this.parentView.$el.trigger('headerChange', translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.CreateYourFreeAd_Mob']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {

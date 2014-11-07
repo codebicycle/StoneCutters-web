@@ -43,13 +43,14 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
+        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
         if (this.isValid === undefined || this.isValid === null) {
             if (!this.form['category.parentId']) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
             }
             if (!this.form['category.id']) {
                 this.errors['category.id'] = this.dictionary["postingerror.PleaseSelectSubcategory"];
-            } 
+            }
             if (!this.form.state) {
                 this.errors.state = this.dictionary["countryoptions.Home_SelectState"];
             }
@@ -221,11 +222,11 @@ module.exports = Base.extend({
         var errorsSummary = _.clone(this.errors);
 
         _.each(errorsSummary, function eachError(message, selector) {
-            
+
             if (selector === 'category.id' || selector === 'category.parentId') {
                 $field = this.$('.posting-categories-list');
             } else {
-                $field = this.$('[name="' + selector + '"]');                
+                $field = this.$('[name="' + selector + '"]');
             }
 
             if ($field.length) {
