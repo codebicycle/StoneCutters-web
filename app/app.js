@@ -67,8 +67,9 @@ module.exports = Base.extend({
                 return callback(err);
             }
             response.toJSON = toJSON;
+            this.dependencies = response;
             callback(null, response);
-        });
+        }.bind(this));
     },
     getSpecs: function(dependencies) {
         var specs = {};

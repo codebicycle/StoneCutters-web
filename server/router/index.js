@@ -36,28 +36,12 @@ var Router = function(server) {
 
     server.viewEngine.getCachedCollections = function(app) {
         var cachedData = {};
-        var scope = this;
 
-        Object.keys(app.fetcher.collectionStore.cache).forEach(function each(key) {
-            var collection = app.fetcher.collectionStore.cache[key];
-            var spec = {};
-            var name = key.split(':').shift();
-
-            if (!app.modelUtils.getCollectionConstructor(name).cache) {
-                return;
-            }
-            spec[name] = {
-                collection: name.charAt(0).toUpperCase() + name.substring(1).toLowerCase(),
-                params: _.omit(collection.value.options || {}, 'app', 'params', 'platform', 'parse')
+        Object.keys(_.omit(app.dependencies, 'toJSON')).forEach(function each(name) {
+            cachedData[name] = {
+                summary: app.fetcher.summarize(app.dependencies[name]),
+                data: app.dependencies[name].toJSON()
             };
-            app.fetch(spec, {
-                readFromCache: true
-            }, function callback(err, response) {
-                cachedData[name] = {
-                    summary: app.fetcher.summarize(response[name]),
-                    data: response[name].toJSON()
-                };
-            });
         });
         return cachedData;
     };

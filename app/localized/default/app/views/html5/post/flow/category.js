@@ -12,7 +12,7 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var subcategories = this.parentView.options.categories.get(this.options.subId).get('children');
+        var subcategories = data.categories.get(this.options.subId || this.options.subid).get('children');
 
         return _.extend({}, data, {
             subcategories: subcategories.toJSON ? subcategories.toJSON() : subcategories

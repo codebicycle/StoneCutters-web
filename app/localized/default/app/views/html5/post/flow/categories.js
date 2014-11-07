@@ -17,7 +17,6 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            categories: this.parentView.options.categories.toJSON(),
             icons: config.get(['icons', this.app.session.get('platform')], [])
         });
     },

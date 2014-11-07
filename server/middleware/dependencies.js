@@ -20,7 +20,6 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function store(done, response) {
-                req.rendrApp.dependencies = response;
                 res.locals(response.toJSON());
                 done();
             }
