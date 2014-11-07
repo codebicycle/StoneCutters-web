@@ -127,6 +127,7 @@ module.exports = Base.extend({
             callback: function() {
                 var params = JSON.parse(tracking.params.hydra.params);
 
+                window.hydra.referer = tracking.params.hydra.referer || undefined;
                 window.hydra.set('pageName', tracking.params.hydra.page);
                 window.hydra.trackPageView(params);
             }

@@ -69,7 +69,7 @@
 
         // Discover some params from the document
         if (ft && ft.value*1) url += '&ftid=' + eucex(ft.value);
-        if (document.referrer) url += '&referer=' + eucex(document.referrer);
+        if (document.referrer) url += '&referer=' + eucex(document.referrer || hydra.referer);
         if (document.title) url += "&title=" + eucex(document.title);
 
         // Pagename
