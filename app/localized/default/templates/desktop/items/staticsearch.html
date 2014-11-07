@@ -8,7 +8,7 @@
             <ul class="items-list {{ 'staticsearch' if isStaticSearch }}">
                 {% include (template + '/items/items.html') %}
             </ul>
-            {% if meta.next or meta.previous %}
+            {% if paginator.isEnabled() %}
                 {% include (template + '/items/pagination.html') %}
             {% endif %}
         </section>
@@ -16,4 +16,5 @@
 {% else %}
     {% include (template + '/partials/notfound.html') %}
 {% endif %}
+
 {% view 'partials/tracking' %}

@@ -84,5 +84,25 @@ module.exports = {
     },
     'redirections#php': {
         url: ':path.php'
+    },
+    'redirections#allresultsig': {
+        url: 'nf/all-results-ig-p-:page/?:filters?'
+    },
+    'redirections#searchfilterig': {
+        urls: [
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/:title-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-ig/?:search?/?:filters?'
+        ]
+    },
+    'redirections#searchfilter': {
+        urls: [
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?'
+        ]
     }
 };

@@ -57,8 +57,15 @@ module.exports = Base.extend({
     },
     paginate: function (url, query, options) {
         var page = options.page;
+        var total;
 
-        Paginator.paginate(this.meta, query, url, {
+        this.paginator = new Paginator({
+            url: url,
+            page: query.page,
+            pageSize: query.pageSize,
+            total: this.meta ? this.meta.total : 0
+        }, {
+            next: this.meta ? this.meta.next : false,
             gallery: options.gallery,
             filters: this.filters
         });
@@ -66,8 +73,9 @@ module.exports = Base.extend({
             if (isNaN(page) || page <= 1) {
                 return 1;
             }
-            if (page > this.meta.totalPages) {
-                return this.meta.totalPages;
+            total = this.paginator.get('totalPages');
+            if (page > total) {
+                return total;
             }
         }
     },

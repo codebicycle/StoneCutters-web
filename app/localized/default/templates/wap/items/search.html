@@ -57,20 +57,8 @@
                     {% endfor %}
                 </tbody>
             </table>
-            {% if meta.next or meta.previous %}
-                <table width="100%" border="0" bgcolor="#DDDDDD" cellspacing="0" cellpadding="4">
-                    <tbody>
-                        <tr>
-                            <td align="center" style="border-top: solid thin #808080;">
-                                <small style="display: block;">
-                                    {{ (['<a href="', meta.previous | link, '" >&lt;</a>'] | join('')) if meta.previous }}
-                                    {{ meta | pagination('wap') }}
-                                    {{ (['<a href="', meta.next | link, '" >&gt;</a>'] | join('')) if meta.next }}
-                                </small>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            {% if paginator.isEnabled() %}
+                {% include (template + '/items/pagination.html') %}
             {% endif %}
         {% endif %}
         {% from macros import Breadcrumb %}

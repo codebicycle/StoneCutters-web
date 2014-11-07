@@ -8,7 +8,7 @@
     <section id='listing-items'>
         {% include (template + '/items/locations.html') %}
         {% include (template + '/items/listig.html') %}
-        {% if meta.next or meta.previous %}
+        {% if paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
     </section>

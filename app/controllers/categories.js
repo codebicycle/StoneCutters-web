@@ -206,7 +206,7 @@ function handleItems(params, promise, gallery) {
         if (subcategory) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
-        tracking.addParam('page', meta.page);
+        tracking.addParam('page', query.page);
 
         done({
             type: 'items',
@@ -217,6 +217,7 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: items.toJSON(),
             filters: items.filters,
+            paginator: items.paginator,
             infiniteScroll: infiniteScroll
         });
     }.bind(this);

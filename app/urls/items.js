@@ -11,12 +11,16 @@ module.exports = {
     },
     'items#allresultsig': {
         urls: [
-            'nf/all-results-ig-p-:page/:filters?',
+            'all-results-p-:page-ig/:filters?',
+            'all-results-ig/:filters?',
+            'nf/all-results-p-:page-ig/:filters?',
             'nf/all-results-ig/:filters?'
         ]
     },
     'items#allresults': {
         urls: [
+            'all-results-p-:page/:filters?',
+            'all-results/:filters?',
             'nf/all-results-p-:page/:filters?',
             'nf/all-results/:filters?'
         ]
@@ -55,19 +59,19 @@ module.exports = {
     },
     'items#searchfilterig': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
-            'nf/:title-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
-            'nf/-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
-            'nf/cat-:catId([0-9]+)-ig/?:search?/?:filters?'
+            'nf/:title-cat-:catId([0-9]+)/?:search?/-p-:page([0-9]+)-ig/?:filters?',
+            'nf/-cat-:catId([0-9]+)/?:search?/-p-:page([0-9]+)-ig/?:filters?',
+            'nf/cat-:catId([0-9]+)/?:search?/-p-:page([0-9]+)-ig/?:filters?',
+            'nf/:title-cat-:catId([0-9]+)/?:search?/-ig/?:filters?',
+            'nf/-cat-:catId([0-9]+)/?:search?/-ig/?:filters?',
+            'nf/cat-:catId([0-9]+)/?:search?/-ig/?:filters?'
         ]
     },
     'items#searchfilter': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/:title-cat-:catId([0-9]+)/?:search?/-p-:page([0-9]+)/?:filters?',
+            'nf/-cat-:catId([0-9]+)/?:search?/-p-:page([0-9]+)/?:filters?',
+            'nf/cat-:catId([0-9]+)/?:search?/-p-:page([0-9]+)/?:filters?',
             'nf/:title-cat-:catId([0-9]+)/?:search?/?:filters?',
             'nf/-cat-:catId([0-9]+)/?:search?/?:filters?',
             'nf/cat-:catId([0-9]+)/?:search?/?:filters?'
