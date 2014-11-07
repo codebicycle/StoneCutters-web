@@ -8,13 +8,13 @@ module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-price-view',
     className: 'posting-price-view',
-    fields: [],
+    fields: false,
     fieldLabel: '',
     fieldName: '',
     fieldMandatory: '',
     initialize: function() {
         Base.prototype.initialize.call(this);
-        this.fields = [];
+        this.fields = false;
         this.fieldLabel = '';
         this.fieldName = '';
         this.fieldMandatory = '';
@@ -23,37 +23,45 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            fields: this.fields || [],
-            fieldLabel: this.fieldLabel || '',
-            fieldName: this.fieldName || '',
-            fieldMandatory: this.fieldMandatory || ''
+            fields: this.fields,
+            label: this.fieldLabel || '',
+            name: this.fieldName || '',
+            mandatory: this.fieldMandatory || ''
         });
     },
     events: {
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange'
     },
-    onFieldsChange: function(event, fields) {
+    onFieldsChange: function(event, options) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        var order = ['currency_type', 'priceC', 'priceType'];
 
-        fields = _.filter(fields, function each(field) {
-            return !(field.name === 'title' || field.name === 'description');
-        });
-        this.fields = [];
-        _.each(order, function find(name) {
-            this.fields.push(_.find(fields, function search(field) {
-                if (field.name === 'priceC') {
-                    this.fieldLabel = field.label;
-                    this.fieldName = field.name;
-                    this.fieldMandatory = field.mandatory;
-                }
-                return field.name === name;
-            }.bind(this)));
-        }.bind(this));
-        this.render();
+        var fields = [];
+
+        if (options.length) {
+            _.each(['currency_type', 'priceC', 'priceType'], function find(name) {
+                fields.push(_.find(options, function search(field) {
+                    if (field.name === 'priceC') {
+                        this.fieldLabel = field.label;
+                        this.fieldName = field.name;
+                        this.fieldMandatory = field.mandatory;
+                    }
+                    return field.name === name;
+                }.bind(this)));
+            }.bind(this));
+            if (!_.isEqual(fields, this.fields)) {
+                this.fields = fields;
+                this.parentView.$el.trigger('priceReset');
+                this.render();
+            }
+        }
+        else {
+            this.fields = false;
+            this.parentView.$el.trigger('priceReset');
+            this.render();
+        }
     },
     onChange: function(event) {
         event.preventDefault();
