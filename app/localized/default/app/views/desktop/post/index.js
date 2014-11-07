@@ -20,6 +20,7 @@ module.exports = Base.extend({
         'subcategorySubmit': 'onSubcategorySubmit',
         'locationSubmit': 'onLocationSubmit',
         'fieldSubmit': 'onFieldSubmit',
+        'imagesLoadStart': 'onImagesLoadStart',
         'imagesLoadEnd': 'onImagesLoadEnd',
         'submit': 'onSubmit',
         'fieldValidationStart': 'onFieldValidationStart',
@@ -191,10 +192,14 @@ module.exports = Base.extend({
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
         this.$('#posting-errors-view').trigger('update');
     },
+    onImagesLoadStart: function(event) {
+        this.$('#posting-contact-view').trigger('disablePost');
+    },
     onImagesLoadEnd: function(event, images) {
         this.form._images = Object.keys(images).map(function each(image) {
             return images[image].id;
         });
+        this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
     onEnd: function(event) {
         this.appView.trigger('posting:end');

@@ -7,6 +7,7 @@ module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
     className: 'footer-view',
+    firstRender: true,
     events: {
         'click [data-footer-slidedown]': 'slideDownContent',
         'click [data-footer-slide]': 'slideFooter'
@@ -32,9 +33,14 @@ module.exports = Base.extend({
             categories: this.isCurrentRoute('categories', 'list') || this.isCurrentRoute('pages', 'sitemap'),
             countries: !this.isCurrentRoute('categories', 'list')
         };
+        if (this.firstRender) {
+            $('body').on('click', this.slideDownContent.bind(this));
+            this.firstRender = false;
+       }
     },
     isCurrentRoute: function(controller, action) {
         var currentRoute = this.app.session.get('currentRoute');
+
         return (currentRoute.controller === controller && currentRoute.action === action);
     },
     onShow: function(element) {
