@@ -2,6 +2,21 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('footer/footer');
 var _ = require('underscore');
+var slideDownContent = function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    var $slide = $('.footer-slide.open');
+    var $select = $('.select li.active');
+
+    $slide.addClass('onTransition');
+    $slide.removeClass('open');
+    $slide.slideToggle('slow', function() {
+        $select.removeClass('active');
+        $slide.removeClass('onTransition'); 
+    }); 
+};
 
 module.exports = Base.extend({
     tagName: 'footer',
@@ -17,6 +32,16 @@ module.exports = Base.extend({
         this.hidden = this.hidden || {
             categories: (currentRoute.controller === 'categories' && currentRoute.action == 'list') || (currentRoute.controller === 'pages' && currentRoute.action === 'sitemap')
         };
+        $('body').click(function(event){
+            var $slide = $('.footer-slide.open');
+            var $select = $('.select li.active');
+
+            if (!$(event.target).closest($slide).length) {
+                if (($slide).is(":visible")) {
+                    slideDownContent(event);
+                }
+            }
+        });
     },
     onShow: function(element) {
         delete this.hidden[element];
@@ -27,7 +52,7 @@ module.exports = Base.extend({
         this.render();
     },
     events: {
-        'click [data-footer-slidedown]': 'slideDownContent',
+        'click [data-footer-slidedown]': 'closeContent',
         'click [data-footer-slide]': 'slideFooter'
     },
     getTemplateData: function() {
@@ -42,20 +67,8 @@ module.exports = Base.extend({
             hidden: this.hidden
         });
     },
-    slideDownContent: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $slide = $('.footer-slide.open');
-        var $select = $('.select li.active');
-
-        $slide.addClass('onTransition');
-        $slide.removeClass('open');
-        $slide.slideToggle('slow', function() {
-            $select.removeClass('active');
-            $slide.removeClass('onTransition');
-        });
+    closeContent:function(event) {
+        slideDownContent(event);
     },
     slideFooter: function(event) {
         event.preventDefault();
