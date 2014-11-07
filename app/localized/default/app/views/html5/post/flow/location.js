@@ -18,15 +18,17 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        this.cities = this.firstRender ? this.parentView.options.topCities : this.cities;
+        this.cities = this.firstRender ? (data.topCities.toJSON ? data.topCities : this.parentView.options.topCities) : this.cities;
         return _.extend({}, data, {
             cities: this.cities.toJSON(),
-            states: this.firstRender ? this.parentView.options.states.toJSON() : [],
+            states: this.firstRender ? (data.states.toJSON ? data.states : this.parentView.options.states).toJSON() : [],
             firstRender: this.firstRender
         });
     },
     postRender: function() {
-        this.cities = this.cities || this.parentView.options.topCities;
+        var data = Base.prototype.getTemplateData.call(this);
+
+        this.cities = this.cities || (data.topCities.toJSON ? data.topCities : this.parentView.options.topCities);
     },
     events: {
         'show': 'onShow',

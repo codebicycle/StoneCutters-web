@@ -1,5 +1,5 @@
 <ul class="{{ icons[icons.length - 1] }}-icons" data-title="Elige una subcategoria">
-    {% for category in categories %}
+    {% for category in categories.toJSON() %}
         <li class="category" data-id="{{ category.id }}">
             <h2>
                 <a class="trackMe" data-tracking="Posting-ClickSubCategoryList">

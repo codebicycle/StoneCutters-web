@@ -14,9 +14,9 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var states = this.parentView.parentView.options.states;
-        var cities = this.parentView.parentView.options.cities;
-        var location = this.parentView.parentView.options.currentLocation;
+        var states = data.states;
+        var cities = data.cities;
+        var location = data.currentLocation;
 
         if (states) {
             states = _.map(states.toJSON(), function each(state) {
@@ -63,7 +63,7 @@ module.exports = Base.extend({
     onFormRendered: function(event) {
         var $states = $('#field-state');
         var $cities = $('#field-location');
-        
+
         if ($states.val()) {
             this.parentView.$el.trigger('fieldSubmit', [$states]);
         }

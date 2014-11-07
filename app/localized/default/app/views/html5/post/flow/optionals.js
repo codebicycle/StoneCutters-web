@@ -26,8 +26,8 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var category = this.parentView.options.categories.search(this.selected.id) || {};
-        var subcategory = this.parentView.options.categories.search(this.selected.subId) || {};
+        var category = (data.categories.search ? data.categories : this.parentView.options.categories).search(this.selected.id) || {};
+        var subcategory = (data.categories.search ? data.categories : this.parentView.options.categories).search(this.selected.subId) || {};
 
         if (category.toJSON) {
             category = category.toJSON();

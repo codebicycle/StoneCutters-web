@@ -84,7 +84,7 @@ module.exports = Base.extend({
                 if (subcategories.toJSON) {
                     subcategories = subcategories.toJSON();
                 }
-                
+
                 var subcategoryName = _.find(subcategories, function each(subcategory) {
                     return subcategory.id === subId;
                 }).trName;
@@ -112,7 +112,7 @@ module.exports = Base.extend({
         var $titleSummary = this.$('#titleSummary').removeClass('success error');
         var $descriptionSummary = this.$('#descriptionSummary').removeClass('success error');
         var failed = false;
-        
+
         fields.forEach(function each(field) {
             if (field.name === 'title') {
                 if (errors[field.name] || !field.value) {
@@ -155,7 +155,7 @@ module.exports = Base.extend({
         var $emailSummary = this.$('#emailSummary').removeClass('success error');
         var $locationSummary = this.$('#locationSummary').removeClass('success error');
         var failed = false;
-        
+
         fields.forEach(function each(field) {
             if (field.name === 'email') {
                 if (errors[field.name] || !field.value) {
