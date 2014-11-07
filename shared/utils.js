@@ -181,6 +181,9 @@ function fullizeUrl(href, app) {
         host = app.session.get('host');
         href = [protocol, host, (href.indexOf('/') ? '/' : ''), href].join('');
     }
+    if (href.slice(href.length - 1) === '/') {
+        href = href.substring(0, href.length - 1);
+    }
     return href;
 }
 

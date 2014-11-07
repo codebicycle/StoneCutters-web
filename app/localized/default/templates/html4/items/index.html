@@ -36,15 +36,8 @@
                 </li>
             {% endfor %}
         </ul>
-        {% if meta.next or meta.previous %}
-            <div id="itemPagination">
-                <a href="{{ (meta.previous | link) if meta.previous else '#' }}" class="arrow {{ "leftA" if meta.previous else "leftD" }}"></a>
-                <div class="center">
-                    {{ meta | pagination }}
-                </div>
-                <a href="{{ (meta.next | link) if meta.next else '#' }}" class="arrow {{ "rightA" if meta.next else "rightD" }}"></a>
-            </div>
-            <div id="itemPaginationCaption">&#160;</div>
+        {% if paginator.isEnabled() %}
+            {% include (template + '/items/pagination.html') %}
         {% endif %}
     {% endif %}
 </div>
