@@ -8,7 +8,10 @@ var common = require('./common');
 
 var customParams = {
     cat: function(params, options) {
-        if(options.category) {
+        if(options.subcategory) {
+            params.cat = options.subcategory.id;
+        }
+        else if(options.category) {
             params.cat = options.category.id;
         }
     },
@@ -41,7 +44,8 @@ function getParams(page, options) {
 
     params = _.extend({}, params, {
         lang: language.split('-').shift(),
-        cou: location.abbreviation
+        cou: location.abbreviation,
+        referer: this.app.session.get('referer')
     });
     _.each(customParams, function(param) {
         param.call(this, params, options);

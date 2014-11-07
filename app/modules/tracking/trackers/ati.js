@@ -156,15 +156,15 @@ function getParams(page, options) {
 }
 
 function getConfig(options) {
-    var siteLocation;
+    var location;
     var platform;
     var country;
     var config;
 
     options = options || {};
-    siteLocation = options.siteLocation || this.app.session.get('siteLocation');
+    location = options.location || this.app.session.get('location').url;
     platform = options.platform || this.app.session.get('platform');
-    country = siteLocation;
+    country = location;
 
     if (env !== 'production') {
         country = env;
@@ -175,7 +175,7 @@ function getConfig(options) {
 
     config = utils.get(configTracking, ['ati', 'paths', country, platform], defaultConfig[platform]);
     config = _.extend({}, config, {
-        host: siteLocation.replace('www', ''),
+        host: location.replace('www', ''),
         protocol: 'http'
     });
 
