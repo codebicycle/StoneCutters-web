@@ -7,6 +7,7 @@ module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
     className: 'footer-view',
+    firstRender: true,
     postRender: function() {
         var currentRoute = this.app.session.get('currentRoute');
 
@@ -17,6 +18,10 @@ module.exports = Base.extend({
         this.hidden = this.hidden || {
             categories: (currentRoute.controller === 'categories' && currentRoute.action == 'list') || (currentRoute.controller === 'pages' && currentRoute.action === 'sitemap')
         };
+        if (this.firstRender) {
+            $('body').on('click', this.slideDownContent.bind(this));
+            this.firstRender = false;
+       }
     },
     onShow: function(element) {
         delete this.hidden[element];
