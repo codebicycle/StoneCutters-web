@@ -1,4 +1,4 @@
-{% if fields.length %}
+{% if fields %}
 	{% from macros import PriceField %}
-	{{ PriceField(fieldLabel = fieldLabel, fieldName = fieldName, fields) }}
+	{{ PriceField(label = label, name = name, fields) }}
 {% endif %}
