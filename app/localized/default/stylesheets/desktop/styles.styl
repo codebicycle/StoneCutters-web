@@ -1,34 +1,34 @@
 @import 'helpers/normalize.css';
 a {
-	color: $blue;
-	outline: none;
-	text-decoration: none;
+    color: $blue;
+    outline: none;
+    text-decoration: none;
 
-	&:hover {
-		color: #369;
-		text-decoration: underline;
-	}
+    &:hover {
+        color: #369;
+        text-decoration: underline;
+    }
 }
 
 body {
-	background: $greyPageBg;
-	font-family: arial, helvetica, sans-serif;
+    background: $greyPageBg;
+    font-family: arial, helvetica, sans-serif;
 }
 
 html {
-	font-size: $baseFont;
+    font-size: $baseFont;
 }
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-   color: $greyStrong;
+    color: $greyStrong;
 }
 
 input::-moz-placeholder, textarea::-moz-placeholder {
-   color: $greyStrong;
+    color: $greyStrong;
 }
 
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-   color: $greyStrong;
+    color: $greyStrong;
 }
 
 main {
@@ -68,70 +68,86 @@ main {
 }
 
 .posting {
-	border-radius();
-	action-button($orange, $white, 3px, 15px 30px);
-	font-size: $l;
-	font-weight: bold;
-	line-height: 1;
+    border-radius();
+    action-button($orange, $white, 3px, 15px 30px);
+    font-size: $l;
+    font-weight: bold;
+    line-height: 1;
 }
 
 .search-form {
-	fieldset {
-		border: none;
-		margin: 0;
-		padding: 0;
-	}
-	.button,
-	.text-field {
-		display: inline-block;
-		vertical-align: middle;
-	}
-	.button {
-		action-button($green, $white, 0 3px 3px 0, 0);
-		border: none;
-		font-size: $l;
-		height: 38px;
-		line-height: 1;
-		width: 40px;
-	}
-	.text-field {
-		border-color: $green;
-		border-radius(3px 0 0 3px);
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    .button,
+    .text-field {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .button {
+        action-button($green, $white, 0 3px 3px 0, 0);
+        border: none;
+        font-size: $l;
+        height: 38px;
+        line-height: 1;
+        width: 40px;
+    }
+    .text-field {
+        border-color: $green;
+        border-radius(3px 0 0 3px);
         width: 255px;
-		&:focus {
-	    	border-color: $green;
-	    	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
-	    	color: $black;
-	    }
-	}
+        &:focus {
+            border-color: $green;
+            box-shadow(0 0 1px 1px rgba(0,0,0,.1));
+            color: $black;
+        }
+    }
 }
 
 .text-field {
-	border-color: $greyBorders;
-	border-radius();
-	border-style: solid;
-	border-width: 1px;
-	color: $greyStrong;
-	font-size: $s;
-	line-height: 1;
-	padding: 0 10px;
+    border-color: $greyBorders;
+    border-radius();
+    border-style: solid;
+    border-width: 1px;
+    color: $greyStrong;
+    font-size: $s;
     height: 36px;
+    line-height: 1;
+    padding: 0 10px;
     &:focus {
-    	border-color: $greyStrong;
-    	box-shadow(0 0 1px 1px rgba(0,0,0,.1));
-    	color: $black;
+        border-color: $greyStrong;
+        box-shadow(0 0 1px 1px rgba(0,0,0,.1));
+        color: $black;
     }
 }
 
 .title-module {
-	font-size: $m;
-	font-weight: normal;
-	line-height: 1;
-	margin: 0;
+    font-size: $m;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    .text-field {
+        border-color: $greyBorders;
+        border-radius();
+        border-style: solid;
+        border-width: 1px;
+        color: $greyStrong;
+        font-size: $s;
+        height: 36px;
+        line-height: 1;
+        padding: 0 10px;
+        &:focus {
+            border-color: $greyStrong;
+            box-shadow(0 0 1px 1px rgba(0,0,0,.1));
+            color: $black;
+        }
+    }
 }
 
 .wrapper-main {
     clear-fix();
-	margin: auto;
-	width: 980px;
+    margin: auto;
+    width: 980px;
 }

@@ -27,6 +27,18 @@ module.exports = Base.extend({
         var message = $form.find('[data-messageText]').val();
         var user = this.app.session.get('user');
 
+        $('[data-error]').addClass('hide');
+        
+        var validate = function(done) {
+            if (message === "") {
+                $('[data-error]').removeClass('hide');
+                done.abort();
+            }
+            else {
+                done();
+            }
+        }.bind(this);
+
         var prepare = function(done) {
             user = this.app.session.get('user');
            if (!user) {
@@ -74,6 +86,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         asynquence().or(error)
+            .then(validate)
             .then(prepare)
             .then(sendMessage)
             .val(success);
