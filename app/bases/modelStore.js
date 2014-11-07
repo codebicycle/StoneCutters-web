@@ -18,6 +18,9 @@ module.exports = {
         return Super.prototype.set.call(this, key, model);
     },
     _set: function(key, data) {
+        if (typeof window === 'undefined') {
+            return;
+        }
         this.cache = cache;
         this.cache[this._formatKey(key)] = data;
     }
