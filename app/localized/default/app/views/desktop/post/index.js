@@ -26,7 +26,8 @@ module.exports = Base.extend({
         'fieldValidationStart': 'onFieldValidationStart',
         'fieldValidationEnd': 'onFieldValidationEnd',
         'errorsUpdate': 'onErrorsUpdate',
-        'error': 'onError'
+        'error': 'onError',
+        'priceReset': 'onPriceReset'
     },
     initialize: function() {
         Base.prototype.initialize.call(this);
@@ -89,7 +90,11 @@ module.exports = Base.extend({
         this.pendingValidations = [];
         this.$el.trigger('errorsUpdate');
         this.$('#posting-optionals-view').trigger('fieldsChange', [subcategory.fields.categoryAttributes, subcategory.parentId, subcategory.id, true]);
-        this.$('#posting-price-view').trigger('fieldsChange', [subcategory.fields.productDescription]);
+        this.$('#posting-price-view').trigger('fieldsChange', [
+            _.filter(subcategory.fields.productDescription, function each(field) {
+                return !(field.name === 'title' || field.name === 'description');
+            })
+        ]);
     },
     onLocationSubmit: function(event, location) {
         event.preventDefault();
@@ -230,6 +235,17 @@ module.exports = Base.extend({
             }
         }.bind(this));
         this.$('#posting-errors-view').trigger('update');
+    },
+    onPriceReset: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        _.each(['currency_type', 'priceC', 'priceType'], function clean(field) {
+            delete this.form[field];
+            delete this.errors[field];
+        }.bind(this));
+        this.$el.trigger('errorsUpdate');
     },
     onSubmit: function(event) {
         event.preventDefault();

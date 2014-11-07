@@ -151,3 +151,68 @@ main {
     margin: auto;
     width: 980px;
 }
+
+#category-tree,
+#notfound {
+    .category-list {
+        box-sizing: border-box;
+        float: left;
+        padding: 0 10px;
+        width: 25%;
+
+        &:last-child {
+            padding-right: 20px;
+        }
+
+        .category {
+            li {
+                padding-bottom: 10px;
+            }
+        }
+
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+
+            .icon {
+                background: url(imageUrl/images/desktop/sprite-home-icons.png)  0 0 no-repeat;
+                display: block;
+                square(54px);
+                margin: 20px 0 9px;
+            }
+            .cat-186 {
+                background-position: 0 -108px;
+            }
+            .cat-187 {
+                background-position: 0 -432px;
+            }
+            .cat-16 {
+                background-position: 0 -216px;
+            }
+            .cat-185 {
+                background-position: 0 -378px;
+            }
+            .cat-190 {
+                background-position: 0 -54px;
+            }
+            .cat-191 {
+                background-position: 0 -162px;
+            }
+            .cat-362 {
+                background-position: 0 -648px;
+            }
+        }
+        .category-link {
+            color: $black;
+            display: inline-block;
+            padding-bottom: 13px;
+
+            h3 {
+                font-size: $l;
+                font-weight: normal;
+                margin: 0;
+            }
+        }
+    }
+}
