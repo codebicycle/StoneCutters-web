@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     tagName: 'section',
@@ -46,7 +47,7 @@ module.exports = Base.extend({
             if (field.values) {
                 field.values.unshift({
                     key: '',
-                    value: this.parentView.dictionary['misc.SelectAnOption_BR']
+                    value: translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.SelectAnOption_BR']
                 });
             }
         }.bind(this));
@@ -95,7 +96,7 @@ module.exports = Base.extend({
             options = res.subfield.values;
             options.unshift({
                 key: '',
-                value: this.parentView.dictionary['misc.SelectAnOption_BR']
+                value: translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.SelectAnOption_BR']
             });
             _.each(options, function each(option) {
                 $field.append('<option value="' + option.key + '">' + option.value + '</option>');

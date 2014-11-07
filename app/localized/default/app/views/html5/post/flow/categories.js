@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../../common/app/bases/view');
 var config = require('../../../../../../../../shared/config');
+var translations = require('../../../../../../../../shared/translations');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -31,7 +32,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['misc.ChooseACategory_Mob'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.ChooseACategory_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -40,7 +41,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('categorySubmit', [this.selected, this.parentView.dictionary['postingerror.PleaseSelectCategory'], this.parentView.dictionary['postingerror.PleaseSelectSubcategory']]);
+        this.parentView.$el.trigger('categorySubmit', [this.selected, translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.PleaseSelectCategory'], translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.PleaseSelectSubcategory']]);
     },
     onClickCategory: function(event) {
         event.preventDefault();
