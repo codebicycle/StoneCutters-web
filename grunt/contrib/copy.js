@@ -7,8 +7,7 @@ module.exports = function(grunt) {
     var _ = require('underscore');
     var config = require('../config');
     var utils = require('../utils');
-    var localization = config.get('localization');
-    var iconsLocalization = config.get('icons');
+    var environments = utils.getEnvironments(grunt);
     var templates = [{
         src: ['app/localized/common/templates/__layout.html'],
         dest: 'app/templates/__layout.html'
@@ -31,12 +30,17 @@ module.exports = function(grunt) {
                 src: [abspath],
                 dest: dest
             };
-            for (var platform in localization) {
-                if (platform !== parts[0]) {
-                    continue;
+            environments.forEach(function eachEnvironments(environment) {
+                var localization = config.get('localization', {}, environment);
+                var platform;
+
+                for (platform in localization) {
+                    if (platform !== parts[0]) {
+                        continue;
+                    }
+                    localization[platform].forEach(eachLocation);
                 }
-                localization[platform].forEach(eachLocation);
-            }
+            });
 
             function eachLocation(location) {
                 var localized = dest.replace('default', location);
@@ -47,11 +51,16 @@ module.exports = function(grunt) {
                 };
             }
         });
-        for (platform in localization) {
-            localization[platform].forEach(eachLocation);
-        }
+        environments.forEach(function eachEnvironments(environment) {
+            var localization = config.get('localization', {}, environment);
+            var platform;
 
-        function eachLocation(location) {
+            for (platform in localization) {
+                localization[platform].forEach(eachLocation.bind(null, platform));
+            }
+        });
+
+        function eachLocation(platform, location) {
             var dir = 'app/localized/' + location + '/templates/' + platform;
 
             if (grunt.file.exists(dir)) {
@@ -88,15 +97,20 @@ module.exports = function(grunt) {
                 src: [abspath],
                 dest: dest
             };
-            for (var platform in iconsLocalization) {
-                if (platform !== subdir) {
-                    continue;
+            environments.forEach(function eachEnvironments(environment) {
+                var icons = config.get('icons', {}, environment);
+                var platform;
+
+                for (platform in icons) {
+                    if (platform !== subdir) {
+                        continue;
+                    }
+                    if (platform === 'html5') {
+                        continue;
+                    }
+                    icons[platform].forEach(eachIconLocation);
                 }
-                if (platform === 'html5') {
-                    continue;
-                }
-                iconsLocalization[platform].forEach(eachIconLocation);
-            }
+            });
 
             function eachIconLocation(location) {
                 var localized = dest.replace('default', location);
@@ -107,12 +121,17 @@ module.exports = function(grunt) {
                 };
             }
         });
-        for (platform in iconsLocalization) {
-            if (platform === 'html5') {
-                continue;
+        environments.forEach(function eachEnvironments(environment) {
+            var icons = config.get('icons', {}, environment);
+            var platform;
+
+            for (platform in icons) {
+                if (platform === 'html5') {
+                    continue;
+                }
+                icons[platform].forEach(eachIconLocation.bind(null, platform));
             }
-            iconsLocalization[platform].forEach(eachIconLocation);
-        }
+        });
 
         function eachIconLocation(location) {
             var dir = 'app/localized/' + location + '/icons/' + platform;
@@ -138,7 +157,6 @@ module.exports = function(grunt) {
     })();
 
     (function copySprites() {
-        var environments = utils.getEnvironments(grunt);
         var files = {};
         var sprite;
 
@@ -155,10 +173,6 @@ module.exports = function(grunt) {
             }
         });
 
-        for (sprite in files) {
-            sprites.push(files[sprite]);
-        }
-
         function addIcons(environment, platform, location) {
             if (environment === 'production') {
                 return;
@@ -167,6 +181,10 @@ module.exports = function(grunt) {
                 src: ['public/css/', location, '/', platform, '/icons.css'].join(''),
                 dest: ['public/css/', location, '/', platform, '/icons-', environment, '.css'].join('')
             };
+        }
+
+        for (sprite in files) {
+            sprites.push(files[sprite]);
         }
     })();
 

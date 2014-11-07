@@ -3,7 +3,9 @@
 module.exports = function(grunt) {
     var path = require('path');
     var _ = require('underscore');
-    var localization = require('../config').get('localization');
+    var config = require('../config');
+    var utils = require('../utils');
+    var environments = utils.getEnvironments(grunt);
     var rendrNunjucks = require('rendr-nunjucks')();
     var nunjucks = {
         options: {
@@ -40,12 +42,17 @@ module.exports = function(grunt) {
             srcs[dest] = {};
         }
         srcs[dest][src] = src;
-        for (var platform in localization) {
-            if (platform !== parts[0]) {
-                continue;
+        environments.forEach(function(environment) {
+            var localization = config.get('localization', {}, environment);
+            var platform;
+
+            for (platform in localization) {
+                if (platform !== parts[0]) {
+                    continue;
+                }
+                localization[platform].forEach(eachLocation);
             }
-            localization[platform].forEach(eachLocation);
-        }
+        });
 
         function eachLocation(location) {
             var localized = dest.replace('default', location);
@@ -56,11 +63,16 @@ module.exports = function(grunt) {
             srcs[localized][src] = src.replace('default', location);
         }
     });
-    for (platform in localization) {
-        localization[platform].forEach(eachLocation);
-    }
+    environments.forEach(function(environment) {
+        var localization = config.get('localization', {}, environment);
+        var platform;
 
-    function eachLocation(location) {
+        for (platform in localization) {
+            localization[platform].forEach(eachLocation.bind(null, platform));
+        }
+    });
+
+    function eachLocation(platform, location) {
         var dir = 'app/localized/' + location + '/templates/' + platform;
 
         if (grunt.file.exists(dir)) {
