@@ -21,7 +21,6 @@ module.exports = Base.extend({
         'click .clean-filters': 'cleanFilters',
         'click .filter-title': 'toogleFilter'
     },
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.cleanPage(this.app.session.get('path'));

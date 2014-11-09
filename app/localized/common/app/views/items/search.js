@@ -17,7 +17,6 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        _.each(data.items, this.processItem);
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });
@@ -70,9 +69,6 @@ module.exports = Base.extend({
         if (this.$('.is-loading').length) {
             this.attachInfiniteScroll(this.$('ul.itemListing'));
         }
-    },
-    processItem: function(item) {
-        item.date.since = helpers.timeAgo(item.date);
     },
     attachInfiniteScroll: function(container) {
         var stop = false;
@@ -203,7 +199,6 @@ module.exports = Base.extend({
         function success(_items) {
             var $html;
 
-            _.each(_items, this.processItem);
             this.items = _items;
             $html = loadHTMLView.call(this, 'items/items');
             this.$('li:last', container).after($html.find('li'));

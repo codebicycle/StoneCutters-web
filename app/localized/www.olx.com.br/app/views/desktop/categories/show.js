@@ -56,9 +56,6 @@ module.exports = Base.extend({
             this.attachInfiniteScroll(this.$('ul.itemListing'));
         }
     },
-    processItem: function(item) {
-        item.date.since = helpers.timeAgo(item.date);
-    },
     attachInfiniteScroll: function(container) {
         var stop = false;
         var runnig = false;
@@ -201,7 +198,6 @@ module.exports = Base.extend({
         function success(_items) {
             var $html;
 
-            _.each(_items, this.processItem);
             this.items = _items;
             $html = loadHTMLView.call(this, 'items/items');
             $('li:last', container).after($html.find('li'));

@@ -1,5 +1,5 @@
 {% include (template + '/items/itemlistingnav.html') %}
-<ul class="items-list-ig">
+<ul class="items-list-ig {{ itemListingClass }}">
     {% for item in items %}
         <li>
             <a href="{{ item | slugToUrl | link }}">

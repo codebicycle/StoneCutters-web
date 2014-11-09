@@ -198,10 +198,6 @@ function myads(params, callback) {
                 deleted: deleted
             };
 
-            _.each(myAds, function processItem(item) {
-                item.date.since = helpers.timeAgo(item.date);
-            });
-
             if (platform === 'desktop') {
                 view = 'users/myolx';
                 _.extend(data, {
@@ -283,10 +279,6 @@ function favorites(params, callback) {
                 favorites: favorites,
                 favorite: favorite
             };
-
-            _.each(favorites, function processItem(item) {
-                item.date.since = helpers.timeAgo(item.date);
-            });
 
             if (platform === 'desktop') {
                 view = 'users/myolx';

@@ -12,7 +12,6 @@ module.exports = Base.extend({
     order: ['state', 'city'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = 'nf/all-results';

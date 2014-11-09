@@ -1,11 +1,21 @@
 'use strict';
 
 module.exports = {
+    'items#staticSearchig': {
+        urls: [
+            'q/:search/c-:catId([0-9]+)/-p-:page([0-9]+)-ig/?:filters?',
+            'q/:search/c-:catId([0-9]+)/-ig/?:filters?',
+            'q/:search/-p-:page([0-9]+)-ig/?:filters?',
+            'q/:search/-ig/?:filters?',
+            'q/:search/-ig'
+        ]
+    },
     'items#staticSearch': {
         urls: [
-            'q/:search/c-:catId/-p-:page',
-            'q/:search/c-:catId',
-            'q/:search/p-:page',
+            'q/:search/c-:catId([0-9]+)/-p-:page([0-9]+)/?:filters?',
+            'q/:search/c-:catId([0-9]+)/?:filters?',
+            'q/:search/-p-:page([0-9]+)/?:filters?',
+            'q/:search/:filters?',
             'q/:search'
         ]
     },
