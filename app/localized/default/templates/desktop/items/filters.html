@@ -1,3 +1,6 @@
+{{filters.toJSON()|log}}
+
+
 {% for filter in filters.toJSON() %}
     {% if filter.name != 'state' and filter.name != 'city'  %}
         {% if filter.otherType == 'LIST' %}
