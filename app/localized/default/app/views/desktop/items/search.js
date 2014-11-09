@@ -27,7 +27,6 @@ module.exports = Base.extend({
 
         this.filters = data.filters;
         this.filters.order = this.order;
-        _.each(data.items, this.processItem);
 
         return _.extend({}, data, {
             items: data.items,

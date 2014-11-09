@@ -37,7 +37,6 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
-    infiniteScroll: false,
     interstitial: {
         enabled: true,
         clicks: 0,

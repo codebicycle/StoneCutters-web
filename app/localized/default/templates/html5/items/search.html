@@ -15,12 +15,7 @@
             {% view 'items/items' %}
             <div class="clear"></div>
         </ul>
-        {% if infiniteScroll %}
-            <div class="loader is-loading" style="display: none;">
-                <img src="{{ '/images/html5/loading.gif' | static }}" alt="Loading...">
-            </div>
-            <input id="currentUrl" type="hidden" class="hide" value="{{ paginator.get('current') | link }}">
-        {% elif paginator.isEnabled() %}
+        {% if paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
     {% endif %}
