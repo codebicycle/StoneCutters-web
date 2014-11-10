@@ -124,10 +124,6 @@ function handleItems(params, promise, gallery) {
 
         url = ['/', slug].join('');
 
-        if (typeof page !== 'undefined' && !isNaN(page) && page > 1) {
-            done.abort();
-            return helpers.common.redirect.call(this, [url, gallery].join(''));
-        }
         if (slug.indexOf(params.title + '-cat-')) {
             done.abort();
             if (page === undefined || isNaN(page) || page <= 1) {

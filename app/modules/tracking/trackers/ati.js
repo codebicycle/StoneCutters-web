@@ -162,6 +162,11 @@ function getConfig(options) {
     var config;
 
     options = options || {};
+    if (!options.location && !this.app.session.get('location')) {
+        var path = (this.app.req ? this.app.req.originalUrl : this.app.session.get('url'));
+        console.log('[OLX_DEBUG]', 'Tracking | PATH', path);
+        options.location = 'www.olx.com.bo';
+    }
     location = options.location || this.app.session.get('location').url;
     platform = options.platform || this.app.session.get('platform');
     country = location;

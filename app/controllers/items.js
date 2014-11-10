@@ -682,10 +682,6 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var prepare = function(done) {
-            if (typeof page !== 'undefined' && !isNaN(page) && page > 1) {
-                done.abort();
-                return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
-            }
             params.seo = this.app.seo.isEnabled();
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
@@ -951,7 +947,7 @@ function allresults(params, callback, gallery) {
             var path = this.app.session.get('path');
             var starts = '/nf/';
 
-            if (page !== undefined && !isNaN(page) && page > 1 && page > maxPage) {
+            if (typeof page !== 'undefined' && !isNaN(page) && page > maxPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
