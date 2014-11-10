@@ -191,7 +191,6 @@ function parseFilter(filter) {
 }
 
 function load(url) {
-    console.log('Load url', url);
     var listFilters = (url.match(regexpFind) || []);
     var transformer;
 
@@ -204,7 +203,6 @@ function load(url) {
                 app: this.app
             });
         }
-        console.log('Load filter', filter);
         this.add(new Filter(filter, {
             app: this.app
         }));
@@ -288,7 +286,6 @@ function smaugize() {
         sort = sort.get('value').replace(regexpSort, '$1#$2').split('#');
         params['s.' + sort[0]] = sort[1] || 'asc';
     }
-    console.log('params');
     return params;
 }
 
