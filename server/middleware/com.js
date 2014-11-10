@@ -5,7 +5,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var asynquence = require('asynquence');
         var statsd = require('../modules/statsd')();
-        var comCountries = ['tn', 'TN', 'us', 'US', 'nl', 'NL', 'vn', 'VN', 'mc', 'MC', 'dz', 'DZ'];
+        var comCountries = ['TN', 'US', 'NL', 'VN', 'MC', 'DZ'];
 
         function endsWith(str, suffix) {
             return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -25,7 +25,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             edgescape.split(',').forEach(function each(property) {
                 property = property.split('=');
                 if (property[0] === 'country_code') {
-                    countryCode = property[1];
+                    countryCode = property[1].toUpperCase();
                 }
             });
             if (!countryCode) {
@@ -35,29 +35,17 @@ module.exports = function(dataAdapter, excludedUrls) {
             else if (_.contains(comCountries, countryCode)) {
                 return next();
             }
-            else if (countryCode === 'TH' || countryCode === 'th') {
+            else if (countryCode === 'TH') {
                 return (function thailand() {
-                    var origin = req.get('host').split(':');
-                    var host = req.protocol + '://www.olx.co.th';
-
-                    if (origin.length > 1) {
-                        host += ':' + origin[1];
-                    }
-                    res.redirect(host + req.originalUrl);
+                    res.redirect(setUrl('www.olx.co.th'));
                 })();
             }
-            else if (countryCode === 'PT' || countryCode === 'pt') {
+            else if (countryCode === 'PT') {
                 return (function portugal() {
-                    var origin = req.get('host').split(':');
-                    var host = req.protocol + '://www.olx.pt';
-
-                    if (origin.length > 1) {
-                        host += ':' + origin[1];
-                    }
-                    res.redirect(host + req.originalUrl);
+                    res.redirect(setUrl('www.olx.pt'));
                 })();
             }
-            else if (countryCode === 'VE' || countryCode === 've') {
+            else if (countryCode === 'VE') {
                 countryCode = 'VZ';
             }
 
@@ -81,6 +69,16 @@ module.exports = function(dataAdapter, excludedUrls) {
                 statsd.increment([country.name, 'middleware', 'com', 'redirection']);
                 res.header('Cache-Control', 'no-cache, no-store');
                 res.redirect(host + req.originalUrl);
+            }
+
+            function setUrl(url) {
+                var origin = req.get('host').split(':');
+                var host = req.protocol + '://' + url;
+
+                if (origin.length > 1) {
+                    host += ':' + origin[1];
+                }
+                return host + req.originalUrl;
             }
 
             function error(err) {
