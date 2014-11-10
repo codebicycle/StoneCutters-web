@@ -613,7 +613,6 @@ function search(params, callback, gallery) {
 
     function controller() {
         var page = params ? params.page : undefined;
-        var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
         var languages = this.app.session.get('languages');
         var query;
@@ -683,7 +682,7 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var prepare = function(done) {
-            if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+            if (typeof page !== 'undefined' && !isNaN(page) && page > 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
             }
@@ -754,8 +753,7 @@ function search(params, callback, gallery) {
                 meta: items.meta,
                 filters: items.filters,
                 paginator: items.paginator,
-                search: query.search,
-                infiniteScroll: infiniteScroll
+                search: query.search
             });
         }.bind(this);
 
@@ -784,7 +782,6 @@ function staticSearch(params, callback, gallery) {
 
     function controller() {
         var page = params ? params.page : undefined;
-        var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
         var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
@@ -913,8 +910,7 @@ function staticSearch(params, callback, gallery) {
                 meta: meta,
                 filters: items.filters,
                 paginator: items.paginator,
-                search: query.search,
-                infiniteScroll: infiniteScroll
+                search: query.search
             });
         }.bind(this);
 
@@ -943,7 +939,6 @@ function allresults(params, callback, gallery) {
 
     function controller() {
         var page = params ? params.page : undefined;
-        var infiniteScroll = config.get('infiniteScroll', false);
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location').url;
         var siteLocation = this.app.session.get('siteLocation');
@@ -952,12 +947,11 @@ function allresults(params, callback, gallery) {
         var query;
 
         var redirect = function(done) {
+            var maxPage = config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500);
             var path = this.app.session.get('path');
             var starts = '/nf/';
 
-            if (page !== undefined && !isNaN(page) && page > 1 &&
-                (page > config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500) ||
-                 (platform === 'html5' && infiniteScroll))) {
+            if (page !== undefined && !isNaN(page) && page > 1 && page > maxPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
@@ -1025,8 +1019,7 @@ function allresults(params, callback, gallery) {
                 items: items.toJSON(),
                 meta: meta,
                 filters: items.filters,
-                paginator: items.paginator,
-                infiniteScroll: infiniteScroll
+                paginator: items.paginator
             });
         }.bind(this);
 

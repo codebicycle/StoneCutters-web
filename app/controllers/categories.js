@@ -98,7 +98,6 @@ function show(params, callback, gallery) {
 
 function handleItems(params, promise, gallery) {
     var page = params ? params.page : undefined;
-    var infiniteScroll = config.get('infiniteScroll', false);
     var languages = this.app.session.get('languages');
     var category;
     var subcategory;
@@ -125,7 +124,7 @@ function handleItems(params, promise, gallery) {
 
         url = ['/', slug].join('');
 
-        if (platform === 'html5' && infiniteScroll && (typeof page !== 'undefined' && !isNaN(page) && page > 1)) {
+        if (typeof page !== 'undefined' && !isNaN(page) && page > 1) {
             done.abort();
             return helpers.common.redirect.call(this, [url, gallery].join(''));
         }
@@ -217,8 +216,7 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: items.toJSON(),
             filters: items.filters,
-            paginator: items.paginator,
-            infiniteScroll: infiniteScroll
+            paginator: items.paginator
         });
     }.bind(this);
 
