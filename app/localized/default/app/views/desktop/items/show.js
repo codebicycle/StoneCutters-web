@@ -40,11 +40,13 @@ module.exports = Base.extend({
 
             $('[data-gallery-thumb]').removeClass('active');
             $(event.currentTarget).addClass('active');
-            $('[data-gallery-image]').attr('src', currentImage);
+            $('[data-gallery-image]').attr('src', '');
+            $('[data-gallery-image]').addClass('spinner');
             var newImg = new Image();
 
             newImg.src = image;
             newImg.onload = function() {
+                $('[data-gallery-image]').removeClass('spinner');
                 $('[data-gallery-image]').attr('src', image);
             };
         }
