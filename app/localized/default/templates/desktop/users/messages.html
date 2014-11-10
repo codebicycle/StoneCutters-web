@@ -12,7 +12,7 @@
     {% else %}
         <ul>
             {% for message in messages %}
-                <li data-message >
+                <li data-message class="{{ "read" if message.read }}" >
                     <input type="checkbox" data-message-id="{{ message.id }}" >
                     <span class="name">{{ message.from.username}}</span>
                     <a href="{{ ('/myolx/readmessages/' + message.id) | link }}" class="title">{{ message.title }}</a>

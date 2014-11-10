@@ -14,7 +14,7 @@
     <a href="{{ message | slugToUrl | link }}">{{ message.title }}</a>
 </p>
 
-<form data-message-reply data-message-id="{{ message.messageId }}">
+<form data-message-reply data-message-id="{{ message.messageId }}" data-message-read="{{ message.read }}">
     <label>{{ dictionary["myolx.ReplyToThisMessage"] }}</label>
     <textarea data-messageText ></textarea>
     <p data-error class="error hide">Por favor complete el mensaje.</p>
