@@ -37,15 +37,15 @@ module.exports = Base.extend({
             var $image = $(event.currentTarget).find('img');
             var image = $image.data('image');
             var currentImage = $image.attr('src');
+            var newImg = new Image();
 
             $('[data-gallery-thumb]').removeClass('active');
             $(event.currentTarget).addClass('active');
-            $('[data-gallery-image]').attr('src', currentImage);
-            var newImg = new Image();
+            $('[data-gallery-image]').attr('src', '').addClass('spinner');
 
             newImg.src = image;
             newImg.onload = function() {
-                $('[data-gallery-image]').attr('src', image);
+                $('[data-gallery-image]').removeClass('spinner').attr('src', image);
             };
         }
     },
