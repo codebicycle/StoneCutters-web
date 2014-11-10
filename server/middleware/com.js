@@ -25,28 +25,33 @@ module.exports = function(dataAdapter, excludedUrls) {
             edgescape.split(',').forEach(function each(property) {
                 property = property.split('=');
                 if (property[0] === 'country_code') {
-                    countryCode = property[1].toUpperCase();
+                    countryCode = property[1];
                 }
             });
             if (!countryCode) {
                 statsd.increment(['Unknown Location', 'middleware', 'com', 'miss']);
                 return next();
             }
-            else if (_.contains(comCountries, countryCode)) {
+
+            countryCode = countryCode.toUpperCase();
+
+            if (_.contains(comCountries, countryCode)) {
                 return next();
             }
-            else if (countryCode === 'TH') {
-                return (function thailand() {
-                    res.redirect(setUrl('www.olx.co.th'));
-                })();
-            }
-            else if (countryCode === 'PT') {
-                return (function portugal() {
-                    res.redirect(setUrl('www.olx.pt'));
-                })();
-            }
-            else if (countryCode === 'VE') {
-                countryCode = 'VZ';
+            else {
+                if (countryCode === 'TH') {
+                    return (function thailand() {
+                        res.redirect(setUrl('www.olx.co.th'));
+                    })();
+                }
+                else if (countryCode === 'PT') {
+                    return (function portugal() {
+                        res.redirect(setUrl('www.olx.pt'));
+                    })();
+                }
+                else if (countryCode === 'VE') {
+                    countryCode = 'VZ';
+                }
             }
 
             asynquence().or(error)
