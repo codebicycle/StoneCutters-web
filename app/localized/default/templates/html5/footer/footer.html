@@ -2,4 +2,4 @@
 {% view 'footer/languages' %}
 
 <p>Copyright &copy; 2006-2014 OLX, Inc.</p>
-<p class="free">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', 'OLX') }}</p>
+<p class="free">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', location.name) }}</p>
