@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 
@@ -18,15 +19,17 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        this.cities = this.firstRender ? this.parentView.options.topCities : this.cities;
+        this.cities = this.firstRender ? (data.topCities.toJSON ? data.topCities : this.parentView.options.topCities) : this.cities;
         return _.extend({}, data, {
             cities: this.cities.toJSON(),
-            states: this.firstRender ? this.parentView.options.states.toJSON() : [],
+            states: this.firstRender ? (data.states.toJSON ? data.states : this.parentView.options.states).toJSON() : [],
             firstRender: this.firstRender
         });
     },
     postRender: function() {
-        this.cities = this.cities || this.parentView.options.topCities;
+        var data = Base.prototype.getTemplateData.call(this);
+
+        this.cities = this.cities || (data.topCities.toJSON ? data.topCities : this.parentView.options.topCities);
     },
     events: {
         'show': 'onShow',
@@ -41,7 +44,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['countryoptions.Home_SelectCity'], this.id, 'contact']);
+        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['countryoptions.Home_SelectCity'], this.id, 'contact']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -51,7 +54,7 @@ module.exports = Base.extend({
 
         this.firstRender = true;
         this.render();
-        this.parentView.$el.trigger('locationSubmit', [this.selected, this.parentView.dictionary['postingerror.InvalidLocation']]);
+        this.parentView.$el.trigger('locationSubmit', [this.selected, translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.InvalidLocation']]);
     },
     onClickCity: function(event) {
         event.preventDefault();

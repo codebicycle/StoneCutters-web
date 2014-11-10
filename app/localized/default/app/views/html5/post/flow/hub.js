@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -27,7 +28,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', this.parentView.dictionary['misc.CreateYourFreeAd_Mob']);
+        this.parentView.$el.trigger('headerChange', translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.CreateYourFreeAd_Mob']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -84,7 +85,7 @@ module.exports = Base.extend({
                 if (subcategories.toJSON) {
                     subcategories = subcategories.toJSON();
                 }
-                
+
                 var subcategoryName = _.find(subcategories, function each(subcategory) {
                     return subcategory.id === subId;
                 }).trName;
@@ -112,7 +113,7 @@ module.exports = Base.extend({
         var $titleSummary = this.$('#titleSummary').removeClass('success error');
         var $descriptionSummary = this.$('#descriptionSummary').removeClass('success error');
         var failed = false;
-        
+
         fields.forEach(function each(field) {
             if (field.name === 'title') {
                 if (errors[field.name] || !field.value) {
@@ -155,7 +156,7 @@ module.exports = Base.extend({
         var $emailSummary = this.$('#emailSummary').removeClass('success error');
         var $locationSummary = this.$('#locationSummary').removeClass('success error');
         var failed = false;
-        
+
         fields.forEach(function each(field) {
             if (field.name === 'email') {
                 if (errors[field.name] || !field.value) {

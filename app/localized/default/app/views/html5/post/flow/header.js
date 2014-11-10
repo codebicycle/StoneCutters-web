@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -19,7 +20,7 @@ module.exports = Base.extend({
         'restart': 'onRestart'
     },
     onLogoClick: function(event) {
-        if (this.parentView.edited && !confirm(this.parentView.dictionary['misc.WantToGoBack'])) { // Now find a better translation
+        if (this.parentView.edited && !confirm(translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.WantToGoBack'])) { // Now find a better translation
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();

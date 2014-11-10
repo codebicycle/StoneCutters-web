@@ -8,9 +8,6 @@ module.exports = {
         },
         html5: {
             maxPageSize: 26
-        },
-        desktop: {
-            maxPageSize: 25
         }
     },
     staticAccept: ['css', 'js'],
@@ -19,6 +16,9 @@ module.exports = {
         type: 'production',
         staticPath: 'http://static[[basenumber]].olx-st.com/mobile-webapp',
         imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
+    },
+    tracking: {
+        enabled: true
     },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
@@ -36,11 +36,10 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
-    infiniteScroll: false,
     interstitial: {
         enabled: true,
         clicks: 0,
-        time: 432000000,
+        time: 259200000,
         ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi', '/posting', '/posting/success', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/analytics(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop']
     },

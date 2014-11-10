@@ -3,7 +3,9 @@
 module.exports = function(grunt) {
     var _ = require('underscore');
     var util = require('util');
-    var iconsLocalization = require('../config').get('icons');
+    var config = require('../config');
+    var utils = require('../utils');
+    var environments = utils.getEnvironments(grunt);
     var sprites = {};
 
     (function spriteIcons() {
@@ -20,17 +22,21 @@ module.exports = function(grunt) {
             cssFormat: 'css'
         };
         var images = ['gif', 'png', 'ico', 'jpg', 'jpeg'];
-        var platform;
         var defaultsIcons;
 
-        for (platform in iconsLocalization) {
-            if (!_.contains(platforms, platform)) {
-                continue;
-            }
-            iconsLocalization[platform].forEach(addIconLocation);
-        }
+        environments.forEach(function(environment) {
+            var icons = config.get('icons', {}, environment);
+            var platform;
 
-        function addIconLocation(location) {
+            for (platform in icons) {
+                if (!_.contains(platforms, platform)) {
+                    continue;
+                }
+                icons[platform].forEach(addIconLocation.bind(null, platform));
+            }
+        });
+
+        function addIconLocation(platform, location) {
             var src = findIconsSrcs(location, platform);
 
             if (!src) {
@@ -52,9 +58,8 @@ module.exports = function(grunt) {
             });
         }
 
-        platforms.forEach(function(_platform) {
-            platform = _platform;
-            addIconLocation('default');
+        platforms.forEach(function(platform) {
+            addIconLocation(platform, 'default');
         });
 
         function findDefaultIconsSrcs(platform) {

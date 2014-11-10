@@ -8,17 +8,17 @@ module.exports = {
         },
         html5: {
             maxPageSize: 26
-        },
-        desktop: {
-            maxPageSize: 25
         }
     },
     staticAccept: ['css', 'js'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'staging',
-        staticPath: 'http://static-staging.olx-st.com/mobile-webapp',
-        imagePath: 'http://images-staging.olx-st.com/mobile-webapp'
+        staticPath: 'http://static01.olx-st.com/mobile-webapp',
+        imagePath: 'http://images01.olx-st.com/mobile-webapp'
+    },
+    tracking: {
+        enabled: true
     },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za'],
@@ -36,7 +36,6 @@ module.exports = {
         html4: ['post', 'location'],
         html5: ['post', 'location']
     },
-    infiniteScroll: false,
     interstitial: {
         enabled: true,
         clicks: 0,

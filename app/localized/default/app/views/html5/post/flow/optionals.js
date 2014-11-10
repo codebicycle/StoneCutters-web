@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
@@ -26,8 +27,8 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var category = this.parentView.options.categories.search(this.selected.id) || {};
-        var subcategory = this.parentView.options.categories.search(this.selected.subId) || {};
+        var category = (data.categories.search ? data.categories : this.parentView.options.categories).search(this.selected.id) || {};
+        var subcategory = (data.categories.search ? data.categories : this.parentView.options.categories).search(this.selected.subId) || {};
 
         if (category.toJSON) {
             category = category.toJSON();
@@ -69,7 +70,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['misc.ChooseACategory_Mob'], this.id, '']);
+        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.ChooseACategory_Mob'], this.id, '']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {

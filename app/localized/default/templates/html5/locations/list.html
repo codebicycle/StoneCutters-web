@@ -21,6 +21,7 @@
 		<p>{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</p>
 	{% endif %}
 </div>
-{% set templateName = template + '/partials/tracking.html' %}
-{% include templateName %}
+
 {% view 'pages/interstitial' %}
+
+{% view 'partials/tracking' %}

@@ -1,0 +1,238 @@
+<div class="help-navigation">
+    <h3 class="title">{{ dictionary["defaultfooter.Help"] }}</h3>
+    <ul>
+        <li class="selected">
+            <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
+        </li>
+        <li>
+            <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
+        </li>
+        <li>
+            <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["help.GeneralQuestions"] }}</a>
+        </li>
+        <li>
+            <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
+        </li>
+    </ul>
+</div>
+<div class="help-content">
+    <div id="new-olx" class="help-content-display">
+        <h3 class="title">{{ dictionary["help.NewToBrand"] }}</h3>
+        <div class="faqs">
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatIsBrand"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatIsBrand_content"] }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.IsBrandFree"] }} </h4>
+                <div class="question-content">
+                    <p>{{ dictionary["help.IsBrandFree_content"] }} </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.DoIHaveToRegisterToUseBrand"] }} </h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.DoIHaveToRegisterToUseBrand_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIFindAnItemAtBrand"] }} </h4>
+                <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIFindAnItemAtBrand_content"] }}
+                </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatIsMyClassifieds"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }} </h4>
+                <div class="question-content">
+                    <p>{{ dictionary["help.WhatIsMyClassifieds_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}  </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="ads" class="help-content-display">
+        <h3 class="title">{{ dictionary["itemslisting.Classifieds"] }} </h3>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIPostAnItemAtBrand"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIPostAnItemAtBrand_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIUploadAPicture"] }} </h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIUploadAPicture_content"] | replace('<<NUMBER>>','8') | replace('<<NUMBER_IN_WORDS>>','ocho') | replace('<<WEIGHT>>', '20480') }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIEditAPosting"] }}</h4>
+            <div class="question-content">
+                <p>
+                   {{ dictionary["help.HowDoIEditAPosting_contentNew"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIChangeAPicture"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIChangeAPicture_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowLongWillMyPostingAppearOnBrand"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowLongWillMyPostingAppearOnBrand_contentNew"] | replace('<<NUMBER>>','180') }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIRemoveMyPosting"] }} </h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIRemoveMyPosting_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoISaveAPostingToRecallItLater"] }} </h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoISaveAPostingToRecallItLater_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right">{{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings_content"] }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="faqs" class="help-content-display">
+        <h3 class="title">{{ dictionary["help.GeneralQuestions"] }}</h3>
+        <div class="faqs">
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatAreClassifieds"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatAreClassifieds_content"] }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIChangeMyRegistrationDetails"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.HowDoIChangeMyRegistrationDetails_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoICheckMyMessages"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.HowDoICheckMyMessages_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIAnswerAMessageSentToMyAd"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.HowDoIAnswerAMessageSentToMyAd_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.AsABuyerHowDoIContactASeller"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.AsABuyerHowDoIContactASeller_content"] }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowCanICreateAPartnershipWithBrand"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed"] }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="more-suggestions" class="help-content-display">
+        <h3 class="title">{{ dictionary["help.MoreGuidelines"] }}</h3>
+        <div class="faqs">
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo"] }}</h4>
+                <div class="question-content">
+                    {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo_content"] }}
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowCanIAvoidAFraud"] }}</h4>
+                <div class="question-content">
+                        {{ dictionary["help.HowCanIAvoidAFraud_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo"] }}</h4>
+                <div class="question-content">
+                   {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo_content"] }}
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatKindOfPostingsAreForbiddenNotAllowedOnBrand"] }}</h4>
+                <div class="question-content">
+                    {{ dictionary["help.WhatKindOfPostingsAreForbiddenNotAllowedOnBrand_content"] }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% view 'partials/tracking' %}

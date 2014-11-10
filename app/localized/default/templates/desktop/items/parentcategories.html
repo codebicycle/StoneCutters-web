@@ -1,0 +1,12 @@
+<span class="title">{{ dictionary["item.SelectACategory"] }} </span>
+<ul class="parent-categories">
+    {% for category in categories  %}
+        <li>
+            <a href="{{ category | slugToUrl | linkig }}">
+                <span class="icons icon-cat-{{ category.id }}"></span>
+                <h2>{{ category.trName }}</h2>
+                <span class="count">{{ (category.counter | countFormat) if category.counter > 0  }}</span>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

@@ -2,35 +2,58 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
+    var restler = require('restler');
     var statsd  = require('../modules/statsd')();
-    var Tracker = require('../modules/tracker');
     var config = require('../../shared/config');
     var utils = require('../../shared/utils');
     var tracking = require('../../app/modules/tracking');
-    var configTracking = require('../../app/modules/tracking/config');
     var env = config.get(['environment', 'type'], 'development');
     var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-    function defaultRequestOptions(req, type, tracker) {
-        var platform = req.rendrApp.session.get('platform');
+    function prepare(options, params) {
+        options = _.defaults(options, {
+            method: 'get',
+            query: params
+        });
 
-        return {
+        if (options.method === 'post') {
+            options.data = options.query;
+            delete options.query;
+        }
+        return options;
+    }
+
+    function getOption(options, name) {
+        var value = options[name];
+
+        delete options[name];
+        return value;
+    }
+
+    function track(req, url, type, tracker) {
+        if (!url) {
+            return;
+        }
+        var platform = req.rendrApp.session.get('platform');
+        var options = {
             headers: {
                 'User-Agent': utils.getUserAgent(req),
                 'Accept-Encoding': 'gzip,deflate,sdch',
                 'Cache-Control': 'no-cache',
                 'Pragma': 'no-cache'
-            },
-            success: function() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
-            },
-            error: function() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
-            },
-            fail: function() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
             }
         };
+
+        restler.request(url, options)
+            .on('success', function success() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+            })
+            .on('fail', function error() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+            })
+            .on('error', function fail() {
+                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
+            });
     }
 
     (function pageview() {
@@ -58,215 +81,237 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
         }
 
-        function googleTracking(req, trackerId, host, page) {
-            var analytic = new Tracker('googleGA', {
-                id: trackerId,
-                host: host || req.host
-            });
+        function analyticsTracking(req, host, page) {
+            if (!req.query.page) {
+                return;
+            }
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.platform;
             var language = req.rendrApp.session.get('selectedLanguage');
-            var platform = req.rendrApp.session.get('platform');
+            var location = req.rendrApp.session.get('location');
             var osName = req.rendrApp.session.get('osName') || 'unknown';
             var osVersion = req.rendrApp.session.get('osVersion') || 'unknown';
-            var options = defaultRequestOptions(req, 'pageview', 'google');
             var params = {
+                host: host || req.host,
                 page: page || req.query.page,
                 referer: req.query.referer,
                 ip: req.rendrApp.session.get('ip'),
                 clientId: req.rendrApp.session.get('clientId'),
-                userAgent: options.headers['User-Agent'],
                 hitCount: req.rendrApp.session.get('hitCount'),
-                visitor: tracking.google.getUtmcc(req.rendrApp)
+                keyword: req.query.keyword
             };
+            var config = {
+                platform: platform,
+                siteLocation: req.rendrApp.session.get('siteLocation') || req.query.locUrl
+            };
+            var url;
 
             if (language) {
                 params.language = language.toLowerCase();
             }
-            osName = osName.replace(/\s*/g, '').toLowerCase();
+            osName = osName.replace(/\s/g, '').toLowerCase();
             params.custom = ['8(olx_visitor_country)9(', platform, '_', osName, '_', osVersion, '_', req.query.locNm, ')11(1)'].join('');
+            url = tracking.analytics.pageview.call({
+                app: req.rendrApp
+            }, params, config);
 
-            analytic.track(params, options);
+            track(req, url, 'pageview', 'google');
         }
 
         function atiTracking(req) {
-            var countryId = req.query.locId;
-            var atiConfig;
-            var analytic;
-            var options;
+            if (!req.query.custom) {
+                return;
+            }
+            var location = req.rendrApp.session.get('location');
+            var params = {
+                clientId: req.rendrApp.session.get('clientId').substr(24),
+                custom: req.query.custom,
+                referer: req.query.referer
+            };
+            var config = {
+                platform: req.rendrApp.session.get('platform'),
+                location: (location ? location.url : false) || req.query.locUrl
+            };
+            var url = tracking.ati.pageview.call({
+                app: req.rendrApp
+            }, params, config);
 
-            if (env !== 'production') {
-                countryId = 0;
-            }
-            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
-            if (atiConfig) {
-                options = defaultRequestOptions(req, 'pageview', 'ati');
-                analytic = new Tracker('ati', {
-                    id: atiConfig.siteId,
-                    host: atiConfig.logServer
-                });
-                analytic.track({
-                    page: req.query.page,
-                    referer: req.query.referer,
-                    custom: req.query.custom,
-                    clientId: req.rendrApp.session.get('clientId').substr(24)
-                }, options);
-            }
+            track(req, url, 'pageview', 'ati');
         }
 
         function atiTrackingColombia(req) {
-            var analytic;
-            var options;
-
             if (env !== 'production') {
                 return;
             }
-
-            options = defaultRequestOptions(req, 'pageview', 'ati');
-            analytic = new Tracker('ati', {
-                id: 539154,
-                host: 'logw306'
-            });
-            analytic.track({
-                page: req.query.page,
-                referer: req.query.referer,
+            if (!req.query.custom) {
+                return;
+            }
+            var location = req.rendrApp.session.get('location');
+            var params = {
+                clientId: req.rendrApp.session.get('clientId').substr(24),
                 custom: req.query.custom,
-                clientId: req.rendrApp.session.get('clientId').substr(24)
-            }, options);
+                referer: req.query.referer
+            };
+            var config = {
+                platform: req.rendrApp.session.get('platform'),
+                location: (location ? location.url : false) || req.query.locUrl,
+                siteId: 539154,
+                logServer: 'logw306'
+            };
+            var url = tracking.ati.pageview.call({
+                app: req.rendrApp
+            }, params, config);
+
+            track(req, url, 'pageview', 'ati');
         }
 
-        function handler(req, res) {
-            var gif = new Buffer(image, 'base64');
+        function check(req) {
             var location = req.rendrApp.session.get('siteLocation');
             var siteLocation = location || req.query.locUrl;
-            var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.platform;
             var osName = req.rendrApp.session.get('osName');
             var osVersion = req.rendrApp.session.get('osVersion');
             var userAgent = utils.getUserAgent(req);
-            var host = req.host;
-            var page = req.query.page;
-            var bot;
-            var trackerId;
             var platformUrl;
-
-            res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', gif.length);
-            res.end(gif);
+            var bot;
 
             if (!location) {
                 if (!siteLocation) {
-                    return/* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl)*/;
+                    /* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl); */
+                    return false;
                 }
-                return/* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl)*/;
+                /* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl); */
+                return false;
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                return statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                return false;
             }
             try {
                 platformUrl = JSON.parse(req.query.custom).platform;
             }
             catch (err) {}
             if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
-                return/* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl)*/;
+                /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
+                return false;
             }
+            return true;
+        }
+
+        function handler(req, res) {
+            var gif = new Buffer(image, 'base64');
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.platform;
+            var host = req.host;
+            var page = req.query.page;
+
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', gif.length);
+            res.end(gif);
+
+            if (!check(req)) {
+                return;
+            }
+
             graphiteTracking(req);
-            trackerId = tracking.google.getId(siteLocation);
-            if (trackerId) {
-                if (req.rendrApp.session.get('internet.org')) {
-                    host = host.replace('olx', 'olx-internet-org');
-                    page = '/internet.org' + page;
-                }
-                googleTracking(req, trackerId, host, page);
+            if (req.rendrApp.session.get('internet.org')) {
+                host = host.replace('olx', 'olx-internet-org');
+                page = '/internet.org' + page;
             }
-            if (req.query.locUrl === 'www.olx.com.br' && platformUrl !== 'wap') {
+            analyticsTracking(req, host, page);
+            if (req.query.locUrl === 'www.olx.com.br' && platform !== 'wap') {
                 return;
             }
             if (req.query.locUrl !== 'www.olx.com.co') {
-                atiTracking(req);
+                return atiTracking(req);
             }
-            else {
-                atiTrackingColombia(req);
-            }
+            atiTrackingColombia(req);
         }
     })();
 
     (function pageevent() {
         app.get('/analytics/pageevent.gif', handler);
 
-        function googleTracking(req, trackerId, host) {
-            var analytic = new Tracker('google-event', {
-                id: trackerId,
-                host: host
-            });
-            var options = defaultRequestOptions(req, 'pageevent', 'google');
-
-            analytic.track(_.extend({
+        function analyticsTracking(req, host) {
+            if (!req.query.page) {
+                return;
+            }
+            var params = _.extend({
+                host: host,
                 ip: req.rendrApp.session.get('ip'),
-                clientId: req.rendrApp.session.get('clientId'),
-                userAgent: options.headers['User-Agent']
-            }, req.query), options);
+                clientId: req.rendrApp.session.get('clientId')
+            }, req.query);
+            var config = {
+                platform: req.rendrApp.session.get('platform'),
+                siteLocation: req.rendrApp.session.get('siteLocation') || req.query.locUrl
+            };
+            var url = tracking.analytics.event.call({
+                app: req.rendrApp
+            }, params, config);
+
+            track(req, url, 'pageevent', 'google');
         }
 
         function atiTracking(req) {
-            var countryId = req.query.locId;
-            var atiConfig;
-            var analytic;
-            var options;
+            if (!req.query.custom) {
+                return;
+            }
+            var location = req.rendrApp.session.get('location');
+            var params = {
+                clientId: req.rendrApp.session.get('clientId').substr(24),
+                custom: req.query.custom,
+                url: req.query.url
+            };
+            var config = {
+                platform: req.rendrApp.session.get('platform'),
+                location: (location ? location.url : false) || req.query.locUrl
+            };
+            var url = tracking.ati.event.call({
+                app: req.rendrApp
+            }, params, config);
 
-            if (env !== 'production') {
-                countryId = 0;
+            track(req, url, 'pageevent', 'ati');
+        }
+
+        function check(req) {
+            var location = req.rendrApp.session.get('siteLocation');
+            var siteLocation = location || req.query.locUrl;
+            var platform = req.rendrApp.session.get('platform') || utils.defaults.platform;
+            var osName = req.rendrApp.session.get('osName');
+            var osVersion = req.rendrApp.session.get('osVersion');
+            var userAgent = utils.getUserAgent(req);
+            var bot;
+
+            if (!location) {
+                if (!siteLocation) {
+                    /* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl); */
+                    return false;
+                }
+                /* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl); */
+                return false;
             }
-            atiConfig = utils.get(configTracking, ['ati', 'paths', countryId]);
-            if (atiConfig) {
-                options = defaultRequestOptions(req, 'pageevent', 'ati');
-                analytic = new Tracker('ati-event', {
-                    id: atiConfig.siteId,
-                    host: atiConfig.logServer
-                });
-                analytic.track({
-                    custom: req.query.custom,
-                    url: req.query.url,
-                    clientId: req.rendrApp.session.get('clientId').substr(24),
-                    dynamics: {
-                        x20: req.rendrApp.session.get('platform') || utils.defaults.platform
-                    }
-                }, options);
+            bot = isBot(userAgent, platform, osName, osVersion);
+            if (bot) {
+                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                return false;
             }
+            return true;
         }
 
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
-            var location = req.rendrApp.session.get('siteLocation');
-            var siteLocation = location || req.query.locUrl;
-            var platform = req.rendrApp.session.get('platform') || utils.defaults.userAgent;
-            var osName = req.rendrApp.session.get('osName');
-            var osVersion = req.rendrApp.session.get('osVersion');
-            var userAgent = utils.getUserAgent(req);
             var host = req.host;
-            var bot;
-            var trackerId;
-            var platformUrl;
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
 
-            if (!location) {
-                if (!siteLocation) {
-                    return console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl);
-                }
-                return console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl);
+            if (!check(req)) {
+                return;
             }
-            bot = isBot(userAgent, platform, osName, osVersion);
-            if (bot) {
-                return statsd.increment([req.query.locNm, 'bot', bot, platform]);
+            if (req.rendrApp.session.get('internet.org')) {
+                host = host.replace('olx', 'olx-internet-org');
             }
-            trackerId = tracking.google.getId(siteLocation);
-            if (trackerId) {
-                if (req.rendrApp.session.get('internet.org')) {
-                    host = host.replace('olx', 'olx-internet-org');
-                }
-                googleTracking(req, trackerId, host);
-            }
+            analyticsTracking(req, host);
             atiTracking(req);
         }
     })();

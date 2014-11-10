@@ -9,6 +9,7 @@ var _ = require('underscore');
 module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var currentRoute = this.app.session.get('currentRoute');
         var languages = this.app.session.get('languages').models;
         var selected = this.app.session.get('selectedLanguage');
 
@@ -24,7 +25,9 @@ module.exports = Base.extend({
             languages: {
                 selected: selectedLanguage,
                 list: languagesList
-            }
+            },
+            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'flow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true),
+            selectedLanguage: this.app.session.get('selectedLanguage')
         });
     },
     events: {

@@ -5,106 +5,100 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var _ = require('underscore');
         var path = require('path');
-        var URLParser = require('url');
+        var asynquence = require('asynquence');
         var config = require('../config');
-        var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
-        var seo = require('../../app/modules/seo');
+        var statsd  = require('../modules/statsd')();
+        var Seo = require('../../app/modules/seo');
         var errorPath = path.resolve('server/templates/error.html');
+        var migrated = config.get('migrated', []);
 
         return function platform(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
             var userAgent = utils.getUserAgent(req);
-            var refererHost;
-            var subdomains;
+            var session = req.rendrApp.get('session');
 
-            function redirect(url, status) {
-                res.set('Vary', 'User-Agent');
-                res.redirect(status || 302, url);
+            function fetch(done) {
+                dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), done.errfcb);
             }
 
-            function redirectDesktop(hasPlatform) {
-                res.set('Vary', 'User-Agent');
-                res.redirect(302, seo.desktopizeUrl(req.originalUrl, {
-                   protocol: req.protocol,
-                   host: req.headers.host,
-                   path: req.path,
-                   hasPlatform: hasPlatform
-                }, req.query));
+            function success(done, response, body) {
+                if (req.cookies && req.cookies.forcedPlatform) {
+                    body.web_platform = req.cookies.forcedPlatform;
+                }
+                else if (body.isBrowser) {
+                    body.web_platform = 'desktop';
+                }
+                else if (!body.web_platform) {
+                    body.web_platform = utils.defaults.platform;
+                }
+                if (!session.platform) {
+                    done.abort();
+                    return redirect(body, false);
+                }
+                else if (!~userAgent.indexOf('Googlebot') && session.platform !== body.web_platform) {
+                    done.abort();
+                    return redirect(body, session.platform !== 'desktop');
+                }
+                session.device = body;
+                session.platform = body.web_platform;
+                res.locals({
+                    platform: body.web_platform
+                });
+                done();
             }
 
-            function checkDevice(err, response, body) {
-                if (err) {
-                    return fail(err);
-                }
-                if (!body) {
-                    console.log('[OLX_DEBUG] Empty device response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
-                    return fail(new Error());
-                }
-                req.data = req.data || {};
-                req.data.device = body;
-                return body;
-            }
+            function redirect(device, hasPlatform) {
+                var url;
 
-            function redirectCorrectPlatform(err, response, body) {
-                var device = checkDevice(err, response, body);
-                var host = req.headers.host;
-                var platform;
-
-                if (!device) {
-                    return;
-                }
-                platform = device.web_platform || utils.defaults.platform;
-                if (device.isBrowser) {
-                    if (!host.indexOf('www')) {
-                        return next();
+                if (device.web_platform === 'desktop') {
+                    if (!_.contains(migrated, session.locationUrl)) {
+                        url = Seo.desktopizeUrl(req.originalUrl, {
+                            protocol: req.protocol,
+                            host: session.host,
+                            path: req.path,
+                            hasPlatform: hasPlatform
+                        }, req.query);
                     }
-                    return redirect([req.protocol, '://', host.replace(new RegExp('^m', 'i'), 'www'), req.originalUrl].join(''));
+                    else {
+                        url = getDesktopUrl(device);
+                    }
                 }
-                redirect([req.protocol, '://', platform, '.', host.replace(new RegExp('^www', 'i'), 'm'), req.originalUrl].join(''));
+                else {
+                    url = getMobileUrl(device);
+                }
+                res.set('Vary', 'User-Agent');
+                res.redirect(302, url);
             }
 
-            function checkCorrectPlatform(err, response, body) {
-                var device = checkDevice(err, response, body);
-                var host = req.headers.host;
-                var platform;
+            function getDesktopUrl(device) {
+                var url = [req.protocol, '://', session.locationUrl];
 
-                if (!device) {
-                    return;
+                if (session.port) {
+                    url.push(':');
+                    url.push(session.port);
                 }
-                platform = device.web_platform || utils.defaults.platform;
-                if (device.isBrowser) {
-                    return redirectDesktop(true);
-                }
-                else if (platform !== req.subdomains.pop()) {
-                    host = host.split('.');
-                    host.shift();
-                    return redirect([req.protocol, '://', platform, '.', host.join('.'), utils.removeParams(req.originalUrl, 'sid')].join(''));
-                }
-                next();
+                url.push(req.originalUrl);
+                return url.join('');
             }
 
-            function checkUnknownSubdomain(err, response, body) {
-                var device = checkDevice(err, response, body);
-                var subdomains = req.subdomains.reverse();
-                var host = req.headers.host;
-                var subdomain = 'm.';
-                var platform;
+            function getMobileUrl(device) {
+                var url = [req.protocol, '://', device.web_platform];
+                var host = session.host;
+                var subHost = host.substr(host.indexOf('.'));
 
-                if (!device) {
-                    return;
+                if (subHost.indexOf('.m.')) {
+                    url.push('.m');
                 }
-                platform = device.web_platform || utils.defaults.platform;
-                if (device.isBrowser) {
-                    subdomain = 'www.';
+                url.push(subHost);
+                url.push(req.originalUrl);
+                url = url.join('');
+                if (session.siteLocation) {
+                    url = utils.params(url, 'location', session.siteLocation);
                 }
-
-                if (_.contains(config.get('hosts', ['olx']), subdomains[subdomains.length - 1])) {
-                    subdomains = subdomains.slice(0, subdomains.length - 1);
-                }
-                redirect([req.protocol, '://', req.headers.host.replace(new RegExp('^' + subdomains.join('.'), 'i'), subdomain)].join(''), 301);
+                return url;
             }
 
             function fail(err) {
@@ -112,34 +106,10 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.status(500).sendfile(errorPath);
             }
 
-            // m.olx.com or www.olx.com
-            if ((req.subdomains.length === 1 || (req.subdomains.length === 2 && _.contains(config.get('hosts', ['olx']), req.subdomains.shift()))) && ('m' === req.subdomains.pop() ||  'www' === req.subdomains.pop())) {
-                dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), redirectCorrectPlatform);
-            }
-            // platform.olx.com 
-            else if (req.subdomains.length <= 3 && _.contains(config.get('platforms', []), req.subdomains.pop())) {
-                if (!~userAgent.indexOf('Googlebot')) {
-                    if (!req.headers.referer) {
-                        return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), checkCorrectPlatform);
-                    }
-                    else {
-                        refererHost = URLParser.parse(req.headers.referer).hostname;
-
-                        if (refererHost !== req.headers.host.split(':').shift()) {
-                            refererHost = (refererHost || '').split('.');
-
-                            if (!_.intersection(config.get('hosts', ['olx']), refererHost).length) {
-                                return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), checkCorrectPlatform);
-                            }
-                        }
-                    }
-                }
-                next();
-            }
-            // location.olx.com or olx.com
-            else {
-                return dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), checkUnknownSubdomain);
-            }
+            asynquence().or(fail)
+                .then(fetch)
+                .then(success)
+                .val(next);
         };
 
     };

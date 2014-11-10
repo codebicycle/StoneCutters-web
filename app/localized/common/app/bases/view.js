@@ -1,11 +1,12 @@
 'use strict';
 
-var Base = require('rendr/shared/base/view');
 var _ = require('underscore');
 var async = require('async');
+var Base = require('rendr/shared/base/view');
 var localization = require('../../../../../shared/config').get('localization', {});
-var helpers = require('../../../../helpers');
 var translations = require('../../../../../shared/translations');
+var utils = require('../../../../../shared/utils');
+var helpers = require('../../../../helpers');
 
 module.exports = Base.extend({
     initialize: function() {
@@ -32,16 +33,19 @@ module.exports = Base.extend({
         return this.app.templateAdapter.getTemplate(template + '/' + this.name);
     },
     getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
+        var data = Base.prototype.getTemplateData.call(this) || {};
         var template = this.app.session.get('template');
+        var user = this.app.session.get('user');
+        var context = data.context ? data.context.ctx || {} : {};
 
-        return _.extend({}, data, {
+        return _.extend(context, data, {
+            user: user,
             device: this.app.session.get('device'),
             platform: this.app.session.get('platform'),
             template: template,
             siteLocation: this.app.session.get('siteLocation'),
             location: this.app.session.get('location'),
-            dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'],
+            dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'],
             referer: this.app.session.get('referer'),
             url: this.app.session.get('url'),
             href: this.app.session.get('href'),
@@ -51,13 +55,12 @@ module.exports = Base.extend({
             os: {
                 name: this.app.session.get('osName').replace(/\s*/g, ''),
                 version: this.app.session.get('osVersion')
-            }
+            },
+            host: this.app.session.get('host')
         });
     },
     track: function(data, callback, options) {
-        var obj = {
-            url: helpers.common.static('/images/common/gif1x1.gif')
-        };
+        var obj = {};
         var tracking = {};
         var $img = $('img.analytics');
 
@@ -69,7 +72,9 @@ module.exports = Base.extend({
             tracking = $img.last().attr('src');
             tracking = $.deparam(tracking.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
         }
-        obj = _.defaults(obj, data, tracking);
+        obj = _.defaults(obj, data, tracking, {
+            url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
+        });
         options = _.defaults((options || {}), {
             url: '/analytics/pageevent.gif',
             type: 'GET',
@@ -102,7 +107,9 @@ module.exports = Base.extend({
                 }
             }
         }.bind(this));
-    }
+    },
+    onActionStart: utils.noop,
+    onActionEnd: utils.noop
 });
 
 module.exports.attach = Base.attach = function(app, parentView, callback) {
@@ -118,18 +125,21 @@ module.exports.attach = Base.attach = function(app, parentView, callback) {
         $el = $(el);
         if (!$el.data('view-attached')) {
             options = Base.getViewOptions($el);
-            options.app = app;
-            viewName = options.view;
-            fetchSummary = options.fetch_summary || {};
-            app.fetcher.hydrate(fetchSummary, {
-                app: app
-            }, function done(err, results) {
-                options = _.extend(options, results);
-                Base.getView(app, viewName, app.options.entryPath, function after(ViewClass) {
-                    var view = new ViewClass(options);
+            app.fetchDependencies(['categories', 'topCities', 'states', 'countries'], function done(err, dependencies) {
+                _.extend(options, dependencies.toJSON());
+                options.app = app;
+                viewName = options.view;
+                fetchSummary = options.fetch_summary || {};
+                app.fetcher.hydrate(fetchSummary, {
+                    app: app
+                }, function done(err, results) {
+                    options = _.extend(options, results);
+                    Base.getView(app, viewName, app.options.entryPath, function after(ViewClass) {
+                        var view = new ViewClass(options);
 
-                    view.attach($el, parentView);
-                    cb(null, view);
+                        view.attach($el, parentView);
+                        cb(null, view);
+                    });
                 });
             });
         }

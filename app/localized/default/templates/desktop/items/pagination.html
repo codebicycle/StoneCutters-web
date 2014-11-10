@@ -1,0 +1,32 @@
+<div id="items-pagination">
+    <div class="items-paginations-buttons">
+        {% if paginator.has('next') and paginator.has('previous') %}
+            <a href="{{ paginator.get('previous') | linkig }}"  rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }} </a><!--
+            --><a href="{{ paginator.get('next') | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
+        {% elif paginator.has('next') %}
+            <a href="{{ paginator.get('next') | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
+        {% else %}
+            <a href="{{ paginator.get('previous') | linkig }}" rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }}</a>
+        {% endif %}
+    </div>
+
+    <ul class="items-paginations-numbers">
+        <li>
+            <a href="{{ (paginator.get('previous') | linkig) if paginator.has('previous') else '#' }}" rel="prev" class="icons pagination-arrow icon-arrow-left {{ "disable" if not paginator.has('previous') }}"></a>
+        </li>
+        {% for page in paginator.pages(10) %}
+            {% if page.isCurrent %}
+                <li class="current">
+                    {{ page.page }}
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ page.url | linkig }}" class="pagination-number" >{{ page.page }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <li>
+            <a href="{{ (paginator.get('next') | linkig) if paginator.has('next') else '#' }}" rel="next" class="icons pagination-arrow icon-arrow-right {{ "disable" if not paginator.has('next') }}"></a>
+        </li>
+    </ul>
+</div>

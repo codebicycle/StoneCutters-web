@@ -1,8 +1,13 @@
 'use strict';
 
 var Base = require('rendr/shared/app');
+var Fetcher = require('./bases/fetcher');
+var ModelStore = require('./bases/modelStore');
+var CollectionStore = require('./bases/collectionStore');
 var Session = require('../shared/session');
 var nunjucks = require('./modules/nunjucks');
+var _ = require('underscore');
+var Seo = require('./modules/seo');
 
 module.exports = Base.extend({
     defaults: {
@@ -12,6 +17,9 @@ module.exports = Base.extend({
         Session.call(this, true, {
             isServer: typeof window === 'undefined'
         });
+        _.extend(this.fetcher, Fetcher);
+        _.extend(this.fetcher.modelStore, ModelStore);
+        _.extend(this.fetcher.collectionStore, CollectionStore);
         this.templateAdapter.registerHelpers(nunjucks.helpers);
         this.templateAdapter.registerExtensions(nunjucks.extensions);
     },
@@ -20,15 +28,104 @@ module.exports = Base.extend({
             this.set({
                 loading: true
             });
+            if (this.router.currentView) {
+                this.router.currentView.onActionEnd();
+            }
         }, this);
         this.router.on('action:end', function onEnd() {
             this.set({
                 loading: false
             });
+            this.router.currentView.onActionStart();
         }, this);
         Base.prototype.start.call(this);
     },
     getAppViewClass: function() {
         return require('./localized/common/app/views/app');
+    },
+    fetchDependencies: function(dependencies, cache, callback) {
+        if (!dependencies) {
+            dependencies = [];
+        }
+        else if (!Array.isArray(dependencies)) {
+            dependencies = [dependencies];
+        }
+        if (!callback) {
+            callback = cache;
+            cache = true;
+        }
+        callback = callback.errfcb ? callback.errfcb : callback;
+        if (this.dependencies) {
+            return callback(null, this.dependencies);
+        }
+        this.fetch(this.getSpecs(dependencies), {
+            readFromCache: !!cache,
+            writeToCache: true,
+            store: true
+        }, function done(err, response) {
+            if (err) {
+                return callback(err);
+            }
+            response.toJSON = toJSON;
+            this.dependencies = response;
+            callback(null, response);
+        }.bind(this));
+    },
+    getSpecs: function(dependencies) {
+        var specs = {};
+        var seo = Seo.instance(this);
+
+        dependencies.forEach(function each(dependency) {
+            switch (dependency) {
+                case 'categories':
+                    specs[dependency] = {
+                        collection: 'Categories',
+                        params: {
+                            location: this.session.get('siteLocation'),
+                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id,
+                            seo: seo.isEnabled()
+                        }
+                    };
+                break;
+                case 'countries':
+                    specs[dependency] = {
+                        collection: 'Countries',
+                        params: {
+                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id
+                        }
+                    };
+                break;
+                case 'states':
+                    specs[dependency] = {
+                        collection: 'States',
+                        params: {
+                            location: this.session.get('location').url,
+                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id
+                        }
+                    };
+                break;
+                case 'topCities':
+                    specs[dependency] = {
+                        collection: 'Cities',
+                        params: {
+                            level: 'countries',
+                            type: 'topcities',
+                            location: this.session.get('location').url,
+                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id
+                        }
+                    };
+                break;
+            }
+        }, this);
+        return specs;
     }
 });
+
+function toJSON() {
+    var json = {};
+
+    Object.keys(_.omit(this, 'toJSON')).forEach(function each(key) {
+        json[key] = this[key].toJSON();
+    }, this);
+    return json;
+}

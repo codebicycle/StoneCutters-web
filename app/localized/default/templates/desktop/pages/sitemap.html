@@ -1,0 +1,9 @@
+{% extends (template + '/categories/categorytree.html') %}
+
+{% block title %}<h2>{{ dictionary["sitemap_map.Sitemap"] }}</h2>{% endblock %}
+
+{% block icon %}<!-- -->{% endblock %}
+
+{% block footer %}
+	{% view 'partials/tracking' %}
+{% endblock %}

@@ -3,14 +3,14 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var common = require('./common');
-var seo = require('../modules/seo');
+var Seo = require('../modules/seo');
 var esi = require('../modules/esi');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var isServer = typeof window === 'undefined';
 var cacheDefault = config.get(['cache', 'headers', 'default']);
 
-function prepare(done) {
+function prepare(params, done) {
     if (!isServer) {
         this.app.session.update({
             referer: this.app.session.get('referer')
@@ -19,18 +19,21 @@ function prepare(done) {
     this.app.session.clear('page');
     this.app.session.clear('postingLink');
     this.app.session.update({
-        currentRoute: this.currentRoute
+        currentRoute: this.currentRoute,
+        params: params
     });
     done();
 }
 
-function processAnalytics(done) {
+function processTracking(done) {
     tracking.reset();
     done();
 }
 
 function processSeo(done) {
-    seo.resetHead.call(this);
+    var seo = Seo.instance(this.app);
+
+    seo.reset(this.app);
     done();
 }
 
@@ -107,15 +110,16 @@ function processForm(params, done) {
         form = _.clone(this.app.session.get('form'));
         this.app.session.clear('form');
     }
-    done(form);
+    this.form = form;
+    done();
 }
 
 module.exports = {
-    control: function(params, options, callback) {
+    control: function(params, options, controller) {
         var promise;
 
         if (_.isFunction(options)) {
-            callback = options;
+            controller = options;
             options = {};
         }
         _.defaults(options, {
@@ -125,8 +129,8 @@ module.exports = {
         });
 
         promise = asynquence().or(fail.bind(this))
-            .then(prepare.bind(this))
-            .then(processAnalytics.bind(this));
+            .then(prepare.bind(this, params))
+            .then(processTracking.bind(this));
         if (options.seo) {
             promise.then(processSeo.bind(this));
         }
@@ -136,7 +140,7 @@ module.exports = {
         if (options.isForm) {
             promise.then(processForm.bind(this, params));
         }
-        promise.val(callback.bind(this));
+        promise.val(controller.bind(this));
 
         function fail(err) {
             this.app.session.persist({

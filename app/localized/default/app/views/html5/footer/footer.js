@@ -17,7 +17,11 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        return _.extend({}, data);
+        var currentRoute = this.app.session.get('currentRoute');
+
+        return _.extend({}, data, {
+            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'flow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true)
+        });
     },
     postRender: function() {
         $('body').on('change:location', this.changeLocation.bind(this));

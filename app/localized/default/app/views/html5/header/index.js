@@ -14,7 +14,7 @@ module.exports = Base.extend({
         
         return _.extend({}, data, {
             postingFlowEnabled: postingFlowEnabled,
-            postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow'
+            postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'flow'
         });
     },    
     postRender: function() {

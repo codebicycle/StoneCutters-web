@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -15,10 +16,8 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        this.options.categories = this.parentView.options.categories;
-        return _.extend({}, data, {
-            categories: this.options.categories.toJSON()
-        });
+        this.options.categories = data.categories;
+        return _.extend({}, data, {});
     },
     events: {
         'show': 'onShow',
@@ -32,7 +31,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['misc.ChooseASubcategory_Mob'], this.id, 'categories']);
+        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.ChooseASubcategory_Mob'], this.id, 'categories']);
         this.$el.removeClass('disabled');
         this.$('#category-' + category.id).trigger('show');
     },
@@ -57,7 +56,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('subcategorySubmit', [subcategory, this.parentView.dictionary[error]]);
+        this.parentView.$el.trigger('subcategorySubmit', [subcategory, translations[this.app.session.get('selectedLanguage') || 'en-US'][error]]);
     },
     onRestart: function(event) {
         event.preventDefault();

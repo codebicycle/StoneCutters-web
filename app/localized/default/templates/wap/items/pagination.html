@@ -1,0 +1,24 @@
+<table width="100%" border="0" bgcolor="#DDDDDD" cellspacing="0" cellpadding="4">
+    <tbody>
+        <tr>
+            <td align="center" style="border-top: solid thin #808080;">
+                <small style="display: block;">
+                    {% if paginator.has('previous') %}
+                        <a href="{{ paginator.get('previous') | link }}" >&lt;</a>
+                    {% endif %}
+                    {% for page in paginator.pages(5) %}
+                        {% if page.isCurrent %}
+                            <strong>{{ page.page }}</strong>
+                        {% else %}
+                            <a href="{{ page.url | link }}">{{ page.page }}</a>
+                        {% endif %}
+                        {{ ' | ' if not loop.last }}
+                    {% endfor %}
+                    {% if paginator.has('next') %}
+                        <a href="{{ paginator.get('next') | link }}" >&gt;</a>
+                    {% endif %}
+                </small>
+            </td>
+        </tr>
+    </tbody>
+</table>

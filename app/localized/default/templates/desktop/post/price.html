@@ -1,0 +1,4 @@
+{% if fields %}
+	{% from macros import PriceField %}
+	{{ PriceField(label = label, name = name, fields) }}
+{% endif %}

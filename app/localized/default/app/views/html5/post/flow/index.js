@@ -216,7 +216,7 @@ module.exports = Base.extend({
 
         var $loading = $('body > .loading').show();
         var query = {
-            postingSession: this.options.postingsession
+            postingSession: this.options.postingsession || this.options.postingSession
         };
         var user = this.app.session.get('user');
 

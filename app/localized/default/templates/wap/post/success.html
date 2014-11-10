@@ -36,16 +36,15 @@
         <small><a href="{{ '/' | link }}" style="color:#474747;" >{{ dictionary["misc.BackToStart_Mob"] }}</a></small>
     </td>
 </tr>
-<tr style="display: none;">
-    <td>
-        {% set templateName = template + '/partials/tracking.html' %}
-        {% include templateName %}
-    </td>
-</tr>
 <tr>
     <td>
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>
