@@ -1,13 +1,11 @@
-<div class="select-language">
-
-	<strong {{ ' class="drop open"' if languages.list|length >= 1 }}>{{ languages.selected.name }}</strong>
-
-	{% if languages.list|length >= 1 %}
-		<ul class="footer-links">
-		{% for language in languages.list %}
-			<li><a href="{{ url | link({language: language.locale}) }}" rel="nofollow" class="footer-link" data-pass-thru="true" data-language="{{ language.locale }}" >{{language.name}}</a></li>
-		{% endfor %}
-		</ul>
-	{% endif %}
-</div>
-<a target="_blank" href="{{ '/terms' | link }}" rel="nofollow" class="terms-link"> {{ dictionary["terms.TermsOfUse"] }}</a>
+{% if languages.list|length >= 1 %}
+    <div class="select-language">
+    	<strong class="drop open">{{ languages.selected.name }}</strong>
+        <ul class="footer-links">
+        {% for language in languages.list %}
+            <li><a href="{{ url | link({language: language.locale}) }}" rel="nofollow" class="footer-link" data-pass-thru="true" data-language="{{ language.locale }}" >{{language.name}}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+<a target="_blank" href="{{ '/terms' | link }}" rel="nofollow" class="terms-link {{ 'right' if languages.list|length >= 1 }}"> {{ dictionary["terms.TermsOfUse"] }}</a>
