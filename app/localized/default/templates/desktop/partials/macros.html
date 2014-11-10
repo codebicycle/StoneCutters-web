@@ -84,7 +84,7 @@
         {% for option in options %}
             <option
                 value="{{ option.key }}"
-                
+
                 {% if not selected and loop.index == 1 or option.key == selected %}
                     selected
                 {% endif %}
@@ -106,7 +106,7 @@
                 {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.selected, related = field.related) }}
             {% endif %}
             {% if hint %}
-                <small class="hint message">{{ hint }}</small>
+                <small class="{% if field.name == 'email' %}icons icon-lock {% endif %}hint message">{{ hint }}</small>
             {% endif %}
         </div>
     </fieldset>
