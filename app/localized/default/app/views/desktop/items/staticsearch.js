@@ -3,13 +3,16 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/staticsearch');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../collections/filters');
+var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
     id: 'items-staticsearch-view',
     className: 'items-staticsearch-view',
     tagName: 'main',
     order: ['parentcategory','state','city'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
+    regexpReplaceCategory: /(c-[0-9]+)/,
     events: {
         'click .sub-categories li a': 'categoryFilter',
         'click .clean-filters': 'cleanFilters',
@@ -17,18 +20,17 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var link = this.app.session.get('path');
+        var link = this.cleanPage(this.app.session.get('path'));
 
         this.filters = data.filters;
         this.filters.order = this.order;
-
         _.each(data.items, this.processItem, data);
 
         return _.extend({}, data, {
-            items: data.items,
             nav: {
                 link: link,
-                listAct: 'active',
+                linkig: helpers.common.linkig.call(this, link, null, 'qig'),
+                listAct: 'active'
             }
         });
     },
@@ -68,13 +70,10 @@ module.exports = Base.extend({
 
         var path = this.app.session.get('path');
         var $target = $(event.currentTarget);
-        var filterSlug = $target.data('filter-slug');
+        var filterId = $target.data('filter-id');
 
-        if (!filterSlug) {
-            filterSlug  = ['/nf/des-cat-', $target.data('filter-id'), '/'].join('');
-        }
-
-        path = path.replace('/q/', filterSlug);
+        path = this.cleanPath(path);
+        path = path.replace(/(\/q\/[^\/\s]+)(\/-.+)?/, '$1/c-' + filterId + '$2');
         path = this.refactorPath(path);
         this.app.router.redirectTo(path);
     },
@@ -89,15 +88,20 @@ module.exports = Base.extend({
     },
     cleanPath: function(path) {
         path = this.refactorPath(path);
-        path = path.replace(this.regexpReplaceCategory, 'search');
+        path = path.replace(this.regexpReplaceCategory, '');
+        return path;
+    },
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
         return path;
     },
     processItem: function(item) {
-        var expregsearch = new RegExp(this.search, 'gi');
+        var regexp = new RegExp(this.search, 'gi');
+        var replace = ['<strong>', this.search, '</strong>'].join('');
 
-        item.date.since = helpers.timeAgo(item.date);
-        item.description = item.description.replace(expregsearch,'<strong>'+this.search+'</strong>');
-        item.title = item.title.replace(expregsearch,'<strong>'+this.search+'</strong>');
+        item.description = item.description.replace(regexp, replace);
+        item.title = item.title.replace(regexp, replace);
     }
-
 });

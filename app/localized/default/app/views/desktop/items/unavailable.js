@@ -15,8 +15,6 @@ module.exports = Base.extend({
         var link = 'nf/all-results';
 
         data.category_name = this.options.category_name;
-        _.each(data.relatedItems, this.processItem);
-
         return _.extend({}, data, {
             items: data.relatedItems,
             nav: {
@@ -25,9 +23,6 @@ module.exports = Base.extend({
                 galeryAct: 'active'
             }
         });
-    },
-    processItem: function(item) {
-        item.date.since = helpers.timeAgo(item.date);
     }
 });
 

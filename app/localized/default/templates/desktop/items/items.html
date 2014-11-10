@@ -2,7 +2,7 @@
 {% for item in items %}
     <li>
         <a href="{{ item | slugToUrl | link }}" data-qa="item-list" >
-            <figure class="items-image {{ 'lines' if item.thumbnail else 'icons icon-photo' }}">
+            <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
                 {% if item.thumbnail %}
                     <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
                 {% endif %}

@@ -8,9 +8,6 @@ module.exports = function(dataAdapter, excludedUrls) {
         var closedPath = path.resolve('server/templates/closed.html');
         var translations = require('../../app/translations');
 
-        _.templateSettings = {
-            interpolate: /\{\{(.+?)\}\}/g
-        };
         return function middleware(req, res, next) {
             if (req.path !== '/closed') {
                 return next();

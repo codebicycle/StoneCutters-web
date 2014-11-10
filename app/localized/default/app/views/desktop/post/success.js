@@ -16,8 +16,6 @@ module.exports = Base.extend({
         if(data.item.location.children[0].children[0].children[0]){
             data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
         }
-        data.item.date.since = helpers.timeAgo(data.item.date);
-
         return _.extend({}, data, {
             breadcrumb: helpers.breadcrumb.get.call(this, data)
         });

@@ -3,7 +3,7 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/search');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../collections/filters');
+var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
     id: 'items-search-view',
@@ -21,14 +21,12 @@ module.exports = Base.extend({
         'click .clean-filters': 'cleanFilters',
         'click .filter-title': 'toogleFilter'
     },
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.cleanPage(this.app.session.get('path'));
 
         this.filters = data.filters;
         this.filters.order = this.order;
-        _.each(data.items, this.processItem);
 
         return _.extend({}, data, {
             items: data.items,
