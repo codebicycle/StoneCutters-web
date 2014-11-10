@@ -358,6 +358,26 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
     })();
 
+    (function statsD() {
+        app.get('/tracking/statsd.gif', handler);
+
+        function handler(req, res) {
+            var gif = new Buffer(image, 'base64');
+            var metric = req.param('metric');
+            var value = req.param('value');
+
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', gif.length);
+            res.end(gif);
+
+            if (!metric) {
+                return;
+            }
+            console.log(metric, value);
+            statsd.increment(metric, value);
+        }
+    })();
+
     function isBot(userAgent, platform, osName, osVersion) {
         if (/googlebot/i.test(userAgent)) {
             return 'google';
