@@ -46,6 +46,17 @@ module.exports = function(dataAdapter, excludedUrls) {
                     res.redirect(host + req.originalUrl);
                 })();
             }
+            else if (countryCode === 'PT' || countryCode === 'pt') {
+                return (function portugal() {
+                    var origin = req.get('host').split(':');
+                    var host = req.protocol + '://www.olx.pt';
+
+                    if (origin.length > 1) {
+                        host += ':' + origin[1];
+                    }
+                    res.redirect(host + req.originalUrl);
+                })();
+            }
             else if (countryCode === 'VE' || countryCode === 've') {
                 countryCode = 'VZ';
             }
