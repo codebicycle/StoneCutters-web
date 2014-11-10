@@ -9,7 +9,6 @@
         {% if item.images.length > 0 %}
             <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-gallery-image />
         {% endif %}
-        <p>{{ item | log }}</p>
     </figure>
     {% if item.images.length > 1 %}
         <div class="image-navigator" data-gallery-navigator >
