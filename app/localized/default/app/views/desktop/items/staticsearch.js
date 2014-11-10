@@ -3,7 +3,7 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/staticsearch');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../collections/filters');
+var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
     id: 'items-staticsearch-view',

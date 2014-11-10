@@ -4,7 +4,7 @@ var Base = require('../bases/collection');
 var _ = require('underscore');
 var Item = require('../models/item');
 var helpers = require('../helpers');
-var Filters = require('./filters');
+var Filters = require('../modules/filters');
 var Paginator = require('../modules/paginator');
 
 module.exports = Base.extend({
