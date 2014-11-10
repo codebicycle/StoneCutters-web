@@ -47,15 +47,34 @@
     .actions {
         float: right;
         margin-top: 8px;
-        a{
-            action-button(#f9f9f9, #666, 3px, 6px 15px);
+        a {
+            background: $greyBoxBg;
+            background: -moz-linear-gradient(top, $greyBoxBg 0%, #f1f1f1 100%);
+            background: -ms-linear-gradient(top, $greyBoxBg 0%,#f1f1f1 100%);
+            background: linear-gradient(to bottom, $greyBoxBg 0%,#f1f1f1 100%);
+            border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
+            border-radius(3px);
+            border-style: solid;
+            border-width: 1px;
+            color: $black;
+            padding: 6px 15px;
+            text-align: center;
+            text-shadow: 0 1px 0 $white;
             font-size: $xs;
 
             &.addToFavorites {
                 margin-right: 10px;
             }
             &:hover{
-                action-button(#999, #fff, 3px, 6px 15px);
+                background: $greyBoxBg;
+                background: -moz-linear-gradient(top,  #f6f6f6 0%,$greyBoxBg 100%);
+                background: -ms-linear-gradient(top, #f6f6f6 0%,$greyBoxBg 100%);
+                background: linear-gradient(to bottom, #f6f6f6 0%,$greyBoxBg 100%);
+                text-decoration: none;
+            }
+             &:active {
+                background: #eee;
+                border-color: #999;
             }
         }
     }
