@@ -1,11 +1,11 @@
 'use strict';
 
 var _ = require('underscore');
-var Base = require('../bases/collection');
-var Filter = require('../models/filter');
-var utils = require('../../shared/utils');
-var config = require('../modules/filters/config');
-var transformers = require('../modules/filters/transformers');
+var Backbone = require('backbone');
+var Filter = require('./filter');
+var utils = require('../../../shared/utils');
+var config = require('./config');
+var transformers = require('./transformers');
 
 var filters = utils.get(config, ['filters'], {});
 var defaultOrder = Object.keys(filters);
@@ -13,9 +13,15 @@ var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g;
 var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g;
 var regexpSort = /([a-zA-Z0-9_]*)(desc)/g;
 var booleans = ['true', 'false'];
+var Base;
 
-function initialize() {
-    if (this.options && this.options.path) {
+Backbone.noConflict();
+Base = Backbone.Collection;
+
+function initialize(models, options) {
+    this.options = options || {};
+    this.app = this.options.app;
+    if (this.options.path) {
         this.load(this.options.path);
     }
 }
@@ -248,9 +254,7 @@ function comparator(filterA, filterB) {
 
 function smaugize() {
     var params = {};
-    var sort = {
-        name: 'sort'
-    };
+    var sort;
     var name;
     var value;
 
@@ -277,8 +281,8 @@ function smaugize() {
                 break;
         }
     });
-    if (this.has(sort)) {
-        sort = this.get(sort);
+    if (this.has('sort')) {
+        sort = this.get('sort');
         sort = sort.get('value').replace(regexpSort, '$1#$2').split('#');
         params['s.' + sort[0]] = sort[1] || 'asc';
     }

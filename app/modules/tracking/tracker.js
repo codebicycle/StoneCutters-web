@@ -106,10 +106,16 @@ function generate(query) {
         urls: [],
         params: {}
     };
+    var trackerName;
 
-    _.each(trackers, function(tracker, name) {
-        tracker.call(this, tracking, page, query.params);
-    }, this);
+    try {
+        _.each(trackers, function(tracker, name) {
+            trackerName = name;
+            tracker.call(this, tracking, page, query.params);
+        }, this);
+    } catch(e) {
+        console.log('[OLX_DEBUG]', 'Tracking not found |', trackerName);
+    }
     return tracking;
 }
 
