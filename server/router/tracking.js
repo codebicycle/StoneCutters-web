@@ -373,7 +373,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (!metric) {
                 return;
             }
-            console.log(metric, value);
             statsd.increment(metric, value);
         }
     })();
