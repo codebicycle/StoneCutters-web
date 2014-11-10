@@ -5,7 +5,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var asynquence = require('asynquence');
         var statsd = require('../modules/statsd')();
-        var comCountries = ['TN', 'US', 'NL', 'VN', 'MC', 'DZ'];
+        var comCountries = ['tn', 'us', 'nl', 'vn', 'mc', 'dz'];
 
         function endsWith(str, suffix) {
             return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -33,24 +33,24 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
 
-            countryCode = countryCode.toUpperCase();
+            countryCode = countryCode.toLowerCase();
 
             if (_.contains(comCountries, countryCode)) {
                 return next();
             }
             else {
-                if (countryCode === 'TH') {
+                if (countryCode === 'th') {
                     return (function thailand() {
                         res.redirect(setUrl('www.olx.co.th'));
                     })();
                 }
-                else if (countryCode === 'PT') {
+                else if (countryCode === 'pt') {
                     return (function portugal() {
                         res.redirect(setUrl('www.olx.pt'));
                     })();
                 }
-                else if (countryCode === 'VE') {
-                    countryCode = 'VZ';
+                else if (countryCode === 've') {
+                    countryCode = 'vz';
                 }
             }
 
