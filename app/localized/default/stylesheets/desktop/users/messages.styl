@@ -35,8 +35,13 @@
     ul {
         ul-reset();
         li {
-            padding: 10px 20px;
             border-bottom: 1px solid $greyBorders;
+            font-weight: bold;
+            padding: 10px 20px;
+            &.read {
+                background: $greyPageBg;
+                font-weight: normal;
+            }
         }
     }
     .backToOlx {
@@ -100,6 +105,5 @@
             margin-right: 10px;
             vertical-align: middle;
         }
-
     }
 }

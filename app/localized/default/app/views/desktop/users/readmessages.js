@@ -15,6 +15,40 @@ module.exports = Base.extend({
             message: this.message
         });
     },
+    postRender: function() {
+        var messageId = $('[data-message-reply]').data('messageId');
+        var messageRead = $('[data-message-reply]').data('messageRead');
+        var user = this.app.session.get('user');
+
+        if (!messageRead) {
+            var prepare = function(done) {
+               if (!user) {
+                    done.abort();
+                    return helpers.common.redirect.call(this.app.router, '/login', null, {
+                        status: 302
+                    });
+                }
+                done();
+            }.bind(this);
+
+            var markRead = function(done) {
+                helpers.dataAdapter.post(this.app.req, ('/users/' + user.userId + '/messages/' + messageId + '/markRead'), {
+                    query: {
+                        token: user.token
+                    },
+                    cache: false
+                }, done);
+            }.bind(this);
+
+            var error = function(err) {
+                console.log('Error :: Mark Message as read');
+            }.bind(this);
+
+            asynquence().or(error)
+                .then(prepare)
+                .then(markRead);
+        }
+    },
     events: {
         'submit': 'onSubmit'
     },
