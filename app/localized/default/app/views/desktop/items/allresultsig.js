@@ -6,7 +6,6 @@ var _ = require('underscore');
 module.exports = Base.extend({
     id: 'items-allresultsig-view',
     className: 'items-allresultsig-view',
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.cleanPage(this.app.session.get('path'));

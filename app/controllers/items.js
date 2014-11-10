@@ -19,6 +19,7 @@ module.exports = {
     searchfilter: middlewares(searchfilter),
     searchig: middlewares(searchig),
     search: middlewares(search),
+    staticSearchig: middlewares(staticSearchig),
     staticSearch: middlewares(staticSearch),
     allresults: middlewares(allresults),
     allresultsig: middlewares(allresultsig),
@@ -773,7 +774,12 @@ function search(params, callback, gallery) {
     }
 }
 
-function staticSearch(params, callback) {
+function staticSearchig(params, callback) {
+    params['f.hasimage'] = true;
+    staticSearch.call(this, params, callback, '-ig');
+}
+
+function staticSearch(params, callback, gallery) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -860,7 +866,7 @@ function staticSearch(params, callback) {
                 return done.fail(null, {});
             }
 
-            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999  || !res.items.length)) {
+            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999 || !res.items.length)) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
@@ -872,14 +878,15 @@ function staticSearch(params, callback) {
 
             if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, url);
+                return helpers.common.redirect.call(this, [url, (gallery ? '/' + gallery : '')].join(''));
             }
-            realPage = _items.paginate([url, '/[page][gallery][filter]'].join(''), query, {
-                page: page
+            realPage = _items.paginate([url, '/[page][gallery][filters]'].join(''), query, {
+                page: page,
+                gallery: gallery
             });
             if (realPage) {
                 done.abort();
-                return helpers.common.redirect.call(this, url + '-p-' + realPage);
+                return helpers.common.redirect.call(this, [url, '/-p-' + realPage, (gallery ? gallery : '')].join(''));
             }
             done(_items);
         }.bind(this);
@@ -901,7 +908,7 @@ function staticSearch(params, callback) {
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
-            callback(null, 'items/staticsearch', {
+            callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: meta,
                 filters: items.filters,

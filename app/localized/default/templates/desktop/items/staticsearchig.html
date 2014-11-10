@@ -4,11 +4,11 @@
         <nav id="listing-filters">
             {% include (template + '/items/filters.html') %}
         </nav>
-        <section id="listing-items">
+        <section id='listing-items'>
             {% set isStaticSearch = true %}
             {% set itemListingClass = 'staticsearch' %}
             {% include (template + '/items/locations.html') %}
-            {% include (template + '/items/list.html') %}
+            {% include (template + '/items/listig.html') %}
             {% if paginator.isEnabled() %}
                 {% include (template + '/items/pagination.html') %}
             {% endif %}

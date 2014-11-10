@@ -20,7 +20,6 @@ module.exports = Base.extend({
                 data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
             }
             data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
-            data.item.date.since = helpers.timeAgo(data.item.date);
         }
 
         return _.extend({}, data, {

@@ -13,16 +13,34 @@ module.exports = (function() {
     var linkIgParsers = (function() {
         var regexpFindPage = /-p-[0-9]+/;
         var regexpReplacePage = /(-p-[0-9]+)/;
+        var regexpFindFilters = /\/-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*.*/;
+        var regexpReplaceFilters = /(\/-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*.*)/;
         var regexpFindCategory = /[a-zA-Z0-9-]+-cat-[0-9]+/;
         var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
         var regexpFindGallery = /-ig/;
+
+        function qig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '/-ig$1');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) !== '/') {
+                    path += '/';
+                }
+                path += '-ig';
+            }
+            return path;
+        }
 
         function searchig(path) {
             if (path.match(regexpFindPage)) {
                 path = path.replace(regexpReplacePage, '$1-ig');
             }
-            else if (path.match(regexpFindCategory)) {
-                path = path.replace(regexpReplaceCategory, '$1-ig');
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '/-ig$1');
             }
             if (!path.match(regexpFindGallery)) {
                 if (path.slice(path.length - 1) !== '/') {
@@ -35,7 +53,10 @@ module.exports = (function() {
 
         function allresultsig(path) {
             if (path.match(regexpFindPage)) {
-                path = path.replace(regexpReplacePage, '-ig$1');
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '-ig$1');
             }
             if (!path.match(regexpFindGallery)) {
                 if (path.slice(path.length - 1) === '/') {
@@ -50,6 +71,9 @@ module.exports = (function() {
             if (path.match(regexpFindPage)) {
                 path = path.replace(regexpReplacePage, '$1-ig');
             }
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '-ig$1');
+            }
             else if (path.match(regexpFindCategory)) {
                 path = path.replace(regexpReplaceCategory, '$1-ig');
             }
@@ -63,6 +87,7 @@ module.exports = (function() {
         }
 
         return {
+            qig: qig,
             searchig: searchig,
             allresultsig: allresultsig,
             showig: showig

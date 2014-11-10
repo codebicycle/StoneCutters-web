@@ -5,17 +5,12 @@ var _ = require('underscore');
 var helpers = require('../../../../../helpers');
 
 module.exports = Base.extend({
-    className: 'items_success_view',
-    wapAttributes: {
-        cellpadding: 0
-    },
+    className: 'items_staticsearchig_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
-        });
+        return _.extend({}, data);
     }
 });
 
-module.exports.id = 'items/success';
+module.exports.id = 'items/staticsearchig';
