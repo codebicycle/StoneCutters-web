@@ -1,5 +1,5 @@
 <div class="filter_order">
-	<span>{{ metadata.total }} {{ dictionary["itemcategorypath.Ads"] }}</span>
+	<span>{{ meta.total }} {{ dictionary["itemcategorypath.Ads"] }}</span>
 	{% if filtersEnabled %}
 		<a href="{{ [url, 'sort'] | join('/') | link }}" class="btnfilter btnsort">{{ dictionary["unavailableitemrelateditems.SortBy"] }}</a>
 		<a href="{{ [url, 'filter'] | join('/') | link }}" class="btnfilter btnfil">{{ dictionary["mobilepromo.Filters"] }}</a>

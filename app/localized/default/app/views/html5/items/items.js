@@ -18,7 +18,8 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
+        //console.log(data);
+        console.log(data.parentView);
         return _.extend({}, data, {
             items: this.items
         });
