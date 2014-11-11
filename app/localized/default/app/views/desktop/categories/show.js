@@ -11,9 +11,6 @@ module.exports = Base.extend({
     order: ['pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
-    events: {
-        'keydown .range input': 'onlyNumbers'
-    },
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -42,13 +39,5 @@ module.exports = Base.extend({
             path = path.replace(this.regexpReplacePage, '');
         }
         return path;
-    },
-    onlyNumbers: function(event) {
-        if ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (event.keyCode == 65 && event.ctrlKey === true) || (event.keyCode >= 35 && event.keyCode <= 39)) {
-            return;
-        }
-        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
-            event.preventDefault();
-        }
     }
 });

@@ -14,7 +14,8 @@ module.exports = Base.extend({
         'click .check-box input': 'selectFilter',
         'click .range-submit': 'rangeFilterInputs',
         'click .link-range': 'rangeFilterLinks',
-        'click .sub-categories li a': 'categoryFilter'
+        'click .sub-categories li a': 'categoryFilter',
+        'keydown .range input': 'onlyNumbers'
     },
     postRender: function() {
         if (!this.filters) {
@@ -157,6 +158,14 @@ module.exports = Base.extend({
         path = path.replace('/search/', filterSlug);
         path = this.refactorPath(path);
         this.app.router.redirectTo(path);
+    },
+    onlyNumbers: function(event) {
+        if ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (event.keyCode == 65 && event.ctrlKey === true) || (event.keyCode >= 35 && event.keyCode <= 39)) {
+            return;
+        }
+        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+            event.preventDefault();
+        }
     }
 });
 
