@@ -54,7 +54,7 @@ function pageview(params, options) {
     var atiEnabled = ati.isEnabledServer.call(this, page);
 
     if (analyticsEnabled || atiEnabled) {
-        return utils.params('/analytics/pageview.gif?', params);
+        return utils.params('/tracking/pageview.gif?', params);
     }
 }
 
