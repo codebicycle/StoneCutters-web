@@ -6,6 +6,9 @@ var helpers = require('../../../../../helpers');
 
 module.exports = Base.extend({
     className: 'pages_help_view',
+    wapAttributes: {
+        cellpadding: 0
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var brand = data.dictionary["biderrorheader.My OLX"];
