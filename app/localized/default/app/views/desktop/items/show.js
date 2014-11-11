@@ -3,6 +3,7 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
+var statsd = require('../../../../../../../shared/statsd')();
 var asynquence = require('asynquence');
 
 module.exports = Base.extend({
@@ -83,20 +84,25 @@ module.exports = Base.extend({
 
         var success = function(done, data) {
             var $replySuccess = $('.replySuccess');
-            var category = $('.itemCategory').val();
-            var subcategory = $('.itemSubcategory').val();
 
             $('.comment').val('');
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
             $replySuccess.removeClass('hide');
+            done(data);
+        }.bind(this);
+
+        var trackEvent = function(done, data) {
+            var category = $('.itemCategory').val();
+            var subcategory = $('.itemSubcategory').val();
+
             this.track({
                 category: 'Reply',
                 action: 'ReplySuccess',
                 custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
             });
-            done(data);
+            done();
         }.bind(this);
 
         var trackTracking = function(done, data) {
@@ -112,18 +118,11 @@ module.exports = Base.extend({
         }.bind(this);
 
         var trackGraphite = function(done) {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+            var location = this.app.session.get('location');
+            var platform = this.app.session.get('platform');
 
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'reply,success',
-                    location: this.app.session.get('location').name,
-                    platform: this.app.session.get('platform')
-                }),
-                cache: false
-            })
-            .done(done)
-            .fail(done.fail);
+            statsd.increment([location.name, 'reply', 'success', platform]);
+            done();
         }.bind(this);
 
         var always = function() {
@@ -135,24 +134,16 @@ module.exports = Base.extend({
         }.bind(this);
 
         var trackFail = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+            var location = this.app.session.get('location');
+            var platform = this.app.session.get('platform');
 
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'reply,error',
-                    location: this.app.session.get('location').name,
-                    platform: this.app.session.get('platform')
-                }),
-                cache: false
-            });
+            statsd.increment([location.name, 'reply', 'error', platform]);
         }.bind(this);
 
         asynquence().or(fail)
                 .then(validate)
                 .then(post)
-                .then(success)
-                .then(trackTracking)
-                .then(trackGraphite);
+                .gate(success, trackEvent, trackTracking, trackGraphite);
 
     },
     validateForm: function(email, name, comment) {

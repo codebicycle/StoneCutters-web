@@ -20,11 +20,7 @@ module.exports = Base.extend({
         $('body').on('change:location', this.changeLocation.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
-        this.attachTrackMe(this.className, function(category, action) {
-            return {
-                custom: [category, '-', '-', action].join('::')
-            };
-        });
+        this.attachTrackMe();
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {

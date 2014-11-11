@@ -60,52 +60,15 @@ module.exports = Base.extend({
         });
     },
     track: function(data, callback, options) {
-        var obj = {};
-        var tracking = {};
-        var $img = $('img.analytics');
-
-        if (callback && !_.isFunction(callback)) {
-            options = callback;
-            callback = $.noop;
-        }
-        if ($img.length) {
-            tracking = $img.last().attr('src');
-            tracking = $.deparam(tracking.replace(/\/analytics\/(pageview|graphite)\.gif\?/, ''));
-        }
-        obj = _.defaults(obj, data, tracking, {
-            url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
-        });
-        options = _.defaults((options || {}), {
-            url: '/analytics/pageevent.gif',
-            type: 'GET',
-            global: false,
-            cache: false,
-            data: obj,
-            always: (callback || $.noop)
-        });
-        $.ajax(options);
+        $('#partials-tracking-view').trigger('fireTrackEvent', [data, options]);
     },
-    attachTrackMe: function(context, handler) {
+    attachTrackMe: function(handler) {
         this.$('.trackMe').on('click', function(e) {
-            var $this = $(e.currentTarget);
-            var data = $this.data('tracking');
-            var obj;
-            var category;
-            var action;
-
-            if (data && !$this.hasClass('disabled') && !$this.hasClass('opaque')) {
-                data = data.split('-');
-
-                if (data.length === 2) {
-                    category = data[0];
-                    action = data[1];
-                    obj = _.defaults((handler || $.noop).apply($this, data) || {}, {
-                        category: category,
-                        action: action
-                    });
-                    this.track(obj);
-                }
-            }
+            $('#partials-tracking-view').trigger('trackEvent', [e.currentTarget, handler || function(category, action) {
+                return {
+                   custom: [category, '-', '-', action].join('::')
+                };
+            }.bind(this)]);
         }.bind(this));
     },
     onActionStart: utils.noop,

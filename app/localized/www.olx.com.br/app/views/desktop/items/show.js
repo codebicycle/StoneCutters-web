@@ -1,7 +1,10 @@
+'use strict';
+
 var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
+var helpers = require('../../../../../../helpers');
+var statsd = require('../../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -27,10 +30,8 @@ module.exports = Base.extend({
                 newImg.onload = function() {
                     $('#photos .bigPhoto').css('background-image', 'url(' + image + ')');
                 };
-                
             }
         });
-        
 
 		that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
 
@@ -90,8 +91,6 @@ module.exports = Base.extend({
 
             var success = function(done, data) {
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-                var category = $('.itemCategory').val();
-                var subcategory = $('.itemSubcategory').val();
 
                 $('.message').val('');
                 $('.name').val('');
@@ -99,28 +98,26 @@ module.exports = Base.extend({
                 $('.phone').val('');
                 
                 $('.replySuccses').removeClass('hide');
+            }.bind(this);
+
+            var trackEvent = function(done) {
+                var category = $('.itemCategory').val();
+                var subcategory = $('.itemSubcategory').val();
+
                 this.track({
                     category: 'Reply',
                     action: 'ReplySuccess',
                     custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
                 });
-                
-                
+                done();
             }.bind(this);
 
-            var track = function(done) {
-                var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+            var trackGraphite = function(done) {
+                var location = this.app.session.get('location');
+                var platform = this.app.session.get('platform');
 
-                $.ajax({
-                    url: helpers.common.link(url, this.app, {
-                        metric: 'reply,success',
-                        location: this.app.session.get('location').name,
-                        platform: this.app.session.get('platform')
-                    }),
-                    cache: false
-                })
-                .done(done)
-                .fail(done.fail);
+                statsd.increment([location.name, 'reply', 'success', platform]);
+                done();
             }.bind(this);
 
             var fail = function(data) {
@@ -131,27 +128,20 @@ module.exports = Base.extend({
             }.bind(this);
 
             var trackFail = function() {
-                var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+                var location = this.app.session.get('location');
+                var platform = this.app.session.get('platform');
 
-                $.ajax({
-                    url: helpers.common.link(url, this.app, {
-                        metric: 'reply,error',
-                        location: this.app.session.get('location').name,
-                        platform: this.app.session.get('platform')
-                    }),
-                    cache: false
-                });
+                statsd.increment([location.name, 'reply', 'error', platform]);
             }.bind(this);
 
             var always = function() {
                 $('.loading').addClass('hide');
             }.bind(this);
 
-
             asynquence().or(fail)
                 .then(validate)
                 .then(post)
-                .gate(success, track);
+                .gate(success, trackEvent, trackGraphite);
         }.bind(this));
 		
 		this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
@@ -163,7 +153,7 @@ module.exports = Base.extend({
             }
         });
 		
-		this.attachTrackMe(this.className, function(category, action) {
+		this.attachTrackMe(function(category, action) {
             var itemId = $('.itemId').val();
             var itemCategory = $('.itemCategory').val();
             var itemSubcategory = $('.itemSubcategory').val();
