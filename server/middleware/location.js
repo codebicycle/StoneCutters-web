@@ -26,6 +26,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             var siteLocation;
             var previousLocation;
 
+            if (typeof location === 'string' && !location) {
+                return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'location'));
+            }
             if (platform === 'desktop') {
                 siteLocation = req.rendrApp.session.get('siteLocation');
                 if (location) {
