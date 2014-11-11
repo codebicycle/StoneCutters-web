@@ -41,6 +41,12 @@ module.exports = {
             'nf/search/:search/-p-:page/filter',
             'nf/search/:search/:filters/filter',
             'nf/search/:search/filter',
+            ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/filter',
+            '-cat-:catId([0-9]+)-p-:page([0-9]+)/filter',
+            'cat-:catId([0-9]+)-p-:page([0-9]+)/filter',
+            ':title-cat-:catId([0-9]+)/filter',
+            '-cat-:catId([0-9]+)/filter',
+            'cat-:catId([0-9]+)/filter',
         ]
     },
     'items#sort': {
@@ -49,6 +55,12 @@ module.exports = {
             'nf/search/:search/-p-:page/sort',
             'nf/search/:search/:filters/sort',
             'nf/search/:search/sort',
+            ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/sort',
+            '-cat-:catId([0-9]+)-p-:page([0-9]+)/sort',
+            'cat-:catId([0-9]+)-p-:page([0-9]+)/sort',
+            ':title-cat-:catId([0-9]+)/sort',
+            '-cat-:catId([0-9]+)/sort',
+            'cat-:catId([0-9]+)/sort',
         ]
     },
     'items#searchig': {
