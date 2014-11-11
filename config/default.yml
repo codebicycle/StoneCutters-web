@@ -60,7 +60,6 @@ middleware:
       - /tracking
       - /tracking/pageview.gif
       - /tracking/event.gif
-      - /tracking/graphite.gif
       - /tracking/statsd.gif
       - /force
       - /force/wap
