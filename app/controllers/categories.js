@@ -31,6 +31,9 @@ function list(params, callback) {
 }
 
 function showig(params, callback) {
+    if (this.app.session.get('platform') !== 'desktop') {
+        return helpers.common.redirect.call(this, this.app.session.get('url').replace('-ig', ''));
+    }
     params['f.hasimage'] = true;
     show.call(this, params, callback, '-ig');
 }
