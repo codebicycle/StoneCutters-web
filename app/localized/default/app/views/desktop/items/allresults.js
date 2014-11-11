@@ -15,11 +15,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var link = 'nf/all-results';
 
-        this.filters = data.filters;
-        this.filters.order = this.order;
-
         return _.extend({}, data, {
-            items: data.items,
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'allresultsig'),
