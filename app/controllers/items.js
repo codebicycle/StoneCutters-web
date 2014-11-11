@@ -142,16 +142,17 @@ function show(params, callback) {
             var slug = helpers.common.slugToUrl(response.item.toJSON());
             var protocol = this.app.session.get('protocol');
             var host = this.app.session.get('host');
+            var itemLocation = response.item.getLocation().url || response.item.get('location').url;
             var url;
 
-            if (platform === 'desktop' && response.item.getLocation().url !== this.app.session.get('siteLocation')) {
+            if (platform === 'desktop' && itemLocation && itemLocation !== this.app.session.get('siteLocation')) {
                 url = [protocol, '://', host, '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
                     query: {
-                        location: response.item.getLocation().url
+                        location: itemLocation
                     }
                 });
             }
@@ -170,7 +171,7 @@ function show(params, callback) {
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
                     query: {
-                        location: response.item.getLocation().url
+                        location: itemLocation
                     }
                 });
             }
