@@ -5,6 +5,7 @@ var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
+var statsd = require('../../../../../../../../shared/statsd')();
 window.URL = window.URL || window.webkitURL;
 
 function onpopstate(event) {
@@ -241,17 +242,8 @@ module.exports = Base.extend({
             trackFail(track);
         }.bind(this);
 
-        var trackFail = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
-
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'post,error',
-                    location: this.app.session.get('location').name,
-                    error: track || 'error'
-                }),
-                cache: false
-            });
+        var trackFail = function(track) {
+            statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
         }.bind(this);
 
         var success = function(item) {

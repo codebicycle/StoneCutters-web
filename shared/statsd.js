@@ -1,5 +1,7 @@
 'use strict';
 
+var helpers = require('../app/helpers');
+
 module.exports = function(options) {
     if (typeof window === 'undefined') {
         var statsdModule = '../server/modules/statsd';
@@ -7,6 +9,22 @@ module.exports = function(options) {
         return require(statsdModule)(options);
     }
     return {
-        send: function() {}
+        increment: increment
     };
 };
+
+function increment(metric, value) {
+    var url = '/tracking/statsd.gif';
+
+    if (Array.isArray(metric)) {
+        metric = metric.join('.');
+    }
+    url += '?metric=' + metric;
+    if (value !== undefined) {
+        url += '&value=' + value;
+    }
+    $.ajax({
+        url: url,
+        cache: false
+    });
+}

@@ -14,8 +14,6 @@ module.exports = Base.extend({
         'blur textarea': 'validateField',
         'submit': 'submitForm',
         'click .replySuccess span': 'showSubmit',
-        'mouseover [data-gallery-thumb]': 'updateGallery',
-        'click [data-gallery-navigator] [class*="arrow-"]': 'navigate',
         'click [data-fav]': 'addToFavorites'
     },
     getTemplateData: function() {
@@ -27,48 +25,6 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             showAdSenseItemBottom: showAdSenseItemBottom
         });
-    },
-    updateGallery: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        if(!$(event.currentTarget).hasClass('active')) {
-            var $image = $(event.currentTarget).find('img');
-            var image = $image.data('image');
-            var currentImage = $image.attr('src');
-            var newImg = new Image();
-
-            $('[data-gallery-thumb]').removeClass('active');
-            $(event.currentTarget).addClass('active');
-            $('[data-gallery-image]').attr('src', '').addClass('spinner');
-
-            newImg.src = image;
-            newImg.onload = function() {
-                $('[data-gallery-image]').removeClass('spinner').attr('src', image);
-            };
-        }
-    },
-    navigate: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var active = $('[data-gallery-thumb].active');
-
-        if ($(event.currentTarget).hasClass('arrow-prev')) {
-            if (active.prev('[data-gallery-thumb]').length > 0) {
-                active.prev().mouseover();
-            } else {
-                $('[data-gallery-thumb]').last().mouseover();
-            }
-        } else {
-            if (active.next('[data-gallery-thumb]').length > 0) {
-                active.next().mouseover();
-            } else {
-                $('[data-gallery-thumb]').first().mouseover();
-            }
-        }
     },
     showSubmit: function(event) {
         event.preventDefault();
