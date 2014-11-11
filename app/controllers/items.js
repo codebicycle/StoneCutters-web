@@ -1176,7 +1176,7 @@ function filter(params, callback) {
             }, {
                 readFromCache: false
             }, function afterFetch(err, res) {
-                done(res.items.metadata.filters);
+                done(res.items.meta.filters);
             }.bind(this));
         }.bind(this);
 

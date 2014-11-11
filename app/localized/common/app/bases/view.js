@@ -48,6 +48,7 @@ module.exports = Base.extend({
             dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'],
             referer: this.app.session.get('referer'),
             url: this.app.session.get('url'),
+            path: this.app.session.get('path'),
             href: this.app.session.get('href'),
             macros: template + '/partials/macros.html',
             currentRoute: this.app.session.get('currentRoute'),
