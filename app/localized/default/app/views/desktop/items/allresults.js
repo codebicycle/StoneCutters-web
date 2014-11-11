@@ -3,7 +3,6 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/allresults');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
     id: 'items-allresults-view',
@@ -27,19 +26,5 @@ module.exports = Base.extend({
                 listAct: 'active'
             }
         });
-    },
-    postRender: function() {
-        if (!this.filters) {
-            this.filters = new Filters(null, {
-                app: this.app,
-                path: this.app.session.get('path')
-            });
-        }
-    },
-    cleanPage: function(path) {
-        if (path.match(this.regexpFindPage)) {
-            path = path.replace(this.regexpReplacePage, '');
-        }
-        return path;
     }
 });
