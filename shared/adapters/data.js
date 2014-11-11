@@ -48,6 +48,14 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         }
         api = this.apiDefaults(api, req);
         api = _.extend(api, options);
+        if (req.rendrApp.session) {
+            api.query = api.query || {};
+            api.query.platform = req.rendrApp.session.get('platform');
+            if (api.method.toUpperCase() !== 'GET') {
+                api.data = api.data || {};
+                api.data.ipAddress = req.rendrApp.session.get('ip');
+            }
+        }
         done();
     }
 
@@ -268,7 +276,7 @@ DataAdapter.prototype.apiDefaults = function(api) {
     if (api.body && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
         api.json = api.body;
     }
-    if (api.method === 'GET') {
+    if (api.method.toUpperCase() === 'GET') {
         delete api.json;
         delete api.body;
         delete api.data;

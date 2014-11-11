@@ -39,6 +39,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.com());
         rendrApp.use(middleware.redirections());
         rendrApp.use(middleware.host());
+        rendrApp.use(middleware.bots());
         rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
         rendrApp.use(middleware.device());

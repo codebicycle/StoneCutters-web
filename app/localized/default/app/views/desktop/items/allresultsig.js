@@ -8,7 +8,7 @@ module.exports = Base.extend({
     className: 'items-allresultsig-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var link = this.cleanPage(this.app.session.get('path'));
+        var link = 'nf/all-results-ig';
 
         delete data.nav.listAct;
         return _.extend({}, data, {

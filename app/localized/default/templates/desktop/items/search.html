@@ -1,8 +1,8 @@
 {% if items.length > 0 %}
     {% include (template + "/partials/breadcrumb.html") %}
     <div class="wrapper-main">
-        <nav id="listing-filters">
-            {% include (template + '/items/filters.html') %}
+        <nav id="listing-nav">
+            {% view 'items/filters' %}
         </nav>
         <section id="listing-items">
             {% include (template + '/items/locations.html') %}

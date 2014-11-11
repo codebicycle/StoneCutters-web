@@ -890,13 +890,14 @@ function staticSearch(params, callback, gallery) {
             var meta = items.meta;
 
             this.app.seo.setContent(meta);
-            this.app.seo.set('staticSearch', {
-                keyword: query.search,
-                category: (subcategory || category ? (subcategory || category).get('trName') : '')
-            });
-            if (meta.total < 5) {
+
+            if (meta.total <= 1) {
                 this.app.seo.addMetatag('robots', 'noindex, follow');
                 this.app.seo.addMetatag('googlebot', 'noindex, follow');
+            }
+            if (meta.total === 0) {
+                this.app.seo.addMetatag('robots', 'noindex, nofollow');
+                this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
 
             tracking.addParam('page_nb', meta.totalPages);

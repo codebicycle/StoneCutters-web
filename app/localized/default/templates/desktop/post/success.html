@@ -36,7 +36,7 @@
 		<div class="wrapper">
 			<h1 class="item-title">{{ item.title }}</h1>
 			{% include (template + "/items/iteminfo.html") %}
-			{% include (template + "/items/imagegallery.html") %}
+			{% view 'items/imagegallery' %}
 	    	{% include (template + "/items/itemprice.html") %}
 	    	{% include (template + "/items/itemdescription.html") %}
 	    	{% include (template + "/items/itemlocation.html") %}
