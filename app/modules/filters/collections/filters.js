@@ -11,8 +11,13 @@ var filters = utils.get(config, ['filters'], {});
 var defaultOrder = Object.keys(filters);
 var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g;
 var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g;
-var regexpSort = /([a-zA-Z0-9_]*)(desc)/g;
+var regexpSort = /([a-zA-Z0-9_]*)(desc|\*to\*show)/g;
 var booleans = ['true', 'false'];
+var sorts = {
+    '': 'asc',
+    desc: 'desc',
+    '*to*showdesc': 'date*to*showdesc'
+};
 var Base;
 
 Backbone.noConflict();
@@ -89,7 +94,7 @@ function add(filter, options) {
     }
     if (filter.type === 'SELECT') {
         if (this.has(filter.name, filter.value)) {
-            return this.remove(filter);
+            return;
         }
         return addSelect.call(this, filter);
     }
@@ -242,31 +247,9 @@ function format() {
     if (this.has('sort')) {
         sort = this.get('sort');
         url.push('-sort_');
-        url.push(sort.get('value'));
+        url.push(sort.get('current').join(''));
     }
     return url.join('');
-}
-
-function getIndex(name) {
-    var indexOf = this.order.indexOf(name);
-
-    if (!~indexOf) {
-        return defaultOrder.indexOf(name);
-    }
-    return indexOf + 100;
-}
-
-function comparator(filterA, filterB) {
-    var indexOfA = getIndex.call(this, filterA.get('name'));
-    var indexOfB = getIndex.call(this, filterB.get('name'));
-
-    if (indexOfA > indexOfB) {
-        return 1;
-    }
-    else if (indexOfB > indexOfA) {
-        return -1;
-    }
-    return 0;
 }
 
 function smaugize() {
@@ -300,14 +283,44 @@ function smaugize() {
     });
     if (this.has('sort')) {
         sort = this.get('sort');
-        sort = sort.get('value').replace(regexpSort, '$1#$2').split('#');
-        params['s.' + sort[0]] = sort[1] || 'asc';
+        sort = sort.get('current').join('').replace(regexpSort, '$1#$2').split('#');
+        params['s.' + sort[0]] = sorts[sort[1]];
     }
     return params;
 }
 
+function toJSON(options) {
+    return this.sort().map(function(model) {
+        return model.toJSON(options); 
+    });
+}
+
+function getIndex(name) {
+    var indexOf = this.order.indexOf(name);
+
+    if (!~indexOf) {
+        return defaultOrder.indexOf(name);
+    }
+    return indexOf - 100;
+}
+
+function comparator(filterA, filterB) {
+    var indexOfA = getIndex.call(this, filterA.get('name'));
+    var indexOfB = getIndex.call(this, filterB.get('name'));
+
+    if (indexOfA > indexOfB) {
+        return 1;
+    }
+    else if (indexOfB > indexOfA) {
+        return -1;
+    }
+    return 0;
+}
+
 module.exports = Base.extend({
     model: Filter,
+    order: defaultOrder,
+    comparator: comparator,
     initialize: initialize,
     isActive: isActive,
     has: has,
@@ -318,8 +331,7 @@ module.exports = Base.extend({
     load: load,
     format: format,
     smaugize: smaugize,
-    comparator: comparator,
-    order: defaultOrder
+    toJSON: toJSON
 });
 
 module.exports.id = 'Filters';
