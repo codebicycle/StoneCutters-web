@@ -310,48 +310,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
     })();
 
-    (function graphiteGif() {
-        app.get('/tracking/graphite.gif', handler);
-
-        var metrics = {
-            pageview: function(req, options) {
-                statsd.increment([req.query.locNm, 'pageview', options.platform]);
-                statsd.increment([req.query.locNm, 'devices', options.osName, options.platform]);
-            },
-            reply: {
-                success: function(req, options) {
-                    statsd.increment([req.query.location, 'reply', 'success', options.platform]);
-                },
-                error: function(req, options) {
-                    statsd.increment([req.query.location, 'reply', 'error', options.platform]);
-                }
-            },
-            post: {
-                success: function(req, options) {
-                    statsd.increment([req.query.location, 'posting', 'success', options.platform]);
-                },
-                error: function(req, options) {
-                    statsd.increment([req.query.location, 'posting', req.query.error, options.platform]);
-                }
-            }
-        };
-
-        function noop() {}
-
-        function handler(req, res) {
-            var gif = new Buffer(image, 'base64');
-
-            res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', gif.length);
-            res.end(gif);
-
-            utils.get(metrics, (req.query.metric || '').split(','), noop)(req, {
-                platform: req.rendrApp.session.get('platform'),
-                osName: req.rendrApp.session.get('osName') || 'Others'
-            });
-        }
-    })();
-
     (function statsD() {
         app.get('/tracking/statsd.gif', handler);
 
