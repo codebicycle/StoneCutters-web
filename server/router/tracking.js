@@ -305,7 +305,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
             if (req.rendrApp.session.get('internet.org')) {
                 host = host.replace('olx', 'olx-internet-org');
             }
-            console.log('analyticsTracking');
             analyticsTracking(req, host);
             atiTracking(req);
         }
