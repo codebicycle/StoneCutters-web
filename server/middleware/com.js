@@ -5,7 +5,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var asynquence = require('asynquence');
         var statsd = require('../modules/statsd')();
-        var comCountries = ['tn', 'TN', 'us', 'US', 'nl', 'NL', 'vn', 'VN', 'mc', 'MC', 'dz', 'DZ'];
+        var comCountries = ['tn', 'us', 'nl', 'vn', 'mc', 'dz'];
 
         function endsWith(str, suffix) {
             return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -32,33 +32,26 @@ module.exports = function(dataAdapter, excludedUrls) {
                 statsd.increment(['Unknown Location', 'middleware', 'com', 'miss']);
                 return next();
             }
-            else if (_.contains(comCountries, countryCode)) {
+
+            countryCode = countryCode.toLowerCase();
+
+            if (_.contains(comCountries, countryCode)) {
                 return next();
             }
-            else if (countryCode === 'TH' || countryCode === 'th') {
-                return (function thailand() {
-                    var origin = req.get('host').split(':');
-                    var host = req.protocol + '://www.olx.co.th';
-
-                    if (origin.length > 1) {
-                        host += ':' + origin[1];
-                    }
-                    res.redirect(host + req.originalUrl);
-                })();
-            }
-            else if (countryCode === 'PT' || countryCode === 'pt') {
-                return (function portugal() {
-                    var origin = req.get('host').split(':');
-                    var host = req.protocol + '://www.olx.pt';
-
-                    if (origin.length > 1) {
-                        host += ':' + origin[1];
-                    }
-                    res.redirect(host + req.originalUrl);
-                })();
-            }
-            else if (countryCode === 'VE' || countryCode === 've') {
-                countryCode = 'VZ';
+            else {
+                if (countryCode === 'th') {
+                    return (function thailand() {
+                        res.redirect(setUrl('www.olx.co.th'));
+                    })();
+                }
+                else if (countryCode === 'pt') {
+                    return (function portugal() {
+                        res.redirect(setUrl('www.olx.pt'));
+                    })();
+                }
+                else if (countryCode === 've') {
+                    countryCode = 'vz';
+                }
             }
 
             asynquence().or(error)
@@ -81,6 +74,16 @@ module.exports = function(dataAdapter, excludedUrls) {
                 statsd.increment([country.name, 'middleware', 'com', 'redirection']);
                 res.header('Cache-Control', 'no-cache, no-store');
                 res.redirect(host + req.originalUrl);
+            }
+
+            function setUrl(url) {
+                var origin = req.get('host').split(':');
+                var host = req.protocol + '://' + url;
+
+                if (origin.length > 1) {
+                    host += ':' + origin[1];
+                }
+                return host + req.originalUrl;
             }
 
             function error(err) {
