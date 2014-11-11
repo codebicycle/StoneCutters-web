@@ -144,15 +144,12 @@ module.exports = Base.extend({
                 .then(validate)
                 .then(post)
                 .gate(success, trackEvent, trackTracking, trackGraphite);
-
     },
     validateForm: function(email, name, comment) {
         if((this.isEmpty(email, 'email') || this.isEmpty(name, 'name') || this.isEmpty(comment, 'comment')) && this.isEmail(email, 'email')) {
             return true;
-        }else{
-            return false;
         }
-
+        return false;
     },
     validateField: function(event) {
         event.preventDefault();
@@ -166,7 +163,6 @@ module.exports = Base.extend({
         if(field === 'email' && result) {
             this.isEmail(value, field);
         }
-
     },
     isEmpty: function (value,field) {
         if(value === ''){
@@ -194,7 +190,6 @@ module.exports = Base.extend({
             $('fieldset.' + field + ' span.icons').removeClass('icon-attention');
             return true;
         }
-
     },
     addToFavorites: function (e) {
         var $this = $(e.currentTarget);
@@ -242,5 +237,4 @@ module.exports = Base.extend({
             });
         }
     }
-
 });
