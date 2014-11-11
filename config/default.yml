@@ -57,10 +57,10 @@ middleware:
       - /stats/threads
       - /stats/check
       - /stats/sockets
-      - /analytics
-      - /analytics/pageview.gif
-      - /analytics/pageevent.gif
-      - /analytics/graphite.gif
+      - /tracking
+      - /tracking/pageview.gif
+      - /tracking/event.gif
+      - /tracking/graphite.gif
       - /tracking/statsd.gif
       - /force
       - /force/wap

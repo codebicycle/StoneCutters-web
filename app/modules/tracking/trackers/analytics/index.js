@@ -119,6 +119,7 @@ function event(params, options) {
         }
     });
     query.z = Math.round(Math.random() * 1000000);
+    console.log(utils.params('http://www.google-analytics.com/collect', query));
     return utils.params('http://www.google-analytics.com/collect', query);
 }
 

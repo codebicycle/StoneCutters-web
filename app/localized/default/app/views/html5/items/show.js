@@ -2,8 +2,9 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
+var helpers = require('../../../../../../helpers');
+var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -195,8 +196,6 @@ module.exports = Base.extend({
 
             var success = function(done, data) {
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-                var category = $('.itemCategory').val();
-                var subcategory = $('.itemSubcategory').val();
                 
                 $('.loading').hide();
                 $('body').removeClass('noscroll');
@@ -205,16 +204,23 @@ module.exports = Base.extend({
                 $('.email').val('');
                 $('.phone').val('');
                 $msg.text(this.messages.msgSend);
-                this.track({
-                    category: 'Reply',
-                    action: 'ReplySuccess',
-                    custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
-                });
                 $('.msgCont').addClass('visible');
                 setTimeout(function(){
                     $('.msgCont').removeClass('visible');
                 }, 3000);
                 done(data);
+            }.bind(this);
+
+            var trackEvent = function(done, data) {
+                var category = $('.itemCategory').val();
+                var subcategory = $('.itemSubcategory').val();
+
+                this.track({
+                    category: 'Reply',
+                    action: 'ReplySuccess',
+                    custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
+                });
+                done();
             }.bind(this);
 
             var trackTracking = function(done, data) {
@@ -230,18 +236,11 @@ module.exports = Base.extend({
             }.bind(this);
 
             var trackGraphite = function(done) {
-                var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+                var location = this.app.session.get('location');
+                var platform = this.app.session.get('platform');
 
-                $.ajax({
-                    url: helpers.common.link(url, this.app, {
-                        metric: 'reply,success',
-                        location: this.app.session.get('location').name,
-                        platform: this.app.session.get('platform')
-                    }),
-                    cache: false
-                })
-                .done(done)
-                .fail(done.fail);
+                statsd.increment([location.name, 'reply', 'success', platform]);
+                done();
             }.bind(this);
 
             var fail = function(data) {
@@ -252,16 +251,10 @@ module.exports = Base.extend({
             }.bind(this);
 
             var trackFail = function() {
-                var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+                var location = this.app.session.get('location');
+                var platform = this.app.session.get('platform');
 
-                $.ajax({
-                    url: helpers.common.link(url, this.app, {
-                        metric: 'reply,error',
-                        location: this.app.session.get('location').name,
-                        platform: this.app.session.get('platform')
-                    }),
-                    cache: false
-                });
+                statsd.increment([location.name, 'reply', 'error', platform]);
             }.bind(this);
 
             var always = function() {
@@ -271,9 +264,7 @@ module.exports = Base.extend({
             asynquence().or(fail)
                 .then(validate)
                 .then(post)
-                .then(success)
-                .then(trackTracking)
-                .then(trackGraphite);
+                .gate(success, trackEvent, trackTracking, trackGraphite);
         }.bind(this));
 
         //window History
@@ -302,7 +293,7 @@ module.exports = Base.extend({
                 that.isEmail(value,field);
             }
         });
-        this.attachTrackMe(this.className, function(category, action) {
+        this.attachTrackMe(function(category, action) {
             var itemId = $('.itemId').val();
             var itemCategory = $('.itemCategory').val();
             var itemSubcategory = $('.itemSubcategory').val();

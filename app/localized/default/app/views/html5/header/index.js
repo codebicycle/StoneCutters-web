@@ -17,11 +17,7 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
-        this.attachTrackMe(this.className, function(category, action) {
-            return {
-                custom: [category, '-', '-', action].join('::')
-            };
-        });
+        this.attachTrackMe();
         $('body').on('change:location', this.changeLocation.bind(this));
         $('body').on('update:postingLink', this.updatePostingLink.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));

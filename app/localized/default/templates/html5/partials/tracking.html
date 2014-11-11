@@ -1,6 +1,6 @@
 {% if tracking %}
     {% for url in tracking.urls %}
-        <img src="{{url}}" class="analytics" width="1" height="1">
+        <img src="{{url}}" class="tracking" width="1" height="1">
     {% endfor %}
 
     <div id="tracking-data" data-params='{% json tracking.params %}'></div>
