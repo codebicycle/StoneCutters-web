@@ -63,7 +63,7 @@ module.exports = Base.extend({
             };
             $('#' + $current).addClass('loading');
         });
-        this.attachTrackMe(this.className, function(category, action) {
+        this.attachTrackMe(function(category, action) {
             var itemCategory = '-';
             var itemSubcategory = '-';
 

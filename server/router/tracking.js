@@ -57,7 +57,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     }
 
     (function pageview() {
-        app.get('/analytics/pageview.gif', handler);
+        app.get('/tracking/pageview.gif', handler);
 
         function graphiteTracking(req) {
             var platform = req.rendrApp.session.get('platform');
@@ -129,7 +129,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                location: (location ? location.url : false) || req.query.locUrl
+                location: (location ? location.url : '') || req.query.locUrl
             };
             var url = tracking.ati.pageview.call({
                 app: req.rendrApp
@@ -153,7 +153,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                location: (location ? location.url : false) || req.query.locUrl,
+                location: (location ? location.url : '') || req.query.locUrl,
                 siteId: 539154,
                 logServer: 'logw306'
             };
@@ -229,12 +229,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
     })();
 
     (function pageevent() {
-        app.get('/analytics/pageevent.gif', handler);
+        app.get('/tracking/event.gif', handler);
 
         function analyticsTracking(req, host) {
-            if (!req.query.page) {
-                return;
-            }
             var params = _.extend({
                 host: host,
                 ip: req.rendrApp.session.get('ip'),
@@ -252,9 +249,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            if (!req.query.custom) {
-                return;
-            }
             var location = req.rendrApp.session.get('location');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
@@ -263,7 +257,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                location: (location ? location.url : false) || req.query.locUrl
+                location: (location ? location.url : '') || req.query.locUrl
             };
             var url = tracking.ati.event.call({
                 app: req.rendrApp
@@ -317,7 +311,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     })();
 
     (function graphiteGif() {
-        app.get('/analytics/graphite.gif', handler);
+        app.get('/tracking/graphite.gif', handler);
 
         var metrics = {
             pageview: function(req, options) {

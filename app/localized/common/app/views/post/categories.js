@@ -18,7 +18,7 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
-        this.attachTrackMe(this.className, function(category, action) {
+        this.attachTrackMe(function(category, action) {
             return {
                 custom: [category, this.data('id'), '-', action].join('::')
             };
