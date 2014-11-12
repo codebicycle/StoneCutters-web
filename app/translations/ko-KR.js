@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<LOCATION>>\uC758 <<KEYWORD>>\uC5D0 \uB300\uD55C <<NUMBER>> \uACB0\uACFC\uB4E4',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>>\uC5D0 \uB300\uD55C <<NUMBER>> \uACB0\uACFC\uB4E4',
     'listingpageitemslisting.ResultsIn': '<<LOCATION>>\uC5D0\uC11C <<NUMBER>>\uAC1C\uC758 \uACB0\uACFC',
+    'listingpageitemslisting.SortBy': '\uC21C\uC11C\uB300\uB85C \uC815\uB9AC',
     'listingpageitemslisting.WeAreSorryNoResults': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4. \uAC80\uC0C9\uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'listingpageitemslisting.ZeroResultsPage': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4, <<REGION>>\uC758 <<CATEGORY>>\uC5D0\uC11C \uCC3E\uC740 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.',
     'netvibes_myolx.content.NoActiveListings': '\uADC0\uD558\uB294 \uD604\uC7AC \uC0AC\uC6A9\uC911\uC778 \uC81C\uD488\uBAA9\uB85D\uC11C\uAC00 \uC5C6\uC73C\uC2ED\uB2C8\uB2E4.',

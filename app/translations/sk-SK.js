@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> v\xFDsledkov na k\u013E\xFA\u010Dov\xE9 slovo <<KEYWORD>> v <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> v\xFDsledkov na k\u013E\xFA\u010Dov\xE9 slovo <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> m\xE1 v\xFDsledok v <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Zoradi\u0165 pod\u013Ea',
     'listingpageitemslisting.WeAreSorryNoResults': '\u013Dutujeme, neboli n\xE1jden\xE9 \u017Eiadne v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Je n\xE1m \u013E\xFAto, nena\u0161li sme v\xFDsledky v kateg\xF3rii <<CATEGORY>> v regi\xF3ne <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Moment\xE1lne nem\xE1te \u017Eiadne akt\xEDvne ozn\xE1menia.',

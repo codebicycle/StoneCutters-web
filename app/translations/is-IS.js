@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> ni\xF0urst\xF6\xF0ur fyrir <<KEYWORD>> \xE1 <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> ni\xF0urst\xF6\xF0ur fyrir <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> ni\xF0urst\xF6\xF0ur fyrir <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Ra\xF0a eftir',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDEv\xED mi\xF0ur fundust engar ni\xF0urst\xF6\xF0ur fyrir leit \xFE\xEDna.',
     'listingpageitemslisting.ZeroResultsPage': '\xDEv\xED mi\xF0ur fundum vi\xF0 engar ni\xF0urst\xF6\xF0ur \xED <<CATEGORY>> \xED <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': '\xDE\xFA ert ekki me\xF0 neinar virkar augl\xFDsingar \xED augnablikinu.',

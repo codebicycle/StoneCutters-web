@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<KEYWORD>> i\xE7in <<LOCATION>> konumunda <<NUMBER>> sonu\xE7',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>> i\xE7in <<NUMBER>> sonu\xE7',
     'listingpageitemslisting.ResultsIn': '<<LOCATION>> konumunda <<NUMBER>> sonu\xE7',
+    'listingpageitemslisting.SortBy': 'S\u0131ralama \u015Eekli:',
     'listingpageitemslisting.WeAreSorryNoResults': '\xDCzg\xFCn\xFCz, arad\u0131\u011F\u0131n\u0131z bulunamad\u0131.',
     'listingpageitemslisting.ZeroResultsPage': '\xDCzg\xFCn\xFCz <<CATEGORY>> kategorisinde b\xF6lgesi <<REGION>> olan sonuca rastlanmad\u0131.',
     'netvibes_myolx.content.NoActiveListings': '\u015Eu an aktif bir ilan\u0131n\u0131z bulunmuyor.',

@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> keputusan untuk <<KEYWORD>> di <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> keputusan untuk <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> keputusan dalam <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Susun mengikut',
     'listingpageitemslisting.WeAreSorryNoResults': 'Kami minta maaf kerana kami tidak mendapat keputusan untuk carian anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Kami minta maaf, kami masih tidak menjumpai keputusan dalam <<CATEGORY>> di <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Anda tiada iklan yang aktif buat masa ini.',

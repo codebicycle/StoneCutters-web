@@ -8,7 +8,7 @@ var Filters = require('../../../../../../modules/filters');
 module.exports = Base.extend({
     className: 'listing-filters',
     id: 'listing-filters',
-   events: {
+    events: {
         'click .filter-title': 'toogleFilter',
         'click .clean-filters': 'cleanFilters',
         'click .check-box input': 'selectFilter',

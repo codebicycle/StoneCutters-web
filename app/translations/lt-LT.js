@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> <<KEYWORD>>, esan\u010Dio <<LOCATION>> rezultatai',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> <<KEYWORD>> rezultatai',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> rezult. <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'R\u016B\u0161iuoti pagal',
     'listingpageitemslisting.WeAreSorryNoResults': 'Atsipra\u0161ome, ta\u010Diau neturime j\u016Bs\u0173 paie\u0161kos rezultat\u0173.',
     'listingpageitemslisting.ZeroResultsPage': 'Atsipra\u0161ome, <<CATEGORY>>, esan\u010Di\u0173 <<REGION>>, neradome.',
     'netvibes_myolx.content.NoActiveListings': '\u0160iuo metu aktyvi\u0173 skelbim\u0173 n\u0117ra.',

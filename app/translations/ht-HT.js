@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> rezilta pour <<KEYWORD>> naon <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezilta pou <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> resilta nan <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Triye pa',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nou regr\xE8t men nou pa jwenn okenn rezilta pou rech\xE8ch ou an. ',
     'listingpageitemslisting.ZeroResultsPage': 'Nou regr\xE8t, nou pa jwenn okenn rezilta nan<<CATEGORY>> pou <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Ou pa genyen anons aktif pou konyea. ',

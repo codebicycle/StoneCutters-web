@@ -1,5 +1,7 @@
 {% if item.images.length == 0 %}
-    {% set classesFigure = 'image-viewer image-wrapper icons icon-photo' %}
+    {% set classesFigure = 'image-viewer image-wrapper icons icon-photo single' %}
+{% elif item.images.length == 1 %}
+    {% set classesFigure = 'image-viewer image-wrapper single' %}
 {% else %}
     {% set classesFigure = 'image-viewer image-wrapper' %}
 {% endif %}
