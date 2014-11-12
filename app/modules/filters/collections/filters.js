@@ -11,12 +11,11 @@ var filters = utils.get(config, ['filters'], {});
 var defaultOrder = Object.keys(filters);
 var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g;
 var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g;
-var regexpSort = /([a-zA-Z0-9_]*)(desc|\*to\*show)/g;
+var regexpSort = /([a-zA-Z0-9_]*)(desc)/g;
 var booleans = ['true', 'false'];
 var sorts = {
     '': 'asc',
-    desc: 'desc',
-    '*to*showdesc': 'date*to*showdesc'
+    desc: 'desc'
 };
 var Base;
 
@@ -105,8 +104,16 @@ function add(filter, options) {
 }
 
 function _add(filter, options) {
+    var transformer;
+
     if (!(filter instanceof Filter)) {
         filter = new Filter(filter, {
+            app: this.app
+        });
+    }
+    transformer = transformers[filter.get('name')];
+    if (transformer) {
+        filter = transformer.call(this, filter, {
             app: this.app
         });
     }
@@ -197,17 +204,9 @@ function parseFilter(filter) {
 
 function load(url) {
     var listFilters = (url.match(regexpFind) || []);
-    var transformer;
 
     _.each(listFilters, function parseFilters(filter, i) {
         filter = parseFilter(filter);
-        transformer = transformers[filter.name];
-
-        if (transformer) {
-            filter = transformer.call(this, filter, {
-                app: this.app
-            });
-        }
         this.add(new Filter(filter, {
             app: this.app
         }));
