@@ -8,21 +8,24 @@ var ati = require('./ati');
 var esi = require('../../esi');
 
 function isEnabled(page) {
-    var platform = this.app.session.get('platform');
-    var location;
+    var location = this.app.session.get('location');
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'serverSide', 'enabled'], true);
+    var platforms;
 
-    if (platform === 'desktop') {
-        return false;
+    if (enabled) {
+        platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'serverSide', 'platforms']);
+        if (platforms && !_.contains(platforms, this.app.session.get('platform'))) {
+            enabled = false;
+        }
     }
-    location = this.app.session.get('location');
-    return config.getForMarket(location.url, ['tracking', 'trackers', 'serverSide'], true);
+    return enabled;
 }
 
 function getParams(page, options) {
     var location = this.app.session.get('location');
     var sid = this.app.session.get('sid');
-    var analyticsEnabled = analytics.isEnabledServer.call(this, page);
-    var atiEnabled = ati.isEnabledServer.call(this, page);
+    var analyticsEnabled = analytics.isServerEnabled.call(this, page);
+    var atiEnabled = ati.isServerEnabled.call(this, page);
     var params = {};
     var analyticsParams;
     var atiParams;
@@ -44,18 +47,11 @@ function getParams(page, options) {
         atiParams = options.atiParams || ati.getParams.call(this, page, options.query);
         params.custom = atiParams.custom;
     }
-
     return params;
 }
 
 function pageview(params, options) {
-    var page = options.page;
-    var analyticsEnabled = analytics.isEnabledServer.call(this, page);
-    var atiEnabled = ati.isEnabledServer.call(this, page);
-
-    if (analyticsEnabled || atiEnabled) {
-        return utils.params('/tracking/pageview.gif?', params);
-    }
+    return utils.params('/tracking/pageview.gif?', params);
 }
 
 module.exports = {
