@@ -15,7 +15,6 @@ module.exports = Base.extend({
         'trackAnalytics': 'onTrackAnalytics',
         'trackHydra': 'onTrackHydra'
     },
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -67,9 +66,8 @@ module.exports = Base.extend({
             return;
         }
 
-        var atiapi = window.atiapi || [];
-
-        atiapi.push({
+        window.atiapi = window.atiapi || [];
+        window.atiapi.push({
             xtdmc: tracking.params.ati.host,
             xtnv: document,
             xtsd: [tracking.params.ati.protocol, '://', tracking.params.ati.logServer].join(''),
@@ -87,9 +85,10 @@ module.exports = Base.extend({
             return;
         }
 
-        var _gaq = window._gaq || [];
+        this._checkAnalyticsLib();
 
-        _gaq.push(function track() {
+        window._gaq = window._gaq || [];
+        window._gaq.push(function track() {
             var host = tracking.params.analytics.host;
             var tracker = window._gat._getTracker(tracking.params.analytics.id);
             var referrerDomain = 'emptyReferrer';
@@ -118,9 +117,8 @@ module.exports = Base.extend({
             return;
         }
 
-        var asyncApi = window.asyncApi || [];
-
-        asyncApi.push({
+        window.asyncApi = window.asyncApi || [];
+        window.asyncApi.push({
             wait: function() {
                 return typeof window.hydra !== 'undefined';
             },
@@ -132,5 +130,23 @@ module.exports = Base.extend({
                 window.hydra.trackPageView(params);
             }
         });
+    },
+    _checkAnalyticsLib: function() {
+        var id = 'ga-lib';
+        var $ga;
+
+        window._gaq = window._gaq || [];
+        window._gaq.push(['_setDomainName', this.app.session.get('host')]);
+
+        if (!$('#' + id).length) {
+            $ga = $('<script></script>');
+            $ga.attr({
+                type: 'text/javascript', 
+                src: ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js',
+                id: id,
+                async: true
+            });
+            $('head').append($ga);
+        }
     }
 });

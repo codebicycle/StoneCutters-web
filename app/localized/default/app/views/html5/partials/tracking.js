@@ -15,7 +15,6 @@ module.exports = Base.extend({
         'trackEvent': 'onTrackEvent',
         'fireTrackEvent': 'onFireTrackEvent'
     },
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -65,9 +64,10 @@ module.exports = Base.extend({
             return;
         }
 
-        var _gaq = window._gaq || [];
-        
-        _gaq.push(function track() {
+        this._checkAnalyticsLib();
+
+        window._gaq = window._gaq || [];
+        window._gaq.push(function track() {
             var tracker = window._gat._getTracker('UA-5247560-17');
             var osName = tracking.params.analytics.osName;
             var osVersion = tracking.params.analytics.osVersion;
@@ -119,5 +119,23 @@ module.exports = Base.extend({
             always: (callback || $.noop)
         });
         $.ajax(options);
+    },
+    _checkAnalyticsLib: function() {
+        var id = 'ga-lib';
+        var $ga;
+
+        window._gaq = window._gaq || [];
+        window._gaq.push(['_setDomainName', this.app.session.get('host')]);
+
+        if (!$('#' + id).length) {
+            $ga = $('<script></script>');
+            $ga.attr({
+                type: 'text/javascript', 
+                src: ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js',
+                id: id,
+                async: true
+            });
+            $('head').append($ga);
+        }
     }
 });
