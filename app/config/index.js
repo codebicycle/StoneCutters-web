@@ -17,7 +17,19 @@ module.exports = function(environment) {
     }
 
     function getForMarket(location, keys, defaultValue) {
-        return utils.get(MARKETS, [location].concat(keys)) || utils.get(MARKETS, ['emerging'].concat(keys)) || utils.get(MARKETS, ['common'].concat(keys), defaultValue);
+        var value = utils.get(MARKETS, [location].concat(keys));
+
+        if (checkValue(value)) {
+            value = utils.get(MARKETS, ['emerging'].concat(keys));
+        }
+        if (checkValue(value)) {
+            value = utils.get(MARKETS, ['common'].concat(keys), defaultValue);
+        }
+        return value;
+    }
+
+    function checkValue(value) {
+        return value === null || _.isUndefined(value);
     }
 
     return {

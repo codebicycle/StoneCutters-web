@@ -14,34 +14,49 @@ var eventsKeys = {
     ev: 'value'
 };
 
+function isPlatformEnabled(platforms) {
+    var enabled = true;
+
+    if (platforms && !_.contains(platforms, this.app.session.get('platform'))) {
+        enabled = false;
+    }
+    return enabled;
+}
+
 function isEnabled(page) {
     var location = this.app.session.get('location');
     var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', 'enabled'], true);
+    var pageName;
+    var params;
 
-    if (!enabled) {
-        return false;
+    if (enabled) {
+        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', 'platforms']));
     }
-    return !!utils.get(configTracking, ['common', 'pages', page]);
+    if (enabled) {
+        enabled = !!utils.get(configTracking, ['common', 'pages', page]);
+    }
+    return enabled;
 }
 
-function isEnabledServer(page) {
+function isTypeEnabled(page, type) {
     var location = this.app.session.get('location');
     var enabled = isEnabled.call(this, page);
 
-    if (!enabled) {
-        return false;
+    if (enabled) {
+        enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', type, 'enabled'], true);
     }
-    return config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', 'server'], true);
+    if (enabled) {
+        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', type, 'platforms']));
+    }
+    return enabled;
 }
 
-function isEnabledClient(page) {
-    var location = this.app.session.get('location');
-    var enabled = isEnabled.call(this, page);
+function isServerEnabled(page) {
+    return isTypeEnabled.call(this, page, 'server');
+}
 
-    if (!enabled) {
-        return false;
-    }
-    return config.getForMarket(location.url, ['tracking', 'trackers', 'analytics', 'client'], true);
+function isClientEnabled(page) {
+    return isTypeEnabled.call(this, page, 'client');
 }
 
 function getParams(page, options) {
@@ -122,10 +137,56 @@ function event(params, options) {
     return utils.params('http://www.google-analytics.com/collect', query);
 }
 
+function isPlatformEnabled(platforms) {
+    var platform = this.app.session.get('platform');
+    var enabled = true;
+
+    if (platforms && !_.contains(platforms, platform)) {
+        enabled = false;
+    }
+    return enabled;
+}
+
+function isEnabled(page) {
+    var location = this.app.session.get('location');
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ati', 'enabled'], true);
+    var pageName;
+    var params;
+
+    if (enabled) {
+        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'ati', 'platforms']));
+    }
+    if (enabled) {
+        enabled = !!utils.get(configTracking, ['ati', 'params', page]);
+    }
+    return enabled;
+}
+
+function isTypeEnabled(page, type) {
+    var location = this.app.session.get('location');
+    var enabled = isEnabled.call(this, page);
+
+    if (enabled) {
+        enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ati', type, 'enabled'], true);
+    }
+    if (enabled) {
+        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'ati', type, 'platforms']));
+    }
+    return enabled;
+}
+
+function isServerEnabled(page) {
+    return isTypeEnabled.call(this, page, 'server');
+}
+
+function isClientEnabled(page) {
+    return isTypeEnabled.call(this, page, 'client');
+}
+
 module.exports = {
     isEnabled: isEnabled,
-    isEnabledServer: isEnabledServer,
-    isEnabledClient: isEnabledClient,
+    isServerEnabled: isServerEnabled,
+    isClientEnabled: isClientEnabled,
     getParams: getParams,
     pageview: pageview,
     event: event

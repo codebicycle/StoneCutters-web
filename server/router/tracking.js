@@ -187,13 +187,15 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 statsd.increment([req.query.locNm, 'bot', bot, platform]);
                 return false;
             }
-            try {
-                platformUrl = JSON.parse(req.query.custom).platform;
-            }
-            catch (err) {}
-            if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
-                /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
-                return false;
+            if (req.query.custom) {
+                try {
+                    platformUrl = JSON.parse(req.query.custom).platform;
+                }
+                catch (err) {}
+                if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
+                    /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
+                    return false;
+                }
             }
             return true;
         }
