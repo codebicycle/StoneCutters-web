@@ -1,3 +1,23 @@
+<script>
+    (function() {
+        var id = 'ga-lib';
+        var ga;
+        var h;
+
+        window._gaq = window._gaq || [];
+        window._gaq.push(['_setDomainName', '{{ host }}']);
+
+        if (!document.getElementById(id)) {
+            ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            ga.id = id;
+            ga.async = true;
+            h = document.getElementsByTagName('head');
+            h.appendChild(ga);
+        }
+    })();
+</script>
 <script type="text/javascript">
     var _gaq = _gaq || [];
 
