@@ -6,10 +6,15 @@ var helpers = require('../../../../../helpers');
 
 module.exports = Base.extend({
     className: 'items_staticsearch_view',
+    wapAttributes: {
+        cellpadding: 0
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data);
+        return _.extend({}, data, {
+            breadcrumb: helpers.breadcrumb.get.call(this, data)
+        });
     }
 });
 
