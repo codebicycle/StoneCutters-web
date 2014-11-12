@@ -18,18 +18,35 @@ module.exports = {
     tracking: {
         enabled: true,
         trackers: {
-            serverSide: true,
+            serverSide: {
+                enabled: true
+            },
             ati: {
                 enabled: true,
-                server: true,
-                client: true
+                server: {
+                    enabled: true,
+                    platforms: ['html5', 'html4', 'wap']
+                },
+                client: {
+                    enabled: true,
+                    platforms: ['desktop', 'html5']
+                }
             },
             analytics: {
                 enabled: true,
-                server: true,
-                client: true
+                server: {
+                    enabled: true,
+                    platforms: ['html5', 'html4', 'wap']
+                },
+                client: {
+                    enabled: true,
+                    platforms: ['desktop', 'html5']
+                }
             },
-            hydra: true
+            hydra: {
+                enabled: true,
+                platforms: ['desktop']
+            }
         }
     }
 };
