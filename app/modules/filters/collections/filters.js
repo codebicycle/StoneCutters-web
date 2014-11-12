@@ -8,15 +8,12 @@ var config = require('../config');
 var transformers = require('../transformers');
 
 var filters = utils.get(config, ['filters'], {});
-var defaultOrder = Object.keys(filters);
+var defaultOrderByName = Object.keys(filters);
+var defaultOrderByType = ['BOOLEAN', 'SELECT', 'RANGE'];
 var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g;
 var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g;
 var regexpSort = /([a-zA-Z0-9_]*)(desc)/g;
 var booleans = ['true', 'false'];
-var sorts = {
-    '': 'asc',
-    desc: 'desc'
-};
 var Base;
 
 Backbone.noConflict();
@@ -283,18 +280,35 @@ function smaugize() {
     if (this.has('sort')) {
         sort = this.get('sort');
         sort = sort.get('current').join('').replace(regexpSort, '$1#$2').split('#');
-        params['s.' + sort[0]] = sorts[sort[1]];
+        params['s.' + sort[0]] = sort[1] || 'asc';
     }
     return params;
 }
 
+function checkComparator(options) {
+    options = options || {};
+    if (options.sortType) {
+        switch(options.sortType) {
+            case 'type':
+                this.order = options.order || defaultOrderByType;
+                this.comparator = comparatorByType;
+                break;
+            default:
+                this.order = options.order || defaultOrderByName;
+                this.comparator = comparatorByName;
+                break;
+        }
+    }
+}
+
 function toJSON(options) {
+    checkComparator.call(this, options);
     return this.sort().map(function(model) {
         return model.toJSON(options); 
     });
 }
 
-function getIndex(name) {
+function getIndex(name, defaultOrder) {
     var indexOf = this.order.indexOf(name);
 
     if (!~indexOf) {
@@ -303,9 +317,9 @@ function getIndex(name) {
     return indexOf - 100;
 }
 
-function comparator(filterA, filterB) {
-    var indexOfA = getIndex.call(this, filterA.get('name'));
-    var indexOfB = getIndex.call(this, filterB.get('name'));
+function comparator(filterA, filterB, property, defaultOrder) {
+    var indexOfA = getIndex.call(this, filterA.get(property), defaultOrder);
+    var indexOfB = getIndex.call(this, filterB.get(property), defaultOrder);
 
     if (indexOfA > indexOfB) {
         return 1;
@@ -316,10 +330,18 @@ function comparator(filterA, filterB) {
     return 0;
 }
 
+function comparatorByName(filterA, filterB) {
+    return comparator(filterA, filterB, 'name', defaultOrderByName);
+}
+
+function comparatorByType(filterA, filterB) {
+    return comparator(filterA, filterB, 'type', defaultOrderByType);
+}
+
 module.exports = Base.extend({
     model: Filter,
-    order: defaultOrder,
-    comparator: comparator,
+    order: defaultOrderByName,
+    comparator: comparatorByName,
     initialize: initialize,
     isActive: isActive,
     has: has,
