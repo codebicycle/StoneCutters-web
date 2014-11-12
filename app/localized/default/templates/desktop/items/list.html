@@ -1,4 +1,4 @@
-{% include (template + '/items/itemlistingnav.html') %}
+{% view 'items/itemlistingtabs' %}
 <ul class="items-list {{ itemListingClass }}">
     {# {% if showAdSenseListingTop %}
         <li>
@@ -6,7 +6,7 @@
             <p>AdSenseListingTop</p>
         </li>
     {% endif %} #}
-    
+
     {% include (template + '/items/items.html') %}
 
     {# {% if showAdSenseListingBottom %}

@@ -1,4 +1,4 @@
-{% include (template + '/items/itemlistingnav.html') %}
+{% view 'items/itemlistingtabs' %}
 <ul class="items-list-ig {{ itemListingClass }}">
     {% for item in items %}
         <li>
