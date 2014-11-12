@@ -47,6 +47,12 @@ module.exports = {
             ':title-cat-:catId([0-9]+)/filter',
             '-cat-:catId([0-9]+)/filter',
             'cat-:catId([0-9]+)/filter',
+            ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?/filter',
+            '-cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?/filter',
+            'cat-:catId([0-9]+)-p-:page([0-9]+)/?:filters?/filter',
+            ':title-cat-:catId([0-9]+)/?:filters?/filter',
+            '-cat-:catId([0-9]+)/?:filters?/filter',
+            'cat-:catId([0-9]+)/?:filters?/filter'
         ]
     },
     'items#sort': {

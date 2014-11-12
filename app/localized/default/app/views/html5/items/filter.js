@@ -3,68 +3,31 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/filter');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
+var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
+    order: ['pricerange', 'hasimage', 'state', 'parentcategory'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var filters = data.filters;
-        var order = ['pricerange','hasimage','state','parentcategory'];
-        var list = [];
-
-        _.each(order, function(obj, i){
-            _.find(filters, function(obj){
-                return obj.name == order[i] ? list.push(obj) : false;
-            });
-        });
-        return _.extend({}, data, {
-            filtersOrd: list
-        });
-    },
-    events: {
-        //'click .orange': 'applyFilter',
-        //'click .clear': 'clearForm',
-        //'click a.location': 'setUrlLocation',
-
-        'submit': 'onSubmit',
-        'click a': 'aClick'
-    },
-    clearForm: function(event) {
-        event.preventDefault();
-        var data = this.getData();
-        var applied = data.appliedstring;
-        var url;
-
-        var removeParams = function (url, params){
-            var trimUrl;
-
-            if (params) {
-                trimUrl = url.split(params + '/');
-                url = trimUrl.join('');
-            }
-
-            return url;
-        };
-
-        url = removeParams(this.getData(), applied);
-
-        $("#filter").trigger('reset');
-
-        helpers.common.redirect.call(this.app.router, url, null, {
-            status: 200
-        });
-    },
-    parseUrl: function(url) {
-        if(url.indexOf('//')) {
-            url = url.split('//').join('')
-                .split('/').slice(1, url.length)
-                .join('/').split('?').slice(0, 1)
-                .join('');
-        }
-        return url;
+        this.filters = data.filters;
+        this.filters.order = this.order;
+        return _.extend({}, data, {});
     },
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
+        if (!this.filters) {
+            this.filters = new Filters(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
+        }
+    },
+    events: {
+        'change .check-box input': 'selectFilter',
+        'submit': 'onSubmit'
     },
     onStart: function(event) {
         this.appView.trigger('filter:start');
@@ -72,48 +35,83 @@ module.exports = Base.extend({
     onEnd: function(event) {
         this.appView.trigger('filter:end');
     },
-    getData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        return data;
-    },
-    setUrlLocation: function(event) {
-        var datos = this.$('#filter').serializeArray();
-
-        var url = this.parseUrl(helpers.filters.generateFilterOrder(datos, this.getData(), 'filter'));
-        var trimUrl = url.split('/');
-
-        if (trimUrl[trimUrl.length-1] !== '') {
-            url = trimUrl.join('/') + '/';
-        }
-
-        $(event.target).attr('href', '/location?target=' + url + 'filter');
-    },
-    applyFilter: function(event) {
+    selectFilter: function(event) {
         event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
 
-        var datos = $('#filter').serializeArray();
-        var url = helpers.filters.generateFilterOrder(datos,this.getData(), 'filter');
+        var $this = $(event.currentTarget);
+        var val = $this.val();
+        var filter = {
+            name: $this.closest('fieldset').data('filter-name'),
+            type: $this.closest('fieldset').data('filter-type'),
+            value: val
+        };
 
-        helpers.common.redirect.call(this.app.router, url, null, {
-            status: 200
-        });
+        if ($this.is(':checked') && !this.filters.has(filter.name, filter.value)) {
+            // $this.closest('fieldset').find('a').attr('data-filter-value', val);
+            this.filters.add(filter);
+        } else {
+            this.filters.remove(filter);
+        }
     },
-
     onSubmit: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var data = this.getData();
-        var url = data.referer || data.url.replace('/filter', '');
+        var filters = this.filters;
+        var path = this.app.session.get('path');
+        var values = this.$('[data-filter-type=RANGE]');
+        var $this;
+        var filter = {};
+        var val;
+        var val2;
 
-        helpers.common.redirect.call(this.app.router, url, null, {
-            status: 200
+        values.each(function setValues(){
+            $this = $(this);
+            filter = {
+                name: $this.data('filter-name'),
+                type: $this.data('filter-type')
+            };
+
+            val = $this.find('[data-filter-id=from]').val();
+            val2 = $this.find('[data-filter-id=to]').val();
+
+            if (!val && !val2) {
+                return filters.remove(filter);
+            }
+
+            filter.value = {
+                from: val,
+                to: val2
+            };
+
+            filters.add(filter);
+
         });
+
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
     },
-    aClick: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
+        return path;
+    },
+    cleanPath: function(path) {
+        path = this.refactorPath(path);
+        path = path.replace('/filter', '');
+        return path.split('/-').shift();
+    },
+    refactorPath: function(path) {
+        path = this.cleanPage(path);
+        if (path.slice(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
+        }
+        return path;
     }
+
 });
