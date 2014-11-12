@@ -38,6 +38,7 @@ coverage
 
 test/unit/coverage.html
 tests/coverage.html
+tests/report.xml
 
 public/images/*/icons
 

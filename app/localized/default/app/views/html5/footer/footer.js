@@ -33,11 +33,7 @@ module.exports = Base.extend({
         this.app.router.appView.on('sort:end', this.show.bind(this));
         this.app.router.appView.on('location:start', this.hide.bind(this));
         this.app.router.appView.on('location:end', this.show.bind(this));
-        this.attachTrackMe(this.className, function(category, action) {
-            return {
-                custom: [category, '-', '-', action].join('::')
-            };
-        });
+        this.attachTrackMe();
     },
     isFilter: function() {
         var currentRoute = this.app.session.get('currentRoute');

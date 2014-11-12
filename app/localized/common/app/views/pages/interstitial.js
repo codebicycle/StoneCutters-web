@@ -42,11 +42,7 @@ module.exports = Base.extend({
             this.app.session.clear('interstitial');
         }.bind(this));
 
-        this.attachTrackMe('interstitial-action', function track(category, action) {
-            return {
-                custom: [category, '-', '-', action].join('::')
-            };
-        });
+        this.attachTrackMe();
 
         tracking.reset();
         tracking.setPage('pages#interstitial');

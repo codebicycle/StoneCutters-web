@@ -21,6 +21,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             var session = req.rendrApp.get('session');
 
             function fetch(done) {
+                if (session.device) {
+                    return done({}, session.device);
+                }
                 dataAdapter.get(req, '/devices/' + encodeURIComponent(userAgent), done.errfcb);
             }
 
@@ -63,7 +66,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                         }, req.query);
                     }
                     else {
-                        url = getDesktopUrl(device);
+                        url = getDesktopUrl();
                     }
                 }
                 else {
@@ -73,7 +76,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 res.redirect(302, url);
             }
 
-            function getDesktopUrl(device) {
+            function getDesktopUrl() {
                 var url = [req.protocol, '://', session.locationUrl];
 
                 if (session.port) {

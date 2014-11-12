@@ -1,9 +1,9 @@
 {% include (template + "/partials/breadcrumb.html") %}
 
 <div class="wrapper-main">
-    <nav id="listing-filters">
+    <nav id="listing-nav">
         {% include (template + '/categories/subcategories.html') %}
-        {% include (template + '/items/filters.html') %}
+        {% view 'items/filters' %}
     </nav>
     <section id="listing-items">
         {% include (template + '/items/locations.html') %}

@@ -17,7 +17,7 @@
             {% for category in subcategories %}
                 <tr>
                     <td style="border-top: solid thin #808080;">
-                        <a style="display: block;" href="{{ ['/posting/', categoryId, '/', category.id] | join('') | link }}" data-qa="subcategory-name">
+                        <a style="display: block;" href="{{ ['/posting/', categoryId, '/', category.id] | join('') | link }}" data-qa="subcategory-name-{{ category.id }}" >
                             <small style="display: block;"><img border="0" alt="" src="" />{{category.trName}}</small>
                         </a>
                     </td>

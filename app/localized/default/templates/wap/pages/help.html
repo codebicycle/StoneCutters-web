@@ -3,25 +3,32 @@
 		<table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">
 			<tr>
 				<td style="border-top: solid thin #808080;">
-					<strong style="color: #0075BD;">Help</strong>
+					<strong style="color: #0075BD;">{{ dictionary["defaultfooter.Help"] }}</strong>
 				</td>
 			</tr>
 		</table>
 		<table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">
-			<tr>
-				<td style="border-top: solid thin #808080;">
-					{% for item in items %}
-				        <strong>{{item.name}}</strong>
-				            {% for question in item.questions %}
-				                <small class="help-question">{{question.question}}</small>
-				                <small>{{ question.response}}</small>
-				            {% endfor %}
-				    {% endfor %}
-				</td>
-			</tr>
+			{% for topic in topics %}
+				<tr>
+					<th bgcolor="#DDDDDD" style="background-color: #DDD; border-top: solid thin #808080;" align="left"><strong>{{ topic.title }}</strong></th>
+				</tr>
+				{% for question in topic.questions %}
+					<tr>
+						<td bgcolor="#EEEEEE" style="background: #EEE; border-top: solid thin #BBB; border-bottom: solid thin #BBB;"><small style="display: block;"><em>{{ question.question }}</em></small></td>
+					</tr>
+					<tr>
+						<td><small style="display: block;">{{ question.answer }}</small></td>
+					</tr>
+				{% endfor %}
+			{% endfor %}
 		</table>
 		{% from macros import Breadcrumb %}
 		{% set link = (breadcrumb | link) %}
 		{{ Breadcrumb(dictionary, link, ('/' | link)) }}
 	</td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
+    </td>
 </tr>

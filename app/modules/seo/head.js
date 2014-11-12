@@ -5,10 +5,11 @@ var Backbone = require('backbone');
 var utils = require('../../../shared/utils');
 var config = require('../../../shared/config');
 var configSeo = require('./config');
-var excludes = ['metatitle'];
+var excludes = [];
 var metasDefaults = utils.get(configSeo, ['metatags', 'default']);
 var metasHandler = {
     title: title,
+    metatitle: metatitle,
     toptitle: topTitle,
     h1: topTitle,
     description: description,
@@ -36,6 +37,23 @@ function title(metas, value) {
         Base.prototype.set.call(this, 'title', value, {
             unset: false
         });
+    }
+    return metas;
+}
+
+function metatitle(metas, value) {
+    var suffix;
+
+    if (!value) {
+        delete metas.title;
+    }
+    else {
+        suffix = this.getLocationName();
+        if (!~value.indexOf(suffix)) {
+            value += ' - ';
+            value += suffix;
+        }
+        metas.title = value;
     }
     return metas;
 }
