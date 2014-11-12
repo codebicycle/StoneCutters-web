@@ -76,7 +76,8 @@ function interstitial(params, callback) {
             });
             return helpers.common.redirect.call(this, params.ref);
         }
-
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         this.app.session.persist({
             showInterstitial: '1'
         }, {
