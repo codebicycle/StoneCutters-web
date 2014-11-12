@@ -1,7 +1,7 @@
 {% set changesearch =  '<strong>' + search + '</strong>' %}
 {% for item in items %}
     <li>
-        <a href="{{ item | slugToUrl | link }}" data-qa="item-list" >
+        <a href="{{ item | slugToUrl | link }}" data-qa="list-item" >
             <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
                 {% if item.thumbnail %}
                     <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
