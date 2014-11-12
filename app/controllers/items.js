@@ -1141,11 +1141,20 @@ function filter(params, callback) {
 
     function controller() {
         var appf, appliedString;
+        var platform = this.app.session.get('platform');
 
         if (params.filters) {
             appf = params.filters;
             appliedString = params.filters;
         }
+
+        var redirect = function(done) {
+            if (platform !== 'html5') {
+                done.abort();
+                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/filter', ''));
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             params.location = this.app.session.get('siteLocation');
@@ -1201,6 +1210,8 @@ function filter(params, callback) {
         };
 
         var success = function(filters) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, 'items/filter', {
                 filters: filters,
                 appliedFilter: appf,
@@ -1213,6 +1224,7 @@ function filter(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(find)
             .then(findApplied)
@@ -1224,6 +1236,15 @@ function sort(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+
+        var redirect = function(done) {
+            if (platform !== 'html5') {
+                done.abort();
+                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/sort', ''));
+            }
+            done();
+        }.bind(this);
 
         var build = function(done) {
             var options = [
@@ -1242,6 +1263,8 @@ function sort(params, callback) {
         }.bind(this);
 
         var success = function(options) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, 'items/sort', {
                 sorts: options
             });
@@ -1252,6 +1275,7 @@ function sort(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(build)
             .val(success);
     }
