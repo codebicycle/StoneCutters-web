@@ -331,11 +331,11 @@ function comparator(filterA, filterB, property, defaultOrder) {
 }
 
 function comparatorByName(filterA, filterB) {
-    return comparator(filterA, filterB, 'name', defaultOrderByName);
+    return comparator.call(this, filterA, filterB, 'name', defaultOrderByName);
 }
 
 function comparatorByType(filterA, filterB) {
-    return comparator(filterA, filterB, 'type', defaultOrderByType);
+    return comparator.call(this, filterA, filterB, 'type', defaultOrderByType);
 }
 
 module.exports = Base.extend({
