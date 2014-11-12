@@ -304,7 +304,7 @@ function checkComparator(options) {
 function toJSON(options) {
     checkComparator.call(this, options);
     return this.sort().map(function(model) {
-        return model.toJSON(options); 
+        return model.toJSON(options);
     });
 }
 
