@@ -1255,7 +1255,7 @@ function sort(params, callback) {
                     name: 'price'
                 },
                 {
-                    name: 'date*to*showdesc'
+                    name: 'datedesc'
                 }
             ];
 

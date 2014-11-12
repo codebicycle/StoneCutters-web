@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> resultate vir <<KEYWORD>> in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultate vir <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> resultate in <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Sorteer volgens',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ons is jammer, maar jou soektog geen resultate opgelewer nie.',
     'listingpageitemslisting.ZeroResultsPage': 'Jammer, ons het geen resultate in <<CATEGORY>> in <<REGION>> gekry nie.',
     'netvibes_myolx.content.NoActiveListings': 'Jy het tans geen aktiewe lystings nie.',

@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> resultaten voor <<KEYWORD>> in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultaten voor  <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> resultaten in <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Sorteren op',
     'listingpageitemslisting.WeAreSorryNoResults': 'Er zijn geen advertenties gevonden.',
     'listingpageitemslisting.ZeroResultsPage': 'Er zijn geen advertenties gevonden in <<CATEGORY>> in <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Je hebt momenteel geen actieve advertenties.',

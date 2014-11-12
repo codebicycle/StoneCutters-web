@@ -1,9 +1,22 @@
 <form id="form-sort">
-   {% from macros import  FieldCheckFilter %}
-	{{ FieldCheckFilter(dictionary["itemslisting.NewlyListed"],'sort' ,'radio',sorts[2].name) }}
-	{{ FieldCheckFilter(dictionary["itemslisting.HighestFirst"], 'sort' ,'radio',sorts[0].name) }}
-	{{ FieldCheckFilter(dictionary["itemslisting.LowestFirst"], 'sort' ,'radio',sorts[1].name) }}
+
+    <fieldset>
+        <label class="block">{{ dictionary["itemslisting.NewlyListed"] }}
+            <input type="radio" name="sort" value="{{ sorts[2].name }}" {{ "checked" if filters.has('sort', sorts[2].name) }}>
+        </label>
+    </fieldset>
+    <fieldset>
+        <label class="block">{{ dictionary["itemslisting.HighestFirst"] }}
+            <input type="radio" name="sort" value="{{ sorts[0].name }}" {{ "checked" if filters.has('sort', sorts[0].name) }}>
+        </label>
+    </fieldset>
+    <fieldset>
+        <label class="block">{{ dictionary["itemslisting.LowestFirst"] }}
+            <input type="radio" name="sort" value="{{ sorts[1].name }}" {{ "checked" if filters.has('sort', sorts[1].name) }}>
+        </label>
+    </fieldset>
 	<fieldset class="center no-border">
-	<button id="btn-sort" type="submit" class="btns orange">{{ dictionary["countryoptions.Accept"] }}</button>
+    {% set isDisabled = false if (filters.has('sort', sorts[2].name) or filters.has('sort', sorts[1].name) or filters.has('sort', sorts[0].name)) else true %}
+	<button id="btn-sort" type="submit" {{ 'disabled' if isDisabled }} class="btns {{ 'disabled' if isDisabled }} orange">{{ dictionary["countryoptions.Accept"] }}</button>
 	</fieldset>
 </form>

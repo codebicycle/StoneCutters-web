@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> Resultate f\xFCr <<KEYWORD>> in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> Resultate f\xFCr <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> Resultate in <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Sortieren nach',
     'listingpageitemslisting.WeAreSorryNoResults': 'Es tut uns leid, aber wir haben keine Ergebnosse f\xFCr Ihre Suche.',
     'listingpageitemslisting.ZeroResultsPage': 'Es konnten leider keine Ergebnisse in <<CATEGORY>> in <<REGION>> gefunden werden.',
     'netvibes_myolx.content.NoActiveListings': 'Es sind derzeit keine Kleinanzeigen aktiv',

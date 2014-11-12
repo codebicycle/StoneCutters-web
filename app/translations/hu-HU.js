@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> eredm\xE9ny <<KEYWORD>> kulcssz\xF3ra itt: <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> eredm\xE9ny <<KEYWORD>> kulcssz\xF3ra',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> tal\xE1lat itt: <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Rendez\xE9s eszerint:',
     'listingpageitemslisting.WeAreSorryNoResults': 'Sajn\xE1ljuk, a keres\xE9sre nincs tal\xE1lat.',
     'listingpageitemslisting.ZeroResultsPage': 'Sajn\xE1ljuk, nem tal\xE1ltunk eredm\xE9nyeket a <<CATEGORY>> kateg\xF3ri\xE1ban <<REGION>> r\xE9gi\xF3ban.',
     'netvibes_myolx.content.NoActiveListings': 'Jelenleg nincs akt\xEDv hirdet\xE9se.',

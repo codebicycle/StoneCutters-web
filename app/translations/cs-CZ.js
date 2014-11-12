@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> v\xFDsledk\u016F pro <<KEYWORD>> v m\xEDst\u011B: <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> v\xFDsledk\u016F pro <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> v\xFDsledk\u016F hled\xE1n\xED v <<LOCATION>>',
+    'listingpageitemslisting.SortBy': '\u0158adit podle',
     'listingpageitemslisting.WeAreSorryNoResults': 'Je n\xE1m l\xEDto, ale pro V\xE1mi zadan\xE9 vyhled\xE1v\xE1n\xED nem\xE1me v\xFDsledky.',
     'listingpageitemslisting.ZeroResultsPage': 'Omlouv\xE1me se, ale nena\u0161li jsme \u017E\xE1dn\xE9 v\xFDsledky v kategorii <<CATEGORY>> pro oblast <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Moment\xE1ln\u011B nem\xE1te \u017E\xE1dn\xE9 aktivn\xED z\xE1znamy.',

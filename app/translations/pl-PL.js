@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> wyniki dla <<KEYWORD>> w <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> wyniki dla <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> wyniki/\xF3w w <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Porz\u0105dkuj wed\u0142ug',
     'listingpageitemslisting.WeAreSorryNoResults': 'Przykro nam, nie znaleziono og\u0142osze\u0144. ',
     'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Nie masz aktywnych og\u0142osze\u0144.',

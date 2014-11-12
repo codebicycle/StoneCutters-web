@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> rezultata/i/ov za <<KEYWORD>> v/na <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezultata/i/ov za <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> rezultatov v <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Uredi po',
     'listingpageitemslisting.WeAreSorryNoResults': 'Za va\u0161e iskanje ni rezultatov.',
     'listingpageitemslisting.ZeroResultsPage': 'V <<CATEGORY>> na <<REGION>> ni nobenih rezultatov.',
     'netvibes_myolx.content.NoActiveListings': 'Trenutno nimate aktivnih oglasov.',

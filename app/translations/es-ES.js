@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> resultados para <<KEYWORD>> en <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultados para <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> resultados en <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Ordenar por',
     'listingpageitemslisting.WeAreSorryNoResults': 'Lo lamentamos pero no hay resultados para tu b\xFAsqueda.',
     'listingpageitemslisting.ZeroResultsPage': 'Disculpa, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualmente no tienes publicaciones activas.',

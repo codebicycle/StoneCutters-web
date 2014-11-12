@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> r\xE9sultats pour <<KEYWORD>> pour <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> r\xE9sultats pour <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> r\xE9sultats pour <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Classer par',
     'listingpageitemslisting.WeAreSorryNoResults': 'Nous sommes d\xE9sol\xE9s mais il n\'y pas de r\xE9sultats pour votre recherche.',
     'listingpageitemslisting.ZeroResultsPage': 'D\xE9sol\xE9 mais nous n\'avons trouv\xE9 aucun r\xE9sultat dans <<CATEGORY>> pour <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actuellement vous n\'avez pas d\'annonce active.',

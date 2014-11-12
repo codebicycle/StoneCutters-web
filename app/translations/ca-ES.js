@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> resultats per a <<KEYWORD>> a <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultats per a <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> resultats a<<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Organitzar per',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ho sentim per\xF2 no tenim resultats per a la vostra cerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ho sentim, no hem trobat resultats de <<CATEGORY>> a <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualment no teniu cap anunci actiu.',
