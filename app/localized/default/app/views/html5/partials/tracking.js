@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('partials/tracking');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
     id: 'partials-tracking-view',
@@ -10,9 +11,10 @@ module.exports = Base.extend({
         'update': 'onUpdate',
         'updateHtml': 'onUpdateHtml',
         'track': 'onTrack',
-        'trackAnalytics': 'onTrackAnalytics'
+        'trackAnalytics': 'onTrackAnalytics',
+        'trackEvent': 'onTrackEvent',
+        'fireTrackEvent': 'onFireTrackEvent'
     },
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -62,9 +64,10 @@ module.exports = Base.extend({
             return;
         }
 
-        var _gaq = window._gaq || [];
-        
-        _gaq.push(function track() {
+        this._checkAnalyticsLib();
+
+        window._gaq = window._gaq || [];
+        window._gaq.push(function track() {
             var tracker = window._gat._getTracker('UA-5247560-17');
             var osName = tracking.params.analytics.osName;
             var osVersion = tracking.params.analytics.osVersion;
@@ -74,5 +77,65 @@ module.exports = Base.extend({
             tracker._setCustomVar(1, 'olx_visitor_country', ['html5_', osName, '_', osVersion, '_', location].join(''), 1);
             tracker._trackPageview(tracking.params.analytics.page);
         });
+    },
+    onTrackEvent: function(event, element, handler) {
+        var $element = $(element);
+        var data = $element.data('tracking');
+        var category;
+        var action;
+
+        if (!data || $element.hasClass('disabled') || $element.hasClass('opaque')) {
+            return;
+        }
+        data = data.split('-');
+        if (data.length === 2) {
+            handler = handler || $.noop;
+            category = data[0];
+            action = data[1];
+            data = handler.apply($element, data) || {};
+            this._fireTrack(_.defaults(data, {
+                category: category,
+                action: action
+            }));
+        }
+    },
+    onFireTrackEvent: function(event, data, options) {
+        this._fireTrack(data, options);
+    },
+    _fireTrack: function(data, callback, options) {
+        if (callback && !_.isFunction(callback)) {
+            options = callback;
+            callback = $.noop;
+        }
+        options = _.defaults((options || {}), {
+            url: '/tracking/event.gif',
+            type: 'GET',
+            global: false,
+            cache: false,
+            data: _.defaults(data, {
+                locUrl: this.app.session.get('location').url,
+                url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
+            }),
+            always: (callback || $.noop)
+        });
+        $.ajax(options);
+    },
+    _checkAnalyticsLib: function() {
+        var id = 'ga-lib';
+        var $ga;
+
+        window._gaq = window._gaq || [];
+        window._gaq.push(['_setDomainName', this.app.session.get('host')]);
+
+        if (!$('#' + id).length) {
+            $ga = $('<script></script>');
+            $ga.attr({
+                type: 'text/javascript', 
+                src: ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js',
+                id: id,
+                async: true
+            });
+            $('head').append($ga);
+        }
     }
 });

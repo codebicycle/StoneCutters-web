@@ -1,191 +1,199 @@
 .categories-best-selling {
-	margin-top: 20px;
+    margin-top: 20px;
 
-	.module {
-		box($greyPageBg, $yellowBorders, 3px, 8px 8px 18px 8px, solid, 1px);
-		display: inline-block;
-		margin: 0 20px 0 0;
-		text-align: center;
-		vertical-align: middle;
-		width: 177px;
+    .module {
+        box($greyPageBg, $yellowBorders, 3px, 8px 8px 18px 8px, solid, 1px);
+        display: inline-block;
+        margin: 0 20px 0 0;
+        text-align: center;
+        vertical-align: middle;
+        width: 177px;
 
-		&:hover {
-			text-decoration: none;
-		}
+        &:hover {
+            text-decoration: none;
+        }
 
-		p {
-			font-size: $xs;
-			margin: 0;
-			strong {
-				display: block;
-				word-break: break-all;
-			}
-		}
+        p {
+            font-size: $xs;
+            margin: 0;
+            strong {
+                display: block;
+                word-break: break-all;
+            }
+        }
 
-		.icons::before {
-			color: $blue;
-			font-size: remify(64px);
-		}
-	}
+        .icons::before {
+            color: $blue;
+            font-size: remify(64px);
+        }
+    }
 
-	.posting {
-		display: inline-block;
-		margin-left: 10px;
-		vertical-align: middle;
+    .posting {
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
 
-		span {
-			display: block;
-			font-size: $s;
-			font-weight: normal;
-		}
-	}
+        span {
+            display: block;
+            font-size: $s;
+            font-weight: normal;
+        }
+    }
 }
 
 .item-preview {
-	clear-fix();
+    clear-fix();
 
-	.header-edit {
-		box($greyBoxBg, $greyBorders, 3px 3px 0 0, 10px 20px, solid, 1px);
-		border-bottom: none;
-		clear-fix();
+    .header-edit {
+        box($greyBoxBg, $greyBorders, 3px 3px 0 0, 10px 20px, solid, 1px);
+        border-bottom: none;
+        clear-fix();
 
-		p {
-			float: left;
-			margin: 0;
-		}
-		.icons {
-			float: right;
-			&::before {
-				font-size: $xs;
-				margin-right: 5px
-			}
-		}
-	}
+        p {
+            float: left;
+            margin: 0;
+        }
+        .icons {
+            float: right;
+            &::before {
+                font-size: $xs;
+                margin-right: 5px
+            }
+        }
+    }
 
-	.item-preview-content {
-		float: left;
-		width: 660px;
-		
-		.item-location {
-			margin: 0;
-		}
-		
-		.item-price {
-		    height: 30px;
-		    left: 10px;
-		    margin: 0;
-		    position: absolute;
-		    tab-arrow(right, $violet, $violet, 1px, 25px, 1000);
-		    top: 125px;
+    .item-preview-content {
+        float: left;
+        width: 660px;
 
-		    .price {
-		    	font-size: $l;
-		    }
-		    .price-type {
-		    	font-size: $xs;
-		    	line-height: 1;
-		    	margin: 0;
-		    }
-		}
+        .item-location {
+            margin: 0;
+        }
 
-		.item-title {
-			font-size: $xl;
-			margin: 0;
-		}
+        .item-price {
+            height: 28px;
+            left: 10px;
+            margin: 0;
+            position: absolute;
+            tab-arrow(right, $violet, $violet, 1px, 24px, 1000);
+            top: 125px;
 
-		.wrapper {
-			box($white, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
-			position: relative;
-		}
-	}
+            .price {
+                font-size: $l;
+                line-height: 1;
+            }
+            .price, .price-type {
+                font-weight: bold;
+            }
+            .price-type:last-child {
+                font-size: $xs;
+                margin: 0;
+                line-height: 1;
+            }
+            .price-type:only-child, .price:only-child {
+                font-size: $l;
+                margin: 4px 0 0 0;
+            }
+        }
 
-	.side-column {
-		float: right;
-		width: 300px;
-		
-		.user-info {
-			box($greyBoxBg, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+        .item-title {
+            font-size: $xl;
+            margin: 0;
+        }
 
-			.icons::before {
-				font-size: $m;
-				margin-right: 5px;
-			}
+        .wrapper {
+            box($white, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+            position: relative;
+        }
+    }
 
-	        .user-name {
-	            font-size: $m;
-	        	margin: 0;
-	        }
+    .side-column {
+        float: right;
+        width: 300px;
+
+        .user-info {
+            box($greyBoxBg, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+
+            .icons::before {
+                font-size: $m;
+                margin-right: 5px;
+            }
+
+            .user-name {
+                font-size: $m;
+                margin: 0;
+            }
             .user-phone {
                 font-size: $l;
-	            font-weight: bold;
+                font-weight: bold;
             }
-    	}
-	}
+        }
+    }
 }
 
 .notification-keep-posting {
-	box($yellow, $yellowBorders, 3px, 30px, solid, 1px);
-	clear-fix();
-	margin-bottom: 20px;
+    box($yellow, $yellowBorders, 3px, 30px, solid, 1px);
+    clear-fix();
+    margin-bottom: 20px;
 
-	.categories-best-selling,
-	.posting {
-		clear: both;
-	}
+    .categories-best-selling,
+    .posting {
+        clear: both;
+    }
 
-	.highlight {
-		color: $orange;
-		font-weight: bold;
-	}
+    .highlight {
+        color: $orange;
+        font-weight: bold;
+    }
 
-	.icon-arrow::before {
-		color: $orange;
-		font-size: $l;
-		left: -35px;
-		position: absolute;
-		top: 15px;
-	}
-	.message,
-	.title {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 0;
-		width: 45%;
-	}
+    .icon-arrow::before {
+        color: $orange;
+        font-size: $l;
+        left: -35px;
+        position: absolute;
+        top: 15px;
+    }
+    .message,
+    .title {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+        width: 45%;
+    }
 
-	.message {
-		font-size: $m;
-		line-height: 1.4;
-		position: relative;
-	}
+    .message {
+        font-size: $m;
+        line-height: 1.4;
+        position: relative;
+    }
 
-	.title {
-		font-size: remify(38px);
-		font-weight: normal; 
-	}
+    .title {
+        font-size: remify(38px);
+        font-weight: normal;
+    }
 }
 
 .notification-message {
-	box($lightBlue, $lightBlueBorder, 3px, 20px 20px 20px 100px, solid, 1px);
-	clear-fix();
-	margin-bottom: 10px;
-	position: relative;
+    box($lightBlue, $lightBlueBorder, 3px, 20px 20px 20px 100px, solid, 1px);
+    clear-fix();
+    margin-bottom: 10px;
+    position: relative;
 
-	&.icon-time::before {
-		color: $blue;
-		font-size: remify(64px);
-		left: 20px;
-		position: absolute;
-		top: 20px;
-	}
+    &.icon-time::before {
+        color: $blue;
+        font-size: remify(64px);
+        left: 20px;
+        position: absolute;
+        top: 20px;
+    }
 
-	h4,
-	p {
-		line-height: 1.4;
-		margin: 0;
-	}
+    h4,
+    p {
+        line-height: 1.4;
+        margin: 0;
+    }
 
-	h4 {
-		font-size: $l;
-	}
+    h4 {
+        font-size: $l;
+    }
 }

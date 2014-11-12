@@ -84,7 +84,7 @@ function flow(params, callback) {
 
         var postingController = function(postingSession, cities) {
             var currentLocation = {};
-            
+
             tracking.setPage('desktop_step1');
             if (location.current) {
                 switch (location.current.type) {
@@ -280,6 +280,7 @@ function success(params, callback) {
         var securityKey = params.sk;
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+        var languages = this.app.session.get('languages');
         var anonymousItem;
 
         var prepare = function(done) {
@@ -298,6 +299,7 @@ function success(params, callback) {
                 }
             }
             params.id = params.itemId;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             delete params.itemId;
             delete params.title;
             delete params.sk;

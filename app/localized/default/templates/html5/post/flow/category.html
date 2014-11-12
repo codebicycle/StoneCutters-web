@@ -1,5 +1,5 @@
 {% for subcategory in subcategories %}
-    <li class="subcategory" data-id="{{ subcategory.id }}">
+    <li class="subcategory" data-id="{{ subcategory.id }}" data-qa="subcategory-name-{{ subcategory.id }}">
         <h2>
             <a class="trackMe" data-tracking="Posting-ClickSelectCategory">{{subcategory.trName}}</a>
         </h2>

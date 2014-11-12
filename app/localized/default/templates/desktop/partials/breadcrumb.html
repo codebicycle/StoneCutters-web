@@ -29,7 +29,7 @@
                     {% endif %}
 
                     {% if currentCat %}
-                        {{ dictionary["listingpageitemslisting.ResultsForNew3"] | replace('<<NUMBER>>', totalAds) | replace('<<KEYWORD>>', '<strong>"' + currentCat + '"</strong>') | replace('<<LOCATION>>', currentLocation) }}
+                        {{ dictionary["listingpageitemslisting.ResultsForNew2"] | replace('<<NUMBER>>', totalAds) | replace('<<KEYWORD>>', '<strong>"' + currentCat + '"</strong>') | replace('<<LOCATION>>', currentLocation) }}
                     {% else %}
                         {{ dictionary["listingpageitemslisting.ResultsIn"] | replace('<<NUMBER>>', totalAds) | replace('<<LOCATION>>', currentLocation) }}
                     {% endif %}

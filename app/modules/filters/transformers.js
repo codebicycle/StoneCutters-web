@@ -5,7 +5,7 @@ var translations = require('../../../shared/translations');
 
 module.exports = {
     kilometers: function transform(filter, options) {
-        if (filter.otherType === 'LIST') {
+        if (filter.has('otherType')) {
             return filter;
         }
         var app = options.app;
@@ -13,7 +13,7 @@ module.exports = {
         var dictionary = translations[app.session.get('selectedLanguage') || 'en-US'];
         var label = [dictionary['misc.LessThan'], regexp, dictionary['posting_optionallist.Kms']].join('');
 
-        return _.extend(filter, {
+        filter.set({
             otherType: 'LIST',
             list: [
                 { 
@@ -42,7 +42,10 @@ module.exports = {
                     label: label.replace(regexp, ' 150.000 ')
                 }
             ]
+        }, {
+            unset: false
         });
+        return filter;
     },
     bathrooms: function transform(filter, options) {
         return filter;

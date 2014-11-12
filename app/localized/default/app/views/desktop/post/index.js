@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -286,6 +287,32 @@ module.exports = Base.extend({
             });
         }.bind(this);
 
+        var trackEvent = function(done, item) {
+            var category = 'Posting';
+            var action = 'PostingSuccess';
+
+            this.track({
+                category: category,
+                action: action,
+                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
+            });
+            done(item);
+        }.bind(this);
+
+        var trackGraphite = function(done, item) {
+            var location = this.app.session.get('location');
+            var platform = this.app.session.get('platform');
+
+            statsd.increment([location.name, 'posting', 'success', platform]);
+            done(item);
+        }.bind(this);
+
+        var success = function(item) {
+            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
+                status: 200
+            });
+        }.bind(this);
+
         var fail = function(_errors, track) {
             // TODO: Improve error handling
             if (_errors) {
@@ -312,44 +339,11 @@ module.exports = Base.extend({
             trackFail(track);
         }.bind(this);
 
-        var trackFail = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+        var trackFail = function(track) {
+            var location = this.app.session.get('location');
+            var platform = this.app.session.get('platform');
 
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'post,error',
-                    location: this.app.session.get('location').name,
-                    error: track || 'error'
-                }),
-                cache: false
-            });
-        }.bind(this);
-
-        var success = function(item) {
-            var category = 'Posting';
-            var action = 'PostingSuccess';
-
-            this.track({
-                category: category,
-                action: action,
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
-            });
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
-                status: 200
-            });
-            track();
-        }.bind(this);
-
-        var track = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
-
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'post,success',
-                    location: this.app.session.get('location').name
-                }),
-                cache: false
-            });
+            statsd.increment([location.name, 'posting', track || 'error', platform]);
         }.bind(this);
 
         this.$('#posting-contact-view').trigger('disablePost');
@@ -366,6 +360,7 @@ module.exports = Base.extend({
         asynquence().or(fail)
             .then(validate)
             .then(post)
+            .gate(trackEvent, trackGraphite)
             .val(success);
     }
 });

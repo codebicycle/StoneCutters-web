@@ -67,6 +67,12 @@ module.exports = {
             ':title-cat-:catId([0-9]+)/sort',
             '-cat-:catId([0-9]+)/sort',
             'cat-:catId([0-9]+)/sort',
+            ':title-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?/sort',
+            '-cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?/sort',
+            'cat-:catId([0-9]+)-p-:page([0-9]+)/:filters?/sort',
+            ':title-cat-:catId([0-9]+)/:filters?/sort',
+            '-cat-:catId([0-9]+)/:filters?/sort',
+            'cat-:catId([0-9]+)/:filters?/sort'
         ]
     },
     'items#searchig': {

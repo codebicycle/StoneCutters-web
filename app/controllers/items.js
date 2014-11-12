@@ -144,16 +144,17 @@ function show(params, callback) {
             var slug = helpers.common.slugToUrl(response.item.toJSON());
             var protocol = this.app.session.get('protocol');
             var host = this.app.session.get('host');
+            var itemLocation = response.item.getLocation().url || response.item.get('location').url;
             var url;
 
-            if (platform === 'desktop' && response.item.getLocation().url !== this.app.session.get('siteLocation')) {
+            if (platform === 'desktop' && itemLocation && itemLocation !== this.app.session.get('siteLocation')) {
                 url = [protocol, '://', host, '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
                     query: {
-                        location: response.item.getLocation().url
+                        location: itemLocation
                     }
                 });
             }
@@ -172,7 +173,7 @@ function show(params, callback) {
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
                     query: {
-                        location: response.item.getLocation().url
+                        location: itemLocation
                     }
                 });
             }
@@ -890,13 +891,14 @@ function staticSearch(params, callback, gallery) {
             var meta = items.meta;
 
             this.app.seo.setContent(meta);
-            this.app.seo.set('staticSearch', {
-                keyword: query.search,
-                category: (subcategory || category ? (subcategory || category).get('trName') : '')
-            });
-            if (meta.total < 5) {
+
+            if (meta.total <= 1) {
                 this.app.seo.addMetatag('robots', 'noindex, follow');
                 this.app.seo.addMetatag('googlebot', 'noindex, follow');
+            }
+            if (meta.total === 0) {
+                this.app.seo.addMetatag('robots', 'noindex, nofollow');
+                this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
 
             tracking.addParam('page_nb', meta.totalPages);
@@ -1210,7 +1212,7 @@ function sort(params, callback) {
                     name: 'price'
                 },
                 {
-                    name: 'date*to*showdesc'
+                    name: 'datedesc'
                 }
             ];
 

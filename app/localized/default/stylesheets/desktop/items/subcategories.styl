@@ -1,0 +1,104 @@
+#listing-nav {
+    float: left;
+    margin-right: 20px;
+    width: 238px;
+    box($greyBoxBg, $greyBorders, 3px, 0);
+    > span {
+        display: block;
+        margin: 0;
+        padding: 10px;
+    }
+    .title {
+        border-bottom: 1px solid $greyBorders;
+        color: $black;
+        font-size: $s;
+        font-weight: bold;
+        position: relative;
+        &.filter-title {
+            border: none;
+            cursor: pointer;
+        }
+        &:hover {
+            .icons::before {
+                color: $black;
+            }
+        }
+        .icons {
+            &::before {
+                color: $greyStrong;
+                cursor: pointer;
+                font-size: remify(10px);
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
+        }
+    }
+    h2 {
+        display: block;
+        font-size: $xs;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+    }
+    a {
+        display: block;
+        font-size: $xs;
+        padding: 11px 10px;
+        &.icons::before {
+            font-size: $m;
+        }
+        &.icon-arrow-left::before {
+            font-size: $xs;
+            margin-right: 5px;
+        }
+    }
+    .category-selected {
+        background: $greyStrong;
+        color: $white;
+        position: relative;
+        span {
+            font-size: $xs;
+            font-weight: normal;
+        }
+        &.arrow:after {
+            left: 10px;
+            bottom: -11px;
+            arrow($greyStrong transparent transparent, 5px 6px 6px);
+        }
+        &.icons::before {
+            font-size: $m;
+            margin-right: 5px;
+        }
+    }
+    .sub-categories {
+        background: $white;
+        ul-reset();
+        h2 {
+            display: inline-block;
+        }
+        li {
+            &:hover {
+                box-shadow(0 0 0 1px $blue inset);
+                a,
+                .count {
+                    color: $greyStrong;
+                    text-decoration: none;
+                }
+            }
+
+        }
+    }
+    .categories-link {
+        border-bottom: 1px solid $greyBorders;
+    }
+    .count {
+        color: $greyStrong;
+        font-size: $xs;
+    }
+}
+
+#listing-items {
+    float: right;
+    width: 720px;
+}
