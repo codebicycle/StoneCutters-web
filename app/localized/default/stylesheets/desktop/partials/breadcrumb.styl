@@ -16,6 +16,10 @@
         }
         a {
             font-size: $xs;
+            &::before {
+                vertical-align: baseline;
+                line-height: initial;
+            }
         }
         .count {
             color: $greyStrong;
@@ -52,6 +56,5 @@
     [class*=icon-arrow]::before {
         font-size: remify(8px);
         margin: 0 4px;
-        line-height: 14px;
     }
 }
