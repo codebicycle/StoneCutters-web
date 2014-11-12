@@ -15,7 +15,8 @@
             {% endif %}
         </div>
         <div class="back-to-results">
-            <a class="icons icon-arrow-left" href="{{ fromOlx if olxReferer else data.childCategoryLevel.url }}" {{ 'rel="nofollow"' if data.locationLevel.noFollow }} >{{ dictionary["itemgeneraldetails.BackResults"] }}</a>
+            <a class="icons icon-arrow-left" href="{{ fromOlx if olxReferer else data.childCategoryLevel.url }}" rel="nofollow">{{ dictionary["itemgeneraldetails.BackResults"] }}</a>
+            {{ data.locationLevel | log }}
         </div>
     </nav>
 {% endif %}
