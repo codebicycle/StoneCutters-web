@@ -38,7 +38,6 @@ module.exports = Base.extend({
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
-        console.log(path);
         this.app.router.redirectTo(path);
     },
     refactorPath: function(path) {
