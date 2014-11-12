@@ -16,7 +16,7 @@
                     </li>
                 {% endfor %}
             </ul>
-        {% elif filter.type == 'SELECT' %}
+        {% elif filter.type == 'SELECT' and not filter.name == 'sort' %}
             <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
             <div class="filter check-box {{ filter.name }}">
                 {% for value in filter.value %}
