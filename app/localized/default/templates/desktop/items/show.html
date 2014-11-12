@@ -10,8 +10,6 @@
     </aside>
 </section>
 
-{# {% if showAdSenseItemBottom %}
-	{% include (template + "/partials/adsense.html") %}
-{% endif %} #}
+{% view 'partials/adsense', 'slot_bottom' %}
 
 {% view 'partials/tracking' %}

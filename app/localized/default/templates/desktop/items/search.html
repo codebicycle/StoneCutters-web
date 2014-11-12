@@ -4,6 +4,7 @@
         <nav id="listing-filters">
             {% include (template + '/items/filters.html') %}
         </nav>
+        {% view 'partials/adsense', 'slot_aside' %}
         <section id="listing-items">
             {% include (template + '/items/locations.html') %}
             {% include (template + '/items/list.html') %}
