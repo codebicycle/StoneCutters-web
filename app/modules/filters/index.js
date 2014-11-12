@@ -213,13 +213,16 @@ function load(url) {
 function format() {
     var url = [];
     var value;
+    var name;
+    var sort;
 
     this.each(function(filter) {
-        if (!filter.has('current')) {
+        name = filter.get('name');
+        if (!filter.has('current') || name === 'sort') {
             return;
         }
         url.push('-');
-        url.push(filter.get('name'));
+        url.push(name);
         url.push('_');
         value = filter.get('current');
         switch (filter.get('type')) {
@@ -236,12 +239,26 @@ function format() {
                 break;
         }
     });
+    if (this.has('sort')) {
+        sort = this.get('sort');
+        url.push('-sort_');
+        url.push(sort.get('current').join(''));
+    }
     return url.join('');
 }
 
+function getIndex(name) {
+    var indexOf = this.order.indexOf(name);
+
+    if (!~indexOf) {
+        return defaultOrder.indexOf(name);
+    }
+    return indexOf - 100;
+}
+
 function comparator(filterA, filterB) {
-    var indexOfA = (this.order || defaultOrder).indexOf(filterA.get('name'));
-    var indexOfB = (this.order || defaultOrder).indexOf(filterB.get('name'));
+    var indexOfA = getIndex.call(this, filterA.get('name'));
+    var indexOfB = getIndex.call(this, filterB.get('name'));
 
     if (indexOfA > indexOfB) {
         return 1;
@@ -283,10 +300,14 @@ function smaugize() {
     });
     if (this.has('sort')) {
         sort = this.get('sort');
-        sort = sort.get('value').replace(regexpSort, '$1#$2').split('#');
+        sort = sort.get('current').join('').replace(regexpSort, '$1#$2').split('#');
         params['s.' + sort[0]] = sort[1] || 'asc';
     }
     return params;
+}
+
+function toJSON(options) {
+    return this.sort().map(function(model){ return model.toJSON(options); });
 }
 
 module.exports = Base.extend({
@@ -301,7 +322,9 @@ module.exports = Base.extend({
     load: load,
     format: format,
     smaugize: smaugize,
-    comparator: comparator
+    comparator: comparator,
+    order: defaultOrder,
+    toJSON: toJSON
 });
 
 module.exports.id = 'Filters';
