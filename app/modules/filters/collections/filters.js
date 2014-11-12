@@ -283,14 +283,14 @@ function smaugize() {
     if (this.has('sort')) {
         sort = this.get('sort');
         sort = sort.get('current').join('').replace(regexpSort, '$1#$2').split('#');
-        params['s.' + sort[0]] = sorts[sort[1]];
+        params['s.' + sort[0]] = sort[1] || 'asc';
     }
     return params;
 }
 
 function toJSON(options) {
     return this.sort().map(function(model) {
-        return model.toJSON(options); 
+        return model.toJSON(options);
     });
 }
 
