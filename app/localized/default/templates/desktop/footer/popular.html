@@ -13,7 +13,7 @@
             <ul class="popular-list">
         {% endif%}
         {% endfor %}
-        <li><a href="{{ '/all-states' | link({location: location.url}) }}">{{ dictionary["countryoptions.OtherCities"] }}</a></li>
+        <li><a href="{{ '/all-states' | link }}">{{ dictionary["countryoptions.OtherCities"] }}</a></li>
     </ul>
 </div>
 {% set itemsPerColumn = ( ( (states.length + 1 ) / totalColumns ) | round(0, 'ceil') ) %}
@@ -27,6 +27,6 @@
             <ul class="popular-list">
         {% endif%}
         {% endfor %}
-        <li><a href="{{ '/all-states' | link({location: location.url}) }}">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
+        <li><a href="{{ '/all-states' | link }}">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
     </ul>
 </div>
