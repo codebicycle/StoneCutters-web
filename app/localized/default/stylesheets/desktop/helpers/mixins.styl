@@ -186,11 +186,11 @@ tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
 
 btn-close()
     background-color: $greyStrong;
-    border-radius: 50%;
+    border-radius: 100%;
     color: $white;
-    font-size: remify(10px);
+    font-size: remify(8.6px);
     line-height: 1;
-    padding: 6px;
+    padding: remify(4px);
     position: absolute;
     right: 10px;
     top: 10px;
@@ -221,3 +221,8 @@ text-wrap()
     white-space: -webkit-pre-wrap;
     word-break: break-all;
     white-space: normal;
+
+cursive(color, size)
+    font-family: 'Kalam', cursive;
+    font-size: size
+    color: color
