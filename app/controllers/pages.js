@@ -127,6 +127,16 @@ function allstates(params, callback) {
     function controller() {
         var siteLocation = this.app.session.get('siteLocation');
 
+        var redirect = function(done) {
+            if (this.app.session.get('platform') !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done();
+        }.bind(this);
+
         var decide = function(done) {
             var spec = {
                 states: {
@@ -190,6 +200,7 @@ function allstates(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(decide)
             .then(fetch)
             .then(formatResponse)
@@ -201,6 +212,11 @@ function sitemap(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        if (this.app.session.get('platform') !== 'desktop') {
+            return helpers.common.redirect.call(this, '/', null, {
+                status: 302
+            });
+        }
         callback(null, {});
     }
 }
@@ -209,8 +225,11 @@ function featuredListings(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {
-
-        });
+        if (this.app.session.get('platform') !== 'desktop') {
+            return helpers.common.redirect.call(this, '/', null, {
+                status: 302
+            });
+        }
+        callback(null, {});
     }
 }
