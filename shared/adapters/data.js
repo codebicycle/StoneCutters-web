@@ -7,12 +7,11 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var logger = require('../logger')('adapter data');
 var utils = require('../utils');
+var statsd = require('../statsd')();
 var isServer = utils.isServer;
+var rGraphite = /\./g;
 
 if (isServer) {
-    var rGraphite = /\./g;
-    var statsdName = '../../server/modules/statsd';
-    var statsd = require(statsdName)();
     var restlerName = 'restler';
     var restler = require(restlerName);
     var memcachedModule = '../../server/modules/memcached';
@@ -169,7 +168,7 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
     var location = window.App && window.App.session && _.isFunction(window.App.session.get) ? window.App.session.get('location') : null;
     var start = new Date().getTime();
     var elapsed;
-    var done;
+    var succeeded;
     var failed;
 
     if (isServer) {
@@ -216,7 +215,8 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
                 readyState: res.readyState,
                 responseText: res.responseText,
                 statusCode: res.status,
-                statusText: res.statusText
+                statusText: res.statusText,
+                status: textStatus
             }, body);
         }
 

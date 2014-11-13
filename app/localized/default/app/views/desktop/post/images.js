@@ -90,12 +90,12 @@ module.exports = Base.extend({
                     dataType: 'json',
                     processData: false,
                     contentType: false
-                }, done);
+                }, done.errfcb);
             }.bind(this);
 
-            var success = function(done, res) {
+            var success = function(done, res, body) {
                 this.selected[$input.attr('name')] = {
-                    id: res.shift(),
+                    id: body.shift(),
                     file: imageUrl,
                     orientation: 1
                 };
