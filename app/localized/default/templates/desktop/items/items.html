@@ -12,7 +12,7 @@
                 {% if isStaticSearch %}
                     <div class="description">{{ item.description | truncate( 200, True, '...') }} </div>
                 {% endif %}
-                <span>{{ (dictionary["crm_new_version.RenameCategory_3"] + ' ' + item.displayLocation) if item.displayLocation  }}</span>
+                <span>{{ item.seo.references[0].anchor }}</span>
             </div><!--
             --><p class="items-price">
                 {{ item.price.displayPrice }}
