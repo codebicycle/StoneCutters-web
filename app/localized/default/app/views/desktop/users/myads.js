@@ -59,8 +59,6 @@ module.exports = Base.extend({
         var _params;
 
         var prepare = function(done) {
-            user = this.app.session.get('user');
-
             _params = {
                 token: user.token,
                 userId: user.userId,
@@ -83,7 +81,7 @@ module.exports = Base.extend({
             }, done.errfcb);
         }.bind(this);
 
-        var successmyads = function(_myAds) {
+        var successmyads = function(res, _myAds) {
             this.ads = _myAds.myAds.toJSON();
             this.render();
         }.bind(this);
@@ -96,10 +94,10 @@ module.exports = Base.extend({
                     reason: reason,
                     comment: reason_comment
                 }
-            }, done);
+            }, done.errfcb);
         }.bind(this);
 
-        var success = function(_myAds) {
+        var success = function(res, _myAds) {
             asynquence().or(error)
                 .then(prepare)
                 .then(findAds)

@@ -37,7 +37,7 @@ module.exports = Base.extend({
                         token: user.token
                     },
                     cache: false
-                }, done);
+                }, done.errfcb);
             }.bind(this);
 
             var error = function(err) {
@@ -98,10 +98,10 @@ module.exports = Base.extend({
                 },
                 cache: false,
                 json: true
-            }, done);
+            }, done.errfcb);
         }.bind(this);
 
-        var success = function(response) {
+        var success = function() {
             helpers.common.redirect.call(this.app.router, '/myolx/myolxmessages', null, {
                 status: 302,
                 query: {
