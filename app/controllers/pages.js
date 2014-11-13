@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var _ = require('underscore');
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
     var statsd = require(statsdModule)();
@@ -70,6 +71,11 @@ function interstitial(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4' || _.isEmpty(params)) {
+            return helpers.common.redirect.call(this, '/');
+        }
         if (params.downloadApp) {
             this.app.session.persist({
                 downloadApp: '1'
