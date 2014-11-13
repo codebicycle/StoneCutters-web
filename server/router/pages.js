@@ -167,9 +167,7 @@ module.exports = function pagesRouter(app, dataAdapter) {
         app.get('/force/:platform?', handler);
 
         function handler(req, res) {
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, callback);
+            Session.call(req.rendrApp, false, callback);
 
             function callback() {
                 var forcedPlatform = req.rendrApp.session.get('forcedPlatform');
