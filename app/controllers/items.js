@@ -223,9 +223,10 @@ function show(params, callback) {
             }
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
-
             if (!item.purged) {
                 this.app.seo.addMetatag('title', item.title);
+                //this.app.seo.addAlt('altImage', item);
+                //console.log('item: ',item.location.children[0]).children;
             }
             else {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');

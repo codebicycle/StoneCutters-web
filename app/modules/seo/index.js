@@ -30,6 +30,10 @@ function getHead() {
     return head;
 }
 
+function getAlter(key) {
+    console.log('altername:' + key);
+}
+
 function getPropertyHead(key) {
     return this.head.get(key);
 }
