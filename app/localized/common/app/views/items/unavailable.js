@@ -2,8 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
-var asynquence = require('asynquence');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'items_unavailable_view',
@@ -15,7 +14,7 @@ module.exports = Base.extend({
         data.category_name = this.options.category_name;
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {

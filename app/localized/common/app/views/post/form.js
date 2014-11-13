@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'post_form_view',
@@ -11,9 +11,9 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+
         return _.extend({}, data, {
-            user: this.app.session.get('user'),
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     }
 });
