@@ -1,8 +1,8 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
+var breadcrumb = require('../../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'posting-success-view',
@@ -17,7 +17,7 @@ module.exports = Base.extend({
             data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
         }
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {
