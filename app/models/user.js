@@ -87,7 +87,7 @@ function lostpassword(done, req) {
         }, done.errfcb);
     }.bind(this);
 
-    var success = function(res) {
+    var success = function() {
         statsd.increment([this.get('country'), 'lostpassword', 'success', this.get('platform')]);
         done();
     }.bind(this);

@@ -1,5 +1,12 @@
 'use strict';
 
+var SECOND = 1000;
+var MINUTE = 60 * SECOND;
+var HOUR = 60 * MINUTE;
+var DAY = 24 * HOUR;
+var MONTH = 30 * DAY;
+var YEAR = 12 * MONTH;
+
 var _ = require('underscore');
 var isServer = (typeof window === 'undefined');
 var esi = require('../app/modules/esi');
@@ -329,5 +336,11 @@ module.exports = {
     stringify: stringify,
     getUserAgent: getUserAgent,
     sort: sort,
-    noop: noop
+    noop: noop,
+    SECOND: SECOND,
+    MINUTE: MINUTE,
+    HOUR: HOUR,
+    DAY: DAY,
+    MONTH: MONTH,
+    YEAR: YEAR
 };

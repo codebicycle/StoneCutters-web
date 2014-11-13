@@ -125,7 +125,8 @@ function allstates(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('location');
+        var siteLocation = location.url;
 
         var redirect = function(done) {
             if (this.app.session.get('platform') !== 'desktop') {
