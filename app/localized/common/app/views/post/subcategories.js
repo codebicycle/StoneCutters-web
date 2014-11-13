@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'post_subcategories_view',
@@ -14,11 +14,11 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {
-        this.attachTrackMe(this.className, function(category, action) {
+        this.attachTrackMe(function(category, action) {
             return {
                 custom: [category, this.data('parentId'), this.data('id'), action].join('::')
             };

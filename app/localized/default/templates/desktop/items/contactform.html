@@ -35,7 +35,7 @@
                 <input type="text" name="phone" id="phone" class="phone" value="" maxlength="15" placeholder="{{ dictionary["item.YourPhoneNumberOptionalZA"] }} ">
             </label>
         </fieldset>
-        <img class="spinner hide" src="{{ '/images/desktop/spinner-bgYellow.gif' | static }}" alt="">
+        <span class="spinner hide"></span>
         <fieldset class="submit">
             <label for="submit">
                 <input type="submit" value="{{ dictionary["misc.SendEmail"] }} " id="submit" class="olx-ui-button orange" data-qa="reply-send-button" >
@@ -43,7 +43,7 @@
             <input type="hidden" class="hide itemCategory" value="{{ item.category.id }}">
             <input type="hidden" class="hide itemSubcategory" value="{{ item.category.parentId }}">
         </fieldset>
-        <p class="replySuccess icons icon-check hide" >
+        <p class="replySuccess icons icon-check hide" data-qa="reply-message-sent">
             {{ dictionary["item.YourMessageHasBeenSent"] }}
             <span>{{ dictionary["replymessage.SendAnotherMessage"] }} </span>
         </p>

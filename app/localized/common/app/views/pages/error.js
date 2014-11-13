@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'pages_error_view',
@@ -14,7 +14,7 @@ module.exports = Base.extend({
 
         this.app.session.clear('errorDirection');
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     }
 });

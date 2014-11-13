@@ -2,11 +2,11 @@
     clear-fix();
     color: $black;
     font-size: $s;
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
 
     .breadcrumb-navigation {
         float: left;
-        padding: 6px 0;
+        padding: 0 0 6px;
 
         a,
         span,
@@ -14,11 +14,22 @@
             display: inline-block;
             vertical-align: middle;
         }
+        a {
+            font-size: $xs;
+            &::before {
+                vertical-align: baseline;
+                line-height: initial;
+            }
+        }
         .count {
             color: $greyStrong;
         }
     }
-
+    .back-to-results {
+        a {
+            font-size: $xs;
+        }
+    }
     .breadcrumb-pagination {
         float: right;
         a {

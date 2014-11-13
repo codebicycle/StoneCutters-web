@@ -54,16 +54,20 @@ module.exports = {
     'items#searchig': {
         urls: [
             'search/:search/-p-:page-ig/:filters?',
+            'search/:search/-ig/:filters?',
             'search/:search?/-ig',
             'nf/search/:search/-p-:page-ig/:filters?',
+            'nf/search/:search/-ig/:filters?',
             'nf/search/:search?/-ig'
         ]
     },
     'items#search': {
         urls: [
             'search/:search/-p-:page/:filters?',
+            'search/:search/:filters?',
             'search/:search?',
             'nf/search/:search/-p-:page/:filters?',
+            'nf/search/:search/:filters?',
             'nf/search/:search?'
         ]
     },

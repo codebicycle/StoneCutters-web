@@ -6,7 +6,7 @@
                     <div class="popup-title">{% if firstRender %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% else %}{{ dictionary["defaultheader.Cities"] }}{% endif %}</div>
                     <ul>
                         {% for city in cities %}
-                            <li class="city" data-url="{{ city.url }}" data-qa="city" ><a>{{ city.name }}</a></li>
+                            <li class="city" data-url="{{ city.url }}" data-qa="city-name" ><a>{{ city.name }}</a></li>
                         {% endfor %}
                     </ul>
 

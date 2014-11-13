@@ -2,10 +2,10 @@
 <ul class="posting-categories-list">
 {% for category in categories %}
     <li>
-   		<a href="#" class="category icons icon-cat-{{ category.id }}" data-id="{{ category.id }}">{{category.trName}}</a>
+   		<a href="#" class="category icons icon-cat-{{ category.id }}" data-id="{{ category.id }}" data-qa="category-name-{{ category.id }}" >{{category.trName}}</a>
         <ul class="subcategories child-categories-list hide" data-id="{{ category.id }}">
         {% for subCategory in category.children.toJSON() %}
-            <li><a href="#" class="subcategory icons" data-id="{{ subCategory.id }}">{{ subCategory.trName }}</a></li>
+            <li><a href="#" class="subcategory icons" data-id="{{ subCategory.id }}" data-qa="subcategory-name-{{ subCategory.id }}">{{ subCategory.trName }}</a></li>
         {% endfor %}
         </ul>
     </li>

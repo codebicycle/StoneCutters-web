@@ -5,6 +5,7 @@ var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
+var statsd = require('../../../../../../../../shared/statsd')();
 window.URL = window.URL || window.webkitURL;
 
 function onpopstate(event) {
@@ -37,7 +38,7 @@ module.exports = Base.extend({
         }, this.onExit.bind(this));
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
-        this.attachTrackMe(this.className, function(category, action) {
+        this.attachTrackMe(function(category, action) {
             return {
                 custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
             };
@@ -227,6 +228,33 @@ module.exports = Base.extend({
             });
         }.bind(this);
 
+        var trackEvent = function(done, item) {
+            var category = 'Posting';
+            var action = 'PostingSuccess';
+
+            this.track({
+                category: category,
+                action: action,
+                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
+            });
+            done(item);
+        }.bind(this);
+
+        var trackGraphite = function(done, item) {
+            var location = this.app.session.get('location');
+            var platform = this.app.session.get('platform');
+
+            statsd.increment([location.name, 'posting', 'success', platform]);
+            done(item);
+        }.bind(this);
+
+        var success = function(item) {
+            this.app.router.once('action:end', always);
+            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
+                status: 200
+            });
+        }.bind(this);
+
         var fail = function(err, track) {
             // TODO: Improve error handling
             always();
@@ -241,45 +269,8 @@ module.exports = Base.extend({
             trackFail(track);
         }.bind(this);
 
-        var trackFail = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
-
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'post,error',
-                    location: this.app.session.get('location').name,
-                    error: track || 'error'
-                }),
-                cache: false
-            });
-        }.bind(this);
-
-        var success = function(item) {
-            var category = 'Posting';
-            var action = 'PostingSuccess';
-
-            this.track({
-                category: category,
-                action: action,
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
-            });
-            this.app.router.once('action:end', always);
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
-                status: 200
-            });
-            track();
-        }.bind(this);
-
-        var track = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
-
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'post,success',
-                    location: this.app.session.get('location').name
-                }),
-                cache: false
-            });
+        var trackFail = function(track) {
+            statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
         }.bind(this);
 
         var always = function() {
@@ -300,6 +291,7 @@ module.exports = Base.extend({
         asynquence().or(fail)
             .then(validate)
             .then(post)
+            .gate(trackEvent, trackGraphite)
             .val(success);
     },
     onRestart: function(event) {

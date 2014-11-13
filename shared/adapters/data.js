@@ -48,6 +48,14 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         }
         api = this.apiDefaults(api, req);
         api = _.extend(api, options);
+        if (req.rendrApp.session) {
+            api.query = api.query || {};
+            api.query.platform = req.rendrApp.session.get('platform');
+            if (api.method.toUpperCase() !== 'GET') {
+                api.data = api.data || {};
+                api.data.ipAddress = req.rendrApp.session.get('ip');
+            }
+        }
         done();
     }
 
@@ -158,6 +166,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
 };
 
 DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
+    var location = window.App && window.App.session && _.isFunction(window.App.session.get) ? window.App.session.get('location') : null;
     var start = new Date().getTime();
     var elapsed;
     var done;
@@ -167,52 +176,99 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
         return this.serverRequest(req, api, options, callback);
     }
 
-    if (options instanceof Function) {
-        callback = options;
-        options = {};
+    function prepare(done) {
+        if (options instanceof Function) {
+            callback = options;
+            options = {};
+        }
+        succeeded = options.done || function noop() {};
+        failed = options.fail || function noop() {};
+        delete options.done;
+        delete options.fail;
+        api = this.apiDefaults(api, req);
+        done();
     }
-    done = options.done || function noop() {};
-    failed = options.fail || function noop() {};
-    delete options.done;
-    delete options.fail;
 
-    var success = function(body, textStatus, res) {
-        elapsed = getElapsed(start, elapsed);
-        if (typeof body === 'string' && DataAdapter.prototype.isJSONResponse(res)) {
+    function request(done) {
+        $.ajax(this.ajaxParams(api, options))
+            .done(success.bind(this))
+            .fail(fail.bind(this));
+
+        function success(body, textStatus, res) {
+            elapsed = getElapsed(start, elapsed);
+            if (typeof body === 'string' && DataAdapter.prototype.isJSONResponse(res)) {
+                try {
+                    body = JSON.parse(body);
+                }
+                catch (err) {
+                    return fail(err, res);
+                }
+            }
+            if (body && body.itemProperties === null){
+                body.itemProperties = {};
+            }
+            logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.status]);
+            }
+            succeeded.apply(this, arguments);
+            done(null, {
+                readyState: res.readyState,
+                responseText: res.responseText,
+                statusCode: res.status,
+                statusText: res.statusText
+            }, body);
+        }
+
+        function fail(res, textStatus, err) {
+            elapsed = getElapsed(start, elapsed);
             try {
-                body = JSON.parse(body);
+                err = JSON.parse(err);
             }
-            catch (err) {
-                return fail(err, res);
+            catch (error) {}
+            if (options.convertErrorCode) {
+                err = DataAdapter.prototype.getErrForResponse(res, {
+                    allow4xx: options.allow4xx
+                });
             }
-        }
-        if (body && body.itemProperties === null){
-            body.itemProperties = {};
-        }
-        logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
-        done.apply(this, arguments);
-    }.bind(this);
-
-    var fail = function(res, textStatus, err) {
-        elapsed = getElapsed(start, elapsed);
-        try {
-            err = JSON.parse(err);
-        }
-        catch (error) {}
-        if (options.convertErrorCode) {
-            err = DataAdapter.prototype.getErrForResponse(res, {
-                allow4xx: options.allow4xx
+            logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.status]);
+            }
+            statsd.increment(['smaug', 'error', res.status]);
+            failed.apply(this, arguments);
+            done(err, {
+                readyState: res.readyState,
+                responseText: res.responseText,
+                statusCode: res.status,
+                statusText: res.statusText
             });
         }
-        logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
-        failed.apply(this, arguments);
-    }.bind(this);
+    }
 
-    api = this.apiDefaults(api, req);
-    $.ajax(this.ajaxParams(api, options))
-        .done(success.bind(this))
-        .fail(fail.bind(this))
-        .always(callback);
+    function check(done, err, res, body) {
+        if (err) {
+            done.abort();
+            return callback(err, res);
+        }
+        done(res, body);
+    }
+
+    function success(res, body) {
+        callback(null, res, body);
+    }
+
+    function fail(err) {
+        callback(err, {
+            statusCode: 598
+        });
+    }
+
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(request.bind(this))
+        .then(check.bind(this))
+        .val(success.bind(this));
 };
 
 DataAdapter.prototype._request = function(method, req, url, options, callback) {
@@ -268,7 +324,7 @@ DataAdapter.prototype.apiDefaults = function(api) {
     if (api.body && (!api.headers['Content-Type'] || api.headers['Content-Type'] == 'application/json')) {
         api.json = api.body;
     }
-    if (api.method === 'GET') {
+    if (api.method.toUpperCase() === 'GET') {
         delete api.json;
         delete api.body;
         delete api.data;

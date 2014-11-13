@@ -1,0 +1,57 @@
+#listing-filters {
+    > span {
+        display: block;
+        margin: 0;
+        padding: 10px;
+    }
+    .filter {
+        border-bottom: 1px solid $greyBorders;
+        display: block;
+        padding: 10px;
+        &:last-child {
+            border: none;
+        }
+
+        &.range {
+            .text-field {
+                display: inline-block;
+                margin-right: 5px;
+                vertical-align: middle;
+                width: 60px;
+            }
+            .button {
+                background: $greyStrong;
+                border-radius();
+                border: none;
+                color: $white;
+                height: 36px;
+                line-height: 1;
+                text-align: center;
+                width: 36px;
+            }
+        }
+        &.check-box {
+            label,
+            .link-range {
+                color: $blue;
+                cursor: pointer;
+                display: block;
+                font-size: $xs;
+                padding: 5px 0;
+                input {
+                    vertical-align: bottom;
+                    position: relative;
+                    top: -1px;
+                }
+            }
+        }
+        .clean-filters {
+            color: $blue;
+            cursor: pointer;
+            font-size: $xs;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -4,6 +4,7 @@ var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../../../../helpers');
 var utils = require('../../../../../../shared/utils');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'locations_list_view',
@@ -14,18 +15,14 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     },
     postRender: function() {
         var $form = this.$('.search-form');
         var $input = $form.find('input[name=search]');
 
-        this.attachTrackMe(this.className, function(category, action) {
-            return {
-                custom: [category, '-', '-', action].join('::')
-            };
-        });
+        this.attachTrackMe();
 
         this.$('#location .country-link, .cities-links .city-link').on('click', function(e) {
             var href = $(e.currentTarget).attr('href');

@@ -57,7 +57,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     }
 
     (function pageview() {
-        app.get('/analytics/pageview.gif', handler);
+        app.get('/tracking/pageview.gif', handler);
 
         function graphiteTracking(req) {
             var platform = req.rendrApp.session.get('platform');
@@ -129,7 +129,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                location: (location ? location.url : false) || req.query.locUrl
+                location: (location ? location.url : '') || req.query.locUrl
             };
             var url = tracking.ati.pageview.call({
                 app: req.rendrApp
@@ -153,7 +153,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                location: (location ? location.url : false) || req.query.locUrl,
+                location: (location ? location.url : '') || req.query.locUrl,
                 siteId: 539154,
                 logServer: 'logw306'
             };
@@ -187,13 +187,15 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 statsd.increment([req.query.locNm, 'bot', bot, platform]);
                 return false;
             }
-            try {
-                platformUrl = JSON.parse(req.query.custom).platform;
-            }
-            catch (err) {}
-            if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
-                /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
-                return false;
+            if (req.query.custom) {
+                try {
+                    platformUrl = JSON.parse(req.query.custom).platform;
+                }
+                catch (err) {}
+                if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
+                    /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
+                    return false;
+                }
             }
             return true;
         }
@@ -229,12 +231,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
     })();
 
     (function pageevent() {
-        app.get('/analytics/pageevent.gif', handler);
+        app.get('/tracking/event.gif', handler);
 
         function analyticsTracking(req, host) {
-            if (!req.query.page) {
-                return;
-            }
             var params = _.extend({
                 host: host,
                 ip: req.rendrApp.session.get('ip'),
@@ -252,9 +251,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function atiTracking(req) {
-            if (!req.query.custom) {
-                return;
-            }
             var location = req.rendrApp.session.get('location');
             var params = {
                 clientId: req.rendrApp.session.get('clientId').substr(24),
@@ -263,7 +259,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             };
             var config = {
                 platform: req.rendrApp.session.get('platform'),
-                location: (location ? location.url : false) || req.query.locUrl
+                location: (location ? location.url : '') || req.query.locUrl
             };
             var url = tracking.ati.event.call({
                 app: req.rendrApp
@@ -316,45 +312,22 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
     })();
 
-    (function graphiteGif() {
-        app.get('/analytics/graphite.gif', handler);
-
-        var metrics = {
-            pageview: function(req, options) {
-                statsd.increment([req.query.locNm, 'pageview', options.platform]);
-                statsd.increment([req.query.locNm, 'devices', options.osName, options.platform]);
-            },
-            reply: {
-                success: function(req, options) {
-                    statsd.increment([req.query.location, 'reply', 'success', options.platform]);
-                },
-                error: function(req, options) {
-                    statsd.increment([req.query.location, 'reply', 'error', options.platform]);
-                }
-            },
-            post: {
-                success: function(req, options) {
-                    statsd.increment([req.query.location, 'posting', 'success', options.platform]);
-                },
-                error: function(req, options) {
-                    statsd.increment([req.query.location, 'posting', req.query.error, options.platform]);
-                }
-            }
-        };
-
-        function noop() {}
+    (function statsD() {
+        app.get('/tracking/statsd.gif', handler);
 
         function handler(req, res) {
             var gif = new Buffer(image, 'base64');
+            var metric = req.param('metric');
+            var value = req.param('value');
 
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
 
-            utils.get(metrics, (req.query.metric || '').split(','), noop)(req, {
-                platform: req.rendrApp.session.get('platform'),
-                osName: req.rendrApp.session.get('osName') || 'Others'
-            });
+            if (!metric) {
+                return;
+            }
+            statsd.increment(metric, value);
         }
     })();
 
