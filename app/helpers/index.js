@@ -4,7 +4,6 @@ module.exports = {
     controllers: require('./controllers'),
     marketing: require('./marketing'),
     common: require('./common'),
-    breadcrumb: require('./breadcrumb'),
     dataAdapter: require('./dataAdapter'),
     features: require('./features'),
     timeAgo: function(itemDate) {

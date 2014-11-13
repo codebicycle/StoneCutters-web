@@ -7,12 +7,11 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var logger = require('../logger')('adapter data');
 var utils = require('../utils');
+var statsd = require('../statsd')();
 var isServer = utils.isServer;
+var rGraphite = /\./g;
 
 if (isServer) {
-    var rGraphite = /\./g;
-    var statsdName = '../../server/modules/statsd';
-    var statsd = require(statsdName)();
     var restlerName = 'restler';
     var restler = require(restlerName);
     var memcachedModule = '../../server/modules/memcached';
@@ -166,61 +165,110 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
 };
 
 DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
+    var location = window.App && window.App.session && _.isFunction(window.App.session.get) ? window.App.session.get('location') : null;
     var start = new Date().getTime();
     var elapsed;
-    var done;
+    var succeeded;
     var failed;
 
     if (isServer) {
         return this.serverRequest(req, api, options, callback);
     }
 
-    if (options instanceof Function) {
-        callback = options;
-        options = {};
+    function prepare(done) {
+        if (options instanceof Function) {
+            callback = options;
+            options = {};
+        }
+        succeeded = options.done || function noop() {};
+        failed = options.fail || function noop() {};
+        delete options.done;
+        delete options.fail;
+        api = this.apiDefaults(api, req);
+        done();
     }
-    done = options.done || function noop() {};
-    failed = options.fail || function noop() {};
-    delete options.done;
-    delete options.fail;
 
-    var success = function(body, textStatus, res) {
-        elapsed = getElapsed(start, elapsed);
-        if (typeof body === 'string' && DataAdapter.prototype.isJSONResponse(res)) {
+    function request(done) {
+        $.ajax(this.ajaxParams(api, options))
+            .done(success.bind(this))
+            .fail(fail.bind(this));
+
+        function success(body, textStatus, res) {
+            elapsed = getElapsed(start, elapsed);
+            if (typeof body === 'string' && DataAdapter.prototype.isJSONResponse(res)) {
+                try {
+                    body = JSON.parse(body);
+                }
+                catch (err) {
+                    return fail(err, res);
+                }
+            }
+            if (body && body.itemProperties === null){
+                body.itemProperties = {};
+            }
+            logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.status]);
+            }
+            succeeded.apply(this, arguments);
+            done(null, {
+                readyState: res.readyState,
+                responseText: res.responseText,
+                statusCode: res.status,
+                statusText: res.statusText,
+                status: textStatus
+            }, body);
+        }
+
+        function fail(res, textStatus, err) {
+            elapsed = getElapsed(start, elapsed);
             try {
-                body = JSON.parse(body);
+                err = JSON.parse(err);
             }
-            catch (err) {
-                return fail(err, res);
+            catch (error) {}
+            if (options.convertErrorCode) {
+                err = DataAdapter.prototype.getErrForResponse(res, {
+                    allow4xx: options.allow4xx
+                });
             }
-        }
-        if (body && body.itemProperties === null){
-            body.itemProperties = {};
-        }
-        logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
-        done.apply(this, arguments);
-    }.bind(this);
-
-    var fail = function(res, textStatus, err) {
-        elapsed = getElapsed(start, elapsed);
-        try {
-            err = JSON.parse(err);
-        }
-        catch (error) {}
-        if (options.convertErrorCode) {
-            err = DataAdapter.prototype.getErrForResponse(res, {
-                allow4xx: options.allow4xx
+            logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.status]);
+            }
+            statsd.increment(['smaug', 'error', res.status]);
+            failed.apply(this, arguments);
+            done(err, {
+                readyState: res.readyState,
+                responseText: res.responseText,
+                statusCode: res.status,
+                statusText: res.statusText
             });
         }
-        logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
-        failed.apply(this, arguments);
-    }.bind(this);
+    }
 
-    api = this.apiDefaults(api, req);
-    $.ajax(this.ajaxParams(api, options))
-        .done(success.bind(this))
-        .fail(fail.bind(this))
-        .always(callback);
+    function check(done, err, res, body) {
+        if (err) {
+            done.abort();
+            return callback(err, res);
+        }
+        done(res, body);
+    }
+
+    function success(res, body) {
+        callback(null, res, body);
+    }
+
+    function fail(err) {
+        callback(err, {
+            statusCode: 598
+        });
+    }
+
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(request.bind(this))
+        .then(check.bind(this))
+        .val(success.bind(this));
 };
 
 DataAdapter.prototype._request = function(method, req, url, options, callback) {

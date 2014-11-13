@@ -14,9 +14,7 @@ module.exports = Base.extend({
         templateAdapter: 'rendr-nunjucks'
     },
     initialize: function() {
-        Session.call(this, true, {
-            isServer: typeof window === 'undefined'
-        });
+        Session.call(this, true);
         _.extend(this.fetcher, Fetcher);
         _.extend(this.fetcher.modelStore, ModelStore);
         _.extend(this.fetcher.collectionStore, CollectionStore);

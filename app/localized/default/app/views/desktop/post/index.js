@@ -173,8 +173,8 @@ module.exports = Base.extend({
             data[$field.attr('name')] = $field.val();
             helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
                 data: data
-            }, function onResponse(response) {
-                _errors = response;
+            }, function onResponse(err, response, body) {
+                _errors = body;
                 $field.trigger('fieldValidationEnd', [_errors]);
             });
         }
@@ -260,34 +260,33 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
-            function callback(body, status, response) {
-                if (status !== 'success') {
-                    return done.fail(body);
-                }
-                if (body) {
-                    done.abort();
-                    return fail(body, 'invalid');
-                }
-                done();
-            }
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
                 data: this.form
-            }, callback);
+            }, done);
+        }.bind(this);
+
+        var check = function(done, err, response, body) {
+            if (response.status !== 'success') {
+                return done.fail(body);
+            }
+            if (body) {
+                done.abort();
+                return fail(body, 'invalid');
+            }
+            done();
         }.bind(this);
 
         var post = function(done) {
             query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
-                data: this.form,
-                done: done,
-                fail: done.fail
-            });
+                data: this.form
+            }, done.errfcb);
         }.bind(this);
 
-        var trackEvent = function(done, item) {
+        var trackEvent = function(done, res, item) {
             var category = 'Posting';
             var action = 'PostingSuccess';
 
@@ -299,7 +298,7 @@ module.exports = Base.extend({
             done(item);
         }.bind(this);
 
-        var trackGraphite = function(done, item) {
+        var trackGraphite = function(done, res, item) {
             var location = this.app.session.get('location');
             var platform = this.app.session.get('platform');
 
@@ -359,6 +358,7 @@ module.exports = Base.extend({
         }
         asynquence().or(fail)
             .then(validate)
+            .then(check)
             .then(post)
             .gate(trackEvent, trackGraphite)
             .val(success);
