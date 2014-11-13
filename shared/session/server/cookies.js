@@ -10,7 +10,7 @@ function Cookies(req, res, callback) {
     var slice = 1;
 
     if (hasM) {
-        slice++;;
+        slice++;
     }
     domain = domain.concat(host.slice(slice)).join('.');
     this.getAll = function() {

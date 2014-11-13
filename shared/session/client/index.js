@@ -11,7 +11,7 @@ function Client(app, callback) {
     var slice = 1;
 
     if (hasM) {
-        slice++;;
+        slice++;
     }
     domain = domain.concat(host.slice(slice)).join('.');
 
