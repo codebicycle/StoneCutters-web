@@ -9,10 +9,14 @@
     font-weight: normal;
 }
 @font-face {
-  font-family: 'Kalam';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Kalam Bold'), local('Kalam-Bold'), url(http://fonts.gstatic.com/s/kalam/v6/V6yS6HmuVV3o39pJxMtJCxTbgVql8nDJpwnrE27mub0.woff2) format('woff2');
+  font-family: 'kalam';
+    src: url(staticUrl/fonts/kalam-bold.eot);
+    src: url(staticUrl/fonts/kalam-bold.eot?#iefix) format('embedded-opentype'),
+         url(staticUrl/fonts/kalam-bold.woff) format('woff'),
+         url(staticUrl/fonts/kalam-bold.ttf) format('truetype'),
+         url(staticUrl/fonts/kalam-bold.svg#kalam_boldregular) format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 .icons::before {
     display: inline-block;
