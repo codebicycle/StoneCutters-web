@@ -7,13 +7,10 @@ function Cookies(req, res, callback) {
     var host = req.host.split('.');
     var hasM = !!~host.indexOf('m');
     var domain = [''];
-    var slice;
+    var slice = 1;
 
-    if (host.length === 3 || !hasM) {
-        slice = 1;
-    }
-    else {
-        slice = 2;
+    if (hasM) {
+        slice++;;
     }
     domain = domain.concat(host.slice(slice)).join('.');
     this.getAll = function() {
