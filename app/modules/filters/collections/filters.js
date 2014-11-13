@@ -290,11 +290,11 @@ function checkComparator(options) {
     if (options.sortType) {
         switch(options.sortType) {
             case 'type':
-                this.order = options.order || defaultOrderByType;
+                this.order = options.order || this.order || defaultOrderByType;
                 this.comparator = comparatorByType;
                 break;
             default:
-                this.order = options.order || defaultOrderByName;
+                this.order = options.order || this.order || defaultOrderByName;
                 this.comparator = comparatorByName;
                 break;
         }
