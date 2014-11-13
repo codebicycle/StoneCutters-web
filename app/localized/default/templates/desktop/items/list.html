@@ -1,18 +1,7 @@
-{% view 'items/partials/itemlistingtabs' %}
+{% include (template + '/items/itemlistingnav.html') %}
+
+{% view 'partials/adsense', 'slot_top' %}
 <ul class="items-list {{ itemListingClass }}">
-    {# {% if showAdSenseListingTop %}
-        <li>
-            <!-- TODO: Replace this markup with actual Google AdSense markup -->
-            <p>AdSenseListingTop</p>
-        </li>
-    {% endif %} #}
-
     {% include (template + '/items/items.html') %}
-
-    {# {% if showAdSenseListingBottom %}
-        <li>
-            <!-- TODO: Replace this markup with actual Google AdSense markup -->
-            <p>AdSenseListingBottom</p>
-        </li>
-    {% endif %} #}
 </ul>
+{% view 'partials/adsense', 'slot_bottom' %}
