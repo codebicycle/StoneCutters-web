@@ -9,10 +9,12 @@ var translations = require('../../../shared/translations');
 var configSeo = require('./config');
 var defaultConfig = config.get(['markets', 'common', 'seo']);
 var Head = require('./head');
+var AltGenerator = require('./altgenerator');
 
 var getters = {
     head: getHead,
     title: getPropertyHead,
+    metatitle: getPropertyHead,
     description: getPropertyHead,
     keywords: getPropertyHead,
     topTitle: getPropertyHead
@@ -30,10 +32,6 @@ function getHead() {
     return head;
 }
 
-function getAlter(key) {
-    console.log('altername:' + key);
-}
-
 function getPropertyHead(key) {
     return this.head.get(key);
 }
@@ -46,6 +44,7 @@ Seo = Backbone.Model.extend({
         });
 
         this.on('change:staticSearch', this.onChangeStaticSearch, this);
+        this.on('change:altImages', this.onChangeAltImages, this);
     },
     get: function (key) {
         var attr;
@@ -123,10 +122,21 @@ Seo = Backbone.Model.extend({
         topTitle.push(': ');
         topTitle.push(message.replace('<<CATEGORY>>', value.category).replace('<<REGION>>', region));
         topTitle.push(' | OLX');
-        
+
         this.head.set('topTitle', topTitle.join(''), {
             unset: false
         });
+    },
+    onChangeAltImages: function (seo, value) {
+        if (!value) {
+            return;
+        }
+        var generator = new AltGenerator({
+                item: value
+            }, {
+                seo: this,
+                app: this.app
+            });
     }
 });
 

@@ -8,6 +8,7 @@ var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var Item = require('../models/item');
+//var altgenerator = require('../modules/seo/altgenerator');
 
 module.exports = {
     show: middlewares(show),
@@ -225,8 +226,7 @@ function show(params, callback) {
             category = (category ? category.toJSON() : undefined);
             if (!item.purged) {
                 this.app.seo.addMetatag('title', item.title);
-                //this.app.seo.addAlt('altImage', item);
-                //console.log('item: ',item.location.children[0]).children;
+                this.app.seo.set('altImages',item);
             }
             else {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');

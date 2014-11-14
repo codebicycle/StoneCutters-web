@@ -219,6 +219,7 @@ module.exports = (function() {
     }
 
     function error(err, res, status, callback) {
+        console.log(err.stack);
         if (_.isFunction(status)) {
             callback = status;
             status = 404;

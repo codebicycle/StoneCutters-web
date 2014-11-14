@@ -1,75 +1,117 @@
-var AlterGenerator = function () {
-    this.data = {
-        title: null,
-        categoryName: null,
-        parentCategoryName: null,
-        optinalsByCategories: null,
-        price: null,
-        preCurrency: null,
-        postCurrency: null,
-        description: null,
-        countryName: null,
-        stateName: null,
-        cityName: null,
-        neighborhood: null
+'use strict';
 
+var _ = require('underscore');
+var Backbone = require('backbone');
+var translations = require('../../../shared/translations');
+var Base;
+
+
+Backbone.noConflict();
+Base = Backbone.Model;
+
+function initialize(attributes, options) {
+    var item = this.get('item');
+    var levelPath;
+    var attrs;
+    var alts = [];
+
+    options = options || {};
+    this.app = options.app;
+    this.seo = options.seo;
+    levelPath = this.seo.get('levelPath');
+    attrs = {
+        title: item.title,
+        categoryName: item.category.name,
+        price: item.price.displayPrice,
+        description: item.description,
+        countryName:  getCountryName(item),
+        stateName:  getStateName(item),
+        cityName: getCityName(item),
+        neighborhood: getNeighborhoodName(item)
     };
+    if (levelPath && levelPath.top && levelPath.top.categoryLevel) {
+        attrs.categoryLevel1 = levelPath.top.categoryLevel.anchor;
+    }
+    if (levelPath && levelPath.top && levelPath.top.childCategoryLevel) {
+        attrs.categoryLevel2 = levelPath.top.childCategoryLevel.anchor;
+    }
+    this.set(attrs, {
+        unset: false
+    });
+}
 
-};
+function generate () {
+    var alts = [];
+    var title = this.get('title');
+    var message = getMessagePictureOf.call(this);
 
-AlterGenerator.prototype.fill = function (item) {
-    this.data.title = item.title;
-    this.data.categoryName = item.category.name;
-    this.data.optinalsByCategories = 'TODO';
-    this.data.price = item.price.amount;
-    this.data.preCurrency = item.price.preCurrency;
-    this.data.postCurrency = item.price.postCurrency;
-    this.data.description = item.description;
-    this.data.countryName = this.getCountryName(item);
-    this.data.stateName = this.getStateName(item);
-    this.data.cityName = this.getCityName(item);
-    this.data.neighborhood = this.getNeighborhoodName(item);
+    if (this.has('neighborhood')) {
+        alts.push(title + ' - ' + this.get('neighborhood'));
+    }
+    if (message) {
+        alts.push(message + ' ' + title);
+    }
+    if (this.has('cityName')) {
+        alts.push(title + ' - ' + this.get('cityName'));
+    }
+    if (this.has('categoryLevel2')) {
+        alts.push(title + ' - ' + this.get('categoryLevel2'));
+    }
+    if (this.has('categoryLevel1')) {
+        alts.push(title + ' - ' + this.get('categoryLevel1'));
+    }
+    if (this.has('stateName')) {
+        alts.push(title + ' - ' + this.get('stateName'));
+    }
+    if (this.has('categoryName')) {
+        alts.push(title + ' - ' + this.get('categoryName'));
+    }
+    if (this.has('price')) {
+        alts.push(title + ' - ' + this.get('price'));
+    }
+    alts.push(title.substr(0,title.length <= 50 ? title.length : 50));
 
-    // console.log(item);
-};
+   return alts;
+}
 
-AlterGenerator.prototype.getCountryName = function (item) {
+function getMessagePictureOf() {
+    var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+    var message = dictionary['itemgeneraldetails.PicturesOf'] || '';
+
+    return message;
+}
+
+function getCountryName(item) {
     if (item.location && item.location.type == 'country' ) {
         return item.location.name;
     }
 }
 
-AlterGenerator.prototype.getStateName = function (item) {
+function getStateName(item) {
     if (item.location && item.location.children[0] && item.location.children[0].type == 'state') {
         return item.location.children[0].name;
     }
-    else {
-        return '';
-    }
+    return '';
 }
 
-AlterGenerator.prototype.getCityName = function (item) {
+function getCityName(item) {
     if (item.location && item.location.children[0] && item.location.children[0].children[0]) {
         return item.location.children[0].children[0].name;
     }
-    else {
-        return '';
-    }
+    return '';
 }
-AlterGenerator.prototype.getNeighborhoodName = function (item) {
+
+function getNeighborhoodName(item) {
     if (item.location && item.location.children[0] && item.location.children[0].children[0] && item.location.children[0].children[0].children[0]) {
         return  item.location.children[0].children[0].children[0].name;
     }
-    else {
-        return '';
-    }
+    return '';
 }
 
 
+module.exports = Base.extend({
+    initialize: initialize,
+    generate: generate
+});
 
-module.exports = function (item) {
-    var instance = new AlterGenerator();
-    instance.fill(item);
-    return instance;
-};
-
+module.exports.id = 'AltGenerator';
