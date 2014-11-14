@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> tulemust m\xE4rks\xF5nale <<KEYWORD>> piirkonnas <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulemust m\xE4rks\xF5nale <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> tulemust asukohas <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Sorteeri',
     'listingpageitemslisting.WeAreSorryNoResults': 'Vabandame, kuid meil ei ole Teie otsingule tulemusi',
     'listingpageitemslisting.ZeroResultsPage': 'Vabandame, me ei leidnud tulemusi <<CATEGORY>>  <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Teil ei ole hetkel aktiivseid kuulutusi.',

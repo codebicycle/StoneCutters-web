@@ -85,15 +85,26 @@ module.exports = Base.extend({
             return;
         }
 
+        var host = this.app.session.get('shortHost').split('.');
+        var hasM = !!~host.indexOf('m');
+        var slice = 1;
+        var domain;
+
+        if (hasM) {
+            slice++;
+        }
+        domain = host.slice(slice).join('.');
+
         this._checkAnalyticsLib();
 
-        window._gaq = window._gaq || [];
         window._gaq.push(function track() {
             var host = tracking.params.analytics.host;
             var tracker = window._gat._getTracker(tracking.params.analytics.id);
             var referrerDomain = 'emptyReferrer';
             var doStore = true;
 
+            tracker._setDomainName(domain);
+            tracker._setCookiePath('/');
             if (typeof document.referrer !== 'undefined' && document.referrer !== '') {
                 referrerDomain = document.referrer.match(/:\/\/(.[^/]+)/)[1];
 
@@ -104,7 +115,7 @@ module.exports = Base.extend({
             if (doStore) {
                 tracker._setCustomVar(2, 'keep_referral', referrerDomain, 2);
             }
-            tracker._set("title", tracking.params.analytics.keyword);
+            tracker._set('title', tracking.params.analytics.keyword);
             tracker._trackPageview(tracking.params.analytics.page);
         });
     },
@@ -136,8 +147,6 @@ module.exports = Base.extend({
         var $ga;
 
         window._gaq = window._gaq || [];
-        window._gaq.push(['_setDomainName', this.app.session.get('host')]);
-
         if (!$('#' + id).length) {
             $ga = $('<script></script>');
             $ga.attr({

@@ -15,7 +15,7 @@
                     {% for city in topCities %}
                         <li><a href="{{ '/nf/all-results' | link({location: city.url}) }}" rel="nofollow">{{ city.name }}, {{ city.stateAbbreviation }}</a></li>
                     {% endfor %}
-                    <li><a href="{{ '/all-states' | link({location: location.url}) }}" rel="nofollow">{{ dictionary["countryoptions.OtherCities"] }}</a></li>
+                    <li><a href="{{ '/all-states' | link }}" rel="nofollow">{{ dictionary["countryoptions.OtherCities"] }}</a></li>
                 </ul>
             </div>
             <div class="column">
@@ -24,7 +24,7 @@
                     {% for state in states %}
                         <li><a href="{{ '/nf/all-results' | link({location: state.url}) }}" rel="nofollow">{{ state.name }}</a></li>
                     {% endfor %}
-                    <li><a href="{{ '/all-states' | link({location: location.url}) }}" rel="nofollow">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
+                    <li><a href="{{ '/all-states' | link }}" rel="nofollow">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
                 </ul>
             </div>
 

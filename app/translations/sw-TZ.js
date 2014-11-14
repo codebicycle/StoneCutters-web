@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': 'Matokeo <<NUMBER>> ya <<KEYWORD>> katika <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': 'Matokeo <<NUMBER>> ya <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': 'Matokeo <<NUMBER>> katika <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Tafuta kwa',
     'listingpageitemslisting.WeAreSorryNoResults': 'Tunasikitika lakini hatuna matokeo ya utafuta wako.',
     'listingpageitemslisting.ZeroResultsPage': 'Tunasikitika, hatukupata matokeo katika <<CATEGORY>> at <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'You currently have no active ads.',

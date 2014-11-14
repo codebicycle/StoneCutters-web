@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> resultater for <<KEYWORD>> i <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> resultater for <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> resultater i <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Sorter efter',
     'listingpageitemslisting.WeAreSorryNoResults': 'Desv\xE6rre kan vi ikke finde noget resultat p\xE5 din s\xF8gning.',
     'listingpageitemslisting.ZeroResultsPage': 'Vi beklager, men vi har ikke fundet nogle resultater i <<CATEGORY>> i <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Du har ingen aktive annoncer.',

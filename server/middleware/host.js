@@ -64,23 +64,21 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!hasM && !hasWww) {
                 location = subdomains[0];
             }
-            if (!hasM) {
-                if (location) {
-                    siteLocation.push(location);
-                }
-                else {
-                    siteLocation.push('www');
-                }
-                siteLocation.push(domain);
-                if (hasCom) {
-                    siteLocation.push('com');
-                }
-                if (hasCo) {
-                    siteLocation.push('co');
-                }
-                if (country) {
-                    siteLocation.push(country);
-                }
+            if (location) {
+                siteLocation.push(location);
+            }
+            else {
+                siteLocation.push('www');
+            }
+            siteLocation.push(domain);
+            if (hasCom) {
+                siteLocation.push('com');
+            }
+            if (hasCo) {
+                siteLocation.push('co');
+            }
+            if (country) {
+                siteLocation.push(country);
             }
             siteLocation = siteLocation.join('.');
             locationUrl.push(domain);
@@ -104,7 +102,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 port: port,
                 locationUrl: locationUrl
             });
-            if (siteLocation.length) {
+            if (!hasM || isTesting || isStaging) {
                 req.rendrApp.get('session').siteLocation = siteLocation;
             }
             next();

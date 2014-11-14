@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<KEYWORD>> \u5728 <<LOCATION>> \u7684 <<NUMBER>> \u500B\u7D50\u679C',
     'listingpageitemslisting.ResultsForNew4': '<<KEYWORD>> \u7684 <<NUMBER>> \u500B\u7D50\u679C',
     'listingpageitemslisting.ResultsIn': '<<LOCATION>>\u7684<<NUMBER>>\u500B\u7D50\u679C',
+    'listingpageitemslisting.SortBy': '\u4F9D\u9806\u5E8F',
     'listingpageitemslisting.WeAreSorryNoResults': '\u5C0D\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u60A8\u641C\u7D22\u7684\u7D50\u679C',
     'listingpageitemslisting.ZeroResultsPage': '\u5C0D\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u5728<<REGION>> \u7684 <<CATEGORY>> \u76F8\u95DC\u7D50\u679C\u3002',
     'netvibes_myolx.content.NoActiveListings': '\u60A8\u66AB\u6642\u6C92\u6709\u5728\u7DDA\u5EE3\u544A\u3002',

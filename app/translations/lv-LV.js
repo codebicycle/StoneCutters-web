@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> rezult\u0101ti p\u0113c<<KEYWORD>> <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> rezult\u0101ti p\u0113c <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> rezult\u0101ti \u0161ai viet\u0101: <<LOCATION>>',
+    'listingpageitemslisting.SortBy': '\u0160\u0137irot p\u0113c',
     'listingpageitemslisting.WeAreSorryNoResults': 'Diem\u017E\u0113l nevaram atrast j\u016Bsu nor\u0101d\u012Btajiem parametriem atbilsto\u0161us rezult\u0101tus.',
     'listingpageitemslisting.ZeroResultsPage': 'Diem\u017E\u0113l m\u0113s neatrad\u0101m rezult\u0101tus <<CATEGORY>>, <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Jums \u0161obr\u012Bd nav neviens akt\u012Bvs sludin\u0101jums.',

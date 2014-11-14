@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> hasil untuk <<KEYWORD>> di <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> hasil untuk <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> hasil di <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Disortir oleh',
     'listingpageitemslisting.WeAreSorryNoResults': 'Maaf tidak ada hasil untuk pencarian Anda.',
     'listingpageitemslisting.ZeroResultsPage': 'Maaf, kami tidak menemukan hasil untuk <<CATEGORY>> di <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Anda saat ini tidak mempunyai iklan aktif.',

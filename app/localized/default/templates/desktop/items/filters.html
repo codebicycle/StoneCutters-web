@@ -1,5 +1,5 @@
 {% for filter in filters.toJSON() %}
-    {% if filter.name != 'state' and filter.name != 'city'  %}
+    {% if filter.name != 'state' and filter.name != 'city' and filter.name != 'sort'  %}
         {% if filter.otherType == 'LIST' %}
             <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
             <div class="filter check-box {{ filter.name }}">

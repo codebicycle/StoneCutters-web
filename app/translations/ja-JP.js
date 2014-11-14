@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> \u306E\u7D50\u679C <<KEYWORD>> \u306E\u4E2D\u3078 <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> \u306E\u7D50\u679C <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<LOCATION>>\u4E2D\u306E<<NUMBER>>\u7D50\u679C',
+    'listingpageitemslisting.SortBy': '\u5206\u985E\u6CD5',
     'listingpageitemslisting.WeAreSorryNoResults': '\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3002\u691C\u7D22\u7D50\u679C\u306F\u3054\u3056\u3044\u307E\u305B\u3093\u3002',
     'listingpageitemslisting.ZeroResultsPage': '\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3002<<REGION>>\u306E<<CATEGORY>>\u3067\u7D50\u679C\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002 ',
     'netvibes_myolx.content.NoActiveListings': '\u73FE\u5728\u63B2\u8F09\u4E2D\u306E\u30EA\u30B9\u30C8\u306F\u3042\u308A\u307E\u305B\u3093\u3002',

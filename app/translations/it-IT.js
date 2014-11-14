@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> risultati per <<KEYWORD>> a <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> risultati per <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> risultati per <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Ordinare per',
     'listingpageitemslisting.WeAreSorryNoResults': 'Ci dispiace ma non ci sono risultati per la tua ricerca.',
     'listingpageitemslisting.ZeroResultsPage': 'Ci dispiace, ma non abbiamo trovato<<RESULTS>> in <<CATEGORY>> in <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Attualmente non hai nessun annuncio pubblicato.',

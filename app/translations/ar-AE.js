@@ -112,6 +112,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew': 'Page <<PAGE_NUMBER>> of <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> results for <<KEYWORD>> in <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> results for <<KEYWORD>>',
+    'listingpageitemslisting.SortBy': '\u062A\u0631\u062A\u064A\u0628 \u0628 ',
     'listingpageitemslisting.WeAreSorryNoResults': 'We are sorry but we don\'t have results for your search.',
     'listingpageitemslisting.ZeroResultsPage': '\u0639\u0641\u0648\u0627\u064B \u0644\u0643\u0646 \u0644\u0645 \u0646\u062C\u062F <<\u0646\u062A\u064A\u062C\u0629 >>\u0641\u064A  <<\u0645\u0631\u062A\u0628\u0629 >>\u0645\u0646  <<\u0645\u0646\u0637\u0642\u0629 >>.',
     'netvibes_myolx.content.NoActiveListings': '\u062D\u0627\u0644\u064A\u0627 \u0644\u064A\u0633 \u0639\u0646\u062F\u0643 \u0623\u0639\u0644\u0627\u0646\u0627\u062A \u0639\u0627\u0645\u0627\u0629 ',

@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> na mga resulta para sa <<KEYWORD>> sa <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> na mga resulta para sa <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> resulta sa <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Uri-uriin ayon sa',
     'listingpageitemslisting.WeAreSorryNoResults': 'Paumanhin ngunit wala kaming mga resulta sa iyong hinahanap.',
     'listingpageitemslisting.ZeroResultsPage': 'Paumanhin, walang resulta sa <<CATEGORY>> sa <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Wala kang aktibong listahan sa ngayon.',

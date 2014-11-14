@@ -1,0 +1,40 @@
+<div id="level-path-bottom">
+    {% if levelPath.locationLevel.length > 0 %}
+        <div class="breadcrumb">
+            {% for level in levelPath.locationLevel %}
+                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+                    <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
+                </span>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if levelPath.categoryLevel.length > 0 %}
+        <div class="breadcrumb">
+            {% for level in levelPath.categoryLevel %}
+                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+                    <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
+                </span>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if levelPath.childCategoryLevel.length > 0 or wikititles.length > 0 %}
+        <div class="breadcrumb">
+            {% for level in levelPath.childCategoryLevel %}
+                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+                    <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
+                </span>
+            {% endfor %}
+            {% if wikititles.length > 0 %}
+                <span class="icons icon-arrow">
+                    {% for wiki in wikititles %}
+                        {% if wiki.url %}
+                            <a href="{{ wiki.url }}" {{ 'rel="nofollow"' if wiki.noFollow }}>{{ wiki.anchor }}</a>
+                        {% else %}
+                            <span>{{ wiki.anchor }}</span>
+                        {% endif %}
+                    {% endfor %}
+                </span>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

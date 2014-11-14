@@ -115,6 +115,7 @@ module.exports = {
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>> sijainnissa <<LOCATION>>',
     'listingpageitemslisting.ResultsForNew4': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>>',
     'listingpageitemslisting.ResultsIn': '<<NUMBER>> tulosta kohteessa <<LOCATION>>',
+    'listingpageitemslisting.SortBy': 'Lajitteluperuste',
     'listingpageitemslisting.WeAreSorryNoResults': 'Haullesi ei valitettavasti l\xF6ytynyt tuloksia.',
     'listingpageitemslisting.ZeroResultsPage': 'Emme valitettavasti l\xF6yt\xE4neet hakutuloksia kategoriassa <<CATEGORY>> alueella <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Sinulla ei ole aktiivisia ilmoituksia.',
