@@ -358,10 +358,10 @@ module.exports = {
         }
     },
     'pages#error': {
-        process: false,
+        process: true,
         names: {
             page_name: 'not_found',
-            category: 'static'
+            category: 'error'
         }
     },
     'pages#allstates': {
