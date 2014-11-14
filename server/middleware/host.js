@@ -102,7 +102,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 port: port,
                 locationUrl: locationUrl
             });
-            if (location || isTesting || isStaging) {
+            if (!hasM || isTesting || isStaging) {
                 req.rendrApp.get('session').siteLocation = siteLocation;
             }
             next();
