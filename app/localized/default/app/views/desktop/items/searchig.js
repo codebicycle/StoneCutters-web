@@ -15,7 +15,7 @@ module.exports = Base.extend({
         delete data.nav.listAct;
         return _.extend({}, data, {
             nav: {
-                link: link.replace('-ig', ''),
+                link: link.replace(/\/?-ig/, ''),
                 linkig: link,
                 galeryAct: 'active',
                 current: 'searchig'
