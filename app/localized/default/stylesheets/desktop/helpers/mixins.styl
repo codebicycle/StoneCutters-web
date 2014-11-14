@@ -184,18 +184,20 @@ tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
             margin-top: - (borderWidth + size);
             border-right-color: borderColor;
 
-btn-close()
-    background-color: $greyStrong;
-    border-radius: 100%;
-    color: $white;
-    font-size: remify(8.6px);
-    line-height: 1;
-    padding: 4px;
+btn-close(bgcolor, color, hoverbgcolor, hovercolor)
+    color: color;
+    background-color: bgcolor;
+    border-radius: 50%;
+    font-size: remify(8px);
+    line-height: $xs;
+    text-align: center;
+    padding: 2px;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    width: 11px;
+    height: 11px;
     &:hover
-        background-color: $black;
+        background-color: hoverbgcolor;
+        color: hovercolor;
 
 transition(t)
     vendor('transition', t)
