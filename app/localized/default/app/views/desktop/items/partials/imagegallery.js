@@ -36,30 +36,42 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var visibleThumbs = 5;
         var active = $('[data-gallery-thumb].active');
         var thumbwraper = $('[data-gallery-thumbwraper]');
         var activeNumber = active.data('gallery-thumb');
         var thumbsNumber = thumbwraper.data('gallery-thumbwraper');
-        var thumbwraperPos = thumbwraper.position();
+        var thumbwraperPos = thumbwraper.position().top;
+        var enoughThumbs = thumbsNumber > visibleThumbs;
         var newPos;
-        var thumbHeight = active.outerHeight();
-        if (activeNumber > 4) {
-            newPos = thumbwraperPos.top - thumbHeight;
-            console.log(newPos);
-            thumbwraper.animate({'top': newPos+'px'}, 100);
-        }
+        var thumbHeight = active.outerHeight(true);
+        var thumbsLast = thumbHeight * (thumbsNumber - visibleThumbs);
+        var maxTopPosition = -(thumbsNumber - visibleThumbs) * thumbHeight;
 
         if ($(event.currentTarget).hasClass('arrow-prev')) {
-            if (active.prev('[data-gallery-thumb]').length > 0) {
+            if (activeNumber > 1) {
                 active.prev().mouseover();
-            } else {
+                if (activeNumber < (visibleThumbs + 1) & thumbwraperPos !== 0 & enoughThumbs) {
+                    newPos = thumbwraperPos + thumbHeight;
+                    thumbwraper.animate({'top': newPos+'px'}, 100);
+                }
+            } 
+            else {
                 $('[data-gallery-thumb]').last().mouseover();
+                thumbwraper.animate({'top': '-'+thumbsLast+'px'}, 500);
             }
-        } else {
-            if (active.next('[data-gallery-thumb]').length > 0) {
+        } 
+        else {
+            if (activeNumber < thumbsNumber) {
+                if (activeNumber > (visibleThumbs - 1) & thumbwraperPos !== maxTopPosition & enoughThumbs) {
+                    newPos = thumbwraperPos - thumbHeight;
+                    thumbwraper.animate({'top': newPos+'px'}, 100);
+                }
                 active.next().mouseover();
-            } else {
+            } 
+            else {
                 $('[data-gallery-thumb]').first().mouseover();
+                thumbwraper.animate({'top': '0'}, 500);
             }
         }
     }
