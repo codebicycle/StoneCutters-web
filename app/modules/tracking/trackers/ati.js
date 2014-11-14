@@ -11,7 +11,7 @@ var defaultConfig = utils.get(configTracking, ['ati', 'paths', 'default']);
 var actionTypes = {
     edited: function (params, options) {
         if (options.itemEdited) {
-            processOptions(params, options);
+            processOptions.call(this, params, options);
         }
     }
 };
@@ -164,6 +164,9 @@ function processOptions(params, options) {
     if(params.subcategory === 'expired_subCategory') {
         delete params.subcategory;
     }
+    if(params.category === 'error') {
+        params.page_name = this.app.session.get('href');
+    }
 }
 
 function prepareParams(params, options) {
@@ -173,11 +176,11 @@ function prepareParams(params, options) {
         actionType = actionTypes[ params.action_type ];
 
         if (actionType) {
-            actionType(params, options);
+            actionType.call(this, params, options);
             return params;
         }
     }
-    processOptions(params, options);
+    processOptions.call(this, params, options);
     return params;
 }
 
@@ -189,7 +192,7 @@ function getParams(page, options) {
 
     prepareDefaultParams.call(this, custom);
     if (ati.process) {
-        custom = prepareParams(custom, options);
+        custom = prepareParams.call(this, custom, options);
     }
     params.custom = JSON.stringify(custom);
     if (!params.custom) {

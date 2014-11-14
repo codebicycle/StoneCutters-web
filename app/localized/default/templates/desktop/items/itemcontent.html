@@ -3,7 +3,7 @@
         <h2 class="item-title">{{ item.title }}</h2>
 
         {% include (template + "/items/iteminfo.html") %}
-        {% view 'items/imagegallery' %}
+        {% view 'items/partials/imagegallery' %}
         {% include (template + "/items/itemdescription.html") %}
         {% include (template + "/items/itemlocation.html") %}
     </div>
