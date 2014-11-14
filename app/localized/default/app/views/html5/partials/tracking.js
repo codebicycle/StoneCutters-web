@@ -64,6 +64,16 @@ module.exports = Base.extend({
             return;
         }
 
+        var host = this.app.session.get('shortHost').split('.');
+        var hasM = !!~host.indexOf('m');
+        var slice = 1;
+        var domain;
+
+        if (hasM) {
+            slice++;
+        }
+        domain = host.slice(slice).join('.');
+
         this._checkAnalyticsLib();
 
         window._gaq = window._gaq || [];
@@ -73,6 +83,8 @@ module.exports = Base.extend({
             var osVersion = tracking.params.analytics.osVersion;
             var location = tracking.params.analytics.location;
 
+            tracker._setDomainName(domain);
+            tracker._setCookiePath('/');
             osName = (osName !== 'Others' ? osName.toLowerCase() : 'unknown');
             tracker._setCustomVar(1, 'olx_visitor_country', ['html5_', osName, '_', osVersion, '_', location].join(''), 1);
             tracker._trackPageview(tracking.params.analytics.page);
@@ -125,8 +137,6 @@ module.exports = Base.extend({
         var $ga;
 
         window._gaq = window._gaq || [];
-        window._gaq.push(['_setDomainName', this.app.session.get('host')]);
-
         if (!$('#' + id).length) {
             $ga = $('<script></script>');
             $ga.attr({
