@@ -25,9 +25,9 @@ function Session(isApp, done) {
     }
 
     function callback(store) {
-        var session = _.extend({
+        var session = _.extend({}, store.getAll(), this.get('session') || {}, {
             isServer: utils.isServer
-        }, _.clone(this.get('session') || {}), store.getAll());
+        });
 
         this.session.update = function(pairs) {
             for (var key in pairs) {
