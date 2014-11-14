@@ -10,23 +10,28 @@ module.exports = Base.extend({
     longitude: '',
     showAutoLocation: false,
     postRender: function() {
+        var callback;
+        var errorCallback;
+
         this.app.router.once('action:start', this.onStart);
         this.app.router.once('action:end', this.onEnd);
 
         if (!helpers.features.isEnabled.call(this, 'autoLocationDisabled')) {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function callback(position) {
+                callback = function (position) {
                         this.latitude = position.coords.latitude;
                         this.longitude = position.coords.longitude;
                         this.$('#autolocation').show();
                         this.showAutoLocation = true;
-                    }.bind(this),
-                    function errorCallback(error) {
+                    }.bind(this);
+                errorCallback = function (error) {
                         this.showAutoLocation = false;
-                    }.bind(this),
-                    {maximumAge:0, timeout:6000}
-                );
+                    }.bind(this);
+
+                navigator.geolocation.getCurrentPosition(callback, errorCallback, {
+                        maximumAge: 0,
+                        timeout: 6000
+                    });
             }
         }
     },
@@ -71,26 +76,27 @@ module.exports = Base.extend({
             }, done.errfcb);
         }.bind(this);
 
-        var success = function(res) {
+        var success = function(res, body) {
             var url;
 
-            if (res.children) {
-                url = res.children[0].url;
-            } else {
-                url = res.url;
+            if (body.children) {
+                url = body.children[0].url;
+            }
+            else {
+                url = body.url;
             }
 
-            helpers.common.redirect.call(this.app.router || this, '/',
-                {
+            helpers.common.redirect.call(this.app.router || this, '/', {
                     location: url
                 }, {
-                status: 200
-            });
+                    status: 200
+                }
+            );
 
         }.bind(this);
 
         var error = function(err) {
-            console.log('Autolocation :: Error');
+            //console.log('Autolocation :: Error');
         }.bind(this);
 
         asynquence().or(error)
