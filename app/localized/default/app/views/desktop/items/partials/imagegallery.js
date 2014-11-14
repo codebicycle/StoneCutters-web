@@ -38,40 +38,48 @@ module.exports = Base.extend({
 
         var visibleThumbs = 5;
         var active = $('[data-gallery-thumb].active');
-        var thumbwraper = $('[data-gallery-thumbwraper]');
+        var thumbwrapper = $('[data-gallery-thumbwrapper]');
         var activeNumber = active.data('gallery-thumb');
-        var thumbsNumber = thumbwraper.data('gallery-thumbwraper');
-        var thumbwraperPos = thumbwraper.position().top;
+        var thumbsNumber = thumbwrapper.data('gallery-thumbwrapper');
+        var thumbwrapperPos = thumbwrapper.position().top;
         var enoughThumbs = thumbsNumber > visibleThumbs;
-        var newPos;
         var thumbHeight = active.outerHeight(true);
         var thumbsLast = thumbHeight * (thumbsNumber - visibleThumbs);
         var maxTopPosition = -(thumbsNumber - visibleThumbs) * thumbHeight;
+        var newPos;
 
         if ($(event.currentTarget).hasClass('arrow-prev')) {
             if (activeNumber > 1) {
                 active.prev().mouseover();
-                if (activeNumber < (visibleThumbs + 1) & thumbwraperPos !== 0 & enoughThumbs) {
-                    newPos = thumbwraperPos + thumbHeight;
-                    thumbwraper.animate({'top': newPos+'px'}, 100);
+                if (activeNumber < (visibleThumbs + 1) && thumbwrapperPos !== 0 && enoughThumbs) {
+                    newPos = thumbwrapperPos + thumbHeight;
+                    thumbwrapper.animate({
+                        'top': newPos + 'px'
+                    }, 100);
                 }
             } 
             else {
                 $('[data-gallery-thumb]').last().mouseover();
-                thumbwraper.animate({'top': '-'+thumbsLast+'px'}, 500);
+                thumbwrapper.animate({
+                    'top': '-' + thumbsLast + 'px'
+                }, 500);
             }
         } 
         else {
             if (activeNumber < thumbsNumber) {
-                if (activeNumber > (visibleThumbs - 1) & thumbwraperPos !== maxTopPosition & enoughThumbs) {
-                    newPos = thumbwraperPos - thumbHeight;
-                    thumbwraper.animate({'top': newPos+'px'}, 100);
+                if (activeNumber > (visibleThumbs - 1) && thumbwrapperPos !== maxTopPosition && enoughThumbs) {
+                    newPos = thumbwrapperPos - thumbHeight;
+                    thumbwrapper.animate({
+                        'top': newPos + 'px'
+                    }, 100);
                 }
                 active.next().mouseover();
             } 
             else {
                 $('[data-gallery-thumb]').first().mouseover();
-                thumbwraper.animate({'top': '0'}, 500);
+                thumbwrapper.animate({
+                    'top': '0'
+                }, 500);
             }
         }
     }
