@@ -49,6 +49,8 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {
 
         });
@@ -101,6 +103,8 @@ function logout(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         this.app.session.clear('user');
         return helpers.common.redirect.call(this, '/', null, {
             status: 302,
@@ -136,6 +140,8 @@ function myolx(params, callback) {
             });
         }
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {});
     }
 }
@@ -215,6 +221,9 @@ function myads(params, callback) {
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
         asynquence().or(error)
             .then(prepare)
@@ -298,6 +307,9 @@ function favorites(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
             .then(prepare)
             .then(findFavorites)
@@ -352,6 +364,9 @@ function messages(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
             .then(prepare)
             .then(fetch)
@@ -405,6 +420,9 @@ function readmessages(params, callback) {
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
         asynquence().or(error)
             .then(prepare)
