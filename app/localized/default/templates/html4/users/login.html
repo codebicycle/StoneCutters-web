@@ -12,6 +12,7 @@
         <div class="formField">
             <label>{{ dictionary["loginbox.Password"] }}</label>
             <input type="password" value="" name="password" data-qa="login-password-field">
+            {#<small><a href="{{ '/lostpassword' | link }}" class="forgot">{{ dictionary["landingbody.ForgotPassword"] }}</a></small>#}
         </div>
         <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
         <div class="formActions">
