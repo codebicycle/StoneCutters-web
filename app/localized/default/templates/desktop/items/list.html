@@ -1,7 +1,6 @@
 {% include (template + '/items/itemlistingnav.html') %}
 
-{% view 'partials/adsense', 'slot_top' %}
+{% view 'partials/adserving', 'slot_top_listing' %}
 <ul class="items-list {{ itemListingClass }}">
     {% include (template + '/items/items.html') %}
 </ul>
-{% view 'partials/adsense', 'slot_bottom' %}
