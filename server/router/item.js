@@ -149,7 +149,7 @@ module.exports = function(app, dataAdapter) {
                 item.languageId = language.id;
                 item.platform = platform;
                 for (var key in item) {
-                    if (!key.indexOf('opt.') && !item[key]) {
+                    if (typeof item[key] === 'string' && !item[key]) {
                         delete item[key];
                     }
                     if (item.id && !key.indexOf('image.')) {
