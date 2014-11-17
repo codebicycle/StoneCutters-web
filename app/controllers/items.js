@@ -1150,7 +1150,7 @@ function filter(params, callback) {
             params.offset = 0;
             params.pageSize = 0;
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
-            params.hasFilters = true;
+
             if (params.search) {
                 params.searchTerm = params.search;
                 delete params.search;

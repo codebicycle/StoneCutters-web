@@ -13,6 +13,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         this.filters = data.filters;
         this.filters.order = this.order;
+        data.path = data.path.replace('/', '');
         return _.extend({}, data, {});
     },
     postRender: function() {
@@ -26,8 +27,12 @@ module.exports = Base.extend({
         }
     },
     events: {
-        'change .check-box input': 'selectFilter',
-        'submit': 'onSubmit'
+        'click .check-box': 'selectFilter',
+        'click .adType': 'adType',
+        'click .clear-all': 'cleanFilters',
+        'click .range-submit': 'rangeFilterInputs',
+        'click .category': 'categoryFilter',
+        'click .title': 'toogleFilter'
     },
     onStart: function(event) {
         this.appView.trigger('filter:start');
@@ -35,61 +40,143 @@ module.exports = Base.extend({
     onEnd: function(event) {
         this.appView.trigger('filter:end');
     },
-    selectFilter: function(event) {
+    toogleFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $this = $(event.currentTarget);
-        var val = $this.val();
-        var filter = {
-            name: $this.closest('fieldset').data('filter-name'),
-            type: $this.closest('fieldset').data('filter-type'),
-            value: val
-        };
 
-        if ($this.is(':checked') && !this.filters.has(filter.name, filter.value)) {
-            // $this.closest('fieldset').find('a').attr('data-filter-value', val);
-            this.filters.add(filter);
-        } else {
-            this.filters.remove(filter);
-        }
+        $this.toggleClass('active');
+        $this.closest('.filter').find('.dropdown').slideToggle();
     },
-    onSubmit: function(event) {
+    adType: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var filters = this.filters;
         var path = this.app.session.get('path');
-        var values = this.$('[data-filter-type=RANGE]');
-        var $this;
-        var filter = {};
-        var val;
-        var val2;
+        var $this = $(event.currentTarget);
+        var filter = {
+            name: $this.closest('.filter').data('filter-name'),
+            type: $this.closest('.filter').data('filter-type'),
+            value: $this.data('filter-value')
+        };
 
-        values.each(function setValues(){
-            $this = $(this);
+        if (filter.value && !this.filters.has(filter.name, filter.value)) {
+            this.filters.add(filter);
+        } else {
+            this.filters.remove(filter);
+        }
+
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    categoryFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filterSlug = $target.data('filter-slug');
+
+        if (!filterSlug) {
+            filterSlug  = ['/des-cat-', $target.data('filter-id'), '/'].join('');
+        }
+
+        path = path.replace('/search/', filterSlug);
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    selectFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $this = $(event.currentTarget);
+        var val = $this.find('input').val();
+
+        var filter = {
+            name: $this.closest('.filter').data('filter-name'),
+            type: $this.closest('.filter').data('filter-type'),
+            value: val
+        };
+
+        $this.find('input').attr('checked', true);
+
+        if ($this.find('input').is(':checked') && !this.filters.has(filter.name, filter.value)) {
+            this.filters.add(filter);
+        } else {
+            this.filters.remove(filter);
+        }
+
+        if (this.filters.has('carmodel') && !this.filters.has('carbrand')) {
             filter = {
-                name: $this.data('filter-name'),
-                type: $this.data('filter-type')
+                name: 'carmodel',
+                type: 'SELECT'
             };
+            this.filters.remove(filter);
+        }
 
-            val = $this.find('[data-filter-id=from]').val();
-            val2 = $this.find('[data-filter-id=to]').val();
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    rangeFilterInputs: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
 
-            if (!val && !val2) {
-                return filters.remove(filter);
+        var path = this.app.session.get('path');
+        var $this = $(event.currentTarget);
+
+        var from = $this.closest('.filter').find('[data-filter-id=from]').val();
+        var to = $this.closest('.filter').find('[data-filter-id=to]').val();
+
+        var filter = {
+            name: $this.closest('.filter').data('filter-name'),
+            type: $this.closest('.filter').data('filter-type'),
+            value: {
+                from: from,
+                to: to
             }
+        };
 
-            filter.value = {
-                from: val,
-                to: val2
+        if (!from && !to) {
+            return this.filters.remove(filter);
+        }
+
+        this.filters.add(filter);
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    cleanFilters: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+
+        var filter = {
+            name: $target.closest('.filter').data('filter-name'),
+            type: $target.closest('.filter').data('filter-type')
+        };
+
+        this.filters.remove(filter);
+
+        if (!this.filters.has('carbrand') && this.filters.has('carmodel')) {
+            filter = {
+                name: 'carmodel',
+                type: 'SELECT'
             };
-
-            filters.add(filter);
-
-        });
+            this.filters.remove(filter);
+        }
 
         path = [this.cleanPath(path), '/', this.filters.format()].join('');
         path = helpers.common.link(path, this.app);

@@ -1,57 +1,65 @@
-<form id="filter" class="filters">
-	{% for filter in filters.toJSON() %}
-	    {% if filter.name != 'state' and filter.name != 'city'  %}
-	        {% if filter.type == 'SELECT' and filter.name == 'parentcategory' %}
-
-
-	        {% elif filter.type == 'SELECT' %}
-			    <fieldset data-filter="true" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
-			        <label>{{ filter.description }}</label>
-			        <a class="bold" href="#" data-filter-value="{{ 'toyota' if filter.name == 'carbrand' }}">{{ filter.name }}</a><br>
-			        <ul>
-	                	{% for value in filter.value %}
-		                	<li>
-			                	<label class="check-box">
-			                        <input type="checkbox" value="{{ value.id }}" {{ 'checked' if filters.has(filter.name, value.id) }}>
-			                        {{ value.value }} <span class="count">{{ value.count }}</span>
-			                	</label>
-		                	</li><br>
-	                    {% endfor %}
-			        </ul>
-			    </fieldset>
-	        {% elif filter.type == 'RANGE' %}
-			    <fieldset data-filter="true"data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
-			        <strong data-filter-name="{{ filter.name }}">{{ filter.description }}</strong>
-					{% for input in filter.value %}
-			            {% if loop.first %}
-					        <div class="left">
-					            <label>{{ input.value }}</label>
-					            <input type="number" value="{{ filter.current[input.id] if input.value }}" data-filter-id="{{ input.id }}" value="{{ filter.current[input.id] if filters.has(filter.name, input.id) }}" data-filter-id="{{ input.id }}">
-					        </div>
-	                	{% endif %}
-			            {% if loop.last %}
-					        <div class="right">
-					            <label>{{ input.value }}</label>
-					            <input type="number" value="{{ filter.current[input.id] if input.value }}" data-filter-id="{{ input.id }}" value="{{ filter.current[input.id] if filters.has(filter.name, input.id) }}" data-filter-id="{{ input.id }}">
-					        </div>
-	                	{% endif %}
-
-                	{% endfor %}
-			    </fieldset>
-	        {% elif filter.type == 'BOOLEAN' %}
-			    <fieldset data-filter="true"data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
-			        <label class="block">{{ filter.description }}
-			            <input type="checkbox" name="{{ filter.name }}" value="true" {{ checked }}>
-			        </label>
-			    </fieldset>
-	        {% endif %}
-	    {% endif %}
-	{% endfor %}
-	<fieldset class="no-border">
-		<a href="#" class="clear">{{ dictionary["itemslisting.ClearAll"] }}</a>
-	</fieldset>
-
-	<fieldset class="center no-border">
-		<input class="btns orange" type="submit" value="{{ dictionary["countryoptions.Accept"] }}" />
-	</fieldset>
-</form>
+<section id="filter" class="filters">
+    <ul>
+        {% for filter in filters.toJSON() %}
+            {% if filter.name != 'state' and filter.name != 'city'  %}
+                {% if filter.type == 'SELECT' and filter.name == 'parentcategory' %}
+                    <li class="filter">
+                        <span class="title">{{ dictionary["itemslisting.NavigatorByCategory"] }}</span>
+                        <ul class="dropdown hide">
+                            {% for value in filter.value %}
+                                <li class="category" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" >{{ value.value }} <span class="count">({{ value.count }})</span></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% elif filter.type == 'SELECT' and filter.name != 'sort' and filter.name != 'neighborhood' %}
+                    {% if filter.value %}
+                        <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
+                            {% set active = true if filters.isActive(filter.name) else false %}
+                            <span class="title {{ 'active' if active }} {{ 'selected' if filters.isActive(filter.name) }}">{{ filter.description }}</span>
+                            <ul class="dropdown {{ 'hide' if not active }}">
+                                {{ ('<li class="clear-all clean-filters">[ ' + dictionary["item.Clear"] + ' ]</li>') if active }}
+                                {% for value in filter.value %}
+                                    <li class="check-box">
+                                        <input type="checkbox" value="{{ value.id }}" {{ 'checked' if filters.has(filter.name, value.id) }}>
+                                        <span class="label">{{ value.value }} <span class="count">({{ value.count }})</span></span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                {% elif filter.type == 'RANGE' %}
+                    {% if filter.value %}
+                        <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
+                            {% set active = true if filters.isActive(filter.name) or filter.name == 'pricerange' else false %}
+                            <span class="title {{ 'active' if active }} {{ 'selected' if filters.isActive(filter.name) }}">{{ filter.description }}</span>
+                            <div class="dropdown range {{ 'hide' if not active }}">
+                                {% for input in filter.value %}
+                                    <input type="number" value="{{ filter.current[input.id] if input.value }}" placeholder="{{ input.value }}" data-filter-id="{{ input.id }}">
+                                {% endfor %}
+                                <button class="range-submit" type="submit" value=""></button>
+                                {{ ('<span class="clear-all clean-filters range">[ ' + dictionary["item.Clear"] + ' ]</span>') if filters.isActive(filter.name) }}
+                            </div>
+                        </li>
+                    {% endif %}
+                {% elif filter.type == 'BOOLEAN' %}
+                    {% if filter.name == 'hasimage' %}
+                        <li class="filter">
+                            <span class="location">
+                                {{ dictionary["defaultheader.Location"] }}
+                                <a class="bold" href="/location?target={{ path | replace('/filter', '') }}">{{ location.children[0].name if location.children[0].name else location.name }}</a>
+                            </span>
+                        </li>
+                        <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
+                            {% set active = true if filters.isActive(filter.name) else false %}
+                            <span class="title {{ 'active' if active }}">{{ 'Tipo de aviso' }}</span>
+                            <ul class="dropdown {{ 'hide' if not active }}">
+                                <li class="adType {{ 'active' if active }}" data-filter-value="true">{{ 'Avisos con foto' }}</li>
+                                <li class="clear-all" data-filter-value="true">{{ 'Todos los avisos' }}</li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</section>

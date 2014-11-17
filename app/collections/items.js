@@ -86,9 +86,7 @@ module.exports = Base.extend({
         _.defaults(options.data, this.defaultParams || {});
         this.params = options.data;
 
-        if (!this.params.hasFilters) {
-            _.extend(this.params, this.filters.smaugize());
-        }
+        _.extend(this.params, this.filters.smaugize());
 
         return Base.prototype.fetch.apply(this, arguments);
     }
