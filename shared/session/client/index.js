@@ -52,9 +52,9 @@ function Client(app, callback) {
         var expires = new Date();
 
         expires.setMonth(-1);
-        put(key, '', {
+        put(key, '', _.extend(options || {}, {
             expires: expires.toUTCString()
-        });
+        }));
     }
 
     this.getAll = !utils.isServer ? getAll : utils.noop;
