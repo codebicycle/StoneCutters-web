@@ -20,7 +20,7 @@ module.exports = function pagesRouter(app, dataAdapter) {
 
         function handler(req, res) {
             statsd.increment(['health']);
-            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.json({
                 online: true,
                 message: 'Everything ok!'

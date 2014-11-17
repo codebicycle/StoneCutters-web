@@ -79,6 +79,7 @@ function login(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
     }, controller);
+
     function controller() {
         var platform = this.app.session.get('platform');
         var user;

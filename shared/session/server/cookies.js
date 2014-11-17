@@ -44,7 +44,9 @@ function Cookies(req, res, callback) {
 
     this.clear = function(key) {
         res.clearCookie(key, {
-            path: '/'
+            path: '/',
+            domain: domain,
+            overwrite: true
         });
     };
 
