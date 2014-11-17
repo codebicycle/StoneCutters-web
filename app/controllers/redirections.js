@@ -134,7 +134,7 @@ module.exports = {
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
-            return helpers.common.redirect.call(this, '/' + params.path);
+            return helpers.common.redirect.call(this, this.app.session.get('url').replace('.php', ''));
         }
         statsd.increment(['redirections', 'php', this.app.session.get('path')]);
         helpers.common.redirect.call(this, '/');
