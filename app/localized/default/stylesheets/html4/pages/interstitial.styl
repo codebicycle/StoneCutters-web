@@ -1,75 +1,53 @@
-#interstitial{ 
-	width: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background-image: url(imageUrl/images/common/marketing/backgroundInt200.jpg); 
-	background-repeat: repeat-y; 
-	background-size: 100%; 
-	text-align: center;
-	z-index: 10;
-}
+#interstitial {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #1b87c4;
+    text-align: center;
+    font-size: 16px;
+    z-index: 100;
 
-@media screen and (min-width: 200px) and (max-width: 299px){ 
-    #interstitial{background-image: url(imageUrl/images/common/marketing/backgroundInt300.jpg);}
-}
-@media screen and (min-width: 300px){ 
-    #interstitial{background-image: url(imageUrl/images/common/marketing/backgroundInt400.jpg);}
-}
-#interstitial .header {
-	width: 100%;
-	display: block;
-	margin:10px auto;
-}
-#interstitial #logoTop {
-	width: 20%;
-	margin: 0;
-	display: inline;
-	vertical-align: top;
-}
-#interstitial h1{ 
-	width: 60%; 
-	display: inline; 
-	margin:0 0 0 7px; 
-	display: inline; 
-	text-align: left;
-	font-size: 24px;
-	line-height: 85px;
-	text-transform: capitalize;
-}
-#interstitial #mobileImg {
-	width: 70%;
-	margin:0 auto;
-}
-#interstitial a.btns {
-	width: 80%;
-	display: inline-block;
-	padding: 10px; 
-	margin: 10px 0; 
-	font-size: 16px;
-}
-#interstitial .btn-adjust.btnGrey a {
-	height: 10px; 
-	padding-top: 10px;
-}
-#interstitial .continue {
-	width: 100%;
-	text-align: center;
-	margin: 15px 0 0 0;
-}
-#interstitial .continue a {
-	color:#515151; 
-	text-decoration: none;
-}
-@media screen and (max-width: 320px){ 
-    #interstitial h1 {
-    	font-size: 16px; 
-    	line-height: 41px;
+    .header {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+
+        img {
+            width: 66px;
+            margin: 16px 0 0 16px;
+            display: inline;
+            vertical-align: top;
+        }
+        h1 {
+            width: 200px;
+            display: inline-block;
+            margin: 16px 0 0 10px;
+            text-align: left;
+            font-size: 28px;
+            color: #fff;
+        }
     }
-}
-@media screen and (min-width: 640px) { 
-    #interstitial h1 {
-    	font-size: 48px; 
-    	line-height: 41px;
+    .downloadApp, .continue {
+        margin: 20px 0;
+    }
+    .downloadApp {
+        display: inline-block;
+        padding: 10px 20px;
+    }
+    .continue {
+        width: 100%;
+        text-align: center;
+        font-size: 10px;
+
+         a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    }
+    #mobileImg {
+        width: 70%;
+        max-width: 292px;
+        margin: 10px auto;
     }
 }

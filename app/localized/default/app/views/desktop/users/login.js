@@ -5,7 +5,7 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'users_login_view',
+    className: 'users_login_view short-page',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var params = this.options.params || {};

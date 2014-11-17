@@ -3,7 +3,7 @@
 var Base;
 var syncer;
 var dataAdapter;
-var req;
+var options;
 var User;
 var user;
 var statsd;
@@ -22,8 +22,8 @@ describe('app', function() {
 
 function reset() {
     dataAdapter = {};
-    req = {
-        rendrApp: {
+    options = {
+        app: {
             session: {}
         }
     };
@@ -60,7 +60,7 @@ function test() {
         function assert(done) {
             expect(dataAdapter.get).to.have.been.calledTwice;
             expect(user.set).to.have.been.calledOnce;
-            expect(req.rendrApp.session.persist).to.have.been.calledOnce;
+            expect(options.app.session.persist).to.have.been.calledOnce;
             expect(user.get('token')).to.exist;
             done();
         }
@@ -118,7 +118,7 @@ function test() {
 }
 
 function mock(data) {
-    user = new User(data);
+    user = new User(data, options);
 
     sinon.spy(user, 'set');
 
@@ -130,12 +130,12 @@ function mock(data) {
         token: '123456'
     });
 
-    req.rendrApp.session.get = sinon.stub();
-    req.rendrApp.session.get.withArgs('location').returns({
+    options.app.session.get = sinon.stub();
+    options.app.session.get.withArgs('location').returns({
         name: 'Test'
     });
 
-    req.rendrApp.session.persist = sinon.stub();
+    options.app.session.persist = sinon.stub();
 
     statsd.increment = sinon.stub();
 }
@@ -163,7 +163,7 @@ function success(done, assert, data) {
         .val(done);
 
     function login(done) {
-        user.login(done, req);
+        user.login(done);
     }
 }
 
@@ -179,7 +179,7 @@ function fail(done, assert, data) {
             .val(done);
 
         function login(done) {
-            user.login(done, req, data);
+            user.login(done, data);
         }
     }
 }
@@ -189,7 +189,7 @@ function assertFailChallenge(done, err) {
     expect(err.toString()).to.equal('Error: Invalid Credentials');
     expect(dataAdapter.get).to.have.been.calledOnce;
     expect(user.set).to.have.not.been.called;
-    expect(req.rendrApp.session.persist).to.not.have.been.calledOnce;
+    expect(options.app.session.persist).to.not.have.been.calledOnce;
     done();
 }
 
@@ -198,6 +198,6 @@ function assertFailLogin(done, err) {
     expect(err.toString()).to.equal('Error: Invalid Credentials');
     expect(dataAdapter.get).to.have.been.calledTwice;
     expect(user.set).to.have.not.been.called;
-    expect(req.rendrApp.session.persist).to.not.have.been.calledOnce;
+    expect(options.app.session.persist).to.not.have.been.calledOnce;
     done();
 }
