@@ -13,7 +13,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
             res.set('Content-Type', 'text/plain; charset=utf-8');
-            res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
+            console.log('[OLX_DEBUG]', 'robots', res._headers);
             res.status(200).sendfile(_.contains(mobile, req.subdomains.pop()) ? mRobots : robots);
         };
     };
