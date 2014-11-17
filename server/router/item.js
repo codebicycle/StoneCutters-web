@@ -34,12 +34,14 @@ module.exports = function(app, dataAdapter) {
                     country: req.rendrApp.session.get('location').name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
+                }, {
+                    app: req.rendrApp
                 });
                 done();
             }
 
             function submit(done) {
-                user.reply(done, req, _.extend({}, reply, {
+                user.reply(done, _.extend({}, reply, {
                     id: itemId
                 }));
             }
