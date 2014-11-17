@@ -5,13 +5,40 @@ var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 
-module.exports = Base.extend({    
+module.exports = Base.extend({
+    latitude: '',
+    longitude: '',
+    showAutoLocation: false,
     postRender: function() {
+        var callback;
+        var errorCallback;
+
         this.app.router.once('action:start', this.onStart);
-        this.app.router.once('action:end', this.onEnd);        
+        this.app.router.once('action:end', this.onEnd);
+
+        if (helpers.features.isEnabled.call(this, 'autoLocation')) {
+            if (navigator.geolocation) {
+                callback = function (position) {
+                        this.latitude = position.coords.latitude;
+                        this.longitude = position.coords.longitude;
+                        this.$('#autolocation').show();
+                        this.showAutoLocation = true;
+                    }.bind(this);
+                errorCallback = function (error) {
+                        this.showAutoLocation = false;
+                        console.log(error);
+                    }.bind(this);
+
+                navigator.geolocation.getCurrentPosition(callback, errorCallback, {
+                        maximumAge: 0,
+                        timeout: 6000
+                    });
+            }
+        }
     },
     events: {
-        'submit': 'onSubmit'
+        'submit': 'onSubmit',
+        'click #autolocation': 'onAutoLocation'
     },
     onStart: function(event) {
         this.appView.trigger('location:end');
@@ -33,6 +60,59 @@ module.exports = Base.extend({
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200
         });
+    },
+    onAutoLocation: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var autolocation = function(done) {
+            helpers.dataAdapter.get(this.app.req, '/locations', {
+                query: {
+                    latitude: this.latitude,
+                    longitude: this.longitude
+                },
+                done: done,
+                fail: done.fail
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(res, body) {
+            var url;
+            var params;
+
+            if (res.children) {
+                if (res.children[0].children) {
+                    url = res.children[0].children[0].url;
+                }
+                else {
+                    url = res.children[0].url;
+                }
+            }
+            else {
+                url = res.url;
+            }
+
+            if (url !== '') {
+                params = {
+                    location: url
+                };
+            }
+
+            helpers.common.redirect.call(this.app.router || this, '/', params, {
+                    status: 200
+                }
+            );
+
+        }.bind(this);
+
+        var error = function(err) {
+            //console.log('Autolocation :: Error');
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(autolocation)
+            .val(success);
     }
 });
 
