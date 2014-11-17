@@ -17,80 +17,56 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             var location = req.rendrApp.session.get('location');
             var siteLocation = req.rendrApp.session.get('siteLocation');
+            var host = req.rendrApp.session.get('host');
             var userAgent = utils.getUserAgent(req);
-            var selectedLanguage;
-            var languages;
+            var language = req.param('language');
 
             function fetch(done) {
-                dataAdapter.get(req, '/countries/' + siteLocation + '/languages', {
-                    query: {
-                        platform: req.rendrApp.session.get('platform')
-                    },
+                req.rendrApp.fetch({
+                    languages: {
+                        collection: 'Languages',
+                        params: {
+                            location: location.url
+                        }
+                    }
+                }, {
+                    readFromCache: false,
+                    writeToCache: false,
                     store: true
                 }, done.errfcb);
             }
 
-            function parse(done, response, _languages) {
-                if (!_languages) {
-                    console.log('[OLX_DEBUG] Empty languages response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
-                    return fail(new Error());
+            function select(done, response) {
+                var languages = response.languages;
+                var selectedLanguage = language || req.rendrApp.session.get('selectedLanguage');
+
+                if (!selectedLanguage || !languages.get(selectedLanguage)) {
+                    selectedLanguage = languages.getDefault();
                 }
-                languages = {
-                    models: _languages,
-                    _byId: {}
-                };
-                languages.models.forEach(function each(language) {
-                    languages._byId[language.locale] = language;
-                });
-
-                done();
-            }
-
-            function transition(done) {
-                var lastSelectedLanguage = req.rendrApp.session.get('selectedLanguage');
-
-                if (!isNaN(lastSelectedLanguage)) {
-                    req.rendrApp.session.clear('selectedLanguage');
-                }
-                done();
-            }
-
-            function select(done) {
-                var language = req.param('language', '');
-
-                if (language && !languages._byId[language]) {
-                    language = null;
-                }
-                selectedLanguage = language || req.rendrApp.session.get('selectedLanguage') || languages.models[0].locale;
-                done();
-            }
-
-            function store(done) {
                 req.rendrApp.session.update({
-                    languages: languages
+                    languages: {
+                        models: languages.toJSON(),
+                        _byId: _.object(Object.keys(languages._byId), _.values(languages._byId).map(function each(language) {
+                            return language.toJSON();
+                        }))
+                    }
                 });
                 req.rendrApp.session.persist({
                     selectedLanguage: selectedLanguage
                 });
-                done();
+                done(languages, selectedLanguage);
             }
 
-            function check(done) {
-                var selectedLanguage = req.rendrApp.session.get('selectedLanguage');
-                var language = req.param('language');
-                var redirect;
-
-                if (selectedLanguage === languages.models[0].locale && language) {
-                    redirect = true;
+            function redirect(done, languages, selectedLanguage) {
+                if (selectedLanguage === languages.getDefault() && language) {
+                    done.abort();
+                    return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'language'));
                 }
-                else if (selectedLanguage !== languages.models[0].locale && !language) {
-                    redirect = true;
-                }
-                else if (language && language !== selectedLanguage) {
-                    redirect = true;
-                }
-                if (redirect) {
-                    return res.redirect(302, utils.link(req.originalUrl, req.rendrApp));
+                if (selectedLanguage !== languages.getDefault() && (!language || selectedLanguage !== language)) {
+                    done.abort();
+                    return res.redirect(302, utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp, {
+                        language: selectedLanguage
+                    }));
                 }
                 done();
             }
@@ -102,11 +78,8 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             asynquence().or(fail)
                 .then(fetch)
-                .then(parse)
-                .then(transition)
                 .then(select)
-                .then(store)
-                .then(check)
+                .then(redirect)
                 .val(next);
         };
 
