@@ -129,7 +129,8 @@ module.exports = {
             domain: location.split('.').slice(1).join('.')
         });
         helpers.common.redirect.call(this, 'http://' + location, null, {
-            status: 302
+            status: 302,
+            pushState: false
         });
     },
     php: function(params, callback) {
