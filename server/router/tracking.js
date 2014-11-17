@@ -187,13 +187,15 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 statsd.increment([req.query.locNm, 'bot', bot, platform]);
                 return false;
             }
-            try {
-                platformUrl = JSON.parse(req.query.custom).platform;
-            }
-            catch (err) {}
-            if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
-                /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
-                return false;
+            if (req.query.custom) {
+                try {
+                    platformUrl = JSON.parse(req.query.custom).platform;
+                }
+                catch (err) {}
+                if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
+                    /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
+                    return false;
+                }
             }
             return true;
         }
@@ -204,6 +206,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var host = req.host;
             var page = req.query.page;
 
+            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
@@ -295,6 +298,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var gif = new Buffer(image, 'base64');
             var host = req.host;
 
+            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
@@ -318,6 +322,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var metric = req.param('metric');
             var value = req.param('value');
 
+            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);

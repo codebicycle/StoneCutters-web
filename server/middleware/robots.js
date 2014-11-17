@@ -12,8 +12,14 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (req.path !== '/robots.txt') {
                 return next();
             }
-            res.set('Content-Type', 'text/plain');
-            res.status(200).sendfile(_.contains(mobile, req.subdomains.pop()) ? mRobots : robots);
+
+            var subdomain = req.subdomains.pop();
+            var isMobile = _.contains(mobile, subdomain);
+
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
+            console.log('[OLX_DEBUG]', 'robots', subdomain, isMobile ? 'mobile' : 'desktop');
+            res.status(200).sendfile(isMobile ? mRobots : robots);
         };
     };
 };

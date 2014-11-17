@@ -7,6 +7,19 @@ var asynquence = require('asynquence');
 var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
 
+function onpopstate(event) {
+    var $loading = $('body > .loading');
+    var status = ($loading.is(":visible")) ? false : confirm(event.data.message);
+
+    if (status) {
+        $(window).off('popstate', onpopstate);
+        history.back();
+    }
+    else {
+        history.pushState(null, '', window.location.pathname);
+    }
+}
+
 module.exports = Base.extend({
     tagName: 'main',
     id: 'posting-view',
@@ -44,6 +57,7 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
+        $(window).on('beforeunload', this.onBeforeUnload);
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
         if (this.isValid === undefined || this.isValid === null) {
             if (!this.form['category.parentId']) {
@@ -73,6 +87,9 @@ module.exports = Base.extend({
     },
     fieldFocus: function(event) {
         $(event.currentTarget).closest('.field-wrapper').toggleClass('focus');
+        if (!this.edited) {
+            this.handleBack();
+        }
     },
     onSubcategorySubmit: function(event, subcategory) {
         event.preventDefault();
@@ -97,6 +114,9 @@ module.exports = Base.extend({
                 return !(field.name === 'title' || field.name === 'description');
             })
         ]);
+        if (!this.edited) {
+            this.handleBack();
+        }
     },
     onLocationSubmit: function(event, location) {
         event.preventDefault();
@@ -107,6 +127,9 @@ module.exports = Base.extend({
             this.form.location = location;
             delete this.errors.location;
             this.$el.trigger('errorsUpdate');
+        }
+        if (!this.edited) {
+            this.handleBack();
         }
     },
     onFieldSubmit: function(event, field) {
@@ -141,6 +164,16 @@ module.exports = Base.extend({
         else {
             delete this.form[field.name];
         }
+        if (!this.edited) {
+            this.handleBack();
+        }
+    },
+    handleBack: function() {
+        this.edited = true;
+        history.pushState(null, '', window.location.pathname);
+        $(window).on('popstate', {
+            message: this.dictionary['misc.WantToGoBack']
+        }, onpopstate);
     },
     onFieldValidationStart: function(event) {
         var $field = $(event.target).addClass('validating');
@@ -150,10 +183,11 @@ module.exports = Base.extend({
         this.validateField($field);
     },
     validateField: function($field) {
-        var data;
+        var value = $field.val();
         var _errors = [];
+        var data;
 
-        if ($field.attr('required') && !$field.val().length) {
+        if ($field.attr('required') && !value.trim().length) {
             _errors.push({
                 selector: $field.attr('name'),
                 message: this.dictionary["postingerror.PleaseCompleteThisField"]
@@ -170,11 +204,11 @@ module.exports = Base.extend({
                 'location': this.app.session.get('location').url,
                 'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
             };
-            data[$field.attr('name')] = $field.val();
+            data[$field.attr('name')] = value;
             helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
                 data: data
-            }, function onResponse(response) {
-                _errors = response;
+            }, function onResponse(err, response, body) {
+                _errors = body;
                 $field.trigger('fieldValidationEnd', [_errors]);
             });
         }
@@ -208,7 +242,12 @@ module.exports = Base.extend({
         });
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
+    onBeforeUnload: function(event) {
+        return ' ';
+    },
     onEnd: function(event) {
+        $(window).off('beforeunload', this.onBeforeUnload);
+        $(window).off('popstate', onpopstate);
         this.appView.trigger('posting:end');
     },
     onStart: function(event) {
@@ -260,34 +299,33 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
-            function callback(body, status, response) {
-                if (status !== 'success') {
-                    return done.fail(body);
-                }
-                if (body) {
-                    done.abort();
-                    return fail(body, 'invalid');
-                }
-                done();
-            }
             query.intent = 'validate';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
                 data: this.form
-            }, callback);
+            }, done);
+        }.bind(this);
+
+        var check = function(done, err, response, body) {
+            if (response.status !== 'success') {
+                return done.fail(body);
+            }
+            if (body) {
+                done.abort();
+                return fail(body, 'invalid');
+            }
+            done();
         }.bind(this);
 
         var post = function(done) {
             query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
-                data: this.form,
-                done: done,
-                fail: done.fail
-            });
+                data: this.form
+            }, done.errfcb);
         }.bind(this);
 
-        var trackEvent = function(done, item) {
+        var trackEvent = function(done, res, item) {
             var category = 'Posting';
             var action = 'PostingSuccess';
 
@@ -299,7 +337,7 @@ module.exports = Base.extend({
             done(item);
         }.bind(this);
 
-        var trackGraphite = function(done, item) {
+        var trackGraphite = function(done, res, item) {
             var location = this.app.session.get('location');
             var platform = this.app.session.get('platform');
 
@@ -359,6 +397,7 @@ module.exports = Base.extend({
         }
         asynquence().or(fail)
             .then(validate)
+            .then(check)
             .then(post)
             .gate(trackEvent, trackGraphite)
             .val(success);

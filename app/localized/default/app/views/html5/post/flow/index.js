@@ -113,7 +113,9 @@ module.exports = Base.extend({
     handleBack: function() {
         this.edited = true;
         history.pushState(null, '', window.location.pathname);
-        $(window).on('popstate', {message: this.dictionary['misc.WantToGoBack']}, onpopstate);
+        $(window).on('popstate', {
+            message: this.dictionary['misc.WantToGoBack']
+        }, onpopstate);
     },
     onHeaderChange: function(event, title, current, back, data) {
         event.preventDefault();
@@ -222,35 +224,33 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         var validate = function(done) {
-            function callback(err, response, body) {
-                if (err) {
-                    return done.fail(err);
-                }
-                if (body) {
-                    done.abort();
-                    return fail(body, 'invalid');
-                }
-                done(response, body);
-            }
-
             query.intent = 'validate';
+            helpers.dataAdapter.post(this.app.req, '/items', {
+                query: query,
+                data: this.form
+            }, done);
+        }.bind(this);
+
+        var check = function(done, err, res, body) {
+            if (err) {
+                return done.fail(err);
+            }
+            if (body) {
+                done.abort();
+                return fail(body, 'invalid');
+            }
+            done(res, body);
+        }.bind(this);
+
+        var post = function(done) {
+            query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
                 data: this.form
             }, done.errfcb);
         }.bind(this);
 
-        var post = function(done, response) {
-            query.intent = 'create';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form,
-                done: done,
-                fail: done.fail
-            });
-        }.bind(this);
-
-        var trackEvent = function(done, item) {
+        var trackEvent = function(done, res, item) {
             var category = 'Posting';
             var action = 'PostingSuccess';
 
@@ -262,7 +262,7 @@ module.exports = Base.extend({
             done(item);
         }.bind(this);
 
-        var trackGraphite = function(done, item) {
+        var trackGraphite = function(done, res, item) {
             var location = this.app.session.get('location');
             var platform = this.app.session.get('platform');
 
@@ -288,10 +288,6 @@ module.exports = Base.extend({
                     this.$el.trigger('errors', [err]);
                 }
             }
-            trackFail(track);
-        }.bind(this);
-
-        var trackFail = function(track) {
             statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
         }.bind(this);
 
@@ -312,6 +308,7 @@ module.exports = Base.extend({
         }
         asynquence().or(fail)
             .then(validate)
+            .then(check)
             .then(post)
             .gate(trackEvent, trackGraphite)
             .val(success);

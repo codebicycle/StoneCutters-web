@@ -6,9 +6,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var Session = require('../../shared/session');
 
         return function middleware(req, res, next) {
-            Session.call(req.rendrApp, false, {
-                isServer: true
-            }, next);
+            Session.call(req.rendrApp, false, next);
         };
 
     };

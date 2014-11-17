@@ -256,7 +256,7 @@ function form(params, callback) {
                 subcategory: subcategory.toJSON(),
                 language: languageId,
                 siteLocation: siteLocation,
-                form: form
+                form: this.form
             });
         }.bind(this);
 

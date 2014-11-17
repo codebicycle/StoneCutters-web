@@ -24,16 +24,23 @@ var customParams = {
 
 function isEnabled(page) {
     var location = this.app.session.get('location');
-    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'hydra'], true);
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'hydra', 'enabled'], true);
+    var platforms;
     var pageName;
     var params;
 
-    if (!enabled) {
-        return false;
+    if (enabled) {
+        platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'hydra', 'platforms']);
+        if (platforms && !_.contains(platforms, this.app.session.get('platform'))) {
+            enabled = false;
+        }
     }
-    pageName = utils.get(configTracking, ['common', 'pages', page]);
-    params = utils.get(configTracking, ['hydra', 'params', location.url]);
-    return !!params && !!pageName;
+    if (enabled) {
+        pageName = utils.get(configTracking, ['common', 'pages', page]);
+        params = utils.get(configTracking, ['hydra', 'params', location.url]);
+        enabled = (!!params && !!pageName);
+    }
+    return enabled;
 }
 
 function getParams(page, options) {

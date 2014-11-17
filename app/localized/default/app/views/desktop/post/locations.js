@@ -10,9 +10,6 @@ module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-locations-view',
     className: 'posting-locations-view',
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var states = data.states;
@@ -56,7 +53,6 @@ module.exports = Base.extend({
         'change #field-location': 'onCityChange'
     },
     addEmptyOption: function(list, text) {
-
         list.unshift({
             key: '',
             value: translations[this.app.session.get('selectedLanguage') || 'en-US'][text]

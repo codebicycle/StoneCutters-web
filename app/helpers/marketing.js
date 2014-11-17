@@ -10,20 +10,24 @@ module.exports = {
         var osVersion = app.session.get('osVersion');
         var browserName = app.session.get('browserName');
         var useADX = helpers.isEnabled.call(this, 'interstitialByADX', platform, location.url);
+        var language = app.session.get('selectedLanguage').split('-')[0];
+        if (language != 'es' && language != 'pt') {
+            language = 'en';
+        }
         var data = {};
 
-        if((osVersion < 2.1 && osName == 'Android') || (osVersion < 3.2 && osName == 'iOS') || (osVersion < 4.5 && osName == 'RIM') || (osVersion < 8 && osName == 'Windows Phone')){
+        if((osVersion < 2.1 && osName == 'Android') || (osVersion < 3.2 && osName == 'iOS')){
             return data;
         }
         switch(osName) {
             case 'Android':
                 data.link = 'market://details?id=com.olx.olx&referrer=utm_source%3DOLX_'+platform+'_DownloadApp%26utm_'+medium+'%3DFooter%26utm_campaign%3B'+medium;
-                data.forOsKey = 'misc.BrandFor_Mob'; 
+                data.forOsKey = 'misc.BrandFor_Mob';
                 data.forOs = ' Android';
-                data.freeInKey = 'misc.FreeIn_Mob'; 
+                data.freeInKey = 'misc.FreeIn_Mob';
                 data.freeIn = ' <span>GOOGLE Play</span>';
                 data.rating = '(+80k)';
-                data.image = 'android';
+                data.image = 'android_' + language;
                 data.browserName = browserName;
             break;
             case 'iOS':
@@ -33,17 +37,7 @@ module.exports = {
                 data.freeInKey = 'misc.FreeIn_Mob';
                 data.freeIn = ' <span>App Store</span>';
                 data.rating = '(+4)';
-                data.image = 'ios';
-                data.browserName = browserName;
-            break;
-            case 'Windows Phone':
-                data.link = 'http://windowsphone.com/s?appid=31fc00f9-44e8-df11-9264-00237de2db9e';
-                data.forOsKey = 'misc.BrandFor_Mob';
-                data.forOs = ' Windows Phone';
-                data.freeInKey = 'misc.FreeIn_Mob';
-                data.freeIn = ' <span>Windows</span>';
-                data.rating = '(+4)';
-                data.image = 'windowsphone';
+                data.image = 'ios_' + language;
                 data.browserName = browserName;
             break;
         }

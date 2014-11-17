@@ -151,23 +151,23 @@ module.exports = Base.extend({
                     location: this.app.session.get('siteLocation'),
                     categoryId: this.selected.subId,
                     languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                },
-                done: done,
-                fail: done.fail
-            }, always);
+                }
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(res, body) {
+            always();
+            this.$el.trigger('fieldsChange', [this.allFields.map(function each(field) {
+                if (field.name !== body.subfield.name) {
+                    return field;
+                }
+                return body.subfield;
+            }), this.selected.id, this.selected.subId]);
         }.bind(this);
 
         var error = function(err) {
+            always();
             console.log(err); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(res) {
-            this.$el.trigger('fieldsChange', [this.allFields.map(function each(field) {
-                if (field.name !== res.subfield.name) {
-                    return field;
-                }
-                return res.subfield;
-            }), this.selected.id, this.selected.subId]);
         }.bind(this);
 
         var always = function() {

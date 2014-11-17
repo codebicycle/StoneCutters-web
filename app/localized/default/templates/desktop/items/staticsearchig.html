@@ -2,7 +2,7 @@
     {% include (template + "/partials/breadcrumb.html") %}
     <div class="wrapper-main">
         <nav id="listing-nav">
-            {% view 'items/filters' %}
+            {% view 'items/filters', 'staticSearch' %}
         </nav>
         <section id='listing-items'>
             {% set isStaticSearch = true %}

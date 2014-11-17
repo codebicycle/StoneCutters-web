@@ -110,12 +110,12 @@ module.exports = Base.extend({
                     dataType: 'json',
                     processData: false,
                     contentType: false
-                }, done);
+                }, done.errfcb);
             }.bind(this);
 
-            var success = function(done, res) {
-                    this.selected[$input.attr('name')] = {
-                    id: res.shift(),
+            var success = function(done, res, body) {
+                this.selected[$input.attr('name')] = {
+                    id: body.shift(),
                     file: imageUrl,
                     orientation: 1
                 };
@@ -140,7 +140,7 @@ module.exports = Base.extend({
                 .then(exif)
                 .then(post)
                 .then(success)
-                .then(display);
+                .val(display);
         }.bind(this);
 
         image.onerror = function(err) {

@@ -1,0 +1,17 @@
+<ul class="tabs">
+    <li>
+        <a href="{{ (nav.linkig) | linkig }}" class="icons {{ nav.galeryAct }} icon-gallery" rel="nofollow">{{ dictionary["listingpageitemslisting.Gallery"] }}</a>
+    </li><!--
+    --><li>
+        <a href="{{ nav.link | link }}" class="icons {{ nav.listAct }} icon-list" rel="nofollow">{{ dictionary["listingpageitemslisting.List"] }}</a>
+    </li>
+</ul><!-- tabs -->
+
+<div class="order-by">
+    <label for="order-by-select">{{ dictionary["listingpageitemslisting.SortBy"] }}:</label>
+    <select id="order-by-select">
+        <option value="datedesc" {{ 'selected' if filters.has('sort', 'datedesc') }}>{{ dictionary["itemslisting.NewlyListed"] }}</option>
+        <option value="price" {{ 'selected' if filters.has('sort', 'price') }} >{{ dictionary["itemslisting.LowestFirst"] }}</option>
+        <option value="pricedesc" {{ 'selected' if filters.has('sort', 'pricedesc') }}>{{ dictionary["itemslisting.HighestFirst"] }}</option>
+    </select>
+</div>

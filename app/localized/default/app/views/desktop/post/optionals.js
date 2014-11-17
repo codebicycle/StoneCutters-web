@@ -20,7 +20,7 @@ module.exports = Base.extend({
     },
     postRender: function() {
         var $field;
-        var $fields = $('.text-field');
+        var $fields = this.$('.text-field');
 
         $fields.each(function() {
             $field = $(this);
@@ -82,18 +82,12 @@ module.exports = Base.extend({
                     categoryId: this.parentView.form['category.id'],
                     languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                 },
-                done: done,
-                fail: done.fail
-            });
+            }, done.errfcb);
         }.bind(this);
 
-        var error = function(err) {
-            console.log(err); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(res) {
+        var success = function(res, body) {
             $field.removeAttr('disabled').empty();
-            options = res.subfield.values;
+            options = body.subfield.values;
             options.unshift({
                 key: '',
                 value: translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.SelectAnOption_BR']
@@ -101,6 +95,10 @@ module.exports = Base.extend({
             _.each(options, function each(option) {
                 $field.append('<option value="' + option.key + '">' + option.value + '</option>');
             });
+        }.bind(this);
+
+        var error = function(err) {
+            console.log(err); // TODO: HANDLE ERRORS
         }.bind(this);
 
         asynquence().or(error)
