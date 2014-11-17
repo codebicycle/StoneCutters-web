@@ -20,7 +20,7 @@ module.exports = Base.extend({
     },
     postRender: function() {
         var $field;
-        var $fields = $('.text-field');
+        var $fields = this.$('.text-field');
 
         $fields.each(function() {
             $field = $(this);
