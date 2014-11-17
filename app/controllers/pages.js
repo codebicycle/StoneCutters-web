@@ -76,7 +76,8 @@ function interstitial(params, callback) {
             });
             return helpers.common.redirect.call(this, params.ref);
         }
-
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         this.app.session.persist({
             showInterstitial: '1'
         }, {
@@ -118,7 +119,8 @@ function allstates(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('location');
+        var siteLocation = location.url;
 
         var decide = function(done) {
             var spec = {

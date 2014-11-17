@@ -39,5 +39,6 @@ module.exports = {
     featured: 'SELECT',
     adtype: 'SELECT',
     distance: 'SELECT',
-    condition: 'SELECT'
+    condition: 'SELECT',
+    sort: 'SELECT'
 };

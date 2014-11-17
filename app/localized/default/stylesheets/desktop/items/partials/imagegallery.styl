@@ -37,15 +37,22 @@
             text-align: center;
         }
         .thumbnail {
-            max-height: 366px;
+            height: 366px;
             overflow-y: hidden;
+            position: relative;
+
+
+            .thumbnail-wrapper {
+                left: 3px;
+                position: absolute;
+                top: 0;
+            }
 
             figure {
-                margin: 0 auto 10px;
+                margin: 6px auto;
                 width: 60px;
-                &:first-child {
-                    margin-top: 10px;
-                }
+                height: 60px;
+                float: left;
             }
             .active {
                 outline: 3px solid $blue;
@@ -59,6 +66,9 @@
                 width: 60px;
             }
         }
+    }
+    .single {
+        width: 616px;
     }
     .icon-photo{
         text-align: center;

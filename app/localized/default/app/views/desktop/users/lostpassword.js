@@ -5,6 +5,7 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
+	className: 'users_lostpassword_view short-page',
     events: {
         'focus .text-field': 'clearInputs'
     },

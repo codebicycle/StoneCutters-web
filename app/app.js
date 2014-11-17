@@ -14,9 +14,7 @@ module.exports = Base.extend({
         templateAdapter: 'rendr-nunjucks'
     },
     initialize: function() {
-        Session.call(this, true, {
-            isServer: typeof window === 'undefined'
-        });
+        Session.call(this, true);
         _.extend(this.fetcher, Fetcher);
         _.extend(this.fetcher.modelStore, ModelStore);
         _.extend(this.fetcher.collectionStore, CollectionStore);
@@ -74,6 +72,8 @@ module.exports = Base.extend({
     getSpecs: function(dependencies) {
         var specs = {};
         var seo = Seo.instance(this);
+        var languageId = this.session.get('languages')._byId[this.session.get('selectedLanguage')].id;
+        var location = this.session.get('location').url;
 
         dependencies.forEach(function each(dependency) {
             switch (dependency) {
@@ -81,8 +81,8 @@ module.exports = Base.extend({
                     specs[dependency] = {
                         collection: 'Categories',
                         params: {
-                            location: this.session.get('siteLocation'),
-                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id,
+                            location: location,
+                            languageId: languageId,
                             seo: seo.isEnabled()
                         }
                     };
@@ -91,7 +91,7 @@ module.exports = Base.extend({
                     specs[dependency] = {
                         collection: 'Countries',
                         params: {
-                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id
+                            languageId: languageId
                         }
                     };
                 break;
@@ -99,8 +99,8 @@ module.exports = Base.extend({
                     specs[dependency] = {
                         collection: 'States',
                         params: {
-                            location: this.session.get('location').url,
-                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id
+                            location: location,
+                            languageId: languageId
                         }
                     };
                 break;
@@ -110,8 +110,8 @@ module.exports = Base.extend({
                         params: {
                             level: 'countries',
                             type: 'topcities',
-                            location: this.session.get('location').url,
-                            languageId: this.session.get('languages')._byId[this.session.get('selectedLanguage')].id
+                            location: location,
+                            languageId: languageId
                         }
                     };
                 break;

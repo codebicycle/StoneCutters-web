@@ -3,7 +3,7 @@
 var Base;
 var syncer;
 var dataAdapter;
-var req;
+var options;
 var User;
 var user;
 var statsd;
@@ -22,8 +22,8 @@ describe('app', function() {
 
 function reset() {
     dataAdapter = {};
-    req = {
-        rendrApp: {
+    options = {
+        app: {
             session: {}
         }
     };
@@ -110,7 +110,7 @@ function test() {
 }
 
 function mock(data) {
-    user = new User(data);
+    user = new User(data, options);
 
     sinon.spy(user, 'set');
 
@@ -134,7 +134,7 @@ function success(done, assert, data) {
         .val(done);
 
     function register(done) {
-        user.register(done, req, data);
+        user.register(done, data);
     }
 }
 
@@ -150,7 +150,7 @@ function fail(done, assert, data) {
             .val(done);
 
         function register(done) {
-            user.register(done, req, data);
+            user.register(done, data);
         }
     }
 }
