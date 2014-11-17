@@ -1,7 +1,7 @@
 'use strict';
 
-module.export : {
-    'slot_top' : {
+module.exports = {
+    'slot_top_listing' : {
         enabled : true,
         types : {
             'CSA' : {
@@ -49,4 +49,4 @@ module.export : {
             }
         }
     }
-}
+};

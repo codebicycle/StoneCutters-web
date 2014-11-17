@@ -9,17 +9,15 @@ module.exports = Base.extend({
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var platform = this.app.session.get('platform');
-        var location = this.app.session.get('location');
-        var showAdSense = helpers.features.isEnabled.call(this, 'adSense', platform, location.url);
+        var slotname = this.options.subId;
 
         return _.extend({}, data, {
-            adsense: {
-                enabled : showAdSense,
-                slotname: data.subId || 'slot_empty'
+            adserving2: {
+                enabled : true,
+                slotname: slotname
             }
         });
     }
 });
 
-module.exports.id = 'partials/adsense';
+module.exports.id = 'partials/adserving';
