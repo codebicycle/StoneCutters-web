@@ -150,10 +150,11 @@ module.exports = Base.extend({
         this.validateField($field);
     },
     validateField: function($field) {
-        var data;
+        var value = $field.val();
         var _errors = [];
+        var data;
 
-        if ($field.attr('required') && !$field.val().length) {
+        if ($field.attr('required') && !value.trim().length) {
             _errors.push({
                 selector: $field.attr('name'),
                 message: this.dictionary["postingerror.PleaseCompleteThisField"]
@@ -170,7 +171,7 @@ module.exports = Base.extend({
                 'location': this.app.session.get('location').url,
                 'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
             };
-            data[$field.attr('name')] = $field.val();
+            data[$field.attr('name')] = value;
             helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
                 data: data
             }, function onResponse(err, response, body) {
