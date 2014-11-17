@@ -24,12 +24,14 @@ module.exports = function userRouter(app) {
                     country: req.rendrApp.session.get('location').name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
-                }));
+                }), {
+                    app: req.rendrApp
+                });
                 done();
             }
 
             function submit(done) {
-                user.login(done, req);
+                user.login(done);
             }
 
             function success() {
@@ -86,12 +88,14 @@ module.exports = function userRouter(app) {
                     location: req.rendrApp.session.get('siteLocation'),
                     country: req.rendrApp.session.get('location').name,
                     platform: req.rendrApp.session.get('platform')
-                }));
+                }), {
+                    app: req.rendrApp
+                });
                 done();
             }
 
             function submit(done) {
-                user.lostpassword(done, req);
+                user.lostpassword(done);
             }
 
             function success() {
@@ -143,7 +147,9 @@ module.exports = function userRouter(app) {
                     country: location.name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: platform
-                }));
+                }), {
+                    app: req.rendrApp
+                });
                 done();
             }
 
@@ -157,11 +163,11 @@ module.exports = function userRouter(app) {
             }
 
             function submit(done) {
-                user.register(done, req);
+                user.register(done);
             }
 
             function login(done) {
-                user.login(done, req);
+                user.login(done);
             }
 
             function success() {
@@ -215,7 +221,9 @@ module.exports = function userRouter(app) {
                     platform: platform,
                     identityType: 1,
                     withConfirmation: true
-                }));
+                }), {
+                    app: req.rendrApp
+                });
                 done();
             }
 
@@ -229,7 +237,7 @@ module.exports = function userRouter(app) {
             }
 
             function submit(done) {
-                user.register(done, req);
+                user.register(done);
             }
 
             function success() {

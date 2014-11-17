@@ -3,7 +3,7 @@
 var Base;
 var syncer;
 var dataAdapter;
-var req;
+var options;
 var User;
 var user;
 var statsd;
@@ -22,8 +22,8 @@ describe('app', function() {
 
 function reset() {
     dataAdapter = {};
-    req = {
-        rendrApp: {
+    options = {
+        app: {
             session: {}
         }
     };
@@ -147,7 +147,7 @@ function test() {
 }
 
 function mock(data) {
-    user = new User(data);
+    user = new User(data, options);
 
     dataAdapter.post = sinon.stub();
     dataAdapter.post.callsArgWith(3, null, null, data);
@@ -169,7 +169,7 @@ function success(done, assert, data) {
         .val(done);
 
     function reply(done) {
-        user.reply(done, req, data);
+        user.reply(done, data);
     }
 }
 
@@ -185,7 +185,7 @@ function fail(done, assert, data) {
             .val(done);
 
         function reply(done) {
-            user.reply(done, req, data);
+            user.reply(done, data);
         }
     }
 }

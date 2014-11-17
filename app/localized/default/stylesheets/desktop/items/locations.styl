@@ -12,27 +12,14 @@
             position: relative;
             vertical-align: top;
             a.icon-close {
-                font-size: remify(8px);
-                position: absolute;
+                btn-close($greyStrong, $yellow, $black, $yellow)
                 right: 7px;
-                top: 6px;
+                top: 11px;
                 &.state {
                     color: $yellow;
-                }
-                &::before {
-                    background: $greyStrong;
-                    circle(15px);
-                    line-height: 15px;
-                    text-align: center;
-                }
-                &:hover::before {
-                    background: $black;
                 }
                 &.city {
                     color: $white;
-                }
-                &.state {
-                    color: $yellow;
                 }
             }
         }

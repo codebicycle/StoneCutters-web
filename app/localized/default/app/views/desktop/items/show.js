@@ -196,12 +196,11 @@ module.exports = Base.extend({
 
         if ($this.attr('href') == '#') {
             e.preventDefault();
-            var session = this.app.get('session');
-            var user = session.user;
+            var user = this.app.session.get('user');
             var itemId = $this.data('itemid');
-            var url = [];
             var removeTxt = $this.attr('data-remove');
             var addTxt = $this.attr('data-add');
+            var url = [];
 
             $this.attr('href', 'adding');
 
