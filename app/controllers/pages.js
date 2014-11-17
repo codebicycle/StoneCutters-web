@@ -6,6 +6,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var _ = require('underscore');
+
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
     var statsd = require(statsdModule)();
