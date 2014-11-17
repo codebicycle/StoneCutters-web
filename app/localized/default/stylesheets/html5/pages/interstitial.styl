@@ -1,76 +1,57 @@
 #interstitial {
-	background-image: url(imageUrl/images/common/marketing/backgroundInt200.jpg);
-	background-repeat: repeat-y;
-	background-size: 100%;
+	width: 100%;
+	position: absolute;
+	background: #1b87c4;
 	text-align: center;
 	font-size: 1rem;
-}
-@media screen and (min-width:200px) and (max-width:299px) {
-	#interstitial {
-		background-image: url(imageUrl/images/common/marketing/backgroundInt300.jpg);
+
+	header {
+		width: 100%;
+		display: block;
+		margin: 1rem auto 0;
+
+		img {
+			width: 66px;
+			display: inline-block;
+			vertical-align: top;
+		}
+		h1 {
+			width: 11rem;
+			display: inline-block;
+			margin: .2rem 0 0 1rem;
+			font-size: 1.8rem;
+			font-weight: normal;
+			text-align: left;
+			font-family: "arialRounded", Arial, sans-serif;
+			color: #fff;
+			line-height: 1.8rem;
+		}
 	}
-}
-@media screen and (min-width:300px) {
-	#interstitial{ 
-		background-image: url(imageUrl/images/common/marketing/backgroundInt400.jpg);
+	.download {
+		margin: 2rem 0;
+
+		a {
+			padding: .6rem 1.5rem;
+			font-weight: bold;
+			-webkit-box-shadow: 0px 4px 1px -3px rgba(0,0,0,0.7);
+			-moz-box-shadow: 0px 4px 1px -3px rgba(0,0,0,0.7);
+			box-shadow: 0px 4px 1px -3px rgba(0,0,0,0.7);
+		}
 	}
-}
-#interstitial .header {
-	width: 100%;
-	display: block;
-	margin: .625rem auto;
-}
-#interstitial #logoTop {
-	width: 20%;
-	margin: 0;
-	display: inline;
-	vertical-align: top;
-}
-#interstitial h1 {
-	width: 60%;
-	display: inline;
-	margin: 0 0 0 .4375rem;
-	display: inline;
-	text-align: left;
-	font-size: 1.5rem;
-	display: inline;
-	font-weight: normal;
-	line-height: 5.25rem;
-	text-transform: capitalize;
-}
-#interstitial #mobileImg {
-	width: 70%;
-	margin: 0 auto;
-}
-#interstitial .btn-adjust {
-	width: 80%;
-	display: block;
-	margin: .625rem auto;
-}
-#interstitial .btn-adjust.btnGrey a {
-	height: .625rem;
-	padding-top: .625rem;
-}
-#interstitial .btn-adjust.btnOrange a {
-	background: #ff7800;
-	border: .0625rem solid #e14b02;
-	border-radius: .1875rem;
-	color: #fff!important;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 1rem;
-	font-weight: bold!important;
-	height:auto;
-	padding: .625rem .4375rem;
-	text-decoration: none;
-	width: 80%;
-}
-#interstitial .continue {
-	width: 100%;
-	text-align: center;
-	margin: .9375rem 0 0 0;
-}
-#interstitial .continue a {
-	color: #515151;
-	text-decoration: none;
+	.continue {
+		width: 100%;
+		text-align: center;
+		margin: 1.5rem 0;
+		font-size: .7rem;
+
+		 a {
+			color: #fff;
+			text-decoration: underline;
+		}
+	}
+	#mobileImg {
+		width: 70%;
+		max-width: 272px;
+		margin: 0 auto;
+	}
 }
