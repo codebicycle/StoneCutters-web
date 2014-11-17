@@ -53,7 +53,7 @@ COMMIT_ID=$(cat console.log | grep -a 'Checking' | awk '{print $4}');
 rm console.log;
 
 cd $SOURCE_PATH
-RELEASE_NOTES=$(git log $COMMIT_ID.. --pretty=format:'%d %s (%cr) <%an> ' --abbrev-commit | grep -v Merge | awk '!x[$0]++')
+RELEASE_NOTES=$(git log $COMMIT_ID.. --pretty=format:'%d %s (%cr) (%an)' --abbrev-commit | grep -v Merge | awk '!x[$0]++')
 RELEASE_NOTES=${RELEASE_NOTES//[/<br>[}
 
 URL_GIT="https\://github.com/olx-inc/mobile-webapp/compare/"$COMMIT_ID"...master"
