@@ -113,7 +113,9 @@ module.exports = Base.extend({
     handleBack: function() {
         this.edited = true;
         history.pushState(null, '', window.location.pathname);
-        $(window).on('popstate', {message: this.dictionary['misc.WantToGoBack']}, onpopstate);
+        $(window).on('popstate', {
+            message: this.dictionary['misc.WantToGoBack']
+        }, onpopstate);
     },
     onHeaderChange: function(event, title, current, back, data) {
         event.preventDefault();

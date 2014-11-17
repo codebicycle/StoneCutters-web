@@ -1,9 +1,9 @@
 <header id="search">
-    <form action="{{ '/nf/search/redirect' | link }}" class="search-form {{ 'home' if currentRoute.action == 'list' else '' }}" method="post" >    	
+    <form action="{{ '/nf/search/redirect' | link }}" class="search-form {{ 'home' if currentRoute.action == 'list' else '' }}" method="post" >
         <input name="search" data-qa="search-input" placeholder="{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}">
         <input type="submit" class="submit" data-qa="search-submit" value="{{ dictionary["homeheader.Search"] }}">
     </form>
     {% if currentRoute.action != 'list' %}
-    	<a href=""  class="btnfilter btnlocation">{{ dictionary["defaultheader.Location"] }}</a>
+    	<a href="{{ '/location' | link }}"  class="btnfilter btnlocation">{{ dictionary["defaultheader.Location"] }}</a>
     {% endif %}
 </header>

@@ -1,9 +1,9 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../modules/filters');
+var helpers = require('../../../../../../../helpers');
+var Filters = require('../../../../../../../modules/filters');
 
 module.exports = Base.extend({
     className: 'listing-filters',
@@ -147,15 +147,15 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = this.app.session.get('path');
         var $target = $(event.currentTarget);
         var filterSlug = $target.data('filter-slug');
+        var path;
 
         if (!filterSlug) {
             filterSlug  = ['/des-cat-', $target.data('filter-id'), '/'].join('');
         }
 
-        path = path.replace('/search/', filterSlug);
+        path = this.replacePath(filterSlug);
         path = this.refactorPath(path);
         this.app.router.redirectTo(path);
     },
@@ -166,7 +166,20 @@ module.exports = Base.extend({
         if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
             event.preventDefault();
         }
+    },
+    replacePath: function(replace) {
+        var path = this.app.session.get('path');
+        var url;
+
+        switch (this.options.subid) {
+            case 'staticSearch':
+                url = ['/nf', replace];
+                url.push(path.replace('/q/', '').split('/').shift());
+                return url.join('');
+            default:
+                return path.replace('/search/', replace);
+        }
     }
 });
 
-module.exports.id = 'items/filters';
+module.exports.id = 'items/partials/filters';

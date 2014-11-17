@@ -17,7 +17,6 @@ module.exports = {
     'defaultfooter.About OLX': 'Over OLX',
     'defaultfooter.Back': 'Terug',
     'defaultfooter.change': 'wijzig',
-    'defaultfooter.FreeSite': '100% Gratis advertenties',
     'defaultfooter.Help': 'Help',
     'defaultfooter.Home': 'Home',
     'defaultfooter.PopularSearches': 'Populaire zoekopdrachten',
