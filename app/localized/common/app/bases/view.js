@@ -57,7 +57,9 @@ module.exports = Base.extend({
                 version: this.app.session.get('osVersion')
             },
             host: this.app.session.get('host'),
-            shortHost: this.app.session.get('shortHost')
+            shortHost: this.app.session.get('shortHost'),
+            domain: this.app.session.get('domain'),
+            fullDomain: this.app.session.get('fullDomain')
         });
     },
     track: function(data, callback, options) {
