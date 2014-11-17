@@ -1,19 +1,22 @@
 'use strict';
 
-var configAdServing = require('./config/slots');
+var configAdServing = require('./config');
 var utils = require('../../../shared/utils');
 
 function getSlots (slotname) {
     return utils.get(configAdServing, ['slots', slotname], false);
 }
 
-function isEnabled (config) {
-	return utils.get(config, ['enabled'], false);
-}
 
-function getSettings(slotname, categories) {
+function getSettings(slotname, category) {
 	var config = getSlots(slotname);
-	//var enabled = isEnabled(config);
+	var categories;
+
+	if (config.enabled) {
+		categories = utils.get(Object(config), ['types', 'CSA', 'categories'], false);
+	}
+
+	return categories;
 }
 
 module.exports = {
