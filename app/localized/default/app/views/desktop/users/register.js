@@ -5,7 +5,7 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'users_register_view',
+    className: 'users_register_view short-page',
     events: {
         'focus .text-field': 'clearInputs'
     },
