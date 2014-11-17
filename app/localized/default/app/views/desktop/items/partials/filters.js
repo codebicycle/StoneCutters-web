@@ -1,9 +1,9 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
-var Filters = require('../../../../../../modules/filters');
+var helpers = require('../../../../../../../helpers');
+var Filters = require('../../../../../../../modules/filters');
 
 module.exports = Base.extend({
     className: 'listing-filters',
@@ -182,4 +182,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/filters';
+module.exports.id = 'items/partials/filters';
