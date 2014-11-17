@@ -3,68 +3,36 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/filter');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
+var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
+    order: ['pricerange', 'hasimage', 'state', 'parentcategory'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var filters = data.filters;
-        var order = ['pricerange','hasimage','state','parentcategory'];
-        var list = [];
-
-        _.each(order, function(obj, i){
-            _.find(filters, function(obj){
-                return obj.name == order[i] ? list.push(obj) : false;
-            });
-        });
-        return _.extend({}, data, {
-            filtersOrd: list
-        });
-    },
-    events: {
-        //'click .orange': 'applyFilter',
-        //'click .clear': 'clearForm',
-        //'click a.location': 'setUrlLocation',
-
-        'submit': 'onSubmit',
-        'click a': 'aClick'
-    },
-    clearForm: function(event) {
-        event.preventDefault();
-        var data = this.getData();
-        var applied = data.appliedstring;
-        var url;
-
-        var removeParams = function (url, params){
-            var trimUrl;
-
-            if (params) {
-                trimUrl = url.split(params + '/');
-                url = trimUrl.join('');
-            }
-
-            return url;
-        };
-
-        url = removeParams(this.getData(), applied);
-
-        $("#filter").trigger('reset');
-
-        helpers.common.redirect.call(this.app.router, url, null, {
-            status: 200
-        });
-    },
-    parseUrl: function(url) {
-        if(url.indexOf('//')) {
-            url = url.split('//').join('')
-                .split('/').slice(1, url.length)
-                .join('/').split('?').slice(0, 1)
-                .join('');
-        }
-        return url;
+        this.filters = data.filters;
+        this.filters.order = this.order;
+        data.path = data.path.replace('/', '');
+        return _.extend({}, data, {});
     },
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
+        if (!this.filters) {
+            this.filters = new Filters(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
+        }
+    },
+    events: {
+        'click .check-box': 'selectFilter',
+        'click .adType': 'adType',
+        'click .clear-all': 'cleanFilters',
+        'click .range-submit': 'rangeFilterInputs',
+        'click .category': 'categoryFilter',
+        'click .title': 'toogleFilter'
     },
     onStart: function(event) {
         this.appView.trigger('filter:start');
@@ -72,48 +40,165 @@ module.exports = Base.extend({
     onEnd: function(event) {
         this.appView.trigger('filter:end');
     },
-    getData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        return data;
+    toogleFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $this = $(event.currentTarget);
+
+        $this.toggleClass('active');
+        $this.closest('.filter').find('.dropdown').slideToggle();
     },
-    setUrlLocation: function(event) {
-        var datos = this.$('#filter').serializeArray();
+    adType: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
 
-        var url = this.parseUrl(helpers.filters.generateFilterOrder(datos, this.getData(), 'filter'));
-        var trimUrl = url.split('/');
+        var path = this.app.session.get('path');
+        var $this = $(event.currentTarget);
+        var filter = {
+            name: $this.closest('.filter').data('filter-name'),
+            type: $this.closest('.filter').data('filter-type'),
+            value: $this.data('filter-value')
+        };
 
-        if (trimUrl[trimUrl.length-1] !== '') {
-            url = trimUrl.join('/') + '/';
+        if (filter.value && !this.filters.has(filter.name, filter.value)) {
+            this.filters.add(filter);
+        } else {
+            this.filters.remove(filter);
         }
 
-        $(event.target).attr('href', '/location?target=' + url + 'filter');
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
     },
-    applyFilter: function(event) {
-        event.preventDefault();
-
-        var datos = $('#filter').serializeArray();
-        var url = helpers.filters.generateFilterOrder(datos,this.getData(), 'filter');
-
-        helpers.common.redirect.call(this.app.router, url, null, {
-            status: 200
-        });
-    },
-
-    onSubmit: function(event) {
+    categoryFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var data = this.getData();
-        var url = data.referer || data.url.replace('/filter', '');
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+        var filterSlug = $target.data('filter-slug');
 
-        helpers.common.redirect.call(this.app.router, url, null, {
-            status: 200
-        });
+        if (!filterSlug) {
+            filterSlug  = ['/des-cat-', $target.data('filter-id'), '/'].join('');
+        }
+
+        path = path.replace('/search/', filterSlug);
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
     },
-    aClick: function(event) {
+    selectFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $this = $(event.currentTarget);
+        var val = $this.find('input').val();
+
+        var filter = {
+            name: $this.closest('.filter').data('filter-name'),
+            type: $this.closest('.filter').data('filter-type'),
+            value: val
+        };
+
+        $this.find('input').attr('checked', true);
+
+        if ($this.find('input').is(':checked') && !this.filters.has(filter.name, filter.value)) {
+            this.filters.add(filter);
+        } else {
+            this.filters.remove(filter);
+        }
+
+        if (this.filters.has('carmodel') && !this.filters.has('carbrand')) {
+            filter = {
+                name: 'carmodel',
+                type: 'SELECT'
+            };
+            this.filters.remove(filter);
+        }
+
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    rangeFilterInputs: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $this = $(event.currentTarget);
+
+        var from = $this.closest('.filter').find('[data-filter-id=from]').val();
+        var to = $this.closest('.filter').find('[data-filter-id=to]').val();
+
+        var filter = {
+            name: $this.closest('.filter').data('filter-name'),
+            type: $this.closest('.filter').data('filter-type'),
+            value: {
+                from: from,
+                to: to
+            }
+        };
+
+        if (!from && !to) {
+            return this.filters.remove(filter);
+        }
+
+        this.filters.add(filter);
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    cleanFilters: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var path = this.app.session.get('path');
+        var $target = $(event.currentTarget);
+
+        var filter = {
+            name: $target.closest('.filter').data('filter-name'),
+            type: $target.closest('.filter').data('filter-type')
+        };
+
+        this.filters.remove(filter);
+
+        if (!this.filters.has('carbrand') && this.filters.has('carmodel')) {
+            filter = {
+                name: 'carmodel',
+                type: 'SELECT'
+            };
+            this.filters.remove(filter);
+        }
+
+        path = [this.cleanPath(path), '/', this.filters.format()].join('');
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+    },
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
+        }
+        return path;
+    },
+    cleanPath: function(path) {
+        path = this.refactorPath(path);
+        path = path.replace('/filter', '');
+        return path.split('/-').shift();
+    },
+    refactorPath: function(path) {
+        path = this.cleanPage(path);
+        if (path.slice(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
+        }
+        return path;
     }
+
 });

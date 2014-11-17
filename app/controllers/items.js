@@ -1144,15 +1144,13 @@ function filter(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var appf, appliedString;
-
-        if (params.filters) {
-            appf = params.filters;
-            appliedString = params.filters;
-        }
 
         var prepare = function(done) {
             params.location = this.app.session.get('siteLocation');
+            params.offset = 0;
+            params.pageSize = 0;
+            params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
+
             if (params.search) {
                 params.searchTerm = params.search;
                 delete params.search;
@@ -1166,6 +1164,7 @@ function filter(params, callback) {
             }
             delete params.platform;
             delete params.page;
+            delete params.filters;
             done();
         }.bind(this);
 
@@ -1178,37 +1177,13 @@ function filter(params, callback) {
             }, {
                 readFromCache: false
             }, function afterFetch(err, res) {
-                done(res.items.meta.filters);
+                done(res.items.filters);
             }.bind(this));
         }.bind(this);
 
-        var findApplied = function (done, filters) {
-
-            function getFilters(arr) {
-                var fil;
-                var obj = {};
-
-                for (var i = 1; i < arr.length; i++) {
-                    fil = arr[i].split('_');
-                    obj[fil[0]] = [];
-                    for (var j = 1; j < fil.length; j++) {
-                        obj[fil[0]].push(fil[j]);
-                    }
-                }
-
-                return obj;
-            }
-            if (appf) {
-                appf = getFilters(appf.split('-'));
-            }
-            done(filters);
-        };
-
         var success = function(filters) {
             callback(null, 'items/filter', {
-                filters: filters,
-                appliedFilter: appf,
-                appliedstring: appliedString
+                filters: filters
             });
         }.bind(this);
 
@@ -1219,7 +1194,6 @@ function filter(params, callback) {
         asynquence().or(error)
             .then(prepare)
             .then(find)
-            .then(findApplied)
             .val(success);
     }
 }
