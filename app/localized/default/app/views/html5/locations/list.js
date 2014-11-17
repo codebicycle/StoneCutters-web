@@ -16,7 +16,7 @@ module.exports = Base.extend({
         this.app.router.once('action:start', this.onStart);
         this.app.router.once('action:end', this.onEnd);
 
-        if (!helpers.features.isEnabled.call(this, 'autoLocationDisabled')) {
+        if (helpers.features.isEnabled.call(this, 'autoLocation')) {
             if (navigator.geolocation) {
                 callback = function (position) {
                         this.latitude = position.coords.latitude;
