@@ -26,6 +26,7 @@ module.exports = Base.extend({
                     }.bind(this);
                 errorCallback = function (error) {
                         this.showAutoLocation = false;
+                        console.log(error);
                     }.bind(this);
 
                 navigator.geolocation.getCurrentPosition(callback, errorCallback, {
@@ -78,17 +79,27 @@ module.exports = Base.extend({
 
         var success = function(res, body) {
             var url;
+            var params;
 
-            if (body.children) {
-                url = body.children[0].url;
+            if (res.children) {
+                if (res.children[0].children) {
+                    url = res.children[0].children[0].url;
+                }
+                else {
+                    url = res.children[0].url;
+                }
             }
             else {
-                url = body.url;
+                url = res.url;
             }
 
-            helpers.common.redirect.call(this.app.router || this, '/', {
+            if (url !== '') {
+                params = {
                     location: url
-                }, {
+                };
+            }
+
+            helpers.common.redirect.call(this.app.router || this, '/', params, {
                     status: 200
                 }
             );
