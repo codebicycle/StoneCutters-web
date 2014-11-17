@@ -44,15 +44,5 @@ module.exports = {
             'longerHeadlines': true,
             'domainLinkAboveDescription': false
         }
-    },
-    AFC: {
-        options: {
-            pubId : 'olx-browser'
-        },
-        settings: {
-            'media': 'flash, image',
-            'width': 160,
-            'height': 600
-        }
     }
 };
