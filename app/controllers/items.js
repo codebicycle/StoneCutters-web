@@ -224,15 +224,16 @@ function show(params, callback) {
             }
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
+            this.app.seo.setContent(item.metadata);
             if (!item.purged) {
                 this.app.seo.addMetatag('title', item.title);
-                this.app.seo.set('altImages',item);
+                this.app.seo.set('altImages', item);
             }
             else {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
-            this.app.seo.setContent(item.metadata);
+
             if (platform !== 'desktop' && siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));

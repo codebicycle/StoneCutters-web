@@ -131,12 +131,17 @@ Seo = Backbone.Model.extend({
         if (!value) {
             return;
         }
+
         var generator = new AltGenerator({
-                item: value
-            }, {
-                seo: this,
-                app: this.app
-            });
+            item: value
+        }, {
+            seo: this,
+            app: this.app
+        });
+        this.set('altImages', generator.generate(), {
+            silent: true,
+            unset: false
+        });
     }
 });
 

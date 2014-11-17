@@ -12,6 +12,7 @@ Base = Backbone.Model;
 function initialize(attributes, options) {
     var item = this.get('item');
     var levelPath;
+    var itemPrice;
     var attrs;
     var alts = [];
 
@@ -19,16 +20,18 @@ function initialize(attributes, options) {
     this.app = options.app;
     this.seo = options.seo;
     levelPath = this.seo.get('levelPath');
+
     attrs = {
         title: item.title,
         categoryName: item.category.name,
-        price: item.price.displayPrice,
+        price: (item.price && item.price.displayPrice ? item.price.displayPrice: ''),
         description: item.description,
         countryName:  getCountryName(item),
         stateName:  getStateName(item),
         cityName: getCityName(item),
         neighborhood: getNeighborhoodName(item)
     };
+
     if (levelPath && levelPath.top && levelPath.top.categoryLevel) {
         attrs.categoryLevel1 = levelPath.top.categoryLevel.anchor;
     }
@@ -45,28 +48,28 @@ function generate () {
     var title = this.get('title');
     var message = getMessagePictureOf.call(this);
 
-    if (this.has('neighborhood')) {
+    if (this.get('neighborhood')) {
         alts.push(title + ' - ' + this.get('neighborhood'));
     }
     if (message) {
         alts.push(message + ' ' + title);
     }
-    if (this.has('cityName')) {
+    if (this.get('cityName')) {
         alts.push(title + ' - ' + this.get('cityName'));
     }
-    if (this.has('categoryLevel2')) {
+    if (this.get('categoryLevel2')) {
         alts.push(title + ' - ' + this.get('categoryLevel2'));
     }
-    if (this.has('categoryLevel1')) {
+    if (this.get('categoryLevel1')) {
         alts.push(title + ' - ' + this.get('categoryLevel1'));
     }
-    if (this.has('stateName')) {
+    if (this.get('stateName')) {
         alts.push(title + ' - ' + this.get('stateName'));
     }
-    if (this.has('categoryName')) {
+    if (this.get('categoryName')) {
         alts.push(title + ' - ' + this.get('categoryName'));
     }
-    if (this.has('price')) {
+    if (this.get('price')) {
         alts.push(title + ' - ' + this.get('price'));
     }
     alts.push(title.substr(0,title.length <= 50 ? title.length : 50));
