@@ -133,7 +133,7 @@ module.exports = function(grunt) {
             }
         });
 
-        function eachIconLocation(location) {
+        function eachIconLocation(platform, location) {
             var dir = 'app/localized/' + location + '/icons/' + platform;
 
             if (grunt.file.exists(dir)) {
@@ -169,7 +169,7 @@ module.exports = function(grunt) {
                     continue;
                 }
                 addIcons(environment, platform, 'default');
-                icons[platform].forEach(addIcons.bind({}, environment, platform));
+                icons[platform].forEach(addIcons.bind(null, environment, platform));
             }
         });
 

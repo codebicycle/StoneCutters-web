@@ -38,11 +38,13 @@ module.exports = function(dataAdapter, excludedUrls) {
             var hasWww = www !== -1;
             var domain = hasCom || hasCo ? subdomains[(hasCo ? co : com) - 1] : subdomains[subdomains.length - 2];
             var siteLocation = [];
+            var domainLocation = [];
             var locationUrl = ['www'];
             var platform;
             var country;
             var location;
             var port;
+            var fullDomain;
 
             if (!hasM) {
                 platform = 'desktop';
@@ -71,36 +73,39 @@ module.exports = function(dataAdapter, excludedUrls) {
                 siteLocation.push('www');
             }
             siteLocation.push(domain);
-            if (hasCom) {
-                siteLocation.push('com');
-            }
-            if (hasCo) {
-                siteLocation.push('co');
-            }
-            if (country) {
-                siteLocation.push(country);
-            }
-            siteLocation = siteLocation.join('.');
+            domainLocation.push(domain);
             locationUrl.push(domain);
             if (hasCom) {
+                siteLocation.push('com');
+                domainLocation.push('com');
                 locationUrl.push('com');
             }
             if (hasCo) {
+                siteLocation.push('co');
+                domainLocation.push('co');
                 locationUrl.push('co');
             }
             if (country) {
+                siteLocation.push(country);
+                domainLocation.push(country);
                 locationUrl.push(country);
             }
+            siteLocation = siteLocation.join('.');
+            domainLocation = domainLocation.join('.');
             locationUrl = locationUrl.join('.');
+            fullDomain = domainLocation;
             if (hasPort) {
                 port = fullHost.split(':').pop();
+                fullDomain = fullDomain + ':' + port;
             }
             req.rendrApp.set('session', {
                 shortHost: host,
                 host: fullHost,
                 platform: req.cookies && req.cookies.forcedPlatform ? req.cookies.forcedPlatform : platform,
                 port: port,
-                locationUrl: locationUrl
+                locationUrl: locationUrl,
+                domain: domainLocation,
+                fullDomain: fullDomain
             });
             if (!hasM || isTesting || isStaging) {
                 req.rendrApp.get('session').siteLocation = siteLocation;

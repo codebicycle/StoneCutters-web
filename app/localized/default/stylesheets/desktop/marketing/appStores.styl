@@ -13,18 +13,18 @@
     }
 
     p {
-        color: $violet;
+        cursive($violet, $xs);
         display: inline-block;
-        font-size: $s;
-        font-weight: bold;
+        text-transform: uppercase;
         margin: 0;
         text-align: center;
         vertical-align: middle;
     }
 
-    .icon-sketchyarrow::before {
+    .icon-sketchyarrow::before { 
         float: right;
         font-size: $m;
+        text-transform: lowercase;
         margin: -3px 5px 0;
         transform(rotate(270deg));
     }

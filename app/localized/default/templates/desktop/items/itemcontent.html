@@ -1,12 +1,12 @@
 <article id="item-content">
     <div>
         <h2 class="item-title">{{ item.title }}</h2>
-
-        {% include (template + "/items/iteminfo.html") %}
+        {% view 'items/partials/iteminfo' %}
         {% view 'items/partials/imagegallery' %}
-        {% include (template + "/items/itemdescription.html") %}
-        {% include (template + "/items/itemlocation.html") %}
+        {% view 'items/partials/itemdescription' %}
+        {% if item.coordinates %}
+            {% view 'items/partials/itemlocation' %}
+        {% endif %}
     </div>
-
-    {% include (template + "/items/socialsharing.html") %}
+    {% view 'items/partials/itemactions' %}
 </article>

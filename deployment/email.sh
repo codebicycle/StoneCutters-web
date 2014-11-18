@@ -43,32 +43,20 @@ LAST_BUILD_VERSION=$(curl -s 'http://elvira.olx.com.ar/tags/api/query.php?repo=m
 echo "     PRODUCTION:" $LAST_BUILD_VERSION
 echo "------------------------------------------"
 
-if [ $LAST_BUILD_VERSION = "0" ]
-then
-	echo "Woow! There is not live version, so we will create an email for the full log"
-	echo "------------------------------------------"
 
-	cd $SOURCE_PATH
-	RELEASE_NOTES=$(git log --grep MOB --pretty=format:'%s' --abbrev-commit | grep -v pull | grep -v "^MOB" | awk '!x[$0]++')
-	RELEASE_NOTES=${RELEASE_NOTES//[/<br>[}
+PATTERN='1.1.'
+REPLACE=''
+LAST_BUILD_VERSION="${LAST_BUILD_VERSION/$PATTERN/$REPLACE}"
 
-	URL_GIT="https\://github.com/olx-inc/mobile-webapp/commits/master"
-else
+curl http://192.168.8.79:8080/view/01_ARWEN_Pipeline_Testing/job/ARWEN_Build_Testing/$LAST_BUILD_VERSION/consoleText > console.log;
+COMMIT_ID=$(cat console.log | grep -a 'Checking' | awk '{print $4}');
+rm console.log;
 
-	PATTERN='1.1.'
-	REPLACE=''
-	LAST_BUILD_VERSION="${LAST_BUILD_VERSION/$PATTERN/$REPLACE}"
+cd $SOURCE_PATH
+RELEASE_NOTES=$(git log $COMMIT_ID.. --pretty=format:'%d %s (%cr) (%an)' --abbrev-commit | grep -v Merge | awk '!x[$0]++')
+RELEASE_NOTES=${RELEASE_NOTES//[/<br>[}
 
-	curl http://192.168.8.79:8080/view/01_ARWEN_Pipeline_Testing/job/ARWEN_UnitTest_Testing/$LAST_BUILD_VERSION/consoleText > console.log;
-	COMMIT_ID=$(cat console.log | grep -a 'Checking' | awk '{print $4}');
-	rm console.log;
-
-	cd $SOURCE_PATH
-	RELEASE_NOTES=$(git log $COMMIT_ID.. --grep MOB --pretty=format:'%s' --abbrev-commit | grep -v pull | grep -v "^MOB" | awk '!x[$0]++')
-	RELEASE_NOTES=${RELEASE_NOTES//[/<br>[}
-
-	URL_GIT="https\://github.com/olx-inc/mobile-webapp/compare/"$COMMIT_ID"...master"
-fi
+URL_GIT="https\://github.com/olx-inc/mobile-webapp/compare/"$COMMIT_ID"...master"
 
 
 
