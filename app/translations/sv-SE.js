@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> i <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Redigera min annons',
+    'unexistingitem.ListingUnavailable': 'Annonsen \xE4r inte l\xE4ngre tillg\xE4nglig',
     'landingbody.EmailAddress': 'E-postadress',
     'landingbody.ForgotPassword': 'Gl\xF6mt ditt l\xF6senord?',
     'landingbody.SubmitRegistration': 'Skicka registrering',

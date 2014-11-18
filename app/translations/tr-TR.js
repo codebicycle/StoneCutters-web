@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> Bulundu\u011Fu yer: <<REGION>> ',
     'messages_site_class.30': 'Tamam',
     'messages_user_management_current_ads.EditMyListing': '\u0130lanlar\u0131m\u0131 D\xFCzenle',
+    'unexistingitem.ListingUnavailable': 'Bu ilan art\u0131k ge\xE7erli de\u011Fil',
     'landingbody.EmailAddress': 'E-Posta Adresi',
     'landingbody.ForgotPassword': 'Parolan\u0131z\u0131 unuttunuz mu?',
     'landingbody.SubmitRegistration': '\xDCyelik Ba\u015Fvurusunu Yolla',

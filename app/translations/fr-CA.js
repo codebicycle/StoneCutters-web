@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> en <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Modifier Mon Annonce',
+    'unexistingitem.ListingUnavailable': 'Cette annonce n\'est plus disponible',
     'landingbody.EmailAddress': 'Email',
     'landingbody.ForgotPassword': 'Vous avez oubli\xE9 votre mot de passe ?',
     'landingbody.SubmitRegistration': 'Soumettre l\'Inscription',

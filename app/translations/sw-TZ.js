@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> katika <<REGION>>',
     'messages_site_class.30': 'Sawa',
     'messages_user_management_current_ads.EditMyListing': 'Hariri Tangazo Langu',
+    'unexistingitem.ListingUnavailable': 'Tangazo hili halipatikani tena',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Forgot password?',
     'landingbody.SubmitRegistration': 'Wasilisha Usajili',

@@ -5,6 +5,8 @@ module.exports = {
     marketing: require('./marketing'),
     common: require('./common'),
     dataAdapter: require('./dataAdapter'),
+    hijri: require('./hijri'),
+    numbers: require('./numbers'),
     features: require('./features'),
     timeAgo: function(itemDate) {
         var current = new Date();

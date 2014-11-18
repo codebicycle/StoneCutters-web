@@ -1,0 +1,82 @@
+<tr>
+    <td>
+        {% view 'locations/select' %}
+        {% set templateName = template + '/partials/search.html' %}
+        {% include templateName %}
+        {% if metadata.total == 0 %}
+            <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4" bgcolor="#FFFFFF">
+                <tbody>
+                    <tr>
+                        <td style="border-top: solid thin #808080;">
+                            <small style="display: block;">{{ dictionary["misc.NoResults"] }}</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: .25em .5em .5em;">
+                            <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
+                                <tr>
+                                    <td bgcolor="#FF6600" align="center">
+                                        <font size="2" style="display: block;">
+                                            <a href="{{ '/' | link }}" style="display: block;">
+                                                <strong><font color="#FFFFFF">{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</font></strong>
+                                            </a>
+                                        </font>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4" bgcolor="#FFFFFF">
+                <tbody>
+                    <tr>
+                        <td style="border-top: solid thin #808080;">
+                            <small style="display: block;">
+                                <img border="0" alt="" src="{{ '/images/common/gif1x1.gif' | static }}" width="12" height="9" >
+                                {{ dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>' , search) | replace('<<NUMBER>>' , metadata.total) }}
+                            </small>
+                        </td>
+                    </tr>
+                    {%for item in items %}
+                        <tr>
+                            <td style="border-top: solid thin #808080;">
+                                <a style="display: block;" data-qa="list-item" tabindex="1" href="{{ item | slugToUrl | link }}">
+                                    <small style="display: block;">
+                                        {% if item.thumbnail %}
+                                            <img border="0" alt="" src="{{ '/images/wap/photo.gif' | static }}">
+                                        {% else %}
+                                            <img border="0" alt="" src="{{ '/images/common/gif1x1.gif' | static }}" width="12" height="9" >
+                                        {% endif %}
+                                        {{ item.title }} {{ " - "+item.price.displayPrice if item.price.displayPrice }}
+                                    </small>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if metadata.next or metadata.previous %}
+                <table width="100%" border="0" bgcolor="#DDDDDD" cellspacing="0" cellpadding="4">
+                    <tbody>
+                        <tr>
+                            <td align="center" style="border-top: solid thin #808080;">
+                                <small style="display: block;">
+                                    {{ (['<a href="', metadata.previous | link, '" >&lt;</a>'] | join('')) if metadata.previous }}
+                                    {{ metadata | pagination('wap') | persianDigits }}
+                                    {{ (['<a href="', metadata.next | link, '" >&gt;</a>'] | join('')) if metadata.next }}
+                                </small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+        {% set templateName = template + '/partials/tracking.html' %}
+        {% include templateName %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>

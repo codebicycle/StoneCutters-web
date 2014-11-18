@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> i <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonse',
+    'unexistingitem.ListingUnavailable': 'Annonsen er ikke lenger tilgjengelig',
     'landingbody.EmailAddress': 'E-postadresse',
     'landingbody.ForgotPassword': 'Glemt passord?',
     'landingbody.SubmitRegistration': 'Send inn registrering',

@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> v <<REGION>>',
     'messages_site_class.30': 'V redu',
     'messages_user_management_current_ads.EditMyListing': 'Uredi moj oglas',
+    'unexistingitem.ListingUnavailable': 'Ta oglas ni ve\u010D na voljo.',
     'landingbody.EmailAddress': 'E-po\u0161tni naslov',
     'landingbody.ForgotPassword': 'Ste pozabili geslo?',
     'landingbody.SubmitRegistration': 'Po\u0161lji registracijo',

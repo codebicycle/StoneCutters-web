@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> a <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar el meu anunci',
+    'unexistingitem.ListingUnavailable': 'Aquest anunci no est\xE0 disponible',
     'landingbody.EmailAddress': 'Adre\xE7a de correu electr\xF2nic',
     'landingbody.ForgotPassword': 'Heu oblidat la contrasenya?',
     'landingbody.SubmitRegistration': 'Enviar registre',

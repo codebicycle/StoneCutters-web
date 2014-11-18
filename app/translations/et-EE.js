@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Muutke "Minu kuulutust"',
+    'unexistingitem.ListingUnavailable': 'See kuulutus ei ole enam k\xE4ttesaadav',
     'landingbody.EmailAddress': 'E-posti aadress',
     'landingbody.ForgotPassword': 'Unustasite salas\xF5na?',
     'landingbody.SubmitRegistration': 'Esitage registreering',

@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> trong <<REGION>>',
     'messages_site_class.30': '\u0110\u1ED3ng \xFD',
     'messages_user_management_current_ads.EditMyListing': 'Ch\u1EC9nh s\u1EEDa rao v\u1EB7t',
+    'unexistingitem.ListingUnavailable': 'Danh m\u1EE5c n\xE0y kh\xF4ng c\xF2n n\u1EEFa. ',
     'landingbody.EmailAddress': '\u0110\u1ECBa ch\u1EC9 email',
     'landingbody.ForgotPassword': 'B\u1EA1n qu\xEAn m\u1EADt kh\u1EA9u?',
     'landingbody.SubmitRegistration': 'N\u1ED9p \u0111\u0103ng k\xFD',

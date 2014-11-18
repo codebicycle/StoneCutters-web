@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> di <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
+    'unexistingitem.ListingUnavailable': 'Iklan ini sudah tiada lagi',
     'landingbody.EmailAddress': 'Alamat Emel ',
     'landingbody.ForgotPassword': 'Terlupa kata laluan?',
     'landingbody.SubmitRegistration': 'Hantar Pendaftaran',

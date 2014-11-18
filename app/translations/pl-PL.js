@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> in <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edytuj moje og\u0142oszenie',
+    'unexistingitem.ListingUnavailable': 'Og\u0142oszenie niedost\u0119pne ',
     'landingbody.EmailAddress': 'Adres e-mail',
     'landingbody.ForgotPassword': 'Zapomnia\u0142e\u015B has\u0142o?',
     'landingbody.SubmitRegistration': 'Formularz rejestracji',

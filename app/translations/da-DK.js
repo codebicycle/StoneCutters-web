@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> i <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonce',
+    'unexistingitem.ListingUnavailable': 'Denne annonce er ikke l\xE6ngere tilg\xE6ngelig',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Glemt password?',
     'landingbody.SubmitRegistration': 'Send registrering',

@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': 'Kategorie <<CATEGORY>> v kraji <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravit m\u016Fj z\xE1znam',
+    'unexistingitem.ListingUnavailable': 'Z\xE1znam u\u017E nen\xED k dispozici.',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'landingbody.ForgotPassword': 'Zapomn\u011Bli jste heslo?',
     'landingbody.SubmitRegistration': 'Odeslat registraci',

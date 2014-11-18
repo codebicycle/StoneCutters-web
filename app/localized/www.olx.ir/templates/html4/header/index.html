@@ -1,0 +1,22 @@
+<div id="header">
+	<span><a href="{{ '/' | link }}">{{ location.url | replace('www.', '') }}</a></span>
+	<ul>
+		{% if user %}
+			{% set status = 'loggedInUnreadMessages' if user.unreadMessagesCount else 'loggedIn' %}
+			{% set url = '/myolx' %}
+			{% set text = dictionary['homeheader.My OLX'] %}
+		{% else %}
+			{% set status = 'loggedOut' %}
+			{% set url = '/login' %}
+			{% set text = dictionary['homeheader.Sign_In'] %}
+		{% endif %}
+		{% if postButton %}
+			<li>
+				<a class="post" href="{% if location.current %}{{ ['/posting', postLink] | join('') | link }}{% else %}{{ '/location?target=posting' | link }}{% endif %}" title="{{ dictionary["misc.Sell_Post_Mobile_India"] }}">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+			</li>
+		{% endif %}
+		<li>
+			<a class="user {{ status }}" href="{{ url | link }}" title="{{ text }}">{{ text }}</a>
+		</li>
+	</ul>
+</div>

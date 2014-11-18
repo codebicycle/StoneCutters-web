@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> in <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Redigeer My Lysting',
+    'unexistingitem.ListingUnavailable': 'Hierdie lysting is nie meer beskikbaar nie',
     'landingbody.EmailAddress': 'E-posadres',
     'landingbody.ForgotPassword': 'Wagwoord vergeet?',
     'landingbody.SubmitRegistration': 'Dien Registrasie In',

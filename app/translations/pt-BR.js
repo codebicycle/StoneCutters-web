@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> in <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
+    'unexistingitem.ListingUnavailable': 'Este an\xFAncio n\xE3o est\xE1 mais dispon\xEDvel',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
     'landingbody.ForgotPassword': 'Esqueceu sua senha?',
     'landingbody.SubmitRegistration': 'Enviar Registro',

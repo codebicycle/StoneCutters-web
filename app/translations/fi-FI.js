@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': 'Kategoria <<CATEGORY>> alueella <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Muokkaa omaa ilmoitusta',
+    'unexistingitem.ListingUnavailable': 'Ilmoitus ei ole en\xE4\xE4 n\xE4ht\xE4viss\xE4',
     'landingbody.EmailAddress': 'S\xE4hk\xF6postiosoite',
     'landingbody.ForgotPassword': 'Unohditko salasanasi?',
     'landingbody.SubmitRegistration': 'L\xE4het\xE4 rekister\xF6intitiedot',

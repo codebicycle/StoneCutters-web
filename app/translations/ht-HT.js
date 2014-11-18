@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> nan <<REGION>>',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Chanje Anons Mwen ',
+    'unexistingitem.ListingUnavailable': 'Anons sa a pa disponib ank\xF2.',
     'landingbody.EmailAddress': 'Adr\xE8s Im\xE8l',
     'landingbody.ForgotPassword': 'Ou bliye kod sekr\xE8 ou ?',
     'landingbody.SubmitRegistration': 'Soum\xE8t Enskripsyon',

@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> itt: <<REGION>>',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'A hirdet\xE9sem szerkeszt\xE9se',
+    'unexistingitem.ListingUnavailable': 'A hirdet\xE9s m\xE1r nem el\xE9rhet\u0151',
     'landingbody.EmailAddress': 'E-mail c\xEDm',
     'landingbody.ForgotPassword': 'Elfelejtette a jelszav\xE1t?',
     'landingbody.SubmitRegistration': 'Regisztr\xE1ci\xF3 elk\xFCld\xE9se',

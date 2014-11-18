@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<REGION>>\u0CA8\u0CB2\u0CCD\u0CB2\u0CBF<<CATEGORY>>',
     'messages_site_class.30': '\u0C93\u0C95\u0CC6',
     'messages_user_management_current_ads.EditMyListing': '\u0CA8\u0CA8\u0CCD\u0CA8 \u0C9C\u0CBE\u0CB9\u0CBF\u0CB0\u0CBE\u0CA4\u0CA8\u0CCD\u0CA8\u0CC1 \u0CAA\u0CB0\u0CBF\u0CB7\u0CCD\u0C95\u0CB0\u0CBF\u0CB8\u0CBF',
+    'unexistingitem.ListingUnavailable': '\u0C88 \u0C9C\u0CBE\u0CB9\u0CBF\u0CB0\u0CBE\u0CA4\u0CC1 \u0C88\u0C97 \u0CB2\u0CAD\u0CCD\u0CAF\u0CB5\u0CBF\u0CB2\u0CCD\u0CB2.',
     'landingbody.EmailAddress': '\u0C87\u0CAE\u0CC7\u0CB2\u0CCD \u0CB5\u0CBF\u0CB3\u0CBE\u0CB8',
     'landingbody.ForgotPassword': 'Forgot password?',
     'landingbody.SubmitRegistration': '\u0CA8\u0CCA\u0C82\u0CA6\u0CA3\u0CBF\u0CAF\u0CA8\u0CCD\u0CA8\u0CC1 \u0CB8\u0CB2\u0CCD\u0CB2\u0CBF\u0CB8\u0CBF',

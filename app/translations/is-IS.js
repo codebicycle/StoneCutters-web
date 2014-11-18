@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.CATEGORY_REGION': '<<CATEGORY>> \xED <<REGION>>',
     'messages_site_class.30': '\xCD lagi',
     'messages_user_management_current_ads.EditMyListing': 'Breyta augl\xFDsingunni minni',
+    'unexistingitem.ListingUnavailable': '\xDEessi augl\xFDsing er ekki lengur f\xE1anleg',
     'landingbody.EmailAddress': 'T\xF6lvup\xF3stfang',
     'landingbody.ForgotPassword': 'Gleymt lykilor\xF0?',
     'landingbody.SubmitRegistration': 'Leggja inn n\xFDskr\xE1ningu',
