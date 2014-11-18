@@ -70,29 +70,29 @@ module.exports = {
         filter.set({
             otherType: 'LIST',
             list: [
-                { 
-                    from: 0, 
-                    to: 30000, 
+                {
+                    from: 0,
+                    to: 30000,
                     label: label.replace(regexp, ' 30.000 ')
                 },
-                { 
-                    from: 0, 
-                    to: 50000, 
+                {
+                    from: 0,
+                    to: 50000,
                     label: label.replace(regexp, ' 50.000 ')
                 },
-                { 
-                    from: 0, 
-                    to: 80000, 
+                {
+                    from: 0,
+                    to: 80000,
                     label: label.replace(regexp, ' 80.000 ')
                 },
-                { 
-                    from: 0, 
-                    to: 120000, 
+                {
+                    from: 0,
+                    to: 120000,
                     label: label.replace(regexp, ' 120.000 ')
                 },
-                { 
-                    from: 0, 
-                    to: 150000, 
+                {
+                    from: 0,
+                    to: 150000,
                     label: label.replace(regexp, ' 150.000 ')
                 }
             ]
@@ -109,6 +109,11 @@ module.exports = {
     bedrooms: function transform(filter, options) {
         filter = checkRangeValue(filter, options);
         filter = checkDescription(filter, options, 'itemdescription.bedrooms');
+        return filter;
+    },
+    surface: function transform(filter, options) {
+        filter = checkRangeValue(filter, options);
+        filter = checkDescription(filter, options, 'itemdescription.meters');
         return filter;
     },
     meters: function transform(filter, options) {
