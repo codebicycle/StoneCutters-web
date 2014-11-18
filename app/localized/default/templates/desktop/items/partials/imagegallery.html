@@ -26,3 +26,13 @@
         <a href="#" class="icons icon-arrow-down arrow-next"></a>
     </div>
 {% endif %}
+
+{% if imgPlusAlts %}
+    <noscript>
+        {% for imgPlusAlt in imgPlusAlts %}
+            <a href="{{ imgPlusAlt.url }}">
+                {{ imgPlusAlt.alt }}
+            </a>
+        {% endfor %}
+    </noscript>
+{% endif %}
