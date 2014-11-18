@@ -116,11 +116,6 @@ module.exports = {
         filter = checkDescription(filter, options, 'itemdescription.meters');
         return filter;
     },
-    meters: function transform(filter, options) {
-        filter = checkRangeValue(filter, options);
-        filter = checkDescription(filter, options, 'itemdescription.meters');
-        return filter;
-    },
     year: function transform(filter, options) {
         filter = checkRangeValue(filter, options);
         filter = checkDescription(filter, options, 'itemdescriptionwiki.year');
