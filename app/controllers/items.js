@@ -8,7 +8,6 @@ var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var Item = require('../models/item');
-//var altgenerator = require('../modules/seo/altgenerator');
 
 module.exports = {
     show: middlewares(show),
