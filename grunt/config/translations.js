@@ -51,6 +51,13 @@ module.exports = {
         'posting_optionallist.Kms',
         'messages_item_page.CATEGORY_REGION',
         'countryoptions.Home_SelectState',
-        'countryoptions.Home_SelectCity'
+        'countryoptions.Home_SelectCity',
+        'itemdescription.mileage',
+        'itemdescription.bathrooms',
+        'itemdescription.bedrooms',
+        'itemdescription.meters',
+        'itemdescriptionwiki.year',
+        'itemdescriptionwiki.model',
+        'misc.Brand'
     ]
 };
