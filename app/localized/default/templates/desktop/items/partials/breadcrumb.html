@@ -1,0 +1,45 @@
+{% if seo %}
+    <div class="breadcrumb-navigation">
+        {% for level in seo.get("levelPath").top %}
+            {% if loop.length > 1 and loop.last %}
+                <span class="icons icon-arrow" >{{ level.anchor }}</span>
+            {% else %}
+                <a href="{{ level.url }}" {{ 'class="icons icon-arrow"' if not loop.first }} {{ 'rel="nofollow"' if level.noFollow }} >{{ level.anchor }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if meta.total %}
+            <span class="icons icon-arrow" >
+                {% set totalAds = paginator.get('total') | countFormat %}
+
+                {% if location.current and location.current.name %}
+                    {% set currentLocation = location.current.name %}
+                {% else %}
+                    {% set currentLocation = location.name %}
+                {% endif %}
+
+                {% if not search %}
+                    {% if currentCategory %}
+                        {% set currentCat = currentCategory.trName %}
+                    {% else %}
+                        {% set currentCat = '' %}
+                    {% endif %}
+                {% else %}
+                    {% set currentCat = search %}
+                {% endif %}
+
+                {% if currentCat %}
+                    {{ dictionary["listingpageitemslisting.ResultsForNew2"] | replace('<<NUMBER>>', totalAds) | replace('<<KEYWORD>>', '<strong>"' + currentCat + '"</strong>') | replace('<<LOCATION>>', currentLocation) }}
+                {% else %}
+                    {{ dictionary["listingpageitemslisting.ResultsIn"] | replace('<<NUMBER>>', totalAds) | replace('<<LOCATION>>', currentLocation) }}
+                {% endif %}
+            </span>
+        {% endif %}
+    </div>
+{% endif %}
+{% if paginator.isEnabled() %}
+    <div class="breadcrumb-pagination">
+        <p>{{ dictionary["listingpageitemslisting.ResultsForNew"] | replace('<<PAGE_NUMBER>>', paginator.get('page')) | replace('<<TOTAL_PAGE_NUMBER>>', paginator.get('totalPages') | countFormat )}}</p>
+        <a href="{{ (paginator.get('previous') | linkig) if paginator.has('previous') else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not paginator.has('previous') }}"></a><a href="{{ (paginator.get('next') | linkig) if paginator.has('next') else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not paginator.has('next') }}"></a>
+    </div>
+{% endif %}
+
