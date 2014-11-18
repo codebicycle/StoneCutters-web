@@ -5,21 +5,29 @@ module.exports = {
         enabled : true,
         types : {
             'CSA' : {
-                categories : ['363', '367', '388', '368']
+                params : {
+                    'number': 10,
+                    'colorTitleLink': '#0F0'
+                },
+                categories : [815, 817, 818, 816, 866, 362]
             },
             'ADX' : {
-                categories : ['410']
+                categories : [410]
             }
         }
     },
-    'slot_bottom_item' : {
+    'slot_bottom_listing' : {
         enabled : true,
         types : {
             'CSA' : {
-                categories : ['363', '367', '388', '368']
+                params : {
+                    'number': 2,
+                    'colorTitleLink': '#00F'
+                },
+                categories : [815, 817, 818, 816, 866, 362]
             },
             'ADX' : {
-                categories : ['410']
+                categories : [410]
             }
         }
     }

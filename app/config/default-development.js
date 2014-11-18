@@ -77,12 +77,6 @@ module.exports = {
         }
     },
     features: {
-        desktop: {
-            adSense: {
-                worldwide: false,
-                countries: ['www.olx.com.bo']
-            }
-        },
         html5: {
             postingFlow: {
                 worldwide: true,

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	adx: require('./adx'),
-	csa: require('./csa'),
-	slots: require('./slots')
+    slots: require('./slots'),
+    CSA: require('./csa'),
+    ADX: require('./adx')
 };
