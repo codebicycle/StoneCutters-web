@@ -201,5 +201,49 @@ module.exports = {
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearchig: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/q/');
+        url.push(params.search);
+        if (params.catId) {
+            url.push('/c-');
+            url.push(params.catId);
+        }
+        url.push('/');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('-p-');
+            url.push(page);
+        }
+        url.push('-ig');
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearch: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/q/');
+        url.push(params.search);
+        if (params.catId) {
+            url.push('/c-');
+            url.push(params.catId);
+        }
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('/-p-');
+            url.push(page);
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
     }
 };
