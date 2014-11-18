@@ -35,11 +35,18 @@
                 }
                 &.button-googleplus {
                     background: $redGooglePlus;
+                    a::before {
+                        margin-left: 2px;
+                    }
                 }
                 a {
                     color: $white;
                     display:block;
                     margin: 5px 0 0 6px;
+                    &::before {
+                        font-size: $s;
+                        margin: -2px 0 0 1px;
+                    }
                 }
             }
         }
