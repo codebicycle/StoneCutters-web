@@ -31,10 +31,24 @@
         height: 402px;
         width: 66px;
         .icons {
+            background: $greyBoxBg;
             border: 1px solid $greyBorders;
             color: $greyStrong;
             display: block;
             text-align: center;
+            &:hover {
+                background: $white;
+                border: 1px solid $greyStrong;
+            }
+            &::before {
+                font-size: $xs;
+                &:hover {
+                    color: $black;
+                }
+            }
+            &.icon-arrow-up::before {
+                margin-top: -4px;
+            }
         }
         .thumbnail {
             height: 366px;
