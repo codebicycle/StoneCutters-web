@@ -30,7 +30,7 @@
 {% if imgPlusAlts %}
     <noscript>
         {% for imgPlusAlt in imgPlusAlts %}
-            <a href="{{ imgPlusAlt.url }}">
+            <a href="{{ imgPlusAlt.url }}" title="{{ imgPlusAlt.alt }}">
                 {{ imgPlusAlt.alt }}
             </a>
         {% endfor %}
