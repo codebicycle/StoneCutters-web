@@ -855,26 +855,17 @@ function staticSearch(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkSearch = function(done, res) {
+        var paginate = function(done, res) {
+            var realPage;
+
             if (!res.items) {
                 return done.fail(null, {});
             }
-
-            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999 || !res.items.length)) {
-                done.abort();
-                return helpers.common.redirect.call(this, '/');
-            }
-            done(res.items);
-        }.bind(this);
-
-        var paginate = function(done, _items) {
-            var realPage;
-
             if (page == 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, (gallery ? '/' + gallery : '')].join(''));
             }
-            realPage = _items.paginate([url, '/[page][gallery][filters]'].join(''), query, {
+            realPage = res.items.paginate([url, '/[page][gallery][filters]'].join(''), query, {
                 page: page,
                 gallery: gallery
             });
@@ -882,7 +873,7 @@ function staticSearch(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/-p-' + realPage, (gallery ? gallery : '')].join(''));
             }
-            done(_items);
+            done(res.items);
         }.bind(this);
 
         var success = function(items) {
@@ -921,7 +912,6 @@ function staticSearch(params, callback, gallery) {
             .then(configure)
             .then(prepare)
             .then(findItems)
-            .then(checkSearch)
             .then(paginate)
             .val(success);
     }
