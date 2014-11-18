@@ -25,7 +25,7 @@
             {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
         {% endif %}
     {% endif %}
-    <a data-current="{{ current }}" data-fav="addToFavorites" data-itemId="{{ item.id }}" data-remove="{{ dictionary["item.RemoveFromFavorites"] }}" data-add="{{ dictionary["itemgeneraldetails.addFavorites"] }}" href="{{ favLink }}" rel="nofollow" title="{{ favText }}">{{ favText }}</a>
+    <a data-current="{{ current }}" data-fav="addToFavorites" data-itemId="{{ item.id }}" data-remove="{{ dictionary["item.RemoveFromFavorites"] }}" data-add="{{ dictionary["itemgeneraldetails.addFavorites"] }}" href="{{ favLink }}" rel="nofollow" title="{{ favText }}" data-qa="{{ current }}-favorite">{{ favText }}</a>
 {% endif %}
 </div>
 

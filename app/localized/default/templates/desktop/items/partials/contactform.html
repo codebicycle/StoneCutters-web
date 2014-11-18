@@ -11,10 +11,10 @@
 
 <form id="replyForm" action="">
     <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
-    <fieldset class="comment">
-        <label for="comment">
-            <textarea id="comment" class="comment" name="comment" cols="30" rows="6" placeholder="{{ dictionary["supportform.Message"] | replace(':','') }} "></textarea>
-            <span class="error hide comment"></span>
+    <fieldset class="message">
+        <label for="message">
+            <textarea id="message" class="message" name="message" cols="30" rows="6" placeholder="{{ dictionary["supportform.Message"] | replace(':','') }} "></textarea>
+            <span class="error hide message"></span>
         </label>
     </fieldset>
     <fieldset class="name">
