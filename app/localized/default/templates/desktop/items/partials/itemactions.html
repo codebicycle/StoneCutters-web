@@ -1,3 +1,5 @@
+{% include (template + '/modals/addfavorites.html') %}
+
 <div class="social-sharing">
     <p>{{ dictionary["itemslisting.NewShareThisAd"] }} :</p>
     <ul>
@@ -15,17 +17,17 @@
 </div>
 <div class="actions">
 {% if not item.status.onReview %}
-    {% set favLink = '#' %}
+        {% set dataUser = true if user else false %}
     {% set favText = dictionary["item.RemoveFromFavorites"] %}
     {% set current =  'remove' %}
     {% if not item.isFavorite %}
         {% set current =  'add' %}
         {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
-        {% if not user %}
+        {# {% if not user %}
             {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
-        {% endif %}
+        {% endif %} #}
     {% endif %}
-    <a data-current="{{ current }}" data-fav="addToFavorites" data-itemId="{{ item.id }}" data-remove="{{ dictionary["item.RemoveFromFavorites"] }}" data-add="{{ dictionary["itemgeneraldetails.addFavorites"] }}" href="{{ favLink }}" rel="nofollow" title="{{ favText }}">{{ favText }}</a>
+    <a class="{{ 'open-modal' if not dataUser }}" data-modal="favorites-modal" data-current="{{ current }}" data-user="{{ dataUser }}" data-fav="addToFavorites" data-itemId="{{ item.id }}" data-remove="{{ dictionary["item.RemoveFromFavorites"] }}" data-add="{{ dictionary["itemgeneraldetails.addFavorites"] }}" href="#" rel="nofollow" title="{{ favText }}">{{ favText }}</a>
 {% endif %}
 </div>
 
