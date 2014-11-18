@@ -2,11 +2,10 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('partials/adserving');
 var _ = require('underscore');
-var AdServing = require('../../../../../../modules/adserving');
+var Adserving = require('../../../../../../modules/adserving');
 
 module.exports = Base.extend({
     className: 'adsense-listing',
-
     getTemplateData: function () {
         var data = Base.prototype.getTemplateData.call(this);
         var slotname = this.options.subId;
@@ -18,9 +17,17 @@ module.exports = Base.extend({
             }
         });
     },
-    postRender: function () {
-        console.log(AdServing.getSettings);
-    },
+    postRender: function() {
+        if (!this.adserving) {
+            this.adserving = new Adserving(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
+        }
+
+        var tuVieja = this.adserving.pepe('Abrahan');
+        console.log(tuVieja);
+    }
 });
 
 module.exports.id = 'partials/adserving';

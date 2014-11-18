@@ -1,24 +1,19 @@
 'use strict';
 
-var configAdServing = require('./config');
-var utils = require('../../../shared/utils');
+var _ = require('underscore');
+var utils = require('../../../../shared/utils');
+var config = require('../config');
+var filters = utils.get(adx, ['ADX'], {});
 
-function getSlots (slotname) {
-    return utils.get(configAdServing, ['slots', slotname], false);
+function initialize(models, options) {
 }
 
-
-function getSettings(slotname, category) {
-	var config = getSlots(slotname);
-	var categories;
-
-	if (config.enabled) {
-		categories = utils.get(Object(config), ['types', 'CSA', 'categories'], false);
-	}
-
-	return categories;
+function pepe(name) {
+    return 'hola' + name;
 }
 
-module.exports = {
-	getSettings: getSettings
-};
+module.exports = Base.extend({
+    pepe: pepe
+});
+
+module.exports.id = 'Adserving';
