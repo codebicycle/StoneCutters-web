@@ -3,6 +3,8 @@
 var Base = require('../../../../../common/app/bases/view').requireView('items/filter');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
+
+var tracking = require('../../../../../../modules/tracking');
 var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
@@ -25,6 +27,7 @@ module.exports = Base.extend({
                 path: this.app.session.get('path')
             });
         }
+        this.attachTrackMe();
     },
     events: {
         'click .check-box': 'selectFilter',

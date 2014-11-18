@@ -1,6 +1,6 @@
-<header id="topBar"{{ ' class="disabled"' if postingFlow }}>    
+<header id="topBar"{{ ' class="disabled"' if postingFlow }}>
     <div class="topBarFilters hide">
-        <a href="#" class="filter-btns blue">{{ dictionary["distancediv.Cancel"] }}</a><strong class="title"></strong>
+        <a href="#" class="filter-btns blue trackMe" data-tracking="">{{ dictionary["distancediv.Cancel"] }}</a><strong class="title"></strong>
     </div>
     <a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a>
     <ul class="header-links">

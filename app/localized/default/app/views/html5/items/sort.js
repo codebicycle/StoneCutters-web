@@ -30,6 +30,7 @@ module.exports = Base.extend({
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
+        this.attachTrackMe();
     },
     onEnableSort: function(event) {
         $('#btn-sort').attr('disabled',false).removeClass('disabled');

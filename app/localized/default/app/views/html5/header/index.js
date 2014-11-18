@@ -11,12 +11,12 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
         var postingFlowEnabled = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true);
-        
+
         return _.extend({}, data, {
             postingFlowEnabled: postingFlowEnabled,
             postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'flow'
         });
-    },    
+    },
     postRender: function() {
         this.attachTrackMe();
         $('body').on('change:location', this.changeLocation.bind(this));
@@ -29,7 +29,7 @@ module.exports = Base.extend({
         this.app.router.appView.on('filter:end', this.restore.bind(this));
         this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
         this.app.router.appView.on('location:end', this.restore.bind(this));
-        this.app.router.on('action:end', this.onActionEnd.bind(this));        
+        this.app.router.on('action:end', this.onActionEnd.bind(this));
     },
     onActionEnd: function() {
         if (this.isPostButtonEnabled()) {
@@ -58,11 +58,11 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        
+
         helpers.common.redirect.call(this.app.router, '/', null, {
             status: 200
         });
-    
+
     },
     changeLocation: function (e, siteLocation) {
         this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {
@@ -123,17 +123,19 @@ module.exports = Base.extend({
         this.customize("unavailableitemrelateditems.SortBy");
     },
     onSelectFilterStart: function(){
-        this.customize("mobilepromo.Filters");        
-    },    
+        this.customize("mobilepromo.Filters");
+    },
     onSelectLocation: function(){
-        this.customize("defaultheader.Location");        
+        this.customize("defaultheader.Location");
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
+        var route = this.app.session.get('currentRoute').action;
 
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
-        this.$('.topBarFilters .title').text(data.dictionary[key]); 
+        this.$('.topBarFilters .title').text(data.dictionary[key]);
+        this.$('.topBarFilters a').attr('data-tracking', route+'-cancel');
     },
     restore: function() {
         var $links = this.$('.logo, .header-links');

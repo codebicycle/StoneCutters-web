@@ -7,7 +7,7 @@
                         <span class="title">{{ dictionary["itemslisting.NavigatorByCategory"] }}</span>
                         <ul class="dropdown hide">
                             {% for value in filter.value %}
-                                <li class="category" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" >{{ value.value }} <span class="count">({{ value.count }})</span></li>
+                                <li class="category trackMe" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" data-tracking="Filter-{{ value.value }}">{{ value.value }} <span class="count">({{ value.count }})</span></li>
                             {% endfor %}
                         </ul>
                     </li>
@@ -17,11 +17,11 @@
                             {% set active = true if filters.isActive(filter.name) else false %}
                             <span class="title {{ 'active' if active }} {{ 'selected' if filters.isActive(filter.name) }}">{{ filter.description }}</span>
                             <ul class="dropdown {{ 'hide' if not active }}">
-                                {{ ('<li class="clear-all clean-filters">[ ' + dictionary["item.Clear"] + ' ]</li>') if active }}
+                                {{ ('<li class="clear-all clean-filters trackMe" data-tracking="Filter-Clean_' + filter.name + '">[ ' + dictionary["item.Clear"] + ' ]</li>') if active }}
                                 {% for value in filter.value %}
                                     <li class="check-box">
-                                        <input type="checkbox" value="{{ value.id }}" {{ 'checked' if filters.has(filter.name, value.id) }}>
-                                        <span class="label">{{ value.value }} <span class="count">({{ value.count }})</span></span>
+                                        <input type="checkbox" class="trackMe" data-tracking="Filter-{{ filter.description }}" value="{{ value.id }}" {{ 'checked' if filters.has(filter.name, value.id) }}>
+                                        <span class="label trackMe" data-tracking="Filter-{{ filter.description }}">{{ value.value }} <span class="count">({{ value.count }})</span></span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -36,8 +36,8 @@
                                 {% for input in filter.value %}
                                     <input type="number" value="{{ filter.current[input.id] if input.value }}" placeholder="{{ input.value }}" data-filter-id="{{ input.id }}">
                                 {% endfor %}
-                                <button class="range-submit" type="submit" value=""></button>
-                                {{ ('<span class="clear-all clean-filters range">[ ' + dictionary["item.Clear"] + ' ]</span>') if filters.isActive(filter.name) }}
+                                <button class="range-submit trackMe" data-tracking="Filter-{{ filter.description }}" type="submit" value=""></button>
+                                {{ ('<span class="clear-all clean-filters range trackMe" data-tracking="Filter-Clean_' + filter.name + '">[ ' + dictionary["item.Clear"] + ' ]</span>') if filters.isActive(filter.name) }}
                             </div>
                         </li>
                     {% endif %}
@@ -53,8 +53,8 @@
                             {% set active = true if filters.isActive(filter.name) else false %}
                             <span class="title {{ 'active' if active }}">{{ 'Tipo de aviso' }}</span>
                             <ul class="dropdown {{ 'hide' if not active }}">
-                                <li class="adType {{ 'active' if active }}" data-filter-value="true">{{ 'Avisos con foto' }}</li>
-                                <li class="clear-all" data-filter-value="true">{{ 'Todos los avisos' }}</li>
+                                <li class="adType {{ 'active' if active }} trackMe" data-tracking="Filter-Has_image" data-filter-value="true">{{ 'Avisos con foto' }}</li>
+                                <li class="clear-all trackMe" data-filter-value="true" data-tracking="Filter-Has_image_all">{{ 'Todos los avisos' }}</li>
                             </ul>
                         </li>
                     {% endif %}
@@ -63,3 +63,4 @@
         {% endfor %}
     </ul>
 </section>
+{% view 'partials/tracking' %}
