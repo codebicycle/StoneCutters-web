@@ -6,11 +6,11 @@ module.exports = {
     "description": "Seen on TV in India, Brazil and South Africa! OLX, online free classifieds. OLX users can search local classified ads, reply to listings, & post ads for free with just a few simple taps.",
     "launch_path": "/",
     "icons": {
-        "16": "http://static01.olx-st.com/images/mobile/firefox-os/icon-16x16.png",
-        "30": "http://static01.olx-st.com/images/mobile/firefox-os/icon-30x30.png",
-        "48": "http://static01.olx-st.com/images/mobile/firefox-os/icon-48x48.png",
-        "60": "http://static01.olx-st.com/images/mobile/firefox-os/icon-60x60.png",
-        "128": "http://static01.olx-st.com/images/mobile/firefox-os/icon-128x128.png"
+        "16": "http://images01.olx-st.com/mobile-webapp/images/firefox-os/icon-16x16.png",
+        "30": "http://images01.olx-st.com/mobile-webapp/images/firefox-os/icon-30x30.png",
+        "48": "http://images01.olx-st.com/mobile-webapp/images/firefox-os/icon-48x48.png",
+        "60": "http://images01.olx-st.com/mobile-webapp/images/firefox-os/icon-60x60.png",
+        "128": "http://images01.olx-st.com/mobile-webapp/images/firefox-os/icon-128x128.png"
     },
     "developer": {
         "name": "OLX Inc.",
