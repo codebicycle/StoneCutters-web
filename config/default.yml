@@ -24,10 +24,6 @@ memcached:
   hosts:
     - 'localhost:11211'
 
-cache:
-  lifetime:
-    default: 60
-
 cluster:
   enabled: true
 
@@ -36,9 +32,6 @@ newrelic:
 
 memwatch:
   enabled: true
-
-graphite:
-  enabled: false
 
 cron:
   enabled: true
@@ -64,46 +57,26 @@ middleware:
       - /stats/threads
       - /stats/check
       - /stats/sockets
-      - /analytics
-      - /analytics/pageview.gif
-      - /analytics/pageevent.gif
-      - /analytics/graphite.gif
+      - /tracking
+      - /tracking/pageview.gif
+      - /tracking/event.gif
+      - /tracking/statsd.gif
       - /force
       - /force/wap
       - /force/html4
       - /force/html5
       - /force/desktop
 
-zombie:
-  dns:
-    localhost: true
-    ip: '127.0.0.1'
-    port: 3030
-    hosts:
-      - 'html4.m.olx.de'
-      - 'html4.m.olx.in'
-
 uglify:
   enabled: false
 
-sixpack:
-  enabled: false
-  url: http://localhost:5000
-  experiments:
-    post-button:
-      enabled: false
-      alternatives:
-        - post
-        - sell
-        - vender
-
 publicEnvironments:
   testing:
-    host: '.m-testing.olx.com'
-    mask: '.m.olx.com.py'
+    host: 'm-testing'
+    mask: 'py'
   staging:
-    host: '.m-staging.olx.com'
-    mask: '.m.olx.com.py'
+    host: 'm-staging'
+    mask: 'py'
 
 hosts:
   - olx
@@ -116,4 +89,7 @@ hosts:
   - jaovat
 
 redirect:
-  onDesktop: false
+  onDesktop: true
+
+migrated:
+    - www.olx.com.bo

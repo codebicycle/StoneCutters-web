@@ -35,12 +35,14 @@ module.exports = function(app, dataAdapter) {
                     country: req.rendrApp.session.get('location').name,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
+                }, {
+                    app: req.rendrApp
                 });
                 done();
             }
 
             function submit(done) {
-                user.reply(done, req, _.extend({}, reply, {
+                user.reply(done, _.extend({}, reply, {
                     id: itemId
                 }));
             }
@@ -152,7 +154,7 @@ module.exports = function(app, dataAdapter) {
                 item.languageId = language.id;
                 item.platform = platform;
                 for (var key in item) {
-                    if (!key.indexOf('opt.') && !item[key]) {
+                    if (typeof item[key] === 'string' && !item[key]) {
                         delete item[key];
                     }
                     if (item.id && !key.indexOf('image.')) {

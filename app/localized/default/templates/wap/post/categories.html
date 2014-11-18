@@ -17,18 +17,12 @@
             {% for category in categories %}
                 <tr>
                     <td style="border-top: solid thin #808080;">
-                        <a style="display: block;" href="{{ ['/posting/', category.id] | join('') | link }}" data-qa="category-name" >
+                        <a style="display: block;" href="{{ ['/posting/', category.id] | join('') | link }}" data-qa="category-name-{{ category.id }}" >
                             <small style="display: block;"><img border="0" alt="" src="" />{{category.trName}}</small>
                         </a>
                     </td>
                 </tr>
             {% endfor %}
-            <tr style="display: none;">
-                <td>
-                    {% set templateName = template + '/partials/tracking.html' %}
-                    {% include templateName %}
-                </td>
-            </tr>
         </table>
     </td>
 </tr>
@@ -37,5 +31,10 @@
         {% from macros import Breadcrumb %}
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>

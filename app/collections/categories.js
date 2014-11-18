@@ -42,7 +42,7 @@ module.exports = Base.extend({
     parse: function(response) {
         if (response) {
             if (response.categories) {
-                this.metadata = response.metadata;
+                this.meta = response.metadata;
                 return response.categories;
             }
         }
@@ -55,3 +55,4 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'Categories';
+module.exports.cache = true;

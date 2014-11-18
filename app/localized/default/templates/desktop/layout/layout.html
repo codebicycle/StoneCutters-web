@@ -3,12 +3,15 @@
     {% view 'layout/head' %}
     <body>
         <div id="progressBar"></div>
-        {% set bar = template + "/layout/bar.html" %}
-        {% include bar %}
-        <div id="wrapper">
-            <section id="content">
+        {% include (template + '/layout/bar.html') %}
+        <div id="wrapper" class="wrapper-main">
+            {% view 'header/keywords' %}
+            {% view 'header/usernav' %}
+            {% view 'header/index' %}
+            <div id="content">
                 {{ body }}
-            </section>
+            </div>
+            {% view 'footer/footer' %}
         </div>
         <script>function init() {
             $LAB
@@ -23,5 +26,5 @@
                 });
         }</script>
         <script async src="{{ '/js/LAB.js' | static }}" onload="init()"></script>
-	</body>
+    </body>
 </html>

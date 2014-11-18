@@ -1,10 +1,37 @@
+<script>
+    (function() {
+        var id = 'ga-lib';
+        var ga;
+        var h;
+
+        if (!document.getElementById(id)) {
+            ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            ga.id = id;
+            ga.async = true;
+            h = document.getElementsByTagName('head')[0];
+            h.appendChild(ga);
+        }
+    })();
+</script>
 <script type="text/javascript">
     var _gaq = _gaq || [];
 
     _gaq.push(function() {
         var tracker = _gat._getTracker('UA-5247560-17');
+        var host = '{{ shortHost }}'.split('.');
+        var hasM = !!~host.indexOf('m');
+        var slice = 1;
+        var domain;
 
+        if (hasM) {
+            slice++;
+        }
+        domain = host.slice(slice).join('.');
+        tracker._setDomainName(domain);
+        tracker._setCookiePath('/');
         tracker._setCustomVar(1, 'olx_visitor_country', 'html4_{{ os.name | lower if (os.name != "Others") else "unknown" }}_{{ os.version }}_{{ location.name }}', 1);
-        tracker._trackPageview('{{ tracking.params.page }}');
+        tracker._trackPageview('{{ tracking.params.analytics.page }}');
     });
 </script>

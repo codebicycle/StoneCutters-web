@@ -3,6 +3,7 @@
 var Base = require('../bases/model');
 
 module.exports = Base.extend({
+    idAttribute: 'url',
     url: '/locations/:location',
     parse: function(location) {
         if (location.children && location.children[0]) {

@@ -30,14 +30,13 @@
                     </td>
                 </tr>
             {% endfor %}
-            <tr style="display: none;">
-                <td>
-                    {% set templateName = template + '/partials/tracking.html' %}
-                    {% include templateName %}
-                </td>
-            </tr>
         </table>
         {% from macros import Breadcrumb %}
         {{ Breadcrumb(dictionary, '', ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>

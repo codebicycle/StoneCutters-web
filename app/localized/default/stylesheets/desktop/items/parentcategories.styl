@@ -1,0 +1,47 @@
+.parent-categories {
+    ul-reset();
+
+    li {
+        float: left;
+        height: 57px;
+        width: 50%;
+        &:hover {
+            background: $white;
+            box-shadow(0 0 0 1px $blue inset);
+            cursor: pointer;
+            a,
+            .count,
+            .icons::before {
+                color: $greyStrong;
+            }
+        }
+        a {
+            color: $blue;
+            display: block;
+            font-size: $xs;
+            font-weight: bold;
+            line-height: 1;
+            height: 42px;
+            padding: 15px 0 0 0;
+            text-decoration: none;
+
+            .icons {
+                float: left;
+                height: 42px;
+                margin-right: 5px;
+                
+                &::before {
+                    color: $blue;
+                    font-size: remify(22px);
+                }
+            }
+            .count {
+                color: $greyStrong;
+                display: block;
+                font-size: $xs;
+                font-weight: normal;
+                padding-left: 0;
+            }
+        }
+    }
+}

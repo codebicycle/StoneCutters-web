@@ -1,0 +1,42 @@
+.description-title {
+    font-size: $l;
+    margin: 0 0 20px 0;
+}
+
+.item-description {
+    clear-fix();
+    margin: 20px 0;
+
+    .text {
+        float: left;
+        line-height: 1.5;
+        text-wrap();
+
+        &.with-optionals {
+            max-width: 365px;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .optionals {
+        float: right;
+        min-width: 210px;
+        ul-reset();
+
+        li {
+            clear-fix();
+            padding: 7px;
+            &:nth-child(odd) {
+                background-color: $greyBoxBg;
+            }
+            span {
+                font-size: $xs;
+                float: right;
+                &:first-child {
+                    float: left;
+                }
+            }
+        }
+    }
+}

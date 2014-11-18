@@ -2,7 +2,7 @@
 
 var Base = require('../bases/model');
 var asynquence = require('asynquence');
-var dataAdapter = require('../helpers/dataAdapter');
+var helpers = require('../helpers');
 
 module.exports = Base.extend({
     idAttribute: 'id',
@@ -10,7 +10,8 @@ module.exports = Base.extend({
     shortTitle: shortTitle,
     shortDescription: shortDescription,
     getLocation: getLocation,
-    checkSlug: checkSlug
+    checkSlug: checkSlug,
+    parse: parse
 });
 
 module.exports.id = 'Item';
@@ -85,4 +86,11 @@ function checkSlug(itemSlug, urlSlug) {
         }
     }
     return false;
+}
+
+function parse(resp, options) {
+    if (resp && resp.date) {
+        resp.date.since = helpers.timeAgo(resp.date);
+    }
+    return Base.prototype.parse.apply(this, arguments);
 }

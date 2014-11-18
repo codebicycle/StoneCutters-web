@@ -1,0 +1,27 @@
+{% from macros import Field %}
+
+{% set statesField = {
+    isOptional: "false",
+    name: "state",
+    mandatory: "true",
+    label: "Estado",
+    values: states,
+    fieldType: "combobox",
+    dataType: "select",
+    selected: location.state
+} %}
+
+{{ Field(statesField) }}
+
+{% set citiesField = {
+    isOptional: "false",
+    name: "location",
+    mandatory: "true",
+    label: "Ciudad",
+    values: cities,
+    fieldType: "combobox",
+    dataType: "select",
+    selected: location.city
+} %}
+
+{{ Field(citiesField) }}

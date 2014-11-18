@@ -1,0 +1,35 @@
+.lostpassword_success,
+.pages_success_view {
+    .success {
+        box($lightBlue, $lightBlueBorder, 3px, 10px 20px, solid, 1px);
+        clear-fix();
+        &::before {
+            float: left;
+            color: $blue;
+            font-size: remify(60px);
+            margin-right: 20px;
+        }
+    }
+
+    h3, p {
+        float: left;
+        margin: 0;
+    }
+
+    h3{
+        font-size: $l;
+        margin-top: 10px;
+        &.center {
+            margin-top: 18px;
+        }
+    }
+
+    .back {
+        display: inline-block;
+        margin-top: 20px;
+        &::before {
+            margin: -2px 5px 0 0;
+        }
+    }
+
+}

@@ -1,0 +1,33 @@
+{% set populars = seo.get('popularSearches') or false %}
+{% set relateds = seo.get('relatedListings') or false %}
+{% set levelPath = seo.get("levelPath").bottom or false %}
+{% set wikititles = seo.get("wikititles") or false %}
+
+{% if (populars and populars.length > 0) or 
+      (relateds and relateds.length > 0) or
+      (levelPath and levelPath.length > 0) or
+      (wikititles and wikititles.length > 0) %}
+    <section id="seo-box" class="{{ seoFrom if seoFrom }}" >
+        {% if populars.length > 0 %}
+            <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
+            <ul>
+                {% for popular in seo.get('popularSearches') %}
+                    <li><a href="{{ popular.url }}" >{{ popular.anchor }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if relateds.length > 0 %}
+            <span class="title">{{ dictionary["itemgeneraldetails.RelatedListings"] }}</span>
+            <ul>
+                {% for related in seo.get('relatedListings') %}
+                    <li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if levelPath.length > 0 or wikititles.length > 0 %}
+            {% include (template + "/partials/seolevelpath.html") %}
+        {% endif %}
+    </section>
+{% endif %}

@@ -175,7 +175,7 @@ function mock(data) {
     formidable.parse = sinon.stub();
     formidable.parse.callsArgWith(1, null, data);
     formidable.error = sinon.stub();
-    formidable.error.callsArgWith(3);
+    formidable.error.callsArgWith(4);
 
     req.rendrApp.session.get = sinon.stub();
     req.rendrApp.session.get.withArgs('languages').returns({
@@ -193,6 +193,7 @@ function mock(data) {
     User.prototype.login = sinon.stub();
     User.prototype.login.callsArgWith(0);
     User.prototype.get = sinon.stub();
+    User.prototype.toJSON = sinon.stub();
     if (data) {
         Object.keys(data).forEach(function each(key) {
             User.prototype.get.withArgs(key).returns(data[key]);

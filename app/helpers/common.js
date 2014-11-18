@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var seo = require('../modules/seo');
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
     var statsd = require(statsdModule)();
@@ -11,8 +10,125 @@ if (typeof window === 'undefined') {
 
 module.exports = (function() {
 
-    var staticsHandler = {
-        static: function(env, filePath, host) {
+    var linkIgParsers = (function() {
+        var regexpFindPage = /-p-[0-9]+/;
+        var regexpReplacePage = /(-p-[0-9]+)/;
+        var regexpFindFilters = /\/-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*.*/;
+        var regexpReplaceFilters = /(\/-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*.*)/;
+        var regexpFindCategory = /[a-zA-Z0-9-]+-cat-[0-9]+/;
+        var regexpReplaceCategory = /([a-zA-Z0-9-]+-cat-[0-9]+)/;
+        var regexpFindGallery = /-ig/;
+
+        function qig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '/-ig$1');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) !== '/') {
+                    path += '/';
+                }
+                path += '-ig';
+            }
+            return path;
+        }
+
+        function searchig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '/-ig$1');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) !== '/') {
+                    path += '/';
+                }
+                path += '-ig';
+            }
+            return path;
+        }
+
+        function allresultsig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '-ig$1');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) === '/') {
+                    path = path.substring(0, path.length - 1);
+                }
+                path += '-ig';
+            }
+            return path;
+        }
+
+        function showig(path) {
+            if (path.match(regexpFindPage)) {
+                path = path.replace(regexpReplacePage, '$1-ig');
+            }
+            else if (path.match(regexpFindFilters)) {
+                path = path.replace(regexpReplaceFilters, '-ig$1');
+            }
+            else if (path.match(regexpFindCategory)) {
+                path = path.replace(regexpReplaceCategory, '$1-ig');
+            }
+            if (!path.match(regexpFindGallery)) {
+                if (path.slice(path.length - 1) === '/') {
+                    path = path.substring(0, path.length - 1);
+                }
+                path += '-ig';
+            }
+            return path;
+        }
+
+        return {
+            qig: qig,
+            searchig: searchig,
+            allresultsig: allresultsig,
+            showig: showig
+        };
+    })();
+
+    function linkig(href, query, parser) {
+        var pairs = href.split('?');
+        var path = pairs[0];
+        var querystring = pairs[1];
+        var linkIgParser;
+
+        if (!~path.indexOf('-ig')) {
+            linkIgParser = linkIgParsers[parser];
+            if (linkIgParser) {
+                path = linkIgParser.call(null, path);
+            }
+        }
+        href = path;
+        if (querystring) {
+            href = '?' + querystring;
+        }
+        return utils.link(href, this.app, query);
+    }
+
+    var staticsHandler = (function() {
+        function getEnv(envPath, filePath, options) {
+            switch (options.env) {
+                case 'production':
+                    return envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
+                case 'staging':
+                case 'testing':
+                    if (~options.host.indexOf(options.env)) {
+                        return envPath.replace(options.type + '01', [options.type, '-', options.env].join(''));
+                    }
+                    break;
+            }
+            return envPath;
+        }
+
+        function statics(env, filePath, host) {
             var envPath = config.get(['environment', 'staticPath'], '');
             var pointIndex = filePath.lastIndexOf('.');
             var fileName = filePath.substr(0, pointIndex);
@@ -32,8 +148,9 @@ module.exports = (function() {
                 host: host
             });
             return [envPath, fileName, envName, revision, '.', ext].join('');
-        },
-        image: function(env, filePath, host) {
+        }
+
+        function image(env, filePath, host) {
             var envPath = config.get(['environment', 'staticPath'], '');
 
             envPath = getEnv(envPath, filePath, {
@@ -43,21 +160,12 @@ module.exports = (function() {
             });
             return [envPath, filePath].join('');
         }
-    };
 
-    function getEnv(envPath, filePath, options) {
-        switch (options.env) {
-            case 'production':
-                return envPath.replace(/\[\[basenumber\]\]/, ('0' + ((filePath.length % 4) + 1)));
-            case 'staging':
-            case 'testing':
-                if (~options.host.indexOf(options.env)) {
-                    return envPath.replace(options.type + '01', [options.type, '-', options.env].join(''));
-                }
-                break;
-        }
-        return envPath;
-    }
+        return {
+            'static': statics,
+            image: image
+        };
+    })();
 
     function getType(path) {
         var ext = path.substr(path.lastIndexOf('.') + 1);
@@ -77,7 +185,7 @@ module.exports = (function() {
 
     function statics(path, key, value) {
         var env = config.get(['environment', 'type'], 'development');
-        var host = this.app.session.get('host');
+        var host = this.app ? this.app.session.get('host') : '';
         var type;
 
         if (key && value) {
@@ -119,15 +227,18 @@ module.exports = (function() {
             this.app.req.res.status(status);
             statsd.increment([this.app.session.get('location').name, 'errors', 400]);
         }
-        seo.addMetatag('robots', 'noindex, nofollow');
-        seo.addMetatag('googlebot', 'noindex, nofollow');
-        seo.update();
+        this.app.seo.reset(this.app, {
+            page: ['pages', 'error']
+        });
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         return callback(null, 'pages/error', res || {});
     }
 
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
+        linkig: linkig,
         fullizeUrl: utils.fullizeUrl,
         params: utils.params,
         removeParams: utils.removeParams,

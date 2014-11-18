@@ -1,0 +1,16 @@
+{% view 'items/partials/breadcrumb' %}
+<div class="wrapper-main">
+    <nav id="listing-nav">
+        {% include (template + '/categories/subcategories.html') %}
+        {% view 'items/partials/filters' %}
+    </nav>
+    <section id='listing-items'>
+        {% view 'items/partials/locations' %}
+        {% include (template + '/items/listig.html') %}
+        {% if paginator.isEnabled() %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    </section>
+</div>
+
+{% view 'partials/tracking' %}

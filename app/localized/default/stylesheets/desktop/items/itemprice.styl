@@ -1,0 +1,21 @@
+.item-price {
+    background-color: $violet;
+    color: $white;
+    height: 60px;
+    margin: 15px 0;
+    padding: 10px 15px 10px 30px;
+    position: relative;
+    tab-arrow(left, $violet, $greyBorders, 1px, 40px, 0);
+
+    p {
+        font-size: $s;
+        margin: 0;
+        &:first-child {
+            font-size: $xxl;
+            font-weight: bold;
+        }
+        &:only-child {
+            margin-top: 11px;
+        }
+    }
+}

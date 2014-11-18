@@ -1,0 +1,67 @@
+.pages-allstates-view {
+    box();
+    padding: 20px;
+
+    ul {
+        ul-reset();
+    }
+
+    .state-name, .city-name, .state-all-link {
+        display: inline-block;
+        line-height: 1.3;
+        margin: 0;
+    }
+
+    .state-name {
+        font-size: $m;
+        font-weight: bold;
+    }
+
+    .counter {
+        display: inline-block;
+        font-size: $xs;
+        padding-left: 3px;
+    }
+
+    .cities {
+        border-top: 1px solid $greyBorders;
+        column-count: 4;
+        column-gap();
+        margin: 5px 0;
+        padding: 10px 0 20px;
+    }
+    
+    .state {
+        &:last-child {            
+            .cities {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .state-all-link {
+        font-size: $xs;
+        font-weight: normal;
+    }
+    
+    .city-name {
+        font-size: $s;
+        font-weight: normal;
+        line-height: 1.5;
+    }
+    
+    .breadcrumb {
+        padding-bottom: 20px;
+        
+        a, span {
+            font-size: $xs;
+            vertical-align: top;
+        }
+        
+        span::before {
+            font-size: remify(8px);
+            margin: 3px;
+            vertical-align: top;
+        }
+    }
+}

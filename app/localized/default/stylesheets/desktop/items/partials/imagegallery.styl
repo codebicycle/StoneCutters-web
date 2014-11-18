@@ -1,0 +1,81 @@
+.image-gallery {
+    clear-fix();
+    overflow: hidden; /* remove this after JS implementation */
+
+    .image-wrapper {
+        border: 1px solid $greyBorders;
+        position: relative;
+
+        .item-image {
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+
+    .image-viewer {
+        background: $greyPageBg;
+        float: left;
+        height: 400px;
+        margin: 0;
+        width: 538px;
+    }
+
+    .image-navigator {
+        float: right;
+        height: 402px;
+        width: 66px;
+        .icons {
+            border: 1px solid $greyBorders;
+            color: $greyStrong;
+            display: block;
+            text-align: center;
+        }
+        .thumbnail {
+            height: 366px;
+            overflow-y: hidden;
+            position: relative;
+
+
+            .thumbnail-wrapper {
+                left: 3px;
+                position: absolute;
+                top: 0;
+            }
+
+            figure {
+                margin: 6px auto;
+                width: 60px;
+                height: 60px;
+                float: left;
+            }
+            .active {
+                outline: 3px solid $blue;
+                a {
+                    border: 0 none;
+                }
+            }
+            .image-wrapper {
+                display: block;
+                height: 60px;
+                width: 60px;
+            }
+        }
+    }
+    .single {
+        width: 616px;
+    }
+    .icon-photo{
+        text-align: center;
+        &::before {
+            color: $disableText;
+            font-size: 230px;
+            line-height: 400px;
+        }
+    }
+}

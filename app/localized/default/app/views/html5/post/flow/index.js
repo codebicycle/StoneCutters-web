@@ -5,6 +5,7 @@ var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
+var statsd = require('../../../../../../../../shared/statsd')();
 window.URL = window.URL || window.webkitURL;
 
 function onpopstate(event) {
@@ -37,7 +38,7 @@ module.exports = Base.extend({
         }, this.onExit.bind(this));
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
-        this.attachTrackMe(this.className, function(category, action) {
+        this.attachTrackMe(function(category, action) {
             return {
                 custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
             };
@@ -90,7 +91,9 @@ module.exports = Base.extend({
     handleBack: function() {
         this.edited = true;
         history.pushState(null, '', window.location.pathname);
-        $(window).on('popstate', {message: this.dictionary['misc.WantToGoBack']}, onpopstate);
+        $(window).on('popstate', {
+            message: this.dictionary['misc.WantToGoBack']
+        }, onpopstate);
     },
     onHeaderChange: function(event, title, current, back, data) {
         event.preventDefault();
@@ -194,36 +197,61 @@ module.exports = Base.extend({
 
         var $loading = $('body > .loading').show();
         var query = {
-            postingSession: this.options.postingsession
+            postingSession: this.options.postingsession || this.options.postingSession
         };
         var user = this.app.session.get('user');
 
         var validate = function(done) {
-            function callback(err, response, body) {
-                if (err) {
-                    return done.fail(err);
-                }
-                if (body) {
-                    done.abort();
-                    return fail(body, 'invalid');
-                }
-                done(response, body);
-            }
-            
             query.intent = 'validate';
+            helpers.dataAdapter.post(this.app.req, '/items', {
+                query: query,
+                data: this.form
+            }, done);
+        }.bind(this);
+
+        var check = function(done, err, res, body) {
+            if (err) {
+                return done.fail(err);
+            }
+            if (body) {
+                done.abort();
+                return fail(body, 'invalid');
+            }
+            done(res, body);
+        }.bind(this);
+
+        var post = function(done) {
+            query.intent = 'create';
             helpers.dataAdapter.post(this.app.req, '/items', {
                 query: query,
                 data: this.form
             }, done.errfcb);
         }.bind(this);
 
-        var post = function(done, response) {
-            query.intent = 'create';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form,
-                done: done,
-                fail: done.fail
+        var trackEvent = function(done, res, item) {
+            var category = 'Posting';
+            var action = 'PostingSuccess';
+
+            this.track({
+                category: category,
+                action: action,
+                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
+            });
+            done(item);
+        }.bind(this);
+
+        var trackGraphite = function(done, res, item) {
+            var location = this.app.session.get('location');
+            var platform = this.app.session.get('platform');
+
+            statsd.increment([location.name, 'posting', 'success', platform]);
+            done(item);
+        }.bind(this);
+
+        var success = function(item) {
+            this.app.router.once('action:end', always);
+            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
+                status: 200
             });
         }.bind(this);
 
@@ -238,48 +266,7 @@ module.exports = Base.extend({
                     this.$el.trigger('errors', [err]);
                 }
             }
-            trackFail(track);
-        }.bind(this);
-
-        var trackFail = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
-
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'post,error',
-                    location: this.app.session.get('location').name,
-                    error: track || 'error'
-                }),
-                cache: false
-            });
-        }.bind(this);
-
-        var success = function(item) {
-            var category = 'Posting';
-            var action = 'PostingSuccess';
-
-            this.track({
-                category: category,
-                action: action,
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
-            });
-            this.app.router.once('action:end', always);
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
-                status: 200
-            });
-            track();
-        }.bind(this);
-
-        var track = function() {
-            var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
-
-            $.ajax({
-                url: helpers.common.link(url, this.app, {
-                    metric: 'post,success',
-                    location: this.app.session.get('location').name
-                }),
-                cache: false
-            });
+            statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
         }.bind(this);
 
         var always = function() {
@@ -299,7 +286,9 @@ module.exports = Base.extend({
         }
         asynquence().or(fail)
             .then(validate)
+            .then(check)
             .then(post)
+            .gate(trackEvent, trackGraphite)
             .val(success);
     },
     onRestart: function(event) {

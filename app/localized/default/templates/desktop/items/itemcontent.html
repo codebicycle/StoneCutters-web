@@ -1,0 +1,12 @@
+<article id="item-content">
+    <div>
+        <h2 class="item-title">{{ item.title }}</h2>
+        {% view 'items/partials/iteminfo' %}
+        {% view 'items/partials/imagegallery' %}
+        {% view 'items/partials/itemdescription' %}
+        {% if item.coordinates %}
+            {% view 'items/partials/itemlocation' %}
+        {% endif %}
+    </div>
+    {% view 'items/partials/itemactions' %}
+</article>

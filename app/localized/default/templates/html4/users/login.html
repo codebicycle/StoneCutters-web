@@ -7,11 +7,11 @@
         <h4>{{ dictionary["loginbox.MemberAccess"] }}</h4>
         <div class="formField">
             <label>{{ dictionary["loginbox.Username"] }}</label>
-            <input type="text" value="" name="usernameOrEmail" data-qa="username-field">
+            <input type="text" value="" name="usernameOrEmail" data-qa="login-username-field">
         </div>
         <div class="formField">
             <label>{{ dictionary["loginbox.Password"] }}</label>
-            <input type="password" value="" name="password" data-qa="password-field">
+            <input type="password" value="" name="password" data-qa="login-password-field">
         </div>
         <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
         <div class="formActions">
@@ -23,7 +23,7 @@
     <div class="formField" style="padding-top:0;">
         <a href="{{ '/register' | link }}" data-qa="register-link" >{{ dictionary["loginbox.NotAMember"] }} {{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
     </div>
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

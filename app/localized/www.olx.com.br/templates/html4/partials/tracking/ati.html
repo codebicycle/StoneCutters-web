@@ -1,9 +1,9 @@
 <!-- Chamada do script de TV da TVdata -->
 <script type="text/javascript"
-src="http://tdp01.tvdata.com.br/?advertiser=6&timeframe=300"></script>
+src="http://tdp01.tvdata.com.br/?a=6&timeframe=300"></script>
 
 <script type="text/javascript">
-    var xtcustom = JSON.parse('{{ tracking.params.custom }}');
+    var xtcustom = JSON.parse('{{ tracking.params.ati.custom }}');
 </script>
  
 <!-- Chamada do script de integração da TVdata e AT Internet -->
@@ -30,5 +30,5 @@ src="http://tdp01.tvdata.com.br/?advertiser=6&timeframe=300"></script>
     })();
 </script>
 <noscript>
-    <img width="1" height="1" alt="" src="{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}.ati-host.net/hit.xiti?s={{ tracking.params.ati.siteId }}&stc={{ tracking.params.custom | encode }}"/>
+    <img width="1" height="1" alt="" src="{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}.ati-host.net/hit.xiti?s={{ tracking.params.ati.siteId }}&stc={{ tracking.params.ati.custom | encode }}"/>
 </noscript>

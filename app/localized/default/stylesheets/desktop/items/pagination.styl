@@ -1,0 +1,73 @@
+@import '../helpers/variables.styl';
+@import '../helpers/mixins.styl';
+
+#items-pagination {
+    display: inline-block;
+    width: 100%;
+
+    .items-paginations-buttons {
+        margin-bottom: 10px;
+
+        .pagination-button {
+            display: inline-block;
+            font-size: $l;
+            font-weight: bold;
+            height: 33px;
+            &.next {
+                action-button($green, $white, 3px, 13px 0 0);
+                &:last-child {
+                    width:606px;
+                }
+            }
+            &.previous {
+                action-button($greyBoxBg, $black, 3px, 13px 0 0);
+                &:first-child {
+                    margin-right: 10px;
+                    width:100px;
+                }
+            }
+            &.next:only-child,
+            &.previous:only-child {
+                width: 718px;
+            }
+        }
+    }
+    .items-paginations-numbers {
+        text-align: center;
+        ul-reset();
+
+        li {
+            display: inline-block;
+
+
+            .pagination-arrow,
+            .pagination-number {
+                font-size: $s;
+                margin: 5px 0;
+                padding: 2px 7px;
+            }
+            .pagination-arrow {
+                color: $black;
+                &.disable {
+                    color: $greyBorders;
+                }
+            }
+            .pagination-number {
+                font-weight: bold;
+                &:hover {
+                    background: $blue;
+                    border-radius(25px);
+                    color: $white;
+                    text-decoration: none;
+                }
+            }
+            &.current {
+                background: $greyStrong;
+                border-radius(25px);
+                color: $white;
+                margin: 5px 0;
+                padding: 2px 7px;
+            }
+        }
+    }
+}

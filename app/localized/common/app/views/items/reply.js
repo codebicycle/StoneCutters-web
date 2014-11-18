@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'items_reply_view',
@@ -14,7 +14,7 @@ module.exports = Base.extend({
         data.fields = [{ name: 'message', label: 'replymessage.Message', mandatory: 'true'},{name: 'name', label: 'replymessage.Name', mandatory: 'false'}, {name: 'email', label: 'replymessage.Email', mandatory: 'true'}, {name: 'phone', label: 'itemgeneraldetails.Phone'}];
 
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     }
 });

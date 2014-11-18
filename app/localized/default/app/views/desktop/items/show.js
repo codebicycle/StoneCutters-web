@@ -1,16 +1,21 @@
+'use strict';
+
 var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var asynquence = require('asynquence');
 
 module.exports = Base.extend({
-    className: 'items_show_view',
+    tagName: 'main',
+    id: 'items-show-view',
+    className: 'items-show-view',
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var showAdSenseItemBottom = helpers.features.isEnabled.call(this, 'adSenseItemBottom', platform, location.url);
 
-    postRender: function() {
-        
+        return _.extend({}, data, {
+            showAdSenseItemBottom: showAdSenseItemBottom
+        });
     }
-    
-    
-    
-
 });

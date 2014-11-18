@@ -1,0 +1,25 @@
+#item-content {
+    box($white, $greyBorders , 3px, 0);
+    float: left;
+    margin-bottom: 20px;
+    position: relative;
+    tab-arrow(right, $white, $greyBorders, 1px, 30px, 1);
+    width: 660px;
+
+    &:after {
+        top: 265px;
+    }
+    &:before {
+        top: 266px;
+    }
+    > div {
+        &:first-child {
+            padding: 0 20px;
+        }
+        .item-title {
+            font-size: $xl;
+            padding-right: 40px;
+            margin: 20px 0;
+        }
+    }
+}

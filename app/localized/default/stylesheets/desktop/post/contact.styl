@@ -1,0 +1,30 @@
+.posting-contact-view {
+	box($white, $greyBorders , 3px, 0, solid, 1px);
+
+	.icon-lock::before {
+		font-size: $s;
+		margin-bottom: 3px;
+		padding-right: 5px;
+	}
+	.seller-post {
+
+		clear-fix();
+		width: 440px;
+		margin: 0;
+		padding: 10px 10px 20px 200px;
+		border: none;
+
+		.posting {
+
+			display: block;
+
+			&[disabled],
+			&[disabled]:hover {
+
+				background: $greyBorders;
+
+			}
+
+		}
+	}
+}

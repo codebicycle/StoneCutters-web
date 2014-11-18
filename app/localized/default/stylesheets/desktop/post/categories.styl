@@ -1,0 +1,78 @@
+.posting-categories-view {
+	clear-fix()
+	.posting-label {
+		font-weight: normal;
+		margin: 0;
+	}
+	
+	.message {
+
+		clear: both;
+		margin-top: 0;
+		padding: 5px 0 0 190px;
+
+	}
+
+}
+
+.posting-categories-list {
+	background: $greyBoxBg;
+	border-radius();
+	float: left;
+	height: 100%
+	position: relative;
+	ul-reset();
+	width: 220px;
+
+	a {
+		display: block;
+		padding: 7px 30px 7px 10px;
+
+		&:hover, &.active, &.select {
+			color: $white;
+			text-decoration: none;
+
+			&::before {
+				color: $white;
+			}
+		}
+		&:hover, &.active {
+			background: $blue;
+		}
+		&.select {
+			background: $greyStrong;
+			&.subcategory.icon-check::before {
+				position: absolute;
+				right: 0;
+			}
+		}
+	}
+
+	.child-categories-list {
+		background: $white;
+		border-left: 3px solid $blue;
+		height: 100%;
+		left: 100%;
+		overflow-y: auto;
+		position: absolute;
+		top: 0;
+		ul-reset();
+		width: 217px;
+		z-index: 9999;
+		.subcategory {
+			border-top: 1px solid $white;
+			padding-top: 8px;
+			&:first-child {
+				border-top: none;
+			}
+		}
+		&.select {
+			border-color: $greyStrong;
+		}
+	}
+
+	.icons::before {
+		font-size: $m;
+		padding: 0 10px 0 0;
+	}
+}

@@ -5,14 +5,14 @@
     <ul class="normalList">
         {% for category in categories %}
             <li class="{{ "last" if loop.last else "" }}">
-                <a href="{{ ['/posting/', category.id] | join('') | link }}" data-qa="category-name" >{{category.trName}}</a>
+                <a href="{{ ['/posting/', category.id] | join('') | link }}" data-qa="category-name-{{ category.id }}" >{{category.trName}}</a>
             </li>
         {% endfor %}
     </ul>
 
-    {% set templateName = template + '/partials/tracking.html' %}
-    {% include templateName %}
     {% set templateName = template + '/pixels/post/categories.html' %}
     {% include templateName %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

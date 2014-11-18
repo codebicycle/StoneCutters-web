@@ -2,8 +2,9 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
+var helpers = require('../../../../../../helpers');
+var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -95,8 +96,7 @@ module.exports = Base.extend({
 
             if ($this.attr('href') == '#') {
                 e.preventDefault();
-                var session = that.app.get('session');
-                var user = session.user;
+                var user = that.app.session.get('user');
                 var itemId = $this.data('itemid');
                 var url = [];
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
@@ -194,11 +194,8 @@ module.exports = Base.extend({
             }.bind(this);
 
             var success = function(done, data) {
-                var tracking;
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-                var category = $('.itemCategory').val();
-                var subcategory = $('.itemSubcategory').val();
-
+                
                 $('.loading').hide();
                 $('body').removeClass('noscroll');
                 $('.message').val('');
@@ -206,33 +203,43 @@ module.exports = Base.extend({
                 $('.email').val('');
                 $('.phone').val('');
                 $msg.text(this.messages.msgSend);
-                tracking = $('<div></div>').append(data);
-                tracking = $('#replySuccess', tracking);
-                $msg.append(tracking.length ? tracking : '');
+                $('.msgCont').addClass('visible');
+                setTimeout(function(){
+                    $('.msgCont').removeClass('visible');
+                }, 3000);
+                done(data);
+            }.bind(this);
+
+            var trackEvent = function(done, data) {
+                var category = $('.itemCategory').val();
+                var subcategory = $('.itemSubcategory').val();
+
                 this.track({
                     category: 'Reply',
                     action: 'ReplySuccess',
                     custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
                 });
-                $('.msgCont').addClass('visible');
-                setTimeout(function(){
-                    $('.msgCont').removeClass('visible');
-                }, 3000);
+                done();
             }.bind(this);
 
-            var track = function(done) {
-                var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+            var trackTracking = function(done, data) {
+                var $view = $('#partials-tracking-view');
+                var tracking;
 
-                $.ajax({
-                    url: helpers.common.link(url, this.app, {
-                        metric: 'reply,success',
-                        location: this.app.session.get('location').name,
-                        platform: this.app.session.get('platform')
-                    }),
-                    cache: false
-                })
-                .done(done)
-                .fail(done.fail);
+                tracking = $('<div></div>').append(data);
+                tracking = $('#partials-tracking-view', tracking);
+                if (tracking.length) {
+                    $view.trigger('updateHtml', tracking.html());
+                }
+                done();
+            }.bind(this);
+
+            var trackGraphite = function(done) {
+                var location = this.app.session.get('location');
+                var platform = this.app.session.get('platform');
+
+                statsd.increment([location.name, 'reply', 'success', platform]);
+                done();
             }.bind(this);
 
             var fail = function(data) {
@@ -243,27 +250,20 @@ module.exports = Base.extend({
             }.bind(this);
 
             var trackFail = function() {
-                var url = helpers.common.fullizeUrl('/analytics/graphite.gif', this.app);
+                var location = this.app.session.get('location');
+                var platform = this.app.session.get('platform');
 
-                $.ajax({
-                    url: helpers.common.link(url, this.app, {
-                        metric: 'reply,error',
-                        location: this.app.session.get('location').name,
-                        platform: this.app.session.get('platform')
-                    }),
-                    cache: false
-                });
+                statsd.increment([location.name, 'reply', 'error', platform]);
             }.bind(this);
 
             var always = function() {
                 $('.loading').hide();
             }.bind(this);
 
-
             asynquence().or(fail)
                 .then(validate)
                 .then(post)
-                .gate(success, track);
+                .gate(success, trackEvent, trackTracking, trackGraphite);
         }.bind(this));
 
         //window History
@@ -292,7 +292,7 @@ module.exports = Base.extend({
                 that.isEmail(value,field);
             }
         });
-        this.attachTrackMe(this.className, function(category, action) {
+        this.attachTrackMe(function(category, action) {
             var itemId = $('.itemId').val();
             var itemCategory = $('.itemCategory').val();
             var itemSubcategory = $('.itemSubcategory').val();

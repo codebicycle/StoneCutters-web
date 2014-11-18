@@ -1,1 +1,63 @@
-post success
+<aside id="notification-message" class="notification-message icons icon-time">
+    <h4>{{ dictionary["posting_step4.WellDoneAdCreated"] }}</h4>
+    <p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }}</p>
+</aside>
+{#
+<aside id="notification-keep-posting" class="notification-keep-posting">
+    <h3 class="title">Continúe <span class="highlight">vendiendo</span></h3>
+    <p class="message icons icon-arrow"><span class="highlight">{{ dictionary["crm_new_version.SomethingElseToPost"] }} </span>{{ dictionary["defaultheader.PostAFreeAd"] }}.</p>
+    <div class="categories-best-selling">
+        <a href="#" class="module">
+            <article class="icons icon-cat-16">
+                <p>Publicar en <strong>Celulares y Smartphones</strong></p>
+            </article>
+        </a><!--
+        --><a href="#" class="module">
+            <article class="icons icon-cat-186">
+                <p>Publicar en <strong>Videojuegos y Consolas</strong></p>
+            </article>
+        </a><!--
+        --><a href="#" class="module">
+            <article class="icons icon-cat-190">
+                <p>Publicar en <strong>TV y Video</strong></p>
+            </article>
+        </a><!--
+        --><a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>{{ dictionary["posting_selector.SelectCategory"] }} </span></a>
+    </div>
+</aside>
+#}
+<section id="item-preview" class="item-preview">
+    <section class="item-preview-content">
+        <div class="header-edit">
+            <p>{{ dictionary["posting_photos.NeedChangeAd"] }} </p>
+            <!-- TODO: We are not having this feature for Bolivian launch
+            <a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a> -->
+        </div>
+        <div class="wrapper">
+            <h1 class="item-title">{{ item.title }}</h1>
+            {% view 'items/partials/iteminfo' %}
+            {% view 'items/partials/imagegallery' %}
+            {% include (template + "/items/itemprice.html") %}
+            {% view 'items/partials/itemdescription' %}
+            {% if item.coordinates %}
+                {% view 'items/partials/itemlocation' %}
+            {% endif %}
+        </div>
+    </section><!-- item-preview-content -->
+
+    <aside class="side-column">
+        <div class="header-edit">
+            <p>{{ dictionary["postingheader.ContactDetails"] }} </p>
+            <!-- TODO: We are not having this feature for Bolivian launch
+            <a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a> -->
+        </div>
+        <div class="user-info">
+            <p class="icons icon-user user-name">{{ item.contactName }}</p>
+            {% if item.phone %}
+                <p class="icons icon-phone user-phone">{{ item.phone }}</p>
+            {% endif %}
+        </div>
+    </aside><!-- right-column -->
+</section><!-- item-preview -->
+
+{% view 'partials/tracking' %}

@@ -13,18 +13,14 @@ module.exports = Base.extend({
         var currentRoute = this.app.session.get('currentRoute');
 
         return _.extend({}, data, {
-            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'categoriesOrFlow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true)
+            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'flow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true)
         });
     },
     postRender: function() {
         $('body').on('change:location', this.changeLocation.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
-        this.attachTrackMe(this.className, function(category, action) {
-            return {
-                custom: [category, '-', '-', action].join('::')
-            };
-        });
+        this.attachTrackMe();
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {

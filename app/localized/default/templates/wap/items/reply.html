@@ -9,12 +9,6 @@
                     </a>
                 </td>
             </tr>
-            <tr style="display: none;">
-                <td>
-                    {% set templateName = template + '/partials/tracking.html' %}
-                    {% include templateName %}
-                </td>
-            </tr>
         </table>
         {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
         <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
@@ -87,5 +81,10 @@
         </form>
         {% set link = (breadcrumb | link) %}
         {{ Breadcrumb(dictionary, link, ('/' | link)) }}
+    </td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
     </td>
 </tr>

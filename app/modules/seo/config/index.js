@@ -2,5 +2,6 @@
 
 module.exports = {
     metatags: require('./metatags'),
-    redirects: require('./redirects')
+    redirects: require('./redirects'),
+    categories: require('./categories')
 };

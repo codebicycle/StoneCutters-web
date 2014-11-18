@@ -1,0 +1,19 @@
+{% if items.length > 0 %}
+    {% view 'items/partials/breadcrumb' %}
+    <div class="wrapper-main">
+        <nav id="listing-nav">
+            {% view 'items/partials/filters' %}
+        </nav>
+        <section id="listing-items">
+            {% view 'items/partials/locations' %}
+            {% include (template + '/items/list.html') %}
+            {% if paginator.isEnabled() %}
+                {% include (template + '/items/pagination.html') %}
+            {% endif %}
+        </section>
+    </div>
+{% else %}
+    {% include (template + '/partials/notfound.html') %}
+{% endif %}
+
+{% view 'partials/tracking' %}

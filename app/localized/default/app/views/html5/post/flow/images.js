@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
@@ -32,7 +33,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [this.parentView.dictionary['item.AddPhotos'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['item.AddPhotos'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -82,9 +83,9 @@ module.exports = Base.extend({
         var image = new window.Image();
 
         image.src = imageUrl;
-        
+
         image.onload = function() {
-        
+
             window.URL.revokeObjectURL(this.src);
 
             var exif = function(done) {
@@ -100,7 +101,7 @@ module.exports = Base.extend({
                 data.append(0, event.target.files[0]);
                 helpers.dataAdapter.post(this.app.req, '/images', {
                     query: {
-                        postingSession: this.parentView.options.postingsession,
+                        postingSession: this.parentView.options.postingsession || this.parentView.options.postingSession,
                         url: this.app.session.get('location').url
                     },
                     data: data,
@@ -109,12 +110,12 @@ module.exports = Base.extend({
                     dataType: 'json',
                     processData: false,
                     contentType: false
-                }, done);
+                }, done.errfcb);
             }.bind(this);
 
-            var success = function(done, res) {
-                    this.selected[$input.attr('name')] = {
-                    id: res.shift(),
+            var success = function(done, res, body) {
+                this.selected[$input.attr('name')] = {
+                    id: body.shift(),
                     file: imageUrl,
                     orientation: 1
                 };
@@ -124,7 +125,7 @@ module.exports = Base.extend({
             var display = function() {
                 var orientation = EXIF.getTag(image, 'Orientation');
                 var cssClass = 'fill r' + (orientation || 1);
-                
+
                 if (orientation) {
                     this.selected[$input.attr('name')].orientation = orientation;
                 }
@@ -139,9 +140,9 @@ module.exports = Base.extend({
                 .then(exif)
                 .then(post)
                 .then(success)
-                .then(display);
+                .val(display);
         }.bind(this);
-        
+
         image.onerror = function(err) {
             this.$el.trigger('imageLoadEnd');
             delete this.selected[$input.attr('name')];

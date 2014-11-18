@@ -43,6 +43,12 @@ module.exports = {
     'redirections#login': {
         url: 'auth/login'
     },
+    'redirections#popularSearches': {
+        urls: [
+            'popular-searches(-cat-:categoryId)',
+            'popular-searches'
+        ]
+    },
     'redirections#register': {
         url: 'registration/index'
     },
@@ -75,5 +81,28 @@ module.exports = {
     },
     'redirections#redirecttomain': {
         url: 'redirecttomain'
+    },
+    'redirections#php': {
+        url: ':path.php'
+    },
+    'redirections#allresultsig': {
+        url: 'nf/all-results-ig-p-:page/?:filters?'
+    },
+    'redirections#searchfilterig': {
+        urls: [
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/?:search?/?:filters?',
+            'nf/:title-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-ig/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-ig/?:search?/?:filters?'
+        ]
+    },
+    'redirections#searchfilter': {
+        urls: [
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?'
+        ]
     }
 };

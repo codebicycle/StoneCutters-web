@@ -1,1 +1,19 @@
-all results
+{% view 'items/partials/breadcrumb' %}
+<div class="wrapper-main">
+    <nav id="listing-nav">
+        {% include (template + '/items/parentcategories.html') %}
+    </nav>
+    <section id="listing-items">
+        {% view 'items/partials/locations' %}
+        {% include (template + '/items/list.html') %}
+        {% if paginator.isEnabled() %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    </section>
+</div>
+
+{% if seo %}
+    {% include (template + '/partials/seobox.html') %}
+{% endif %}
+
+{% view 'partials/tracking' %}

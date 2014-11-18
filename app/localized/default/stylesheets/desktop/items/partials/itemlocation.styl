@@ -1,0 +1,49 @@
+.item-location {
+    clear-fix();
+    margin: 20px 0;
+
+    .box {
+        box($white, $greyBorders, none, 15px, solid, 1px);
+        float: left;
+        height: 131px;
+        width: 275px;
+        .icon-pin {
+            margin: 0;
+            &::before {
+                font-size: remify(24px);
+                margin: -5px 10px 0 0;
+            }
+        }
+        .icon-zoom::before {
+            font-size: $m;
+            margin-right: 5px;
+        }
+        p {
+            margin: 25px 0 25px 30px;
+            span {
+                display: block;
+            }
+        }
+        a {
+            margin-left: 30px;
+        }
+    }
+    .map {
+        box($white, $greyBorders, none, 0, solid, 1px);
+        float: right;
+        height: 161px;
+
+        .area {
+            border: 2px solid $violet;
+            circle(120px);
+            margin: 18px 0 0 95px;
+            position: absolute;
+            
+            .background {
+                background: $violet;
+                circle(100%);
+                opacity: 0.3;
+            }
+        }
+    }
+}

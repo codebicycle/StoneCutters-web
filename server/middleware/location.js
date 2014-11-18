@@ -4,54 +4,72 @@ module.exports = function(dataAdapter, excludedUrls) {
 
     return function loader() {
         var _ = require('underscore');
+        var fs = require('fs');
         var path = require('path');
         var asynquence = require('asynquence');
-        var config = require('../config');
         var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
-        var testing = config.get(['publicEnvironments', 'testing'], {});
-        var staging = config.get(['publicEnvironments', 'staging'], {});
+        var closedPath = path.resolve('server/templates/closed.html');
+        var translations = require('../../app/translations');
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
                 return next();
             }
 
+            var host = req.rendrApp.session.get('host');
+            var shortHost = req.rendrApp.session.get('shortHost');
+            var platform = req.rendrApp.session.get('platform');
+            var locationUrl = req.rendrApp.session.get('locationUrl');
             var location = req.param('location');
-            var previousLocation = req.rendrApp.session.get('siteLocation');
-            var redirect = false;
+            var siteLocation;
+            var previousLocation;
 
-            if (!_.contains(excludedUrls.data, req.path)) {
-                if (!location && (previousLocation && previousLocation.split('.').shift() !== 'www')) {
-                    return res.redirect(302, utils.link(req.originalUrl, req.rendrApp, {
-                        location: previousLocation
+            if (typeof location === 'string' && !location) {
+                return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'location'));
+            }
+            if (platform === 'desktop') {
+                siteLocation = req.rendrApp.session.get('siteLocation');
+                if (location) {
+                    location = host.replace(shortHost, location);
+                    return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + location + req.originalUrl, req.rendrApp), 'location'));
+                }
+            }
+            else {
+                previousLocation = req.rendrApp.session.get('siteLocation');
+                siteLocation = location || previousLocation || shortHost.replace(platform + '.m.', 'www.');
+                if (!location && siteLocation.indexOf('www.')) {
+                    return res.redirect(302, utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp, {
+                        location: siteLocation
                     }));
                 }
-                else if (location && location.split('.').shift() === 'www') {
-                    redirect = true;
+                else if (location && !siteLocation.indexOf('www.')) {
+                    req.rendrApp.session.persist({
+                        siteLocation: siteLocation
+                    });
+                    return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'location'));
                 }
             }
 
-            var siteLocation = req.param('location', previousLocation);
-            var host = req.rendrApp.session.get('host');
-            var index = host.indexOf(':');
-            var platform;
-
             function fetch(done) {
-                function after(err, result) {
+                function callback(err, response) {
                     var params = null;
 
                     if (err) {
+                        if (err.status !== 404) {
+                            return done.fail(err);
+                        }
                         if (previousLocation) {
                             params = {
                                 location: previousLocation
                             };
                         }
                         done.abort();
-                        return res.redirect(301, utils.link('/', req.rendrApp, params));
+                        locationUrl = host.replace(shortHost, locationUrl);
+                        return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + locationUrl + req.originalUrl, req.rendrApp), 'location'));
                     }
-                    done(result.location);
+                    done(response.location);
                 }
 
                 req.rendrApp.fetch({
@@ -62,27 +80,13 @@ module.exports = function(dataAdapter, excludedUrls) {
                         }
                     }
                 }, {
-                    readFromCache: false
-                }, after);
+                    readFromCache: false,
+                    writeToCache: false,
+                    store: true
+                }, callback);
             }
 
-            function check(done, location) {
-                var url = location.get('url');
-                var params = null;
-
-                if (_.contains(req.subdomains, 'm') && host.split(':').shift().split('.').pop() !== url.split('.').pop()) {
-                    if (previousLocation) {
-                        params = {
-                            location: previousLocation
-                        };
-                    }
-                    done.abort();
-                    return res.redirect(301, utils.link('/', req.rendrApp, params));
-                }
-                done(location);
-            }
-
-            function store(done, location) {
+            function success(done, location) {
                 var current = location.get('current');
 
                 if (current) {
@@ -97,46 +101,24 @@ module.exports = function(dataAdapter, excludedUrls) {
                 done();
             }
 
-            function redirection(done) {
-                if (redirect) {
-                    return res.redirect(302, utils.link(utils.removeParams(req.originalUrl, 'location'), req.rendrApp));
-                }
-                done();
-            }
-
             function fail(err) {
-                statsd.increment(['Unknown Location', 'middleware', 'platform', 'error']);
+                if (err.status === 400) {
+                    return fs.readFile(closedPath, 'utf8', function callback(err, html) {
+                        var template = _.template(html);
+
+                        res.send(template({
+                            dictionary: translations['en-US']
+                        }));
+                    });
+                }
+                statsd.increment(['Unknown Location', 'middleware', 'location', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 
-            if (!siteLocation) {
-                siteLocation = (index === -1) ? host : host.substring(0, index);
-                platform = siteLocation.split('.').shift().length;
-                if (siteLocation.indexOf(testing.host || '.m-testing.olx.com') === platform) {
-                    siteLocation = platform + testing.mask || '.m.olx.com';
-                }
-                if (siteLocation.indexOf(staging.host || '.m-staging.olx.com') === platform) {
-                    siteLocation = platform + staging.mask || '.m.olx.com';
-                }
-                siteLocation = siteLocation.replace(siteLocation.slice(0, siteLocation.indexOf('.m.') + 2), 'www');
-                previousLocation = siteLocation;
-            }
-            else if (_.isArray(siteLocation)) {
-                siteLocation = siteLocation[0];
-            }
-            if (previousLocation && previousLocation.split('.').pop() !== siteLocation.split('.').pop()) {
-                return res.redirect(301, utils.link('/', req.rendrApp, {
-                    location: previousLocation
-                }));
-            }
             asynquence().or(fail)
                 .then(fetch)
-                .then(check)
-                .then(store)
-                .then(redirection)
+                .then(success)
                 .val(next);
         };
-
     };
-
 };

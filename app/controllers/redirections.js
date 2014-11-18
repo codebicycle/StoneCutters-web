@@ -2,10 +2,15 @@
 
 var _ = require('underscore');
 var helpers = require('../helpers');
-
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
+var phpPaths = ['posting', 'register', 'login'];
+
+if (typeof window === 'undefined') {
+    var statsdModule = '../../server/modules/statsd';
+    var statsd = require(statsdModule)();
+}
 
 module.exports = {
     category: function(params, callback) {
@@ -50,6 +55,15 @@ module.exports = {
     search: function(params, callback) {
         helpers.common.redirect.call(this, '/nf/search/' + (params.search || '') + '/-p-' + params.page);
     },
+    popularSearches: function(params, callback) {
+        helpers.common.redirect.call(this, '/');
+    },
+    nfsearch: function(params, callback) {
+        helpers.common.redirect.call(this, '/nf/search/' + (params.search || '') + '/-p-' + params.page);
+    },
+    nfallresults: function(params, callback) {
+        helpers.common.redirect.call(this, '/nf/all-results/-p-' + params.page);
+    },
     login: function(params, callback) {
         helpers.common.redirect.call(this, '/login');
     },
@@ -71,11 +85,13 @@ module.exports = {
                 collection: 'Categories',
                 params: {
                     location: this.app.session.get('siteLocation'),
-                    languageCode: this.app.session.get('selectedLanguage')
+                    languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                    seo: this.app.seo.isEnabled()
                 }
             }
         }, {
-            readFromCache: false
+            readFromCache: false,
+            store: true
         }, function afterFetch(err, result) {
             if (err) {
                 return helpers.common.redirect.call(this, '/posting');
@@ -112,6 +128,78 @@ module.exports = {
             maxAge: 2 * HOUR,
             domain: location.split('.').slice(1).join('.')
         });
-        helpers.common.redirect.call(this, 'http://' + location, null, { status: 302 });
+        helpers.common.redirect.call(this, 'http://' + location, null, {
+            status: 302
+        });
+    },
+    php: function(params, callback) {
+        if (_.contains(phpPaths, params.path)) {
+            return helpers.common.redirect.call(this, this.app.session.get('url').replace('.php', ''));
+        }
+        statsd.increment(['redirections', 'php', this.app.session.get('path')]);
+        helpers.common.redirect.call(this, '/');
+    },
+    allresultsig: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/nf/all-results');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('-p-');
+            url.push(page);
+        }
+        url.push('-ig');
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    searchfilterig: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/');
+        url.push(params.title);
+        url.push('-cat');
+        url.push(params.catId);
+        url.push('/');
+        url.push(params.search || '');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('/-p-');
+            url.push(page);
+            url.push('-ig');
+        }
+        else {
+            url.push('/-ig');
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    searchfilter: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/');
+        url.push(params.title);
+        url.push('-cat');
+        url.push(params.catId);
+        url.push('/');
+        url.push(params.search || '');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('/-p-');
+            url.push(page);
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
     }
 };

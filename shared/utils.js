@@ -1,13 +1,26 @@
 'use strict';
 
+var SECOND = 1000;
+var MINUTE = 60 * SECOND;
+var HOUR = 60 * MINUTE;
+var DAY = 24 * HOUR;
+var MONTH = 30 * DAY;
+var YEAR = 12 * MONTH;
+
 var _ = require('underscore');
 var isServer = (typeof window === 'undefined');
 var esi = require('../app/modules/esi');
 var linkParams = {
     location: function (href, query) {
         var siteLocation = this.session.get('siteLocation');
+        var platform = this.session.get('platform');
 
-        if (!query.location && siteLocation && !~siteLocation.indexOf('www.')) {
+        if (platform === 'desktop' && query.location) {
+            href = fullizeUrl(href, this);
+            href = href.replace(/^(.+:\/\/)[^.]*/, '$1' + query.location.split('.').shift());
+            delete query.location;
+        }
+        if (platform !== 'desktop' && !query.location && siteLocation && !~siteLocation.indexOf('www.')) {
             href = params(href, 'location', siteLocation);
         }
         return href;
@@ -154,11 +167,15 @@ function stringify(obj, sep, eq, name) {
 
 function link(href, app, query) {
     query = query || {};
+
     _.each(linkParams, function(checker, name) {
         href = checker.call(app, href, query);
     });
     if (!_.isEmpty(query)) {
         href = params(href, query);
+    }
+    if (href.slice(href.length - 1) === '/') {
+        href = href.substring(0, href.length - 1);
     }
     return href;
 }
@@ -170,6 +187,9 @@ function fullizeUrl(href, app) {
     if (href.slice(0, protocol.length) !== protocol) {
         host = app.session.get('host');
         href = [protocol, host, (href.indexOf('/') ? '/' : ''), href].join('');
+    }
+    if (href.slice(href.length - 1) === '/') {
+        href = href.substring(0, href.length - 1);
     }
     return href;
 }
@@ -291,6 +311,17 @@ function getUserAgent(req) {
     return /*req.header('device-stock-ua') || req.header('x-operamini-phone-ua') || */req.get('user-agent') || defaults.userAgent;
 }
 
+function sort(params, comparator) {
+    var sorted = {};
+
+    _.chain(params).keys().sort(comparator).forEach(function(key) {
+        sorted[key] = params[key];
+    });
+    return sorted;
+}
+
+function noop() {}
+
 module.exports = {
     isServer: isServer,
     link: link,
@@ -303,5 +334,13 @@ module.exports = {
     defaults: defaults,
     parse: parse,
     stringify: stringify,
-    getUserAgent: getUserAgent
+    getUserAgent: getUserAgent,
+    sort: sort,
+    noop: noop,
+    SECOND: SECOND,
+    MINUTE: MINUTE,
+    HOUR: HOUR,
+    DAY: DAY,
+    MONTH: MONTH,
+    YEAR: YEAR
 };
