@@ -3,16 +3,30 @@
 var _ = require('underscore');
 var translations = require('../../../shared/translations');
 
+function checkDescription(filter, options, key) {
+    var dictionary;
+
+    if (!filter.has('description')) {
+        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        filter.set('description', dictionary[key]);
+    }
+    return filter
+}
+
 module.exports = {
     kilometers: function transform(filter, options) {
+        var dictionary;
+        var regexp;
+        var label;
+
+        filter = checkDescription(filter, options, 'itemdescription.mileage');
         if (filter.has('otherType')) {
             return filter;
         }
-        var app = options.app;
-        var regexp = '[[kilometers]]';
-        var dictionary = translations[app.session.get('selectedLanguage') || 'en-US'];
-        var label = [dictionary['misc.LessThan'], regexp, dictionary['posting_optionallist.Kms']].join('');
 
+        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        regexp = '[[kilometers]]';
+        label = [dictionary['misc.LessThan'], regexp, dictionary['posting_optionallist.Kms']].join('');
         filter.set({
             otherType: 'LIST',
             list: [
@@ -48,6 +62,15 @@ module.exports = {
         return filter;
     },
     bathrooms: function transform(filter, options) {
-        return filter;
+        return checkDescription(filter, options, 'itemdescription.bathrooms');
+    },
+    bedrooms: function transform(filter, options) {
+        return checkDescription(filter, options, 'itemdescription.bedrooms');
+    },
+    meters: function transform(filter, options) {
+        return checkDescription(filter, options, 'itemdescription.meters');
+    },
+    year: function transform(filter, options) {
+        return checkDescription(filter, options, 'itemdescriptionwiki.year');
     }
 };

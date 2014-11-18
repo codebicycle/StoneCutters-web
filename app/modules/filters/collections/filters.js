@@ -101,22 +101,37 @@ function add(filter, options) {
 }
 
 function _add(filter, options) {
-    var transformer;
 
     if (!(filter instanceof Filter)) {
         filter = new Filter(filter, {
             app: this.app
         });
     }
-    transformer = transformers[filter.get('name')];
+    return Base.prototype.add.call(this, filter, options || {
+        merge: true
+    });
+}
+
+function checkTransform(filter) {
+    var transformer = transformers[filter.get('name')];
+
     if (transformer) {
         filter = transformer.call(this, filter, {
             app: this.app
         });
     }
-    return Base.prototype.add.call(this, filter, options || {
-        merge: true
-    });
+    return filter;
+}
+
+function checkDescription(filter) {
+    var transformer = transformers[filter.get('name')];
+
+    if (transformer) {
+        filter = transformer.call(this, filter, {
+            app: this.app
+        });
+    }
+    return filter;
 }
 
 function removeAll(filters, options) {
