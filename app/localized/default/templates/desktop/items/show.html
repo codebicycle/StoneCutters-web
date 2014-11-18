@@ -6,9 +6,9 @@
     <aside class="side-column">
         {% include (template + "/items/itemprice.html") %}
 
-        {% include (template + "/items/contactform.html") %}
+        {% view 'items/partials/contactform' %}
     </aside>
-    
+
     {% set seoFrom = "seo-item-page" %}
     {% include (template + "/partials/seobox.html") %}
 </section>
