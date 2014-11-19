@@ -3,14 +3,14 @@
 {% set levelPath = seo.get("levelPath").bottom or false %}
 {% set wikititles = seo.get("wikititles") or false %}
 
-{% if (populars and populars.length > 0) or 
+{% if (populars and populars.length > 0) or
       (relateds and relateds.length > 0) or
       (levelPath and levelPath.length > 0) or
       (wikititles and wikititles.length > 0) %}
     <section id="seo-box" class="{{ seoFrom if seoFrom }}" >
         {% if populars.length > 0 %}
             <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
-            <ul>
+            <ul class="{{ seoCantColumn }}">
                 {% for popular in seo.get('popularSearches') %}
                     <li><a href="{{ popular.url }}" >{{ popular.anchor }}</a></li>
                 {% endfor %}
@@ -18,8 +18,14 @@
         {% endif %}
 
         {% if relateds.length > 0 %}
+
+            {% if relateds.length == 2 %}
+                    {% set seoCantColumn =  'twoColumn' %}
+            {%  elif relateds == 3 %}
+                    {% set seoCantColumn = 'threeColumn' %}
+            {% endif %}
             <span class="title">{{ dictionary["itemgeneraldetails.RelatedListings"] }}</span>
-            <ul>
+            <ul {{ ('class="' + seoCantColumn + '"') if seoCantColumn  }}>
                 {% for related in seo.get('relatedListings') %}
                     <li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
                 {% endfor %}
