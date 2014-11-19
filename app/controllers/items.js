@@ -935,8 +935,6 @@ function staticSearch(params, callback, gallery) {
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
-            console.log('[OLX_DEBUG]', 'keyword', '|', params.searchTerm, '|', typeof query.search, '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
-
             callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: meta,
