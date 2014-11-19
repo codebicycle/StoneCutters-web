@@ -485,12 +485,10 @@ function reply(params, callback) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-            var item = resItem.item.toJSON();
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5') {
-                done.abort();
-                return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
             }
             done(resItem.item);
         }.bind(this);
