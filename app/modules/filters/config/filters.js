@@ -17,7 +17,7 @@ module.exports = {
     imageGallery: 'SELECT',
     ethnicgroup: 'SELECT',
     bodytype: 'SELECT',
-    bedrooms: 'SELECT',
+    bedrooms: 'RANGE',
     kilometers: 'RANGE',
     year: 'RANGE',
     excludecity: 'SELECT',

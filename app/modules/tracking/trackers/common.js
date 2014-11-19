@@ -120,9 +120,6 @@ function getPageName(page, options) {
             pageName = parser.parse(pageName, options);
         }
     });
-    if (pageName.split('_').pop() === 'undefined') {
-        console.log('[OLX_DEBUG]', 'tracking keyword', '|', pageName, '|', JSON.stringify(_.omit(options, 'item', 'category', 'subcategory')));
-    }
     return pageName;
 }
 
