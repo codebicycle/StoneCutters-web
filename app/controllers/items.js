@@ -895,6 +895,10 @@ function staticSearch(params, callback, gallery) {
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
+            if (!query.search) {
+                console.log('[OLX_DEBUG]', 'tracker analytics keyword', '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
+            }
+
             callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: meta,
