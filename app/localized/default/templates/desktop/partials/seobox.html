@@ -10,7 +10,7 @@
     <section id="seo-box" class="{{ seoFrom if seoFrom }}" >
         {% if populars.length > 0 %}
             <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
-            <ul class="{{ seoCantColumn }}">
+            <ul>
                 {% for popular in seo.get('popularSearches') %}
                     <li><a href="{{ popular.url }}" >{{ popular.anchor }}</a></li>
                 {% endfor %}
