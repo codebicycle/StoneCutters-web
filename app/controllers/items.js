@@ -846,10 +846,6 @@ function staticSearch(params, callback, gallery) {
             delete params.page;
             delete params.filters;
 
-            if (!query.search || query.search === 'undefined') {
-                console.log('[OLX_DEBUG]', 'keyword', '|', params.searchTerm, '|', typeof query.search);
-            }
-
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
 
