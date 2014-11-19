@@ -120,9 +120,6 @@ function getPageName(page, options) {
             pageName = parser.parse(pageName, options);
         }
     });
-    if (!options || !options.keyword || options.keyword === 'undefined') {
-        console.log('[OLX_DEBUG]', 'tracking keyword', '|', pageName, '| options: ', !!options, '| keyword: ', !!options.keyword, '| ' + (new Error()).stack);
-    }
     return pageName;
 }
 
