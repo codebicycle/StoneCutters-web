@@ -38,7 +38,8 @@
 
             a {
                 background-color: #ECF8FF;
-                padding-right: 24px;
+                padding-left: 24px;
+                padding-right: 14px;
                 font-size: 15px;            
 
                 &::after {
@@ -46,9 +47,12 @@
                     content: "";
                     height: 9px;
                     position: absolute;
-                    right: 15px;
+                    left: 15px;
                     top: 20px;
                     width: 5px;
+                    -webkit-transform: rotate(180deg);
+                    -moz-transform: rotate(180deg);
+                    transform: rotate(180deg);
                 }
             }
         }
