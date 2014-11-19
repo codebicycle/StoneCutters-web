@@ -14,10 +14,7 @@
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
     {% else %}
-        <ul class="item-listing">
-            {% view 'items/items' %}
-            <div class="clear"></div>
-        </ul>
+        {% view 'items/items' %}
         {% if paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}

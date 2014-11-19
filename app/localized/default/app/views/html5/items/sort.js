@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('items/so
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
+var tracking = require('../../../../../../modules/tracking');
 var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
@@ -30,6 +31,7 @@ module.exports = Base.extend({
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
+        this.attachTrackMe();
     },
     onEnableSort: function(event) {
         $('#btn-sort').attr('disabled',false).removeClass('disabled');
