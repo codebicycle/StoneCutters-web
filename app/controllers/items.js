@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
@@ -714,12 +715,31 @@ function search(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var paginate = function(done, res) {
-            var realPage;
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
 
             if (!res.items) {
                 return done.fail(null, {});
             }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var realPage;
+
             if (page == 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
@@ -767,6 +787,7 @@ function search(params, callback, gallery) {
             .then(configure)
             .then(prepare)
             .then(fetch)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
@@ -854,12 +875,31 @@ function staticSearch(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var paginate = function(done, res) {
-            var realPage;
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
 
             if (!res.items) {
                 return done.fail(null, {});
             }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var realPage;
+
             if (page == 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, (gallery ? '/' + gallery : '')].join(''));
@@ -911,6 +951,7 @@ function staticSearch(params, callback, gallery) {
             .then(configure)
             .then(prepare)
             .then(findItems)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
@@ -974,6 +1015,28 @@ function allresults(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
+
+            if (!res.items) {
+                return done.fail(null, {});
+            }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
         var paginate = function(done, res) {
             var realPage;
 
@@ -1018,6 +1081,7 @@ function allresults(params, callback, gallery) {
             .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(filters)
             .then(paginate)
             .val(success);
     }

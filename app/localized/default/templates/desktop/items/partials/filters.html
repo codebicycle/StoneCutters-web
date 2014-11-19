@@ -6,6 +6,7 @@
                 {% for value in filter.list %}
                     <span class="link-range" data-filter-from="{{ value.from }}" data-filter-to="{{ value.to }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ value.label }}</span>
                 {% endfor %}
+                {{ ('<span class="clean-filters" data-filter-name="' + filter.name + '" data-filter-type="' + filter.type + '" >[' + dictionary["item.Clear"] + ']</span>') if filters.isActive(filter.name) }}
             </div>
         {% elif filter.type == 'SELECT' and filter.name == 'parentcategory' %}
             <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>

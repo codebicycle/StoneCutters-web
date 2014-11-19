@@ -64,6 +64,10 @@ function getParams(page, options) {
     var siteLocation = this.app.session.get('siteLocation');
     var params = {};
 
+    if (!options.keyword || options.keyword === 'undefined') {
+        console.log('[OLX_DEBUG]', 'tracker analytics keyword', '|', options.keyword, '|', typeof options.keyword, 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
+    }
+
     params.page = common.getPageName.call(this, page, options);
     params.host = this.app.session.get('host');
     params.id = paramsManager.getId(siteLocation, platform);
