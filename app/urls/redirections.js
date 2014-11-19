@@ -104,5 +104,21 @@ module.exports = {
             'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?',
             'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/?:search?/?:filters?'
         ]
-    }
+    },
+    'redirections#staticSearchig': {
+        urls: [
+            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)-ig/:filters',
+            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)-ig',
+            'q/:search/p-:page([0-9]+)-ig/:filters',
+            'q/:search/p-:page([0-9]+)-ig'
+        ]
+    },
+    'redirections#staticSearch': {
+        urls: [
+            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)/:filters',
+            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)',
+            'q/:search/p-:page([0-9]+)/:filters',
+            'q/:search/p-:page([0-9]+)'
+        ]
+    },
 };
