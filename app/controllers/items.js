@@ -846,10 +846,6 @@ function staticSearch(params, callback, gallery) {
             delete params.page;
             delete params.filters;
 
-            if (!query.search || query.search === 'undefined') {
-                console.log('[OLX_DEBUG]', 'keyword', '|', params.searchTerm, '|', typeof query.search);
-            }
-
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', 0);
 
@@ -938,6 +934,8 @@ function staticSearch(params, callback, gallery) {
             tracking.addParam('page_nb', meta.totalPages);
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
+
+            console.log('[OLX_DEBUG]', 'keyword', '|', params.searchTerm, '|', typeof query.search, '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
 
             callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
