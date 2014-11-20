@@ -202,7 +202,6 @@ function show(params, callback) {
                 else {
                     response.relatedItems = response.relatedItems.toJSON();
                 }
-                console.log(response.relatedItems);
                 done(item, response.relatedItems);
             }.bind(this));
         }.bind(this);
