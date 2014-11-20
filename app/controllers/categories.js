@@ -19,7 +19,6 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var popularStates = [];
         var platform = this.app.session.get('platform');
         var icons = config.get(['icons', platform], []);
         var location = this.app.session.get('location');
