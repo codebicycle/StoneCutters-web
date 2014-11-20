@@ -1,0 +1,21 @@
+<div id="items-pagination">
+    <ul class="myolx-paginations-numbers">
+        <li>
+            <a href="{{ (paginator.get('previous') | linkig) if paginator.has('previous') else '#' }}" rel="prev" class="icons pagination-arrow icon-arrow-left {{ "disable" if not paginator.has('previous') }}"></a>
+        </li>
+        {% for page in paginator.pages(10) %}
+            {% if page.isCurrent %}
+                <li class="current">
+                    {{ page.page }}
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ page.url | linkig }}" class="pagination-number" >{{ page.page }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <li>
+            <a href="{{ (paginator.get('next') | linkig) if paginator.toJSON().totalPages != paginator.toJSON().page else '#' }}" rel="next" class="icons pagination-arrow icon-arrow-right {{ "disable" if paginator.toJSON().totalPages == paginator.toJSON().page }}"></a>
+        </li>
+    </ul>
+</div>

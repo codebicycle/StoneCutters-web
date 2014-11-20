@@ -7,14 +7,6 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'users_myads_view',
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-
-        this.ads = this.ads || data.context.ctx.myAds;
-        return _.extend({}, data, {
-            myAds: this.ads
-        });
-    },
     events: {
         'click .btndelete': 'onDeleteClick',
         'click .btncanceldelete': 'onCancelDeleteClick',

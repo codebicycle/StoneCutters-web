@@ -49,6 +49,10 @@ module.exports = Base.extend({
                 }
                 this.filters.addAll(this.meta.filters);
             }
+            // TODO Borrar
+            if (this.meta && response.total) {
+                this.meta.total = response.total;
+            }
             return response.data;
         }
         console.log('[OLX_DEBUG] Empty item listing response');

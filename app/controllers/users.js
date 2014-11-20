@@ -141,33 +141,38 @@ function myads(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var page = params ? params.page : undefined;
+        var myAds;
         var deleted;
         var _params;
         var user;
 
-        var prepare = function(done) {
+        var redirect = function(done) {
             var platform = this.app.session.get('platform');
+
             if (platform === 'wap') {
-                done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
             user = this.app.session.get('user');
             if (!user) {
-                done.abort();
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
+            done();
+        }.bind(this);
 
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params);
+            myAds = params.myAds;
             deleted = params.deleted;
             delete params.deleted;
-            _params = _.extend({
+            _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId,
-                location: this.app.session.get('siteLocation'),
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'myAds'
-            }, params);
+            });
 
             done();
         }.bind(this);
@@ -190,6 +195,24 @@ function myads(params, callback) {
             done(res.myAds);
         }.bind(this);
 
+        var paginate = function(done, myAds) {
+            var url = '/myolx/myadslisting';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = myAds.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(myAds);
+        }.bind(this);
+
         var success = function(_myAds) {
             var myAds = _myAds.toJSON();
             var platform = this.app.session.get('platform');
@@ -197,7 +220,8 @@ function myads(params, callback) {
             var data = {
                 myAdsMetadata: _myAds.meta,
                 myAds: myAds,
-                deleted: deleted
+                deleted: deleted,
+                paginator: _myAds.paginator
             };
 
             if (platform === 'desktop') {
@@ -214,9 +238,11 @@ function myads(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findAds)
             .then(check)
+            .then(paginate)
             .val(success);
     }
 }
@@ -252,6 +278,7 @@ function favorites(params, callback) {
             _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId,
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'favorites'
             });
 
