@@ -2,7 +2,6 @@
 
 var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
-var Seo = require('../../../../../../../modules/seo');
 
 module.exports = Base.extend({
     className: 'image-gallery',
@@ -13,21 +12,21 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var seo = Seo.instance(this.app);
         var images = data.item.images;
-        var altImages = seo.get('altImages') || [];
+        var altImages = this.app.seo.get('altImages') || [];
         var imgPlusAlts = [];
         var cantImages = images.length;
         var cantAlt = altImages.length;
-
         var alts = 0;
-        for(var i = 0; i < images.length; i++) {
+        var i;
+
+        for(i = 0; i < images.length; i++) {
             if (!altImages[alts]) {
                 alts = 0;
             }
             imgPlusAlts.push({
-                'url': images[i].url,
-                'alt': altImages[alts]
+                url: images[i].url,
+                alt: altImages[alts]
             });
             alts++;
         }

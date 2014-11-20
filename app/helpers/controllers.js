@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var common = require('./common');
-var Seo = require('../modules/seo');
 var esi = require('../modules/esi');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
@@ -31,9 +30,7 @@ function processTracking(done) {
 }
 
 function processSeo(done) {
-    var seo = Seo.instance(this.app);
-
-    seo.reset(this.app);
+    this.app.seo.reset(this.app);
     done();
 }
 
@@ -143,6 +140,7 @@ module.exports = {
         promise.val(controller.bind(this));
 
         function fail(err) {
+            console.log('APP ERROR', err.stack);
             this.app.session.persist({
                 error: err
             });
