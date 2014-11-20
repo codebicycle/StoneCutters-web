@@ -23,7 +23,10 @@ module.exports = {
         url: 'myolx/myadslisting'
     },
     'users#favorites': {
-        url: 'myolx/favoritelisting'
+        urls: [
+            'myolx/favoritelisting-p-:page([0-9]+)',
+            'myolx/favoritelisting'
+        ]
     },
     'users#messages': {
         url: 'myolx/myolxmessages'

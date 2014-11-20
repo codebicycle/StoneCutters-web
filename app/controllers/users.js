@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var Paginator = require('../modules/paginator');
 
 module.exports = {
     register: middlewares(register),
@@ -224,11 +225,12 @@ function favorites(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var page = params ? params.page : undefined;
         var favorite;
         var _params;
         var user;
 
-        var prepare = function(done) {
+        var redirect = function(done) {
             var platform = this.app.session.get('platform');
 
             if (platform === 'wap') {
@@ -240,15 +242,18 @@ function favorites(params, callback) {
                     status: 302
                 });
             }
+            done();
+        }.bind(this);
 
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params);
             favorite = params.favorite;
             delete params.favorite;
-            _params = _.extend({
+            _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId,
-                location: this.app.session.get('siteLocation'),
                 item_type: 'favorites'
-            }, params);
+            });
 
             done();
         }.bind(this);
@@ -271,6 +276,24 @@ function favorites(params, callback) {
             done(res.favorites);
         }.bind(this);
 
+        var paginate = function(done, favorites) {
+            var url = '/myolx/favoritelisting';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = favorites.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(favorites);
+        }.bind(this);
+
         var success = function(_favorites) {
             var favorites = _favorites.toJSON();
             var platform = this.app.session.get('platform');
@@ -278,7 +301,8 @@ function favorites(params, callback) {
             var data = {
                 favoritesMetadata: _favorites.meta,
                 favorites: favorites,
-                favorite: favorite
+                favorite: favorite,
+                paginator: _favorites.paginator
             };
 
             if (platform === 'desktop') {
@@ -295,9 +319,11 @@ function favorites(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findFavorites)
             .then(check)
+            .then(paginate)
             .val(success);
     }
 }

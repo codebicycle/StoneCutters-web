@@ -65,7 +65,7 @@ module.exports = Base.extend({
             pageSize: query.pageSize,
             total: this.meta ? this.meta.total : 0
         }, {
-            next: this.meta ? this.meta.next : false,
+            next: this.meta ? (this.meta.next || this.meta.nextLink) : false,
             gallery: options.gallery,
             filters: this.filters
         });
