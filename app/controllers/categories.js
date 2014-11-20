@@ -32,6 +32,11 @@ function list(params, callback) {
 }
 
 function showig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     show.call(this, params, callback, '-ig');
 }
