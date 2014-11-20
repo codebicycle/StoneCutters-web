@@ -30,7 +30,7 @@ module.exports = Base.extend({
                 $('[message-alert-success]').hide();
                 $('[message-alert-fail]').show();
             }
-            
+
             $('[message-alert]').show().delay( 4000 ).slideUp( 600 );
         }
     },
@@ -38,11 +38,11 @@ module.exports = Base.extend({
         var selectAll = $(event.target);
         var inputs = $('[data-message] input');
         var check = selectAll.is(':checked');
-        
+
         if (check) {
             $(inputs).prop('checked', true);
         } else {
-            $(inputs).prop('checked', false);            
+            $(inputs).prop('checked', false);
         }
     },
     deleteMessage: function() {
@@ -75,7 +75,7 @@ module.exports = Base.extend({
             });
         }, function callback(err) {
             this.render();
-        });
+        }.bind(this));
     }
 });
 

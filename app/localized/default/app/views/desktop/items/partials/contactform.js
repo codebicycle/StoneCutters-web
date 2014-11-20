@@ -30,7 +30,7 @@ module.exports = Base.extend({
 
         var email = $('#email').val();
         var name = $('#name').val();
-        var comment = $('#comment').val();
+        var message = $('#message').val();
         var phone = $('#phone').val();
         var itemId = $('.itemId').val();
         var url = [];
@@ -41,7 +41,7 @@ module.exports = Base.extend({
         url = helpers.common.fullizeUrl(url.join(''), this.app);
 
         var validate = function(done) {
-            if (this.validateForm(email, name, comment)) {
+            if (this.validateForm(email, name, message)) {
                 $('.spinner').removeClass('hide');
                 $('#replyForm .submit').addClass('hide');
                 done();
@@ -59,7 +59,7 @@ module.exports = Base.extend({
                 url: helpers.common.link(url, this.app),
                 cache: false,
                 data: {
-                    message: comment,
+                    message: message,
                     email: email,
                     name:name,
                     phone:phone
@@ -73,7 +73,7 @@ module.exports = Base.extend({
         var success = function(done, data) {
             var $replySuccess = $('.replySuccess');
 
-            $('.comment').val('');
+            $('.message').val('');
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
@@ -133,8 +133,8 @@ module.exports = Base.extend({
                 .then(post)
                 .gate(success, trackEvent, trackTracking, trackGraphite);
     },
-    validateForm: function(email, name, comment) {
-        if((this.isEmpty(email, 'email') || this.isEmpty(name, 'name') || this.isEmpty(comment, 'comment')) && this.isEmail(email, 'email')) {
+    validateForm: function(email, name, message) {
+        if((this.isEmpty(email, 'email') || this.isEmpty(name, 'name') || this.isEmpty(message, 'message')) && this.isEmail(email, 'email')) {
             return true;
         }
         return false;

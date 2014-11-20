@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
@@ -223,15 +224,16 @@ function show(params, callback) {
             }
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
-
+            this.app.seo.setContent(item.metadata);
             if (!item.purged) {
                 this.app.seo.addMetatag('title', item.title);
+                this.app.seo.set('altImages', item);
             }
             else {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
-            this.app.seo.setContent(item.metadata);
+
             if (platform !== 'desktop' && siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
@@ -483,12 +485,10 @@ function reply(params, callback) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-            var item = resItem.item.toJSON();
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5') {
-                done.abort();
-                return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
             }
             done(resItem.item);
         }.bind(this);
@@ -711,12 +711,31 @@ function search(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var paginate = function(done, res) {
-            var realPage;
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
 
             if (!res.items) {
                 return done.fail(null, {});
             }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var realPage;
+
             if (page == 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
@@ -764,6 +783,7 @@ function search(params, callback, gallery) {
             .then(configure)
             .then(prepare)
             .then(fetch)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
@@ -855,12 +875,31 @@ function staticSearch(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var paginate = function(done, res) {
-            var realPage;
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
 
             if (!res.items) {
                 return done.fail(null, {});
             }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var realPage;
+
             if (page == 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, (gallery ? '/' + gallery : '')].join(''));
@@ -894,6 +933,10 @@ function staticSearch(params, callback, gallery) {
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
+            if (!query.search || query.search === 'undefined') {
+                console.log('[OLX_DEBUG]', 'tracker analytics keyword', '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
+            }
+
             callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: meta,
@@ -912,6 +955,7 @@ function staticSearch(params, callback, gallery) {
             .then(configure)
             .then(prepare)
             .then(findItems)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
@@ -975,6 +1019,28 @@ function allresults(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
+
+            if (!res.items) {
+                return done.fail(null, {});
+            }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
         var paginate = function(done, res) {
             var realPage;
 
@@ -1019,6 +1085,7 @@ function allresults(params, callback, gallery) {
             .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
