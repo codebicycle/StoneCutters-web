@@ -23,11 +23,5 @@ module.exports = Base.extend({
             location: this.app.session.get('location'),
             categories: list
         });
-    },
-    onActionStart: function(event) {
-        this.app.trigger('footer:hide', 'categories');
-    },
-    onActionEnd: function(event) {
-        this.app.trigger('footer:show', 'categories');
     }
 });
