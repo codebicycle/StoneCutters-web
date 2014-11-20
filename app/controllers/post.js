@@ -139,30 +139,46 @@ function subcategories(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
-        var redirect;
+        var category;
 
-        if (isPostingFlow) {
-            redirect = '/posting';
-        }
-        else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
-            redirect = '/location?target=posting';
-        }
-        if (redirect) {
-            return helpers.common.redirect.call(this, redirect, null, {
-                status: 302
-            });
-        }
-        var category = this.dependencies.categories.get(params.categoryId);
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+            var redirect;
 
-        if (!category) {
-            return helpers.common.redirect.call(this, '/posting');
-        }
-        this.app.seo.addMetatag('robots', 'noindex, nofollow');
-        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-        callback(null, _.extend(params, {
-            category: category.toJSON(),
-            subcategories: category.get('children').toJSON()
-        }));
+            if (isPostingFlow || platform === 'desktop') {
+                redirect = '/posting';
+            }
+            else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
+                redirect = '/location?target=posting';
+            }
+            if (redirect) {
+                return helpers.common.redirect.call(this, redirect, null, {
+                    status: 302
+                });
+            }
+            category = this.dependencies.categories.get(params.categoryId);
+            if (!category) {
+                return helpers.common.redirect.call(this, '/posting');
+            }
+            done();
+        }.bind(this);
+
+        var success = function() {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+            callback(null, _.extend(params, {
+                category: category.toJSON(),
+                subcategories: category.get('children').toJSON()
+            }));
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .val(success);
     }
 }
 
@@ -180,9 +196,10 @@ function form(params, callback) {
         var languageId;
 
         var prepare = function(done) {
+            var platform = this.app.session.get('platform');
             var redirect;
 
-            if (isPostingFlow) {
+            if (isPostingFlow || platform === 'desktop') {
                 redirect = '/posting';
             }
             else if (!siteLocation || siteLocation.indexOf('www.') === 0) {

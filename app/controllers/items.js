@@ -292,6 +292,15 @@ function gallery(params, callback) {
         var pos = Number(params.pos) || 0;
         var siteLocation = this.app.session.get('siteLocation');
 
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;
@@ -368,6 +377,7 @@ function gallery(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(fetch)
             .then(check)
@@ -383,6 +393,15 @@ function map(params, callback) {
         var itemId = params.itemId;
         var slugUrl = params.title;
         var siteLocation = this.app.session.get('siteLocation');
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             if (user) {
@@ -449,6 +468,7 @@ function map(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findItem)
             .then(checkItem)
@@ -464,6 +484,15 @@ function reply(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             params.id = params.itemId;
@@ -524,6 +553,7 @@ function reply(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findItem)
             .then(checkItem)
@@ -537,6 +567,15 @@ function success(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             params.id = params.itemId;
@@ -588,6 +627,7 @@ function success(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findItem)
             .then(checkItem)
@@ -596,6 +636,11 @@ function success(params, callback) {
 }
 
 function searchfilterig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     searchfilter.call(this, params, callback, '-ig');
 }
@@ -606,6 +651,11 @@ function searchfilter(params, callback, gallery) {
 }
 
 function searchig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     search.call(this, params, callback, '-ig');
 }
@@ -982,6 +1032,9 @@ function allresults(params, callback, gallery) {
             var path = this.app.session.get('path');
             var starts = '/nf/';
 
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
             if (typeof page !== 'undefined' && !isNaN(page) && page > maxPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
