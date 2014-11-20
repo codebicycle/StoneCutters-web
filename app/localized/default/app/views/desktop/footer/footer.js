@@ -15,24 +15,11 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        this.hidden = this.hidden || {
-            categories: this.isCurrentRoute('categories', 'list') || this.isCurrentRoute('pages', 'sitemap'),
-            countries: !this.isCurrentRoute('categories', 'list')
-        };
         return _.extend({}, data, {
-            user: this.app.session.get('user'),
-            hidden: this.hidden
+            user: this.app.session.get('user')
         });
     },
     postRender: function() {
-        if (!this.hidden) {
-            this.app.on('footer:show', this.onShow.bind(this));
-            this.app.on('footer:hide', this.onHide.bind(this));
-        }
-        this.hidden = this.hidden || {
-            categories: this.isCurrentRoute('categories', 'list') || this.isCurrentRoute('pages', 'sitemap'),
-            countries: !this.isCurrentRoute('categories', 'list')
-        };
         if (this.firstRender) {
             $('body').on('click', function(event){
                 var $slide = $('.footer-slide');
@@ -46,19 +33,6 @@ module.exports = Base.extend({
             }.bind(this));
             this.firstRender = false;
        }
-    },
-    isCurrentRoute: function(controller, action) {
-        var currentRoute = this.app.session.get('currentRoute');
-
-        return (currentRoute.controller === controller && currentRoute.action === action);
-    },
-    onShow: function(element) {
-        delete this.hidden[element];
-        this.render();
-    },
-    onHide: function(element) {
-        this.hidden[element] = true;
-        this.render();
     },
     slideDownContent: function(event) {
         event.preventDefault();
