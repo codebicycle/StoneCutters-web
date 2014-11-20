@@ -53,6 +53,8 @@ function Client(app, callback) {
 
         expires.setMonth(-1);
         put(key, '', _.extend(options || {}, {
+            path: '/',
+            domain: domain,
             expires: expires.toUTCString()
         }));
     }
