@@ -4,6 +4,7 @@ var _ = require('underscore');
 var qs = require('./querystring');
 var time = require('./time');
 var linker = require('./linker');
+var string = require('./string');
 var crypto = require('./crypto');
 var isServer = (typeof window === 'undefined');
 
@@ -82,4 +83,4 @@ module.exports = _.extend({
     getUserAgent: getUserAgent,
     sort: sort,
     noop: noop
-}, qs, time, linker, crypto);
+}, qs, time, linker, string, crypto);
