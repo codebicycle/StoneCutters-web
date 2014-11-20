@@ -9,7 +9,7 @@
         {% endfor %}
         {% if meta.total %}
             <span class="icons icon-arrow" >
-                {% set totalAds = paginator.get('total') | countFormat %}
+                {% set totalAds = (paginator.get('total') if paginator else countFormat) %}
 
                 {% if location.current and location.current.name %}
                     {% set currentLocation = location.current.name %}
@@ -36,7 +36,7 @@
         {% endif %}
     </div>
 {% endif %}
-{% if paginator.isEnabled() %}
+{% if paginator and paginator.isEnabled() %}
     <div class="breadcrumb-pagination">
         <p>{{ dictionary["listingpageitemslisting.ResultsForNew"] | replace('<<PAGE_NUMBER>>', paginator.get('page')) | replace('<<TOTAL_PAGE_NUMBER>>', paginator.get('totalPages') | countFormat )}}</p>
         <a href="{{ (paginator.get('previous') | linkig) if paginator.has('previous') else '#' }}" rel="prev" class="icons icon-arrow-left {{ "disable" if not paginator.has('previous') }}"></a><a href="{{ (paginator.get('next') | linkig) if paginator.has('next') else '#' }}" rel="next" class="icons icon-arrow-right {{ "disable" if not paginator.has('next') }}"></a>
