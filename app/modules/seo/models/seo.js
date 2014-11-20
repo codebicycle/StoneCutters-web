@@ -98,9 +98,6 @@ Seo = Backbone.Model.extend({
         options = _.defaults({}, options || {}, {
             silent: false
         });
-        if (!app) {
-            console.log(new Error().stack);
-        }
         this.app = app;
         if (!options.silent) {
             this.head.reset(app, options);
