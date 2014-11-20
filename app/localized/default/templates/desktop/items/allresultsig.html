@@ -6,7 +6,7 @@
     <section id="listing-items">
         {% view 'items/partials/locations' %}
         {% include (template + '/items/listig.html') %}
-        {% if paginator.isEnabled() %}
+        {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
     </section>
