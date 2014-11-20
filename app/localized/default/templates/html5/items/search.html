@@ -15,7 +15,7 @@
             {% view 'items/items' %}
             <div class="clear"></div>
         </ul>
-        {% if paginator.isEnabled() %}
+        {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
     {% endif %}
