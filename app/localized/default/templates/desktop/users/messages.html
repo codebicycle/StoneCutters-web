@@ -25,4 +25,7 @@
         <a href="{{ '/myolx/myadslisting' | link }}" class="back">{{ dictionary["myolx.BackToMyOLX"] }}</a>
     </div>
 </form>
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}
 
