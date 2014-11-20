@@ -879,6 +879,7 @@ function staticSearch(params, callback, gallery) {
         var prepare = function(done) {
             Paginator.prepare(this.app, params);
             query = _.clone(params);
+            params.categoryId = params.catId;
             delete params.search;
             delete params.page;
             delete params.filters;
