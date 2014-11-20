@@ -119,3 +119,6 @@
         </li>
     {% endfor %}
 </ul>
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}

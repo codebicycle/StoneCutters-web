@@ -129,7 +129,8 @@ module.exports = {
             domain: location.split('.').slice(1).join('.')
         });
         helpers.common.redirect.call(this, 'http://' + location, null, {
-            status: 302
+            status: 302,
+            pushState: false
         });
     },
     editphp: function(params, callback) {
@@ -169,7 +170,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
@@ -194,7 +195,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');

@@ -2,19 +2,18 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var translations = require('../../../shared/translations');
+var translations = require('../../../../shared/translations');
 var Base;
-
 
 Backbone.noConflict();
 Base = Backbone.Model;
 
 function initialize(attributes, options) {
     var item = this.get('item');
+    var alts = [];
     var levelPath;
     var itemPrice;
     var attrs;
-    var alts = [];
 
     options = options || {};
     this.app = options.app;
@@ -110,7 +109,6 @@ function getNeighborhoodName(item) {
     }
     return '';
 }
-
 
 module.exports = Base.extend({
     initialize: initialize,
