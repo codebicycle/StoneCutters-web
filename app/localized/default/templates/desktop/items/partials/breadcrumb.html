@@ -9,7 +9,7 @@
         {% endfor %}
         {% if meta.total %}
             <span class="icons icon-arrow" >
-                {% set totalAds = (paginator.get('total') if paginator else countFormat) %}
+                {% set totalAds = (paginator.get('total') | countFormat if paginator else 0) %}
 
                 {% if location.current and location.current.name %}
                     {% set currentLocation = location.current.name %}
