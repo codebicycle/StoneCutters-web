@@ -82,6 +82,9 @@ module.exports = {
     'redirections#redirecttomain': {
         url: 'redirecttomain'
     },
+    'redirections#editphp': {
+        url: 'myolx/edititem.php'
+    },
     'redirections#php': {
         url: ':path.php'
     },

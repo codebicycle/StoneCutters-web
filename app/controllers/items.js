@@ -486,12 +486,10 @@ function reply(params, callback) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-            var item = resItem.item.toJSON();
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5') {
-                done.abort();
-                return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
             }
             done(resItem.item);
         }.bind(this);
@@ -933,6 +931,10 @@ function staticSearch(params, callback, gallery) {
             tracking.addParam('page_nb', meta.totalPages);
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
+
+            if (!query.search || query.search === 'undefined') {
+                console.log('[OLX_DEBUG]', 'tracker analytics keyword', '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
+            }
 
             callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
