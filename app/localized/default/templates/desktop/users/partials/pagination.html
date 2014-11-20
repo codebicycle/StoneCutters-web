@@ -15,7 +15,7 @@
             {% endif %}
         {% endfor %}
         <li>
-            <a href="{{ (paginator.get('next') | linkig) if paginator.toJSON().totalPages != paginator.toJSON().page else '#' }}" rel="next" class="icons pagination-arrow icon-arrow-right {{ "disable" if paginator.toJSON().totalPages == paginator.toJSON().page }}"></a>
+            <a href="{{ (paginator.get('next') | linkig) if paginator.has('next') else '#' }}" rel="next" class="icons pagination-arrow icon-arrow-right {{ "disable" if not paginator.has('next') }}"></a>
         </li>
     </ul>
 </div>
