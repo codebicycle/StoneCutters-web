@@ -5,6 +5,7 @@ var crypto = require('crypto');
 var asynquence = require('asynquence');
 var dataAdapter = require('../helpers/dataAdapter');
 var statsd = require('../../shared/statsd')();
+var utils = require('../../shared/utils');
 
 module.exports = Base.extend({
     url: '/users',
@@ -19,6 +20,13 @@ module.exports.id = 'User';
 
 function getUsernameOrEmail() {
     return this.get('usernameOrEmail') || this.get('username') || this.get('email');
+}
+
+function getHash(hash) {
+    if (utils.isServer) {
+        return crypto.createHash('sha512').update(hash + this.getUsernameOrEmail()).digest('hex');
+    }
+    return utils.toSha512(hash);
 }
 
 function login(done) {
@@ -37,7 +45,7 @@ function login(done) {
         dataAdapter.get(this.app.req, '/users/login', {
             query: {
                 c: data.challenge,
-                h: crypto.createHash('sha512').update(hash + this.getUsernameOrEmail()).digest('hex'),
+                h: getHash.call(this, hash),
                 platform: this.get('platform')
             }
         }, done.errfcb);
