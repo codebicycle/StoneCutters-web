@@ -22,8 +22,8 @@ _.extend(urls, {
 _.extend(urls, pages);
 _.extend(urls, users);
 _.extend(urls, post);
-_.extend(urls, items);
 _.extend(urls, categories);
+_.extend(urls, items);
 
 // Handler 404
 _.extend(urls, {
