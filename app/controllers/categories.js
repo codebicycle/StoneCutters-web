@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
@@ -31,6 +32,9 @@ function list(params, callback) {
 }
 
 function showig(params, callback) {
+    if (this.app.session.get('platform') !== 'desktop') {
+        return helpers.common.redirect.call(this, this.app.session.get('url').replace('-ig', ''));
+    }
     params['f.hasimage'] = true;
     show.call(this, params, callback, '-ig');
 }
@@ -159,6 +163,28 @@ function handleItems(params, promise, gallery) {
         }, done.errfcb);
     }.bind(this);
 
+    var filters = function(done, res) {
+        var _filters;
+        var filter;
+        var url;
+
+        if (!res.items) {
+            return done.fail(null, {});
+        }
+        filter = query.filters;
+        if (!filter || filter === 'undefined') {
+            return done(res);
+        }
+        _filters = res.items.filters.format();
+        if (filter !== _filters) {
+            done.abort();
+            _filters = (_filters ? '/' + _filters : '');
+            url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+            return helpers.common.redirect.call(this, url);
+        }
+        done(res);
+    }.bind(this);
+
     var paginate = function(done, res) {
         var realPage;
 
@@ -220,6 +246,7 @@ function handleItems(params, promise, gallery) {
     promise.then(redirect);
     promise.then(prepare);
     promise.then(fetch);
+    promise.then(filters);
     promise.then(paginate);
     promise.then(success);
 }

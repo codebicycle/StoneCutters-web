@@ -30,6 +30,7 @@ module.exports = Base.extend({
         this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
         this.app.router.appView.on('location:end', this.restore.bind(this));
         this.app.router.on('action:end', this.onActionEnd.bind(this));
+
         if ( !(/(iPad|iPhone|iPod).*OS [6-7].*AppleWebKit.*Mobile.*Safari/.test(navigator.userAgent)) && !this.app.session.get('interstitial') ) {
             $.smartbanner({
                 title: 'OLX Free Classifieds',
@@ -140,10 +141,13 @@ module.exports = Base.extend({
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
+        var route = this.app.session.get('currentRoute').action;
 
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);
+
+        this.$('.topBarFilters a').attr('data-tracking', route+'-cancel');
     },
     restore: function() {
         var $links = this.$('.logo, .header-links');

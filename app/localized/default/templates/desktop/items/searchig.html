@@ -1,10 +1,10 @@
-{% include (template + "/partials/breadcrumb.html") %}
+{% view 'items/partials/breadcrumb' %}
 <div class="wrapper-main">
     <nav id="listing-nav">
-        {% view 'items/filters' %}
+        {% view 'items/partials/filters' %}
     </nav>
     <section id='listing-items'>
-        {% include (template + '/items/locations.html') %}
+        {% view 'items/partials/locations' %}
         {% include (template + '/items/listig.html') %}
         {% if paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}

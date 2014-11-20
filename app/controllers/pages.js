@@ -5,6 +5,8 @@ var asynquence = require('asynquence');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var _ = require('underscore');
+
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
     var statsd = require(statsdModule)();
@@ -70,6 +72,11 @@ function interstitial(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4' || _.isEmpty(params)) {
+            return helpers.common.redirect.call(this, '/');
+        }
         if (params.downloadApp) {
             this.app.session.persist({
                 downloadApp: '1'
@@ -121,6 +128,16 @@ function allstates(params, callback) {
     function controller() {
         var location = this.app.session.get('location');
         var siteLocation = location.url;
+
+        var redirect = function(done) {
+            if (this.app.session.get('platform') !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done();
+        }.bind(this);
 
         var decide = function(done) {
             var spec = {
@@ -185,6 +202,7 @@ function allstates(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(decide)
             .then(fetch)
             .then(formatResponse)
@@ -196,6 +214,11 @@ function sitemap(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        if (this.app.session.get('platform') !== 'desktop') {
+            return helpers.common.redirect.call(this, '/', null, {
+                status: 302
+            });
+        }
         callback(null, {});
     }
 }
@@ -204,8 +227,11 @@ function featuredListings(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {
-
-        });
+        if (this.app.session.get('platform') !== 'desktop') {
+            return helpers.common.redirect.call(this, '/', null, {
+                status: 302
+            });
+        }
+        callback(null, {});
     }
 }

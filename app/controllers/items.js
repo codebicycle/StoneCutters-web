@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
@@ -225,15 +226,16 @@ function show(params, callback) {
             }
             subcategory = (subcategory ? subcategory.toJSON() : undefined);
             category = (category ? category.toJSON() : undefined);
-
+            this.app.seo.setContent(item.metadata);
             if (!item.purged) {
                 this.app.seo.addMetatag('title', item.title);
+                this.app.seo.set('altImages', item);
             }
             else {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
-            this.app.seo.setContent(item.metadata);
+
             if (platform !== 'desktop' && siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
@@ -485,12 +487,10 @@ function reply(params, callback) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-            var item = resItem.item.toJSON();
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5') {
-                done.abort();
-                return helpers.common.redirect.call(this, ['/', params.title, (params.title || '-'), 'iid-', item.id]);
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
             }
             done(resItem.item);
         }.bind(this);
@@ -713,12 +713,31 @@ function search(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var paginate = function(done, res) {
-            var realPage;
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
 
             if (!res.items) {
                 return done.fail(null, {});
             }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var realPage;
+
             if (page == 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/', gallery].join(''));
@@ -766,6 +785,7 @@ function search(params, callback, gallery) {
             .then(configure)
             .then(prepare)
             .then(fetch)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
@@ -788,10 +808,6 @@ function staticSearch(params, callback, gallery) {
         var subcategory;
 
         var redirect = function(done) {
-            if (platform !== 'desktop') {
-                done.abort();
-                return helpers.common.redirect.call(this, '/nf/search/' + params.search);
-            }
             if (params.search && params.search.toLowerCase() === 'gumtree' && this.app.session.get('location').url === 'www.olx.co.za') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/q/-');
@@ -857,26 +873,36 @@ function staticSearch(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var checkSearch = function(done, res) {
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
+
             if (!res.items) {
                 return done.fail(null, {});
             }
-
-            if (typeof page !== 'undefined' && (isNaN(page) || page <= 1 || page >= 999999 || !res.items.length)) {
-                done.abort();
-                return helpers.common.redirect.call(this, '/');
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
             }
-            done(res.items);
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
         }.bind(this);
 
-        var paginate = function(done, _items) {
+        var paginate = function(done, res) {
             var realPage;
 
             if (page == 1) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, (gallery ? '/' + gallery : '')].join(''));
             }
-            realPage = _items.paginate([url, '/[page][gallery][filters]'].join(''), query, {
+            realPage = res.items.paginate([url, '/[page][gallery][filters]'].join(''), query, {
                 page: page,
                 gallery: gallery
             });
@@ -884,7 +910,7 @@ function staticSearch(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/-p-' + realPage, (gallery ? gallery : '')].join(''));
             }
-            done(_items);
+            done(res.items);
         }.bind(this);
 
         var success = function(items) {
@@ -923,7 +949,7 @@ function staticSearch(params, callback, gallery) {
             .then(configure)
             .then(prepare)
             .then(findItems)
-            .then(checkSearch)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
@@ -987,6 +1013,28 @@ function allresults(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
+        var filters = function(done, res) {
+            var _filters;
+            var filter;
+            var url;
+
+            if (!res.items) {
+                return done.fail(null, {});
+            }
+            filter = query.filters;
+            if (!filter || filter === 'undefined') {
+                return done(res);
+            }
+            _filters = res.items.filters.format();
+            if (filter !== _filters) {
+                done.abort();
+                _filters = (_filters ? '/' + _filters : '');
+                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+            done(res);
+        }.bind(this);
+
         var paginate = function(done, res) {
             var realPage;
 
@@ -1031,6 +1079,7 @@ function allresults(params, callback, gallery) {
             .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(filters)
             .then(paginate)
             .val(success);
     }
@@ -1144,15 +1193,22 @@ function filter(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var appf, appliedString;
+        var platform = this.app.session.get('platform');
 
-        if (params.filters) {
-            appf = params.filters;
-            appliedString = params.filters;
-        }
+        var redirect = function(done) {
+            if (platform !== 'html5') {
+                done.abort();
+                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/filter', ''));
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             params.location = this.app.session.get('siteLocation');
+            params.offset = 0;
+            params.pageSize = 0;
+            params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
+
             if (params.search) {
                 params.searchTerm = params.search;
                 delete params.search;
@@ -1166,6 +1222,7 @@ function filter(params, callback) {
             }
             delete params.platform;
             delete params.page;
+            delete params.filters;
             done();
         }.bind(this);
 
@@ -1178,37 +1235,15 @@ function filter(params, callback) {
             }, {
                 readFromCache: false
             }, function afterFetch(err, res) {
-                done(res.items.meta.filters);
+                done(res.items.filters);
             }.bind(this));
         }.bind(this);
 
-        var findApplied = function (done, filters) {
-
-            function getFilters(arr) {
-                var fil;
-                var obj = {};
-
-                for (var i = 1; i < arr.length; i++) {
-                    fil = arr[i].split('_');
-                    obj[fil[0]] = [];
-                    for (var j = 1; j < fil.length; j++) {
-                        obj[fil[0]].push(fil[j]);
-                    }
-                }
-
-                return obj;
-            }
-            if (appf) {
-                appf = getFilters(appf.split('-'));
-            }
-            done(filters);
-        };
-
         var success = function(filters) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, 'items/filter', {
-                filters: filters,
-                appliedFilter: appf,
-                appliedstring: appliedString
+                filters: filters
             });
         }.bind(this);
 
@@ -1217,9 +1252,9 @@ function filter(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(find)
-            .then(findApplied)
             .val(success);
     }
 }
@@ -1228,6 +1263,15 @@ function sort(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+
+        var redirect = function(done) {
+            if (platform !== 'html5') {
+                done.abort();
+                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/sort', ''));
+            }
+            done();
+        }.bind(this);
 
         var build = function(done) {
             var options = [
@@ -1246,6 +1290,8 @@ function sort(params, callback) {
         }.bind(this);
 
         var success = function(options) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, 'items/sort', {
                 sorts: options
             });
@@ -1256,6 +1302,7 @@ function sort(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(build)
             .val(success);
     }

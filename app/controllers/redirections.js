@@ -129,12 +129,13 @@ module.exports = {
             domain: location.split('.').slice(1).join('.')
         });
         helpers.common.redirect.call(this, 'http://' + location, null, {
-            status: 302
+            status: 302,
+            pushState: false
         });
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
-            return helpers.common.redirect.call(this, '/' + params.path);
+            return helpers.common.redirect.call(this, this.app.session.get('url').replace('.php', ''));
         }
         statsd.increment(['redirections', 'php', this.app.session.get('path')]);
         helpers.common.redirect.call(this, '/');
@@ -192,6 +193,50 @@ module.exports = {
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('/-p-');
+            url.push(page);
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearchig: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/q/');
+        url.push(params.search);
+        if (params.catId) {
+            url.push('/c-');
+            url.push(params.catId);
+        }
+        url.push('/');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('-p-');
+            url.push(page);
+        }
+        url.push('-ig');
+        if (filters && filters !== 'undefined') {
+            url.push('/');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearch: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/q/');
+        url.push(params.search);
+        if (params.catId) {
+            url.push('/c-');
+            url.push(params.catId);
+        }
         if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
             url.push('/-p-');
             url.push(page);

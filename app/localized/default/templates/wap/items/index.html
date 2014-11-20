@@ -1,19 +1,21 @@
 <tr>
     <td>
-        <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
-            <tbody>
-                <tr>
-                    <td style="border-top: solid thin #808080;">
-                        <h1>
-                            <strong style="color: #0075BD;">{{subcategory.trName}}</strong>
-                            {% if subcategory.counter %}
-                                <small style="color: #999;">({{subcategory.counter}})</small>
-                            {% endif %}
-                        </h1>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        {% if subcategory %}
+            <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#FFFFFF">
+                <tbody>
+                    <tr>
+                        <td style="border-top: solid thin #808080;">
+                            <h1>
+                                <strong style="color: #0075BD;">{{subcategory.trName}}</strong>
+                                {% if subcategory.counter %}
+                                    <small style="color: #999;">({{subcategory.counter}})</small>
+                                {% endif %}
+                            </h1>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
         {% view 'locations/select' %}
         {% set templateName = template + '/partials/search.html' %}
         {% include templateName %}

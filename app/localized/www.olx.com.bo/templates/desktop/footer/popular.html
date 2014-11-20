@@ -1,0 +1,32 @@
+{% set totalColumns = 2 %}
+<div class="title-bar">
+    <h3 class="title">{{ dictionary["selectregion.SelectCityStateIn"] | replace('<<COUNTRY>>',location.name)}}</h3>
+</div>
+{% set itemsPerColumn = ( ( (topCities.length + 1) / totalColumns ) | round(0, 'ceil') ) %}
+<div class="popular-topcities">
+    <h3 class="popular-title">{{ dictionary["popularsearchesbody.PopularCities"] }}</h3>
+    <ul class="popular-list popular-list-first">
+        {% for city in topCities %}
+            <li><a href="{{ '/' | link({location: city.url}) }}">{{ city.name }}, {{ city.stateAbbreviation }}</a></li>
+        {% if loop.index%itemsPerColumn == 0 %}
+            </ul>
+            <ul class="popular-list">
+        {% endif%}
+        {% endfor %}
+        <li><a href="{{ '/all-states' | link }}">{{ dictionary["countryoptions.OtherCities"] }}</a></li>
+    </ul>
+</div>
+{% set itemsPerColumn = ( ( (states.length + 1 ) / totalColumns ) | round(0, 'ceil') ) %}
+<div class="popular-states">
+    <h3 class="popular-title">{{ dictionary["misc.States"] }}</h3>
+    <ul class="popular-list popular-list-first">
+        {% for state in states %}
+            <li><a href="{{ '/' | link({location: state.url}) }}">{{ state.name }}</a></li>
+        {% if loop.index%itemsPerColumn == 0 %}
+            </ul>
+            <ul class="popular-list">
+        {% endif%}
+        {% endfor %}
+        <li><a href="{{ '/all-states' | link }}">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
+    </ul>
+</div>

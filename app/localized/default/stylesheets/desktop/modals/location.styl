@@ -4,19 +4,28 @@
         .modal-wrapper {
 
             .modal-container {
-                width: 720px;
+                max-height: 500px;
+                overflow: hidden;
+                width: 980px;
 
                 .modal-header {
                     background: $greyBoxBg;
-                    border-bottom: 1px solid #ddd;
+                    border-bottom: 1px solid $greyBorders;
                     padding: 15px 40px 15px 20px;
 
                     .modal-title {
                         font-size: $xl;
                     }
                 }
+                .modal-content {
+                    max-height: 400px;
+                    overflow: auto;
+                    padding: 20px 0 0 0;
+                    margin: 0 0 20px 0;
+                }
                 .location-content {
-                    padding: 10px 20px;
+                    clear-fix();
+                    padding-left: 20px;
 
                     > a {
                         display: block;
@@ -31,18 +40,18 @@
 
                     .column {
                         float: left;
-                        width: 50%;
-
+                        width: 48%;
+                        &:last-child {
+                            margin-left: 2%;
+                        }
                         h4 {
-                            border-bottom: 1px solid #ddd;
-                            font-weight: bold;
+                            border-bottom: 1px solid $greyBorders;
                             font-size: $m;
+                            font-weight: bold;
                             margin: 0 0 10px 0;
                             padding-bottom: 10px;
+                            width: 100%;
 
-                            &:first-child {
-                                width:95%;
-                            }
                         }
 
                         .modal-cities {
@@ -50,7 +59,9 @@
 
                             li {
                                 line-height: 1.3;
-                                padding-bottom: 10px;
+                                padding-bottom: 5px;
+                                float: left;
+                                width: 50%;
                             }
                         }
                     }

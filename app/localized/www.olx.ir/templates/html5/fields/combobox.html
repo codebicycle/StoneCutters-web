@@ -1,0 +1,19 @@
+{% if field.values.length == 1 %}
+    <label>{{field.label}} <strong>{{ field.values[0].value }}</strong></label>
+    <input type="hidden" id="select-{{field.name}}" name="{{field.name}}" value="{{ field.values[0].key }}">
+{% else %}
+    <label>{{field.label}}</label>
+    {% if field.name == "experience_from" or field.name == "experience_to" %}
+	    <select id="select-{{field.name}}" name="{{field.name}}">
+	        {% for value in field.values %}
+	            <option value="{{value.key}}"{% if form and form.values and form.values[field.name] and form.values[field.name] == value.key %} selected="selected"{% endif %}>{{ value.value | persianDigits }}</option>
+	        {% endfor %}
+	    </select>    
+    {% else %}
+	    <select id="select-{{field.name}}" name="{{field.name}}">
+	        {% for value in field.values %}
+	            <option value="{{value.key}}"{% if form and form.values and form.values[field.name] and form.values[field.name] == value.key %} selected="selected"{% endif %}>{{value.value}} lalalalal</option>
+	        {% endfor %}
+	    </select>
+    {% endif %}
+{% endif %}

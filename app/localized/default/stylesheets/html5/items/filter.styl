@@ -1,96 +1,141 @@
 .items_filter_view {
-	font-size: .875rem;
-	color: #494949;
+    font-size: .875rem;
+    color: #494949;
 
-	form.filters {
+    section.filters {
 
-		fieldset {
-			padding: 1.250rem .625rem;
-			border: 0;
-			border-bottom: 1px solid #ccc;
-			&.center {
-				text-align: center;
-				position: fixed;
-				bottom: 0;
-				width: 100%;
-				box-sizing: border-box;
-			}
-			&.no-border {
-				border: 0;
-			}
-			.left,
-			.right {
-				width: 48%;
-				box-sizing: border-box;
-				label {
-					width: 35%;
-					padding: .625rem 0;
-				}
-			}
-			.left{
-				float: left;
-			}
-			.right {
-				float: right;
-			}
-		}
+        .filter {
+            border-bottom: 1px solid #ccc;
+            overflow: hidden;
+        }
 
-		strong {
-			display: block;
-			margin-bottom: 10px;
-		}
+        .title,
+        .location {
+            box-sizing: border-box;
+            display: inline-block;
+            padding: 1.250rem .625rem;
+            width: 100%;
+        }
 
-		label {
-			float: left;
-			padding-right: .625em;
-			&.block {
-				width: 100%;
-			}
-		}
+        .title {
+            &::after {
+                background: url(imageUrl/images/html5/icon_flechas.png) left bottom no-repeat;
+                content: '';
+                font-size: 0;
+                float: right;
+                position: relative;
+                top: 5px;
+                height: 5px;
+                line-height: 0;
+                width: 9px;
+            }
+            &.active {
+                background: #e0f4ff;
+                font-weight: bold;
+                &::after {
+                    background-position: left top;
+                }
+            }
+            &.selected {
+                font-weight: bold;
+            }
+        }
 
-		input[type="number"] {
-			float: left;
-			border: 1px solid #ccc;
-			padding: .625rem .313em;
-			width: 65%;
-			box-sizing: border-box;
-			border-radius: 3px;
-		}
+        .location {
+            .bold {
+                float: right;
+                font-weight: bold;
+                color: #4275ba;
+                &::after {
+                    content: '';
+                    font-size: 0;
+                    line-height: 0;
+                    display: inline-block;
+                    width: 5px;
+                    height: 9px;
+                    background: url(imageUrl/images/html5/nextArrow.png) no-repeat;
+                    margin-left: 6px;
+                }
+            }
+        }
 
-		input[type="submit"] {
-			padding: .625rem 1.875rem;
-			text-transform: uppercase;
-			font-weight: bold;
-			color: #fff;
-		}
+        .clean-filters {
+            color: #4275ba;
+            display: inline-block;
+            &.range {
+                margin-top: 10px;
+            }
+        }
 
-		input[type="checkbox"],
-		input[type="radio"] {
-			float: right;
-		}
+        input[type="number"] {
+            float: left;
+            padding: .625rem .313em;
+            width: 39%;
+            margin-right: 5%;
+            box-sizing: border-box;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
 
-		a {
-			float: right;
-			color: #4275ba;
+        .range-submit {
+            display: inline-block;
+            box-sizing: border-box;
+            border-radius: 3px;
+            padding: .625rem .313em;
+            border: 1px solid #ccc;
+            background: #ccc;
+            width: 35px;
+            &::before {
+                background: url(imageUrl/images/html5/arrow_sprite.png) left bottom no-repeat;
+                content: '';
+                display: inline-block
+                font-size: 0;
+                height: 9px;
+                line-height: 0;
+                vertical-align: middle;
+                width: 7px;
+            }
+        }
 
-			&.bold {
-				font-weight: bold;
-			}
-			&.bold::after {
-				content: '';
-				font-size: 0;
-				line-height: 0;
-				width: 5px;
-				height: 9px;
-				background: url(imageUrl/images/html5/nextArrow.png) no-repeat;
-				margin-left: 6px;
-				display: inline-block;
-			}
-		}
-	}
+        .dropdown {
 
-	.filter-btns {
-		border-radius: 3px;
-	}
+            &.hide {
+                display: none;
+            }
+
+            li,
+            &.range {
+                border-top: 1px solid #fff;
+            }
+
+            &.range {
+                padding: .625rem .625rem 1.250rem;
+                background: #ecf8ff;
+            }
+
+            li {
+                background: #ecf8ff;
+                box-sizing: border-box;
+                float: left;
+                padding: 1.250rem .625rem;
+                width: 100%;
+                &.active {
+                    font-weight: bold;
+                }
+            }
+            input[type="checkbox"] {
+                float: left;
+                margin-top: 1px;
+            }
+            .label {
+                float: left;
+                margin-left: 5px;
+            }
+            .count {
+                color: #ccc;
+            }
+        }
+
+    }
 
 }

@@ -1,0 +1,28 @@
+<header id="topBar">
+    <a href="{{ '/' | link }}" class="logo">{{ location.url | replace('www.','')}}</a>
+    <ul class="header-links">
+        {% if not user %}
+            <li class="logOut"><a href="{{ '/login' | link }}" class="btns blue header-link"></a></li>
+        {% elif user.unreadMessagesCount > 0 %}
+            <li class="logInMsg"><span class="btns blue"></span></li>
+        {% else %}
+            <li class="logIn"><span class="btns blue"></span></li>
+        {% endif %}
+        <li class="postBtn{% if not postButton %} disabled{% endif %}">
+            {% if location.current %}
+                <a href="{{ ['/posting', postLink] | join('') | link }}" class="btns orange posting-link trackMe">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% else %}
+                <a href="{{ '/location?target=posting' | link }}" class="btns orange posting-link trackMe" data-tracking="Posting-ClickSelectLocation" >{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% endif %}
+        </li>
+    </ul>
+</header>
+{% if user %}
+<menu id="myOlx">
+        <ul class="header-links" >
+            <li><a href="{{ '/myolx/myadslisting' | link }}" class="header-link" >{{ dictionary["myolx.MyAds"] }}</a></li>
+            <li><a href="{{ '/myolx/favoritelisting' | link }}" class="header-link" >{{ dictionary["myolx.MyFavorites"] }}</a></li>
+            <li><a href="{{ '/logout' | link }}" class="header-link" >{{ dictionary["myolx.SignOut"] }}</a></li>
+        </ul>
+    </menu>
+{% endif %}

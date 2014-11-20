@@ -1,0 +1,18 @@
+<h3 class="description-title">{{ dictionary["itemslisting.NewAdDetails"] }}</h3>
+{% if item.optionals and item.optionals.length > 1 %}
+    <div class="text with-optionals">
+        {{ item.description }}
+    </div>
+    <ul class="optionals">
+        {% for option in item.optionals %}
+            <li>
+                <span>{{ option.label }}</span>
+                <span>{{ option.value }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="text">
+        {{ item.description }}
+    </div>
+{% endif %}

@@ -46,6 +46,7 @@ function isEnabled(page) {
 function getParams(page, options) {
     var location = this.app.session.get('location');
     var language = this.app.session.get('selectedLanguage');
+    var url = this.app.session.get('url');
     var params = utils.get(configTracking, ['hydra', 'params', location.url], {});
     var pageName = common.getPageName.call(this, page, options);
 
@@ -58,6 +59,9 @@ function getParams(page, options) {
         param.call(this, params, options);
     }, this);
 
+    if (url && url.indexOf('?')) {
+        params = _.defaults(params, utils.parse(url.split('?').pop()));
+    }
     return {
         page: pageName,
         params: JSON.stringify(params)

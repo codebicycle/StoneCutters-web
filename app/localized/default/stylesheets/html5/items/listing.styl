@@ -1,4 +1,5 @@
 .item-listing {
+    overflow: hidden;
     background: #DDD;
 
     a {
@@ -55,6 +56,19 @@
         font-weight: bold;
         line-height: 1;
         text-align: right;
+    }
+    
+    .status {
+        color: #FFF;
+        font-size: 12px;
+        padding: 3px 6px;
+        margin-bottom: 7px;
+        &.pending {
+            background-color: orange;
+        }
+        &.rejected {
+            background-color: red;
+        }
     }
 }
 @media only screen and (min-width: 768px) {
