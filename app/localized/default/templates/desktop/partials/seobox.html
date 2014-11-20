@@ -7,7 +7,7 @@
       (relateds and relateds.length > 0) or
       (levelPath and levelPath.length > 0) or
       (wikititles and wikititles.length > 0) %}
-    <section id="seo-box" class="{{ seoFrom if seoFrom }}" >
+    <section id="seo-box" {{ 'class="' + seoFrom + '"' if seoFrom }}>
         {% if populars.length > 0 %}
             <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
             <ul>
@@ -25,8 +25,7 @@
                 {% endfor %}
             </ul>
         {% endif %}
-
-        {% if levelPath.length > 0 or wikititles.length > 0 %}
+        {% if levelPath or wikititles.length > 0 %}
             {% include (template + "/partials/seolevelpath.html") %}
         {% endif %}
     </section>

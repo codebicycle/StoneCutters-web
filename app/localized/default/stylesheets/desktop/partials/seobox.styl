@@ -26,4 +26,22 @@
             }
         }
     }
+    .level-path-bottom {
+        padding: 0 10px;
+        span {
+            font-size: $xs;
+            &::before {
+                color: $greyStrong;
+                font-size: remify(7px);
+            }
+        }
+    }
+    &.seo-item-page {
+        width: 640px;
+    }
+    &.seo-listing-page {
+        .level-path-bottom {
+            margin-top: 20px;
+        }
+    }
 }

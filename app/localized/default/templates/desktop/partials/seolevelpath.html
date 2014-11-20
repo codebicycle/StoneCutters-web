@@ -1,8 +1,8 @@
-<div id="level-path-bottom">
+<div class="level-path-bottom">
     {% if levelPath.locationLevel.length > 0 %}
         <div class="breadcrumb">
             {% for level in levelPath.locationLevel %}
-                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+                <span {{ 'class="icons icon-arrow"' if not loop.first }} >
                     <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
                 </span>
             {% endfor %}
@@ -11,7 +11,7 @@
     {% if levelPath.categoryLevel.length > 0 %}
         <div class="breadcrumb">
             {% for level in levelPath.categoryLevel %}
-                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+                <span {{ 'class="icons icon-arrow"' if not loop.first }} >
                     <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
                 </span>
             {% endfor %}
@@ -20,7 +20,7 @@
     {% if levelPath.childCategoryLevel.length > 0 or wikititles.length > 0 %}
         <div class="breadcrumb">
             {% for level in levelPath.childCategoryLevel %}
-                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+                <span {{ 'class="icons icon-arrow"' if not loop.first }} >
                     <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
                 </span>
             {% endfor %}
