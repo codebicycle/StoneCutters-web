@@ -310,6 +310,15 @@ function messages(params, callback) {
         var _params;
         var user;
 
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
         var prepare = function(done) {
             user = this.app.session.get('user');
             if (!user) {
@@ -362,6 +371,15 @@ function readmessages(params, callback) {
         var deleted;
         var _params;
         var user;
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             user = this.app.session.get('user');

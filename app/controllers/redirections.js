@@ -169,7 +169,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
@@ -194,7 +194,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
