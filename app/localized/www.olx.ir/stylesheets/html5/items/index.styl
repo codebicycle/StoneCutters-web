@@ -33,12 +33,15 @@ section#itemListing ul.gallery-list li a p {
     margin: 0 .3125rem 0 0;
     padding: .4rem 0 .3rem;
 }
-section#itemListing ul.gallery-list li a h3 {
+section#itemListing ul.gallery-list li a h3,
+section#itemListing ul.gallery-list li a div.price {
     position: relative;
     float: left;
     padding: 0 0 0 .3125rem;
     right: 0;
     bottom: 0;
+    width: 100%;
+    font-size: .9375rem;
 }
 section#itemListing ul.gallery-list li a .title {
     height: auto;
@@ -49,9 +52,6 @@ section#itemListing ul.gallery-list li a .title {
 section#itemListing ul.gallery-list li a .title h2 {
     height: auto;
 }
-
-
-
 section#itemListing #itemPagination {
     width: 100%;
     height: 33px;
@@ -77,25 +77,22 @@ section#itemListing #itemPagination .arrow.leftA {
 section#itemListing #itemPagination .arrow.leftD {
     background: url(imageUrl/images/html4/rightD.png) no-repeat;
 }
-
 section#itemListing #itemPagination .center {
     height: 33px;
     display: inline-block;
-    padding: 8px 0;
+    padding: 0;
     text-align: center;
-    line-height: 17px;
-    vertical-align: top;
 }
-
 section#itemListing #itemPagination .center a, section#itemListing #itemPagination .center strong {
-    padding: 0 8px;
-    display: inline-block;
+    float: right;
+    padding: 0 6px;
+    margin: 7px 0 0;
+    display: inline;
     vertical-align: top;
     color: #333333;
-    border-left: solid thin #CCC;
 }
 section#itemListing #itemPagination .center a.last, section#itemListing #itemPagination .center strong.last {
-    border-left-width: 0;
+    border-left: 0 solid #000000;
 }
 
 section#itemListing #itemPagination a span {
@@ -110,9 +107,6 @@ section#itemListing #itemPagination a:first-child span {
 section#itemListing #itemPagination a:last-child span {
     right: 0;
 }
-
-
-
 
 @media only screen and (min-width : 768px) {
     section#itemListing ul.gallery-list li a {
