@@ -76,7 +76,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                     location: {
                         model: 'Location',
                         params: {
-                            location: siteLocation
+                            location: siteLocation,
+                            seo: true
                         }
                     }
                 }, {
