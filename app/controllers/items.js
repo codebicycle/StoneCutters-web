@@ -8,6 +8,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
+var utils = require('../../shared/utils');
 var Item = require('../models/item');
 
 module.exports = {
@@ -291,6 +292,15 @@ function gallery(params, callback) {
         var pos = Number(params.pos) || 0;
         var siteLocation = this.app.session.get('siteLocation');
 
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;
@@ -367,6 +377,7 @@ function gallery(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(fetch)
             .then(check)
@@ -382,6 +393,15 @@ function map(params, callback) {
         var itemId = params.itemId;
         var slugUrl = params.title;
         var siteLocation = this.app.session.get('siteLocation');
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             if (user) {
@@ -448,6 +468,7 @@ function map(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findItem)
             .then(checkItem)
@@ -463,6 +484,15 @@ function reply(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             params.id = params.itemId;
@@ -523,6 +553,7 @@ function reply(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findItem)
             .then(checkItem)
@@ -536,6 +567,15 @@ function success(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'html5' || platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             params.id = params.itemId;
@@ -587,6 +627,7 @@ function success(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findItem)
             .then(checkItem)
@@ -595,6 +636,11 @@ function success(params, callback) {
 }
 
 function searchfilterig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     searchfilter.call(this, params, callback, '-ig');
 }
@@ -605,6 +651,11 @@ function searchfilter(params, callback, gallery) {
 }
 
 function searchig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     search.call(this, params, callback, '-ig');
 }
@@ -616,15 +667,14 @@ function search(params, callback, gallery) {
         var page = params ? params.page : undefined;
         var platform = this.app.session.get('platform');
         var languages = this.app.session.get('languages');
+        var path = this.app.session.get('path');
+        var starts = '/nf';
         var query;
         var url;
         var category;
         var subcategory;
 
         var redirect = function(done) {
-            var path = this.app.session.get('path');
-            var starts = '/nf/';
-
             if (!params.search || _.isEmpty(params.search.trim())) {
                 done.abort();
                 if (platform === 'desktop') {
@@ -637,15 +687,15 @@ function search(params, callback, gallery) {
                     }
                 });
             }
-            if (path.slice(0, starts.length) !== starts) {
+            if (!utils.startsWith(path, starts)) {
                 done.abort();
-                return helpers.common.redirect.call(this, ['/nf', path].join(''));
+                return helpers.common.redirect.call(this, [starts, path].join(''));
             }
             done();
         }.bind(this);
 
         var buildUrl = function(done) {
-            url = ['/nf/'];
+            url = [starts, '/'];
             gallery = gallery || '';
 
             if (params.categoryId) {
@@ -712,9 +762,9 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var filters = function(done, res) {
-            var _filters;
+            var url = this.app.session.get('url');
             var filter;
-            var url;
+            var _filters;
 
             if (!res.items) {
                 return done.fail(null, {});
@@ -726,8 +776,7 @@ function search(params, callback, gallery) {
             _filters = res.items.filters.format();
             if (filter !== _filters) {
                 done.abort();
-                _filters = (_filters ? '/' + _filters : '');
-                url = [this.app.session.get('path').split('/-').shift(), _filters, URLParser.parse(this.app.session.get('url')).search || ''].join('');
+                url = [path.split('/-').shift(), (_filters ? '/' + _filters : ''), URLParser.parse(url).search || ''].join('');
                 return helpers.common.redirect.call(this, url);
             }
             done(res);
@@ -933,7 +982,7 @@ function staticSearch(params, callback, gallery) {
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
-            if (!query.search) {
+            if (!query.search || query.search === 'undefined') {
                 console.log('[OLX_DEBUG]', 'tracker analytics keyword', '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
             }
 
@@ -983,6 +1032,9 @@ function allresults(params, callback, gallery) {
             var path = this.app.session.get('path');
             var starts = '/nf/';
 
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
             if (typeof page !== 'undefined' && !isNaN(page) && page > maxPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
