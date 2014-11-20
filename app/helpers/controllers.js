@@ -140,7 +140,6 @@ module.exports = {
         promise.val(controller.bind(this));
 
         function fail(err) {
-            console.log('APP ERROR', err.stack);
             this.app.session.persist({
                 error: err
             });
