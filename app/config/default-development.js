@@ -98,7 +98,7 @@ module.exports = {
             },
             listingFilters: {
                 worldwide: false,
-                countries: ['www.olx.com.ar']
+                countries: []
             },
             interstitialByADX: {
                 worldwide: false,
