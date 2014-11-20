@@ -132,6 +132,12 @@ module.exports = {
             status: 302
         });
     },
+    editphp: function(params, callback) {
+        if (params.editid) {
+            return helpers.common.redirect.call(this, '/iid-' + params.editid);
+        }
+        helpers.common.redirect.call(this, '/');
+    },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
             return helpers.common.redirect.call(this, this.app.session.get('url').replace('.php', ''));
@@ -163,7 +169,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
@@ -188,7 +194,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');

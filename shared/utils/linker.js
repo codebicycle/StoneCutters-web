@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var qs = require('./querystring');
+var string = require('./string');
 var esi = require('../../app/modules/esi');
 
 var linkParams = {
@@ -77,7 +78,7 @@ function fullizeUrl(href, app) {
     var protocol = app.session.get('protocol') + '://';
     var host;
 
-    if (href.slice(0, protocol.length) !== protocol) {
+    if (!string.startsWith(href, protocol)) {
         host = app.session.get('host');
         href = [protocol, host, (href.indexOf('/') ? '/' : ''), href].join('');
     }
