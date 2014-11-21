@@ -127,4 +127,7 @@ module.exports = {
             'q/:search/p-:page([0-9]+)'
         ]
     },
+    'redirections#staticSearchMobile': {
+        url: /s\/.*/
+    }
 };
