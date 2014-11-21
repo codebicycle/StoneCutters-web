@@ -30,6 +30,18 @@ module.exports = Base.extend({
         this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
         this.app.router.appView.on('location:end', this.restore.bind(this));
         this.app.router.on('action:end', this.onActionEnd.bind(this));
+        if (helpers.features.isEnabled.call(this, 'smartBanner')) {
+            if ( !(/(iPad|iPhone|iPod).*OS [6-7].*AppleWebKit.*Mobile.*Safari/.test(navigator.userAgent)) && !this.app.session.get('interstitial') ) {
+                $.smartbanner({
+                    title: 'OLX Free Classifieds',
+                    author: 'OLX Inc.',
+                    daysHidden: 0,
+                    daysReminder: 0,
+                    icon: 'images/html5/app_logo.jpeg',
+                    layer: true
+                });
+            }
+        }
     },
     onActionEnd: function() {
         if (this.isPostButtonEnabled()) {
@@ -135,6 +147,7 @@ module.exports = Base.extend({
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);
+
         this.$('.topBarFilters a').attr('data-tracking', route+'-cancel');
     },
     restore: function() {
