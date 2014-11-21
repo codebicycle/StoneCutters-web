@@ -7,7 +7,8 @@ module.exports = function(options) {
         return require(statsdModule)(options);
     }
     return {
-        increment: increment
+        increment: increment,
+        gauge: gauge
     };
 };
 
@@ -26,3 +27,5 @@ function increment(metric, value) {
         cache: false
     });
 }
+
+function gauge() {}
