@@ -51,8 +51,7 @@ function show(params, callback, gallery) {
     function controller() {
 
         var redirect = function(done){
-            var seo = Seo.instance(this.app);
-            var categoryId = seo.isCategoryDeprecated(params.catId);
+            var categoryId = Seo.isCategoryDeprecated(params.catId);
 
             gallery = gallery || '';
 
@@ -114,13 +113,12 @@ function handleItems(params, promise, gallery) {
     var url;
 
     var configure = function(done, _category, _subcategory) {
-        var seo = Seo.instance(this.app);
         var currentRouter = ['categories', 'items'];
 
         category = _category;
         subcategory = _subcategory;
 
-        seo.reset(this.app, {
+        this.app.seo.reset(this.app, {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
@@ -267,12 +265,11 @@ function handleShow(params, promise) {
     var category;
 
     var configure = function(done, _category) {
-        var seo = Seo.instance(this.app);
         var currentRouter = ['categories', 'subcategories'];
 
         category = _category;
 
-        seo.reset(this.app, {
+        this.app.seo.reset(this.app, {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);

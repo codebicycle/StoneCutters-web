@@ -15,6 +15,9 @@ module.exports = Base.extend({
     },
     initialize: function() {
         Session.call(this, true);
+        this.seo = new Seo({}, {
+            app: this
+        });
         _.extend(this.fetcher, Fetcher);
         _.extend(this.fetcher.modelStore, ModelStore);
         _.extend(this.fetcher.collectionStore, CollectionStore);
@@ -71,7 +74,6 @@ module.exports = Base.extend({
     },
     getSpecs: function(dependencies) {
         var specs = {};
-        var seo = Seo.instance(this);
         var languageId = this.session.get('languages')._byId[this.session.get('selectedLanguage')].id;
         var location = this.session.get('location').url;
 
@@ -83,7 +85,7 @@ module.exports = Base.extend({
                         params: {
                             location: location,
                             languageId: languageId,
-                            seo: seo.isEnabled()
+                            seo: Seo.isEnabled(location)
                         }
                     };
                 break;
