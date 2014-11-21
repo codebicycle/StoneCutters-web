@@ -254,5 +254,8 @@ module.exports = {
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearchMobile: function(params, callback) {
+        helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
     }
 };
