@@ -120,18 +120,26 @@ module.exports = {
         helpers.common.redirect.call(this, '/myolx/edititem/' + params.itemId);
     },
     redirecttomain: function(params, callback) {
-        var location = this.app.session.get('siteLocation');
+        var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('location').url;
+        var path = this.app.session.get('path');
 
         this.app.session.persist({
-            olx_mobile_full_site_redirect: true
+            olx_mobile_full_site_redirect: true,
+            siteLocation: location
         }, {
-            maxAge: 2 * HOUR,
-            domain: location.split('.').slice(1).join('.')
+            maxAge: 2 * HOUR
         });
-        helpers.common.redirect.call(this, 'http://' + location, null, {
+        helpers.common.redirect.call(this, 'http://' + siteLocation + path, null, {
             status: 302,
             pushState: false
         });
+    },
+    editphp: function(params, callback) {
+        if (params.editid) {
+            return helpers.common.redirect.call(this, '/iid-' + params.editid);
+        }
+        helpers.common.redirect.call(this, '/');
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
@@ -164,7 +172,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
@@ -189,7 +197,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');

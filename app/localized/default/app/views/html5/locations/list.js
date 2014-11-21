@@ -80,6 +80,7 @@ module.exports = Base.extend({
         var success = function(res, body) {
             var url;
             var params;
+            var location = this.app.session.get('location').url;
 
             if (res.children) {
                 if (res.children[0].children) {
@@ -98,11 +99,12 @@ module.exports = Base.extend({
                     location: url
                 };
             }
-
-            helpers.common.redirect.call(this.app.router || this, '/', params, {
-                    status: 200
-                }
-            );
+            if (location == res.url) {
+                helpers.common.redirect.call(this.app.router || this, '/', params, {
+                        status: 200
+                    }
+                );
+            }
 
         }.bind(this);
 

@@ -14,6 +14,15 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
         var fetch = function(done) {
             var citiesParams = {
                 level: 'countries',
@@ -59,6 +68,7 @@ function list(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(fetch)
             .val(success);
     }

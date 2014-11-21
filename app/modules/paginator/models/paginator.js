@@ -20,7 +20,7 @@ function initialize(attributes, options) {
 
     this.options = _.clone(options);
     if (total > 0) {
-        if (options.next) {
+        if (page < attrs.totalPages) {
             attrs.next = format.call(this, page + 1);
             attrs.last = format.call(this, attrs.totalPages);
         }

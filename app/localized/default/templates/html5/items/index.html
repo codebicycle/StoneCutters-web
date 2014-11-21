@@ -15,7 +15,7 @@
         </div>
     {% else %}
         {% view 'items/items' %}
-        {% if paginator.isEnabled() %}
+        {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
     {% endif %}

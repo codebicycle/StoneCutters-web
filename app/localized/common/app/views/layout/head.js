@@ -6,6 +6,7 @@ var config = require('../../../../../../shared/config');
 var Seo = require('../../../../../modules/seo');
 var helpers = require('../../../../../helpers');
 
+
 module.exports = Base.extend({
     className: 'layout_head_view',
     tagName: 'head',
@@ -17,7 +18,7 @@ module.exports = Base.extend({
         var smartBanner = helpers.features.isEnabled.call(this, 'smartBanner');
 
         return _.extend({}, data, {
-            head: seo.get('head'),
+            head: this.app.seo.get('head'),
             clientId: this.app.session.get('clientId'),
             icons: (~icons.indexOf(country) ? country : 'default'),
             smartBanner: smartBanner
