@@ -808,7 +808,8 @@ function search(params, callback, gallery) {
                 meta: items.meta,
                 filters: items.filters,
                 paginator: items.paginator,
-                search: query.search
+                search: query.search,
+                category: category ? category.toJSON() : undefined
             });
         }.bind(this);
 
