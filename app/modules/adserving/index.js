@@ -12,33 +12,48 @@ function getConfigAD(type) {
     return utils.get(configAdServing, [type], {});
 }
 
-function getSettings(slotname, category) {
+function getConfigTypes(config) {
+    return utils.get(config, ['types'], {});
+}
+
+function getSettings(category) {
+    var slotname = this.options.subId || this.options.subid;
     var configSlot = getConfigSlot(slotname);
+    var configTypes;
+    var configAD;
+    var adType;
+    var adParams;
     var settings = {
         enabled: false,
         slotname : slotname
     };
 
-    if(configSlot.enabled) {
-        var configTypes = utils.get(Object(configSlot), ['types'], {});
-        var adType;
-        var adParams = {
+    if (configSlot.enabled) {
+        configTypes = getConfigTypes(Object(configSlot));
+        adParams = {
             'container': slotname
         };
-
         _.each(configTypes, function eachTypes(obj, type) {
-            if(_.contains(obj.categories, category)){
+            if(!adType && _.contains(obj.categories, category)){
                 adType = type;
                 if(obj.params){
                     _.extend(adParams, obj.params);
                 }
             }
         });
+        configAD = getConfigAD(adType);
+        if (configAD.enabled) {
+            configAD.params = _.extend({}, configAD.params, adParams);
 
-        var configAD = getConfigAD(adType);
+            var countryCode = this.app.session.get('location').abbreviation;
+            var repKey = '[countrycode]';
 
-        if(configAD.enabled) {
-            _.extend(configAD.params, adParams);
+            configAD.options = _.extend({}, configAD.options, {
+                pubId: configAD.options.pubId.replace(repKey, countryCode.toLowerCase()), //REVIEW
+                query: 'Playa', //TODO
+                channel: configAD.options.channel.replace(repKey, countryCode), //REVIEW
+                hl: this.app.session.get('selectedLanguage').split('-').shift()
+            });
 
             _.extend(settings, {
                 enabled : true,
