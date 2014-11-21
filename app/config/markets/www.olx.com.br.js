@@ -6,11 +6,5 @@ module.exports = {
             gallery: 36,
             related: 30
         }
-    },
-    seo: {
-        enabled: true,
-        popularSearches: true,
-        levelPath: true,
-        relatedListings: true
     }
 };
