@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'JETZT KOSTENLOSE APP LADEN',
     'misc.LessThan': 'Weniger als',
     'misc.NoResults': 'Wir haben nichts gefunden, aber wir haben, wonach Sie suchen!',
+    'misc.OtherPlaces_EM': 'Andere Standorte',
     'misc.Pending_BR': 'In Bearbeitung',
     'misc.PeopleWereAlsoInterestedIn': 'Besucher, die sich diese Annonce angeschaut haben, interessierten sich auch f\xFCr:',
     'misc.PhoneNumberNotValid': 'Die von Ihnen eingegebene Telefonnummer ist ung\xFCltig. Bitte \xFCberpr\xFCfen Sie sie.',

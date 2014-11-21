@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'T\xD6LTSE LE AZ INGYENES ALKALMAZ\xC1ST',
     'misc.LessThan': 'Kevesebb, mint',
     'misc.NoResults': 'Nem tal\xE1ltunk semmit, de biztosan megtal\xE1lja n\xE1lunk, amit keres!',
+    'misc.OtherPlaces_EM': 'M\xE1s helys\xE9gek',
     'misc.Pending_BR': 'F\xFCgg\u0151ben',
     'misc.PeopleWereAlsoInterestedIn': 'Azok, akik megn\xE9zt\xE9k ezt a hirdet\xE9st, az al\xE1bbiakat is \xE9rdekesnek tal\xE1lt\xE1k:',
     'misc.PhoneNumberNotValid': 'Az \xD6n \xE1ltal megadott telefonsz\xE1m \xE9rv\xE9nytelen. K\xE9rj\xFCk, ellen\u0151rizze!',

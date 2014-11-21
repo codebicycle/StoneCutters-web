@@ -90,41 +90,44 @@ module.exports = {
     },
     'redirections#allresultsig': {
         urls: [
-            'nf/all-results-ig-p-:page/:filters(-[a-zA-Z0-9_\\-\\.]+)',
+            'nf/all-results-ig-p-:page/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'nf/all-results-ig-p-:page'
         ]
     },
     'redirections#searchfilterig': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)',
-            'nf/:title-cat-:catId([0-9]+)-ig/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)',
-            'nf/-cat-:catId([0-9]+)-ig/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)',
-            'nf/cat-:catId([0-9]+)-ig/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)'
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/:title-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)'
         ]
     },
     'redirections#searchfilter': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/:search/:filters(-[a-zA-Z0-9_\\-\\.]+)'
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.]+)'
         ]
     },
     'redirections#staticSearchig': {
         urls: [
-            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)-ig/:filters(-[a-zA-Z0-9_\\-\\.]+)',
+            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)-ig/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)-ig',
-            'q/:search/p-:page([0-9]+)-ig/:filters(-[a-zA-Z0-9_\\-\\.]+)',
+            'q/:search/p-:page([0-9]+)-ig/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'q/:search/p-:page([0-9]+)-ig'
         ]
     },
     'redirections#staticSearch': {
         urls: [
-            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)/:filters(-[a-zA-Z0-9_\\-\\.]+)',
+            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)',
-            'q/:search/p-:page([0-9]+)/:filters(-[a-zA-Z0-9_\\-\\.]+)',
+            'q/:search/p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'q/:search/p-:page([0-9]+)'
         ]
     },
+    'redirections#staticSearchMobile': {
+        url: /^\/s\/.*/
+    }
 };

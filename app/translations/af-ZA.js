@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'KRY DIE GRATIS TOEPASSING',
     'misc.LessThan': 'Minder as',
     'misc.NoResults': 'Ons kon niks vind nie, maar ons het beslis waarna jy soek!',
+    'misc.OtherPlaces_EM': 'Ander plekke',
     'misc.Pending_BR': 'Hangende',
     'misc.PeopleWereAlsoInterestedIn': 'Mense wat hierdie advt. gesien het het ook belanggestel in:',
     'misc.PhoneNumberNotValid': 'Die selfoonnommer wat jy ingevoer het, is nie geldig nie. Gaan dit asseblief na.',

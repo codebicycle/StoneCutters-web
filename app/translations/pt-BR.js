@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'BAIXAR APLICATIVO GR\xC1TIS',
     'misc.LessThan': 'Menos de',
     'misc.NoResults': 'Ops! N\xE3o encontramos resultados para sua pesquisa, mas n\xF3s temos o que voc\xEA est\xE1 procurando!',
+    'misc.OtherPlaces_EM': 'Outros lugares',
     'misc.Pending_BR': 'Pendente',
     'misc.PeopleWereAlsoInterestedIn': 'Usu\xE1rios que viram este an\xFAncio tamb\xE9m se interessaram por:',
     'misc.PhoneNumberNotValid': 'O n\xFAmero de telefone que voc\xEA digitou n\xE3o \xE9 v\xE1lido. Por favor, confira.',

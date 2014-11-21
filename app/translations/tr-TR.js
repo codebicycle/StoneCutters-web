@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'UYGULAMAYI \xDCCRETS\u0130Z \u0130ND\u0130R\u0130N',
     'misc.LessThan': '\u015Eundan daha az:',
     'misc.NoResults': 'Bir \u015Fey bulamad\u0131k, ancak arad\u0131\u011F\u0131n\u0131z \u015Feyi not ettik!',
+    'misc.OtherPlaces_EM': 'Di\u011Fer yerler',
     'misc.Pending_BR': 'Beklemede',
     'misc.PeopleWereAlsoInterestedIn': 'Bu ilana bakanlar \u015Funlarla da ilgilendiler:',
     'misc.PhoneNumberNotValid': 'Girdi\u011Finiz telefon numaras\u0131 ge\xE7erli de\u011Fil. L\xFCtfen kontrol edin.',

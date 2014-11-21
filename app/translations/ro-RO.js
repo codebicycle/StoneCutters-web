@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DESC\u0102RCA\u0162I APLICA\u0162IA GRATUIT\u0102',
     'misc.LessThan': 'Mai pu\u0163in de',
     'misc.NoResults': 'Nu am g\u0103sit nimic, \xEEns\u0103 avem ceea ce c\u0103uta\u0163i!',
+    'misc.OtherPlaces_EM': 'Alte locuri',
     'misc.Pending_BR': '\xCEn a\u015Fteptare',
     'misc.PeopleWereAlsoInterestedIn': 'Persoanele care au vizualizat asta au fost interesa\u0163i \u015Fi de:',
     'misc.PhoneNumberNotValid': 'Num\u0103rul de telefon pe care l-a\u0163i introdus nu este valabil. V\u0103 rug\u0103m s\u0103 verifica\u0163i.',

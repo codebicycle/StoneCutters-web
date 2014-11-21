@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PATA PROG YA BURE',
     'misc.LessThan': 'Chini ya',
     'misc.NoResults': 'Hatukupata kitu chochote, lakini tuna kile unachotafuta!',
+    'misc.OtherPlaces_EM': 'Mahali pengine',
     'misc.Pending_BR': 'Inasubiri',
     'misc.PeopleWereAlsoInterestedIn': 'Watu ambao wameona tangazo hili pia walikuwa wanataka:',
     'misc.PhoneNumberNotValid': 'Namba ya simu uliyoingiza si halali. Tafadhali, angalia.',

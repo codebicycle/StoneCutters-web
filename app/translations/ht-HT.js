@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PRAN APLIKASYON GRATIS LA',
     'misc.LessThan': 'Mwens pase',
     'misc.NoResults': 'Nou pa te jwenn anyen, men nou gen sa w ap ch\xE8che a.',
+    'misc.OtherPlaces_EM': 'L\xF2t kote',
     'misc.Pending_BR': 'Ap tann',
     'misc.PeopleWereAlsoInterestedIn': 'Moun ki te f\xE8 anons sa a te enterese tou nan:',
     'misc.PhoneNumberNotValid': 'Nimewo telef\xF2n ou mete a pa valid. Tanpri, verifye.',

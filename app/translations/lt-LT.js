@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'GAUKITE NEMOKAM\u0104 PROGRAM\u0116L\u0118',
     'misc.LessThan': 'Ma\u017Eiau nei',
     'misc.NoResults': 'Mes nieko neradome, bet turime tai, ko ie\u0161kote!',
+    'misc.OtherPlaces_EM': 'Kitos vietos',
     'misc.Pending_BR': 'Nagrin\u0117jamas',
     'misc.PeopleWereAlsoInterestedIn': '\u0160\u012F skelbim\u0105 perskai\u010Diusius \u017Emones taip pat domino:',
     'misc.PhoneNumberNotValid': 'J\u016Bs\u0173 \u012Fvestas telefono numeris yra neteisingas. Patikrinkite.',

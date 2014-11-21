@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'F\xC5 GRATIS-APPEN',
     'misc.LessThan': 'Mindre enn',
     'misc.NoResults': 'Vi fant ikke noe, men vi har det du er ute etter!',
+    'misc.OtherPlaces_EM': 'Andre steder',
     'misc.Pending_BR': 'Avventer',
     'misc.PeopleWereAlsoInterestedIn': 'Mennesker som har sett denne annonsen var ogs\xE5 interessert i:',
     'misc.PhoneNumberNotValid': 'Telefonnummeret du tastet inn er ikke gyldig. Vennligst sjekk.',

@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'KUNIN ANG LIBRENG APP',
     'misc.LessThan': 'Mas maliit kaysa',
     'misc.NoResults': 'Wala kaming nahanap na anumang bagay, pero mayroon kami ng hinahanap mo!',
+    'misc.OtherPlaces_EM': 'Iba pang mga lugar',
     'misc.Pending_BR': 'Nakabinbin',
     'misc.PeopleWereAlsoInterestedIn': 'Mga taong nakakita na ng anunsyong ito ay interesado rin sa:',
     'misc.PhoneNumberNotValid': 'Hindi wasto ang numero ng telepono na ipinasok mo. Mangyaring tignan.',

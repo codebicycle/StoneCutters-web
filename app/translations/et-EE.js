@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'HANKIGE TASUTA RAKENDUS',
     'misc.LessThan': 'V\xE4hem kui',
     'misc.NoResults': 'Me ei leidnud midagi, kuid meil on olemas see, mida otsite!',
+    'misc.OtherPlaces_EM': 'Muud kohad',
     'misc.Pending_BR': 'Ootel',
     'misc.PeopleWereAlsoInterestedIn': 'Seda kuulutust vaadanud inimesed tundsid huvi ka alltoodu vastu:',
     'misc.PhoneNumberNotValid': 'Sisestatud telefoninumber on kehtetu. Palun kontrollige seda.',

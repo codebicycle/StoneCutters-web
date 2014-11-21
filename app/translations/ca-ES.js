@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'ACONSEGUEIX L\'APLICACI\xD3 GRATU\xCFTA',
     'misc.LessThan': 'Menys de',
     'misc.NoResults': 'No hem trobat cap resultat, per\xF2 segur que tenim el que busques!',
+    'misc.OtherPlaces_EM': 'Altres llocs',
     'misc.Pending_BR': 'Pendent',
     'misc.PeopleWereAlsoInterestedIn': 'Les persones que han vist aquest anunci tamb\xE9 s\'han interessat per:',
     'misc.PhoneNumberNotValid': 'El tel\xE8fon que has introdu\xEFt no \xE9s v\xE0lid. Si us plau, revisa\'l.',

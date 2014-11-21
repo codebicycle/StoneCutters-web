@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DAPATKAN APL GRATIS',
     'misc.LessThan': 'Kurang dari',
     'misc.NoResults': 'Kami tidak menemukan apa pun, tapi kami memiliki apa yang Anda cari!',
+    'misc.OtherPlaces_EM': 'Tempat lain',
     'misc.Pending_BR': 'Sedang menunggu',
     'misc.PeopleWereAlsoInterestedIn': 'Orang yang telah melihat iklan ini juga tertarik dengan:',
     'misc.PhoneNumberNotValid': 'Nomor telepon yang Anda masukkan tidak sah. Harap dicek.',

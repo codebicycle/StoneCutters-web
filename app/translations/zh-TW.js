@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': '\u7372\u53D6\u514D\u8CBB\u7A0B\u5F0F',
     'misc.LessThan': '\u5C11\u65BC',
     'misc.NoResults': '\u6C92\u6709\u641C\u7D22\u7D50\u679C\uFF0C\u4E0D\u904E\u6211\u5011\u6709\u60A8\u6240\u8981\u5C0B\u627E\u7684\u5546\u54C1\uFF01',
+    'misc.OtherPlaces_EM': '\u5176\u4ED6\u5730\u65B9',
     'misc.Pending_BR': '\u5F85\u5B9A',
     'misc.PeopleWereAlsoInterestedIn': '\u6AA2\u8996\u904E\u9019\u500B\u5EE3\u544A\u7684\u4EBA\u8FD8\u770B\u904E\uFF1A',
     'misc.PhoneNumberNotValid': '\u60A8\u8F38\u5165\u7684\u96FB\u8A71\u865F\u78BC\u7121\u6548\u3002\u8ACB\u6AA2\u67E5\u3002',

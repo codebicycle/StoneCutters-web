@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'SA\u0145EMIET BEZMAKSAS LIETOTNI',
     'misc.LessThan': 'Maz\u0101k par',
     'misc.NoResults': 'We didn\'t find anything, but we have what you are looking for!',
+    'misc.OtherPlaces_EM': 'Other places',
     'misc.Pending_BR': 'Atkar\u012Bgs',
     'misc.PeopleWereAlsoInterestedIn': 'Cilv\u0113ki, kas apskat\u012Bja \u0161o sludin\u0101jumu, ieinteres\u0113j\u0101s ar\u012B par:',
     'misc.PhoneNumberNotValid': 'T\u0101lru\u0146a numurs, ko ievad\u012Bj\u0101t, nav der\u012Bgs. L\u016Bdzu, p\u0101rbaudiet to.',

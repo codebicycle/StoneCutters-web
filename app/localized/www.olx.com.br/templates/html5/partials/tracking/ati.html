@@ -1,16 +1,12 @@
 <!-- Chamada do script de TV da TVdata -->
 <script type="text/javascript" src="http://tdp01.tvdata.com.br/?a=6&timeframe=300"></script>
- 
-<script type="text/javascript">
-    var xtcustom = JSON.parse('{{ tracking.params.ati.custom }}');
-</script>
-
-<!-- Chamada do script de integração da TVdata e AT Internet -->
-<script type="text/javascript" src="{{'/js/at_tvdata_sync.min.js' | static }}"></script>
 
 <script type="text/javascript">
     var atiapi = (atiapi || []);
+    var xtcustom = JSON.parse('{{ tracking.params.ati.custom }}');
 
+    atiapi.push(['config', 'domain', '{{ tracking.params.ati.domain }}']);
+    atiapi.push('tv-data');
     atiapi.push({
         xtdmc: '{{ tracking.params.ati.host }}',
         xtnv: document,

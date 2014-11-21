@@ -366,6 +366,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PREUZMITE BESPLATNU APLIKACIJU',
     'misc.LessThan': 'Manje od',
     'misc.NoResults': 'Nismo prona\u0161li ni\u0161ta, ali imamo ono \u0161to tra\u017Eite!',
+    'misc.OtherPlaces_EM': 'Ostala mesta',
     'misc.Pending_BR': 'Na \u010Dekanju',
     'misc.PeopleWereAlsoInterestedIn': 'Ljudi koji su videli ovaj oglas tako\u0111e su zainteresovani za:',
     'misc.PhoneNumberNotValid': 'Telefonski broj koji ste uneli nije va\u017Ee\u0107i. Proverite ga.',
