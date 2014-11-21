@@ -20,15 +20,15 @@ module.exports = Base.extend({
         });
     },
     postRender: function(){
-        var slotname = this.options.subid;
+        var slotname = this.options.pubId;
         var settings = this.getAdserving();
 
         this._checkAdsenseLib();
 
-        if(settings.type === 'CSA') {
-            window._googCsa('ads', settings.options, settings.params);
-        }
-        else if(settings.type === 'ADX') {
+        window._googCsa('ads', settings.options, settings.params);
+        /*if (settings.type === 'CSA') {
+        }*/
+        /*else if(settings.type === 'ADX') {
             var $gadx;
             window.google_ad_client = "ca-pub-9177434926134739";
             window.google_ad_slot = "4197936346";
@@ -41,11 +41,11 @@ module.exports = Base.extend({
                 src: '//pagead2.googlesyndication.com/pagead/show_ads.js'
             });
             $gadx.appendTo('#' + slotname);
-        }
+        }*/
     },
     getAdserving: function(){
         //var currentCategory = 410; // adx
-        var currentCategory = 362; // csa
+        var currentCategory = 185; // csa
         var settings = AdServing.getSettings.call(this, currentCategory);
 
         return settings;

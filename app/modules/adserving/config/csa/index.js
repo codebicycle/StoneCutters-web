@@ -1,5 +1,5 @@
 'use strict';
-
+// CSA Ads Default Config
 module.exports = {
     enabled : true,
     options: {

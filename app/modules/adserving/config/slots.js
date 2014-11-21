@@ -6,29 +6,28 @@ module.exports = {
         types: {
             'CSA': {
                 params: {
-                    number: 3,
-                    colorTitleLink: '#F00'
+                    number: 6,
+                    colorTitleLink: '#000'
                 },
-                categories: [815, 817, 818, 816, 866, 362]
-            },
+                categories: [185, 186]
+            }/*,
             'ADX': {
-                categories: [410]
-            }
+                //categories: [410]
+            }*/
         }
-    },
+    }/*,
     'slot_bottom_listing': {
         enabled: true,
         types: {
             'CSA': {
                 params: {
-                    number: 2,
-                    colorTitleLink: '#0F0'
+                    number: 2
                 },
-                categories: [815, 817, 818, 816, 866, 362]
+                categories: [185, 186]
             },
             'ADX': {
-                categories: [410]
+                //categories: [410]
             }
         }
-    }
+    }*/
 };
