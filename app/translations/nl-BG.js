@@ -204,7 +204,6 @@ module.exports = {
     'itemdescriptionwiki.model': 'Model',
     'itemdescriptionwiki.year': 'Jaar',
     'itemwarning.Here': 'hier.',
-    'popularsearchesbody.CATEGORIES_BOX': 'Rubrieken',
     'popularsearchesbody.PopularCities': 'Populaire steden',
     'popularsearchesbody.PopularOn': 'Populair op <<OLX_DOMAIN>>',
     'mobilepromo.DownloadNowForFree': 'Download now for free',

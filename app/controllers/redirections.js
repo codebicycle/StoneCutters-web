@@ -120,16 +120,19 @@ module.exports = {
         helpers.common.redirect.call(this, '/myolx/edititem/' + params.itemId);
     },
     redirecttomain: function(params, callback) {
-        var location = this.app.session.get('siteLocation');
+        var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('location').url;
+        var path = this.app.session.get('path');
 
         this.app.session.persist({
-            olx_mobile_full_site_redirect: true
+            olx_mobile_full_site_redirect: true,
+            siteLocation: location
         }, {
-            maxAge: 2 * HOUR,
-            domain: location.split('.').slice(1).join('.')
+            maxAge: 2 * HOUR
         });
-        helpers.common.redirect.call(this, 'http://' + location, null, {
-            status: 302
+        helpers.common.redirect.call(this, 'http://' + siteLocation + path, null, {
+            status: 302,
+            pushState: false
         });
     },
     editphp: function(params, callback) {
@@ -157,7 +160,7 @@ module.exports = {
         }
         url.push('-ig');
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -182,7 +185,7 @@ module.exports = {
             url.push('/-ig');
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -203,7 +206,7 @@ module.exports = {
             url.push(page);
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -226,7 +229,7 @@ module.exports = {
         }
         url.push('-ig');
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -247,9 +250,12 @@ module.exports = {
             url.push(page);
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearchMobile: function(params, callback) {
+        helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
     }
 };

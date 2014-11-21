@@ -2,9 +2,9 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var utils = require('../../../shared/utils');
-var config = require('../../../shared/config');
-var configSeo = require('./config');
+var utils = require('../../../../shared/utils');
+var config = require('../../../../shared/config');
+var configSeo = require('../config');
 var excludes = ['itemImages'];
 var metasDefaults = utils.get(configSeo, ['metatags', 'default']);
 var metasHandler = {
@@ -141,7 +141,7 @@ Head = Backbone.Model.extend({
             return;
         }
         var handler = metasHandler[key.toLowerCase()];
-        var metas = this.get('metatags');
+        var metas = _.clone(this.get('metatags') || {});
         
         if (handler) {
             metas = handler.call(this, metas, value);
@@ -149,9 +149,9 @@ Head = Backbone.Model.extend({
         else {
             metas[key] = value;
         }
-        return Base.prototype.set.call(this, 'metatags', metas, {
+        return Base.prototype.set.call(this, 'metatags', metas, _.defaults(options || {}, {
             unset: false
-        });
+        }));
     },
     setAll: function(metas, options) {
         options = _.defaults({}, options, {
