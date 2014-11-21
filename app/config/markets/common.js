@@ -16,7 +16,8 @@ module.exports = {
         popularSearches: true,
         relatedListings: true,
         topTitle: true,
-        references: true
+        references: true,
+        wikititles: true
     },
     tracking: {
         enabled: true,

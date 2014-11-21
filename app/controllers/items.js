@@ -570,15 +570,6 @@ function success(params, callback) {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
 
-        var redirect = function(done) {
-            var platform = this.app.session.get('platform');
-
-            if (platform === 'html5' || platform === 'desktop') {
-                return done.fail();
-            }
-            done();
-        }.bind(this);
-
         var prepare = function(done) {
             params.id = params.itemId;
             delete params.itemId;
@@ -629,7 +620,6 @@ function success(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-            .then(redirect)
             .then(prepare)
             .then(findItem)
             .then(checkItem)
