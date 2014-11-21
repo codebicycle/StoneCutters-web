@@ -160,7 +160,7 @@ module.exports = {
         }
         url.push('-ig');
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -185,7 +185,7 @@ module.exports = {
             url.push('/-ig');
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -206,7 +206,7 @@ module.exports = {
             url.push(page);
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -229,7 +229,7 @@ module.exports = {
         }
         url.push('-ig');
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -250,7 +250,7 @@ module.exports = {
             url.push(page);
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
