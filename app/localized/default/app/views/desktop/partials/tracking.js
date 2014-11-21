@@ -85,16 +85,6 @@ module.exports = Base.extend({
             return;
         }
 
-        var host = this.app.session.get('shortHost').split('.');
-        var hasM = !!~host.indexOf('m');
-        var slice = 1;
-        var domain;
-
-        if (hasM) {
-            slice++;
-        }
-        domain = host.slice(slice).join('.');
-
         this._checkAnalyticsLib();
 
         window._gaq.push(function track() {
@@ -103,7 +93,7 @@ module.exports = Base.extend({
             var referrerDomain = 'emptyReferrer';
             var doStore = true;
 
-            tracker._setDomainName(domain);
+            tracker._setDomainName(tracking.params.analytics.domain);
             tracker._setCookiePath('/');
             if (typeof document.referrer !== 'undefined' && document.referrer !== '') {
                 referrerDomain = document.referrer.match(/:\/\/(.[^/]+)/)[1];
