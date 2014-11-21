@@ -6,6 +6,7 @@ var common = require('./common');
 var esi = require('../modules/esi');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var utils = require('../../shared/utils');
 var isServer = typeof window === 'undefined';
 var cacheDefault = config.get(['cache', 'headers', 'default']);
 
@@ -21,6 +22,9 @@ function prepare(params, done) {
         currentRoute: this.currentRoute,
         params: params
     });
+    if (params && params.filters && !utils.startsWith(params.filters, '-')) {
+        params.filters = '-' + params.filters;
+    }
     done();
 }
 
