@@ -129,8 +129,15 @@ module.exports = {
             domain: location.split('.').slice(1).join('.')
         });
         helpers.common.redirect.call(this, 'http://' + location, null, {
-            status: 302
+            status: 302,
+            pushState: false
         });
+    },
+    editphp: function(params, callback) {
+        if (params.editid) {
+            return helpers.common.redirect.call(this, '/iid-' + params.editid);
+        }
+        helpers.common.redirect.call(this, '/');
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
@@ -163,7 +170,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
@@ -188,7 +195,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');

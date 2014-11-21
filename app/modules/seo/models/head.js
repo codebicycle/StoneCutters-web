@@ -2,10 +2,10 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var utils = require('../../../shared/utils');
-var config = require('../../../shared/config');
-var configSeo = require('./config');
-var excludes = [];
+var utils = require('../../../../shared/utils');
+var config = require('../../../../shared/config');
+var configSeo = require('../config');
+var excludes = ['itemImages'];
 var metasDefaults = utils.get(configSeo, ['metatags', 'default']);
 var metasHandler = {
     title: title,

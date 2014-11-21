@@ -1,0 +1,39 @@
+.users_myolx_view {
+    #items-pagination {
+        .myolx-paginations-numbers {
+            text-align: center;
+            ul-reset();
+
+            li {
+                display: inline-block;
+
+                .pagination-arrow,
+                .pagination-number,
+                &.current {
+                    font-size: $s;
+                    margin: 5px 0;
+                    padding: 3px 7px;
+                }
+                .pagination-arrow {
+                    color: $black;
+                    &.disable {
+                        color: $greyBorders;
+                    }
+                }
+                .pagination-number {
+                    color: $blue;
+                    font-weight: bold;
+                    &:hover {
+                        background: $lightBlueHover;
+                        text-decoration: none;
+                    }
+                }
+                &.current {
+                    border: 1px solid $greyBorders;
+                    color: $disableText;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
