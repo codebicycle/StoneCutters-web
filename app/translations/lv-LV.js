@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Zi\u0146ojums:',
     'supportform.Reset': 'Atiestat\u012Bt',
     'seccion-30.478': 'Dz\u0113st sludin\u0101jumu',
+    'seccion-31.454': 'Atra\u0161an\u0101s vieta:',
     'distancediv.changeLocation': 'Main\u012Bt atra\u0161an\u0101s vietu',
     'postingtitlelisting.view': 'J\u016Bs varat apskat\u012Bt savu sludin\u0101jumu:',
     'posting_selector.SelectCategory': 'Izv\u0113lieties kategoriju',

@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Messaggio:',
     'supportform.Reset': 'Riavviare',
     'seccion-30.478': 'Eliminare annuncio',
+    'seccion-31.454': 'Posizione:',
     'distancediv.changeLocation': 'Cambia regione',
     'postingtitlelisting.view': 'Puoi vederlo in:',
     'posting_selector.SelectCategory': 'Seleziona una Categoria',

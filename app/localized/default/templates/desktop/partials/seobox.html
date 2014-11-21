@@ -5,9 +5,9 @@
 
 {% if (populars and populars.length > 0) or
       (relateds and relateds.length > 0) or
-      (levelPath and levelPath.length > 0) or
+      levelPath or
       (wikititles and wikititles.length > 0) %}
-    <section id="seo-box" {{ 'class="' + seoFrom + '"' if seoFrom }}>
+    <section id="seo-box" {{ 'class="seo-' + seoFrom + '-page"' if seoFrom }}>
         {% if populars.length > 0 %}
             <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
             <ul>

@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Viesti:',
     'supportform.Reset': 'Tyhjenn\xE4',
     'seccion-30.478': 'Poista ilmoitus',
+    'seccion-31.454': 'Sijainti:',
     'distancediv.changeLocation': 'muokkaa sijaintia',
     'postingtitlelisting.view': 'Voit n\xE4hd\xE4 ilmoituksesi:',
     'posting_selector.SelectCategory': 'Valitse kategoria',

@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Poruka:',
     'supportform.Reset': 'Poni\u0161ti',
     'seccion-30.478': 'Ukloni oglas',
+    'seccion-31.454': 'Lokacija:',
     'distancediv.changeLocation': 'Promenite lokaciju',
     'postingtitlelisting.view': 'Mo\u017Eete prikazati va\u0161 oglas:',
     'posting_selector.SelectCategory': 'Izaberite kategoriju',

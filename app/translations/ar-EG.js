@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': '\u0631\u0633\u0627\u0644\u0629 ',
     'supportform.Reset': '\u0627\u0644\u063A\u0627\u0621 ',
     'seccion-30.478': '',
+    'seccion-31.454': '\u0627\u0644\u0645\u0648\u0642\u0639:',
     'distancediv.changeLocation': '\u062A\u063A\u064A\u0631 \u0645\u0646\u0637\u0642\u0629 ',
     'postingtitlelisting.view': '\u062A\u0633\u062A\u0637\u064A\u0639 \u0645\u0634\u0627\u0647\u062F\u062A \u0627\u0639\u0644\u0627\u0646\u0643',
     'posting_selector.SelectCategory': '\u0627\u062E\u062A\u0631 \u0645\u0631\u062A\u0628\u0629 ',

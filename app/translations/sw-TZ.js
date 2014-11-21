@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Ujumbe:',
     'supportform.Reset': 'Seti upya',
     'seccion-30.478': 'Ondoa tangazo',
+    'seccion-31.454': 'Mahali:',
     'distancediv.changeLocation': 'Badilisha Mahali',
     'postingtitlelisting.view': 'Unaweza kuangalia tangazo lako:',
     'posting_selector.SelectCategory': 'Chagua Kundi',

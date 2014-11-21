@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Zpr\xE1va:',
     'supportform.Reset': 'Resetovat',
     'seccion-30.478': 'Odstranit+z\xE1znam',
+    'seccion-31.454': 'M\xEDsto:',
     'distancediv.changeLocation': 'Zm\u011Bnit m\xEDsto',
     'postingtitlelisting.view': 'M\u016F\u017Eete zobrazit sv\u016Fj inzer\xE1t:',
     'posting_selector.SelectCategory': 'Vyberte kategorii',

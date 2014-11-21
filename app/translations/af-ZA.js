@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Boodskap:',
     'supportform.Reset': 'Herstel',
     'seccion-30.478': 'Verwyder+Lysting',
+    'seccion-31.454': 'Ligging:',
     'distancediv.changeLocation': 'Verander ligging',
     'postingtitlelisting.view': 'Jy kan jou advt. bekyk:',
     'posting_selector.SelectCategory': 'Kies \'n Kategorie',

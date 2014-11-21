@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Skilabo\xF0: ',
     'supportform.Reset': 'Endurr\xE6sa',
     'seccion-30.478': 'Fjarl\xE6gja augl\xFDsingu',
+    'seccion-31.454': 'Sta\xF0setning:',
     'distancediv.changeLocation': 'Breyta sta\xF0setningu',
     'postingtitlelisting.view': '\xDE\xFA getur s\xE9\xF0 augl\xFDsinguna \xFE\xEDna:',
     'posting_selector.SelectCategory': 'Veldu flokk',

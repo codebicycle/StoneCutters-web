@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Teade:',
     'supportform.Reset': 'T\xFChista',
     'seccion-30.478': 'Eemalda+kuulutus',
+    'seccion-31.454': 'Asukoht:',
     'distancediv.changeLocation': 'Muutke asukohta',
     'postingtitlelisting.view': 'Te saate oma kuulutust vaadata:',
     'posting_selector.SelectCategory': 'Valige kategooria',

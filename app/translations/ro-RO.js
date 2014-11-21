@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Mesaj:',
     'supportform.Reset': 'Reseteaz\u0103',
     'seccion-30.478': '\u015Eterge+Listare',
+    'seccion-31.454': 'Loca\u0163ia:',
     'distancediv.changeLocation': 'Schimb\u0103 pozi\u0163ia',
     'postingtitlelisting.view': 'Pute\u0163i vizualiza anun\u0163ul dvs.:',
     'posting_selector.SelectCategory': 'Selecta\u0163i o categorie',

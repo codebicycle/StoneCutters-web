@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Sporo\u010Dilo:',
     'supportform.Reset': 'Ponastavi',
     'seccion-30.478': 'Odstrani objavo',
+    'seccion-31.454': 'Lokacija:',
     'distancediv.changeLocation': 'Spremeni lokacijo',
     'postingtitlelisting.view': 'Svoj oglas si lahko ogledate na:',
     'posting_selector.SelectCategory': 'Izberite kategorijo',

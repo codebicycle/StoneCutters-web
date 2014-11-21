@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Prane\u0161imas:',
     'supportform.Reset': 'Nustatyti i\u0161 naujo',
     'seccion-30.478': '\u0160alinti+skelbim\u0105',
+    'seccion-31.454': 'Vieta:',
     'distancediv.changeLocation': 'Keisti viet\u0105',
     'postingtitlelisting.view': 'Galite per\u017Ei\u016Br\u0117ti savo skelbim\u0105:',
     'posting_selector.SelectCategory': 'Pasirinkite kategorij\u0105',

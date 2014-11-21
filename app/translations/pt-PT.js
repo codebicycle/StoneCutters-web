@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Mensagem:',
     'supportform.Reset': 'Cancelar',
     'seccion-30.478': 'Eliminar an\xFAncio.',
+    'seccion-31.454': 'Localiza\xE7\xE3o',
     'distancediv.changeLocation': 'Mudar a Localiza\xE7\xE3o',
     'postingtitlelisting.view': 'Pode ver o seu an\xFAncio em:',
     'posting_selector.SelectCategory': 'Seleccione uma categoria',

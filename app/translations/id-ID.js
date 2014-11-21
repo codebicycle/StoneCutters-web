@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Pesan:',
     'supportform.Reset': 'Reset',
     'seccion-30.478': 'Hapus+Iklan',
+    'seccion-31.454': 'Lokasi:',
     'distancediv.changeLocation': 'Ganti lokasi',
     'postingtitlelisting.view': 'Anda dapat melihat iklan Anda:',
     'posting_selector.SelectCategory': 'Pilih Kategori',

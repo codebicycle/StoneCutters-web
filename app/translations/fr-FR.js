@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Message :',
     'supportform.Reset': 'Annuler',
     'seccion-30.478': '\xC9liminer annonce',
+    'seccion-31.454': 'Quartier : ',
     'distancediv.changeLocation': 'Modifier le lieu',
     'postingtitlelisting.view': 'Vous pouvez voir votre annonce :',
     'posting_selector.SelectCategory': 'Choisissez une cat\xE9gorie',

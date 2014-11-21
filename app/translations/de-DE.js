@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Nachricht:',
     'supportform.Reset': 'Zur\xFCcksetzen',
     'seccion-30.478': 'Anzeige l\xF6schen',
+    'seccion-31.454': 'Standort:',
     'distancediv.changeLocation': 'Ort wechseln',
     'postingtitlelisting.view': 'Sie k\xF6nnen ihn sehen bei:',
     'posting_selector.SelectCategory': 'W\xE4hlen Sie eine Kategorie',

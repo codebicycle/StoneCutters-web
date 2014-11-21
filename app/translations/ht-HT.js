@@ -119,6 +119,7 @@ module.exports = {
     'supportform.Message': 'Mesaj :',
     'supportform.Reset': 'Anile',
     'seccion-30.478': 'Efase Anons',
+    'seccion-31.454': 'Katye: ',
     'distancediv.changeLocation': 'Chanje kote an ',
     'postingtitlelisting.view': 'Ou ka gade anons ou an :',
     'posting_selector.SelectCategory': 'Chwazi yon Kategori',
