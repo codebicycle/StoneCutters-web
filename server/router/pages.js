@@ -14,12 +14,17 @@ module.exports = function pagesRouter(app, dataAdapter) {
         tag: 'li',
         html: '<strong>${key}:</strong> ${value}'
     };
+    var hostname = require('os').hostname();
+    var version = configClient.get(['deploy', 'version'], '1.1.dev').split('.').pop();
 
     (function health() {
         app.get('/health', handler);
 
         function handler(req, res) {
             statsd.increment(['health']);
+            if (!isNaN(version)) {
+                statsd.gauge([hostname, 'all', 'version'], version);
+            }
             res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.json({
                 online: true,
