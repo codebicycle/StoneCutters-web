@@ -128,6 +128,6 @@ module.exports = {
         ]
     },
     'redirections#staticSearchMobile': {
-        url: /s\/.*/
+        url: /^\/s\/.*/
     }
 };
