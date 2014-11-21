@@ -89,12 +89,10 @@ module.exports = Base.extend({
 
         window._gaq.push(function track() {
             var host = tracking.params.analytics.host;
-            var tracker = window._gat._getTracker(tracking.params.analytics.id);
+            var tracker = this._getAnalyticsTracker(tracking.params.analytics);
             var referrerDomain = 'emptyReferrer';
             var doStore = true;
 
-            tracker._setDomainName(tracking.params.analytics.domain);
-            tracker._setCookiePath('/');
             if (typeof document.referrer !== 'undefined' && document.referrer !== '') {
                 referrerDomain = document.referrer.match(/:\/\/(.[^/]+)/)[1];
 
@@ -107,7 +105,7 @@ module.exports = Base.extend({
             }
             tracker._set('title', tracking.params.analytics.keyword);
             tracker._trackPageview(tracking.params.analytics.page);
-        });
+        }.bind(this));
     },
     onTrackHydra: function(event, tracking) {
         event.preventDefault();
@@ -147,5 +145,13 @@ module.exports = Base.extend({
             });
             $('head').append($ga);
         }
+    },
+    _getAnalyticsTracker: function(options) {
+        if (!window.analyticsTracker) {
+            window.analyticsTracker = window._gat._getTracker(options.id);
+            window.analyticsTracker._setDomainName(options.domain);
+            window.analyticsTracker._setCookiePath('/');
+        }
+        return window.analyticsTracker;
     }
 });
