@@ -24,7 +24,7 @@
                     {% for state in states %}
                         <li><a href="{{ '/nf/all-results' | link({location: state.url}) }}" rel="nofollow">{{ state.name }}</a></li>
                     {% endfor %}
-                    <li><a href="{{ '/all-states' | link }}" rel="nofollow">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
+                    <li><a href="{{ '/all-states' | link }}" rel="nofollow" data-qa="all-states-link">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
                 </ul>
             </div>
 
