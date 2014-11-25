@@ -2,8 +2,8 @@
 127.0.0.1       {LOCAL}
 
 #SMAUG
-#190.210.62.60             api-v2.olx.com   #production
-108.171.171.70            api-v2.olx.com    #testing
+190.210.62.60             api-v2.olx.com   #production
+#108.171.171.70            api-v2.olx.com    #testing
 
 #ARWEN
 {IP}  m.olx.com           # United States
