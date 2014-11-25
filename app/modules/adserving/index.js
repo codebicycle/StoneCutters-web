@@ -16,11 +16,12 @@ function getConfigTypes(config) {
     return utils.get(config, ['types'], {});
 }
 
-function getSettings(category) {
+function getSettings() {
     var slotname = this.options.subId || this.options.subid;
     var configSlot = getConfigSlot(slotname);
     var configTypes;
     var configAD;
+    var currentCat;
     var adType;
     var adParams;
     var settings = {
@@ -28,11 +29,14 @@ function getSettings(category) {
         slotname : slotname
     };
 
+
     if (configSlot.enabled) {
         configTypes = getConfigTypes(Object(configSlot));
         adParams = {
             'container': slotname
         };
+        currentCat = this.app.attributes.session.params.categoryId;
+
         _.each(configTypes, function eachTypes(obj, type) {
             if(!adType && _.contains(obj.categories, category)){
                 adType = type;
@@ -41,20 +45,21 @@ function getSettings(category) {
                 }
             }
         });
-        //console.log(this.app.attributes.session.params.categoryId);
 
-        console.log(this.app);
+        console.log(this.app.attributes.session.params.categoryId);
+        console.log(configTypes.CSA.categories);
 
         configAD = getConfigAD(adType);
         if (configAD.enabled) {
             configAD.params = _.extend({}, configAD.params, adParams);
 
             var countryCode = this.app.session.get('location').abbreviation;
+            var searchQuery = this.app.attributes.session.params.searchTerm;
             var repKey = '[countrycode]';
 
             configAD.options = _.extend({}, configAD.options, {
                 pubId: configAD.options.pubId.replace(repKey, countryCode.toLowerCase()), //REVIEW
-                query: 'Playa', //TODO
+                query: searchQuery, //TODO
                 channel: configAD.options.channel.replace(repKey, countryCode), //REVIEW
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });

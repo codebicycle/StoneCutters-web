@@ -10,10 +10,10 @@ module.exports = {
                     colorTitleLink: '#000'
                 },
                 categories: [185, 186]
-            }/*,
+            },
             'ADX': {
                 categories: [410]
-            }*/
+            }
         }
     }/*,
     'slot_bottom_listing': {
