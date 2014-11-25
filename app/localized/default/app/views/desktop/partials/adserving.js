@@ -26,6 +26,9 @@ module.exports = Base.extend({
         this._checkAdsenseLib();
 
         window._googCsa('ads', settings.options, settings.params);
+
+        console.log('loro');
+
         /*if (settings.type === 'CSA') {
         }*/
         /*else if(settings.type === 'ADX') {

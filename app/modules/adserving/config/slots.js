@@ -6,7 +6,7 @@ module.exports = {
         types: {
             CSA: {
                 params: {
-                    number: 6,
+                    number: 3,
                     colorTitleLink: '#000'
                 },
                 categories: [185, 186]

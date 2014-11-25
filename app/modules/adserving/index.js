@@ -41,7 +41,10 @@ function getSettings(category) {
                 }
             }
         });
-        console.log(adParams.number);
+        //console.log(this.app.attributes.session.params.categoryId);
+
+        console.log(this.app);
+
         configAD = getConfigAD(adType);
         if (configAD.enabled) {
             configAD.params = _.extend({}, configAD.params, adParams);
