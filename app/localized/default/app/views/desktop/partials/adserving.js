@@ -24,9 +24,6 @@ module.exports = Base.extend({
         var settings = this.getAdserving();
 
         this._checkCsaLib();
-        //this._checkAdxLib();
-
-        console.log(settings.params);
 
         window._googCsa('ads', settings.options, settings.params);
 
@@ -55,22 +52,7 @@ module.exports = Base.extend({
             });
             $ads.appendTo('head');
         }
-    }/*,
-    _checkAdxLib: function() {
-        var id = 'gadx-lib';
-        var $adx;
-
-        if (!$('#' + id).length) {
-            $adx = $('<script></script>');
-            $adx.attr({
-                async: true,
-                type: 'text/javascript',
-                src: '//pagead2.googlesyndication.com/pagead/show_ads.js',
-                id: id
-            });
-            $adx.appendTo('head');
-        }
-    }*/
+    }
 });
 
 module.exports.id = 'partials/adserving';
