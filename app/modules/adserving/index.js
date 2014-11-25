@@ -41,6 +41,7 @@ function getSettings(category) {
                 }
             }
         });
+        console.log(adParams.number);
         configAD = getConfigAD(adType);
         if (configAD.enabled) {
             configAD.params = _.extend({}, configAD.params, adParams);

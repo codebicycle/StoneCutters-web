@@ -1,32 +1,32 @@
 'use strict';
 
 module.exports = {
-    'slot_top_listing': {
+    slot_top_listing: {
         enabled: true,
         types: {
-            'CSA': {
+            CSA: {
                 params: {
-                    number: 3,
-                    colorTitleLink: '#F00'
+                    number: 1,
+                    colorTitleLink: '#000'
                 },
                 categories: [815, 817, 818, 816, 866, 362]
             },
-            'ADX': {
+            ADX: {
                 categories: [410]
             }
         }
     },
-    'slot_bottom_listing': {
+    slot_bottom_listing: {
         enabled: true,
         types: {
-            'CSA': {
+            CSA: {
                 params: {
-                    number: 2,
+                    number: 1,
                     colorTitleLink: '#0F0'
                 },
                 categories: [815, 817, 818, 816, 866, 362]
             },
-            'ADX': {
+            ADX: {
                 categories: [410]
             }
         }
