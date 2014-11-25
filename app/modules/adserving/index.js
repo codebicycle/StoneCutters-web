@@ -38,7 +38,7 @@ function getSettings() {
         currentCat = this.app.attributes.session.params.categoryId;
 
         _.each(configTypes, function eachTypes(obj, type) {
-            if(!adType && _.contains(obj.categories, category)){
+            if(!adType && _.contains(obj.categories, currentCat)){
                 adType = type;
                 if(obj.params){
                     _.extend(adParams, obj.params);
