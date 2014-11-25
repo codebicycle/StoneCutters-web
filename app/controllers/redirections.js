@@ -5,7 +5,14 @@ var helpers = require('../helpers');
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
-var phpPaths = ['posting', 'register', 'login'];
+var phpRedirections = {
+    index: '',
+    posting: 'posting',
+    register: 'register',
+    login: 'login',
+    switch_domain: ''
+};
+var phpPaths = Object.keys(phpRedirections);
 
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -120,21 +127,30 @@ module.exports = {
         helpers.common.redirect.call(this, '/myolx/edititem/' + params.itemId);
     },
     redirecttomain: function(params, callback) {
-        var location = this.app.session.get('siteLocation');
+        var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('location').url;
+        var path = this.app.session.get('path');
 
         this.app.session.persist({
-            olx_mobile_full_site_redirect: true
+            olx_mobile_full_site_redirect: true,
+            siteLocation: location
         }, {
-            maxAge: 2 * HOUR,
-            domain: location.split('.').slice(1).join('.')
+            maxAge: 2 * HOUR
         });
-        helpers.common.redirect.call(this, 'http://' + location, null, {
-            status: 302
+        helpers.common.redirect.call(this, 'http://' + siteLocation + path, null, {
+            status: 302,
+            pushState: false
         });
+    },
+    editphp: function(params, callback) {
+        if (params.editid) {
+            return helpers.common.redirect.call(this, '/iid-' + params.editid);
+        }
+        helpers.common.redirect.call(this, '/');
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
-            return helpers.common.redirect.call(this, this.app.session.get('url').replace('.php', ''));
+            return helpers.common.redirect.call(this, this.app.session.get('url').replace(params.path + '.php', phpRedirections[params.path]));
         }
         statsd.increment(['redirections', 'php', this.app.session.get('path')]);
         helpers.common.redirect.call(this, '/');
@@ -151,7 +167,7 @@ module.exports = {
         }
         url.push('-ig');
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -163,7 +179,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
@@ -176,7 +192,7 @@ module.exports = {
             url.push('/-ig');
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -188,7 +204,7 @@ module.exports = {
 
         url.push('/');
         url.push(params.title);
-        url.push('-cat');
+        url.push('-cat-');
         url.push(params.catId);
         url.push('/');
         url.push(params.search || '');
@@ -197,9 +213,56 @@ module.exports = {
             url.push(page);
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearchig: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/q/');
+        url.push(params.search);
+        if (params.catId) {
+            url.push('/c-');
+            url.push(params.catId);
+        }
+        url.push('/');
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('-p-');
+            url.push(page);
+        }
+        url.push('-ig');
+        if (filters && filters !== 'undefined') {
+            url.push('/-');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearch: function(params, callback) {
+        var page = params ? params.page : undefined;
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/q/');
+        url.push(params.search);
+        if (params.catId) {
+            url.push('/c-');
+            url.push(params.catId);
+        }
+        if (typeof page !== 'undefined' && !isNaN(page) && page !== 'undefined') {
+            url.push('/-p-');
+            url.push(page);
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/-');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearchMobile: function(params, callback) {
+        helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
     }
 };

@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     (function browserifyConfig() {
         var allEnvironments = ['development', 'testing', 'staging', 'production'];
         var defaultSrc = ['app/config/**/*.js'];
-        var defaultOptionAlias = ['app/config/index.js:../app/config', 'shared/utils.js:../../shared/utils'];
+        var defaultOptionAlias = ['app/config/index.js:../app/config', 'shared/utils/index.js:../../shared/utils'];
         var defaultOptionExternal = ['underscore', 'querystring'];
 
         var srcTemplate = '!app/config/defaultENVIRONMENT.js';

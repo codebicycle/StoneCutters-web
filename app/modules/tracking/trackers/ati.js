@@ -224,7 +224,8 @@ function getConfig(options) {
     config = utils.get(configTracking, ['ati', 'paths', country, platform], defaultConfig[platform]);
     config = _.extend({}, config, {
         host: location.replace('www', ''),
-        protocol: 'http'
+        protocol: 'http',
+        domain: this.app.session.get('domain')
     });
 
     if (options.siteId) {

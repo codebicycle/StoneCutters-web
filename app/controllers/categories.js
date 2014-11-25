@@ -2,12 +2,14 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var Seo = require('../modules/seo');
 var config = require('../../shared/config');
+var utils = require('../../shared/utils');
 
 module.exports = {
     list: middlewares(list),
@@ -33,6 +35,11 @@ function list(params, callback) {
 }
 
 function showig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     show.call(this, params, callback, '-ig');
 }
@@ -46,8 +53,7 @@ function show(params, callback, gallery) {
     function controller() {
 
         var redirect = function(done){
-            var seo = Seo.instance(this.app);
-            var categoryId = seo.isCategoryDeprecated(params.catId);
+            var categoryId = Seo.isCategoryDeprecated(params.catId);
 
             gallery = gallery || '';
 
@@ -101,19 +107,20 @@ function show(params, callback, gallery) {
 function handleItems(params, promise, gallery) {
     var page = params ? params.page : undefined;
     var languages = this.app.session.get('languages');
+    var path = this.app.session.get('path');
+    var starts = '/nf';
     var category;
     var subcategory;
     var query;
     var url;
 
     var configure = function(done, _category, _subcategory) {
-        var seo = Seo.instance(this.app);
         var currentRouter = ['categories', 'items'];
 
         category = _category;
         subcategory = _subcategory;
 
-        seo.reset(this.app, {
+        this.app.seo.reset(this.app, {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
@@ -132,6 +139,14 @@ function handleItems(params, promise, gallery) {
                 return helpers.common.redirect.call(this, [url, gallery].join(''));
             }
             return helpers.common.redirect.call(this, [url, '-p-', page, gallery].join(''));
+        }
+        if ((params.filters && params.filters !== 'undefined') && !utils.startsWith(path, starts)) {
+            done.abort();
+            return helpers.common.redirect.call(this, [starts, path, URLParser.parse(this.app.session.get('url')).search || ''].join(''));
+        }
+        else if ((!params.filters || params.filters === 'undefined') && utils.startsWith(path, starts)) {
+            done.abort();
+            return helpers.common.redirect.call(this, [path.replace(starts, ''), URLParser.parse(this.app.session.get('url')).search || ''].join(''));
         }
         done();
     }.bind(this);
@@ -159,6 +174,27 @@ function handleItems(params, promise, gallery) {
         }, {
             readFromCache: false
         }, done.errfcb);
+    }.bind(this);
+
+    var filters = function(done, res) {
+        var url = this.app.session.get('url');
+        var filter;
+        var _filters;
+
+        if (!res.items) {
+            return done.fail(null, {});
+        }
+        filter = query.filters;
+        if (!filter || filter === 'undefined') {
+            return done(res);
+        }
+        _filters = res.items.filters.format();
+        if (filter !== _filters) {
+            done.abort();
+            url = [path.split('/-').shift(), (_filters ? '/' + _filters : ''), URLParser.parse(url).search || ''].join('');
+            return helpers.common.redirect.call(this, url);
+        }
+        done(res);
     }.bind(this);
 
     var paginate = function(done, res) {
@@ -222,6 +258,7 @@ function handleItems(params, promise, gallery) {
     promise.then(redirect);
     promise.then(prepare);
     promise.then(fetch);
+    promise.then(filters);
     promise.then(paginate);
     promise.then(success);
 }
@@ -230,12 +267,11 @@ function handleShow(params, promise) {
     var category;
 
     var configure = function(done, _category) {
-        var seo = Seo.instance(this.app);
         var currentRouter = ['categories', 'subcategories'];
 
         category = _category;
 
-        seo.reset(this.app, {
+        this.app.seo.reset(this.app, {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
