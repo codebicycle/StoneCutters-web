@@ -8,7 +8,7 @@ module.exports = Base.extend({
     id: 'items-search-view',
     className: 'items-search-view',
     tagName: 'main',
-    order: ['parentcategory', 'state', 'city'],
+    order: ['parentcategory','pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
     regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
