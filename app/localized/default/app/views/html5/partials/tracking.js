@@ -64,31 +64,19 @@ module.exports = Base.extend({
             return;
         }
 
-        var host = this.app.session.get('shortHost').split('.');
-        var hasM = !!~host.indexOf('m');
-        var slice = 1;
-        var domain;
-
-        if (hasM) {
-            slice++;
-        }
-        domain = host.slice(slice).join('.');
-
         this._checkAnalyticsLib();
 
         window._gaq = window._gaq || [];
         window._gaq.push(function track() {
-            var tracker = window._gat._getTracker('UA-5247560-17');
+            var tracker = this._getAnalyticsTracker('UA-5247560-17', tracking.params.analytics);
             var osName = tracking.params.analytics.osName;
             var osVersion = tracking.params.analytics.osVersion;
             var location = tracking.params.analytics.location;
 
-            tracker._setDomainName(domain);
-            tracker._setCookiePath('/');
             osName = (osName !== 'Others' ? osName.toLowerCase() : 'unknown');
             tracker._setCustomVar(1, 'olx_visitor_country', ['html5_', osName, '_', osVersion, '_', location].join(''), 1);
             tracker._trackPageview(tracking.params.analytics.page);
-        });
+        }.bind(this));
     },
     onTrackEvent: function(event, element, handler) {
         var $element = $(element);
@@ -147,5 +135,13 @@ module.exports = Base.extend({
             });
             $('head').append($ga);
         }
+    },
+    _getAnalyticsTracker: function(id, options) {
+        if (!window.analyticsTracker) {
+            window.analyticsTracker = window._gat._getTracker(id);
+            window.analyticsTracker._setDomainName(options.domain);
+            window.analyticsTracker._setCookiePath('/');
+        }
+        return window.analyticsTracker;
     }
 });
