@@ -10,6 +10,10 @@ module.exports = function(params, next) {
     if (!enabled) {
         return next();
     }
+    if (this.app.session.get('location').url === 'www.olx.co.za' && this.app.session.get('internet.org')) {
+        console.log('salgo');
+        return next();
+    }
     var url = '/interstitial';
     var platform;
     var platforms;
