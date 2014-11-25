@@ -14,7 +14,6 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var icons = config.get(['icons', this.app.session.get('platform')], []);
         var country = this.app.session.get('location').url;
-        var seo = Seo.instance(this.app);
         var smartBanner = helpers.features.isEnabled.call(this, 'smartBanner');
 
         return _.extend({}, data, {
