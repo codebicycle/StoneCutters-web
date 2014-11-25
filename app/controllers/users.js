@@ -424,7 +424,7 @@ function messages(params, callback) {
             callback(null, 'users/myolx', {
                 messages: response.messages.toJSON(),
                 viewname: 'messages',
-                paginator: response.paginator
+                paginator: response.messages.paginator
             });
         }.bind(this);
 

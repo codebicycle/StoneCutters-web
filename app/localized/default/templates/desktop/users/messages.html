@@ -10,7 +10,7 @@
     {% if messages.length == 0 %}
         <p class="notification">{{ dictionary["netvibes_myolx.content.NoMessages"] }}</p>
     {% else %}
-        <ul>
+        <ul class="messages">
             {% for message in messages %}
                 <li data-message class="{{ "read" if message.read }}" >
                     <input type="checkbox" data-message-id="{{ message.id }}" >
