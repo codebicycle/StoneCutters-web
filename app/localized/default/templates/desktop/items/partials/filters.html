@@ -1,3 +1,7 @@
+{% if category and search %}
+    <span class="title">{{ category.trName }}</span>
+    <a href="{{ ('/nf/search/' + search) | linkig }}" rel="nofollow"  class="icons icon-arrow-left">{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
+{% endif %}
 {% if filters %}
     {% for filter in filters.toJSON() %}
         {% if filter.name != 'state' and filter.name != 'city' and filter.name != 'sort'  %}
