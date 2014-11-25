@@ -21,7 +21,7 @@ module.exports = function pagesRouter(app, dataAdapter) {
         app.get('/health', handler);
 
         function handler(req, res) {
-            statsd.increment(['health']);
+            statsd.gauge([hostname, 'all', 'health'], 1);
             if (!isNaN(version)) {
                 statsd.gauge([hostname, 'all', 'version'], version);
             }
