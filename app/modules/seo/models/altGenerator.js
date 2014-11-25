@@ -77,7 +77,6 @@ function generate () {
 }
 
 function getMessagePictureOf() {
-    console.log(this.app.session.get('selectedLanguage'));
     var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
     var message = dictionary['itemgeneraldetails.PicturesOf'] || '';
 
