@@ -14,7 +14,8 @@ module.exports = {
         relatedListings: true,
         topTitle: true,
         references: true,
-        wikititles: true
+        wikititles: true,
+        altImages: true
     },
     tracking: {
         enabled: true,
