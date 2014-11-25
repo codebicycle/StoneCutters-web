@@ -31,11 +31,11 @@ function initialize(attributes, options) {
         neighborhood: getNeighborhoodName(item)
     };
 
-    if (levelPath && levelPath.top && levelPath.top.categoryLevel) {
-        attrs.categoryLevel1 = levelPath.top.categoryLevel.anchor;
+    if (levelPath && levelPath.top && levelPath.top.category) {
+        attrs.categoryLevel1 = levelPath.top.category.anchor;
     }
-    if (levelPath && levelPath.top && levelPath.top.childCategoryLevel) {
-        attrs.categoryLevel2 = levelPath.top.childCategoryLevel.anchor;
+    if (levelPath && levelPath.top && levelPath.top.childCategory) {
+        attrs.categoryLevel2 = levelPath.top.childCategory.anchor;
     }
     this.set(attrs, {
         unset: false
@@ -72,14 +72,12 @@ function generate () {
         alts.push(title + ' - ' + this.get('price'));
     }
     alts.push(title.substr(0,title.length <= 50 ? title.length : 50));
-
    return alts;
 }
 
 function getMessagePictureOf() {
     var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
     var message = dictionary['itemgeneraldetails.PicturesOf'] || '';
-
     return message;
 }
 
