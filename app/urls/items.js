@@ -118,7 +118,7 @@ module.exports = {
             'nf/search/:search/-p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'nf/search/:search/-p-:page([0-9]+)',
             'nf/search/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/search/:search'
+            'nf/search/?:search?'
         ]
     },
     'items#searchfilterig': {

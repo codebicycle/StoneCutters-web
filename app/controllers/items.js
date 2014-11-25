@@ -667,7 +667,7 @@ function search(params, callback, gallery) {
         var subcategory;
 
         var redirect = function(done) {
-            if (!params.search || _.isEmpty(params.search.trim())) {
+            if (!params.search || _.isEmpty(params.search.trim()) || params.search === 'undefined') {
                 done.abort();
                 if (platform === 'desktop') {
                     return helpers.common.redirect.call(this, '/nf/all-results');
