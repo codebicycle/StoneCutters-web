@@ -140,6 +140,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\u0A95\u0ACB\u0A88 \u0A9A\u0ABF\u0AA4\u0ACD\u0AB0 \u0A86\u0AAA\u0AC7\u0AB2 \u0AA8\u0AA5\u0AC0',
     'itemgeneraldetails.OtherRelatedListings': '\u0A85\u0AA8\u0ACD\u0AAF \u0AB8\u0A82\u0AAC\u0A82\u0AA7\u0ABF\u0AA4 \u0AAF\u0ABE\u0AA6\u0AC0\u0A93:',
     'itemgeneraldetails.Phone': '\u0AAB\u0ACB\u0AA8',
+    'itemgeneraldetails.PicturesOf': '\u0AA8\u0ABE \u0A9A\u0ABF\u0AA4\u0ACD\u0AB0\u0ACB ',
     'itemgeneraldetails.Price': '\u0AAD\u0ABE\u0AB5',
     'itemgeneraldetails.RelatedListings': '\u0AB8\u0A82\u0AAC\u0A82\u0AA7\u0ABF\u0AA4 \u0AAF\u0ABE\u0AA6\u0AC0\u0A93',
     'itemgeneraldetails.ShareThisAd': '\u0A86 \u0A9C\u0ABE\u0AB9\u0AC7\u0AB0\u0ABE\u0AA4\u0AA8\u0AC7 \u0AB5\u0AB9\u0AC7\u0A82\u0A9A\u0ACB',

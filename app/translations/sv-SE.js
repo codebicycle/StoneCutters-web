@@ -140,6 +140,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Ingen bild',
     'itemgeneraldetails.OtherRelatedListings': 'Andra relaterade annonser:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Bilder av ',
     'itemgeneraldetails.Price': 'Pris',
     'itemgeneraldetails.RelatedListings': 'Relaterade annonser',
     'itemgeneraldetails.ShareThisAd': 'Dela ut denna annonsen',

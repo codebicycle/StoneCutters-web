@@ -140,6 +140,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Nessuna foto inserita',
     'itemgeneraldetails.OtherRelatedListings': 'Altri annunci relazionati:',
     'itemgeneraldetails.Phone': 'Telefono',
+    'itemgeneraldetails.PicturesOf': 'Immagini di ',
     'itemgeneraldetails.Price': 'Prezzo',
     'itemgeneraldetails.RelatedListings': 'Annunci Relazionati',
     'itemgeneraldetails.ShareThisAd': 'Condividi questo annuncio',

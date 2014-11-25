@@ -140,6 +140,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Ingen bilde tilgjengelig',
     'itemgeneraldetails.OtherRelatedListings': 'Andre relaterte annonser:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Bilder av ',
     'itemgeneraldetails.Price': 'Pris',
     'itemgeneraldetails.RelatedListings': 'Relaterte annonser',
     'itemgeneraldetails.ShareThisAd': 'Del denne annonsen',

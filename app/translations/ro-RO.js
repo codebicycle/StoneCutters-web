@@ -140,6 +140,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'F\u0103r\u0103 imagine',
     'itemgeneraldetails.OtherRelatedListings': 'Alte anun\u0163uri similare:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Fotografii de ',
     'itemgeneraldetails.Price': 'Pre\u0163',
     'itemgeneraldetails.RelatedListings': 'Anun\u0163uri similare',
     'itemgeneraldetails.ShareThisAd': 'Distribui\u0163i acest anun\u0163',

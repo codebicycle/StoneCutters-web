@@ -140,6 +140,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Pa Genyen Foto',
     'itemgeneraldetails.OtherRelatedListings': 'L\xF2t anons ki gen rap\xF2 :',
     'itemgeneraldetails.Phone': 'Telef\xF2n',
+    'itemgeneraldetails.PicturesOf': 'Foto  ',
     'itemgeneraldetails.Price': 'Pri',
     'itemgeneraldetails.RelatedListings': 'Anons ki gen Rap\xF2',
     'itemgeneraldetails.ShareThisAd': 'Pataje Anons sa a',

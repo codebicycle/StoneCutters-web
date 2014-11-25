@@ -137,6 +137,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\u0648\u0644\u0627 \u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0642\u062F\u0645\u0629',
     'itemgeneraldetails.OtherRelatedListings': 'Other related listings:',
     'itemgeneraldetails.Phone': '\u0647\u0627\u062A\u0641',
+    'itemgeneraldetails.PicturesOf': 'Pictures of ',
     'itemgeneraldetails.Price': '\u0633\u0639\u0631 ',
     'itemgeneraldetails.RelatedListings': 'Related Listings',
     'itemgeneraldetails.ShareThisAd': 'Share this ad',

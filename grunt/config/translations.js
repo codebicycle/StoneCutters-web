@@ -58,6 +58,7 @@ module.exports = {
         'itemdescription.meters',
         'itemdescriptionwiki.year',
         'itemdescriptionwiki.model',
-        'misc.Brand'
+        'misc.Brand',
+        'itemgeneraldetails.PicturesOf'
     ]
 };

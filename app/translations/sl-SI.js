@@ -140,6 +140,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Fotografija ni prilo\u017Eena',
     'itemgeneraldetails.OtherRelatedListings': 'Drugi sorodni oglasi:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Slike ',
     'itemgeneraldetails.Price': 'Cena',
     'itemgeneraldetails.RelatedListings': 'Sorodni oglasi',
     'itemgeneraldetails.ShareThisAd': 'Deli ta oglas',

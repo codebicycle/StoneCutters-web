@@ -72,11 +72,12 @@ function generate () {
         alts.push(title + ' - ' + this.get('price'));
     }
     alts.push(title.substr(0,title.length <= 50 ? title.length : 50));
-
+    
    return alts;
 }
 
 function getMessagePictureOf() {
+    console.log(this.app.session.get('selectedLanguage'));
     var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
     var message = dictionary['itemgeneraldetails.PicturesOf'] || '';
 
