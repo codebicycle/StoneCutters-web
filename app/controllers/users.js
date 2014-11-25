@@ -163,7 +163,7 @@ function myads(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'myAds');
             myAds = params.myAds;
             deleted = params.deleted;
             delete params.deleted;
@@ -272,7 +272,8 @@ function favorites(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'myFavs');
+            console.log(params);
             favorite = params.favorite;
             delete params.favorite;
             _params = _.extend({}, params, {
@@ -380,7 +381,7 @@ function messages(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'myMsgs');
             message = params.message;
             delete params.message;
             _params = _.extend({}, params, {
