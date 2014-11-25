@@ -6,7 +6,7 @@
     {% set classesFigure = 'image-viewer image-wrapper' %}
 {% endif %}
 
-<figure id="image-viewer" class="{{ classesFigure }}">
+<figure id="image-viewer" class="{{ classesFigure }} open-modal" data-modal="image-modal" >
     {% if item.images.length > 0 %}
         <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-gallery-image />
     {% endif %}

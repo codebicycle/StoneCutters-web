@@ -1,0 +1,15 @@
+{% extends (template + '/modals/modal.html') %}
+
+{% block id %}image-modal{% endblock %}
+
+{% block title %}
+    <span class="modal-title">Images galery</span>
+{% endblock %}
+
+{% block content %}
+   {% for image in item.images %}
+        <figure class="{{ 'active' if loop.first }}" data-gallery-thumb="{{ loop.index }}" >
+            <a href="#" class="image-wrapper"><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" alt="{{ item.title }}" class="item-image" ></a>
+        </figure>
+    {% endfor %}
+{% endblock %}
