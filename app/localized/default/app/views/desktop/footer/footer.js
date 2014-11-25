@@ -14,6 +14,15 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var location = this.app.session.get('location');
+        var states = data.states;
+        var hostname = '';
+
+        if(location.children.length) {
+            _.each(states, function(state, i){
+                return location.children[0].id == state.id ? hostname = state.hostname : false;
+            });
+        }
 
         this.hidden = this.hidden || {
             categories: this.isCurrentRoute('categories', 'list') || this.isCurrentRoute('pages', 'sitemap'),
@@ -21,7 +30,8 @@ module.exports = Base.extend({
         };
         return _.extend({}, data, {
             user: this.app.session.get('user'),
-            hidden: this.hidden
+            hidden: this.hidden,
+            hostname: hostname
         });
     },
     postRender: function() {
