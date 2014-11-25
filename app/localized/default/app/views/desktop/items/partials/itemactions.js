@@ -86,32 +86,13 @@ module.exports = Base.extend({
             user.login(done);
         }
 
-        function success(res) {
-            $('[data-modal-close]').click();
-            console.log('success');
-            console.log(res);
-            // var redirect = user.get('redirect');
-
-            // if (!redirect || redirect.match(/(\/register|\/login|\/logout)/g)) {
-            //     redirect = '/';
-            // }
-            // res.redirect(utils.link(redirect, this.app));
-            // end();
+        function success() {
+            this.$('[data-fav]').attr('data-user', true).data('user', true).click();
+            // this.parentView.render();
         }
 
         function error(err) {
-            console.log('error');
             console.log(err);
-            // var link = '/login';
-            // var redirect = user ? user.get('redirect') : '';
-
-            // if (redirect && redirect.match(/(\/register|\/login|\/logout|\/)/g)) {
-            //     link += '?redirect=' + redirect;
-            // }
-            // formidable.error(req, link, err, user.toJSON(), function redirect(url) {
-            //     res.redirect(utils.link(url, req.rendrApp));
-            //     end(err);
-            // });
         }
 
         asynquence().or(error.bind(this))
