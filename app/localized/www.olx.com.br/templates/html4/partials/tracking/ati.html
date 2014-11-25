@@ -1,17 +1,12 @@
 <!-- Chamada do script de TV da TVdata -->
-<script type="text/javascript"
-src="http://tdp01.tvdata.com.br/?a=6&timeframe=300"></script>
+<script type="text/javascript" src="http://tdp01.tvdata.com.br/?a=6&timeframe=300"></script>
 
-<script type="text/javascript">
-    var xtcustom = JSON.parse('{{ tracking.params.ati.custom }}');
-</script>
- 
-<!-- Chamada do script de integração da TVdata e AT Internet -->
-<script type="text/javascript" src="{{'/js/at_tvdata_sync.min.js' | static }}"></script>
-
-<script type="text/javascript">
+<script id="ati-lib" type="text/javascript">
     var atiapi = (atiapi || []);
+    var xtcustom = JSON.parse('{{ tracking.params.ati.custom }}');
 
+    atiapi.push(['config', 'domain', '{{ tracking.params.ati.domain }}']);
+    atiapi.push('tv-data');
     atiapi.push({
         xtdmc: '{{ tracking.params.ati.host }}',
         xtnv: document,
@@ -26,7 +21,7 @@ src="http://tdp01.tvdata.com.br/?a=6&timeframe=300"></script>
         at.type  = 'text/javascript';
         at.async = true;
         at.src = "{{'/js/lib/xtcore.js' | static }}";
-        (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]||document.getElementsByTagName('script')[0].parentNode).insertBefore(at,null);
+        (document.getElementById('ati-lib').parentNode).insertBefore(at,null);
     })();
 </script>
 <noscript>

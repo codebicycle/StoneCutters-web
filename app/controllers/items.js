@@ -665,7 +665,7 @@ function search(params, callback, gallery) {
         var subcategory;
 
         var redirect = function(done) {
-            if (!params.search || _.isEmpty(params.search.trim())) {
+            if (!params.search || _.isEmpty(params.search.trim()) || params.search === 'undefined') {
                 done.abort();
                 if (platform === 'desktop') {
                     return helpers.common.redirect.call(this, '/nf/all-results');
@@ -808,7 +808,8 @@ function search(params, callback, gallery) {
                 meta: items.meta,
                 filters: items.filters,
                 paginator: items.paginator,
-                search: query.search
+                search: query.search,
+                category: category ? category.toJSON() : undefined
             });
         }.bind(this);
 
