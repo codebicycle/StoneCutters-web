@@ -1,0 +1,74 @@
+.locations_select_view {
+	header#location {
+
+		background: #EFEFEF;
+		border-bottom:1px solid #BCBCBC;
+		border-top:1px solid #BCBCBC;
+		overflow: hidden;
+		padding: .4rem .625rem;
+		h1,
+		h3,
+		strong {
+
+			color: #333;
+			display: inline-block;
+			float: left;
+			font-size: 1.063rem;
+			font-weight: normal;
+			text-align: left;
+			width: 60%;
+			a {
+				position: relative;
+				color: #008dcb;
+			    font-size: 0.85rem;
+			    font-weight: bold;
+			    padding: 0 0.6rem;
+				&.big {
+
+					font-size: 1.063rem;
+				}
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					display: block;
+					width: 5px;
+					height: 100%;
+					background: url(imageUrl/images/html5/flecha_home.png) left center no-repeat;
+					-webkit-transform: rotate(180deg);
+                    -moz-transform: rotate(180deg);
+                    transform: rotate(180deg);
+				}
+			}
+			small {
+				font-size: 0.6875rem;
+			}
+		}
+		.locationtext {
+			background: url(imageUrl/images/html5/icon_location.png) right center no-repeat;
+			color: #494949;
+			float: right;
+			font-size: .95rem;
+			line-height: 1.5;
+			padding: 0 1.2rem;
+		}
+
+	}
+
+}
+.locations_list_view {
+	#autolocation {
+		background:#EFEFEF url(imageUrl/images/html5/ico_autolocation.png) center center no-repeat;
+		border-radius: 3px;
+		border: none;
+		box-shadow: 0 1px 1px rgba(0,0,0,.5);
+		display: none;
+		float: left;
+		height: 31px;
+		line-height: 1.5;
+		margin-right: 10px;
+		padding: 0 1.2rem;
+		width: 28px;
+	}
+}

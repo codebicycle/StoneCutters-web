@@ -1,21 +1,15 @@
 {% for item in items %}
     <li>
         <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
-            <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image {% if item.thumbnail %} filled {% endif %}"></div>
-            <p>
+            <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }}"></div>
+            <p class="datetime">
                 {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
                 {% if item.displayLocation %}
                     {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
                 {% endif %}
             </p>
-            <div class="price">{{ item.price.displayPrice }}</div>
-            <div class="title">
-                <h2>
-                    <span>
-                        <span>{{ item.title }}</span>
-                    </span>
-                </h2>
-            </div>
+            <h2 class="title">{{ item.title }}</h2>            
+            <div class="price">{{ item.price.displayPrice }}</div>            
         </a>
     </li>
 {% endfor %}

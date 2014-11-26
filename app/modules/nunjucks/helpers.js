@@ -70,6 +70,9 @@ module.exports = function(nunjucks) {
         encode: encode,
         'static': statics,
         countFormat: countFormat,
-        slugToUrl: helpers.common.slugToUrl
+        slugToUrl: helpers.common.slugToUrl,
+        hijri: helpers.hijri,
+        persianDigits: helpers.numbers.toPersian,
+        latinDigits: helpers.numbers.toLatin
     };
 };

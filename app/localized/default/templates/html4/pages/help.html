@@ -1,13 +1,21 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, 'Help') }}
-<div>
-    {% for item in items %}
-        <h1>{{item.name}}</h1>
-            {% for question in item.questions %}
-                <h4 class="help-question">{{question.question}}</h4>
-                <p>{{ question.response}}</p>
-            {% endfor %}
-    {% endfor %}
-</div>
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.Help"]) }}
+<ul class="topics">
+	{% for topic in topics %}
+		<li class="topic">
+			<h2 class="title">{{ topic.title }}</h2>
+			<ul class="questions">
+				{% for question in topic.questions%}
+					<li class="question-group">
+						<div class="question"><em>{{ question.question }}</em></div>
+						<div class="answer">{{ question.answer }}</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</li>
+	{% endfor %}
+</ul>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+{% view 'partials/tracking' %}
+
