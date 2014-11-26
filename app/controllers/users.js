@@ -273,7 +273,6 @@ function favorites(params, callback) {
 
         var prepare = function(done) {
             Paginator.prepare(this.app, params, 'myFavs');
-            console.log(params);
             favorite = params.favorite;
             delete params.favorite;
             _params = _.extend({}, params, {
