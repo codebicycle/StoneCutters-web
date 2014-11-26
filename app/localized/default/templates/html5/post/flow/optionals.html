@@ -8,14 +8,16 @@
     <form>
         {% from macros import FieldText, FieldTextArea, FieldCombobox %}
         {% for field in fields %}
-            {% if field.fieldType == 'text' %}
+            {% if (field.name == 'mileage' or field.name == 'surface' or field.name == 'salary_to' or field.name == 'salary_from') %}
+                {{ FieldText(field.label, field.name, field.mandatory, form, user, 'number') }}
+            {% elif field.fieldType == 'text' %}
                 {{ FieldText(field.label, field.name, field.mandatory, form, user) }}
             {% elif field.fieldType == 'combobox' %}
                 {{ FieldCombobox(field.label, field.name, field.mandatory, form, user, field.values) }}
             {% endif %}
         {% endfor %}
         <div class="btnCenter">
-            <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange" data-qa="category-continue-button" >
+            <input type="submit" value="{{ dictionary['posting_buttonpublish.buttonstep1'] }}" class="btns orange" data-qa="category-continue-button" >
         </div>
     </form>
 </div>

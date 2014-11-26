@@ -3,9 +3,11 @@
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
+var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
+    urlreferer: '',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
@@ -22,7 +24,25 @@ module.exports = Base.extend({
         $('body').on('update:postingLink', this.updatePostingLink.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
+        this.app.router.appView.on('sort:start', this.onSelectSortStart.bind(this));
+        this.app.router.appView.on('sort:end', this.restore.bind(this));
+        this.app.router.appView.on('filter:start', this.onSelectFilterStart.bind(this));
+        this.app.router.appView.on('filter:end', this.restore.bind(this));
+        this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
+        this.app.router.appView.on('location:end', this.restore.bind(this));
         this.app.router.on('action:end', this.onActionEnd.bind(this));
+        if (helpers.features.isEnabled.call(this, 'smartBanner')) {
+            if ( !(/(iPad|iPhone|iPod).*OS [6-7].*AppleWebKit.*Mobile.*Safari/.test(navigator.userAgent)) && !this.app.session.get('interstitial') ) {
+                $.smartbanner({
+                    title: 'OLX Free Classifieds',
+                    author: 'OLX Inc.',
+                    daysHidden: 0,
+                    daysReminder: 0,
+                    icon: 'images/html5/app_logo.jpeg',
+                    layer: true
+                });
+            }
+        }
     },
     onActionEnd: function() {
         if (this.isPostButtonEnabled()) {
@@ -34,7 +54,8 @@ module.exports = Base.extend({
     },
     events: {
         'click .logIn span': 'onLoginClick',
-        'click #myOlx li a': 'onMenuClick'
+        'click #myOlx li a': 'onMenuClick',
+        'click .topBarFilters .filter-btns': 'onCancelFilter'
     },
     onLoginClick: function(event) {
         event.preventDefault();
@@ -45,6 +66,16 @@ module.exports = Base.extend({
     },
     onMenuClick: function(event) {
         this.$('#myOlx').slideUp();
+    },
+    onCancelFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        helpers.common.redirect.call(this.app.router, this.urlreferer, null, {
+            status: 200
+        });
+
     },
     changeLocation: function (e, siteLocation) {
         this.$('.logo, .header-links .header-link, .header-links .posting-link').each(function(i, link) {
@@ -100,5 +131,34 @@ module.exports = Base.extend({
     },
     onPostingFlowAfter: function() {
         this.$('#topBar, #myOlx').removeClass('disabled');
+    },
+    onSelectSortStart: function(){
+        this.customize("unavailableitemrelateditems.SortBy");
+    },
+    onSelectFilterStart: function(){
+        this.customize("mobilepromo.Filters");
+    },
+    onSelectLocation: function(){
+        this.customize("defaultheader.Location");
+    },
+    customize: function(key) {
+        var data = Base.prototype.getTemplateData.call(this);
+        var route = this.app.session.get('currentRoute').action;
+
+        this.urlreferer = data.referer || '/';
+        this.$('.logo, .header-links').hide();
+        this.$('.topBarFilters').removeClass('hide');
+        this.$('.topBarFilters .title').text(data.dictionary[key]);
+
+        this.$('.topBarFilters a').attr('data-tracking', route+'-cancel');
+    },
+    restore: function() {
+        var $links = this.$('.logo, .header-links');
+        var $text = this.$('.topBarFilters');
+
+        this.app.router.once('action:end', function afterEnd() {
+            $links.show();
+            $text.addClass('hide').find('.title').text('');
+        });
     }
 });

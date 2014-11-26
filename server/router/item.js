@@ -10,6 +10,7 @@ module.exports = function(app, dataAdapter) {
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
+    var helpers = require('../../app/helpers');
     
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -142,6 +143,10 @@ module.exports = function(app, dataAdapter) {
                     done(response, body);
                 }
 
+                if (_item.priceC) {
+                    _item.priceC = helpers.numbers.toLatin(_item.priceC);
+                }
+
                 item = _item;
                 images = _images;
                 item.ipAddress = req.ip;
@@ -255,7 +260,7 @@ module.exports = function(app, dataAdapter) {
                 var url = req.headers.referer || '/posting';
 
                 if (!track || track === 'error') {
-                    console.log('[OLX_DEBUG]', 'post', err);
+                    console.log('[OLX_DEBUG]', 'post', err.stack);
                 }
                 statsd.increment([location.name, 'posting', track || 'error', platform]);
                 formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {

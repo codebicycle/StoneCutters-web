@@ -8,6 +8,13 @@ var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 
 module.exports = Base.extend({
+    tagName: 'footer',
+    className: function() {
+        if (this.isFilter()) {
+            return 'footer_footer_view disabled';
+        }
+        return 'footer_footer_view';
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
@@ -20,7 +27,18 @@ module.exports = Base.extend({
         $('body').on('change:location', this.changeLocation.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
+        this.app.router.appView.on('filter:start', this.hide.bind(this));
+        this.app.router.appView.on('filter:end', this.show.bind(this));
+        this.app.router.appView.on('sort:start', this.hide.bind(this));
+        this.app.router.appView.on('sort:end', this.show.bind(this));
+        this.app.router.appView.on('location:start', this.hide.bind(this));
+        this.app.router.appView.on('location:end', this.show.bind(this));
         this.attachTrackMe();
+    },
+    isFilter: function() {
+        var currentRoute = this.app.session.get('currentRoute');
+        
+        return (currentRoute.action === 'filter' || currentRoute.action === 'sort' || currentRoute.action === 'location');
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {
@@ -44,12 +62,22 @@ module.exports = Base.extend({
         }.bind(this));
     },
     onPostingFlowStart: function() {
-        this.$('#footer').addClass('disabled');
+        this.$el.addClass('disabled');
     },
     onPostingFlowEnd: function() {
         this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));
     },
     onPostingFlowAfter: function() {
-        this.$('#footer').removeClass('disabled');
+        this.$el.removeClass('disabled');
+    },
+    hide: function() {
+        this.$el.addClass('disabled');
+    },
+    show: function() {
+        var $footer = this.$el;
+
+        this.app.router.once('action:end', function afterEnd() {
+            $footer.removeClass('disabled');
+        });
     }
 });

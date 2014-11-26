@@ -8,6 +8,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var asynquence = require('asynquence');
         var statsd  = require('../modules/statsd')();
         var utils = require('../../shared/utils');
+        var Languages = require('../../app/collections/languages');
         var errorPath = path.resolve('server/templates/error.html');
 
         return function middleware(req, res, next) {
@@ -34,6 +35,29 @@ module.exports = function(dataAdapter, excludedUrls) {
                     writeToCache: false,
                     store: true
                 }, done.errfcb);
+            }
+
+            function check(done, response, _languages) {
+                if (!response) {
+                    console.log('[OLX_DEBUG] Empty languages response: ' + (response ? response.statusCode : 'no response') + ' for ' + userAgent + ' on ' + req.headers.host);
+                    return done.fail(new Error());
+                }
+
+                if (!response.languages || !response.languages.length) {
+                    // TODO: Hardcoded until SMAUG stops asking OCL for languages
+                    if (siteLocation === 'www.olx.ir') {
+                        response.languages = new Languages([{
+                            id: 85,
+                            isocode: 'FA',
+                            name: 'فارسی',
+                            locale: 'fa-IR'
+                        }], {
+                            app: req.rendrApp
+                        });
+                    }
+                }
+
+                done(response, _languages);
             }
 
             function select(done, response) {
@@ -78,6 +102,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             asynquence().or(fail)
                 .then(fetch)
+                .then(check)
                 .then(select)
                 .then(redirect)
                 .val(next);

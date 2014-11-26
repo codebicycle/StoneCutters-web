@@ -1,0 +1,97 @@
+#header {
+
+	position: relative;
+	height: 48px;
+	background-color: #4275BA;
+
+	span {
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 2;
+		padding-right: 8px;
+
+		a {
+
+			display: block;
+			width: 94px;
+			height: 48px;
+			background: transparent url(imageUrl/images/html4/logoMenu.png) no-repeat center center;
+			text-indent: -9000px;
+
+		}
+
+	}
+
+	ul {
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		padding-right: 6px;
+
+		li {
+
+			float: left;
+			height: 36px;
+			padding: 6px 0 6px 6px;
+
+			a {
+
+				display: block;
+				height: 27px;
+				padding: 7px 8px 0;
+				border-radius: 4px;
+				cursor: pointer;
+
+			}
+
+			.user {
+
+				width: 16px;
+				background-color: #355E97;
+				background-repeat: no-repeat;
+				background-position: center center;
+				border: thin solid #2C4B77;
+				text-indent: -9000px;
+
+			}
+
+			.loggedOut {
+
+				background-image: url(imageUrl/images/html4/userLogOut.png);
+				background-position: 1px 1px;
+
+			}
+
+			.loggedIn {
+
+				background-image: url(imageUrl/images/html4/userLogIn.png);
+				background-position: 0 1px;
+
+			}
+
+			.loggedInUnreadMessages {
+
+				background-image: url(imageUrl/images/html4/userLogInMsg.png);
+				background-position: 0 1px;
+
+			}
+
+			.post {
+
+				background-color: #E0771B;
+				border: thin solid #C44D13;
+				font-weight: bold;
+				color: #FFF;
+				text-transform: uppercase;
+
+			}
+
+		}
+
+	}
+
+}
