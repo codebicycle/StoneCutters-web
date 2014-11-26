@@ -7,8 +7,8 @@ var Paginator = require('./models/paginator');
 function prepare(app, params, type) {
     var platform = app.session.get('platform');
     var location = app.session.get('location').url;
-    var max = config.get(['smaug', platform, 'maxPageSize']) || config.getForMarket(location, ['ads', 'quantity', type || 'listing'], 25);
-    
+    var max = config.getForMarket(location, ['ads', 'quantity', type || 'listing'], config.get(['smaug', platform, 'maxPageSize'], 25) );
+
     if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
         params.pageSize = max;
     }

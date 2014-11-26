@@ -2,6 +2,7 @@
 
 var Base = require('../bases/collection');
 var Message = require('../models/message');
+var Paginator = require('../modules/paginator');
 
 module.exports = Base.extend({
     model: Message,
@@ -14,6 +15,29 @@ module.exports = Base.extend({
         console.log('[OLX_DEBUG] Empty messages response');
         this.metadata = {};
         return [];
+    },
+    paginate: function (url, query, options) {
+        var page = options.page;
+        var total;
+
+        this.paginator = new Paginator({
+            url: url,
+            page: query.page,
+            pageSize: query.pageSize,
+            total: this.metadata ? this.metadata.total : 0
+        }, {
+            gallery: options.gallery,
+            filters: this.filters
+        });
+        if (page !== undefined) {
+            if (isNaN(page) || page <= 1) {
+                return 1;
+            }
+            total = this.paginator.get('totalPages');
+            if (page > total) {
+                return total;
+            }
+        }
     }
 });
 

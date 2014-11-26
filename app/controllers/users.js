@@ -163,7 +163,7 @@ function myads(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'myAds');
             myAds = params.myAds;
             deleted = params.deleted;
             delete params.deleted;
@@ -272,7 +272,7 @@ function favorites(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'myFavs');
             favorite = params.favorite;
             delete params.favorite;
             _params = _.extend({}, params, {
@@ -359,7 +359,8 @@ function messages(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var deleted;
+        var page = params ? params.page : undefined;
+        var message;
         var _params;
         var user;
 
@@ -369,21 +370,23 @@ function messages(params, callback) {
             if (platform !== 'desktop') {
                 return done.fail();
             }
-            done();
-        }.bind(this);
-
-        var prepare = function(done) {
             user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
+            done();
+        }.bind(this);
 
-            _params = _.extend({
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, 'myMsgs');
+            message = params.message;
+            delete params.message;
+            _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId
-            }, params);
+            });
 
             done();
         }.bind(this);
@@ -399,10 +402,29 @@ function messages(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
+        var paginate = function(done, res) {
+            var url = '/myolx/myolxmessages';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.messages.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
+
         var success = function(response) {
             callback(null, 'users/myolx', {
                 messages: response.messages.toJSON(),
-                viewname: 'messages'
+                viewname: 'messages',
+                paginator: response.messages.paginator
             });
         }.bind(this);
 
@@ -411,8 +433,10 @@ function messages(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }
