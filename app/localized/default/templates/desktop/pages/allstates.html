@@ -25,8 +25,8 @@
             <ul class="cities">
                 {% for city in state.children %}
                 <li class="city">
-                    <h3 class="city-name">
-                        <a href="{{ '/' | link({ location: city.url }) }}">{{ city.name }}</a>
+                    <h3 class="city-name" >
+                        <a href="{{ '/' | link({ location: city.url }) }}" data-qa="city-name">{{ city.name }}</a>
                     </h3>
                     {% if city.count %}<span class="counter">({{ city.count }})</span>{% endif %}
                 </li>
