@@ -32,7 +32,10 @@ module.exports = {
         ]
     },
     'users#messages': {
-        url: 'myolx/myolxmessages'
+        urls: [
+            'myolx/myolxmessages-p-:page([0-9]+)',
+            'myolx/myolxmessages'
+        ]
     },
     'users#readmessages': {
         url: 'myolx/readmessages/:msgId'
