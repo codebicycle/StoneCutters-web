@@ -22,7 +22,7 @@ module.exports = {
         enabled: true
     },
     localization: {
-        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za', 'www.olx.ir'],
+        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
         html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
         desktop: ['www.olx.com.bo', 'www.olx.com.py']
@@ -94,7 +94,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.ir']
+                countries: ['www.olx.in', 'www.olx.ir']
             },
             listingFilters: {
                 worldwide: false,
