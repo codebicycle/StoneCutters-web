@@ -22,9 +22,9 @@ module.exports = {
         enabled: true
     },
     localization: {
-        wap: [],
-        html4: [],
-        html5: [],
+        wap: ['www.olx.in'],
+        html4: ['www.olx.in'],
+        html5: ['www.olx.in'],
         desktop: ['www.olx.com.bo', 'www.olx.com.py']
     },
     icons: {
@@ -94,7 +94,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.in']
             },
             interstitialByADX: {
                 worldwide: false,
