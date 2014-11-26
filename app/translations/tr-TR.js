@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': '\u0130leti:',
     'supportform.Reset': 'S\u0131f\u0131rla',
     'seccion-30.478': '\u0130lan\u0131+Kald\u0131r',
-    'seccion-31.454': 'B\xF6lge:',
     'distancediv.changeLocation': 'Yeri de\u011Fi\u015Ftir',
     'postingtitlelisting.view': '\u0130lan\u0131n\u0131z\u0131 g\xF6r\xFCnt\xFClemek i\xE7in:',
     'posting_selector.SelectCategory': 'Bir Kategori Se\xE7in',

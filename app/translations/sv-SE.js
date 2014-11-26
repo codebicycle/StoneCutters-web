@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Meddelande',
     'supportform.Reset': '\xC5terst\xE4ll',
     'seccion-30.478': 'Radera+annons',
-    'seccion-31.454': 'Ort:',
     'distancediv.changeLocation': '\xC4ndra ort',
     'postingtitlelisting.view': 'Du kan se din annons:',
     'posting_selector.SelectCategory': 'V\xE4lj en Kategori',

@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Message:',
     'supportform.Reset': 'Reset',
     'seccion-30.478': 'Remove Ad',
-    'seccion-31.454': 'Location:',
     'distancediv.changeLocation': 'Change Location',
     'postingtitlelisting.view': 'You can view your ad:',
     'posting_selector.SelectCategory': 'Select a Category',

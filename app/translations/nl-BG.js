@@ -116,7 +116,6 @@ module.exports = {
     'supportform.Message': 'Bericht:',
     'supportform.Reset': 'Opnieuw',
     'seccion-30.478': 'Verwijder+Aadvertentie',
-    'seccion-31.454': 'Locatie:',
     'distancediv.changeLocation': 'Wijzig locatie',
     'postingtitlelisting.view': 'Je kunt je advertentie bekijken op:',
     'posting_selector.SelectCategory': 'Kies een rubriek',

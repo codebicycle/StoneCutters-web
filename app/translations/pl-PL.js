@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Wiadomo\u015B\u0107:',
     'supportform.Reset': 'Anuluj',
     'seccion-30.478': 'Usu\u0144+og\u0142oszenie',
-    'seccion-31.454': 'Lokalizacja:',
     'distancediv.changeLocation': 'Zmie\u0144 lokalizacj\u0119',
     'postingtitlelisting.view': 'Zobacz swoje og\u0142oszenie:',
     'posting_selector.SelectCategory': 'Wybierz kategori\u0119',
