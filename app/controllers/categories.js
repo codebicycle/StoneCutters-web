@@ -23,13 +23,11 @@ function list(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
         var icons = config.get(['icons', platform], []);
-        var location = this.app.session.get('location');
         var country = this.app.session.get('location').url;
 
         this.app.seo.setContent(this.dependencies.categories.meta);
         callback(null, {
-            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-            location: location
+            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.')
         });
     }
 }

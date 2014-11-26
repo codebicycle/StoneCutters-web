@@ -1,4 +1,4 @@
-{% if location and location.metadata and location.metadata.seo and location.metadata.seo.topLocations and location.metadata.seo.topLocations.secondLevel and location.metadata.seo.topLocations.secondLevel.entities %}
+{% if location.metadata.seo.topLocations.secondLevel.entities %}
     {% set entities = location.metadata.seo.topLocations.secondLevel.entities %}
 {% endif %}
 {% set totalColumns = 2 %}
@@ -24,7 +24,7 @@
     </ul>
 </div>
 {% if entities %}
-{% set itemsPerColumn = ( ( (states.length + 1 ) / totalColumns ) | round(0, 'ceil') ) %}
+    {% set itemsPerColumn = ( ( (states.length + 1 ) / totalColumns ) | round(0, 'ceil') ) %}
     <div class="popular-states">
         <h3 class="popular-title">{{ dictionary["misc.States"] }}</h3>
         <ul class="popular-list popular-list-first">

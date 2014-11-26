@@ -1,3 +1,6 @@
+{% if location.metadata.seo.topLocations.secondLevel.entities %}
+    {% set entities = location.metadata.seo.topLocations.secondLevel.entities %}
+{% endif %}
 {% set totalColumns = 2 %}
 <div class="title-bar">
     <h3 class="title">{{ dictionary["selectregion.SelectCityStateIn"] | replace('<<COUNTRY>>',location.name)}}</h3>
