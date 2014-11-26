@@ -7,6 +7,7 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
+    urlreferer: '',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
@@ -71,7 +72,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        helpers.common.redirect.call(this.app.router, '/', null, {
+        helpers.common.redirect.call(this.app.router, this.urlreferer, null, {
             status: 200
         });
 
@@ -144,6 +145,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var route = this.app.session.get('currentRoute').action;
 
+        this.urlreferer = data.referer;
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);
