@@ -145,7 +145,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var route = this.app.session.get('currentRoute').action;
 
-        this.urlreferer = data.referer;
+        this.urlreferer = data.referer || '/';
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);
