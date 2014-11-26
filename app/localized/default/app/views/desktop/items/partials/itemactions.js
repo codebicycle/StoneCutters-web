@@ -1,18 +1,23 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var _ = require('underscore');
 var helpers = require('../../../../../../../helpers');
+var asynquence = require('asynquence');
+var User = require('../../../../../../../models/user');
 
 module.exports = Base.extend({
     className: 'item-actions',
     id: 'item-actions',
     events: {
-        'click [data-fav]': 'addToFavorites'
+        'click [data-fav]': 'addToFavorites',
+        'submit [data-login-form]': 'login'
     },
     addToFavorites: function (e) {
         var $this = $(e.currentTarget);
+        var dataUser = $this.data('user');
 
-        if ($this.attr('href') == '#') {
+        if (dataUser) {
             e.preventDefault();
             var user = this.app.session.get('user');
             var itemId = $this.data('itemid');
@@ -53,6 +58,51 @@ module.exports = Base.extend({
                 $this.attr('href', '#');
             });
         }
+    },
+    login: function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        
+        var data = {
+            usernameOrEmail: this.$('[name="usernameOrEmail"]').val(),
+            password: this.$('[name="password"]').val()
+        };
+        var user;
+        
+        function prepare(done) {
+            user = new User(_.extend(data, {
+                location: this.app.session.get('siteLocation'),
+                country: this.app.session.get('location').name,
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                platform: this.app.session.get('platform')
+            }), {
+                app: this.app
+            });
+            done();
+        }
+
+        function submit(done) {
+            user.login(done);
+        }
+
+        function success() {
+            this.$('[data-fav]').attr('data-user', true).data('user', true).click();
+            this.app.trigger('login', user);
+            this.app.router.navigate(this.app.session.get('url'), {
+                trigger: true,
+                replace: true
+            });
+        }
+
+        function error(err) {
+            console.log(err);
+        }
+
+        asynquence().or(error.bind(this))
+            .then(prepare.bind(this))
+            .then(submit.bind(this))
+            .val(success.bind(this));
     }
 });
 
