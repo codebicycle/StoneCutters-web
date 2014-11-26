@@ -88,7 +88,11 @@ module.exports = Base.extend({
 
         function success() {
             this.$('[data-fav]').attr('data-user', true).data('user', true).click();
-            // this.parentView.render();
+            this.app.trigger('login', user);
+            this.app.router.navigate(this.app.session.get('url'), {
+                trigger: true,
+                replace: true
+            });
         }
 
         function error(err) {

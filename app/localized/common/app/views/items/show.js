@@ -12,8 +12,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         data.category_name = this.options.category_name;
-        console.log(data.item);
-        console.log(data.item.purged);
+
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
             data.item.location.cityName = data.item.location.children[0].children[0].name;
