@@ -5,9 +5,9 @@ module.exports = {
             'static': 50,
             gallery: 27,
             related: 30,
-            myAds: 10,
-            myFavs: 10,
-            myMsgs: 10
+            myAds: 15,
+            myFavs: 15,
+            myMsgs: 15
         }
     }
 };
