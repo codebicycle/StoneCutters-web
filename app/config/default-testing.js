@@ -82,7 +82,7 @@ module.exports = {
                 countries: ['www.olx.in', 'www.olx.ir']
             },
             listingFilters: {
-                worldwide: true,
+                worldwide: false,
                 countries: []
             },
             interstitialByADX: {
@@ -94,7 +94,7 @@ module.exports = {
                 countries: ['www.olx.com.bd','www.olx.com.bo','www.olx.co.cr','www.olx.ba','www.olx.cz','www.olx.com.ec','www.olx.com.eg','www.olx.com.sv','www.olx.fr','www.olx.gr','www.olx.hn','www.olx.jp','www.olx.is','www.olx.com.mt','www.olx.com.mx','www.olx.md','www.olx.no','www.olx.com.pa','www.olx.com.py','www.olx.com.pe','www.olx.ph','www.olx.com.pr','www.olx.lk','www.olx.com.uy', 'www.olx.ir']
             },
             smartBanner: {
-                worldwide: true,
+                worldwide: false,
                 countries: []
             }
         },

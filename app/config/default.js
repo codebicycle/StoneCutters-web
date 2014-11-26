@@ -21,10 +21,10 @@ module.exports = {
         enabled: true
     },
     localization: {
-        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.co.za', 'www.olx.ir'],
+        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
         html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
-        desktop: []
+        desktop: ['www.olx.com.bo']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
@@ -78,8 +78,8 @@ module.exports = {
     features: {
         html5: {
             postingFlow: {
-                worldwide: false,
-                countries: ['www.olx.com.mx', 'www.olx.com.ar', 'www.olx.co.za']
+                worldwide: true,
+                countries: ['www.olx.in', 'www.olx.ir']
             },
             listingFilters: {
                 worldwide: false,
