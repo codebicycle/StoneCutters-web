@@ -17,15 +17,12 @@
 </div>
 <div class="actions">
 {% if not item.status.onReview %}
-        {% set dataUser = true if user else false %}
+    {% set dataUser = true if user else false %}
     {% set favText = dictionary["item.RemoveFromFavorites"] %}
     {% set current =  'remove' %}
     {% if not item.isFavorite %}
         {% set current =  'add' %}
         {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
-        {# {% if not user %}
-            {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
-        {% endif %} #}
     {% endif %}
     <a class="{{ 'open-modal' if not dataUser }}" data-modal="favorites-modal" data-current="{{ current }}" data-user="{{ dataUser }}" data-fav="addToFavorites" data-itemId="{{ item.id }}" data-remove="{{ dictionary["item.RemoveFromFavorites"] }}" data-add="{{ dictionary["itemgeneraldetails.addFavorites"] }}" href="#" rel="nofollow" title="{{ favText }}">{{ favText }}</a>
 {% endif %}
