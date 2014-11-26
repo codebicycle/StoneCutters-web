@@ -35,6 +35,9 @@ function Client(app, callback) {
     }
 
     function put(key, value, options) {
+        if (_.isObject(value)) {
+            value = encodeURIComponent('j:' + JSON.stringify(value));
+        }
         var cookie = key + '=' + value;
         var properties = _.defaults({
             path: '/',

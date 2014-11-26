@@ -967,13 +967,10 @@ function staticSearch(params, callback, gallery) {
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
 
-            tracking.addParam('page_nb', meta.totalPages);
+            tracking.addParam('keyword', query.search);
+            tracking.addParam('page_nb', items.paginator.get('totalPages'));
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
-
-            if (!query.search || query.search === 'undefined') {
-                console.log('[OLX_DEBUG]', 'tracker analytics keyword', '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
-            }
 
             callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
