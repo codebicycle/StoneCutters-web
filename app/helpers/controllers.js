@@ -3,10 +3,10 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var common = require('./common');
-var Seo = require('../modules/seo');
 var esi = require('../modules/esi');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var utils = require('../../shared/utils');
 var isServer = typeof window === 'undefined';
 var cacheDefault = config.get(['cache', 'headers', 'default']);
 
@@ -22,6 +22,9 @@ function prepare(params, done) {
         currentRoute: this.currentRoute,
         params: params
     });
+    if (params && params.filters && !utils.startsWith(params.filters, '-')) {
+        params.filters = '-' + params.filters;
+    }
     done();
 }
 
@@ -31,9 +34,7 @@ function processTracking(done) {
 }
 
 function processSeo(done) {
-    var seo = Seo.instance(this.app);
-
-    seo.reset(this.app);
+    this.app.seo.reset(this.app);
     done();
 }
 

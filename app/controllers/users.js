@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var Paginator = require('../modules/paginator');
 
 module.exports = {
     register: middlewares(register),
@@ -49,6 +50,8 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {
 
         });
@@ -61,6 +64,11 @@ function lostpassword(params, callback) {
     }, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
         callback(null, {
             form: this.form,
             success: params.success
@@ -97,6 +105,8 @@ function logout(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         this.app.session.clear('user');
         return helpers.common.redirect.call(this, '/', null, {
             status: 302,
@@ -132,6 +142,8 @@ function myolx(params, callback) {
             });
         }
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {});
     }
 }
@@ -140,33 +152,38 @@ function myads(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var page = params ? params.page : undefined;
+        var myAds;
         var deleted;
         var _params;
         var user;
 
-        var prepare = function(done) {
+        var redirect = function(done) {
             var platform = this.app.session.get('platform');
+
             if (platform === 'wap') {
-                done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
             user = this.app.session.get('user');
             if (!user) {
-                done.abort();
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
+            done();
+        }.bind(this);
 
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, 'myAds');
+            myAds = params.myAds;
             deleted = params.deleted;
             delete params.deleted;
-            _params = _.extend({
+            _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId,
-                location: this.app.session.get('siteLocation'),
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'myAds'
-            }, params);
+            });
 
             done();
         }.bind(this);
@@ -189,6 +206,24 @@ function myads(params, callback) {
             done(res.myAds);
         }.bind(this);
 
+        var paginate = function(done, myAds) {
+            var url = '/myolx/myadslisting';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = myAds.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(myAds);
+        }.bind(this);
+
         var success = function(_myAds) {
             var myAds = _myAds.toJSON();
             var platform = this.app.session.get('platform');
@@ -196,7 +231,8 @@ function myads(params, callback) {
             var data = {
                 myAdsMetadata: _myAds.meta,
                 myAds: myAds,
-                deleted: deleted
+                deleted: deleted,
+                paginator: _myAds.paginator
             };
 
             if (platform === 'desktop') {
@@ -212,10 +248,15 @@ function myads(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findAds)
             .then(check)
+            .then(paginate)
             .val(success);
     }
 }
@@ -224,11 +265,12 @@ function favorites(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var page = params ? params.page : undefined;
         var favorite;
         var _params;
         var user;
 
-        var prepare = function(done) {
+        var redirect = function(done) {
             var platform = this.app.session.get('platform');
 
             if (platform === 'wap') {
@@ -240,15 +282,19 @@ function favorites(params, callback) {
                     status: 302
                 });
             }
+            done();
+        }.bind(this);
 
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, 'myFavs');
             favorite = params.favorite;
             delete params.favorite;
-            _params = _.extend({
+            _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId,
-                location: this.app.session.get('siteLocation'),
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'favorites'
-            }, params);
+            });
 
             done();
         }.bind(this);
@@ -271,6 +317,24 @@ function favorites(params, callback) {
             done(res.favorites);
         }.bind(this);
 
+        var paginate = function(done, favorites) {
+            var url = '/myolx/favoritelisting';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = favorites.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(favorites);
+        }.bind(this);
+
         var success = function(_favorites) {
             var favorites = _favorites.toJSON();
             var platform = this.app.session.get('platform');
@@ -278,7 +342,8 @@ function favorites(params, callback) {
             var data = {
                 favoritesMetadata: _favorites.meta,
                 favorites: favorites,
-                favorite: favorite
+                favorite: favorite,
+                paginator: _favorites.paginator
             };
 
             if (platform === 'desktop') {
@@ -294,10 +359,15 @@ function favorites(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(findFavorites)
             .then(check)
+            .then(paginate)
             .val(success);
     }
 }
@@ -306,22 +376,34 @@ function messages(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var deleted;
+        var page = params ? params.page : undefined;
+        var message;
         var _params;
         var user;
 
-        var prepare = function(done) {
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
             user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
+            done();
+        }.bind(this);
 
-            _params = _.extend({
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, 'myMsgs');
+            message = params.message;
+            delete params.message;
+            _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId
-            }, params);
+            });
 
             done();
         }.bind(this);
@@ -337,10 +419,29 @@ function messages(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
+        var paginate = function(done, res) {
+            var url = '/myolx/myolxmessages';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.messages.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
+
         var success = function(response) {
             callback(null, 'users/myolx', {
                 messages: response.messages.toJSON(),
-                viewname: 'messages'
+                viewname: 'messages',
+                paginator: response.messages.paginator
             });
         }.bind(this);
 
@@ -348,9 +449,14 @@ function messages(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }
@@ -362,6 +468,15 @@ function readmessages(params, callback) {
         var deleted;
         var _params;
         var user;
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             user = this.app.session.get('user');
@@ -401,6 +516,9 @@ function readmessages(params, callback) {
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
         asynquence().or(error)
             .then(prepare)

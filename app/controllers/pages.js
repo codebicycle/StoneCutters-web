@@ -5,6 +5,8 @@ var asynquence = require('asynquence');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
+var _ = require('underscore');
+
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
     var statsd = require(statsdModule)();
@@ -70,22 +72,42 @@ function interstitial(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        if (params.downloadApp) {
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'html4' || _.isEmpty(params)) {
+                return done.fail();
+            }
+            if (params.downloadApp) {
+                done.abort();
+                this.app.session.persist({
+                    downloadApp: '1'
+                });
+                return helpers.common.redirect.call(this, params.ref);
+            }
+            done();
+        }.bind(this);
+
+        var success = function() {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             this.app.session.persist({
-                downloadApp: '1'
+                showInterstitial: '1'
+            }, {
+                maxAge: this.app.session.get('showInterstitial')
             });
-            return helpers.common.redirect.call(this, params.ref);
-        }
-        this.app.seo.addMetatag('robots', 'noindex, nofollow');
-        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-        this.app.session.persist({
-            showInterstitial: '1'
-        }, {
-            maxAge: this.app.session.get('showInterstitial')
-        });
-        callback(null, {
-            ref: params.ref
-        });
+            callback(null, {
+                ref: params.ref
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .val(success);
     }
 }
 
@@ -121,6 +143,16 @@ function allstates(params, callback) {
     function controller() {
         var location = this.app.session.get('location');
         var siteLocation = location.url;
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                done.abort();
+                return helpers.common.error.call(this, null, {}, callback);
+            }
+            done();
+        }.bind(this);
 
         var decide = function(done) {
             var spec = {
@@ -185,6 +217,7 @@ function allstates(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(decide)
             .then(fetch)
             .then(formatResponse)
@@ -196,7 +229,26 @@ function sitemap(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {});
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .val(success);
     }
 }
 
@@ -204,8 +256,25 @@ function featuredListings(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
 
-        });
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .val(success);
     }
 }

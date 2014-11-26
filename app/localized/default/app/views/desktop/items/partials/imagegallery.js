@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'image-gallery',
@@ -8,6 +9,31 @@ module.exports = Base.extend({
     events: {
         'mouseover [data-gallery-thumb]': 'updateGallery',
         'click [data-gallery-navigator] [class*="arrow-"]': 'navigate'
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var images = data.item.images;
+        var altImages = this.app.seo.get('altImages') || [];
+        var imgPlusAlts = [];
+        var cantImages = images.length;
+        var cantAlt = altImages.length;
+        var alts = 0;
+        var i;
+
+        for(i = 0; i < images.length; i++) {
+            if (!altImages[alts]) {
+                alts = 0;
+            }
+            imgPlusAlts.push({
+                url: images[i].url,
+                alt: altImages[alts]
+            });
+            alts++;
+        }
+
+        return _.extend({}, data, {
+            imgPlusAlts: imgPlusAlts
+        });
     },
     updateGallery: function(event) {
         event.preventDefault();
@@ -57,14 +83,14 @@ module.exports = Base.extend({
                         'top': newPos + 'px'
                     }, 100);
                 }
-            } 
+            }
             else {
                 $('[data-gallery-thumb]').last().mouseover();
                 thumbwrapper.animate({
                     'top': '-' + thumbsLast + 'px'
                 }, 500);
             }
-        } 
+        }
         else {
             if (activeNumber < thumbsNumber) {
                 if (activeNumber > (visibleThumbs - 1) && thumbwrapperPos !== maxTopPosition && enoughThumbs) {
@@ -74,7 +100,7 @@ module.exports = Base.extend({
                     }, 100);
                 }
                 active.next().mouseover();
-            } 
+            }
             else {
                 $('[data-gallery-thumb]').first().mouseover();
                 thumbwrapper.animate({

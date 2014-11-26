@@ -49,6 +49,10 @@ module.exports = Base.extend({
                 }
                 this.filters.addAll(this.meta.filters);
             }
+            // TODO Borrar
+            if (this.meta && response.total) {
+                this.meta.total = response.total;
+            }
             return response.data;
         }
         console.log('[OLX_DEBUG] Empty item listing response');
@@ -65,7 +69,6 @@ module.exports = Base.extend({
             pageSize: query.pageSize,
             total: this.meta ? this.meta.total : 0
         }, {
-            next: this.meta ? this.meta.next : false,
             gallery: options.gallery,
             filters: this.filters
         });

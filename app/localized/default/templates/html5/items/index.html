@@ -1,32 +1,24 @@
-{% view 'locations/select' %}
 {% view 'partials/search' %}
+{% if meta.total > 0 %}
+    {% include (template + '/partials/filterorder.html') %}
+{% endif %}
 <section id="itemListing">
-    {% from macros import Breadcrumb %}
-    {% set link = (breadcrumb | link) %}
-    {{ Breadcrumb(dictionary, link, category.trName, '<span class="switchView"></span>') }}
     {% if meta.total == 0 %}
         <div class="emtyList">
             <div></div>
             <p>
-                {% if location.current.name %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
-                {% else %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}
-                {% endif %}
+                {% block noResultsMsg %}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>', location.current.name if location.current.name else location.name)}}
+                {% endblock %}
             </p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
     {% else %}
-        <ul class="itemListing">
-            {% view 'items/items' %}
-            <div class="clear"></div>
-        </ul>
-        {% if paginator.isEnabled() %}
+        {% view 'items/items' %}
+        {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
     {% endif %}
 </section>
-
 {% view 'pages/interstitial' %}
-
 {% view 'partials/tracking' %}

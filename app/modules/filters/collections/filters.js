@@ -101,22 +101,31 @@ function add(filter, options) {
 }
 
 function _add(filter, options) {
-    var transformer;
+    var tFilter;
 
     if (!(filter instanceof Filter)) {
         filter = new Filter(filter, {
             app: this.app
         });
     }
-    transformer = transformers[filter.get('name')];
+    tFilter = checkTransform.call(this, filter);
+    if (!tFilter) {
+        return this.remove(filter);
+    }
+    return Base.prototype.add.call(this, tFilter, options || {
+        merge: true
+    });
+}
+
+function checkTransform(filter) {
+    var transformer = transformers[filter.get('name')];
+
     if (transformer) {
         filter = transformer.call(this, filter, {
             app: this.app
         });
     }
-    return Base.prototype.add.call(this, filter, options || {
-        merge: true
-    });
+    return filter;
 }
 
 function removeAll(filters, options) {
