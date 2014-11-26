@@ -1,26 +1,4 @@
-{% view 'locations/select' %}
-{% view 'partials/search' %}
-<section id="itemListing">
-    {% from macros import Breadcrumb %}
-    {% set link = (breadcrumb | link) %}
-    {{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>', search) | replace('<<NUMBER>>', meta.total), '<span class="switchView"></span>') }}
-    {% if meta.total == 0 %}
-        <div class="emtyList">
-            <div></div>
-            <p>{{ dictionary["misc.NoResults"] }}</p>
-            <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
-        </div>
-    {% else %}
-        <ul class="itemListing">
-            {% view 'items/items' %}
-            <div class="clear"></div>
-        </ul>
-        {% if paginator and paginator.isEnabled() %}
-            {% include (template + '/items/pagination.html') %}
-        {% endif %}
-    {% endif %}
-</section>
-
-{% view 'pages/interstitial' %}
-
-{% view 'partials/tracking' %}
+{% extends (template + '/items/index.html') %}
+{% block noResultsMsg %}
+    {{ dictionary["misc.NoResults"] }}
+{% endblock %}

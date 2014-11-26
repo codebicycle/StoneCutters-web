@@ -1,14 +1,68 @@
-section#categories ul li a {
-    position: relative;
-    padding: 0.7rem 0.9375rem .7rem 2.5rem;
-    text-transform: capitalize;
-}
-section#categories ul li a span{
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    display: inline;
-    top: 4px;
-    left: 0;
-    background-repeat: no-repeat;
+.categories_list_view {
+    
+    .categories-list {
+
+        .categories-title,
+        a {
+            background-color: #FFF;
+            border-bottom: 1px solid #ECECEC;
+            box-sizing: border-box;
+            font-size: 17px;
+            line-height: 1.2;
+            padding: 14px 8px 13px 46px;
+        }
+
+        .categories-title {
+            color: #4275BA;
+            padding-left: 14px;
+        }
+
+        .icon {
+            background-repeat: no-repeat;
+            left: 8px;
+            position: absolute;
+            top: 8px;
+        }
+
+        a {       
+            color: #494949;
+            display: block;
+            font-weight: normal;
+            position: relative;
+            text-transform: capitalize;
+            trasition: all .5s ease;
+        }
+
+        .subcategories {
+            display: none;
+
+            a {
+                background-color: #ECF8FF;
+                padding-right: 24px;
+                font-size: 15px;            
+
+                &::after {
+                    background: transparent url(imageUrl/images/html5/arrow_cat_home.png) no-repeat 0 0;
+                    content: "";
+                    height: 9px;
+                    position: absolute;
+                    right: 15px;
+                    top: 20px;
+                    width: 5px;
+                }
+            }
+        }
+
+        .expanded {
+
+            a {
+                border-color: #FFF;
+            }
+            
+            > h2 > a {
+                background-color: #E0F4FF;
+                font-weight: bold;
+            }
+        }
+    }
 }

@@ -1,0 +1,26 @@
+<tr>
+	<td>
+		<table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">
+			<tr>
+				<td style="border-top: solid thin #808080;">
+					<strong style="color: #0075BD;">{{ dictionary["defaultfooter.About OLX"] }}</strong>
+				</td>
+			</tr>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="4" border="0" style="width: 100%;">
+			<tr>
+				<td style="border-top: solid thin #808080;">
+					<small>{{ dictionary["about.about_Body"] | replace('<<QTY_COUNTRIES>>', '106') | replace('<<QTY_LANGUAGES>>', '40') }}</small>
+				</td>
+			</tr>
+		</table>
+		{% from macros import Breadcrumb %}
+		{% set link = (breadcrumb | link) %}
+		{{ Breadcrumb(dictionary, link, ('/' | link)) }}
+	</td>
+</tr>
+<tr style="display: none;">
+    <td>
+        {% view 'partials/tracking' %}
+    </td>
+</tr>
