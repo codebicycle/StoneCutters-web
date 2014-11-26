@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'pages_help_view',
@@ -143,7 +143,7 @@ module.exports = Base.extend({
         ];
         
         return _.extend({}, data, {
-            breadcrumb: helpers.breadcrumb.get.call(this, data),
+            breadcrumb: breadcrumb.get.call(this, data),
             topics: topics
         });
     }
