@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': '\xDCzenet:',
     'supportform.Reset': 'Vissza\xE1ll\xEDt\xE1s',
     'seccion-30.478': 'Hirdet\xE9s+t\xF6rl\xE9se',
-    'seccion-31.454': 'Hely:',
     'distancediv.changeLocation': 'M\xE1s hely',
     'postingtitlelisting.view': 'Hirdet\xE9s\xE9t megtekintheti:',
     'posting_selector.SelectCategory': 'V\xE1lasszon kateg\xF3ri\xE1t',

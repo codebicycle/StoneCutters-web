@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Tin nh\u1EAFn:',
     'supportform.Reset': 'Kh\u1EDFi \u0111\u1ED9ng l\u1EA1i',
     'seccion-30.478': 'G\u1EE1 b\u1ECF+Danh m\u1EE5c',
-    'seccion-31.454': '\u0110\u1ECBa \u0111i\u1EC3m:',
     'distancediv.changeLocation': 'Thay \u0111\u1ED5i v\u1ECB tr\xED',
     'postingtitlelisting.view': 'B\u1EA1n c\xF3 th\u1EC3 xem qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n:',
     'posting_selector.SelectCategory': 'Ch\u1ECDn h\u1EA1ng m\u1EE5c',

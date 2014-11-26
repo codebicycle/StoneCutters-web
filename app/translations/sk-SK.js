@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Spr\xE1va:',
     'supportform.Reset': 'Obnovi\u0165',
     'seccion-30.478': 'odstr\xE1ni\u0165+ozn\xE1menie',
-    'seccion-31.454': 'Umiestnenie:',
     'distancediv.changeLocation': 'Zmeni\u0165 miesto',
     'postingtitlelisting.view': 'Va\u0161u reklamu m\xF4\u017Eete zobrazi\u0165:',
     'posting_selector.SelectCategory': 'Zvo\u013Ete kateg\xF3riu',

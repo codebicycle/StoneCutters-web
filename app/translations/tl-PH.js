@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Mensahe:',
     'supportform.Reset': 'I-reset',
     'seccion-30.478': 'Tanggalin+Listahan',
-    'seccion-31.454': 'Lokasyon:',
     'distancediv.changeLocation': 'Palitan ang Lokasyon',
     'postingtitlelisting.view': 'Makikita mo ito sa:',
     'posting_selector.SelectCategory': 'Pumili ng Kategorya',

@@ -3,7 +3,6 @@
         <div class="breadcrumb">
             {% for level in levelPath.location %}
                 <span {{ 'class="icons icon-arrow"' if not loop.first }} >
-                    {{ dictionary["seccion-31.454"] if seoFrom != "item" }}
                     <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
                 </span>
             {% endfor %}

@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Mensaje:',
     'supportform.Reset': 'Restaurar',
     'seccion-30.478': 'Eliminar anuncio',
-    'seccion-31.454': 'Ubicaci\xF3n:',
     'distancediv.changeLocation': 'Cambiar ubicaci\xF3n',
     'postingtitlelisting.view': 'Puedes ver tu anuncio:',
     'posting_selector.SelectCategory': 'Elige categor\xEDa',

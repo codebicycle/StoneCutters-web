@@ -119,7 +119,6 @@ module.exports = {
     'supportform.Message': 'Besked:',
     'supportform.Reset': 'Slet',
     'seccion-30.478': 'Fjern+liste',
-    'seccion-31.454': 'Sted:',
     'distancediv.changeLocation': '\xE6ndr sted',
     'postingtitlelisting.view': 'Du kan se din annonce:',
     'posting_selector.SelectCategory': 'V\xE6lg kategori',

@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var URLParser = require('url');
 var configTracking = require('../config');
 var config = require('../../../../shared/config');
 var utils = require('../../../../shared/utils');
@@ -60,7 +61,7 @@ function getParams(page, options) {
     }, this);
 
     if (url && url.indexOf('?')) {
-        params = _.defaults(params, utils.parse(url.split('?').pop()));
+        params = _.defaults(params, utils.parse(URLParser.parse(url).search));
     }
     return {
         page: pageName,
