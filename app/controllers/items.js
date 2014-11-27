@@ -690,7 +690,7 @@ function search(params, callback, gallery) {
             url = [starts, '/'];
             gallery = gallery || '';
 
-            if (params.categoryId) {
+            if (params.catId) {
                 url.push(params.title);
                 url.push('-cat-');
                 url.push(params.categoryId);
@@ -719,6 +719,23 @@ function search(params, callback, gallery) {
                 if (category.has('parentId')) {
                     subcategory = category;
                     category = categories.get(subcategory.get('parentId'));
+                }
+            }
+            done();
+        }.bind(this);
+
+        var check = function(done) {
+            var cat = '-cat-';
+            var slug;
+            var slugUrl;
+
+            if (params.catId) {
+                slug = helpers.common.slugToUrl((subcategory || category).toJSON());
+                slugUrl = params.title + cat + params.catId;
+
+                if (slug.indexOf(slugUrl)) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, path.replace(slugUrl, slug));
                 }
             }
             done();
@@ -823,6 +840,7 @@ function search(params, callback, gallery) {
             .then(redirect)
             .then(buildUrl)
             .then(configure)
+            .then(check)
             .then(prepare)
             .then(fetch)
             .then(filters)
