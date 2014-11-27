@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\u5199\u771F\u306F\u63B2\u8F09\u3055\u308C\u3066\u3044\u307E\u305B\u3093',
     'itemgeneraldetails.OtherRelatedListings': '\u305D\u306E\u4ED6\u306E\u95A2\u9023\u30EA\u30B9\u30C8:',
     'itemgeneraldetails.Phone': '\u96FB\u8A71',
+    'itemgeneraldetails.PicturesOf': '\u306E\u753B\u50CF ',
     'itemgeneraldetails.Price': '\u4FA1\u683C',
     'itemgeneraldetails.RelatedListings': '\u95A2\u9023\u30EA\u30B9\u30C8',
     'itemgeneraldetails.ShareThisAd': '\u63B2\u8F09\u3092\u516C\u958B\u3059\u308B',

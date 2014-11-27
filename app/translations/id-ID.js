@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Tidak Ada Gambar',
     'itemgeneraldetails.OtherRelatedListings': 'Iklan terkait lainnya:',
     'itemgeneraldetails.Phone': 'Telepon',
+    'itemgeneraldetails.PicturesOf': 'Gambar ',
     'itemgeneraldetails.Price': 'Harga',
     'itemgeneraldetails.RelatedListings': 'Iklan-Iklan Terkait',
     'itemgeneraldetails.ShareThisAd': 'Berbagi iklan ini',

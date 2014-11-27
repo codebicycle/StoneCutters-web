@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Aucune Image Fournie',
     'itemgeneraldetails.OtherRelatedListings': 'Autres annonces connexes:',
     'itemgeneraldetails.Phone': 'T\xE9l\xE9phone',
+    'itemgeneraldetails.PicturesOf': 'Photos de ',
     'itemgeneraldetails.Price': 'Prix',
     'itemgeneraldetails.RelatedListings': 'Annonces Connexes',
     'itemgeneraldetails.ShareThisAd': 'Partager cette annonce',
