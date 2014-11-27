@@ -23,6 +23,9 @@ Backbone.noConflict();
 Base = Backbone.Model;
 
 function cutString(string, n) {
+    if (string.length <= n ) {
+        return string;
+    }    
     if (string.charAt(n) == ' ') {
         return string.substr(0,n);
     }
@@ -30,7 +33,6 @@ function cutString(string, n) {
         return cutString(string, --n);
     }
 }
-
 
 function title(metas, value) {
     var suffix;
