@@ -11,7 +11,10 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var categories = data.categories;
         var order = ['For Sale','Classes','Vehicles','Community','Real Estate','Services','Jobs'];
+        var location = this.app.session.get('location');
+        var states = data.states;
         var list = [];
+        var currentState = {};
 
         _.each(order, function(obj, i){
             _.find(categories, function(obj){
@@ -19,9 +22,20 @@ module.exports = Base.extend({
             });
         });
 
+        if(location.children.length) {
+            _.each(states, function each(state, i){
+                if(location.children[0].id == state.id) {
+                    currentState = state;
+                }
+            });
+        }
+
         return _.extend({}, data, {
-            location: this.app.session.get('location'),
-            categories: list
+            categories: list,
+            currentState: {
+                hostname: currentState.hostname,
+                name: currentState.name
+            }
         });
     }
 });

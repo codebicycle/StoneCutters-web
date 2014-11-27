@@ -22,7 +22,7 @@
             {% endif%}
             {% endfor %}
             <li>
-                <a href="{{ ('all-states/' + currentState.hostname) | link({location: location.url}) }}">
+                <a href="{{ (('all-states/' + currentState.hostname) | link({location: location.url})) if currentState.hostname else ('all-states/' | link({location: location.url})) }}">
                     {{ dictionary["countryoptions.OtherCities"] }}
                 </a>
             </li>
