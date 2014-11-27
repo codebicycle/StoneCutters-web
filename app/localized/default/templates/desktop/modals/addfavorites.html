@@ -1,0 +1,11 @@
+{% extends (template + '/modals/modal.html') %}
+
+{% block id %}favorites-modal{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="users_login_view" data-login-form >
+    {% include (template + "/users/login.html") %}
+</div>
+{% endblock %}
