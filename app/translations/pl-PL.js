@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Brak zdj\u0119cia',
     'itemgeneraldetails.OtherRelatedListings': 'Podobne og\u0142oszenia:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Zdj\u0119cia - ',
     'itemgeneraldetails.Price': 'Cena',
     'itemgeneraldetails.RelatedListings': 'Og\u0142oszenia w tym temacie',
     'itemgeneraldetails.ShareThisAd': 'Pole\u0107',

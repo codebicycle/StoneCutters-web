@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\u7121\u5716\u7247',
     'itemgeneraldetails.OtherRelatedListings': '\u76F8\u95DC\u5EE3\u544A\uFF1A',
     'itemgeneraldetails.Phone': '\u96FB\u8A71',
+    'itemgeneraldetails.PicturesOf': '\uC0AC\uC9C4 ',
     'itemgeneraldetails.Price': '\u50F9\u683C',
     'itemgeneraldetails.RelatedListings': '\u76F8\u95DC\u5EE3\u544A',
     'itemgeneraldetails.ShareThisAd': '\u5206\u4EAB\u9019\u500B\u5EE3\u544A',

@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\u0DA1\u0DCF\u0DBA\u0DCF\u0DBB\u0DD6\u0DB4\u0DBA\u0D9A\u0DCA \u0DC3\u0DB4\u0DBA\u0DCF \u0DB1\u0DD0\u0DAD',
     'itemgeneraldetails.OtherRelatedListings': '\u0D85\u0DB1\u0DD9\u0D9A\u0DCA \u0D85\u0DAF\u0DCF\u0DC5 \u0DBD\u0DD0\u0DBA\u0DD2\u0DC3\u0DCA\u0DAD\u0DD4:',
     'itemgeneraldetails.Phone': '\u0DAF\u0DD4\u0DBB\u0D9A\u0DAE\u0DB1\u0DBA',
+    'itemgeneraldetails.PicturesOf': '\u0DA1\u0DCF\u0DBA\u0DCF\u0DBB\u0DD6\u0DB4\u0DBA ',
     'itemgeneraldetails.Price': '\u0DB8\u0DD2\u0DBD',
     'itemgeneraldetails.RelatedListings': '\u0D85\u0DAF\u0DCF\u0DC5 \u0DBD\u0DD0\u0DBA\u0DD2\u0DC3\u0DCA\u0DAD\u0DD4',
     'itemgeneraldetails.ShareThisAd': '\u0DB8\u0DD9\u0DB8 \u0DAF\u0DD0\u0DB1\u0DCA\u0DC0\u0DD3\u0DB8 \u0DC4\u0DD4\u0DC0\u0DB8\u0DCF\u0DBB\u0DD4 \u0D9A\u0DBB \u0D9C\u0DB1\u0DCA\u0DB1',

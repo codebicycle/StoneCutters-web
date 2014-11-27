@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Intet billede',
     'itemgeneraldetails.OtherRelatedListings': '\xD8vrige relaterede lister:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Billeder af ',
     'itemgeneraldetails.Price': 'Pris',
     'itemgeneraldetails.RelatedListings': 'Relaterede lister',
     'itemgeneraldetails.ShareThisAd': 'Del annoncen',

@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Ei kuvaa',
     'itemgeneraldetails.OtherRelatedListings': 'Muut samankaltaiset ilmoitukset:',
     'itemgeneraldetails.Phone': 'Puhelinnumero',
+    'itemgeneraldetails.PicturesOf': 'Kuvia aiheesta ',
     'itemgeneraldetails.Price': 'Hinta',
     'itemgeneraldetails.RelatedListings': 'Samankaltaiset ilmoitukset',
     'itemgeneraldetails.ShareThisAd': 'Jaa t\xE4m\xE4 ilmoitus',

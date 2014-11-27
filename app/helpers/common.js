@@ -106,7 +106,7 @@ module.exports = (function() {
                 path = linkIgParser.call(null, path);
             }
         }
-        href = path;
+        href = path.replace(/\/\//g, '/');
         if (querystring) {
             href = '?' + querystring;
         }

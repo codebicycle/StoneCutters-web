@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Engin mynd \xED bo\xF0i',
     'itemgeneraldetails.OtherRelatedListings': 'A\xF0rar skyldar augl\xFDsingar:',
     'itemgeneraldetails.Phone': 'S\xEDmi',
+    'itemgeneraldetails.PicturesOf': 'Pictures of ',
     'itemgeneraldetails.Price': 'Ver\xF0',
     'itemgeneraldetails.RelatedListings': 'Tengdar augl\xFDsingar',
     'itemgeneraldetails.ShareThisAd': 'Mi\xF0la \xFEessari augl\xFDsingu',
