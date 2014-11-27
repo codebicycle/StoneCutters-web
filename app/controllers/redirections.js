@@ -10,7 +10,9 @@ var phpRedirections = {
     posting: 'posting',
     register: 'register',
     login: 'login',
-    switch_domain: ''
+    switch_domain: '',
+    myolx: 'myolx/myadslisting',
+    yourads: 'myolx/myadslisting'
 };
 var phpPaths = Object.keys(phpRedirections);
 
