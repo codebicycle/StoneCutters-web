@@ -2,7 +2,7 @@
     clear-fix();
     color: $black;
     font-size: $xs;
-    margin: 0 0 10px 0;
+    margin: 0 0 20px 0;
 
     .breadcrumb-navigation {
         float: left;
@@ -24,6 +24,10 @@
         .count {
             color: $greyStrong;
         }
+        [class*=icon-arrow]::before {
+            font-size: remify(8px);
+            margin: 0 4px;
+        }
     }
     .back-to-results {
         a {
@@ -39,11 +43,17 @@
             &.disable {
                 color: $greyBorders;
             }
+            &:hover {
+                color: $black;
+            }
             &[rel="prev"] {
                 box($white, $greyBorders, 3px 0 0 3px, 6px, solid, 1px 0 1px 1px);
             }
             &[rel="next"] {
                 box($white, $greyBorders, 0 3px 3px 0, 6px, solid, 1px);
+                &.icon-arrow-right:before {
+                    margin-top: -3px;
+                }
             }
         }
         p {
@@ -53,8 +63,4 @@
         }
     }
 
-    [class*=icon-arrow]::before {
-        font-size: remify(8px);
-        margin: 0 4px;
-    }
 }
