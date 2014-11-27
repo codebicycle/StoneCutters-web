@@ -54,7 +54,6 @@ function getSettings(category) {
             var searchQuery = this.app.attributes.session.params.searchTerm;
             var repKey = '[countrycode]';
 
-
             /**
                 CASOS PARA PASAR UN TÉRMINO DE BÚSQUEDA:
                 -
