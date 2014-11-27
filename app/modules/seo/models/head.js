@@ -22,6 +22,16 @@ var Head;
 Backbone.noConflict();
 Base = Backbone.Model;
 
+function cutString(string, n) {
+    if (string.charAt(n) == ' ') {
+        return string.substr(0,n);
+    }
+    else {
+        return cutString(string, --n);
+    }
+}
+
+
 function title(metas, value) {
     var suffix;
 
@@ -53,6 +63,8 @@ function metatitle(metas, value) {
             value += ' - ';
             value += suffix;
         }
+
+        value = cutString(value,110);
         metas.title = value;
     }
     return metas;
@@ -80,6 +92,7 @@ function description(metas, value) {
             value += ' - ';
             value += suffix;
         }
+        value = cutString(value,160);
         metas.description = value;
     }
     return metas;
