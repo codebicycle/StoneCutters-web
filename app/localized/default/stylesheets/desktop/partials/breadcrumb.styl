@@ -24,7 +24,7 @@
         .count {
             color: $greyStrong;
         }
-        [class*=icon-arrow]::before {
+        .icon-arrow:before {
             font-size: remify(8px);
             margin: 0 4px;
         }
@@ -32,6 +32,10 @@
     .back-to-results {
         a {
             font-size: $xs;
+            &.icon-arrow-left:before {
+                font-size: remify(8px);
+                margin: 0 4px;
+            }
         }
     }
     .breadcrumb-pagination {
