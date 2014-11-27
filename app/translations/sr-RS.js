@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Bez slike',
     'itemgeneraldetails.OtherRelatedListings': 'Drugi srodni oglasi:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Slike ',
     'itemgeneraldetails.Price': 'Cena',
     'itemgeneraldetails.RelatedListings': 'Srodni oglasi',
     'itemgeneraldetails.ShareThisAd': 'Podelite ovaj oglas',

@@ -9,7 +9,9 @@
         {% view 'items/partials/contactform' %}
     </aside>
 
-    {% set seoFrom = "seo-item-page" %}
-    {% include (template + "/partials/seobox.html") %}
+    {% if seo %}
+        {% set seoFrom = "item" %}
+        {% include (template + "/partials/seobox.html") %}
+    {% endif %}
 </section>
 {% view 'partials/tracking' %}

@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Kh\xF4ng c\xF3 \u1EA3nh n\xE0o \u0111\u01B0\u1EE3c cung c\u1EA5p',
     'itemgeneraldetails.OtherRelatedListings': 'C\xE1c rao v\u1EB7t li\xEAn quan kh\xE1c:',
     'itemgeneraldetails.Phone': '\u0110i\u1EC7n tho\u1EA1i',
+    'itemgeneraldetails.PicturesOf': 'H\xECnh \u1EA3nh c\u1EE7a ',
     'itemgeneraldetails.Price': 'Gi\xE1',
     'itemgeneraldetails.RelatedListings': 'C\xE1c danh m\u1EE5c li\xEAn quan',
     'itemgeneraldetails.ShareThisAd': 'Chia s\u1EBB rao v\u1EB7t n\xE0y',

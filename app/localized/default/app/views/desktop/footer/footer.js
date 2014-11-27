@@ -14,9 +14,23 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var location = this.app.session.get('location');
+        var states = data.states;
+        var currentState = {};
+
+        if(location.children.length) {
+            _.each(states, function each(state, i){
+                if(location.children[0].id == state.id) {
+                    currentState = state;
+                }
+            });
+        }
 
         return _.extend({}, data, {
-            user: this.app.session.get('user')
+            currentState: {
+                hostname: currentState.hostname,
+                name: currentState.name
+            }
         });
     },
     postRender: function() {
