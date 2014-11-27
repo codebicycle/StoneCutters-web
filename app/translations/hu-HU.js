@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Nincs k\xE9p',
     'itemgeneraldetails.OtherRelatedListings': 'Egy\xE9b hasonl\xF3 hirdet\xE9sek:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Fot\xF3k ',
     'itemgeneraldetails.Price': 'V\xE9tel\xE1r',
     'itemgeneraldetails.RelatedListings': 'Hasonl\xF3 hirdet\xE9sek',
     'itemgeneraldetails.ShareThisAd': 'A rekl\xE1m megoszt\xE1sa',
