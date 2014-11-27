@@ -10,7 +10,9 @@ var phpRedirections = {
     posting: 'posting',
     register: 'register',
     login: 'login',
-    switch_domain: ''
+    switch_domain: '',
+    myolx: 'myolx/myadslisting',
+    yourads: 'myolx/myadslisting'
 };
 var phpPaths = Object.keys(phpRedirections);
 
@@ -129,7 +131,6 @@ module.exports = {
     redirecttomain: function(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location').url;
-        var path = this.app.session.get('path');
 
         this.app.session.persist({
             olx_mobile_full_site_redirect: true,
@@ -137,7 +138,7 @@ module.exports = {
         }, {
             maxAge: 2 * HOUR
         });
-        helpers.common.redirect.call(this, 'http://' + siteLocation + path, null, {
+        helpers.common.redirect.call(this, 'http://' + siteLocation, null, {
             status: 302,
             pushState: false
         });

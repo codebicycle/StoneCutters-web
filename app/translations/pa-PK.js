@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\u0A15\u0A4B\u0A08 \u0A24\u0A38\u0A35\u0A40\u0A30 \u0A28\u0A39\u0A40\u0A02 \u0A26\u0A3F\u0A71\u0A24\u0A40',
     'itemgeneraldetails.OtherRelatedListings': '\u0A39\u0A4B\u0A30 \u0A38\u0A70\u0A2C\u0A70\u0A27\u0A24 \u0A07\u0A36\u0A24\u0A3F\u0A39\u0A3E\u0A30:',
     'itemgeneraldetails.Phone': '\u0A5E\u0A4B\u0A28',
+    'itemgeneraldetails.PicturesOf': '\u0A07\u0A38 \u0A26\u0A40\u0A06\u0A02 \u0A24\u0A38\u0A35\u0A40\u0A30\u0A3E\u0A02 ',
     'itemgeneraldetails.Price': '\u0A15\u0A40\u0A2E\u0A24',
     'itemgeneraldetails.RelatedListings': '\u0A38\u0A70\u0A2C\u0A70\u0A27\u0A24 \u0A07\u0A36\u0A24\u0A3F\u0A39\u0A3E\u0A30',
     'itemgeneraldetails.ShareThisAd': '\u0A07\u0A38 \u0A07\u0A36\u0A24\u0A3F\u0A39\u0A3E\u0A30 \u0A28\u0A42\u0A70 \u0A38\u0A3E\u0A02\u0A1D\u0A3E \u0A15\u0A30\u0A4B',

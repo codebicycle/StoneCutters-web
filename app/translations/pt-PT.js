@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'No Picture Provided',
     'itemgeneraldetails.OtherRelatedListings': 'Outros an\xFAncios relacionados:',
     'itemgeneraldetails.Phone': 'Telefone',
+    'itemgeneraldetails.PicturesOf': 'Fotos de ',
     'itemgeneraldetails.Price': 'Pre\xE7o',
     'itemgeneraldetails.RelatedListings': 'An\xFAncios relacionados',
     'itemgeneraldetails.ShareThisAd': 'Partilhar este an\xFAncio',

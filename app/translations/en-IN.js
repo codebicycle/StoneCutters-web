@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'No Picture Provided',
     'itemgeneraldetails.OtherRelatedListings': 'Other related ads:',
     'itemgeneraldetails.Phone': 'Phone',
+    'itemgeneraldetails.PicturesOf': 'Pictures of ',
     'itemgeneraldetails.Price': 'Price',
     'itemgeneraldetails.RelatedListings': 'Related Ads',
     'itemgeneraldetails.ShareThisAd': 'Share this ad',

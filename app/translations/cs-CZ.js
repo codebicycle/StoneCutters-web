@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Nebyl zad\xE1n obr\xE1zek',
     'itemgeneraldetails.OtherRelatedListings': 'Ostatn\xED souvisej\xEDc\xED z\xE1znamy:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Obr\xE1zky ',
     'itemgeneraldetails.Price': 'Cena',
     'itemgeneraldetails.RelatedListings': 'Souvisej\xEDc\xED z\xE1znamy',
     'itemgeneraldetails.ShareThisAd': 'Sd\xEDlet inzer\xE1t',

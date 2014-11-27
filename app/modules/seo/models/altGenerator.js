@@ -72,7 +72,7 @@ function generate () {
         alts.push(title + ' - ' + this.get('price'));
     }
     alts.push(title.substr(0,title.length <= 50 ? title.length : 50));
-    
+
    return alts;
 }
 

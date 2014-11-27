@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\u0915\u094B\u0908 \u091A\u093F\u0924\u094D\u0930 \u0928\u0939\u0940\u0902 \u0939\u0948',
     'itemgeneraldetails.OtherRelatedListings': '\u0905\u0928\u094D\u092F \u0938\u0902\u092C\u0902\u0927\u093F\u0924 \u0932\u093F\u0938\u094D\u091F\u093F\u0902\u0917:',
     'itemgeneraldetails.Phone': '\u092B\u094B\u0928',
+    'itemgeneraldetails.PicturesOf': '\u0915\u0947 \u091A\u093F\u0924\u094D\u0930 ',
     'itemgeneraldetails.Price': '\u0915\u0940\u092E\u0924',
     'itemgeneraldetails.RelatedListings': '\u0938\u0902\u092C\u0902\u0927\u093F\u0924 \u0932\u093F\u0938\u094D\u091F\u093F\u0902\u0917',
     'itemgeneraldetails.ShareThisAd': '\u0907\u0938 \u0935\u093F\u091C\u094D\u091E\u093E\u092A\u0928 \u0915\u094B \u0938\u093E\u091D\u093E \u0915\u0930\u0947\u0902',

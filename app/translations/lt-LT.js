@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Nepateiktas vaizdas',
     'itemgeneraldetails.OtherRelatedListings': 'Kiti susij\u0119 skelbimai:',
     'itemgeneraldetails.Phone': 'Telefonas',
+    'itemgeneraldetails.PicturesOf': 'Nuotraukos ',
     'itemgeneraldetails.Price': 'Kaina',
     'itemgeneraldetails.RelatedListings': 'Susij\u0119 skelbimai',
     'itemgeneraldetails.ShareThisAd': 'Dalytis \u0161iuo skelbimu',

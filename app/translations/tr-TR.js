@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Resim yoktur',
     'itemgeneraldetails.OtherRelatedListings': '\u0130lgili di\u011Fer ilanlar:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Resimleri ',
     'itemgeneraldetails.Price': 'Fiyat',
     'itemgeneraldetails.RelatedListings': '\u0130lgili \u0130lanlar',
     'itemgeneraldetails.ShareThisAd': 'Bu ilan\u0131 payla\u015F',

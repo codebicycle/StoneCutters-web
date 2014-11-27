@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Geen Prent Verskaf Nie',
     'itemgeneraldetails.OtherRelatedListings': 'Ander verwante lystings:',
     'itemgeneraldetails.Phone': 'Telefoon',
+    'itemgeneraldetails.PicturesOf': 'Foto\'s van ',
     'itemgeneraldetails.Price': 'Prys',
     'itemgeneraldetails.RelatedListings': 'Verwante Lystings',
     'itemgeneraldetails.ShareThisAd': 'Deel hierdie advt.',

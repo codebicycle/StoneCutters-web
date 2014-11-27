@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': '\uB4F1\uB85D\uB41C \uC0AC\uC9C4 \uC5C6\uC74C',
     'itemgeneraldetails.OtherRelatedListings': '\uAE30\uD0C0 \uAD00\uB828 \uBAA9\uB85D\uC11C:',
     'itemgeneraldetails.Phone': '\uC804\uD654',
+    'itemgeneraldetails.PicturesOf': '\uD56D\uBAA9\uBA85 ',
     'itemgeneraldetails.Price': '\uAC00\uACA9',
     'itemgeneraldetails.RelatedListings': '\uAD00\uB828 \uBAA9\uB85D\uC11C',
     'itemgeneraldetails.ShareThisAd': '\uC774 \uAD11\uACE0\uB97C \uACF5\uC720\uD558\uAE30',

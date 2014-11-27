@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Pas d\'image associ\xE9e',
     'itemgeneraldetails.OtherRelatedListings': 'Autres annonces correspondantes :',
     'itemgeneraldetails.Phone': 'T\xE9l\xE9phone',
+    'itemgeneraldetails.PicturesOf': 'Photos de ',
     'itemgeneraldetails.Price': 'Prix',
     'itemgeneraldetails.RelatedListings': 'Annonces correspondantes',
     'itemgeneraldetails.ShareThisAd': 'Faire passer cette annonce',

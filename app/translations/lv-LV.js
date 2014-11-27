@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Nav pievienots att\u0113ls',
     'itemgeneraldetails.OtherRelatedListings': 'Citi l\u012Bdz\u012Bgi sludin\u0101jumi:',
     'itemgeneraldetails.Phone': 'T\u0101lrunis',
+    'itemgeneraldetails.PicturesOf': 'att\u0113li ',
     'itemgeneraldetails.Price': 'Cena',
     'itemgeneraldetails.RelatedListings': 'L\u012Bdz\u012Bgi sludin\u0101jumi',
     'itemgeneraldetails.ShareThisAd': 'Izplatiet \u0161o sludin\u0101jumu',

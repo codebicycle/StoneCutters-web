@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Sense imatge',
     'itemgeneraldetails.OtherRelatedListings': 'Altres anuncis relacionats:',
     'itemgeneraldetails.Phone': 'Tel\xE8fon',
+    'itemgeneraldetails.PicturesOf': 'Fotos de ',
     'itemgeneraldetails.Price': 'Preu',
     'itemgeneraldetails.RelatedListings': 'Anuncis relacionats',
     'itemgeneraldetails.ShareThisAd': 'Comparteix aquest anunci',

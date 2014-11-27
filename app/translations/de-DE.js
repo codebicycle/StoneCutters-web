@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Kein Foto',
     'itemgeneraldetails.OtherRelatedListings': '\xC4hnliche Kleinanzeigen:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Bilder von ',
     'itemgeneraldetails.Price': 'Preis',
     'itemgeneraldetails.RelatedListings': '\xC4hnliche Kleinanzeigen',
     'itemgeneraldetails.ShareThisAd': 'Annonce mit anderen teilen',

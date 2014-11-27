@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Walang Litrato na Binigay',
     'itemgeneraldetails.OtherRelatedListings': 'Ibang kaugnay na mga patalastas:',
     'itemgeneraldetails.Phone': 'Telepono',
+    'itemgeneraldetails.PicturesOf': 'Larawan ng ',
     'itemgeneraldetails.Price': 'Halaga',
     'itemgeneraldetails.RelatedListings': 'Kaugnay na mga Patalastas',
     'itemgeneraldetails.ShareThisAd': 'Ibahagi ang patalastas na ito',

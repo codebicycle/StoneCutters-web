@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Pilti pole lisatud',
     'itemgeneraldetails.OtherRelatedListings': 'Muud seotud kuulutused:',
     'itemgeneraldetails.Phone': 'Telefon',
+    'itemgeneraldetails.PicturesOf': 'Pildid teemal ',
     'itemgeneraldetails.Price': 'Hind',
     'itemgeneraldetails.RelatedListings': 'Seotud kuulutused',
     'itemgeneraldetails.ShareThisAd': 'Jaga seda kuulutust',

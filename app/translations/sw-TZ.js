@@ -144,6 +144,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Hakuna Picha Iliyotolewa',
     'itemgeneraldetails.OtherRelatedListings': 'Matangazo mengine husika:',
     'itemgeneraldetails.Phone': 'Simu',
+    'itemgeneraldetails.PicturesOf': 'Pictures of ',
     'itemgeneraldetails.Price': 'Bei',
     'itemgeneraldetails.RelatedListings': 'Matangazo Husika',
     'itemgeneraldetails.ShareThisAd': 'Shriki tangazo hili',
