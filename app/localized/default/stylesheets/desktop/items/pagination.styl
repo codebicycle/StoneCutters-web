@@ -24,6 +24,8 @@
                 &:first-child {
                     margin-right: 10px;
                     width:100px;
+                    font-weight: normal;
+                    text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
                 }
             }
             &.next:only-child,
@@ -38,7 +40,7 @@
 
         li {
             display: inline-block;
-
+            margin-right: 5px;
 
             .pagination-arrow,
             .pagination-number {
@@ -47,9 +49,15 @@
                 padding: 2px 7px;
             }
             .pagination-arrow {
-                color: $black;
+                color: $greyStrong;
+                &:hover {
+                    color: $black;
+                }
                 &.disable {
                     color: $greyBorders;
+                }
+                &.icon-arrow-right:before {
+                    margin-top: -4px;
                 }
             }
             .pagination-number {
@@ -65,7 +73,7 @@
                 background: $greyStrong;
                 border-radius(25px);
                 color: $white;
-                margin: 5px 0;
+                margin: 5px;
                 padding: 2px 7px;
             }
         }
