@@ -191,6 +191,7 @@ function form(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
+
         var language;
         var languages;
         var languageId;

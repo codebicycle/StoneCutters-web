@@ -1,0 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html dir="rtl">
+    {% view 'layout/head' %}
+    <body style="margin: 0; padding: 0; font-family: Sans-Serif;" text="#666666" link="#0066FF" vlink="#0066FF">
+        {% set bar = template + "/layout/bar.html" %}
+        {% include bar %}
+        {% view 'header/index' %}
+        {{ body }}
+        {% view 'footer/footer' %}
+    </body>
+</html>

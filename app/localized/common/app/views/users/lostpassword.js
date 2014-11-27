@@ -2,7 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'users_lostpassword_view',
@@ -14,7 +14,8 @@ module.exports = Base.extend({
         var params = this.options.params;
 
         return _.extend({}, data, {
-            params: params
+            params: params,
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     }
 });
