@@ -24,6 +24,7 @@ module.exports = {
     'es-SV': require('./es-SV'),
     'es-VZ': require('./es-VZ'),
     'et-EE': require('./et-EE'),
+    'fa-IR': require('./fa-IR'),
     'fi-FI': require('./fi-FI'),
     'fr-CA': require('./fr-CA'),
     'fr-FR': require('./fr-FR'),

@@ -1,0 +1,100 @@
+.partials_search_view, .locations_list_view {
+	header#search {
+		background: #dadada;
+		display: table;
+		overflow: hidden;
+		padding: .5rem 0;
+		width: 100%;
+		.search-form {
+			display: table-cell;
+			padding: 0 10px 0 0;
+			width: 100%;
+		}
+		.search-form.home {
+			width:100%;
+		}
+		input {
+			display: inline-block;
+			height: 1.875rem;
+		}
+		input[name=search] {
+			border-radius: 0 .3125rem .3125rem 0;
+			border: 1px solid #3b67a2;
+			float:right;
+			font-size: 0.8125rem;
+			padding: 0 .3rem 0 0;
+			width: 81%;
+		}
+		input[type=submit] {
+			background: #3b67a2 url(imageUrl/images/html5/icon_lupa.png) center center no-repeat;
+			border-radius: .3125rem 0 0 .3125rem;
+			border: 1px solid #3b67a2;
+			float: right;
+			height: 32px;
+			text-indent: -100em;
+			width: 15%
+		}
+	}
+
+
+	@media only screen and (max-width : 214px) {
+		header#search {
+		    .search-form {
+		    	width: 91%;
+		    	display: block;
+		    	margin-bottom: 5px;
+		    	overflow: hidden;
+		    }
+	    }
+
+	}
+}
+
+.locations_list_view {
+	.cities-links {
+		padding: 0;
+		h3 {
+			color: #4275ba;
+			border-bottom: none;
+		}
+		ul {
+			li {
+				border-bottom: 1px solid #ececec;
+			}
+		}
+		p {
+			padding: 10px;
+		}
+	}
+}
+
+.btnfilter {
+	border-radius: 0.150rem;
+	border: .1rem solid #e2e2e2;
+	box-shadow: 0 1px 1px rgba(96, 96, 96, 0.5);
+	color: #178cc8;
+    display: table-cell;
+    float: left;
+    font-family: Arial;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 7px 30px 7px 7px;
+    text-align: center;
+}
+.btnlocation {
+	background: #fff url(imageUrl/images/html5/icon_location.png) 10px center no-repeat;
+	color: #494949;
+	display: table-cell;
+	margin-right: 8px;
+	margin-left: 10px;
+}
+@media  (max-width : 279px) {
+	.btnfilter {
+    	margin-bottom: 5px;
+    	width: 72%;
+    }
+    .btnlocation {
+    	margin-bottom: 0;
+    }
+}
+

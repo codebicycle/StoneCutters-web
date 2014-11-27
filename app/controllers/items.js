@@ -26,7 +26,9 @@ module.exports = {
     allresults: middlewares(allresults),
     allresultsig: middlewares(allresultsig),
     favorite: middlewares(favorite),
-    'delete': middlewares(deleteItem)
+    'delete': middlewares(deleteItem),
+    filter: middlewares(filter),
+    sort: middlewares(sort)
 };
 
 function show(params, callback) {
@@ -846,10 +848,6 @@ function staticSearch(params, callback, gallery) {
         var subcategory;
 
         var redirect = function(done) {
-            if (platform !== 'desktop') {
-                done.abort();
-                return helpers.common.redirect.call(this, '/nf/search/' + params.search);
-            }
             if (params.search && params.search.toLowerCase() === 'gumtree' && this.app.session.get('location').url === 'www.olx.co.za') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/q/-');
@@ -969,13 +967,10 @@ function staticSearch(params, callback, gallery) {
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
 
-            tracking.addParam('page_nb', meta.totalPages);
+            tracking.addParam('keyword', query.search);
+            tracking.addParam('page_nb', items.paginator.get('totalPages'));
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
-
-            if (!query.search || query.search === 'undefined') {
-                console.log('[OLX_DEBUG]', 'tracker analytics keyword', '|', 'url', '|', this.app.session.get('url'), '|', 'referer', '|', this.app.session.get('referer'));
-            }
 
             callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
                 items: items.toJSON(),
@@ -1236,4 +1231,123 @@ function deleteItem(params, callback) {
         .then(prepare)
         .then(remove)
         .val(success);
+}
+
+function filter(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        var redirect = function(done) {
+            if (platform !== 'html5') {
+                done.abort();
+                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/filter', ''));
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            params.location = this.app.session.get('siteLocation');
+            params.offset = 0;
+            params.pageSize = 0;
+            params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
+
+            if (params.search) {
+                params.searchTerm = params.search;
+                delete params.search;
+            }
+            if (params.catId) {
+                params.categoryId = params.catId;
+                delete params.catId;
+            }
+            if (params.title) {
+                delete params.title;
+            }
+            delete params.platform;
+            delete params.page;
+            delete params.filters;
+            done();
+        }.bind(this);
+
+        var find = function(done) {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                done(res.items.filters);
+            }.bind(this));
+        }.bind(this);
+
+        var success = function(filters) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+            callback(null, 'items/filter', {
+                filters: filters
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(find)
+            .val(success);
+    }
+}
+
+function sort(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        var redirect = function(done) {
+            if (platform !== 'html5') {
+                done.abort();
+                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/sort', ''));
+            }
+            done();
+        }.bind(this);
+
+        var build = function(done) {
+            var options = [
+                {
+                    name: 'pricedesc'
+                },
+                {
+                    name: 'price'
+                },
+                {
+                    name: 'datedesc'
+                }
+            ];
+
+            done(options);
+        }.bind(this);
+
+        var success = function(options) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+            callback(null, 'items/sort', {
+                sorts: options
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(build)
+            .val(success);
+    }
 }

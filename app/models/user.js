@@ -26,7 +26,7 @@ function getHash(hash) {
     if (utils.isServer) {
         return crypto.createHash('sha512').update(hash + this.getUsernameOrEmail()).digest('hex');
     }
-    return utils.toSha512(hash);
+    return utils.toSha512(hash + this.getUsernameOrEmail());
 }
 
 function login(done) {
