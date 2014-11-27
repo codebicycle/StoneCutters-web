@@ -5,10 +5,12 @@
     </div>
     <ul class="optionals">
         {% for option in item.optionals %}
-            <li>
-                <span>{{ option.label }}</span>
-                <span>{{ option.value }}</span>
-            </li>
+            {% if option.label %}
+                <li>
+                    <span>{{ option.label }}</span>
+                    <span>{{ option.value }}</span>
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 {% else %}
