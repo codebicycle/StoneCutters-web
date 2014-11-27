@@ -5,7 +5,14 @@ var helpers = require('../helpers');
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
-var phpPaths = ['posting', 'register', 'login'];
+var phpRedirections = {
+    index: '',
+    posting: 'posting',
+    register: 'register',
+    login: 'login',
+    switch_domain: ''
+};
+var phpPaths = Object.keys(phpRedirections);
 
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -143,7 +150,7 @@ module.exports = {
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
-            return helpers.common.redirect.call(this, this.app.session.get('url').replace('.php', ''));
+            return helpers.common.redirect.call(this, this.app.session.get('url').replace(params.path + '.php', phpRedirections[params.path]));
         }
         statsd.increment(['redirections', 'php', this.app.session.get('path')]);
         helpers.common.redirect.call(this, '/');
@@ -160,7 +167,7 @@ module.exports = {
         }
         url.push('-ig');
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -185,7 +192,7 @@ module.exports = {
             url.push('/-ig');
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -206,7 +213,7 @@ module.exports = {
             url.push(page);
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -229,7 +236,7 @@ module.exports = {
         }
         url.push('-ig');
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
@@ -250,9 +257,12 @@ module.exports = {
             url.push(page);
         }
         if (filters && filters !== 'undefined') {
-            url.push('/');
+            url.push('/-');
             url.push(filters);
         }
         helpers.common.redirect.call(this, url.join(''));
+    },
+    staticSearchMobile: function(params, callback) {
+        helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
     }
 };

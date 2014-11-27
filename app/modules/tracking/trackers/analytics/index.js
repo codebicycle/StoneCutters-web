@@ -70,6 +70,7 @@ function getParams(page, options) {
     params.osName = this.app.session.get('osName');
     params.osVersion = this.app.session.get('osVersion');
     params.location = this.app.session.get('location').name;
+    params.domain = this.app.session.get('domain');
 
     if (options.keyword) {
         params.keyword = options.keyword;

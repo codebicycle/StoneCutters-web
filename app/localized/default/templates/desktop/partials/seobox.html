@@ -5,13 +5,10 @@
 
 {% if (populars and populars.length > 0) or
       (relateds and relateds.length > 0) or
-      (levelPath and levelPath.length > 0) or
+      levelPath or
       (wikititles and wikititles.length > 0) %}
-    <section id="seo-box" class="{{ seoFrom if seoFrom }}" >
-        {% if seo %}
-            {% include (template + '/partials/seotopsearches.html') %}
-        {% endif %}
-
+    <section id="seo-box" {{ 'class="seo-' + seoFrom + '-page"' if seoFrom }}>
+        {% include (template + '/partials/seotopsearches.html') %}
         {% if populars.length > 0 %}
             <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
             <ul>
@@ -35,8 +32,7 @@
                 {% endfor %}
             </ul>
         {% endif %}
-
-        {% if levelPath.length > 0 or wikititles.length > 0 %}
+        {% if levelPath or wikititles.length > 0 %}
             {% include (template + "/partials/seolevelpath.html") %}
         {% endif %}
     </section>

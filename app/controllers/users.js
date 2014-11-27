@@ -50,6 +50,8 @@ function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {
 
         });
@@ -62,6 +64,11 @@ function lostpassword(params, callback) {
     }, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
         callback(null, {
             form: this.form,
             success: params.success
@@ -98,6 +105,8 @@ function logout(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         this.app.session.clear('user');
         return helpers.common.redirect.call(this, '/', null, {
             status: 302,
@@ -133,6 +142,8 @@ function myolx(params, callback) {
             });
         }
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
         callback(null, {});
     }
 }
@@ -163,7 +174,7 @@ function myads(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'myAds');
             myAds = params.myAds;
             deleted = params.deleted;
             delete params.deleted;
@@ -237,6 +248,9 @@ function myads(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
             .then(redirect)
             .then(prepare)
@@ -272,7 +286,7 @@ function favorites(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'myFavs');
             favorite = params.favorite;
             delete params.favorite;
             _params = _.extend({}, params, {
@@ -345,6 +359,9 @@ function favorites(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
             .then(redirect)
             .then(prepare)
@@ -359,7 +376,8 @@ function messages(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var deleted;
+        var page = params ? params.page : undefined;
+        var message;
         var _params;
         var user;
 
@@ -369,21 +387,23 @@ function messages(params, callback) {
             if (platform !== 'desktop') {
                 return done.fail();
             }
-            done();
-        }.bind(this);
-
-        var prepare = function(done) {
             user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
+            done();
+        }.bind(this);
 
-            _params = _.extend({
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, 'myMsgs');
+            message = params.message;
+            delete params.message;
+            _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId
-            }, params);
+            });
 
             done();
         }.bind(this);
@@ -399,10 +419,29 @@ function messages(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
+        var paginate = function(done, res) {
+            var url = '/myolx/myolxmessages';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.messages.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
+
         var success = function(response) {
             callback(null, 'users/myolx', {
                 messages: response.messages.toJSON(),
-                viewname: 'messages'
+                viewname: 'messages',
+                paginator: response.messages.paginator
             });
         }.bind(this);
 
@@ -410,9 +449,14 @@ function messages(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }
@@ -472,6 +516,9 @@ function readmessages(params, callback) {
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
+        this.app.seo.addMetatag('robots', 'noindex, nofollow');
+        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
         asynquence().or(error)
             .then(prepare)

@@ -1,0 +1,8 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.About OLX"]) }}
+<div class="about-content">
+	{{ dictionary["about.about_Body"] | replace('<<QTY_COUNTRIES>>', '106') | replace('<<QTY_LANGUAGES>>', '40') }}
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+{% view 'partials/tracking' %}

@@ -14,9 +14,11 @@
             {% endif %}
         </section>
     </div>
-{% if seo %}
-    {% include (template + '/partials/seobox.html') %}
-{% endif %}
+
+    {% if seo %}
+        {% set seoFrom = "staticsearch" %}
+        {% include (template + "/partials/seobox.html") %}
+    {% endif %}
 {% else %}
     {% include (template + '/partials/notfound.html') %}
 {% endif %}

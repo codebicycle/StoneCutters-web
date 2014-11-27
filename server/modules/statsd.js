@@ -23,8 +23,17 @@ var Client = function(options) {
         statsD.increment(metric, value);
     }
 
+    function gauge(metric, value) {
+        if (Array.isArray(metric)) {
+            metric = metric.join('.');
+        }
+        logger.log('Gauging metric: ' + metric + ' by ' + (value || 1));
+        statsD.gauge(metric, value);
+    }
+
     return {
-        increment: increment
+        increment: increment,
+        gauge: gauge
     };
 };
 
@@ -37,7 +46,8 @@ module.exports = function() {
     }
     else {
         client = {
-            increment: function() {}
+            increment: function() {},
+            gauge: function() {}
         };
     }
     return client;

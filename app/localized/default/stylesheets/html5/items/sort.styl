@@ -1,0 +1,48 @@
+.items_sort_view {
+	font-size: .875rem;
+	color: #494949;
+	form#form-sort {
+		fieldset {
+			padding: 1.250rem .625rem;
+			border: 0;
+			border-bottom: 1px solid #ccc;
+			&.center {
+				text-align: center;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				box-sizing: border-box;
+			}
+			&.no-border {
+				border: 0;
+			}			
+		}
+		label {
+			float: left;
+			padding-right: .625em;
+			&.block {
+				width: 100%;
+			}
+		}
+		button {
+			padding: .625rem 1.875rem;
+			text-transform: uppercase;
+			font-weight: bold;
+			color: #fff;
+			&.disabled {
+				background: #F2F1F0; 
+				border: none;
+				color: #C7C7C7;
+			}
+		}
+
+		input[type="checkbox"],
+		input[type="radio"] {
+			float: right;
+		}
+	}
+	.filter-btns {
+		border-radius: 3px;
+	}
+
+}

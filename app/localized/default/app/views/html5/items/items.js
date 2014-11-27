@@ -4,7 +4,8 @@ var Base = require('../../../../../common/app/bases/view');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'items_items_view',
+    className: 'item-listing items_items_view',
+    tagName: 'ul',
     wapAttributes: {
         cellpadding: 0
     },
