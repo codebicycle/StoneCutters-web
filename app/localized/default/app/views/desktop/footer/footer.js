@@ -16,17 +16,26 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
         var states = data.states;
-        var hostname = '';
+        var currentState = '';
 
         if(location.children.length) {
             _.each(states, function(state, i){
-                return location.children[0].id == state.id ? hostname = state.hostname : false;
+                if(location.children[0].id == state.id) {
+                    currentState = state;
+                    return currentState;
+                }
+                else {
+                    return false;
+                }
             });
         }
 
         return _.extend({}, data, {
             user: this.app.session.get('user'),
-            hostname: hostname
+            currentState: {
+                hostname: currentState.hostname,
+                name: currentState.name
+            }
         });
     },
     postRender: function() {
