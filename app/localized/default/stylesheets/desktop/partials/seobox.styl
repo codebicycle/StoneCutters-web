@@ -33,6 +33,14 @@
             width: 32%;
         }
     }
+    .top-searches {
+        font-size: $xs;
+        a:not(:last-child)::after {
+            color: $black;
+            content: "-";
+            margin-left: 2px;
+        }
+    }
     .level-path-bottom {
         span {
             font-size: $xs;
@@ -41,13 +49,11 @@
                 font-size: remify(7px);
             }
         }
-    }
-    &.seo-item-page {
-        width: 640px;
-    }
-    &.seo-listing-page {
-        .level-path-bottom {
+        &:not(:first-child) {
             margin-top: 20px;
         }
+    }
+    &.seo-item-page {
+        width: 620px;
     }
 }

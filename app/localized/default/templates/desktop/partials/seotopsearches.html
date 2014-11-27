@@ -1,7 +1,0 @@
-{% set topSearches = seo.get('topSearches') or false %}
-<p class="pop-rel">
-    <span>{{ dictionary["defaultfooter.PopularSearches"] }}:</span>
-    {% for _top in topSearches %}
-        <a href="{{ _top.url }}" >{{ _top.anchor }}</a>
-    {% endfor %}
-</p>
