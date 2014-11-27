@@ -143,6 +143,7 @@ module.exports = {
     'itemgeneraldetails.NoPicture': 'Geen foto aangeboden',
     'itemgeneraldetails.OtherRelatedListings': 'Verwante advertenties:',
     'itemgeneraldetails.Phone': 'Telefoonnummer',
+    'itemgeneraldetails.PicturesOf': 'Foto\'s van ',
     'itemgeneraldetails.Price': 'Prijs',
     'itemgeneraldetails.RelatedListings': 'Verwante advertenties',
     'itemgeneraldetails.ShareThisAd': 'Deel deze advertentie',
