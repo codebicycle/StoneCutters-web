@@ -17,6 +17,7 @@ module.exports = {
         enabled: true,
         levelPath: true,
         popularSearches: true,
+        topSearches: true,
         relatedListings: true,
         topTitle: true,
         references: true,
