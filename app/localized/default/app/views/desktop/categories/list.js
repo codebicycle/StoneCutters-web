@@ -15,7 +15,7 @@ module.exports = Base.extend({
         var categories = data.categories;
         var currentState = {};
 
-        categories = helpers.common.categoryOrder(categories, this.app.session.get('siteLocation'));
+        categories = helpers.common.categoryOrder(categories, location.url);
 
         if(location.children.length) {
             _.each(states, function each(state, i){

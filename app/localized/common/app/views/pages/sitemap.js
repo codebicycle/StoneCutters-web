@@ -12,7 +12,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var categories = data.categories;
 
-        categories = helpers.common.categoryOrder(categories, this.app.session.get('siteLocation'));
+        categories = helpers.common.categoryOrder(categories, this.app.session.get('location').url);
 
         return _.extend({}, data, {
             location: this.app.session.get('location'),
