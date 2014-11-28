@@ -58,10 +58,13 @@ function getSettings(category) {
                 configAD.options = _.extend({}, configAD.options, {
                     pubId: configAD.options.pubId.replace(repKey, countryCode.toLowerCase()), //REVIEW
                     query: searchQuery, //TODO
+                    categoriesAsQuery: [185, 186, 16],
                     channel: configAD.options.channel.replace(repKey, countryCode), //REVIEW
                     hl: this.app.session.get('selectedLanguage').split('-').shift()
                 });
             }
+
+            console.log(configAD.options.categoriesAsQuery);
 
             _.extend(settings, {
                 enabled : true,
