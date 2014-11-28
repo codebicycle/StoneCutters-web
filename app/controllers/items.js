@@ -978,16 +978,17 @@ function staticSearch(params, callback, gallery) {
 
         var success = function(items) {
             var meta = items.meta;
+            var location = this.app.session.get('location').url;
+            var maxResultsToIndex = config.getForMarket(location, ['seo', 'maxResultToIndexFollow'], 1);
 
             this.app.seo.setContent(meta);
 
-            if (meta.total <= 1) {
-                this.app.seo.addMetatag('robots', 'noindex, follow');
-                this.app.seo.addMetatag('googlebot', 'noindex, follow');
-            }
             if (meta.total === 0) {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+            } else if (meta.total <= maxResultsToIndex) {
+                this.app.seo.addMetatag('robots', 'noindex, follow');
+                this.app.seo.addMetatag('googlebot', 'noindex, follow');
             }
 
             tracking.addParam('keyword', query.search);
