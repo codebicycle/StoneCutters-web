@@ -21,7 +21,6 @@ module.exports = {
     searchfilter: middlewares(searchfilter),
     searchig: middlewares(searchig),
     search: middlewares(search),
-    staticSearchig: middlewares(staticSearchig),
     staticSearch: middlewares(staticSearch),
     allresults: middlewares(allresults),
     allresultsig: middlewares(allresultsig),
@@ -846,12 +845,7 @@ function search(params, callback, gallery) {
     }
 }
 
-function staticSearchig(params, callback) {
-    params['f.hasimage'] = true;
-    staticSearch.call(this, params, callback, '-ig');
-}
-
-function staticSearch(params, callback, gallery) {
+function staticSearch(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -960,15 +954,14 @@ function staticSearch(params, callback, gallery) {
 
             if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, (gallery ? '/' + gallery : '')].join(''));
+                return helpers.common.redirect.call(this, url);
             }
-            realPage = res.items.paginate([url, '/[page][gallery][filters]'].join(''), query, {
-                page: page,
-                gallery: gallery
+            realPage = res.items.paginate([url, '/[page][filters]'].join(''), query, {
+                page: page
             });
             if (realPage) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '/-p-' + realPage, (gallery ? gallery : '')].join(''));
+                return helpers.common.redirect.call(this, [url, '/-p-' + realPage].join(''));
             }
             done(res.items);
         }.bind(this);
@@ -992,7 +985,7 @@ function staticSearch(params, callback, gallery) {
             tracking.addParam('category', category ? category.toJSON() : undefined);
             tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
 
-            callback(null, ['items/staticsearch', (gallery || '').replace('-', '')].join(''), {
+            callback(null, 'items/staticsearch', {
                 items: items.toJSON(),
                 meta: meta,
                 filters: items.filters,
