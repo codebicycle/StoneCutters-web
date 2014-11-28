@@ -11,35 +11,41 @@
       (wikititles and wikititles.length > 0) %}
     <section id="seo-box" {{ 'class="seo-' + seoFrom + '-page"' if seoFrom }}>
         {% if topSearches.length > 0 %}
-            <p class="top-searches">
-                <span>{{ dictionary["seokeywords.PopularSearches"] }}:</span>
-                {% for _top in topSearches %}
-                    <a href="{{ _top.url }}" >{{ _top.anchor }}</a>
-                {% endfor %}
-            </p>
+            <div>
+                <p class="top-searches">
+                    <span>{{ dictionary["seokeywords.PopularSearches"] }}:</span>
+                    {% for _top in topSearches %}
+                        <a href="{{ _top.url }}" >{{ _top.anchor }}</a>
+                    {% endfor %}
+                </p>
+            </div>
         {% endif %}
+        
         {% if populars.length > 0 %}
-            <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
-            <ul>
-                {% for popular in populars %}
-                    <li><a href="{{ popular.url }}" >{{ popular.anchor }}</a></li>
-                {% endfor %}
-            </ul>
+            <div>
+                <span class="title">{{ dictionary["defaultfooter.PopularSearches"] }}</span>
+                <ul>
+                    {% for popular in populars %}
+                        <li><a href="{{ popular.url }}" >{{ popular.anchor }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
 
         {% if relateds.length > 0 %}
-
             {% if relateds.length == 2 %}
                     {% set seoCantColumn =  'twoColumn' %}
             {%  elif relateds == 3 %}
                     {% set seoCantColumn = 'threeColumn' %}
             {% endif %}
-            <span class="title">{{ dictionary["itemgeneraldetails.RelatedListings"] }}</span>
-            <ul {{ ('class="' + seoCantColumn + '"') if seoCantColumn  }}>
-                {% for related in seo.get('relatedListings') %}
-                    <li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
-                {% endfor %}
-            </ul>
+            <div>
+                <span class="title">{{ dictionary["itemgeneraldetails.RelatedListings"] }}</span>
+                <ul {{ ('class="' + seoCantColumn + '"') if seoCantColumn  }}>
+                    {% for related in seo.get('relatedListings') %}
+                        <li><a href="{{ related.url }}" >{{ related.anchor }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
         {% if levelPath or wikititles.length > 0 %}
             {% include (template + "/partials/seolevelpath.html") %}
