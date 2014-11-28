@@ -10,6 +10,9 @@
       levelPath or
       (wikititles and wikititles.length > 0) %}
     <section id="seo-box" {{ 'class="seo-' + seoFrom + '-page"' if seoFrom }}>
+        {% if seoFrom == "item" %}
+            {% include (template + "/partials/seopaginator.html") %}
+        {% endif %}
         {% if topSearches.length > 0 %}
             <div>
                 <p class="top-searches">

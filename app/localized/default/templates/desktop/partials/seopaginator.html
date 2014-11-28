@@ -1,0 +1,7 @@
+{% set prevItem = seo.get('prevItem') or false %}
+{% set nextItem = seo.get('nextItem') or false %}
+
+<div class="item-paginator">
+    <a href="{{ prevItem.itemUrl }}" class="previous-item">{{ prevItem.title }}</a>
+    <a href="{{ nextItem.itemUrl }}" class="next-item">{{ nextItem.title }}</a>
+</div>
