@@ -22,16 +22,24 @@ var Head;
 Backbone.noConflict();
 Base = Backbone.Model;
 
-function cutString(string, n) {
-    if (string.length <= n ) {
-        return string;
-    }    
-    if (string.charAt(n) == ' ') {
-        return string.substr(0,n);
+function cutString(title, n) {
+    var pattern = /(\sP\-\d+)$/;
+    var pageMatch;
+    var page = '';
+ 
+    if (title.length <= n ) return title;
+
+    pageMatch = title.match(pattern);
+    if (pageMatch) {
+        title = title.substr(0, pageMatch.index + 1);
+        page = pageMatch[0];
+    }
+    if (title.charAt(n) == ' ') {
+        return title.substr(0,n) + page;
     }
     else {
-        return cutString(string, --n);
-    }
+        return cutString(title, --n) + page;
+    }   
 }
 
 function title(metas, value) {
