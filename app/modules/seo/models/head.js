@@ -73,7 +73,6 @@ function metatitle(metas, value) {
             value += ' - ';
             value += suffix;
         }
-
         value = cutString(value,110);
         metas.title = value;
     }
