@@ -16,10 +16,9 @@ function getConfigTypes(config) {
     return utils.get(config, ['types'], {});
 }
 
-function getSettings(category) {
+function getSettings(type) {
     var slotname = this.options.subId || this.options.subid;
     var configSlot = getConfigSlot(slotname);
-    var configTypes;
     var configAD;
     var adType;
     var adParams;
@@ -29,42 +28,26 @@ function getSettings(category) {
     };
 
     if (configSlot.enabled) {
-        configTypes = getConfigTypes(Object(configSlot));
-        adParams = {
-            'container': slotname
-        };
-        _.each(configTypes, function eachTypes(obj, type) {
-            if(!adType && _.contains(obj.categories, category)){
-                adType = type;
-                if(obj.params){
-                    _.extend(adParams, obj.params);
-                }
-            }
+        adParams = _.extend({}, configSlot.types[type].params || {}, {
+            container: slotname
         });
-
-        console.log(this.app.attributes.session.params.categoryId);
-        console.log(configTypes.CSA.categories);
-
-        configAD = getConfigAD(adType);
+        configAD = getConfigAD(type);
 
         if (configAD.enabled) {
             configAD.params = _.extend({}, configAD.params, adParams);
 
             var countryCode = this.app.session.get('location').abbreviation;
-            var searchQuery = this.app.attributes.session.params.searchTerm;
+            var searchQuery = getQuery(this.app);
             var repKey = '[countrycode]';
 
-            if (searchQuery !== undefined) {
+            if (searchQuery) {
                 configAD.options = _.extend({}, configAD.options, {
                     pubId: configAD.options.pubId.replace(repKey, countryCode.toLowerCase()), //REVIEW
                     query: searchQuery, //TODO
-                    categoriesAsQuery: [185, 186, 16],
                     channel: configAD.options.channel.replace(repKey, countryCode), //REVIEW
                     hl: this.app.session.get('selectedLanguage').split('-').shift()
                 });
             }
-
-            console.log(configAD.options.categoriesAsQuery);
 
             _.extend(settings, {
                 enabled : true,
@@ -77,6 +60,59 @@ function getSettings(category) {
     return settings;
 }
 
+function isEnabled() {
+    var config = getConfigSlot(this.options.subId || this.options.subid);
+    var enabled = config.enabled;
+    var category;
+    var adType;
+
+    if (enabled) {
+        category = getCategoryId(this.app);
+
+        if (category) {
+            adType = _.find(config.types || {}, function eachTypes(obj) {
+                return _.contains(obj.categories, category);
+            });
+            enabled = !adType;
+        }
+    }
+    return enabled;
+}
+
+function getCategoryId(app) {
+    var postingLink = app.session.get('postingLink');
+
+    if (postingLink) {
+        return postingLink.subcategory || postingLink.category;
+    }
+}
+
+function getSearchTerm(app) {
+    return app.attributes.session.params.searchTerm;
+}
+
+function getCategory(app) {
+    var postingLink = app.session.get('postingLink');
+    var category;
+
+    if (postingLink) {
+        category = postingLink.subcategory || postingLink.category;
+    }
+    if (category) {
+        // busco
+    }
+    return category;
+}
+
+function getCategories(app) {
+    return ['Sales', 'Jobs'].join(',');
+}
+
+function getQuery(app) {
+    return getSearchTerm(app) || getCategory(app) || getCategories(app);
+}
+
 module.exports = {
-    getSettings : getSettings
+    getSettings: getSettings,
+    isEnabled: isEnabled
 };

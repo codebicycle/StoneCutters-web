@@ -8,31 +8,23 @@ module.exports = Base.extend({
     className: 'adserving-listing',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var slotname = this.options.subId;
-        var settingsAdserving = this.getAdserving();
-        var enabledAD = settingsAdserving.enabled; // TODO
 
         return _.extend({}, data, {
             adserving: {
-                enabled : enabledAD,
-                slotname: slotname
+                enabled : AdServing.isEnabled.call(this),
+                slotname: this.options.subId
             }
         });
     },
-    postRender: function(){
-        var slotname = this.options.pubId;
-        var settings = this.getAdserving();
+    postRender: function() {
+        if (!AdServing.isEnabled.call(this)) {
+            return;
+        }
+        var settings = AdServing.getSettings.call(this);
 
         this._checkCsaLib();
 
         window._googCsa('ads', settings.options, settings.params);
-
-    },
-    getAdserving: function(){
-        var currentCategory = 185; // csa
-        var settings = AdServing.getSettings.call(this, currentCategory);
-
-        return settings;
     },
     _checkCsaLib: function() {
         var id = 'gads-lib';
