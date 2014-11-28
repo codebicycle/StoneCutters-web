@@ -17,10 +17,12 @@ module.exports = {
         enabled: true,
         levelPath: true,
         popularSearches: true,
+        topSearches: true,
         relatedListings: true,
         topTitle: true,
         references: true,
-        wikititles: true
+        wikititles: true,
+        maxResultToIndexFollow: 0
     },
     tracking: {
         enabled: true,
