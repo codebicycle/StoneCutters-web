@@ -22,6 +22,26 @@ var Head;
 Backbone.noConflict();
 Base = Backbone.Model;
 
+function cutString(title, n) {
+    var pattern = /(\sP\-\d+)$/;
+    var pageMatch;
+    var page = '';
+ 
+    if (title.length <= n ) return title;
+
+    pageMatch = title.match(pattern);
+    if (pageMatch) {
+        title = title.substr(0, pageMatch.index + 1);
+        page = pageMatch[0];
+    }
+    if (title.charAt(n) == ' ') {
+        return title.substr(0,n) + page;
+    }
+    else {
+        return cutString(title, --n) + page;
+    }   
+}
+
 function title(metas, value) {
     var suffix;
 
@@ -53,6 +73,7 @@ function metatitle(metas, value) {
             value += ' - ';
             value += suffix;
         }
+        value = cutString(value,110);
         metas.title = value;
     }
     return metas;
@@ -80,6 +101,7 @@ function description(metas, value) {
             value += ' - ';
             value += suffix;
         }
+        value = cutString(value,160);
         metas.description = value;
     }
     return metas;
