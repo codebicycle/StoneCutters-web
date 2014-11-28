@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -9,18 +10,12 @@ module.exports = Base.extend({
     className: 'categories-list-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var categories = data.categories;
-        var order = ['For Sale','Classes','Vehicles','Community','Real Estate','Services','Jobs'];
         var location = this.app.session.get('location');
         var states = data.states;
-        var list = [];
+        var categories = data.categories;
         var currentState = {};
 
-        _.each(order, function(obj, i){
-            _.find(categories, function(obj){
-                return obj.name == order[i] ? list.push(obj) : false;
-            });
-        });
+        categories = helpers.common.categoryOrder(categories, this.app.session.get('siteLocation'));
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -31,7 +26,7 @@ module.exports = Base.extend({
         }
 
         return _.extend({}, data, {
-            categories: list,
+            categories: categories,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
