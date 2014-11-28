@@ -5,7 +5,6 @@ module.exports = {
     'biderrorheader.My OLX': 'Mijn OLX',
     'biderrorheader.Or': 'of',
     'buyerinfo.E-mail': 'E-mail',
-    'countryoptions.Accept': 'Accepteren',
     'countryoptions.AllDepartaments': 'Alle districten',
     'countryoptions.ChangeCity': 'Plaats wijzigen',
     'countryoptions.EnterCity': 'Vul een stad in',
