@@ -21,7 +21,9 @@ module.exports = {
         relatedListings: true,
         topTitle: true,
         references: true,
-        wikititles: true
+        wikititles: true,
+        metaTitleLength: 110,
+        metaDescriptionLength: 160
     },
     tracking: {
         enabled: true,
