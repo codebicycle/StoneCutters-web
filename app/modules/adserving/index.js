@@ -54,14 +54,6 @@ function getSettings(category) {
             var searchQuery = this.app.attributes.session.params.searchTerm;
             var repKey = '[countrycode]';
 
-            /**
-                CASOS PARA PASAR UN TÉRMINO DE BÚSQUEDA:
-                -
-
-                Si no hay término de búsqueda, pero hay categoría y está habilitada => Usá título categoría
-                Si no hay categoría, pero hay término. Verificar que sea una categoría con Ads => Usar término
-                Si no hay categoría, ni hay término (All results) => Mostrar categorías como query por default concatenadas
-            */
             if (searchQuery !== undefined) {
                 configAD.options = _.extend({}, configAD.options, {
                     pubId: configAD.options.pubId.replace(repKey, countryCode.toLowerCase()), //REVIEW
