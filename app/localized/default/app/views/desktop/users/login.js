@@ -11,7 +11,8 @@ module.exports = Base.extend({
         var params = this.options.params || {};
 
         return _.extend({}, data, {
-            params: params
+            params: params,
+            requireTracking: true
         });
     },
     events: {
