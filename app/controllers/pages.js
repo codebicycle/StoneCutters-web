@@ -20,6 +20,7 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
+    sitemapByDate: middlewares(sitemapByDate),
     featured_listings: middlewares(featuredListings)
 };
 
@@ -250,6 +251,12 @@ function sitemap(params, callback) {
             .then(redirect)
             .val(success);
     }
+}
+
+function sitemapByDate(params, callback) {
+    helpers.common.redirect.call(this, '/', null, {
+        status: 302
+    });
 }
 
 function featuredListings(params, callback) {

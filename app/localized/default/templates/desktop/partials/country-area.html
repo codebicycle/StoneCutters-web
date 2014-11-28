@@ -3,7 +3,7 @@
         <img src="{{ ('/images/desktop/' + location.name | lower + '/country_map.gif') | static }}" alt="Mapa de {{ location.name }}" />
     </a>
     <div class="content-description">
-        <h2 class="title">{{ dictionary["misc.FindAdsCity"] }}</h2>
+        <h2 class="title">{{ dictionary["misc.BuyWhatYouWant"] }}</h2>
         <p class="cities-title icons icon-pin">{{ dictionary["misc.FindAdsCity"] }}</p>
         <ul class="list-cities">
             {% for city in location.metadata.seo.topLocations.firstLevel.entities %}

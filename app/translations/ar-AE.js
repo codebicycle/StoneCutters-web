@@ -5,7 +5,6 @@ module.exports = {
     'biderrorheader.My OLX': '\u0628\u0644\u062F\u064A OLX',
     'biderrorheader.Or': '\u0623\u0648',
     'buyerinfo.E-mail': '\u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0627\u0644\u0643\u062A\u0631\u0648\u0646\u064A',
-    'countryoptions.Accept': '\u0648\u0641\u0627\u0642 ',
     'countryoptions.AllDepartaments': 'All Departments',
     'countryoptions.ChangeCity': 'Change City',
     'countryoptions.EnterCity': '\u0623\u062F\u062E\u0644 \u0627\u0644\u0645\u062F\u064A\u0646\u0629 ',
