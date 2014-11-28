@@ -39,12 +39,12 @@
             &:hover {
                 background: $white;
                 border: 1px solid $greyStrong;
+                &::before {
+                    color: $black;
+                }
             }
             &::before {
                 font-size: $xs;
-                &:hover {
-                    color: $black;
-                }
             }
             &.icon-arrow-up::before {
                 margin-top: -4px;
