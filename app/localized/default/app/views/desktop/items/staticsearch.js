@@ -22,9 +22,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             nav: {
-                link: link,
-                linkig: helpers.common.linkig.call(this, link, null, 'qig'),
-                listAct: 'active'
+                link: link
             }
         });
     },
