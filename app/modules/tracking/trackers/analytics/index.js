@@ -95,7 +95,9 @@ function pageview(params, options) {
         utmvid: utmvid,
         utmip: params.ip
     };
-
+    if (params.host.split('.').pop() === 'in' && query.utmac !== 'UA-54083301-2') {
+        console.log('[OLX_DEBUG]', 'tracker', 'india', query.utmac);
+    }
     if (params.keyword) {
         query.utmdt = params.keyword;
     }

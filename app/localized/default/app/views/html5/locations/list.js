@@ -26,7 +26,6 @@ module.exports = Base.extend({
                     }.bind(this);
                 errorCallback = function (error) {
                         this.showAutoLocation = false;
-                        console.log(error);
                     }.bind(this);
 
                 navigator.geolocation.getCurrentPosition(callback, errorCallback, {
