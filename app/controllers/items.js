@@ -870,6 +870,10 @@ function staticSearch(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/q/-');
             }
+            if (platform !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/nf/search/' + params.search || '');
+            }
             done();
         }.bind(this);
 
