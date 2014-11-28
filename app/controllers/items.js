@@ -146,18 +146,15 @@ function show(params, callback) {
             var slug = helpers.common.slugToUrl(response.item.toJSON());
             var protocol = this.app.session.get('protocol');
             var host = this.app.session.get('host');
+            var shortHost = this.app.session.get('shortHost');
             var itemLocation = response.item.getLocation().url || response.item.get('location').url;
             var url;
 
             if (platform === 'desktop' && itemLocation && itemLocation !== this.app.session.get('siteLocation')) {
-                url = [protocol, '://', host, '/', slug].join('');
-
+                url = [protocol, '://', host.replace(shortHost, itemLocation), '/', slug].join('');
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
-                    pushState: false,
-                    query: {
-                        location: itemLocation
-                    }
+                    pushState: false
                 });
             }
             if (!response.item.checkSlug(slug, slugUrl)) {
