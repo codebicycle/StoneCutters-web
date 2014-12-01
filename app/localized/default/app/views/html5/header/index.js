@@ -139,7 +139,7 @@ module.exports = Base.extend({
         this.customize("mobilepromo.Filters");
     },
     onSelectLocation: function(){
-        this.customize("defaultheader.Location");
+        this.customize("itemslisting.NavigatorByLocation");
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
