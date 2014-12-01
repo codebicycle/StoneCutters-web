@@ -18,5 +18,8 @@
 {# {% if showAdSenseItemBottom %}
 	{% include (template + "/partials/adsense.html") %}
 {% endif %} #}
-{% include (template + '/modals/image-gallery.html') %}
+{% if item.images.length > 0 %}
+    {% include (template + '/modals/image-gallery.html') %}
+{% endif %}
+
 {% view 'partials/tracking' %}

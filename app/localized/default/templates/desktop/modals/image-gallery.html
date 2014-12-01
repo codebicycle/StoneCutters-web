@@ -3,13 +3,27 @@
 {% block id %}image-modal{% endblock %}
 
 {% block title %}
-    <span class="modal-title">Images galery</span>
+
 {% endblock %}
 
 {% block content %}
-   {% for image in item.images %}
-        <figure class="{{ 'active' if loop.first }}" data-gallery-thumb="{{ loop.index }}" >
-            <a href="#" class="image-wrapper"><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" alt="{{ item.title }}" class="item-image" ></a>
-        </figure>
-    {% endfor %}
+    {% if item.images.length > 1 %}
+        <span class="icons icon-arrow-left arrow-prev"></span>
+        <span class="icons icon-arrow-right arrow-next"></span>
+    {% endif %}
+    <figure class="image-viewer" >
+        <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-gallery-image />
+    </figure>
+    <footer class="modal-footer">
+        <span class="item-title">{{ item.title }}</span>
+        {% if item.images.length > 1 %}
+            <div class="thumbnail-wrapper">
+                {% for image in item.images %}
+                    <figure class="thumbnail" data-gallery-thumb="{{ loop.index }}" >
+                        <img src="{{ image.thumbnail }}" data-image="{{ image.url }}" alt="{{ item.title }}" class="item-image" >
+                    </figure>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </footer>
 {% endblock %}
