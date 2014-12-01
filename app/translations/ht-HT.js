@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Vann',
     'misc.SendEmail': 'Voye Yon Im\xE8l',
     'misc.SinceDate': 'Depi <<DATE>>',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Chan Espesifik Kategori (Opsyon\xE8l)',
     'misc.States': 'z\xF2n',
     'misc.ThereWasProb': 'Te gen yon pwobl\xE8m',

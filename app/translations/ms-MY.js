@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Siar',
     'misc.SendEmail': 'Hantar e-mel',
     'misc.SinceDate': 'Sejak <<DATE>>',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Medan Spesifik Kategori (Opsyenal)',
     'misc.States': 'Negeri',
     'misc.ThereWasProb': 'Terdapat masalah',

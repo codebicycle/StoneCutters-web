@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Ipaskil',
     'misc.SendEmail': 'Magpadala ng E-mail',
     'misc.SinceDate': 'Simula <<DATE>>',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Mga Partikular na Field ng Kategorya (Mga Opsyonal)',
     'misc.States': 'Lokasyon',
     'misc.ThereWasProb': 'Nagkaroon ng problema',

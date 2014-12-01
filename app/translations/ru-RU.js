@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': '\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C',
     'misc.SendEmail': '\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C r-mail',
     'misc.SinceDate': '\u0421 <<DATE>>',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': '\u041F\u043E\u043B\u044F \u043F\u043E \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044F (\u043E\u043F\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435)',
     'misc.States': '\u0428\u0442\u0430\u0442\u044B',
     'misc.ThereWasProb': '\u0412\u043E\u0437\u043D\u0438\u043A\u043B\u0430 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0430',

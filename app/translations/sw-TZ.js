@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Kuuza',
     'misc.SendEmail': 'Tuma Barua pepe',
     'misc.SinceDate': 'Tangu <<DATE>>',
+    'misc.Sort_Mob': 'Panga',
     'misc.SpecificFields_title': 'Uga ya Kundi Maalum (Hiari)',
     'misc.States': 'Nchi',
     'misc.ThereWasProb': 'Kulikuwa na tatizo',
