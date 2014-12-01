@@ -34,7 +34,7 @@ module.exports = function appUseConf(done) {
     }
 
     function rendrConfiguration(rendrApp) {
-        rendrApp.use(middleware.cookies());
+        //rendrApp.use(middleware.cookies());
         rendrApp.use(middleware.analytics());
         rendrApp.use(middleware.localstorageiframe());
         rendrApp.use(middleware.manifest());

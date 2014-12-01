@@ -17,9 +17,6 @@ module.exports = {
         staticPath: 'http://static[[basenumber]].olx-st.com/mobile-webapp',
         imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
     },
-    tracking: {
-        enabled: true
-    },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
