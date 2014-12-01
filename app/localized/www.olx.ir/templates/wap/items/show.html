@@ -44,7 +44,7 @@
                                         <font color="#CCCCCC">&lt;</font> |
                                     {% endif %}
                                         <!-- translate the word "of" -->
-                                        <span dir="rtl">{{ pos + 1 }}</span> of <span dir="rtl">{{ item.images.length }}</span>
+                                        <span dir="rtl">{{ (pos + 1) | persianDigits }}</span> / <span dir="rtl">{{ item.images.length | persianDigits }}</span>
                                     {% if pos < item.images.length - 1 %}
                                         {% set posImage = '?pos=' + (pos + 1) %}
                                          | <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>
