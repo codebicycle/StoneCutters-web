@@ -21,9 +21,9 @@
                     <tr>
                         <td style="border-top: solid thin #808080;">
                             {% if location.current.name %}
-                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}</small>
+                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.current.name)}}</small>
                             {% else %}
-                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}</small>
+                                <small style="display: block;">{{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.name)}}</small>
                             {% endif %}
                         </td>
                     </tr>

@@ -8,7 +8,7 @@
             <div></div>
             <p>
                 {% block noResultsMsg %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>', location.current.name if location.current.name else location.name)}}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>', location.current.name if location.current.name else location.name) }}
                 {% endblock %}
             </p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>

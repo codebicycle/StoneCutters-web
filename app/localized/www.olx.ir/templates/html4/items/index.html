@@ -9,9 +9,9 @@
             <div></div>
             <p>
                 {% if location.current.name %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.current.name)}}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.current.name)}}
                 {% else %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>',category.name) | replace('<<REGION>>',location.name)}}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.name)}}
                 {% endif %}
             </p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
