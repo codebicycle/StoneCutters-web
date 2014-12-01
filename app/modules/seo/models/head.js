@@ -26,9 +26,10 @@ function cutString(title, n) {
     var pattern = /(\sP\-\d+)$/;
     var pageMatch;
     var page = '';
- 
-    if (title.length <= n ) return title;
-
+    
+    if (title.length <= n) { 
+        return title;
+    }
     pageMatch = title.match(pattern);
     if (pageMatch) {
         title = title.substr(0, pageMatch.index + 1);
@@ -39,7 +40,7 @@ function cutString(title, n) {
     }
     else {
         return cutString(title, --n) + page;
-    }   
+    }
 }
 
 function title(metas, value) {
@@ -63,6 +64,8 @@ function title(metas, value) {
 
 function metatitle(metas, value) {
     var suffix;
+    var location = this.app.session.get('location').url;
+    var titleLength = config.getForMarket(location, ['seo', 'metaTitleLength'], 110);
 
     if (!value) {
         delete metas.title;
@@ -73,8 +76,7 @@ function metatitle(metas, value) {
             value += ' - ';
             value += suffix;
         }
-        value = cutString(value,110);
-        metas.title = value;
+        metas.title = cutString(value,titleLength);
     }
     return metas;
 }
@@ -91,6 +93,8 @@ function topTitle(metas, value) {
 
 function description(metas, value) {
     var suffix;
+    var location = this.app.session.get('location').url;
+    var descriptionLength = config.getForMarket(location, ['seo', 'metaDescriptionLength'], 160);
 
     if (!value) {
         delete metas.description;
@@ -100,9 +104,8 @@ function description(metas, value) {
         if (!~value.indexOf(suffix)) {
             value += ' - ';
             value += suffix;
-        }
-        value = cutString(value,160);
-        metas.description = value;
+        }        
+        metas.description = cutString(value,descriptionLength);
     }
     return metas;
 }

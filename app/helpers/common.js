@@ -113,6 +113,21 @@ module.exports = (function() {
         return utils.link(href, this.app, query);
     }
 
+    function categoryOrder(categories, country) {
+        var order = config.get(['categoryOrder', country]);
+        var list = [];
+
+        if (order){
+            _.each(order, function(obj, i){
+                _.find(categories, function(obj){
+                    return obj.id == order[i] ? list.push(obj) : false;
+                });
+            });
+        }
+
+        return order ? list : categories;
+    }
+
     var staticsHandler = (function() {
         function getEnv(envPath, filePath, options) {
             switch (options.env) {
@@ -237,7 +252,7 @@ module.exports = (function() {
 
     function serializeFormJSON(data) {
        var output = {};
-        _.each(data, function each(item) {        
+        _.each(data, function each(item) {
            if (output[item.name]) {
                if (!output[item.name].push) {
                    output[item.name] = [output[item.name]];
@@ -254,6 +269,7 @@ module.exports = (function() {
         slugToUrl: slugToUrl,
         link: utils.link,
         linkig: linkig,
+        categoryOrder: categoryOrder,
         fullizeUrl: utils.fullizeUrl,
         params: utils.params,
         removeParams: utils.removeParams,
