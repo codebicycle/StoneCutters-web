@@ -15,9 +15,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var key = cookie.split('=').shift();
 
                 res.clearCookie(cookie);
-                res.clearCookie(cookie, {
-                    domain: '.' + req.host
-                });
             });
             next();
         };
