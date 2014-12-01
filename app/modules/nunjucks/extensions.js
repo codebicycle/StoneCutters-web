@@ -13,8 +13,8 @@ module.exports = function(nunjucks) {
             this.tags = ['view'];
             this.parse = function(parser, nodes, lexer) {
                 var tok = parser.nextToken();
-                var args = parser.parseSignature(null, true);
-
+                var args = parser.parseSignature(null,true);
+                
                 parser.advanceAfterBlockEnd(tok.value);
                 return new nodes.CallExtension(this, 'run', args);
             };

@@ -106,11 +106,26 @@ module.exports = (function() {
                 path = linkIgParser.call(null, path);
             }
         }
-        href = path;
+        href = path.replace(/\/\//g, '/');
         if (querystring) {
             href = '?' + querystring;
         }
         return utils.link(href, this.app, query);
+    }
+
+    function categoryOrder(categories, country) {
+        var order = config.get(['categoryOrder', country]);
+        var list = [];
+
+        if (order){
+            _.each(order, function(obj, i){
+                _.find(categories, function(obj){
+                    return obj.id == order[i] ? list.push(obj) : false;
+                });
+            });
+        }
+
+        return order ? list : categories;
     }
 
     var staticsHandler = (function() {
@@ -235,15 +250,32 @@ module.exports = (function() {
         return callback(null, 'pages/error', res || {});
     }
 
+    function serializeFormJSON(data) {
+       var output = {};
+        _.each(data, function each(item) {
+           if (output[item.name]) {
+               if (!output[item.name].push) {
+                   output[item.name] = [output[item.name]];
+               }
+               output[item.name].push(item.value || '');
+           } else {
+               output[item.name] = item.value || '';
+           }
+       });
+       return output;
+    }
+
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
         linkig: linkig,
+        categoryOrder: categoryOrder,
         fullizeUrl: utils.fullizeUrl,
         params: utils.params,
         removeParams: utils.removeParams,
         redirect: redirect,
         error: error,
+        serializeFormJSON: serializeFormJSON,
         'static': statics
     };
 })();

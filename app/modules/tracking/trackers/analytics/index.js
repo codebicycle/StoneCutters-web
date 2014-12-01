@@ -70,6 +70,7 @@ function getParams(page, options) {
     params.osName = this.app.session.get('osName');
     params.osVersion = this.app.session.get('osVersion');
     params.location = this.app.session.get('location').name;
+    params.domain = this.app.session.get('domain');
 
     if (options.keyword) {
         params.keyword = options.keyword;
@@ -94,7 +95,9 @@ function pageview(params, options) {
         utmvid: utmvid,
         utmip: params.ip
     };
-
+    if (params.host.split('.').pop() === 'in' && query.utmac !== 'UA-54083301-2') {
+        console.log('[OLX_DEBUG]', 'tracker', 'india', query.utmac);
+    }
     if (params.keyword) {
         query.utmdt = params.keyword;
     }

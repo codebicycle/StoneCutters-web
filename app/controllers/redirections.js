@@ -5,7 +5,16 @@ var helpers = require('../helpers');
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
-var phpPaths = ['posting', 'register', 'login'];
+var phpRedirections = {
+    index: '',
+    posting: 'posting',
+    register: 'register',
+    login: 'login',
+    switch_domain: '',
+    myolx: 'myolx/myadslisting',
+    yourads: 'myolx/myadslisting'
+};
+var phpPaths = Object.keys(phpRedirections);
 
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -122,7 +131,6 @@ module.exports = {
     redirecttomain: function(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location').url;
-        var path = this.app.session.get('path');
 
         this.app.session.persist({
             olx_mobile_full_site_redirect: true,
@@ -130,7 +138,7 @@ module.exports = {
         }, {
             maxAge: 2 * HOUR
         });
-        helpers.common.redirect.call(this, 'http://' + siteLocation + path, null, {
+        helpers.common.redirect.call(this, 'http://' + siteLocation, null, {
             status: 302,
             pushState: false
         });
@@ -143,7 +151,7 @@ module.exports = {
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
-            return helpers.common.redirect.call(this, this.app.session.get('url').replace('.php', ''));
+            return helpers.common.redirect.call(this, this.app.session.get('url').replace(params.path + '.php', phpRedirections[params.path]));
         }
         statsd.increment(['redirections', 'php', this.app.session.get('path')]);
         helpers.common.redirect.call(this, '/');

@@ -85,26 +85,14 @@ module.exports = Base.extend({
             return;
         }
 
-        var host = this.app.session.get('shortHost').split('.');
-        var hasM = !!~host.indexOf('m');
-        var slice = 1;
-        var domain;
-
-        if (hasM) {
-            slice++;
-        }
-        domain = host.slice(slice).join('.');
-
         this._checkAnalyticsLib();
 
         window._gaq.push(function track() {
             var host = tracking.params.analytics.host;
-            var tracker = window._gat._getTracker(tracking.params.analytics.id);
+            var tracker = this._getAnalyticsTracker(tracking.params.analytics);
             var referrerDomain = 'emptyReferrer';
             var doStore = true;
 
-            tracker._setDomainName(domain);
-            tracker._setCookiePath('/');
             if (typeof document.referrer !== 'undefined' && document.referrer !== '') {
                 referrerDomain = document.referrer.match(/:\/\/(.[^/]+)/)[1];
 
@@ -117,7 +105,7 @@ module.exports = Base.extend({
             }
             tracker._set('title', tracking.params.analytics.keyword);
             tracker._trackPageview(tracking.params.analytics.page);
-        });
+        }.bind(this));
     },
     onTrackHydra: function(event, tracking) {
         event.preventDefault();
@@ -156,6 +144,26 @@ module.exports = Base.extend({
                 async: true
             });
             $('head').append($ga);
+        }
+    },
+    _getAnalyticsTracker: function(options) {
+        if (!window.analyticsTracker) {
+            window.analyticsTracker = window._gat._getTracker(options.id);
+            window.analyticsTracker._setDomainName(options.domain);
+            window.analyticsTracker._setCookiePath('/');
+        }
+        this._cleanCookiesAnalytics(options);
+        return window.analyticsTracker;
+    },
+    _cleanCookiesAnalytics: function(options) {
+        var utms;
+        var i;
+
+        if (document.domain.indexOf(options.domain) > 0) {
+            utms = ['__utmz', '__utma', '__utmb', '__utmc', '__utmv'];
+            for (i = 0; i < utms.length; i++) {
+                document.cookie = utms[i] + "=; expires=Mon, 07 May 2007 18:42:40 GMT; path=/; domain=" + document.domain;
+            }
         }
     }
 });

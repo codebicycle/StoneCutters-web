@@ -1,10 +1,13 @@
 module.exports = {
     ads: {
         quantity: {
-            listing: 30,
+            listing: 27,
             'static': 50,
-            gallery: 18,
-            related: 30
+            gallery: 27,
+            related: 30,
+            myAds: 15,
+            myFavs: 15,
+            myMsgs: 15
         },
         maxPage: {
             allResults: 500
@@ -14,10 +17,14 @@ module.exports = {
         enabled: true,
         levelPath: true,
         popularSearches: true,
+        topSearches: true,
         relatedListings: true,
         topTitle: true,
         references: true,
-        wikititles: true
+        wikititles: true,
+        metaTitleLength: 110,
+        metaDescriptionLength: 160,
+        maxResultToIndexFollow: 0
     },
     tracking: {
         enabled: true,

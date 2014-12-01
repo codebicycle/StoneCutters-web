@@ -1,0 +1,84 @@
+.footer_downloadapp_view {
+
+	display: none !important;
+
+	text-align: center;
+	border-top: 1px solid #eaeaea;
+	margin-top: 1.250rem;
+	padding: .7rem .625rem .5rem;
+
+	.container {
+		padding: .5rem;
+		background: #d8d7d7;
+	}
+
+	.logoOlx {
+		width: 37px;
+		height: 37px;
+		float: right;
+		background: url(imageUrl/images/common/marketing/logo37.png);
+		margin: 0 0 0 .5rem;
+	}
+
+	.data {
+		float: right;
+		margin: .1rem 0 0 0;
+		text-align: right;
+		line-height: 1.188rem;
+
+		h1 {
+			font-size: .875rem;
+			color: #494949;
+		}
+
+	}
+
+	.stars {
+		font-size: .625rem;
+		color: #827e7e;
+		height: 16px;
+		span {
+			height: 10px;
+			float: right;
+			line-height: normal;
+			margin: 0 0 0 .3em;
+		}
+		.star {
+			width: 10px;
+			background: url(imageUrl/images/common/marketing/starG.png) no-repeat;
+			&.midstar {
+				background: url(imageUrl/images/common/marketing/midStarG.png) no-repeat;
+			}
+			&.emptystar {
+				background: url(imageUrl/images/common/marketing/emptyStar.png) no-repeat;
+			}
+		}
+	}
+
+	.btns {
+		max-width: 40%;
+		float: left;
+		margin: .4375rem 0 0;
+		padding: .4375rem .5rem;
+		font-size: 1.188rem;
+		text-transform: uppercase;
+
+		&.download {
+			background: #4275ba;
+			border-radius: .125rem;
+			font-weight: bold;
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		.btns{
+			max-width: 33%;
+			margin: .313rem 0 0;
+			padding: .4375rem .5rem;
+			font-size: .750rem;
+		}
+	}
+
+}
+
+

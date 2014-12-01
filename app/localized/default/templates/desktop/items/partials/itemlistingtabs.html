@@ -1,11 +1,21 @@
-<ul class="tabs">
-    <li>
-        <a href="{{ (nav.linkig) | linkig }}" class="icons {{ nav.galeryAct }} icon-gallery" rel="nofollow">{{ dictionary["listingpageitemslisting.Gallery"] }}</a>
-    </li><!--
-    --><li>
-        <a href="{{ nav.link | link }}" class="icons {{ nav.listAct }} icon-list" rel="nofollow">{{ dictionary["listingpageitemslisting.List"] }}</a>
-    </li>
-</ul><!-- tabs -->
+{% if nav.galeryAct or nav.listAct %}
+    <ul class="tabs">
+        <li>
+            {% if nav.galeryAct == 'active' %}
+                <span class="icons {{ nav.galeryAct }} icon-gallery">{{ dictionary["listingpageitemslisting.Gallery"] }}</span>
+            {% else %}
+                <a href="{{ (nav.linkig) | linkig }}" class="icons {{ nav.galeryAct }} icon-gallery" rel="nofollow">{{ dictionary["listingpageitemslisting.Gallery"] }}</a>
+            {% endif %}
+        </li>
+        <li>
+            {% if nav.listAct == 'active' %}
+                <span class="icons {{ nav.listAct }} icon-list">{{ dictionary["listingpageitemslisting.List"] }}</span>
+            {% else %}
+                <a href="{{ nav.link | link }}" class="icons {{ nav.listAct }} icon-list" rel="nofollow">{{ dictionary["listingpageitemslisting.List"] }}</a>
+            {% endif %}
+        </li>
+    </ul>
+{% endif %}
 
 <div class="order-by">
     <label for="order-by-select">{{ dictionary["listingpageitemslisting.SortBy"] }}:</label>

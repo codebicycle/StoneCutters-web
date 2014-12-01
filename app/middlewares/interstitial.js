@@ -10,6 +10,13 @@ module.exports = function(params, next) {
     if (!enabled) {
         return next();
     }
+    var locationUrl = this.app.session.get('location').url;
+    if (locationUrl === 'www.olx.ir') {
+        return next();
+    }
+    if (locationUrl === 'www.olx.co.za' && this.app.session.get('internet.org')) {
+        return next();
+    }
     var url = '/interstitial';
     var platform;
     var platforms;

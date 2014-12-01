@@ -51,6 +51,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                     return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'location'));
                 }
             }
+            if (siteLocation.split('.').pop() !== shortHost.split('.').pop()) {
+                return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'location'));
+            }
 
             function fetch(done) {
                 function callback(err, response) {
@@ -76,7 +79,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                     location: {
                         model: 'Location',
                         params: {
-                            location: siteLocation
+                            location: siteLocation,
+                            seo: true
                         }
                     }
                 }, {

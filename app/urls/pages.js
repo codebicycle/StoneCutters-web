@@ -19,6 +19,9 @@ module.exports = {
     'pages#sitemap': {
         url: 'sitemap'
     },
+    'pages#sitemapByDate': {
+        url: /^\/sitemap\/.+/
+    },
     'pages#interstitial': {
         url: 'interstitial'
     },

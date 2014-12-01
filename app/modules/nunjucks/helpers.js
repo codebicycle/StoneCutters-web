@@ -26,18 +26,16 @@ module.exports = function(nunjucks) {
     }
 
     function date(timestamp, complete) {
-        complete = complete || false;
-        var completeDate;
+        var _date = new Date(timestamp);
         var month;
+
+        complete = complete || false;
         if (complete === true) {
             month = timestamp.split('-')[1];
             month = this.ctx.dictionary['messages_date_format.1' + month];
-            completeDate = dateformat(new Date(timestamp), 'dd, h:MM:ss TT');
-            completeDate = month + ' ' + completeDate;
-            return completeDate;
-        } else {
-            return dateformat(new Date(timestamp), 'dd/mm/yyyy');
+            return month + ' ' + dateformat(_date, 'dd, h:MM:ss TT');
         }
+        return dateformat(_date, 'dd/mm/yyyy');
     }
 
     function countFormat(count) {
@@ -70,6 +68,9 @@ module.exports = function(nunjucks) {
         encode: encode,
         'static': statics,
         countFormat: countFormat,
-        slugToUrl: helpers.common.slugToUrl
+        slugToUrl: helpers.common.slugToUrl,
+        hijri: helpers.hijri,
+        persianDigits: helpers.numbers.toPersian,
+        latinDigits: helpers.numbers.toLatin
     };
 };

@@ -8,7 +8,7 @@ module.exports = Base.extend({
     id: 'items-staticsearch-view',
     className: 'items-staticsearch-view',
     tagName: 'main',
-    order: ['parentcategory','state','city'],
+    order: ['parentcategory','pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
     regexpReplaceCategory: /(c-[0-9]+)/,
@@ -22,9 +22,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             nav: {
-                link: link,
-                linkig: helpers.common.linkig.call(this, link, null, 'qig'),
-                listAct: 'active'
+                link: link
             }
         });
     },

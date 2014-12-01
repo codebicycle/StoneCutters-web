@@ -1,6 +1,8 @@
-<div id="itemPagination">
-    <a href="{{ (paginator.get('previous') | link) if paginator.has('previous') else '#' }}" class="arrow {{ "leftA" if paginator.has('previous') else "leftD" }}"><span>{{ dictionary["itemslisting.Previous"] }}</span></a>
-    <div class="center">
+<div class="pagination-listing">
+	<div class="backtop"><a href="#"></a></div>
+    {% if paginator.has('previous') %}<a href="{{ (paginator.get('previous') | link) }}">{% endif %}<span class="button-previous">{{ dictionary["itemslisting.Previous"] }}</span>{% if paginator.has('previous') %}</a>{% endif %}
+    {% if paginator.has('next') %}<a href="{{ (paginator.get('next') | link) }}">{% endif %}<span class="button-next">{{ dictionary["itemslisting.Next"] }}</span>{% if paginator.has('next') %}</a>{% endif %}
+    <div class="pages">
         {% for page in paginator.pages(5) %}
             {% if page.isCurrent %}
                 <strong {{ 'class="last"' if paginator.isLast(page.page) }}>{{ page.page }}</strong>
@@ -9,5 +11,4 @@
             {% endif %}
         {% endfor %}
     </div>
-    <a href="{{ (paginator.get('next') | link) if paginator.has('next') else '#' }}" class="arrow {{ "rightA" if paginator.has('next') else "rightD" }}"><span>{{ dictionary["itemslisting.Next"] }}</span></a>
 </div>

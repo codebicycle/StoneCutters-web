@@ -5,10 +5,16 @@
                 <td style="border-top: solid thin #808080;">
                     <small style="display: block;">
                         {% if link %}
-                            <a href="{{link}}"><img border="0" alt="" src="{{ "/images/wap/arrowbackwap.gif" | static }}">
-                            {{dictionary["defaultfooter.Back"]}}</a> |
+                            <a href="{{link}}">
+                                <img border="0" alt="" src="{{ "/images/wap/arrowbackwap.gif" | static }}">
+                                {{dictionary["defaultfooter.Back"]}}
+                            </a>
+                            |
                         {% endif %}
-                        <a href="{{home}}"><img border="0" alt="" src="{{ "/images/wap/ico_home.gif" | static }}"> {{dictionary["defaultfooter.Home"]}}</a>
+                        <a href="{{home}}">
+                            <img border="0" alt="" src="{{ "/images/wap/ico_home.gif" | static }}">
+                            {{dictionary["defaultfooter.Home"]}}
+                        </a>
                     </small>
                 </td>
             </tr>

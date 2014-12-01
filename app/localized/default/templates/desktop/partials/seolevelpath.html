@@ -1,26 +1,27 @@
-<div id="level-path-bottom">
-    {% if levelPath.locationLevel.length > 0 %}
+<div class="level-path-bottom">
+    {% if levelPath.location.length > 0 %}
         <div class="breadcrumb">
-            {% for level in levelPath.locationLevel %}
-                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+            {% for level in levelPath.location %}
+                <span {{ 'class="icons icon-arrow"' if not loop.first }} >
+                    {{ dictionary["seccion-31.454"] if seoFrom != "item" and loop.first }}
                     <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
                 </span>
             {% endfor %}
         </div>
     {% endif %}
-    {% if levelPath.categoryLevel.length > 0 %}
+    {% if levelPath.category.length > 0 %}
         <div class="breadcrumb">
-            {% for level in levelPath.categoryLevel %}
-                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+            {% for level in levelPath.category %}
+                <span {{ 'class="icons icon-arrow"' if not loop.first }} >
                     <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
                 </span>
             {% endfor %}
         </div>
     {% endif %}
-    {% if levelPath.childCategoryLevel.length > 0 or wikititles.length > 0 %}
+    {% if levelPath.childCategory.length > 0 or wikititles.length > 0 %}
         <div class="breadcrumb">
-            {% for level in levelPath.childCategoryLevel %}
-                <span class="{{ "icons icon-arrow" if not loop.first }}" >
+            {% for level in levelPath.childCategory %}
+                <span {{ 'class="icons icon-arrow"' if not loop.first }} >
                     <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
                 </span>
             {% endfor %}

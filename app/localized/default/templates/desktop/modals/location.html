@@ -1,3 +1,10 @@
+{% if location.metadata.seo.topLocations.firstLevel.entities %}
+    {% set firstLevel = location.metadata.seo.topLocations.firstLevel.entities %}
+{% endif %}
+{% if location.metadata.seo.topLocations.secondLevel.entities %}
+    {% set secondLevel = location.metadata.seo.topLocations.secondLevel.entities %}
+{% endif %}
+
 {% extends (template + '/modals/modal.html') %}
 
 {% block id %}location-modal{% endblock %}
@@ -12,19 +19,22 @@
             <div class="column">
                 <h4>{{ dictionary["popularsearchesbody.PopularCities"] }}</h4>
                 <ul class="modal-cities">
-                    {% for city in topCities %}
-                        <li><a href="{{ '/nf/all-results' | link({location: city.url}) }}" rel="nofollow">{{ city.name }}</a></li>
+                    {% for city in firstLevel %}
+                        <li><a href="{{ '/nf/all-results' | link({location: city.url}) }}" rel="nofollow">{{ city.anchor }}</a></li>
                     {% endfor %}
-                    <li><a href="{{ '/all-states' | link }}" rel="nofollow">{{ dictionary["countryoptions.OtherCities"] }}</a></li>
+                    <li>
+                        <a href="{{ (('all-states/' + currentState.hostname) | link({location: location.url})) if currentState.hostname else ('all-states/' | link({location: location.url})) }}">
+                            {{ dictionary["countryoptions.OtherCities"] }}</a>
+                    </li>
                 </ul>
             </div>
             <div class="column">
-                <h4>{{ dictionary["misc.States"] }}</h4>
+                <h4>{{ dictionary["misc.States"] if location.metadata.seo.topLocations.secondLevel.name == 'state' else ('Otras Ciudades en ' + currentState.name) }}</h4>
                 <ul class="modal-cities">
-                    {% for state in states %}
-                        <li><a href="{{ '/nf/all-results' | link({location: state.url}) }}" rel="nofollow">{{ state.name }}</a></li>
+                    {% for state in secondLevel %}
+                        <li><a href="{{ '/nf/all-results' | link({location: state.url}) }}" rel="nofollow">{{ state.anchor }}</a></li>
                     {% endfor %}
-                    <li><a href="{{ '/all-states' | link }}" rel="nofollow">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
+                    <li><a href="{{ '/all-states' | link }}" rel="nofollow" data-qa="all-states-link">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
                 </ul>
             </div>
 

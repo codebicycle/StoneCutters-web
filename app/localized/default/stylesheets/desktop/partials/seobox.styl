@@ -33,4 +33,28 @@
             width: 32%;
         }
     }
+    .top-searches {
+        font-size: $xs;
+        margin: 0;
+        a:not(:last-child)::after {
+            color: $black;
+            content: "-";
+            margin-left: 2px;
+        }
+    }
+    .level-path-bottom {
+        span {
+            font-size: $xs;
+            &::before {
+                color: $greyStrong;
+                font-size: remify(7px);
+            }
+        }
+    }
+    &.seo-item-page {
+        width: 620px;
+    }
+    &>div:not(:first-child) {
+        margin-top: 20px;
+    }
 }
