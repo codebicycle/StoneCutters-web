@@ -18,9 +18,6 @@ module.exports = {
     environment: {
         type: 'development'
     },
-    tracking: {
-        enabled: true
-    },
     localization: {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
