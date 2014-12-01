@@ -9,18 +9,20 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
+        this._checkAdServing();
         return _.extend({}, data, {
             adserving: {
-                enabled : AdServing.isEnabled.call(this),
-                slotname: this.options.subId
+                enabled : this.adServing.isEnabled(),
+                slotname: this.adServing.get('slotname')
             }
         });
     },
     postRender: function() {
-        if (!AdServing.isEnabled.call(this)) {
+        this._checkAdServing();
+        if (!this.adServing.isEnabled()) {
             return;
         }
-        var settings = AdServing.getSettings.call(this);
+        var settings = this.adServing.getSettings();
 
         this._checkCsaLib();
 
@@ -43,6 +45,16 @@ module.exports = Base.extend({
                 id: id
             });
             $ads.appendTo('head');
+        }
+    },
+    _checkAdServing: function() {
+        if (!this.adServing) {
+            this.adServing = new AdServing({
+                slotname: this.options.subId || this.options.subid
+            }, {
+                app: this.app,
+                categories: this.options.categories
+            });
         }
     }
 });

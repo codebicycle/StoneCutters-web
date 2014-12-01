@@ -3,16 +3,17 @@
 module.exports = {
     slot_top_listing: {
         enabled: true,
+        defaultType: 'CSA',
         types: {
             CSA: {
                 params: {
                     number: 3,
                     colorTitleLink: '#000'
                 },
-                categories: [185, 186]
+                excludedCategories: [185, 186]
             },
             ADX: {
-                categories: [410]
+                excludedCategories: [410]
             }
         }
     }

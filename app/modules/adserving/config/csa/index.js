@@ -4,7 +4,7 @@ module.exports = {
     enabled : true,
     options: {
         pubId: 'olx',
-        categoriesAsQuery: [],
+        queryCategories: [16, 185, 190, 821],
         query: '',
         channel: 'OLX_[countrycode]',
         hl: 'en',

@@ -241,7 +241,7 @@ function show(params, callback) {
             tracking.addParam('category', category);
             tracking.addParam('subcategory', subcategory);
             this.app.session.update({
-                postingLink: {
+                dataPage: {
                     category: (category ? category.id : undefined),
                     subcategory: (subcategory ? subcategory.id : undefined)
                 }
@@ -806,6 +806,9 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var success = function(items) {
+            var category = category ? category.toJSON() : undefined;
+            var subcategory = subcategory ? subcategory.toJSON() : undefined;
+
             this.app.seo.setContent(items.meta);
             if (items.meta.total < 5) {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
@@ -815,8 +818,16 @@ function search(params, callback, gallery) {
             tracking.addParam('page_nb', items.meta.totalPages);
             tracking.addParam('section', query.categoryId);
             tracking.addParam('page', page);
-            tracking.addParam('category', category ? category.toJSON() : undefined);
-            tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
+            tracking.addParam('category', category);
+            tracking.addParam('subcategory', subcategory);
+
+            this.app.session.update({
+                dataPage: {
+                    search: query.search,
+                    category: category ? category.id : undefined,
+                    subcategory: subcategory ? subcategory.id : undefined
+                }
+            });
 
             callback(null, ['items/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
@@ -824,7 +835,7 @@ function search(params, callback, gallery) {
                 filters: items.filters,
                 paginator: items.paginator,
                 search: query.search,
-                category: category ? category.toJSON() : undefined
+                category: category
             });
         }.bind(this);
 
