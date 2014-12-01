@@ -22,6 +22,8 @@ module.exports = {
         topTitle: true,
         references: true,
         wikititles: true,
+        metaTitleLength: 110,
+        metaDescriptionLength: 160,
         maxResultToIndexFollow: 0
     },
     tracking: {

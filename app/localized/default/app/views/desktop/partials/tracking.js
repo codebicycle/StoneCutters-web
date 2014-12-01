@@ -152,6 +152,18 @@ module.exports = Base.extend({
             window.analyticsTracker._setDomainName(options.domain);
             window.analyticsTracker._setCookiePath('/');
         }
+        this._cleanCookiesAnalytics(options);
         return window.analyticsTracker;
+    },
+    _cleanCookiesAnalytics: function(options) {
+        var utms;
+        var i;
+
+        if (document.domain.indexOf(options.domain) > 0) {
+            utms = ['__utmz', '__utma', '__utmb', '__utmc', '__utmv'];
+            for (i = 0; i < utms.length; i++) {
+                document.cookie = utms[i] + "=; expires=Mon, 07 May 2007 18:42:40 GMT; path=/; domain=" + document.domain;
+            }
+        }
     }
 });
