@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'G\xF6nder',
     'misc.SendEmail': 'E-Posta G\xF6nder',
     'misc.SinceDate': '<<DATE>> tarihinden bu yana',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)',
     'misc.States': 'Eyaletler',
     'misc.ThereWasProb': 'Bir sorun olu\u015Ftu',

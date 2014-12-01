@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Julkaise',
     'misc.SendEmail': 'L\xE4het\xE4 s\xE4hk\xF6postia',
     'misc.SinceDate': 'P\xE4iv\xE4st\xE4 <<DATE>> l\xE4htien',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)',
     'misc.States': 'Osavaltiot',
     'misc.ThereWasProb': 'Ongelma ilmeni',

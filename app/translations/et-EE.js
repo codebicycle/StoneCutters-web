@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Postita',
     'misc.SendEmail': 'Saatke e-kiri',
     'misc.SinceDate': 'Alates <<DATE>>',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategooriatele vastavad v\xE4ljad (valikulised)',
     'misc.States': 'Osariigid',
     'misc.ThereWasProb': 'Ilmnes probleem',

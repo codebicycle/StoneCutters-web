@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Birta',
     'misc.SendEmail': 'Senda t\xF6lvup\xF3st',
     'misc.SinceDate': 'Fr\xE1 <<DATE>>',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)',
     'misc.States': 'R\xEDki',
     'misc.ThereWasProb': 'Vandam\xE1l kom upp',
