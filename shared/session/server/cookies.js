@@ -34,7 +34,7 @@ function Cookies(req, res, callback) {
             catch (e) {
                 return;
             }
-            res.cookie(key, value, _.defaults({
+            res.cookie(key, value, _.extend({
                 maxAge: 2 * utils.YEAR,
                 domain: domain,
                 overwrite: true
