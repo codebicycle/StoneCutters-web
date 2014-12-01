@@ -12,9 +12,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return next();
             }
             req.headers.cookie.split(';').forEach(function each(cookie) {
-                var key = cookie.split('=').shift();
-
-                res.clearCookie(cookie);
+                res.clearCookie(cookie.split('=').shift());
             });
             next();
         };
