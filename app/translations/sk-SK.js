@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'V\u0161etky v\xFDsledky',
     'listingpageitemslisting.Gallery': 'Fotogal\xE9ria',
     'listingpageitemslisting.List': 'Zoznam',
+    'listingpageitemslisting.Of': 'z',
     'listingpageitemslisting.Posted': 'Uverejnen\xE9',
     'listingpageitemslisting.ResultsForNew': 'Strana <<PAGE_NUMBER>> z <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> v\xFDsledkov na k\u013E\xFA\u010Dov\xE9 slovo <<KEYWORD>> v <<LOCATION>>',

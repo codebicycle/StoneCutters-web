@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Semua keputusan',
     'listingpageitemslisting.Gallery': 'Galeri',
     'listingpageitemslisting.List': 'Senarai',
+    'listingpageitemslisting.Of': 'dari',
     'listingpageitemslisting.Posted': 'Disiarkan',
     'listingpageitemslisting.ResultsForNew': 'Halaman <<PAGE_NUMBER>> daripada <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> keputusan untuk <<KEYWORD>> di <<LOCATION>>',

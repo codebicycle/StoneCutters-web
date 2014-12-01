@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'T\u1EA5t c\u1EA3 k\u1EBFt qu\u1EA3',
     'listingpageitemslisting.Gallery': 'Tri\u1EC3n l\xE3m',
     'listingpageitemslisting.List': 'Danh m\u1EE5c',
+    'listingpageitemslisting.Of': 'c\u1EE7a',
     'listingpageitemslisting.Posted': '\u0110\xE3 \u0111\u0103ng',
     'listingpageitemslisting.ResultsForNew': 'Trang <<PAGE_NUMBER>> tr\xEAn t\u1ED5ng s\u1ED1 <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> k\u1EBFt qu\u1EA3 c\u1EE7a <<KEYWORD>> t\u1EA1i <<LOCATION>>',

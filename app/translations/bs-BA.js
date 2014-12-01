@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Svi rezultati',
     'listingpageitemslisting.Gallery': 'Galerija',
     'listingpageitemslisting.List': 'Spisak',
+    'listingpageitemslisting.Of': 'od',
     'listingpageitemslisting.Posted': 'Objavljeno',
     'listingpageitemslisting.ResultsForNew': 'Stranica <<PAGE_NUMBER>> od ukupno <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> rezultati za <<KEYWORD>> u <<LOCATION>>',

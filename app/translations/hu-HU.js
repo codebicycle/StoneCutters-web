@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': '\xD6sszes tal\xE1lat',
     'listingpageitemslisting.Gallery': 'Gal\xE9ria',
     'listingpageitemslisting.List': 'Lista',
+    'listingpageitemslisting.Of': '/',
     'listingpageitemslisting.Posted': 'K\xF6zz\xE9t\xE9ve',
     'listingpageitemslisting.ResultsForNew': '<<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>> oldal',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> eredm\xE9ny <<KEYWORD>> kulcssz\xF3ra itt: <<LOCATION>>',

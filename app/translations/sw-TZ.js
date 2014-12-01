@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Matokeo yote',
     'listingpageitemslisting.Gallery': 'Galari',
     'listingpageitemslisting.List': 'Orodha',
+    'listingpageitemslisting.Of': 'ya',
     'listingpageitemslisting.Posted': 'Ilichapishwa',
     'listingpageitemslisting.ResultsForNew': 'Ukurasa <<PAGE_NUMBER>> kati ya <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': 'Matokeo <<NUMBER>> ya <<KEYWORD>> katika <<LOCATION>>',

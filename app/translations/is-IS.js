@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Allar ni\xF0urst\xF6\xF0ur',
     'listingpageitemslisting.Gallery': 'Myndasafn',
     'listingpageitemslisting.List': 'Listi',
+    'listingpageitemslisting.Of': 'af',
     'listingpageitemslisting.Posted': 'Birt',
     'listingpageitemslisting.ResultsForNew': 'S\xED\xF0a <<PAGE_NUMBER>> af <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> ni\xF0urst\xF6\xF0ur fyrir <<KEYWORD>> \xE1 <<LOCATION>>',

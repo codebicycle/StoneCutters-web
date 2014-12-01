@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': '\u0E1C\u0E25\u0E25\u0E31\u0E1E\u0E18\u0E4C\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14',
     'listingpageitemslisting.Gallery': '\u0E2B\u0E49\u0E2D\u0E07\u0E23\u0E27\u0E21\u0E23\u0E39\u0E1B\u0E20\u0E32\u0E1E',
     'listingpageitemslisting.List': '\u0E23\u0E32\u0E22\u0E01\u0E32\u0E23\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32',
+    'listingpageitemslisting.Of': '\u0E02\u0E2D\u0E07',
     'listingpageitemslisting.Posted': '\u0E42\u0E1E\u0E2A\u0E15\u0E4C\u0E41\u0E25\u0E49\u0E27',
     'listingpageitemslisting.ResultsForNew': '\u0E2B\u0E19\u0E49\u0E32 <<PAGE_NUMBER>> \u0E02\u0E2D\u0E07 <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>>\u0E1C\u0E25\u0E2A\u0E33\u0E2B\u0E23\u0E31\u0E1A <<KEYWORD>> \u0E43\u0E19 <<LOCATION>>',

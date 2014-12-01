@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Lahat ng resulta',
     'listingpageitemslisting.Gallery': 'Galerya',
     'listingpageitemslisting.List': 'Listahan',
+    'listingpageitemslisting.Of': 'ng ',
     'listingpageitemslisting.Posted': 'Tapos ng i-post',
     'listingpageitemslisting.ResultsForNew': 'Pahina <<PAGE_NUMBER>> ng <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> na mga resulta para sa <<KEYWORD>> sa <<LOCATION>>',

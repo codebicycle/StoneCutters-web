@@ -103,6 +103,7 @@ module.exports = {
     'countrystatecityv2.MessageFromPost': 'Please select a city in order to post an item',
     'listingpageitemslisting.Gallery': 'Gallery',
     'listingpageitemslisting.List': 'List',
+    'listingpageitemslisting.Of': '\u0645\u0646 ',
     'listingpageitemslisting.Posted': 'Posted',
     'listingpageitemslisting.ResultsForNew': 'Page <<PAGE_NUMBER>> of <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> results for <<KEYWORD>> in <<LOCATION>>',

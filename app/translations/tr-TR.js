@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'B\xFCt\xFCn sonu\xE7lar',
     'listingpageitemslisting.Gallery': 'Alb\xFCm',
     'listingpageitemslisting.List': 'Liste',
+    'listingpageitemslisting.Of': '\'nin/\'n\u0131n',
     'listingpageitemslisting.Posted': 'G\xF6nderildi',
     'listingpageitemslisting.ResultsForNew': 'Sayfa <<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<KEYWORD>> i\xE7in <<LOCATION>> konumunda <<NUMBER>> sonu\xE7',

@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Kaikki tulokset',
     'listingpageitemslisting.Gallery': 'Galleria',
     'listingpageitemslisting.List': 'Luettelo',
+    'listingpageitemslisting.Of': ' ',
     'listingpageitemslisting.Posted': 'L\xE4hetetty',
     'listingpageitemslisting.ResultsForNew': 'Sivu <<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> tulosta hakusanalle <<KEYWORD>> sijainnissa <<LOCATION>>',

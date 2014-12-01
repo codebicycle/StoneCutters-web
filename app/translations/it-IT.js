@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Tutti i risultati',
     'listingpageitemslisting.Gallery': 'Galleria',
     'listingpageitemslisting.List': 'Elenco',
+    'listingpageitemslisting.Of': 'di',
     'listingpageitemslisting.Posted': 'Postato',
     'listingpageitemslisting.ResultsForNew': 'Pagina <<PAGE_NUMBER>> di <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> risultati per <<KEYWORD>> a <<LOCATION>>',

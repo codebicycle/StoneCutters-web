@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Visi rezult\u0101ti',
     'listingpageitemslisting.Gallery': 'Galerija',
     'listingpageitemslisting.List': 'Saraksts',
+    'listingpageitemslisting.Of': 'no',
     'listingpageitemslisting.Posted': 'Public\u0113ts',
     'listingpageitemslisting.ResultsForNew': '<<PAGE_NUMBER>>. lappuse no pavisam <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> rezult\u0101ti p\u0113c<<KEYWORD>> <<LOCATION>>',

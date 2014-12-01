@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'K\xF5ik tulemused',
     'listingpageitemslisting.Gallery': 'Galerii',
     'listingpageitemslisting.List': 'Nimekiri',
+    'listingpageitemslisting.Of': '',
     'listingpageitemslisting.Posted': 'Postitatud',
     'listingpageitemslisting.ResultsForNew': 'Lk <<PAGE_NUMBER>> / <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> tulemust m\xE4rks\xF5nale <<KEYWORD>> piirkonnas <<LOCATION>>',

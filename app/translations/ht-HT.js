@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Tout resilta yo',
     'listingpageitemslisting.Gallery': 'Ekspozisyon Galri',
     'listingpageitemslisting.List': 'Lis',
+    'listingpageitemslisting.Of': 'de',
     'listingpageitemslisting.Posted': 'Afiche',
     'listingpageitemslisting.ResultsForNew': 'PaJ <<PAGE_NUMBER>> DE <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> rezilta pour <<KEYWORD>> naon <<LOCATION>>',

@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Toate rezultatele',
     'listingpageitemslisting.Gallery': 'Galerie',
     'listingpageitemslisting.List': 'List\u0103',
+    'listingpageitemslisting.Of': 'de',
     'listingpageitemslisting.Posted': 'Publicat',
     'listingpageitemslisting.ResultsForNew': 'Pagina <<PAGE_NUMBER>> din <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> rezultate pentru <<KEYWORD>> \xEEn <<LOCATION>>',

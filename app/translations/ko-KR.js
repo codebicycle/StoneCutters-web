@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': '\uBAA8\uB4E0 \uACB0\uACFC',
     'listingpageitemslisting.Gallery': '\uAC24\uB7EC\uB9AC',
     'listingpageitemslisting.List': '\uBAA9\uB85D\uC11C',
+    'listingpageitemslisting.Of': '\uBC88\uD638',
     'listingpageitemslisting.Posted': '\uAC8C\uC2DC\uB428',
     'listingpageitemslisting.ResultsForNew': '\uCD1D <<TOTAL_PAGE_NUMBER>>\uD398\uC774\uC9C0 \uC911 <<PAGE_NUMBER>>\uD398\uC774\uC9C0',
     'listingpageitemslisting.ResultsForNew2': '<<LOCATION>>\uC758 <<KEYWORD>>\uC5D0 \uB300\uD55C <<NUMBER>> \uACB0\uACFC\uB4E4',

@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': '\u0D0E\u0D32\u0D4D\u0D32\u0D3E \u0D2B\u0D32\u0D19\u0D4D\u0D19\u0D33\u0D4D',
     'listingpageitemslisting.Gallery': '\u0D2A\u0D4D\u0D31\u0D26\u0D31\u0D4D\u0D36\u0D3F\u0D2A\u0D4D\u0D2A\u0D3F\u0D15\u0D4D\u0D15\u0D41\u0D35\u0D3E\u0D28\u0D41\u0D33\u0D4D\u0D33 \u0D38\u0D4D\u0D25\u0D32\u0D02',
     'listingpageitemslisting.List': '\u0D2A\u0D1F\u0D4D\u0D1F\u0D3F\u0D15',
+    'listingpageitemslisting.Of': '\u0D05\u0D24\u0D3F\u0D28\u0D4D\u0D31\u0D46',
     'listingpageitemslisting.Posted': '\u0D15\u0D4A\u0D1F\u0D41\u0D24\u0D4D\u0D24\u0D3F\u0D1F\u0D4D\u0D1F\u0D41\u0D23\u0D4D\u0D1F\u0D4D',
     'listingpageitemslisting.ResultsForNew': '\u0D2A\u0D47\u0D1C\u0D4D <<TOTAL_PAGE_NUMBER>> \u0D28\u0D4D\u0D31\u0D46 <<PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<LOCATION>> \u0D07\u0D32\u0D4D  <<KEYWORD>> \u0D07\u0D28\u0D41 \u0D35\u0D47\u0D23\u0D4D\u0D1F\u0D3F\u0D2F\u0D41\u0D33\u0D4D\u0D33 <<NUMBER>>     \u0D2B\u0D32\u0D19\u0D33\u0D4D',

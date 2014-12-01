@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': 'Visi rezultatai',
     'listingpageitemslisting.Gallery': 'Galerija',
     'listingpageitemslisting.List': 'S\u0105ra\u0161as',
+    'listingpageitemslisting.Of': 'i\u0161',
     'listingpageitemslisting.Posted': 'Paskelbta',
     'listingpageitemslisting.ResultsForNew': 'Puslapis <<PAGE_NUMBER>> i\u0161 <<TOTAL_PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<NUMBER>> <<KEYWORD>>, esan\u010Dio <<LOCATION>> rezultatai',

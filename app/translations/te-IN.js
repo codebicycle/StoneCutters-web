@@ -105,6 +105,7 @@ module.exports = {
     'listingpageitemslisting.AllResultsNew': '\u0C05\u0C28\u0C4D\u0C28\u0C3F \u0C2B\u0C32\u0C3F\u0C24\u0C3E\u0C32\u0C41',
     'listingpageitemslisting.Gallery': '\u0C2A\u0C4D\u0C30\u0C26\u0C30\u0C4D\u0C36\u0C28\u0C36\u0C3E\u0C32',
     'listingpageitemslisting.List': '\u0C32\u0C3F\u0C38\u0C4D\u0C1F\u0C41',
+    'listingpageitemslisting.Of': '\u0C2F\u0C4A\u0C15\u0C4D\u0C15',
     'listingpageitemslisting.Posted': '\u0C2A\u0C4B\u0C38\u0C4D\u0C1F\u0C41\u0C1A\u0C47\u0C2F\u0C2C\u0C21\u0C3F\u0C02\u0C26\u0C3F',
     'listingpageitemslisting.ResultsForNew': '<<TOTAL_PAGE_NUMBER>> \u0C32\u0C4B <<PAGE_NUMBER>>',
     'listingpageitemslisting.ResultsForNew2': '<<LOCATION>>\u0C32\u0C4B <<KEYWORD>> \u0C15\u0C4B\u0C38\u0C02 <<NUMBER>> \u0C2B\u0C32\u0C3F\u0C24\u0C3E\u0C32\u0C41',
