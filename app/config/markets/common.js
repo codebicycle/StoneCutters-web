@@ -22,9 +22,11 @@ module.exports = {
         topTitle: true,
         references: true,
         wikititles: true,
-        maxResultToIndexFollow: 0,
         prevItem: true,
-        nextItem: true
+        nextItem: true,
+        metaTitleLength: 110,
+        metaDescriptionLength: 160,
+        maxResultToIndexFollow: 0
     },
     tracking: {
         enabled: true,
