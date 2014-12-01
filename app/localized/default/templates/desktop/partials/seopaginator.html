@@ -1,0 +1,8 @@
+<div class="item-paginator">
+{% if prevItem %}
+    <a href="{{ prevItem.itemUrl }}" class="previous-item">{{ prevItem.title }}</a>
+{% endif %}
+{% if nextItem %}
+    <a href="{{ nextItem.itemUrl }}" class="next-item">{{ nextItem.title }}</a>
+{% endif %}
+</div>

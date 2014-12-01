@@ -1,3 +1,5 @@
+{% set prevItem = seo.get('prevItem') or false %}
+{% set nextItem = seo.get('nextItem') or false %}
 {% set topSearches = seo.get('topSearches') or false %}
 {% set populars = seo.get('popularSearches') or false %}
 {% set relateds = seo.get('relatedListings') or false %}
@@ -10,6 +12,9 @@
       levelPath or
       (wikititles and wikititles.length > 0) %}
     <section id="seo-box" {{ 'class="seo-' + seoFrom + '-page"' if seoFrom }}>
+        {% if (prevItem or nextItem) and seoFrom == "item" %}
+            {% include (template + "/partials/seopaginator.html") %}
+        {% endif %}
         {% if topSearches.length > 0 %}
             <div>
                 <p class="top-searches">

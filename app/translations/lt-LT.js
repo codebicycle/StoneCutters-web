@@ -384,6 +384,7 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Skelbti',
     'misc.SendEmail': 'Si\u0173sti el. prane\u0161im\u0105',
     'misc.SinceDate': 'Nuo <<DATE>>',
+    'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Special\u016Bs kategorij\u0173 laukai (papildomi)',
     'misc.States': 'Rajonai',
     'misc.ThereWasProb': 'Kilo problema',
