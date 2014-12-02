@@ -45,6 +45,8 @@ function cutString(title, n) {
 
 function title(metas, value) {
     var suffix;
+    var location = this.app.session.get('location').url;
+    var titleLength = config.getForMarket(location, ['seo', 'metaTitleLength'], 110);
 
     if (!value) {
         this.unset('title');
@@ -55,7 +57,7 @@ function title(metas, value) {
             value += ' - ';
             value += suffix;
         }
-        Base.prototype.set.call(this, 'title', value, {
+        Base.prototype.set.call(this, 'title', cutString(value,titleLength), {
             unset: false
         });
     }
