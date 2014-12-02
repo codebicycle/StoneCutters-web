@@ -132,6 +132,7 @@ lines(bgColor, width, height1, pos1, sep1, height2, pos2, sep2, position)
             left: sep2;
 
 
+
 tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
     &:after, &:before
         border: solid transparent;
@@ -197,13 +198,112 @@ btn-close(bgcolor, color, hoverbgcolor, hovercolor)
     height: 11px;
     &:hover
         background-color: hoverbgcolor;
-        color: hovercolor;        
+        color: hovercolor;
 
 transition(t)
     vendor('transition', t)
 
 transform(t)
     vendor('transform', t)
+
+preloader(preloaderSize, circlesSize, color)
+    position:relative;
+    width: preloaderSize;
+    height: preloaderSize;
+    .circles
+        position:absolute;
+        background-color: color;
+        width: circlesSize;
+        height: circlesSize;
+        -moz-border-radius: 50%;
+        -moz-animation-name:bounce_circles;
+        -moz-animation-duration:0.56s;
+        -moz-animation-iteration-count:infinite;
+        -moz-animation-direction:linear;
+        -webkit-border-radius: 50%;
+        -webkit-animation-name:bounce_circles;
+        -webkit-animation-duration:0.56s;
+        -webkit-animation-iteration-count:infinite;
+        -webkit-animation-direction:linear;
+        -ms-border-radius: 50%;
+        -ms-animation-name:bounce_circles;
+        -ms-animation-duration:0.56s;
+        -ms-animation-iteration-count:infinite;
+        -ms-animation-direction:linear;
+        -o-border-radius: 50%;
+        -o-animation-name:bounce_circles;
+        -o-animation-duration:0.56s;
+        -o-animation-iteration-count:infinite;
+        -o-animation-direction:linear;
+        border-radius: 50%;
+        animation-name:bounce_circles;
+        animation-duration:0.56s;
+        animation-iteration-count:infinite;
+        animation-direction:linear;
+
+        &.circle1
+            left:0;
+            top:32px;
+            -moz-animation-delay:0.21s;
+            -webkit-animation-delay:0.21s;
+            -ms-animation-delay:0.21s;
+            -o-animation-delay:0.21s;
+            animation-delay:0.21s;
+        &.circle2
+            left:8px;
+            top:8px;
+            -moz-animation-delay:0.28s;
+            -webkit-animation-delay:0.28s;
+            -ms-animation-delay:0.28s;
+            -o-animation-delay:0.28s;
+            animation-delay:0.28s;
+        &.circle3
+            top:0; left:32px;
+            -moz-animation-delay:0.35s;
+            -webkit-animation-delay:0.35s;
+            -ms-animation-delay:0.35s;
+            -o-animation-delay:0.35s;
+            animation-delay:0.35s;
+        &.circle4
+            right:8px;
+            top:8px;
+            -moz-animation-delay:0.42s;
+            -webkit-animation-delay:0.42s;
+            -ms-animation-delay:0.42s;
+            -o-animation-delay:0.42s;
+            animation-delay:0.42s;
+        &.circle5
+            right:0;
+            top:32px;
+            -moz-animation-delay:0.49s;
+            -webkit-animation-delay:0.49s;
+            -ms-animation-delay:0.49s;
+            -o-animation-delay:0.49s;
+            animation-delay:0.49s;
+        &.circle6
+            right:8px;
+            bottom:8px;
+            -moz-animation-delay:0.56s;
+            -webkit-animation-delay:0.56s;
+            -ms-animation-delay:0.56s;
+            -o-animation-delay:0.56s;
+            animation-delay:0.56s;
+        &.circle7
+            left:32px; bottom:0;
+            -moz-animation-delay:0.63s;
+            -webkit-animation-delay:0.63s;
+            -ms-animation-delay:0.63s;
+            -o-animation-delay:0.63s;
+            animation-delay:0.63s;
+        &.circle8
+            left:8px; bottom:8px;
+            -moz-animation-delay:0.7s;
+            -webkit-animation-delay:0.7s;
+            -ms-animation-delay:0.7s;
+            -o-animation-delay:0.7s;
+            animation-delay:0.7s;
+
+
 
 ul-reset()
     margin: 0

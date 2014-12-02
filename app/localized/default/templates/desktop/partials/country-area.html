@@ -1,3 +1,4 @@
+{% include (template + '/partials/preloader.html') %}
 <div class="country-area">
     <a class="open-modal" data-modal="location-modal" rel="nofollow" href="#">
         <img src="{{ ('/images/desktop/' + location.name | lower + '/country_map.gif') | static }}" alt="Mapa de {{ location.name }}" />
