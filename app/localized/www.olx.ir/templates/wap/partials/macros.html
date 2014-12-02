@@ -95,7 +95,7 @@
             <br />
             <select id="select-{{name}}" name="{{name}}">
                 {% for value in values %}
-                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
+                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{ value.value | persianDigits }}</option>
                 {% endfor %}
             </select>
         {% endif %}
