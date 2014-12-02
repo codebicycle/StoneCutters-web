@@ -77,7 +77,8 @@ function interstitial(params, callback) {
             var platform = this.app.session.get('platform');
 
             if (platform !== 'html4' || _.isEmpty(params)) {
-                return done.fail();
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
             }
             if (params.downloadApp) {
                 done.abort();
