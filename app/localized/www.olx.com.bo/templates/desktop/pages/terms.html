@@ -1,7 +1,4 @@
-{% from macros import Breadcrumb, BreadcrumbHome %}
-{% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["terms.TermsOfUse"]) }}
-<div id="terms">
+<h1>Condiciones de Uso</h1>
 <ol>
     <li>
         <h3>ACEPTACIÓN</h3>
@@ -152,6 +149,5 @@
     </li>
 </ol>
 </div>
-{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
 
 {% view 'partials/tracking' %}
