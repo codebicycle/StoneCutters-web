@@ -1,5 +1,4 @@
-{{ countryMapClass }}
-<div class="country-area">
+<div class="country-area {{ countryMapClass }}">
     <a class="open-modal" data-modal="location-modal" rel="nofollow" href="#">
         <img src="{{ ('/images/desktop/home_maps/' + location.name | lower + '.gif') | static }}" alt="Mapa de {{ location.name }}" />
     </a>
