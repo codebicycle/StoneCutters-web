@@ -665,15 +665,7 @@ function search(params, callback, gallery) {
         var redirect = function(done) {
             if (!params.search || _.isEmpty(params.search.trim()) || params.search === 'undefined') {
                 done.abort();
-                if (platform === 'desktop') {
-                    return helpers.common.redirect.call(this, '/nf/all-results');
-                }
-                return callback(null, {
-                    search: '',
-                    meta: {
-                        total: 0
-                    }
-                });
+                return helpers.common.redirect.call(this, '/nf/all-results');
             }
             if (!utils.startsWith(path, starts)) {
                 done.abort();
@@ -861,10 +853,6 @@ function staticSearch(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/q/-');
             }
-            if (platform !== 'desktop') {
-                done.abort();
-                return helpers.common.redirect.call(this, '/nf/search/' + params.search || '');
-            }
             done();
         }.bind(this);
 
@@ -1032,9 +1020,6 @@ function allresults(params, callback, gallery) {
             var path = this.app.session.get('path');
             var starts = '/nf/';
 
-            if (platform !== 'desktop') {
-                return done.fail();
-            }
             if (typeof page !== 'undefined' && !isNaN(page) && page > maxPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
