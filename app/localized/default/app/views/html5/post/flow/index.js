@@ -299,7 +299,6 @@ module.exports = Base.extend({
                 console.log(selector);
                 statsd.increment([this.app.session.get('location').name, 'posting', track, this.app.session.get('platform'), selector]);
             }.bind(this));
-            // statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
         }.bind(this);
 
         var always = function() {
