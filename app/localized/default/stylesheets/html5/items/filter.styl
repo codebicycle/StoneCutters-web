@@ -9,6 +9,7 @@
             overflow: hidden;
         }
 
+        .cat,
         .title,
         .location {
             box-sizing: border-box;
@@ -17,6 +18,7 @@
             width: 100%;
         }
 
+        .cat,
         .title {
             &::after {
                 background: url(imageUrl/images/html5/icon_flechas.png) left bottom no-repeat;
@@ -29,6 +31,9 @@
                 line-height: 0;
                 width: 9px;
             }
+        }
+
+        .title {
             &.active {
                 background: #e0f4ff;
                 font-weight: bold;
@@ -38,6 +43,17 @@
             }
             &.selected {
                 font-weight: bold;
+            }
+        }
+
+        .cat {
+            &::after {
+                background: url(imageUrl/images/html5/arrows_top_light.png) left bottom no-repeat;
+            }
+            &.active {
+                &::after {
+                    background-position: left top;
+                }
             }
         }
 
@@ -97,6 +113,11 @@
             }
         }
 
+        .subcategory-hide {
+            display: none;
+        }
+
+        .subcategory-hide,
         .dropdown {
 
             &.hide {
@@ -117,9 +138,32 @@
                 background: #ecf8ff;
                 box-sizing: border-box;
                 float: left;
-                padding: 1.250rem .625rem;
                 width: 100%;
-                &.active {
+                padding: 1.250rem .625rem;
+                &.subcategory {
+                    padding: 0;
+                    .cat {
+                        display: inline-block;
+                        padding: 1.250rem .625rem 1.250rem .625rem;
+                    }
+                }
+                &.category {
+                    &::after {
+                        background: url(imageUrl/images/html5/arrows_left_light.png) right top no-repeat;
+                        content: '';
+                        font-size: 0;
+                        float: right;
+                        position: relative;
+                        top: 5px;
+                        height: 9px;
+                        right: 2px;
+                        line-height: 0;
+                        width: 5px;
+                    }
+                    padding: 1.250rem .625rem 1.250rem 2.500rem;
+                }
+                &.active,
+                .active {
                     font-weight: bold;
                 }
             }
@@ -132,7 +176,7 @@
                 margin-left: 5px;
             }
             .count {
-                color: #ccc;
+                color: #999;
             }
         }
 
