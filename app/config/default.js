@@ -29,7 +29,7 @@ module.exports = {
         html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir']
     },
     countryMapStyle: {
-        special: ['www.olx.hn','www.olx.sn'],
+        special: ['www.olx.com.pa', 'www.olx.hn'],
     },
     categoryOrder: {
         //'For Sale','Classes','Vehicles','Community','Real Estate','Services','Jobs'
