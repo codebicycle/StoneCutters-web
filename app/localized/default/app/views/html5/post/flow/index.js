@@ -288,7 +288,18 @@ module.exports = Base.extend({
                     this.$el.trigger('errors', [err]);
                 }
             }
-            statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
+            if (track !== 'invalid') {
+                console.log('aca');
+                return statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
+            }
+            var errStast = [];
+            _.uniq(err.map(function each(error) {
+                return error.selector;
+            })).forEach(function each(selector) {
+                console.log(selector);
+                statsd.increment([this.app.session.get('location').name, 'posting', track, this.app.session.get('platform'), selector]);
+            }.bind(this));
+            // statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
         }.bind(this);
 
         var always = function() {
