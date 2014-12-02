@@ -101,25 +101,26 @@ module.exports = Base.extend({
         var $priceType = this.$('select[name=priceType]');
         var $priceC = this.$('input[name=priceC]').removeClass('error');
         var failed = false;
+        var location = this.app.session.get('location').abbreviation.toLowerCase();
 
         this.$el.removeClass('error').find('small').remove();
         if ($title.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
             $title.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
-            statsd.increment([this.app.session.get('location').name, this.app.session.get('platform'), 'posting', 'invalid', 'title']);
+            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'title']);
         }
         if ($description.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
             $description.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
-            statsd.increment([this.app.session.get('location').name, this.app.session.get('platform'), 'posting', 'invalid', 'description']);
+            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'description']);
         }
         if ($priceType.val() === 'FIXED' && $priceC.val() < 1) {
             failed = true;
             this.$el.addClass('error');
             $priceC.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']["postingerror.PleaseEnterANumericalValue"] + '</small>');
-            statsd.increment([this.app.session.get('location').name, this.app.session.get('platform'), 'posting', 'invalid', 'priceC']);
+            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'priceC']);
         }
         return !failed;
     },
