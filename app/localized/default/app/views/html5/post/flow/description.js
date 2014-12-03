@@ -108,19 +108,19 @@ module.exports = Base.extend({
             failed = true;
             this.$el.addClass('error');
             $title.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
-            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'title']);
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'title']);
         }
         if ($description.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
             $description.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', '10') + '</small>');
-            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'description']);
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'description']);
         }
         if ($priceType.val() === 'FIXED' && $priceC.val() < 1) {
             failed = true;
             this.$el.addClass('error');
             $priceC.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']["postingerror.PleaseEnterANumericalValue"] + '</small>');
-            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'priceC']);
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'priceC']);
         }
         return !failed;
     },
