@@ -215,94 +215,59 @@ preloader(firstColor, preloaderSize, animationSpeed)
         background-color: firstColor;
         width: round(preloaderSize*15/66);
         height: round(preloaderSize*15/66);
-        -moz-border-radius: round(preloaderSize*10/66);
-        -moz-animation-name:bounce_circles;
-        -moz-animation-duration: animationSpeed;
-        -moz-animation-iteration-count:infinite;
-        -moz-animation-direction:linear;
-        -webkit-border-radius: round(preloaderSize*10/66);
+        vendor('border-radius', round(preloaderSize*10/66));
+        vendor('animation-duration', round(animationSpeed*8/10, 2));
+
         -webkit-animation-name:bounce_circles;
-        -webkit-animation-duration: animationSpeed;
-        -webkit-animation-iteration-count:infinite;
-        -webkit-animation-direction:linear;
-        -ms-border-radius: round(preloaderSize*10/66);
+        -moz-animation-name:bounce_circles;
         -ms-animation-name:bounce_circles;
-        -ms-animation-duration: animationSpeed;
-        -ms-animation-iteration-count:infinite;
-        -ms-animation-direction:linear;
-        -o-border-radius: round(preloaderSize*10/66);
         -o-animation-name:bounce_circles;
-        -o-animation-duration: animationSpeed;
-        -o-animation-iteration-count:infinite;
-        -o-animation-direction:linear;
-        border-radius: round(preloaderSize*10/66);
         animation-name:bounce_circles;
-        animation-duration: animationSpeed;
+
+        -moz-animation-iteration-count:infinite;
+        -webkit-animation-iteration-count:infinite;
+        -ms-animation-iteration-count:infinite;
+        -o-animation-iteration-count:infinite;
         animation-iteration-count:infinite;
+
+        -moz-animation-direction:linear;
+        -webkit-animation-direction:linear;
+        -ms-animation-direction:linear;
+        -o-animation-direction:linear;
         animation-direction:linear;
 
         &.circle1
             left: 0;
             top: round(preloaderSize*26/66);
-            -moz-animation-delay: 0.21s;
-            -webkit-animation-delay: 0.21s;
-            -ms-animation-delay: 0.21s;
-            -o-animation-delay: 0.21s;
-            animation-delay: 0.21s;
+            vendor('animation-delay', round(animationSpeed*3/10, 2))
         &.circle2
-            left:8px;
-            top:8px;
-            -moz-animation-delay:0.28s;
-            -webkit-animation-delay:0.28s;
-            -ms-animation-delay:0.28s;
-            -o-animation-delay:0.28s;
-            animation-delay:0.28s;
+            left: round(preloaderSize*7/66);
+            top: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*4/10, 2))
         &.circle3
-            top:0; left:32px;
-            -moz-animation-delay:0.35s;
-            -webkit-animation-delay:0.35s;
-            -ms-animation-delay:0.35s;
-            -o-animation-delay:0.35s;
-            animation-delay:0.35s;
+            top: 0;
+            left: round(preloaderSize*26/66);
+            vendor('animation-delay', round(animationSpeed*5/10, 2))
         &.circle4
-            right:8px;
-            top:8px;
-            -moz-animation-delay:0.42s;
-            -webkit-animation-delay:0.42s;
-            -ms-animation-delay:0.42s;
-            -o-animation-delay:0.42s;
-            animation-delay:0.42s;
+            right: round(preloaderSize*7/66);
+            top: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*6/10, 2))
         &.circle5
-            right:0;
-            top:32px;
-            -moz-animation-delay:0.49s;
-            -webkit-animation-delay:0.49s;
-            -ms-animation-delay:0.49s;
-            -o-animation-delay:0.49s;
-            animation-delay:0.49s;
+            right: 0;
+            top: round(preloaderSize*26/66);
+            vendor('animation-delay', round(animationSpeed*7/10, 2))
         &.circle6
-            right:8px;
-            bottom:8px;
-            -moz-animation-delay:0.56s;
-            -webkit-animation-delay:0.56s;
-            -ms-animation-delay:0.56s;
-            -o-animation-delay:0.56s;
-            animation-delay:0.56s;
+            right: round(preloaderSize*7/66);
+            bottom: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*8/10, 2))
         &.circle7
-            left:32px; bottom:0;
-            -moz-animation-delay:0.63s;
-            -webkit-animation-delay:0.63s;
-            -ms-animation-delay:0.63s;
-            -o-animation-delay:0.63s;
-            animation-delay:0.63s;
+            left: round(preloaderSize*26/66);
+            bottom: 0;
+            vendor('animation-delay', round(animationSpeed*9/10, 2))
         &.circle8
-            left:8px; bottom:8px;
-            -moz-animation-delay:0.7s;
-            -webkit-animation-delay:0.7s;
-            -ms-animation-delay:0.7s;
-            -o-animation-delay:0.7s;
-            animation-delay:0.7s;
-
+            left: round(preloaderSize*7/66);
+            bottom: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*10/10, 2))
 
 
 ul-reset()
