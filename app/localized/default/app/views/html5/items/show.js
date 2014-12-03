@@ -300,20 +300,21 @@ module.exports = Base.extend({
                 var message = $('.message').val();
                 var email = $('.email').val();
                 var name = $('.name').val();
+                var location = this.app.session.get('location').abbreviation.toLowerCase();
 
                 if (!that.validForm(message, email)) {
                     action += '_Error';
                     if (!that.isEmpty(email, 'email')){
                         action += 'EmailEmpty';
-                        statsd.increment([this.app.session.get('location').name, this.app.session.get('platform'), 'reply', 'error', 'EmailEmpty']);
+                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'EmailEmpty']);
                     }
                     else if (!that.isEmail(email, 'email')) {
                         action += 'EmailWrong';
-                        statsd.increment([this.app.session.get('location').name, this.app.session.get('platform'), 'reply', 'error', 'EmailWrong']);
+                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'EmailWrong']);
                     }
                     if (!that.isEmpty(message, 'message')) {
                         action += 'MessageEmpty';
-                        statsd.increment([this.app.session.get('location').name, this.app.session.get('platform'), 'reply', 'error', 'MessageEmpty']);
+                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'MessageEmpty']);
                     }
                     if (!that.isEmpty(name, 'name')) {
                         action += 'NameEmpty';
