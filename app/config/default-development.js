@@ -34,6 +34,9 @@ module.exports = {
         'www.olx.com.bo': ['185','186','362','187','16','191','190'],
         'www.olx.com.py': ['185','186','362','187','16','191','190'],
     },
+    countryMapStyle: {
+        special: ['www.olx.com.pa', 'www.olx.hn'],
+    },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
         html4: ['post', 'location'],
