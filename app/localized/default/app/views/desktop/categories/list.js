@@ -3,6 +3,7 @@
 var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -14,8 +15,16 @@ module.exports = Base.extend({
         var states = data.states;
         var categories = data.categories;
         var currentState = {};
+        var countryMapStyle = config.get('countryMapStyle');
+        var countryMapClass;
 
         categories = helpers.common.categoryOrder(categories, location.url);
+
+        _.each(countryMapStyle, function each(country, style){
+            if (_.contains(country,location.url)){
+                countryMapClass = style;
+            }
+        });
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -27,6 +36,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             categories: categories,
+            countryMapClass: countryMapClass,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
