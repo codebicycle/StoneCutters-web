@@ -290,7 +290,7 @@ module.exports = Base.extend({
                 }
             }
             if (track !== 'invalid') {
-                return statsd.increment([location, 'posting', track || 'error', this.app.session.get('platform')]);
+                return statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
             }
 
             _.uniq(err.map(function each(error) {
