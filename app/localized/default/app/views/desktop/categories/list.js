@@ -15,7 +15,7 @@ module.exports = Base.extend({
         var states = data.states;
         var categories = data.categories;
         var currentState = {};
-        var countryMapStyle = config.get(['countryMapStyle']);
+        var countryMapStyle = config.get('countryMapStyle');
         var countryMapClass;
 
         categories = helpers.common.categoryOrder(categories, location.url);

@@ -1,39 +1,44 @@
 .country-area {
     box();
     clear-fix();
-    background: $white;
-    background: -moz-linear-gradient(top, $white 20%, $greyPageBg 20%);
-    background: -ms-linear-gradient(top, $white 20%, $greyPageBg 20%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%,$white), color-stop(20%,$greyPageBg));
-    background: -webkit-linear-gradient(top, $white 20%, $greyPageBg 20%);
-    background: linear-gradient(to bottom, $white 20%, $greyPageBg 20%);
+    background-color: $white;
+    background-image: -moz-linear-gradient(top, $white 18%, $greyPageBg 18%);
+    background-image: -ms-linear-gradient(top, $white 18%, $greyPageBg 18%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(18%,$white), color-stop(18%,$greyPageBg));
+    background-image: -webkit-linear-gradient(top, $white 18%, $greyPageBg 18%);
+    background-image: linear-gradient(to bottom, $white 18%, $greyPageBg 18%);
     float: left;
     height: 347px;
     margin-bottom: 20px;
     padding-bottom: 20px;
     width: 578px;
+    position: relative;
     img {
-        margin: 15px 0 0 0;
+        position: absolute;
+        right: 5px;
+        bottom: 25px;
     }
 
 
     .content-description {
-        float: right;
-        width: 300px;
+        margin-left: 20px;
+        float: left;
+        width: 100%;
 
         .title {
             color: $green;
             display: table-cell;
             font-size: $xl;
             font-weight: bold;
-            height: 55px;
+            height: 48px;
             vertical-align: middle;
         }
         .cities-title {
             color: $greyStrong;
             font-size: $l;
-            margin: 45px 0 10px;
+            margin: 35px 0 10px;
             padding-left: 25px;
+            width: 200px;
             &::before {
                 font-size: $l;
                 margin-left: -25px;
@@ -52,16 +57,10 @@
     }
 
     &.special {
-        position: relative;
         .content-description {
-            margin-left: 20px;
-            float: left;
-            width: 100%;
-        }
-        img {
-            position: absolute;
-            right: 0;
-            bottom: 25px;
+            .cities-title {
+                width: 100%;
+            }
         }
     }
 }
