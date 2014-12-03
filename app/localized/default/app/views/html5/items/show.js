@@ -195,7 +195,7 @@ module.exports = Base.extend({
 
             var success = function(done, data) {
                 var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-                
+
                 $('.loading').hide();
                 $('body').removeClass('noscroll');
                 $('.message').val('');
@@ -296,30 +296,36 @@ module.exports = Base.extend({
             var itemId = $('.itemId').val();
             var itemCategory = $('.itemCategory').val();
             var itemSubcategory = $('.itemSubcategory').val();
-
             if (action === 'ClickReply') {
                 var message = $('.message').val();
                 var email = $('.email').val();
                 var name = $('.name').val();
+                var location = this.app.session.get('location').abbreviation.toLowerCase();
 
                 if (!that.validForm(message, email)) {
                     action += '_Error';
-
                     if (!that.isEmpty(email, 'email')){
                         action += 'EmailEmpty';
+                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'EmailEmpty']);
                     }
                     else if (!that.isEmail(email, 'email')) {
                         action += 'EmailWrong';
+                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'EmailWrong']);
                     }
-                    action += (that.isEmpty(message, 'message') ? '' : 'MessageEmpty');
-                    action += (that.isEmpty(name, 'name') ? '' : 'NameEmpty');
+                    if (!that.isEmpty(message, 'message')) {
+                        action += 'MessageEmpty';
+                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'MessageEmpty']);
+                    }
+                    if (!that.isEmpty(name, 'name')) {
+                        action += 'NameEmpty';
+                    }
                 }
             }
             return {
                 action: action,
                 custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
             };
-        });
+        }.bind(this));
     },
     remove: function() {
         $(window).off('resize', this.resize);

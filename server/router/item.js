@@ -11,7 +11,7 @@ module.exports = function(app, dataAdapter) {
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
     var helpers = require('../../app/helpers');
-    
+
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 
@@ -63,7 +63,9 @@ module.exports = function(app, dataAdapter) {
 
             function error(err) {
                 var url = req.headers.referer || '/items/' + itemId + '/reply';
+                var location = req.rendrApp.session.get('location').abbreviation.toLowerCase();
 
+                statsd.increment([location, 'reply', 'error', platform]);
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     end(err);
