@@ -206,49 +206,49 @@ transition(t)
 transform(t)
     vendor('transform', t)
 
-preloader(preloaderSize, circlesSize, color)
+preloader(firstColor, preloaderSize, animationSpeed)
     position:relative;
     width: preloaderSize;
     height: preloaderSize;
     .circles
         position:absolute;
-        background-color: color;
-        width: circlesSize;
-        height: circlesSize;
-        -moz-border-radius: 50%;
+        background-color: firstColor;
+        width: round(preloaderSize*15/66);
+        height: round(preloaderSize*15/66);
+        -moz-border-radius: round(preloaderSize*10/66);
         -moz-animation-name:bounce_circles;
-        -moz-animation-duration:0.56s;
+        -moz-animation-duration: animationSpeed;
         -moz-animation-iteration-count:infinite;
         -moz-animation-direction:linear;
-        -webkit-border-radius: 50%;
+        -webkit-border-radius: round(preloaderSize*10/66);
         -webkit-animation-name:bounce_circles;
-        -webkit-animation-duration:0.56s;
+        -webkit-animation-duration: animationSpeed;
         -webkit-animation-iteration-count:infinite;
         -webkit-animation-direction:linear;
-        -ms-border-radius: 50%;
+        -ms-border-radius: round(preloaderSize*10/66);
         -ms-animation-name:bounce_circles;
-        -ms-animation-duration:0.56s;
+        -ms-animation-duration: animationSpeed;
         -ms-animation-iteration-count:infinite;
         -ms-animation-direction:linear;
-        -o-border-radius: 50%;
+        -o-border-radius: round(preloaderSize*10/66);
         -o-animation-name:bounce_circles;
-        -o-animation-duration:0.56s;
+        -o-animation-duration: animationSpeed;
         -o-animation-iteration-count:infinite;
         -o-animation-direction:linear;
-        border-radius: 50%;
+        border-radius: round(preloaderSize*10/66);
         animation-name:bounce_circles;
-        animation-duration:0.56s;
+        animation-duration: animationSpeed;
         animation-iteration-count:infinite;
         animation-direction:linear;
 
         &.circle1
-            left:0;
-            top:32px;
-            -moz-animation-delay:0.21s;
-            -webkit-animation-delay:0.21s;
-            -ms-animation-delay:0.21s;
-            -o-animation-delay:0.21s;
-            animation-delay:0.21s;
+            left: 0;
+            top: round(preloaderSize*26/66);
+            -moz-animation-delay: 0.21s;
+            -webkit-animation-delay: 0.21s;
+            -ms-animation-delay: 0.21s;
+            -o-animation-delay: 0.21s;
+            animation-delay: 0.21s;
         &.circle2
             left:8px;
             top:8px;
