@@ -132,7 +132,7 @@ module.exports = Base.extend({
         if (!$contactName.val().length) {
             failed = true;
             $contactName.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.EnterNameForBuyers_Mob'] + '</small>');
-            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'contactName']);
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'contactName']);
         }
         if ($phone.val() !== '' && !rPhone.test($phone.val())) {
             failed = true;
@@ -141,12 +141,12 @@ module.exports = Base.extend({
         if (!rEmail.test($email.val())) {
             failed = true;
             $email.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.InvalidEmail'] + '</small>');
-            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'email']);
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
         }
         if (!this.city) {
             failed = true;
             $location.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.AdNeedsLocation_Mob'] + '</small>');
-            statsd.increment([location, this.app.session.get('platform'), 'posting', 'invalid', 'city']);
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
         }
         if (failed) {
             this.$el.addClass('error');
