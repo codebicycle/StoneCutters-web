@@ -66,6 +66,20 @@ module.exports = {
             columns: [2, 3, 3],
         }
     },
+    testimonials: {
+        'www.olx.com.bo': [
+            {
+                name: 'María de Santa Cruz',
+                testimonial: 'Vendí una bicicleta que ya no usaba, ¡lo mejor fue que no pagué comisión!',
+                image: '/images/desktop/maria.jpg',
+            },
+            {
+                name: 'Raúl de La Paz',
+                testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
+                image: '/images/desktop/raul.jpg',
+            }
+        ]
+    },
     countryMapStyle: {
         special: ['www.olx.com.pa', 'www.olx.hn'],
     },
