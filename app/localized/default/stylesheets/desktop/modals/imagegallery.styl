@@ -1,10 +1,12 @@
 #image-modal {
+    background: rgba(0,0,0,0.8);
     .modal-container, .modal-header, .modal-content {
         background: $black;
         border: none;
     }
     .modal-container {
         border-radius: 0;
+        height: 90%;
         width: 980px;
     }
     .modal-header {
@@ -15,6 +17,7 @@
     }
     .icon-close {
         color: $black;
+        z-index: 3;
         &:hover {
             background: $white;
         }
@@ -22,27 +25,43 @@
     .arrow-prev, .arrow-next {
         color: rgba(255, 255, 255, .4);
         cursor: pointer;
-        position: absolute;
-        top: 48%;
         font-size: 32px;
+        height: 100%;
+        position: absolute;
         text-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
+        top: 50%;
+        transform (translateY(-50%));
+        width: 50%;
+        z-index: 1;
 
+        &::before {
+            padding-right: 5px;
+            position: relative;
+            top: 48%;
+        }
         &:hover {
             color: rgba(255, 255, 255, 1);
         }
     }
     .arrow-prev {
-        left: 5px;
+        left: 0;
     }
     .arrow-next {
-        right: 5px;
+        right: 0;
+        text-align: right;
     }
     .image-viewer {
         margin: 0;
 
         img {
-            display: table;
-            margin: 0 auto;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
         }
     }
     .modal-footer {
@@ -71,8 +90,9 @@
                 margin: 0;
                 position: relative;
                 width: 39px;
+                z-index: 2;
 
-                &:hover, .active {
+                &:hover, &.active {
                     border: 3px $blue solid;
                 }
 

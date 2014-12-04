@@ -7,23 +7,25 @@
 {% endblock %}
 
 {% block content %}
-    {% if item.images.length > 1 %}
-        <span class="icons icon-arrow-left arrow-prev"></span>
-        <span class="icons icon-arrow-right arrow-next"></span>
-    {% endif %}
-    <figure class="image-viewer" >
-        <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-gallery-image />
-    </figure>
-    <footer class="modal-footer">
-        <span class="item-title">{{ item.title }}</span>
+    <div data-modal-gallery-view >
         {% if item.images.length > 1 %}
-            <div class="thumbnail-wrapper">
-                {% for image in item.images %}
-                    <figure class="thumbnail" data-gallery-thumb="{{ loop.index }}" >
-                        <img src="{{ image.thumbnail }}" data-image="{{ image.url }}" alt="{{ item.title }}" class="item-image" >
-                    </figure>
-                {% endfor %}
-            </div>
+            <span class="icons icon-arrow-left arrow-prev" data-modal-gallery-navigator ></span>
+            <span class="icons icon-arrow-right arrow-next" data-modal-gallery-navigator ></span>
         {% endif %}
-    </footer>
+        <figure class="image-viewer" >
+            <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-modal-gallery-image />
+        </figure>
+        <footer class="modal-footer">
+            <span class="item-title">{{ item.title }}</span>
+            {% if item.images.length > 1 %}
+                <div class="thumbnail-wrapper" data-modal-gallery-thumbwrapper="{{ item.images.length }}">
+                    {% for image in item.images %}
+                        <figure class="thumbnail {{ "active" if loop.first }}" data-modal-gallery-thumb="{{ loop.index }}" >
+                            <img src="{{ image.thumbnail }}" data-modal-image="{{ image.url }}" alt="{{ item.title }}" class="item-image" >
+                        </figure>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </footer>
+    </div>
 {% endblock %}

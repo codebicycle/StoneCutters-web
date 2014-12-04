@@ -19,7 +19,7 @@
 	{% include (template + "/partials/adsense.html") %}
 {% endif %} #}
 {% if item.images.length > 0 %}
-    {% include (template + '/modals/image-gallery.html') %}
+    {% view '/modals/image-gallery' %}
 {% endif %}
 
 {% view 'partials/tracking' %}
