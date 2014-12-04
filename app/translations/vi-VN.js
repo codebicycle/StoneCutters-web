@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Quay tr\u1EDF l\u1EA1i Danh m\u1EE5c c\u1EE7a t\xF4i',
     'myolx.BackToMyOLX': 'Tr\u1EDF l\u1EA1i OLX c\u1EE7a t\xF4i',
     'myolx.EditListing': 'Bi\xEAn t\u1EADp danh m\u1EE5c',
+    'myolx.EmailPasswordInvalid': 'Xin l\u1ED7i, Email hay m\u1EADt kh\u1EA9u c\u1EE7a b\u1EA1n d\u01B0\u1EDDng nh\u01B0 kh\xF4ng h\u1EE3p l\u1EC7',
     'myolx.MessageNotSent': 'Tin nh\u1EAFn ch\u01B0a \u0111\u01B0\u1EE3c g\u1EEDi',
     'myolx.Messages': 'Tin nh\u1EAFn',
     'myolx.MyAds': 'Rao V\u1EB7t C\u1EE7a T\xF4i',

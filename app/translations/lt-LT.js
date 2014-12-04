@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Atgal prie mano skelbim\u0173',
     'myolx.BackToMyOLX': 'Atgal \u012F mano OLX',
     'myolx.EditListing': 'Redaguoti skelbim\u0105',
+    'myolx.EmailPasswordInvalid': 'Apgailestaujame, J\u016Bs\u0173 J\u016Bs\u0173 el. pa\u0161to adresas arba slapta\u017Eodis yra neteisingas',
     'myolx.MessageNotSent': 'Prane\u0161imas nei\u0161si\u0173stas',
     'myolx.Messages': 'Prane\u0161imai',
     'myolx.MyAds': 'Mano skelbimai',

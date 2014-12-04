@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Zp\u011Bt na Moje z\xE1znamy',
     'myolx.BackToMyOLX': 'Zp\u011Bt na Moje OLX',
     'myolx.EditListing': 'Upravit z\xE1znam',
+    'myolx.EmailPasswordInvalid': 'Je n\xE1m l\xEDto, v\xE1\u0161 e-mail nebo heslo nen\xED spr\xE1vn\xE9',
     'myolx.MessageNotSent': 'Zpr\xE1va nebyla odesl\xE1na',
     'myolx.Messages': 'Zpr\xE1vy',
     'myolx.MyAds': 'Moje z\xE1znamy',

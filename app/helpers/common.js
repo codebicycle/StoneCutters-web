@@ -114,18 +114,27 @@ module.exports = (function() {
     }
 
     function categoryOrder(categories, country) {
-        var order = config.get(['categoryOrder', country]);
+        var categoryTree = config.get(['categoryTree', country]);
         var list = [];
 
-        if (order){
-            _.each(order, function(obj, i){
-                _.find(categories, function(obj){
-                    return obj.id == order[i] ? list.push(obj) : false;
+        if (categoryTree) {
+            if (categoryTree.order) {
+                _.each(categoryTree.order, function(obj, i){
+                    _.find(categories, function(obj){
+                        return obj.id == categoryTree.order[i] ? list.push(obj) : false;
+                    });
                 });
-            });
+                categories = list;
+            }
+            if (categoryTree.columns) {
+                categories.columns = categoryTree.columns;
+            }
+        }
+        if (!categoryTree || !categoryTree.columns) {
+            categories.columns = [1, 3, 2];
         }
 
-        return order ? list : categories;
+        return categories;
     }
 
     var staticsHandler = (function() {

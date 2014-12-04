@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Nazad na moje oglase',
     'myolx.BackToMyOLX': 'Nazad na moj OLX',
     'myolx.EditListing': 'Uredite oglas',
+    'myolx.EmailPasswordInvalid': 'E-adresa ili lozinka je neva\u017Ee\u0107a',
     'myolx.MessageNotSent': 'Poruka nije poslata',
     'myolx.Messages': 'Poruke',
     'myolx.MyAds': 'Moji oglasi',

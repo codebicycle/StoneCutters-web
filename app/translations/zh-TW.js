@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': '\u8FD4\u56DE\u6211\u7684\u5EE3\u544A',
     'myolx.BackToMyOLX': '\u56DE\u5230\u6211\u7684OLX',
     'myolx.EditListing': '\u66F4\u6539\u5EE3\u544A',
+    'myolx.EmailPasswordInvalid': '\u4E0D\u597D\u610F\u601D\uFF0C\u60A8\u7684\u96FB\u5B50\u90F5\u7BB1\u6216\u5BC6\u78BC\u7121\u6548',
     'myolx.MessageNotSent': '\u6D88\u606F\u672A\u767C\u9001',
     'myolx.Messages': '\u7559\u8A00',
     'myolx.MyAds': '\u6211\u7684\u5EE3\u544A',

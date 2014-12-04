@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Vissza a hirdet\xE9seimre',
     'myolx.BackToMyOLX': 'Vissza a Saj\xE1t OLX oldalra',
     'myolx.EditListing': 'Hirdet\xE9s szerkeszt\xE9se',
+    'myolx.EmailPasswordInvalid': 'Sajnos \xFAgy t\u0171nik, e-mail c\xEDme vagy jelszava \xE9rv\xE9nytelen',
     'myolx.MessageNotSent': 'Az \xFCzenet nem ker\xFClt elk\xFCld\xE9sre',
     'myolx.Messages': '\xDCzenetek',
     'myolx.MyAds': 'Hirdet\xE9seim',
