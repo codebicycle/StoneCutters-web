@@ -116,7 +116,6 @@ module.exports = (function() {
     function categoryOrder(categories, country) {
         var categoryTree = config.get(['categoryTree', country]);
         var list = [];
-        categories.columns = [1, 3, 2];
 
         if (categoryTree) {
             if (categoryTree.order) {
@@ -130,6 +129,9 @@ module.exports = (function() {
             if (categoryTree.columns) {
                 categories.columns = categoryTree.columns;
             }
+        }
+        if (!categoryTree || !categoryTree.columns) {
+            categories.columns = [1, 3, 2];
         }
 
         return categories;
