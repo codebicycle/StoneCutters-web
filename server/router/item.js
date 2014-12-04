@@ -11,7 +11,7 @@ module.exports = function(app, dataAdapter) {
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
     var helpers = require('../../app/helpers');
-    
+
     (function reply() {
         app.post('/items/:itemId/reply', handler);
 

@@ -279,6 +279,7 @@ module.exports = Base.extend({
 
         var fail = function(err, track) {
             // TODO: Improve error handling
+            var location = this.app.session.get('location').abbreviation.toLowerCase();
             always();
             if (err) {
                 if (err.responseText) {
@@ -288,7 +289,16 @@ module.exports = Base.extend({
                     this.$el.trigger('errors', [err]);
                 }
             }
-            statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
+            if (track !== 'invalid') {
+                return statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
+            }
+
+            _.uniq(err.map(function each(error) {
+                return error.selector;
+            })).forEach(function each(selector) {
+                statsd.increment([location, 'posting', track, this.app.session.get('platform'), selector.replace(/[.\s]+/g, '_')]);
+            }.bind(this));
+
         }.bind(this);
 
         var always = function() {
