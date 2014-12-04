@@ -50,12 +50,12 @@
             border: 1px solid #ccc;
             height: 110px;
             line-height: 95px;
-            margin: 0;
+            margin: 0 20px 0 0;
             padding: 0;
             position: relative;
             text-align: center;
             width: 141px;
-            display: inline-block;
+            float: left;
             img {
                 bottom: 0;
                 left: 0;
@@ -65,6 +65,10 @@
                 position: absolute;
                 right: 0;
                 top: 0;
+            }
+            &.icon-photo {
+                color: $greyBorders;
+                font-size: remify(64px);
             }
         }
 
@@ -76,13 +80,13 @@
             display: inline-block;
             vertical-align: top;
             width: 760
-            margin: -3px 0 0 20px;
+            margin: -3px 0 20px;
         }
 
         .description {
-            line-height: 1;
+            line-height: 1.2;
             overflow: hidden;
-            height: 55px;
+            font-size: $xs;
             text-wrap();
         }
 
