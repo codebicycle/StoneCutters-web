@@ -29,10 +29,43 @@ module.exports = {
         html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
         html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir']
     },
-    categoryOrder: {
-        //'For Sale','Classes','Vehicles','Community','Real Estate','Services','Jobs'
-        'www.olx.com.bo': ['185','186','362','187','16','191','190'],
-        'www.olx.com.py': ['185','186','362','187','16','191','190'],
+    categoryTree: {
+        'www.olx.com.bo': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.py': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.ni': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.hn': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.co.cr': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.pa': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.co.tz': {
+            order: [185, 186, 187, 362, 16, 191, 190]
+        },
+        'www.olx.co.ug': {
+            order: [830, 800, 806, 815, 362, 811, 859, 16, 821],
+            columns: [3, 2, 2],
+        },
+        'www.olx.com.gh': {
+            order: [830, 800, 806, 815, 362, 811, 859, 16, 821],
+            columns: [3, 2, 2],
+        },
+        'www.olx.sn': {
+            columns: [2, 2, 2],
+        },
+        'www.olx.com.uy': {
+            order: [830, 859, 811, 800, 853, 362, 806, 815, 821 ,16],
+            columns: [2, 3, 3],
+        }
     },
     countryMapStyle: {
         special: ['www.olx.com.pa', 'www.olx.hn'],
@@ -102,7 +135,7 @@ module.exports = {
                 countries: ['www.olx.in', 'www.olx.ir']
             },
             listingFilters: {
-                worldwide: false,
+                worldwide: true,
                 countries: []
             },
             interstitialByADX: {
