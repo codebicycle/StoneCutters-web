@@ -1,11 +1,12 @@
 'use strict';
 
-var middlewares = require('../middlewares');
+var _ = require('underscore');
 var asynquence = require('asynquence');
+var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
-var _ = require('underscore');
+var countriesTerms = ['www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.bo', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'];
 
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -20,6 +21,7 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
+    sitemapByDate: middlewares(sitemapByDate),
     featured_listings: middlewares(featuredListings)
 };
 
@@ -27,7 +29,14 @@ function terms(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {});
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var view = 'pages/terms';
+
+        if (platform !== 'desktop' && _.contains(countriesTerms, location.url)) {
+            view += 'es';
+        }
+        callback(null, view, {});
     }
 }
 
@@ -76,7 +85,8 @@ function interstitial(params, callback) {
             var platform = this.app.session.get('platform');
 
             if (platform !== 'html4' || _.isEmpty(params)) {
-                return done.fail();
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
             }
             if (params.downloadApp) {
                 done.abort();
@@ -250,6 +260,12 @@ function sitemap(params, callback) {
             .then(redirect)
             .val(success);
     }
+}
+
+function sitemapByDate(params, callback) {
+    helpers.common.redirect.call(this, '/', null, {
+        status: 302
+    });
 }
 
 function featuredListings(params, callback) {

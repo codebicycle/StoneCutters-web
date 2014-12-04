@@ -10,7 +10,11 @@ module.exports = function(params, next) {
     if (!enabled) {
         return next();
     }
-    if (this.app.session.get('location').url === 'www.olx.co.za' && this.app.session.get('internet.org')) {
+    var locationUrl = this.app.session.get('location').url;
+    if (locationUrl === 'www.olx.ir') {
+        return next();
+    }
+    if (locationUrl === 'www.olx.co.za' && this.app.session.get('internet.org')) {
         return next();
     }
     var url = '/interstitial';

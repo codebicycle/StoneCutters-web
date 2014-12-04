@@ -1,0 +1,13 @@
+{% extends (template + '/modals/modal.html') %}
+
+{% block id %}terms-modal{% endblock %}
+
+{% block title %}
+    <span class="modal-title">{{ dictionary["defaultfooter.Terms of use"] }}</span>
+{% endblock %}
+
+{% block content %}
+<div>
+    {% include (template + '/pages/terms.html') %}
+</div>
+{% endblock %}

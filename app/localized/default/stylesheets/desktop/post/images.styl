@@ -1,117 +1,124 @@
 .posting-images-view {
-	position: relative;
+    label.field-label {
+        font-size: $m;
+    }
+    position: relative;
 
-	.hint {
-		margin-top: -5px;
-	}
+    .hint {
+        margin-top: 3px;
+    }
 
-	.image-input-file {
-		  height: 0;
-		  left: -99999px;
-		  opacity: 0;
-		  position: absolute;
-		  top: -99999px;
-		  width: 0;
-	}
+    .image-input-file {
+          height: 0;
+          left: -99999px;
+          opacity: 0;
+          position: absolute;
+          top: -99999px;
+          width: 0;
+    }
 
-	.file-upload {
-		ul-reset();
-		max-width: 440px;
+    .file-upload {
+        ul-reset();
+        max-width: 440px;
 
-		.image-cont {
-			border: 1px dashed $blue;
-			display: inline-block;
-			height: 75px;
-			line-height: 75px;
-			margin: 0 0 10px 10px;
-			opacity: .3;
-			position: relative;
-			text-align: center;
-			vertical-align: top;
-			width: 100px;
+        .image-cont {
+            border: 1px dashed $blue;
+            display: inline-block;
+            height: 74px;
+            line-height: 75px;
+            margin: 0 0 10px 10px;
+            opacity: .3;
+            position: relative;
+            text-align: center;
+            vertical-align: top;
+            width: 76px;
 
-			&::after {
-				background-color: $blue;
-				bottom: 0;
-				content: '';
-				display: block;
-				height: .5rem;
-				left: 0;
-				position: absolute;
-				width: 0;
-			}
+            &::after {
+                background-color: $blue;
+                bottom: 0;
+                content: '';
+                display: block;
+                height: .5rem;
+                left: 0;
+                position: absolute;
+                width: 0;
+            }
 
-			&:first-child,
-			&:nth-child(4n + 1) {
-				margin: 0 0 10px 0;
-			}
+            &:hover {
+                cursor: pointer;
+                opacity: 1;
+            }
 
-			&:hover {
-				cursor: pointer;
-				opacity: 1;
-			}
+            &.loaded {
+                opacity: 1;
 
-			&.loaded {
-				opacity: 1;
+                &::after {
+                    opacity: 0;
+                    transition(250ms);
+                    width: 100%;
+                }
 
-				&::after {
-					opacity: 0;
-					transition(250ms);
-					width: 100%;
-				}
+                &:hover {
+                    .icon-close {
+                        background: $black;
+                    }
+                }
 
-				&:hover {
-					.icon-close {
-						background: $greyStrong;
-						color: $white;
-					}
-				}
-				
-				.icon-close {
-					background: $blue;
-					circle(8px);
-					color: $lightBlue;
-					display: block;
-					font-size: remify(8px);
-					line-height: 7px;
-					padding: 5px;
-					position: absolute;
-					right: 5px;
-					text-align: center;
-					top: 5px;
-					transition(250ms);
-				}
-			}
+                .icon-close {
+                    background: $greyStrong;
+                    circle(8px);
+                    color: $white;
+                    display: block;
+                    font-size: remify(8px);
+                    line-height: 7px;
+                    padding: 5px;
+                    position: absolute;
+                    right: 5px;
+                    text-align: center;
+                    top: 5px;
+                    transition(250ms);
+                }
+            }
 
+            &.loading {
+                &::after {
+                    transition(250ms);
+                    width: 66%;
+                }
+            }
 
-			&.loading {
-				&::after {
-					transition(250ms);
-					width: 66%;
-				}
-			}
+            .icon-close {
+                display: none;
+            }
 
-			.icon-close {
-				display: none;
-			}
+            .image {
+                background: $lightBlue;
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
 
-			.image {
-				background: $lightBlue;
-				bottom: 0;
-				left: 0;
-				position: absolute;
-				right: 0;
-				top: 0;
+                &.fill {
+                    background-size: cover;
+                }
 
-				&.fill {
-					background-size: cover;
-				}
+                &.icon-addpicture::before {
+                    color: $blue;
+                    font-size: $xxl;
+                }
+            }
 
-				&.icon-addpicture::before {
-					color: $blue;
-					font-size: remify(32px);
-				}
-			}
-		}
-	}
+            &.first-img {
+                float: left;
+                height: 160px;
+                line-height: 160px;
+                margin: 0;
+                width: 165px;
+                .icon-addpicture::before {
+                    font-size: 75px;
+                }
+            }
+        }
+    }
 }

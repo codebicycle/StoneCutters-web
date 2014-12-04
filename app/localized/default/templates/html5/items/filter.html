@@ -7,7 +7,15 @@
                         <span class="title">{{ dictionary["itemslisting.NavigatorByCategory"] }}</span>
                         <ul class="dropdown hide">
                             {% for value in filter.value %}
-                                <li class="category trackMe" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" data-tracking="Filter-{{ value.value }}">{{ value.value }} <span class="count">({{ value.count }})</span></li>
+                                <li class="subcategory"><span class="cat">{{ value.value }} <span class="count">({{ value.count }})</span></span>
+                                    {% if value.children.value %}
+                                        <ul class="subcategory-hide">
+                                        {% for subCat in value.children.value %}
+                                            <li class="category trackMe" data-filter-id="{{ subCat.id }}" data-filter-name="{{ subCat.value }}" data-filter-slug="{{ subCat.slug }}" data-tracking="Filter-{{ subCat.value }}">{{ subCat.value }} <span class="count">({{ subCat.count }})</span>
+                                        {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
                             {% endfor %}
                         </ul>
                     </li>
@@ -46,15 +54,22 @@
                         <li class="filter">
                             <span class="location">
                                 {{ dictionary["defaultheader.Location"] }}
-                                <a class="bold" href="/location?target={{ path | replace('/filter', '') }}">{{ location.children[0].name if location.children[0].name else location.name }}</a>
+                                {% if location.children[0].children[0].name %}
+                                    {% set state = location.children[0].children[0].name %}
+                                {% elif location.children[0].name %}
+                                    {% set state = location.children[0].name %}
+                                {% else %}
+                                    {% set state = location.name %}
+                                {% endif %}
+                                <a class="bold" href="/location?target={{ path | replace('/filter', '') }}">{{ state }}</a>
                             </span>
                         </li>
                         <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
                             {% set active = true if filters.isActive(filter.name) else false %}
-                            <span class="title {{ 'active' if active }}">{{ 'Tipo de aviso' }}</span>
+                            <span class="title {{ 'active selected' if active }}">{{ dictionary["misc.ViewOptions"] }}</span>
                             <ul class="dropdown {{ 'hide' if not active }}">
-                                <li class="adType {{ 'active' if active }} trackMe" data-tracking="Filter-Has_image" data-filter-value="true">{{ 'Avisos con foto' }}</li>
-                                <li class="clear-all trackMe" data-filter-value="true" data-tracking="Filter-Has_image_all">{{ 'Todos los avisos' }}</li>
+                                <li class="adType {{ 'active' if active }} trackMe" data-tracking="Filter-Has_image" data-filter-value="true">{{ dictionary["misc.WithPicsOnly"] }}</li>
+                                <li class="clear-all trackMe" data-filter-value="true" data-tracking="Filter-Has_image_all">{{ dictionary["misc.AllAds_Mob"] }}</li>
                             </ul>
                         </li>
                     {% endif %}

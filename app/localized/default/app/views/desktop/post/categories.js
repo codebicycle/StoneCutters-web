@@ -88,6 +88,10 @@ module.exports = Base.extend({
 
         var $target = $(event.currentTarget);
 
+        $('a.category').removeClass('select');
+        $('.child-categories-list').removeClass('select');
+        $('a.subcategory').removeClass('select icon-check');
+
         $('a.category').removeClass('active');
         $('.child-categories-list').addClass('hide');
         $target.addClass('active');

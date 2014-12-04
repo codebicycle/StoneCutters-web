@@ -15,6 +15,12 @@ module.exports = Base.extend({
     },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
+        $('body').on('click', function(event){
+            var $modal = $('.modal');
+            if ($(event.target).hasClass("modal-wrapper") && $modal.hasClass("modal-visible")) {
+                $("a[data-modal-close]").click();
+            }
+        }.bind(this));
     },
     loading: function($progressBar, app, isLoading) {
         if (isLoading){

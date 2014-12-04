@@ -24,8 +24,8 @@
         <div class="btnCenter">
             <input type="submit" value="{{ dictionary["registerheader.Register"] }}" class="btns orange" data-qa="registrate-button" >
         </div>
+        <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
     </form>
-    <a href="{{ '/login' | link }}">{{ dictionary["loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn"] }}</a>
 </section>
 
 {% view 'partials/tracking' %}

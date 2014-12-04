@@ -12,8 +12,7 @@ module.exports = Base.extend({
     regexpReplacePage: /(-p-[0-9]+)/,
     regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     events: {
-        'click #form-sort input[type="radio"]': 'onEnableSort',
-        'submit': 'onSort'
+        'click #form-sort input[type="radio"]': 'onSort'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -33,27 +32,21 @@ module.exports = Base.extend({
         this.app.router.once('action:start', this.onEnd);
         this.attachTrackMe();
     },
-    onEnableSort: function(event) {
-        $('#btn-sort').attr('disabled',false).removeClass('disabled');
-    },
-    onStart: function(event) {
-        this.appView.trigger('sort:start');
-    },
-    onEnd: function(event) {
-        this.appView.trigger('sort:end');
-    },
     onSort: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
         var path = this.app.session.get('path');
         var $target = $(event.currentTarget);
-        var toSort = $('input[name="sort"]:checked').val();
+        var toSort = $target.val();
         var filter = {
             name: 'sort',
             type: 'SELECT'
         };
+
+        if (!this.filters) {
+            this.filters = new Filters(null, {
+                    app: this.app,
+                    path: this.app.session.get('path')
+                });
+        }
 
         this.filters.remove(filter);
         filter.value = toSort;
@@ -63,6 +56,12 @@ module.exports = Base.extend({
         path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
+    },
+    onStart: function(event) {
+        this.appView.trigger('sort:start');
+    },
+    onEnd: function(event) {
+        this.appView.trigger('sort:end');
     },
     refactorPath: function(path) {
         path = this.cleanPage(path);

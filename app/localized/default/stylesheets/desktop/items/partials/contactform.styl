@@ -1,5 +1,12 @@
 #item-contact-form {
     box($yellow, $yellowBorders , 3px, 15px 20px);
+    position: relative;
+    tab-arrow(right, $white, $greyBorders, 1px, 30px, 1);
+    &::before,
+    &::after {
+        left: -20px;
+        top: 150px;
+    }
 
     .icons:before {
         font-size: $l;
@@ -51,9 +58,10 @@
             color: $red;
             display: inline-block;
             font-size: $xs;
-            margin-top: 10px;
+            margin-top: 5px;
         }
         textarea {
+            display: block;
             height: 80px;
         }
         input[type="text"] {

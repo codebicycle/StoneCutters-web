@@ -113,6 +113,30 @@ module.exports = (function() {
         return utils.link(href, this.app, query);
     }
 
+    function categoryOrder(categories, country) {
+        var categoryTree = config.get(['categoryTree', country]);
+        var list = [];
+
+        if (categoryTree) {
+            if (categoryTree.order) {
+                _.each(categoryTree.order, function(obj, i){
+                    _.find(categories, function(obj){
+                        return obj.id == categoryTree.order[i] ? list.push(obj) : false;
+                    });
+                });
+                categories = list;
+            }
+            if (categoryTree.columns) {
+                categories.columns = categoryTree.columns;
+            }
+        }
+        if (!categoryTree || !categoryTree.columns) {
+            categories.columns = [1, 3, 2];
+        }
+
+        return categories;
+    }
+
     var staticsHandler = (function() {
         function getEnv(envPath, filePath, options) {
             switch (options.env) {
@@ -237,7 +261,7 @@ module.exports = (function() {
 
     function serializeFormJSON(data) {
        var output = {};
-        _.each(data, function each(item) {        
+        _.each(data, function each(item) {
            if (output[item.name]) {
                if (!output[item.name].push) {
                    output[item.name] = [output[item.name]];
@@ -254,6 +278,7 @@ module.exports = (function() {
         slugToUrl: slugToUrl,
         link: utils.link,
         linkig: linkig,
+        categoryOrder: categoryOrder,
         fullizeUrl: utils.fullizeUrl,
         params: utils.params,
         removeParams: utils.removeParams,

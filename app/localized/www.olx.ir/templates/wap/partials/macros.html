@@ -1,0 +1,103 @@
+{% macro Breadcrumb(dictionary, link='', home='/') %}
+    <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#DDDDDD">
+        <tbody>
+            <tr>
+                <td style="border-top: solid thin #808080;">
+                    <small style="display: block;">
+                        {% if link %}
+                            <a href="{{link}}">
+                                <img border="0" alt="" src="{{ '/images/wap/rtl_arrowbackwap.gif' | static }}">
+                                {{dictionary["defaultfooter.Back"]}}
+                            </a>
+                            |
+                        {% endif %}
+                        <a href="{{home}}">
+                            <img border="0" alt="" src="{{ "/images/wap/ico_home.gif" | static }}">
+                            {{dictionary["defaultfooter.Home"]}}
+                        </a>
+                    </small>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% macro Errors(errors) %}
+    <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#F9E4E3">
+        <tbody>
+            <tr>
+                <td style="border: solid thin #B55351;">
+                    {% for field, messages in errors %}
+                        {% for message in messages %}
+                            <small>{{ ([field, ': '] | join | title) if field != 'main' }}{{ message }}</small><br/>
+                        {% endfor %}
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% macro ErrorsPosting(errors, dictionary) %}
+    <table width="100%" cellspacing="0" cellpadding="4" border="0" bgcolor="#F9E4E3">
+        <tbody>
+            <tr>
+                <td style="border: solid thin #B55351;">
+                    {% for field, messages in errors %}
+                        {% for message in messages %}
+
+                            {% if field == 'priceC' %}
+                                <small>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</small><br/>
+                            {% elif field ==  'contactName' %}
+                                <small>{{ dictionary["itemslisting.NewContactName"] }}: {{ message }}</small><br/>
+                            {% elif field ==  'phone' %}
+                                <small>{{ dictionary["posting_fields_1.phoneNumber"] }}: {{ message }}</small><br/>
+                            {% else %}
+                                <small>{{ dictionary["posting_fields_1."+field] }}: {{ message }}</small><br/>
+                            {% endif %}
+
+                        {% endfor %}
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% macro FieldText(label, name, mandatory, form, user) %}
+    <label style="display: block; padding-top: .5em;">
+        <small>{{ '* ' if mandatory == 'true' }}{{ label }}</small>
+        <br />
+        <input type="text" name="{{name}}" id="text-{{name}}"
+        {% if name == 'email' %}
+            value="{{ user.email if (user and user.email) else '' }}"
+        {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
+            value="{{ form.values[name] if form.values[name] else user.username }}"
+        {% endif %}>
+    </label>
+{% endmacro %}
+
+{% macro FieldTextArea(label, name, mandatory, form, user) %}
+    <label style="display: block; padding-top: .5em;">
+        <small>{{ '* ' if mandatory == 'true' }}{{ label }}</small>
+        <br />
+        <textarea id="text-{{name}}" name="{{name}}" >{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
+    </label>
+{% endmacro %}
+
+{% macro FieldCombobox(label, name, mandatory, form, user, values) %}
+    <label style="display: block; padding-top: .5em;">
+        {% if values.length == 1 %}
+            <small>{{label}}: <strong>{{ values[0].value }}</strong></small>
+            <input type="hidden" name="{{name}}" value="{{ values[0].key }}">
+        {% else %}
+            <small>{{label}}</small>
+            <br />
+            <select id="select-{{name}}" name="{{name}}">
+                {% for value in values %}
+                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{ value.value | persianDigits }}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    </label>
+{% endmacro %}
