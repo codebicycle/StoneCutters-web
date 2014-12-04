@@ -2,7 +2,6 @@
     clear-fix();
     color: $black;
     font-size: $xs;
-    margin: 0 0 20px 0;
 
     .breadcrumb-navigation {
         float: left;
@@ -32,6 +31,8 @@
     .back-to-results {
         a {
             font-size: $xs;
+            height:28px;
+            display: inline-block;
             &.icon-arrow-left:before {
                 font-size: remify(8px);
                 margin: 0 4px;
@@ -44,17 +45,19 @@
             color: $greyStrong;
             display: inline-block;
             vertical-align: middle;
+            padding: 6px;
             &.disable {
                 color: $greyBorders;
+                cursor: default;
             }
             &:hover {
                 color: $black;
             }
-            &[rel="prev"] {
-                box($white, $greyBorders, 3px 0 0 3px, 6px, solid, 1px 0 1px 1px);
+            &.disable:hover {
+                color: $greyBorders;
             }
             &[rel="next"] {
-                box($white, $greyBorders, 0 3px 3px 0, 6px, solid, 1px);
+                border-left: 1px solid $greyBorders;
                 &.icon-arrow-right:before {
                     margin-top: -3px;
                 }
