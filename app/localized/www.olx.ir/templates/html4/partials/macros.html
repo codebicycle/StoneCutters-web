@@ -1,0 +1,80 @@
+{% macro Breadcrumb(dictionary, link, title='', suffix='', heading=true) %}
+    <div class="breadcrumb">
+        <a href="{{link}}" class="arrow">{{dictionary["defaultfooter.Back"]}}</a>
+        {% if heading %}
+            {% set tag = 'h1' %}
+        {% else %}
+            {% set tag = 'strong' %}
+        {% endif %}
+        {{ (['<', tag, '>', title, '</', tag, '>'] | join) if title }}{{suffix}}
+    </div>
+{% endmacro %}
+
+{% macro BreadcrumbHome(dictionary, link, home) %}
+    {{ Breadcrumb(dictionary, link, '', ['<a class="arrow home" href="', home, '">', dictionary["defaultfooter.Home"], '</a>'] | join) }}
+{% endmacro %}
+
+{% macro Errors(errors) %}
+    <div class="messages errors">
+        {% for field, messages in errors %}
+            {% for message in messages %}
+                <span>{{ ([field, ': '] | join | title) if field != 'main' }}{{ message }}</span><br/>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro ErrorsPosting(errors, dictionary) %}
+    <div class="messages errors">
+        {% for field, messages in errors %}
+            {% for message in messages %}
+
+                {% if field == 'priceC' %}
+                    <span>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</span><br/>
+                {% elif field ==  'contactName' %}
+                    <span>{{ dictionary["itemslisting.NewContactName"] }}: {{ message }}</span><br/>
+                {% elif field ==  'phone' %}
+                    <span>{{ dictionary["posting_fields_1.phoneNumber"] }}: {{ message }}</span><br/>
+                {% else %}
+                    <span>{{ dictionary["posting_fields_1."+field] }}: {{ message }}</span><br/>
+                {% endif %}
+
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro FieldText(label, name, mandatory, form, user) %}
+    <div class="formField">
+        <label>{{ '* ' if mandatory == 'true' }}{{label}}</label>
+        <input type="text" name="{{name}}" id="text-{{name}}"
+        {% if name == 'email' %}
+            value="{{ user.email if (user and user.email) else '' }}"
+        {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
+            value="{{ form.values[name] if form.values[name] else user.username }}"
+        {% endif %}>
+    </div>
+{% endmacro %}
+
+{% macro FieldTextArea(label, name, mandatory, form, user) %}
+    <div class="formField">
+        <label>{{ '* ' if mandatory == 'true' }}{{label}}</label>
+        <textarea id="text-{{name}}" name="{{name}}" class="textarea">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
+    </div>
+{% endmacro %}
+
+{% macro FieldCombobox(label, name, mandatory, form, user, values) %}
+    <div class="formField">
+        {% if values.length == 1 %}
+            <label>{{label}} <strong>{{ values[0].value }}</strong></label>
+            <input type="hidden" id="select-{{name}}" name="{{name}}" value="{{ values[0].key }}">
+        {% else %}
+            <label>{{label}}</label>
+            <select id="select-{{name}}" name="{{name}}">
+                {% for value in values %}
+                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{ value.value  | persianDigits }}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    </div>
+{% endmacro %}

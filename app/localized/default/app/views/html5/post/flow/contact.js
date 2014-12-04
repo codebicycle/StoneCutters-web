@@ -5,6 +5,7 @@ var _ = require('underscore');
 var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
 var rPhone = /^[\d -]+$/;
 var translations = require('../../../../../../../../shared/translations');
+var statsd = require('../../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'post_flow_contact_view disabled',
@@ -125,11 +126,13 @@ module.exports = Base.extend({
         var $email = this.$('input[name=email]').removeClass('error');
         var $location = this.$('.location').removeClass('error');
         var failed = false;
+        var location = this.app.session.get('location').abbreviation.toLowerCase();
 
         this.$el.removeClass('error').find('small').remove();
         if (!$contactName.val().length) {
             failed = true;
             $contactName.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.EnterNameForBuyers_Mob'] + '</small>');
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'contactName']);
         }
         if ($phone.val() !== '' && !rPhone.test($phone.val())) {
             failed = true;
@@ -138,10 +141,12 @@ module.exports = Base.extend({
         if (!rEmail.test($email.val())) {
             failed = true;
             $email.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.InvalidEmail'] + '</small>');
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
         }
         if (!this.city) {
             failed = true;
             $location.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.AdNeedsLocation_Mob'] + '</small>');
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
         }
         if (failed) {
             this.$el.addClass('error');

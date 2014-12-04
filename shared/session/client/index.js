@@ -39,7 +39,7 @@ function Client(app, callback) {
             value = encodeURIComponent('j:' + JSON.stringify(value));
         }
         var cookie = key + '=' + value;
-        var properties = _.defaults({
+        var properties = _.extend({
             path: '/',
             'max-age': 2 * utils.YEAR / utils.SECOND,
             domain: domain
@@ -55,9 +55,9 @@ function Client(app, callback) {
         var expires = new Date();
 
         expires.setMonth(-1);
-        put(key, '', _.extend(options || {}, {
+        put(key, '', _.extend({
             expires: expires.toUTCString()
-        }));
+        }, options || {}));
     }
 
     this.getAll = !utils.isServer ? getAll : utils.noop;

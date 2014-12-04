@@ -16,6 +16,7 @@ module.exports = Base.extend({
         this.filters = data.filters;
         this.filters.order = this.order;
         data.path = data.path.replace('/', '');
+
         return _.extend({}, data, {});
     },
     postRender: function() {
@@ -35,7 +36,8 @@ module.exports = Base.extend({
         'click .clear-all': 'cleanFilters',
         'click .range-submit': 'rangeFilterInputs',
         'click .category': 'categoryFilter',
-        'click .title': 'toogleFilter'
+        'click .title': 'toogleFilter',
+        'click .cat': 'toogleSubcategory'
     },
     onStart: function(event) {
         this.appView.trigger('filter:start');
@@ -52,6 +54,21 @@ module.exports = Base.extend({
 
         $this.toggleClass('active');
         $this.closest('.filter').find('.dropdown').slideToggle();
+    },
+    toogleSubcategory: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $this = $(event.currentTarget);
+
+        if (!$this.hasClass('active')) {
+            $this.closest('.filter').find('.cat').removeClass('active');
+            $this.closest('.filter').find('.subcategory-hide').slideUp();
+        }
+
+        $this.toggleClass('active');
+        $this.closest('.subcategory').find('.subcategory-hide').slideToggle();
     },
     adType: function(event) {
         event.preventDefault();
@@ -117,14 +134,6 @@ module.exports = Base.extend({
             this.filters.remove(filter);
         }
 
-        if (this.filters.has('carmodel') && !this.filters.has('carbrand')) {
-            filter = {
-                name: 'carmodel',
-                type: 'SELECT'
-            };
-            this.filters.remove(filter);
-        }
-
         path = [this.cleanPath(path), '/', this.filters.format()].join('');
         path = helpers.common.link(path, this.app);
         this.app.router.redirectTo(path);
@@ -172,14 +181,6 @@ module.exports = Base.extend({
         };
 
         this.filters.remove(filter);
-
-        if (!this.filters.has('carbrand') && this.filters.has('carmodel')) {
-            filter = {
-                name: 'carmodel',
-                type: 'SELECT'
-            };
-            this.filters.remove(filter);
-        }
 
         path = [this.cleanPath(path), '/', this.filters.format()].join('');
         path = helpers.common.link(path, this.app);

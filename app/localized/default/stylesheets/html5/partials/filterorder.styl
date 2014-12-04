@@ -14,6 +14,10 @@
 	    font-weight: normal;
 	    line-height: 2.2;
 	    margin: 0 0 0 10px;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    width: 34%;
 	}
 	.btnsort {
 		background: #fff url(imageUrl/images/html5/icon_flechas.png) 10px center no-repeat;
@@ -26,21 +30,9 @@
 }
 
 @media (max-width : 279px) {
-	.filter_order {	
+	.filter_order {
 		span {
 			line-height: 1.2;
-		}
-	}
-}
-@media (min-width: 280px) and (max-width : 320px) {
-	.filter_order {	
-		span {
-			display: block;
-			float: none;
-			line-height: 1.6;
-		}
-		.btnfilter {
-			width: 33%;
 		}
 	}
 }

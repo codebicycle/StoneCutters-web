@@ -2,6 +2,7 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
+var helpers = require('../../../../../helpers');
 
 module.exports = Base.extend({
     tagName: "section",
@@ -10,25 +11,13 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var categories = data.categories;
-        var order = ['For Sale','Classes','Vehicles','Community','Real Estate','Services','Jobs'];
-        var list = [];
 
-        _.each(order, function(obj, i){
-            _.find(categories, function(obj){
-                return obj.name == order[i] ? list.push(obj) : false;
-            });
-        });
+        categories = helpers.common.categoryOrder(categories, this.app.session.get('location').url);
 
         return _.extend({}, data, {
             location: this.app.session.get('location'),
-            categories: list
+            categories: categories
         });
-    },
-    onActionStart: function(event) {
-        this.app.trigger('footer:hide', 'categories');
-    },
-    onActionEnd: function(event) {
-        this.app.trigger('footer:show', 'categories');
     }
 });
 
