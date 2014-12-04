@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view');
+var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
@@ -61,6 +62,7 @@ module.exports = Base.extend({
         var $image = $container.children('.image');
         var imageUrl = window.URL.createObjectURL(event.target.files[0]);
         var image = new window.Image();
+        var item;
 
         image.src = imageUrl;
 
@@ -68,41 +70,34 @@ module.exports = Base.extend({
 
             window.URL.revokeObjectURL(this.src);
 
-            var exif = function(done) {
+            function exif(done) {
                 EXIF.getData(image);
                 done();
-            }.bind(this);
+            }
 
-            var post = function(done) {
-                var data = new FormData();
-
+            function post(done) {
                 this.$el.trigger('imageLoadStart');
                 $container.addClass('loading');
-                data.append(0, event.target.files[0]);
-                helpers.dataAdapter.post(this.app.req, '/images', {
-                    query: {
-                        postingSession: this.parentView.options.postingsession || this.parentView.options.postingSession,
-                        url: this.app.session.get('location').url
-                    },
-                    data: data,
-                    multipart: true,
-                    cache: false,
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false
-                }, done.errfcb);
-            }.bind(this);
+                item = new Item({
+                    images: event.target.files,
+                    postingSession: this.parentView.options.postingsession || this.parentView.options.postingSession,
+                    location: this.app.session.get('location').url
+                }, {
+                    app: this.app
+                });
+                item.postImages(done);
+            }
 
-            var success = function(done, res, body) {
+            function success(done, response, images) {
                 this.selected[$input.attr('name')] = {
-                    id: body.shift(),
+                    id: images.shift(),
                     file: imageUrl,
                     orientation: 1
                 };
                 done();
-            }.bind(this);
+            }
 
-            var display = function() {
+            function display() {
                 var orientation = EXIF.getTag(image, 'Orientation');
                 var cssClass = 'fill r' + (orientation || 1);
 
@@ -115,13 +110,13 @@ module.exports = Base.extend({
                 });
                 $container.removeClass('loading').addClass('loaded');
                 this.$el.trigger('imageLoadEnd');
-            }.bind(this);
+            }
 
             asynquence().or(image.onerror)
-                .then(exif)
-                .then(post)
-                .then(success)
-                .then(display);
+                .then(exif.bind(this))
+                .then(post.bind(this))
+                .then(success.bind(this))
+                .then(display.bind(this));
         }.bind(this);
 
         image.onerror = function(err) {

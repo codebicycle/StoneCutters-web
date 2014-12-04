@@ -337,9 +337,18 @@ DataAdapter.prototype.apiDefaults = function(api) {
 };
 
 DataAdapter.prototype.ajaxParams = function(api, options) {
+    var data;
+
     _.extend(api, options);
     if (api.query) {
         api.url = utils.params(api.url, api.query);
+    }
+    if (api.data && api.multipart) {
+        data = new FormData();
+        Object.keys(api.data).forEach(function each(key) {
+            data.append(key, api.data[key]);
+        });
+        api.data = data;
     }
     return api;
 };
