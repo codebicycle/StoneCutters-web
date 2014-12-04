@@ -7,7 +7,10 @@
     {% include (template + '/partials/categorytree.html') %}
 </section>
 
-{% include (template + '/partials/testimonials.html') %}
+{% if testimonials %}
+    {% include (template + '/partials/testimonials.html') %}
+{% endif %}
+
 {% include (template + '/modals/location.html') %}
 
 {% view 'partials/tracking' %}

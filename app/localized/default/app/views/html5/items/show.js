@@ -306,15 +306,15 @@ module.exports = Base.extend({
                     action += '_Error';
                     if (!that.isEmpty(email, 'email')){
                         action += 'EmailEmpty';
-                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'EmailEmpty']);
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailEmpty']);
                     }
                     else if (!that.isEmail(email, 'email')) {
                         action += 'EmailWrong';
-                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'EmailWrong']);
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailWrong']);
                     }
                     if (!that.isEmpty(message, 'message')) {
                         action += 'MessageEmpty';
-                        statsd.increment([location, this.app.session.get('platform'), 'reply', 'error', 'MessageEmpty']);
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'MessageEmpty']);
                     }
                     if (!that.isEmpty(name, 'name')) {
                         action += 'NameEmpty';
