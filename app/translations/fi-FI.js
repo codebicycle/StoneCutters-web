@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Takaisin omiin ilmoituksiin',
     'myolx.BackToMyOLX': 'Takaisin Oma OLX -sivulle',
     'myolx.EditListing': 'Muokkaa ilmoitusta',
+    'myolx.EmailPasswordInvalid': 'Valitettavasti s\xE4hk\xF6postiosoitteesi tai salasanasi on virheellinen',
     'myolx.MessageNotSent': 'Viesti\xE4 ei l\xE4hetetty',
     'myolx.Messages': 'Viestit',
     'myolx.MyAds': 'Omat ilmoitukset',

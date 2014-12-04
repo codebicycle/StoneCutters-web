@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Powr\xF3t do moich og\u0142osze\u0144',
     'myolx.BackToMyOLX': 'Wr\xF3\u0107 do Mojego OLX',
     'myolx.EditListing': 'Edytuj og\u0142oszenie',
+    'myolx.EmailPasswordInvalid': 'Niestety podany adres e-mail lub has\u0142o wydaj\u0105 si\u0119 nieprawid\u0142owe',
     'myolx.MessageNotSent': 'Wiadomo\u015B\u0107 nie zosta\u0142a wys\u0142ana',
     'myolx.Messages': 'Wiadomo\u015Bci',
     'myolx.MyAds': 'Moje og\u0142oszenia',

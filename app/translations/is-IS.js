@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Aftur \xED augl\xFDsinguna m\xEDna',
     'myolx.BackToMyOLX': 'Aftur \xED Mitt OLX',
     'myolx.EditListing': 'Breyta augl\xFDsingu',
+    'myolx.EmailPasswordInvalid': '\xDE\xFA vir\xF0ist hafa gefi\xF0 upp rangt netfang e\xF0a a\xF0gangsor\xF0',
     'myolx.MessageNotSent': 'Skilabo\xF0in voru ekki send',
     'myolx.Messages': 'Skilabo\xF0',
     'myolx.MyAds': 'Augl\xFDsingarnar m\xEDnar',
