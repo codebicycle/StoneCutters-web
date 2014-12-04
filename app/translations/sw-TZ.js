@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Rejea kwa matangazo yangu',
     'myolx.BackToMyOLX': 'Back to My OLX',
     'myolx.EditListing': 'Hariri tangazo',
+    'myolx.EmailPasswordInvalid': 'Samahani, Barua pepe yako au nenosiri inaonekana kuwa batili',
     'myolx.MessageNotSent': 'Ujumbe Haukutumwa',
     'myolx.Messages': 'Ujumbe',
     'myolx.MyAds': 'Matangazo Yangu',

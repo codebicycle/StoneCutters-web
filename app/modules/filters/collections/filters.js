@@ -262,6 +262,7 @@ function smaugize() {
     var sort;
     var name;
     var value;
+    var separator;
 
     if (!this.length) {
         return params;
@@ -276,7 +277,11 @@ function smaugize() {
         name = 'f.' + name;
         switch (filter.get('type')) {
             case 'SELECT':
-                params[name] = value.join('OR');
+                separator = 'OR';
+                if (name === 'f.neighborhood') {
+                    separator = ' OR ';
+                }
+                params[name] = value.join(separator);
                 break;
             case 'RANGE':
                 params[name] = [value.from, 'TO', value.to].join('');

@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': '\u0631\u062C\u0648\u0639 \u0627\u0644\u0649 \u0644\u0627\u0626\u062D\u062A\u064A ',
     'myolx.BackToMyOLX': 'Back to My OLX',
     'myolx.EditListing': 'Edit Listing',
+    'myolx.EmailPasswordInvalid': 'Sorry, you Email or password seem to be invalid',
     'myolx.MessageNotSent': 'The Message was not sent',
     'myolx.Messages': 'Messages',
     'myolx.MyAds': '\u0628\u0644\u062F\u064A \u0646\u062A\u0627\u0626\u062C',

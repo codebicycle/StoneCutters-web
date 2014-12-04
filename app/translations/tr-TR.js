@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': '\u0130lanlar\u0131ma Geri D\xF6n',
     'myolx.BackToMyOLX': 'OLX Bana \xD6zel\'e Geri D\xF6n',
     'myolx.EditListing': '\u0130lan\u0131 D\xFCzenle',
+    'myolx.EmailPasswordInvalid': '\xDCzg\xFCn\xFCz, e-posta ya da \u015Fifre ge\xE7ersiz',
     'myolx.MessageNotSent': 'Mesaj g\xF6nderilmedi',
     'myolx.Messages': '\u0130letiler',
     'myolx.MyAds': '\u0130lanlar\u0131m',

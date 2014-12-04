@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Retounen sou Anons mwen yo',
     'myolx.BackToMyOLX': 'Retounen sou  OLX mwen',
     'myolx.EditListing': 'Chanje Anons yo',
+    'myolx.EmailPasswordInvalid': 'Nou regr\xE8t, Email oswa modpas ou a pa bon',
     'myolx.MessageNotSent': 'Mesaj la pa te ale',
     'myolx.Messages': 'Messaj',
     'myolx.MyAds': 'Anons Mwen yo',
