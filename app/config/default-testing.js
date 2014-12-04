@@ -18,20 +18,70 @@ module.exports = {
         imagePath: 'http://images01.olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
-        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
-        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir'],
-        desktop: ['www.olx.com.bo', 'www.olx.com.py']
+        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
+        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
+        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
+        desktop: ['www.olx.com.bo', 'www.olx.com.py', 'www.jaovat.com']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
         html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
         html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir']
     },
-    categoryOrder: {
-        //'For Sale','Classes','Vehicles','Community','Real Estate','Services','Jobs'
-        'www.olx.com.bo': ['185','186','362','187','16','191','190'],
-        'www.olx.com.py': ['185','186','362','187','16','191','190'],
+    categoryTree: {
+        'www.olx.com.bo': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.py': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.ni': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.hn': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.co.cr': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.pa': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.co.tz': {
+            order: [185, 186, 187, 362, 16, 191, 190]
+        },
+        'www.olx.co.ug': {
+            order: [830, 800, 806, 815, 362, 811, 859, 16, 821],
+            columns: [3, 2, 2],
+        },
+        'www.olx.com.gh': {
+            order: [830, 800, 806, 815, 362, 811, 859, 16, 821],
+            columns: [3, 2, 2],
+        },
+        'www.olx.sn': {
+            columns: [2, 2, 2],
+        },
+        'www.olx.com.uy': {
+            order: [830, 859, 811, 800, 853, 362, 806, 815, 821 ,16],
+            columns: [2, 3, 3],
+        }
+    },
+    testimonials: {
+        'www.olx.com.bo': [
+            {
+                name: 'María de Santa Cruz',
+                testimonial: 'Vendí una bicicleta que ya no usaba, ¡lo mejor fue que no pagué comisión!',
+                image: '/images/desktop/maria.jpg',
+            },
+            {
+                name: 'Raúl de La Paz',
+                testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
+                image: '/images/desktop/raul.jpg',
+            }
+        ]
+    },
+    countryMapStyle: {
+        special: ['www.olx.com.pa', 'www.olx.hn'],
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
@@ -84,7 +134,7 @@ module.exports = {
                 countries: ['www.olx.in', 'www.olx.ir']
             },
             listingFilters: {
-                worldwide: false,
+                worldwide: true,
                 countries: []
             },
             interstitialByADX: {
