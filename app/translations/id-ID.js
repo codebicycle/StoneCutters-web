@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Kembali ke Iklan saya',
     'myolx.BackToMyOLX': 'Kembali ke OLX Saya',
     'myolx.EditListing': 'Edit Iklan',
+    'myolx.EmailPasswordInvalid': 'Maaf, Email atau kata sandi Anda tampak tidak sah',
     'myolx.MessageNotSent': 'Pesan Tidak Terkirim',
     'myolx.Messages': 'Pesan',
     'myolx.MyAds': 'Iklan Saya',

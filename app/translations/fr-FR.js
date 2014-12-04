@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Revenir \xE0 mes Annonces',
     'myolx.BackToMyOLX': 'Retour \xE0 Mon OLX',
     'myolx.EditListing': 'Modifier l\'Annonce',
+    'myolx.EmailPasswordInvalid': 'D\xE9sol\xE9, votre Email ou mot de passe semble invalide',
     'myolx.MessageNotSent': 'Le Message n\'a pas \xE9t\xE9 envoy\xE9',
     'myolx.Messages': 'Messages',
     'myolx.MyAds': 'Mes Annonces',

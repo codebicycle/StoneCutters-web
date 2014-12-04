@@ -218,6 +218,7 @@ module.exports = {
     'myolx.BackToMyAds': 'Terug naar mijn advertenties',
     'myolx.BackToMyOLX': 'Terug naar Mijn OLX',
     'myolx.EditListing': 'Wijzig advertentie',
+    'myolx.EmailPasswordInvalid': 'Je e-mailadres of wachtwoord lijkt ongeldig te zijn',
     'myolx.MessageNotSent': 'Het bericht is niet verzonden',
     'myolx.Messages': 'Berichten',
     'myolx.MyAds': 'Mijn advertenties',
