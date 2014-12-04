@@ -16,6 +16,7 @@ module.exports = Base.extend({
         this.filters = data.filters;
         this.filters.order = this.order;
         data.path = data.path.replace('/', '');
+        data.path = data.path.replace(/(-neighborhood)([0-9_]+)/, '');
 
         return _.extend({}, data, {});
     },
