@@ -1,5 +1,6 @@
 'use strict';
 
 module.exports = {
-    filters: require('./filters')
+    filters: require('./filters'),
+    sorts: require('./sorts')
 };
