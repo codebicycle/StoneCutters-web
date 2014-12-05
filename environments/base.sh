@@ -72,7 +72,7 @@ cp hosts /etc/hosts;
 # Host replace
 # ---------------------------------------------------------------------------------------
 # Check if Mac OS
-if [ "$OSTYPE" == "darwin"* ]
+if [[ "$OSTYPE" == "darwin"* ]]
 then
 	sed -i .bkp "s/{IP}/$IP/g" '/etc/hosts';
 	sed -i .bkp "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
