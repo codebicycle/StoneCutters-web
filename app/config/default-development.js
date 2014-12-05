@@ -22,7 +22,7 @@ module.exports = {
         wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        desktop: ['www.olx.com.bo', 'www.olx.com.py', 'www.jaovat.com']
+        desktop: ['www.olx.com.bo', 'www.jaovat.com']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
@@ -49,23 +49,42 @@ module.exports = {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
         'www.olx.co.tz': {
-            order: [185, 186, 187, 362, 16, 191, 190]
+            order: [185, 187, 186, 191, 16, 362, 190],
+            columns: [2, 2, 2],
         },
         'www.olx.co.ug': {
-            order: [830, 800, 806, 815, 362, 811, 859, 16, 821],
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.com.gh': {
-            order: [830, 800, 806, 815, 362, 811, 859, 16, 821],
+            order: [830, 800, 811, 806, 815, 362, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.sn': {
             columns: [2, 2, 2],
         },
         'www.olx.com.uy': {
-            order: [830, 859, 811, 800, 853, 362, 806, 815, 821 ,16],
-            columns: [2, 3, 3],
+            order: [830, 800, 811, 815, 853, 362, 859, 806, 821 ,16],
+            columns: [3, 3, 2],
+        },
+        'www.olx.cm': {
+            order: [800, 806, 815, 859, 600, 362, 16, 821],
+            columns: [2, 2, 2],
         }
+    },
+    testimonials: {
+        'www.olx.com.bo': [
+            {
+                name: 'María de Santa Cruz',
+                testimonial: 'Vendí una bicicleta que ya no usaba, ¡lo mejor fue que no pagué comisión!',
+                image: '/images/desktop/maria.jpg',
+            },
+            {
+                name: 'Raúl de La Paz',
+                testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
+                image: '/images/desktop/raul.jpg',
+            }
+        ]
     },
     countryMapStyle: {
         special: ['www.olx.com.pa', 'www.olx.hn'],
@@ -132,7 +151,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.in', 'www.olx.ir']
+                countries: ['www.olx.ir']
             },
             listingFilters: {
                 worldwide: true,
