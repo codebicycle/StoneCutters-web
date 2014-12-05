@@ -59,6 +59,9 @@ module.exports = {
         'itemdescriptionwiki.year',
         'itemdescriptionwiki.model',
         'misc.Brand',
-        'itemgeneraldetails.PicturesOf'
+        'itemgeneraldetails.PicturesOf',
+        'itemslisting.NewlyListed',
+        'itemslisting.HighestFirst',
+        'itemslisting.LowestFirst'
     ]
 };

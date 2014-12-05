@@ -1,18 +1,11 @@
 <form id="form-sort">
-    <fieldset>
-        <label class="block">{{ dictionary["itemslisting.NewlyListed"] }}
-            <input type="radio" class="trackMe" name="sort" value="{{ sorts[2].name }}" {{ "checked" if filters.has('sort', sorts[2].name) }} data-tracking="Sort-{{ sorts[2].name }}">
-        </label>
-    </fieldset>
-    <fieldset>
-        <label class="block">{{ dictionary["itemslisting.HighestFirst"] }}
-            <input type="radio" class="trackMe" name="sort" value="{{ sorts[0].name }}" {{ "checked" if filters.has('sort', sorts[0].name) }} data-tracking="Sort-{{ sorts[0].name }}">
-        </label>
-    </fieldset>
-    <fieldset>
-        <label class="block">{{ dictionary["itemslisting.LowestFirst"] }}
-            <input type="radio" class="trackMe" name="sort" value="{{ sorts[1].name }}" {{ "checked" if filters.has('sort', sorts[1].name) }} data-tracking="Sort-{{ sorts[1].name }}">
-        </label>
-    </fieldset>
+    {% for sort, key in sorts %}
+        <fieldset>
+            <label class="block">{{ dictionary[key] }}
+                <input type="radio" class="trackMe" name="sort" value="{{ sort }}" {{ "checked" if filters.has('sort', sort) }} data-tracking="Sort-{{ sort }}">
+            </label>
+        </fieldset>
+    {% endfor %}
 </form>
+
 {% view 'partials/tracking' %}

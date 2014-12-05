@@ -7,6 +7,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
+var Filters = require('../modules/filters');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var Item = require('../models/item');
@@ -1316,27 +1317,11 @@ function sort(params, callback) {
             done();
         }.bind(this);
 
-        var build = function(done) {
-            var options = [
-                {
-                    name: 'pricedesc'
-                },
-                {
-                    name: 'price'
-                },
-                {
-                    name: 'datedesc'
-                }
-            ];
-
-            done(options);
-        }.bind(this);
-
         var success = function(options) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, 'items/sort', {
-                sorts: options
+                sorts: Filters.sorts()
             });
         }.bind(this);
 
@@ -1346,7 +1331,6 @@ function sort(params, callback) {
 
         asynquence().or(error)
             .then(redirect)
-            .then(build)
             .val(success);
     }
 }
