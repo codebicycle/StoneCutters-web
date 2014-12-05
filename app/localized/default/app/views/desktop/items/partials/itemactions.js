@@ -11,7 +11,10 @@ module.exports = Base.extend({
     id: 'item-actions',
     events: {
         'click [data-fav]': 'addToFavorites',
-        'submit [data-login-form]': 'login'
+        'submit [data-login-form]': 'login',
+        'click [data-modal-close]': 'onCloseModal',
+        'click .open-modal': 'onOpenModal',
+        'click [data-modal-shadow]': 'onCloseModal'
     },
     addToFavorites: function (e) {
         var $this = $(e.currentTarget);
@@ -63,13 +66,13 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        
+
         var data = {
             usernameOrEmail: this.$('[name="usernameOrEmail"]').val(),
             password: this.$('[name="password"]').val()
         };
         var user;
-        
+
         function prepare(done) {
             user = new User(_.extend(data, {
                 location: this.app.session.get('siteLocation'),
@@ -103,6 +106,18 @@ module.exports = Base.extend({
             .then(prepare.bind(this))
             .then(submit.bind(this))
             .val(success.bind(this));
+    },
+    onOpenModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-addfavorites-view').trigger('show');
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-addfavorites-view').trigger('hide');
     }
 });
 
