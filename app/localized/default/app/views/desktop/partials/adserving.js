@@ -13,7 +13,8 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             adserving: {
                 enabled : this.adServing.isEnabled(),
-                slotname: this.adServing.get('slotname')
+                slotname: this.adServing.get('slotname'),
+                classname: 'ads-' + this.adServing.get('type').toLowerCase()
             }
         });
     },
@@ -23,12 +24,19 @@ module.exports = Base.extend({
             return;
         }
         var settings = this.adServing.getSettings();
+        var type = this.adServing.get('type');
 
-        this._checkCsaLib();
-
-        window._googCsa('ads', settings.options, settings.params);
+        if (type == 'CSA') {
+            if(this.isGoogleReferer() && (settings.ifSeo && settings.ifSeo > 0)){
+                settings.params = _.extend({}, settings.params, {
+                    number: settings.ifSeo
+                });
+            }
+            this._includeCsaLib();
+            window._googCsa('ads', settings.options, settings.params);
+        }
     },
-    _checkCsaLib: function() {
+    _includeCsaLib: function() {
         var id = 'gads-lib';
         var $ads;
 
@@ -56,6 +64,9 @@ module.exports = Base.extend({
                 categories: this.options.categories
             });
         }
+    },
+    isGoogleReferer: function(){
+        return document.referrer.match(/^[a-zA-Z0-9:\/\/]*\.google\.[a-zA-Z.]+/) && (document.location.search.indexOf("invite=") == -1);
     }
 });
 

@@ -41,17 +41,17 @@ function getSettings() {
                 container: slotname
             });
             configAD.options = _.extend({}, configAD.options, {
-                pubId: configAD.options.pubId.replace(repKey, countryCode.toLowerCase()), //REVIEW
                 query: getQuery.call(this),
-                channel: configAD.options.channel.replace(repKey, countryCode), //REVIEW
+                channel: configAD.options.channel.replace(repKey, countryCode),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
 
             _.extend(settings, {
-                enabled : true,
-                type : type,
-                options : configAD.options,
-                params : configAD.params
+                enabled: true,
+                type: type,
+                options: configAD.options,
+                params: configAD.params,
+                ifSeo: configSlot.types[type].ifSeo
             });
         }
     }
@@ -63,19 +63,25 @@ function isEnabled() {
     var config = getConfigSlot(this.get('slotname'));
     var enabled = config.enabled;
     var category;
-    var type;
+    var status;
 
     if (enabled) {
         category = getCategoryId.call(this);
 
         if (category) {
-            type = _.find(config.types || {}, function eachTypes(obj) {
+            status = _.find(config.types || {}, function eachTypes(obj) {
                 return _.contains(obj.excludedCategories, category);
             });
-            enabled = !type;
+            enabled = !status;
         }
     }
     return enabled;
+}
+
+function getSeo() {
+    var slotname = this.get('slotname');
+    var config = getConfigSlot(slotname);
+    return config.ifSeo;
 }
 
 function getType() {
@@ -168,4 +174,4 @@ module.exports = Base.extend({
     isEnabled: isEnabled
 });
 
-module.exports.id = 'Adsense';
+module.exports.id = 'Adserving';

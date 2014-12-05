@@ -9,7 +9,10 @@ module.exports = {
         channel: 'OLX_[countrycode]',
         hl: 'en',
         adPage: 3,
-        adsafe: 'Medium'
+        adsafe: 'Medium',
+        ie: 'UTF-8',
+        oe: 'UTF-8',
+        linkTarget: '_blank'
     },
     params: {
         container: '[slot_empty]',
@@ -18,7 +21,7 @@ module.exports = {
         fontFamily: 'arial',
 
         rolloverLinkUnderline: false,
-        fontSizeTitle: 16,
+        fontSizeTitle: 18,
         lineHeightTitle: 26,
         colorTitleLink: '#38B',
         noTitleUnderline: true,
@@ -35,6 +38,7 @@ module.exports = {
 
         verticalSpacing: 2,
 
+        rolloverAdBackgroundColor: '#FFF',
         clickableBackgrounds: true,
 
         adIconLocation: 'ad-left',
@@ -44,8 +48,6 @@ module.exports = {
         adIconSpacingBefore: 6,
         adIconSpacingAfter: 15,
         adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png',
-
-        rolloverAdBackgroundColor: '#FFF',
 
         lines: 3,
         longerHeadlines: true,

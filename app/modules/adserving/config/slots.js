@@ -6,14 +6,24 @@ module.exports = {
         defaultType: 'CSA',
         types: {
             CSA: {
+                ifSeo: 1,
                 params: {
-                    number: 3,
-                    colorTitleLink: '#000'
+                    number: 3
                 },
-                excludedCategories: [185, 186]
-            },
-            ADX: {
-                excludedCategories: [410]
+                excludedCategories: [186]
+            }
+        }
+    },
+    slot_bottom_listing: {
+        enabled: true,
+        defaultType: 'CSA',
+        types: {
+            CSA: {
+                ifSeo: 0,
+                params: {
+                    number: 3
+                },
+                excludedCategories: []
             }
         }
     }
