@@ -1,16 +1,17 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
+var Base = require('../../../../../common/app/bases/view').requireView('modals/modal', null, 'desktop');
+var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'modal-image-gallery',
     id: 'modal-image-gallery',
-    events: {
+    idModal: 'image-gallery-modal',
+    events: _.extend({}, Base.prototype.events, {
         'mouseover [data-modal-gallery-thumb]': 'updateGallery',
         'click [data-modal-gallery-navigator]': 'navigate',
-        'mouseenter [data-modal = image-modal] .modal-container': 'showTools',
-        'mouseleave [data-modal = image-modal] .modal-container': 'hideTools'
-    },
+        'mouseenter [data-modal = image-gallery-modal] .modal-container': 'showTools',
+        'mouseleave [data-modal = image-gallery-modal] .modal-container': 'hideTools'
+    }),
     updateGallery: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -72,4 +73,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'modals/image-gallery';
+module.exports.id = 'modals/imagegallery';

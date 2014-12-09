@@ -1,6 +1,6 @@
 {% extends (template + '/modals/modal.html') %}
 
-{% block id %}image-modal{% endblock %}
+{% block id %}image-gallery-modal{% endblock %}
 
 {% block title %}
 
@@ -12,7 +12,7 @@
             <span class="icons icon-arrow-left arrow-prev" data-modal-gallery-navigator ></span>
             <span class="icons icon-arrow-right arrow-next" data-modal-gallery-navigator ></span>
         {% endif %}
-        <figure class="image-viewer" >
+        <figure class="modal-image-viewer" >
             <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-modal-gallery-image />
         </figure>
         <footer class="modal-footer">
