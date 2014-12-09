@@ -19,7 +19,7 @@
                             {% endfor %}
                         </ul>
                     </li>
-                {% elif filter.type == 'SELECT' and filter.name != 'sort' and filter.name != 'neighborhood' %}
+                {% elif filter.type == 'SELECT' and filter.name != 'sort' %}
                     {% if filter.value %}
                         <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
                             {% set active = true if filters.isActive(filter.name) else false %}
