@@ -1,5 +1,7 @@
 module.exports = {
     smaug: {
+        protocol: 'http',
+        host: 'api-v2.olx.com',
         wap: {
             maxPageSize: 25
         },

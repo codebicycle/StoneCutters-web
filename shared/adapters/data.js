@@ -1,15 +1,17 @@
 'use strict';
 
-var PROTOCOL = 'http';
-var HOST = 'api-v2.olx.com';
-
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var logger = require('../logger')('adapter data');
 var utils = require('../utils');
 var statsd = require('../statsd')();
+var config = require('../config');
 var isServer = utils.isServer;
 var rGraphite = /\./g;
+
+var PROTOCOL = config.get(['smaug', 'protocol'], 'http');
+var HOST = config.get(['smaug', 'host'], 'api-v2.olx.com');
+var HOST_IRIS = config.get(['smaug', 'hostIris'], 'api-v2.olx.com');
 
 if (isServer) {
     var restlerName = 'restler';
@@ -54,6 +56,10 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
                 api.data = api.data || {};
                 api.data.ipAddress = req.rendrApp.session.get('ip');
             }
+        }
+        if (utils.endsWith(req.host, '.olx.ir')) {
+            api.url = api.url.replace(HOST, HOST_IRIS);
+            console.log(HOST_IRIS, api.url);
         }
         done();
     }

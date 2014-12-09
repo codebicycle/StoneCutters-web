@@ -15,7 +15,7 @@ platforms:
 
 smaug:
   protocol: http
-  host: api-v2.olx.com
+  host: api-v2.olx.ir
 
 session:
   secret: VWaB5TfjGPNWXJATbr6BK3Hy
