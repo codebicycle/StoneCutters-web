@@ -11,6 +11,7 @@ var Seo = require('../modules/seo');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var statsd = require('../../shared/statsd')();
+var rCatId = /^[0-9]{3}$/;
 
 module.exports = {
     list: middlewares(list),
@@ -63,7 +64,8 @@ function show(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
             }
-            if (params.extra) {
+            if (!rCatId.test(params.catId)) {
+                console.log(params.catId);
                 statsd.increment(['redirections', 'seo', 'categories']);
                 done.abort();
                 return helpers.common.error.call(this, null, null, callback);
