@@ -65,7 +65,6 @@ function show(params, callback, gallery) {
                 return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
             }
             if (!rCatId.test(params.catId)) {
-                console.log(params.catId);
                 statsd.increment(['redirections', 'seo', 'categories']);
                 done.abort();
                 return helpers.common.error.call(this, null, null, callback);
