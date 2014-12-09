@@ -1,5 +1,12 @@
+'use strict';
+
+var utils = require('../../shared/utils');
+
 module.exports = {
     smaug: {
+        protocol: 'http',
+        host: 'api-v2.olx.com',
+        hostIris: utils.isServer ? 'api-v2.olx.ir:8081' : 'api-v2.olx.ir',
         wap: {
             maxPageSize: 25
         },
@@ -136,7 +143,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.in', 'www.olx.ir']
+                countries: ['www.olx.ir']
             },
             listingFilters: {
                 worldwide: false,
