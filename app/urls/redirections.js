@@ -121,5 +121,8 @@ module.exports = {
     },
     'redirections#staticSearchMobile': {
         url: /^\/s\/.*/
+    },
+    'redirections#pictures': {
+        url: 'pictures/:path'
     }
 };

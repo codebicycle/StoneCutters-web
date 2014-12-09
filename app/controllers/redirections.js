@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var helpers = require('../helpers');
+var middlewares = require('../middlewares');
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 var HOUR = 60 * MINUTE;
@@ -265,5 +266,14 @@ module.exports = {
     },
     staticSearchMobile: function(params, callback) {
         helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
-    }
+    },
+    pictures: middlewares(function pictures(params, callback) {
+        statsd.increment(['redirections', 'seo', 'pictures']);
+        helpers.controllers.control.call(this, params, controller);
+
+        function controller() {
+            //helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
+            helpers.common.error.call(this, null, null, callback);
+        }
+    })
 };
