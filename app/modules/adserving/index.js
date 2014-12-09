@@ -3,9 +3,9 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var configAdServing = require('./config');
+var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var Categories = require('../../collections/categories');
-var repKey = '[countrycode]';
 var Base;
 
 Backbone.noConflict();
@@ -24,7 +24,6 @@ function getSettings() {
     }
     var slotname = this.get('slotname');
     var type = this.get('type');
-    var countryCode = this.app.session.get('location').abbreviation;
     var configSlot = getConfigSlot(slotname);
     var settings = {
         enabled: false,
@@ -42,7 +41,7 @@ function getSettings() {
             });
             configAD.options = _.extend({}, configAD.options, {
                 query: getQuery.call(this),
-                channel: configAD.options.channel.replace(repKey, countryCode),
+                channel: createChannels.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
 
@@ -59,29 +58,55 @@ function getSettings() {
     return settings;
 }
 
-function isEnabled() {
-    var config = getConfigSlot(this.get('slotname'));
-    var enabled = config.enabled;
+function createChannels(type) {
+    var config = utils.get(configAdServing, type, {});
+    var countryCode = this.app.session.get('location').abbreviation;
+    var repKey = '[countrycode]';
+    var channelPrefix = config.options.channel.replace(repKey, countryCode);
+    var currentRoute = this.app.session.get('currentRoute');
+    var channels;
+    var page = [];
+    var pageName;
+
+    page.push(currentRoute.controller);
+    page.push('#');
+    page.push(currentRoute.action);
+    pageName = page.join('');
+
+    console.log(pageName);
+
+    channels = utils.get(configAdServing, ['channels', 'page', pageName], '');
+
+    return channelPrefix;
+}
+
+function isSlotEnabled() {
+    var enabled = this.isEnabled();
     var category;
+    var config;
     var status;
 
     if (enabled) {
-        category = getCategoryId.call(this);
+        config = getConfigSlot(this.get('slotname'));
+        enabled = config.enabled;
+        if (enabled) {
+            category = getCategoryId.call(this);
 
-        if (category) {
-            status = _.find(config.types || {}, function eachTypes(obj) {
-                return _.contains(obj.excludedCategories, category);
-            });
-            enabled = !status;
+            if (category) {
+                status = _.find(config.types || {}, function eachTypes(obj) {
+                    return _.contains(obj.excludedCategories, category);
+                });
+                enabled = !status;
+            }
         }
     }
     return enabled;
 }
 
-function getSeo() {
-    var slotname = this.get('slotname');
-    var config = getConfigSlot(slotname);
-    return config.ifSeo;
+function isEnabled() {
+    var location = this.app.session.get('location');
+
+    return config.getForMarket(location.url, ['adserving', 'enabled'], true);
 }
 
 function getType() {
@@ -154,6 +179,7 @@ function getCategoryId() {
 function getCategoryName(id) {
     var subcategory;
     var category;
+    var origName;
     var name;
 
     if (id) {
@@ -163,6 +189,7 @@ function getCategoryName(id) {
         }
         if (subcategory || category) {
             name = (subcategory || category).get('trName');
+            origName = (subcategory || category).get('name').replace(/ /g, '');
         }
     }
     return name;
@@ -171,7 +198,8 @@ function getCategoryName(id) {
 module.exports = Base.extend({
     initialize: initialize,
     getSettings: getSettings,
-    isEnabled: isEnabled
+    isEnabled: isEnabled,
+    isSlotEnabled: isSlotEnabled
 });
 
 module.exports.id = 'Adserving';

@@ -4,6 +4,7 @@ module.exports = {
     slot_top_listing: {
         enabled: true,
         defaultType: 'CSA',
+        channelName: 'Listing',
         types: {
             CSA: {
                 ifSeo: 1,
@@ -17,6 +18,7 @@ module.exports = {
     slot_bottom_listing: {
         enabled: true,
         defaultType: 'CSA',
+        channelName: 'Listing',
         types: {
             CSA: {
                 ifSeo: 0,

@@ -12,7 +12,7 @@ module.exports = Base.extend({
         this._checkAdServing();
         return _.extend({}, data, {
             adserving: {
-                enabled : this.adServing.isEnabled(),
+                enabled : this.adServing.isSlotEnabled(),
                 slotname: this.adServing.get('slotname'),
                 classname: 'ads-' + this.adServing.get('type').toLowerCase()
             }
@@ -20,7 +20,7 @@ module.exports = Base.extend({
     },
     postRender: function() {
         this._checkAdServing();
-        if (!this.adServing.isEnabled()) {
+        if (!this.adServing.isSlotEnabled()) {
             return;
         }
         var settings = this.adServing.getSettings();
