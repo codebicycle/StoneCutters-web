@@ -4,6 +4,11 @@
         <input type="submit" class="submit" data-qa="search-submit" value="{{ dictionary["homeheader.Search"] }}">
     </form>
     {% if (currentRoute.action != 'list' and currentRoute.action != 'success') %}
-    	<a href="/location?target={{ path | replace('/', '', 1) }}"  class="btnfilter btnlocation">{{ dictionary["itemslisting.NavigatorByLocation"] }}</a>
+        {% if location.children[0].children[0].name %}
+            {% set city = location.children[0].children[0].name %}
+        {% elif location.children[0].children[0] %}
+            {% set city = location.children[0].name %}
+        {% endif %}
+        <a href="/location?target={{ path | replace('/', '', 1) }}"  class="btnfilter btnlocation">{{ city if city else location.name }}</a>
     {% endif %}
 </header>

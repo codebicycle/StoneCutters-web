@@ -13,7 +13,7 @@ module.exports = function appUseConf(done) {
     var server = rendr.createServer({
         dataAdapter: dataAdapter,
         errorHandler: require('./modules/errorHandler')(),
-        apiPath: config.get(['smaug', 'protocol'], 'http') + '://' + config.get(['smaug', 'url'], 'api-v2.olx.com'),
+        apiPath: config.get(['smaug', 'protocol'], 'http') + '://' + config.get(['smaug', 'host'], 'api-v2.olx.com'),
         viewsPath: 'app/localized/common/app/views'
     });
     var Router = require('./router');
