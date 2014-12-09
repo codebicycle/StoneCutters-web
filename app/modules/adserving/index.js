@@ -67,10 +67,11 @@ function createChannels(type) {
     var channelPrefix = config.options.channel.replace(repKey, countryCode);
     var currentRoute = this.app.session.get('currentRoute');
     var channels = [];
-    var channelPage;
-    var channelName = configSlot.channelName;
-    var channelLocation = configSlot.channelLocation;
     var page = [];
+    var channelPage;
+    var channelConfig;
+    var channelName;
+    var channelLocation;
     var pageName;
 
     page.push(currentRoute.controller);
@@ -78,11 +79,12 @@ function createChannels(type) {
     page.push(currentRoute.action);
     pageName = page.join('');
 
-    channelPage = utils.get(configAdServing, ['channels', 'page', pageName], '');
+    console.log(pageName);
 
-    if (channelPage.indexOf('[category_name]') > -1){
-        channelPage = channelPage.replace('[category_name]', getCategoryOriginName.call(this));
-    }
+    channelConfig = utils.get(configAdServing, ['channels', 'page', pageName], {});
+    channelName = channelConfig.name;
+    channelPage = getCategoryForChannel.call(this);
+    channelLocation = configSlot.location;
 
     channels.push(channelPrefix);
     channels.push([channelPrefix, channelName].join('_'));
@@ -191,7 +193,7 @@ function getCategoryId() {
     }
 }
 
-function getCategoryName(id) {
+function getCategoryAttrbibute(id, attr) {
     var subcategory;
     var category;
     var origName;
@@ -203,26 +205,24 @@ function getCategoryName(id) {
             category = this.categories.get(id);
         }
         if (subcategory || category) {
-            name = (subcategory || category).get('trName');
+            name = (subcategory || category).get(attr);
         }
     }
     return name;
 }
 
-function getCategoryOriginName() {
+function getCategoryName(id) {
+    return getCategoryAttrbibute.call(this, id, 'trName');
+}
+
+function getCategoryForChannel() {
     var id = getCategoryId.call(this);
-    var subcategory;
-    var category;
-    var origName;
-    var name;
+    var name = 'NoCategory';
 
     if (id) {
-        subcategory = this.categories.search(id);
-        if (!subcategory) {
-            category = this.categories.get(id);
-        }
-        if (subcategory || category) {
-            name = (subcategory || category).get('name').replace(/ /g, '');
+        name = getCategoryAttrbibute.call(this, id, 'name');
+        if (name) {
+            name = name.replace(/\s/g, '');
         }
     }
     return name;

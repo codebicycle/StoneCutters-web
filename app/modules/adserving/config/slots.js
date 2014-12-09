@@ -4,11 +4,10 @@ module.exports = {
     slot_top_listing_gallery: {
         enabled: true,
         defaultType: 'CSA',
-        channelName: 'ListingGallery',
-        channelLocation: 'Top',
+        location: 'Top',
         types: {
             CSA: {
-                ifSeo: 1,
+                seo: 1,
                 params: {
                     number: 3
                 },
@@ -19,11 +18,10 @@ module.exports = {
     slot_top_listing: {
         enabled: true,
         defaultType: 'CSA',
-        channelName: 'Listing',
-        channelLocation: 'Top',
+        location: 'Top',
         types: {
             CSA: {
-                ifSeo: 1,
+                seo: 1,
                 params: {
                     number: 3
                 },
@@ -34,11 +32,10 @@ module.exports = {
     slot_bottom_listing: {
         enabled: true,
         defaultType: 'CSA',
-        channelName: 'Listing',
-        channelLocation: 'Bottom',
+        location: 'Bottom',
         types: {
             CSA: {
-                ifSeo: 0,
+                seo: 0,
                 params: {
                     number: 3
                 },

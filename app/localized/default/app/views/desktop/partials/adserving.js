@@ -27,12 +27,12 @@ module.exports = Base.extend({
         var type = this.adServing.get('type');
 
         if (type == 'CSA') {
-            if(this.isGoogleReferer() && settings.ifSeo){
+            if(this.isGoogleReferer() && settings.seo){
                 settings.params = _.extend({}, settings.params, {
-                    number: settings.ifSeo
+                    number: settings.seo
                 });
                 settings.options = _.extend({}, settings.options, {
-                    channel: settings.options.channel.replace('Organic', 'Seo')
+                    channel: settings.options.channel.replace('Organic', 'SEO')
                 });
             }
             settings.options = _.extend({}, settings.options, {

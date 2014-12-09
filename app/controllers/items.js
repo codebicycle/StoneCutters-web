@@ -799,8 +799,8 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var success = function(items) {
-            var category = category ? category.toJSON() : undefined;
-            var subcategory = subcategory ? subcategory.toJSON() : undefined;
+            var _category = category ? category.toJSON() : undefined;
+            var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
             this.app.seo.setContent(items.meta);
             if (items.meta.total < 5) {
@@ -817,8 +817,8 @@ function search(params, callback, gallery) {
             this.app.session.update({
                 dataPage: {
                     search: query.search,
-                    category: category ? category.id : undefined,
-                    subcategory: subcategory ? subcategory.id : undefined
+                    category: _category ? _category.id : undefined,
+                    subcategory: _subcategory ? _subcategory.id : undefined
                 }
             });
 
@@ -970,21 +970,30 @@ function staticSearch(params, callback) {
             var meta = items.meta;
             var location = this.app.session.get('location').url;
             var maxResultsToIndex = config.getForMarket(location, ['seo', 'maxResultToIndexFollow'], 1);
+            var _category = category ? category.toJSON() : undefined;
+            var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
             this.app.seo.setContent(meta);
-
             if (meta.total === 0) {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-            } else if (meta.total <= maxResultsToIndex) {
+            }
+            else if (meta.total <= maxResultsToIndex) {
                 this.app.seo.addMetatag('robots', 'noindex, follow');
                 this.app.seo.addMetatag('googlebot', 'noindex, follow');
             }
 
             tracking.addParam('keyword', query.search);
             tracking.addParam('page_nb', items.paginator.get('totalPages'));
-            tracking.addParam('category', category ? category.toJSON() : undefined);
-            tracking.addParam('subcategory', subcategory ? subcategory.toJSON() : undefined);
+            tracking.addParam('category', _category);
+            tracking.addParam('subcategory', _subcategory);
+
+            this.app.session.update({
+                dataPage: {
+                    category: _category ? _category.id : undefined,
+                    subcategory: _subcategory ? _subcategory.id : undefined
+                }
+            });
 
             callback(null, 'items/staticsearch', {
                 items: items.toJSON(),
