@@ -63,6 +63,7 @@ function isClientEnabled(page) {
 
 function standarizeName(name) {
     name = name.toLowerCase();
+    name = name.replace(/'/g, '');
     name = name.replace(/-/g, '');
     name = name.replace(/\s\s/g, ' ');
     name = name.replace(/\s/g, '_');
