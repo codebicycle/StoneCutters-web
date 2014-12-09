@@ -1,17 +1,33 @@
 'use strict';
 
 module.exports = {
-    slot_top_listing: {
+    slot_top_listing_gallery: {
         enabled: true,
         defaultType: 'CSA',
-        channelName: 'Listing',
+        channelName: 'ListingGallery',
+        channelLocation: 'Top',
         types: {
             CSA: {
                 ifSeo: 1,
                 params: {
                     number: 3
                 },
-                excludedCategories: [186]
+                excludedCategories: []
+            }
+        }
+    },
+    slot_top_listing: {
+        enabled: true,
+        defaultType: 'CSA',
+        channelName: 'Listing',
+        channelLocation: 'Top',
+        types: {
+            CSA: {
+                ifSeo: 1,
+                params: {
+                    number: 3
+                },
+                excludedCategories: []
             }
         }
     },
@@ -19,6 +35,7 @@ module.exports = {
         enabled: true,
         defaultType: 'CSA',
         channelName: 'Listing',
+        channelLocation: 'Bottom',
         types: {
             CSA: {
                 ifSeo: 0,

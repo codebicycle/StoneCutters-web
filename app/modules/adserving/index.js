@@ -60,11 +60,16 @@ function getSettings() {
 
 function createChannels(type) {
     var config = utils.get(configAdServing, type, {});
+    var slotname = this.get('slotname');
+    var configSlot = getConfigSlot(slotname);
     var countryCode = this.app.session.get('location').abbreviation;
     var repKey = '[countrycode]';
     var channelPrefix = config.options.channel.replace(repKey, countryCode);
     var currentRoute = this.app.session.get('currentRoute');
-    var channels;
+    var channels = [];
+    var channelPage;
+    var channelName = configSlot.channelName;
+    var channelLocation = configSlot.channelLocation;
     var page = [];
     var pageName;
 
@@ -73,11 +78,21 @@ function createChannels(type) {
     page.push(currentRoute.action);
     pageName = page.join('');
 
-    console.log(pageName);
+    channelPage = utils.get(configAdServing, ['channels', 'page', pageName], '');
 
-    channels = utils.get(configAdServing, ['channels', 'page', pageName], '');
+    if (channelPage.indexOf('[category_name]') > -1){
+        channelPage = channelPage.replace('[category_name]', getCategoryOriginName.call(this));
+    }
 
-    return channelPrefix;
+    channels.push(channelPrefix);
+    channels.push([channelPrefix, channelName].join('_'));
+    channels.push([channelPrefix, channelPage].join('_'));
+    channels.push([channelPrefix, channelName, channelPage].join('_'));
+    channels.push([channelPrefix, channelName, channelLocation].join('_'));
+    channels.push('[navigator]');
+    channels.push([channelPrefix, channelName, channelLocation, 'Organic'].join('_'));
+
+    return channels.join(' ');
 }
 
 function isSlotEnabled() {
@@ -189,11 +204,30 @@ function getCategoryName(id) {
         }
         if (subcategory || category) {
             name = (subcategory || category).get('trName');
-            origName = (subcategory || category).get('name').replace(/ /g, '');
         }
     }
     return name;
 }
+
+function getCategoryOriginName() {
+    var id = getCategoryId.call(this);
+    var subcategory;
+    var category;
+    var origName;
+    var name;
+
+    if (id) {
+        subcategory = this.categories.search(id);
+        if (!subcategory) {
+            category = this.categories.get(id);
+        }
+        if (subcategory || category) {
+            name = (subcategory || category).get('name').replace(/ /g, '');
+        }
+    }
+    return name;
+}
+
 
 module.exports = Base.extend({
     initialize: initialize,

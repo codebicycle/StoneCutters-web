@@ -2,7 +2,10 @@
 
 module.exports = {
     page: {
-        'categories#show': 'LasarteGay',
-        'items#search': 'StaticSearch'
+        'categories#show': '[category_name]',
+        'categories#showig': '[category_name]',
+        'items#staticSearch': '[category_name]',
+        'items#allresults': 'NoCategory',
+        'items#search': 'NoCategory'
     }
 };
