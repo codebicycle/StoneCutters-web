@@ -10,6 +10,7 @@ var Paginator = require('../modules/paginator');
 var Seo = require('../modules/seo');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
+var statsd = require('../../shared/statsd')();
 
 module.exports = {
     list: middlewares(list),
@@ -61,6 +62,11 @@ function show(params, callback, gallery) {
             if (categoryId) {
                 done.abort();
                 return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
+            }
+            if (params.extra) {
+                statsd.increment(['redirections', 'seo', 'categories']);
+                done.abort();
+                return helpers.common.error.call(this, null, null, callback);
             }
             done();
         }.bind(this);
