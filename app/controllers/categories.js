@@ -11,7 +11,7 @@ var Seo = require('../modules/seo');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var statsd = require('../../shared/statsd')();
-var rCatId = /^[0-9]{3}$/;
+var rCatId = /^[0-9]{1,3}$/;
 
 module.exports = {
     list: middlewares(list),
