@@ -275,5 +275,9 @@ module.exports = {
             //helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
             helpers.common.error.call(this, null, null, callback);
         }
-    })
+    }),
+    userlistings: function(params, callback) {
+        statsd.increment(['redirections', 'seo', 'userlistings']);
+        helpers.common.redirect.call(this, '/');
+    }
 };

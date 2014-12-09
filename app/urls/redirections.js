@@ -124,5 +124,8 @@ module.exports = {
     },
     'redirections#pictures': {
         url: 'pictures/:path'
+    },
+    'redirections#userlistings': {
+        url: 'userlistings/:user'
     }
 };
