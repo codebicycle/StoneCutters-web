@@ -40,7 +40,7 @@
                                 {% else %}
                                     <font color="#CCCCCC">&lt;</font> |
                                 {% endif %}
-                                    {{ pos + 1 }} of {{ item.images.length }}
+                                    {{ pos + 1 }} {{ dictionary["listingpageitemslisting.Of"] }} {{ item.images.length }}
                                 {% if pos < item.images.length - 1 %}
                                     {% set posImage = '?pos=' + (pos + 1) %}
                                      | <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>

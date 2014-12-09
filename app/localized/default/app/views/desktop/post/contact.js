@@ -11,7 +11,10 @@ module.exports = Base.extend({
     events: {
         'change': 'onChange',
         'disablePost': 'onDisablePost',
-        'enablePost': 'onEnablePost'
+        'enablePost': 'onEnablePost',
+        'click [data-modal-close]': 'onCloseModal',
+        'click .open-modal': 'onOpenModal',
+        'click [data-modal-shadow]': 'onCloseModal'
     },
     onChange: function(event) {
         event.preventDefault();
@@ -25,6 +28,18 @@ module.exports = Base.extend({
     },
     onEnablePost: function(event) {
         this.$('.posting').removeAttr('disabled');
+    },
+    onOpenModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-terms-view').trigger('show');
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-terms-view').trigger('hide');
     }
 });
 

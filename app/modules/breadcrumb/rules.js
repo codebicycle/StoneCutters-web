@@ -87,10 +87,7 @@ var rules = {
             if (fragment) {
                 switch (fragment.name) {
                     case 'search':
-                        this.search = fragment.search;
-                        this.page = fragment.page + 1;
-                        breadcrumb = rules.items.search.call(this);
-                        navigation.popState.call(this);
+                        breadcrumb = fragment.url;
                         break;
                     case 'item-listing':
                         breadcrumb = fragment.url;
@@ -147,6 +144,25 @@ var rules = {
             }
             saveNavigation(this, state);
             breadcrumb = '/nf/search/' + this.search;
+            if ((page - 1) > 1) {
+                breadcrumb += '/-p-' + (page - 1);
+            }
+            return breadcrumb;
+        },
+        searchfilter: function() {
+            var page = this.page || this.app.session.get('page') || 0;
+            var state = {
+                name: 'search'
+            };
+            var breadcrumb;
+
+            if (page === 1) {
+                navigation.clear.call(this);
+                saveNavigation(this, state);
+                return '/';
+            }
+            saveNavigation(this, state);
+            breadcrumb = '/nf/desc-cat-' + (this.subcategory || this.category).id + '/' + this.search;
             if ((page - 1) > 1) {
                 breadcrumb += '/-p-' + (page - 1);
             }

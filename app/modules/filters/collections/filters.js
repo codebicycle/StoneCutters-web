@@ -8,6 +8,7 @@ var config = require('../config');
 var transformers = require('../transformers');
 
 var filters = utils.get(config, ['filters'], {});
+var sorts = utils.get(config, ['sorts'], {});
 var defaultOrderByName = Object.keys(filters);
 var defaultOrderByType = ['BOOLEAN', 'SELECT', 'RANGE'];
 var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g;
@@ -250,9 +251,11 @@ function format() {
         }
     });
     if (this.has('sort')) {
-        sort = this.get('sort');
-        url.push('-sort_');
-        url.push(sort.get('current').join(''));
+        sort = this.get('sort').get('current').join('');
+        if (sorts[sort]) {
+            url.push('-sort_');
+            url.push(sort);
+        }
     }
     return url.join('');
 }
@@ -262,6 +265,7 @@ function smaugize() {
     var sort;
     var name;
     var value;
+    var separator;
 
     if (!this.length) {
         return params;
@@ -276,7 +280,11 @@ function smaugize() {
         name = 'f.' + name;
         switch (filter.get('type')) {
             case 'SELECT':
-                params[name] = value.join('OR');
+                separator = 'OR';
+                if (name === 'f.neighborhood') {
+                    separator = ' OR ';
+                }
+                params[name] = value.join(separator);
                 break;
             case 'RANGE':
                 params[name] = [value.from, 'TO', value.to].join('');
@@ -289,7 +297,9 @@ function smaugize() {
     if (this.has('sort')) {
         sort = this.get('sort');
         sort = sort.get('current').join('').replace(regexpSort, '$1#$2').split('#');
-        params['s.' + sort[0]] = sort[1] || 'asc';
+        if (sorts[sort[0]]) {
+            params['s.' + sort[0]] = sort[1] || 'asc';
+        }
     }
     return params;
 }

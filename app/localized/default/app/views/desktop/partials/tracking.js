@@ -138,7 +138,7 @@ module.exports = Base.extend({
         if (!$('#' + id).length) {
             $ga = $('<script></script>');
             $ga.attr({
-                type: 'text/javascript', 
+                type: 'text/javascript',
                 src: ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js',
                 id: id,
                 async: true
