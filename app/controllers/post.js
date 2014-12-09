@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
+var Item = require('../models/item');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -17,13 +18,13 @@ module.exports = {
 
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
-
     function controller() {
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
         var platform = this.app.session.get('platform');
         var isDesktop = platform === 'desktop';
+        var itemId = params.itemId;
 
         var prepare = function(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
@@ -61,6 +62,15 @@ function flow(params, callback) {
                     }
                 };
             }
+            if ((isDesktop || isPostingFlow) && itemId) {
+                data.item = {
+                    model: 'Item',
+                    params: {
+                        id: itemId,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                    }
+                };
+            }
 
             this.app.fetch(data, {
                 readFromCache: !this.app.session.get('isServer'),
@@ -72,17 +82,17 @@ function flow(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
-                postingFlowController(res.postingSession);
+                postingFlowController(res.postingSession, res.item);
             }
             else if (isDesktop) {
-                postingController(res.postingSession, res.cities);
+                postingController(res.postingSession, res.cities, res.item);
             }
             else {
                 postingCategoriesController();
             }
         }.bind(this);
 
-        var postingController = function(postingSession, cities) {
+        var postingController = function(postingSession, cities, item) {
             var currentLocation = {};
 
             tracking.setPage('desktop_step1');
@@ -103,13 +113,15 @@ function flow(params, callback) {
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
                 cities: cities,
-                currentLocation: currentLocation
+                currentLocation: currentLocation,
+                item: item || new Item()
             }, false);
         }.bind(this);
 
-        var postingFlowController = function(postingSession) {
+        var postingFlowController = function(postingSession, item) {
             callback(null, 'post/flow/index', {
-                postingSession: postingSession.get('postingSession')
+                postingSession: postingSession.get('postingSession'),
+                item: item || new Item()
             }, false);
         }.bind(this);
 
