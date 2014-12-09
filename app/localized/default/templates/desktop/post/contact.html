@@ -6,7 +6,7 @@
 	isOptional: false,
 	name: "contactName",
 	mandatory: true,
-	label: "Nombre de contacto",
+	label: dictionary["itemslisting.NewContactName"],
 	fieldType: "text",
 	dataType: "string"
 } %}
@@ -15,7 +15,7 @@
 	isOptional: false,
 	name: "email",
 	mandatory: true,
-	label: "Email",
+	label: dictionary["seccion-35.559"],
 	fieldType: "text",
 	dataType: "string"
 } %}
@@ -24,7 +24,7 @@
 	isOptional: false,
 	name: "phone",
 	mandatory: false,
-	label: "Número de Teléfono",
+	label: dictionary["posting_footerlist.phoneNumber"],
 	fieldType: "text",
 	dataType: "string"
 } %}
@@ -33,7 +33,7 @@
 	isOptional: true,
 	name: "streetAddress",
 	mandatory: false,
-	label: "Dirección exacta",
+	label: dictionary["itemdescription.streetaddress"],
 	fieldType: "text",
 	dataType: "string"
 } %}
@@ -51,5 +51,4 @@
     <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" />
     <small class="hint message">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a class="open-modal" href="#" rel="nofollow" data-modal="terms-modal">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>
 </fieldset>
-
-{% include (template + '/modals/terms.html') %}
+{% view 'modals/terms' %}

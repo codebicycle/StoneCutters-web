@@ -69,7 +69,7 @@ module.exports = Base.extend({
         var thumbsNumber = thumbwrapper.data('gallery-thumbwrapper');
         var thumbwrapperPos = thumbwrapper.position().top;
         var enoughThumbs = thumbsNumber > visibleThumbs;
-        var thumbHeight = active.outerHeight(true);
+        var thumbHeight = active.outerHeight(true) + 3;
         var thumbsLast = thumbHeight * (thumbsNumber - visibleThumbs);
         var maxTopPosition = -(thumbsNumber - visibleThumbs) * thumbHeight;
         var newPos;
