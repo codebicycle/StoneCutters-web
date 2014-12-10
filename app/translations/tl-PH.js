@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Lokasyon:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Palitan ang Lokasyon',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> na mga character. Ang isang mainam na pamagat ay nangangailangan ng kahit man lang<<NUMBER_OF_SUGGESTED_CHARACTERS>> mga character.',
     'postingtitlelisting.view': 'Makikita mo ito sa:',
     'posting_footerlist.phoneNumber': 'Telepono',
     'posting_selector.SelectCategory': 'Pumili ng Kategorya',
