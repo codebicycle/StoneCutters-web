@@ -11,7 +11,7 @@ module.exports = {
                 params: {
                     number: 3
                 },
-                excludedCategories: [186]
+                excludedCategories: []
             }
         }
     },

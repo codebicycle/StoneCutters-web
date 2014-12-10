@@ -83,7 +83,7 @@ module.exports = Base.extend({
                 this.browsername = this.browser + this.version;
             },
             searchString: function(data) {
-                for (var i=0; i<data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
                     var dataString = data[i].string;
                     var dataProp = data[i].prop;
                     this.versionSearchString = data[i].versionSearch || data[i].identity;

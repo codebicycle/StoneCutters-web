@@ -1,5 +1,3 @@
 {% if adserving.enabled %}
-    <div class="{{ adserving.classname }}-without-icon">
-    	<div id="{{ adserving.slotname }}" class="{{ adserving.classname }}"></div>
-    </div>
+	<div id="{{ adserving.slotname }}" class="{{ adserving.classname }} {{ adserving.slotname }}"></div>
 {% endif %}
