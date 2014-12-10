@@ -79,8 +79,6 @@ function createChannels(type) {
     page.push(currentRoute.action);
     pageName = page.join('');
 
-    console.log(pageName);
-
     channelConfig = utils.get(configAdServing, ['channels', 'page', pageName], {});
     channelName = channelConfig.name;
     channelPage = getCategoryForChannel.call(this);

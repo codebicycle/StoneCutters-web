@@ -21,8 +21,8 @@ module.exports = {
         fontFamily: 'arial',
 
         rolloverLinkUnderline: false,
-        fontSizeTitle: 18,
-        lineHeightTitle: 26,
+        fontSizeTitle: 16,
+        lineHeightTitle: 24,
         colorTitleLink: '#38B',
         noTitleUnderline: true,
 
@@ -40,14 +40,6 @@ module.exports = {
 
         rolloverAdBackgroundColor: '#FFF',
         clickableBackgrounds: true,
-
-        adIconLocation: 'ad-left',
-        adIconWidth: 143,
-        adIconHeight: 112,
-        adIconSpacingAbove: 4,
-        adIconSpacingBefore: 6,
-        adIconSpacingAfter: 15,
-        adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png',
 
         lines: 3,
         longerHeadlines: true,
