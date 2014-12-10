@@ -346,6 +346,9 @@ DataAdapter.prototype.ajaxParams = function(api, options) {
     if (api.query) {
         api.url = utils.params(api.url, api.query);
     }
+    if (utils.endsWith(window.location.hostname, '.olx.ir')) {
+        api.url = api.url.replace(HOST, HOST_IRIS);
+    }
     return api;
 };
 
