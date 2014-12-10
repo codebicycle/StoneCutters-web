@@ -1,9 +1,9 @@
 'use strict';
-var title = "Bolivia ofrece anuncios clasificados locales para trabajos, compras, ventas, inmuebles, servicios, y eventos - Publica tu clasificado gratis - Bolivia ofrece anuncios clasificados locales para trabajos, compras, ventas, inmuebles, servicios, y eventos - Publica tu clasificado gratis";
-var metas = { 
+
+var metas = {
         description: 'Bolivia ofrece anuncios clasificados locales para trabajos, compras, ventas, inmuebles, servicios, y eventos - Publica tu clasificado gratis',
         topTitle: 'Bolivia ofrece anuncios clasificados locales para trabajos, compras, ventas, inmuebles, servicios, y eventos - Publica tu clasificado gratis',
-        title: 'Bolivia ofrece anuncios clasificados locales para trabajos, compras, ventas, inmuebles, servicios, y eventos - Publica tu clasificado gratis',
+        title: 'Bolivia ofrece anuncios clasificados locales para trabajos, compras, ventas, inmuebles, servicios, y eventos - Publica tu clasificado gratis ESTO ES UN TITULO MUY EXTENSO Y TENDRIA QUE SER CORTADO',
         'google-site-verification': '_3dWQgd7S7XLeekqcv7n-A7exgaeZitXSo7mtI5K7ng',
         robots: 'index,follow',
         googlebot: 'index,follow',
@@ -11,9 +11,11 @@ var metas = {
     };
 describe('app', function () {
     describe('modules', function () {
-        describe('seo :: head', function () {
-            beforeEach(reset);
-            test();
+        describe('seo', function () {
+                describe('head', function () {
+                beforeEach(reset);
+                test();
+            });
         });
     });
 });
@@ -21,36 +23,26 @@ describe('app', function () {
 function reset() {
    var options = {
         app: {
-            session: {
-                get: function location () {
-                    return 'Bolivia';                    
-                }
+                session: {}
             }        
-        }
-    };        
+    };      
+    options.app.session.get = sinon.stub();
+    options.app.session.get.withArgs('location').returns({
+        name: 'Bolivia',        
+        url: 'www.olx.com.bo'
+    });
+
     var Head = proxyquire(ROOT + '/app/modules/seo/models/head.js', {        
     });
     var head = new Head({}, options);
-
-    head.setAll(metas,{});
-  //  console.log(head.get('description'));
-    
+    head.setAll(metas,{});    
+    //head.set('title',metas);
     
 }
-/*
-  it('head metas should set on a head setters', function () {
-        seo.head.set = sinon.stub();                
-        seo.addMetatag('title','this a title of metatag');        
-        expect(seo.head.set).calledOnce;
-        expect(seo.head.set).calledWith('title','this a title of metatag');
-    });
-*/
 
 function test() {
-
-    it('true is true', function () {
+    /*it('true is true', function () {
     expect(true).to.be.true;
-    });
-
+    });*/
 }
 

@@ -16,7 +16,7 @@ describe('app', function () {
 });
 
 function reset() {
-    var app = {
+   /* var app = {
         app: {
             session: {
                 get: function location () {
@@ -26,13 +26,25 @@ function reset() {
                 }
             }
         }
-    };
+    };*/
+
+     var options = {
+        app: {
+                session: {}
+        }
+     };
+    options.app.session.get = sinon.stub();
+    options.app.session.get.withArgs('location').returns({
+        name: 'Bolivia',        
+        url: 'www.olx.com.bo'
+    });
+    
     config = {};
     mockConfig();
     Seo = proxyquire(ROOT + '/app/modules/seo', {
         '../../../shared/config': config
     });
-    seo = new Seo({}, app);
+    seo = new Seo({}, options);
     
 }
 

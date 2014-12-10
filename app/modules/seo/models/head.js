@@ -51,6 +51,7 @@ function title(metas, value) {
     }
     else {
         suffix = this.getLocationName();
+
         if (!~value.indexOf(suffix)) {
             value += ' - ';
             value += suffix;
@@ -236,9 +237,8 @@ Head = Backbone.Model.extend({
     },
     getLocationName: function () {
         var location = this.app.session.get('location');
-
         if (location) {
-            return (location.current || location).name;
+            return (location.current || location.name);
         }
         return '';
     },
