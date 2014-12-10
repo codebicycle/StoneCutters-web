@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Ort:',
     'seccion-35.559': 'E-post',
     'distancediv.changeLocation': '\xC4ndra ort',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> tecken. En j\xE4ttebra titel beh\xF6ver minst <<NUMBER_OF_SUGGESTED_CHARACTERS>> tecken.',
     'postingtitlelisting.view': 'Du kan se din annons:',
     'posting_footerlist.phoneNumber': 'Telefonnummer',
     'posting_selector.SelectCategory': 'V\xE4lj en Kategori',

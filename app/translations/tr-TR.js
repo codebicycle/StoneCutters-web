@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'B\xF6lge:',
     'seccion-35.559': 'E-Posta',
     'distancediv.changeLocation': 'Yeri de\u011Fi\u015Ftir',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> karakter. \u0130yi bir ba\u015Fl\u0131kta en az <<NUMBER_OF_SUGGESTED_CHARACTERS>> karakter bulunmas\u0131 gerekir.',
     'postingtitlelisting.view': '\u0130lan\u0131n\u0131z\u0131 g\xF6r\xFCnt\xFClemek i\xE7in:',
     'posting_footerlist.phoneNumber': 'Telefon No',
     'posting_selector.SelectCategory': 'Bir Kategori Se\xE7in',

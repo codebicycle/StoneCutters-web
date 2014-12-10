@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Lokasi:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Ganti lokasi',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> karakter. Judul yang hebat membutuhkan minimal <<NUMBER_OF_SUGGESTED_CHARACTERS>> karakter.',
     'postingtitlelisting.view': 'Anda dapat melihat iklan Anda:',
     'posting_footerlist.phoneNumber': 'Nomor Telepon',
     'posting_selector.SelectCategory': 'Pilih Kategori',

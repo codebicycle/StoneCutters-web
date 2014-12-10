@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': '\u30ED\u30B1\u30FC\u30B7\u30E7\u30F3:',
     'seccion-35.559': '\u30E1\u30FC\u30EB',
     'distancediv.changeLocation': '\u30ED\u30B1\u30FC\u30B7\u30E7\u30F3\u3092\u5909\u3048\u308B',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> \u6587\u5B57\u3002\u5C11\u306A\u304F\u3068\u3082<<NUMBER_OF_SUGGESTED_CHARACTERS>> \u6587\u5B57\u304C\u5FC5\u8981\u3067\u3059\u3002',
     'postingtitlelisting.view': '\u304A\u5BA2\u69D8\u306E\u5E83\u544A\u306F\u3001\u4EE5\u4E0B\u3067\u3054\u89A7\u3044\u305F\u3060\u3051\u307E\u3059:',
     'posting_footerlist.phoneNumber': '\u96FB\u8A71\u756A\u53F7',
     'posting_selector.SelectCategory': '\u30AB\u30C6\u30B4\u30EA\u30FC\u3092\u9078\u629E\u3059\u308B',

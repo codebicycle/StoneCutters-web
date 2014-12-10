@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Umiestnenie:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Zmeni\u0165 miesto',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> znakov. Hlavn\xFD n\xE1zov mus\xED ma\u0165 aspo\u0148 <<NUMBER_OF_SUGGESTED_CHARACTERS>> znakov.',
     'postingtitlelisting.view': 'Va\u0161u reklamu m\xF4\u017Eete zobrazi\u0165:',
     'posting_footerlist.phoneNumber': 'Telef\xF3nne \u010D\xEDslo',
     'posting_selector.SelectCategory': 'Zvo\u013Ete kateg\xF3riu',

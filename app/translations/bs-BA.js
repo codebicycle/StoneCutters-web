@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Lokacija:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Promjeniti lokaciju',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> znakova. Glavni naslov mora imati bar <<NUMBER_OF_SUGGESTED_CHARACTERS>> znakova.',
     'postingtitlelisting.view': 'Mo\u017Eete vidjeti svoj oglas:',
     'posting_footerlist.phoneNumber': 'Broj telefona',
     'posting_selector.SelectCategory': 'Odaberite kategoriju',

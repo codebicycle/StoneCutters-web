@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Quartier : ',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Modifier le lieu',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> caract\xE8res. Un bon titre doit avoir au moins <<NUMBER_OF_SUGGESTED_CHARACTERS>> caract\xE8res.',
     'postingtitlelisting.view': 'Vous pouvez voir votre annonce :',
     'posting_footerlist.phoneNumber': 'T\xE9l\xE9phone',
     'posting_selector.SelectCategory': 'Choisissez une cat\xE9gorie',

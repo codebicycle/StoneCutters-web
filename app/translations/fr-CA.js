@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Endroit:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Modifier l\'Emplacement',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> characters. A great title needs at least <<NUMBER_OF_SUGGESTED_CHARACTERS>> characters.',
     'postingtitlelisting.view': 'Vous pouvez voir votre annonce :',
     'posting_footerlist.phoneNumber': 'T\xE9l\xE9phone',
     'posting_selector.SelectCategory': 'Choisissez une Cat\xE9gorie',

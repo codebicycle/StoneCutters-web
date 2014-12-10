@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Lokacija:',
     'seccion-35.559': 'E-adresa',
     'distancediv.changeLocation': 'Promenite lokaciju',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> znakova. Sjajan naslov zahteva najmanje <<NUMBER_OF_SUGGESTED_CHARACTERS>> znakova.',
     'postingtitlelisting.view': 'Mo\u017Eete prikazati va\u0161 oglas:',
     'posting_footerlist.phoneNumber': 'Broj telefona',
     'posting_selector.SelectCategory': 'Izaberite kategoriju',

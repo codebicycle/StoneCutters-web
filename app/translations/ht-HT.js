@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Katye: ',
     'seccion-35.559': 'Im\xE8l',
     'distancediv.changeLocation': 'Chanje kote an ',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> karakt\xE8. Yon bon tit dwe genyen omwen <<NUMBER_OF_SUGGESTED_CHARACTERS>> karakt\xE8.',
     'postingtitlelisting.view': 'Ou ka gade anons ou an :',
     'posting_footerlist.phoneNumber': 'Nimewo Telef\xF2n',
     'posting_selector.SelectCategory': 'Chwazi yon Kategori',

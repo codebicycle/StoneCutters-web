@@ -126,6 +126,7 @@ module.exports = {
     'seccion-31.454': 'Atra\u0161an\u0101s vieta:',
     'seccion-35.559': 'E-pasts',
     'distancediv.changeLocation': 'Main\u012Bt atra\u0161an\u0101s vietu',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> rakstz\u012Bmes. Lab\u0101 virsrakst\u0101 b\u016Btu j\u0101b\u016Bt vismaz <<NUMBER_OF_SUGGESTED_CHARACTERS>> rakstz\u012Bm\u0113m.',
     'postingtitlelisting.view': 'J\u016Bs varat apskat\u012Bt savu sludin\u0101jumu:',
     'posting_footerlist.phoneNumber': 'Telefona numurs',
     'posting_selector.SelectCategory': 'Izv\u0113lieties kategoriju',
