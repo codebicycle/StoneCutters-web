@@ -12,7 +12,13 @@ var EXPRESSIONS = {
 };
 
 function toLatin(input) {
-    var output = input.toString();
+    var output;
+
+    if (!input) {
+        return input;
+    }
+
+    output = input.toString();
 
     _.times(10, function translate(digit) {
         output = output.replace(EXPRESSIONS.persian[digit], digit.toString());
@@ -21,7 +27,13 @@ function toLatin(input) {
 }
 
 function toPersian(input) {
-    var output = input.toString();
+    var output;
+
+    if (!input) {
+        return input;
+    }
+
+    output = input.toString();
 
     _.times(10, function translate(digit) {
         output = output.replace(EXPRESSIONS.latin[digit], SYMBOLS.persian[digit]);
