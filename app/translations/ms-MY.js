@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Lokasi:',
     'seccion-35.559': 'Emel',
     'distancediv.changeLocation': 'Tukar lokasi',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> aksara. Tajuk terbaik memerlukan sekurang-kurangnya <<NUMBER_OF_SUGGESTED_CHARACTERS>> aksara.',
     'postingtitlelisting.view': 'Anda boleh melihat iklan anda:',
     'posting_footerlist.phoneNumber': 'Nombor Telefon',
     'posting_selector.SelectCategory': 'Pilih satu Kategori',

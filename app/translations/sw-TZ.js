@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Mahali:',
     'seccion-35.559': 'Barua pepe',
     'distancediv.changeLocation': 'Badilisha Mahali',
+    'postingtitlelisting.NumberOfCharactersForTitle': 'Herufi<<NUMBER _OF_ENTERED_CHARACTERS>> . Kichwa kikuu kinahitaji angalau herufi <<NUMBER_OF_SUGGESTED_CHARACTERS>>.',
     'postingtitlelisting.view': 'Unaweza kuangalia tangazo lako:',
     'posting_footerlist.phoneNumber': 'Namba ya simu',
     'posting_selector.SelectCategory': 'Chagua Kundi',

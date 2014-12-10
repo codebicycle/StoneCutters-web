@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Vieta:',
     'seccion-35.559': 'el. pa\u0161tas',
     'distancediv.changeLocation': 'Keisti viet\u0105',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> simboli\u0173. Norint, kad  pavadinimas b\u016Bt\u0173 idealus, j\u012F tur\u0117t\u0173 sudaryti bent <<NUMBER_OF_SUGGESTED_CHARACTERS>> simboli\u0173.',
     'postingtitlelisting.view': 'Galite per\u017Ei\u016Br\u0117ti savo skelbim\u0105:',
     'posting_footerlist.phoneNumber': 'Telefono numeris',
     'posting_selector.SelectCategory': 'Pasirinkite kategorij\u0105',

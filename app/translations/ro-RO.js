@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Loca\u0163ia:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Schimb\u0103 pozi\u0163ia',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> caractere. Ptr. un titlu fantastic trebuie s\u0103 folosi\u0163i cel pu\u0163in <<NUMBER_OF_SUGGESTED_CHARACTERS>> caractere.',
     'postingtitlelisting.view': 'Pute\u0163i vizualiza anun\u0163ul dvs.:',
     'posting_footerlist.phoneNumber': 'Num\u0103rul de Telefon',
     'posting_selector.SelectCategory': 'Selecta\u0163i o categorie',

@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Hely:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'M\xE1s hely',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> karakter. Egy j\xF3 c\xEDm legal\xE1bb  <<NUMBER_OF_SUGGESTED_CHARACTERS>> karaktert tartalmaz.',
     'postingtitlelisting.view': 'Hirdet\xE9s\xE9t megtekintheti:',
     'posting_footerlist.phoneNumber': 'Telefonsz\xE1m',
     'posting_selector.SelectCategory': 'V\xE1lasszon kateg\xF3ri\xE1t',

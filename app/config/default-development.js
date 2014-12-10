@@ -21,7 +21,7 @@ module.exports = {
         type: 'development'
     },
     localization: {
-        wap: ['www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
+        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         desktop: ['www.olx.com.bo', 'www.jaovat.com']
