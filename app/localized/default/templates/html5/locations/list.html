@@ -10,13 +10,20 @@
 </header>
 
 <div class="list cities-links">
+	{% if location.children[0] %}
+		<ul class="country">
+			<li><a href="{{ ['/', target or ''] | join | link({location: location.url}) }}" class="city-link" data-qa="city-name" >Toda {{ location.name }}</a></li>
+			{% if location.children[0].children[0] %}
+				<li><a href="{{ ['/', target or ''] | join | link({location: location.children[0].url}) }}" class="city-link" data-qa="city-name" >Toda {{ location.children[0].name }}</a></li>
+			{% endif %}
+		</ul>
+	{% endif %}
 	{% if cities.length %}
-		<h3>{% if search %}{{ dictionary["listingpageitemslisting.AllResultsNew"] }}{% else %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% endif %}</h3>
+		<h3>{{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}</h3>
 		<ul>
 			{% for city in cities %}
 				<li><a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city-link" data-qa="city-name" >{{ city.name }}</a></li>
 			{% endfor %}
-		</ul>
 	{% else %}
 		<p>{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</p>
 	{% endif %}
