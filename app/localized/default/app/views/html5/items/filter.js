@@ -194,8 +194,9 @@ module.exports = Base.extend({
         return path;
     },
     cleanPath: function(path) {
-        path = this.refactorPath(path);
         path = path.replace('/filter', '');
+        path = this.refactorPath(path);
+        path = path.replace('//', '/');
         return path.split('/-').shift();
     },
     refactorPath: function(path) {
