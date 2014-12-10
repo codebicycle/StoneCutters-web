@@ -9,32 +9,32 @@
 
 <div class="field-controls">
 	<ul class="file-upload">
-	    <li class="image-cont track-me first-img" data-tracking="Posting-ClickUploadPicture" data-input="file0">
-	        <div class="image icons icon-addpicture"></div>
+	    <li class="image-cont track-me first-img{{ " loaded" if item.attributes.images[0].thumbnail }}" data-tracking="Posting-ClickUploadPicture" data-input="file0">
+	        <div class="image{{ " fill r1" if item.attributes.images[0].thumbnail else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.attributes.images[0].thumbnail + ");'") if item.attributes.images[0].thumbnail }}></div>
 	        <span class="remove icons icon-close"></span>
 	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file1">
-	        <div class="image icons icon-addpicture"></div>
+	    --><li class="image-cont track-me{{ " loaded" if item.attributes.images[1].thumbnail }}" data-tracking="Posting-ClickUploadPicture" data-input="file1">
+	        <div class="image{{ " fill r1" if item.attributes.images[1].thumbnail else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.attributes.images[1].thumbnail + ");'") if item.attributes.images[1].thumbnail }}></div>
 	        <span class="remove icons icon-close"></span>
 	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file2">
-	        <div class="image icons icon-addpicture"></div>
+	    --><li class="image-cont track-me{{ " loaded" if item.attributes.images[2].thumbnail }}" data-tracking="Posting-ClickUploadPicture" data-input="file2">
+	        <div class="image{{ " fill r1" if item.attributes.images[2].thumbnail else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.attributes.images[2].thumbnail + ");'") if item.attributes.images[2].thumbnail }}></div>
 	        <span class="remove icons icon-close"></span>
 	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file3">
-	        <div class="image icons icon-addpicture"></div>
+	    --><li class="image-cont track-me{{ " loaded" if item.attributes.images[3].thumbnail }}" data-tracking="Posting-ClickUploadPicture" data-input="file3">
+	        <div class="image{{ " fill r1" if item.attributes.images[3].thumbnail else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.attributes.images[3].thumbnail + ");'") if item.attributes.images[3].thumbnail }}></div>
 	        <span class="remove icons icon-close"></span>
 	    </li>
-	    <li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file4">
-	        <div class="image icons icon-addpicture"></div>
+	    <li class="image-cont track-me{{ " loaded" if item.attributes.images[4].thumbnail }}" data-tracking="Posting-ClickUploadPicture" data-input="file4">
+	        <div class="image{{ " fill r1" if item.attributes.images[4].thumbnail else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.attributes.images[4].thumbnail + ");'") if item.attributes.images[4].thumbnail }}></div>
 	        <span class="remove icons icon-close"></span>
 	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file5">
-	        <div class="image icons icon-addpicture"></div>
+	    --><li class="image-cont track-me{{ " loaded" if item.attributes.images[5].thumbnail }}" data-tracking="Posting-ClickUploadPicture" data-input="file5">
+	        <div class="image{{ " fill r1" if item.attributes.images[5].thumbnail else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.attributes.images[5].thumbnail + ");'") if item.attributes.images[5].thumbnail }}></div>
 	        <span class="remove icons icon-close"></span>
 	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file6">
-	        <div class="image icons icon-addpicture"></div>
+	    --><li class="image-cont track-me{{ " loaded" if item.attributes.images[6].thumbnail }}" data-tracking="Posting-ClickUploadPicture" data-input="file6">
+	        <div class="image{{ " fill r1" if item.attributes.images[6].thumbnail else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.attributes.images[6].thumbnail + ");'") if item.attributes.images[6].thumbnail }}></div>
 	        <span class="remove icons icon-close"></span>
 	    </li><!--
 	    -->

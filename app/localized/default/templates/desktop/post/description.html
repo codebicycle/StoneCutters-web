@@ -5,7 +5,8 @@
 	isOptional: "false",
 	label: dictionary["messages_auction_bid_class.7"],
 	mandatory: "true",
-	name: "title"
+	name: "title",
+	value: item.attributes.title
 } %}
 {% set descriptionField = {
 	dataType: "string",
@@ -13,7 +14,8 @@
 	isOptional: "false",
 	label: dictionary["posting_fields_1.description"],
 	mandatory: "true",
-	name: "description"
+	name: "description",
+	value: item.attributes.description
 } %}
 {{ Field(hint = '0 caracteres. Un buen título precisa de por lo menos 60 caracteres.', titleField) }}
 {{ Field(descriptionField) }}

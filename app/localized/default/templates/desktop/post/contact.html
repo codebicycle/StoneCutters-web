@@ -8,7 +8,8 @@
 	mandatory: true,
 	label: dictionary["itemslisting.NewContactName"],
 	fieldType: "text",
-	dataType: "string"
+	dataType: "string",
+	value: item.attributes.contactName
 } %}
 
 {% set emailField = {
@@ -17,7 +18,8 @@
 	mandatory: true,
 	label: dictionary["seccion-35.559"],
 	fieldType: "text",
-	dataType: "string"
+	dataType: "string",
+	value: item.attributes.email
 } %}
 
 {% set phoneField = {
@@ -26,7 +28,8 @@
 	mandatory: false,
 	label: dictionary["posting_footerlist.phoneNumber"],
 	fieldType: "text",
-	dataType: "string"
+	dataType: "string",
+	value: item.attributes.phone
 } %}
 
 {% set adressField = {
@@ -35,7 +38,8 @@
 	mandatory: false,
 	label: dictionary["itemdescription.streetaddress"],
 	fieldType: "text",
-	dataType: "string"
+	dataType: "string",
+	value: item.attributes.streetAddress
 } %}
 
 {{ Field(contactNameField) }}
