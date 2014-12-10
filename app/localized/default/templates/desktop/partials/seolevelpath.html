@@ -1,10 +1,16 @@
+{% set notItemPage = seoFrom != "item" %}
+
 <div class="level-path-bottom">
     {% if levelPath.location.length > 0 %}
         <div class="breadcrumb">
             {% for level in levelPath.location %}
                 <span {{ 'class="icons icon-arrow"' if not loop.first }} >
-                    {{ dictionary["seccion-31.454"] if seoFrom != "item" and loop.first }}
-                    <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
+                    {{ dictionary["seccion-31.454"] if notItemPage and loop.first }}
+                    {% if notItemPage and loop.last %}
+                        {{ level.anchor }}
+                    {% else %}
+                        <a href="{{ level.url }}">{{ level.anchor }}</a>
+                    {% endif %}
                 </span>
             {% endfor %}
         </div>
@@ -13,7 +19,11 @@
         <div class="breadcrumb">
             {% for level in levelPath.category %}
                 <span {{ 'class="icons icon-arrow"' if not loop.first }} >
-                    <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
+                    {% if notItemPage and loop.last %}
+                        {{ level.anchor }}
+                    {% else %}
+                        <a href="{{ level.url }}">{{ level.anchor }}</a>
+                    {% endif %}
                 </span>
             {% endfor %}
         </div>
@@ -22,7 +32,11 @@
         <div class="breadcrumb">
             {% for level in levelPath.childCategory %}
                 <span {{ 'class="icons icon-arrow"' if not loop.first }} >
-                    <a href="{{ level.url }}" {{ 'rel="nofollow"' if level.noFollow }}>{{ level.anchor }}</a>
+                    {% if notItemPage and loop.last %}
+                        {{ level.anchor }}
+                    {% else %}
+                        <a href="{{ level.url }}">{{ level.anchor }}</a>
+                    {% endif %}
                 </span>
             {% endfor %}
             {% if wikititles.length > 0 %}
