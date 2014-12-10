@@ -1271,7 +1271,6 @@ function filter(params, callback) {
         }.bind(this);
 
         var find = function(done) {
-            console.log('params', params);
             this.app.fetch({
                 items: {
                     collection: 'Items',
