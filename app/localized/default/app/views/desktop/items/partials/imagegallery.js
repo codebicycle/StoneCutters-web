@@ -8,7 +8,10 @@ module.exports = Base.extend({
     id: 'image-gallery',
     events: {
         'mouseover [data-gallery-thumb]': 'updateGallery',
-        'click [data-gallery-navigator] [class*="arrow-"]': 'navigate'
+        'click [data-gallery-navigator] [class*="arrow-"]': 'navigate',
+        'click [data-modal-close]': 'onCloseModal',
+        'click .open-modal': 'onOpenModal',
+        'click [data-modal-shadow]': 'onCloseModal'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -69,7 +72,7 @@ module.exports = Base.extend({
         var thumbsNumber = thumbwrapper.data('gallery-thumbwrapper');
         var thumbwrapperPos = thumbwrapper.position().top;
         var enoughThumbs = thumbsNumber > visibleThumbs;
-        var thumbHeight = active.outerHeight(true);
+        var thumbHeight = active.outerHeight(true) + 3;
         var thumbsLast = thumbHeight * (thumbsNumber - visibleThumbs);
         var maxTopPosition = -(thumbsNumber - visibleThumbs) * thumbHeight;
         var newPos;
@@ -108,6 +111,18 @@ module.exports = Base.extend({
                 }, 500);
             }
         }
+    },
+    onOpenModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-image-gallery').trigger('show');
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-image-gallery').trigger('hide');
     }
 });
 

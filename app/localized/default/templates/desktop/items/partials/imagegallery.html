@@ -1,3 +1,7 @@
+{% if item.images.length > 0 %}
+    {% view 'modals/imagegallery' %}
+{% endif %}
+
 {% if item.images.length == 0 %}
     {% set classesFigure = 'image-viewer image-wrapper icons icon-photo single' %}
 {% elif item.images.length == 1 %}
@@ -6,9 +10,10 @@
     {% set classesFigure = 'image-viewer image-wrapper' %}
 {% endif %}
 
-<figure id="image-viewer" class="{{ classesFigure }}">
+<figure id="image-viewer" class="{{ classesFigure }} {{ 'open-modal' if item.images.length > 0 }}" data-modal="image-gallery-modal" >
     {% if item.images.length > 0 %}
         <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-gallery-image />
+        <span class="icons icon-bigger"></span>
     {% endif %}
 </figure>
 {% if item.images.length > 1 %}
@@ -18,7 +23,7 @@
             <div class="thumbnail-wrapper" data-gallery-thumbwrapper="{{ item.images.length }}">
                 {% for image in item.images %}
                     <figure class="{{ 'active' if loop.first }}" data-gallery-thumb="{{ loop.index }}" >
-                        <a href="#" class="image-wrapper"><img src="{{ image.thumbnail }}" data-image="{{ image.url }}" alt="{{ item.title }}" class="item-image" ></a>
+                        <img src="{{ image.thumbnail }}" data-image="{{ image.url }}" alt="{{ item.title }}" class="item-image" >
                     </figure>
                 {% endfor %}
             </div>

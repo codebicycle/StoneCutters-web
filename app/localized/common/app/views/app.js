@@ -6,21 +6,13 @@ var URLParser = require('url');
 module.exports = Base.extend({
     className: 'app_view',
     events: {
-        'click [data-modal-close]': 'toggleModal',
-        'click .open-modal': 'toggleModal',
         'click [data-video-item]': 'changeVideo',
         'click [data-share-facebook]': 'openFacebook',
         'click [data-share-twitter]': 'openTwitter',
-        'click [data-share-gplus]': 'openGplus',
+        'click [data-share-gplus]': 'openGplus'
     },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
-        $('body').on('click', function(event){
-            var $modal = $('.modal');
-            if ($(event.target).hasClass("modal-wrapper") && $modal.hasClass("modal-visible")) {
-                $("a[data-modal-close]").click();
-            }
-        }.bind(this));
     },
     loading: function($progressBar, app, isLoading) {
         if (isLoading){
@@ -50,13 +42,6 @@ module.exports = Base.extend({
             e.preventDefault();
             this.app.router.redirectTo(href);
         }
-    },
-    toggleModal: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        $('body').toggleClass('noscroll');
-        $('#' + event.currentTarget.dataset.modal).toggleClass('modal-visible');
     },
     changeVideo: function(event) {
         event.preventDefault();
@@ -121,6 +106,5 @@ module.exports = Base.extend({
         );
     },
 });
-
 
 module.exports.id = 'app_view/index';
