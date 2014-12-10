@@ -2,7 +2,6 @@
 
 module.exports = function(grunt) {
     var _ = require('underscore');
-    var config = require('../config');
     var utils = require('../utils');
     var environments = utils.getEnvironments(grunt);
     var browserify = {
@@ -72,7 +71,7 @@ module.exports = function(grunt) {
         
         compile('default');
         environments.forEach(function(environment) {
-            var localization = config.get('localization', {}, environment);
+            var localization = utils.getLocalization(grunt, {}, environment);
             var platform;
 
             for (platform in localization) {
