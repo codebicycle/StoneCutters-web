@@ -57,6 +57,8 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
+        this.$('#posting-categories-view').trigger('editCategory', [this.$('input[name=editSubCategory]').val()]);
+
         $(window).on('beforeunload', this.onBeforeUnload);
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
         if (this.isValid === undefined || this.isValid === null) {

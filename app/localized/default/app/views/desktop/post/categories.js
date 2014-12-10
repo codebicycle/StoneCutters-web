@@ -12,7 +12,8 @@ module.exports = Base.extend({
     className: 'posting-categories-view field-wrapper',
     events: {
         'click .posting-categories-list a.category': 'onCategoryClick',
-        'click .child-categories-list a': 'onSubCategoryClick'
+        'click .child-categories-list a': 'onSubCategoryClick',
+        'editCategory': 'onEditCategory'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -20,6 +21,9 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             categories: data.categories.toJSON()
         });
+    },
+    onEditCategory: function(event, subCategoryId) {
+        this.$('.child-categories-list a[data-id=' + subCategoryId + ']').click();
     },
     onSubCategoryClick: function(event) {
         event.preventDefault();

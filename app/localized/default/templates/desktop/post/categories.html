@@ -1,11 +1,12 @@
+<input type="hidden" name="editSubCategory" value="{{ item.attributes.category.id if item.attributes.category.id }}">
 <label class="field-label">* {{ dictionary["itemslisting.NavigatorByCategory"] }}</label>
 <ul class="posting-categories-list">
 {% for category in categories %}
     <li>
-   		<a href="#" class="category icons icon-cat-{{ category.id }}{{ ' active' if item.attributes.category.parentId == category.id }}" data-id="{{ category.id }}" data-qa="category-name-{{ category.id }}" >{{category.trName}}</a>
+   		<a href="#" class="category icons icon-cat-{{ category.id }}{{ ' active select' if item.attributes.category.parentId == category.id }}" data-id="{{ category.id }}" data-qa="category-name-{{ category.id }}" >{{category.trName}}</a>
         <ul class="subcategories child-categories-list{{ ' hide' if item.attributes.category.parentId != category.id }}" data-id="{{ category.id }}">
         {% for subCategory in category.children.toJSON() %}
-            <li><a href="#" class="subcategory icons {{ ' active' if item.attributes.category.id == subCategory.id }}" data-id="{{ subCategory.id }}" data-qa="subcategory-name-{{ subCategory.id }}">{{ subCategory.trName }}</a></li>
+            <li><a href="#" class="subcategory icons {{ ' select icon-check' if item.attributes.category.id == subCategory.id }}" data-id="{{ subCategory.id }}" data-qa="subcategory-name-{{ subCategory.id }}">{{ subCategory.trName }}</a></li>
         {% endfor %}
         </ul>
     </li>
