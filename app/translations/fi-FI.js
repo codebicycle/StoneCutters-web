@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Sijainti:',
     'seccion-35.559': 's\xE4hk\xF6posti',
     'distancediv.changeLocation': 'muokkaa sijaintia',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> merkki\xE4. Hyv\xE4ss\xE4 otsikossa pit\xE4\xE4 olla v\xE4hint\xE4\xE4n <<NUMBER_OF_SUGGESTED_CHARACTERS>> merkki\xE4.',
     'postingtitlelisting.view': 'Voit n\xE4hd\xE4 ilmoituksesi:',
     'posting_footerlist.phoneNumber': 'Puhelinnumero',
     'posting_selector.SelectCategory': 'Valitse kategoria',

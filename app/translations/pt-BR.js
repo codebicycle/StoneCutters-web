@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Localiza\xE7\xE3o',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Mudar a Localiza\xE7\xE3o',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> caracteres. Um bom t\xEDtulo precisa de pelo menos <<NUMBER_OF_SUGGESTED_CHARACTERS>> caracteres.',
     'postingtitlelisting.view': 'Pode ver o seu an\xFAncio em:',
     'posting_footerlist.phoneNumber': 'N\xFAmero de telefone',
     'posting_selector.SelectCategory': 'Selecionar categoria',

@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                 dest: dest
             };
             environments.forEach(function eachEnvironments(environment) {
-                var localization = config.get('localization', {}, environment);
+                var localization = utils.getLocalization(grunt, {}, environment);
                 var platform;
 
                 for (platform in localization) {
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
             }
         });
         environments.forEach(function eachEnvironments(environment) {
-            var localization = config.get('localization', {}, environment);
+            var localization = utils.getLocalization(grunt, {}, environment);
             var platform;
 
             for (platform in localization) {

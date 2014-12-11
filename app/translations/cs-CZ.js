@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'M\xEDsto:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Zm\u011Bnit m\xEDsto',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> znak\u016F. Velk\xFD nadpis mus\xED m\xEDt alespo\u0148 <<NUMBER_OF_SUGGESTED_CHARACTERS>> znak\u016F.',
     'postingtitlelisting.view': 'M\u016F\u017Eete zobrazit sv\u016Fj inzer\xE1t:',
     'posting_footerlist.phoneNumber': 'Telefonn\xED \u010D\xEDslo',
     'posting_selector.SelectCategory': 'Vyberte kategorii',

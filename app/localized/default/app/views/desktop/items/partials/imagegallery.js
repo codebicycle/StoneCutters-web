@@ -8,7 +8,10 @@ module.exports = Base.extend({
     id: 'image-gallery',
     events: {
         'mouseover [data-gallery-thumb]': 'updateGallery',
-        'click [data-gallery-navigator] [class*="arrow-"]': 'navigate'
+        'click [data-gallery-navigator] [class*="arrow-"]': 'navigate',
+        'click [data-modal-close]': 'onCloseModal',
+        'click .open-modal': 'onOpenModal',
+        'click [data-modal-shadow]': 'onCloseModal'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -108,6 +111,18 @@ module.exports = Base.extend({
                 }, 500);
             }
         }
+    },
+    onOpenModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-image-gallery').trigger('show');
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-image-gallery').trigger('hide');
     }
 });
 
