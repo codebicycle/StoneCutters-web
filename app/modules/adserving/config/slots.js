@@ -24,6 +24,7 @@ module.exports = {
                 seo: 1,
                 params: {
                     number: 3,
+                    fontSizeTitle: 18,
                     adIconLocation: 'ad-left',
                     adIconWidth: 143,
                     adIconHeight: 112,
@@ -45,6 +46,7 @@ module.exports = {
                 seo: 0,
                 params: {
                     number: 3,
+                    fontSizeTitle: 18,
                     adIconLocation: 'ad-left',
                     adIconWidth: 143,
                     adIconHeight: 112,
