@@ -50,7 +50,7 @@ function getSettings() {
                 type: type,
                 options: configAD.options,
                 params: configAD.params,
-                ifSeo: configSlot.types[type].ifSeo
+                seo: configSlot.types[type].seo
             });
         }
     }
