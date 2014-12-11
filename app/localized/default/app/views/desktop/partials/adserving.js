@@ -73,7 +73,7 @@ module.exports = Base.extend({
         }
     },
     isGoogleReferer: function() {
-        return document.referrer.match(/^[a-zA-Z0-9:\/\/]*\.google\.[a-zA-Z.]+/) && (document.location.search.indexOf("invite=") == -1);
+        return document.referrer.match(/^[a-zA-Z0-9:\/\/]*\.google\.[a-zA-Z.]+/) && (document.location.search.indexOf('invite=') == -1);
     },
     getBrowser: function() {
         var BrowserDetect = {
@@ -110,68 +110,68 @@ module.exports = Base.extend({
             dataBrowser: [
                 {
                     string: navigator.userAgent,
-                    subString: "Chrome",
-                    identity: "Chrome"
+                    subString: 'Chrome',
+                    identity: 'Chrome'
                 },
                 {
                     string: navigator.userAgent,
-                    subString: "OmniWeb",
-                    versionSearch: "OmniWeb/",
-                    identity: "OmniWeb"
+                    subString: 'OmniWeb',
+                    versionSearch: 'OmniWeb/',
+                    identity: 'OmniWeb'
                 },
                 {
                     string: navigator.vendor,
-                    subString: "Apple",
-                    identity: "Safari",
-                    versionSearch: "Version"
+                    subString: 'Apple',
+                    identity: 'Safari',
+                    versionSearch: 'Version'
                 },
                 {
                     prop: window.opera,
-                    identity: "Opera",
-                    versionSearch: "Version"
+                    identity: 'Opera',
+                    versionSearch: 'Version'
                 },
                 {
                     string: navigator.vendor,
-                    subString: "iCab",
-                    identity: "iCab"
+                    subString: 'iCab',
+                    identity: 'iCab'
                 },
                 {
                     string: navigator.vendor,
-                    subString: "KDE",
-                    identity: "Konqueror"
+                    subString: 'KDE',
+                    identity: 'Konqueror'
                 },
                 {
                     string: navigator.userAgent,
-                    subString: "Firefox",
-                    identity: "Firefox"
+                    subString: 'Firefox',
+                    identity: 'Firefox'
                 },
                 {
                     string: navigator.vendor,
-                    subString: "Camino",
-                    identity: "Camino"
+                    subString: 'Camino',
+                    identity: 'Camino'
                 },
                 {
                     string: navigator.userAgent,
-                    subString: "Netscape",
-                    identity: "Netscape"
+                    subString: 'Netscape',
+                    identity: 'Netscape'
                 },
                 {
                     string: navigator.userAgent,
-                    subString: "MSIE",
-                    identity: "Explorer",
-                    versionSearch: "MSIE"
+                    subString: 'MSIE',
+                    identity: 'Explorer',
+                    versionSearch: 'MSIE'
                 },
                 {
                     string: navigator.userAgent,
-                    subString: "Gecko",
-                    identity: "Mozilla",
-                    versionSearch: "rv"
+                    subString: 'Gecko',
+                    identity: 'Mozilla',
+                    versionSearch: 'rv'
                 },
                 {
                     string: navigator.userAgent,
-                    subString: "Mozilla",
-                    identity: "Netscape",
-                    versionSearch: "Mozilla"
+                    subString: 'Mozilla',
+                    identity: 'Netscape',
+                    versionSearch: 'Mozilla'
                 }
             ]
         };

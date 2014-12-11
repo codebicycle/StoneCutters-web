@@ -811,8 +811,8 @@ function search(params, callback, gallery) {
             tracking.addParam('page_nb', items.meta.totalPages);
             tracking.addParam('section', query.categoryId);
             tracking.addParam('page', page);
-            tracking.addParam('category', category);
-            tracking.addParam('subcategory', subcategory);
+            tracking.addParam('category', _category);
+            tracking.addParam('subcategory', _subcategory);
 
             this.app.session.update({
                 dataPage: {

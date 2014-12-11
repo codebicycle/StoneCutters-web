@@ -191,7 +191,7 @@ function getCategoryId() {
     }
 }
 
-function getCategoryAttrbibute(id, attr) {
+function getCategoryAttribute(id, attr) {
     var subcategory;
     var category;
     var origName;
@@ -210,7 +210,7 @@ function getCategoryAttrbibute(id, attr) {
 }
 
 function getCategoryName(id) {
-    return getCategoryAttrbibute.call(this, id, 'trName');
+    return getCategoryAttribute.call(this, id, 'trName');
 }
 
 function getCategoryForChannel() {
@@ -218,7 +218,7 @@ function getCategoryForChannel() {
     var name = 'NoCategory';
 
     if (id) {
-        name = getCategoryAttrbibute.call(this, id, 'name');
+        name = getCategoryAttribute.call(this, id, 'name');
         if (name) {
             name = name.replace(/\s/g, '');
         }
