@@ -1,6 +1,16 @@
 'use strict';
-var Head;
+
 var title = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.';
+var metas = {
+    description: title,
+    topTitle: title,
+    title: title,
+    'google-site-verification': '_3dWQgd7S7XLeekqcv7n-A7exgaeZitXSo7mtI5K7ng',
+    robots: 'index,follow',
+    googlebot: 'index,follow',
+    keywords: 'Bolivia, clasificados, anuncios clasificados, trabajos, en venta, inmuebles, servicios, eventos'
+};
+var Head;
 
 describe('app', function () {
     describe('modules', function () {
@@ -35,12 +45,4 @@ function test() {
         expect(true).to.be.true;
      });
 }
-var metas = {
-    description: title,
-    topTitle: title,
-    title: title,
-    'google-site-verification': '_3dWQgd7S7XLeekqcv7n-A7exgaeZitXSo7mtI5K7ng',
-    robots: 'index,follow',
-    googlebot: 'index,follow',
-    keywords: 'Bolivia, clasificados, anuncios clasificados, trabajos, en venta, inmuebles, servicios, eventos'
-};
+

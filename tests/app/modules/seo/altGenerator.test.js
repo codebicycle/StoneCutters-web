@@ -2,6 +2,7 @@
 
 var generator;
 var translations;
+
 describe('app', function () {
     describe('modules', function () {
         describe('seo', function () {

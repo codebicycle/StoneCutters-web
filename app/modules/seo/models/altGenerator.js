@@ -116,12 +116,11 @@ function getOptionals(item) {
     var make = '';
     var model = '';
     if (item.optionals) {
-        _.each(item.optionals,function (opt) 
-            {
-                if (opt.name == "make") {
+        _.each(item.optionals,function (opt) {
+                if (opt.name === "make") {
                     make = opt.value;
                 }
-                if (opt.name == "model") {
+                if (opt.name === "model") {
                     model = opt.value;
                 }
             }
