@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Ligging:',
     'seccion-35.559': 'E-pos',
     'distancediv.changeLocation': 'Verander ligging',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> karakters. \'n Treffende titel benodig ten minste <<NUMBER_OF_SUGGESTED_CHARACTERS>> karakters.',
     'postingtitlelisting.view': 'Jy kan jou advt. bekyk:',
     'posting_footerlist.phoneNumber': 'Telefoonnommer',
     'posting_selector.SelectCategory': 'Kies \'n Kategorie',
