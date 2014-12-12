@@ -23,42 +23,16 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var icons = config.get(['icons', platform], []);
         var location = this.app.session.get('location');
+        var country = location.url;
 
-        var fetch = function(done) {
-            this.app.fetch({
-                categories: {
-                    collection: 'Categories',
-                    params: {
-                        location: this.app.session.get('siteLocation'),
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        seo: this.app.seo.isEnabled()
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(res) {
-            var platform = this.app.session.get('platform');
-            var icons = config.get(['icons', platform], []);
-            var country = location.url;
-
-            this.app.seo.setContent(res.categories.meta);
-            callback(null, {
-                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                location: location
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        this.app.seo.setContent(this.dependencies.categories.meta);
+        callback(null, {
+            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+            location: location
+        });
     }
 }
 
