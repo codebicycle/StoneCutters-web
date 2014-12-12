@@ -64,7 +64,7 @@ module.exports = Base.extend({
 
         $(window).on('beforeunload', this.onBeforeUnload);
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
-        if (this.isValid === undefined || this.isValid === null) {
+        if (!editSubCategory && (this.isValid === undefined || this.isValid === null)) {
             if (!this.form['category.parentId']) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
             }

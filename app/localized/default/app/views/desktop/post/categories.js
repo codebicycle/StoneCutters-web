@@ -24,7 +24,6 @@ module.exports = Base.extend({
         });
     },
     onEditCategory: function(event, subCategoryId) {
-        //this.$('.child-categories-list a[data-id=' + subCategoryId + ']').click({ intent: 'edit' });
         this.$('.child-categories-list a[data-id=' + subCategoryId + ']').trigger('click', ['edit']);
     },
     onSubCategoryClick: function(event, intent) {

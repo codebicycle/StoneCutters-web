@@ -106,7 +106,9 @@
                 {% set type = field.type or 'text' %}
                 {{ TextInput(type = type, name = field.name, required = field.mandatory, value = field.value) }}
             {% elif field.fieldType == 'combobox' %}
-                {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.value.key, related = field.related) }}
+                {% set selected = field.value.key or field.selected %}
+                {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = selected, related = field.related) }}
+
             {% endif %}
             {% if hint %}
                 <small class="{{ 'icons icon-lock ' if field.name == 'email' }}hint message">{{ hint }}</small>
