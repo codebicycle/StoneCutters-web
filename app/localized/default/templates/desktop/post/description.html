@@ -3,7 +3,7 @@
 	dataType: "string",
 	fieldType: "text",
 	isOptional: "false",
-	label: "Título",
+	label: dictionary["messages_auction_bid_class.7"],
 	mandatory: "true",
 	name: "title"
 } %}
@@ -11,9 +11,9 @@
 	dataType: "string",
 	fieldType: "text",
 	isOptional: "false",
-	label: "Descripción de tu anuncio",
+	label: dictionary["posting_fields_1.description"],
 	mandatory: "true",
 	name: "description"
 } %}
-{{ Field(hint = '0 caracteres. Un buen título precisa de por lo menos 60 caracteres.', titleField) }}
+{{ Field(hint = dictionary["postingtitlelisting.NumberOfCharactersForTitle"] | replace('<<NUMBER _OF_ENTERED_CHARACTERS>>', '0') | replace('<<NUMBER_OF_SUGGESTED_CHARACTERS>>', '60'), titleField) }}
 {{ Field(descriptionField) }}

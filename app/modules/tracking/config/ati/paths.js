@@ -417,6 +417,18 @@ module.exports = {
             logServer: 'logw307'
         }
     },
+    //Iran
+    'www.olx.ir': {
+        'default': {
+            siteId: 546636,
+            logServer: 'logw340',
+            secureLogServer: 'logws1340'
+        },
+        desktop: {
+            siteId: 546635,
+            logServer: 'logw340'
+        }
+    },
     //Sri Lanka+
     'www.olx.lk': {
         'default': {

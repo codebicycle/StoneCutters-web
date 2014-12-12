@@ -1,6 +1,6 @@
 <div class="country-area {{ countryMapClass }}">
     <a class="open-modal" data-modal="location-modal" rel="nofollow" href="#">
-        <img src="{{ ('/images/desktop/home_maps/' + location.name | lower + '.gif') | static }}" alt="Mapa de {{ location.name }}" />
+        <img src="{{ ('/images/desktop/home_maps/' + location.abbreviation | lower + '.gif') | static }}" alt="Mapa de {{ location.name }}" />
     </a>
     <div class="content-description">
         <h2 class="title">{{ dictionary["misc.BuyWhatYouWant"] }}</h2>
@@ -19,3 +19,4 @@
         </ul>
     </div>
 </div>
+{% view 'modals/location' %}

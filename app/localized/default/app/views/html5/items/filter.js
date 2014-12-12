@@ -16,6 +16,7 @@ module.exports = Base.extend({
         this.filters = data.filters;
         this.filters.order = this.order;
         data.path = data.path.replace('/', '');
+        data.path = data.path.replace(/(-neighborhood)([0-9_]+)/, '');
 
         return _.extend({}, data, {});
     },
@@ -193,8 +194,9 @@ module.exports = Base.extend({
         return path;
     },
     cleanPath: function(path) {
-        path = this.refactorPath(path);
         path = path.replace('/filter', '');
+        path = this.refactorPath(path);
+        path = path.replace(/\/\//g, '/');
         return path.split('/-').shift();
     },
     refactorPath: function(path) {
@@ -204,5 +206,4 @@ module.exports = Base.extend({
         }
         return path;
     }
-
 });

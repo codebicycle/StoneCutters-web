@@ -63,6 +63,7 @@ function isClientEnabled(page) {
 
 function standarizeName(name) {
     name = name.toLowerCase();
+    name = name.replace(/'/g, '');
     name = name.replace(/-/g, '');
     name = name.replace(/\s\s/g, ' ');
     name = name.replace(/\s/g, '_');
@@ -259,7 +260,8 @@ function event(params, options) {
         type: 'click',
         idclient: params.clientId,
         url: params.url,
-        na: Math.round(Math.random() * 1000000)
+        na: Math.round(Math.random() * 1000000),
+        x20: this.app.session.get('platform')
     });
 }
 

@@ -1,5 +1,5 @@
 <section id="marketing-top">
-    {% include (template + '/partials/country-area.html') %}
+    {% view 'categories/partials/country-area' %}
     {% include (template + '/partials/marketing-box-sell.html') %}
 </section>
 
@@ -7,7 +7,9 @@
     {% include (template + '/partials/categorytree.html') %}
 </section>
 
-{% include (template + '/partials/testimonials.html') %}
-{% include (template + '/modals/location.html') %}
+{% if testimonials %}
+    {% include (template + '/partials/testimonials.html') %}
+{% endif %}
 
+{% include (template + '/modals/location.html') %}
 {% view 'partials/tracking' %}
