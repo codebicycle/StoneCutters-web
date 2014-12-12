@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Adresa dvs. de email nu va fi \xEEmp\u0103rt\u0103\u015Fit\u0103',
     'posting_publishbutton.EditYourAd_ZA': 'Editare anun\u0163',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Sunte\u0163i deja membru - Loga\u0163i-v\u0103',
     'posting_photos.AcceptedFormats': 'Formatele acceptate sunt .jpg, .gif \u015Fi .png.',
     'posting_photos.NeedChangeAd': 'Trebuie s\u0103 modifica\u0163i ceva la anun\u0163ul dvs.?',
     'posting_photos.RemovePhoto': '\u015Eterge aceast\u0103 poz\u0103',

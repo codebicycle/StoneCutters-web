@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Alamat e-mel anda tidak akan dikongsi dengan orang lain.',
     'posting_publishbutton.EditYourAd_ZA': 'Edit iklan anda',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Sudah menjadi ahli - Daftar masuk',
     'posting_photos.AcceptedFormats': 'Format yang diterima ialah .jpg, .gif dan .png.',
     'posting_photos.NeedChangeAd': 'Anda perlu menukar sesuatu dalam iklan anda?',
     'posting_photos.RemovePhoto': 'Buang foto ini',

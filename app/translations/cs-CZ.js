@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Va\u0161e e-mailov\xE1 adresa nebude s nik\xFDm sd\xEDlena.',
     'posting_publishbutton.EditYourAd_ZA': 'Editovat inzer\xE1t',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'U\u017E jste \u010Dlenem? \u2013 P\u0159ihlaste se. ',
     'posting_photos.AcceptedFormats': 'P\u0159ijateln\xE9 form\xE1ty jsou .jpg, .gif a .png.',
     'posting_photos.NeedChangeAd': 'Pot\u0159ebujete ve sv\xE9m inzer\xE1tu n\u011Bco zm\u011Bnit?',
     'posting_photos.RemovePhoto': 'Odstranit tuto fotografii',

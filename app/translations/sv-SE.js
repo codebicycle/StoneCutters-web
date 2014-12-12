@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Din e-postadress delas inte ut',
     'posting_publishbutton.EditYourAd_ZA': 'Redigera din annons',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Redan medlem - logga in',
     'posting_photos.AcceptedFormats': 'Godk\xE4nda format \xE4r .jpg, .gif och .png.',
     'posting_photos.NeedChangeAd': 'Beh\xF6ver du \xE4ndra n\xE5got i din annons?',
     'posting_photos.RemovePhoto': 'Ta bort detta foto',

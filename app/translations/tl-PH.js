@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Ang iyong email address ay hindi ipapamahagi',
     'posting_publishbutton.EditYourAd_ZA': 'I-edit ang inyong anunsyo',
     'posting_publishbutton.ValidationError': 'Pakitama ang mga field na may mali',
+    'posting_loginbox.existingUser': 'Miyembro ka na-Mag-sign in',
     'posting_photos.AcceptedFormats': 'Ang mga tinatanggap na ayos ay .jpg, .gif at .png.',
     'posting_photos.NeedChangeAd': 'Mayroon ba kayong kailangang palitan sa inyong anunsyo?',
     'posting_photos.RemovePhoto': 'Alisin ang litratong ito',

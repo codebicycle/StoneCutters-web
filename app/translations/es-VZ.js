@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Tu email no ser\xE1 publicado.',
     'posting_publishbutton.EditYourAd_ZA': 'Edita tu aviso',
     'posting_publishbutton.ValidationError': 'Por favor, verifica los errores indicados',
+    'posting_loginbox.existingUser': 'Ya estoy registrado',
     'posting_photos.AcceptedFormats': 'Los formatos aceptados son .jpg, .gif y .png.',
     'posting_photos.NeedChangeAd': '\xBFNecesitas cambiar algo en tu anuncio?',
     'posting_photos.RemovePhoto': 'Quitar esta foto',

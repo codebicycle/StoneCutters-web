@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Je e-mailadres wordt niet gedeeld',
     'posting_publishbutton.EditYourAd_ZA': 'Je advertentie bewerken',
     'posting_publishbutton.ValidationError': 'Er waren problemen met sommige velden.',
+    'posting_loginbox.existingUser': 'Ik ben reeds een gebruiker - inloggen',
     'posting_photos.AcceptedFormats': 'Geaccepteerde indelingen zijn .jpg, .gif en .png.',
     'posting_photos.NeedChangeAd': 'Wil je iets wijzigen in je advertentie?',
     'posting_photos.RemovePhoto': 'Deze foto verwijderen',

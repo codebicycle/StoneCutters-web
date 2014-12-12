@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Va\u0161 e-po\u0161tni naslov ne bo prikazan',
     'posting_publishbutton.EditYourAd_ZA': 'Uredite svoj oglas',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': '\u017De \u010Dlan \u2013 vpis',
     'posting_photos.AcceptedFormats': 'Sprejemljivi formati so .jpg, .gif in .png.',
     'posting_photos.NeedChangeAd': 'Ali morate v oglasu kaj spremeniti?',
     'posting_photos.RemovePhoto': 'Odstrani to fotografijo',

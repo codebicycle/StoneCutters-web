@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Jou e-posadres bly konfidensieel',
     'posting_publishbutton.EditYourAd_ZA': 'Hersien jou advt.',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Reeds \'n lid - Log aan',
     'posting_photos.AcceptedFormats': 'Formate wat aanvaar word is .jpg, .gif en .png.',
     'posting_photos.NeedChangeAd': 'Is dit nodig om iets in jou advt. te verander?',
     'posting_photos.RemovePhoto': 'Verwyder hierdie foto',

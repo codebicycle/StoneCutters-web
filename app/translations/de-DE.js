@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Ihre E-Mailadresse wird nicht weitergegeben',
     'posting_publishbutton.EditYourAd_ZA': 'Ihre Anzeige bearbeiten',
     'posting_publishbutton.ValidationError': 'Please, verify the fields with errors',
+    'posting_loginbox.existingUser': 'Ich bin bereits bei OLX registriert - Jetzt anmelden',
     'posting_photos.AcceptedFormats': 'Die folgenden Bildformate werden akzeptiert: JPG, GIF und PNG.',
     'posting_photos.NeedChangeAd': 'M\xF6chten Sie etwas an Ihrer Anzeige \xE4ndern?',
     'posting_photos.RemovePhoto': 'Foto entfernen',

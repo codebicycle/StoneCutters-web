@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Tw\xF3j e-mail nie b\u0119dzie widoczny',
     'posting_publishbutton.EditYourAd_ZA': 'Edytuj og\u0142oszenie',
     'posting_publishbutton.ValidationError': 'Please, verify the fields with errors',
+    'posting_loginbox.existingUser': 'Zarejestrowany u\u017Cytkownik - Zaloguj si\u0119',
     'posting_photos.AcceptedFormats': 'Dopuszczalne formaty to .jpg, .gif i .png.',
     'posting_photos.NeedChangeAd': 'Czy chcesz zmieni\u0107 swoje og\u0142oszenie?',
     'posting_photos.RemovePhoto': 'Usu\u0144 to zdj\u0119cie',

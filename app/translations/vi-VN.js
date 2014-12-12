@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': '\u0110\u1ECBa ch\u1EC9 email c\u1EE7a b\u1EA1n s\u1EBD kh\xF4ng b\u1ECB ph\u1ED5 bi\u1EBFn',
     'posting_publishbutton.EditYourAd_ZA': 'Ch\u1EC9nh s\u1EEDa qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'B\u1EA1n \u0111\xE3 l\xE0 th\xE0nh vi\xEAn - H\xE3y \u0111\u0103ng nh\u1EADp',
     'posting_photos.AcceptedFormats': 'C\xE1c \u0111\u1ECBnh d\u1EA1ng \u0111\u01B0\u1EE3c ch\u1EA5p nh\u1EADn l\xE0 .jpg, .gif v\xE0 .png.',
     'posting_photos.NeedChangeAd': 'B\u1EA1n c\u1EA7n thay \u0111\u1ED5i th\xEAm cho rao v\u1EB7t?',
     'posting_photos.RemovePhoto': 'G\u1EE1 \u1EA3nh n\xE0y',

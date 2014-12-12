@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'J\u016Bs\u0173 el. pa\u0161to adresas nebus rodomas',
     'posting_publishbutton.EditYourAd_ZA': 'Paredaguokite savo skelbim\u0105',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Narys - Prisijungti',
     'posting_photos.AcceptedFormats': 'Priimtini formatai: .jpg, .gif ir .png.',
     'posting_photos.NeedChangeAd': 'Norite k\u0105 nors pakeisti savo skelbime?',
     'posting_photos.RemovePhoto': 'Pa\u0161alinti \u0161i\u0105 nuotrauk\u0105',
