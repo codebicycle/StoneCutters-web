@@ -1,4 +1,5 @@
 <input type="hidden" name="editSubCategory" value="{{ item.attributes.category.id if item.attributes.category.id }}">
+<input type="hidden" name="itemId" value="{{ item.attributes.id if item.attributes.id }}">
 <label class="field-label">* {{ dictionary["itemslisting.NavigatorByCategory"] }}</label>
 <ul class="posting-categories-list">
 {% for category in categories %}

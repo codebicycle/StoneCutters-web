@@ -57,7 +57,10 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        this.$('#posting-categories-view').trigger('editCategory', [this.$('input[name=editSubCategory]').val()]);
+        var editSubCategory = this.$('input[name=editSubCategory]').val();
+        if (editSubCategory) {
+            this.$('#posting-categories-view').trigger('editCategory', [this.$('input[name=editSubCategory]').val()]);
+        }
 
         $(window).on('beforeunload', this.onBeforeUnload);
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
@@ -98,6 +101,9 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        console.log(subcategory.fields.contactInformation[2].value);
+        var email = subcategory.fields.contactInformation[2].value ? subcategory.fields.contactInformation[2].value.value : '';
+
         if (this.form['category.id'] === subcategory.id) {
             return;
         }
@@ -116,6 +122,9 @@ module.exports = Base.extend({
                 return !(field.name === 'title' || field.name === 'description');
             })
         ]);
+        if (email) {
+            this.$('#posting-contact-view').trigger('fieldsChange', [email]);
+        }
         if (!this.edited) {
             this.handleBack();
         }
