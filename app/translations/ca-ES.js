@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Ubicaci\xF3:',
     'seccion-35.559': 'Correu electr\xF2nic',
     'distancediv.changeLocation': 'Canvia ubicaci\xF3',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> car\xE0cters. Un bon t\xEDtol necessita un m\xEDnim de  <<NUMBER_OF_SUGGESTED_CHARACTERS>> car\xE0cters.',
     'postingtitlelisting.view': 'Podeu veure el vostre anunci:',
     'posting_footerlist.phoneNumber': 'N\xFAmero de Tel\xE8fon',
     'posting_selector.SelectCategory': 'Selecciona una categoria',

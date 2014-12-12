@@ -33,7 +33,7 @@ function terms(params, callback) {
         var location = this.app.session.get('location');
         var view = 'pages/terms';
 
-        if (platform !== 'desktop' && _.contains(countriesTerms, location.url)) {
+        if (_.contains(countriesTerms, location.url)) {
             view += 'es';
         }
         callback(null, view, {});
