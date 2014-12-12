@@ -17,7 +17,7 @@ function prepare(params, done) {
         });
     }
     this.app.session.clear('page');
-    this.app.session.clear('postingLink');
+    this.app.session.clear('dataPage');
     this.app.session.update({
         currentRoute: this.currentRoute,
         params: params

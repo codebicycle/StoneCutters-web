@@ -20,16 +20,16 @@ module.exports = Base.extend({
         });
     },
     getPostLink: function() {
-        var postLink = this.app.session.get('postingLink');
+        var dataPage = this.app.session.get('dataPage');
         var link;
 
-        if (!postLink) {
+        if (!dataPage) {
             return '';
         }
-        link = ['/', postLink.category];
-        if (postLink.subcategory) {
+        link = ['/', dataPage.category];
+        if (dataPage.subcategory) {
             link.push('/');
-            link.push(postLink.subcategory);
+            link.push(dataPage.subcategory);
         }
         return link.join('');
     },

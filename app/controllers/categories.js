@@ -225,15 +225,15 @@ function handleItems(params, promise, gallery) {
 
     var success = function(done, items) {
         var meta = items.meta;
-        var postingLink = {
+        var dataPage = {
             category: category.get('id')
         };
 
         if (subcategory) {
-            postingLink.subcategory = subcategory.get('id');
+            dataPage.subcategory = subcategory.get('id');
         }
         this.app.session.update({
-            postingLink: postingLink
+            dataPage: dataPage
         });
 
         this.app.seo.setContent(meta);
@@ -298,7 +298,7 @@ function handleShow(params, promise) {
 
     var success = function(done) {
         this.app.session.update({
-            postingLink: {
+            dataPage: {
                 category: category.get('id')
             }
         });
