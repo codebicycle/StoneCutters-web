@@ -194,7 +194,6 @@ function getCategoryId() {
 function getCategoryAttribute(id, attr) {
     var subcategory;
     var category;
-    var origName;
     var name;
 
     if (id) {
