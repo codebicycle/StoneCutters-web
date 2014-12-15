@@ -10,6 +10,9 @@ module.exports = {
             myMsgs: 15
         }
     },
+    adserving: {
+        enabled: true
+    },
     seo: {
         enabled: true,
         levelPath: true,
