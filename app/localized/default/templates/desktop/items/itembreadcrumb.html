@@ -1,0 +1,39 @@
+{% if seo %}
+    {% set data = seo.get('levelPath').top %}
+    {% set olxReferer = ((referer or "") | first) == "/" %}
+    {% set fromOlx = data.locationLevel.url + referer %}
+    {% set prevItem = seo.get('prevItem') or false %}
+    {% set nextItem = seo.get('nextItem') or false %}
+
+    <nav id="breadcrumb" class="item-page">
+        <div class="back-to-results">
+            <a class="icons icon-arrow-left" href="{{ fromOlx if olxReferer else data.childCategoryLevel.url }}" rel="nofollow">{{ dictionary["itemgeneraldetails.BackResults"] }}</a>
+        </div>
+        <div class="breadcrumb-navigation">
+            <a href="/nf/all-results" rel="nofollow" >{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
+
+            {% if data.categoryLevel %}
+                <a href="{{ data.categoryLevel.url }}" class="icons icon-arrow" {{ 'rel="nofollow"' if data.categoryLevel.noFollow }} >{{ data.categoryLevel.anchor }}</a>
+            {% endif %}
+            {% if data.childCategoryLevel %}
+                <a href="{{ data.childCategoryLevel.url }}" class="icons icon-arrow" {{ 'rel="nofollow"' if data.childCategoryLevel.noFollow }} >{{ data.childCategoryLevel.anchor }}</a>
+            {% endif %}
+        </div>
+        {% if prevItem or nextItem %}
+            <div class="breadcrumb-pagination">
+            {% if prevItem %}
+                <a href="{{ prevItem.itemUrl }}"  rel="prev">
+                    <span class="icons icon-arrow-left"></span>
+                    {{ dictionary["itemslisting.Previous"] }}
+                </a>
+            {% endif %}
+            {% if nextItem %}
+                <a href="{{ nextItem.itemUrl }}" rel="next">
+                    {{ dictionary["itemslisting.Next"] }}
+                    <span class="icons icon-arrow-right"></span>
+                </a>
+            {% endif %}
+            </div>
+        {% endif %}
+    </nav>
+{% endif %}
