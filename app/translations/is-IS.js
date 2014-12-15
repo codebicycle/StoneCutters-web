@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Setja inn myndir',
     'misc.AdNeedsLocation_Mob': 'Augl\xFDsingin \xFE\xEDn \xFEarf a\xF0 vera sta\xF0sett \xED borg',
     'misc.AdSubmittedApproval': 'Augl\xFDsingin \xFE\xEDn var send til yfirfer\xF0ar.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Allt til rei\xF0u!',
     'misc.BackToStart_Mob': 'Aftur \xE1 upphafss\xED\xF0u',

@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Legg til bilder',
     'misc.AdNeedsLocation_Mob': 'Annonsen m\xE5 v\xE6re lokalisert i en by',
     'misc.AdSubmittedApproval': 'Annonsen din har blitt sendt inn til godkjenning.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Alt klart!',
     'misc.BackToStart_Mob': 'Tilbake til start',

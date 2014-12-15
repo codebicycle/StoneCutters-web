@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Ad\u0103uga\u0163i fotografii',
     'misc.AdNeedsLocation_Mob': 'Anun\u0163ul dvs. trebuie s\u0103 fie asociat unui ora\u015F',
     'misc.AdSubmittedApproval': 'Anun\u0163ul dvs. a fost trimis spre aprobare.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Totul este \xEEn ordine!',
     'misc.BackToStart_Mob': '\xCEnapoi la \xEEnceput',

@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Prid\u0117kite nuotrauk\u0173',
     'misc.AdNeedsLocation_Mob': 'J\u016Bs\u0173 skelbim\u0105 reikia paskelbti mieste',
     'misc.AdSubmittedApproval': 'J\u016Bs\u0173 skelbimas pateiktas patvirtinimui.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Viskas sutvarkyta!',
     'misc.BackToStart_Mob': 'Atgal \u012F prad\u017Ei\u0105',

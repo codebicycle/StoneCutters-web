@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'L\xE4gga till foton',
     'misc.AdNeedsLocation_Mob': 'Din annons m\xE5ste vara bel\xE4gen i en stad',
     'misc.AdSubmittedApproval': 'Din annons har l\xE4mnats in f\xF6r godk\xE4nnande.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Redo!',
     'misc.BackToStart_Mob': 'Tillbaka till start',

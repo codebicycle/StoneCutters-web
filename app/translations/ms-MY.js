@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Tambah foto',
     'misc.AdNeedsLocation_Mob': 'Iklan anda perlu diletakkan di sebuah bandar.',
     'misc.AdSubmittedApproval': 'Iklan anda telah dihantar untuk kelulusan.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Semuanya telah sedia!',
     'misc.BackToStart_Mob': 'Kembali ke mula',

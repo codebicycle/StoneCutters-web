@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': '\uC0AC\uC9C4 \uCD94\uAC00',
     'misc.AdNeedsLocation_Mob': '\uADC0\uD558\uC758 \uAD11\uACE0\uB294 \uB3C4\uC2DC \uB0B4\uC5D0 \uC704\uCE58\uD574\uC57C \uD569\uB2C8\uB2E4',
     'misc.AdSubmittedApproval': '\uADC0\uD558\uC758 \uAD11\uACE0\uAC00 \uC2B9\uC778\uC744 \uBC1B\uAE30 \uC704\uD574 \uC81C\uCD9C\uB418\uC5C8\uC2B5\uB2C8\uB2E4.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': '\uC900\uBE44 \uC644\uB8CC!',
     'misc.BackToStart_Mob': '\uCC98\uC74C\uC73C\uB85C \uB418\uB3CC\uC544\uAC00\uAE30',

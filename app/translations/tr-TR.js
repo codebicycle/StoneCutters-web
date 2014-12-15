@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Foto\u011Fraf Ekle',
     'misc.AdNeedsLocation_Mob': '\u0130lan\u0131n\u0131z\u0131n bir \u015Fehirde yer almas\u0131 gerekiyor',
     'misc.AdSubmittedApproval': '\u0130lan\u0131n\u0131z onay i\xE7in g\xF6nderilmi\u015Ftir.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Her \u015Fey tamam!',
     'misc.BackToStart_Mob': 'Ba\u015Flang\u0131ca d\xF6n',

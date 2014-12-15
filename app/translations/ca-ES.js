@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Afegeix fotos',
     'misc.AdNeedsLocation_Mob': 'Cal que ubiquis el teu anunci a una ciutat',
     'misc.AdSubmittedApproval': 'El teu anunci ha estat enviat i est\xE0 pendent d\'aprovaci\xF3',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Fet!',
     'misc.BackToStart_Mob': 'Tornar a l\'inici',

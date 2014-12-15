@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'K\xE9pek hozz\xE1ad\xE1sa',
     'misc.AdNeedsLocation_Mob': 'A hirdet\xE9s\xE9t el kell helyeznie egy v\xE1rosban.',
     'misc.AdSubmittedApproval': 'Hirdet\xE9s\xE9t elk\xFCldt\xFCk j\xF3v\xE1hagy\xE1sra.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Minden k\xE9sz!',
     'misc.BackToStart_Mob': 'Vissza az elej\xE9re',

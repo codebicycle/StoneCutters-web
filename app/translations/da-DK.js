@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Tilf\xF8j fotos',
     'misc.AdNeedsLocation_Mob': 'Din annonce skal v\xE6re i en by',
     'misc.AdSubmittedApproval': 'Din annonce er sendt til godkendelse',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Klar, parat!',
     'misc.BackToStart_Mob': 'Tilbage til start',

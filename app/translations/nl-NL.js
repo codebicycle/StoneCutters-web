@@ -352,6 +352,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Foto\'s toevoegen',
     'misc.AdNeedsLocation_Mob': 'Je moet een plaats opgeven voor je advertentie',
     'misc.AdSubmittedApproval': 'Je advertentie is ingediend voor goedkeuring.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Klaar!',
     'misc.BackToStart_Mob': 'Terug naar start',
