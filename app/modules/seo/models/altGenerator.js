@@ -9,7 +9,7 @@ Backbone.noConflict();
 Base = Backbone.Model;
 
 function initialize(attributes, options) {
-    var item = this.get('item');
+    var item = attributes.item;
     var alts = [];
     var levelPath;
     var itemPrice;
@@ -19,7 +19,6 @@ function initialize(attributes, options) {
     this.app = options.app;
     this.seo = options.seo;
     levelPath = this.seo.get('levelPath');
-
     attrs = {
         title: item.title,
         categoryName: item.category.name,
@@ -28,6 +27,7 @@ function initialize(attributes, options) {
         countryName:  getCountryName(item),
         stateName:  getStateName(item),
         cityName: getCityName(item),
+        optionalsBrand: getOptionals(item),
         neighborhood: getNeighborhoodName(item)
     };
 
@@ -65,8 +65,11 @@ function generate () {
     if (this.get('stateName')) {
         alts.push(title + ' - ' + this.get('stateName'));
     }
-    if (this.get('categoryName')) {
-        alts.push(title + ' - ' + this.get('categoryName'));
+    if (this.get('countryName')) {
+        alts.push(title + ' - ' + this.get('countryName'));
+    }
+    if (this.get('optionalsBrand')) {
+        alts.push(title + ' - ' + this.get('optionalsBrand'));
     }
     if (this.get('price')) {
         alts.push(title + ' - ' + this.get('price'));
@@ -108,6 +111,24 @@ function getNeighborhoodName(item) {
     }
     return '';
 }
+
+function getOptionals(item) {
+    var make = '';
+    var model = '';
+    if (item.optionals) {
+        _.each(item.optionals,function (opt) {
+                if (opt.name === "make") {
+                    make = opt.value;
+                }
+                if (opt.name === "model") {
+                    model = opt.value;
+                }
+            }
+        );
+     return make + ' ' + model;
+    }
+}
+
 
 module.exports = Base.extend({
     initialize: initialize,
