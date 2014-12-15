@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Adicione fotografias',
     'misc.AdNeedsLocation_Mob': 'Seu an\xFAncio deve estar localizado em uma cidade',
     'misc.AdSubmittedApproval': 'Seu an\xFAncio foi submetido para aprova\xE7\xE3o.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'Todos os an\xFAncios',
     'misc.AllSet_Mob': 'Pronto!',
     'misc.BackToStart_Mob': 'Voltar ao in\xEDcio.',

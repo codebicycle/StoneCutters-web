@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Lisage fotod',
     'misc.AdNeedsLocation_Mob': 'Teie kuulutuses tuleb n\xE4idata linn',
     'misc.AdSubmittedApproval': 'Teie kuulutus on esitatud heakskiitmiseks.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Valmis!',
     'misc.BackToStart_Mob': 'Tagasi algusse',

@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Ajoute foto',
     'misc.AdNeedsLocation_Mob': 'Ou dwe mete anons ou nan yon vil',
     'misc.AdSubmittedApproval': 'Nou te soum\xE8t anons ou an pou otorizasyon.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Ou fini!',
     'misc.BackToStart_Mob': 'Retounen nan k\xF2mansman',

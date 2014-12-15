@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Th\xEAm \u1EA2nh',
     'misc.AdNeedsLocation_Mob': 'C\u1EA7n x\xE1c \u0111\u1ECBnh m\u1ED9t th\xE0nh ph\u1ED1 trong qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n',
     'misc.AdSubmittedApproval': 'Qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n \u0111\xE3 \u0111\u01B0\u1EE3c g\u1EEDi \u0111\u1EC3 ph\xEA duy\u1EC7t',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'T\u1EA5t c\u1EA3 rao v\u1EB7t',
     'misc.AllSet_Mob': 'T\u1EA5t c\u1EA3 \u0111\xE3 xong!',
     'misc.BackToStart_Mob': 'Quay l\u1EA1i \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u',

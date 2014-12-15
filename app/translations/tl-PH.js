@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Magdagdag ng Mga Litrato',
     'misc.AdNeedsLocation_Mob': 'Ang inyong anunsyo ay matatagpuan dapat sa isang lungsod',
     'misc.AdSubmittedApproval': 'Isinumite ang inyong anunsyo para aprubahan.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Handa na!',
     'misc.BackToStart_Mob': 'Balik sa simula',

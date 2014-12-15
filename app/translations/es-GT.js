@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Agrega fotos',
     'misc.AdNeedsLocation_Mob': 'Tu anuncio necesita ser ubicado en una ciudad',
     'misc.AdSubmittedApproval': 'Tu anuncio se ha enviado para su aprobaci\xF3n',
+    'misc.All-Location': 'Todo (a) <<LOCATION>>',
     'misc.AllAds_Mob': 'Todos los anuncios',
     'misc.AllSet_Mob': '\xA1Todo listo!',
     'misc.BackToStart_Mob': 'Regresa al inicio',

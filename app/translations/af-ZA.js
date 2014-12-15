@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Voeg Foto\'s by',
     'misc.AdNeedsLocation_Mob': 'Jou advt. moet in \'n stad gelokaliseer wees.',
     'misc.AdSubmittedApproval': 'Jou advt. is vir goedkeuring ingedien.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'Alle advts.',
     'misc.AllSet_Mob': 'Alles reg!',
     'misc.BackToStart_Mob': 'Terug na begin.',

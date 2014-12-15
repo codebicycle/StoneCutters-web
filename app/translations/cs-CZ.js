@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'P\u0159idejte fotografie',
     'misc.AdNeedsLocation_Mob': 'V\xE1\u0161 inzer\xE1t mus\xED b\xFDt p\u0159i\u0159azen k m\u011Bstu',
     'misc.AdSubmittedApproval': 'V\xE1\u0161 inzer\xE1t byl zasl\xE1n ke schv\xE1len\xED.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'V\u0161e je hotovo!',
     'misc.BackToStart_Mob': 'Zp\u011Bt na za\u010D\xE1tek',

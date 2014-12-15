@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Ongeza Picha',
     'misc.AdNeedsLocation_Mob': 'Tangazo lako linahitaka kuwa katika mji',
     'misc.AdSubmittedApproval': 'Tangazo lako limewasiliwa ili kuidhinishwa.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'Matangazo yote',
     'misc.AllSet_Mob': 'Zote ziko sawa!',
     'misc.BackToStart_Mob': 'Rejea mpaka mwanzo',

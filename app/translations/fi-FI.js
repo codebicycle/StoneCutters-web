@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Lis\xE4\xE4 valokuvia',
     'misc.AdNeedsLocation_Mob': 'Ilmoituksesi pit\xE4\xE4 olla kaupungissa',
     'misc.AdSubmittedApproval': 'lmoituksesi on l\xE4hetetty hyv\xE4ksytt\xE4v\xE4ksi.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Kaikki valmista!',
     'misc.BackToStart_Mob': 'Takaisin alkuun',

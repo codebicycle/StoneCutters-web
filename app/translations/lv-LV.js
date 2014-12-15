@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Pievienojiet fotogr\u0101fijas',
     'misc.AdNeedsLocation_Mob': 'J\u016Bsu sludin\u0101jumam ir j\u0101b\u016Bt piesaist\u012Btam pils\u0113tai',
     'misc.AdSubmittedApproval': 'J\u016Bsu sludin\u0101jums ir iesniegts apstiprin\u0101\u0161anai.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Viss gatavs!',
     'misc.BackToStart_Mob': 'Atpaka\u013C uz s\u0101kumu',

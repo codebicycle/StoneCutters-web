@@ -351,6 +351,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Prida\u0165 fotky',
     'misc.AdNeedsLocation_Mob': 'V\xE1\u0161 inzer\xE1t potrebuje by\u0165 lokalizovan\xFD k mestu',
     'misc.AdSubmittedApproval': 'V\xE1\u0161 inzer\xE1t bol podan\xFD na schv\xE1lenie.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Hotovo!',
     'misc.BackToStart_Mob': 'Sp\xE4\u0165 na \u0161tart',
