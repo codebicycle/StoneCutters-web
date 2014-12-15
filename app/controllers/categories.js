@@ -65,6 +65,7 @@ function show(params, callback, gallery) {
             }
             if (!rCatId.test(params.catId)) {
                 statsd.increment(['redirections', 'seo', 'categories']);
+                console.log('[OLX_DEBUG]', 'redirections', 'seo', 'categories', this.app.session.get('url'));
                 done.abort();
                 return helpers.common.error.call(this, null, null, callback);
             }

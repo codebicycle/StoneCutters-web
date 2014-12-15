@@ -273,9 +273,16 @@ module.exports = {
 
         function controller() {
             //helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
+            console.log('[OLX_DEBUG]', 'redirections', 'seo', 'pictures', this.app.session.get('url'));
             helpers.common.error.call(this, null, null, callback);
         }
     }),
+    users: function(params, callback) {
+        statsd.increment(['redirections', 'seo', 'users']);
+        helpers.common.redirect.call(this, '/', null, {
+            status: 302
+        });
+    },
     userlistings: function(params, callback) {
         statsd.increment(['redirections', 'seo', 'userlistings']);
         helpers.common.redirect.call(this, '/');
