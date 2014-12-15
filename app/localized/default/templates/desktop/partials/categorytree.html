@@ -10,7 +10,7 @@
 		<li class="category">
 			<a class="category-link" href="{{ category | slugToUrl | link }}">
 				{% block icon %}<span class="icon cat-{{ category.id }}"></span>{% endblock %}
-				<h3>{{ category.trName }}</h3>
+				<h3>{{ category.trName }}- {{category.id}}</h3>
 			</a>
 			<ul>
 			{% if category.id == '190' and location.url == 'www.olx.co.tz' %}
