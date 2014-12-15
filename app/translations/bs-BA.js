@@ -353,6 +353,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Dodaj fotografije',
     'misc.AdNeedsLocation_Mob': 'Va\u0161 oglas se mora locirati u gradu',
     'misc.AdSubmittedApproval': 'Va\u0161 je oglas poslan na odobrenje.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Sve postavljeno!',
     'misc.BackToStart_Mob': 'Nazad na po\u010Detak',

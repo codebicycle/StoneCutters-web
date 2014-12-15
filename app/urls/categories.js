@@ -38,7 +38,7 @@ module.exports = {
             'cat-:catId([0-9]+)-p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'cat-:catId([0-9]+)-p-:page([0-9]+)',
             ':title-cat-:catId([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            ':title-cat-:catId',
+            ':title-cat-:catId([0-9]+)',
             '-cat-:catId([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             '-cat-:catId([0-9]+)',
             'cat-:catId([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',

@@ -353,6 +353,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Dodaj zdj\u0119cia',
     'misc.AdNeedsLocation_Mob': 'Og\u0142oszenie musi by\u0107 przypisane do miasta',
     'misc.AdSubmittedApproval': 'Og\u0142oszenie zosta\u0142o przes\u0142ane do akceptacji',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Wszystko gotowe!',
     'misc.BackToStart_Mob': 'Powr\xF3t do pocz\u0105tku',

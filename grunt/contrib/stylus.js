@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 
 
         function getFiles(environment, _platform) {
-            var localization = config.get('localization', {}, environment);
+            var localization = utils.getLocalization(grunt, {}, environment);
             var files = {};
             var file;
             var platform;

@@ -20,7 +20,7 @@ module.exports = {
     environment: {
         type: 'development'
     },
-    localization: {
+localization: {
         wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
@@ -51,8 +51,8 @@ module.exports = {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
         'www.olx.co.tz': {
-            order: [185, 187, 186, 191, 16, 362, 190],
-            columns: [2, 2, 2],
+            order: [185, 186, 187, 362, 16, 191, 190],
+            columns: [1, 3, 2],
         },
         'www.olx.co.ug': {
             order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
@@ -136,20 +136,6 @@ module.exports = {
         }
     },
     features: {
-        //desktop: { - This is going to be turned on later
-        //    adSenseListingBottom: {
-        //        worldwide: false,
-        //       countries: ['www.olx.com.bo']
-        //    },
-        //    adSenseListingTop: {
-        //        worldwide: false,
-        //        countries: ['www.olx.com.bo']
-        //    },
-        //    adSenseItemBottom: {
-        //        worldwide: false,
-        //        countries: ['www.olx.com.bo']
-        //    }
-        //},
         html5: {
             postingFlow: {
                 worldwide: true,

@@ -353,6 +353,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Fotos hinzuf\xFCgen',
     'misc.AdNeedsLocation_Mob': 'Ihre Anzeige muss einen Standort haben',
     'misc.AdSubmittedApproval': 'Ihre Anzeige wurde zur \xDCberpr\xFCfung \xFCbermittelt.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Fertig!',
     'misc.BackToStart_Mob': 'Zur\xFCck zum Start',

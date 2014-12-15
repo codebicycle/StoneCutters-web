@@ -353,6 +353,7 @@ module.exports = {
     'misc.AddPhotos_Mob': 'Tambahkan Foto',
     'misc.AdNeedsLocation_Mob': 'Iklan Anda mesti terletak di sebuah kota',
     'misc.AdSubmittedApproval': 'Iklan Anda telah dikirimkan untuk persetujuan.',
+    'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Semuanya siap!',
     'misc.BackToStart_Mob': 'Kembali untuk memulai',

@@ -19,7 +19,7 @@
                             {% endfor %}
                         </ul>
                     </li>
-                {% elif filter.type == 'SELECT' and filter.name != 'sort' %}
+                {% elif filter.type == 'SELECT' and filter.name != 'sort' and filter.name != 'directdistancedialing' %}
                     {% if filter.value %}
                         <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
                             {% set active = true if filters.isActive(filter.name) else false %}
@@ -42,7 +42,7 @@
                             <span class="title {{ 'active' if active }} {{ 'selected' if filters.isActive(filter.name) }}">{{ filter.description }}</span>
                             <div class="dropdown range {{ 'hide' if not active }}">
                                 {% for input in filter.value %}
-                                    <input type="number" value="{{ filter.current[input.id] if input.value }}" placeholder="{{ input.value }}" data-filter-id="{{ input.id }}">
+                                    <input type="number" value="{{ filter.current[input.id] }}" placeholder="{{ input.value }}" data-filter-id="{{ input.id }}">
                                 {% endfor %}
                                 <button class="range-submit trackMe" data-tracking="Filter-{{ filter.description }}" type="submit" value=""></button>
                                 {{ ('<span class="clear-all clean-filters range trackMe" data-tracking="Filter-Clean_' + filter.name + '">[ ' + dictionary["item.Clear"] + ' ]</span>') if filters.isActive(filter.name) }}
