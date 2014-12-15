@@ -23,11 +23,10 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var popularStates = [];
         var platform = this.app.session.get('platform');
         var icons = config.get(['icons', platform], []);
         var location = this.app.session.get('location');
-        var country = this.app.session.get('location').url;
+        var country = location.url;
 
         this.app.seo.setContent(this.dependencies.categories.meta);
         callback(null, {
@@ -66,6 +65,7 @@ function show(params, callback, gallery) {
             }
             if (!rCatId.test(params.catId)) {
                 statsd.increment(['redirections', 'seo', 'categories']);
+                console.log('[OLX_DEBUG]', 'redirections', 'seo', 'categories', this.app.session.get('url'));
                 done.abort();
                 return helpers.common.error.call(this, null, null, callback);
             }
