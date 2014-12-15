@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': '\u0A38\u0A25\u0A3E\u0A28:',
     'seccion-35.559': '\u0A08\u0A2E\u0A47\u0A32',
     'distancediv.changeLocation': '\u0A38\u0A25\u0A3E\u0A28 \u0A2C\u0A26\u0A32\u0A4B',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> \u0A35\u0A30\u0A23\u0964 \u0A35\u0A27\u0A40\u0A06 \u0A38\u0A3F\u0A30\u0A32\u0A47\u0A16 \u0A32\u0A08 \u0A18\u0A71\u0A1F\u0A4B-\u0A18\u0A71\u0A1F <<NUMBER_OF_SUGGESTED_CHARACTERS>> \u0A35\u0A30\u0A23\u0A3E\u0A02 \u0A26\u0A40 \u0A32\u0A4B\u0A5C \u0A39\u0A41\u0A70\u0A26\u0A40 \u0A39\u0A48\u0964',
     'postingtitlelisting.view': '\u0A24\u0A41\u0A38\u0A40\u0A02 \u0A06\u0A2A\u0A23\u0A3E \u0A07\u0A36\u0A24\u0A3F\u0A39\u0A3E\u0A30 \u0A26\u0A47\u0A16 \u0A38\u0A15\u0A26\u0A47 \u0A39\u0A4B:',
     'posting_footerlist.phoneNumber': '\u0A5E\u0A4B\u0A28 \u0A28\u0A70\u0A2C\u0A30',
     'posting_selector.SelectCategory': '\u0A36\u0A4D\u0A30\u0A47\u0A23\u0A40 \u0A1A\u0A41\u0A23\u0A4B',

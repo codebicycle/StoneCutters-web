@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Sta\xF0setning:',
     'seccion-35.559': 't\xF6lvup\xF3stur',
     'distancediv.changeLocation': 'Breyta sta\xF0setningu',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> stafir. Til a\xF0 hafa g\xF3\xF0an titil \xFEarf minnst <<NUMBER_OF_SUGGESTED_CHARACTERS>> stafi.',
     'postingtitlelisting.view': '\xDE\xFA getur s\xE9\xF0 augl\xFDsinguna \xFE\xEDna:',
     'posting_footerlist.phoneNumber': 'S\xEDman\xFAmer',
     'posting_selector.SelectCategory': 'Veldu flokk',

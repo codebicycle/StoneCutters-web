@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Lokalizacja:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Zmie\u0144 lokalizacj\u0119',
+    'postingtitlelisting.NumberOfCharactersForTitle': 'Liczba znak\xF3w: <<NUMBER _OF_ENTERED_CHARACTERS>>. Dobry tytu\u0142 powinien mie\u0107 przynajmniej <<NUMBER_OF_SUGGESTED_CHARACTERS>> znak\xF3w.',
     'postingtitlelisting.view': 'Zobacz swoje og\u0142oszenie:',
     'posting_footerlist.phoneNumber': 'Numer telefonu',
     'posting_selector.SelectCategory': 'Wybierz kategori\u0119',

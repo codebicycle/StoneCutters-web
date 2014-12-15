@@ -194,8 +194,9 @@ module.exports = Base.extend({
         return path;
     },
     cleanPath: function(path) {
-        path = this.refactorPath(path);
         path = path.replace('/filter', '');
+        path = this.refactorPath(path);
+        path = path.replace(/\/\//g, '/');
         return path.split('/-').shift();
     },
     refactorPath: function(path) {
@@ -205,5 +206,4 @@ module.exports = Base.extend({
         }
         return path;
     }
-
 });

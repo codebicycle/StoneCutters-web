@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Sted:',
     'seccion-35.559': 'Epost',
     'distancediv.changeLocation': 'Endre sted',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> tegn. En kjempefin tittel trenger minst <<NUMBER_OF_SUGGESTED_CHARACTERS>> tegn.',
     'postingtitlelisting.view': 'Du kan se din annonse:',
     'posting_footerlist.phoneNumber': 'Telefonnummer',
     'posting_selector.SelectCategory': 'Velg en kategori',

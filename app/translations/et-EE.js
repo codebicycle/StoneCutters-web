@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Asukoht:',
     'seccion-35.559': 'E-post',
     'distancediv.changeLocation': 'Muutke asukohta',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> t\xE4hem\xE4rki. Hea pealkiri koosneb v\xE4hemalt <<NUMBER_OF_SUGGESTED_CHARACTERS>> t\xE4hem\xE4rgist.',
     'postingtitlelisting.view': 'Te saate oma kuulutust vaadata:',
     'posting_footerlist.phoneNumber': 'Telefoninumber',
     'posting_selector.SelectCategory': 'Valige kategooria',

@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Sted:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': '\xE6ndr sted',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> bogstaver. En god overskrift er p\xE5 mindst <<NUMBER_OF_SUGGESTED_CHARACTERS>> bogstaver.',
     'postingtitlelisting.view': 'Du kan se din annonce:',
     'posting_footerlist.phoneNumber': 'Telefonnummer',
     'posting_selector.SelectCategory': 'V\xE6lg kategori',

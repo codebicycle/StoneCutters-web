@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': 'Locatie:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Wijzig locatie',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> tekens. Een goede titel heeft ten minste <<NUMBER_OF_SUGGESTED_CHARACTERS>> tekens.',
     'postingtitlelisting.view': 'Je kunt je advertentie bekijken op:',
     'posting_footerlist.phoneNumber': 'Telefoonnummer',
     'posting_selector.SelectCategory': 'Kies een rubriek',

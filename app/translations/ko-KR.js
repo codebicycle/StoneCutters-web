@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': '\uC704\uCE58:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': '\uC9C0\uC5ED \uBC14\uAFB8\uAE30',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>>\uAC1C\uC758 \uBB38\uC790. \uD070 \uC81C\uBAA9\uC740 \uCD5C\uC18C  <<NUMBER_OF_SUGGESTED_CHARACTERS>>\uAC1C\uC758 \uBB38\uC790\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4.',
     'postingtitlelisting.view': '\uADC0\uD558\uC758 \uAD11\uACE0\uB97C \uBCF4\uC2E4 \uC218\uAC00 \uC788\uC2B5\uB2C8\uB2E4:',
     'posting_footerlist.phoneNumber': '\uC804\uD654',
     'posting_selector.SelectCategory': '\uCE74\uD14C\uACE0\uB9AC \uC815\uD558\uAE30',

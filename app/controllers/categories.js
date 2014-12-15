@@ -10,8 +10,6 @@ var Paginator = require('../modules/paginator');
 var Seo = require('../modules/seo');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var statsd = require('../../shared/statsd')();
-var rCatId = /^[0-9]{1,3}$/;
 
 module.exports = {
     list: middlewares(list),
@@ -23,11 +21,10 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var popularStates = [];
         var platform = this.app.session.get('platform');
         var icons = config.get(['icons', platform], []);
         var location = this.app.session.get('location');
-        var country = this.app.session.get('location').url;
+        var country = location.url;
 
         this.app.seo.setContent(this.dependencies.categories.meta);
         callback(null, {
@@ -63,11 +60,6 @@ function show(params, callback, gallery) {
             if (categoryId) {
                 done.abort();
                 return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
-            }
-            if (!rCatId.test(params.catId)) {
-                statsd.increment(['redirections', 'seo', 'categories']);
-                done.abort();
-                return helpers.common.error.call(this, null, null, callback);
             }
             done();
         }.bind(this);
@@ -225,15 +217,15 @@ function handleItems(params, promise, gallery) {
 
     var success = function(done, items) {
         var meta = items.meta;
-        var postingLink = {
+        var dataPage = {
             category: category.get('id')
         };
 
         if (subcategory) {
-            postingLink.subcategory = subcategory.get('id');
+            dataPage.subcategory = subcategory.get('id');
         }
         this.app.session.update({
-            postingLink: postingLink
+            dataPage: dataPage
         });
 
         this.app.seo.setContent(meta);
@@ -298,7 +290,7 @@ function handleShow(params, promise) {
 
     var success = function(done) {
         this.app.session.update({
-            postingLink: {
+            dataPage: {
                 category: category.get('id')
             }
         });

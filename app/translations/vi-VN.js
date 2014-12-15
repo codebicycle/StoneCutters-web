@@ -127,6 +127,7 @@ module.exports = {
     'seccion-31.454': '\u0110\u1ECBa \u0111i\u1EC3m:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Thay \u0111\u1ED5i v\u1ECB tr\xED',
+    'postingtitlelisting.NumberOfCharactersForTitle': '<<NUMBER _OF_ENTERED_CHARACTERS>> k\xFD t\u1EF1. Ti\xEAu \u0111\u1EC1 c\u1EA7n c\xF3 \xEDt nh\u1EA5t <<NUMBER_OF_SUGGESTED_CHARACTERS>> k\xFD t\u1EF1.',
     'postingtitlelisting.view': 'B\u1EA1n c\xF3 th\u1EC3 xem qu\u1EA3ng c\xE1o c\u1EE7a b\u1EA1n:',
     'posting_footerlist.phoneNumber': 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i',
     'posting_selector.SelectCategory': 'Ch\u1ECDn h\u1EA1ng m\u1EE5c',

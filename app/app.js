@@ -76,6 +76,7 @@ module.exports = Base.extend({
         var specs = {};
         var languageId = this.session.get('languages')._byId[this.session.get('selectedLanguage')].id;
         var location = this.session.get('location').url;
+        var siteLocation = this.session.get('siteLocation');
 
         dependencies.forEach(function each(dependency) {
             switch (dependency) {
@@ -83,7 +84,7 @@ module.exports = Base.extend({
                     specs[dependency] = {
                         collection: 'Categories',
                         params: {
-                            location: location,
+                            location: siteLocation || location,
                             languageId: languageId,
                             seo: Seo.isEnabled(location)
                         }

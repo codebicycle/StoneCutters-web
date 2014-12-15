@@ -13,9 +13,17 @@
 				<h3>{{ category.trName }}</h3>
 			</a>
 			<ul>
-			{% for subcategory in category.children.toJSON() %}
-				<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName}}</a></li>
-			{% endfor %}
+			{% if category.id == '190' and location.url == 'www.olx.co.tz' %}
+				{% for subcategory in category.children.toJSON() %}
+					{% if loop.index < 28 %}
+						<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName }}</a></li>
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				{% for subcategory in category.children.toJSON() %}
+					<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName }}</a></li>
+				{% endfor %}
+			{% endif %}
 			</ul>
 		</li>
 		{% if loop.index == column1 or loop.index == column2 or loop.index == column3 %}

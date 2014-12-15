@@ -3,17 +3,35 @@
 var _ = require('underscore');
 var config = require('./config');
 
-var replaces = {
+var options = {
     environments: {
         d: 'development',
         t: 'testing',
         s: 'staging',
         p: 'production'
+    },
+    localization: {
+        wap: [],
+        html5: [],
+        html4: [],
+        desktop: []
     }
 };
 
+function option(grunt, keys, defaultValue) {
+    var value = defaultValue;
+
+    if (_.isString(keys)) {
+        keys = [keys];
+    }
+    _.each(keys, function each(k) {
+        value = grunt.option(k) || value;
+    });
+    return value;
+}
+
 function getEnvironments(grunt) {
-    var environments = grunt.option('env');
+    var environments = option(grunt, 'env');
 
     if (!environments) {
         environments = config.get('environments');
@@ -22,7 +40,7 @@ function getEnvironments(grunt) {
         environments = environments.split(',');
     }
     return environments.map(function(environment) {
-        var replace = replaces.environments[environment.toLowerCase()];
+        var replace = options.environments[environment.toLowerCase()];
 
         if (replace) {
             environment = replace;
@@ -31,6 +49,17 @@ function getEnvironments(grunt) {
     });
 }
 
+function getLocalization(grunt, defaultValue, environment) {
+    var noLocalize = option(grunt, ['nl', 'no-localize']);
+
+    if (noLocalize) {
+        return options.localization;
+    }
+    return config.get('localization', defaultValue, environment);
+}
+
 module.exports = {
-    getEnvironments: getEnvironments
+    option: option,
+    getEnvironments: getEnvironments,
+    getLocalization: getLocalization
 };
