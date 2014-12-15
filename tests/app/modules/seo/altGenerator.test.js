@@ -43,36 +43,36 @@ function test() {
     it('the generator should be an Array', function () {
         expect(generator.generate()).to.be.Array;
     });
-    it('should has neighborhood at 1 position', function () {
+    it('should have neighborhood at 1 position', function () {
         expect(generator.generate()[0].indexOf('- Neighborhood')).to.not.equal(-1);
     });
-    it('should has the text \'Picture Of\' at 2 position', function () {
+    it('should have the text "Picture Of" at 2 position', function () {
         expect(generator.generate()[1].indexOf('Pictures of')).to.not.equal(-1);
     });
-    it('should has \'City\' at 3 position', function () {
+    it('should have "City" at 3 position', function () {
         expect(generator.generate()[2].indexOf('City')).to.not.equal(-1);
     });
-    it('should has \'2nd level category\' at 4 position', function () {
+    it('should have "2nd level category" at 4 position', function () {
         expect(generator.generate()[3].indexOf('2nd level category')).to.not.equal(-1);
     });
-    it('should has \'1nd level category\' at 5 position', function () {
+    it('should have "1nd level category" at 5 position', function () {
         expect(generator.generate()[4].indexOf('1st level category')).to.not.equal(-1);
     });
-    it('should has \'State\' at 6 position', function () {
+    it('should have "State" at 6 position', function () {
         expect(generator.generate()[5].indexOf('State')).to.not.equal(-1);
     });
-    it('should has \'Country\' at 7 position', function () {
+    it('should have "Country" at 7 position', function () {
         expect(generator.generate()[6].indexOf('Country')).to.not.equal(-1);
     });
-    it('should has \'Brand\' at 8 position', function () {
+    it('should have "Brand" at 8 position', function () {
         expect(generator.generate()[7].indexOf('Ford Otro')).to.not.equal(-1);
     });
-    it('should has \'Price\' at 9 position', function () {
+    it('should have "Price" at 9 position', function () {
         expect(generator.generate()[8].indexOf('Bs.100000')).to.not.equal(-1);
     });
-    it('should has first 50 chars at 10 position', function () {
-        expect(generator.generate()[9].indexOf('Lorem ipsum dolor sit amet')).to.not.equal(-1);
-        expect(generator.generate()[9].length).to.be.equal(50);
+    it('should have first 50 chars at 10 position', function () {
+        expect(generator.generate()[9].indexOf('Lorem ipsum dolor sit amet')).to.not.equal(-1);        
+        expect(generator.generate()[9].length).to.be.at.most(50);
     });
 
 }
