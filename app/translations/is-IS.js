@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Netfangi \xFE\xEDnu ver\xF0ur ekki deilt me\xF0 \xF6\xF0rum',
     'posting_publishbutton.EditYourAd_ZA': 'Breyta augl\xFDsingunni',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'N\xFA \xFEegar me\xF0limur - skr\xE1\xF0u \xFEig inn',
     'posting_photos.AcceptedFormats': 'Teki\xF0 er vi\xF0 .jpg, .gif og .png.',
     'posting_photos.NeedChangeAd': '\xDEarftu a\xF0 breyta einhverju \xED augl\xFDsingunni \xFEinni?',
     'posting_photos.RemovePhoto': 'Fjarl\xE6gja \xFEessa lj\xF3smynd',

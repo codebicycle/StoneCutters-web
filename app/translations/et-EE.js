@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Teie e-posti aadressi ei jagata',
     'posting_publishbutton.EditYourAd_ZA': 'Kuulutuse redigeerimine',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Olete juba liige - Logige sisse',
     'posting_photos.AcceptedFormats': 'Lubatavad vormingud on .jpg, .gif ja .png.',
     'posting_photos.NeedChangeAd': 'Kas soovite oma kuulutuses midagi muuta?',
     'posting_photos.RemovePhoto': 'Eemaldage see foto',

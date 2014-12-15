@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Anwani yako ya barua pepe itashirikishwa',
     'posting_publishbutton.EditYourAd_ZA': 'Hariri tangazo lako',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Already a member - Sign in',
     'posting_photos.AcceptedFormats': 'Miundo inayokubalika ni .jpg, .gif and .png.',
     'posting_photos.NeedChangeAd': 'Je, unahitaji kitu chochote katika tangazo lako?',
     'posting_photos.RemovePhoto': 'Ondoa picha hii',

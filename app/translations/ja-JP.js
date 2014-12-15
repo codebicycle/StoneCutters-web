@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': '\u304A\u5BA2\u69D8\u306E\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u304C\u5171\u6709\u3055\u308C\u308B\u3053\u3068\u306F\u3054\u3056\u3044\u307E\u305B\u3093',
     'posting_publishbutton.EditYourAd_ZA': '\u8CB4\u5E83\u544A\u3092\u7DE8\u96C6\u3057\u3066\u4E0B\u3055\u3044',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': '\u767B\u9332\u30E6\u30FC\u30B6\u30FC\u3067\u3059\u304B? \u30B5\u30A4\u30F3\u30A4\u30F3\u3057\u3066\u304F\u3060\u3055\u3044',
     'posting_photos.AcceptedFormats': '\u627F\u8A8D\u3055\u308C\u305F\u5F62\u5F0F\u306F .jpg, .gif ,.png. \u3067\u3059',
     'posting_photos.NeedChangeAd': '\u8CB4\u5E83\u544A\u306E\u4E2D\u3067\u4F55\u304B\u5909\u66F4\u304C\u5FC5\u8981\u3067\u3059\u304B?',
     'posting_photos.RemovePhoto': '\u3053\u306E\u5199\u771F\u3092\u524A\u9664\u3059\u308B',

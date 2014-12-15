@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'E-Posta adresiniz kimseyle payla\u015F\u0131lmayacakt\u0131r',
     'posting_publishbutton.EditYourAd_ZA': '\u0130lan\u0131n\u0131z\u0131 d\xFCzenleyin.',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': '\xDCyemiz misiniz - \xDCye giri\u015Fi yap\u0131n',
     'posting_photos.AcceptedFormats': 'Kabul edilen formatlar .jpg, .gif ve .png\'dir.',
     'posting_photos.NeedChangeAd': '\u0130lan\u0131n\u0131zda bir \u015Fey de\u011Fi\u015Ftirmeniz gerekiyor mu?',
     'posting_photos.RemovePhoto': 'Bu foto\u011Fraf\u0131 sil',

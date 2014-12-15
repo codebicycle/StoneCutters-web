@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Din e-post adresse vil ikke bli avsl\xF8rt',
     'posting_publishbutton.EditYourAd_ZA': 'Rediger annonsen din',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Allerede et medlem - Logg inn',
     'posting_photos.AcceptedFormats': 'Aksepterte formater er .jpg, .gif og .png.',
     'posting_photos.NeedChangeAd': 'Trenger du \xE5 endre noe i annonsen?',
     'posting_photos.RemovePhoto': 'Slett dette fotobildet',

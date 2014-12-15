@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'E-mail c\xEDm\xE9t nem osztjuk meg m\xE1sokkal',
     'posting_publishbutton.EditYourAd_ZA': 'Szerkessze \xE1t hirdet\xE9s\xE9t',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'M\xE1r tag - bejelentkez\xE9s',
     'posting_photos.AcceptedFormats': 'Elfogadott form\xE1tumok: .jpg, .gif \xE9s .png.',
     'posting_photos.NeedChangeAd': 'M\xF3dos\xEDtana hirdet\xE9s\xE9n?',
     'posting_photos.RemovePhoto': 'A fot\xF3 elt\xE1vol\xEDt\xE1sa',

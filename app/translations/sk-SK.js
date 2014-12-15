@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Va\u0161a e-mailov\xE1 adresa nebude zdie\u013Ean\xE1 in\xFDm',
     'posting_publishbutton.EditYourAd_ZA': 'Upravi\u0165 v\xE1\u0161 inzer\xE1t',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Existuj\xFAci \u010Dlen - Prihl\xE1ste sa',
     'posting_photos.AcceptedFormats': 'Medzi akceptovan\xE9 form\xE1ty patr\xED .jpg, .gif a .png.',
     'posting_photos.NeedChangeAd': 'Potrebuje vo svojom inzer\xE1te nie\u010Do zmeni\u0165?',
     'posting_photos.RemovePhoto': 'Odstr\xE1ni\u0165 t\xFAto fotografiu',

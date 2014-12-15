@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': '\u0639\u0646\u0648\u0627\u0646 \u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0627\u0644\u0643\u062A\u0631\u0648\u0646\u064A \u0627\u0644\u062E\u0627\u0635 \u0628\u0643 \u0644\u0646 \u064A\u062A\u0645 \u062A\u0642\u0627\u0633\u0645',
     'posting_publishbutton.EditYourAd_ZA': 'Edit your ad',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Already a member - Sign in',
     'posting_photos.AcceptedFormats': 'Accepted formats are .jpg, .gif and .png.',
     'posting_photos.NeedChangeAd': 'Do you need change something in your ad?',
     'posting_photos.RemovePhoto': '\u062D\u0630\u0641 \u0647\u0630\u0647 \u0627\u0644\u0635\u0648\u0631 ',

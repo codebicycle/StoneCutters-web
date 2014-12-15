@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'J\u016Bsu e-pasta adrese b\u016Bs konfidenci\u0101la.',
     'posting_publishbutton.EditYourAd_ZA': 'Redi\u0123\u0113jiet savu sludin\u0101jumu',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Jau esat biedrs - Pierakst\u012Bties',
     'posting_photos.AcceptedFormats': 'Tiek pie\u0146emti form\u0101ti .jpg, .gif un .png.',
     'posting_photos.NeedChangeAd': 'Vai j\u016Bs v\u0113laties kaut ko main\u012Bt j\u016Bsu sludin\u0101jum\u0101?',
     'posting_photos.RemovePhoto': 'Dz\u0113st \u0161o fotoatt\u0113lu',

@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'La vostra adre\xE7a de correu electr\xF2nic no es compartir\xE0',
     'posting_publishbutton.EditYourAd_ZA': 'Edita el teu anunci',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'S\xF3c un membre - Iniciar sessi\xF3',
     'posting_photos.AcceptedFormats': 'Els formats acceptats s\xF3n .jpg, .gif i .png.',
     'posting_photos.NeedChangeAd': 'Necessites fer algun canvi al teu anunci?',
     'posting_photos.RemovePhoto': 'Elimina aquesta foto',

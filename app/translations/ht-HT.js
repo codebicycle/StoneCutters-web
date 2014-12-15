@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Nou pap pataje im\xE8 ou ak l\xF2t moun ',
     'posting_publishbutton.EditYourAd_ZA': 'Modifye anons ou a',
     'posting_publishbutton.ValidationError': 'Please, verify the fields with errors',
+    'posting_loginbox.existingUser': 'Ou deja enskri - Konekte ',
     'posting_photos.AcceptedFormats': 'F\xF2ma nou aksepte se .jpg, .gif ak .png.',
     'posting_photos.NeedChangeAd': 'Eske ou vle chanje yon bagay nan anons ou a?',
     'posting_photos.RemovePhoto': 'Retire foto sa',

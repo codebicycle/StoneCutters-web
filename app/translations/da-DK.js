@@ -181,6 +181,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Din e-mail adresse vil ikke blive delt med andre',
     'posting_publishbutton.EditYourAd_ZA': 'Rediger din annonce',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Allerede medlem - log ind',
     'posting_photos.AcceptedFormats': 'Accepterede formater er .jpg, .gif og .png.',
     'posting_photos.NeedChangeAd': 'Vil du \xE6ndre noget i din annonce?',
     'posting_photos.RemovePhoto': 'Fjern dette foto',
