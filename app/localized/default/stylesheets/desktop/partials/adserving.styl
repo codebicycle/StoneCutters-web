@@ -1,0 +1,37 @@
+.adserving-listing {
+    .ads-csa {
+        margin-top: 10px;
+
+        iframe {
+            border: 1px solid $greyBorders;
+            border-bottom: none;
+            box-sizing: border-box;
+            display: block;
+        }
+        &.slot_bottom_listing {
+            margin-bottom: 10px;
+            margin-top: -10px;
+
+            iframe {
+                border: 1px solid $greyBorders;
+                border-top: none;
+            }
+        }
+        &.slot_top_listing_gallery:not(:empty) {
+            background: $white;
+            border: 1px solid $greyBorders;
+            box-sizing: border-box;
+            height: auto !important; /* es de vida o muerte */
+            margin: 10px 0;
+            padding: 10px;
+
+            iframe {
+                border: none;
+            }
+        }
+    }
+}
+
+.adserving-listing:not(:empty) + .items-list {
+    margin-top: 0;
+}

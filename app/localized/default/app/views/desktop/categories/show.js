@@ -15,18 +15,12 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.cleanPage(this.app.session.get('path'));
-        var platform = this.app.session.get('platform');
-        var location = this.app.session.get('location');
-        var showAdSenseListingBottom = helpers.features.isEnabled.call(this, 'adSenseListingBottom', platform, location.url);
-        var showAdSenseListingTop = helpers.features.isEnabled.call(this, 'adSenseListingTop', platform, location.url);
 
         this.filters = data.filters;
         this.filters.order = this.order;
 
         return _.extend({}, data, {
             items: data.items,
-            showAdSenseListingBottom: showAdSenseListingBottom,
-            showAdSenseListingTop: showAdSenseListingTop,
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'showig'),
