@@ -22,7 +22,7 @@
 		<h3>{{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}</h3>
 		<ul>
 			{% for city in cities %}
-				<li><a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city-link" data-qa="city-name" >{{ city.name }}</a></li>
+				<li><a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city-link" data-qa="city-name" >{{ city.name }}{{ [' <span>(', city.stateAbbreviation, ')</span>'] | join('') if search and city.repeat}}</a></li>
 			{% endfor %}
 	{% else %}
 		<p>{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</p>
