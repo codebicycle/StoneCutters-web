@@ -180,6 +180,7 @@ module.exports = {
     'posting_fields_1.YourEmailAddressWontBeShared': 'Your email address won\'t be shared',
     'posting_publishbutton.EditYourAd_ZA': 'Edit your ad',
     'posting_publishbutton.ValidationError': 'There were problems with some of the fields.',
+    'posting_loginbox.existingUser': 'Already a member - Sign in',
     'posting_photos.AcceptedFormats': 'Accepted formats are .jpg, .gif and .png.',
     'posting_photos.NeedChangeAd': 'Do you need change something in your ad?',
     'posting_photos.RemovePhoto': 'Remove this photo',

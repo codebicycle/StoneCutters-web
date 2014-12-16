@@ -16,11 +16,11 @@ module.exports = {
             'all-states/:state'
         ]
     },
-    'pages#sitemap': {
+    /*'pages#sitemap': {
         url: 'sitemap'
-    },
+    },*/
     'pages#sitemapByDate': {
-        url: /^\/sitemap\/.+/
+        url: /^\/sitemap((\/.+)|$)/
     },
     'pages#interstitial': {
         url: 'interstitial'

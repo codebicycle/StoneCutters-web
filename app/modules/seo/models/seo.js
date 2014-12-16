@@ -7,7 +7,6 @@ var translations = require('../../../../shared/translations');
 var configSeo = require('../config');
 var Head = require('./head');
 var AltGenerator = require( './altGenerator');
-var defaultConfig = config.get(['markets', 'common', 'seo']);
 var getters = {
     head: getHead,
     title: getPropertyHead,
@@ -53,7 +52,9 @@ Seo = Backbone.Model.extend({
         });
 
         this.on('change:staticSearch', this.onChangeStaticSearch, this);
-        this.on('change:altImages', this.onChangeAltImages, this);
+        this.on('change:altImages', function(seo, value) {
+            this.onChangeAltImages(seo, value);
+        }, this);
     },
     get: function (key) {
         var attr;

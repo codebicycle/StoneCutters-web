@@ -10,8 +10,6 @@ var Paginator = require('../modules/paginator');
 var Seo = require('../modules/seo');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var statsd = require('../../shared/statsd')();
-var rCatId = /^[0-9]{1,3}$/;
 
 module.exports = {
     list: middlewares(list),
@@ -62,12 +60,6 @@ function show(params, callback, gallery) {
             if (categoryId) {
                 done.abort();
                 return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
-            }
-            if (!rCatId.test(params.catId)) {
-                statsd.increment(['redirections', 'seo', 'categories']);
-                console.log('[OLX_DEBUG]', 'redirections', 'seo', 'categories', this.app.session.get('url'));
-                done.abort();
-                return helpers.common.error.call(this, null, null, callback);
             }
             done();
         }.bind(this);
