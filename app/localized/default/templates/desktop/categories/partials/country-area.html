@@ -1,6 +1,3 @@
-
-{% include (template + '/partials/preloader.html') %}
-
 <div class="country-area {{ countryMapClass }}">
     <a class="open-modal" data-modal="location-modal" rel="nofollow" href="#">
         <img src="{{ ('/images/desktop/home_maps/' + location.abbreviation | lower + '.gif') | static }}" alt="Mapa de {{ location.name }}" />
