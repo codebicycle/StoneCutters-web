@@ -53,6 +53,7 @@ function title(metas, value) {
     }
     else {
         suffix = this.getLocationName();
+
         if (!~value.indexOf(suffix)) {
             value += ' - ';
             value += suffix;

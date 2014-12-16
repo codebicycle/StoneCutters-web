@@ -9,6 +9,13 @@ module.exports = Base.extend({
     latitude: '',
     longitude: '',
     showAutoLocation: false,
+    getTemplateData: function(){
+        var data = Base.prototype.getTemplateData.call(this);
+        if (data.target) {
+            data.target = data.target.replace(/(-neighborhood)([0-9_]+)/, '');
+        }
+        return _.extend({}, data, {});
+    },
     postRender: function() {
         var callback;
         var errorCallback;

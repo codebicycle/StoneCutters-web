@@ -20,7 +20,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             var jsDir = '/js/' + (minify ? 'min' : 'src');
             var template;
 
-            if (!!(localization[platform] && ~localization[platform].indexOf(location.url))) {
+            if (!process.env.NO_LOCALIZE && !!(localization[platform] && ~localization[platform].indexOf(location.url))) {
                 directory = location.url;
             }
             template = directory + '/' + platform;
