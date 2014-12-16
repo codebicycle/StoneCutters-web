@@ -27,6 +27,18 @@ module.exports = Base.extend({
             border: 0
         }, this.wapAttributes || {});
     },
+    getAttributes: function() {
+        var attributes = Base.prototype.getAttributes.call(this, arguments);
+        var data;
+
+        if (this.options && this.options.include) {
+            data = _.pick.apply(_, [this.options || {}].concat(this.options.include));
+            _.each(data, function eachDataController(value, key) {
+                attributes['data-' + key] = JSON.stringify(value);
+            });
+        }
+        return attributes;
+    },
     getTemplate: function() {
         var template = this.app.session.get('template');
 
