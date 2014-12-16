@@ -1,10 +1,10 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view');
+var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
 var Item = require('../../../../../../models/item');
 
@@ -252,7 +252,7 @@ module.exports = Base.extend({
         this.$('#posting-contact-view').trigger('disablePost');
     },
     onImagesLoadEnd: function(event, images) {
-        this.form._images = Object.keys(images).map(function each(image) {
+        this.form.images = Object.keys(images).map(function each(image) {
             return images[image].id;
         });
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
@@ -308,65 +308,30 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var query = {
-            postingSession: this.options.postingsession
-        };
-        var user = this.app.session.get('user');
+        var item;
 
-        var validate = function(done) {
-            query.intent = 'validate';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form
-            }, done);
-        }.bind(this);
+        function post(done) {
+            item = new Item(this.form, {
+                app: this.app
+            });
+            item.post(done);
+        }
 
-        var check = function(done, err, response, body) {
-            if (response.status !== 'success') {
-                return done.fail(body);
-            }
-            if (body) {
-                done.abort();
-                return fail(body, 'invalid');
-            }
-            done();
-        }.bind(this);
-
-        var post = function(done) {
-            query.intent = 'create';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form
-            }, done.errfcb);
-        }.bind(this);
-
-        var trackEvent = function(done, res, item) {
+        function success(response) {
             var category = 'Posting';
             var action = 'PostingSuccess';
 
             this.track({
                 category: category,
                 action: action,
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
+                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.get('id')].join('::')
             });
-            done(item);
-        }.bind(this);
-
-        var trackGraphite = function(done, res, item) {
-            var location = this.app.session.get('location');
-            var platform = this.app.session.get('platform');
-
-            statsd.increment([location.name, 'posting', 'success', platform]);
-            done(item);
-        }.bind(this);
-
-        var success = function(item) {
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
+            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.get('id') + '?sk=' + item.get('securityKey'), null, {
                 status: 200
             });
-        }.bind(this);
+        }
 
-        var fail = function(_errors, track) {
+        function fail(_errors, track) {
             // TODO: Improve error handling
             if (_errors) {
                 if (_errors.responseText) {
@@ -389,33 +354,16 @@ module.exports = Base.extend({
                 }
                 this.$el.trigger('error');
             }
-            trackFail(track);
-        }.bind(this);
-
-        var trackFail = function(track) {
-            var location = this.app.session.get('location');
-            var platform = this.app.session.get('platform');
-
-            statsd.increment([location.name, 'posting', track || 'error', platform]);
-        }.bind(this);
+        }
 
         this.$('#posting-contact-view').trigger('disablePost');
         this.formErrors = [];
-        if (user) {
-            query.token = user.token;
-        }
-        this.form.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
+        this.form.languageId = this.app.session.get('languageId');
         this.form.platform = this.app.session.get('platform');
         this.form.ipAddress = this.app.session.get('ip');
-        if (this.form._images) {
-            this.form.images = this.form._images.join(',');
-        }
-        asynquence().or(fail)
-            .then(validate)
-            .then(check)
-            .then(post)
-            .gate(trackEvent, trackGraphite)
-            .val(success);
+        asynquence().or(fail.bind(this))
+            .then(post.bind(this))
+            .val(success.bind(this));
     }
 });
 
