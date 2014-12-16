@@ -19,8 +19,10 @@ module.exports = function(controller, exclude) {
     }
     return function execute(params, callback) {
         var promise = asynquence().or(fail);
+        var middleware;
 
-        for (var middleware in middlewares) {
+        this.include = [];
+        for (middleware in middlewares) {
             if (!_.contains(exclude, middleware)) {
                 promise.then(middlewares[middleware].bind(this, params));
             }
@@ -44,6 +46,7 @@ module.exports = function(controller, exclude) {
             }
             json = json !== undefined ? json : true;
             data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data, {
+                include: this.include.concat((data || {}).include || []),
                 seo: this.app.seo,
                 tracking: tracking.generateURL.call(this)
             });

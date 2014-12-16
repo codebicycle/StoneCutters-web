@@ -30,6 +30,12 @@ module.exports = Base.extend({
         this.app.router.appView.on('filter:end', this.restore.bind(this));
         this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
         this.app.router.appView.on('location:end', this.restore.bind(this));
+        this.app.router.appView.on('login:start', this.onLoginStart.bind(this));
+        this.app.router.appView.on('login:end', this.restore.bind(this));
+        this.app.router.appView.on('register:start', this.onLoginStart.bind(this));
+        this.app.router.appView.on('register:end', this.restore.bind(this));
+        this.app.router.appView.on('lostpassword:start', this.onLoginStart.bind(this));
+        this.app.router.appView.on('lostpassword:end', this.restore.bind(this));
         this.app.router.on('action:end', this.onActionEnd.bind(this));
         if (helpers.features.isEnabled.call(this, 'smartBanner')) {
             if ( !(/(iPad|iPhone|iPod).*OS [6-7].*AppleWebKit.*Mobile.*Safari/.test(navigator.userAgent)) && !this.app.session.get('interstitial') ) {
@@ -141,11 +147,21 @@ module.exports = Base.extend({
     onSelectLocation: function(){
         this.customize("itemslisting.NavigatorByLocation");
     },
+    onLoginStart: function(){
+        this.customize("defaulthtmlhead.My Listings");
+    },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
         var route = this.app.session.get('currentRoute').action;
 
         this.urlreferer = data.referer || '/';
+
+        if (route === 'register' || route === 'lostpassword') {
+            this.urlreferer = '/login';
+        } else if (route === 'login') {
+            this.urlreferer = '/';
+        }
+
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);
