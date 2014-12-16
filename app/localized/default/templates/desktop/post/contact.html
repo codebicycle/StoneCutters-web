@@ -9,7 +9,7 @@
 	label: dictionary["itemslisting.NewContactName"],
 	fieldType: "text",
 	dataType: "string",
-	value: item.attributes.contactName
+	value: item.get('contactName')
 } %}
 
 {% set emailField = {
@@ -28,7 +28,7 @@
 	label: dictionary["posting_footerlist.phoneNumber"],
 	fieldType: "text",
 	dataType: "string",
-	value: item.attributes.phone
+	value: item.get('phone')
 } %}
 
 {% set adressField = {
@@ -38,7 +38,7 @@
 	label: dictionary["itemdescription.streetaddress"],
 	fieldType: "text",
 	dataType: "string",
-	value: item.attributes.streetAddress
+	value: item.get('streetAddress')
 } %}
 
 {{ Field(contactNameField) }}

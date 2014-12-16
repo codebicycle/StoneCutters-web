@@ -62,14 +62,13 @@ module.exports = Base.extend({
             app: this.app
         });
 
-        var editSubCategory = this.$('input[name=editSubCategory]').val();
-        if (editSubCategory) {
-            this.$('#posting-categories-view').trigger('editCategory', [this.$('input[name=editSubCategory]').val()]);
+        if (this.item.has('category')) {
+            this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category').id]);
         }
 
         $(window).on('beforeunload', this.onBeforeUnload);
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
-        if (!editSubCategory && (this.isValid === undefined || this.isValid === null)) {
+        if (this.isValid === undefined || this.isValid === null) {
             if (!this.form['category.parentId']) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
             }
@@ -174,6 +173,9 @@ module.exports = Base.extend({
             }
         }
         if (field.value) {
+            //ASI SE HACE
+            /*this.item.set(field.name, field.value);
+            this.item.unset(field.name);*/
             this.form[field.name] = field.value;
         }
         else {

@@ -35,7 +35,6 @@ module.exports = Base.extend({
         var subcategoryId = subcategory.data('id');
         var categoryId = subcategory.parents('.subcategories').siblings('.category').data('id');
         var user = this.app.session.get('user');
-        var itemId = this.$('input[name=itemId]').val();
         var params = {};
 
         intent = intent ? 'edit' : 'post';
@@ -50,7 +49,7 @@ module.exports = Base.extend({
         else {
             params = {
                 intent: intent,
-                itemId: itemId,
+                itemId: this.parentView.item.get('id'),
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 token: user.token
             };

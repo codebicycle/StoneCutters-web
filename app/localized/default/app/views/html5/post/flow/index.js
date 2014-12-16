@@ -6,7 +6,7 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
-var Item = require('../../../../../../models/item');
+var Item = require('../../../../../../../models/item');
 window.URL = window.URL || window.webkitURL;
 
 function onpopstate(event) {

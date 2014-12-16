@@ -107,7 +107,7 @@ function flow(params, callback) {
 
         var postingController = function(postingSession, cities, item, fields) {
             var currentLocation = {};
-console.log(item);
+
             tracking.setPage('desktop_step1');
             if (location.current) {
                 switch (location.current.type) {
