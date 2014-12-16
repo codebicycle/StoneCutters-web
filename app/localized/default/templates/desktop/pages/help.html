@@ -11,6 +11,9 @@
             <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["help.GeneralQuestions"] }}</a>
         </li>
         <li>
+            <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">Falta traduccion</a>
+        </li>
+        <li>
             <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
         </li>
     </ul>
@@ -188,6 +191,56 @@
 
         </div>
     </div>
+
+    <div id="contact" class="help-content-display">
+        <h3 class="title">Falta traduccion</h3>
+        <div class="contact">
+            <p>{{ dictionary["supportform.FillForm"] }}</p>
+            <form id="contactForm" data-contact-form action="">
+                <fieldset>
+                    <label for="subject">{{ dictionary["supportform.Subject"] }}</label>
+                    <select name="subject">
+                        <option value="ContactSupportTeam">{{ dictionary["contact_us.ContactSupportTeam"] }}</option>
+                        <option value="ContactPartnership">{{ dictionary["contact_us.ContactPartnership"] }}</option>
+                        <option value="ContactPress">{{ dictionary["contact_us.ContactPress"] }}</option>
+                        <option value="ContactMobileAdvertising">{{ dictionary["contact_us.ContactMobileAdvertising"] }}</option>
+                        <option value="ContactLegalIssues">{{ dictionary["contact_us.ContactLegalIssues"] }}</option>
+                        <option value="ContactFeedSupport">{{ dictionary["contact_us.ContactFeedSupport"] | replace('<<BRAND>>','OLX') }}</option>
+                    </select>
+                    <span class="error hide subject"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="name">{{ dictionary["itemcomments.CommentsFormName"] }}</label>
+                    <input type="text" name="name" value="" maxlength="200">
+                    <span class="error hide name"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="email">{{ dictionary["messages_item_page.CommentsFormEmail"] }}</label>
+                    <input type="text" name="email" value="" maxlength="200">
+                    <span class="icons icon-lock notification">{{ dictionary["lostform.PleaseEnterTheEmailAddressYouUsedToRegisterOnBrand"] }}</span>
+                    <span class="error hide email"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="message">{{ dictionary["supportform.Message"] }}</label>
+                    <textarea name="message" cols="30" rows="6"></textarea>
+                    <span class="error hide message"></span>
+                </fieldset>
+                
+                <span class="spinner hide"></span>
+                
+                <fieldset>
+                    <label for="submit">
+                        <input type="submit" value="{{ dictionary["supportform.Submit"] }}" >
+                    </label>
+                </fieldset>
+                <p class="replySuccess icons icon-check hide">
+                    {{ dictionary["item.YourMessageHasBeenSent"] }}
+                    <span>{{ dictionary["replymessage.SendAnotherMessage"] }} </span>
+                </p>
+            </form>
+        </div>
+    </div>
+
     <div id="more-suggestions" class="help-content-display">
         <h3 class="title">{{ dictionary["help.MoreGuidelines"] }}</h3>
         <div class="faqs">

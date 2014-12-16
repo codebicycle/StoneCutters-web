@@ -9,7 +9,8 @@ module.exports = Base.extend({
     className: 'pages-help-view',
     events: {
         'click .help-toggle-content': 'helpToggleContent',
-        'click .question .icons': 'helpToggleQuestion'
+        'click .question .icons': 'helpToggleQuestion',
+        'submit [data-contact-form]': 'submitForm'
     },
     helpToggleContent: function(event) {
         event.preventDefault();
@@ -39,6 +40,52 @@ module.exports = Base.extend({
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();
         }
-    }
+    },
+    submitForm: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
 
+        var data = Base.prototype.getTemplateData.call(this);
+        var fields = [
+            this.$('[name="subject"]'),
+            this.$('[name="name"]'),
+            this.$('[name="email"]'),
+            this.$('[name="message"]')
+        ];
+        var message = {
+            'empty': data.dictionary["postingerror.PleaseCompleteThisField"],
+            'invalidEmail': data.dictionary["postingerror.InvalidEmail"],
+            'wrongCode': data.dictionary["supportform.VerificationCodeError"],
+            'thankYou': data.dictionary["supportform.ThankYou"]
+        };
+        var emailRegExp = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
+        var valid = true;
+        var value;
+
+        $(fields).each( function() {
+            value = $(this).val();
+            if (value === '') {
+                $(this).siblings('.error').text(message.empty).removeClass('hide');
+                valid = false;
+            } 
+            else if ($(this).selector == '[name="email"]' && 
+                    !emailRegExp.test(value)) {
+                $(this).siblings('.error').text(message.invalidEmail).removeClass('hide');
+                valid = false;
+            }
+            else {
+                $(this).siblings('.error').addClass('hide');
+            }
+        });
+
+        if (!valid) {
+            $('.spinner').addClass('hide');
+            $('#contactForm [type="submit"]').removeClass('hide');
+        }
+        else {
+            $('.spinner').removeClass('hide');
+            $('#contactForm [type="submit"]').addClass('hide');
+        }
+    }
 });
