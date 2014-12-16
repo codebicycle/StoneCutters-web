@@ -6,6 +6,7 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
+var Item = require('../../../../../../models/item');
 window.URL = window.URL || window.webkitURL;
 
 function onpopstate(event) {
@@ -32,6 +33,9 @@ module.exports = Base.extend({
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
     },
     postRender: function() {
+        this.item = this.item || new Item(this.options.item || {}, {
+            app: this.app
+        });
         $(window).on('beforeunload', this.onBeforeUnload);
         $(window).on('unload', {
             async: false

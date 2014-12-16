@@ -107,7 +107,7 @@ function flow(params, callback) {
 
         var postingController = function(postingSession, cities, item, fields) {
             var currentLocation = {};
-
+console.log(item);
             tracking.setPage('desktop_step1');
             if (location.current) {
                 switch (location.current.type) {
@@ -127,7 +127,10 @@ function flow(params, callback) {
                 postingSession: postingSession.get('postingSession'),
                 cities: cities,
                 currentLocation: currentLocation,
-                item: item || new Item(),
+                include: ['item'],
+                item: item || new Item({}, {
+                    app: this.app
+                }),
                 fields: fields
             }, false);
         }.bind(this);
@@ -135,7 +138,11 @@ function flow(params, callback) {
         var postingFlowController = function(postingSession, item, fields) {
             callback(null, 'post/flow/index', {
                 postingSession: postingSession.get('postingSession'),
-                item: item || new Item()
+                include: ['item'],
+                item: item || new Item({}, {
+                    app: this.app
+                }),
+                fields: fields
             }, false);
         }.bind(this);
 

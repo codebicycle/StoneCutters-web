@@ -6,6 +6,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
+var Item = require('../../../../../../models/item');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -57,6 +58,10 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
+        this.item = this.item || new Item(this.options.item || {}, {
+            app: this.app
+        });
+
         var editSubCategory = this.$('input[name=editSubCategory]').val();
         if (editSubCategory) {
             this.$('#posting-categories-view').trigger('editCategory', [this.$('input[name=editSubCategory]').val()]);
@@ -101,7 +106,6 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        console.log(subcategory.fields.contactInformation[2].value);
         var email = subcategory.fields.contactInformation[2].value ? subcategory.fields.contactInformation[2].value.value : '';
 
         if (this.form['category.id'] === subcategory.id) {
