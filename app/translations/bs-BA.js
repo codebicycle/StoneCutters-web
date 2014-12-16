@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Poni\u0161titi',
     'supportform.Subject': 'Subjekt:',
     'supportform.Submit': 'Dostaviti',
-    'supportform.VerificationCode': 'Verifikacijski k\xF4d:',
-    'supportform.VerificationCodeTip': 'Molimo unesite tekst ta\u010Dno onako kako se pojavljuje. Vodite ra\u010Duna o velikim i malim slovima.',
     'seccion-30.478': ' Ukloni oglas',
     'seccion-31.454': 'Lokacija:',
     'seccion-35.559': 'E-mail',

@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Reset',
     'supportform.Subject': 'Emne:',
     'supportform.Submit': 'Send',
-    'supportform.VerificationCode': 'Bekreftelseskode:',
-    'supportform.VerificationCodeTip': 'Vennligst angi teksten n\xF8yaktig som den st\xE5r. Ta hensyn til sm\xE5 og store bokstaver.',
     'seccion-30.478': 'Slett annonsen',
     'seccion-31.454': 'Sted:',
     'seccion-35.559': 'Epost',

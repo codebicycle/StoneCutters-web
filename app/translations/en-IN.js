@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Reset',
     'supportform.Subject': 'Subject:',
     'supportform.Submit': 'Submit',
-    'supportform.VerificationCode': 'Verification Code: ',
-    'supportform.VerificationCodeTip': 'Please enter the text exactly as it appears. Consider upper and lower case.',
     'seccion-30.478': 'Remove Ad',
     'seccion-31.454': 'Location:',
     'seccion-35.559': 'Email',

@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Reinicia',
     'supportform.Subject': 'Assumpte:',
     'supportform.Submit': 'Envia',
-    'supportform.VerificationCode': 'Codi de verificaci\xF3:',
-    'supportform.VerificationCodeTip': 'Introdu\xEFu el text tal i com apareix exactament. Tingueu en compte l\'\xFAs de min\xFAscules i maj\xFAscules.',
     'seccion-30.478': 'Eliminar Anunci',
     'seccion-31.454': 'Ubicaci\xF3:',
     'seccion-35.559': 'Correu electr\xF2nic',

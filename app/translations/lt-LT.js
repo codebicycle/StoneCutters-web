@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Nustatyti i\u0161 naujo',
     'supportform.Subject': 'Tema:',
     'supportform.Submit': 'Pateikti',
-    'supportform.VerificationCode': 'Patvirtinimo kodas:',
-    'supportform.VerificationCodeTip': 'Tekst\u0105 \u012Fveskite lygiai taip, kaip j\u012F matote. Atkreipkite d\u0117mes\u012F \u012F did\u017Ei\u0105sias ir ma\u017E\u0105sias raides.',
     'seccion-30.478': '\u0160alinti+skelbim\u0105',
     'seccion-31.454': 'Vieta:',
     'seccion-35.559': 'el. pa\u0161tas',

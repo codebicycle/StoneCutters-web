@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Herstel',
     'supportform.Subject': 'Onderwerp:',
     'supportform.Submit': 'Dien in',
-    'supportform.VerificationCode': 'Verifi\xEBringskode:',
-    'supportform.VerificationCodeTip': 'Voer asseblief die teks in presies soos dit lyk. Slaan ag op hoof- en kleinletters.',
     'seccion-30.478': 'Verwyder+Lysting',
     'seccion-31.454': 'Ligging:',
     'seccion-35.559': 'E-pos',

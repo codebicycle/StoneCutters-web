@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Seti upya',
     'supportform.Subject': 'Mada:',
     'supportform.Submit': 'Wasilisha',
-    'supportform.VerificationCode': 'Msimbo wa Uthibitisho:',
-    'supportform.VerificationCodeTip': 'Tafadhali ingiza matini hasa kama inavyoonekana. Zingatia herufi kubwa na ndogo.',
     'seccion-30.478': 'Ondoa tangazo',
     'seccion-31.454': 'Mahali:',
     'seccion-35.559': 'Barua pepe',

@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': '\uB9AC\uC14B',
     'supportform.Subject': '\uC81C\uBAA9:',
     'supportform.Submit': '\uC81C\uCD9C\uD558\uAE30',
-    'supportform.VerificationCode': '\uD655\uC778\uCF54\uB4DC: ',
-    'supportform.VerificationCodeTip': '\uBCF4\uC774\uB294 \uADF8\uB300\uB85C \uC785\uB825\uD558\uC2DC\uAE30 \uBC1C\uBC14\uB2C8\uB2E4. \uB300\uBB38\uC790, \uC18C\uBB38\uC790\uB97C \uAC00\uB824 \uC8FC\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.',
     'seccion-30.478': '\uC81C\uD488\uBAA9\uB85D+\uC0AD\uC81C\uD558\uAE30',
     'seccion-31.454': '\uC704\uCE58:',
     'seccion-35.559': 'Email',

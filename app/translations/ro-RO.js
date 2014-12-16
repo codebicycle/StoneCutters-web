@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Reseteaz\u0103',
     'supportform.Subject': 'Subiect:',
     'supportform.Submit': 'Trimite',
-    'supportform.VerificationCode': 'Cod de Verificare: ',
-    'supportform.VerificationCodeTip': 'V\u0103 rug\u0103m intra\u0163i textul exact a\u015Fa cum apare. Considera literele mari \u015Fi mici.',
     'seccion-30.478': '\u015Eterge+Listare',
     'seccion-31.454': 'Loca\u0163ia:',
     'seccion-35.559': 'Email',

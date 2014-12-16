@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Slet',
     'supportform.Subject': 'Emne:',
     'supportform.Submit': 'Send',
-    'supportform.VerificationCode': 'Verifikationskode:',
-    'supportform.VerificationCodeTip': 'Indtast venligst teksten, pr\xE6cis som den st\xE5r. V\xE6r opm\xE6rksom p\xE5 store og sm\xE5 bogstaver.',
     'seccion-30.478': 'Fjern+liste',
     'seccion-31.454': 'Sted:',
     'seccion-35.559': 'E-mail',

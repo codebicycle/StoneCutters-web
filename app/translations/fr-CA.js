@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'R\xE9initialiser',
     'supportform.Subject': 'Objet :',
     'supportform.Submit': 'Soumettre',
-    'supportform.VerificationCode': 'Code de V\xE9rification:',
-    'supportform.VerificationCodeTip': 'Veuillez entrer le texte tel qu\'il appara\xEEt \xE0 l\'\xE9cran. Respectez les majuscules et les minuscules.',
     'seccion-30.478': 'Retirer l\'annonce',
     'seccion-31.454': 'Endroit:',
     'seccion-35.559': 'Email',

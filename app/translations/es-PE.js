@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Reiniciar',
     'supportform.Subject': 'Asunto:',
     'supportform.Submit': 'Enviar',
-    'supportform.VerificationCode': 'C\xF3digo de verificaci\xF3n:',
-    'supportform.VerificationCodeTip': 'Escribe el texto tal como se muestra. Ten en cuenta las letras may\xFAsculas y las min\xFAsculas.',
     'seccion-30.478': 'Eliminar Anuncio',
     'seccion-31.454': 'Ubicaci\xF3n:',
     'seccion-35.559': 'Email',

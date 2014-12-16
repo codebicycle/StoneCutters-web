@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Zur\xFCcksetzen',
     'supportform.Subject': 'Betreff:',
     'supportform.Submit': 'Einreichen',
-    'supportform.VerificationCode': 'Best\xE4tigungscode: ',
-    'supportform.VerificationCodeTip': 'Bitte geben Sie den Text genau so ein, wie er Ihnen in der Box erscheint. Bitte ber\xFCcksichtigen Sie Gro\xDF- und Kleinschreibung.',
     'seccion-30.478': 'Anzeige l\xF6schen',
     'seccion-31.454': 'Standort:',
     'seccion-35.559': 'E-Mail',

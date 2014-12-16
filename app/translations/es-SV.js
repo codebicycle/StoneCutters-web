@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Cancelar',
     'supportform.Subject': 'Asunto:',
     'supportform.Submit': 'Enviar',
-    'supportform.VerificationCode': 'C\xF3digo de Verificaci\xF3n:',
-    'supportform.VerificationCodeTip': 'Por favor ingresa el texto exactamente como aparece. Toma en cuenta las palabras en may\xFAsculas y min\xFAsculas.',
     'seccion-30.478': 'Eliminar Anuncio',
     'seccion-31.454': 'Ubicaci\xF3n:',
     'seccion-35.559': 'Email',

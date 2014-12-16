@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'I-reset',
     'supportform.Subject': 'Paksa',
     'supportform.Submit': 'Isumite',
-    'supportform.VerificationCode': 'Verification Code: ',
-    'supportform.VerificationCodeTip': 'Pakilagay ang mga letra pareho kung paano ito nakikita. Isaalang-alang ang malaki at maliit na titik.',
     'seccion-30.478': 'Tanggalin+Listahan',
     'seccion-31.454': 'Lokasyon:',
     'seccion-35.559': 'Email',

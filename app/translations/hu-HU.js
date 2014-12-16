@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Vissza\xE1ll\xEDt\xE1s',
     'supportform.Subject': 'T\xE1rgy:',
     'supportform.Submit': 'K\xFCld\xE9s',
-    'supportform.VerificationCode': 'Ellen\u0151rz\u0151 k\xF3d:',
-    'supportform.VerificationCodeTip': 'A sz\xF6veget pontosan \xFAgy \xEDrja be, ahogyan megjelenik. Vegye figyelembe a kis- \xE9s nagybet\u0171ket.',
     'seccion-30.478': 'Hirdet\xE9s+t\xF6rl\xE9se',
     'seccion-31.454': 'Hely:',
     'seccion-35.559': 'E-mail',

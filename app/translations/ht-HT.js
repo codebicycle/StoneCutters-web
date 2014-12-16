@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Anile',
     'supportform.Subject': 'Rezon :',
     'supportform.Submit': 'Voye l',
-    'supportform.VerificationCode': 'Kod Verifikasyon :',
-    'supportform.VerificationCodeTip': 'Tanpri mete kod lan jan li par\xE8t sou ekran an.  Mete li jan li ye an majiskil ou miniskil. ',
     'seccion-30.478': 'Efase Anons',
     'seccion-31.454': 'Katye: ',
     'seccion-35.559': 'Im\xE8l',

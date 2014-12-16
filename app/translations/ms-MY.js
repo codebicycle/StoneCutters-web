@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Set semula',
     'supportform.Subject': 'Subjek:',
     'supportform.Submit': 'Hantar',
-    'supportform.VerificationCode': 'Kod Pengesahan: ',
-    'supportform.VerificationCodeTip': 'Sila masukkan teks seperti yang dapat anda lihat. Pastikan huruf besar dan kecil di masukkan dengan tepat.',
     'seccion-30.478': 'Buang+Penyenaraian',
     'seccion-31.454': 'Lokasi:',
     'seccion-35.559': 'Emel',

@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Anuluj',
     'supportform.Subject': 'Temat:',
     'supportform.Submit': 'Wy\u015Blij',
-    'supportform.VerificationCode': 'Kod weryfikacyjny: ',
-    'supportform.VerificationCodeTip': 'Wprowad\u017A tekst dok\u0142adnie tak, jak go widzisz. Uwa\u017Caj na ma\u0142e i du\u017Ce litery.',
     'seccion-30.478': 'Usu\u0144+og\u0142oszenie',
     'seccion-31.454': 'Lokalizacja:',
     'seccion-35.559': 'E-mail',

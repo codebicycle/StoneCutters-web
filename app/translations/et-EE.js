@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'T\xFChista',
     'supportform.Subject': 'Teema:',
     'supportform.Submit': 'Saada',
-    'supportform.VerificationCode': 'Kinnituskood: ',
-    'supportform.VerificationCodeTip': 'Palun sisestage tekst t\xE4pselt nii, nagu ta paistab. V\xF5tke arvesse suur- ja v\xE4iket\xE4hti.',
     'seccion-30.478': 'Eemalda+kuulutus',
     'seccion-31.454': 'Asukoht:',
     'seccion-35.559': 'E-post',

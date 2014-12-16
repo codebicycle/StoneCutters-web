@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Obnovi\u0165',
     'supportform.Subject': 'Predmet:',
     'supportform.Submit': 'Odosla\u0165',
-    'supportform.VerificationCode': 'Overovac\xED k\xF3d:',
-    'supportform.VerificationCodeTip': 'Text zadajte presne, ako je zobrazen\xFD. Zoh\u013Eadnite ve\u013Ek\xE9 a mal\xE9 p\xEDsmen\xE1.',
     'seccion-30.478': 'odstr\xE1ni\u0165+ozn\xE1menie',
     'seccion-31.454': 'Umiestnenie:',
     'seccion-35.559': 'E-mail',

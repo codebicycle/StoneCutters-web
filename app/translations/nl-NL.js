@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Opnieuw',
     'supportform.Subject': 'Onderwerp:',
     'supportform.Submit': 'Verzenden',
-    'supportform.VerificationCode': 'Verificatiecode: ',
-    'supportform.VerificationCodeTip': 'Vul de tekst precies in zoals deze wordt weergegeven. Let op hoofd- en kleine letters.',
     'seccion-30.478': 'Verwijder+Aadvertentie',
     'seccion-31.454': 'Locatie:',
     'seccion-35.559': 'E-mail',

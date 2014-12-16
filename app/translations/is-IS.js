@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Endurr\xE6sa',
     'supportform.Subject': 'Umr\xE6\xF0uefni:',
     'supportform.Submit': 'Senda',
-    'supportform.VerificationCode': 'Sta\xF0festingark\xF3\xF0i:',
-    'supportform.VerificationCodeTip': 'Vinsamlegast sl\xE1\xF0u textann inn eins og hann birtist. Taktu tillit til h\xE1stafa og l\xE1gstafa.',
     'seccion-30.478': 'Fjarl\xE6gja augl\xFDsingu',
     'seccion-31.454': 'Sta\xF0setning:',
     'seccion-35.559': 't\xF6lvup\xF3stur',

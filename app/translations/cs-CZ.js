@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Resetovat',
     'supportform.Subject': 'P\u0159edm\u011Bt:',
     'supportform.Submit': 'Odeslat',
-    'supportform.VerificationCode': 'Ov\u011B\u0159ovac\xED k\xF3d:',
-    'supportform.VerificationCodeTip': 'Zadejte pros\xEDm text p\u0159esn\u011B tak, jak je naps\xE1n. Rozli\u0161ujte velk\xE1 a mal\xE1 p\xEDsmena.',
     'seccion-30.478': 'Odstranit+z\xE1znam',
     'seccion-31.454': 'M\xEDsto:',
     'seccion-35.559': 'E-mail',

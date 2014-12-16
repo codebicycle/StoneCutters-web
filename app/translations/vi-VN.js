@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Kh\u1EDFi \u0111\u1ED9ng l\u1EA1i',
     'supportform.Subject': 'Ch\u1EE7 \u0111\u1EC1:',
     'supportform.Submit': 'Tr\xECnh',
-    'supportform.VerificationCode': 'M\xE3 x\xE1c nh\u1EADn: ',
-    'supportform.VerificationCodeTip': 'Vui l\xF2ng nh\u1EADp ch\xEDnh x\xE1c d\xF2ng ch\u1EEF nh\u01B0 n\xF3 xu\u1EA5t hi\u1EC7n. L\u01B0u \xFD ch\u1EEF hoa v\xE0 ch\u1EEF th\u01B0\u1EDDng',
     'seccion-30.478': 'G\u1EE1 b\u1ECF+Danh m\u1EE5c',
     'seccion-31.454': '\u0110\u1ECBa \u0111i\u1EC3m:',
     'seccion-35.559': 'Email',

@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'S\u0131f\u0131rla',
     'supportform.Subject': 'Konu:',
     'supportform.Submit': 'Yolla',
-    'supportform.VerificationCode': 'Onay Kodu: ',
-    'supportform.VerificationCodeTip': 'L\xFCtfen yaz\u0131y\u0131 tam olarak g\xF6r\xFCnd\xFC\u011F\xFC \u015Fekilde girin. K\xFC\xE7\xFCk b\xFCy\xFCk harf farkl\u0131l\u0131klar\u0131na dikkat edin.',
     'seccion-30.478': '\u0130lan\u0131+Kald\u0131r',
     'seccion-31.454': 'B\xF6lge:',
     'seccion-35.559': 'E-Posta',

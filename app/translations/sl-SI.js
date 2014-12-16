@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Ponastavi',
     'supportform.Subject': 'Zadeva:',
     'supportform.Submit': 'Po\u0161lji',
-    'supportform.VerificationCode': 'Potrditvena koda:',
-    'supportform.VerificationCodeTip': 'Besedilo vnesite natanko tako, kot je prikazano. Upo\u0161tevajte velike in male \u010Drke.',
     'seccion-30.478': 'Odstrani objavo',
     'seccion-31.454': 'Lokacija:',
     'seccion-35.559': 'E-po\u0161ta',

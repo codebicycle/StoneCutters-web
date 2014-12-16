@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': '\xC5terst\xE4ll',
     'supportform.Subject': '\xC4mne',
     'supportform.Submit': 'Skicka',
-    'supportform.VerificationCode': 'Verifikationskod:',
-    'supportform.VerificationCodeTip': 'V\xE4nligen ange texten precis som den visas. Bet\xE4nk sm\xE5 och stora bokst\xE4ver.',
     'seccion-30.478': 'Radera+annons',
     'seccion-31.454': 'Ort:',
     'seccion-35.559': 'E-post',

@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Tyhjenn\xE4',
     'supportform.Subject': 'Aihe:',
     'supportform.Submit': 'L\xE4het\xE4',
-    'supportform.VerificationCode': 'Vahvistuskoodi:',
-    'supportform.VerificationCodeTip': 'Sy\xF6t\xE4 teksti juuri niin kuin se on annettu. Ota pienet ja isot kirjaimet huomioon.',
     'seccion-30.478': 'Poista ilmoitus',
     'seccion-31.454': 'Sijainti:',
     'seccion-35.559': 's\xE4hk\xF6posti',

@@ -128,8 +128,6 @@ module.exports = {
     'supportform.Reset': 'Atiestat\u012Bt',
     'supportform.Subject': 'Temats:',
     'supportform.Submit': 'Iesniegt',
-    'supportform.VerificationCode': 'Verifik\u0101cijas kods: ',
-    'supportform.VerificationCodeTip': 'L\u016Bdzu, ievadiet tekstu tie\u0161i t\u0101, k\u0101 tas redzams. \u0145emiet v\u0113r\u0101 lielos un mazos burtus.',
     'seccion-30.478': 'Dz\u0113st sludin\u0101jumu',
     'seccion-31.454': 'Atra\u0161an\u0101s vieta:',
     'seccion-35.559': 'E-pasts',
