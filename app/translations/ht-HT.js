@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Mod\xE8l',
     'itemdescriptionwiki.year': 'Ane',
     'itemwarning.Here': 'ici.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kategori',
     'popularsearchesbody.PopularCities': 'Vil kote l alam\xF2d',
     'popularsearchesbody.PopularOn': 'Li alam\xF2d sou <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filt',

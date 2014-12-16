@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Malli',
     'itemdescriptionwiki.year': 'Vuosi',
     'itemwarning.Here': 't\xE4st\xE4.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kategoriat',
     'popularsearchesbody.PopularCities': 'suosituissa paikkakunnissa',
     'popularsearchesbody.PopularOn': 'suosittuja <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Suodattimet',

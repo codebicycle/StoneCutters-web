@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Model',
     'itemdescriptionwiki.year': 'Letnik',
     'itemwarning.Here': 'tukaj.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kategorije',
     'popularsearchesbody.PopularCities': 'Popularni kraji',
     'popularsearchesbody.PopularOn': 'Popularno na <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filtri',

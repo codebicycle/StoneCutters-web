@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Modelo',
     'itemdescriptionwiki.year': 'Taon',
     'itemwarning.Here': 'dito.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Mga kategorya',
     'popularsearchesbody.PopularCities': 'Mga sikat na lungsod',
     'popularsearchesbody.PopularOn': 'Sikat sa <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Mga filter',

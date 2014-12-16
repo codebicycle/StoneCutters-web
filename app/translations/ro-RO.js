@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Model',
     'itemdescriptionwiki.year': 'An',
     'itemwarning.Here': 'aici.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Categorii ',
     'popularsearchesbody.PopularCities': 'Ora\u015Fe bine cunoscute',
     'popularsearchesbody.PopularOn': 'Bine cunoscute pe <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filtre',

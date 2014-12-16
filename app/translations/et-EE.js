@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Mudel',
     'itemdescriptionwiki.year': 'Aasta',
     'itemwarning.Here': 'siia.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kategooriad ',
     'popularsearchesbody.PopularCities': 'Menukas j\xE4rgmistes linnades',
     'popularsearchesbody.PopularOn': 'Menukas domeenis <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filtrid',

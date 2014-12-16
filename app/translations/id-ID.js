@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Model',
     'itemdescriptionwiki.year': 'Tahun',
     'itemwarning.Here': 'di sini',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kategori',
     'popularsearchesbody.PopularCities': 'Kota-kota populer',
     'popularsearchesbody.PopularOn': 'Populer di <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filter',

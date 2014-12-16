@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Model',
     'itemdescriptionwiki.year': 'Godina',
     'itemwarning.Here': 'ovdje.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kategorije',
     'popularsearchesbody.PopularCities': 'Popularni gradovi',
     'popularsearchesbody.PopularOn': 'Popularni na <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filteri',

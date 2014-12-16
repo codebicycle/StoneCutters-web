@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Modell',
     'itemdescriptionwiki.year': '\xC5r',
     'itemwarning.Here': 'h\xE4r.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kategorier',
     'popularsearchesbody.PopularCities': 'Popul\xE4ra st\xE4der',
     'popularsearchesbody.PopularOn': 'Popul\xE4r p\xE5 <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filter',

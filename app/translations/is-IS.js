@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Ger\xF0',
     'itemdescriptionwiki.year': '\xC1r',
     'itemwarning.Here': 'h\xE9r.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Flokkar',
     'popularsearchesbody.PopularCities': 'Vins\xE6lar borgir',
     'popularsearchesbody.PopularOn': 'Vins\xE6lt \xE1 <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'S\xEDur',

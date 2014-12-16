@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': '\u0AAE\u0ACB\u0AA1\u0AB2',
     'itemdescriptionwiki.year': '\u0AB5\u0AB0\u0ACD\u0AB7',
     'itemwarning.Here': 'here.',
+    'popularsearchesbody.CATEGORIES_BOX': '\u0AB5\u0AB0\u0ACD\u0A97\u0ACB',
     'popularsearchesbody.PopularCities': '\u0AB2\u0ACB\u0A95\u0AAA\u0ACD\u0AB0\u0ABF\u0AAF \u0AB6\u0AB9\u0AC7\u0AB0\u0ACB',
     'popularsearchesbody.PopularOn': '<<OLX_DOMAIN>> \u0AAA\u0AB0 \u0AB2\u0ACB\u0A95\u0AAA\u0ACD\u0AB0\u0ABF\u0AAF',
     'mobilepromo.Filters': '\u0AAB\u0ABF\u0AB2\u0ACD\u0A9F\u0AB0\u0ACD\u0AB8',

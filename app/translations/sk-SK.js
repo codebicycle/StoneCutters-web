@@ -247,6 +247,7 @@ module.exports = {
     'itemdescriptionwiki.model': 'Model',
     'itemdescriptionwiki.year': 'Rok',
     'itemwarning.Here': 'sem.',
+    'popularsearchesbody.CATEGORIES_BOX': 'Kateg\xF3rie  ',
     'popularsearchesbody.PopularCities': 'Ob\u013E\xFAben\xE9 mest\xE1',
     'popularsearchesbody.PopularOn': 'Ob\u013E\xFAben\xE9 v <<OLX_DOMAIN>>',
     'mobilepromo.Filters': 'Filtre',
