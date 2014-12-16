@@ -272,9 +272,7 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            //helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
-            console.log('[OLX_DEBUG]', 'redirections', 'seo', 'pictures', this.app.session.get('url'));
-            helpers.common.error.call(this, null, null, callback);
+            helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
         }
     }),
     users: function(params, callback) {

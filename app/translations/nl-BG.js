@@ -173,6 +173,7 @@ module.exports = {
     'posting_fields_1.validationError': 'Controleer de velden met fouten',
     'posting_fields_1.YourEmailAddressWontBeShared': 'Je emailadres wordt niet weergegeven',
     'posting_publishbutton.ValidationError': 'Er waren problemen met sommige velden.',
+    'posting_loginbox.existingUser': 'Ik ben reeds een gebruiker - inloggen',
     'posting_photos.RemovePhoto': 'Deze foto verwijderen',
     'posting_changecategorymod.Cancel': 'Annuleer',
     'item.ThisAdIsNoLongerAvailable': 'Deze advertentie is niet meer beschikbaar',
