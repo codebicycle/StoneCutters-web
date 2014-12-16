@@ -35,7 +35,6 @@ module.exports = {
                 dictionary: 'messages_date_format.1' + monthArr[itemDate.month]
             };
         }
-        console.log(itemDate.month);
         return formatDate;
     }
 };
