@@ -41,7 +41,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                     done.abort();
                     return redirect(body, false);
                 }
-                else if (!~userAgent.indexOf('Googlebot') && session.platform !== body.web_platform) {
+                else if (session.platform !== body.web_platform) {
                     done.abort();
                     return redirect(body, session.platform !== 'desktop');
                 }
