@@ -52,6 +52,7 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.internetOrg());
         rendrApp.use(middleware.dependencies());
+        rendrApp.use(middleware.sixpack());
     }
 
     server.expressApp.configure(expressConfiguration);

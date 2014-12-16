@@ -142,8 +142,6 @@ module.exports.getView = Base.getView = function(app, viewName, entryPath, callb
 };
 
 module.exports.requireView = Base.requireView = function(viewName, location, platform, entryPath) {
-    var View;
-
     if (!entryPath) {
         entryPath = process.cwd();
         if (entryPath.length === 1) {
