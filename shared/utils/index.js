@@ -16,13 +16,7 @@ var defaults = {
 function get(obj, keys, defaultValue) {
     var value;
 
-    if (!Array.isArray(keys)) {
-        if (typeof keys === 'undefined') {
-            keys = [];
-        } else {
-            keys = [keys];
-        }
-    }
+    keys = toArray(keys);
     if (typeof defaultValue === 'undefined') {
         defaultValue = null;
     }
@@ -73,6 +67,17 @@ function sort(params, comparator) {
     return sorted;
 }
 
+function toArray(value) {
+    if (!Array.isArray(value)) {
+        if (typeof value === 'undefined') {
+            value = [];
+        } else {
+            value = [value];
+        }
+    }
+    return value;
+}
+
 function noop() {}
 
 module.exports = _.extend({
@@ -82,5 +87,6 @@ module.exports = _.extend({
     daysDiff: daysDiff,
     getUserAgent: getUserAgent,
     sort: sort,
+    toArray: toArray,
     noop: noop
 }, qs, time, linker, string, crypto);

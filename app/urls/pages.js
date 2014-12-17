@@ -8,7 +8,10 @@ module.exports = {
         url: 'about'
     },
     'pages#help': {
-        url: 'help'
+        urls: [
+            'help',
+            'help/:active'
+        ]        
     },
     'pages#allstates': {
         urls: [

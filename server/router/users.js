@@ -87,6 +87,7 @@ module.exports = function userRouter(app) {
                 user = new User(_.extend(data, {
                     location: req.rendrApp.session.get('siteLocation'),
                     country: req.rendrApp.session.get('location').name,
+                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
                 }), {
                     app: req.rendrApp
