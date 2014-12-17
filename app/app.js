@@ -1,13 +1,15 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('rendr/shared/app');
+var Session = require('../shared/session');
+var utils = require('../shared/utils');
 var Fetcher = require('./bases/fetcher');
 var ModelStore = require('./bases/modelStore');
 var CollectionStore = require('./bases/collectionStore');
-var Session = require('../shared/session');
 var nunjucks = require('./modules/nunjucks');
-var _ = require('underscore');
 var Seo = require('./modules/seo');
+var helpers = require('./helpers');
 
 module.exports = Base.extend({
     defaults: {
@@ -39,6 +41,7 @@ module.exports = Base.extend({
             });
             this.router.currentView.onActionStart();
         }, this);
+        this.autolocate();
         Base.prototype.start.call(this);
     },
     getAppViewClass: function() {
@@ -121,6 +124,18 @@ module.exports = Base.extend({
             }
         }, this);
         return specs;
+    },
+    autolocate: function() {
+        if (!navigator || !navigator.geolocation || !helpers.features.isEnabled('autoLocation', this.session.get('platform'), this.session.get('location').url)) {
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(this.onAutolocationSuccess.bind(this), utils.noop, {
+            maximumAge: 0,
+            timeout: 6000
+        });
+    },
+    onAutolocationSuccess: function(position) {
+        this.set('autolocation', position);
     }
 });
 
