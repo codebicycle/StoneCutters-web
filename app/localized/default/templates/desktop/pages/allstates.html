@@ -6,7 +6,7 @@
         {% else %}
             <span class="icons icon-arrow"></span>
             <a href="{{ '/all-states' | link({ location: location.url }) }}">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}</a>
-            <span class="icons icon-arrow">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', states[0].name ) }}</span>            
+            <span class="icons icon-arrow">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', states[0].name ) }}</span>
         {% endif %}
 </div>
 <ul>
@@ -19,7 +19,7 @@
         {% if state.children | length > 0 %}
             {% if not state.selected %}
                 <h4 class="state-all-link">
-                    <a href="{{ (url + '/' + state.hostname) | link }}">[Ver todas las ciudades de {{ state.name }}]</a>
+                    <a href="{{ (url + '/' + state.hostname) | link }}">{{ dictionary["sitemap_map.see_all_cities"] | replace('<<STATE>>', state.name) }}</a>
                 </h4>
             {% endif %}
             <ul class="cities">
