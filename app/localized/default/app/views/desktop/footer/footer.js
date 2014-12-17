@@ -17,6 +17,7 @@ module.exports = Base.extend({
         var location = this.app.session.get('location');
         var states = data.states;
         var currentState = {};
+        var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -27,6 +28,7 @@ module.exports = Base.extend({
         }
 
         return _.extend({}, data, {
+            selectedLanguage: selectedLanguage,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name

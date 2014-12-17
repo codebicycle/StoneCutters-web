@@ -1,0 +1,32 @@
+@-moz-keyframes bounce_circles {
+    0% {
+        -moz-transform:scale(1)
+    }
+    100% {
+        -moz-transform:scale(.3)
+    }
+}
+@-webkit-keyframes bounce_circles {
+    0% {
+        -webkit-transform:scale(1)
+    }
+    100% {
+        -webkit-transform:scale(.3)
+    }
+}
+@-o-keyframes bounce_circles {
+    0% {
+        -o-transform:scale(1)
+    }
+    100% {
+        -o-transform:scale(.3)
+    }
+}
+@keyframes bounce_circles {
+    0% {
+        transform:scale(1)
+    }
+    100% {
+        transform:scale(.3)
+    }
+}

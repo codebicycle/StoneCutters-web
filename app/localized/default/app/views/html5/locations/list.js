@@ -11,6 +11,22 @@ module.exports = Base.extend({
     showAutoLocation: false,
     getTemplateData: function(){
         var data = Base.prototype.getTemplateData.call(this);
+        var citiesNames = [];
+        if (data.search) {
+            _.each(_.groupBy(_.pluck(data.cities, 'name')), function(val, key){
+                if (val.length > 1) {
+                    citiesNames.push(key);
+                }
+            });
+            _.each(data.cities, function(obj){
+                _.find(citiesNames, function(val){
+                    if (obj.name === val) {
+                        obj.repeat = true;
+                        return obj;
+                    }
+                });
+            });
+        }
         if (data.target) {
             data.target = data.target.replace(/(-neighborhood)([0-9_]+)/, '');
         }

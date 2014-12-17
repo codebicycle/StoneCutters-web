@@ -2,9 +2,9 @@
     <div class="items-paginations-buttons">
         {% if paginator.has('next') and paginator.has('previous') %}
             <a href="{{ paginator.get('previous') | linkig }}"  rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }} </a><!--
-            --><a href="{{ paginator.get('next') | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
+            --><a href="{{ paginator.get('next') | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["misc.NextPage"] }} </a>
         {% elif paginator.has('next') %}
-            <a href="{{ paginator.get('next') | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["itemslisting.Next"] }} </a>
+            <a href="{{ paginator.get('next') | linkig }}" rel="next" role="button" class="pagination-button next">{{ dictionary["misc.NextPage"] }} </a>
         {% else %}
             <a href="{{ paginator.get('previous') | linkig }}" rel="prev" role="button" class="pagination-button previous">{{ dictionary["defaultfooter.Back"] }}</a>
         {% endif %}
