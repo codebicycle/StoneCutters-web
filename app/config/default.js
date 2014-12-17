@@ -146,8 +146,8 @@ module.exports = {
                 countries: ['www.olx.ir']
             },
             listingFilters: {
-                worldwide: false,
-                countries: []
+                worldwide: true,
+                countries: ['www.olx.ir']
             },
             interstitialByADX: {
                 worldwide: false,
