@@ -39,6 +39,7 @@ function getSettings() {
             configAD.params = _.extend({}, configAD.params, configSlot.types[type].params || {}, {
                 container: slotname
             });
+
             configAD.options = _.extend({}, configAD.options, {
                 query: getQuery.call(this),
                 channel: createChannels.call(this, type),
@@ -169,7 +170,7 @@ function getCategoryQuery() {
 function getCategoriesQuery() {
     var configAD = utils.get(configAdServing, this.get('type'), {});
 
-    return _.reduce(configAD.options.queryCategories, function(memo, id) {
+    return _.reduce(configAD.options.queryCategories || [], function(memo, id) {
         var category = getCategoryName.call(this, id);
 
         if (category) {

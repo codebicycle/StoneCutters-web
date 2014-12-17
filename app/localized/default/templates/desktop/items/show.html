@@ -1,5 +1,7 @@
 {% include (template + "/items/itembreadcrumb.html") %}
 
+{% view 'partials/adserving', 'slot_top_item' %}
+
 <section id="item-page" data-qa="item" >
     {% include (template + "/items/itemcontent.html") %}
 
@@ -7,6 +9,8 @@
         {% include (template + "/items/itemprice.html") %}
 
         {% view 'items/partials/contactform' %}
+
+        {% view 'partials/adserving', 'slot_side_item' %}
     </aside>
 
     {% if seo %}

@@ -58,5 +58,66 @@ module.exports = {
                 excludedCategories: []
             }
         }
+    },
+    slot_side_listing: {
+        enabled: true,
+        defaultType: 'AFC',
+        location: 'Side',
+        types: {
+            AFC: {
+                params: {
+                    slotId: 8767812706,
+                    media: 'flash, image',
+                    width: '160',
+                    height: '600'
+                },
+                excludedCategories: []
+            }
+        }
+    },
+    slot_top_item: {
+        enabled: true,
+        defaultType: 'AFC',
+        location: 'Top',
+        types: {
+            AFC: {
+                params: {
+                    media: 'text, flash, image',
+                    width: '728',
+                    height: '90'
+                },
+                excludedCategories: []
+            }
+        }
+    },
+    slot_side_item: {
+        enabled: true,
+        defaultType: 'AFC',
+        location: 'Side',
+        types: {
+            AFC: {
+                params: {
+                    media: 'flash, image',
+                    width: '300',
+                    height: '250'
+                },
+                excludedCategories: []
+            }
+        }
+    },
+    slot_bottom_item: {
+        enabled: true,
+        defaultType: 'AFC',
+        location: 'Bottom',
+        types: {
+            AFC: {
+                params: {
+                    media: 'text',
+                    width: '728',
+                    height: '90'
+                },
+                excludedCategories: []
+            }
+        }
     }
 };

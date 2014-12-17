@@ -25,6 +25,7 @@ module.exports = Base.extend({
         }
         var settings = this.adServing.getSettings();
         var type = this.adServing.get('type');
+        var slotname = this.adServing.get('slotname');
 
         if (type == 'CSA') {
             if(this.isGoogleReferer() && settings.seo){
@@ -41,6 +42,15 @@ module.exports = Base.extend({
             this._includeCsaLib();
 
             window._googCsa('ads', settings.options, settings.params);
+        }
+        else if (type == 'AFC') {
+            this.createIframe({
+                slotname: slotname,
+                width: settings.params.width,
+                height: settings.params.height,
+                slotId: settings.params.slotId,
+                pubId: settings.options.pubId
+            });
         }
     },
     _includeCsaLib: function() {
@@ -61,6 +71,21 @@ module.exports = Base.extend({
             });
             $ads.appendTo('head');
         }
+    },
+    createIframe: function(params) {
+        var $ifr;
+
+        $ifr = $('<iframe></iframe>');
+        $ifr.attr({
+            height: params.height,
+            width: params.width,
+            src: 'about:blank',
+            id: params.slotname + '_iframe'
+        }).on('load', function() {
+            var domIfr = this.contentDocument || this.contentWindow.document;
+
+            domIfr.write('<style>body{margin:0;}</style><sc'+'ript type="text/javascript">  google_ad_client = "' + params.pubId + '";  google_ad_slot = "' + params.slotId + '";  google_ad_width = ' + params.width + ';  google_ad_height =  ' + params.height + ';  </sc'+'ript> <scr'+'ipt type="text/javascript"  src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </sc'+'ript>');
+        }).appendTo('#' + params.slotname);
     },
     _checkAdServing: function() {
         if (!this.adServing) {
