@@ -1,4 +1,4 @@
-<ul class="locations-tabs {{ 'locations-empty' if filters and not (filters.has('city') or filters.has('state')) }}" >
+<ul class="locations-tabs {{ 'locations-empty' if location.current.type == 'city' }}" >
     <li>
     {% if location.children | length == 0 %}
         {{ location.name }}
@@ -21,7 +21,7 @@
 </ul>
 {% if filters %}
     {% for filter in filters.toJSON() %}
-        {% if filter.name == 'state' or filter.name == 'city' %}
+        {% if filter.name == 'state' or (filter.name == 'city' and location.current.type != 'city') %}
             <ul class="locations-list">
                 {% for value in filter.value %}
                     <li><a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a></li>
