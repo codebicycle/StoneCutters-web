@@ -16,8 +16,11 @@ module.exports = function(environment) {
         var value = utils.get(CONFIG, keys);
 
         if (checkValue(value)) {
+            value = defaultValue;
             keys = _.clone(utils.toArray(keys));
-            value = utils.get(CONFIG, keys.splice(keys.length - 1, 1, 'default'), defaultValue);
+            if (keys.length) {
+                value = utils.get(CONFIG, keys.splice(keys.length - 1, 1, 'default'), defaultValue);
+            }
         }
         return value;
     }
