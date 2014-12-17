@@ -55,9 +55,9 @@ var trackers = {
         var url;
 
         if (keyade.isEnabled.call(this, page)) {
-            url = keyade.pageview.call(this, null, {
+            url = keyade.pageview.call(this, null, _.extend({}, query, {
                 page: page
-            });
+            }));
 
             if (url) {
                 ctx.urls.push(url);
