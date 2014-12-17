@@ -61,36 +61,31 @@ module.exports = Base.extend({
         this.item = this.item || new Item(this.options.item || {}, {
             app: this.app
         });
+        $(window).on('beforeunload', this.onBeforeUnload);
 
         if (this.item.has('category')) {
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category').id]);
         }
+        else{
 
-        $(window).on('beforeunload', this.onBeforeUnload);
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
-        if (this.isValid === undefined || this.isValid === null) {
-            if (!this.form['category.parentId']) {
+            this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+            if (this.isValid === undefined || this.isValid === null) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
-            }
-            if (!this.form['category.id']) {
                 this.errors['category.id'] = this.dictionary["postingerror.PleaseSelectSubcategory"];
-            }
-            if (!this.form.state) {
                 this.errors.state = this.dictionary["countryoptions.Home_SelectState"];
-            }
-            if (!this.form.location) {
                 this.errors.location = this.dictionary["countryoptions.Home_SelectCity"];
-            }
-            this.$('[required]').each(function eachRequiredField(index, field) {
-                var $field = $(field);
+                this.$('[required]').each(function eachRequiredField(index, field) {
+                    var $field = $(field);
 
-                if ($field.attr('name') !== 'state' && $field.attr('name') !== 'location') {
-                    this.errors[$field.attr('name')] = this.dictionary["postingerror.PleaseCompleteThisField"];
-                }
-            }.bind(this));
-            this.$el.trigger('errorsUpdate');
-            this.$('#posting-locations-view').trigger('formRendered');
+                    if ($field.attr('name') !== 'state' && $field.attr('name') !== 'location') {
+                        this.errors[$field.attr('name')] = this.dictionary["postingerror.PleaseCompleteThisField"];
+                    }
+                }.bind(this));
+                this.$el.trigger('errorsUpdate');
+                this.$('#posting-locations-view').trigger('formRendered');
+            }
         }
+
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
     },
@@ -104,14 +99,10 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
         var email = subcategory.fields.contactInformation[2].value ? subcategory.fields.contactInformation[2].value.value : '';
 
-        if (this.form['category.id'] === subcategory.id) {
-            return;
-        }
-        this.form['category.parentId'] = subcategory.parentId;
-        this.form['category.id'] = subcategory.id;
+        this.item.set('category.parentId', subcategory.parentId);
+        this.item.set('category.id', subcategory.id);
         delete this.errors['category.parentId'];
         delete this.errors['category.id'];
         _.each(this.pendingValidations, function eachValidation($field) {
@@ -138,7 +129,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         if (location) {
-            this.form.location = location;
+            this.item.set('location', location);
             delete this.errors.location;
             this.$el.trigger('errorsUpdate');
         }
@@ -153,7 +144,7 @@ module.exports = Base.extend({
 
         var $field;
         var shouldValidateField = false;
-        var canValidateFields = this.form['category.id'] && this.form['category.parentId'];
+        var canValidateFields = this.item.has('category');
 
         if (field instanceof window.jQuery) {
             $field = field;
@@ -173,13 +164,10 @@ module.exports = Base.extend({
             }
         }
         if (field.value) {
-            //ASI SE HACE
-            /*this.item.set(field.name, field.value);
-            this.item.unset(field.name);*/
-            this.form[field.name] = field.value;
+            this.item.set(field.name, field.value);
         }
         else {
-            delete this.form[field.name];
+            this.item.unset(field.name);
         }
         if (!this.edited) {
             this.handleBack();
@@ -216,8 +204,8 @@ module.exports = Base.extend({
         }
         else {
             data = {
-                'category.id': this.form['category.id'],
-                'category.parentId': this.form['category.parentId'],
+                'category.id': this.item.get('category.id'),
+                'category.parentId': this.item('category.parentId'),
                 'location': this.app.session.get('location').url,
                 'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
             };
@@ -300,7 +288,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         _.each(['currency_type', 'priceC', 'priceType'], function clean(field) {
-            delete this.form[field];
+            this.item.unset(field);
             delete this.errors[field];
         }.bind(this));
         this.$el.trigger('errorsUpdate');
@@ -313,10 +301,7 @@ module.exports = Base.extend({
         var item;
 
         function post(done) {
-            item = new Item(this.form, {
-                app: this.app
-            });
-            item.post(done);
+            this.item.post(done);
         }
 
         function success(response) {
@@ -326,7 +311,7 @@ module.exports = Base.extend({
             this.track({
                 category: category,
                 action: action,
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.get('id')].join('::')
+                custom: [category, this.item.get('category.parentId') || '-', this.item.get('category.id') || '-', action, item.get('id')].join('::')
             });
             helpers.common.redirect.call(this.app.router, '/posting/success/' + item.get('id') + '?sk=' + item.get('securityKey'), null, {
                 status: 200
@@ -360,9 +345,9 @@ module.exports = Base.extend({
 
         this.$('#posting-contact-view').trigger('disablePost');
         this.formErrors = [];
-        this.form.languageId = this.app.session.get('languageId');
-        this.form.platform = this.app.session.get('platform');
-        this.form.ipAddress = this.app.session.get('ip');
+        this.item.set('languageId', this.app.session.get('languageId'));
+        this.item.set('platform', this.app.session.get('platform'));
+        this.item.set('ipAddress', this.app.session.get('ip'));
         asynquence().or(fail.bind(this))
             .then(post.bind(this))
             .val(success.bind(this));
