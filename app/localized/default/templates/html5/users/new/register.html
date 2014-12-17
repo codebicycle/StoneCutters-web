@@ -1,0 +1,29 @@
+{% from macros import Errors %}
+{% if form and form.errors %}
+    {{ Errors(form.errors) }}
+{% elif (not agreeTerms | is('undefined')) %}
+    <div id="errors">
+        <span>{{ dictionary["register_confirmation.782"] }}</span><br/>
+    </div>
+{% endif %}
+<section id="login">
+    <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
+        <label>{{ dictionary["register_mail.Username"] }}</label>
+        <input type="text" name="username" data-qa="username-field" >
+        <label class="top">{{ dictionary["landingbody.EmailAddress"] }}</label>
+        <input type="text" name="email" data-qa="email-field" >
+        <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small>
+        <label class="top">{{ dictionary["register_mail.Password"] }}</label>
+        <input type="password" name="password" data-qa="password-field" >
+        <label class="terms top">
+            <input type="checkbox" name="agreeTerms" value="1" checked="true" data-qa="agree-terms-checkbox">
+            {{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>", (["<a href='" , "/terms" | link, "'>"] | join(''))) | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}
+        </label>
+        <div class="content-btns">
+            <a class="back" href="{{ '/login' | link }}">{{ dictionary["posting_loginbox.existingUser"] }}</a>
+            <input type="submit" value="{{ dictionary["registerheader.Register"] }}" class="accept" data-qa="registrate-button" >
+        </div>
+    </form>
+</section>
+
+{% view 'partials/tracking' %}
