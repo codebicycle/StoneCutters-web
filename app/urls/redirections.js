@@ -119,6 +119,12 @@ module.exports = {
             'q/:search/p-:page([0-9]+)'
         ]
     },
+    'redirections#staticSearchFilters': {
+        urls: [
+            'q/:search/c-:catId([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'q/:search/-:filters([a-zA-Z0-9_\\-\\.]+)'
+        ]
+    },
     'redirections#staticSearchMobile': {
         url: /^\/s\/.*/
     },
