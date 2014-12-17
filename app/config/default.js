@@ -260,5 +260,38 @@ module.exports = {
             'www.olx.com': 'JwT4VZIdr9x8Ctn4jWX3pA1qaewK3uMlnFS4iVoM4Zs',
             'www.olx.com.mx': 'NYmbUbWCvkxL9ADmytt25vu68NpFeyy3CkWCu3ZTppM'
         }
+    },
+    mails: {
+        domain: {
+            'www.olx.com.ng': 'olx.com',
+            'www.olx.com.ke': 'olx.com',
+            'www.olx.it': 'olx.com',
+            'www.olx.fr': 'olx.com',
+            'www.olx.es': 'olx.com',
+            'www.olx.cl': 'olx.com',
+            'www.olx.com.mx': 'olx.com'
+        },
+        support: {
+            'default': 'support',
+            'www.olx.com.ar': 'soporte',
+            'www.olx.com.co': 'soporte',
+            'www.olx.co.cr': 'soporte',
+            'www.olx.com.ec': 'soporte',
+            'www.olx.com.sv': 'soporte',
+            'www.olx.com.gt': 'soporte',
+            'www.olx.hn': 'soporte',
+            'www.olx.co.ke': 'support-ke',
+            'www.olx.com.ni': 'soporte',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.pa': 'soporte',
+            'www.olx.com.pe': 'soporte',
+            'www.olx.com.uy': 'soporte',
+            'www.olx.com.ve': 'soporte'
+        },
+        legal: {
+            'default':'legal',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.ke': 'support-ke'
+        }
     }
 };
