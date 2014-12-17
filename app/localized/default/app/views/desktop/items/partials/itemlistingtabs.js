@@ -25,7 +25,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = this.app.session.get('path');
+        var path = this.getPath();
         var $target = $(event.currentTarget);
         var filter = {
             name: 'sort',
@@ -41,15 +41,23 @@ module.exports = Base.extend({
         this.app.router.redirectTo(path);
     },
     refactorPath: function(path) {
-        path = this.cleanPage(path);
         if (path.slice(path.length - 1) === '/') {
             path = path.substring(0, path.length - 1);
         }
         return path;
     },
-    cleanPage: function(path) {
-        if (path.match(this.regexpFindPage)) {
-            path = path.replace(this.regexpReplacePage, '');
+    getPath: function() {
+        var path = this.app.session.get('path');
+        var currentRoute = this.app.session.get('currentRoute');
+        var category;
+
+        if (currentRoute.action === 'staticSearch') {
+            path = path.replace('/q/', '/nf/search/');
+            if (path.match(/\/c-[0-9]+/)) {
+                category = path.replace(/.*\/(c-[0-9]+).*/, '$1');
+                path = path.replace(/\/(c-[0-9]+)/, '');
+                path = path.replace('/search/', '/des-cat' + category.substring(1) + '/');
+            }
         }
         return path;
     }
