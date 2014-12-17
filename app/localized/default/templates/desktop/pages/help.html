@@ -1,13 +1,13 @@
 <div class="help-navigation">
     <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
     <ul>
-        <li class="selected">
+        <li {{ 'class="selected"' if not active }} >
             <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
         </li>
         <li>
             <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
         </li>
-        <li>
+        <li {{ 'class="selected"' if active == 'contact' }} >
             <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
         </li>
         <li>
@@ -16,7 +16,7 @@
     </ul>
 </div>
 <div class="help-content">
-    <div id="new-olx" class="help-content-display">
+    <div id="new-olx" class="help-content-display" {{ 'style="display:block"' if not active }}>
         <h3 class="title">{{ dictionary["help.NewToBrand"] }}</h3>
         <div class="faqs">
             <div class="question">
@@ -134,7 +134,7 @@
         </div>
     </div>
 
-    <div id="faqs" class="help-content-display">
+    <div id="faqs" class="help-content-display" {{ 'style="display:block"' if active == 'contact' }}>
         <h3 class="title">{{ dictionary["misc.FrequentQuestions"] }}</h3>
         <div class="faqs">
             <div class="question">
@@ -185,7 +185,13 @@
                     </p>
                 </div>
             </div>
-
+            <div class="question  {{ "faq-open" if active == 'contact' }}">
+                <h4 class="icons {{ "icon-arrow-down" if active == 'contact' else "icon-arrow-right" }}" >{{ dictionary["misc.HowToContact"] }}</h4>
+                <div class="question-content" {{ 'style="display:block"' if active == 'contact' }}>
+                    <p>{{ dictionary["misc.TechQuestions"] }} <a href="mailTo:{{ mails.support }}">{{ dictionary["misc.ClickHere"] }}</a></p>
+                    <p>{{ dictionary["misc.LegalQuestions"] }} <a href="mailTo:{{ mails.legal }}">{{ dictionary["misc.ClickHere"] }}</a></p>
+                </div>
+            </div>
         </div>
     </div>
     <div id="more-suggestions" class="help-content-display">
