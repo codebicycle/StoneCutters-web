@@ -31,11 +31,6 @@ module.exports = Base.extend({
         });
     },
 
-    postRender: function() {
-        console.log('dhdfh');
-        
-    },
-
     helpToggleContent: function(event) {
         event.preventDefault();
         var element = $(event.currentTarget);
