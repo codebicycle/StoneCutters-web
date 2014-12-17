@@ -379,7 +379,7 @@ module.exports = {
     'misc.EverythingSells': 'Kila kitu kinauzika kwa OLX!',
     'misc.Expired': 'Muda umekwisha',
     'misc.FindAdsCity': 'Tafuta matangazo katika mji wako',
-    'misc.Free-NoCommission': 'Ni bure na haina asilimia ya faida',
+    'misc.Free-NoCommission': 'Ni bure na <strong> haina asilimia ya faida </strong>',
     'misc.FreeDownload': 'Pakua bure',
     'misc.FreeEasyFast': 'Bure, rahisi na kwa haraka!',
     'misc.FreeIn_Mob': 'Bure katika',

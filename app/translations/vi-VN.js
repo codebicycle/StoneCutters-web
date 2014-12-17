@@ -379,7 +379,7 @@ module.exports = {
     'misc.EverythingSells': 'B\xE1n m\u1ECDi th\u1EE9 \u1EDF OLX!',
     'misc.Expired': '\u0110\xE3 h\u1EBFt h\u1EA1n',
     'misc.FindAdsCity': 'T\xECm rao v\u1EB7t trong th\xE0nh ph\u1ED1 c\u1EE7a b\u1EA1n',
-    'misc.Free-NoCommission': 'Mi\u1EC5n ph\xED v\xE0 kh\xF4ng m\u1EA5t hoa h\u1ED3ng',
+    'misc.Free-NoCommission': 'N\xF3 mi\u1EC5n ph\xED v\xE0 <strong> kh\xF4ng m\u1EA5t hoa h\u1ED3ng </strong>',
     'misc.FreeDownload': 'T\u1EA3i xu\u1ED1ng mi\u1EC5n ph\xED',
     'misc.FreeEasyFast': 'Mi\u1EC5n ph\xED, d\u1EC5 d\xE0ng v\xE0 nhanh ch\xF3ng!',
     'misc.FreeIn_Mob': 'Mi\u1EC5n ph\xED t\u1EA1i',

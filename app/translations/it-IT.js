@@ -379,7 +379,7 @@ module.exports = {
     'misc.EverythingSells': 'Si vende tutto con OLX!',
     'misc.Expired': 'Scaduto',
     'misc.FindAdsCity': 'Trova annunci nella tua citt\xE0',
-    'misc.Free-NoCommission': 'E\' gratuito e senza commissioni',
+    'misc.Free-NoCommission': 'E\' gratuito e <strong> senza commissioni </strong>',
     'misc.FreeDownload': 'Scarica gratuitamente',
     'misc.FreeEasyFast': 'Gratuito, semplice e rapido!',
     'misc.FreeIn_Mob': 'Gratis in',
