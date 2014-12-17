@@ -200,7 +200,7 @@ module.exports = {
             'www.olx.com.ve': 'ElLjb-uA1Oel1D9y3P4-WbbvrHB4NO2UOtkcLomsFkg',
             'www.jaovat.com': 'q0p5TRgd4gq-TbLCJZL38tpTimpocaWMN5e_ef4iAtg'
         }
-    }
+    },
     mails: {
         domain: {
             'www.olx.com.ng': 'olx.com',
@@ -235,5 +235,4 @@ module.exports = {
         }
 
     }
-};
 };

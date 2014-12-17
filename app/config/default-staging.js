@@ -245,7 +245,7 @@ module.exports = {
             'www.olx.co.uk': '3avqcjFDvQyE7sGOGGNH1HbN1VWV5D5THYJKu35BbZY',
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
-    }
+    },
     mails: {
         domain: {
             'www.olx.com.ng': 'olx.com',
@@ -280,5 +280,4 @@ module.exports = {
         }
 
     }
-};
 };
