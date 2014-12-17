@@ -53,7 +53,9 @@ function help(params, callback) {
 
     function controller() {
         // Delete this callback
-        callback(null, {});
+        callback(null, {
+                active: params.active
+        });
         /*
             TODO [MOB-4717] Help.
         var spec = {

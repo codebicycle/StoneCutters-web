@@ -12,12 +12,12 @@
         <p class="message">
             {{ dictionary["defaulthtmlhead.SorryThePageYouAreLookingForIsNotAvailable"] }}
         </p>
-        <h3>Encuentra lo que estás buscando</h3>
+        <h3>{{ dictionary["misc.FindLookFor"] }}</h3>
     {% endif %}
 
     {% view 'partials/search' %}
 
-    {{ '<h3>Navegue por las categorías para encontrar un item similar a su búsqueda:</h3>' if items }}
+    {{ ('<h3>' + dictionary["misc.BrowseCategories"] + '</h3>') if items }}
     <ul class="category-list">
         {% for category in categories %}
             <li class="category">

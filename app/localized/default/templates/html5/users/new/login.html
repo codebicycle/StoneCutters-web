@@ -1,0 +1,21 @@
+{% if form and form.errors %}
+    <div id="errors">
+        <span>{{ dictionary["myolx.EmailPasswordInvalid"] }}</span>
+    </div>
+{% endif %}
+<section id="login">
+    <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
+        <label>{{ dictionary["loginbox.Username"] }}</label>
+        <input type="text" name="usernameOrEmail" data-qa="login-username-field">
+        <label class="top">{{ dictionary["loginbox.Password"] }}</label>
+        <input type="password" name="password" data-qa="login-password-field">
+        <small><a href="{{ '/lostpassword' | link }}" class="forgot">{{ dictionary["landingbody.ForgotPassword"] }}</a></small>
+        <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
+        <div class="content-btns">
+            <a class="back" data-qa="register-link" href="{{ '/register' | link }}">{{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
+            <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="accept" data-qa="login-button" >
+        </div>
+    </form>
+</section>
+
+{% view 'partials/tracking' %}
