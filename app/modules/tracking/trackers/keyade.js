@@ -13,10 +13,9 @@ var generators = {
         this.app.session.clear('replyId');
         return [baseUrl, '&kaEvId=69473&kaEvAcId=3&kaEvMcId=', replyId, '&kaEvCt1=1'].join('');
     },
-    'post#success': function generate() {
-        var itemId = this.app.session.get('itemId');
-        
-        this.app.session.clear('itemId');
+    'post#success': function generate(options) {
+        var itemId = options.item.id;
+
         return [baseUrl, '&kaEvId=69472&kaEvAcId=2&kaEvMcId=', itemId, '&kaEvCt1=1'].join('');
     }
 };
@@ -29,7 +28,7 @@ function pageview(params, options) {
     var generator = utils.get(generators, options.page);
 
     if (generator && _.isFunction(generator)) {
-        return generator.call(this);
+        return generator.call(this, options);
     }
 }
 
