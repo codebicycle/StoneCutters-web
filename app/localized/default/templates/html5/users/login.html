@@ -12,7 +12,7 @@
         <small><a href="{{ '/lostpassword' | link }}" class="forgot">{{ dictionary["landingbody.ForgotPassword"] }}</a></small>
         <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
         <div class="content-btns">
-            <button class="back"><a href="{{ '/register' | link }}">{{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a></button>
+            <a class="back" data-qa="register-link" href="{{ '/register' | link }}">{{ dictionary["loginbox.CreateYourAccount"] | replace(':','.') }}</a>
             <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="accept" data-qa="login-button" >
         </div>
     </form>

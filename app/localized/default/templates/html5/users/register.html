@@ -20,7 +20,7 @@
             {{ dictionary["loginbox.IAgreeToTheTermsAndConditionsOfBrand"] | replace("<<LINK_TERMS_USE>>", (["<a href='" , "/terms" | link, "'>"] | join(''))) | replace("<</LINK_TERMS_USE>>","</a>") | replace("<<BRAND>>","OLX") }}
         </label>
         <div class="content-btns">
-            <button class="back"><a href="{{ '/login' | link }}">{{ dictionary["posting_loginbox.existingUser"] }}</a></button>
+            <a class="back" href="{{ '/login' | link }}">{{ dictionary["posting_loginbox.existingUser"] }}</a>
             <input type="submit" value="{{ dictionary["registerheader.Register"] }}" class="accept" data-qa="registrate-button" >
         </div>
     </form>
