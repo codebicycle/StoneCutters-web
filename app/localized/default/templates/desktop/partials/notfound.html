@@ -2,11 +2,11 @@
     <img width="349" height="173" src="{{ '/images/desktop/couch.jpg' | static }}" alt="" />
     {% if items %}
         <p class="message">
-            Ups! No se encontraron resultados para "{{ search }}"
+            {{ dictionary["countrystatecityv2.Sorry"] }} "{{ search }}"
         </p>
         <ul class="options">
             <li>{{ dictionary["crm_new_version.CheckSpelling"] }}</li>
-            <li>Realice una búsqueda más genérica.</li>
+            <li>{{ dictionary["itemslisting.RefineYourSearch"] }}</li>
         </ul>
     {% else %}
         <p class="message">
