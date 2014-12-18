@@ -198,30 +198,29 @@ function allstates(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var formatResponse = function(done, res) {
-            if (res.cities) {
-                var url = siteLocation.replace('www', params.state);
-                var currentState = res.states.get(url);
+        var formatResponse = function(done, response) {
+            var url = siteLocation.replace('www', params.state);
+            var state = response.states.get(url);
 
-                currentState.set({
-                    children: res.cities.toJSON(),
-                    selected: true
+            if (!params.state) {
+                return done({
+                    states: response.states.toJSON(),
+                    meta: response.states.meta
                 });
-                res.states.set([currentState]);
             }
-            done(res);
+            state = state.toJSON();
+            state.children = response.cities.toJSON();
+            state.selected = true;
+            done({
+                states: [state],
+                meta: response.states.meta
+            });
         }.bind(this);
 
         var success = function(response) {
-            var meta = response.meta;
-
             this.app.seo.addMetatag('robots', 'noindex, follow');
             this.app.seo.addMetatag('googlebot', 'noindex, follow');
-
-            callback(null, {
-                states: response.states.toJSON(),
-                meta: meta
-            });
+            callback(null, response);
         }.bind(this);
 
         var error = function(err, res) {
