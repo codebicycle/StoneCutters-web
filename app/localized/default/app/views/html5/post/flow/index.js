@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view').requireView('post/flow/index');
+var Categories = require('../../../../../../../collections/categories');
 var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
@@ -40,6 +41,9 @@ module.exports = Base.extend({
         $(window).on('unload', {
             async: false
         }, this.onExit.bind(this));
+        this.options.categories = this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories, {
+            app: this.app
+        });
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
         this.attachTrackMe(function(category, action) {

@@ -65,11 +65,11 @@ module.exports = {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
         'www.olx.com.sv': {
-            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
             columns: [4, 3, 3]
         },
         'www.olx.com.gt': {
-            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
             columns: [4, 3, 3]
         },
         'www.olx.co.tz': {
@@ -161,7 +161,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.ir']
+                countries: []
             },
             listingFilters: {
                 worldwide: true,

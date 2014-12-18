@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': '\u0627\u0644\u0645\u062F\u064A\u0646\u0629',
     'messages_site_class.30': '\u0646\u0639\u0645',
     'messages_user_management_current_ads.EditMyListing': '\u0645\u0639\u0627\u0644\u062C\u0629 \u0623\u0639\u0644\u0627\u0646\u064A',
+    'topcities.SelectLocation': 'Select a Location',
     'unexistingitem.ListingUnavailable': '\u0627\u0639\u0644\u0627\u0646 \u0644\u064A\u0633 \u062C\u0627\u0647\u0632 ',
     'landingbody.EmailAddress': ' Email \u0639\u0646\u0648\u0627\u0646 ',
     'landingbody.ForgotPassword': '\xBF\u0646\u0633\u064A\u062A \u0627\u0644\u0633\u0631 ?',

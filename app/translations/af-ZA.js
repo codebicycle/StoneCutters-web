@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Stad',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Redigeer My Lysting',
+    'topcities.SelectLocation': 'Kies \'n Plek',
     'unexistingitem.ListingUnavailable': 'Hierdie lysting is nie meer beskikbaar nie',
     'landingbody.EmailAddress': 'E-posadres',
     'landingbody.ForgotPassword': 'Wagwoord vergeet?',
