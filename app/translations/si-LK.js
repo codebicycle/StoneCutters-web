@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': '\u0DB1\u0D9C\u0DBB\u0DBA',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': '\u0DB8\u0D9C\u0DDA \u0DBD\u0DD0\u0DBA\u0DD2\u0DC3\u0DCA\u0DAD\u0DD4 \u0DC3\u0D82\u0DC1\u0DDD\u0DB0\u0DB1\u0DBA \u0D9A\u0DBB\u0DB1\u0DCA\u0DB1',
+    'topcities.SelectLocation': '\u0DC3\u0DCA\u0DAE\u0DCF\u0DB1\u0DBA\u0D9A\u0DCA \u0DAD\u0DDD\u0DBB\u0DB1\u0DCA\u0DB1',
     'unexistingitem.ListingUnavailable': '\u0DB8\u0DD9\u0DB8 \u0DBD\u0DD0\u0DBA\u0DD2\u0DC3\u0DCA\u0DAD\u0DD4\u0DC0 \u0DAD\u0DC0\u0DAF\u0DD4\u0DBB\u0DA7\u0DAD\u0DCA \u0DBD\u0DB6\u0DCF \u0D9C\u0DD0\u0DB1\u0DD3\u0DB8\u0DA7 \u0DB1\u0DDC\u0DB8\u0DD0\u0DAD',
     'landingbody.EmailAddress': '\u0D8A\u0DB8\u0DDA\u0DBD\u0DCA \u0DBD\u0DD2\u0DB4\u0DD2\u0DB1\u0DBA',
     'landingbody.ForgotPassword': 'Forgot password?',

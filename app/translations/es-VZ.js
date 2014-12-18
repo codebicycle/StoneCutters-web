@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Ciudad',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar mi publicaci&#243;n',
+    'topcities.SelectLocation': 'Selecciona una ubicaci\xF3n',
     'unexistingitem.ListingUnavailable': 'El anuncio no est\xE1 disponible',
     'landingbody.EmailAddress': 'Direcci\xF3n de Email',
     'landingbody.ForgotPassword': '\xBFOlvidaste tu contrase\xF1a?',

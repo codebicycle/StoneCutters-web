@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'By',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonse',
+    'topcities.SelectLocation': 'Velg et sted',
     'unexistingitem.ListingUnavailable': 'Annonsen er ikke lenger tilgjengelig',
     'landingbody.EmailAddress': 'E-postadresse',
     'landingbody.ForgotPassword': 'Glemt passord?',

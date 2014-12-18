@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'By',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonce',
+    'topcities.SelectLocation': 'V\xE6lg placering',
     'unexistingitem.ListingUnavailable': 'Denne annonce er ikke l\xE6ngere tilg\xE6ngelig',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Glemt password?',

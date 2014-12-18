@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Kota',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
+    'topcities.SelectLocation': 'Pilih Lokasi',
     'unexistingitem.ListingUnavailable': 'Iklan ini tidak lagi tersedia',
     'landingbody.EmailAddress': 'Alamat Email',
     'landingbody.ForgotPassword': 'Lupa kata sandi?',

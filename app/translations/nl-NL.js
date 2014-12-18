@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Stad',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Mijn advertentie bewerken',
+    'topcities.SelectLocation': 'Kies een locatie',
     'unexistingitem.ListingUnavailable': 'Deze advertentie is niet meer beschikbaar',
     'landingbody.EmailAddress': 'E-mailadres',
     'landingbody.ForgotPassword': 'Wachtwoord vergeten?',

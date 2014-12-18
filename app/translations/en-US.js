@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'City',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Edit My Ad',
+    'topcities.SelectLocation': 'Select a Location',
     'unexistingitem.ListingUnavailable': 'This ad is no longer available',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Forgot password?',

@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Lungsod',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'I-edit ang aking Patalastas',
+    'topcities.SelectLocation': 'Pumili ng isang Lokasyon',
     'unexistingitem.ListingUnavailable': 'Ang patalastas na ito ay hindi na available.',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Nakalimutan ang iyong password?',

@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Mesto',
     'messages_site_class.30': 'OK',
     'messages_user_management_current_ads.EditMyListing': 'Upravi\u0165 moje ozn\xE1menie',
+    'topcities.SelectLocation': 'Vyberte miesto',
     'unexistingitem.ListingUnavailable': 'Toto ozn\xE1menie u\u017E nie je dostupn\xE9.',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'landingbody.ForgotPassword': 'Zabudli ste heslo?',
