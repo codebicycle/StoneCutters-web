@@ -5,9 +5,39 @@
         a {
             display: inline-block;
             vertical-align: middle;
-            img {
-                display: block;
-                max-height: 40px;
+            height: 36px;
+            width: 108px;
+            background-image: url(imageUrl/images/common/marketing/apps.gif);
+
+            &.google-play-en {
+                background-position: -3px -3px;
+            }
+            &.app-store-en {
+                background-position: -118px -3px;
+            }
+            &.google-play-es {
+                background-position: -3px -52px;
+            }
+            &.app-store-es {
+                background-position: -118px -52px;
+            }
+            &.google-play-fr {
+                background-position: -3px -101px;
+            }
+            &.app-store-fr {
+                background-position: -118px -101px;
+            }
+            &.google-play-it {
+                background-position: -3px -150px;
+            }
+            &.app-store-it {
+                background-position: -118px -150px;
+            }
+            &.google-play-pt {
+                background-position: -3px -199px;
+            }
+            &.app-store-pt {
+                background-position: -118px -199px;
             }
         }
     }
@@ -21,7 +51,7 @@
         vertical-align: middle;
     }
 
-    .icon-sketchyarrow::before { 
+    .icon-sketchyarrow::before {
         float: right;
         font-size: $m;
         text-transform: lowercase;

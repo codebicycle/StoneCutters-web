@@ -13,7 +13,16 @@ module.exports = function(environment) {
     });
 
     function get(keys, defaultValue) {
-        return utils.get(CONFIG, keys, defaultValue);
+        var value = utils.get(CONFIG, keys);
+
+        if (checkValue(value)) {
+            value = defaultValue;
+            keys = _.clone(utils.toArray(keys));
+            if (keys.length) {
+                value = utils.get(CONFIG, keys.splice(keys.length - 1, 1, 'default'), defaultValue);
+            }
+        }
+        return value;
     }
 
     function getForMarket(location, keys, defaultValue) {
