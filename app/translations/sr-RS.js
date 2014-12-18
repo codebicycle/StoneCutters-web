@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Grad',
     'messages_site_class.30': 'U redu',
     'messages_user_management_current_ads.EditMyListing': 'Ure\u0111ivanje oglasa',
+    'topcities.SelectLocation': 'Izaberite lokaciju',
     'unexistingitem.ListingUnavailable': 'Ovaj oglas vi\u0161e nije dostupan',
     'landingbody.EmailAddress': 'E-adresa',
     'landingbody.ForgotPassword': 'Zaboravili ste lozinku?',

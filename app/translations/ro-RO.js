@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Ora\u015F',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editarea anun\u0163ului meu',
+    'topcities.SelectLocation': 'Selecteaz\u0103 o loca\u0163ie',
     'unexistingitem.ListingUnavailable': 'Listarea nu mai ste disponibil\u0103',
     'landingbody.EmailAddress': 'Adresa de email',
     'landingbody.ForgotPassword': 'A\u0163i uitat parola?',
