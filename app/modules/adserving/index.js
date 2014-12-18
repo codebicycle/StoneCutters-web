@@ -60,6 +60,9 @@ function getSettings() {
 }
 
 function createChannels(type) {
+    if (type == 'ADX') {
+        return;
+    }
     var config = utils.get(configAdServing, type, {});
     var slotname = this.get('slotname');
     var configSlot = getConfigSlot(slotname);

@@ -43,7 +43,7 @@ module.exports = Base.extend({
 
             window._googCsa('ads', settings.options, settings.params);
         }
-        else if (type == 'AFC') {
+        else if (type == 'ADX') {
             this.createIframe({
                 slotname: slotname,
                 width: settings.params.width,

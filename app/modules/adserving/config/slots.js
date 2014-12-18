@@ -61,13 +61,12 @@ module.exports = {
     },
     slot_side_listing: {
         enabled: true,
-        defaultType: 'AFC',
+        defaultType: 'ADX',
         location: 'Side',
         types: {
-            AFC: {
+            ADX: {
                 params: {
-                    slotId: 8767812706,
-                    media: 'flash, image',
+                    slotId: 3997611586,
                     width: '160',
                     height: '600'
                 },
@@ -77,12 +76,11 @@ module.exports = {
     },
     slot_top_item: {
         enabled: true,
-        defaultType: 'AFC',
+        defaultType: 'ADX',
         location: 'Top',
         types: {
-            AFC: {
+            ADX: {
                 params: {
-                    media: 'text, flash, image',
                     width: '728',
                     height: '90'
                 },
@@ -92,12 +90,11 @@ module.exports = {
     },
     slot_side_item: {
         enabled: true,
-        defaultType: 'AFC',
+        defaultType: 'ADX',
         location: 'Side',
         types: {
-            AFC: {
+            ADX: {
                 params: {
-                    media: 'flash, image',
                     width: '300',
                     height: '250'
                 },
@@ -107,12 +104,11 @@ module.exports = {
     },
     slot_bottom_item: {
         enabled: true,
-        defaultType: 'AFC',
+        defaultType: 'ADX',
         location: 'Bottom',
         types: {
-            AFC: {
+            ADX: {
                 params: {
-                    media: 'text',
                     width: '728',
                     height: '90'
                 },

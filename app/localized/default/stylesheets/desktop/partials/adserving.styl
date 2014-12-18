@@ -1,7 +1,6 @@
 .adserving-listing {
     .ads-csa {
         margin-top: 10px;
-
         iframe {
             border: 1px solid $greyBorders;
             border-bottom: none;
@@ -11,7 +10,6 @@
         &.slot_bottom_listing {
             margin-bottom: 10px;
             margin-top: -10px;
-
             iframe {
                 border: 1px solid $greyBorders;
                 border-top: none;
@@ -24,30 +22,26 @@
             height: auto !important; /* es de vida o muerte */
             margin: 10px 0;
             padding: 10px;
-
             iframe {
                 border: none;
             }
         }
     }
-
-    .ads-afc {
+    .ads-adx {
         text-align: center;
-
         iframe {
-            vertical-align: top;
             border: none;
             margin: 0;
+            vertical-align: top;
         }
-    }
-    .slot_side_listing,
-    .slot_side_item {
-        margin-top: 20px;
-    }
-
-    .slot_top_item {
-        margin: 10px 0;
-        min-height: 90px;
+        &.slot_side_listing,
+        &.slot_side_item {
+            margin-top: 20px;
+        }
+        &.slot_top_item {
+            margin: 10px 0;
+            min-height: 90px;
+        }
     }
 }
 
