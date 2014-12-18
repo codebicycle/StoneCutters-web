@@ -34,6 +34,21 @@ module.exports = {
         'www.olx.com.bo': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
+        'www.olx.it': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.es': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.mx': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.fr': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
         'www.olx.com.py': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
@@ -49,16 +64,24 @@ module.exports = {
         'www.olx.com.pa': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
+        'www.olx.com.sv': {
+            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            columns: [4, 3, 3]
+        },
+        'www.olx.com.gt': {
+            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            columns: [4, 3, 3]
+        },
         'www.olx.co.tz': {
-            order: [185, 187, 186, 191, 16, 362, 190],
-            columns: [2, 2, 2],
+            order: [185, 186, 187, 362, 16, 191, 190],
+            columns: [1, 3, 2],
         },
         'www.olx.co.ug': {
             order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.com.gh': {
-            order: [830, 800, 811, 806, 815, 362, 859, 16, 821],
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.sn': {
@@ -88,7 +111,7 @@ module.exports = {
         ]
     },
     countryMapStyle: {
-        special: ['www.olx.com.pa', 'www.olx.hn'],
+        special: ['www.olx.com.pa', 'www.olx.hn', 'www.olx.com.mx'],
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
@@ -141,8 +164,8 @@ module.exports = {
                 countries: []
             },
             listingFilters: {
-                worldwide: false,
-                countries: []
+                worldwide: true,
+                countries: ['www.olx.ir']
             },
             interstitialByADX: {
                 worldwide: false,
@@ -245,5 +268,39 @@ module.exports = {
             'www.olx.co.uk': '3avqcjFDvQyE7sGOGGNH1HbN1VWV5D5THYJKu35BbZY',
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
+    },
+    mails: {
+        domain: {
+            'www.olx.com.ng': 'olx.com',
+            'www.olx.com.ke': 'olx.com',
+            'www.olx.it': 'olx.com',
+            'www.olx.fr': 'olx.com',
+            'www.olx.es': 'olx.com',
+            'www.olx.cl': 'olx.com',
+            'www.olx.com.mx': 'olx.com'
+        },
+        support: {
+            'default': 'support',
+            'www.olx.com.ar': 'soporte',
+            'www.olx.com.co': 'soporte',
+            'www.olx.co.cr': 'soporte',
+            'www.olx.com.ec': 'soporte',
+            'www.olx.com.sv': 'soporte',
+            'www.olx.com.gt': 'soporte',
+            'www.olx.hn': 'soporte',
+            'www.olx.co.ke': 'support-ke',
+            'www.olx.com.ni': 'soporte',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.pa': 'soporte',
+            'www.olx.com.pe': 'soporte',
+            'www.olx.com.uy': 'soporte',
+            'www.olx.com.ve': 'soporte'
+        },
+        legal: {
+            'default':'legal',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.ke': 'support-ke'
+        }
+
     }
 };

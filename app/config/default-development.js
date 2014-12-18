@@ -24,7 +24,7 @@ module.exports = {
         wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
         html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        desktop: ['www.olx.com.bo', 'www.jaovat.com']
+        desktop: ['www.olx.com.bo', 'www.jaovat.com', 'www.olx.co.cr']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
@@ -33,6 +33,21 @@ module.exports = {
     },
     categoryTree: {
         'www.olx.com.bo': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.it': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.es': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.mx': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.fr': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
         'www.olx.com.py': {
@@ -50,6 +65,14 @@ module.exports = {
         'www.olx.com.pa': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
+        'www.olx.com.sv': {
+            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            columns: [4, 3, 3]
+        },
+        'www.olx.com.gt': {
+            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            columns: [4, 3, 3]
+        },
         'www.olx.co.tz': {
             order: [185, 186, 187, 362, 16, 191, 190],
             columns: [1, 3, 2],
@@ -59,7 +82,7 @@ module.exports = {
             columns: [3, 2, 2],
         },
         'www.olx.com.gh': {
-            order: [830, 800, 811, 806, 815, 362, 859, 16, 821],
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.sn': {
@@ -89,7 +112,7 @@ module.exports = {
         ]
     },
     countryMapStyle: {
-        special: ['www.olx.com.pa', 'www.olx.hn'],
+        special: ['www.olx.com.pa', 'www.olx.hn', 'www.olx.com.mx'],
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
@@ -201,5 +224,39 @@ module.exports = {
             'www.olx.com.ve': 'ElLjb-uA1Oel1D9y3P4-WbbvrHB4NO2UOtkcLomsFkg',
             'www.jaovat.com': 'q0p5TRgd4gq-TbLCJZL38tpTimpocaWMN5e_ef4iAtg'
         }
+    },
+    mails: {
+        domain: {
+            'www.olx.com.ng': 'olx.com',
+            'www.olx.com.ke': 'olx.com',
+            'www.olx.it': 'olx.com',
+            'www.olx.fr': 'olx.com',
+            'www.olx.es': 'olx.com',
+            'www.olx.cl': 'olx.com',
+            'www.olx.com.mx': 'olx.com'
+        },
+        support: {
+            'default': 'support',
+            'www.olx.com.ar': 'soporte',
+            'www.olx.com.co': 'soporte',
+            'www.olx.co.cr': 'soporte',
+            'www.olx.com.ec': 'soporte',
+            'www.olx.com.sv': 'soporte',
+            'www.olx.com.gt': 'soporte',
+            'www.olx.hn': 'soporte',
+            'www.olx.co.ke': 'support-ke',
+            'www.olx.com.ni': 'soporte',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.pa': 'soporte',
+            'www.olx.com.pe': 'soporte',
+            'www.olx.com.uy': 'soporte',
+            'www.olx.com.ve': 'soporte'
+        },
+        legal: {
+            'default':'legal',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.ke': 'support-ke'
+        }
+
     }
 };
