@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Nou regr\xE8t, nou pa jwenn okenn rezilta nan<<CATEGORY>> pou <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Ou pa genyen anons aktif pou konyea. ',
     'netvibes_myolx.content.NoMessages': 'Ou pa genyen mesaj pou konyea. ',
-    'netvibes_myolx.content.RemoveListing': 'Efase anons lan',
     'netvibes_myolx.content.Views': 'Vizit ',
     'supportform.Message': 'Mesaj :',
     'supportform.Reset': 'Anile',
