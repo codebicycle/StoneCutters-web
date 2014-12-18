@@ -26,6 +26,10 @@
                     {{ category.trName }}
                 </a>
             </li>
+            {% if loop.length > 7 and loop.index == 6  %}
+                </ul>
+                <ul class="category-list">
+            {% endif %}
         {% endfor %}
     </ul>
 </section>
