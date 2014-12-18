@@ -116,7 +116,7 @@ module.exports = {
         ]
     },
     countryMapStyle: {
-        special: ['www.olx.com.pa', 'www.olx.hn'],
+        special: ['www.olx.com.pa', 'www.olx.hn', 'www.olx.com.mx'],
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
