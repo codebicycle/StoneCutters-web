@@ -58,13 +58,14 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        this.item = this.item || new Item(this.options.item || {}, {
+        this.item = this.item || this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
             app: this.app
         });
         $(window).on('beforeunload', this.onBeforeUnload);
 
-        if (this.item.has('category')) {
-            this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category').id]);
+        if (this.item.has('id')) {
+            this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
+            this.$('#field-location').trigger('change');
         }
         else{
 
@@ -101,8 +102,10 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
         var email = subcategory.fields.contactInformation[2].value ? subcategory.fields.contactInformation[2].value.value : '';
 
-        this.item.set('category.parentId', subcategory.parentId);
-        this.item.set('category.id', subcategory.id);
+        this.item.get('category').parentId = subcategory.parentId;
+        this.item.get('category').id = subcategory.id;
+        //this.item.set('category.parentId', subcategory.parentId);
+        //this.item.set('category.id', subcategory.id);
         delete this.errors['category.parentId'];
         delete this.errors['category.id'];
         _.each(this.pendingValidations, function eachValidation($field) {
@@ -204,8 +207,8 @@ module.exports = Base.extend({
         }
         else {
             data = {
-                'category.id': this.item.get('category.id'),
-                'category.parentId': this.item('category.parentId'),
+                'category.id': this.item.get('category').id,
+                'category.parentId': this.item.get('category').parentId,
                 'location': this.app.session.get('location').url,
                 'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
             };
@@ -298,8 +301,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var item;
-
+        console.log(this.item);
         function post(done) {
             this.item.post(done);
         }
@@ -311,9 +313,9 @@ module.exports = Base.extend({
             this.track({
                 category: category,
                 action: action,
-                custom: [category, this.item.get('category.parentId') || '-', this.item.get('category.id') || '-', action, item.get('id')].join('::')
+                custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.get('id') + '?sk=' + item.get('securityKey'), null, {
+            helpers.common.redirect.call(this.app.router, '/posting/success/' + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
             });
         }

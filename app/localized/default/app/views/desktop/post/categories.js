@@ -23,8 +23,9 @@ module.exports = Base.extend({
             categories: data.categories.toJSON()
         });
     },
-    onEditCategory: function(event, subCategoryId) {
-        this.$('.child-categories-list a[data-id=' + subCategoryId + ']').trigger('click', ['edit']);
+    onEditCategory: function(event, category) {
+        this.$('.posting-categories-list a[data-id=' + category.parentId + ']').trigger('click', ['edit']);
+        this.$('.child-categories-list a[data-id=' + category.id + ']').trigger('click', ['edit']);
     },
     onSubCategoryClick: function(event, intent) {
         event.preventDefault();

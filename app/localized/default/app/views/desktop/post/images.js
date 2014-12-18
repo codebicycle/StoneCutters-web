@@ -89,8 +89,19 @@ module.exports = Base.extend({
             }
 
             function success(done, response, images) {
-                this.selected[$input.attr('name')] = {
-                    id: images.shift(),
+                var name = $input.attr('name');
+                var index = name.slice(-2, -1);
+                var image = images.shift();
+
+                images = this.parentView.item.get('images');
+                if (images[index]) {
+                    images[index] = images.shift();
+                }
+                else {
+                    images.push(image);
+                }
+                this.selected[name] = {
+                    id: image,
                     file: imageUrl,
                     orientation: 1
                 };

@@ -9,6 +9,10 @@ var statsd = require('../../shared/statsd')();
 module.exports = Base.extend({
     idAttribute: 'id',
     url: '/items/:id',
+    defaults: {
+        category: {},
+        images: []
+    },
     shortTitle: shortTitle,
     shortDescription: shortDescription,
     getLocation: getLocation,
@@ -20,7 +24,8 @@ module.exports = Base.extend({
     postImages: postImages,
     logValidation: logValidation,
     logPost: logPost,
-    logPostImages: logPostImages
+    logPostImages: logPostImages,
+    toData: toData
 });
 
 module.exports.id = 'Item';
@@ -119,7 +124,7 @@ function validate(done) {
     var platform = this.app.session.get('platform');
 
     helpers.dataAdapter.post(this.app.req, '/items', {
-        data: this.toJSON(),
+        data: this.toData(),
         query: {
             intent: 'validate',
             postingSession: this.get('postingSession'),
@@ -140,7 +145,9 @@ function postImages(done) {
     var oldImages = [];
 
     if (!images || Array.isArray(images)) {
-        this.set('images', images || oldImages);
+        this.set('images', _.map(images || oldImages, function each(image) {
+            return typeof image === 'string' ? image : image.id;
+        }));
         return (done.errfcb || done)(undefined, undefined, images || oldImages);
     }
     Object.keys(_.omit(images, 'length')).forEach(function each(key) {
@@ -183,7 +190,6 @@ function postImages(done) {
 function postFields(done) {
     var id = this.get('id');
     var sk = this.get('sk');
-    var images = this.get('images');
     var user = this.app.session.get('user');
     var query = {
         postingSession: this.get('postingSession'),
@@ -202,10 +208,7 @@ function postFields(done) {
         query.securityKey = sk;
         this.unset('sk');
     }
-    data = this.toJSON();
-    if (images && images.length) {
-        data.images = images.join(',');
-    }
+    data = this.toData(true);
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, 'edit'].join('/')), {
         data: data,
         query: query
@@ -263,5 +266,32 @@ function logPost(type, statusCode, errors) {
     errors.forEach(function each(error) {
         statsd.increment([locale, type, 'error', 'post', statusCode, error.selector, platform]);
     });
+}
+
+function toData(includeImages) {
+    var data = this.toJSON();
+    var images = this.get('images');
+
+    data['category.parentId'] = data['category.parentId'] || (this.get('category') || {}).parentId;
+    data['category.id'] = data['category.id'] || (this.get('category') || {}).id;
+    delete data.category;
+    if (typeof data.location !== 'string') {
+        try {
+            data.location = this.get('location').children[0].children[0].url;
+        }
+        catch(err) {
+            delete data.location;
+        }
+    }
+    if (includeImages && images && images.length) {
+        data.images = images.join(',');
+    }
+    delete data.date;
+    delete data.metadata;
+    delete data.status;
+    delete data.user;
+    delete data.slug;
+    delete data.priceTypeData;
+    return data;
 }
 

@@ -47,7 +47,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        $('input[name="email"]').val(email);
+        $('input[name="email"]').val(email).trigger('change');
     }
 });
 
