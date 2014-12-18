@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Przepraszamy. Nie znaleziono og\u0142osze\u0144 w kategorii: <<CATEGORY>> w obszarze: <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Nie masz aktywnych og\u0142osze\u0144.',
     'netvibes_myolx.content.NoMessages': 'Nie masz wiadomo\u015Bci.',
-    'netvibes_myolx.content.RemoveListing': 'Usu\u0144 og\u0142oszenie',
     'netvibes_myolx.content.Views': 'Wy\u015Bwietle\u0144',
     'supportform.Message': 'Wiadomo\u015B\u0107:',
     'supportform.Reset': 'Anuluj',

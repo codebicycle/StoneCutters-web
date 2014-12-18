@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Beklager, men vi har ikke funnet noen resultater i <<CATEGORY>> i <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Du har ingen aktive annonser.',
     'netvibes_myolx.content.NoMessages': 'Du har for tiden ingen meldinger.',
-    'netvibes_myolx.content.RemoveListing': 'Slett annonsen',
     'netvibes_myolx.content.Views': 'Vist',
     'supportform.Message': 'Melding:',
     'supportform.Reset': 'Reset',
