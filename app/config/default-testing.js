@@ -20,10 +20,10 @@ module.exports = {
         imagePath: 'http://images01.olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        desktop: ['www.olx.com.bo', 'www.jaovat.com']
+        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.com.ng'],
+        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.com.ng'],
+        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.com.ng'],
+        desktop: ['www.olx.com.bo', 'www.jaovat.com', 'www.olx.co.cr']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
@@ -65,11 +65,11 @@ module.exports = {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
         'www.olx.com.sv': {
-            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
             columns: [4, 3, 3]
         },
         'www.olx.com.gt': {
-            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
             columns: [4, 3, 3]
         },
         'www.olx.co.tz': {
@@ -161,7 +161,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.ir']
+                countries: []
             },
             listingFilters: {
                 worldwide: true,

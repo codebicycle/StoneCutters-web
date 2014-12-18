@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Miestas',
     'messages_site_class.30': 'Gerai',
     'messages_user_management_current_ads.EditMyListing': 'Redaguoti mano skelbim\u0105',
+    'topcities.SelectLocation': 'Pasirinkite vietov\u0119',
     'unexistingitem.ListingUnavailable': '\u0160io skelbimo daugiau neb\u0117ra',
     'landingbody.EmailAddress': 'El. pa\u0161to adresas',
     'landingbody.ForgotPassword': 'Pamir\u0161ote slapta\u017Eod\u012F?',

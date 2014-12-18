@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Pils\u0113ta',
     'messages_site_class.30': 'Labi',
     'messages_user_management_current_ads.EditMyListing': 'Redi\u0123\u0113t manu sludin\u0101jumu',
+    'topcities.SelectLocation': 'Atlasiet vietu',
     'unexistingitem.ListingUnavailable': '\u0160is sludin\u0101jums vairs nav pieejams',
     'landingbody.EmailAddress': 'E-pasta adrese',
     'landingbody.ForgotPassword': 'Esat aizmirsis paroli?',

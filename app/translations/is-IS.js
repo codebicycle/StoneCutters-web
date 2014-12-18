@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Borg',
     'messages_site_class.30': '\xCD lagi',
     'messages_user_management_current_ads.EditMyListing': 'Breyta augl\xFDsingunni minni',
+    'topcities.SelectLocation': 'Veldu sta\xF0',
     'unexistingitem.ListingUnavailable': '\xDEessi augl\xFDsing er ekki lengur f\xE1anleg',
     'landingbody.EmailAddress': 'T\xF6lvup\xF3stfang',
     'landingbody.ForgotPassword': 'Gleymt lykilor\xF0?',

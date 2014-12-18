@@ -89,6 +89,7 @@ module.exports = {
     'messages_item_page.City': 'Ciutat',
     'messages_site_class.30': 'Ok',
     'messages_user_management_current_ads.EditMyListing': 'Editar el meu anunci',
+    'topcities.SelectLocation': 'Selecciona una ubicaci\xF3',
     'unexistingitem.ListingUnavailable': 'Aquest anunci no est\xE0 disponible',
     'landingbody.EmailAddress': 'Adre\xE7a de correu electr\xF2nic',
     'landingbody.ForgotPassword': 'Heu oblidat la contrasenya?',
