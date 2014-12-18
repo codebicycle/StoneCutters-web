@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('locations/list');
 var helpers = require('../../../../../../helpers');
+var utils = require('../../../../../../../shared/utils');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 
@@ -35,6 +36,15 @@ module.exports = Base.extend({
     postRender: function() {
         var callback;
         var errorCallback;
+
+        this.attachTrackMe();
+
+        this.$('#location .country-link, .cities-links .city-link').on('click', function(e) {
+            var href = $(e.currentTarget).attr('href');
+            var siteLocation = utils.params(href, 'location');
+
+            $('body').trigger('change:location', siteLocation);
+        }.bind(this));
 
         this.app.router.once('action:start', this.onStart);
         this.app.router.once('action:end', this.onEnd);

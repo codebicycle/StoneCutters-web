@@ -3,7 +3,7 @@
 module.exports = {
     'f.location_state': 'SELECT',
     'f.location_city': 'SELECT',
-    // neighborhood: 'SELECT',
+    neighborhood: 'SELECT',
     nbhzone: 'SELECT',
     directdistancedialing: 'SELECT',
     category: 'SELECT',

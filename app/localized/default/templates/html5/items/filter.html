@@ -51,6 +51,14 @@
                     {% endif %}
                 {% elif filter.type == 'BOOLEAN' %}
                     {% if filter.name == 'hasimage' %}
+                        <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
+                            {% set active = true if filters.isActive(filter.name) else false %}
+                            <span class="title {{ 'active selected' if active }}">{{ dictionary["misc.ViewOptions"] }}</span>
+                            <ul class="dropdown {{ 'hide' if not active }}">
+                                <li class="adType {{ 'active' if active }} trackMe" data-tracking="Filter-Has_image" data-filter-value="true">{{ dictionary["misc.WithPicsOnly"] }}</li>
+                                <li class="clear-all trackMe" data-filter-value="true" data-tracking="Filter-Has_image_all">{{ dictionary["misc.AllAds_Mob"] }}</li>
+                            </ul>
+                        </li>
                         <li class="filter">
                             <span class="location">
                                 {{ dictionary["defaultheader.Location"] }}
@@ -63,14 +71,6 @@
                                 {% endif %}
                                 <a class="bold" href="/location?target={{ path | replace('/filter', '') }}">{{ state }}</a>
                             </span>
-                        </li>
-                        <li class="filter" data-filter-type="{{ filter.type }}" data-filter-name="{{ filter.name }}">
-                            {% set active = true if filters.isActive(filter.name) else false %}
-                            <span class="title {{ 'active selected' if active }}">{{ dictionary["misc.ViewOptions"] }}</span>
-                            <ul class="dropdown {{ 'hide' if not active }}">
-                                <li class="adType {{ 'active' if active }} trackMe" data-tracking="Filter-Has_image" data-filter-value="true">{{ dictionary["misc.WithPicsOnly"] }}</li>
-                                <li class="clear-all trackMe" data-filter-value="true" data-tracking="Filter-Has_image_all">{{ dictionary["misc.AllAds_Mob"] }}</li>
-                            </ul>
                         </li>
                     {% endif %}
                 {% endif %}
