@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Vabandame, me ei leidnud tulemusi <<CATEGORY>>  <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Teil ei ole hetkel aktiivseid kuulutusi.',
     'netvibes_myolx.content.NoMessages': 'Teil ei ole hetkel s\xF5numeid.',
-    'netvibes_myolx.content.RemoveListing': 'Eemaldage kuulutus',
     'netvibes_myolx.content.Views': 'Vaadatud',
     'supportform.Message': 'Teade:',
     'supportform.Reset': 'T\xFChista',

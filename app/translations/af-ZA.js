@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Jammer, ons het geen resultate in <<CATEGORY>> in <<REGION>> gekry nie.',
     'netvibes_myolx.content.NoActiveListings': 'Jy het tans geen aktiewe lystings nie.',
     'netvibes_myolx.content.NoMessages': 'Jy het tans geen boodskappe nie.',
-    'netvibes_myolx.content.RemoveListing': 'Verwyder lysting',
     'netvibes_myolx.content.Views': 'Bekyk',
     'supportform.Message': 'Boodskap:',
     'supportform.Reset': 'Herstel',
