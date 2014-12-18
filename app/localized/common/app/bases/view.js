@@ -96,29 +96,19 @@ module.exports.attach = Base.attach = function(app, parentView, callback) {
     var list = $('[data-view]', scope).toArray();
 
     async.map(list, function each(el, cb) {
-        var $el;
-        var options;
-        var viewName;
-        var fetchSummary;
+        var $el = $(el);
 
-        $el = $(el);
         if (!$el.data('view-attached')) {
-            options = Base.getViewOptions($el);
             app.fetchDependencies(['categories', 'topCities', 'states', 'countries'], function done(err, dependencies) {
-                _.extend(options, dependencies.toJSON());
-                options.app = app;
-                viewName = options.view;
-                fetchSummary = options.fetch_summary || {};
-                app.fetcher.hydrate(fetchSummary, {
+                var options = _.extend(Base.getViewOptions($el), dependencies.toJSON(), {
                     app: app
-                }, function done(err, results) {
-                    options = _.extend(options, results);
-                    Base.getView(app, viewName, app.options.entryPath, function after(ViewClass) {
-                        var view = new ViewClass(options);
+                });
 
-                        view.attach($el, parentView);
-                        cb(null, view);
-                    });
+                Base.getView(app, options.view, app.options.entryPath, function after(ViewClass) {
+                    var view = new ViewClass(options);
+
+                    view.attach($el, parentView);
+                    cb(null, view);
                 });
             });
         }
