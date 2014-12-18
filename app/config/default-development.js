@@ -35,6 +35,21 @@ module.exports = {
         'www.olx.com.bo': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
+        'www.olx.it': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.es': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.mx': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.fr': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
         'www.olx.com.py': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
@@ -50,6 +65,14 @@ module.exports = {
         'www.olx.com.pa': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
+        'www.olx.com.sv': {
+            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            columns: [4, 3, 3]
+        },
+        'www.olx.com.gt': {
+            order: [830, 800, 859, 806, 362, 16, 186, 815, 191, 187, 811, 190],
+            columns: [4, 3, 3]
+        },
         'www.olx.co.tz': {
             order: [185, 186, 187, 362, 16, 191, 190],
             columns: [1, 3, 2],
@@ -59,7 +82,7 @@ module.exports = {
             columns: [3, 2, 2],
         },
         'www.olx.com.gh': {
-            order: [830, 800, 811, 806, 815, 362, 859, 16, 821],
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.sn': {
@@ -89,7 +112,7 @@ module.exports = {
         ]
     },
     countryMapStyle: {
-        special: ['www.olx.com.pa', 'www.olx.hn'],
+        special: ['www.olx.com.pa', 'www.olx.hn', 'www.olx.com.mx'],
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
