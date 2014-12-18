@@ -161,7 +161,7 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.ir']
+                countries: []
             },
             listingFilters: {
                 worldwide: true,
