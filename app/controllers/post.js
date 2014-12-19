@@ -368,7 +368,26 @@ function success(params, callback) {
             }.bind(this));
         }.bind(this);
 
-        var success = function(_item, _relatedItems) {
+        var findFeatureAds = function(done, item, relateds) {
+            this.app.fetch({
+                featuread: {
+                    model : 'Featuread',
+                    params: {
+                        id: item.get('id'),
+                        locate: this.app.session.get('selectedLanguage')
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (err) {
+                    res = {};
+                }
+                done(item, relateds, res.featuread);
+            }.bind(this));
+        }.bind(this);
+
+        var success = function(_item, _relatedItems, _featuread) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
@@ -391,7 +410,8 @@ function success(params, callback) {
                 sk: securityKey,
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems
+                relatedItems: _relatedItems,
+                featureAd: _featuread
             });
         }.bind(this);
 
@@ -404,6 +424,7 @@ function success(params, callback) {
             .then(findItem)
             .then(checkItem)
             .then(findRelatedItems)
+            .then(findFeatureAds)
             .val(success);
     }
 }

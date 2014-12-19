@@ -128,6 +128,33 @@
                 font-weight: bold;
             }
         }
+
+        .featured-ads {
+            box($greyBoxBg, $greyBorders, 3px 3px 3px 3px, 20px, solid, 1px);
+            margin-top: 20px;
+
+            .featured-ads-title {
+                margin: 0;
+            }
+
+            .featured-ads-tip {
+                height: 61px;
+                background-image: url(imageUrl/images/desktop/destacar.png);
+                position: absolute;
+                margin: -26px 0 0 225px;
+                width: 61px;
+            }
+
+            ul {
+                padding: 15px;
+                margin: 0;
+
+                li {
+                    font-size: $s;
+                    margin-bottom: 5px;
+                }
+            }
+        }
     }
 }
 

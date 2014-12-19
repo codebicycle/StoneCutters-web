@@ -1,7 +1,7 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
+var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
@@ -11,19 +11,6 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data)
-        });
-    },
-    postRender: function() {
-        var category = 'Posting';
-        var action = 'PostingSuccess';
-        var itemId = $('.itemId').val();
-        var itemCategory = $('.itemCategory').val();
-        var itemSubcategory = $('.itemSubcategory').val();
-
-        this.track({
-            category: category,
-            action: action,
-            custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
         });
     }
 });
