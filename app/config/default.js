@@ -283,8 +283,8 @@ module.exports = {
                 countries: ['www.olx.ir']
             },
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.ar', , 'www.olx.cl']
+                worldwide: true,
+                countries: []
             },
             autoLocation: {
                 worldwide: true,
@@ -297,8 +297,8 @@ module.exports = {
         },
         html4: {
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.ar', 'www.olx.cl']
+                worldwide: true,
+                countries: []
             }
         }
     },
