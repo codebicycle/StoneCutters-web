@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('locations/list');
 var helpers = require('../../../../../../helpers');
+var utils = require('../../../../../../../shared/utils');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 
@@ -11,6 +12,22 @@ module.exports = Base.extend({
     showAutoLocation: false,
     getTemplateData: function(){
         var data = Base.prototype.getTemplateData.call(this);
+        var citiesNames = [];
+        if (data.search) {
+            _.each(_.groupBy(_.pluck(data.cities, 'name')), function(val, key){
+                if (val.length > 1) {
+                    citiesNames.push(key);
+                }
+            });
+            _.each(data.cities, function(obj){
+                _.find(citiesNames, function(val){
+                    if (obj.name === val) {
+                        obj.repeat = true;
+                        return obj;
+                    }
+                });
+            });
+        }
         if (data.target) {
             data.target = data.target.replace(/(-neighborhood)([0-9_]+)/, '');
         }
@@ -20,27 +37,32 @@ module.exports = Base.extend({
         var callback;
         var errorCallback;
 
+        this.attachTrackMe();
+
+        this.$('#location .country-link, .cities-links .city-link').on('click', function(e) {
+            var href = $(e.currentTarget).attr('href');
+            var siteLocation = utils.params(href, 'location');
+
+            $('body').trigger('change:location', siteLocation);
+        }.bind(this));
+
         this.app.router.once('action:start', this.onStart);
         this.app.router.once('action:end', this.onEnd);
-
-        if (helpers.features.isEnabled.call(this, 'autoLocation')) {
-            if (navigator.geolocation) {
-                callback = function (position) {
-                        this.latitude = position.coords.latitude;
-                        this.longitude = position.coords.longitude;
-                        this.$('#autolocation').show();
-                        this.showAutoLocation = true;
-                    }.bind(this);
-                errorCallback = function (error) {
-                        this.showAutoLocation = false;
-                    }.bind(this);
-
-                navigator.geolocation.getCurrentPosition(callback, errorCallback, {
-                        maximumAge: 0,
-                        timeout: 6000
-                    });
-            }
+        this.app.on('change:autolocation', this.autolocation, this);
+        if (this.app.get('autolocation')) {
+            this.autolocation();
         }
+    },
+    autolocation: function() {
+        var autolocation = this.app.get('autolocation');
+
+        if (!autolocation) {
+            this.$('#autolocation').hide();
+            return;
+        }
+        this.latitude = autolocation.coords.latitude;
+        this.longitude = autolocation.coords.longitude;
+        this.$('#autolocation').show();
     },
     events: {
         'submit': 'onSubmit',

@@ -42,12 +42,12 @@
     </div>
 </div>
 <ul class="my-items">
-    {% if myAds | length == 0 %}
+    {% if items.length == 0 %}
         <li class="item empty">
             {{ dictionary["netvibes_myolx.content.NoActiveListings"] }}
         </li>
     {% endif %}
-    {% for item in myAds %}
+    {% for item in items.toJSON() %}
         {% set status = 'ready' %}
         {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
         {% if item.status == 'expired' %}
@@ -109,7 +109,6 @@
                         {% if status == 'expired' %}
                             <a href="" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                         {% endif %}
-                        <a href="" data-idd="{{ item.id }}" class="btn icons icon-trash btndelforever">{{ dictionary["netvibes_myolx.content.RemoveListing"] }}</a>
                     {% endif %}
                 </div>
             </div>

@@ -264,6 +264,25 @@ module.exports = {
         }
         helpers.common.redirect.call(this, url.join(''));
     },
+    staticSearchFilters: function(params, callback) {
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/nf/');
+        url.push(params.search);
+        if (params.catId) {
+            url.pop();
+            url.push('des-cat-');
+            url.push(params.catId);
+            url.push('/');
+            url.push(params.search);
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/-');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
     staticSearchMobile: function(params, callback) {
         helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
     },

@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('footer/footer');
+var config = require('../../../../../../../shared/config');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -16,8 +17,10 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
+        var socials = config.get(['socials', location.url]);
         var states = data.states;
         var currentState = {};
+        var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -28,6 +31,8 @@ module.exports = Base.extend({
         }
 
         return _.extend({}, data, {
+            selectedLanguage: selectedLanguage,
+            socials: socials,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
