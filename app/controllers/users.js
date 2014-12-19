@@ -75,7 +75,9 @@ function register(params, callback) {
 
         var success = function(isLogin) {
           if (isLogin !== false) {
-            return helpers.common.redirect.call(this, '/');
+            return helpers.common.redirect.call(this, '/', null, {
+              status: 302
+            });
           }
           callback(null, {
               form: this.form,

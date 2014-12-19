@@ -170,12 +170,12 @@ function registerConfirm(done) {
 
     var success = function(res, body) {
       this.set(body);
-      statsd.increment([this.get('country'), 'registerConfirm', 'success', this.get('platform')]);
+      statsd.increment([this.get('country'), 'register','confirm', 'success', this.get('platform')]);
       done(true);
     }.bind(this);
 
     var error = function(err) {
-      statsd.increment([this.get('country'), 'registerConfirm', 'error', err.statusCode, this.get('platform')]);
+      statsd.increment([this.get('country'), 'register','confirm', 'error', err.statusCode, this.get('platform')]);
       done.fail(err);
     }.bind(this);
 
