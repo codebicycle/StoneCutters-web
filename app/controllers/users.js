@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var Paginator = require('../modules/paginator');
+var User = require('../models/user');
 
 module.exports = {
     register: middlewares(register),
@@ -30,19 +31,68 @@ function register(params, callback) {
         var platform = this.app.session.get('platform');
         var user;
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
-        }
-        user = this.app.session.get('user');
-        if (user) {
-            return helpers.common.redirect.call(this, '/', null, {
-                status: 302
+        var redirect = function(done) {
+          if (platform === 'wap') {
+              done.abort();
+              return helpers.common.redirect.call(this, '/');
+          }
+          user = this.app.session.get('user');
+          if (user) {
+              done.abort();
+              return helpers.common.redirect.call(this, '/', null, {
+                  status: 302
+              });
+          }
+          done();
+        }.bind(this);
+
+        var check = function(done) {
+          var languages;
+
+          if (params.hash && params.username) {
+            languages = this.app.session.get('languages');
+            user = new User({
+              languageId: languages._byId[this.app.session.get('selectedLanguage')].id,
+              country: this.app.session.get('location').name,
+              username: params.username,
+              hash: params.hash,
+              platform: platform,
+              noMD5: true
+            }, {
+              app: this.app
             });
-        }
-        callback(null, {
-            form: this.form,
-            agreeTerms: params.agreeTerms
-        });
+            return user.registerConfirm(done);
+          }
+          done(false);
+        }.bind(this);
+
+        var login = function(done, isConfirm) {
+          if (isConfirm) {
+            return user.login(done);
+          }
+          done(false);
+        }.bind(this);
+
+        var success = function(isLogin) {
+          if (isLogin !== false) {
+            return helpers.common.redirect.call(this, '/');
+          }
+          callback(null, {
+              form: this.form,
+              agreeTerms: params.agreeTerms
+          });
+        }.bind(this);
+
+        var error = function(err, res) {
+          return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+        .then(redirect)
+        .then(check)
+        .then(login)
+        .val(success);
+
     }
 }
 

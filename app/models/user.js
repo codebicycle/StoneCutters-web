@@ -13,6 +13,7 @@ module.exports = Base.extend({
     login: login,
     lostpassword: lostpassword,
     register: register,
+    registerConfirm: registerConfirm,
     reply: reply
 });
 
@@ -40,8 +41,11 @@ function login(done) {
     }.bind(this);
 
     var submit = function(done, res, data) {
-        var hash = crypto.createHash('md5').update(this.get('password') || '').digest('hex');
+        var hash = this.get('password');
 
+        if (!this.has('noMD5')) {
+          hash = crypto.createHash('md5').update(hash || '').digest('hex');
+        }
         dataAdapter.get(this.app.req, '/users/login', {
             query: {
                 c: data.challenge,
@@ -148,6 +152,36 @@ function register(done) {
         .then(submit)
         .then(persist)
         .val(success);
+}
+
+function registerConfirm(done) {
+    var query = {
+      languageId: this.get('languageId'),
+      platform: this.get('platform'),
+      username: this.get('username'),
+      hash: this.get('hash')
+    };
+
+    var submit = function(done) {
+      dataAdapter.post(this.app.req, '/users/confirm', {
+        query: query
+      }, done.errfcb);
+    }.bind(this);
+
+    var success = function(res, body) {
+      this.set(body);
+      statsd.increment([this.get('country'), 'registerConfirm', 'success', this.get('platform')]);
+      done(true);
+    }.bind(this);
+
+    var error = function(err) {
+      statsd.increment([this.get('country'), 'registerConfirm', 'error', err.statusCode, this.get('platform')]);
+      done.fail(err);
+    }.bind(this);
+
+    asynquence().or(error)
+    .then(submit)
+    .val(success);
 }
 
 function reply(done, data) {
