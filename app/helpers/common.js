@@ -133,7 +133,6 @@ module.exports = (function() {
         if (!categoryTree || !categoryTree.columns) {
             categories.columns = [1, 3, 2];
         }
-
         return categories;
     }
 
