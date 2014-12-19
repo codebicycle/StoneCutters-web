@@ -111,6 +111,116 @@ module.exports = {
             }
         ]
     },
+    socials: {
+        'www.olx.com.co': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXcolombia'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_colombia'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcolombia'
+            }
+        ],
+        'www.olx.co.cr': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXCostaRica'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_costarica'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcostarica'
+            }
+        ],
+        'www.olx.com.ec': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXEcuador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Ecuador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXecuador'
+            }
+        ],
+        'www.olx.com.sv': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXElSalvador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_ElSalvador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXelsalvador'
+            }
+        ],
+        'www.olx.com.gt': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXGuatemala'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Guatemala'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXguatemala'
+            }
+        ],
+        'www.olx.com.pa': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/pages/OLX-Panama/209969112487961'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXpanama'
+            }
+        ],
+        'www.olx.com.pe': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXperu'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Peru'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXperu'
+            }
+        ],
+        'www.olx.com.ve': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXvenezuela'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Venezuela'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXvenezuela'
+            }
+        ]
+    },
     countryMapStyle: {
         special: ['www.olx.com.pa', 'www.olx.hn', 'www.olx.com.mx'],
     },
@@ -169,8 +279,8 @@ module.exports = {
                 countries: ['www.olx.ir']
             },
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.py']
+                worldwide: true,
+                countries: []
             },
             autoLocation: {
                 worldwide: true,
@@ -183,8 +293,8 @@ module.exports = {
         },
         html4: {
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.py']
+                worldwide: true,
+                countries: []
             }
         }
     },

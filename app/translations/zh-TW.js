@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': '\u5C0D\u4E0D\u8D77\uFF0C\u6C92\u6709\u627E\u5230\u5728<<REGION>> \u7684 <<CATEGORY>> \u76F8\u95DC\u7D50\u679C\u3002',
     'netvibes_myolx.content.NoActiveListings': '\u60A8\u66AB\u6642\u6C92\u6709\u5728\u7DDA\u5EE3\u544A\u3002',
     'netvibes_myolx.content.NoMessages': '\u60A8\u76EE\u524D\u6C92\u6709\u4EFB\u4F55\u7559\u8A00\u3002',
-    'netvibes_myolx.content.RemoveListing': '\u522A\u9664\u5EE3\u544A',
     'netvibes_myolx.content.Views': '\u67E5\u770B',
     'supportform.Message': '\u7559\u8A00\uFF1A',
     'supportform.Reset': '\u91CD\u65B0',

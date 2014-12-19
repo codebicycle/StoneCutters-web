@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Pedimos desculpa, mas n\xE3o encontramos <<RESULTS>> na <<CATEGORY>> da <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualmente n\xE3o tem an\xFAncios activos.',
     'netvibes_myolx.content.NoMessages': 'Actualmente n\xE3o tem mensagens.',
-    'netvibes_myolx.content.RemoveListing': 'Apagar an\xFAncio',
     'netvibes_myolx.content.Views': 'Visitas',
     'supportform.Message': 'Mensagem:',
     'supportform.Reset': 'Cancelar',

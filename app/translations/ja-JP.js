@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': '\u7533\u3057\u8A33\u3042\u308A\u307E\u305B\u3093\u3002<<REGION>>\u306E<<CATEGORY>>\u3067\u7D50\u679C\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002 ',
     'netvibes_myolx.content.NoActiveListings': '\u73FE\u5728\u63B2\u8F09\u4E2D\u306E\u30EA\u30B9\u30C8\u306F\u3042\u308A\u307E\u305B\u3093\u3002',
     'netvibes_myolx.content.NoMessages': '\u73FE\u5728\u30E1\u30C3\u30BB\u30FC\u30B8\u306F\u3042\u308A\u307E\u305B\u3093\u3002',
-    'netvibes_myolx.content.RemoveListing': '\u30EA\u30B9\u30C8\u3092\u524A\u9664\u3059\u308B',
     'netvibes_myolx.content.Views': '\u65E2\u8AAD',
     'supportform.Message': '\u30E1\u30C3\u30BB\u30FC\u30B8:',
     'supportform.Reset': '\u30EA\u30BB\u30C3\u30C8',
