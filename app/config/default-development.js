@@ -191,7 +191,8 @@ module.exports = {
                 name: 'youtube',
                 link: 'https://www.youtube.com/user/OLXpanama'
             }
-        ],'www.olx.com.pe': [
+        ],
+        'www.olx.com.pe': [
             {
                 name: 'facebook',
                 link: 'https://www.facebook.com/OLXperu'
@@ -204,7 +205,8 @@ module.exports = {
                 name: 'youtube',
                 link: 'https://www.youtube.com/user/OLXperu'
             }
-        ],'www.olx.com.ve': [
+        ],
+        'www.olx.com.ve': [
             {
                 name: 'facebook',
                 link: 'https://www.facebook.com/OLXvenezuela'
