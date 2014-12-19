@@ -12,6 +12,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
+        var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
         var states = data.states;
         var categories = data.categories;
         var currentState = {};
@@ -39,6 +40,7 @@ module.exports = Base.extend({
             categories: categories,
             countryMapClass: countryMapClass,
             testimonials: testimonials,
+            selectedLanguage: selectedLanguage,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
