@@ -34,7 +34,7 @@ function isEnabled(page) {
     if (enabled) {
         enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'ati', 'platforms']));
     }
-    if (enabled) {
+    if (enabled && page) {
         enabled = !!utils.get(configTracking, ['ati', 'params', page]);
     }
     return enabled;
