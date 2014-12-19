@@ -1,6 +1,7 @@
 #notfound {
     box();
     clear-fix();
+    text-align: center;
     img {
         display: block;
         margin: 20px auto 0;
@@ -10,13 +11,11 @@
         font-size: $l;
         font-weight: normal;
         margin: 20px 0 0;
-        text-align: center;
     }
     h3 {
         font-size: $xl;
         font-weight: normal;
         margin: 30px 0 20px;
-        text-align: center;
     }
     ul {
         ul-reset();
@@ -26,6 +25,7 @@
         margin: 25px auto;
         position: relative;
         width: 285px;
+        text-align: left;
         tab-arrow(bottom, $yellowPosting, $green, 1px, 18px, 90);
         &::before,
         &::after {
@@ -39,7 +39,6 @@
     }
     .search-form {
         display: inline;
-        text-align: center;
         fieldset {
             margin: 0 auto;
             position: relative;
@@ -64,17 +63,23 @@
         }
     }
     .category-list {
-        width: 100%;
+        display: inline-block;
+        float: none;
         padding: 0;
+        text-align: center;
+        width: auto;
         &:last-child {
             padding: 0;
         }
         .category {
             float: left;
-            text-align: center;
-            width: 136px;
+            height: 140px;
+            margin: 0 3px;
+            width: 130px;
             .category-link {
+                float: left;
                 font-size: $m;
+                width: 100%;
             }
         }
         a {
