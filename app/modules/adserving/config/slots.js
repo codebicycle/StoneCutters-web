@@ -76,11 +76,14 @@ module.exports = {
     },
     slot_top_item: {
         enabled: true,
-        defaultType: 'ADX',
+        defaultType: 'AFC',
         location: 'Top',
         types: {
             ADX: {
                 params: {
+                    hints: 'casa',
+                    number: 3,
+                    media: 'flash, image, text',
                     width: '728',
                     height: '90'
                 },
