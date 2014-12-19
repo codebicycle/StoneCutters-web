@@ -625,11 +625,6 @@ function success(params, callback) {
 }
 
 function searchfilterig(params, callback) {
-    var platform = this.app.session.get('platform');
-
-    if (platform !== 'desktop') {
-        return helpers.common.error.call(this, null, {}, callback);
-    }
     params['f.hasimage'] = true;
     searchfilter.call(this, params, callback, '-ig');
 }
@@ -640,11 +635,6 @@ function searchfilter(params, callback, gallery) {
 }
 
 function searchig(params, callback) {
-    var platform = this.app.session.get('platform');
-
-    if (platform !== 'desktop') {
-        return helpers.common.error.call(this, null, {}, callback);
-    }
     params['f.hasimage'] = true;
     search.call(this, params, callback, '-ig');
 }
@@ -801,6 +791,7 @@ function search(params, callback, gallery) {
         var success = function(items) {
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
+            var view = 'items/search';
 
             this.app.seo.setContent(items.meta);
             if (items.meta.total < 5) {
@@ -822,7 +813,11 @@ function search(params, callback, gallery) {
                 }
             });
 
-            callback(null, ['items/search', gallery.replace('-', '')].join(''), {
+            if (platform === 'desktop' && gallery) {
+                view += gallery.replace('-', '');
+            }
+
+            callback(null, view, {
                 items: items.toJSON(),
                 meta: items.meta,
                 filters: items.filters,
@@ -1119,6 +1114,7 @@ function allresults(params, callback, gallery) {
 
         var success = function(items) {
             var meta = items.meta;
+            var view = 'items/allresults';
 
             this.app.seo.setContent(items.meta);
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
@@ -1126,7 +1122,11 @@ function allresults(params, callback, gallery) {
 
             tracking.addParam('page_nb', meta.totalPages);
 
-            callback(null, {
+            if (platform === 'desktop' && gallery) {
+                view += gallery.replace('-', '');
+            }
+
+            callback(null, view, {
                 categories: this.dependencies.categories.toJSON(),
                 items: items.toJSON(),
                 meta: meta,
@@ -1136,6 +1136,7 @@ function allresults(params, callback, gallery) {
         }.bind(this);
 
         var error = function(err, res) {
+            console.log(err.stack);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 

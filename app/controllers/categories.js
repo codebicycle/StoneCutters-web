@@ -35,11 +35,6 @@ function list(params, callback) {
 }
 
 function showig(params, callback) {
-    var platform = this.app.session.get('platform');
-
-    if (platform !== 'desktop') {
-        return helpers.common.redirect.call(this, '/');
-    }
     params['f.hasimage'] = true;
     show.call(this, params, callback, '-ig');
 }
@@ -51,6 +46,7 @@ function show(params, callback, gallery) {
     }, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
 
         var redirect = function(done){
             var categoryId = Seo.isCategoryDeprecated(params.catId);
@@ -66,7 +62,6 @@ function show(params, callback, gallery) {
 
         var router = function(done) {
             var category = this.dependencies.categories.get(params.catId);
-            var platform = this.app.session.get('platform');
             var subcategory;
 
             if (!category) {
@@ -91,7 +86,13 @@ function show(params, callback, gallery) {
         }.bind(this);
 
         var success = function(_result) {
-            callback(null, _result);
+            var view = 'categories/show';
+
+            if (platform === 'desktop' && gallery) {
+                view += gallery.replace('-', '');
+            }
+
+            callback(null, view, _result);
         }.bind(this);
 
         var error = function(err, res) {
