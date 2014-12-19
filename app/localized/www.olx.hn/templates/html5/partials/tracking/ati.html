@@ -1,0 +1,18 @@
+{% if tracking.params.ati %}
+<script type="text/javascript">
+    var atiapi = (atiapi || []);
+
+    atiapi.push(['config', 'domain', '{{ tracking.params.ati.domain }}']);
+    atiapi.push({
+        xtdmc: '{{ tracking.params.ati.host }}',
+        xtnv: document,
+        xtsd: '{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}',
+        xtsite: '{{ tracking.params.ati.siteId }}',
+        xtcustom: JSON.parse('{{ tracking.params.ati.custom }}'),
+        xtergo: '1'
+    });
+</script>
+<noscript>
+    <img width="1" height="1" alt="" src="{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}.ati-host.net/hit.xiti?s={{ tracking.params.ati.siteId }}&stc={{ tracking.params.ati.custom | encode }}"/>
+</noscript>
+{% endif %}
