@@ -38,7 +38,7 @@ function showig(params, callback) {
     var platform = this.app.session.get('platform');
 
     if (platform !== 'desktop') {
-        return helpers.common.error.call(this, null, {}, callback);
+        return helpers.common.redirect.call(this, '/');
     }
     params['f.hasimage'] = true;
     show.call(this, params, callback, '-ig');

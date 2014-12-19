@@ -161,7 +161,7 @@ function allstates(params, callback) {
 
             if (platform !== 'desktop') {
                 done.abort();
-                return helpers.common.error.call(this, null, {}, callback);
+                return helpers.common.redirect.call(this, '/');
             }
             done();
         }.bind(this);
