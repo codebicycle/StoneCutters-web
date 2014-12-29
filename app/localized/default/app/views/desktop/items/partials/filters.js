@@ -69,7 +69,7 @@ module.exports = Base.extend({
         if (path.match(this.regexpFindPage)) {
             path = path.replace(this.regexpReplacePage, '');
         }
-        return path;
+        return path.replace(/\/\//g, '/');
     },
     selectFilter: function(event) {
         event.preventDefault();
