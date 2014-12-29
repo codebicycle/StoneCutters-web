@@ -12,7 +12,12 @@
         </div>
     </section>
     <section id="description">
-        <span class="date">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
+        <span class="date">
+            {{ item.date.since.day if item.date.since.day }}
+            {{ dictionary[item.date.since.dictionary] }}
+            {{ (', ' + item.date.since.hour) if item.date.since.hour }}
+            {{ (', '+item.location.cityName) if item.location.cityName }}
+        </span>
         <h1>{{ item.title }}</h1>
         <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
         <div class="clear"></div>
@@ -88,11 +93,31 @@
 
 
 
-    {% if item.coordinates %}
-        <section id="map">
-            <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&zoom=14&size=320x100&markers={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&sensor=false">
-        </section>
-    {% endif %}
+    <section id="map">
+        <div class="profile {{ '' if item.coordinates else 'withoutmap' }}">
+        {% if item.phone and item.contactName %}
+            <strong>{{ item.contactName }}</strong>
+            <span>{{ item.phone }}</span>
+        {% elif item.phone or item.contactName %}
+            <strong>{{ item.contactName if item.contactName }}</strong>
+            <span> {{ item.phone if item.phone }}</span>
+        {% endif %}
+            <span>
+                In
+                {% if item.location.neighborhoodName %}
+                    {{ item.location.neighborhoodName if item.location.neighborhoodName }}
+                {% else %}
+                    {{ item.location.cityName if item.location.cityName }}
+                {% endif %}
+                {{ (', '+item.location.countryName) if item.location.countryName }}
+            </span>
+        </div>
+        {% if item.coordinates %}
+            <div class="map">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&zoom=14&size=108x63&markers={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&sensor=false">
+            </div>
+        {% endif %}
+    </section>
     {% if relatedItems.length %}
         <aside class="relatedAds">
             <section class="swiper-containerRA">
