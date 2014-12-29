@@ -95,9 +95,9 @@ module.exports = {
         types: {
             AFC: {
                 params: {
-                    hints: 'casa',
+                    hints: 'fibertel',
                     number: 3,
-                    media: 'image',
+                    media: 'image, text',
                     width: '728',
                     height: '90'
                 },

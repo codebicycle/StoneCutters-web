@@ -113,15 +113,20 @@ module.exports = Base.extend({
         }).on('load', function() {
             var domIfr = this.contentDocument || this.contentWindow.document;
 
-            /*var str = new Array();
+            /*var str = ;
             str.push({
-                "name": "slot_{{slotName}}",
-                "num_ads": {{numAds|number_format}},
-                "refered_num_ads": {{seoAds|default(0)|number_format}},
-                "layout": "{{cssClass|default('')}}",
-                "renderSlot": "{{renderSlot|default('slot_' ~ slotName)}}",
-                "renderMethod": "googleUnique"
-            });*/
+                //"name": "slot_{{slotName}}",
+                //"num_ads": {{numAds|number_format}},
+                //"refered_num_ads": {{seoAds|default(0)|number_format}},
+                //"layout": "{{cssClass|default('')}}",
+                //"renderSlot": "{{renderSlot|default('slot_' ~ slotName)}}",
+                //"renderMethod": "googleUnique"
+                'name': 'slot_' + params.slotname,
+                'num_ads': params.number,
+                'refered_num_ads': params.numbers,
+                'renderSlot': params.slotname,
+                'renderMethod': 'googleUnique'
+            }); */
 
             var attrIframe = [];
                 attrIframe.push('google_ad_client = "' + params.pubId + '";');
@@ -130,10 +135,11 @@ module.exports = Base.extend({
                 attrIframe.push('google_image_size = "' + params.width + 'x' + params.height + '";');
                 attrIframe.push('google_ad_output = "js";');
                 attrIframe.push('google_ad_channel = "OLX_EG";');
-                attrIframe.push('google_max_num_ads = "' + params.number + '";');
+                attrIframe.push('google_max_num_ads = 3;');
                 attrIframe.push('google_hints = "' + params.hints + '";');
                 attrIframe.push('google_ad_section = "title body";');
                 attrIframe.push('google_skip = 0;');
+                attrIframe.push('google_ad_request_done = function(r){console.log(r);};');
 
             domIfr.write('<style>body{margin:0;}</style><sc'+'ript type="text/javascript">' + attrIframe.join('\n') + '</sc'+'ript> <scr'+'ipt type="text/javascript"  src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </sc'+'ript>');
         }).appendTo('#' + params.slotname);
