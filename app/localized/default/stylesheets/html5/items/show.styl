@@ -46,6 +46,44 @@ section#itemPage .unavailable {
         padding-top: .5rem;
     }
 }
+
+section.nav {
+    background: #EFEFEF;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 0 !important;
+}
+section.nav span {
+    float: left;
+    color: #550C90;
+    line-height: 2;
+    font-size: 14px;
+}
+section.nav .links {
+    float: right;
+    border-radius: 5px;
+    background: #FFF;
+    border: 1px solid #D4D4D4;
+    box-shadow: 0 1px 0 rgba(0,0,0,.2);
+    padding: 5px 10px;
+}
+section.nav .links a{
+    color: #0096CF;
+    font-size: 13px;
+    padding: 0 10px;
+    font-weight: 700;
+
+}
+section.nav .links a:first-child{
+    background: transparent url(imageUrl/images/html5/flecha_home_left.png) no-repeat left center;
+    border-right: 1px solid #0096CF;
+}
+section.nav .links a:last-child{
+    background: transparent url(imageUrl/images/html5/flecha_home.png) no-repeat right center;
+}
+
+
 section#itemPage section {
     height: auto;
     margin: 0 0 .5rem;
@@ -149,23 +187,24 @@ section#itemPage section#onePicture .slide div {
 section#itemPage section#description, section#itemPage section#optionals {
     padding: 0 .5rem;
 }
-section#itemPage section#description span {
+section#itemPage section#description span.date {
     float: left;
     margin: .5rem 0 0;
     font-size: 0.6875rem;
-    color: #494949;
+    color: #B1B1B1;
 }
 section#itemPage section#description span, section#itemPage section#description h1, section#itemPage section#description p {
     float: left;
 }
 section#itemPage section#description .price {
-    float: right;
+    float: left;
     font-size: 1.5rem;
-    font-weight: normal;
+    font-weight: 700;
     color: #ff7700;
+    line-height: 1;
 }
 section#itemPage section#description h1, section#itemPage section#description p {
-    color: #666;
+    color: #303030;
     width: 100%;
 }
 section#itemPage section#description h1 {
@@ -175,6 +214,16 @@ section#itemPage section#description h1 {
 }
 section#itemPage section#description p {
     font-size: .75rem;
+}
+
+section .detail {
+    background: #EFEFEF;
+    color: #2A2929;
+    padding: 10px;
+}
+section .detail h3{
+    padding: 3px 0;
+    margin: 0;
 }
 section#itemPage section#optionals ul {
     float: left;

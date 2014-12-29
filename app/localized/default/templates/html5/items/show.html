@@ -4,30 +4,19 @@
     <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
     <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav" >
     <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav" >
-
-    {% if not item.status.onReview %}
-        {% set favClass = 'remove' %}
-        {% set favLink = '#' %}
-        {% set favText = dictionary["item.RemoveFromFavorites"] %}
-        {% if not item.isFavorite %}
-            {% set favClass = 'add' %}
-            {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
-            {% if not user %}
-                {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
-            {% endif %}
-        {% endif %}
-        {% from macros import Breadcrumb %}
-        {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link, item.category.name, heading=false, ['<ul>
-            <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
-            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '" data-qa="', favClass, '-favorite" >', favText, '</a></li>
-        </ul>'] | join) }}
-    {% else %}
-        {% from macros import Breadcrumb %}
-        {% set link = (breadcrumb | link) %}
-        {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
-    {% endif %}
-
+    <section class="nav">
+        <span>1 de 2122 ads</span>
+        <div class="links">
+            <a href="">Previo</a>
+            <a href="">Next</a>
+        </div>
+    </section>
+    <section id="description">
+        <span class="date">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
+        <h1>{{ item.title }}</h1>
+        <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
+        <div class="clear"></div>
+    </section>
 
     {% if item.images.length == 0 %}
         <section id="noPicture">
@@ -56,14 +45,6 @@
         </section>
     {% endif %}
 
-    <section id="description">
-        <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
-        <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
-        <h1>{{ item.title }}</h1>
-        <p>{{ item.descriptionReplace }}</p>
-        <div class="clear"></div>
-    </section>
-
     <section id="optionals">
         {% if item.optionals %}
             <ul>
@@ -76,6 +57,37 @@
         {% endif %}
         <div class="clear"></div>
     </section>
+
+    <div class="detail">
+        <h3>Ad Details</h3>
+        <p>{{ item.descriptionReplace }}</p>
+    </div>
+
+    {% if not item.status.onReview %}
+        {% set favClass = 'remove' %}
+        {% set favLink = '#' %}
+        {% set favText = dictionary["item.RemoveFromFavorites"] %}
+        {% if not item.isFavorite %}
+            {% set favClass = 'add' %}
+            {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
+            {% if not user %}
+                {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
+            {% endif %}
+        {% endif %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false, ['<ul>
+            <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
+            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '" data-qa="', favClass, '-favorite" >', favText, '</a></li>
+        </ul>'] | join) }}
+    {% else %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
+    {% endif %}
+
+
+
     {% if item.coordinates %}
         <section id="map">
             <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&zoom=14&size=320x100&markers={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&sensor=false">
