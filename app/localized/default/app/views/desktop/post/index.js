@@ -245,9 +245,9 @@ module.exports = Base.extend({
         this.$('#posting-contact-view').trigger('disablePost');
     },
     onImagesLoadEnd: function(event, images) {
-        this.form.images = Object.keys(images).map(function each(image) {
+        this.item.set('images', Object.keys(images).map(function each(image) {
             return images[image].id;
-        });
+        }));
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
     onBeforeUnload: function(event) {
