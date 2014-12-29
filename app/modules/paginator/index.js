@@ -12,7 +12,6 @@ function prepare(app, params, type) {
     if (!params.pageSize || (params.pageSize < 1 || params.pageSize > max)) {
         params.pageSize = max;
     }
-    params.item_type = 'adsList';
     params.location = app.session.get('siteLocation');
     params.page = (params.page && !isNaN(Number(params.page)) ? Number(params.page) : 1);
     app.session.persist({
