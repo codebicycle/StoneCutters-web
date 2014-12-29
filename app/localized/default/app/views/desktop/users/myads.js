@@ -49,7 +49,7 @@ module.exports = Base.extend({
         $('.formdeleteitem').hide();
         $('.my-items').show();
     },
-    onDelete: function() {
+    onDelete: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();

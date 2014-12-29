@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': '\xDEv\xED mi\xF0ur fundum vi\xF0 engar ni\xF0urst\xF6\xF0ur \xED <<CATEGORY>> \xED <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': '\xDE\xFA ert ekki me\xF0 neinar virkar augl\xFDsingar \xED augnablikinu.',
     'netvibes_myolx.content.NoMessages': '\xDEa\xF0 eru engin skilabo\xF0 \xED augnablikinu.',
-    'netvibes_myolx.content.RemoveListing': 'Fjarl\xE6gja augl\xFDsingu',
     'netvibes_myolx.content.Views': 'Sko\xF0a\xF0',
     'supportform.Message': 'Skilabo\xF0: ',
     'supportform.Reset': 'Endurr\xE6sa',

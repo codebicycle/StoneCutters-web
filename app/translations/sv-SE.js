@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Vi \xE4r ledsna, vi har inte hittat resultat i <<CATEGORY>> i <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Du har inga aktiva annonser f\xF6r tillf\xE4llet.',
     'netvibes_myolx.content.NoMessages': 'Du har inga meddelanden f\xF6r tillf\xE4llet.',
-    'netvibes_myolx.content.RemoveListing': 'Ta bort annons',
     'netvibes_myolx.content.Views': 'L\xE4sta',
     'supportform.Message': 'Meddelande',
     'supportform.Reset': '\xC5terst\xE4ll',
