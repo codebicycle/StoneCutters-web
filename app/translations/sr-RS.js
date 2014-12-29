@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Nema rezultata u <<CATEGORY>> u <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Trenutno nemate aktivnih oglasa.',
     'netvibes_myolx.content.NoMessages': 'Trenutno nemate poruka.',
-    'netvibes_myolx.content.RemoveListing': 'Ukloni oglas',
     'netvibes_myolx.content.Views': 'Broj pregleda',
     'supportform.Message': 'Poruka:',
     'supportform.Reset': 'Poni\u0161ti',

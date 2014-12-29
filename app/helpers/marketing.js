@@ -42,7 +42,7 @@ module.exports = {
             break;
         }
         if (useADX) {
-            data.link = 'http://ad-x.co.uk/API/click/olxinc789048jo/am5543eccbc236fa';
+            data.link = 'http://ad-x.co.uk/API/click/olxinc789048jo/am5549427d4c29a6';
         }
         return data;
 
