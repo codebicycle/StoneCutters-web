@@ -1,4 +1,4 @@
-<ul class="locations-tabs {{ 'locations-empty' if location.current and location.current.type == 'city' }}" >
+<ul class="locations-tabs{{ ' locations-empty' if location.current and location.current.type == 'city' }}{{ ' locations-neighborhood' if filters.has('neighborhood') }}" >
     <li>
     {% if location.children | length == 0 %}
         {{ location.name }}
@@ -24,17 +24,37 @@
         {% if filter.name == 'state' or (filter.name == 'city' and location.current and location.current.type != 'city') %}
             <ul class="locations-list">
                 {% for value in filter.value %}
-                    <li><a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a></li>
+                    <li class="locations">
+                        <a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a>
+                    </li>
                 {% endfor %}
-                {# {% for neighborhood in filters.get('neighborhood').get('value') %}
-                    <li>
+            </ul>
+        {% endif %}
+        {% if filters.has('neighborhood') and filter.name == 'neighborhood' %}
+            <div class="neighborhood">
+                <ul class="neighborhood-list">
+                    <li class="locations">
                         <label>
-                            <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" >
-                            {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
+                            <input type="checkbox" value="select-all" rel="select-all" >
+                            {{ dictionary["itemslisting.SelectAll"] }}
                         </label>
                     </li>
-                {% endfor %} #}
-            </ul>
+                    {% for neighborhood in filters.get('neighborhood').get('value') %}
+                        <li class="locations">
+                            <label>
+                                <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" >
+                                {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="actions">
+                    <span class="filter-btn"  rel="nofollow" data-action="slide" >{{ dictionary["listingpageitemslisting.FilterByNeighborhood"] }}</span>
+                    <span class="cancel-btn hide" rel="nofollow">{{ dictionary["misc.Cancel"] }}</span>
+                    <span class="see less hide icons icon-arrow-up" data-action="seeLess">{{ dictionary["misc.SeeLess"] }}</span>
+                    <span class="see more hide icons icon-arrow-down" data-action="seeMore">{{ dictionary["misc.SeeMore"] }}</span>
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 {% endif %}

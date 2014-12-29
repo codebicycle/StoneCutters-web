@@ -50,19 +50,88 @@
                     padding-bottom: 10px;
                 }
             }
+            &.locations-neighborhood {
+                li:last-child {
+                    background: $greyBoxBg;
+                    border-bottom: none;
+                    padding: 10px 30px 11px 28px;
+                }
+            }
         }
     }
     .locations-list {
         box($yellow, $yellowBorders, 0 3px 3px 3px, 10px);
 
-        li {
+    }
+    .locations {
+        display: inline-block;
+        font-size: $xs;
+        margin: 4px 0;
+        vertical-align: top;
+        width: 24%;
+        span {
+            color: $greyStrong;
+        }
+    }
+    .neighborhood {
+        box($greyBoxBg, $greyBorders, 0 3px 3px 3px, 0);
+        .neighborhood-list {
+            border-bottom: 1px solid $greyBorders;
+            display: none;
+            padding: 10px;
+            height: 0;
+            overflow: hidden;
+            &.open {
+                display: inline-block;
+            }
+        }
+        .locations {
+            label {
+                padding: 0 0 0 18px;
+                position: relative;
+                input {
+                    left: 0;
+                    position: absolute;
+                    top: 0;
+                }
+            }
+            &:first-child {
+                font-weight: bold;
+                width: 100%;
+            }
+        }
+        .actions {
+            display: block;
+            padding: 10px;
+        }
+        .cancel-btn, .filter-btn {
+            cursor: pointer;
             display: inline-block;
+            font-size: $s;
+            line-height: 1;
+            &.hide {
+                display: none;
+            }
+        }
+        .cancel-btn {
+            action-button($greyBoxBg, $black, 3px, 10px);
+        }
+        .filter-btn {
+            action-button($green, $white, 3px, 10px);
+            font-weight: bold;
+        }
+        .see {
+            color: $blue;
+            cursor: pointer;
+            float: right;
             font-size: $xs;
-            margin: 4px 0;
-            vertical-align: top;
-            width: 24%;
-            span {
-                color: $greyStrong;
+            margin: 10px 0 0 0;
+            padding: 0 20px 0 0;
+            position: relative;
+            &:before {
+                position: absolute;
+                right: 0;
+                top: 1px;
             }
         }
     }

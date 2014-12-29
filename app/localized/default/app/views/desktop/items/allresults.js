@@ -8,7 +8,7 @@ module.exports = Base.extend({
     id: 'items-allresults-view',
     className: 'items-allresults-view',
     tagName: 'main',
-    order: ['state', 'city'],
+    order: ['state', 'city', 'neighborhood'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
     getTemplateData: function() {

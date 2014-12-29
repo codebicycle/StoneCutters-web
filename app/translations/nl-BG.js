@@ -56,6 +56,7 @@ module.exports = {
     'itemslisting.PendingAd': 'Advertentie is in behandeling',
     'itemslisting.Previous': 'Vorige',
     'itemslisting.RefineYourSearch': 'Verfijn je zoekopdracht ',
+    'itemslisting.SelectAll': 'Alles selecteren',
     'loginbox.CreateYourAccount': 'Maak een gratis account aan:',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Ik ga akkoord met de <<LINK_TERMS_USE>>Gebruiksvoorwaarden<</LINK_TERMS_USE>> van OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Hebt u al een account? Klik hier om u aan te melden.',

@@ -2,8 +2,8 @@
 127.0.0.1       {LOCAL}
 
 #SMAUG
-{SMAUG}             api-v2.olx.com    #environment
-#190.210.62.60      api-v2.olx.com    #production
+#{SMAUG}             api-v2.olx.com    #environment
+190.210.62.60      api-v2.olx.com    #production
 
 #ARWEN
 {IP}  m.olx.com           # United States
@@ -19,6 +19,8 @@
 {IP}  html5.m.olx.com.ar        # Argentina
 {IP}  www.olx.com.ar        # Argentina
 {IP}  olx.com.ar        # Argentina
+{IP}  capitalfederal-gba.olx.com.ar        # Argentina
+{IP}  capitalfederal.olx.com.ar        # Argentina
 
 {IP}  m.olx.co.ao         # Angola
 {IP}  wap.m.olx.co.ao         # Angola
