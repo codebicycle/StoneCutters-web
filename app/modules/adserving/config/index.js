@@ -4,5 +4,6 @@ module.exports = {
     slots: require('./slots'),
     channels: require('./channels'),
     CSA: require('./csa'),
-    ADX: require('./adx')
+    ADX: require('./adx'),
+    AFC: require('./afc')
 };

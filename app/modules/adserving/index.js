@@ -60,7 +60,7 @@ function getSettings() {
 }
 
 function createChannels(type) {
-    if (type == 'ADX') {
+    if (type == 'ADX' || type == 'AFC') {
         return;
     }
     var config = utils.get(configAdServing, type, {});

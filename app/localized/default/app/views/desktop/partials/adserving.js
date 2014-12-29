@@ -44,10 +44,24 @@ module.exports = Base.extend({
             window._googCsa('ads', settings.options, settings.params);
         }
         else if (type == 'ADX') {
+
             this.createIframe({
                 slotname: slotname,
                 width: settings.params.width,
                 height: settings.params.height,
+                slotId: settings.params.slotId,
+                pubId: settings.options.pubId
+            });
+        }
+        else if (type == 'AFC') {
+
+            this.createIframeAfc({
+                slotname: slotname,
+                width: settings.params.width,
+                height: settings.params.height,
+                media: settings.params.media,
+                hints: settings.params.hints,
+                number: settings.params.number,
                 slotId: settings.params.slotId,
                 pubId: settings.options.pubId
             });
@@ -98,6 +112,7 @@ module.exports = Base.extend({
             id: params.slotname + '_iframe'
         }).on('load', function() {
             var domIfr = this.contentDocument || this.contentWindow.document;
+
             /*var str = new Array();
             str.push({
                 "name": "slot_{{slotName}}",
@@ -108,22 +123,19 @@ module.exports = Base.extend({
                 "renderMethod": "googleUnique"
             });*/
 
-            var params = [];
-                params.push('google_ad_client = "' + params.pubId + '";');
-                params.push('google_safe = "medium";');
-                params.push('google_ad_type = "' + params.media + '";');
-                params.push('google_image_size = "' + params.width + 'x' + params.height + '";');
-                params.push('google_ad_output = "js";');
-                params.push('google_max_num_ads = "' + params.number + '";');
-                params.push('google_hints = "' + params.hints + '";');
-                params.push('google_ad_section = "title body";');
-                params.push('google_ad_client = "' + params.pubId + '";');
-                //google_skip = ads_skip;
+            var attrIframe = [];
+                attrIframe.push('google_ad_client = "' + params.pubId + '";');
+                attrIframe.push('google_safe = "medium";');
+                attrIframe.push('google_ad_type = "' + params.media + '";');
+                attrIframe.push('google_image_size = "' + params.width + 'x' + params.height + '";');
+                attrIframe.push('google_ad_output = "js";');
+                attrIframe.push('google_ad_channel = "OLX_EG";');
+                attrIframe.push('google_max_num_ads = "' + params.number + '";');
+                attrIframe.push('google_hints = "' + params.hints + '";');
+                attrIframe.push('google_ad_section = "title body";');
+                attrIframe.push('google_skip = 0;');
 
-                // Acá lo que hay que hacer es agarrar lo que hay en FP y pasarlo para asi tener la librería de AFC.
-
-
-            domIfr.write('<style>body{margin:0;}</style><sc'+'ript type="text/javascript">aca va el push</sc'+'ript> <scr'+'ipt type="text/javascript"  src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </sc'+'ript>');
+            domIfr.write('<style>body{margin:0;}</style><sc'+'ript type="text/javascript">' + attrIframe.join('\n') + '</sc'+'ript> <scr'+'ipt type="text/javascript"  src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </sc'+'ript>');
         }).appendTo('#' + params.slotname);
     },
     _checkAdServing: function() {

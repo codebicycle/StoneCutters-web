@@ -74,16 +74,30 @@ module.exports = {
             }
         }
     },
+    /*slot_top_item: {
+        enabled: true,
+        defaultType: 'ADX',
+        location: 'Top',
+        types: {
+            ADX: {
+                params: {
+                    width: '728',
+                    height: '90'
+                },
+                excludedCategories: []
+            }
+        }
+    }*/
     slot_top_item: {
         enabled: true,
         defaultType: 'AFC',
         location: 'Top',
         types: {
-            ADX: {
+            AFC: {
                 params: {
                     hints: 'casa',
                     number: 3,
-                    media: 'flash, image, text',
+                    media: 'image',
                     width: '728',
                     height: '90'
                 },
