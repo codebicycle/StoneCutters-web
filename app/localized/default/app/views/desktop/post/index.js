@@ -301,7 +301,6 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        console.log(this.item);
         function post(done) {
             this.item.post(done);
         }

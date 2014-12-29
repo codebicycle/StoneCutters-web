@@ -18,6 +18,7 @@ module.exports = {
 
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var user = this.app.session.get('user');
         var siteLocation = this.app.session.get('siteLocation');
@@ -95,13 +96,47 @@ function flow(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
+                if (redirect(res.item)) {
+                    return;
+                }
                 postingFlowController(res.postingSession, res.item, res.fields);
             }
             else if (isDesktop) {
+                if (redirect(res.item)) {
+                    return;
+                }
                 postingController(res.postingSession, res.cities, res.item, res.fields);
             }
             else {
                 postingCategoriesController();
+            }
+        }.bind(this);
+
+        var redirect = function(item) {
+            var protocol = this.app.session.get('protocol');
+            var host = this.app.session.get('host');
+            var shortHost = this.app.session.get('shortHost');
+            var url = this.app.session.get('url');
+            var user = this.app.session.get('user');
+
+            if (!item) {
+                return false;
+            }
+            if (item.get('status') && !item.get('status').editable) {
+                helpers.common.redirect.call(this, '/iid-' + itemId);
+                return true;
+            }
+            if (!user || !user.userId || (item.get('user') && item.get('user').id != user.userId)) {
+                helpers.common.redirect.call(this, '/iid-' + itemId, null, {
+                    status: 302
+                });
+                return true;
+            }
+            if (item.getLocation().url && item.getLocation().url !== siteLocation) {
+                helpers.common.redirect.call(this, [protocol, '://', host.replace(shortHost, item.getLocation().url), url].join(''), null, {
+                    pushState: false
+                });
+                return true;
             }
         }.bind(this);
 
@@ -152,6 +187,12 @@ function flow(params, callback) {
         }.bind(this);
 
         var error = function(err) {
+            if (itemId && err.status === 400) {
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (itemId && err.status === 401) {
+                return helpers.common.redirect.call(this, '/iid-' + itemId);
+            }
             helpers.common.error.call(this, err, {}, callback);
         }.bind(this);
 
