@@ -7,9 +7,9 @@
     </div>
 {% endif %}
 <div id="myads">
-    {% if myAds.length %}
+    {% if items.length %}
         <ul class="itemListing">
-            {% for item in myAds %}
+            {% for item in items.toJSON() %}
                 <li>
                     <a href="{{ item | slugToUrl | link }}">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
@@ -43,3 +43,4 @@
         {% endif %}
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+{% view 'partials/tracking' %}

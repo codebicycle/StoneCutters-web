@@ -1,13 +1,15 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('rendr/shared/app');
+var Session = require('../shared/session');
+var utils = require('../shared/utils');
 var Fetcher = require('./bases/fetcher');
 var ModelStore = require('./bases/modelStore');
 var CollectionStore = require('./bases/collectionStore');
-var Session = require('../shared/session');
 var nunjucks = require('./modules/nunjucks');
-var _ = require('underscore');
 var Seo = require('./modules/seo');
+var helpers = require('./helpers');
 
 module.exports = Base.extend({
     defaults: {
@@ -39,6 +41,7 @@ module.exports = Base.extend({
             });
             this.router.currentView.onActionStart();
         }, this);
+        this.autolocate();
         Base.prototype.start.call(this);
     },
     getAppViewClass: function() {
@@ -76,6 +79,7 @@ module.exports = Base.extend({
         var specs = {};
         var languageId = this.session.get('languages')._byId[this.session.get('selectedLanguage')].id;
         var location = this.session.get('location').url;
+        var siteLocation = this.session.get('siteLocation');
 
         dependencies.forEach(function each(dependency) {
             switch (dependency) {
@@ -83,7 +87,7 @@ module.exports = Base.extend({
                     specs[dependency] = {
                         collection: 'Categories',
                         params: {
-                            location: location,
+                            location: siteLocation || location,
                             languageId: languageId,
                             seo: Seo.isEnabled(location)
                         }
@@ -120,6 +124,18 @@ module.exports = Base.extend({
             }
         }, this);
         return specs;
+    },
+    autolocate: function() {
+        if (!navigator || !navigator.geolocation || !helpers.features.isEnabled('autoLocation', this.session.get('platform'), this.session.get('location').url)) {
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(this.onAutolocationSuccess.bind(this), utils.noop, {
+            maximumAge: 0,
+            timeout: 6000
+        });
+    },
+    onAutolocationSuccess: function(position) {
+        this.set('autolocation', position);
     }
 });
 

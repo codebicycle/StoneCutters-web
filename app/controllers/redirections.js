@@ -264,6 +264,25 @@ module.exports = {
         }
         helpers.common.redirect.call(this, url.join(''));
     },
+    staticSearchFilters: function(params, callback) {
+        var filters = params ? params.filters : undefined;
+        var url = [];
+
+        url.push('/nf/');
+        url.push(params.search);
+        if (params.catId) {
+            url.pop();
+            url.push('des-cat-');
+            url.push(params.catId);
+            url.push('/');
+            url.push(params.search);
+        }
+        if (filters && filters !== 'undefined') {
+            url.push('/-');
+            url.push(filters);
+        }
+        helpers.common.redirect.call(this, url.join(''));
+    },
     staticSearchMobile: function(params, callback) {
         helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
     },
@@ -272,10 +291,15 @@ module.exports = {
         helpers.controllers.control.call(this, params, controller);
 
         function controller() {
-            //helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
-            helpers.common.error.call(this, null, null, callback);
+            helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
         }
     }),
+    users: function(params, callback) {
+        statsd.increment(['redirections', 'seo', 'users']);
+        helpers.common.redirect.call(this, '/', null, {
+            status: 302
+        });
+    },
     userlistings: function(params, callback) {
         statsd.increment(['redirections', 'seo', 'userlistings']);
         helpers.common.redirect.call(this, '/');

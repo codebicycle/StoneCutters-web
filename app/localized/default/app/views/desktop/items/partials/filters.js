@@ -41,7 +41,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = this.app.session.get('path');
+        var path = this.getPath('path');
         var $target = $(event.currentTarget);
         var filter = {
             name: $target.data('filter-name'),
@@ -69,14 +69,14 @@ module.exports = Base.extend({
         if (path.match(this.regexpFindPage)) {
             path = path.replace(this.regexpReplacePage, '');
         }
-        return path;
+        return path.replace(/\/\//g, '/');
     },
     selectFilter: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = this.app.session.get('path');
+        var path = this.getPath('path');
         var $target = $(event.currentTarget);
         var filter = {
             name: $target.data('filter-name'),
@@ -101,7 +101,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = this.app.session.get('path');
+        var path = this.getPath('path');
         var $target = $(event.currentTarget);
         var $from = $target.siblings('[data-filter-id=from]');
         var $to = $target.siblings('[data-filter-id=to]');
@@ -125,7 +125,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var path = this.app.session.get('path');
+        var path = this.getPath('path');
         var $target = $(event.currentTarget);
         var filter = {
             name: $target.data('filter-name'),
@@ -169,16 +169,30 @@ module.exports = Base.extend({
     },
     replacePath: function(replace) {
         var path = this.app.session.get('path');
+        var currentRoute = this.app.session.get('currentRoute');
         var url;
 
-        switch (this.options.subid) {
-            case 'staticSearch':
-                url = ['/nf', replace];
-                url.push(path.replace('/q/', '').split('/').shift());
-                return url.join('');
-            default:
-                return path.replace('/search/', replace);
+        if (currentRoute.action === 'staticSearch') {
+            url = ['/nf', replace];
+            url.push(path.replace('/q/', '').split('/').shift());
+            return url.join('');
         }
+        return path.replace('/search/', replace);
+    },
+    getPath: function() {
+        var path = this.app.session.get('path');
+        var currentRoute = this.app.session.get('currentRoute');
+        var category;
+
+        if (currentRoute.action === 'staticSearch') {
+            path = path.replace('/q/', '/nf/search/');
+            if (path.match(/\/c-[0-9]+/)) {
+                category = path.replace(/.*\/(c-[0-9]+).*/, '$1');
+                path = path.replace(/\/(c-[0-9]+)/, '');
+                path = path.replace('/search/', '/des-cat' + category.substring(1) + '/');
+            }
+        }
+        return path;
     }
 });
 

@@ -2,6 +2,8 @@
     float: right;
     padding-top: 19px;
     width: 356px;
+    height: 360px;
+    position: relative;
     p {
         font-size: $xl;
         margin: 0;
@@ -12,7 +14,7 @@
         line-height: 1;
         padding: 6px 0 10px;
         strong {
-            background: url(imageUrl/images/desktop/underline.gif) left bottom no-repeat;
+            background: url(imageUrl/images/desktop/underline.gif) center bottom no-repeat;
             display: inline-block;
             margin-bottom: 20px;
             padding-bottom: 8px;
@@ -21,9 +23,10 @@
     .description {
         clear-fix();
         background: #f5f5f5;
-        margin-top: 85px;
-        padding: 82px 0 20px;
-        position: relative;
+        margin-top: 100px;
+        padding: 65px 0 10px;
+        position: absolute;
+        bottom: 0;
         .stuff {
             background: url(imageUrl/images/desktop/stuff.png) no-repeat 0 0;
             display: block;

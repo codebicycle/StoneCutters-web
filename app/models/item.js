@@ -11,7 +11,8 @@ module.exports = Base.extend({
     shortDescription: shortDescription,
     getLocation: getLocation,
     checkSlug: checkSlug,
-    parse: parse
+    parse: parse,
+    remove: remove
 });
 
 module.exports.id = 'Item';
@@ -93,4 +94,20 @@ function parse(resp, options) {
         resp.date.since = helpers.timeAgo(resp.date);
     }
     return Base.prototype.parse.apply(this, arguments);
+}
+
+function remove(reason, comment, done) {
+    helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/delete', {
+        query: {
+            token: (this.app.session.get('user') || {}).token,
+            platform: this.app.session.get('platform'),
+            reason: reason,
+            comment: comment
+        }
+    }, callback.bind(this));
+
+    function callback(err) {
+        this.set('status', 'closed');
+        this.errfcb(done)(err);
+    }
 }

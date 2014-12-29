@@ -10,7 +10,7 @@ var asynquence = require('asynquence');
 module.exports = Base.extend({
     tagName: 'footer',
     className: function() {
-        if (this.isFilter()) {
+        if (this.hideFooter()) {
             return 'footer_footer_view disabled';
         }
         return 'footer_footer_view';
@@ -33,12 +33,23 @@ module.exports = Base.extend({
         this.app.router.appView.on('sort:end', this.show.bind(this));
         this.app.router.appView.on('location:start', this.hide.bind(this));
         this.app.router.appView.on('location:end', this.show.bind(this));
+        /*this.app.router.appView.on('login:start', this.hide.bind(this));
+        this.app.router.appView.on('login:end', this.show.bind(this));
+        this.app.router.appView.on('register:start', this.hide.bind(this));
+        this.app.router.appView.on('register:end', this.show.bind(this));
+        this.app.router.appView.on('lostpassword:start', this.hide.bind(this));
+        this.app.router.appView.on('lostpassword:end', this.show.bind(this));*/
         this.attachTrackMe();
     },
-    isFilter: function() {
+    hideFooter: function() {
         var currentRoute = this.app.session.get('currentRoute');
-        
-        return (currentRoute.action === 'filter' || currentRoute.action === 'sort' || currentRoute.action === 'location');
+
+        return (currentRoute.action === 'filter' ||
+                currentRoute.action === 'sort' ||
+                currentRoute.action === 'location'/* ||
+                currentRoute.action === 'login' ||
+                currentRoute.action === 'lostpassword' ||
+                currentRoute.action === 'register'*/);
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {

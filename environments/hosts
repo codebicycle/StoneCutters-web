@@ -2,8 +2,8 @@
 127.0.0.1       {LOCAL}
 
 #SMAUG
-190.210.62.60             api-v2.olx.com   #production
-#108.171.171.70            api-v2.olx.com    #testing
+{SMAUG}             api-v2.olx.com    #environment
+#190.210.62.60      api-v2.olx.com    #production
 
 #ARWEN
 {IP}  m.olx.com           # United States
@@ -40,6 +40,7 @@
 {IP}  html5.m.olx.cm        # Cameroon
 {IP}  www.olx.cm        # Cameroon
 {IP}  olx.cm        # Cameroon
+{IP}  yaounde.olx.cm        # Cameroon
 
 {IP}  m.olx.sn        # Senegal
 {IP}  wap.m.olx.sn        # Senegal
@@ -247,6 +248,8 @@
 {IP}  html5.m.olx.com.gh        # Ghana
 {IP}  www.olx.com.gh        # Ghana
 {IP}  olx.com.gh        # Ghana
+{IP}  kumasi-metropolitan.olx.com.gh        # Ghana
+{IP}  accra-metropolitan.olx.com.gh        # Ghana
 
 {IP}  m.olx.com.gt        # Guatemala
 {IP}  wap.m.olx.com.gt        # Guatemala
@@ -310,6 +313,7 @@
 {IP}  html5.m.olx.com.ni        # Nicaragua
 {IP}  www.olx.com.ni        # Nicaragua
 {IP}  olx.com.ni        # Nicaragua
+{IP}  managuacity.olx.com.ni        # Nicaragua
 
 {IP}  m.olx.com.ng        # Nigeria
 {IP}  wap.m.olx.com.ng        # Nigeria
@@ -618,6 +622,7 @@
 {IP}  html5.m.olx.co.ug         # Uganda
 {IP}  www.olx.co.ug         # Uganda
 {IP}  olx.co.ug         # Uganda
+{IP}  kampala.olx.co.ug         # Uganda
 
 {IP}  m.olx.com.ua        # Ukraine
 {IP}  wap.m.olx.com.ua        # Ukraine
@@ -639,6 +644,7 @@
 {IP}  html5.m.olx.com.uy        # Uruguay
 {IP}  www.olx.com.uy        # Uruguay
 {IP}  olx.com.uy        # Uruguay
+{IP}  ciudadmontevideo.olx.com.uy        # Uruguay
 
 {IP}  m.olx.com.ve        # Venezuela
 {IP}  wap.m.olx.com.ve        # Venezuela

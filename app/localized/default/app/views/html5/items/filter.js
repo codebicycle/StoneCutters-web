@@ -8,7 +8,7 @@ var tracking = require('../../../../../../modules/tracking');
 var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({
-    order: ['pricerange', 'hasimage', 'state', 'parentcategory'],
+    order: ['pricerange', 'hasimage', 'neighborhood', 'state', 'parentcategory'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
     getTemplateData: function() {

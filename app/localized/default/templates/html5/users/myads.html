@@ -7,9 +7,9 @@
     </div>
 {% endif %}
 <section id="myads">
-    {% if myAds.length %}
+    {% if items.length %}
         <ul class="item-listing">
-            {% for item in myAds %}
+            {% for item in items.toJSON() %}
                 <li>
                     <a href="#" class="edit {{ item.id }}" data-itemUrl="{{ item | slugToUrl | link }}" data-itemId="{{ item.id }}" {{ 'data-editable="true"' if item.status == 'ready'}}>
                         {% if item.status == 'pending' %}
@@ -26,8 +26,8 @@
                                 {% endif %}
                             </p>
                         {% endif %}
-                        <h2 class="title">{{ item.title }}</h2>            
-                        <div class="price">{{ item.price.displayPrice }}</div>            
+                        <h2 class="title">{{ item.title }}</h2>
+                        <div class="price">{{ item.price.displayPrice }}</div>
                     </a>
                 </li>
             {% endfor %}
@@ -69,3 +69,5 @@
         </div>
     </div>
 </div>
+
+{% view 'partials/tracking' %}

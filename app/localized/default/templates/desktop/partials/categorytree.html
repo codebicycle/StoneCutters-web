@@ -3,7 +3,7 @@
 {% set column3 = column2 + categories.columns[2] %}
 
 <div class="title-bar">
-	{% block title %}<h2>Categorías populares</h2>{% endblock %}
+	{% block title %}<h2>{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}</h2>{% endblock %}
 </div>
 <ul class="category-list category-list-first">
 	{% for category in categories %}
@@ -13,9 +13,17 @@
 				<h3>{{ category.trName }}</h3>
 			</a>
 			<ul>
-			{% for subcategory in category.children.toJSON() %}
-				<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName}}</a></li>
-			{% endfor %}
+			{% if category.id == '190' and location.url == 'www.olx.co.tz' %}
+				{% for subcategory in category.children.toJSON() %}
+					{% if loop.index < 28 %}
+						<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName }}</a></li>
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				{% for subcategory in category.children.toJSON() %}
+					<li><a href="{{ subcategory | slugToUrl | link }}">{{ subcategory.trName }}</a></li>
+				{% endfor %}
+			{% endif %}
 			</ul>
 		</li>
 		{% if loop.index == column1 or loop.index == column2 or loop.index == column3 %}

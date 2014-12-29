@@ -1,0 +1,26 @@
+{% if tracking.params.ati %}
+<script id="ati-lib" type="text/javascript">
+    var atiapi = (atiapi || []);
+
+    atiapi.push(['config', 'domain', '{{ tracking.params.ati.domain }}']);
+    atiapi.push({
+        xtdmc: '{{ tracking.params.ati.host }}',
+        xtnv: document,
+        xtsd: '{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}',
+        xtsite: '{{ tracking.params.ati.siteId }}',
+        xtcustom: JSON.parse('{{ tracking.params.ati.custom }}'),
+        xtergo: '1'
+    });
+
+    (function() {
+        var at   = document.createElement('script');
+        at.type  = 'text/javascript';
+        at.async = true;
+        at.src = "{{'/js/lib/xtcore.js' | static }}";
+        (document.getElementById('ati-lib').parentNode).insertBefore(at,null);
+    })();
+</script>
+<noscript>
+    <img width="1" height="1" alt="" src="{{ tracking.params.ati.protocol }}://{{ tracking.params.ati.logServer }}.ati-host.net/hit.xiti?s={{ tracking.params.ati.siteId }}&stc={{ tracking.params.ati.custom | encode }}"/>
+</noscript>
+{% endif %}

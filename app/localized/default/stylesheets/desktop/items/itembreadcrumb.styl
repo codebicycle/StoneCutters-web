@@ -1,0 +1,39 @@
+#breadcrumb {
+    &.item-page {
+        color: $blue;
+        .back-to-results {
+            border-right: solid 1px $greyBorders;
+            float: left;
+            padding-right: 10px;
+            margin-right: 8px;
+            a {
+                height: auto;
+            }
+        }
+        .breadcrumb-pagination {
+            margin-top: 3px;
+            a {
+                color: $black;
+                &:hover {
+                    text-decoration: none;
+                    .icons {
+                        color: $black;
+                    }
+                }
+                &[rel="prev"] {
+                    margin-right: 8px;
+                    padding-right: 8px;
+                }
+                .icons {
+                    color: $greyStrong;
+                    font-size: 1rem;
+                }
+                &:only-child {
+                    border-right: 0 none;
+                    margin-right: 0;
+                    padding-right: 0;
+                }
+            }
+        }
+    }
+}

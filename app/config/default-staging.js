@@ -20,10 +20,10 @@ module.exports = {
         imagePath: 'http://images01.olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        desktop: ['www.olx.com.bo', 'www.olx.com.py', 'www.jaovat.com']
+        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
+        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
+        desktop: ['www.olx.com.bo', 'www.jaovat.com']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
@@ -32,6 +32,21 @@ module.exports = {
     },
     categoryTree: {
         'www.olx.com.bo': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.it': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.es': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.com.mx': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        },
+        'www.olx.fr': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
         'www.olx.com.py': {
@@ -49,16 +64,24 @@ module.exports = {
         'www.olx.com.pa': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
+        'www.olx.com.sv': {
+            order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
+            columns: [4, 3, 3]
+        },
+        'www.olx.com.gt': {
+            order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
+            columns: [4, 3, 3]
+        },
         'www.olx.co.tz': {
-            order: [185, 187, 186, 191, 16, 362, 190],
-            columns: [2, 2, 2],
+            order: [185, 186, 187, 362, 16, 191, 190],
+            columns: [1, 3, 2],
         },
         'www.olx.co.ug': {
             order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.com.gh': {
-            order: [830, 800, 811, 806, 815, 362, 859, 16, 821],
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
             columns: [3, 2, 2],
         },
         'www.olx.sn': {
@@ -87,8 +110,118 @@ module.exports = {
             }
         ]
     },
+    socials: {
+        'www.olx.com.co': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXcolombia'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_colombia'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcolombia'
+            }
+        ],
+        'www.olx.co.cr': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXCostaRica'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_costarica'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcostarica'
+            }
+        ],
+        'www.olx.com.ec': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXEcuador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Ecuador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXecuador'
+            }
+        ],
+        'www.olx.com.sv': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXElSalvador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_ElSalvador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXelsalvador'
+            }
+        ],
+        'www.olx.com.gt': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXGuatemala'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Guatemala'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXguatemala'
+            }
+        ],
+        'www.olx.com.pa': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/pages/OLX-Panama/209969112487961'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXpanama'
+            }
+        ],
+        'www.olx.com.pe': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXperu'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Peru'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXperu'
+            }
+        ],
+        'www.olx.com.ve': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXvenezuela'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Venezuela'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXvenezuela'
+            }
+        ]
+    },
     countryMapStyle: {
-        special: ['www.olx.com.pa', 'www.olx.hn'],
+        special: ['www.olx.com.pa', 'www.olx.hn', 'www.olx.com.mx'],
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
@@ -138,15 +271,15 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.ir']
-            },
-            listingFilters: {
-                worldwide: false,
                 countries: []
             },
+            listingFilters: {
+                worldwide: true,
+                countries: ['www.olx.ir']
+            },
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.py']
+                worldwide: true,
+                countries: []
             },
             autoLocation: {
                 worldwide: true,
@@ -159,8 +292,8 @@ module.exports = {
         },
         html4: {
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.py']
+                worldwide: true,
+                countries: []
             }
         }
     },
@@ -245,5 +378,39 @@ module.exports = {
             'www.olx.co.uk': '3avqcjFDvQyE7sGOGGNH1HbN1VWV5D5THYJKu35BbZY',
             'www.olx.com.uy': 'VJzbp5sqpyhHSKP6ClyJyoZg-bGxBZG2kcxmmxIvI7k'
         }
+    },
+    mails: {
+        domain: {
+            'www.olx.com.ng': 'olx.com',
+            'www.olx.com.ke': 'olx.com',
+            'www.olx.it': 'olx.com',
+            'www.olx.fr': 'olx.com',
+            'www.olx.es': 'olx.com',
+            'www.olx.cl': 'olx.com',
+            'www.olx.com.mx': 'olx.com'
+        },
+        support: {
+            'default': 'support',
+            'www.olx.com.ar': 'soporte',
+            'www.olx.com.co': 'soporte',
+            'www.olx.co.cr': 'soporte',
+            'www.olx.com.ec': 'soporte',
+            'www.olx.com.sv': 'soporte',
+            'www.olx.com.gt': 'soporte',
+            'www.olx.hn': 'soporte',
+            'www.olx.co.ke': 'support-ke',
+            'www.olx.com.ni': 'soporte',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.pa': 'soporte',
+            'www.olx.com.pe': 'soporte',
+            'www.olx.com.uy': 'soporte',
+            'www.olx.com.ve': 'soporte'
+        },
+        legal: {
+            'default':'legal',
+            'www.olx.com.ng': 'support-ng',
+            'www.olx.com.ke': 'support-ke'
+        }
+
     }
 };
