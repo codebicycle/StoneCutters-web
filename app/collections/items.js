@@ -19,20 +19,21 @@ module.exports = Base.extend({
         var url;
 
         switch(this.params.item_type) {
-            case 'adsList':
-                url = '/items';
-            break;
             case 'myAds':
                 url = '/users/:userId/items';
             break;
             case 'favorites':
                 url = '/users/:userId/favorites';
             break;
-            case 'staticSearch':
+            case 'static':
                 url = '/items/static';
             break;
             default:
                 url = '/items';
+                if (this.params.relatedAds) {
+                    url += '/' + this.params.relatedAds + '/related';
+                    delete this.params.relatedAds;
+                }
             break;
         }
         return url;
