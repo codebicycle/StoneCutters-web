@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Diem\u017E\u0113l m\u0113s neatrad\u0101m rezult\u0101tus <<CATEGORY>>, <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Jums \u0161obr\u012Bd nav neviens akt\u012Bvs sludin\u0101jums.',
     'netvibes_myolx.content.NoMessages': 'Jums \u0161obr\u012Bd nav zi\u0146ojumu.',
-    'netvibes_myolx.content.RemoveListing': 'Dz\u0113st sludin\u0101jumu',
     'netvibes_myolx.content.Views': 'Apskat\u012Bts',
     'supportform.Message': 'Zi\u0146ojums:',
     'supportform.Reset': 'Atiestat\u012Bt',

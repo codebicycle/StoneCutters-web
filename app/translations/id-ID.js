@@ -121,7 +121,6 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Maaf, kami tidak menemukan hasil untuk <<CATEGORY>> di <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Anda saat ini tidak mempunyai iklan aktif.',
     'netvibes_myolx.content.NoMessages': 'Anda saat ini tidak mempunyai pesan.',
-    'netvibes_myolx.content.RemoveListing': 'Hapus iklan',
     'netvibes_myolx.content.Views': 'Frekuensi dilihat',
     'supportform.Message': 'Pesan:',
     'supportform.Reset': 'Reset',
