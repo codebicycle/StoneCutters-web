@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Kui Teil on palju kuulutusi, mida soovite OLXis avaldada, v\xF5ite need saata XML- v\xF5i CSV-formaadis. Me avaldame kuulutused tasuta, kuulutusi ajakohastatakse regulaarselt.',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Valige rohkem piirkondi',
     'posting_removedsurvey.RemovedAdSurvey': 'Eemaldamise l\xF5puleviimiseks palume n\xE4idata kuulutuse eemaldamise p\xF5hjus:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'M\xFC\xFCdud OLXi kaudu',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'M\xFC\xFCdud teise teenusepakkuja kaudu',

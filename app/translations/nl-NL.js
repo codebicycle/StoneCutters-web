@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Als je veel advertenties wilt indienen bij OLX, kun je ons de advertenties sturen in XML- of CSV-indeling. De advertenties worden gratis gepubliceerd en regelmatig bijgewerkt.',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Selecteer meer buurten',
     'posting_removedsurvey.RemovedAdSurvey': 'Om de verwijdering te voltooien, deelt u ons alstublieft mee waarom u deze advertentie wilt verwijderen:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Verkocht via OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Verkocht via een andere dienst',

@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ak m\xE1te ve\u013Ea inzer\xE1tov, ktor\xE9 chcete zverejni\u0165 na str\xE1nkach OLX, po\u0161lite n\xE1m ich vo form\xE1te XML alebo CSV. Tieto inzer\xE1ty zverejn\xEDme bezplatne a pravidelne ich aktualizujeme.',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Zvoli\u0165 \u010Fal\u0161ie susedstv\xE1',
     'posting_removedsurvey.RemovedAdSurvey': 'Ako posledn\xFD krok odstra\u0148ovania povedzte n\xE1m, pre\u010Do odstra\u0148ujete tento inzer\xE1t:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Predan\xE9 prostredn\xEDctvom OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Predan\xE9 prostredn\xEDctvom inej slu\u017Eby',

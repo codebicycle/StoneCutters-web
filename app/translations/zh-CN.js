@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': '\u60A8\u82E5\u6709\u5F88\u591A\u5E7F\u544A\u8981\u63D0\u4EA4\u7ED9OLX, \u60A8\u53EF\u4EE5\u4F7F\u7528XML\u6216CSV\u5F62\u5F0F. \u6211\u4EEC\u4F1A\u514D\u8D39\u53D1\u5E03\u8FD9\u4E9B\u5E7F\u544A\u800C\u4E14\u5B9A\u671F\u66F4\u65B0.',
     'business_directory.Map': '\u5730\u56FE',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': '\u9009\u62E9\u66F4\u591A\u793E\u533A',
     'posting_removedsurvey.RemovedAdSurvey': '\u5B8C\u6210\u79FB\u9664\u524D\uFF0C\u8BF7\u60A8\u544A\u8BC9\u6211\u4EEC\u4E3A\u4EC0\u4E48\u8981\u79FB\u9664\u8BE5\u5E7F\u544A\uFF1A',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': '\u901A\u8FC7 \u552E\u51FA OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u901A\u8FC7\u5176\u4ED6\u670D\u52A1\u552E\u51FA',

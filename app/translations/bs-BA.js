@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ako imate veliki broj oglasa koje \u017Eelite postaviti na OLX, mo\u017Eete nam ih poslati u XML ili CSV formatu. Ove \u0107emo oglase objaviti besplatno i redovno a\u017Eurirati.',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Izaberite vi\u0161e kom\u0161iluka',
     'posting_removedsurvey.RemovedAdSurvey': 'Da dovr\u0161ite povla\u010Denje, molimo vas ka\u017Eite za\u0161to povla\u010Dite taj oglas:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Prodato preko OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Prodato preko nekog drugog servisa',

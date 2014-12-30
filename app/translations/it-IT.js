@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Se vuoi inoltrare molti annunnci a  OLX, puoi mandarceli in formato XML o CSV. Noi li pubblicheremo gratuitamente e questi verranno aggiornati regolarmente.',
     'business_directory.Map': 'Mappa',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Seleziona altri quartieri',
     'posting_removedsurvey.RemovedAdSurvey': 'Per completare la rimozione, dicci perch\xE9 vuoi rimuovere l\'annuncio:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Venduto tramite OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Venduto tramite altro servizio',

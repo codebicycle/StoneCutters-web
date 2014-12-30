@@ -75,13 +75,38 @@
     }
     .neighborhood {
         box($greyBoxBg, $greyBorders, 0 3px 3px 3px, 0);
+
+        .active-neighborhoods {
+            ul {
+                padding: 10px;
+                border-bottom: 1px solid $greyBorders;
+            }
+            .active-neighborhood {
+                box($greyStrong, $greyStrong, 3px, 5px 30px 5px 5px);
+                color: $white;
+                cursor: pointer;
+                display: inline-block;
+                font-size: $xs;
+                margin: 0 10px 10px 0;
+                position: relative;
+                &:hover {
+                    background: $black;
+                    border-color: $black;
+                }
+                .icons {
+                    font-size: remify(10px);
+                    position: absolute;
+                    right: 5px;
+                    top: 4px;
+                }
+            }
+        }
         .neighborhood-list {
-            border-bottom: 1px solid $greyBorders;
-            display: none;
-            padding: 10px;
-            height: 0;
-            overflow: hidden;
-            &.open {
+            ul {
+                border-bottom: 1px solid $greyBorders;
+                padding: 10px;
+                height: 60px;
+                overflow: hidden;
                 display: inline-block;
             }
         }

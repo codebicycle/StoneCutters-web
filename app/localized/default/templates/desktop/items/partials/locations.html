@@ -32,27 +32,48 @@
         {% endif %}
         {% if filters.has('neighborhood') and filter.name == 'neighborhood' %}
             <div class="neighborhood">
-                <ul class="neighborhood-list">
-                    <li class="locations">
-                        <label>
-                            <input type="checkbox" value="select-all" rel="select-all" >
-                            {{ dictionary["itemslisting.SelectAll"] }}
-                        </label>
-                    </li>
-                    {% for neighborhood in filters.get('neighborhood').get('value') %}
+                <div class="neighborhood-first{{ ' hide' if filters.isActive(filter.name) }}">
+                    <div class="actions">
+                        <span class="filter-btn"  rel="nofollow" data-action="slide" >{{ dictionary["listingpageitemslisting.FilterByNeighborhood"] }}</span>
+                    </div>
+                </div>
+                {% if filters.isActive(filter.name) %}
+                    <div class="active-neighborhoods">
+                        <ul>
+                            {% for neighborhood in filters.get('neighborhood').get('value') %}
+                                {% if filters.has(filter.name, neighborhood.id) %}
+                                    <li class="active-neighborhood">{{ neighborhood.value }}<span class="icons icon-close"></span></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <div class="actions">
+                            <span class="filter-btn"  rel="nofollow" data-action="selectMore" >{{ dictionary["optionals.SelectMoreNeighborhoods"] }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="neighborhood-list hide">
+                    <ul>
                         <li class="locations">
                             <label>
-                                <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" >
-                                {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
+                                <input type="checkbox" value="select-all" rel="select-all" >
+                                {{ dictionary["itemslisting.SelectAll"] }}
                             </label>
                         </li>
-                    {% endfor %}
-                </ul>
-                <div class="actions">
-                    <span class="filter-btn"  rel="nofollow" data-action="slide" >{{ dictionary["listingpageitemslisting.FilterByNeighborhood"] }}</span>
-                    <span class="cancel-btn hide" rel="nofollow">{{ dictionary["misc.Cancel"] }}</span>
-                    <span class="see less hide icons icon-arrow-up" data-action="seeLess">{{ dictionary["misc.SeeLess"] }}</span>
-                    <span class="see more hide icons icon-arrow-down" data-action="seeMore">{{ dictionary["misc.SeeMore"] }}</span>
+                        {% for neighborhood in filters.get('neighborhood').get('value') %}
+                            <li class="locations">
+                                <label>
+                                    <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" {{ 'checked' if filters.has(filter.name, neighborhood.id) }} >
+                                    {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="actions">
+                        <span class="filter-btn"  rel="nofollow" data-action="filter" >Filtrar</span>
+                        <span class="cancel-btn" rel="nofollow">{{ dictionary["misc.Cancel"] }}</span>
+                        <span class="see more icons icon-arrow-down" data-action="seeMore">{{ dictionary["misc.SeeMore"] }}</span>
+                        <span class="see less hide icons icon-arrow-up" data-action="seeLess">{{ dictionary["misc.SeeLess"] }}</span>
+                    </div>
                 </div>
             </div>
         {% endif %}

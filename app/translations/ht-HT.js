@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Si ou genyen anpil anons ou ta renmen voye bay  OLX, ou ka itilize yon XML oubyen CSV f\xF2ma.  Nou ap pibliye yo gratis epi nou ap f\xE8 chanjman nan anons sa yo regily\xE8man.',
     'business_directory.Map': 'Kat Jewografik',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Seleksyone lot Zonn',
     'posting_removedsurvey.RemovedAdSurvey': 'Pou tout bagay fini, tan pri di nou poukisa ou vle retire anons la:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Vann li nan OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vann li nan yon l\xF2t s\xE8vis',

@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Jika Anda ingin mengirimkan banyak iklan ke OLX, Anda dapat mengirimkannya ke kami dalam format XML atau CSV. Kami akan menerbitkannya secara gratis dan iklan-iklan ini akan dimutakhirkan secara rutin.',
     'business_directory.Map': 'Peta',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Pilih lebih banyak lingkungan',
     'posting_removedsurvey.RemovedAdSurvey': 'Untuk menyelesaikan penghapusan, beri tahu kami alasan Anda menghapus iklan ini:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Sudah terjual melalui OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Sudah terjual melalui layanan lain',

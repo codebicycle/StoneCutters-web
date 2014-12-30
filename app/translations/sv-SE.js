@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Om du vill skicka in m\xE5nga annonser till OLX, s\xE5 kan du skicka in dem i XML eller CSV format. Vi publicerar dem gratis och dessa annonser kommer att blir regelbundet uppdaterade.',
     'business_directory.Map': 'Karta',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'V\xE4lj fler omr\xE5den',
     'posting_removedsurvey.RemovedAdSurvey': 'V\xE4nligen ber\xE4tta f\xF6r oss varf\xF6r du tar bort denna annons innan borttaget genomf\xF6rs:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'S\xE5ld via OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'S\xE5ld via annan tj\xE4nst',

@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Si vols publicar molts anuncis a  OLX, pots enviar-nos-els per XML o CSV. Els publicarem gratu\xEFtament i seran actualitzats regularment.',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Selecciona m\xE9s barris',
     'posting_removedsurvey.RemovedAdSurvey': 'Per finalitzar l\'eliminaci\xF3, si us plau, explica\'ns per qu\xE8 vols eliminar aquest anunci:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'L\'he venut per OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'L\'he venut mitjan\xE7ant un altre servei',

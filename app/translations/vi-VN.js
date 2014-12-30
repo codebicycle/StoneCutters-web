@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'N\u1EBFu b\u1EA1n mu\u1ED1n \u0111\u0103ng nhi\u1EC1u tin rao v\u1EB7t l\xEAn OLX, b\u1EA1n c\xF3 th\u1EC3 g\u1EEDi ch\xFAng cho ch\xFAng t\xF4i theo \u0111\u1ECBnh d\u1EA1ng XML ho\u1EB7c CSV. Ch\xFAng t\xF4i s\u1EBD \u0111\u0103ng t\u1EA3i mi\u1EC5n ph\xED v\xE0 nh\u1EEFng tin rao v\u1EB7t n\xE0y s\u1EBD \u0111\u01B0\u1EE3c c\u1EADp nh\u1EADt \u0111\u1EC1u \u0111\u1EB7n.',
     'business_directory.Map': 'B\u1EA3n \u0111\u1ED3',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Ch\u1ECDn nhi\u1EC1u h\xE0ng x\xF3m',
     'posting_removedsurvey.RemovedAdSurvey': '\u0110\u1EC3 ho\xE0n t\u1EA5t vi\u1EC7c g\u1EE1 b\u1ECF, vui l\xF2ng cho ch\xFAng t\xF4i bi\u1EBFt t\u1EA1i sao b\u1EA1n l\u1EA1i g\u1EE1 b\u1ECF qu\u1EA3ng c\xE1o n\xE0y:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': '\u0110\xE3 b\xE1n n\xF3 qua OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u0110\xE3 b\xE1n n\xF3 qua m\u1ED9t d\u1ECBch v\u1EE5 kh\xE1c',

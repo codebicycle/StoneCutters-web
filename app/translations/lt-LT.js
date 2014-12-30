@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Jeigu \u012F OLX norite \u012Fd\u0117ti daug skelbim\u0173, juos mums galite si\u0173sti XML arba CSV formatu. Mes paskelbsime juos nemokamai ir \u0161ie skelbimai bus reguliariai atnaujinami.',
     'business_directory.Map': '\u017Dem\u0117lapis',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Pasirinkite daugiau rajon\u0173',
     'posting_removedsurvey.RemovedAdSurvey': 'Nor\u0117dami u\u017Ebaigti \u0161i\u0105 proced\u016Br\u0105, nurodykite prie\u017East\u012F, kod\u0117l norite pa\u0161alinti \u0161\u012F skelbim\u0105:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Parduota OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Parduota kitu kanalu',

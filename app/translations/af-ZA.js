@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'As jy baie advts. het om by OLX in te dien, kan jy dit in XML- of CSV-formaat aan ons stuur. Ons sal dit gratis publiseer en hierdie advts. sal gereeld hersien word.',
     'business_directory.Map': 'Kaart',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Kies nog omgewings',
     'posting_removedsurvey.RemovedAdSurvey': 'Om die verwydering te voltooi, dui asseblief aan waarom u hierdie advt. wil verwyder:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Dit is deur OLX verkoop',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Dit is deur \'n ander diens verkoop',

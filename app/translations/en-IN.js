@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'If you want to submit many ads to OLX, you can send them to us in XML or CSV format. We will publish them for free and these ads will be updated regularly.',
     'business_directory.Map': 'Map',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Select more neighborhoods',
     'posting_removedsurvey.RemovedAdSurvey': 'To complete the removal, please tell us why you are removing this ad:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Sold it through OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Sold it through another service',

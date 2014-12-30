@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Je\u015Bli masz du\u017Co og\u0142osze\u0144, kt\xF3re chcesz zamie\u015Bci\u0107 w serwisie OLX, mo\u017Cesz je nam wys\u0142a\u0107 w formacie XML lub CSV. Twoje og\u0142oszenia opublikujemy bezp\u0142atnie i b\u0119dziemy je regularnie aktualizowa\u0107.',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Wybierz wi\u0119cej dzielnic',
     'posting_removedsurvey.RemovedAdSurvey': 'Aby zako\u0144czy\u0107 ten proces, prosz\u0119 poda\u0107 z jakiego powodu usuwasz to og\u0142oszenie:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Sprzeda\u0142em to za po\u015Brednictwem OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Sprzeda\u0142em to za po\u015Brednictwem innego serwisu',

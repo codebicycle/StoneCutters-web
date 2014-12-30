@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ja jums ir daudz sludin\u0101jumu, ko v\u0113laties iesniegt OLX, j\u016Bs varat tos ats\u016Bt\u012Bt mums XML vai CSV form\u0101t\u0101. M\u0113s tos public\u0113sim bez maksas, un \u0161ie sludin\u0101jumi tiks regul\u0101ri atjaunin\u0101ti.',
     'business_directory.Map': 'Karte',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Atlas\u012Bt vair\u0101k kaimi\u0146u',
     'posting_removedsurvey.RemovedAdSurvey': 'Lai pabeigtu atcel\u0161anu, l\u016Bdzu, pasakiet mums, k\u0101p\u0113c j\u016Bs to dar\u0101t:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'P\u0101rdots, izmantojot OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'P\u0101rdots, izmantojot citu pakalpojuma sniedz\u0113ju',

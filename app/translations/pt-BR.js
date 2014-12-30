@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Sim, caso tenha um site pr\xF3prio e possua muitos an\xFAncios para publicar, voc\xEApode otimizar a publica\xE7\xE3o atrav\xE9s de arquivos .XML ou .CSV. Ap\xF3s analise,nossa equipe de conte\xFAdo poder\xE1 publica-los gratuitamente e esses an\xFAnciosser\xE3o atualizados regularmente.',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Selecionar mais bairros',
     'posting_removedsurvey.RemovedAdSurvey': 'Nos informe o motivo para concluir o processo:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Vendi pela OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vendi por outro servi\xE7o',

@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Hvis du har mange annoncer du vil indtrykke for  OLX, s\xE5 kan du sende dem til os i XML-eller CSV-format. Vi udgiver dem gratis og de opdateres j\xE6vnligt',
     'business_directory.Map': 'Kort',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'V\xE6lg flere nabokvarterer',
     'posting_removedsurvey.RemovedAdSurvey': 'For at fuldf\xF8re fjernelsen bedes du fort\xE6lle os, hvorfor du fjerner denne annonce:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Solgte gennem OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Solgte gennem en anden tjeneste',

@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Kama unataka kuwasilisha matangazo mengi kwa OLX, unaweza kuituma kwetu katika muundo wa XML au CSV. Sisi tutaichapisha bure na matangazo haya itakuwa ikisasishwa mara kwa mara..',
     'business_directory.Map': 'Ramani',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Chagua vitongoji zaidi',
     'posting_removedsurvey.RemovedAdSurvey': 'Kukamilisha kuondolewa, tafadhali tueleze kwa nini wewe unaondoa tangazo hili:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Iliuzwa kwa njia ya OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Iliuzwa kwa njia ya huduma nyingine',

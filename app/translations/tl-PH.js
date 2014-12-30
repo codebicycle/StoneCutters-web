@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Kung nais mong magsumite ng maraming patalastas sa OLX,  maaari mong ipadala ang mga ito sa XML o CSV format. Ilalathala namin ang mga ito nang libre at ang mga patalastas na ito ay regular na i-a-update.',
     'business_directory.Map': 'Mapa',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Pumili ng iba pang kalapitbahayan',
     'posting_removedsurvey.RemovedAdSurvey': 'Para kumpletuhin ang pag-alis, pakisabi sa amin kung bakit mo aalisin ang anunsiyong ito:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Ibinenta ito sa pamamagitan ng OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Ibinenta ito sa pamamagitan ng ibang serbisyo',

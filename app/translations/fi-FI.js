@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Jos haluat l\xE4hett\xE4\xE4 useita ilmoituksia sivustolle OLX, voit l\xE4hett\xE4\xE4 ne meille XML- tai CSV-muodossa. Julkaisemme ne ilmaiseksi ja ilmoitukset p\xE4ivitet\xE4\xE4n s\xE4\xE4nn\xF6llisesti.',
     'business_directory.Map': 'Kartta',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Valitse enemm\xE4n alueita',
     'posting_removedsurvey.RemovedAdSurvey': 'Jotta ilmoitus poistetaan, kerro meille syy ilmoituksen poistamiseen:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Myin sen OLX -palvelun kautta',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Myin sen muun palvelun kautta',

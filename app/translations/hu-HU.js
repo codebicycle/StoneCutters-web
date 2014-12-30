@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ha sok hirdet\xE9st szeretne nyilv\xE1noss\xE1gra hozni az OLX oldalain, elk\xFCldheti nek\xFCnk XML vagy CSV form\xE1tumban. Mi ingyenesen k\xF6z\xE9tessz\xFCk, \xE9s rendszeresen friss\xEDtj\xFCk ezeket a hirdet\xE9seket.',
     'business_directory.Map': 'T\xE9rk\xE9p',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Tov\xE1bbi szomsz\xE9ds\xE1gok kijel\xF6l\xE9se',
     'posting_removedsurvey.RemovedAdSurvey': 'A v\xE9gleges\xEDt\xE9shez k\xE9rj\xFCk \xE1rulja el nek\xFCnk, mi\xE9rt t\xE1vol\xEDtja el hirdet\xE9s\xE9t:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'A term\xE9ket m\xE1r \xE9rt\xE9kes\xEDtettem itt OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'M\xE1s szolg\xE1ltat\xE1ssal \xE9rt\xE9kes\xEDtettem a term\xE9ket',

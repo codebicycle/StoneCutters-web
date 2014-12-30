@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Ef \xFE\xFA virt birta miki\xF0 af augl\xFDsingum \xE1 OLX getur\xF0u nota\xF0 XML-straum e\xF0a CSV-sni\xF0. Vi\xF0 munum birta \xFE\xE6r \xFE\xE9r a\xF0 kostna\xF0arlausu og augl\xFDsingarnar ver\xF0a uppf\xE6r\xF0ar reglulega.',
     'business_directory.Map': 'Kort',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Velja fleiri hverfi',
     'posting_removedsurvey.RemovedAdSurvey': 'Vinsamlegast gef\xF0u upp \xE1st\xE6\xF0u \xFEess a\xF0 \xFE\xFA vilt fjarl\xE6gja augl\xFDsinguna \xE1\xF0ur en \xFE\xFA l\xFDkur vi\xF0 ferli\xF0:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Seldi \xED gegnum OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Seldi \xED gegnum a\xF0ra \xFEj\xF3nustu',

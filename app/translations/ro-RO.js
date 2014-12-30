@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Dac\u0103 dori\u0163i s\u0103 pune\u0163i multe anun\u0163uri pe OLX, ni le pute\u0163i trimite sub form\u0103 de XML sau CSV. Le vom publica gratis \u015Fi aceste anun\u0163uri vor fi actualizate periodic.',
     'business_directory.Map': 'Hart\u0103',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Selecta\u0163i mai multe cartiere',
     'posting_removedsurvey.RemovedAdSurvey': 'Pentru a finaliza \u015Ftergerea, v\u0103 rug\u0103m s\u0103 ne spune\u0163i de ce \u015Fterge\u0163i aceast\u0103 anun\u0163:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'Am v\xE2ndut prin  OLX',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Am v\xE2ndut prin alt serviciu',

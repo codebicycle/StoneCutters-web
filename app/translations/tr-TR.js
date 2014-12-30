@@ -433,6 +433,7 @@ module.exports = {
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'OLX\'de yay\u0131nlamak istedi\u011Finiz bir\xE7ok ilan\u0131n\u0131z varsa, bu ilanlar\u0131n\u0131z\u0131 bize XML ya da CSV formatlar\u0131nda g\xF6nderebilirsiniz. \u0130lanlar\u0131n\u0131z sitemizde \xFCcretsiz yay\u0131mlanacak olup, d\xFCzenli olarak g\xFCncellenecektir.',
     'business_directory.Map': 'Harita',
     'optionals.opt-138-323-translation-location': 'Location',
+    'optionals.SelectMoreNeighborhoods': 'Daha fazla mahalle se\xE7',
     'posting_removedsurvey.RemovedAdSurvey': 'Kald\u0131rma i\u015Flemini tamamlamak i\xE7in l\xFCtfen bize neden bu ilan\u0131 kald\u0131rd\u0131\u011F\u0131n\u0131z\u0131 belirtiniz:',
     'posting_removedsurvey.RemovedAdSurveyAnswer1': 'OLX \xFCzerinden satt\u0131m',
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Ba\u015Fka bir hizmeti kullanarak satt\u0131m',
