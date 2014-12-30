@@ -33,7 +33,8 @@ module.exports = {
                 enabled: true,
                 server: {
                     enabled: true,
-                    platforms: ['html5', 'html4', 'wap']
+                    platforms: ['html5', 'html4', 'wap'],
+                    event: true
                 },
                 client: {
                     enabled: true,
@@ -44,7 +45,8 @@ module.exports = {
                 enabled: true,
                 server: {
                     enabled: true,
-                    platforms: ['html5', 'html4', 'wap']
+                    platforms: ['html5', 'html4', 'wap'],
+                    event: true
                 },
                 client: {
                     enabled: true,
