@@ -231,7 +231,12 @@
                     <textarea name="message" cols="30" rows="6"></textarea>
                     <span class="error hide message"></span>
                 </fieldset>
-                
+                <div class="verification" data-captcha-verification>
+                    <p class="label">{{ dictionary["supportform.VerificationCode"] }}</p>
+                    <div class="g-recaptcha" data-callback data-sitekey="6LcjQf8SAAAAAEOXFJQiVtou5CmhFq5B4nopsbtN"></div>
+                    <span class="error hide message"></span>
+                </div>
+
                 <span class="spinner hide"></span>
                 
                 <fieldset>

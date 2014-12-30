@@ -146,7 +146,8 @@
 
         .contact {
             margin: 20px;
-            fieldset {
+            fieldset,
+            div {
                 border: 0 none;
                 font-size: $s;
                 span {
@@ -206,8 +207,18 @@
                     margin-top: 8px;
                     vertical-align: top;
                 }
-                label[for="verification"] {
-                    vertical-align: middle;
+            }
+            .verification {
+                margin: 5px 10px 10px;
+                p {
+                    display: inline-block;
+                    margin: 8px 10px 0 0;
+                    text-align: right;
+                    vertical-align: top;
+                    width: 100px;
+                }
+                div {
+                    display: inline-block;
                 }
             }
             span.spinner {

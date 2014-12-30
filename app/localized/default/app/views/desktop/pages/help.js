@@ -31,7 +31,17 @@ module.exports = Base.extend({
             }
         });
     },
+    postRender: function(){
+        var recaptcha = $('<script></script>');
 
+        recaptcha.attr({
+            type: 'text/javascript',
+            src: 'https://www.google.com/recaptcha/api.js?onload=onloadCallback',
+            async: true,
+            defer: true
+        });
+        $('head').append(recaptcha);
+    },
     helpToggleContent: function(event) {
         event.preventDefault();
         var element = $(event.currentTarget);
@@ -81,6 +91,7 @@ module.exports = Base.extend({
         };
         var emailRegExp = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
         var valid = true;
+        // var captcha = this.captchaCallback(this.$('#g-recaptcha-response').val());
         var value;
 
         $(fields).each( function() {
@@ -99,13 +110,40 @@ module.exports = Base.extend({
             }
         });
 
-        if (!valid) {
-            $('.spinner').addClass('hide');
-            $('#contactForm [type="submit"]').removeClass('hide');
+        if (valid) {
+            this.captchaCallback(this.$('#g-recaptcha-response').val())
+            .done(function(result) {
+                if (result.success) {
+                    $('[data-contact-form] .spinner').removeClass('hide');
+                    $('[data-contact-form] [type="submit"]').addClass('hide');
+                    $('[data-captcha-verification] .error').addClass('hide');
+                } else {
+                    $('[data-captcha-verification] .error').text(message.empty).removeClass('hide');
+                }
+            })
+            .fail(function(x) {
+                console.log('error');
+            });
         }
         else {
-            $('.spinner').removeClass('hide');
-            $('#contactForm [type="submit"]').addClass('hide');
+            this.$('[data-contact-form] .spinner').addClass('hide');
+            this.$('[data-contact-form] [type="submit"]').removeClass('hide');
         }
+    },
+    captchaCallback: function(captchaResponse){
+        var url = "/secure/recaptcha";
+        var userIp = this.app.session.get('ip');
+        var data = {
+            "response": captchaResponse,
+            "remoteip": userIp
+        };
+
+        return $.ajax({
+            type: 'GET',
+            url: url,
+            data: data,
+            dataType: 'json',
+            cache: false
+        });
     }
 });

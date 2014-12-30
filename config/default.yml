@@ -66,6 +66,7 @@ middleware:
       - /force/html4
       - /force/html5
       - /force/desktop
+      - /secure
 
 uglify:
   enabled: false
