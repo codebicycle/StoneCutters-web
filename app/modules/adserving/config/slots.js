@@ -95,7 +95,7 @@ module.exports = {
         types: {
             AFC: {
                 params: {
-                    hints: 'fibertel',
+                    hints: 'internet',
                     number: 3,
                     media: 'image, text',
                     width: '728',
@@ -121,11 +121,14 @@ module.exports = {
     },
     slot_bottom_item: {
         enabled: true,
-        defaultType: 'ADX',
+        defaultType: 'AFC',
         location: 'Bottom',
         types: {
-            ADX: {
+            AFC: {
                 params: {
+                    hints: 'auto',
+                    number: 3,
+                    media: 'text',
                     width: '728',
                     height: '90'
                 },

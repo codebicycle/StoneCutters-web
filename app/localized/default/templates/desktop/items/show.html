@@ -17,5 +17,7 @@
         {% set seoFrom = "item" %}
         {% include (template + "/partials/seobox.html") %}
     {% endif %}
+
+    {% view 'partials/adserving', 'slot_bottom_item' %}
 </section>
 {% view 'partials/tracking' %}

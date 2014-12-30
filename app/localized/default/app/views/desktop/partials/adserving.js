@@ -98,7 +98,7 @@ module.exports = Base.extend({
         }).on('load', function() {
             var domIfr = this.contentDocument || this.contentWindow.document;
 
-            domIfr.write('<style>body{margin:0;}</style><sc'+'ript type="text/javascript">  google_ad_client = "' + params.pubId + '";  google_ad_slot = "' + params.slotId + '";  google_ad_width = ' + params.width + ';  google_ad_height =  ' + params.height + ';  </sc'+'ript> <scr'+'ipt type="text/javascript"  src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </sc'+'ript>');
+            domIfr.write('<style>body{margin:0;}</style><script type="text/javascript">google_ad_client = "' + params.pubId + '";google_ad_slot = "' + params.slotId + '";google_ad_width = ' + params.width + ';google_ad_height =  ' + params.height + ';</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
         }).appendTo('#' + params.slotname);
     },
     createIframeAfc: function(params) {
@@ -106,42 +106,26 @@ module.exports = Base.extend({
 
         $ifr = $('<iframe></iframe>');
         $ifr.attr({
-            height: params.height,
-            width: params.width,
+            height: 1,
+            width: 1,
             src: 'about:blank',
             id: params.slotname + '_iframe'
         }).on('load', function() {
             var domIfr = this.contentDocument || this.contentWindow.document;
 
-            /*var str = ;
-            str.push({
-                //"name": "slot_{{slotName}}",
-                //"num_ads": {{numAds|number_format}},
-                //"refered_num_ads": {{seoAds|default(0)|number_format}},
-                //"layout": "{{cssClass|default('')}}",
-                //"renderSlot": "{{renderSlot|default('slot_' ~ slotName)}}",
-                //"renderMethod": "googleUnique"
-                'name': 'slot_' + params.slotname,
-                'num_ads': params.number,
-                'refered_num_ads': params.numbers,
-                'renderSlot': params.slotname,
-                'renderMethod': 'googleUnique'
-            }); */
+            var ifrScripts = [];
+                ifrScripts.push('google_ad_client = "' + params.pubId + '";');
+                ifrScripts.push('google_safe = "medium";');
+                ifrScripts.push('google_ad_type = "' + params.media + '";');
+                ifrScripts.push('google_image_size = "' + params.width + 'x' + params.height + '";');
+                ifrScripts.push('google_ad_output = "js";');
+                ifrScripts.push('google_ad_channel = "OLX_EG";');
+                ifrScripts.push('google_max_num_ads = 3;');
+                ifrScripts.push('google_hints = "' + params.hints + '";');
+                ifrScripts.push('google_ad_section = "title body";');
+                ifrScripts.push('google_ad_request_done = function(r){ window.parent.AFCrender(r, "' + params.slotname + '"); };');
 
-            var attrIframe = [];
-                attrIframe.push('google_ad_client = "' + params.pubId + '";');
-                attrIframe.push('google_safe = "medium";');
-                attrIframe.push('google_ad_type = "' + params.media + '";');
-                attrIframe.push('google_image_size = "' + params.width + 'x' + params.height + '";');
-                attrIframe.push('google_ad_output = "js";');
-                attrIframe.push('google_ad_channel = "OLX_EG";');
-                attrIframe.push('google_max_num_ads = 3;');
-                attrIframe.push('google_hints = "' + params.hints + '";');
-                attrIframe.push('google_ad_section = "title body";');
-                attrIframe.push('google_skip = 0;');
-                attrIframe.push('google_ad_request_done = function(r){console.log(r);};');
-
-            domIfr.write('<style>body{margin:0;}</style><sc'+'ript type="text/javascript">' + attrIframe.join('\n') + '</sc'+'ript> <scr'+'ipt type="text/javascript"  src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </sc'+'ript>');
+            domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
         }).appendTo('#' + params.slotname);
     },
     _checkAdServing: function() {
