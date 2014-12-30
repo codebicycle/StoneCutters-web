@@ -58,12 +58,8 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        this.item = this.item || this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
-            app: this.app
-        });
         $(window).on('beforeunload', this.onBeforeUnload);
-
-        if (this.item.has('id')) {
+        if (this.getItem().has('id')) {
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
             this.$('#field-location').trigger('change');
         }
@@ -245,9 +241,6 @@ module.exports = Base.extend({
         this.$('#posting-contact-view').trigger('disablePost');
     },
     onImagesLoadEnd: function(event, images) {
-        this.item.set('images', Object.keys(images).map(function each(image) {
-            return images[image].id;
-        }));
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
     onBeforeUnload: function(event) {
@@ -352,6 +345,12 @@ module.exports = Base.extend({
         asynquence().or(fail.bind(this))
             .then(post.bind(this))
             .val(success.bind(this));
+    },
+    getItem: function() {
+        this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
+            app: this.app
+        }));
+        return this.item;
     }
 });
 

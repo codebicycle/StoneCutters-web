@@ -155,7 +155,10 @@ function postImages(done) {
         if (typeof images[key] === 'string') {
             oldImages.push(images[key]);
         }
-        else if (!(images[key] instanceof Function)) {
+        else if (images[key].id) {
+            oldImages.push(images[key].id);
+        }
+        else {
             newImages[key] = images[key];
         }
     });

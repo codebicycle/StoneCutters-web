@@ -10,11 +10,12 @@ module.exports = Base.extend({
     className: 'posting-images-view field-wrapper',
     id: 'posting-images-view',
     tagName: 'fieldset',
-    selected: {},
-    pending: 0,
-    initialize: function() {
-        Base.prototype.initialize.call(this);
+    postRender: function() {
+        this.pending = 0;
         this.selected = {};
+        _.each(this.parentView.getItem().get('images'), function each(image, i) {
+            this.selected['images[' + i + ']'] = image;
+        }, this);
     },
     events: {
         'click .image:not(.fill .image)': 'onImageClick',
@@ -78,37 +79,12 @@ module.exports = Base.extend({
             function post(done) {
                 this.$el.trigger('imageLoadStart');
                 $container.addClass('loading');
-                item = new Item({
-                    images: event.target.files,
-                    postingSession: this.parentView.options.postingsession || this.parentView.options.postingSession,
-                    location: this.app.session.get('location').url
-                }, {
-                    app: this.app
-                });
-                item.postImages(done);
+                this.selected[$input.attr('name')] = event.target.files[0];
+                this.parentView.item.set('images', _.clone(this.selected));
+                this.parentView.item.postImages(done);
             }
 
-            function success(done, response, images) {
-                var name = $input.attr('name');
-                var index = name.slice(-2, -1);
-                var image = images.shift();
-
-                images = this.parentView.item.get('images');
-                if (images[index]) {
-                    images[index] = images.shift();
-                }
-                else {
-                    images.push(image);
-                }
-                this.selected[name] = {
-                    id: image,
-                    file: imageUrl,
-                    orientation: 1
-                };
-                done();
-            }
-
-            function display() {
+            function success() {
                 var orientation = EXIF.getTag(image, 'Orientation');
                 var cssClass = 'fill r' + (orientation || 1);
 
@@ -126,13 +102,13 @@ module.exports = Base.extend({
             asynquence().or(image.onerror)
                 .then(exif.bind(this))
                 .then(post.bind(this))
-                .then(success.bind(this))
-                .then(display.bind(this));
+                .then(success.bind(this));
         }.bind(this);
 
         image.onerror = function(err) {
             this.$el.trigger('imageLoadEnd');
             delete this.selected[$input.attr('name')];
+            this.parentView.item.set('images', _.clone(this.selected));
             $input.val('');
         }.bind(this);
     },
