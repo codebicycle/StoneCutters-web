@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Tagasi l\xFCkatud',
     'item.RemoveFromFavorites': 'Eemalda lemmikutest',
     'item.SeeMoreAds': 'Vaadake veel kuulutusi kategoorias <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Jaga reklaami',
     'item.ThisAdIsNoLongerAvailable': 'See kuulutus pole enam k\xE4ttesaadav',
     'item.ViewBiggerMap': 'Kuva suurem kaart',
     'item.YourMessageHasBeenSent': 'Teie s\xF5num on saadetud.',

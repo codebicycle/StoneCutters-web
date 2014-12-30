@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Hyl\xE4tty',
     'item.RemoveFromFavorites': 'Poista suosikeista',
     'item.SeeMoreAds': 'Katso lis\xE4\xE4 ilmoituksia kohdassa <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Jaa ilmoitus',
     'item.ThisAdIsNoLongerAvailable': 'T\xE4m\xE4 ilmoitus ei ole en\xE4\xE4 saatavilla',
     'item.ViewBiggerMap': 'Katso Suurempaa Karttaa',
     'item.YourMessageHasBeenSent': 'Viestisi on l\xE4hetetty.',

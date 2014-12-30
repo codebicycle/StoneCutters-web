@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'B\u1ECB t\u1EEB ch\u1ED1i',
     'item.RemoveFromFavorites': 'G\u1EE1 b\u1ECF kh\u1ECFi m\u1EE5c \u0111\u01B0\u1EE3c \u01B0a th\xEDch',
     'item.SeeMoreAds': 'Xem th\xEAm c\xE1c rao v\u1EB7t trong <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Chia s\u1EBB qu\u1EA3ng c\xE1o',
     'item.ThisAdIsNoLongerAvailable': 'Rao v\u1EB7t n\xE0y kh\xF4ng c\xF2n',
     'item.ViewBiggerMap': 'Xem B\u1EA3n \u0111\u1ED3 L\u1EDBn h\u01A1n',
     'item.YourMessageHasBeenSent': 'Tin nh\u1EAFn c\u1EE7a b\u1EA1n \u0111\xE3 \u0111\u01B0\u1EE3c g\u1EEDi.',

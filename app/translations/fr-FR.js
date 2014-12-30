@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Rejet\xE9e',
     'item.RemoveFromFavorites': 'Supprimer des favoris',
     'item.SeeMoreAds': 'Voir plus d\'annonces dans <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Partager annonce',
     'item.ThisAdIsNoLongerAvailable': 'Cette annonce n\'est plus disponiblle',
     'item.ViewBiggerMap': 'Agrandir plan',
     'item.YourMessageHasBeenSent': 'Votre message a \xE9t\xE9 envoy\xE9.',

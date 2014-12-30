@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Respins',
     'item.RemoveFromFavorites': 'Elimin\u0103 din favorite',
     'item.SeeMoreAds': 'Vezi mai multe anun\u0163uri din <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Partajeaz\u0103 anun\u0163ul',
     'item.ThisAdIsNoLongerAvailable': 'Acest anun\u0163 nu mai este disponibil',
     'item.ViewBiggerMap': 'Vizualizeaz\u0103 harta m\u0103rit\u0103',
     'item.YourMessageHasBeenSent': 'Mesajul dvs. a fost trimis.',

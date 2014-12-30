@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Imekataliwa',
     'item.RemoveFromFavorites': 'Ondoa kutoka kwa vibwedo',
     'item.SeeMoreAds': 'Angalia matangazo zaidi katika <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Shiriki tangazo',
     'item.ThisAdIsNoLongerAvailable': 'Tangazo hili halipatikani tena',
     'item.ViewBiggerMap': 'Angalia Ramani Kubwa zaidi',
     'item.YourMessageHasBeenSent': 'Ujumbe wako umetumwa',

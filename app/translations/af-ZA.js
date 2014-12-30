@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Afgekeur',
     'item.RemoveFromFavorites': 'Verwyder van gunstelinge',
     'item.SeeMoreAds': 'Kyk na nog advts. <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Deel \'n advt.',
     'item.ThisAdIsNoLongerAvailable': 'Hierdie advt. is nie meer beskikbaar nie.',
     'item.ViewBiggerMap': 'Bekyk Groter Kaart',
     'item.YourMessageHasBeenSent': 'Jou boodskap is gestuur.',

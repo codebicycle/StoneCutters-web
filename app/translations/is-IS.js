@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Hafna\xF0',
     'item.RemoveFromFavorites': 'Fjarl\xE6gja \xFAr upp\xE1halds',
     'item.SeeMoreAds': 'Sj\xE1 fleiri augl\xFDsingar \xED <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Deila augl\xFDsingu',
     'item.ThisAdIsNoLongerAvailable': '\xDEessi augl\xFDsing er ekki lengur \xED bo\xF0i',
     'item.ViewBiggerMap': 'Pogledajte ve\u0107u mapu',
     'item.YourMessageHasBeenSent': 'Skilabo\xF0in voru send.',

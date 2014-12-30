@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Rejected',
     'item.RemoveFromFavorites': 'Odstranite iz priljubljenih',
     'item.SeeMoreAds': 'Poglejte ve\u010D oglasov v <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Delite oglas',
     'item.ThisAdIsNoLongerAvailable': 'Ta oglas ne obstaja ve\u010D',
     'item.ViewBiggerMap': 'Poglejte ve\u010Dji zemljevid',
     'item.YourMessageHasBeenSent': 'Va\u0161e sporo\u010Dilo je bilo poslano.',

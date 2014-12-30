@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Ditolak',
     'item.RemoveFromFavorites': 'Hapus dari favorit',
     'item.SeeMoreAds': 'Lihat lebih banyak iklan di <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Bagi iklan',
     'item.ThisAdIsNoLongerAvailable': 'Iklan ini tidak tersedia lagi',
     'item.ViewBiggerMap': 'Lihat Peta yang Lebih Besar',
     'item.YourMessageHasBeenSent': 'Pesan Anda telah dikirim.',

@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Zam\xEDtnuto',
     'item.RemoveFromFavorites': 'Odstranit z obl\xEDben\xFDch',
     'item.SeeMoreAds': 'Prohl\xE9dnout v\xEDce inzer\xE1t\u016F v kategorii <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Sd\xEDlet inzer\xE1t',
     'item.ThisAdIsNoLongerAvailable': 'Tento inzer\xE1t ji\u017E nen\xED k dispozici',
     'item.ViewBiggerMap': 'Zobrazit v\u011Bt\u0161\xED mapu',
     'item.YourMessageHasBeenSent': 'V\xE1\u0161 vzkaz byl odesl\xE1n.',

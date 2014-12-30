@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Odrzucone',
     'item.RemoveFromFavorites': 'Usu\u0144 z ulubionych',
     'item.SeeMoreAds': 'Zobacz wi\u0119cej og\u0142osze\u0144 w kategorii <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Udost\u0119pnij og\u0142oszenie',
     'item.ThisAdIsNoLongerAvailable': 'Og\u0142oszenie jest niedost\u0119pne.',
     'item.ViewBiggerMap': 'Zobacz wi\u0119ksz\u0105 map\u0119',
     'item.YourMessageHasBeenSent': 'Wiadomo\u015B\u0107 zosta\u0142a wys\u0142ana.',

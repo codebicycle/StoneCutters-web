@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': '\u0E1B\u0E0F\u0E34\u0E40\u0E2A\u0E18',
     'item.RemoveFromFavorites': 'Favorilerden kald\u0131r\u0131n',
     'item.SeeMoreAds': '\u0E14\u0E39\u0E42\u0E06\u0E29\u0E13\u0E32\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E15\u0E34\u0E21\u0E43\u0E19 <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': '\u0130lan payla\u015F\u0131n',
     'item.ThisAdIsNoLongerAvailable': '\u0E42\u0E06\u0E29\u0E13\u0E32\u0E19\u0E35\u0E49\u0E44\u0E21\u0E48\u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E43\u0E0A\u0E49\u0E44\u0E14\u0E49\u0E2D\u0E35\u0E01',
     'item.ViewBiggerMap': 'Daha B\xFCy\xFCk Bir Haritay\u0131 G\xF6r\xFCnt\xFCleyin',
     'item.YourMessageHasBeenSent': '\u0E02\u0E49\u0E2D\u0E04\u0E27\u0E32\u0E21\u0E17\u0E35\u0E48\u0E04\u0E38\u0E13\u0E2A\u0E48\u0E07',

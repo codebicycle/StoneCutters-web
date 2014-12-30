@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': '\u62D2\u5426\u3055\u308C\u305F',
     'item.RemoveFromFavorites': '\u304A\u6C17\u306B\u5165\u308A\u304B\u3089\u524A\u9664',
     'item.SeeMoreAds': '\u4ED6\u306E\u5E83\u544A\u3092\u3053\u306E\u30EA\u30F3\u30AF\u3067\u898B\u3066\u4E0B\u3055\u3044<<LINK_TO_CATEGORY>>',
+    'item.ShareAd': '\u5E83\u544A\u3092\u5171\u6709',
     'item.ThisAdIsNoLongerAvailable': '\u3053\u306E\u5E83\u544A\u306F\u63B2\u8F09\u3092\u7D42\u4E86\u3057\u307E\u3057\u305F\u3002',
     'item.ViewBiggerMap': '\u5927\u304D\u3044\u5730\u56F3\u3092\u898B\u308B',
     'item.YourMessageHasBeenSent': '\u30E1\u30C3\u30BB\u30FC\u30B8\u306F\u9001\u4FE1\u3055\u308C\u307E\u3057\u305F\u3002',

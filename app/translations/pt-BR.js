@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Recusado',
     'item.RemoveFromFavorites': 'Remover dos favoritos',
     'item.SeeMoreAds': 'Veja mais an\xFAncios em <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Compartilhar an\xFAncio',
     'item.ThisAdIsNoLongerAvailable': 'Esse an\xFAncio n\xE3o est\xE1 mais dispon\xEDvel',
     'item.ViewBiggerMap': 'Ver Mapa Maior',
     'item.YourMessageHasBeenSent': 'Mensagem enviada com sucesso!',

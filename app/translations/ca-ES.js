@@ -197,6 +197,7 @@ module.exports = {
     'item.Rejected': 'Rebutjat',
     'item.RemoveFromFavorites': 'Treure de favorits',
     'item.SeeMoreAds': 'Veure m\xE9s anuncis a <<LINK_TO_CATEGORY>>',
+    'item.ShareAd': 'Compartir anunci',
     'item.ThisAdIsNoLongerAvailable': 'Aquest anunci ja no est\xE0 disponible',
     'item.ViewBiggerMap': 'Veure mapa m\xE9s gran',
     'item.YourMessageHasBeenSent': 'El teu missatge s\'ha enviat correctament.',
