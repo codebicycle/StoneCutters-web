@@ -426,5 +426,8 @@ module.exports = {
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
         }
+    },
+    recaptcha: {
+        'secretKey': '6LcjQf8SAAAAADIPSryjN9TVSsgIrVSPADI-nC2a'
     }
 };

@@ -368,5 +368,8 @@ module.exports = {
             'www.olx.com.ke': 'support-ke'
         }
 
+    },
+    recaptcha: {
+        secretKey: '6LcjQf8SAAAAADIPSryjN9TVSsgIrVSPADI-nC2a'
     }
 };

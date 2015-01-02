@@ -36,11 +36,12 @@ module.exports = Base.extend({
 
         recaptcha.attr({
             type: 'text/javascript',
-            src: 'https://www.google.com/recaptcha/api.js?onload=onloadCallback',
+            src: 'https://www.google.com/recaptcha/api.js',
             async: true,
             defer: true
         });
         $('head').append(recaptcha);
+
     },
     helpToggleContent: function(event) {
         event.preventDefault();
@@ -91,8 +92,10 @@ module.exports = Base.extend({
         };
         var emailRegExp = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
         var valid = true;
-        // var captcha = this.captchaCallback(this.$('#g-recaptcha-response').val());
         var value;
+
+        $('[data-contact-form] .spinner').removeClass('hide');
+        $('[data-contact-form] [type="submit"]').addClass('hide');
 
         $(fields).each( function() {
             value = $(this).val();
@@ -114,8 +117,6 @@ module.exports = Base.extend({
             this.captchaCallback(this.$('#g-recaptcha-response').val())
             .done(function(result) {
                 if (result.success) {
-                    $('[data-contact-form] .spinner').removeClass('hide');
-                    $('[data-contact-form] [type="submit"]').addClass('hide');
                     $('[data-captcha-verification] .error').addClass('hide');
                 } else {
                     $('[data-captcha-verification] .error').text(message.empty).removeClass('hide');
@@ -142,8 +143,7 @@ module.exports = Base.extend({
             type: 'GET',
             url: url,
             data: data,
-            dataType: 'json',
-            cache: false
+            dataType: 'json'
         });
     }
 });
