@@ -66,7 +66,7 @@
     .locations {
         display: inline-block;
         font-size: $xs;
-        margin: 4px 0;
+        margin: 0 0 10px;
         vertical-align: top;
         width: 24%;
         span {
@@ -78,7 +78,7 @@
 
         .active-neighborhoods {
             ul {
-                padding: 10px;
+                padding: 10px 10px 0;
                 border-bottom: 1px solid $greyBorders;
             }
             .active-neighborhood {
@@ -103,11 +103,17 @@
         }
         .neighborhood-list {
             ul {
-                border-bottom: 1px solid $greyBorders;
-                padding: 10px;
-                height: 60px;
-                overflow: hidden;
-                display: inline-block;
+                &.visible-neighborhoods {
+                    padding: 10px 10px 0 10px;
+                    display: inline-block;
+                }
+                &.hidden-neighborhoods {
+                    padding: 0 10px;
+                    display: none;
+                }
+            }
+            .actions {
+                border-top: 1px solid $greyBorders;
             }
         }
         .locations {
@@ -120,7 +126,7 @@
                     top: 0;
                 }
             }
-            &:first-child {
+            &.select-all {
                 font-weight: bold;
                 width: 100%;
             }

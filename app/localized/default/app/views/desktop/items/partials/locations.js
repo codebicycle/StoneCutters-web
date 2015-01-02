@@ -9,12 +9,15 @@ module.exports = Base.extend({
     className: 'items-locations',
     id: 'items-locations',
     tagName: 'nav',
+    animateTime: 500,
     events: {
         'click [data-action=slide]': 'filterSlide',
         'click [data-action=filter]': 'filter',
         'click [data-action=selectMore]': 'selectMore',
-        'click [data-action=seeLess]': 'seeLess',
-        'click [data-action=seeMore]': 'seeMore'
+        'click [data-action=see]': 'toggleNeighborhoods',
+        'click [data-action=removeNeighborhood]': 'removeNeighborhood',
+        'click [data-action=selectAll]': 'selectAll',
+        'click [data-action=cancel]': 'cancel'
     },
     postRender: function() {
         if (!this.filters) {
@@ -30,15 +33,14 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
-        var animateTime = 500;
-        var $neighborhoodList = $('.neighborhood-list');
+                var $neighborhoodList = $('.neighborhood-list');
         var $neighborhoodFirst = $('.neighborhood-first');
         var $cancel = $('.cancel-btn');
         var $filter = $('.filter-btn[data-action=filter]');
         var $seeMore = $('.see.more');
 
-        $neighborhoodFirst.slideUp( parseInt(animateTime), function() {
-            $neighborhoodList.slideDown(parseInt(animateTime));
+        $neighborhoodFirst.slideUp( function() {
+            $neighborhoodList.slideDown();
         });
 
     },
@@ -49,117 +51,13 @@ module.exports = Base.extend({
 
         var path = this.getPath('path');
         var filtersId = '';
-        var $neighborhoods = $('.neighborhood-list input:checked');
+        var $neighborhoods = $('.neighborhood-list .neighborhoods input:checked');
         var filter = {
             name: 'neighborhood',
             type: 'SELECT'
         };
 
-        $($neighborhoods).each(function (index) {
-            if (index === $neighborhoods.length - 1) {
-                filtersId += $(this).val();
-            }
-            else {
-                filtersId += $(this).val() + '_';
-            }
-        });
-
-        this.filters.remove(filter);
-        filter.value = filtersId;
-        this.filters.add(filter);
-        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-        path = this.refactorPath(path);
-        path = helpers.common.link(path, this.app);
-        this.app.router.redirectTo(path);
-
-    },
-    selectMore: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $target = $(event.currentTarget);
-        var $activeNeighborhoods = $('.active-neighborhoods');
-        var $neighborhoodList = $('.neighborhood-list');
-        var animateTime = 500;
-
-        $activeNeighborhoods.slideUp( parseInt(animateTime), function() {
-            $neighborhoodList.slideDown(parseInt(animateTime));
-        });
-
-    },
-    seeLess: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $target = $(event.currentTarget);
-        var $neighborhoodList = $('.neighborhood-list ul');
-        var $seeMore = $('.see.more');
-        var animateTime = 500;
-        var height = '60px';
-
-        $neighborhoodList.animate({height: height}, parseInt(animateTime));
-        $seeMore.removeClass('hide');
-        $target.addClass('hide');
-
-    },
-    seeMore: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $target = $(event.currentTarget);
-        var animateTime = 500;
-        var $neighborhoodList = $('.neighborhood-list ul');
-        var $seeLess = $('.see.less');
-        var curHeight = $neighborhoodList.height();
-        var autoHeight = $neighborhoodList.css('height', 'auto').height();
-
-        $neighborhoodList.height(curHeight);
-        $neighborhoodList.stop().animate({ height: autoHeight }, parseInt(animateTime));
-        $target.addClass('hide');
-        $seeLess.removeClass('hide');
-    },
-
-    /*
-    filterAction: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $seeLess = $('.see.less');
-        var $neighborhoods = $('.neighborhood-list input:checked');
-
-        if (action === 'slide') {
-            $neighborhoodList.addClass('open');
-            $neighborhoodList.animate({height: height}, parseInt(animateTime));
-            $filter.data('action', 'filter');
-            $seeMore.removeClass('hide');
-            $cancel.removeClass('hide');
-        }
-        else if (action === 'seeMore') {
-            var curHeight = $neighborhoodList.height();
-            var autoHeight = $neighborhoodList.css('height', 'auto').height();
-
-            $neighborhoodList.height(curHeight);
-            $neighborhoodList.stop().animate({ height: autoHeight }, parseInt(animateTime));
-            $seeMore.addClass('hide');
-            $seeLess.removeClass('hide');
-        }
-        else if (action === 'seeLess') {
-            $neighborhoodList.animate({height: height}, parseInt(animateTime));
-            $seeMore.removeClass('hide');
-            $seeLess.addClass('hide');
-        }
-        else if (action === 'filter' && $neighborhoods.length > 0) {
-            var path = this.getPath('path');
-            var filtersId = '';
-            var filter = {
-                name: 'neighborhood',
-                type: 'SELECT'
-            };
-
+        if ($neighborhoods.length > 0) {
             $($neighborhoods).each(function (index) {
                 if (index === $neighborhoods.length - 1) {
                     filtersId += $(this).val();
@@ -177,7 +75,94 @@ module.exports = Base.extend({
             path = helpers.common.link(path, this.app);
             this.app.router.redirectTo(path);
         }
-    },*/
+    },
+    selectMore: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+        var $activeNeighborhoods = $('.active-neighborhoods');
+        var $neighborhoodList = $('.neighborhood-list');
+
+        $activeNeighborhoods.slideUp( function() {
+            $neighborhoodList.slideDown();
+        });
+
+    },
+    toggleNeighborhoods: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+        var $neighborhoodList = $('.neighborhood-list .hidden-neighborhoods');
+        var $see = $('.see');
+
+        $neighborhoodList.slideToggle();
+        $see.toggleClass('hide');
+
+    },
+    removeNeighborhood: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+        var path = this.getPath('path');
+        var filter = {
+            name: 'neighborhood',
+            type: 'SELECT',
+            value: $target.data('id').toString()
+        };
+
+        this.filters.remove(filter);
+        path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+        path = this.refactorPath(path);
+        path = helpers.common.link(path, this.app);
+        this.app.router.redirectTo(path);
+
+    },
+    selectAll: function(event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+        var $neighborhoods = $('.neighborhood-list .neighborhoods input');
+
+        if($target.is(':checked')) {
+            $neighborhoods.each(function() {
+                this.checked = true;
+            });
+        }
+        else{
+            $neighborhoods.each(function() {
+                this.checked = false;
+            });
+        }
+
+    },
+    cancel: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+        var $activeNeighborhoods = $('.active-neighborhoods');
+        var $neighborhoodList = $('.neighborhood-list');
+        var $neighborhoodFirst = $('.neighborhood-first');
+
+        if (this.filters.isActive('neighborhood')) {
+            $neighborhoodList.slideUp( function() {
+                $activeNeighborhoods.slideDown();
+            });
+        }
+        else {
+            $neighborhoodList.slideUp( function() {
+                $neighborhoodFirst.slideDown();
+            });
+        }
+    },
     getPath: function() {
         var path = this.app.session.get('path');
         var currentRoute = this.app.session.get('currentRoute');
