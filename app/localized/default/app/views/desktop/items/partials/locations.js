@@ -33,7 +33,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
-                var $neighborhoodList = $('.neighborhood-list');
+        var $neighborhoodList = $('.neighborhood-list');
         var $neighborhoodFirst = $('.neighborhood-first');
         var $cancel = $('.cancel-btn');
         var $filter = $('.filter-btn[data-action=filter]');
