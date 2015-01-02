@@ -27,7 +27,7 @@ module.exports = Base.extend({
         var type = this.adServing.get('type');
         var slotname = this.adServing.get('slotname');
 
-        if (type == 'CSA') {
+        if (type == 'CSA' || type == 'AFC') {
             if(this.isGoogleReferer() && settings.seo){
                 settings.params = _.extend({}, settings.params, {
                     number: settings.seo
@@ -39,13 +39,13 @@ module.exports = Base.extend({
             settings.options = _.extend({}, settings.options, {
                 channel: settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername)
             });
+        }
+        if (type == 'CSA') {
             this._includeCsaLib();
-
             window._googCsa('ads', settings.options, settings.params);
         }
         else if (type == 'ADX') {
-
-            this.createIframe({
+            this.createIframeADX({
                 slotname: slotname,
                 width: settings.params.width,
                 height: settings.params.height,
@@ -54,16 +54,16 @@ module.exports = Base.extend({
             });
         }
         else if (type == 'AFC') {
-
-            this.createIframeAfc({
+            this.createIframeAFC({
                 slotname: slotname,
                 width: settings.params.width,
                 height: settings.params.height,
                 media: settings.params.media,
-                hints: settings.params.hints,
+                hints: settings.options.query,
                 number: settings.params.number,
                 slotId: settings.params.slotId,
-                pubId: settings.options.pubId
+                pubId: settings.options.pubId,
+                channel: settings.options.channel
             });
         }
     },
@@ -86,44 +86,46 @@ module.exports = Base.extend({
             $ads.appendTo('head');
         }
     },
-    createIframe: function(params) {
-        var $ifr;
-
-        $ifr = $('<iframe></iframe>');
-        $ifr.attr({
+    createIframeADX: function(params) {
+        $('<iframe></iframe>')
+        .attr({
             height: params.height,
             width: params.width,
             src: 'about:blank',
             id: params.slotname + '_iframe'
         }).on('load', function() {
             var domIfr = this.contentDocument || this.contentWindow.document;
+            var ifrScripts = [];
 
-            domIfr.write('<style>body{margin:0;}</style><script type="text/javascript">google_ad_client = "' + params.pubId + '";google_ad_slot = "' + params.slotId + '";google_ad_width = ' + params.width + ';google_ad_height =  ' + params.height + ';</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
+            ifrScripts.push('google_ad_client = "' + params.pubId + '";');
+            ifrScripts.push('google_ad_slot = "' + params.slotId + '";');
+            ifrScripts.push('google_ad_width = "' + params.width + '";');
+            ifrScripts.push('google_ad_height = "' + params.height + '";');
+
+            domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><style>body{margin:0;}</style>');
         }).appendTo('#' + params.slotname);
     },
-    createIframeAfc: function(params) {
-        var $ifr;
-
-        $ifr = $('<iframe></iframe>');
-        $ifr.attr({
+    createIframeAFC: function(params) {
+        $('<iframe></iframe>')
+        .attr({
             height: 1,
             width: 1,
             src: 'about:blank',
             id: params.slotname + '_iframe'
         }).on('load', function() {
             var domIfr = this.contentDocument || this.contentWindow.document;
-
             var ifrScripts = [];
-                ifrScripts.push('google_ad_client = "' + params.pubId + '";');
-                ifrScripts.push('google_safe = "medium";');
-                ifrScripts.push('google_ad_type = "' + params.media + '";');
-                ifrScripts.push('google_image_size = "' + params.width + 'x' + params.height + '";');
-                ifrScripts.push('google_ad_output = "js";');
-                ifrScripts.push('google_ad_channel = "OLX_EG";');
-                ifrScripts.push('google_max_num_ads = 3;');
-                ifrScripts.push('google_hints = "' + params.hints + '";');
-                ifrScripts.push('google_ad_section = "title body";');
-                ifrScripts.push('google_ad_request_done = function(r){ window.parent.AFCrender(r, "' + params.slotname + '"); };');
+
+            ifrScripts.push('google_ad_client = "' + params.pubId + '";');
+            ifrScripts.push('google_safe = "medium";');
+            ifrScripts.push('google_ad_type = "' + params.media + '";');
+            ifrScripts.push('google_image_size = "' + params.width + 'x' + params.height + '";');
+            ifrScripts.push('google_ad_output = "js";');
+            ifrScripts.push('google_ad_channel =  "' + params.channel + '";');
+            ifrScripts.push('google_max_num_ads =  ' + params.number + ';');
+            ifrScripts.push('google_hints = "' + params.hints + '";');
+            ifrScripts.push('google_ad_section = "title body";');
+            ifrScripts.push('google_ad_request_done = function(r){ window.parent.AFCrender(r, "' + params.slotname + '"); };');
 
             domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
         }).appendTo('#' + params.slotname);

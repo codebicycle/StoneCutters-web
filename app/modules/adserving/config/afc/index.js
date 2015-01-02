@@ -3,6 +3,7 @@
 module.exports = {
     enabled: true,
     options: {
-        pubId: 'ca-olx'
+        pubId: 'ca-olx',
+        channel: 'OLX_[countrycode]'
     }
 };

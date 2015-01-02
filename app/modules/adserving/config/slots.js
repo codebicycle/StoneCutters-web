@@ -95,7 +95,6 @@ module.exports = {
         types: {
             AFC: {
                 params: {
-                    hints: 'internet',
                     number: 3,
                     media: 'image, text',
                     width: '728',
@@ -126,7 +125,6 @@ module.exports = {
         types: {
             AFC: {
                 params: {
-                    hints: 'auto',
                     number: 3,
                     media: 'text',
                     width: '728',

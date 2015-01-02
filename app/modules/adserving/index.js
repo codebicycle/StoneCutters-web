@@ -60,7 +60,7 @@ function getSettings() {
 }
 
 function createChannels(type) {
-    if (type == 'ADX' || type == 'AFC') {
+    if (type == 'ADX') {
         return;
     }
     var config = utils.get(configAdServing, type, {});
@@ -77,6 +77,7 @@ function createChannels(type) {
     var channelName;
     var channelLocation;
     var pageName;
+    var joiner = type == 'CSA' ? ' ' : ',';
 
     page.push(currentRoute.controller);
     page.push('#');
@@ -96,7 +97,7 @@ function createChannels(type) {
     channels.push('[navigator]');
     channels.push([channelPrefix, channelName, channelLocation, 'Organic'].join('_'));
 
-    return channels.join(' ');
+    return channels.join(joiner);
 }
 
 function isSlotEnabled() {
