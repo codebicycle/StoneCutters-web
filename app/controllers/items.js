@@ -918,7 +918,7 @@ function staticSearch(params, callback) {
                 items: {
                     collection: 'Items',
                     params: _.extend(params, {
-                        item_type: 'staticSearch',
+                        item_type: 'static',
                         seo: this.app.seo.isEnabled()
                     })
                 }
