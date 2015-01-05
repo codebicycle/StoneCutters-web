@@ -61,12 +61,13 @@ module.exports = {
     },
     slot_side_listing: {
         enabled: true,
-        defaultType: 'ADX',
+        defaultType: 'AFC',
         location: 'Side',
         types: {
-            ADX: {
+            AFC: {
                 params: {
-                    slotId: 3997611586,
+                    number: 1,
+                    media: "flash, image",
                     width: '160',
                     height: '600'
                 },
