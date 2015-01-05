@@ -366,7 +366,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Ostke, mida soovite',
     'misc.ByPublishingYouAgreeTerms': 'Kuulutuse avaldamisega n\xF5ustute OLXi <<LINK_TO_TERMS_AND_CONDITIONS>> kasutustingimustega <</ LINK_TO_TERMS_AND_CONDITIONS>>.',
     'misc.Call': 'Helista',
-    'misc.Cancel': 'T\xFChista',
     'misc.ChooseACategory_Mob': 'Valige kategooria',
     'misc.ChooseASubcategory_Mob': 'Valige alamkategooria',
     'misc.ClickHere': 'Click here',

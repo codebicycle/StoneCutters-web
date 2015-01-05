@@ -366,7 +366,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Koop wat je wilt',
     'misc.ByPublishingYouAgreeTerms': 'Door een advertentie te plaatsen, verklaar je in te stemmen en akkoord te gaan met de <<LINK_TO_TERMS_AND_CONDITIONS>> Algemene voorwaarden <</ LINK_TO_TERMS_AND_CONDITIONS>> van OLX.',
     'misc.Call': 'Bellen',
-    'misc.Cancel': 'Annuleren',
     'misc.ChooseACategory_Mob': 'Een rubriek kiezen',
     'misc.ChooseASubcategory_Mob': 'Een subrubriek kiezen',
     'misc.ClickHere': 'Click here',

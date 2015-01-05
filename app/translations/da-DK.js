@@ -366,7 +366,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'K\xF8b n\xE5r du har lyst',
     'misc.ByPublishingYouAgreeTerms': 'Ved at indrykke en annonce accepterer du  <<LINK_TO_TERMS_AND_CONDITIONS>> vilk\xE5r og betingelser for <</ LINK_TO_TERMS_AND_CONDITIONS>> of OLX.',
     'misc.Call': 'Ring',
-    'misc.Cancel': 'Annuller',
     'misc.ChooseACategory_Mob': 'V\xE6lg en kategori',
     'misc.ChooseASubcategory_Mob': 'V\xE6lg en underkategori',
     'misc.ClickHere': 'Click here',

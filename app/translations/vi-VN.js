@@ -366,7 +366,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'H\xE3y mua nh\u1EEFng g\xEC b\u1EA1n c\u1EA7n',
     'misc.ByPublishingYouAgreeTerms': 'B\u1EB1ng vi\u1EC7c \u0111\u0103ng t\u1EA3i rao v\u1EB7t c\u1EE7a b\u1EA1n, b\u1EA1n \u0111\u1ED3ng \xFD v\xE0 ch\u1EA5p nh\u1EADn <<LINK_TO_TERMS_AND_CONDITIONS>> \u0110i\u1EC1u kho\u1EA3n v\xE0 \u0111i\u1EC1u ki\u1EC7n <</ LINK_TO_TERMS_AND_CONDITIONS>> of OLX.',
     'misc.Call': 'G\u1ECDi',
-    'misc.Cancel': 'Hu\u1EF7',
     'misc.ChooseACategory_Mob': 'Ch\u1ECDn m\u1ED9t h\u1EA1ng m\u1EE5c',
     'misc.ChooseASubcategory_Mob': 'Ch\u1ECDn m\u1ED9t ti\u1EC3u h\u1EA1ng m\u1EE5c',
     'misc.ClickHere': 'Click here',

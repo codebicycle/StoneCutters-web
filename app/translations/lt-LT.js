@@ -366,7 +366,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Nusipirkite k\u0105 tik norite',
     'misc.ByPublishingYouAgreeTerms': 'Paskelbdami skelbim\u0105, J\u016Bs sutinkate su OLX <<LINK_TO_TERMS_AND_CONDITIONS>> teisin\u0117mis s\u0105lygomis <</ LINK_TO_TERMS_AND_CONDITIONS>>.',
     'misc.Call': 'Skambinti',
-    'misc.Cancel': 'At\u0161aukti',
     'misc.ChooseACategory_Mob': 'Pasirinkite kategorij\u0105',
     'misc.ChooseASubcategory_Mob': 'Pasirinkite pakategor\u0119',
     'misc.ClickHere': 'Click here',
