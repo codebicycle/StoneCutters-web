@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Kies asseblief \'n Subkategorie.',
     'postingerror.PleaseTryAgain': 'Probeer asseblief weer.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': '\'n Fout het ontstaan in die poging om aan jou versoek te voldoen.',
-    'posting_photosprogress.wait': 'Wag asseblief, ons is besig om jou beelde op te laai...',
     'contactseller_form.55': 'Aan:',
     'contactseller_form.60': 'Stuur',
     'contactseller_form.AttachPicture': 'Heg \'n Beeld Aan:',

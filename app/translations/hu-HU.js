@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'V\xE1lasszon alkateg\xF3ri\xE1t.',
     'postingerror.PleaseTryAgain': 'Pr\xF3b\xE1lkozzon \xFAjra.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'K\xE9r\xE9se teljes\xEDt\xE9se sor\xE1n hiba t\xF6rt\xE9nt.',
-    'posting_photosprogress.wait': 'K\xE9rj\xFCk, v\xE1rjon, k\xE9pei felt\xF6lt\xE9se folyamatban van...',
     'contactseller_form.55': 'C\xEDmzett:',
     'contactseller_form.60': 'K\xFCld\xE9s',
     'contactseller_form.AttachPicture': 'K\xE9p csatol\xE1sa:',

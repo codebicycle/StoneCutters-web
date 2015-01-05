@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'L\u016Bdzu, izv\u0113lieties apak\u0161kategoriju.',
     'postingerror.PleaseTryAgain': 'L\u016Bdzu, m\u0113\u0123iniet v\u0113lreiz.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Apstr\u0101d\u0101jot j\u016Bsu piepras\u012Bjumu notikusi k\u013C\u016Bda.',
-    'posting_photosprogress.wait': 'L\u016Bdzu, pagaidiet, m\u0113s aug\u0161upiel\u0101d\u0113jam j\u016Bsu att\u0113lus...',
     'contactseller_form.55': 'Adres\u0101ts:',
     'contactseller_form.60': 'Nos\u016Bt\u012Bt',
     'contactseller_form.AttachPicture': 'Pievienot att\u0113lu:',

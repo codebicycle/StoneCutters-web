@@ -192,7 +192,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': '\u0645\u0646 \u0641\u0636\u0644\u0643 \u0627\u062E\u062A\u0631 \u0642\u0628\u0644 \u0627\u0644\u0645\u0631\u062A\u0628\u0629 ',
     'postingerror.PleaseTryAgain': 'Please try again.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': '\u0647\u0646\u0627\u0643 \u062E\u0637\u0623 \u0641\u064A \u0645\u062D\u0627\u0648\u0644\u0629 \u0644\u062A\u0644\u0628\u064A\u0629 \u0637\u0644\u0628\u0643.',
-    'posting_photosprogress.wait': '\u0645\u0646 \u0641\u0636\u0644\u0643 \u0623\u0646\u062A\u0638\u0631 \u062D\u062A\u0649 \u0646\u062D\u0645\u064B\u0644 \u0635\u0648\u0631\u062A\u0643 ',
     'contactseller_form.55': '\u0628\u0627\u0626\u0639',
     'contactseller_form.60': '\u0623\u0631\u0633\u0627\u0644 \u0633\u0624\u0627\u0644',
     'contactseller_form.AttachPicture': 'Attach a Picture:',

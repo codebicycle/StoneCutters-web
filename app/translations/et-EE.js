@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Palun valige alamkategooria.',
     'postingerror.PleaseTryAgain': 'Palun proovige uuesti.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Teie p\xE4ringu t\xE4itmisel tekkis viga.',
-    'posting_photosprogress.wait': 'Palun oodake, me laeme Teie pilte \xFCles...',
     'contactseller_form.55': 'M\xFC\xFCja:',
     'contactseller_form.60': 'Saada',
     'contactseller_form.AttachPicture': 'Manustage pilt:',

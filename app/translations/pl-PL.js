@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Wybierz Podkategori\u0119.',
     'postingerror.PleaseTryAgain': 'Spr\xF3buj ponownie.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Pojawi\u0142 si\u0119 b\u0142\u0105d.',
-    'posting_photosprogress.wait': 'Czekaj. Trwa \u0142adowanie zdj\u0119cia...',
     'contactseller_form.55': 'Do:',
     'contactseller_form.60': 'Wy\u015Blij',
     'contactseller_form.AttachPicture': 'Do\u0142\u0105cz Zdj\u0119cie',

@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'V\xE6lg venligst en underkategori.',
     'postingerror.PleaseTryAgain': 'Pr\xF8v venligst igen.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Der opstod en fejl i forbindelse med din anmodning.',
-    'posting_photosprogress.wait': 'Vent venligst, vi uploader dine biller...',
     'contactseller_form.55': 'S\xE6lger:',
     'contactseller_form.60': 'Send',
     'contactseller_form.AttachPicture': 'Vedh\xE6ft et billede:',

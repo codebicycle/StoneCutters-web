@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Bitte w\xE4hlen Sie eine Unterkategorie',
     'postingerror.PleaseTryAgain': 'Please try again.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Es ist ein Fehler aufgetreten.',
-    'posting_photosprogress.wait': 'Bitte haben Sie einen Moment Geduld. Ihr Bilder werden hochgeladen.',
     'contactseller_form.55': 'An:',
     'contactseller_form.60': 'Senden',
     'contactseller_form.AttachPicture': 'Bild anh\xE4ngen:',

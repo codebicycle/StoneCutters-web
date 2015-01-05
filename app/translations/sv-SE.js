@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'V\xE4nligen v\xE4lj en underkategori.',
     'postingerror.PleaseTryAgain': 'V\xE4nligen f\xF6rs\xF6k igen.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Det uppstod ett fel i utf\xF6randet av din beg\xE4ran.',
-    'posting_photosprogress.wait': 'V\xE4nligen v\xE4nta, vi laddar upp dina bilder...',
     'contactseller_form.55': 'Till:',
     'contactseller_form.60': 'Skicka',
     'contactseller_form.AttachPicture': 'Bifoga en bild:',

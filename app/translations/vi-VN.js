@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Xin ch\u1ECDn m\u1ED9t h\u1EA1ng m\u1EE5c con.',
     'postingerror.PleaseTryAgain': 'Vui l\xF2ng th\u1EED l\u1EA1i l\u1EA7n n\u1EEFa.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'C\xF3 l\u1ED7i x\u1EA3y ra khi \u0111\xE1p \u1EE9ng y\xEAu c\u1EA7u c\u1EE7a b\u1EA1n.',
-    'posting_photosprogress.wait': 'Vui l\xF2ng \u0111\u1EE3i, ch\xFAng t\xF4i \u0111ang t\u1EA3i h\xECnh \u1EA3nh c\u1EE7a b\u1EA1n l\xEAn...',
     'contactseller_form.55': 'Ng\u01B0\u1EDDi b\xE1n:',
     'contactseller_form.60': 'G\u1EEDi',
     'contactseller_form.AttachPicture': '\u0110\xEDnh k\xE8m \u1EA3nh:',

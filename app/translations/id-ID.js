@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Silakan pilih Subkategori.',
     'postingerror.PleaseTryAgain': 'Silakan coba lagi.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Ada kesalahan saat memenuhi permintaan Anda.',
-    'posting_photosprogress.wait': 'Mohon tunggu, kami sedang mengunggah gambar Anda...',
     'contactseller_form.55': 'Penjual:',
     'contactseller_form.60': 'Kirim',
     'contactseller_form.AttachPicture': 'Melampirkan Gambar:',

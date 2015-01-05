@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': '\u8BF7\u9009\u62E9\u6B21\u7C7B\u522B\u3002',
     'postingerror.PleaseTryAgain': 'Please try again.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': '\u5B8C\u6210\u60A8\u7684\u8BF7\u793A\u65F6\u6709\u8BEF.',
-    'posting_photosprogress.wait': '\u8BF7\u7A0D\u7B49\uFF0C\u56FE\u7247\u4E0A\u4F20\u4E2D\u2026',
     'contactseller_form.55': '\u6536\u4EF6\u4EBA:',
     'contactseller_form.60': '\u5BC4\u9001',
     'contactseller_form.AttachPicture': '\u9644\u52A0\u56FE\u7247:',

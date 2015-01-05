@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Sila pilih subkategori.',
     'postingerror.PleaseTryAgain': 'Sila cuba semula.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Terdapat ralat ketika cuba melaksanakan permintaan anda.',
-    'posting_photosprogress.wait': 'Sila tunggu, kami sedang memuat naik imej anda...',
     'contactseller_form.55': 'Kepada:',
     'contactseller_form.60': 'Kirim',
     'contactseller_form.AttachPicture': 'Lampirkan Gambar:',

@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Izaberite potkategoriju.',
     'postingerror.PleaseTryAgain': 'Poku\u0161ajte ponovo.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Do\u0161lo je do gre\u0161ke prilikom poku\u0161aja da se ispuni va\u0161 zahtev.',
-    'posting_photosprogress.wait': 'Sa\u010Dekajte, slike se otpremaju...',
     'contactseller_form.55': 'Prodavac:',
     'contactseller_form.60': 'Po\u0161alji',
     'contactseller_form.AttachPicture': 'Prilo\u017Ei sliku:',

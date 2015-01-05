@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Por favor elige una Subcategor\xEDa',
     'postingerror.PleaseTryAgain': 'Por favor, intenta de nuevo.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Ha habido un error al intentar cumplimentar tu solititud.',
-    'posting_photosprogress.wait': 'Por favor espera mientras cargamos tus im\xE1genes...',
     'contactseller_form.55': 'Para:',
     'contactseller_form.60': 'Enviar Consulta',
     'contactseller_form.AttachPicture': 'Adjuntar Imagen:',

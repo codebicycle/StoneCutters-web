@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'V\u0103 rug\u0103m s\u0103 selecta\u0163i o Subcategorie.',
     'postingerror.PleaseTryAgain': 'V\u0103 rug\u0103m \xEEncerca\u0163i din nou. ',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'A ap\u0103rut o eroare \xEEn timpul \xEEncerc\u0103rii de a \xEEndeplini cererea dumneavoastr\u0103.',
-    'posting_photosprogress.wait': 'V\xEE rug\u0103m a\u015Ftepta\u0163i, v\u0103 \xEEnc\u0103rc\u0103m imaginile...',
     'contactseller_form.55': 'C\u0103tre:',
     'contactseller_form.60': 'Trimite',
     'contactseller_form.AttachPicture': 'Ata\u015Fa\u0163i o imagine:',

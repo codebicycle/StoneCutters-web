@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Kies een subrubriek.',
     'postingerror.PleaseTryAgain': 'Probeer het opnieuw.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Je verzoek kan niet worden uitgevoerd.',
-    'posting_photosprogress.wait': 'Je foto wordt ge\xFCpload. Een ogenblik...',
     'contactseller_form.55': 'Aan:',
     'contactseller_form.60': 'Verzenden',
     'contactseller_form.AttachPicture': 'Foto toevoegen',

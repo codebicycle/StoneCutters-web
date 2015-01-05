@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'L\xFCtfen bir Alt Kategori se\xE7in.',
     'postingerror.PleaseTryAgain': 'L\xFCtfen yeniden deneyin.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': '\u0130stedi\u011Finizi ger\xE7ekle\u015Ftirirken bir hata oldu.',
-    'posting_photosprogress.wait': 'L\xFCtfen bekleyin resimleriniz y\xFCkleniyor...',
     'contactseller_form.55': 'Kime:',
     'contactseller_form.60': 'G\xF6nder',
     'contactseller_form.AttachPicture': 'Resim Ekle:',

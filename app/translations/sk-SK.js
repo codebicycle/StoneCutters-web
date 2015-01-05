@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Zvo\u013Ete podkateg\xF3riu.',
     'postingerror.PleaseTryAgain': 'Pros\xEDme, sk\xFAste znova.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Pri pokuse o vybavenie va\u0161ej po\u017Eiadavky sa vyskytla chyba.',
-    'posting_photosprogress.wait': '\u010Cakajte pros\xEDm, va\u0161e obr\xE1zky sa odovzd\xE1vaj\xFA...',
     'contactseller_form.55': 'Pre:',
     'contactseller_form.60': 'Odosla\u0165',
     'contactseller_form.AttachPicture': 'Pripoji\u0165 obr\xE1zok:',

@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Tanpri chwazi yon  dezy\xE8m kategori',
     'postingerror.PleaseTryAgain': 'Tanpri eseye ank\xF2. ',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Gen yon er\xE8 .',
-    'posting_photosprogress.wait': 'Fon ti tann souple...nou ap monte foto ou yo.',
     'contactseller_form.55': 'Machann:',
     'contactseller_form.60': 'Voye',
     'contactseller_form.AttachPicture': 'Ajoute yon Foto:',

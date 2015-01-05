@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Valitse alakategoria.',
     'postingerror.PleaseTryAgain': 'Yrit\xE4 uudelleen.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Pyynt\xF6\xE4si ei voida toteuttaa.',
-    'posting_photosprogress.wait': 'Odota, kuviasi ladataan...',
     'contactseller_form.55': 'Vastaanottaja:',
     'contactseller_form.60': 'L\xE4het\xE4',
     'contactseller_form.AttachPicture': 'Liit\xE4 kuva:',

@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Please select a Subcategory.',
     'postingerror.PleaseTryAgain': 'Please try again.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'There was an error trying to fulfill your request.',
-    'posting_photosprogress.wait': 'Wait please, we are uploading your images...',
     'contactseller_form.55': 'To:',
     'contactseller_form.60': 'Send',
     'contactseller_form.AttachPicture': 'Attach a Picture:',

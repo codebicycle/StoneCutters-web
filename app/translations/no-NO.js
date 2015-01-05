@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Vennligst velg en underkategori.',
     'postingerror.PleaseTryAgain': 'Vennligst pr\xF8v p\xE5 nytt.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Det oppsto en feil med \xE5 oppfylle ditt foresp\xF8rsel.',
-    'posting_photosprogress.wait': 'Vennligst vent, vi laster opp dine bilder...',
     'contactseller_form.55': 'Selger:',
     'contactseller_form.60': 'Send',
     'contactseller_form.AttachPicture': 'Legg ved et bilde:',

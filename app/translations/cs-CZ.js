@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Vyberte pros\xEDm subkategorii.',
     'postingerror.PleaseTryAgain': 'Zkuste to pros\xEDm je\u0161t\u011B jednou.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'P\u0159i pokusu o vy\u0159\xEDzen\xED va\u0161eho po\u017Eadavku do\u0161lo k chyb\u011B.',
-    'posting_photosprogress.wait': 'Po\u010Dkejte pros\xEDm. Nahr\xE1v\xE1me va\u0161e obr\xE1zky...',
     'contactseller_form.55': 'Adres\xE1t:',
     'contactseller_form.60': 'Odeslat',
     'contactseller_form.AttachPicture': 'P\u0159ilo\u017Eit obr\xE1zek:',

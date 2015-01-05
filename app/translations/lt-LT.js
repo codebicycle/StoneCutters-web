@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Pasirinkite papildom\u0105 kategorij\u0105.',
     'postingerror.PleaseTryAgain': 'Bandykite dar kart\u0105.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'M\u0117ginant \u012Fvykdyti j\u016Bs\u0173 u\u017Eklaus\u0105 \u012Fvyko klaida.',
-    'posting_photosprogress.wait': 'Palaukite, kol \u012Fkelsime j\u016Bs\u0173 nuotraukas...',
     'contactseller_form.55': 'Pardav\u0117jas:',
     'contactseller_form.60': 'Si\u0173sti',
     'contactseller_form.AttachPicture': 'Prisegti nuotrauk\u0105:',

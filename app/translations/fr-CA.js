@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Veuillez s\xE9lectionner une Sous-cat\xE9gorie.',
     'postingerror.PleaseTryAgain': 'Veuillez essayer de nouveau.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Il y a eu une erreur au moment de r\xE9pondre \xE0 votre demande.',
-    'posting_photosprogress.wait': 'Veuillez patienter, nous t\xE9l\xE9chargeons vos images...',
     'contactseller_form.55': '\xC0 :',
     'contactseller_form.60': 'Envoyer',
     'contactseller_form.AttachPicture': 'Ajouter une Image:',

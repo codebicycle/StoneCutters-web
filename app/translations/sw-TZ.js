@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Tafadhali chagua Kundi ngodo',
     'postingerror.PleaseTryAgain': 'Please try again.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'Kulikuwa na hitilafu ya kujaribu kukamilisha ombi lako.',
-    'posting_photosprogress.wait': 'Subiri tafadhali, tunapakia picha zako...',
     'contactseller_form.55': 'Kwa:',
     'contactseller_form.60': 'Tuma',
     'contactseller_form.AttachPicture': 'Ambatanisha Picha:',

@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': '\uBD80\uCE74\uD14C\uACE0\uB9AC \uC120\uC815\uD558\uAE30',
     'postingerror.PleaseTryAgain': '\uC6B0\uD3B8\uBC88\uD638\uB97C \uB2E4\uC2DC \uAE30\uC7AC\uD558\uC5EC \uC8FC\uC138\uC694.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': '\uC694\uCCAD \uC2E4\uD589\uC5D0 \uC5D0\uB7EC\uAC00 \uBC1C\uC0DD\uD558\uC600\uC2B5\uB2C8\uB2E4.',
-    'posting_photosprogress.wait': '\uC7A0\uC2DC \uAE30\uB2E4\uB824 \uC8FC\uC2ED\uC2DC\uC694, \uC774\uBBF8\uC9C0\uB97C \uC5C5\uB85C\uB4DC \uC911\uC785\uB2C8\uB2E4....',
     'contactseller_form.55': '\uBC1B\uB294 \uC774:',
     'contactseller_form.60': '\uBCF4\uB0B4\uAE30',
     'contactseller_form.AttachPicture': '\uC0AC\uC9C4 \uCCA8\uBD80\uD558\uAE30:',

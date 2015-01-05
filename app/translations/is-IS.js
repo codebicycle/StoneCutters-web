@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Vinsamlegast veldu undirflokk.',
     'postingerror.PleaseTryAgain': 'Vinsamlegast reyndu aftur.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': '\xDEa\xF0 kom upp villa \xED a\xF0ger\xF0.',
-    'posting_photosprogress.wait': 'Vinsamlegast b\xED\xF0i\xF0 augnablik, vi\xF0 erum a\xF0 hla\xF0a upp myndunum \xFE\xEDnum...',
     'contactseller_form.55': 'Til:',
     'contactseller_form.60': 'Senda',
     'contactseller_form.AttachPicture': 'Hengja mynd vi\xF0:',

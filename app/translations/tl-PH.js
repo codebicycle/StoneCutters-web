@@ -216,7 +216,6 @@ module.exports = {
     'postingerror.PleaseSelectSubcategory': 'Pumili ng Subcategory',
     'postingerror.PleaseTryAgain': 'Pakisubukan muli.',
     'postingerror.ThereWasAnErrorTryingToFulfillYourRequest': 'May error sa pagtupad ng iyong kahilingan.',
-    'posting_photosprogress.wait': 'Maghintay po lamang. Ina-upload po namin ang iyong mga litrato',
     'contactseller_form.55': 'Sa:',
     'contactseller_form.60': 'Ipadala',
     'contactseller_form.AttachPicture': 'Mag-attach ng litrato',
