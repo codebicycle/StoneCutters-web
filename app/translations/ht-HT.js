@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Chanje Anons Mwen ',
     'topcities.SelectLocation': 'Chwazi yon kote',
     'unexistingitem.ListingUnavailable': 'Anons sa a pa disponib ank\xF2.',
+    'adsense.SponsoredLinks': 'Lyen Spons\xF2rize',
     'landingbody.EmailAddress': 'Adr\xE8s Im\xE8l',
     'landingbody.ForgotPassword': 'Ou bliye kod sekr\xE8 ou ?',
     'landingbody.SubmitRegistration': 'Soum\xE8t Enskripsyon',

@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonse',
     'topcities.SelectLocation': 'Velg et sted',
     'unexistingitem.ListingUnavailable': 'Annonsen er ikke lenger tilgjengelig',
+    'adsense.SponsoredLinks': 'Sponsede lenker',
     'landingbody.EmailAddress': 'E-postadresse',
     'landingbody.ForgotPassword': 'Glemt passord?',
     'landingbody.SubmitRegistration': 'Send inn registrering',

@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
     'topcities.SelectLocation': 'Pilih Lokasi',
     'unexistingitem.ListingUnavailable': 'Iklan ini sudah tiada lagi',
+    'adsense.SponsoredLinks': 'Pautan Tajaan',
     'landingbody.EmailAddress': 'Alamat Emel ',
     'landingbody.ForgotPassword': 'Terlupa kata laluan?',
     'landingbody.SubmitRegistration': 'Hantar Pendaftaran',

@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': '\u0AAE\u0ABE\u0AB0\u0AC0 \u0AAF\u0ABE\u0AA6\u0AC0 \u0A8F\u0AA1\u0ABF\u0A9F \u0A95\u0AB0\u0ACB',
     'topcities.SelectLocation': '\u0AB8\u0ACD\u0AA5\u0AB3 \u0AAA\u0AB8\u0A82\u0AA6 \u0A95\u0AB0\u0ACB',
     'unexistingitem.ListingUnavailable': '\u0AAF\u0ABE\u0AA6\u0AC0 \u0AAC\u0ABF\u0AB2\u0A95\u0AC1\u0AB2 \u0A89\u0AAA\u0AB2\u0AAC\u0ACD\u0AA7 \u0AA8\u0AA5\u0AC0',
+    'adsense.SponsoredLinks': '\u0AAA\u0ACD\u0AB0\u0ABE\u0AAF\u0ACB\u0A9C\u0ABF\u0AA4 \u0AB2\u0ABF\u0A82\u0A95\u0ACD\u0AB8',
     'landingbody.EmailAddress': '\u0A88\u0AAE\u0AC7\u0A88\u0AB2 \u0A8F\u0AA1\u0ACD\u0AB0\u0AC7\u0AB8',
     'landingbody.ForgotPassword': 'Forgot password?',
     'landingbody.SubmitRegistration': '\u0AB0\u0A9C\u0AC0\u0AB8\u0ACD\u0A9F\u0ACD\u0AB0\u0AC7\u0AB6\u0AA8 \u0AB8\u0AC1\u0AAA\u0ACD\u0AB0\u0AA4 \u0A95\u0AB0\u0ACB',

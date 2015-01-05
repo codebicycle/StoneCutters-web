@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'I-edit ang aking Patalastas',
     'topcities.SelectLocation': 'Pumili ng isang Lokasyon',
     'unexistingitem.ListingUnavailable': 'Ang patalastas na ito ay hindi na available.',
+    'adsense.SponsoredLinks': 'Mga Sponsored Link',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Nakalimutan ang iyong password?',
     'landingbody.SubmitRegistration': 'Ipadala ang Registration',

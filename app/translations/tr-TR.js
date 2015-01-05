@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': '\u0130lanlar\u0131m\u0131 D\xFCzenle',
     'topcities.SelectLocation': 'Bir Konum Se\xE7in',
     'unexistingitem.ListingUnavailable': 'Bu ilan art\u0131k ge\xE7erli de\u011Fil',
+    'adsense.SponsoredLinks': 'Sponsor Destekli Ba\u011Flant\u0131lar',
     'landingbody.EmailAddress': 'E-Posta Adresi',
     'landingbody.ForgotPassword': 'Parolan\u0131z\u0131 unuttunuz mu?',
     'landingbody.SubmitRegistration': '\xDCyelik Ba\u015Fvurusunu Yolla',

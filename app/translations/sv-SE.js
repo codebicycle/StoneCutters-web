@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Redigera min annons',
     'topcities.SelectLocation': 'V\xE4lj en plats',
     'unexistingitem.ListingUnavailable': 'Annonsen \xE4r inte l\xE4ngre tillg\xE4nglig',
+    'adsense.SponsoredLinks': 'Sponsrade L\xE4nkar',
     'landingbody.EmailAddress': 'E-postadress',
     'landingbody.ForgotPassword': 'Gl\xF6mt ditt l\xF6senord?',
     'landingbody.SubmitRegistration': 'Skicka registrering',

@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Ure\u0111ivanje oglasa',
     'topcities.SelectLocation': 'Izaberite lokaciju',
     'unexistingitem.ListingUnavailable': 'Ovaj oglas vi\u0161e nije dostupan',
+    'adsense.SponsoredLinks': 'Sponzorisani linkovi',
     'landingbody.EmailAddress': 'E-adresa',
     'landingbody.ForgotPassword': 'Zaboravili ste lozinku?',
     'landingbody.SubmitRegistration': 'Prosledi podatke za registraciju',

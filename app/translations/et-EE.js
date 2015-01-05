@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Muutke "Minu kuulutust"',
     'topcities.SelectLocation': 'Valige asukoht',
     'unexistingitem.ListingUnavailable': 'See kuulutus ei ole enam k\xE4ttesaadav',
+    'adsense.SponsoredLinks': 'Tasulised lingid',
     'landingbody.EmailAddress': 'E-posti aadress',
     'landingbody.ForgotPassword': 'Unustasite salas\xF5na?',
     'landingbody.SubmitRegistration': 'Esitage registreering',

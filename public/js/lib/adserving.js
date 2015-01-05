@@ -1,4 +1,4 @@
-AFCrender = function(gads, slot) {
+AFCrender = function(gads, slot, boxTitle) {
     if (gads.length == 0) {
         return;
     }
@@ -22,6 +22,7 @@ AFCrender = function(gads, slot) {
         case 'text/narrow':
             var cr = new AFCTextRender();
             cr.adData = gads;
+            cr.boxTitle = boxTitle;
             html = cr.render();
             break;
 
@@ -70,26 +71,27 @@ AFCFlashRender.prototype = {
 };
 
 AFCTextRender = function() {}
-AFCTextRender.prototype = {
-    html: '<ul>#list#</ul>',
-    template: '<li>' +
-              '<a class="ads-afc-title" href="#url#">#title#</a>' +
-              '<span class="ads-afc-desc">#desc1#</span>' +
-              '<span class="ads-afc-desc">#desc2#</span>' +
-              '<a class="ads-afc-link" href="#url#">#link#</a>' +
-              '</li>',
 
-    render: function () {
-        var templates = '';
+AFCTextRender.prototype.html = '<span class="ads-afc-box-title">#boxTitle#</span><ul>#list#</ul>';
+AFCTextRender.prototype.template = [
+  '<li>',
+  '<a class="ads-afc-title" href="#url#">#title#</a>',
+  '<span class="ads-afc-desc">#desc1#</span>',
+  '<span class="ads-afc-desc">#desc2#</span>',
+  '<a class="ads-afc-link" href="#url#">#link#</a>',
+  '</li>'
+].join('');
 
-        for (var n = 0; n < this.adData.length; n++) {
-            templates += this.template.replace(/#url#/g, this.adData[n].url)
-                                      .replace(/#title#/g, this.adData[n].line1)
-                                      .replace(/#desc1#/g, this.adData[n].line2)
-                                      .replace(/#desc2#/g, this.adData[n].line3)
-                                      .replace(/#link#/g, this.adData[n].visible_url);
-        }
+AFCTextRender.prototype.render = function () {
+    var templates = '';
 
-        return this.html.replace(/#list#/g, templates);
+    for (var n = 0; n < this.adData.length; n++) {
+        templates += this.template.replace(/#url#/g, this.adData[n].url)
+                                  .replace(/#title#/g, this.adData[n].line1)
+                                  .replace(/#desc1#/g, this.adData[n].line2)
+                                  .replace(/#desc2#/g, this.adData[n].line3)
+                                  .replace(/#link#/g, this.adData[n].visible_url);
     }
+
+    return this.html.replace(/#boxTitle#/g, this.boxTitle).replace(/#list#/g, templates);
 };

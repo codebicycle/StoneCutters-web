@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Modifier Mon Annonce',
     'topcities.SelectLocation': 'S\xE9lectionnez un lieu',
     'unexistingitem.ListingUnavailable': 'Cette annonce n\'est plus disponible',
+    'adsense.SponsoredLinks': 'Liens Sponsoris\xE9s',
     'landingbody.EmailAddress': 'Email',
     'landingbody.ForgotPassword': 'Vous avez oubli\xE9 votre mot de passe ?',
     'landingbody.SubmitRegistration': 'Soumettre l\'Inscription',

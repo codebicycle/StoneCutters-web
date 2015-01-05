@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Breyta augl\xFDsingunni minni',
     'topcities.SelectLocation': 'Veldu sta\xF0',
     'unexistingitem.ListingUnavailable': '\xDEessi augl\xFDsing er ekki lengur f\xE1anleg',
+    'adsense.SponsoredLinks': 'Kosta\xF0ir tenglar',
     'landingbody.EmailAddress': 'T\xF6lvup\xF3stfang',
     'landingbody.ForgotPassword': 'Gleymt lykilor\xF0?',
     'landingbody.SubmitRegistration': 'Leggja inn n\xFDskr\xE1ningu',
