@@ -1,97 +1,82 @@
-AFCrender = function(gads, slot, boxTitle) {
+var _ = require('underscore');
+
+window.AFCrender = function AFCrender(gads, slot, boxTitle) {
     if (gads.length == 0) {
         return;
     }
-    var html = '';
+    var render;
 
     switch (gads[0].type) {
         case 'image':
-            var ir = new AFCImageRender();
-            ir.adData = gads[0];
-            html = ir.render();
+            render = new AFCImageRender();
+            render.adData = gads[0];
             break;
-
         case 'flash':
-            var fr = new AFCFlashRender();
-            fr.adData = gads[0];
-            html = fr.render();
+            render = new AFCFlashRender();
+            render.adData = gads[0];
             break;
-
         case 'text':
         case 'text/wide':
         case 'text/narrow':
-            var cr = new AFCTextRender();
-            cr.adData = gads;
-            cr.boxTitle = boxTitle;
-            html = cr.render();
+            render = new AFCTextRender();
+            render.adData = gads;
+            render.boxTitle = boxTitle;
             break;
-
         default:
             return;
     }
-    $('#' + slot).html(html);
-}
-
-AFCImageRender = function() {}
-AFCImageRender.prototype = {
-    html: '<a href="#url#" target="_blank" title="#visibleurl#">' +
-          '<img src="#imgurl#" width="#imgwidth#" height="#imgheight#" alt="#visibleurl#" />' +
-          '</a>',
-
-    render: function() {
-        return this.html.replace(/#url#/g, this.adData.url)
-                        .replace(/#visibleurl#/g, this.adData.visible_url)
-                        .replace(/#imgurl#/g, this.adData.image_url)
-                        .replace(/#imgwidth#/g, this.adData.image_width)
-                        .replace(/#imgheight#/g, this.adData.image_height);
-    }
+    $('#' + slot).html(render.render());
 };
 
-AFCFlashRender = function() {}
-AFCFlashRender.prototype = {
-    html: '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' +
-          ' codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"' +
-          ' width="#moviewidth#" height="#movieheight#">'+
-          '<param name="movie" value="#movieurl#">' +
-          '<param name="quality" value="high">' +
-          '<param name="wmode" value="opaque">' +
-          '<param name="AllowScriptAccess" value="never">' +
-          '<embed wmode="opaque" src="#movieurl#" width="#moviewidth#"' +
-          ' height="#movieheight#" type="application/x-shockwave-flash"' +
-          ' allowscriptaccess="never" ' +
-          ' pluginspage="http://www.macromedia.com/go/getflashplayer">' +
-          '</embed>' +
-          '</object>',
+function AFCImageRender() {};
 
-    render: function() {
-        return this.html.replace(/#movieurl#/g, this.adData.image_url)
-                        .replace(/#moviewidth#/g, this.adData.image_width)
-                        .replace(/#movieheight#/g, this.adData.image_height);
-    }
+AFCImageRender.prototype.html = [
+    '<a href="<%= url %>" target="_blank" title="<%= visible_url %>">',
+    '<img src="<%= image_url %>" width="<%= image_width %>" height="<%= image_height %>" alt="<%= visible_url %>" />',
+    '</a>'
+].join('');
+
+AFCImageRender.prototype.render = function render() {
+    return _.template(this.html)(this.adData);
+};
+
+function AFCFlashRender() {};
+
+AFCFlashRender.prototype.html = [
+    '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="<%= image_width %>" height="<%= image_height %>">',
+    '<param name="movie" value="<%= image_url %>">',
+    '<param name="quality" value="high">',
+    '<param name="wmode" value="opaque">',
+    '<param name="AllowScriptAccess" value="never">',
+    '<embed wmode="opaque" src="<%= image_url %>" width="<%= image_width %>"',
+    ' height="<%= image_height %>" type="application/x-shockwave-flash"',
+    ' allowscriptaccess="never" ',
+    ' pluginspage="http://www.macromedia.com/go/getflashplayer">',
+    '</embed>',
+    '</object>'
+].join('');
+
+AFCFlashRender.prototype.render = function render() {
+    return _.template(this.html)(this.adData);
 };
 
 AFCTextRender = function() {}
 
-AFCTextRender.prototype.html = '<span class="ads-afc-box-title">#boxTitle#</span><ul>#list#</ul>';
-AFCTextRender.prototype.template = [
-  '<li>',
-  '<a class="ads-afc-title" href="#url#">#title#</a>',
-  '<span class="ads-afc-desc">#desc1#</span>',
-  '<span class="ads-afc-desc">#desc2#</span>',
-  '<a class="ads-afc-link" href="#url#">#link#</a>',
-  '</li>'
+AFCTextRender.prototype.html = [
+    '<span class="ads-afc-box-title"><%= boxTitle %></span>',
+    '<ul>',
+    '<% for (var item in list) { item = list[item]; %>',
+    ' <li><a class="ads-afc-title" href="<%= item.url %>"><%= item.line1 %></a>',
+    ' <span class="ads-afc-desc"><%= item.line2 %></span>',
+    ' <span class="ads-afc-desc"><%= item.line3 %></span>',
+    ' <a class="ads-afc-link" href="<%= item.url %>"><%= item.visible_url %></a></li>',
+    '<% } %>',
+    '</ul>'
 ].join('');
 
-AFCTextRender.prototype.render = function () {
-    var templates = '';
-
-    for (var n = 0; n < this.adData.length; n++) {
-        templates += this.template.replace(/#url#/g, this.adData[n].url)
-                                  .replace(/#title#/g, this.adData[n].line1)
-                                  .replace(/#desc1#/g, this.adData[n].line2)
-                                  .replace(/#desc2#/g, this.adData[n].line3)
-                                  .replace(/#link#/g, this.adData[n].visible_url);
-    }
-
-    return this.html.replace(/#boxTitle#/g, this.boxTitle).replace(/#list#/g, templates);
+AFCTextRender.prototype.render = function render() {
+    return _.template(this.html)({
+        boxTitle: this.boxTitle,
+        list: this.adData
+    });
 };
