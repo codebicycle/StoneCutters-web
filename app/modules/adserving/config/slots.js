@@ -96,7 +96,7 @@ module.exports = {
         defaultType: 'AFC',
         location: 'Side',
         types: {
-            ADX: {
+            AFC: {
                 params: {
                     number: 1,
                     media: "flash, image",
