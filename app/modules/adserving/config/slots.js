@@ -83,7 +83,7 @@ module.exports = {
             AFC: {
                 params: {
                     number: 3,
-                    media: 'text, image, flash',
+                    media: 'text',
                     width: '728',
                     height: '90'
                 },

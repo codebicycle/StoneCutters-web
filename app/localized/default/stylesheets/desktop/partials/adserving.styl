@@ -27,7 +27,8 @@
             }
         }
     }
-    .ads-adx, .ads-afc {
+    .ads-adx,
+    .ads-afc {
         text-align: center;
         iframe {
             border: none;
@@ -39,7 +40,7 @@
             margin-top: 20px;
         }
         &.slot_top_item {
-            margin: 10px 0;
+            margin: 10px 0 20px 0;
             min-height: 90px;
         }
     }
@@ -47,8 +48,57 @@
         iframe {
             visibility: hidden;
         }
-        &.slot_bottom_item {
+        ul {
+            background: $white;
+            border: 1px solid $greyBorders;
+            border-radius();
             clear: left;
+            ul-reset();
+            text-align: left;
+
+            li {
+                border-bottom: 1px solid $greyBorders;
+                padding: 10px;
+
+                &:last-child {
+                    border: none;
+                }
+
+                .ads-afc-desc {
+                    font-size: $xs;
+                }
+                .ads-afc-link {
+                    font-size: $xs;
+                    padding-left: 5px;
+                    text-decoration: underline;
+                }
+                .ads-afc-title {
+                    text-decoration: underline;
+                }
+            }
+        }
+        &.slot_bottom_item {
+            li {
+                padding: 20px;
+
+                .ads-afc-title {
+                    color: $orange;
+                    display: block;
+                    font-size: $l;
+                }
+            }
+        }
+        &.slot_top_item {
+            li {
+                .ads-afc-link {
+                    color: #080;
+                }
+                .ads-afc-title {
+                    font-size: $m;
+                    font-weight: bold;
+                    padding: 0 5px 0 0;
+                }
+            }
         }
     }
 }
