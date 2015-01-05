@@ -1,0 +1,9 @@
+[ONEWEB-544] DESKTOP :: DEV :: Add translation keys :: Login :: "password" has capital letter missing
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch bug/loginPasword
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   app/localized/default/stylesheets/desktop/users/login.styl
+#
