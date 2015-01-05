@@ -74,20 +74,6 @@ module.exports = {
             }
         }
     },
-    /*slot_top_item: {
-        enabled: true,
-        defaultType: 'ADX',
-        location: 'Top',
-        types: {
-            ADX: {
-                params: {
-                    width: '728',
-                    height: '90'
-                },
-                excludedCategories: []
-            }
-        }
-    }*/
     slot_top_item: {
         enabled: true,
         defaultType: 'AFC',
@@ -96,7 +82,7 @@ module.exports = {
             AFC: {
                 params: {
                     number: 3,
-                    media: 'image, text',
+                    media: 'text, image, flash',
                     width: '728',
                     height: '90'
                 },
@@ -106,11 +92,13 @@ module.exports = {
     },
     slot_side_item: {
         enabled: true,
-        defaultType: 'ADX',
+        defaultType: 'AFC',
         location: 'Side',
         types: {
             ADX: {
                 params: {
+                    number: 1,
+                    media: "flash, image",
                     width: '300',
                     height: '250'
                 },
@@ -125,7 +113,7 @@ module.exports = {
         types: {
             AFC: {
                 params: {
-                    number: 3,
+                    number: 5,
                     media: 'text',
                     width: '728',
                     height: '90'
