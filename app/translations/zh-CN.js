@@ -365,7 +365,6 @@ module.exports = {
     'misc.BuyWhatYouWant': '\u8D2D\u4E70\u60F3\u8981\u7684\u7269\u54C1',
     'misc.ByPublishingYouAgreeTerms': '\u53EA\u8981\u53D1\u5E03\u5E7F\u544A\uFF0C\u5C31\u8868\u660E\u60A8\u540C\u610F\u5E76\u63A5\u53D7OLX\u7684<<LINK_TO_TERMS_AND_CONDITIONS>> \u6761\u6B3E\u548C\u6761\u4EF6<</ LINK_TO_TERMS_AND_CONDITIONS>>\u3002',
     'misc.Call': '\u547C\u53EB',
-    'misc.Cancel': '\u53D6\u6D88',
     'misc.ChooseACategory_Mob': '\u9009\u62E9\u7C7B\u522B',
     'misc.ChooseASubcategory_Mob': '\u9009\u62E9\u5B50\u7C7B\u522B',
     'misc.ClickHere': 'Click here',

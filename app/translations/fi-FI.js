@@ -365,7 +365,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Osta mit\xE4 haluat',
     'misc.ByPublishingYouAgreeTerms': 'Julkaisemalla ilmoituksen hyv\xE4ksyt OLX:n <<LINK_TO_TERMS_AND_CONDITIONS>> ehdot <</ LINK_TO_TERMS_AND_CONDITIONS>>.',
     'misc.Call': 'Soita',
-    'misc.Cancel': 'Peruuta',
     'misc.ChooseACategory_Mob': 'Valitse luokka',
     'misc.ChooseASubcategory_Mob': 'Valitse aliluokka',
     'misc.ClickHere': 'Click here',

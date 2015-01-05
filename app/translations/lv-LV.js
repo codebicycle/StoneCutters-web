@@ -365,7 +365,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'P\u0113rciet visu, ko v\u0113laties',
     'misc.ByPublishingYouAgreeTerms': 'Public\u0113jot sludin\u0101jumu, j\u016Bs piekr\u012Btat vietnes OLX<<LINK_TO_TERMS_AND_CONDITIONS>> Noteikumiem <</ LINK_TO_TERMS_AND_CONDITIONS>>.',
     'misc.Call': 'Zvan\u012Bt',
-    'misc.Cancel': 'Cancel',
     'misc.ChooseACategory_Mob': 'Izv\u0113lieties kategoriju',
     'misc.ChooseASubcategory_Mob': 'Izv\u0113lieties apak\u0161kategoriju',
     'misc.ClickHere': 'Click here',

@@ -365,7 +365,6 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Compra lo que quieras',
     'misc.ByPublishingYouAgreeTerms': 'Al publicar un anuncio, est\xE1s de acuerdo y aceptas los <<LINK_TO_TERMS_AND_CONDITIONS>> T\xE9rminos y Condiciones <</ LINK_TO_TERMS_AND_CONDITIONS>> of OLX.',
     'misc.Call': 'Llamar',
-    'misc.Cancel': 'Cancelar',
     'misc.ChooseACategory_Mob': 'Escoge una categor\xEDa',
     'misc.ChooseASubcategory_Mob': 'Escoge una subcategor\xEDa',
     'misc.ClickHere': 'haz click aqu\xED.',
