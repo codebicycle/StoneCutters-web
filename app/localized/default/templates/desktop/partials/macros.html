@@ -49,7 +49,7 @@
             data-validate="true"
         {% endif %}
         {% if value %}
-            value="{{ value }}"
+            value="{{ value.value if value.value else value }}"
         {% endif %}
     />
 {% endmacro %}
