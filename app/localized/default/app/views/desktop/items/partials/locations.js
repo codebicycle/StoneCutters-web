@@ -57,7 +57,7 @@ module.exports = Base.extend({
             type: 'SELECT'
         };
 
-        if (this.filters.isActive(filter.name) && $neighborhoods.length === 0 ) {
+        if (this.filters.isActive(filter.name) && !$neighborhoods.length ) {
             this.filters.remove(filter);
             path = [path.split('/-').shift(), '/', this.filters.format()].join('');
             path = this.refactorPath(path);
@@ -65,7 +65,7 @@ module.exports = Base.extend({
             this.app.router.redirectTo(path);
         }
         else if ($neighborhoods.length > 0) {
-            $($neighborhoods).each(function (index) {
+            $neighborhoods.each(function (index) {
                 if (index === $neighborhoods.length - 1) {
                     filtersId += $(this).val();
                 }
