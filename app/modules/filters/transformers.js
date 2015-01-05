@@ -9,7 +9,6 @@ module.exports = {
     bedrooms: bedrooms,
     surface: surface,
     year: year,
-    neighborhood: neighborhood,
     carbrand: carbrand,
     carmodel: carmodel
 };
@@ -70,13 +69,6 @@ function surface(filter, options) {
 function year(filter, options) {
     filter = checkRangeValue(filter, options);
     filter = checkDescription(filter, options, 'itemdescriptionwiki.year');
-    return filter;
-}
-
-function neighborhood(filter, options) {
-    if (options.app.session.get('platform') === 'desktop') {
-        return;
-    }
     return filter;
 }
 
