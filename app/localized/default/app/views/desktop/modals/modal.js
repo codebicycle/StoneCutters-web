@@ -13,6 +13,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        console.log('onnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
         $('body').addClass('noscroll');
         $('#' + this.idModal).addClass('modal-visible');
     },

@@ -1,6 +1,7 @@
 <section id="marketing-top">
     {% view 'categories/partials/country-area' %}
-    {% include (template + '/marketing/marketing-box-sell.html') %}
+    {% view '/marketing/bannervideo' %}
+    {#% include (template + '/marketing/marketing-box-sell.html') %#}
 </section>
 
 <section id="category-tree">
@@ -12,4 +13,5 @@
 {% endif %}
 
 {% include (template + '/modals/location.html') %}
+{% include (template + '/modals/videogallery.html') %}
 {% view 'partials/tracking' %}
