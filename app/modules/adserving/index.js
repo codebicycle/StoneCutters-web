@@ -36,7 +36,7 @@ function getSettings() {
         configAD = utils.get(configAdServing, type, {});
 
         if (configAD.enabled) {
-            configAD.params = _.extend({}, configAD.params, configSlot.types[type].params || {}, {
+            configAD.params = _.extend({}, configAD.params, configSlot.params || {}, {
                 container: slotname
             });
 
@@ -51,7 +51,7 @@ function getSettings() {
                 type: type,
                 options: configAD.options,
                 params: configAD.params,
-                seo: configSlot.types[type].seo
+                seo: configSlot.seo
             });
         }
     }
@@ -113,10 +113,7 @@ function isSlotEnabled() {
             category = getCategoryId.call(this);
 
             if (category) {
-                status = _.find(config.types || {}, function eachTypes(obj) {
-                    return _.contains(obj.excludedCategories, category);
-                });
-                enabled = !status;
+                enabled = !_.contains(config.excludedCategories, category);
             }
         }
     }
@@ -131,24 +128,9 @@ function isEnabled() {
 
 function getType() {
     var slotname = this.get('slotname');
-    var category = getCategoryId.call(this);
     var config = getConfigSlot(slotname);
-    var type;
 
-    if (category) {
-        _.find(config.types || {}, function eachTypes(obj, key) {
-            var is = !_.contains(obj.excludedCategories, category);
-
-            if (is) {
-                type = key;
-            }
-            return is;
-        });
-    }
-    if (!type) {
-        type = config.defaultType;
-    }
-    return type;
+    return config.type;
 }
 
 function getConfigSlot(slotname) {

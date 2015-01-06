@@ -3,124 +3,96 @@
 module.exports = {
     slot_top_listing_gallery: {
         enabled: true,
-        defaultType: 'CSA',
+        type: 'CSA',
         location: 'Top',
-        types: {
-            CSA: {
-                seo: 1,
-                params: {
-                    number: 3
-                },
-                excludedCategories: []
-            }
-        }
+        seo: 1,
+        params: {
+            number: 3
+        },
+        excludedCategories: []
     },
     slot_top_listing: {
         enabled: true,
-        defaultType: 'CSA',
+        type: 'CSA',
         location: 'Top',
-        types: {
-            CSA: {
-                seo: 1,
-                params: {
-                    number: 3,
-                    fontSizeTitle: 18,
-                    adIconLocation: 'ad-left',
-                    adIconWidth: 143,
-                    adIconHeight: 112,
-                    adIconSpacingAbove: 4,
-                    adIconSpacingBefore: 6,
-                    adIconSpacingAfter: 15,
-                    adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
-                },
-                excludedCategories: []
-            }
-        }
+        seo: 1,
+        params: {
+            number: 3,
+            fontSizeTitle: 18,
+            adIconLocation: 'ad-left',
+            adIconWidth: 143,
+            adIconHeight: 112,
+            adIconSpacingAbove: 4,
+            adIconSpacingBefore: 6,
+            adIconSpacingAfter: 15,
+            adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
+        },
+        excludedCategories: []
     },
     slot_bottom_listing: {
         enabled: true,
-        defaultType: 'CSA',
+        type: 'CSA',
         location: 'Bottom',
-        types: {
-            CSA: {
-                seo: 0,
-                params: {
-                    number: 3,
-                    fontSizeTitle: 18,
-                    adIconLocation: 'ad-left',
-                    adIconWidth: 143,
-                    adIconHeight: 112,
-                    adIconSpacingAbove: 4,
-                    adIconSpacingBefore: 6,
-                    adIconSpacingAfter: 15,
-                    adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
-                },
-                excludedCategories: []
-            }
-        }
+        seo: 0,
+        params: {
+            number: 3,
+            fontSizeTitle: 18,
+            adIconLocation: 'ad-left',
+            adIconWidth: 143,
+            adIconHeight: 112,
+            adIconSpacingAbove: 4,
+            adIconSpacingBefore: 6,
+            adIconSpacingAfter: 15,
+            adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
+        },
+        excludedCategories: []
     },
     slot_side_listing: {
         enabled: true,
-        defaultType: 'AFC',
+        type: 'AFC',
         location: 'Side',
-        types: {
-            AFC: {
-                params: {
-                    number: 1,
-                    media: "flash, image",
-                    width: '160',
-                    height: '600'
-                },
-                excludedCategories: []
-            }
-        }
+        params: {
+            number: 1,
+            media: "flash, image",
+            width: '160',
+            height: '600'
+        },
+        excludedCategories: [0]
     },
     slot_top_item: {
         enabled: true,
-        defaultType: 'AFC',
+        type: 'AFC',
         location: 'Top',
-        types: {
-            AFC: {
-                params: {
-                    number: 3,
-                    media: 'text',
-                    width: '728',
-                    height: '90'
-                },
-                excludedCategories: []
-            }
-        }
+        params: {
+            number: 3,
+            media: 'text',
+            width: '728',
+            height: '90'
+        },
+        excludedCategories: []
     },
     slot_side_item: {
         enabled: true,
-        defaultType: 'AFC',
+        type: 'AFC',
         location: 'Side',
-        types: {
-            AFC: {
-                params: {
-                    number: 1,
-                    media: "flash, image",
-                    width: '300',
-                    height: '250'
-                },
-                excludedCategories: []
-            }
-        }
+        params: {
+            number: 1,
+            media: "flash, image",
+            width: '300',
+            height: '250'
+        },
+        excludedCategories: []
     },
     slot_bottom_item: {
         enabled: true,
-        defaultType: 'AFC',
+        type: 'AFC',
         location: 'Bottom',
-        types: {
-            AFC: {
-                params: {
-                    number: 5,
-                    media: 'text',
-                    width: '728',
-                    height: '90'
-                },
-                excludedCategories: []
-            }
-        }
+        params: {
+            number: 5,
+            media: 'text',
+            width: '728',
+            height: '90'
+        },
+        excludedCategories: []
     }
 };
