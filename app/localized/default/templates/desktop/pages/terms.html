@@ -177,4 +177,6 @@
 
 </ol>
 
-{% view 'partials/tracking' %}
+{% if requireTracking %}
+    {% view 'partials/tracking' %}
+{% endif %}
