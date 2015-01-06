@@ -120,12 +120,12 @@ module.exports = Base.extend({
             .done(function(result) {
                 if (result.success) {
                     $('[data-captcha-verification] .error').addClass('hide');
-                } else {
-                    $('[data-captcha-verification] .error').text(message.empty).removeClass('hide');
-                    spinner.addClass('hide');
-                    submit.removeClass('hide');
+                    return this.sendForm();
                 }
-            })
+                $('[data-captcha-verification] .error').text(message.empty).removeClass('hide');
+                spinner.addClass('hide');
+                submit.removeClass('hide');
+            }.bind(this))
             .fail(function(x) {
                 console.log('error');
             });
@@ -139,8 +139,8 @@ module.exports = Base.extend({
         var url = "/secure/recaptcha";
         var userIp = this.app.session.get('ip');
         var data = {
-            "response": captchaResponse,
-            "remoteip": userIp
+            response: captchaResponse,
+            remoteip: userIp
         };
 
         return $.ajax({
@@ -148,6 +148,28 @@ module.exports = Base.extend({
             url: url,
             data: data,
             dataType: 'json'
+        });
+    },
+    sendForm: function(){
+        var url = "/secure/send";
+        var data = {
+            subject: this.$('[name="subject"]').val(),
+            email: this.$('[name="email"]').val(),
+            name: this.$('[name="name"]').val(),
+            message: this.$('[name="message"]').val()
+        };
+
+        return $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function onSuccess(data) {
+                this.$('[data-contact-form] .spinner').addClass('hide');
+                this.$('[data-contact-form] [type="submit"]').removeClass('hide');
+                if (!data.send) {
+                    // TODO Handle error
+                }
+            }.bind(this)
         });
     }
 });

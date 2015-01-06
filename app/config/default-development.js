@@ -384,8 +384,52 @@ module.exports = {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
+        },
+        zendesk: {
+            'default': {
+                subdomain: 'olxar1419002989',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            },
+            'www.olx.com.bo': {
+                subdomain: 'olxar1419002989',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            },
+            'www.olx.com.py': {
+                subdomain: 'test',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            },
+            'www.olx.com.ni': {
+                subdomain: 'test',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            },
+            'www.olx.hn': {
+                subdomain: 'test',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            },
+            'www.olx.cm': {
+                subdomain: 'test',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            },
+            'www.olx.co.tz': {
+                subdomain: 'test',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            },
+            'www.olx.sn': {
+                subdomain: 'test',
+                email: 'gonzalo.aizpun@olx.com',
+                password: 'olx2014',
+            }
         }
-
+    },
+    zendeskEncoded: {
+        key: 'Z29uemFsby5haXpwdW5Ab2x4LmNvbTpvbHgyMDE0'
     },
     recaptcha: {
         secretKey: '6LcjQf8SAAAAADIPSryjN9TVSsgIrVSPADI-nC2a'
