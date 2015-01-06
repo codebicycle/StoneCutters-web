@@ -94,3 +94,38 @@ redirect:
 
 migrated:
     - www.olx.com.bo
+
+emails:
+  captcha:
+    secret: 6LcjQf8SAAAAADIPSryjN9TVSsgIrVSPADI-nC2a
+  zendesk:
+    default:
+      subdomain: olxar1419002989
+      email: gonzalo.aizpun@olx.com
+      password: olx2014
+    www.olx.com:
+      subdomain: olxmilk
+    www.olx.co.cr:
+      subdomain: olxcr
+    www.olx.com.ar:
+      subdomain: olxar
+    www.olx.com.co:
+      subdomain: olxco
+    www.olx.com.ec:
+      subdomain: olxec
+    www.olx.com.gt:
+      subdomain: olxgt
+    www.olx.com.ni:
+      subdomain: olxni
+    www.olx.com.pa:
+      subdomain: olxpa
+    www.olx.com.pe:
+      subdomain: olxpe
+    www.olx.com.sv:
+      subdomain: olxsv
+    www.olx.com.uy:
+      subdomain: olxuy
+    www.olx.com.ve:
+      subdomain: olxve
+    www.olx.hn:
+      subdomain: olxhn
