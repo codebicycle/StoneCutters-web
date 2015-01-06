@@ -1,0 +1,50 @@
+.banner-video {
+    float: right;
+    padding-top: 25px;
+    width: 356px;
+    height: 378px;
+    position: relative;
+    box-sizing: border-box;
+    p {
+        font-size: $xl;
+        margin: 0;
+        text-align: center;
+    }
+    > .subtitle {
+        font-size: $l;
+        line-height: 1;
+        padding: 10px 0;
+        strong {
+            background: url(imageUrl/images/desktop/underline.gif) center bottom no-repeat;
+            display: inline-block;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+        }
+    }
+    .have-see {
+        cursor: pointer;
+        box();
+        padding: 180px 0 0 0;
+        background-image: url(imageUrl/images/desktop/cellphone.jpg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 255px;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        &:hover {
+            opacity: .85;
+        }
+        .title {
+            font-size: $l;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        .subtitle {
+            font-size: $s;
+            color: $blue;
+        }
+    }
+}

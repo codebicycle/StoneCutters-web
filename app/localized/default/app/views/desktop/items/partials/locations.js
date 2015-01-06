@@ -89,10 +89,16 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
-        var $activeNeighborhoods = $('.active-neighborhoods');
+        var $activeNeighborhoodsList = $('.active-neighborhoods');
         var $neighborhoodList = $('.neighborhood-list');
+        var $activeNeighborhoods = $('.neighborhood-list .neighborhoods input:checked');
+        var $neighborhoods = $('.neighborhood-list .neighborhoods input');
 
-        $activeNeighborhoods.slideUp( function() {
+        if ($activeNeighborhoods.length === $neighborhoods.length) {
+            $('.neighborhood-list .select-all input')[0].checked = true;
+        }
+
+        $activeNeighborhoodsList.slideUp( function() {
             $neighborhoodList.slideDown();
         });
 
