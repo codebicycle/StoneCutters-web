@@ -57,8 +57,15 @@ module.exports = Base.extend({
             type: 'SELECT'
         };
 
-        if ($neighborhoods.length > 0) {
-            $($neighborhoods).each(function (index) {
+        if (this.filters.isActive(filter.name) && !$neighborhoods.length ) {
+            this.filters.remove(filter);
+            path = [path.split('/-').shift(), '/', this.filters.format()].join('');
+            path = this.refactorPath(path);
+            path = helpers.common.link(path, this.app);
+            this.app.router.redirectTo(path);
+        }
+        else if ($neighborhoods.length > 0) {
+            $neighborhoods.each(function (index) {
                 if (index === $neighborhoods.length - 1) {
                     filtersId += $(this).val();
                 }
@@ -82,10 +89,16 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
-        var $activeNeighborhoods = $('.active-neighborhoods');
+        var $activeNeighborhoodsList = $('.active-neighborhoods');
         var $neighborhoodList = $('.neighborhood-list');
+        var $activeNeighborhoods = $('.neighborhood-list .neighborhoods input:checked');
+        var $neighborhoods = $('.neighborhood-list .neighborhoods input');
 
-        $activeNeighborhoods.slideUp( function() {
+        if ($activeNeighborhoods.length === $neighborhoods.length) {
+            $('.neighborhood-list .select-all input')[0].checked = true;
+        }
+
+        $activeNeighborhoodsList.slideUp( function() {
             $neighborhoodList.slideDown();
         });
 

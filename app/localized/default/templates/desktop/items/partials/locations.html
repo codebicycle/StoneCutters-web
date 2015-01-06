@@ -71,9 +71,11 @@
                     </ul>
                     <div class="actions">
                         <span class="filter-btn"  rel="nofollow" data-action="filter" >{{ dictionary["listingpageitemslisting.FilterByNeighborhood"] }}</span>
-                        <span class="cancel-btn" rel="nofollow" data-action="cancel">{{ dictionary["misc.Cancel"] }}</span>
-                        <span class="see more icons icon-arrow-down" data-action="see">{{ dictionary["misc.SeeMore"] }}</span>
-                        <span class="see less hide icons icon-arrow-up" data-action="see">{{ dictionary["misc.SeeLess"] }}</span>
+                        <span class="cancel-btn" rel="nofollow" data-action="cancel">{{ dictionary["wap_posting_step4.Cancel"] }}</span>
+                        {% if filters.get('neighborhood').get('value').length > 8 %}
+                            <span class="see more icons icon-arrow-down" data-action="see">{{ dictionary["misc.SeeMore"] }}</span>
+                            <span class="see less hide icons icon-arrow-up" data-action="see">{{ dictionary["misc.SeeLess"] }}</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
